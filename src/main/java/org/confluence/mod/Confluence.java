@@ -8,12 +8,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Mod(Conflunce.MODID)
-public class Conflunce {
+@Mod(Confluence.MODID)
+public class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
 
-    public Conflunce() {
+    public Confluence() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfluenceConfig.SPEC);
     }
