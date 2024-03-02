@@ -12,6 +12,7 @@ out
 *.iws
 *.iml
 .idea
+*.log
 
 # gradle
 build
@@ -21,6 +22,5 @@ build
 eclipse
 run
 
-# Files from Forge MDK
 src/generated
 src/test
