@@ -1,11 +1,11 @@
 package org.confluence.mod.block;
 
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -77,7 +77,6 @@ public class ConfluenceBlocks {
         METEORITE("meteorite", () -> new BaseBlock());
 
 
-
         private final RegistryObject<Block> value;
 
         Ores(String id, Supplier<Block> ore) {
@@ -93,6 +92,10 @@ public class ConfluenceBlocks {
         public Block get() {
             return value.get();
         }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering ores");
+        }
     }
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
@@ -101,11 +104,16 @@ public class ConfluenceBlocks {
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block, Item.Properties properties) {
         RegistryObject<B> object = BLOCKS.register(id, block);
-        ConfluenceItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
+        ConfluenceItems.ITEMS.register(id, () -> new BaseBlock.Item(object.get(), properties));
         return object;
     }
 
     public static <B extends Block> RegistryObject<B> registerWithoutItem(String id, Supplier<B> block) {
         return BLOCKS.register(id, block);
+    }
+
+    public static void register(IEventBus bus) {
+        Ores.init();
+        BLOCKS.register(bus);
     }
 }

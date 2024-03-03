@@ -32,12 +32,12 @@ public class ConfluenceItemModels extends ItemModelProvider {
     public void itemGenerated(RegistryObject<Item> item, String path) {
         String name = item.getId().getPath();
         withExistingParent(name, "item/generated")
-            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path));
+            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path.toLowerCase()));
     }
 
     public <I extends Item> void itemHandheld(RegistryObject<I> item, String path) {
         String name = item.getId().getPath();
         withExistingParent(name, "item/handheld")
-            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path));
+            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path.toLowerCase()));
     }
 }

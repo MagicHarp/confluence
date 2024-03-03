@@ -24,8 +24,8 @@ public class Confluence {
     public Confluence() {
         GeckoLib.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        ConfluenceBlocks.BLOCKS.register(bus);
-        ConfluenceItems.ITEMS.register(bus);
+        ConfluenceBlocks.register(bus);
+        ConfluenceItems.register(bus);
         ConfluenceTabs.TABS.register(bus);
         bus.addListener(Confluence::commonSetup);
 

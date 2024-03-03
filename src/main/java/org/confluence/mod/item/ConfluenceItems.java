@@ -4,6 +4,7 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -45,6 +46,10 @@ public class ConfluenceItems {
         public Item get() {
             return value.get();
         }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering materials");
+        }
     }
 
     public enum Swords implements EnumRegister<SwordItem> {
@@ -74,6 +79,10 @@ public class ConfluenceItems {
         public SwordItem get() {
             return value.get();
         }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering swords");
+        }
     }
 
     public enum Axes implements EnumRegister<AxeItem> {
@@ -97,6 +106,10 @@ public class ConfluenceItems {
         @Override
         public AxeItem get() {
             return value.get();
+        }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering axes");
         }
     }
 
@@ -122,6 +135,10 @@ public class ConfluenceItems {
         public PickaxeItem get() {
             return value.get();
         }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering pickaxes");
+        }
     }
 
     public enum HammerAxes implements EnumRegister<HammerAxeItem> {
@@ -142,5 +159,18 @@ public class ConfluenceItems {
         public HammerAxeItem get() {
             return value.get();
         }
+
+        public static void init() {
+            Confluence.LOGGER.info("Registering hammer-axes");
+        }
+    }
+
+    public static void register(IEventBus bus) {
+        Materials.init();
+        Swords.init();
+        Axes.init();
+        Pickaxes.init();
+        HammerAxes.init();
+        ITEMS.register(bus);
     }
 }
