@@ -17,10 +17,30 @@ import org.confluence.mod.item.sword.ShortSwordItem;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot", BaseItem::new);
-    public static final RegistryObject<Item> WOLFRAM_INGOT = ITEMS.register("wolfram_ingot", BaseItem::new);
-    public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("silver_ingot", BaseItem::new);
-    public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("platinum_ingot", BaseItem::new);
+    public enum Ores {
+        RAW_TIN("raw_tin", new BaseItem()),
+        TIN_INGOT("tin_ingot", new BaseItem()),
+        RAW_WOLFRAM("raw_wolfram", new BaseItem()),
+        WOLFRAM_INGOT("wolfram_ingot", new BaseItem()),
+        RAW_SILVER("raw_silver", new BaseItem()),
+        SILVER_INGOT("silver_ingot", new BaseItem()),
+        RAW_PLATINUM("raw_platinum", new BaseItem()),
+        PLATINUM_INGOT("platinum_ingot", new BaseItem()),;
+
+        private final RegistryObject<Item> value;
+
+        Ores(String id, Item ore) {
+            this.value = ITEMS.register(id, () -> ore);
+        }
+
+        public RegistryObject<Item> getValue() {
+            return value;
+        }
+
+        public Item get() {
+            return value.get();
+        }
+    }
 
     public enum Swords {
         COPPER_SHORT_SWORD("copper_short_sword", new ShortSwordItem(ConfluenceTiers.COPPER, 2, 3)),

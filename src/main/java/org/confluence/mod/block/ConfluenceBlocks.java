@@ -3,6 +3,7 @@ package org.confluence.mod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
@@ -46,14 +47,25 @@ public class ConfluenceBlocks {
     //endregion registries
 
     public enum Ores {
-        TIN_ORE("tin_ore", new BaseBlock()),
-        TIN_BLOCK("tin_block", new BaseBlock()),
-        WOLFRAM_ORE("wolfram_ore", new BaseBlock()),
-        WOLFRAM_BLOCK("wolfram_block", new BaseBlock()),
-        SILVER_ORE("silver_ore", new BaseBlock()),
-        SILVER_BLOCK("silver_block", new BaseBlock()),
-        PLATINUM_ORE("platinum_ore", new BaseBlock()),
-        PLATINUM_BLOCK("platinum_block", new BaseBlock());
+        TIN_ORE("tin_ore", new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+        DEEPSLATE_TIN_ORE("deepslate_tin_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE))),
+        RAW_TIN_BLOCK("raw_tin_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK))),
+        TIN_BLOCK("tin_block", new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
+
+        WOLFRAM_ORE("wolfram_ore", new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+        DEEPSLATE_WOLFRAM_ORE("deepslate_wolfram_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+        RAW_WOLFRAM_BLOCK("raw_wolfram_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+        WOLFRAM_BLOCK("wolfram_block", new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+
+        SILVER_ORE("silver_ore", new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+        DEEPSLATE_SILVER_ORE("deepslate_silver_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+        RAW_SILVER_BLOCK("raw_silver_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+        SILVER_BLOCK("silver_block", new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+
+        PLATINUM_ORE("platinum_ore", new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
+        DEEPSLATE_PLATINUM_ORE("deepslate_platinum_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE))),
+        RAW_PLATINUM_BLOCK("raw_platinum_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK))),
+        PLATINUM_BLOCK("platinum_block", new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
 
         private final RegistryObject<Block> value;
 
