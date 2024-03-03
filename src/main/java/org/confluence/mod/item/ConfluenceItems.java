@@ -9,9 +9,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.BaseAxeItem;
+import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.item.sword.BoardSwordItem;
 import org.confluence.mod.item.sword.ShortSwordItem;
+import org.confluence.mod.util.EnumRegister;
 
 @SuppressWarnings("unused")
 public class ConfluenceItems {
@@ -25,7 +27,8 @@ public class ConfluenceItems {
         RAW_SILVER("raw_silver", new BaseItem()),
         SILVER_INGOT("silver_ingot", new BaseItem()),
         RAW_PLATINUM("raw_platinum", new BaseItem()),
-        PLATINUM_INGOT("platinum_ingot", new BaseItem()),;
+        PLATINUM_INGOT("platinum_ingot", new BaseItem()),
+        METEORITE_INGOT("meteorite_ingot", new BaseItem());
 
         private final RegistryObject<Item> value;
 
@@ -42,7 +45,7 @@ public class ConfluenceItems {
         }
     }
 
-    public enum Swords {
+    public enum Swords implements EnumRegister<SwordItem> {
         COPPER_SHORT_SWORD("copper_short_sword", new ShortSwordItem(ConfluenceTiers.COPPER, 2, 3)),
         COPPER_BOARD_SWORD("copper_board_sword", new BoardSwordItem(ConfluenceTiers.COPPER, 4, 1.6F)),
         TIN_SHORT_SWORD("tin_short_sword", new ShortSwordItem(ConfluenceTiers.TIN, 3, 3)),
@@ -60,16 +63,18 @@ public class ConfluenceItems {
             this.value = ITEMS.register(id, () -> sword);
         }
 
+        @Override
         public RegistryObject<SwordItem> getValue() {
             return value;
         }
 
+        @Override
         public SwordItem get() {
             return value.get();
         }
     }
 
-    public enum Axes {
+    public enum Axes implements EnumRegister<AxeItem> {
         COPPER_AXE("copper_axe", new BaseAxeItem(ConfluenceTiers.COPPER, 2, 1)),
         TIN_AXE("tin_axe", new BaseAxeItem(ConfluenceTiers.TIN, 0, 0)),
         WOLFRAM_AXE("wolfram_axe", new BaseAxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
@@ -82,16 +87,18 @@ public class ConfluenceItems {
             this.value = ITEMS.register(id, () -> axe);
         }
 
+        @Override
         public RegistryObject<AxeItem> getValue() {
             return value;
         }
 
+        @Override
         public AxeItem get() {
             return value.get();
         }
     }
 
-    public enum Pickaxes {
+    public enum Pickaxes implements EnumRegister<PickaxeItem> {
         COPPER_PICKAXE("copper_pickaxe", new BasePickaxeItem(ConfluenceTiers.COPPER, 2, 1)),
         TIN_PICKAXE("tin_pickaxe", new BasePickaxeItem(ConfluenceTiers.TIN, 0, 0)),
         WOLFRAM_PICKAXE("wolfram_pickaxe", new BasePickaxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
@@ -104,11 +111,33 @@ public class ConfluenceItems {
             this.value = ITEMS.register(id, () -> pickaxe);
         }
 
+        @Override
         public RegistryObject<PickaxeItem> getValue() {
             return value;
         }
 
+        @Override
         public PickaxeItem get() {
+            return value.get();
+        }
+    }
+
+    public enum HammerAxes implements EnumRegister<HammerAxeItem> {
+        ;
+
+        private final RegistryObject<HammerAxeItem> value;
+
+        HammerAxes(String id, HammerAxeItem hammerAxe) {
+            this.value = ITEMS.register(id, () -> hammerAxe);
+        }
+
+        @Override
+        public RegistryObject<HammerAxeItem> getValue() {
+            return value;
+        }
+
+        @Override
+        public HammerAxeItem get() {
             return value.get();
         }
     }

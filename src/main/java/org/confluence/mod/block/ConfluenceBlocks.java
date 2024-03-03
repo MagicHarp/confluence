@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.util.DecorationLogBlocks;
+import org.confluence.mod.util.EnumRegister;
 
 import static org.confluence.mod.block.WoodSetType.*;
 
@@ -34,7 +35,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", new BaseBlock());
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", new SandBlock(0x5313e, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLE_STONE = registerWithItem("another_crimson_cobble_stone", new BaseBlock());
-    // desert
+    //  desert
     public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM.SET, PALM.TYPE);
     //  jewelry
     public static final RegistryObject<Block> BIG_RUBY_BLOCK = registerWithItem("big_ruby_block", new BaseBlock());
@@ -46,7 +47,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> EMBERS_BLOCK = registerWithItem("embers_block", new BaseBlock());
     //endregion registries
 
-    public enum Ores {
+    public enum Ores implements EnumRegister<Block> {
         TIN_ORE("tin_ore", new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
         DEEPSLATE_TIN_ORE("deepslate_tin_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE))),
         RAW_TIN_BLOCK("raw_tin_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK))),
@@ -65,7 +66,9 @@ public class ConfluenceBlocks {
         PLATINUM_ORE("platinum_ore", new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
         DEEPSLATE_PLATINUM_ORE("deepslate_platinum_ore", new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE))),
         RAW_PLATINUM_BLOCK("raw_platinum_block", new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK))),
-        PLATINUM_BLOCK("platinum_block", new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)));
+        PLATINUM_BLOCK("platinum_block", new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK))),
+
+        METEORITE("meteorite", new BaseBlock());
 
         private final RegistryObject<Block> value;
 
@@ -73,10 +76,12 @@ public class ConfluenceBlocks {
             this.value = registerWithItem(id, ore);
         }
 
+        @Override
         public RegistryObject<Block> getValue() {
             return value;
         }
 
+        @Override
         public Block get() {
             return value.get();
         }
