@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/dirt",
+    "up": "confluence:block/the_top_of_a_corrupt_grass_block",
+    "north": "confluence:block/sides_of_corrupt_grass_blocks",
+    "east": "confluence:block/sides_of_corrupt_grass_blocks",
+    "south": "confluence:block/sides_of_corrupt_grass_blocks",
+    "west": "confluence:block/sides_of_corrupt_grass_blocks",
+    "particle": "confluence:block/dirt"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:lead"
+    }
+  },
+  "result": {
+    "item": "confluence:lead_block",
+    "count": 1
+  }
+}

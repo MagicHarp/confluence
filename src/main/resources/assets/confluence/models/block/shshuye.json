@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "confluence:block/palm_wood_leaves1",
+    "particle": "confluence:block/palm_wood_leaves1"
+  }
+}

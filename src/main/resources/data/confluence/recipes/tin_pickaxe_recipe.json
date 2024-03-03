@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    " a ",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:tin"
+    }
+  },
+  "result": {
+    "item": "confluence:tin_pickaxe",
+    "count": 1
+  }
+}

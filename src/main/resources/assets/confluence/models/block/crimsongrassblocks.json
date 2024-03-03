@@ -1,0 +1,11 @@
+{
+  "parent": "block/grass_block",
+  "textures": {
+    "bottom": "confluence:block/dirt",
+    "top": "confluence:block/the_top_of_the_crimson_grass_block",
+    "side": "confluence:block/crimson_grass_blocks",
+    "overlay": "confluence:block/crimson_grass_blocks",
+    "particle": "confluence:block/dirt"
+  },
+  "render_type": "cutout_mipped"
+}

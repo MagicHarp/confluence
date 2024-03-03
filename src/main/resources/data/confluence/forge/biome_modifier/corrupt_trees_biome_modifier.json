@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:the_corruption",
+  "features": "confluence:corrupt_trees",
+  "step": "surface_structures"
+}

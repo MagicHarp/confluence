@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "nether_wastes",
+  "features": "confluence:hellrockoregeneration",
+  "step": "surface_structures"
+}

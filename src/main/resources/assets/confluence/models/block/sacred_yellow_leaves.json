@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "confluence:block/sacred_leaves_5",
+    "particle": "confluence:block/sacred_leaves_5"
+  },
+  "render_type": "cutout"
+}

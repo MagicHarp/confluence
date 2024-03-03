@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "experience": 5,
+  "cookingtime": 400,
+  "ingredient": {
+    "item": "confluence:crimson_rough"
+  },
+  "result": "confluence:crimson_ore_bars"
+}

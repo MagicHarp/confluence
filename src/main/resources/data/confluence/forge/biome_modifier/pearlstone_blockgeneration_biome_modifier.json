@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "confluence:the_hallow",
+    "confluence:sacred_desert"
+  ],
+  "features": "confluence:pearlstone_blockgeneration",
+  "step": "surface_structures"
+}

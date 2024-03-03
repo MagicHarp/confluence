@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "features": "confluence:rubyspawns",
+  "step": "surface_structures"
+}

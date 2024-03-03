@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:the_hallow",
+  "features": "confluence:sacred_blue_tree",
+  "step": "surface_structures"
+}

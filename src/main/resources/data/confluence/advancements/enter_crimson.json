@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:crimsongrassblocks"
+    },
+    "title": {
+      "translate": "advancements.enter_crimson.title"
+    },
+    "description": {
+      "translate": "advancements.enter_crimson.descr"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enter_crimson": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "confluence:the_crimson"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 20
+  },
+  "parent": "confluence:enterthe_corruption"
+}

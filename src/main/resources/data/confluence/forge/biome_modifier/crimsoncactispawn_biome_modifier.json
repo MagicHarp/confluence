@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:crimson_desert",
+  "features": "confluence:crimsoncactispawn",
+  "step": "surface_structures"
+}

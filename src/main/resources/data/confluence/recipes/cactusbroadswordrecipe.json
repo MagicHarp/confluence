@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  a",
+    " a ",
+    "a  "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:cactus"
+    }
+  },
+  "result": {
+    "item": "confluence:cactusbroadsword",
+    "count": 1
+  }
+}

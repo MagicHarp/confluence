@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "snowy_slopes",
+    "snowy_beach",
+    "snowy_plains",
+    "snowy_taiga"
+  ],
+  "features": "confluence:shiveringthorns",
+  "step": "vegetal_decoration"
+}

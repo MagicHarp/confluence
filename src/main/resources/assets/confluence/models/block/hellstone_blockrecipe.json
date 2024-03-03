@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/hellstone_placed",
+    "up": "confluence:block/hellstone_placed",
+    "north": "confluence:block/hellstone_placed",
+    "east": "confluence:block/hellstone_placed",
+    "south": "confluence:block/hellstone_placed",
+    "west": "confluence:block/hellstone_placed",
+    "particle": "confluence:block/hellstone_placed"
+  },
+  "render_type": "solid"
+}

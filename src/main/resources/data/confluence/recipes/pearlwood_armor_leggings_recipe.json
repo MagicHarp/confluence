@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "a a",
+    "a a"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:pearlwood_planks"
+    }
+  },
+  "result": {
+    "item": "confluence:pearlwood_armor_leggings",
+    "count": 1
+  }
+}

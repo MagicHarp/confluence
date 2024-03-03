@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:spruce_wood"
+    },
+    {
+      "item": "minecraft:spruce_wood"
+    },
+    {
+      "item": "minecraft:spruce_wood"
+    }
+  ],
+  "result": {
+    "item": "confluence:northgroundwood",
+    "count": 3
+  }
+}

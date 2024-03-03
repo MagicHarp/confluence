@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:tin"
+    },
+    "title": {
+      "translate": "advancements.tinsmelting.title"
+    },
+    "description": {
+      "translate": "advancements.tinsmelting.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tinsmelting": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "confluence:tin"
+            ],
+            "count": {
+              "min": 1,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 6
+  },
+  "parent": "confluence:coppersmelting"
+}

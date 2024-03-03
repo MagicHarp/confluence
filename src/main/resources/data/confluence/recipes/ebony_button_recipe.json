@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "confluence:ebony_planks"
+    }
+  ],
+  "result": {
+    "item": "confluence:ebony_button",
+    "count": 1
+  }
+}

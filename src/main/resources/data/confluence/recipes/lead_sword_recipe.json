@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " a",
+    "a "
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:lead"
+    }
+  },
+  "result": {
+    "item": "confluence:lead_sword",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/ebony_cobblestone_",
+    "up": "confluence:block/ebony_cobblestone_",
+    "north": "confluence:block/ebony_cobblestone_",
+    "east": "confluence:block/ebony_cobblestone_",
+    "south": "confluence:block/ebony_cobblestone_",
+    "west": "confluence:block/ebony_cobblestone_",
+    "particle": "confluence:block/ebony_cobblestone_"
+  },
+  "render_type": "solid"
+}

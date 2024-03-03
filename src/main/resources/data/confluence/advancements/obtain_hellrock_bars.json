@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:hellrock_bars"
+    },
+    "title": {
+      "translate": "advancements.obtain_hellrock_bars.title"
+    },
+    "description": {
+      "translate": "advancements.obtain_hellrock_bars.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "obtain_hellrock_bars": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "confluence:hellrock_bars"
+            ],
+            "count": {
+              "min": 1,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 11
+  },
+  "parent": "confluence:primordial_hellstone_bars_2"
+}

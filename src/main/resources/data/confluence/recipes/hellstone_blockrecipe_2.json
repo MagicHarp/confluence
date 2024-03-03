@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:hellrock_bars"
+    }
+  },
+  "result": {
+    "item": "confluence:hellstone_blockrecipe",
+    "count": 1
+  }
+}

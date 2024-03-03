@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/sapphire_ore",
+    "up": "confluence:block/sapphire_ore",
+    "north": "confluence:block/sapphire_ore",
+    "east": "confluence:block/sapphire_ore",
+    "south": "confluence:block/sapphire_ore",
+    "west": "confluence:block/sapphire_ore",
+    "particle": "confluence:block/sapphire_ore"
+  },
+  "render_type": "solid"
+}

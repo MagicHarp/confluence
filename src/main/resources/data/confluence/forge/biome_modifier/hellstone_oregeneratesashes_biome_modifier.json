@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:ashhell",
+  "features": "confluence:hellstone_oregeneratesashes",
+  "step": "surface_structures"
+}

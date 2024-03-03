@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "confluence:block/magic_mushrooms_",
+    "particle": "confluence:block/magic_mushrooms_"
+  },
+  "render_type": "cutout"
+}

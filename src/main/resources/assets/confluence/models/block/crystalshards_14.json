@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "confluence:block/crystal_shards5",
+    "particle": "confluence:block/crystal_shards5"
+  },
+  "render_type": "cutout"
+}

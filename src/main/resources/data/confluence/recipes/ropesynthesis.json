@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:ropejason"
+    }
+  },
+  "result": {
+    "item": "confluence:cordage",
+    "count": 1
+  }
+}

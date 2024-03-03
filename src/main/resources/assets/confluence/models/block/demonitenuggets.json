@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/demonite_ore_placed",
+    "up": "confluence:block/demonite_ore_placed",
+    "north": "confluence:block/demonite_ore_placed",
+    "east": "confluence:block/demonite_ore_placed",
+    "south": "confluence:block/demonite_ore_placed",
+    "west": "confluence:block/demonite_ore_placed",
+    "particle": "confluence:block/demonite_ore_placed"
+  },
+  "render_type": "solid"
+}

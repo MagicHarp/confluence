@@ -1,0 +1,42 @@
+{
+  "hurt_tr": {
+    "sounds": [
+      {
+        "name": "confluence:00a9u7f7c3f7upt61g74p63l7qioccm",
+        "stream": false
+      }
+    ]
+  },
+  "death_tr": {
+    "sounds": [
+      {
+        "name": "confluence:7jeaju0oycr5mk0iua4ijuwob027pm31",
+        "stream": false
+      }
+    ]
+  },
+  "tr_zombie_death": {
+    "sounds": [
+      {
+        "name": "confluence:bandicam_2024-02-23_14-21-42-136",
+        "stream": false
+      }
+    ]
+  },
+  "tr_face": {
+    "sounds": [
+      {
+        "name": "confluence:bandicam_2024-02-23_14-21-45-831",
+        "stream": false
+      }
+    ]
+  },
+  "corruption": {
+    "sounds": [
+      {
+        "name": "confluence:music-corruption",
+        "stream": true
+      }
+    ]
+  }
+}

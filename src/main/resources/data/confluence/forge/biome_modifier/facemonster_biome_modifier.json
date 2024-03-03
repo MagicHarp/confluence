@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "confluence:the_crimson",
+    "confluence:crimson_desert"
+  ],
+  "spawners": {
+    "type": "confluence:facemonster",
+    "weight": 5,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

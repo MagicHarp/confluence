@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "confluence:palmlogs"
+    },
+    {
+      "item": "confluence:palmlogs"
+    },
+    {
+      "item": "confluence:palmlogs"
+    },
+    {
+      "item": "confluence:palmlogs"
+    }
+  ],
+  "result": {
+    "item": "confluence:palmwoodbark",
+    "count": 3
+  }
+}

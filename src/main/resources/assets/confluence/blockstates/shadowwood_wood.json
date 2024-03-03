@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "confluence:block/shadowwood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "confluence:block/shadowwood_wood"
+    },
+    "axis=z": {
+      "model": "confluence:block/shadowwood_wood",
+      "x": 90
+    }
+  }
+}

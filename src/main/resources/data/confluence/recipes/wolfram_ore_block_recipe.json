@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:wolfram"
+    }
+  },
+  "result": {
+    "item": "confluence:wolfram_block",
+    "count": 1
+  }
+}

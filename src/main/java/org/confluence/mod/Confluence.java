@@ -18,7 +18,7 @@ import software.bernie.geckolib.GeckoLib;
 public class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
-    public static GameRules.Key<GameRules.BooleanValue> EXPERT_MODE;
+    public static GameRules.Key<GameRules.IntegerValue> GAME_PHASE;
 
     public Confluence() {
         GeckoLib.initialize();
@@ -27,10 +27,10 @@ public class Confluence {
         ConfluenceItems.ITEMS.register(bus);
         bus.addListener(Confluence::commonSetup);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfluenceConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfluenceConfig.SPEC);
     }
 
     private static void commonSetup(FMLCommonSetupEvent event){
-        EXPERT_MODE = GameRules.register("expert_mode", GameRules.Category.UPDATES, GameRules.BooleanValue.create(false));
+        GAME_PHASE = GameRules.register("terraGamePhase", GameRules.Category.UPDATES, GameRules.IntegerValue.create(8));
     }
 }

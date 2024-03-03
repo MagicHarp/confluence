@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:meteoriteredlightsaber"
+    },
+    "title": {
+      "translate": "advancements.gguangjian.title"
+    },
+    "description": {
+      "translate": "advancements.gguangjian.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "gguangjian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "confluence:meteoriteredlightsaber"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 9
+  },
+  "parent": "confluence:yuyunshi"
+}

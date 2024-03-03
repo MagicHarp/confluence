@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "confluence:corrupt_desert",
+    "confluence:the_corruption"
+  ],
+  "spawners": {
+    "type": "confluence:eaterof_souls",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}

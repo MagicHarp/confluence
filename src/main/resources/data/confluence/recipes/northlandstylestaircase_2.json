@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "confluence:northgroundwood"
+    },
+    {
+      "item": "confluence:northgroundwood"
+    },
+    {
+      "item": "confluence:northgroundwood"
+    },
+    {
+      "item": "confluence:northgroundwood"
+    },
+    {
+      "item": "confluence:northgroundwood"
+    },
+    {
+      "item": "confluence:northgroundwood"
+    }
+  ],
+  "result": {
+    "item": "confluence:northlandstylestaircase",
+    "count": 4
+  }
+}

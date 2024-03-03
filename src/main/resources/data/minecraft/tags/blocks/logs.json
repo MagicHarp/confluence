@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "confluence:ebony_log",
+    "confluence:shadowwood_log",
+    "confluence:pearlwood_log",
+    "minecraft:oak_log"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "confluence:desertstyleplanks"
+    },
+    {
+      "item": "confluence:desertstyleplanks"
+    },
+    {
+      "item": "confluence:desertstyleplanks"
+    }
+  ],
+  "result": {
+    "item": "confluence:desertstylehalfbrick",
+    "count": 3
+  }
+}

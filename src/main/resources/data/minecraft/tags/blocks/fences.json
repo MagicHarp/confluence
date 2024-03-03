@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "confluence:ebony_fence",
+    "confluence:pearlwood_fence",
+    "confluence:shadowwood_fence"
+  ]
+}

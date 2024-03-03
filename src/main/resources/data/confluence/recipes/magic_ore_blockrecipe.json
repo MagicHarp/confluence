@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:demonite_bars"
+    }
+  },
+  "result": {
+    "item": "confluence:demonitenuggets",
+    "count": 1
+  }
+}

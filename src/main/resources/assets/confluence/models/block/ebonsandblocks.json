@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/ebonsand_blocks",
+    "up": "confluence:block/ebonsand_blocks",
+    "north": "confluence:block/ebonsand_blocks",
+    "east": "confluence:block/ebonsand_blocks",
+    "south": "confluence:block/ebonsand_blocks",
+    "west": "confluence:block/ebonsand_blocks",
+    "particle": "confluence:block/ebonsand_blocks"
+  },
+  "render_type": "solid"
+}

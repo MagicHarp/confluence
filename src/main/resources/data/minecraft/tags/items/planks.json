@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "confluence:pearlwood_planks",
+    "confluence:ebony_planks",
+    "confluence:shadowwood_planks",
+    "confluence:desertstyleplanks",
+    "confluence:northgroundwood",
+    "confluence:classicwood"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/palm_wood_leaves1",
+    "up": "confluence:block/palm_wood_leaves1",
+    "north": "confluence:block/palm_wood_leaves1",
+    "east": "confluence:block/palm_wood_leaves1",
+    "south": "confluence:block/palm_wood_leaves1",
+    "west": "confluence:block/palm_wood_leaves1",
+    "particle": "confluence:block/palm_wood_leaves1"
+  },
+  "render_type": "cutout"
+}

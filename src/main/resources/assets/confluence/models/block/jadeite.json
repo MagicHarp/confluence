@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/emerald_ore_",
+    "up": "confluence:block/emerald_ore_",
+    "north": "confluence:block/emerald_ore_",
+    "east": "confluence:block/emerald_ore_",
+    "south": "confluence:block/emerald_ore_",
+    "west": "confluence:block/emerald_ore_",
+    "particle": "confluence:block/emerald_ore_"
+  },
+  "render_type": "solid"
+}

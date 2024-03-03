@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "experience": 0.805,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "confluence:silverrougher"
+  },
+  "result": "confluence:silver_ingot"
+}

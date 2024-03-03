@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence_gate",
+  "category": "redstone",
+  "pattern": [
+    "aba",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "item": "confluence:pearlwood_planks"
+    }
+  },
+  "result": {
+    "item": "confluence:pearlwood_fence_gate",
+    "count": 1
+  }
+}

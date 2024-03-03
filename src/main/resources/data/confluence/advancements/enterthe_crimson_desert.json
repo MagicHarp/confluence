@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:crimsand_blocks"
+    },
+    "title": {
+      "translate": "advancements.enterthe_crimson_desert.title"
+    },
+    "description": {
+      "translate": "advancements.enterthe_crimson_desert.descr"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "enterthe_crimson_desert": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "confluence:crimson_desert"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 20
+  },
+  "parent": "confluence:enter_crimson"
+}

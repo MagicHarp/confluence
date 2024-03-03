@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:the_crimson",
+  "features": "confluence:crimsongrass_1",
+  "step": "vegetal_decoration"
+}

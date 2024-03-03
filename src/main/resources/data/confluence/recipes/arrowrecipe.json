@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a",
+    "b"
+  ],
+  "key": {
+    "a": {
+      "tag": "minecraft:logs"
+    },
+    "b": {
+      "tag": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "minecraft:arrow",
+    "count": 25
+  }
+}

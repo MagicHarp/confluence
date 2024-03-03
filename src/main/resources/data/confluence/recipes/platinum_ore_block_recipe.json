@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:platinum_ingot"
+    }
+  },
+  "result": {
+    "item": "confluence:platinum_block",
+    "count": 1
+  }
+}

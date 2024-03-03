@@ -1,0 +1,8 @@
+{
+  "parent": "block/fence_side",
+  "textures": {
+    "texture": "confluence:block/pearl_planks",
+    "particle": "confluence:block/pearl_planks"
+  },
+  "render_type": "solid"
+}

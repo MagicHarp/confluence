@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "a a",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:meteorite"
+    }
+  },
+  "result": {
+    "item": "confluence:meteorite_armor_chestplate",
+    "count": 1
+  }
+}

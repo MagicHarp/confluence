@@ -1,0 +1,9 @@
+{
+  "parent": "confluence:custom/scarlet_cactus",
+  "textures": {
+    "all": "confluence:block/scarlet_cactus",
+    "particle": "confluence:block/scarlet_cactus",
+    "2": "confluence:block/scarlet_cactus12"
+  },
+  "render_type": "solid"
+}

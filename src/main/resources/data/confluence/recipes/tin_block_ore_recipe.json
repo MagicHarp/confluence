@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "confluence:tin_block"
+    }
+  ],
+  "result": {
+    "item": "confluence:tin",
+    "count": 9
+  }
+}

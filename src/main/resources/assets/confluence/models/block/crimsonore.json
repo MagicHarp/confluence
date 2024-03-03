@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/crimtane_blocks",
+    "up": "confluence:block/crimtane_blocks",
+    "north": "confluence:block/crimtane_blocks",
+    "east": "confluence:block/crimtane_blocks",
+    "south": "confluence:block/crimtane_blocks",
+    "west": "confluence:block/crimtane_blocks",
+    "particle": "confluence:block/crimtane_blocks"
+  },
+  "render_type": "solid"
+}

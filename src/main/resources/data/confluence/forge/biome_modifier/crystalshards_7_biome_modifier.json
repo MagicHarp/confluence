@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "confluence:sacred_desert",
+    "confluence:the_hallow"
+  ],
+  "features": "confluence:crystalshards_7",
+  "step": "vegetal_decoration"
+}

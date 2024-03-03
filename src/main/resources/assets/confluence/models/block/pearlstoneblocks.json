@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/pearlstone_blocks",
+    "up": "confluence:block/pearlstone_blocks",
+    "north": "confluence:block/pearlstone_blocks",
+    "east": "confluence:block/pearlstone_blocks",
+    "south": "confluence:block/pearlstone_blocks",
+    "west": "confluence:block/pearlstone_blocks",
+    "particle": "confluence:block/pearlstone_blocks"
+  },
+  "render_type": "cutout_mipped"
+}

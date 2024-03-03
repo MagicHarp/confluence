@@ -1,0 +1,9 @@
+{
+  "parent": "confluence:custom/corrupt_cactus",
+  "textures": {
+    "all": "confluence:block/corrupt_cactus2",
+    "particle": "confluence:block/corrupt_cactus2",
+    "2": "confluence:block/corrupt_cactus"
+  },
+  "render_type": "solid"
+}

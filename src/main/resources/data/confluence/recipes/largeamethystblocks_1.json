@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "confluence:amethystitems"
+    }
+  },
+  "result": {
+    "item": "confluence:largeamethystblocks",
+    "count": 1
+  }
+}

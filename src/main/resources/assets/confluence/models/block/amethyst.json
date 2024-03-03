@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/amethyst_cubes",
+    "up": "confluence:block/amethyst_cubes",
+    "north": "confluence:block/amethyst_cubes",
+    "east": "confluence:block/amethyst_cubes",
+    "south": "confluence:block/amethyst_cubes",
+    "west": "confluence:block/amethyst_cubes",
+    "particle": "confluence:block/amethyst_cubes"
+  },
+  "render_type": "solid"
+}

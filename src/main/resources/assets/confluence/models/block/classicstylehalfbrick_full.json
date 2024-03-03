@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "confluence:block/wood_top",
+    "top": "confluence:block/wood_top",
+    "side": "confluence:block/wood_side"
+  },
+  "render_type": "solid"
+}

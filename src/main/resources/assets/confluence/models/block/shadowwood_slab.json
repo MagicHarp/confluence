@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "confluence:block/shadow_planks",
+    "top": "confluence:block/shadow_planks",
+    "side": "confluence:block/shadow_planks"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "confluence:item/fallen_star2"
+  },
+  "render_type": "translucent"
+}

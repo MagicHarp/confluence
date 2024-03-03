@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "confluence:tinroughore"
+    },
+    {
+      "item": "confluence:tinroughore"
+    },
+    {
+      "item": "confluence:tinroughore"
+    }
+  ],
+  "result": {
+    "item": "confluence:tin",
+    "count": 1
+  }
+}

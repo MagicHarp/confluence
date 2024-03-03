@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "confluence:shadowwood_log"
+    }
+  ],
+  "result": {
+    "item": "confluence:shadowwood_planks",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "confluence:block/wood_top",
+    "up": "confluence:block/wood_top",
+    "north": "confluence:block/wood_side",
+    "east": "confluence:block/wood_side",
+    "south": "confluence:block/wood_side",
+    "west": "confluence:block/wood_side",
+    "particle": "confluence:block/wood_top"
+  },
+  "render_type": "solid"
+}

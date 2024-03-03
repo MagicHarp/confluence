@@ -1,0 +1,7 @@
+{
+  "parent": "block/button_pressed",
+  "textures": {
+    "texture": "confluence:block/ebony_planks2"
+  },
+  "render_type": "solid"
+}
