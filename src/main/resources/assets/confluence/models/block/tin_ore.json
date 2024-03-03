@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/tinore",
-    "particle": "confluence:block/tinore"
-  },
-  "render_type": "solid"
-}

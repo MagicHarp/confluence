@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/tungsten_ore_2",
-    "particle": "confluence:block/tungsten_ore_2"
-  },
-  "render_type": "solid"
-}

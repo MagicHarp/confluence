@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "confluence:corrupt_desert",
-  "features": "confluence:corruptcactus_2",
-  "step": "surface_structures"
-}

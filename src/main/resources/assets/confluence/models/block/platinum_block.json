@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/platinum_ore_placed",
-    "particle": "confluence:block/platinum_ore_placed"
-  },
-  "render_type": "solid"
-}

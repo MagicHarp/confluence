@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/hallowed_grass_2",
-    "particle": "confluence:block/hallowed_grass_2"
-  },
-  "render_type": "cutout"
-}

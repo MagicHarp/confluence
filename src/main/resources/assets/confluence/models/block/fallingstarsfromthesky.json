@@ -1,9 +1,0 @@
-{
-  "parent": "confluence:custom/falling_star2",
-  "textures": {
-    "all": "confluence:block/falling_stars_from_the_sky",
-    "particle": "confluence:block/fallen_star",
-    "2": "confluence:block/falling----star2"
-  },
-  "render_type": "cutout"
-}

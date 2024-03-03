@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/blinkroot",
-    "particle": "confluence:block/blinkroot"
-  },
-  "render_type": "cutout"
-}

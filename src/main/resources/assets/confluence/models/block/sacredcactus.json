@@ -1,9 +1,0 @@
-{
-  "parent": "confluence:custom/sacred_cactus",
-  "textures": {
-    "all": "confluence:block/sacred_cactus_side",
-    "particle": "confluence:block/sacred_cactus_side",
-    "4": "confluence:block/sacred_cactus"
-  },
-  "render_type": "solid"
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/shadowwood_leaves",
-    "particle": "confluence:block/shadowwood_leaves"
-  },
-  "render_type": "cutout"
-}

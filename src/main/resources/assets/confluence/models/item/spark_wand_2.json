@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "confluence:item/wand_of_sparking"
-  }
-}

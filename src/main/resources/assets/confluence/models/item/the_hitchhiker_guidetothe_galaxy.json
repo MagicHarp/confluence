@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "confluence:item/the_hitchhikers_guide_to_the_galaxy"
-  }
-}

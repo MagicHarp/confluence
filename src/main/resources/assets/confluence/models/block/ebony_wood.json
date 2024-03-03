@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/ebony_log",
-    "particle": "confluence:block/ebony_log"
-  },
-  "render_type": "solid"
-}

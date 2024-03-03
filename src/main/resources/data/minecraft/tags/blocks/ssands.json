@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "confluence:pearlsand_blocks",
-    "confluence:ebonsandblocks",
-    "confluence:crimsand_blocks",
-    "minecraft:sand"
-  ]
-}

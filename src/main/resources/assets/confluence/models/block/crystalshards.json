@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/crystalshards",
-    "particle": "confluence:block/crystalshards"
-  },
-  "render_type": "cutout"
-}

@@ -1,9 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "confluence:block/northground_wood_top",
-    "top": "confluence:block/northground_wood_top",
-    "side": "confluence:block/northground_wood_side"
-  },
-  "render_type": "solid"
-}

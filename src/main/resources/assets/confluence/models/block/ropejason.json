@@ -1,9 +1,0 @@
-{
-  "parent": "confluence:custom/ropejason",
-  "textures": {
-    "all": "confluence:block/rope2",
-    "particle": "confluence:block/rope2",
-    "3": "confluence:block/ropejason"
-  },
-  "render_type": "solid"
-}

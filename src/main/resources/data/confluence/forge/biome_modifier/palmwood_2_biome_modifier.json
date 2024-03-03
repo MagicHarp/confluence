@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "desert",
-  "features": "confluence:palmwood_2",
-  "step": "surface_structures"
-}

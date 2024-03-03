@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    public enum Ores {
+    public enum Materials {
         RAW_TIN("raw_tin", () -> new BaseItem()),
         TIN_INGOT("tin_ingot", () -> new BaseItem()),
         RAW_WOLFRAM("raw_wolfram", () -> new BaseItem()),
@@ -34,7 +34,7 @@ public class ConfluenceItems {
 
         private final RegistryObject<Item> value;
 
-        Ores(String id, Supplier<Item> ore) {
+        Materials(String id, Supplier<Item> ore) {
             this.value = ITEMS.register(id, ore);
         }
 

@@ -1,8 +1,0 @@
-{
-  "parent": "block/fence_side",
-  "textures": {
-    "texture": "confluence:block/ebony_planks2",
-    "particle": "confluence:block/ebony_planks2"
-  },
-  "render_type": "solid"
-}

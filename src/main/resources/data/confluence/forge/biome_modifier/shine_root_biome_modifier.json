@@ -1,8 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": {
-    "type": "forge:any"
-  },
-  "features": "confluence:shine_root",
-  "step": "vegetal_decoration"
-}

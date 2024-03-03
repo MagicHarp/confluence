@@ -1,9 +1,0 @@
-{
-  "parent": "block/slab_top",
-  "textures": {
-    "bottom": "confluence:block/pearl_planks",
-    "top": "confluence:block/pearl_planks",
-    "side": "confluence:block/pearl_planks"
-  },
-  "render_type": "solid"
-}

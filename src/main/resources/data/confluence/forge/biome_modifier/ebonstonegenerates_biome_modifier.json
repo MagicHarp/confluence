@@ -1,9 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": [
-    "confluence:the_corruption",
-    "confluence:corrupt_desert"
-  ],
-  "features": "confluence:ebonstonegenerates",
-  "step": "surface_structures"
-}

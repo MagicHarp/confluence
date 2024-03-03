@@ -1,9 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "confluence:block/ebony_planks2",
-    "top": "confluence:block/ebony_planks2",
-    "side": "confluence:block/ebony_planks2"
-  },
-  "render_type": "solid"
-}

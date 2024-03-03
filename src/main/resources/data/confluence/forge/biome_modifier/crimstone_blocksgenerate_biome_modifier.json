@@ -1,9 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": [
-    "confluence:crimson_desert",
-    "confluence:the_crimson"
-  ],
-  "features": "confluence:crimstone_blocksgenerate",
-  "step": "surface_structures"
-}

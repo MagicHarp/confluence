@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/vicious_mushroom",
-    "particle": "confluence:block/vicious_mushroom"
-  },
-  "render_type": "cutout"
-}

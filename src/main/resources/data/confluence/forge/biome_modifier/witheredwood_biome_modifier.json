@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "confluence:the_corruption",
-  "features": "confluence:witheredwood",
-  "step": "surface_structures"
-}

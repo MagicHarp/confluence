@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "confluence:block/acacia_leaves",
-    "particle": "confluence:block/acacia_leaves"
-  },
-  "render_type": "cutout"
-}

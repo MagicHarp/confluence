@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/hoki",
-    "particle": "confluence:block/hoki"
-  },
-  "render_type": "cutout"
-}
