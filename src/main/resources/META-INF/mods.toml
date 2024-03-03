@@ -15,9 +15,31 @@ mandatory = true
 versionRange = "${forge_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
 [[dependencies.confluence]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+#[[dependencies.confluence]]
+#modId="eventhorizon"
+#mandatory=true
+#versionRange="[1.20.1-1.1.0,)"
+#ordering="NONE"
+#side="CLIENT"
+
+#[[dependencies.confluence]]
+#modId="geckolib"
+#mandatory=true
+#versionRange="[4.4.2,)"
+#ordering="NONE"
+#side="CLIENT"
+
+#[[dependencies.confluence]]
+#modId="fusion"
+#mandatory=true
+#versionRange="[1.1.1,)"
+#ordering="NONE"
+#side="CLIENT"

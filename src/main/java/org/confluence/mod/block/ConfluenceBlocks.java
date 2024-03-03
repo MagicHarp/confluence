@@ -3,10 +3,8 @@ package org.confluence.mod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -14,23 +12,30 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.util.DecorationLogBlocks;
 
+import static org.confluence.mod.block.WoodSetType.*;
+
 @SuppressWarnings("unused")
 public class ConfluenceBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Confluence.MODID);
-
-    public static final DecorationLogBlocks EBONY_LOG_BLOCKS = new DecorationLogBlocks("ebony");
+    //region registries
+    //  ebony
+    public static final DecorationLogBlocks EBONY_LOG_BLOCKS = new DecorationLogBlocks("ebony", EBONY.SET, EBONY.TYPE);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", new BaseBlock());
-    public static final RegistryObject<Block> EBONY_SANDSTONE = registerWithItem("ebony_sandstone", new BaseBlock());
+    public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", new SandBlock(0x372b4b, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_COBBLE_STONE = registerWithItem("ebony_cobble_stone", new BaseBlock());
-    public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl");
+    //  holy
+    public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl", PEARL.SET, PEARL.TYPE);
     public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", new BaseBlock());
-    public static final RegistryObject<Block> PEARL_SANDSTONE = registerWithItem("pearl_sandstone", new BaseBlock());
+    public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", new SandBlock(0xedd5f6, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_COBBLE_STONE = registerWithItem("pearl_cobble_stone", new BaseBlock());
-    public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow");
+    //  crimson
+    public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow", SHADOW.SET, SHADOW.TYPE);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", new BaseBlock());
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_SANDSTONE = registerWithItem("another_crimson_sandstone", new BaseBlock());
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", new SandBlock(0x5313e, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLE_STONE = registerWithItem("another_crimson_cobble_stone", new BaseBlock());
-    public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm");
+    // desert
+    public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM.SET, PALM.TYPE);
+    //  jewelry
     public static final RegistryObject<Block> BIG_RUBY_BLOCK = registerWithItem("big_ruby_block", new BaseBlock());
     public static final RegistryObject<Block> BIG_AMBER_BLOCK = registerWithItem("big_amber_block", new BaseBlock());
     public static final RegistryObject<Block> BIG_TOPAZ_BLOCK = registerWithItem("big_topaz_block", new BaseBlock());
@@ -38,7 +43,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> BIG_SAPPHIRE_BLOCK = registerWithItem("big_sapphire_block", new BaseBlock());
     public static final RegistryObject<Block> BIG_ANOTHER_AMETHYST_BLOCK = registerWithItem("big_another_amethyst_block", new BaseBlock());
     public static final RegistryObject<Block> EMBERS_BLOCK = registerWithItem("embers_block", new BaseBlock());
-
+    //endregion registries
 
     public enum Ores {
         TIN_ORE("tin_ore", new BaseBlock()),
@@ -73,5 +78,9 @@ public class ConfluenceBlocks {
         RegistryObject<B> object = BLOCKS.register(id, () -> block);
         ConfluenceItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
         return object;
+    }
+
+    public static <B extends Block> RegistryObject<B> registerWithoutItem(String id, B block) {
+        return BLOCKS.register(id, () -> block);
     }
 }
