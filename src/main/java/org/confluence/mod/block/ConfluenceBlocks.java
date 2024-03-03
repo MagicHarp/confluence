@@ -1,5 +1,6 @@
 package org.confluence.mod.block;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -104,7 +105,7 @@ public class ConfluenceBlocks {
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block, Item.Properties properties) {
         RegistryObject<B> object = BLOCKS.register(id, block);
-        ConfluenceItems.ITEMS.register(id, () -> new BaseBlock.Item(object.get(), properties));
+        ConfluenceItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
         return object;
     }
 

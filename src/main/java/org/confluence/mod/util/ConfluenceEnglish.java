@@ -1,7 +1,10 @@
 package org.confluence.mod.util;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ConfluenceBlocks;
@@ -19,11 +22,16 @@ public class ConfluenceEnglish extends LanguageProvider {
     protected void addTranslations() {
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
-            if (!block1.getDescriptionId().equals("block.minecraft.air")) {
+            if (!(block1 instanceof WallSignBlock)) {
                 add(block1, toTitleCase(block.getId().getPath()));
             }
         });
-        ConfluenceItems.ITEMS.getEntries().forEach(item -> add(item.get(), toTitleCase(item.getId().getPath())));
+        ConfluenceItems.ITEMS.getEntries().forEach(item -> {
+            Item item1 = item.get();
+            if (!(item1 instanceof BlockItem)) {
+                add(item.get(), toTitleCase(item.getId().getPath()));
+            }
+        });
     }
 
     private static String toTitleCase(String raw) {
