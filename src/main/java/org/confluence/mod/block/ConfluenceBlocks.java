@@ -89,12 +89,7 @@ public class ConfluenceBlocks {
             return value;
         }
 
-        @Override
-        public Block get() {
-            return value.get();
-        }
-
-        public static void init() {
+        static void init() {
             Confluence.LOGGER.info("Registering ores");
         }
     }

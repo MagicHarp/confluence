@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
+import org.confluence.mod.item.hammer.HammerItem;
 import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.item.sword.BoardSwordItem;
 import org.confluence.mod.item.sword.ShortSwordItem;
@@ -22,7 +23,7 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    public enum Materials {
+    public enum Materials implements EnumRegister<Item> {
         RAW_TIN("raw_tin", () -> new BaseItem()),
         TIN_INGOT("tin_ingot", () -> new BaseItem()),
         RAW_WOLFRAM("raw_wolfram", () -> new BaseItem()),
@@ -43,11 +44,7 @@ public class ConfluenceItems {
             return value;
         }
 
-        public Item get() {
-            return value.get();
-        }
-
-        public static void init() {
+        static void init() {
             Confluence.LOGGER.info("Registering materials");
         }
     }
@@ -75,12 +72,7 @@ public class ConfluenceItems {
             return value;
         }
 
-        @Override
-        public SwordItem get() {
-            return value.get();
-        }
-
-        public static void init() {
+        static void init() {
             Confluence.LOGGER.info("Registering swords");
         }
     }
@@ -103,12 +95,7 @@ public class ConfluenceItems {
             return value;
         }
 
-        @Override
-        public AxeItem get() {
-            return value.get();
-        }
-
-        public static void init() {
+        static void init() {
             Confluence.LOGGER.info("Registering axes");
         }
     }
@@ -131,13 +118,27 @@ public class ConfluenceItems {
             return value;
         }
 
-        @Override
-        public PickaxeItem get() {
-            return value.get();
+        static void init() {
+            Confluence.LOGGER.info("Registering pickaxes");
+        }
+    }
+
+    public enum Hammers implements EnumRegister<HammerItem> {
+        ;
+
+        private final RegistryObject<HammerItem> value;
+
+        Hammers(String id, Supplier<HammerItem> hammer) {
+            this.value = ITEMS.register(id, hammer);
         }
 
-        public static void init() {
-            Confluence.LOGGER.info("Registering pickaxes");
+        @Override
+        public RegistryObject<HammerItem> getValue() {
+            return value;
+        }
+
+        static void init() {
+            Confluence.LOGGER.info("Registering hammers");
         }
     }
 
@@ -155,12 +156,7 @@ public class ConfluenceItems {
             return value;
         }
 
-        @Override
-        public HammerAxeItem get() {
-            return value.get();
-        }
-
-        public static void init() {
+        static void init() {
             Confluence.LOGGER.info("Registering hammer-axes");
         }
     }
@@ -170,6 +166,7 @@ public class ConfluenceItems {
         Swords.init();
         Axes.init();
         Pickaxes.init();
+        Hammers.init();
         HammerAxes.init();
         ITEMS.register(bus);
     }
