@@ -14,5 +14,6 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        // 根据游戏规则(terraGamePhase)为每位进入游戏的玩家进行成就同步
     }
 }

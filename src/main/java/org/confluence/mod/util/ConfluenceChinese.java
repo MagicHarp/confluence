@@ -1,14 +1,14 @@
 package org.confluence.mod.util;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks.Ores;
+import org.confluence.mod.block.ConfluenceBlocks.*;
 import org.confluence.mod.item.ConfluenceItems.Axes;
 import org.confluence.mod.item.ConfluenceItems.Materials;
 import org.confluence.mod.item.ConfluenceItems.Pickaxes;
 import org.confluence.mod.item.ConfluenceItems.Swords;
+
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 
 public class ConfluenceChinese extends LanguageProvider {
@@ -19,11 +19,11 @@ public class ConfluenceChinese extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add(Ores.TIN_ORE.get(), "锡矿石");
-        add(Ores.DEEPSLATE_TIN_ORE.get(),"深层锡矿石");
+        add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
         add(Ores.RAW_TIN_BLOCK.get(), "原锡块");
         add(Ores.TIN_BLOCK.get(), "锡块");
         add(Ores.LEAD_ORE.get(), "铅矿石");
-        add(Ores.DEEPSLATE_LEAD_ORE.get(),"深层铅矿石");
+        add(Ores.DEEPSLATE_LEAD_ORE.get(), "深层铅矿石");
         add(Ores.RAW_TIN_BLOCK.get(), "原铅块");
         add(Ores.LEAD_BLOCK.get(), "铅块");
         add(Ores.SILVER_ORE.get(), "银矿石");
@@ -38,9 +38,12 @@ public class ConfluenceChinese extends LanguageProvider {
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
         add(Ores.RAW_PLATINUM_BLOCK.get(), "原铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
+
+        add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
+
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");
-        add( EBONY_COBBLE_STONE.get(), "黑檀圆石");
+        add(EBONY_COBBLE_STONE.get(), "黑檀圆石");
         add(CORRUPTION_GRASS_BLOCKS.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
         add(PEARL_SAND.get(), "珍珠沙块");
@@ -83,7 +86,7 @@ public class ConfluenceChinese extends LanguageProvider {
         add(SUN_PLATE.get(), "日盘块");
         add(TIN_BRICKS.get(), "锡砖块");
         add(TIN_PLATE.get(), "锡条板块");
-        add( WOLFRAM_BRICKS.get(), "钨砖块");
+        add(WOLFRAM_BRICKS.get(), "钨砖块");
         add(ANOTHER_LAVA_BEAM.get(), "异域熔岩梁");
         add(ANOTHER_LAVA_BRICKS.get(), "异域熔岩砖块");
         add(ANOTHER_OBSIDIAN_BEAM.get(), "异域黑曜石梁");
@@ -98,8 +101,7 @@ public class ConfluenceChinese extends LanguageProvider {
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
 
 
-
-                add(Materials.RAW_TIN.get(), "原锡矿");
+        add(Materials.RAW_TIN.get(), "原锡矿");
         add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");

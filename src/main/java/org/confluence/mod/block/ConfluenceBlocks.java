@@ -1,21 +1,17 @@
 package org.confluence.mod.block;
 
-import io.netty.handler.ssl.AbstractSniHandler;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.validation.PathAllowList;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
-import org.confluence.mod.util.DecorationLogBlocks;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -56,17 +52,17 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> BIG_ANOTHER_EMERALD_BLOCK = registerWithItem("big_another_emerald_block", BaseBlock::new);
     public static final RegistryObject<Block> BIG_SAPPHIRE_BLOCK = registerWithItem("big_sapphire_block", BaseBlock::new);
     public static final RegistryObject<Block> BIG_ANOTHER_AMETHYST_BLOCK = registerWithItem("big_another_amethyst_block", BaseBlock::new);
-    //other environmental stones
+    //  other environmental stones
     public static final RegistryObject<Block> ANOTHER_POLISHED_GRANITE = registerWithItem("another_polished_granite", BaseBlock::new);
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);
-    //decorative blocks
+    //  decorative blocks
     public static final RegistryObject<Block> ANOTHER_COPPER_BRICKS = registerWithItem("another_copper_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_COPPER_PLATE = registerWithItem("another_copper_plate", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ORE_BRICKS = registerWithItem("another_crimson_ore_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ROCK_BRICKS = registerWithItem("another_crimson_rock_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_BRICKS = registerWithItem("another_crimson_stone_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_GOLD_BRICKS = registerWithItem("another_gold_bricks", BaseBlock::new);
-    public static final RegistryObject<Block>ANOTHER_IRON_BRICKS = registerWithItem("another_iron_bricks", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_IRON_BRICKS = registerWithItem("another_iron_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_STONE_BRICKS = registerWithItem("another_stone_bricks", BaseBlock::new);
     public static final RegistryObject<Block> EVIL_ORE_BRICKS = registerWithItem("evil_ore_bricks", BaseBlock::new);
     public static final RegistryObject<Block> EVIL_ROCK_BRICKS = registerWithItem("evil_rock_bricks", BaseBlock::new);
@@ -94,10 +90,10 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_SMALL_BRICKS = registerWithItem("another_obsidian_small_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN_SLAB = registerWithItem("another_smooth_obsidian_slab", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN = registerWithItem("another_smooth_obsidian", BaseBlock::new);
-    public static final RegistryObject<Block>CHISELED_ANOTHER_OBSIDIAN_BRICKS = registerWithItem("chiseled_another_obsidian_bricks", BaseBlock::new);
-    public static final RegistryObject<Block>SPOOKY_WOOD_PLANKS = registerWithItem("spooky_wood_planks", BaseBlock::new);
-    public static final RegistryObject<Block>ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BaseBlock::new);
-    public static final RegistryObject<Block>ANOTHER_OAK_BEAM = registerWithItem("another_oak_beam", BaseBlock::new);
+    public static final RegistryObject<Block> CHISELED_ANOTHER_OBSIDIAN_BRICKS = registerWithItem("chiseled_another_obsidian_bricks", BaseBlock::new);
+    public static final RegistryObject<Block> SPOOKY_WOOD_PLANKS = registerWithItem("spooky_wood_planks", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_oak_beam", BaseBlock::new);
 
     //endregion registries
 
