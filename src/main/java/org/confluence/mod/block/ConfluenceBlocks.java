@@ -82,7 +82,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> RED_CANDY_BLOCK = registerWithItem("red_candy_block", BaseBlock::new);
     public static final RegistryObject<Block> SILVER_BRICKS = registerWithItem("silver_bricks", BaseBlock::new);
     public static final RegistryObject<Block> SNOW_BRICKS = registerWithItem("snow_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> STAR_BRICKS = registerWithItem("star_bricks", BaseBlock::new);
+    public static final RegistryObject<Block> SUN_PLATE = registerWithItem("sun plate", BaseBlock::new);
     public static final RegistryObject<Block> TIN_BRICKS = registerWithItem("tin_bricks", BaseBlock::new);
     public static final RegistryObject<Block> TIN_PLATE = registerWithItem("tin_plate", BaseBlock::new);
     public static final RegistryObject<Block> WOLFRAM_BRICKS = registerWithItem("wolfram_bricks", BaseBlock::new);
