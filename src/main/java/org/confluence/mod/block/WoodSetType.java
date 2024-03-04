@@ -3,11 +3,16 @@ package org.confluence.mod.block;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
+import javax.naming.Name;
+
 public enum WoodSetType {
     EBONY("ebony"),
     PEARL("pearl"),
     SHADOW("shadow"),
-    PALM("palm");
+    PALM("palm"),
+    ASH("ash");
+
+
 
     public final BlockSetType SET;
     public final WoodType TYPE;
