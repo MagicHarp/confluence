@@ -57,7 +57,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);
     //  decorative blocks
     public static final RegistryObject<Block> ANOTHER_COPPER_BRICKS = registerWithItem("another_copper_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_COPPER_PLATE = registerWithItem("another_copper_plate", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_COPPER_PLATE = registerWithItem("another_copper_plate", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ORE_BRICKS = registerWithItem("another_crimson_ore_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ROCK_BRICKS = registerWithItem("another_crimson_rock_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_BRICKS = registerWithItem("another_crimson_stone_bricks", BaseBlock::new);
@@ -78,22 +78,22 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> RED_CANDY_BLOCK = registerWithItem("red_candy_block", BaseBlock::new);
     public static final RegistryObject<Block> SILVER_BRICKS = registerWithItem("silver_bricks", BaseBlock::new);
     public static final RegistryObject<Block> SNOW_BRICKS = registerWithItem("snow_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> SUN_PLATE = registerWithItem("sun plate", BaseBlock::new);
+    public static final RegistryObject<Block> SUN_PLATE = registerWithItem("sun_plate", BaseBlock::new);
     public static final RegistryObject<Block> TIN_BRICKS = registerWithItem("tin_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> TIN_PLATE = registerWithItem("tin_plate", BaseBlock::new);
+    public static final RegistryObject<Block> TIN_PLATE = registerWithItem("tin_plate", PlateBlock::new);
     public static final RegistryObject<Block> WOLFRAM_BRICKS = registerWithItem("wolfram_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_LAVA_BEAM = registerWithItem("another_lava_beam", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_LAVA_BEAM = registerWithItem("another_lava_beam", BeamBlock::new);
     public static final RegistryObject<Block> ANOTHER_LAVA_BRICKS = registerWithItem("another_lava_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BEAM = registerWithItem("another_obsidian_beam", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BEAM = registerWithItem("another_obsidian_beam", BeamBlock::new);
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BRICKS = registerWithItem("another_obsidian_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_PLATE = registerWithItem("another_obsidian_plate", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_PLATE = registerWithItem("another_obsidian_plate", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_SMALL_BRICKS = registerWithItem("another_obsidian_small_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN_SLAB = registerWithItem("another_smooth_obsidian_slab", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN = registerWithItem("another_smooth_obsidian", BaseBlock::new);
     public static final RegistryObject<Block> CHISELED_ANOTHER_OBSIDIAN_BRICKS = registerWithItem("chiseled_another_obsidian_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> SPOOKY_WOOD_PLANKS = registerWithItem("spooky_wood_planks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_oak_beam", BaseBlock::new);
+    public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE);
+    public static final RegistryObject<Block> ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_oak_beam", BeamBlock::new);
 
     //endregion registries
 

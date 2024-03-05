@@ -13,6 +13,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
+import software.bernie.geckolib.animatable.GeoItem;
 
 public class ConfluenceItemModels extends ItemModelProvider {
     public ConfluenceItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -24,7 +25,7 @@ public class ConfluenceItemModels extends ItemModelProvider {
         ConfluenceItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
             String path = item.getId().getPath();
-            if (value instanceof CustomModel) return;
+            if (value instanceof CustomModel || value instanceof GeoItem) return;
             if (value instanceof BlockItem blockItem) {
                 blockItem(blockItem, path);
             } else if (isHandheld(value)) {
