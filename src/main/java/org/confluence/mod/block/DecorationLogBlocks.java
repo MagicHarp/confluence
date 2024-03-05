@@ -32,6 +32,7 @@ public class DecorationLogBlocks {
     public final RegistryObject<TrapDoorBlock> TRAPDOOR;
     public final RegistryObject<DoorBlock> DOOR;
 
+
     public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree) {
         this.PLANKS = registerWithItem(id + "_planks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
         if (requiresTree) {

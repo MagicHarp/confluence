@@ -91,13 +91,12 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.SLAB.get(), "白蜡木台阶");
         add(ASH_LOG_BLOCKS.LEAVES.get(), "白蜡木树叶");
 
-        add(ANOTHER_OAK_PLANK.get(), "经典风情木板");
-        add(ANOTHER_OAK_STAIRS.get(), "经典风情楼梯");
-        add(ANOTHER_OAK_SLAB.get(), "经典风情台阶");
-        add(ANOTHER_NORTHLAND_SLAB.get(), "北地风情台阶");
-        add(ANOTHER_NORTHLAND_STAIRS.get(), "北地风情楼梯");
-        add(ANOTHER_NORTHLAND_PLANK.get(), "北地风情木板");
-
+        add(ANOTHER_OAK_LOG_BLOCKS.PLANKS.get(), "经典风情木板");
+        add(ANOTHER_OAK_LOG_BLOCKS.SLAB.get(), "经典风情台阶");
+        add(ANOTHER_OAK_LOG_BLOCKS.STAIRS.get(), "经典风情楼梯");
+        add(ANOTHER_NORTHLAND_LOG_BLOCKS.STAIRS.get(), "北地风情楼梯");
+        add(ANOTHER_NORTHLAND_LOG_BLOCKS.SLAB.get(), "北地风情台阶");
+        add(ANOTHER_NORTHLAND_LOG_BLOCKS.PLANKS.get(), "北地风情木板");
 
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");

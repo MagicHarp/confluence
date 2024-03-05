@@ -9,6 +9,8 @@ public enum WoodSetType {
     SHADOW("shadow"),
     PALM("palm"),
     ASH("ash"),
+    ANOTHER_OAK("another_oak"),
+    ANOTHER_NORTHLAND("another_northland"),
     SPOOKY("spooky");
 
     public final BlockSetType SET;
