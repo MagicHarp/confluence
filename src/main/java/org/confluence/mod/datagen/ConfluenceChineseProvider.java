@@ -184,6 +184,21 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ConfluenceItems.SUMMON_ICON.get(), "召唤武器标识");
         add(ConfluenceItems.TOOLS_ICON.get(), "工具标识");
         add(ConfluenceItems.TOPAZ.get(), "黄玉");
+        add(ConfluenceItems.APPLE_JUICE.get(), "苹果汁");
+        add(ConfluenceItems.BLACKCURRANT.get(), "黑醋栗");
+        add(ConfluenceItems.BLOOD_ORANGE.get(), "血橙");
+        add(ConfluenceItems.BLOODY_MOSCATO.get(), "猩红麝香葡萄");
+        add(ConfluenceItems.CARRION.get(), "腐肉");
+        add(ConfluenceItems.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
+        add(ConfluenceItems.ELDERBERRY.get(), "接骨木果");
+        add(ConfluenceItems.ICE_MIRROR.get(), "冰雪镜");
+        add(ConfluenceItems.LESSER_HEALING_POTION.get(), "弱效治疗药水");
+        add(ConfluenceItems.MAGIC_MIRROR.get(), "魔镜");
+        add(ConfluenceItems.ROPE.get(), "绳子");
+        add(ConfluenceItems.ROPE_COIL.get(), "绳圈");
+        add(ConfluenceItems. SHURIKEN.get(), "手里剑");
+
+
 
 
 

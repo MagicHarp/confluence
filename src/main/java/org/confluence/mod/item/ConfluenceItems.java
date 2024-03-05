@@ -39,6 +39,23 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new) ;
     public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new) ;
     public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", BaseItem::new) ;
+    public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new) ;
+    public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new) ;
+    public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new) ;
+    public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new) ;
+    public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new) ;
+    public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new) ;
+    public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new) ;
+    public static final RegistryObject<Item> ICE_MIRROR = ITEMS.register("ice_mirror", BaseItem::new) ;
+    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new) ;
+    public static final RegistryObject<Item> MAGIC_MIRROR = ITEMS.register("magic_mirror", BaseItem::new) ;
+    public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new) ;
+    public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new) ;
+    public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new) ;
+
+
+
+
 
 
 
