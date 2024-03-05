@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -9,8 +9,8 @@ import org.confluence.mod.block.ConfluenceBlocks;
 
 import static org.confluence.mod.Confluence.MODID;
 
-public class ConfluenceBlockModels extends BlockModelProvider {
-    public ConfluenceBlockModels(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class ConfluenceBlockModelProvider extends BlockModelProvider {
+    public ConfluenceBlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 

@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 

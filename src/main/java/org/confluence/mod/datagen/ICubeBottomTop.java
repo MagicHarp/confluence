@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 public interface ICubeBottomTop {
 }

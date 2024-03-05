@@ -1,9 +1,8 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks.*;
 import org.confluence.mod.item.ConfluenceItems.Axes;
 import org.confluence.mod.item.ConfluenceItems.Materials;
 import org.confluence.mod.item.ConfluenceItems.Pickaxes;
@@ -11,8 +10,8 @@ import org.confluence.mod.item.ConfluenceItems.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 
-public class ConfluenceChinese extends LanguageProvider {
-    public ConfluenceChinese(PackOutput output) {
+public class ConfluenceChineseProvider extends LanguageProvider {
+    public ConfluenceChineseProvider(PackOutput output) {
         super(output, Confluence.MODID, "zh_cn");
     }
 

@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -15,8 +15,8 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
 import software.bernie.geckolib.animatable.GeoItem;
 
-public class ConfluenceItemModels extends ItemModelProvider {
-    public ConfluenceItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class ConfluenceItemModelProvider extends ItemModelProvider {
+    public ConfluenceItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Confluence.MODID, existingFileHelper);
     }
 

@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
@@ -13,8 +13,8 @@ import org.confluence.mod.item.ConfluenceItems;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class ConfluenceEnglish extends LanguageProvider {
-    public ConfluenceEnglish(PackOutput output) {
+public class ConfluenceEnglishProvider extends LanguageProvider {
+    public ConfluenceEnglishProvider(PackOutput output) {
         super(output, Confluence.MODID, "en_us");
     }
 
