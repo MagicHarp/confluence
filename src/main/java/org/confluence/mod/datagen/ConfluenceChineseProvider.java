@@ -1,8 +1,11 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.BaseItem;
+import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.ConfluenceItems.Axes;
 import org.confluence.mod.item.ConfluenceItems.Materials;
 import org.confluence.mod.item.ConfluenceItems.Pickaxes;
@@ -166,10 +169,27 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
 
 
-        add(Materials.RAW_TIN.get(), "原锡矿");
+        add(Materials.RAW_TIN.get(), "锡粗矿");
         add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
+        add(ConfluenceItems.AMBER.get(), "琥珀");
+        add(ConfluenceItems.ANOTHER_AMETHYST.get(), "紫晶");
+        add(ConfluenceItems.ANOTHER_EMERALD.get(), "翡翠");
+        add(ConfluenceItems.BLOCKS_ICON.get(), "方块标识");
+        add(ConfluenceItems.FALLING_STAR.get(), "坠落之星");
+        add(ConfluenceItems.MAGIC_ICON.get(), "法师武器标识");
+        add(ConfluenceItems.MELEE_ICON.get(), "战士武器标识");
+        add(ConfluenceItems.REMOTE_ICON.get(), "射手武器标识");
+        add(ConfluenceItems.RUBY.get(), "红玉");
+        add(ConfluenceItems.SAPPHIRE.get(), "蓝玉");
+        add(ConfluenceItems.SPOOKY_WOOD.get(), "阴森木板");
+        add(ConfluenceItems.SUMMON_ICON.get(), "召唤武器标识");
+        add(ConfluenceItems.TOOLS_ICON.get(), "工具标识");
+        add(ConfluenceItems.TOPAZ.get(), "黄玉");
+
+
+
 
     }
 }

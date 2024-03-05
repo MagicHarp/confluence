@@ -4,11 +4,13 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.BaseBlock;
 import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
@@ -23,6 +25,24 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
+    public static final RegistryObject<Item> AMBER = ITEMS.register("amber", BaseItem::new) ;
+    public static final RegistryObject<Item> ANOTHER_AMETHYST = ITEMS.register("another_amethyst", BaseItem::new) ;
+    public static final RegistryObject<Item> ANOTHER_EMERALD = ITEMS.register("another_emerald", BaseItem::new) ;
+    public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new) ;
+    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new) ;
+    public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new) ;
+    public static final RegistryObject<Item> MELEE_ICON = ITEMS.register("melee_icon", BaseItem::new) ;
+    public static final RegistryObject<Item>REMOTE_ICON = ITEMS.register("remote_icon", BaseItem::new) ;
+    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", BaseItem::new) ;
+    public static final RegistryObject<Item>SAPPHIRE = ITEMS.register("sapphire", BaseItem::new) ;
+    public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new) ;
+    public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new) ;
+    public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new) ;
+    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", BaseItem::new) ;
+
+
+
+
     public enum Materials implements EnumRegister<Item> {
         RAW_TIN("raw_tin", () -> new BaseItem()),
         TIN_INGOT("tin_ingot", () -> new BaseItem()),
@@ -33,6 +53,8 @@ public class ConfluenceItems {
         RAW_PLATINUM("raw_platinum", () -> new BaseItem()),
         PLATINUM_INGOT("platinum_ingot", () -> new BaseItem()),
         METEORITE_INGOT("meteorite_ingot", () -> new BaseItem());
+
+
 
         private final RegistryObject<Item> value;
 
