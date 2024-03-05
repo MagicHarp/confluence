@@ -39,6 +39,65 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
+        add(EBONY_LOG_BLOCKS.PLANKS.get(), "乌木板");
+        add(EBONY_LOG_BLOCKS.LOG.get(),"乌木原木");
+        add(EBONY_LOG_BLOCKS.DOOR.get(), "乌木门");
+        add(EBONY_LOG_BLOCKS.SIGN.get(), "乌木告示牌");
+        add(EBONY_LOG_BLOCKS.STAIRS.get(), "乌木楼梯");
+        add(EBONY_LOG_BLOCKS.SLAB.get(), "乌木台阶");
+        add(EBONY_LOG_BLOCKS.TRAPDOOR.get(), "乌木活板门");
+        add(EBONY_LOG_BLOCKS.PRESSURE_PLATE.get(), "乌木压力板");
+        add(EBONY_LOG_BLOCKS.WOOD.get(), "乌木树皮");
+        add(EBONY_LOG_BLOCKS.LEAVES.get(), "乌木树叶");
+
+        add(PEARL_LOG_BLOCKS.BUTTON.get(), "珍珠木按钮");
+        add(PEARL_LOG_BLOCKS.PLANKS.get(), "珍珠木板");
+        add(PEARL_LOG_BLOCKS.LOG.get(), "珍珠木原木");
+        add(PEARL_LOG_BLOCKS.DOOR.get(), "珍珠木门");
+        add(PEARL_LOG_BLOCKS.SIGN.get(), "珍珠木告示牌");
+        add(PEARL_LOG_BLOCKS.STAIRS.get(), "珍珠木楼梯");
+        add(PEARL_LOG_BLOCKS.SLAB.get(), "珍珠木台阶");
+        add(PEARL_LOG_BLOCKS.TRAPDOOR.get(), "珍珠木活板门");
+        add(PEARL_LOG_BLOCKS.PRESSURE_PLATE.get(), "珍珠木压力板");
+        add(PEARL_LOG_BLOCKS.WOOD.get(), "珍珠木树皮");
+        add(PEARL_LOG_BLOCKS.LEAVES.get(), "珍珠木树叶");
+
+        add(SHADOW_LOG_BLOCKS.BUTTON.get(), "暗影木按钮");
+        add(SHADOW_LOG_BLOCKS.PLANKS.get(), "暗影木板");
+        add(SHADOW_LOG_BLOCKS.LOG.get(), "暗影木原木");
+        add(SHADOW_LOG_BLOCKS.DOOR.get(), "暗影木门");
+        add(SHADOW_LOG_BLOCKS.SIGN.get(), "暗影木告示牌");
+        add(SHADOW_LOG_BLOCKS.STAIRS.get(), "暗影木楼梯");
+        add(SHADOW_LOG_BLOCKS.SLAB.get(), "暗影木台阶");
+        add(SHADOW_LOG_BLOCKS.WOOD.get(), "暗影木树皮");
+        add(SHADOW_LOG_BLOCKS.LEAVES.get(), "暗影木树叶");
+
+        add(PALM_LOG_BLOCKS.BUTTON.get(), "沙漠风情按钮");
+        add(PALM_LOG_BLOCKS.PLANKS.get(), "沙漠风情木板");
+        add(PALM_LOG_BLOCKS.LOG.get(), "棕榈原木");
+        add(PALM_LOG_BLOCKS.DOOR.get(), "沙漠风情木门");
+        add(PALM_LOG_BLOCKS.SIGN.get(), "沙漠风情告示牌");
+        add(PALM_LOG_BLOCKS.STAIRS.get(), "沙漠风情楼梯");
+        add(PALM_LOG_BLOCKS.SLAB.get(), "沙漠风情台阶");
+        add(PALM_LOG_BLOCKS.WOOD.get(), "棕榈树皮");
+        add(PALM_LOG_BLOCKS.LEAVES.get(), "棕榈树叶");
+
+        add(ASH_LOG_BLOCKS.BUTTON.get(), "白蜡木按钮");
+        add(ASH_LOG_BLOCKS.PLANKS.get(), "白蜡木板");
+        add(ASH_LOG_BLOCKS.LOG.get(), "白蜡木原木");
+        add(ASH_LOG_BLOCKS.DOOR.get(), "白蜡木门");
+        add(ASH_LOG_BLOCKS.SIGN.get(), "白蜡木告示牌");
+        add(ASH_LOG_BLOCKS.STAIRS.get(), "白蜡木楼梯");
+        add(ASH_LOG_BLOCKS.SLAB.get(), "白蜡木台阶");
+        add(ASH_LOG_BLOCKS.LEAVES.get(), "白蜡木树叶");
+
+        add(ANOTHER_OAK_PLANK.get(), "经典风情木板");
+        add(ANOTHER_OAK_STAIRS.get(), "经典风情楼梯");
+        add(ANOTHER_OAK_SLAB.get(), "经典风情台阶");
+        add(ANOTHER_NORTHLAND_SLAB.get(), "北地风情台阶");
+        add(ANOTHER_NORTHLAND_STAIRS.get(), "北地风情楼梯");
+        add(ANOTHER_NORTHLAND_PLANK.get(), "北地风情木板");
+
 
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");
@@ -70,7 +129,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_STONE_BRICKS.get(), "异域石砖");
         add(EVIL_ORE_BRICKS.get(), "魔矿砖");
         add(EVIL_ROCK_BRICKS.get(), "魔矿石砖");
-        add(GEL_BLOCK.get(), "凝胶块");
+        add(BLUE_GEL_BLOCK.get(), "凝胶块");
         add(GREEN_CANDY_BLOCK.get(), "绿色糖块");
         add(ICE_BRICKS.get(), "冰砖块");
         add(ICED_GEL_BLOCK.get(), "冻凝胶块");
@@ -97,6 +156,12 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
+        add(SPOOKY_LOG_BLOCKS.BUTTON.get(), "阴森按钮");
+        add(SPOOKY_LOG_BLOCKS.DOOR.get(), "阴森木门");
+        add(SPOOKY_LOG_BLOCKS.SIGN.get(), "阴森告示牌");
+        add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
+        add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
+
 
         add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");

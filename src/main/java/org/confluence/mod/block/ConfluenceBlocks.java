@@ -66,7 +66,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_STONE_BRICKS = registerWithItem("another_stone_bricks", BaseBlock::new);
     public static final RegistryObject<Block> EVIL_ORE_BRICKS = registerWithItem("evil_ore_bricks", BaseBlock::new);
     public static final RegistryObject<Block> EVIL_ROCK_BRICKS = registerWithItem("evil_rock_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> GEL_BLOCK = registerWithItem("gel_block", BaseBlock::new);
+    public static final RegistryObject<Block> BLUE_GEL_BLOCK = registerWithItem("blue_gel_block", BaseBlock::new);
     public static final RegistryObject<Block> GREEN_CANDY_BLOCK = registerWithItem("green_candy_block", BaseBlock::new);
     public static final RegistryObject<Block> ICE_BRICKS = registerWithItem("ice_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ICED_GEL_BLOCK = registerWithItem("iced_gel_block", BaseBlock::new);
@@ -94,6 +94,12 @@ public class ConfluenceBlocks {
     public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false);
     public static final RegistryObject<Block> ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BeamBlock::new);
     public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_oak_beam", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_PLANK = registerWithItem("another_oak_plank", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_SLAB = registerWithItem(" another_oak_slab", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_STAIRS = registerWithItem("another_oak_stairs", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_NORTHLAND_PLANK = registerWithItem("another_northland_plank", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_NORTHLAND_SLAB = registerWithItem("another_northland_slab", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_NORTHLAND_STAIRS = registerWithItem("another_northland_stairs", BeamBlock::new);
 
     //endregion registries
 
