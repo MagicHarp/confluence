@@ -22,4 +22,5 @@ public class ConfluenceTabs {
                 output.accept(Materials.TIN_INGOT.get());
             })
             .build());
+
 }

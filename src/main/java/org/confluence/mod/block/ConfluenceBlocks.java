@@ -92,7 +92,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN = registerWithItem("another_smooth_obsidian", BaseBlock::new);
     public static final RegistryObject<Block> CHISELED_ANOTHER_OBSIDIAN_BRICKS = registerWithItem("chiseled_another_obsidian_bricks", BaseBlock::new);
     public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false);
-    public static final RegistryObject<Block> ANOTHER_NORTHLAND_BEAM = registerWithItem("another_northland_beam", BeamBlock::new);
+
     public static final DecorationLogBlocks ANOTHER_OAK_LOG_BLOCKS = new DecorationLogBlocks("another_oak", ANOTHER_OAK.SET, ANOTHER_OAK.TYPE, false);
     public static final DecorationLogBlocks ANOTHER_NORTHLAND_LOG_BLOCKS = new DecorationLogBlocks("another_northland", ANOTHER_NORTHLAND.SET, ANOTHER_NORTHLAND.TYPE, false);
     public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_northland_beam", BeamBlock::new);

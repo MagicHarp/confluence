@@ -164,10 +164,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
 
-
-        add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
-
 
         add(Materials.RAW_TIN.get(), "锡粗矿");
         add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
