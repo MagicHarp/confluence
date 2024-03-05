@@ -20,6 +20,6 @@ public class DataGen {
         generator.addProvider(bool, new ConfluenceChineseProvider(output));
         generator.addProvider(bool, new ConfluenceEnglishProvider(output));
         generator.addProvider(bool, new ConfluenceItemModelProvider(output, helper));
-        generator.addProvider(bool, new ConfluenceBlockModelProvider(output, helper));
+        generator.addProvider(bool, new ConfluenceBlockStateProvider(output, helper));
     }
 }
