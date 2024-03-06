@@ -10,9 +10,10 @@ import java.util.function.Supplier;
 public enum ConfluenceTiers implements Tier {
     COPPER(250, 4, 1, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT)),
     TIN(270, 4, 1, 1, 5, () -> Ingredient.of(ConfluenceItems.Materials.TIN_INGOT.get())),
-    WOLFRAM(286, 6, 2, 2, 14, () -> Ingredient.of(ConfluenceItems.Materials.WOLFRAM_INGOT.get())),
+    LEAD(286, 6, 2, 2, 14, () -> Ingredient.of(ConfluenceItems.Materials.LEAD_INGOT.get())),
     SILVER(304, 6, 2, 2, 14, () -> Ingredient.of(ConfluenceItems.Materials.SILVER_INGOT.get())),
-    PLATINUM(1661, 12, 0, 0, 22, () -> Ingredient.of(ConfluenceItems.Materials.PLATINUM_INGOT.get()));
+    WOLFRAM(648, 8, 3, 3, 18, () -> Ingredient.of(ConfluenceItems.Materials.WOLFRAM_INGOT.get())),
+    PLATINUM(1661, 12, 4, 4, 22, () -> Ingredient.of(ConfluenceItems.Materials.PLATINUM_INGOT.get()));
 
     private final int uses;
     private final float speed;

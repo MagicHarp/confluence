@@ -8,6 +8,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.entity.ConfluenceEntities;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.ConfluenceTabs;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class Confluence {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ConfluenceBlocks.register(bus);
         ConfluenceItems.register(bus);
+        ConfluenceEntities.ENTITIES.register(bus);
         ConfluenceTabs.TABS.register(bus);
         bus.addListener(Confluence::commonSetup);
 

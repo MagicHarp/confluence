@@ -4,13 +4,18 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.WoodSetType;
 
+import java.util.Arrays;
+
 import static org.confluence.mod.Confluence.MODID;
 
 public class ConfluenceBlockStateProvider extends BlockStateProvider {
+    private final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
+
     public ConfluenceBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MODID, exFileHelper);
     }
@@ -20,7 +25,7 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block value = block.get();
             String path = block.getId().getPath();
-            if (value instanceof CustomModel) return;
+            if (value instanceof CustomModel || value instanceof SlimeBlock) return;
 
             if (value instanceof ButtonBlock buttonBlock) {
                 buttonBlock(buttonBlock, texture(path, "_button"));
@@ -47,19 +52,27 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
             } else if (value instanceof TrapDoorBlock trapDoorBlock) {
                 trapdoorBlock(trapDoorBlock, path, new ResourceLocation(MODID, path), true);
             } else if (value instanceof DoorBlock doorBlock) {
-                doorBlock(doorBlock, path, new ResourceLocation(MODID, path + "_bottom"), new ResourceLocation(MODID, path + "_top"));
+                doorBlock(doorBlock, path, new ResourceLocation(MODID, path + "_bottom"), top(path));
+            } else if (value instanceof ICubeTop) {
+                getVariantBuilder(value).partialState().setModels(new ConfiguredModel(models()
+                    .cubeTop(path, new ResourceLocation(MODID, path + "_side"), top(path))
+                ));
             } else {
                 simpleBlock(value);
             }
         });
     }
 
-    private static ResourceLocation texture(String path, String regex) {
-        for (WoodSetType woodSetType : WoodSetType.values()) {
-            if (path.contains(woodSetType.name().toLowerCase())) {
+    private ResourceLocation texture(String path, String regex) {
+        for (String woodSetType : WOODS) {
+            if (path.contains(woodSetType)) {
                 return new ResourceLocation(MODID, path.replaceFirst(regex, "_planks"));
             }
         }
         return new ResourceLocation(MODID, path.replaceFirst(regex, ""));
+    }
+
+    private static ResourceLocation top(String path) {
+        return new ResourceLocation(MODID, path + "_top");
     }
 }

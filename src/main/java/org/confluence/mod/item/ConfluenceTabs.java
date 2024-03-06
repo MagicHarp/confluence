@@ -10,7 +10,7 @@ import org.confluence.mod.Confluence;
 
 import static org.confluence.mod.item.ConfluenceItems.Materials;
 
-public class ConfluenceTabs {
+public class  ConfluenceTabs {
     public static final DeferredRegister<CreativeModeTab> TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
 

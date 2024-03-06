@@ -4,13 +4,11 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.BaseBlock;
 import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
@@ -25,53 +23,46 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    public static final RegistryObject<Item> AMBER = ITEMS.register("amber", BaseItem::new) ;
-    public static final RegistryObject<Item> ANOTHER_AMETHYST = ITEMS.register("another_amethyst", BaseItem::new) ;
-    public static final RegistryObject<Item> ANOTHER_EMERALD = ITEMS.register("another_emerald", BaseItem::new) ;
-    public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new) ;
-    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new) ;
-    public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new) ;
-    public static final RegistryObject<Item> MELEE_ICON = ITEMS.register("melee_icon", BaseItem::new) ;
-    public static final RegistryObject<Item>REMOTE_ICON = ITEMS.register("remote_icon", BaseItem::new) ;
-    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", BaseItem::new) ;
-    public static final RegistryObject<Item>SAPPHIRE = ITEMS.register("sapphire", BaseItem::new) ;
-    public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new) ;
-    public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new) ;
-    public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new) ;
-    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", BaseItem::new) ;
-    public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new) ;
-    public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new) ;
-    public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new) ;
-    public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new) ;
-    public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new) ;
-    public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new) ;
-    public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new) ;
-    public static final RegistryObject<Item> ICE_MIRROR = ITEMS.register("ice_mirror", BaseItem::new) ;
-    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new) ;
-    public static final RegistryObject<Item> MAGIC_MIRROR = ITEMS.register("magic_mirror", BaseItem::new) ;
-    public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new) ;
-    public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new) ;
-    public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new) ;
-
-
-
-
-
-
-
+    public static final RegistryObject<Item> AMBER = ITEMS.register("amber", BaseItem::new);
+    public static final RegistryObject<Item> ANOTHER_AMETHYST = ITEMS.register("another_amethyst", BaseItem::new);
+    public static final RegistryObject<Item> ANOTHER_EMERALD = ITEMS.register("another_emerald", BaseItem::new);
+    public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new);
+    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
+    public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new);
+    public static final RegistryObject<Item> MELEE_ICON = ITEMS.register("melee_icon", BaseItem::new);
+    public static final RegistryObject<Item> REMOTE_ICON = ITEMS.register("remote_icon", BaseItem::new);
+    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", BaseItem::new);
+    public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire", BaseItem::new);
+    public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new);
+    public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new);
+    public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new);
+    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", BaseItem::new);
+    public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new);
+    public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new);
+    public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new);
+    public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new);
+    public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new);
+    public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new);
+    public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new);
+    public static final RegistryObject<Item> ICE_MIRROR = ITEMS.register("ice_mirror", BaseItem::new);
+    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new);
+    public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
+    public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
+    public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
+    public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
     public enum Materials implements EnumRegister<Item> {
         RAW_TIN("raw_tin", () -> new BaseItem()),
         TIN_INGOT("tin_ingot", () -> new BaseItem()),
-        RAW_WOLFRAM("raw_wolfram", () -> new BaseItem()),
-        WOLFRAM_INGOT("wolfram_ingot", () -> new BaseItem()),
+        RAW_LEAD("raw_lead", () -> new BaseItem()),
+        LEAD_INGOT("lead_ingot", () -> new BaseItem()),
         RAW_SILVER("raw_silver", () -> new BaseItem()),
         SILVER_INGOT("silver_ingot", () -> new BaseItem()),
+        RAW_WOLFRAM("raw_wolfram", () -> new BaseItem()),
+        WOLFRAM_INGOT("wolfram_ingot", () -> new BaseItem()),
         RAW_PLATINUM("raw_platinum", () -> new BaseItem()),
         PLATINUM_INGOT("platinum_ingot", () -> new BaseItem()),
         METEORITE_INGOT("meteorite_ingot", () -> new BaseItem());
-
-
 
         private final RegistryObject<Item> value;
 
@@ -93,10 +84,12 @@ public class ConfluenceItems {
         COPPER_BOARD_SWORD("copper_board_sword", () -> new BoardSwordItem(ConfluenceTiers.COPPER, 4, 1.6F)),
         TIN_SHORT_SWORD("tin_short_sword", () -> new ShortSwordItem(ConfluenceTiers.TIN, 3, 3)),
         TIN_BOARD_SWORD("tin_board_sword", () -> new BoardSwordItem(ConfluenceTiers.TIN, 5, 1.6F)),
-        WOLFRAM_SHORT_SWORD("wolfram_short_sword", () -> new ShortSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
-        WOLFRAM_BOARD_SWORD("wolfram_board_sword", () -> new BoardSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
+        LEAD_SHORT_SWORD("lead_short_sword", () -> new ShortSwordItem(ConfluenceTiers.LEAD, 0, 0)),
+        LEAD_BOARD_SWORD("lead_board_sword", () -> new BoardSwordItem(ConfluenceTiers.LEAD, 0, 0)),
         SILVER_SHORT_SWORD("silver_short_sword", () -> new ShortSwordItem(ConfluenceTiers.SILVER, 0, 0)),
         SILVER_BOARD_SWORD("silver_board_sword", () -> new BoardSwordItem(ConfluenceTiers.SILVER, 0, 0)),
+        WOLFRAM_SHORT_SWORD("wolfram_short_sword", () -> new ShortSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
+        WOLFRAM_BOARD_SWORD("wolfram_board_sword", () -> new BoardSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
         PLATINUM_SHORT_SWORD("platinum_short_sword", () -> new ShortSwordItem(ConfluenceTiers.PLATINUM, 0, 0)),
         PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ConfluenceTiers.PLATINUM, 0, 0));
 
@@ -119,8 +112,9 @@ public class ConfluenceItems {
     public enum Axes implements EnumRegister<AxeItem> {
         COPPER_AXE("copper_axe", () -> new BaseAxeItem(ConfluenceTiers.COPPER, 2, 1)),
         TIN_AXE("tin_axe", () -> new BaseAxeItem(ConfluenceTiers.TIN, 0, 0)),
-        WOLFRAM_AXE("wolfram_axe", () -> new BaseAxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
+        LEAD_AXE("lead_axe", () -> new BaseAxeItem(ConfluenceTiers.LEAD, 0, 0)),
         SILVER_AXE("silver_axe", () -> new BaseAxeItem(ConfluenceTiers.SILVER, 0, 0)),
+        WOLFRAM_AXE("wolfram_axe", () -> new BaseAxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
         PLATINUM_AXE("platinum_axe", () -> new BaseAxeItem(ConfluenceTiers.PLATINUM, 0, 0));
 
         private final RegistryObject<AxeItem> value;
@@ -142,8 +136,9 @@ public class ConfluenceItems {
     public enum Pickaxes implements EnumRegister<PickaxeItem> {
         COPPER_PICKAXE("copper_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.COPPER, 2, 1)),
         TIN_PICKAXE("tin_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.TIN, 0, 0)),
-        WOLFRAM_PICKAXE("wolfram_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
+        LEAD_PICKAXE("lead_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.LEAD, 0, 0)),
         SILVER_PICKAXE("silver_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.SILVER, 0, 0)),
+        WOLFRAM_PICKAXE("walfram_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.WOLFRAM, 0, 0)),
         PLATINUM_PICKAXE("platinum_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.PLATINUM, 0, 0));
 
         private final RegistryObject<PickaxeItem> value;
@@ -200,6 +195,25 @@ public class ConfluenceItems {
         }
     }
 
+    public enum SlimeBalls implements EnumRegister<Item> {
+        BLUE_SLIME_BALL("blue_slime_ball", () -> new BaseItem());
+
+        private final RegistryObject<Item> value;
+
+        SlimeBalls(String id, Supplier<Item> item) {
+            this.value = ITEMS.register(id, item);
+        }
+
+        @Override
+        public RegistryObject<Item> getValue() {
+            return value;
+        }
+
+        static void init() {
+            Confluence.LOGGER.info("Registering slime balls");
+        }
+    }
+
     public static void register(IEventBus bus) {
         Materials.init();
         Swords.init();
@@ -207,6 +221,7 @@ public class ConfluenceItems {
         Pickaxes.init();
         Hammers.init();
         HammerAxes.init();
+        SlimeBalls.init();
         ITEMS.register(bus);
     }
 }

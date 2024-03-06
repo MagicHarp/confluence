@@ -1,17 +1,11 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.BaseItem;
-import org.confluence.mod.item.ConfluenceItems;
-import org.confluence.mod.item.ConfluenceItems.Axes;
-import org.confluence.mod.item.ConfluenceItems.Materials;
-import org.confluence.mod.item.ConfluenceItems.Pickaxes;
-import org.confluence.mod.item.ConfluenceItems.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
+import static org.confluence.mod.item.ConfluenceItems.*;
 
 public class ConfluenceChineseProvider extends LanguageProvider {
     public ConfluenceChineseProvider(PackOutput output) {
@@ -20,30 +14,31 @@ public class ConfluenceChineseProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
-        add(Ores.RAW_TIN_BLOCK.get(), "原锡块");
+        add(Ores.RAW_TIN_BLOCK.get(), "粗锡块");
         add(Ores.TIN_BLOCK.get(), "锡块");
         add(Ores.LEAD_ORE.get(), "铅矿石");
         add(Ores.DEEPSLATE_LEAD_ORE.get(), "深层铅矿石");
-        add(Ores.RAW_TIN_BLOCK.get(), "原铅块");
+        add(Ores.RAW_LEAD_BLOCK.get(), "粗铅块");
         add(Ores.LEAD_BLOCK.get(), "铅块");
         add(Ores.SILVER_ORE.get(), "银矿石");
         add(Ores.DEEPSLATE_SILVER_ORE.get(), "深层银矿石");
-        add(Ores.RAW_SILVER_BLOCK.get(), "原银块");
+        add(Ores.RAW_SILVER_BLOCK.get(), "粗银块");
         add(Ores.SILVER_BLOCK.get(), "银块");
         add(Ores.WOLFRAM_ORE.get(), "钨矿石");
         add(Ores.DEEPSLATE_WOLFRAM_ORE.get(), "深层钨矿石");
-        add(Ores.RAW_WOLFRAM_BLOCK.get(), "原钨块");
+        add(Ores.RAW_WOLFRAM_BLOCK.get(), "粗钨块");
         add(Ores.WOLFRAM_BLOCK.get(), "钨块");
         add(Ores.PLATINUM_ORE.get(), "铂金矿石");
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
-        add(Ores.RAW_PLATINUM_BLOCK.get(), "原铂金块");
+        add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
         add(EBONY_LOG_BLOCKS.PLANKS.get(), "乌木板");
-        add(EBONY_LOG_BLOCKS.LOG.get(),"乌木原木");
+        add(EBONY_LOG_BLOCKS.LOG.get(), "乌木原木");
         add(EBONY_LOG_BLOCKS.DOOR.get(), "乌木门");
         add(EBONY_LOG_BLOCKS.SIGN.get(), "乌木告示牌");
         add(EBONY_LOG_BLOCKS.STAIRS.get(), "乌木楼梯");
@@ -165,43 +160,78 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
 
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
+        //endregion blocks
 
-        add(Materials.RAW_TIN.get(), "锡粗矿");
+        //region items
+        add(Materials.RAW_TIN.get(), "粗锡");
+        add(Materials.TIN_INGOT.get(), "锡锭");
+        add(Materials.RAW_LEAD.get(), "粗铅");
+        add(Materials.LEAD_INGOT.get(), "铅锭");
+        add(Materials.RAW_SILVER.get(), "粗银");
+        add(Materials.SILVER_INGOT.get(), "银锭");
+        add(Materials.RAW_WOLFRAM.get(), "粗钨");
+        add(Materials.WOLFRAM_INGOT.get(), "钨锭");
+        add(Materials.RAW_PLATINUM.get(), "粗铂金");
+        add(Materials.PLATINUM_INGOT.get(), "铂金锭");
+
         add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
+        add(Swords.COPPER_BOARD_SWORD.get(), "铜质阔剑");
+        add(Swords.TIN_SHORT_SWORD.get(), "锡质短剑");
+        add(Swords.TIN_BOARD_SWORD.get(), "锡质阔剑");
+        add(Swords.LEAD_SHORT_SWORD.get(), "铅质短剑");
+        add(Swords.LEAD_BOARD_SWORD.get(), "铅质阔剑");
+        add(Swords.SILVER_SHORT_SWORD.get(), "银质短剑");
+        add(Swords.SILVER_BOARD_SWORD.get(), "银质阔剑");
+        add(Swords.WOLFRAM_SHORT_SWORD.get(), "钨质短剑");
+        add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨质阔剑");
+        add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
+        add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
+
         add(Axes.COPPER_AXE.get(), "铜斧");
+        add(Axes.TIN_AXE.get(), "锡斧");
+        add(Axes.LEAD_AXE.get(), "铅斧");
+        add(Axes.SILVER_AXE.get(), "银斧");
+        add(Axes.WOLFRAM_AXE.get(), "钨斧");
+        add(Axes.PLATINUM_AXE.get(), "铂金斧");
+
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
-        add(ConfluenceItems.AMBER.get(), "琥珀");
-        add(ConfluenceItems.ANOTHER_AMETHYST.get(), "紫晶");
-        add(ConfluenceItems.ANOTHER_EMERALD.get(), "翡翠");
-        add(ConfluenceItems.BLOCKS_ICON.get(), "方块标识");
-        add(ConfluenceItems.FALLING_STAR.get(), "坠落之星");
-        add(ConfluenceItems.MAGIC_ICON.get(), "法师武器标识");
-        add(ConfluenceItems.MELEE_ICON.get(), "战士武器标识");
-        add(ConfluenceItems.REMOTE_ICON.get(), "射手武器标识");
-        add(ConfluenceItems.RUBY.get(), "红玉");
-        add(ConfluenceItems.SAPPHIRE.get(), "蓝玉");
-        add(ConfluenceItems.SPOOKY_WOOD.get(), "阴森木板");
-        add(ConfluenceItems.SUMMON_ICON.get(), "召唤武器标识");
-        add(ConfluenceItems.TOOLS_ICON.get(), "工具标识");
-        add(ConfluenceItems.TOPAZ.get(), "黄玉");
-        add(ConfluenceItems.APPLE_JUICE.get(), "苹果汁");
-        add(ConfluenceItems.BLACKCURRANT.get(), "黑醋栗");
-        add(ConfluenceItems.BLOOD_ORANGE.get(), "血橙");
-        add(ConfluenceItems.BLOODY_MOSCATO.get(), "猩红麝香葡萄");
-        add(ConfluenceItems.CARRION.get(), "腐肉");
-        add(ConfluenceItems.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
-        add(ConfluenceItems.ELDERBERRY.get(), "接骨木果");
-        add(ConfluenceItems.ICE_MIRROR.get(), "冰雪镜");
-        add(ConfluenceItems.LESSER_HEALING_POTION.get(), "弱效治疗药水");
-        add(ConfluenceItems.MAGIC_MIRROR.get(), "魔镜");
-        add(ConfluenceItems.ROPE.get(), "绳子");
-        add(ConfluenceItems.ROPE_COIL.get(), "绳圈");
-        add(ConfluenceItems. SHURIKEN.get(), "手里剑");
+        add(Pickaxes.TIN_PICKAXE.get(), "锡镐");
+        add(Pickaxes.LEAD_PICKAXE.get(), "铅镐");
+        add(Pickaxes.SILVER_PICKAXE.get(), "银镐");
+        add(Pickaxes.WOLFRAM_PICKAXE.get(), "钨镐");
+        add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
+        /* Hammers */
+        /* HammerAxes */
+        add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
 
+        add(RUBY.get(), "红玉");
+        add(AMBER.get(), "琥珀");
+        add(TOPAZ.get(), "黄玉");
+        add(ANOTHER_EMERALD.get(), "翡翠");
+        add(SAPPHIRE.get(), "蓝玉");
+        add(ANOTHER_AMETHYST.get(), "紫晶");
 
-
-
-
-
+        add(BLOCKS_ICON.get(), "方块标识");
+        add(FALLING_STAR.get(), "坠落之星");
+        add(MAGIC_ICON.get(), "法师武器标识");
+        add(MELEE_ICON.get(), "战士武器标识");
+        add(REMOTE_ICON.get(), "射手武器标识");
+        add(SPOOKY_WOOD.get(), "阴森木板");
+        add(SUMMON_ICON.get(), "召唤武器标识");
+        add(TOOLS_ICON.get(), "工具标识");
+        add(APPLE_JUICE.get(), "苹果汁");
+        add(BLACKCURRANT.get(), "黑醋栗");
+        add(BLOOD_ORANGE.get(), "血橙");
+        add(BLOODY_MOSCATO.get(), "猩红麝香葡萄");
+        add(CARRION.get(), "腐肉");
+        add(CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
+        add(ELDERBERRY.get(), "接骨木果");
+        add(ICE_MIRROR.get(), "冰雪镜");
+        add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
+        add(MAGIC_MIRROR.get(), "魔镜");
+        add(ROPE.get(), "绳子");
+        add(ROPE_COIL.get(), "绳圈");
+        add(SHURIKEN.get(), "手里剑");
+        //endregion items
     }
 }
