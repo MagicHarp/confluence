@@ -14,6 +14,7 @@ import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
 import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.item.sword.BoardSwordItem;
+import org.confluence.mod.item.sword.LaserSwordItem;
 import org.confluence.mod.item.sword.ShortSwordItem;
 import org.confluence.mod.util.EnumRegister;
 
