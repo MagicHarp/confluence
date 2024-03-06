@@ -20,6 +20,7 @@ import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
 
+
 @SuppressWarnings("unused")
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
@@ -51,6 +52,7 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
+
 
     public enum Materials implements EnumRegister<Item> {
         RAW_TIN("raw_tin", () -> new BaseItem()),
