@@ -9,11 +9,15 @@ import java.util.function.Supplier;
 @AutoRegisterCapability
 public class ManaStorage implements INBTSerializable<CompoundTag> {
     private int stars;
+    private int regenerateBonus;
+    private int additionalMana;
     private int currentMana;
     private transient Integer maxMana;
 
     public ManaStorage() {
         this.stars = 1;
+        this.regenerateBonus = 3;
+        this.additionalMana = 0;
         this.currentMana = 20;
     }
 
@@ -21,6 +25,8 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("stars", stars);
+        nbt.putInt("regenerateBonus", regenerateBonus);
+        nbt.putInt("additionalMana", additionalMana);
         nbt.putInt("currentMana", currentMana);
         return nbt;
     }
@@ -28,6 +34,8 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         this.stars = nbt.getInt("stars");
+        this.regenerateBonus = nbt.getInt("regenerateBonus");
+        this.additionalMana = nbt.getInt("additionalMana");
         this.currentMana = nbt.getInt("currentMana");
     }
 
@@ -45,12 +53,21 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         return extracted;
     }
 
-    public int getStars() {
-        return stars;
-    }
-
     public int getCurrentMana() {
         return currentMana;
+    }
+
+    public int getRegenerateBonus() {
+        return regenerateBonus;
+    }
+
+    public void setRegenerateBonus(int regenerateBonus) {
+        this.regenerateBonus = regenerateBonus;
+    }
+
+    public void setAdditionalMana(int additionalMana) {
+        this.additionalMana = additionalMana;
+        freshMaxMana();
     }
 
     public int getMaxMana() {
@@ -61,7 +78,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     public void freshMaxMana() {
-        this.maxMana = stars * 20;
+        this.maxMana = stars * 20 + additionalMana;
     }
 
     public boolean canExtract() {
@@ -75,6 +92,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     public boolean addStar() {
         if (stars < 10) {
             this.stars++;
+            freshMaxMana();
             return true;
         }
         return false;

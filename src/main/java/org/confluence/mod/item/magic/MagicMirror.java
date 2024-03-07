@@ -1,4 +1,4 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.magic;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
-import org.confluence.mod.mana.ManaProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicMirror extends Item {
@@ -51,10 +50,7 @@ public class MagicMirror extends Item {
             } else {
                 serverPlayer.teleportTo(pos.getX(), pos.getY(), pos.getZ());
             }
-            serverPlayer.getCooldowns().addCooldown(ConfluenceItems.MAGIC_MIRROR.get(), 10);
-
-            serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY)
-                .ifPresent(manaStorage -> manaStorage.extractMana(() -> 20));
+            serverPlayer.getCooldowns().addCooldown(this, 10);
         }
         return itemStack;
     }

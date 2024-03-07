@@ -1,7 +1,5 @@
 package org.confluence.mod.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,28 +9,22 @@ import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientManaStorage {
-    public static ClientManaStorage INSTANCE;
-
-    private static int stars;
-    private static int currentMana;
+    private static int maxMana = 20;
+    private static int currentMana = 20;
 
     public static void handlePacket(ManaPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            stars = packet.stars();
+            maxMana = packet.maxMana();
             currentMana = packet.currentMana();
         });
         ctx.get().setPacketHandled(true);
-
-        if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.sendSystemMessage(Component.literal("Client: " + currentMana));
-        }
-    }
-
-    public static int getStars() {
-        return stars;
     }
 
     public static int getCurrentMana() {
         return currentMana;
+    }
+
+    public static int getMaxMana() {
+        return maxMana;
     }
 }
