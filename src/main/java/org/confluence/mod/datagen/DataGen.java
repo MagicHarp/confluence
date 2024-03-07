@@ -19,7 +19,7 @@ public class DataGen {
         boolean bool = event.includeClient();
         generator.addProvider(bool, new ConfluenceChineseProvider(output));
         generator.addProvider(bool, new ConfluenceEnglishProvider(output));
-        generator.addProvider(bool, new ConfluenceItemModelProvider(output, helper));
         generator.addProvider(bool, new ConfluenceBlockStateProvider(output, helper));
+        generator.addProvider(bool, new ConfluenceItemModelProvider(output, helper));
     }
 }

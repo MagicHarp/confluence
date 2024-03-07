@@ -12,6 +12,7 @@ import org.confluence.mod.client.particle.ConfluenceParticles;
 import org.confluence.mod.entity.ConfluenceEntities;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.ConfluenceTabs;
+import org.confluence.mod.network.NetworkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -38,5 +39,7 @@ public class Confluence {
 
     private static void commonSetup(FMLCommonSetupEvent event) {
         GAME_PHASE = GameRules.register("terraGamePhase", GameRules.Category.UPDATES, GameRules.IntegerValue.create(8));
+
+        NetworkHandler.register();
     }
 }

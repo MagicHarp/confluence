@@ -39,11 +39,17 @@ minecraft {
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
         }
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
         }
 
         data {
@@ -73,10 +79,7 @@ repositories {
     }
 
     maven {
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
+        url "https://maven.theillusivec4.top/"
     }
 }
 
@@ -85,7 +88,8 @@ dependencies {
 
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:4.4.2")
     implementation fg.deobf("curse.maven:eventhorizon-890704:5026654")
-    implementation fg.deobf("maven.modrinth:p19vrgc2:oA5jxU4i") // fusion
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.7.0+1.20.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.7.0+1.20.1:api")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

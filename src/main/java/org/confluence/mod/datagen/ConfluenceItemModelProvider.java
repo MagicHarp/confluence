@@ -26,12 +26,16 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
             Item value = item.get();
             String path = item.getId().getPath();
             if (value instanceof CustomModel || value instanceof GeoItem) return;
-            if (value instanceof BlockItem blockItem) {
-                blockItem(blockItem, path);
-            } else if (isHandheld(value)) {
-                itemHandheld(item, path);
-            } else {
-                itemGenerated(path);
+            try {
+                if (value instanceof BlockItem blockItem) {
+                    blockItem(blockItem, path);
+                } else if (isHandheld(value)) {
+                    itemHandheld(item, path);
+                } else {
+                    itemGenerated(path);
+                }
+            } catch (Exception e) {
+                Confluence.LOGGER.info(e.getMessage());
             }
         });
     }
