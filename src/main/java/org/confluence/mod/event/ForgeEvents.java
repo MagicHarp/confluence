@@ -33,8 +33,9 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player) {
-            event.addCapability(new ResourceLocation(Confluence.MODID, "mana_capability"), new ManaProvider());
+        if (event.getObject() instanceof Player player) {
+            if (player.getCapability(ManaProvider.MANA_CAPABILITY).isPresent()) return;
+            event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
         }
     }
 
@@ -44,7 +45,7 @@ public class ForgeEvents {
 
         ServerPlayer serverPlayer = (ServerPlayer) event.player;
         serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
-            if (manaStorage.receiveMana(() -> manaStorage.getCurrentMana() * 5 / manaStorage.getMaxMana()) > 0) {
+            if (manaStorage.receiveMana(() -> (manaStorage.getCurrentMana() * 5 / manaStorage.getMaxMana()) + 1) != -1) {
                 NetworkHandler.CHANNEL.send(
                     PacketDistributor.PLAYER.with(() -> serverPlayer),
                     new ManaPacketS2C(manaStorage.getStars(), manaStorage.getCurrentMana())

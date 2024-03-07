@@ -32,14 +32,14 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     public int receiveMana(Supplier<Integer> sup) {
-        if (!canReceive()) return 0;
+        if (!canReceive()) return -1;
         int received = Math.min(sup.get(), getMaxMana() - currentMana);
         this.currentMana += received;
         return received;
     }
 
     public int extractMana(Supplier<Integer> sup) {
-        if (!canExtract()) return 0;
+        if (!canExtract()) return -1;
         int extracted = Math.min(sup.get(), currentMana);
         this.currentMana -= extracted;
         return extracted;

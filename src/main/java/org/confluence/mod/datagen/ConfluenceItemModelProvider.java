@@ -44,7 +44,7 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
         path = path.toLowerCase();
         Block block = blockItem.getBlock();
         if (block instanceof ButtonBlock) path += "_inventory";
-        withExistingParent(path, "block/" + path);
+        withExistingParent(path, new ResourceLocation(Confluence.MODID, "block/" + path));
     }
 
     public void itemGenerated(String path) {

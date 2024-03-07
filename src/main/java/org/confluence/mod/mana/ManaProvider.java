@@ -31,6 +31,9 @@ public class ManaProvider implements ICapabilitySerializable<CompoundTag> {
     }
 
     private ManaStorage getOrCreateStorage() {
-        return manaStorage == null ? new ManaStorage() : manaStorage;
+        if (manaStorage == null) {
+            this.manaStorage = new ManaStorage();
+        }
+        return manaStorage;
     }
 }
