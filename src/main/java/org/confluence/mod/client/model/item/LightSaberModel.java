@@ -11,9 +11,9 @@ public class LightSaberModel extends GeoModel<LightSaber> {
     private final ResourceLocation animation;
 
     public LightSaberModel(String color) {
-        this.model = new ResourceLocation(Confluence.MODID, "geo/item/" + color + "_light_saber.geo.json");
+        this.model = new ResourceLocation(Confluence.MODID, "geo/item/light_saber.geo.json");
         this.texture = new ResourceLocation(Confluence.MODID, "textures/item/light_saber/" + color + "_light_saber.png");
-        this.animation = new ResourceLocation(Confluence.MODID, "animations/item/" + color + "_light_saber.animation.json");
+        this.animation = new ResourceLocation(Confluence.MODID, "animations/item/light_saber.animation.json");
     }
 
     @Override
