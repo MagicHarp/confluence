@@ -6,14 +6,12 @@ import org.confluence.mod.item.sword.LightSaber;
 import software.bernie.geckolib.model.GeoModel;
 
 public class LightSaberModel extends GeoModel<LightSaber> {
-    private final ResourceLocation model;
+    private static final ResourceLocation model = new ResourceLocation(Confluence.MODID, "geo/item/light_saber.geo.json");
     private final ResourceLocation texture;
-    private final ResourceLocation animation;
+    private static final ResourceLocation animation = new ResourceLocation(Confluence.MODID, "animations/item/light_saber.animation.json");
 
     public LightSaberModel(String color) {
-        this.model = new ResourceLocation(Confluence.MODID, "geo/item/" + color + "_light_saber.geo.json");
         this.texture = new ResourceLocation(Confluence.MODID, "textures/item/light_saber/" + color + "_light_saber.png");
-        this.animation = new ResourceLocation(Confluence.MODID, "animations/item/" + color + "_light_saber.animation.json");
     }
 
     @Override

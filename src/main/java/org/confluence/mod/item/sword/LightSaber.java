@@ -34,7 +34,8 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 public class LightSaber extends BoardSwordItem implements GeoItem {
-    public static final UUID SABER_MODIFIER_UUID = UUID.fromString("C07E8BEF-215A-4AF8-81AF-C435420D9A3F");
+    private static final UUID SABER_MODIFIER_UUID = UUID.fromString("C07E8BEF-215A-4AF8-81AF-C435420D9A3F");
+    private static final AttributeModifier SABER_MODIFIER = new AttributeModifier(SABER_MODIFIER_UUID, "Saber Modifier", 6, AttributeModifier.Operation.ADDITION);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private Multimap<Attribute, AttributeModifier> attributeModifiers;
     private final String color;
@@ -91,12 +92,12 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
         boolean onUse = isOnUse(itemStack);
         level.playSound(player, player.getOnPos().above(), onUse ? SoundEvents.BEACON_DEACTIVATE : SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2, 1);
 
-        if (!level.isClientSide) {
-            if (onUse) {
-                attributeModifiers.entries().removeIf(entry -> entry.getKey() == Attributes.ATTACK_DAMAGE && entry.getValue().getId() == SABER_MODIFIER_UUID);
-            } else {
-                attributeModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(SABER_MODIFIER_UUID, "Saber Modifier", 6, AttributeModifier.Operation.ADDITION));
-            }
+        if (onUse) {
+            itemStack.getOrCreateTag().putBoolean("onUse", false);
+            attributeModifiers.entries().removeIf(entry -> entry.getValue() == SABER_MODIFIER);
+        } else {
+            itemStack.getOrCreateTag().putBoolean("onUse", true);
+            attributeModifiers.put(Attributes.ATTACK_DAMAGE, SABER_MODIFIER);
         }
 
         return InteractionResultHolder.success(itemStack);
