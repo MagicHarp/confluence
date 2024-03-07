@@ -12,8 +12,11 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
+import org.confluence.mod.item.magic.MagicMirror;
+import org.confluence.mod.item.magic.ManaStar;
 import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.item.sword.BoardSwordItem;
+import org.confluence.mod.item.sword.LightSaber;
 import org.confluence.mod.item.sword.ShortSwordItem;
 import org.confluence.mod.util.EnumRegister;
 
@@ -24,20 +27,15 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    public static final RegistryObject<Item> AMBER = ITEMS.register("amber", BaseItem::new);
-    public static final RegistryObject<Item> ANOTHER_AMETHYST = ITEMS.register("another_amethyst", BaseItem::new);
-    public static final RegistryObject<Item> ANOTHER_EMERALD = ITEMS.register("another_emerald", BaseItem::new);
     public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new);
     public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
     public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new);
     public static final RegistryObject<Item> MELEE_ICON = ITEMS.register("melee_icon", BaseItem::new);
     public static final RegistryObject<Item> REMOTE_ICON = ITEMS.register("remote_icon", BaseItem::new);
-    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", BaseItem::new);
-    public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire", BaseItem::new);
+
     public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new);
     public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new);
     public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new);
-    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", BaseItem::new);
     public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new);
     public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new);
     public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new);
@@ -51,25 +49,33 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
+    public static final RegistryObject<ManaStar> MANA_STAR = ITEMS.register("mana_star", ManaStar::new);
 
 
     public enum Materials implements EnumRegister<Item> {
-        RAW_TIN("raw_tin", () -> new BaseItem()),
-        TIN_INGOT("tin_ingot", () -> new BaseItem()),
-        RAW_LEAD("raw_lead", () -> new BaseItem()),
-        LEAD_INGOT("lead_ingot", () -> new BaseItem()),
-        RAW_SILVER("raw_silver", () -> new BaseItem()),
-        SILVER_INGOT("silver_ingot", () -> new BaseItem()),
-        RAW_WOLFRAM("raw_wolfram", () -> new BaseItem()),
-        WOLFRAM_INGOT("wolfram_ingot", () -> new BaseItem()),
-        RAW_PLATINUM("raw_platinum", () -> new BaseItem()),
-        PLATINUM_INGOT("platinum_ingot", () -> new BaseItem()),
-        METEORITE_INGOT("meteorite_ingot", () -> new BaseItem());
+        RAW_TIN("raw_tin"),
+        TIN_INGOT("tin_ingot"),
+        RAW_LEAD("raw_lead"),
+        LEAD_INGOT("lead_ingot"),
+        RAW_SILVER("raw_silver"),
+        SILVER_INGOT("silver_ingot"),
+        RAW_WOLFRAM("raw_wolfram"),
+        WOLFRAM_INGOT("wolfram_ingot"),
+        RAW_PLATINUM("raw_platinum"),
+        PLATINUM_INGOT("platinum_ingot"),
+        METEORITE_INGOT("meteorite_ingot"),
+
+        AMBER("amber"),
+        ANOTHER_AMETHYST("another_amethyst"),
+        ANOTHER_EMERALD("another_emerald"),
+        RUBY("ruby"),
+        SAPPHIRE("sapphire"),
+        TOPAZ("topaz");
 
         private final RegistryObject<Item> value;
 
-        Materials(String id, Supplier<Item> ore) {
-            this.value = ITEMS.register(id, ore);
+        Materials(String id) {
+            this.value = ITEMS.register(id, BaseItem::new);
         }
 
         public RegistryObject<Item> getValue() {
@@ -93,7 +99,15 @@ public class ConfluenceItems {
         WOLFRAM_SHORT_SWORD("wolfram_short_sword", () -> new ShortSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
         WOLFRAM_BOARD_SWORD("wolfram_board_sword", () -> new BoardSwordItem(ConfluenceTiers.WOLFRAM, 0, 0)),
         PLATINUM_SHORT_SWORD("platinum_short_sword", () -> new ShortSwordItem(ConfluenceTiers.PLATINUM, 0, 0)),
-        PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ConfluenceTiers.PLATINUM, 0, 0));
+        PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ConfluenceTiers.PLATINUM, 0, 0)),
+
+        RED_LIGHT_SABER("red_light_saber", () -> new LightSaber("red")),
+        ORANGE_LIGHT_SABER("orange_light_saber", () -> new LightSaber("orange")),
+        YELLOW_LIGHT_SABER("yellow_light_saber", () -> new LightSaber("yellow")),
+        GREEN_LIGHT_SABER("green_light_saber", () -> new LightSaber("green")),
+        BLUE_LIGHT_SABER("blue_light_saber", () -> new LightSaber("blue")),
+        PURPLE_LIGHT_SABER("purple_light_saber", () -> new LightSaber("purple")),
+        WHITE_LIGHT_SABER("white_light_saber", () -> new LightSaber("white"));
 
         private final RegistryObject<SwordItem> value;
 
@@ -198,7 +212,7 @@ public class ConfluenceItems {
     }
 
     public enum SlimeBalls implements EnumRegister<Item> {
-        BLUE_SLIME_BALL("blue_slime_ball", () -> new BaseItem());
+        BLUE_SLIME_BALL("blue_slime_ball", BaseItem::new);
 
         private final RegistryObject<Item> value;
 
