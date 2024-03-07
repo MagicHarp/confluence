@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
-
+    //icon
     public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new);
     public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
     public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new);
@@ -36,20 +36,26 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new);
     public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new);
     public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new);
+    //food
     public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new);
     public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new);
     public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new);
     public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new);
+    public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new);
+    //material
     public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new);
     public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new);
-    public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new);
+    public static final RegistryObject<ManaStar> MANA_STAR = ITEMS.register("mana_star", ManaStar::new);
+    //tool
     public static final RegistryObject<Item> ICE_MIRROR = ITEMS.register("ice_mirror", BaseItem::new);
-    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new);
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
+    //Healing Potion
+    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new);
+    //Throwables
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
-    public static final RegistryObject<ManaStar> MANA_STAR = ITEMS.register("mana_star", ManaStar::new);
+
 
 
     public enum Materials implements EnumRegister<Item> {
