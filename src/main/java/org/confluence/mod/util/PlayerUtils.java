@@ -1,4 +1,4 @@
-package org.confluence.mod.event;
+package org.confluence.mod.util;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
@@ -10,7 +10,7 @@ import org.confluence.mod.network.NetworkHandler;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-public class PlayerEvents {
+public class PlayerUtils {
     public static void syncMana2Client(ServerPlayer serverPlayer, ManaStorage manaStorage) {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),

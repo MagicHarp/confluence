@@ -20,6 +20,10 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("creativetab.confluence.building_blocks", "Confluence | Buildings");
+        add("creativetab.confluence.natural_blocks", "Confluence | Naturals");
+        add("creativetab.confluence.materials", "Confluence | Materials");
+
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) {

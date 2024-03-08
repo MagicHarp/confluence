@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 
+import static org.confluence.mod.block.ConfluenceBlocks.Ores;
 import static org.confluence.mod.item.ConfluenceItems.Materials;
 
 public class ConfluenceTabs {
@@ -15,21 +16,23 @@ public class ConfluenceTabs {
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
 
     public static final RegistryObject<CreativeModeTab> BUILDING_BLOCKS = TABS.register("building_blocks",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(ConfluenceItems.BLOCKS_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(ConfluenceItems.Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.building_blocks"))
             .displayItems((parameters, output) -> {
 
             })
             .build());
     public static final RegistryObject<CreativeModeTab> NATURAL_BLOCKS = TABS.register("natural_blocks",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(ConfluenceItems.BLOCKS_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(ConfluenceItems.Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.natural_blocks"))
             .displayItems((parameters, output) -> {
-
+                for (Ores ores : Ores.values()) {
+                    output.accept(ores.get());
+                }
             })
             .build());
     public static final RegistryObject<CreativeModeTab> MATERIALS = TABS.register("materials",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Materials.RAW_TIN.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(ConfluenceItems.Icons.ITEM_ICON.get()))
             .title(Component.translatable("creativetab.confluence.materials"))
             .displayItems((parameters, output) -> {
                 for (Materials materials : Materials.values()) {

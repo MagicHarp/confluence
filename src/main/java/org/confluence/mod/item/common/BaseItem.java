@@ -1,4 +1,4 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.common;
 
 import net.minecraft.world.item.Item;
 

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import static org.confluence.mod.Confluence.MODID;
 
 public class ConfluenceBlockStateProvider extends BlockStateProvider {
-    private final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
+    private static final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
 
     public ConfluenceBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MODID, exFileHelper);
@@ -63,7 +63,7 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                     simpleBlock(value);
                 }
             } catch (Exception e) {
-                Confluence.LOGGER.info(e.getMessage());
+                Confluence.LOGGER.error(e.getMessage());
             }
         });
     }

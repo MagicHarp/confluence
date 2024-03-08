@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
+import org.confluence.mod.util.PlayerUtils;
 
 import java.util.Random;
 
@@ -39,8 +40,8 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            PlayerEvents.syncMana2Client(serverPlayer);
-            PlayerEvents.syncAdvancements(serverPlayer);
+            PlayerUtils.syncMana2Client(serverPlayer);
+            PlayerUtils.syncAdvancements(serverPlayer);
         }
     }
 
@@ -49,7 +50,7 @@ public class ForgeEvents {
         if (event.side == LogicalSide.CLIENT || event.phase == TickEvent.Phase.START) return;
 
         ServerPlayer serverPlayer = (ServerPlayer) event.player;
-        PlayerEvents.regenerateMana(serverPlayer);
+        PlayerUtils.regenerateMana(serverPlayer);
     }
 
     @SubscribeEvent

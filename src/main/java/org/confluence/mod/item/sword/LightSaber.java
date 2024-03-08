@@ -4,10 +4,12 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -21,8 +23,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.LightSaberRenderer;
+import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -30,14 +34,19 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class LightSaber extends BoardSwordItem implements GeoItem {
-    private static final UUID SABER_MODIFIER_UUID = UUID.fromString("C07E8BEF-215A-4AF8-81AF-C435420D9A3F");
-    private static final AttributeModifier SABER_MODIFIER = new AttributeModifier(SABER_MODIFIER_UUID, "Saber Modifier", 6, AttributeModifier.Operation.ADDITION);
+    private static final ImmutableMultimap<Attribute, AttributeModifier> ON = ImmutableMultimap.of(
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 9, AttributeModifier.Operation.ADDITION),
+        Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
+    );
+    private static final ImmutableMultimap<Attribute, AttributeModifier> OFF = ImmutableMultimap.of(
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 0, AttributeModifier.Operation.ADDITION),
+        Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
+    );
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private Multimap<Attribute, AttributeModifier> attributeModifiers;
     private final String color;
 
     public LightSaber(String color) {
@@ -71,17 +80,15 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
             public @NotNull Ingredient getRepairIngredient() {
                 return Ingredient.EMPTY;
             }
-        }, 0, 3, new Properties().fireResistant());
+        }, 10, 3, new Properties().fireResistant());
         this.color = color;
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack itemStack) {
         if (slot == EquipmentSlot.MAINHAND) {
-            if (attributeModifiers == null) {
-                attributeModifiers = super.getDefaultAttributeModifiers(slot);
-            }
-            return attributeModifiers;
+            return isOnUse(itemStack) ? ON : OFF;
         }
         return ImmutableMultimap.of();
     }
@@ -89,17 +96,7 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        boolean onUse = isOnUse(itemStack);
-        level.playSound(player, player.getOnPos().above(), onUse ? SoundEvents.BEACON_DEACTIVATE : SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2, 1);
-
-        if (onUse) {
-            itemStack.getOrCreateTag().putBoolean("onUse", false);
-            attributeModifiers.entries().removeIf(entry -> entry.getValue() == SABER_MODIFIER);
-        } else {
-            itemStack.getOrCreateTag().putBoolean("onUse", true);
-            attributeModifiers.put(Attributes.ATTACK_DAMAGE, SABER_MODIFIER);
-        }
-
+        level.playSound(player, player.getOnPos().above(), isOnUse(itemStack) ? SoundEvents.BEACON_DEACTIVATE : SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2, 1);
         return InteractionResultHolder.success(itemStack);
     }
 
@@ -110,16 +107,26 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
 
     @Override
     public int getUseDuration(@NotNull ItemStack itemStack) {
-        return isOnUse(itemStack) ? 5 : 15;
+        return 20;
     }
 
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         if (level.isClientSide) return itemStack;
 
-        triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", isOnUse(itemStack) ? "off" : "on");
+        boolean onUse = isOnUse(itemStack);
+        triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", onUse ? "off" : "on");
+        itemStack.getOrCreateTag().putBoolean("onUse", !onUse);
         if (living instanceof Player player) player.getCooldowns().addCooldown(this, 10);
         return itemStack;
+    }
+
+    @Override
+    public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int tick, boolean selected) {
+        if (selected && !level.isClientSide && isOnUse(itemStack) && entity instanceof ServerPlayer serverPlayer) {
+            if (PlayerUtils.extractMana(serverPlayer, () -> 2)) return;
+            itemStack.getOrCreateTag().putBoolean("onUse", false);
+        }
     }
 
     @Override

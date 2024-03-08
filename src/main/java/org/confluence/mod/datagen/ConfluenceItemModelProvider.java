@@ -5,63 +5,56 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
 import software.bernie.geckolib.animatable.GeoItem;
 
+import static org.confluence.mod.Confluence.MODID;
+
 public class ConfluenceItemModelProvider extends ItemModelProvider {
+    private static final ResourceLocation MISSING_ITEM = new ResourceLocation(MODID, "item/item_icon");
+    private static final ResourceLocation MISSING_BLOCK = new ResourceLocation(MODID, "item/blocks_icon");
+
     public ConfluenceItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, Confluence.MODID, existingFileHelper);
+        super(output, MODID, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
+        for (ConfluenceItems.Icons icons : ConfluenceItems.Icons.values()) {
+            String path = icons.name().toLowerCase();
+            withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+        }
+
         ConfluenceItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
-            String path = item.getId().getPath();
+            String path = item.getId().getPath().toLowerCase();
             if (value instanceof CustomModel || value instanceof GeoItem) return;
+
+            boolean isBlockItem = false;
             try {
                 if (value instanceof BlockItem blockItem) {
-                    blockItem(blockItem, path);
+                    isBlockItem = true;
+                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (blockItem.getBlock() instanceof ButtonBlock ? "_inventory" : "")));
                 } else if (isHandheld(value)) {
-                    itemHandheld(item, path);
+                    ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    if (value instanceof Image32x i32) {
+                        i32.preset(builder);
+                    } else if (value instanceof Image64x i64) {
+                        i64.preset(builder);
+                    }
                 } else {
-                    itemGenerated(path);
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }
             } catch (Exception e) {
-                Confluence.LOGGER.info(e.getMessage());
+                Confluence.LOGGER.error(e.getMessage());
+                withExistingParent(path, isBlockItem ? MISSING_BLOCK : MISSING_ITEM);
             }
         });
-    }
-
-    public void blockItem(BlockItem blockItem, String path) {
-        path = path.toLowerCase();
-        Block block = blockItem.getBlock();
-        if (block instanceof ButtonBlock) path += "_inventory";
-        withExistingParent(path, new ResourceLocation(Confluence.MODID, "block/" + path));
-    }
-
-    public void itemGenerated(String path) {
-        path = path.toLowerCase();
-        withExistingParent(path, "item/generated")
-            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path));
-    }
-
-    public <I extends Item> void itemHandheld(RegistryObject<I> item, String path) {
-        path = path.toLowerCase();
-        ItemModelBuilder builder = withExistingParent(path, "item/handheld")
-            .texture("layer0", new ResourceLocation(Confluence.MODID, "item/" + path));
-        if (item.get() instanceof Image32x i32) {
-            i32.preset(builder);
-        } else if (item.get() instanceof Image64x i64) {
-            i64.preset(builder);
-        }
     }
 
     private static boolean isHandheld(Item item) {

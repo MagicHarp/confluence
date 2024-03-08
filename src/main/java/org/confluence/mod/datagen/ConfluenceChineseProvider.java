@@ -14,6 +14,10 @@ public class ConfluenceChineseProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("creativetab.confluence.building_blocks", "汇流来世 | 建筑方块");
+        add("creativetab.confluence.natural_blocks", "汇流来世 | 自然方块");
+        add("creativetab.confluence.materials", "汇流来世 | 材料");
+
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");

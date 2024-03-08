@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.event.PlayerEvents;
+import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ManaPotion extends Item {
@@ -25,7 +25,7 @@ public class ManaPotion extends Item {
         level.playSound(player, player.getOnPos(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1, 1);
 
         ItemStack itemStack = player.getItemInHand(hand);
-        if (player instanceof ServerPlayer serverPlayer && PlayerEvents.receiveMana(serverPlayer, () -> amount)) {
+        if (player instanceof ServerPlayer serverPlayer && PlayerUtils.receiveMana(serverPlayer, () -> amount)) {
             itemStack.shrink(1);
         }
         return InteractionResultHolder.consume(itemStack);

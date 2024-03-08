@@ -10,6 +10,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.BaseAxeItem;
+import org.confluence.mod.item.common.BaseItem;
+import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
 import org.confluence.mod.item.magic.MagicMirror;
@@ -26,16 +28,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
-    //icon
-    public static final RegistryObject<Item> BLOCKS_ICON = ITEMS.register("blocks_icon", BaseItem::new);
-    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
-    public static final RegistryObject<Item> MAGIC_ICON = ITEMS.register("magic_icon", BaseItem::new);
-    public static final RegistryObject<Item> MELEE_ICON = ITEMS.register("melee_icon", BaseItem::new);
-    public static final RegistryObject<Item> REMOTE_ICON = ITEMS.register("remote_icon", BaseItem::new);
 
-    public static final RegistryObject<Item> SPOOKY_WOOD = ITEMS.register("spooky_wood", BaseItem::new);
-    public static final RegistryObject<Item> SUMMON_ICON = ITEMS.register("summon_icon", BaseItem::new);
-    public static final RegistryObject<Item> TOOLS_ICON = ITEMS.register("tools_icon", BaseItem::new);
     //food
     public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new);
     public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new);
@@ -43,6 +36,7 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new);
     public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new);
     //material
+    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
     public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new);
     public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new);
     public static final RegistryObject<ManaStar> MANA_STAR = ITEMS.register("mana_star", ManaStar::new);
@@ -57,8 +51,33 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
 
+    public enum Icons implements EnumRegister<IconItem> {
+        ITEM_ICON("item_icon"),
+        BLOCKS_ICON("blocks_icon"),
+        MAGIC_ICON("magic_icon"),
+        MELEE_ICON("melee_icon"),
+        REMOTE_ICON("remote_icon"),
+        SPOOKY_WOOD("spooky_wood"),
+        SUMMON_ICON("summon_icon"),
+        TOOLS_ICON("tools_icon");
 
-    public enum Materials implements EnumRegister<Item> {
+        private final RegistryObject<IconItem> value;
+
+        Icons(String id) {
+            this.value = ITEMS.register(id, IconItem::new);
+        }
+
+        @Override
+        public RegistryObject<IconItem> getValue() {
+            return value;
+        }
+
+        static void init() {
+            Confluence.LOGGER.info("Registering icon items");
+        }
+    }
+
+    public enum Materials implements EnumRegister<BaseItem> {
         RAW_TIN("raw_tin"),
         TIN_INGOT("tin_ingot"),
         RAW_LEAD("raw_lead"),
@@ -78,13 +97,13 @@ public class ConfluenceItems {
         SAPPHIRE("sapphire"),
         TOPAZ("topaz");
 
-        private final RegistryObject<Item> value;
+        private final RegistryObject<BaseItem> value;
 
         Materials(String id) {
             this.value = ITEMS.register(id, BaseItem::new);
         }
 
-        public RegistryObject<Item> getValue() {
+        public RegistryObject<BaseItem> getValue() {
             return value;
         }
 
@@ -237,6 +256,7 @@ public class ConfluenceItems {
     }
 
     public static void register(IEventBus bus) {
+        Icons.init();
         Materials.init();
         Swords.init();
         Axes.init();
