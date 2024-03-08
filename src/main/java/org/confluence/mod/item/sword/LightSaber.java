@@ -17,11 +17,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.renderer.item.LightSaberRenderer;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
@@ -88,22 +90,19 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack itemStack) {
         if (slot == EquipmentSlot.MAINHAND) {
-            return isOnUse(itemStack) ? ON : OFF;
+            return isTurnOff(itemStack) ? OFF : ON;
         }
         return ImmutableMultimap.of();
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        ItemStack itemStack = player.getItemInHand(hand);
-        level.playSound(player, player.getOnPos().above(), isOnUse(itemStack) ? SoundEvents.BEACON_DEACTIVATE : SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2, 1);
-        player.startUsingItem(hand);
-        return InteractionResultHolder.success(itemStack);
+        return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
     @Override
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack itemStack) {
-        return isOnUse(itemStack) ? UseAnim.NONE : UseAnim.BLOCK;
+        return UseAnim.BLOCK;
     }
 
     @Override
@@ -115,18 +114,27 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         if (level.isClientSide) return itemStack;
 
-        boolean onUse = isOnUse(itemStack);
-        triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", onUse ? "off" : "on");
-        itemStack.getOrCreateTag().putBoolean("onUse", !onUse);
+        boolean turnOff = isTurnOff(itemStack);
+        itemStack.getOrCreateTag().putBoolean("turnOff", !turnOff);
+        triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "controller", turnOff ? "on" : "off");
+        level.playSound(living, living.getOnPos().above(), isTurnOff(itemStack) ? SoundEvents.BEACON_ACTIVATE : SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
+
+        Confluence.LOGGER.debug("Triggering controller." + (turnOff ? "on" : "off"));
+
         if (living instanceof Player player) player.getCooldowns().addCooldown(this, 10);
         return itemStack;
     }
 
     @Override
     public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int tick, boolean selected) {
-        if (selected && !level.isClientSide && isOnUse(itemStack) && entity instanceof ServerPlayer serverPlayer) {
-            if (PlayerUtils.extractMana(serverPlayer, () -> 2)) return;
-            itemStack.getOrCreateTag().putBoolean("onUse", false);
+        if (tick % 20 == 0 && selected && !level.isClientSide && !isTurnOff(itemStack) && entity instanceof ServerPlayer serverPlayer) {
+            if (PlayerUtils.extractMana(serverPlayer, () -> 1)) return;
+
+            itemStack.getOrCreateTag().putBoolean("turnOff", true);
+            triggerAnim(entity, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "controller", "off");
+            level.playSound(entity, entity.getOnPos().above(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
+
+            Confluence.LOGGER.debug("Triggering controller.off");
         }
     }
 
@@ -147,9 +155,9 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "light", state -> PlayState.STOP)
-            .triggerableAnim("on", RawAnimation.begin().thenPlayAndHold("turn_on"))
-            .triggerableAnim("off", RawAnimation.begin().thenPlayAndHold("turn_off"))
+        controllers.add(new AnimationController<>(this, "controller", state -> PlayState.STOP)
+            .triggerableAnim("on", RawAnimation.begin().thenPlay("turn_on"))
+            .triggerableAnim("off", RawAnimation.begin().thenPlay("turn_off"))
         );
     }
 
@@ -158,7 +166,7 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
         return cache;
     }
 
-    private boolean isOnUse(ItemStack itemStack) {
-        return itemStack.getOrCreateTag().getBoolean("onUse");
+    private boolean isTurnOff(ItemStack itemStack) {
+        return itemStack.getOrCreateTag().getBoolean("turnOff");
     }
 }

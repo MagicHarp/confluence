@@ -19,18 +19,22 @@ public class PlayerUtils {
     }
 
     public static void syncMana2Client(ServerPlayer serverPlayer) {
-        serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
-            syncMana2Client(serverPlayer, manaStorage);
-        });
+        serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> syncMana2Client(serverPlayer, manaStorage));
     }
 
     public static void regenerateMana(ServerPlayer serverPlayer) {
         serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
+            int delay = manaStorage.getRegenerateDelay();
+            if (delay > 0) {
+                manaStorage.setRegenerateDelay(delay - (serverPlayer.getDeltaMovement().length() < 0.2 ? 2 : 1));
+                return;
+            }
+
             Supplier<Integer> receive = () -> {
                 float a = ((float) manaStorage.getMaxMana() / 7) + manaStorage.getRegenerateBonus() + 1;
-                float b = ((float) manaStorage.getCurrentMana()) / manaStorage.getMaxMana() * 0.8F + 0.2F;
-                if (serverPlayer.getDeltaMovement().length() < 0.3) a += (float) manaStorage.getMaxMana() / 2;
-                return Math.round(a * b * 1.15F);
+                float b = ((float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 0.8F + 0.2F;
+                if (serverPlayer.getDeltaMovement().length() < 0.2) a += (float) manaStorage.getMaxMana() / 2;
+                return Math.round(a * b * 0.0115F);
             };
 
             if (manaStorage.receiveMana(receive) != -1) {
@@ -41,7 +45,13 @@ public class PlayerUtils {
 
     public static boolean extractMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
         AtomicBoolean success = new AtomicBoolean(false);
-        serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> success.set(manaStorage.extractMana(sup) != -1));
+        serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
+            if (manaStorage.extractMana(sup) != -1) {
+                success.set(true);
+                manaStorage.setRegenerateDelay((int) Math.ceil(0.7F * ((1 - (float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 240 + 45)));
+                syncMana2Client(serverPlayer, manaStorage);
+            }
+        });
         return success.get();
     }
 

@@ -39,7 +39,10 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
     //  Potion
-    public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new);
+    public static final RegistryObject<HealingPotion> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", () -> new HealingPotion(50, new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<HealingPotion> HEALING_POTION = ITEMS.register("healing_potion", () -> new HealingPotion(100, new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<HealingPotion> GREATER_HEALING_POTION = ITEMS.register("greater_healing_potion", () -> new HealingPotion(200, new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<HealingPotion> SUPER_HEALING_POTION = ITEMS.register("super_healing_potion", () -> new HealingPotion(300, new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<ManaPotion> LESSER_MANA_POTION = ITEMS.register("lesser_mana_potion", () -> new ManaPotion(50, new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<ManaPotion> MANA_POTION = ITEMS.register("mana_potion", () -> new ManaPotion(100, new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<ManaPotion> GREATER_MANA_POTION = ITEMS.register("greater_mana_potion", () -> new ManaPotion(200, new Item.Properties().rarity(Rarity.RARE)));

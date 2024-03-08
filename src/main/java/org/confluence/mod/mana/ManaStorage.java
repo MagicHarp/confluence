@@ -12,13 +12,15 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     private int regenerateBonus;
     private int additionalMana;
     private int currentMana;
+    private transient int regenerateDelay;
     private transient Integer maxMana;
 
     public ManaStorage() {
         this.stars = 1;
-        this.regenerateBonus = 3;
+        this.regenerateBonus = 0;
         this.additionalMana = 0;
         this.currentMana = 20;
+        this.regenerateDelay = 0;
     }
 
     @Override
@@ -68,6 +70,14 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     public void setAdditionalMana(int additionalMana) {
         this.additionalMana = additionalMana;
         freshMaxMana();
+    }
+
+    public int getRegenerateDelay() {
+        return regenerateDelay;
+    }
+
+    public void setRegenerateDelay(int regenerateDelay) {
+        this.regenerateDelay = regenerateDelay;
     }
 
     public int getMaxMana() {

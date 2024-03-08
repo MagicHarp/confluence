@@ -65,6 +65,6 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void livingHurt(LivingHurtEvent event) {
-        event.setAmount(event.getAmount()*RANDOM.nextFloat(0.8F, 1.25F));
+        event.setAmount(event.getAmount() * RANDOM.nextFloat(0.8F, 1.25F));
     }
 }
