@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.common.BaseItem;
+import org.confluence.mod.item.common.HealingPotion;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
@@ -246,7 +247,9 @@ public class ConfluenceItems {
     }
 
     public enum SlimeBalls implements EnumRegister<Item> {
-        BLUE_SLIME_BALL("blue_slime_ball", BaseItem::new);
+        BLUE_SLIME_BALL("blue_slime_ball", BaseItem::new),
+        PINK_SLIME_BALL("pink_slime_ball", BaseItem::new),
+        HONEY_SLIME_BALL("honey_slime_ball", BaseItem::new);
 
         private final RegistryObject<Item> value;
 

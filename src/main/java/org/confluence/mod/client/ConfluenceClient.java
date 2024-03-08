@@ -12,6 +12,7 @@ import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
+import org.confluence.mod.item.ConfluenceItems;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -47,6 +48,7 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.BlueSlimeProvider());
+        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.BLUE_SLIME_BALL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.PINK_SLIME_BALL.get()));
     }
 }

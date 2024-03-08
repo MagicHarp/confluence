@@ -17,7 +17,7 @@ public class ConfluenceEntities {
 
     public static final RegistryObject<EntityType<BaseSlime>> BLUE_SLIME = registerSlime("blue", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 2);
     public static final RegistryObject<EntityType<BaseSlime>> GREEN_SLIME = registerSlime("green", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 2);
-    public static final RegistryObject<EntityType<BaseSlime>> PINK_SLIME = registerSlime("pink", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 1);
+    public static final RegistryObject<EntityType<BaseSlime>> PINK_SLIME = registerSlime("pink", ConfluenceParticles.ITEM_PINK_SLIME.get(), 1);
     public static final RegistryObject<EntityType<BaseSlime>> CORRUPTED_SLIME = registerSlime("corrupted", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 2);
     public static final RegistryObject<EntityType<BaseSlime>> DESERT_SLIME = registerSlime("desert", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 2);
     public static final RegistryObject<EntityType<BaseSlime>> EVIL_SLIME = registerSlime("evil", ConfluenceParticles.ITEM_BLUE_SLIME.get(), 2);

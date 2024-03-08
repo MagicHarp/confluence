@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.confluence.mod.item.ConfluenceItems;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
@@ -19,9 +18,15 @@ public class ExtendedBreakingItemParticle extends BreakingItemParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class BlueSlimeProvider implements ParticleProvider<SimpleParticleType> {
+    public static class SlimeBallProvider implements ParticleProvider<SimpleParticleType> {
+        private final Item item;
+
+        public SlimeBallProvider(Item item) {
+            this.item = item;
+        }
+
         public Particle createParticle(@NotNull SimpleParticleType type, @NotNull ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
-            return new ExtendedBreakingItemParticle(level, x, y, z, ConfluenceItems.SlimeBalls.BLUE_SLIME_BALL.get());
+            return new ExtendedBreakingItemParticle(level, x, y, z, item);
         }
     }
 }
