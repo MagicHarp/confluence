@@ -6,11 +6,13 @@ import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Supplier;
+
 public class BaseSlime extends Slime {
-    private final ParticleOptions particleOptions;
+    private final Supplier<ParticleOptions> particleOptions;
     private final int size;
 
-    public BaseSlime(EntityType<? extends Slime> slime, Level level, ParticleOptions particleOptions, int size) {
+    public BaseSlime(EntityType<? extends Slime> slime, Level level, Supplier<ParticleOptions> particleOptions, int size) {
         super(slime, level);
         this.particleOptions = particleOptions;
         this.size = size;
@@ -18,7 +20,7 @@ public class BaseSlime extends Slime {
 
     @Override
     protected @NotNull ParticleOptions getParticleType() {
-        return particleOptions;
+        return particleOptions.get();
     }
 
     @Override
