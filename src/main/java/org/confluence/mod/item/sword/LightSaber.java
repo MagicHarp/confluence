@@ -97,6 +97,7 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         level.playSound(player, player.getOnPos().above(), isOnUse(itemStack) ? SoundEvents.BEACON_DEACTIVATE : SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 2, 1);
+        player.startUsingItem(hand);
         return InteractionResultHolder.success(itemStack);
     }
 

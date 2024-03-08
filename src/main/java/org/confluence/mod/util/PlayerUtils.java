@@ -52,7 +52,6 @@ public class PlayerUtils {
                 success.set(true);
                 syncMana2Client(serverPlayer, manaStorage);
             }
-
         });
         return success.get();
     }

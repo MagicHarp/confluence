@@ -185,6 +185,9 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.ANOTHER_AMETHYST.get(), "紫晶");
+        add(Materials.FALLING_STAR.get(), "坠落之星");
+        add(Materials.CARRION.get(), "腐肉");
+        add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
         add(Swords.COPPER_BOARD_SWORD.get(), "铜质阔剑");
@@ -216,13 +219,10 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         /* HammerAxes */
         add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
 
-        add(FALLING_STAR.get(), "坠落之星");
         add(APPLE_JUICE.get(), "苹果汁");
         add(BLACKCURRANT.get(), "黑醋栗");
         add(BLOOD_ORANGE.get(), "血橙");
         add(BLOODY_MOSCATO.get(), "猩红麝香葡萄");
-        add(CARRION.get(), "腐肉");
-        add(CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
         add(ELDERBERRY.get(), "接骨木果");
         add(ICE_MIRROR.get(), "冰雪镜");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");

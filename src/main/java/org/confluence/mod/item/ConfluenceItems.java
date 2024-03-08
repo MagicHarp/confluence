@@ -1,9 +1,6 @@
 package org.confluence.mod.item;
 
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,6 +12,7 @@ import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
 import org.confluence.mod.item.magic.MagicMirror;
+import org.confluence.mod.item.magic.ManaPotion;
 import org.confluence.mod.item.magic.ManaStar;
 import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.item.sword.BoardSwordItem;
@@ -29,25 +27,24 @@ import java.util.function.Supplier;
 public class ConfluenceItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
-    //food
+    //  food
     public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice", BaseItem::new);
     public static final RegistryObject<Item> BLACKCURRANT = ITEMS.register("blackcurrant", BaseItem::new);
     public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange", BaseItem::new);
     public static final RegistryObject<Item> BLOODY_MOSCATO = ITEMS.register("bloody_moscato", BaseItem::new);
     public static final RegistryObject<Item> ELDERBERRY = ITEMS.register("elderberry", BaseItem::new);
-    //material
-    public static final RegistryObject<Item> FALLING_STAR = ITEMS.register("falling_star", BaseItem::new);
-    public static final RegistryObject<Item> CARRION = ITEMS.register("carrion", BaseItem::new);
-    public static final RegistryObject<Item> CRYSTAL_SHARDS_ITEM = ITEMS.register("crystal_shards_item", BaseItem::new);
-    public static final RegistryObject<ManaStar> MANA_STAR = ITEMS.register("mana_star", ManaStar::new);
-    //tool
-    public static final RegistryObject<Item> ICE_MIRROR = ITEMS.register("ice_mirror", BaseItem::new);
+    //  tool
+    public static final RegistryObject<MagicMirror> ICE_MIRROR = ITEMS.register("ice_mirror", MagicMirror::new);
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
-    //Healing Potion
+    //  Potion
     public static final RegistryObject<Item> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", BaseItem::new);
-    //Throwables
+    public static final RegistryObject<ManaPotion> LESSER_MANA_POTION = ITEMS.register("lesser_mana_potion", () -> new ManaPotion(50, new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<ManaPotion> MANA_POTION = ITEMS.register("mana_potion", () -> new ManaPotion(100, new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<ManaPotion> GREATER_MANA_POTION = ITEMS.register("greater_mana_potion", () -> new ManaPotion(200, new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<ManaPotion> SUPER_MANA_POTION = ITEMS.register("super_mana_potion", () -> new ManaPotion(300, new Item.Properties().rarity(Rarity.EPIC)));
+    //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
 
@@ -77,7 +74,7 @@ public class ConfluenceItems {
         }
     }
 
-    public enum Materials implements EnumRegister<BaseItem> {
+    public enum Materials implements EnumRegister<Item> {
         RAW_TIN("raw_tin"),
         TIN_INGOT("tin_ingot"),
         RAW_LEAD("raw_lead"),
@@ -95,15 +92,24 @@ public class ConfluenceItems {
         ANOTHER_EMERALD("another_emerald"),
         RUBY("ruby"),
         SAPPHIRE("sapphire"),
-        TOPAZ("topaz");
+        TOPAZ("topaz"),
 
-        private final RegistryObject<BaseItem> value;
+        FALLING_STAR("falling_star"),
+        CARRION("carrion"),
+        CRYSTAL_SHARDS_ITEM("crystal_shards_item"),
+        MANA_STAR("mana_star", ManaStar::new);
+
+        private final RegistryObject<Item> value;
 
         Materials(String id) {
             this.value = ITEMS.register(id, BaseItem::new);
         }
 
-        public RegistryObject<BaseItem> getValue() {
+        Materials(String id, Supplier<Item> item) {
+            this.value = ITEMS.register(id, item);
+        }
+
+        public RegistryObject<Item> getValue() {
             return value;
         }
 
