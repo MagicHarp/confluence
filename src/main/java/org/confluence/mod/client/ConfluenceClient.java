@@ -19,7 +19,7 @@ import org.confluence.mod.item.ConfluenceItems;
 public class ConfluenceClient {
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll("mana_hud", ConfluenceOverlays.HUD_MANA);
+        event.registerBelowAll("mana_hud", ConfluenceOverlays.HUD_MANA);
     }
 
     @SubscribeEvent
