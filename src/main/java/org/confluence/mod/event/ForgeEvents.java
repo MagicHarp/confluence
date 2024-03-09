@@ -3,19 +3,25 @@ package org.confluence.mod.event;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
+import org.confluence.mod.network.EchoBlockVisibilityPacket;
+import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.PlayerUtils;
 
 import java.util.Random;
@@ -66,5 +72,15 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void livingHurt(LivingHurtEvent event) {
         event.setAmount(event.getAmount() * RANDOM.nextFloat(0.8F, 1.25F));
+    }
+
+    @SubscribeEvent
+    public static void a(LivingEquipmentChangeEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer && event.getSlot() == EquipmentSlot.HEAD) {
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new EchoBlockVisibilityPacket(event.getTo().is(Items.IRON_HELMET))
+            );
+        }
     }
 }

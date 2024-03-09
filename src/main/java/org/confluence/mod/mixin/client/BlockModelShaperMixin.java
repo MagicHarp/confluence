@@ -5,12 +5,11 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.EchoBlock;
+import org.confluence.mod.client.ClientPacketHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,8 +22,8 @@ public class BlockModelShaperMixin {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
 
-        if (blockState.is(ConfluenceBlocks.ECHO_BLOCK.get()) && player.getItemBySlot(EquipmentSlot.HEAD).is(Items.IRON_HELMET)) {
-            blockState = blockState.setValue(EchoBlock.VISIBLE, true);
+        if (blockState.is(ConfluenceBlocks.ECHO_BLOCK.get())) {
+            blockState = blockState.setValue(EchoBlock.VISIBLE, ClientPacketHandler.isEchoBlockVisible());
         }
     }
 }

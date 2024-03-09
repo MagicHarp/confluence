@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import org.confluence.mod.client.ClientManaStorage;
+import org.confluence.mod.client.ClientPacketHandler;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -22,7 +22,7 @@ public class ConfluenceOverlays {
 
         int left = screenWidth / 2 - 91;
         int top = screenHeight - gui.leftHeight;
-        int currentMana = ClientManaStorage.getCurrentMana();
+        int currentMana = ClientPacketHandler.getCurrentMana();
         guiGraphics.blit(MANA_BAR, left, top, 0, 0, 82, 7, 82, 35);
         if (currentMana <= 82) {
             guiGraphics.blit(MANA_BAR, left, top, 0, 7, currentMana, 7, 82, 35);
@@ -31,7 +31,7 @@ public class ConfluenceOverlays {
         } else if (currentMana <= 246) {
             guiGraphics.blit(MANA_BAR, left, top, 0, 21, currentMana - 164, 7, 82, 35);
         } else {
-            int width = (int) Math.ceil((double) currentMana / ClientManaStorage.getMaxMana()) * 82;
+            int width = (int) Math.ceil((double) currentMana / ClientPacketHandler.getMaxMana()) * 82;
             guiGraphics.blit(MANA_BAR, left, top, 0, 28, width, 7, 82, 35);
         }
 
