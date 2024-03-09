@@ -82,9 +82,9 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> TIN_BRICKS = registerWithItem("tin_bricks", BaseBlock::new);
     public static final RegistryObject<Block> TIN_PLATE = registerWithItem("tin_plate", PlateBlock::new);
     public static final RegistryObject<Block> WOLFRAM_BRICKS = registerWithItem("wolfram_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_LAVA_BEAM = registerWithItem("another_lava_beam", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_LAVA_BEAM = registerWithItem("another_lava_beam", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_LAVA_BRICKS = registerWithItem("another_lava_bricks", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BEAM = registerWithItem("another_obsidian_beam", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BEAM = registerWithItem("another_obsidian_beam", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_BRICKS = registerWithItem("another_obsidian_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_PLATE = registerWithItem("another_obsidian_plate", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_OBSIDIAN_SMALL_BRICKS = registerWithItem("another_obsidian_small_bricks", BaseBlock::new);
@@ -95,7 +95,8 @@ public class ConfluenceBlocks {
 
     public static final DecorationLogBlocks ANOTHER_OAK_LOG_BLOCKS = new DecorationLogBlocks("another_oak", ANOTHER_OAK.SET, ANOTHER_OAK.TYPE, false);
     public static final DecorationLogBlocks ANOTHER_NORTHLAND_LOG_BLOCKS = new DecorationLogBlocks("another_northland", ANOTHER_NORTHLAND.SET, ANOTHER_NORTHLAND.TYPE, false);
-    public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_northland_beam", BeamBlock::new);
+    public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_northland_beam", PlateBlock::new);
+    public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
 
 
     //endregion registries
