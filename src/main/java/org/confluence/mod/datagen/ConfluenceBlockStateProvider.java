@@ -32,7 +32,7 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                 if (value instanceof ButtonBlock buttonBlock) {
                     buttonBlock(buttonBlock, texture(path, "_button"));
                 } else if (value instanceof RotatedPillarBlock rotatedPillarBlock) {
-                    ResourceLocation side = new ResourceLocation(MODID, path);
+                    ResourceLocation side = new ResourceLocation(MODID, "block/" + path);
                     if (path.contains("wood")) {
                         axisBlock(rotatedPillarBlock, side, side);
                     } else if (path.contains("log")) {
@@ -52,16 +52,16 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                 } else if (value instanceof StairBlock stairBlock) {
                     stairsBlock(stairBlock, path, texture(path, "_stairs"));
                 } else if (value instanceof TrapDoorBlock trapDoorBlock) {
-                    trapdoorBlock(trapDoorBlock, path, new ResourceLocation(MODID, path), true);
+                    trapdoorBlock(trapDoorBlock, path, new ResourceLocation(MODID, "block/" + path), true);
                 } else if (value instanceof DoorBlock doorBlock) {
-                    doorBlock(doorBlock, path, new ResourceLocation(MODID, path + "_bottom"), top(path));
+                    doorBlock(doorBlock, path, new ResourceLocation(MODID, "block/" + path + "_bottom"), top(path));
                 } else if (value instanceof ICubeTop) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
-                        .cubeTop(path, new ResourceLocation(MODID, path + "_side"), top(path)));
+                        .cubeTop(path, new ResourceLocation(MODID, "block/" + path + "_side"), top(path)));
                     getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else if (value instanceof LeavesBlock) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
-                        .withExistingParent(path, "block/leaves").texture("all", path));
+                        .withExistingParent(path, "block/leaves").texture("all", new ResourceLocation(MODID, "block/" + path)));
                     getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else {
                     simpleBlock(value);
@@ -75,13 +75,13 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
     private ResourceLocation texture(String path, String regex) {
         for (String woodSetType : WOODS) {
             if (path.contains(woodSetType)) {
-                return new ResourceLocation(MODID, path.replaceFirst(regex, "_planks"));
+                return new ResourceLocation(MODID, "block/" + path.replaceFirst(regex, "_planks"));
             }
         }
-        return new ResourceLocation(MODID, path.replaceFirst(regex, ""));
+        return new ResourceLocation(MODID, "block/" + path.replaceFirst(regex, ""));
     }
 
     private static ResourceLocation top(String path) {
-        return new ResourceLocation(MODID, path + "_top");
+        return new ResourceLocation(MODID, "block/" + path + "_top");
     }
 }

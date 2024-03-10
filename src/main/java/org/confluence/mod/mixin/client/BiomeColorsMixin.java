@@ -28,14 +28,14 @@ public abstract class BiomeColorsMixin {
     @Final
     public static ColorResolver WATER_COLOR_RESOLVER;
     @Unique
-    private static final TagKey<Biome> confluence$is_holy = TagKey.create(Registries.BIOME, new ResourceLocation(Confluence.MODID, "is_holy"));
+    private static final TagKey<Biome> confluence$is_hallow = TagKey.create(Registries.BIOME, new ResourceLocation(Confluence.MODID, "is_hallow"));
 
     @Inject(method = "getAverageColor", at = @At(value = "RETURN"), cancellable = true)
     private static void changeColor(BlockAndTintGetter getter, BlockPos pos, ColorResolver resolver, CallbackInfoReturnable<Integer> cir) {
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || resolver != WATER_COLOR_RESOLVER) return;
         if (ClientPacketHandler.showHolyWaterColor() && level.getBiome(pos).is(Tags.Biomes.IS_DESERT)) {
-            cir.setReturnValue(getter.getBlockTint(pos, ConfluenceClient.HOLY_WATER_RESOLVER));
+            cir.setReturnValue(getter.getBlockTint(pos, ConfluenceClient.HALLOW_WATER_RESOLVER));
         }
     }
 }

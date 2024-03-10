@@ -1,5 +1,6 @@
 package org.confluence.mod.client;
 
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -9,8 +10,10 @@ import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.client.particle.ConfluenceParticles;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
+import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
@@ -25,7 +28,7 @@ public class ConfluenceClient {
     }
 
     @SubscribeEvent
-    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+    public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     }
 
     @SubscribeEvent
@@ -54,10 +57,30 @@ public class ConfluenceClient {
         event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.PINK_SLIME_BALL.get()));
     }
 
-    public static final ColorResolver HOLY_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;
+    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;
 
     @SubscribeEvent
-    public static void registerColorHandlers(RegisterColorHandlersEvent.ColorResolvers event) {
-        event.register(HOLY_WATER_RESOLVER);
+    public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
+        event.register(HALLOW_WATER_RESOLVER);
+    }
+
+    public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
+        if (pos == null) return Color.HALLOW_B.get();
+        int i = pos.getX() % 12 + pos.getZ() % 12;
+        boolean j = (pos.getY() % 4) < 2;
+        Color xz;
+        if (i <= 4) {
+            xz = Color.HALLOW_A.mixture(j ? Color.HALLOW_B : Color.HALLOW_C, i * 0.25F);
+        } else if (i <= 8) {
+            xz = Color.HALLOW_B.mixture(j ? Color.HALLOW_C : Color.HALLOW_A, (i - 4) * 0.25F);
+        } else {
+            xz = Color.HALLOW_C.mixture(j ? Color.HALLOW_B : Color.HALLOW_A, (i - 8) * 0.25F);
+        }
+        return xz.get();
+    };
+
+    @SubscribeEvent
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register(HALLOW_LEAVES_COLOR, ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
     }
 }
