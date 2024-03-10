@@ -29,7 +29,10 @@ public class ClientPacketHandler {
 
     public static void handleEchoBlock(EchoBlockVisibilityPacket packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> echoBlockVisible = packet.visible());
+        context.enqueueWork(() -> {
+            echoBlockVisible = packet.visible();
+            ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
+        });
         context.setPacketHandled(true);
     }
 
