@@ -158,7 +158,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_OBSIDIAN_BEAM.get(), "异域黑曜石梁");
         add(ANOTHER_OBSIDIAN_BRICKS.get(), "异域黑曜石砖");
         add(ANOTHER_OBSIDIAN_PLATE.get(), "异域黑曜石条板块");
-        add(ANOTHER_OBSIDIAN_SMALL_BRICKS.get(), "异域黑曜石细致砖");
+        add(ANOTHER_OBSIDIAN_SMALL_BRICKS.get(), "异域切制黑曜石砖");
         add(ANOTHER_SMOOTH_OBSIDIAN_SLAB.get(), "异域光滑黑曜石台阶");
         add(ANOTHER_SMOOTH_OBSIDIAN.get(), "异域光滑黑曜石块");
         add(CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");

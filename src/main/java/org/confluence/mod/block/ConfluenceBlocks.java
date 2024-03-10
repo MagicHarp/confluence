@@ -61,7 +61,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_POLISHED_GRANITE = registerWithItem("another_polished_granite", BaseBlock::new);
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);
     //  decorative blocks
-    public static final RegistryObject<Block> ANOTHER_COPPER_BRICKS = registerWithItem("another_copper_bricks", BaseBlock::new);
+    public static final RegistryObject<Block> ANOTHER_COPPER_BRICKS = registerWithItem("another_copper_bricks", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_COPPER_PLATE = registerWithItem("another_copper_plate", PlateBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ORE_BRICKS = registerWithItem("another_crimson_ore_bricks", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_ROCK_BRICKS = registerWithItem("another_crimson_rock_bricks", BaseBlock::new);
