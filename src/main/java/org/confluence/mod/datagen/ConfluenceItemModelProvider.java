@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -39,7 +40,9 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
             try {
                 if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;
-                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (blockItem.getBlock() instanceof ButtonBlock ? "_inventory" : "")));
+                    Block block = blockItem.getBlock();
+                    if(block instanceof CustomItemModel) return;
+                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (block instanceof ButtonBlock ? "_inventory" : "")));
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                     if (value instanceof Image32x i32) {

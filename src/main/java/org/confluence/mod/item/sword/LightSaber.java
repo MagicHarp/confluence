@@ -113,14 +113,13 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         if (level.isClientSide) return itemStack;
-
         boolean turnOff = isTurnOff(itemStack);
         itemStack.getOrCreateTag().putBoolean("turnOff", !turnOff);
+
+        Confluence.LOGGER.info("Triggering controller." + (turnOff ? "on" : "off"));
+
         triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "controller", turnOff ? "on" : "off");
         level.playSound(living, living.getOnPos().above(), isTurnOff(itemStack) ? SoundEvents.BEACON_ACTIVATE : SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
-
-        Confluence.LOGGER.debug("Triggering controller." + (turnOff ? "on" : "off"));
-
         if (living instanceof Player player) player.getCooldowns().addCooldown(this, 10);
         return itemStack;
     }
@@ -129,12 +128,12 @@ public class LightSaber extends BoardSwordItem implements GeoItem {
     public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int tick, boolean selected) {
         if (tick % 20 == 0 && selected && !level.isClientSide && !isTurnOff(itemStack) && entity instanceof ServerPlayer serverPlayer) {
             if (PlayerUtils.extractMana(serverPlayer, () -> 1)) return;
-
             itemStack.getOrCreateTag().putBoolean("turnOff", true);
+
+            Confluence.LOGGER.info("Triggering controller.off");
+
             triggerAnim(entity, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "controller", "off");
             level.playSound(entity, entity.getOnPos().above(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
-
-            Confluence.LOGGER.debug("Triggering controller.off");
         }
     }
 

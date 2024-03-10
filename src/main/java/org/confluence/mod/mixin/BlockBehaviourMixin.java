@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(BlockBehaviour.class)
-public class BlockBehaviourMixin {
+public abstract class BlockBehaviourMixin {
     @Inject(method = "getDestroyProgress", at = @At(value = "RETURN", ordinal = 1), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void checkPhase(BlockState state, Player player, BlockGetter getter, BlockPos pos, CallbackInfoReturnable<Float> cir, float f, int i) {
         if (RevelationRegistry.isVisibleTo(state, player)) return;

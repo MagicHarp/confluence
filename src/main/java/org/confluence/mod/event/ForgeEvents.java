@@ -75,7 +75,7 @@ public class ForgeEvents {
     }
 
     @SubscribeEvent
-    public static void a(LivingEquipmentChangeEvent event) {
+    public static void livingEquipmentChange(LivingEquipmentChangeEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer && event.getSlot() == EquipmentSlot.HEAD) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),

@@ -1,7 +1,9 @@
 package org.confluence.mod.client;
 
+import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,5 +52,12 @@ public class ConfluenceClient {
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.BLUE_SLIME_BALL.get()));
         event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.PINK_SLIME_BALL.get()));
+    }
+
+    public static final ColorResolver HOLY_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;
+
+    @SubscribeEvent
+    public static void registerColorHandlers(RegisterColorHandlersEvent.ColorResolvers event) {
+        event.register(HOLY_WATER_RESOLVER);
     }
 }

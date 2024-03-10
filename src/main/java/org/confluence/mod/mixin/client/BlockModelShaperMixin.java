@@ -1,29 +1,35 @@
 package org.confluence.mod.mixin.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.block.BlockModelShaper;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.EchoBlock;
 import org.confluence.mod.client.ClientPacketHandler;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BlockModelShaper.class)
-public class BlockModelShaperMixin {
-    @Inject(method = "getTexture", at = @At("HEAD"))
-    private void ifEchoBlock(BlockState blockState, Level level, BlockPos pos, CallbackInfoReturnable<TextureAtlasSprite> cir) {
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) return;
+import java.util.Map;
 
+@Mixin(BlockModelShaper.class)
+public abstract class BlockModelShaperMixin {
+    @Shadow
+    private Map<BlockState, BakedModel> modelByStateCache;
+
+    @Shadow
+    @Final
+    private ModelManager modelManager;
+
+    @Inject(method = "getBlockModel", at = @At("HEAD"), cancellable = true)
+    private void ifEchoBlock(BlockState blockState, CallbackInfoReturnable<BakedModel> cir) {
         if (blockState.is(ConfluenceBlocks.ECHO_BLOCK.get())) {
-            blockState = blockState.setValue(EchoBlock.VISIBLE, ClientPacketHandler.isEchoBlockVisible());
+            BlockState visible = blockState.setValue(EchoBlock.VISIBLE, ClientPacketHandler.isEchoBlockVisible());
+            cir.setReturnValue(modelByStateCache.getOrDefault(visible, modelManager.getMissingModel()));
         }
     }
 }

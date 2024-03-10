@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Tiers.class)
-public class TiersMixin {
+public abstract class TiersMixin {
     @Shadow
     @Final
     private int uses;
