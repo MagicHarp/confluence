@@ -63,10 +63,8 @@ public class ForgeEvents {
     public static void playerClone(PlayerEvent.Clone event) {
         if (!event.isWasDeath()) return;
         LazyOptional<ManaStorage> manaStorageLazyOptional = event.getOriginal().getCapability(ManaProvider.MANA_CAPABILITY);
-        manaStorageLazyOptional.ifPresent(old -> {
-            event.getEntity().getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old));
-        });
-        manaStorageLazyOptional.invalidate();
+        manaStorageLazyOptional.ifPresent(old -> event.getEntity().getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
+        //manaStorageLazyOptional.invalidate();
     }
 
     @SubscribeEvent

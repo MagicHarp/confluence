@@ -5,7 +5,7 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BlockBehaviourMixin",
-        "TiersMixin"
+        "RecipeManagerMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

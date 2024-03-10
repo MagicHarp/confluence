@@ -23,6 +23,7 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.building_blocks", "Confluence | Buildings");
         add("creativetab.confluence.natural_blocks", "Confluence | Naturals");
         add("creativetab.confluence.materials", "Confluence | Materials");
+        add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();

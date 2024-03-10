@@ -1,5 +1,6 @@
 package org.confluence.mod;
 
+import com.google.gson.Gson;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -20,6 +21,7 @@ import software.bernie.geckolib.GeckoLib;
 public class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
+    public static final Gson GSON = new Gson();
     public static GameRules.Key<GameRules.IntegerValue> GAME_PHASE;
 
     public Confluence() {

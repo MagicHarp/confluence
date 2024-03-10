@@ -1,5 +1,6 @@
 package org.confluence.mod.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,6 +11,7 @@ import org.confluence.mod.item.axe.BaseAxeItem;
 import org.confluence.mod.item.common.BaseItem;
 import org.confluence.mod.item.common.HealingPotion;
 import org.confluence.mod.item.common.IconItem;
+import org.confluence.mod.item.common.TooltipItem;
 import org.confluence.mod.item.hammer.HammerAxeItem;
 import org.confluence.mod.item.hammer.HammerItem;
 import org.confluence.mod.item.magic.MagicMirror;
@@ -89,7 +91,21 @@ public class ConfluenceItems {
         WOLFRAM_INGOT("wolfram_ingot"),
         RAW_PLATINUM("raw_platinum"),
         PLATINUM_INGOT("platinum_ingot"),
-        METEORITE_INGOT("meteorite_ingot"),
+        RAW_METEORITE("raw_meteorite"),
+        METEORITE_INGOT("meteorite_ingot", () -> new TooltipItem(Component.translatable("item.confluence.meteorite_ingot.tooltip"))),
+
+        RAW_COBALT("raw_cobalt"),
+        COBALT_INGOT("cobalt_ingot"),
+        RAW_PALLADIUM("raw_palladium"),
+        PALLADIUM_INGOT("palladium_ingot"),
+        RAW_MITHRIL("raw_mithril"),
+        MITHRIL_INGOT("mithril_ingot"),
+        RAW_ORICHALCUM("raw_orichalcum"),
+        ORICHALCUM_INGOT("orichalcum_ingot"),
+        RAW_ADAMANTITE("raw_adamantite"),
+        ADAMANTITE_INGOT("adamantite_ingot"),
+        RAW_TITANIUM("raw_titanium"),
+        TITANIUM_INGOT("titanium_ingot"),
 
         AMBER("amber"),
         ANOTHER_AMETHYST("another_amethyst"),

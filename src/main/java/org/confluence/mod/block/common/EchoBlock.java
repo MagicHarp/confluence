@@ -1,4 +1,4 @@
-package org.confluence.mod.block;
+package org.confluence.mod.block.common;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;

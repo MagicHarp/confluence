@@ -59,6 +59,10 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
                         .cubeTop(path, new ResourceLocation(MODID, path + "_side"), top(path)));
                     getVariantBuilder(value).partialState().setModels(configuredModel);
+                } else if (value instanceof LeavesBlock) {
+                    ConfiguredModel configuredModel = new ConfiguredModel(models()
+                        .withExistingParent(path, "block/leaves").texture("all", path));
+                    getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else {
                     simpleBlock(value);
                 }
