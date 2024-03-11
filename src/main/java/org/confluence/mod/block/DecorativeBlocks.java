@@ -2,6 +2,7 @@ package org.confluence.mod.block;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BaseBlock;
 import org.confluence.mod.block.common.PlateLikeBlock;
 import org.confluence.mod.util.EnumRegister;
@@ -9,7 +10,7 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum DecorativeBlocks implements EnumRegister<Block> {
-    ANOTHER_COPPER_BRICKS("another_copper_bricks",PlateLikeBlock::new),
+    ANOTHER_COPPER_BRICKS("another_copper_bricks", PlateLikeBlock::new),
     ANOTHER_COPPER_PLATE("another_copper_plate", PlateLikeBlock::new),
     ANOTHER_CRIMSON_ORE_BRICKS("another_crimson_ore_bricks", BaseBlock::new),
     ANOTHER_CRIMSON_ROCK_BRICKS("another_crimson_rock_bricks", BaseBlock::new),
@@ -55,5 +56,9 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     @Override
     public RegistryObject<Block> getValue() {
         return value;
+    }
+
+    public static void init() {
+        Confluence.LOGGER.info("Registering decorative blocks");
     }
 }

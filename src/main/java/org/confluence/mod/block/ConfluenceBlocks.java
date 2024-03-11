@@ -23,25 +23,25 @@ public class ConfluenceBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Confluence.MODID);
     //region registries
     //  ebony
-    public static final DecorationLogBlocks EBONY_LOG_BLOCKS = new DecorationLogBlocks("ebony", EBONY.SET, EBONY.TYPE);
+    public static final DecorationLogBlocks EBONY_LOG_BLOCKS = new DecorationLogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", BaseBlock::new);
     public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SandBlock(0x372b4b, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_COBBLE_STONE = registerWithItem("ebony_cobble_stone", BaseBlock::new);
     public static final RegistryObject<Block> CORRUPTION_GRASS_BLOCKS = registerWithItem("corruption_grass_blocks", BaseBlock::new);
     //  holy
-    public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl", PEARL.SET, PEARL.TYPE);
+    public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl", PEARL);
     public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", BaseBlock::new);
     public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SandBlock(0xedd5f6, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_COBBLE_STONE = registerWithItem("pearl_cobble_stone", BaseBlock::new);
     public static final RegistryObject<Block> HALLOW_GRASS_BLOCKS = registerWithItem("hallow_grass_blocks", BaseBlock::new);
     //  crimson
-    public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow", SHADOW.SET, SHADOW.TYPE);
+    public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow", SHADOW);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SandBlock(0x5313e, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLE_STONE = registerWithItem("another_crimson_cobble_stone", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCKS = registerWithItem("another_crimson_grass_blocks", BaseBlock::new);
     //  desert
-    public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM.SET, PALM.TYPE);
+    public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM);
     //  ash
     public static final DecorationLogBlocks ASH_LOG_BLOCKS = new DecorationLogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
     public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", BaseBlock::new);
@@ -81,6 +81,7 @@ public class ConfluenceBlocks {
 
     public static void register(IEventBus bus) {
         Ores.init();
+        DecorativeBlocks.init();
         BLOCKS.register(bus);
     }
 }
