@@ -17,7 +17,7 @@ import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.SlimeBalls;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -53,8 +53,8 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.BLUE_SLIME_BALL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(ConfluenceItems.SlimeBalls.PINK_SLIME_BALL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.BLUE_SLIME_BALL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.PINK_SLIME_BALL.get()));
     }
 
     public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;

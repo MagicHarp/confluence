@@ -21,5 +21,6 @@ public class DataGen {
         generator.addProvider(bool, new ConfluenceEnglishProvider(output));
         generator.addProvider(bool, new ConfluenceBlockStateProvider(output, helper));
         generator.addProvider(bool, new ConfluenceItemModelProvider(output, helper));
+
     }
 }

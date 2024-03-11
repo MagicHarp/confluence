@@ -3,8 +3,11 @@ package org.confluence.mod.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.Ores;
+import org.confluence.mod.item.*;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
+import static org.confluence.mod.block.DecorativeBlocks.*;
 import static org.confluence.mod.item.ConfluenceItems.*;
 
 public class ConfluenceChineseProvider extends LanguageProvider {
@@ -37,10 +40,10 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_SILVER_ORE.get(), "深层银矿石");
         add(Ores.RAW_SILVER_BLOCK.get(), "粗银块");
         add(Ores.SILVER_BLOCK.get(), "银块");
-        add(Ores.WOLFRAM_ORE.get(), "钨矿石");
-        add(Ores.DEEPSLATE_WOLFRAM_ORE.get(), "深层钨矿石");
-        add(Ores.RAW_WOLFRAM_BLOCK.get(), "粗钨块");
-        add(Ores.WOLFRAM_BLOCK.get(), "钨块");
+        add(Ores.TUNGSTEN_ORE.get(), "钨矿石");
+        add(Ores.DEEPSLATE_TUNGSTEN_ORE.get(), "深层钨矿石");
+        add(Ores.RAW_TUNGSTEN_BLOCK.get(), "粗钨块");
+        add(Ores.TUNGSTEN_BLOCK.get(), "钨块");
         add(Ores.PLATINUM_ORE.get(), "铂金矿石");
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
         add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
@@ -180,8 +183,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.LEAD_INGOT.get(), "铅锭");
         add(Materials.RAW_SILVER.get(), "粗银");
         add(Materials.SILVER_INGOT.get(), "银锭");
-        add(Materials.RAW_WOLFRAM.get(), "粗钨");
-        add(Materials.WOLFRAM_INGOT.get(), "钨锭");
+        add(Materials.RAW_TUNGSTEN.get(), "粗钨");
+        add(Materials.TUNGSTEN_INGOT.get(), "钨锭");
         add(Materials.RAW_PLATINUM.get(), "粗铂金");
         add(Materials.PLATINUM_INGOT.get(), "铂金锭");
         add(Materials.METEORITE_INGOT.get(), "陨铁锭");

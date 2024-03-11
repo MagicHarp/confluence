@@ -11,12 +11,17 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.Icons;
 import software.bernie.geckolib.animatable.GeoItem;
+
+import java.util.List;
 
 import static org.confluence.mod.Confluence.MODID;
 
 public class ConfluenceItemModelProvider extends ItemModelProvider {
+    private static final List<Item> SKIP_ITEMS = List.of(ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
     private static final ResourceLocation MISSING_ITEM = new ResourceLocation(MODID, "item/item_icon");
     private static final ResourceLocation MISSING_BLOCK = new ResourceLocation(MODID, "item/blocks_icon");
 
@@ -26,22 +31,22 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (ConfluenceItems.Icons icons : ConfluenceItems.Icons.values()) {
+        for (Icons icons : Icons.values()) {
             String path = icons.name().toLowerCase();
             withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
         }
 
         ConfluenceItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
-            String path = item.getId().getPath().toLowerCase();
-            if (value instanceof CustomModel || value instanceof GeoItem) return;
+            if (shouldSkip(value)) return;
 
+            String path = item.getId().getPath().toLowerCase();
             boolean isBlockItem = false;
             try {
                 if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
-                    if(block instanceof CustomItemModel) return;
+                    if (block instanceof CustomItemModel) return;
                     withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (block instanceof ButtonBlock ? "_inventory" : "")));
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
@@ -62,5 +67,9 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
 
     private static boolean isHandheld(Item item) {
         return item instanceof TieredItem;
+    }
+
+    private static boolean shouldSkip(Item item) {
+        return item instanceof CustomModel || item instanceof GeoItem || SKIP_ITEMS.contains(item);
     }
 }
