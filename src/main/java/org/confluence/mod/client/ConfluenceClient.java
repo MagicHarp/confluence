@@ -66,17 +66,21 @@ public class ConfluenceClient {
 
     public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
         if (pos == null) return Color.HALLOW_B.get();
-        int i = pos.getX() % 12 + pos.getZ() % 12;
-        boolean j = (pos.getY() % 4) < 2;
-        Color xz;
-        if (i <= 4) {
-            xz = Color.HALLOW_A.mixture(j ? Color.HALLOW_B : Color.HALLOW_C, i * 0.25F);
-        } else if (i <= 8) {
-            xz = Color.HALLOW_B.mixture(j ? Color.HALLOW_C : Color.HALLOW_A, (i - 4) * 0.25F);
-        } else {
-            xz = Color.HALLOW_C.mixture(j ? Color.HALLOW_B : Color.HALLOW_A, (i - 8) * 0.25F);
-        }
-        return xz.get();
+
+        int i = Math.abs(pos.getX()) % 12;
+        int k = Math.abs(pos.getZ()) % 12;
+        Color x;
+        Color z;
+
+        if (i <= 4) x = Color.HALLOW_A.mixture(Color.HALLOW_B, i * 0.25F);
+        else if (i <= 8) x = Color.HALLOW_B.mixture(Color.HALLOW_C, (i - 4) * 0.25F);
+        else x = Color.HALLOW_C.mixture(Color.HALLOW_A, (i - 8) * 0.25F);
+
+        if (k <= 4) z = Color.HALLOW_A.mixture(Color.HALLOW_B, i * 0.25F);
+        else if (k <= 8) z = Color.HALLOW_B.mixture(Color.HALLOW_C, (i - 4) * 0.25F);
+        else z = Color.HALLOW_C.mixture(Color.HALLOW_A, (i - 8) * 0.25F);
+
+        return x.mixture(z, 0.5F).get();
     };
 
     @SubscribeEvent

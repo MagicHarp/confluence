@@ -3,7 +3,7 @@ package org.confluence.mod.client.renderer;
 public record Color(int red, int green, int blue) {
     public static final Color HALLOW_A = Color.of(0xFF0051);
     public static final Color HALLOW_B = Color.of(0x12FFE2);
-    public static final Color HALLOW_C = Color.of(0x5AC8FF);
+    public static final Color HALLOW_C = Color.of(0xFFFA00);
 
     public static Color of(int rgb) {
         return new Color((rgb & 0xFF0000) >> 16, (rgb & 0x00FF00) >> 8, rgb & 0x0000FF);
