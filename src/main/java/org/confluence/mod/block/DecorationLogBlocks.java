@@ -19,8 +19,10 @@ import static org.confluence.mod.block.ConfluenceBlocks.registerWithoutItem;
 public class DecorationLogBlocks {
     public final RegistryObject<Block> PLANKS;
     public RegistryObject<RotatedPillarBlock> LOG;
+    public RegistryObject<RotatedPillarBlock> STRIPPED_LOG;
     public RegistryObject<LeavesBlock> LEAVES;
     public RegistryObject<RotatedPillarBlock> WOOD;
+    public RegistryObject<RotatedPillarBlock> STRIPPED_WOOD;
     public final RegistryObject<ButtonBlock> BUTTON;
     public final RegistryObject<FenceBlock> FENCE;
     public final RegistryObject<FenceGateBlock> FENCE_GATE;
@@ -33,29 +35,43 @@ public class DecorationLogBlocks {
     public final RegistryObject<DoorBlock> DOOR;
 
 
-    public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree) {
-        this.PLANKS = registerWithItem(id + "_planks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree, boolean ignitedByLava) {
+        var planks = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
+        this.PLANKS = registerWithItem(id + "_planks", () -> new Block(ignitedByLava ? planks.ignitedByLava() : planks));
         if (requiresTree) {
-            this.LOG = registerWithItem(id + "_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
-            /* 去皮原木 */
-            this.LEAVES = registerWithItem(id + "_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(DecorationLogBlocks::valid).isSuffocating(DecorationLogBlocks::never).isViewBlocking(DecorationLogBlocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(DecorationLogBlocks::never)));
-            this.WOOD = registerWithItem(id + "_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
-            /* 去皮木 */
+            var log = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD);
+            var finalLog = ignitedByLava ? log.ignitedByLava() : log;
+            this.LOG = registerWithItem(id + "_log", () -> new RotatedPillarBlock(finalLog));
+            this.STRIPPED_LOG = registerWithItem(id + "_stripped_log", () -> new RotatedPillarBlock(finalLog));
+            var leaves = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(DecorationLogBlocks::valid).isSuffocating(DecorationLogBlocks::never).isViewBlocking(DecorationLogBlocks::never).pushReaction(PushReaction.DESTROY).isRedstoneConductor(DecorationLogBlocks::never);
+            this.LEAVES = registerWithItem(id + "_leaves", () -> new LeavesBlock(ignitedByLava ? leaves.ignitedByLava() : leaves));
+            var wood = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD);
+            var finalWood = ignitedByLava ? wood.ignitedByLava() : wood;
+            this.WOOD = registerWithItem(id + "_wood", () -> new RotatedPillarBlock(finalWood));
+            this.STRIPPED_WOOD = registerWithItem(id + "_stripped_wood", () -> new RotatedPillarBlock(finalWood));
         }
         this.BUTTON = registerWithItem(id + "_button", () -> new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType, 30, true));
-        this.FENCE = registerWithItem(id + "_fence", () -> new FenceBlock(BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
-        this.FENCE_GATE = registerWithItem(id + "_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava(), woodType));
-        this.PRESSURE_PLATE = registerWithItem(id + "_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY), blockSetType));
-        this.SLAB = registerWithItem(id + "_slab", () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
+        var fence = BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
+        this.FENCE = registerWithItem(id + "_fence", () -> new FenceBlock(ignitedByLava ? fence.ignitedByLava() : fence));
+        var fence_gate = BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F);
+        this.FENCE_GATE = registerWithItem(id + "_fence_gate", () -> new FenceGateBlock(ignitedByLava ? fence_gate.ignitedByLava() : fence_gate, woodType));
+        var pressure_plate = BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
+        this.PRESSURE_PLATE = registerWithItem(id + "_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, ignitedByLava ? pressure_plate.ignitedByLava() : pressure_plate, blockSetType));
+        var slab = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
+        this.SLAB = registerWithItem(id + "_slab", () -> new SlabBlock(ignitedByLava ? slab.ignitedByLava() : slab));
         this.STAIRS = registerWithItem(id + "_stairs", () -> new StairBlock(() -> PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(PLANKS.get())));
-        this.SIGN = registerWithItem(id + "_sign", () -> new StandingSignBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), woodType));
-        this.WALL_SIGN = registerWithoutItem(id + "_wall_sign", () -> new WallSignBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).lootFrom(SIGN).ignitedByLava(), woodType));
-        this.TRAPDOOR = registerWithItem(id + "_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(DecorationLogBlocks::never).ignitedByLava(), blockSetType));
-        this.DOOR = registerWithItem(id + "_door", () -> new DoorBlock(BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY), blockSetType));
+        var sign = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F);
+        this.SIGN = registerWithItem(id + "_sign", () -> new StandingSignBlock(ignitedByLava ? sign.ignitedByLava() : sign, woodType));
+        var wall_sign = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).lootFrom(SIGN);
+        this.WALL_SIGN = registerWithoutItem(id + "_wall_sign", () -> new WallSignBlock(ignitedByLava ? wall_sign.ignitedByLava() : wall_sign, woodType));
+        var trapdoor = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(DecorationLogBlocks::never);
+        this.TRAPDOOR = registerWithItem(id + "_trapdoor", () -> new TrapDoorBlock(ignitedByLava ? trapdoor.ignitedByLava() : trapdoor, blockSetType));
+        var door = BlockBehaviour.Properties.of().mapColor(PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().pushReaction(PushReaction.DESTROY);
+        this.DOOR = registerWithItem(id + "_door", () -> new DoorBlock(ignitedByLava ? door.ignitedByLava() : door, blockSetType));
     }
 
     public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType) {
-        this(id, blockSetType, woodType, true);
+        this(id, blockSetType, woodType, true, false);
     }
 
     private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {

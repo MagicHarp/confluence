@@ -48,7 +48,7 @@ public class ConfluenceBlocks {
     //  desert
     public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM.SET, PALM.TYPE);
     //  ash
-    public static final DecorationLogBlocks ASH_LOG_BLOCKS = new DecorationLogBlocks("ash", ASH.SET, ASH.TYPE);
+    public static final DecorationLogBlocks ASH_LOG_BLOCKS = new DecorationLogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
     public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", BaseBlock::new);
     //  jewelry
     public static final RegistryObject<Block> BIG_RUBY_BLOCK = registerWithItem("big_ruby_block", BaseBlock::new);
@@ -96,10 +96,10 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN_SLAB = registerWithItem("another_smooth_obsidian_slab", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_SMOOTH_OBSIDIAN = registerWithItem("another_smooth_obsidian", BaseBlock::new);
     public static final RegistryObject<Block> CHISELED_ANOTHER_OBSIDIAN_BRICKS = registerWithItem("chiseled_another_obsidian_bricks", BaseBlock::new);
-    public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false);
+    public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
 
-    public static final DecorationLogBlocks ANOTHER_OAK_LOG_BLOCKS = new DecorationLogBlocks("another_oak", ANOTHER_OAK.SET, ANOTHER_OAK.TYPE, false);
-    public static final DecorationLogBlocks ANOTHER_NORTHLAND_LOG_BLOCKS = new DecorationLogBlocks("another_northland", ANOTHER_NORTHLAND.SET, ANOTHER_NORTHLAND.TYPE, false);
+    public static final DecorationLogBlocks ANOTHER_OAK_LOG_BLOCKS = new DecorationLogBlocks("another_oak", ANOTHER_OAK.SET, ANOTHER_OAK.TYPE, false, true);
+    public static final DecorationLogBlocks ANOTHER_NORTHLAND_LOG_BLOCKS = new DecorationLogBlocks("another_northland", ANOTHER_NORTHLAND.SET, ANOTHER_NORTHLAND.TYPE, false, true);
     public static final RegistryObject<Block> ANOTHER_OAK_BEAM = registerWithItem("another_northland_beam", PlateBlock::new);
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
 

@@ -76,9 +76,9 @@ public class ConfluenceClient {
         else if (i <= 8) x = Color.HALLOW_B.mixture(Color.HALLOW_C, (i - 4) * 0.25F);
         else x = Color.HALLOW_C.mixture(Color.HALLOW_A, (i - 8) * 0.25F);
 
-        if (k <= 4) z = Color.HALLOW_A.mixture(Color.HALLOW_B, i * 0.25F);
-        else if (k <= 8) z = Color.HALLOW_B.mixture(Color.HALLOW_C, (i - 4) * 0.25F);
-        else z = Color.HALLOW_C.mixture(Color.HALLOW_A, (i - 8) * 0.25F);
+        if (k <= 4) z = Color.HALLOW_A.mixture(Color.HALLOW_B, k * 0.25F);
+        else if (k <= 8) z = Color.HALLOW_B.mixture(Color.HALLOW_C, (k - 4) * 0.25F);
+        else z = Color.HALLOW_C.mixture(Color.HALLOW_A, (k - 8) * 0.25F);
 
         return x.mixture(z, 0.5F).get();
     };
