@@ -69,6 +69,15 @@ public class ConfluenceTabs {
 
             })
             .build());
+    //工具
+    public static final RegistryObject<CreativeModeTab> TOOL = TABS.register("tool",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.tool"))
+                    .displayItems((parameters, output) -> {
+
+                    })
+                    .build());
+
     //战士武器
     public static final RegistryObject<CreativeModeTab> WARRIOR = TABS.register("warrior",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MELEE_ICON.get()))

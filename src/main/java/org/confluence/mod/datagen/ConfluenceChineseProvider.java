@@ -21,6 +21,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.natural_blocks", "汇流来世 | 自然方块");
         add("creativetab.confluence.materials", "汇流来世 | 材料");
         add("creativetab.confluence.creature", "汇流来世 | 生物");
+        add("creativetab.confluence.tool", "汇流来世 | 工具");
         add("creativetab.confluence.warrior", "汇流来世 | 战士武器");
         add("creativetab.confluence.shooter", "汇流来世 | 射手武器");
         add("creativetab.confluence.mage", "汇流来世 | 法师武器");
