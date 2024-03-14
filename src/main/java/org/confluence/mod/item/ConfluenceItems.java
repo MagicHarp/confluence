@@ -11,6 +11,7 @@ import org.confluence.mod.item.common.BaseItem;
 import org.confluence.mod.item.common.HealingPotion;
 import org.confluence.mod.item.magic.MagicMirror;
 import org.confluence.mod.item.magic.ManaPotion;
+import org.confluence.mod.item.magic.Weapons;
 
 
 @SuppressWarnings("unused")
@@ -50,6 +51,7 @@ public class ConfluenceItems {
         Hammers.init();
         HammerAxes.init();
         SlimeBalls.init();
+        Weapons.init();
         ITEMS.register(bus);
     }
 }

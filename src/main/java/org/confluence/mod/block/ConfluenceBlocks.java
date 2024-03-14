@@ -4,6 +4,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,19 +34,19 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", BaseBlock::new);
     public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SandBlock(0x372B4B, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_COBBLE_STONE = registerWithItem("ebony_cobble_stone", BaseBlock::new);
-    public static final RegistryObject<Block> CORRUPTION_GRASS_BLOCKS = registerWithItem("corruption_grass_blocks", () -> new GlassBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> CORRUPTION_GRASS_BLOCKS = registerWithItem("corruption_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
     //  holy
     public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl", PEARL);
     public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", BaseBlock::new);
     public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SandBlock(0xEDD5F6, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_COBBLE_STONE = registerWithItem("pearl_cobble_stone", BaseBlock::new);
-    public static final RegistryObject<Block> HALLOW_GRASS_BLOCKS = registerWithItem("hallow_grass_blocks", () -> new GlassBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> HALLOW_GRASS_BLOCKS = registerWithItem("hallow_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
     //  crimson
     public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow", SHADOW);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", BaseBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SandBlock(0x5313E0, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLE_STONE = registerWithItem("another_crimson_cobble_stone", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCKS = registerWithItem("another_crimson_grass_blocks", () -> new GlassBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCKS = registerWithItem("another_crimson_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
     //  desert
     public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM);
     //  ash

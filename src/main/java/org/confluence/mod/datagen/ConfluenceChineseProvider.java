@@ -5,6 +5,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.*;
+import org.confluence.mod.item.magic.Weapons;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 import static org.confluence.mod.block.DecorativeBlocks.*;
@@ -240,6 +241,17 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ROPE.get(), "绳子");
         add(ROPE_COIL.get(), "绳圈");
         add(SHURIKEN.get(), "手里剑");
+        //法杖
+        add(Weapons.RUBY_STAFF.get(), "红玉法杖");
+        add(Weapons.AMBER_STAFF.get(), "琥珀法杖");
+        add(Weapons.TOPAZ_STAFF.get(), "黄玉法杖");
+        add(Weapons.EMERALD_STAFF.get(), "翡翠法杖");
+        add(Weapons.SAPPHIRE_STAFF.get(), "蓝玉法杖");
+        add(Weapons.DIAMOND_STAFF.get(), "钻石法杖");
+        add(Weapons.AMETHYST_STAFF.get(), "紫晶法杖");
+        add(Weapons.AQUA_SCEPTER.get(), "海蓝权杖");
+        add(Weapons.WOND_OF_SPARKING.get(), "火花魔棒");
+        add(Weapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
         //endregion items
     }
 }

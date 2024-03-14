@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.item.magic.Weapons;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 
@@ -99,7 +100,9 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MAGIC_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mage"))
             .displayItems((parameters, output) -> {
-
+                 for (Weapons weapons : Weapons.values()) {
+                     output.accept(weapons.get());
+                 }
             })
             .build());
     //召唤武器
