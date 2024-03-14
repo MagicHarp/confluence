@@ -52,6 +52,9 @@ public class ConfluenceTabs {
                 for (Materials materials : Materials.values()) {
                     output.accept(materials.get());
                 }
+                for (SlimeBalls slimeBalls : SlimeBalls.values()) {
+                    output.accept(slimeBalls.get());
+                }
             })
             .build());
     //创造者物品栏
@@ -75,6 +78,20 @@ public class ConfluenceTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
                     .title(Component.translatable("creativetab.confluence.tool"))
                     .displayItems((parameters, output) -> {
+                        for (Pickaxes pickaxes :Pickaxes.values()){
+                            output.accept(pickaxes.get());
+                        }
+                        for (HammerAxes hammerAxes :HammerAxes.values()){
+                            output.accept(hammerAxes.get());
+                        }
+                        for (Axes axes :Axes.values()){
+                            output.accept(axes.get());
+
+                        }
+                        for (Hammers hammers :Hammers.values()){
+                            output.accept(hammers.get());
+
+                        }
 
                     })
                     .build());
@@ -84,6 +101,12 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MELEE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.warrior"))
             .displayItems((parameters, output) -> {
+                for (Swords swords :Swords.values()){
+                    output.accept(swords.get());
+
+
+
+                }
 
             })
             .build());
