@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.block.WoodSetType;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.common.Materials;
@@ -52,6 +53,7 @@ public class ConfluenceTabs {
                 for (Ores ores : Ores.values()) {
                     output.accept(ores.get());
                 }
+
             })
             .build());
     //材料
@@ -141,7 +143,7 @@ public class ConfluenceTabs {
             .build());
     //食物与药水
     public static final RegistryObject<CreativeModeTab> FOOD_AND_POTIONS = TABS.register("food_and_potions",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.POTION_ICON.get()))
             .title(Component.translatable("creativetab.confluence.food_and_potions"))
             .displayItems((parameters, output) -> {
                 for (TerraPotions terraPotions : TerraPotions.values()) {
