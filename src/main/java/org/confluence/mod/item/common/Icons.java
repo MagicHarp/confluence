@@ -1,8 +1,8 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.common;
 
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.common.IconItem;
+import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.util.EnumRegister;
 
 public enum Icons implements EnumRegister<IconItem> {
@@ -34,7 +34,7 @@ public enum Icons implements EnumRegister<IconItem> {
         return value;
     }
 
-    static void init() {
+    public static void init() {
         Confluence.LOGGER.info("Registering icon items");
     }
 }

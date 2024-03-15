@@ -1,17 +1,23 @@
 package org.confluence.mod.item;
 
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.BaseItem;
-import org.confluence.mod.item.common.HealingPotion;
+import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.hammer.HammerAxes;
+import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.MagicMirror;
-import org.confluence.mod.item.magic.ManaPotion;
-import org.confluence.mod.item.magic.Weapons;
+import org.confluence.mod.item.magic.ManaWeapons;
+import org.confluence.mod.item.pickaxe.Pickaxes;
+import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.sword.Swords;
 
 
 @SuppressWarnings("unused")
@@ -29,15 +35,6 @@ public class ConfluenceItems {
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
-    //  Potion
-    public static final RegistryObject<HealingPotion> LESSER_HEALING_POTION = ITEMS.register("lesser_healing_potion", () -> new HealingPotion(50, new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<HealingPotion> HEALING_POTION = ITEMS.register("healing_potion", () -> new HealingPotion(100, new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<HealingPotion> GREATER_HEALING_POTION = ITEMS.register("greater_healing_potion", () -> new HealingPotion(200, new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<HealingPotion> SUPER_HEALING_POTION = ITEMS.register("super_healing_potion", () -> new HealingPotion(300, new Item.Properties().rarity(Rarity.EPIC)));
-    public static final RegistryObject<ManaPotion> LESSER_MANA_POTION = ITEMS.register("lesser_mana_potion", () -> new ManaPotion(50, new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<ManaPotion> MANA_POTION = ITEMS.register("mana_potion", () -> new ManaPotion(100, new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<ManaPotion> GREATER_MANA_POTION = ITEMS.register("greater_mana_potion", () -> new ManaPotion(200, new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<ManaPotion> SUPER_MANA_POTION = ITEMS.register("super_mana_potion", () -> new ManaPotion(300, new Item.Properties().rarity(Rarity.EPIC)));
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
@@ -51,7 +48,8 @@ public class ConfluenceItems {
         Hammers.init();
         HammerAxes.init();
         SlimeBalls.init();
-        Weapons.init();
+        ManaWeapons.init();
+        TerraPotions.init();
         ITEMS.register(bus);
     }
 }

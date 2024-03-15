@@ -9,11 +9,20 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
-import org.confluence.mod.item.common.ExoticPotions;
-import org.confluence.mod.item.magic.Weapons;
+import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.hammer.HammerAxes;
+import org.confluence.mod.item.hammer.Hammers;
+import org.confluence.mod.item.magic.ManaWeapons;
+import org.confluence.mod.item.pickaxe.Pickaxes;
+import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 
+@SuppressWarnings("unused")
 public class ConfluenceTabs {
     public static final DeferredRegister<CreativeModeTab> TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
@@ -59,92 +68,85 @@ public class ConfluenceTabs {
             })
             .build());
     //创造者物品栏
-    public static final RegistryObject<CreativeModeTab> CREATOR_ITEMS = TABS.register("creator_items",
+    public static final RegistryObject<CreativeModeTab> CREATIVES = TABS.register("creatives",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.CREATIVE_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.creator_items"))
+            .title(Component.translatable("creativetab.confluence.creatives"))
             .displayItems((parameters, output) -> {
 
             })
             .build());
     //生物
-    public static final RegistryObject<CreativeModeTab> CREATURE = TABS.register("creature",
+    public static final RegistryObject<CreativeModeTab> CREATURES = TABS.register("creatures",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ENEMY_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.creature"))
+            .title(Component.translatable("creativetab.confluence.creatures"))
             .displayItems((parameters, output) -> {
 
             })
             .build());
     //工具
-    public static final RegistryObject<CreativeModeTab> TOOL = TABS.register("tool",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
-                    .title(Component.translatable("creativetab.confluence.tool"))
-                    .displayItems((parameters, output) -> {
-                        for (Pickaxes pickaxes :Pickaxes.values()){
-                            output.accept(pickaxes.get());
-                        }
-                        for (HammerAxes hammerAxes :HammerAxes.values()){
-                            output.accept(hammerAxes.get());
-                        }
-                        for (Axes axes :Axes.values()){
-                            output.accept(axes.get());
-
-                        }
-                        for (Hammers hammers :Hammers.values()){
-                            output.accept(hammers.get());
-
-                        }
-
-                    })
-                    .build());
+    public static final RegistryObject<CreativeModeTab> TOOLS = TABS.register("tools",
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
+            .title(Component.translatable("creativetab.confluence.tools"))
+            .displayItems((parameters, output) -> {
+                for (Pickaxes pickaxes : Pickaxes.values()) {
+                    output.accept(pickaxes.get());
+                }
+                for (HammerAxes hammerAxes : HammerAxes.values()) {
+                    output.accept(hammerAxes.get());
+                }
+                for (Axes axes : Axes.values()) {
+                    output.accept(axes.get());
+                }
+                for (Hammers hammers : Hammers.values()) {
+                    output.accept(hammers.get());
+                }
+            })
+            .build());
 
     //战士武器
-    public static final RegistryObject<CreativeModeTab> WARRIOR = TABS.register("warrior",
+    public static final RegistryObject<CreativeModeTab> WARRIORS = TABS.register("warriors",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MELEE_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.warrior"))
+            .title(Component.translatable("creativetab.confluence.warriors"))
             .displayItems((parameters, output) -> {
-                for (Swords swords :Swords.values()){
+                for (Swords swords : Swords.values()) {
                     output.accept(swords.get());
-
-
-
                 }
-
             })
             .build());
     //射手武器
-    public static final RegistryObject<CreativeModeTab> SHOOTER = TABS.register("shooter",
+    public static final RegistryObject<CreativeModeTab> SHOOTERS = TABS.register("shooters",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.REMOTE_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.shooter"))
+            .title(Component.translatable("creativetab.confluence.shooters"))
             .displayItems((parameters, output) -> {
 
             })
             .build());
     //法师武器
-    public static final RegistryObject<CreativeModeTab> MAGE = TABS.register("mage",
+    public static final RegistryObject<CreativeModeTab> MAGES = TABS.register("mages",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MAGIC_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.mage"))
+            .title(Component.translatable("creativetab.confluence.mages"))
             .displayItems((parameters, output) -> {
-                 for (Weapons weapons : Weapons.values()) {
-                     output.accept(weapons.get());
-                 }
+                for (ManaWeapons manaWeapons : ManaWeapons.values()) {
+                    output.accept(manaWeapons.get());
+                }
             })
             .build());
     //召唤武器
-    public static final RegistryObject<CreativeModeTab> SUMMONER = TABS.register("summoner",
+    public static final RegistryObject<CreativeModeTab> SUMMONERS = TABS.register("summoners",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.summoner"))
+            .title(Component.translatable("creativetab.confluence.summoners"))
             .displayItems((parameters, output) -> {
 
             })
             .build());
     //食物与药水
     public static final RegistryObject<CreativeModeTab> FOOD_AND_POTIONS = TABS.register("food_and_potions",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
-                    .title(Component.translatable("creativetab.confluence.food_and_potions"))
-                    .displayItems((parameters, output) -> {
-                        for (ExoticPotions exoticPotions : ExoticPotions.values()) {
-                            output.accept(exoticPotions.get());
-                        }
-                    })
-                    .build());
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
+            .title(Component.translatable("creativetab.confluence.food_and_potions"))
+            .displayItems((parameters, output) -> {
+                for (TerraPotions terraPotions : TerraPotions.values()) {
+                    output.accept(terraPotions.get());
+                }
+            })
+            .build());
 }

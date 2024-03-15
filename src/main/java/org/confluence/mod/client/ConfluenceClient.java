@@ -18,7 +18,7 @@ import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
-import org.confluence.mod.item.SlimeBalls;
+import org.confluence.mod.item.common.SlimeBalls;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

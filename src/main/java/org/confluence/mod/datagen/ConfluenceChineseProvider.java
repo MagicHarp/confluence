@@ -4,12 +4,17 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
-import org.confluence.mod.item.*;
-import org.confluence.mod.item.magic.Weapons;
+import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.magic.ManaWeapons;
+import org.confluence.mod.item.pickaxe.Pickaxes;
+import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 import static org.confluence.mod.block.DecorativeBlocks.*;
 import static org.confluence.mod.item.ConfluenceItems.*;
+import static org.confluence.mod.item.potion.TerraPotions.LESSER_HEALING_POTION;
 
 public class ConfluenceChineseProvider extends LanguageProvider {
     public ConfluenceChineseProvider(PackOutput output) {
@@ -21,14 +26,16 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.building_blocks", "汇流来世 | 建筑方块");
         add("creativetab.confluence.natural_blocks", "汇流来世 | 自然方块");
         add("creativetab.confluence.materials", "汇流来世 | 材料");
-        add("creativetab.confluence.creature", "汇流来世 | 生物");
-        add("creativetab.confluence.tool", "汇流来世 | 工具");
-        add("creativetab.confluence.warrior", "汇流来世 | 战士武器");
-        add("creativetab.confluence.shooter", "汇流来世 | 射手武器");
-        add("creativetab.confluence.mage", "汇流来世 | 法师武器");
-        add("creativetab.confluence.summoner", "汇流来世 | 召唤师武器");
-        add("creativetab.confluence.creator_items", "汇流来世 | 创造者物品");
+        add("creativetab.confluence.creatures", "汇流来世 | 生物");
+        add("creativetab.confluence.tools", "汇流来世 | 工具");
+        add("creativetab.confluence.warriors", "汇流来世 | 战士武器");
+        add("creativetab.confluence.shooters", "汇流来世 | 射手武器");
+        add("creativetab.confluence.mages", "汇流来世 | 法师武器");
+        add("creativetab.confluence.summoners", "汇流来世 | 召唤师武器");
+        add("creativetab.confluence.creatives", "汇流来世 | 创造者物品");
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
+
+        add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
@@ -244,16 +251,16 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ROPE_COIL.get(), "绳圈");
         add(SHURIKEN.get(), "手里剑");
         //法杖
-        add(Weapons.RUBY_STAFF.get(), "红玉法杖");
-        add(Weapons.AMBER_STAFF.get(), "琥珀法杖");
-        add(Weapons.TOPAZ_STAFF.get(), "黄玉法杖");
-        add(Weapons.EMERALD_STAFF.get(), "翡翠法杖");
-        add(Weapons.SAPPHIRE_STAFF.get(), "蓝玉法杖");
-        add(Weapons.DIAMOND_STAFF.get(), "钻石法杖");
-        add(Weapons.AMETHYST_STAFF.get(), "紫晶法杖");
-        add(Weapons.AQUA_SCEPTER.get(), "海蓝权杖");
-        add(Weapons.WOND_OF_SPARKING.get(), "火花魔棒");
-        add(Weapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
+        add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
+        add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
+        add(ManaWeapons.TOPAZ_STAFF.get(), "黄玉法杖");
+        add(ManaWeapons.EMERALD_STAFF.get(), "翡翠法杖");
+        add(ManaWeapons.SAPPHIRE_STAFF.get(), "蓝玉法杖");
+        add(ManaWeapons.DIAMOND_STAFF.get(), "钻石法杖");
+        add(ManaWeapons.AMETHYST_STAFF.get(), "紫晶法杖");
+        add(ManaWeapons.AQUA_SCEPTER.get(), "海蓝权杖");
+        add(ManaWeapons.WOND_OF_SPARKING.get(), "火花魔棒");
+        add(ManaWeapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
         //endregion items
     }
 }

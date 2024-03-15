@@ -1,9 +1,10 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.pickaxe;
 
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.pickaxe.BasePickaxeItem;
+import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ConfluenceTiers;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -27,7 +28,7 @@ public enum Pickaxes implements EnumRegister<PickaxeItem> {
         return value;
     }
 
-    static void init() {
+    public static void init() {
         Confluence.LOGGER.info("Registering pickaxes");
     }
 }

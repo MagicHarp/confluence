@@ -23,6 +23,15 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.building_blocks", "Confluence | Buildings");
         add("creativetab.confluence.natural_blocks", "Confluence | Naturals");
         add("creativetab.confluence.materials", "Confluence | Materials");
+        add("creativetab.confluence.creatures", "Confluence | Creatures");
+        add("creativetab.confluence.tools", "Confluence | Tools");
+        add("creativetab.confluence.warriors", "Confluence | Warriors");
+        add("creativetab.confluence.shooters", "Confluence | Shooters");
+        add("creativetab.confluence.mages", "Confluence | Mages");
+        add("creativetab.confluence.summoners", "Confluence | Summoners");
+        add("creativetab.confluence.creatives", "Confluence | Creatives");
+        add("creativetab.confluence.food_and_potions", "Confluence | Food & Potions");
+        
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {

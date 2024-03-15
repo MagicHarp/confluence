@@ -3,7 +3,6 @@ package org.confluence.mod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;

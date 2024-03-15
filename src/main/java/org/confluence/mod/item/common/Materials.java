@@ -1,11 +1,10 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.common;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.common.BaseItem;
-import org.confluence.mod.item.common.TooltipItem;
+import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.magic.ManaStar;
 import org.confluence.mod.util.EnumRegister;
 
@@ -64,7 +63,7 @@ public enum Materials implements EnumRegister<Item> {
         return value;
     }
 
-    static void init() {
+    public static void init() {
         Confluence.LOGGER.info("Registering materials");
     }
 }

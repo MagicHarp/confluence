@@ -29,7 +29,7 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvents {
     @SubscribeEvent
-    public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
+    public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
             if (player.getCapability(ManaProvider.MANA_CAPABILITY).isPresent()) return;
             event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());

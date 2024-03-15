@@ -13,7 +13,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.item.ConfluenceItems;
-import org.confluence.mod.item.Icons;
+import org.confluence.mod.item.common.Icons;
 import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.List;

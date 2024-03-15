@@ -1,11 +1,10 @@
-package org.confluence.mod.item;
+package org.confluence.mod.item.sword;
 
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.sword.BoardSwordItem;
-import org.confluence.mod.item.sword.LightSaber;
-import org.confluence.mod.item.sword.ShortSwordItem;
+import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ConfluenceTiers;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -43,7 +42,7 @@ public enum Swords implements EnumRegister<SwordItem> {
         return value;
     }
 
-    static void init() {
+    public static void init() {
         Confluence.LOGGER.info("Registering swords");
     }
 }
