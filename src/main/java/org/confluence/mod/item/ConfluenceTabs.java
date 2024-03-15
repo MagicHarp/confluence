@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.item.common.ExoticPotions;
 import org.confluence.mod.item.magic.Weapons;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
@@ -136,4 +137,14 @@ public class ConfluenceTabs {
 
             })
             .build());
+    //食物与药水
+    public static final RegistryObject<CreativeModeTab> FOOD_AND_POTIONS = TABS.register("food_and_potions",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.food_and_potions"))
+                    .displayItems((parameters, output) -> {
+                        for (ExoticPotions exoticPotions : ExoticPotions.values()) {
+                            output.accept(exoticPotions.get());
+                        }
+                    })
+                    .build());
 }

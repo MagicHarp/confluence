@@ -28,6 +28,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.mage", "汇流来世 | 法师武器");
         add("creativetab.confluence.summoner", "汇流来世 | 召唤师武器");
         add("creativetab.confluence.creator_items", "汇流来世 | 创造者物品");
+        add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
@@ -229,6 +230,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         /* Hammers */
         /* HammerAxes */
         add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
+        add(SlimeBalls.PINK_SLIME_BALL.get(), "粉色粘液球");
 
         add(APPLE_JUICE.get(), "苹果汁");
         add(BLACKCURRANT.get(), "黑醋栗");
