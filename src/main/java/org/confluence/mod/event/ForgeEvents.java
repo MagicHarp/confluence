@@ -2,6 +2,9 @@ package org.confluence.mod.event;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +21,8 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.effect.ConfluenceEffects;
+import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
 import org.confluence.mod.network.EchoBlockVisibilityPacket;
@@ -69,7 +74,22 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void livingHurt(LivingHurtEvent event) {
-        event.setAmount(event.getAmount() * RANDOM.nextFloat(0.8F, 1.25F));
+        float amount = event.getAmount();
+        if (event.getSource().getEntity() instanceof Player player) {
+            MobEffectInstance manaIssue = player.getEffect(ConfluenceEffects.MANA_ISSUE.get());
+            boolean isMagic = event.getSource().is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IMagicAttack;
+            if (manaIssue != null && isMagic) {
+                int duration = manaIssue.getDuration();
+                if (duration == -1) {
+                    amount *= 0.5F;
+                } else if (duration <= 100) {
+                    amount *= 0.75F;
+                } else {
+                    amount *= 0.75F - 0.05F * Math.round((duration - 100) / 20.0F);
+                }
+            }
+        }
+        event.setAmount(amount * RANDOM.nextFloat(0.8F, 1.2F));
     }
 
     @SubscribeEvent

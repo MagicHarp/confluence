@@ -9,6 +9,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.client.particle.ConfluenceParticles;
+import org.confluence.mod.effect.ConfluenceEffects;
 import org.confluence.mod.entity.ConfluenceEntities;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.ConfluenceTabs;
@@ -32,6 +33,7 @@ public class Confluence {
         ConfluenceParticles.PARTICLES.register(bus);
         ConfluenceEntities.ENTITIES.register(bus);
         ConfluenceTabs.TABS.register(bus);
+        ConfluenceEffects.MOB_EFFECTS.register(bus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfluenceConfig.SPEC);
     }
