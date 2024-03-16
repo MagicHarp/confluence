@@ -125,6 +125,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(EBONY_COBBLE_STONE.get(), "黑檀圆石");
         add(CORRUPTION_GRASS_BLOCKS.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
+        add(PEARL_COBBLE_STONE.get(), "珍珠圆石");
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCKS.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
