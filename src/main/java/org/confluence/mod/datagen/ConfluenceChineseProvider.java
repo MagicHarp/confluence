@@ -14,7 +14,7 @@ import org.confluence.mod.item.sword.Swords;
 import static org.confluence.mod.block.ConfluenceBlocks.*;
 import static org.confluence.mod.block.DecorativeBlocks.*;
 import static org.confluence.mod.item.ConfluenceItems.*;
-import static org.confluence.mod.item.potion.TerraPotions.LESSER_HEALING_POTION;
+import static org.confluence.mod.item.potion.TerraPotions.*;
 
 public class ConfluenceChineseProvider extends LanguageProvider {
     public ConfluenceChineseProvider(PackOutput output) {
@@ -238,6 +238,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         /* HammerAxes */
         add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
         add(SlimeBalls.PINK_SLIME_BALL.get(), "粉色粘液球");
+        add(SlimeBalls.HONEY_SLIME_BALL.get(), "蜂蜜粘液球");
 
         add(APPLE_JUICE.get(), "苹果汁");
         add(BLACKCURRANT.get(), "黑醋栗");
@@ -246,6 +247,13 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ELDERBERRY.get(), "接骨木果");
         add(ICE_MIRROR.get(), "冰雪镜");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
+        add(HEALING_POTION.get(), "治疗药水");
+        add(GREATER_HEALING_POTION.get(), "强效治疗药水");
+        add(SUPER_HEALING_POTION.get(), "超级治疗药水");
+        add(LESSER_MANA_POTION.get(), "弱效魔力药水");
+        add(MANA_POTION.get(), "魔力药水");
+        add(GREATER_MANA_POTION.get(), "强效魔力药水");
+        add(SUPER_MANA_POTION.get(), "超级魔力药水");
         add(MAGIC_MIRROR.get(), "魔镜");
         add(ROPE.get(), "绳子");
         add(ROPE_COIL.get(), "绳圈");
