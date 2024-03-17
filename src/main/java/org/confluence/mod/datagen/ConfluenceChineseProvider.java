@@ -7,6 +7,7 @@ import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
@@ -278,6 +279,21 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ManaWeapons.AQUA_SCEPTER.get(), "海蓝权杖");
         add(ManaWeapons.WOND_OF_SPARKING.get(), "火花魔棒");
         add(ManaWeapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
+
+        //刷怪蛋
+        add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(),"蓝色史莱姆刷怪蛋");
+        add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(),"红色史莱姆刷怪蛋");
+        add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(),"黄色史莱姆刷怪蛋");
+        add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(),"紫色史莱姆刷怪蛋");
+        add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(),"沙漠史莱姆刷怪蛋");
+        add(SpawnEggs.PINK_SLIME_SPAWN_EGG.get(),"粉色史莱姆刷怪蛋");
+        add(SpawnEggs.ICE_SLIME_SPAWN_EGG.get(),"冰冻史莱姆刷怪蛋");
+        add(SpawnEggs.GREEN_SLIME_SPAWN_EGG.get(),"绿色史莱姆刷怪蛋");
+        add(SpawnEggs.BLACK_SLIME_SPAWN_EGG.get(),"史莱姆之母刷怪蛋");
+        add(SpawnEggs.CRIMSON_SLIME_SPAWN_EGG.get(),"猩红史莱姆刷怪蛋");
+        add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(),"热带史莱姆刷怪蛋");
+        add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(),"夜明史莱姆刷怪蛋");
+        add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(),"岩浆史莱姆刷怪蛋");
         //endregion items
     }
 }
