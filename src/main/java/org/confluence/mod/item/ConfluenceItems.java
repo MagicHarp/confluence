@@ -7,10 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.axe.Axes;
-import org.confluence.mod.item.common.BaseItem;
-import org.confluence.mod.item.common.Icons;
-import org.confluence.mod.item.common.Materials;
-import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.MagicMirror;
@@ -38,8 +35,8 @@ public class ConfluenceItems {
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
-
     public static void register(IEventBus bus) {
+        ConfluenceTiers.register();
         Icons.init();
         Materials.init();
         Swords.init();
@@ -50,6 +47,7 @@ public class ConfluenceItems {
         SlimeBalls.init();
         ManaWeapons.init();
         TerraPotions.init();
+        SpawnEggs.init();
         ITEMS.register(bus);
     }
 }

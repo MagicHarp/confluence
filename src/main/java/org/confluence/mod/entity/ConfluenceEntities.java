@@ -33,6 +33,8 @@ public class ConfluenceEntities {
     public static final RegistryObject<EntityType<BaseSlime>> YELLOW_SLIME = registerSlime("yellow", ConfluenceParticles.ITEM_BLUE_SLIME::get, 2);
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
 
+    public static final RegistryObject<EntityType<BulletEntity>> BULLET = ENTITIES.register("bullet", () -> EntityType.Builder.of((EntityType.EntityFactory<BulletEntity>) BulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:bullet"));
+
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<ParticleOptions> p, int s) {
         return ENTITIES.register(i + "_slime", () ->
             EntityType.Builder.of((EntityType.EntityFactory<BaseSlime>) (e, l) -> new BaseSlime(e, l, p, s), MobCategory.MONSTER)
@@ -40,5 +42,4 @@ public class ConfluenceEntities {
                 .clientTrackingRange(10)
                 .build("confluence:" + i + "_slime"));
     }
-
 }

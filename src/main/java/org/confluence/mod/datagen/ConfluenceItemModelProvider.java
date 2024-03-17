@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -14,6 +15,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.magic.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.List;
@@ -55,6 +57,8 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
                     } else if (value instanceof Image64x i64) {
                         i64.preset(builder);
                     }
+                } else if (value instanceof SpawnEggItem) {
+                    withExistingParent(path, "item/template_spawn_egg");
                 } else {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }
@@ -66,7 +70,7 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
     }
 
     private static boolean isHandheld(Item item) {
-        return item instanceof TieredItem;
+        return item instanceof TieredItem || item instanceof StaffItem;
     }
 
     private static boolean shouldSkip(Item item) {

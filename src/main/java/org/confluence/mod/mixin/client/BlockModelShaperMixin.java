@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.common.EchoBlock;
 import org.confluence.mod.client.ClientPacketHandler;
 import org.spongepowered.asm.mixin.Final;
@@ -27,7 +26,7 @@ public abstract class BlockModelShaperMixin {
 
     @Inject(method = "getBlockModel", at = @At("HEAD"), cancellable = true)
     private void ifEchoBlock(BlockState blockState, CallbackInfoReturnable<BakedModel> cir) {
-        if (blockState.is(ConfluenceBlocks.ECHO_BLOCK.get())) {
+        if (blockState.getBlock() instanceof EchoBlock) {
             BlockState visible = blockState.setValue(EchoBlock.VISIBLE, ClientPacketHandler.isEchoBlockVisible());
             cir.setReturnValue(modelByStateCache.getOrDefault(visible, modelManager.getMissingModel()));
         }

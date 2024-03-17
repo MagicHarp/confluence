@@ -9,11 +9,11 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
-import org.confluence.mod.block.WoodSetType;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
@@ -82,7 +82,9 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ENEMY_ICON.get()))
             .title(Component.translatable("creativetab.confluence.creatures"))
             .displayItems((parameters, output) -> {
-
+                for (SpawnEggs spawnEggs : SpawnEggs.values()) {
+                    output.accept(spawnEggs.get());
+                }
             })
             .build());
     //工具
@@ -90,17 +92,20 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.tools"))
             .displayItems((parameters, output) -> {
+                output.accept(ConfluenceItems.MAGIC_MIRROR.get());
+                output.accept(ConfluenceItems.ICE_MIRROR.get());
+
                 for (Pickaxes pickaxes : Pickaxes.values()) {
                     output.accept(pickaxes.get());
-                }
-                for (HammerAxes hammerAxes : HammerAxes.values()) {
-                    output.accept(hammerAxes.get());
                 }
                 for (Axes axes : Axes.values()) {
                     output.accept(axes.get());
                 }
                 for (Hammers hammers : Hammers.values()) {
                     output.accept(hammers.get());
+                }
+                for (HammerAxes hammerAxes : HammerAxes.values()) {
+                    output.accept(hammerAxes.get());
                 }
             })
             .build());

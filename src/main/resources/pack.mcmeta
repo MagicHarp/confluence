@@ -4,5 +4,8 @@
             "text": "${mod_id} resources"
         },
         "pack_format": 15
+    },
+    "fusion": {
+        "overrides_folder": "fusion"
     }
 }

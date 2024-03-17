@@ -11,10 +11,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.client.model.entity.BulletModel;
+import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ConfluenceParticles;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
+import org.confluence.mod.client.renderer.entity.BulletRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
@@ -30,6 +33,7 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -50,6 +54,8 @@ public class ConfluenceClient {
         event.registerEntityRenderer(ConfluenceEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
         event.registerEntityRenderer(ConfluenceEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
+        event.registerEntityRenderer(ConfluenceEntities.BULLET.get(), BulletRenderer::new);
+
         event.registerBlockEntityRenderer(ConfluenceBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }
 
@@ -57,6 +63,9 @@ public class ConfluenceClient {
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.BLUE_SLIME_BALL.get()));
         event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.PINK_SLIME_BALL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_HONEY_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.HONEY_SLIME_BALL.get()));
+
+        event.registerSpriteSet(ConfluenceParticles.RUBY_BULLET.get(), BulletParticle.Provider::new);
     }
 
     public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;

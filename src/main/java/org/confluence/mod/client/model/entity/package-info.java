@@ -1,1 +1,0 @@
-package org.confluence.mod.client.model.entity;

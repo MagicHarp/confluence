@@ -4,12 +4,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.confluence.mod.datagen.ICubeTop;
 
-public class PlateLikeBlock extends Block implements ICubeTop {
-    public PlateLikeBlock(Properties properties) {
+public class BeamLikeBlock extends Block implements ICubeTop {
+    public BeamLikeBlock(Properties properties) {
         super(properties);
     }
 
-    public PlateLikeBlock() {
+    public BeamLikeBlock() {
         this(BlockBehaviour.Properties.of());
     }
 }
