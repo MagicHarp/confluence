@@ -14,7 +14,7 @@ public enum Pickaxes implements EnumRegister<PickaxeItem> {
     TIN_PICKAXE("tin_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.TIN, 2, 1)),
     LEAD_PICKAXE("lead_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.LEAD, 3, 1)),
     SILVER_PICKAXE("silver_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.SILVER, 3, 1)),
-    WOLFRAM_PICKAXE("walfram_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
+    WOLFRAM_PICKAXE("wolfram_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
     PLATINUM_PICKAXE("platinum_pickaxe", () -> new BasePickaxeItem(ConfluenceTiers.PLATINUM, 5, 1));
 
     private final RegistryObject<PickaxeItem> value;

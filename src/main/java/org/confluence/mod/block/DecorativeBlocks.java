@@ -13,7 +13,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ICE_BRICKS("ice_bricks", BaseBlock::new),
     SNOW_BRICKS("snow_bricks", BaseBlock::new),
     ANOTHER_STONE_BRICKS("another_stone_bricks", BaseBlock::new),
-    ANOTHER_COPPER_BRICKS("another_copper_bricks", BeamLikeBlock::new),
+    ANOTHER_COPPER_BRICKS("another_copper_bricks", BaseBlock::new),
     ANOTHER_COPPER_PLATE("another_copper_plate", BeamLikeBlock::new),
     TIN_BRICKS("tin_bricks", BaseBlock::new),
     TIN_PLATE("tin_plate", BeamLikeBlock::new),
@@ -36,16 +36,16 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     BLUE_GEL_BLOCK("blue_gel_block", BaseBlock::new),
     PINK_GEL_BLOCK("pink_gel_block", BaseBlock::new),
     SUN_PLATE("sun_plate", BaseBlock::new),
-    ANOTHER_LAVA_BEAM("another_lava_beam", BeamLikeBlock::new),
+    ANOTHER_LAVA_BEAM("another_lava_beam", BaseBlock::new),
     ANOTHER_LAVA_BRICKS("another_lava_bricks", BaseBlock::new),
-    ANOTHER_OBSIDIAN_BEAM("another_obsidian_beam", BeamLikeBlock::new),
+    ANOTHER_OBSIDIAN_BEAM("another_obsidian_beam", BaseBlock::new),
     ANOTHER_OBSIDIAN_BRICKS("another_obsidian_bricks", BaseBlock::new),
     ANOTHER_OBSIDIAN_PLATE("another_obsidian_plate", BaseBlock::new),
     ANOTHER_OBSIDIAN_SMALL_BRICKS("another_obsidian_small_bricks", BaseBlock::new),
-    ANOTHER_SMOOTH_OBSIDIAN_SLAB("another_smooth_obsidian_slab", BaseBlock::new),
-    ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BaseBlock::new),
+    ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
-    ANOTHER_OAK_BEAM("another_northland_beam", BeamLikeBlock::new);
+    ANOTHER_OAK_BEAM("another_northland_beam",BeamLikeBlock::new),
+    CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 
     private final RegistryObject<Block> value;
 
