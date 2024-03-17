@@ -11,11 +11,11 @@ import java.util.function.Supplier;
 
 public enum Axes implements EnumRegister<AxeItem> {
     COPPER_AXE("copper_axe", () -> new BaseAxeItem(ConfluenceTiers.COPPER, 2, 1)),
-    TIN_AXE("tin_axe", () -> new BaseAxeItem(ConfluenceTiers.TIN, 0, 0)),
-    LEAD_AXE("lead_axe", () -> new BaseAxeItem(ConfluenceTiers.LEAD, 0, 0)),
-    SILVER_AXE("silver_axe", () -> new BaseAxeItem(ConfluenceTiers.SILVER, 0, 0)),
-    WOLFRAM_AXE("wolfram_axe", () -> new BaseAxeItem(ConfluenceTiers.TUNGSTEN, 0, 0)),
-    PLATINUM_AXE("platinum_axe", () -> new BaseAxeItem(ConfluenceTiers.PLATINUM, 0, 0));
+    TIN_AXE("tin_axe", () -> new BaseAxeItem(ConfluenceTiers.TIN, 2, 1)),
+    LEAD_AXE("lead_axe", () -> new BaseAxeItem(ConfluenceTiers.LEAD, 3, 1)),
+    SILVER_AXE("silver_axe", () -> new BaseAxeItem(ConfluenceTiers.SILVER, 3, 1)),
+    WOLFRAM_AXE("wolfram_axe", () -> new BaseAxeItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
+    PLATINUM_AXE("platinum_axe", () -> new BaseAxeItem(ConfluenceTiers.PLATINUM, 5, 1));
 
     private final RegistryObject<AxeItem> value;
 

@@ -7,6 +7,7 @@ import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.sword.Swords;
@@ -236,6 +237,13 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Pickaxes.WOLFRAM_PICKAXE.get(), "钨镐");
         add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
         /* Hammers */
+        add(Hammers. COPPER_HAMMER.get(), "铜锤");
+        add(Hammers. TIN_HAMMER.get(), "锡锤");
+        add(Hammers. LEAD_HAMMER.get(), "铅锤");
+        add(Hammers. SILVER_HAMMER.get(), "银锤");
+        add(Hammers. WOLFRAM_HAMMER.get(), "钨锤");
+        add(Hammers. PLATINUM_HAMMER.get(), "铂金锤");
+
         /* HammerAxes */
         add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
         add(SlimeBalls.PINK_SLIME_BALL.get(), "粉色粘液球");
