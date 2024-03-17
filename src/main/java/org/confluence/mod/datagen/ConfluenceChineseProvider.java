@@ -210,16 +210,16 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
 
-        add(Swords.COPPER_SHORT_SWORD.get(), "铜质短剑");
-        add(Swords.COPPER_BOARD_SWORD.get(), "铜质阔剑");
-        add(Swords.TIN_SHORT_SWORD.get(), "锡质短剑");
-        add(Swords.TIN_BOARD_SWORD.get(), "锡质阔剑");
-        add(Swords.LEAD_SHORT_SWORD.get(), "铅质短剑");
-        add(Swords.LEAD_BOARD_SWORD.get(), "铅质阔剑");
-        add(Swords.SILVER_SHORT_SWORD.get(), "银质短剑");
-        add(Swords.SILVER_BOARD_SWORD.get(), "银质阔剑");
-        add(Swords.WOLFRAM_SHORT_SWORD.get(), "钨质短剑");
-        add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨质阔剑");
+        add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
+        add(Swords.COPPER_BOARD_SWORD.get(), "铜阔剑");
+        add(Swords.TIN_SHORT_SWORD.get(), "锡短剑");
+        add(Swords.TIN_BOARD_SWORD.get(), "锡阔剑");
+        add(Swords.LEAD_SHORT_SWORD.get(), "铅短剑");
+        add(Swords.LEAD_BOARD_SWORD.get(), "铅阔剑");
+        add(Swords.SILVER_SHORT_SWORD.get(), "银短剑");
+        add(Swords.SILVER_BOARD_SWORD.get(), "银阔剑");
+        add(Swords.WOLFRAM_SHORT_SWORD.get(), "钨短剑");
+        add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨阔剑");
         add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
         add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
 
