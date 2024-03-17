@@ -200,6 +200,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.TUNGSTEN_INGOT.get(), "钨锭");
         add(Materials.RAW_PLATINUM.get(), "粗铂金");
         add(Materials.PLATINUM_INGOT.get(), "铂金锭");
+        add(Materials.RAW_METEORITE.get(), "陨铁原矿");
         add(Materials.METEORITE_INGOT.get(), "陨铁锭");
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
