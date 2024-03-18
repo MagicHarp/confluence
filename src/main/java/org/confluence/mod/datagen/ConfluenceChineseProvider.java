@@ -141,8 +141,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(BIG_ANOTHER_EMERALD_BLOCK.get(), "大翡翠块");
         add(BIG_SAPPHIRE_BLOCK.get(), "大蓝玉块");
         add(BIG_ANOTHER_AMETHYST_BLOCK.get(), "大紫晶块");
-        add(ANOTHER_POLISHED_GRANITE.get(), "抛光异域花岗岩块");
-        add(POLISHED_MARBLE.get(), "抛光异域大理石块");
+        add(ANOTHER_POLISHED_GRANITE.get(), "异域花岗岩块");
+        add(POLISHED_MARBLE.get(), "异域大理石块");
         add(ANOTHER_COPPER_BRICKS.get(), "铜砖块");
         add(ANOTHER_COPPER_PLATE.get(), "铜条板块");
         add(ANOTHER_CRIMSON_ORE_BRICKS.get(), "猩红矿砖");
