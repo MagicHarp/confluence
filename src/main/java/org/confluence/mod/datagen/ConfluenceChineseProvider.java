@@ -60,6 +60,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
         add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
+        add(Ores.METEORITE_ORE.get(), "陨石矿石");
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
         add(EBONY_LOG_BLOCKS.PLANKS.get(), "乌木板");

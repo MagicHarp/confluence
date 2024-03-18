@@ -29,7 +29,7 @@ public enum Ores implements EnumRegister<Block> {
     SILVER_BLOCK("silver_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
 
     TUNGSTEN_ORE("tungsten_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    DEEPSLATE_TUNGSTEN_ORE("deepslate_tungsten_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+    DEEPSLATE_TUNGSTEN_ORE("deepslate_tungesten_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
     RAW_TUNGSTEN_BLOCK("raw_tungsten_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     TUNGSTEN_BLOCK("tungsten_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
 
