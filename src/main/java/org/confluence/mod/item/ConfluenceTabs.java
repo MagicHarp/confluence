@@ -7,6 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.axe.Axes;
@@ -53,6 +55,30 @@ public class ConfluenceTabs {
                 for (Ores ores : Ores.values()) {
                     output.accept(ores.get());
                 }
+                    output.accept(PALM_LOG_BLOCKS.LOG.get());
+                    output.accept(PALM_LOG_BLOCKS.LEAVES.get());
+                    output.accept(CORRUPTION_GRASS_BLOCKS.get());
+                    output.accept(EBONY_SAND.get());
+                    output.accept(EBONY_STONE.get());
+                    output.accept(EBONY_COBBLE_STONE.get());
+                    output.accept(EBONY_LOG_BLOCKS.LOG.get());
+                    output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
+                    output.accept(ANOTHER_CRIMSON_GRASS_BLOCKS.get());
+                    output.accept(ANOTHER_CRIMSON_SAND.get());
+                    output.accept(ANOTHER_CRIMSON_STONE.get());
+                    output.accept(ANOTHER_CRIMSON_COBBLE_STONE.get());
+                    output.accept(SHADOW_LOG_BLOCKS.LOG.get());
+                    output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
+                    output.accept(HALLOW_GRASS_BLOCKS.get());
+                    output.accept(PEARL_SAND.get());
+                    output.accept(PEARL_STONE.get());
+                    output.accept(PEARL_COBBLE_STONE.get());
+                    output.accept(PEARL_LOG_BLOCKS.LOG.get());
+                    output.accept(PEARL_LOG_BLOCKS.LEAVES.get());
+                    output.accept(ASH_BLOCK.get());
+                    output.accept(ASH_LOG_BLOCKS.LOG.get());
+                    output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+
 
             })
             .build());
