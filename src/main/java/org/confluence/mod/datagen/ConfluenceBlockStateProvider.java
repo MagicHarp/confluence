@@ -7,12 +7,13 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.WoodSetType;
 
 import java.util.Arrays;
 
 import static org.confluence.mod.Confluence.MODID;
+import static org.confluence.mod.block.ConfluenceBlocks.*;
 
 public class ConfluenceBlockStateProvider extends BlockStateProvider {
     private static final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
@@ -23,25 +24,29 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
+        BLOCKS.getEntries().forEach(block -> {
             Block value = block.get();
             String path = block.getId().getPath();
             if (shouldSkip(value)) return;
 
             try {
                 if (value instanceof ButtonBlock buttonBlock) {
-                    buttonBlock(buttonBlock, texture(path, "_button"));
+                    ResourceLocation texture = texture(path, "_button");
+                    buttonBlock(buttonBlock, texture);
+                    models().withExistingParent(path + "_inventory", "block/button_inventory").texture("texture", texture);
                 } else if (value instanceof RotatedPillarBlock rotatedPillarBlock) {
-                    ResourceLocation side = new ResourceLocation(MODID, "block/" + path);
                     if (path.contains("wood")) {
+                        ResourceLocation side = new ResourceLocation(MODID, "block/" + path.replace("wood", "log"));
                         axisBlock(rotatedPillarBlock, side, side);
                     } else if (path.contains("log")) {
                         logBlock(rotatedPillarBlock);
                     } else {
-                        axisBlock(rotatedPillarBlock, side);
+                        axisBlock(rotatedPillarBlock, new ResourceLocation(MODID, "block/" + path));
                     }
                 } else if (value instanceof FenceBlock fenceBlock) {
-                    fenceBlock(fenceBlock, texture(path, "_fence"));
+                    ResourceLocation texture = texture(path, "_fence");
+                    fenceBlock(fenceBlock, texture);
+                    models().withExistingParent(path + "_inventory", "block/fence_inventory").texture("texture", texture);
                 } else if (value instanceof FenceGateBlock fenceGateBlock) {
                     fenceGateBlock(fenceGateBlock, texture(path, "_fence_gate"));
                 } else if (value instanceof PressurePlateBlock pressurePlateBlock) {
@@ -70,6 +75,13 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                 Confluence.LOGGER.error(e.getMessage());
             }
         });
+
+        registerSignBlock(EBONY_LOG_BLOCKS);
+        registerSignBlock(PEARL_LOG_BLOCKS);
+        registerSignBlock(SHADOW_LOG_BLOCKS);
+        registerSignBlock(PALM_LOG_BLOCKS);
+        registerSignBlock(ASH_LOG_BLOCKS);
+        registerSignBlock(SPOOKY_LOG_BLOCKS);
     }
 
     private static boolean shouldSkip(Block block) {
@@ -85,5 +97,13 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
 
     private static ResourceLocation top(String path) {
         return new ResourceLocation(MODID, "block/" + path + "_top");
+    }
+
+    private void registerSignBlock(DecorationLogBlocks logBlocks) {
+        try {
+            signBlock(logBlocks.SIGN.get(), logBlocks.WALL_SIGN.get(), new ResourceLocation(MODID, "block/" + logBlocks.id + "_planks"));
+        } catch (Exception e) {
+            Confluence.LOGGER.error(e.getMessage());
+        }
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -49,7 +50,7 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;
-                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (block instanceof ButtonBlock ? "_inventory" : "")));
+                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                     if (value instanceof Image32x i32) {
@@ -67,6 +68,10 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
                 withExistingParent(path, isBlockItem ? MISSING_BLOCK : MISSING_ITEM);
             }
         });
+    }
+
+    private static boolean hasInventory(Block block) {
+        return block instanceof ButtonBlock || block instanceof FenceBlock;
     }
 
     private static boolean isHandheld(Item item) {

@@ -17,6 +17,7 @@ import static org.confluence.mod.block.ConfluenceBlocks.registerWithItem;
 import static org.confluence.mod.block.ConfluenceBlocks.registerWithoutItem;
 
 public class DecorationLogBlocks {
+    public final String id;
     public final RegistryObject<Block> PLANKS;
     public RegistryObject<RotatedPillarBlock> LOG;
     public RegistryObject<RotatedPillarBlock> STRIPPED_LOG;
@@ -36,6 +37,7 @@ public class DecorationLogBlocks {
 
 
     public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree, boolean ignitedByLava) {
+        this.id = id;
         BlockBehaviour.Properties planks = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
         this.PLANKS = registerWithItem(id + "_planks", () -> new Block(ignitedByLava ? planks.ignitedByLava() : planks));
         if (requiresTree) {
