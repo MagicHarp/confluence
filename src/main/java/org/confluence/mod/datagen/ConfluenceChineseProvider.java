@@ -73,6 +73,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(EBONY_LOG_BLOCKS.PRESSURE_PLATE.get(), "乌木压力板");
         add(EBONY_LOG_BLOCKS.WOOD.get(), "乌木");
         add(EBONY_LOG_BLOCKS.LEAVES.get(), "乌木树叶");
+        add(EBONY_LOG_BLOCKS.FENCE.get(), "乌木栅栏");
+        add(EBONY_LOG_BLOCKS.FENCE_GATE.get(), "乌木栅栏门");
 
         add(PEARL_LOG_BLOCKS.BUTTON.get(), "珍珠木按钮");
         add(PEARL_LOG_BLOCKS.PLANKS.get(), "珍珠木板");
@@ -85,6 +87,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(PEARL_LOG_BLOCKS.PRESSURE_PLATE.get(), "珍珠木压力板");
         add(PEARL_LOG_BLOCKS.WOOD.get(), "珍珠木");
         add(PEARL_LOG_BLOCKS.LEAVES.get(), "珍珠木树叶");
+        add(PEARL_LOG_BLOCKS.FENCE.get(), "珍珠木栅栏");
+        add(PEARL_LOG_BLOCKS.FENCE_GATE.get(), "珍珠木栅栏门");
 
         add(SHADOW_LOG_BLOCKS.BUTTON.get(), "暗影木按钮");
         add(SHADOW_LOG_BLOCKS.PLANKS.get(), "暗影木板");
@@ -95,6 +99,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SHADOW_LOG_BLOCKS.SLAB.get(), "暗影木台阶");
         add(SHADOW_LOG_BLOCKS.WOOD.get(), "暗影木");
         add(SHADOW_LOG_BLOCKS.LEAVES.get(), "暗影木树叶");
+        add(SHADOW_LOG_BLOCKS.FENCE.get(), "暗影木栅栏");
+        add(SHADOW_LOG_BLOCKS.FENCE_GATE.get(), "暗影木栅栏门");
 
         add(PALM_LOG_BLOCKS.BUTTON.get(), "沙漠风情按钮");
         add(PALM_LOG_BLOCKS.PLANKS.get(), "沙漠风情木板");
@@ -105,6 +111,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(PALM_LOG_BLOCKS.SLAB.get(), "沙漠风情台阶");
         add(PALM_LOG_BLOCKS.WOOD.get(), "棕榈木");
         add(PALM_LOG_BLOCKS.LEAVES.get(), "棕榈树叶");
+        add(PALM_LOG_BLOCKS.FENCE.get(), "沙漠风情栅栏");
+        add(PALM_LOG_BLOCKS.FENCE_GATE.get(), "沙漠风情栅栏门");
 
         add(ASH_LOG_BLOCKS.BUTTON.get(), "白蜡木按钮");
         add(ASH_LOG_BLOCKS.PLANKS.get(), "白蜡木板");
@@ -115,6 +123,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.SLAB.get(), "白蜡木台阶");
         add(ASH_LOG_BLOCKS.WOOD.get(), "白蜡木");
         add(ASH_LOG_BLOCKS.LEAVES.get(), "白蜡木树叶");
+        add(ASH_LOG_BLOCKS.FENCE.get(), "白蜡木栅栏");
+        add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
 
         add(ANOTHER_OAK_LOG_BLOCKS.PLANKS.get(), "经典风情木板");
         add(ANOTHER_OAK_LOG_BLOCKS.SLAB.get(), "经典风情台阶");

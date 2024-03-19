@@ -34,6 +34,30 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.building_blocks"))
             .displayItems((parameters, output) -> {
+                output.accept(EBONY_LOG_BLOCKS.PLANKS.get());output.accept(EBONY_LOG_BLOCKS.WOOD.get());output.accept(EBONY_LOG_BLOCKS.STAIRS.get());
+                output.accept(EBONY_LOG_BLOCKS.SLAB.get());output.accept(EBONY_LOG_BLOCKS.DOOR.get());output.accept(EBONY_LOG_BLOCKS.TRAPDOOR.get());
+                output.accept(EBONY_LOG_BLOCKS.BUTTON.get());output.accept(EBONY_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(EBONY_LOG_BLOCKS.SIGN.get());
+                output.accept(EBONY_LOG_BLOCKS.FENCE.get());output.accept(EBONY_LOG_BLOCKS.FENCE_GATE.get());
+
+                output.accept(SHADOW_LOG_BLOCKS.PLANKS.get());output.accept(SHADOW_LOG_BLOCKS.WOOD.get());output.accept(SHADOW_LOG_BLOCKS.STAIRS.get());
+                output.accept(SHADOW_LOG_BLOCKS.SLAB.get());output.accept(SHADOW_LOG_BLOCKS.DOOR.get());output.accept(SHADOW_LOG_BLOCKS.TRAPDOOR.get());
+                output.accept(SHADOW_LOG_BLOCKS.BUTTON.get());output.accept(SHADOW_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(SHADOW_LOG_BLOCKS.SIGN.get());
+                output.accept(SHADOW_LOG_BLOCKS.FENCE.get());output.accept(SHADOW_LOG_BLOCKS.FENCE_GATE.get());
+
+                output.accept(PEARL_LOG_BLOCKS.PLANKS.get());output.accept(PEARL_LOG_BLOCKS.WOOD.get());output.accept(PEARL_LOG_BLOCKS.STAIRS.get());
+                output.accept(PEARL_LOG_BLOCKS.SLAB.get());output.accept(PEARL_LOG_BLOCKS.DOOR.get());output.accept(PEARL_LOG_BLOCKS.TRAPDOOR.get());
+                output.accept(PEARL_LOG_BLOCKS.BUTTON.get());output.accept(PEARL_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(PEARL_LOG_BLOCKS.SIGN.get());
+                output.accept(PEARL_LOG_BLOCKS.FENCE.get());output.accept(PEARL_LOG_BLOCKS.FENCE_GATE.get());
+
+                output.accept(PALM_LOG_BLOCKS.PLANKS.get());output.accept(PALM_LOG_BLOCKS.WOOD.get());output.accept(PALM_LOG_BLOCKS.STAIRS.get());
+                output.accept(PALM_LOG_BLOCKS.SLAB.get());output.accept(PALM_LOG_BLOCKS.DOOR.get());output.accept(PALM_LOG_BLOCKS.TRAPDOOR.get());
+                output.accept(PALM_LOG_BLOCKS.BUTTON.get());output.accept(PALM_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(PALM_LOG_BLOCKS.SIGN.get());
+                output.accept(PALM_LOG_BLOCKS.FENCE.get());output.accept(PALM_LOG_BLOCKS.FENCE_GATE.get());
+
+                output.accept(ANOTHER_OAK_LOG_BLOCKS.PLANKS.get());output.accept(ANOTHER_OAK_LOG_BLOCKS.STAIRS.get());output.accept(ANOTHER_OAK_LOG_BLOCKS.SLAB.get());
+
+                output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.PLANKS.get());output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.STAIRS.get());output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.SLAB.get());
+
                 for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
                     output.accept(decorativeBlocks.get());
                 }
@@ -45,6 +69,7 @@ public class ConfluenceTabs {
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
+
             })
             .build());
     //自然方块
