@@ -62,8 +62,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);
     //  decorative blocks
     public static final DecorationLogBlocks SPOOKY_LOG_BLOCKS = new DecorationLogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
-    public static final DecorationLogBlocks ANOTHER_OAK_LOG_BLOCKS = new DecorationLogBlocks("another_oak", ANOTHER_OAK.SET, ANOTHER_OAK.TYPE, false, true);
-    public static final DecorationLogBlocks ANOTHER_NORTHLAND_LOG_BLOCKS = new DecorationLogBlocks("another_northland", ANOTHER_NORTHLAND.SET, ANOTHER_NORTHLAND.TYPE, false, true);
+
     //  functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
     public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);

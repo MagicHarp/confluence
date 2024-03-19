@@ -54,9 +54,10 @@ public class ConfluenceTabs {
                 output.accept(PALM_LOG_BLOCKS.BUTTON.get());output.accept(PALM_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(PALM_LOG_BLOCKS.SIGN.get());
                 output.accept(PALM_LOG_BLOCKS.FENCE.get());output.accept(PALM_LOG_BLOCKS.FENCE_GATE.get());
 
-                output.accept(ANOTHER_OAK_LOG_BLOCKS.PLANKS.get());output.accept(ANOTHER_OAK_LOG_BLOCKS.STAIRS.get());output.accept(ANOTHER_OAK_LOG_BLOCKS.SLAB.get());
-
-                output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.PLANKS.get());output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.STAIRS.get());output.accept(ANOTHER_NORTHLAND_LOG_BLOCKS.SLAB.get());
+                output.accept(ASH_LOG_BLOCKS.PLANKS.get());output.accept(ASH_LOG_BLOCKS.WOOD.get());output.accept(ASH_LOG_BLOCKS.STAIRS.get());
+                output.accept(ASH_LOG_BLOCKS.SLAB.get());output.accept(ASH_LOG_BLOCKS.DOOR.get());output.accept(ASH_LOG_BLOCKS.TRAPDOOR.get());
+                output.accept(ASH_LOG_BLOCKS.BUTTON.get());output.accept(ASH_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(ASH_LOG_BLOCKS.SIGN.get());
+                output.accept(ASH_LOG_BLOCKS.FENCE.get());output.accept(ASH_LOG_BLOCKS.FENCE_GATE.get());
 
                 for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
                     output.accept(decorativeBlocks.get());
