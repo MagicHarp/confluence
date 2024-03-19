@@ -125,15 +125,12 @@ public class ConfluenceChineseProvider extends LanguageProvider {
 
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");
-        add(EBONY_COBBLE_STONE.get(), "黑檀圆石");
         add(CORRUPTION_GRASS_BLOCKS.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
-        add(PEARL_COBBLE_STONE.get(), "珍珠圆石");
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCKS.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
-        add(ANOTHER_CRIMSON_COBBLE_STONE.get(), "猩红圆石");
         add(ANOTHER_CRIMSON_GRASS_BLOCKS.get(), "猩红草方块");
         add(ASH_BLOCK.get(), "灰烬块");
         add(BIG_RUBY_BLOCK.get(), "大红玉块");
