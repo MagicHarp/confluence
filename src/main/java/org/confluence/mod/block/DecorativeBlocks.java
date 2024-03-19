@@ -10,6 +10,10 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum DecorativeBlocks implements EnumRegister<Block> {
+    ANOTHER_OAK_BEAM("another_oak_beam", BaseBlock::new),
+    ANOTHER_OAK_PLANKS("another_oak_planks", BeamLikeBlock::new),
+    ANOTHER_NORTHLAND_BEAM("another_northland_beam", BaseBlock::new),
+    ANOTHER_NORTHLAND_PLANKS("another_northland_planks", BeamLikeBlock::new),
     ICE_BRICKS("ice_bricks", BaseBlock::new),
     SNOW_BRICKS("snow_bricks", BaseBlock::new),
     ANOTHER_STONE_BRICKS("another_stone_bricks", BaseBlock::new),
@@ -44,7 +48,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_OBSIDIAN_SMALL_BRICKS("another_obsidian_small_bricks", BaseBlock::new),
     ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
-    ANOTHER_OAK_BEAM("another_northland_beam", BeamLikeBlock::new),
+
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 
     private final RegistryObject<Block> value;

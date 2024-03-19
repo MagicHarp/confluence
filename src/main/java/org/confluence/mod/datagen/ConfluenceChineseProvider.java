@@ -180,6 +180,10 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_SMOOTH_OBSIDIAN.get(), "异域光滑黑曜石块");
         add(CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");
         add(CRYSTAL_BLOCK.get(), "水晶块");
+        add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
+        add(ANOTHER_OAK_PLANKS.get(), "经典风情木板");
+        add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
+        add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
@@ -189,7 +193,6 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
 
-        add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
         //endregion blocks
 
         //region items
