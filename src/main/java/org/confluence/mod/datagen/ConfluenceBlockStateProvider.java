@@ -26,7 +26,7 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block value = block.get();
             String path = block.getId().getPath();
-            if (value instanceof CustomModel || value instanceof SlimeBlock) return;
+            if (shouldSkip(value)) return;
 
             try {
                 if (value instanceof ButtonBlock buttonBlock) {
@@ -41,20 +41,20 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                         axisBlock(rotatedPillarBlock, side);
                     }
                 } else if (value instanceof FenceBlock fenceBlock) {
-                    fenceBlock(fenceBlock, path, texture(path, "_fence"));
+                    fenceBlock(fenceBlock, texture(path, "_fence"));
                 } else if (value instanceof FenceGateBlock fenceGateBlock) {
-                    fenceGateBlock(fenceGateBlock, path, texture(path, "_fence_gate"));
+                    fenceGateBlock(fenceGateBlock, texture(path, "_fence_gate"));
                 } else if (value instanceof PressurePlateBlock pressurePlateBlock) {
                     pressurePlateBlock(pressurePlateBlock, texture(path, "_pressure_plate"));
                 } else if (value instanceof SlabBlock slabBlock) {
                     ResourceLocation texture = texture(path, "_slab");
                     slabBlock(slabBlock, texture, texture);
                 } else if (value instanceof StairBlock stairBlock) {
-                    stairsBlock(stairBlock, path, texture(path, "_stairs"));
+                    stairsBlock(stairBlock, texture(path, "_stairs"));
                 } else if (value instanceof TrapDoorBlock trapDoorBlock) {
-                    trapdoorBlock(trapDoorBlock, path, new ResourceLocation(MODID, "block/" + path), true);
+                    trapdoorBlock(trapDoorBlock, new ResourceLocation(MODID, "block/" + path), true);
                 } else if (value instanceof DoorBlock doorBlock) {
-                    doorBlock(doorBlock, path, new ResourceLocation(MODID, "block/" + path + "_bottom"), top(path));
+                    doorBlock(doorBlock, new ResourceLocation(MODID, "block/" + path + "_bottom"), top(path));
                 } else if (value instanceof ICubeTop) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
                         .cubeTop(path, new ResourceLocation(MODID, "block/" + path + "_side"), top(path)));
@@ -72,13 +72,15 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
         });
     }
 
-    private ResourceLocation texture(String path, String regex) {
-        for (String woodSetType : WOODS) {
-            if (path.contains(woodSetType)) {
-                return new ResourceLocation(MODID, "block/" + path.replaceFirst(regex, "_planks"));
-            }
+    private static boolean shouldSkip(Block block) {
+        return block instanceof CustomModel || block instanceof SlimeBlock || block instanceof SignBlock;
+    }
+
+    private static ResourceLocation texture(String path, String regex) {
+        if (Arrays.stream(WOODS).anyMatch(path::contains)) {
+            return new ResourceLocation(MODID, "block/" + path.replace(regex, "_planks"));
         }
-        return new ResourceLocation(MODID, "block/" + path.replaceFirst(regex, ""));
+        return new ResourceLocation(MODID, "block/" + path.replace(regex, ""));
     }
 
     private static ResourceLocation top(String path) {

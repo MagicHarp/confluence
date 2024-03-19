@@ -44,7 +44,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_OBSIDIAN_SMALL_BRICKS("another_obsidian_small_bricks", BaseBlock::new),
     ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
-    ANOTHER_OAK_BEAM("another_northland_beam",BeamLikeBlock::new),
+    ANOTHER_OAK_BEAM("another_northland_beam", BeamLikeBlock::new),
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 
     private final RegistryObject<Block> value;
