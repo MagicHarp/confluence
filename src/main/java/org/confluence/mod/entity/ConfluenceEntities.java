@@ -8,6 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.ConfluenceParticles;
+import org.confluence.mod.entity.bullet.BaseBulletEntity;
+import org.confluence.mod.entity.bullet.RubyBulletEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 
@@ -33,7 +35,7 @@ public class ConfluenceEntities {
     public static final RegistryObject<EntityType<BaseSlime>> YELLOW_SLIME = registerSlime("yellow", ConfluenceParticles.ITEM_BLUE_SLIME::get, 2);
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
 
-    public static final RegistryObject<EntityType<BulletEntity>> BULLET = ENTITIES.register("bullet", () -> EntityType.Builder.of((EntityType.EntityFactory<BulletEntity>) BulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:bullet"));
+    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = ENTITIES.register("ruby_bullet", () -> EntityType.Builder.of((EntityType.EntityFactory<BaseBulletEntity>) RubyBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:ruby_bullet"));
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<ParticleOptions> p, int s) {
         return ENTITIES.register(i + "_slime", () ->

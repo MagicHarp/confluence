@@ -9,32 +9,31 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.BulletEntity;
+import org.confluence.mod.entity.bullet.BaseBulletEntity;
 
-public class BulletModel extends EntityModel<BulletEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet_layer"), "main");
-	private final ModelPart bone;
+public class BulletModel extends EntityModel<BaseBulletEntity> {
+	public static final ModelLayerLocation RUBY_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/ruby_bullet"), "main");
+	private final ModelPart root;
 
 	public BulletModel(ModelPart root) {
-		this.bone = root.getChild("bone");
+		this.root = root;
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -9.0F, 7.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE), PartPose.offset(8.0F, 24.0F, -8.0F));
+		partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 16, 16);
 	}
 
 	@Override
-	public void setupAnim(BulletEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void setupAnim(BaseBulletEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

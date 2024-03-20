@@ -33,7 +33,7 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.RUBY_LAYER, BulletModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -54,7 +54,7 @@ public class ConfluenceClient {
         event.registerEntityRenderer(ConfluenceEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
         event.registerEntityRenderer(ConfluenceEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
-        event.registerEntityRenderer(ConfluenceEntities.BULLET.get(), BulletRenderer::new);
+        event.registerEntityRenderer(ConfluenceEntities.RUBY_BULLET.get(), c -> new BulletRenderer(c, "ruby"));
 
         event.registerBlockEntityRenderer(ConfluenceBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

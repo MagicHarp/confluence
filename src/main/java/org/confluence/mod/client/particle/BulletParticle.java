@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class BulletParticle extends SimpleAnimatedParticle {
     public BulletParticle(ClientLevel clientLevel, double x, double y, double z, SpriteSet spriteSet, float gravity) {
         super(clientLevel, x, y, z, spriteSet, gravity);
-        this.lifetime = 60;
+        this.lifetime = 20;
         setSpriteFromAge(spriteSet);
     }
 

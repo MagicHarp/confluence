@@ -13,20 +13,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.BulletEntity;
+import org.confluence.mod.entity.bullet.BaseBulletEntity;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class StaffItem extends Item implements IMagicAttack {
-    private final BulletEntity.Type type;
+    private final BulletSupplier bulletSupplier;
 
-    public StaffItem(BulletEntity.Type type, Properties properties) {
+    public StaffItem(BulletSupplier bulletSupplier, Properties properties) {
         super(properties);
-        this.type = type;
+        this.bulletSupplier = bulletSupplier;
+
     }
 
-    public StaffItem(BulletEntity.Type type) {
-        this(type, new Properties());
+    public StaffItem(BulletSupplier bulletSupplier) {
+        this(bulletSupplier, new Properties());
     }
 
     @Override
@@ -49,13 +50,17 @@ public class StaffItem extends Item implements IMagicAttack {
         if (!level.isClientSide && living instanceof ServerPlayer serverPlayer) {
             if (PlayerUtils.extractMana(serverPlayer, () -> 20)) {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-                BulletEntity bulletEntity = new BulletEntity(serverPlayer, level);
-                bulletEntity.setType(type);
-                bulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-                level.addFreshEntity(bulletEntity);
+                BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level);
+                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                level.addFreshEntity(baseBulletEntity);
                 level.playSound(serverPlayer, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         }
         return itemStack;
+    }
+
+    @FunctionalInterface
+    public interface BulletSupplier {
+        BaseBulletEntity create(ServerPlayer serverPlayer, Level level);
     }
 }
