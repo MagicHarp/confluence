@@ -32,6 +32,7 @@ public class ConfluenceTiers {
     public static void register() {
         ResourceLocation copper = new ResourceLocation(MODID, "copper");
         ResourceLocation tin = new ResourceLocation(MODID, "tin");
+        ResourceLocation iron = new ResourceLocation("iron");
         ResourceLocation lead = new ResourceLocation(MODID, "lead");
         ResourceLocation silver = new ResourceLocation(MODID, "silver");
         ResourceLocation tungsten = new ResourceLocation(MODID, "wolfram");
@@ -43,9 +44,9 @@ public class ConfluenceTiers {
         ResourceLocation orichalcum = new ResourceLocation(MODID, "orichalcum");
         ResourceLocation adamantite = new ResourceLocation(MODID, "adamantite");
         ResourceLocation titanium = new ResourceLocation(MODID, "titanium");
-        TierSortingRegistry.registerTier(COPPER, copper, List.of(new ResourceLocation("stone")), List.of(new ResourceLocation("iron")));
+        TierSortingRegistry.registerTier(COPPER, copper, List.of(new ResourceLocation("stone")), List.of(iron));
         TierSortingRegistry.registerTier(TIN, tin, List.of(copper), List.of(lead));
-        TierSortingRegistry.registerTier(LEAD, lead, List.of(tin), List.of(silver));
+        TierSortingRegistry.registerTier(LEAD, lead, List.of(tin, iron), List.of(silver));
         TierSortingRegistry.registerTier(SILVER, silver, List.of(lead), List.of(tungsten));
         TierSortingRegistry.registerTier(TUNGSTEN, tungsten, List.of(silver), List.of(gold));
         TierSortingRegistry.registerTier(GOLD, gold, List.of(tungsten), List.of(platinum));
