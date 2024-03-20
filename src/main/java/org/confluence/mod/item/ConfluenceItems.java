@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.hammer.HammerAxes;
@@ -48,6 +49,7 @@ public class ConfluenceItems {
         ManaWeapons.init();
         TerraPotions.init();
         SpawnEggs.init();
+        Armors.init();
         ITEMS.register(bus);
     }
 }

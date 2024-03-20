@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
@@ -34,31 +33,7 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.building_blocks"))
             .displayItems((parameters, output) -> {
-                output.accept(EBONY_LOG_BLOCKS.PLANKS.get());output.accept(EBONY_LOG_BLOCKS.WOOD.get());output.accept(EBONY_LOG_BLOCKS.STAIRS.get());
-                output.accept(EBONY_LOG_BLOCKS.SLAB.get());output.accept(EBONY_LOG_BLOCKS.DOOR.get());output.accept(EBONY_LOG_BLOCKS.TRAPDOOR.get());
-                output.accept(EBONY_LOG_BLOCKS.BUTTON.get());output.accept(EBONY_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(EBONY_LOG_BLOCKS.SIGN.get());
-                output.accept(EBONY_LOG_BLOCKS.FENCE.get());output.accept(EBONY_LOG_BLOCKS.FENCE_GATE.get());
-
-                output.accept(SHADOW_LOG_BLOCKS.PLANKS.get());output.accept(SHADOW_LOG_BLOCKS.WOOD.get());output.accept(SHADOW_LOG_BLOCKS.STAIRS.get());
-                output.accept(SHADOW_LOG_BLOCKS.SLAB.get());output.accept(SHADOW_LOG_BLOCKS.DOOR.get());output.accept(SHADOW_LOG_BLOCKS.TRAPDOOR.get());
-                output.accept(SHADOW_LOG_BLOCKS.BUTTON.get());output.accept(SHADOW_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(SHADOW_LOG_BLOCKS.SIGN.get());
-                output.accept(SHADOW_LOG_BLOCKS.FENCE.get());output.accept(SHADOW_LOG_BLOCKS.FENCE_GATE.get());
-
-                output.accept(PEARL_LOG_BLOCKS.PLANKS.get());output.accept(PEARL_LOG_BLOCKS.WOOD.get());output.accept(PEARL_LOG_BLOCKS.STAIRS.get());
-                output.accept(PEARL_LOG_BLOCKS.SLAB.get());output.accept(PEARL_LOG_BLOCKS.DOOR.get());output.accept(PEARL_LOG_BLOCKS.TRAPDOOR.get());
-                output.accept(PEARL_LOG_BLOCKS.BUTTON.get());output.accept(PEARL_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(PEARL_LOG_BLOCKS.SIGN.get());
-                output.accept(PEARL_LOG_BLOCKS.FENCE.get());output.accept(PEARL_LOG_BLOCKS.FENCE_GATE.get());
-
-                output.accept(PALM_LOG_BLOCKS.PLANKS.get());output.accept(PALM_LOG_BLOCKS.WOOD.get());output.accept(PALM_LOG_BLOCKS.STAIRS.get());
-                output.accept(PALM_LOG_BLOCKS.SLAB.get());output.accept(PALM_LOG_BLOCKS.DOOR.get());output.accept(PALM_LOG_BLOCKS.TRAPDOOR.get());
-                output.accept(PALM_LOG_BLOCKS.BUTTON.get());output.accept(PALM_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(PALM_LOG_BLOCKS.SIGN.get());
-                output.accept(PALM_LOG_BLOCKS.FENCE.get());output.accept(PALM_LOG_BLOCKS.FENCE_GATE.get());
-
-                output.accept(ASH_LOG_BLOCKS.PLANKS.get());output.accept(ASH_LOG_BLOCKS.WOOD.get());output.accept(ASH_LOG_BLOCKS.STAIRS.get());
-                output.accept(ASH_LOG_BLOCKS.SLAB.get());output.accept(ASH_LOG_BLOCKS.DOOR.get());output.accept(ASH_LOG_BLOCKS.TRAPDOOR.get());
-                output.accept(ASH_LOG_BLOCKS.BUTTON.get());output.accept(ASH_LOG_BLOCKS.PRESSURE_PLATE.get());output.accept(ASH_LOG_BLOCKS.SIGN.get());
-                output.accept(ASH_LOG_BLOCKS.FENCE.get());output.accept(ASH_LOG_BLOCKS.FENCE_GATE.get());
-
+                DecorationLogBlocks.acceptBuilding(output);
                 for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
                     output.accept(decorativeBlocks.get());
                 }
@@ -81,28 +56,26 @@ public class ConfluenceTabs {
                 for (Ores ores : Ores.values()) {
                     output.accept(ores.get());
                 }
-                    output.accept(PALM_LOG_BLOCKS.LOG.get());
-                    output.accept(PALM_LOG_BLOCKS.LEAVES.get());
-                    output.accept(CORRUPTION_GRASS_BLOCKS.get());
-                    output.accept(EBONY_SAND.get());
-                    output.accept(EBONY_STONE.get());
-                    output.accept(EBONY_LOG_BLOCKS.LOG.get());
-                    output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
-                    output.accept(ANOTHER_CRIMSON_GRASS_BLOCKS.get());
-                    output.accept(ANOTHER_CRIMSON_SAND.get());
-                    output.accept(ANOTHER_CRIMSON_STONE.get());
-                    output.accept(SHADOW_LOG_BLOCKS.LOG.get());
-                    output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
-                    output.accept(HALLOW_GRASS_BLOCKS.get());
-                    output.accept(PEARL_SAND.get());
-                    output.accept(PEARL_STONE.get());
-                    output.accept(PEARL_LOG_BLOCKS.LOG.get());
-                    output.accept(PEARL_LOG_BLOCKS.LEAVES.get());
-                    output.accept(ASH_BLOCK.get());
-                    output.accept(ASH_LOG_BLOCKS.LOG.get());
-                    output.accept(ASH_LOG_BLOCKS.LEAVES.get());
-
-
+                output.accept(PALM_LOG_BLOCKS.LOG.get());
+                output.accept(PALM_LOG_BLOCKS.LEAVES.get());
+                output.accept(CORRUPTION_GRASS_BLOCKS.get());
+                output.accept(EBONY_SAND.get());
+                output.accept(EBONY_STONE.get());
+                output.accept(EBONY_LOG_BLOCKS.LOG.get());
+                output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
+                output.accept(ANOTHER_CRIMSON_GRASS_BLOCKS.get());
+                output.accept(ANOTHER_CRIMSON_SAND.get());
+                output.accept(ANOTHER_CRIMSON_STONE.get());
+                output.accept(SHADOW_LOG_BLOCKS.LOG.get());
+                output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
+                output.accept(HALLOW_GRASS_BLOCKS.get());
+                output.accept(PEARL_SAND.get());
+                output.accept(PEARL_STONE.get());
+                output.accept(PEARL_LOG_BLOCKS.LOG.get());
+                output.accept(PEARL_LOG_BLOCKS.LEAVES.get());
+                output.accept(ASH_BLOCK.get());
+                output.accept(ASH_LOG_BLOCKS.LOG.get());
+                output.accept(ASH_LOG_BLOCKS.LEAVES.get());
             })
             .build());
     //材料
@@ -143,7 +116,6 @@ public class ConfluenceTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ConfluenceItems.MAGIC_MIRROR.get());
                 output.accept(ConfluenceItems.ICE_MIRROR.get());
-
                 for (Pickaxes pickaxes : Pickaxes.values()) {
                     output.accept(pickaxes.get());
                 }
