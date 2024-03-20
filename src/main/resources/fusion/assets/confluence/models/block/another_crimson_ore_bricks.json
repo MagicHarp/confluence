@@ -8,6 +8,6 @@
     ],
     "parent": "minecraft:block/cube_all",
     "textures": {
-        "all": "confluence:block/tungesten_ore_ctm"
+        "all": "confluence:block/another_crimson_ore_bricks_ctm"
     }
 }

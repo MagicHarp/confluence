@@ -148,8 +148,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_COPPER_BRICKS.get(), "铜砖块");
         add(ANOTHER_COPPER_PLATE.get(), "铜条板块");
         add(ANOTHER_CRIMSON_ORE_BRICKS.get(), "猩红矿砖");
-        add(ANOTHER_CRIMSON_ROCK_BRICKS.get(), "猩红岩石砖");
-        add(ANOTHER_CRIMSON_STONE_BRICKS.get(), "猩红石砖");
+        add(ANOTHER_CRIMSON_ROCK_BRICKS.get(), "猩红石砖");
         add(ANOTHER_GOLD_BRICKS.get(), "金砖块");
         add(ANOTHER_IRON_BRICKS.get(), "铁砖块");
         add(ANOTHER_STONE_BRICKS.get(), "异域石砖");
@@ -161,7 +160,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ICED_GEL_BLOCK.get(), "冻凝胶块");
         add(LEAD_BRICKS.get(), "铅砖块");
         add(METEORITE_BRICKS.get(), "陨石砖块");
-        add(PEARL_ROCK_BRICKS.get(), "珍珠岩石砖");
+        add(PEARL_ROCK_BRICKS.get(), "珍珠石砖");
         add(PINK_GEL_BLOCK.get(), "粉凝胶块");
         add(PLATINUM_BRICKS.get(), "铂金砖块");
         add(RED_CANDY_BLOCK.get(), "红色糖块");

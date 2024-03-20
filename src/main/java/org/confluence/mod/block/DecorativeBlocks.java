@@ -32,7 +32,6 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     METEORITE_BRICKS("meteorite_bricks", BaseBlock::new),
     ANOTHER_CRIMSON_ORE_BRICKS("another_crimson_ore_bricks", BaseBlock::new),
     ANOTHER_CRIMSON_ROCK_BRICKS("another_crimson_rock_bricks", BaseBlock::new),
-    ANOTHER_CRIMSON_STONE_BRICKS("another_crimson_stone_bricks", BaseBlock::new),
     PEARL_ROCK_BRICKS("pearl_rock_bricks", BaseBlock::new),
     GREEN_CANDY_BLOCK("green_candy_block", BaseBlock::new),
     RED_CANDY_BLOCK("red_candy_block", BaseBlock::new),
