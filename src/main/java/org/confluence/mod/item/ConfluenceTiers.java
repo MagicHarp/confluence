@@ -14,6 +14,7 @@ import java.util.List;
 import static org.confluence.mod.Confluence.MODID;
 
 public class ConfluenceTiers {
+    public static final ForgeTier CACTUS = new ForgeTier(1, 272, 4, 1, 5, BlockTags.FLOWERS, () -> Ingredient.of(Items.CACTUS));
     public static final ForgeTier COPPER = new ForgeTier(1, 250, 4, 1, 5, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ForgeTier TIN = new ForgeTier(1, 270, 4, 1, 5, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Materials.TIN_INGOT.get()));
     public static final ForgeTier LEAD = new ForgeTier(2, 286, 6, 2, 14, BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(Materials.LEAD_INGOT.get()));

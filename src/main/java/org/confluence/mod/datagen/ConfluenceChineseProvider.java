@@ -101,6 +101,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SHADOW_LOG_BLOCKS.LEAVES.get(), "暗影木树叶");
         add(SHADOW_LOG_BLOCKS.FENCE.get(), "暗影木栅栏");
         add(SHADOW_LOG_BLOCKS.FENCE_GATE.get(), "暗影木栅栏门");
+        add(SHADOW_LOG_BLOCKS.PRESSURE_PLATE.get(), "暗影木压力板");
 
         add(PALM_LOG_BLOCKS.BUTTON.get(), "沙漠风情按钮");
         add(PALM_LOG_BLOCKS.PLANKS.get(), "沙漠风情木板");
@@ -113,6 +114,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(PALM_LOG_BLOCKS.LEAVES.get(), "棕榈树叶");
         add(PALM_LOG_BLOCKS.FENCE.get(), "沙漠风情栅栏");
         add(PALM_LOG_BLOCKS.FENCE_GATE.get(), "沙漠风情栅栏门");
+        add(PALM_LOG_BLOCKS.PRESSURE_PLATE.get(), "沙漠风情压力板");
 
         add(ASH_LOG_BLOCKS.BUTTON.get(), "白蜡木按钮");
         add(ASH_LOG_BLOCKS.PLANKS.get(), "白蜡木板");
@@ -125,6 +127,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.LEAVES.get(), "白蜡木树叶");
         add(ASH_LOG_BLOCKS.FENCE.get(), "白蜡木栅栏");
         add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
+        add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
 
 
         add(EBONY_STONE.get(), "黑檀石块");
@@ -215,6 +218,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.ANOTHER_AMETHYST.get(), "紫晶");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.CARRION.get(), "腐肉");
+        add(Materials.CRYSTALLINE_LENS.get(), "晶状体");
         add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
@@ -229,6 +233,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨阔剑");
         add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
         add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
+        add(Swords.COPPER_BOARD_SWORD.get(), "仙人掌剑");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");

@@ -46,6 +46,7 @@ public enum Materials implements EnumRegister<Item> {
 
     FALLING_STAR("falling_star"),
     CARRION("carrion"),
+    CRYSTALLINE_LENS("crystalline_lens"),
     CRYSTAL_SHARDS_ITEM("crystal_shards_item"),
     MANA_STAR("mana_star", ManaStar::new);
 
