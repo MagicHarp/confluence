@@ -34,7 +34,7 @@ public class PlayerUtils {
                 float a = ((float) manaStorage.getMaxMana() / 7) + manaStorage.getRegenerateBonus() + 1;
                 float b = ((float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 0.8F + 0.2F;
                 if (serverPlayer.getDeltaMovement().length() < 0.2) a += (float) manaStorage.getMaxMana() / 2;
-                return Math.round(a * b * 0.0115F);
+                return Math.max(Math.round(a * b * 0.0115F), 1);
             };
 
             if (manaStorage.receiveMana(receive) != -1) {

@@ -4,7 +4,6 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ConfluenceItems;
 import org.confluence.mod.item.ConfluenceTiers;
-import org.confluence.mod.item.pickaxe.BasePickaxeItem;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -15,8 +14,8 @@ public enum Hammers implements EnumRegister<HammerItem> {
     LEAD_HAMMER("lead_hammer", () -> new HammerItem(ConfluenceTiers.LEAD, 3, 1)),
     SILVER_HAMMER("silver_hammer", () -> new HammerItem(ConfluenceTiers.SILVER, 3, 1)),
     WOLFRAM_HAMMER("wolfram_hammer", () -> new HammerItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
+    GOLDEN_HAMMER("golden_hammer", () -> new HammerItem(ConfluenceTiers.GOLD, 5, 1)),
     PLATINUM_HAMMER("platinum_hammer", () -> new HammerItem(ConfluenceTiers.PLATINUM, 5, 1));
-    ;
 
     private final RegistryObject<HammerItem> value;
 

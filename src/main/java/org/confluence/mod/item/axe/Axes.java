@@ -15,6 +15,7 @@ public enum Axes implements EnumRegister<AxeItem> {
     LEAD_AXE("lead_axe", () -> new BaseAxeItem(ConfluenceTiers.LEAD, 3, 1)),
     SILVER_AXE("silver_axe", () -> new BaseAxeItem(ConfluenceTiers.SILVER, 3, 1)),
     WOLFRAM_AXE("wolfram_axe", () -> new BaseAxeItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
+    GOLDEN_AXE("golden_axe", () -> new BaseAxeItem(ConfluenceTiers.GOLD, 5, 1)),
     PLATINUM_AXE("platinum_axe", () -> new BaseAxeItem(ConfluenceTiers.PLATINUM, 5, 1));
 
     private final RegistryObject<AxeItem> value;
