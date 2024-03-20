@@ -32,18 +32,29 @@ public class ConfluenceTiers {
     public static void register() {
         ResourceLocation copper = new ResourceLocation(MODID, "copper");
         ResourceLocation tin = new ResourceLocation(MODID, "tin");
+        ResourceLocation lead = new ResourceLocation(MODID, "lead");
+        ResourceLocation silver = new ResourceLocation(MODID, "silver");
+        ResourceLocation tungsten = new ResourceLocation(MODID, "wolfram");
+        ResourceLocation gold = new ResourceLocation(MODID, "gold");
+        ResourceLocation platinum = new ResourceLocation(MODID, "platinum");
+        ResourceLocation cobalt = new ResourceLocation(MODID, "cobalt");
+        ResourceLocation palladium = new ResourceLocation(MODID, "palladium");
+        ResourceLocation mithril = new ResourceLocation(MODID, "mithril");
+        ResourceLocation orichalcum = new ResourceLocation(MODID, "orichalcum");
+        ResourceLocation adamantite = new ResourceLocation(MODID, "adamantite");
+        ResourceLocation titanium = new ResourceLocation(MODID, "titanium");
         TierSortingRegistry.registerTier(COPPER, copper, List.of(new ResourceLocation("stone")), List.of(new ResourceLocation("iron")));
-        TierSortingRegistry.registerTier(TIN, tin, List.of(), List.of());
-        TierSortingRegistry.registerTier(LEAD, new ResourceLocation(MODID, "lead"), List.of(), List.of());
-        TierSortingRegistry.registerTier(SILVER, new ResourceLocation(MODID, "silver"), List.of(), List.of());
-        TierSortingRegistry.registerTier(TUNGSTEN, new ResourceLocation(MODID, "wolfram"), List.of(), List.of());
-        TierSortingRegistry.registerTier(GOLD, new ResourceLocation(MODID, "gold"), List.of(), List.of());
-        TierSortingRegistry.registerTier(PLATINUM, new ResourceLocation(MODID, "platinum"), List.of(), List.of());
-        TierSortingRegistry.registerTier(COBALT, new ResourceLocation(MODID, "cobalt"), List.of(), List.of());
-        TierSortingRegistry.registerTier(PALLADIUM, new ResourceLocation(MODID, "palladium"), List.of(), List.of());
-        TierSortingRegistry.registerTier(MITHRIL, new ResourceLocation(MODID, "mithril"), List.of(), List.of());
-        TierSortingRegistry.registerTier(ORICHALCUM, new ResourceLocation(MODID, "orichalcum"), List.of(), List.of());
-        TierSortingRegistry.registerTier(ADAMANTITE, new ResourceLocation(MODID, "adamantite"), List.of(), List.of());
-        TierSortingRegistry.registerTier(TITANIUM, new ResourceLocation(MODID, "titanium"), List.of(), List.of());
+        TierSortingRegistry.registerTier(TIN, tin, List.of(copper), List.of(lead));
+        TierSortingRegistry.registerTier(LEAD, lead, List.of(tin), List.of(silver));
+        TierSortingRegistry.registerTier(SILVER, silver, List.of(lead), List.of(tungsten));
+        TierSortingRegistry.registerTier(TUNGSTEN, tungsten, List.of(silver), List.of(gold));
+        TierSortingRegistry.registerTier(GOLD, gold, List.of(tungsten), List.of(platinum));
+        TierSortingRegistry.registerTier(PLATINUM, platinum, List.of(gold), List.of(cobalt));
+        TierSortingRegistry.registerTier(COBALT, cobalt, List.of(platinum), List.of(palladium));
+        TierSortingRegistry.registerTier(PALLADIUM, palladium, List.of(cobalt), List.of(mithril));
+        TierSortingRegistry.registerTier(MITHRIL, mithril, List.of(palladium), List.of(orichalcum));
+        TierSortingRegistry.registerTier(ORICHALCUM, orichalcum, List.of(mithril), List.of(adamantite));
+        TierSortingRegistry.registerTier(ADAMANTITE, adamantite, List.of(orichalcum), List.of(titanium));
+        TierSortingRegistry.registerTier(TITANIUM, titanium, List.of(adamantite), List.of());
     }
 }
