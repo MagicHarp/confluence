@@ -11,6 +11,7 @@ import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
+import org.confluence.mod.item.sword.LightSaber;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
@@ -68,6 +69,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
         add(EBONY_LOG_BLOCKS.PLANKS.get(), "乌木板");
         add(EBONY_LOG_BLOCKS.LOG.get(), "乌木原木");
+        add(EBONY_LOG_BLOCKS.STRIPPED_LOG.get(), "乌木去皮原木");
+        add(EBONY_LOG_BLOCKS.STRIPPED_WOOD.get(), "乌木去皮木");
         add(EBONY_LOG_BLOCKS.DOOR.get(), "乌木门");
         add(EBONY_LOG_BLOCKS.SIGN.get(), "乌木告示牌");
         add(EBONY_LOG_BLOCKS.STAIRS.get(), "乌木楼梯");
@@ -82,6 +85,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(PEARL_LOG_BLOCKS.BUTTON.get(), "珍珠木按钮");
         add(PEARL_LOG_BLOCKS.PLANKS.get(), "珍珠木板");
         add(PEARL_LOG_BLOCKS.LOG.get(), "珍珠木原木");
+        add(PEARL_LOG_BLOCKS.STRIPPED_LOG.get(), "珍珠木去皮原木");
+        add(PEARL_LOG_BLOCKS.STRIPPED_WOOD.get(), "珍珠木去皮木");
         add(PEARL_LOG_BLOCKS.DOOR.get(), "珍珠木门");
         add(PEARL_LOG_BLOCKS.SIGN.get(), "珍珠木告示牌");
         add(PEARL_LOG_BLOCKS.STAIRS.get(), "珍珠木楼梯");
@@ -96,6 +101,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SHADOW_LOG_BLOCKS.BUTTON.get(), "暗影木按钮");
         add(SHADOW_LOG_BLOCKS.PLANKS.get(), "暗影木板");
         add(SHADOW_LOG_BLOCKS.LOG.get(), "暗影木原木");
+        add(SHADOW_LOG_BLOCKS.STRIPPED_LOG.get(), "暗影木去皮原木");
+        add(SHADOW_LOG_BLOCKS.STRIPPED_WOOD.get(), "暗影木去皮木");
         add(SHADOW_LOG_BLOCKS.DOOR.get(), "暗影木门");
         add(SHADOW_LOG_BLOCKS.SIGN.get(), "暗影木告示牌");
         add(SHADOW_LOG_BLOCKS.STAIRS.get(), "暗影木楼梯");
@@ -114,6 +121,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(PALM_LOG_BLOCKS.STAIRS.get(), "沙漠风情楼梯");
         add(PALM_LOG_BLOCKS.SLAB.get(), "沙漠风情台阶");
         add(PALM_LOG_BLOCKS.WOOD.get(), "棕榈木");
+        add(PALM_LOG_BLOCKS.STRIPPED_LOG.get(), "棕榈去皮原木");
+        add(PALM_LOG_BLOCKS.STRIPPED_WOOD.get(), "棕榈去皮木");
         add(PALM_LOG_BLOCKS.LEAVES.get(), "棕榈树叶");
         add(PALM_LOG_BLOCKS.FENCE.get(), "沙漠风情栅栏");
         add(PALM_LOG_BLOCKS.FENCE_GATE.get(), "沙漠风情栅栏门");
@@ -122,6 +131,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.BUTTON.get(), "白蜡木按钮");
         add(ASH_LOG_BLOCKS.PLANKS.get(), "白蜡木板");
         add(ASH_LOG_BLOCKS.LOG.get(), "白蜡木原木");
+        add(ASH_LOG_BLOCKS.STRIPPED_LOG.get(), "白蜡木去皮原木");
+        add(ASH_LOG_BLOCKS.STRIPPED_WOOD.get(), "白蜡木去皮木");
         add(ASH_LOG_BLOCKS.DOOR.get(), "白蜡木门");
         add(ASH_LOG_BLOCKS.SIGN.get(), "白蜡木告示牌");
         add(ASH_LOG_BLOCKS.STAIRS.get(), "白蜡木楼梯");
@@ -308,6 +319,15 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(),"热带史莱姆刷怪蛋");
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(),"夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(),"岩浆史莱姆刷怪蛋");
+        //光剑
+        add(Swords.RED_LIGHT_SABER.get(),"陨石红光剑");
+        add(Swords.ORANGE_LIGHT_SABER.get(),"陨石橙光剑");
+        add(Swords.YELLOW_LIGHT_SABER.get(),"陨石黄光剑");
+        add(Swords.GREEN_LIGHT_SABER.get(),"陨石绿光剑");
+        add(Swords.BLUE_LIGHT_SABER.get(),"陨石蓝光剑");
+        add(Swords.PURPLE_LIGHT_SABER.get(),"陨石紫光剑");
+        add(Swords.WHITE_LIGHT_SABER.get(),"陨石白光剑");
+
         //endregion items
     }
 }
