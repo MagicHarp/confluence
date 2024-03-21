@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.common.EchoBlock;
+import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.client.ClientPacketHandler;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

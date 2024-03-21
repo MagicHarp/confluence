@@ -26,7 +26,6 @@ public class ActuatorsBlockRenderer implements BlockEntityRenderer<ActuatorsBloc
     @Override
     public void render(@NotNull ActuatorsBlockEntity actuatorsBlockEntity, float delta, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int light, int packedOverlay) {
         poseStack.pushPose();
-        poseStack.translate(0.5, 0.5, 0.5);
         BakedModel model = dispatcher.getBlockModel(actuatorsBlockEntity.getContain());
         renderer.renderModel(poseStack.last(), multiBufferSource.getBuffer(RenderType.translucent()), null, model, 1.0F, 1.0F, 1.0F, light, packedOverlay, ModelData.EMPTY, null);
         poseStack.popPose();
