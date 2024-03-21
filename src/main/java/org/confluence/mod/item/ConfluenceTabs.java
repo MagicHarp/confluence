@@ -12,9 +12,9 @@ import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.common.Materials;
-import org.confluence.mod.item.common.SlimeBalls;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
@@ -41,9 +41,7 @@ public class ConfluenceTabs {
                 output.accept(BIG_RUBY_BLOCK.get());
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());
-                output.accept(BIG_ANOTHER_EMERALD_BLOCK.get());
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
-                output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
 
@@ -59,17 +57,17 @@ public class ConfluenceTabs {
                 }
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
-                output.accept(CORRUPTION_GRASS_BLOCKS.get());
+                output.accept(CORRUPT_GRASS_BLOCK.get());
                 output.accept(EBONY_SAND.get());
                 output.accept(EBONY_STONE.get());
                 output.accept(EBONY_LOG_BLOCKS.LOG.get());
                 output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
-                output.accept(ANOTHER_CRIMSON_GRASS_BLOCKS.get());
+                output.accept(ANOTHER_CRIMSON_GRASS_BLOCK.get());
                 output.accept(ANOTHER_CRIMSON_SAND.get());
                 output.accept(ANOTHER_CRIMSON_STONE.get());
                 output.accept(SHADOW_LOG_BLOCKS.LOG.get());
                 output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
-                output.accept(HALLOW_GRASS_BLOCKS.get());
+                output.accept(HALLOW_GRASS_BLOCK.get());
                 output.accept(PEARL_SAND.get());
                 output.accept(PEARL_STONE.get());
                 output.accept(PEARL_LOG_BLOCKS.LOG.get());
@@ -87,8 +85,8 @@ public class ConfluenceTabs {
                 for (Materials materials : Materials.values()) {
                     output.accept(materials.get());
                 }
-                for (SlimeBalls slimeBalls : SlimeBalls.values()) {
-                    output.accept(slimeBalls.get());
+                for (Gels gels : Gels.values()) {
+                    output.accept(gels.get());
                 }
             })
             .build());

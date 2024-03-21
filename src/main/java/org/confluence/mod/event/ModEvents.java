@@ -33,7 +33,7 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
-        Confluence.GAME_PHASE = GameRules.register("terraGamePhase", GameRules.Category.UPDATES, GameRules.IntegerValue.create(8));
+        Confluence.GAME_PHASE = GameRules.register("terraGamePhase", GameRules.Category.UPDATES, GameRules.IntegerValue.create(6));
 
         NetworkHandler.register();
     }

@@ -21,7 +21,7 @@ import org.confluence.mod.client.renderer.entity.BulletRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ConfluenceEntities;
-import org.confluence.mod.item.common.SlimeBalls;
+import org.confluence.mod.item.common.Gels;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -77,9 +77,10 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.BLUE_SLIME_BALL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_PINK_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.PINK_SLIME_BALL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_HONEY_SLIME.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(SlimeBalls.HONEY_SLIME_BALL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.BLUE_GEL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_PINK_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.PINK_GEL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_HONEY_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.HONEY_GEL.get()));
+        event.registerSpecial(ConfluenceParticles.ITEM_FROZEN_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.FROZEN_GEL.get()));
 
         event.registerSpriteSet(ConfluenceParticles.RUBY_BULLET.get(), BulletParticle.Provider::new);
     }

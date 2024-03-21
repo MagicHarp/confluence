@@ -5,13 +5,12 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
-import org.confluence.mod.item.common.SlimeBalls;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
-import org.confluence.mod.item.sword.LightSaber;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
@@ -146,20 +145,18 @@ public class ConfluenceChineseProvider extends LanguageProvider {
 
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");
-        add(CORRUPTION_GRASS_BLOCKS.get(), "腐化草方块");
+        add(CORRUPT_GRASS_BLOCK.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
         add(PEARL_SAND.get(), "珍珠沙块");
-        add(HALLOW_GRASS_BLOCKS.get(), "神圣草方块");
+        add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
-        add(ANOTHER_CRIMSON_GRASS_BLOCKS.get(), "猩红草方块");
+        add(ANOTHER_CRIMSON_GRASS_BLOCK.get(), "猩红草方块");
         add(ASH_BLOCK.get(), "灰烬块");
         add(BIG_RUBY_BLOCK.get(), "大红玉块");
         add(BIG_AMBER_BLOCK.get(), "大琥珀块");
         add(BIG_TOPAZ_BLOCK.get(), "大黄玉块");
-        add(BIG_ANOTHER_EMERALD_BLOCK.get(), "大翡翠块");
         add(BIG_SAPPHIRE_BLOCK.get(), "大蓝玉块");
-        add(BIG_ANOTHER_AMETHYST_BLOCK.get(), "大紫晶块");
         add(ANOTHER_POLISHED_GRANITE.get(), "异域花岗岩块");
         add(POLISHED_MARBLE.get(), "异域大理石块");
         add(ANOTHER_COPPER_BRICKS.get(), "铜砖块");
@@ -174,7 +171,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(BLUE_GEL_BLOCK.get(), "凝胶块");
         add(GREEN_CANDY_BLOCK.get(), "绿色糖块");
         add(ICE_BRICKS.get(), "冰砖块");
-        add(ICED_GEL_BLOCK.get(), "冻凝胶块");
+        add(FROZEN_GEL_BLOCK.get(), "冻凝胶块");
         add(LEAD_BRICKS.get(), "铅砖块");
         add(METEORITE_BRICKS.get(), "陨石砖块");
         add(PEARL_ROCK_BRICKS.get(), "珍珠石砖");
@@ -186,7 +183,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(SUN_PLATE.get(), "日盘块");
         add(TIN_BRICKS.get(), "锡砖块");
         add(TIN_PLATE.get(), "锡条板块");
-        add(WOLFRAM_BRICKS.get(), "钨砖块");
+        add(TUNGSTEN_BRICKS.get(), "钨砖块");
         add(ANOTHER_LAVA_BEAM.get(), "异域熔岩梁");
         add(ANOTHER_LAVA_BRICKS.get(), "异域熔岩砖块");
         add(ANOTHER_OBSIDIAN_BEAM.get(), "异域黑曜石梁");
@@ -243,8 +240,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Swords.LEAD_BOARD_SWORD.get(), "铅阔剑");
         add(Swords.SILVER_SHORT_SWORD.get(), "银短剑");
         add(Swords.SILVER_BOARD_SWORD.get(), "银阔剑");
-        add(Swords.WOLFRAM_SHORT_SWORD.get(), "钨短剑");
-        add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨阔剑");
+        add(Swords.TUNGSTEN_SHORT_SWORD.get(), "钨短剑");
+        add(Swords.TUNGSTEN_BOARD_SWORD.get(), "钨阔剑");
         add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
         add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
@@ -253,27 +250,27 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Axes.TIN_AXE.get(), "锡斧");
         add(Axes.LEAD_AXE.get(), "铅斧");
         add(Axes.SILVER_AXE.get(), "银斧");
-        add(Axes.WOLFRAM_AXE.get(), "钨斧");
+        add(Axes.TUNGSTEN_AXE.get(), "钨斧");
         add(Axes.PLATINUM_AXE.get(), "铂金斧");
 
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
         add(Pickaxes.TIN_PICKAXE.get(), "锡镐");
         add(Pickaxes.LEAD_PICKAXE.get(), "铅镐");
         add(Pickaxes.SILVER_PICKAXE.get(), "银镐");
-        add(Pickaxes.WOLFRAM_PICKAXE.get(), "钨镐");
+        add(Pickaxes.TUNGSTEN_PICKAXE.get(), "钨镐");
         add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
         /* Hammers */
         add(Hammers. COPPER_HAMMER.get(), "铜锤");
         add(Hammers. TIN_HAMMER.get(), "锡锤");
         add(Hammers. LEAD_HAMMER.get(), "铅锤");
         add(Hammers. SILVER_HAMMER.get(), "银锤");
-        add(Hammers. WOLFRAM_HAMMER.get(), "钨锤");
+        add(Hammers. TUNGSTEN_HAMMER.get(), "钨锤");
         add(Hammers. PLATINUM_HAMMER.get(), "铂金锤");
 
         /* HammerAxes */
-        add(SlimeBalls.BLUE_SLIME_BALL.get(), "蓝色粘液球");
-        add(SlimeBalls.PINK_SLIME_BALL.get(), "粉色粘液球");
-        add(SlimeBalls.HONEY_SLIME_BALL.get(), "蜂蜜粘液球");
+        add(Gels.BLUE_GEL.get(), "蓝色粘液球");
+        add(Gels.PINK_GEL.get(), "粉色粘液球");
+        add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
 
         add(APPLE_JUICE.get(), "苹果汁");
         add(BLACKCURRANT.get(), "黑醋栗");

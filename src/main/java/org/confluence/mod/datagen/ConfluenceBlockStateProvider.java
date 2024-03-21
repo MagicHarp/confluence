@@ -9,6 +9,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.WoodSetType;
+import org.confluence.mod.block.natural.SpreadingGrassBlock;
 
 import java.util.Arrays;
 
@@ -59,10 +60,14 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                 } else if (value instanceof TrapDoorBlock trapDoorBlock) {
                     trapdoorBlock(trapDoorBlock, new ResourceLocation(MODID, "block/" + path), true);
                 } else if (value instanceof DoorBlock doorBlock) {
-                    doorBlock(doorBlock, new ResourceLocation(MODID, "block/" + path + "_bottom"), top(path));
+                    doorBlock(doorBlock, bottom(path), top(path));
                 } else if (value instanceof ICubeTop) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
-                        .cubeTop(path, new ResourceLocation(MODID, "block/" + path + "_side"), top(path)));
+                        .cubeTop(path, side(path), top(path)));
+                    getVariantBuilder(value).partialState().setModels(configuredModel);
+                } else if (value instanceof ICubeBottomTop) {
+                    ConfiguredModel configuredModel = new ConfiguredModel(models()
+                        .cubeBottomTop(path, side(path), value instanceof SpreadingGrassBlock ? new ResourceLocation("block/dirt") : bottom(path), top(path)));
                     getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else if (value instanceof LeavesBlock) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
@@ -93,6 +98,14 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
             return new ResourceLocation(MODID, "block/" + path.replace(regex, "_planks"));
         }
         return new ResourceLocation(MODID, "block/" + path.replace(regex, ""));
+    }
+
+    private static ResourceLocation side(String path) {
+        return new ResourceLocation(MODID, "block/" + path + "_side");
+    }
+
+    private static ResourceLocation bottom(String path) {
+        return new ResourceLocation(MODID, "block/" + path + "_bottom");
     }
 
     private static ResourceLocation top(String path) {

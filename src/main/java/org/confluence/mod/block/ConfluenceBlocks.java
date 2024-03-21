@@ -3,8 +3,6 @@ package org.confluence.mod.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,6 +14,10 @@ import org.confluence.mod.block.common.BaseBlock;
 import org.confluence.mod.block.common.EchoBlock;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
+import org.confluence.mod.block.natural.ISpreadable;
+import org.confluence.mod.block.natural.SpreadingBlock;
+import org.confluence.mod.block.natural.SpreadingGrassBlock;
+import org.confluence.mod.block.natural.SpreadingSandBlock;
 import org.confluence.mod.item.ConfluenceItems;
 
 import java.util.function.Supplier;
@@ -30,21 +32,19 @@ public class ConfluenceBlocks {
     //region registries
     //  ebony
     public static final DecorationLogBlocks EBONY_LOG_BLOCKS = new DecorationLogBlocks("ebony", EBONY);
-    public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", BaseBlock::new);
-    public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SandBlock(0x372B4B, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> CORRUPTION_GRASS_BLOCKS = registerWithItem("corruption_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
-    //  holy
+    public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CORRUPT, 0x372B4B, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> CORRUPT_GRASS_BLOCK = registerWithItem("corrupt_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    //  hallow
     public static final DecorationLogBlocks PEARL_LOG_BLOCKS = new DecorationLogBlocks("pearl", PEARL);
-    public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", BaseBlock::new);
-    public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SandBlock(0xEDD5F6, BlockBehaviour.Properties.of()));
-
-    public static final RegistryObject<Block> HALLOW_GRASS_BLOCKS = registerWithItem("hallow_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SpreadingSandBlock(ISpreadable.Type.HALLOW, 0xEDD5F6, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> HALLOW_GRASS_BLOCK = registerWithItem("hallow_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     //  crimson
     public static final DecorationLogBlocks SHADOW_LOG_BLOCKS = new DecorationLogBlocks("shadow", SHADOW);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", BaseBlock::new);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SandBlock(0x5313E0, BlockBehaviour.Properties.of()));
-
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCKS = registerWithItem("another_crimson_grass_blocks", () -> new GrassBlock(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CRIMSON, 0x5313E0, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCK = registerWithItem("another_crimson_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     //  desert
     public static final DecorationLogBlocks PALM_LOG_BLOCKS = new DecorationLogBlocks("palm", PALM);
     //  ash
@@ -54,9 +54,7 @@ public class ConfluenceBlocks {
     public static final RegistryObject<Block> BIG_RUBY_BLOCK = registerWithItem("big_ruby_block", BaseBlock::new);
     public static final RegistryObject<Block> BIG_AMBER_BLOCK = registerWithItem("big_amber_block", BaseBlock::new);
     public static final RegistryObject<Block> BIG_TOPAZ_BLOCK = registerWithItem("big_topaz_block", BaseBlock::new);
-    public static final RegistryObject<Block> BIG_ANOTHER_EMERALD_BLOCK = registerWithItem("big_another_emerald_block", BaseBlock::new);
     public static final RegistryObject<Block> BIG_SAPPHIRE_BLOCK = registerWithItem("big_sapphire_block", BaseBlock::new);
-    public static final RegistryObject<Block> BIG_ANOTHER_AMETHYST_BLOCK = registerWithItem("big_another_amethyst_block", BaseBlock::new);
     //  other environmental stones
     public static final RegistryObject<Block> ANOTHER_POLISHED_GRANITE = registerWithItem("another_polished_granite", BaseBlock::new);
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);

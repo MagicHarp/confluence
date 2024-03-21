@@ -13,7 +13,7 @@ public enum Hammers implements EnumRegister<HammerItem> {
     TIN_HAMMER("tin_hammer", () -> new HammerItem(ConfluenceTiers.TIN, 2, 1)),
     LEAD_HAMMER("lead_hammer", () -> new HammerItem(ConfluenceTiers.LEAD, 3, 1)),
     SILVER_HAMMER("silver_hammer", () -> new HammerItem(ConfluenceTiers.SILVER, 3, 1)),
-    WOLFRAM_HAMMER("wolfram_hammer", () -> new HammerItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
+    TUNGSTEN_HAMMER("tungsten_hammer", () -> new HammerItem(ConfluenceTiers.TUNGSTEN, 4, 1)),
     GOLDEN_HAMMER("golden_hammer", () -> new HammerItem(ConfluenceTiers.GOLD, 5, 1)),
     PLATINUM_HAMMER("platinum_hammer", () -> new HammerItem(ConfluenceTiers.PLATINUM, 5, 1));
 

@@ -23,6 +23,7 @@ public class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Gson GSON = new Gson();
+    // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
     public static GameRules.Key<GameRules.IntegerValue> GAME_PHASE;
 
     public Confluence() {

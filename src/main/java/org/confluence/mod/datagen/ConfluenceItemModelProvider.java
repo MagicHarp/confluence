@@ -8,6 +8,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -50,7 +51,11 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;
-                    withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
+                    if (block instanceof DoorBlock) {
+                        withExistingParent(path, new ResourceLocation(MODID, "item/" + path));
+                    } else {
+                        withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
+                    }
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                     if (value instanceof Image32x i32) {

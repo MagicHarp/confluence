@@ -45,7 +45,7 @@ public class ConfluenceItems {
         Pickaxes.init();
         Hammers.init();
         HammerAxes.init();
-        SlimeBalls.init();
+        Gels.init();
         ManaWeapons.init();
         TerraPotions.init();
         SpawnEggs.init();

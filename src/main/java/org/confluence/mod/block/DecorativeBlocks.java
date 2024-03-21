@@ -24,7 +24,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_IRON_BRICKS("another_iron_bricks", BaseBlock::new),
     LEAD_BRICKS("lead_bricks", BaseBlock::new),
     SILVER_BRICKS("silver_bricks", BaseBlock::new),
-    WOLFRAM_BRICKS("wolfram_bricks", BaseBlock::new),
+    TUNGSTEN_BRICKS("tungsten_bricks", BaseBlock::new),
     ANOTHER_GOLD_BRICKS("another_gold_bricks", BaseBlock::new),
     PLATINUM_BRICKS("platinum_bricks", BaseBlock::new),
     EVIL_ORE_BRICKS("evil_ore_bricks", BaseBlock::new),
@@ -35,7 +35,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     PEARL_ROCK_BRICKS("pearl_rock_bricks", BaseBlock::new),
     GREEN_CANDY_BLOCK("green_candy_block", BaseBlock::new),
     RED_CANDY_BLOCK("red_candy_block", BaseBlock::new),
-    ICED_GEL_BLOCK("iced_gel_block", BaseBlock::new),
+    FROZEN_GEL_BLOCK("frozen_gel_block", BaseBlock::new),
     BLUE_GEL_BLOCK("blue_gel_block", BaseBlock::new),
     PINK_GEL_BLOCK("pink_gel_block", BaseBlock::new),
     SUN_PLATE("sun_plate", BaseBlock::new),
@@ -47,7 +47,6 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_OBSIDIAN_SMALL_BRICKS("another_obsidian_small_bricks", BaseBlock::new),
     ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
-
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 
     private final RegistryObject<Block> value;

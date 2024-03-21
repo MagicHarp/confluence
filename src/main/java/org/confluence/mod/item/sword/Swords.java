@@ -14,7 +14,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     TIN_SHORT_SWORD("tin_short_sword", () -> new ShortSwordItem(ConfluenceTiers.TIN, 3, 3)),
     LEAD_SHORT_SWORD("lead_short_sword", () -> new ShortSwordItem(ConfluenceTiers.LEAD, 3, 3)),
     SILVER_SHORT_SWORD("silver_short_sword", () -> new ShortSwordItem(ConfluenceTiers.SILVER, 4, 3)),
-    WOLFRAM_SHORT_SWORD("wolfram_short_sword", () -> new ShortSwordItem(ConfluenceTiers.TUNGSTEN, 4, 3)),
+    TUNGSTEN_SHORT_SWORD("tungsten_short_sword", () -> new ShortSwordItem(ConfluenceTiers.TUNGSTEN, 4, 3)),
     GOLDEN_SHORT_SWORD("golden_short_sword", () -> new ShortSwordItem(ConfluenceTiers.GOLD, 5, 3)),
     PLATINUM_SHORT_SWORD("platinum_short_sword", () -> new ShortSwordItem(ConfluenceTiers.PLATINUM, 5, 3)),
 
@@ -23,7 +23,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     TIN_BOARD_SWORD("tin_board_sword", () -> new BoardSwordItem(ConfluenceTiers.TIN, 4, 1.6F)),
     LEAD_BOARD_SWORD("lead_board_sword", () -> new BoardSwordItem(ConfluenceTiers.LEAD, 5, 1.6F)),
     SILVER_BOARD_SWORD("silver_board_sword", () -> new BoardSwordItem(ConfluenceTiers.SILVER, 5, 1.6F)),
-    WOLFRAM_BOARD_SWORD("wolfram_board_sword", () -> new BoardSwordItem(ConfluenceTiers.TUNGSTEN, 6, 1.6F)),
+    TUNGSTEN_BOARD_SWORD("tungsten_board_sword", () -> new BoardSwordItem(ConfluenceTiers.TUNGSTEN, 6, 1.6F)),
     GOLDEN_BOARD_SWORD("golden_board_sword", () -> new BoardSwordItem(ConfluenceTiers.GOLD, 7, 1.6F)),
     PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ConfluenceTiers.PLATINUM, 7, 1.6F)),
 
