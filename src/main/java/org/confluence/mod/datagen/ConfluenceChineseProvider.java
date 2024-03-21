@@ -166,8 +166,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_GOLD_BRICKS.get(), "金砖块");
         add(ANOTHER_IRON_BRICKS.get(), "铁砖块");
         add(ANOTHER_STONE_BRICKS.get(), "异域石砖");
-        add(EVIL_ORE_BRICKS.get(), "魔矿砖");
-        add(EVIL_ROCK_BRICKS.get(), "魔矿石砖");
+        add(EBONY_ORE_BRICKS.get(), "魔矿砖");
+        add(EBONY_ROCK_BRICKS.get(), "魔矿石砖");
         add(BLUE_GEL_BLOCK.get(), "凝胶块");
         add(GREEN_CANDY_BLOCK.get(), "绿色糖块");
         add(ICE_BRICKS.get(), "冰砖块");
