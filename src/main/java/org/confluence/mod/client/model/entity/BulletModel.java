@@ -12,7 +12,16 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.bullet.BaseBulletEntity;
 
 public class BulletModel extends EntityModel<BaseBulletEntity> {
+	public static final ModelLayerLocation AMBER_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/amber_bullet"), "main");
+	public static final ModelLayerLocation AMETHYST_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/amethyst_bullet"), "main");
+	public static final ModelLayerLocation DIAMOND_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/diamond_bullet"), "main");
+	public static final ModelLayerLocation EMERALD_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/emerald_bullet"), "main");
+	public static final ModelLayerLocation FROST_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/frost_bullet"), "main");
 	public static final ModelLayerLocation RUBY_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/ruby_bullet"), "main");
+	public static final ModelLayerLocation SAPPHIRE_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/sapphire_bullet"), "main");
+	public static final ModelLayerLocation SPARK_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/spark_bullet"), "main");
+	public static final ModelLayerLocation TOPAZ_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/topaz_bullet"), "main");
+
 	private final ModelPart root;
 
 	public BulletModel(ModelPart root) {

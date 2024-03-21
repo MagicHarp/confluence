@@ -10,6 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.common.Materials;
@@ -28,7 +29,7 @@ import static org.confluence.mod.block.ConfluenceBlocks.*;
 public class ConfluenceTabs {
     public static final DeferredRegister<CreativeModeTab> TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
-    //建筑方块
+    // 建筑方块
     public static final RegistryObject<CreativeModeTab> BUILDING_BLOCKS = TABS.register("building_blocks",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.building_blocks"))
@@ -48,7 +49,7 @@ public class ConfluenceTabs {
 
             })
             .build());
-    //自然方块
+    // 自然方块
     public static final RegistryObject<CreativeModeTab> NATURAL_BLOCKS = TABS.register("natural_blocks",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.NATURE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.natural_blocks"))
@@ -78,7 +79,7 @@ public class ConfluenceTabs {
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
             })
             .build());
-    //材料
+    // 材料
     public static final RegistryObject<CreativeModeTab> MATERIALS = TABS.register("materials",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ITEM_ICON.get()))
             .title(Component.translatable("creativetab.confluence.materials"))
@@ -91,7 +92,7 @@ public class ConfluenceTabs {
                 }
             })
             .build());
-    //创造者物品栏
+    // 创造者物品栏
     public static final RegistryObject<CreativeModeTab> CREATIVES = TABS.register("creatives",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.CREATIVE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.creatives"))
@@ -99,7 +100,7 @@ public class ConfluenceTabs {
 
             })
             .build());
-    //生物
+    // 生物
     public static final RegistryObject<CreativeModeTab> CREATURES = TABS.register("creatures",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ENEMY_ICON.get()))
             .title(Component.translatable("creativetab.confluence.creatures"))
@@ -109,7 +110,7 @@ public class ConfluenceTabs {
                 }
             })
             .build());
-    //工具
+    // 工具
     public static final RegistryObject<CreativeModeTab> TOOLS = TABS.register("tools",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.tools"))
@@ -131,7 +132,7 @@ public class ConfluenceTabs {
             })
             .build());
 
-    //战士武器
+    // 战士武器
     public static final RegistryObject<CreativeModeTab> WARRIORS = TABS.register("warriors",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MELEE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.warriors"))
@@ -141,7 +142,7 @@ public class ConfluenceTabs {
                 }
             })
             .build());
-    //射手武器
+    // 射手武器
     public static final RegistryObject<CreativeModeTab> SHOOTERS = TABS.register("shooters",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.REMOTE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.shooters"))
@@ -149,7 +150,7 @@ public class ConfluenceTabs {
 
             })
             .build());
-    //法师武器
+    // 法师武器
     public static final RegistryObject<CreativeModeTab> MAGES = TABS.register("mages",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MAGIC_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mages"))
@@ -159,7 +160,7 @@ public class ConfluenceTabs {
                 }
             })
             .build());
-    //召唤武器
+    // 召唤武器
     public static final RegistryObject<CreativeModeTab> SUMMONERS = TABS.register("summoners",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.SUMMON_ICON.get()))
             .title(Component.translatable("creativetab.confluence.summoners"))
@@ -167,13 +168,23 @@ public class ConfluenceTabs {
 
             })
             .build());
-    //食物与药水
+    // 食物与药水
     public static final RegistryObject<CreativeModeTab> FOOD_AND_POTIONS = TABS.register("food_and_potions",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.POTION_ICON.get()))
             .title(Component.translatable("creativetab.confluence.food_and_potions"))
             .displayItems((parameters, output) -> {
                 for (TerraPotions terraPotions : TerraPotions.values()) {
                     output.accept(terraPotions.get());
+                }
+            })
+            .build());
+    // 盔甲
+    public static final RegistryObject<CreativeModeTab> ARMORS = TABS.register("armors",
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ARMOR_ICON.get()))
+            .title(Component.translatable("creativetab.confluence.armors"))
+            .displayItems((parameters, output) -> {
+                for (Armors armors : Armors.values()) {
+                    output.accept(armors.get());
                 }
             })
             .build());

@@ -33,7 +33,15 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(BulletModel.AMBER_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.AMETHYST_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.DIAMOND_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.EMERALD_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.FROST_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.RUBY_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.SAPPHIRE_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.SPARK_LAYER, BulletModel::createBodyLayer);
+        event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -54,7 +62,15 @@ public class ConfluenceClient {
         event.registerEntityRenderer(ConfluenceEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
         event.registerEntityRenderer(ConfluenceEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
+        event.registerEntityRenderer(ConfluenceEntities.AMBER_BULLET.get(), c -> new BulletRenderer(c, "amber"));
+        event.registerEntityRenderer(ConfluenceEntities.AMETHYST_BULLET.get(), c -> new BulletRenderer(c, "amethyst"));
+        event.registerEntityRenderer(ConfluenceEntities.DIAMOND_BULLET.get(), c -> new BulletRenderer(c, "diamond"));
+        event.registerEntityRenderer(ConfluenceEntities.EMERALD_BULLET.get(), c -> new BulletRenderer(c, "emerald"));
+        event.registerEntityRenderer(ConfluenceEntities.FROST_BULLET.get(), c -> new BulletRenderer(c, "frost"));
         event.registerEntityRenderer(ConfluenceEntities.RUBY_BULLET.get(), c -> new BulletRenderer(c, "ruby"));
+        event.registerEntityRenderer(ConfluenceEntities.SAPPHIRE_BULLET.get(), c -> new BulletRenderer(c, "sapphire"));
+        event.registerEntityRenderer(ConfluenceEntities.SPARK_BULLET.get(), c -> new BulletRenderer(c, "spark"));
+        event.registerEntityRenderer(ConfluenceEntities.TOPAZ_BULLET.get(), c -> new BulletRenderer(c, "topaz"));
 
         event.registerBlockEntityRenderer(ConfluenceBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

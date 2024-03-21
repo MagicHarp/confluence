@@ -1,6 +1,8 @@
 package org.confluence.mod.event;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -9,19 +11,20 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ConfluenceEffects;
+import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
@@ -41,11 +44,21 @@ public class ForgeEvents {
         }
     }
 
-    public static Random RANDOM;
+    public static final Random RANDOM = new Random();
 
     @SubscribeEvent
-    public static void beforeServerStarting(ServerAboutToStartEvent event) {
-        RANDOM = new Random(event.getServer().getWorldData().worldGenOptions().seed());
+    public static void levelTick(TickEvent.LevelTickEvent event) {
+        if (event.side == LogicalSide.CLIENT || event.phase == TickEvent.Phase.START) return;
+
+        ServerLevel serverLevel = (ServerLevel) event.level;
+        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.isNight() && serverLevel.getGameTime() % 600 == 0) {
+            for(ServerPlayer serverPlayer : serverLevel.players()) {
+                BlockPos pos = serverPlayer.getOnPos().multiply(RANDOM.nextInt(serverLevel.getServer().getScaledTrackingDistance(1)));
+                if(serverLevel.isLoaded(pos)) {
+                    serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos));
+                }
+            }
+        }
     }
 
     @SubscribeEvent

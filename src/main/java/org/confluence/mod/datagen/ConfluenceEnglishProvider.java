@@ -31,8 +31,11 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.summoners", "Confluence | Summoners");
         add("creativetab.confluence.creatives", "Confluence | Creatives");
         add("creativetab.confluence.food_and_potions", "Confluence | Food & Potions");
+        add("creativetab.confluence.armors", "Confluence | Armors");
         
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
+
+        add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
         ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();

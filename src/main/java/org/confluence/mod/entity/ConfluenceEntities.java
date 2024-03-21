@@ -1,6 +1,6 @@
 package org.confluence.mod.entity;
 
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,13 +35,29 @@ public class ConfluenceEntities {
     public static final RegistryObject<EntityType<BaseSlime>> YELLOW_SLIME = registerSlime("yellow", ConfluenceParticles.ITEM_BLUE_SLIME::get, 2);
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
 
-    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = ENTITIES.register("ruby_bullet", () -> EntityType.Builder.of((EntityType.EntityFactory<BaseBulletEntity>) RubyBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:ruby_bullet"));
+    public static final RegistryObject<EntityType<BaseBulletEntity>> AMBER_BULLET = registerBullet("amber", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> AMETHYST_BULLET = registerBullet("amethyst", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> DIAMOND_BULLET = registerBullet("diamond", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> EMERALD_BULLET = registerBullet("emerald", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> FROST_BULLET = registerBullet("frost", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = registerBullet("ruby", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> SAPPHIRE_BULLET = registerBullet("sapphire", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", RubyBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", RubyBulletEntity::new);
 
-    private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<ParticleOptions> p, int s) {
+    private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<SimpleParticleType> p, int s) {
         return ENTITIES.register(i + "_slime", () ->
             EntityType.Builder.of((EntityType.EntityFactory<BaseSlime>) (e, l) -> new BaseSlime(e, l, p, s), MobCategory.MONSTER)
                 .sized(2.04F, 2.04F)
                 .clientTrackingRange(10)
                 .build("confluence:" + i + "_slime"));
+    }
+
+    private static RegistryObject<EntityType<BaseBulletEntity>> registerBullet(String i, EntityType.EntityFactory<BaseBulletEntity> factory) {
+        return ENTITIES.register(i + "_bullet", () ->
+            EntityType.Builder.of(factory, MobCategory.MISC)
+                .sized(0.25F, 0.25F)
+                .clientTrackingRange(10)
+                .build("confluence:" + i + "_bullet"));
     }
 }

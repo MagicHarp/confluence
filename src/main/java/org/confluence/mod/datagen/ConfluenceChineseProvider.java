@@ -36,8 +36,11 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.summoners", "汇流来世 | 召唤师武器");
         add("creativetab.confluence.creatives", "汇流来世 | 创造者物品");
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
+        add("creativetab.confluence.armors", "汇流来世 | 盔甲");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
+
+        add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
@@ -213,9 +216,9 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
-        add(Materials.ANOTHER_EMERALD.get(), "翡翠");
+        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
-        add(Materials.ANOTHER_AMETHYST.get(), "紫晶");
+        //add(Materials.ANOTHER_AMETHYST.get(), "紫晶");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.CRYSTALLINE_LENS.get(), "晶状体");
@@ -233,7 +236,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Swords.WOLFRAM_BOARD_SWORD.get(), "钨阔剑");
         add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
         add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
-        add(Swords.COPPER_BOARD_SWORD.get(), "仙人掌剑");
+        add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");

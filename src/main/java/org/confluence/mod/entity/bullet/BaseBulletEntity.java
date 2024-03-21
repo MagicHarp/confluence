@@ -22,6 +22,7 @@ public abstract class BaseBulletEntity extends Projectile {
     public void tick() {
         super.tick();
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+        checkInsideBlocks();
         Vec3 vec3 = getDeltaMovement();
         HitResult.Type hitresult$type = hitresult.getType();
         if (hitresult$type == HitResult.Type.BLOCK || vec3.length() < 0.007) {
