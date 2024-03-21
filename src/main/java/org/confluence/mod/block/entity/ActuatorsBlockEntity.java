@@ -54,7 +54,7 @@ public class ActuatorsBlockEntity extends BlockEntity {
     public void markUpdated() {
         setChanged();
         if (level != null) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
         }
     }
 }

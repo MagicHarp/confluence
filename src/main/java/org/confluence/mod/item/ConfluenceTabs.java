@@ -42,6 +42,7 @@ public class ConfluenceTabs {
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
+                output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
 

@@ -55,6 +55,7 @@ public class ActuatorsBlock extends Block implements EntityBlock {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult blockHitResult) {
+        if(level.isClientSide)return InteractionResult.PASS;
         Item item = player.getItemInHand(hand).getItem();
         if (item instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
