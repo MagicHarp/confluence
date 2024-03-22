@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -47,14 +48,14 @@ public class ActuatorsBlockEntity extends BlockEntity {
 
     public @NotNull CompoundTag getUpdateTag() {
         CompoundTag nbt = new CompoundTag();
-        nbt.putString("contain", contain.toString());
+        nbt.putString("contain", BlockStateParser.serialize(contain));
         return nbt;
     }
 
     public void markUpdated() {
         setChanged();
         if (level != null) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 2);
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
         }
     }
 }
