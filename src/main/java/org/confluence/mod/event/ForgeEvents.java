@@ -8,28 +8,22 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ConfluenceEffects;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
-import org.confluence.mod.network.EchoBlockVisibilityPacket;
-import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.PlayerUtils;
 
 import java.util.Random;
@@ -52,9 +46,9 @@ public class ForgeEvents {
 
         ServerLevel serverLevel = (ServerLevel) event.level;
         if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.isNight() && serverLevel.getGameTime() % 600 == 0) {
-            for(ServerPlayer serverPlayer : serverLevel.players()) {
+            for (ServerPlayer serverPlayer : serverLevel.players()) {
                 BlockPos pos = serverPlayer.getOnPos().multiply(RANDOM.nextInt(serverLevel.getServer().getScaledTrackingDistance(1)));
-                if(serverLevel.isLoaded(pos)) {
+                if (serverLevel.isLoaded(pos)) {
                     serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos));
                 }
             }
@@ -103,15 +97,5 @@ public class ForgeEvents {
             }
         }
         event.setAmount(amount * RANDOM.nextFloat(0.8F, 1.2F));
-    }
-
-    @SubscribeEvent
-    public static void livingEquipmentChange(LivingEquipmentChangeEvent event) {
-        if (event.getEntity() instanceof ServerPlayer serverPlayer && event.getSlot() == EquipmentSlot.HEAD) {
-            NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EchoBlockVisibilityPacket(event.getTo().is(Items.IRON_HELMET))
-            );
-        }
     }
 }

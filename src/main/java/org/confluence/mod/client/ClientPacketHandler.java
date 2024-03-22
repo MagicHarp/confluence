@@ -8,6 +8,7 @@ import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.network.EchoBlockVisibilityPacket;
 import org.confluence.mod.network.HolyWaterColorUpdatePacket;
 import org.confluence.mod.network.ManaPacketS2C;
+import org.confluence.mod.network.MechanicalBlockVisibilityPacket;
 
 import java.util.function.Supplier;
 
@@ -16,6 +17,7 @@ public class ClientPacketHandler {
     private static int maxMana = 20;
     private static int currentMana = 20;
     private static boolean echoBlockVisible = false;
+    private static boolean mechanicalBlockVisible = false;
     private static boolean showHolyWaterColor = false;
 
     public static void handleMana(ManaPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
@@ -36,7 +38,16 @@ public class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleHolyWater(HolyWaterColorUpdatePacket packet, Supplier<NetworkEvent.Context> ctx){
+    public static void handleMechanicalBlock(MechanicalBlockVisibilityPacket packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            mechanicalBlockVisible = packet.visible();
+            ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
+        });
+        context.setPacketHandled(true);
+    }
+
+    public static void handleHolyWater(HolyWaterColorUpdatePacket packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             showHolyWaterColor = packet.show();
@@ -55,6 +66,10 @@ public class ClientPacketHandler {
 
     public static boolean isEchoBlockVisible() {
         return echoBlockVisible;
+    }
+
+    public static boolean isMechanicalBlockVisible() {
+        return mechanicalBlockVisible;
     }
 
     public static boolean showHolyWaterColor() {

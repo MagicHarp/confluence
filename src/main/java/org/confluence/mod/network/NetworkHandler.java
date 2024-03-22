@@ -43,5 +43,13 @@ public class NetworkHandler {
             HolyWaterColorUpdatePacket::decode,
             ClientPacketHandler::handleHolyWater
         );
+
+        CHANNEL.registerMessage(
+            packetId++,
+            MechanicalBlockVisibilityPacket.class,
+            MechanicalBlockVisibilityPacket::encode,
+            MechanicalBlockVisibilityPacket::decode,
+            ClientPacketHandler::handleMechanicalBlock
+        );
     }
 }
