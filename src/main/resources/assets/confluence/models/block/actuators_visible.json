@@ -1,9 +1,9 @@
 {
 	"credit": "Made by Mesdag",
-	"render_type": "translucent",
+	"render_type": "cutout",
 	"textures": {
-		"0": "confluence:block/actuators_block",
-		"particle": "confluence:block/actuators_block"
+		"0": "confluence:block/actuators",
+		"particle": "confluence:block/actuators"
 	},
 	"elements": [
 		{

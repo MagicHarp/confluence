@@ -19,27 +19,34 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.confluence.mod.block.ConfluenceBlocks;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
+import org.confluence.mod.datagen.CustomItemModel;
 import org.confluence.mod.datagen.CustomModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ActuatorsBlock extends Block implements EntityBlock, CustomModel {
+@SuppressWarnings("deprecation")
+public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, CustomModel, CustomItemModel {
     public ActuatorsBlock() {
-        super(BlockBehaviour.Properties.of().noOcclusion());
+        super(BlockBehaviour.Properties.of()
+            .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)
+            .isRedstoneConductor((blockState, blockGetter, blockPos) -> true)
+        );
         registerDefaultState(stateDefinition.any()
-            .setValue(StateProperties.DRIVE, true)
+            .setValue(StateProperties.DRIVE, false)
             .setValue(StateProperties.VISIBLE, false)
         );
     }
 
     public boolean propagatesSkylightDown(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return true;
+        return blockState.getValue(StateProperties.DRIVE);
     }
 
     @Override
@@ -48,12 +55,10 @@ public class ActuatorsBlock extends Block implements EntityBlock, CustomModel {
     }
 
     public float getShadeBrightness(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return 1.0F;
-    }
-
-    @Override
-    public @NotNull RenderShape getRenderShape(@NotNull BlockState blockState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+            return isCollisionShapeFullBlock(actuatorsBlockEntity.getContain(), blockGetter, blockPos) ? 0.2F : 1.0F;
+        }
+        return 0.2F;
     }
 
     @Nullable
@@ -64,21 +69,20 @@ public class ActuatorsBlock extends Block implements EntityBlock, CustomModel {
 
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult blockHitResult) {
-        if (!level.isClientSide) {
-            ItemStack itemStack = player.getItemInHand(hand);
-            if (itemStack.getItem() instanceof BlockItem blockItem) {
-                Block block = blockItem.getBlock();
-                Vec3 view = player.getViewVector(1.0F);
-                BlockState resultState = block.getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, new BlockHitResult(view, Direction.getNearest(view.x, view.y, view.z), blockPos, true)));
-                if (resultState != null && block.getRenderShape(resultState) != RenderShape.ENTITYBLOCK_ANIMATED && level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
-                    actuatorsBlockEntity.setContain(resultState);
-                    actuatorsBlockEntity.markUpdated();
-                    return InteractionResult.SUCCESS;
-                }
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.getItem() instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            if (block instanceof ActuatorsBlock) return InteractionResult.PASS;
+            Vec3 view = player.getViewVector(1.0F);
+            BlockState resultState = block.getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, new BlockHitResult(view, Direction.getNearest(view.x, view.y, view.z).getOpposite(), blockPos, false)));
+            if (resultState != null && block.getRenderShape(resultState) == RenderShape.MODEL && level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+                actuatorsBlockEntity.setContain(resultState);
+                actuatorsBlockEntity.markUpdated();
+                return InteractionResult.SUCCESS;
             }
-            return InteractionResult.PASS;
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -91,7 +95,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, CustomModel {
         boolean drive = blockState.getValue(StateProperties.DRIVE);
         if (drive == level.hasNeighborSignal(blockPos)) return;
         if (drive) {
-            level.scheduleTick(blockPos, this, 4);
+            level.scheduleTick(blockPos, this, 1);
         } else {
             level.setBlock(blockPos, blockState.cycle(StateProperties.DRIVE), Block.UPDATE_CLIENTS);
         }
@@ -106,14 +110,57 @@ public class ActuatorsBlock extends Block implements EntityBlock, CustomModel {
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState blockState, BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
-            return actuatorsBlockEntity.getContain().getShape(blockGetter, blockPos, context);
-        } else {
-            return Shapes.block();
+            BlockState target = actuatorsBlockEntity.getContain();
+            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            return target.getShape(blockGetter, blockPos, context);
         }
+        return Shapes.empty();
+    }
+
+    @Override
+    public @NotNull VoxelShape getVisualShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+            BlockState target = actuatorsBlockEntity.getContain();
+            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            return target.getVisualShape(blockGetter, blockPos, context);
+        }
+        return Shapes.empty();
+    }
+
+    @Override
+    public @NotNull VoxelShape getBlockSupportShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+            BlockState target = actuatorsBlockEntity.getContain();
+            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            return target.getBlockSupportShape(blockGetter, blockPos);
+        }
+        return Shapes.empty();
+    }
+
+    @Override
+    public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+            BlockState target = actuatorsBlockEntity.getContain();
+            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            return target.getOcclusionShape(blockGetter, blockPos);
+        }
+        return Shapes.empty();
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        return getShape(blockState, blockGetter, blockPos, context);
+        if (!blockState.getValue(StateProperties.DRIVE)) {
+            if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+                BlockState target = actuatorsBlockEntity.getContain();
+                if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+                return target.getCollisionShape(blockGetter, blockPos);
+            }
+        }
+        return Shapes.empty();
+    }
+
+    @Override
+    public boolean isPathfindable(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull PathComputationType type) {
+        return !blockState.getValue(StateProperties.DRIVE);
     }
 }

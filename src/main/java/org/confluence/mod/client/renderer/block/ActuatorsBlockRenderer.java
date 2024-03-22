@@ -9,9 +9,10 @@ import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
+import org.confluence.mod.block.functional.StateProperties;
 import org.jetbrains.annotations.NotNull;
 
 public class ActuatorsBlockRenderer implements BlockEntityRenderer<ActuatorsBlockEntity> {
@@ -24,15 +25,18 @@ public class ActuatorsBlockRenderer implements BlockEntityRenderer<ActuatorsBloc
     }
 
     @Override
-    public void render(@NotNull ActuatorsBlockEntity actuatorsBlockEntity, float delta, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int light, int packedOverlay) {
+    public void render(@NotNull ActuatorsBlockEntity blockEntity, float delta, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int light, int packedOverlay) {
         poseStack.pushPose();
-        BakedModel model = dispatcher.getBlockModel(actuatorsBlockEntity.getContain());
-        renderer.renderModel(poseStack.last(), multiBufferSource.getBuffer(RenderType.translucent()), null, model, 1.0F, 1.0F, 1.0F, light, packedOverlay, ModelData.EMPTY, null);
+        BlockState target = blockEntity.getContain();
+        BakedModel model = dispatcher.getBlockModel(target);
+        RenderType renderType;
+        if (blockEntity.getLevel() == null) {
+            renderType = RenderType.solid();
+        } else {
+            renderType = model.getRenderTypes(target, blockEntity.getLevel().random, ModelData.EMPTY).asList().get(0);
+        }
+        float l = blockEntity.getBlockState().getValue(StateProperties.DRIVE) ? 0.5F : 1.0F;
+        renderer.renderModel(poseStack.last(), multiBufferSource.getBuffer(renderType), null, model, 1.0F, 1.0F, 1.0F, (int) (light * l), packedOverlay, ModelData.EMPTY, renderType);
         poseStack.popPose();
-    }
-
-    @Override
-    public boolean shouldRender(@NotNull ActuatorsBlockEntity actuatorsBlockEntity, @NotNull Vec3 vec3) {
-        return BlockEntityRenderer.super.shouldRender(actuatorsBlockEntity, vec3);
     }
 }

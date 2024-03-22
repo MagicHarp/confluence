@@ -36,6 +36,9 @@ public class ConfluenceItems {
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
+    public static final RegistryObject<Item> MECHANICAL_LENS = ITEMS.register("mechanical_lens", BaseItem::new);
+    public static final RegistryObject<Item> SPECTRE_GOGGLES = ITEMS.register("spectre_goggles", BaseItem::new);
+
     public static void register(IEventBus bus) {
         ConfluenceTiers.register();
         Icons.init();

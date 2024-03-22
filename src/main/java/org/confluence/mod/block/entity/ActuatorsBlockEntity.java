@@ -14,10 +14,11 @@ import org.confluence.mod.block.ConfluenceBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class ActuatorsBlockEntity extends BlockEntity {
-    private BlockState contain = Blocks.BEDROCK.defaultBlockState();
+    private BlockState contain;
 
     public ActuatorsBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ConfluenceBlocks.ACTUATORS_ENTITY.get(), blockPos, blockState);
+        this.contain = Blocks.AIR.defaultBlockState();
     }
 
     public BlockState getContain() {
@@ -39,7 +40,7 @@ public class ActuatorsBlockEntity extends BlockEntity {
 
     protected void saveAdditional(@NotNull CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putString("contain", contain.toString());
+        nbt.putString("contain", BlockStateParser.serialize(contain));
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
