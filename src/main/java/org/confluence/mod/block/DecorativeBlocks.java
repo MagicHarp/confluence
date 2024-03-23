@@ -48,6 +48,9 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_OBSIDIAN_PLATE("another_obsidian_plate", BaseBlock::new),
     ANOTHER_OBSIDIAN_SMALL_BRICKS("another_obsidian_small_bricks", BaseBlock::new),
     ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
+
+    ANOTHER_GRANITE_COLUMN("another_granite_column", BaseBlock::new),
+    MARBLE_COLUMN("marble_column", BaseBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 

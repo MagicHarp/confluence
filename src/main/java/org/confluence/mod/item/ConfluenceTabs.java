@@ -201,7 +201,7 @@ public class ConfluenceTabs {
             .build());
     //饰品
     public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("curios",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.ACCESSORIES_ICON.get()))
             .title(Component.translatable("creativetab.confluence.curios"))
             .displayItems((parameters, output) -> {
                 for (CurioItems curioItems : CurioItems.values()) {

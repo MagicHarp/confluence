@@ -71,7 +71,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");
         add(Ores.EBONY_ORE_BLOCK.get(), "魔矿块");
         add(Ores.ANOTHER_CRIMSON_ORE.get(), "猩红矿石");
-        add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), "深层魔矿石");
+        add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), "深层猩红矿石");
         add(Ores.ANOTHER_CRIMSON_ORE_BLOCK.get(), "猩红矿块");
         add(Ores.HELLSTONE.get(), "狱石");
 
@@ -212,6 +212,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ANOTHER_OAK_PLANKS.get(), "经典风情木板");
         add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
         add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
+        add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
+        add(MARBLE_COLUMN.get(), "异域大理岩梁");
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
