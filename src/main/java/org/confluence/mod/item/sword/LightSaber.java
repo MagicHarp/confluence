@@ -38,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack {
+public abstract class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack {
     private static final ImmutableMultimap<Attribute, AttributeModifier> ON = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 9, AttributeModifier.Operation.ADDITION),
         Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
@@ -49,9 +49,8 @@ public class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack 
     );
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private final String color;
 
-    public LightSaber(String color) {
+    public LightSaber() {
         super(new Tier() {
             @Override
             public int getUses() {
@@ -83,7 +82,6 @@ public class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack 
                 return Ingredient.EMPTY;
             }
         }, 10, 3, new Properties().fireResistant());
-        this.color = color;
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
@@ -116,44 +114,31 @@ public class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack 
         boolean turnOff = isTurnOff(itemStack);
         itemStack.getOrCreateTag().putBoolean("turnOff", !turnOff);
         triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", turnOff ? "on" : "off");
+        // todo sound
         level.playSound(living, living.getOnPos().above(), isTurnOff(itemStack) ? SoundEvents.BEACON_ACTIVATE : SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
         if (living instanceof Player player) player.getCooldowns().addCooldown(this, 10);
         return itemStack;
     }
 
     @Override
-    public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int tick, boolean selected) {
-        if (selected && tick % 20 == 0 && !level.isClientSide && !isTurnOff(itemStack) && entity instanceof ServerPlayer serverPlayer) {
+    public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int slot, boolean selected) {
+
+        if (selected && !level.isClientSide && level.getGameTime() % 20 == 0 && !isTurnOff(itemStack) && entity instanceof ServerPlayer serverPlayer) {
             if (PlayerUtils.extractMana(serverPlayer, () -> 1)) return;
             itemStack.getOrCreateTag().putBoolean("turnOff", true);
             triggerAnim(entity, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", "off");
-            level.playSound(entity, entity.getOnPos().above(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 2, 1);
+            // todo sound
+            level.playSound(entity, entity.getOnPos().above(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1, 1);
         }
     }
 
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            private LightSaberRenderer renderer;
-
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                if (this.renderer == null) {
-                    this.renderer = new LightSaberRenderer(color);
-                }
-                return renderer;
-            }
-        });
-    }
-
-    public static final RawAnimation onAnim = RawAnimation.begin().thenPlay("turn_on");
-    public static final RawAnimation offAnim = RawAnimation.begin().thenPlay("turn_off");
+    public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlay("turn_off");
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "light", state -> PlayState.STOP)
-            .triggerableAnim("on", onAnim)
-            .triggerableAnim("off", offAnim)
+            .triggerableAnim("on", RawAnimation.begin().thenPlay("turn_on"))
+            .triggerableAnim("off", TURN_OFF)
         );
     }
 
@@ -162,7 +147,147 @@ public class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack 
         return cache;
     }
 
-    private boolean isTurnOff(ItemStack itemStack) {
+    private static boolean isTurnOff(ItemStack itemStack) {
         return itemStack.getOrCreateTag().getBoolean("turnOff");
+    }
+
+    public static class Red extends LightSaber {
+        public Red() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("red");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class Orange extends LightSaber {
+        public Orange() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("orange");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class Yellow extends LightSaber {
+        public Yellow() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("yellow");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class Green extends LightSaber {
+        public Green() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("green");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class Blue extends LightSaber {
+        public Blue() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("blue");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class Purple extends LightSaber {
+        public Purple() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("purple");
+                    }
+                    return renderer;
+                }
+            });
+        }
+    }
+
+    public static class White extends LightSaber {
+        public White() {
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private LightSaberRenderer renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (this.renderer == null) {
+                        this.renderer = new LightSaberRenderer("white");
+                    }
+                    return renderer;
+                }
+            });
+        }
     }
 }

@@ -6,6 +6,7 @@ import org.confluence.mod.item.sword.LightSaber;
 import software.bernie.geckolib.model.GeoModel;
 
 public class LightSaberModel extends GeoModel<LightSaber> {
+    public static final ResourceLocation barModel = new ResourceLocation(Confluence.MODID, "geo/item/light_saber_bar.geo.json");
     private static final ResourceLocation model = new ResourceLocation(Confluence.MODID, "geo/item/light_saber.geo.json");
     private final ResourceLocation texture;
     private static final ResourceLocation animation = new ResourceLocation(Confluence.MODID, "animations/item/light_saber.animation.json");

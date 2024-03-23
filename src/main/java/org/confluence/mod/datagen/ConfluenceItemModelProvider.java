@@ -2,10 +2,7 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.DoorBlock;
@@ -20,12 +17,12 @@ import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.magic.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.confluence.mod.Confluence.MODID;
 
 public class ConfluenceItemModelProvider extends ItemModelProvider {
-    private static final List<Item> SKIP_ITEMS = List.of(ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
+    private static final Set<Item> SKIP_ITEMS = Set.of(ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
     private static final ResourceLocation MISSING_ITEM = new ResourceLocation(MODID, "item/item_icon");
     private static final ResourceLocation MISSING_BLOCK = new ResourceLocation(MODID, "item/blocks_icon");
 
@@ -84,6 +81,6 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
     }
 
     private static boolean shouldSkip(Item item) {
-        return item instanceof CustomModel || item instanceof GeoItem || SKIP_ITEMS.contains(item);
+        return item instanceof CustomModel || (item instanceof GeoItem && !(item instanceof ArmorItem)) || SKIP_ITEMS.contains(item);
     }
 }
