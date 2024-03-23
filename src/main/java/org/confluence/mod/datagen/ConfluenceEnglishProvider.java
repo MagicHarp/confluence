@@ -32,6 +32,8 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.creatives", "Confluence | Creatives");
         add("creativetab.confluence.food_and_potions", "Confluence | Food & Potions");
         add("creativetab.confluence.armors", "Confluence | Armors");
+        add("creativetab.confluence.function", "Confluence | Function");
+        add("creativetab.confluence.jewelry", "Confluence | JEWELRY");
         
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 

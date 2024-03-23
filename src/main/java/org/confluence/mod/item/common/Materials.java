@@ -38,7 +38,7 @@ public enum Materials implements EnumRegister<Item> {
     TITANIUM_INGOT("titanium_ingot"),
 
     AMBER("amber"),
-    //ANOTHER_AMETHYST("another_amethyst"),
+    ANOTHER_AMETHYST("another_amethyst"),
     //ANOTHER_EMERALD("another_emerald"),
     RUBY("ruby"),
     SAPPHIRE("sapphire"),

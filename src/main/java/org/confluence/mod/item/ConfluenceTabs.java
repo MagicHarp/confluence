@@ -24,6 +24,7 @@ import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
+import static org.confluence.mod.item.ConfluenceItems.SPECTRE_GOGGLES;
 
 @SuppressWarnings("unused")
 public class ConfluenceTabs {
@@ -187,4 +188,16 @@ public class ConfluenceTabs {
                 }
             })
             .build());
+    //功能方块
+    public static final RegistryObject<CreativeModeTab> FUNCTION = TABS.register("function",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.FUNCTION_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.function"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ECHO_BLOCK.get());
+                        output.accept(ACTUATORS.get());
+
+                    })
+                    .build());
+    //饰品
+
 }

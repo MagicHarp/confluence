@@ -37,6 +37,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.creatives", "汇流来世 | 创造者物品");
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
+        add("creativetab.confluence.function", "汇流来世 | 功能方块");
+        add("creativetab.confluence.jewelry", "汇流来世 | 饰品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
@@ -227,7 +229,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.TOPAZ.get(), "黄玉");
         //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
-        //add(Materials.ANOTHER_AMETHYST.get(), "紫晶");
+        add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.CRYSTALLINE_LENS.get(), "晶状体");
@@ -326,6 +328,11 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Swords.PURPLE_LIGHT_SABER.get(),"陨石紫光剑");
         add(Swords.WHITE_LIGHT_SABER.get(),"陨石白光剑");
 
+        //功能方块
+        add(ECHO_BLOCK.get(),"回声块");
+        add(ACTUATORS.get(),"促动器");
+        //饰品
+        add(SPECTRE_GOGGLES.get(),"幽灵护目镜");
         //endregion items
     }
 }
