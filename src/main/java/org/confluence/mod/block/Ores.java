@@ -37,9 +37,16 @@ public enum Ores implements EnumRegister<Block> {
     DEEPSLATE_PLATINUM_ORE("deepslate_platinum_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE))),
     RAW_PLATINUM_BLOCK("raw_platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK))),
     PLATINUM_BLOCK("platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK))),
-
-    ANOTHER_CRIMSON_ORE("another_crimson_ore", BaseBlock::new),
-
+    //魔矿
+    EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    DEEPSLATE_EBONY_ORE("deepslate_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE))),
+    EBONY_ORE_BLOCK("ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK))),
+    //猩红矿
+    ANOTHER_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    DEEPSLATE_ANOTHER_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE))),
+    ANOTHER_CRIMSON_ORE_BLOCK("another_crimson_ore_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK))),
+    //狱石矿
+    HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
     //  陨铁
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
 
