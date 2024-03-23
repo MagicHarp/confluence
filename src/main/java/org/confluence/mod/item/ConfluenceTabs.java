@@ -16,6 +16,7 @@ import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
@@ -24,7 +25,6 @@ import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ConfluenceBlocks.*;
-import static org.confluence.mod.item.ConfluenceItems.SPECTRE_GOGGLES;
 
 @SuppressWarnings("unused")
 public class ConfluenceTabs {
@@ -89,6 +89,7 @@ public class ConfluenceTabs {
                 }
                 for (Gels gels : Gels.values()) {
                     output.accept(gels.get());
+                    output.accept(CurioItems.MECHANICAL_LENS.get());
                 }
             })
             .build());
@@ -199,5 +200,12 @@ public class ConfluenceTabs {
                     })
                     .build());
     //饰品
+    public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("jewelry",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.jewelry"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(CurioItems.SPECTRE_GOGGLES.get());
 
+                    })
+                    .build());
 }

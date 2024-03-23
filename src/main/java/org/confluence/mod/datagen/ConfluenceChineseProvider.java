@@ -332,7 +332,6 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(ECHO_BLOCK.get(),"回声块");
         add(ACTUATORS.get(),"促动器");
         //饰品
-        add(SPECTRE_GOGGLES.get(),"幽灵护目镜");
         //endregion items
     }
 }
