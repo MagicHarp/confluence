@@ -204,6 +204,7 @@ public class ConfluenceTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
                     .title(Component.translatable("creativetab.confluence.jewelry"))
                     .displayItems((parameters, output) -> {
+                        output.accept(CurioItems.MECHANICAL_LENS.get());
                         output.accept(CurioItems.SPECTRE_GOGGLES.get());
 
                     })
