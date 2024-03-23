@@ -37,11 +37,14 @@ public class ConfluenceBlockStateProvider extends BlockStateProvider {
                     models().withExistingParent(path + "_inventory", "block/button_inventory").texture("texture", texture);
                 } else if (value instanceof RotatedPillarBlock rotatedPillarBlock) {
                     if (path.contains("wood")) {
-                        ResourceLocation side = new ResourceLocation(MODID, "block/" + path.replace("wood", "log"));
+                        // _side, _side
+                        ResourceLocation side = new ResourceLocation(MODID, "block/" + path.replace("wood", "log") + "_side");
                         axisBlock(rotatedPillarBlock, side, side);
                     } else if (path.contains("log")) {
-                        logBlock(rotatedPillarBlock);
+                        // _side, _end
+                        axisBlock(rotatedPillarBlock, new ResourceLocation(MODID, "block/" + path));
                     } else {
+                        // _side, _end
                         axisBlock(rotatedPillarBlock, new ResourceLocation(MODID, "block/" + path));
                     }
                 } else if (value instanceof FenceBlock fenceBlock) {
