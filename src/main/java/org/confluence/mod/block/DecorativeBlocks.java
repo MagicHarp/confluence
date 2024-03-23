@@ -1,6 +1,8 @@
 package org.confluence.mod.block;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BaseBlock;
@@ -48,6 +50,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_SMOOTH_OBSIDIAN("another_smooth_obsidian", BeamLikeBlock::new),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
+
 
 
     private final RegistryObject<Block> value;

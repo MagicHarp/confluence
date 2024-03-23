@@ -207,6 +207,9 @@ public class ConfluenceChineseProvider extends LanguageProvider {
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
+        add(SPOOKY_LOG_BLOCKS.PRESSURE_PLATE.get(), "阴森木压力板");
+        add(SPOOKY_LOG_BLOCKS.FENCE.get(), "阴森木栅栏");
+        add(SPOOKY_LOG_BLOCKS.FENCE_GATE.get(), "阴森木栅栏门");
         add(SPOOKY_LOG_BLOCKS.BUTTON.get(), "阴森按钮");
         add(SPOOKY_LOG_BLOCKS.DOOR.get(), "阴森木门");
         add(SPOOKY_LOG_BLOCKS.TRAPDOOR.get(), "阴森木活板门");
@@ -300,6 +303,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         /* HammerAxes */
         add(Gels.BLUE_GEL.get(), "蓝色粘液球");
         add(Gels.PINK_GEL.get(), "粉色粘液球");
+        add(Gels.FROZEN_GEL.get(), "冰冻粘液球");
         add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
 
         add(APPLE_JUICE.get(), "苹果汁");
