@@ -10,14 +10,17 @@ import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.client.model.curio.SpectreGogglesModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ConfluenceParticles;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
+import org.confluence.mod.client.renderer.curio.CurioRenderers;
 import org.confluence.mod.client.renderer.entity.BulletRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
@@ -27,6 +30,11 @@ import org.confluence.mod.item.common.Gels;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ConfluenceClient {
+    @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(CurioRenderers::register);
+    }
+
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerBelow(VanillaGuiOverlay.ITEM_NAME.id(), "mana_hud", ConfluenceOverlays.HUD_MANA);
@@ -43,6 +51,8 @@ public class ConfluenceClient {
         event.registerLayerDefinition(BulletModel.SAPPHIRE_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.SPARK_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
+
+        event.registerLayerDefinition(SpectreGogglesModel.LAYER_LOCATION, SpectreGogglesModel::createBodyLayer);
     }
 
     @SubscribeEvent

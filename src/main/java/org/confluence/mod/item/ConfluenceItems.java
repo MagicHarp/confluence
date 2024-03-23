@@ -9,6 +9,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.MagicMirror;
@@ -36,9 +37,6 @@ public class ConfluenceItems {
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
-    public static final RegistryObject<Item> MECHANICAL_LENS = ITEMS.register("mechanical_lens", BaseItem::new);
-    public static final RegistryObject<Item> SPECTRE_GOGGLES = ITEMS.register("spectre_goggles", BaseItem::new);
-
     public static void register(IEventBus bus) {
         ConfluenceTiers.register();
         Icons.init();
@@ -53,6 +51,7 @@ public class ConfluenceItems {
         TerraPotions.init();
         SpawnEggs.init();
         Armors.init();
+        CurioItems.init();
         ITEMS.register(bus);
     }
 }

@@ -6,7 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.network.EchoBlockVisibilityPacket;
 import org.confluence.mod.network.MechanicalBlockVisibilityPacket;
 import org.confluence.mod.network.NetworkHandler;
@@ -27,7 +27,7 @@ public class CuriosEvents {
     }
 
     private static void echo(ItemStack itemStack, ServerPlayer serverPlayer, boolean value) {
-        if (itemStack.is(ConfluenceItems.SPECTRE_GOGGLES.get())) {
+        if (itemStack.is(CurioItems.SPECTRE_GOGGLES.get())) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new EchoBlockVisibilityPacket(value)
@@ -36,7 +36,7 @@ public class CuriosEvents {
     }
 
     private static void mechanical(ItemStack itemStack, ServerPlayer serverPlayer, boolean value) {
-        if (itemStack.is(ConfluenceItems.MECHANICAL_LENS.get())) {
+        if (itemStack.is(CurioItems.MECHANICAL_LENS.get())) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new MechanicalBlockVisibilityPacket(value)
