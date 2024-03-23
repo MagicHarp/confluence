@@ -18,7 +18,7 @@ public class ActuatorsBlockEntity extends BlockEntity {
 
     public ActuatorsBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ConfluenceBlocks.ACTUATORS_ENTITY.get(), blockPos, blockState);
-        this.contain = Blocks.AIR.defaultBlockState();
+        this.contain = Blocks.BEDROCK.defaultBlockState();
     }
 
     public BlockState getContain() {
