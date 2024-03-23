@@ -10,4 +10,5 @@ import static org.confluence.mod.Confluence.MODID;
 public class ConfluenceTags {
     // block
     public static final TagKey<Block> NEEDS_COPPER_TOOL = TagKey.create(Registries.BLOCK, new ResourceLocation(MODID, "needs_copper_tool"));
+    public static final TagKey<Block> NEEDS_EBONY_TOOL = TagKey.create(Registries.BLOCK, new ResourceLocation(MODID, "needs_ebony_tool"));
 }

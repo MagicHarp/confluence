@@ -42,6 +42,9 @@ public class ConfluenceTiers {
         ResourceLocation tungsten = new ResourceLocation(MODID, "wolfram");
         ResourceLocation gold = new ResourceLocation(MODID, "gold");
         ResourceLocation platinum = new ResourceLocation(MODID, "platinum");
+        ResourceLocation ebony = new ResourceLocation(MODID, "ebony");
+        ResourceLocation another_crimson = new ResourceLocation(MODID, "another_crimson");
+        ResourceLocation hellstone = new ResourceLocation(MODID, "hellstone");
         ResourceLocation cobalt = new ResourceLocation(MODID, "cobalt");
         ResourceLocation palladium = new ResourceLocation(MODID, "palladium");
         ResourceLocation mithril = new ResourceLocation(MODID, "mithril");
@@ -54,8 +57,11 @@ public class ConfluenceTiers {
         TierSortingRegistry.registerTier(SILVER, silver, List.of(lead), List.of(tungsten));
         TierSortingRegistry.registerTier(TUNGSTEN, tungsten, List.of(silver), List.of(gold));
         TierSortingRegistry.registerTier(GOLD, gold, List.of(tungsten), List.of(platinum));
-        TierSortingRegistry.registerTier(PLATINUM, platinum, List.of(gold), List.of(cobalt));
-        TierSortingRegistry.registerTier(COBALT, cobalt, List.of(platinum), List.of(palladium));
+        TierSortingRegistry.registerTier(PLATINUM, platinum, List.of(gold), List.of(ebony,another_crimson));
+        TierSortingRegistry.registerTier(EBONY,ebony, List.of(platinum), List.of(hellstone));
+        TierSortingRegistry.registerTier(ANOTHER_CRIMSON, another_crimson, List.of(platinum), List.of(hellstone));
+        TierSortingRegistry.registerTier(HELLSTONE,hellstone, List.of(ebony,another_crimson), List.of(cobalt));
+        TierSortingRegistry.registerTier(COBALT, cobalt, List.of(hellstone), List.of(palladium));
         TierSortingRegistry.registerTier(PALLADIUM, palladium, List.of(cobalt), List.of(mithril));
         TierSortingRegistry.registerTier(MITHRIL, mithril, List.of(palladium), List.of(orichalcum));
         TierSortingRegistry.registerTier(ORICHALCUM, orichalcum, List.of(mithril), List.of(adamantite));
