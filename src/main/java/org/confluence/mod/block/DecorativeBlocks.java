@@ -49,6 +49,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", BaseBlock::new),
     CRYSTAL_BLOCK("crystal_block", BaseBlock::new);
 
+
     private final RegistryObject<Block> value;
 
     DecorativeBlocks(String id, Supplier<Block> block) {
