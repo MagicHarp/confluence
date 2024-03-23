@@ -190,23 +190,23 @@ public class ConfluenceTabs {
             })
             .build());
     //功能方块
-    public static final RegistryObject<CreativeModeTab> FUNCTION = TABS.register("function",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.FUNCTION_ICON.get()))
-                    .title(Component.translatable("creativetab.confluence.function"))
-                    .displayItems((parameters, output) -> {
-                        output.accept(ECHO_BLOCK.get());
-                        output.accept(ACTUATORS.get());
+    public static final RegistryObject<CreativeModeTab> FUNCTION = TABS.register("functional_blocks",
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.FUNCTION_ICON.get()))
+            .title(Component.translatable("creativetab.confluence.functional"))
+            .displayItems((parameters, output) -> {
+                output.accept(ECHO_BLOCK.get());
+                output.accept(ACTUATORS.get());
 
-                    })
-                    .build());
+            })
+            .build());
     //饰品
-    public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("jewelry",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
-                    .title(Component.translatable("creativetab.confluence.jewelry"))
-                    .displayItems((parameters, output) -> {
-                        output.accept(CurioItems.MECHANICAL_LENS.get());
-                        output.accept(CurioItems.SPECTRE_GOGGLES.get());
-
-                    })
-                    .build());
+    public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("curios",
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
+            .title(Component.translatable("creativetab.confluence.curios"))
+            .displayItems((parameters, output) -> {
+                for (CurioItems curioItems : CurioItems.values()) {
+                    output.accept(curioItems.get());
+                }
+            })
+            .build());
 }

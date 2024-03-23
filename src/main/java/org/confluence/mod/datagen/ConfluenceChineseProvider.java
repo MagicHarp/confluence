@@ -38,8 +38,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add("creativetab.confluence.creatives", "汇流来世 | 创造者物品");
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
-        add("creativetab.confluence.function", "汇流来世 | 功能方块");
-        add("creativetab.confluence.jewelry", "汇流来世 | 饰品");
+        add("creativetab.confluence.functional", "汇流来世 | 功能方块");
+        add("creativetab.confluence.curios", "汇流来世 | 饰品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 

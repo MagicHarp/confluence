@@ -1,6 +1,8 @@
 {
     "replace": false,
     "values": [
+        "confluence:aglet",
+        "confluence:anklet_of_the_wind",
         "confluence:mechanical_lens",
         "confluence:spectre_goggles"
     ]
