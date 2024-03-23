@@ -22,7 +22,9 @@ public class ConfluenceTiers {
     public static final ForgeTier TUNGSTEN = new ForgeTier(2, 648, 8, 2, 18, BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(Materials.TUNGSTEN_INGOT.get()));
     public static final ForgeTier GOLD = new ForgeTier(3, 1600, 8, 3, 22, Tags.Blocks.NEEDS_GOLD_TOOL, () -> Ingredient.of(Items.GOLD_INGOT));
     public static final ForgeTier PLATINUM = new ForgeTier(3, 1661, 8, 3, 22, Tags.Blocks.NEEDS_GOLD_TOOL, () -> Ingredient.of(Materials.PLATINUM_INGOT.get()));
-
+    public static final ForgeTier EBONY = new ForgeTier(4, 0, 10, 4, 24, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(Materials.EBONY_INGOT.get()));
+    public static final ForgeTier ANOTHER_CRIMSON = new ForgeTier(4, 0, 11, 4, 25, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(Materials.ANOTHER_CRIMSON_INGOT.get()));
+    public static final ForgeTier HELLSTONE = new ForgeTier(5, 0, 14, 6, 27, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(Materials.HELLSTONE_INGOT.get()));
     public static final ForgeTier COBALT = new ForgeTier(4, 270, 4, 1, 5, BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(Materials.COBALT_INGOT.get()));
 
     public static final ForgeTier PALLADIUM = new ForgeTier(1, 270, 4, 1, 5, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Materials.PALLADIUM_INGOT.get()));

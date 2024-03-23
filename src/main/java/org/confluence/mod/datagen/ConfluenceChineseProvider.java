@@ -67,6 +67,14 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
+        add(Ores.EBONY_ORE.get(), "魔矿石");
+        add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");
+        add(Ores.EBONY_ORE_BLOCK.get(), "魔矿块");
+        add(Ores.ANOTHER_CRIMSON_ORE.get(), "猩红矿石");
+        add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), "深层魔矿石");
+        add(Ores.ANOTHER_CRIMSON_ORE_BLOCK.get(), "猩红矿块");
+        add(Ores.HELLSTONE.get(), "狱石");
+
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
         add(EBONY_LOG_BLOCKS.PLANKS.get(), "乌木板");
@@ -232,6 +240,12 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.PLATINUM_INGOT.get(), "铂金锭");
         add(Materials.RAW_METEORITE.get(), "陨铁原矿");
         add(Materials.METEORITE_INGOT.get(), "陨铁锭");
+        add(Materials.RAW_EBONY.get(), "粗魔矿");
+        add(Materials.EBONY_INGOT.get(), "魔矿锭");
+        add(Materials.RAW_ANOTHER_CRIMSON.get(), "粗猩红矿");
+        add(Materials.ANOTHER_CRIMSON_INGOT.get(), "猩红矿锭");
+        add(Materials.RAW_HELLSTONE.get(), "狱石矿");
+        add(Materials.HELLSTONE_INGOT.get(), "狱石矿锭");
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
@@ -275,6 +289,8 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Swords.TUNGSTEN_BOARD_SWORD.get(), "钨阔剑");
         add(Swords.PLATINUM_SHORT_SWORD.get(), "铂金短剑");
         add(Swords.PLATINUM_BOARD_SWORD.get(), "铂金阔剑");
+        add(Swords.GOLDEN_SHORT_SWORD.get(), "金短剑");
+        add(Swords.GOLDEN_BOARD_SWORD.get(), "金阔剑");
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
 
         add(Axes.COPPER_AXE.get(), "铜斧");

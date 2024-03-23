@@ -23,7 +23,12 @@ public enum Materials implements EnumRegister<Item> {
     PLATINUM_INGOT("platinum_ingot"),
     RAW_METEORITE("raw_meteorite"),
     METEORITE_INGOT("meteorite_ingot", () -> new TooltipItem(Component.translatable("item.confluence.meteorite_ingot.tooltip"))),
-
+    RAW_EBONY("raw_ebony"),
+    EBONY_INGOT("ebony_ingot"),
+    RAW_ANOTHER_CRIMSON("raw_another_crimson"),
+    ANOTHER_CRIMSON_INGOT("another_crimson_ingot"),
+    HELLSTONE_INGOT("hellstone_ingot"),
+    RAW_HELLSTONE("raw_hellstone"),
     RAW_COBALT("raw_cobalt"),
     COBALT_INGOT("cobalt_ingot"),
     RAW_PALLADIUM("raw_palladium"),
