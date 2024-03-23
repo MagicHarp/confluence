@@ -279,6 +279,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Axes.LEAD_AXE.get(), "铅斧");
         add(Axes.SILVER_AXE.get(), "银斧");
         add(Axes.TUNGSTEN_AXE.get(), "钨斧");
+        add(Axes.GOLDEN_AXE.get(), "金斧");
         add(Axes.PLATINUM_AXE.get(), "铂金斧");
 
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
@@ -286,6 +287,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Pickaxes.LEAD_PICKAXE.get(), "铅镐");
         add(Pickaxes.SILVER_PICKAXE.get(), "银镐");
         add(Pickaxes.TUNGSTEN_PICKAXE.get(), "钨镐");
+        add(Pickaxes.GOLDEN_PICKAXE.get(), "金镐");
         add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
         /* Hammers */
         add(Hammers. COPPER_HAMMER.get(), "铜锤");
