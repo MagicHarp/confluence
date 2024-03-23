@@ -46,6 +46,9 @@ public enum Materials implements EnumRegister<Item> {
 
     FALLING_STAR("falling_star"),
     CARRION("carrion"),
+    BLACK_INK("black_ink"),
+    PURPLE_MUCUS("purple_mucus"),
+    SHARK_FIN("shark_fin"),
     ANTLION_MANDIBLE("antlion_mandible"),
     BLINKROOT_GAINS("blinkroot_gains"),
     DAYBLOOM_POLLEN("daybloom_pollen"),
@@ -54,21 +57,18 @@ public enum Materials implements EnumRegister<Item> {
     SHIVERTHRON_SHARD("shiverthron_shard"),
     WATERLEAF_POT("waterleaf_pot"),
     FIREBLOSSOM_BUD("fireblossom_bud"),
-    BLACK_INK("black_ink"),
-    SHARK_FIN("shark_fin"),
+    CRYSTALLINE_LENS("crystalline_lens"),
+    BLACK_LENS("black_lens"),
+    LIFE_CRYSTAL("life_crystal"),
+    MANA_STAR("mana_star", ManaStar::new),
     SHADOW_SCALE("shadow_scale"),
     TISSUE_SAMPLE("tissue_sample"),
 
-    CRYSTALLINE_LENS("crystalline_lens"),
-    BLACK_LENS("black_lens"),
-    PURPLE_MUCUS("purple_mucus"),
     CRYSTAL_SHARDS_ITEM("crystal_shards_item"),
     CURSED_FLAME("cursed_flame"),
     ICHOR("ichor"),
-    LIFE_CRYSTAL("life_crystal"),
 
-
-    MANA_STAR("mana_star", ManaStar::new);
+    ;
 
     private final RegistryObject<Item> value;
 
