@@ -28,6 +28,7 @@ public class LightSaberRenderer extends GeoItemRenderer<LightSaber> {
                 .get("light");
             if (controller != null && controller.getCurrentRawAnimation() != LightSaber.TURN_OFF) {
                 model = getGeoModel().getBakedModel(LightSaberModel.barModel);
+                //model.getBone("light").ifPresent(geoBone -> geoBone.setHidden(true));
             }
         }
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

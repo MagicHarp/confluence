@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
@@ -36,7 +37,7 @@ public class ActuatorsBlockRenderer implements BlockEntityRenderer<ActuatorsBloc
             renderType = model.getRenderTypes(target, blockEntity.getLevel().random, ModelData.EMPTY).asList().get(0);
         }
         float l = blockEntity.getBlockState().getValue(StateProperties.DRIVE) ? 0.5F : 1.0F;
-        renderer.renderModel(poseStack.last(), multiBufferSource.getBuffer(renderType), null, model, 1.0F, 1.0F, 1.0F, (int) (light * l), packedOverlay, ModelData.EMPTY, renderType);
+        renderer.renderModel(poseStack.last(), multiBufferSource.getBuffer(renderType), null, model, 1.0F, 1.0F, 1.0F, (int) (light * l), OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
         poseStack.popPose();
     }
 }

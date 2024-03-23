@@ -14,6 +14,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, CustomModel, CustomItemModel {
+public class ActuatorsBlock extends HalfTransparentBlock implements EntityBlock, IMechanical, CustomModel, CustomItemModel {
     public ActuatorsBlock() {
         super(BlockBehaviour.Properties.of()
             .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false)
