@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "confluence:raw_meteorite"
+    },
+    "result": "confluence:meteorite_ingot",
+    "experience": 0.4,
+    "cookingtime": 200,
+    "group": "misc"
+}

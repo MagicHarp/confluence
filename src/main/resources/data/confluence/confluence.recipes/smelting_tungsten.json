@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "confluence:raw_tungsten"
+    },
+    "result": "confluence:tungsten_ingot",
+    "experience": 0.3,
+    "cookingtime": 200,
+    "group": "misc"
+}

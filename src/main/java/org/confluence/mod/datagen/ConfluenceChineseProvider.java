@@ -247,6 +247,7 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Materials.RAW_ANOTHER_CRIMSON.get(), "粗猩红矿");
         add(Materials.ANOTHER_CRIMSON_INGOT.get(), "猩红矿锭");
         add(Materials.RAW_HELLSTONE.get(), "狱石矿");
+        add(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), "原始狱石矿锭");
         add(Materials.HELLSTONE_INGOT.get(), "狱石矿锭");
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");

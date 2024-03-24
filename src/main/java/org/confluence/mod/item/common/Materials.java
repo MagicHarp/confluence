@@ -29,6 +29,8 @@ public enum Materials implements EnumRegister<Item> {
     ANOTHER_CRIMSON_INGOT("another_crimson_ingot"),
     HELLSTONE_INGOT("hellstone_ingot"),
     RAW_HELLSTONE("raw_hellstone"),
+    PRIMORDIAL_HELLSTONE_INGOT("primordial_hellstone_ingot"),
+
     RAW_COBALT("raw_cobalt"),
     COBALT_INGOT("cobalt_ingot"),
     RAW_PALLADIUM("raw_palladium"),
