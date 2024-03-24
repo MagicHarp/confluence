@@ -6,6 +6,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.network.NetworkHandler;
@@ -36,5 +37,10 @@ public class ModEvents {
         Confluence.GAME_PHASE = GameRules.register("terraGamePhase", GameRules.Category.UPDATES, GameRules.IntegerValue.create(6));
 
         NetworkHandler.register();
+    }
+
+    @SubscribeEvent
+    public static void loadedComplete(FMLLoadCompleteEvent event) {
+        //StepRevealingBlock.createRevelation("", Ores.DEEPSLATE_COBALT_ORE.get());
     }
 }
