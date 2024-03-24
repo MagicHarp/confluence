@@ -9,6 +9,7 @@ import org.confluence.mod.mana.ManaStorage;
 import org.confluence.mod.network.ManaPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -73,7 +74,7 @@ public class PlayerUtils {
 
     }
 
-    public static boolean noSameCurio(LivingEntity living, Item curio) {
+    public static <C extends Item & ICurioItem> boolean noSameCurio(LivingEntity living, C curio) {
         AtomicBoolean isEmpty = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living)
             .ifPresent(handler -> isEmpty.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).isEmpty()));

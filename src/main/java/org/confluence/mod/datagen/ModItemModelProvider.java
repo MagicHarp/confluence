@@ -3,10 +3,7 @@ package org.confluence.mod.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -54,6 +51,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                     if (block instanceof CustomItemModel) return;
                     if (block instanceof DoorBlock) {
                         withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    } else if (block instanceof TrapDoorBlock) {
+                        withExistingParent(path, new ResourceLocation(MODID, "block/" + path + "_bottom"));
                     } else {
                         withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
                     }
