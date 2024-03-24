@@ -1,11 +1,14 @@
 package org.confluence.mod.util;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
 import org.confluence.mod.network.ManaPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -68,5 +71,12 @@ public class PlayerUtils {
 
     public static void syncAdvancements(ServerPlayer serverPlayer) {
 
+    }
+
+    public static boolean noSameCurio(LivingEntity living, Item curio) {
+        AtomicBoolean isEmpty = new AtomicBoolean();
+        CuriosApi.getCuriosInventory(living)
+            .ifPresent(handler -> isEmpty.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).isEmpty()));
+        return isEmpty.get();
     }
 }
