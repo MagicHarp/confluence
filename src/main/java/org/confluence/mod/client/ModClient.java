@@ -12,24 +12,24 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.curio.SpectreGogglesModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
-import org.confluence.mod.client.particle.ConfluenceParticles;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
+import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.curio.CurioRenderers;
 import org.confluence.mod.client.renderer.entity.BulletRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
-import org.confluence.mod.entity.ConfluenceEntities;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ConfluenceClient {
+public class ModClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(CurioRenderers::register);
@@ -57,43 +57,43 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ConfluenceEntities.BLUE_SLIME.get(), c -> new CustomSlimeRenderer(c, "blue"));
-        event.registerEntityRenderer(ConfluenceEntities.GREEN_SLIME.get(), c -> new CustomSlimeRenderer(c, "green"));
-        event.registerEntityRenderer(ConfluenceEntities.PINK_SLIME.get(), c -> new CustomSlimeRenderer(c, "pink"));
-        event.registerEntityRenderer(ConfluenceEntities.CORRUPTED_SLIME.get(), c -> new CustomSlimeRenderer(c, "corrupted"));
-        event.registerEntityRenderer(ConfluenceEntities.DESERT_SLIME.get(), c -> new CustomSlimeRenderer(c, "desert"));
-        event.registerEntityRenderer(ConfluenceEntities.EVIL_SLIME.get(), c -> new CustomSlimeRenderer(c, "evil"));
-        event.registerEntityRenderer(ConfluenceEntities.ICE_SLIME.get(), c -> new CustomSlimeRenderer(c, "ice"));
-        event.registerEntityRenderer(ConfluenceEntities.LAVA_SLIME.get(), c -> new CustomSlimeRenderer(c, "lava"));
-        event.registerEntityRenderer(ConfluenceEntities.LUMINOUS_SLIME.get(), c -> new CustomSlimeRenderer(c, "luminous"));
-        event.registerEntityRenderer(ConfluenceEntities.CRIMSON_SLIME.get(), c -> new CustomSlimeRenderer(c, "crimson"));
-        event.registerEntityRenderer(ConfluenceEntities.PURPLE_SLIME.get(), c -> new CustomSlimeRenderer(c, "purple"));
-        event.registerEntityRenderer(ConfluenceEntities.RED_SLIME.get(), c -> new CustomSlimeRenderer(c, "red"));
-        event.registerEntityRenderer(ConfluenceEntities.TROPIC_SLIME.get(), c -> new CustomSlimeRenderer(c, "tropic"));
-        event.registerEntityRenderer(ConfluenceEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
-        event.registerEntityRenderer(ConfluenceEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
+        event.registerEntityRenderer(ModEntities.BLUE_SLIME.get(), c -> new CustomSlimeRenderer(c, "blue"));
+        event.registerEntityRenderer(ModEntities.GREEN_SLIME.get(), c -> new CustomSlimeRenderer(c, "green"));
+        event.registerEntityRenderer(ModEntities.PINK_SLIME.get(), c -> new CustomSlimeRenderer(c, "pink"));
+        event.registerEntityRenderer(ModEntities.CORRUPTED_SLIME.get(), c -> new CustomSlimeRenderer(c, "corrupted"));
+        event.registerEntityRenderer(ModEntities.DESERT_SLIME.get(), c -> new CustomSlimeRenderer(c, "desert"));
+        event.registerEntityRenderer(ModEntities.EVIL_SLIME.get(), c -> new CustomSlimeRenderer(c, "evil"));
+        event.registerEntityRenderer(ModEntities.ICE_SLIME.get(), c -> new CustomSlimeRenderer(c, "ice"));
+        event.registerEntityRenderer(ModEntities.LAVA_SLIME.get(), c -> new CustomSlimeRenderer(c, "lava"));
+        event.registerEntityRenderer(ModEntities.LUMINOUS_SLIME.get(), c -> new CustomSlimeRenderer(c, "luminous"));
+        event.registerEntityRenderer(ModEntities.CRIMSON_SLIME.get(), c -> new CustomSlimeRenderer(c, "crimson"));
+        event.registerEntityRenderer(ModEntities.PURPLE_SLIME.get(), c -> new CustomSlimeRenderer(c, "purple"));
+        event.registerEntityRenderer(ModEntities.RED_SLIME.get(), c -> new CustomSlimeRenderer(c, "red"));
+        event.registerEntityRenderer(ModEntities.TROPIC_SLIME.get(), c -> new CustomSlimeRenderer(c, "tropic"));
+        event.registerEntityRenderer(ModEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
+        event.registerEntityRenderer(ModEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
-        event.registerEntityRenderer(ConfluenceEntities.AMBER_BULLET.get(), c -> new BulletRenderer(c, "amber"));
-        event.registerEntityRenderer(ConfluenceEntities.AMETHYST_BULLET.get(), c -> new BulletRenderer(c, "amethyst"));
-        event.registerEntityRenderer(ConfluenceEntities.DIAMOND_BULLET.get(), c -> new BulletRenderer(c, "diamond"));
-        event.registerEntityRenderer(ConfluenceEntities.EMERALD_BULLET.get(), c -> new BulletRenderer(c, "emerald"));
-        event.registerEntityRenderer(ConfluenceEntities.FROST_BULLET.get(), c -> new BulletRenderer(c, "frost"));
-        event.registerEntityRenderer(ConfluenceEntities.RUBY_BULLET.get(), c -> new BulletRenderer(c, "ruby"));
-        event.registerEntityRenderer(ConfluenceEntities.SAPPHIRE_BULLET.get(), c -> new BulletRenderer(c, "sapphire"));
-        event.registerEntityRenderer(ConfluenceEntities.SPARK_BULLET.get(), c -> new BulletRenderer(c, "spark"));
-        event.registerEntityRenderer(ConfluenceEntities.TOPAZ_BULLET.get(), c -> new BulletRenderer(c, "topaz"));
+        event.registerEntityRenderer(ModEntities.AMBER_BULLET.get(), c -> new BulletRenderer(c, "amber"));
+        event.registerEntityRenderer(ModEntities.AMETHYST_BULLET.get(), c -> new BulletRenderer(c, "amethyst"));
+        event.registerEntityRenderer(ModEntities.DIAMOND_BULLET.get(), c -> new BulletRenderer(c, "diamond"));
+        event.registerEntityRenderer(ModEntities.EMERALD_BULLET.get(), c -> new BulletRenderer(c, "emerald"));
+        event.registerEntityRenderer(ModEntities.FROST_BULLET.get(), c -> new BulletRenderer(c, "frost"));
+        event.registerEntityRenderer(ModEntities.RUBY_BULLET.get(), c -> new BulletRenderer(c, "ruby"));
+        event.registerEntityRenderer(ModEntities.SAPPHIRE_BULLET.get(), c -> new BulletRenderer(c, "sapphire"));
+        event.registerEntityRenderer(ModEntities.SPARK_BULLET.get(), c -> new BulletRenderer(c, "spark"));
+        event.registerEntityRenderer(ModEntities.TOPAZ_BULLET.get(), c -> new BulletRenderer(c, "topaz"));
 
-        event.registerBlockEntityRenderer(ConfluenceBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpecial(ConfluenceParticles.ITEM_BLUE_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.BLUE_GEL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_PINK_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.PINK_GEL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_HONEY_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.HONEY_GEL.get()));
-        event.registerSpecial(ConfluenceParticles.ITEM_FROZEN_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.FROZEN_GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_BLUE_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.BLUE_GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_PINK_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.PINK_GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_HONEY_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.HONEY_GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_FROZEN_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.FROZEN_GEL.get()));
 
-        event.registerSpriteSet(ConfluenceParticles.RUBY_BULLET.get(), BulletParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.RUBY_BULLET.get(), BulletParticle.Provider::new);
     }
 
     public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;
@@ -124,6 +124,6 @@ public class ConfluenceClient {
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.register(HALLOW_LEAVES_COLOR, ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
+        event.register(HALLOW_LEAVES_COLOR, ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
     }
 }

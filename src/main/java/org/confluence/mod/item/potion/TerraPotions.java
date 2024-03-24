@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -57,7 +57,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotion> {
     private final RegistryObject<AbstractPotion> value;
 
     TerraPotions(String id, Supplier<AbstractPotion> item) {
-        this.value = ConfluenceItems.ITEMS.register(id, item);
+        this.value = ModItems.ITEMS.register(id, item);
     }
 
     @Override

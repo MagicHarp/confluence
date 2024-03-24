@@ -10,16 +10,19 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.WoodSetType;
 import org.confluence.mod.block.natural.SpreadingGrassBlock;
+import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.datagen.limit.ICubeBottomTop;
+import org.confluence.mod.datagen.limit.ICubeTop;
 
 import java.util.Arrays;
 
 import static org.confluence.mod.Confluence.MODID;
-import static org.confluence.mod.block.ConfluenceBlocks.*;
+import static org.confluence.mod.block.ModBlocks.*;
 
-public class ConfluenceBlockStateProvider extends BlockStateProvider {
+public class ModBlockStateProvider extends BlockStateProvider {
     private static final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
 
-    public ConfluenceBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+    public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MODID, exFileHelper);
     }
 

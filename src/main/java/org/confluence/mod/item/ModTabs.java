@@ -24,10 +24,10 @@ import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
-import static org.confluence.mod.block.ConfluenceBlocks.*;
+import static org.confluence.mod.block.ModBlocks.*;
 
 @SuppressWarnings("unused")
-public class ConfluenceTabs {
+public class ModTabs {
     public static final DeferredRegister<CreativeModeTab> TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
     // 建筑方块
@@ -116,8 +116,8 @@ public class ConfluenceTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.TOOLS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.tools"))
             .displayItems((parameters, output) -> {
-                output.accept(ConfluenceItems.MAGIC_MIRROR.get());
-                output.accept(ConfluenceItems.ICE_MIRROR.get());
+                output.accept(ModItems.MAGIC_MIRROR.get());
+                output.accept(ModItems.ICE_MIRROR.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) {
                     output.accept(pickaxes.get());
                 }

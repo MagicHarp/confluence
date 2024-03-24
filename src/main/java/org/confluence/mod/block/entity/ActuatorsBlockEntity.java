@@ -10,14 +10,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public class ActuatorsBlockEntity extends BlockEntity {
     private BlockState contain;
 
     public ActuatorsBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ConfluenceBlocks.ACTUATORS_ENTITY.get(), blockPos, blockState);
+        super(ModBlocks.ACTUATORS_ENTITY.get(), blockPos, blockState);
         this.contain = Blocks.BEDROCK.defaultBlockState();
     }
 

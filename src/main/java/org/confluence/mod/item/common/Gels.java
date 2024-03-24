@@ -3,7 +3,7 @@ package org.confluence.mod.item.common;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -17,7 +17,7 @@ public enum Gels implements EnumRegister<Item> {
     private final RegistryObject<Item> value;
 
     Gels(String id, Supplier<Item> item) {
-        this.value = ConfluenceItems.ITEMS.register(id, item);
+        this.value = ModItems.ITEMS.register(id, item);
     }
 
     @Override

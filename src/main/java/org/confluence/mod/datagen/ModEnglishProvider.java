@@ -7,14 +7,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.item.ModItems;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class ConfluenceEnglishProvider extends LanguageProvider {
-    public ConfluenceEnglishProvider(PackOutput output) {
+public class ModEnglishProvider extends LanguageProvider {
+    public ModEnglishProvider(PackOutput output) {
         super(output, Confluence.MODID, "en_us");
     }
 
@@ -39,13 +39,13 @@ public class ConfluenceEnglishProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
-        ConfluenceBlocks.BLOCKS.getEntries().forEach(block -> {
+        ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) {
                 add(block1, toTitleCase(block.getId().getPath()));
             }
         });
-        ConfluenceItems.ITEMS.getEntries().forEach(item -> {
+        ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
             if (!(item1 instanceof BlockItem)) {
                 add(item.get(), toTitleCase(item.getId().getPath()));

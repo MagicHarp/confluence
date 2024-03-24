@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.confluence.mod.datagen.CustomItemModel;
-import org.confluence.mod.datagen.CustomModel;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
 public class EchoBlock extends HalfTransparentBlock implements CustomModel, CustomItemModel {

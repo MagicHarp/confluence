@@ -1,4 +1,4 @@
-package org.confluence.mod.datagen;
+package org.confluence.mod.datagen.limit;
 
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 

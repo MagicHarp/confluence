@@ -3,7 +3,7 @@ package org.confluence.mod.item.armor;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -17,7 +17,7 @@ public enum Armors implements EnumRegister<ArmorItem> {
     private final RegistryObject<ArmorItem> value;
 
     Armors(String id, Supplier<ArmorItem> armorItem) {
-        this.value = ConfluenceItems.ITEMS.register(id, armorItem);
+        this.value = ModItems.ITEMS.register(id, armorItem);
     }
 
     @Override

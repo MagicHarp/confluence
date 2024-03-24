@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.effect.ConfluenceEffects;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,9 +22,9 @@ public class ManaPotion extends AbstractPotion {
         if (level.isClientSide) return itemStack;
         if (living instanceof ServerPlayer serverPlayer) {
             PlayerUtils.receiveMana(serverPlayer, () -> amount);
-            MobEffectInstance instance = serverPlayer.getEffect(ConfluenceEffects.MANA_ISSUE.get());
+            MobEffectInstance instance = serverPlayer.getEffect(ModEffects.MANA_ISSUE.get());
             if (instance == null) {
-                serverPlayer.addEffect(new MobEffectInstance(ConfluenceEffects.MANA_ISSUE.get(), 100));
+                serverPlayer.addEffect(new MobEffectInstance(ModEffects.MANA_ISSUE.get(), 100));
             } else {
                 instance.mapDuration(raw -> Math.min(raw + 100, 200));
                 serverPlayer.addEffect(instance);

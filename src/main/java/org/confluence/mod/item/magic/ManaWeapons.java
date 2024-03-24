@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.bullet.*;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.BaseItem;
 import org.confluence.mod.util.EnumRegister;
 
@@ -25,7 +25,7 @@ public enum ManaWeapons implements EnumRegister<Item> {
     private final RegistryObject<Item> value;
 
     ManaWeapons(String id, Supplier<Item> item) {
-        this.value = ConfluenceItems.ITEMS.register(id, item);
+        this.value = ModItems.ITEMS.register(id, item);
     }
 
     @Override

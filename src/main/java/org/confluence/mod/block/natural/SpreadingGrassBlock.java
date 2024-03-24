@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.datagen.ICubeBottomTop;
+import org.confluence.mod.datagen.limit.ICubeBottomTop;
 import org.jetbrains.annotations.NotNull;
 
 public class SpreadingGrassBlock extends SpreadingBlock implements ICubeBottomTop {

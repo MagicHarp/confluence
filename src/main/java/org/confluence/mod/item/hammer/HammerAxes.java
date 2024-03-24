@@ -2,7 +2,7 @@ package org.confluence.mod.item.hammer;
 
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -13,7 +13,7 @@ public enum HammerAxes implements EnumRegister<HammerAxeItem> {
     private final RegistryObject<HammerAxeItem> value;
 
     HammerAxes(String id, Supplier<HammerAxeItem> hammerAxe) {
-        this.value = ConfluenceItems.ITEMS.register(id, hammerAxe);
+        this.value = ModItems.ITEMS.register(id, hammerAxe);
     }
 
     @Override

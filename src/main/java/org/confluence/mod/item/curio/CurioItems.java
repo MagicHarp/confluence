@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio;
 
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -20,7 +20,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     }
 
     CurioItems(String id, Supplier<BaseCurioItem> curio) {
-        this.value = ConfluenceItems.ITEMS.register(id, curio);
+        this.value = ModItems.ITEMS.register(id, curio);
     }
 
     @Override

@@ -20,7 +20,7 @@ import org.confluence.mod.item.sword.Swords;
 
 
 @SuppressWarnings("unused")
-public class ConfluenceItems {
+public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
     //  food
@@ -38,7 +38,7 @@ public class ConfluenceItems {
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
     public static void register(IEventBus bus) {
-        ConfluenceTiers.register();
+        ModTiers.register();
         Icons.init();
         Materials.init();
         Swords.init();

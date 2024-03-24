@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 
 public interface ISpreadable {
@@ -52,20 +52,20 @@ public interface ISpreadable {
 
     enum Type {
         HALLOW(ImmutableMap.of(
-            Blocks.DIRT, ConfluenceBlocks.HALLOW_GRASS_BLOCK,
-            Blocks.DIRT_PATH, ConfluenceBlocks.HALLOW_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ConfluenceBlocks.HALLOW_GRASS_BLOCK
+            Blocks.DIRT, ModBlocks.HALLOW_GRASS_BLOCK,
+            Blocks.DIRT_PATH, ModBlocks.HALLOW_GRASS_BLOCK,
+            Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK
             /* todo 其它东西 */
         )),
         CRIMSON(ImmutableMap.of(
-            Blocks.DIRT, ConfluenceBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
-            Blocks.DIRT_PATH, ConfluenceBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ConfluenceBlocks.ANOTHER_CRIMSON_GRASS_BLOCK
+            Blocks.DIRT, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
+            Blocks.DIRT_PATH, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
+            Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK
         )),
         CORRUPT(ImmutableMap.of(
-            Blocks.DIRT, ConfluenceBlocks.CORRUPT_GRASS_BLOCK,
-            Blocks.DIRT_PATH, ConfluenceBlocks.CORRUPT_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ConfluenceBlocks.CORRUPT_GRASS_BLOCK
+            Blocks.DIRT, ModBlocks.CORRUPT_GRASS_BLOCK,
+            Blocks.DIRT_PATH, ModBlocks.CORRUPT_GRASS_BLOCK,
+            Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK
         ));
 
         public final ImmutableMap<Block, RegistryObject<Block>> blockMap;

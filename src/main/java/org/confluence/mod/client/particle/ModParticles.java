@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 
-public class ConfluenceParticles {
+public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Confluence.MODID);
 
     public static final RegistryObject<SimpleParticleType> ITEM_BLUE_GEL = PARTICLES.register("item_blue_gel", () -> new SimpleParticleType(false));

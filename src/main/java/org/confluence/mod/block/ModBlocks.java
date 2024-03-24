@@ -18,14 +18,14 @@ import org.confluence.mod.block.natural.ISpreadable;
 import org.confluence.mod.block.natural.SpreadingBlock;
 import org.confluence.mod.block.natural.SpreadingGrassBlock;
 import org.confluence.mod.block.natural.SpreadingSandBlock;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 
 import java.util.function.Supplier;
 
 import static org.confluence.mod.block.WoodSetType.*;
 
 @SuppressWarnings("unused")
-public class ConfluenceBlocks {
+public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Confluence.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Confluence.MODID);
 
@@ -75,7 +75,7 @@ public class ConfluenceBlocks {
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block, Item.Properties properties) {
         RegistryObject<B> object = BLOCKS.register(id, block);
-        ConfluenceItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
+        ModItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
         return object;
     }
 

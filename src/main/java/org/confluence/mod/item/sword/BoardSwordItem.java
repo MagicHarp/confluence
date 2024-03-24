@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.phys.AABB;
-import org.confluence.mod.datagen.Image32x;
+import org.confluence.mod.datagen.limit.Image32x;
 import org.jetbrains.annotations.NotNull;
 
 public class BoardSwordItem extends SwordItem implements Image32x {

@@ -1,5 +1,6 @@
 package org.confluence.mod.block;
 
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -37,53 +38,61 @@ public enum Ores implements EnumRegister<Block> {
     DEEPSLATE_PLATINUM_ORE("deepslate_platinum_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE))),
     RAW_PLATINUM_BLOCK("raw_platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK))),
     PLATINUM_BLOCK("platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK))),
-    //魔矿
-    EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
-    DEEPSLATE_EBONY_ORE("deepslate_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE))),
-    EBONY_ORE_BLOCK("ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK))),
-    //猩红矿
-    ANOTHER_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
-    DEEPSLATE_ANOTHER_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE))),
-    ANOTHER_CRIMSON_ORE_BLOCK("another_crimson_ore_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK))),
-    //狱石矿
-    HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
-    //  陨铁
+    // 陨铁
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
+    // 魔矿
+    EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_EBONY_ORE("deepslate_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+    EBONY_BLOCK("ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+    RAW_EBONY_BLOCK("raw_ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    // 猩红矿
+    ANOTHER_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_ANOTHER_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+    ANOTHER_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+    RAW_ANOTHER_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    // 狱石矿
+    HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
 
-    //  钴
-    DEEPSLATE_COBALT_ORE("deepslate_cobalt_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 钴
+    DEEPSLATE_COBALT_ORE("deepslate_cobalt_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_COBALT_BLOCK("raw_cobalt_block", BaseBlock::new),
     COBALT_BLOCK("cobalt_block", BaseBlock::new),
-    //  钯金
-    DEEPSLATE_PALLADIUM_ORE("deepslate_palladium_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 钯金
+    DEEPSLATE_PALLADIUM_ORE("deepslate_palladium_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_PALLADIUM_BLOCK("raw_palladium_block", BaseBlock::new),
     PALLADIUM_BLOCK("palladium_block", BaseBlock::new),
-    //  秘银
-    DEEPSLATE_MITHRIL_ORE("deepslate_mithril_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 秘银
+    DEEPSLATE_MITHRIL_ORE("deepslate_mithril_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_MITHRIL_BLOCK("raw_mithril_block", BaseBlock::new),
     MITHRIL_BLOCK("mithril_block", BaseBlock::new),
-    //  山铜
-    DEEPSLATE_ORICHALCUM_ORE("deepslate_orichalcum_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 山铜
+    DEEPSLATE_ORICHALCUM_ORE("deepslate_orichalcum_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_ORICHALCUM_BLOCK("raw_orichalcum_block", BaseBlock::new),
     ORICHALCUM_BLOCK("orichalcum_block", BaseBlock::new),
-    //  精金
-    DEEPSLATE_ADAMANTITE_ORE("deepslate_adamantite_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 精金
+    DEEPSLATE_ADAMANTITE_ORE("deepslate_adamantite_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_ADAMANTITE_BLOCK("raw_adamantite_block", BaseBlock::new),
     ADAMANTITE_BLOCK("adamantite_block", BaseBlock::new),
-    //  钛金
-    DEEPSLATE_TITANIUM_ORE("deepslate_titanium_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of())),
+    // 钛金
+    DEEPSLATE_TITANIUM_ORE("deepslate_titanium_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_TITANIUM_BLOCK("raw_titanium_block", BaseBlock::new),
     TITANIUM_BLOCK("titanium_block", BaseBlock::new);
 
     private final RegistryObject<Block> value;
 
     Ores(String id, Supplier<Block> ore) {
-        this.value = ConfluenceBlocks.registerWithItem(id, ore);
+        this.value = ModBlocks.registerWithItem(id, ore);
     }
 
     @Override
     public RegistryObject<Block> getValue() {
         return value;
+    }
+
+    public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
+        for (Ores ores : values()) {
+            tag.add(ores.get());
+        }
     }
 
     static void init() {

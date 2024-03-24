@@ -2,7 +2,7 @@ package org.confluence.mod.item.common;
 
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 public enum Icons implements EnumRegister<IconItem> {
@@ -30,7 +30,7 @@ public enum Icons implements EnumRegister<IconItem> {
     private final RegistryObject<IconItem> value;
 
     Icons(String id) {
-        this.value = ConfluenceItems.ITEMS.register(id, IconItem::new);
+        this.value = ModItems.ITEMS.register(id, IconItem::new);
     }
 
     @Override

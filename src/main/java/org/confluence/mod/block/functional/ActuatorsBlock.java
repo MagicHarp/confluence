@@ -25,10 +25,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.confluence.mod.block.ConfluenceBlocks;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
-import org.confluence.mod.datagen.CustomItemModel;
-import org.confluence.mod.datagen.CustomModel;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,7 +111,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     public @NotNull VoxelShape getShape(@NotNull BlockState blockState, BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
             BlockState target = actuatorsBlockEntity.getContain();
-            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            if (target.is(ModBlocks.ACTUATORS.get())) return Shapes.block();
             return target.getShape(blockGetter, blockPos, context);
         }
         return Shapes.empty();
@@ -121,7 +121,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     public @NotNull VoxelShape getVisualShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
             BlockState target = actuatorsBlockEntity.getContain();
-            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            if (target.is(ModBlocks.ACTUATORS.get())) return Shapes.block();
             return target.getVisualShape(blockGetter, blockPos, context);
         }
         return Shapes.empty();
@@ -131,7 +131,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     public @NotNull VoxelShape getBlockSupportShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
             BlockState target = actuatorsBlockEntity.getContain();
-            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            if (target.is(ModBlocks.ACTUATORS.get())) return Shapes.block();
             return target.getBlockSupportShape(blockGetter, blockPos);
         }
         return Shapes.empty();
@@ -141,7 +141,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
             BlockState target = actuatorsBlockEntity.getContain();
-            if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+            if (target.is(ModBlocks.ACTUATORS.get())) return Shapes.block();
             return target.getOcclusionShape(blockGetter, blockPos);
         }
         return Shapes.empty();
@@ -152,7 +152,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
         if (!blockState.getValue(StateProperties.DRIVE)) {
             if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
                 BlockState target = actuatorsBlockEntity.getContain();
-                if (target.is(ConfluenceBlocks.ACTUATORS.get())) return Shapes.block();
+                if (target.is(ModBlocks.ACTUATORS.get())) return Shapes.block();
                 return target.getCollisionShape(blockGetter, blockPos);
             }
         }

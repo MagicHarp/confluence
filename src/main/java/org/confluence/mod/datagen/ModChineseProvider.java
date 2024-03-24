@@ -14,13 +14,13 @@ import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.sword.Swords;
 
-import static org.confluence.mod.block.ConfluenceBlocks.*;
 import static org.confluence.mod.block.DecorativeBlocks.*;
-import static org.confluence.mod.item.ConfluenceItems.*;
+import static org.confluence.mod.block.ModBlocks.*;
+import static org.confluence.mod.item.ModItems.*;
 import static org.confluence.mod.item.potion.TerraPotions.*;
 
-public class ConfluenceChineseProvider extends LanguageProvider {
-    public ConfluenceChineseProvider(PackOutput output) {
+public class ModChineseProvider extends LanguageProvider {
+    public ModChineseProvider(PackOutput output) {
         super(output, Confluence.MODID, "zh_cn");
     }
 
@@ -69,10 +69,10 @@ public class ConfluenceChineseProvider extends LanguageProvider {
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.EBONY_ORE.get(), "魔矿石");
         add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");
-        add(Ores.EBONY_ORE_BLOCK.get(), "魔矿块");
+        add(Ores.RAW_EBONY_BLOCK.get(), "魔原矿块");
         add(Ores.ANOTHER_CRIMSON_ORE.get(), "猩红矿石");
         add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), "深层猩红矿石");
-        add(Ores.ANOTHER_CRIMSON_ORE_BLOCK.get(), "猩红矿块");
+        add(Ores.RAW_ANOTHER_CRIMSON_BLOCK.get(), "猩红原矿块");
         add(Ores.HELLSTONE.get(), "狱石");
 
 

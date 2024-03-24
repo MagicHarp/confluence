@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class ConfluenceRecipeProvider extends RecipeProvider {
-    public ConfluenceRecipeProvider(PackOutput packOutput) {
+public class ModRecipeProvider extends RecipeProvider {
+    public ModRecipeProvider(PackOutput packOutput) {
         super(packOutput);
     }
 

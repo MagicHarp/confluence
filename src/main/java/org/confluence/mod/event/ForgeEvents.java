@@ -19,7 +19,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.effect.ConfluenceEffects;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.mana.ManaProvider;
@@ -83,7 +83,7 @@ public class ForgeEvents {
     public static void livingHurt(LivingHurtEvent event) {
         float amount = event.getAmount();
         if (event.getSource().getEntity() instanceof Player player) {
-            MobEffectInstance manaIssue = player.getEffect(ConfluenceEffects.MANA_ISSUE.get());
+            MobEffectInstance manaIssue = player.getEffect(ModEffects.MANA_ISSUE.get());
             boolean isMagic = event.getSource().is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IMagicAttack;
             if (manaIssue != null && isMagic) {
                 int duration = manaIssue.getDuration();

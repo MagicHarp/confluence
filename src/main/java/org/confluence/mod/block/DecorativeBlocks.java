@@ -1,8 +1,6 @@
 package org.confluence.mod.block;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BaseBlock;
@@ -59,7 +57,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     private final RegistryObject<Block> value;
 
     DecorativeBlocks(String id, Supplier<Block> block) {
-        this.value = ConfluenceBlocks.registerWithItem(id, block);
+        this.value = ModBlocks.registerWithItem(id, block);
     }
 
     @Override

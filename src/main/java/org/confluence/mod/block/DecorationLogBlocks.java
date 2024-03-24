@@ -1,6 +1,7 @@
 package org.confluence.mod.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.BlockGetter;
@@ -16,8 +17,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 
-import static org.confluence.mod.block.ConfluenceBlocks.registerWithItem;
-import static org.confluence.mod.block.ConfluenceBlocks.registerWithoutItem;
+import static org.confluence.mod.block.ModBlocks.registerWithItem;
+import static org.confluence.mod.block.ModBlocks.registerWithoutItem;
 
 public class DecorationLogBlocks {
     public static final ArrayList<DecorationLogBlocks> DECORATION_LOG_BLOCKS = new ArrayList<>();
@@ -116,6 +117,30 @@ public class DecorationLogBlocks {
             output.accept(decorationLogBlocks.SIGN.get());
             output.accept(decorationLogBlocks.TRAPDOOR.get());
             output.accept(decorationLogBlocks.DOOR.get());
+        }
+    }
+
+    public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
+        for (DecorationLogBlocks decorationLogBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
+            tag.add(decorationLogBlocks.PLANKS.get());
+            if (decorationLogBlocks.STRIPPED_LOG != null) {
+                tag.add(decorationLogBlocks.STRIPPED_LOG.get());
+            }
+            if (decorationLogBlocks.WOOD != null) {
+                tag.add(decorationLogBlocks.WOOD.get());
+            }
+            if (decorationLogBlocks.STRIPPED_WOOD != null) {
+                tag.add(decorationLogBlocks.STRIPPED_WOOD.get());
+            }
+            tag.add(decorationLogBlocks.BUTTON.get());
+            tag.add(decorationLogBlocks.FENCE.get());
+            tag.add(decorationLogBlocks.FENCE_GATE.get());
+            tag.add(decorationLogBlocks.PRESSURE_PLATE.get());
+            tag.add(decorationLogBlocks.SLAB.get());
+            tag.add(decorationLogBlocks.STAIRS.get());
+            tag.add(decorationLogBlocks.SIGN.get());
+            tag.add(decorationLogBlocks.TRAPDOOR.get());
+            tag.add(decorationLogBlocks.DOOR.get());
         }
     }
 }

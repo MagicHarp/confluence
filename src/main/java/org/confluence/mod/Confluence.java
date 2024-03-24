@@ -7,12 +7,12 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.confluence.mod.block.ConfluenceBlocks;
-import org.confluence.mod.client.particle.ConfluenceParticles;
-import org.confluence.mod.effect.ConfluenceEffects;
-import org.confluence.mod.entity.ConfluenceEntities;
-import org.confluence.mod.item.ConfluenceItems;
-import org.confluence.mod.item.ConfluenceTabs;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.particle.ModParticles;
+import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.ModTabs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -29,13 +29,13 @@ public class Confluence {
     public Confluence() {
         GeckoLib.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        ConfluenceBlocks.register(bus);
-        ConfluenceItems.register(bus);
-        ConfluenceParticles.PARTICLES.register(bus);
-        ConfluenceEntities.ENTITIES.register(bus);
-        ConfluenceTabs.TABS.register(bus);
-        ConfluenceEffects.MOB_EFFECTS.register(bus);
+        ModBlocks.register(bus);
+        ModItems.register(bus);
+        ModParticles.PARTICLES.register(bus);
+        ModEntities.ENTITIES.register(bus);
+        ModTabs.TABS.register(bus);
+        ModEffects.MOB_EFFECTS.register(bus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfluenceConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModConfigs.SPEC);
     }
 }

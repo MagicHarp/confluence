@@ -11,8 +11,12 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ConfluenceBlocks;
-import org.confluence.mod.item.ConfluenceItems;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.datagen.limit.Image32x;
+import org.confluence.mod.datagen.limit.Image64x;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.magic.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -21,12 +25,12 @@ import java.util.Set;
 
 import static org.confluence.mod.Confluence.MODID;
 
-public class ConfluenceItemModelProvider extends ItemModelProvider {
-    private static final Set<Item> SKIP_ITEMS = Set.of(ConfluenceBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
+public class ModItemModelProvider extends ItemModelProvider {
+    private static final Set<Item> SKIP_ITEMS = Set.of(ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
     private static final ResourceLocation MISSING_ITEM = new ResourceLocation(MODID, "item/item_icon");
     private static final ResourceLocation MISSING_BLOCK = new ResourceLocation(MODID, "item/blocks_icon");
 
-    public ConfluenceItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
     }
 
@@ -37,7 +41,7 @@ public class ConfluenceItemModelProvider extends ItemModelProvider {
             withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
         }
 
-        ConfluenceItems.ITEMS.getEntries().forEach(item -> {
+        ModItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
             if (shouldSkip(value)) return;
 
