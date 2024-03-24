@@ -7,10 +7,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.network.EchoBlockVisibilityPacket;
-import org.confluence.mod.network.MechanicalBlockVisibilityPacket;
+import org.confluence.mod.item.curio.IMultiJump;
+import org.confluence.mod.network.EchoBlockVisibilityPacketS2C;
+import org.confluence.mod.network.MechanicalBlockVisibilityPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.PlayerJumpPacketS2C;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CuriosEvents {
@@ -23,6 +29,8 @@ public class CuriosEvents {
             echo(to, serverPlayer, true);
             mechanical(from, serverPlayer, false);
             mechanical(to, serverPlayer, true);
+
+            sendMaxJump(serverPlayer);
         }
     }
 
@@ -30,7 +38,7 @@ public class CuriosEvents {
         if (itemStack.is(CurioItems.SPECTRE_GOGGLES.get())) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EchoBlockVisibilityPacket(value)
+                new EchoBlockVisibilityPacketS2C(value)
             );
         }
     }
@@ -39,8 +47,26 @@ public class CuriosEvents {
         if (itemStack.is(CurioItems.MECHANICAL_LENS.get())) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new MechanicalBlockVisibilityPacket(value)
+                new MechanicalBlockVisibilityPacketS2C(value)
             );
         }
+    }
+
+    private static void sendMaxJump(ServerPlayer serverPlayer) {
+        AtomicInteger count = new AtomicInteger(1);
+        CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> curiosItemHandler
+            .getCurios().values().forEach(curioStacksHandler -> {
+                IDynamicStackHandler dynamicStackHandler = curioStacksHandler.getStacks();
+                for (int i = 0; i < dynamicStackHandler.getSlots(); i++) {
+                    ItemStack curio = dynamicStackHandler.getStackInSlot(i);
+                    if (curio.getItem() instanceof IMultiJump iMultiJump) {
+                        count.addAndGet(iMultiJump.getJumpTimes());
+                    }
+                }
+            }));
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new PlayerJumpPacketS2C(count.get())
+        );
     }
 }
