@@ -6,11 +6,11 @@
     ],
     "key": {
         "c": {
-            "item": "confluence:tin_ingot"
+            "item": "confluence:silver_ingot"
         }
     },
     "result": {
-        "item": "confluence:tin_short_sword",
+        "item": "confluence:silver_short_sword",
         "count": 1
     }
 }
