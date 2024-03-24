@@ -9,7 +9,7 @@
             "item": "minecraft:cobblestone"
         },
         "O": {
-            "item": "minecraft:oak_log"
+            "tag": "minecraft:logs"
         }
     },
     "result": {
