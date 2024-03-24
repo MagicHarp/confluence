@@ -53,7 +53,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;
                     if (block instanceof DoorBlock) {
-                        withExistingParent(path, new ResourceLocation(MODID, "item/" + path));
+                        withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                     } else {
                         withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
                     }

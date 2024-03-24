@@ -10,9 +10,12 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.common.Materials;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,6 +32,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        // region ore
         dropSelf(Ores.TIN_BLOCK.get());
         dropSelf(Ores.RAW_TIN_BLOCK.get());
         dropSelf(Ores.LEAD_BLOCK.get());
@@ -45,6 +49,16 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_ANOTHER_CRIMSON_BLOCK.get());
         dropSelf(Ores.COBALT_BLOCK.get());
         dropSelf(Ores.RAW_COBALT_BLOCK.get());
+        dropSelf(Ores.PALLADIUM_BLOCK.get());
+        dropSelf(Ores.RAW_PLATINUM_BLOCK.get());
+        dropSelf(Ores.MITHRIL_BLOCK.get());
+        dropSelf(Ores.RAW_MITHRIL_BLOCK.get());
+        dropSelf(Ores.ORICHALCUM_BLOCK.get());
+        dropSelf(Ores.RAW_ORICHALCUM_BLOCK.get());
+        dropSelf(Ores.ADAMANTITE_BLOCK.get());
+        dropSelf(Ores.RAW_ADAMANTITE_BLOCK.get());
+        dropSelf(Ores.TITANIUM_BLOCK.get());
+        dropSelf(Ores.RAW_TITANIUM_BLOCK.get());
 
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
@@ -63,6 +77,36 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
         add(Ores.HELLSTONE.get(), block -> createOreDrop(block, Materials.RAW_HELLSTONE.get()));
         add(Ores.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(block, Materials.RAW_COBALT.get()));
+        add(Ores.DEEPSLATE_PALLADIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PALLADIUM.get()));
+        add(Ores.DEEPSLATE_MITHRIL_ORE.get(), block -> createOreDrop(block, Materials.RAW_MITHRIL.get()));
+        add(Ores.DEEPSLATE_ORICHALCUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_ORICHALCUM.get()));
+        add(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_ADAMANTITE.get()));
+        add(Ores.DEEPSLATE_TITANIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_TITANIUM.get()));
+        // endregion ore
+        for (DecorationLogBlocks logBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
+            dropSelf(logBlocks.PLANKS.get());
+            if (logBlocks.STRIPPED_LOG != null) dropSelf(logBlocks.STRIPPED_LOG.get());
+            if (logBlocks.WOOD != null) dropSelf(logBlocks.WOOD.get());
+            if (logBlocks.STRIPPED_WOOD != null) dropSelf(logBlocks.STRIPPED_WOOD.get());
+            dropSelf(logBlocks.BUTTON.get());
+            dropSelf(logBlocks.FENCE.get());
+            dropSelf(logBlocks.FENCE_GATE.get());
+            dropSelf(logBlocks.PRESSURE_PLATE.get());
+            add(logBlocks.SLAB.get(), this::createSlabItemTable);
+            dropSelf(logBlocks.STAIRS.get());
+            dropSelf(logBlocks.SIGN.get());
+            dropSelf(logBlocks.TRAPDOOR.get());
+            add(logBlocks.DOOR.get(), this::createDoorTable);
+        }
+    }
+
+    @Override
+    protected @NotNull Iterable<Block> getKnownBlocks() {
+        return ModBlocks.BLOCKS.getEntries()
+            .stream()
+            .map(RegistryObject::get)
+            .filter(block -> map.containsKey(block.getLootTable()))
+            .toList();
     }
 
     private LootTable.Builder createTinOreDrop(Block block) {

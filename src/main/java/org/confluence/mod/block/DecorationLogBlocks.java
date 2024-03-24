@@ -97,50 +97,53 @@ public class DecorationLogBlocks {
     }
 
     public static void acceptBuilding(CreativeModeTab.Output output) {
-        for (DecorationLogBlocks decorationLogBlocks : DECORATION_LOG_BLOCKS) {
-            output.accept(decorationLogBlocks.PLANKS.get());
-            if (decorationLogBlocks.STRIPPED_LOG != null) {
-                output.accept(decorationLogBlocks.STRIPPED_LOG.get());
+        for (DecorationLogBlocks logBlocks : DECORATION_LOG_BLOCKS) {
+            output.accept(logBlocks.PLANKS.get());
+            if (logBlocks.STRIPPED_LOG != null) {
+                output.accept(logBlocks.STRIPPED_LOG.get());
             }
-            if (decorationLogBlocks.WOOD != null) {
-                output.accept(decorationLogBlocks.WOOD.get());
+            if (logBlocks.WOOD != null) {
+                output.accept(logBlocks.WOOD.get());
             }
-            if (decorationLogBlocks.STRIPPED_WOOD != null) {
-                output.accept(decorationLogBlocks.STRIPPED_WOOD.get());
+            if (logBlocks.STRIPPED_WOOD != null) {
+                output.accept(logBlocks.STRIPPED_WOOD.get());
             }
-            output.accept(decorationLogBlocks.BUTTON.get());
-            output.accept(decorationLogBlocks.FENCE.get());
-            output.accept(decorationLogBlocks.FENCE_GATE.get());
-            output.accept(decorationLogBlocks.PRESSURE_PLATE.get());
-            output.accept(decorationLogBlocks.SLAB.get());
-            output.accept(decorationLogBlocks.STAIRS.get());
-            output.accept(decorationLogBlocks.SIGN.get());
-            output.accept(decorationLogBlocks.TRAPDOOR.get());
-            output.accept(decorationLogBlocks.DOOR.get());
+            output.accept(logBlocks.BUTTON.get());
+            output.accept(logBlocks.FENCE.get());
+            output.accept(logBlocks.FENCE_GATE.get());
+            output.accept(logBlocks.PRESSURE_PLATE.get());
+            output.accept(logBlocks.SLAB.get());
+            output.accept(logBlocks.STAIRS.get());
+            output.accept(logBlocks.SIGN.get());
+            output.accept(logBlocks.TRAPDOOR.get());
+            output.accept(logBlocks.DOOR.get());
         }
     }
 
-    public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
-        for (DecorationLogBlocks decorationLogBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
-            tag.add(decorationLogBlocks.PLANKS.get());
-            if (decorationLogBlocks.STRIPPED_LOG != null) {
-                tag.add(decorationLogBlocks.STRIPPED_LOG.get());
+    public static void acceptAxeTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
+        for (DecorationLogBlocks logBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
+            tag.add(logBlocks.PLANKS.get());
+            if (logBlocks.LOG != null) {
+                tag.add(logBlocks.LOG.get());
             }
-            if (decorationLogBlocks.WOOD != null) {
-                tag.add(decorationLogBlocks.WOOD.get());
+            if (logBlocks.STRIPPED_LOG != null) {
+                tag.add(logBlocks.STRIPPED_LOG.get());
             }
-            if (decorationLogBlocks.STRIPPED_WOOD != null) {
-                tag.add(decorationLogBlocks.STRIPPED_WOOD.get());
+            if (logBlocks.WOOD != null) {
+                tag.add(logBlocks.WOOD.get());
             }
-            tag.add(decorationLogBlocks.BUTTON.get());
-            tag.add(decorationLogBlocks.FENCE.get());
-            tag.add(decorationLogBlocks.FENCE_GATE.get());
-            tag.add(decorationLogBlocks.PRESSURE_PLATE.get());
-            tag.add(decorationLogBlocks.SLAB.get());
-            tag.add(decorationLogBlocks.STAIRS.get());
-            tag.add(decorationLogBlocks.SIGN.get());
-            tag.add(decorationLogBlocks.TRAPDOOR.get());
-            tag.add(decorationLogBlocks.DOOR.get());
+            if (logBlocks.STRIPPED_WOOD != null) {
+                tag.add(logBlocks.STRIPPED_WOOD.get());
+            }
+            tag.add(logBlocks.BUTTON.get());
+            tag.add(logBlocks.FENCE.get());
+            tag.add(logBlocks.FENCE_GATE.get());
+            tag.add(logBlocks.PRESSURE_PLATE.get());
+            tag.add(logBlocks.SLAB.get());
+            tag.add(logBlocks.STAIRS.get());
+            tag.add(logBlocks.SIGN.get());
+            tag.add(logBlocks.TRAPDOOR.get());
+            tag.add(logBlocks.DOOR.get());
         }
     }
 }

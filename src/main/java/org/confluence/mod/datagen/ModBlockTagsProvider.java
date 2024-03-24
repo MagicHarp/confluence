@@ -22,7 +22,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public void addTags(HolderLookup.@NotNull Provider provider) {
-        DecorationLogBlocks.acceptTag(tag(BlockTags.MINEABLE_WITH_AXE));
+        DecorationLogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
         Ores.acceptTag(tag(BlockTags.MINEABLE_WITH_PICKAXE));
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
