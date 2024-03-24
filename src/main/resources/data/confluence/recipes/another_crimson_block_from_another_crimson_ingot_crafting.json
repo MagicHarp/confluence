@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "confluence:another_crimson_block"
+        }
+    },
+    "result": {
+        "item": "confluence:another_crimson_ingot",
+        "count": 9
+    }
+}
