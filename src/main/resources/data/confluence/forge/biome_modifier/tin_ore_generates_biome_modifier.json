@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "features": "confluence:tin_ore_generates",
+  "step": "surface_structures"
+}

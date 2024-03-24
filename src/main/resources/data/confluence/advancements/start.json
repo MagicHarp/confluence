@@ -1,0 +1,31 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "confluence:copper_short_sword"
+    },
+    "title": {
+      "translate": "advancements.start.title"
+    },
+    "description": {
+      "translate": "advancements.start.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "start": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 0,
+    "loot": [
+      "confluence:copper_short_sword",
+      "confluence:copper_axe",
+      "confluence:copper_pickaxe"
+    ]
+  }
+}
