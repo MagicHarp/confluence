@@ -4,7 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.ClientPacketHandler;
+import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.client.handler.PlayerJumpHandler;
 
 public class NetworkHandler {
     public static final String PROTOCOL_VERSION = "1";
@@ -30,26 +31,42 @@ public class NetworkHandler {
 
         CHANNEL.registerMessage(
             packetId++,
-            EchoBlockVisibilityPacket.class,
-            EchoBlockVisibilityPacket::encode,
-            EchoBlockVisibilityPacket::decode,
+            EchoBlockVisibilityPacketS2C.class,
+            EchoBlockVisibilityPacketS2C::encode,
+            EchoBlockVisibilityPacketS2C::decode,
             ClientPacketHandler::handleEchoBlock
         );
 
         CHANNEL.registerMessage(
             packetId++,
-            HolyWaterColorUpdatePacket.class,
-            HolyWaterColorUpdatePacket::encode,
-            HolyWaterColorUpdatePacket::decode,
+            HolyWaterColorUpdatePacketS2C.class,
+            HolyWaterColorUpdatePacketS2C::encode,
+            HolyWaterColorUpdatePacketS2C::decode,
             ClientPacketHandler::handleHolyWater
         );
 
         CHANNEL.registerMessage(
             packetId++,
-            MechanicalBlockVisibilityPacket.class,
-            MechanicalBlockVisibilityPacket::encode,
-            MechanicalBlockVisibilityPacket::decode,
+            MechanicalBlockVisibilityPacketS2C.class,
+            MechanicalBlockVisibilityPacketS2C::encode,
+            MechanicalBlockVisibilityPacketS2C::decode,
             ClientPacketHandler::handleMechanicalBlock
+        );
+
+        CHANNEL.registerMessage(
+            packetId++,
+            PlayerJumpPacketC2S.class,
+            PlayerJumpPacketC2S::encode,
+            PlayerJumpPacketC2S::decode,
+            PlayerJumpPacketC2S::handle
+        );
+
+        CHANNEL.registerMessage(
+            packetId++,
+            PlayerJumpPacketS2C.class,
+            PlayerJumpPacketS2C::encode,
+            PlayerJumpPacketS2C::decode,
+            PlayerJumpHandler::handlePacket
         );
     }
 }

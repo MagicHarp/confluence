@@ -1,14 +1,14 @@
-package org.confluence.mod.client;
+package org.confluence.mod.client.handler;
 
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.network.EchoBlockVisibilityPacket;
-import org.confluence.mod.network.HolyWaterColorUpdatePacket;
+import org.confluence.mod.network.EchoBlockVisibilityPacketS2C;
+import org.confluence.mod.network.HolyWaterColorUpdatePacketS2C;
 import org.confluence.mod.network.ManaPacketS2C;
-import org.confluence.mod.network.MechanicalBlockVisibilityPacket;
+import org.confluence.mod.network.MechanicalBlockVisibilityPacketS2C;
 
 import java.util.function.Supplier;
 
@@ -29,7 +29,7 @@ public class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleEchoBlock(EchoBlockVisibilityPacket packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleEchoBlock(EchoBlockVisibilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             echoBlockVisible = packet.visible();
@@ -38,7 +38,7 @@ public class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleMechanicalBlock(MechanicalBlockVisibilityPacket packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleMechanicalBlock(MechanicalBlockVisibilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             mechanicalBlockVisible = packet.visible();
@@ -47,7 +47,7 @@ public class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleHolyWater(HolyWaterColorUpdatePacket packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleHolyWater(HolyWaterColorUpdatePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             showHolyWaterColor = packet.show();
