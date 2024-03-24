@@ -33,6 +33,11 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
     }
 
     @Override
+    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
+        return getCollisionShape(blockState, blockGetter, blockPos, context);
+    }
+
+    @Override
     public @NotNull VoxelShape getVisualShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         return Shapes.empty();
     }
