@@ -83,6 +83,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(EBONY_LOG_BLOCKS.STRIPPED_WOOD.get(), "乌木去皮木");
         add(EBONY_LOG_BLOCKS.DOOR.get(), "乌木门");
         add(EBONY_LOG_BLOCKS.SIGN.get(), "乌木告示牌");
+        add(EBONY_LOG_BLOCKS.WALL_SIGN.get(), "乌木悬挂告示牌");
         add(EBONY_LOG_BLOCKS.STAIRS.get(), "乌木楼梯");
         add(EBONY_LOG_BLOCKS.SLAB.get(), "乌木台阶");
         add(EBONY_LOG_BLOCKS.TRAPDOOR.get(), "乌木活板门");
@@ -91,7 +92,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(EBONY_LOG_BLOCKS.LEAVES.get(), "乌木树叶");
         add(EBONY_LOG_BLOCKS.FENCE.get(), "乌木栅栏");
         add(EBONY_LOG_BLOCKS.FENCE_GATE.get(), "乌木栅栏门");
-        add(EBONY_LOG_BLOCKS.WALL_SIGN.get(), "乌木悬挂告示牌");
+
 
         add(PEARL_LOG_BLOCKS.BUTTON.get(), "珍珠木按钮");
         add(PEARL_LOG_BLOCKS.PLANKS.get(), "珍珠木板");
@@ -108,7 +109,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PEARL_LOG_BLOCKS.LEAVES.get(), "珍珠木树叶");
         add(PEARL_LOG_BLOCKS.FENCE.get(), "珍珠木栅栏");
         add(PEARL_LOG_BLOCKS.FENCE_GATE.get(), "珍珠木栅栏门");
-        add(PEARL_LOG_BLOCKS.WALL_SIGN.get(), "珍珠木悬挂告示牌");
+
 
         add(SHADOW_LOG_BLOCKS.BUTTON.get(), "暗影木按钮");
         add(SHADOW_LOG_BLOCKS.PLANKS.get(), "暗影木板");
@@ -125,7 +126,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SHADOW_LOG_BLOCKS.FENCE.get(), "暗影木栅栏");
         add(SHADOW_LOG_BLOCKS.FENCE_GATE.get(), "暗影木栅栏门");
         add(SHADOW_LOG_BLOCKS.PRESSURE_PLATE.get(), "暗影木压力板");
-        add(SHADOW_LOG_BLOCKS.WALL_SIGN.get(), "暗影木悬挂告示牌");
+
 
         add(PALM_LOG_BLOCKS.BUTTON.get(), "沙漠风情按钮");
         add(PALM_LOG_BLOCKS.PLANKS.get(), "沙漠风情木板");
@@ -142,7 +143,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PALM_LOG_BLOCKS.FENCE.get(), "沙漠风情栅栏");
         add(PALM_LOG_BLOCKS.FENCE_GATE.get(), "沙漠风情栅栏门");
         add(PALM_LOG_BLOCKS.PRESSURE_PLATE.get(), "沙漠风情压力板");
-        add(PALM_LOG_BLOCKS.WALL_SIGN.get(), "沙漠风情悬挂告示牌");
+
 
         add(ASH_LOG_BLOCKS.BUTTON.get(), "白蜡木按钮");
         add(ASH_LOG_BLOCKS.PLANKS.get(), "白蜡木板");
@@ -159,7 +160,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.FENCE.get(), "白蜡木栅栏");
         add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
         add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
-        add(ASH_LOG_BLOCKS.WALL_SIGN.get(), "白蜡木悬挂告示牌");
+
 
 
         add(EBONY_STONE.get(), "黑檀石块");
@@ -231,7 +232,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.SIGN.get(), "阴森告示牌");
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
-        add(SPOOKY_LOG_BLOCKS.WALL_SIGN.get(), "阴森悬挂告示牌");
 
         //endregion blocks
 
