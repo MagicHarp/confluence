@@ -12,6 +12,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.DecorationLogBlocks;
+import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.common.Materials;
@@ -97,6 +98,9 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             dropSelf(logBlocks.SIGN.get());
             dropSelf(logBlocks.TRAPDOOR.get());
             add(logBlocks.DOOR.get(), this::createDoorTable);
+        }
+        for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
+            dropSelf(decorativeBlocks.get());
         }
     }
 
