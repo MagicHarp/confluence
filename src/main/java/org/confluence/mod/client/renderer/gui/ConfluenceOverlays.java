@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import org.confluence.mod.client.ClientPacketHandler;
+import org.confluence.mod.client.handler.ClientPacketHandler;
 
 import static org.confluence.mod.Confluence.MODID;
 

@@ -1,4 +1,4 @@
-package org.confluence.mod.client.player;
+package org.confluence.mod.client.handler;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,7 +11,7 @@ import org.confluence.mod.network.PlayerJumpPacketS2C;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class PlayerJump {
+public class PlayerJumpHandler {
     private static boolean jumped = false;
     private static int maxJump = 0;
     private static int jumpCount = 0;

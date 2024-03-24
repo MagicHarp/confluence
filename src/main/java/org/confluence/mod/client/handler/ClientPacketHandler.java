@@ -1,4 +1,4 @@
-package org.confluence.mod.client;
+package org.confluence.mod.client.handler;
 
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;

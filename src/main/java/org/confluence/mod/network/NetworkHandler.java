@@ -4,8 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.ClientPacketHandler;
-import org.confluence.mod.client.player.PlayerJump;
+import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.client.handler.PlayerJumpHandler;
 
 public class NetworkHandler {
     public static final String PROTOCOL_VERSION = "1";
@@ -66,7 +66,7 @@ public class NetworkHandler {
             PlayerJumpPacketS2C.class,
             PlayerJumpPacketS2C::encode,
             PlayerJumpPacketS2C::decode,
-            PlayerJump::handlePacket
+            PlayerJumpHandler::handlePacket
         );
     }
 }
