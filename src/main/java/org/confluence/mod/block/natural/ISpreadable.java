@@ -66,6 +66,9 @@ public interface ISpreadable {
             Blocks.DIRT, ModBlocks.CORRUPT_GRASS_BLOCK,
             Blocks.DIRT_PATH, ModBlocks.CORRUPT_GRASS_BLOCK,
             Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK
+        )),
+        GLOWING(ImmutableMap.of(
+            Blocks.MUD, ModBlocks.GLOWING_GRASS_BLOCK
         ));
 
         public final ImmutableMap<Block, RegistryObject<Block>> blockMap;
@@ -74,4 +77,10 @@ public interface ISpreadable {
             this.blockMap = blockMap;
         }
     }
+
+//    static ImmutableMap<Block, RegistryObject<Block>> createGlowing() {
+//        ImmutableMap.Builder<Block, RegistryObject<Block>> builder = new ImmutableMap.Builder<>();
+//        builder.put(Blocks.MUD, ModBlocks.GLOWING_GRASS_BLOCK);
+//        return builder.build();
+//    }
 }
