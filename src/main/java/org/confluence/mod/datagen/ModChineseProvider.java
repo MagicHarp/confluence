@@ -325,6 +325,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hammers. LEAD_HAMMER.get(), "铅锤");
         add(Hammers. SILVER_HAMMER.get(), "银锤");
         add(Hammers. TUNGSTEN_HAMMER.get(), "钨锤");
+        add(Hammers. GOLDEN_HAMMER.get(), "金锤");
         add(Hammers. PLATINUM_HAMMER.get(), "铂金锤");
 
         /* HammerAxes */
