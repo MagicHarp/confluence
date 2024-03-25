@@ -37,6 +37,10 @@ public abstract class BaseBulletEntity extends Projectile {
         double offY = getY() + vec3.y;
         double offZ = getZ() + vec3.z;
         setDeltaMovement(vec3.scale(0.9));
+        if (!isNoGravity()) {
+            Vec3 vec31 = getDeltaMovement();
+            this.setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
+        }
         setPos(offX, offY, offZ);
         level().addParticle(getParticle(), getX(), getY(), getZ(), 0.0, 0.0, 0.0);
     }
@@ -53,5 +57,9 @@ public abstract class BaseBulletEntity extends Projectile {
 
     @Override
     protected void defineSynchedData() {
+    }
+
+    protected double getGravity(){
+        return 0.03;
     }
 }
