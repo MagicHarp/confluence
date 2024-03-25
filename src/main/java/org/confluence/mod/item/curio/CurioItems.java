@@ -8,7 +8,6 @@ import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
 import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
 import org.confluence.mod.item.curio.informational.MechanicalLens;
-import org.confluence.mod.item.curio.miscellaneous.BaseCurioItem;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.Aglet;
 import org.confluence.mod.item.curio.movement.AnkletOfTheWind;

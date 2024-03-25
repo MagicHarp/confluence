@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio.healthandmana;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.mod.item.curio.miscellaneous.BaseCurioItem;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
