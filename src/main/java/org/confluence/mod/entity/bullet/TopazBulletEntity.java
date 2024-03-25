@@ -21,6 +21,6 @@ public class TopazBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.TOPAZ_BULLET.get();
     }
 }

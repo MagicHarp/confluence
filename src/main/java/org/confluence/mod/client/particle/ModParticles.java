@@ -15,4 +15,10 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> ITEM_HONEY_GEL = PARTICLES.register("item_honey_gel", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> ITEM_FROZEN_GEL = PARTICLES.register("item_frozen_gel", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> RUBY_BULLET = PARTICLES.register("ruby_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> AMBER_BULLET = PARTICLES.register("amber_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> TOPAZ_BULLET = PARTICLES.register("topaz_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> EMERALD_BULLET = PARTICLES.register("emerald_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> SAPPHIRE_BULLET = PARTICLES.register("sapphire_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> DIAMOND_BULLET = PARTICLES.register("diamond_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> AMETHYST_BULLET = PARTICLES.register("amethyst_bullet", () -> new SimpleParticleType(false));
 }

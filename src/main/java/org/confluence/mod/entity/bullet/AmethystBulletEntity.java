@@ -21,6 +21,6 @@ public class AmethystBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.AMETHYST_BULLET.get();
     }
 }

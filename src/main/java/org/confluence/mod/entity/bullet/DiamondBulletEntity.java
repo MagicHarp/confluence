@@ -21,6 +21,6 @@ public class DiamondBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.DIAMOND_BULLET.get();
     }
 }

@@ -21,6 +21,7 @@ public class AmberBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.AMBER_BULLET.get();
     }
 }
+

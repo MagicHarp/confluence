@@ -21,6 +21,6 @@ public class SapphireBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.SAPPHIRE_BULLET.get();
     }
 }

@@ -21,6 +21,6 @@ public class EmeraldBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ModParticles.EMERALD_BULLET.get();
     }
 }
