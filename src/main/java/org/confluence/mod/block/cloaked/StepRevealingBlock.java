@@ -24,9 +24,9 @@ public class StepRevealingBlock extends Block {
         builder.add(REVEAL_STEP);
     }
 
-    public static void createRevelation(String step, Block clockedBlock) {
+    public void createRevelation(String step) {
         for (int i = 0; i < 3; i++) {
-            String source = BlockStateParser.serialize(clockedBlock.defaultBlockState().setValue(REVEAL_STEP, i));
+            String source = BlockStateParser.serialize(defaultBlockState().setValue(REVEAL_STEP, i));
             JsonObject revJson = Confluence.GSON.toJsonTree(Map.of(
                 "advancement", step,
                 "block_states", Map.of(source, "minecraft:deepslate"),

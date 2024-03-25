@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Confluence.MODID);
 
+    // todo variants
     public static final RegistryObject<EntityType<BaseSlime>> BLUE_SLIME = registerSlime("blue", ModParticles.ITEM_BLUE_GEL, 2);
     public static final RegistryObject<EntityType<BaseSlime>> GREEN_SLIME = registerSlime("green", ModParticles.ITEM_BLUE_GEL, 2);
     public static final RegistryObject<EntityType<BaseSlime>> PINK_SLIME = registerSlime("pink", ModParticles.ITEM_PINK_GEL, 1);
@@ -46,9 +47,11 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", RubyBulletEntity::new);
     public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", RubyBulletEntity::new);
 
+    public static final RegistryObject<EntityType<FallingStarItemEntity>> FALLING_STAR_ITEM_ENTITY = ENTITIES.register("falling_star", () -> EntityType.Builder.<FallingStarItemEntity>of(FallingStarItemEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).updateInterval(20).build("confluence:falling_star"));
+
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<SimpleParticleType> p, int s) {
         return ENTITIES.register(i + "_slime", () ->
-            EntityType.Builder.of((EntityType.EntityFactory<BaseSlime>) (e, l) -> new BaseSlime(e, l, p, s), MobCategory.MONSTER)
+            EntityType.Builder.<BaseSlime>of((e, l) -> new BaseSlime(e, l, p, s), MobCategory.MONSTER)
                 .sized(2.04F, 2.04F)
                 .clientTrackingRange(10)
                 .build("confluence:" + i + "_slime"));

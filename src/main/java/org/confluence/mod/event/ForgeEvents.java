@@ -30,6 +30,8 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvents {
+    public static final Random RANDOM = new Random();
+
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
@@ -38,18 +40,19 @@ public class ForgeEvents {
         }
     }
 
-    public static final Random RANDOM = new Random();
-
     @SubscribeEvent
     public static void levelTick(TickEvent.LevelTickEvent event) {
         if (event.side == LogicalSide.CLIENT || event.phase == TickEvent.Phase.START) return;
 
         ServerLevel serverLevel = (ServerLevel) event.level;
-        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.isNight() && serverLevel.getGameTime() % 600 == 0) {
+        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.getDayTime() > 12000L && serverLevel.getGameTime() % 600 == 0) {
             for (ServerPlayer serverPlayer : serverLevel.players()) {
-                BlockPos pos = serverPlayer.getOnPos().multiply(RANDOM.nextInt(serverLevel.getServer().getScaledTrackingDistance(1)));
+                int distance = serverLevel.getServer().getScaledTrackingDistance(1);
+                int offsetX = (RANDOM.nextFloat() < 0.5F ? 1 : -1) * RANDOM.nextInt(distance);
+                int offsetZ = (RANDOM.nextFloat() < 0.5F ? 1 : -1) * RANDOM.nextInt(distance);
+                BlockPos pos = serverPlayer.getOnPos().offset(offsetX, 0, offsetZ);
                 if (serverLevel.isLoaded(pos)) {
-                    serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos));
+                    serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos.atY(256).getCenter()));
                 }
             }
         }

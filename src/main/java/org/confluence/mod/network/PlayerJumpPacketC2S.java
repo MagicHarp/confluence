@@ -2,6 +2,7 @@ package org.confluence.mod.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -20,8 +21,10 @@ public record PlayerJumpPacketC2S(float fallDistance) {
         context.enqueueWork(() -> {
             ServerPlayer serverPlayer = context.getSender();
             if (serverPlayer == null) return;
-            //serverPlayer.jumpFromGround();
             serverPlayer.fallDistance = packet.fallDistance;
+            serverPlayer.hasImpulse = true;
+            serverPlayer.awardStat(Stats.JUMP);
+            serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);
         });
         context.setPacketHandled(true);
     }

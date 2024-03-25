@@ -41,6 +41,6 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void loadedComplete(FMLLoadCompleteEvent event) {
-        //StepRevealingBlock.createRevelation("", Ores.DEEPSLATE_COBALT_ORE.get());
+        //((StepRevealingBlock) Ores.DEEPSLATE_COBALT_ORE.get()).createRevelation("");
     }
 }

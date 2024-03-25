@@ -16,7 +16,7 @@ public class ForgeClient {
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
         LocalPlayer localPlayer = MINECRAFT.player;
-        if (localPlayer == null || event.phase != TickEvent.Phase.END) return;
+        if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
         PlayerJumpHandler.handleJump(localPlayer);
     }
 }

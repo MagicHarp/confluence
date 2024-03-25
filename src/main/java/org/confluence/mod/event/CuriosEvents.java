@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.curio.CurioItems;
@@ -14,7 +15,6 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
-import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -53,20 +53,24 @@ public class CuriosEvents {
     }
 
     private static void sendMaxJump(ServerPlayer serverPlayer) {
-        AtomicInteger count = new AtomicInteger(1);
-        CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> curiosItemHandler
-            .getCurios().values().forEach(curioStacksHandler -> {
-                IDynamicStackHandler dynamicStackHandler = curioStacksHandler.getStacks();
-                for (int i = 0; i < dynamicStackHandler.getSlots(); i++) {
-                    ItemStack curio = dynamicStackHandler.getStackInSlot(i);
-                    if (curio.getItem() instanceof IMultiJump iMultiJump) {
-                        count.addAndGet(iMultiJump.getJumpTimes());
+        AtomicInteger maxJump = new AtomicInteger();
+        AtomicInteger height = new AtomicInteger();
+        CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
+            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                ItemStack curio = itemHandlerModifiable.getStackInSlot(i);
+                if (curio.getItem() instanceof IMultiJump iMultiJump) {
+                    int times = iMultiJump.getJumpTimes();
+                    if (times > maxJump.get()) {
+                        maxJump.set(times);
                     }
+                    height.addAndGet(times);
                 }
-            }));
+            }
+        });
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(count.get())
+            new PlayerJumpPacketS2C(maxJump.get(), height.get())
         );
     }
 }
