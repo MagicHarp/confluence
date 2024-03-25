@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EchoBlock extends HalfTransparentBlock implements CustomModel, CustomItemModel {
     public EchoBlock() {
-        super(BlockBehaviour.Properties.of().noOcclusion());
+        super(BlockBehaviour.Properties.of().isSuffocating((a,b,c)->false).noCollission());
         registerDefaultState(stateDefinition.any().setValue(StateProperties.VISIBLE, false));
     }
 
