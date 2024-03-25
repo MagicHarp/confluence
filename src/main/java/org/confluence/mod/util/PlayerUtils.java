@@ -70,6 +70,17 @@ public class PlayerUtils {
         return success.get();
     }
 
+    public static void increaseAdditionalMana(ServerPlayer serverPlayer, int amount) {
+        serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
+            manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() + amount);
+            syncMana2Client(serverPlayer, manaStorage);
+        });
+    }
+
+    public static void decreaseAdditionalMana(ServerPlayer serverPlayer, int amount) {
+        increaseAdditionalMana(serverPlayer, -amount);
+    }
+
     public static void syncAdvancements(ServerPlayer serverPlayer) {
 
     }

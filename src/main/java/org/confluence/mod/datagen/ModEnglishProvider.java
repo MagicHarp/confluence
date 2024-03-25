@@ -36,6 +36,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.curios", "Confluence | Curios");
         
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
+        add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
+        add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
+        add("item.confluence.extendo_grip.tooltip", "Increases block placement & tool range by 3");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

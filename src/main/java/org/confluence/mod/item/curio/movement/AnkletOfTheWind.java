@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio;
+package org.confluence.mod.item.curio.movement;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;

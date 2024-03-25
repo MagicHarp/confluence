@@ -42,6 +42,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.curios", "汇流来世 | 饰品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
+        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
+        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.extendo_grip.tooltip", "物块放置范围和工具范围扩大3格");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
