@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item":"confluence:another_northland_planks"
+        }
+    },
+    "result": {
+        "item": "confluence:another_northland_beam",
+        "count": 1
+    }
+}

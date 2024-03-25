@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "minecraft:ice"
+    },
+    "result": "confluence:ice_bricks",
+    "count": 1
+}

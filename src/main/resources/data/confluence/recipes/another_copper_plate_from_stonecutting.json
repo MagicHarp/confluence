@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item":"minecraft:copper_block"
+    },
+    "result": "confluence:another_copper_plate",
+    "count": 4
+}

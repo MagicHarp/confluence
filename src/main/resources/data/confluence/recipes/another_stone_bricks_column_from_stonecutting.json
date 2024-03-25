@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item":"confluence:another_polished_granite"
+    },
+    "result": "confluence:another_granite_column",
+    "count": 1
+}

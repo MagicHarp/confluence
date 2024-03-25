@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item":"minecraft:stripped_spruce_wood"
+        },
+        {
+            "item": "minecraft:stripped_spruce_wood"
+        },
+        {
+            "item": "minecraft:stripped_spruce_wood"
+        }
+    ],
+    "result": {
+        "item": "confluence:another_northland_planks",
+        "count": 12
+    }
+}

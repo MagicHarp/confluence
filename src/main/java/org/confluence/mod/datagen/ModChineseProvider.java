@@ -85,7 +85,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(EBONY_LOG_BLOCKS.STRIPPED_WOOD.get(), "乌木去皮木");
         add(EBONY_LOG_BLOCKS.DOOR.get(), "乌木门");
         add(EBONY_LOG_BLOCKS.SIGN.get(), "乌木告示牌");
-        add(EBONY_LOG_BLOCKS.WALL_SIGN.get(), "乌木悬挂告示牌");
         add(EBONY_LOG_BLOCKS.STAIRS.get(), "乌木楼梯");
         add(EBONY_LOG_BLOCKS.SLAB.get(), "乌木台阶");
         add(EBONY_LOG_BLOCKS.TRAPDOOR.get(), "乌木活板门");
@@ -190,7 +189,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_IRON_BRICKS.get(), "铁砖块");
         add(ANOTHER_STONE_BRICKS.get(), "异域石砖");
         add(EBONY_ORE_BRICKS.get(), "魔矿砖");
-        add(EBONY_ROCK_BRICKS.get(), "魔矿石砖");
+        add(EBONY_ROCK_BRICKS.get(), "黑檀石砖");
         add(BLUE_GEL_BLOCK.get(), "凝胶块");
         add(GREEN_CANDY_BLOCK.get(), "绿色糖块");
         add(ICE_BRICKS.get(), "冰砖块");
@@ -260,7 +259,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
-        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
+        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");ebony_planks_from_ebony_log_crafting.json
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
