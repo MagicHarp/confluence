@@ -16,11 +16,15 @@ public class FrostBulletEntity extends BaseBulletEntity {
         this(ModEntities.FROST_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
-        setNoGravity(true);
     }
 
     @Override
     public SimpleParticleType getParticle() {
         return ModParticles.RUBY_BULLET.get();
+    }
+
+    @Override
+    protected double getGravity() {
+        return 0.5;
     }
 }

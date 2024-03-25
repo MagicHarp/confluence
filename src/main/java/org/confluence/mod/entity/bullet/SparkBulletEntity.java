@@ -16,11 +16,15 @@ public class SparkBulletEntity extends BaseBulletEntity {
         this(ModEntities.SPARK_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
-        setSecondsOnFire(100);
     }
 
     @Override
     public SimpleParticleType getParticle() {
         return ModParticles.RUBY_BULLET.get();
+    }
+
+    @Override
+    protected double getGravity() {
+        return 0.5;
     }
 }
