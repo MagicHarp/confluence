@@ -67,8 +67,12 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         this.regenerateBonus = regenerateBonus;
     }
 
-    public void setAdditionalMana(int additionalMana) {
-        this.additionalMana = additionalMana;
+    public int getAdditionalMana() {
+        return additionalMana;
+    }
+
+    public void setAdditionalMana(int amount) {
+        this.additionalMana = amount;
         freshMaxMana();
     }
 

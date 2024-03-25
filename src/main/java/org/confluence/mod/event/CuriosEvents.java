@@ -7,10 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.curio.IMultiJump;
-import org.confluence.mod.network.EchoBlockVisibilityPacketS2C;
-import org.confluence.mod.network.MechanicalBlockVisibilityPacketS2C;
+import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -23,32 +20,7 @@ public class CuriosEvents {
     @SubscribeEvent
     public static void curioChange(CurioChangeEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            ItemStack from = event.getFrom();
-            ItemStack to = event.getTo();
-            echo(from, serverPlayer, false);
-            echo(to, serverPlayer, true);
-            mechanical(from, serverPlayer, false);
-            mechanical(to, serverPlayer, true);
-
             sendMaxJump(serverPlayer);
-        }
-    }
-
-    private static void echo(ItemStack itemStack, ServerPlayer serverPlayer, boolean value) {
-        if (itemStack.is(CurioItems.SPECTRE_GOGGLES.get())) {
-            NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EchoBlockVisibilityPacketS2C(value)
-            );
-        }
-    }
-
-    private static void mechanical(ItemStack itemStack, ServerPlayer serverPlayer, boolean value) {
-        if (itemStack.is(CurioItems.MECHANICAL_LENS.get())) {
-            NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new MechanicalBlockVisibilityPacketS2C(value)
-            );
         }
     }
 

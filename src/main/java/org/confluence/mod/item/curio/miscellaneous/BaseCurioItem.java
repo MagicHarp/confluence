@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio;
+package org.confluence.mod.item.curio.miscellaneous;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

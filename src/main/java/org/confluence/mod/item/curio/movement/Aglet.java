@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio;
+package org.confluence.mod.item.curio.movement;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -6,14 +6,15 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.item.curio.miscellaneous.BaseCurioItem;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class AnkletOfTheWind extends BaseCurioItem {
-    public static final UUID SPEED_UUID = UUID.fromString("355067F2-9D3A-92F8-B557-31ED341BFAC3");
+public class Aglet extends BaseCurioItem {
+    public static final UUID SPEED_UUID = UUID.fromString("2B6DC797-A802-DF05-8231-BC8FCA9D770A");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Anklet of the Wind", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Aglet", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     @Override
