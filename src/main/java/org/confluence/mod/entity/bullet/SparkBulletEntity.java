@@ -31,6 +31,6 @@ public class SparkBulletEntity extends BaseBulletEntity {
 
     @Override
     protected double getGravity() {
-        return 1;
+        return 0.2;
     }
 }
