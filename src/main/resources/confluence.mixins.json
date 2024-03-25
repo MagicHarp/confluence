@@ -6,7 +6,8 @@
     "mixins": [
         "BlockBehaviourMixin",
         "LivingEntityAccessor",
-        "PlayerAdvancementsMixin"
+        "PlayerAdvancementsMixin",
+        "RangedAttributeAccessor"
     ],
     "minVersion": "0.8.5",
     "client": [

@@ -89,7 +89,6 @@ public class ModTabs {
                 }
                 for (Gels gels : Gels.values()) {
                     output.accept(gels.get());
-                    output.accept(CurioItems.MECHANICAL_LENS.get());
                 }
             })
             .build());
