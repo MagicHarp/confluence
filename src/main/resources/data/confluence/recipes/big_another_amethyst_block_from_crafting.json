@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "confluence:another_amethyst"
+        }
+    },
+    "result": {
+        "item": "confluence:big_another_amethyst_block",
+        "count": 1
+    }
+}
