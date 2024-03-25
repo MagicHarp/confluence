@@ -47,7 +47,7 @@ public abstract class BaseBulletEntity extends Projectile {
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        entityHitResult.getEntity().hurt(damageSources().indirectMagic(this, this.getOwner()), 5);
+        entityHitResult.getEntity().hurt(damageSources().indirectMagic(this, getOwner()), getDamage());
     }
 
     @Override
@@ -59,7 +59,11 @@ public abstract class BaseBulletEntity extends Projectile {
     protected void defineSynchedData() {
     }
 
-    protected double getGravity(){
+    protected float getDamage() {
+        return 5;
+    }
+
+    protected double getGravity() {
         return 0.03;
     }
 }
