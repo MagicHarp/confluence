@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item":"confluence:tin_block"
+    },
+    "result": "confluence:tin_plate",
+    "count": 9
+}
