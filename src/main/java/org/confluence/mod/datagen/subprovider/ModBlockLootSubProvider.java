@@ -11,6 +11,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.ModBlocks;
@@ -21,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.confluence.mod.block.ModBlocks.*;
 
 public class ModBlockLootSubProvider extends BlockLootSubProvider {
     private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(
@@ -60,6 +63,14 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_ADAMANTITE_BLOCK.get());
         dropSelf(Ores.TITANIUM_BLOCK.get());
         dropSelf(Ores.RAW_TITANIUM_BLOCK.get());
+        //自然方块
+        dropSelf(EBONY_STONE.get());
+        dropSelf(EBONY_SAND.get());
+        dropSelf(PEARL_STONE.get());
+        dropSelf(PEARL_SAND.get());
+        dropSelf(ANOTHER_CRIMSON_STONE.get());
+        dropSelf(ANOTHER_CRIMSON_SAND.get());
+        dropSelf(ASH_BLOCK.get());
 
         //装饰方块
         dropSelf(DecorativeBlocks.ANOTHER_OAK_BEAM.get());
@@ -102,6 +113,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(DecorativeBlocks.MARBLE_COLUMN.get());
         dropSelf(DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get());
         dropSelf(DecorativeBlocks.CRYSTAL_BLOCK.get());
+        dropSelf(BIG_RUBY_BLOCK.get());
+        dropSelf(BIG_AMBER_BLOCK.get());
+        dropSelf(BIG_TOPAZ_BLOCK.get());
+        dropSelf(BIG_SAPPHIRE_BLOCK.get());
+        dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
 
 
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
