@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
@@ -414,6 +415,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.BAND_OF_STARPOWER.get(),"星力手环");
         add(CurioItems. EXTENDO_GRIP.get(),"加长握爪");
         //盔甲
+        add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
+        add(Armors.CACTUS_HELMET.get(),"仙人掌头盔");
+        add(Armors.CACTUS_LEGGINGS.get(),"仙人掌护腿");
+        add(Armors.CACTUS_BOOTS.get(),"仙人掌靴子");
         //endregion items
     }
 }
