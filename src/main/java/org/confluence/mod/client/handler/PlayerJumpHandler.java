@@ -36,7 +36,7 @@ public class PlayerJumpHandler {
 
                 jumpCount--;
                 localPlayer.hasImpulse = true;
-                localPlayer.fallDistance = 0.0F;
+                localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(0.0F));
             }
             firstJumped = true;
@@ -47,7 +47,7 @@ public class PlayerJumpHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             maxJump = packet.maxJump();
-            multiY = (packet.height() > 1 ? packet.height() * 0.7 : 1);
+            multiY = packet.multiY();
         });
         context.setPacketHandled(true);
     }

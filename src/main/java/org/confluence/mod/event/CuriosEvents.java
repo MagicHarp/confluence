@@ -42,7 +42,7 @@ public class CuriosEvents {
         });
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(maxJump.get(), height.get())
+            new PlayerJumpPacketS2C(maxJump.get(), height.get() > 1 ? height.get() * 0.7 : 1)
         );
     }
 }

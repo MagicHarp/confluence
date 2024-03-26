@@ -36,6 +36,6 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(0, Component.translatable("item.confluence."+ Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).getPath() +".tooltip"));
+        list.add(Component.translatable("item.confluence."+ Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).getPath() +".tooltip"));
     }
 }

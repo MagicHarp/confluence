@@ -2,16 +2,17 @@ package org.confluence.mod.util;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
 import org.confluence.mod.network.ManaPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class PlayerUtils {
@@ -85,7 +86,14 @@ public class PlayerUtils {
 
     }
 
-    public static <C extends Item & ICurioItem> boolean noSameCurio(LivingEntity living, C curio) {
+    public static boolean noSameCurio(LivingEntity living, Predicate<ItemStack> predicate) {
+        AtomicBoolean isEmpty = new AtomicBoolean();
+        CuriosApi.getCuriosInventory(living)
+            .ifPresent(handler -> isEmpty.set(handler.findCurios(predicate).isEmpty()));
+        return isEmpty.get();
+    }
+
+    public static <C extends BaseCurioItem> boolean noSameCurio(LivingEntity living, C curio) {
         AtomicBoolean isEmpty = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living)
             .ifPresent(handler -> isEmpty.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).isEmpty()));

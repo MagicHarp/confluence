@@ -9,9 +9,7 @@ import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
 import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
 import org.confluence.mod.item.curio.informational.MechanicalLens;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
-import org.confluence.mod.item.curio.movement.Aglet;
-import org.confluence.mod.item.curio.movement.AnkletOfTheWind;
-import org.confluence.mod.item.curio.movement.CloudInABottle;
+import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -25,7 +23,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SHACKLE("shackle", Shackle::new), // 脚镣
     BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
     BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
-    EXTENDO_GRIP("extendo_grip", ExtendoGrip::new); // 加长握爪
+    EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
+    HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
+    FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
+    SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
+    DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
+    ;
 
     private final RegistryObject<BaseCurioItem> value;
 

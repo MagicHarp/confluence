@@ -21,7 +21,7 @@ public record PlayerJumpPacketC2S(float fallDistance) {
         context.enqueueWork(() -> {
             ServerPlayer serverPlayer = context.getSender();
             if (serverPlayer == null) return;
-            serverPlayer.fallDistance = packet.fallDistance;
+            serverPlayer.resetFallDistance();
             serverPlayer.hasImpulse = true;
             serverPlayer.awardStat(Stats.JUMP);
             serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);

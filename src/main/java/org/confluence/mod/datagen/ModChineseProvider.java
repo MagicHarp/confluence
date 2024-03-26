@@ -42,9 +42,21 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.curios", "汇流来世 | 饰品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
+
+        add("item.confluence.aglet.tooltip", "移动速度提高5%");
+        add("item.confluence.anklet_of_the_wind.tooltip", "移动速度提高10%");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.cloud_in_a_bottle.tooltip", "可让持有者二连跳");
+        add("item.confluence.shackle.tooltip", "Allows the holder to double jump");
+        add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
+        add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.extendo_grip.tooltip", "物块放置范围和工具范围扩大3格");
+        add("item.confluence.hermes_boots.tooltip", "穿戴者可飞速奔跑");
+        add("item.confluence.flurry_boots.tooltip", "穿戴者可飞速奔跑");
+        add("item.confluence.sailfish_boots.tooltip", "穿戴者可飞速奔跑");
+        add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
+        add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 

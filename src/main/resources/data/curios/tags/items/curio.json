@@ -9,6 +9,10 @@
         "confluence:shackle",
         "confluence:band_of_regeneration",
         "confluence:band_of_starpower",
-        "confluence:extendo_grip"
+        "confluence:extendo_grip",
+        "confluence:hermes_boots",
+        "confluence:flurry_boots",
+        "confluence:sailfish_boots",
+        "confluence:dunerider_boots"
     ]
 }
