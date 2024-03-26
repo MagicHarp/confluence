@@ -7,8 +7,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.mixin.LivingEntityAccessor;
+import org.confluence.mod.network.FallDistancePacketC2S;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.PlayerJumpPacketC2S;
 import org.confluence.mod.network.PlayerJumpPacketS2C;
 
 import java.util.function.Supplier;
@@ -37,7 +37,7 @@ public class PlayerJumpHandler {
                 jumpCount--;
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(0.0F));
+                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(0.0F));
             }
             firstJumped = true;
         }
@@ -50,5 +50,9 @@ public class PlayerJumpHandler {
             multiY = packet.multiY();
         });
         context.setPacketHandled(true);
+    }
+
+    public static boolean mayFly() {
+        return jumpCount == 0;
     }
 }

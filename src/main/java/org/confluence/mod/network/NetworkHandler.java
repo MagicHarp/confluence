@@ -5,6 +5,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.client.handler.PlayerFlyHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 
 public class NetworkHandler {
@@ -55,10 +56,10 @@ public class NetworkHandler {
 
         CHANNEL.registerMessage(
             packetId++,
-            PlayerJumpPacketC2S.class,
-            PlayerJumpPacketC2S::encode,
-            PlayerJumpPacketC2S::decode,
-            PlayerJumpPacketC2S::handle
+            FallDistancePacketC2S.class,
+            FallDistancePacketC2S::encode,
+            FallDistancePacketC2S::decode,
+            FallDistancePacketC2S::handle
         );
 
         CHANNEL.registerMessage(
@@ -67,6 +68,14 @@ public class NetworkHandler {
             PlayerJumpPacketS2C::encode,
             PlayerJumpPacketS2C::decode,
             PlayerJumpHandler::handlePacket
+        );
+
+        CHANNEL.registerMessage(
+            packetId++,
+            PlayerFlyPacketS2C.class,
+            PlayerFlyPacketS2C::encode,
+            PlayerFlyPacketS2C::decode,
+            PlayerFlyHandler::handlePacket
         );
     }
 }

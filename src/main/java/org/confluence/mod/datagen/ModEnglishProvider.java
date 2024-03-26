@@ -42,7 +42,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
         add("item.confluence.cloud_in_a_bottle.tooltip", "Allows the holder to double jump");
-        add("item.confluence.shackle.tooltip", "Allows the holder to double jump");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.extendo_grip.tooltip", "Increases block placement & tool range by 3");

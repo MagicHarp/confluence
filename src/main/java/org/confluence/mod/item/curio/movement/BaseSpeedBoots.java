@@ -2,7 +2,6 @@ package org.confluence.mod.item.curio.movement;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -18,11 +17,6 @@ import java.util.function.Predicate;
 
 public class BaseSpeedBoots extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("EE6FAFF5-A69D-6101-F82A-93E55A01F65E");
-    protected static final ImmutableMultimap<Attribute, AttributeModifier>[] SPEEDS = Util.make(new ImmutableMultimap<>[71], modifiers -> {
-        for (int i = 0; i < modifiers.length; i++) {
-            modifiers[i] = ImmutableMultimap.of(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", i * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL));
-        }
-    });
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
@@ -45,7 +39,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return SPEEDS[stack.getOrCreateTag().getInt("speed")];
+        return ImmutableMultimap.of(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 
     @Override

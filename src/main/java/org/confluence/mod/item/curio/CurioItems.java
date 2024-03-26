@@ -28,6 +28,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
     SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
+    ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     ;
 
     private final RegistryObject<BaseCurioItem> value;
