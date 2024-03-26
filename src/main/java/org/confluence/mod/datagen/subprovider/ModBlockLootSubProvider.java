@@ -61,6 +61,49 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.TITANIUM_BLOCK.get());
         dropSelf(Ores.RAW_TITANIUM_BLOCK.get());
 
+        //装饰方块
+        dropSelf(DecorativeBlocks.ANOTHER_OAK_BEAM.get());
+        dropSelf(DecorativeBlocks.ANOTHER_OAK_PLANKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_NORTHLAND_BEAM.get());
+        dropSelf(DecorativeBlocks.ANOTHER_NORTHLAND_PLANKS.get());
+        dropSelf(DecorativeBlocks.ICE_BRICKS.get());
+        dropSelf(DecorativeBlocks.SNOW_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_STONE_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_COPPER_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_COPPER_PLATE.get());
+        dropSelf(DecorativeBlocks.TIN_BRICKS.get());
+        dropSelf(DecorativeBlocks.TIN_PLATE.get());
+        dropSelf(DecorativeBlocks.ANOTHER_IRON_BRICKS.get());
+        dropSelf(DecorativeBlocks.LEAD_BRICKS.get());
+        dropSelf(DecorativeBlocks.SILVER_BRICKS.get());
+        dropSelf(DecorativeBlocks.TUNGSTEN_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_GOLD_BRICKS.get());
+        dropSelf(DecorativeBlocks.PLATINUM_BRICKS.get());
+        dropSelf(DecorativeBlocks.EBONY_ORE_BRICKS.get());
+        dropSelf(DecorativeBlocks.EBONY_ROCK_BRICKS.get());
+        dropSelf(DecorativeBlocks.METEORITE_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_CRIMSON_ORE_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_CRIMSON_ROCK_BRICKS.get());
+        dropSelf(DecorativeBlocks.PEARL_ROCK_BRICKS.get());
+        dropSelf(DecorativeBlocks.GREEN_CANDY_BLOCK.get());
+        dropSelf(DecorativeBlocks.RED_CANDY_BLOCK.get());
+        dropSelf(DecorativeBlocks.FROZEN_GEL_BLOCK.get());
+        dropSelf(DecorativeBlocks.BLUE_GEL_BLOCK.get());
+        dropSelf(DecorativeBlocks.PINK_GEL_BLOCK.get());
+        dropSelf(DecorativeBlocks.SUN_PLATE.get());
+        dropSelf(DecorativeBlocks.ANOTHER_LAVA_BEAM.get());
+        dropSelf(DecorativeBlocks.ANOTHER_LAVA_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_BEAM.get());
+        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_PLATE.get());
+        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_SMALL_BRICKS.get());
+        dropSelf(DecorativeBlocks.ANOTHER_SMOOTH_OBSIDIAN.get());
+        dropSelf(DecorativeBlocks.ANOTHER_GRANITE_COLUMN.get());
+        dropSelf(DecorativeBlocks.MARBLE_COLUMN.get());
+        dropSelf(DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get());
+        dropSelf(DecorativeBlocks.CRYSTAL_BLOCK.get());
+
+
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
