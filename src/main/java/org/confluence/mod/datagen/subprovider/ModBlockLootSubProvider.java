@@ -1,10 +1,13 @@
 package org.confluence.mod.datagen.subprovider;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -71,7 +74,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(ANOTHER_CRIMSON_STONE.get());
         dropSelf(ANOTHER_CRIMSON_SAND.get());
         dropSelf(ASH_BLOCK.get());
+        dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(),Items.DIRT);
+        dropOther(CORRUPT_GRASS_BLOCK.get(),Items.DIRT);
+        dropOther(HALLOW_GRASS_BLOCK.get(),Items.DIRT);
 
+        
         //装饰方块
         dropSelf(DecorativeBlocks.ANOTHER_OAK_BEAM.get());
         dropSelf(DecorativeBlocks.ANOTHER_OAK_PLANKS.get());
