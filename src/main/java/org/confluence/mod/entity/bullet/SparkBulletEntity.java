@@ -16,6 +16,8 @@ public class SparkBulletEntity extends BaseBulletEntity {
         this(ModEntities.SPARK_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
+        setSecondsOnFire(100);
+
     }
 
     @Override
@@ -23,8 +25,12 @@ public class SparkBulletEntity extends BaseBulletEntity {
         return ModParticles.RUBY_BULLET.get();
     }
 
+    protected float getDamage() {
+        return 1.3F;
+    }
+
     @Override
     protected double getGravity() {
-        return 0.5;
+        return 0.2;
     }
 }
