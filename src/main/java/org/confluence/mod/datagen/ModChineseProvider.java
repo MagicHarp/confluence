@@ -407,6 +407,14 @@ public class ModChineseProvider extends LanguageProvider {
         //饰品
         add(CurioItems.MECHANICAL_LENS.get(),"机械晶状体");
         add(CurioItems.SPECTRE_GOGGLES.get(),"幽灵护目镜");
+        add(CurioItems.AGLET.get(),"金属带扣");
+        add(CurioItems.ANKLET_OF_THE_WIND.get(),"疾风脚镯");
+        add(CurioItems.CLOUD_IN_A_BOTTLE.get(),"云朵瓶");
+        add(CurioItems.SHACKLE.get(),"脚镣");
+        add(CurioItems.BAND_OF_REGENERATION.get(),"再生手环");
+        add(CurioItems.BAND_OF_STARPOWER.get(),"星力手环");
+        add(CurioItems. EXTENDO_GRIP.get(),"加长握爪");
+        //盔甲
         //endregion items
     }
 }
