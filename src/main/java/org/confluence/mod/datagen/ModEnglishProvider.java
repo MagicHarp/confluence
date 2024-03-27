@@ -34,7 +34,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.armors", "Confluence | Armors");
         add("creativetab.confluence.functional", "Confluence | Functional");
         add("creativetab.confluence.curios", "Confluence | Curios");
-        
+
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
         add("item.confluence.aglet.tooltip", "5% increased movement speed");
@@ -50,6 +50,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sailfish_boots.tooltip", "The wearer can run super fast");
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
         add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
+        add("item.confluence.spectre_boots.tooltip", "Allows flight");
+        add("item.confluence.spectre_boots.tooltip2", "The wearer can run super fast");
+        add("item.confluence.shiny_red_balloon.tooltip", "Increases jump height");
+        add("item.confluence.cloud_in_a_balloon.tooltip", "Allows the holder to double jump");
+        add("item.confluence.cloud_in_a_balloon.tooltip2", "Increases jump height");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

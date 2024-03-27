@@ -57,6 +57,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.sailfish_boots.tooltip", "穿戴者可飞速奔跑");
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
         add("item.confluence.dunerider_boots.tooltip2", "“无节律行走就不会引来蠕虫”");
+        add("item.confluence.spectre_boots.tooltip", "可飞行");
+        add("item.confluence.spectre_boots.tooltip2", "穿戴者可飞速奔跑");
+        add("item.confluence.shiny_red_balloon.tooltip", "增加跳跃高度");
+        add("item.confluence.cloud_in_a_balloon.tooltip", "穿戴者可飞速奔跑");
+        add("item.confluence.cloud_in_a_balloon.tooltip2", "增加跳跃高度");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
