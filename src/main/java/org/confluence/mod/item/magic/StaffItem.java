@@ -21,9 +21,8 @@ public class StaffItem extends Item implements IMagicAttack {
     private final BulletSupplier bulletSupplier;
 
     public StaffItem(BulletSupplier bulletSupplier, Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
         this.bulletSupplier = bulletSupplier;
-
     }
 
     public StaffItem(BulletSupplier bulletSupplier) {
