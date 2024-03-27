@@ -15,7 +15,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.util.PlayerUtils;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class EchoBlock extends HalfTransparentBlock implements CustomModel, CustomItemModel {
@@ -26,7 +26,7 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player && PlayerUtils.noSameCurio(player, CurioItems.SPECTRE_GOGGLES.get())) {
+        if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player && CuriosUtils.noSameCurio(player, CurioItems.SPECTRE_GOGGLES.get())) {
             return Shapes.empty();
         }
         return Shapes.block();

@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.util.PlayerUtils;
+import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
@@ -30,11 +30,11 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     protected void speedUp(LivingEntity living, CompoundTag nbt, int tick, int max) {
         if (max > 70) return;
-        if (living.getDeltaMovement().length() > 0) {
+        if (living.zza > 0) {
             if (tick == 1 || living.level().getGameTime() % tick == 0) {
                 int speed = nbt.getInt("speed");
                 if (speed < max) {
-                    nbt.putInt("speed", speed);
+                    nbt.putInt("speed", speed + 1);
                 }
             }
         } else {
@@ -49,11 +49,11 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return PlayerUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
+        return CuriosUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
     }
 
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return PlayerUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
+        return CuriosUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
     }
 }
