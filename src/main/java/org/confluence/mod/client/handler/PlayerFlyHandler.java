@@ -20,15 +20,14 @@ public class PlayerFlyHandler {
     public static void handleFly(LocalPlayer localPlayer){
         if (localPlayer.onGround()) {
             flyTicks = maxFlyTicks;
-        } else if (localPlayer.input.jumping && localPlayer.getDeltaMovement().y < 0.16) {
+        } else if (localPlayer.input.jumping) {
             if (PlayerJumpHandler.mayFly() && flyTicks > 0) {
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, maxFlySpeed, vec3.z);
-
-                maxFlyTicks--;
+                flyTicks--;
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(0.0F));
+                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
             }
         }
     }

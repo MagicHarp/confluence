@@ -7,13 +7,13 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public record FallDistancePacketC2S(float fallDistance) {
+public record FallDistancePacketC2S(boolean shouldCause) {
     public static void encode(FallDistancePacketC2S packet, FriendlyByteBuf friendlyByteBuf) {
-        friendlyByteBuf.writeFloat(packet.fallDistance);
+        friendlyByteBuf.writeBoolean(packet.shouldCause);
     }
 
     public static FallDistancePacketC2S decode(FriendlyByteBuf friendlyByteBuf) {
-        return new FallDistancePacketC2S(friendlyByteBuf.readFloat());
+        return new FallDistancePacketC2S(friendlyByteBuf.readBoolean());
     }
 
     public static void handle(FallDistancePacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
@@ -23,8 +23,10 @@ public record FallDistancePacketC2S(float fallDistance) {
             if (serverPlayer == null) return;
             serverPlayer.resetFallDistance();
             serverPlayer.hasImpulse = true;
-            serverPlayer.awardStat(Stats.JUMP);
-            serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);
+            if (packet.shouldCause) {
+                serverPlayer.awardStat(Stats.JUMP);
+                serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);
+            }
         });
         context.setPacketHandled(true);
     }
