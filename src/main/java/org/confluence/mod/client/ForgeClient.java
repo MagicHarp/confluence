@@ -7,6 +7,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.handler.PlayerFlyHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -18,5 +19,6 @@ public class ForgeClient {
         LocalPlayer localPlayer = MINECRAFT.player;
         if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
         PlayerJumpHandler.handleJump(localPlayer);
+        PlayerFlyHandler.handleFly(localPlayer);
     }
 }

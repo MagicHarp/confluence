@@ -37,7 +37,7 @@ public class PlayerJumpHandler {
                 jumpCount--;
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(0.0F));
+                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(true));
             }
             firstJumped = true;
         }

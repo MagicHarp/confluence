@@ -23,6 +23,11 @@ public class BaseSpeedBoots extends BaseCurioItem {
         speedUp(slotContext.entity(), stack.getOrCreateTag(), 2, 40);
     }
 
+    @Override
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        stack.getOrCreateTag().putInt("speed", 0);
+    }
+
     protected void speedUp(LivingEntity living, CompoundTag nbt, int tick, int max) {
         if (max > 70) return;
         if (living.getDeltaMovement().length() > 0) {
