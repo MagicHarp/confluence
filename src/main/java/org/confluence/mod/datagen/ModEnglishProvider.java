@@ -51,9 +51,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.ice_skates.tooltip2", "Ice will not break when you fall on it");
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
         add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
-
         add("item.confluence.lucky_horseshoe.tooltip", "'Said to bring good fortune and keep evil spirits at bay'");
-        add("item.confluence.lightning_boots.attr", "8% increased movement speed");
+        add("item.confluence.lightning_boots.attribute", "8% increased movement speed");
         add("item.confluence.lightning_boots.tooltip", "Allows flight, super fast running");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");

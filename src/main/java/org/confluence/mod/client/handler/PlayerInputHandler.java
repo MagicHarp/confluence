@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 @OnlyIn(Dist.CLIENT)
 public class PlayerInputHandler {
     private static boolean jumpKeyDown = true;
+    private static boolean jumpFinished = false;
 
     private static int maxJumpCount = 0;
     private static int remainJumpCount = 0;
@@ -26,7 +27,6 @@ public class PlayerInputHandler {
     private static int maxOneTimeJumpTicks = 0;
     private static int remainOneTimeJumpTicks = 0;
     private static double jumpSpeed = 0.0;
-    private static boolean oneTimeJumped = false;
 
     private static int maxFlyTicks = 0;
     private static int remainFlyTicks = 0;
@@ -35,9 +35,9 @@ public class PlayerInputHandler {
     public static void handleJump(LocalPlayer localPlayer) {
         if (localPlayer.onGround()) {
             jumpKeyDown = true;
+            jumpFinished = false;
             remainJumpCount = maxJumpCount;
             remainOneTimeJumpTicks = maxOneTimeJumpTicks;
-            oneTimeJumped = false;
             remainFlyTicks = maxFlyTicks;
         } else if (localPlayer.input.jumping) {
             if (jumpKeyDown) return;
@@ -54,14 +54,14 @@ public class PlayerInputHandler {
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(true));
-            } else if (!oneTimeJumped && remainOneTimeJumpTicks > 0) {
+            } else if (!jumpFinished && remainOneTimeJumpTicks > 0) {
                 remainOneTimeJumpTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, jumpSpeed, vec3.z);
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
-            } else if (remainFlyTicks > 0) {
+            } else if (jumpFinished && remainFlyTicks > 0) {
                 remainFlyTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, flySpeed, vec3.z);
@@ -71,7 +71,7 @@ public class PlayerInputHandler {
             }
         } else {
             jumpKeyDown = false;
-            oneTimeJumped = remainOneTimeJumpTicks < maxOneTimeJumpTicks;
+            jumpFinished = remainJumpCount == 0 && (maxOneTimeJumpTicks == 0 || remainOneTimeJumpTicks < maxOneTimeJumpTicks);
         }
     }
 

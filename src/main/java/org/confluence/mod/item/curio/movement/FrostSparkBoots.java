@@ -19,11 +19,11 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class FrostSparkBoots extends LightningBoots implements ThinIceBlock.ISafeIce {
+public class FrostSparkBoots extends LightningBoots implements ThinIceBlock.IceSafe {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        if (living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
+        if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
             return ImmutableMultimap.of(
                 Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.MOVEMENT_SPEED, new AttributeModifier(IceSkates.SPEED_UUID, "Ice Skates", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL)

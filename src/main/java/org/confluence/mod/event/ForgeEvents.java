@@ -10,7 +10,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -23,7 +22,6 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.mana.ManaProvider;
-import org.confluence.mod.mana.ManaStorage;
 import org.confluence.mod.util.PlayerUtils;
 
 import java.util.Random;
@@ -76,10 +74,12 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void playerClone(PlayerEvent.Clone event) {
-        if (!event.isWasDeath()) return;
-        LazyOptional<ManaStorage> manaStorageLazyOptional = event.getOriginal().getCapability(ManaProvider.MANA_CAPABILITY);
-        manaStorageLazyOptional.ifPresent(old -> event.getEntity().getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
-        //manaStorageLazyOptional.invalidate();
+        Player oldPlayer = event.getOriginal();
+        oldPlayer.revive();
+        oldPlayer.getCapability(ManaProvider.MANA_CAPABILITY)
+            .ifPresent(old -> event.getEntity().getCapability(ManaProvider.MANA_CAPABILITY)
+                .ifPresent(neo -> neo.copyFrom(old))
+            );
     }
 
     @SubscribeEvent

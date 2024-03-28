@@ -47,7 +47,7 @@ public class LivingEntityMixin implements LivingMixin {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFallResistance iFallResistance) {
                     int distance = iFallResistance.getFallResistance();
                     if (distance == -1) {
-                        this.c$fallResistance = -1;
+                        fallResistance.set(-1);
                         return;
                     } else {
                         fallResistance.set(Math.max(distance, fallResistance.get()));
@@ -64,7 +64,7 @@ public class LivingEntityMixin implements LivingMixin {
     }
 
     @Inject(method = "calculateFallDamage", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    private void fallDamage(float fallDistance, float p_21238_, CallbackInfoReturnable<Integer> cir) {
+    private void fallDamage(float fallDistance, float multiply, CallbackInfoReturnable<Integer> cir) {
         if (c$fallResistance == -1) {
             cir.setReturnValue(0);
         } else {

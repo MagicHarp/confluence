@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class IceSkates extends BaseCurioItem implements ThinIceBlock.ISafeIce {
+public class IceSkates extends BaseCurioItem implements ThinIceBlock.IceSafe {
     public static final UUID SPEED_UUID = UUID.fromString("7691D447-BD87-29E8-1C04-CF218DFF154D");
     static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
         Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Ice Skates", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -34,7 +34,7 @@ public class IceSkates extends BaseCurioItem implements ThinIceBlock.ISafeIce {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        if (living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
+        if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
             return SPEED;
         }
         return EMPTY_ATTRIBUTE;

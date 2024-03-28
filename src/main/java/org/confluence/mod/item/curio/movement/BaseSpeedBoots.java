@@ -49,7 +49,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
             if (living.zza > 0) {
                 int actually = Math.min(max - speed, addition);
                 if (actually > 0) {
-                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), actually));
+                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
