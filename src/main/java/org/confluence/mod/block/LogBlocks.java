@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import static org.confluence.mod.block.ModBlocks.registerWithItem;
 import static org.confluence.mod.block.ModBlocks.registerWithoutItem;
 
-public class DecorationLogBlocks {
-    public static final ArrayList<DecorationLogBlocks> DECORATION_LOG_BLOCKS = new ArrayList<>();
+public class LogBlocks {
+    public static final ArrayList<LogBlocks> LOG_BLOCKS = new ArrayList<>();
 
     public final String id;
     public final RegistryObject<Block> PLANKS;
@@ -42,7 +42,7 @@ public class DecorationLogBlocks {
     public final RegistryObject<DoorBlock> DOOR;
 
 
-    public DecorationLogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree, boolean ignitedByLava) {
+    public LogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree, boolean ignitedByLava) {
         this.id = id;
         BlockBehaviour.Properties planks = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
         this.PLANKS = registerWithItem(id + "_planks", () -> new Block(ignitedByLava ? planks.ignitedByLava() : planks));
@@ -51,7 +51,7 @@ public class DecorationLogBlocks {
             BlockBehaviour.Properties finalLog = ignitedByLava ? log.ignitedByLava() : log;
             this.LOG = registerWithItem(id + "_log", () -> new RotatedPillarBlock(finalLog));
             this.STRIPPED_LOG = registerWithItem(id + "_stripped_log", () -> new RotatedPillarBlock(finalLog));
-            BlockBehaviour.Properties leaves = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(DecorationLogBlocks::valid).isSuffocating(DecorationLogBlocks::never).isViewBlocking(DecorationLogBlocks::never).pushReaction(PushReaction.DESTROY).isRedstoneConductor(DecorationLogBlocks::never);
+            BlockBehaviour.Properties leaves = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(LogBlocks::valid).isSuffocating(LogBlocks::never).isViewBlocking(LogBlocks::never).pushReaction(PushReaction.DESTROY).isRedstoneConductor(LogBlocks::never);
             this.LEAVES = registerWithItem(id + "_leaves", () -> new LeavesBlock(ignitedByLava ? leaves.ignitedByLava() : leaves));
             BlockBehaviour.Properties wood = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD);
             BlockBehaviour.Properties finalWood = ignitedByLava ? wood.ignitedByLava() : wood;
@@ -72,15 +72,15 @@ public class DecorationLogBlocks {
         this.SIGN = registerWithItem(id + "_sign", () -> new StandingSignBlock(ignitedByLava ? sign.ignitedByLava() : sign, woodType));
         BlockBehaviour.Properties wall_sign = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).lootFrom(SIGN);
         this.WALL_SIGN = registerWithoutItem(id + "_wall_sign", () -> new WallSignBlock(ignitedByLava ? wall_sign.ignitedByLava() : wall_sign, woodType));
-        BlockBehaviour.Properties trapdoor = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(DecorationLogBlocks::never);
+        BlockBehaviour.Properties trapdoor = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(LogBlocks::never);
         this.TRAPDOOR = registerWithItem(id + "_trapdoor", () -> new TrapDoorBlock(ignitedByLava ? trapdoor.ignitedByLava() : trapdoor, blockSetType));
         BlockBehaviour.Properties door = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().pushReaction(PushReaction.DESTROY);
         this.DOOR = registerWithItem(id + "_door", () -> new DoorBlock(ignitedByLava ? door.mapColor(PLANKS.get().defaultMapColor()).ignitedByLava() : door.mapColor(PLANKS.get().defaultMapColor()), blockSetType));
 
-        DECORATION_LOG_BLOCKS.add(this);
+        LOG_BLOCKS.add(this);
     }
 
-    public DecorationLogBlocks(String id, WoodSetType woodSetType) {
+    public LogBlocks(String id, WoodSetType woodSetType) {
         this(id, woodSetType.SET, woodSetType.TYPE, true, true);
     }
 
@@ -97,7 +97,7 @@ public class DecorationLogBlocks {
     }
 
     public static void acceptBuilding(CreativeModeTab.Output output) {
-        for (DecorationLogBlocks logBlocks : DECORATION_LOG_BLOCKS) {
+        for (LogBlocks logBlocks : LOG_BLOCKS) {
             output.accept(logBlocks.PLANKS.get());
             if (logBlocks.STRIPPED_LOG != null) {
                 output.accept(logBlocks.STRIPPED_LOG.get());
@@ -121,7 +121,7 @@ public class DecorationLogBlocks {
     }
 
     public static void acceptAxeTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
-        for (DecorationLogBlocks logBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
+        for (LogBlocks logBlocks : LOG_BLOCKS) {
             tag.add(logBlocks.PLANKS.get());
             if (logBlocks.LOG != null) {
                 tag.add(logBlocks.LOG.get());

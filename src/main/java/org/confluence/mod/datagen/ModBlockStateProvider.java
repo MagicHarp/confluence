@@ -7,7 +7,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.DecorationLogBlocks;
+import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.WoodSetType;
 import org.confluence.mod.block.natural.SpreadingGrassBlock;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -118,7 +118,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         return new ResourceLocation(MODID, "block/" + path + "_top");
     }
 
-    private void registerSignBlock(DecorationLogBlocks logBlocks) {
+    private void registerSignBlock(LogBlocks logBlocks) {
         try {
             signBlock(logBlocks.SIGN.get(), logBlocks.WALL_SIGN.get(), new ResourceLocation(MODID, "block/" + logBlocks.id + "_planks"));
         } catch (Exception e) {
