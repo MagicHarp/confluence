@@ -1,22 +1,30 @@
 {
     "replace": false,
     "values": [
-        "confluence:aglet",
-        "confluence:anklet_of_the_wind",
+        "confluence:shackle",
+        "confluence:extendo_grip",
         "confluence:mechanical_lens",
         "confluence:spectre_goggles",
-        "confluence:cloud_in_a_bottle",
-        "confluence:shackle",
         "confluence:band_of_regeneration",
         "confluence:band_of_starpower",
-        "confluence:extendo_grip",
+        "confluence:aglet",
+        "confluence:anklet_of_the_wind",
+        "confluence:cloud_in_a_bottle",
+        "confluence:blizzard_in_a_bottle",
+        "confluence:ice_skates",
         "confluence:hermes_boots",
         "confluence:flurry_boots",
         "confluence:sailfish_boots",
         "confluence:dunerider_boots",
         "confluence:rocket_boots",
         "confluence:spectre_boots",
+        "confluence:lightning_boots",
+        "confluence:frostspark_boots",
         "confluence:shiny_red_balloon",
-        "confluence:cloud_in_a_balloon"
+        "confluence:cloud_in_a_balloon",
+        "confluence:blizzard_in_a_balloon",
+        "confluence:frog_leg",
+        "confluence:ambhipian_boots",
+        "confluence:lucky_horseshoe"
     ]
 }

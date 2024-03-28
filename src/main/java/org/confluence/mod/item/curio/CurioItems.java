@@ -29,14 +29,22 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
+    BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
+    ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
     SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
+    LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
+    FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
     SHINY_RED_BALLOON("shiny_red_balloon", ShinyRedBalloon::new), // 闪亮红气球
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
+    BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
+    FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
+    AMBHIPIAN_BOOTS("ambhipian_boots", AmbhipianBoots::new), // 水陆两用靴
+    LUCKY_HORSESHOE("lucky_horseshoe", LuckyHorseshoe::new), // 幸运马掌
     ;
 
     private final RegistryObject<BaseCurioItem> value;

@@ -37,25 +37,24 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
-        add("item.confluence.extendo_grip.tooltip", "Increases block placement & tool range by 3");
+        add("curios.tooltip.speed_boots", "The wearer can run super fast");
+        add("curios.tooltip.may_fly", "Allows flight");
+        add("curios.tooltip.jump_boost", "Increases jump height");
+        add("curios.tooltip.multi_jump", "Allows the holder to double jump");
+        add("curios.tooltip.fall_resistance", "Increases fall resistance");
+        add("curios.tooltip.negates_fall_damage", "Negates fall damage");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
-        add("item.confluence.aglet.tooltip", "5% increased movement speed");
-        add("item.confluence.anklet_of_the_wind.tooltip", "10% increased movement speed");
-        add("item.confluence.cloud_in_a_bottle.tooltip", "Allows the holder to double jump");
-        add("item.confluence.hermes_boots.tooltip", "The wearer can run super fast");
-        add("item.confluence.flurry_boots.tooltip", "The wearer can run super fast");
-        add("item.confluence.sailfish_boots.tooltip", "The wearer can run super fast");
+        add("item.confluence.ice_skates.tooltip", "Provides extra mobility on ice");
+        add("item.confluence.ice_skates.tooltip2", "Ice will not break when you fall on it");
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
         add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
-        add("item.confluence.rocket_boots.tooltip", "Allows flight");
-        add("item.confluence.spectre_boots.tooltip", "Allows flight");
-        add("item.confluence.spectre_boots.tooltip2", "The wearer can run super fast");
-        add("item.confluence.shiny_red_balloon.tooltip", "Increases jump height");
-        add("item.confluence.cloud_in_a_balloon.tooltip", "Allows the holder to double jump");
-        add("item.confluence.cloud_in_a_balloon.tooltip2", "Increases jump height");
+
+        add("item.confluence.lucky_horseshoe.tooltip", "'Said to bring good fortune and keep evil spirits at bay'");
+        add("item.confluence.lightning_boots.attr", "8% increased movement speed");
+        add("item.confluence.lightning_boots.tooltip", "Allows flight, super fast running");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

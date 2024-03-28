@@ -7,7 +7,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 public class CloudInABottle extends BaseCurioItem implements IMultiJump {
     @Override
-    public int getJumpTimes() {
+    public int getJumpCount() {
         return 1;
     }
 

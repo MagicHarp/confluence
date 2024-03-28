@@ -14,10 +14,7 @@ import org.confluence.mod.block.common.BaseBlock;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
-import org.confluence.mod.block.natural.ISpreadable;
-import org.confluence.mod.block.natural.SpreadingBlock;
-import org.confluence.mod.block.natural.SpreadingGrassBlock;
-import org.confluence.mod.block.natural.SpreadingSandBlock;
+import org.confluence.mod.block.natural.*;
 import org.confluence.mod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -29,7 +26,6 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Confluence.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Confluence.MODID);
 
-    // region registries
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
@@ -63,13 +59,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> POLISHED_MARBLE = registerWithItem("polished_marble", BaseBlock::new);
     // decorative blocks
     public static final LogBlocks SPOOKY_LOG_BLOCKS = new LogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
-
     // functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
     public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);
     public static final RegistryObject<BlockEntityType<ActuatorsBlockEntity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlockEntity::new, ACTUATORS.get()).build(null));
-
-    // endregion registries
+    // frost
+    public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

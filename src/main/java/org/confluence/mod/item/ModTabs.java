@@ -57,6 +57,7 @@ public class ModTabs {
                 for (Ores ores : Ores.values()) {
                     output.accept(ores.get());
                 }
+
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
                 output.accept(CORRUPT_GRASS_BLOCK.get());
@@ -77,6 +78,8 @@ public class ModTabs {
                 output.accept(ASH_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+
+                output.accept(THIN_ICE_BLOCK.get());
             })
             .build());
     // 材料

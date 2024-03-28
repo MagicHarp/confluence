@@ -38,7 +38,7 @@ public class SpectreBoots extends BaseSpeedBoots implements IMayFly {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(Component.translatable("item.confluence.spectre_boots.tooltip2"));
+        list.add(IMayFly.TOOLTIP);
+        list.add(BaseSpeedBoots.TOOLTIP);
     }
 }
