@@ -21,7 +21,7 @@ public enum Icons implements EnumRegister<IconItem> {
     PRECIOUS_ICON("precious_icon"),
     SPOOKY_WOOD("spooky_wood"),
     SUMMON_ICON("summon_icon"),
-    FUNCTION_ICON("function_icon"),
+    FUNCTIONAL_ICON("functional_icon"),
     MATERIAL_ICON("material_icon"),
     ACCESSORIES_ICON("accessories_icon"),
     TOOLS_ICON("tools_icon");

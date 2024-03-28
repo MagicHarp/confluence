@@ -1,22 +1,19 @@
 package org.confluence.mod.datagen.subprovider;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
-import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
+import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.common.Materials;
@@ -66,66 +63,6 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_ADAMANTITE_BLOCK.get());
         dropSelf(Ores.TITANIUM_BLOCK.get());
         dropSelf(Ores.RAW_TITANIUM_BLOCK.get());
-        //自然方块
-        dropSelf(EBONY_STONE.get());
-        dropSelf(EBONY_SAND.get());
-        dropSelf(PEARL_STONE.get());
-        dropSelf(PEARL_SAND.get());
-        dropSelf(ANOTHER_CRIMSON_STONE.get());
-        dropSelf(ANOTHER_CRIMSON_SAND.get());
-        dropSelf(ASH_BLOCK.get());
-        dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(),Items.DIRT);
-        dropOther(CORRUPT_GRASS_BLOCK.get(),Items.DIRT);
-        dropOther(HALLOW_GRASS_BLOCK.get(),Items.DIRT);
-
-        
-        //装饰方块
-        dropSelf(DecorativeBlocks.ANOTHER_OAK_BEAM.get());
-        dropSelf(DecorativeBlocks.ANOTHER_OAK_PLANKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_NORTHLAND_BEAM.get());
-        dropSelf(DecorativeBlocks.ANOTHER_NORTHLAND_PLANKS.get());
-        dropSelf(DecorativeBlocks.ICE_BRICKS.get());
-        dropSelf(DecorativeBlocks.SNOW_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_STONE_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_COPPER_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_COPPER_PLATE.get());
-        dropSelf(DecorativeBlocks.TIN_BRICKS.get());
-        dropSelf(DecorativeBlocks.TIN_PLATE.get());
-        dropSelf(DecorativeBlocks.ANOTHER_IRON_BRICKS.get());
-        dropSelf(DecorativeBlocks.LEAD_BRICKS.get());
-        dropSelf(DecorativeBlocks.SILVER_BRICKS.get());
-        dropSelf(DecorativeBlocks.TUNGSTEN_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_GOLD_BRICKS.get());
-        dropSelf(DecorativeBlocks.PLATINUM_BRICKS.get());
-        dropSelf(DecorativeBlocks.EBONY_ORE_BRICKS.get());
-        dropSelf(DecorativeBlocks.EBONY_ROCK_BRICKS.get());
-        dropSelf(DecorativeBlocks.METEORITE_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_CRIMSON_ORE_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_CRIMSON_ROCK_BRICKS.get());
-        dropSelf(DecorativeBlocks.PEARL_ROCK_BRICKS.get());
-        dropSelf(DecorativeBlocks.GREEN_CANDY_BLOCK.get());
-        dropSelf(DecorativeBlocks.RED_CANDY_BLOCK.get());
-        dropSelf(DecorativeBlocks.FROZEN_GEL_BLOCK.get());
-        dropSelf(DecorativeBlocks.BLUE_GEL_BLOCK.get());
-        dropSelf(DecorativeBlocks.PINK_GEL_BLOCK.get());
-        dropSelf(DecorativeBlocks.SUN_PLATE.get());
-        dropSelf(DecorativeBlocks.ANOTHER_LAVA_BEAM.get());
-        dropSelf(DecorativeBlocks.ANOTHER_LAVA_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_BEAM.get());
-        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_PLATE.get());
-        dropSelf(DecorativeBlocks.ANOTHER_OBSIDIAN_SMALL_BRICKS.get());
-        dropSelf(DecorativeBlocks.ANOTHER_SMOOTH_OBSIDIAN.get());
-        dropSelf(DecorativeBlocks.ANOTHER_GRANITE_COLUMN.get());
-        dropSelf(DecorativeBlocks.MARBLE_COLUMN.get());
-        dropSelf(DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get());
-        dropSelf(DecorativeBlocks.CRYSTAL_BLOCK.get());
-        dropSelf(BIG_RUBY_BLOCK.get());
-        dropSelf(BIG_AMBER_BLOCK.get());
-        dropSelf(BIG_TOPAZ_BLOCK.get());
-        dropSelf(BIG_SAPPHIRE_BLOCK.get());
-        dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
-
 
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
@@ -150,7 +87,26 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_ADAMANTITE.get()));
         add(Ores.DEEPSLATE_TITANIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_TITANIUM.get()));
         // endregion ore
-        for (DecorationLogBlocks logBlocks : DecorationLogBlocks.DECORATION_LOG_BLOCKS) {
+        // region natural
+        dropSelf(EBONY_STONE.get());
+        dropSelf(EBONY_SAND.get());
+        dropSelf(PEARL_STONE.get());
+        dropSelf(PEARL_SAND.get());
+        dropSelf(ANOTHER_CRIMSON_STONE.get());
+        dropSelf(ANOTHER_CRIMSON_SAND.get());
+        dropSelf(ASH_BLOCK.get());
+        dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(), Items.DIRT);
+        dropOther(CORRUPT_GRASS_BLOCK.get(), Items.DIRT);
+        dropOther(HALLOW_GRASS_BLOCK.get(), Items.DIRT);
+        // endregion natural
+
+        dropSelf(BIG_RUBY_BLOCK.get());
+        dropSelf(BIG_AMBER_BLOCK.get());
+        dropSelf(BIG_TOPAZ_BLOCK.get());
+        dropSelf(BIG_SAPPHIRE_BLOCK.get());
+        dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
+
+        for (LogBlocks logBlocks : LogBlocks.LOG_BLOCKS) {
             dropSelf(logBlocks.PLANKS.get());
             if (logBlocks.STRIPPED_LOG != null) dropSelf(logBlocks.STRIPPED_LOG.get());
             if (logBlocks.WOOD != null) dropSelf(logBlocks.WOOD.get());
@@ -180,6 +136,9 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
     }
 
     private LootTable.Builder createTinOreDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RAW_TIN.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RAW_TIN.get())
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
+            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+        ));
     }
 }

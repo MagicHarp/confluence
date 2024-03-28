@@ -44,19 +44,20 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
-        add("item.confluence.aglet.tooltip", "移动速度提高5%");
-        add("item.confluence.anklet_of_the_wind.tooltip", "移动速度提高10%");
-        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
-        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
-        add("item.confluence.cloud_in_a_bottle.tooltip", "可让持有者二连跳");
+        add("item.confluence.extendo_grip.tooltip", "物块放置范围和工具范围扩大3格");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
-        add("item.confluence.extendo_grip.tooltip", "物块放置范围和工具范围扩大3格");
+        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
+        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.aglet.tooltip", "移动速度提高5%");
+        add("item.confluence.anklet_of_the_wind.tooltip", "移动速度提高10%");
+        add("item.confluence.cloud_in_a_bottle.tooltip", "可让持有者二连跳");
         add("item.confluence.hermes_boots.tooltip", "穿戴者可飞速奔跑");
         add("item.confluence.flurry_boots.tooltip", "穿戴者可飞速奔跑");
         add("item.confluence.sailfish_boots.tooltip", "穿戴者可飞速奔跑");
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
         add("item.confluence.dunerider_boots.tooltip2", "“无节律行走就不会引来蠕虫”");
+        add("item.confluence.rocket_boots.tooltip", "可飞行");
         add("item.confluence.spectre_boots.tooltip", "可飞行");
         add("item.confluence.spectre_boots.tooltip2", "穿戴者可飞速奔跑");
         add("item.confluence.shiny_red_balloon.tooltip", "增加跳跃高度");

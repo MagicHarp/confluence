@@ -6,7 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.ModTags;
-import org.confluence.mod.block.DecorationLogBlocks;
+import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.Ores;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +22,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public void addTags(HolderLookup.@NotNull Provider provider) {
-        DecorationLogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
+        LogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
         Ores.acceptTag(tag(BlockTags.MINEABLE_WITH_PICKAXE));
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(

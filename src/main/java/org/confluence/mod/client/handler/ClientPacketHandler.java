@@ -5,10 +5,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.network.EchoBlockVisibilityPacketS2C;
-import org.confluence.mod.network.HolyWaterColorUpdatePacketS2C;
-import org.confluence.mod.network.ManaPacketS2C;
-import org.confluence.mod.network.MechanicalBlockVisibilityPacketS2C;
+import org.confluence.mod.network.s2c.EchoBlockVisibilityPacketS2C;
+import org.confluence.mod.network.s2c.HolyWaterColorUpdatePacketS2C;
+import org.confluence.mod.network.s2c.ManaPacketS2C;
+import org.confluence.mod.network.s2c.MechanicalBlockVisibilityPacketS2C;
 
 import java.util.function.Supplier;
 
