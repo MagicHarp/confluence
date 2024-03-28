@@ -17,18 +17,35 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class Aglet extends BaseCurioItem {
-    public static final UUID SPEED_UUID = UUID.fromString("2B6DC797-A802-DF05-8231-BC8FCA9D770A");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Aglet", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
+    public static final UUID LUCKY_UUID = UUID.fromString("EEFDE523-84A5-60DE-4176-71EBE048D5F3");
+    static final ImmutableMultimap<Attribute, AttributeModifier> LUCKY = ImmutableMultimap.of(
+        Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Horseshoe", 0.05, AttributeModifier.Operation.ADDITION)
     );
 
     @Override
+    public int getFallResistance() {
+        return -1;
+    }
+
+    @Override
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        freshFallResistance(slotContext.entity());
+    }
+
+    @Override
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        freshFallResistance(slotContext.entity());
+    }
+
+    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return SPEED;
+        return LUCKY;
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+        list.add(Component.translatable("curios.tooltip.negates_fall_damage"));
+        super.appendHoverText(itemStack, level, list, tooltipFlag);
     }
 }

@@ -11,6 +11,7 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.network.s2c.PlayerFlyPacketS2C;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
+import org.confluence.mod.network.s2c.PlayerOneTimeJumpPacketS2C;
 
 import java.util.function.Supplier;
 
@@ -18,23 +19,30 @@ import java.util.function.Supplier;
 public class PlayerInputHandler {
     private static boolean jumpKeyDown = true;
 
-    private static int maxJump = 0;
-    private static int jumpCount = 0;
-    private static double multiY = 0.0D;
+    private static int maxJumpCount = 0;
+    private static int remainJumpCount = 0;
+    private static double multiY = 0.0;
+
+    private static int maxOneTimeJumpTicks = 0;
+    private static int remainOneTimeJumpTicks = 0;
+    private static double jumpSpeed = 0.0;
+    private static boolean oneTimeJumped = false;
 
     private static int maxFlyTicks = 0;
     private static int remainFlyTicks = 0;
-    private static double maxFlySpeed = 0.0D;
+    private static double flySpeed = 0.0;
 
     public static void handleJump(LocalPlayer localPlayer) {
         if (localPlayer.onGround()) {
             jumpKeyDown = true;
-            jumpCount = maxJump;
+            remainJumpCount = maxJumpCount;
+            remainOneTimeJumpTicks = maxOneTimeJumpTicks;
+            oneTimeJumped = false;
             remainFlyTicks = maxFlyTicks;
         } else if (localPlayer.input.jumping) {
             if (jumpKeyDown) return;
-            if (jumpCount > 0) {
-                jumpCount--;
+            if (remainJumpCount > 0) {
+                remainJumpCount--;
                 jumpKeyDown = true;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * multiY;
@@ -46,24 +54,41 @@ public class PlayerInputHandler {
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(true));
+            } else if (!oneTimeJumped && remainOneTimeJumpTicks > 0) {
+                remainOneTimeJumpTicks--;
+                Vec3 vec3 = localPlayer.getDeltaMovement();
+                localPlayer.setDeltaMovement(vec3.x, jumpSpeed, vec3.z);
+                localPlayer.hasImpulse = true;
+                localPlayer.resetFallDistance();
+                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
             } else if (remainFlyTicks > 0) {
                 remainFlyTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
-                localPlayer.setDeltaMovement(vec3.x, maxFlySpeed, vec3.z);
+                localPlayer.setDeltaMovement(vec3.x, flySpeed, vec3.z);
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
             }
         } else {
             jumpKeyDown = false;
+            oneTimeJumped = remainOneTimeJumpTicks < maxOneTimeJumpTicks;
         }
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            maxJump = packet.maxJump();
+            maxJumpCount = packet.maxJumpCount();
             multiY = packet.multiY();
+        });
+        context.setPacketHandled(true);
+    }
+
+    public static void handleOneTimeJumpPacket(PlayerOneTimeJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            maxOneTimeJumpTicks = packet.maxOneTimeJumpTicks();
+            jumpSpeed = packet.jumpSpeed();
         });
         context.setPacketHandled(true);
     }
@@ -72,7 +97,7 @@ public class PlayerInputHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             maxFlyTicks = packet.maxFlyTicks();
-            maxFlySpeed = packet.maxFlySpeed();
+            flySpeed = packet.flySpeed();
         });
         context.setPacketHandled(true);
     }

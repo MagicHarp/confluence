@@ -16,11 +16,11 @@ import java.util.List;
 public class CloudInABalloon extends BaseCurioItem implements IMultiJump, IJumpBoost {
     @Override
     public double getBoost() {
-        return 0.33;
+        return 1.3;
     }
 
     @Override
-    public int getJumpTimes() {
+    public int getJumpCount() {
         return 1;
     }
 
@@ -35,7 +35,6 @@ public class CloudInABalloon extends BaseCurioItem implements IMultiJump, IJumpB
         if (living instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMaxJump(serverPlayer);
         }
-        IJumpBoost.getMaxBoost(living);
     }
 
     @Override
@@ -44,12 +43,11 @@ public class CloudInABalloon extends BaseCurioItem implements IMultiJump, IJumpB
         if (living instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMaxJump(serverPlayer);
         }
-        IJumpBoost.getMaxBoost(living);
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(Component.translatable("item.confluence.cloud_in_a_balloon.tooltip2"));
+        list.add(IMultiJump.TOOLTIP);
+        list.add(IJumpBoost.TOOLTIP);
     }
 }

@@ -5,14 +5,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.item.curio.BaseCurioItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
-public class RocketBoots extends BaseCurioItem implements IMayFly {
+public class LightningBoots extends BaseSpeedBoots implements IMayFly {
+    private static final List<Component> ATTR_TOOLTIP = List.of(Component.translatable("item.confluence.lightning_boots.attribute"));
+
     @Override
     public int getFlyTicks() {
         return 32;
@@ -21,6 +22,11 @@ public class RocketBoots extends BaseCurioItem implements IMayFly {
     @Override
     public double getFlySpeed() {
         return 0.3;
+    }
+
+    @Override
+    public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
+        return ATTR_TOOLTIP;
     }
 
     @Override
@@ -39,6 +45,6 @@ public class RocketBoots extends BaseCurioItem implements IMayFly {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(IMayFly.TOOLTIP);
+        list.add(Component.translatable("item.confluence.lightining_boots.tooltip"));
     }
 }
