@@ -25,6 +25,11 @@ public class CloudInABalloon extends BaseCurioItem implements IMultiJump, IJumpB
     }
 
     @Override
+    public double getMultiY() {
+        return 1.1;
+    }
+
+    @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         if (living instanceof ServerPlayer serverPlayer) {

@@ -15,6 +15,7 @@ import org.confluence.mod.datagen.limit.Image32x;
 import org.confluence.mod.datagen.limit.Image64x;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.magic.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
@@ -65,6 +66,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                     }
                 } else if (value instanceof SpawnEggItem) {
                     withExistingParent(path, "item/template_spawn_egg");
+                } else if (value instanceof BaseCurioItem) {
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
                 } else {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }

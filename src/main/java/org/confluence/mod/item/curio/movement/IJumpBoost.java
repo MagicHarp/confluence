@@ -19,10 +19,7 @@ public interface IJumpBoost {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IJumpBoost iJumpBoost) {
-                    double boost = iJumpBoost.getBoost() + 1.0;
-                    if (boost > maxBoost.get()) {
-                        maxBoost.set(boost);
-                    }
+                    maxBoost.set(Math.max(iJumpBoost.getBoost() + 1.0, maxBoost.get()));
                 }
             }
         });
