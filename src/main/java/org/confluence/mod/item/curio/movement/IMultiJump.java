@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.PlayerJumpPacketS2C;
+import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicInteger;

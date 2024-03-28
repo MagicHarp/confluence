@@ -1,4 +1,4 @@
-package org.confluence.mod.network;
+package org.confluence.mod.network.s2c;
 
 import net.minecraft.network.FriendlyByteBuf;
 

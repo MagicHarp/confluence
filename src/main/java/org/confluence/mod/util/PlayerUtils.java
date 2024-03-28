@@ -4,8 +4,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.mana.ManaStorage;
-import org.confluence.mod.network.ManaPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.ManaPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;

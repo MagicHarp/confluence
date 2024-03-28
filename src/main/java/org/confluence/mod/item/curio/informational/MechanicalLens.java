@@ -5,8 +5,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.network.MechanicalBlockVisibilityPacketS2C;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.MechanicalBlockVisibilityPacketS2C;
 import top.theillusivec4.curios.api.SlotContext;
 
 public class MechanicalLens extends BaseCurioItem {

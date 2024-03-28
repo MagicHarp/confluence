@@ -1,4 +1,4 @@
-package org.confluence.mod.network;
+package org.confluence.mod.network.c2s;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

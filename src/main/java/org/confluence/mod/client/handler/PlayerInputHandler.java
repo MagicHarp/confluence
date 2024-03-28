@@ -7,25 +7,35 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.mixin.LivingEntityAccessor;
-import org.confluence.mod.network.FallDistancePacketC2S;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.PlayerJumpPacketS2C;
+import org.confluence.mod.network.c2s.FallDistancePacketC2S;
+import org.confluence.mod.network.s2c.PlayerFlyPacketS2C;
+import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class PlayerJumpHandler {
-    private static boolean firstJumped = false;
+public class PlayerInputHandler {
+    private static boolean jumpKeyDown = true;
+
     private static int maxJump = 0;
     private static int jumpCount = 0;
     private static double multiY = 0.0D;
 
+    private static int maxFlyTicks = 0;
+    private static int remainFlyTicks = 0;
+    private static double maxFlySpeed = 0.0D;
+
     public static void handleJump(LocalPlayer localPlayer) {
         if (localPlayer.onGround()) {
+            jumpKeyDown = true;
             jumpCount = maxJump;
-            firstJumped = false;
-        } else if (localPlayer.input.jumping && localPlayer.getDeltaMovement().y < 0.16) {
-            if (firstJumped && jumpCount > 0) {
+            remainFlyTicks = maxFlyTicks;
+        } else if (localPlayer.input.jumping) {
+            if (jumpKeyDown) return;
+            if (jumpCount > 0) {
+                jumpCount--;
+                jumpKeyDown = true;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * multiY;
                 localPlayer.setDeltaMovement(vec3.x, motionY, vec3.z);
@@ -33,17 +43,23 @@ public class PlayerJumpHandler {
                     float f = localPlayer.getYRot() * ((float) Math.PI / 180F);
                     localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().add(-Mth.sin(f) * 0.2F, 0.0D, Mth.cos(f) * 0.2F));
                 }
-
-                jumpCount--;
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
                 NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(true));
+            } else if (remainFlyTicks > 0) {
+                remainFlyTicks--;
+                Vec3 vec3 = localPlayer.getDeltaMovement();
+                localPlayer.setDeltaMovement(vec3.x, maxFlySpeed, vec3.z);
+                localPlayer.hasImpulse = true;
+                localPlayer.resetFallDistance();
+                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
             }
-            firstJumped = true;
+        } else {
+            jumpKeyDown = false;
         }
     }
 
-    public static void handlePacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             maxJump = packet.maxJump();
@@ -52,7 +68,12 @@ public class PlayerJumpHandler {
         context.setPacketHandled(true);
     }
 
-    public static boolean mayFly() {
-        return jumpCount == 0;
+    public static void handleFlyPacket(PlayerFlyPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            maxFlyTicks = packet.maxFlyTicks();
+            maxFlySpeed = packet.maxFlySpeed();
+        });
+        context.setPacketHandled(true);
     }
 }

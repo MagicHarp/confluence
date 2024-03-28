@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class BaseCurioItem extends Item implements ICurioItem {
+    protected static final List<Component> EMPTY_TOOLTIP = List.of();
+
     public BaseCurioItem(Properties properties) {
         super(properties.stacksTo(1));
     }
@@ -36,6 +38,6 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence."+ Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).getPath() +".tooltip"));
+        list.add(Component.translatable("item.confluence." + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).getPath() + ".tooltip"));
     }
 }
