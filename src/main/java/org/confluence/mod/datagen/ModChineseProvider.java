@@ -63,6 +63,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
+        add("biome.confluence.the_corruption", "腐化之地");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
@@ -239,6 +240,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
         add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
+        add(THIN_ICE_BLOCK.get(), "碎冰块");
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
@@ -417,6 +419,22 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.BAND_OF_REGENERATION.get(),"再生手环");
         add(CurioItems.BAND_OF_STARPOWER.get(),"星力手环");
         add(CurioItems. EXTENDO_GRIP.get(),"加长握爪");
+        add(CurioItems. BLIZZARD_IN_A_BOTTLE.get(),"暴雪瓶");
+        add(CurioItems. ICE_SKATES.get(),"溜冰鞋");
+        add(CurioItems. HERMES_BOOTS.get(),"赫尔墨斯靴");
+        add(CurioItems. FLURRY_BOOTS.get(),"疾风雪靴");
+        add(CurioItems. SAILFISH_BOOTS.get(),"旗鱼靴");
+        add(CurioItems. DUNERIDER_BOOTS.get(),"沙丘行者靴");
+        add(CurioItems. ROCKET_BOOTS.get(),"火箭靴");
+        add(CurioItems. SPECTRE_BOOTS.get(),"幽灵靴");
+        add(CurioItems. LIGHTNING_BOOTS.get(),"闪电靴");
+        add(CurioItems. FROSTSPARK_BOOTS.get(),"霜花靴");
+        add(CurioItems. SHINY_RED_BALLOON.get(),"闪亮红气球");
+        add(CurioItems. CLOUD_IN_A_BALLOON.get(),"云朵气球");
+        add(CurioItems. BLIZZARD_IN_A_BALLOON.get(),"暴雪气球");
+        add(CurioItems. FROG_LEG.get(),"蛙腿");
+        add(CurioItems. AMBHIPIAN_BOOTS.get(),"水陆两用靴");
+        add(CurioItems. LUCKY_HORSESHOE.get(),"幸运马掌");
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
         add(Armors.CACTUS_HELMET.get(),"仙人掌头盔");
