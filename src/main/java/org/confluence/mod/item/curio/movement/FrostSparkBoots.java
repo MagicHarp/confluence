@@ -26,7 +26,7 @@ public class FrostSparkBoots extends LightningBoots implements ThinIceBlock.IceS
         if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
             return ImmutableMultimap.of(
                 Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.MOVEMENT_SPEED, new AttributeModifier(IceSkates.SPEED_UUID, "Ice Skates", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
             );
         }
         return super.getAttributeModifiers(slotContext, uuid, stack);

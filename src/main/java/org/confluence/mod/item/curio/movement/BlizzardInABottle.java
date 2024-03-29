@@ -13,14 +13,17 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
+    public static final int TICKS = 16;
+    public static final double SPEED = 0.4;
+
     @Override
     public int getJumpTicks() {
-        return 16;
+        return TICKS;
     }
 
     @Override
     public double getJumpSpeed() {
-        return 0.4;
+        return SPEED;
     }
 
     @Override

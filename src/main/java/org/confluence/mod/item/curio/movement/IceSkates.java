@@ -22,9 +22,8 @@ import java.util.UUID;
 
 public class IceSkates extends BaseCurioItem implements ThinIceBlock.IceSafe {
     public static final UUID SPEED_UUID = UUID.fromString("7691D447-BD87-29E8-1C04-CF218DFF154D");
-    static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Ice Skates", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    static final AttributeModifier MODIFIER = new AttributeModifier(SPEED_UUID, "Ice Skates", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(Attributes.MOVEMENT_SPEED, MODIFIER);
 
     @Override
     public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {

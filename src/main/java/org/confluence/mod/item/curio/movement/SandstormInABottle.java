@@ -13,14 +13,17 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class SandstormInABottle extends BaseCurioItem implements IOneTimeJump {
+    public static final int TICKS = 20;
+    public static final double SPEED = 0.45;
+
     @Override
     public int getJumpTicks() {
-        return 20;
+        return TICKS;
     }
 
     @Override
     public double getJumpSpeed() {
-        return 0.45;
+        return SPEED;
     }
 
     @Override

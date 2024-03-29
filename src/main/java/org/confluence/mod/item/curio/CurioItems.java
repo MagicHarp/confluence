@@ -61,8 +61,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
     BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
     SANDSTORM_IN_A_BALLOON("sandstorm_in_a_balloon", SandstormInABalloon::new), // 沙暴气球
-    /* 蜂蜜气球 */
     FART_IN_A_BALLOON("fart_in_a_balloon", FartInABalloon::new), // 臭屁气球
+    /* 蜂蜜气球 */
+    BUNDLE_OF_BALLOONS("bundle_of_balloons", BundleOfBalloons::new), // 气球束
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
     FROG_FLIPPER("frog_flipper", FrogFlipper::new), // 青蛙脚蹼
     /* 青蛙蹼 */
@@ -74,6 +75,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
     /* 琥珀马掌气球 */
+    BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
     ;
 
     private final RegistryObject<BaseCurioItem> value;

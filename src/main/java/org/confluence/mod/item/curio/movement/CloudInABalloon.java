@@ -11,6 +11,8 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
+    public static final double SPEED = 1.1;
+
     @Override
     public double getBoost() {
         return 1.33;
@@ -18,7 +20,7 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
 
     @Override
     public double getJumpSpeed() {
-        return 1.1;
+        return SPEED;
     }
 
     @Override
