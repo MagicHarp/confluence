@@ -23,7 +23,7 @@ public class FallingStarItemEntity extends ItemEntity {
         setDeltaMovement(level.random.nextDouble(), -8, level.random.nextDouble());
         setItem(Materials.FALLING_STAR.get().getDefaultInstance());
         this.lifespan = 12000;
-        setNoPickUpDelay();
+        setNeverPickUp();
     }
 
     @Override
@@ -32,7 +32,9 @@ public class FallingStarItemEntity extends ItemEntity {
             discard();
         } else {
             super.tick();
-            if (!onGround() && ProjectileUtil.getHitResultOnMoveVector(this, entity -> true) instanceof EntityHitResult entityHitResult) {
+            if (onGround()) {
+                if (hasPickUpDelay()) setNoPickUpDelay();
+            } else if (ProjectileUtil.getHitResultOnMoveVector(this, entity -> true) instanceof EntityHitResult entityHitResult) {
                 entityHitResult.getEntity().hurt(ConfluenceDamageTypes.of(level(), ConfluenceDamageTypes.FALLING_STAR), 100);
                 discard();
             }

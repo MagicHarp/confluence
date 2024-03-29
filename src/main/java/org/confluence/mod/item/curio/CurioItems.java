@@ -99,28 +99,47 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
 
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
+    /* 水母项链 */
+    /* 黑曜石骷髅头 */
 
+    /* 梯凳 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
     MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符 (WIP)
     FLIPPER("flipper", Flipper::new), // 脚蹼
+    /* 潜水装备 */
+    /* 水母潜水装备 */
+    /* 北极潜水装备 */
     /* 攀爬爪 */
     /* 鞋钉 */
     /* 猛虎攀爬装备 */
+    /* 分趾厚底袜 */
+    /* 飞毯 */
+    /* 浮游圈 */
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
     TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle"), // 海啸瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
+    /* 花靴 */
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
     SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
+    /* 仙灵靴 */
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
+    /* 黑曜石玫瑰 */
+    /* 岩浆石 */
+    /* 熔岩护身符 */
+    /* 熔火护声符 */
+    /* 水上漂靴 */
+    /* 黑曜石水上漂靴 */
+    /* 熔岩靴 */
+    /* 泰拉闪耀靴 */
     SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
@@ -141,6 +160,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
     /* 琥珀马掌气球 */
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
+    /* 天界贝壳 */
     ;
 
     private final RegistryObject<BaseCurioItem> value;
