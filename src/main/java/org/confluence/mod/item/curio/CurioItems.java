@@ -117,7 +117,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 飞毯 */
     /* 浮游圈 */
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
-    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle"), // 海啸瓶
+    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
