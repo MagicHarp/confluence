@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Magiluminescence extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("F0E9149C-E146-5D87-A319-A45CE63A2C65");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Magiluminescence", 0.15, AttributeModifier.Operation.ADDITION)
+        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Magiluminescence", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     @Override

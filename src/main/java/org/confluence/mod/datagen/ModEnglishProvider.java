@@ -45,6 +45,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.negates_fall_damage", "Negates fall damage");
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
+        add("item.confluence.blindfold.tooltip", "Immunity to Darkness");
+        add("item.confluence.cobalt_shield.tooltip", "Grants immunity to knockback");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");

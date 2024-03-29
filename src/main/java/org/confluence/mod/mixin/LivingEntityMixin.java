@@ -3,13 +3,16 @@ package org.confluence.mod.mixin;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.util.LivingMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -21,6 +24,10 @@ public abstract class LivingEntityMixin implements LivingMixin {
     private double c$jumpBoost = 1.0;
     @Unique
     private int c$fallResistance = 0;
+    @Unique
+    private int c$invulnerableTime = 20;
+    @Unique
+    private float c$criticalChance = 0.0F;
 
     @Unique
     @Override
@@ -58,6 +65,33 @@ public abstract class LivingEntityMixin implements LivingMixin {
         this.c$fallResistance = fallResistance.get();
     }
 
+    @Unique
+    @Override
+    public void c$setInvulnerableTime(int time) {
+        this.c$invulnerableTime = time;
+    }
+
+    @Unique
+    @Override
+    public void c$freshCriticalChance() {
+        AtomicDouble maxChance = new AtomicDouble();
+        CuriosApi.getCuriosInventory((LivingEntity) (Object) this).ifPresent(curiosItemHandler -> {
+            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ICriticalHit iCriticalHit) {
+                    maxChance.set(Math.max(iCriticalHit.getChance(), maxChance.get()));
+                }
+            }
+        });
+        this.c$criticalChance = maxChance.floatValue();
+    }
+
+    @Unique
+    @Override
+    public float c$getCriticalChance() {
+        return c$criticalChance;
+    }
+
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
         cir.setReturnValue((float) (cir.getReturnValue() * c$jumpBoost));
@@ -70,5 +104,15 @@ public abstract class LivingEntityMixin implements LivingMixin {
         } else {
             cir.setReturnValue(cir.getReturnValue() - c$fallResistance);
         }
+    }
+
+    @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
+    private int invulnerable1(int constant) {
+        return c$invulnerableTime;
+    }
+
+    @ModifyConstant(method = "handleDamageEvent", constant = @Constant(intValue = 20))
+    private int invulnerable2(int constant) {
+        return c$invulnerableTime;
     }
 }

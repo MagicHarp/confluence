@@ -51,6 +51,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
+        add("item.confluence.blindfold.tooltip", "对失明免疫");
+        add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");

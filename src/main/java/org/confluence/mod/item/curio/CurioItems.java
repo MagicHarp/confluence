@@ -3,9 +3,7 @@ package org.confluence.mod.item.curio;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.curio.combat.Bezoar;
-import org.confluence.mod.item.curio.combat.HoneyComb;
-import org.confluence.mod.item.curio.combat.Shackle;
+import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
 import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
@@ -21,6 +19,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
     BEZOAR("bezoar", Bezoar::new), // 牛黄
     BLACK_BELT("black_belt"), // 黑腰带
+    BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
+    AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
+    COBALT_SHIELD("cobalt_shield", CobaltShield::new), // 钴护盾
+    CROSS_NECKLACE("cross_necklace", CrossNecklace::new), // 十字项链
+    DESTROYER_EMBLEM("destroyer_emblem", DestroyerEmblem::new), // 毁灭者勋章
+    EYE_OF_THE_GOLEM("eye_of_the_golem", EyeOfTheGolem::new), // 石巨人之眼
 
     EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
 
