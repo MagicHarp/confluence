@@ -15,16 +15,81 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum CurioItems implements EnumRegister<BaseCurioItem> {
-    SHACKLE("shackle", Shackle::new), // 脚镣
-    HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
+    /* 粘性绷带 */
+    /* 十字章护身符 */
+    /* 十字章护盾 */
+    /* 盔甲背带 */
+    /* 盔甲抛光剂 */
+    AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
+    /* 蜜蜂斗篷 */
+    /* 狂战士手套 */
     BEZOAR("bezoar", Bezoar::new), // 牛黄
     BLACK_BELT("black_belt"), // 黑腰带
     BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
-    AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
+    /* 天界徽章 */
+    /* 月光护身符 */
+    /* 月亮贝壳 */
+    /* 天界石 */
+    /* 天界贝壳 */
     COBALT_SHIELD("cobalt_shield", CobaltShield::new), // 钴护盾
+    /* 反诅咒咒语 */
     CROSS_NECKLACE("cross_necklace", CrossNecklace::new), // 十字项链
     DESTROYER_EMBLEM("destroyer_emblem", DestroyerEmblem::new), // 毁灭者勋章
     EYE_OF_THE_GOLEM("eye_of_the_golem", EyeOfTheGolem::new), // 石巨人之眼
+    /* 快走时钟 */
+    /* 狂爪手套 */
+    /* 烈火手套 */
+    /* 血肉指虎 */
+    /* 冰冻海龟壳 */
+    /* 冰冻护盾 */
+    /* 暖手宝 */
+    /* 英雄护盾 */
+    HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
+    /* 魔法箭袋 */
+    /* 岩浆石 */
+    /* 机械手套 */
+    /* 药用绷带 */
+    /* 扩音器 */
+    /* 月亮石 */
+    /* 熔火箭袋 */
+    /* 熔火骷髅头玫瑰 */
+    /* 邪眼 */
+    /* 黑曜石玫瑰 */
+    /* 黑曜石护盾 */
+    /* 黑曜石骷髅头 */
+    /* 黑曜石骷髅头玫瑰 */
+    /* 圣骑士护盾 */
+    /* 恐慌项链 */
+    /* 袖珍镜 */
+    /* 强力手套 */
+    /* 腐香囊 */
+    /* 游侠徽章 */
+    /* 侦察镜 */
+    /* 步枪瞄准镜 */
+    SHACKLE("shackle", Shackle::new), // 脚镣
+    /* 鲨牙项链 */
+    /* 狙击镜 */
+    /* 巫士徽章 */
+    /* 潜行者箭袋 */
+    /* 星星斗篷 */
+    /* 星星面纱 */
+    /* 毒刺项链 */
+    /* 召唤师徽章 */
+    /* 太阳石 */
+    /* 甜心项链 */
+    /* 计划书 */
+    /* 泰坦手套 */
+    /* 三折地图 */
+    /* 维生素 */
+    /* 战士徽章 */
+    /* 学徒围巾 */
+    /* 侍卫护盾 */
+    /* 女猎人圆盾 */
+    /* 武僧腰带 */
+    /* 大力士甲虫 */
+    /* 死灵卷轴 */
+    /* 甲虫莎草纸 */
+    /* 矮人项链 */
 
     EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
 
