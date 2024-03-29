@@ -13,7 +13,6 @@
     "minVersion": "0.8.5",
     "client": [
         "client.BiomeColorsMixin",
-        "client.BlockModelShaperMixin",
-        "client.MinecraftMixin"
+        "client.BlockModelShaperMixin"
     ]
 }
