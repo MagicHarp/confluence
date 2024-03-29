@@ -47,6 +47,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
+        add("item.confluence.sandstorm_on_a_bottle.tooltip", "Allows the holder to do an improved double jump");
         add("item.confluence.ice_skates.tooltip", "Provides extra mobility on ice");
         add("item.confluence.ice_skates.tooltip2", "Ice will not break when you fall on it");
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
@@ -54,6 +55,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.lucky_horseshoe.tooltip", "'Said to bring good fortune and keep evil spirits at bay'");
         add("item.confluence.lightning_boots.attribute", "8% increased movement speed");
         add("item.confluence.lightning_boots.tooltip", "Allows flight, super fast running");
+        add("item.confluence.horseshoe_balloon.tooltip", "Increases jump height and negates fall damage");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

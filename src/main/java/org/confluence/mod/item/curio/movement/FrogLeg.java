@@ -29,12 +29,6 @@ public class FrogLeg extends BaseCurioItem implements IJumpBoost, IFallResistanc
     }
 
     @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        freshJumpBoost(slotContext.entity());
-        freshFallResistance(slotContext.entity());
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IJumpBoost.TOOLTIP);
         list.add(IFallResistance.TOOLTIP);

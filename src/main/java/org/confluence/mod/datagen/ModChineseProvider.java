@@ -53,6 +53,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
         add("item.confluence.ice_skates.tooltip", "提供额外冰面行动力");
         add("item.confluence.ice_skates.tooltip2", "落到冰上时冰不会碎");
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
@@ -60,6 +61,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.lucky_horseshoe.tooltip", "“据说能带来好运、驱除邪灵”");
         add("item.confluence.lightning_boots.attribute", "移动速度提高8%");
         add("item.confluence.lightning_boots.tooltip", "可飞行、可飞速奔跑");
+        add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 

@@ -34,11 +34,6 @@ public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
     }
 
     @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        freshFallResistance(slotContext.entity());
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return LUCKY;
     }

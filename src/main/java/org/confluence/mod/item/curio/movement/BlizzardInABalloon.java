@@ -2,7 +2,6 @@ package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -16,7 +15,7 @@ import java.util.List;
 public class BlizzardInABalloon extends BaseCurioItem implements IOneTimeJump, IJumpBoost {
     @Override
     public double getBoost() {
-        return 1.3;
+        return 1.33;
     }
 
     @Override
@@ -31,16 +30,7 @@ public class BlizzardInABalloon extends BaseCurioItem implements IOneTimeJump, I
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        if (living instanceof ServerPlayer serverPlayer) {
-            IOneTimeJump.sendMaxJump(serverPlayer);
-        }
-    }
-
-    @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        if (living instanceof ServerPlayer serverPlayer) {
+        if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             IOneTimeJump.sendMaxJump(serverPlayer);
         }
     }

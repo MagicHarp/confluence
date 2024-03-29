@@ -1,6 +1,9 @@
 package org.confluence.mod.item.curio.movement;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -9,34 +12,33 @@ import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
+import java.util.UUID;
 
-public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallResistance {
+public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResistance {
     @Override
     public double getBoost() {
-        return 1.6;
+        return 1.75;
     }
 
     @Override
     public int getFallResistance() {
-        return 7;
+        return -1;
     }
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshJumpBoost(slotContext.entity());
+        super.onEquip(slotContext, prevStack, stack);
         freshFallResistance(slotContext.entity());
     }
 
     @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        super.onUnequip(slotContext, newStack, stack);
-        onEquip(slotContext, newStack, stack);
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        return LuckyHorseshoe.LUCKY;
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(IJumpBoost.TOOLTIP);
-        list.add(IFallResistance.TOOLTIP);
+        list.add(IMultiJump.TOOLTIP);
+        list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
     }
 }

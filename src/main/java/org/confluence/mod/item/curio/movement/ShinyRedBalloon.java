@@ -14,16 +14,11 @@ import java.util.List;
 public class ShinyRedBalloon extends BaseCurioItem implements IJumpBoost {
     @Override
     public double getBoost() {
-        return 1.3;
+        return 1.33;
     }
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshJumpBoost(slotContext.entity());
-    }
-
-    @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         freshJumpBoost(slotContext.entity());
     }
 

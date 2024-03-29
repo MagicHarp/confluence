@@ -30,13 +30,6 @@ public class SpectreBoots extends BaseSpeedBoots implements IMayFly {
     }
 
     @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
-            IMayFly.sendMaxFly(serverPlayer);
-        }
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IMayFly.TOOLTIP);
         list.add(BaseSpeedBoots.TOOLTIP);

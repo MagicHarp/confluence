@@ -68,11 +68,6 @@ public class BaseSpeedBoots extends BaseCurioItem {
     }
 
     @Override
-    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return CuriosUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
