@@ -17,7 +17,7 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
     }
 
     @Override
-    public double getMultiY() {
+    public double getJumpSpeed() {
         return 1.1;
     }
 

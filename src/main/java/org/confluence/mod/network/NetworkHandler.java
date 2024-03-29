@@ -28,7 +28,6 @@ public class NetworkHandler {
         CHANNEL.registerMessage(packetId++, MechanicalBlockVisibilityPacketS2C.class, MechanicalBlockVisibilityPacketS2C::encode, MechanicalBlockVisibilityPacketS2C::decode, ClientPacketHandler::handleMechanicalBlock);
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketS2C.class, PlayerJumpPacketS2C::encode, PlayerJumpPacketS2C::decode, PlayerInputHandler::handleJumpPacket);
         CHANNEL.registerMessage(packetId++, PlayerFlyPacketS2C.class, PlayerFlyPacketS2C::encode, PlayerFlyPacketS2C::decode, PlayerInputHandler::handleFlyPacket);
-        CHANNEL.registerMessage(packetId++, PlayerOneTimeJumpPacketS2C.class, PlayerOneTimeJumpPacketS2C::encode, PlayerOneTimeJumpPacketS2C::decode, PlayerInputHandler::handleOneTimeJumpPacket);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);

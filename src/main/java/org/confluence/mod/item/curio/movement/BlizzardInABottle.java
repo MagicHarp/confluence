@@ -26,7 +26,7 @@ public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
-            IOneTimeJump.sendMaxJump(serverPlayer);
+            IOneTimeJump.sendMsg(serverPlayer);
         }
     }
 

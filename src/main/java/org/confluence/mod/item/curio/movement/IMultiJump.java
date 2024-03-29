@@ -10,34 +10,49 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IMultiJump {
-    int getJumpCount();
+    double getJumpSpeed();
 
-    double getMultiY();
-
-    static void sendMaxJump(ServerPlayer serverPlayer) {
-        AtomicInteger maxJumpCount = new AtomicInteger();
-        AtomicDouble multiY = new AtomicDouble();
-        AtomicBoolean fart = new AtomicBoolean();
+    static void sendMsg(ServerPlayer serverPlayer) {
+        AtomicDouble fartSpeed = new AtomicDouble();
+        AtomicDouble sandstormSpeed = new AtomicDouble();
+        AtomicInteger sandstormTicks = new AtomicInteger();
+        AtomicDouble blizzardSpeed = new AtomicDouble();
+        AtomicInteger blizzardTicks = new AtomicInteger();
+        AtomicDouble tsunamiSpeed = new AtomicDouble();
+        AtomicDouble cloudSpeed = new AtomicDouble();
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 Item curio = itemHandlerModifiable.getStackInSlot(i).getItem();
-                if (curio instanceof IMultiJump iMultiJump) {
-                    maxJumpCount.set(Math.max(iMultiJump.getJumpCount(), maxJumpCount.get()));
-                    multiY.set(Math.max(iMultiJump.getMultiY(), multiY.get()));
-                }
-                if(curio instanceof FartInABottle){
-                    fart.set(true);
+                if (curio instanceof FartInABottle fart) {
+                    fartSpeed.set(fart.getJumpSpeed());
+                } else if (curio instanceof SandstormInABottle sandstorm) {
+                    sandstormSpeed.set(sandstorm.getJumpSpeed());
+                    sandstormTicks.set(sandstorm.getJumpTicks());
+                } else if (curio instanceof BlizzardInABottle blizzard) {
+                    blizzardSpeed.set(blizzard.getJumpSpeed());
+                    blizzardTicks.set(blizzard.getJumpTicks());
+                } else if (curio instanceof TsunamiInABottle tsunami) {
+                    tsunamiSpeed.set(tsunami.getJumpSpeed());
+                } else if (curio instanceof CloudInABottle cloud) {
+                    cloudSpeed.set(cloud.getJumpSpeed());
                 }
             }
         });
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(maxJumpCount.get(), multiY.get(), fart.get())
+            new PlayerJumpPacketS2C(
+                fartSpeed.get(),
+                sandstormSpeed.get(),
+                sandstormTicks.get(),
+                blizzardSpeed.get(),
+                blizzardTicks.get(),
+                tsunamiSpeed.get(),
+                cloudSpeed.get()
+            )
         );
     }
 

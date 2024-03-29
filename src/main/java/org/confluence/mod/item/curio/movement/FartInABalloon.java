@@ -17,7 +17,7 @@ public class FartInABalloon extends FartInABottle implements IJumpBoost {
     }
 
     @Override
-    public double getMultiY() {
+    public double getJumpSpeed() {
         return 1.3;
     }
 

@@ -14,19 +14,14 @@ import java.util.List;
 
 public class CloudInABottle extends BaseCurioItem implements IMultiJump {
     @Override
-    public int getJumpCount() {
-        return 1;
-    }
-
-    @Override
-    public double getMultiY() {
+    public double getJumpSpeed() {
         return 1.0;
     }
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if(slotContext.entity() instanceof ServerPlayer serverPlayer) {
-            IMultiJump.sendMaxJump(serverPlayer);
+            IMultiJump.sendMsg(serverPlayer);
         }
     }
 

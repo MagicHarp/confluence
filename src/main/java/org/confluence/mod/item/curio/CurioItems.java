@@ -43,6 +43,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 鞋钉 */
     /* 猛虎攀爬装备 */
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
+    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle"), // 海啸瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
@@ -55,10 +56,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
-    SHINY_RED_BALLOON("shiny_red_balloon", ShinyRedBalloon::new), // 闪亮红气球
+    SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
+    BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
     BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
     SANDSTORM_IN_A_BALLOON("sandstorm_in_a_balloon", SandstormInABalloon::new), // 沙暴气球
+    /* 蜂蜜气球 */
     FART_IN_A_BALLOON("fart_in_a_balloon", FartInABalloon::new), // 臭屁气球
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
     FROG_FLIPPER("frog_flipper", FrogFlipper::new), // 青蛙脚蹼
@@ -70,6 +73,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
+    /* 琥珀马掌气球 */
     ;
 
     private final RegistryObject<BaseCurioItem> value;
