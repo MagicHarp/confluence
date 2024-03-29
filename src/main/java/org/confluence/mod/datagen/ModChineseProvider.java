@@ -66,6 +66,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
         add("biome.confluence.the_corruption", "腐化之地");
+
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
@@ -184,7 +185,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
 
 
-
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_SAND.get(), "黑檀沙块");
         add(CORRUPT_GRASS_BLOCK.get(), "腐化草方块");
@@ -255,7 +255,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.SIGN.get(), "阴森告示牌");
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
-
         //endregion blocks
 
         //region items
@@ -281,7 +280,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
-        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");ebony_planks_from_ebony_log_crafting.json
+        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
@@ -306,7 +305,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.LIFE_CRYSTAL.get(), "生命水晶");
         add(Materials.CURSED_FLAME.get(), "诅咒火");
         add(Materials.ICHOR.get(), "灵液");
-
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
@@ -340,14 +338,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pickaxes.TUNGSTEN_PICKAXE.get(), "钨镐");
         add(Pickaxes.GOLDEN_PICKAXE.get(), "金镐");
         add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
-        /* Hammers */
-        add(Hammers. COPPER_HAMMER.get(), "铜锤");
-        add(Hammers. TIN_HAMMER.get(), "锡锤");
-        add(Hammers. LEAD_HAMMER.get(), "铅锤");
-        add(Hammers. SILVER_HAMMER.get(), "银锤");
-        add(Hammers. TUNGSTEN_HAMMER.get(), "钨锤");
-        add(Hammers. GOLDEN_HAMMER.get(), "金锤");
-        add(Hammers. PLATINUM_HAMMER.get(), "铂金锤");
+
+        add(Hammers.COPPER_HAMMER.get(), "铜锤");
+        add(Hammers.TIN_HAMMER.get(), "锡锤");
+        add(Hammers.LEAD_HAMMER.get(), "铅锤");
+        add(Hammers.SILVER_HAMMER.get(), "银锤");
+        add(Hammers.TUNGSTEN_HAMMER.get(), "钨锤");
+        add(Hammers.GOLDEN_HAMMER.get(), "金锤");
+        add(Hammers.PLATINUM_HAMMER.get(), "铂金锤");
 
         /* HammerAxes */
         add(Gels.BLUE_GEL.get(), "蓝色粘液球");
@@ -386,62 +384,62 @@ public class ModChineseProvider extends LanguageProvider {
         add(ManaWeapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
 
         //刷怪蛋
-        add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(),"蓝色史莱姆刷怪蛋");
-        add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(),"红色史莱姆刷怪蛋");
-        add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(),"黄色史莱姆刷怪蛋");
-        add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(),"紫色史莱姆刷怪蛋");
-        add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(),"沙漠史莱姆刷怪蛋");
-        add(SpawnEggs.PINK_SLIME_SPAWN_EGG.get(),"粉色史莱姆刷怪蛋");
-        add(SpawnEggs.ICE_SLIME_SPAWN_EGG.get(),"冰冻史莱姆刷怪蛋");
-        add(SpawnEggs.GREEN_SLIME_SPAWN_EGG.get(),"绿色史莱姆刷怪蛋");
-        add(SpawnEggs.BLACK_SLIME_SPAWN_EGG.get(),"史莱姆之母刷怪蛋");
-        add(SpawnEggs.CRIMSON_SLIME_SPAWN_EGG.get(),"猩红史莱姆刷怪蛋");
-        add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(),"热带史莱姆刷怪蛋");
-        add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(),"夜明史莱姆刷怪蛋");
-        add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(),"岩浆史莱姆刷怪蛋");
+        add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(), "蓝色史莱姆刷怪蛋");
+        add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(), "红色史莱姆刷怪蛋");
+        add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(), "黄色史莱姆刷怪蛋");
+        add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(), "紫色史莱姆刷怪蛋");
+        add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(), "沙漠史莱姆刷怪蛋");
+        add(SpawnEggs.PINK_SLIME_SPAWN_EGG.get(), "粉色史莱姆刷怪蛋");
+        add(SpawnEggs.ICE_SLIME_SPAWN_EGG.get(), "冰冻史莱姆刷怪蛋");
+        add(SpawnEggs.GREEN_SLIME_SPAWN_EGG.get(), "绿色史莱姆刷怪蛋");
+        add(SpawnEggs.BLACK_SLIME_SPAWN_EGG.get(), "史莱姆之母刷怪蛋");
+        add(SpawnEggs.CRIMSON_SLIME_SPAWN_EGG.get(), "猩红史莱姆刷怪蛋");
+        add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(), "热带史莱姆刷怪蛋");
+        add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
+        add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
         //光剑
-        add(Swords.RED_LIGHT_SABER.get(),"陨石红光剑");
-        add(Swords.ORANGE_LIGHT_SABER.get(),"陨石橙光剑");
-        add(Swords.YELLOW_LIGHT_SABER.get(),"陨石黄光剑");
-        add(Swords.GREEN_LIGHT_SABER.get(),"陨石绿光剑");
-        add(Swords.BLUE_LIGHT_SABER.get(),"陨石蓝光剑");
-        add(Swords.PURPLE_LIGHT_SABER.get(),"陨石紫光剑");
-        add(Swords.WHITE_LIGHT_SABER.get(),"陨石白光剑");
+        add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
+        add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");
+        add(Swords.YELLOW_LIGHT_SABER.get(), "陨石黄光剑");
+        add(Swords.GREEN_LIGHT_SABER.get(), "陨石绿光剑");
+        add(Swords.BLUE_LIGHT_SABER.get(), "陨石蓝光剑");
+        add(Swords.PURPLE_LIGHT_SABER.get(), "陨石紫光剑");
+        add(Swords.WHITE_LIGHT_SABER.get(), "陨石白光剑");
 
         //功能方块
-        add(ECHO_BLOCK.get(),"回声块");
-        add(ACTUATORS.get(),"促动器");
+        add(ECHO_BLOCK.get(), "回声块");
+        add(ACTUATORS.get(), "促动器");
         //饰品
-        add(CurioItems.MECHANICAL_LENS.get(),"机械晶状体");
-        add(CurioItems.SPECTRE_GOGGLES.get(),"幽灵护目镜");
-        add(CurioItems.AGLET.get(),"金属带扣");
-        add(CurioItems.ANKLET_OF_THE_WIND.get(),"疾风脚镯");
-        add(CurioItems.CLOUD_IN_A_BOTTLE.get(),"云朵瓶");
-        add(CurioItems.SHACKLE.get(),"脚镣");
-        add(CurioItems.BAND_OF_REGENERATION.get(),"再生手环");
-        add(CurioItems.BAND_OF_STARPOWER.get(),"星力手环");
-        add(CurioItems. EXTENDO_GRIP.get(),"加长握爪");
-        add(CurioItems. BLIZZARD_IN_A_BOTTLE.get(),"暴雪瓶");
-        add(CurioItems. ICE_SKATES.get(),"溜冰鞋");
-        add(CurioItems. HERMES_BOOTS.get(),"赫尔墨斯靴");
-        add(CurioItems. FLURRY_BOOTS.get(),"疾风雪靴");
-        add(CurioItems. SAILFISH_BOOTS.get(),"旗鱼靴");
-        add(CurioItems. DUNERIDER_BOOTS.get(),"沙丘行者靴");
-        add(CurioItems. ROCKET_BOOTS.get(),"火箭靴");
-        add(CurioItems. SPECTRE_BOOTS.get(),"幽灵靴");
-        add(CurioItems. LIGHTNING_BOOTS.get(),"闪电靴");
-        add(CurioItems. FROSTSPARK_BOOTS.get(),"霜花靴");
-        add(CurioItems. SHINY_RED_BALLOON.get(),"闪亮红气球");
-        add(CurioItems. CLOUD_IN_A_BALLOON.get(),"云朵气球");
-        add(CurioItems. BLIZZARD_IN_A_BALLOON.get(),"暴雪气球");
-        add(CurioItems. FROG_LEG.get(),"蛙腿");
-        add(CurioItems. AMBHIPIAN_BOOTS.get(),"水陆两用靴");
-        add(CurioItems. LUCKY_HORSESHOE.get(),"幸运马掌");
+        add(CurioItems.MECHANICAL_LENS.get(), "机械晶状体");
+        add(CurioItems.SPECTRE_GOGGLES.get(), "幽灵护目镜");
+        add(CurioItems.AGLET.get(), "金属带扣");
+        add(CurioItems.ANKLET_OF_THE_WIND.get(), "疾风脚镯");
+        add(CurioItems.CLOUD_IN_A_BOTTLE.get(), "云朵瓶");
+        add(CurioItems.SHACKLE.get(), "脚镣");
+        add(CurioItems.BAND_OF_REGENERATION.get(), "再生手环");
+        add(CurioItems.BAND_OF_STARPOWER.get(), "星力手环");
+        add(CurioItems.EXTENDO_GRIP.get(), "加长握爪");
+        add(CurioItems.BLIZZARD_IN_A_BOTTLE.get(), "暴雪瓶");
+        add(CurioItems.ICE_SKATES.get(), "溜冰鞋");
+        add(CurioItems.HERMES_BOOTS.get(), "赫尔墨斯靴");
+        add(CurioItems.FLURRY_BOOTS.get(), "疾风雪靴");
+        add(CurioItems.SAILFISH_BOOTS.get(), "旗鱼靴");
+        add(CurioItems.DUNERIDER_BOOTS.get(), "沙丘行者靴");
+        add(CurioItems.ROCKET_BOOTS.get(), "火箭靴");
+        add(CurioItems.SPECTRE_BOOTS.get(), "幽灵靴");
+        add(CurioItems.LIGHTNING_BOOTS.get(), "闪电靴");
+        add(CurioItems.FROSTSPARK_BOOTS.get(), "霜花靴");
+        add(CurioItems.SHINY_RED_BALLOON.get(), "闪亮红气球");
+        add(CurioItems.CLOUD_IN_A_BALLOON.get(), "云朵气球");
+        add(CurioItems.BLIZZARD_IN_A_BALLOON.get(), "暴雪气球");
+        add(CurioItems.FROG_LEG.get(), "蛙腿");
+        add(CurioItems.AMBHIPIAN_BOOTS.get(), "水陆两用靴");
+        add(CurioItems.LUCKY_HORSESHOE.get(), "幸运马掌");
         //盔甲
-        add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
-        add(Armors.CACTUS_HELMET.get(),"仙人掌头盔");
-        add(Armors.CACTUS_LEGGINGS.get(),"仙人掌护腿");
-        add(Armors.CACTUS_BOOTS.get(),"仙人掌靴子");
+        add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
+        add(Armors.CACTUS_HELMET.get(), "仙人掌头盔");
+        add(Armors.CACTUS_LEGGINGS.get(), "仙人掌护腿");
+        add(Armors.CACTUS_BOOTS.get(), "仙人掌靴子");
         //endregion items
     }
 }

@@ -11,6 +11,7 @@
         "confluence:anklet_of_the_wind",
         "confluence:cloud_in_a_bottle",
         "confluence:blizzard_in_a_bottle",
+        "confluence:sandstorm_in_a_bottle",
         "confluence:ice_skates",
         "confluence:hermes_boots",
         "confluence:flurry_boots",
@@ -23,8 +24,12 @@
         "confluence:shiny_red_balloon",
         "confluence:cloud_in_a_balloon",
         "confluence:blizzard_in_a_balloon",
+        "confluence:sandstorm_in_a_balloon",
         "confluence:frog_leg",
         "confluence:ambhipian_boots",
-        "confluence:lucky_horseshoe"
+        "confluence:lucky_horseshoe",
+        "confluence:blue_horseshoe_balloon",
+        "confluence:white_horseshoe_balloon",
+        "confluence:yellow_horseshoe_balloon"
     ]
 }

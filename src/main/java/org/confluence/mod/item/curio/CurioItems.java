@@ -49,7 +49,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     LUCKY_HORSESHOE("lucky_horseshoe", LuckyHorseshoe::new), // 幸运马掌
     BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
-    YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon"), // 黄马掌气球
+    YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     ;
 
     private final RegistryObject<BaseCurioItem> value;
