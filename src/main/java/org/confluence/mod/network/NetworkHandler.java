@@ -6,7 +6,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.PlayerInputHandler;
-import org.confluence.mod.network.c2s.FallDistancePacketC2S;
+import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.network.s2c.*;
 
@@ -30,7 +30,7 @@ public class NetworkHandler {
         CHANNEL.registerMessage(packetId++, PlayerFlyPacketS2C.class, PlayerFlyPacketS2C::encode, PlayerFlyPacketS2C::decode, PlayerInputHandler::handleFlyPacket);
         CHANNEL.registerMessage(packetId++, PlayerOneTimeJumpPacketS2C.class, PlayerOneTimeJumpPacketS2C::encode, PlayerOneTimeJumpPacketS2C::decode, PlayerInputHandler::handleOneTimeJumpPacket);
 
-        CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
     }
 }

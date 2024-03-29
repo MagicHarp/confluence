@@ -49,10 +49,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.jump_boost", "增加跳跃高度");
         add("curios.tooltip.multi_jump", "可让持有者二连跳");
         add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
+        add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
+        add("item.confluence.bezoar.tooltip", "对中毒免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
         add("item.confluence.ice_skates.tooltip", "提供额外冰面行动力");
         add("item.confluence.ice_skates.tooltip2", "落到冰上时冰不会碎");

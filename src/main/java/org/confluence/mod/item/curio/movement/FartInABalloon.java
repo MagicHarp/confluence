@@ -10,7 +10,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
-public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
+public class FartInABalloon extends FartInABottle implements IJumpBoost {
     @Override
     public double getBoost() {
         return 1.33;
@@ -18,7 +18,7 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
 
     @Override
     public double getMultiY() {
-        return 1.1;
+        return 1.3;
     }
 
     @Override

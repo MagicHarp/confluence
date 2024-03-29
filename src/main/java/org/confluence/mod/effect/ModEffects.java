@@ -10,4 +10,5 @@ public class ModEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
 
     public static final RegistryObject<ManaIssueEffect> MANA_ISSUE = MOB_EFFECTS.register("mana_issue", ManaIssueEffect::new);
+    public static final RegistryObject<HoneyEffect> HONEY = MOB_EFFECTS.register("honey", HoneyEffect::new);
 }

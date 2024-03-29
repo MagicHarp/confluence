@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements LivingMixin {
+public abstract class LivingEntityMixin implements LivingMixin {
     @Unique
     private double c$jumpBoost = 1.0;
     @Unique

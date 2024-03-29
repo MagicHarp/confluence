@@ -9,6 +9,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 public class CuriosUtils {
+    public static boolean noSameCurio(LivingEntity living, Class<?> clazz) {
+        return noSameCurio(living, (Predicate<ItemStack>) itemStack -> clazz.isInstance(itemStack.getItem()));
+    }
+
     public static boolean noSameCurio(LivingEntity living, Predicate<ItemStack> predicate) {
         AtomicBoolean isEmpty = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living)
@@ -21,5 +25,17 @@ public class CuriosUtils {
         CuriosApi.getCuriosInventory(living)
             .ifPresent(handler -> isEmpty.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).isEmpty()));
         return isEmpty.get();
+    }
+
+    public static boolean hasCurio(LivingEntity living, Class<?> clazz) {
+        return !noSameCurio(living, clazz);
+    }
+
+    public static boolean hasCurio(LivingEntity living, Predicate<ItemStack> predicate) {
+        return !noSameCurio(living, predicate);
+    }
+
+    public static <C extends BaseCurioItem> boolean hasCurio(LivingEntity living, C curio) {
+        return !noSameCurio(living, curio);
     }
 }

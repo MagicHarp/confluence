@@ -21,7 +21,6 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 public class BaseSpeedBoots extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("EE6FAFF5-A69D-6101-F82A-93E55A01F65E");
@@ -64,7 +63,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return CuriosUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
+        return CuriosUtils.noSameCurio(slotContext.entity(), BaseSpeedBoots.class);
     }
 
     @Override

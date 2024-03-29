@@ -1,5 +1,9 @@
 package org.confluence.mod.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -31,6 +35,21 @@ public class FallingStarItemEntity extends ItemEntity {
             if (!onGround() && ProjectileUtil.getHitResultOnMoveVector(this, entity -> true) instanceof EntityHitResult entityHitResult) {
                 entityHitResult.getEntity().hurt(ConfluenceDamageTypes.of(level(), ConfluenceDamageTypes.FALLING_STAR), 100);
                 discard();
+            }
+        }
+    }
+
+    public static void summon(ServerLevel serverLevel) {
+        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.getDayTime() > 12000L && serverLevel.getGameTime() % 600 == 0) {
+            RandomSource random = serverLevel.random;
+            for (ServerPlayer serverPlayer : serverLevel.players()) {
+                int distance = serverLevel.getServer().getScaledTrackingDistance(1);
+                int offsetX = (random.nextFloat() < 0.5F ? 1 : -1) * random.nextInt(distance);
+                int offsetZ = (random.nextFloat() < 0.5F ? 1 : -1) * random.nextInt(distance);
+                BlockPos pos = serverPlayer.getOnPos().offset(offsetX, 0, offsetZ).atY(256);
+                if (serverLevel.isLoaded(pos)) {
+                    serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos.getCenter()));
+                }
             }
         }
     }

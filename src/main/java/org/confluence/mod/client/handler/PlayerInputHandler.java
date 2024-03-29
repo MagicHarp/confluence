@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.mixin.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.c2s.FallDistancePacketC2S;
+import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
 import org.confluence.mod.network.s2c.PlayerFlyPacketS2C;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import org.confluence.mod.network.s2c.PlayerOneTimeJumpPacketS2C;
@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 public class PlayerInputHandler {
     private static boolean jumpKeyDown = true;
     private static boolean jumpFinished = false;
+    private static boolean fart = false;
 
     private static int maxJumpCount = 0;
     private static int remainJumpCount = 0;
@@ -53,21 +54,21 @@ public class PlayerInputHandler {
                 }
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(true));
+                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, fart));
             } else if (!jumpFinished && remainOneTimeJumpTicks > 0) {
                 remainOneTimeJumpTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, jumpSpeed, vec3.z);
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
+                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, false));
             } else if (jumpFinished && remainFlyTicks > 0) {
                 remainFlyTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, flySpeed, vec3.z);
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(false));
+                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, false));
             }
         } else {
             jumpKeyDown = false;
@@ -80,6 +81,7 @@ public class PlayerInputHandler {
         context.enqueueWork(() -> {
             maxJumpCount = packet.maxJumpCount();
             multiY = packet.multiY();
+            fart = packet.fart();
         });
         context.setPacketHandled(true);
     }
