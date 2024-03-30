@@ -480,6 +480,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.CACTUS_HELMET.get(),"仙人掌头盔");
         add(Armors.CACTUS_LEGGINGS.get(),"仙人掌护腿");
         add(Armors.CACTUS_BOOTS.get(),"仙人掌靴子");
+        add(Armors.PLANK_CHESTPLATE.get(),"木制胸甲");
+        add(Armors.PLANK_HELMET.get(),"木制头盔");
+        add(Armors.PLANK_LEGGINGS.get(),"木制护腿");
+        add(Armors.PLANK_BOOTS.get(),"木制靴子");
         //endregion items
     }
 }
