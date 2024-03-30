@@ -1,5 +1,6 @@
 package org.confluence.mod.item;
 
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,14 +24,13 @@ public class ModRarity {
 
     @OnlyIn(Dist.CLIENT)
     public static class Animate {
-        public static int DiscoStyle = 0;
-        public static int DiscoR = Byte.MAX_VALUE;
-        public static int DiscoB = 0;
-        public static int DiscoG = 0;
-
+        private static int DiscoStyle = 0;
+        private static int DiscoR = Byte.MAX_VALUE;
+        private static int DiscoB = 0;
+        private static int DiscoG = 0;
         private static final int update = 7;
 
-        public static void DoUpdate_AnimateDiscoRGB() {
+        public static void doUpdateRainbowColor() {
             if (DiscoStyle == 0) {
                 DiscoG += update;
                 if (DiscoG >= Byte.MAX_VALUE) {
@@ -73,11 +73,45 @@ public class ModRarity {
             DiscoStyle = 0;
         }
 
-        public static void DoUpdate_AnimateCursorColors() {
+        public static int getRainbowColor() {
+            return ((DiscoR + 64) << 16) + ((DiscoG + 64) << 8) + (DiscoB + 64);
         }
 
-        public static int getDiscoColor() {
-            return ((DiscoR + 128) << 16) + ((DiscoG + 128) << 8) + (DiscoB + 128);
+        private static byte mouseTextColor = 0;
+        private static int mouseTextColorChange = 1;
+        private static float masterColor = 1.0F;
+        private static int masterColorDir = 1;
+
+        public static void doUpdateMasterColor() {
+            mouseTextColor += (byte) mouseTextColorChange;
+            if (mouseTextColor == Byte.MAX_VALUE) {
+                mouseTextColorChange = -1;
+            }
+            if (mouseTextColor <= (byte) 190) {
+                mouseTextColorChange = 1;
+            }
+            masterColor += (float) masterColorDir * 0.05f;
+            if ((double) masterColor > 1.0) {
+                masterColor = 1f;
+                masterColorDir = -1;
+            }
+            if ((double) masterColor >= 0.0) return;
+            masterColor = 0.0f;
+            masterColorDir = 1;
         }
+
+        public static int getMasterColor() {
+            double num = (float) mouseTextColor / (float) Byte.MAX_VALUE * 200.0;
+            int green = (int) (byte) (masterColor * num);
+            return ((int) mouseTextColor << 16) + (green << 8);
+        }
+    }
+
+    public interface Expert {
+        MutableComponent getComponent();
+    }
+
+    public interface Master {
+        MutableComponent getComponent();
     }
 }

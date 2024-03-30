@@ -100,7 +100,8 @@ public class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.CREATIVE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.creatives"))
             .displayItems((parameters, output) -> {
-                output.accept(ModItems.RGB_TEST_ITEM.get());
+                output.accept(ModItems.EXPERT_TEST_ITEM.get());
+                output.accept(ModItems.MASTER_TEST_ITEM.get());
             })
             .build());
     // 生物
