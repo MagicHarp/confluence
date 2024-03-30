@@ -1,11 +1,16 @@
 package org.confluence.mod.mixin;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
+import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.LivingMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -13,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -114,5 +120,14 @@ public abstract class LivingEntityMixin implements LivingMixin {
     @ModifyConstant(method = "handleDamageEvent", constant = @Constant(intValue = 20))
     private int invulnerable2(int constant) {
         return c$invulnerableTime;
+    }
+
+    @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
+    private void thinIceBlock(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (self.fallDistance > 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
+            self.level().destroyBlock(blockPos, true, self);
+            ci.cancel();
+        }
     }
 }

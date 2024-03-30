@@ -16,13 +16,13 @@ public interface IMultiJump {
     double getJumpSpeed();
 
     static void sendMsg(ServerPlayer serverPlayer) {
-        AtomicDouble fartSpeed = new AtomicDouble();
-        AtomicDouble sandstormSpeed = new AtomicDouble();
+        AtomicDouble fartSpeed = new AtomicDouble(-1.0);
+        AtomicDouble sandstormSpeed = new AtomicDouble(-1.0);
         AtomicInteger sandstormTicks = new AtomicInteger();
-        AtomicDouble blizzardSpeed = new AtomicDouble();
+        AtomicDouble blizzardSpeed = new AtomicDouble(-1.0);
         AtomicInteger blizzardTicks = new AtomicInteger();
-        AtomicDouble tsunamiSpeed = new AtomicDouble();
-        AtomicDouble cloudSpeed = new AtomicDouble();
+        AtomicDouble tsunamiSpeed = new AtomicDouble(-1.0);
+        AtomicDouble cloudSpeed = new AtomicDouble(-1.0);
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {

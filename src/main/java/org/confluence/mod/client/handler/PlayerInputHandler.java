@@ -55,29 +55,29 @@ public class PlayerInputHandler {
         } else if (localPlayer.input.jumping) {
             if (jumpKeyDown) return;
 
-            if (fartSpeed != 0.0 && !fartFinished) {
+            if (fartSpeed > 0.0 && !fartFinished) {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed, true);
-            } else if (sandstormSpeed != 0.0 && !sandstormFinished) {
+            } else if (sandstormSpeed > 0.0 && !sandstormFinished) {
                 if (remainSandstormTicks > 0) {
                     remainSandstormTicks--;
                     oneTimeJump(localPlayer, sandstormSpeed);
                 } else {
                     jumpKeyDown = true;
                 }
-            } else if (blizzardSpeed != 0.0 && !blizzardFinished) {
+            } else if (blizzardSpeed > 0.0 && !blizzardFinished) {
                 if (remainBlizzardTicks > 0) {
                     remainBlizzardTicks--;
                     oneTimeJump(localPlayer, blizzardSpeed);
                 } else {
                     jumpKeyDown = true;
                 }
-            } else if (tsunamiSpeed != 0.0 && !tsunamiFinished) {
+            } else if (tsunamiSpeed > 0.0 && !tsunamiFinished) {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, tsunamiSpeed, false);
-            } else if (cloudSpeed != 0.0 && !cloudFinished) {
+            } else if (cloudSpeed > 0.0 && !cloudFinished) {
                 cloudFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, cloudSpeed, false);
@@ -122,16 +122,12 @@ public class PlayerInputHandler {
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            if (packet.fartSpeed() > 0) {
-                fartSpeed = packet.fartSpeed();
-            }
+            fartSpeed = packet.fartSpeed();
             sandstormSpeed = packet.sandstormSpeed();
             maxSandstormTicks = packet.sandstormTicks();
             blizzardSpeed = packet.blizzardSpeed();
             maxBlizzardTicks = packet.blizzardTicks();
-            if (packet.tsunamiSpeed() > 0) {
-                tsunamiSpeed = packet.tsunamiSpeed();
-            }
+            tsunamiSpeed = packet.tsunamiSpeed();
             cloudSpeed = packet.cloudSpeed();
         });
         context.setPacketHandled(true);
