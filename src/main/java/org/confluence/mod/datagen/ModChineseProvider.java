@@ -94,6 +94,16 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
         add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
+        add(Ores.RUBY_ORE.get(), "红玉矿石");
+        add(Ores.DEEPSLATE_RUBY_ORE.get(), "深层红玉矿石");
+        add(Ores.TOPAZ_ORE.get(), "黄玉矿石");
+        add(Ores.DEEPSLATE_TOPAZ_ORE.get(), "深层黄玉矿石");
+        add(Ores.AMBER_ORE.get(), "琥珀矿石");
+        add(Ores.DEEPSLATE_AMBER_ORE.get(), "深层琥珀矿石");
+        add(Ores.ANOTHER_AMETHYST_ORE.get(), "异域紫晶矿石");
+        add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), "深层异域紫晶矿石");
+        add(Ores.SAPPHIRE_ORE.get(), "蓝玉矿石");
+        add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), "深层蓝玉矿石");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.EBONY_ORE.get(), "魔矿石");
         add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");

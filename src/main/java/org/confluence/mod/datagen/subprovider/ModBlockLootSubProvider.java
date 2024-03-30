@@ -74,6 +74,18 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
+//宝石
+        add(Ores.RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
+        add(Ores.DEEPSLATE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
+        add(Ores.AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
+        add(Ores.DEEPSLATE_AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
+        add(Ores.TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.DEEPSLATE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
+        add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
+        add(Ores.ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+        add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+
         add(Ores.METEORITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_METEORITE.get()));
         add(Ores.EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
         add(Ores.DEEPSLATE_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
