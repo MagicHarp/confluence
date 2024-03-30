@@ -37,6 +37,9 @@ public class ModItems {
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
+    // 创造
+    public static final RegistryObject<RGBTestItem> RGB_TEST_ITEM = ITEMS.register("rgb_test_item", RGBTestItem::new);
+
     public static void register(IEventBus bus) {
         ModTiers.register();
         Icons.init();
