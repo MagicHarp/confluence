@@ -38,7 +38,8 @@ public class ModItems {
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 
     // 创造
-    public static final RegistryObject<RGBTestItem> RGB_TEST_ITEM = ITEMS.register("rgb_test_item", RGBTestItem::new);
+    public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
+    public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);
 
     public static void register(IEventBus bus) {
         ModTiers.register();
