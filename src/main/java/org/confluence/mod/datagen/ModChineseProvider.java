@@ -484,6 +484,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLANK_HELMET.get(),"木制头盔");
         add(Armors.PLANK_LEGGINGS.get(),"木制护腿");
         add(Armors.PLANK_BOOTS.get(),"木制靴子");
+        add(Armors.RAIN_CAP.get(),"雨帽");
+        add(Armors.RAINCOAT.get(),"雨衣");
+        add(Armors.SNOW_CAPS.get(),"防雪帽");
+        add(Armors.SNOW_SUITS.get(),"防雪衣");
+        add(Armors.INSULATED_PANTS.get(),"保温裤");
+        add(Armors.INSULATED_SHOES.get(),"保温鞋");
+        add(Armors.SNOW_PINK_CAPS.get(),"粉色防雪帽");
+        add(Armors.SNOW_PINK_SUITS.get(),"粉色防雪衣");
+
         //endregion items
     }
 }
