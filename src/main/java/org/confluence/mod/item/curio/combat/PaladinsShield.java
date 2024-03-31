@@ -36,7 +36,7 @@ public class PaladinsShield extends BaseCurioItem {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer && serverPlayer.level().getGameTime() % 200 == 0) {
             Team team = serverPlayer.getTeam();
             for (Player player : serverPlayer.level().players()) {
-                if (player.getTeam() != team) continue;
+                if (player.getTeam() != team || player.getScoreboardName().equals(serverPlayer.getScoreboardName())) continue;
                 player.addEffect(new OwnerMobEffectInstance(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 200), serverPlayer));
             }
         }

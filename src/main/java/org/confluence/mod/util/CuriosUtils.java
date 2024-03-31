@@ -4,7 +4,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
@@ -40,10 +42,14 @@ public class CuriosUtils {
         return !noSameCurio(living, curio);
     }
 
-    public static <C extends BaseCurioItem> ItemStack findCurio(LivingEntity living, C curio){
+    public static <C extends BaseCurioItem> ItemStack findCurio(LivingEntity living, C curio) {
         AtomicReference<ItemStack> atomic = new AtomicReference<>(ItemStack.EMPTY);
         CuriosApi.getCuriosInventory(living)
-            .ifPresent(handler -> atomic.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).get(0).stack()));
+            .ifPresent(handler -> {
+                List<SlotResult> results = handler.findCurios(itemStack -> itemStack.getItem() == curio);
+                if (results.isEmpty()) return;
+                atomic.set(results.get(0).stack());
+            });
         return atomic.get();
     }
 }

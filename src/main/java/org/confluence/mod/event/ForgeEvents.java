@@ -4,6 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -81,11 +83,13 @@ public class ForgeEvents {
     public static void livingHurt(LivingHurtEvent event) {
         LivingEntity living = event.getEntity();
         if (living.level().isClientSide) return;
+        DamageSource damageSource = event.getSource();
+        if(damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         ServerLevel level = (ServerLevel) living.level();
         RandomSource random = level.random;
         float amount = event.getAmount();
 
-        amount *= ManaIssueEffect.apply(event.getSource());
+        amount *= ManaIssueEffect.apply(damageSource);
         HoneyComb.apply(living, random);
         if (IHurtEvasion.apply(living, random)) {
             event.setCanceled(true);
