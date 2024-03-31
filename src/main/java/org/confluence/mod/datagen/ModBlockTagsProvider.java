@@ -2,7 +2,9 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.ModTags;
@@ -14,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static org.confluence.mod.Confluence.MODID;
+import static org.confluence.mod.block.ModBlocks.*;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
     public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, @Nullable ExistingFileHelper helper) {
@@ -23,7 +26,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     public void addTags(HolderLookup.@NotNull Provider provider) {
         LogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
-        Ores.acceptTag(tag(BlockTags.MINEABLE_WITH_PICKAXE));
+        IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
+        Ores.acceptTag(mineableWithPickaxe);
+        mineableWithPickaxe.add(
+            BIG_RUBY_BLOCK.get(),
+            BIG_AMBER_BLOCK.get(),
+            BIG_TOPAZ_BLOCK.get(),
+            BIG_SAPPHIRE_BLOCK.get(),
+            BIG_ANOTHER_AMETHYST_BLOCK.get()
+        );
+
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
