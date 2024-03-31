@@ -91,12 +91,14 @@ public class ForgeEvents {
             event.setCanceled(true);
             return;
         }
+        PanicNecklace.apply(living);
+        amount = PaladinsShield.apply(living, amount);
 
         event.setAmount(amount * (random.nextInt(80, 121) / 100.0F));
     }
 
     @SubscribeEvent
-    public static void attackEntity(AttackEntityEvent event){
+    public static void attackEntity(AttackEntityEvent event) {
         IFireAttack.apply(event.getEntity(), event.getTarget());
     }
 

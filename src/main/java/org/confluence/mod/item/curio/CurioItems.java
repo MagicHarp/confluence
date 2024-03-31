@@ -60,8 +60,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     OBSIDIAN_SKULL("obsidian_skull", ObsidianSkull::new), // 黑曜石骷髅头
     MOLTEN_SKULL_ROSE("molten_skull_rose", MoltenSkullRose::new), // 熔火骷髅头玫瑰
     OBSIDIAN_SKULL_ROSE("obsidian_skull_rose", ObsidianSkullRose::new), // 黑曜石骷髅头玫瑰
-    /* 圣骑士护盾 */
-    /* 恐慌项链 */
+    PALADINS_SHIELD("paladins_shield", PaladinsShield::new), // 圣骑士护盾
+    PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     /* 袖珍镜 */
     /* 强力手套 */
     /* 腐香囊 */
