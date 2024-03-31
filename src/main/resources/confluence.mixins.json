@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BlockBehaviourMixin",
+        "EntityMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
         "PlayerAdvancementsMixin",

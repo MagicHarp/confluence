@@ -7,7 +7,6 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -20,12 +19,6 @@ public class FrogLeg extends BaseCurioItem implements IJumpBoost, IFallResistanc
     @Override
     public int getFallResistance() {
         return 7;
-    }
-
-    @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshJumpBoost(slotContext.entity());
-        freshFallResistance(slotContext.entity());
     }
 
     @Override

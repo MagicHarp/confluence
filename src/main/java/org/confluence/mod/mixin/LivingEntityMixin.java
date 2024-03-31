@@ -11,7 +11,7 @@ import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.LivingMixin;
+import org.confluence.mod.util.ILivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +25,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin implements LivingMixin {
+public abstract class LivingEntityMixin implements ILivingEntity {
     @Unique
     private double c$jumpBoost = 1.0;
     @Unique

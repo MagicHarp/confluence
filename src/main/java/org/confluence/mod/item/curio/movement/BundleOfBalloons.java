@@ -37,7 +37,6 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
                 )
             );
         }
-        freshJumpBoost(slotContext.entity());
     }
 
     @Override

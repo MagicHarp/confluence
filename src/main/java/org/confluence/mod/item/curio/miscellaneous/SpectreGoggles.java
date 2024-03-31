@@ -20,7 +20,7 @@ public class SpectreGoggles extends BaseCurioItem {
         echo(slotContext.entity(), false);
     }
 
-    private void echo(LivingEntity living, boolean value) {
+    private static void echo(LivingEntity living, boolean value) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),

@@ -5,7 +5,6 @@ import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.SlotContext;
@@ -21,13 +20,6 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit {
     @Override
     public float getChance() {
         return 0.08F;
-    }
-
-    @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        if (slotContext.entity() instanceof Player player) {
-            freshChance(player);
-        }
     }
 
     @Override

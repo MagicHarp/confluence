@@ -6,7 +6,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -14,12 +13,6 @@ public class SandstormInABalloon extends SandstormInABottle implements IJumpBoos
     @Override
     public double getBoost() {
         return 1.33;
-    }
-
-    @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        super.onEquip(slotContext, prevStack, stack);
-        freshJumpBoost(slotContext.entity());
     }
 
     @Override

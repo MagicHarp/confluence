@@ -54,9 +54,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 熔火箭袋 */
     /* 熔火骷髅头玫瑰 */
     /* 邪眼 */
-    /* 黑曜石玫瑰 */
-    /* 黑曜石护盾 */
-    /* 黑曜石骷髅头 */
+    OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
+    OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾
+    OBSIDIAN_SKULL("obsidian_skull", ObsidianSkull::new), // 黑曜石骷髅头
     /* 黑曜石骷髅头玫瑰 */
     /* 圣骑士护盾 */
     /* 恐慌项链 */
@@ -100,7 +100,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
 
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
     /* 水母项链 */
-    /* 黑曜石骷髅头 */
 
     /* 梯凳 */
     AGLET("aglet", Aglet::new), // 金属带扣
@@ -132,10 +131,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 仙灵靴 */
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
-    /* 黑曜石玫瑰 */
-    /* 岩浆石 */
-    /* 熔岩护身符 */
-    /* 熔火护声符 */
     /* 水上漂靴 */
     /* 黑曜石水上漂靴 */
     /* 熔岩靴 */
@@ -146,6 +141,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
     SANDSTORM_IN_A_BALLOON("sandstorm_in_a_balloon", SandstormInABalloon::new), // 沙暴气球
     FART_IN_A_BALLOON("fart_in_a_balloon", FartInABalloon::new), // 臭屁气球
+    SHARKRON_BALLOON("sharkron_balloon", SharkronBalloon::new), // 鲨鱼龙气球
     /* 蜂蜜气球 */
     BUNDLE_OF_BALLOONS("bundle_of_balloons", BundleOfBalloons::new), // 气球束
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
@@ -158,6 +154,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
+    PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
     /* 琥珀马掌气球 */
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
     /* 天界贝壳 */

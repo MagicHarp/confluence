@@ -17,7 +17,7 @@ public interface IMayFly {
 
     double getFlySpeed();
 
-    static void sendMaxFly(ServerPlayer serverPlayer) {
+    static void sendMsg(ServerPlayer serverPlayer) {
         AtomicInteger maxFlyTicks = new AtomicInteger();
         AtomicDouble flySpeed = new AtomicDouble();
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
