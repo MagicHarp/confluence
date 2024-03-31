@@ -8,7 +8,7 @@ public interface IFallResistance {
     int getFallResistance();
 
     default void freshFallResistance(LivingEntity living) {
-        ((ILivingEntity) living).c$freshFallResistance();
+        ((ILivingEntity) living).c$freshFallResistance(living);
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.fall_resistance");

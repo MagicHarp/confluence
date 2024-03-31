@@ -37,9 +37,9 @@ public abstract class LivingEntityMixin implements ILivingEntity {
 
     @Unique
     @Override
-    public void c$freshJumpBoost() {
+    public void c$freshJumpBoost(LivingEntity living) {
         AtomicDouble maxBoost = new AtomicDouble();
-        CuriosApi.getCuriosInventory((LivingEntity) (Object) this).ifPresent(handler -> {
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IJumpBoost iJumpBoost) {
@@ -52,9 +52,9 @@ public abstract class LivingEntityMixin implements ILivingEntity {
 
     @Unique
     @Override
-    public void c$freshFallResistance() {
+    public void c$freshFallResistance(LivingEntity living) {
         AtomicInteger fallResistance = new AtomicInteger();
-        CuriosApi.getCuriosInventory((LivingEntity) (Object) this).ifPresent(handler -> {
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFallResistance iFallResistance) {
@@ -79,9 +79,9 @@ public abstract class LivingEntityMixin implements ILivingEntity {
 
     @Unique
     @Override
-    public void c$freshCriticalChance() {
+    public void c$freshCriticalChance(LivingEntity living) {
         AtomicDouble maxChance = new AtomicDouble();
-        CuriosApi.getCuriosInventory((LivingEntity) (Object) this).ifPresent(curiosItemHandler -> {
+        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ICriticalHit iCriticalHit) {

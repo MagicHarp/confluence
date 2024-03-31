@@ -2,5 +2,5 @@ package org.confluence.mod.item.curio.combat;
 
 import org.confluence.mod.item.curio.BaseCurioItem;
 
-public class ObsidianRose extends BaseCurioItem implements ILavaHurtReduce {
+public class BlackBelt extends BaseCurioItem implements IHurtEvasion {
 }

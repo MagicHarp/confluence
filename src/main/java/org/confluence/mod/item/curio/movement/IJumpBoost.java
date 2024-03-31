@@ -8,7 +8,7 @@ public interface IJumpBoost {
     double getBoost();
 
     default void freshJumpBoost(LivingEntity living) {
-        ((ILivingEntity) living).c$freshJumpBoost();
+        ((ILivingEntity) living).c$freshJumpBoost(living);
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.jump_boost");

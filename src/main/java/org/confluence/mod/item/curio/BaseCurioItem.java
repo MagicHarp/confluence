@@ -13,7 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.item.curio.combat.ILavaReduce;
+import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
+import org.confluence.mod.item.curio.combat.ILavaImmune;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
@@ -43,14 +44,17 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         Item item = stack.getItem();
         LivingEntity living = slotContext.entity();
-        if(item instanceof ICriticalHit iCriticalHit){
+        if (item instanceof ICriticalHit iCriticalHit) {
             iCriticalHit.freshChance(living);
         }
         if (item instanceof IFireImmune iFireImmune) {
             iFireImmune.freshFireImmune(living);
         }
-        if (item instanceof ILavaReduce iLavaReduce) {
-            iLavaReduce.freshLavaReduce(living);
+        if (item instanceof ILavaHurtReduce iLavaHurtReduce) {
+            iLavaHurtReduce.freshLavaReduce(living);
+        }
+        if (item instanceof ILavaImmune iLavaImmune) {
+            iLavaImmune.freshLavaImmuneTicks(living);
         }
         if (item instanceof IFallResistance iFallResistance) {
             iFallResistance.freshFallResistance(living);

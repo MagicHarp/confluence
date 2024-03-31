@@ -12,6 +12,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -21,14 +22,10 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.curio.combat.EffectInvulnerable;
-import org.confluence.mod.item.curio.combat.HoneyComb;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.mana.ManaProvider;
-import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.PlayerUtils;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -90,7 +87,7 @@ public class ForgeEvents {
 
         amount *= ManaIssueEffect.apply(event.getSource());
         HoneyComb.apply(living, random);
-        if (random.nextFloat() < 0.1F && CuriosUtils.hasCurio(living, CurioItems.BLACK_BELT.get())) {
+        if (IHurtEvasion.apply(living, random)) {
             event.setCanceled(true);
             return;
         }
@@ -99,12 +96,13 @@ public class ForgeEvents {
     }
 
     @SubscribeEvent
+    public static void attackEntity(AttackEntityEvent event){
+        IFireAttack.apply(event.getEntity(), event.getTarget());
+    }
+
+    @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
-        Player player = event.getEntity();
-        if (ICriticalHit.apply(event.isVanillaCritical(), player)) {
-            event.setDamageModifier(1.5F);
-            event.setResult(Event.Result.ALLOW);
-        }
+        ICriticalHit.apply(event);
     }
 
     @SubscribeEvent

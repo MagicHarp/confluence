@@ -24,7 +24,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 蜜蜂斗篷 */
     /* 狂战士手套 */
     BEZOAR("bezoar", Bezoar::new), // 牛黄
-    BLACK_BELT("black_belt"), // 黑腰带
+    BLACK_BELT("black_belt", BlackBelt::new), // 黑腰带
     BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
     /* 天界徽章 */
     /* 月光护身符 */
@@ -46,18 +46,20 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 英雄护盾 */
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
     /* 魔法箭袋 */
-    /* 岩浆石 */
     /* 机械手套 */
     /* 药用绷带 */
     /* 扩音器 */
     /* 月亮石 */
     /* 熔火箭袋 */
-    /* 熔火骷髅头玫瑰 */
     /* 邪眼 */
+    /* 岩浆石 */
+    MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
+    LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
     OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾
     OBSIDIAN_SKULL("obsidian_skull", ObsidianSkull::new), // 黑曜石骷髅头
-    /* 黑曜石骷髅头玫瑰 */
+    MOLTEN_SKULL_ROSE("molten_skull_rose", MoltenSkullRose::new), // 熔火骷髅头玫瑰
+    OBSIDIAN_SKULL_ROSE("obsidian_skull_rose", ObsidianSkullRose::new), // 黑曜石骷髅头玫瑰
     /* 圣骑士护盾 */
     /* 恐慌项链 */
     /* 袖珍镜 */
