@@ -474,6 +474,17 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.CROSS_NECKLACE.get(), "十字项链");
         add(CurioItems.DESTROYER_EMBLEM.get(), "毁灭者勋章");
         add(CurioItems.EYE_OF_THE_GOLEM.get(), "石巨人之眼");
+        add(CurioItems.PINK_HORSESHOE_BALLOON.get(), "粉马掌气球");
+        add(CurioItems.SHARKRON_BALLOON.get(), "鲨鱼龙气球");
+        add(CurioItems.BALLOON_PUFFERFISH.get(), "气球河豚鱼");
+        add(CurioItems.TSUNAMI_IN_A_BOTTLE.get(), "海啸瓶");
+        add(CurioItems.MAGMA_SKULL.get(), "岩浆骷髅头");
+        add(CurioItems.LAVA_CHARM.get(), "熔岩护身符");
+        add(CurioItems.OBSIDIAN_ROSE.get(), "黑曜石玫瑰");
+        add(CurioItems.OBSIDIAN_SHIELD.get(), "黑曜石护盾");
+        add(CurioItems.OBSIDIAN_SKULL.get(), "黑曜石骷髅头");
+        add(CurioItems.MOLTEN_SKULL_ROSE.get(), "熔火骷髅头玫瑰");
+        add(CurioItems.OBSIDIAN_SKULL_ROSE.get(), "黑曜石骷髅头玫瑰");
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
