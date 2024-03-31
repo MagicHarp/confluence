@@ -21,12 +21,6 @@ public class GreenHorseshoeBalloon extends FartInABalloon implements IFallResist
     }
 
     @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        super.onEquip(slotContext, prevStack, stack);
-        freshFallResistance(slotContext.entity());
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return LuckyHorseshoe.LUCKY;
     }

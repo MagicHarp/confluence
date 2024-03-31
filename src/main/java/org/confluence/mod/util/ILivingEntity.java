@@ -1,6 +1,6 @@
 package org.confluence.mod.util;
 
-public interface LivingMixin {
+public interface ILivingEntity {
     void c$freshJumpBoost();
 
     void c$freshFallResistance();

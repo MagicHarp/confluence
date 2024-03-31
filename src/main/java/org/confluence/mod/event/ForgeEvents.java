@@ -25,6 +25,8 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.EffectInvulnerable;
 import org.confluence.mod.item.curio.combat.HoneyComb;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.movement.IMayFly;
+import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.mana.ManaProvider;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.PlayerUtils;
@@ -65,9 +67,17 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void playerClone(PlayerEvent.Clone event) {
+        if (!event.isWasDeath()) return;
+
         Player oldPlayer = event.getOriginal();
+        Player neoPlayer = event.getEntity();
         oldPlayer.revive();
-        oldPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(old -> event.getEntity().getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
+        oldPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(old -> neoPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
+
+        if (neoPlayer instanceof ServerPlayer serverPlayer) {
+            IMultiJump.sendMsg(serverPlayer);
+            IMayFly.sendMsg(serverPlayer);
+        }
     }
 
     @SubscribeEvent

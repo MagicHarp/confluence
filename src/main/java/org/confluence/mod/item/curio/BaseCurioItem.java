@@ -2,6 +2,8 @@ package org.confluence.mod.item.curio;
 
 import com.google.common.collect.ImmutableMultimap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
@@ -9,6 +11,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.combat.IFireImmune;
+import org.confluence.mod.item.curio.combat.ILavaReduce;
+import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.item.curio.movement.IJumpBoost;
+import org.confluence.mod.item.curio.movement.IMayFly;
+import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +37,33 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     public BaseCurioItem() {
         this(new Properties());
+    }
+
+    @Override
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        Item item = stack.getItem();
+        LivingEntity living = slotContext.entity();
+        if(item instanceof ICriticalHit iCriticalHit){
+            iCriticalHit.freshChance(living);
+        }
+        if (item instanceof IFireImmune iFireImmune) {
+            iFireImmune.freshFireImmune(living);
+        }
+        if (item instanceof ILavaReduce iLavaReduce) {
+            iLavaReduce.freshLavaReduce(living);
+        }
+        if (item instanceof IFallResistance iFallResistance) {
+            iFallResistance.freshFallResistance(living);
+        }
+        if (item instanceof IJumpBoost iJumpBoost) {
+            iJumpBoost.freshJumpBoost(living);
+        }
+        if (item instanceof IMayFly && living instanceof ServerPlayer serverPlayer) {
+            IMayFly.sendMsg(serverPlayer);
+        }
+        if (item instanceof IMultiJump && living instanceof ServerPlayer serverPlayer) {
+            IMultiJump.sendMsg(serverPlayer);
+        }
     }
 
     @Override

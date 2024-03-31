@@ -22,12 +22,6 @@ public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallR
     }
 
     @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshJumpBoost(slotContext.entity());
-        freshFallResistance(slotContext.entity());
-    }
-
-    @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
         onEquip(slotContext, newStack, stack);
