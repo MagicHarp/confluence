@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.ModTags;
+import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.Ores;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,41 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             BIG_AMBER_BLOCK.get(),
             BIG_TOPAZ_BLOCK.get(),
             BIG_SAPPHIRE_BLOCK.get(),
-            BIG_ANOTHER_AMETHYST_BLOCK.get()
+            BIG_ANOTHER_AMETHYST_BLOCK.get(),
+            DecorativeBlocks.SNOW_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_COPPER_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_COPPER_PLATE.get(),
+            DecorativeBlocks.TIN_BRICKS.get(),
+            DecorativeBlocks.TIN_PLATE.get(),
+            DecorativeBlocks.ANOTHER_IRON_BRICKS.get(),
+            DecorativeBlocks.LEAD_BRICKS.get(),
+            DecorativeBlocks.SILVER_BRICKS.get(),
+            DecorativeBlocks.TUNGSTEN_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_GOLD_BRICKS.get(),
+            DecorativeBlocks.PLATINUM_BRICKS.get(),
+            DecorativeBlocks.EBONY_ORE_BRICKS.get(),
+            DecorativeBlocks.EBONY_ROCK_BRICKS.get(),
+            DecorativeBlocks.METEORITE_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_CRIMSON_ORE_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_CRIMSON_ROCK_BRICKS.get(),
+            DecorativeBlocks.PEARL_ROCK_BRICKS.get(),
+            DecorativeBlocks.GREEN_CANDY_BLOCK.get(),
+            DecorativeBlocks.RED_CANDY_BLOCK.get(),
+            DecorativeBlocks.SUN_PLATE.get(),
+            DecorativeBlocks.ANOTHER_LAVA_BEAM.get(),
+            DecorativeBlocks.ANOTHER_LAVA_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_OBSIDIAN_BEAM.get(),
+            DecorativeBlocks.ANOTHER_OBSIDIAN_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_OBSIDIAN_PLATE.get(),
+            DecorativeBlocks.ANOTHER_OBSIDIAN_SMALL_BRICKS.get(),
+            DecorativeBlocks.ANOTHER_SMOOTH_OBSIDIAN.get(),
+            DecorativeBlocks.ANOTHER_GRANITE_COLUMN.get(),
+            DecorativeBlocks.MARBLE_COLUMN.get(),
+            DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(),
+            DecorativeBlocks.CRYSTAL_BLOCK.get()
+
+
+
         );
 
 
