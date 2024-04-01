@@ -92,19 +92,19 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity old = event.getOriginalTarget();
-        if (old == null) return;
-        LivingEntity neo = event.getNewTarget();
-
-        AtomicBoolean bothHas = new AtomicBoolean();
-        old.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(oldAbility ->
-            neo.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(neoAbility -> {
-                bothHas.set(true);
-                if (oldAbility.getAggro() > neoAbility.getAggro()) {
-                    event.setNewTarget(old);
-                }
-            })
-        );
-        if (bothHas.get()) return;
+        if (old != null) {
+            LivingEntity neo = event.getNewTarget();
+            AtomicBoolean bothHas = new AtomicBoolean();
+            old.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(oldAbility ->
+                neo.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(neoAbility -> {
+                    bothHas.set(true);
+                    if (oldAbility.getAggro() > neoAbility.getAggro()) {
+                        event.setNewTarget(old);
+                    }
+                })
+            );
+            if (bothHas.get()) return;
+        }
 
         LivingEntity self = event.getEntity();
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
