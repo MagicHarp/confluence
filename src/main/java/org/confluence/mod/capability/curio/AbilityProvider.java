@@ -23,12 +23,12 @@ public class AbilityProvider implements ICapabilitySerializable<CompoundTag> {
 
     @Override
     public CompoundTag serializeNBT() {
-        return playerAbility.serializeNBT();
+        return getOrCreateStorage().serializeNBT();
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        playerAbility.deserializeNBT(nbt);
+        getOrCreateStorage().deserializeNBT(nbt);
     }
 
     private PlayerAbility getOrCreateStorage() {

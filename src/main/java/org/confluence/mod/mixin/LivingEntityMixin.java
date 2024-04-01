@@ -1,18 +1,13 @@
 package org.confluence.mod.mixin;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.curio.AbilityProvider;
 import org.confluence.mod.util.CuriosUtils;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -25,19 +20,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Shadow
-    public abstract <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing);
-
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        getCapability(AbilityProvider.ABILITY_CAPABILITY, null).ifPresent(playerAbility -> {
+        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
             cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost()));
         });
     }
 
     @Inject(method = "calculateFallDamage", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
     private void fallDamage(float fallDistance, float multiply, CallbackInfoReturnable<Integer> cir) {
-        getCapability(AbilityProvider.ABILITY_CAPABILITY, null).ifPresent(playerAbility -> {
+        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
             if (playerAbility.getFallResistance() < 0) {
                 cir.setReturnValue(0);
             } else {
@@ -59,7 +51,7 @@ public abstract class LivingEntityMixin {
     @Unique
     private int c$getInvulnerableTime(int constant) {
         AtomicInteger time = new AtomicInteger(constant);
-        getCapability(AbilityProvider.ABILITY_CAPABILITY, null).ifPresent(playerAbility -> {
+        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
             time.set(playerAbility.getInvulnerableTime());
         });
         return time.get();
@@ -67,10 +59,15 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
     private void thinIceBlock(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
-        LivingEntity self = (LivingEntity) (Object) this;
+        LivingEntity self = c$getSelf();
         if (self.fallDistance > 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
         }
+    }
+
+    @Unique
+    private LivingEntity c$getSelf() {
+        return (LivingEntity) (Object) this;
     }
 }
