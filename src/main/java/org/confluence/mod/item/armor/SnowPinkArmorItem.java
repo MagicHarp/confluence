@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.SnowArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.SnowPinkArmorRenderer;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -28,35 +27,21 @@ public class SnowPinkArmorItem extends ArmorItem implements GeoItem {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    default -> {
-                        return 55;
-                    }
-                    case CHESTPLATE -> {
-                        return 80;
-                    }
-                    case LEGGINGS -> {
-                        return 75;
-                    }
-                    case BOOTS -> {
-                        return 65;
-                    }
-                }
+                return switch (armorType) {
+                    case HELMET -> 55;
+                    case CHESTPLATE -> 80;
+                    case LEGGINGS -> 75;
+                    case BOOTS -> 65;
+                };
             }
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    default -> {
-                        return 1;
-                    }
-                    case CHESTPLATE -> {
-                        return 3;
-                    }
-                    case LEGGINGS -> {
-                        return 2;
-                    }
-                }
+                return switch (armorType) {
+                    default -> 1;
+                    case CHESTPLATE -> 3;
+                    case LEGGINGS -> 2;
+                };
             }
 
             @Override

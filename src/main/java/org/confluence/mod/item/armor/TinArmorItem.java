@@ -8,10 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.CopperArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.TinArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
@@ -29,36 +27,21 @@ public class TinArmorItem extends ArmorItem implements GeoItem {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    default -> {
-                        return 55;
-                    }
-                    case CHESTPLATE -> {
-                        return 80;
-                    }
-                    case LEGGINGS -> {
-                        return 75;
-                    }
-                    case BOOTS -> {
-                        return 65;
-                    }
-                }
+                return switch (armorType) {
+                    case HELMET -> 55;
+                    case CHESTPLATE -> 80;
+                    case LEGGINGS -> 75;
+                    case BOOTS -> 65;
+                };
             }
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    case HELMET -> {
-                        return 1;
-                    }
-                    case CHESTPLATE -> {
-                        return 3;
-                    }
-                    case LEGGINGS, BOOTS -> {
-                        return 2;
-                    }
-                }
-                return 0;
+                return switch (armorType) {
+                    default -> 1;
+                    case CHESTPLATE -> 3;
+                    case LEGGINGS -> 2;
+                };
             }
 
             @Override
