@@ -25,6 +25,7 @@ public class PlayerEvents {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             PlayerUtils.syncMana2Client(serverPlayer);
             PlayerUtils.syncAdvancements(serverPlayer);
+            PlayerUtils.syncSavedData(serverPlayer);
         }
     }
 

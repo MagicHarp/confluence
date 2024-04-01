@@ -4,8 +4,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
+import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
+import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -79,5 +81,10 @@ public class PlayerUtils {
 
     public static void syncAdvancements(ServerPlayer serverPlayer) {
 
+    }
+
+    public static void syncSavedData(ServerPlayer serverPlayer) {
+        ConfluenceData data = ConfluenceData.get(serverPlayer.serverLevel());
+        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SpecificMoonPacketS2C(data.getMoonSpecific()));
     }
 }

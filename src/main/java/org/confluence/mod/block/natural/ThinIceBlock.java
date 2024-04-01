@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +23,9 @@ public class ThinIceBlock extends IceBlock {
 
     @Override
     public void updateEntityAfterFallOn(@NotNull BlockGetter blockGetter, @NotNull Entity entity) {
+        if (blockGetter.getBlockState(entity.getOnPosLegacy()).is(ModBlocks.THIN_ICE_BLOCK.get())) {
+            super.updateEntityAfterFallOn(blockGetter, entity);
+        }
     }
 
     @Override
