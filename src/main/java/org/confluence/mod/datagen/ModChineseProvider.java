@@ -511,6 +511,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.TIN_CHESTPLATE.get(),"锡胸甲");
         add(Armors.TIN_LEGGINGS.get(),"锡护腿");
         add(Armors.TIN_BOOTS.get(),"锡靴子");
+        add(Armors.LEAD_HELMET.get(),"铅头盔");
+        add(Armors.LEAD_CHESTPLATE.get(),"铅胸甲");
+        add(Armors.LEAD_LEGGINGS.get(),"铅护腿");
+        add(Armors.LEAD_BOOTS.get(),"铅靴子");
+
 
         //endregion items
     }

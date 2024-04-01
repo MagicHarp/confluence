@@ -39,8 +39,8 @@ public class TinArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 2;
-                    case CHESTPLATE -> 2;
-                    case LEGGINGS -> 1;
+                    case CHESTPLATE -> 4;
+                    case LEGGINGS -> 4;
                 };
             }
 

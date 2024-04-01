@@ -8,10 +8,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.RaincoatArmorRenderer;
+import org.confluence.mod.client.renderer.item.armor.LeadArmorRenderer;
+import org.confluence.mod.client.renderer.item.armor.TinArmorRenderer;
+import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -20,27 +21,27 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class RaincoatArmorItem extends ArmorItem implements GeoItem {
+public class LeadArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
-    public RaincoatArmorItem(Type type) {
+    public LeadArmorItem(Type type) {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    case HELMET -> 55;
-                    case CHESTPLATE -> 80;
-                    case LEGGINGS -> 75;
-                    case BOOTS -> 65;
+                    case HELMET -> 170;
+                    case CHESTPLATE -> 250;
+                    case LEGGINGS -> 230;
+                    case BOOTS -> 160;
                 };
             }
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    default -> 1;
-                    case CHESTPLATE -> 4;
-                    case LEGGINGS -> 0;
+                    default -> 2;
+                    case CHESTPLATE -> 5;
+                    case LEGGINGS -> 6;
                 };
             }
 
@@ -56,12 +57,12 @@ public class RaincoatArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(Items.OAK_PLANKS);
+                return Ingredient.of(Materials.LEAD_INGOT.get());
             }
 
             @Override
             public @NotNull String getName() {
-                return "planks";
+                return "tin";
             }
 
             @Override
@@ -79,12 +80,12 @@ public class RaincoatArmorItem extends ArmorItem implements GeoItem {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private RaincoatArmorRenderer renderer;
+            private LeadArmorRenderer renderer;
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = new RaincoatArmorRenderer();
+                    this.renderer = new LeadArmorRenderer();
                 }
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 

@@ -38,9 +38,9 @@ public class CopperArmorItem extends ArmorItem implements GeoItem {
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    default -> 1;
-                    case CHESTPLATE ->2;
-                    case LEGGINGS -> 2;
+                    default -> 2;
+                    case CHESTPLATE ->4;
+                    case LEGGINGS -> 4;
                 };
             }
 
