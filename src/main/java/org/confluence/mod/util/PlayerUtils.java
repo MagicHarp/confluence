@@ -2,8 +2,8 @@ package org.confluence.mod.util;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
-import org.confluence.mod.mana.ManaProvider;
-import org.confluence.mod.mana.ManaStorage;
+import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 

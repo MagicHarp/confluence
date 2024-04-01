@@ -11,10 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
-import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
-import org.confluence.mod.item.curio.combat.ILavaImmune;
+import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
@@ -55,6 +52,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
         }
         if (item instanceof ILavaImmune iLavaImmune) {
             iLavaImmune.freshLavaImmuneTicks(living);
+        }
+        if (item instanceof IInvulnerableTime iInvulnerableTime) {
+            iInvulnerableTime.freshInvulnerableTime(living);
+        }
+        if (item instanceof IAggroAttach iAggroAttach) {
+            iAggroAttach.freshAggro(living);
         }
         if (item instanceof IFallResistance iFallResistance) {
             iFallResistance.freshFallResistance(living);

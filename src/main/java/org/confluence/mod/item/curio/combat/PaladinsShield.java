@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,11 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.scores.Team;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class PaladinsShield extends BaseCurioItem {
@@ -45,25 +44,17 @@ public class PaladinsShield extends BaseCurioItem {
     }
 
     public static float apply(LivingEntity living, float amount) {
-        if (living instanceof ServerPlayer serverPlayer && serverPlayer.hasEffect(ModEffects.PALADINS_SHIELD.get())) {
-            if (CuriosUtils.hasCurio(serverPlayer, CurioItems.PALADINS_SHIELD.get())) return amount;
+        if (living instanceof ServerPlayer serverPlayer && serverPlayer.hasEffect(ModEffects.PALADINS_SHIELD.get()) && !CuriosUtils.hasCurio(serverPlayer, PaladinsShield.class)) {
+            AtomicDouble atomic = new AtomicDouble(amount);
             Team team = serverPlayer.getTeam();
-            ArrayList<Player> players = new ArrayList<>();
-            for (Player player : serverPlayer.level().players()) {
-                if (shouldSkip(player, team, serverPlayer)) continue;
-                if (player.getHealth() / player.getMaxHealth() > 0.25F && CuriosUtils.hasCurio(player, CurioItems.PALADINS_SHIELD.get())) {
-                    players.add(player);
-                }
-            }
-            if (players.isEmpty()) return amount;
-            if (players.size() > 1) {
-                players.sort((playerA, playerB) -> (int) (playerA.distanceTo(serverPlayer) - playerB.distanceTo(serverPlayer)));
-            }
-            Player player = players.get(0);
-            float damage = amount * 0.25F;
-            player.hurt(living.damageSources().playerAttack(serverPlayer), damage);
-            return amount - damage;
-
+            serverPlayer.level().players().stream()
+                .filter(player -> !shouldSkip(player, team, serverPlayer) && player.getHealth() / player.getMaxHealth() > 0.25F && CuriosUtils.hasCurio(player, PaladinsShield.class))
+                .min((playerA, playerB) -> (int) (playerA.distanceTo(serverPlayer) - playerB.distanceTo(serverPlayer))).ifPresent(player -> {
+                    float damage = amount * 0.25F;
+                    player.hurt(living.damageSources().playerAttack(serverPlayer), damage);
+                    atomic.set(amount - damage);
+                });
+            return atomic.floatValue();
         }
         return amount;
     }

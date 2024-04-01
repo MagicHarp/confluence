@@ -1,4 +1,4 @@
-package org.confluence.mod.mana;
+package org.confluence.mod.capability.mana;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

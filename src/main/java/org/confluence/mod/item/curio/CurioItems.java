@@ -39,11 +39,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 快走时钟 */
     /* 狂爪手套 */
     /* 烈火手套 */
-    /* 血肉指虎 */
+    FLESH_KNUCKLES("flesh_knuckles", FleshKnuckles::new), // 血肉指虎
     /* 冰冻海龟壳 */
     /* 冰冻护盾 */
     /* 暖手宝 */
-    /* 英雄护盾 */
+    HERO_SHIELD("hero_shield", HeroShield::new), // 英雄护盾
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
     /* 魔法箭袋 */
     /* 机械手套 */
