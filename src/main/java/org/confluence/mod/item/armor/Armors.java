@@ -36,7 +36,11 @@ public enum Armors implements EnumRegister<ArmorItem> {
     COPPER_CHESTPLATE("copper_chestplate", () -> new CopperArmorItem(ArmorItem.Type.CHESTPLATE)),
     COPPER_LEGGINGS("copper_leggings", () -> new CopperArmorItem(ArmorItem.Type.LEGGINGS)),
     COPPER_BOOTS("copper_boots", () -> new CopperArmorItem(ArmorItem.Type.BOOTS)),
-
+    //锡套
+    TIN_HELMET("tin_helmet", () -> new TinArmorItem(ArmorItem.Type.HELMET)),
+    TIN_CHESTPLATE("tin_chestplate", () -> new TinArmorItem(ArmorItem.Type.CHESTPLATE)),
+    TIN_LEGGINGS("tin_leggings", () -> new TinArmorItem(ArmorItem.Type.LEGGINGS)),
+    TIN_BOOTS("tin_boots", () -> new TinArmorItem(ArmorItem.Type.BOOTS)),
 ;
     private final RegistryObject<ArmorItem> value;
 

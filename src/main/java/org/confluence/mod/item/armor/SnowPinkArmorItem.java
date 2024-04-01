@@ -28,18 +28,18 @@ public class SnowPinkArmorItem extends ArmorItem implements GeoItem {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    case HELMET -> 55;
-                    case CHESTPLATE -> 80;
-                    case LEGGINGS -> 75;
-                    case BOOTS -> 65;
+                    case HELMET -> 120;
+                    case CHESTPLATE -> 170;
+                    case LEGGINGS -> 160;
+                    case BOOTS -> 140;
                 };
             }
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    default -> 1;
-                    case CHESTPLATE -> 3;
+                    default -> 2;
+                    case CHESTPLATE -> 2;
                     case LEGGINGS -> 2;
                 };
             }
@@ -56,7 +56,7 @@ public class SnowPinkArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(Items.BLUE_WOOL);
+                return Ingredient.of(Items.PINK_WOOL);
             }
 
             @Override

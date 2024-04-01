@@ -39,8 +39,8 @@ public class RaincoatArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 1;
-                    case CHESTPLATE -> 3;
-                    case LEGGINGS -> 2;
+                    case CHESTPLATE -> 2;
+                    case LEGGINGS -> 0;
                 };
             }
 
