@@ -92,6 +92,7 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity old = event.getOriginalTarget();
+        if (old == null) return;
         LivingEntity neo = event.getNewTarget();
 
         AtomicBoolean bothHas = new AtomicBoolean();
