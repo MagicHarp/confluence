@@ -43,7 +43,7 @@ public class ConfluenceOverlays {
     private static final int background = (0x90 << 24) + 0x505050;
     private static final int textColor = 0xE0E0E0;
     public static final IGuiOverlay INFO_HUD = (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
-        if (gui.getMinecraft().options.hideGui) return;
+        if (gui.getMinecraft().options.hideGui || gui.getMinecraft().options.renderDebug) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("info");
         RenderSystem.enableBlend();
