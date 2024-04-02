@@ -7,10 +7,7 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
 import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
-import org.confluence.mod.item.curio.informational.HalfHourWatch;
-import org.confluence.mod.item.curio.informational.HourWatch;
-import org.confluence.mod.item.curio.informational.MechanicalLens;
-import org.confluence.mod.item.curio.informational.MinuteWatch;
+import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
@@ -107,6 +104,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
     GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
     PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
+    RADAR("radar", Radar::new), // 雷达
     MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
 
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
