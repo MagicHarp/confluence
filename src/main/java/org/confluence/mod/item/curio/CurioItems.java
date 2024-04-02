@@ -93,10 +93,34 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 甲虫莎草纸 */
     /* 矮人项链 */
 
-    EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
 
+    /* 工具腰带 */
+    /* 工具箱 */
+    /* 喷漆器 */
+    EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
+    /* 便携式水泥搅拌机 */
+    /* 砌砖刀 */
+    /* 建筑师发明背包 */
+    /* 自动安放器 */
+    /* 远古凿子 */
+    /* 创造之手 */
+
+
+    /* 奥术花 */
     BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
     BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
+    /* 天界手铐 */
+    /* 天界磁石 */
+    /* 天界徽章 */
+    /* 神话护身符 */
+    /* 魔法手铐 */
+    /* 磁花 */
+    /* 魔力斗篷 */
+    /* 魔力花 */
+    /* 魔力再生手环 */
+    /* 大自然的恩赐 */
+    /* 点金石 */
+
 
     COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
     TIN_WATCH("tin_watch", HourWatch::new), // 锡表
@@ -104,11 +128,26 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
     GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
     PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
+    /* 深度计 */
+    /* 罗盘 */
     RADAR("radar", Radar::new), // 雷达
+    /* 生命体分析机 */
+    /* 杀怪计数器 */
+    /* 金属探测器 */
+    /* 秒表 */
+    /* 每秒伤害计数器 */
+    /* 渔民袖珍宝典 */
+    /* 天气收音机 */
+    /* 六分仪 */
+    /* 全球定位系统 */
+    /* R.E.K.3000 */
+    /* 哥布林数据仪 */
+    /* 探鱼器 */
+    /* 个人数字助手 */
     MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
+    /* 标尺 */
+    /* 机械标尺 */
 
-    SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
-    /* 水母项链 */
 
     /* 梯凳 */
     AGLET("aglet", Aglet::new), // 金属带扣
@@ -130,7 +169,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
-    /* 花靴 */
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
     SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
@@ -167,13 +205,33 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 琥珀马掌气球 */
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
     /* 天界贝壳 */
+
+
+    /* 服装商巫毒娃娃 */
+    /* 钱币戒指 */
+    /* 优惠卡 */
+    /* 花靴 */
+    /* 金戒指 */
+    /* 贪婪戒指 */
+    /* 植物纤维绳索宝典 */
+    /* 向导巫毒娃娃 */
+    /* 水母项链 */
+    /* 幸运币 */
+    /* 收音机 */
+    SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
+    /* 宝藏磁石 */
+    /* 炫彩斗篷 */
+
+
+    /* ** 钓鱼 ** */
+    /* ** 悠悠球 ** */
+    /* ** 时装 ** */
+    /* ** 八音盒 ** */
+    /* ** 高尔夫球 ** */
+    /* ** 专家模式独有 ** */
     ;
 
     private final RegistryObject<BaseCurioItem> value;
-
-    CurioItems(String id) {
-        this(id, BaseCurioItem::new);
-    }
 
     CurioItems(String id, Supplier<BaseCurioItem> curio) {
         this.value = ModItems.ITEMS.register(id, curio);

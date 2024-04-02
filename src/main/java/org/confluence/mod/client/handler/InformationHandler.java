@@ -18,9 +18,19 @@ public class InformationHandler {
 
     public static void update(LocalPlayer localPlayer) {
         information.clear();
-        CuriosUtils.findCurio(localPlayer, IWatch.class)
-            .ifPresent(iWatch -> information.add(iWatch.wrapTime(localPlayer.level().dayTime())));
+        CuriosUtils.findCurio(localPlayer, IWatch.class).ifPresent(iWatch ->
+            information.add(iWatch.wrapTime(localPlayer.level().dayTime())));
+        /* 天气 */
+        /* 月相 */
+        /* 渔力 */
+        /* 矿物 */
+        /* 稀有生物 */
         if (!enemyInfo.isEmpty()) information.add(enemyInfo);
+        /* 杀敌数 */
+        /* 伤害 */
+        /* 速度 */
+        /* 水平 */
+        /* 垂直 */
     }
 
     public static void handleEnemyInfo(EnemyInfoPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
