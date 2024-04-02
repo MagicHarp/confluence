@@ -2,7 +2,6 @@ package org.confluence.mod;
 
 import com.google.gson.Gson;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.GameRules;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,9 +27,6 @@ public class Confluence {
     public static final Gson GSON = new Gson();
 
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
-
-    // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
-    public static GameRules.Key<GameRules.IntegerValue> GAME_PHASE;
 
     public Confluence() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModConfigs.SPEC);

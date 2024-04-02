@@ -28,7 +28,7 @@ public class FallingStarItemEntity extends ItemEntity {
 
     @Override
     public void tick() {
-        if (level().getDayTime() < 12000L) {
+        if (level().getDayTime() % 24000 < 12000) {
             discard();
         } else {
             super.tick();
@@ -42,7 +42,7 @@ public class FallingStarItemEntity extends ItemEntity {
     }
 
     public static void summon(ServerLevel serverLevel) {
-        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.getDayTime() > 12000L && serverLevel.getGameTime() % 600 == 0) {
+        if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.getDayTime() % 24000 > 12000 && serverLevel.getGameTime() % 600 == 0) {
             RandomSource random = serverLevel.random;
             for (ServerPlayer serverPlayer : serverLevel.players()) {
                 int distance = serverLevel.getServer().getScaledTrackingDistance(1);

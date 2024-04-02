@@ -7,7 +7,10 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
 import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
+import org.confluence.mod.item.curio.informational.HalfHourWatch;
+import org.confluence.mod.item.curio.informational.HourWatch;
 import org.confluence.mod.item.curio.informational.MechanicalLens;
+import org.confluence.mod.item.curio.informational.MinuteWatch;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
@@ -98,6 +101,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
     BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
 
+    COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
+    TIN_WATCH("tin_watch", HourWatch::new), // 锡表
+    SILVER_WATCH("silver_watch", HalfHourWatch::new), // 银表
+    TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
+    GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
+    PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
     MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
 
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜

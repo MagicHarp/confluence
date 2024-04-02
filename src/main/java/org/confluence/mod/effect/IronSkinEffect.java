@@ -1,33 +1,35 @@
 package org.confluence.mod.effect;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.entity.ai.attributes.*;
 
 import java.util.UUID;
 
 
 public class IronSkinEffect extends MobEffect {
-    public static final UUID IRON_UUID = UUID.fromString("1E4E10F1-C3D2-E16D-1C91-CB49935164E8");
+    public static final UUID ARMOR_UUID = UUID.fromString("33D41FDC-F153-0F90-0624-E9B2CB9C751B");
+    private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Iron Skin", 8, AttributeModifier.Operation.ADDITION)
+    );
+
     public IronSkinEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0xF5F5F5);
+        super(MobEffectCategory.BENEFICIAL, 0x184F5);
     }
 
-    public Multimap<Attribute, AttributeModifier> changeArmor(int amplifier){
-        return ImmutableMultimap.of(Attributes.ARMOR, new AttributeModifier(IRON_UUID, "Iron_Skin" , 10*amplifier, AttributeModifier.Operation.ADDITION));
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+        if (mobEffect == ModEffects.IRON_SKIN.get()) {
+            attributeMap.addTransientAttributeModifiers(ARMOR);
+        }
     }
 
-    @Override
-    public void applyEffectTick(@NotNull LivingEntity entity, int amplifier){
-        if (entity instanceof Player && !entity.isSpectator()){
-            entity.getAttributes().addTransientAttributeModifiers(changeArmor(amplifier));
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap){
+        if (mobEffect == ModEffects.IRON_SKIN.get()) {
+            AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ARMOR);
+            if (attributeInstance != null) {
+                attributeInstance.removeModifier(ARMOR_UUID);
+            }
         }
     }
 }

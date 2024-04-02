@@ -7,6 +7,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
@@ -40,6 +41,20 @@ public class CuriosUtils {
 
     public static <C extends BaseCurioItem> boolean hasCurio(LivingEntity living, C curio) {
         return !noSameCurio(living, curio);
+    }
+
+    public static <C> Optional<C> findCurio(LivingEntity living, Class<C> clazz) {
+        AtomicReference<Optional<C>> atomic = new AtomicReference<>();
+        CuriosApi.getCuriosInventory(living)
+            .ifPresent(handler -> {
+                List<SlotResult> results = handler.findCurios(itemStack -> clazz.isInstance(itemStack.getItem()));
+                if (results.isEmpty()) {
+                    atomic.set(Optional.empty());
+                    return;
+                }
+                atomic.set(Optional.of(clazz.cast(results.get(0).stack().getItem())));
+            });
+        return atomic.get();
     }
 
     public static <C extends BaseCurioItem> ItemStack findCurio(LivingEntity living, C curio) {

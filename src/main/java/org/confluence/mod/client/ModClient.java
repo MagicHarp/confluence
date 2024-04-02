@@ -46,6 +46,7 @@ public class ModClient {
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerBelow(VanillaGuiOverlay.ITEM_NAME.id(), "mana_hud", ConfluenceOverlays.HUD_MANA);
+        event.registerAboveAll("info_hud", ConfluenceOverlays.INFO_HUD);
     }
 
     @SubscribeEvent

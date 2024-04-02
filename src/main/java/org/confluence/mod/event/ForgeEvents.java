@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -15,8 +14,6 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +23,10 @@ import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.effect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.combat.HoneyComb;
+import org.confluence.mod.item.curio.combat.IHurtEvasion;
+import org.confluence.mod.item.curio.combat.PaladinsShield;
+import org.confluence.mod.item.curio.combat.PanicNecklace;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -77,16 +77,6 @@ public class ForgeEvents {
         amount = PaladinsShield.apply(living, amount);
 
         event.setAmount(amount * (random.nextInt(80, 121) / 100.0F));
-    }
-
-    @SubscribeEvent
-    public static void effectApplicable(MobEffectEvent.Applicable event) {
-        MobEffect mobEffect = event.getEffectInstance().getEffect();
-        LivingEntity living = event.getEntity();
-
-        if (EffectInvulnerable.apply(mobEffect, living)) {
-            event.setResult(Event.Result.DENY);
-        }
     }
 
     @SubscribeEvent
