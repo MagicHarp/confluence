@@ -10,12 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class ConfluenceData extends SavedData {
     private int moonSpecific = -1;
+    private int gamePhase = 0; // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
 
     public ConfluenceData() {
     }
 
     public ConfluenceData(CompoundTag nbt) {
         this.moonSpecific = nbt.getInt("moonSpecific");
+        this.gamePhase = nbt.getInt("gamePhase");
     }
 
     public static ConfluenceData get(ServerLevel serverLevel) {
@@ -35,9 +37,19 @@ public class ConfluenceData extends SavedData {
         return moonSpecific;
     }
 
+    public void setGamePhase(int gamePhase) {
+        this.gamePhase = gamePhase;
+        setDirty();
+    }
+
+    public int getGamePhase() {
+        return gamePhase;
+    }
+
     @Override
     public @NotNull CompoundTag save(@NotNull CompoundTag nbt) {
         nbt.putInt("moonSpecific", moonSpecific);
+        nbt.putInt("gamePhase", gamePhase);
         return nbt;
     }
 }

@@ -46,6 +46,8 @@ public class PlayerUtils {
     }
 
     public static boolean extractMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
+        if (serverPlayer.gameMode.isCreative()) return true;
+
         AtomicBoolean success = new AtomicBoolean(false);
         serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
             if (manaStorage.extractMana(sup) != -1) {

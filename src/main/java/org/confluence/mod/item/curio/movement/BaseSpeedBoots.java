@@ -62,7 +62,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
     }
 
     @Override
-    public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         return CuriosUtils.noSameCurio(slotContext.entity(), BaseSpeedBoots.class);
     }
 

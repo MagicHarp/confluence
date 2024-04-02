@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.command.ConfluenceData;
 import org.jetbrains.annotations.NotNull;
 
 public interface ISpreadable {
@@ -41,7 +41,7 @@ public interface ISpreadable {
     }
 
     static void spreadOrDie(BlockState selfState, ServerLevel serverLevel, BlockPos selfPos, RandomSource randomSource, BlockState targetState, BlockPos targetPos) {
-        int phase = serverLevel.getServer().getGameRules().getInt(Confluence.GAME_PHASE);
+        int phase = ConfluenceData.get(serverLevel).getGamePhase();
         if (phase == 0) return;
         if (randomSource.nextFloat() < 0.01 * phase) {
             serverLevel.setBlockAndUpdate(targetPos, targetState);

@@ -10,6 +10,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerInputHandler;
 import org.confluence.mod.item.ModRarity;
 
@@ -22,6 +23,7 @@ public class ForgeClient {
         LocalPlayer localPlayer = MINECRAFT.player;
         if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
         PlayerInputHandler.handleJump(localPlayer);
+        InformationHandler.update(localPlayer);
 
         ModRarity.Animate.doUpdateRainbowColor();
         ModRarity.Animate.doUpdateMasterColor();

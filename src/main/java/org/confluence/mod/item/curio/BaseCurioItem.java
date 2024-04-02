@@ -80,12 +80,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return CuriosUtils.noSameCurio(slotContext.entity(), this);
+        return canEquip(slotContext, stack);
     }
 
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return canEquipFromUse(slotContext, stack);
+        return CuriosUtils.noSameCurio(slotContext.entity(), this);
     }
 
     @Override
