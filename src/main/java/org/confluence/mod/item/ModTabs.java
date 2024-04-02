@@ -7,8 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.DecorationLogBlocks;
 import org.confluence.mod.block.DecorativeBlocks;
+import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
@@ -35,7 +35,7 @@ public class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.BLOCKS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.building_blocks"))
             .displayItems((parameters, output) -> {
-                DecorationLogBlocks.acceptBuilding(output);
+                LogBlocks.acceptBuilding(output);
                 for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
                     output.accept(decorativeBlocks.get());
                 }
@@ -57,6 +57,7 @@ public class ModTabs {
                 for (Ores ores : Ores.values()) {
                     output.accept(ores.get());
                 }
+
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
                 output.accept(CORRUPT_GRASS_BLOCK.get());
@@ -77,6 +78,8 @@ public class ModTabs {
                 output.accept(ASH_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+
+                output.accept(THIN_ICE_BLOCK.get());
             })
             .build());
     // 材料
@@ -97,7 +100,8 @@ public class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.CREATIVE_ICON.get()))
             .title(Component.translatable("creativetab.confluence.creatives"))
             .displayItems((parameters, output) -> {
-
+                output.accept(ModItems.EXPERT_TEST_ITEM.get());
+                output.accept(ModItems.MASTER_TEST_ITEM.get());
             })
             .build());
     // 生物
@@ -190,7 +194,7 @@ public class ModTabs {
             .build());
     //功能方块
     public static final RegistryObject<CreativeModeTab> FUNCTION = TABS.register("functional_blocks",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.FUNCTION_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.FUNCTIONAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.functional"))
             .displayItems((parameters, output) -> {
                 output.accept(ECHO_BLOCK.get());

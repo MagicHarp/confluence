@@ -33,6 +33,7 @@ public class Confluence {
     public static GameRules.Key<GameRules.IntegerValue> GAME_PHASE;
 
     public Confluence() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModConfigs.SPEC);
         GeckoLib.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
@@ -41,7 +42,5 @@ public class Confluence {
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
         ModEffects.MOB_EFFECTS.register(bus);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModConfigs.SPEC);
     }
 }

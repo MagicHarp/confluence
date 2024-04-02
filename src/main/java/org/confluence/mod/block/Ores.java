@@ -40,6 +40,21 @@ public enum Ores implements EnumRegister<Block> {
     PLATINUM_BLOCK("platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK))),
     // 陨铁
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
+    //红玉矿
+    RUBY_ORE("ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_RUBY_ORE("deepslate_ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    //黄玉矿
+    TOPAZ_ORE("topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_TOPAZ_ORE("deepslate_topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    //琥珀矿
+    AMBER_ORE("amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_AMBER_ORE("deepslate_amber_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    //异域紫晶矿
+    ANOTHER_AMETHYST_ORE("another_amethyst_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_ANOTHER_AMETHYST_ORE("deepslate_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    //蓝玉矿
+    SAPPHIRE_ORE("sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_SAPPHIRE_ORE("deepslate_sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     // 魔矿
     EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     DEEPSLATE_EBONY_ORE("deepslate_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),

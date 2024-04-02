@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.mana.ManaProvider;
+import org.confluence.mod.capability.mana.ManaProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class ManaStar extends Item {

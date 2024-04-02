@@ -1,37 +1,60 @@
 package org.confluence.mod.item.curio.movement;
 
+import com.google.common.util.concurrent.AtomicDouble;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.PlayerJumpPacketS2C;
+import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IMultiJump {
-    int getJumpTimes();
+    double getJumpSpeed();
 
-    static void sendMaxJump(ServerPlayer serverPlayer) {
-        AtomicInteger maxJump = new AtomicInteger();
-        AtomicInteger height = new AtomicInteger();
+    static void sendMsg(ServerPlayer serverPlayer) {
+        AtomicDouble fartSpeed = new AtomicDouble(-1.0);
+        AtomicDouble sandstormSpeed = new AtomicDouble(-1.0);
+        AtomicInteger sandstormTicks = new AtomicInteger();
+        AtomicDouble blizzardSpeed = new AtomicDouble(-1.0);
+        AtomicInteger blizzardTicks = new AtomicInteger();
+        AtomicDouble tsunamiSpeed = new AtomicDouble(-1.0);
+        AtomicDouble cloudSpeed = new AtomicDouble(-1.0);
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                ItemStack curio = itemHandlerModifiable.getStackInSlot(i);
-                if (curio.getItem() instanceof IMultiJump iMultiJump) {
-                    int times = iMultiJump.getJumpTimes();
-                    if (times > maxJump.get()) {
-                        maxJump.set(times);
-                    }
-                    height.addAndGet(times);
+                Item curio = itemHandlerModifiable.getStackInSlot(i).getItem();
+                if (curio instanceof FartInABottle fart) {
+                    fartSpeed.set(fart.getJumpSpeed());
+                } else if (curio instanceof SandstormInABottle sandstorm) {
+                    sandstormSpeed.set(sandstorm.getJumpSpeed());
+                    sandstormTicks.set(sandstorm.getJumpTicks());
+                } else if (curio instanceof BlizzardInABottle blizzard) {
+                    blizzardSpeed.set(blizzard.getJumpSpeed());
+                    blizzardTicks.set(blizzard.getJumpTicks());
+                } else if (curio instanceof TsunamiInABottle tsunami) {
+                    tsunamiSpeed.set(tsunami.getJumpSpeed());
+                } else if (curio instanceof CloudInABottle cloud) {
+                    cloudSpeed.set(cloud.getJumpSpeed());
                 }
             }
         });
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(maxJump.get(), height.get() > 1 ? height.get() * 0.7 : 1)
+            new PlayerJumpPacketS2C(
+                fartSpeed.get(),
+                sandstormSpeed.get(),
+                sandstormTicks.get(),
+                blizzardSpeed.get(),
+                blizzardTicks.get(),
+                tsunamiSpeed.get(),
+                cloudSpeed.get()
+            )
         );
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.multi_jump");
 }

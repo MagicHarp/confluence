@@ -21,7 +21,7 @@ public class BlackSlime extends Slime {
     public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor accessor, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag nbt) {
         SpawnGroupData spawnGroupData = super.finalizeSpawn(accessor, difficulty, spawnType, groupData, nbt);
         int size = 2;
-        if (accessor.getRandom().nextFloat() > 0.5F * difficulty.getSpecialMultiplier()) size = 4;
+        if (accessor.getRandom().nextFloat() < 0.5F * difficulty.getSpecialMultiplier()) size = 4;
         setSize(size, true);
         return spawnGroupData;
     }

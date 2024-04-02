@@ -19,9 +19,9 @@ public class DuneriderBoots extends BaseSpeedBoots {
         LivingEntity living = slotContext.entity();
         CompoundTag nbt = stack.getOrCreateTag();
         if (living.level().getBlockState(living.getOnPos().below()).is(BlockTags.SAND)) {
-            speedUp(living, nbt, 1, 70);
+            speedUp(slotContext, nbt, 2, 70);
         } else {
-            speedUp(living, nbt, 2, 40);
+            speedUp(slotContext, nbt, 1, 40);
         }
     }
 

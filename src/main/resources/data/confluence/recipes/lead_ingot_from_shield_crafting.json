@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#O#",
+        "###",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "tag": "minecraft:planks"
+        },
+        "O": {
+            "item": "confluence:lead_ingot"
+        }
+    },
+    "result": {
+        "item": "minecraft:shield",
+        "count": 1
+    }
+}

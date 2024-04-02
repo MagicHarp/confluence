@@ -3,37 +3,56 @@ package org.confluence.mod.item.curio.movement;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.util.PlayerUtils;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
+import org.confluence.mod.util.CuriosUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.List;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 public class BaseSpeedBoots extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("EE6FAFF5-A69D-6101-F82A-93E55A01F65E");
+    public static final Component TOOLTIP = Component.translatable("curios.tooltip.speed_boots");
+
+    @Override
+    public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
+        return EMPTY_TOOLTIP;
+    }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        speedUp(slotContext.entity(), stack.getOrCreateTag(), 2, 40);
+        speedUp(slotContext, stack.getOrCreateTag(), 1, 40);
     }
 
-    protected void speedUp(LivingEntity living, CompoundTag nbt, int tick, int max) {
-        if (max > 70) return;
-        if (living.getDeltaMovement().length() > 0) {
-            if (tick == 1 || living.level().getGameTime() % tick == 0) {
-                int speed = nbt.getInt("speed");
-                if (speed < max) {
-                    nbt.putInt("speed", speed);
+    @Override
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        stack.getOrCreateTag().putInt("speed", 0);
+    }
+
+    protected void speedUp(SlotContext slotContext, CompoundTag nbt, int addition, int max) {
+        LivingEntity living = slotContext.entity();
+        if (living.level().isClientSide) {
+            int speed = nbt.getInt("speed");
+            if (living.zza > 0) {
+                int actually = Math.min(max - speed, addition);
+                if (actually > 0) {
+                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
+            } else if (speed != 0) {
+                NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
-        } else {
-            nbt.putInt("speed", 0);
         }
     }
 
@@ -44,11 +63,11 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return PlayerUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
+        return CuriosUtils.noSameCurio(slotContext.entity(), BaseSpeedBoots.class);
     }
 
     @Override
-    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return PlayerUtils.noSameCurio(slotContext.entity(), (Predicate<ItemStack>) itemStack -> itemStack.getItem() instanceof BaseSpeedBoots);
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+        list.add(TOOLTIP);
     }
 }

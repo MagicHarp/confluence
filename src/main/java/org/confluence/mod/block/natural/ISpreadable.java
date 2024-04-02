@@ -54,18 +54,27 @@ public interface ISpreadable {
         HALLOW(ImmutableMap.of(
             Blocks.DIRT, ModBlocks.HALLOW_GRASS_BLOCK,
             Blocks.DIRT_PATH, ModBlocks.HALLOW_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK
+            Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
+            Blocks.STONE, ModBlocks.PEARL_STONE,
+            Blocks.SAND, ModBlocks.PEARL_SAND
             /* todo 其它东西 */
         )),
         CRIMSON(ImmutableMap.of(
             Blocks.DIRT, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
             Blocks.DIRT_PATH, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK
+            Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
+            Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
+            Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND
+
+
         )),
         CORRUPT(ImmutableMap.of(
             Blocks.DIRT, ModBlocks.CORRUPT_GRASS_BLOCK,
             Blocks.DIRT_PATH, ModBlocks.CORRUPT_GRASS_BLOCK,
-            Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK
+            Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK,
+            Blocks.STONE, ModBlocks.EBONY_STONE,
+            Blocks.SAND, ModBlocks.EBONY_SAND
+
         )),
         GLOWING(ImmutableMap.of(
             Blocks.MUD, ModBlocks.GLOWING_GRASS_BLOCK

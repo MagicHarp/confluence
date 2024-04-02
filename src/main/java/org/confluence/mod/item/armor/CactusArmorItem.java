@@ -27,35 +27,21 @@ public class CactusArmorItem extends ArmorItem implements GeoItem {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    default -> {
-                        return 55;
-                    }
-                    case CHESTPLATE -> {
-                        return 80;
-                    }
-                    case LEGGINGS -> {
-                        return 75;
-                    }
-                    case BOOTS -> {
-                        return 65;
-                    }
-                }
+                return switch (armorType) {
+                    case HELMET -> 120;
+                    case CHESTPLATE -> 170;
+                    case LEGGINGS -> 150;
+                    case BOOTS -> 130;
+                };
             }
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
-                switch (armorType) {
-                    default -> {
-                        return 1;
-                    }
-                    case CHESTPLATE -> {
-                        return 3;
-                    }
-                    case LEGGINGS -> {
-                        return 2;
-                    }
-                }
+                return switch (armorType) {
+                    default -> 1;
+                    case CHESTPLATE -> 1;
+                    case LEGGINGS -> 1;
+                };
             }
 
             @Override

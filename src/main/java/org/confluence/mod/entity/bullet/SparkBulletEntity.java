@@ -1,9 +1,11 @@
 package org.confluence.mod.entity.bullet;
 
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
 
@@ -16,8 +18,13 @@ public class SparkBulletEntity extends BaseBulletEntity {
         this(ModEntities.SPARK_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
-        setSecondsOnFire(100);
+    }
 
+    @Override
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        Entity entity = entityHitResult.getEntity();
+        entity.hurt(damageSources().indirectMagic(this, getOwner()), getDamage());
+        entity.setSecondsOnFire(5);
     }
 
     @Override

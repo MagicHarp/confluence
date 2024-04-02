@@ -44,22 +44,35 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
-        add("item.confluence.aglet.tooltip", "移动速度提高5%");
-        add("item.confluence.anklet_of_the_wind.tooltip", "移动速度提高10%");
-        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
-        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
-        add("item.confluence.cloud_in_a_bottle.tooltip", "可让持有者二连跳");
+        add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
+        add("curios.tooltip.may_fly", "可飞行");
+        add("curios.tooltip.jump_boost", "增加跳跃高度");
+        add("curios.tooltip.multi_jump", "可让持有者二连跳");
+        add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
+        add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
+        add("item.confluence.bezoar.tooltip", "对中毒免疫");
+        add("item.confluence.blindfold.tooltip", "对失明免疫");
+        add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
-        add("item.confluence.extendo_grip.tooltip", "物块放置范围和工具范围扩大3格");
-        add("item.confluence.hermes_boots.tooltip", "穿戴者可飞速奔跑");
-        add("item.confluence.flurry_boots.tooltip", "穿戴者可飞速奔跑");
-        add("item.confluence.sailfish_boots.tooltip", "穿戴者可飞速奔跑");
+        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
+        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
+        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
+        add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
+        add("item.confluence.ice_skates.tooltip", "提供额外冰面行动力");
+        add("item.confluence.ice_skates.tooltip2", "落到冰上时冰不会碎");
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
         add("item.confluence.dunerider_boots.tooltip2", "“无节律行走就不会引来蠕虫”");
+        add("item.confluence.lucky_horseshoe.tooltip", "“据说能带来好运、驱除邪灵”");
+        add("item.confluence.lightning_boots.attribute", "移动速度提高8%");
+        add("item.confluence.lightning_boots.tooltip", "可飞行、可飞速奔跑");
+        add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
+        add("biome.confluence.the_corruption", "腐化之地");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
@@ -81,6 +94,16 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), "深层铂金矿石");
         add(Ores.RAW_PLATINUM_BLOCK.get(), "粗铂金块");
         add(Ores.PLATINUM_BLOCK.get(), "铂金块");
+        add(Ores.RUBY_ORE.get(), "红玉矿石");
+        add(Ores.DEEPSLATE_RUBY_ORE.get(), "深层红玉矿石");
+        add(Ores.TOPAZ_ORE.get(), "黄玉矿石");
+        add(Ores.DEEPSLATE_TOPAZ_ORE.get(), "深层黄玉矿石");
+        add(Ores.AMBER_ORE.get(), "琥珀矿石");
+        add(Ores.DEEPSLATE_AMBER_ORE.get(), "深层琥珀矿石");
+        add(Ores.ANOTHER_AMETHYST_ORE.get(), "异域紫晶矿石");
+        add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), "深层异域紫晶矿石");
+        add(Ores.SAPPHIRE_ORE.get(), "蓝玉矿石");
+        add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), "深层蓝玉矿石");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.EBONY_ORE.get(), "魔矿石");
         add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");
@@ -236,6 +259,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
         add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
+        add(THIN_ICE_BLOCK.get(), "碎冰块");
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
@@ -413,12 +437,81 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.SHACKLE.get(),"脚镣");
         add(CurioItems.BAND_OF_REGENERATION.get(),"再生手环");
         add(CurioItems.BAND_OF_STARPOWER.get(),"星力手环");
-        add(CurioItems. EXTENDO_GRIP.get(),"加长握爪");
+        add(CurioItems.EXTENDO_GRIP.get(),"加长握爪");
+        add(CurioItems.BLIZZARD_IN_A_BOTTLE.get(),"暴雪瓶");
+        add(CurioItems.ICE_SKATES.get(),"溜冰鞋");
+        add(CurioItems.HERMES_BOOTS.get(),"赫尔墨斯靴");
+        add(CurioItems.FLURRY_BOOTS.get(),"疾风雪靴");
+        add(CurioItems.SAILFISH_BOOTS.get(),"旗鱼靴");
+        add(CurioItems.DUNERIDER_BOOTS.get(),"沙丘行者靴");
+        add(CurioItems.ROCKET_BOOTS.get(),"火箭靴");
+        add(CurioItems.SPECTRE_BOOTS.get(),"幽灵靴");
+        add(CurioItems.LIGHTNING_BOOTS.get(),"闪电靴");
+        add(CurioItems.FROSTSPARK_BOOTS.get(),"霜花靴");
+        add(CurioItems.SHINY_RED_BALLOON.get(),"闪亮红气球");
+        add(CurioItems.CLOUD_IN_A_BALLOON.get(),"云朵气球");
+        add(CurioItems.BLIZZARD_IN_A_BALLOON.get(),"暴雪气球");
+        add(CurioItems.FROG_LEG.get(),"蛙腿");
+        add(CurioItems.AMBHIPIAN_BOOTS.get(),"水陆两用靴");
+        add(CurioItems.LUCKY_HORSESHOE.get(),"幸运马掌");
+        add(CurioItems.HONEY_COMB.get(), "蜂窝");
+        add(CurioItems.BEZOAR.get(), " 牛黄");
+        add(CurioItems.BLACK_BELT.get(), "黑腰带");
+        add(CurioItems.MAGILUMINESCENCE.get(), "魔光护符");
+        add(CurioItems.FLIPPER.get(), "脚蹼");
+        add(CurioItems.SANDSTORM_IN_A_BOTTLE.get(), "沙暴瓶");
+        add(CurioItems.FART_IN_A_BOTTLE.get(), "罐中臭屁");
+        add(CurioItems.SANDSTORM_IN_A_BALLOON.get(), "沙暴气球");
+        add(CurioItems.FART_IN_A_BALLOON.get(), "臭屁气球");
+        add(CurioItems.FROG_FLIPPER.get(), "青蛙脚蹼");
+        add(CurioItems.BLUE_HORSESHOE_BALLOON.get(), "蓝马掌气球");
+        add(CurioItems.WHITE_HORSESHOE_BALLOON.get(), "白马掌气球");
+        add(CurioItems.YELLOW_HORSESHOE_BALLOON.get(), "黄马掌气球");
+        add(CurioItems.GREEN_HORSESHOE_BALLOON.get(), "绿马掌气球");
+        add(CurioItems.BLINDFOLD.get(), "蒙眼布");
+        add(CurioItems.AVENGER_EMBLEM.get(), "复仇者勋章");
+        add(CurioItems.COBALT_SHIELD.get(), "钴护盾");
+        add(CurioItems.CROSS_NECKLACE.get(), "十字项链");
+        add(CurioItems.DESTROYER_EMBLEM.get(), "毁灭者勋章");
+        add(CurioItems.EYE_OF_THE_GOLEM.get(), "石巨人之眼");
+        add(CurioItems.PINK_HORSESHOE_BALLOON.get(), "粉马掌气球");
+        add(CurioItems.SHARKRON_BALLOON.get(), "鲨鱼龙气球");
+        add(CurioItems.BALLOON_PUFFERFISH.get(), "气球河豚鱼");
+        add(CurioItems.TSUNAMI_IN_A_BOTTLE.get(), "海啸瓶");
+        add(CurioItems.MAGMA_SKULL.get(), "岩浆骷髅头");
+        add(CurioItems.LAVA_CHARM.get(), "熔岩护身符");
+        add(CurioItems.OBSIDIAN_ROSE.get(), "黑曜石玫瑰");
+        add(CurioItems.OBSIDIAN_SHIELD.get(), "黑曜石护盾");
+        add(CurioItems.OBSIDIAN_SKULL.get(), "黑曜石骷髅头");
+        add(CurioItems.MOLTEN_SKULL_ROSE.get(), "熔火骷髅头玫瑰");
+        add(CurioItems.OBSIDIAN_SKULL_ROSE.get(), "黑曜石骷髅头玫瑰");
+
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
         add(Armors.CACTUS_HELMET.get(),"仙人掌头盔");
         add(Armors.CACTUS_LEGGINGS.get(),"仙人掌护腿");
         add(Armors.CACTUS_BOOTS.get(),"仙人掌靴子");
+        add(Armors.PLANK_CHESTPLATE.get(),"木制胸甲");
+        add(Armors.PLANK_HELMET.get(),"木制头盔");
+        add(Armors.PLANK_LEGGINGS.get(),"木制护腿");
+        add(Armors.PLANK_BOOTS.get(),"木制靴子");
+        add(Armors.RAIN_CAP.get(),"雨帽");
+        add(Armors.RAINCOAT.get(),"雨衣");
+        add(Armors.SNOW_CAPS.get(),"防雪帽");
+        add(Armors.SNOW_SUITS.get(),"防雪衣");
+        add(Armors.INSULATED_PANTS.get(),"保温裤");
+        add(Armors.INSULATED_SHOES.get(),"保温鞋");
+        add(Armors.SNOW_PINK_CAPS.get(),"粉色防雪帽");
+        add(Armors.SNOW_PINK_SUITS.get(),"粉色防雪衣");
+        add(Armors.COPPER_HELMET.get(),"铜头盔");
+        add(Armors.COPPER_CHESTPLATE.get(),"铜胸甲");
+        add(Armors.COPPER_LEGGINGS.get(),"铜护腿");
+        add(Armors.COPPER_BOOTS.get(),"铜靴子");
+        add(Armors.TIN_HELMET.get(),"锡头盔");
+        add(Armors.TIN_CHESTPLATE.get(),"锡胸甲");
+        add(Armors.TIN_LEGGINGS.get(),"锡护腿");
+        add(Armors.TIN_BOOTS.get(),"锡靴子");
+
         //endregion items
     }
 }
