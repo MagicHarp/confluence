@@ -485,6 +485,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.OBSIDIAN_SKULL.get(), "黑曜石骷髅头");
         add(CurioItems.MOLTEN_SKULL_ROSE.get(), "熔火骷髅头玫瑰");
         add(CurioItems.OBSIDIAN_SKULL_ROSE.get(), "黑曜石骷髅头玫瑰");
+        add(CurioItems.COPPER_WATCH.get(), "铜表");
+        add(CurioItems.TIN_WATCH.get(), "锡表");
+        add(CurioItems.SILVER_WATCH.get(), " 银表");
+        add(CurioItems.TUNGSTEN_WATCH.get(), "钨表");
+        add(CurioItems.GOLDEN_WATCH.get(), "金表");
+        add(CurioItems.PLATINUM_WATCH.get(), "铂金表");
+        add(CurioItems.PALADINS_SHIELD.get(), "圣骑士护盾");
+        add(CurioItems.RADAR.get(), "雷达");
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
