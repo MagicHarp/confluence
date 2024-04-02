@@ -523,6 +523,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.LEAD_CHESTPLATE.get(),"铅胸甲");
         add(Armors.LEAD_LEGGINGS.get(),"铅护腿");
         add(Armors.LEAD_BOOTS.get(),"铅靴子");
+        add(Armors.SILVER_HELMET.get(),"银头盔");
+        add(Armors.SILVER_CHESTPLATE.get(),"银胸甲");
+        add(Armors.SILVER_LEGGINGS.get(),"银护腿");
+        add(Armors.SILVER_BOOTS.get(),"银靴子");
 
 
         //endregion items

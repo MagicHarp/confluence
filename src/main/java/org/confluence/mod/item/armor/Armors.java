@@ -46,6 +46,12 @@ public enum Armors implements EnumRegister<ArmorItem> {
     LEAD_CHESTPLATE("lead_chestplate", () -> new LeadArmorItem(ArmorItem.Type.CHESTPLATE)),
     LEAD_LEGGINGS("lead_leggings", () -> new LeadArmorItem(ArmorItem.Type.LEGGINGS)),
     LEAD_BOOTS("lead_boots", () -> new LeadArmorItem(ArmorItem.Type.BOOTS)),
+    //银套
+    SILVER_HELMET("silver_helmet", () -> new SilverArmorItem(ArmorItem.Type.HELMET)),
+    SILVER_CHESTPLATE("silver_chestplate", () -> new SilverArmorItem(ArmorItem.Type.CHESTPLATE)),
+    SILVER_LEGGINGS("silver_leggings", () -> new SilverArmorItem(ArmorItem.Type.LEGGINGS)),
+    SILVER_BOOTS("silver_boots", () -> new SilverArmorItem(ArmorItem.Type.BOOTS)),
+
 ;
     private final RegistryObject<ArmorItem> value;
 

@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.armor.LeadArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.TinArmorRenderer;
+import org.confluence.mod.client.renderer.item.armor.SilverArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -21,18 +21,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class LeadArmorItem extends ArmorItem implements GeoItem {
+public class SilverArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
-    public LeadArmorItem(Type type) {
+    public SilverArmorItem(Type type) {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    case HELMET -> 170;
-                    case CHESTPLATE -> 250;
-                    case LEGGINGS -> 230;
-                    case BOOTS -> 160;
+                    case HELMET -> 190;
+                    case CHESTPLATE -> 270;
+                    case LEGGINGS -> 250;
+                    case BOOTS ->180;
                 };
             }
 
@@ -40,7 +40,7 @@ public class LeadArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 2;
-                    case CHESTPLATE -> 5;
+                    case CHESTPLATE -> 6;
                     case LEGGINGS -> 6;
                 };
             }
@@ -57,12 +57,12 @@ public class LeadArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(Materials.LEAD_INGOT.get());
+                return Ingredient.of(Materials.SILVER_INGOT.get());
             }
 
             @Override
             public @NotNull String getName() {
-                return "lead";
+                return "silver";
             }
 
             @Override
@@ -80,12 +80,12 @@ public class LeadArmorItem extends ArmorItem implements GeoItem {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private LeadArmorRenderer renderer;
+            private SilverArmorRenderer renderer;
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = new LeadArmorRenderer();
+                    this.renderer = new SilverArmorRenderer();
                 }
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 
