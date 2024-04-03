@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "# #",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "confluence:shadow_planks"
+        }
+    },
+    "result": {
+        "item": "confluence:shadow_leggings",
+        "count": 1
+    }
+}

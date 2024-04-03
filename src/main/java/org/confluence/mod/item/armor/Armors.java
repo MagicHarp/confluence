@@ -31,6 +31,21 @@ public enum Armors implements EnumRegister<ArmorItem> {
     //粉色防雪衣
     SNOW_PINK_CAPS("snow_pink_caps", () -> new SnowPinkArmorItem(ArmorItem.Type.HELMET)),
     SNOW_PINK_SUITS("snow_pink_suits", () -> new SnowPinkArmorItem(ArmorItem.Type.CHESTPLATE)),
+    //暗影木套
+    SHADOW_HELMET("shadow_helmet", () -> new ShadowArmorItem(ArmorItem.Type.HELMET)),
+    SHADOW_CHESTPLATE("shadow_chestplate", () -> new ShadowArmorItem(ArmorItem.Type.CHESTPLATE)),
+    SHADOW_LEGGINGS("shadow_leggings", () -> new ShadowArmorItem(ArmorItem.Type.LEGGINGS)),
+    SHADOW_BOOTS("shadow_boots", () -> new ShadowArmorItem(ArmorItem.Type.BOOTS)),
+    //乌木套
+    EBONY_HELMET("ebony_helmet", () -> new EbonyArmorItem(ArmorItem.Type.HELMET)),
+    EBONY_CHESTPLATE("ebony_chestplate", () -> new EbonyArmorItem(ArmorItem.Type.CHESTPLATE)),
+    EBONY_LEGGINGS("ebony_leggings", () -> new EbonyArmorItem(ArmorItem.Type.LEGGINGS)),
+    EBONY_BOOTS("ebony_boots", () -> new EbonyArmorItem(ArmorItem.Type.BOOTS)),
+    //珍珠套
+    PEARL_HELMET("pearl_helmet", () -> new PearlArmorItem(ArmorItem.Type.HELMET)),
+    PEARL_CHESTPLATE("pearl_chestplate", () -> new PearlArmorItem(ArmorItem.Type.CHESTPLATE)),
+    PEARL_LEGGINGS("pearl_leggings", () -> new PearlArmorItem(ArmorItem.Type.LEGGINGS)),
+    PEARL_BOOTS("pearl_boots", () -> new PearlArmorItem(ArmorItem.Type.BOOTS)),
     //铜套
     COPPER_HELMET("copper_helmet", () -> new CopperArmorItem(ArmorItem.Type.HELMET)),
     COPPER_CHESTPLATE("copper_chestplate", () -> new CopperArmorItem(ArmorItem.Type.CHESTPLATE)),
@@ -56,6 +71,11 @@ public enum Armors implements EnumRegister<ArmorItem> {
     TUNGSTEN_CHESTPLATE("tungsten_chestplate", () -> new TungstenArmorItem(ArmorItem.Type.CHESTPLATE)),
     TUNGSTEN_LEGGINGS("tungsten_leggings", () -> new TungstenArmorItem(ArmorItem.Type.LEGGINGS)),
     TUNGSTEN_BOOTS("tungsten_boots", () -> new TungstenArmorItem(ArmorItem.Type.BOOTS)),
+    //铂金套
+    PLATINUM_HELMET("platinum_helmet", () -> new PlatinumArmorItem(ArmorItem.Type.HELMET)),
+    PLATINUM_CHESTPLATE("platinum_chestplate", () -> new PlatinumArmorItem(ArmorItem.Type.CHESTPLATE)),
+    PLATINUM_LEGGINGS("platinum_leggings", () -> new PlatinumArmorItem(ArmorItem.Type.LEGGINGS)),
+    PLATINUM_BOOTS("platinum_boots", () -> new PlatinumArmorItem(ArmorItem.Type.BOOTS)),
 ;
     private final RegistryObject<ArmorItem> value;
 

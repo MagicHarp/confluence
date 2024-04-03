@@ -503,6 +503,18 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLANK_HELMET.get(),"木制头盔");
         add(Armors.PLANK_LEGGINGS.get(),"木制护腿");
         add(Armors.PLANK_BOOTS.get(),"木制靴子");
+        add(Armors.EBONY_CHESTPLATE.get(),"乌木胸甲");
+        add(Armors.EBONY_HELMET.get(),"乌木头盔");
+        add(Armors.EBONY_LEGGINGS.get(),"乌木护腿");
+        add(Armors.EBONY_BOOTS.get(),"乌木靴子");
+        add(Armors.SHADOW_CHESTPLATE.get(),"暗影木胸甲");
+        add(Armors.SHADOW_HELMET.get(),"暗影木头盔");
+        add(Armors.SHADOW_LEGGINGS.get(),"暗影木护腿");
+        add(Armors.SHADOW_BOOTS.get(),"暗影木靴子");
+        add(Armors.PEARL_CHESTPLATE.get(),"珍珠木胸甲");
+        add(Armors.PEARL_HELMET.get(),"珍珠木头盔");
+        add(Armors.PEARL_LEGGINGS.get(),"珍珠木护腿");
+        add(Armors.PEARL_BOOTS.get(),"珍珠木靴子");
         add(Armors.RAIN_CAP.get(),"雨帽");
         add(Armors.RAINCOAT.get(),"雨衣");
         add(Armors.SNOW_CAPS.get(),"防雪帽");
@@ -531,6 +543,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.TUNGSTEN_CHESTPLATE.get(),"钨胸甲");
         add(Armors.TUNGSTEN_LEGGINGS.get(),"钨护腿");
         add(Armors.TUNGSTEN_BOOTS.get(),"钨靴子");
+        add(Armors.PLATINUM_HELMET.get(),"铂金头盔");
+        add(Armors.PLATINUM_CHESTPLATE.get(),"铂金胸甲");
+        add(Armors.PLATINUM_LEGGINGS.get(),"铂金护腿");
+        add(Armors.PLATINUM_BOOTS.get(),"铂金靴子");
 
 
         //endregion items
