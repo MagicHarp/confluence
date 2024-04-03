@@ -51,7 +51,11 @@ public enum Armors implements EnumRegister<ArmorItem> {
     SILVER_CHESTPLATE("silver_chestplate", () -> new SilverArmorItem(ArmorItem.Type.CHESTPLATE)),
     SILVER_LEGGINGS("silver_leggings", () -> new SilverArmorItem(ArmorItem.Type.LEGGINGS)),
     SILVER_BOOTS("silver_boots", () -> new SilverArmorItem(ArmorItem.Type.BOOTS)),
-
+    //钨套
+    TUNGSTEN_HELMET("tungsten_helmet", () -> new TungstenArmorItem(ArmorItem.Type.HELMET)),
+    TUNGSTEN_CHESTPLATE("tungsten_chestplate", () -> new TungstenArmorItem(ArmorItem.Type.CHESTPLATE)),
+    TUNGSTEN_LEGGINGS("tungsten_leggings", () -> new TungstenArmorItem(ArmorItem.Type.LEGGINGS)),
+    TUNGSTEN_BOOTS("tungsten_boots", () -> new TungstenArmorItem(ArmorItem.Type.BOOTS)),
 ;
     private final RegistryObject<ArmorItem> value;
 
