@@ -25,12 +25,11 @@ public class NetworkHandler {
     public static void register() {
         CHANNEL.registerMessage(packetId++, ManaPacketS2C.class, ManaPacketS2C::encode, ManaPacketS2C::decode, ClientPacketHandler::handleMana);
         CHANNEL.registerMessage(packetId++, EchoBlockVisibilityPacketS2C.class, EchoBlockVisibilityPacketS2C::encode, EchoBlockVisibilityPacketS2C::decode, ClientPacketHandler::handleEchoBlock);
-        CHANNEL.registerMessage(packetId++, MechanicalBlockVisibilityPacketS2C.class, MechanicalBlockVisibilityPacketS2C::encode, MechanicalBlockVisibilityPacketS2C::decode, ClientPacketHandler::handleMechanicalBlock);
         CHANNEL.registerMessage(packetId++, HolyWaterColorUpdatePacketS2C.class, HolyWaterColorUpdatePacketS2C::encode, HolyWaterColorUpdatePacketS2C::decode, ClientPacketHandler::handleHolyWater);
         CHANNEL.registerMessage(packetId++, SpecificMoonPacketS2C.class, SpecificMoonPacketS2C::encode, SpecificMoonPacketS2C::decode, ClientPacketHandler::handleSpecificMoon);
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketS2C.class, PlayerJumpPacketS2C::encode, PlayerJumpPacketS2C::decode, PlayerInputHandler::handleJumpPacket);
         CHANNEL.registerMessage(packetId++, PlayerFlyPacketS2C.class, PlayerFlyPacketS2C::encode, PlayerFlyPacketS2C::decode, PlayerInputHandler::handleFlyPacket);
-        CHANNEL.registerMessage(packetId++, EnemyInfoPacketS2C.class, EnemyInfoPacketS2C::encode, EnemyInfoPacketS2C::decode, InformationHandler::handleEnemyInfo);
+        CHANNEL.registerMessage(packetId++, InfoCurioCheckPacketS2C.class, InfoCurioCheckPacketS2C::encode, InfoCurioCheckPacketS2C::decode, InformationHandler::handlePacket);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);

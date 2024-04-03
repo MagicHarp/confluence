@@ -9,7 +9,8 @@
         "LivingEntityAccessor",
         "LivingEntityMixin",
         "PlayerAdvancementsMixin",
-        "RangedAttributeAccessor"
+        "RangedAttributeAccessor",
+        "ServerPlayerMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

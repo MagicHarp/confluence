@@ -1,11 +1,14 @@
 package org.confluence.mod.event;
 
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +16,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -20,13 +24,12 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.curio.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.effect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.curio.combat.HoneyComb;
-import org.confluence.mod.item.curio.combat.IHurtEvasion;
-import org.confluence.mod.item.curio.combat.PaladinsShield;
-import org.confluence.mod.item.curio.combat.PanicNecklace;
+import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.movement.IFallResistance;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -63,20 +66,29 @@ public class ForgeEvents {
         if (living.level().isClientSide) return;
         DamageSource damageSource = event.getSource();
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
-        ServerLevel level = (ServerLevel) living.level();
-        RandomSource random = level.random;
-        float amount = event.getAmount();
+        RandomSource random = living.level().random;
 
-        amount *= ManaIssueEffect.apply(damageSource);
         HoneyComb.apply(living, random);
-        if (IHurtEvasion.apply(living, random)) {
+        PanicNecklace.apply(living);
+        if (IHurtEvasion.apply(living, random) || IFireImmune.apply(living, damageSource)) {
             event.setCanceled(true);
             return;
         }
-        PanicNecklace.apply(living);
+        float amount = event.getAmount();
+        amount = ManaIssueEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
+        amount = ILavaHurtReduce.apply(living, damageSource, amount);
+        amount = IFallResistance.apply(living, damageSource, amount);
 
         event.setAmount(amount * (random.nextInt(80, 121) / 100.0F));
+    }
+
+    @SubscribeEvent
+    public static void livingDeath(LivingDeathEvent event) {
+        if (event.getSource().getEntity() instanceof LocalPlayer localPlayer) {
+            EntityType<?> entityType = event.getEntity().getType();
+            InformationHandler.updateEntityKilled(localPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)), entityType);
+        }
     }
 
     @SubscribeEvent

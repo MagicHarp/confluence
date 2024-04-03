@@ -7,8 +7,7 @@ public interface IInvulnerableTime {
     int getTime();
 
     default void freshInvulnerableTime(LivingEntity living) {
-        living.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            playerAbility.freshInvulnerableTime(living);
-        });
+        living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+            .ifPresent(playerAbility -> playerAbility.freshInvulnerableTime(living));
     }
 }

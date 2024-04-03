@@ -21,7 +21,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        IntrinsicTagAppender<Item> appender = tag(ModTags.CURIOS);
+        IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) {
             appender.add(curioItems.get());
         }

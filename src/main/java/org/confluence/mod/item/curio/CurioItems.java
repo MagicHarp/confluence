@@ -128,11 +128,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
     GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
     PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
-    /* 深度计 */
-    /* 罗盘 */
+    DEPTH_METER("depth_miner", DepthMeter::new), // 深度计
+    COMPASS("compass", Compass::new), // 罗盘
     RADAR("radar", Radar::new), // 雷达
     /* 生命体分析机 */
-    /* 杀怪计数器 */
+    TALLY_COUNTER("tally_counter", TallyCounter::new), // 杀怪计数器
     /* 金属探测器 */
     /* 秒表 */
     /* 每秒伤害计数器 */
@@ -228,8 +228,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* ** 时装 ** */
     /* ** 八音盒 ** */
     /* ** 高尔夫球 ** */
-    /* ** 专家模式独有 ** */
-    ;
+    /* ** 专家模式独有 ** */;
 
     private final RegistryObject<BaseCurioItem> value;
 

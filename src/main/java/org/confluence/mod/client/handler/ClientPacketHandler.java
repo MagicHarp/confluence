@@ -6,7 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.network.s2c.*;
+import org.confluence.mod.network.s2c.EchoBlockVisibilityPacketS2C;
+import org.confluence.mod.network.s2c.HolyWaterColorUpdatePacketS2C;
+import org.confluence.mod.network.s2c.ManaPacketS2C;
+import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -19,7 +22,6 @@ public class ClientPacketHandler {
     private static int currentMana = 20;
 
     private static boolean echoBlockVisible = false;
-    private static boolean mechanicalBlockVisible = false;
     private static boolean showHolyWaterColor = false;
 
     private static ResourceLocation specificMoon = null;
@@ -37,15 +39,6 @@ public class ClientPacketHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             echoBlockVisible = packet.visible();
-            ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
-        });
-        context.setPacketHandled(true);
-    }
-
-    public static void handleMechanicalBlock(MechanicalBlockVisibilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> {
-            mechanicalBlockVisible = packet.visible();
             ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
         });
         context.setPacketHandled(true);
@@ -82,10 +75,6 @@ public class ClientPacketHandler {
 
     public static boolean isEchoBlockVisible() {
         return echoBlockVisible;
-    }
-
-    public static boolean isMechanicalBlockVisible() {
-        return mechanicalBlockVisible;
     }
 
     public static boolean showHolyWaterColor() {

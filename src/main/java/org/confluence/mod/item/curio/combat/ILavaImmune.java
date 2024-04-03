@@ -7,8 +7,7 @@ public interface ILavaImmune {
     int getLavaImmuneTicks();
 
     default void freshLavaImmuneTicks(LivingEntity living) {
-        living.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            playerAbility.freshLavaImmuneTicks(living);
-        });
+        living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+            .ifPresent(playerAbility -> playerAbility.freshLavaImmuneTicks(living));
     }
 }

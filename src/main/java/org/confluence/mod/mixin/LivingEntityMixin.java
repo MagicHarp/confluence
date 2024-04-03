@@ -27,17 +27,6 @@ public abstract class LivingEntityMixin {
         });
     }
 
-    @Inject(method = "calculateFallDamage", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    private void fallDamage(float fallDistance, float multiply, CallbackInfoReturnable<Integer> cir) {
-        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            if (playerAbility.getFallResistance() < 0) {
-                cir.setReturnValue(0);
-            } else {
-                cir.setReturnValue(cir.getReturnValue() - playerAbility.getFallResistance());
-            }
-        });
-    }
-
     @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
     private int invulnerable1(int constant) {
         return c$getInvulnerableTime(constant);

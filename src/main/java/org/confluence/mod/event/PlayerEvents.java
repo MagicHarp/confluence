@@ -24,8 +24,8 @@ public class PlayerEvents {
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             PlayerUtils.syncMana2Client(serverPlayer);
-            PlayerUtils.syncAdvancements(serverPlayer);
             PlayerUtils.syncSavedData(serverPlayer);
+            //PlayerUtils.syncInfoCurio(serverPlayer);
         }
     }
 

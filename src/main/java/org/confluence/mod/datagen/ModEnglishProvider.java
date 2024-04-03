@@ -43,6 +43,18 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.multi_jump", "Allows the holder to double jump");
         add("curios.tooltip.fall_resistance", "Increases fall resistance");
         add("curios.tooltip.negates_fall_damage", "Negates fall damage");
+
+        add("info.confluence.time", "Time: [%s:%s]");
+        add("info.confluence.radar", "Enemies: %s");
+        add("info.confluence.compass.east", "East: %s, ");
+        add("info.confluence.compass.west", "West: %s, ");
+        add("info.confluence.compass.south", "South: %s");
+        add("info.confluence.compass.north", "North: %s");
+        add("info.confluence.depth_meter.surface", "Surface: ");
+        add("info.confluence.depth_meter.underground", "Underground: ");
+        add("info.confluence.tally_counter.unknown", "Kill count unavailable");
+        add("info.confluence.tally_counter", "Killed '");
+
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
         add("item.confluence.blindfold.tooltip", "Immunity to Darkness");

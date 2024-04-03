@@ -14,7 +14,7 @@ public class ManaIssueEffect extends MobEffect {
         super(MobEffectCategory.HARMFUL, 0x0000FF);
     }
 
-    public static float apply(DamageSource damageSource) {
+    public static float apply(DamageSource damageSource, float amount) {
         float multiply = 1.0F;
         if (damageSource.getEntity() instanceof Player player) {
             MobEffectInstance manaIssue = player.getEffect(ModEffects.MANA_ISSUE.get());
@@ -29,6 +29,6 @@ public class ManaIssueEffect extends MobEffect {
                 }
             }
         }
-        return multiply;
+        return amount * multiply;
     }
 }

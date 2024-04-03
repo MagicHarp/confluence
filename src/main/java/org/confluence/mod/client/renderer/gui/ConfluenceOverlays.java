@@ -2,6 +2,7 @@ package org.confluence.mod.client.renderer.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -50,8 +51,7 @@ public class ConfluenceOverlays {
 
         int top = screenHeight / 2;
         Font font = gui.getFont();
-        for (String info : InformationHandler.getInformation()) {
-            if (info == null || info.isEmpty()) continue;
+        for (Component info : InformationHandler.getInformation()) {
             int w = font.width(info);
             int left = screenWidth - 2 - w;
             guiGraphics.fill(left - 1, top - 1, left + w + 1, top + font.lineHeight - 1, background);

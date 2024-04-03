@@ -17,5 +17,5 @@ public class ModTags {
     public static final TagKey<Block> NEEDS_7_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_7_level"));
     public static final TagKey<Block> NEEDS_8_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_8_level"));
 
-    public static final TagKey<Item> CURIOS = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
+    public static final TagKey<Item> CURIO = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
 }
