@@ -5,13 +5,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.confluence.mod.client.renderer.item.armor.GoldenArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.PlatinumArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.TungstenArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -21,10 +19,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class PlatinumArmorItem extends ArmorItem implements GeoItem {
+public class GoldenArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
-    public PlatinumArmorItem(Type type) {
+    public GoldenArmorItem(Type type) {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
@@ -57,12 +55,12 @@ public class PlatinumArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public @NotNull Ingredient getRepairIngredient() {
-                return Ingredient.of(Materials.PLATINUM_INGOT.get());
+                return Ingredient.of(Items.GOLD_INGOT);
             }
 
             @Override
             public @NotNull String getName() {
-                return "platinum";
+                return "golden";
             }
 
             @Override
@@ -80,12 +78,12 @@ public class PlatinumArmorItem extends ArmorItem implements GeoItem {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private PlatinumArmorRenderer renderer;
+            private GoldenArmorRenderer renderer;
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = new PlatinumArmorRenderer();
+                    this.renderer = new GoldenArmorRenderer();
                 }
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 

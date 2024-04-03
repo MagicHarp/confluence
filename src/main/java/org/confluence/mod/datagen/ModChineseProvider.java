@@ -493,6 +493,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.PLATINUM_WATCH.get(), "铂金表");
         add(CurioItems.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(CurioItems.RADAR.get(), "雷达");
+        add(CurioItems.DEPTH_METER.get(), "深度计");
+        add(CurioItems.COMPASS.get(), "罗盘");
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
@@ -543,6 +545,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.TUNGSTEN_CHESTPLATE.get(),"钨胸甲");
         add(Armors.TUNGSTEN_LEGGINGS.get(),"钨护腿");
         add(Armors.TUNGSTEN_BOOTS.get(),"钨靴子");
+        add(Armors.GOLDEN_HELMET.get(),"金头盔");
+        add(Armors.GOLDEN_CHESTPLATE.get(),"金胸甲");
+        add(Armors.GOLDEN_LEGGINGS.get(),"金护腿");
+        add(Armors.GOLDEN_BOOTS.get(),"金靴子");
         add(Armors.PLATINUM_HELMET.get(),"铂金头盔");
         add(Armors.PLATINUM_CHESTPLATE.get(),"铂金胸甲");
         add(Armors.PLATINUM_LEGGINGS.get(),"铂金护腿");

@@ -71,6 +71,11 @@ public enum Armors implements EnumRegister<ArmorItem> {
     TUNGSTEN_CHESTPLATE("tungsten_chestplate", () -> new TungstenArmorItem(ArmorItem.Type.CHESTPLATE)),
     TUNGSTEN_LEGGINGS("tungsten_leggings", () -> new TungstenArmorItem(ArmorItem.Type.LEGGINGS)),
     TUNGSTEN_BOOTS("tungsten_boots", () -> new TungstenArmorItem(ArmorItem.Type.BOOTS)),
+    //金套
+    GOLDEN_HELMET("golden_helmet", () -> new GoldenArmorItem(ArmorItem.Type.HELMET)),
+    GOLDEN_CHESTPLATE("golden_chestplate", () -> new GoldenArmorItem(ArmorItem.Type.CHESTPLATE)),
+    GOLDEN_LEGGINGS("golden_leggings", () -> new GoldenArmorItem(ArmorItem.Type.LEGGINGS)),
+    GOLDEN_BOOTS("golden_boots", () -> new GoldenArmorItem(ArmorItem.Type.BOOTS)),
     //铂金套
     PLATINUM_HELMET("platinum_helmet", () -> new PlatinumArmorItem(ArmorItem.Type.HELMET)),
     PLATINUM_CHESTPLATE("platinum_chestplate", () -> new PlatinumArmorItem(ArmorItem.Type.CHESTPLATE)),
