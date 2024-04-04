@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.AtomicDouble;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,12 +13,17 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.scores.Team;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.util.CuriosUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PaladinsShield extends BaseCurioItem {
@@ -66,5 +72,10 @@ public class PaladinsShield extends BaseCurioItem {
 
     protected static boolean shouldSkip(Player playerA, Team team, Player playerB) {
         return playerA.getTeam() != team || playerA.getScoreboardName().equals(playerB.getScoreboardName());
+    }
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, level, list, tooltipFlag);
+        list.add(Component.translatable("item.confluence.paladins_shield.tooltip2"));
     }
 }

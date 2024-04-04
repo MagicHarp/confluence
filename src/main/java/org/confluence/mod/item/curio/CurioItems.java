@@ -23,7 +23,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 盔甲抛光剂 */
     AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
     /* 蜜蜂斗篷 */
-    Berserkers_Glove("berserkers_glove", BerserkersGlove::new), // 狂战士手套
+    BERSERKERS_GLOVE("berserkers_glove", BerserkersGlove::new), // 狂战士手套
     BEZOAR("bezoar", Bezoar::new), // 牛黄
     BLACK_BELT("black_belt", BlackBelt::new), // 黑腰带
     BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
