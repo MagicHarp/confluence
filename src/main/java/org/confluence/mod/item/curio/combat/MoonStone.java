@@ -33,7 +33,9 @@ public class MoonStone extends BaseCurioItem implements ICriticalHit {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return slotContext.entity().level().getDayTime() % 24000 > 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
+        LivingEntity living = slotContext.entity();
+        if (living == null) return EMPTY_ATTRIBUTE;
+        return living.level().getDayTime() % 24000 > 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
     }
 
     @Override
