@@ -6,6 +6,6 @@ import net.minecraft.network.chat.Component;
 public interface IDepthMeter {
     static Component getInfo(LocalPlayer localPlayer) {
         double y = localPlayer.getY();
-        return Component.translatable("info.confluence.depth_meter." + (y > 63 ? "surface" : "underground"), y);
+        return Component.translatable("info.confluence.depth_meter." + (y > 63 ? "surface" : "underground"), "%.2f".formatted(y));
     }
 }

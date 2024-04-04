@@ -1,21 +1,17 @@
 {
     "type": "minecraft:crafting_shaped",
-    "category": "equipment",
+    "pattern": [
+        "g  ",
+        " g ",
+        "  g"
+    ],
     "key": {
-        "#": {
-            "item": "minecraft:stick"
-        },
-        "X": {
+        "g": {
             "item": "minecraft:gold_ingot"
         }
     },
-    "pattern": [
-        "X",
-        "X",
-        "#"
-    ],
     "result": {
-        "item": "confluence:golden_sword"
-    },
-    "show_notification": true
+        "item": "confluence:golden_board_sword",
+        "count": 1
+    }
 }

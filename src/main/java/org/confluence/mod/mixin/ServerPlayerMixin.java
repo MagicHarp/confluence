@@ -8,7 +8,6 @@ import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,9 +30,7 @@ public abstract class ServerPlayerMixin {
                     Inventory inventory = self.getInventory();
                     if (!(slot instanceof ResultSlot) && slot.container == inventory) {
                         CriteriaTriggers.INVENTORY_CHANGED.trigger(self, inventory, itemStack);
-                        if (itemStack.getItem() instanceof BaseCurioItem) {
-                            InfoCurioCheckPacketS2C.send(self, inventory.items);
-                        }
+                        InfoCurioCheckPacketS2C.send(self, inventory.items);
                     }
                 }
 
