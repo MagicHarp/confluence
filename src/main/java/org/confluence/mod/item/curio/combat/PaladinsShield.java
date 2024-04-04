@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.scores.Team;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
@@ -26,6 +27,10 @@ public class PaladinsShield extends BaseCurioItem {
         Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Paladins Shield", 6, AttributeModifier.Operation.ADDITION),
         Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Paladins Shield", 1.0, AttributeModifier.Operation.ADDITION)
     );
+
+    public PaladinsShield(Rarity rarity) {
+        super(rarity);
+    }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {

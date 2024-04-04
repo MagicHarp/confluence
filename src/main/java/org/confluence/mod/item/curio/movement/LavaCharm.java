@@ -1,12 +1,12 @@
-package org.confluence.mod.item.curio.combat;
+package org.confluence.mod.item.curio.movement;
 
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.ILavaImmune;
 
-public class ObsidianSkullRose extends BaseCurioItem implements IFireImmune, ILavaImmune {
-    public ObsidianSkullRose() {
-        super(ModRarity.PINK);
+public class LavaCharm extends BaseCurioItem implements ILavaImmune {
+    public LavaCharm() {
+        super(ModRarity.ORANGE);
     }
 
     @Override

@@ -12,23 +12,18 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
-    public static final UUID ARMOR_UUID = UUID.fromString("91F63796-420A-FFCB-504C-FEAA53C7DFC4");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", 8, AttributeModifier.Operation.ADDITION)
+public class FeralClaws extends BaseCurioItem {
+    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("069AEF75-87F4-9B81-A3D1-82114C18103D");
+    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTACK_SPEED = ImmutableMultimap.of(
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Feral Claws", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public FleshKnuckles() {
-        super(ModRarity.PINK);
-    }
-
-    @Override
-    public int getAggro() {
-        return 400;
+    public FeralClaws() {
+        super(ModRarity.ORANGE);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return ARMOR;
+        return ATTACK_SPEED;
     }
 }

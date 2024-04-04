@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -20,6 +21,10 @@ public class CobaltShield extends BaseCurioItem {
         Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION),
         Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION)
     );
+
+    public CobaltShield() {
+        super(ModRarity.GREEN);
+    }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {

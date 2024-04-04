@@ -101,9 +101,7 @@ public class ModRarity {
         }
 
         public static int getMasterColor() {
-            double num = (float) mouseTextColor / (float) Byte.MAX_VALUE * 200.0;
-            int green = (int) (byte) (masterColor * num);
-            return ((int) mouseTextColor << 16) + (green << 8);
+            return ((int) mouseTextColor << 16) + ((int) masterColor << 8);
         }
     }
 

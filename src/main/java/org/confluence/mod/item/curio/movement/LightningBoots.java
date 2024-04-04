@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,10 @@ import java.util.List;
 
 public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     private static final List<Component> ATTR_TOOLTIP = List.of(Component.translatable("item.confluence.lightning_boots.attribute"));
+
+    public LightningBoots(Rarity rarity) {
+        super(rarity);
+    }
 
     @Override
     public int getFlyTicks() {

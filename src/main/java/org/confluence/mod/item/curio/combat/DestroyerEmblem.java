@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -16,6 +17,10 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit {
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Destroyer Emblem", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
+
+    public DestroyerEmblem() {
+        super(ModRarity.LIME);
+    }
 
     @Override
     public float getChance() {

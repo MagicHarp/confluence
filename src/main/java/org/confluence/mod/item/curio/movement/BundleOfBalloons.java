@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
@@ -16,6 +17,10 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
+    public BundleOfBalloons() {
+        super(ModRarity.YELLOW);
+    }
+
     @Override
     public double getBoost() {
         return 1.33;

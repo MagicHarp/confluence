@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.combat;
+package org.confluence.mod.item.curio;
 
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.capability.curio.AbilityProvider;

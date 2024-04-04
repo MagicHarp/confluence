@@ -8,9 +8,11 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -29,12 +31,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
     protected static final List<Component> EMPTY_TOOLTIP = List.of();
     protected static final ImmutableMultimap<Attribute, AttributeModifier> EMPTY_ATTRIBUTE = ImmutableMultimap.of();
 
-    public BaseCurioItem(Properties properties) {
-        super(properties.stacksTo(1));
+    public BaseCurioItem(Rarity rarity) {
+        super(new Properties().rarity(rarity).stacksTo(1));
     }
 
     public BaseCurioItem() {
-        this(new Properties());
+        this(ModRarity.BLUE);
     }
 
     @Override

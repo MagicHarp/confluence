@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,10 @@ public class Flipper extends BaseCurioItem {
     static final ImmutableMultimap<Attribute, AttributeModifier> SWIM_SPEED = ImmutableMultimap.of(
         ForgeMod.SWIM_SPEED.get(), new AttributeModifier(SWIM_SPEED_UUID, "Flipper", 0.5, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
+
+    public Flipper() {
+        super(ModRarity.BLUE);
+    }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {

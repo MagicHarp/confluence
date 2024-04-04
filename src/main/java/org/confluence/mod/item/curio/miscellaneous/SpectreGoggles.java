@@ -4,12 +4,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EchoBlockVisibilityPacketS2C;
 import top.theillusivec4.curios.api.SlotContext;
 
 public class SpectreGoggles extends BaseCurioItem {
+    public SpectreGoggles() {
+        super(ModRarity.PINK);
+    }
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         echo(slotContext.entity(), true);
