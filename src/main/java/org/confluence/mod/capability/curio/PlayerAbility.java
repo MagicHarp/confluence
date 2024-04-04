@@ -90,11 +90,11 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ICriticalHit iCriticalHit) {
-                    maxChance.set(Math.max(iCriticalHit.getChance(), maxChance.get()));
+                    maxChance.addAndGet(iCriticalHit.getChance());
                 }
             }
         });
-        this.criticalChance = maxChance.floatValue();
+        this.criticalChance = maxChance.get();
     }
 
     public void freshFireImmune(LivingEntity living) {

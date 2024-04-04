@@ -9,7 +9,7 @@ public class EyeOfTheGolem extends BaseCurioItem implements ICriticalHit {
     }
 
     @Override
-    public float getChance() {
-        return 0.1F;
+    public double getChance() {
+        return 0.1;
     }
 }

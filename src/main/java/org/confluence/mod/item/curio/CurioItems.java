@@ -50,7 +50,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     MECHANICAL_GLOVE("mechanical_glove", MechanicalGlove::new), // 机械手套
     /* 药用绷带 */
     /* 扩音器 */
-    MOON_STONE("moon_stone", MoonStone::new), // 月亮石
+    MOON_STONE("moon_stone", MoonStone::new), // 月亮石 (WIP)
     /* 熔火箭袋 */
     /* 邪眼 */
     MAGMA_STONE("magma_stone", MagmaStone::new), // 岩浆石

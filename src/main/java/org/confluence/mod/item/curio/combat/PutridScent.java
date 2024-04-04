@@ -33,7 +33,7 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach, ICritica
     }
 
     @Override
-    public float getChance() {
-        return 0.05F;
+    public double getChance() {
+        return 0.05;
     }
 }

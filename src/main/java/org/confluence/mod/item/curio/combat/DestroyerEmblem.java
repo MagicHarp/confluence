@@ -23,8 +23,8 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit {
     }
 
     @Override
-    public float getChance() {
-        return 0.08F;
+    public double getChance() {
+        return 0.08;
     }
 
     @Override

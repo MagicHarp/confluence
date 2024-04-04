@@ -37,8 +37,8 @@ public class MoonStone extends BaseCurioItem implements ICriticalHit {
     }
 
     @Override
-    public float getChance() {
-        return 0.02F;
+    public double getChance() {
+        return 0.0;
     }
 
     @Override

@@ -5,22 +5,31 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.Event;
 import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.util.CuriosUtils;
 
 public interface ICriticalHit {
-    float getChance();
+    double getChance();
 
     default void freshChance(LivingEntity living) {
-        living.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            playerAbility.freshCriticalChance(living);
-        });
+        living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+            .ifPresent(playerAbility -> playerAbility.freshCriticalChance(living));
     }
 
     static void apply(CriticalHitEvent event) {
         Player player = event.getEntity();
         player.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            if (!event.isVanillaCritical() && player.level().random.nextFloat() < playerAbility.getCriticalChance()) {
-                event.setDamageModifier(1.5F);
-                event.setResult(Event.Result.ALLOW);
+            if (!event.isVanillaCritical()) {
+                double chance = playerAbility.getCriticalChance();
+                if (player.level().getDayTime() % 24000 > 12000) {
+                    if (CuriosUtils.hasCurio(player, CurioItems.MOON_STONE.get())) chance += 0.02;
+                } else {
+                    if (CuriosUtils.hasCurio(player, CurioItems.SUN_STONE.get())) chance += 0.02;
+                }
+                if (player.level().random.nextFloat() < chance) {
+                    event.setDamageModifier(1.5F);
+                    event.setResult(Event.Result.ALLOW);
+                }
             }
         });
     }
