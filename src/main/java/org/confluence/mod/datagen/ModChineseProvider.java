@@ -137,7 +137,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.destroyer_emblem.tooltip","伤害增加10%、暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip","增加受到伤害后的无敌时间");
         add("item.confluence.black_belt.tooltip","有几率避开攻击");
-        add("item.confluence.cross_necklace.tooltip","增加受到伤害后的无敌时间");
         add("item.confluence.avenger_emblem.tooltip","伤害提高12%");
 
 

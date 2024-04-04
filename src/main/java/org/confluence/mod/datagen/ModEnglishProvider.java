@@ -133,7 +133,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.destroyer_emblem.tooltip","10% increased damage and 8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip","Increases the duration of invincibility after taking damage");
         add("item.confluence.black_belt.tooltip","Has a chance to avoid attacks");
-        add("item.confluence.cross_necklace.tooltip","Increases the duration of invincibility after taking damage");
         add("item.confluence.avenger_emblem.tooltip","12% increased damage");
 
 
