@@ -44,6 +44,17 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
+        add("info.confluence.time", "时间: [%s:%s]");
+        add("info.confluence.radar", "敌人: %s");
+        add("info.confluence.compass.east", "东: %s, ");
+        add("info.confluence.compass.west", "西: %s, ");
+        add("info.confluence.compass.south", "南: %s");
+        add("info.confluence.compass.north", "北: %s");
+        add("info.confluence.depth_meter.surface", "地表: %s");
+        add("info.confluence.depth_meter.underground", "地下: %s");
+        add("info.confluence.tally_counter.unknown", "击杀数不可用");
+        add("info.confluence.tally_counter", "已杀死 '");
+
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
         add("curios.tooltip.jump_boost", "增加跳跃高度");
