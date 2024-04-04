@@ -298,7 +298,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
-        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");ebony_planks_from_ebony_log_crafting.json
+        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
