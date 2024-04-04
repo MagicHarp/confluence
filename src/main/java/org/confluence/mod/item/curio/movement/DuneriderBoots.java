@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.item.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -14,6 +15,10 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class DuneriderBoots extends BaseSpeedBoots {
+    public DuneriderBoots() {
+        super(ModRarity.BLUE);
+    }
+
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();

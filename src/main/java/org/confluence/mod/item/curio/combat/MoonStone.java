@@ -16,24 +16,24 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class SunStone extends BaseCurioItem implements ICriticalHit {
-    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("6B2CFC65-3C84-7C1F-69D8-7B37556578E0");
-    public static final UUID DAMAGE_UUID = UUID.fromString("56A08AD3-ADA1-F838-E09C-28B08935F5C2");
-    public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
+public class MoonStone extends BaseCurioItem implements ICriticalHit {
+    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("E11BBE53-8620-4795-296E-B1E512E04EFF");
+    public static final UUID DAMAGE_UUID = UUID.fromString("51D0544E-0AA8-CB0C-5FBC-1A4C6B5C99B7");
+    public static final UUID ARMOR_UUID = UUID.fromString("35D05688-D0BE-3387-DAD8-82C79B46AB46");
 
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION)
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION)
     );
 
-    public SunStone() {
-        super(ModRarity.LIME);
+    public MoonStone() {
+        super(ModRarity.PINK);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return slotContext.entity().level().getDayTime() % 24000 < 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
+        return slotContext.entity().level().getDayTime() % 24000 > 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
     }
 
     @Override
