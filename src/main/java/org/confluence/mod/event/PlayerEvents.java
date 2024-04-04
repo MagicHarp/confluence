@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
@@ -46,8 +46,8 @@ public class PlayerEvents {
         oldPlayer.revive();
         oldPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(old ->
             neoPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
-        oldPlayer.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(old ->
-            neoPlayer.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
+        oldPlayer.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(old ->
+            neoPlayer.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
 
         if (neoPlayer instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMsg(serverPlayer);

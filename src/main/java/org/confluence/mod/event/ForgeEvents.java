@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,9 +25,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
+import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
@@ -50,8 +52,8 @@ public class ForgeEvents {
             if (player.getCapability(ManaProvider.MANA_CAPABILITY).isPresent()) return;
             event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
 
-            if (player.getCapability(AbilityProvider.ABILITY_CAPABILITY).isPresent()) return;
-            event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
+            if (player.getCapability(PlayerAbilityProvider.CAPABILITY).isPresent()) return;
+            event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new PlayerAbilityProvider());
         }
     }
 
@@ -61,6 +63,20 @@ public class ForgeEvents {
 
         ServerLevel serverLevel = (ServerLevel) event.level;
         FallingStarItemEntity.summon(serverLevel);
+        int dayTime = (int) (serverLevel.getDayTime() % 24000);
+
+        if (dayTime == 6000) {
+            if (serverLevel.random.nextFloat() < 0.2F) {
+                ConfluenceData.get(serverLevel).setMoonSpecific(serverLevel.random.nextInt(11)); // 0 ~ 10
+            } else {
+                ConfluenceData.get(serverLevel).setMoonSpecific(-1);
+            }
+        } else if (dayTime == 12000 && serverLevel.getMoonPhase() != 4 && serverLevel.random.nextFloat() < 0.1111F &&
+            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24)
+        ) {
+            serverLevel.getServer().sendSystemMessage(Component.translatable("event.confluence.blood_moon"));
+            ConfluenceData.get(serverLevel).setMoonSpecific(11);
+        }
     }
 
     @SubscribeEvent
@@ -107,8 +123,8 @@ public class ForgeEvents {
         if (old != null) {
             LivingEntity neo = event.getNewTarget();
             AtomicBoolean bothHas = new AtomicBoolean();
-            old.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(oldAbility ->
-                neo.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(neoAbility -> {
+            old.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(oldAbility ->
+                neo.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(neoAbility -> {
                     bothHas.set(true);
                     if (oldAbility.getAggro() > neoAbility.getAggro()) {
                         event.setNewTarget(old);
@@ -124,8 +140,8 @@ public class ForgeEvents {
             .filter(player -> player.distanceTo(self) < range)
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
-                playerA.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(abilityA ->
-                    playerB.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(abilityB ->
+                playerA.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(abilityA ->
+                    playerB.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(abilityB ->
                         atomic.set(abilityA.getAggro() - abilityB.getAggro())
                     )
                 );

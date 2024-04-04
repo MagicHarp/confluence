@@ -66,7 +66,7 @@ public enum Materials implements EnumRegister<Item> {
     FIREBLOSSOM_BUD("fireblossom_bud"),
     CRYSTALLINE_LENS("crystalline_lens"),
     BLACK_LENS("black_lens"),
-    LIFE_CRYSTAL("life_crystal"),
+    LIFE_CRYSTAL("life_crystal", LifeCrystal::new),
     MANA_STAR("mana_star", ManaStar::new),
     SHADOW_SCALE("shadow_scale"),
     TISSUE_SAMPLE("tissue_sample"),

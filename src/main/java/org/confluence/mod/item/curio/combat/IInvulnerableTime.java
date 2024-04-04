@@ -1,13 +1,13 @@
 package org.confluence.mod.item.curio.combat;
 
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 
 public interface IInvulnerableTime {
     int getTime();
 
     default void freshInvulnerableTime(LivingEntity living) {
-        living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+        living.getCapability(PlayerAbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshInvulnerableTime(living));
     }
 }

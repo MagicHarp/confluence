@@ -3,13 +3,13 @@ package org.confluence.mod.item.curio.combat;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface IFireImmune {
     default void freshFireImmune(LivingEntity living) {
-        living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+        living.getCapability(PlayerAbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshFireImmune(living));
     }
 
@@ -21,7 +21,7 @@ public interface IFireImmune {
             damageSource.is(DamageTypes.FIREBALL)
         ) {
             AtomicBoolean atomic = new AtomicBoolean();
-            living.getCapability(AbilityProvider.ABILITY_CAPABILITY)
+            living.getCapability(PlayerAbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> atomic.set(playerAbility.isFireImmune()));
             return atomic.get();
         }

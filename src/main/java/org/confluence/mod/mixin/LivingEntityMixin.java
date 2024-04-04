@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,9 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class LivingEntityMixin {
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
-            cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost()));
-        });
+        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY)
+            .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
     }
 
     @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
@@ -43,7 +42,7 @@ public abstract class LivingEntityMixin {
     @Unique
     private int c$getInvulnerableTime(int constant) {
         AtomicInteger time = new AtomicInteger(constant);
-        c$getSelf().getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
+        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
             time.set(playerAbility.getInvulnerableTime());
         });
         return time.get();

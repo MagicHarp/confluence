@@ -2,7 +2,7 @@ package org.confluence.mod.mixin;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -15,7 +15,7 @@ public abstract class EntityMixin {
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
         if (((Entity) (Object) this) instanceof Player player) {
-            player.getCapability(AbilityProvider.ABILITY_CAPABILITY).ifPresent(playerAbility -> {
+            player.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
                     if (playerAbility.decreaseLavaImmuneTicks()) {
                         inLava.set(false);

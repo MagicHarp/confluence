@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
     @Unique
-    private static final float c$size = 20.0F;
+    private static final float c$size = 10.0F;
     @Unique
     private static final ResourceLocation NO_MOON = new ResourceLocation(Confluence.MODID, "textures/environment/no_moon.png");
 

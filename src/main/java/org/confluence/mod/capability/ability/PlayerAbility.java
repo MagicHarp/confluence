@@ -1,4 +1,4 @@
-package org.confluence.mod.capability.curio;
+package org.confluence.mod.capability.ability;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +26,8 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
     private transient int remainLavaImmuneTicks;
     private int aggro; // 仇恨
 
+    private int crystals;
+
     public PlayerAbility() {
         this.jumpBoost = 1.0;
         this.fallResistance = 0;
@@ -37,6 +39,8 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
         this.aggro = 0;
+
+        this.crystals = 0;
     }
 
     public void freshJumpBoost(LivingEntity living) {
@@ -193,6 +197,18 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         return aggro;
     }
 
+    public boolean increaseCrystals() {
+        if (crystals < 15) {
+            crystals++;
+            return true;
+        }
+        return false;
+    }
+
+    public int getCrystals() {
+        return crystals;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -205,6 +221,8 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putBoolean("lavaHurtReduce", lavaHurtReduce);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
         nbt.putInt("aggro", aggro);
+
+        nbt.putInt("crystals", crystals);
         return nbt;
     }
 
@@ -219,6 +237,8 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.lavaHurtReduce = nbt.getBoolean("lavaHurtReduce");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
         this.aggro = nbt.getInt("aggro");
+
+        this.crystals = nbt.getInt("crystals");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -231,5 +251,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.lavaHurtReduce = playerAbility.lavaHurtReduce;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
         this.aggro = playerAbility.aggro;
+
+        this.crystals = playerAbility.crystals;
     }
 }
