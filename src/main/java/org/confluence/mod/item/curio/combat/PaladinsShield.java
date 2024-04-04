@@ -64,7 +64,7 @@ public class PaladinsShield extends BaseCurioItem {
         return amount;
     }
 
-    private static boolean shouldSkip(Player playerA, Team team, Player playerB) {
+    protected static boolean shouldSkip(Player playerA, Team team, Player playerB) {
         return playerA.getTeam() != team || playerA.getScoreboardName().equals(playerB.getScoreboardName());
     }
 }

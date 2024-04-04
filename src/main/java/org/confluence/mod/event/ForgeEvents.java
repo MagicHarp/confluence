@@ -27,7 +27,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.curio.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
-import org.confluence.mod.effect.ManaIssueEffect;
+import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -80,6 +80,7 @@ public class ForgeEvents {
         float amount = event.getAmount();
         amount = ManaIssueEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
+        amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
         amount = IFallResistance.apply(living, damageSource, amount);
 

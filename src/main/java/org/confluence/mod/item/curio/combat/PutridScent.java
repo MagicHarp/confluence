@@ -12,18 +12,28 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class AvengerEmblem extends BaseCurioItem {
-    public static final UUID DAMAGE_UUID = UUID.fromString("3D20DB42-C40E-23BF-6CE4-FBDD7CC14222");
+public class PutridScent extends BaseCurioItem implements IAggroAttach, ICriticalHit {
+    public static final UUID DAMAGE_UUID = UUID.fromString("70F6E4B4-64AC-4B2A-AAD6-8C35AFB9507D");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Avenger Emblem", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public AvengerEmblem() {
-        super(ModRarity.PINK);
+    public PutridScent() {
+        super(ModRarity.LIGHT_PURPLE);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return DAMAGE;
+    }
+
+    @Override
+    public int getAggro() {
+        return -400;
+    }
+
+    @Override
+    public float getChance() {
+        return 0.05F;
     }
 }

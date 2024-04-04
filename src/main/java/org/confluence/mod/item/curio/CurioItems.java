@@ -39,15 +39,15 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     EYE_OF_THE_GOLEM("eye_of_the_golem", EyeOfTheGolem::new), // 石巨人之眼
     /* 快走时钟 */
     FERAL_CLAWS("feral_claws", FeralClaws::new), // 狂爪手套 (WIP)
-    /* 烈火手套 */
+    FIRE_GAUNTLET("fire_gauntlet", FireGauntlet::new), // 烈火手套
     FLESH_KNUCKLES("flesh_knuckles", FleshKnuckles::new), // 血肉指虎
-    /* 冰冻海龟壳 */
-    /* 冰冻护盾 */
+    FROZEN_TURTLE_SHELL("frozen_turtle_shell", FrozenTurtleShell::new), // 冰冻海龟壳
+    FROZEN_SHIELD("frozen_shield", FrozenShield::new), // 冰冻护盾
     /* 暖手宝 */
     HERO_SHIELD("hero_shield", HeroShield::new), // 英雄护盾
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
     /* 魔法箭袋 */
-    /* 机械手套 */
+    MECHANICAL_GLOVE("mechanical_glove", MechanicalGlove::new), // 机械手套
     /* 药用绷带 */
     /* 扩音器 */
     /* 月亮石 */
@@ -62,8 +62,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     PALADINS_SHIELD("paladins_shield", () -> new PaladinsShield(ModRarity.YELLOW)), // 圣骑士护盾
     PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     /* 袖珍镜 */
-    /* 强力手套 */
-    /* 腐香囊 */
+    POWER_GLOVE("power_glove", PowerGlove::new), // 强力手套
+    PUTRID_SCENT("putrid_scent", PutridScent::new), // 腐香囊
     /* 游侠徽章 */
     /* 侦察镜 */
     /* 步枪瞄准镜 */
@@ -76,10 +76,10 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 星星面纱 */
     /* 毒刺项链 */
     /* 召唤师徽章 */
-    /* 太阳石 */
+    SUN_STONE("sun_stone", SunStone::new), // 太阳石 (WIP)
     /* 甜心项链 */
     /* 计划书 */
-    /* 泰坦手套 */
+    TITAN_GLOVE("titan_glove", TitanGlove::new), // 泰坦手套
     /* 三折地图 */
     /* 维生素 */
     /* 战士徽章 */
