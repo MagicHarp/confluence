@@ -23,7 +23,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 盔甲抛光剂 */
     AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
     /* 蜜蜂斗篷 */
-    /* 狂战士手套 */
+    Berserkers_Glove("berserkers_glove", BerserkersGlove::new), // 狂战士手套
     BEZOAR("bezoar", Bezoar::new), // 牛黄
     BLACK_BELT("black_belt", BlackBelt::new), // 黑腰带
     BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
@@ -181,10 +181,10 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
     MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
-    /* 水上漂靴 */
-    /* 黑曜石水上漂靴 */
-    /* 熔岩靴 */
-    /* 泰拉闪耀靴 */
+    WATER_WALKING_BOOTS("water_walking_boots", WaterWalkingBoots::new), // 水上漂靴
+    OBSIDIAN_WATER_WALKING_BOOTS("obsidian_water_walking_boots", ObsidianWaterWalkingBoots::new), // 黑曜石水上漂靴
+    LAVA_WADERS("lava_waders", LavaWaders::new), // 熔岩靴
+    TERRASPARK_BOOTS("terraspark_boots", TerrasparkBoots::new), // 泰拉闪耀靴
     SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", () -> new CloudInABalloon(ModRarity.LIGHT_RED)), // 云朵气球
@@ -200,7 +200,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 青蛙装备 */
     AMBHIPIAN_BOOTS("ambhipian_boots", AmbhipianBoots::new), // 水陆两用靴
     LUCKY_HORSESHOE("lucky_horseshoe", LuckyHorseshoe::new), // 幸运马掌
-    /* 黑曜石马掌 */
+    OBSIDIAN_HORSESHOE("obsidian_horseshoe", ObsidianHorseshoe::new), // 黑曜石马掌
     BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球

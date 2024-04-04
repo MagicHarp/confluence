@@ -9,9 +9,4 @@ public class MoltenCharm extends BaseCurioItem implements IFireImmune, ILavaImmu
     public MoltenCharm() {
         super(ModRarity.PINK);
     }
-
-    @Override
-    public int getLavaImmuneTicks() {
-        return 140;
-    }
 }

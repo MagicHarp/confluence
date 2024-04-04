@@ -2,10 +2,13 @@ package org.confluence.mod.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.curio.AbilityProvider;
+import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -52,6 +55,14 @@ public abstract class LivingEntityMixin {
         if (self.fallDistance > 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
+    private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
+        if (c$getSelf() instanceof Player player) {
+            CuriosUtils.findCurio(player, IFluidWalk.class)
+                .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
         }
     }
 

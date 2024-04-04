@@ -8,9 +8,4 @@ public class ObsidianSkullRose extends BaseCurioItem implements IFireImmune, ILa
     public ObsidianSkullRose() {
         super(ModRarity.PINK);
     }
-
-    @Override
-    public int getLavaImmuneTicks() {
-        return 140;
-    }
 }

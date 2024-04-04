@@ -8,9 +8,4 @@ public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILava
     public MoltenSkullRose() {
         super(ModRarity.LIGHT_PURPLE);
     }
-
-    @Override
-    public int getLavaImmuneTicks() {
-        return 140;
-    }
 }

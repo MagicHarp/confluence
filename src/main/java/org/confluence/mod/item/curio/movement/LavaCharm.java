@@ -8,9 +8,4 @@ public class LavaCharm extends BaseCurioItem implements ILavaImmune {
     public LavaCharm() {
         super(ModRarity.ORANGE);
     }
-
-    @Override
-    public int getLavaImmuneTicks() {
-        return 140;
-    }
 }
