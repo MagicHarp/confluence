@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.effect.IronSkinEffect;
+import org.confluence.mod.effect.BeneficialEffect.*;
 import org.confluence.mod.item.curio.combat.EffectInvulnerable;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
