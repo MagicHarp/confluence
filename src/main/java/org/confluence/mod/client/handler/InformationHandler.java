@@ -8,7 +8,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.item.curio.informational.*;
+import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.Nullable;
@@ -20,19 +22,16 @@ import java.util.function.Supplier;
 @OnlyIn(Dist.CLIENT)
 public class InformationHandler {
     private static final ArrayList<Component> information = new ArrayList<>();
-    private static int updates = Integer.MIN_VALUE;
-    private static int updated = Integer.MIN_VALUE;
 
     private static byte time = 0;
-    private static @Nullable Function<Long, Component> timeInfo = null;
     private static byte radar = 0;
     private static byte tallyCounter = 0;
     private static byte compass = 0;
     private static byte depthMeter = 0;
-
     private static byte mechanicalLens = 0;
+
+    private static @Nullable Function<Long, Component> timeInfo = null;
     private static Component radarInfo = Component.translatable("info.confluence.radar", 0);
-    private static int entityKilled = -1;
     private static Component tallyCounterInfo = Component.translatable("info.confluence.tally_counter.unknown");
 
     public static void update(LocalPlayer localPlayer) {
@@ -66,10 +65,6 @@ public class InformationHandler {
             radar = 0;
         }
         if (tallyCounter > 0) {
-            if (updated != updates) {
-                updated = updates;
-                tallyCounterInfo = ITallyCounter.getInfo(entityKilled, tallyCounterInfo);
-            }
             information.add(tallyCounterInfo);
         } else if (tallyCounter < 0 && gameTime % 200 == 0 && nearPlayerNoCurio(localPlayer, ITallyCounter.class)) {
             tallyCounter = 0;
@@ -129,10 +124,15 @@ public class InformationHandler {
         context.setPacketHandled(true);
     }
 
-    public static void updateEntityKilled(int amount, EntityType<?> type) {
-        updates++;
-        entityKilled = amount;
-        tallyCounterInfo = type.getDescription();
+    public static void handleEntityKilled(EntityKilledPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(packet.type());
+            if (entityType != null) {
+                tallyCounterInfo = ITallyCounter.getInfo(packet.amount(), entityType.getDescription());
+            }
+        });
+        context.setPacketHandled(true);
     }
 
     public static boolean isMechanicalBlockVisible() {

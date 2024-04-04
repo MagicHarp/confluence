@@ -50,8 +50,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.compass.west", "West: %s, ");
         add("info.confluence.compass.south", "South: %s");
         add("info.confluence.compass.north", "North: %s");
-        add("info.confluence.depth_meter.surface", "Surface: ");
-        add("info.confluence.depth_meter.underground", "Underground: ");
+        add("info.confluence.depth_meter.surface", "Surface: %.2f");
+        add("info.confluence.depth_meter.underground", "Underground: %s");
         add("info.confluence.tally_counter.unknown", "Kill count unavailable");
         add("info.confluence.tally_counter", "Killed '");
 

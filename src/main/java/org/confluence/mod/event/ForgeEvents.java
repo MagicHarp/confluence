@@ -1,8 +1,8 @@
 package org.confluence.mod.event;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,15 +21,18 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.curio.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
-import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.effect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -85,9 +88,15 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void livingDeath(LivingDeathEvent event) {
-        if (event.getSource().getEntity() instanceof LocalPlayer localPlayer) {
+        if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
             EntityType<?> entityType = event.getEntity().getType();
-            InformationHandler.updateEntityKilled(localPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)), entityType);
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new EntityKilledPacketS2C(
+                    serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
+                    ForgeRegistries.ENTITY_TYPES.getKey(entityType)
+                )
+            );
         }
     }
 
