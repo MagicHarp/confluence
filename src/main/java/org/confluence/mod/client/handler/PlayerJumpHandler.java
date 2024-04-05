@@ -15,7 +15,7 @@ import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class PlayerInputHandler {
+public class PlayerJumpHandler {
     private static boolean jumpKeyDown = true;
 
     private static double fartSpeed = 0.0;
@@ -41,7 +41,7 @@ public class PlayerInputHandler {
     private static int remainFlyTicks = 0;
     private static double flySpeed = 0.0;
 
-    public static void handleJump(LocalPlayer localPlayer) {
+    public static void handle(LocalPlayer localPlayer) {
         if (localPlayer.onGround()) {
             jumpKeyDown = true;
             fartFinished = false;

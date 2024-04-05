@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class FrostSparkBoots extends LightningBoots implements ThinIceBlock.IceSafe {
+    public static final UUID SPEED_UUID = UUID.fromString("FF5835B7-FA33-A02D-A91F-E0043403CE69");
+    private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Lightning Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
     public FrostSparkBoots() {
         super(ModRarity.LIME);
     }
@@ -30,6 +33,7 @@ public class FrostSparkBoots extends LightningBoots implements ThinIceBlock.IceS
         LivingEntity living = slotContext.entity();
         if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
             return ImmutableMultimap.of(
+                Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
                 Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
             );

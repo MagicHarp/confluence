@@ -45,6 +45,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.multi_jump", "Allows the holder to double jump");
         add("curios.tooltip.fall_resistance", "Increases fall resistance");
         add("curios.tooltip.negates_fall_damage", "Negates fall damage");
+        add("curios.tooltip.watch", "Tell the time");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -74,7 +75,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
         add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
         add("item.confluence.lucky_horseshoe.tooltip", "'Said to bring good fortune and keep evil spirits at bay'");
-        add("item.confluence.lightning_boots.attribute", "8% increased movement speed");
         add("item.confluence.lightning_boots.tooltip", "Allows flight, super fast running");
         add("item.confluence.horseshoe_balloon.tooltip", "Increases jump height and negates fall damage");
         add("item.confluence.obsidian_horseshoe.tooltip", "Eliminate fall damage and immune to fire blocks");
@@ -92,12 +92,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.radar.tooltip", "Detect enemies around you");
         add("item.confluence.compass.tooltip", "Displays the horizontal position");
         add("item.confluence.depth_meter.tooltip", "Display depth");
-        add("item.confluence.copper_watch.tooltip", "Tell the time");
-        add("item.confluence.tin_watch.tooltip", "Tell the time");
-        add("item.confluence.silver_watch.tooltip", "Tell the time");
-        add("item.confluence.tungsten_watch.tooltip", "Tell the time");
-        add("item.confluence.golden_watch.tooltip", "Tell the time");
-        add("item.confluence.platinum_watch.tooltip", "Tell the time");
         add("item.confluence.titan_glove.tooltip", "Added melee knockback and enabled melee weapon autoswing");
         add("item.confluence.sun_stone.tooltip", "Slightly increases attribute values during the day");
         add("item.confluence.moon_stone.tooltip", "Slightly increases stat values at night");
@@ -125,15 +119,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.flesh_knuckles.tooltip", "In multiplayer, enemies are more likely to target you");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and causes attacks to inflict fire damage");
         add("item.confluence.fire_gauntlet.tooltip2","Increases melee damage and speed by 10%");
-        add("item.confluence.feral_claws.tooltip","12% increased melee damage speed");
         add("item.confluence.eye_of_the_golem.tooltip","10% increased Critical Strike Chance");
         add("item.confluence.berserkers_glove.tooltip","Added melee knockback and enabled melee weapon autoswing");
         add("item.confluence.berserkers_glove.tooltip2","In multiplayer, enemies are more likely to target you");
-        add("item.confluence.berserkers_glove.tooltip3","12% increased melee damage speed");
         add("item.confluence.destroyer_emblem.tooltip","10% increased damage and 8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip","Increases the duration of invincibility after taking damage");
         add("item.confluence.black_belt.tooltip","Has a chance to avoid attacks");
-        add("item.confluence.avenger_emblem.tooltip","12% increased damage");
 
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");

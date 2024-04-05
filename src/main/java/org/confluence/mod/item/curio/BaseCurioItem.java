@@ -67,11 +67,16 @@ public class BaseCurioItem extends Item implements ICurioItem {
         if (item instanceof IJumpBoost iJumpBoost) {
             iJumpBoost.freshJumpBoost(living);
         }
-        if (item instanceof IMayFly && living instanceof ServerPlayer serverPlayer) {
-            IMayFly.sendMsg(serverPlayer);
-        }
-        if (item instanceof IMultiJump && living instanceof ServerPlayer serverPlayer) {
-            IMultiJump.sendMsg(serverPlayer);
+        if (living instanceof ServerPlayer serverPlayer) {
+            if (item instanceof IMayFly) {
+                IMayFly.sendMsg(serverPlayer);
+            }
+            if (item instanceof IMultiJump) {
+                IMultiJump.sendMsg(serverPlayer);
+            }
+            if (item instanceof IContinueSwing) {
+                IContinueSwing.sendMsg(serverPlayer);
+            }
         }
     }
 
