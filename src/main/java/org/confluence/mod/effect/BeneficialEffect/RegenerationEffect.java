@@ -10,12 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class RegenerationEffect extends MobEffect { //再生  加生命恢复
     public RegenerationEffect() {
-        super(MobEffectCategory.BENEFICIAL,0xFFC0CB);
+        super(MobEffectCategory.BENEFICIAL, 0xFFC0CB);
     }
+
     @Override
     public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
-        if (entity instanceof Player && !entity.isSpectator()){
-            entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST,1,amplifier,false,false));
+        if (entity instanceof Player && !entity.isSpectator()) {
+            entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1, amplifier, false, false));
         }
     }
 }

@@ -13,9 +13,13 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IMayFly {
-    int getFlyTicks();
+    default int getFlyTicks() {
+        return 32;
+    }
 
-    double getFlySpeed();
+    default double getFlySpeed() {
+        return 0.3;
+    }
 
     static void sendMsg(ServerPlayer serverPlayer) {
         AtomicInteger maxFlyTicks = new AtomicInteger();

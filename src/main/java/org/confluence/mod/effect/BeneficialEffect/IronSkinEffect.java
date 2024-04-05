@@ -11,7 +11,7 @@ import java.util.UUID;
 public class IronSkinEffect extends MobEffect {
     public static final UUID ARMOR_UUID = UUID.fromString("33D41FDC-F153-0F90-0624-E9B2CB9C751B");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Iron Skin", 1, AttributeModifier.Operation.ADDITION)
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Iron Skin", 1, AttributeModifier.Operation.ADDITION)
     );
 
     public IronSkinEffect() {
@@ -24,7 +24,7 @@ public class IronSkinEffect extends MobEffect {
         }
     }
 
-    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap){
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.IRON_SKIN.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ARMOR);
             if (attributeInstance != null) {

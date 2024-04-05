@@ -57,6 +57,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.depth_meter.underground", "Underground: %s");
         add("info.confluence.tally_counter.unknown", "Kill count unavailable");
         add("info.confluence.tally_counter", "Killed '");
+        add("info.confluence.life_form_analyzer.none", "No rare creatures nearby!");
+        add("info.confluence.life_form_analyzer", "%s detected nearby!");
+        add("info.confluence.metal_detector.none", "No treasure nearby!");
+        add("info.confluence.metal_detector", "%s detected nearby!");
+        add("info.confluence.stopwatch", "Speed: %s mps");
 
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
@@ -80,7 +85,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.obsidian_horseshoe.tooltip", "Eliminate fall damage and immune to fire blocks");
         add("item.confluence.obsidian_water_walking_boots.tooltip", "Provides the ability to walk on water" + "Immune to fire blocks");
         add("item.confluence.lava_waders.tooltip", "Provides the ability to walk on water, honey & lava");
-        add("item.confluence.lava_waders.tooltip2","Grants immunity to fire blocks and 7 seconds of immunity to lava");
+        add("item.confluence.lava_waders.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.bundle_of_balloons.tooltip", "Allows the holder to quadruple jump");
         add("item.confluence.water_walking_boots.tooltip", "Provides the ability to walk on water and honey");
         add("item.confluence.molten_charm.tooltip", "Immune to fire blocks and magma for 7 seconds");
@@ -118,14 +123,21 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.tooltip", "When health drops below 50%, place a shell around the owner, reducing damage by 25%");
         add("item.confluence.flesh_knuckles.tooltip", "In multiplayer, enemies are more likely to target you");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and causes attacks to inflict fire damage");
-        add("item.confluence.fire_gauntlet.tooltip2","Increases melee damage and speed by 10%");
-        add("item.confluence.eye_of_the_golem.tooltip","10% increased Critical Strike Chance");
-        add("item.confluence.berserkers_glove.tooltip","Added melee knockback and enabled melee weapon autoswing");
-        add("item.confluence.berserkers_glove.tooltip2","In multiplayer, enemies are more likely to target you");
-        add("item.confluence.destroyer_emblem.tooltip","10% increased damage and 8% increased critical strike chance");
-        add("item.confluence.cross_necklace.tooltip","Increases the duration of invincibility after taking damage");
-        add("item.confluence.black_belt.tooltip","Has a chance to avoid attacks");
-
+        add("item.confluence.fire_gauntlet.tooltip2", "Increases melee damage and speed by 10%");
+        add("item.confluence.eye_of_the_golem.tooltip", "10% increased Critical Strike Chance");
+        add("item.confluence.berserkers_glove.tooltip", "Added melee knockback and enabled melee weapon autoswing");
+        add("item.confluence.berserkers_glove.tooltip2", "In multiplayer, enemies are more likely to target you");
+        add("item.confluence.destroyer_emblem.tooltip", "10% increased damage and 8% increased critical strike chance");
+        add("item.confluence.cross_necklace.tooltip", "Increases the duration of invincibility after taking damage");
+        add("item.confluence.black_belt.tooltip", "Has a chance to avoid attacks");
+        add("item.confluence.terraspark_boots.tooltip2", "8% increased movement speed");
+        add("item.confluence.terraspark_boots.tooltip3", "Provides the ability to walk on water, honey, and lava");
+        add("item.confluence.terraspark_boots.tooltip4", "Immune to fire blocks and lava for 7 seconds");
+        add("item.confluence.stopwatch.tooltip", "Displays the player's movement speed");
+        add("item.confluence.metal_detector.tooltip", "Shows the most valuable ores around you");
+        add("item.confluence.life_form_analyzer.tooltip", "Displays the names of rare creatures around you");
+        add("item.confluence.rek_3000.tooltip", "Displays the number of monsters, kills, and rare creatures");
+        add("item.confluence.fledgling_wings.tooltip", "Provides the ability to fly");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

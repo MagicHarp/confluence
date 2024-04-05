@@ -11,21 +11,25 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class ThornsEffect extends MobEffect {   //荆棘 给予伤害来源反伤
     DamageSource damageSource;
     float damage;
+
     public ThornsEffect() {
-        super(MobEffectCategory.BENEFICIAL,0x00FF00);
+        super(MobEffectCategory.BENEFICIAL, 0x00FF00);
     }
-    public void onAdd(LivingEntity entity,float ThornMultiplier){
-        if (entity instanceof Player){
-            onThorn(entity,ThornMultiplier);
+
+    public void onAdd(LivingEntity entity, float ThornMultiplier) {
+        if (entity instanceof Player) {
+            onThorn(entity, ThornMultiplier);
         }
     }
+
     @SubscribeEvent
-    public void onEntityDamage(LivingHurtEvent event){
+    public void onEntityDamage(LivingHurtEvent event) {
         damage = event.getAmount();
     }
-    private void onThorn(LivingEntity entity,float ThornMultiplier){
-        if (damageSource!=null){
-            entity.hurt(damageSource,damage*ThornMultiplier);
+
+    private void onThorn(LivingEntity entity, float ThornMultiplier) {
+        if (damageSource != null) {
+            entity.hurt(damageSource, damage * ThornMultiplier);
         }
     }
 }

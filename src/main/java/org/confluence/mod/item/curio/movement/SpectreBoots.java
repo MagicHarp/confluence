@@ -16,16 +16,6 @@ public class SpectreBoots extends BaseSpeedBoots implements IMayFly {
     }
 
     @Override
-    public int getFlyTicks() {
-        return 32;
-    }
-
-    @Override
-    public double getFlySpeed() {
-        return 0.3;
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IMayFly.TOOLTIP);
         list.add(BaseSpeedBoots.TOOLTIP);

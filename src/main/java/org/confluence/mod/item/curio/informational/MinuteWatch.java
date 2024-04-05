@@ -5,10 +5,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.ModRarity;
-import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -18,6 +16,7 @@ public class MinuteWatch extends AbstractInfoCurio implements IWatch {
     }
 
     public static Component wrapTime(long dayTime) {
+        dayTime = dayTime % 24000;
         long hour = dayTime / 1000 + 6;
         if (hour > 23) hour -= 24;
         long minute = (long) ((dayTime % 1000) * 0.06F);
@@ -26,11 +25,6 @@ public class MinuteWatch extends AbstractInfoCurio implements IWatch {
             IWatch.format(hour),
             IWatch.format(minute)
         );
-    }
-
-    @Override
-    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return CuriosUtils.noSameCurio(slotContext.entity(), IWatch.class);
     }
 
     @Override

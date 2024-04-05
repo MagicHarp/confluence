@@ -2,10 +2,12 @@ package org.confluence.mod.util;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -66,5 +68,17 @@ public class CuriosUtils {
                 atomic.set(results.get(0).stack());
             });
         return atomic.get();
+    }
+
+    public static ArrayList<ItemStack> getCurios(LivingEntity living) {
+        ArrayList<ItemStack> items = new ArrayList<>();
+        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
+            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
+                if (!itemStack.isEmpty()) items.add(itemStack);
+            }
+        });
+        return items;
     }
 }
