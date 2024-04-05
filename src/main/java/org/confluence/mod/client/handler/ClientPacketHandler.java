@@ -6,10 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.network.s2c.EchoBlockVisibilityPacketS2C;
-import org.confluence.mod.network.s2c.HolyWaterColorUpdatePacketS2C;
-import org.confluence.mod.network.s2c.ManaPacketS2C;
-import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
+import org.confluence.mod.network.s2c.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -23,6 +20,7 @@ public class ClientPacketHandler {
 
     private static boolean echoBlockVisible = false;
     private static boolean showHolyWaterColor = false;
+    private static boolean continueSwing = false;
 
     private static ResourceLocation specificMoon = null;
 
@@ -81,7 +79,17 @@ public class ClientPacketHandler {
         return showHolyWaterColor;
     }
 
+    public static boolean shouldContinueSwing() {
+        return continueSwing;
+    }
+
     public static @Nullable ResourceLocation getSpecificMoon() {
         return specificMoon;
+    }
+
+    public static void handleSwing(ContinuingSwingHandPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> continueSwing = packet.swing());
+        context.setPacketHandled(true);
     }
 }

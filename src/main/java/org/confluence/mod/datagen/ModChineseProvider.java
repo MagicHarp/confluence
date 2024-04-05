@@ -44,6 +44,14 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
+        add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
+        add("curios.tooltip.may_fly", "可飞行");
+        add("curios.tooltip.jump_boost", "增加跳跃高度");
+        add("curios.tooltip.multi_jump", "可让持有者二连跳");
+        add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
+        add("curios.tooltip.fall_resistance", "增加抗坠落性");
+        add("curios.tooltip.watch", "报时");
+
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
         add("info.confluence.compass.east", "东: %s, ");
@@ -55,12 +63,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.tally_counter.unknown", "击杀数不可用");
         add("info.confluence.tally_counter", "已杀死 '");
 
-        add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
-        add("curios.tooltip.may_fly", "可飞行");
-        add("curios.tooltip.jump_boost", "增加跳跃高度");
-        add("curios.tooltip.multi_jump", "可让持有者二连跳");
-        add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
-        add("curios.tooltip.fall_resistance", "增加抗坠落性");
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
         add("item.confluence.blindfold.tooltip", "对失明免疫");
@@ -69,7 +71,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
-        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度");
         add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明(仍在开发中)");
         add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
@@ -78,7 +80,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
         add("item.confluence.dunerider_boots.tooltip2", "“无节律行走就不会引来蠕虫”");
         add("item.confluence.lucky_horseshoe.tooltip", "“据说能带来好运、驱除邪灵”");
-        add("item.confluence.lightning_boots.attribute", "移动速度提高8%");
         add("item.confluence.lightning_boots.tooltip", "可飞行、可飞速奔跑");
         add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.obsidian_horseshoe.tooltip", "消除掉落伤害、对火块免疫");
@@ -96,12 +97,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.radar.tooltip", "探测你周围的敌人");
         add("item.confluence.compass.tooltip", "显示水平位置");
         add("item.confluence.depth_meter.tooltip", "显示深度");
-        add("item.confluence.copper_watch.tooltip", "报时");
-        add("item.confluence.tin_watch.tooltip", "报时");
-        add("item.confluence.silver_watch.tooltip", "报时");
-        add("item.confluence.tungsten_watch.tooltip", "报时");
-        add("item.confluence.golden_watch.tooltip", "报时");
-        add("item.confluence.platinum_watch.tooltip", "报时");
         add("item.confluence.titan_glove.tooltip", "增加近战击退、启用近战武器自动挥动");
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
@@ -129,15 +124,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.flesh_knuckles.tooltip", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
         add("item.confluence.fire_gauntlet.tooltip2","使近战伤害和速度各增加10%");
-        add("item.confluence.feral_claws.tooltip","近战伤害速度增加12%");
         add("item.confluence.eye_of_the_golem.tooltip","暴击率提高10%");
         add("item.confluence.berserkers_glove.tooltip","增加近战击退、启用近战武器自动挥动");
         add("item.confluence.berserkers_glove.tooltip2","多人模式时，敌人更可能以你为目标");
-        add("item.confluence.berserkers_glove.tooltip3","近战伤害速度增加12%");
         add("item.confluence.destroyer_emblem.tooltip","伤害增加10%、暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip","增加受到伤害后的无敌时间");
         add("item.confluence.black_belt.tooltip","有几率避开攻击");
-        add("item.confluence.avenger_emblem.tooltip","伤害提高12%");
 
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");

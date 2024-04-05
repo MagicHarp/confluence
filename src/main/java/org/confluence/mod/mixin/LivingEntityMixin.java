@@ -8,6 +8,7 @@ import net.minecraft.world.level.material.FluidState;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,9 +43,8 @@ public abstract class LivingEntityMixin {
     @Unique
     private int c$getInvulnerableTime(int constant) {
         AtomicInteger time = new AtomicInteger(constant);
-        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-            time.set(playerAbility.getInvulnerableTime());
-        });
+        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY)
+            .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
         return time.get();
     }
 
@@ -62,6 +62,13 @@ public abstract class LivingEntityMixin {
         if (c$getSelf() instanceof Player player) {
             CuriosUtils.findCurio(player, IFluidWalk.class)
                 .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+        }
+    }
+
+    @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
+    private void speed(float friction, CallbackInfoReturnable<Float> cir) {
+        if (c$getSelf() instanceof Player player && CuriosUtils.hasCurio(player, CurioItems.MAGILUMINESCENCE.get())) {
+            cir.setReturnValue(cir.getReturnValue() * 1.75F);
         }
     }
 

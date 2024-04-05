@@ -19,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class FireGauntlet extends BaseCurioItem implements IFireAttack {
+public class FireGauntlet extends BaseCurioItem implements IFireAttack, IContinueSwing {
     public static final UUID DAMAGE_UUID = UUID.fromString("27D54C06-2AE7-C9F2-60D8-AC4FF55F7B9F");
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("AF3F478D-0E82-B1D5-6A1C-1714BCA73525");
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("AAFC960E-43F6-B0D4-859C-9C198E60D057");

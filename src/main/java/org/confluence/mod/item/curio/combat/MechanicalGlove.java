@@ -19,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class MechanicalGlove extends BaseCurioItem {
+public class MechanicalGlove extends BaseCurioItem implements IContinueSwing {
     public static final UUID DAMAGE_UUID = UUID.fromString("36E88BBC-C5CD-79B7-7E1D-144E6C3C5818");
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("32488AC2-6D30-E40C-2722-8630E4BA101E");
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("FDA86C95-41F9-1A50-EF0B-A9B9AFFD5AB3");

@@ -43,6 +43,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        super.onEquip(slotContext, newStack, stack);
         stack.getOrCreateTag().putInt("speed", 0);
     }
 
