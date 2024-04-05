@@ -39,4 +39,5 @@ public class ModEffects {
     public static final RegistryObject<ConfusedEffect> CONFUSED = MOB_EFFECTS.register("confused", ConfusedEffect::new);
     public static final RegistryObject<WitheredArmorEffect> WITHERED_ARMOR = MOB_EFFECTS.register("withered_armor", WitheredArmorEffect::new);
     public static final RegistryObject<IchorEffect> ICHOR = MOB_EFFECTS.register("ichor", IchorEffect::new);
+    public static final RegistryObject<SpeedEffect> SPEED = MOB_EFFECTS.register("speed", SpeedEffect::new);
 }
