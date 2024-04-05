@@ -13,10 +13,9 @@ public class ModEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
 
     public static final RegistryObject<ManaIssueEffect> MANA_ISSUE = MOB_EFFECTS.register("mana_issue", ManaIssueEffect::new);
-    public static final RegistryObject<HappyEffect> HAPPY = MOB_EFFECTS.register("happy", HappyEffect::new);
+    public static final RegistryObject<SpeedEffect> SPEED_EFFECT = MOB_EFFECTS.register("speed", SpeedEffect::new);
     public static final RegistryObject<ExquisitelyStuffedEffect> EXQUISITELY_STUFFED = MOB_EFFECTS.register("exquisitely_stuffed", ExquisitelyStuffedEffect::new);
     public static final RegistryObject<IronSkinEffect> IRON_SKIN = MOB_EFFECTS.register("iron_skin",  IronSkinEffect::new);
-    public static final RegistryObject<SwiftNessEffect> SWIFT_NESS = MOB_EFFECTS.register("swift_ness", SwiftNessEffect::new);
     public static final RegistryObject<RegenerationEffect> REGENERATION = MOB_EFFECTS.register("regeneration", RegenerationEffect::new);
     public static final RegistryObject<EnduranceEffect>  ENDURANCE = MOB_EFFECTS.register("endurance", EnduranceEffect::new);
     public static final RegistryObject<InfernoEffect> INFERNO =  MOB_EFFECTS.register("inferno", InfernoEffect::new);
@@ -40,6 +39,6 @@ public class ModEffects {
     public static final RegistryObject<CursedEffect>  CURSED = MOB_EFFECTS.register("cursed", CursedEffect::new);
     public static final RegistryObject<ConfusedEffect>  CONFUSED = MOB_EFFECTS.register("confused", ConfusedEffect::new);
     public static final RegistryObject<WitheredArmorEffect>  WITHERED_ARMOR = MOB_EFFECTS.register("withered_armor", WitheredArmorEffect::new);
-
+    public static final RegistryObject<IchorEffect>  ICHOR = MOB_EFFECTS.register("ichor", IchorEffect::new);
 
 }
