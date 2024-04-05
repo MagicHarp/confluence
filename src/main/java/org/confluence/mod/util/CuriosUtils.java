@@ -46,14 +46,11 @@ public class CuriosUtils {
     }
 
     public static <C> Optional<C> findCurio(LivingEntity living, Class<C> clazz) {
-        AtomicReference<Optional<C>> atomic = new AtomicReference<>();
+        AtomicReference<Optional<C>> atomic = new AtomicReference<>(Optional.empty());
         CuriosApi.getCuriosInventory(living)
             .ifPresent(handler -> {
                 List<SlotResult> results = handler.findCurios(itemStack -> clazz.isInstance(itemStack.getItem()));
-                if (results.isEmpty()) {
-                    atomic.set(Optional.empty());
-                    return;
-                }
+                if (results.isEmpty()) return;
                 atomic.set(Optional.of(clazz.cast(results.get(0).stack().getItem())));
             });
         return atomic.get();

@@ -7,8 +7,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.util.CuriosUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @param enabled length == 13
@@ -22,7 +23,9 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         return new InfoCurioCheckPacketS2C(friendlyByteBuf.readByteArray());
     }
 
-    public static void send(ServerPlayer serverPlayer, List<ItemStack> items) {
+    public static void send(ServerPlayer serverPlayer) {
+        ArrayList<ItemStack> itemStacks   = CuriosUtils.getCurios(serverPlayer);
+        itemStacks.addAll(serverPlayer.getInventory().items);
         byte watch = 0;
         byte metalDetector = 0;
         byte lifeFormAnalyzer = 0;
@@ -33,7 +36,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         byte depthMeter = 0;
 
         byte mechanicalLens = 0;
-        for (ItemStack stack : items) {
+        for (ItemStack stack : itemStacks) {
             Item item = stack.getItem();
             if (item instanceof MinuteWatch) watch = 1;
             else if (item instanceof HalfHourWatch) watch = 2;
