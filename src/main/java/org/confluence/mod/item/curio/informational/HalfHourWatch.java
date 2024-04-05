@@ -5,10 +5,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.ModRarity;
-import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -26,11 +24,6 @@ public class HalfHourWatch extends AbstractInfoCurio implements IWatch {
             IWatch.format(hour),
             half
         );
-    }
-
-    @Override
-    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return CuriosUtils.noSameCurio(slotContext.entity(), IWatch.class);
     }
 
     @Override

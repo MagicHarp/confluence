@@ -62,6 +62,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.depth_meter.underground", "地下: %s");
         add("info.confluence.tally_counter.unknown", "击杀数不可用");
         add("info.confluence.tally_counter", "已杀死 '");
+        add("info.confluence.life_form_analyzer.none", "未发现稀有生物");
+        add("info.confluence.life_form_analyzer", "发现稀有生物: %s");
+        add("info.confluence.metal_detector.none", "未发现稀有方块");
+        add("info.confluence.metal_detector", "在附近发现%s!");
+        add("info.confluence.stopwatch", "速度: %s mps");
 
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");

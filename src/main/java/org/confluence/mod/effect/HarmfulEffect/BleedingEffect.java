@@ -8,17 +8,19 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class BleedingEffect extends MobEffect { //流血 不能自然恢复生命
-    public BleedingEffect(){
+    public BleedingEffect() {
         super(MobEffectCategory.HARMFUL, 0xA52A2A);
     }
+
     @SubscribeEvent
-    public void noHealthBoost(LivingHealEvent event){
-        if (event.getAmount()>0){
+    public void noHealthBoost(LivingHealEvent event) {
+        if (event.getAmount() > 0) {
             event.setCanceled(true);
         }
     }
-    public void onAdd(LivingEntity entity){
-        if (entity instanceof Player && !entity.isSpectator()){
+
+    public void onAdd(LivingEntity entity) {
+        if (entity instanceof Player && !entity.isSpectator()) {
             noHealthBoost(new LivingHealEvent(entity, 1));
         }
     }

@@ -57,6 +57,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.depth_meter.underground", "Underground: %s");
         add("info.confluence.tally_counter.unknown", "Kill count unavailable");
         add("info.confluence.tally_counter", "Killed '");
+        add("info.confluence.life_form_analyzer.none", "Analyzer unavailable");
+        add("info.confluence.life_form_analyzer", "%s detected nearby!");
+        add("info.confluence.metal_detector.none", "Detector unavailable");
+        add("info.confluence.metal_detector", "%s detected nearby!");
+        add("info.confluence.stopwatch", "Speed: %s mps");
 
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");

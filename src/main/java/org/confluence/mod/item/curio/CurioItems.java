@@ -3,7 +3,6 @@ package org.confluence.mod.item.curio;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
@@ -14,6 +13,8 @@ import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
+
+import static org.confluence.mod.item.ModRarity.*;
 
 public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 粘性绷带 */
@@ -59,7 +60,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     OBSIDIAN_SKULL("obsidian_skull", ObsidianSkull::new), // 黑曜石骷髅头
     MOLTEN_SKULL_ROSE("molten_skull_rose", MoltenSkullRose::new), // 熔火骷髅头玫瑰
     OBSIDIAN_SKULL_ROSE("obsidian_skull_rose", ObsidianSkullRose::new), // 黑曜石骷髅头玫瑰
-    PALADINS_SHIELD("paladins_shield", () -> new PaladinsShield(ModRarity.YELLOW)), // 圣骑士护盾
+    PALADINS_SHIELD("paladins_shield", () -> new PaladinsShield(YELLOW)), // 圣骑士护盾
     PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     /* 袖珍镜 */
     POWER_GLOVE("power_glove", PowerGlove::new), // 强力手套
@@ -130,16 +131,16 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     DEPTH_METER("depth_meter", DepthMeter::new), // 深度计
     COMPASS("compass", Compass::new), // 罗盘
     RADAR("radar", Radar::new), // 雷达
-    /* 生命体分析机 */
+    LIFE_FORM_ANALYZER("life_form_analyzer", LifeFormAnalyzer::new), // 生命体分析机
     TALLY_COUNTER("tally_counter", TallyCounter::new), // 杀怪计数器
-    /* 金属探测器 */
-    /* 秒表 */
+    METAL_DETECTOR("metal_detector", MetalDetector::new), // 金属探测器
+    STOPWATCH("stopwatch", Stopwatch::new), // 秒表
     /* 每秒伤害计数器 */
     /* 渔民袖珍宝典 */
     /* 天气收音机 */
     /* 六分仪 */
     /* 全球定位系统 */
-    /* R.E.K.3000 */
+    REK_3000("rek_3000", REK3000::new), // R.E.K.3000
     /* 哥布林数据仪 */
     /* 探鱼器 */
     /* 个人数字助手 */
@@ -163,20 +164,20 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 忍者大师装备 */
     /* 飞毯 */
     /* 浮游圈 */
-    CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", () -> new CloudInABottle(ModRarity.BLUE)), // 云朵瓶
-    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", () -> new TsunamiInABottle(ModRarity.BLUE)), // 海啸瓶
-    BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", () -> new BlizzardInABottle(ModRarity.BLUE)), // 暴雪瓶
-    SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", () -> new SandstormInABottle(ModRarity.GREEN)), // 沙暴瓶
-    FART_IN_A_BOTTLE("fart_in_a_bottle", () -> new FartInABottle(ModRarity.GREEN)), // 罐中臭屁
+    CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", () -> new CloudInABottle(BLUE)), // 云朵瓶
+    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", () -> new TsunamiInABottle(BLUE)), // 海啸瓶
+    BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", () -> new BlizzardInABottle(BLUE)), // 暴雪瓶
+    SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", () -> new SandstormInABottle(GREEN)), // 沙暴瓶
+    FART_IN_A_BOTTLE("fart_in_a_bottle", () -> new FartInABottle(GREEN)), // 罐中臭屁
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
-    HERMES_BOOTS("hermes_boots", () -> new BaseSpeedBoots(ModRarity.BLUE)), // 赫尔墨斯靴
-    FLURRY_BOOTS("flurry_boots", () -> new BaseSpeedBoots(ModRarity.BLUE)), // 疾风雪靴
-    SAILFISH_BOOTS("sailfish_boots", () -> new BaseSpeedBoots(ModRarity.BLUE)), // 旗鱼靴
+    HERMES_BOOTS("hermes_boots", () -> new BaseSpeedBoots(BLUE)), // 赫尔墨斯靴
+    FLURRY_BOOTS("flurry_boots", () -> new BaseSpeedBoots(BLUE)), // 疾风雪靴
+    SAILFISH_BOOTS("sailfish_boots", () -> new BaseSpeedBoots(BLUE)), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
     /* 仙灵靴 */
-    LIGHTNING_BOOTS("lightning_boots", () -> new LightningBoots(ModRarity.PINK)), // 闪电靴
+    LIGHTNING_BOOTS("lightning_boots", () -> new LightningBoots(PINK)), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
@@ -187,11 +188,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     TERRASPARK_BOOTS("terraspark_boots", TerrasparkBoots::new), // 泰拉闪耀靴
     SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
-    CLOUD_IN_A_BALLOON("cloud_in_a_balloon", () -> new CloudInABalloon(ModRarity.LIGHT_RED)), // 云朵气球
+    CLOUD_IN_A_BALLOON("cloud_in_a_balloon", () -> new CloudInABalloon(LIGHT_RED)), // 云朵气球
     BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
     SANDSTORM_IN_A_BALLOON("sandstorm_in_a_balloon", SandstormInABalloon::new), // 沙暴气球
     FART_IN_A_BALLOON("fart_in_a_balloon", FartInABalloon::new), // 臭屁气球
-    SHARKRON_BALLOON("sharkron_balloon", () -> new SharkronBalloon(ModRarity.BLUE)), // 鲨鱼龙气球
+    SHARKRON_BALLOON("sharkron_balloon", () -> new SharkronBalloon(BLUE)), // 鲨鱼龙气球
     /* 蜂蜜气球 */
     BUNDLE_OF_BALLOONS("bundle_of_balloons", BundleOfBalloons::new), // 气球束
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
@@ -208,6 +209,56 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
     /* 琥珀马掌气球 */
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
+
+    FLEDGLING_WINGS("fledgling_wings", () -> new BaseWings(WHITE, 25, 1.5)), // 雏翼
+    /* 天使之翼 */
+    /* 恶魔之翼 */
+    /* 仙灵之翼 */
+    /* 鳍翼 */
+    /* 冰冻之翼 */
+    /* 鳍翼 */
+    /* 冰冻之翼 */
+    /* 鸟妖之翼 */
+    /* 喷气背包 */
+    /* 叶之翼 */
+    /* 蝙蝠之翼 */
+    /* 蜜蜂之翼 */
+    /* 蝴蝶之翼 */
+    /* 烈焰之翼 */
+    /* 悬浮板 */
+    /* 骨之翼 */
+    /* 蛾怪之翼 */
+    /* 幽灵之翼 */
+    /* 甲虫之翼 */
+    /* 喜庆之翼 */
+    /* 阴森之翼 */
+    /* 褴褛仙灵之翼 */
+    /* 蒸汽朋克之翼 */
+    /* 双足翼龙之翼 */
+    /* 女皇之翼 */
+    /* 猪龙鱼之翼 */
+    /* 星云斗篷 */
+    /* 星旋强化翼 */
+    /* 日耀之翼 */
+    /* 星尘之翼 */
+    /* 天界星盘 */
+
+    /* Red的翅膀 */
+    /* D-Town的翅膀 */
+    /* Will的翅膀 */
+    /* Crowno的翅膀 */
+    /* Cenx的翅膀 */
+    /* Lazure的屏障台 */
+    /* Yoraiz0r的魔法 */
+    /* Jim的翅膀 */
+    /* Skiphs的爪子 */
+    /* Loki的翅膀 */
+    /* Arkhalis的飞翼 */
+    /* Leinfors的卷缠斗篷 */
+    /* Ghostar的无极翼 */
+    /* Safeman的毛毯斗篷 */
+    /* FoodBarbarian的褴褛龙之翼 */
+    /* Grox The Great的翅膀 */
 
 
     /* 服装商巫毒娃娃 */

@@ -6,7 +6,6 @@ import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 
@@ -85,9 +84,5 @@ public class PlayerUtils {
     public static void syncSavedData(ServerPlayer serverPlayer) {
         ConfluenceData data = ConfluenceData.get(serverPlayer.serverLevel());
         NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SpecificMoonPacketS2C(data.getMoonSpecific()));
-    }
-
-    public static void syncInfoCurio(ServerPlayer serverPlayer) {
-        InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory().items);
     }
 }

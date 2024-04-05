@@ -26,16 +26,6 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     }
 
     @Override
-    public int getFlyTicks() {
-        return 32;
-    }
-
-    @Override
-    public double getFlySpeed() {
-        return 0.3;
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ImmutableMultimap.of(
             Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
