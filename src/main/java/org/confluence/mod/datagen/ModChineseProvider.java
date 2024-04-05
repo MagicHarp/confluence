@@ -128,13 +128,21 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.flesh_knuckles.tooltip", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
-        add("item.confluence.fire_gauntlet.tooltip2","使近战伤害和速度各增加10%");
-        add("item.confluence.eye_of_the_golem.tooltip","暴击率提高10%");
-        add("item.confluence.berserkers_glove.tooltip","增加近战击退、启用近战武器自动挥动");
-        add("item.confluence.berserkers_glove.tooltip2","多人模式时，敌人更可能以你为目标");
-        add("item.confluence.destroyer_emblem.tooltip","伤害增加10%、暴击率提高8%");
-        add("item.confluence.cross_necklace.tooltip","增加受到伤害后的无敌时间");
-        add("item.confluence.black_belt.tooltip","有几率避开攻击");
+        add("item.confluence.fire_gauntlet.tooltip2", "使近战伤害和速度各增加10%");
+        add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
+        add("item.confluence.berserkers_glove.tooltip", "增加近战击退、启用近战武器自动挥动");
+        add("item.confluence.berserkers_glove.tooltip2", "多人模式时，敌人更可能以你为目标");
+        add("item.confluence.destroyer_emblem.tooltip", "伤害增加10%、暴击率提高8%");
+        add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
+        add("item.confluence.black_belt.tooltip", "有几率避开攻击");
+        add("item.confluence.terraspark_boots.tooltip2", "移动速度提高8%");
+        add("item.confluence.terraspark_boots.tooltip3", "提供在水、蜂蜜和熔岩上行走的能力");
+        add("item.confluence.terraspark_boots.tooltip4", "对火块免疫，对熔岩免疫7秒");
+        add("item.confluence.stopwatch.tooltip", "显示玩家的移动速度");
+        add("item.confluence.metal_detector.tooltip", "显示你周围最贵重的矿石");
+        add("item.confluence.life_form_analyzer.tooltip", "显示您周围稀有生物的名称");
+        add("item.confluence.rek_3000.tooltip", "显示怪物数量、击杀数量和稀有生物");
+        add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
 
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
@@ -586,6 +594,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.MECHANICAL_GLOVE.get(), "机械手套");
         add(CurioItems.PANIC_NECKLACE.get(), "恐慌项链");
         add(CurioItems.MAGMA_STONE.get(), "岩浆石");
+        add(CurioItems.METAL_DETECTOR.get(), "金属探测器");
+        add(CurioItems.STOPWATCH.get(), "秒表");
+        add(CurioItems.REK_3000.get(), "R.E.K.3000");
+        add(CurioItems.FLEDGLING_WINGS.get(), "雏翼");
+        add(CurioItems.LIFE_FORM_ANALYZER.get(), "生命体分析机");
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
