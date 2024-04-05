@@ -14,7 +14,7 @@ public class GravitationEffect extends MobEffect {
 
     其效果可在空中切换。*/
 
-    public GravitationEffect(){
-        super(MobEffectCategory.NEUTRAL,0x7FFFD4);
+    public GravitationEffect() {
+        super(MobEffectCategory.NEUTRAL, 0x7FFFD4);
     }
 }

@@ -5,10 +5,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,6 +30,11 @@ import org.confluence.mod.item.common.Gels;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClient {
+    @SubscribeEvent
+    public static void keyBinding(RegisterKeyMappingsEvent event) {
+        event.register(KeyBindings.metalDetector.get());
+    }
+
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {

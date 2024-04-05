@@ -9,11 +9,14 @@ import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+import java.util.ArrayList;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin {
@@ -30,7 +33,9 @@ public abstract class ServerPlayerMixin {
                     Inventory inventory = self.getInventory();
                     if (!(slot instanceof ResultSlot) && slot.container == inventory) {
                         CriteriaTriggers.INVENTORY_CHANGED.trigger(self, inventory, itemStack);
-                        InfoCurioCheckPacketS2C.send(self, inventory.items);
+                        ArrayList<ItemStack> curios = CuriosUtils.getCurios(self);
+                        curios.addAll(inventory.items);
+                        InfoCurioCheckPacketS2C.send(self, curios);
                     }
                 }
 

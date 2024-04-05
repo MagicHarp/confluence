@@ -7,11 +7,12 @@ import net.minecraft.world.entity.player.Player;
 
 public class ConfusedEffect extends MobEffect { //困惑 反向移动
     public ConfusedEffect() {
-        super(MobEffectCategory.HARMFUL,0x8B008B);
+        super(MobEffectCategory.HARMFUL, 0x8B008B);
     }
-    public void onAdd(LivingEntity entity){
-        if(entity instanceof Player && entity.hasEffect(this)){
-            entity.setDeltaMovement(entity.getDeltaMovement().x()*-1,entity.getDeltaMovement().y()*-1,entity.getDeltaMovement().z()*-1);
+
+    public void onAdd(LivingEntity entity) {
+        if (entity instanceof Player && entity.hasEffect(this)) {
+            entity.setDeltaMovement(entity.getDeltaMovement().x() * -1, entity.getDeltaMovement().y() * -1, entity.getDeltaMovement().z() * -1);
         }
     }
 }
