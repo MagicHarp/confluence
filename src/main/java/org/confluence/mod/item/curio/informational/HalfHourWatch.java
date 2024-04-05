@@ -16,6 +16,7 @@ public class HalfHourWatch extends AbstractInfoCurio implements IWatch {
     }
 
     public static Component wrapTime(long dayTime) {
+        dayTime = dayTime % 24000;
         long hour = dayTime / 1000 + 6;
         if (hour > 23) hour -= 24;
         String half = dayTime % 1000 > 499 ? "30" : "00";

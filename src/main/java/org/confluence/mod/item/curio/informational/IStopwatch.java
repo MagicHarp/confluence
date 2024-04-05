@@ -7,7 +7,7 @@ public interface IStopwatch {
     static Component getInfo(LocalPlayer localPlayer) {
         return Component.translatable(
             "info.confluence.stopwatch",
-            "%.2f".formatted(localPlayer.getDeltaMovement().length() * 20)
+            "%.2f".formatted(localPlayer.getDeltaMovement().length() * 20 - 1.568)
         );
     }
 }

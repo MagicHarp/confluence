@@ -9,7 +9,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
@@ -66,7 +65,6 @@ public class InformationHandler {
         if (KeyBindings.metalDetector.get().isDown()) {
             if (!detectorPressed && metalDetector != 0) {
                 detectorPressed = true;
-                Confluence.LOGGER.info("key down");
                 metalDetectorInfo = IMetalDetector.getInfo(localPlayer);
             }
         } else {

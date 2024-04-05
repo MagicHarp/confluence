@@ -16,7 +16,7 @@ public class HourWatch extends AbstractInfoCurio implements IWatch {
     }
 
     public static Component wrapTime(long dayTime) {
-        long hour = dayTime / 1000 + 6;
+        long hour = (dayTime % 24000) / 1000 + 6;
         if (hour > 23) hour -= 24;
         return Component.translatable(
             "info.confluence.time",
