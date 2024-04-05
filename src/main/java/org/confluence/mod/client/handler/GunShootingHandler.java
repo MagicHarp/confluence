@@ -18,7 +18,7 @@ public class GunShootingHandler {
             event.setCanceled(true);
 
             if (!baseGunItem.isAuto()) {
-                Minecraft.getInstance().options.keyUse.setDown(false);
+                Minecraft.getInstance().options.keyAttack.setDown(false);
             }
         }
     }

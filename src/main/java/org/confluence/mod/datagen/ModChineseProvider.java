@@ -71,7 +71,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
-        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度");
         add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明(仍在开发中)");
         add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");

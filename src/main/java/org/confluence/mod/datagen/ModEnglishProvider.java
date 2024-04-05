@@ -66,7 +66,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
-        add("item.confluence.magiluminescence.tooltip", "Increases movement speed and acceleration(WIP)");
+        add("item.confluence.magiluminescence.tooltip", "Increases movement speed and acceleration");
         add("item.confluence.magiluminescence.tooltip2", "Provides light when worn(WIP)");
         add("item.confluence.magiluminescence.tooltip3", "'A brief light in my dark life.'");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "Allows the holder to do an improved double jump");

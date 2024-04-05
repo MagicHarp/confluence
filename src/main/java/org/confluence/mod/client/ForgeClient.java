@@ -11,7 +11,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
@@ -48,8 +47,6 @@ public class ForgeClient {
     public static void click(InputEvent.InteractionKeyMappingTriggered event) {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
-
         GunShootingHandler.handle(event, localPlayer);
-        if (ClientPacketHandler.shouldContinueSwing()) event.setSwingHand(true);
     }
 }

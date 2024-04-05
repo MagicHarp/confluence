@@ -18,7 +18,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class BerserkersGlove extends BaseCurioItem implements IAggroAttach {
+public class BerserkersGlove extends BaseCurioItem implements IAggroAttach, IContinueSwing {
     public static final UUID ARMOR_UUID = UUID.fromString("4CB3ACFA-DD90-C6EA-3FD2-95469EFE2AA4");
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("7736D2EF-0A57-D622-A8B0-2C4942EC572A");
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("DF71E32B-22B5-8F93-4550-12A6B8E98B4B");
