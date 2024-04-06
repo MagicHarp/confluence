@@ -6,18 +6,27 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
+import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 import org.jetbrains.annotations.NotNull;
 
 public class ConfluenceData extends SavedData {
-    private int moonSpecific = -1;
-    private int gamePhase = 0; // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
+    private int moonSpecific;
+    private int gamePhase; // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
+    private float windSpeedX;
+    private float windSpeedZ;
 
     public ConfluenceData() {
+        this.moonSpecific = -1;
+        this.gamePhase = 0;
+        this.windSpeedX = 0.0F;
+        this.windSpeedZ = 0.0F;
     }
 
     public ConfluenceData(CompoundTag nbt) {
         this.moonSpecific = nbt.getInt("moonSpecific");
         this.gamePhase = nbt.getInt("gamePhase");
+        this.windSpeedX = nbt.getFloat("windSpeedX");
+        this.windSpeedZ = nbt.getFloat("windSpeedZ");
     }
 
     public static ConfluenceData get(ServerLevel serverLevel) {
@@ -26,10 +35,7 @@ public class ConfluenceData extends SavedData {
 
     public void setMoonSpecific(int moonSpecific) {
         this.moonSpecific = moonSpecific;
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.ALL.noArg(),
-            new SpecificMoonPacketS2C(moonSpecific)
-        );
+        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SpecificMoonPacketS2C(moonSpecific));
         setDirty();
     }
 
@@ -46,10 +52,27 @@ public class ConfluenceData extends SavedData {
         return gamePhase;
     }
 
+    public void setWindSpeed(float x, float z) {
+        this.windSpeedX = x;
+        this.windSpeedZ = z;
+        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new WindSpeedPacketS2C(x, z));
+        setDirty();
+    }
+
+    public float getWindSpeedX() {
+        return windSpeedX;
+    }
+
+    public float getWindSpeedZ() {
+        return windSpeedZ;
+    }
+
     @Override
     public @NotNull CompoundTag save(@NotNull CompoundTag nbt) {
         nbt.putInt("moonSpecific", moonSpecific);
         nbt.putInt("gamePhase", gamePhase);
+        nbt.putFloat("windSpeedX", windSpeedX);
+        nbt.putFloat("windSpeedZ", windSpeedZ);
         return nbt;
     }
 }

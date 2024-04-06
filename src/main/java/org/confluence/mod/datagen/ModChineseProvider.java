@@ -82,6 +82,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.sextant.5", "月相: 峨眉月");
         add("info.confluence.sextant.6", "月相: 上弦月");
         add("info.confluence.sextant.7", "月相: 盈凸月");
+        add("info.confluence.weather_radio.clear", "天气: 晴天, 风速: %s");
+        add("info.confluence.weather_radio.cloudy", "天气: 阴天, 风速: %s");
+        add("info.confluence.weather_radio.rain", "天气: 下雨, 风速: %s");
+        add("info.confluence.weather_radio.snow", "天气: 下雪, 风速: %s");
+        add("info.confluence.weather_radio.thunder", "天气: 雷暴, 风速: %s");
+        add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");

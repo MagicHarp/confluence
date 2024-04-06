@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.scores.Team;
+import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.util.CuriosUtils;
@@ -20,7 +21,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class PaladinsShield extends BaseCurioItem {
+public class PaladinsShield extends BaseCurioItem implements CustomName {
     public static final UUID ARMOR_UUID = UUID.fromString("276CFD23-08F7-50D5-8797-C7F4E1DAD96E");
     public static final UUID RESISTANCE_UUID = UUID.fromString("E4816CB8-0453-3050-70A6-2D0075E84FC5");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
@@ -66,5 +67,10 @@ public class PaladinsShield extends BaseCurioItem {
 
     protected static boolean shouldSkip(Player playerA, Team team, Player playerB) {
         return playerA.getTeam() != team || playerA.getScoreboardName().equals(playerB.getScoreboardName());
+    }
+
+    @Override
+    public String getName() {
+        return "Paladin's Shield";
     }
 }

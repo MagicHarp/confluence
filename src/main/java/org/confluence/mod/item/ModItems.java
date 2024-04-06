@@ -12,7 +12,6 @@ import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
-import org.confluence.mod.item.magic.MagicMirror;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
@@ -34,6 +33,7 @@ public class ModItems {
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<Item> ROPE = ITEMS.register("rope", BaseItem::new);
     public static final RegistryObject<Item> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
+    public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
     //  Throwable
     public static final RegistryObject<Item> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
 

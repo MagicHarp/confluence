@@ -27,9 +27,9 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         ArrayList<ItemStack> itemStacks = CuriosUtils.getCurios(serverPlayer);
         itemStacks.addAll(serverPlayer.getInventory().items);
         byte watch = 0;
-
+        byte weatherRadio = 0;
         byte sextant = 0;
-
+        byte fishermansPocketGuide = 0;
         byte metalDetector = 0;
         byte lifeFormAnalyzer = 0;
         byte radar = 0;
@@ -44,9 +44,9 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
             if (item instanceof MinuteWatch) watch = 1;
             else if (item instanceof HalfHourWatch) watch = 2;
             else if (item instanceof HourWatch) watch = 3;
-
+            if (item instanceof IWeatherRadio) weatherRadio = 1;
             if (item instanceof ISextant) sextant = 1;
-
+            if (item instanceof IFishermansPocketGuide) fishermansPocketGuide = 1;
             if (item instanceof IMetalDetector) metalDetector = 1;
             if (item instanceof ILifeFormAnalyzer) lifeFormAnalyzer = 1;
             if (item instanceof IRadar) radar = 1;
@@ -60,8 +60,8 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new InfoCurioCheckPacketS2C(new byte[]{
-                watch, 0, sextant, 0, metalDetector, lifeFormAnalyzer, radar,
-                tallyCounter, dpsMeter, stopwatch, compass, depthMeter, mechanicalLens
+                watch, weatherRadio, sextant, fishermansPocketGuide, metalDetector, lifeFormAnalyzer,
+                radar, tallyCounter, dpsMeter, stopwatch, compass, depthMeter, mechanicalLens
             })
         );
     }
