@@ -78,6 +78,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.sextant.5", "Moon phase: Waxing Crescent");
         add("info.confluence.sextant.6", "Moon phase: First Quarter");
         add("info.confluence.sextant.7", "Moon phase: Waxing Gibbous");
+        add("info.confluence.weather_radio.clear", "Weather: Clear, Wind Speed: %s");
+        add("info.confluence.weather_radio.cloudy", "Weather: Cloudy, Wind Speed: %s");
+        add("info.confluence.weather_radio.rain", "Weather: Rain, Wind Speed: %s");
+        add("info.confluence.weather_radio.snow", "Weather: Snow, Wind Speed: %s");
+        add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
 
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");

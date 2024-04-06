@@ -8,6 +8,7 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
+import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -83,6 +84,11 @@ public class PlayerUtils {
 
     public static void syncSavedData(ServerPlayer serverPlayer) {
         ConfluenceData data = ConfluenceData.get(serverPlayer.serverLevel());
-        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SpecificMoonPacketS2C(data.getMoonSpecific()));
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new SpecificMoonPacketS2C(data.getMoonSpecific()));
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new WindSpeedPacketS2C(data.getWindSpeedX(), data.getWindSpeedZ()));
     }
 }
