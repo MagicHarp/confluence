@@ -31,4 +31,10 @@ public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance,
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return LuckyHorseshoe.LUCKY;
     }
+
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+        list.add(IFallResistance.TOOLTIP);
+        list.add(IFireImmune.TOOLTIP);
+    }
 }

@@ -25,7 +25,7 @@ public class ForgeClient {
         PlayerJumpHandler.handle(localPlayer);
         InformationHandler.update(localPlayer);
 
-        ModRarity.Animate.doUpdateRainbowColor();
+        ModRarity.Animate.doUpdateExpertColor();
         ModRarity.Animate.doUpdateMasterColor();
     }
 
@@ -34,7 +34,7 @@ public class ForgeClient {
         Item item = event.getItemStack().getItem();
         if (item instanceof ModRarity.Expert expert) {
             event.getTooltipElements().set(0, Either.left(expert.getComponent()
-                .withStyle(style -> style.withColor(ModRarity.Animate.getRainbowColor()))
+                .withStyle(style -> style.withColor(ModRarity.Animate.getExpertColor()))
             ));
         } else if (item instanceof ModRarity.Master master) {
             event.getTooltipElements().set(0, Either.left(master.getComponent()

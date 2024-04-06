@@ -51,6 +51,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.negates_fall_damage", "消除掉落伤害");
         add("curios.tooltip.fall_resistance", "增加抗坠落性");
         add("curios.tooltip.watch", "报时");
+        add("curios.tooltip.fire_immune", "对火块免疫");
+        add("curios.tooltip.fluid_walk.part", "提供在水和蜂蜜上行走的能力");
+        add("curios.tooltip.fluid_walk.all", "提供在水、蜂蜜、岩浆上行走的能力");
+        add("curios.tooltip.lava_immune", "对岩浆免疫7秒");
+        add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
+        add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -87,17 +93,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.lucky_horseshoe.tooltip", "“据说能带来好运、驱除邪灵”");
         add("item.confluence.lightning_boots.tooltip", "可飞行、可飞速奔跑");
         add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
-        add("item.confluence.obsidian_horseshoe.tooltip", "消除掉落伤害、对火块免疫");
-        add("item.confluence.obsidian_water_walking_boots.tooltip", "提供在水上行走的能力、对火块免疫");
-        add("item.confluence.lava_waders.tooltip", "提供在水、蜂蜜、岩浆上行走的能力");
         add("item.confluence.lava_waders.tooltip2", "对火块免疫、对岩浆免疫7秒");
         add("item.confluence.bundle_of_balloons.tooltip", "可让持有者四段跳");
         add("item.confluence.water_walking_boots.tooltip", "提供在水和蜂蜜上行走的能力");
-        add("item.confluence.molten_charm.tooltip", "对火块免疫、对岩浆免疫7秒");
         add("item.confluence.magma_skull.tooltip", "对火块免疫、近战攻击造成火焰伤害");
-        add("item.confluence.lava_charm.tooltip", "对岩浆免疫7秒");
-        add("item.confluence.frostspark_boots.tooltip", "可飞行、可飞速奔跑");
-        add("item.confluence.frostspark_boots.tooltip2", "提供额外冰面行动力、落到冰上时冰不会碎");
+        add("item.confluence.frostspark_boots.tooltip", "可飞行、飞速奔跑、并提供额外冰面行动力");
         add("item.confluence.tally_counter.tooltip", "显示怪物击杀数量");
         add("item.confluence.radar.tooltip", "探测你周围的敌人");
         add("item.confluence.compass.tooltip", "显示水平位置");
@@ -109,21 +109,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.putrid_scent.tooltip2", "伤害和暴击率增加5%");
         add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
         add("item.confluence.power_glove.tooltip2", "启用近战武器自动挥动");
+        add("item.confluence.feral_claws.tooltip", "启用近战武器自动挥动");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
-        add("item.confluence.paladins_shield.tooltip2", "免疫击退");
-        add("item.confluence.obsidian_skull_rose.tooltip", "对火块免疫、减少触碰岩浆造成的伤害");
-        add("item.confluence.molten_skull_rose.tooltip", "对火块免疫、减少触碰岩浆造成的伤害");
-        add("item.confluence.molten_skull_rose.tooltip2", "近战攻击造成火焰伤害");
-        add("item.confluence.obsidian_skull.tooltip", "对火块免疫");
-        add("item.confluence.obsidian_shield.tooltip", "对击退免疫、对火块免疫");
-        add("item.confluence.obsidian_rose.tooltip", "减少触碰岩浆造成的伤害");
-        add("item.confluence.magma_stone.tooltip", "近战攻击造成火焰伤害");
-        add("item.confluence.mechanical_glove.tooltip", "近战伤害和近战速度提升12%");
-        add("item.confluence.mechanical_glove.tooltip2", "增加近战击退、启用近战武器自动挥动");
-        add("item.confluence.hero_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
+        add("item.confluence.mechanical_glove.tooltip", "启用近战武器自动挥动");
         add("item.confluence.hero_shield.tooltip2", "多人模式时，敌人更可能以你为目标");
-        add("item.confluence.frozen_shield.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.frozen_shield.tooltip2", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.flesh_knuckles.tooltip", "多人模式时，敌人更可能以你为目标");
@@ -132,18 +122,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
         add("item.confluence.berserkers_glove.tooltip", "增加近战击退、启用近战武器自动挥动");
         add("item.confluence.berserkers_glove.tooltip2", "多人模式时，敌人更可能以你为目标");
-        add("item.confluence.destroyer_emblem.tooltip", "伤害增加10%、暴击率提高8%");
+        add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
         add("item.confluence.black_belt.tooltip", "有几率避开攻击");
-        add("item.confluence.terraspark_boots.tooltip2", "移动速度提高8%");
-        add("item.confluence.terraspark_boots.tooltip3", "提供在水、蜂蜜和熔岩上行走的能力");
-        add("item.confluence.terraspark_boots.tooltip4", "对火块免疫，对熔岩免疫7秒");
+        add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.stopwatch.tooltip", "显示玩家的移动速度");
         add("item.confluence.metal_detector.tooltip", "显示你周围最贵重的矿石");
         add("item.confluence.life_form_analyzer.tooltip", "显示您周围稀有生物的名称");
         add("item.confluence.rek_3000.tooltip", "显示怪物数量、击杀数量和稀有生物");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
-
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 

@@ -27,7 +27,7 @@ public class LavaWaders extends BaseCurioItem implements IFireImmune, ILavaImmun
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
+        list.add(IFluidWalk.ALL_FLUID);
         list.add(Component.translatable("item.confluence.lava_waders.tooltip2"));
     }
 }

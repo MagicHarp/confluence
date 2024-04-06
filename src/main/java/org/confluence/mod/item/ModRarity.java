@@ -4,6 +4,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.confluence.mod.Confluence;
 
 public class ModRarity {
     public static final Rarity GRAY = Rarity.create("gray", style -> style.withColor(0x828282));
@@ -30,7 +31,7 @@ public class ModRarity {
         private static int DiscoG = 0;
         private static final int update = 7;
 
-        public static void doUpdateRainbowColor() {
+        public static void doUpdateExpertColor() {
             if (DiscoStyle == 0) {
                 DiscoG += update;
                 if (DiscoG >= Byte.MAX_VALUE) {
@@ -73,7 +74,7 @@ public class ModRarity {
             DiscoStyle = 0;
         }
 
-        public static int getRainbowColor() {
+        public static int getExpertColor() {
             return ((DiscoR + 64) << 16) + ((DiscoG + 64) << 8) + (DiscoB + 64);
         }
 
@@ -101,6 +102,7 @@ public class ModRarity {
         }
 
         public static int getMasterColor() {
+            Confluence.LOGGER.info("%s, %s".formatted(mouseTextColor, masterColor));
             return ((int) mouseTextColor << 16) + ((int) masterColor << 8);
         }
     }

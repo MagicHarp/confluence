@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.combat;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,4 +28,6 @@ public interface IFireImmune {
         }
         return false;
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.fire_immune");
 }

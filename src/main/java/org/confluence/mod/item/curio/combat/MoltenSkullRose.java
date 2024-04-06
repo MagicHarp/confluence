@@ -18,7 +18,7 @@ public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILava
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(Component.translatable("item.confluence.molten_skull_rose.tooltip2"));
+        list.add(IFireImmune.TOOLTIP);
+        list.add(ILavaImmune.TOOLTIP);
     }
 }

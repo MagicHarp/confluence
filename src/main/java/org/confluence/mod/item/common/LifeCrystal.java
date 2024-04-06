@@ -41,9 +41,9 @@ public class LifeCrystal extends Item {
     public static void applyModifier(Player player, PlayerAbility playerAbility) {
         AttributeInstance attributeInstance = player.getAttributes().getInstance(Attributes.MAX_HEALTH);
         if (attributeInstance == null) return;
-        attributeInstance.removeModifier(LifeCrystal.HEALTH_UUID);
+        attributeInstance.removeModifier(HEALTH_UUID);
         attributeInstance.addPermanentModifier(new AttributeModifier(
-            LifeCrystal.HEALTH_UUID, "Life Crystal",
+            HEALTH_UUID, "Life Crystal",
             playerAbility.getCrystals() * 4,
             AttributeModifier.Operation.ADDITION
         ));

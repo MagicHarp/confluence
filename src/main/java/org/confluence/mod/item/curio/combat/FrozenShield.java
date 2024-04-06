@@ -54,7 +54,7 @@ public class FrozenShield extends PaladinsShield {
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(Component.translatable("item.confluence.frozen_shield.tooltip2"));
+        super.appendHoverText(itemStack, level, list, tooltipFlag);
     }
 }

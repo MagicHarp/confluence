@@ -51,10 +51,8 @@ public class TerrasparkBoots extends FrostSparkBoots implements IFireImmune, ILa
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
+        list.add(IFluidWalk.ALL_FLUID);
         list.add(Component.translatable("item.confluence.terraspark_boots.tooltip2"));
-        list.add(Component.translatable("item.confluence.terraspark_boots.tooltip3"));
-        list.add(Component.translatable("item.confluence.terraspark_boots.tooltip4"));
+        list.add(ILavaHurtReduce.TOOLTIP);
     }
-
-
 }

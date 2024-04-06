@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.combat;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,4 +26,6 @@ public interface ILavaHurtReduce {
         }
         return amount;
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.lava_hurt_reduce");
 }
