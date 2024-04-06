@@ -56,7 +56,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.fluid_walk.all", "提供在水、蜂蜜、岩浆上行走的能力");
         add("curios.tooltip.lava_immune", "对岩浆免疫7秒");
         add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
-        add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
+        add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -102,7 +102,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.radar.tooltip", "探测你周围的敌人");
         add("item.confluence.compass.tooltip", "显示水平位置");
         add("item.confluence.depth_meter.tooltip", "显示深度");
-        add("item.confluence.titan_glove.tooltip", "增加近战击退、启用近战武器自动挥动");
+        add("item.confluence.titan_glove.tooltip", "启用近战武器自动挥动");
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
         add("item.confluence.putrid_scent.tooltip", "多人模式下，敌怪不太可能以你为目标");

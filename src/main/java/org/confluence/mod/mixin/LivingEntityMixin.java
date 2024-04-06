@@ -5,6 +5,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
@@ -13,10 +15,7 @@ import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -63,6 +62,36 @@ public abstract class LivingEntityMixin {
             CuriosUtils.findCurio(player, IFluidWalk.class)
                 .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
         }
+    }
+
+    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canStandOnFluid(Lnet/minecraft/world/level/material/FluidState;)Z"))
+    private boolean onFluid(LivingEntity instance, FluidState fluidState) {
+        return false;
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
+    private Vec3 waterWalk(Vec3 par1) {
+        return c$getWalkVec(par1);
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 2))
+    private Vec3 lavaJump(Vec3 par1) {
+        return c$getWalkVec(par1);
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 4))
+    private Vec3 lavaWalk(Vec3 par1) {
+        return c$getWalkVec(par1);
+    }
+
+    @Unique
+    private Vec3 c$getWalkVec(Vec3 par1) {
+        LivingEntity self = c$getSelf();
+        if (self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get() && self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
+            double horizon = self.getSpeed() * 1.0;
+            return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+        }
+        return par1;
     }
 
     @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
