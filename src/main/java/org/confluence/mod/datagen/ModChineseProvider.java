@@ -601,6 +601,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.REK_3000.get(), "R.E.K.3000");
         add(CurioItems.FLEDGLING_WINGS.get(), "雏翼");
         add(CurioItems.LIFE_FORM_ANALYZER.get(), "生命体分析机");
+        add(CurioItems.DPS_METER.get(), "每秒伤害计数器");
+        add(CurioItems.FISHERMANS_POCKET_GUIDE.get(), "渔民袖珍宝典");
+        add(CurioItems.WEATHER_RADIO.get(), "天气收音机");
+        add(CurioItems.SEXTANT.get(), "六分仪");
+        add(CurioItems.GPS.get(), " 全球定位系统");
+        add(CurioItems.GOBLIN_TECH.get(), "哥布林数据仪");
+        add(CurioItems.FISH_FINDER.get(), "探鱼器");
+        add(CurioItems.PDA.get(), "个人数字助手");
+
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
