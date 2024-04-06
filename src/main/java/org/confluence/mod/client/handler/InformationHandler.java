@@ -29,7 +29,7 @@ public class InformationHandler {
     private static byte time = 0;
     private static byte weatherRadio = 0;
     private static byte sextant = 0;
-
+    private static byte fishermansPocketGuide = 0;
     private static byte metalDetector = 0;
     private static byte lifeFormAnalyzer = 0;
     private static byte radar = 0;
@@ -77,7 +77,10 @@ public class InformationHandler {
         if (sextant < 0 && gameTime % 200 == 2 && nearPlayerNoCurio(localPlayer, ISextant.class)) {
             sextant = 0;
         }
-        /* 渔力 */
+        if (fishermansPocketGuide != 0) information.add(IFishermansPocketGuide.getInfo(localPlayer));
+        if (fishermansPocketGuide < 0 && gameTime % 200 == 3 && nearPlayerNoCurio(localPlayer, IFishermansPocketGuide.class)) {
+            fishermansPocketGuide = 0;
+        }
         if (KeyBindings.metalDetector.get().isDown()) {
             if (!detectorPressed && metalDetector != 0) {
                 detectorPressed = true;
@@ -160,7 +163,7 @@ public class InformationHandler {
             }
             weatherRadio = enabled[1];
             sextant = enabled[2];
-
+            fishermansPocketGuide = enabled[3];
             metalDetector = enabled[4];
             lifeFormAnalyzer = enabled[5];
             radar = enabled[6];
