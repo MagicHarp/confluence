@@ -88,7 +88,7 @@ public abstract class LivingEntityMixin {
     private Vec3 c$getWalkVec(Vec3 par1) {
         LivingEntity self = c$getSelf();
         if (self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get() && self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
-            double horizon = self.getSpeed() * 1.0;
+            double horizon = self.getSpeed() * 9.1;
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
         }
         return par1;
