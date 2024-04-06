@@ -26,13 +26,16 @@ public class ConfluenceOverlays {
         int top = screenHeight - gui.leftHeight;
         int currentMana = ClientPacketHandler.getCurrentMana();
         guiGraphics.blit(MANA_BAR, left, top, 0, 0, 82, 7, 82, 35);
-        if (currentMana <= 82) {
-            guiGraphics.blit(MANA_BAR, left, top, 0, 7, currentMana, 7, 82, 35);
-        } else if (currentMana <= 164) {
-            guiGraphics.blit(MANA_BAR, left, top, 0, 14, currentMana - 82, 7, 82, 35);
-        } else if (currentMana <= 246) {
-            guiGraphics.blit(MANA_BAR, left, top, 0, 21, currentMana - 164, 7, 82, 35);
-        } else {
+        if (currentMana <= 164) {
+            guiGraphics.blit(MANA_BAR, left, top, 0, 7, Math.min(currentMana, 82), 7, 82, 35);
+        }
+        if (currentMana > 82 && currentMana <= 246) {
+            guiGraphics.blit(MANA_BAR, left, top, 0, 14, Math.min(currentMana - 82, 82), 7, 82, 35);
+        }
+        if (currentMana > 164) {
+            guiGraphics.blit(MANA_BAR, left, top, 0, 21, Math.min(currentMana - 164, 82), 7, 82, 35);
+        }
+        if (currentMana > 246) {
             int width = (int) Math.ceil((double) currentMana / ClientPacketHandler.getMaxMana()) * 82;
             guiGraphics.blit(MANA_BAR, left, top, 0, 28, width, 7, 82, 35);
         }

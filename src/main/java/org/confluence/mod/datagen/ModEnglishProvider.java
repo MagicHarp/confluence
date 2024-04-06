@@ -11,6 +11,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.curio.informational.REK3000;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -129,13 +130,16 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
+        add("item.confluence.rek_3000", "R.E.K.3000");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
         });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
-            if (!(item1 instanceof BlockItem)) add(item1, toTitleCase(item.getId().getPath()));
+            if(item1 instanceof BlockItem || item1 instanceof REK3000) return;
+            add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.MOB_EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));

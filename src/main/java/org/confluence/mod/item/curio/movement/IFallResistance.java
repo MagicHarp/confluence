@@ -23,7 +23,7 @@ public interface IFallResistance {
             .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance()));
         int reduce = atomic.get();
         if (reduce < 0) return 0.0F;
-        return Math.min(amount - reduce, 0.0F);
+        return Math.max(amount - reduce, 0.0F);
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.fall_resistance");
