@@ -645,7 +645,32 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLATINUM_LEGGINGS.get(),"铂金护腿");
         add(Armors.PLATINUM_BOOTS.get(),"铂金靴子");
 
-
+//鱼
+        add(Materials.SEA_BASS.get(),"鲈鱼");
+        add(Materials.ATLANTIC_COD.get(),"大西洋鳕鱼");
+        add(Materials.ARMORED_CAVE_FISH.get(),"装甲洞穴鱼");
+        add(Materials.CHAOS_FISH.get(),"混沌鱼");
+        add(Materials.SCARLET_TIGER_FISH.get(),"猩红虎鱼");
+        add(Materials.DAMSEL_FISH.get(),"雀鲷");
+        add(Materials.PISCES_FIN_COD.get(),"双鳍鳕鱼");
+        add(Materials.EBONY_KOI.get(),"黑檀锦鲤");
+        add(Materials.FLASHFIN_KOI.get(),"闪耀锦鲤");
+        add(Materials.PARTIAL_MOUTH_FISH.get(),"偏口鱼");
+        add(Materials.FROSTY_MINNOW.get(),"寒霜鲦鱼");
+        add(Materials.GOLDEN_CARP.get(),"金鲤鱼");
+        add(Materials.BLOODY_PIRANHAS.get(),"血腥食人鱼");
+        add(Materials.NEON_GREASE_CARP.get(),"霓虹脂鲤");
+        add(Materials.OBSIDIAN_FISH.get(),"黑曜石鱼");
+        add(Materials.PRINCESS_FISH.get(),"公主鱼");
+        add(Materials.COLORFUL_MINERAL_FISH.get(),"七彩矿鱼");
+        add(Materials.RED_SNAPPER.get(),"红鲷鱼");
+        add(Materials.ROCK_LOBSTER.get(),"岩石龙虾");
+        add(Materials.SALMON.get(),"三文鱼");
+        add(Materials.SHRIMP.get(),"虾");
+        add(Materials.MIRROR_FISH.get(),"镜面鱼");
+        add(Materials.STINKY_FISH.get(),"臭味鱼");
+        add(Materials.TUNA.get(),"金枪鱼");
+        add(Materials.MOTTLED_OILFISH.get(),"斑驳油鱼");
         //endregion items
     }
 }
