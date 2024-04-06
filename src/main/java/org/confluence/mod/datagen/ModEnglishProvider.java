@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.curio.informational.REK3000;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -68,7 +68,16 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.life_form_analyzer", "%s detected nearby!");
         add("info.confluence.metal_detector.none", "No treasure nearby!");
         add("info.confluence.metal_detector", "%s detected nearby!");
-        add("info.confluence.stopwatch", "Speed: %s mps");
+        add("info.confluence.stopwatch", "Speed: %s m/s");
+        add("info.confluence.dps_meter", "DPS: %s");
+        add("info.confluence.sextant.0", "Moon phase: Full Moon");
+        add("info.confluence.sextant.1", "Moon phase: Waning Gibbous");
+        add("info.confluence.sextant.2", "Moon phase: Third Quarter");
+        add("info.confluence.sextant.3", "Moon phase: Waning Crescent");
+        add("info.confluence.sextant.4", "Moon phase: New Moon");
+        add("info.confluence.sextant.5", "Moon phase: Waxing Crescent");
+        add("info.confluence.sextant.6", "Moon phase: First Quarter");
+        add("info.confluence.sextant.7", "Moon phase: Waxing Gibbous");
 
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
@@ -130,16 +139,15 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
-        add("item.confluence.rek_3000", "R.E.K.3000");
-
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
         });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
-            if(item1 instanceof BlockItem || item1 instanceof REK3000) return;
-            add(item1, toTitleCase(item.getId().getPath()));
+            if (item1 instanceof BlockItem) return;
+            if (item1 instanceof CustomName customName) add(item1, customName.getName());
+            else add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.MOB_EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));

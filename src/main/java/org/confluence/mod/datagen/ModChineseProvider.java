@@ -72,7 +72,16 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.life_form_analyzer", "发现稀有生物: %s");
         add("info.confluence.metal_detector.none", "未发现稀有方块");
         add("info.confluence.metal_detector", "在附近发现%s!");
-        add("info.confluence.stopwatch", "速度: %s mps");
+        add("info.confluence.stopwatch", "速度: %s m/s");
+        add("info.confluence.dps_meter", "DPS: %s");
+        add("info.confluence.sextant.0", "月相: 满月");
+        add("info.confluence.sextant.1", "月相: 亏凸月");
+        add("info.confluence.sextant.2", "月相: 下弦月");
+        add("info.confluence.sextant.3", "月相: 残月");
+        add("info.confluence.sextant.4", "月相: 新月");
+        add("info.confluence.sextant.5", "月相: 峨眉月");
+        add("info.confluence.sextant.6", "月相: 上弦月");
+        add("info.confluence.sextant.7", "月相: 盈凸月");
 
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
