@@ -15,7 +15,7 @@ public class WrathEffect extends MobEffect {    //怒气 攻击+10
 
     private static final UUID WRATH_UUID = UUID.fromString("E503A08A-1667-F60A-735F-5C3CDC8C90CC");
     private static final ImmutableMultimap<Attribute, AttributeModifier> WRATH = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(WRATH_UUID, "wrath", 10, AttributeModifier.Operation.ADDITION)
+            Attributes.ATTACK_DAMAGE, new AttributeModifier(WRATH_UUID, "wrath", 10, AttributeModifier.Operation.ADDITION)
     );
 
     public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {

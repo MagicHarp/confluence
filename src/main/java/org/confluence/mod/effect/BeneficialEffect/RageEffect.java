@@ -12,7 +12,7 @@ import java.util.UUID;
 public class RageEffect extends MobEffect { //暴怒 暴击率增加10%
     private static final UUID RAGE_UUID = UUID.fromString("C3018361-D622-37F2-CECD-F397B8B67349");
     private static final ImmutableMultimap<Attribute, AttributeModifier> RAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(RAGE_UUID, "Rage", 10, AttributeModifier.Operation.ADDITION)
+            Attributes.ATTACK_DAMAGE, new AttributeModifier(RAGE_UUID, "Rage", 10, AttributeModifier.Operation.ADDITION)
     );
 
     public RageEffect() {

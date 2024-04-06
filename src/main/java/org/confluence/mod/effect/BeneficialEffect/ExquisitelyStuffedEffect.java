@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满意/酒足饭饱
     private static final UUID SPEED_UUID = UUID.fromString("3043D990-320B-2E80-FD32-FDB6BBCDC503");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED_MODIFIER = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Exquisitely Stuffed Speed", 0.05, AttributeModifier.Operation.ADDITION)
+            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Exquisitely Stuffed Speed", 0.05, AttributeModifier.Operation.ADDITION)
     );
 
     public ExquisitelyStuffedEffect() {
