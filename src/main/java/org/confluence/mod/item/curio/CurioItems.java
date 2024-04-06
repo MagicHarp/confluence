@@ -135,13 +135,13 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     TALLY_COUNTER("tally_counter", TallyCounter::new), // 杀怪计数器
     METAL_DETECTOR("metal_detector", MetalDetector::new), // 金属探测器
     STOPWATCH("stopwatch", Stopwatch::new), // 秒表
-    /* 每秒伤害计数器 */
+    DPS_METER("dps_meter", DPSMeter::new), // 每秒伤害计数器
     /* 渔民袖珍宝典 */
     /* 天气收音机 */
-    /* 六分仪 */
-    /* 全球定位系统 */
+    SEXTANT("sextant", Sextant::new), // 六分仪
+    GPS("gps", GPS::new), // 全球定位系统
     REK_3000("rek_3000", REK3000::new), // R.E.K.3000
-    /* 哥布林数据仪 */
+    GOBLIN_TECH("goblin_tech", GoblinTech::new), // 哥布林数据仪
     /* 探鱼器 */
     /* 个人数字助手 */
     MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
