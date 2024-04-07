@@ -684,8 +684,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.PRINCESS_FISH.get(),"公主鱼");
         add(Materials.COLORFUL_MINERAL_FISH.get(),"七彩矿鱼");
         add(Materials.RED_SNAPPER.get(),"红鲷鱼");
+        add(Materials.TROUT.get(),"鳟鱼");
         add(Materials.ROCK_LOBSTER.get(),"岩石龙虾");
-        add(Materials.SALMON.get(),"三文鱼");
+        add(Materials.SALMON.get(),"异域鲑鱼");
         add(Materials.SHRIMP.get(),"虾");
         add(Materials.MIRROR_FISH.get(),"镜面鱼");
         add(Materials.STINKY_FISH.get(),"臭味鱼");

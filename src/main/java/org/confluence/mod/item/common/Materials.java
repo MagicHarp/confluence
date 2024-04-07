@@ -85,6 +85,7 @@ public enum Materials implements EnumRegister<Item> {
     SALMON("salmon"),
     TUNA("tuna"),
     RED_SNAPPER("red_snapper"),
+    TROUT("trout"),
     ARMORED_CAVE_FISH("armored_cave_fish"),
     MIRROR_FISH("mirror_fish"),
     STINKY_FISH("stinky_fish"),
