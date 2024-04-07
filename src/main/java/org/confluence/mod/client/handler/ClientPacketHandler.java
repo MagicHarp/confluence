@@ -20,7 +20,7 @@ public class ClientPacketHandler {
 
     private static boolean echoBlockVisible = false;
     private static boolean showHolyWaterColor = false;
-    private static boolean continueSwing = false;
+    private static boolean autoAttack = false;
 
     private static ResourceLocation specificMoon = null;
 
@@ -79,8 +79,8 @@ public class ClientPacketHandler {
         return showHolyWaterColor;
     }
 
-    public static boolean shouldContinueSwing() {
-        return continueSwing;
+    public static boolean couldAutoAttack() {
+        return autoAttack;
     }
 
     public static @Nullable ResourceLocation getSpecificMoon() {
@@ -89,7 +89,7 @@ public class ClientPacketHandler {
 
     public static void handleSwing(ContinuingSwingHandPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> continueSwing = packet.swing());
+        context.enqueueWork(() -> autoAttack = packet.autoAttack());
         context.setPacketHandled(true);
     }
 }

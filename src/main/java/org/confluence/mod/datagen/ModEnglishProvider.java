@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.curio.informational.REK3000;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -53,6 +53,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.lava_immune", "Provides 7 seconds of immunity to lava");
         add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
         add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
+        add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -68,7 +69,22 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.life_form_analyzer", "%s detected nearby!");
         add("info.confluence.metal_detector.none", "No treasure nearby!");
         add("info.confluence.metal_detector", "%s detected nearby!");
-        add("info.confluence.stopwatch", "Speed: %s mps");
+        add("info.confluence.stopwatch", "Speed: %s m/s");
+        add("info.confluence.dps_meter", "DPS: %s");
+        add("info.confluence.sextant.0", "Moon phase: Full Moon");
+        add("info.confluence.sextant.1", "Moon phase: Waning Gibbous");
+        add("info.confluence.sextant.2", "Moon phase: Third Quarter");
+        add("info.confluence.sextant.3", "Moon phase: Waning Crescent");
+        add("info.confluence.sextant.4", "Moon phase: New Moon");
+        add("info.confluence.sextant.5", "Moon phase: Waxing Crescent");
+        add("info.confluence.sextant.6", "Moon phase: First Quarter");
+        add("info.confluence.sextant.7", "Moon phase: Waxing Gibbous");
+        add("info.confluence.weather_radio.clear", "Weather: Clear, Wind Speed: %s");
+        add("info.confluence.weather_radio.cloudy", "Weather: Cloudy, Wind Speed: %s");
+        add("info.confluence.weather_radio.rain", "Weather: Rain, Wind Speed: %s");
+        add("info.confluence.weather_radio.snow", "Weather: Snow, Wind Speed: %s");
+        add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
+        add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
 
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
@@ -104,19 +120,14 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.putrid_scent.tooltip", "Enemies are less likely to target you");
         add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
         add("item.confluence.power_glove.tooltip", "Increases melee knockback");
-        add("item.confluence.power_glove.tooltip2", "Enables auto swing for melee weapons");
-        add("item.confluence.feral_claws.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
-        add("item.confluence.mechanical_glove.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.hero_shield.tooltip2", "Enemies are more likely to target you");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.flesh_knuckles.tooltip", "Enemies are more likely to target you");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and melee attacks inflict fire damage");
-        add("item.confluence.fire_gauntlet.tooltip2", "Enables auto swing for melee weapons");
         add("item.confluence.eye_of_the_golem.tooltip", "10% increased critical strike chance");
-        add("item.confluence.berserkers_glove.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.berserkers_glove.tooltip2", "Enemies are more likely to target you");
         add("item.confluence.destroyer_emblem.tooltip", "8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip", "Increases length of invincibility after taking damage");
@@ -130,16 +141,15 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
-        add("item.confluence.rek_3000", "R.E.K.3000");
-
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
         });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
-            if(item1 instanceof BlockItem || item1 instanceof REK3000) return;
-            add(item1, toTitleCase(item.getId().getPath()));
+            if (item1 instanceof BlockItem) return;
+            if (item1 instanceof CustomName customName) add(item1, customName.getName());
+            else add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.MOB_EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));

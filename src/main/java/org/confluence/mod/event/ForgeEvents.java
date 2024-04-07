@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -32,6 +33,7 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
@@ -64,17 +66,22 @@ public class ForgeEvents {
         ServerLevel serverLevel = (ServerLevel) event.level;
         FallingStarItemEntity.summon(serverLevel);
         int dayTime = (int) (serverLevel.getDayTime() % 24000);
+        RandomSource random = serverLevel.random;
 
-        if (dayTime == 6000) {
-            if (serverLevel.random.nextFloat() < 0.2F) {
-                ConfluenceData.get(serverLevel).setMoonSpecific(serverLevel.random.nextInt(11)); // 0 ~ 10
+        if (dayTime == 0) {
+            float factorX = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
+            float factorZ = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
+            ConfluenceData.get(serverLevel).setWindSpeed(factorX, factorZ);
+        } else if (dayTime == 6000) {
+            if (random.nextFloat() < 0.2F) {
+                ConfluenceData.get(serverLevel).setMoonSpecific(random.nextInt(11)); // 0 ~ 10
             } else {
                 ConfluenceData.get(serverLevel).setMoonSpecific(-1);
             }
-        } else if (dayTime == 12000 && serverLevel.getMoonPhase() != 4 && serverLevel.random.nextFloat() < 0.1111F &&
+        } else if (dayTime == 12000 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
             serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24)
         ) {
-            serverLevel.getServer().sendSystemMessage(Component.translatable("event.confluence.blood_moon"));
+            serverLevel.getServer().sendSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED));
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
         }
     }
@@ -100,7 +107,9 @@ public class ForgeEvents {
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
         amount = IFallResistance.apply(living, damageSource, amount);
 
-        event.setAmount(amount * (random.nextInt(80, 121) / 100.0F));
+        amount = amount * (random.nextInt(80, 121) / 100.0F);
+        IDPSMeter.sendMsg(amount, damageSource.getEntity());
+        event.setAmount(amount);
     }
 
     @SubscribeEvent

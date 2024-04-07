@@ -13,6 +13,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.item.common.LifeCrystal;
+import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
@@ -56,6 +57,7 @@ public class PlayerEvents {
         if (neoPlayer instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMsg(serverPlayer);
             IMayFly.sendMsg(serverPlayer);
+            IAutoAttack.sendMsg(serverPlayer);
         }
     }
 

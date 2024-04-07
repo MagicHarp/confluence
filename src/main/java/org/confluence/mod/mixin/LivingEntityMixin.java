@@ -2,6 +2,8 @@ package org.confluence.mod.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
@@ -87,8 +89,11 @@ public abstract class LivingEntityMixin {
     @Unique
     private Vec3 c$getWalkVec(Vec3 par1) {
         LivingEntity self = c$getSelf();
-        if (self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get() && self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
-            double horizon = self.getSpeed() * 9.1;
+        if (!(self instanceof Player) || self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
+        if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
+            AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (instance == null) return par1;
+            double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
         }
         return par1;

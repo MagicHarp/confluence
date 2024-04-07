@@ -57,6 +57,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.lava_immune", "对岩浆免疫7秒");
         add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
         add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
+        add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -72,7 +73,22 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.life_form_analyzer", "发现稀有生物: %s");
         add("info.confluence.metal_detector.none", "未发现稀有方块");
         add("info.confluence.metal_detector", "在附近发现%s!");
-        add("info.confluence.stopwatch", "速度: %s mps");
+        add("info.confluence.stopwatch", "速度: %s m/s");
+        add("info.confluence.dps_meter", "DPS: %s");
+        add("info.confluence.sextant.0", "月相: 满月");
+        add("info.confluence.sextant.1", "月相: 亏凸月");
+        add("info.confluence.sextant.2", "月相: 下弦月");
+        add("info.confluence.sextant.3", "月相: 残月");
+        add("info.confluence.sextant.4", "月相: 新月");
+        add("info.confluence.sextant.5", "月相: 峨眉月");
+        add("info.confluence.sextant.6", "月相: 上弦月");
+        add("info.confluence.sextant.7", "月相: 盈凸月");
+        add("info.confluence.weather_radio.clear", "天气: 晴天, 风速: %s");
+        add("info.confluence.weather_radio.cloudy", "天气: 阴天, 风速: %s");
+        add("info.confluence.weather_radio.rain", "天气: 下雨, 风速: %s");
+        add("info.confluence.weather_radio.snow", "天气: 下雪, 风速: %s");
+        add("info.confluence.weather_radio.thunder", "天气: 雷暴, 风速: %s");
+        add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
@@ -102,17 +118,13 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.radar.tooltip", "探测你周围的敌人");
         add("item.confluence.compass.tooltip", "显示水平位置");
         add("item.confluence.depth_meter.tooltip", "显示深度");
-        add("item.confluence.titan_glove.tooltip", "启用近战武器自动挥动");
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
         add("item.confluence.putrid_scent.tooltip", "多人模式下，敌怪不太可能以你为目标");
         add("item.confluence.putrid_scent.tooltip2", "伤害和暴击率增加5%");
         add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
-        add("item.confluence.power_glove.tooltip2", "启用近战武器自动挥动");
-        add("item.confluence.feral_claws.tooltip", "启用近战武器自动挥动");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
-        add("item.confluence.mechanical_glove.tooltip", "启用近战武器自动挥动");
         add("item.confluence.hero_shield.tooltip2", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.frozen_shield.tooltip2", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
@@ -120,7 +132,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
         add("item.confluence.fire_gauntlet.tooltip2", "使近战伤害和速度各增加10%");
         add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
-        add("item.confluence.berserkers_glove.tooltip", "增加近战击退、启用近战武器自动挥动");
         add("item.confluence.berserkers_glove.tooltip2", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
@@ -586,6 +597,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.REK_3000.get(), "R.E.K.3000");
         add(CurioItems.FLEDGLING_WINGS.get(), "雏翼");
         add(CurioItems.LIFE_FORM_ANALYZER.get(), "生命体分析机");
+        add(CurioItems.DPS_METER.get(), "每秒伤害计数器");
+        add(CurioItems.FISHERMANS_POCKET_GUIDE.get(), "渔民袖珍宝典");
+        add(CurioItems.WEATHER_RADIO.get(), "天气收音机");
+        add(CurioItems.SEXTANT.get(), "六分仪");
+        add(CurioItems.GPS.get(), " 全球定位系统");
+        add(CurioItems.GOBLIN_TECH.get(), "哥布林数据仪");
+        add(CurioItems.FISH_FINDER.get(), "探鱼器");
+        add(CurioItems.PDA.get(), "个人数字助手");
+
 
         //盔甲
         add(Armors.CACTUS_CHESTPLATE.get(),"仙人掌胸甲");
@@ -645,7 +665,32 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLATINUM_LEGGINGS.get(),"铂金护腿");
         add(Armors.PLATINUM_BOOTS.get(),"铂金靴子");
 
-
+//鱼
+        add(Materials.SEA_BASS.get(),"鲈鱼");
+        add(Materials.ATLANTIC_COD.get(),"大西洋鳕鱼");
+        add(Materials.ARMORED_CAVE_FISH.get(),"装甲洞穴鱼");
+        add(Materials.CHAOS_FISH.get(),"混沌鱼");
+        add(Materials.SCARLET_TIGER_FISH.get(),"猩红虎鱼");
+        add(Materials.DAMSEL_FISH.get(),"雀鲷");
+        add(Materials.PISCES_FIN_COD.get(),"双鳍鳕鱼");
+        add(Materials.EBONY_KOI.get(),"黑檀锦鲤");
+        add(Materials.FLASHFIN_KOI.get(),"闪耀锦鲤");
+        add(Materials.PARTIAL_MOUTH_FISH.get(),"偏口鱼");
+        add(Materials.FROSTY_MINNOW.get(),"寒霜鲦鱼");
+        add(Materials.GOLDEN_CARP.get(),"金鲤鱼");
+        add(Materials.BLOODY_PIRANHAS.get(),"血腥食人鱼");
+        add(Materials.NEON_GREASE_CARP.get(),"霓虹脂鲤");
+        add(Materials.OBSIDIAN_FISH.get(),"黑曜石鱼");
+        add(Materials.PRINCESS_FISH.get(),"公主鱼");
+        add(Materials.COLORFUL_MINERAL_FISH.get(),"七彩矿鱼");
+        add(Materials.RED_SNAPPER.get(),"红鲷鱼");
+        add(Materials.ROCK_LOBSTER.get(),"岩石龙虾");
+        add(Materials.SALMON.get(),"三文鱼");
+        add(Materials.SHRIMP.get(),"虾");
+        add(Materials.MIRROR_FISH.get(),"镜面鱼");
+        add(Materials.STINKY_FISH.get(),"臭味鱼");
+        add(Materials.TUNA.get(),"金枪鱼");
+        add(Materials.MOTTLED_OILFISH.get(),"斑驳油鱼");
         //endregion items
     }
 }

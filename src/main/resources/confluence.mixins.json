@@ -10,7 +10,8 @@
         "LivingEntityMixin",
         "PlayerAdvancementsMixin",
         "RangedAttributeAccessor",
-        "ServerPlayerMixin"
+        "ServerPlayerMixin",
+        "client.MinecraftAccessor"
     ],
     "minVersion": "0.8.5",
     "client": [

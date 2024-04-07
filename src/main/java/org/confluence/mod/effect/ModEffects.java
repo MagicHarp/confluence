@@ -21,7 +21,7 @@ public class ModEffects {
     public static final RegistryObject<LifeForceEffect> LIFE_FORCE = MOB_EFFECTS.register("life_force", LifeForceEffect::new);
     public static final RegistryObject<RageEffect> RAGE = MOB_EFFECTS.register("rage", RageEffect::new);
     public static final RegistryObject<WrathEffect> WRATH = MOB_EFFECTS.register("wrath", WrathEffect::new);
-    public static final RegistryObject<ThornsEffect> THORNS = MOB_EFFECTS.register("thorns", ThornsEffect::new);
+//    public static final RegistryObject<ThornsEffect> THORNS = MOB_EFFECTS.register("thorns", ThornsEffect::new);
     public static final RegistryObject<HoneyEffect> HONEY = MOB_EFFECTS.register("honey", HoneyEffect::new);
     public static final RegistryObject<PaladinsShieldEffect> PALADINS_SHIELD = MOB_EFFECTS.register("paladins_shield", PaladinsShieldEffect::new);
     public static final RegistryObject<TitanEffect> TITAN = MOB_EFFECTS.register("titan", TitanEffect::new);
