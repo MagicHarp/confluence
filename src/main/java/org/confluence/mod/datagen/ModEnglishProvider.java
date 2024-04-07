@@ -53,6 +53,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.lava_immune", "Provides 7 seconds of immunity to lava");
         add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
         add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
+        add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -119,19 +120,14 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.putrid_scent.tooltip", "Enemies are less likely to target you");
         add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
         add("item.confluence.power_glove.tooltip", "Increases melee knockback");
-        add("item.confluence.power_glove.tooltip2", "Enables auto swing for melee weapons");
-        add("item.confluence.feral_claws.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
-        add("item.confluence.mechanical_glove.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.hero_shield.tooltip2", "Enemies are more likely to target you");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.flesh_knuckles.tooltip", "Enemies are more likely to target you");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and melee attacks inflict fire damage");
-        add("item.confluence.fire_gauntlet.tooltip2", "Enables auto swing for melee weapons");
         add("item.confluence.eye_of_the_golem.tooltip", "10% increased critical strike chance");
-        add("item.confluence.berserkers_glove.tooltip", "Enables auto swing for melee weapons");
         add("item.confluence.berserkers_glove.tooltip2", "Enemies are more likely to target you");
         add("item.confluence.destroyer_emblem.tooltip", "8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip", "Increases length of invincibility after taking damage");

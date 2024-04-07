@@ -74,8 +74,8 @@ public class BaseCurioItem extends Item implements ICurioItem {
             if (item instanceof IMultiJump) {
                 IMultiJump.sendMsg(serverPlayer);
             }
-            if (item instanceof IContinueSwing) {
-                IContinueSwing.sendMsg(serverPlayer);
+            if (item instanceof IAutoAttack) {
+                IAutoAttack.sendMsg(serverPlayer);
             }
         }
     }

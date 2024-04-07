@@ -15,15 +15,18 @@ import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.item.curio.combat.IAutoAttack;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ForgeClient {
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
-        LocalPlayer localPlayer = Minecraft.getInstance().player;
+        Minecraft minecraft = Minecraft.getInstance();
+        LocalPlayer localPlayer = minecraft.player;
         if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
         PlayerJumpHandler.handle(localPlayer);
         InformationHandler.update(localPlayer);
+        IAutoAttack.apply(minecraft, localPlayer);
 
         ModRarity.Animate.doUpdateExpertColor();
         ModRarity.Animate.doUpdateMasterColor();
