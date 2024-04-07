@@ -55,25 +55,4 @@ public class EffectEvents {
 
         IronSkinEffect.onRemove(mobEffect, attributeMap);
     }
-
-    @SubscribeEvent
-    public void noHealthBoost(LivingHealEvent event) {
-        if (event.getAmount() > 0) {
-            event.setCanceled(true);
-        }
-    }
-
-    @SubscribeEvent
-    public void noUseMagicItem(PlayerInteractEvent.RightClickItem event) {
-        if (event.getHand() == InteractionHand.MAIN_HAND && event.getItemStack().getItem() instanceof IMagicAttack) {
-            event.setCanceled(true);
-        }
-    }
-
-    @SubscribeEvent
-    public void noUseItem(PlayerInteractEvent event) {
-        if (event.getEntity().isUsingItem()) {
-            event.setCanceled(true);
-        }
-    }
 }

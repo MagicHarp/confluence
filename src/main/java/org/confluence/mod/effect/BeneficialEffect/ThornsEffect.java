@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 public class ThornsEffect extends MobEffect {   //荆棘 给予伤害来源反伤
     DamageSource damageSource;
 
-    public ThornsEffect(LivingHurtEvent event) {
+    public ThornsEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x00FF00);
     }
 
