@@ -87,7 +87,7 @@ public class ClientPacketHandler {
         return specificMoon;
     }
 
-    public static void handleSwing(ContinuingSwingHandPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleSwing(AutoAttackPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> autoAttack = packet.autoAttack());
         context.setPacketHandled(true);

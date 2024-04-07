@@ -243,23 +243,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 星尘之翼 */
     /* 天界星盘 */
 
-    /* Red的翅膀 */
-    /* D-Town的翅膀 */
-    /* Will的翅膀 */
-    /* Crowno的翅膀 */
-    /* Cenx的翅膀 */
-    /* Lazure的屏障台 */
-    /* Yoraiz0r的魔法 */
-    /* Jim的翅膀 */
-    /* Skiphs的爪子 */
-    /* Loki的翅膀 */
-    /* Arkhalis的飞翼 */
-    /* Leinfors的卷缠斗篷 */
-    /* Ghostar的无极翼 */
-    /* Safeman的毛毯斗篷 */
-    /* FoodBarbarian的褴褛龙之翼 */
-    /* Grox The Great的翅膀 */
-
 
     /* 服装商巫毒娃娃 */
     /* 钱币戒指 */
