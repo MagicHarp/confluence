@@ -5,12 +5,13 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+
 
 public class BleedingEffect extends MobEffect { //流血 不能自然恢复生命
     public BleedingEffect() {
         super(MobEffectCategory.HARMFUL, 0xA52A2A);
     }
+
     public static void noHealthBoost(LivingHealEvent event) {
         if (event.getAmount() > 0) {
             event.setCanceled(true);
