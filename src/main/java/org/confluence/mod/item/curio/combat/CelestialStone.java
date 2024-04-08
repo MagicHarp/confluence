@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -16,34 +17,35 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class SunStone extends BaseCurioItem {
-    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("6B2CFC65-3C84-7C1F-69D8-7B37556578E0");
-    public static final UUID DAMAGE_UUID = UUID.fromString("56A08AD3-ADA1-F838-E09C-28B08935F5C2");
-    public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
+public class CelestialStone extends BaseCurioItem implements ICriticalHit {
+    public static final UUID ATTACK_SPEED_UUID = UUID.fromString("A1F8AB0C-8285-3BE9-575A-E05787707241");
+    public static final UUID DAMAGE_UUID = UUID.fromString("2B80C158-EBB2-39C0-E246-E401C544D9D8");
+    public static final UUID ARMOR_UUID = UUID.fromString("814ABB7D-ADB4-F0C6-B7BD-A2E3FB23EE8D");
 
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION)
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", 4, AttributeModifier.Operation.ADDITION)
     );
 
-    public SunStone() {
+    public CelestialStone() {
         super(ModRarity.LIME);
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        if (living == null) return EMPTY_ATTRIBUTE;
-        return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        return ATTRIBUTE;
+    }
+
+    @Override
+    public double getChance() {
+        return 0.02;
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        long gameTime = living.level().getGameTime();
-        if (gameTime % 24000 > 12000) return;
-        if (gameTime % 20 == 0) {
+        if (living.level().getGameTime() % 20 == 0) {
             int amplifier = living.hasEffect(ModEffects.HONEY.get()) ? 3 : 2;
             living.heal(amplifier);
         }

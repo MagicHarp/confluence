@@ -31,14 +31,14 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 天界徽章 */
     /* 月光护身符 */
     /* 月亮贝壳 */
-    /* 天界石 */
+    CELESTIAL_STONE("celestial_stone", CelestialStone::new), // 天界石
     /* 天界贝壳 */
     COBALT_SHIELD("cobalt_shield", CobaltShield::new), // 钴护盾
     /* 反诅咒咒语 */
     CROSS_NECKLACE("cross_necklace", CrossNecklace::new), // 十字项链
     DESTROYER_EMBLEM("destroyer_emblem", DestroyerEmblem::new), // 毁灭者勋章
     EYE_OF_THE_GOLEM("eye_of_the_golem", EyeOfTheGolem::new), // 石巨人之眼
-    /* 快走时钟 */
+    FAST_CLOCK("fast_clock", FastClock::new), // 快走时钟
     FERAL_CLAWS("feral_claws", FeralClaws::new), // 狂爪手套 (WIP)
     FIRE_GAUNTLET("fire_gauntlet", FireGauntlet::new), // 烈火手套
     FLESH_KNUCKLES("flesh_knuckles", FleshKnuckles::new), // 血肉指虎
@@ -69,9 +69,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 侦察镜 */
     /* 步枪瞄准镜 */
     SHACKLE("shackle", Shackle::new), // 脚镣
-    /* 鲨牙项链 */
+    SHARK_TOOTH_NECKLACE("shark_tooth_necklace", SharkToothNecklace::new), // 鲨牙项链
     /* 狙击镜 */
-    /* 巫士徽章 */
+    SORCERER_EMBLEM("sorcerer_emblem", SorcererEmblem::new), // 巫士徽章
     /* 潜行者箭袋 */
     /* 星星斗篷 */
     /* 星星面纱 */
