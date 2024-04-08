@@ -33,6 +33,7 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach, ICritica
         return DAMAGE;
 
     }
+
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(Component.translatable("item.confluence.putrid_scent.tooltip2"));

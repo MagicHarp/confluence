@@ -42,16 +42,13 @@ public class FrozenShield extends PaladinsShield {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer && serverPlayer.level().getGameTime() % 200 == 0) {
             Team team = serverPlayer.getTeam();
-            float health = serverPlayer.getHealth() / serverPlayer.getMaxHealth();
             for (Player player : serverPlayer.level().players()) {
                 if (shouldSkip(player, team, serverPlayer)) continue;
                 player.addEffect(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 200));
-                if (health > 0.25F && health < 0.5F) {
-                    //player.addEffect()
-                }
             }
         }
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.frozen_shield.tooltip2"));

@@ -120,7 +120,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
-        add("item.confluence.hero_shield.tooltip2", "Enemies are more likely to target you");
+        add("item.confluence.hero_shield.tooltip", "Enemies are more likely to target you");
         add("item.confluence.frozen_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");

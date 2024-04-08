@@ -125,12 +125,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
-        add("item.confluence.hero_shield.tooltip2", "多人模式时，敌人更可能以你为目标");
-        add("item.confluence.frozen_shield.tooltip2", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
+        add("item.confluence.hero_shield.tooltip", "多人模式时，敌人更可能以你为目标");
+        add("item.confluence.frozen_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.flesh_knuckles.tooltip", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
-        add("item.confluence.fire_gauntlet.tooltip2", "使近战伤害和速度各增加10%");
         add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
         add("item.confluence.berserkers_glove.tooltip2", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
