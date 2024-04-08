@@ -42,7 +42,7 @@ public class BerserkersGlove extends BaseCurioItem implements IAggroAttach, IAut
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(TOOLTIP);
-        list.add(Component.translatable("item.confluence.berserkers_glove.tooltip2"));
+        list.add(IAutoAttack.TOOLTIP);
+        list.add(IAggroAttach.TOOLTIP);
     }
 }

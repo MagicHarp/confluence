@@ -51,7 +51,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
             if (item instanceof ILifeFormAnalyzer) lifeFormAnalyzer = 1;
             if (item instanceof IRadar) radar = 1;
             if (item instanceof ITallyCounter) tallyCounter = 1;
-            if (item instanceof IDPSMeter) depthMeter = 1;
+            if (item instanceof IDPSMeter) dpsMeter = 1;
             if (item instanceof IStopwatch) stopwatch = 1;
             if (item instanceof ICompass) compass = 1;
             if (item instanceof IDepthMeter) depthMeter = 1;

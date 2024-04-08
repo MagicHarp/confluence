@@ -20,4 +20,6 @@ public interface IWeatherRadio {
         }
         return Component.translatable("info.confluence.weather_radio." + weather, speed);
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.weather_radio");
 }

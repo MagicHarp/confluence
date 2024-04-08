@@ -13,4 +13,6 @@ public interface IFishermansPocketGuide {
             .ifPresent(playerAbility -> atomic.set(Component.translatable("info.confluence.fishermans_pocket_guide", playerAbility.getFishing())));
         return atomic.get();
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.fishermans_pocket_guide");
 }

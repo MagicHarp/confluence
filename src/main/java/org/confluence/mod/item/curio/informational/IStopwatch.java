@@ -15,4 +15,6 @@ public interface IStopwatch {
             ) * 20)
         );
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.stopwatch");
 }
