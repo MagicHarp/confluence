@@ -5,22 +5,17 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
-
+import org.confluence.mod.event.EffectEvents;
 
 public class BleedingEffect extends MobEffect { //流血 不能自然恢复生命
+    EffectEvents effectEvents = new EffectEvents();
     public BleedingEffect() {
         super(MobEffectCategory.HARMFUL, 0xA52A2A);
     }
 
-    public static void noHealthBoost(LivingHealEvent event) {
-        if (event.getAmount() > 0) {
-            event.setCanceled(true);
-        }
-    }
-
     public void onAdd(LivingEntity entity) {
         if (entity instanceof Player && !entity.isSpectator()) {
-            noHealthBoost(new LivingHealEvent(entity, 1));
+            effectEvents.noHealthBoost(new LivingHealEvent(entity, 1));
         }
     }
 }

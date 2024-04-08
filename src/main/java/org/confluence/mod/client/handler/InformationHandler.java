@@ -4,6 +4,7 @@ import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -41,6 +42,7 @@ public class InformationHandler {
     private static byte mechanicalLens = 0;
 
     private static @Nullable Function<Long, Component> timeInfo = null;
+    private static String windSpeed = "0.00";
     private static Component weatherRadioInfo = Component.translatable("info.confluence.weather_radio.clear", "0.00");
     private static boolean detectorPressed = false;
     private static Component metalDetectorInfo = Component.translatable("info.confluence.metal_detector.none");
@@ -69,7 +71,10 @@ public class InformationHandler {
                 timeInfo = null;
             }
         }
-        if (weatherRadio != 0) information.add(weatherRadioInfo);
+        if (weatherRadio != 0) {
+            if (gameTime % 200 == 1) weatherRadioInfo = IWeatherRadio.getInfo(localPlayer, windSpeed);
+            information.add(weatherRadioInfo);
+        }
         if (weatherRadio < 0 && gameTime % 200 == 1 && nearPlayerNoCurio(localPlayer, IWeatherRadio.class)) {
             weatherRadio = 0;
         }
@@ -208,9 +213,7 @@ public class InformationHandler {
     public static void handleWindSpeed(WindSpeedPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            LocalPlayer localPlayer = Minecraft.getInstance().player;
-            if (localPlayer == null) return;
-            weatherRadioInfo = IWeatherRadio.getInfo(localPlayer, packet.x(), packet.z());
+            windSpeed = "%.2f".formatted(Mth.length(packet.x(), packet.z()));
         });
         context.setPacketHandled(true);
     }

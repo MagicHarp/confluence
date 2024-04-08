@@ -4,7 +4,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.confluence.mod.Confluence;
 
 public class ModRarity {
     public static final Rarity GRAY = Rarity.create("gray", style -> style.withColor(0x828282));
@@ -102,8 +101,7 @@ public class ModRarity {
         }
 
         public static int getMasterColor() {
-            Confluence.LOGGER.info("%s, %s".formatted(mouseTextColor, masterColor));
-            return ((int) mouseTextColor << 16) + ((int) masterColor << 8);
+            return ((int) mouseTextColor << 16) + ((int) (masterColor * 190) << 8);
         }
     }
 
