@@ -114,15 +114,14 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.radar.tooltip", "Detects enemies around you");
         add("item.confluence.compass.tooltip", "Displays horizontal position");
         add("item.confluence.depth_meter.tooltip", "Displays depth");
-        add("item.confluence.titan_glove.tooltip", "Increases melee knockback");
         add("item.confluence.sun_stone.tooltip", "During daytime, grants minor increase");
         add("item.confluence.moon_stone.tooltip", "During nighttime, grants minor increase");
         add("item.confluence.putrid_scent.tooltip", "Enemies are less likely to target you");
         add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
-        add("item.confluence.power_glove.tooltip", "Increases melee knockback");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.hero_shield.tooltip2", "Enemies are more likely to target you");
+        add("item.confluence.frozen_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.flesh_knuckles.tooltip", "Enemies are more likely to target you");

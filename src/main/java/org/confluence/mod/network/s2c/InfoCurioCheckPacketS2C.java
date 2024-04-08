@@ -43,7 +43,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
             Item item = stack.getItem();
             if (item instanceof MinuteWatch) watch = 1;
             else if (item instanceof HalfHourWatch) watch = 2;
-            else if (item instanceof HourWatch) watch = 3;
+            else if (item instanceof HourWatch || item instanceof GPS || item instanceof PDA) watch = 3;
             if (item instanceof IWeatherRadio) weatherRadio = 1;
             if (item instanceof ISextant) sextant = 1;
             if (item instanceof IFishermansPocketGuide) fishermansPocketGuide = 1;

@@ -57,4 +57,9 @@ public class FrozenShield extends PaladinsShield {
         list.add(Component.translatable("item.confluence.frozen_shield.tooltip2"));
         super.appendHoverText(itemStack, level, list, tooltipFlag);
     }
+
+    @Override
+    public String getName() {
+        return "Frozen Shield";
+    }
 }
