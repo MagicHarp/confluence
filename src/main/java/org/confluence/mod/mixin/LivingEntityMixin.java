@@ -1,5 +1,6 @@
 package org.confluence.mod.mixin;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -13,6 +14,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -104,6 +106,14 @@ public abstract class LivingEntityMixin {
         if (c$getSelf() instanceof Player player && CuriosUtils.hasCurio(player, CurioItems.MAGILUMINESCENCE.get())) {
             cir.setReturnValue(cir.getReturnValue() * 1.75F);
         }
+    }
+
+    @ModifyArg(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"), index = 1)
+    private float passArmor(float armor) {
+        AtomicDouble atomic = new AtomicDouble(armor);
+        CuriosUtils.findCurio(c$getSelf(), IArmorPass.class)
+            .ifPresent(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
+        return atomic.floatValue();
     }
 
     @Unique

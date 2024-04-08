@@ -47,7 +47,7 @@ public class PlayerEvents {
         Player neoPlayer = event.getEntity();
         oldPlayer.revive();
 
-        oldPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(old -> neoPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
+        oldPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
         oldPlayer.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(PlayerAbilityProvider.CAPABILITY)
             .ifPresent(neo -> {
                 neo.copyFrom(old);

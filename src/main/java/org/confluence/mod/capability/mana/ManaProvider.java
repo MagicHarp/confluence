@@ -10,14 +10,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 
 public class ManaProvider implements ICapabilitySerializable<CompoundTag> {
-    public static final Capability<ManaStorage> MANA_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    public static final Capability<ManaStorage> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
     private ManaStorage manaStorage;
     private final LazyOptional<ManaStorage> manaStorageLazyOptional = LazyOptional.of(this::getOrCreateStorage);
 
     @Override
     public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
-        return MANA_CAPABILITY.orEmpty(cap, manaStorageLazyOptional);
+        return CAPABILITY.orEmpty(cap, manaStorageLazyOptional);
     }
 
     @Override

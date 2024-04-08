@@ -18,6 +18,7 @@ import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
+import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,40 +44,19 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         Item item = stack.getItem();
         LivingEntity living = slotContext.entity();
-        if (item instanceof ICriticalHit iCriticalHit) {
-            iCriticalHit.freshChance(living);
-        }
-        if (item instanceof IFireImmune iFireImmune) {
-            iFireImmune.freshFireImmune(living);
-        }
-        if (item instanceof ILavaHurtReduce iLavaHurtReduce) {
-            iLavaHurtReduce.freshLavaReduce(living);
-        }
-        if (item instanceof ILavaImmune iLavaImmune) {
-            iLavaImmune.freshLavaImmuneTicks(living);
-        }
-        if (item instanceof IInvulnerableTime iInvulnerableTime) {
-            iInvulnerableTime.freshInvulnerableTime(living);
-        }
-        if (item instanceof IAggroAttach iAggroAttach) {
-            iAggroAttach.freshAggro(living);
-        }
-        if (item instanceof IFallResistance iFallResistance) {
-            iFallResistance.freshFallResistance(living);
-        }
-        if (item instanceof IJumpBoost iJumpBoost) {
-            iJumpBoost.freshJumpBoost(living);
-        }
+        if (item instanceof ICriticalHit iCriticalHit) iCriticalHit.freshChance(living);
+        if (item instanceof IFireImmune iFireImmune) iFireImmune.freshFireImmune(living);
+        if (item instanceof ILavaHurtReduce iLavaHurtReduce) iLavaHurtReduce.freshLavaReduce(living);
+        if (item instanceof ILavaImmune iLavaImmune) iLavaImmune.freshLavaImmuneTicks(living);
+        if (item instanceof IInvulnerableTime iInvulnerableTime) iInvulnerableTime.freshInvulnerableTime(living);
+        if (item instanceof IAggroAttach iAggroAttach) iAggroAttach.freshAggro(living);
+        if (item instanceof IFallResistance iFallResistance) iFallResistance.freshFallResistance(living);
+        if (item instanceof IJumpBoost iJumpBoost) iJumpBoost.freshJumpBoost(living);
+        if (item instanceof IMagicAttack iMagicAttack) iMagicAttack.freshMagicAttackBonus(living);
         if (living instanceof ServerPlayer serverPlayer) {
-            if (item instanceof IMayFly) {
-                IMayFly.sendMsg(serverPlayer);
-            }
-            if (item instanceof IMultiJump) {
-                IMultiJump.sendMsg(serverPlayer);
-            }
-            if (item instanceof IAutoAttack) {
-                IAutoAttack.sendMsg(serverPlayer);
-            }
+            if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
+            if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
+            if (item instanceof IAutoAttack) IAutoAttack.sendMsg(serverPlayer);
         }
     }
 

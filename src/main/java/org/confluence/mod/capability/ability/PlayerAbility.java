@@ -25,7 +25,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
     private int aggro; // 仇恨
-    private float fishing;
+    private float fishingPower;
 
     private int crystals;
 
@@ -40,7 +40,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
         this.aggro = 0;
-        this.fishing = 0.0F;
+        this.fishingPower = 0.0F;
 
         this.crystals = 0;
     }
@@ -211,12 +211,12 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         return crystals;
     }
 
-    public void setFishing(float fishing) {
-        this.fishing = fishing;
+    public void setFishingPower(float fishingPower) {
+        this.fishingPower = fishingPower;
     }
 
-    public float getFishing() {
-        return fishing;
+    public float getFishingPower() {
+        return fishingPower;
     }
 
     @Override
@@ -231,7 +231,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putBoolean("lavaHurtReduce", lavaHurtReduce);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
         nbt.putInt("aggro", aggro);
-        nbt.putFloat("fishing", fishing);
+        nbt.putFloat("fishingPower", fishingPower);
 
         nbt.putInt("crystals", crystals);
         return nbt;
@@ -248,7 +248,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.lavaHurtReduce = nbt.getBoolean("lavaHurtReduce");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
         this.aggro = nbt.getInt("aggro");
-        this.fishing = nbt.getFloat("fishing");
+        this.fishingPower = nbt.getFloat("fishingPower");
 
         this.crystals = nbt.getInt("crystals");
     }
@@ -263,7 +263,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.lavaHurtReduce = playerAbility.lavaHurtReduce;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
         this.aggro = playerAbility.aggro;
-        this.fishing = playerAbility.fishing;
+        this.fishingPower = playerAbility.fishingPower;
 
         this.crystals = playerAbility.crystals;
     }

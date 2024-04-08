@@ -35,6 +35,7 @@ import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 
@@ -51,7 +52,7 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (player.getCapability(ManaProvider.MANA_CAPABILITY).isPresent()) return;
+            if (player.getCapability(ManaProvider.CAPABILITY).isPresent()) return;
             event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
 
             if (player.getCapability(PlayerAbilityProvider.CAPABILITY).isPresent()) return;
@@ -101,6 +102,7 @@ public class ForgeEvents {
             return;
         }
         float amount = event.getAmount();
+        amount = IMagicAttack.apply(damageSource, amount);
         amount = ManaIssueEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);
