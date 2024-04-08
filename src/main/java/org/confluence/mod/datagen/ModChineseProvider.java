@@ -123,6 +123,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.lava_waders.tooltip2", "对火块免疫、对岩浆免疫7秒");
         add("item.confluence.bundle_of_balloons.tooltip", "可让持有者四段跳");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip", "可让持有者四段跳");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip2", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.water_walking_boots.tooltip", "提供在水和蜂蜜上行走的能力");
         add("item.confluence.magma_skull.tooltip", "对火块免疫、近战攻击造成火焰伤害");
         add("item.confluence.frostspark_boots.tooltip", "可飞行、飞速奔跑、并提供额外冰面行动力");

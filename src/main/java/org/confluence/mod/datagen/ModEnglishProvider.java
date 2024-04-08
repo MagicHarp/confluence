@@ -119,6 +119,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.horseshoe_balloon.tooltip", "Increases jump height and negates fall damage");
         add("item.confluence.lava_waders.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.bundle_of_balloons.tooltip", "Allows the holder to quadruple jump");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip", "Allows the holder to quadruple jump");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip2", "Increases jump height and negates fall damage");
         add("item.confluence.water_walking_boots.tooltip", "Provides the ability to walk on water & honey");
         add("item.confluence.magma_skull.tooltip", "Immunity to fire blocks, melee attacks deal fire damage");
         add("item.confluence.frostspark_boots.tooltip", "Allows flight, super fast running, and extra mobility on ice");

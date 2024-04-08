@@ -39,6 +39,12 @@ public interface IMultiJump {
                     tsunamiSpeed.set(tsunami.getJumpSpeed());
                 } else if (curio instanceof CloudInABottle cloud) {
                     cloudSpeed.set(cloud.getJumpSpeed());
+                } else if (curio instanceof BundleOfBalloons) {
+                    sandstormSpeed.set(SandstormInABottle.SPEED);
+                    sandstormTicks.set(SandstormInABottle.TICKS);
+                    blizzardSpeed.set(BlizzardInABottle.SPEED);
+                    blizzardTicks.set(BlizzardInABottle.TICKS);
+                    cloudSpeed.set(CloudInABottle.SPEED);
                 }
             }
         });

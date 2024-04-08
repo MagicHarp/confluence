@@ -27,7 +27,7 @@ public class BundleOfHorseshoeBalloons extends BundleOfBalloons implements IFall
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(IMultiJump.TOOLTIP);
-        list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
+        list.add(Component.translatable("item.confluence.bundle_of_horseshoe_balloon.tooltip"));
+        list.add(Component.translatable("item.confluence.bundle_of_horseshoe_balloon.tooltip2"));
     }
 }
