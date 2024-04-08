@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "confluence:another_crimson"
+  ],
+  "features": "confluence:another_crimson_stone",
+  "step": "surface_structures"
+}

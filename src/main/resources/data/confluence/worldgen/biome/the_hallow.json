@@ -1,19 +1,19 @@
 {
   "has_precipitation": true,
-  "temperature": 1,
-  "downfall": 0,
+  "temperature": 0.5,
+  "downfall": 0.5,
   "effects": {
     "music": {
       "min_delay": 12000,
       "max_delay": 24000,
       "replace_current_music": true
     },
-    "foliage_color": -12703670,
-    "grass_color": -11655583,
-    "sky_color": -10726554,
-    "fog_color": -10726554,
-    "water_color": -12837542,
-    "water_fog_color": -11055776
+    "foliage_color": -16711703,
+    "grass_color": -3999757,
+    "sky_color":-3346188,
+    "fog_color":-3346188,
+    "water_color": -1554953,
+    "water_fog_color": -3345167
   },
   "spawners": {
     "monster": [],
@@ -66,7 +66,7 @@
     [],
     [],
     [
-      "confluence:the_corruption_tree"
+      "confluence:the_hallow_tree"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -149,6 +149,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
         add("biome.confluence.the_corruption", "腐化之地");
+        add("biome.confluence.another_crimson", "猩红之地");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
