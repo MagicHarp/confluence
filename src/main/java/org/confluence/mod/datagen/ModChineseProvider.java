@@ -55,7 +55,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.fluid_walk.part", "提供在水和蜂蜜上行走的能力");
         add("curios.tooltip.fluid_walk.all", "提供在水、蜂蜜、岩浆上行走的能力");
         add("curios.tooltip.lava_immune", "对岩浆免疫7秒");
-        add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
+        add("curios.tooltip.lava_hurt_reduce", "减少因触碰熔岩而造成的伤害");
         add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
 
