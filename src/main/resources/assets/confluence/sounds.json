@@ -1,0 +1,17 @@
+{
+    "transmission": {
+        "sounds": [
+            "confluence:transmission"
+        ]
+    },
+    "waving": {
+        "sounds": [
+            "confluence:waving"
+        ]
+    },
+    "double_jump": {
+        "sounds": [
+            "confluence:double_jump"
+        ]
+    }
+}

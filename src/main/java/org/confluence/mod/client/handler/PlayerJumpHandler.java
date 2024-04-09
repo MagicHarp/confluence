@@ -6,6 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.ModSounds;
 import org.confluence.mod.mixin.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
@@ -58,7 +59,7 @@ public class PlayerJumpHandler {
             if (fartSpeed > 0.0 && !fartFinished) {
                 fartFinished = true;
                 jumpKeyDown = true;
-                multiJump(localPlayer, fartSpeed, true);
+                multiJump(localPlayer, fartSpeed);
             } else if (sandstormSpeed > 0.0 && !sandstormFinished) {
                 if (remainSandstormTicks > 0) {
                     remainSandstormTicks--;
@@ -76,18 +77,19 @@ public class PlayerJumpHandler {
             } else if (tsunamiSpeed > 0.0 && !tsunamiFinished) {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
-                multiJump(localPlayer, tsunamiSpeed, false);
+                multiJump(localPlayer, tsunamiSpeed);
             } else if (cloudSpeed > 0.0 && !cloudFinished) {
                 cloudFinished = true;
                 jumpKeyDown = true;
-                multiJump(localPlayer, cloudSpeed, false);
+                multiJump(localPlayer, cloudSpeed);
+                localPlayer.playSound(ModSounds.DOUBLE_JUMP.get());
             } else if (remainFlyTicks > 0) {
                 remainFlyTicks--;
                 Vec3 vec3 = localPlayer.getDeltaMovement();
                 localPlayer.setDeltaMovement(vec3.x, flySpeed, vec3.z);
                 localPlayer.hasImpulse = true;
                 localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, false));
+                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
             } else {
                 jumpKeyDown = true;
             }
@@ -98,7 +100,7 @@ public class PlayerJumpHandler {
         }
     }
 
-    private static void multiJump(LocalPlayer localPlayer, double speed, boolean isFart) {
+    private static void multiJump(LocalPlayer localPlayer, double speed) {
         Vec3 vec3 = localPlayer.getDeltaMovement();
         double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * speed;
         localPlayer.setDeltaMovement(vec3.x, motionY, vec3.z);
@@ -108,7 +110,7 @@ public class PlayerJumpHandler {
         }
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, isFart));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true));
     }
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
@@ -116,7 +118,7 @@ public class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, false));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
