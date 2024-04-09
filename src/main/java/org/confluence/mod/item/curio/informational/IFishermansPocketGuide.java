@@ -10,7 +10,9 @@ public interface IFishermansPocketGuide {
     static Component getInfo(LocalPlayer localPlayer) {
         AtomicReference<Component> atomic = new AtomicReference<>(Component.translatable("info.confluence.fishermans_pocket_guide", 0.0F));
         localPlayer.getCapability(PlayerAbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> atomic.set(Component.translatable("info.confluence.fishermans_pocket_guide", playerAbility.getFishing())));
+            .ifPresent(playerAbility -> atomic.set(Component.translatable("info.confluence.fishermans_pocket_guide", playerAbility.getFishingPower())));
         return atomic.get();
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.fishermans_pocket_guide");
 }

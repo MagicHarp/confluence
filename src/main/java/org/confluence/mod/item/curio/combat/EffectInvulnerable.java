@@ -11,6 +11,8 @@ public interface EffectInvulnerable {
             return CuriosUtils.hasCurio(living, Poison.class);
         } else if (mobEffect == MobEffects.BLINDNESS) {
             return CuriosUtils.hasCurio(living, Blindness.class);
+        } else if (mobEffect == MobEffects.MOVEMENT_SLOWDOWN) {
+            return CuriosUtils.hasCurio(living, Slowness.class);
         }
         return false;
     }
@@ -19,5 +21,8 @@ public interface EffectInvulnerable {
     }
 
     interface Blindness {
+    }
+
+    interface Slowness {
     }
 }

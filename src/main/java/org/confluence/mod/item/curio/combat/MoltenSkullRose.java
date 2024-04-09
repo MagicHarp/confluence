@@ -16,6 +16,7 @@ public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILava
     public MoltenSkullRose() {
         super(ModRarity.LIGHT_PURPLE);
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IFireImmune.TOOLTIP);

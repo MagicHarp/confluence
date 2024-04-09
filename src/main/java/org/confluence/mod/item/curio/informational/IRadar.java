@@ -15,4 +15,6 @@ public interface IRadar {
                 ).size()
         );
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.radar");
 }

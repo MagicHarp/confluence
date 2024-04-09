@@ -8,4 +8,6 @@ public interface IDepthMeter {
         double y = localPlayer.getY();
         return Component.translatable("info.confluence.depth_meter." + (y > 63 ? "surface" : "underground"), "%.2f".formatted(y));
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.depth_meter");
 }

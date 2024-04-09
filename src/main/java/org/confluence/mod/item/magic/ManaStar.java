@@ -24,7 +24,7 @@ public class ManaStar extends Item {
 
         ItemStack itemStack = player.getItemInHand(hand);
         if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaStorage -> {
+            serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
                 if (manaStorage.addStar()) {
                     itemStack.shrink(1);
                 }

@@ -55,9 +55,21 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.fluid_walk.part", "提供在水和蜂蜜上行走的能力");
         add("curios.tooltip.fluid_walk.all", "提供在水、蜂蜜、岩浆上行走的能力");
         add("curios.tooltip.lava_immune", "对岩浆免疫7秒");
-        add("curios.tooltip.lava_hurt_reduce", "Reduces damage from touching lava");
+        add("curios.tooltip.lava_hurt_reduce", "减少因触碰熔岩而造成的伤害");
         add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
+        add("curios.tooltip.aggro_attach", "多人模式时，敌人更可能以你为目标");
+        add("curios.tooltip.compass", "显示水平位置");
+        add("curios.tooltip.depth_meter", "显示深度");
+        add("curios.tooltip.dps_meter", "显示你的每秒伤害");
+        add("curios.tooltip.fishermans_pocket_guide", "显示钓鱼信息");
+        add("curios.tooltip.life_form_analyzer", "显示您周围稀有生物的名称");
+        add("curios.tooltip.metal_detector", "显示你周围最贵重的矿石");
+        add("curios.tooltip.radar", "探测你周围的敌人");
+        add("curios.tooltip.sextant", "显示月相");
+        add("curios.tooltip.stopwatch", "显示玩家的移动速度");
+        add("curios.tooltip.tally_counter", "显示怪物击杀数量");
+        add("curios.tooltip.weather_radio", "显示天气");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -111,13 +123,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.lava_waders.tooltip2", "对火块免疫、对岩浆免疫7秒");
         add("item.confluence.bundle_of_balloons.tooltip", "可让持有者四段跳");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip", "可让持有者四段跳");
+        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip2", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.water_walking_boots.tooltip", "提供在水和蜂蜜上行走的能力");
         add("item.confluence.magma_skull.tooltip", "对火块免疫、近战攻击造成火焰伤害");
         add("item.confluence.frostspark_boots.tooltip", "可飞行、飞速奔跑、并提供额外冰面行动力");
-        add("item.confluence.tally_counter.tooltip", "显示怪物击杀数量");
-        add("item.confluence.radar.tooltip", "探测你周围的敌人");
-        add("item.confluence.compass.tooltip", "显示水平位置");
-        add("item.confluence.depth_meter.tooltip", "显示深度");
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
         add("item.confluence.putrid_scent.tooltip", "多人模式下，敌怪不太可能以你为目标");
@@ -125,27 +135,22 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
-        add("item.confluence.hero_shield.tooltip2", "多人模式时，敌人更可能以你为目标");
-        add("item.confluence.frozen_shield.tooltip2", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
+        add("item.confluence.frozen_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
+        add("item.confluence.frozen_shield.tooltip2", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
-        add("item.confluence.flesh_knuckles.tooltip", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
-        add("item.confluence.fire_gauntlet.tooltip2", "使近战伤害和速度各增加10%");
         add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
-        add("item.confluence.berserkers_glove.tooltip2", "多人模式时，敌人更可能以你为目标");
         add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
         add("item.confluence.black_belt.tooltip", "有几率避开攻击");
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
-        add("item.confluence.stopwatch.tooltip", "显示玩家的移动速度");
-        add("item.confluence.metal_detector.tooltip", "显示你周围最贵重的矿石");
-        add("item.confluence.life_form_analyzer.tooltip", "显示您周围稀有生物的名称");
-        add("item.confluence.rek_3000.tooltip", "显示怪物数量、击杀数量和稀有生物");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
         add("biome.confluence.the_corruption", "腐化之地");
+        add("biome.confluence.another_crimson", "猩红之地");
+        add("biome.confluence.the_hallow", "神圣之地");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");

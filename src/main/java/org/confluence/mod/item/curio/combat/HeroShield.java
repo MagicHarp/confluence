@@ -37,9 +37,14 @@ public class HeroShield extends PaladinsShield implements IAggroAttach {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ATTRIBUTE;
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(Component.translatable("item.confluence.hero_shield.tooltip2"));
+        list.add(TOOLTIP);
+    }
+
+    @Override
+    public String getName() {
+        return "Hero Shield";
     }
 }

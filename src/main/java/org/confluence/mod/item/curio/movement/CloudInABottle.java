@@ -12,13 +12,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CloudInABottle extends BaseCurioItem implements IMultiJump {
+    public static final double SPEED = 1.0;
+
     public CloudInABottle(Rarity rarity) {
         super(rarity);
     }
 
     @Override
     public double getJumpSpeed() {
-        return 1.0;
+        return SPEED;
     }
 
     @Override

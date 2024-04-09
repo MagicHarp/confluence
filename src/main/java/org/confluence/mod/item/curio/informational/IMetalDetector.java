@@ -27,6 +27,8 @@ public interface IMetalDetector {
         return atomic.get();
     }
 
+    Component TOOLTIP = Component.translatable("curios.tooltip.metal_detector");
+
     interface Detectable {
         int getValue();
     }

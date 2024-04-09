@@ -7,4 +7,6 @@ public interface ISextant {
     static Component getInfo(LocalPlayer localPlayer) {
         return Component.translatable("info.confluence.sextant." + localPlayer.level().getMoonPhase());
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.sextant");
 }

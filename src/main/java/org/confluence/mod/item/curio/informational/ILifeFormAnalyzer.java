@@ -16,6 +16,8 @@ public interface ILifeFormAnalyzer {
         return atomic.get();
     }
 
+    Component TOOLTIP = Component.translatable("curios.tooltip.life_form_analyzer");
+
     interface Detectable {
         int getRarity();
     }

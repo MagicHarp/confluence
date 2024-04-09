@@ -10,4 +10,6 @@ public interface ICompass {
         return Component.translatable("info.confluence.compass." + (x > 0 ? "east" : "west"), "%.2f".formatted(x))
             .append(Component.translatable("info.confluence.compass." + (z > 0 ? "south" : "north"), "%.2f".formatted(z)));
     }
+
+    Component TOOLTIP = Component.translatable("curios.tooltip.compass");
 }

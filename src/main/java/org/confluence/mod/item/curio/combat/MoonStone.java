@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class MoonStone extends BaseCurioItem implements ICriticalHit {
+public class MoonStone extends BaseCurioItem {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("E11BBE53-8620-4795-296E-B1E512E04EFF");
     public static final UUID DAMAGE_UUID = UUID.fromString("51D0544E-0AA8-CB0C-5FBC-1A4C6B5C99B7");
     public static final UUID ARMOR_UUID = UUID.fromString("35D05688-D0BE-3387-DAD8-82C79B46AB46");
@@ -39,15 +39,14 @@ public class MoonStone extends BaseCurioItem implements ICriticalHit {
     }
 
     @Override
-    public double getChance() {
-        return 0.0;
-    }
-
-    @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        int amplifier = living.hasEffect(ModEffects.HONEY.get()) ? 2 : 1;
-        living.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, amplifier, false, false, false));
+        long gameTime = living.level().getGameTime();
+        if (gameTime % 24000 < 12000) return;
+        if (gameTime % 20 == 0) {
+            int amplifier = living.hasEffect(ModEffects.HONEY.get()) ? 3 : 2;
+            living.heal(amplifier);
+        }
         living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1, 0, false, false, false));
     }
 }

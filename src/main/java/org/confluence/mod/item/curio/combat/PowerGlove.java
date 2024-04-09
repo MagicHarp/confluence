@@ -37,9 +37,9 @@ public class PowerGlove extends BaseCurioItem implements IAutoAttack {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ATTRIBUTE;
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(TOOLTIP);
     }
 }
