@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,6 +15,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
+import org.confluence.mod.ModSounds;
 import org.confluence.mod.item.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public class MagicMirror extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        level.playSound(player, player.getOnPos(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1, 1);
+        level.playSound(player, player.getOnPos(), ModSounds.TRANSMISSION.get(), SoundSource.PLAYERS, 1, 1);
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 

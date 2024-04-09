@@ -2,9 +2,9 @@ package org.confluence.mod.item.curio.movement;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.ModSounds;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
@@ -48,13 +49,14 @@ public class BaseSpeedBoots extends BaseCurioItem {
     }
 
     protected void speedUp(SlotContext slotContext, CompoundTag nbt, int addition, int max) {
-        LivingEntity living = slotContext.entity();
-        if (living.level().isClientSide) {
+        if (slotContext.entity() instanceof LocalPlayer localPlayer) {
             int speed = nbt.getInt("speed");
-            if (living.zza > 0) {
+            if (localPlayer.zza > 0) {
                 int actually = Math.min(max - speed, addition);
+                int value = speed + actually;
+                localPlayer.playSound(ModSounds.WAVING.get(), 1.0F, 1.1F * value / max);
                 if (actually > 0) {
-                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
+                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), value));
                 }
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
