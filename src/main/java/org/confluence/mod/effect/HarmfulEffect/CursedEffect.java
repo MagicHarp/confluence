@@ -4,15 +4,22 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物品
     public CursedEffect() {
         super(MobEffectCategory.HARMFUL, 0x4F4F4F);
     }
 
-    public static void onAdd(LivingEntity entity, LivingEntityUseItemEvent.Stop event) {
-        if (entity instanceof Player && !entity.isSpectator() && entity.isUsingItem()) {
+    public static void onRightClick(LivingEntity entity, PlayerInteractEvent.RightClickItem event) {
+        if (entity instanceof Player && !entity.isSpectator() && !entity.getUseItem().isEmpty()) {
+            event.setCanceled(true);
+        }
+    }
+
+    public static void onLeftClick(InputEvent.InteractionKeyMappingTriggered event) {
+        if (event.isUseItem() && event.isAttack() && event.isPickBlock()) {
             event.setCanceled(true);
         }
     }

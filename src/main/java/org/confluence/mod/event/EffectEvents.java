@@ -1,14 +1,14 @@
 package org.confluence.mod.event;
 
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +36,17 @@ public class EffectEvents {
 
         IronSkinEffect.onAdd(mobEffect, attributeMap);
         FishingEffect.onAdd(event.getEntity());
+        EnduranceEffect.onAdd(mobEffect,attributeMap);
+        ExquisitelyStuffedEffect.onAdd(event.getEntity(),mobEffect,attributeMap);
+        LifeForceEffect.onAdd(mobEffect,attributeMap);
+        SpeedEffect.onAdd(mobEffect,attributeMap);
+        WrathEffect.onAdd(mobEffect,attributeMap);
+        AcidVenomEffect.onAdd(event.getEntity());
+        ConfusedEffect.onAdd(event.getEntity());
+        CursedInfernoEffect.onAdd(event.getEntity());
+        FrostburnEffect.onAdd(event.getEntity());
+        IchorEffect.onAdd(mobEffect,attributeMap);
+        WitheredArmorEffect.onAdd(mobEffect,attributeMap);
     }
 
     @SubscribeEvent
@@ -46,6 +57,17 @@ public class EffectEvents {
         AttributeMap attributeMap = event.getEntity().getAttributes();
 
         IronSkinEffect.onRemove(mobEffect, attributeMap);
+        EnduranceEffect.onRemove(mobEffect,attributeMap);
+        ExquisitelyStuffedEffect.onRemove(event.getEntity(),mobEffect,attributeMap);
+        LifeForceEffect.onRemove(mobEffect,attributeMap);
+        SpeedEffect.onRemove(mobEffect,attributeMap);
+        WrathEffect.onRemove(mobEffect,attributeMap);
+        AcidVenomEffect.onRemove(event.getEntity());
+        ConfusedEffect.onRemove(event.getEntity());
+        CursedInfernoEffect.onRemove(event.getEntity());
+        FrostburnEffect.onRemove(event.getEntity());
+        IchorEffect.onRemove(mobEffect,attributeMap);
+        WitheredArmorEffect.onRemove(mobEffect,attributeMap);
     }
 
     @SubscribeEvent
@@ -57,16 +79,32 @@ public class EffectEvents {
 
         IronSkinEffect.onRemove(mobEffect, attributeMap);
         FishingEffect.onRemove(event.getEntity());
+        EnduranceEffect.onRemove(mobEffect,attributeMap);
+        ExquisitelyStuffedEffect.onRemove(event.getEntity(),mobEffect,attributeMap);
+        LifeForceEffect.onRemove(mobEffect,attributeMap);
+        SpeedEffect.onRemove(mobEffect,attributeMap);
+        WrathEffect.onRemove(mobEffect,attributeMap);
+        AcidVenomEffect.onRemove(event.getEntity());
+        ConfusedEffect.onRemove(event.getEntity());
+        CursedInfernoEffect.onRemove(event.getEntity());
+        FrostburnEffect.onRemove(event.getEntity());
+        IchorEffect.onRemove(mobEffect,attributeMap);
+        WitheredArmorEffect.onRemove(mobEffect,attributeMap);
     }
 
     @SubscribeEvent
-    public static void noUseItem(LivingEntityUseItemEvent.Stop event){
-        CursedEffect.onAdd(event.getEntity(),event);
-        SilencedEffect.onAdd(event.getEntity(),event);
+    public static void noHeal(LivingHealEvent event) {
+        BleedingEffect.onAdd(event.getEntity(), event);
     }
 
     @SubscribeEvent
-    public static void noHeal(LivingHealEvent event){
-        BleedingEffect.onAdd(event.getEntity(),event);
+    public static void noRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        SilencedEffect.onAdd(event.getEntity(), event);
+        CursedEffect.onRightClick(event.getEntity(),event);
+    }
+
+    @SubscribeEvent
+    public static void noLeftClickItem(InputEvent.InteractionKeyMappingTriggered event){
+        CursedEffect.onLeftClick(event);
     }
 }

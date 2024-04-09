@@ -22,11 +22,11 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
         super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
     }
 
-    public static void onAdd(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap, int time, int amplifier) {
+    public static void onAdd(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap) {
         if (entity instanceof Player && mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
             attributeMap.addTransientAttributeModifiers(SPEED_MODIFIER);
-            entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, time, amplifier, false, false));
-            entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, amplifier, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1, 1, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1, 1, false, false));
         }
     }
 
