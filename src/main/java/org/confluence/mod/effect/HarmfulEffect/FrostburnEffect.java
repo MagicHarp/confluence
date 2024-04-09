@@ -18,8 +18,8 @@ public class FrostburnEffect extends MobEffect {    //霜冻：缓慢损失生�
         }
     }
 
-    public static void onRemove(LivingEntity entity){
-        if (entity instanceof Player && entity.hasEffect(new MobEffectInstance(ModEffects.FROSTBURN.get()).getEffect())){
+    public static void onRemove(LivingEntity entity) {
+        if (entity instanceof Player && entity.hasEffect(new MobEffectInstance(ModEffects.FROSTBURN.get()).getEffect())) {
             entity.removeEffect(new MobEffectInstance(ModEffects.FROSTBURN.get()).getEffect());
         }
     }

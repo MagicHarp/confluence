@@ -18,8 +18,8 @@ public class CursedInfernoEffect extends MobEffect {    //诅咒火 缓慢失去
         }
     }
 
-    public static void onRemove(LivingEntity entity){
-        if (entity instanceof Player && entity.hasEffect(new MobEffectInstance(ModEffects.CURSED_INFERNO.get()).getEffect())){
+    public static void onRemove(LivingEntity entity) {
+        if (entity instanceof Player && entity.hasEffect(new MobEffectInstance(ModEffects.CURSED_INFERNO.get()).getEffect())) {
             entity.removeEffect(new MobEffectInstance(ModEffects.CURSED_INFERNO.get()).getEffect());
         }
     }

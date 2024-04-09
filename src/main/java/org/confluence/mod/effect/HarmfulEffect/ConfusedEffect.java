@@ -18,7 +18,7 @@ public class ConfusedEffect extends MobEffect { //困惑 反向移动
         }
     }
 
-    public static void onRemove(LivingEntity entity){
+    public static void onRemove(LivingEntity entity) {
         if (entity instanceof Player && entity.hasEffect(new MobEffectInstance(ModEffects.CONFUSED.get()).getEffect())) {
             entity.removeEffect(new MobEffectInstance(ModEffects.CONFUSED.get()).getEffect());
         }
