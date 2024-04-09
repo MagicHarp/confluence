@@ -10,7 +10,7 @@ public class FrostburnEffect extends MobEffect {    //霜冻：缓慢损失生�
         super(MobEffectCategory.HARMFUL, 0xBBFFFF);
     }
 
-    public void onAdd(LivingEntity entity) {
+    public static void onAdd(LivingEntity entity) {
         if (entity instanceof Player && entity.getHealth() > 1.0F) {
             entity.hurt(entity.damageSources().magic(), 1.5F);
         }

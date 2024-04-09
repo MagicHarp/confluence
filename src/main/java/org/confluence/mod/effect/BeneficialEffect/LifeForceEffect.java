@@ -19,13 +19,13 @@ public class LifeForceEffect extends MobEffect {    //生命力 最大生命提�
         super(MobEffectCategory.BENEFICIAL, 0xFFC0CB);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributemap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributemap) {
         if (mobEffect == ModEffects.LIFE_FORCE.get()) {
             attributemap.addTransientAttributeModifiers(LIFE_FORCE);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributemap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributemap) {
         if (mobEffect == ModEffects.LIFE_FORCE.get()) {
             AttributeInstance attributeInstance = attributemap.getInstance(Attributes.MAX_HEALTH);
             if (attributeInstance != null) {

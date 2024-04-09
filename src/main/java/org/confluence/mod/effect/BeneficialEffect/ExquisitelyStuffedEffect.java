@@ -22,7 +22,7 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
         super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
     }
 
-    public void onAdd(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap, int time, int amplifier) {
+    public static void onAdd(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap, int time, int amplifier) {
         if (entity instanceof Player && mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
             attributeMap.addTransientAttributeModifiers(SPEED_MODIFIER);
             entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, time, amplifier, false, false));
@@ -30,7 +30,7 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
         }
     }
 
-    public void onRemove(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap) {
         if (entity instanceof Player && mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.MOVEMENT_SPEED);
             if (attributeInstance != null) {

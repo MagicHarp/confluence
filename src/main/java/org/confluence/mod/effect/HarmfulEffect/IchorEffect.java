@@ -18,13 +18,13 @@ public class IchorEffect extends MobEffect {    //灵液 护甲值-5
         super(MobEffectCategory.HARMFUL, 0xFFD700);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.ICHOR.get()) {
             attributeMap.addTransientAttributeModifiers(ICHOR_MODIFIER);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.ICHOR.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ARMOR);
             if (attributeInstance != null) {

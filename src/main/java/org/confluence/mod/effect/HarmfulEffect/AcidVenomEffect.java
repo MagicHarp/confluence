@@ -10,7 +10,7 @@ public class AcidVenomEffect extends MobEffect {    //酸性毒液：缓慢失�
         super(MobEffectCategory.HARMFUL, 0x228B22);
     }
 
-    public void onAdd(LivingEntity entity) {
+    public static void onAdd(LivingEntity entity) {
         if (entity instanceof Player && entity.getHealth() > 1.0F) {
             entity.hurt(entity.damageSources().magic(), 1);
         }

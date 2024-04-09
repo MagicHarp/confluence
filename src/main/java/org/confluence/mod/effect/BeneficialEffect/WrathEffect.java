@@ -18,13 +18,13 @@ public class WrathEffect extends MobEffect {    //怒气 攻击+10
             Attributes.ATTACK_DAMAGE, new AttributeModifier(WRATH_UUID, "wrath", 10, AttributeModifier.Operation.ADDITION)
     );
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.WRATH.get()) {
             attributeMap.addTransientAttributeModifiers(WRATH);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.WRATH.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ATTACK_DAMAGE);
             if (attributeInstance != null) {

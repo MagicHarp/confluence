@@ -10,8 +10,8 @@ public class ConfusedEffect extends MobEffect { //困惑 反向移动
         super(MobEffectCategory.HARMFUL, 0x8B008B);
     }
 
-    public void onAdd(LivingEntity entity) {
-        if (entity instanceof Player && entity.hasEffect(this)) {
+    public static void onAdd(LivingEntity entity) {
+        if (entity instanceof Player) {
             entity.setDeltaMovement(entity.getDeltaMovement().x() * -1, entity.getDeltaMovement().y() * -1, entity.getDeltaMovement().z() * -1);
         }
     }

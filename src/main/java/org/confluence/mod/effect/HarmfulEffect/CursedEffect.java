@@ -11,7 +11,7 @@ public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物�
         super(MobEffectCategory.HARMFUL, 0x4F4F4F);
     }
 
-    public static void onAdd(LivingEntity entity, LivingEntityUseItemEvent event) {
+    public static void onAdd(LivingEntity entity, LivingEntityUseItemEvent.Stop event) {
         if (entity instanceof Player && !entity.isSpectator() && entity.isUsingItem()) {
             event.setCanceled(true);
         }

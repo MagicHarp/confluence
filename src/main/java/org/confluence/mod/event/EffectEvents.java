@@ -3,7 +3,9 @@ package org.confluence.mod.event;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
@@ -11,7 +13,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.effect.BeneficialEffect.IronSkinEffect;
+import org.confluence.mod.effect.BeneficialEffect.*;
 import org.confluence.mod.effect.HarmfulEffect.*;
 import org.confluence.mod.item.curio.combat.EffectInvulnerable;
 
@@ -33,6 +35,7 @@ public class EffectEvents {
         AttributeMap attributeMap = event.getEntity().getAttributes();
 
         IronSkinEffect.onAdd(mobEffect, attributeMap);
+        FishingEffect.onAdd(event.getEntity());
     }
 
     @SubscribeEvent
@@ -53,10 +56,11 @@ public class EffectEvents {
         AttributeMap attributeMap = event.getEntity().getAttributes();
 
         IronSkinEffect.onRemove(mobEffect, attributeMap);
+        FishingEffect.onRemove(event.getEntity());
     }
 
     @SubscribeEvent
-    public static void noUseItem(LivingEntityUseItemEvent event){
+    public static void noUseItem(LivingEntityUseItemEvent.Stop event){
         CursedEffect.onAdd(event.getEntity(),event);
         SilencedEffect.onAdd(event.getEntity(),event);
     }

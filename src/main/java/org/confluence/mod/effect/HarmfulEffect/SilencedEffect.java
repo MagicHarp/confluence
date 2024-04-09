@@ -12,7 +12,7 @@ public class SilencedEffect extends MobEffect { //沉默 禁用使用魔力的�
         super(MobEffectCategory.HARMFUL, 0xFFFAFA);
     }
 
-    public static void onAdd(LivingEntity entity, LivingEntityUseItemEvent event) {
+    public static void onAdd(LivingEntity entity, LivingEntityUseItemEvent.Stop event) {
         if (entity instanceof Player && !entity.isSpectator() && entity.isUsingItem() && event.getItem().getItem() instanceof IMagicAttack) {
             event.setCanceled(true);
         }

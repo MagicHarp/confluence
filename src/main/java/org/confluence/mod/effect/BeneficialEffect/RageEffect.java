@@ -19,13 +19,13 @@ public class RageEffect extends MobEffect { //暴怒 暴击率增加10%
         super(MobEffectCategory.BENEFICIAL, 0xFF4500);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.RAGE.get()) {
             attributeMap.addTransientAttributeModifiers(RAGE);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.RAGE.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ATTACK_DAMAGE);
             if (attributeInstance != null) {

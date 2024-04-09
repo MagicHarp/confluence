@@ -18,13 +18,13 @@ public class WitheredArmorEffect extends MobEffect {    //破碎盔甲 护甲值
         super(MobEffectCategory.HARMFUL, 0xE0EEE0);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.WITHERED_ARMOR.get()) {
             attributeMap.addTransientAttributeModifiers(WITHERED_MODIFIER);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.WITHERED_ARMOR.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.ARMOR);
             if (attributeInstance != null) {

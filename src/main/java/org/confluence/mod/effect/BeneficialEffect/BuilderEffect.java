@@ -21,13 +21,13 @@ public class BuilderEffect extends MobEffect {  //建筑工 增加触及距离
         super(MobEffectCategory.BENEFICIAL, 0x8B6914);
     }
 
-    public void onAdd(Attribute attribute, AttributeMap attributeMap) {
+    public static void onAdd(Attribute attribute, AttributeMap attributeMap) {
         if (attribute == ForgeMod.BLOCK_REACH.get()) {
             attributeMap.addTransientAttributeModifiers(BUILDER);
         }
     }
 
-    public void onRemove(Attribute attribute, AttributeMap attributeMap) {
+    public static void onRemove(Attribute attribute, AttributeMap attributeMap) {
         if (attribute == ForgeMod.BLOCK_REACH.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(attribute);
             if (attributeInstance != null) {

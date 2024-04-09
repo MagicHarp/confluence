@@ -9,9 +9,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 public class InfernoEffect extends MobEffect {  //狱火 点燃周围的怪物 （以玩家为中心的5×5×5范围内）
-    Level level;
+    static Level level;
 
-    private AABB BurningType(LivingEntity entity) {
+    private static AABB BurningType(LivingEntity entity) {
         double halfSize = 2.5;
         double x = entity.getX();
         double y = entity.getY();
@@ -19,7 +19,7 @@ public class InfernoEffect extends MobEffect {  //狱火 点燃周围的怪物 �
         return new AABB(x - halfSize, y - halfSize, z - halfSize, x + halfSize, y + halfSize, z + halfSize);
     }
 
-    public void onFire(LivingEntity entity, int burningtime) {
+    public static void onFire(LivingEntity entity, int burningtime) {
         for (Entity m : level.getEntitiesOfClass(Monster.class, BurningType(entity))) {
             m.setSecondsOnFire(burningtime);
         }
@@ -29,7 +29,7 @@ public class InfernoEffect extends MobEffect {  //狱火 点燃周围的怪物 �
         super(MobEffectCategory.BENEFICIAL, 0xFF4500);
     }
 
-    public void onAdd(LivingEntity entity, int burningtime) {
+    public static void onAdd(LivingEntity entity, int burningtime) {
         onFire(entity, burningtime);
     }
 }

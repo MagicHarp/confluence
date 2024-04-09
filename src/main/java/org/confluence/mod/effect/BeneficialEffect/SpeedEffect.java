@@ -18,13 +18,13 @@ public class SpeedEffect extends MobEffect {    //速度 加0.05基础移速
         super(MobEffectCategory.BENEFICIAL, 0xF8F8FF);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.SPEED.get()) {
             attributeMap.addTransientAttributeModifiers(SPEED);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.SPEED.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.MOVEMENT_SPEED);
             if (attributeInstance != null) {

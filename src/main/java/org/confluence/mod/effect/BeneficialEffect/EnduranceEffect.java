@@ -18,13 +18,13 @@ public class EnduranceEffect extends MobEffect {    //耐力 加一点点抗性�
         super(MobEffectCategory.BENEFICIAL, 0x708090);
     }
 
-    public void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.ENDURANCE.get()) {
             attributeMap.addTransientAttributeModifiers(ENDURANCE);
         }
     }
 
-    public void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
         if (mobEffect == ModEffects.ENDURANCE.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.KNOCKBACK_RESISTANCE);
             if (attributeInstance != null) {
