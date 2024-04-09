@@ -4,12 +4,15 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.BeneficialEffect.IronSkinEffect;
+import org.confluence.mod.effect.HarmfulEffect.*;
 import org.confluence.mod.item.curio.combat.EffectInvulnerable;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -50,5 +53,16 @@ public class EffectEvents {
         AttributeMap attributeMap = event.getEntity().getAttributes();
 
         IronSkinEffect.onRemove(mobEffect, attributeMap);
+    }
+
+    @SubscribeEvent
+    public static void noUseItem(LivingEntityUseItemEvent event){
+        CursedEffect.onAdd(event.getEntity(),event);
+        SilencedEffect.onAdd(event.getEntity(),event);
+    }
+
+    @SubscribeEvent
+    public static void noHeal(LivingHealEvent event){
+        BleedingEffect.onAdd(event.getEntity(),event);
     }
 }
