@@ -10,10 +10,12 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.ModTags;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.LogBlocks;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.security.PublicKey;
 import java.util.concurrent.CompletableFuture;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -70,7 +72,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 
         );
+        tag(BlockTags.LOGS).add(
+        ModBlocks.EBONY_LOG_BLOCKS.LOG.get(),ModBlocks.SHADOW_LOG_BLOCKS.LOG.get(),ModBlocks.PEARL_LOG_BLOCKS.LOG.get(),
+                ModBlocks.PALM_LOG_BLOCKS.LOG.get(),ModBlocks.ASH_LOG_BLOCKS.LOG.get());
 
+        tag(BlockTags.FENCES).add(
+                EBONY_LOG_BLOCKS.FENCE.get(),ModBlocks.SHADOW_LOG_BLOCKS.FENCE.get(),ModBlocks.PEARL_LOG_BLOCKS.FENCE.get(),
+                ModBlocks.PALM_LOG_BLOCKS.FENCE.get(),ModBlocks.SPOOKY_LOG_BLOCKS.FENCE.get(),ModBlocks.ASH_LOG_BLOCKS.FENCE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),

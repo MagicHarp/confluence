@@ -96,13 +96,13 @@ public class EffectEvents {
     public static void noHeal(LivingHealEvent event) {
         BleedingEffect.onAdd(event.getEntity(), event);
     }
-
+/*
     @SubscribeEvent
     public static void noRightClickItem(PlayerInteractEvent.RightClickItem event) {
         SilencedEffect.onAdd(event.getEntity(), event);
         CursedEffect.onRightClick(event.getEntity(),event);
     }
-
+*/
     @SubscribeEvent
     public static void noLeftClickItem(InputEvent.InteractionKeyMappingTriggered event){
         CursedEffect.onLeftClick(event);
