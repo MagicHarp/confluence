@@ -3,7 +3,7 @@ package org.confluence.mod.item.magic;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.bullet.*;
+import org.confluence.mod.entity.projectile.bullet.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.BaseItem;
 import org.confluence.mod.util.EnumRegister;

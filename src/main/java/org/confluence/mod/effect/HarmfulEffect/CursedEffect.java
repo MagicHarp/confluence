@@ -3,7 +3,6 @@ package org.confluence.mod.effect.HarmfulEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
@@ -13,13 +12,13 @@ public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物�
     }
 
     public static void onRightClick(LivingEntity entity, PlayerInteractEvent.RightClickItem event) {
-        if (entity instanceof Player && !entity.isSpectator() && !entity.getUseItem().isEmpty()) {
+        if (!entity.isSpectator() && !entity.getUseItem().isEmpty()) {
             event.setCanceled(true);
         }
     }
 
     public static void onLeftClick(InputEvent.InteractionKeyMappingTriggered event) {
-        if (event.isUseItem() && event.isAttack() && event.isPickBlock()) {
+        if (event.isUseItem() || event.isAttack() || event.isPickBlock()) {
             event.setCanceled(true);
         }
     }

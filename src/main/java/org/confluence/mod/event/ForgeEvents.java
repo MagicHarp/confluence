@@ -19,6 +19,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -30,6 +31,8 @@ import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
+import org.confluence.mod.effect.HarmfulEffect.BleedingEffect;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.combat.*;
@@ -94,14 +97,16 @@ public class ForgeEvents {
         DamageSource damageSource = event.getSource();
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         RandomSource random = living.level().random;
+        float amount = event.getAmount();
 
         HoneyComb.apply(living, random);
         PanicNecklace.apply(living);
+        ThornsEffect.apply(living, damageSource.getEntity(), amount);
         if (IHurtEvasion.apply(living, random) || IFireImmune.apply(living, damageSource)) {
             event.setCanceled(true);
             return;
         }
-        float amount = event.getAmount();
+
         amount = IMagicAttack.apply(damageSource, amount);
         amount = ManaIssueEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
@@ -158,5 +163,10 @@ public class ForgeEvents {
                 );
                 return atomic.get();
             }).ifPresent(event::setNewTarget);
+    }
+
+    @SubscribeEvent
+    public static void livingHeal(LivingHealEvent event) {
+        BleedingEffect.apply(event.getEntity(), event);
     }
 }

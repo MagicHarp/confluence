@@ -211,8 +211,12 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         return crystals;
     }
 
-    public void setFishingPower(float fishingPower) {
-        this.fishingPower = fishingPower;
+    public void increaseFishingPower(float fishingPower) {
+        this.fishingPower += fishingPower;
+    }
+
+    public void decreaseFishingPower(float fishingPower) {
+        this.fishingPower -= fishingPower;
     }
 
     public float getFishingPower() {

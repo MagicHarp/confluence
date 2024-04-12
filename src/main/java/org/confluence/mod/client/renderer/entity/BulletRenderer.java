@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.BulletModel;
-import org.confluence.mod.entity.bullet.BaseBulletEntity;
+import org.confluence.mod.entity.projectile.bullet.BaseBulletEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {

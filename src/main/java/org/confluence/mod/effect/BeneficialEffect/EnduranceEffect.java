@@ -11,7 +11,7 @@ import java.util.UUID;
 public class EnduranceEffect extends MobEffect {    //耐力 加一点点抗性提升
     private static final UUID ENDURANCE_UUID = UUID.fromString("20370222-C4CC-9E85-40FB-CA5BC1F74F2F");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ENDURANCE = ImmutableMultimap.of(
-            Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(ENDURANCE_UUID, "Endurance", 1, AttributeModifier.Operation.ADDITION)
+        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(ENDURANCE_UUID, "Endurance", 1, AttributeModifier.Operation.ADDITION)
     );
 
     public EnduranceEffect() {

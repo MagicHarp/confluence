@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.bullet;
+package org.confluence.mod.entity.projectile.bullet;
 
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.damagesource.DamageSource;

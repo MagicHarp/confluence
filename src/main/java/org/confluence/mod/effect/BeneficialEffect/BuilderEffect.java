@@ -14,7 +14,7 @@ import java.util.UUID;
 public class BuilderEffect extends MobEffect {  //建筑工 增加触及距离
     private static final UUID BUILDER_UUID = UUID.fromString("02B12F05-C426-AC6F-953C-AC0DBE1CEB57");
     private static final ImmutableMultimap<Attribute, AttributeModifier> BUILDER = ImmutableMultimap.of(
-            ForgeMod.BLOCK_REACH.get(), new AttributeModifier(BUILDER_UUID, "Builder", 3, AttributeModifier.Operation.ADDITION)
+        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(BUILDER_UUID, "Builder", 3, AttributeModifier.Operation.ADDITION)
     );
 
     public BuilderEffect() {

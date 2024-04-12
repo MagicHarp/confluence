@@ -8,8 +8,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.entity.bullet.*;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.projectile.BeeProjectile;
+import org.confluence.mod.entity.projectile.bullet.*;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.PinkSlime;
@@ -49,7 +50,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", SparkBulletEntity::new);
     public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", TopazBulletEntity::new);
 
-    public static final RegistryObject<EntityType<FallingStarItemEntity>> FALLING_STAR_ITEM_ENTITY = ENTITIES.register("falling_star", () -> EntityType.Builder.<FallingStarItemEntity>of(FallingStarItemEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).updateInterval(20).build("confluence:falling_star"));
+    public static final RegistryObject<EntityType<BeeProjectile>> BEE_PROJECTILE = ENTITIES.register("bee_projectile", () -> EntityType.Builder.<BeeProjectile>of(BeeProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:bee_projectile"));
+
+    public static final RegistryObject<EntityType<FallingStarItemEntity>> FALLING_STAR_ITEM_ENTITY = ENTITIES.register("falling_star", () -> EntityType.Builder.<FallingStarItemEntity>of(FallingStarItemEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(16).updateInterval(20).build("confluence:falling_star"));
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<SimpleParticleType> p, int s) {
         return ENTITIES.register(i + "_slime", () ->

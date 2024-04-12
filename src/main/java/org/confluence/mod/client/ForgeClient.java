@@ -14,6 +14,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
+import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 
@@ -51,5 +52,6 @@ public class ForgeClient {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
         GunShootingHandler.handle(event, localPlayer);
+        CursedEffect.onLeftClick(event);
     }
 }
