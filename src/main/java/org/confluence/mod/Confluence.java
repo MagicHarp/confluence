@@ -38,5 +38,6 @@ public class Confluence {
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
         ModEffects.MOB_EFFECTS.register(bus);
+        ModSounds.SOUNDS.register(bus);
     }
 }
