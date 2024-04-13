@@ -151,6 +151,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC 21st century, the most impressionist birch painting!");
         add("painting.confluence.cooobrid.title", "COOOBRID");
         add("painting.confluence.cooobrid.author", "Github_COOOBRID，Coo-goo~");
+        add("painting.confluence.nakinosi.title", "NAKINOSI");
+        add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头");
+        add("painting.confluence.maker.title", "MAKER");
+        add("painting.confluence.maker.author", "Github_MakerTechno");
+        add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
+        add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
