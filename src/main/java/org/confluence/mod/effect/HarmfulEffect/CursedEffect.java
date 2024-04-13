@@ -1,10 +1,12 @@
 package org.confluence.mod.effect.HarmfulEffect;
 
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import org.confluence.mod.effect.ModEffects;
 
 public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物品
     public CursedEffect() {
@@ -12,13 +14,14 @@ public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物�
     }
 
     public static void onRightClick(LivingEntity entity, PlayerInteractEvent.RightClickItem event) {
-        if (!entity.isSpectator() && !entity.getUseItem().isEmpty() && entity.hasEffect(new CursedEffect())) {
+        if (!entity.isSpectator() && !entity.getUseItem().isEmpty() && entity.hasEffect(ModEffects.CURSED.get())) {
             event.setCanceled(true);
         }
     }
 
-    public static void onLeftClick(InputEvent.InteractionKeyMappingTriggered event) {
-        if (event.isUseItem() || event.isAttack() || event.isPickBlock()) {
+    public static void onLeftClick(LocalPlayer player, InputEvent.InteractionKeyMappingTriggered event) {
+        boolean PlayerHasEffect = player.hasEffect(ModEffects.CURSED.get());
+        if (event.isUseItem() && PlayerHasEffect || event.isAttack() && PlayerHasEffect || event.isPickBlock() && PlayerHasEffect) {
             event.setCanceled(true);
         }
     }
