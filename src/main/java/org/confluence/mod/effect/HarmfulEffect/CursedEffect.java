@@ -12,7 +12,7 @@ public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物�
     }
 
     public static void onRightClick(LivingEntity entity, PlayerInteractEvent.RightClickItem event) {
-        if (!entity.isSpectator() && !entity.getUseItem().isEmpty()) {
+        if (!entity.isSpectator() && !entity.getUseItem().isEmpty() && entity.hasEffect(new CursedEffect())) {
             event.setCanceled(true);
         }
     }
