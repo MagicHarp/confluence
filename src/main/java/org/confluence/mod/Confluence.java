@@ -30,7 +30,7 @@ public class Confluence {
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
 
     public Confluence() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ModConfigs.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);

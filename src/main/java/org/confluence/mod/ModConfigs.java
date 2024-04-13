@@ -37,8 +37,6 @@ public class ModConfigs {
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         dropsMoney = DROP_MONEY.get();
-        rareBlocks.clear();
-        rareCreatures.clear();
         RARE_BLOCKS.get().forEach(s -> {
             try {
                 rareBlocks.add(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, false).blockState());

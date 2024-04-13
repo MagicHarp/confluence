@@ -21,7 +21,7 @@ public interface IMetalDetector {
                 Block block = blockState.getBlock();
                 Item item = block.asItem();
                 atomic.set(Component.translatable(
-                    "info.terracurio.metal_detector",
+                    "info.confluence.metal_detector",
                     block.getName().withStyle(item.getRarity(new ItemStack(item)).getStyleModifier()))
                 );
             });
