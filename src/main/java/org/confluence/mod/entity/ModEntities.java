@@ -13,7 +13,6 @@ import org.confluence.mod.entity.projectile.BeeProjectile;
 import org.confluence.mod.entity.projectile.bullet.*;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
-import org.confluence.mod.entity.slime.PinkSlime;
 
 import java.util.function.Supplier;
 
@@ -24,7 +23,7 @@ public class ModEntities {
     // todo variants
     public static final RegistryObject<EntityType<BaseSlime>> BLUE_SLIME = registerSlime("blue", ModParticles.ITEM_BLUE_GEL, 2);
     public static final RegistryObject<EntityType<BaseSlime>> GREEN_SLIME = registerSlime("green", ModParticles.ITEM_BLUE_GEL, 2);
-    public static final RegistryObject<EntityType<PinkSlime>> PINK_SLIME = ENTITIES.register("pink_slime", () -> EntityType.Builder.of(PinkSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:pink_slime"));
+    public static final RegistryObject<EntityType<BaseSlime>> PINK_SLIME = registerSlime("pink", ModParticles.ITEM_PINK_GEL, 1);
     public static final RegistryObject<EntityType<BaseSlime>> CORRUPTED_SLIME = registerSlime("corrupted", ModParticles.ITEM_BLUE_GEL, 2);
     public static final RegistryObject<EntityType<BaseSlime>> DESERT_SLIME = registerSlime("desert", ModParticles.ITEM_BLUE_GEL, 2);
     public static final RegistryObject<EntityType<BaseSlime>> EVIL_SLIME = registerSlime("evil", ModParticles.ITEM_BLUE_GEL, 2);

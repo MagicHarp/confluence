@@ -20,8 +20,7 @@ public class CursedEffect extends MobEffect {   //诅咒 禁止玩家使用物�
     }
 
     public static void onLeftClick(LocalPlayer player, InputEvent.InteractionKeyMappingTriggered event) {
-        boolean PlayerHasEffect = player.hasEffect(ModEffects.CURSED.get());
-        if (event.isUseItem() && PlayerHasEffect || event.isAttack() && PlayerHasEffect || event.isPickBlock() && PlayerHasEffect) {
+        if (player.hasEffect(ModEffects.CURSED.get()) && (event.isUseItem() || event.isAttack() || event.isPickBlock())) {
             event.setCanceled(true);
         }
     }
