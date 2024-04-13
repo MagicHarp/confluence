@@ -151,6 +151,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("biome.confluence.the_corruption", "腐化之地");
         add("biome.confluence.another_crimson", "猩红之地");
         add("biome.confluence.the_hallow", "神圣之地");
+
+        add("painting.confluence.magic_harp.title", "MAGIC_HARP");
+        add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，看上去傻傻的...");
+        add("painting.confluence.amanita.title", "AMANITA");
+        add("painting.confluence.amanita.author", "BiliBili_蘑菇人怎么还不来，一个蘑菇人镁铝！");
+        add("painting.confluence.westernat.title", "WESTERNAT");
+        add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC21世纪以来，最具有印象派主义的白桦树绘画!");
+        add("painting.confluence.cooobrid.title", "COOOBRID");
+        add("painting.confluence.cooobrid.author", "Github_COOOBRID，咕咕咕咕~");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");

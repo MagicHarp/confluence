@@ -13,6 +13,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
+import org.confluence.mod.painting.ModPaintings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -39,5 +40,6 @@ public class Confluence {
         ModTabs.TABS.register(bus);
         ModEffects.MOB_EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
+        ModPaintings.register(bus);
     }
 }

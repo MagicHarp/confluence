@@ -143,6 +143,15 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
+        add("painting.confluence.magic_harp.title", "MAGIC_HARP");
+        add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，Looks silly...");
+        add("painting.confluence.amanita.title", "AMANITA");
+        add("painting.confluence.amanita.author", "BiliBili_蘑菇人怎么还不来，A mushroom lady !");
+        add("painting.confluence.westernat.title", "WESTERNAT");
+        add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC 21st century, the most impressionist birch painting!");
+        add("painting.confluence.cooobrid.title", "COOOBRID");
+        add("painting.confluence.cooobrid.author", "Github_COOOBRID，Coo-goo~");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
