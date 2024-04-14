@@ -13,6 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.curio.SpectreGogglesModel;
+import org.confluence.mod.client.model.curio.TerrasparkBootsModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
@@ -64,6 +65,7 @@ public class ModClient {
         event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
 
         event.registerLayerDefinition(SpectreGogglesModel.LAYER_LOCATION, SpectreGogglesModel::createBodyLayer);
+        event.registerLayerDefinition(TerrasparkBootsModel.LAYER_LOCATION, TerrasparkBootsModel::createBodyLayer);
     }
 
     @SubscribeEvent
