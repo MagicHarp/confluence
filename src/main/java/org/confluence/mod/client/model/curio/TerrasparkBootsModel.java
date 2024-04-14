@@ -37,19 +37,19 @@ public class TerrasparkBootsModel extends HumanoidModel<LivingEntity> {
 
 		group2.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(14, 11).addBox(-2.5F, 1.5F, -1.0F, 5.0F, 1.0F, 2.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-0.0F, 8.375F, -1.55F, -0.7854F, 0.0F, 0.0F));//鞋带
 
-		PartDefinition group = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(16, 4).mirror().addBox(-12.0F, 9.0F, 5.5F, 4.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-		.texOffs(12, 15).mirror().addBox(-12.0F, 9.875F, 4.25F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.25F))
-		.texOffs(14, 7).mirror().addBox(-12.5F, 8.375F, 5.5F, 5.0F, 1.0F, 3.0F, CubeDeformation.NONE)
-		.texOffs(12, 0).mirror().addBox(-12.5F, 6.875F, 5.5F, 5.0F, 1.0F, 3.0F, CubeDeformation.NONE)
-		.texOffs(0, 10).mirror().addBox(-12.5F, 5.450F, 5.25F, 5.0F, 1.0F, 4.0F, CubeDeformation.NONE)
-		.texOffs(0, 15).mirror().addBox(-12.5F, 4.450F, 5.25F, 5.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-		.texOffs(0, 0).mirror().addBox(-12.0F, 6.0F, 6.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(8.0F, 24.0F, -8.0F));
+		PartDefinition group = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(16, 4).mirror().addBox(-2.0F, 9.0F, -2.3F, 4.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+		.texOffs(12, 15).mirror().addBox(-2.0F, 9.875F, -4.05F, 4.0F, 2.0F, 1.0F, new CubeDeformation(0.25F))
+		.texOffs(14, 7).mirror().addBox(-2.5F, 8.375F, -3.3F, 5.0F, 1.0F, 3.0F, CubeDeformation.NONE)
+		.texOffs(12, 0).mirror().addBox(-2.5F, 6.875F, -3.3F, 5.0F, 1.0F, 3.0F, CubeDeformation.NONE)
+		.texOffs(0, 10).mirror().addBox(-2.5F, 5.450F, -3.05F, 5.0F, 1.0F, 4.0F, CubeDeformation.NONE)
+		.texOffs(0, 15).mirror().addBox(-2.5F, 4.450F, -3.05F, 5.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+		.texOffs(0, 0).mirror().addBox(-2.0F, 6.0F, -1.8F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.25F)), PartPose.offset(8.0F, 24.0F, -8.0F));
 
-		group.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 17).mirror().addBox(-2.875F, 0.0F, 1.5F, 1.0F, 1.0F, 2.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-9.75F, 7.12549F, 7.2315F, 0.3927F, 0.0F, 0.0F));
+		group.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 17).mirror().addBox(-2.875F, 0.0F, 1.5F, 1.0F, 1.0F, 2.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-0.25F, 7.12549F, -0.55F, 0.3927F, 0.0F, 0.0F));
 
-		group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-2.875F, 1.25F, 1.25F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-9.75F, 7.1254F, 6.9841F, 0.3927F, 0.0F, 0.0F));
+		group.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-2.875F, 1.25F, 1.25F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-0.25F, 7.1254F, -1.3F, 0.3927F, 0.0F, 0.0F));
 
-		group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(14, 11).mirror().addBox(-2.5F, 1.5F, -1.0F, 5.0F, 1.0F, 2.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-10.0F, 8.375F, 7.25F, -0.7854F, 0.0F, 0.0F));
+		group.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(14, 11).mirror().addBox(-2.5F, 1.5F, -1.0F, 5.0F, 1.0F, 2.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(-0.0F, 8.375F, -1.55F, -0.7854F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
