@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.combat.IFireImmune;
+import org.confluence.mod.item.curio.combat.IFireInvul;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -17,7 +17,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance, IFireImmune {
+public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance, IFireInvul {
     public ObsidianHorseshoe() {
         super(ModRarity.LIGHT_RED);
     }
@@ -35,6 +35,6 @@ public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance,
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IFallResistance.TOOLTIP);
-        list.add(IFireImmune.TOOLTIP);
+        list.add(IFireInvul.TOOLTIP);
     }
 }

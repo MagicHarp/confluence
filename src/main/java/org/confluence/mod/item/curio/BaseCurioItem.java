@@ -45,9 +45,9 @@ public class BaseCurioItem extends Item implements ICurioItem {
         Item item = stack.getItem();
         LivingEntity living = slotContext.entity();
         if (item instanceof ICriticalHit iCriticalHit) iCriticalHit.freshChance(living);
-        if (item instanceof IFireImmune iFireImmune) iFireImmune.freshFireImmune(living);
+        if (item instanceof IFireInvul iFireInvul) iFireInvul.freshFireImmune(living);
         if (item instanceof ILavaHurtReduce iLavaHurtReduce) iLavaHurtReduce.freshLavaReduce(living);
-        if (item instanceof ILavaImmune iLavaImmune) iLavaImmune.freshLavaImmuneTicks(living);
+        if (item instanceof ILavaInvul iLavaInvul) iLavaInvul.freshLavaImmuneTicks(living);
         if (item instanceof IInvulnerableTime iInvulnerableTime) iInvulnerableTime.freshInvulnerableTime(living);
         if (item instanceof IAggroAttach iAggroAttach) iAggroAttach.freshAggro(living);
         if (item instanceof IFallResistance iFallResistance) iFallResistance.freshFallResistance(living);

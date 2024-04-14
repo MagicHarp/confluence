@@ -41,9 +41,9 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         byte mechanicalLens = 0;
         for (ItemStack stack : itemStacks) {
             Item item = stack.getItem();
-            if (item instanceof MinuteWatch) watch = 1;
-            else if (item instanceof HalfHourWatch) watch = 2;
-            else if (item instanceof HourWatch || item instanceof GPS || item instanceof PDA) watch = 3;
+            if (watch < 1 && item instanceof HourWatch) watch = 1;
+            else if (watch < 2 && item instanceof HalfHourWatch) watch = 2;
+            else if (watch < 3 && IWatch.isMinuteWatch(item)) watch = 3;
             if (item instanceof IWeatherRadio) weatherRadio = 1;
             if (item instanceof ISextant) sextant = 1;
             if (item instanceof IFishermansPocketGuide) fishermansPocketGuide = 1;

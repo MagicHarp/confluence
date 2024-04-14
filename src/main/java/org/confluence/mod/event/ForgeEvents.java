@@ -102,7 +102,7 @@ public class ForgeEvents {
         HoneyComb.apply(living, random);
         PanicNecklace.apply(living);
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
-        if (IHurtEvasion.apply(living, random) || IFireImmune.apply(living, damageSource)) {
+        if (IHurtEvasion.apply(living, random) || IFireInvul.apply(living, damageSource)) {
             event.setCanceled(true);
             return;
         }

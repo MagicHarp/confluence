@@ -11,7 +11,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.mixin.client.MinecraftAccessor;
+import org.confluence.mod.mixin.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
@@ -26,9 +26,10 @@ public interface IAutoAttack {
 
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
         if (ClientPacketHandler.couldAutoAttack() && minecraft.options.keyAttack.isDown()) {
+            if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;
             if (accessor.getMissTime() > 0) accessor.setMissTime(0);
-            double reach = Math.max(localPlayer.getBlockReach(), localPlayer.getEntityReach());
+            double reach = localPlayer.getEntityReach();
             Vec3 from = localPlayer.getEyePosition(1.0F);
             Vec3 viewVector = localPlayer.getViewVector(1.0F);
             Vec3 to = from.add(viewVector.x * reach, viewVector.y * reach, viewVector.z * reach);

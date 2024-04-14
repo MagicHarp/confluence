@@ -12,7 +12,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
-public class ObsidianSkull extends BaseCurioItem implements IFireImmune {
+public class ObsidianSkull extends BaseCurioItem implements IFireInvul {
     public ObsidianSkull() {
         super(ModRarity.GREEN);
     }

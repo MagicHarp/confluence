@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import org.confluence.mod.item.curio.ILavaImmune;
+import org.confluence.mod.item.curio.ILavaInvul;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -108,7 +108,7 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFireImmune) {
+                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFireInvul) {
                     fireImmune.set(true);
                     return;
                 }
@@ -136,8 +136,8 @@ public class PlayerAbility implements INBTSerializable<CompoundTag> {
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ILavaImmune iLavaImmune) {
-                    lavaImmuneTicks.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lavaImmuneTicks.get()));
+                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ILavaInvul iLavaInvul) {
+                    lavaImmuneTicks.set(Math.max(iLavaInvul.getLavaImmuneTicks(), lavaImmuneTicks.get()));
                 }
             }
         });
