@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -49,18 +50,19 @@ public class BaseSpeedBoots extends BaseCurioItem {
     }
 
     protected void speedUp(SlotContext slotContext, CompoundTag nbt, int addition, int max) {
-        if (slotContext.entity() instanceof LocalPlayer localPlayer) {
+        LivingEntity living = slotContext.entity();
+        if (living instanceof LocalPlayer localPlayer) {
             int speed = nbt.getInt("speed");
             if (localPlayer.zza > 0) {
                 int actually = Math.min(max - speed, addition);
-                int value = speed + actually;
-                localPlayer.playSound(ModSounds.WAVING.get(), 1.0F, 1.1F * value / max);
                 if (actually > 0) {
-                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), value));
+                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
+        } else if (living.level().getGameTime() % 5 == 0) {
+            living.playSound(ModSounds.SHOES_WALK.get(), 1.0F, 1.0F);
         }
     }
 
