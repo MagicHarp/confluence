@@ -12,15 +12,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.client.model.curio.SpectreGogglesModel;
-import org.confluence.mod.client.model.curio.TerrasparkBootsModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
-import org.confluence.mod.client.renderer.curio.CurioRenderers;
 import org.confluence.mod.client.renderer.entity.BulletRenderer;
 import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
 import org.confluence.mod.client.renderer.entity.FallingStarRenderer;
@@ -39,7 +36,8 @@ public class ModClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            CurioRenderers.register();
+            CuriosClient.registerRenderers();
+
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.EBONY_LOG_BLOCKS.DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.EBONY_LOG_BLOCKS.TRAPDOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALM_LOG_BLOCKS.DOOR.get(), RenderType.cutout());
@@ -54,6 +52,8 @@ public class ModClient {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        CuriosClient.registerLayers(event::registerLayerDefinition);
+
         event.registerLayerDefinition(BulletModel.AMBER_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.AMETHYST_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.DIAMOND_LAYER, BulletModel::createBodyLayer);
@@ -63,9 +63,6 @@ public class ModClient {
         event.registerLayerDefinition(BulletModel.SAPPHIRE_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.SPARK_LAYER, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
-
-        event.registerLayerDefinition(SpectreGogglesModel.LAYER_LOCATION, SpectreGogglesModel::createBodyLayer);
-        event.registerLayerDefinition(TerrasparkBootsModel.LAYER_LOCATION, TerrasparkBootsModel::createBodyLayer);
     }
 
     @SubscribeEvent

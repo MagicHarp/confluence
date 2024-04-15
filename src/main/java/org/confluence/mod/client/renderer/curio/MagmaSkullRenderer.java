@@ -11,23 +11,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.model.curio.TerrasparkBootsModel;
+import org.confluence.mod.client.model.curio.MagmaSkullModel;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-public class TerrasparkBootsRenderer implements ICurioRenderer {
-    private static final RenderType CUTOUT = RenderType.entityCutout(new ResourceLocation(Confluence.MODID, "textures/curio/terraspark_boots.png"));
+public class MagmaSkullRenderer implements ICurioRenderer {
+    private static final RenderType CUTOUT = RenderType.entityCutout(new ResourceLocation(Confluence.MODID, "textures/curio/magma_skull.png"));
 
-    private final TerrasparkBootsModel model;
+    private final MagmaSkullModel model;
 
-    public TerrasparkBootsRenderer() {
-        this.model = new TerrasparkBootsModel(Minecraft.getInstance().getEntityModels().bakeLayer(TerrasparkBootsModel.LAYER_LOCATION));
+    public MagmaSkullRenderer() {
+        this.model = new MagmaSkullModel(Minecraft.getInstance().getEntityModels().bakeLayer(MagmaSkullModel.LAYER_LOCATION));
     }
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
+        ICurioRenderer.followHeadRotations(slotContext.entity(), model.head, model.magma);
         model.renderToBuffer(matrixStack, renderTypeBuffer.getBuffer(CUTOUT), light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 }
-

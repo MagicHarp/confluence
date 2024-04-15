@@ -26,7 +26,7 @@ public class SpectreGogglesRenderer implements ICurioRenderer {
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        ICurioRenderer.followHeadRotations(slotContext.entity(), model.getGoggles());
+        ICurioRenderer.followHeadRotations(slotContext.entity(), model.head);
         model.renderToBuffer(poseStack, renderTypeBuffer.getBuffer(CUTOUT), light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

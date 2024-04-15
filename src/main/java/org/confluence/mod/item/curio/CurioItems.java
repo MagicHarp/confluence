@@ -178,7 +178,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
     /* 仙灵靴 */
     LIGHTNING_BOOTS("lightning_boots", () -> new LightningBoots(PINK)), // 闪电靴
-    FROSTSPARK_BOOTS("frostspark_boots", FrostSparkBoots::new), // 霜花靴
+    FROSTSPARK_BOOTS("frostspark_boots", FrostsparkBoots::new), // 霜花靴
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
     MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
