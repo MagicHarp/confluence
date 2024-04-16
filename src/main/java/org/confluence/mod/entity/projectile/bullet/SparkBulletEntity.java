@@ -1,5 +1,6 @@
 package org.confluence.mod.entity.projectile.bullet;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -29,7 +30,7 @@ public class SparkBulletEntity extends BaseBulletEntity {
 
     @Override
     public SimpleParticleType getParticle() {
-        return ModParticles.RUBY_BULLET.get();
+        return ParticleTypes.LAVA.getType();
     }
 
     protected float getDamage() {
