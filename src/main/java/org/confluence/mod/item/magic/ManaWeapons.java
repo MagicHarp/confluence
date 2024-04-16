@@ -38,7 +38,7 @@ public enum ManaWeapons implements EnumRegister<Item> {
     POISON_STAFF("poison_staff", BaseItem::new),//毒液法杖
     RAINBOW_ROD("rainbow_rod", BaseItem::new),//彩虹法杖
     UNHOLY_TRIDENT("unholy_trident", BaseItem::new),//邪恶三叉戟
-    TOME_OF_INFINITE_WISDOM(" tome_of_infinite_wisdom", BaseItem::new),//无限智慧巨著
+    TOME_OF_INFINITE_WISDOM("tome_of_infinite_wisdom", BaseItem::new),//无限智慧巨著
     NETTLE_BURST("nettle_burst", BaseItem::new),//爆裂藤曼
     SHADOWBEAM_STAFF("shadowbeam_staff", BaseItem::new),//暗影束法杖
     INFERNO_FORK("inferno_fork", BaseItem::new),//狱火叉
@@ -48,7 +48,7 @@ public enum ManaWeapons implements EnumRegister<Item> {
     SPECTRE_STAFF("spectre_staff", BaseItem::new),//幽灵法杖
     RESONANCE_SCEPTER("resonance_scepter", BaseItem::new),//共鸣权杖
     STAFF_OF_EARTH("staff_of_earth", BaseItem::new),//大地法杖
-    RAZORPINE(" razorpine", BaseItem::new),//剃刀松
+    RAZORPINE("razorpine", BaseItem::new),//剃刀松
     BETSYS_WRATH("betsys_wrath", BaseItem::new),//双足翼龙怒气
 
 
