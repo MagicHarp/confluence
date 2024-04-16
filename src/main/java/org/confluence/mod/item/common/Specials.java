@@ -4,12 +4,12 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
+/*
+public enum Specials implements EnumRegister<Item> {
 
-public enum SpecialFunctionalItems implements EnumRegister<Item> {
     AMANITA_FUNGIFIN("amanita_fungifin", BaseItem::new),//发光蘑菇鱼
     ANGELFISH("angelfish", BaseItem::new),//天使鱼
     BATFISH("batfish", BaseItem::new),//蝙蝠鱼
@@ -50,12 +50,12 @@ public enum SpecialFunctionalItems implements EnumRegister<Item> {
     TUNDRA_TROUT("tundra_trout", BaseItem::new),//苔原鳟鱼
     UNICORN_FISH("unicorn_fish", BaseItem::new),//独角兽鱼
     WYVERNTAIL("wyverntail", BaseItem::new),//飞龙尾
-    ZOMBIE_FISH("zombie_fish", BaseItem::new),//僵尸鱼
-    ;
+    ZOMBIE_FISH("zombie_fish", BaseItem::new);//僵尸鱼
+
 
     private final RegistryObject<Item> value;
 
-    SpecialFunctionalItems(String id, Supplier<Item> item) {
+    Specials(String id, Supplier<Item> item) {
         this.value = ModItems.ITEMS.register(id, item);
     }
 
@@ -65,7 +65,8 @@ public enum SpecialFunctionalItems implements EnumRegister<Item> {
     }
 
     public static void init() {
-        Confluence.LOGGER.info("Registering specialfunctionalitems");
+        Confluence.LOGGER.info("Registering specials");
     }
-
+*//*
 }
+*/

@@ -9,6 +9,7 @@ import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
+//import org.confluence.mod.item.common.Specials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
@@ -41,6 +42,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
         add("creativetab.confluence.functional", "汇流来世 | 功能方块");
         add("creativetab.confluence.curios", "汇流来世 | 饰品");
+        add("creativetab.confluence.special", "汇流来世 | 特殊物品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
@@ -494,6 +496,34 @@ public class ModChineseProvider extends LanguageProvider {
         add(ManaWeapons.AQUA_SCEPTER.get(), "海蓝权杖");
         add(ManaWeapons.WOND_OF_SPARKING.get(), "火花魔棒");
         add(ManaWeapons.WOND_OF_FROSTING.get(), "霜冻魔棒");
+        add(ManaWeapons.THUNDER_ZAPPER.get(), "雷霆法杖");
+        add(ManaWeapons.VILETHORN.get(), "魔刺");
+        add(ManaWeapons.WEATHER_PAIN.get(), "天候棒");
+        add(ManaWeapons.MAGIC_MISSILE.get(), "魔法导弹");
+        add(ManaWeapons.FLOWER_OF_FIRE.get(), "火之花");
+        add(ManaWeapons.FLAMELASH.get(), "烈焰火鞭");
+        add(ManaWeapons.SKY_FRACTURE.get(), "裂天剑");
+        add(ManaWeapons.CRYSTAL_SERPENT.get(), "水晶蛇");
+        add(ManaWeapons.FROST_STAFF.get(), "寒霜法杖");
+        add(ManaWeapons.FLOWER_OF_FROST.get(), "寒霜之花");
+        add(ManaWeapons.CRYSTAL_VILE_SHARD.get(), "魔晶碎块");
+        add(ManaWeapons.LIFE_DRAIN.get(), "夺命杖");
+        add(ManaWeapons.METEOR_STAFF.get(), "流星法杖");
+        add(ManaWeapons.POISON_STAFF.get(), "毒液法杖");
+        add(ManaWeapons.RAINBOW_ROD.get(), "彩虹法杖");
+        add(ManaWeapons.UNHOLY_TRIDENT.get(), "邪恶三叉戟");
+        add(ManaWeapons.TOME_OF_INFINITE_WISDOM.get(), "无限智慧巨著");
+        add(ManaWeapons.NETTLE_BURST.get(), "爆裂藤曼");
+        add(ManaWeapons.SHADOWBEAM_STAFF.get(), "暗影束法杖");
+        add(ManaWeapons.INFERNO_FORK.get(), "狱火叉");
+        add(ManaWeapons.VENOM_STAFF.get(), "毒液法杖");
+        add(ManaWeapons.BAT_SCEPTER.get(), "蝙蝠权杖");
+        add(ManaWeapons.BLIZZARD_STAFF.get(), "暴雪法杖");
+        add(ManaWeapons.SPECTRE_STAFF.get(), "幽灵法杖");
+        add(ManaWeapons.RESONANCE_SCEPTER.get(), "共鸣权杖");
+        add(ManaWeapons.STAFF_OF_EARTH.get(), "大地法杖");
+        add(ManaWeapons.RAZORPINE.get(), "剃刀松");
+        add(ManaWeapons.BETSYS_WRATH.get(), "双足翼龙怒气");
 
         //刷怪蛋
         add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(),"蓝色史莱姆刷怪蛋");
@@ -625,6 +655,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.GOBLIN_TECH.get(), "哥布林数据仪");
         add(CurioItems.FISH_FINDER.get(), "探鱼器");
         add(CurioItems.PDA.get(), "个人数字助手");
+        add(CurioItems.SHARK_TOOTH_NECKLACE.get(), "鲨牙项链");
+        add(CurioItems.CELESTIAL_STONE.get(), "天界壳");
+        add(CurioItems.FAST_CLOCK.get(), "快走时钟");
+        add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
 
 
         //盔甲
@@ -712,6 +746,50 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.STINKY_FISH.get(),"臭味鱼");
         add(Materials.TUNA.get(),"金枪鱼");
         add(Materials.MOTTLED_OILFISH.get(),"斑驳油鱼");
+        //任务鱼
+       /*
+        add(Specials.AMANITA_FUNGIFIN.get(),"发光蘑菇鱼");
+        add(Specials.ANGELFISH.get(),"天使鱼");
+        add(Specials.BATFISH.get(),"蝙蝠鱼");
+        add(Specials.BLOODY_MANOWAR.get(),"血腥战神");
+        add(Specials.BONEFISH.get(),"骨鱼");
+        add(Specials.BUMBLEBEE_TUNA.get(),"大黄蜂金枪鱼");
+        add(Specials.BUNNYFISH.get(),"兔兔鱼");
+        add(Specials.CAP_TUNABEARD.get(),"金枪鱼船长");
+        add(Specials.CATFISH.get(),"猫猫鱼");
+        add(Specials.CLOUDFISH.get(),"云朵鱼");
+        add(Specials.ANOTHER_CLOWNFISH.get(),"异域小丑鱼");
+        add(Specials.CURSEDFISH.get(),"诅咒鱼");
+        add(Specials.DEMONIC_HELLFISH.get(),"地狱恶魔鱼");
+        add(Specials.DERPFISH.get(),"跳跳鱼");
+        add(Specials.DIRTFISH.get(),"土鱼");
+        add(Specials.DYNAMITE_FISH.get(),"雷管鱼");
+        add(Specials.EATER_OF_PLANKTON.get(),"浮游噬鱼");
+        add(Specials.FALLEN_STARFISH.get(),"坠落星鱼");
+        add(Specials.THE_FISH_OF_CTHULHU.get(),"克苏鲁之鱼");
+        add(Specials.FISHOTRON.get(),"骷髅王鱼");
+        add(Specials.FISHRON.get(),"猪龙鱼");
+        add(Specials.GUIDE_VOODOO_FISH.get(),"向导巫毒鱼");
+        add(Specials.HARPYFISH.get(),"鸟妖鱼");
+        add(Specials.HUNGERFISH.get(),"饥饿鱼");
+        add(Specials.ICHORFISH.get(),"灵液鱼");
+        add(Specials.INFECTED_SCABBARDFISH.get(),"染病鞘鱼");
+        add(Specials.JEWELFISH.get(),"宝石鱼");
+        add(Specials.MIRAGE_FISH.get(),"混沌鱼");
+        add(Specials.MUDFISH.get(),"泥鱼");
+        add(Specials.MUTANT_FLINXFIN.get(),"突变弗林鱼");
+        add(Specials.PENGFISH.get(),"企鹅鱼");
+        add(Specials.PIXIEFISH.get(),"妖精鱼");
+        add(Specials.SCARAB_FISH.get(),"甲虫鱼");
+        add(Specials.SCORPIO_FISH.get(),"毒蝎鱼");
+        add(Specials.SLIMEFISH.get(),"史莱姆鱼");
+        add(Specials.SPIDERFISH.get(),"蜘蛛鱼");
+        add(Specials.TROPICAL_BARRACUDA.get(),"热带梭鱼");
+        add(Specials.TUNDRA_TROUT.get(),"苔原鳟鱼");
+        add(Specials.UNICORN_FISH.get(),"独角兽鱼");
+        add(Specials.WYVERNTAIL.get(),"飞龙尾");
+        add(Specials.ZOMBIE_FISH.get(),"僵尸鱼");
+        */
         //endregion items
     }
 }

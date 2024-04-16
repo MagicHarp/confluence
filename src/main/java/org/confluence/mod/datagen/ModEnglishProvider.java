@@ -37,6 +37,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.armors", "Confluence | Armors");
         add("creativetab.confluence.functional", "Confluence | Functional");
         add("creativetab.confluence.curios", "Confluence | Curios");
+        add("creativetab.confluence.special", "汇流来世 | Special");
 
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
