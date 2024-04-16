@@ -1,6 +1,8 @@
 package org.confluence.mod.item.sword;
 
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
@@ -34,6 +36,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     BLUE_LIGHT_SABER("blue_light_saber", LightSaber.Blue::new),
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new);
+    //其他剑
 
     private final RegistryObject<SwordItem> value;
 
