@@ -1,16 +1,15 @@
 package org.confluence.mod.util;
 
-import net.minecraftforge.fml.loading.FMLPaths;
 import org.confluence.mod.Confluence;
 
 import javax.imageio.ImageIO;
-import javax.tools.*;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.util.Collections;
 
 public class ModResources {
@@ -50,31 +49,5 @@ public class ModResources {
             }
         }
         return text.toString();
-    }
-
-    private static class StringObject extends SimpleJavaFileObject {
-        private final String content;
-
-        StringObject(String className, String contents) throws URISyntaxException {
-            super(new URI(className), Kind.SOURCE);
-            this.content = contents;
-        }
-
-        @Override
-        public CharSequence getCharContent(boolean ignoreEncodingErrors) {
-            return content;
-        }
-    }
-
-    private static class GameDirClassLoader extends ClassLoader {
-        @Override
-        protected Class<?> findClass(String name) throws ClassNotFoundException {
-            try {
-                byte[] bytes = Files.readAllBytes(FMLPaths.GAMEDIR.get().resolve(name + ".class"));
-                return defineClass(name, bytes, 0, bytes.length);
-            } catch (IOException e) {
-                throw new ClassNotFoundException(name);
-            }
-        }
     }
 }

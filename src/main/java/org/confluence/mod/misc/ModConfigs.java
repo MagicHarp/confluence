@@ -1,4 +1,4 @@
-package org.confluence.mod;
+package org.confluence.mod.misc;
 
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.Confluence;
 
 import java.util.ArrayList;
 import java.util.List;

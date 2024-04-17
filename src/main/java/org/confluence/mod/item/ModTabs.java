@@ -4,8 +4,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
@@ -14,7 +12,10 @@ import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
-import org.confluence.mod.item.common.*;
+import org.confluence.mod.item.common.Gels;
+import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
@@ -22,7 +23,6 @@ import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
-import org.confluence.mod.painting.ModPaintings;
 
 import static org.confluence.mod.block.ModBlocks.*;
 

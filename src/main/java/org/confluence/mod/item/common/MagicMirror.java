@@ -15,8 +15,8 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
-import org.confluence.mod.ModSounds;
 import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModSounds;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicMirror extends Item {

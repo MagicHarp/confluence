@@ -7,8 +7,8 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.TierSortingRegistry;
-import org.confluence.mod.ModTags;
 import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

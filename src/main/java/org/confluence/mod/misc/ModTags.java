@@ -1,4 +1,4 @@
-package org.confluence.mod;
+package org.confluence.mod.misc;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

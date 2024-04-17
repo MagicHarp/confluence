@@ -6,7 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.ModSounds;
+import org.confluence.mod.misc.ModSounds;
 import org.confluence.mod.mixin.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;

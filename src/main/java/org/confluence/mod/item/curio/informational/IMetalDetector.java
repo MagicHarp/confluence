@@ -6,7 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
-import org.confluence.mod.ModConfigs;
+import org.confluence.mod.misc.ModConfigs;
 
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicReference;

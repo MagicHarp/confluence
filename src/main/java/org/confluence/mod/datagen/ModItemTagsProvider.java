@@ -7,8 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.ModTags;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

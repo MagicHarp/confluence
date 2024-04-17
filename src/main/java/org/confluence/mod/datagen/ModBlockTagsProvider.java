@@ -7,15 +7,14 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.confluence.mod.ModTags;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.security.PublicKey;
 import java.util.concurrent.CompletableFuture;
 
 import static org.confluence.mod.Confluence.MODID;
