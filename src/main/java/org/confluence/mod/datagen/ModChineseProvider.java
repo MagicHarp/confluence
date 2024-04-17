@@ -10,6 +10,7 @@ import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 //import org.confluence.mod.item.common.Specials;
+import org.confluence.mod.item.common.Specials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;

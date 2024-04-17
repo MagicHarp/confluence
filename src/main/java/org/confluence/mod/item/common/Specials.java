@@ -7,7 +7,7 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
-/*
+
 public enum Specials implements EnumRegister<Item> {
 
     AMANITA_FUNGIFIN("amanita_fungifin", BaseItem::new),//发光蘑菇鱼
@@ -67,6 +67,5 @@ public enum Specials implements EnumRegister<Item> {
     public static void init() {
         Confluence.LOGGER.info("Registering specials");
     }
-*//*
+
 }
-*/

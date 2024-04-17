@@ -212,4 +212,11 @@ public class ModTabs {
                     })
                     .build());
     //特殊物品
+    public static final RegistryObject<CreativeModeTab> SPECIAL = TABS.register("special",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.MATERIAL_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.special"))
+                    .displayItems((parameters, output) -> {
+
+                    })
+                    .build());
 }
