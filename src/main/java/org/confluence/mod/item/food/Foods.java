@@ -1,5 +1,6 @@
 package org.confluence.mod.item.food;
 
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;

@@ -57,6 +57,7 @@ public class ModItems {
         SpawnEggs.init();
         Armors.init();
         CurioItems.init();
+        QuestedFishes.init();
         Foods.init();
         ITEMS.register(bus);
     }
