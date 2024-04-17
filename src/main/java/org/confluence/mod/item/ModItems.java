@@ -10,6 +10,7 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
@@ -56,6 +57,7 @@ public class ModItems {
         SpawnEggs.init();
         Armors.init();
         CurioItems.init();
+        Foods.init();
         ITEMS.register(bus);
     }
 }
