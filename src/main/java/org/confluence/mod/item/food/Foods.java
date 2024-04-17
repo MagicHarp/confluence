@@ -26,5 +26,4 @@ public enum Foods implements EnumRegister<Item> {
     public static void init() {
         Confluence.LOGGER.info("Registering foods");
     }
-
 }
