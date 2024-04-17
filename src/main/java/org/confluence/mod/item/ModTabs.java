@@ -91,9 +91,8 @@ public class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.EXPERT_TEST_ITEM.get());
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
-
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
-
+                for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
             })
@@ -151,7 +150,6 @@ public class ModTabs {
             .displayItems((parameters, output) -> {
                 for (Foods foods : Foods.values()) output.accept(foods.get());
                 for (TerraPotions terraPotions : TerraPotions.values()) output.accept(terraPotions.get());
-                for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
             })
             .build());
     // 盔甲

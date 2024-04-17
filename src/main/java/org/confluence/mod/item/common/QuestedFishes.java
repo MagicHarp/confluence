@@ -21,7 +21,7 @@ public enum QuestedFishes implements EnumRegister<Item> {
     ANOTHER_CLOWNFISH("another_clownfish"), // 异域小丑鱼
     CURSEDFISH("cursedfish"), // 诅咒鱼
     DEMONIC_HELLFISH("demonic_hellfish"), // 地狱恶魔鱼
-    DERPFISH(" derpfish"), // 跳跳鱼
+    DERPFISH("derpfish"), // 跳跳鱼
     DIRTFISH("dirtfish"), // 土鱼
     DYNAMITE_FISH("dynamite_fish"), // 雷管鱼
     EATER_OF_PLANKTON("eater_of_plankton"), // 浮游噬鱼
