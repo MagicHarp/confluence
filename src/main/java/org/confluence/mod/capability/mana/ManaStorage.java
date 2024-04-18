@@ -72,14 +72,20 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         int extract = (int) (sup.get() * extractRatio);
         if (currentMana < extract) {
             if (CuriosUtils.noSameCurio(serverPlayer, IAutoGetMana.class)) return false;
+            ItemStack toUse = null;
             for (ItemStack itemStack : serverPlayer.getInventory().items) {
                 if (itemStack.getItem() instanceof ManaPotion manaPotion) {
                     if (currentMana + manaPotion.getAmount() < extract) continue;
-                    manaPotion.finishUsingItem(itemStack, serverPlayer.level(), serverPlayer);
-                    break;
+                    if (toUse == null) {
+                        toUse = itemStack;
+                    } else if (manaPotion.getAmount() < ((ManaPotion) toUse.getItem()).getAmount()) {
+                        toUse = itemStack;
+                    }
+                    if (manaPotion.getAmount() == 50) break;
                 }
             }
-            if (currentMana < extract) return false;
+            if (toUse == null) return false;
+            else toUse.finishUsingItem(serverPlayer.level(), serverPlayer);
         }
         this.currentMana -= extract;
         return true;
