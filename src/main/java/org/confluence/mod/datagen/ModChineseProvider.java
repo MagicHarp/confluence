@@ -11,6 +11,7 @@ import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.QuestedFishes;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.magic.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
@@ -462,11 +463,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Gels.FROZEN_GEL.get(), "冰冻粘液球");
         add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
 
-        add(APPLE_JUICE.get(), "苹果汁");
-        add(BLACKCURRANT.get(), "黑醋栗");
-        add(BLOOD_ORANGE.get(), "血橙");
-        add(BLOODY_MOSCATO.get(), "猩红麝香葡萄");
-        add(ELDERBERRY.get(), "接骨木果");
         add(ICE_MIRROR.get(), "冰雪镜");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
         add(HEALING_POTION.get(), "治疗药水");
@@ -715,32 +711,32 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLATINUM_BOOTS.get(), "铂金靴子");
 
 //鱼
-        add(Materials.SEA_BASS.get(), "鲈鱼");
-        add(Materials.ATLANTIC_COD.get(), "大西洋鳕鱼");
-        add(Materials.ARMORED_CAVE_FISH.get(), "装甲洞穴鱼");
-        add(Materials.CHAOS_FISH.get(), "混沌鱼");
-        add(Materials.SCARLET_TIGER_FISH.get(), "猩红虎鱼");
-        add(Materials.DAMSEL_FISH.get(), "雀鲷");
-        add(Materials.PISCES_FIN_COD.get(), "双鳍鳕鱼");
-        add(Materials.EBONY_KOI.get(), "黑檀锦鲤");
-        add(Materials.FLASHFIN_KOI.get(), "闪耀锦鲤");
-        add(Materials.PARTIAL_MOUTH_FISH.get(), "偏口鱼");
-        add(Materials.FROSTY_MINNOW.get(), "寒霜鲦鱼");
-        add(Materials.GOLDEN_CARP.get(), "金鲤鱼");
-        add(Materials.BLOODY_PIRANHAS.get(), "血腥食人鱼");
-        add(Materials.NEON_GREASE_CARP.get(), "霓虹脂鲤");
-        add(Materials.OBSIDIAN_FISH.get(), "黑曜石鱼");
-        add(Materials.PRINCESS_FISH.get(), "公主鱼");
-        add(Materials.COLORFUL_MINERAL_FISH.get(), "七彩矿鱼");
-        add(Materials.RED_SNAPPER.get(), "红鲷鱼");
-        add(Materials.TROUT.get(), "鳟鱼");
-        add(Materials.ROCK_LOBSTER.get(), "岩石龙虾");
-        add(Materials.SALMON.get(), "异域鲑鱼");
-        add(Materials.SHRIMP.get(), "虾");
-        add(Materials.MIRROR_FISH.get(), "镜面鱼");
-        add(Materials.STINKY_FISH.get(), "臭味鱼");
-        add(Materials.TUNA.get(), "金枪鱼");
-        add(Materials.MOTTLED_OILFISH.get(), "斑驳油鱼");
+        add(Foods.SEA_BASS.get(), "鲈鱼");
+        add(Foods.ATLANTIC_COD.get(), "大西洋鳕鱼");
+        add(Foods.ARMORED_CAVE_FISH.get(), "装甲洞穴鱼");
+        add(Foods.CHAOS_FISH.get(), "混沌鱼");
+        add(Foods.SCARLET_TIGER_FISH.get(), "猩红虎鱼");
+        add(Foods.DAMSEL_FISH.get(), "雀鲷");
+        add(Foods.PISCES_FIN_COD.get(), "双鳍鳕鱼");
+        add(Foods.EBONY_KOI.get(), "黑檀锦鲤");
+        add(Foods.FLASHFIN_KOI.get(), "闪耀锦鲤");
+        add(Foods.PARTIAL_MOUTH_FISH.get(), "偏口鱼");
+        add(Foods.FROSTY_MINNOW.get(), "寒霜鲦鱼");
+        add(Foods.GOLDEN_CARP.get(), "金鲤鱼");
+        add(Foods.BLOODY_PIRANHAS.get(), "血腥食人鱼");
+        add(Foods.NEON_GREASE_CARP.get(), "霓虹脂鲤");
+        add(Foods.OBSIDIAN_FISH.get(), "黑曜石鱼");
+        add(Foods.PRINCESS_FISH.get(), "公主鱼");
+        add(Foods.COLORFUL_MINERAL_FISH.get(), "七彩矿鱼");
+        add(Foods.RED_SNAPPER.get(), "红鲷鱼");
+        add(Foods.TROUT.get(), "鳟鱼");
+        add(Foods.ROCK_LOBSTER.get(), "岩石龙虾");
+        add(Foods.SALMON.get(), "异域鲑鱼");
+        add(Foods.SHRIMP.get(), "虾");
+        add(Foods.MIRROR_FISH.get(), "镜面鱼");
+        add(Foods.STINKY_FISH.get(), "臭味鱼");
+        add(Foods.TUNA.get(), "金枪鱼");
+        add(Foods.MOTTLED_OILFISH.get(), "斑驳油鱼");
         //任务鱼
 
         add(QuestedFishes.AMANITA_FUNGIFIN.get(), "发光蘑菇鱼");
@@ -785,6 +781,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(QuestedFishes.WYVERNTAIL.get(), "飞龙尾");
         add(QuestedFishes.ZOMBIE_FISH.get(), "僵尸鱼");
 
+        //食物
+        add(Foods.APPLE_JUICE.get(), "苹果汁");
+        add(Foods.BLACKCURRANT.get(), "黑醋栗");
+        add(Foods.BLOOD_ORANGE.get(), "血橙");
+        add(Foods.BLOODY_MOSCATO.get(), "猩红麝香葡萄");
+        add(Foods.ELDERBERRY.get(), "接骨木果");
+        add(Foods.COOKEDMARSHMALLOW.get(), "烤棉花糖");
         //endregion items
     }
 }
