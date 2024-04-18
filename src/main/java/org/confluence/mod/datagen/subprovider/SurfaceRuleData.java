@@ -14,13 +14,13 @@ public class SurfaceRuleData
     private static final SurfaceRules.RuleSource BLUE_TERRACOTTA = makeStateRule(Blocks.BLUE_TERRACOTTA);
 
     private static final SurfaceRules.RuleSource CORRUPT_GRASS_BLOCK = makeStateRule(ModBlocks.CORRUPT_GRASS_BLOCK.get());
-
+//将方块转化为可用？
     public static SurfaceRules.RuleSource makeRules()
     {
         SurfaceRules.ConditionSource isAtOrAboveWaterLevel = SurfaceRules.waterBlockCheck(-1, 0);
         SurfaceRules.RuleSource grassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource corrupt_grass_blocksurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel,CORRUPT_GRASS_BLOCK), DIRT);
-
+//不知为何，无效应用
         return SurfaceRules.sequence(
             SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.HOT_RED), RED_TERRACOTTA),
             SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.COLD_BLUE), BLUE_TERRACOTTA),

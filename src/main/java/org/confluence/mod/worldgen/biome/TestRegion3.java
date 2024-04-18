@@ -13,7 +13,7 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 import java.util.function.Consumer;
 
 import static terrablender.api.ParameterUtils.*;
-//腐化群系设置
+//腐化群系设置（自然生成，参数设置）
 public class TestRegion3 extends Region {
     public TestRegion3(ResourceLocation name, int weight)
     {
