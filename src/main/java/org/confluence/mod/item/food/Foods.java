@@ -15,7 +15,7 @@ public enum Foods implements EnumRegister<Item> {
     ELDERBERRY("elderberry", () -> new BaseFoodItem(FoodType.LOW)),
     BLOOD_ORANGE("blood_orange", () -> new BaseFoodItem(FoodType.LOW)),
     BLACKCURRANT("blackcurrant", () -> new BaseFoodItem(FoodType.LOW)),
-   //果汁
+    //果汁
     BLOODY_MOSCATO("bloody_moscato", () -> new BaseFoodItem(FoodType.MEDIUM)),
     APPLE_JUICE("apple_juice", () -> new BaseFoodItem(FoodType.MEDIUM)),
     //鱼
@@ -45,6 +45,7 @@ public enum Foods implements EnumRegister<Item> {
     GOLDEN_CARP("golden_carp", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),
     OBSIDIAN_FISH("obsidian_fish", () -> new BaseFoodItem(FoodType.FISH)),
     FLASHFIN_KOI("flashfin_koi", () -> new BaseFoodItem(FoodType.FISH)),
+
     ;
     private final RegistryObject<Item> value;
 
