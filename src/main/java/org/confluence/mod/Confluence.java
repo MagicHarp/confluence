@@ -49,7 +49,7 @@ public class Confluence {
         ModParticles.PARTICLES.register(bus);
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
-        ModEffects.MOB_EFFECTS.register(bus);
+        ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModPaintings.register(bus);
     }

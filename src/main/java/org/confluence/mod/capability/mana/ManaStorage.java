@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.item.curio.healthandmana.IManaReduce;
 import org.confluence.mod.item.magic.IMagicAttack;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -14,44 +15,44 @@ import java.util.function.Supplier;
 @AutoRegisterCapability
 public class ManaStorage implements INBTSerializable<CompoundTag> {
     private int stars;
-    private int regenerateBonus;
     private int additionalMana;
     private int currentMana;
     private transient int regenerateDelay;
     private transient Integer maxMana;
     private double magicAttackBonus;
-    private float extractRatio;
+    private double extractRatio;
+    private boolean manaRegenerationBand;
 
     public ManaStorage() {
         this.stars = 1;
-        this.regenerateBonus = 0;
         this.additionalMana = 0;
         this.currentMana = 20;
         this.regenerateDelay = 0;
         this.magicAttackBonus = 1.0;
-        this.extractRatio = 1.0F;
+        this.extractRatio = 1.0;
+        this.manaRegenerationBand = false;
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("stars", stars);
-        nbt.putInt("regenerateBonus", regenerateBonus);
         nbt.putInt("additionalMana", additionalMana);
         nbt.putInt("currentMana", currentMana);
         nbt.putDouble("magicAttackBonus", magicAttackBonus);
-        nbt.putFloat("extractRatio", extractRatio);
+        nbt.putDouble("extractRatio", extractRatio);
+        nbt.putBoolean("manaRegenerationBand", manaRegenerationBand);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         this.stars = nbt.getInt("stars");
-        this.regenerateBonus = nbt.getInt("regenerateBonus");
         this.additionalMana = nbt.getInt("additionalMana");
         this.currentMana = nbt.getInt("currentMana");
         this.magicAttackBonus = nbt.getDouble("magicAttackBonus");
-        this.extractRatio = nbt.getFloat("extractRatio");
+        this.extractRatio = nbt.getDouble("extractRatio");
+        this.manaRegenerationBand = nbt.getBoolean("manaRegenerationBand");
     }
 
     public int receiveMana(Supplier<Integer> sup) {
@@ -70,14 +71,6 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
 
     public int getCurrentMana() {
         return currentMana;
-    }
-
-    public int getRegenerateBonus() {
-        return regenerateBonus;
-    }
-
-    public void setRegenerateBonus(int amount) {
-        this.regenerateBonus = amount;
     }
 
     public int getAdditionalMana() {
@@ -146,13 +139,32 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     public void freshExtractRatio(LivingEntity living) {
+        AtomicDouble atomic = new AtomicDouble();
+        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
+            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IManaReduce iManaReduce) {
+                    atomic.addAndGet(iManaReduce.getManaReduce());
+                }
+            }
+        });
+        this.extractRatio = 1.0 - atomic.get();
+    }
 
+    public void setManaRegenerationBand(boolean manaRegenerationBand) {
+        this.manaRegenerationBand = manaRegenerationBand;
+    }
+
+    public boolean hasManaRegenerationBand() {
+        return manaRegenerationBand;
     }
 
     public void copyFrom(ManaStorage manaStorage) {
         this.stars = manaStorage.stars;
+        this.additionalMana = manaStorage.additionalMana;
         this.currentMana = manaStorage.currentMana;
         this.magicAttackBonus = manaStorage.magicAttackBonus;
         this.extractRatio = manaStorage.extractRatio;
+        this.manaRegenerationBand = manaStorage.manaRegenerationBand;
     }
 }

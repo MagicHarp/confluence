@@ -167,7 +167,7 @@ public class ModEnglishProvider extends LanguageProvider {
             else add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
-        ModEffects.MOB_EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
+        ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
     }
 
     private static String toTitleCase(String raw) {

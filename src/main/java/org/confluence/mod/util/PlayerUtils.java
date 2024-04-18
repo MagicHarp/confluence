@@ -5,6 +5,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
@@ -30,14 +31,19 @@ public class PlayerUtils {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             int delay = manaStorage.getRegenerateDelay();
             if (delay > 0) {
-                manaStorage.setRegenerateDelay(delay - (serverPlayer.getDeltaMovement().length() < 0.2 ? 2 : 1));
+                if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
+                int delayReduce = Math.abs(serverPlayer.getX() - serverPlayer.xOld) < 0.001F ? 2 : 1;
+                if (manaStorage.hasManaRegenerationBand()) delayReduce += 1;
+                manaStorage.setRegenerateDelay(delay - delayReduce);
                 return;
             }
 
             Supplier<Integer> receive = () -> {
-                float a = ((float) manaStorage.getMaxMana() / 7) + manaStorage.getRegenerateBonus() + 1;
+                float a = ((float) manaStorage.getMaxMana() / 7) + (manaStorage.hasManaRegenerationBand() ? 25 : 0) + 1;
                 float b = ((float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 0.8F + 0.2F;
-                if (serverPlayer.getDeltaMovement().length() < 0.2) a += (float) manaStorage.getMaxMana() / 2;
+                if (Math.abs(serverPlayer.getX() - serverPlayer.xOld) < 0.001F) {
+                    a += (float) manaStorage.getMaxMana() / 2;
+                }
                 return Math.max(Math.round(a * b * 0.0115F), 1);
             };
 
