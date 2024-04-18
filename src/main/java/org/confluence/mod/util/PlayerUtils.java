@@ -47,9 +47,7 @@ public class PlayerUtils {
                 return Math.max(Math.round(a * b * 0.0115F), 1);
             };
 
-            if (manaStorage.receiveMana(receive) != -1) {
-                syncMana2Client(serverPlayer, manaStorage);
-            }
+            if (manaStorage.receiveMana(receive)) syncMana2Client(serverPlayer, manaStorage);
         });
     }
 
@@ -58,7 +56,7 @@ public class PlayerUtils {
 
         AtomicBoolean success = new AtomicBoolean(false);
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
-            if (manaStorage.extractMana(sup) != -1) {
+            if (manaStorage.extractMana(sup, serverPlayer)) {
                 success.set(true);
                 manaStorage.setRegenerateDelay((int) Math.ceil(0.7F * ((1 - (float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 240 + 45)));
                 syncMana2Client(serverPlayer, manaStorage);
@@ -69,9 +67,7 @@ public class PlayerUtils {
 
     public static void receiveMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
-            if (manaStorage.receiveMana(sup) != -1) {
-                syncMana2Client(serverPlayer, manaStorage);
-            }
+            if (manaStorage.receiveMana(sup)) syncMana2Client(serverPlayer, manaStorage);
         });
     }
 

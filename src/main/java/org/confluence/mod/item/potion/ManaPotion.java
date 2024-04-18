@@ -32,4 +32,8 @@ public class ManaPotion extends AbstractPotion {
         }
         return super.finishUsingItem(itemStack, level, living);
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }

@@ -5,10 +5,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
-import org.confluence.mod.item.curio.healthandmana.BandOfRegeneration;
-import org.confluence.mod.item.curio.healthandmana.BandOfStarpower;
-import org.confluence.mod.item.curio.healthandmana.ManaRegenerationBand;
-import org.confluence.mod.item.curio.healthandmana.NaturesGift;
+import org.confluence.mod.item.curio.healthandmana.*;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
@@ -118,7 +115,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 魔法手铐 */
     /* 磁花 */
     /* 魔力斗篷 */
-    /* 魔力花 */
+    MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
     MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环
     NATURES_GIFT("natures_gift", NaturesGift::new), // 大自然的恩赐
     /* 点金石 */

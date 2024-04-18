@@ -2,12 +2,17 @@ package org.confluence.mod.capability.mana;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.item.curio.healthandmana.IAutoGetMana;
 import org.confluence.mod.item.curio.healthandmana.IManaReduce;
 import org.confluence.mod.item.magic.IMagicAttack;
+import org.confluence.mod.item.potion.ManaPotion;
+import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Supplier;
@@ -55,18 +60,29 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         this.manaRegenerationBand = nbt.getBoolean("manaRegenerationBand");
     }
 
-    public int receiveMana(Supplier<Integer> sup) {
-        if (!canReceive()) return -1;
+    public boolean receiveMana(Supplier<Integer> sup) {
+        if (!canReceive()) return false;
         int received = Math.min(sup.get(), getMaxMana() - currentMana);
         this.currentMana += received;
-        return received;
+        return true;
     }
 
-    public int extractMana(Supplier<Integer> sup) {
-        if (!canExtract()) return -1;
-        int extracted = Math.min((int) (sup.get() * extractRatio), currentMana);
-        this.currentMana -= extracted;
-        return extracted;
+    public boolean extractMana(Supplier<Integer> sup, ServerPlayer serverPlayer) {
+        if (!canExtract()) return false;
+        int extract = (int) (sup.get() * extractRatio);
+        if (currentMana < extract) {
+            if (CuriosUtils.noSameCurio(serverPlayer, IAutoGetMana.class)) return false;
+            for (ItemStack itemStack : serverPlayer.getInventory().items) {
+                if (itemStack.getItem() instanceof ManaPotion manaPotion) {
+                    if (currentMana + manaPotion.getAmount() < extract) continue;
+                    manaPotion.finishUsingItem(itemStack, serverPlayer.level(), serverPlayer);
+                    break;
+                }
+            }
+            if (currentMana < extract) return false;
+        }
+        this.currentMana -= extract;
+        return true;
     }
 
     public int getCurrentMana() {
