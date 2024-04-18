@@ -11,9 +11,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.datagen.subprovider.TestSurfaceRuleData;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.worldgen.biome.TestRegion1;
+import org.confluence.mod.worldgen.biome.TestRegion2;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -48,6 +53,15 @@ public class ModEvents {
         if (attribute instanceof RangedAttribute rangedAttribute) {
             ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
         }
+
+        event.enqueueWork(() -> {
+            // Weights are kept intentionally low as we add minimal biomes
+            Regions.register(new TestRegion1(new ResourceLocation(Confluence.MODID, "cold_blue"), 1));
+            Regions.register(new TestRegion2(new ResourceLocation(Confluence.MODID, "hot_red"), 2));
+
+            // Register our surface rules
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, "Confluence", TestSurfaceRuleData.makeRules());
+        });
     }
 
     @SubscribeEvent

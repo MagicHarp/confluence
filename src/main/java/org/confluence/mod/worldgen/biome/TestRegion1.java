@@ -1,4 +1,4 @@
-package org.confluence.mod.biome;
+package org.confluence.mod.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
@@ -14,16 +14,14 @@ import java.util.function.Consumer;
 
 import static terrablender.api.ParameterUtils.*;
 
-public class TestRegion1 extends Region
-{
+public class TestRegion1 extends Region {
     public TestRegion1(ResourceLocation name, int weight)
     {
         super(name, RegionType.OVERWORLD, weight);
     }
 
     @Override
-    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper)
-    {
+    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
         // Overlap Vanilla's parameters with our own for our COLD_BLUE biome.
         // The parameters for this biome are chosen arbitrarily.
