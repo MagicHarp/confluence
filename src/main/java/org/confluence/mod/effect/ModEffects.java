@@ -1,6 +1,7 @@
 package org.confluence.mod.effect;
 
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -36,4 +37,11 @@ public class ModEffects {
     public static final RegistryObject<ConfusedEffect> CONFUSED = MOB_EFFECTS.register("confused", ConfusedEffect::new);
     public static final RegistryObject<WitheredArmorEffect> WITHERED_ARMOR = MOB_EFFECTS.register("withered_armor", WitheredArmorEffect::new);
     public static final RegistryObject<IchorEffect> ICHOR = MOB_EFFECTS.register("ichor", IchorEffect::new);
+
+    public static void heal(LivingEntity living, float amount) {
+        if (living.level().getGameTime() % 20 == 0) {
+            if (living.hasEffect(HONEY.get())) amount += 1;
+            living.heal(amount);
+        }
+    }
 }

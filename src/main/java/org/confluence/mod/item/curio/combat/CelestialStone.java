@@ -44,10 +44,7 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        if (living.level().getGameTime() % 20 == 0) {
-            int amplifier = living.hasEffect(ModEffects.HONEY.get()) ? 3 : 2;
-            living.heal(amplifier);
-        }
+        ModEffects.heal(living, 2);
         living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1, 0, false, false, false));
     }
 }

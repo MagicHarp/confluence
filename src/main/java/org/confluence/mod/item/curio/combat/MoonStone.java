@@ -41,12 +41,8 @@ public class MoonStone extends BaseCurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        long gameTime = living.level().getGameTime();
-        if (gameTime % 24000 < 12000) return;
-        if (gameTime % 20 == 0) {
-            int amplifier = living.hasEffect(ModEffects.HONEY.get()) ? 3 : 2;
-            living.heal(amplifier);
-        }
+        if (living.level().getGameTime() % 24000 < 12000) return;
+        ModEffects.heal(living, 2);
         living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1, 0, false, false, false));
     }
 }

@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.effect.ModEffects;
 
 import java.util.UUID;
@@ -22,20 +21,20 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
         super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
     }
 
-    public static void onAdd(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap) {
-        if (entity instanceof Player && mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
+    public static void onAdd(LivingEntity living, MobEffect mobEffect, AttributeMap attributeMap) {
+        if (mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
             attributeMap.addTransientAttributeModifiers(SPEED_MODIFIER);
-            entity.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1, 1, false, false, false));
-            entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1, 1, false, false, false));
+            ModEffects.heal(living, 1);
+            living.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1, 1, false, false, false));
         }
     }
 
-    public static void onRemove(LivingEntity entity, MobEffect mobEffect, AttributeMap attributeMap) {
-        if (entity instanceof Player && mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
+    public static void onRemove(LivingEntity living, MobEffect mobEffect, AttributeMap attributeMap) {
+        if (mobEffect == ModEffects.EXQUISITELY_STUFFED.get()) {
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.MOVEMENT_SPEED);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(SPEED_UUID);
-                entity.removeEffect(ModEffects.EXQUISITELY_STUFFED.get());
+                living.removeEffect(ModEffects.EXQUISITELY_STUFFED.get());
             }
         }
     }
