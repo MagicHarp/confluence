@@ -1,0 +1,8 @@
+{
+    "parent": "confluence:start",
+    "criteria": {
+        "never": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

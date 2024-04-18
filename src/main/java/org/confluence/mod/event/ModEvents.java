@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.Ores;
+import org.confluence.mod.block.cloaked.StepRevealingBlock;
 import org.confluence.mod.datagen.subprovider.SurfaceRuleData;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
@@ -62,12 +64,17 @@ public class ModEvents {
             Regions.register(new TestRegion3(new ResourceLocation(Confluence.MODID, "the_corruption"), 2));
 
             // Register our surface rules
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, "Confluence", SurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Confluence.MODID, SurfaceRuleData.makeRules());
         });
     }
 
     @SubscribeEvent
     public static void loadedComplete(FMLLoadCompleteEvent event) {
-        //((StepRevealingBlock) Ores.DEEPSLATE_COBALT_ORE.get()).createRevelation("");
+        int step = 0;
+        for (int state = 0; state < 3; state++) {
+            StepRevealingBlock.create(Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get(), state, step++);
+            StepRevealingBlock.create(Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get(), state, step++);
+            StepRevealingBlock.create(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get(), state, step++);
+        }
     }
 }

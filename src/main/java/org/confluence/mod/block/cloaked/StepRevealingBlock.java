@@ -24,15 +24,20 @@ public class StepRevealingBlock extends Block {
         builder.add(REVEAL_STEP);
     }
 
-    public void createRevelation(String step) {
-        for (int i = 0; i < 3; i++) {
-            String source = BlockStateParser.serialize(defaultBlockState().setValue(REVEAL_STEP, i));
-            JsonObject revJson = Confluence.GSON.toJsonTree(Map.of(
-                "advancement", step,
-                "block_states", Map.of(source, "minecraft:deepslate"),
-                "block_name_replacements", Map.of(source, "block.minecraft.deepslate")
-            ), JsonObject.class).getAsJsonObject();
-            RevelationRegistry.registerFromJson(revJson);
-        }
+    public static void create(Block blockA, Block blockB, int state, int step) {
+        String a = BlockStateParser.serialize(blockA.defaultBlockState().setValue(REVEAL_STEP, state));
+        String b = BlockStateParser.serialize(blockB.defaultBlockState().setValue(REVEAL_STEP, state));
+        JsonObject revJson = Confluence.GSON.toJsonTree(Map.of(
+            "advancement", "confluence:reveal/step" + step,
+            "block_states", Map.of(
+                a, "minecraft:deepslate",
+                b, "minecraft:deepslate"
+            ),
+            "block_name_replacements", Map.of(
+                a, "block.minecraft.deepslate",
+                b, "block.minecraft.deepslate"
+            )
+        ), JsonObject.class).getAsJsonObject();
+        RevelationRegistry.registerFromJson(revJson);
     }
 }
