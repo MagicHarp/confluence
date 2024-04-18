@@ -9,7 +9,8 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum Foods implements EnumRegister<Item> {
-    CookedMarshmall("cooked_marshmall", () -> new BaseFoodItem(LowGradeFood.CookedMarshmallow));
+    CookedMarshmallow("cooked_marshmallow", () -> new BaseFoodItem(LowGradeFood.CookedMarshmallow));
+    ;
     private final RegistryObject<Item> value;
 
     Foods(String id, Supplier<Item> item) {

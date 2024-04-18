@@ -34,7 +34,6 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
             AttributeInstance attributeInstance = attributeMap.getInstance(Attributes.MOVEMENT_SPEED);
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(SPEED_UUID);
-                living.removeEffect(ModEffects.EXQUISITELY_STUFFED.get());
             }
         }
     }
