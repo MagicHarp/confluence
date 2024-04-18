@@ -5,7 +5,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
@@ -23,7 +22,7 @@ public class TestRegion2 extends Region {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
             // Simple example:
             // Replace the Vanilla desert with our hot_red biome
-            builder.replaceBiome(Biomes.DESERT, TestBiomes.HOT_RED);
+            builder.replaceBiome(net.minecraft.world.level.biome.Biomes.DESERT, Biomes.HOT_RED);
         });
     }
 }

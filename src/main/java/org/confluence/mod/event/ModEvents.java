@@ -11,12 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.datagen.subprovider.TestSurfaceRuleData;
+import org.confluence.mod.datagen.subprovider.SurfaceRuleData;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.worldgen.biome.TestRegion1;
 import org.confluence.mod.worldgen.biome.TestRegion2;
+import org.confluence.mod.worldgen.biome.TestRegion3;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
@@ -57,10 +58,11 @@ public class ModEvents {
         event.enqueueWork(() -> {
             // Weights are kept intentionally low as we add minimal biomes
             Regions.register(new TestRegion1(new ResourceLocation(Confluence.MODID, "cold_blue"), 1));
-            Regions.register(new TestRegion2(new ResourceLocation(Confluence.MODID, "hot_red"), 2));
+            Regions.register(new TestRegion2(new ResourceLocation(Confluence.MODID, "hot_red"), 1));
+            Regions.register(new TestRegion3(new ResourceLocation(Confluence.MODID, "the_corruption"), 2));
 
             // Register our surface rules
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, "Confluence", TestSurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, "Confluence", SurfaceRuleData.makeRules());
         });
     }
 

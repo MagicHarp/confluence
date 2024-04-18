@@ -13,9 +13,9 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 import java.util.function.Consumer;
 
 import static terrablender.api.ParameterUtils.*;
-
-public class TestRegion1 extends Region {
-    public TestRegion1(ResourceLocation name, int weight)
+//腐化群系设置
+public class TestRegion3 extends Region {
+    public TestRegion3(ResourceLocation name, int weight)
     {
         super(name, RegionType.OVERWORLD, weight);
     }
@@ -32,7 +32,7 @@ public class TestRegion1 extends Region {
             .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
             .depth(Depth.SURFACE, Depth.FLOOR)
             .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)
-            .build().forEach(point -> builder.add(point, Biomes.COLD_BLUE));
+            .build().forEach(point -> builder.add(point, Biomes.THE_CORRUPTION));
 
         // Add our points to the mapper
         builder.build().forEach(mapper::accept);
