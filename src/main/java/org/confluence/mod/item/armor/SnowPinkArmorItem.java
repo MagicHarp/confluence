@@ -37,11 +37,7 @@ public class SnowPinkArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
-                return switch (armorType) {
-                    default -> 2;
-                    case CHESTPLATE -> 2;
-                    case LEGGINGS -> 2;
-                };
+                return 2;
             }
 
             @Override

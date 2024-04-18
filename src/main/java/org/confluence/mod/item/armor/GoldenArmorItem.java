@@ -5,12 +5,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.GoldenArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.PlatinumArmorRenderer;
-import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -30,7 +30,7 @@ public class GoldenArmorItem extends ArmorItem implements GeoItem {
                     case HELMET -> 250;
                     case CHESTPLATE -> 340;
                     case LEGGINGS -> 320;
-                    case BOOTS ->260;
+                    case BOOTS -> 260;
                 };
             }
 
@@ -38,8 +38,7 @@ public class GoldenArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 3;
-                    case CHESTPLATE -> 5;
-                    case LEGGINGS -> 5;
+                    case CHESTPLATE, LEGGINGS -> 5;
                 };
             }
 

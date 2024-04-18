@@ -10,7 +10,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.LeadArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.SilverArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
@@ -40,8 +39,7 @@ public class SilverArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 2;
-                    case CHESTPLATE -> 6;
-                    case LEGGINGS -> 6;
+                    case CHESTPLATE, LEGGINGS -> 6;
                 };
             }
 

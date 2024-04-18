@@ -37,11 +37,7 @@ public class PlankArmorItem extends ArmorItem implements GeoItem {
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
-                return switch (armorType) {
-                    default -> 1;
-                    case CHESTPLATE -> 1;
-                    case LEGGINGS -> 1;
-                };
+                return 1;
             }
 
             @Override

@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.renderer.item.armor.PearlArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.ShadowArmorRenderer;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -40,8 +39,7 @@ public class PearlArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 1;
-                    case CHESTPLATE -> 2;
-                    case LEGGINGS -> 2;
+                    case CHESTPLATE, LEGGINGS -> 2;
                 };
             }
 

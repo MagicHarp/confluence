@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.armor.PlatinumArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.TungstenArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -40,8 +39,7 @@ public class PlatinumArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 3;
-                    case CHESTPLATE -> 5;
-                    case LEGGINGS -> 5;
+                    case CHESTPLATE, LEGGINGS -> 5;
                 };
             }
 

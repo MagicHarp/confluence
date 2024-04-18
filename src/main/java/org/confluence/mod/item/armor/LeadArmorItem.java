@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.armor.LeadArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.TinArmorRenderer;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;

@@ -28,10 +28,9 @@ public class TinArmorItem extends ArmorItem implements GeoItem {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    case HELMET -> 150;
+                    case HELMET, BOOTS -> 150;
                     case CHESTPLATE -> 190;
                     case LEGGINGS -> 170;
-                    case BOOTS -> 150;
                 };
             }
 
@@ -39,8 +38,7 @@ public class TinArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 2;
-                    case CHESTPLATE -> 4;
-                    case LEGGINGS -> 4;
+                    case CHESTPLATE, LEGGINGS -> 4;
                 };
             }
 

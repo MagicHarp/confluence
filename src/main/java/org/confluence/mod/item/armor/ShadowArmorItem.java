@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.client.renderer.item.armor.EbonyArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.ShadowArmorRenderer;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -41,7 +40,6 @@ public class ShadowArmorItem extends ArmorItem implements GeoItem {
                 return switch (armorType) {
                     default -> 1;
                     case CHESTPLATE -> 2;
-                    case LEGGINGS -> 1;
                 };
             }
 

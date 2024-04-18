@@ -8,9 +8,8 @@ public interface IJumpBoost {
     double getBoost();
 
     default void freshJumpBoost(LivingEntity living) {
-        living.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-            playerAbility.freshJumpBoost(living);
-        });
+        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+            .ifPresent(playerAbility -> playerAbility.freshJumpBoost(living));
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.jump_boost");

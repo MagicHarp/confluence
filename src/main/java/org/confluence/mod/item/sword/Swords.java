@@ -1,8 +1,6 @@
 package org.confluence.mod.item.sword;
 
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;

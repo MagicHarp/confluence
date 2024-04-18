@@ -31,7 +31,7 @@ public class CopperArmorItem extends ArmorItem implements GeoItem {
                     case HELMET -> 120;
                     case CHESTPLATE -> 170;
                     case LEGGINGS -> 150;
-                    case BOOTS ->130;
+                    case BOOTS -> 130;
                 };
             }
 
@@ -39,8 +39,7 @@ public class CopperArmorItem extends ArmorItem implements GeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 2;
-                    case CHESTPLATE ->4;
-                    case LEGGINGS -> 4;
+                    case CHESTPLATE, LEGGINGS -> 4;
                 };
             }
 

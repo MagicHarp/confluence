@@ -8,12 +8,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.renderer.item.armor.EbonyArmorRenderer;
-import org.confluence.mod.client.renderer.item.armor.PlankArmorRenderer;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -42,7 +40,6 @@ public class EbonyArmorItem extends ArmorItem implements GeoItem {
                 return switch (armorType) {
                     default -> 1;
                     case CHESTPLATE -> 2;
-                    case LEGGINGS -> 1;
                 };
             }
 
