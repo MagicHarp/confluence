@@ -30,8 +30,8 @@ public final class ModEffects {
     public static final RegistryObject<BuilderEffect> BUILDER = EFFECTS.register("builder", BuilderEffect::new);
     public static final RegistryObject<FishingEffect> FISHING = EFFECTS.register("fishing", FishingEffect::new);
     public static final RegistryObject<BleedingEffect> BLEEDING = EFFECTS.register("bleeding", BleedingEffect::new);
-    public static final RegistryObject<AcidVenomEffect> ACDID_VENOM = EFFECTS.register("acid_venom", AcidVenomEffect::new);
-    public static final RegistryObject<FrostburnEffect> FROSTBURN = EFFECTS.register("frostburn", FrostburnEffect::new);
+    public static final RegistryObject<AcidVenomEffect> ACID_VENOM = EFFECTS.register("acid_venom", AcidVenomEffect::new);
+    public static final RegistryObject<FrostburnEffect> FROST_BURN = EFFECTS.register("frost_burn", FrostburnEffect::new);
     public static final RegistryObject<CursedInfernoEffect> CURSED_INFERNO = EFFECTS.register("cursed_inferno", CursedInfernoEffect::new);
     public static final RegistryObject<SilencedEffect> SILENCED = EFFECTS.register("silenced", SilencedEffect::new);
     public static final RegistryObject<CursedEffect> CURSED = EFFECTS.register("cursed", CursedEffect::new);
