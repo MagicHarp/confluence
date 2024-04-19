@@ -71,6 +71,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
 
         );
+        tag(BlockTags.DIRT).add(
+            CORRUPT_GRASS_BLOCK.get(), ASH_BLOCK.get(), ANOTHER_CRIMSON_GRASS_BLOCK.get(),
+            HALLOW_GRASS_BLOCK.get());
+        tag(BlockTags.PLANKS).add(
+            EBONY_LOG_BLOCKS.PLANKS.get(),ModBlocks.SHADOW_LOG_BLOCKS.PLANKS.get(),ModBlocks.PEARL_LOG_BLOCKS.PLANKS.get(),
+            ModBlocks.PALM_LOG_BLOCKS.PLANKS.get(),ModBlocks.SPOOKY_LOG_BLOCKS.PLANKS.get(),ModBlocks.ASH_LOG_BLOCKS.PLANKS.get());
         tag(BlockTags.LOGS).add(
         ModBlocks.EBONY_LOG_BLOCKS.LOG.get(),ModBlocks.SHADOW_LOG_BLOCKS.LOG.get(),ModBlocks.PEARL_LOG_BLOCKS.LOG.get(),
                 ModBlocks.PALM_LOG_BLOCKS.LOG.get(),ModBlocks.ASH_LOG_BLOCKS.LOG.get());
