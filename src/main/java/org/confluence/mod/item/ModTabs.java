@@ -91,6 +91,7 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.EXPERT_TEST_ITEM.get());
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
+                output.accept(ModItems.STAR.get());
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ECHO_BLOCK.get());

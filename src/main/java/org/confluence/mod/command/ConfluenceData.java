@@ -2,6 +2,7 @@ package org.confluence.mod.command;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
@@ -55,7 +56,7 @@ public class ConfluenceData extends SavedData {
     public void setWindSpeed(float x, float z) {
         this.windSpeedX = x;
         this.windSpeedZ = z;
-        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new WindSpeedPacketS2C(x, z));
+        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new WindSpeedPacketS2C((float) Mth.length(x, z)));
         setDirty();
     }
 

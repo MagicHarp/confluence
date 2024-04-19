@@ -4,7 +4,6 @@ import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -194,9 +193,7 @@ public final class InformationHandler {
 
     public static void handleWindSpeed(WindSpeedPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> {
-            windSpeed = "%.2f".formatted(Mth.length(packet.x(), packet.z()));
-        });
+        context.enqueueWork(() -> windSpeed = "%.2f".formatted(packet.speed()));
         context.setPacketHandled(true);
     }
 }
