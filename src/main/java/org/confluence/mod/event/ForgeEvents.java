@@ -86,7 +86,9 @@ public final class ForgeEvents {
         } else if (dayTime == 12000 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
             serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24)
         ) {
-            serverLevel.getServer().sendSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED));
+            serverLevel.players().forEach(serverPlayer -> serverPlayer
+                .sendSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED))
+            );
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
         }
     }

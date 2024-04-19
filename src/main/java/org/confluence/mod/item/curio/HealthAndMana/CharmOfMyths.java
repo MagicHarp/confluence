@@ -14,4 +14,9 @@ public class CharmOfMyths extends PhilosophersStone {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         ModEffects.heal(slotContext.entity(), 1);
     }
+
+    @Override
+    public String getName() {
+        return "Charm Of Myths";
+    }
 }

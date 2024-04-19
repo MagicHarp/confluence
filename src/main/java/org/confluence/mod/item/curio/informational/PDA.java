@@ -34,6 +34,7 @@ public class PDA extends AbstractInfoCurio implements ICompass, IDepthMeter, IDP
         list.add(ISextant.TOOLTIP);
         list.add(IStopwatch.TOOLTIP);
         list.add(ITallyCounter.TOOLTIP);
+        list.add(IWatch.TOOLTIP);
         list.add(IWeatherRadio.TOOLTIP);
     }
 }
