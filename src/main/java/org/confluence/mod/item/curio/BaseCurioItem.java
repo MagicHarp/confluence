@@ -34,7 +34,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
     protected static final ImmutableMultimap<Attribute, AttributeModifier> EMPTY_ATTRIBUTE = ImmutableMultimap.of();
 
     public BaseCurioItem(Rarity rarity) {
-        super(new Properties().rarity(rarity).stacksTo(1));
+        super(new Properties().rarity(rarity).fireResistant().stacksTo(1));
     }
 
     public BaseCurioItem() {
@@ -46,9 +46,9 @@ public class BaseCurioItem extends Item implements ICurioItem {
         Item item = stack.getItem();
         LivingEntity living = slotContext.entity();
         if (item instanceof ICriticalHit iCriticalHit) iCriticalHit.freshChance(living);
-        if (item instanceof IFireInvul iFireInvul) iFireInvul.freshFireImmune(living);
+        if (item instanceof IFireInvul iFireInvul) iFireInvul.freshFireInvul(living);
         if (item instanceof ILavaHurtReduce iLavaHurtReduce) iLavaHurtReduce.freshLavaReduce(living);
-        if (item instanceof ILavaInvul iLavaInvul) iLavaInvul.freshLavaImmuneTicks(living);
+        if (item instanceof ILavaInvul iLavaInvul) iLavaInvul.freshLavaInvulTicks(living);
         if (item instanceof IInvulnerableTime iInvulnerableTime) iInvulnerableTime.freshInvulnerableTime(living);
         if (item instanceof IAggroAttach iAggroAttach) iAggroAttach.freshAggro(living);
         if (item instanceof IFallResistance iFallResistance) iFallResistance.freshFallResistance(living);

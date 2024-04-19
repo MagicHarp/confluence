@@ -9,7 +9,7 @@ public interface ILavaInvul {
         return 140;
     }
 
-    default void freshLavaImmuneTicks(LivingEntity living) {
+    default void freshLavaInvulTicks(LivingEntity living) {
         living.getCapability(PlayerAbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshLavaImmuneTicks(living));
     }

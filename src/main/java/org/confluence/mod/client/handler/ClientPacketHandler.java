@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 import static org.confluence.mod.Confluence.MODID;
 
 @OnlyIn(Dist.CLIENT)
-public class ClientPacketHandler {
+public final class ClientPacketHandler {
     private static int maxMana = 20;
     private static int currentMana = 20;
 

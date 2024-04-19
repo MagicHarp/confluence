@@ -24,7 +24,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class InformationHandler {
+public final class InformationHandler {
     private static final ArrayList<Component> information = new ArrayList<>();
 
     private static byte time = 0;
@@ -119,7 +119,7 @@ public class InformationHandler {
         if (dpsMeter != 0) {
             long delta = gameTime - lastAttackTime;
             if (delta > 1200) attackDamage = 0.0F;
-            else dpsMeterInfo = IDPSMeter.getInfo(attackDamage / delta);
+            else if (delta % 20 == 0) dpsMeterInfo = IDPSMeter.getInfo(attackDamage / delta);
             information.add(dpsMeterInfo);
         }
         if (dpsMeter < 0 && gameTime % 200 == 8 && nearPlayerNoCurio(localPlayer, IDPSMeter.class)) {

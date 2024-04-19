@@ -19,7 +19,7 @@ public class ObsidianSkull extends BaseCurioItem implements IFireInvul {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshFireImmune(slotContext.entity());
+        freshFireInvul(slotContext.entity());
     }
 
     @Override

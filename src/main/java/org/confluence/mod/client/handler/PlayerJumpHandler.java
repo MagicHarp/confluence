@@ -16,7 +16,7 @@ import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class PlayerJumpHandler {
+public final class PlayerJumpHandler {
     private static boolean jumpKeyDown = true;
 
     private static double fartSpeed = 0.0;

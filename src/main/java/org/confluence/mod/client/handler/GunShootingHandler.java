@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.InputEvent;
 import org.confluence.mod.item.gun.BaseGunItem;
 
 @OnlyIn(Dist.CLIENT)
-public class GunShootingHandler {
+public final class GunShootingHandler {
     public static void handle(InputEvent.InteractionKeyMappingTriggered event, LocalPlayer localPlayer) {
         if (event.isUseItem()) return;
         ItemStack itemStack = localPlayer.getMainHandItem();
