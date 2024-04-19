@@ -6,6 +6,7 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
@@ -100,7 +101,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 砌砖刀 */
     /* 建筑师发明背包 */
     /* 自动安放器 */
-    /* 远古凿子 */
+    ANCIENT_CHISEL("ancient_chisel", AncientChisel::new), // 远古凿子
     /* 创造之手 */
 
 

@@ -19,6 +19,7 @@ import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
+import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
@@ -78,5 +79,12 @@ public final class PlayerEvents {
     public static void rightClickItem(PlayerInteractEvent.RightClickItem event) {
         SilencedEffect.apply(event.getEntity(), event);
         CursedEffect.onRightClick(event.getEntity(),event);
+    }
+
+    @SubscribeEvent
+    public static void breakSpeed(PlayerEvent.BreakSpeed event) {
+        float speed = event.getOriginalSpeed();
+        speed = AncientChisel.apply(event.getEntity(), speed);
+        event.setNewSpeed(speed);
     }
 }
