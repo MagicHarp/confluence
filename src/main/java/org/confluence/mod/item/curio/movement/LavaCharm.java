@@ -6,13 +6,13 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.ILavaInvul;
+import org.confluence.mod.item.curio.ILavaImmune;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LavaCharm extends BaseCurioItem implements ILavaInvul {
+public class LavaCharm extends BaseCurioItem implements ILavaImmune {
     public LavaCharm() {
         super(ModRarity.ORANGE);
     }

@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.combat.IFireInvul;
+import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
-public class ObsidianWaterWalkingBoots extends BaseCurioItem implements IFluidWalk, IFireInvul {
+public class ObsidianWaterWalkingBoots extends BaseCurioItem implements IFluidWalk, IFireImmune {
     public ObsidianWaterWalkingBoots() {
         super(ModRarity.LIGHT_RED);
     }
@@ -34,6 +34,6 @@ public class ObsidianWaterWalkingBoots extends BaseCurioItem implements IFluidWa
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IFluidWalk.WATER_HONEY);
-        list.add(IFireInvul.TOOLTIP);
+        list.add(IFireImmune.TOOLTIP);
     }
 }

@@ -33,6 +33,10 @@ public class BaseSpeedBoots extends BaseCurioItem {
         super(rarity);
     }
 
+    public BaseSpeedBoots() {
+        super();
+    }
+
     @Override
     public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
         return EMPTY_TOOLTIP;

@@ -6,21 +6,21 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.ILavaInvul;
-import org.confluence.mod.item.curio.combat.IFireInvul;
+import org.confluence.mod.item.curio.ILavaImmune;
+import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MagmaSkull extends BaseCurioItem implements IFireInvul, ILavaInvul {
+public class MagmaSkull extends BaseCurioItem implements IFireImmune, ILavaImmune {
     public MagmaSkull() {
         super(ModRarity.PINK);
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(ILavaInvul.TOOLTIP);
-        list.add(IFireInvul.TOOLTIP);
+        list.add(ILavaImmune.TOOLTIP);
+        list.add(IFireImmune.TOOLTIP);
     }
 }

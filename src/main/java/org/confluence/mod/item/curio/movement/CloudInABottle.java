@@ -18,6 +18,10 @@ public class CloudInABottle extends BaseCurioItem implements IMultiJump {
         super(rarity);
     }
 
+    public CloudInABottle() {
+        super();
+    }
+
     @Override
     public double getJumpSpeed() {
         return SPEED;

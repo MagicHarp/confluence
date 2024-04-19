@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 
-public interface ILavaInvul {
+public interface ILavaImmune {
     default int getLavaImmuneTicks() {
         return 140;
     }

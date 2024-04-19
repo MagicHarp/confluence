@@ -35,6 +35,7 @@ import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
 import org.confluence.mod.effect.HarmfulEffect.BleedingEffect;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -102,10 +103,7 @@ public final class ForgeEvents {
         HoneyComb.apply(living, random);
         PanicNecklace.apply(living);
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
-        if (IHurtEvasion.apply(living, random) || IFireInvul.apply(living, damageSource)) {
-            event.setCanceled(true);
-            return;
-        }
+        MagicCuffs.apply(living, damageSource, amount);
 
         amount = IMagicAttack.apply(damageSource, amount);
         amount = ManaIssueEffect.apply(damageSource, amount);
@@ -114,7 +112,7 @@ public final class ForgeEvents {
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
         amount = IFallResistance.apply(living, damageSource, amount);
 
-        amount = amount * (random.nextInt(80, 121) / 100.0F);
+        amount *= (random.nextInt(80, 121) / 100.0F);
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
         event.setAmount(amount);
     }

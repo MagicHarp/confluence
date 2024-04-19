@@ -8,7 +8,7 @@ import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public interface IFireInvul {
+public interface IFireImmune {
     default void freshFireInvul(LivingEntity living) {
         living.getCapability(PlayerAbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshFireImmune(living));

@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.misc.ModDamageTypes;
 
 public class FallingStarItemEntity extends ItemEntity {
     public FallingStarItemEntity(EntityType<FallingStarItemEntity> entityType, Level level) {
@@ -35,7 +36,7 @@ public class FallingStarItemEntity extends ItemEntity {
             if (onGround()) {
                 if (hasPickUpDelay()) setNoPickUpDelay();
             } else if (ProjectileUtil.getHitResultOnMoveVector(this, entity -> true) instanceof EntityHitResult entityHitResult) {
-                entityHitResult.getEntity().hurt(ConfluenceDamageTypes.of(level(), ConfluenceDamageTypes.FALLING_STAR), 100);
+                entityHitResult.getEntity().hurt(ModDamageTypes.of(level(), ModDamageTypes.FALLING_STAR), 100);
                 discard();
             }
         }

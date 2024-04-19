@@ -78,10 +78,6 @@ public final class PlayerUtils {
         });
     }
 
-    public static void decreaseAdditionalMana(ServerPlayer serverPlayer, int amount) {
-        increaseAdditionalMana(serverPlayer, -amount);
-    }
-
     public static void syncSavedData(ServerPlayer serverPlayer) {
         ConfluenceData data = ConfluenceData.get(serverPlayer.serverLevel());
         NetworkHandler.CHANNEL.send(

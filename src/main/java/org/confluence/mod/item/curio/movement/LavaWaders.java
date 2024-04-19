@@ -8,15 +8,15 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.ILavaInvul;
-import org.confluence.mod.item.curio.combat.IFireInvul;
+import org.confluence.mod.item.curio.ILavaImmune;
+import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LavaWaders extends BaseCurioItem implements IFireInvul, ILavaInvul, ILavaHurtReduce, IFluidWalk {
+public class LavaWaders extends BaseCurioItem implements IFireImmune, ILavaImmune, ILavaHurtReduce, IFluidWalk {
     public LavaWaders() {
         super(ModRarity.LIME);
     }

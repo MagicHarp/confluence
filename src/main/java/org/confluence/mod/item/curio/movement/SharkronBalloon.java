@@ -15,6 +15,10 @@ public class SharkronBalloon extends TsunamiInABottle implements IJumpBoost {
         super(rarity);
     }
 
+    public SharkronBalloon() {
+        super();
+    }
+
     @Override
     public double getBoost() {
         return 1.33;

@@ -16,6 +16,10 @@ public class TsunamiInABottle extends BaseCurioItem implements IMultiJump {
         super(rarity);
     }
 
+    public TsunamiInABottle() {
+        super();
+    }
+
     @Override
     public double getJumpSpeed() {
         return 1.0;

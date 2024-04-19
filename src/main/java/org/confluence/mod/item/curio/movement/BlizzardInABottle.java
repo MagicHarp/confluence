@@ -19,6 +19,10 @@ public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
         super(rarity);
     }
 
+    public BlizzardInABottle() {
+        super();
+    }
+
     @Override
     public int getJumpTicks() {
         return TICKS;

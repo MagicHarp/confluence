@@ -72,9 +72,9 @@ public final class ModEvents {
     public static void loadComplete(FMLLoadCompleteEvent event) {
         int step = 0;
         for (int state = 0; state < 3; state++) {
-            StepRevealingBlock.create(Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get(), state, step++);
-            StepRevealingBlock.create(Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get(), state, step++);
-            StepRevealingBlock.create(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get(), state, step++);
+            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get());
+            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get());
+            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get());
         }
     }
 }
