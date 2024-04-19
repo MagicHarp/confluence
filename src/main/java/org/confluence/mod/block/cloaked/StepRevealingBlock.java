@@ -7,9 +7,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import org.confluence.mod.Confluence;
-
-import java.util.Map;
 
 public class StepRevealingBlock extends Block {
     public static final IntegerProperty REVEAL_STEP = IntegerProperty.create("reveal_step", 0, 2);
@@ -27,17 +24,16 @@ public class StepRevealingBlock extends Block {
     public static void create(Block blockA, Block blockB, int state, int step) {
         String a = BlockStateParser.serialize(blockA.defaultBlockState().setValue(REVEAL_STEP, state));
         String b = BlockStateParser.serialize(blockB.defaultBlockState().setValue(REVEAL_STEP, state));
-        JsonObject revJson = Confluence.GSON.toJsonTree(Map.of(
-            "advancement", "confluence:reveal/step" + step,
-            "block_states", Map.of(
-                a, "minecraft:deepslate",
-                b, "minecraft:deepslate"
-            ),
-            "block_name_replacements", Map.of(
-                a, "block.minecraft.deepslate",
-                b, "block.minecraft.deepslate"
-            )
-        ), JsonObject.class).getAsJsonObject();
+        JsonObject revJson = new JsonObject();
+        revJson.addProperty("advancement", "confluence:reveal/step" + step);
+        JsonObject stateJson = new JsonObject();
+        stateJson.addProperty(a, "minecraft:deepslate");
+        stateJson.addProperty(b, "minecraft:deepslate");
+        revJson.add("block_states", stateJson);
+        JsonObject nameJson = new JsonObject();
+        nameJson.addProperty(a, "block.minecraft.deepslate");
+        nameJson.addProperty(b, "block.minecraft.deepslate");
+        revJson.add("block_name_replacements", nameJson);
         RevelationRegistry.registerFromJson(revJson);
     }
 }
