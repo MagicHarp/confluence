@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerAbilityProvider implements ICapabilitySerializable<CompoundTag> {
+public final class PlayerAbilityProvider implements ICapabilitySerializable<CompoundTag> {
     public static final Capability<PlayerAbility> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
     private PlayerAbility playerAbility;

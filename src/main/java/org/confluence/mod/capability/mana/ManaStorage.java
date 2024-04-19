@@ -18,7 +18,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.function.Supplier;
 
 @AutoRegisterCapability
-public class ManaStorage implements INBTSerializable<CompoundTag> {
+public final class ManaStorage implements INBTSerializable<CompoundTag> {
     private int stars;
     private int additionalMana;
     private int currentMana;
@@ -77,11 +77,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
                 if (itemStack.getItem() instanceof ManaPotion manaPotion) {
                     int amount = manaPotion.getAmount();
                     if (currentMana + amount < extract) continue;
-                    if (toUse == null) {
-                        toUse = itemStack;
-                    } else if (amount < ((ManaPotion) toUse.getItem()).getAmount()) {
-                        toUse = itemStack;
-                    }
+                    if (toUse == null || amount < ((ManaPotion) toUse.getItem()).getAmount()) toUse = itemStack;
                     if (amount == 50) break;
                 }
             }

@@ -17,7 +17,7 @@ import org.confluence.mod.entity.slime.BlackSlime;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public class ModEntities {
+public final class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Confluence.MODID);
 
     // todo variants

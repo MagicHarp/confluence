@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 import static org.confluence.mod.block.WoodSetType.*;
 
 @SuppressWarnings("unused")
-public class ModBlocks {
+public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Confluence.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Confluence.MODID);
 

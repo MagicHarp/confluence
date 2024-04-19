@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
 @OnlyIn(Dist.CLIENT)
-public class KeyBindings {
+public final class KeyBindings {
     public static final Lazy<KeyMapping> metalDetector = Lazy.of(() -> new KeyMapping(
         "key.confluence.metal_detector",
         KeyConflictContext.IN_GAME,

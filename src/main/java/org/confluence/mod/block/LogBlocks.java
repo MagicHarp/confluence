@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import static org.confluence.mod.block.ModBlocks.registerWithItem;
 import static org.confluence.mod.block.ModBlocks.registerWithoutItem;
 
-public class LogBlocks {
+public final class LogBlocks {
     public static final ArrayList<LogBlocks> LOG_BLOCKS = new ArrayList<>();
 
     public final String id;

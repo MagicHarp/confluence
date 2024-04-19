@@ -10,7 +10,7 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class CuriosClient {
+public final class CuriosClient {
     public static void registerRenderers() {
         CuriosRendererRegistry.register(CurioItems.SPECTRE_GOGGLES.get(), SpectreGogglesRenderer::new);
         CuriosRendererRegistry.register(CurioItems.TERRASPARK_BOOTS.get(), TerrasparkBootsRenderer::new);

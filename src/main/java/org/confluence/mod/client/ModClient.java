@@ -27,7 +27,7 @@ import org.confluence.mod.item.common.Gels;
 
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ModClient {
+public final class ModClient {
     @SubscribeEvent
     public static void keyBinding(RegisterKeyMappingsEvent event) {
         event.register(KeyBindings.metalDetector.get());

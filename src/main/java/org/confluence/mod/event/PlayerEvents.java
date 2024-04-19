@@ -25,7 +25,7 @@ import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.PlayerUtils;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class PlayerEvents {
+public final class PlayerEvents {
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {

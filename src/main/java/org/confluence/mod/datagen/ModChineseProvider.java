@@ -787,7 +787,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.BLOOD_ORANGE.get(), "血橙");
         add(Foods.BLOODY_MOSCATO.get(), "猩红麝香葡萄");
         add(Foods.ELDERBERRY.get(), "接骨木果");
-        add(Foods.COOKEDMARSHMALLOW.get(), "烤棉花糖");
+        add(Foods.COOKED_MARSHMALLOW.get(), "烤棉花糖");
         //endregion items
     }
 }

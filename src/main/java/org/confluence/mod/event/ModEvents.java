@@ -13,10 +13,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.block.cloaked.StepRevealingBlock;
-import org.confluence.mod.datagen.subprovider.SurfaceRuleData;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import org.confluence.mod.worldgen.biome.TestRegion1;
 import org.confluence.mod.worldgen.biome.TestRegion2;
 import org.confluence.mod.worldgen.biome.TestRegion3;
@@ -24,7 +24,7 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEvents {
+public final class ModEvents {
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
         event.put(ModEntities.BLUE_SLIME.get(), Monster.createMonsterAttributes().build());
@@ -69,7 +69,7 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void loadedComplete(FMLLoadCompleteEvent event) {
+    public static void loadComplete(FMLLoadCompleteEvent event) {
         int step = 0;
         for (int state = 0; state < 3; state++) {
             StepRevealingBlock.create(Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get(), state, step++);

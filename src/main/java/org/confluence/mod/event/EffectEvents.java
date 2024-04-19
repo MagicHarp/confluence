@@ -15,7 +15,7 @@ import org.confluence.mod.effect.HarmfulEffect.WitheredArmorEffect;
 import org.confluence.mod.item.curio.combat.EffectInvulnerable;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EffectEvents {
+public final class EffectEvents {
     @SubscribeEvent
     public static void effectApplicable(MobEffectEvent.Applicable event) {
         MobEffect mobEffect = event.getEffectInstance().getEffect();

@@ -9,7 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 
-public class ManaProvider implements ICapabilitySerializable<CompoundTag> {
+public final class ManaProvider implements ICapabilitySerializable<CompoundTag> {
     public static final Capability<ManaStorage> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
     private ManaStorage manaStorage;

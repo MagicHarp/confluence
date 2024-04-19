@@ -20,7 +20,7 @@ import org.confluence.mod.item.sword.Swords;
 
 
 @SuppressWarnings("unused")
-public class ModItems {
+public final class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
     //  tool

@@ -140,11 +140,8 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries()
-            .stream()
-            .map(RegistryObject::get)
-            .filter(block -> map.containsKey(block.getLootTable()))
-            .toList();
+        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+            .filter(block -> map.containsKey(block.getLootTable())).toList();
     }
 
     private LootTable.Builder createTinOreDrop(Block block) {

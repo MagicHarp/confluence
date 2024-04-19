@@ -10,7 +10,7 @@ import top.theillusivec4.curios.Curios;
 
 import static org.confluence.mod.Confluence.MODID;
 
-public class ModTags {
+public final class ModTags {
     public static final TagKey<Block> NEEDS_4_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_4_level"));
     public static final TagKey<Block> NEEDS_5_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_5_level"));
     public static final TagKey<Block> NEEDS_6_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_6_level"));

@@ -25,7 +25,7 @@ import java.util.HashSet;
 
 @SuppressWarnings("unused")
 @Mod(Confluence.MODID)
-public class Confluence {
+public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Gson GSON = new Gson();

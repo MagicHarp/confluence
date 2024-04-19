@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PlayerAbility implements INBTSerializable<CompoundTag> {
+public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private double jumpBoost;
     private int fallResistance;
     private int invulnerableTime;

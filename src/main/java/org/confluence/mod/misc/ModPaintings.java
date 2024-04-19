@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 
-public class ModPaintings {
+public final class ModPaintings {
     public static final DeferredRegister<PaintingVariant> PAINTING_VARIANTS = DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, Confluence.MODID);
     public static final RegistryObject<PaintingVariant> AMANITA = PAINTING_VARIANTS.register("amanita", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> MAGIC_HARP = PAINTING_VARIANTS.register("magic_harp", () -> new PaintingVariant(32, 32));

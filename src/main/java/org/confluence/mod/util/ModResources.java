@@ -39,8 +39,9 @@ public class ModResources {
                 if (hexR.length() == 1) hexR = "0" + hexR;
                 String hexG = Integer.toHexString(rgba[1]);
                 if (rgba[3] == (byte) 255 && hexG.length() == 1) hexG = "0" + hexG;
-                String uniStr = hexR + hexG;
+                String uniStr;
                 if (rgba[3] == 127) uniStr = "00" + hexR;
+                else uniStr = hexR + hexG;
                 if (uniStr.equals("0a00")) {
                     text.append("\n");
                 } else if (!uniStr.equals("000") && !uniStr.equals("0000")) {

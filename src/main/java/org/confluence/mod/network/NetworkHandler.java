@@ -11,7 +11,7 @@ import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.network.s2c.*;
 
-public class NetworkHandler {
+public final class NetworkHandler {
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         new ResourceLocation(Confluence.MODID, "main"),

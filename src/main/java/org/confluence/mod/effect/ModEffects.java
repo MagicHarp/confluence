@@ -10,7 +10,7 @@ import org.confluence.mod.effect.BeneficialEffect.*;
 import org.confluence.mod.effect.HarmfulEffect.*;
 import org.confluence.mod.effect.NeutralEffect.GravitationEffect;
 
-public class ModEffects {
+public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
 
     public static final RegistryObject<ManaIssueEffect> MANA_ISSUE = EFFECTS.register("mana_issue", ManaIssueEffect::new);

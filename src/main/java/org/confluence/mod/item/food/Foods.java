@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public enum Foods implements EnumRegister<Item> {
     //常规食物
-    COOKEDMARSHMALLOW("cooked_marshmallow", () -> new BaseFoodItem(FoodType.MEDIUM)),
+    COOKED_MARSHMALLOW("cooked_marshmallow", () -> new BaseFoodItem(FoodType.MEDIUM)),
     //水果
     ELDERBERRY("elderberry", () -> new BaseFoodItem(FoodType.LOW)),
     BLOOD_ORANGE("blood_orange", () -> new BaseFoodItem(FoodType.LOW)),

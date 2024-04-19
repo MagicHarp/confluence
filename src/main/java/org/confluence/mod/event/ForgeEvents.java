@@ -46,7 +46,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ForgeEvents {
+public final class ForgeEvents {
     @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         ConfluenceCommand.register(event.getDispatcher());

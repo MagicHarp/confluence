@@ -1,10 +1,9 @@
-package org.confluence.mod.datagen.subprovider;
+package org.confluence.mod.worldgen.biome;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.worldgen.biome.Biomes;
 
 public class SurfaceRuleData
 {

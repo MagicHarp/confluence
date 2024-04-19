@@ -5,7 +5,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ModRarity {
+public final class ModRarity {
     public static final Rarity GRAY = Rarity.create("gray", style -> style.withColor(0x828282));
     public static final Rarity WHITE = Rarity.create("white", style -> style.withColor(0xFFFFFF));
     public static final Rarity BLUE = Rarity.create("blue", style -> style.withColor(0x9696FF));

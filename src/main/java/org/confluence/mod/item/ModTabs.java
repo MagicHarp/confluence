@@ -25,7 +25,7 @@ import org.confluence.mod.item.sword.Swords;
 import static org.confluence.mod.block.ModBlocks.*;
 
 @SuppressWarnings("unused")
-public class ModTabs {
+public final class ModTabs {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
     // 建筑方块
     public static final RegistryObject<CreativeModeTab> BUILDING_BLOCKS = TABS.register("building_blocks",
