@@ -4,7 +4,6 @@ import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,9 +29,9 @@ public final class InformationHandler {
     private static byte time = 0;
     private static byte weatherRadio = 0;
     private static byte sextant = 0;
-    private static byte fishermansPocketGuide = 0;
+    private static byte fpg = 0;
     private static byte metalDetector = 0;
-    private static byte lifeFormAnalyzer = 0;
+    private static byte lfa = 0;
     private static byte radar = 0;
     private static byte tallyCounter = 0;
     private static byte dpsMeter = 0;
@@ -57,87 +56,73 @@ public final class InformationHandler {
         information.clear();
         long gameTime = localPlayer.level().getGameTime();
 
-        if (time != 0) {
-            if (timeInfo != null) {
-                information.add(timeInfo.apply(localPlayer.level().dayTime()));
-            }
-        }
-        if (time < 0 && gameTime % 200 == 0) {
-            if (time == -1) {
-                if (nearPlayerNoCurio(localPlayer, HourWatch.class)) timeInfo = null;
-            } else if (time == -2) {
-                if (nearPlayerNoCurio(localPlayer, HalfHourWatch.class)) timeInfo = null;
-            } else if (nearPlayerNoCurio(localPlayer, MinuteWatch.class)) {
-                timeInfo = null;
+        if (time != 0 && timeInfo != null) {
+            information.add(timeInfo.apply(localPlayer.level().dayTime()));
+            if (time < 0 && gameTime % 200 == 0) {
+                if (time == -1) {
+                    if (check(localPlayer, HourWatch.class)) timeInfo = null;
+                } else if (time == -2) {
+                    if (check(localPlayer, HalfHourWatch.class)) timeInfo = null;
+                } else if (check(localPlayer, MinuteWatch.class)) timeInfo = null;
             }
         }
         if (weatherRadio != 0) {
             if (gameTime % 200 == 1) weatherRadioInfo = IWeatherRadio.getInfo(localPlayer, windSpeed);
             information.add(weatherRadioInfo);
+            if (weatherRadio < 0 && gameTime % 200 == 1 && check(localPlayer, IWeatherRadio.class)) weatherRadio = 0;
         }
-        if (weatherRadio < 0 && gameTime % 200 == 1 && nearPlayerNoCurio(localPlayer, IWeatherRadio.class)) {
-            weatherRadio = 0;
+        if (sextant != 0) {
+            information.add(ISextant.getInfo(localPlayer));
+            if (sextant < 0 && gameTime % 200 == 2 && check(localPlayer, ISextant.class)) sextant = 0;
         }
-        if (sextant != 0) information.add(ISextant.getInfo(localPlayer));
-        if (sextant < 0 && gameTime % 200 == 2 && nearPlayerNoCurio(localPlayer, ISextant.class)) {
-            sextant = 0;
-        }
-        if (fishermansPocketGuide != 0) information.add(IFishermansPocketGuide.getInfo(localPlayer));
-        if (fishermansPocketGuide < 0 && gameTime % 200 == 3 && nearPlayerNoCurio(localPlayer, IFishermansPocketGuide.class)) {
-            fishermansPocketGuide = 0;
+        if (fpg != 0) {
+            information.add(IFishermansPocketGuide.getInfo(localPlayer));
+            if (fpg < 0 && gameTime % 200 == 3 && check(localPlayer, IFishermansPocketGuide.class)) fpg = 0;
         }
         if (KeyBindings.metalDetector.get().isDown()) {
             if (!detectorPressed && metalDetector != 0) {
                 detectorPressed = true;
                 metalDetectorInfo = IMetalDetector.getInfo(localPlayer);
             }
-        } else {
-            detectorPressed = false;
+        } else detectorPressed = false;
+        if (metalDetector != 0) {
+            information.add(metalDetectorInfo);
+            if (metalDetector < 0 && gameTime % 200 == 4 && check(localPlayer, IMetalDetector.class)) metalDetector = 0;
         }
-        if (metalDetector != 0) information.add(metalDetectorInfo);
-        if (metalDetector < 0 && gameTime % 200 == 4 && nearPlayerNoCurio(localPlayer, IMetalDetector.class)) {
-            metalDetector = 0;
-        }
-        if (lifeFormAnalyzer != 0) {
+        if (lfa != 0) {
             if (gameTime % 200 == 5) lifeFormAnalyzerInfo = ILifeFormAnalyzer.getInfo(localPlayer);
             information.add(lifeFormAnalyzerInfo);
-        }
-        if (lifeFormAnalyzer < 0 && gameTime % 200 == 5 && nearPlayerNoCurio(localPlayer, ILifeFormAnalyzer.class)) {
-            lifeFormAnalyzer = 0;
+            if (lfa < 0 && gameTime % 200 == 5 && check(localPlayer, ILifeFormAnalyzer.class)) lfa = 0;
         }
         if (radar != 0) {
             if (gameTime % 200 == 6) radarInfo = IRadar.getInfo(localPlayer);
             information.add(radarInfo);
+            if (radar < 0 && gameTime % 200 == 6 && check(localPlayer, IRadar.class)) radar = 0;
         }
-        if (radar < 0 && gameTime % 200 == 6 && nearPlayerNoCurio(localPlayer, IRadar.class)) {
-            radar = 0;
-        }
-        if (tallyCounter != 0) information.add(tallyCounterInfo);
-        if (tallyCounter < 0 && gameTime % 200 == 7 && nearPlayerNoCurio(localPlayer, ITallyCounter.class)) {
-            tallyCounter = 0;
+        if (tallyCounter != 0) {
+            information.add(tallyCounterInfo);
+            if (tallyCounter < 0 && gameTime % 200 == 7 && check(localPlayer, ITallyCounter.class)) tallyCounter = 0;
         }
         if (dpsMeter != 0) {
             long delta = gameTime - lastAttackTime;
             if (delta > 1200) attackDamage = 0.0F;
-            else if (delta % 20 == 0) dpsMeterInfo = IDPSMeter.getInfo(attackDamage / delta);
+            else dpsMeterInfo = IDPSMeter.getInfo(attackDamage / delta);
             information.add(dpsMeterInfo);
+            if (dpsMeter < 0 && gameTime % 200 == 8 && check(localPlayer, IDPSMeter.class)) dpsMeter = 0;
         }
-        if (dpsMeter < 0 && gameTime % 200 == 8 && nearPlayerNoCurio(localPlayer, IDPSMeter.class)) {
-            dpsMeter = 0;
+        if (stopwatch != 0) {
+            information.add(IStopwatch.getInfo(localPlayer));
+            if (stopwatch < 0 && gameTime % 200 == 9 && check(localPlayer, IStopwatch.class)) stopwatch = 0;
         }
-        if (stopwatch != 0) information.add(IStopwatch.getInfo(localPlayer));
-        if (stopwatch < 0 && gameTime % 200 == 9 && nearPlayerNoCurio(localPlayer, IStopwatch.class)) {
-            stopwatch = 0;
+        if (compass != 0) {
+            information.add(ICompass.getInfo(localPlayer));
+            if (compass < 0 && gameTime % 200 == 10 && check(localPlayer, ICompass.class)) compass = 0;
         }
-        if (compass != 0) information.add(ICompass.getInfo(localPlayer));
-        if (compass < 0 && gameTime % 200 == 10 && nearPlayerNoCurio(localPlayer, ICompass.class)) {
-            compass = 0;
+        if (depthMeter != 0) {
+            information.add(IDepthMeter.getInfo(localPlayer));
+            if (depthMeter < 0 && gameTime % 200 == 11 && check(localPlayer, IDepthMeter.class)) depthMeter = 0;
         }
-        if (depthMeter != 0) information.add(IDepthMeter.getInfo(localPlayer));
-        if (depthMeter < 0 && gameTime % 200 == 11 && nearPlayerNoCurio(localPlayer, IDepthMeter.class)) {
-            depthMeter = 0;
-        }
-        if (mechanicalLens < 0 && gameTime % 200 == 12 && nearPlayerNoCurio(localPlayer, MechanicalLens.class)) {
+        if (mechanicalLens < 0 && gameTime % 200 == 12 && check(localPlayer, MechanicalLens.class)) {
             mechanicalLens = 0;
         }
     }
@@ -146,7 +131,7 @@ public final class InformationHandler {
         return information;
     }
 
-    private static boolean nearPlayerNoCurio(LocalPlayer self, Class<?> clazz) {
+    private static boolean check(LocalPlayer self, Class<?> clazz) {
         return self.level().players().stream()
             .noneMatch(player -> player.distanceTo(self) < 31.5F && CuriosUtils.hasCurio(player, clazz));
     }
@@ -156,21 +141,17 @@ public final class InformationHandler {
         context.enqueueWork(() -> {
             byte[] enabled = packet.enabled();
             time = enabled[0];
-            int absTime = Math.abs(time);
-            if (absTime == 1) {
-                timeInfo = MinuteWatch::wrapTime;
-            } else if (absTime == 2) {
-                timeInfo = HalfHourWatch::wrapTime;
-            } else if (absTime == 3) {
-                timeInfo = HourWatch::wrapTime;
-            } else {
-                timeInfo = null;
-            }
+            timeInfo = switch (Math.abs(time)) {
+                case 1 -> HourWatch::wrapTime;
+                case 2 -> HalfHourWatch::wrapTime;
+                case 3 -> MinuteWatch::wrapTime;
+                default -> null;
+            };
             weatherRadio = enabled[1];
             sextant = enabled[2];
-            fishermansPocketGuide = enabled[3];
+            fpg = enabled[3];
             metalDetector = enabled[4];
-            lifeFormAnalyzer = enabled[5];
+            lfa = enabled[5];
             radar = enabled[6];
             tallyCounter = enabled[7];
             dpsMeter = enabled[8];
@@ -212,9 +193,7 @@ public final class InformationHandler {
 
     public static void handleWindSpeed(WindSpeedPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> {
-            windSpeed = "%.2f".formatted(Mth.length(packet.x(), packet.z()));
-        });
+        context.enqueueWork(() -> windSpeed = "%.2f".formatted(packet.speed()));
         context.setPacketHandled(true);
     }
 }

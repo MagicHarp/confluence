@@ -1,6 +1,7 @@
 package org.confluence.mod.util;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
@@ -85,6 +86,6 @@ public final class PlayerUtils {
             new SpecificMoonPacketS2C(data.getMoonSpecific()));
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new WindSpeedPacketS2C(data.getWindSpeedX(), data.getWindSpeedZ()));
+            new WindSpeedPacketS2C((float) Mth.length(data.getWindSpeedX(), data.getWindSpeedZ())));
     }
 }
