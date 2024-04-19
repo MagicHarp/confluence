@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.healthandmana;
+package org.confluence.mod.item.curio.HealthAndMana;
 
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;

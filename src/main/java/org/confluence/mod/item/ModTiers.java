@@ -62,23 +62,7 @@ public final class ModTiers {
         TierSortingRegistry.registerTier(TITANIUM, titanium, List.of(adamantite), List.of());
     }
 
-    private static class ModTier implements Tier {
-        private final int level;
-        private final int uses;
-        private final float speed;
-        private final float attackDamageBonus;
-        private final int enchantmentValue;
-        private final @NotNull Supplier<Ingredient> repairIngredient;
-
-        public ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) {
-            this.level = level;
-            this.uses = uses;
-            this.speed = speed;
-            this.attackDamageBonus = attackDamageBonus;
-            this.enchantmentValue = enchantmentValue;
-            this.repairIngredient = repairIngredient;
-        }
-
+    private record ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) implements Tier {
         @Override
         public int getUses() {
             return uses;

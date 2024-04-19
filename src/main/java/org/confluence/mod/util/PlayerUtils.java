@@ -14,7 +14,7 @@ import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-public class PlayerUtils {
+public final class PlayerUtils {
     public static void syncMana2Client(ServerPlayer serverPlayer, ManaStorage manaStorage) {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),

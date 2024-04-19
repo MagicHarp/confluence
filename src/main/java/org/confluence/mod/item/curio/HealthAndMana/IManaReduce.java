@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.healthandmana;
+package org.confluence.mod.item.curio.HealthAndMana;
 
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.capability.mana.ManaProvider;

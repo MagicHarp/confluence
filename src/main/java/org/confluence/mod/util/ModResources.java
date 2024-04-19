@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 
-public class ModResources {
+public final class ModResources {
     public static void initialize() throws ClassNotFoundException {
         JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = javaCompiler.getStandardFileManager(null, null, null);

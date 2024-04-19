@@ -4,7 +4,7 @@ import javax.tools.SimpleJavaFileObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-class StringObject extends SimpleJavaFileObject {
+final class StringObject extends SimpleJavaFileObject {
     private final String content;
 
     StringObject(String className, String contents) throws URISyntaxException {

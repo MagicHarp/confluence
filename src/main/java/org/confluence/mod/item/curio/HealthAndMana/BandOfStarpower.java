@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.healthandmana;
+package org.confluence.mod.item.curio.HealthAndMana;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;

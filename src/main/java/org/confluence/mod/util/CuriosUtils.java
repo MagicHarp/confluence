@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-public class CuriosUtils {
+public final class CuriosUtils {
     public static boolean noSameCurio(LivingEntity living, Class<?> clazz) {
         return noSameCurio(living, (Predicate<ItemStack>) itemStack -> clazz.isInstance(itemStack.getItem()));
     }
