@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.item.magic.IMagicAttack;
+import org.confluence.mod.item.IMagicAttack;
 
 public class ManaIssueEffect extends MobEffect {
     public ManaIssueEffect() {

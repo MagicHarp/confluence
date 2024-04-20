@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.projectile.bullet.BaseBulletEntity;
+import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 

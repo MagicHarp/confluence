@@ -8,9 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.item.curio.HealthAndMana.IAutoGetMana;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
-import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.item.potion.ManaPotion;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -146,7 +146,7 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IMagicAttack iMagicAttack) {
-                    atomic.addAndGet(iMagicAttack.getBonus());
+                    atomic.addAndGet(iMagicAttack.getMagicBonus());
                 }
             }
         });
@@ -158,16 +158,16 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     public void freshExtractRatio(LivingEntity living) {
-        AtomicDouble atomic = new AtomicDouble();
+        AtomicDouble atomic = new AtomicDouble(1.0);
         CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IManaReduce iManaReduce) {
-                    atomic.addAndGet(iManaReduce.getManaReduce());
+                    atomic.addAndGet(-iManaReduce.getManaReduce());
                 }
             }
         });
-        this.extractRatio = 1.0 - atomic.get();
+        this.extractRatio = atomic.get();
     }
 
     public void setManaRegenerationBand(boolean manaRegenerationBand) {

@@ -31,20 +31,19 @@ public final class PlayerUtils {
     public static void regenerateMana(ServerPlayer serverPlayer) {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             int delay = manaStorage.getRegenerateDelay();
+            boolean notMove = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F;
             if (delay > 0) {
                 if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
-                int delayReduce = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F ? 2 : 1;
+                int delayReduce = notMove ? 2 : 1;
                 if (manaStorage.hasManaRegenerationBand()) delayReduce += 1;
                 manaStorage.setRegenerateDelay(delay - delayReduce);
                 return;
             }
 
             Supplier<Integer> receive = () -> {
-                float a = ((float) manaStorage.getMaxMana() / 7) + (manaStorage.hasManaRegenerationBand() ? 25 : 0) + 1;
-                float b = ((float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 0.8F + 0.2F;
-                if (Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F) {
-                    a += (float) manaStorage.getMaxMana() / 2;
-                }
+                float a = manaStorage.getMaxMana() / 7.0F + (manaStorage.hasManaRegenerationBand() ? 25 : 0) + 1;
+                float b = manaStorage.getCurrentMana() * 0.8F / manaStorage.getMaxMana() + 0.2F;
+                if (notMove) a += manaStorage.getMaxMana() / 2.0F;
                 return Math.max(Math.round(a * b * 0.0115F), 1);
             };
 
@@ -69,13 +68,6 @@ public final class PlayerUtils {
     public static void receiveMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             if (manaStorage.receiveMana(sup)) syncMana2Client(serverPlayer, manaStorage);
-        });
-    }
-
-    public static void increaseAdditionalMana(ServerPlayer serverPlayer, int amount) {
-        serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
-            manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() + amount);
-            syncMana2Client(serverPlayer, manaStorage);
         });
     }
 

@@ -23,6 +23,7 @@ public final class ClientPacketHandler {
     private static boolean autoAttack = false;
 
     private static ResourceLocation specificMoon = null;
+    private static int moonPhase = -1;
 
     public static void handleMana(ManaPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
@@ -55,9 +56,11 @@ public final class ClientPacketHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             if (packet.id() < 0) {
+                moonPhase = -1;
                 specificMoon = null;
             } else {
-                specificMoon = new ResourceLocation(MODID, "textures/environment/specific_moon_" + packet.id() + ".png");
+                moonPhase = packet.id();
+                specificMoon = new ResourceLocation(MODID, "textures/environment/specific_moon_" + moonPhase + ".png");
             }
         });
         context.setPacketHandled(true);
@@ -85,6 +88,10 @@ public final class ClientPacketHandler {
 
     public static @Nullable ResourceLocation getSpecificMoon() {
         return specificMoon;
+    }
+
+    public static int getMoonPhase() {
+        return moonPhase;
     }
 
     public static void handleSwing(AutoAttackPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

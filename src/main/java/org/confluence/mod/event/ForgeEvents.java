@@ -35,11 +35,11 @@ import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
 import org.confluence.mod.effect.HarmfulEffect.BleedingEffect;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
-import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 

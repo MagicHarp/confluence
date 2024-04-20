@@ -21,7 +21,7 @@ public class FishingEffect extends MobEffect {  //钓鱼药水 换皮海之眷�
     public static void onRemove(LivingEntity entity) {
         if (entity instanceof Player && !entity.isSpectator()) {
             entity.getCapability(PlayerAbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> playerAbility.decreaseFishingPower(1.0F));
+                .ifPresent(playerAbility -> playerAbility.increaseFishingPower(-1.0F));
         }
     }
 }

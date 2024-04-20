@@ -108,12 +108,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     ARCANE_FLOWER("arcane_flower", ArcaneFlower::new), // 奥术花
     BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
     BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
-    /* 天界手铐 */
-    /* 天界磁石 */
-    /* 天界徽章 */
+    CELESTIAL_CUFFS("celestial_cuffs", CelestialCuffs::new), // 天界手铐
+    CELESTIAL_MAGNET("celestial_magnet", CelestialMagnet::new), // 天界磁石
+    CELESTIAL_EMBLEM("celestial_emblem", CelestialEmblem::new), // 天界徽章
     CHARM_OF_MYTHS("charm_of_myths", CharmOfMyths::new), // 神话护身符
     MAGIC_CUFFS("magic_cuffs", MagicCuffs::new), // 魔法手铐
-    /* 磁花 */
+    MAGNET_FLOWER("magnet_flower", MagnetFlower::new), // 磁花
     /* 魔力斗篷 */
     MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
     MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环

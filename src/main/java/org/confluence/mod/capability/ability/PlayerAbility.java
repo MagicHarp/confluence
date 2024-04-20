@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.item.curio.HealthAndMana.CelestialMagnet;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -28,6 +29,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private float fishingPower;
 
     private int crystals;
+    private double starRange;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -43,6 +45,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = 0.0F;
 
         this.crystals = 0;
+        this.starRange = 1.75;
     }
 
     public void freshJumpBoost(LivingEntity living) {
@@ -211,12 +214,26 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return crystals;
     }
 
-    public void increaseFishingPower(float fishingPower) {
-        this.fishingPower += fishingPower;
+    public void freshStarRange(LivingEntity living) {
+        AtomicBoolean atomic = new AtomicBoolean();
+        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
+            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof CelestialMagnet) {
+                    atomic.set(true);
+                    return;
+                }
+            }
+        });
+        this.starRange = atomic.get() ? 14.25: 1.75;
     }
 
-    public void decreaseFishingPower(float fishingPower) {
-        this.fishingPower -= fishingPower;
+    public double getStarRange() {
+        return starRange;
+    }
+
+    public void increaseFishingPower(float fishingPower) {
+        this.fishingPower += fishingPower;
     }
 
     public float getFishingPower() {
@@ -238,6 +255,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putFloat("fishingPower", fishingPower);
 
         nbt.putInt("crystals", crystals);
+        nbt.putDouble("starRange", starRange);
         return nbt;
     }
 
@@ -255,6 +273,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = nbt.getFloat("fishingPower");
 
         this.crystals = nbt.getInt("crystals");
+        this.starRange = nbt.getDouble("starRange");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -270,5 +289,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = playerAbility.fishingPower;
 
         this.crystals = playerAbility.crystals;
+        this.starRange = playerAbility.starRange;
     }
 }

@@ -20,6 +20,7 @@ public final class ModTags {
     public static final TagKey<Block> NEEDS_8_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_8_level"));
 
     public static final TagKey<Item> CURIO = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
+    public static final TagKey<Item> PROVIDE_MANA = ItemTags.create(new ResourceLocation(MODID, "provide_mana"));
 
     public static final TagKey<DamageType> HARMFUL_EFFECT = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MODID, "harmful_effect"));
 }

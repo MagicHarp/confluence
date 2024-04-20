@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.LightSaberRenderer;
-import org.confluence.mod.item.magic.IMagicAttack;
+import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;

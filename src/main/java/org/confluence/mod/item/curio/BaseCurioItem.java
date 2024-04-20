@@ -12,14 +12,15 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
+import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
-import org.confluence.mod.item.magic.IMagicAttack;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,6 +56,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
         if (item instanceof IJumpBoost iJumpBoost) iJumpBoost.freshJumpBoost(living);
         if (item instanceof IMagicAttack iMagicAttack) iMagicAttack.freshMagicAttackBonus(living);
         if (item instanceof IManaReduce iManaReduce) iManaReduce.freshManaReduce(living);
+        if(item instanceof IRangePickup.Star star) star.freshStarRange(living);
         if (living instanceof ServerPlayer serverPlayer) {
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
