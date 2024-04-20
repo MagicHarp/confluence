@@ -16,10 +16,10 @@ import org.confluence.mod.block.cloaked.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import org.confluence.mod.worldgen.biome.TestRegion1;
 import org.confluence.mod.worldgen.biome.TestRegion2;
 import org.confluence.mod.worldgen.biome.TestRegion3;
+import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
