@@ -42,7 +42,7 @@ public final class PlayerUtils {
             Supplier<Integer> receive = () -> {
                 float a = ((float) manaStorage.getMaxMana() / 7) + (manaStorage.hasManaRegenerationBand() ? 25 : 0) + 1;
                 float b = ((float) manaStorage.getCurrentMana() / manaStorage.getMaxMana()) * 0.8F + 0.2F;
-                if (Math.abs(serverPlayer.getX() - serverPlayer.xOld) < 0.001F) {
+                if (Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F) {
                     a += (float) manaStorage.getMaxMana() / 2;
                 }
                 return Math.max(Math.round(a * b * 0.0115F), 1);
