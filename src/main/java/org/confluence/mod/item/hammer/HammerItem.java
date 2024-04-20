@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.stream.Stream;
+
 public class HammerItem extends DiggerItem {
     public HammerItem(Tier tier, float rawDamage, float rawSpeed) {
         this(tier, rawDamage, rawSpeed, new Properties());
@@ -46,16 +48,12 @@ public class HammerItem extends DiggerItem {
     /**
      * Scan 3*1*3 blocks related to the given pos.
      */
-    public static int iteForBlocks(Level level, Player player, BlockPos pos, boolean xOff, boolean yOff, boolean zOff, float speedOff) {
-        int innerDestroyed = 0;
-        for (int d1 = -1; d1 <= 1; d1++) {
-            for (int d2 = -1; d2 <= 1; d2++) {
-                if (d1 == 0 && d2 == 0) continue;
-                if (applyBlockDestroy(level, xOff ? pos.offset(d1, yOff ? d2 : 0, zOff ? d2 : 0) : pos.offset(0, d1, d2), player, speedOff))
-                    innerDestroyed++;
-            }
-        }
-        return innerDestroyed;
+    public static int iteForBlocks(Level level, Player player, @NotNull BlockPos pos, boolean xOff, boolean yOff, boolean zOff, float speedOff) {
+        Stream<BlockPos> posStream = BlockPos.betweenClosedStream(pos.offset(xOff? 1:0, yOff? 1:0, zOff? 1:0), pos.offset(xOff? -1:0, yOff? -1:0, zOff? -1:0));
+        return (int) posStream.filter(pos1 -> !pos1.equals(pos))
+                .map(pos1 -> applyBlockDestroy(level, pos1, player, speedOff))
+                .filter(destroyed -> destroyed)
+                .count();
     }
 
     /**
