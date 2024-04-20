@@ -33,7 +33,7 @@ public final class PlayerUtils {
             int delay = manaStorage.getRegenerateDelay();
             if (delay > 0) {
                 if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
-                int delayReduce = Math.abs(serverPlayer.getX() - serverPlayer.xOld) < 0.001F ? 2 : 1;
+                int delayReduce = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F ? 2 : 1;
                 if (manaStorage.hasManaRegenerationBand()) delayReduce += 1;
                 manaStorage.setRegenerateDelay(delay - delayReduce);
                 return;
@@ -55,7 +55,7 @@ public final class PlayerUtils {
     public static boolean extractMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
         if (serverPlayer.gameMode.isCreative()) return true;
 
-        AtomicBoolean success = new AtomicBoolean(false);
+        AtomicBoolean success = new AtomicBoolean();
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             if (manaStorage.extractMana(sup, serverPlayer)) {
                 success.set(true);
