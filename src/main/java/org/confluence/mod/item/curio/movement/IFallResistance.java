@@ -6,6 +6,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IFallResistance {
@@ -24,6 +25,14 @@ public interface IFallResistance {
         int reduce = atomic.get();
         if (reduce < 0) return 0.0F;
         return Math.max(amount - reduce, 0.0F);
+    }
+
+    static boolean isInvul(LivingEntity living, DamageSource damageSource) {
+        if (!damageSource.is(DamageTypes.FALL)) return false;
+        AtomicBoolean atomic = new AtomicBoolean();
+        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+            .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance() < 0));
+        return atomic.get();
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.fall_resistance");

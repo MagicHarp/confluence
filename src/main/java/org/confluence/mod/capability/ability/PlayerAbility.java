@@ -20,14 +20,13 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int fallResistance;
     private int invulnerableTime;
     private double criticalChance;
-
     private boolean fireImmune;
     private boolean lavaHurtReduce;
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
-    private int aggro; // 仇恨
-    private float fishingPower;
 
+    private int aggro;
+    private float fishingPower;
     private int crystals;
     private double starRange;
 
@@ -36,14 +35,13 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fallResistance = 0;
         this.invulnerableTime = 20;
         this.criticalChance = 0.0;
-
         this.fireImmune = false;
         this.lavaHurtReduce = false;
         this.maxLavaImmuneTicks = 0;
+
         this.remainLavaImmuneTicks = 0;
         this.aggro = 0;
         this.fishingPower = 0.0F;
-
         this.crystals = 0;
         this.starRange = 1.75;
     }
@@ -202,6 +200,14 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return aggro;
     }
 
+    public void increaseFishingPower(float fishingPower) {
+        this.fishingPower += fishingPower;
+    }
+
+    public float getFishingPower() {
+        return fishingPower;
+    }
+
     public boolean increaseCrystals() {
         if (crystals < 15) {
             crystals++;
@@ -225,19 +231,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 }
             }
         });
-        this.starRange = atomic.get() ? 14.25: 1.75;
+        this.starRange = atomic.get() ? 14.25 : 1.75;
     }
 
     public double getStarRange() {
         return starRange;
-    }
-
-    public void increaseFishingPower(float fishingPower) {
-        this.fishingPower += fishingPower;
-    }
-
-    public float getFishingPower() {
-        return fishingPower;
     }
 
     @Override
@@ -247,13 +245,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("fallResistance", fallResistance);
         nbt.putInt("invulnerableTime", invulnerableTime);
         nbt.putDouble("criticalChance", criticalChance);
-
         nbt.putBoolean("fireImmune", fireImmune);
         nbt.putBoolean("lavaHurtReduce", lavaHurtReduce);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
+
         nbt.putInt("aggro", aggro);
         nbt.putFloat("fishingPower", fishingPower);
-
         nbt.putInt("crystals", crystals);
         nbt.putDouble("starRange", starRange);
         return nbt;
@@ -265,13 +262,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fallResistance = nbt.getInt("fallResistance");
         this.invulnerableTime = nbt.getInt("invulnerableTime");
         this.criticalChance = nbt.getDouble("criticalChance");
-
         this.fireImmune = nbt.getBoolean("fireImmune");
         this.lavaHurtReduce = nbt.getBoolean("lavaHurtReduce");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
+
         this.aggro = nbt.getInt("aggro");
         this.fishingPower = nbt.getFloat("fishingPower");
-
         this.crystals = nbt.getInt("crystals");
         this.starRange = nbt.getDouble("starRange");
     }
@@ -281,13 +277,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fallResistance = playerAbility.fallResistance;
         this.invulnerableTime = playerAbility.invulnerableTime;
         this.criticalChance = playerAbility.criticalChance;
-
         this.fireImmune = playerAbility.fireImmune;
         this.lavaHurtReduce = playerAbility.lavaHurtReduce;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
+
         this.aggro = playerAbility.aggro;
         this.fishingPower = playerAbility.fishingPower;
-
         this.crystals = playerAbility.crystals;
         this.starRange = playerAbility.starRange;
     }

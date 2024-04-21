@@ -39,7 +39,7 @@ public interface IRangePickup {
         }
 
         static void apply(Player player) {
-            apply(player, PlayerAbility::getStarRange, ModTags.PROVIDE_MANA);
+            IRangePickup.apply(player, PlayerAbility::getStarRange, ModTags.PROVIDE_MANA);
         }
     }
 

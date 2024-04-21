@@ -9,6 +9,7 @@ import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
+import org.confluence.mod.network.c2s.WingsGlidePacketC2S;
 import org.confluence.mod.network.s2c.*;
 
 public final class NetworkHandler {
@@ -37,5 +38,6 @@ public final class NetworkHandler {
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, WingsGlidePacketC2S.class, WingsGlidePacketC2S::encode, WingsGlidePacketC2S::decode, WingsGlidePacketC2S::handle);
     }
 }

@@ -8,4 +8,12 @@ public interface EnumRegister<E> {
     default E get() {
         return getValue().get();
     }
+
+    default <T> T get(Class<T> clazz) {
+        E item = get();
+        if (clazz.isInstance(item)) {
+            return clazz.cast(item);
+        }
+        throw new ClassCastException("Can not cast %s to %s".formatted(item, clazz));
+    }
 }

@@ -19,6 +19,9 @@ public final class CuriosClient {
         CuriosRendererRegistry.register(CurioItems.FLURRY_BOOTS.get(), FlurryBootsRenderer::new);
         CuriosRendererRegistry.register(CurioItems.HERMES_BOOTS.get(), HermesBootsRenderer::new);
         CuriosRendererRegistry.register(CurioItems.OBSIDIAN_SKULL.get(), ObsidianSkullRenderer::new);
+
+        // Gecko x Curio
+        CuriosRendererRegistry.register(CurioItems.FLEDGLING_WINGS.get(), FledglingWingsRenderer::new);
     }
 
     public static void registerLayers(BiConsumer<ModelLayerLocation, Supplier<LayerDefinition>> layerDefinition) {

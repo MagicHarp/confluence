@@ -41,6 +41,9 @@ public final class PlayerJumpHandler {
     private static int maxFlyTicks = 0;
     private static int remainFlyTicks = 0;
     private static double flySpeed = 0.0;
+    private static boolean couldGlide = false;
+
+    public static boolean onFly = false;
 
     public static void handle(LocalPlayer localPlayer) {
         if (localPlayer.onGround()) {
@@ -54,6 +57,16 @@ public final class PlayerJumpHandler {
             cloudFinished = false;
             remainFlyTicks = maxFlyTicks;
         } else if (localPlayer.input.jumping) {
+            if (couldGlide) {
+                if (remainFlyTicks-- > 0) {
+                    onFly = true;
+                    fly(localPlayer, flySpeed);
+                } else if (!localPlayer.getAbilities().flying && localPlayer.getDeltaMovement().y < 0.0) {
+                    onFly = false;
+                    fly(localPlayer, -0.2);
+                }
+                return;
+            }
             if (jumpKeyDown) return;
 
             if (fartSpeed > 0.0 && !fartFinished) {
@@ -61,19 +74,11 @@ public final class PlayerJumpHandler {
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);
             } else if (sandstormSpeed > 0.0 && !sandstormFinished) {
-                if (remainSandstormTicks > 0) {
-                    remainSandstormTicks--;
-                    oneTimeJump(localPlayer, sandstormSpeed);
-                } else {
-                    jumpKeyDown = true;
-                }
+                if (remainSandstormTicks-- > 0) oneTimeJump(localPlayer, sandstormSpeed);
+                else jumpKeyDown = true;
             } else if (blizzardSpeed > 0.0 && !blizzardFinished) {
-                if (remainBlizzardTicks > 0) {
-                    remainBlizzardTicks--;
-                    oneTimeJump(localPlayer, blizzardSpeed);
-                } else {
-                    jumpKeyDown = true;
-                }
+                if (remainBlizzardTicks-- > 0) oneTimeJump(localPlayer, blizzardSpeed);
+                else jumpKeyDown = true;
             } else if (tsunamiSpeed > 0.0 && !tsunamiFinished) {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
@@ -83,13 +88,8 @@ public final class PlayerJumpHandler {
                 jumpKeyDown = true;
                 multiJump(localPlayer, cloudSpeed);
                 localPlayer.playSound(ModSounds.DOUBLE_JUMP.get());
-            } else if (remainFlyTicks > 0) {
-                remainFlyTicks--;
-                Vec3 vec3 = localPlayer.getDeltaMovement();
-                localPlayer.setDeltaMovement(vec3.x, flySpeed, vec3.z);
-                localPlayer.hasImpulse = true;
-                localPlayer.resetFallDistance();
-                NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
+            } else if (remainFlyTicks-- > 0) {
+                fly(localPlayer, flySpeed);
             } else {
                 jumpKeyDown = true;
             }
@@ -97,6 +97,7 @@ public final class PlayerJumpHandler {
             jumpKeyDown = false;
             sandstormFinished = remainSandstormTicks < maxSandstormTicks;
             blizzardFinished = remainBlizzardTicks < maxBlizzardTicks;
+            onFly = false;
         }
     }
 
@@ -114,6 +115,14 @@ public final class PlayerJumpHandler {
     }
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
+        Vec3 vec3 = localPlayer.getDeltaMovement();
+        localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
+        localPlayer.hasImpulse = true;
+        localPlayer.resetFallDistance();
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
+    }
+
+    private static void fly(LocalPlayer localPlayer, double speed) {
         Vec3 vec3 = localPlayer.getDeltaMovement();
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
@@ -140,7 +149,12 @@ public final class PlayerJumpHandler {
         context.enqueueWork(() -> {
             maxFlyTicks = packet.maxFlyTicks();
             flySpeed = packet.flySpeed();
+            couldGlide = packet.glide();
         });
         context.setPacketHandled(true);
+    }
+
+    public static boolean isOnGlide() {
+        return onFly;
     }
 }

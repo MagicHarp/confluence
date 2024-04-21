@@ -7,6 +7,7 @@ import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IHurtEvasion;
+import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +39,10 @@ public abstract class EntityMixin {
     @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (((Entity) (Object) this) instanceof Player player) {
-            if (IHurtEvasion.apply(player) || IFireImmune.apply(player, damageSource)) {
+            if (IHurtEvasion.apply(player) ||
+                IFallResistance.isInvul(player, damageSource) ||
+                IFireImmune.apply(player, damageSource)
+            ) {
                 cir.setReturnValue(true);
             }
         }
