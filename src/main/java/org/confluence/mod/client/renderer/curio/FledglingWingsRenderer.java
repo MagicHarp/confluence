@@ -14,6 +14,6 @@ public class FledglingWingsRenderer extends GeckoCurioRenderer<BaseWings> {
     @Override
     public void modifyPoseStack(PoseStack poseStack) {
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
-        poseStack.translate(0.0F, -1.0F, 0.0F);
+        poseStack.translate(-0.5F, -2.0F, -0.5F);
     }
 }
