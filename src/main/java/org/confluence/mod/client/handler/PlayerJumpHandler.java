@@ -57,6 +57,8 @@ public final class PlayerJumpHandler {
             cloudFinished = false;
             remainFlyTicks = maxFlyTicks;
         } else if (localPlayer.input.jumping) {
+            if (jumpKeyDown) return;
+
             if (couldGlide) {
                 if (remainFlyTicks-- > 0) {
                     onFly = true;
@@ -65,25 +67,21 @@ public final class PlayerJumpHandler {
                     onFly = false;
                     fly(localPlayer, -0.2);
                 }
-                return;
-            }
-            if (jumpKeyDown) return;
-
-            if (fartSpeed > 0.0 && !fartFinished) {
+            } else if (!fartFinished && fartSpeed > 0.0) {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);
-            } else if (sandstormSpeed > 0.0 && !sandstormFinished) {
+            } else if (!sandstormFinished && sandstormSpeed > 0.0) {
                 if (remainSandstormTicks-- > 0) oneTimeJump(localPlayer, sandstormSpeed);
                 else jumpKeyDown = true;
-            } else if (blizzardSpeed > 0.0 && !blizzardFinished) {
+            } else if (!blizzardFinished && blizzardSpeed > 0.0) {
                 if (remainBlizzardTicks-- > 0) oneTimeJump(localPlayer, blizzardSpeed);
                 else jumpKeyDown = true;
-            } else if (tsunamiSpeed > 0.0 && !tsunamiFinished) {
+            } else if (!tsunamiFinished && tsunamiSpeed > 0.0) {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, tsunamiSpeed);
-            } else if (cloudSpeed > 0.0 && !cloudFinished) {
+            } else if (!cloudFinished && cloudSpeed > 0.0) {
                 cloudFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, cloudSpeed);
