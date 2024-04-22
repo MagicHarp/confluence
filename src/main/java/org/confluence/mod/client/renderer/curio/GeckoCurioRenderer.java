@@ -30,7 +30,7 @@ public abstract class GeckoCurioRenderer<A extends BaseCurioItem & GeoAnimatable
         this.currentItemStack = stack;
         poseStack.pushPose();
         modifyPoseStack(poseStack);
-        render(poseStack, animatable, renderTypeBuffer, null, null, light);
+        defaultRender(poseStack, animatable, renderTypeBuffer, null, null, 0, partialTicks, light);
         poseStack.popPose();
     }
 

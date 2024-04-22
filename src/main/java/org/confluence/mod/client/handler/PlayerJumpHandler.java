@@ -61,7 +61,7 @@ public final class PlayerJumpHandler {
                 if (remainFlyTicks-- > 0) {
                     onFly = true;
                     fly(localPlayer, flySpeed);
-                } else if (!localPlayer.getAbilities().flying && localPlayer.getDeltaMovement().y < 0.0) {
+                } else if (!localPlayer.getAbilities().flying && localPlayer.getDeltaMovement().y < -0.15) {
                     onFly = false;
                     fly(localPlayer, -0.2);
                 }
