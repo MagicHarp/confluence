@@ -69,10 +69,9 @@ public final class ForgeEvents {
         }
     }
 
-    //@SubscribeEvent
-    public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-        if (event.getObject().getCapability(PrefixProvider.CAPABILITY).isPresent()) return;
-        Item item = event.getObject().getItem();
+    @SubscribeEvent
+    public static void attachItemCapabilities(AttachCapabilitiesEvent<Item> event) {
+        Item item = event.getObject();
         if (item instanceof IUniversalOnly) {
             event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.UNIVERSAL));
         } else if (item instanceof Vanishable) {
