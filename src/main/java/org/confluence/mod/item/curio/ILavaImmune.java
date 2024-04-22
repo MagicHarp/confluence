@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 
 public interface ILavaImmune {
     default int getLavaImmuneTicks() {
@@ -10,7 +10,7 @@ public interface ILavaImmune {
     }
 
     default void freshLavaInvulTicks(LivingEntity living) {
-        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+        living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshLavaImmuneTicks(living));
     }
 

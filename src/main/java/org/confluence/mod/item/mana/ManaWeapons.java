@@ -1,4 +1,4 @@
-package org.confluence.mod.item.magic;
+package org.confluence.mod.item.mana;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;

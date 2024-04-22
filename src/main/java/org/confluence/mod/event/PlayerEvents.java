@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
 import org.confluence.mod.effect.HarmfulEffect.SilencedEffect;
@@ -55,7 +55,7 @@ public final class PlayerEvents {
         oldPlayer.revive();
 
         oldPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
-        oldPlayer.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(PlayerAbilityProvider.CAPABILITY)
+        oldPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(neo -> {
                 neo.copyFrom(old);
                 LifeCrystal.applyModifier(neoPlayer, neo);

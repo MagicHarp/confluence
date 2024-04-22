@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.item.IMagicAttack;
+import org.confluence.mod.item.mana.IManaWeapon;
 
 public class ManaIssueEffect extends MobEffect {
     public ManaIssueEffect() {
@@ -19,7 +19,7 @@ public class ManaIssueEffect extends MobEffect {
         float multiply = 1.0F;
         if (damageSource.getEntity() instanceof Player player) {
             MobEffectInstance manaIssue = player.getEffect(ModEffects.MANA_ISSUE.get());
-            if (manaIssue != null && (damageSource.is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IMagicAttack)) {
+            if (manaIssue != null && (damageSource.is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IManaWeapon)) {
                 int duration = manaIssue.getDuration();
                 if (duration == -1) {
                     multiply = 0.5F;

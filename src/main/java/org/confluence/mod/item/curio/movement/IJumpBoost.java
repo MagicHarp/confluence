@@ -2,13 +2,13 @@ package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 
 public interface IJumpBoost {
     double getBoost();
 
     default void freshJumpBoost(LivingEntity living) {
-        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+        living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshJumpBoost(living));
     }
 

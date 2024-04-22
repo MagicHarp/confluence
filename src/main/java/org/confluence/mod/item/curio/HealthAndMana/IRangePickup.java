@@ -8,15 +8,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.misc.ModTags;
 
 import java.util.function.Function;
 
 public interface IRangePickup {
     static void apply(Player player, Function<PlayerAbility, Double> range, TagKey<Item> tag) {
-        player.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility ->
+        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
             player.level().getEntitiesOfClass(
                 ItemEntity.class,
                 new AABB(player.getOnPos()).inflate(range.apply(playerAbility)),
@@ -34,7 +34,7 @@ public interface IRangePickup {
 
     interface Star {
         default void freshStarRange(LivingEntity living) {
-            living.getCapability(PlayerAbilityProvider.CAPABILITY)
+            living.getCapability(AbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> playerAbility.freshStarRange(living));
         }
 

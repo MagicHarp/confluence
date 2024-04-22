@@ -16,7 +16,7 @@ import org.confluence.mod.datagen.limit.Image64x;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.magic.StaffItem;
+import org.confluence.mod.item.mana.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.Set;

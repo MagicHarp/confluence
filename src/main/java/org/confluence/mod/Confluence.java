@@ -29,6 +29,7 @@ public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Gson GSON = new Gson();
+    public static final ResourceLocation ITEM_PREFIX = new ResourceLocation(MODID, "prefix");
 
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
 

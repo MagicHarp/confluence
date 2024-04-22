@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -27,19 +28,23 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.capability.prefix.IUniversalOnly;
+import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
 import org.confluence.mod.effect.HarmfulEffect.BleedingEffect;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.IMagicAttack;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.item.mana.IManaWeapon;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 
@@ -59,8 +64,27 @@ public final class ForgeEvents {
             if (player.getCapability(ManaProvider.CAPABILITY).isPresent()) return;
             event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
 
-            if (player.getCapability(PlayerAbilityProvider.CAPABILITY).isPresent()) return;
-            event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new PlayerAbilityProvider());
+            if (player.getCapability(AbilityProvider.CAPABILITY).isPresent()) return;
+            event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
+        }
+    }
+
+    //@SubscribeEvent
+    public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+        if (event.getObject().getCapability(PrefixProvider.CAPABILITY).isPresent()) return;
+        Item item = event.getObject().getItem();
+        if (item instanceof IUniversalOnly) {
+            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.UNIVERSAL));
+        } else if (item instanceof Vanishable) {
+            if (item instanceof SwordItem || item instanceof DiggerItem) {
+                event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.MELEE));
+            } else if (item instanceof TridentItem || item instanceof BowItem || item instanceof CrossbowItem) {
+                event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.RANGED));
+            }
+        } else if (item instanceof IManaWeapon) {
+            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.MAGIC_AND_SUMMING));
+        } else if (item instanceof BaseCurioItem) {
+            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.CURIO));
         }
     }
 
@@ -107,7 +131,7 @@ public final class ForgeEvents {
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
         MagicCuffs.apply(living, damageSource, amount);
 
-        amount = IMagicAttack.apply(damageSource, amount);
+        amount = IManaWeapon.apply(damageSource, amount);
         amount = ManaIssueEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);
@@ -139,8 +163,8 @@ public final class ForgeEvents {
         if (old != null) {
             LivingEntity neo = event.getNewTarget();
             AtomicBoolean bothHas = new AtomicBoolean();
-            old.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(oldAbility ->
-                neo.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(neoAbility -> {
+            old.getCapability(AbilityProvider.CAPABILITY).ifPresent(oldAbility ->
+                neo.getCapability(AbilityProvider.CAPABILITY).ifPresent(neoAbility -> {
                     bothHas.set(true);
                     if (oldAbility.getAggro() > neoAbility.getAggro()) {
                         event.setNewTarget(old);
@@ -156,8 +180,8 @@ public final class ForgeEvents {
             .filter(player -> player.distanceTo(self) < range)
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
-                playerA.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                    playerB.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(abilityB ->
+                playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
+                    playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
                         atomic.set(abilityA.getAggro() - abilityB.getAggro())
                     )
                 );

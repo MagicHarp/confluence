@@ -4,7 +4,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 
 public class FishingEffect extends MobEffect {  //钓鱼药水 换皮海之眷顾
     public FishingEffect() {
@@ -13,14 +13,14 @@ public class FishingEffect extends MobEffect {  //钓鱼药水 换皮海之眷�
 
     public static void onAdd(LivingEntity entity) {
         if (entity instanceof Player && !entity.isSpectator()) {
-            entity.getCapability(PlayerAbilityProvider.CAPABILITY)
+            entity.getCapability(AbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> playerAbility.increaseFishingPower(1.0F));
         }
     }
 
     public static void onRemove(LivingEntity entity) {
         if (entity instanceof Player && !entity.isSpectator()) {
-            entity.getCapability(PlayerAbilityProvider.CAPABILITY)
+            entity.getCapability(AbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> playerAbility.increaseFishingPower(-1.0F));
         }
     }

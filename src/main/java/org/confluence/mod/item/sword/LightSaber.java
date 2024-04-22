@@ -24,7 +24,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.LightSaberRenderer;
-import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -38,7 +37,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public abstract class LightSaber extends BoardSwordItem implements GeoItem, IMagicAttack {
+public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     private static final ImmutableMultimap<Attribute, AttributeModifier> ON = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 9, AttributeModifier.Operation.ADDITION),
         Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)

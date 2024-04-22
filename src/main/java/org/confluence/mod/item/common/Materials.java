@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.magic.ManaStar;
+import org.confluence.mod.item.mana.ManaStar;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;

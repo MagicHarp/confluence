@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,14 +13,14 @@ public interface IFallResistance {
     int getFallResistance();
 
     default void freshFallResistance(LivingEntity living) {
-        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+        living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> playerAbility.freshFallResistance(living));
     }
 
     static float apply(LivingEntity living, DamageSource damageSource, float amount) {
         if (!damageSource.is(DamageTypes.FALL)) return amount;
         AtomicInteger atomic = new AtomicInteger();
-        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+        living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance()));
         int reduce = atomic.get();
         if (reduce < 0) return 0.0F;
@@ -30,7 +30,7 @@ public interface IFallResistance {
     static boolean isInvul(LivingEntity living, DamageSource damageSource) {
         if (!damageSource.is(DamageTypes.FALL)) return false;
         AtomicBoolean atomic = new AtomicBoolean();
-        living.getCapability(PlayerAbilityProvider.CAPABILITY)
+        living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance() < 0));
         return atomic.get();
     }

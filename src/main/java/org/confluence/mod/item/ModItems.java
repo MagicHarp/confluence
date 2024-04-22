@@ -13,7 +13,7 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
-import org.confluence.mod.item.magic.ManaWeapons;
+import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;

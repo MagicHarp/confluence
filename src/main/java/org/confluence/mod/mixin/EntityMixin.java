@@ -4,7 +4,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluids;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IHurtEvasion;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -23,7 +23,7 @@ public abstract class EntityMixin {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
         if (((Entity) (Object) this) instanceof Player player) {
             if (player.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
-            player.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
                     if (playerAbility.decreaseLavaImmuneTicks()) {
                         inLava.set(false);

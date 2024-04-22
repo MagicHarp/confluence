@@ -1,7 +1,11 @@
 package org.confluence.mod.item;
 
-public final class ModPrefix {
-    public enum Curio {
+import org.confluence.mod.capability.prefix.ItemPrefix;
+
+public interface ModPrefix {
+    void copyTo(ItemPrefix itemPrefix);
+
+    enum Curio implements ModPrefix {
         HARD(1, 0, 0, 0, 0, 0, 1, 0.1025), // 坚硬
         GUARDING(2, 0, 0, 0, 0, 0, 1, 0.21), // 守护
         ARMORED(3, 0, 0, 0, 0, 0, 1, 0.3225), // 装甲
@@ -32,39 +36,76 @@ public final class ModPrefix {
         public final double attackDamage;
         public final double attackSpeed;
         public final double movementSpeed;
-        public final int mana;
-        public final int level;
+        public final int additionalMana;
+        public final int tier;
         public final double value;
 
-        Curio(int armor, double criticalChance, double attackDamage, double attackSpeed, double movementSpeed, int mana, int level, double value) {
+        Curio(int armor, double criticalChance, double attackDamage, double attackSpeed, double movementSpeed, int additionalMana, int tier, double value) {
             this.armor = armor;
             this.criticalChance = criticalChance;
             this.attackDamage = attackDamage;
             this.attackSpeed = attackSpeed;
             this.movementSpeed = movementSpeed;
-            this.mana = mana;
-            this.level = level;
+            this.additionalMana = additionalMana;
+            this.tier = tier;
             this.value = value;
+        }
+
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+            itemPrefix.armor = armor;
+            itemPrefix.criticalChance = criticalChance;
+            itemPrefix.attackDamage = attackDamage;
+            itemPrefix.attackSpeed = attackSpeed;
+            itemPrefix.movementSpeed = movementSpeed;
+            itemPrefix.additionalMana = additionalMana;
+            itemPrefix.tier = tier;
+            itemPrefix.value = value;
         }
     }
 
-    public enum Universal {
+    enum Universal implements ModPrefix {
+        ;
 
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+
+        }
     }
 
-    public enum Common {
+    enum Common implements ModPrefix {
+        ;
 
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+
+        }
     }
 
-    public enum Melee {
+    enum Melee implements ModPrefix {
+        ;
 
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+
+        }
     }
 
-    public enum Ranged {
+    enum Ranged implements ModPrefix {
+        ;
 
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+
+        }
     }
 
-    public enum MagicAndSummoning {
+    enum MagicAndSummoning implements ModPrefix {
+        ;
 
+        @Override
+        public void copyTo(ItemPrefix itemPrefix) {
+
+        }
     }
 }

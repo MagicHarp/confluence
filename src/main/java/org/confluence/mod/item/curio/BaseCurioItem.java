@@ -12,7 +12,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
 import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;

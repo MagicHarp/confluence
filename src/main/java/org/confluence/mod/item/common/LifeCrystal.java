@@ -9,8 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
 import org.confluence.mod.item.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +27,7 @@ public class LifeCrystal extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (!level.isClientSide) {
-            player.getCapability(PlayerAbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (playerAbility.increaseCrystals()) {
                     itemStack.shrink(1);
                     applyModifier(player, playerAbility);

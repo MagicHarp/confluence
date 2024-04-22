@@ -1,4 +1,4 @@
-package org.confluence.mod.item.magic;
+package org.confluence.mod.item.mana;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -14,11 +14,10 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.projectile.bullet.BaseBulletEntity;
-import org.confluence.mod.item.IMagicAttack;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class StaffItem extends Item implements IMagicAttack {
+public class StaffItem extends Item implements IManaWeapon {
     private final BulletSupplier bulletSupplier;
 
     public StaffItem(BulletSupplier bulletSupplier, Properties properties) {

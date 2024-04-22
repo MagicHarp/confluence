@@ -1,4 +1,4 @@
-package org.confluence.mod.item.magic;
+package org.confluence.mod.item.mana;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;

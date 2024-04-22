@@ -12,7 +12,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
-import org.confluence.mod.capability.ability.PlayerAbilityProvider;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class LivingEntityMixin {
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY)
+        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
     }
 
@@ -46,7 +46,7 @@ public abstract class LivingEntityMixin {
     @Unique
     private int c$getInvulnerableTime(int constant) {
         AtomicInteger time = new AtomicInteger(constant);
-        c$getSelf().getCapability(PlayerAbilityProvider.CAPABILITY)
+        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
         return time.get();
     }
