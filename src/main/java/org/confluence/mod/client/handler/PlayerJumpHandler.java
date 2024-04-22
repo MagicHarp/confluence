@@ -38,9 +38,9 @@ public final class PlayerJumpHandler {
     private static double cloudSpeed = 0.0;
     private static boolean cloudFinished = false;
 
+    private static double flySpeed = 0.0;
     private static int maxFlyTicks = 0;
     private static int remainFlyTicks = 0;
-    private static double flySpeed = 0.0;
     private static boolean couldGlide = false;
 
     public static boolean onFly = false;
