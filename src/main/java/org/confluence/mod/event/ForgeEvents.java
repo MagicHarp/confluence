@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -30,16 +29,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
-import org.confluence.mod.capability.prefix.IUniversalOnly;
-import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
 import org.confluence.mod.effect.HarmfulEffect.BleedingEffect;
 import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
@@ -66,24 +61,6 @@ public final class ForgeEvents {
 
             if (player.getCapability(AbilityProvider.CAPABILITY).isPresent()) return;
             event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
-        }
-    }
-
-    @SubscribeEvent
-    public static void attachItemCapabilities(AttachCapabilitiesEvent<Item> event) {
-        Item item = event.getObject();
-        if (item instanceof IUniversalOnly) {
-            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.UNIVERSAL));
-        } else if (item instanceof Vanishable) {
-            if (item instanceof SwordItem || item instanceof DiggerItem) {
-                event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.MELEE));
-            } else if (item instanceof TridentItem || item instanceof BowItem || item instanceof CrossbowItem) {
-                event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.RANGED));
-            }
-        } else if (item instanceof IManaWeapon) {
-            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.MAGIC_AND_SUMMING));
-        } else if (item instanceof BaseCurioItem) {
-            event.addCapability(Confluence.ITEM_PREFIX, new PrefixProvider(PrefixType.CURIO));
         }
     }
 

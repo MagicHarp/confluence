@@ -6,12 +6,12 @@
     "mixins": [
         "BlockBehaviourMixin",
         "EntityMixin",
+        "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
         "MinecraftAccessor",
         "PlayerAdvancementsMixin",
-        "RangedAttributeAccessor",
-        "ServerPlayerMixin"
+        "RangedAttributeAccessor"
     ],
     "minVersion": "0.8.5",
     "client": [

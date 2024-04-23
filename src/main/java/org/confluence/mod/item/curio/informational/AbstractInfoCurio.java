@@ -15,7 +15,7 @@ public abstract class AbstractInfoCurio extends BaseCurioItem {
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
-            InfoCurioCheckPacketS2C.send(serverPlayer);
+            InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
         }
     }
 }

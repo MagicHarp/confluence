@@ -53,6 +53,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
+            itemPrefix.name = name();
             itemPrefix.armor = armor;
             itemPrefix.criticalChance = criticalChance;
             itemPrefix.attackDamage = attackDamage;

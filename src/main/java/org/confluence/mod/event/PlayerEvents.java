@@ -33,7 +33,7 @@ public final class PlayerEvents {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             PlayerUtils.syncMana2Client(serverPlayer);
             PlayerUtils.syncSavedData(serverPlayer);
-            InfoCurioCheckPacketS2C.send(serverPlayer);
+            InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
         }
     }
 

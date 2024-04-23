@@ -1,45 +1,58 @@
 package org.confluence.mod.capability.prefix;
 
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.*;
+import org.confluence.mod.item.ModPrefix;
+import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.item.mana.IManaWeapon;
 
-public class PrefixProvider implements ICapabilitySerializable<CompoundTag> {
-    public static final Capability<ItemPrefix> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-    });
-    private ItemPrefix itemPrefix;
-    private final LazyOptional<ItemPrefix> itemPrefixLazyOptional = LazyOptional.of(this::getOrCreateStorage);
-    private transient final PrefixType type;
+import java.util.Optional;
 
-    public PrefixProvider(PrefixType type) {
-        this.type = type;
-    }
+public final class PrefixProvider {
+    public static final String KEY = "confluence:prefix";
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return CAPABILITY.orEmpty(cap, itemPrefixLazyOptional);
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        return getOrCreateStorage().serializeNBT();
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        getOrCreateStorage().deserializeNBT(nbt);
-    }
-
-    private ItemPrefix getOrCreateStorage() {
-        if (itemPrefix == null) {
-            this.itemPrefix = new ItemPrefix(type);
+    public static void initPrefix(ServerPlayer serverPlayer, ItemStack itemStack) {
+        Item item = itemStack.getItem();
+        RandomSource randomSource = serverPlayer.level().random;
+        if (item instanceof IUniversalOnly) {
+            create(randomSource, itemStack, PrefixType.UNIVERSAL);
+        } else if (item instanceof Vanishable) {
+            if (item instanceof SwordItem || item instanceof DiggerItem) {
+                create(randomSource, itemStack, PrefixType.MELEE);
+            } else if (item instanceof TridentItem || item instanceof BowItem || item instanceof CrossbowItem) {
+                create(randomSource, itemStack, PrefixType.RANGED);
+            }
+        } else if (item instanceof IManaWeapon) {
+            create(randomSource, itemStack, PrefixType.MAGIC_AND_SUMMING);
+        } else if (item instanceof BaseCurioItem) {
+            create(randomSource, itemStack, PrefixType.CURIO);
         }
-        return itemPrefix;
+    }
+
+    private static void create(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
+        CompoundTag nbt = itemStack.getOrCreateTag();
+        if (nbt.contains(KEY, Tag.TAG_COMPOUND)) return;
+        ItemPrefix itemPrefix = new ItemPrefix(prefixType);
+        itemPrefix.random(randomSource);
+        nbt.put(KEY, itemPrefix.serializeNBT());
+    }
+
+    public static Optional<ItemPrefix> getPrefix(ItemStack itemStack) {
+        CompoundTag nbt = itemStack.getTag();
+        if (nbt == null || !nbt.contains(KEY, Tag.TAG_COMPOUND)) return Optional.empty();
+        CompoundTag prefix = nbt.getCompound(KEY);
+        ItemPrefix itemPrefix = new ItemPrefix(PrefixType.valueOf(prefix.getString("type")));
+        itemPrefix.deserializeNBT(nbt);
+        return Optional.of(itemPrefix);
+    }
+
+    public static void updatePrefix(ItemStack itemStack, ModPrefix modPrefix) {
+        getPrefix(itemStack).ifPresent(itemPrefix -> {
+            itemPrefix.copyFrom(modPrefix);
+            itemStack.getOrCreateTag().put(KEY, itemPrefix.serializeNBT());
+        });
     }
 }

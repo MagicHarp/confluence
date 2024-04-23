@@ -2,6 +2,7 @@ package org.confluence.mod.network.s2c;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
@@ -23,9 +24,9 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         return new InfoCurioCheckPacketS2C(friendlyByteBuf.readByteArray());
     }
 
-    public static void send(ServerPlayer serverPlayer) {
+    public static void send(ServerPlayer serverPlayer, Inventory inventory) {
         ArrayList<ItemStack> itemStacks = CuriosUtils.getCurios(serverPlayer);
-        itemStacks.addAll(serverPlayer.getInventory().items);
+        itemStacks.addAll(inventory.items);
         byte watch = 0;
         byte weatherRadio = 0;
         byte sextant = 0;
