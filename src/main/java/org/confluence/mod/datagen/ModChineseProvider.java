@@ -650,6 +650,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.CELESTIAL_STONE.get(), "天界壳");
         add(CurioItems.FAST_CLOCK.get(), "快走时钟");
         add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
+        add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
 
 
         //盔甲

@@ -7,7 +7,9 @@ public enum PrefixType {
     MELEE(new Enum[][]{ModPrefix.Common.values(), ModPrefix.Melee.values()}),
     RANGED(new Enum[][]{ModPrefix.Common.values(), ModPrefix.Ranged.values()}),
     MAGIC_AND_SUMMING(new Enum[][]{ModPrefix.Common.values(), ModPrefix.MagicAndSumming.values()}),
-    CURIO(new Enum[][]{ModPrefix.Curio.values()});
+    CURIO(new Enum[][]{ModPrefix.Curio.values()}),
+
+    UNKNOWN(new Enum[][]{});
 
     public final Enum<? extends ModPrefix>[][] available;
 
