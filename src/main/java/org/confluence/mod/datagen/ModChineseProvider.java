@@ -650,7 +650,18 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.CELESTIAL_STONE.get(), "天界壳");
         add(CurioItems.FAST_CLOCK.get(), "快走时钟");
         add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
-        add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
+        add(CurioItems.ANCIENT_CHISEL.get(), "远古凿子");
+        add(CurioItems.ARCANE_FLOWER.get(), "奥术花");
+        add(CurioItems.CELESTIAL_CUFFS.get(), "天界手铐");
+        add(CurioItems.CELESTIAL_MAGNET.get(), "天界磁石");
+        add(CurioItems.CELESTIAL_EMBLEM.get(), "天界徽章");
+        add(CurioItems.CHARM_OF_MYTHS.get(), "神话护身符");
+        add(CurioItems.MAGIC_CUFFS.get(), "魔法手铐");
+        add(CurioItems.MAGNET_FLOWER.get(), "磁花");
+        add(CurioItems.MANA_FLOWER.get(), "魔力花");
+        add(CurioItems.MANA_REGENERATION_BAND.get(), "魔力再生手环");
+        add(CurioItems.NATURES_GIFT.get(), "大自然的恩赐");
+        add(CurioItems.PHILOSOPHERS_STONE.get(), "点金石");
 
 
         //盔甲

@@ -52,7 +52,7 @@ public final class PrefixProvider {
         if (nbt == null || !nbt.contains(KEY, Tag.TAG_COMPOUND)) return Optional.empty();
         CompoundTag prefix = nbt.getCompound(KEY);
         ItemPrefix itemPrefix = new ItemPrefix(PrefixType.valueOf(prefix.getString("type")));
-        itemPrefix.deserializeNBT(nbt);
+        itemPrefix.deserializeNBT(prefix);
         return Optional.of(itemPrefix);
     }
 
