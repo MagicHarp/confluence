@@ -13,11 +13,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.ModRarity;
-import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
-import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.util.CuriosUtils;
@@ -43,8 +42,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     private void freshAbility(Item item, LivingEntity living) {
         living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.freshAbility(living));
-        if (item instanceof IMagicAttack iMagicAttack) iMagicAttack.freshMagicAttackBonus(living);
-        if (item instanceof IManaReduce iManaReduce) iManaReduce.freshManaReduce(living);
+        living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.freshAbility(living));
         if (living instanceof ServerPlayer serverPlayer) {
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);

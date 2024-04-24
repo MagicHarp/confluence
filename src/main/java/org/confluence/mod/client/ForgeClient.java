@@ -68,7 +68,7 @@ public final class ForgeClient {
         List<Component> tooltip = event.getToolTip();
 
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
-            tooltip.add(Component.translatable("prefix.confluence." + itemPrefix.name));
+            tooltip.add(Component.translatable("prefix.confluence." + itemPrefix.name.toLowerCase()));
         });
     }
 }

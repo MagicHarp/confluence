@@ -12,6 +12,7 @@ import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.ModPrefix;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -168,6 +169,24 @@ public class ModEnglishProvider extends LanguageProvider {
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
+        for (ModPrefix.Universal universal : ModPrefix.Universal.values()) {
+            add("prefix.confluence." + universal.name().toLowerCase(), toTitleCase(universal.name()));
+        }
+        for (ModPrefix.Common common : ModPrefix.Common.values()) {
+            add("prefix.confluence." + common.name().toLowerCase(), toTitleCase(common.name()));
+        }
+        for (ModPrefix.Melee melee : ModPrefix.Melee.values()) {
+            add("prefix.confluence." + melee.name().toLowerCase(), toTitleCase(melee.name()));
+        }
+        for (ModPrefix.Ranged ranged : ModPrefix.Ranged.values()) {
+            add("prefix.confluence." + ranged.name().toLowerCase(), toTitleCase(ranged.name()));
+        }
+        for (ModPrefix.MagicAndSumming magicAndSumming : ModPrefix.MagicAndSumming.values()) {
+            add("prefix.confluence." + magicAndSumming.name().toLowerCase(), toTitleCase(magicAndSumming.name()));
+        }
+        for (ModPrefix.Curio curio : ModPrefix.Curio.values()) {
+            add("prefix.confluence." + curio.name().toLowerCase(), toTitleCase(curio.name()));
+        }
     }
 
     private static String toTitleCase(String raw) {

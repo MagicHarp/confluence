@@ -37,8 +37,7 @@ public final class ItemEvents {
                     "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
             }
             if (itemPrefix.attackSpeed > 0.0) {
-                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(
-                    ItemPrefix.ATTACK_SPEED_UUID_HAND,
+                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ItemPrefix.ATTACK_SPEED_UUID_HAND,
                     "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
             }
             if (itemPrefix.knockBack > 0.0) {

@@ -5,9 +5,20 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.capability.prefix.ItemPrefix;
+import org.confluence.mod.capability.prefix.PrefixProvider;
+
+import java.util.Optional;
 
 public interface IManaWeapon {
+    default int getManaCost(ItemStack itemStack, int amount) {
+        Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
+        if (optional.isPresent()) amount *= (1 + optional.get().manaCost);
+        return amount;
+    }
+
     static float apply(DamageSource damageSource, float amount) {
         if (damageSource.getEntity() instanceof Player player && isMagic(player, damageSource)) {
             AtomicDouble atomic = new AtomicDouble(amount);

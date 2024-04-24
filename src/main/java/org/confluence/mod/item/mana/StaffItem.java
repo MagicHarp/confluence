@@ -47,7 +47,7 @@ public class StaffItem extends Item implements IManaWeapon {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, Level level, @NotNull LivingEntity living) {
         if (!level.isClientSide && living instanceof ServerPlayer serverPlayer) {
-            if (PlayerUtils.extractMana(serverPlayer, () -> 20)) {
+            if (PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level);
                 baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);

@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
+import org.confluence.mod.datagen.limit.NormalGeoItem;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.WingsGlidePacketC2S;
@@ -20,7 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.util.RenderUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
-public class BaseWings extends BaseCurioItem implements IMayFly, GeoItem, IFallResistance {
+public class BaseWings extends BaseCurioItem implements IMayFly, NormalGeoItem, IFallResistance {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final int flyTicks;
     private final double flySpeed;
