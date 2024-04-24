@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.util.PlayerUtils;
@@ -21,12 +22,16 @@ public class BandOfStarpower extends BaseCurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        updateMana(slotContext.entity(), 20);
+        LivingEntity living = slotContext.entity();
+        updateMana(living, 20);
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(living));
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        updateMana(slotContext.entity(), -20);
+        LivingEntity living = slotContext.entity();
+        updateMana(living, -20);
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(living));
     }
 
     protected static void updateMana(LivingEntity living, int amount) {

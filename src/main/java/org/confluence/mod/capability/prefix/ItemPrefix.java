@@ -112,6 +112,7 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     }
 
     public void applyPrefix(LivingEntity living) {
+        if (living.level().isClientSide) return;
         AttributeMap attributeMap = living.getAttributes();
         addModifier(attributeMap, attackDamage, Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE_UUID);
         addModifier(attributeMap, attackSpeed, Attributes.ATTACK_SPEED, ATTACK_SPEED_UUID);
@@ -136,6 +137,7 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     }
 
     public void expirePrefix(LivingEntity living) {
+        if (living.level().isClientSide) return;
         AttributeMap attributeMap = living.getAttributes();
         removeModifier(attributeMap, attackDamage, Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE_UUID);
         removeModifier(attributeMap, attackSpeed, Attributes.ATTACK_SPEED, ATTACK_SPEED_UUID);

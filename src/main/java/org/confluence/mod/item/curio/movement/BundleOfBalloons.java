@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
@@ -41,6 +42,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
                     CloudInABalloon.SPEED
                 )
             );
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(serverPlayer));
         }
     }
 
@@ -48,6 +50,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMsg(serverPlayer);
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(serverPlayer));
         }
     }
 

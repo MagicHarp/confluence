@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio.HealthAndMana;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.SlotContext;
@@ -16,6 +17,7 @@ public class ManaRegenerationBand extends BaseCurioItem {
                 manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() + 20);
                 PlayerUtils.syncMana2Client(serverPlayer, manaStorage);
             });
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(serverPlayer));
         }
     }
 
@@ -27,6 +29,7 @@ public class ManaRegenerationBand extends BaseCurioItem {
                 manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() - 20);
                 PlayerUtils.syncMana2Client(serverPlayer, manaStorage);
             });
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(serverPlayer));
         }
     }
 }
