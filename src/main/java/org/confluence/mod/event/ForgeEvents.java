@@ -11,14 +11,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
@@ -33,8 +29,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
-import org.confluence.mod.capability.prefix.ItemPrefix;
-import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.BeneficialEffect.ThornsEffect;
@@ -51,8 +45,6 @@ import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ForgeEvents {
@@ -176,29 +168,5 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingHeal(LivingHealEvent event) {
         BleedingEffect.apply(event.getEntity(), event);
-    }
-
-    @SubscribeEvent
-    public static void itemAttributeModifier(ItemAttributeModifierEvent event) {
-        if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
-        PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix -> {
-            if (itemPrefix.attackDamage > 0.0) {
-                event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,
-                    "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
-            }
-            if (itemPrefix.attackSpeed > 0.0) {
-                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(
-                    ItemPrefix.ATTACK_SPEED_UUID_HAND,
-                    "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
-            }
-            if (itemPrefix.knockBack > 0.0) {
-                event.addModifier(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ItemPrefix.KNOCK_BACK_UUID_HAND,
-                    "Item Prefix", itemPrefix.knockBack, MULTIPLY_TOTAL));
-            }
-            if (itemPrefix.size > 0.0) {
-                event.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(ItemPrefix.ENTITY_REACH_UUID_HAND,
-                    "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
-            }
-        });
     }
 }
