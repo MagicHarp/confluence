@@ -11,16 +11,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.armor.SilverArmorRenderer;
+import org.confluence.mod.datagen.limit.NormalGeoItem;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class SilverArmorItem extends ArmorItem implements GeoItem {
+public class SilverArmorItem extends ArmorItem implements NormalGeoItem {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
     public SilverArmorItem(Type type) {

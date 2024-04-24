@@ -57,8 +57,6 @@ public final class PlayerJumpHandler {
             cloudFinished = false;
             remainFlyTicks = maxFlyTicks;
         } else if (localPlayer.input.jumping) {
-            if (jumpKeyDown) return;
-
             if (couldGlide) {
                 if (remainFlyTicks-- > 0) {
                     onFly = true;
@@ -67,7 +65,11 @@ public final class PlayerJumpHandler {
                     onFly = false;
                     fly(localPlayer, -0.2);
                 }
-            } else if (!fartFinished && fartSpeed > 0.0) {
+            }
+            if (jumpKeyDown) return;
+            if (couldGlide && remainFlyTicks > 0) return;
+
+            if (!fartFinished && fartSpeed > 0.0) {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);

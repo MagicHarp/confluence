@@ -3,7 +3,7 @@ package org.confluence.mod.item.curio.movement;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
@@ -33,8 +33,8 @@ public interface IMayFly {
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                ItemStack curio = itemHandlerModifiable.getStackInSlot(i);
-                if (curio.getItem() instanceof IMayFly iMayFly) {
+                Item curio = itemHandlerModifiable.getStackInSlot(i).getItem();
+                if (curio instanceof IMayFly iMayFly) {
                     maxFlyTicks.set(Math.max(iMayFly.getFlyTicks(), maxFlyTicks.get()));
                     flySpeed.set(Math.max(iMayFly.getFlySpeed(), flySpeed.get()));
                     if (iMayFly.couldGlide()) glide.set(true);

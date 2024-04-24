@@ -2,17 +2,17 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.datagen.limit.CustomItemModel;
-import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.datagen.limit.Image32x;
-import org.confluence.mod.datagen.limit.Image64x;
+import org.confluence.mod.datagen.limit.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.curio.BaseCurioItem;
@@ -87,6 +87,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private static boolean shouldSkip(Item item) {
-        return item instanceof CustomModel || (item instanceof GeoItem && !(item instanceof ArmorItem)) || SKIP_ITEMS.contains(item);
+        return item instanceof CustomModel || (item instanceof GeoItem && !(item instanceof NormalGeoItem)) || SKIP_ITEMS.contains(item);
     }
 }

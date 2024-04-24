@@ -12,15 +12,15 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.renderer.item.armor.PearlArmorRenderer;
+import org.confluence.mod.datagen.limit.NormalGeoItem;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class PearlArmorItem extends ArmorItem implements GeoItem {
+public class PearlArmorItem extends ArmorItem implements NormalGeoItem {
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
     public PearlArmorItem(Type type) {

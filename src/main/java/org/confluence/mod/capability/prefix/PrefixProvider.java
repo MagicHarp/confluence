@@ -36,9 +36,11 @@ public final class PrefixProvider {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.contains(KEY, Tag.TAG_COMPOUND)) return;
         ModPrefix modPrefix = prefixType.randomPrefix(randomSource);
-        if (modPrefix.isHarmful() && randomSource.nextFloat() < 0.6667F) return;
-        ItemPrefix itemPrefix = new ItemPrefix(prefixType, itemStack);
-        itemPrefix.copyFrom(modPrefix);
+        if (modPrefix.isHarmful() && randomSource.nextFloat() < 0.6667F) {
+            nbt.put(KEY, new CompoundTag());
+        } else {
+            new ItemPrefix(prefixType, itemStack).copyFrom(modPrefix);
+        }
     }
 
     public static Optional<ItemPrefix> getPrefix(ItemStack itemStack) {
