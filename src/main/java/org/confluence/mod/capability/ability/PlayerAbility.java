@@ -3,9 +3,11 @@ package org.confluence.mod.capability.ability;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import org.confluence.mod.item.curio.HealthAndMana.CelestialMagnet;
+import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -46,116 +48,48 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.starRange = 1.75;
     }
 
-    public void freshJumpBoost(LivingEntity living) {
-        AtomicDouble maxBoost = new AtomicDouble(1.0);
-        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IJumpBoost iJumpBoost) {
-                    maxBoost.set(Math.max(iJumpBoost.getBoost(), maxBoost.get()));
-                }
-            }
-        });
-        this.jumpBoost = maxBoost.get();
-    }
-
-    public void freshFallResistance(LivingEntity living) {
-        AtomicInteger fallResistance = new AtomicInteger();
-        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFallResistance iFallResistance) {
-                    int distance = iFallResistance.getFallResistance();
-                    if (distance < 0) {
-                        fallResistance.set(-1);
-                        return;
-                    } else {
-                        fallResistance.set(Math.max(distance, fallResistance.get()));
-                    }
-                }
-            }
-        });
-        this.fallResistance = fallResistance.get();
-    }
-
-    public void freshInvulnerableTime(LivingEntity living) {
-        AtomicInteger atomic = new AtomicInteger();
-        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IInvulnerableTime iInvulnerableTime) {
-                    atomic.set(Math.max(iInvulnerableTime.getTime(), invulnerableTime));
-                }
-            }
-        });
-        this.invulnerableTime = atomic.get();
-    }
-
-    public void freshCriticalChance(LivingEntity living) {
-        AtomicDouble maxChance = new AtomicDouble();
-        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
-            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ICriticalHit iCriticalHit) {
-                    maxChance.addAndGet(iCriticalHit.getChance());
-                }
-            }
-        });
-        this.criticalChance = maxChance.get();
-    }
-
-    public void freshFireImmune(LivingEntity living) {
-        AtomicBoolean fireImmune = new AtomicBoolean();
-        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
-            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IFireImmune) {
-                    fireImmune.set(true);
-                    return;
-                }
-            }
-        });
-        this.fireImmune = fireImmune.get();
-    }
-
-    public void freshLavaHurtReduce(LivingEntity living) {
+    public void freshAbility(LivingEntity living) {
+        AtomicDouble jump = new AtomicDouble(1.0);
+        AtomicInteger fall = new AtomicInteger();
+        AtomicInteger invul = new AtomicInteger(20);
+        AtomicDouble chance = new AtomicDouble();
+        AtomicBoolean fire = new AtomicBoolean();
         AtomicBoolean reduce = new AtomicBoolean();
-        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
-            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
+        AtomicInteger lava = new AtomicInteger();
+        AtomicInteger aggro = new AtomicInteger();
+        AtomicBoolean star = new AtomicBoolean();
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ILavaHurtReduce) {
-                    reduce.set(true);
-                    return;
+                ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
+                Item item = itemStack.getItem();
+                if (item instanceof IJumpBoost iJumpBoost) jump.set(Math.max(iJumpBoost.getBoost(), jump.get()));
+                if (item instanceof IFallResistance iFallResistance && fall.get() != -1) {
+                    int distance = iFallResistance.getFallResistance();
+                    fall.set(distance < 0 ? -1 : Math.max(distance, fall.get()));
                 }
+                if (item instanceof IInvulnerableTime iInvulnerableTime) {
+                    invul.set(Math.max(iInvulnerableTime.getTime(), invulnerableTime));
+                }
+                if (item instanceof ICriticalHit iCriticalHit) chance.addAndGet(iCriticalHit.getChance());
+                if (item instanceof IFireImmune) fire.set(true);
+                if (item instanceof ILavaHurtReduce) reduce.set(true);
+                if (item instanceof ILavaImmune iLavaImmune) {
+                    lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
+                }
+                if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
+                if (item instanceof IRangePickup.Star) star.set(true);
             }
         });
+        this.jumpBoost = jump.get();
+        this.fallResistance = fall.get();
+        this.invulnerableTime = invul.get();
+        this.criticalChance = chance.get();
+        this.fireImmune = fire.get();
         this.lavaHurtReduce = reduce.get();
-    }
-
-    public void freshLavaImmuneTicks(LivingEntity living) {
-        AtomicInteger lavaImmuneTicks = new AtomicInteger();
-        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof ILavaImmune iLavaImmune) {
-                    lavaImmuneTicks.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lavaImmuneTicks.get()));
-                }
-            }
-        });
-        this.maxLavaImmuneTicks = lavaImmuneTicks.get();
-    }
-
-    public void freshAggro(LivingEntity living) {
-        AtomicInteger atomic = new AtomicInteger();
-        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof IAggroAttach iAggroAttach) {
-                    atomic.addAndGet(iAggroAttach.getAggro());
-                }
-            }
-        });
-        this.aggro = atomic.get();
+        this.maxLavaImmuneTicks = lava.get();
+        this.aggro = aggro.get();
+        this.starRange = star.get() ? 14.25 : 1.75;
     }
 
     public double getJumpBoost() {
@@ -218,20 +152,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public int getCrystals() {
         return crystals;
-    }
-
-    public void freshStarRange(LivingEntity living) {
-        AtomicBoolean atomic = new AtomicBoolean();
-        CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
-            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (itemHandlerModifiable.getStackInSlot(i).getItem() instanceof CelestialMagnet) {
-                    atomic.set(true);
-                    return;
-                }
-            }
-        });
-        this.starRange = atomic.get() ? 14.25 : 1.75;
     }
 
     public double getStarRange() {

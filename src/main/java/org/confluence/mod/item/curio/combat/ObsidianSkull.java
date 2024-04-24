@@ -8,18 +8,12 @@ import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
 public class ObsidianSkull extends BaseCurioItem implements IFireImmune {
     public ObsidianSkull() {
         super(ModRarity.GREEN);
-    }
-
-    @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        freshFireInvul(slotContext.entity());
     }
 
     @Override

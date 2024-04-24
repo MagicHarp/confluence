@@ -9,11 +9,6 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface IFireImmune {
-    default void freshFireInvul(LivingEntity living) {
-        living.getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> playerAbility.freshFireImmune(living));
-    }
-
     static boolean apply(LivingEntity living, DamageSource damageSource) {
         if (damageSource.is(DamageTypes.IN_FIRE) ||
             damageSource.is(DamageTypes.ON_FIRE) ||

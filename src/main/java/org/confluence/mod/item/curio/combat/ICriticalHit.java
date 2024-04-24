@@ -1,6 +1,5 @@
 package org.confluence.mod.item.curio.combat;
 
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -10,11 +9,6 @@ import org.confluence.mod.util.CuriosUtils;
 
 public interface ICriticalHit {
     double getChance();
-
-    default void freshChance(LivingEntity living) {
-        living.getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> playerAbility.freshCriticalChance(living));
-    }
 
     static void apply(CriticalHitEvent event) {
         Player player = event.getEntity();

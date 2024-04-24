@@ -12,12 +12,12 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
-import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
-import org.confluence.mod.item.curio.combat.*;
-import org.confluence.mod.item.curio.movement.IFallResistance;
-import org.confluence.mod.item.curio.movement.IJumpBoost;
+import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.util.CuriosUtils;
@@ -41,21 +41,10 @@ public class BaseCurioItem extends Item implements ICurioItem {
         this(ModRarity.BLUE);
     }
 
-    @Override
-    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        Item item = stack.getItem();
-        LivingEntity living = slotContext.entity();
-        if (item instanceof ICriticalHit iCriticalHit) iCriticalHit.freshChance(living);
-        if (item instanceof IFireImmune iFireImmune) iFireImmune.freshFireInvul(living);
-        if (item instanceof ILavaHurtReduce iLavaHurtReduce) iLavaHurtReduce.freshLavaReduce(living);
-        if (item instanceof ILavaImmune iLavaImmune) iLavaImmune.freshLavaInvulTicks(living);
-        if (item instanceof IInvulnerableTime iInvulnerableTime) iInvulnerableTime.freshInvulnerableTime(living);
-        if (item instanceof IAggroAttach iAggroAttach) iAggroAttach.freshAggro(living);
-        if (item instanceof IFallResistance iFallResistance) iFallResistance.freshFallResistance(living);
-        if (item instanceof IJumpBoost iJumpBoost) iJumpBoost.freshJumpBoost(living);
+    private void freshAbility(Item item, LivingEntity living) {
+        living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.freshAbility(living));
         if (item instanceof IMagicAttack iMagicAttack) iMagicAttack.freshMagicAttackBonus(living);
         if (item instanceof IManaReduce iManaReduce) iManaReduce.freshManaReduce(living);
-        if(item instanceof IRangePickup.Star star) star.freshStarRange(living);
         if (living instanceof ServerPlayer serverPlayer) {
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
@@ -64,8 +53,17 @@ public class BaseCurioItem extends Item implements ICurioItem {
     }
 
     @Override
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        LivingEntity living = slotContext.entity();
+        freshAbility(stack.getItem(), living);
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(living));
+    }
+
+    @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        onEquip(slotContext, newStack, stack);
+        LivingEntity living = slotContext.entity();
+        freshAbility(stack.getItem(), living);
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(living));
     }
 
     @Override

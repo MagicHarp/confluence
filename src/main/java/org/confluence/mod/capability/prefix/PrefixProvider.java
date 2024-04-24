@@ -35,31 +35,18 @@ public final class PrefixProvider {
     private static void create(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.contains(KEY, Tag.TAG_COMPOUND)) return;
-        ModPrefix modPrefix = randomPrefix(randomSource, prefixType);
+        ModPrefix modPrefix = prefixType.randomPrefix(randomSource);
         if (modPrefix.isHarmful() && randomSource.nextFloat() < 0.6667F) return;
-        ItemPrefix itemPrefix = new ItemPrefix(prefixType);
-        modPrefix.copyTo(itemPrefix);
-        nbt.put(KEY, itemPrefix.serializeNBT());
-    }
-
-    public static ModPrefix randomPrefix(RandomSource random, PrefixType type) {
-        Enum<? extends ModPrefix>[] values = type.available[random.nextInt(type.available.length)];
-        return (ModPrefix) values[random.nextInt(values.length)];
+        ItemPrefix itemPrefix = new ItemPrefix(prefixType, itemStack);
+        itemPrefix.copyFrom(modPrefix);
     }
 
     public static Optional<ItemPrefix> getPrefix(ItemStack itemStack) {
         CompoundTag nbt = itemStack.getTag();
         if (nbt == null || !nbt.contains(KEY, Tag.TAG_COMPOUND)) return Optional.empty();
         CompoundTag prefix = nbt.getCompound(KEY);
-        ItemPrefix itemPrefix = new ItemPrefix(PrefixType.valueOf(prefix.getString("type")));
+        ItemPrefix itemPrefix = new ItemPrefix(itemStack);
         itemPrefix.deserializeNBT(prefix);
         return Optional.of(itemPrefix);
-    }
-
-    public static void updatePrefix(ItemStack itemStack, ModPrefix modPrefix) {
-        getPrefix(itemStack).ifPresent(itemPrefix -> {
-            modPrefix.copyTo(itemPrefix);
-            itemStack.getOrCreateTag().put(KEY, itemPrefix.serializeNBT());
-        });
     }
 }

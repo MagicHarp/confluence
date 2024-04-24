@@ -12,11 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public interface IFallResistance {
     int getFallResistance();
 
-    default void freshFallResistance(LivingEntity living) {
-        living.getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> playerAbility.freshFallResistance(living));
-    }
-
     static float apply(LivingEntity living, DamageSource damageSource, float amount) {
         if (!damageSource.is(DamageTypes.FALL)) return amount;
         AtomicInteger atomic = new AtomicInteger();

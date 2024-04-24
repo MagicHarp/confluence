@@ -9,11 +9,6 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface ILavaHurtReduce {
-    default void freshLavaReduce(LivingEntity living) {
-        living.getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> playerAbility.freshLavaHurtReduce(living));
-    }
-
     static float apply(LivingEntity living, DamageSource damageSource, float amount) {
         if (damageSource.is(DamageTypes.LAVA)) {
             AtomicBoolean atomic = new AtomicBoolean();

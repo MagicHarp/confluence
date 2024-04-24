@@ -1,7 +1,6 @@
 package org.confluence.mod.item.curio.HealthAndMana;
 
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,20 +32,12 @@ public interface IRangePickup {
     }
 
     interface Star {
-        default void freshStarRange(LivingEntity living) {
-            living.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> playerAbility.freshStarRange(living));
-        }
-
         static void apply(Player player) {
             IRangePickup.apply(player, PlayerAbility::getStarRange, ModTags.PROVIDE_MANA);
         }
     }
 
     interface Heart {
-        default void freshHeartRange(LivingEntity living) {
-        }
-
         static void apply(Player player) {
         }
     }
