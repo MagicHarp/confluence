@@ -17,6 +17,7 @@ import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
 import org.confluence.mod.effect.HarmfulEffect.SilencedEffect;
+import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
@@ -26,7 +27,9 @@ public class ItemEvents {
     @SubscribeEvent
     public static void itemAttributeModifier(ItemAttributeModifierEvent event) {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
-        PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix -> {
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.getItem() instanceof BaseCurioItem) return;
+        PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
             if (itemPrefix.attackDamage > 0.0) {
                 event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,
                     "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
