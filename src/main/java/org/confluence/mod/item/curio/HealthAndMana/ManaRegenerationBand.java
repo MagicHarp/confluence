@@ -17,7 +17,7 @@ public class ManaRegenerationBand extends BaseCurioItem {
                 manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() + 20);
                 PlayerUtils.syncMana2Client(serverPlayer, manaStorage);
             });
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(serverPlayer));
         }
     }
 
@@ -29,7 +29,7 @@ public class ManaRegenerationBand extends BaseCurioItem {
                 manaStorage.setAdditionalMana(manaStorage.getAdditionalMana() - 20);
                 PlayerUtils.syncMana2Client(serverPlayer, manaStorage);
             });
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(serverPlayer));
         }
     }
 }

@@ -20,14 +20,14 @@ public class SpectreGoggles extends BaseCurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         echo(living, true);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(living));
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(living));
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         echo(living, false);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(living));
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(living));
     }
 
     private static void echo(LivingEntity living, boolean value) {

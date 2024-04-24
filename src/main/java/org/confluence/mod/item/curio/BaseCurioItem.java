@@ -56,14 +56,14 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         freshAbility(stack.getItem(), living);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(living));
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(living));
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         freshAbility(stack.getItem(), living);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(living));
+        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(living));
     }
 
     @Override

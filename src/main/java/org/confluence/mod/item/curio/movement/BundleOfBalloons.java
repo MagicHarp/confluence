@@ -42,7 +42,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
                     CloudInABalloon.SPEED
                 )
             );
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(serverPlayer));
         }
     }
 
@@ -50,7 +50,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMsg(serverPlayer);
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(serverPlayer));
         }
     }
 

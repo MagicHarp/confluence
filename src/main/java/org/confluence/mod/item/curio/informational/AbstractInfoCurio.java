@@ -17,7 +17,7 @@ public abstract class AbstractInfoCurio extends BaseCurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyPrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(serverPlayer));
         }
     }
 
@@ -25,7 +25,7 @@ public abstract class AbstractInfoCurio extends BaseCurioItem {
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
-            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expirePrefix(serverPlayer));
+            PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(serverPlayer));
         }
     }
 }

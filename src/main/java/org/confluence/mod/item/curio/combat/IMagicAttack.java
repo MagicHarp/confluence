@@ -7,7 +7,6 @@ public interface IMagicAttack {
     double getMagicBonus();
 
     default void freshMagicAttackBonus(LivingEntity living) {
-        living.getCapability(ManaProvider.CAPABILITY)
-            .ifPresent(manaStorage -> manaStorage.freshMagicAttackBonus(living));
+        living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.freshMagicAttackBonus(living));
     }
 }

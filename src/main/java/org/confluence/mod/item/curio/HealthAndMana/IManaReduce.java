@@ -7,7 +7,6 @@ public interface IManaReduce {
     double getManaReduce();
 
     default void freshManaReduce(LivingEntity living) {
-        living.getCapability(ManaProvider.CAPABILITY)
-            .ifPresent(manaStorage -> manaStorage.freshExtractRatio(living));
+        living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.freshExtractRatio(living));
     }
 }
