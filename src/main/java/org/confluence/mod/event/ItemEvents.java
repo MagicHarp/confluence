@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,7 +25,7 @@ import org.confluence.mod.misc.ModTags;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ItemEvents {
+public final class ItemEvents {
     @SubscribeEvent
     public static void itemAttributeModifier(ItemAttributeModifierEvent event) {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
@@ -65,6 +67,14 @@ public class ItemEvents {
                 .ifPresent(manaStorage -> manaStorage.receiveMana(() -> itemStack.getCount() * 20));
             itemEntity.discard();
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void livingEquipmentChange(LivingEquipmentChangeEvent event) {
+        if (event.getSlot() != EquipmentSlot.MAINHAND) return;
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            PrefixProvider.initPrefix(serverPlayer, event.getTo());
         }
     }
 }
