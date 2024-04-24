@@ -800,6 +800,21 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.BLOODY_MOSCATO.get(), "猩红麝香葡萄");
         add(Foods.ELDERBERRY.get(), "接骨木果");
         add(Foods.COOKED_MARSHMALLOW.get(), "烤棉花糖");
+        add(Foods.APRICOT.get(), "杏");
+        add(Foods.BANANA.get(), "香蕉");
+        add(Foods.CHERRY.get(), "樱桃");
+        add(Foods.COCONUT.get(), "椰子");
+        add(Foods.DRAGON_FRUIT.get(), "火龙果");
+        add(Foods.GRAPE_FRUIT.get(), "葡萄柚");
+        add(Foods.LEMON.get(), "柠檬");
+        add(Foods.MANGO.get(), "芒果");
+        add(Foods.PEACH.get(), "桃子");
+        add(Foods.PINEAPPLE.get(), "菠萝");
+        add(Foods.PLUM.get(), "李子");
+        add(Foods.SPICY_PEPPER.get(), "辣椒");
+        add(Foods.STAR_FRUIT.get(), "杨桃");
+        add(Foods.POMEGRANATE.get(), "番石榴");
+        add(Foods.RAMBUTAN.get(), "红毛丹");
         //endregion items
     }
 }
