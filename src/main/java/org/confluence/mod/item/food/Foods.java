@@ -16,8 +16,8 @@ public enum Foods implements EnumRegister<Item> {
     BLOOD_ORANGE("blood_orange", () -> new BaseFoodItem(FoodType.LOW)),
     BLACKCURRANT("blackcurrant", () -> new BaseFoodItem(FoodType.LOW)),
     //果汁
-    BLOODY_MOSCATO("bloody_moscato", () -> new BaseFoodItem(FoodType.MEDIUM)),
-    APPLE_JUICE("apple_juice", () -> new BaseFoodItem(FoodType.MEDIUM)),
+    BLOODY_MOSCATO("bloody_moscato", () -> new BottleFoodItem(FoodType.MEDIUM)),
+    APPLE_JUICE("apple_juice", () -> new BottleFoodItem(FoodType.MEDIUM)),
     //鱼
     SEA_BASS("sea_bass", () -> new BaseFoodItem(FoodType.FISH)),
     ATLANTIC_COD("atlantic_cod", () -> new BaseFoodItem(FoodType.FISH)),
