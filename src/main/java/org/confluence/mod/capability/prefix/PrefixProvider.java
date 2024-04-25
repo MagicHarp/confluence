@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.*;
 import org.confluence.mod.item.ModPrefix;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.item.gun.BaseGunItem;
 import org.confluence.mod.item.mana.IManaWeapon;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public final class PrefixProvider {
         } else if (item instanceof Vanishable) {
             if (item instanceof SwordItem || item instanceof DiggerItem) {
                 create(randomSource, itemStack, PrefixType.MELEE);
-            } else if (item instanceof TridentItem || item instanceof BowItem || item instanceof CrossbowItem) {
+            } else if (item instanceof TridentItem || item instanceof BowItem || item instanceof CrossbowItem || item instanceof BaseGunItem) {
                 create(randomSource, itemStack, PrefixType.RANGED);
             }
         } else if (item instanceof IManaWeapon) {
