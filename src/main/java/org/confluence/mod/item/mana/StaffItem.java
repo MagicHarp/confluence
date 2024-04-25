@@ -50,7 +50,7 @@ public class StaffItem extends Item implements IManaWeapon {
             if (PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
                 BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level);
-                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, getVelocity(itemStack, 1.5F), 1.0F);
                 level.addFreshEntity(baseBulletEntity);
                 level.playSound(serverPlayer, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
             }

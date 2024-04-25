@@ -19,6 +19,12 @@ public interface IManaWeapon {
         return amount;
     }
 
+    default float getVelocity(ItemStack itemStack, float velocity) {
+        Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
+        if (optional.isPresent()) velocity *= (1 + optional.get().velocity);
+        return velocity;
+    }
+
     static float apply(DamageSource damageSource, float amount) {
         if (damageSource.getEntity() instanceof Player player && isMagic(player, damageSource)) {
             AtomicDouble atomic = new AtomicDouble(amount);
