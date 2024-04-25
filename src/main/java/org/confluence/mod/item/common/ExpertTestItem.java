@@ -1,9 +1,10 @@
 package org.confluence.mod.item.common;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.ModRarity;
+import org.jetbrains.annotations.NotNull;
 
 public class ExpertTestItem extends Item implements ModRarity.Expert {
     public ExpertTestItem() {
@@ -11,7 +12,7 @@ public class ExpertTestItem extends Item implements ModRarity.Expert {
     }
 
     @Override
-    public MutableComponent getComponent() {
-        return Component.translatable(getDescriptionId());
+    public @NotNull Component getName(@NotNull ItemStack itemStack) {
+        return getComponent(getDescriptionId(itemStack));
     }
 }

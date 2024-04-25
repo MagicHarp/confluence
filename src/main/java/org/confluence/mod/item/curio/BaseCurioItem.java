@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
@@ -33,7 +34,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
     protected static final ImmutableMultimap<Attribute, AttributeModifier> EMPTY_ATTRIBUTE = ImmutableMultimap.of();
 
     public BaseCurioItem(Rarity rarity) {
-        super(new Properties().rarity(rarity).fireResistant().stacksTo(1));
+        super(rarity != ModRarity.GRAY && rarity != ModRarity.WHITE ? new Properties().rarity(rarity).fireResistant().stacksTo(1) : new Properties().rarity(rarity).stacksTo(1));
     }
 
     public BaseCurioItem() {
@@ -54,6 +55,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         freshAbility(stack.getItem(), living);
+        PrefixProvider.create(living.level().random, stack, PrefixType.CURIO);
         PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(living));
     }
 

@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
@@ -26,7 +25,6 @@ import org.confluence.mod.item.curio.combat.IAutoAttack;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ForgeClient {
@@ -45,23 +43,14 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void gatherComponents(RenderTooltipEvent.GatherComponents event) {
-        Item item = event.getItemStack().getItem();
         Optional<FormattedText> displayName = event.getTooltipElements().get(0).left();
         if (displayName.isEmpty()) return;
 
         if (displayName.get() instanceof Component component) {
-            AtomicReference<Component> atomic = new AtomicReference<>(component);
-            if (item instanceof ModRarity.Expert expert) {
-                atomic.set(expert.getComponent().withStyle(style -> style.withColor(ModRarity.Animate.getExpertColor())));
-            }
-            if (item instanceof ModRarity.Master master) {
-                atomic.set(master.getComponent().withStyle(style -> style.withColor(ModRarity.Animate.getMasterColor())));
-            }
             PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix ->
                 event.getTooltipElements().set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name.toLowerCase())
                     .withStyle(itemPrefix.tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
-                    .append(" ")
-                    .append(atomic.get())
+                    .append(" ").append(component)
                 )));
         }
     }

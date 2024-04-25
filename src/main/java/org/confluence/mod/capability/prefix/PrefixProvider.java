@@ -33,21 +33,23 @@ public final class PrefixProvider {
         }
     }
 
-    private static void create(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
-        CompoundTag nbt = itemStack.getOrCreateTag();
-        if (nbt.contains(KEY, Tag.TAG_COMPOUND)) return;
+    public static void create(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
+        if (itemStack.getOrCreateTag().contains(KEY, Tag.TAG_COMPOUND)) return;
         ModPrefix modPrefix = prefixType.randomPrefix(randomSource);
         if (modPrefix.isHarmful() && randomSource.nextFloat() < 0.6667F) prefixType = PrefixType.UNKNOWN;
         new ItemPrefix(prefixType, itemStack).copyFrom(modPrefix);
     }
 
     public static Optional<ItemPrefix> getPrefix(ItemStack itemStack) {
-        CompoundTag nbt = itemStack.getTag();
-        if (nbt == null || !nbt.contains(KEY, Tag.TAG_COMPOUND)) return Optional.empty();
-        CompoundTag prefix = nbt.getCompound(KEY);
+        CompoundTag prefix = itemStack.getTagElement(KEY);
+        if (prefix == null) return Optional.empty();
         ItemPrefix itemPrefix = new ItemPrefix(itemStack);
         itemPrefix.deserializeNBT(prefix);
         if (itemPrefix.type == PrefixType.UNKNOWN) return Optional.empty();
         return Optional.of(itemPrefix);
+    }
+
+    public static void random(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
+        new ItemPrefix(prefixType, itemStack).copyFrom(prefixType.randomPrefix(randomSource));
     }
 }

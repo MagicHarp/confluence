@@ -9,11 +9,9 @@ public interface EnumRegister<E> {
         return getValue().get();
     }
 
-    default <T> T get(Class<T> clazz) {
+    default <T extends E> T get(Class<T> clazz) {
         E item = get();
-        if (clazz.isInstance(item)) {
-            return clazz.cast(item);
-        }
-        throw new ClassCastException("Can not cast %s to %s".formatted(item, clazz));
+        if (clazz.isInstance(item)) return clazz.cast(item);
+        throw new ClassCastException("Can not cast %s to %s".formatted(getValue().getId(), clazz));
     }
 }
