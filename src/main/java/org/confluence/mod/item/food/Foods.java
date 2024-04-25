@@ -40,7 +40,7 @@ public enum Foods implements EnumRegister<Item> {
     CHRISTMAS_PUDDING("christmas_pudding", () -> new BaseFoodItem(FoodType.SENIOR)),//圣诞布丁
     GINGERBREAD_COOKIE("gingerbread_cookie", () -> new BaseFoodItem(FoodType.SENIOR)),//姜饼人
     SUGAR_COOKIE("sugar_cookie", () -> new BaseFoodItem(FoodType.SENIOR)),//糖曲奇
-    MARSHMALLOW("Marshmallow", () -> new BaseFoodItem(FoodType.LOW)),//棉花糖
+    MARSHMALLOW("marshmallow", () -> new BaseFoodItem(FoodType.LOW)),//棉花糖
     COOKED_MARSHMALLOW("cooked_marshmallow", () -> new BaseFoodItem(FoodType.MEDIUM)),//烤棉花糖
     PAD_THAI("pad_thai", () -> new BaseFoodItem(FoodType.SENIOR)),//泰式炒河粉
 
@@ -72,7 +72,7 @@ public enum Foods implements EnumRegister<Item> {
     GRAPE_JUICE("grape_juice", () -> new BottleFoodItem(FoodType.GOLDEN_CARP)),//葡萄汁
     LEMONADE("lemonade", () -> new BottleFoodItem(FoodType.MEDIUM)),//柠檬水
     PEACH_SANGRIA("peach_sangria", () -> new BottleFoodItem(FoodType.SENIOR)),//桃子桑格利亚汽酒
-    PIÑA_COLADA("piña_colada", () -> new BottleFoodItem(FoodType.MEDIUM)),//皮尼亚·科拉达
+    PIÑA_COLADA("pina_colada", () -> new BottleFoodItem(FoodType.MEDIUM)),//皮尼亚·科拉达
     PRISMATIC_PUNCH("prismatic_punch", () -> new BottleFoodItem(FoodType.SENIOR)),//味蕾冲击者
     TROPICAL_SMOOTHIE("tropical_smoothie", () -> new BottleFoodItem(FoodType.SENIOR)),//热带冰沙
     SMOOTHIE_OF_DARKNESS("smoothie_of_darkness", () -> new BottleFoodItem(FoodType.MEDIUM)),//黑暗奶昔
