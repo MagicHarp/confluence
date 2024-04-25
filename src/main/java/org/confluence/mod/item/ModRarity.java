@@ -1,9 +1,8 @@
 package org.confluence.mod.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public final class ModRarity {
     public static final Rarity GRAY = Rarity.create("gray", style -> style.withColor(0x828282));
@@ -22,10 +21,9 @@ public final class ModRarity {
 
     public static final Rarity QUEST = Rarity.create("quest", style -> style.withColor(0xFFAF00));
 
-    @OnlyIn(Dist.CLIENT)
     public static class Animate {
         private static int DiscoStyle = 0;
-        private static int DiscoR = Byte.MAX_VALUE;
+        private static int DiscoR = 255;
         private static int DiscoB = 0;
         private static int DiscoG = 0;
         private static final int update = 7;
@@ -33,8 +31,8 @@ public final class ModRarity {
         public static void doUpdateExpertColor() {
             if (DiscoStyle == 0) {
                 DiscoG += update;
-                if (DiscoG >= Byte.MAX_VALUE) {
-                    DiscoG = Byte.MAX_VALUE;
+                if (DiscoG >= 255) {
+                    DiscoG = 255;
                     ++DiscoStyle;
                 }
             }
@@ -47,8 +45,8 @@ public final class ModRarity {
             }
             if (DiscoStyle == 2) {
                 DiscoB += update;
-                if (DiscoB >= Byte.MAX_VALUE) {
-                    DiscoB = Byte.MAX_VALUE;
+                if (DiscoB >= 255) {
+                    DiscoB = 255;
                     ++DiscoStyle;
                 }
             }
@@ -61,8 +59,8 @@ public final class ModRarity {
             }
             if (DiscoStyle == 4) {
                 DiscoR += update;
-                if (DiscoR >= Byte.MAX_VALUE) {
-                    DiscoR = Byte.MAX_VALUE;
+                if (DiscoR >= 255) {
+                    DiscoR = 255;
                     ++DiscoStyle;
                 }
             }
@@ -74,42 +72,46 @@ public final class ModRarity {
         }
 
         public static int getExpertColor() {
-            return ((DiscoR + 64) << 16) + ((DiscoG + 64) << 8) + (DiscoB + 64);
+            return (DiscoR << 16) + (DiscoG << 8) + DiscoB;
         }
 
-        private static byte mouseTextColor = 0;
+        private static int mouseTextColor = 0;
         private static int mouseTextColorChange = 1;
         private static float masterColor = 1.0F;
         private static int masterColorDir = 1;
 
         public static void doUpdateMasterColor() {
-            mouseTextColor += (byte) mouseTextColorChange;
-            if (mouseTextColor == Byte.MAX_VALUE) {
+            mouseTextColor += mouseTextColorChange;
+            if (mouseTextColor == 255) {
                 mouseTextColorChange = -1;
             }
-            if (mouseTextColor <= (byte) 190) {
+            if (mouseTextColor <= 190) {
                 mouseTextColorChange = 1;
             }
-            masterColor += (float) masterColorDir * 0.05f;
-            if ((double) masterColor > 1.0) {
-                masterColor = 1f;
+            masterColor += masterColorDir * 0.05F;
+            if (masterColor > 1.0F) {
+                masterColor = 1.0F;
                 masterColorDir = -1;
             }
-            if ((double) masterColor >= 0.0) return;
-            masterColor = 0.0f;
+            if (masterColor >= 0.0F) return;
+            masterColor = 0.0F;
             masterColorDir = 1;
         }
 
         public static int getMasterColor() {
-            return ((int) mouseTextColor << 16) + ((int) (masterColor * 190) << 8);
+            return (mouseTextColor << 16) + ((int) (masterColor * 190) << 8);
         }
     }
 
     public interface Expert {
-        MutableComponent getComponent();
+        default MutableComponent getComponent(String descriptionId) {
+            return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getExpertColor()));
+        }
     }
 
     public interface Master {
-        MutableComponent getComponent();
+        default MutableComponent getComponent(String descriptionId) {
+            return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getMasterColor()));
+        }
     }
 }
