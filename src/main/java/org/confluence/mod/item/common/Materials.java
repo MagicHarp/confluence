@@ -75,6 +75,10 @@ public enum Materials implements EnumRegister<Item> {
     CURSED_FLAME("cursed_flame"),
     ICHOR("ichor"),
 
+    PEARL("pearl"),
+    BLACK_PEARL("black_pearl"),
+    PINK_PEARL("pink_pearl"),
+
     ;
 
     private final RegistryObject<Item> value;

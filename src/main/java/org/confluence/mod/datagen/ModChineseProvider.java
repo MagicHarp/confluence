@@ -415,6 +415,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.LIFE_CRYSTAL.get(), "生命水晶");
         add(Materials.CURSED_FLAME.get(), "诅咒火");
         add(Materials.ICHOR.get(), "灵液");
+        add(Materials.PEARL.get(), "珍珠");
+        add(Materials.BLACK_PEARL.get(), "黑珍珠");
+        add(Materials.PINK_PEARL.get(), "粉珍珠");
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");

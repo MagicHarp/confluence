@@ -6,28 +6,33 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:atlantic_cod",
-          "weight": 30
+          "name": "confluence:pearl",
+          "weight": 28
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:salmon",
-          "weight": 5
+          "name": "confluence:black_pearl",
+          "weight": 14
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:salmon",
-          "weight": 25
+          "name": "confluence:pink_pearl",
+          "weight": 2
         },
         {
-          "type": "minecraft:item",
-          "name": "minecraft:cod",
-          "weight": 25
-        },
+          "type": "minecraft:empty",
+          "weight": 175
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:pufferfish",
-          "weight": 15
+          "name": "confluence:shucked_oyster",
+          "weight": 1
         }
       ],
       "rolls": 1.0
