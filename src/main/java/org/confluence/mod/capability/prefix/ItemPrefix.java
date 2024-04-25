@@ -9,6 +9,7 @@ import org.confluence.mod.item.ModPrefix;
 
 import java.util.UUID;
 
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
 public final class ItemPrefix implements INBTSerializable<CompoundTag> {
@@ -119,24 +120,24 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     public void applyCurioPrefix(LivingEntity living) {
         if (living.level().isClientSide) return;
         AttributeMap attributeMap = living.getAttributes();
-        addModifier(attributeMap, attackDamage, Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE_UUID_CURIO);
-        addModifier(attributeMap, attackSpeed, Attributes.ATTACK_SPEED, ATTACK_SPEED_UUID_CURIO);
-        addModifier(attributeMap, knockBack, Attributes.ATTACK_KNOCKBACK, KNOCK_BACK_UUID_CURIO);
-        addModifier(attributeMap, armor, Attributes.ARMOR, ARMOR_UUID_CURIO);
-        addModifier(attributeMap, movementSpeed, Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED_UUID_CURIO);
+        addModifier(attributeMap, attackDamage, Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE_UUID_CURIO, MULTIPLY_TOTAL);
+        addModifier(attributeMap, attackSpeed, Attributes.ATTACK_SPEED, ATTACK_SPEED_UUID_CURIO, MULTIPLY_TOTAL);
+        addModifier(attributeMap, knockBack, Attributes.ATTACK_KNOCKBACK, KNOCK_BACK_UUID_CURIO, MULTIPLY_TOTAL);
+        addModifier(attributeMap, armor, Attributes.ARMOR, ARMOR_UUID_CURIO, ADDITION);
+        addModifier(attributeMap, movementSpeed, Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED_UUID_CURIO, MULTIPLY_TOTAL);
     }
 
-    private static void addModifier(AttributeMap attributeMap, double pValue, Attribute attribute, UUID uuid) {
+    private static void addModifier(AttributeMap attributeMap, double pValue, Attribute attribute, UUID uuid, AttributeModifier.Operation operation) {
         if (pValue <= 0.0) return;
         AttributeInstance instance = attributeMap.getInstance(attribute);
         if (instance == null) return;
         AttributeModifier modifier = instance.getModifier(uuid);
         if (modifier == null) {
-            instance.addTransientModifier(new AttributeModifier(uuid, "Item Prefix", pValue, MULTIPLY_TOTAL));
+            instance.addTransientModifier(new AttributeModifier(uuid, "Item Prefix", pValue, operation));
         } else {
             double amount = modifier.getAmount();
             instance.removeModifier(uuid);
-            instance.addTransientModifier(new AttributeModifier(uuid, "Item Prefix", amount + pValue, MULTIPLY_TOTAL));
+            instance.addTransientModifier(new AttributeModifier(uuid, "Item Prefix", amount + pValue, operation));
         }
     }
 
