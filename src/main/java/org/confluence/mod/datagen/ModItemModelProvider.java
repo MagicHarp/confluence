@@ -17,6 +17,7 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Icons;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.food.BaseFoodItem;
+import org.confluence.mod.item.food.BottleFoodItem;
 import org.confluence.mod.item.mana.StaffItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
@@ -70,6 +71,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 } else if (value instanceof BaseCurioItem) {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
                 } else if (value instanceof BaseFoodItem) {
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
+                } else if (value instanceof BottleFoodItem) {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
                 } else {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));

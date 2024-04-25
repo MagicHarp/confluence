@@ -12,7 +12,7 @@ public enum Foods implements EnumRegister<Item> {
     //常规食物
     COOKED_SHRIMP("cooked_shrimp", () -> new BaseFoodItem(FoodType.MEDIUM)),//熟虾
     ESCARGOT("escargot", () -> new BaseFoodItem(FoodType.MEDIUM)),//法式蜗牛
-    FROGGLE_BUNWICH("froggle_bunwich", () -> new BaseFoodItem(FoodType.MEDIUM)),//蒸田鸡
+    FROGGLE_BUNWICH("froggle_bunwich", () -> new BaseFoodItem(FoodType.MEDIUM)),//面包夹田鸡
     GOLDEN_DELIGHT("golden_delight", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),//金美味
     GRILLED_SQUIRREL("grilled_squirrel", () -> new BaseFoodItem(FoodType.MEAT)),//松鼠尾
     LOBSTER_TAIL("lobster_tail", () -> new BaseFoodItem(FoodType.SENIOR)),//龙虾尾
@@ -43,7 +43,11 @@ public enum Foods implements EnumRegister<Item> {
     MARSHMALLOW("marshmallow", () -> new BaseFoodItem(FoodType.LOW)),//棉花糖
     COOKED_MARSHMALLOW("cooked_marshmallow", () -> new BaseFoodItem(FoodType.MEDIUM)),//烤棉花糖
     PAD_THAI("pad_thai", () -> new BaseFoodItem(FoodType.SENIOR)),//泰式炒河粉
-
+    FISH_AND_MUSHROOM_SOUP("fish_and_mushroom_soup", () -> new BottleFoodItem(FoodType.MEDIUM)),//鱼菇汤
+    FRUIT_SALAD("fruit_salad", () -> new BottleFoodItem(FoodType.HIGH)),//水果沙拉
+    GRUB_SOUP("grub_soup", () -> new BottleFoodItem(FoodType.HIGH)),//蛆虫汤
+    NACHOS("nachos", () -> new BottleFoodItem(FoodType.HIGH)),//一碗玉米粒
+    PHO("pho", () -> new BottleFoodItem(FoodType.MEDIUM)),//河粉
     //水果
     APRICOT("apricot", () -> new BaseFoodItem(FoodType.LOW)),
     BANANA("banana", () -> new BaseFoodItem(FoodType.LOW)),
@@ -85,12 +89,9 @@ public enum Foods implements EnumRegister<Item> {
     CARTON_OF_MILK("carton_of_milk", () -> new BaseFoodItem(FoodType.SENIOR)),//卡通牛奶
     TEACUP("teacup", () -> new BottleFoodItem(FoodType.LOW)),//一小杯茶
     COFFEE("coffee", () -> new BottleFoodItem(FoodType.SENIOR)),//咖啡
-    //用碗的食物
-    FISH_AND_MUSHROOM_SOUP("fish_and_mushroom_soup", () -> new BottleFoodItem(FoodType.MEDIUM)),//鱼菇汤
-    FRUIT_SALAD("fruit_salad", () -> new BottleFoodItem(FoodType.HIGH)),//水果沙拉
-    GRUB_SOUP("grub_soup", () -> new BottleFoodItem(FoodType.HIGH)),//蛆虫汤
-    NACHOS("nachos", () -> new BottleFoodItem(FoodType.HIGH)),//一碗玉米粒
-    PHO("pho", () -> new BottleFoodItem(FoodType.MEDIUM)),//河粉
+
+    SAKE("sake", () -> new BottleFoodItem(FoodType.SENIOR)),//清酒
+
     //鱼
     SEA_BASS("sea_bass", () -> new BaseFoodItem(FoodType.FISH)),
     ATLANTIC_COD("atlantic_cod", () -> new BaseFoodItem(FoodType.FISH)),

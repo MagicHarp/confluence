@@ -816,7 +816,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.RAMBUTAN.get(), "红毛丹");
         add(Foods.COOKED_SHRIMP.get(), "熟虾");
         add(Foods.ESCARGOT.get(), "法式蜗牛");
-        add(Foods.FROGGLE_BUNWICH.get(), "蒸田鸡");
+        add(Foods.FROGGLE_BUNWICH.get(), "面包夹田鸡");
         add(Foods.GOLDEN_DELIGHT.get(), "金美味");
         add(Foods.GRILLED_SQUIRREL.get(), "松鼠尾");
         add(Foods.LOBSTER_TAIL.get(), "龙虾尾");
@@ -868,6 +868,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.GRUB_SOUP.get(), "蛆虫汤");
         add(Foods.NACHOS.get(), "一碗玉米粒");
         add(Foods.PHO.get(), "河粉");
+        add(Foods.FRUIT_JUICE.get(), "混合果汁");
+        add(Foods.SAKE.get(), "清酒");
         //endregion items
     }
 }
