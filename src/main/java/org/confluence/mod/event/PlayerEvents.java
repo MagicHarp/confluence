@@ -38,6 +38,7 @@ public final class PlayerEvents {
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) return;
         IRangePickup.Star.apply(event.player);
+        IRangePickup.Coin.apply(event.player);
 
         if (event.side == LogicalSide.CLIENT) return;
         ServerPlayer serverPlayer = (ServerPlayer) event.player;

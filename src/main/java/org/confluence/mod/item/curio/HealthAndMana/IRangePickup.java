@@ -41,4 +41,10 @@ public interface IRangePickup {
         static void apply(Player player) {
         }
     }
+
+    interface Coin {
+        static void apply(Player player) {
+            IRangePickup.apply(player, PlayerAbility::getCoinRange, ModTags.COIN);
+        }
+    }
 }

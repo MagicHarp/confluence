@@ -89,6 +89,10 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Icons.PRECIOUS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.misc"))
             .displayItems((parameters, output) -> {
+                output.accept(ModItems.COPPER_COIN.get());
+                output.accept(ModItems.SILVER_COIN.get());
+                output.accept(ModItems.GOLDEN_COIN.get());
+                output.accept(ModItems.PLATINUM_COIN.get());
                 output.accept(ModItems.EXPERT_TEST_ITEM.get());
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
                 output.accept(ModItems.STAR.get());

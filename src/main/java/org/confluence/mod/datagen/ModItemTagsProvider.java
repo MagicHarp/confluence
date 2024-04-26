@@ -25,5 +25,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
         tag(ModTags.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get());
+        tag(ModTags.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
     }
 }

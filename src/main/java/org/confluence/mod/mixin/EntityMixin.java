@@ -93,7 +93,7 @@ public abstract class EntityMixin implements IEntity {
         if (((IEntity) player).c$isOnCthulhuSprinting()) {
             Entity self = (Entity) (Object) this;
             self.addDeltaMovement(player.getDeltaMovement().scale(0.9F).with(Direction.Axis.Y, 0.2));
-            self.hurt(damageSources().playerAttack(player), 30.0F);
+            self.hurt(damageSources().playerAttack(player), 7.8F);
         }
     }
 }

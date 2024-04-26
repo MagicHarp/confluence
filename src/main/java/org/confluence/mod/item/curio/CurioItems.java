@@ -13,6 +13,7 @@ import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.*;
+import org.confluence.mod.item.curio.miscellaneous.GoldRing;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
@@ -251,7 +252,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 钱币戒指 */
     /* 优惠卡 */
     /* 花靴 */
-    /* 金戒指 */
+    GOLD_RING("gold_ring", GoldRing::new), // 金戒指
     /* 贪婪戒指 */
     /* 植物纤维绳索宝典 */
     /* 向导巫毒娃娃 */

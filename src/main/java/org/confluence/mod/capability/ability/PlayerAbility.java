@@ -36,6 +36,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private float fishingPower;
     private int crystals;
     private double starRange;
+    private double coinRange;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -51,6 +52,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = 0.0F;
         this.crystals = 0;
         this.starRange = 1.75;
+        this.coinRange = 2.0;
     }
 
     public void freshAbility(LivingEntity living) {
@@ -63,6 +65,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger lava = new AtomicInteger();
         AtomicInteger aggro = new AtomicInteger();
         AtomicBoolean star = new AtomicBoolean();
+        AtomicBoolean coin = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -84,6 +87,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 }
                 if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
                 if (item instanceof IRangePickup.Star) star.set(true);
+                if (item instanceof IRangePickup.Coin) coin.set(true);
             }
         });
         this.jumpBoost = jump.get();
@@ -95,6 +99,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.maxLavaImmuneTicks = lava.get();
         this.aggro = aggro.get();
         this.starRange = star.get() ? 14.25 : 1.75;
+        this.coinRange = coin.get() ? 16.67 : 2.0;
     }
 
     public double getJumpBoost() {
@@ -184,6 +189,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return starRange;
     }
 
+    public double getCoinRange() {
+        return coinRange;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -199,6 +208,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putFloat("fishingPower", fishingPower);
         nbt.putInt("crystals", crystals);
         nbt.putDouble("starRange", starRange);
+        nbt.putDouble("coinRange", coinRange);
         return nbt;
     }
 
@@ -216,6 +226,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = nbt.getFloat("fishingPower");
         this.crystals = nbt.getInt("crystals");
         this.starRange = nbt.getDouble("starRange");
+        this.coinRange = nbt.getDouble("coinRange");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -231,5 +242,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower = playerAbility.fishingPower;
         this.crystals = playerAbility.crystals;
         this.starRange = playerAbility.starRange;
+        this.coinRange = playerAbility.coinRange;
     }
 }
