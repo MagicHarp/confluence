@@ -40,8 +40,7 @@ public class PanicNecklace extends BaseCurioItem {
     }
 
     public static void apply(LivingEntity living) {
-        ItemStack self = CuriosUtils.findCurio(living, CurioItems.PANIC_NECKLACE.get());
-        if (self.isEmpty()) return;
-        self.getOrCreateTag().putLong("lastHurt", living.level().getGameTime());
+        CuriosUtils.findCurio(living, CurioItems.PANIC_NECKLACE.get())
+            .ifPresent(itemStack -> itemStack.getOrCreateTag().putLong("lastHurt", living.level().getGameTime()));
     }
 }

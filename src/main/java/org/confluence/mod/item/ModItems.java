@@ -30,7 +30,7 @@ public final class ModItems {
     public static final RegistryObject<BaseItem> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
     public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
     public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
-    public static final RegistryObject<ClamItem> CLAM_TEST_ITEM = ITEMS.register("clam_test_item", () -> new ClamItem());
+    public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);

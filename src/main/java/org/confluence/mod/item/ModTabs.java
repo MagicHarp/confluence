@@ -95,6 +95,7 @@ public final class ModTabs {
                 output.accept(ModItems.SOUL_CAKE.get());
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
+                output.accept(ModItems.CLAM.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
             })
