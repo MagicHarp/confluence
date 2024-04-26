@@ -123,8 +123,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.horseshoe_balloon.tooltip", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.lava_waders.tooltip2", "对火块免疫、对岩浆免疫7秒");
         add("item.confluence.bundle_of_balloons.tooltip", "可让持有者四段跳");
-        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip", "可让持有者四段跳");
-        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip2", "增加跳跃高度、消除掉落伤害");
+        add("item.confluence.bundle_of_horseshoe_balloon.tooltip", "可让持有者四段跳");
+        add("item.confluence.bundle_of_horseshoe_balloon.tooltip2", "增加跳跃高度、消除掉落伤害");
         add("item.confluence.water_walking_boots.tooltip", "提供在水和蜂蜜上行走的能力");
         add("item.confluence.magma_skull.tooltip", "对火块免疫、近战攻击造成火焰伤害");
         add("item.confluence.frostspark_boots.tooltip", "可飞行、飞速奔跑、并提供额外冰面行动力");
@@ -145,6 +145,35 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.black_belt.tooltip", "有几率避开攻击");
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
+        add("item.confluence.worm_scarf.tooltip", "所受伤害减少17%");
+        add("item.confluence.shiele_of_cthulhu.tooltip", "允许冲刺，双击w以进行冲刺");
+        add("item.confluence.brain_of_confusion.tooltip", "有几率制造幻觉并躲避攻击");
+        add("item.confluence.brain_of_confusion.tooltip2", "闪避后暂时增加暴击几率");
+        add("item.confluence.brain_of_confusion.tooltip3", "被击中后可能会迷惑附近的敌人");
+        add("item.confluence.royal_gel.tooltip", "史莱姆将变成友好生物");
+        add("item.confluence.magic_cuffs.tooltip", "最大魔力值增加20");
+        add("item.confluence.magic_cuffs.tooltip2", "受伤时恢复魔力");
+        add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%" );
+        add("item.confluence.magnet_flower.tooltip2","需要时自动使用魔力药水");
+        add("item.confluence.magnet_flower.tooltip3","扩大魔力星的拾取范围");
+        add("item.confluence.mana_flower.tooltip", "魔力消耗降低8%");
+        add("item.confluence.mana_flower.tooltip2", "需要时自动使用魔力药水");
+        add("item.confluence.arcane_flower.tooltip", "魔力消耗降低8%");
+        add("item.confluence.arcane_flower.tooltip2", "需要时自动使用魔力药水");
+        add("item.confluence.arcane_flower.tooltip3", "敌人不太可能以你为目标");
+        add("item.confluence.celestial_cuffs.tooltip", "扩大魔力星的拾取范围");
+        add("item.confluence.celestial_cuffs.tooltip2", "受到伤害时会恢复魔力");
+        add("item.confluence.celestial_cuffs.tooltip3", "最大魔力增加20");
+        add("item.confluence.celestial_magnet.tooltip", "扩大魔力星的拾取范围");
+        add("item.confluence.celestial_emblem.tooltip", "扩大魔力星的拾取范围");
+        add("item.confluence.celestial_emblem.tooltip2", "魔法伤害提高15%");
+        add("item.confluence.celestial_stone.tooltip", "小幅提高属性值");
+        add("item.confluence.charm_of_myths.tooltip", "提供生命恢复，减少治疗药水的冷却时间");
+        add("item.confluence.philosophers_stone.tooltip", "减少治疗药水的冷却时间");
+        add("item.confluence.mana_regeneration_band.tooltip", "最大魔力值增加20");
+        add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
+        add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
+
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
@@ -166,6 +195,26 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.maker.author", "BiliBili_Maker-2333");
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，确实挺严肃的");
+
+        add("prefix.confluence.hard", "坚硬");
+        add("prefix.confluence.guarding", "守护");
+        add("prefix.confluence.armored", "装甲");
+        add("prefix.confluence.warding", "护佑");
+        add("prefix.confluence.precise", "精确");
+        add("prefix.confluence.lucky", "幸运");
+        add("prefix.confluence.jagged", "锯齿");
+        add("prefix.confluence.spiked", "尖刺");
+        add("prefix.confluence.angry", "愤怒");
+        add("prefix.confluence.menacing", "险恶");
+        add("prefix.confluence.wild", "狂野");
+        add("prefix.confluence.rash", "鲁莽");
+        add("prefix.confluence.intrepid", "勇猛");
+        add("prefix.confluence.violent", "暴力");
+        add("prefix.confluence.brisk", "轻快");
+        add("prefix.confluence.fleeting", "快速");
+        add("prefix.confluence.hasty", "急速");
+        add("prefix.confluence.quick", "迅捷");
+        add("prefix.confluence.arcane", "奥秘");
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
@@ -650,7 +699,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.FISH_FINDER.get(), "探鱼器");
         add(CurioItems.PDA.get(), "个人数字助手");
         add(CurioItems.SHARK_TOOTH_NECKLACE.get(), "鲨牙项链");
-        add(CurioItems.CELESTIAL_STONE.get(), "天界壳");
+        add(CurioItems.CELESTIAL_STONE.get(), "天界石");
         add(CurioItems.FAST_CLOCK.get(), "快走时钟");
         add(CurioItems.SORCERER_EMBLEM.get(), "巫师徽章");
         add(CurioItems.ANCIENT_CHISEL.get(), "远古凿子");
@@ -665,6 +714,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.MANA_REGENERATION_BAND.get(), "魔力再生手环");
         add(CurioItems.NATURES_GIFT.get(), "大自然的恩赐");
         add(CurioItems.PHILOSOPHERS_STONE.get(), "点金石");
+        add(CurioItems.ROYAL_GEL.get(), "皇家凝胶");
+        add(CurioItems.SHIELD_OD_CTHULHU.get(), "克苏鲁护盾");
+        add(CurioItems.WORM_SCARF.get(), "蠕虫围巾");
+        add(CurioItems.BRAIN_OF_CONFUSION.get(), "混乱之脑");
 
 
         //盔甲

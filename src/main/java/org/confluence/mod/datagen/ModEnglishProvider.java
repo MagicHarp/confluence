@@ -118,8 +118,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.horseshoe_balloon.tooltip", "Increases jump height and negates fall damage");
         add("item.confluence.lava_waders.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.bundle_of_balloons.tooltip", "Allows the holder to quadruple jump");
-        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip", "Allows the holder to quadruple jump");
-        add("item.terracurio.bundle_of_horseshoe_balloon.tooltip2", "Increases jump height and negates fall damage");
+        add("item.confluence.bundle_of_horseshoe_balloon.tooltip", "Allows the holder to quadruple jump");
+        add("item.confluence.bundle_of_horseshoe_balloon.tooltip2", "Increases jump height and negates fall damage");
         add("item.confluence.water_walking_boots.tooltip", "Provides the ability to walk on water & honey");
         add("item.confluence.magma_skull.tooltip", "Immunity to fire blocks, melee attacks deal fire damage");
         add("item.confluence.frostspark_boots.tooltip", "Allows flight, super fast running, and extra mobility on ice");
@@ -139,6 +139,34 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.black_belt.tooltip", "Gives a chance to dodge attacks");
         add("item.confluence.terraspark_boots.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.fledgling_wings.tooltip", "Allows flight and slow fall");
+        add("item.confluence.worm_scarf.tooltip", "Reduces damage taken by 17%");
+        add("item.confluence.shiele_of_cthulhu.tooltip", "Allows the player to dash into the enemy,Double tap a direction");
+        add("item.confluence.brain_of_confusion.tooltip", "Has a chance to create illusions and dodge an attack");
+        add("item.confluence.brain_of_confusion.tooltip2", "Temporarily increase critical chance after dodge");
+        add("item.confluence.brain_of_confusion.tooltip3", "May confuse nearby enemies after being struck");
+        add("item.confluence.royal_gel.tooltip", "Slimes become friendly");
+        add("item.confluence.magic_cuffs.tooltip", "Maximum mana is increased by 20");
+        add("item.confluence.magic_cuffs.tooltip2", "Restores mana when injured");
+        add("item.confluence.magnet_flower.tooltip", "8% reduced mana cost" );
+        add("item.confluence.magnet_flower.tooltip2","Automatically uses mana potions when needed");
+        add("item.confluence.magnet_flower.tooltip3","Increases the pickup range of Mana Stars");
+        add("item.confluence.mana_flower.tooltip", "8% reduced mana cost");
+        add("item.confluence.mana_flower.tooltip2", "Automatically uses mana potions when needed");
+        add("item.confluence.arcane_flower.tooltip", "8% reduced mana cost");
+        add("item.confluence.arcane_flower.tooltip2", "Automatically uses mana potions when needed");
+        add("item.confluence.arcane_flower.tooltip3", "The enemy is unlikely to target you");
+        add("item.confluence.celestial_cuffs.tooltip", "Increases the pickup range of Mana Stars");
+        add("item.confluence.celestial_cuffs.tooltip2", "Restores mana when injured");
+        add("item.confluence.celestial_cuffs.tooltip3", "Maximum mana is increased by 20");
+        add("item.confluence.celestial_magnet.tooltip", "Increases the pickup range of Mana Stars");
+        add("item.confluence.celestial_emblem.tooltip", "Increases the pickup range of Mana Stars");
+        add("item.confluence.celestial_emblem.tooltip2", "15% increased magic damage");
+        add("item.confluence.celestial_stone.tooltip", "Slightly increases the attribute value");
+        add("item.confluence.charm_of_myths.tooltip", "Provides health regeneration and reduces the cooldown of healing potions");
+        add("item.confluence.philosophers_stone.tooltip", "Reduced the cooldown of Healing Potions");
+        add("item.confluence.mana_regeneration_band.tooltip", "Maximum mana is increased by 20");
+        add("item.confluence.mana_regeneration_band.tooltip2", "Increases mana regeneration rate");
+        add("item.confluence.natures_gift.tooltip", "6% reduced mana cost");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
@@ -157,9 +185,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
-        add("prefix.confluence.hasty", "Hasty");
-        add("prefix.confluence.quick", "Quick");
-        add("prefix.confluence.deadly", "Deadly");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
