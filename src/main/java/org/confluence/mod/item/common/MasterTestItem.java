@@ -13,6 +13,6 @@ public class MasterTestItem extends Item implements ModRarity.Master {
 
     @Override
     public @NotNull Component getName(@NotNull ItemStack itemStack) {
-        return getComponent(getDescriptionId(itemStack));
+        return withColor(getDescriptionId(itemStack));
     }
 }

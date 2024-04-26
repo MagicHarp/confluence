@@ -11,6 +11,7 @@ import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.food.Foods;
+import org.confluence.mod.item.functional.ClamItem;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.mana.ManaWeapons;
@@ -35,6 +36,7 @@ public final class ModItems {
     // 创造
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);
+    public static final RegistryObject<ClamItem> CLAM_TEST_ITEM = ITEMS.register("clam_test_item", () -> new ClamItem(new Item.Properties()));
     public static final RegistryObject<Item> STAR = ITEMS.register("star", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SOUL_CAKE = ITEMS.register("soul_cake", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
 

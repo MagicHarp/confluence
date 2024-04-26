@@ -13,6 +13,6 @@ public class ExpertTestItem extends Item implements ModRarity.Expert {
 
     @Override
     public @NotNull Component getName(@NotNull ItemStack itemStack) {
-        return getComponent(getDescriptionId(itemStack));
+        return withColor(getDescriptionId(itemStack));
     }
 }

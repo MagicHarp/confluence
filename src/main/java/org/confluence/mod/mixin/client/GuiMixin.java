@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 @Mixin(Gui.class)
-public class GuiMixin {
+public abstract class GuiMixin {
     @Shadow
     protected ItemStack lastToolHighlight;
 

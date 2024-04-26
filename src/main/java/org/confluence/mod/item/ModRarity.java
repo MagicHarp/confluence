@@ -104,13 +104,13 @@ public final class ModRarity {
     }
 
     public interface Expert {
-        default MutableComponent getComponent(String descriptionId) {
+        default MutableComponent withColor(String descriptionId) {
             return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getExpertColor()));
         }
     }
 
     public interface Master {
-        default MutableComponent getComponent(String descriptionId) {
+        default MutableComponent withColor(String descriptionId) {
             return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getMasterColor()));
         }
     }

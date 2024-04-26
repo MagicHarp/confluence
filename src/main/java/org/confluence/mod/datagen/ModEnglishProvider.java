@@ -157,6 +157,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
+        add("prefix.confluence.hasty", "Hasty");
+        add("prefix.confluence.quick", "Quick");
+        add("prefix.confluence.deadly", "Deadly");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
@@ -173,18 +177,21 @@ public class ModEnglishProvider extends LanguageProvider {
             add("prefix.confluence." + universal.name().toLowerCase(), toTitleCase(universal.name()));
         }
         for (ModPrefix.Common common : ModPrefix.Common.values()) {
+            if (common == ModPrefix.Common.QUICK || common == ModPrefix.Common.DEADLY) continue;
             add("prefix.confluence." + common.name().toLowerCase(), toTitleCase(common.name()));
         }
         for (ModPrefix.Melee melee : ModPrefix.Melee.values()) {
             add("prefix.confluence." + melee.name().toLowerCase(), toTitleCase(melee.name()));
         }
         for (ModPrefix.Ranged ranged : ModPrefix.Ranged.values()) {
+            if (ranged == ModPrefix.Ranged.HASTY || ranged == ModPrefix.Ranged.DEADLY) continue;
             add("prefix.confluence." + ranged.name().toLowerCase(), toTitleCase(ranged.name()));
         }
         for (ModPrefix.MagicAndSumming magicAndSumming : ModPrefix.MagicAndSumming.values()) {
             add("prefix.confluence." + magicAndSumming.name().toLowerCase(), toTitleCase(magicAndSumming.name()));
         }
         for (ModPrefix.Curio curio : ModPrefix.Curio.values()) {
+            if (curio == ModPrefix.Curio.HASTY || curio == ModPrefix.Curio.QUICK) continue;
             add("prefix.confluence." + curio.name().toLowerCase(), toTitleCase(curio.name()));
         }
     }
