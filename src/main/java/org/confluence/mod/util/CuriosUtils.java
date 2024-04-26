@@ -20,17 +20,14 @@ public final class CuriosUtils {
     }
 
     public static boolean noSameCurio(LivingEntity living, Predicate<ItemStack> predicate) {
-        AtomicBoolean isEmpty = new AtomicBoolean();
+        AtomicBoolean isEmpty = new AtomicBoolean(true);
         CuriosApi.getCuriosInventory(living)
             .ifPresent(handler -> isEmpty.set(handler.findCurios(predicate).isEmpty()));
         return isEmpty.get();
     }
 
     public static <C extends BaseCurioItem> boolean noSameCurio(LivingEntity living, C curio) {
-        AtomicBoolean isEmpty = new AtomicBoolean();
-        CuriosApi.getCuriosInventory(living)
-            .ifPresent(handler -> isEmpty.set(handler.findCurios(itemStack -> itemStack.getItem() == curio).isEmpty()));
-        return isEmpty.get();
+        return noSameCurio(living, (Predicate<ItemStack>) itemStack -> itemStack.getItem() == curio);
     }
 
     public static boolean hasCurio(LivingEntity living, Class<?> clazz) {
