@@ -516,6 +516,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
 
         add(ICE_MIRROR.get(), "冰雪镜");
+        add(CLAM.get(), "牡蛎");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
         add(HEALING_POTION.get(), "治疗药水");
         add(GREATER_HEALING_POTION.get(), "强效治疗药水");
