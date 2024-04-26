@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:pisces_fin_cod",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:salmon",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:mottled_oilfish",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:pufferfish",
+          "weight": 25
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/fishing/fish"
+}

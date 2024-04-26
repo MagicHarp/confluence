@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:partial_mouth_fish",
+          "weight": 35
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:clam",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rock_lobster",
+          "weight": 35
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/fishing/fish"
+}

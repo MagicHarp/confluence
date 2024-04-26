@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:armored_cave_fish",
+          "weight": 35
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:stinky_fish",
+          "weight": 30
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:mirror_fish",
+          "weight": 35
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/fishing/fish"
+}

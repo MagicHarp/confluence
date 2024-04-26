@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:tuna",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:salmon",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:trout",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shrimp",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:red_snapper",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:pufferfish",
+          "weight": 15
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/fishing/fish"
+}
