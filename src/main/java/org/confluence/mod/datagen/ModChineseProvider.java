@@ -173,6 +173,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.mana_regeneration_band.tooltip", "最大魔力值增加20");
         add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
         add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
+        add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
 
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
@@ -215,6 +216,67 @@ public class ModChineseProvider extends LanguageProvider {
         add("prefix.confluence.hasty", "急速");
         add("prefix.confluence.quick", "迅捷");
         add("prefix.confluence.arcane", "奥秘");
+        add("prefix.confluence.keen", "锐利");
+        add("prefix.confluence.superior", "高端");
+        add("prefix.confluence.forceful", "强力");
+        add("prefix.confluence.broken", "碎裂");
+        add("prefix.confluence.damaged", "破损");
+        add("prefix.confluence.shoddy", "粗劣");
+        add("prefix.confluence.hurtful", "致伤");
+        add("prefix.confluence.strong", "强劲");
+        add("prefix.confluence.unpleasant", "粗鲁");
+        add("prefix.confluence.weak", "虚弱");
+        add("prefix.confluence.ruthless", "无情");
+        add("prefix.confluence.godly", "神级");
+        add("prefix.confluence.demonic", "恶魔");
+        add("prefix.confluence.zealous", "狂热");
+        add("prefix.confluence.deadly", "致命");
+        add("prefix.confluence.agile", "灵活");
+        add("prefix.confluence.nimble", "灵巧");
+        add("prefix.confluence.murderous", "残暴");
+        add("prefix.confluence.slow", "缓慢");
+        add("prefix.confluence.sluggish", "迟钝");
+        add("prefix.confluence.lazy", "呆滞");
+        add("prefix.confluence.annoying", "惹恼");
+        add("prefix.confluence.nasty", "凶险");
+        add("prefix.confluence.large", "大");
+        add("prefix.confluence.massive", "巨大");
+        add("prefix.confluence.dangerous", "危险");
+        add("prefix.confluence.savage", "凶险");
+        add("prefix.confluence.sharp", "锋利");
+        add("prefix.confluence.pointy", "尖锐");
+        add("prefix.confluence.tiny", "微小");
+        add("prefix.confluence.terrible", "可怕");
+        add("prefix.confluence.small", "小");
+        add("prefix.confluence.dull", "钝");
+        add("prefix.confluence.unhappy", "倒霉");
+        add("prefix.confluence.bulky", "笨蛋");
+        add("prefix.confluence.shameful", "可耻");
+        add("prefix.confluence.heavy", "重");
+        add("prefix.confluence.light", "轻");
+        add("prefix.confluence.legendary", "传奇");
+        add("prefix.confluence.sighted", "精准");
+        add("prefix.confluence.rapid", "迅速");
+        add("prefix.confluence.intimidating", " 恐怖");
+        add("prefix.confluence.staunch", "可靠");
+        add("prefix.confluence.awful", "可畏");
+        add("prefix.confluence.lethargic", "无力");
+        add("prefix.confluence.awkward", "粗笨");
+        add("prefix.confluence.powerful", "强大");
+        add("prefix.confluence.frenzying", "暴怒");
+        add("prefix.confluence.mythic", "神秘");
+        add("prefix.confluence.adeptl", "精巧");
+        add("prefix.confluence.masterful", "精湛");
+        add("prefix.confluence.inept", "笨拙");
+        add("prefix.confluence.ignorant", "无知");
+        add("prefix.confluence.deranged", "错乱");
+        add("prefix.confluence.intense", "威猛");
+        add("prefix.confluence.taboo", "禁忌");
+        add("prefix.confluence.celestial", "天界");
+        add("prefix.confluence.furious", "狂怒");
+        add("prefix.confluence.manic", "狂躁");
+        add("prefix.confluence.mythical", "神话");
+
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
@@ -719,6 +781,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.SHIELD_OD_CTHULHU.get(), "克苏鲁护盾");
         add(CurioItems.WORM_SCARF.get(), "蠕虫围巾");
         add(CurioItems.BRAIN_OF_CONFUSION.get(), "混乱之脑");
+        add(CurioItems.GOLD_RING.get(), "金戒指");
 
 
         //盔甲

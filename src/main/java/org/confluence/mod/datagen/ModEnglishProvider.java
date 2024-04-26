@@ -167,6 +167,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.mana_regeneration_band.tooltip", "Maximum mana is increased by 20");
         add("item.confluence.mana_regeneration_band.tooltip2", "Increases mana regeneration rate");
         add("item.confluence.natures_gift.tooltip", "6% reduced mana cost");
+        add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
@@ -185,9 +186,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
-        add("prefix.confluence.hasty", "Hasty");
         add("prefix.confluence.quick", "Quick");
+        add("prefix.confluence.hasty", "Hasty");
         add("prefix.confluence.deadly", "Deadly");
+
+
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
