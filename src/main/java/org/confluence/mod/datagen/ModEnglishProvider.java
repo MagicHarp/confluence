@@ -185,6 +185,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
+        add("prefix.confluence.hasty", "Hasty");
+        add("prefix.confluence.quick", "Quick");
+        add("prefix.confluence.deadly", "Deadly");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
