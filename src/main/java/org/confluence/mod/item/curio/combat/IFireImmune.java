@@ -9,7 +9,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface IFireImmune {
-    static boolean apply(LivingEntity living, DamageSource damageSource) {
+    static boolean isInvul(LivingEntity living, DamageSource damageSource) {
         if (damageSource.is(DamageTypes.IN_FIRE) ||
             damageSource.is(DamageTypes.ON_FIRE) ||
             damageSource.is(DamageTypes.HOT_FLOOR) ||

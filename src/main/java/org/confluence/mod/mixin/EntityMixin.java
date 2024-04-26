@@ -62,10 +62,11 @@ public abstract class EntityMixin implements IEntity {
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         if (((Entity) (Object) this) instanceof Player player) {
-            if (IHurtEvasion.apply(player) ||
+            if (IHurtEvasion.isInvul(player) ||
                 IFallResistance.isInvul(player, damageSource) ||
-                IFireImmune.apply(player, damageSource) ||
-                RoyalGel.isInvul(player, damageSource)
+                IFireImmune.isInvul(player, damageSource) ||
+                RoyalGel.isInvul(player, damageSource) ||
+                ShieldOfCthulhu.isInvul(player)
             ) {
                 cir.setReturnValue(true);
             }
@@ -78,7 +79,7 @@ public abstract class EntityMixin implements IEntity {
             if (bool && CuriosUtils.hasCurio(player, CurioItems.SHIELD_OD_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(player);
             }
-            this.c$cthulhuSprintingTime = bool ? 10 : 0;
+            this.c$cthulhuSprintingTime = bool ? 12 : 0;
         }
     }
 

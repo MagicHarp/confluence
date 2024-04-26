@@ -13,6 +13,7 @@ import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.IEntity;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
@@ -41,5 +42,10 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
         if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OD_CTHULHU.get())) return;
         float f = living.getYRot() * ((float) Math.PI / 180F);
         living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * 1.6F, 0.0D, Mth.cos(f) * 1.6F));
+    }
+
+    public static boolean isInvul(LivingEntity living) {
+        if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OD_CTHULHU.get())) return false;
+        return ((IEntity) living).c$isOnCthulhuSprinting();
     }
 }
