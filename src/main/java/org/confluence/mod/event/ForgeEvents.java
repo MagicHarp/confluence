@@ -37,6 +37,9 @@ import org.confluence.mod.effect.HarmfulEffect.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.expert.BrainOfConfusion;
+import org.confluence.mod.item.curio.expert.RoyalGel;
+import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
@@ -113,6 +116,8 @@ public final class ForgeEvents {
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
         amount = IFallResistance.apply(living, damageSource, amount);
+        amount = WormScarf.apply(living, amount);
+        amount = BrainOfConfusion.apply(living, random, damageSource, amount);
 
         amount *= (random.nextInt(80, 121) / 100.0F);
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
@@ -135,9 +140,12 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
+        LivingEntity self = event.getEntity();
         LivingEntity old = event.getOriginalTarget();
+        LivingEntity neo = event.getNewTarget();
+        if (RoyalGel.apply(self, neo)) event.setNewTarget(old);
+
         if (old != null) {
-            LivingEntity neo = event.getNewTarget();
             AtomicBoolean bothHas = new AtomicBoolean();
             old.getCapability(AbilityProvider.CAPABILITY).ifPresent(oldAbility ->
                 neo.getCapability(AbilityProvider.CAPABILITY).ifPresent(neoAbility -> {
@@ -150,7 +158,6 @@ public final class ForgeEvents {
             if (bothHas.get()) return;
         }
 
-        LivingEntity self = event.getEntity();
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
         self.level().players().stream()
             .filter(player -> player.distanceTo(self) < range)

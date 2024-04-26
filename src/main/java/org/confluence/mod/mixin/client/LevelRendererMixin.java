@@ -30,8 +30,8 @@ public abstract class LevelRendererMixin {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;getStarBrightness(F)F", shift = At.Shift.BEFORE),
         locals = LocalCapture.CAPTURE_FAILSOFT)
     private void drawSpecificMoon(PoseStack p_202424_, Matrix4f p_254034_, float p_202426_, Camera p_202427_, boolean p_202428_, Runnable p_202429_, CallbackInfo ci, FogType fogtype, Vec3 vec3, float f, float f1, float f2, BufferBuilder bufferbuilder, ShaderInstance shaderinstance, float[] afloat, float f11, Matrix4f matrix4f1) {
-        if (ClientPacketHandler.getSpecificMoon() == null) return;
-        RenderSystem.setShaderTexture(0, ClientPacketHandler.getSpecificMoon());
+        if (ClientPacketHandler.getMoonTexture() == null) return;
+        RenderSystem.setShaderTexture(0, ClientPacketHandler.getMoonTexture());
         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         bufferbuilder.vertex(matrix4f1, -c$size, -100.0F, c$size).uv(0.0F, 1.0F).endVertex();
         bufferbuilder.vertex(matrix4f1, c$size, -100.0F, c$size).uv(1.0F, 1.0F).endVertex();
@@ -42,7 +42,7 @@ public abstract class LevelRendererMixin {
 
     @ModifyArg(method = "renderSky", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/resources/ResourceLocation;)V", ordinal = 1), index = 1)
     private ResourceLocation noMoon(ResourceLocation path) {
-        if (ClientPacketHandler.getSpecificMoon() == null) return path;
+        if (ClientPacketHandler.getMoonTexture() == null) return path;
         return NO_MOON;
     }
 }

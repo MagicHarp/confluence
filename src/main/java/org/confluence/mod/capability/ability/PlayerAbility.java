@@ -2,11 +2,16 @@ package org.confluence.mod.capability.ability;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.*;
@@ -138,8 +143,29 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fishingPower += fishingPower;
     }
 
-    public float getFishingPower() {
-        return fishingPower;
+    public float getFishingPower(Player player) {
+        float base = fishingPower;
+        Level level = player.level();
+        long dayTime = level.dayTime() % 24000; // [0, 24000]
+        if (level.isRaining()) base *= 1.1F;
+        else if (level.isThundering()) base *= 1.2F;
+        if (dayTime >= 22500 || dayTime == 0) base *= 1.3F; // 04:30 -> 06:00
+        else if (dayTime >= 3000 && dayTime <= 9000) base *= 0.8F; // 09:00 -> 15:00
+        else if (dayTime >= 12000 && dayTime <= 13500) base *= 1.3F; // 18:00 -> 19:30
+        else if (dayTime >= 15300 && dayTime <= 20200) base *= 0.8F; // 21:18 -> 02:12
+        base *= switch (level.getMoonPhase()) {
+            case 0 -> 1.1F; // 满月
+            case 1, 7 -> 1.05F; // 凸月
+            case 5 -> 0.95F; // 眉月
+            case 4 -> 0.9F; // 新月
+            default -> 1.0F;
+        };
+        if (player.isLocalPlayer()) { // 血月
+            if (ClientPacketHandler.getMoonSpecific() == 11) base *= 1.1F;
+        } else if (ConfluenceData.get((ServerLevel) level).getMoonSpecific() == 11) {
+            base *= 1.1F;
+        }
+        return base;
     }
 
     public boolean increaseCrystals() {

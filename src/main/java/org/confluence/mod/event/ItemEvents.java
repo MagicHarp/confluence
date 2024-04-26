@@ -5,6 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -20,6 +21,7 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
 import org.confluence.mod.effect.HarmfulEffect.SilencedEffect;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.item.mana.StaffItem;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
@@ -30,7 +32,8 @@ public final class ItemEvents {
     public static void itemAttributeModifier(ItemAttributeModifierEvent event) {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
         ItemStack itemStack = event.getItemStack();
-        if (itemStack.getItem() instanceof BaseCurioItem) return;
+        Item item = itemStack.getItem();
+        if (item instanceof BaseCurioItem || item instanceof StaffItem) return;
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
             if (itemPrefix.attackDamage > 0.0) {
                 event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,

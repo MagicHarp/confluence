@@ -8,6 +8,10 @@ import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
+import org.confluence.mod.item.curio.expert.BrainOfConfusion;
+import org.confluence.mod.item.curio.expert.RoyalGel;
+import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
+import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
@@ -38,7 +42,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     DESTROYER_EMBLEM("destroyer_emblem", DestroyerEmblem::new), // 毁灭者勋章
     EYE_OF_THE_GOLEM("eye_of_the_golem", EyeOfTheGolem::new), // 石巨人之眼
     FAST_CLOCK("fast_clock", FastClock::new), // 快走时钟
-    FERAL_CLAWS("feral_claws", FeralClaws::new), // 狂爪手套 (WIP)
+    FERAL_CLAWS("feral_claws", FeralClaws::new), // 狂爪手套
     FIRE_GAUNTLET("fire_gauntlet", FireGauntlet::new), // 烈火手套
     FLESH_KNUCKLES("flesh_knuckles", FleshKnuckles::new), // 血肉指虎
     FROZEN_TURTLE_SHELL("frozen_turtle_shell", FrozenTurtleShell::new), // 冰冻海龟壳
@@ -264,7 +268,19 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* ** 时装 ** */
     /* ** 八音盒 ** */
     /* ** 高尔夫球 ** */
-    /* ** 专家模式独有 ** */;
+
+    ROYAL_GEL("royal_gel", RoyalGel::new), // 皇家凝胶
+    SHIELD_OD_CTHULHU("shiele_of_cthulhu", ShieldOfCthulhu::new), // 克苏鲁护盾
+    WORM_SCARF("worm_scarf", WormScarf::new), // 蠕虫围巾
+    BRAIN_OF_CONFUSION("brain_of_confusion", BrainOfConfusion::new), // 混乱之脑
+    /* 蜂巢背包 */
+    /* 骨头手套 */
+    /* 骸骨头盔 */
+    /* 挥发明胶 */
+    /* 孢子囊 */
+    /* 闪亮石 */
+    /* 翱翔徽章 */
+    ; /* 重力球 */
 
     private final RegistryObject<BaseCurioItem> value;
 

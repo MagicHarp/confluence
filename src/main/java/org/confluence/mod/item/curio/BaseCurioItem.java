@@ -80,4 +80,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence." + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).getPath() + ".tooltip"));
     }
+
+    @Override
+    public @NotNull Component getName(@NotNull ItemStack itemStack) {
+        if (this instanceof ModRarity.Special special) {
+            return special.withColor(getDescriptionId(itemStack));
+        }
+        return super.getName(itemStack);
+    }
 }

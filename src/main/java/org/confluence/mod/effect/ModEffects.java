@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.BeneficialEffect.*;
 import org.confluence.mod.effect.HarmfulEffect.*;
+import org.confluence.mod.effect.NeutralEffect.CerebralMindtrickEffect;
 import org.confluence.mod.effect.NeutralEffect.GravitationEffect;
 
 public final class ModEffects {
@@ -39,6 +40,7 @@ public final class ModEffects {
     public static final RegistryObject<WitheredArmorEffect> WITHERED_ARMOR = EFFECTS.register("withered_armor", WitheredArmorEffect::new);
     public static final RegistryObject<IchorEffect> ICHOR = EFFECTS.register("ichor", IchorEffect::new);
     public static final RegistryObject<PotionSicknessEffect> POTION_SICKNESS = EFFECTS.register("potion_sickness", PotionSicknessEffect::new);
+    public static final RegistryObject<CerebralMindtrickEffect> CEREBRAL_MINDTRICK = EFFECTS.register("cerebral_mindtrick", CerebralMindtrickEffect::new);
 
     public static void heal(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

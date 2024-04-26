@@ -19,6 +19,8 @@ public final class ModRarity {
     public static final Rarity RED = Rarity.create("red", style -> style.withColor(0xFF2864));
     public static final Rarity PURPLE = Rarity.create("purple", style -> style.withColor(0xB428FF));
 
+    public static final Rarity EXPERT = Rarity.create("expert", style -> style.withColor(0x000000));
+    public static final Rarity MASTER = Rarity.create("master", style -> style.withColor(0x000000));
     public static final Rarity QUEST = Rarity.create("quest", style -> style.withColor(0xFFAF00));
 
     public static class Animate {
@@ -103,13 +105,19 @@ public final class ModRarity {
         }
     }
 
-    public interface Expert {
+    public interface Special {
+        MutableComponent withColor(String descriptionId);
+    }
+
+    public interface Expert extends Special {
+        @Override
         default MutableComponent withColor(String descriptionId) {
             return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getExpertColor()));
         }
     }
 
-    public interface Master {
+    public interface Master extends Special {
+        @Override
         default MutableComponent withColor(String descriptionId) {
             return Component.translatable(descriptionId).withStyle(style -> style.withColor(Animate.getMasterColor()));
         }

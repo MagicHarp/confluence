@@ -4,4 +4,5 @@
 - EventHorizon
 - GeckoLib
 - Curios API
+- TerraBlender
 - Fusion (可选)
