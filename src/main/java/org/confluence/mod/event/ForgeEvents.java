@@ -12,8 +12,10 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -35,6 +37,7 @@ import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.ManaIssueEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -43,8 +46,10 @@ import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
+import org.confluence.mod.util.ModUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -118,15 +123,16 @@ public final class ForgeEvents {
         amount = WormScarf.apply(living, amount);
         amount = BrainOfConfusion.apply(living, random, damageSource, amount);
 
-        amount *= (random.nextInt(80, 121) / 100.0F);
+        amount *= ModUtils.nextFloat(random, 0.8F, 1.2F);
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
         event.setAmount(amount);
     }
 
     @SubscribeEvent
     public static void livingDeath(LivingDeathEvent event) {
+        LivingEntity living = event.getEntity();
         if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
-            EntityType<?> entityType = event.getEntity().getType();
+            EntityType<?> entityType = living.getType();
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new EntityKilledPacketS2C(
@@ -134,6 +140,36 @@ public final class ForgeEvents {
                     ForgeRegistries.ENTITY_TYPES.getKey(entityType)
                 )
             );
+        }
+
+        if (ModConfigs.dropsMoney) {
+            Level level = living.level();
+            AttributeInstance attack = living.getAttribute(Attributes.ATTACK_DAMAGE);
+            AttributeInstance armor = living.getAttribute(Attributes.ARMOR);
+            double healthFactor = living.getMaxHealth() * 0.05;
+            double attackFactor = attack == null ? 0.0 : attack.getBaseValue() * 0.25;
+            double armorFactor = armor == null ? 0.45 : (armor.getBaseValue() + 1.0) * 0.45;
+            double difficultyFactor = switch (level.getDifficulty()) {
+                case PEACEFUL -> 0.0;
+                case EASY -> 0.75;
+                case NORMAL -> 1.0;
+                case HARD -> 1.5;
+            };
+            int amount = (int) Math.min(Math.round((healthFactor + attackFactor + armorFactor) * difficultyFactor), 7290L);
+            int copper_count = amount % 9;
+            int i = ((amount - copper_count) / 9);
+            int silver_count = i % 9;
+            int j = ((i - silver_count) / 9);
+            int golden_count = j % 9;
+            int k = (j - golden_count) / 9;
+            int platinum_count = k % 9;
+            double x = living.getX();
+            double y = living.getEyeY() - 0.3;
+            double z = living.getZ();
+            ModUtils.createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level);
+            ModUtils.createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level);
+            ModUtils.createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level);
+            ModUtils.createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level);
         }
     }
 

@@ -12,6 +12,7 @@ import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.ModUtils;
 
 public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert {
     public BrainOfConfusion() {
@@ -31,8 +32,8 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
             else if (amount <= 46.6F) rangeMax = amount * 1.5F + 350;
             else if (amount <= 100) rangeMax = amount * 0.75F + 525;
             else rangeMax = amount * 0.1875F + 806.25F;
-            float range = randomSource.nextInt((int) (rangeMin * 100), (int) (rangeMax * 100)) / 2400.0F;
-            int duration = randomSource.nextInt((int) ((90 + amount / 3) / 60), (int) ((300 + amount / 2) / 60));
+            float range = ModUtils.nextFloat(randomSource, rangeMin, rangeMax) / 24;
+            int duration = randomSource.nextInt((int) ((90 + amount / 3) / 50), (int) ((300 + amount / 2) / 50));
             living.level().getEntitiesOfClass(Monster.class, new AABB(living.getOnPos()).inflate(range))
                 .forEach(monster -> monster.addEffect(new MobEffectInstance(ModEffects.CONFUSED.get(), duration)));
         }
