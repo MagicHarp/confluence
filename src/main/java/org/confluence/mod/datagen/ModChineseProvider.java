@@ -576,7 +576,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Gels.PINK_GEL.get(), "粉色粘液球");
         add(Gels.FROZEN_GEL.get(), "冰冻粘液球");
         add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
-
+        //杂项
         add(ICE_MIRROR.get(), "冰雪镜");
         add(CLAM.get(), "牡蛎");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
@@ -590,6 +590,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(MAGIC_MIRROR.get(), "魔镜");
         add(ROPE.get(), "绳子");
         add(ROPE_COIL.get(), "绳圈");
+        add(COPPER_COIN.get(), "铜币");
+        add(SILVER_COIN.get(), "银币");
+        add(GOLDEN_COIN.get(), "金币");
+        add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");

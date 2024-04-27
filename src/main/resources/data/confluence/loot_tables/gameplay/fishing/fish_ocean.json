@@ -16,17 +16,17 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:trout",
+          "name": "confluence:trout",
           "weight": 20
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:shrimp",
+          "name": "confluence:shrimp",
           "weight": 20
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:red_snapper",
+          "name": "confluence:red_snapper",
           "weight": 20
         },
         {

@@ -16,7 +16,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:mottled_oilfish",
+          "name": "confluence:mottled_oilfish",
           "weight": 25
         },
         {

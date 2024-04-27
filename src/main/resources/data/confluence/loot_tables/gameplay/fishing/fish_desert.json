@@ -16,7 +16,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:rock_lobster",
+          "name": "confluence:rock_lobster",
           "weight": 35
         }
       ],

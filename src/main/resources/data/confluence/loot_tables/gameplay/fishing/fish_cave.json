@@ -16,7 +16,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:mirror_fish",
+          "name": "confluence:mirror_fish",
           "weight": 35
         }
       ],
