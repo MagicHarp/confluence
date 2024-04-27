@@ -39,6 +39,7 @@ public interface IAutoAttack {
             if (entityhitresult != null && minecraft.gameMode != null) {
                 minecraft.gameMode.attack(localPlayer, entityhitresult.getEntity());
             }
+            localPlayer.resetAttackStrengthTicker();
             localPlayer.swing(InteractionHand.MAIN_HAND);
         }
     }

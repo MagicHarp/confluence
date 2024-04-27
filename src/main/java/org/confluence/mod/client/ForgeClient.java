@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +20,8 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
+import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.ModRarity;
@@ -34,7 +37,12 @@ public final class ForgeClient {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
         if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
-        PlayerJumpHandler.handle(localPlayer);
+        if (localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
+            GravitationEffect.handle(localPlayer);
+        } else {
+            GravitationEffect.expire();
+            PlayerJumpHandler.handle(localPlayer);
+        }
         InformationHandler.update(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
 
@@ -57,7 +65,7 @@ public final class ForgeClient {
     }
 
     @SubscribeEvent
-    public static void click(InputEvent.InteractionKeyMappingTriggered event) {
+    public static void leftClick(InputEvent.InteractionKeyMappingTriggered event) {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
         GunShootingHandler.handle(event, localPlayer);
@@ -73,5 +81,12 @@ public final class ForgeClient {
 
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
         });
+    }
+
+    @SubscribeEvent
+    public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
+        LocalPlayer localPlayer = Minecraft.getInstance().player;
+        if (localPlayer == null) return;
+        GravitationEffect.zRot(event::setRoll);
     }
 }

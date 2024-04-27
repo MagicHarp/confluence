@@ -1,6 +1,7 @@
 package org.confluence.mod.mixin;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -13,6 +14,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
@@ -123,6 +125,9 @@ public abstract class LivingEntityMixin {
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
         if (self.hasEffect(ModEffects.STONED.get())) return Vec3.ZERO;
+        if (self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
+            return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
+        }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
     }
 

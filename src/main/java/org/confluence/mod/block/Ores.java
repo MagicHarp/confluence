@@ -6,9 +6,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.cloaked.StepRevealingBlock;
 import org.confluence.mod.block.common.BaseBlock;
 import org.confluence.mod.block.common.MeteoriteOre;
+import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;

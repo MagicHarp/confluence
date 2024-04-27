@@ -12,14 +12,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
-import org.confluence.mod.block.cloaked.StepRevealingBlock;
+import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import org.confluence.mod.worldgen.biome.TestRegion1;
 import org.confluence.mod.worldgen.biome.TestRegion2;
 import org.confluence.mod.worldgen.biome.TestRegion3;
-import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 

@@ -19,6 +19,7 @@
         "client.BlockModelShaperMixin",
         "client.GuiMixin",
         "client.LevelRendererMixin",
-        "client.LocalPlayerMixin"
+        "client.LocalPlayerMixin",
+        "client.MouseHandlerMixin"
     ]
 }

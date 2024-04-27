@@ -1,4 +1,4 @@
-package org.confluence.mod.block.cloaked;
+package org.confluence.mod.block.reveal;
 
 import com.google.gson.JsonObject;
 import de.dafuqs.revelationary.RevelationRegistry;

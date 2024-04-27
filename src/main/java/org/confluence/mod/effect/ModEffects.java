@@ -9,7 +9,6 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.beneficial.*;
 import org.confluence.mod.effect.harmful.*;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
-import org.confluence.mod.effect.neutral.GravitationEffect;
 
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
