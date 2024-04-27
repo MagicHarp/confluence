@@ -46,7 +46,6 @@ import org.confluence.mod.item.mana.IManaWeapon;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -141,21 +140,10 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
-        LivingEntity old = event.getOriginalTarget();
-        LivingEntity neo = event.getNewTarget();
-        if (RoyalGel.apply(self, neo)) event.setNewTarget(old);
-
-        if (old != null) {
-            AtomicBoolean bothHas = new AtomicBoolean();
-            old.getCapability(AbilityProvider.CAPABILITY).ifPresent(oldAbility ->
-                neo.getCapability(AbilityProvider.CAPABILITY).ifPresent(neoAbility -> {
-                    bothHas.set(true);
-                    if (oldAbility.getAggro() > neoAbility.getAggro()) {
-                        event.setNewTarget(old);
-                    }
-                })
-            );
-            if (bothHas.get()) return;
+        LivingEntity original = event.getOriginalTarget();
+        if (RoyalGel.apply(self, original)) {
+            event.setNewTarget(null);
+            return;
         }
 
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);

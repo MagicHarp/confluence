@@ -30,11 +30,10 @@ public class ClamItem extends Item {
                 .ifPresent(playerAbility -> fishingPower.set(playerAbility.getFishingPower(player)));
             LootParams lootparams = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.ORIGIN, player.position())
-                .withParameter(LootContextParams.TOOL, itemStack)
                 .withParameter(LootContextParams.THIS_ENTITY, player)
                 .withLuck(player.getLuck() + fishingPower.floatValue())
-                .create(LootContextParamSets.FISHING);
-            LootTable loottable = serverLevel.getServer().getLootData().getLootTable(ModLootTables.FISH_CLAM);
+                .create(LootContextParamSets.GIFT);
+            LootTable loottable = serverLevel.getServer().getLootData().getLootTable(ModLootTables.CLAM);
             for (ItemStack loot : loottable.getRandomItems(lootparams)) {
                 if (!player.addItem(loot)) {
                     player.drop(loot, false, false);
@@ -42,6 +41,6 @@ public class ClamItem extends Item {
             }
             itemStack.shrink(1);
         }
-        return InteractionResultHolder.consume(itemStack);
+        return InteractionResultHolder.success(itemStack);
     }
 }

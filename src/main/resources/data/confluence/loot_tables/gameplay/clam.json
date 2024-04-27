@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:fishing",
+  "type": "minecraft:gift",
   "pools": [
     {
       "bonus_rolls": 0.0,
@@ -24,7 +24,7 @@
           "weight": 175
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "bonus_rolls": 0.0,
@@ -35,7 +35,7 @@
           "weight": 1
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "minecraft:gameplay/fishing/fish"

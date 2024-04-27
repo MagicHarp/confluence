@@ -37,5 +37,6 @@ public class AnkhShield extends AnkhCharm implements IFireImmune {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
+        list.add(Component.translatable("item.confluence.ankh_shield.tooltip"));
     }
 }
