@@ -16,7 +16,6 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.misc.ModLootTables;
 import org.jetbrains.annotations.NotNull;
 
-//未完成
 public class ClamItem extends Item {
     public ClamItem() {
         super(new Properties());

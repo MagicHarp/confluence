@@ -78,8 +78,10 @@ public abstract class EntityMixin implements IEntity {
         if (((Entity) (Object) this) instanceof Player player) {
             if (bool && CuriosUtils.hasCurio(player, CurioItems.SHIELD_OD_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(player);
+                this.c$cthulhuSprintingTime = 12;
+            } else {
+                this.c$cthulhuSprintingTime = 0;
             }
-            this.c$cthulhuSprintingTime = bool ? 12 : 0;
         }
     }
 
