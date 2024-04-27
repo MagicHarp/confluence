@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeMod;
+import org.confluence.mod.effect.ModEffects;
 
 import java.util.UUID;
 
@@ -21,15 +22,15 @@ public class BuilderEffect extends MobEffect {  //建筑工 增加触及距离
         super(MobEffectCategory.BENEFICIAL, 0x8B6914);
     }
 
-    public static void onAdd(Attribute attribute, AttributeMap attributeMap) {
-        if (attribute == ForgeMod.BLOCK_REACH.get()) {
+    public static void onAdd(MobEffect mobEffect, AttributeMap attributeMap) {
+        if (mobEffect == ModEffects.BUILDER.get()) {
             attributeMap.addTransientAttributeModifiers(BUILDER);
         }
     }
 
-    public static void onRemove(Attribute attribute, AttributeMap attributeMap) {
-        if (attribute == ForgeMod.BLOCK_REACH.get()) {
-            AttributeInstance attributeInstance = attributeMap.getInstance(attribute);
+    public static void onRemove(MobEffect mobEffect, AttributeMap attributeMap) {
+        if (mobEffect == ModEffects.BUILDER.get()) {
+            AttributeInstance attributeInstance = attributeMap.getInstance(ForgeMod.BLOCK_REACH.get());
             if (attributeInstance != null) {
                 attributeInstance.removeModifier(BUILDER_UUID);
             }

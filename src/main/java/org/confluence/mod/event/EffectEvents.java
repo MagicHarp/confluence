@@ -32,6 +32,7 @@ public final class EffectEvents {
         LivingEntity living = event.getEntity();
         AttributeMap attributeMap = living.getAttributes();
 
+        BuilderEffect.onAdd(mobEffect, attributeMap);
         IronSkinEffect.onAdd(mobEffect, attributeMap);
         FishingEffect.onAdd(living);
         EnduranceEffect.onAdd(mobEffect, attributeMap);
@@ -40,6 +41,7 @@ public final class EffectEvents {
         WrathEffect.onAdd(mobEffect, attributeMap);
         IchorEffect.onAdd(mobEffect, attributeMap);
         WitheredArmorEffect.onAdd(mobEffect, attributeMap);
+
     }
 
     @SubscribeEvent
@@ -50,6 +52,7 @@ public final class EffectEvents {
         LivingEntity living = event.getEntity();
         AttributeMap attributeMap = living.getAttributes();
 
+        BuilderEffect.onRemove(mobEffect, attributeMap);
         IronSkinEffect.onRemove(mobEffect, attributeMap);
         EnduranceEffect.onRemove(mobEffect, attributeMap);
         ExquisitelyStuffedEffect.onRemove(living, mobEffect, attributeMap);
@@ -67,6 +70,7 @@ public final class EffectEvents {
         LivingEntity living = event.getEntity();
         AttributeMap attributeMap = living.getAttributes();
 
+        BuilderEffect.onRemove(mobEffect, attributeMap);
         IronSkinEffect.onRemove(mobEffect, attributeMap);
         FishingEffect.onRemove(living);
         EnduranceEffect.onRemove(mobEffect, attributeMap);
