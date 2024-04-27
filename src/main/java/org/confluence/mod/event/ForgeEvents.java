@@ -147,10 +147,10 @@ public final class ForgeEvents {
                 AttributeInstance attack = living.getAttribute(Attributes.ATTACK_DAMAGE);
                 AttributeInstance armor = living.getAttribute(Attributes.ARMOR);
                 double healthFactor = living.getMaxHealth() * 0.05;
-                double attackFactor = attack == null ? 0.0 : attack.getBaseValue() * 0.25;
-                double armorFactor = armor == null ? 0.45 : (armor.getBaseValue() + 1.0) * 0.45;
+                double attackFactor = attack == null ? 0.0 : attack.getValue() * 0.25;
+                double armorFactor = armor == null ? 0.45 : (armor.getValue() + 1.0) * 0.45;
                 double difficultyFactor = switch (level.getDifficulty()) {
-                    case PEACEFUL -> 0.0;
+                    case PEACEFUL -> 0.5;
                     case EASY -> 0.75;
                     case NORMAL -> 1.0;
                     case HARD -> 1.5;
