@@ -13,6 +13,7 @@ import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
@@ -114,6 +115,16 @@ public abstract class LivingEntityMixin {
         CuriosUtils.findCurio(c$getSelf(), IArmorPass.class)
             .ifPresent(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
         return atomic.floatValue();
+    }
+
+    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;<init>(DDD)V"), index = 0)
+    private double confusedX(double xxa) {
+        return xxa * (c$getSelf().hasEffect(ModEffects.CONFUSED.get()) ? -1.0F : 1.0F);
+    }
+
+    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;<init>(DDD)V"), index = 2)
+    private double confusedZ(double zza) {
+        return zza * (c$getSelf().hasEffect(ModEffects.CONFUSED.get()) ? -1.0F : 1.0F);
     }
 
     @Unique
