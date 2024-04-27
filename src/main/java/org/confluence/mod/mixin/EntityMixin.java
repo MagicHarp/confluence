@@ -5,6 +5,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -43,9 +44,9 @@ public abstract class EntityMixin implements IEntity {
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
-        if (((Entity) (Object) this) instanceof Player player) {
-            if (player.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
-            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+        if (((Entity) (Object) this) instanceof LivingEntity living) {
+            if (living.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
+            living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
                     if (playerAbility.decreaseLavaImmuneTicks()) {
                         inLava.set(false);
@@ -61,12 +62,12 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
-        if (((Entity) (Object) this) instanceof Player player) {
-            if (IHurtEvasion.isInvul(player) ||
-                IFallResistance.isInvul(player, damageSource) ||
-                IFireImmune.isInvul(player, damageSource) ||
-                RoyalGel.isInvul(player, damageSource) ||
-                ShieldOfCthulhu.isInvul(player)
+        if (((Entity) (Object) this) instanceof LivingEntity living) {
+            if (IHurtEvasion.isInvul(living) ||
+                IFallResistance.isInvul(living, damageSource) ||
+                IFireImmune.isInvul(living, damageSource) ||
+                RoyalGel.isInvul(living, damageSource) ||
+                ShieldOfCthulhu.isInvul(living)
             ) {
                 cir.setReturnValue(true);
             }
@@ -75,9 +76,9 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
-        if (((Entity) (Object) this) instanceof Player player) {
-            if (bool && CuriosUtils.hasCurio(player, CurioItems.SHIELD_OD_CTHULHU.get())) {
-                ShieldOfCthulhu.apply(player);
+        if (((Entity) (Object) this) instanceof LivingEntity living) {
+            if (bool && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OD_CTHULHU.get())) {
+                ShieldOfCthulhu.apply(living);
                 this.c$cthulhuSprintingTime = 12;
             } else {
                 this.c$cthulhuSprintingTime = 0;

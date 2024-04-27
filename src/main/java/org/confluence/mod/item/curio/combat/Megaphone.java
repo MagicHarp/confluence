@@ -3,8 +3,8 @@ package org.confluence.mod.item.curio.combat;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 
-public class Bezoar extends BaseCurioItem implements EffectInvul.Poison {
-    public Bezoar() {
+public class Megaphone extends BaseCurioItem implements EffectInvul.Silenced {
+    public Megaphone() {
         super(ModRarity.LIGHT_RED);
     }
 }

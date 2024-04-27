@@ -9,10 +9,10 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.effect.BeneficialEffect.*;
-import org.confluence.mod.effect.HarmfulEffect.IchorEffect;
-import org.confluence.mod.effect.HarmfulEffect.WitheredArmorEffect;
-import org.confluence.mod.item.curio.combat.EffectInvulnerable;
+import org.confluence.mod.effect.beneficial.*;
+import org.confluence.mod.effect.harmful.IchorEffect;
+import org.confluence.mod.effect.harmful.WitheredArmorEffect;
+import org.confluence.mod.item.curio.combat.EffectInvul;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class EffectEvents {
@@ -21,7 +21,7 @@ public final class EffectEvents {
         MobEffect mobEffect = event.getEffectInstance().getEffect();
         LivingEntity living = event.getEntity();
 
-        if (EffectInvulnerable.apply(mobEffect, living)) {
+        if (EffectInvul.isInvul(mobEffect, living)) {
             event.setResult(Event.Result.DENY);
         }
     }

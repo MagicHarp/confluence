@@ -5,6 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
@@ -18,8 +19,9 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
-import org.confluence.mod.effect.HarmfulEffect.SilencedEffect;
+import org.confluence.mod.effect.harmful.CursedEffect;
+import org.confluence.mod.effect.harmful.SilencedEffect;
+import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.mana.StaffItem;
 import org.confluence.mod.misc.ModTags;
@@ -56,8 +58,10 @@ public final class ItemEvents {
 
     @SubscribeEvent
     public static void rightClickItem(PlayerInteractEvent.RightClickItem event) {
-        SilencedEffect.apply(event.getEntity(), event);
-        CursedEffect.onRightClick(event.getEntity(), event);
+        Player player = event.getEntity();
+        SilencedEffect.onRightClick(player, event);
+        CursedEffect.onRightClick(player, event::setCanceled);
+        StonedEffect.onRightClick(player, event::setCanceled);
     }
 
     @SubscribeEvent

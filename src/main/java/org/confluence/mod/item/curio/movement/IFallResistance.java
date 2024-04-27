@@ -5,6 +5,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.effect.ModEffects;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +14,7 @@ public interface IFallResistance {
     int getFallResistance();
 
     static float apply(LivingEntity living, DamageSource damageSource, float amount) {
-        if (!damageSource.is(DamageTypes.FALL)) return amount;
+        if (!damageSource.is(DamageTypes.FALL) || living.hasEffect(ModEffects.STONED.get())) return amount;
         AtomicInteger atomic = new AtomicInteger();
         living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance()));
@@ -23,7 +24,7 @@ public interface IFallResistance {
     }
 
     static boolean isInvul(LivingEntity living, DamageSource damageSource) {
-        if (!damageSource.is(DamageTypes.FALL)) return false;
+        if (!damageSource.is(DamageTypes.FALL) || living.hasEffect(ModEffects.STONED.get())) return false;
         AtomicBoolean atomic = new AtomicBoolean();
         living.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance() < 0));

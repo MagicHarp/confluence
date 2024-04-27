@@ -19,7 +19,8 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
-import org.confluence.mod.effect.HarmfulEffect.CursedEffect;
+import org.confluence.mod.effect.harmful.CursedEffect;
+import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 
@@ -61,6 +62,7 @@ public final class ForgeClient {
         if (localPlayer == null) return;
         GunShootingHandler.handle(event, localPlayer);
         CursedEffect.onLeftClick(localPlayer, event);
+        StonedEffect.onLeftClick(localPlayer, event);
     }
 
     @SubscribeEvent

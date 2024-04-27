@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
@@ -55,7 +54,8 @@ public abstract class LivingEntityMixin {
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
     private void thinIceBlock(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
-        if (self.fallDistance > 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
+        if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
+        if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
         }
@@ -63,10 +63,8 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
     private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
-        if (c$getSelf() instanceof Player player) {
-            CuriosUtils.findCurio(player, IFluidWalk.class)
-                .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
-        }
+        CuriosUtils.findCurio(c$getSelf(), IFluidWalk.class)
+            .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
     }
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canStandOnFluid(Lnet/minecraft/world/level/material/FluidState;)Z"))
@@ -92,7 +90,7 @@ public abstract class LivingEntityMixin {
     @Unique
     private Vec3 c$getWalkVec(Vec3 par1) {
         LivingEntity self = c$getSelf();
-        if (!(self instanceof Player) || self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
+        if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
         if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
             AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
             if (instance == null) return par1;
@@ -104,27 +102,28 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
     private void speed(float friction, CallbackInfoReturnable<Float> cir) {
-        if (c$getSelf() instanceof Player player && CuriosUtils.hasCurio(player, CurioItems.MAGILUMINESCENCE.get())) {
+        if (CuriosUtils.hasCurio(c$getSelf(), CurioItems.MAGILUMINESCENCE.get())) {
             cir.setReturnValue(cir.getReturnValue() * 1.75F);
         }
     }
 
     @ModifyArg(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"), index = 1)
     private float passArmor(float armor) {
+        LivingEntity self = c$getSelf();
         AtomicDouble atomic = new AtomicDouble(armor);
-        CuriosUtils.findCurio(c$getSelf(), IArmorPass.class)
+        CuriosUtils.findCurio(self, IArmorPass.class)
             .ifPresent(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
+        if (self.hasEffect(ModEffects.BROKEN_ARMOR.get())) {
+            atomic.set(atomic.get() / 2.0);
+        }
         return atomic.floatValue();
     }
 
-    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;<init>(DDD)V"), index = 0)
-    private double confusedX(double xxa) {
-        return xxa * (c$getSelf().hasEffect(ModEffects.CONFUSED.get()) ? -1.0F : 1.0F);
-    }
-
-    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;<init>(DDD)V"), index = 2)
-    private double confusedZ(double zza) {
-        return zza * (c$getSelf().hasEffect(ModEffects.CONFUSED.get()) ? -1.0F : 1.0F);
+    @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
+    private Vec3 confused(Vec3 vec3) {
+        LivingEntity self = c$getSelf();
+        if (self.hasEffect(ModEffects.STONED.get())) return Vec3.ZERO;
+        return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
     }
 
     @Unique
