@@ -146,7 +146,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
         add("item.confluence.worm_scarf.tooltip", "所受伤害减少17%");
-        add("item.confluence.shiele_of_cthulhu.tooltip", "允许冲刺，双击w以进行冲刺");
+        add("item.confluence.shield_of_cthulhu.tooltip", "允许冲刺，疾跑以冲刺");
         add("item.confluence.brain_of_confusion.tooltip", "有几率制造幻觉并躲避攻击");
         add("item.confluence.brain_of_confusion.tooltip2", "闪避后暂时增加暴击几率");
         add("item.confluence.brain_of_confusion.tooltip3", "被击中后可能会迷惑附近的敌人");
@@ -778,7 +778,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.NATURES_GIFT.get(), "大自然的恩赐");
         add(CurioItems.PHILOSOPHERS_STONE.get(), "点金石");
         add(CurioItems.ROYAL_GEL.get(), "皇家凝胶");
-        add(CurioItems.SHIELD_OD_CTHULHU.get(), "克苏鲁护盾");
+        add(CurioItems.SHIELD_OF_CTHULHU.get(), "克苏鲁护盾");
         add(CurioItems.WORM_SCARF.get(), "蠕虫围巾");
         add(CurioItems.BRAIN_OF_CONFUSION.get(), "混乱之脑");
         add(CurioItems.GOLD_RING.get(), "金戒指");

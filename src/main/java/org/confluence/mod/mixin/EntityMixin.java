@@ -77,7 +77,7 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
         if (((Entity) (Object) this) instanceof LivingEntity living) {
-            if (bool && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OD_CTHULHU.get())) {
+            if (bool && c$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(living);
                 this.c$cthulhuSprintingTime = 12;
             } else {

@@ -18,6 +18,7 @@
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
         "client.GuiMixin",
-        "client.LevelRendererMixin"
+        "client.LevelRendererMixin",
+        "client.LocalPlayerMixin"
     ]
 }

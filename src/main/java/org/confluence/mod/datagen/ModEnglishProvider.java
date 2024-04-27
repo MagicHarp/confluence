@@ -140,7 +140,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.terraspark_boots.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.fledgling_wings.tooltip", "Allows flight and slow fall");
         add("item.confluence.worm_scarf.tooltip", "Reduces damage taken by 17%");
-        add("item.confluence.shiele_of_cthulhu.tooltip", "Allows the player to dash into the enemy,Double tap a direction");
+        add("item.confluence.shield_of_cthulhu.tooltip", "Allows the player to dash into the enemy, sprinting to dsh");
         add("item.confluence.brain_of_confusion.tooltip", "Has a chance to create illusions and dodge an attack");
         add("item.confluence.brain_of_confusion.tooltip2", "Temporarily increase critical chance after dodge");
         add("item.confluence.brain_of_confusion.tooltip3", "May confuse nearby enemies after being struck");

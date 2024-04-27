@@ -272,7 +272,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* ** 高尔夫球 ** */
 
     ROYAL_GEL("royal_gel", RoyalGel::new), // 皇家凝胶
-    SHIELD_OD_CTHULHU("shiele_of_cthulhu", ShieldOfCthulhu::new), // 克苏鲁护盾
+    SHIELD_OF_CTHULHU("shield_of_cthulhu", ShieldOfCthulhu::new), // 克苏鲁护盾
     WORM_SCARF("worm_scarf", WormScarf::new), // 蠕虫围巾
     BRAIN_OF_CONFUSION("brain_of_confusion", BrainOfConfusion::new), // 混乱之脑
     /* 蜂巢背包 */
