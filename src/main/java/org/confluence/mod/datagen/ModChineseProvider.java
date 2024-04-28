@@ -786,6 +786,20 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.WORM_SCARF.get(), "蠕虫围巾");
         add(CurioItems.BRAIN_OF_CONFUSION.get(), "混乱之脑");
         add(CurioItems.GOLD_RING.get(), "金戒指");
+        add(CurioItems.ADHESIVE_BANDAGE.get(), "粘性绷带");
+        add(CurioItems.MEDICATED_BANDAGE.get(), "药用绷带");
+        add(CurioItems.POCKET_MIRROR.get(), "袖珍镜");
+        add(CurioItems.REFLECTIVE_SHADES.get(), "反光墨镜");
+        add(CurioItems.VITAMINS.get(), "维生素");
+        add(CurioItems.ARMOR_POLISH.get(), "盔甲抛光剂");
+        add(CurioItems.ARMOR_BRACING.get(), "盔甲背带");
+        add(CurioItems.TRIFOLD_MAP.get(), "三折地图");
+        add(CurioItems.THE_PLAN.get(), "计划书");
+        add(CurioItems.MEGAPHONE.get(), "扩音器");
+        add(CurioItems.NAZAR.get(), "邪眼");
+        add(CurioItems.COUNTERCURSE_MANTRA.get(), "反诅咒咒语");
+        add(CurioItems.ANKH_CHARM.get(), "十字章护身符");
+        add(CurioItems.ANKH_SHIELD.get(), "十字章护盾");
 
 
         //盔甲
