@@ -39,9 +39,9 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
     }
 
     public static void apply(LivingEntity living) {
-        if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) return;
-        float f = living.getYRot() * ((float) Math.PI / 180F);
-        living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * 1.6F, 0.0D, Mth.cos(f) * 1.6F));
+        float f = living.getYRot() * (Mth.PI / 180F);
+        float factor = living.onGround() ? 1.6F : 1.2F;
+        living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * factor, 0.0D, Mth.cos(f) * factor));
     }
 
     public static boolean isInvul(LivingEntity living) {

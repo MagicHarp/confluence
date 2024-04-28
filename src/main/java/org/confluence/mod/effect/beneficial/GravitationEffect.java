@@ -11,7 +11,6 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
 
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class GravitationEffect extends MobEffect {
     public static final UUID GRAVITY_UUID = UUID.fromString("30AE55C6-016B-09A2-74B8-96C68C22AFE1");
@@ -25,8 +24,8 @@ public class GravitationEffect extends MobEffect {
         super(MobEffectCategory.BENEFICIAL, 0xAA00AA);
     }
 
-    public static void handle(LocalPlayer localPlayer) {
-        if (localPlayer.input.jumping) {
+    public static void handle(LocalPlayer localPlayer, boolean jumping) {
+        if (jumping) {
             if (!keyDown) {
                 shouldRot = !shouldRot;
                 localPlayer.resetFallDistance();
@@ -38,13 +37,15 @@ public class GravitationEffect extends MobEffect {
         }
     }
 
-    public static void zRot(Consumer<Float> consumer) {
-        if (shouldRot) consumer.accept(180.0F);
+    public static void expire() {
+        if (shouldRot) {
+            shouldRot = false;
+            NetworkHandler.CHANNEL.sendToServer(new GravitationPacketC2S(false));
+        }
     }
 
-    public static void expire() {
+    public static void reset() {
         shouldRot = false;
-        NetworkHandler.CHANNEL.sendToServer(new GravitationPacketC2S(false));
     }
 
     public static boolean isShouldRot() {

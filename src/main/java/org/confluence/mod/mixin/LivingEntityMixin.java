@@ -18,6 +18,8 @@ import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -56,6 +58,10 @@ public abstract class LivingEntityMixin {
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
     private void thinIceBlock(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
+        if (motionY > 0.0 && self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
+            self.fallDistance += motionY;
+            NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
+        }
         if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
         if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
@@ -125,7 +131,7 @@ public abstract class LivingEntityMixin {
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
         if (self.hasEffect(ModEffects.STONED.get())) return Vec3.ZERO;
-        if (self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
+        if (self.level().isClientSide && GravitationEffect.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;

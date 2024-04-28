@@ -9,6 +9,7 @@ import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -36,18 +37,28 @@ public final class ForgeClient {
     public static void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
-        if (localPlayer == null || event.phase == TickEvent.Phase.START) return;
-        if (localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
-            GravitationEffect.handle(localPlayer);
-        } else {
-            GravitationEffect.expire();
-            PlayerJumpHandler.handle(localPlayer);
+        if (event.phase == TickEvent.Phase.START) return;
+        if (localPlayer == null) {
+            GravitationEffect.reset();
+            return;
         }
         InformationHandler.update(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
 
         ModRarity.Animate.doUpdateExpertColor();
         ModRarity.Animate.doUpdateMasterColor();
+    }
+
+    @SubscribeEvent
+    public static void movementInputUpdate(MovementInputUpdateEvent event) {
+        LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
+        boolean jumping = event.getInput().jumping;
+        if (localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
+            GravitationEffect.handle(localPlayer, jumping);
+        } else {
+            GravitationEffect.expire();
+            PlayerJumpHandler.handle(localPlayer, jumping);
+        }
     }
 
     @SubscribeEvent
@@ -85,8 +96,8 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
-        LocalPlayer localPlayer = Minecraft.getInstance().player;
-        if (localPlayer == null) return;
-        GravitationEffect.zRot(event::setRoll);
+        if (GravitationEffect.isShouldRot()) {
+            event.setRoll(180.0F);
+        }
     }
 }

@@ -45,7 +45,7 @@ public final class PlayerJumpHandler {
 
     public static boolean onFly = false;
 
-    public static void handle(LocalPlayer localPlayer) {
+    public static void handle(LocalPlayer localPlayer, boolean jumping) {
         if (localPlayer.onGround()) {
             jumpKeyDown = true;
             fartFinished = false;
@@ -56,7 +56,7 @@ public final class PlayerJumpHandler {
             tsunamiFinished = false;
             cloudFinished = false;
             remainFlyTicks = maxFlyTicks;
-        } else if (localPlayer.input.jumping) {
+        } else if (jumping) {
             if (couldGlide) {
                 if (remainFlyTicks-- > 0) {
                     onFly = true;

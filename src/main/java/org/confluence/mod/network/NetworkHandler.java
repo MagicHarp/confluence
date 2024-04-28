@@ -7,10 +7,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
-import org.confluence.mod.network.c2s.GravitationPacketC2S;
-import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
-import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
-import org.confluence.mod.network.c2s.WingsGlidePacketC2S;
+import org.confluence.mod.network.c2s.*;
 import org.confluence.mod.network.s2c.*;
 
 public final class NetworkHandler {
@@ -41,5 +38,6 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, WingsGlidePacketC2S.class, WingsGlidePacketC2S::encode, WingsGlidePacketC2S::decode, WingsGlidePacketC2S::handle);
         CHANNEL.registerMessage(packetId++, GravitationPacketC2S.class, GravitationPacketC2S::encode, GravitationPacketC2S::decode, GravitationPacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
     }
 }
