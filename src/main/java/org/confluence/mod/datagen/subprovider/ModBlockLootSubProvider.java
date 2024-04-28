@@ -110,6 +110,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(CORRUPT_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(HALLOW_GRASS_BLOCK.get(), Items.DIRT);
+        dropSelf(EBONY_LOG_BLOCKS.LOG.get());
+        dropSelf(SHADOW_LOG_BLOCKS.LOG.get());
+        dropSelf(PEARL_LOG_BLOCKS.LOG.get());
+        dropSelf(PALM_LOG_BLOCKS.LOG.get());
+        dropSelf(ASH_LOG_BLOCKS.LOG.get());
         // endregion natural
 
         dropSelf(BIG_RUBY_BLOCK.get());
