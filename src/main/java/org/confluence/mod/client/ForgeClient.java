@@ -18,6 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
@@ -89,6 +90,37 @@ public final class ForgeClient {
         List<Component> tooltip = event.getToolTip();
 
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
+            if (itemPrefix.attackDamage > 0.0) {
+                tooltip.add(Component.translatable("prefix.confluence.tooltip.attack_damage", "%.2f".formatted(itemPrefix.attackDamage)));
+            }
+            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.attackSpeed > 0.0) {
+                tooltip.add(Component.translatable("prefix.confluence.tooltip.attack_speed", "%.2f".formatted(itemPrefix.attackSpeed)));
+            }
+            if (itemPrefix.criticalChance > 0.0) {
+                tooltip.add(Component.translatable("prefix.confluence.tooltip.critical_chance", "%.2f".formatted(itemPrefix.criticalChance)));
+            }
+            if (itemPrefix.knockBack > 0.0) {
+                tooltip.add(Component.translatable("prefix.confluence.tooltip.knock_back", "%.2f".formatted(itemPrefix.knockBack)));
+            }
+            if (itemPrefix.type == PrefixType.RANGED) {
+                if (itemPrefix.velocity > 0.0) {
+                    tooltip.add(Component.translatable("prefix.confluence.tooltip.velocity", "%.2f".formatted(itemPrefix.velocity)));
+                }
+            } else if (itemPrefix.type == PrefixType.MAGIC_AND_SUMMING) {
+                if (itemPrefix.manaCost > 0.0) {
+                    tooltip.add(Component.translatable("prefix.confluence.tooltip.mana_cost", "%.2f".formatted(itemPrefix.manaCost)));
+                }
+            } else if (itemPrefix.type == PrefixType.CURIO) {
+                if (itemPrefix.armor > 0) {
+                    tooltip.add(Component.translatable("prefix.confluence.tooltip.armor", itemPrefix.armor));
+                }
+                if (itemPrefix.additionalMana > 0) {
+                    tooltip.add(Component.translatable("prefix.confluence.tooltip.additional_mana", itemPrefix.additionalMana));
+                }
+                if (itemPrefix.movementSpeed > 0.0) {
+                    tooltip.add(Component.translatable("prefix.confluence.tooltip.movement_speed", "%.2f".formatted(itemPrefix.movementSpeed)));
+                }
+            }
         });
     }
 

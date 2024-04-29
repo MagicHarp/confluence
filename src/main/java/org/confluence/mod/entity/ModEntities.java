@@ -9,8 +9,8 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.confluence.mod.entity.projectile.BeeProjectile;
-import org.confluence.mod.entity.projectile.bullet.*;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 
@@ -39,15 +39,15 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.5F, 0.5F).clientTrackingRange(10).build("confluence:demon_eye"));
 
-    public static final RegistryObject<EntityType<BaseBulletEntity>> AMBER_BULLET = registerBullet("amber", AmberBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> AMETHYST_BULLET = registerBullet("amethyst", AmethystBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> DIAMOND_BULLET = registerBullet("diamond", DiamondBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> EMERALD_BULLET = registerBullet("emerald", EmeraldBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> FROST_BULLET = registerBullet("frost", FrostBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = registerBullet("ruby", RubyBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> SAPPHIRE_BULLET = registerBullet("sapphire", SapphireBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", SparkBulletEntity::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", TopazBulletEntity::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> AMBER_BULLET = registerBullet("amber", BaseBulletEntity.Amber::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> AMETHYST_BULLET = registerBullet("amethyst", BaseBulletEntity.Amethyst::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> DIAMOND_BULLET = registerBullet("diamond", BaseBulletEntity.Diamond::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> EMERALD_BULLET = registerBullet("emerald", BaseBulletEntity.Emerald::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> FROST_BULLET = registerBullet("frost", BaseBulletEntity.Frost::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = registerBullet("ruby", BaseBulletEntity.Ruby::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> SAPPHIRE_BULLET = registerBullet("sapphire", BaseBulletEntity.Sapphire::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", BaseBulletEntity.Spark::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", BaseBulletEntity.Topaz::new);
 
     public static final RegistryObject<EntityType<BeeProjectile>> BEE_PROJECTILE = ENTITIES.register("bee_projectile", () -> EntityType.Builder.<BeeProjectile>of(BeeProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:bee_projectile"));
 

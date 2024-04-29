@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.projectile.ammo;
+package org.confluence.mod.entity.projectile;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;

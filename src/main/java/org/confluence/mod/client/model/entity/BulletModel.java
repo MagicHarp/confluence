@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.projectile.bullet.BaseBulletEntity;
+import org.confluence.mod.entity.projectile.BaseBulletEntity;
 
 public class BulletModel extends EntityModel<BaseBulletEntity> {
 	public static final ModelLayerLocation AMBER_LAYER = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "bullet/amber_bullet"), "main");

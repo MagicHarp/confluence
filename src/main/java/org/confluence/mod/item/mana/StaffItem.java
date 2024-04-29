@@ -13,9 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.projectile.bullet.BaseBulletEntity;
+import org.confluence.mod.capability.prefix.ItemPrefix;
+import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class StaffItem extends Item implements IManaWeapon {
     private final BulletSupplier bulletSupplier;
@@ -36,7 +41,7 @@ public class StaffItem extends Item implements IManaWeapon {
 
     @Override
     public int getUseDuration(@NotNull ItemStack itemStack) {
-        return 20;
+        return getAttackSpeed(itemStack, 20);
     }
 
     @Override
@@ -49,10 +54,11 @@ public class StaffItem extends Item implements IManaWeapon {
         if (!level.isClientSide && living instanceof ServerPlayer serverPlayer) {
             if (PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-                BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level);
-                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, getVelocity(itemStack, 1.5F), 1.0F);
+                Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
+                BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, optional.orElse(null));
+                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
                 level.addFreshEntity(baseBulletEntity);
-                level.playSound(serverPlayer, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
+                level.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         }
         return itemStack;
@@ -60,6 +66,6 @@ public class StaffItem extends Item implements IManaWeapon {
 
     @FunctionalInterface
     public interface BulletSupplier {
-        BaseBulletEntity create(ServerPlayer serverPlayer, Level level);
+        BaseBulletEntity create(ServerPlayer serverPlayer, Level level, @Nullable ItemPrefix itemPrefix);
     }
 }
