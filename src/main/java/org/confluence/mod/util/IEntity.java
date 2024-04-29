@@ -8,4 +8,8 @@ public interface IEntity {
     default boolean c$isOnCthulhuSprinting() {
         return c$getCthulhuSprintingTime() > 20;
     }
+
+    void c$setShouldRot(boolean bool);
+
+    boolean c$isShouldRot();
 }

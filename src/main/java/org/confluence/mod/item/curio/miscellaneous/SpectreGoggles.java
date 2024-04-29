@@ -4,7 +4,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
-import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
@@ -18,16 +17,14 @@ public class SpectreGoggles extends BaseCurioItem {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        echo(living, true);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(living));
+        super.onEquip(slotContext, prevStack, stack);
+        echo(slotContext.entity(), true);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        echo(living, false);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(living));
+        super.onUnequip(slotContext, newStack, stack);
+        echo(slotContext.entity(), false);
     }
 
     private static void echo(LivingEntity living, boolean value) {

@@ -3,9 +3,12 @@ package org.confluence.mod.mixin;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
@@ -21,7 +24,9 @@ import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.IEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,6 +36,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
+    @Shadow
+    public abstract EntityDimensions getDimensions(Pose pPose);
+
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
         c$getSelf().getCapability(AbilityProvider.CAPABILITY)
@@ -56,7 +64,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
-    private void thinIceBlock(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
+    private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
         if (motionY > 0.0 && self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
             self.fallDistance += motionY;
@@ -67,6 +75,16 @@ public abstract class LivingEntityMixin {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
         }
+    }
+
+    @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
+    private double fall2(double pPosY) {
+        if (c$getSelf() instanceof Player player) {
+            if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : ((IEntity) player).c$isShouldRot()) {
+                return pPosY + getDimensions(player.getPose()).height;
+            }
+        }
+        return pPosY;
     }
 
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)

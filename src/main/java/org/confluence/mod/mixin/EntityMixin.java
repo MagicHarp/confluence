@@ -41,9 +41,12 @@ public abstract class EntityMixin implements IEntity {
     @Shadow
     protected abstract BlockPos getOnPos(float p_216987_);
 
-    @Shadow public boolean verticalCollision;
+    @Shadow
+    public boolean verticalCollision;
     @Unique
     private int c$cthulhuSprintingTime = 0;
+    @Unique
+    private boolean c$isShouldRot = false;
 
     @Override
     public int c$getCthulhuSprintingTime() {
@@ -53,6 +56,16 @@ public abstract class EntityMixin implements IEntity {
     @Override
     public void c$setCthulhuSprintingTime(int amount) {
         this.c$cthulhuSprintingTime = amount;
+    }
+
+    @Override
+    public void c$setShouldRot(boolean bool) {
+        this.c$isShouldRot = bool;
+    }
+
+    @Override
+    public boolean c$isShouldRot() {
+        return c$isShouldRot;
     }
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
@@ -132,8 +145,10 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "getOnPosLegacy", at = @At("RETURN"), cancellable = true)
     private void getOnPosAbove(CallbackInfoReturnable<BlockPos> cir) {
-        if (c$getSelf() instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
-            cir.setReturnValue(getOnPos(-2.2F));
+        if (c$getSelf() instanceof Player player) {
+            if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : c$isShouldRot) {
+                cir.setReturnValue(getOnPos(-2.2F));
+            }
         }
     }
 

@@ -44,11 +44,15 @@ public class GravitationEffect extends MobEffect {
         }
     }
 
-    public static void reset() {
-        shouldRot = false;
-    }
-
     public static boolean isShouldRot() {
         return shouldRot;
+    }
+
+    public static void tick(LocalPlayer localPlayer) {
+        if (localPlayer == null) {
+            shouldRot = false;
+        } else if (localPlayer.getY() > localPlayer.level().getMaxBuildHeight()) {
+            expire();
+        }
     }
 }

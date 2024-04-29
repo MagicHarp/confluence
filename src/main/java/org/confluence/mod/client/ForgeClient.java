@@ -38,10 +38,8 @@ public final class ForgeClient {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
         if (event.phase == TickEvent.Phase.START) return;
-        if (localPlayer == null) {
-            GravitationEffect.reset();
-            return;
-        }
+        GravitationEffect.tick(localPlayer);
+        if (localPlayer == null) return;
         InformationHandler.update(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
 

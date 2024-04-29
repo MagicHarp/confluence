@@ -9,8 +9,10 @@
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
+        "LocalPlayerAccessor",
         "MinecraftAccessor",
         "PlayerAdvancementsMixin",
+        "PlayerMixin",
         "RangedAttributeAccessor"
     ],
     "minVersion": "0.8.5",

@@ -41,7 +41,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
         this(ModRarity.BLUE);
     }
 
-    private void freshAbility(Item item, LivingEntity living) {
+    protected void freshAbility(Item item, LivingEntity living) {
         living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.freshAbility(living));
         living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.freshAbility(living));
         if (living instanceof ServerPlayer serverPlayer) {

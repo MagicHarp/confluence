@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.util.IEntity;
 
 import java.util.function.Supplier;
 
@@ -34,6 +35,7 @@ public record GravitationPacketC2S(boolean enable) {
                     attributeInstance.removeModifier(GravitationEffect.GRAVITY_UUID);
                 }
             }
+            ((IEntity)serverPlayer).c$setShouldRot(packet.enable);
         });
         context.setPacketHandled(true);
     }

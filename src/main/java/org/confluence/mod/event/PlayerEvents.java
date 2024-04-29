@@ -1,7 +1,11 @@
 package org.confluence.mod.event;
 
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
@@ -12,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
@@ -20,6 +25,7 @@ import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
+import org.confluence.mod.mixin.LocalPlayerAccessor;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.PlayerUtils;
 
@@ -36,13 +42,21 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) return;
-        IRangePickup.Star.apply(event.player);
-        IRangePickup.Coin.apply(event.player);
-
-        if (event.side == LogicalSide.CLIENT) return;
-        ServerPlayer serverPlayer = (ServerPlayer) event.player;
-        PlayerUtils.regenerateMana(serverPlayer);
+        if (event.phase == TickEvent.Phase.START) {
+            if (event.side != LogicalSide.CLIENT) return;
+            LocalPlayer localPlayer = (LocalPlayer) event.player;
+            if (GravitationEffect.isShouldRot() && localPlayer.onGround() && localPlayer.isCrouching() && !localPlayer.isShiftKeyDown()) {
+                localPlayer.move(MoverType.SELF, new Vec3(0.0, -0.3000001, 0.0));
+                localPlayer.setPose(Pose.STANDING);
+                ((LocalPlayerAccessor) localPlayer).setCrouching(false);
+            }
+        } else {
+            IRangePickup.Star.apply(event.player);
+            IRangePickup.Coin.apply(event.player);
+            if (event.side == LogicalSide.CLIENT) return;
+            ServerPlayer serverPlayer = (ServerPlayer) event.player;
+            PlayerUtils.regenerateMana(serverPlayer);
+        }
     }
 
     @SubscribeEvent
