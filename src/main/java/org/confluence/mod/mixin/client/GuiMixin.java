@@ -27,7 +27,7 @@ public abstract class GuiMixin {
         MutableComponent component = instance.withStyle(lastToolHighlight.getRarity().getStyleModifier());
         Optional<ItemPrefix> optional = PrefixProvider.getPrefix(lastToolHighlight);
         if (optional.isEmpty()) return component;
-        return Component.translatable("prefix.confluence." + optional.get().name.toLowerCase())
+        return Component.translatable("prefix.confluence." + optional.get().name)
             .withStyle(optional.get().tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
             .append(" ").append(component);
     }

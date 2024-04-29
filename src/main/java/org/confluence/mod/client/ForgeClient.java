@@ -67,7 +67,7 @@ public final class ForgeClient {
 
         if (displayName.get() instanceof Component component) {
             PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix ->
-                event.getTooltipElements().set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name.toLowerCase())
+                event.getTooltipElements().set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name)
                     .withStyle(itemPrefix.tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
                     .append(" ").append(component)
                 )));

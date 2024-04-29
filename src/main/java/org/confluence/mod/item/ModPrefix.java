@@ -55,7 +55,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.armor = armor;
             itemPrefix.criticalChance = criticalChance;
             itemPrefix.attackDamage = attackDamage;
@@ -104,7 +104,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.attackDamage = attackDamage;
             itemPrefix.criticalChance = criticalChance;
             itemPrefix.knockBack = knockBack;
@@ -148,7 +148,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.attackDamage = attackDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;
@@ -201,7 +201,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.attackDamage = attackDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;
@@ -251,7 +251,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.attackDamage = attackDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;
@@ -301,7 +301,7 @@ public interface ModPrefix {
 
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
-            itemPrefix.name = name();
+            itemPrefix.name = name().toLowerCase();
             itemPrefix.attackDamage = attackDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;

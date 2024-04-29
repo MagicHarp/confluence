@@ -45,7 +45,7 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     public ItemPrefix(PrefixType type, ItemStack itemStack) {
         this.itemStack = itemStack;
         this.type = type;
-        this.name = "UNKNOWN";
+        this.name = "unknown";
 
         this.attackDamage = 0.0;
         this.attackSpeed = 0.0;
