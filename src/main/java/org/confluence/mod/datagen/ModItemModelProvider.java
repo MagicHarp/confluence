@@ -14,7 +14,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.*;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.common.Icons;
+import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.food.BaseFoodItem;
 import org.confluence.mod.item.food.BottleFoodItem;
@@ -36,7 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (Icons icons : Icons.values()) {
+        for (IconItem.Icons icons : IconItem.Icons.values()) {
             String path = icons.name().toLowerCase();
             withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
         }

@@ -25,7 +25,7 @@ public enum QuestedFishes implements EnumRegister<Item> {
     ANOTHER_CLOWNFISH("another_clownfish"), // 异域小丑鱼
     DEMONIC_HELLFISH("demonic_hellfish"), // 地狱恶魔鱼
     DERPFISH("derpfish"), // 跳跳鱼
-   ICHORFISH("ichorfish"), // 灵液鱼
+    ICHORFISH("ichorfish"), // 灵液鱼
     SLIMEFISH("slimefish"), // 史莱姆鱼
     ZOMBIE_FISH("zombie_fish"), // 僵尸鱼
     TROPICAL_BARRACUDA("tropical_barracuda"), // 热带梭鱼
@@ -47,7 +47,7 @@ public enum QuestedFishes implements EnumRegister<Item> {
     FISHOTRON("fishotron"), // 骷髅王鱼
     SCORPIO_FISH("scorpio_fish"), // 毒蝎鱼
     HUNGERFISH("hungerfish"), // 饥饿鱼
-     CATFISH("catfish"), // 猫猫鱼
+    CATFISH("catfish"), // 猫猫鱼
 
     PENGFISH("pengfish"), // 企鹅鱼
     PIXIEFISH("pixiefish"), // 妖精鱼
@@ -73,6 +73,6 @@ public enum QuestedFishes implements EnumRegister<Item> {
     }
 
     public static void init() {
-        Confluence.LOGGER.info("Registering specials");
+        Confluence.LOGGER.info("Registering quested fishes");
     }
 }

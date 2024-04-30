@@ -8,10 +8,7 @@ import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
-import org.confluence.mod.item.curio.expert.BrainOfConfusion;
-import org.confluence.mod.item.curio.expert.RoyalGel;
-import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
-import org.confluence.mod.item.curio.expert.WormScarf;
+import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.GoldRing;
 import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
@@ -282,7 +279,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 孢子囊 */
     /* 闪亮石 */
     /* 翱翔徽章 */
-    ; /* 重力球 */
+    GRAVITY_GLOBE("gravity_globe", GravityGlobe::new); // 重力球
 
     private final RegistryObject<BaseCurioItem> value;
 

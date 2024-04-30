@@ -43,7 +43,7 @@ public final class ModItems {
 
     public static void register(IEventBus bus) {
         ModTiers.register();
-        Icons.init();
+        IconItem.Icons.init();
         Materials.init();
         Swords.init();
         Axes.init();

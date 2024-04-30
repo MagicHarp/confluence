@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.capability.prefix.PrefixType;
+import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
@@ -55,7 +56,7 @@ public final class ForgeClient {
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
         boolean jumping = event.getInput().jumping;
-        if (localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
+        if (ClientPacketHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
             GravitationEffect.handle(localPlayer, jumping);
         } else {
             GravitationEffect.expire();
