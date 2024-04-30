@@ -108,7 +108,7 @@ public abstract class EntityMixin implements IEntity {
                 ShieldOfCthulhu.apply(living);
                 this.c$cthulhuSprintingTime = 32;
             } else {
-                this.c$cthulhuSprintingTime = 0;
+                this.c$cthulhuSprintingTime = 20;
             }
         }
     }

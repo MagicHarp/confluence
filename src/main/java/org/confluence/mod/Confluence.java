@@ -16,6 +16,7 @@ import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.recipe.ModRecipes;
 import org.confluence.mod.util.ModResources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,6 @@ public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Gson GSON = new Gson();
-    public static final ResourceLocation ITEM_PREFIX = new ResourceLocation(MODID, "prefix");
 
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
 
@@ -40,11 +40,12 @@ public final class Confluence {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
         ModItems.register(bus);
+        ModPaintings.register(bus);
+        ModRecipes.register(bus);
         ModParticles.PARTICLES.register(bus);
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
-        ModPaintings.register(bus);
     }
 }

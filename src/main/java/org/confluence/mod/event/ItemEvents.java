@@ -6,7 +6,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
@@ -19,11 +18,10 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.mana.StaffItem;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
@@ -34,22 +32,21 @@ public final class ItemEvents {
     public static void itemAttributeModifier(ItemAttributeModifierEvent event) {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
         ItemStack itemStack = event.getItemStack();
-        Item item = itemStack.getItem();
-        if (item instanceof BaseCurioItem || item instanceof StaffItem) return;
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
-            if (itemPrefix.attackDamage > 0.0) {
+            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.type != PrefixType.MELEE) return;
+            if (itemPrefix.attackDamage != 0.0) {
                 event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,
                     "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
             }
-            if (itemPrefix.attackSpeed > 0.0) {
+            if (itemPrefix.type == PrefixType.MELEE && itemPrefix.attackSpeed != 0.0) {
                 event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ItemPrefix.ATTACK_SPEED_UUID_HAND,
                     "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
             }
-            if (itemPrefix.knockBack > 0.0) {
+            if (itemPrefix.knockBack != 0.0) {
                 event.addModifier(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ItemPrefix.KNOCK_BACK_UUID_HAND,
                     "Item Prefix", itemPrefix.knockBack, MULTIPLY_TOTAL));
             }
-            if (itemPrefix.size > 0.0) {
+            if (itemPrefix.size != 0.0) {
                 event.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(ItemPrefix.ENTITY_REACH_UUID_HAND,
                     "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
             }

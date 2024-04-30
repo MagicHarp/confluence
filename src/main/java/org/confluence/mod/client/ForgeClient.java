@@ -28,9 +28,12 @@ import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
 import java.util.Optional;
+
+import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ForgeClient {
@@ -90,25 +93,32 @@ public final class ForgeClient {
         List<Component> tooltip = event.getToolTip();
 
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
-            if (itemPrefix.attackDamage > 0.0) {
-                tooltip.add(Component.translatable("prefix.confluence.tooltip.attack_damage", "%.2f".formatted(itemPrefix.attackDamage)));
+            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.type != PrefixType.MELEE) {
+                if (itemPrefix.attackDamage != 0.0) {
+                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.attackDamage, "attack_damage"));
+                }
+                if (itemPrefix.attackSpeed != 0.0) {
+                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.attackSpeed, "attack_speed"));
+                }
+                if (itemPrefix.knockBack != 0.0) {
+                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.knockBack, "knock_back"));
+                }
             }
-            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.attackSpeed > 0.0) {
-                tooltip.add(Component.translatable("prefix.confluence.tooltip.attack_speed", "%.2f".formatted(itemPrefix.attackSpeed)));
-            }
-            if (itemPrefix.criticalChance > 0.0) {
-                tooltip.add(Component.translatable("prefix.confluence.tooltip.critical_chance", "%.2f".formatted(itemPrefix.criticalChance)));
-            }
-            if (itemPrefix.knockBack > 0.0) {
-                tooltip.add(Component.translatable("prefix.confluence.tooltip.knock_back", "%.2f".formatted(itemPrefix.knockBack)));
+            if (itemPrefix.criticalChance != 0.0) {
+                tooltip.add(ModUtils.getModifierTooltip(itemPrefix.criticalChance, "critical_chance"));
             }
             if (itemPrefix.type == PrefixType.RANGED) {
-                if (itemPrefix.velocity > 0.0) {
-                    tooltip.add(Component.translatable("prefix.confluence.tooltip.velocity", "%.2f".formatted(itemPrefix.velocity)));
+                if (itemPrefix.velocity != 0.0) {
+                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.velocity, "velocity"));
                 }
             } else if (itemPrefix.type == PrefixType.MAGIC_AND_SUMMING) {
-                if (itemPrefix.manaCost > 0.0) {
-                    tooltip.add(Component.translatable("prefix.confluence.tooltip.mana_cost", "%.2f".formatted(itemPrefix.manaCost)));
+                if (itemPrefix.manaCost != 0.0) {
+                    boolean b = itemPrefix.manaCost > 0.0;
+                    tooltip.add(Component.translatable(
+                        "prefix.confluence.tooltip." + (b ? "plus" : "take"),
+                        ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.manaCost * (b ? 100.0 : -100.0)),
+                        Component.translatable("prefix.confluence.tooltip.mana_cost")
+                    ).withStyle(b ? ChatFormatting.RED : ChatFormatting.BLUE));
                 }
             } else if (itemPrefix.type == PrefixType.CURIO) {
                 if (itemPrefix.armor > 0) {
@@ -118,7 +128,11 @@ public final class ForgeClient {
                     tooltip.add(Component.translatable("prefix.confluence.tooltip.additional_mana", itemPrefix.additionalMana));
                 }
                 if (itemPrefix.movementSpeed > 0.0) {
-                    tooltip.add(Component.translatable("prefix.confluence.tooltip.movement_speed", "%.2f".formatted(itemPrefix.movementSpeed)));
+                    tooltip.add(Component.translatable(
+                        "prefix.confluence.tooltip.plus",
+                        ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.movementSpeed * 100.0),
+                        Component.translatable("prefix.confluence.tooltip.movement_speed")
+                    ).withStyle(ChatFormatting.BLUE));
                 }
             }
         });

@@ -153,9 +153,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.royal_gel.tooltip", "史莱姆将变成友好生物");
         add("item.confluence.magic_cuffs.tooltip", "最大魔力值增加20");
         add("item.confluence.magic_cuffs.tooltip2", "受伤时恢复魔力");
-        add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%" );
-        add("item.confluence.magnet_flower.tooltip2","需要时自动使用魔力药水");
-        add("item.confluence.magnet_flower.tooltip3","扩大魔力星的拾取范围");
+        add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%");
+        add("item.confluence.magnet_flower.tooltip2", "需要时自动使用魔力药水");
+        add("item.confluence.magnet_flower.tooltip3", "扩大魔力星的拾取范围");
         add("item.confluence.mana_flower.tooltip", "魔力消耗降低8%");
         add("item.confluence.mana_flower.tooltip2", "需要时自动使用魔力药水");
         add("item.confluence.arcane_flower.tooltip", "魔力消耗降低8%");
@@ -276,6 +276,19 @@ public class ModChineseProvider extends LanguageProvider {
         add("prefix.confluence.furious", "狂怒");
         add("prefix.confluence.manic", "狂躁");
         add("prefix.confluence.mythical", "神话");
+        add("prefix.confluence.unreal", "虚幻");
+
+        add("prefix.confluence.tooltip.plus", "+%s%% %s");
+        add("prefix.confluence.tooltip.take", "-%s%% %s");
+        add("prefix.confluence.tooltip.attack_damage", "攻击伤害");
+        add("prefix.confluence.tooltip.attack_speed", "攻击速度");
+        add("prefix.confluence.tooltip.critical_chance", "暴击几率");
+        add("prefix.confluence.tooltip.knock_back", "击退");
+        add("prefix.confluence.tooltip.velocity", "投射速度");
+        add("prefix.confluence.tooltip.mana_cost", "魔力消耗");
+        add("prefix.confluence.tooltip.armor", "护甲值");
+        add("prefix.confluence.tooltip.additional_mana", "额外魔力");
+        add("prefix.confluence.tooltip.movement_speed", "移动速度");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");

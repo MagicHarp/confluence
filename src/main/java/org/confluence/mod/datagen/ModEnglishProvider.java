@@ -147,9 +147,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.royal_gel.tooltip", "Slimes become friendly");
         add("item.confluence.magic_cuffs.tooltip", "Maximum mana is increased by 20");
         add("item.confluence.magic_cuffs.tooltip2", "Restores mana when injured");
-        add("item.confluence.magnet_flower.tooltip", "8% reduced mana cost" );
-        add("item.confluence.magnet_flower.tooltip2","Automatically uses mana potions when needed");
-        add("item.confluence.magnet_flower.tooltip3","Increases the pickup range of Mana Stars");
+        add("item.confluence.magnet_flower.tooltip", "8% reduced mana cost");
+        add("item.confluence.magnet_flower.tooltip2", "Automatically uses mana potions when needed");
+        add("item.confluence.magnet_flower.tooltip3", "Increases the pickup range of Mana Stars");
         add("item.confluence.mana_flower.tooltip", "8% reduced mana cost");
         add("item.confluence.mana_flower.tooltip2", "Automatically uses mana potions when needed");
         add("item.confluence.arcane_flower.tooltip", "8% reduced mana cost");
@@ -190,7 +190,17 @@ public class ModEnglishProvider extends LanguageProvider {
         add("prefix.confluence.hasty", "Hasty");
         add("prefix.confluence.deadly", "Deadly");
 
-
+        add("prefix.confluence.tooltip.plus", "+%s%% %s");
+        add("prefix.confluence.tooltip.take", "-%s%% %s");
+        add("prefix.confluence.tooltip.attack_damage", "Attack Damage");
+        add("prefix.confluence.tooltip.attack_speed", "Attack Speed");
+        add("prefix.confluence.tooltip.critical_chance", "Critical Chance");
+        add("prefix.confluence.tooltip.knock_back", "Knock Back");
+        add("prefix.confluence.tooltip.velocity", "Velocity");
+        add("prefix.confluence.tooltip.mana_cost", "Mana Cost");
+        add("prefix.confluence.tooltip.armor", "Armor");
+        add("prefix.confluence.tooltip.additional_mana", "Additional Mana");
+        add("prefix.confluence.tooltip.movement_speed", "Movement Speed");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
