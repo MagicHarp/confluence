@@ -192,6 +192,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("prefix.confluence.tooltip.plus", "+%s%% %s");
         add("prefix.confluence.tooltip.take", "-%s%% %s");
+        add("prefix.confluence.tooltip.add", "+%s %s");
         add("prefix.confluence.tooltip.attack_damage", "Attack Damage");
         add("prefix.confluence.tooltip.attack_speed", "Attack Speed");
         add("prefix.confluence.tooltip.critical_chance", "Critical Chance");

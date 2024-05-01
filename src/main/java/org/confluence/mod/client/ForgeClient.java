@@ -123,10 +123,18 @@ public final class ForgeClient {
                 }
             } else if (itemPrefix.type == PrefixType.CURIO) {
                 if (itemPrefix.armor > 0) {
-                    tooltip.add(Component.translatable("prefix.confluence.tooltip.armor", itemPrefix.armor));
+                    tooltip.add(Component.translatable(
+                        "prefix.confluence.tooltip.add",
+                        itemPrefix.armor,
+                        Component.translatable("prefix.confluence.tooltip.armor")
+                    ).withStyle(ChatFormatting.BLUE));
                 }
                 if (itemPrefix.additionalMana > 0) {
-                    tooltip.add(Component.translatable("prefix.confluence.tooltip.additional_mana", itemPrefix.additionalMana));
+                    tooltip.add(Component.translatable(
+                        "prefix.confluence.tooltip.add",
+                        itemPrefix.additionalMana,
+                        Component.translatable("prefix.confluence.tooltip.additional_mana")
+                    ).withStyle(ChatFormatting.BLUE));
                 }
                 if (itemPrefix.movementSpeed > 0.0) {
                     tooltip.add(Component.translatable(

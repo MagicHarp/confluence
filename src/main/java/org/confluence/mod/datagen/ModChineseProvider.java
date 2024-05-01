@@ -280,6 +280,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("prefix.confluence.tooltip.plus", "+%s%% %s");
         add("prefix.confluence.tooltip.take", "-%s%% %s");
+        add("prefix.confluence.tooltip.add", "+%s %s");
         add("prefix.confluence.tooltip.attack_damage", "攻击伤害");
         add("prefix.confluence.tooltip.attack_speed", "攻击速度");
         add("prefix.confluence.tooltip.critical_chance", "暴击几率");

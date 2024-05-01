@@ -31,7 +31,7 @@ public abstract class BaseBulletEntity extends Projectile {
 
     protected BaseBulletEntity(EntityType<BaseBulletEntity> entityType, Player player, Level level, @Nullable ItemPrefix itemPrefix) {
         this(entityType, level);
-        setPos(player.getX(), player.getEyeHeight() - 0.1, player.getZ());
+        setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
         setNoGravity(true);
         if (itemPrefix != null) {
