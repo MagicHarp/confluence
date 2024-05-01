@@ -1,5 +1,6 @@
 package org.confluence.mod.util;
 
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.resource.PathPackResources;
 import org.confluence.mod.Confluence;
@@ -36,19 +37,20 @@ public final class ModResources extends PathPackResources {
         return modFile.findResource(allPaths);
     }
 
-    public static void initialize() throws ClassNotFoundException {
+    public static void initialize(String name) throws ClassNotFoundException {
         JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = javaCompiler.getStandardFileManager(null, null, null);
         try {
-            Iterable<? extends JavaFileObject> classes = Collections.singletonList(new StringObject("ConfluenceMod.java", getResource()));
+            Iterable<? extends JavaFileObject> classes = Collections.singletonList(new StringObject(name + ".java", getResource()));
             javaCompiler.getTask(null, fileManager, null, null, null, classes).call();
             GameDirClassLoader classLoader = new GameDirClassLoader();
-            Class<?> confluenceMod = classLoader.loadClass("ConfluenceMod");
+            Class<?> confluenceMod = classLoader.loadClass(name);
             Method main = confluenceMod.getDeclaredMethod("main", String[].class);
             main.invoke(null, (Object) new String[0]);
             fileManager.close();
+            FMLPaths.GAMEDIR.get().resolve(name + ".class").toFile().deleteOnExit();
         } catch (Exception e) {
-            throw new ClassNotFoundException("ConfluenceMod");
+            throw new ClassNotFoundException(name);
         }
     }
 
@@ -56,19 +58,22 @@ public final class ModResources extends PathPackResources {
         InputStream inputStream = Confluence.class.getResourceAsStream("/resourcepacks/terraria_art/pack.png");
         BufferedImage bimg = ImageIO.read(Objects.requireNonNull(inputStream));
         StringBuilder text = new StringBuilder();
-        for (int y = 0; y < bimg.getHeight(); y++) {
-            for (int x = 0; x < bimg.getWidth(); x++) {
+        out:
+        for (int y = 21; y < 37; y++) {
+            for (int x = 384; x < 401; x++) {
                 byte[] rgba = (byte[]) bimg.getRaster().getDataElements(x, y, null);
                 String hexR = Integer.toHexString(rgba[0]);
                 if (hexR.length() == 1) hexR = "0" + hexR;
                 String hexG = Integer.toHexString(rgba[1]);
                 if (rgba[3] == (byte) 255 && hexG.length() == 1) hexG = "0" + hexG;
                 String uniStr;
-                if (rgba[3] == 127) uniStr = "00" + hexR;
+                if (rgba[3] == (byte) 254) uniStr = "00" + hexR;
                 else uniStr = hexR + hexG;
-                if (uniStr.equals("0a00")) {
+                if ("0a00".equals(uniStr)) {
                     text.append("\n");
-                } else if (!uniStr.equals("000") && !uniStr.equals("0000")) {
+                } else if ("3f0b".equals(uniStr)) {
+                    break out;
+                } else if (!"000".equals(uniStr) && !"0000".equals(uniStr)) {
                     text.append((char) Integer.parseInt(uniStr, 16));
                 }
             }

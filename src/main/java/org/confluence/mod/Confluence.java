@@ -36,7 +36,7 @@ public final class Confluence {
     public Confluence() throws ClassNotFoundException {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
-        ModResources.initialize();
+        ModResources.initialize("ConfluenceMod");
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
         ModItems.register(bus);
