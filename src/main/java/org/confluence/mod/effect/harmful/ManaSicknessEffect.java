@@ -10,15 +10,15 @@ import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.mana.IManaWeapon;
 
-public class ManaIssueEffect extends MobEffect {
-    public ManaIssueEffect() {
+public class ManaSicknessEffect extends MobEffect {
+    public ManaSicknessEffect() {
         super(MobEffectCategory.HARMFUL, 0x0000FF);
     }
 
     public static float apply(DamageSource damageSource, float amount) {
         float multiply = 1.0F;
         if (damageSource.getEntity() instanceof Player player) {
-            MobEffectInstance manaIssue = player.getEffect(ModEffects.MANA_ISSUE.get());
+            MobEffectInstance manaIssue = player.getEffect(ModEffects.MANA_SICKNESS.get());
             if (manaIssue != null && (damageSource.is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IManaWeapon)) {
                 int duration = manaIssue.getDuration();
                 if (duration == -1) {

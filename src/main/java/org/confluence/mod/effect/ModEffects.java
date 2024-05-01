@@ -13,7 +13,7 @@ import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
 
-    public static final RegistryObject<ManaIssueEffect> MANA_ISSUE = EFFECTS.register("mana_issue", ManaIssueEffect::new);
+    public static final RegistryObject<ManaSicknessEffect> MANA_SICKNESS = EFFECTS.register("mana_sickness", ManaSicknessEffect::new);
     public static final RegistryObject<ExquisitelyStuffedEffect> EXQUISITELY_STUFFED = EFFECTS.register("exquisitely_stuffed", ExquisitelyStuffedEffect::new);
     public static final RegistryObject<IronSkinEffect> IRON_SKIN = EFFECTS.register("iron_skin", IronSkinEffect::new);
     public static final RegistryObject<EnduranceEffect> ENDURANCE = EFFECTS.register("endurance", EnduranceEffect::new);

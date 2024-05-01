@@ -22,9 +22,9 @@ public class ManaPotion extends AbstractPotion {
         if (level.isClientSide) return itemStack;
         if (living instanceof ServerPlayer serverPlayer) {
             PlayerUtils.receiveMana(serverPlayer, () -> amount);
-            MobEffectInstance instance = serverPlayer.getEffect(ModEffects.MANA_ISSUE.get());
+            MobEffectInstance instance = serverPlayer.getEffect(ModEffects.MANA_SICKNESS.get());
             if (instance == null) {
-                serverPlayer.addEffect(new MobEffectInstance(ModEffects.MANA_ISSUE.get(), 100));
+                serverPlayer.addEffect(new MobEffectInstance(ModEffects.MANA_SICKNESS.get(), 100));
             } else {
                 instance.mapDuration(raw -> Math.min(raw + 100, 200));
                 serverPlayer.addEffect(instance);

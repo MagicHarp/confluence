@@ -36,7 +36,7 @@ import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
-import org.confluence.mod.effect.harmful.ManaIssueEffect;
+import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
@@ -116,7 +116,7 @@ public final class ForgeEvents {
         MagicCuffs.apply(living, damageSource, amount);
 
         amount = IManaWeapon.apply(damageSource, amount);
-        amount = ManaIssueEffect.apply(damageSource, amount);
+        amount = ManaSicknessEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);

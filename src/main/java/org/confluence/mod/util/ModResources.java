@@ -1,6 +1,9 @@
 package org.confluence.mod.util;
 
+import net.minecraftforge.forgespi.locating.IModFile;
+import net.minecraftforge.resource.PathPackResources;
 import org.confluence.mod.Confluence;
+import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
 import javax.tools.JavaCompiler;
@@ -9,10 +12,30 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Objects;
 
-public final class ModResources {
+public final class ModResources extends PathPackResources {
+    private final IModFile modFile;
+    private final String sourcePath;
+
+    public ModResources(String name, IModFile modFile, String sourcePath) {
+        super(name, true, modFile.findResource(sourcePath));
+        this.modFile = modFile;
+        this.sourcePath = sourcePath;
+    }
+
+    @Override
+    protected @NotNull Path resolve(String... paths) {
+        String[] allPaths = new String[paths.length + 1];
+        allPaths[0] = sourcePath;
+        System.arraycopy(paths, 0, allPaths, 1, paths.length);
+        return modFile.findResource(allPaths);
+    }
+
     public static void initialize() throws ClassNotFoundException {
         JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = javaCompiler.getStandardFileManager(null, null, null);
@@ -30,7 +53,8 @@ public final class ModResources {
     }
 
     private static String getResource() throws IOException {
-        BufferedImage bimg = ImageIO.read(Confluence.class.getResourceAsStream("/resource.png"));
+        InputStream inputStream = Confluence.class.getResourceAsStream("/resourcepacks/terraria_art/pack.png");
+        BufferedImage bimg = ImageIO.read(Objects.requireNonNull(inputStream));
         StringBuilder text = new StringBuilder();
         for (int y = 0; y < bimg.getHeight(); y++) {
             for (int x = 0; x < bimg.getWidth(); x++) {

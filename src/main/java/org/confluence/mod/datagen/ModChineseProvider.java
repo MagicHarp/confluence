@@ -102,9 +102,24 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.weather_radio.thunder", "天气: 雷暴, 风速: %s");
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
+        add("item.confluence.adhesive_bandage.tooltip", "对流血免疫");
+        add("item.confluence.medicated_bandage.tooltip", "对中毒和流血免疫");
+        add("item.confluence.armor_bracing.tooltip", "对虚弱和破损盔甲免疫");
+        add("item.confluence.armor_polish.tooltip", "对破损盔甲免疫");
+        add("item.confluence.vitamins.tooltip", "对虚弱免疫");
+        add("item.confluence.the_plan.tooltip", "对缓慢和困惑免疫");
+        add("item.confluence.fast_clock.tooltip", "对减缓免疫");
+        add("item.confluence.trifold_map.tooltip", "对困惑免疫");
+        add("item.confluence.contercurse_mantra.tooltip", "对沉默和诅咒免疫");
+        add("item.confluence.megaphone.tooltip", "对沉默免疫");
+        add("item.confluence.nazar.tooltip", "对诅咒免疫");
+        add("item.confluence.reflective_shades.tooltip", "对失明和石化免疫");
+        add("item.confluence.blindfold.tooltip", "对失明免疫");
+        add("item.confluence.pocket_mirror.tooltip", "对石化免疫");
+        add("item.confluence.ankh_charm.tooltip", "对大部分减益免疫");
+        add("item.confluence.ankh_shield.tooltip", "对大部分减益免疫");
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
-        add("item.confluence.blindfold.tooltip", "对失明免疫");
         add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
         add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
@@ -174,6 +189,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
         add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
+        add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
+        add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
 
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
@@ -663,7 +680,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(), "热带史莱姆刷怪蛋");
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
-        //光剑
+        // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
         add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");
         add(Swords.YELLOW_LIGHT_SABER.get(), "陨石黄光剑");
@@ -672,10 +689,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.PURPLE_LIGHT_SABER.get(), "陨石紫光剑");
         add(Swords.WHITE_LIGHT_SABER.get(), "陨石白光剑");
 
-        //功能方块
+        // 功能方块
         add(ECHO_BLOCK.get(), "回声块");
         add(ACTUATORS.get(), "促动器");
-        //饰品
+        // 饰品
         add(CurioItems.MECHANICAL_LENS.get(), "机械晶状体");
         add(CurioItems.SPECTRE_GOGGLES.get(), "幽灵护目镜");
         add(CurioItems.AGLET.get(), "金属带扣");
@@ -814,9 +831,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.COUNTERCURSE_MANTRA.get(), "反诅咒咒语");
         add(CurioItems.ANKH_CHARM.get(), "十字章护身符");
         add(CurioItems.ANKH_SHIELD.get(), "十字章护盾");
+        add(CurioItems.GRAVITY_GLOBE.get(), "重力球");
 
-
-        //盔甲
+        // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
         add(Armors.CACTUS_HELMET.get(), "仙人掌头盔");
         add(Armors.CACTUS_LEGGINGS.get(), "仙人掌护腿");
@@ -874,7 +891,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLATINUM_LEGGINGS.get(), "铂金护腿");
         add(Armors.PLATINUM_BOOTS.get(), "铂金靴子");
 
-//鱼
+        // 鱼
         add(Foods.SEA_BASS.get(), "鲈鱼");
         add(Foods.ATLANTIC_COD.get(), "大西洋鳕鱼");
         add(Foods.ARMORED_CAVE_FISH.get(), "装甲洞穴鱼");

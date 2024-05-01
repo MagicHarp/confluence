@@ -97,9 +97,24 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
 
+        add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
+        add("item.confluence.medicated_bandage.tooltip", "Immunity to Poison and Bleeding");
+        add("item.confluence.armor_bracing.tooltip", "Immunity to Weakness and Broken Armor");
+        add("item.confluence.armor_polish.tooltip", "Immunity to Broken Armor");
+        add("item.confluence.vitamins.tooltip", "Immunity to Weakness");
+        add("item.confluence.the_plan.tooltip", "Immunity to Slow and Confusion");
+        add("item.confluence.fast_clock.tooltip", "Immunity to Slow");
+        add("item.confluence.trifold_map.tooltip", "Immunity to Confusion");
+        add("item.confluence.contercurse_mantra.tooltip", "Immunity to Silence and Curse");
+        add("item.confluence.megaphone.tooltip", "Immunity to Silence");
+        add("item.confluence.nazar.tooltip", "Immunity to Curse");
+        add("item.confluence.reflective_shades.tooltip", "Immunity to Blindness and Petrification");
+        add("item.confluence.blindfold.tooltip", "Immunity to Blindness");
+        add("item.confluence.pocket_mirror.tooltip", "Immunity to Petrification");
+        add("item.confluence.ankh_charm.tooltip", "Grants immunity to most debuffs");
+        add("item.confluence.ankh_shield.tooltip", "Grants immunity to most debuffs");
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
-        add("item.confluence.blindfold.tooltip", "Immunity to Darkness");
         add("item.confluence.cobalt_shield.tooltip", "Grants immunity to knockback");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
         add("item.confluence.band_of_starpower.tooltip", "Increases maximum mana by 20");
@@ -168,6 +183,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.mana_regeneration_band.tooltip2", "Increases mana regeneration rate");
         add("item.confluence.natures_gift.tooltip", "6% reduced mana cost");
         add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
+        add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
+        add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
