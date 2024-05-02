@@ -1,7 +1,6 @@
 package org.confluence.mod.item.curio.expert;
 
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -10,7 +9,6 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.ModUtils;
 
@@ -19,8 +17,7 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
         super(ModRarity.EXPERT);
     }
 
-    public static float apply(LivingEntity living, RandomSource randomSource, DamageSource damageSource, float amount) {
-        if (damageSource.is(ModTags.HARMFUL_EFFECT)) return amount;
+    public static float apply(LivingEntity living, RandomSource randomSource, float amount) {
         if (CuriosUtils.noSameCurio(living, CurioItems.BRAIN_OF_CONFUSION.get())) return amount;
         if (randomSource.nextFloat() < 0.6F + amount * 0.02F) {
             float rangeMin, rangeMax;

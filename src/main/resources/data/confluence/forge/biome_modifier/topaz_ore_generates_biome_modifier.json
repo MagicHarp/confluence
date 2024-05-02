@@ -1,8 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": {
-    "type": "forge:any"
-  },
-  "features": "confluence:topaz_ore_generates",
-  "step": "surface_structures"
-}

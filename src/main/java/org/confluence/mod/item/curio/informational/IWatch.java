@@ -2,7 +2,6 @@ package org.confluence.mod.item.curio.informational;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
-import org.confluence.mod.item.common.CellPhone;
 
 public interface IWatch {
     static String format(long time) {
@@ -10,7 +9,7 @@ public interface IWatch {
     }
 
     static boolean isMinuteWatch(Item item) {
-        return item instanceof MinuteWatch || item instanceof GPS || item instanceof PDA || item instanceof CellPhone;
+        return item instanceof MinuteWatch || item instanceof GPS || item instanceof PDA;
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.watch");

@@ -6,7 +6,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
@@ -70,7 +69,7 @@ public abstract class EntityMixin implements IEntity {
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
-        if (c$getSelf() instanceof LivingEntity living) {
+        if (c$getSelf() instanceof Player living) {
             if (living.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
             living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
@@ -88,7 +87,7 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
-        if (c$getSelf() instanceof LivingEntity living) {
+        if (c$getSelf() instanceof Player living) {
             if (IHurtEvasion.isInvul(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
@@ -102,7 +101,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
-        if (bool && c$getSelf() instanceof LivingEntity living) {
+        if (bool && c$getSelf() instanceof Player living) {
             if (c$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(living);
                 this.c$cthulhuSprintingTime = 32;

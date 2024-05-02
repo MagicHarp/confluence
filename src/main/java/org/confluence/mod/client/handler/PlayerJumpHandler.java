@@ -41,7 +41,6 @@ public final class PlayerJumpHandler {
     private static double flySpeed = 0.0;
     private static int maxFlyTicks = 0;
     private static int remainFlyTicks = 0;
-    private static boolean couldGlide = false;
 
     public static boolean onFly = false;
 
@@ -57,17 +56,7 @@ public final class PlayerJumpHandler {
             cloudFinished = false;
             remainFlyTicks = maxFlyTicks;
         } else if (jumping) {
-            if (couldGlide) {
-                if (remainFlyTicks-- > 0) {
-                    onFly = true;
-                    fly(localPlayer, flySpeed);
-                } else if (!localPlayer.getAbilities().flying && localPlayer.getDeltaMovement().y < -0.15) {
-                    onFly = false;
-                    fly(localPlayer, -0.2);
-                }
-            }
             if (jumpKeyDown) return;
-            if (couldGlide && remainFlyTicks > 0) return;
 
             if (!fartFinished && fartSpeed > 0.0) {
                 fartFinished = true;
@@ -149,12 +138,7 @@ public final class PlayerJumpHandler {
         context.enqueueWork(() -> {
             maxFlyTicks = packet.maxFlyTicks();
             flySpeed = packet.flySpeed();
-            couldGlide = packet.glide();
         });
         context.setPacketHandled(true);
-    }
-
-    public static boolean isOnGlide() {
-        return onFly;
     }
 }

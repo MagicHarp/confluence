@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"confluence:ebony_block"
-    },
-    "result": "confluence:ebony_ore_bricks",
-    "count": 9
-}

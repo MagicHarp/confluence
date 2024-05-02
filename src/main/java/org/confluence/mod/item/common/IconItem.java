@@ -14,22 +14,7 @@ public class IconItem extends Item implements CustomModel {
     }
 
     public enum Icons implements EnumRegister<IconItem> {
-        ITEM_ICON("item_icon"),
-        BLOCKS_ICON("blocks_icon"),
-        MAGIC_ICON("magic_icon"),
-        MELEE_ICON("melee_icon"),
-        REMOTE_ICON("remote_icon"),
-        ARMOR_ICON("armor_icon"),
-        DEVELOPER_ICON("developer_icon"),
-        ENEMY_ICON("enemy_icon"),
-        FOOD_ICON("food_icon"),
-        NATURE_ICON("nature_icon"),
-        POTION_ICON("potion_icon"),
-        PRECIOUS_ICON("precious_icon"),
-        SUMMON_ICON("summon_icon"),
-        MATERIAL_ICON("material_icon"),
-        ACCESSORIES_ICON("accessories_icon"),
-        TOOLS_ICON("tools_icon");
+        ACCESSORIES_ICON("accessories_icon");
 
         private final RegistryObject<IconItem> value;
 

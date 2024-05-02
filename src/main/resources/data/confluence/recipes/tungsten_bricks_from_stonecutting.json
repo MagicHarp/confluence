@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"confluence:tungsten_block"
-    },
-    "result": "confluence:tungsten_bricks",
-    "count": 9
-}

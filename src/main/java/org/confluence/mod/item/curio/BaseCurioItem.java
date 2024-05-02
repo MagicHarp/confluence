@@ -13,9 +13,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.capability.mana.ManaProvider;
-import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
@@ -43,7 +40,6 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     protected void freshAbility(Item item, LivingEntity living) {
         living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.freshAbility(living));
-        living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.freshAbility(living));
         if (living instanceof ServerPlayer serverPlayer) {
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
@@ -55,15 +51,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         freshAbility(stack.getItem(), living);
-        PrefixProvider.create(living.level().random, stack, PrefixType.CURIO);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(living));
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         freshAbility(stack.getItem(), living);
-        PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.expireCurioPrefix(living));
     }
 
     @Override

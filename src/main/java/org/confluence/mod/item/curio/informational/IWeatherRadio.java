@@ -6,7 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 
 public interface IWeatherRadio {
-    static Component getInfo(LocalPlayer localPlayer, String speed) {
+    static Component getInfo(LocalPlayer localPlayer) {
         Level level = localPlayer.level();
         String weather = level.dimension() == Level.OVERWORLD ? "clear" : "cloudy";
         if (level.isRaining()) {
@@ -18,7 +18,7 @@ public interface IWeatherRadio {
         } else if (level.isThundering()) {
             weather = "thunder";
         }
-        return Component.translatable("info.confluence.weather_radio." + weather, speed);
+        return Component.translatable("info.confluence.weather_radio." + weather);
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.weather_radio");

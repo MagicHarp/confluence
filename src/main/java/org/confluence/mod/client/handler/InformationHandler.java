@@ -1,7 +1,5 @@
 package org.confluence.mod.client.handler;
 
-import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +12,6 @@ import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.network.s2c.AttackDamagePacketS2C;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
-import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,10 +35,8 @@ public final class InformationHandler {
     private static byte stopwatch = 0;
     private static byte compass = 0;
     private static byte depthMeter = 0;
-    private static byte mechanicalLens = 0;
 
     private static @Nullable Function<Long, Component> timeInfo = null;
-    private static String windSpeed = "0.00";
     private static Component weatherRadioInfo = Component.translatable("info.confluence.weather_radio.clear", "0.00");
     private static boolean detectorPressed = false;
     private static Component metalDetectorInfo = Component.translatable("info.confluence.metal_detector.none");
@@ -67,7 +62,7 @@ public final class InformationHandler {
             }
         }
         if (weatherRadio != 0) {
-            if (gameTime % 200 == 1) weatherRadioInfo = IWeatherRadio.getInfo(localPlayer, windSpeed);
+            if (gameTime % 200 == 1) weatherRadioInfo = IWeatherRadio.getInfo(localPlayer);
             information.add(weatherRadioInfo);
             if (weatherRadio < 0 && gameTime % 200 == 1 && check(localPlayer, IWeatherRadio.class)) weatherRadio = 0;
         }
@@ -122,9 +117,6 @@ public final class InformationHandler {
             information.add(IDepthMeter.getInfo(localPlayer));
             if (depthMeter < 0 && gameTime % 200 == 11 && check(localPlayer, IDepthMeter.class)) depthMeter = 0;
         }
-        if (mechanicalLens < 0 && gameTime % 200 == 12 && check(localPlayer, MechanicalLens.class)) {
-            mechanicalLens = 0;
-        }
     }
 
     public static ArrayList<Component> getInformation() {
@@ -158,11 +150,6 @@ public final class InformationHandler {
             stopwatch = enabled[9];
             compass = enabled[10];
             depthMeter = enabled[11];
-
-            if (mechanicalLens != (byte) Math.abs(enabled[12])) {
-                mechanicalLens = enabled[12];
-                ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
-            }
         });
         context.setPacketHandled(true);
     }
@@ -178,22 +165,12 @@ public final class InformationHandler {
         context.setPacketHandled(true);
     }
 
-    public static boolean isMechanicalBlockVisible() {
-        return mechanicalLens != 0;
-    }
-
     public static void handleAttackDamage(AttackDamagePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             attackDamage += packet.amount();
             lastAttackTime = packet.gameTime();
         });
-        context.setPacketHandled(true);
-    }
-
-    public static void handleWindSpeed(WindSpeedPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> windSpeed = "%.2f".formatted(packet.speed()));
         context.setPacketHandled(true);
     }
 }

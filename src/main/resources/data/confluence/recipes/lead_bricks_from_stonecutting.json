@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"confluence:lead_block"
-    },
-    "result": "confluence:lead_bricks",
-    "count": 9
-}

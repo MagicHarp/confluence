@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"minecraft:snow_block"
-    },
-    "result": "confluence:snow_bricks",
-    "count": 1
-}

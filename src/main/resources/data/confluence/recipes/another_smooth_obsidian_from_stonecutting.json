@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"confluence:another_obsidian_bricks"
-    },
-    "result": "confluence:another_smooth_obsidian",
-    "count": 1
-}

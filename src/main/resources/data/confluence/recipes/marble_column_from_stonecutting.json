@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item":"confluence:polished_marble"
-    },
-    "result": "confluence:marble_column",
-    "count": 1
-}

@@ -3,38 +3,34 @@ package org.confluence.mod.item.curio;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
-import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.informational.*;
-import org.confluence.mod.item.curio.miscellaneous.GoldRing;
-import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
 
 public enum CurioItems implements EnumRegister<BaseCurioItem> {
-    ADHESIVE_BANDAGE("adhesive_bandage", AdhesiveBandage::new), // 粘性绷带
+    //ADHESIVE_BANDAGE("adhesive_bandage", AdhesiveBandage::new), // 粘性绷带
     BEZOAR("bezoar", Bezoar::new), // 牛黄
-    MEDICATED_BANDAGE("medicated_bandage", MedicatedBandage::new), // 药用绷带
+    //MEDICATED_BANDAGE("medicated_bandage", MedicatedBandage::new), // 药用绷带
     BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
-    POCKET_MIRROR("pocket_mirror", PocketMirror::new), // 袖珍镜
-    REFLECTIVE_SHADES("reflective_shades", ReflectiveShades::new), // 反光墨镜
+    //POCKET_MIRROR("pocket_mirror", PocketMirror::new), // 袖珍镜
+    //REFLECTIVE_SHADES("reflective_shades", ReflectiveShades::new), // 反光墨镜
     VITAMINS("vitamins", Vitamins::new), // 维生素
-    ARMOR_POLISH("armor_polish", ArmorPolish::new), // 盔甲抛光剂
-    ARMOR_BRACING("armor_bracing", ArmorBracing::new), // 盔甲背带
+    //ARMOR_POLISH("armor_polish", ArmorPolish::new), // 盔甲抛光剂
+    //ARMOR_BRACING("armor_bracing", ArmorBracing::new), // 盔甲背带
     FAST_CLOCK("fast_clock", FastClock::new), // 快走时钟
-    TRIFOLD_MAP("trifold_map", TrifoldMap::new), // 三折地图
-    THE_PLAN("the_plan", ThePlan::new), // 计划书
-    MEGAPHONE("megaphone", Megaphone::new), // 扩音器
-    NAZAR("nazar", Nazar::new), // 邪眼
-    COUNTERCURSE_MANTRA("contercurse_mantra", CountercurseMantra::new), // 反诅咒咒语
-    ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
-    ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
+    //TRIFOLD_MAP("trifold_map", TrifoldMap::new), // 三折地图
+    //THE_PLAN("the_plan", ThePlan::new), // 计划书
+    //MEGAPHONE("megaphone", Megaphone::new), // 扩音器
+    //NAZAR("nazar", Nazar::new), // 邪眼
+    //COUNTERCURSE_MANTRA("contercurse_mantra", CountercurseMantra::new), // 反诅咒咒语
+    //ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
+    //ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
     AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
     /* 蜜蜂斗篷 */
     BERSERKERS_GLOVE("berserkers_glove", BerserkersGlove::new), // 狂战士手套
@@ -59,7 +55,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FROZEN_SHIELD("frozen_shield", FrozenShield::new), // 冰冻护盾
     /* 暖手宝 */
     HERO_SHIELD("hero_shield", HeroShield::new), // 英雄护盾
-    HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
+    //HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
     SHARK_TOOTH_NECKLACE("shark_tooth_necklace", SharkToothNecklace::new), // 鲨牙项链
     /* 甜心项链 */
     /* 熔火箭袋 */
@@ -108,20 +104,20 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 创造之手 */
 
 
-    ARCANE_FLOWER("arcane_flower", ArcaneFlower::new), // 奥术花
-    BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
-    BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
-    CELESTIAL_CUFFS("celestial_cuffs", CelestialCuffs::new), // 天界手铐
-    CELESTIAL_MAGNET("celestial_magnet", CelestialMagnet::new), // 天界磁石
-    CELESTIAL_EMBLEM("celestial_emblem", CelestialEmblem::new), // 天界徽章
-    CHARM_OF_MYTHS("charm_of_myths", CharmOfMyths::new), // 神话护身符
-    MAGIC_CUFFS("magic_cuffs", MagicCuffs::new), // 魔法手铐
-    MAGNET_FLOWER("magnet_flower", MagnetFlower::new), // 磁花
+    //ARCANE_FLOWER("arcane_flower", ArcaneFlower::new), // 奥术花
+    //BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
+    //BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
+    //CELESTIAL_CUFFS("celestial_cuffs", CelestialCuffs::new), // 天界手铐
+    //CELESTIAL_MAGNET("celestial_magnet", CelestialMagnet::new), // 天界磁石
+    //CELESTIAL_EMBLEM("celestial_emblem", CelestialEmblem::new), // 天界徽章
+    //CHARM_OF_MYTHS("charm_of_myths", CharmOfMyths::new), // 神话护身符
+    //MAGIC_CUFFS("magic_cuffs", MagicCuffs::new), // 魔法手铐
+    //MAGNET_FLOWER("magnet_flower", MagnetFlower::new), // 磁花
     /* 魔力斗篷 */
-    MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
-    MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环
-    NATURES_GIFT("natures_gift", NaturesGift::new), // 大自然的恩赐
-    PHILOSOPHERS_STONE("philosophers_stone", PhilosophersStone::new), // 点金石
+    //MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
+    //MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环
+    //NATURES_GIFT("natures_gift", NaturesGift::new), // 大自然的恩赐
+    //PHILOSOPHERS_STONE("philosophers_stone", PhilosophersStone::new), // 点金石
 
 
     COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
@@ -146,7 +142,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     GOBLIN_TECH("goblin_tech", GoblinTech::new), // 哥布林数据仪
     FISH_FINDER("fish_finder", FishFinder::new), // 探鱼器
     PDA("pda", PDA::new), // 个人数字助手
-    MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
+    //MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
     /* 标尺 */
     /* 机械标尺 */
 
@@ -212,61 +208,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 琥珀马掌气球 */
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
 
-    FLEDGLING_WINGS("fledgling_wings", () -> new BaseWings(ModRarity.WHITE, 25, 1.5)), // 雏翼
-    /* 天使之翼 */
-    /* 恶魔之翼 */
-    /* 仙灵之翼 */
-    /* 鳍翼 */
-    /* 冰冻之翼 */
-    /* 鳍翼 */
-    /* 冰冻之翼 */
-    /* 鸟妖之翼 */
-    /* 喷气背包 */
-    /* 叶之翼 */
-    /* 蝙蝠之翼 */
-    /* 蜜蜂之翼 */
-    /* 蝴蝶之翼 */
-    /* 烈焰之翼 */
-    /* 悬浮板 */
-    /* 骨之翼 */
-    /* 蛾怪之翼 */
-    /* 幽灵之翼 */
-    /* 甲虫之翼 */
-    /* 喜庆之翼 */
-    /* 阴森之翼 */
-    /* 褴褛仙灵之翼 */
-    /* 蒸汽朋克之翼 */
-    /* 双足翼龙之翼 */
-    /* 女皇之翼 */
-    /* 猪龙鱼之翼 */
-    /* 星云斗篷 */
-    /* 星旋强化翼 */
-    /* 日耀之翼 */
-    /* 星尘之翼 */
-    /* 天界星盘 */
-
-
-    /* 服装商巫毒娃娃 */
-    /* 钱币戒指 */
-    /* 优惠卡 */
-    /* 花靴 */
-    GOLD_RING("gold_ring", GoldRing::new), // 金戒指
-    /* 贪婪戒指 */
-    /* 植物纤维绳索宝典 */
-    /* 向导巫毒娃娃 */
-    /* 水母项链 */
-    /* 幸运币 */
-    /* 收音机 */
-    SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
-    /* 宝藏磁石 */
-    /* 炫彩斗篷 */
-
-
-    /* ** 钓鱼 ** */
-    /* ** 悠悠球 ** */
-    /* ** 时装 ** */
-    /* ** 八音盒 ** */
-    /* ** 高尔夫球 ** */
 
     ROYAL_GEL("royal_gel", RoyalGel::new), // 皇家凝胶
     SHIELD_OF_CTHULHU("shield_of_cthulhu", ShieldOfCthulhu::new), // 克苏鲁护盾

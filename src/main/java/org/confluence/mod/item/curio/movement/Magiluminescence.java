@@ -31,7 +31,7 @@ public class Magiluminescence extends BaseCurioItem {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.magiluminescence.tooltip"));
-        list.add(Component.translatable("item.confluence.magiluminescence.tooltip2"));
+        //list.add(Component.translatable("item.confluence.magiluminescence.tooltip2"));
         list.add(Component.translatable("item.confluence.magiluminescence.tooltip3"));
     }
 }

@@ -1,18 +1,12 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModPrefix;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -24,20 +18,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("creativetab.confluence.building_blocks", "Confluence | Buildings");
-        add("creativetab.confluence.natural_blocks", "Confluence | Naturals");
-        add("creativetab.confluence.materials", "Confluence | Materials");
-        add("creativetab.confluence.tools", "Confluence | Tools");
-        add("creativetab.confluence.warriors", "Confluence | Warriors");
-        add("creativetab.confluence.shooters", "Confluence | Shooters");
-        add("creativetab.confluence.mages", "Confluence | Mages");
-        add("creativetab.confluence.summoners", "Confluence | Summoners");
-        add("creativetab.confluence.misc", "Confluence | Miscellaneous");
-        add("creativetab.confluence.food_and_potions", "Confluence | Food & Potions");
-        add("creativetab.confluence.armors", "Confluence | Armors");
         add("creativetab.confluence.curios", "Confluence | Curios");
-
-        add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
 
         add("curios.tooltip.speed_boots", "The wearer can run super fast");
         add("curios.tooltip.may_fly", "Allows flight");
@@ -90,11 +71,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.sextant.5", "Moon phase: Waxing Crescent");
         add("info.confluence.sextant.6", "Moon phase: First Quarter");
         add("info.confluence.sextant.7", "Moon phase: Waxing Gibbous");
-        add("info.confluence.weather_radio.clear", "Weather: Clear, Wind Speed: %s");
-        add("info.confluence.weather_radio.cloudy", "Weather: Cloudy, Wind Speed: %s");
-        add("info.confluence.weather_radio.rain", "Weather: Rain, Wind Speed: %s");
-        add("info.confluence.weather_radio.snow", "Weather: Snow, Wind Speed: %s");
-        add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
+        add("info.confluence.weather_radio.clear", "Weather: Clear");
+        add("info.confluence.weather_radio.cloudy", "Weather: Cloudy");
+        add("info.confluence.weather_radio.rain", "Weather: Rain");
+        add("info.confluence.weather_radio.snow", "Weather: Snow");
+        add("info.confluence.weather_radio.thunder", "Weather: Thunder");
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
 
         add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
@@ -113,7 +94,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.pocket_mirror.tooltip", "Immunity to Petrification");
         add("item.confluence.ankh_charm.tooltip", "Grants immunity to most debuffs");
         add("item.confluence.ankh_shield.tooltip", "Grants immunity to most debuffs");
-        add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
         add("item.confluence.cobalt_shield.tooltip", "Grants immunity to knockback");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
@@ -121,7 +101,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
         add("item.confluence.magiluminescence.tooltip", "Increases movement speed and acceleration");
-        add("item.confluence.magiluminescence.tooltip2", "Provides light when worn(WIP)");
         add("item.confluence.magiluminescence.tooltip3", "'A brief light in my dark life.'");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "Allows the holder to do an improved double jump");
         add("item.confluence.ice_skates.tooltip", "Provides extra mobility on ice");
@@ -186,73 +165,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
         add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
 
-        add("death.attack.falling_star", "%1$s was squashed by a falling star");
-
-        add("painting.confluence.magic_harp.title", "MAGIC_HARP");
-        add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，Looks silly...");
-        add("painting.confluence.amanita.title", "AMANITA");
-        add("painting.confluence.amanita.author", "BiliBili_蘑菇人怎么还不来，A mushroom lady !");
-        add("painting.confluence.westernat.title", "WESTERNAT");
-        add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC 21st century, the most impressionist birch painting!");
-        add("painting.confluence.cooobrid.title", "COOOBRID");
-        add("painting.confluence.cooobrid.author", "BiliBili_事一只一只一只鸽子，咕咕咕咕~");
-        add("painting.confluence.nakinosi.title", "NAKINOSI");
-        add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头");
-        add("painting.confluence.maker.title", "MAKER");
-        add("painting.confluence.maker.author", "BiliBili_Maker-2333");
-        add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
-        add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
-
-        add("prefix.confluence.quick", "Quick");
-        add("prefix.confluence.hasty", "Hasty");
-        add("prefix.confluence.deadly", "Deadly");
-
-        add("prefix.confluence.tooltip.plus", "+%s%% %s");
-        add("prefix.confluence.tooltip.take", "-%s%% %s");
-        add("prefix.confluence.tooltip.add", "+%s %s");
-        add("prefix.confluence.tooltip.attack_damage", "Attack Damage");
-        add("prefix.confluence.tooltip.attack_speed", "Attack Speed");
-        add("prefix.confluence.tooltip.critical_chance", "Critical Chance");
-        add("prefix.confluence.tooltip.knock_back", "Knock Back");
-        add("prefix.confluence.tooltip.velocity", "Velocity");
-        add("prefix.confluence.tooltip.mana_cost", "Mana Cost");
-        add("prefix.confluence.tooltip.armor", "Armor");
-        add("prefix.confluence.tooltip.additional_mana", "Additional Mana");
-        add("prefix.confluence.tooltip.movement_speed", "Movement Speed");
-
-        ModBlocks.BLOCKS.getEntries().forEach(block -> {
-            Block block1 = block.get();
-            if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
-        });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
-            if (item1 instanceof BlockItem) return;
             if (item1 instanceof CustomName customName) add(item1, customName.getName());
             else add(item1, toTitleCase(item.getId().getPath()));
         });
-        ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
-        for (ModPrefix.Universal universal : ModPrefix.Universal.values()) {
-            add("prefix.confluence." + universal.name().toLowerCase(), toTitleCase(universal.name()));
-        }
-        for (ModPrefix.Common common : ModPrefix.Common.values()) {
-            if (common == ModPrefix.Common.QUICK || common == ModPrefix.Common.DEADLY) continue;
-            add("prefix.confluence." + common.name().toLowerCase(), toTitleCase(common.name()));
-        }
-        for (ModPrefix.Melee melee : ModPrefix.Melee.values()) {
-            add("prefix.confluence." + melee.name().toLowerCase(), toTitleCase(melee.name()));
-        }
-        for (ModPrefix.Ranged ranged : ModPrefix.Ranged.values()) {
-            if (ranged == ModPrefix.Ranged.HASTY || ranged == ModPrefix.Ranged.DEADLY) continue;
-            add("prefix.confluence." + ranged.name().toLowerCase(), toTitleCase(ranged.name()));
-        }
-        for (ModPrefix.MagicAndSumming magicAndSumming : ModPrefix.MagicAndSumming.values()) {
-            add("prefix.confluence." + magicAndSumming.name().toLowerCase(), toTitleCase(magicAndSumming.name()));
-        }
-        for (ModPrefix.Curio curio : ModPrefix.Curio.values()) {
-            if (curio == ModPrefix.Curio.HASTY || curio == ModPrefix.Curio.QUICK) continue;
-            add("prefix.confluence." + curio.name().toLowerCase(), toTitleCase(curio.name()));
-        }
     }
 
     private static String toTitleCase(String raw) {

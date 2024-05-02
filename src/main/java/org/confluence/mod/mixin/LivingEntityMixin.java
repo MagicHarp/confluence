@@ -13,8 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
-import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
@@ -63,17 +61,12 @@ public abstract class LivingEntityMixin {
         return time.get();
     }
 
-    @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "checkFallDamage", at = @At("HEAD"))
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
         if (motionY > 0.0 && self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
             self.fallDistance += motionY;
             NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
-        }
-        if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
-        if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
-            self.level().destroyBlock(blockPos, true, self);
-            ci.cancel();
         }
     }
 
@@ -116,12 +109,13 @@ public abstract class LivingEntityMixin {
     @Unique
     private Vec3 c$getWalkVec(Vec3 par1) {
         LivingEntity self = c$getSelf();
-        if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
-        if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
-            AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
-            if (instance == null) return par1;
-            double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
-            return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+        if (self instanceof Player && self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get()) {
+            if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
+                AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
+                if (instance == null) return par1;
+                double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
+                return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+            }
         }
         return par1;
     }
@@ -139,17 +133,13 @@ public abstract class LivingEntityMixin {
         AtomicDouble atomic = new AtomicDouble(armor);
         CuriosUtils.findCurio(self, IArmorPass.class)
             .ifPresent(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
-        if (self.hasEffect(ModEffects.BROKEN_ARMOR.get())) {
-            atomic.set(atomic.get() / 2.0);
-        }
         return atomic.floatValue();
     }
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
-        if (self.hasEffect(ModEffects.STONED.get())) return Vec3.ZERO;
-        if (self.level().isClientSide && GravitationEffect.isShouldRot()) {
+        if (self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;

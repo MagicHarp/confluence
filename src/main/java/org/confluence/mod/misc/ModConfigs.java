@@ -18,7 +18,6 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModConfigs {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-    private static final ForgeConfigSpec.BooleanValue DROP_MONEY = BUILDER.comment("Determines if player drops money after dead").define("dropsMoney", true);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_BLOCKS = BUILDER.comment(
         "In order for the block to be found by the Metal Detector",
         "You need to fill the list with string like 'modid:block[state1=true]' or 'modid:block'",
@@ -31,13 +30,13 @@ public final class ModConfigs {
     ).defineListAllowEmpty("rareCreatures", List.of("minecraft:enderman"), o -> true);
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
-    public static Boolean dropsMoney;
-    public static ArrayList<BlockState> rareBlocks = new ArrayList<>();
-    public static ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
+    public static final ArrayList<BlockState> rareBlocks = new ArrayList<>();
+    public static final ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
-        dropsMoney = DROP_MONEY.get();
+        rareBlocks.clear();
+        rareCreatures.clear();
         RARE_BLOCKS.get().forEach(s -> {
             try {
                 rareBlocks.add(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, false).blockState());

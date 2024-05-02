@@ -11,7 +11,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.item.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +19,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class FrostsparkBoots extends LightningBoots implements ThinIceBlock.IceSafe {
+public class FrostsparkBoots extends LightningBoots {
     public static final UUID SPEED_UUID = UUID.fromString("FF5835B7-FA33-A02D-A91F-E0043403CE69");
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Frostspark Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
 

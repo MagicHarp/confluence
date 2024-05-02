@@ -13,7 +13,7 @@ import org.confluence.mod.util.CuriosUtils;
 import java.util.ArrayList;
 
 /**
- * @param enabled length == 13
+ * @param enabled length == 12
  */
 public record InfoCurioCheckPacketS2C(byte[] enabled) {
     public static void encode(InfoCurioCheckPacketS2C packet, FriendlyByteBuf friendlyByteBuf) {
@@ -39,7 +39,6 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         byte stopwatch = 0;
         byte compass = 0;
         byte depthMeter = 0;
-        byte mechanicalLens = 0;
         for (ItemStack stack : itemStacks) {
             Item item = stack.getItem();
             if (watch < 1 && item instanceof HourWatch) watch = 1;
@@ -56,13 +55,12 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
             if (item instanceof IStopwatch) stopwatch = 1;
             if (item instanceof ICompass) compass = 1;
             if (item instanceof IDepthMeter) depthMeter = 1;
-            if (item instanceof MechanicalLens) mechanicalLens = 1;
         }
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new InfoCurioCheckPacketS2C(new byte[]{
                 watch, weatherRadio, sextant, fishermansPocketGuide, metalDetector, lifeFormAnalyzer,
-                radar, tallyCounter, dpsMeter, stopwatch, compass, depthMeter, mechanicalLens
+                radar, tallyCounter, dpsMeter, stopwatch, compass, depthMeter
             })
         );
     }
