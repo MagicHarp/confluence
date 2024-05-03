@@ -7,6 +7,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -34,5 +37,10 @@ public final class ModUtils {
             ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
             Component.translatable("prefix.confluence.tooltip." + type)
         ).withStyle(b ? ChatFormatting.BLUE : ChatFormatting.RED);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> getTicker(BlockEntityType<A> a, BlockEntityType<E> b, BlockEntityTicker<? super E> ticker) {
+        return a == b ? (BlockEntityTicker<A>) ticker : null;
     }
 }

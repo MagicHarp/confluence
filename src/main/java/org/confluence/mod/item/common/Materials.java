@@ -64,7 +64,7 @@ public enum Materials implements EnumRegister<Item> {
     SHIVERTHRON_SHARD("shiverthron_shard"),
     WATERLEAF_POT("waterleaf_pot"),
     FIREBLOSSOM_BUD("fireblossom_bud"),
-    CRYSTALLINE_LENS("crystalline_lens"),
+    LENS("lens"),
     BLACK_LENS("black_lens"),
     LIFE_CRYSTAL("life_crystal", LifeCrystal::new),
     MANA_STAR("mana_star", ManaStar::new),

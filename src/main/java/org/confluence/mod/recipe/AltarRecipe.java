@@ -1,6 +1,7 @@
 package org.confluence.mod.recipe;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
@@ -25,9 +26,9 @@ import java.util.ArrayList;
 
 public class AltarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
-    final String group;
-    final ItemStack result;
-    final NonNullList<Ingredient> ingredients;
+    private final String group;
+    private final ItemStack result;
+    public final NonNullList<Ingredient> ingredients;
 
     public AltarRecipe(ResourceLocation pId, String pGroup, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
         this.id = pId;
@@ -52,6 +53,15 @@ public class AltarRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull ItemStack assemble(@NotNull Container pContainer, @NotNull RegistryAccess pRegistryAccess) {
+        return result.copy();
+    }
+
+    public ItemStack assembleAndShrink(ArrayList<ItemStack> itemStacks) {
+        for (int index : RecipeMatcher.findMatches(itemStacks, ingredients)) {
+            ItemStack itemStack = itemStacks.get(index);
+            itemStack.shrink(((AmountIngredient) ingredients.get(index)).getCount());
+            if (itemStack.isEmpty()) itemStacks.remove(index);
+        }
         return result.copy();
     }
 
@@ -101,12 +111,13 @@ public class AltarRecipe implements Recipe<Container> {
             String group = GsonHelper.getAsString(pJson, "group", "");
             ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pJson, "result"), true, true);
             JsonArray ingredients = GsonHelper.getAsJsonArray(pJson, "ingredients");
-            NonNullList<Ingredient> nonNullList = NonNullList.create();
+            NonNullList<Ingredient> nonNullList = NonNullList.withSize(ingredients.size(), AmountIngredient.EMPTY);
             for (int i = 0; i < ingredients.size(); ++i) {
-                Ingredient ingredient = CraftingHelper.getIngredient(ingredients.get(i), false);
-                nonNullList.add(ingredient);
+                JsonElement jsonElement = ingredients.get(i);
+                JsonObject json = GsonHelper.convertToJsonObject(jsonElement.getAsJsonObject(), "confluence:amount");
+                nonNullList.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(json));
             }
-            if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for shapeless recipe");
+            if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for altar recipe");
             return new AltarRecipe(pRecipeId, group, result, nonNullList);
         }
 
@@ -114,8 +125,8 @@ public class AltarRecipe implements Recipe<Container> {
         public @Nullable AltarRecipe fromNetwork(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
             String group = pBuffer.readUtf();
             int size = pBuffer.readVarInt();
-            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, Ingredient.EMPTY);
-            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(pBuffer));
+            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, AmountIngredient.EMPTY);
+            ingredients.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(pBuffer));
             ItemStack result = pBuffer.readItem();
             return new AltarRecipe(pRecipeId, group, result, ingredients);
         }

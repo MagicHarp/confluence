@@ -22,7 +22,6 @@ public final class ClientPacketHandler {
     private static boolean showHolyWaterColor = false;
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
-    private static boolean hasGlobe = false;
 
     private static ResourceLocation moonTexture = null;
     private static int moonSpecific = -1;
@@ -92,10 +91,6 @@ public final class ClientPacketHandler {
         return hasCthulhu;
     }
 
-    public static boolean isHasGlobe() {
-        return hasGlobe;
-    }
-
     public static @Nullable ResourceLocation getMoonTexture() {
         return moonTexture;
     }
@@ -113,12 +108,6 @@ public final class ClientPacketHandler {
     public static void handleCthulhu(ShieldOfCthulhuPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> hasCthulhu = packet.has());
-        context.setPacketHandled(true);
-    }
-
-    public static void handleGlobe(GravityGlobePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> hasGlobe = packet.has());
         context.setPacketHandled(true);
     }
 }

@@ -1,0 +1,12 @@
+{
+    "type": "confluence:altar",
+    "result": {
+        "item": "confluence:suspicious_looking_eye"
+    },
+    "ingredients": [
+        {
+            "item": "confluence:lens",
+            "count": 6
+        }
+    ]
+}

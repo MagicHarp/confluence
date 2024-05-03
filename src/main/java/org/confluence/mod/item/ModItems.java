@@ -35,6 +35,7 @@ public final class ModItems {
     public static final RegistryObject<BaseItem> SILVER_COIN = ITEMS.register("silver_coin", BaseItem::new);
     public static final RegistryObject<BaseItem> GOLDEN_COIN = ITEMS.register("golden_coin", BaseItem::new);
     public static final RegistryObject<BaseItem> PLATINUM_COIN = ITEMS.register("platinum_coin", BaseItem::new);
+    public static final RegistryObject<SuspiciousLookingEye> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", SuspiciousLookingEye::new);
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);

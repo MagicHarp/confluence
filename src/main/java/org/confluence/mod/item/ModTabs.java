@@ -102,6 +102,7 @@ public final class ModTabs {
                 output.accept(ModItems.CLAM.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
+                output.accept(ALTAR_BLOCK.get());
             })
             .build());
     // 工具

@@ -149,7 +149,7 @@ public abstract class LivingEntityMixin {
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
         if (self.hasEffect(ModEffects.STONED.get())) return Vec3.ZERO;
-        if (self.level().isClientSide && GravitationEffect.isShouldRot()) {
+        if (self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;

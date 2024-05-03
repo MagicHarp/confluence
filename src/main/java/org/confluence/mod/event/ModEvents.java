@@ -9,6 +9,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,12 +19,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.recipe.AmountIngredient;
 import org.confluence.mod.util.ModResources;
 import org.confluence.mod.worldgen.biome.SurfaceRuleData;
 import org.confluence.mod.worldgen.biome.TestRegion1;
@@ -102,6 +106,13 @@ public final class ModEvents {
                     consumer.accept(pack);
                 }
             });
+        }
+    }
+
+    @SubscribeEvent
+    public void registerRecipeSerializers(RegisterEvent event) {
+        if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
+            CraftingHelper.register(new ResourceLocation(Confluence.MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
         }
     }
 }
