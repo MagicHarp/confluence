@@ -18,12 +18,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.util.RecipeMatcher;
 import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
 
 public class AltarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
@@ -40,44 +37,58 @@ public class AltarRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
-        if (pContainer instanceof Inventory inventory) return matchInventory(inventory);
-
-        ArrayList<ItemStack> inputs = new ArrayList<>();
-        int i = 0;
-        for (int j = 0; j < pContainer.getContainerSize(); j++) {
-            ItemStack itemstack = pContainer.getItem(j);
-            if (!itemstack.isEmpty()) {
-                inputs.add(itemstack);
-                i++;
+        if (pContainer instanceof Inventory inventory) {
+            found:
+            for (Ingredient ingredient : ingredients) {
+                for (ItemStack itemStack : inventory.items) {
+                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
+                        continue found;
+                    }
+                }
+                return false;
             }
+            return true;
         }
-        return i == ingredients.size() && RecipeMatcher.findMatches(inputs, ingredients) != null;
-    }
 
-    public boolean matchInventory(Inventory inventory) {
+        found:
         for (Ingredient ingredient : ingredients) {
-            boolean matches = false;
-            for (ItemStack itemStack : inventory.items) {
+            for (int index = 0; index < pContainer.getContainerSize(); index++) {
+                ItemStack itemStack = pContainer.getItem(index);
                 if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
-                    matches = true;
-                    break;
+                    continue found;
                 }
             }
-            if (!matches) return false;
+            return false;
         }
         return true;
     }
 
-    @Override
-    public @NotNull ItemStack assemble(@NotNull Container pContainer, @NotNull RegistryAccess pRegistryAccess) {
-        return result.copy();
+    public ItemStack assemble(Container container, Level level) {
+        return assemble(container, level.registryAccess());
     }
 
-    public ItemStack assembleAndShrink(ArrayList<ItemStack> itemStacks) {
-        for (int index : RecipeMatcher.findMatches(itemStacks, ingredients)) {
-            ItemStack itemStack = itemStacks.get(index);
-            itemStack.shrink(((AmountIngredient) ingredients.get(index)).getCount());
-            if (itemStack.isEmpty()) itemStacks.remove(index);
+    @Override
+    public @NotNull ItemStack assemble(@NotNull Container pContainer, @NotNull RegistryAccess pRegistryAccess) {
+        if (pContainer instanceof Inventory inventory) {
+            for (Ingredient ingredient : ingredients) {
+                for (int index = 0; index < inventory.items.size(); index++) {
+                    ItemStack itemStack = inventory.items.get(index);
+                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
+                        pContainer.removeItem(index, ((AmountIngredient) ingredient).getCount());
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (Ingredient ingredient : ingredients) {
+                for (int index = 0; index < pContainer.getContainerSize(); index++) {
+                    ItemStack itemStack = pContainer.getItem(index);
+                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
+                        pContainer.removeItem(index, ((AmountIngredient) ingredient).getCount());
+                        break;
+                    }
+                }
+            }
         }
         return result.copy();
     }
