@@ -2,6 +2,7 @@ package org.confluence.mod.recipe;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.AbstractIngredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -30,6 +31,10 @@ public class AmountIngredient extends AbstractIngredient {
 
     public static AmountIngredient of(ItemStack itemStack) {
         return new AmountIngredient(itemStack);
+    }
+
+    public Item getItem() {
+        return itemStack.getItem();
     }
 
     public int getCount() {

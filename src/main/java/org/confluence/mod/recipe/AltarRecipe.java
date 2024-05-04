@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -21,6 +22,8 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashSet;
 
 public class AltarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
@@ -140,10 +143,17 @@ public class AltarRecipe implements Recipe<Container> {
             ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pJson, "result"), true, true);
             JsonArray ingredients = GsonHelper.getAsJsonArray(pJson, "ingredients");
             NonNullList<Ingredient> nonNullList = NonNullList.withSize(ingredients.size(), AmountIngredient.EMPTY);
+            HashSet<Item> items = new HashSet<>();
             for (int i = 0; i < ingredients.size(); ++i) {
                 JsonElement jsonElement = ingredients.get(i);
                 JsonObject json = GsonHelper.convertToJsonObject(jsonElement.getAsJsonObject(), "confluence:amount");
-                nonNullList.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(json));
+                AmountIngredient ingredient = AmountIngredient.Serializer.INSTANCE.parse(json);
+                Item item = ingredient.getItem();
+                if (items.add(item)) {
+                    nonNullList.set(i, ingredient);
+                } else {
+                    throw new IllegalArgumentException("Duplicate ingredient " + item);
+                }
             }
             if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for altar recipe");
             return new AltarRecipe(pRecipeId, group, result, nonNullList);
