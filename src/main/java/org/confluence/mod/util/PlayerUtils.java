@@ -31,7 +31,7 @@ public final class PlayerUtils {
     public static void regenerateMana(ServerPlayer serverPlayer) {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             int delay = manaStorage.getRegenerateDelay();
-            boolean notMove = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 0.001F;
+            boolean notMove = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 1.0E-7;
             if (delay > 0) {
                 if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
                 int delayReduce = notMove ? 2 : 1;

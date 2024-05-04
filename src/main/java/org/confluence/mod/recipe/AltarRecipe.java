@@ -10,6 +10,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -28,7 +29,7 @@ public class AltarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final String group;
     private final ItemStack result;
-    public final NonNullList<Ingredient> ingredients;
+    private final NonNullList<Ingredient> ingredients;
 
     public AltarRecipe(ResourceLocation pId, String pGroup, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
         this.id = pId;
@@ -38,7 +39,9 @@ public class AltarRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container pContainer, @NotNull Level pLevel) {
+    public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
+        if (pContainer instanceof Inventory inventory) return matchInventory(inventory);
+
         ArrayList<ItemStack> inputs = new ArrayList<>();
         int i = 0;
         for (int j = 0; j < pContainer.getContainerSize(); j++) {
@@ -49,6 +52,20 @@ public class AltarRecipe implements Recipe<Container> {
             }
         }
         return i == ingredients.size() && RecipeMatcher.findMatches(inputs, ingredients) != null;
+    }
+
+    public boolean matchInventory(Inventory inventory) {
+        for (Ingredient ingredient : ingredients) {
+            boolean matches = false;
+            for (ItemStack itemStack : inventory.items) {
+                if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
+                    matches = true;
+                    break;
+                }
+            }
+            if (!matches) return false;
+        }
+        return true;
     }
 
     @Override
