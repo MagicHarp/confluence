@@ -1039,6 +1039,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.PHO.get(), "河粉");
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
+        //药水
+        add(Foods.GRAVITATION_POTION.get(), "重力药水");
+        add(Foods.IRON_SKIN_POTION.get(), "铁皮药水");
+        add(Foods.WRATH_POTION.get(), "怒气药水");
+        add(Foods.TITAN_POTION.get(), "泰坦药水");
+        add(Foods.BUILDER_POTION.get(), "建造者药水");
+        add(Foods.ENDURANCE_POTION.get(), "耐力药水");
+        add(Foods.INFERNO_POTION.get(), "狱火药水");
+        add(Foods.LIFEFORCE_POTION.get(), "生命力药水");
         //endregion items
     }
 }

@@ -119,7 +119,15 @@ public enum Foods implements EnumRegister<Item> {
     GOLDEN_CARP("golden_carp", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),
     OBSIDIAN_FISH("obsidian_fish", () -> new BaseFoodItem(FoodType.FISH)),
     FLASHFIN_KOI("flashfin_koi", () -> new BaseFoodItem(FoodType.FISH)),
-
+    //药水
+    GRAVITATION_POTION("gravitation_potion", () -> new PotionFoodItem((FoodType.GRAVITY_POTION))),
+    IRON_SKIN_POTION("iron_skin_potion", () -> new PotionFoodItem((FoodType.IRON_SKIN_POTION))),
+    WRATH_POTION("wrath_potion", () -> new PotionFoodItem((FoodType.WRATH_POTION))),
+    TITAN_POTION("titan_potion",() -> new PotionFoodItem((FoodType.TITAN_POTION))),
+    BUILDER_POTION("builder_potion",() -> new PotionFoodItem((FoodType.BUILDER_POTION))),
+    ENDURANCE_POTION("endurance_potion",() -> new PotionFoodItem((FoodType.ENDURANCE_POTION))),
+    INFERNO_POTION("inferno_potion",() -> new PotionFoodItem((FoodType.INFERNO_POTION))),
+    LIFEFORCE_POTION("lifeforce_potion",() -> new PotionFoodItem((FoodType.LIFEFORCE_POTION))),
     ;
     private final RegistryObject<Item> value;
 
