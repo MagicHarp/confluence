@@ -12,8 +12,7 @@ import terrablender.api.RegionType;
 import java.util.function.Consumer;
 
 public class TestRegion2 extends Region {
-    public TestRegion2(ResourceLocation name, int weight)
-    {
+    public TestRegion2(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 

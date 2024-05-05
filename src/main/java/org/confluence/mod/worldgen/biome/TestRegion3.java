@@ -15,8 +15,7 @@ import java.util.function.Consumer;
 import static terrablender.api.ParameterUtils.*;
 //腐化群系设置（自然生成，参数设置）
 public class TestRegion3 extends Region {
-    public TestRegion3(ResourceLocation name, int weight)
-    {
+    public TestRegion3(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
@@ -35,6 +34,6 @@ public class TestRegion3 extends Region {
             .build().forEach(point -> builder.add(point, Biomes.THE_CORRUPTION));
 
         // Add our points to the mapper
-        builder.build().forEach(mapper::accept);
+        builder.build().forEach(mapper);
     }
 }

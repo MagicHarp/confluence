@@ -15,8 +15,7 @@ import java.util.function.Consumer;
 import static terrablender.api.ParameterUtils.*;
 
 public class TestRegion1 extends Region {
-    public TestRegion1(ResourceLocation name, int weight)
-    {
+    public TestRegion1(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
@@ -35,6 +34,6 @@ public class TestRegion1 extends Region {
             .build().forEach(point -> builder.add(point, Biomes.COLD_BLUE));
 
         // Add our points to the mapper
-        builder.build().forEach(mapper::accept);
+        builder.build().forEach(mapper);
     }
 }

@@ -57,16 +57,16 @@ public final class ModEvents {
     public static void commonSetup(FMLCommonSetupEvent event) {
         NetworkHandler.register();
 
-        Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
-        if (armor instanceof RangedAttribute rangedAttribute) {
-            ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
-        }
-        Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
-        if (attribute instanceof RangedAttribute rangedAttribute) {
-            ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
-        }
-
         event.enqueueWork(() -> {
+            Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
+            if (armor instanceof RangedAttribute rangedAttribute) {
+                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+            }
+            Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
+            if (attribute instanceof RangedAttribute rangedAttribute) {
+                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+            }
+
             // Weights are kept intentionally low as we add minimal biomes
             Regions.register(new TestRegion1(new ResourceLocation(Confluence.MODID, "cold_blue"), 1));
             Regions.register(new TestRegion2(new ResourceLocation(Confluence.MODID, "hot_red"), 1));
