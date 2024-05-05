@@ -14,12 +14,12 @@ public class SpreadingGrassBlock extends SpreadingBlock implements ICubeBottomTo
     }
 
     @Override
-    public void tick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
         if (!serverLevel.isAreaLoaded(blockPos, 3)) return;
         if (ISpreadable.isFullBlock(serverLevel, blockPos.above())) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
         } else {
-            super.tick(blockState, serverLevel, blockPos, randomSource);
+            super.randomTick(blockState, serverLevel, blockPos, randomSource);
         }
     }
 }

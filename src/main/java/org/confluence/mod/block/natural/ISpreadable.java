@@ -21,6 +21,7 @@ public interface ISpreadable {
 
     default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
         if (!blockState.getValue(STILL_ALIVE)) return;
+        int phase = ConfluenceData.get(serverLevel).getGamePhase();
         for (int i = 0; i < 4; ++i) {
             BlockPos pos = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(5) - 3, randomSource.nextInt(3) - 1);
             BlockState source = serverLevel.getBlockState(pos);
@@ -28,10 +29,10 @@ public interface ISpreadable {
             if (target == null) continue;
             if (source.is(Blocks.DIRT)) {
                 if (!isFullBlock(serverLevel, pos.above())) {
-                    spreadOrDie(blockState, serverLevel, blockPos, randomSource, target.get().defaultBlockState(), pos);
+                    spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, target.get().defaultBlockState(), pos);
                 }
             } else {
-                spreadOrDie(blockState, serverLevel, blockPos, randomSource, target.get().defaultBlockState(), pos);
+                spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, target.get().defaultBlockState(), pos);
             }
         }
     }
@@ -40,12 +41,9 @@ public interface ISpreadable {
         return Block.isShapeFullBlock(serverLevel.getBlockState(pos).getCollisionShape(serverLevel, pos));
     }
 
-    static void spreadOrDie(BlockState selfState, ServerLevel serverLevel, BlockPos selfPos, RandomSource randomSource, BlockState targetState, BlockPos targetPos) {
-        int phase = ConfluenceData.get(serverLevel).getGamePhase();
-        if (phase == 0) return;
+    static void spreadOrDie(int phase, BlockState selfState, ServerLevel serverLevel, BlockPos selfPos, RandomSource randomSource, BlockState targetState, BlockPos targetPos) {
+        serverLevel.setBlockAndUpdate(targetPos, targetState);
         if (randomSource.nextFloat() < 0.01 * phase) {
-            serverLevel.setBlockAndUpdate(targetPos, targetState);
-        } else if (phase > 2) {
             serverLevel.setBlockAndUpdate(selfPos, selfState.setValue(STILL_ALIVE, false));
         }
     }
