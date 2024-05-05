@@ -31,7 +31,7 @@ public class TestRegion3 extends Region {
             .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
             .depth(Depth.SURFACE, Depth.FLOOR)
             .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)
-            .build().forEach(point -> builder.add(point, Biomes.THE_CORRUPTION));
+            .build().forEach(point -> builder.add(point, ModBiomes.THE_CORRUPTION));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);
