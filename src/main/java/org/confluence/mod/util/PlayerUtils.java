@@ -1,8 +1,11 @@
 package org.confluence.mod.util;
 
+import net.minecraft.advancements.Advancement;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.command.ConfluenceData;
@@ -79,5 +82,14 @@ public final class PlayerUtils {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new WindSpeedPacketS2C((float) Mth.length(data.getWindSpeedX(), data.getWindSpeedZ())));
+    }
+
+    public static void syncAdvancements(ServerPlayer serverPlayer) {
+        int step = ConfluenceData.get(serverPlayer.serverLevel()).getRevealStep();
+        for (int i = 0; i < step + 1; i++) {
+            ResourceLocation id = new ResourceLocation(Confluence.MODID, "reveal/step" + i);
+            Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(id);
+            if (advancement != null) serverPlayer.getAdvancements().award(advancement, "never");
+        }
     }
 }
