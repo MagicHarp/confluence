@@ -13,9 +13,10 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 import java.util.function.Consumer;
 
 import static terrablender.api.ParameterUtils.*;
+
 //腐化群系设置（自然生成，参数设置）
-public class TestRegion3 extends Region {
-    public TestRegion3(ResourceLocation name, int weight) {
+public class Region_the_hallow extends Region {
+    public Region_the_hallow(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
@@ -25,13 +26,13 @@ public class TestRegion3 extends Region {
         // Overlap Vanilla's parameters with our own for our COLD_BLUE biome.
         // The parameters for this biome are chosen arbitrarily.
         new ParameterPointListBuilder()
-            .temperature(Temperature.span(Temperature.COOL, Temperature.FROZEN))
-            .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))
+            .temperature(Temperature.span(Temperature.ICY, Temperature.COOL))
+            .humidity(Humidity.span(Humidity.DRY, Humidity.NEUTRAL))
             .continentalness(Continentalness.INLAND)
-            .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
+            .erosion(Erosion.EROSION_4, Erosion.EROSION_6)
             .depth(Depth.SURFACE, Depth.FLOOR)
-            .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)
-            .build().forEach(point -> builder.add(point, ModBiomes.THE_CORRUPTION));
+            .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.FULL_RANGE)
+            .build().forEach(point -> builder.add(point, ModBiomes.THE_HALLOW));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);

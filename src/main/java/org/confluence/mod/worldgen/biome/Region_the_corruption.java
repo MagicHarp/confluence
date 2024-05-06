@@ -13,9 +13,9 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 import java.util.function.Consumer;
 
 import static terrablender.api.ParameterUtils.*;
-/*
-public class TestRegion1 extends Region {
-    public TestRegion1(ResourceLocation name, int weight) {
+//腐化群系设置（自然生成，参数设置）
+public class Region_the_corruption extends Region {
+    public Region_the_corruption(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
@@ -25,16 +25,15 @@ public class TestRegion1 extends Region {
         // Overlap Vanilla's parameters with our own for our COLD_BLUE biome.
         // The parameters for this biome are chosen arbitrarily.
         new ParameterPointListBuilder()
-            .temperature(Temperature.span(Temperature.COOL, Temperature.FROZEN))
+            .temperature(Temperature.span(Temperature.WARM, Temperature.HOT))
             .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))
             .continentalness(Continentalness.INLAND)
-            .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
-            .depth(Depth.SURFACE, Depth.FLOOR)
-            .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)
-            .build().forEach(point -> builder.add(point, ModBiomes.COLD_BLUE));
+            .erosion(Erosion.EROSION_0, Erosion. EROSION_3)
+            .depth(Depth.SURFACE, Depth.SURFACE)
+            .weirdness(Weirdness.FULL_RANGE, Weirdness.LOW_SLICE_VARIANT_ASCENDING)
+            .build().forEach(point -> builder.add(point, ModBiomes.THE_CORRUPTION));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);
     }
 }
- */
