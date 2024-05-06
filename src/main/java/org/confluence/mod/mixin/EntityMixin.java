@@ -70,7 +70,7 @@ public abstract class EntityMixin implements IEntity {
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
-        if (c$getSelf() instanceof LivingEntity living) {
+        if (c$getSelf() instanceof Player living) {
             if (living.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
             living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
@@ -102,7 +102,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
-        if (bool && c$getSelf() instanceof LivingEntity living) {
+        if (bool && c$getSelf() instanceof Player living) {
             if (c$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(living);
                 this.c$cthulhuSprintingTime = 32;

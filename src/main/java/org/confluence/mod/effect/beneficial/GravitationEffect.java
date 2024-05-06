@@ -29,6 +29,7 @@ public class GravitationEffect extends MobEffect {
     }
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
+        if (localPlayer.getAbilities().flying) return;
         if (jumping) {
             if (!keyDown) {
                 shouldRot = !shouldRot;
