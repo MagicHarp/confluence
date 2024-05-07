@@ -25,13 +25,13 @@ public class SurfaceRuleData {
         SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
             SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, corrupt_grassSurface),
+        SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_HALLOW),
+            SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, hallow_grassSurface),
+        SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ANOTHER_CRIMSON),
+            SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, another_crimson_grassSurface),
 
-            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_HALLOW),
-                SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, hallow_grassSurface),
-            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ANOTHER_CRIMSON),
-                SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, another_crimson_grassSurface),
             SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, grassSurface)
         )))))));
     }
