@@ -20,11 +20,14 @@ public class SurfaceRuleData {
         SurfaceRules.RuleSource corrupt_grassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, CORRUPTED_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource hallow_grassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, HALLOW_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource another_crimson_grassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ANOTHER_CRIMSON_GRASS_BLOCK), DIRT);
-
+        SurfaceRules.RuleSource corrupt_stone_Surface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, EBONY_STONE), EBONY_STONE);
         return SurfaceRules.sequence(
         SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
             SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, corrupt_grassSurface))),
+            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.VERY_DEEP_UNDER_FLOOR, corrupt_stone_Surface))),
         SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_HALLOW),
             SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, hallow_grassSurface))),
