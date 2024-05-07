@@ -142,8 +142,8 @@ public final class ModClient {
     };
 
     public static final BlockColor GRASS_BLOCK_COLOR = (blockState, getter, pos, tint) -> {
-        if (tint == 0) return -1;
-        return getter == null || pos == null ? -1 : BiomeColors.getAverageGrassColor(getter, pos);
+        if (tint == 0) return getter == null || pos == null ? -1 : BiomeColors.getAverageGrassColor(getter, pos);
+        return -1;
     };
 
     @SubscribeEvent
