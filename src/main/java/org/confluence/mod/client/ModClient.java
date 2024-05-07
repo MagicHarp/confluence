@@ -1,6 +1,7 @@
 package org.confluence.mod.client;
 
 import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.ColorResolver;
@@ -25,7 +26,7 @@ import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
 
-
+@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ModClient {
     @SubscribeEvent
@@ -140,8 +141,16 @@ public final class ModClient {
         return x.mixture(z, 0.5F).get();
     };
 
+    public static final BlockColor GRASS_BLOCK_COLOR = (blockState, getter, pos, tint) -> {
+        if (tint == 0) return -1;
+        return getter == null || pos == null ? -1 : BiomeColors.getAverageGrassColor(getter, pos);
+    };
+
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(HALLOW_LEAVES_COLOR, ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
+        event.register(GRASS_BLOCK_COLOR, ModBlocks.CORRUPT_GRASS_BLOCK.get());
+        event.register(GRASS_BLOCK_COLOR, ModBlocks.HALLOW_GRASS_BLOCK.get());
+        event.register(GRASS_BLOCK_COLOR, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get());
     }
 }

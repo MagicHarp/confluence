@@ -1,0 +1,8 @@
+{
+    "parent": "block/grass_block",
+    "textures": {
+        "top": "confluence:block/corrupt_grass_block_top",
+        "side": "confluence:block/corrupt_grass_block_side",
+        "overlay": "confluence:block/corrupt_grass_block_side_overlay"
+    }
+}
