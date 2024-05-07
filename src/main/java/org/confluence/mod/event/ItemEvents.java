@@ -67,7 +67,7 @@ public final class ItemEvents {
         ItemStack itemStack = itemEntity.getItem();
         if (itemStack.is(ModTags.PROVIDE_MANA)) {
             event.getEntity().getCapability(ManaProvider.CAPABILITY)
-                .ifPresent(manaStorage -> manaStorage.receiveMana(() -> itemStack.getCount() * 20));
+                .ifPresent(manaStorage -> manaStorage.receiveMana(() -> itemStack.getCount() * 100));
             itemEntity.discard();
             event.setCanceled(true);
         }

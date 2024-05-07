@@ -25,10 +25,10 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.ModResources;
-import org.confluence.mod.worldgen.biome.Region_another_crimson;
-import org.confluence.mod.worldgen.biome.Region_the_hallow;
+import org.confluence.mod.worldgen.biome.AnotherCrimsonRegion;
 import org.confluence.mod.worldgen.biome.SurfaceRuleData;
-import org.confluence.mod.worldgen.biome.Region_the_corruption;
+import org.confluence.mod.worldgen.biome.TheCorruptionRegion;
+import org.confluence.mod.worldgen.biome.TheHallowRegion;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
@@ -68,9 +68,9 @@ public final class ModEvents {
             }
 
             // Weights are kept intentionally low as we add minimal biomes
-            Regions.register(new Region_another_crimson(new ResourceLocation(Confluence.MODID, "another_crimson"), 1));
-            Regions.register(new Region_the_hallow(new ResourceLocation(Confluence.MODID, "the_hallow"), 1));
-            Regions.register(new Region_the_corruption(new ResourceLocation(Confluence.MODID, "the_corruption"), 1));
+            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(Confluence.MODID, "another_crimson"), 1));
+            Regions.register(new TheHallowRegion(new ResourceLocation(Confluence.MODID, "the_hallow"), 1));
+            Regions.register(new TheCorruptionRegion(new ResourceLocation(Confluence.MODID, "the_corruption"), 1));
 
             // Register our surface rules
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Confluence.MODID, SurfaceRuleData.makeRules());

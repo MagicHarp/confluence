@@ -15,8 +15,8 @@ import java.util.function.Consumer;
 import static terrablender.api.ParameterUtils.*;
 
 //腐化群系设置（自然生成，参数设置）
-public class Region_the_hallow extends Region {
-    public Region_the_hallow(ResourceLocation name, int weight) {
+public class TheHallowRegion extends Region {
+    public TheHallowRegion(ResourceLocation name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
 
