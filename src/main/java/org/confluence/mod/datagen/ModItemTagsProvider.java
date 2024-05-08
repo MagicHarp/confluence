@@ -3,6 +3,7 @@ package org.confluence.mod.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -26,5 +27,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
         tag(ModTags.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get());
         tag(ModTags.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
+        tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }
