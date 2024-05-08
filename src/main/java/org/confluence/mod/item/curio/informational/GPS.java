@@ -17,7 +17,7 @@ public class GPS extends AbstractInfoCurio implements IWatch, IDepthMeter, IComp
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "GPS";
     }
 

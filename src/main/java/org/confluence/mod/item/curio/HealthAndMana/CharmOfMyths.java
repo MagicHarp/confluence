@@ -16,7 +16,7 @@ public class CharmOfMyths extends PhilosophersStone {
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Charm Of Myths";
     }
 }

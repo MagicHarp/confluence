@@ -17,7 +17,7 @@ public class DPSMeter extends AbstractInfoCurio implements IDPSMeter, CustomName
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "DPS Meter";
     }
 

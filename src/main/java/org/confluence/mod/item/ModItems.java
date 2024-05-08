@@ -1,6 +1,8 @@
 package org.confluence.mod.item;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.RecordItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -41,6 +43,7 @@ public final class ModItems {
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);
     public static final RegistryObject<Item> STAR = ITEMS.register("star", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SOUL_CAKE = ITEMS.register("soul_cake", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, SoundEvents.MUSIC_CREDITS, 12060));
 
     public static void register(IEventBus bus) {
         ModTiers.register();

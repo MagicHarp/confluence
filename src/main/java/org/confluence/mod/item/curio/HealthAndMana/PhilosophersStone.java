@@ -15,7 +15,7 @@ public class PhilosophersStone extends BaseCurioItem implements CustomName {
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Philosopher's Stone";
     }
 }

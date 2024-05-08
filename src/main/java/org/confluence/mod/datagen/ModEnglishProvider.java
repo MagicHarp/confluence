@@ -38,6 +38,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.curios", "Confluence | Curios");
 
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
+        add("item.confluence.alpha.desc", "C418 - alpha");
 
         add("curios.tooltip.speed_boots", "The wearer can run super fast");
         add("curios.tooltip.may_fly", "Allows flight");
@@ -227,7 +228,7 @@ public class ModEnglishProvider extends LanguageProvider {
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
             if (item1 instanceof BlockItem) return;
-            if (item1 instanceof CustomName customName) add(item1, customName.getName());
+            if (item1 instanceof CustomName customName) add(item1, customName.getGenName());
             else add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));

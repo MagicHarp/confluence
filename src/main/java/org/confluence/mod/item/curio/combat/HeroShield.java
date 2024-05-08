@@ -44,7 +44,7 @@ public class HeroShield extends PaladinsShield implements IAggroAttach {
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Hero Shield";
     }
 }

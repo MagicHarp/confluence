@@ -17,7 +17,7 @@ public class REK3000 extends AbstractInfoCurio implements ILifeFormAnalyzer, IRa
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "R.E.K.3000";
     }
 

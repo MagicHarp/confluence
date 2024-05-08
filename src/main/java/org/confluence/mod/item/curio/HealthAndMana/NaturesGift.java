@@ -15,7 +15,7 @@ public class NaturesGift extends BaseCurioItem implements IManaReduce, CustomNam
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Nature's Gift";
     }
 }

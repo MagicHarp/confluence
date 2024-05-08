@@ -17,7 +17,7 @@ public class FishermansPocketGuide extends AbstractInfoCurio implements IFisherm
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Fisherman's Pocket Guide";
     }
 
