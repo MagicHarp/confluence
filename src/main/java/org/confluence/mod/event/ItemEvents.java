@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -22,6 +23,7 @@ import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
+import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
@@ -70,6 +72,13 @@ public final class ItemEvents {
                 .ifPresent(manaStorage -> manaStorage.receiveMana(() -> itemStack.getCount() * 100));
             itemEntity.discard();
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void itemExpire(ItemExpireEvent event) {
+        if (event.getEntity().getItem().getItem() instanceof ModRarity.Special) {
+            event.setExtraLife(6000);
         }
     }
 
