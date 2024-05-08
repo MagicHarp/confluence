@@ -1,7 +1,6 @@
 package org.confluence.mod.client;
 
 import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.ColorResolver;
@@ -115,7 +114,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.SAPPHIRE_BULLET.get(), BulletParticle.Provider::new);
     }
 
-    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0x39C5BB;
+    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> -1554953;
 
     @SubscribeEvent
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
@@ -123,7 +122,7 @@ public final class ModClient {
     }
 
     public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
-        if (pos == null) return Color.HALLOW_B.get();
+        if (pos == null) return -1;
 
         int i = Math.abs(pos.getX()) % 12;
         int k = Math.abs(pos.getZ()) % 12;
@@ -141,16 +140,8 @@ public final class ModClient {
         return x.mixture(z, 0.5F).get();
     };
 
-    public static final BlockColor GRASS_BLOCK_COLOR = (blockState, getter, pos, tint) -> {
-        if (tint == 0) return getter == null || pos == null ? -1 : BiomeColors.getAverageGrassColor(getter, pos);
-        return -1;
-    };
-
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(HALLOW_LEAVES_COLOR, ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
-        event.register(GRASS_BLOCK_COLOR, ModBlocks.CORRUPT_GRASS_BLOCK.get());
-        event.register(GRASS_BLOCK_COLOR, ModBlocks.HALLOW_GRASS_BLOCK.get());
-        event.register(GRASS_BLOCK_COLOR, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get());
     }
 }
