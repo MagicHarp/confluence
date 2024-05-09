@@ -912,7 +912,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.RED_SNAPPER.get(), "红鲷鱼");
         add(Foods.TROUT.get(), "鳟鱼");
         add(Foods.ROCK_LOBSTER.get(), "岩石龙虾");
-        add(Foods.SALMON.get(), "异域鲑鱼");
+        add(Foods.ANOTHER_SALMON.get(), "异域鲑鱼");
         add(Foods.SHRIMP.get(), "虾");
         add(Foods.MIRROR_FISH.get(), "镜面鱼");
         add(Foods.STINKY_FISH.get(), "臭味鱼");
