@@ -58,5 +58,13 @@
         "sounds": [
             "confluence:sparkle_shoot"
         ]
+    },
+    "alpha": {
+        "sounds": [
+            {
+                "name": "minecraft:music/game/end/credits",
+                "stream": true
+            }
+        ]
     }
 }

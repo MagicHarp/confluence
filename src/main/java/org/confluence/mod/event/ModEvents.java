@@ -18,10 +18,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
+import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.ModResources;
@@ -106,10 +108,11 @@ public final class ModEvents {
         }
     }
 
-//    @SubscribeEvent
-//    public static void registerRecipeSerializers(RegisterEvent event) {
+    @SubscribeEvent
+    public static void registerRecipeSerializers(RegisterEvent event) {
 //        if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
 //            CraftingHelper.register(new ResourceLocation(Confluence.MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
 //        }
-//    }
+        ModFluids.register(event);
+    }
 }

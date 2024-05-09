@@ -22,6 +22,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> SHOES_WALK = register("shoes_walk");
     public static final RegistryObject<SoundEvent> SHOOT = register("shoot");
     public static final RegistryObject<SoundEvent> SPARKLE_SHOOT = register("sparkle_shoot");
+    public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
 
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));

@@ -95,6 +95,7 @@ public final class ModTabs {
                 output.accept(ModItems.PLATINUM_COIN.get());
                 output.accept(ModItems.EXPERT_TEST_ITEM.get());
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
+                output.accept(ModItems.HONEY_BUCKET.get());
                 output.accept(ModItems.STAR.get());
                 output.accept(ModItems.SOUL_CAKE.get());
                 output.accept(ModItems.ALPHA.get());
