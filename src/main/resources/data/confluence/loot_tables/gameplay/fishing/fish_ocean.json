@@ -11,7 +11,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:salmon",
+          "name": "confluence:another_salmon",
           "weight": 5
         },
         {
@@ -35,7 +35,7 @@
           "weight": 15
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "minecraft:gameplay/fishing/fish"
