@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "biomes": "confluence:the_hallow",
+    "features": "confluence:pearl_big_trees",
+    "step": "surface_structures"
+}

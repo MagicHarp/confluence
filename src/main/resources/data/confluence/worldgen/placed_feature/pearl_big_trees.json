@@ -1,0 +1,32 @@
+{
+    "feature": "confluence:pearl_big_trees",
+    "placement": [
+        {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                    "Name": "confluence:hallow_grass_block"
+                }
+            }
+        },
+        {
+            "type": "minecraft:surface_water_depth_filter",
+            "max_water_depth": 0
+        },
+        {
+            "type": "minecraft:rarity_filter",
+            "chance": 6
+        },
+        {
+            "type": "minecraft:in_square"
+        },
+        {
+            "type": "minecraft:heightmap",
+            "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+        },
+        {
+            "type": "minecraft:biome"
+        }
+    ]
+}
