@@ -51,6 +51,7 @@ public final class ModEvents {
         event.put(ModEntities.TROPIC_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntities.YELLOW_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build());
+        event.put(ModEntities.DEMON_EYE.get(), Monster.createMonsterAttributes().build());
     }
 
     @SubscribeEvent

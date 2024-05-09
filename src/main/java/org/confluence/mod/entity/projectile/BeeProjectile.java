@@ -1,12 +1,14 @@
 package org.confluence.mod.entity.projectile;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -14,28 +16,59 @@ import org.confluence.mod.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
 
 public class BeeProjectile extends AbstractHurtingProjectile {
-    private int blockHitTime = 0;
+    private int blockHitCount;
+    private int lifeTime;
+    private LivingEntity target;
+    private BlockPos targetPos;
 
     public BeeProjectile(EntityType<BeeProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
-    public BeeProjectile(Level level, Player player) {
+    public BeeProjectile(Level level, LivingEntity owner) {
         this(ModEntities.BEE_PROJECTILE.get(), level);
-        setOwner(player);
+        setOwner(owner);
+        this.blockHitCount = 0;
+        this.lifeTime = 0;
     }
 
     @Override
     public void tick() {
         super.tick();
+        if (tickCount % 20 == 2) {
+            level().getEntitiesOfClass(Monster.class, new AABB(getOnPos()).inflate(8.0))
+                .stream().min((a, b) -> Math.round(a.distanceTo(this) - b.distanceTo(this)))
+                .ifPresent(monster -> this.target = monster);
+        }
+        if (target != null) {
+            if (target.isSpectator() || target.isDeadOrDying()) this.target = null;
+            if (target == null) {
+                if (targetPos != null && (!level().isEmptyBlock(targetPos) || targetPos.getY() <= level().getMinBuildHeight())) {
+                    this.targetPos = null;
+                }
+                if (targetPos == null || random.nextInt(30) == 0 || targetPos.closerToCenterThan(position(), 2.0)) {
+                    this.targetPos = BlockPos.containing(getX() + random.nextInt(7) - random.nextInt(7), getY() + random.nextInt(6) - 2.0D, getZ() + random.nextInt(7) - random.nextInt(7));
+                }
+                Vec3 motion = getDeltaMovement();
+                double x = (Math.signum(targetPos.getX() + 0.5 - getX()) * 0.5 - motion.x) * 0.1;
+                double y = (Math.signum(targetPos.getY() + 0.5 - getY()) * 0.5 - motion.y) * 0.1;
+                double z = (Math.signum(targetPos.getZ() + 0.5 - getZ()) * 0.5 - motion.z) * 0.1;
+                setDeltaMovement(motion.add(x, y, z));
+            } else {
+                Vec3 vec3 = new Vec3(target.getX() - getX(), target.getY() + target.getEyeHeight() / 2.0 - getY(), target.getZ() - getZ());
+                double lengthSqr = vec3.lengthSqr();
+                if (lengthSqr < 64.0) {
+                    double factor = 1.0 - Math.sqrt(lengthSqr) / 8.0;
+                    addDeltaMovement(vec3.normalize().scale(factor * factor * 0.1));
+                }
+            }
+        }
+        move(MoverType.SELF, getDeltaMovement());
+        if (lifeTime++ > 200) discard();
     }
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
-        if (blockHitTime >= 3) {
-            discard();
-            return;
-        }
         Vec3 motion = getDeltaMovement();
         double x = motion.x;
         double y = motion.y;
@@ -46,13 +79,13 @@ public class BeeProjectile extends AbstractHurtingProjectile {
             case Z -> z = -z;
         }
         setDeltaMovement(x, y, z);
-        blockHitTime++;
+        if (blockHitCount++ > 2) discard();
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        if (entity instanceof Enemy) {
+        if (entity != getOwner()) {
             entity.hurt(damageSources().mobProjectile(this, (LivingEntity) getOwner()), 5.0F);
             discard();
         }
