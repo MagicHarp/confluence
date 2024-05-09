@@ -16,8 +16,8 @@ import org.confluence.mod.item.ModItems;
 import java.util.function.Consumer;
 
 public final class ModFluids {
-    public static final RegistryObject<FluidType> HONEY_TYPE = RegistryObject.createOptional(new ResourceLocation(Confluence.MODID, "milk"), ForgeRegistries.Keys.FLUID_TYPES.location(), Confluence.MODID);
-    public static final RegistryObject<Fluid> HONEY = RegistryObject.create(new ResourceLocation(Confluence.MODID, "milk"), ForgeRegistries.FLUIDS);
+    public static final RegistryObject<FluidType> HONEY_TYPE = RegistryObject.createOptional(new ResourceLocation(Confluence.MODID, "honey"), ForgeRegistries.Keys.FLUID_TYPES.location(), Confluence.MODID);
+    public static final RegistryObject<Fluid> HONEY = RegistryObject.create(new ResourceLocation(Confluence.MODID, "honey"), ForgeRegistries.FLUIDS);
     public static final RegistryObject<Fluid> FLOWING_HONEY = RegistryObject.create(new ResourceLocation(Confluence.MODID, "flowing_honey"), ForgeRegistries.FLUIDS);
 
     public static void register(RegisterEvent event) {
