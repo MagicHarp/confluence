@@ -59,6 +59,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
         add("curios.tooltip.aggro_attach", "多人模式时，敌人更可能以你为目标");
+        add("curios.tooltip.armor_pass", "盔甲穿透力提高%s点");
         add("curios.tooltip.compass", "显示水平位置");
         add("curios.tooltip.depth_meter", "显示深度");
         add("curios.tooltip.dps_meter", "显示你的每秒伤害");
@@ -118,7 +119,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.pocket_mirror.tooltip", "对石化免疫");
         add("item.confluence.ankh_charm.tooltip", "对大部分减益免疫");
         add("item.confluence.ankh_shield.tooltip", "对大部分减益免疫");
-        add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中(仍在开发中)");
+        add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
         add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");

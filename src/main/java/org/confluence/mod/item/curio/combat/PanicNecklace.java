@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
@@ -22,6 +23,14 @@ public class PanicNecklace extends BaseCurioItem {
         Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
+    public PanicNecklace(Rarity rarity) {
+        super(rarity);
+    }
+
+    public PanicNecklace() {
+        super();
+    }
+
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         Level level = slotContext.entity().level();
@@ -29,7 +38,7 @@ public class PanicNecklace extends BaseCurioItem {
         CompoundTag nbt = stack.getOrCreateTag();
         long lastHurt = nbt.getLong("lastHurt");
         if (lastHurt == 0) return;
-        if (level.getGameTime() - lastHurt > 100) {
+        if (level.getGameTime() - lastHurt > 160) {
             nbt.putLong("lastHurt", 0);
         }
     }

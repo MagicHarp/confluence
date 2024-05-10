@@ -108,7 +108,7 @@ public final class ForgeEvents {
         RandomSource random = living.level().random;
         float amount = event.getAmount();
 
-        HoneyComb.apply(living, random);
+        IHoneycomb.apply(living, random);
         PanicNecklace.apply(living);
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
         MagicCuffs.apply(living, damageSource, amount);

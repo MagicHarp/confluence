@@ -55,6 +55,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
         add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
         add("curios.tooltip.aggro_attach", "Enemies are more likely to target you");
+        add("curios.tooltip.armor_pass", "Increases armor penetration by %s");
         add("curios.tooltip.compass", "Displays horizontal position");
         add("curios.tooltip.depth_meter", "Displays depth");
         add("curios.tooltip.dps_meter", "Displays your damage per second");

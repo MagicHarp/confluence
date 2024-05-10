@@ -115,9 +115,7 @@ public abstract class LivingEntityMixin {
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
         } else if (fluidstate.getType().getFluidType() == ModFluids.HONEY_TYPE.get()) {
             if (self.level().isClientSide) {
-                if (self instanceof LocalPlayer) {
-                    return par1.scale(0.6);
-                }
+                if (self instanceof LocalPlayer) return par1.scale(0.6);
             } else {
                 if (self.isOnFire()) self.clearFire();
                 if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
@@ -163,8 +161,8 @@ public abstract class LivingEntityMixin {
     private float passArmor(float armor) {
         LivingEntity self = c$getSelf();
         AtomicDouble atomic = new AtomicDouble(armor);
-        CuriosUtils.findCurio(self, IArmorPass.class)
-            .ifPresent(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
+        CuriosUtils.getCurios(self, IArmorPass.class)
+            .forEach(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
         if (self.hasEffect(ModEffects.BROKEN_ARMOR.get())) {
             atomic.set(atomic.get() / 2.0);
         }

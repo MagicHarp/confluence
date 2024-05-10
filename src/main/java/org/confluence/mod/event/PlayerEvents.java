@@ -2,6 +2,7 @@ package org.confluence.mod.event;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +24,7 @@ import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.construction.AncientChisel;
+import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.mixin.LocalPlayerAccessor;
@@ -83,7 +85,11 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void attackEntity(AttackEntityEvent event) {
-        IFireAttack.apply(event.getEntity(), event.getTarget());
+        Player player = event.getEntity();
+        if (player.isLocalPlayer()) return;
+        Entity target = event.getTarget();
+        IFireAttack.apply(player, target);
+        LuckyCoin.apply(player, target);
     }
 
     @SubscribeEvent

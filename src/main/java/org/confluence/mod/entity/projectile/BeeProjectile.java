@@ -20,16 +20,18 @@ public class BeeProjectile extends AbstractHurtingProjectile {
     private int lifeTime;
     private LivingEntity target;
     private BlockPos targetPos;
+    private boolean isGiant;
 
     public BeeProjectile(EntityType<BeeProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
-    public BeeProjectile(Level level, LivingEntity owner) {
+    public BeeProjectile(Level level, LivingEntity owner, boolean isGiant) {
         this(ModEntities.BEE_PROJECTILE.get(), level);
         setOwner(owner);
         this.blockHitCount = 0;
         this.lifeTime = 0;
+        this.isGiant = isGiant;
     }
 
     @Override
@@ -59,12 +61,12 @@ public class BeeProjectile extends AbstractHurtingProjectile {
                 double lengthSqr = vec3.lengthSqr();
                 if (lengthSqr < 64.0) {
                     double factor = 1.0 - Math.sqrt(lengthSqr) / 8.0;
-                    addDeltaMovement(vec3.normalize().scale(factor * factor * 0.1));
+                    addDeltaMovement(vec3.normalize().scale(factor * factor * (isGiant ? 0.3 : 0.1)));
                 }
             }
         }
         move(MoverType.SELF, getDeltaMovement());
-        if (lifeTime++ > 200) discard();
+        if (lifeTime++ > (isGiant ? 220 : 200)) discard();
     }
 
     @Override
@@ -79,15 +81,19 @@ public class BeeProjectile extends AbstractHurtingProjectile {
             case Z -> z = -z;
         }
         setDeltaMovement(x, y, z);
-        if (blockHitCount++ > 2) discard();
+        if (blockHitCount++ > (isGiant ? 2 : 1)) discard();
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         if (entity != getOwner()) {
-            entity.hurt(damageSources().mobProjectile(this, (LivingEntity) getOwner()), 5.0F);
-            discard();
+            float damage = 5.0F + (isGiant ? random.nextInt(1, 4) : (random.nextBoolean() ? 1 : 0));
+            entity.hurt(damageSources().mobProjectile(this, (LivingEntity) getOwner()), damage);
+            if (isGiant) {
+                Vec3 motion = position().subtract(entity.position()).normalize().scale(0.5);
+                entity.push(motion.x, motion.y, motion.z);
+            }
         }
     }
 }
