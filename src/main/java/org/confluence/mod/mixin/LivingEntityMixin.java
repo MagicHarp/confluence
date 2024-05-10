@@ -3,13 +3,17 @@ package org.confluence.mod.mixin;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
@@ -21,6 +25,7 @@ import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
+import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -100,21 +105,39 @@ public abstract class LivingEntityMixin {
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
     private Vec3 waterWalk(Vec3 par1) {
-        return c$getWalkVec(par1);
+        LivingEntity self = c$getSelf();
+        if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
+        FluidState fluidstate = self.level().getFluidState(self.blockPosition());
+        if (self.canStandOnFluid(fluidstate)) {
+            AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (instance == null) return par1;
+            double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
+            return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+        } else if (fluidstate.getType().getFluidType() == ModFluids.HONEY_TYPE.get()) {
+            if (self.level().isClientSide) {
+                if (self instanceof LocalPlayer) {
+                    return par1.scale(0.6);
+                }
+            } else if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
+                self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
+            }
+            return par1.scale(0.6);
+        }
+        return par1;
     }
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 2))
     private Vec3 lavaJump(Vec3 par1) {
-        return c$getWalkVec(par1);
+        return c$getInLavaVec(par1);
     }
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 4))
     private Vec3 lavaWalk(Vec3 par1) {
-        return c$getWalkVec(par1);
+        return c$getInLavaVec(par1);
     }
 
     @Unique
-    private Vec3 c$getWalkVec(Vec3 par1) {
+    private Vec3 c$getInLavaVec(Vec3 par1) {
         LivingEntity self = c$getSelf();
         if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
         if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {

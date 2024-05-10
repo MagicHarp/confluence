@@ -59,6 +59,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
         NetworkHandler.register();
+        ModFluids.registerInteraction();
 
         event.enqueueWork(() -> {
             Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
@@ -109,7 +110,7 @@ public final class ModEvents {
     }
 
     @SubscribeEvent
-    public static void registerRecipeSerializers(RegisterEvent event) {
+    public static void register(RegisterEvent event) {
 //        if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
 //            CraftingHelper.register(new ResourceLocation(Confluence.MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
 //        }

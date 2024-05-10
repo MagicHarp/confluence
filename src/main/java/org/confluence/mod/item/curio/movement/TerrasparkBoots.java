@@ -45,7 +45,7 @@ public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILa
 
     @Override
     public boolean canStandOn(FluidState fluidState) {
-        return fluidState.is(Fluids.WATER) || fluidState.is(Fluids.LAVA);
+        return IFluidWalk.super.canStandOn(fluidState) || fluidState.is(Fluids.LAVA);
     }
 
     @Override

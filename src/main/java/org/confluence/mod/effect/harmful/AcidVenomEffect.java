@@ -5,7 +5,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.misc.ModDamageTypes;
 
-public class AcidVenomEffect extends MobEffect {    //酸性毒液：缓慢失去生命 每秒损失1点生命
+/**
+ * 酸性毒液：缓慢失去生命 每秒损失1点生命
+ */
+public class AcidVenomEffect extends MobEffect {
     public AcidVenomEffect() {
         super(MobEffectCategory.HARMFUL, 0x228B22);
     }

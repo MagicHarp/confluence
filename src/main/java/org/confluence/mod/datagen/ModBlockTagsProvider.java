@@ -9,7 +9,6 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.block.DecorativeBlocks;
 import org.confluence.mod.block.LogBlocks;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
@@ -67,29 +66,41 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             DecorativeBlocks.MARBLE_COLUMN.get(),
             DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(),
             DecorativeBlocks.CRYSTAL_BLOCK.get()
-
-
-
         );
         tag(BlockTags.DIRT).add(
-            CORRUPT_GRASS_BLOCK.get(), ASH_BLOCK.get(), ANOTHER_CRIMSON_GRASS_BLOCK.get(),
-            HALLOW_GRASS_BLOCK.get());
+            CORRUPT_GRASS_BLOCK.get(),
+            ASH_BLOCK.get(),
+            ANOTHER_CRIMSON_GRASS_BLOCK.get(),
+            HALLOW_GRASS_BLOCK.get()
+        );
         tag(BlockTags.PLANKS).add(
-            EBONY_LOG_BLOCKS.PLANKS.get(),ModBlocks.SHADOW_LOG_BLOCKS.PLANKS.get(),ModBlocks.PEARL_LOG_BLOCKS.PLANKS.get(),
-            ModBlocks.PALM_LOG_BLOCKS.PLANKS.get(),ModBlocks.SPOOKY_LOG_BLOCKS.PLANKS.get(),ModBlocks.ASH_LOG_BLOCKS.PLANKS.get());
+            EBONY_LOG_BLOCKS.PLANKS.get(),
+            SHADOW_LOG_BLOCKS.PLANKS.get(),
+            PEARL_LOG_BLOCKS.PLANKS.get(),
+            PALM_LOG_BLOCKS.PLANKS.get(),
+            SPOOKY_LOG_BLOCKS.PLANKS.get(),
+            ASH_LOG_BLOCKS.PLANKS.get()
+        );
         tag(BlockTags.LOGS).add(
-        ModBlocks.EBONY_LOG_BLOCKS.LOG.get(),ModBlocks.SHADOW_LOG_BLOCKS.LOG.get(),ModBlocks.PEARL_LOG_BLOCKS.LOG.get(),
-                ModBlocks.PALM_LOG_BLOCKS.LOG.get(),ModBlocks.ASH_LOG_BLOCKS.LOG.get());
-
+            EBONY_LOG_BLOCKS.LOG.get(),
+            SHADOW_LOG_BLOCKS.LOG.get(),
+            PEARL_LOG_BLOCKS.LOG.get(),
+            PALM_LOG_BLOCKS.LOG.get(),
+            ASH_LOG_BLOCKS.LOG.get()
+        );
         tag(BlockTags.FENCES).add(
-                EBONY_LOG_BLOCKS.FENCE.get(),ModBlocks.SHADOW_LOG_BLOCKS.FENCE.get(),ModBlocks.PEARL_LOG_BLOCKS.FENCE.get(),
-                ModBlocks.PALM_LOG_BLOCKS.FENCE.get(),ModBlocks.SPOOKY_LOG_BLOCKS.FENCE.get(),ModBlocks.ASH_LOG_BLOCKS.FENCE.get());
+            EBONY_LOG_BLOCKS.FENCE.get(),
+            SHADOW_LOG_BLOCKS.FENCE.get(),
+            PEARL_LOG_BLOCKS.FENCE.get(),
+            PALM_LOG_BLOCKS.FENCE.get(),
+            SPOOKY_LOG_BLOCKS.FENCE.get(),
+            ASH_LOG_BLOCKS.FENCE.get()
+        );
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
             Ores.ANOTHER_CRIMSON_ORE.get(), Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), Ores.ANOTHER_CRIMSON_BLOCK.get(), Ores.RAW_ANOTHER_CRIMSON_BLOCK.get()
         );
-
         tag(ModTags.NEEDS_4_LEVEL).add(
             Ores.HELLSTONE.get()
         );

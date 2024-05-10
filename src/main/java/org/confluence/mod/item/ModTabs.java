@@ -73,6 +73,7 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
 
                 output.accept(THIN_ICE_BLOCK.get());
+                output.accept(CRISPY_HONEY_BLOCK.get());
             })
             .build());
     // 材料

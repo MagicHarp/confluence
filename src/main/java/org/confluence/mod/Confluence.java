@@ -2,7 +2,6 @@ package org.confluence.mod;
 
 import com.google.gson.Gson;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +36,6 @@ public final class Confluence {
     public Confluence() throws ClassNotFoundException {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
-        ForgeMod.enableMilkFluid();
         ModResources.initialize("ConfluenceMod");
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);

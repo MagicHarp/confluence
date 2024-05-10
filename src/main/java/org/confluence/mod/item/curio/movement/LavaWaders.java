@@ -23,7 +23,7 @@ public class LavaWaders extends BaseCurioItem implements IFireImmune, ILavaImmun
 
     @Override
     public boolean canStandOn(FluidState fluidState) {
-        return fluidState.is(Fluids.WATER) || fluidState.is(Fluids.LAVA);
+        return IFluidWalk.super.canStandOn(fluidState) || fluidState.is(Fluids.LAVA);
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
