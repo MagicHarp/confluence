@@ -118,8 +118,11 @@ public abstract class LivingEntityMixin {
                 if (self instanceof LocalPlayer) {
                     return par1.scale(0.6);
                 }
-            } else if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
-                self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
+            } else {
+                if (self.isOnFire()) self.clearFire();
+                if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
+                    self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
+                }
             }
             return par1.scale(0.6);
         }
