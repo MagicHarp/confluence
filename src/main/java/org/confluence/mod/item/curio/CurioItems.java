@@ -248,16 +248,16 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 天界星盘 */
 
 
+    /* 向导巫毒娃娃 */
     /* 服装商巫毒娃娃 */
     LUCKY_COIN("lucky_coin", LuckyCoin::new), // 幸运币
     GOLD_RING("gold_ring", GoldRing::new), // 金戒指
     COIN_RING("coin_ring", CoinRing::new), // 钱币戒指
-    /* 宝藏磁石 */
     /* 优惠卡 */
-    /* 花靴 */
     /* 贪婪戒指 */
+    /* 宝藏磁石 */
+    /* 花靴 */
     /* 植物纤维绳索宝典 */
-    /* 向导巫毒娃娃 */
     /* 水母项链 */
     /* 收音机 */
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
