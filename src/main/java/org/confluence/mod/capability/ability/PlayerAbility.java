@@ -12,8 +12,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.command.ConfluenceData;
-import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
+import org.confluence.mod.item.curio.IRangePickup;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -37,6 +37,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int crystals;
     private double starRange;
     private double coinRange;
+    private double dropsRange;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -53,6 +54,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.crystals = 0;
         this.starRange = 1.75;
         this.coinRange = 2.0;
+        this.dropsRange = 0.0;
     }
 
     public void freshAbility(LivingEntity living) {
@@ -66,6 +68,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger aggro = new AtomicInteger();
         AtomicBoolean star = new AtomicBoolean();
         AtomicBoolean coin = new AtomicBoolean();
+        AtomicBoolean drops = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -88,6 +91,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
                 if (item instanceof IRangePickup.Star) star.set(true);
                 if (item instanceof IRangePickup.Coin) coin.set(true);
+                if (item instanceof IRangePickup.Drops) drops.set(true);
             }
         });
         this.jumpBoost = jump.get();
@@ -100,6 +104,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = aggro.get();
         this.starRange = star.get() ? 14.25 : 1.75;
         this.coinRange = coin.get() ? 16.67 : 2.0;
+        this.dropsRange = drops.get() ? 6.25 : 0.0;
     }
 
     public double getJumpBoost() {
@@ -193,6 +198,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return coinRange;
     }
 
+    public double getDropsRange() {
+        return dropsRange;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -209,6 +218,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("crystals", crystals);
         nbt.putDouble("starRange", starRange);
         nbt.putDouble("coinRange", coinRange);
+        nbt.putDouble("dropsRange", dropsRange);
         return nbt;
     }
 
@@ -227,6 +237,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.crystals = nbt.getInt("crystals");
         this.starRange = nbt.getDouble("starRange");
         this.coinRange = nbt.getDouble("coinRange");
+        this.dropsRange = nbt.getDouble("dropsRange");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -243,5 +254,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.crystals = playerAbility.crystals;
         this.starRange = playerAbility.starRange;
         this.coinRange = playerAbility.coinRange;
+        this.dropsRange = playerAbility.dropsRange;
     }
 }

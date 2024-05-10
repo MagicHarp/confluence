@@ -19,7 +19,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.common.LifeCrystal;
-import org.confluence.mod.item.curio.HealthAndMana.IRangePickup;
+import org.confluence.mod.item.curio.IRangePickup;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;

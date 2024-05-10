@@ -10,10 +10,7 @@ import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.informational.*;
-import org.confluence.mod.item.curio.miscellaneous.CoinRing;
-import org.confluence.mod.item.curio.miscellaneous.GoldRing;
-import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
-import org.confluence.mod.item.curio.miscellaneous.SpectreGoggles;
+import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
@@ -255,7 +252,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     COIN_RING("coin_ring", CoinRing::new), // 钱币戒指
     /* 优惠卡 */
     /* 贪婪戒指 */
-    /* 宝藏磁石 */
+    TREASURE_MAGNET("treasure_magnet", TreasureMagnet::new), // 宝藏磁石
     /* 花靴 */
     /* 植物纤维绳索宝典 */
     /* 水母项链 */

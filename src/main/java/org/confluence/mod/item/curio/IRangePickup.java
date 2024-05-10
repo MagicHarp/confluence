@@ -1,10 +1,9 @@
-package org.confluence.mod.item.curio.HealthAndMana;
+package org.confluence.mod.item.curio;
 
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -12,14 +11,15 @@ import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.misc.ModTags;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public interface IRangePickup {
-    static void apply(Player player, Function<PlayerAbility, Double> range, TagKey<Item> tag) {
+    static void apply(Player player, Function<PlayerAbility, Double> range, Predicate<ItemStack> predicate) {
         player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
             player.level().getEntitiesOfClass(
                 ItemEntity.class,
                 new AABB(player.getOnPos()).inflate(range.apply(playerAbility)),
-                itemEntity -> itemEntity.getItem().is(tag)
+                itemEntity -> predicate.test(itemEntity.getItem())
             ).forEach(itemEntity -> {
                 if (itemEntity.isRemoved()) return;
                 Vec3 vec3 = player.position()
@@ -33,7 +33,7 @@ public interface IRangePickup {
 
     interface Star {
         static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getStarRange, ModTags.PROVIDE_MANA);
+            IRangePickup.apply(player, PlayerAbility::getStarRange, itemStack -> itemStack.is(ModTags.PROVIDE_MANA));
         }
     }
 
@@ -44,7 +44,13 @@ public interface IRangePickup {
 
     interface Coin {
         static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getCoinRange, ModTags.COIN);
+            IRangePickup.apply(player, PlayerAbility::getCoinRange, itemStack -> itemStack.is(ModTags.COIN));
+        }
+    }
+
+    interface Drops {
+        static void apply(Player player) {
+            IRangePickup.apply(player, PlayerAbility::getDropsRange, itemStack -> !itemStack.is(ModTags.PROVIDE_MANA) && !itemStack.is(ModTags.COIN));
         }
     }
 }
