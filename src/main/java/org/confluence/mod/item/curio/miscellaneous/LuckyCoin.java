@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.UUID;
 
 public class LuckyCoin extends BaseCurioItem {
-    public static final UUID LUCKY_UUID = UUID.fromString("");
+    public static final UUID LUCKY_UUID = UUID.fromString("C136140E-2C12-14F2-ED0D-A6848D4F4EED");
     public static final ImmutableMultimap<Attribute, AttributeModifier> LUCKY = ImmutableMultimap.of(
         Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Coin", 0.05, AttributeModifier.Operation.ADDITION)
     );
