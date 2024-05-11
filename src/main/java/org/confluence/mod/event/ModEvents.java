@@ -62,15 +62,16 @@ public final class ModEvents {
         ModFluids.registerInteraction();
 
         event.enqueueWork(() -> {
-            Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
-            if (armor instanceof RangedAttribute rangedAttribute) {
-                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+            if (!ModList.get().isLoaded("attributefix")) {
+                Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
+                if (armor instanceof RangedAttribute rangedAttribute) {
+                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+                }
+                Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
+                if (attribute instanceof RangedAttribute rangedAttribute) {
+                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+                }
             }
-            Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
-            if (attribute instanceof RangedAttribute rangedAttribute) {
-                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
-            }
-
             // Weights are kept intentionally low as we add minimal biomes
             Regions.register(new AnotherCrimsonRegion(new ResourceLocation(Confluence.MODID, "another_crimson"), 1));
             Regions.register(new TheHallowRegion(new ResourceLocation(Confluence.MODID, "the_hallow"), 1));
