@@ -48,4 +48,5 @@ public class GravityGlobe extends BaseCurioItem implements ModRarity.Expert {
             );
         }
     }
+
 }

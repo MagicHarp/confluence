@@ -187,6 +187,14 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
         add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
         add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
+        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
+        add("item.confluence.sweetheart_necklace.tooltip", "When damaged, the bee is released and the user is immersed in honey and increases movement speed");
+        add("item.confluence.ancient_chisel.tooltip", "25% increased mining speed");
+        add("item.confluence.ancient_chisel.tooltip2", "“Age-old problems require age-old solutions”");
+        add("item.confluence.lucky_coin.tooltip", "Hitting an enemy can sometimes drop extra coins");
+        add("item.confluence.coin_ring.tooltip", "Increasing the coin pickup range and hitting enemies will sometimes drop additional coins");
+        add("item.confluence.hive_pack.tooltip", "Increases the strength of friendly bees");
+        add("item.confluence.treasure_magnet.tooltip", "Expanded item pickup");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
