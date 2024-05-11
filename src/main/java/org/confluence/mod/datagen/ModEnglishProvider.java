@@ -161,7 +161,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.brain_of_confusion.tooltip", "Has a chance to create illusions and dodge an attack");
         add("item.confluence.brain_of_confusion.tooltip2", "Temporarily increase critical chance after dodge");
         add("item.confluence.brain_of_confusion.tooltip3", "May confuse nearby enemies after being struck");
-        add("item.confluence.royal_gel.tooltip", "Slimes become friendly");
+        add("item.confluence.royal_gel.tooltip", "Slimes cannot damage you");
         add("item.confluence.magic_cuffs.tooltip", "Maximum mana is increased by 20");
         add("item.confluence.magic_cuffs.tooltip2", "Restores mana when injured");
         add("item.confluence.magnet_flower.tooltip", "8% reduced mana cost");

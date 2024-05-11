@@ -166,7 +166,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.brain_of_confusion.tooltip", "有几率制造幻觉并躲避攻击");
         add("item.confluence.brain_of_confusion.tooltip2", "闪避后暂时增加暴击几率");
         add("item.confluence.brain_of_confusion.tooltip3", "被击中后可能会迷惑附近的敌人");
-        add("item.confluence.royal_gel.tooltip", "史莱姆将变成友好生物");
+        add("item.confluence.royal_gel.tooltip", "史莱姆无法对你造成伤害");
         add("item.confluence.magic_cuffs.tooltip", "最大魔力值增加20");
         add("item.confluence.magic_cuffs.tooltip2", "受伤时恢复魔力");
         add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%");
@@ -627,6 +627,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLDEN_COIN.get(), "金币");
         add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
+        add(HONEY_BUCKET.get(), "蜂蜜桶");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");

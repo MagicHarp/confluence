@@ -96,7 +96,6 @@ public final class ModTabs {
                 output.accept(ModItems.PLATINUM_COIN.get());
                 output.accept(ModItems.EXPERT_TEST_ITEM.get());
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
-                output.accept(ModItems.HONEY_BUCKET.get());
                 output.accept(ModItems.STAR.get());
                 output.accept(ModItems.SOUL_CAKE.get());
                 output.accept(ModItems.ALPHA.get());
@@ -115,6 +114,7 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
+                output.accept(ModItems.HONEY_BUCKET.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) output.accept(pickaxes.get());
                 for (Axes axes : Axes.values()) output.accept(axes.get());
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());
