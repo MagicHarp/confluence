@@ -192,6 +192,38 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
         add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
+        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
+        add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
+        add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
+        add("item.confluence.ancient_chisel.tooltip2", "“古老的问题需要古老的解决方案”");
+        add("item.confluence.lucky_coin.tooltip", "击中敌人有时会掉落额外的钱币");
+        add("item.confluence.coin_ring.tooltip", "扩大钱币拾取范围、击中敌人有时会掉落额外的钱币");
+        add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
+        add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
+
+        add("effect.confluence.mana_sickness","魔力病");
+        add("effect.confluence.exquisitely_stuffed","食物增益");
+        add("effect.confluence.iron_skin","铁皮");
+        add("effect.confluence.endurance","耐力");
+        add("effect.confluence.inferno","狱火");
+        add("effect.confluence.life_force","生命力");
+        add("effect.confluence.thorns","荆棘");
+        add("effect.confluence.honey","蜂蜜");
+        add("effect.confluence.paladins_shield","圣骑士之盾");
+        add("effect.confluence.titan","泰坦之力");
+        add("effect.confluence.wrath","愤怒");
+        add("effect.confluence.gravitation","重力控制");
+        add("effect.confluence.builder","加快建造");
+        add("effect.confluence.bleeding","流血");
+        add("effect.confluence.silenced","沉默");
+        add("effect.confluence.cursed","诅咒");
+        add("effect.confluence.confused","困惑");
+        add("effect.confluence.withered_armor","盔甲腐蚀");
+        add("effect.confluence.ichor","灵液");
+        add("effect.confluence.potion_sickness","耐药性");
+        add("effect.confluence.cerebral_mindtrick","大脑一激灵");
+        add("effect.confluence.broken_armor","破甲");
+        add("effect.confluence.stoned","石化");
 
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
