@@ -833,6 +833,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.ANKH_CHARM.get(), "十字章护身符");
         add(CurioItems.ANKH_SHIELD.get(), "十字章护盾");
         add(CurioItems.GRAVITY_GLOBE.get(), "重力球");
+        add(CurioItems.WARRIOR_EMBLEM.get(), "战士徽章");
+        add(CurioItems.SWEETHEART_NECKLACE.get(), "甜心项链");
+        add(CurioItems.STINGER_NECKLACE.get(), "毒刺项链");
+        add(CurioItems.HONEY_BALLOON.get(), "蜂蜜气球");
+        add(CurioItems.AMBER_HORSESHOE_BALLOON.get(), "琥珀马掌气球");
+        add(CurioItems.LUCKY_COIN.get(), "幸运币");
+        add(CurioItems.COIN_RING.get(), "钱币戒指");
+        add(CurioItems.TREASURE_MAGNET.get(), "宝藏磁石");
+        add(CurioItems.HIVE_PACK.get(), "蜂巢背包");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
