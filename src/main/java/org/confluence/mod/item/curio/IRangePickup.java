@@ -15,10 +15,12 @@ import java.util.function.Predicate;
 
 public interface IRangePickup {
     static void apply(Player player, Function<PlayerAbility, Double> range, Predicate<ItemStack> predicate) {
-        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
+        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            double value = range.apply(playerAbility);
+            if (value <= 0.0) return;
             player.level().getEntitiesOfClass(
                 ItemEntity.class,
-                new AABB(player.getOnPos()).inflate(range.apply(playerAbility)),
+                new AABB(player.getOnPos()).inflate(value),
                 itemEntity -> predicate.test(itemEntity.getItem())
             ).forEach(itemEntity -> {
                 if (itemEntity.isRemoved()) return;
@@ -27,8 +29,9 @@ public interface IRangePickup {
                     .normalize().scale(0.05F).add(0, 0.04F, 0);
                 itemEntity.addDeltaMovement(vec3);
                 itemEntity.move(MoverType.SELF, itemEntity.getDeltaMovement());
-            })
-        );
+            });
+
+        });
     }
 
     interface Star {

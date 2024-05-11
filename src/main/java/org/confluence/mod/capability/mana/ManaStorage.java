@@ -136,7 +136,7 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         return false;
     }
 
-    public void freshAbility(LivingEntity living) {
+    public void flushAbility(LivingEntity living) {
         AtomicDouble bonus = new AtomicDouble(1.0);
         AtomicDouble ratio = new AtomicDouble(1.0);
         AtomicBoolean band = new AtomicBoolean();

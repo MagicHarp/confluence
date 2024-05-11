@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.combat;
+package org.confluence.mod.item.curio.expert;
 
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;

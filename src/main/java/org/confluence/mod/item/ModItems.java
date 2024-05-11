@@ -13,6 +13,7 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
@@ -66,6 +67,7 @@ public final class ModItems {
         CurioItems.init();
         QuestedFishes.init();
         Foods.init();
+        FishingPoles.init();
         ITEMS.register(bus);
     }
 }

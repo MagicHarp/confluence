@@ -14,6 +14,7 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
@@ -119,6 +120,7 @@ public final class ModTabs {
                 for (Axes axes : Axes.values()) output.accept(axes.get());
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());
                 for (HammerAxes hammerAxes : HammerAxes.values()) output.accept(hammerAxes.get());
+                for (FishingPoles fishingPoles : FishingPoles.values()) output.accept(fishingPoles.get());
             })
             .build());
 
@@ -171,7 +173,7 @@ public final class ModTabs {
                 for (Armors armors : Armors.values()) output.accept(armors.get());
             })
             .build());
-    //饰品
+    // 饰品
     public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("curios",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ACCESSORIES_ICON.get()))
             .title(Component.translatable("creativetab.confluence.curios"))

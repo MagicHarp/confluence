@@ -2,10 +2,12 @@ package org.confluence.mod.client.handler;
 
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.network.s2c.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,6 +110,18 @@ public final class ClientPacketHandler {
     public static void handleCthulhu(ShieldOfCthulhuPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> hasCthulhu = packet.has());
+        context.setPacketHandled(true);
+    }
+
+    public static void handleFlush(FlushPlayerAbilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            if (packet.flush()) {
+                LocalPlayer localPlayer = Minecraft.getInstance().player;
+                if (localPlayer != null) localPlayer.getCapability(AbilityProvider.CAPABILITY)
+                    .ifPresent(playerAbility -> playerAbility.flushAbility(localPlayer));
+            }
+        });
         context.setPacketHandled(true);
     }
 }

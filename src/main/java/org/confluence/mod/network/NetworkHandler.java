@@ -36,6 +36,7 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, AutoAttackPacketS2C.class, AutoAttackPacketS2C::encode, AutoAttackPacketS2C::decode, ClientPacketHandler::handleSwing);
         CHANNEL.registerMessage(packetId++, ShieldOfCthulhuPacketS2C.class, ShieldOfCthulhuPacketS2C::encode, ShieldOfCthulhuPacketS2C::decode, ClientPacketHandler::handleCthulhu);
         CHANNEL.registerMessage(packetId++, GravityGlobePacketS2C.class, GravityGlobePacketS2C::encode, GravityGlobePacketS2C::decode, GravitationEffect::handleGlobe);
+        CHANNEL.registerMessage(packetId++, FlushPlayerAbilityPacketS2C.class, FlushPlayerAbilityPacketS2C::encode, FlushPlayerAbilityPacketS2C::decode, ClientPacketHandler::handleFlush);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);

@@ -54,10 +54,12 @@ public final class PlayerEvents {
                 ((LocalPlayerAccessor) localPlayer).setCrouching(false);
             }
         } else {
-            IRangePickup.Star.apply(event.player);
-            IRangePickup.Coin.apply(event.player);
-            if (event.side == LogicalSide.CLIENT) return;
-            ServerPlayer serverPlayer = (ServerPlayer) event.player;
+            Player player = event.player;
+            IRangePickup.Star.apply(player);
+            IRangePickup.Coin.apply(player);
+            IRangePickup.Drops.apply(player);
+            if (player.isLocalPlayer()) return;
+            ServerPlayer serverPlayer = (ServerPlayer) player;
             PlayerUtils.regenerateMana(serverPlayer);
         }
     }

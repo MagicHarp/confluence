@@ -47,8 +47,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = false;
         this.lavaHurtReduce = false;
         this.maxLavaImmuneTicks = 0;
-
         this.remainLavaImmuneTicks = 0;
+
         this.aggro = 0;
         this.fishingPower = 0.0F;
         this.crystals = 0;
@@ -57,7 +57,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.dropsRange = 0.0;
     }
 
-    public void freshAbility(LivingEntity living) {
+    public void flushAbility(LivingEntity living) {
         AtomicDouble jump = new AtomicDouble(1.0);
         AtomicInteger fall = new AtomicInteger();
         AtomicInteger invul = new AtomicInteger(20);
@@ -73,6 +73,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
+                if (itemStack.isEmpty()) continue;
                 Item item = itemStack.getItem();
                 if (item instanceof IJumpBoost iJumpBoost) jump.set(Math.max(iJumpBoost.getBoost(), jump.get()));
                 if (item instanceof IFallResistance iFallResistance && fall.get() != -1) {

@@ -64,11 +64,12 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (player.getCapability(ManaProvider.CAPABILITY).isPresent()) return;
-            event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
-
-            if (player.getCapability(AbilityProvider.CAPABILITY).isPresent()) return;
-            event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
+            if (!player.isLocalPlayer() && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
+                event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
+            }
+            if (!player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {
+                event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
+            }
         }
     }
 
