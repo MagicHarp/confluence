@@ -2,6 +2,7 @@ package org.confluence.mod.mixin;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import org.confluence.mod.entity.fishing.LavaFishingHook;
+import org.confluence.mod.misc.ModLootTables;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,31 +30,31 @@ public abstract class FishingHookMixin {
         return par1;
     }
 
-    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",ordinal = 0), index = 0)
+    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 0), index = 0)
     private ParticleOptions smokeParticle(ParticleOptions pType) {
         if (c$isLava()) return ParticleTypes.SMOKE;
         return pType;
     }
 
-    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",ordinal = 1), index = 0)
+    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 1), index = 0)
     private ParticleOptions flameParticle(ParticleOptions pType) {
         if (c$isLava()) return ParticleTypes.FLAME;
         return pType;
     }
 
-    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",ordinal = 2), index = 0)
+    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 2), index = 0)
     private ParticleOptions flameParticle2(ParticleOptions pType) {
         if (c$isLava()) return ParticleTypes.FLAME;
         return pType;
     }
 
-    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",ordinal = 3), index = 0)
+    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 3), index = 0)
     private ParticleOptions smokeParticle2(ParticleOptions pType) {
         if (c$isLava()) return ParticleTypes.SMOKE;
         return pType;
     }
 
-    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I",ordinal = 4), index = 0)
+    @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 4), index = 0)
     private ParticleOptions flameParticle3(ParticleOptions pType) {
         if (c$isLava()) return ParticleTypes.FLAME;
         return pType;
@@ -64,10 +66,11 @@ public abstract class FishingHookMixin {
         return pType;
     }
 
-//    @ModifyArg(method = "retrieve", at=@At(value = "INVOKE",target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
-//    private ResourceLocation loot(ResourceLocation par1) {
-//        if(c$isLava())return
-//    }
+    @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
+    private ResourceLocation loot(ResourceLocation par1) {
+        if (c$isLava()) return ModLootTables.FISHING_LAVA;
+        return par1;
+    }
 
     @Unique
     private boolean c$isLava() {

@@ -1,4 +1,4 @@
-package org.confluence.mod.item.common;
+package org.confluence.mod.item.fishing;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
@@ -64,7 +64,7 @@ public enum QuestedFishes implements EnumRegister<Item> {
     private final RegistryObject<Item> value;
 
     QuestedFishes(String id) {
-        this.value = ModItems.ITEMS.register(id, () -> new Item(new Item.Properties().rarity(ModRarity.QUEST)));
+        this.value = ModItems.ITEMS.register(id, () -> new Item(new Item.Properties().fireResistant().rarity(ModRarity.QUEST)));
     }
 
     @Override

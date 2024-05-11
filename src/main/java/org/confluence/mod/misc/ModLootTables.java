@@ -6,6 +6,5 @@ import static org.confluence.mod.Confluence.MODID;
 
 public final class ModLootTables {
     public static final ResourceLocation CLAM = new ResourceLocation(MODID, "gameplay/clam");
-    public static final ResourceLocation FISH_PLAINS = new ResourceLocation(MODID, "gameplay/fishing/fish_plains");
-    public static final ResourceLocation FISH_SNOW = new ResourceLocation(MODID, "gameplay/fishing/fish_snow");
+    public static final ResourceLocation FISHING_LAVA = new ResourceLocation(MODID, "gameplay/fishing/lava");
 }
