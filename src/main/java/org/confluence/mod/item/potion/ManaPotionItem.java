@@ -7,19 +7,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.util.PlayerUtils;
-import org.jetbrains.annotations.NotNull;
 
-public class ManaPotion extends AbstractPotion {
+public class ManaPotionItem extends AbstractPotionItem {
     private final int amount;
 
-    public ManaPotion(int amount, Properties properties) {
+    public ManaPotionItem(int amount, Properties properties) {
         super(properties);
         this.amount = amount;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
-        if (level.isClientSide) return itemStack;
+    protected void apply(ItemStack itemStack, Level level, LivingEntity living) {
+        if (level.isClientSide) return;
         if (living instanceof ServerPlayer serverPlayer) {
             PlayerUtils.receiveMana(serverPlayer, () -> amount);
             MobEffectInstance instance = serverPlayer.getEffect(ModEffects.MANA_SICKNESS.get());
@@ -30,10 +33,5 @@ public class ManaPotion extends AbstractPotion {
                 serverPlayer.addEffect(instance);
             }
         }
-        return super.finishUsingItem(itemStack, level, living);
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

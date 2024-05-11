@@ -33,7 +33,7 @@ public enum Foods implements EnumRegister<Item> {
     HOTDOG("hotdog", () -> new BaseFoodItem(FoodType.SENIOR)),//热狗
     PIZZA("pizza", () -> new BaseFoodItem(FoodType.SENIOR)),//披萨
     POTATO_CHIPS("potato_chips", () -> new BaseFoodItem(FoodType.SENIOR)),//薯片
-    SHRIMP_PO_BOY ("shrimp_po_boy", () -> new BaseFoodItem(FoodType.SENIOR)),//鲨宝男孩
+    SHRIMP_PO_BOY("shrimp_po_boy", () -> new BaseFoodItem(FoodType.SENIOR)),//鲨宝男孩
     SHUCKED_OYSTER("shucked_oyster", () -> new BaseFoodItem(FoodType.LOW)),//去壳牡蛎
     SPAGHETTI("spaghetti", () -> new BaseFoodItem(FoodType.SENIOR)),//意大利面
     SURPER_STEAK("surper_steak", () -> new BaseFoodItem(FoodType.SENIOR)),//超大肉排
@@ -119,15 +119,6 @@ public enum Foods implements EnumRegister<Item> {
     GOLDEN_CARP("golden_carp", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),
     OBSIDIAN_FISH("obsidian_fish", () -> new BaseFoodItem(FoodType.FISH)),
     FLASHFIN_KOI("flashfin_koi", () -> new BaseFoodItem(FoodType.FISH)),
-    //药水
-    GRAVITATION_POTION("gravitation_potion", () -> new PotionFoodItem((FoodType.GRAVITY_POTION))),
-    IRON_SKIN_POTION("iron_skin_potion", () -> new PotionFoodItem((FoodType.IRON_SKIN_POTION))),
-    WRATH_POTION("wrath_potion", () -> new PotionFoodItem((FoodType.WRATH_POTION))),
-    TITAN_POTION("titan_potion",() -> new PotionFoodItem((FoodType.TITAN_POTION))),
-    BUILDER_POTION("builder_potion",() -> new PotionFoodItem((FoodType.BUILDER_POTION))),
-    ENDURANCE_POTION("endurance_potion",() -> new PotionFoodItem((FoodType.ENDURANCE_POTION))),
-    INFERNO_POTION("inferno_potion",() -> new PotionFoodItem((FoodType.INFERNO_POTION))),
-    LIFEFORCE_POTION("lifeforce_potion",() -> new PotionFoodItem((FoodType.LIFEFORCE_POTION))),
     ;
     private final RegistryObject<Item> value;
 

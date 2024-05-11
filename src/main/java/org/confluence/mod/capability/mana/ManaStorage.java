@@ -14,7 +14,7 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.HealthAndMana.IAutoGetMana;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
 import org.confluence.mod.item.curio.combat.IMagicAttack;
-import org.confluence.mod.item.potion.ManaPotion;
+import org.confluence.mod.item.potion.ManaPotionItem;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -79,10 +79,10 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
             if (CuriosUtils.noSameCurio(serverPlayer, IAutoGetMana.class)) return false;
             ItemStack toUse = null;
             for (ItemStack itemStack : serverPlayer.getInventory().items) {
-                if (itemStack.getItem() instanceof ManaPotion manaPotion) {
+                if (itemStack.getItem() instanceof ManaPotionItem manaPotion) {
                     int amount = manaPotion.getAmount();
                     if (currentMana + amount < extract) continue;
-                    if (toUse == null || amount < ((ManaPotion) toUse.getItem()).getAmount()) toUse = itemStack;
+                    if (toUse == null || amount < ((ManaPotionItem) toUse.getItem()).getAmount()) toUse = itemStack;
                     if (amount == 50) break;
                 }
             }

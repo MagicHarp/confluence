@@ -8,8 +8,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractPotion extends Item {
-    public AbstractPotion(Properties properties) {
+public abstract class AbstractPotionItem extends Item {
+    public AbstractPotionItem(Properties properties) {
         super(properties.stacksTo(16));
     }
 
@@ -35,6 +35,7 @@ public abstract class AbstractPotion extends Item {
         if (itemStack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {
+            apply(itemStack, level, living);
             if (living instanceof Player player && !player.getAbilities().instabuild) {
                 ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
                 if (!player.getInventory().add(itemstack)) {
@@ -48,4 +49,6 @@ public abstract class AbstractPotion extends Item {
     protected boolean canUse(Level level, Player player, InteractionHand hand) {
         return true;
     }
+
+    protected abstract void apply(ItemStack itemStack, Level level, LivingEntity living);
 }

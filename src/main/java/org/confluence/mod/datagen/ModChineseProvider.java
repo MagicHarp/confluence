@@ -15,6 +15,7 @@ import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
+import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.DecorativeBlocks.*;
@@ -333,7 +334,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("prefix.confluence.tooltip.add", "+%s %s");
         add("prefix.confluence.tooltip.attack_damage", "攻击伤害");
         add("prefix.confluence.tooltip.attack_speed", "攻击速度");
-        add("prefix.confluence.tooltip.critical_chance", "暴击几率");
+        add("prefix.confluence.tooltip.critical_chance", "暴击率");
         add("prefix.confluence.tooltip.knock_back", "击退");
         add("prefix.confluence.tooltip.velocity", "投射速度");
         add("prefix.confluence.tooltip.mana_cost", "魔力消耗");
@@ -1083,14 +1084,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
         //药水
-        add(Foods.GRAVITATION_POTION.get(), "重力药水");
-        add(Foods.IRON_SKIN_POTION.get(), "铁皮药水");
-        add(Foods.WRATH_POTION.get(), "怒气药水");
-        add(Foods.TITAN_POTION.get(), "泰坦药水");
-        add(Foods.BUILDER_POTION.get(), "建造者药水");
-        add(Foods.ENDURANCE_POTION.get(), "耐力药水");
-        add(Foods.INFERNO_POTION.get(), "狱火药水");
-        add(Foods.LIFEFORCE_POTION.get(), "生命力药水");
+        add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
+        add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");
+        add(TerraPotions.WRATH_POTION.get(), "怒气药水");
+        add(TerraPotions.TITAN_POTION.get(), "泰坦药水");
+        add(TerraPotions.BUILDER_POTION.get(), "建造者药水");
+        add(TerraPotions.ENDURANCE_POTION.get(), "耐力药水");
+        add(TerraPotions.INFERNO_POTION.get(), "狱火药水");
+        add(TerraPotions.LIFEFORCE_POTION.get(), "生命力药水");
         //endregion items
     }
 }

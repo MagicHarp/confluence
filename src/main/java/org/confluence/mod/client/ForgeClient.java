@@ -118,7 +118,7 @@ public final class ForgeClient {
                         "prefix.confluence.tooltip." + (b ? "plus" : "take"),
                         ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.manaCost * (b ? 100.0 : -100.0)),
                         Component.translatable("prefix.confluence.tooltip.mana_cost")
-                    ).withStyle(b ? ChatFormatting.RED : ChatFormatting.BLUE));
+                    ).withStyle(b ? ChatFormatting.RED : ChatFormatting.GREEN));
                 }
             } else if (itemPrefix.type == PrefixType.CURIO) {
                 if (itemPrefix.armor > 0) {
@@ -126,21 +126,21 @@ public final class ForgeClient {
                         "prefix.confluence.tooltip.add",
                         itemPrefix.armor,
                         Component.translatable("prefix.confluence.tooltip.armor")
-                    ).withStyle(ChatFormatting.BLUE));
+                    ).withStyle(ChatFormatting.GREEN));
                 }
                 if (itemPrefix.additionalMana > 0) {
                     tooltip.add(Component.translatable(
                         "prefix.confluence.tooltip.add",
                         itemPrefix.additionalMana,
                         Component.translatable("prefix.confluence.tooltip.additional_mana")
-                    ).withStyle(ChatFormatting.BLUE));
+                    ).withStyle(ChatFormatting.GREEN));
                 }
                 if (itemPrefix.movementSpeed > 0.0) {
                     tooltip.add(Component.translatable(
                         "prefix.confluence.tooltip.plus",
                         ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.movementSpeed * 100.0),
                         Component.translatable("prefix.confluence.tooltip.movement_speed")
-                    ).withStyle(ChatFormatting.BLUE));
+                    ).withStyle(ChatFormatting.GREEN));
                 }
             }
         });

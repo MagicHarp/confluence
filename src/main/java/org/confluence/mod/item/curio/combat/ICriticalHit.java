@@ -22,6 +22,7 @@ public interface ICriticalHit {
                     if (CuriosUtils.hasCurio(player, CurioItems.SUN_STONE.get())) chance += 0.02;
                 }
                 if (player.hasEffect(ModEffects.CEREBRAL_MINDTRICK.get())) chance += 0.04;
+                if (player.hasEffect(ModEffects.RAGE.get())) chance *= 1.1;
                 if (player.level().random.nextFloat() < chance) {
                     event.setDamageModifier(1.5F);
                     event.setResult(Event.Result.ALLOW);
