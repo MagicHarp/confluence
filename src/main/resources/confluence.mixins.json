@@ -14,7 +14,8 @@
         "MinecraftAccessor",
         "PlayerAdvancementsMixin",
         "PlayerMixin",
-        "RangedAttributeAccessor"
+        "RangedAttributeAccessor",
+        "SlimeBlockMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

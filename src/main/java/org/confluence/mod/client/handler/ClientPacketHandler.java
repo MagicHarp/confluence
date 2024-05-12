@@ -3,7 +3,6 @@ package org.confluence.mod.client.handler;
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -134,7 +133,7 @@ public final class ClientPacketHandler {
             LocalPlayer localPlayer = Minecraft.getInstance().player;
             if (localPlayer == null) return;
             Entity entity = localPlayer.level().getEntity(packet.entityId());
-            if (entity instanceof RemotePlayer) {
+            if (entity != null) {
                 ((IEntity) entity).c$setShouldRot(packet.enabled());
             }
         });
