@@ -1,6 +1,7 @@
 package org.confluence.mod.event;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -200,5 +202,12 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingHeal(LivingHealEvent event) {
         BleedingEffect.apply(event.getEntity(), event);
+    }
+
+    @SubscribeEvent
+    public static void entityJoinLevel(EntityJoinLevelEvent event) {
+        if(event.getEntity() instanceof RemotePlayer remotePlayer) {
+
+        }
     }
 }

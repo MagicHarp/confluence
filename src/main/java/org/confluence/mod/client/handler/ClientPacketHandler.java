@@ -3,12 +3,15 @@ package org.confluence.mod.client.handler;
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.network.s2c.*;
+import org.confluence.mod.util.IEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -120,6 +123,19 @@ public final class ClientPacketHandler {
                 LocalPlayer localPlayer = Minecraft.getInstance().player;
                 if (localPlayer != null) localPlayer.getCapability(AbilityProvider.CAPABILITY)
                     .ifPresent(playerAbility -> playerAbility.flushAbility(localPlayer));
+            }
+        });
+        context.setPacketHandled(true);
+    }
+
+    public static void handleRemoteRot(BroadcastGravitationRotPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            LocalPlayer localPlayer = Minecraft.getInstance().player;
+            if (localPlayer == null) return;
+            Entity entity = localPlayer.level().getEntity(packet.entityId());
+            if (entity instanceof RemotePlayer) {
+                ((IEntity) entity).c$setShouldRot(packet.enabled());
             }
         });
         context.setPacketHandled(true);
