@@ -64,7 +64,7 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (!player.isLocalPlayer() && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
+            if (player instanceof ServerPlayer && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
             }
             if (!player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {

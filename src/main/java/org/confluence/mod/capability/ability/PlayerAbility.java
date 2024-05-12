@@ -173,8 +173,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         };
         if (player.isLocalPlayer()) { // 血月
             if (ClientPacketHandler.getMoonSpecific() == 11) base *= 1.1F;
-        } else if (ConfluenceData.get((ServerLevel) level).getMoonSpecific() == 11) {
-            base *= 1.1F;
+        } else if (level instanceof ServerLevel serverLevel) {
+            if (ConfluenceData.get(serverLevel).getMoonSpecific() == 11) base *= 1.1F;
         }
         return base;
     }

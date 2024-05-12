@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -46,21 +45,21 @@ public final class PlayerEvents {
     @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            if (event.side != LogicalSide.CLIENT) return;
-            LocalPlayer localPlayer = (LocalPlayer) event.player;
-            if (GravitationEffect.isShouldRot() && localPlayer.onGround() && localPlayer.isCrouching() && !localPlayer.isShiftKeyDown()) {
-                localPlayer.move(MoverType.SELF, new Vec3(0.0, -0.3000001, 0.0));
-                localPlayer.setPose(Pose.STANDING);
-                ((LocalPlayerAccessor) localPlayer).setCrouching(false);
+            if (event.player instanceof LocalPlayer localPlayer) {
+                if (GravitationEffect.isShouldRot() && localPlayer.onGround() && localPlayer.isCrouching() && !localPlayer.isShiftKeyDown()) {
+                    localPlayer.move(MoverType.SELF, new Vec3(0.0, -0.3000001, 0.0));
+                    localPlayer.setPose(Pose.STANDING);
+                    ((LocalPlayerAccessor) localPlayer).setCrouching(false);
+                }
             }
         } else {
             Player player = event.player;
             IRangePickup.Star.apply(player);
             IRangePickup.Coin.apply(player);
             IRangePickup.Drops.apply(player);
-            if (player.isLocalPlayer()) return;
-            ServerPlayer serverPlayer = (ServerPlayer) player;
-            PlayerUtils.regenerateMana(serverPlayer);
+            if (player instanceof ServerPlayer serverPlayer) {
+                PlayerUtils.regenerateMana(serverPlayer);
+            }
         }
     }
 
@@ -88,10 +87,11 @@ public final class PlayerEvents {
     @SubscribeEvent
     public static void attackEntity(AttackEntityEvent event) {
         Player player = event.getEntity();
-        if (player.isLocalPlayer()) return;
-        Entity target = event.getTarget();
-        IFireAttack.apply(player, target);
-        LuckyCoin.apply(player, target);
+        if (player instanceof ServerPlayer) {
+            Entity target = event.getTarget();
+            IFireAttack.apply(player, target);
+            LuckyCoin.apply(player, target);
+        }
     }
 
     @SubscribeEvent
