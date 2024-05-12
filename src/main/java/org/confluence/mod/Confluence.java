@@ -17,7 +17,6 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSounds;
 import org.confluence.mod.recipe.ModRecipes;
-import org.confluence.mod.util.ModResources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -36,7 +35,6 @@ public final class Confluence {
     public Confluence() throws ClassNotFoundException {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
-        ModResources.initialize("ConfluenceMod");
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
         ModItems.register(bus);

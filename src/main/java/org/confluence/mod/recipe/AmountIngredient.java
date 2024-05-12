@@ -81,7 +81,7 @@ public class AmountIngredient extends AbstractIngredient {
 
     public static void serialize(JsonObject jsonObject, ItemStack itemStack) {
         jsonObject.addProperty("item", ForgeRegistries.ITEMS.getKey(itemStack.getItem()).toString());
-        if (itemStack.getCount() != 1) jsonObject.addProperty("count", itemStack.getCount());
+        jsonObject.addProperty("count", itemStack.getCount());
         if (itemStack.getTag() != null) jsonObject.addProperty("nbt", itemStack.getTag().toString());
     }
 

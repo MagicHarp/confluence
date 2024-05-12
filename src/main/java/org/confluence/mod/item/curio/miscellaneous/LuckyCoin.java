@@ -46,7 +46,7 @@ public class LuckyCoin extends BaseCurioItem {
             } else {
                 item = ModItems.COPPER_COIN.get();
             }
-            ModUtils.createItemEntity(item, randomSource.nextInt(1, 11), target.getX(), target.getY(), target.getZ(), player.level());
+            ModUtils.createItemEntity(item, randomSource.nextInt(1, 3), target.getX(), target.getY(), target.getZ(), player.level());
         }
     }
 }

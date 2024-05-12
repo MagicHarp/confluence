@@ -161,29 +161,30 @@ public class AltarRecipe implements Recipe<Container> {
 
         @Override
         public @Nullable AltarRecipe fromNetwork(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
-            String group = pBuffer.readUtf();
-            int size = pBuffer.readVarInt();
-            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, AmountIngredient.EMPTY);
-            ingredients.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(pBuffer));
-            ItemStack result = pBuffer.readItem();
-            return new AltarRecipe(pRecipeId, group, result, ingredients);
+//            String group = pBuffer.readUtf();
+//            int size = pBuffer.readVarInt();
+//            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, AmountIngredient.EMPTY);
+//            ingredients.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(pBuffer));
+//            ItemStack result = pBuffer.readItem();
+//            return new AltarRecipe(pRecipeId, group, result, ingredients);
+            return null;
         }
 
         @Override
         public void toNetwork(@NotNull FriendlyByteBuf pBuffer, @NotNull AltarRecipe pRecipe) {
-            pBuffer.writeUtf(pRecipe.group);
-            pBuffer.writeVarInt(pRecipe.ingredients.size());
-            for (Ingredient ingredient : pRecipe.ingredients) {
-                ingredient.toNetwork(pBuffer);
-            }
-            pBuffer.writeItem(pRecipe.result);
+//            pBuffer.writeUtf(pRecipe.group);
+//            pBuffer.writeVarInt(pRecipe.ingredients.size());
+//            for (Ingredient ingredient : pRecipe.ingredients) {
+//                ingredient.toNetwork(pBuffer);
+//            }
+//            pBuffer.writeItem(pRecipe.result);
         }
     }
 
     public static class Type implements RecipeType<AltarRecipe> {
         @Override
         public String toString() {
-            return "confluence:altar";
+            return "confluence:altar_type";
         }
     }
 }
