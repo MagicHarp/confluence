@@ -14,6 +14,9 @@ public class SurfaceRuleData {
     private static final SurfaceRules.RuleSource HALLOW_GRASS_BLOCK = makeStateRule(ModBlocks.HALLOW_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource ANOTHER_CRIMSON_GRASS_BLOCK = makeStateRule(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get());
 
+    //地狱
+    private static final SurfaceRules.RuleSource ASH = makeStateRule(ModBlocks.ASH_BLOCK.get());
+
     public static SurfaceRules.RuleSource makeRules() {
         SurfaceRules.ConditionSource isAtOrAboveWaterLevel = SurfaceRules.waterBlockCheck(-1, 0);
         SurfaceRules.ConditionSource isUnderWaterLevel = SurfaceRules.waterStartCheck(-6, -1);
@@ -24,6 +27,7 @@ public class SurfaceRuleData {
         SurfaceRules.RuleSource hallowGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, HALLOW_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource anotherCrimsonGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ANOTHER_CRIMSON_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource corruptStoneSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, EBONY_STONE), EBONY_STONE);
+        SurfaceRules.RuleSource ashSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ASH), ASH);
         return SurfaceRules.sequence(
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
                 SurfaceRules.sequence(
@@ -34,6 +38,12 @@ public class SurfaceRuleData {
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ANOTHER_CRIMSON),
                 SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, anotherCrimsonGrassSurface))),
+            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ASH_FOREST),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ashSurface))),
+            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ASH_WASTELAND),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ashSurface))),
 
             SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, grassSurface)
         );

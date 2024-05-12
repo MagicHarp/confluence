@@ -30,10 +30,7 @@ import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
 import org.confluence.mod.util.ModResources;
-import org.confluence.mod.worldgen.biome.AnotherCrimsonRegion;
-import org.confluence.mod.worldgen.biome.SurfaceRuleData;
-import org.confluence.mod.worldgen.biome.TheCorruptionRegion;
-import org.confluence.mod.worldgen.biome.TheHallowRegion;
+import org.confluence.mod.worldgen.biome.*;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
@@ -79,6 +76,8 @@ public final class ModEvents {
             Regions.register(new AnotherCrimsonRegion(new ResourceLocation(Confluence.MODID, "another_crimson"), 1));
             Regions.register(new TheHallowRegion(new ResourceLocation(Confluence.MODID, "the_hallow"), 1));
             Regions.register(new TheCorruptionRegion(new ResourceLocation(Confluence.MODID, "the_corruption"), 1));
+            Regions.register(new AshForestRegion(new ResourceLocation(Confluence.MODID, "ash_forest"), 0));
+            Regions.register(new AshWastelandRegion(new ResourceLocation(Confluence.MODID, "ash_wasteland"), 0));
 
             // Register our surface rules
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Confluence.MODID, SurfaceRuleData.makeRules());
