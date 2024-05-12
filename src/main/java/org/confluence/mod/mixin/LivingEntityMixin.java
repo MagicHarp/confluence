@@ -30,6 +30,7 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IEntity;
+import org.confluence.mod.util.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -90,7 +91,7 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
         if (c$getSelf() instanceof Player player) {
-            if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : ((IEntity) player).c$isShouldRot()) {
+            if ((player.isLocalPlayer() && GravitationEffect.isShouldRot()) || (PlayerUtils.isServerNotFake(player) && ((IEntity) player).c$isShouldRot())) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
         }

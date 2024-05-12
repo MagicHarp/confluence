@@ -4,10 +4,14 @@ import com.google.common.collect.ImmutableMultimap;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.mixin.LocalPlayerAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
 import org.confluence.mod.network.s2c.GravityGlobePacketS2C;
@@ -59,6 +63,14 @@ public class GravitationEffect extends MobEffect {
             hasGlobe = false;
         } else if (localPlayer.getY() > localPlayer.level().getMaxBuildHeight()) {
             expire();
+        }
+    }
+
+    public static void unCrouching(LocalPlayer localPlayer) {
+        if (shouldRot && localPlayer.onGround() && localPlayer.isCrouching() && !localPlayer.isShiftKeyDown()) {
+            localPlayer.move(MoverType.SELF, new Vec3(0.0, -0.3000001, 0.0));
+            localPlayer.setPose(Pose.STANDING);
+            ((LocalPlayerAccessor) localPlayer).setCrouching(false);
         }
     }
 
