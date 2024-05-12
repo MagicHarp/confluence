@@ -7,7 +7,7 @@
             "type": "minecraft:multi_noise",
             "biomes": [
                 {
-                    "biome": "minecraft:nether_wastes",
+                    "biome": "confluence:ash_forest",
                     "parameters": {
                         "temperature": 0,
                         "humidity": 0,
@@ -19,7 +19,7 @@
                     }
                 },
                 {
-                    "biome": "minecraft:soul_sand_valley",
+                    "biome": "confluence:ash_wasteland",
                     "parameters": {
                         "temperature": 0,
                         "humidity": -0.5,
