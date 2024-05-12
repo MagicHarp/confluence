@@ -34,7 +34,9 @@ import org.confluence.mod.util.PlayerUtils;
 public final class PlayerEvents {
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+        Player player = event.getEntity();
+        if (PlayerUtils.isServerNotFake(player)) {
+            ServerPlayer serverPlayer = (ServerPlayer) player;
             PlayerUtils.syncMana2Client(serverPlayer);
             PlayerUtils.syncSavedData(serverPlayer);
             PlayerUtils.syncAdvancements(serverPlayer);
@@ -57,8 +59,8 @@ public final class PlayerEvents {
             IRangePickup.Star.apply(player);
             IRangePickup.Coin.apply(player);
             IRangePickup.Drops.apply(player);
-            if (player instanceof ServerPlayer serverPlayer) {
-                PlayerUtils.regenerateMana(serverPlayer);
+            if (PlayerUtils.isServerNotFake(player)) {
+                PlayerUtils.regenerateMana((ServerPlayer) player);
             }
         }
     }
@@ -77,7 +79,8 @@ public final class PlayerEvents {
                 LifeCrystal.applyModifier(neoPlayer, neo);
             }));
 
-        if (neoPlayer instanceof ServerPlayer serverPlayer) {
+        if (PlayerUtils.isServerNotFake(neoPlayer)) {
+            ServerPlayer serverPlayer = (ServerPlayer) neoPlayer;
             IMultiJump.sendMsg(serverPlayer);
             IMayFly.sendMsg(serverPlayer);
             IAutoAttack.sendMsg(serverPlayer);
@@ -87,7 +90,7 @@ public final class PlayerEvents {
     @SubscribeEvent
     public static void attackEntity(AttackEntityEvent event) {
         Player player = event.getEntity();
-        if (player instanceof ServerPlayer) {
+        if (PlayerUtils.isServerNotFake(player)) {
             Entity target = event.getTarget();
             IFireAttack.apply(player, target);
             LuckyCoin.apply(player, target);

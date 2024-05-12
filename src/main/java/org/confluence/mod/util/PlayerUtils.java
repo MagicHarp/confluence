@@ -4,6 +4,8 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
@@ -91,5 +93,9 @@ public final class PlayerUtils {
             Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(id);
             if (advancement != null) serverPlayer.getAdvancements().award(advancement, "never");
         }
+    }
+
+    public static boolean isServerNotFake(Player player) {
+        return player instanceof ServerPlayer && !(player instanceof FakePlayer);
     }
 }

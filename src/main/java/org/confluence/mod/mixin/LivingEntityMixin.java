@@ -46,8 +46,10 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+        if (c$getSelf() instanceof Player player) {
+            player.getCapability(AbilityProvider.CAPABILITY)
+                .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+        }
     }
 
     @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
@@ -62,10 +64,13 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private int c$getInvulnerableTime(int constant) {
-        AtomicInteger time = new AtomicInteger(constant);
-        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
-        return time.get();
+        if (c$getSelf() instanceof Player player) {
+            AtomicInteger time = new AtomicInteger(constant);
+            player.getCapability(AbilityProvider.CAPABILITY)
+                .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
+            return time.get();
+        }
+        return constant;
     }
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)

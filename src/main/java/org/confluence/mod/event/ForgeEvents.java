@@ -51,6 +51,7 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.ModUtils;
+import org.confluence.mod.util.PlayerUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -64,10 +65,10 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (player instanceof ServerPlayer && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
+            if (PlayerUtils.isServerNotFake(player) && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
             }
-            if (!player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {
+            if ((PlayerUtils.isServerNotFake(player) || player.isLocalPlayer()) && !player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
             }
         }
