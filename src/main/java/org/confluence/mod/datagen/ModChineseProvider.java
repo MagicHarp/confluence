@@ -1069,6 +1069,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.ENDURANCE_POTION.get(), "耐力药水");
         add(TerraPotions.INFERNO_POTION.get(), "狱火药水");
         add(TerraPotions.LIFEFORCE_POTION.get(), "生命力药水");
+        add(TerraPotions.FISHING_POTION.get(), "钓鱼药水");
+        add(TerraPotions.RAGE_POTION.get(), "暴怒药水");
+        add(TerraPotions.MANA_REGENERATION_POTION.get(), "魔力回复药水");
+        add(TerraPotions.THORNS_POTION.get(), "荆棘药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "食物增益");
