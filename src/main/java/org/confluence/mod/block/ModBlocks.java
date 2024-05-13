@@ -25,6 +25,7 @@ import org.confluence.mod.block.natural.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModFluids;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.confluence.mod.block.WoodSetType.*;
@@ -69,7 +70,7 @@ public final class ModBlocks {
     public static final LogBlocks SPOOKY_LOG_BLOCKS = new LogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
     // functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
-    public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);
+    public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new, supplier -> () -> new ActuatorsBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<ActuatorsBlockEntity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlockEntity::new, ACTUATORS.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
@@ -81,6 +82,12 @@ public final class ModBlocks {
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
+    }
+
+    public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block, Function<Supplier<B>, Supplier<BlockItem>> item) {
+        RegistryObject<B> object = BLOCKS.register(id, block);
+        ModItems.ITEMS.register(id, item.apply(object));
+        return object;
     }
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block, Item.Properties properties) {

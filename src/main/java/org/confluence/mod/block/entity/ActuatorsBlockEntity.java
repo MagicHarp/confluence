@@ -27,6 +27,7 @@ public class ActuatorsBlockEntity extends BlockEntity {
 
     public void setContain(BlockState contain) {
         this.contain = contain;
+        markUpdated();
     }
 
     public void load(@NotNull CompoundTag nbt) {

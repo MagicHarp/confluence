@@ -6,25 +6,29 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -73,11 +77,14 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
         if (itemStack.getItem() instanceof BlockItem blockItem) {
             Block block = blockItem.getBlock();
             if (block instanceof ActuatorsBlock) return InteractionResult.PASS;
-            Vec3 view = player.getViewVector(1.0F);
-            BlockState resultState = block.getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, new BlockHitResult(view, Direction.getNearest(view.x, view.y, view.z).getOpposite(), blockPos, false)));
-            if (resultState != null && block.getRenderShape(resultState) == RenderShape.MODEL && level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
-                actuatorsBlockEntity.setContain(resultState);
-                actuatorsBlockEntity.markUpdated();
+            BlockState resultState = block.getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, blockHitResult));
+            if (resultState != null && !resultState.hasBlockEntity() && level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity blockEntity) {
+                if (!blockEntity.getContain().is(block)) {
+                    blockEntity.setContain(resultState);
+                    if (!player.getAbilities().instabuild) {
+                        itemStack.shrink(1);
+                    }
+                }
                 return InteractionResult.SUCCESS;
             }
         }
@@ -159,5 +166,45 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     @Override
     public boolean isPathfindable(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull PathComputationType type) {
         return !blockState.getValue(StateProperties.DRIVE);
+    }
+
+    @Override
+    public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pMovedByPiston) {
+        if (pLevel instanceof ServerLevel serverLevel && pLevel.getBlockEntity(pPos) instanceof ActuatorsBlockEntity blockEntity) {
+            LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
+            blockEntity.getContain().getDrops(builder).forEach(itemStack -> {
+                ItemEntity itemEntity = new ItemEntity(serverLevel, pPos.getX(), pPos.getY(), pPos.getZ(), itemStack);
+                itemEntity.setPickUpDelay(40);
+                serverLevel.addFreshEntity(itemEntity);
+            });
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    public static class Item extends BlockItem {
+        public Item(Block pBlock) {
+            super(pBlock, new Properties());
+        }
+
+        @Override
+        public @NotNull InteractionResult useOn(UseOnContext pContext) {
+            Player player = pContext.getPlayer();
+            if (player != null && !player.isCrouching()) {
+                Level level = pContext.getLevel();
+                BlockPos blockPos = pContext.getClickedPos();
+                BlockState blockState = level.getBlockState(blockPos);
+                if (!blockState.is(ModBlocks.ACTUATORS.get()) && blockState.canHarvestBlock(level, blockPos, player)) {
+                    level.setBlockAndUpdate(blockPos, ModBlocks.ACTUATORS.get().defaultBlockState());
+                    if (level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity blockEntity) {
+                        blockEntity.setContain(blockState);
+                        if (!player.getAbilities().instabuild) {
+                            pContext.getItemInHand().shrink(1);
+                        }
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
+                }
+            }
+            return super.useOn(pContext);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package org.confluence.mod.event;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -67,10 +65,11 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player player) {
-            if (PlayerUtils.isServerNotFake(player) && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
+            boolean isServerNotFake = PlayerUtils.isServerNotFake(player);
+            if (isServerNotFake && !player.getCapability(ManaProvider.CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(Confluence.MODID, "mana"), new ManaProvider());
             }
-            if ((PlayerUtils.isServerNotFake(player) || player.isLocalPlayer()) && !player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {
+            if ((isServerNotFake || player.isLocalPlayer()) && !player.getCapability(AbilityProvider.CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(Confluence.MODID, "ability"), new AbilityProvider());
             }
         }
@@ -85,18 +84,18 @@ public final class ForgeEvents {
         int dayTime = (int) (serverLevel.getDayTime() % 24000);
         RandomSource random = serverLevel.random;
 
-        if (dayTime == 0) {
+        if (dayTime == 1) {
             float factorX = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
             float factorZ = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
             ConfluenceData.get(serverLevel).setWindSpeed(factorX, factorZ);
-        } else if (dayTime == 6000) {
+        } else if (dayTime == 6001) {
             if (random.nextFloat() < 0.2F) {
                 ConfluenceData.get(serverLevel).setMoonSpecific(random.nextInt(11)); // 0 ~ 10
             } else {
                 ConfluenceData.get(serverLevel).setMoonSpecific(-1);
             }
-        } else if (dayTime == 12000 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
-            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24)
+        } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
+            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
         ) {
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED), false);
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
@@ -202,12 +201,5 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingHeal(LivingHealEvent event) {
         BleedingEffect.apply(event.getEntity(), event);
-    }
-
-    @SubscribeEvent
-    public static void entityJoinLevel(EntityJoinLevelEvent event) {
-        if(event.getEntity() instanceof RemotePlayer remotePlayer) {
-
-        }
     }
 }

@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio.miscellaneous;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -13,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.ModUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
@@ -35,6 +36,7 @@ public class LuckyCoin extends BaseCurioItem {
     }
 
     public static void apply(Player player, Entity target) {
+        if (!ModConfigs.dropsMoney) return;
         RandomSource randomSource = player.getRandom();
         if (randomSource.nextFloat() < 0.2F && CuriosUtils.hasCurio(player, LuckyCoin.class)) {
             Item item;
@@ -46,7 +48,7 @@ public class LuckyCoin extends BaseCurioItem {
             } else {
                 item = ModItems.COPPER_COIN.get();
             }
-            ModUtils.createItemEntity(item, randomSource.nextInt(1, 3), target.getX(), target.getY(), target.getZ(), player.level());
+            Containers.dropItemStack(player.level(), target.getX(), target.getY(), target.getZ(), new ItemStack(item, randomSource.nextInt(1, 3)));
         }
     }
 }

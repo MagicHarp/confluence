@@ -36,7 +36,7 @@ public final class ModUtils {
             "prefix.confluence.tooltip." + (b ? "plus" : "take"),
             ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
             Component.translatable("prefix.confluence.tooltip." + type)
-        ).withStyle(b ? ChatFormatting.GREEN : ChatFormatting.RED);
+        ).withStyle(b ? ChatFormatting.BLUE : ChatFormatting.RED);
     }
 
     @SuppressWarnings("unchecked")
