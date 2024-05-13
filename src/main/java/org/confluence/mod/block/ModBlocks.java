@@ -18,7 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.block.common.BaseBlock;
-import org.confluence.mod.block.entity.ActuatorsBlockEntity;
+import org.confluence.mod.block.functional.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
@@ -79,6 +79,8 @@ public final class ModBlocks {
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
+
+
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
