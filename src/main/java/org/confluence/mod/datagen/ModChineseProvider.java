@@ -1075,7 +1075,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.THORNS_POTION.get(), "荆棘药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
-        add(ModEffects.EXQUISITELY_STUFFED.get(), "食物增益");
+        add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
         add(ModEffects.IRON_SKIN.get(), "铁皮");
         add(ModEffects.ENDURANCE.get(), "耐力");
         add(ModEffects.INFERNO.get(), "狱火");
@@ -1091,11 +1091,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.SILENCED.get(), "沉默");
         add(ModEffects.CURSED.get(), "诅咒");
         add(ModEffects.CONFUSED.get(), "困惑");
-        add(ModEffects.WITHERED_ARMOR.get(), "盔甲腐蚀");
+        add(ModEffects.WITHERED_ARMOR.get(), "枯萎盔甲");
         add(ModEffects.ICHOR.get(), "灵液");
         add(ModEffects.POTION_SICKNESS.get(), "耐药性");
-        add(ModEffects.CEREBRAL_MINDTRICK.get(), "大脑一激灵");
-        add(ModEffects.BROKEN_ARMOR.get(), "破甲");
+        add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
+        add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
         //endregion items
     }

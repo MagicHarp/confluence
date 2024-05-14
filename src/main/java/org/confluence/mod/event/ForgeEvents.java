@@ -34,6 +34,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.effect.beneficial.MagicPowerEffect;
 import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
@@ -118,6 +119,7 @@ public final class ForgeEvents {
 
         amount = IManaWeapon.apply(damageSource, amount);
         amount = ManaSicknessEffect.apply(damageSource, amount);
+        amount = MagicPowerEffect.apply(living, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);

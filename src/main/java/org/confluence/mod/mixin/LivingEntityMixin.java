@@ -169,9 +169,6 @@ public abstract class LivingEntityMixin {
         AtomicDouble atomic = new AtomicDouble(armor);
         CuriosUtils.getCurios(self, IArmorPass.class)
             .forEach(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
-        if (self.hasEffect(ModEffects.BROKEN_ARMOR.get())) {
-            atomic.set(atomic.get() / 2.0);
-        }
         return atomic.floatValue();
     }
 

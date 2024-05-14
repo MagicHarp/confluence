@@ -12,6 +12,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IHurtEvasion;
@@ -92,6 +93,7 @@ public abstract class EntityMixin implements IEntity {
             if (IHurtEvasion.isInvul(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
+                ObsidianSkinEffect.isInvul(living, damageSource) ||
                 RoyalGel.isInvul(living, damageSource) ||
                 ShieldOfCthulhu.isInvul(living)
             ) {

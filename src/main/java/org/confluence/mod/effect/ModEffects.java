@@ -42,6 +42,9 @@ public final class ModEffects {
     public static final RegistryObject<CerebralMindtrickEffect> CEREBRAL_MINDTRICK = EFFECTS.register("cerebral_mindtrick", CerebralMindtrickEffect::new);
     public static final RegistryObject<BrokenArmorEffect> BROKEN_ARMOR = EFFECTS.register("broken_armor", BrokenArmorEffect::new);
     public static final RegistryObject<StonedEffect> STONED = EFFECTS.register("stoned", StonedEffect::new);
+    public static final RegistryObject<MagicPowerEffect> MAGIC_POWER = EFFECTS.register("magic_power", MagicPowerEffect::new);
+    public static final RegistryObject<ObsidianSkinEffect> OBSIDIAN_SKIN = EFFECTS.register("obsidian_skin", ObsidianSkinEffect::new);
+    public static final RegistryObject<LuckEffect> LUCK_EFFECT = EFFECTS.register("luck", LuckEffect::new);
 
     public static void heal(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

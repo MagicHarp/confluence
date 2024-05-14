@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.capability.ability.AbilityProvider;
 
-public class FishingEffect extends MobEffect {  //钓鱼药水 换皮海之眷顾
+public class FishingEffect extends MobEffect {  //钓鱼药水
     public FishingEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x00BFFF);
     }
