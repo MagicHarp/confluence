@@ -8,9 +8,11 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
@@ -99,5 +101,10 @@ public final class PlayerEvents {
         float speed = event.getOriginalSpeed();
         speed = AncientChisel.apply(event.getEntity(), speed);
         event.setNewSpeed(speed);
+    }
+
+    @SubscribeEvent
+    public static void rightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        ActuatorsBlock.blockItemPlace(event);
     }
 }
