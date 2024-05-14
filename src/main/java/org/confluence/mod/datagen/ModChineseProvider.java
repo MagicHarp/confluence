@@ -505,6 +505,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
         add(THIN_ICE_BLOCK.get(), "碎冰块");
+        add(FOREST_JARS.get(), "森林陶罐");
 
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
