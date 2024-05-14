@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional.entity;
+package org.confluence.mod.block.entity;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;

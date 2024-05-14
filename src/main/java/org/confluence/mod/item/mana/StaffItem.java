@@ -6,11 +6,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.prefix.ItemPrefix;
@@ -40,28 +38,18 @@ public class StaffItem extends Item implements IManaWeapon {
     }
 
     @Override
-    public int getUseDuration(@NotNull ItemStack itemStack) {
-        return getAttackSpeed(itemStack, 20);
-    }
-
-    @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        return ItemUtils.startUsingInstantly(level, player, hand);
-    }
-
-    @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, Level level, @NotNull LivingEntity living) {
-        if (!level.isClientSide && living instanceof ServerPlayer serverPlayer) {
-            if (PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
-                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-                Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
-                BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, optional.orElse(null));
-                baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-                level.addFreshEntity(baseBulletEntity);
-                level.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
-            }
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (player instanceof ServerPlayer serverPlayer && PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
+            serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+            Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
+            BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, optional.orElse(null));
+            baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+            level.addFreshEntity(baseBulletEntity);
+            player.getCooldowns().addCooldown(this, getAttackSpeed(itemStack, 20));
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
-        return itemStack;
+        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide);
     }
 
     @FunctionalInterface

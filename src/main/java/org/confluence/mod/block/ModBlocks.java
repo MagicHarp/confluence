@@ -18,7 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.block.common.BaseBlock;
-import org.confluence.mod.block.functional.entity.ActuatorsBlockEntity;
+import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
