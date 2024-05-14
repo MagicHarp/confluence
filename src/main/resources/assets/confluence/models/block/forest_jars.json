@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "forest_jars",
-		"particle": "forest_jars"
+		"1": "confluence:block/forest_jars",
+		"particle": "confluence:blockforest_jars"
 	},
 	"elements": [
 		{

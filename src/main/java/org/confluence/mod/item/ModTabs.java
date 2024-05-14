@@ -79,6 +79,8 @@ public final class ModTabs {
 
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());
+
+                output.accept(FOREST_JARS.get());
             })
             .build());
     // 材料

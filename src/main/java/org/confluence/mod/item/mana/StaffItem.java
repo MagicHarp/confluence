@@ -24,6 +24,7 @@ import java.util.Optional;
 public class StaffItem extends Item implements IManaWeapon {
     private final BulletSupplier bulletSupplier;
 
+
     public StaffItem(BulletSupplier bulletSupplier, Properties properties) {
         super(properties.stacksTo(1));
         this.bulletSupplier = bulletSupplier;
