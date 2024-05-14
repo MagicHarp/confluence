@@ -23,7 +23,7 @@ public class FartInABottle extends BaseCurioItem implements IMultiJump {
 
     @Override
     public double getJumpSpeed() {
-        return 1.2;
+        return 2.8;
     }
 
     @Override

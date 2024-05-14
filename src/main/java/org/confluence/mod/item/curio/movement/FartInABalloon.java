@@ -22,7 +22,7 @@ public class FartInABalloon extends FartInABottle implements IJumpBoost {
 
     @Override
     public double getJumpSpeed() {
-        return 1.3;
+        return 2.1;
     }
 
     @Override
