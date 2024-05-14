@@ -61,7 +61,7 @@ public abstract class BaseBulletEntity extends Projectile {
         double offX = getX() + vec3.x;
         double offY = getY() + vec3.y;
         double offZ = getZ() + vec3.z;
-        setDeltaMovement(vec3.scale(0.9));
+        setDeltaMovement(vec3.scale(0.93));
         if (!isNoGravity()) {
             Vec3 vec31 = getDeltaMovement();
             this.setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
