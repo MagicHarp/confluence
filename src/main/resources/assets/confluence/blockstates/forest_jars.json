@@ -4,15 +4,15 @@
 			"model": "confluence:block/forest_jars"
 		},
 		"facing=east": {
-			"model": "test:block/forest_jars",
+			"model": "confluence:block/forest_jars",
 			"y": 90
 		},
 		"facing=south": {
-			"model": "test:block/forest_jars",
+			"model": "confluence:block/forest_jars",
 			"y": 180
 		},
 		"facing=west": {
-			"model": "test:block/forest_jars",
+			"model": "confluence:block/forest_jars",
 			"y": 270
 		}
 	}
