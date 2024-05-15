@@ -2,6 +2,7 @@ package org.confluence.mod.worldgen.biome;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import org.confluence.mod.block.ModBlocks;
 
@@ -28,6 +29,7 @@ public class SurfaceRuleData {
         SurfaceRules.RuleSource anotherCrimsonGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ANOTHER_CRIMSON_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource corruptStoneSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, EBONY_STONE), EBONY_STONE);
         SurfaceRules.RuleSource ashSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ASH_BLOCK), ASH_BLOCK);
+        SurfaceRules.ConditionSource netherrackNoised = SurfaceRules.noiseCondition(Noises.NETHERRACK, 0.54D);
         return SurfaceRules.sequence(
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
                 SurfaceRules.sequence(
