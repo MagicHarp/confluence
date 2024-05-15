@@ -81,6 +81,9 @@ public final class ModTabs {
                 output.accept(CRISPY_HONEY_BLOCK.get());
 
                 output.accept(FOREST_JARS.get());
+                output.accept(SNOW_JARS.get());
+                output.accept(DESERT_JARS.get());
+                output.accept(CORRUPT_JARS.get());
             })
             .build());
     // 材料

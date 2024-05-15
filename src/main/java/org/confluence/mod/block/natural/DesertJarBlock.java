@@ -6,11 +6,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -19,13 +17,13 @@ import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ForestJarBlock extends Block implements CustomModel {
+public class DesertJarBlock extends Block implements CustomModel {
 
-    public ForestJarBlock(Properties pProperties) {
+    public DesertJarBlock(Properties pProperties) {
         super(pProperties);
     }
-    public ForestJarBlock() {
-        this(BlockBehaviour.Properties.of());
+    public DesertJarBlock() {
+        this(Properties.of());
     }
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     @Override
@@ -43,12 +41,20 @@ public class ForestJarBlock extends Block implements CustomModel {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
-            default -> Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12));
-            case NORTH -> Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12));
-            case EAST -> Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12));
-            case WEST -> Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12));
+            default -> Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(12, 8, 7, 14, 15, 9), box(2, 8, 7, 4, 15, 9), box(3, 15, 7, 5, 17, 9), box(11, 15, 7, 13, 17, 9),
+                box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14));
+            case NORTH -> Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(2, 8, 7, 4, 15, 9), box(12, 8, 7, 14, 15, 9), box(11, 15, 7, 13, 17, 9), box(3, 15, 7, 5, 17, 9),
+                box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14));
+            case EAST -> Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(7, 8, 2, 9, 15, 4), box(7, 8, 12, 9, 15, 14), box(7, 15, 11, 9, 17, 13), box(7, 15, 3, 9, 17, 5),
+                box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14));
+            case WEST -> Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(7, 8, 12, 9, 15, 14), box(7, 8, 2, 9, 15, 4), box(7, 15, 3, 9, 17, 5), box(7, 15, 11, 9, 17, 13),
+                box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14));
         };
     }
+
+
+
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
