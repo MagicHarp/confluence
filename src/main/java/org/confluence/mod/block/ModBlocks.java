@@ -82,9 +82,13 @@ public final class ModBlocks {
     //罐子
     public static final RegistryObject<ForestJarBlock> FOREST_JARS = registerWithItem("forest_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static final RegistryObject<ForestJarBlock> SNOW_JARS = registerWithItem("snow_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
+    public static final RegistryObject<ForestJarBlock> SPIDER_CAVE_JARS = registerWithItem("spider_cave_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static final RegistryObject<DesertJarBlock> DESERT_JARS = registerWithItem("desert_jars",() -> new DesertJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
+    public static final RegistryObject<AnotherCrimsonJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars",() -> new AnotherCrimsonJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static final RegistryObject<CorruptJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars",() -> new CorruptJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 
+    public static final RegistryObject<ForestJarBlock> ASH_JARS = registerWithItem("ash_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
+    public static final RegistryObject<CorruptJarBlock> TEMPLE_JARS = registerWithItem("temple_jars",() -> new CorruptJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }

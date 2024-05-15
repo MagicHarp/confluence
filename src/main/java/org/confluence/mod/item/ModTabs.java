@@ -82,8 +82,12 @@ public final class ModTabs {
 
                 output.accept(FOREST_JARS.get());
                 output.accept(SNOW_JARS.get());
+                output.accept(SPIDER_CAVE_JARS.get());
                 output.accept(DESERT_JARS.get());
                 output.accept(CORRUPT_JARS.get());
+                output.accept(ANOTHER_CRIMSON_JARS.get());
+                output.accept(ASH_JARS.get());
+                output.accept(TEMPLE_JARS.get());
             })
             .build());
     // 材料
