@@ -319,6 +319,6 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
             event.setUseBlock(Event.Result.DENY);
             event.setUseItem(Event.Result.DENY);
         }
-        if (level.isClientSide) player.swing(event.getHand());
+        player.swing(event.getHand());
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.CuriosUtils;
@@ -42,6 +43,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         byte mechanicalLens = 0;
         for (ItemStack stack : itemStacks) {
             Item item = stack.getItem();
+            if (item instanceof IFunctionCouldEnable couldEnable && !couldEnable.isEnabled(stack)) continue;
             if (watch < 1 && item instanceof HourWatch) watch = 1;
             else if (watch < 2 && item instanceof HalfHourWatch) watch = 2;
             else if (watch < 3 && IWatch.isMinuteWatch(item)) watch = 3;

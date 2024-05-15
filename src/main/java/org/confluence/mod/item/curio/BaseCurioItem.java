@@ -75,7 +75,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return canEquip(slotContext, stack);
+        return !(stack.getItem() instanceof IFunctionCouldEnable) && canEquip(slotContext, stack);
     }
 
     @Override

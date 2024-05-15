@@ -6,9 +6,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -24,6 +26,7 @@ import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
@@ -87,6 +90,18 @@ public final class ItemEvents {
         if (event.getSlot() != EquipmentSlot.MAINHAND) return;
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             PrefixProvider.initPrefix(serverPlayer, event.getTo());
+        }
+    }
+
+    @SubscribeEvent
+    public static void itemStackedOnOther(ItemStackedOnOtherEvent event) {
+        if (event.getClickAction() == ClickAction.PRIMARY) return;
+        ItemStack onSlot = event.getCarriedItem();
+        if (event.getStackedOnItem().isEmpty() && onSlot.getItem() instanceof IFunctionCouldEnable couldEnable) {
+            if (!event.getPlayer().level().isClientSide) {
+                couldEnable.cycleEnable(onSlot);
+            }
+            event.setCanceled(true);
         }
     }
 }

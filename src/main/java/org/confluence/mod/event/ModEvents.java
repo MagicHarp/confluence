@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -21,10 +22,10 @@ import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.block.Ores;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.mixin.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
@@ -34,7 +35,9 @@ import org.confluence.mod.worldgen.biome.*;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
-@Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import static org.confluence.mod.Confluence.MODID;
+
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModEvents {
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
@@ -65,22 +68,25 @@ public final class ModEvents {
             if (!ModList.get().isLoaded("attributefix")) {
                 Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
                 if (armor instanceof RangedAttribute rangedAttribute) {
-                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
                 }
                 Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
                 if (attribute instanceof RangedAttribute rangedAttribute) {
-                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0D);
+                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
                 }
             }
-            // Weights are kept intentionally low as we add minimal biomes
-            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(Confluence.MODID, "another_crimson"), 1));
-            Regions.register(new TheHallowRegion(new ResourceLocation(Confluence.MODID, "the_hallow"), 1));
-            Regions.register(new TheCorruptionRegion(new ResourceLocation(Confluence.MODID, "the_corruption"), 1));
-            Regions.register(new AshForestRegion(new ResourceLocation(Confluence.MODID, "ash_forest"), 0));
-            Regions.register(new AshWastelandRegion(new ResourceLocation(Confluence.MODID, "ash_wasteland"), 0));
 
-            // Register our surface rules
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Confluence.MODID, SurfaceRuleData.makeRules());
+            ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
+                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+            ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
+                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+
+            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "another_crimson"), 1));
+            Regions.register(new TheHallowRegion(new ResourceLocation(MODID, "the_hallow"), 1));
+            Regions.register(new TheCorruptionRegion(new ResourceLocation(MODID, "the_corruption"), 1));
+            Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 0));
+            Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 0));
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
         });
     }
 
@@ -97,7 +103,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-            IModFileInfo modFileInfo = ModList.get().getModFileById(Confluence.MODID);
+            IModFileInfo modFileInfo = ModList.get().getModFileById(MODID);
             IModFile modFile = modFileInfo.getFile();
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
@@ -115,7 +121,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void register(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> {
-            CraftingHelper.register(new ResourceLocation(Confluence.MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
+            CraftingHelper.register(new ResourceLocation(MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
         });
         ModFluids.register(event);
     }
