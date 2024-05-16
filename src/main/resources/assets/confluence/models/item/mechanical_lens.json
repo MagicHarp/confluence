@@ -8,7 +8,7 @@
             "predicate": {
                 "confluence:enable": 1
             },
-            "model": "confluence:item/curio/mechanical_lens_on"
+            "model": "confluence:item/mechanical_lens_on"
         }
     ]
 }

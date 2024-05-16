@@ -176,7 +176,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
-    /* 仙灵靴 */
+    FAIRY_BOOTS("fairy_boots", FairyBoots::new), // 仙灵靴
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostsparkBoots::new), // 霜花靴
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
@@ -252,7 +252,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 优惠卡 */
     /* 贪婪戒指 */
     TREASURE_MAGNET("treasure_magnet", TreasureMagnet::new), // 宝藏磁石
-    /* 花靴 */
+    FLOWER_BOOTS("flower_boots", FlowerBoots::new), // 花靴
     /* 植物纤维绳索宝典 */
     /* 水母项链 */
     /* 收音机 */

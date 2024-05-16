@@ -24,6 +24,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
+import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.network.NetworkHandler;
@@ -180,6 +181,11 @@ public abstract class LivingEntityMixin {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
+    }
+
+    @Inject(method = "onChangedBlock", at = @At("TAIL"))
+    private void onMoved(BlockPos pPos, CallbackInfo ci) {
+        IFlowerBoots.apply(c$getSelf());
     }
 
     @Unique

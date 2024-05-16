@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.block.DecorativeBlocks;
@@ -96,6 +97,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             SPOOKY_LOG_BLOCKS.FENCE.get(),
             ASH_LOG_BLOCKS.FENCE.get()
         );
+        tag(BlockTags.DIRT).add(
+            ANOTHER_CRIMSON_GRASS_BLOCK.get(),
+            CORRUPT_GRASS_BLOCK.get(),
+            HALLOW_GRASS_BLOCK.get(),
+            MUSHROOM_GRASS_BLOCK.get()
+        );
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
@@ -115,6 +122,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(ModTags.NEEDS_7_LEVEL).add(
             Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.RAW_ADAMANTITE_BLOCK.get(), Ores.ADAMANTITE_BLOCK.get(),
             Ores.DEEPSLATE_TITANIUM_ORE.get(), Ores.RAW_TITANIUM_BLOCK.get(), Ores.TITANIUM_BLOCK.get()
+        );
+        tag(ModTags.FLOWER_BOOTS_AVAILABLE).add(
+            Blocks.GRASS_BLOCK,
+            HALLOW_GRASS_BLOCK.get()
         );
     }
 }

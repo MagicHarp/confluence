@@ -18,6 +18,7 @@ public final class ModTags {
     public static final TagKey<Block> NEEDS_6_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_6_level"));
     public static final TagKey<Block> NEEDS_7_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_7_level"));
     public static final TagKey<Block> NEEDS_8_LEVEL = BlockTags.create(new ResourceLocation(MODID, "needs_8_level"));
+    public static final TagKey<Block> FLOWER_BOOTS_AVAILABLE = BlockTags.create(new ResourceLocation(MODID, "flower_boots_available"));
 
     public static final TagKey<Item> CURIO = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
     public static final TagKey<Item> PROVIDE_MANA = ItemTags.create(new ResourceLocation(MODID, "provide_mana"));
