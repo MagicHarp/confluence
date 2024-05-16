@@ -2,7 +2,6 @@ package org.confluence.mod.item.axe;
 
 import net.minecraft.world.item.AxeItem;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.util.EnumRegister;
@@ -31,7 +30,5 @@ public enum Axes implements EnumRegister<AxeItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering axes");
-    }
+    public static void init() {}
 }

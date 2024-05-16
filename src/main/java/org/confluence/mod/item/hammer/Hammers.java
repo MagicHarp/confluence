@@ -1,7 +1,6 @@
 package org.confluence.mod.item.hammer;
 
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.util.EnumRegister;
@@ -30,7 +29,5 @@ public enum Hammers implements EnumRegister<HammerItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering hammers");
-    }
+    public static void init() {}
 }

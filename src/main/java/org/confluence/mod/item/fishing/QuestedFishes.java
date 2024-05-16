@@ -2,7 +2,6 @@ package org.confluence.mod.item.fishing;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.util.EnumRegister;
@@ -53,12 +52,9 @@ public enum QuestedFishes implements EnumRegister<Item> {
     PIXIEFISH("pixiefish"), // 妖精鱼
     SCARAB_FISH("scarab_fish"), // 甲虫鱼
 
-
     SPIDERFISH("spiderfish"), // 蜘蛛鱼
 
-    TUNDRA_TROUT("tundra_trout"), // 苔原鳟鱼
-
-    ;
+    TUNDRA_TROUT("tundra_trout"); // 苔原鳟鱼
 
 
     private final RegistryObject<Item> value;
@@ -72,7 +68,5 @@ public enum QuestedFishes implements EnumRegister<Item> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering quested fishes");
-    }
+    public static void init() {}
 }

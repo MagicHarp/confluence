@@ -2,7 +2,6 @@ package org.confluence.mod.item.mana;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.BaseItem;
@@ -64,7 +63,5 @@ public enum ManaWeapons implements EnumRegister<Item> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering mana weapons");
-    }
+    public static void init() {}
 }

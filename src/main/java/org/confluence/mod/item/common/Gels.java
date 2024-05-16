@@ -2,7 +2,6 @@ package org.confluence.mod.item.common;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
@@ -25,7 +24,5 @@ public enum Gels implements EnumRegister<Item> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering gels");
-    }
+    public static void init() {}
 }

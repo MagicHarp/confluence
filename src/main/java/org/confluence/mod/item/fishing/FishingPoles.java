@@ -2,7 +2,6 @@ package org.confluence.mod.item.fishing;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
@@ -22,7 +21,5 @@ public enum FishingPoles implements EnumRegister<Item> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering fishing poles");
-    }
+    public static void init() {}
 }

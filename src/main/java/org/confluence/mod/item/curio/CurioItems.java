@@ -1,7 +1,6 @@
 package org.confluence.mod.item.curio;
 
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.*;
@@ -291,7 +290,5 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering curio items");
-    }
+    public static void init() {}
 }

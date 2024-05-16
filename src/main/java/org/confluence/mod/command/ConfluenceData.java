@@ -50,7 +50,10 @@ public class ConfluenceData extends SavedData {
 
     public void setMoonSpecific(int moonSpecific) {
         this.moonSpecific = moonSpecific;
-        NetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SpecificMoonPacketS2C(moonSpecific));
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.ALL.noArg(),
+            new SpecificMoonPacketS2C(moonSpecific)
+        );
         setDirty();
     }
 

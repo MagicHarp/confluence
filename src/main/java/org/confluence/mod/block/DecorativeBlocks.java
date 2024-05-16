@@ -4,7 +4,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BeamLikeBlock;
 import org.confluence.mod.util.EnumRegister;
 
@@ -63,7 +62,5 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering decorative blocks");
-    }
+    public static void init() {}
 }

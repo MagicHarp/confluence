@@ -3,7 +3,6 @@ package org.confluence.mod.item.potion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
@@ -67,7 +66,5 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering Weapons");
-    }
+    public static void init() {}
 }

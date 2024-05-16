@@ -43,7 +43,7 @@ public interface ISpreadable {
 
     static void spreadOrDie(int phase, BlockState selfState, ServerLevel serverLevel, BlockPos selfPos, RandomSource randomSource, BlockState targetState, BlockPos targetPos) {
         serverLevel.setBlockAndUpdate(targetPos, targetState);
-        if (randomSource.nextFloat() < 0.01 * phase) {
+        if (randomSource.nextInt(7) > phase) {
             serverLevel.setBlockAndUpdate(selfPos, selfState.setValue(STILL_ALIVE, false));
         }
     }
@@ -55,7 +55,6 @@ public interface ISpreadable {
             Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
             Blocks.STONE, ModBlocks.PEARL_STONE,
             Blocks.SAND, ModBlocks.PEARL_SAND
-            /* todo 其它东西 */
         )),
         CRIMSON(ImmutableMap.of(
             Blocks.DIRT, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
@@ -63,8 +62,6 @@ public interface ISpreadable {
             Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
             Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
             Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND
-
-
         )),
         CORRUPT(ImmutableMap.of(
             Blocks.DIRT, ModBlocks.CORRUPT_GRASS_BLOCK,
@@ -72,7 +69,6 @@ public interface ISpreadable {
             Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK,
             Blocks.STONE, ModBlocks.EBONY_STONE,
             Blocks.SAND, ModBlocks.EBONY_SAND
-
         )),
         GLOWING(ImmutableMap.of(
             Blocks.MUD, ModBlocks.GLOWING_GRASS_BLOCK

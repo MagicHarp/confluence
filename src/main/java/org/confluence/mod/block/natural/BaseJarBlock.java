@@ -21,7 +21,7 @@ public class BaseJarBlock extends HorizontalDirectionalBlock implements CustomMo
     private final VoxelShape voxelShape;
 
     public BaseJarBlock(VoxelShape voxelShape) {
-        super(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+        super(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1.0F, 10.0F).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
         this.voxelShape = voxelShape;
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }

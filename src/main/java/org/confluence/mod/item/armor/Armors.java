@@ -2,7 +2,6 @@ package org.confluence.mod.item.armor;
 
 import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
@@ -93,7 +92,5 @@ public enum Armors implements EnumRegister<ArmorItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering armors");
-    }
+    public static void init() {}
 }

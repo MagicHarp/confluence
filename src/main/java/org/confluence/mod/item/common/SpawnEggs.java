@@ -5,7 +5,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
@@ -42,7 +41,5 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering spawn eggs");
-    }
+    public static void init() {}
 }

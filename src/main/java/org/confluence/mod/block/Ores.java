@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BaseBlock;
 import org.confluence.mod.block.common.MeteoriteOre;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
@@ -110,7 +109,5 @@ public enum Ores implements EnumRegister<Block> {
         }
     }
 
-    static void init() {
-        Confluence.LOGGER.info("Registering ores");
-    }
+    public static void init() {}
 }
