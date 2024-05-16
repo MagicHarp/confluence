@@ -8,6 +8,7 @@
         "BlockItemAccessor",
         "EntityMixin",
         "FishingHookMixin",
+        "FishingRodItemMixin",
         "HoneyBottleItemMixin",
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",

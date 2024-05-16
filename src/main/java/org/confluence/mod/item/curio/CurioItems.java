@@ -8,6 +8,7 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
+import org.confluence.mod.item.curio.fishing.LavaproofFishingHook;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
@@ -259,8 +260,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
     /* 炫彩斗篷 */
 
+    LAVAPROOF_FISHING_HOOK("lavaproof_fishing_hook", LavaproofFishingHook::new), // 防熔岩钓钩
 
-    /* ** 钓鱼 ** */
     /* ** 悠悠球 ** */
     /* ** 时装 ** */
     /* ** 八音盒 ** */
