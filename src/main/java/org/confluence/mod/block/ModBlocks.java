@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,6 +29,7 @@ import org.confluence.mod.misc.ModFluids;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.minecraft.world.level.block.Block.box;
 import static org.confluence.mod.block.WoodSetType.*;
 
 @SuppressWarnings("unused")
@@ -79,16 +81,16 @@ public final class ModBlocks {
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
-    //罐子
-    public static final RegistryObject<ForestJarBlock> FOREST_JARS = registerWithItem("forest_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<ForestJarBlock> SNOW_JARS = registerWithItem("snow_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<ForestJarBlock> SPIDER_CAVE_JARS = registerWithItem("spider_cave_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<DesertJarBlock> DESERT_JARS = registerWithItem("desert_jars",() -> new DesertJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<AnotherCrimsonJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars",() -> new AnotherCrimsonJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<CorruptJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars",() -> new CorruptJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
+    // 罐子
+    public static final RegistryObject<BaseJarBlock> FOREST_JARS = registerWithItem("forest_jars", BaseJarBlock::new);
+    public static final RegistryObject<BaseJarBlock> SNOW_JARS = registerWithItem("snow_jars", BaseJarBlock::new);
+    public static final RegistryObject<BaseJarBlock> SPIDER_CAVE_JARS = registerWithItem("spider_cave_jars", BaseJarBlock::new);
+    public static final RegistryObject<BaseJarBlock> DESERT_JARS = registerWithItem("desert_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(9, 11, 4, 13, 15, 8), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
+    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(9, 11, 4, 13, 15, 8), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
+    public static final RegistryObject<BaseJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
+    public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
+    public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
 
-    public static final RegistryObject<ForestJarBlock> ASH_JARS = registerWithItem("ash_jars",() -> new ForestJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
-    public static final RegistryObject<CorruptJarBlock> TEMPLE_JARS = registerWithItem("temple_jars",() -> new CorruptJarBlock(BlockBehaviour.Properties.of().sound(SoundType.DECORATED_POT).strength(1f, 10f).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }
