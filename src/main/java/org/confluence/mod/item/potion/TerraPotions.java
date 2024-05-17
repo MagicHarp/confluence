@@ -33,7 +33,6 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     GREATER_LUCK_POTION("greater_luck_potion", () -> new EffectPotionItem(ModEffects.LUCK_EFFECT, 6000, 2)),
     MANA_REGENERATION_POTION("mana_regeneration_potion", () -> new EffectPotionItem(ModEffects.MANA_REGENERATION, 9600)),
     MAGC_POWER_POTION("magic_power_potion", () -> new EffectPotionItem(ModEffects.MAGIC_POWER, 4800)),
-    //MINING_POTION("mining_potion", BaseItem::new),
     OBSIDIAN_SKIN_POTION("obsidian_skin_potion", () -> new EffectPotionItem(ModEffects.OBSIDIAN_SKIN, 7200)),
     RAGE_POTION("rage_potion", () -> new EffectPotionItem(ModEffects.RAGE, 4800)),
     //SONAR_POTION("sonar_potion", BaseItem::new),
