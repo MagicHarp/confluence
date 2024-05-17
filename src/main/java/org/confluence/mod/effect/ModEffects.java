@@ -9,6 +9,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.beneficial.*;
 import org.confluence.mod.effect.harmful.*;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
+import org.confluence.mod.effect.neutral.LoveEffect;
 
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
@@ -45,6 +46,8 @@ public final class ModEffects {
     public static final RegistryObject<MagicPowerEffect> MAGIC_POWER = EFFECTS.register("magic_power", MagicPowerEffect::new);
     public static final RegistryObject<ObsidianSkinEffect> OBSIDIAN_SKIN = EFFECTS.register("obsidian_skin", ObsidianSkinEffect::new);
     public static final RegistryObject<LuckEffect> LUCK_EFFECT = EFFECTS.register("luck", LuckEffect::new);
+    public static final RegistryObject<WaterWalkingEffect> WATER_WALKING = EFFECTS.register("water_walking", WaterWalkingEffect::new);
+    public static final RegistryObject<LoveEffect> LOVE = EFFECTS.register("love", LoveEffect::new);
 
     public static void heal(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

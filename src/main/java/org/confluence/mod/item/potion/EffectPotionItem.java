@@ -11,9 +11,9 @@ import org.confluence.mod.item.ModRarity;
 import java.util.function.Supplier;
 
 public class EffectPotionItem extends AbstractPotionItem {
-    private final Supplier<? extends MobEffect> mobEffect;
-    private final int duration;
-    private final int amplifier;
+    public final Supplier<? extends MobEffect> mobEffect;
+    public final int duration;
+    public final int amplifier;
 
     public EffectPotionItem(Properties properties, Supplier<? extends MobEffect> mobEffect, int duration, int amplifier) {
         super(properties);

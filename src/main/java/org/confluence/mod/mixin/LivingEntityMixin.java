@@ -101,8 +101,17 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
     private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
-        CuriosUtils.findCurio(c$getSelf(), IFluidWalk.class)
-            .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+        LivingEntity self = c$getSelf();
+        if (self.isCrouching()) {
+            cir.setReturnValue(false);
+        } else {
+            if (self.hasEffect(ModEffects.WATER_WALKING.get())) {
+                cir.setReturnValue(true);
+            } else {
+                CuriosUtils.findCurio(self, IFluidWalk.class).ifPresent(iFluidWalk ->
+                    cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+            }
+        }
     }
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canStandOnFluid(Lnet/minecraft/world/level/material/FluidState;)Z"))

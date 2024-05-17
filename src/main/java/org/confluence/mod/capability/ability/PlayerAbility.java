@@ -15,7 +15,10 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.IRangePickup;
-import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.combat.IAggroAttach;
+import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.combat.IFireImmune;
+import org.confluence.mod.item.curio.combat.IInvulnerableTime;
 import org.confluence.mod.item.curio.fishing.IFishingPower;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -30,7 +33,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int invulnerableTime;
     private double criticalChance;
     private boolean fireImmune;
-    private boolean lavaHurtReduce;
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
 
@@ -47,7 +49,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = 20;
         this.criticalChance = 0.0;
         this.fireImmune = false;
-        this.lavaHurtReduce = false;
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
 
@@ -65,7 +66,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger invul = new AtomicInteger(20);
         AtomicDouble chance = new AtomicDouble();
         AtomicBoolean fire = new AtomicBoolean();
-        AtomicBoolean reduce = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
         AtomicInteger aggro = new AtomicInteger();
         AtomicDouble fishing = new AtomicDouble();
@@ -88,7 +88,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 }
                 if (item instanceof ICriticalHit iCriticalHit) chance.addAndGet(iCriticalHit.getChance());
                 if (item instanceof IFireImmune) fire.set(true);
-                if (item instanceof ILavaHurtReduce) reduce.set(true);
                 if (item instanceof ILavaImmune iLavaImmune) {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
                 }
@@ -104,7 +103,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = invul.get();
         this.criticalChance = chance.get();
         this.fireImmune = fire.get();
-        this.lavaHurtReduce = reduce.get();
         this.maxLavaImmuneTicks = lava.get();
         this.aggro = aggro.get();
         this.fishingPower = fishing.floatValue();
@@ -131,10 +129,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public boolean isFireImmune() {
         return fireImmune;
-    }
-
-    public boolean isLavaHurtReduce() {
-        return lavaHurtReduce;
     }
 
     public void increaseLavaImmuneTicks() {
@@ -213,7 +207,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("invulnerableTime", invulnerableTime);
         nbt.putDouble("criticalChance", criticalChance);
         nbt.putBoolean("fireImmune", fireImmune);
-        nbt.putBoolean("lavaHurtReduce", lavaHurtReduce);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
 
         nbt.putInt("aggro", aggro);
@@ -232,7 +225,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = nbt.getInt("invulnerableTime");
         this.criticalChance = nbt.getDouble("criticalChance");
         this.fireImmune = nbt.getBoolean("fireImmune");
-        this.lavaHurtReduce = nbt.getBoolean("lavaHurtReduce");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
 
         this.aggro = nbt.getInt("aggro");
@@ -249,7 +241,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = playerAbility.invulnerableTime;
         this.criticalChance = playerAbility.criticalChance;
         this.fireImmune = playerAbility.fireImmune;
-        this.lavaHurtReduce = playerAbility.lavaHurtReduce;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
 
         this.aggro = playerAbility.aggro;
