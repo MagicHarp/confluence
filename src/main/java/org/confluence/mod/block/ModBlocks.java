@@ -89,7 +89,7 @@ public final class ModBlocks {
 
 
 
-    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(9, 11, 4, 13, 15, 8), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
+    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
     public static final RegistryObject<BaseJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
     public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
     public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
