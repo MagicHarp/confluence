@@ -27,13 +27,13 @@ public abstract class FishingRodItemMixin {
         cancellable = true
     )
     private void replaceHook(Level pLevel, Player pPlayer, InteractionHand pHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir, ItemStack itemstack, int k, int j) {
+        FishingHook fishingHook = new FishingHook(pPlayer, pLevel, j, k);
         if (CuriosUtils.hasCurio(pPlayer, ILavaproofFishingHook.class)) {
-            FishingHook fishingHook = new FishingHook(pPlayer, pLevel, j, k);
             ((IFishingHook) fishingHook).c$setIsLavaHook();
-            pLevel.addFreshEntity(fishingHook);
-            pPlayer.awardStat(Stats.ITEM_USED.get((FishingRodItem) (Object) this));
-            pPlayer.gameEvent(GameEvent.ITEM_INTERACT_START);
-            cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemstack, false));
         }
+        pLevel.addFreshEntity(fishingHook);
+        pPlayer.awardStat(Stats.ITEM_USED.get((FishingRodItem) (Object) this));
+        pPlayer.gameEvent(GameEvent.ITEM_INTERACT_START);
+        cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemstack, false));
     }
 }

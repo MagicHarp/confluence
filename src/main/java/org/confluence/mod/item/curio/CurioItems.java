@@ -8,6 +8,8 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
+import org.confluence.mod.item.curio.fishing.AnglerEarring;
+import org.confluence.mod.item.curio.fishing.HighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.LavaproofFishingHook;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.*;
@@ -260,7 +262,15 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
     /* 炫彩斗篷 */
 
+    HIGH_TEST_FISHING_LINE("high_test_fishing_line", HighTestFishingLine::new), // 优质钓鱼线
+    ANGLER_EARRING("angler_earring", AnglerEarring::new), // 渔夫耳环
+    /* 钓具箱 */
+    /* 渔夫渔具袋 */
     LAVAPROOF_FISHING_HOOK("lavaproof_fishing_hook", LavaproofFishingHook::new), // 防熔岩钓钩
+    /* 防熔岩渔具袋 */
+    /*
+     * 各种浮标
+     */
 
     /* ** 悠悠球 ** */
     /* ** 时装 ** */

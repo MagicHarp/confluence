@@ -1,33 +1,60 @@
 package org.confluence.mod.mixin;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.item.fishing.IBait;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.IFishingHook;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import javax.annotation.Nullable;
+
 @Mixin(FishingHook.class)
 public abstract class FishingHookMixin implements IFishingHook {
+    @Shadow
+    @Nullable
+    public abstract Player getPlayerOwner();
+
+    @Shadow
+    @Final
+    private int luck;
     @Unique
     private boolean c$isLavaHook = false;
+    @Unique
+    private ItemStack c$bait = null;
 
     @Unique
     @Override
     public void c$setIsLavaHook() {
         this.c$isLavaHook = true;
+    }
+
+    @Unique
+    @Override
+    public ItemStack c$getBait() {
+        return c$bait;
     }
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
@@ -88,6 +115,37 @@ public abstract class FishingHookMixin implements IFishingHook {
     private ResourceLocation loot(ResourceLocation par1) {
         if (c$isInLava()) return ModLootTables.FISHING_LAVA;
         return par1;
+    }
+
+    @Redirect(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootParams$Builder;create(Lnet/minecraft/world/level/storage/loot/parameters/LootContextParamSet;)Lnet/minecraft/world/level/storage/loot/LootParams;"))
+    private LootParams getLuck(LootParams.Builder builder, LootContextParamSet set) {
+        Player owner = getPlayerOwner();
+        AtomicDouble fishing = new AtomicDouble(luck);
+        if (owner != null) {
+            fishing.addAndGet(owner.getLuck());
+            owner.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
+                fishing.set(playerAbility.getFishingPower(owner)));
+            Inventory inventory = owner.getInventory();
+            float bonus = 1.0F;
+            for (ItemStack itemStack : inventory.offhand) {
+                if (itemStack.getItem() instanceof IBait iBait) {
+                    this.c$bait = itemStack;
+                    bonus += iBait.getBaitBonus();
+                    break;
+                }
+            }
+            if (c$bait == null) {
+                for (ItemStack itemStack : inventory.items) {
+                    if (itemStack.getItem() instanceof IBait iBait) {
+                        this.c$bait = itemStack;
+                        bonus += iBait.getBaitBonus();
+                        break;
+                    }
+                }
+            }
+            if (c$bait != null) fishing.set(fishing.get() * bonus);
+        }
+        return builder.withLuck(fishing.floatValue()).create(set);
     }
 
     @Unique

@@ -12,9 +12,11 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.IRangePickup;
 import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.fishing.IFishingPower;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -66,6 +68,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicBoolean reduce = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
         AtomicInteger aggro = new AtomicInteger();
+        AtomicDouble fishing = new AtomicDouble();
         AtomicBoolean star = new AtomicBoolean();
         AtomicBoolean coin = new AtomicBoolean();
         AtomicBoolean drops = new AtomicBoolean();
@@ -90,6 +93,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
                 }
                 if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
+                if (item instanceof IFishingPower iFishingPower) fishing.addAndGet(iFishingPower.getFishingBonus());
                 if (item instanceof IRangePickup.Star) star.set(true);
                 if (item instanceof IRangePickup.Coin) coin.set(true);
                 if (item instanceof IRangePickup.Drops) drops.set(true);
@@ -103,6 +107,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.lavaHurtReduce = reduce.get();
         this.maxLavaImmuneTicks = lava.get();
         this.aggro = aggro.get();
+        this.fishingPower = fishing.floatValue();
         this.starRange = star.get() ? 14.25 : 1.75;
         this.coinRange = coin.get() ? 16.67 : 2.0;
         this.dropsRange = drops.get() ? 6.25 : 0.0;
@@ -150,10 +155,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return aggro;
     }
 
-    public void increaseFishingPower(float fishingPower) {
-        this.fishingPower += fishingPower;
-    }
-
     public float getFishingPower(Player player) {
         float base = fishingPower;
         Level level = player.level();
@@ -176,6 +177,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         } else if (level instanceof ServerLevel serverLevel) {
             if (ConfluenceData.get(serverLevel).getMoonSpecific() == 11) base *= 1.1F;
         }
+        if (player.hasEffect(ModEffects.FISHING.get())) base += 1.0F;
         return base;
     }
 

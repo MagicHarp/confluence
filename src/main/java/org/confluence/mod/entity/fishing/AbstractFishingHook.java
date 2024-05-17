@@ -33,8 +33,8 @@ public abstract class AbstractFishingHook extends FishingHook {
         double d3 = 0.6 / vec3.length();
         vec3 = vec3.multiply(d3 + random.triangle(0.5, 0.0103365), d3 + random.triangle(0.5, 0.0103365), d3 + random.triangle(0.5, 0.0103365));
         setDeltaMovement(vec3);
-        setYRot((float)(Mth.atan2(vec3.x, vec3.z) * rad));
-        setXRot((float)(Mth.atan2(vec3.y, vec3.horizontalDistance()) * rad));
+        setYRot((float) (Mth.atan2(vec3.x, vec3.z) * rad));
+        setXRot((float) (Mth.atan2(vec3.y, vec3.horizontalDistance()) * rad));
         this.yRotO = getYRot();
         this.xRotO = getXRot();
     }
