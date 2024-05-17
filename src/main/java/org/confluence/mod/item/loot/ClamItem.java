@@ -31,7 +31,7 @@ public class ClamItem extends Item {
             LootParams lootparams = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.ORIGIN, player.position())
                 .withParameter(LootContextParams.THIS_ENTITY, player)
-                .withLuck(player.getLuck() + fishingPower.floatValue())
+                .withLuck(fishingPower.floatValue())
                 .create(LootContextParamSets.GIFT);
             LootTable loottable = serverLevel.getServer().getLootData().getLootTable(ModLootTables.CLAM);
             for (ItemStack loot : loottable.getRandomItems(lootparams)) {

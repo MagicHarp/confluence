@@ -178,7 +178,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
             if (ConfluenceData.get(serverLevel).getMoonSpecific() == 11) base *= 1.1F;
         }
         if (player.hasEffect(ModEffects.FISHING.get())) base += 1.0F;
-        return base;
+        return base + player.getLuck();
     }
 
     public boolean increaseCrystals() {

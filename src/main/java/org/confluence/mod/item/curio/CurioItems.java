@@ -8,9 +8,7 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
-import org.confluence.mod.item.curio.fishing.AnglerEarring;
-import org.confluence.mod.item.curio.fishing.HighTestFishingLine;
-import org.confluence.mod.item.curio.fishing.LavaproofFishingHook;
+import org.confluence.mod.item.curio.fishing.*;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
@@ -264,13 +262,18 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
 
     HIGH_TEST_FISHING_LINE("high_test_fishing_line", HighTestFishingLine::new), // 优质钓鱼线
     ANGLER_EARRING("angler_earring", AnglerEarring::new), // 渔夫耳环
-    /* 钓具箱 */
-    /* 渔夫渔具袋 */
+    TACKLE_BOX("tackle_box", TackleBox::new), // 钓具箱
+    ANGLER_TACKLE_BAG("angler_tackle_bag", AnglerTackleBag::new), // 渔夫渔具袋
     LAVAPROOF_FISHING_HOOK("lavaproof_fishing_hook", LavaproofFishingHook::new), // 防熔岩钓钩
-    /* 防熔岩渔具袋 */
-    /*
-     * 各种浮标
-     */
+    LAVAPROOF_TACKLE_BAG("lavaproof_tackle_bag", LavaproofTackleBag::new), // 防熔岩渔具袋
+    FISHING_BOBBER("fishing_bobber", FishingBobber::new), // 钓鱼浮标
+    GLOWING_FISHING_BOBBER("glowing_fishing_bobber", FishingBobber::new), // 发光钓鱼浮标
+    LAVA_MOSS_FISHING_BOBBER("lava_moss_fishing_bobber", FishingBobber::new), // 熔岩苔藓钓鱼浮标
+    HELIUM_MOSS_FISHING_BOBBER("helium_moss_fishing_bobber", FishingBobber::new), // 氦苔藓钓鱼浮标
+    NEON_MOSS_FISHING_BOBBER("neon_moss_fishing_bobber", FishingBobber::new), // 氖苔藓钓鱼浮标
+    ARGON_MOSS_FISHING_BOBBER("argon_moss_fishing_bobber", FishingBobber::new), // 氩苔藓钓鱼浮标
+    KRYPTON_MOSS_FISHING_BOBBER("krypton_moss_fishing_bobber", FishingBobber::new), // 氪苔藓钓鱼浮标
+    XENON_MOSS_FISHING_BOBBER("xenon_moss_fishing_bobber", FishingBobber::new), // 氙苔藓钓鱼浮标
 
     /* ** 悠悠球 ** */
     /* ** 时装 ** */

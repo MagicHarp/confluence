@@ -12,7 +12,7 @@ public interface IFishermansPocketGuide {
         localPlayer.getCapability(AbilityProvider.CAPABILITY)
             .ifPresent(playerAbility -> atomic.set(Component.translatable(
                 "info.confluence.fishermans_pocket_guide",
-                "%.2f".formatted(localPlayer.getLuck() + playerAbility.getFishingPower(localPlayer))
+                "%.2f".formatted(playerAbility.getFishingPower(localPlayer))
             )));
         return atomic.get();
     }

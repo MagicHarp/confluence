@@ -31,8 +31,6 @@ import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.IFishingHook;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
@@ -113,13 +111,7 @@ public final class ItemEvents {
     @SubscribeEvent
     public static void itemFished(ItemFishedEvent event) {
         IHighTestFishingLine.apply(event);
-        if (!event.isCanceled()) {
-            IFishingHook fishingHook = (IFishingHook) event.getHookEntity();
-            Player player = event.getEntity();
-            float factor = CuriosUtils.noSameCurio(player, ITackleBox.class) ? 1.0F : 2.0F;
-            if (player.getRandom().nextFloat() < 1.0F / (factor + fishingHook.c$getBonus() / 6.0F)) {
-                fishingHook.c$getBait().shrink(1);
-            }
-        }
+        if (event.isCanceled()) return;
+        ITackleBox.apply(event.getHookEntity(), event.getEntity());
     }
 }

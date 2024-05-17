@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.item.fishing.IBait;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
@@ -30,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 @Mixin(FishingHook.class)
 public abstract class FishingHookMixin implements IFishingHook {
@@ -122,9 +124,12 @@ public abstract class FishingHookMixin implements IFishingHook {
         Player owner = getPlayerOwner();
         AtomicDouble fishing = new AtomicDouble(luck);
         if (owner != null) {
-            fishing.addAndGet(owner.getLuck());
-            owner.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
-                fishing.set(playerAbility.getFishingPower(owner)));
+            Optional<PlayerAbility> optional = owner.getCapability(AbilityProvider.CAPABILITY).resolve();
+            if (optional.isPresent()) {
+                fishing.addAndGet(optional.get().getFishingPower(owner));
+            } else {
+                fishing.addAndGet(owner.getLuck());
+            }
             Inventory inventory = owner.getInventory();
             float bonus = 1.0F;
             for (ItemStack itemStack : inventory.offhand) {
@@ -133,6 +138,7 @@ public abstract class FishingHookMixin implements IFishingHook {
                     bonus += iBait.getBaitBonus();
                     break;
                 }
+                this.c$bait = null;
             }
             if (c$bait == null) {
                 for (ItemStack itemStack : inventory.items) {
