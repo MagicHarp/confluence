@@ -511,6 +511,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SNOW_JARS.get(), "雪地陶罐");
         add(SPIDER_CAVE_JARS.get(), "蛛洞陶罐");
         add(DESERT_JARS.get(), "沙漠陶罐");
+        add(MARBLE_JARS.get(), "尘封陶罐");
         add(CORRUPT_JARS.get(), "蠕虫陶罐");
         add(ANOTHER_CRIMSON_JARS.get(), "血肉陶罐");
         add(ASH_JARS.get(), "炎烬陶罐");
@@ -863,6 +864,21 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.COIN_RING.get(), "钱币戒指");
         add(CurioItems.TREASURE_MAGNET.get(), "宝藏磁石");
         add(CurioItems.HIVE_PACK.get(), "蜂巢背包");
+        add(CurioItems.FLOWER_BOOTS.get(), "花靴");
+        add(CurioItems.HIGH_TEST_FISHING_LINE.get(), "优质钓鱼线");
+        add(CurioItems.TACKLE_BOX.get(), "钓具箱");
+        add(CurioItems.ANGLER_EARRING.get(), "渔夫耳环");
+        add(CurioItems.ANGLER_TACKLE_BAG.get(), "渔夫渔具袋");
+        add(CurioItems.LAVA_MOSS_FISHING_BOBBER.get(), "熔岩苔藓钓鱼浮标");
+        add(CurioItems.LAVAPROOF_FISHING_HOOK.get(), "防熔岩钓钩");
+        add(CurioItems.LAVAPROOF_TACKLE_BAG.get(), "防熔岩渔具袋");
+        add(CurioItems.FISHING_BOBBER.get(), "钓鱼浮标");
+        add(CurioItems.GLOWING_FISHING_BOBBER.get(), "发光钓鱼浮标");
+        add(CurioItems.HELIUM_MOSS_FISHING_BOBBER.get(), "氦苔藓钓鱼浮标");
+        add(CurioItems.NEON_MOSS_FISHING_BOBBER.get(), "氖苔藓钓鱼浮标");
+        add(CurioItems.ARGON_MOSS_FISHING_BOBBER.get(), "氩苔藓钓鱼浮标");
+        add(CurioItems.KRYPTON_MOSS_FISHING_BOBBER.get(), "氪苔藓钓鱼浮标");
+        add(CurioItems.XENON_MOSS_FISHING_BOBBER.get(), "氙苔藓钓鱼浮标");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
