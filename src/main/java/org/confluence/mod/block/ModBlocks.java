@@ -86,13 +86,17 @@ public final class ModBlocks {
     public static final RegistryObject<BaseJarBlock> SNOW_JARS = registerWithItem("snow_jars", BaseJarBlock::new);
     public static final RegistryObject<BaseJarBlock> SPIDER_CAVE_JARS = registerWithItem("spider_cave_jars", BaseJarBlock::new);
     public static final RegistryObject<BaseJarBlock> DESERT_JARS = registerWithItem("desert_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14))));
-
-    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
-    public static final RegistryObject<BaseJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
-    public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
-    public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
+    public static final RegistryObject<BaseJarBlock> JUNGLE_JARS = registerWithItem("jungle_jars", () -> new BaseJarBlock(Shapes.or(box(3, 1, 3, 13, 13, 13), box(4, 14, 4, 12, 15, 12), box(5, 13, 5, 11, 14, 11), box(4, 0, 4, 12, 1, 12))));
     public static final RegistryObject<BaseJarBlock> MARBLE_JARS = registerWithItem("marble_jars", () -> new BaseJarBlock(Shapes.or((box(4, 2, 4, 12, 3, 12)), box(5, 1, 5, 11, 2, 11), box(5, 12, 5, 11, 13, 11), box(4, 11, 4, 12, 12, 12), box(4, 13, 4, 12, 14, 12), box(4, 0, 4, 12, 1, 12), box(3, 3, 3, 13, 4, 13), box(2, 4, 2, 14, 10, 14),
         box(3, 10, 3, 13, 11, 13))));
+    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
+    public static final RegistryObject<BaseJarBlock> PYRAMID_JARS = registerWithItem("pyramid_jars", () -> new BaseJarBlock(Shapes.or(box(2, 2, 2, 14, 13, 14), box(3, 1, 3, 13, 2, 13), box(2, 0, 2, 14, 1, 14), box(3, 13, 3, 13, 15, 13), box(2, 15, 2, 14, 17, 14))));
+    public static final RegistryObject<BaseJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
+    public static final RegistryObject<BaseJarBlock> DUNGEON_JARS = registerWithItem("dungeon_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 6, 13), box(3, 15, 3, 13, 16, 13), box(2, 6, 2, 14, 15, 14))));
+
+    public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
+    public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
+
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

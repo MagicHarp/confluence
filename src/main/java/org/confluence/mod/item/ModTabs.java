@@ -84,9 +84,12 @@ public final class ModTabs {
                 output.accept(SNOW_JARS.get());
                 output.accept(SPIDER_CAVE_JARS.get());
                 output.accept(DESERT_JARS.get());
+                output.accept(JUNGLE_JARS.get());
                 output.accept(MARBLE_JARS.get());
+                output.accept(PYRAMID_JARS.get());
                 output.accept(CORRUPT_JARS.get());
                 output.accept(ANOTHER_CRIMSON_JARS.get());
+                output.accept(DUNGEON_JARS.get());
                 output.accept(ASH_JARS.get());
                 output.accept(TEMPLE_JARS.get());
             })

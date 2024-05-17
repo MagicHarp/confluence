@@ -511,9 +511,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(SNOW_JARS.get(), "雪地陶罐");
         add(SPIDER_CAVE_JARS.get(), "蛛洞陶罐");
         add(DESERT_JARS.get(), "沙漠陶罐");
+        add(JUNGLE_JARS.get(), "丛林陶罐");
         add(MARBLE_JARS.get(), "尘封陶罐");
+        add(PYRAMID_JARS.get(), "祭祀陶罐");
         add(CORRUPT_JARS.get(), "蠕虫陶罐");
         add(ANOTHER_CRIMSON_JARS.get(), "血肉陶罐");
+        add(DUNGEON_JARS.get(), "地牢陶罐");
         add(ASH_JARS.get(), "炎烬陶罐");
         add(TEMPLE_JARS.get(), "神庙陶罐");
 

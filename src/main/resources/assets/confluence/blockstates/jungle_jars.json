@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "confluence:block/jungle_jars"
+		},
+		"facing=east": {
+			"model": "confluence:block/jungle_jars",
+			"y": 90
+		},
+		"facing=south": {
+			"model": "confluence:block/jungle_jars",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "confluence:block/jungle_jars",
+			"y": 270
+		}
+	}
+}
