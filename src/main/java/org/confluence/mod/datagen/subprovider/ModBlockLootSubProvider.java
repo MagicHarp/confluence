@@ -12,10 +12,10 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.block.DecorativeBlocks;
-import org.confluence.mod.block.LogBlocks;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.Ores;
+import org.confluence.mod.block.common.DecorativeBlocks;
+import org.confluence.mod.block.natural.LogBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 

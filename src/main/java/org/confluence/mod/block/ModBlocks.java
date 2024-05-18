@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,17 +18,21 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.block.common.BaseBlock;
+import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
+import org.confluence.mod.block.natural.spreadable.ISpreadable;
+import org.confluence.mod.block.natural.spreadable.SpreadingBlock;
+import org.confluence.mod.block.natural.spreadable.SpreadingGrassBlock;
+import org.confluence.mod.block.natural.spreadable.SpreadingSandBlock;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModFluids;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static net.minecraft.world.level.block.Block.box;
 import static org.confluence.mod.block.WoodSetType.*;
 
 @SuppressWarnings("unused")
@@ -81,49 +84,6 @@ public final class ModBlocks {
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
-    // 罐子
-    public static final RegistryObject<BaseJarBlock> FOREST_JARS = registerWithItem("forest_jars", BaseJarBlock::new);
-    public static final RegistryObject<BaseJarBlock> SNOW_JARS = registerWithItem("snow_jars", BaseJarBlock::new);
-    public static final RegistryObject<BaseJarBlock> SPIDER_CAVE_JARS = registerWithItem("spider_cave_jars", BaseJarBlock::new);
-    public static final RegistryObject<BaseJarBlock> DESERT_JARS = registerWithItem("desert_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14))));
-    public static final RegistryObject<BaseJarBlock> JUNGLE_JARS = registerWithItem("jungle_jars", () -> new BaseJarBlock(Shapes.or(box(3, 1, 3, 13, 13, 13), box(4, 14, 4, 12, 15, 12), box(5, 13, 5, 11, 14, 11), box(4, 0, 4, 12, 1, 12))));
-    public static final RegistryObject<BaseJarBlock> MARBLE_JARS = registerWithItem("marble_jars", () -> new BaseJarBlock(Shapes.or((box(4, 2, 4, 12, 3, 12)), box(5, 1, 5, 11, 2, 11), box(5, 12, 5, 11, 13, 11), box(4, 11, 4, 12, 12, 12), box(4, 13, 4, 12, 14, 12), box(4, 0, 4, 12, 1, 12), box(3, 3, 3, 13, 4, 13), box(2, 4, 2, 14, 10, 14),
-        box(3, 10, 3, 13, 11, 13))));
-    public static final RegistryObject<BaseJarBlock> ANOTHER_CRIMSON_JARS = registerWithItem("another_crimson_jars", () -> new BaseJarBlock(Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))));
-    public static final RegistryObject<BaseJarBlock> PYRAMID_JARS = registerWithItem("pyramid_jars", () -> new BaseJarBlock(Shapes.or(box(2, 2, 2, 14, 13, 14), box(3, 1, 3, 13, 2, 13), box(2, 0, 2, 14, 1, 14), box(3, 13, 3, 13, 15, 13), box(2, 15, 2, 14, 17, 14))));
-    public static final RegistryObject<BaseJarBlock> CORRUPT_JARS = registerWithItem("corrupt_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
-    public static final RegistryObject<BaseJarBlock> DUNGEON_JARS = registerWithItem("dungeon_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 6, 13), box(3, 15, 3, 13, 16, 13), box(2, 6, 2, 14, 15, 14))));
-
-    public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
-    public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
-    //匣子
-    public static final RegistryObject<BaseBoxBlock> WOODEN_BOX = registerWithItem("wooden_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> IRON_BOX = registerWithItem("iron_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> GOLDEN_BOX = registerWithItem("golden_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> JUNGLE_BOX = registerWithItem("jungle_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> SKY_BOX = registerWithItem("sky_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> CORRUPT_BOX = registerWithItem("corrupt_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> ANOTHER_CRIMSON_BOX = registerWithItem("another_crimson_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> SACRED_BOX = registerWithItem("sacred_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> DUNGEON_BOX = registerWithItem("dungeon_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> FREEZE_BOX = registerWithItem("freeze_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> OASIS_BOX = registerWithItem("oasis_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> OBSIDIAN_BOX = registerWithItem("obsidian_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> OCEAN_BOX = registerWithItem("ocean_box", BaseBoxBlock::new);
-    //肉后
-    public static final RegistryObject<BaseBoxBlock> PEARLWOOD_BOX = registerWithItem("pearlwood_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> MITHRIL_BOX = registerWithItem("mithril_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> TITANIUM_BOX = registerWithItem("titanium_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> THORNS_BOX = registerWithItem("thorns_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> SPACE_BOX = registerWithItem("space_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> DEFACED_BOX = registerWithItem("defaced_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> BLOOD_BOX = registerWithItem("blood_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> PROVIDENTIAL_BOX = registerWithItem("providential_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> FENCING_BOX = registerWithItem("fencing_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> CONIFEROUS_WOOD_BOX = registerWithItem("coniferous_wood_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> ILLUSION_BOX = registerWithItem("illusion_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> HELL_STONE_BOX = registerWithItem("hell_stone_box", BaseBoxBlock::new);
-    public static final RegistryObject<BaseBoxBlock> BEACH_BOX = registerWithItem("beach_box", BaseBoxBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
@@ -148,6 +108,8 @@ public final class ModBlocks {
     public static void register(IEventBus bus) {
         Ores.init();
         DecorativeBlocks.init();
+        Jars.init();
+        Boxes.init();
         BLOCKS.register(bus);
         BLOCK_ENTITIES.register(bus);
     }

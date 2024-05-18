@@ -1,4 +1,4 @@
-package org.confluence.mod.block.natural;
+package org.confluence.mod.block.natural.spreadable;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;

@@ -1,10 +1,10 @@
-package org.confluence.mod.block;
+package org.confluence.mod.block.common;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.block.common.BeamLikeBlock;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;

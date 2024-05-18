@@ -1,4 +1,4 @@
-package org.confluence.mod.block;
+package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.block.WoodSetType;
 
 import java.util.ArrayList;
 

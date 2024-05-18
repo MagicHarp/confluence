@@ -7,9 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.DecorativeBlocks;
-import org.confluence.mod.block.LogBlocks;
-import org.confluence.mod.block.Ores;
+import org.confluence.mod.block.common.DecorativeBlocks;
+import org.confluence.mod.block.natural.Boxes;
+import org.confluence.mod.block.natural.Jars;
+import org.confluence.mod.block.natural.LogBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Gels;
@@ -80,18 +82,7 @@ public final class ModTabs {
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());
 
-                output.accept(FOREST_JARS.get());
-                output.accept(SNOW_JARS.get());
-                output.accept(SPIDER_CAVE_JARS.get());
-                output.accept(DESERT_JARS.get());
-                output.accept(JUNGLE_JARS.get());
-                output.accept(MARBLE_JARS.get());
-                output.accept(PYRAMID_JARS.get());
-                output.accept(CORRUPT_JARS.get());
-                output.accept(ANOTHER_CRIMSON_JARS.get());
-                output.accept(DUNGEON_JARS.get());
-                output.accept(ASH_JARS.get());
-                output.accept(TEMPLE_JARS.get());
+                for (Jars jars : Jars.values()) output.accept(jars.get());
             })
             .build());
     // 材料
@@ -123,32 +114,7 @@ public final class ModTabs {
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
                 output.accept(ALTAR_BLOCK.get());
-                output.accept(WOODEN_BOX.get());
-                output.accept(IRON_BOX.get());
-                output.accept(GOLDEN_BOX.get());
-                output.accept(JUNGLE_BOX.get());
-                output.accept(SKY_BOX.get());
-                output.accept(CORRUPT_BOX.get());
-                output.accept(ANOTHER_CRIMSON_BOX.get());
-                output.accept(SACRED_BOX.get());
-                output.accept(DUNGEON_BOX.get());
-                output.accept(FREEZE_BOX.get());
-                output.accept(OASIS_BOX.get());
-                output.accept(OBSIDIAN_BOX.get());
-                output.accept(OCEAN_BOX.get());
-                output.accept(PEARLWOOD_BOX.get());
-                output.accept(MITHRIL_BOX.get());
-                output.accept(TITANIUM_BOX.get());
-                output.accept(THORNS_BOX.get());
-                output.accept(SPACE_BOX.get());
-                output.accept(DEFACED_BOX.get());
-                output.accept(BLOOD_BOX.get());
-                output.accept(PROVIDENTIAL_BOX.get());
-                output.accept(FENCING_BOX.get());
-                output.accept(CONIFEROUS_WOOD_BOX.get());
-                output.accept(ILLUSION_BOX.get());
-                output.accept(HELL_STONE_BOX.get());
-                output.accept(BEACH_BOX.get());
+                for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
 
             })
             .build());
