@@ -659,6 +659,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.GOLDEN_SHORT_SWORD.get(), "金短剑");
         add(Swords.GOLDEN_BOARD_SWORD.get(), "金阔剑");
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
+        add(Swords.CROWBAR.get(), "物理学圣剑");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
