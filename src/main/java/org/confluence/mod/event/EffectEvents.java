@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.beneficial.LuckEffect;
 import org.confluence.mod.effect.harmful.IchorEffect;
+import org.confluence.mod.effect.neutral.LoveEffect;
 import org.confluence.mod.item.curio.combat.EffectInvul;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -32,6 +33,7 @@ public final class EffectEvents {
         LivingEntity living = event.getEntity();
         AttributeMap attributeMap = living.getAttributes();
 
+        LoveEffect.onAdd(mobEffect, living, event.getEffectSource());
         IchorEffect.onAdd(mobEffect, attributeMap);
         LuckEffect.onAdd(mobEffect, attributeMap, effectInstance.getAmplifier());
     }
