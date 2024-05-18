@@ -96,7 +96,34 @@ public final class ModBlocks {
 
     public static final RegistryObject<BaseJarBlock> ASH_JARS = registerWithItem("ash_jars", BaseJarBlock::new);
     public static final RegistryObject<BaseJarBlock> TEMPLE_JARS = registerWithItem("temple_jars", () -> new BaseJarBlock(Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))));
-
+    //匣子
+    public static final RegistryObject<BaseBoxBlock> WOODEN_BOX = registerWithItem("wooden_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> IRON_BOX = registerWithItem("iron_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> GOLDEN_BOX = registerWithItem("golden_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> JUNGLE_BOX = registerWithItem("jungle_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> SKY_BOX = registerWithItem("sky_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> CORRUPT_BOX = registerWithItem("corrupt_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> ANOTHER_CRIMSON_BOX = registerWithItem("another_crimson_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> SACRED_BOX = registerWithItem("sacred_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> DUNGEON_BOX = registerWithItem("dungeon_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> FREEZE_BOX = registerWithItem("freeze_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> OASIS_BOX = registerWithItem("oasis_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> OBSIDIAN_BOX = registerWithItem("obsidian_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> OCEAN_BOX = registerWithItem("ocean_box", BaseBoxBlock::new);
+    //肉后
+    public static final RegistryObject<BaseBoxBlock> PEARLWOOD_BOX = registerWithItem("pearlwood_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> MITHRIL_BOX = registerWithItem("mithril_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> TITANIUM_BOX = registerWithItem("titanium_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> THORNS_BOX = registerWithItem("thorns_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> SPACE_BOX = registerWithItem("space_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> DEFACED_BOX = registerWithItem("defaced_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> BLOOD_BOX = registerWithItem("blood_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> PROVIDENTIAL_BOX = registerWithItem("providential_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> FENCING_BOX = registerWithItem("fencing_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> CONIFEROUS_WOOD_BOX = registerWithItem("coniferous_wood_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> ILLUSION_BOX = registerWithItem("illusion_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> HELL_STONE_BOX = registerWithItem("hell_stone_box", BaseBoxBlock::new);
+    public static final RegistryObject<BaseBoxBlock> BEACH_BOX = registerWithItem("beach_box", BaseBoxBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

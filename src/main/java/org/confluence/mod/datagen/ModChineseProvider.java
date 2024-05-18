@@ -360,6 +360,24 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.ANOTHER_CRIMSON_BLOCK.get(), "猩红矿块");
         add(Ores.RAW_ANOTHER_CRIMSON_BLOCK.get(), "猩红原矿块");
         add(Ores.HELLSTONE.get(), "狱石");
+        add(Ores.RAW_COBALT_BLOCK.get(), "钴原矿");
+        add(Ores.DEEPSLATE_COBALT_ORE.get(), "深层钴矿");
+        add(Ores.COBALT_BLOCK.get(), "钴块");
+        add(Ores.RAW_PALLADIUM_BLOCK.get(), "钯金原矿");
+        add(Ores.DEEPSLATE_PALLADIUM_ORE.get(), "深层钯金矿");
+        add(Ores.PALLADIUM_BLOCK.get(), "钯金块");
+        add(Ores.RAW_MITHRIL_BLOCK.get(), "秘银原矿");
+        add(Ores.DEEPSLATE_MITHRIL_ORE.get(), "深层秘银矿");
+        add(Ores.MITHRIL_BLOCK.get(), "秘银块");
+        add(Ores.RAW_ORICHALCUM_BLOCK.get(), "山铜原矿");
+        add(Ores.DEEPSLATE_ORICHALCUM_ORE.get(), "深层山铜矿");
+        add(Ores.ORICHALCUM_BLOCK.get(), "山铜块");
+        add(Ores.RAW_ADAMANTITE_BLOCK.get(), "精金原矿");
+        add(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), "深层精金矿");
+        add(Ores.ADAMANTITE_BLOCK.get(), "精金块");
+        add(Ores.RAW_TITANIUM_BLOCK.get(), "钛金原矿");
+        add(Ores.DEEPSLATE_TITANIUM_ORE.get(), "深层钛金矿");
+        add(Ores.TITANIUM_BLOCK.get(), "钛金块");
 
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
@@ -520,6 +538,33 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_JARS.get(), "炎烬陶罐");
         add(TEMPLE_JARS.get(), "神庙陶罐");
 
+        add(WOODEN_BOX.get(), "木匣");
+        add(IRON_BOX.get(), "铁匣");
+        add(GOLDEN_BOX.get(), "金匣");
+        add(JUNGLE_BOX.get(), "丛林匣");
+        add(SKY_BOX.get(), "天空匣");
+        add(CORRUPT_BOX.get(), "腐化匣");
+        add(ANOTHER_CRIMSON_BOX.get(), "猩红匣");
+        add(SACRED_BOX.get(), "神圣匣");
+        add(DUNGEON_BOX.get(), "地牢匣");
+        add(FREEZE_BOX.get(), "冰冻匣");
+        add(OASIS_BOX.get(), "绿洲匣");
+        add(OBSIDIAN_BOX.get(), "黑曜石匣");
+        add(OCEAN_BOX.get(), "海洋匣");
+        add(PEARLWOOD_BOX.get(), "珍珠木匣");
+        add(MITHRIL_BOX.get(), "秘银匣");
+        add(TITANIUM_BOX.get(), "钛金匣");
+        add(THORNS_BOX.get(), "荆棘匣");
+        add(SPACE_BOX.get(), "太空匣");
+        add(DEFACED_BOX.get(), "污损匣");
+        add(BLOOD_BOX.get(), "血匣");
+        add(PROVIDENTIAL_BOX.get(), "天赐匣");
+        add(FENCING_BOX.get(), "围栏匣");
+        add(CONIFEROUS_WOOD_BOX.get(), "针叶木匣");
+        add(ILLUSION_BOX.get(), "幻象匣");
+        add(HELL_STONE_BOX.get(), "狱石匣");
+        add(BEACH_BOX.get(), "海滩匣");
+
 
         add(SPOOKY_LOG_BLOCKS.PLANKS.get(), "阴森木板");
         add(SPOOKY_LOG_BLOCKS.PRESSURE_PLATE.get(), "阴森木压力板");
@@ -554,6 +599,18 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RAW_HELLSTONE.get(), "狱石矿");
         add(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), "原始狱石矿锭");
         add(Materials.HELLSTONE_INGOT.get(), "狱石矿锭");
+        add(Materials.RAW_COBALT.get(), "钴原矿");
+        add(Materials.COBALT_INGOT.get(), "钴锭");
+        add(Materials.RAW_PALLADIUM.get(), "钯金原矿");
+        add(Materials.PALLADIUM_INGOT.get(), "钯金锭");
+        add(Materials.RAW_MITHRIL.get(), "秘银原矿");
+        add(Materials.MITHRIL_INGOT.get(), "秘银锭");
+        add(Materials.RAW_ORICHALCUM.get(), "山铜原矿");
+        add(Materials.ORICHALCUM_INGOT.get(), "山铜锭");
+        add(Materials.RAW_ADAMANTITE.get(), "精金原矿");
+        add(Materials.ADAMANTITE_INGOT.get(), "精金锭");
+        add(Materials.RAW_TITANIUM.get(), "钛金原矿");
+        add(Materials.TITANIUM_INGOT.get(), "钛金锭");
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");

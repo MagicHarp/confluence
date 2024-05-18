@@ -120,9 +120,33 @@ public final class ModTabs {
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ModItems.CLAM.get());
-                output.accept(ECHO_BLOCK.get());
-                output.accept(ACTUATORS.get());
-                output.accept(ALTAR_BLOCK.get());
+                output.accept(WOODEN_BOX.get());
+                output.accept(IRON_BOX.get());
+                output.accept(GOLDEN_BOX.get());
+                output.accept(JUNGLE_BOX.get());
+                output.accept(SKY_BOX.get());
+                output.accept(CORRUPT_BOX.get());
+                output.accept(ANOTHER_CRIMSON_BOX.get());
+                output.accept(SACRED_BOX.get());
+                output.accept(DUNGEON_BOX.get());
+                output.accept(FREEZE_BOX.get());
+                output.accept(OASIS_BOX.get());
+                output.accept(OBSIDIAN_BOX.get());
+                output.accept(OCEAN_BOX.get());
+                output.accept(PEARLWOOD_BOX.get());
+                output.accept(MITHRIL_BOX.get());
+                output.accept(TITANIUM_BOX.get());
+                output.accept(THORNS_BOX.get());
+                output.accept(SPACE_BOX.get());
+                output.accept(DEFACED_BOX.get());
+                output.accept(BLOOD_BOX.get());
+                output.accept(PROVIDENTIAL_BOX.get());
+                output.accept(FENCING_BOX.get());
+                output.accept(CONIFEROUS_WOOD_BOX.get());
+                output.accept(ILLUSION_BOX.get());
+                output.accept(HELL_STONE_BOX.get());
+                output.accept(BEACH_BOX.get());
+
             })
             .build());
     // 工具
