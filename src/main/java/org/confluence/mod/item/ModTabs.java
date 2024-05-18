@@ -126,6 +126,7 @@ public final class ModTabs {
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
+                output.accept(ROPE.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) output.accept(pickaxes.get());
                 for (Axes axes : Axes.values()) output.accept(axes.get());
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());

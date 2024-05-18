@@ -23,10 +23,7 @@ import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
-import org.confluence.mod.block.natural.spreadable.ISpreadable;
-import org.confluence.mod.block.natural.spreadable.SpreadingBlock;
-import org.confluence.mod.block.natural.spreadable.SpreadingGrassBlock;
-import org.confluence.mod.block.natural.spreadable.SpreadingSandBlock;
+import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModFluids;
 
@@ -84,6 +81,8 @@ public final class ModBlocks {
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
+    //绳子
+    public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope" ,()-> new RopeBlock(BlockBehaviour.Properties.copy(Blocks.SCAFFOLDING)));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
