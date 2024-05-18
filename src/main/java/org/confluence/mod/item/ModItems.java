@@ -45,6 +45,7 @@ public final class ModItems {
     public static final RegistryObject<HoneyBucketItem> HONEY_BUCKET = ITEMS.register("honey_bucket", HoneyBucketItem::new);
     public static final RegistryObject<Item> STAR = ITEMS.register("star", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SOUL_CAKE = ITEMS.register("soul_cake", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> THROWING_KNIVES = ITEMS.register("throwing_knives", () -> new ThrowingKnivesItem((new Item.Properties()).stacksTo(64)));
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSounds.ALPHA, 12060));
 
     public static void register(IEventBus bus) {
