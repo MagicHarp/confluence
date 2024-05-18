@@ -11,6 +11,8 @@
         "LocalPlayerAccessor",
         "MinecraftAccessor",
         "PlayerMixin",
+        ,
+        "SlimeBlockMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

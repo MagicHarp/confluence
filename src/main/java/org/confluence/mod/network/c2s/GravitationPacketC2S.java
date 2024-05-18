@@ -6,7 +6,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.BroadcastGravitationRotPacketS2C;
 import org.confluence.mod.util.IEntity;
 
 import java.util.function.Supplier;
@@ -36,6 +39,10 @@ public record GravitationPacketC2S(boolean enable) {
                 }
             }
             ((IEntity)serverPlayer).c$setShouldRot(packet.enable);
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.ALL.noArg(),
+                new BroadcastGravitationRotPacketS2C(serverPlayer.getId(), packet.enable)
+            );
         });
         context.setPacketHandled(true);
     }

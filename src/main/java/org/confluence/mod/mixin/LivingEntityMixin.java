@@ -3,6 +3,7 @@ package org.confluence.mod.mixin;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -73,7 +74,7 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
         if (c$getSelf() instanceof Player player) {
-            if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : ((IEntity) player).c$isShouldRot()) {
+            if ((player.isLocalPlayer() && GravitationEffect.isShouldRot()) || (player instanceof ServerPlayer && ((IEntity) player).c$isShouldRot())) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
         }
