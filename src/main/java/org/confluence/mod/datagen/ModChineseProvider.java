@@ -1167,6 +1167,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.LUCK_POTION.get(), "异域幸运药水");
         add(TerraPotions.LESSER_LUCK_POTION.get(), "异域弱效幸运药水");
         add(TerraPotions.GREATER_LUCK_POTION.get(), "异域强效幸运药水");
+        add(TerraPotions.LOVE_POTION.get(), "爱情药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
