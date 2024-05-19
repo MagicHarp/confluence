@@ -1,4 +1,4 @@
-package org.confluence.mod.block.reveal;
+package org.confluence.mod.block.common;
 
 import net.minecraft.world.level.block.Block;
 

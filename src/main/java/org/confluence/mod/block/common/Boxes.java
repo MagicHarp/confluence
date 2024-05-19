@@ -1,4 +1,4 @@
-package org.confluence.mod.block.natural;
+package org.confluence.mod.block.common;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.resources.ResourceLocation;
