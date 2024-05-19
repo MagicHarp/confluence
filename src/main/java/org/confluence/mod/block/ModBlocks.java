@@ -108,7 +108,7 @@ public final class ModBlocks {
     public static void register(IEventBus bus) {
         Ores.init();
         DecorativeBlocks.init();
-        Jars.init();
+        Pots.init();
         Boxes.init();
         BLOCKS.register(bus);
         BLOCK_ENTITIES.register(bus);

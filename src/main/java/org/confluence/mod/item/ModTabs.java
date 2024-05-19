@@ -7,9 +7,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Boxes;
-import org.confluence.mod.block.common.Jars;
+import org.confluence.mod.block.common.DecorativeBlocks;
+import org.confluence.mod.block.common.Pots;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -82,7 +82,7 @@ public final class ModTabs {
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());
 
-                for (Jars jars : Jars.values()) output.accept(jars.get());
+                for (Pots pots : Pots.values()) output.accept(pots.get());
             })
             .build());
     // 材料

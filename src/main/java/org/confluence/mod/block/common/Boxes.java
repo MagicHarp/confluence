@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -68,7 +69,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
 
     public static class BaseBoxBlock extends Block {
         public BaseBoxBlock() {
-            super(Properties.of());
+            super(Properties.copy(Blocks.OAK_PLANKS));
         }
     }
 
@@ -94,9 +95,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
                     .create(LootContextParamSets.GIFT);
                 LootTable loottable = serverLevel.getServer().getLootData().getLootTable(lootTable);
                 for (ItemStack loot : loottable.getRandomItems(lootparams)) {
-                    if (!player.addItem(loot)) {
-                        player.drop(loot, false, false);
-                    }
+                    if (!player.addItem(loot)) player.drop(loot, false, false);
                 }
                 itemStack.shrink(1);
             }

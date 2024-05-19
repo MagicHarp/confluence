@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
@@ -74,7 +75,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
-//宝石
+        // 宝石
         add(Ores.RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.DEEPSLATE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
@@ -141,6 +142,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
             dropSelf(decorativeBlocks.get());
         }
+        for (Boxes boxes : Boxes.values()) dropSelf(boxes.get());
     }
 
     @Override
