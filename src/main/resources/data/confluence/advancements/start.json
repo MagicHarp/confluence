@@ -17,15 +17,19 @@
   },
   "criteria": {
     "start": {
-      "trigger": "minecraft:impossible"
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player":{
+          "type_specific": {
+            "gamemode": "survival"
+          }
+        }
+      }
     }
   },
   "rewards": {
-    "experience": 0,
     "loot": [
-      "confluence:copper_short_sword",
-      "confluence:copper_axe",
-      "confluence:copper_pickaxe"
+      "confluence:gameplay/start_advancements"
     ]
   }
 }
