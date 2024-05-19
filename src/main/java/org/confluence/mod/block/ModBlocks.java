@@ -20,7 +20,10 @@ import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
-import org.confluence.mod.block.natural.*;
+import org.confluence.mod.block.natural.CrispyHoneyBlock;
+import org.confluence.mod.block.natural.LogBlocks;
+import org.confluence.mod.block.natural.Ores;
+import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModFluids;
@@ -80,7 +83,7 @@ public final class ModBlocks {
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
     //绳子
-    public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope" ,()-> new RopeBlock(BlockBehaviour.Properties.copy(Blocks.SCAFFOLDING)));
+    public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
