@@ -23,7 +23,7 @@ public class ConfluenceData extends SavedData {
         this.gamePhase = 0;
         this.windSpeedX = 0.0F;
         this.windSpeedZ = 0.0F;
-        this.revealStep = 0;
+        this.revealStep = -1;
     }
 
     ConfluenceData(CompoundTag nbt) {
