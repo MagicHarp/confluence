@@ -71,13 +71,11 @@ public final class ModFluids {
     }
 
     public static void registerInteraction() {
-        FluidInteractionRegistry.addInteraction(HONEY_TYPE.get(),
-            new FluidInteractionRegistry.InteractionInformation(
+        FluidInteractionRegistry.addInteraction(HONEY_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
                 (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.WATER_TYPE.get(),
                 Blocks.HONEY_BLOCK.defaultBlockState()
             ));
-        FluidInteractionRegistry.addInteraction(HONEY_TYPE.get(),
-            new FluidInteractionRegistry.InteractionInformation(
+        FluidInteractionRegistry.addInteraction(HONEY_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
                 (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.LAVA_TYPE.get(),
                 ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState()
             ));

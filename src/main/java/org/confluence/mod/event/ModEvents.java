@@ -27,7 +27,7 @@ import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModFluids;
-import org.confluence.mod.mixin.RangedAttributeAccessor;
+import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
 import org.confluence.mod.util.ModResources;

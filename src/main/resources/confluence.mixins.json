@@ -5,20 +5,20 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BlockBehaviourMixin",
-        "BlockItemAccessor",
         "EntityMixin",
         "FishingHookMixin",
         "FishingRodItemMixin",
         "HoneyBottleItemMixin",
         "InventoryChangeTriggerMixin",
-        "LivingEntityAccessor",
         "LivingEntityMixin",
-        "LocalPlayerAccessor",
-        "MinecraftAccessor",
         "PlayerAdvancementsMixin",
         "PlayerMixin",
-        "RangedAttributeAccessor",
-        "SlimeBlockMixin"
+        "SlimeBlockMixin",
+        "accessor.BlockItemAccessor",
+        "accessor.LivingEntityAccessor",
+        "accessor.LocalPlayerAccessor",
+        "accessor.MinecraftAccessor",
+        "accessor.RangedAttributeAccessor"
     ],
     "minVersion": "0.8.5",
     "client": [

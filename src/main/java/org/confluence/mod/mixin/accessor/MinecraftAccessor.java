@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.accessor;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

@@ -82,7 +82,7 @@ public final class ModBlocks {
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
-    //绳子
+    // misc
     public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.mixin.LocalPlayerAccessor;
+import org.confluence.mod.mixin.accessor.LocalPlayerAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
 import org.confluence.mod.network.s2c.GravityGlobePacketS2C;

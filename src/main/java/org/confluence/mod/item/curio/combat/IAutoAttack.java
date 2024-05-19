@@ -11,7 +11,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.mixin.MinecraftAccessor;
+import org.confluence.mod.mixin.accessor.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
 import org.confluence.mod.util.CuriosUtils;

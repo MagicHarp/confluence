@@ -40,7 +40,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.mixin.BlockItemAccessor;
+import org.confluence.mod.mixin.accessor.BlockItemAccessor;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

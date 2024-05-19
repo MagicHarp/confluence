@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.accessor;
 
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
