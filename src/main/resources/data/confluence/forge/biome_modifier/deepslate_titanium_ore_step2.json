@@ -3,6 +3,6 @@
     "biomes": {
         "type": "forge:any"
     },
-    "features": "confluence:deepslate_titanium_ore_step1",
+    "features": "confluence:deepslate_titanium_ore_step2",
     "step": "surface_structures"
 }
