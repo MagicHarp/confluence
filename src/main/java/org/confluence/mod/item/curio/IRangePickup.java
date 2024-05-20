@@ -8,6 +8,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.misc.ModTags;
 
 import java.util.function.Function;
@@ -41,9 +42,10 @@ public interface IRangePickup {
 
     interface Heart {
         static void apply(Player player) {
+            double range = player.hasEffect(ModEffects.HEART_REACH.get()) ? 12.17 : 1.75;
             player.level().getEntitiesOfClass(
                 ItemEntity.class,
-                new AABB(player.getOnPos()).inflate(1.75),
+                new AABB(player.getOnPos()).inflate(range),
                 itemEntity -> itemEntity.getItem().is(ModTags.Items.PROVIDE_LIFE)
             ).forEach(itemEntity -> {
                 if (itemEntity.isRemoved()) return;

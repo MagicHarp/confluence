@@ -138,7 +138,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             // 如果玩家正在游玩秘密世界种子 for the worthy，有 1/4 (25%) 的几率掉落一个点燃的炸弹。若掉落，则流程结束。
             if (dropPotion(level, center)) return;
             if (dropWormhole(level, center)) return;
-            boolean flag = switch (level.random.nextInt(0, 7)) {
+            boolean flag = switch (level.random.nextInt(7)) {
                 case 0 -> dropHeart(level, blockPos, center);
                 case 1 -> dropTorch(level, blockPos, center);
                 case 2 -> dropAmmo(level, center);
@@ -177,7 +177,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         case 8 -> THORNS_POTION.get();
                         // 水上漂
                         // 战斗
-                        // 拾心
+                        case 11 -> HEART_REACH_POTION.get();
                         case 12 -> TITAN_POTION.get();
                         default -> null;
                     };
@@ -196,7 +196,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         case 7 -> INVISIBILITY_POTION.get();
                         case 8 -> THORNS_POTION.get();
                         case 9 -> MINING_POTION.get();
-                        // 拾心
+                        case 10 -> HEART_REACH_POTION.get();
                         // 脚蹼
                         // 危险感
                         default -> null; // 回忆
