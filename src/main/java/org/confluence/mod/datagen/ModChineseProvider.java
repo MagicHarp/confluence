@@ -227,6 +227,19 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，确实挺严肃的");
 
+        add("advancements.start.title", "旧的世界，新的旅途！");
+        add("advancements.start.descr", "汇合交流的来世");
+        add("advancements.copper_short_sword.title", "拿起武器");
+        add("advancements.copper_short_sword.descr", "你获得了你的第一把武器，面对怪物时挥舞它！");
+        add("advancements.copper_pickaxe.title", "深入地下");
+        add("advancements.copper_pickaxe.descr", "你获得了你的第一把镐子，可以破坏坚硬的石头！");
+        add("advancements.copper_axe.title", "采集资源");
+        add("advancements.copper_axe.descr", "你获得了你的第一把斧头，获取原木这种重要的资源！");
+        add("advancements.falling_star.title", "寻觅坠落之光");
+        add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
+        add("advancements.mana_star.title", "凝聚众星之力");
+        add("advancements.mana_star.descr", "星辰会增长你魔力的造诣");
+
         add("prefix.confluence.hard", "坚硬");
         add("prefix.confluence.guarding", "守护");
         add("prefix.confluence.armored", "装甲");

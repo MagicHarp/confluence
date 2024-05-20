@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "confluence:falling_star"
+    },
+    "title": {
+      "translate": "advancements.falling_star.title"
+    },
+    "description": {
+      "translate": "advancements.falling_star.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "coppersmelting": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "confluence:falling_star"
+            ],
+            "count": {
+              "min": 1,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "confluence:copper_short_sword"
+}
