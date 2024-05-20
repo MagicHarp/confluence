@@ -25,7 +25,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
-        tag(ModTags.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get());
+        tag(ModTags.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get(), ModItems.SUGAR_PLUM.get());
+        tag(ModTags.PROVIDE_LIFE).add(ModItems.HEART.get(), ModItems.CANDY_APPLE.get(), ModItems.CANDY_CANE.get());
         tag(ModTags.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }

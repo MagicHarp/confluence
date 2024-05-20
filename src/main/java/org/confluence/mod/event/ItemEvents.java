@@ -73,9 +73,14 @@ public final class ItemEvents {
     public static void entityItemPickup(EntityItemPickupEvent event) {
         ItemEntity itemEntity = event.getItem();
         ItemStack itemStack = itemEntity.getItem();
+        Player player = event.getEntity();
         if (itemStack.is(ModTags.PROVIDE_MANA)) {
-            event.getEntity().getCapability(ManaProvider.CAPABILITY)
-                .ifPresent(manaStorage -> manaStorage.receiveMana(() -> itemStack.getCount() * 100));
+            player.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage ->
+                manaStorage.receiveMana(() -> itemStack.getCount() * 100));
+            itemEntity.discard();
+            event.setCanceled(true);
+        } else if (itemStack.is(ModTags.PROVIDE_LIFE)) {
+            player.heal(itemStack.getCount() * 4.0F);
             itemEntity.discard();
             event.setCanceled(true);
         }

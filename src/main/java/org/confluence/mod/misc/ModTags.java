@@ -24,6 +24,7 @@ public final class ModTags {
 
     public static final TagKey<Item> CURIO = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
     public static final TagKey<Item> PROVIDE_MANA = ItemTags.create(new ResourceLocation(MODID, "provide_mana"));
+    public static final TagKey<Item> PROVIDE_LIFE = ItemTags.create(new ResourceLocation(MODID, "provide_life"));
     public static final TagKey<Item> COIN = ItemTags.create(new ResourceLocation(MODID, "coin"));
 
     public static final TagKey<Fluid> FISHING_ABLE = FluidTags.create(new ResourceLocation(MODID, "fishing_able"));

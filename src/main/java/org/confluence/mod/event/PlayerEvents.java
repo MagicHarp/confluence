@@ -51,6 +51,7 @@ public final class PlayerEvents {
         } else {
             Player player = event.player;
             IRangePickup.Star.apply(player);
+            IRangePickup.Heart.apply(player);
             IRangePickup.Coin.apply(player);
             IRangePickup.Drops.apply(player);
             if (PlayerUtils.isServerNotFake(player)) {
