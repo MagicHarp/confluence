@@ -23,6 +23,12 @@ public final class ModUtils {
         }
     }
 
+    public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level) {
+        ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
+        itemEntity.setPickUpDelay(40);
+        level.addFreshEntity(itemEntity);
+    }
+
     public static void createItemEntity(Item item, int count, double x, double y, double z, Level level) {
         if (count <= 0) return;
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, new ItemStack(item, count));

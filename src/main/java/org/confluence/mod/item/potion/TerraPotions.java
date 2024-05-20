@@ -1,5 +1,6 @@
 package org.confluence.mod.item.potion;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,13 +19,14 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     //CRATE_POTION("crate_potion", BaseItem::new),
     //DANGERSENSE_POTION("dangersense_potion", BaseItem::new),
     ENDURANCE_POTION("endurance_potion", () -> new EffectPotionItem(ModEffects.ENDURANCE, 4800)),
-    //FEATHERFALL_POTION("featherfall_potion", BaseItem::new),
+    FEATHERFALL_POTION("featherfall_potion", () -> new EffectPotionItem(() -> MobEffects.SLOW_FALLING, 12000)),
     FISHING_POTION("fishing_potion", () -> new EffectPotionItem(ModEffects.FISHING, -1)),
     //GILLS_POTION("gills_potion", BaseItem::new),
     GRAVITATION_POTION("gravitation_potion", () -> new EffectPotionItem(ModEffects.GRAVITATION, 3600)),
     //HEARTREACH_POTION("heartreach_potion", BaseItem::new),
     //HUNTER_POTION("hunter_potion", BaseItem::new),
     INFERNO_POTION("inferno_potion", () -> new EffectPotionItem(ModEffects.INFERNO, 4800)),
+    INVISIBILITY_POTION("invisibility_potion", () -> new EffectPotionItem(() -> MobEffects.INVISIBILITY, 3600)),
     IRON_SKIN_POTION("iron_skin_potion", () -> new EffectPotionItem(ModEffects.IRON_SKIN, 9600)),
     LIFEFORCE_POTION("lifeforce_potion", () -> new EffectPotionItem(ModEffects.LIFE_FORCE, 9600)),
     LOVE_POTION("love_potion", () -> new EffectThrowablePotionItem(ModEffects.LOVE, 600)),
@@ -32,13 +34,17 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     LESSER_LUCK_POTION("lesser_luck_potion", () -> new EffectPotionItem(ModEffects.LUCK_EFFECT, 6000, 1)),
     GREATER_LUCK_POTION("greater_luck_potion", () -> new EffectPotionItem(ModEffects.LUCK_EFFECT, 6000, 2)),
     MANA_REGENERATION_POTION("mana_regeneration_potion", () -> new EffectPotionItem(ModEffects.MANA_REGENERATION, 9600)),
-    MAGC_POWER_POTION("magic_power_potion", () -> new EffectPotionItem(ModEffects.MAGIC_POWER, 4800)),
+    MAGIC_POWER_POTION("magic_power_potion", () -> new EffectPotionItem(ModEffects.MAGIC_POWER, 4800)),
+    MINING_POTION("mining_potion", () -> new EffectPotionItem(() -> MobEffects.DIG_SPEED, 12000, 1)),
+    NIGHT_OWL_POTION("night_owl_potion", () -> new EffectPotionItem(() -> MobEffects.NIGHT_VISION, 12000)),
     OBSIDIAN_SKIN_POTION("obsidian_skin_potion", () -> new EffectPotionItem(ModEffects.OBSIDIAN_SKIN, 7200)),
     RAGE_POTION("rage_potion", () -> new EffectPotionItem(ModEffects.RAGE, 4800)),
+    REGENERATION_POTION("regeneration_potion", () -> new EffectPotionItem(() -> MobEffects.REGENERATION, 9600)),
     //SONAR_POTION("sonar_potion", BaseItem::new),
     //SPELUNKER_POTION("spelunker_potion", BaseItem::new),
     //STRANGE_BREW("strange_brew", BaseItem::new),
     //SUMMONING_POTION("summoning_potion", BaseItem::new),
+    SWIFTNESS_POTION("swiftness_potion", () -> new EffectPotionItem(() -> MobEffects.MOVEMENT_SPEED, 9600)),
     THORNS_POTION("thorns", () -> new EffectPotionItem(ModEffects.THORNS, 9600)),
     TITAN_POTION("titan_potion", () -> new EffectPotionItem(ModEffects.TITAN, 9600)),
     WATER_WALKING_POTION("water_walking_potion", () -> new EffectPotionItem(ModEffects.WATER_WALKING, 12000)),

@@ -43,6 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 import static net.minecraft.world.level.block.Block.box;
+import static org.confluence.mod.item.potion.TerraPotions.*;
 
 public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     FOREST_POTS("forest_pots", 1.0F, 0.002F),
@@ -131,15 +132,12 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         // todo 专家模式掉落
         private void dropSequence(Level level, BlockPos blockPos) {
             if (level.isClientSide) return;
-            // 钱币传送门生成的几率取决于罐子的类型以及最接近它的玩家的运气。若生成，则流程结束。
+            Vec3 center = blockPos.getCenter();
+            if (summonHole(level, center)) return;
             // 如果罐子位于天然地牢墙前方且低于地表地层，有 1/35 (2.86%) 的几率掉落金钥匙。若掉落，则流程结束。
             // 如果玩家正在游玩秘密世界种子 for the worthy，有 1/4 (25%) 的几率掉落一个点燃的炸弹。若掉落，则流程结束。
-            // 1/45 (2.22%)（2/45 (4.44%)）的几率掉落一瓶药水。若掉落，则流程结束。
-            if (level.players().size() > 1 && level.random.nextFloat() < 0.0333F) {
-                // 生成虫洞药水
-                return;
-            }
-            Vec3 center = blockPos.getCenter();
+            if (dropPotion(level, center)) return;
+            if (dropWormhole(level, center)) return;
             boolean flag = switch (level.random.nextInt(0, 7)) {
                 case 0 -> dropHeart(level, blockPos, center);
                 case 1 -> dropTorch(level, blockPos, center);
@@ -151,6 +149,96 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 default -> false;
             };
             if (!flag) dropMoney(level, center);
+        }
+
+        private boolean summonHole(Level level, Vec3 center) {
+            if (level.random.nextFloat() < moneyHoleChance) {
+                // 金钱洞
+                return true;
+            }
+            return false;
+        }
+
+        private boolean dropPotion(Level level, Vec3 center) {
+            // 专家模式 0.0444F
+            if (level.random.nextFloat() < 0.0222F) {
+                double y = center.y;
+                Item item = null;
+                if (level.dimension() == Confluence.HELL) {
+                    item = switch (level.random.nextInt(14)) {
+                        // 洞穴探险
+                        case 1 -> FEATHERFALL_POTION.get();
+                        case 2 -> MANA_REGENERATION_POTION.get();
+                        case 3 -> OBSIDIAN_SKIN_POTION.get();
+                        case 4 -> MAGIC_POWER_POTION.get();
+                        case 5 -> INVISIBILITY_POTION.get();
+                        // 狩猎
+                        case 7 -> GRAVITATION_POTION.get();
+                        case 8 -> THORNS_POTION.get();
+                        // 水上漂
+                        // 战斗
+                        // 拾心
+                        case 12 -> TITAN_POTION.get();
+                        default -> null;
+                    };
+                    if (level.random.nextFloat() < 0.2F) {
+                        // 返回
+                    }
+                } else if (y <= 0.0) {
+                    item = switch (level.random.nextInt(15)) {
+                        // 洞穴探险
+                        case 1 -> FEATHERFALL_POTION.get();
+                        case 2 -> NIGHT_OWL_POTION.get();
+                        // 水上漂
+                        // 箭术
+                        case 5 -> GRAVITATION_POTION.get();
+                        // 狩猎
+                        case 7 -> INVISIBILITY_POTION.get();
+                        case 8 -> THORNS_POTION.get();
+                        case 9 -> MINING_POTION.get();
+                        // 拾心
+                        // 脚蹼
+                        // 危险感
+                        default -> null; // 回忆
+                    };
+                } else if (y <= 63.0) {
+                    item = switch (level.random.nextInt(11)) {
+                        case 0 -> REGENERATION_POTION.get();
+                        // 光芒
+                        case 2 -> SWIFTNESS_POTION.get();
+                        // 箭术
+                        // 鱼鳃
+                        // 狩猎
+                        case 6 -> MINING_POTION.get();
+                        // 危险感
+                        default -> null; // 回忆
+                    };
+                } else if (y <= 240.0) {
+                    item = switch (level.random.nextInt(10)) {
+                        case 0 -> IRON_SKIN_POTION.get();
+                        // 光芒
+                        case 2 -> NIGHT_OWL_POTION.get();
+                        case 3 -> SWIFTNESS_POTION.get();
+                        case 4 -> MINING_POTION.get();
+                        // 镇静
+                        case 6 -> BUILDER_POTION.get();
+                        default -> null; // 回忆
+                    };
+                }
+                if (item != null) {
+                    ModUtils.createItemEntity(item, 1, center.x, y, center.z, level);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean dropWormhole(Level level, Vec3 center) {
+            if (level.players().size() > 1 && level.random.nextFloat() < 0.0333F) {
+                // 生成虫洞药水
+                return true;
+            }
+            return false;
         }
 
         private boolean dropHeart(Level level, BlockPos blockPos, Vec3 center) {
@@ -255,11 +343,11 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             float random = level.random.nextFloat();
             float ratio = 1.0F;
             double y = center.y;
-            if (y < 0.0) {
+            if (y <= 0.0) {
                 ratio = 1.25F;
-            } else if (y < 40.0) {
+            } else if (y <= 63.0) {
                 ratio = 0.75F;
-            } else if (y > 63.0 && y < 240.0) {
+            } else if (y <= 240.0) {
                 ratio = 0.5F;
             } else if (random < 0.05F) {
                 ratio = ModUtils.nextFloat(level.random, 1.5F, 2.0F);
