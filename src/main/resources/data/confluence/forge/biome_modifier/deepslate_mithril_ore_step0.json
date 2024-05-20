@@ -1,0 +1,8 @@
+{
+    "type": "forge:add_features",
+    "biomes": {
+        "type": "forge:any"
+    },
+    "features": "confluence:deepslate_mithril_ore_step0",
+    "step": "surface_structures"
+}
