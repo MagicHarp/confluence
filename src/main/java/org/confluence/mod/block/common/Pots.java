@@ -108,12 +108,12 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         public void playerDestroy(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull BlockPos pPos, @NotNull BlockState pState, @Nullable BlockEntity pBlockEntity, @NotNull ItemStack pTool) {
             pPlayer.awardStat(Stats.BLOCK_MINED.get(this));
             pPlayer.causeFoodExhaustion(0.005F);
-            dropSequence(pLevel, pPos, pPlayer);
+            dropSequence(pLevel, pPos);
         }
 
         @Override
         public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
-            dropSequence(pLevel, pPos, null);
+            dropSequence(pLevel, pPos);
         }
 
         @Override
@@ -121,17 +121,15 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             BlockPos blockPos = pHit.getBlockPos();
             Entity entity = pProjectile.getOwner();
             if (pLevel.destroyBlock(blockPos, true, entity)) {
-                Player player = null;
-                if (entity instanceof Player player1) {
-                    player = player1;
+                if (entity instanceof Player player) {
                     player.awardStat(Stats.BLOCK_MINED.get(this));
                 }
-                dropSequence(pLevel, blockPos, player);
+                dropSequence(pLevel, blockPos);
             }
         }
 
         // todo 专家模式掉落
-        private void dropSequence(Level level, BlockPos blockPos, @Nullable Player player) {
+        private void dropSequence(Level level, BlockPos blockPos) {
             if (level.isClientSide) return;
             // 钱币传送门生成的几率取决于罐子的类型以及最接近它的玩家的运气。若生成，则流程结束。
             // 如果罐子位于天然地牢墙前方且低于地表地层，有 1/35 (2.86%) 的几率掉落金钥匙。若掉落，则流程结束。
