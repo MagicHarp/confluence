@@ -213,6 +213,19 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
 
+        add("advancements.start.title", "Old World, New Journey!");
+        add("advancements.start.descr", "The afterlife of convergence and exchange");
+        add("advancements.copper_short_sword.title", "Take up arms");
+        add("advancements.copper_short_sword.descr", "You've got your first weapon, wield it as you face monsters!");
+        add("advancements.copper_pickaxe.title", "Go deep underground");
+        add("advancements.copper_pickaxe.descr", "You've got your first pickaxe to break hard stone!");
+        add("advancements.copper_axe.title", "Collect resources");
+        add("advancements.copper_axe.descr", "You've got your first axe, and you've got this important resource, logs!");
+        add("advancements.falling_star.title", "Seek the Fallen Light");
+        add("advancements.falling_star.descr", "When it meets, the night sky is marked with a special kind of star");
+        add("advancements.mana_star.title", "Gather the power of the stars");
+        add("advancements.mana_star.descr", "The stars will increase your magical powers");
+
         add("prefix.confluence.quick", "Quick");
         add("prefix.confluence.hasty", "Hasty");
         add("prefix.confluence.deadly", "Deadly");
