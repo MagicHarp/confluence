@@ -12,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
     public class ThrowingKnivesItem extends Item {
-        public ThrowingKnivesItem(Item.Properties pProperties) {
-            super(pProperties);
+        public ThrowingKnivesItem() {
+            super(new Properties());
         }
 
         public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {

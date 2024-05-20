@@ -74,12 +74,12 @@ public final class ItemEvents {
         ItemEntity itemEntity = event.getItem();
         ItemStack itemStack = itemEntity.getItem();
         Player player = event.getEntity();
-        if (itemStack.is(ModTags.PROVIDE_MANA)) {
+        if (itemStack.is(ModTags.Items.PROVIDE_MANA)) {
             player.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage ->
                 manaStorage.receiveMana(() -> itemStack.getCount() * 100));
             itemEntity.discard();
             event.setCanceled(true);
-        } else if (itemStack.is(ModTags.PROVIDE_LIFE)) {
+        } else if (itemStack.is(ModTags.Items.PROVIDE_LIFE)) {
             player.heal(itemStack.getCount() * 4.0F);
             itemEntity.discard();
             event.setCanceled(true);

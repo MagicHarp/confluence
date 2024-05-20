@@ -2,10 +2,13 @@ package org.confluence.mod.block.common;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -24,9 +27,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.misc.ModConfigs;
+import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.EnumRegister;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
@@ -37,27 +45,27 @@ import java.util.Optional;
 import static net.minecraft.world.level.block.Block.box;
 
 public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
-    FOREST_POTS("forest_pots", 0.002F),
-    TUNDRA_POTS("tundra_pots", 0.002167F),
-    SPIDER_NEST_POTS("spider_nest_pots", 0.003676F),
-    UNDERGROUND_DESERT_POTS("underground_desert_pots", 0.002169F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14))),
-    JUNGLE_POTS("jungle_pots", 0.0025F, Shapes.or(box(3, 1, 3, 13, 13, 13), box(4, 14, 4, 12, 15, 12), box(5, 13, 5, 11, 14, 11), box(4, 0, 4, 12, 1, 12))),
-    MARBLE_CAVE_POTS("marble_cave_pots", 0.002667F, Shapes.or((box(4, 2, 4, 12, 3, 12)), box(5, 1, 5, 11, 2, 11), box(5, 12, 5, 11, 13, 11), box(4, 11, 4, 12, 12, 12), box(4, 13, 4, 12, 14, 12), box(4, 0, 4, 12, 1, 12), box(3, 3, 3, 13, 4, 13), box(2, 4, 2, 14, 10, 14), box(3, 10, 3, 13, 11, 13))),
-    ANOTHER_CRIMSON_POTS("another_crimson_pots", 0.00274F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))),
-    PYRAMID_POTS("pyramid_pots", 0.008F, Shapes.or(box(2, 2, 2, 14, 13, 14), box(3, 1, 3, 13, 2, 13), box(2, 0, 2, 14, 1, 14), box(3, 13, 3, 13, 15, 13), box(2, 15, 2, 14, 17, 14))),
-    CORRUPTION_POTS("corruption_pots", 0.00274F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))),
-    DUNGEON_POTS("dungeon_pots", 0.002604F, Shapes.or(box(3, 0, 3, 13, 6, 13), box(3, 15, 3, 13, 16, 13), box(2, 6, 2, 14, 15, 14))),
-    UNDERWORLD_POTS("underworld_pots", 0.00274F),
-    LIHZAHRD_POTS("lihzahrd_pots", 0.004F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14)));
+    FOREST_POTS("forest_pots", 1.0F, 0.002F),
+    TUNDRA_POTS("tundra_pots", 1.25F, 0.002167F),
+    SPIDER_NEST_POTS("spider_nest_pots", 3.5F, 0.003676F),
+    UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14))),
+    JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F, Shapes.or(box(3, 1, 3, 13, 13, 13), box(4, 14, 4, 12, 15, 12), box(5, 13, 5, 11, 14, 11), box(4, 0, 4, 12, 1, 12))),
+    MARBLE_CAVE_POTS("marble_cave_pots", 2.0F, 0.002667F, Shapes.or((box(4, 2, 4, 12, 3, 12)), box(5, 1, 5, 11, 2, 11), box(5, 12, 5, 11, 13, 11), box(4, 11, 4, 12, 12, 12), box(4, 13, 4, 12, 14, 12), box(4, 0, 4, 12, 1, 12), box(3, 3, 3, 13, 4, 13), box(2, 4, 2, 14, 10, 14), box(3, 10, 3, 13, 11, 13))),
+    ANOTHER_CRIMSON_POTS("another_crimson_pots", 1.6F, 0.00274F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))),
+    PYRAMID_POTS("pyramid_pots", 10.0F, 0.008F, Shapes.or(box(2, 2, 2, 14, 13, 14), box(3, 1, 3, 13, 2, 13), box(2, 0, 2, 14, 1, 14), box(3, 13, 3, 13, 15, 13), box(2, 15, 2, 14, 17, 14))),
+    CORRUPTION_POTS("corruption_pots", 1.6F, 0.00274F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))),
+    DUNGEON_POTS("dungeon_pots", 1.9F, 0.002604F, Shapes.or(box(3, 0, 3, 13, 6, 13), box(3, 15, 3, 13, 16, 13), box(2, 6, 2, 14, 15, 14))),
+    UNDERWORLD_POTS("underworld_pots", 2.1F, 0.00274F),
+    LIHZAHRD_POTS("lihzahrd_pots", 4.0F, 0.004F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14)));
 
     private final RegistryObject<BasePotsBlock> value;
 
-    Pots(String id, float moneyHoleChance, VoxelShape voxelShape) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, voxelShape));
+    Pots(String id, float moneyHoleChance, float moneyRatio, VoxelShape voxelShape) {
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, moneyRatio, voxelShape));
     }
 
-    Pots(String id, float moneyHoleChance) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12))));
+    Pots(String id, float moneyHoleChance, float moneyRatio) {
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, moneyRatio, Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12))));
     }
 
     @Override
@@ -70,11 +78,13 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     public static class BasePotsBlock extends HorizontalDirectionalBlock implements CustomModel {
         private final VoxelShape voxelShape;
         private final float moneyHoleChance;
+        private final float moneyRatio;
 
-        public BasePotsBlock(float moneyHoleChance, VoxelShape voxelShape) {
+        public BasePotsBlock(float moneyHoleChance, float moneyRatio, VoxelShape voxelShape) {
             super(Properties.of().sound(SoundType.DECORATED_POT).strength(1.0F, 10.0F).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
             this.voxelShape = voxelShape;
             this.moneyHoleChance = moneyHoleChance;
+            this.moneyRatio = moneyRatio;
             registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
         }
 
@@ -120,6 +130,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             }
         }
 
+        // todo 专家模式掉落
         private void dropSequence(Level level, BlockPos blockPos, @Nullable Player player) {
             if (level.isClientSide) return;
             // 钱币传送门生成的几率取决于罐子的类型以及最接近它的玩家的运气。若生成，则流程结束。
@@ -130,61 +141,145 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 // 生成虫洞药水
                 return;
             }
-            switch (level.random.nextInt(0, 7)) {
-                case 0 -> dropHeart(level, blockPos, player);
-                case 1 -> dropTorch(level, blockPos, player);
-                case 2 -> dropAmmo(level, blockPos, player);
-                case 3 -> dropHeal(level, blockPos, player);
-                case 4 -> dropBomb(level, blockPos, player);
-                case 5 -> dropRope(level, blockPos, player);
-                case 6 -> dropMoney(level, blockPos, player);
-            }
+            Vec3 center = blockPos.getCenter();
+            boolean flag = switch (level.random.nextInt(0, 7)) {
+                case 0 -> dropHeart(level, blockPos, center);
+                case 1 -> dropTorch(level, blockPos, center);
+                case 2 -> dropAmmo(level, center);
+                case 3 -> dropHeal(level, center);
+                case 4 -> dropBomb(level, center);
+                case 5 -> dropRope(level, center);
+                case 6 -> dropMoney(level, center);
+                default -> false;
+            };
+            if (!flag) dropMoney(level, center);
         }
 
-        private void dropHeart(Level level, BlockPos blockPos, @Nullable Player player) {
-            Vec3 center = blockPos.getCenter();
-            Optional<? extends Player> optional = level.players().stream().min((a, b) -> (int) (a.distanceToSqr(center) - b.distanceToSqr(center)));
+        private boolean dropHeart(Level level, BlockPos blockPos, Vec3 center) {
+            Optional<? extends Player> optional = level.players().stream()
+                .min((a, b) -> (int) (a.distanceToSqr(center) - b.distanceToSqr(center)));
             if (optional.isPresent()) {
-                Player player1 = optional.get();
-                if (player1.getHealth() < player1.getMaxHealth()) {
+                Player player = optional.get();
+                if (player.getHealth() < player.getMaxHealth()) {
                     int amount = 1;
                     if (level.random.nextBoolean()) amount++;
                     /* 在专家模式中，有 1/8 的几率掉落 1 个心，3/8 的几率掉落 2 个心，3/8 的几率掉落 3 个心，以及 1/8 的几率掉落 4 个心。*/
                     ModUtils.createItemEntity(ModItems.HEART.get(), amount, center.x, center.y, center.z, level);
-                } else if (player1.getInventory().hasAnyMatching(itemStack -> itemStack.getCount() < 20 && itemStack.is(Items.TORCH))) {
-                    dropTorch(level, blockPos, player);
+                } else if (player.getInventory().hasAnyMatching(itemStack -> itemStack.getCount() < 20 && itemStack.is(ModTags.Items.TORCH))) {
+                    return dropTorch(level, blockPos, center);
                 } else {
-                    dropMoney(level, blockPos, player);
+                    return dropMoney(level, center);
                 }
+            }
+            return false;
+        }
+
+        private boolean dropTorch(Level level, BlockPos blockPos, Vec3 center) {
+            boolean tundra = this == TUNDRA_POTS.get();
+            int amount = tundra ? level.random.nextInt(2, 7) : level.random.nextInt(4, 13);
+            Item item;
+            if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
+                if (tundra) {
+                    item = ModItems.STICKY_GLOW_STICK.get();
+                } else {
+                    item = ModItems.GLOW_STICK.get();
+                }
+            } else {
+                if (tundra) {
+                    item = Torches.ICE_TORCH.get().asItem();
+                } else if (this == ANOTHER_CRIMSON_POTS.get()) {
+                    item = Torches.CRIMSON_TORCH.get().asItem();
+                } else if (this == JUNGLE_POTS.get()) {
+                    item = Torches.JUNGLE_TORCH.get().asItem();
+                } else if (this == CORRUPTION_POTS.get()) {
+                    item = Torches.CORRUPT_TORCH.get().asItem();
+                } else if (this == UNDERGROUND_DESERT_POTS.get()) {
+                    item = Torches.DESERT_TORCH.get().asItem();
+                } else {
+                    item = Items.TORCH;
+                }
+            }
+            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level);
+            return true;
+        }
+
+        private boolean dropAmmo(Level level, Vec3 center) {
+            int amount = level.random.nextInt(10, 21);
+            Item item = Items.ARROW;
+            if (level.random.nextBoolean()) {
+                // 被手里剑手里剑（困难模式之前） / 手榴弹（困难模式）替代
+            } else if (level.dimension() == Confluence.HELL) {
+                // 如果位于地狱，它会被狱炎箭替代
+            } else if (ConfluenceData.get((ServerLevel) level).isHardCore()) {
+                // 被邪箭或银子弹（在包含银的世界中）/ 钨子弹（在包含钨的世界中）（箭或子弹的几率各为 50%）
+            }
+            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level);
+            return true;
+        }
+
+        private boolean dropHeal(Level level, Vec3 center) {
+            Item item;
+            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardCore()) {
+                item = TerraPotions.HEALING_POTION.get();
+            } else {
+                item = TerraPotions.LESSER_HEALING_POTION.get();
+            }
+            // 在专家模式，有 1/3 的几率额外掉落 1 个
+            ModUtils.createItemEntity(item, 1, center.x, center.y, center.z, level);
+            return true;
+        }
+
+        private boolean dropBomb(Level level, Vec3 center) {
+            Item item;
+            if (this == UNDERGROUND_DESERT_POTS.get()) {
+                item = ModItems.SCARAB_BOMB.get();
+            } else if (level.dimension() == Level.OVERWORLD) {
+                item = ModItems.BOMB.get();
+            } else {
+                return dropRope(level, center);
+            }
+            // 专家模式 1-7 个
+            ModUtils.createItemEntity(item, level.random.nextInt(1, 5), center.x, center.y, center.z, level);
+            return true;
+        }
+
+        private boolean dropRope(Level level, Vec3 center) {
+            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardCore()) {
+                return dropMoney(level, center);
+            } else {
+                ModUtils.createItemEntity(ModBlocks.ROPE.get().asItem(), level.random.nextInt(20, 41), center.x, center.y, center.z, level);
+                return true;
             }
         }
 
-        private void dropTorch(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 掉落火把。注意如果罐子在液体中，火把会被 荧光棒 代替；如果罐子是苔原罐子，则会掉落粘性荧光棒。
-        }
-
-        private void dropAmmo(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 掉落 10-20 个弹药。默认类型为 木箭。在地表层或地下层时，它有 50% 的几率被手里剑手里剑（困难模式之前） / 手榴弹（困难模式）替代。
-            // 然后，如果位于地狱，它会被狱炎箭替代，否则，在困难模式中，它会被邪箭或银子弹（在包含银的世界中）/ 钨子弹（在包含钨的世界中）（箭或子弹的几率各为 50%）。
-        }
-
-        private void dropHeal(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 掉落 1 个弱效治疗药水或治疗药水（在地狱中或困难模式下）。在专家模式，有 1/3 的几率额外掉落 1 个。
-        }
-
-        private void dropBomb(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 如果罐子是沙漠罐子，掉落 1-4 （1-7）个甲虫炸弹。
-            // 否则，如果罐子在地下层或以下，掉落 1-4 （1-7）个普通炸弹。
-            // 若以上条件都不满足，以下方所示的情况掉落绳。
-        }
-
-        private void dropRope(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 如果罐子不在地狱层，且处于困难模式之前，掉落 20-40 个绳。
-            // 否则，以下方所示的情况掉落钱币。
-        }
-
-        private void dropMoney(Level level, BlockPos blockPos, @Nullable Player player) {
-            // 和所有其它尝试失败时：罐子会掉落钱币。掉落量会极大地受位置和类型影响。所有罐子会至少掉落 80  到 360 ，然后游戏会施加下列奖励以得出总掉落量：
+        private boolean dropMoney(Level level, Vec3 center) {
+            if (!ModConfigs.dropsMoney) return false;
+            float random = level.random.nextFloat();
+            float ratio = 1.0F;
+            double y = center.y;
+            if (y < 0.0) {
+                ratio = 1.25F;
+            } else if (y < 40.0) {
+                ratio = 0.75F;
+            } else if (y > 63.0 && y < 240.0) {
+                ratio = 0.5F;
+            } else if (random < 0.05F) {
+                ratio = ModUtils.nextFloat(level.random, 1.5F, 2.0F);
+            } else if (random < 0.0625F) {
+                ratio = ModUtils.nextFloat(level.random, 1.4F, 1.8F);
+            } else if (random < 0.0833F) {
+                ratio = ModUtils.nextFloat(level.random, 1.2F, 1.4F);
+            } else if (random < 0.125F) {
+                ratio = ModUtils.nextFloat(level.random, 1.1F, 1.2F);
+            } else if (random < 0.25F) {
+                ratio = ModUtils.nextFloat(level.random, 1.05F, 1.1F);
+            }
+            // 专家模式增益
+            // 击败增益
+            ratio *= moneyRatio;
+            int amount = (int) Math.ceil(level.random.nextInt(8, 34) * ratio);
+            ModUtils.dropMoney(amount, center.x, y, center.z, level);
+            return true;
         }
     }
 }

@@ -39,7 +39,6 @@ import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -159,20 +158,7 @@ public final class ForgeEvents {
                     case HARD -> 1.5;
                 };
                 int amount = (int) Math.min(Math.round((healthFactor + attackFactor + armorFactor) * difficultyFactor), 7290L);
-                int copper_count = amount % 9;
-                int i = ((amount - copper_count) / 9);
-                int silver_count = i % 9;
-                int j = ((i - silver_count) / 9);
-                int golden_count = j % 9;
-                int k = (j - golden_count) / 9;
-                int platinum_count = k % 9;
-                double x = living.getX();
-                double y = living.getEyeY() - 0.3;
-                double z = living.getZ();
-                ModUtils.createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level);
-                ModUtils.createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level);
-                ModUtils.createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level);
-                ModUtils.createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level);
+                ModUtils.dropMoney(amount, living.getX(), living.getEyeY() - 0.3, living.getZ(), level);
             }
         }
     }

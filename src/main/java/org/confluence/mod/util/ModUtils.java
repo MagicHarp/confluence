@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.confluence.mod.item.ModItems;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -27,6 +28,20 @@ public final class ModUtils {
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, new ItemStack(item, count));
         itemEntity.setPickUpDelay(40);
         level.addFreshEntity(itemEntity);
+    }
+
+    public static void dropMoney(int amount, double x, double y, double z, Level level) {
+        int copper_count = amount % 9;
+        int i = ((amount - copper_count) / 9);
+        int silver_count = i % 9;
+        int j = ((i - silver_count) / 9);
+        int golden_count = j % 9;
+        int k = (j - golden_count) / 9;
+        int platinum_count = k % 9;
+        createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level);
+        createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level);
+        createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level);
+        createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level);
     }
 
     public static Component getModifierTooltip(double amount, String type) {

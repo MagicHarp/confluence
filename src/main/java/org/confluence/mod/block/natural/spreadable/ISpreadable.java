@@ -21,7 +21,7 @@ public interface ISpreadable {
 
     default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
         if (!blockState.getValue(STILL_ALIVE)) return;
-        int phase = ConfluenceData.get(serverLevel).getGamePhase();
+        int phase = ConfluenceData.get(serverLevel).getGamePhase().ordinal();
         for (int i = 0; i < 4; ++i) {
             BlockPos pos = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(5) - 3, randomSource.nextInt(3) - 1);
             BlockState source = serverLevel.getBlockState(pos);

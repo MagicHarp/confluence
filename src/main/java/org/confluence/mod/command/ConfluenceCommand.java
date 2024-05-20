@@ -20,12 +20,12 @@ public class ConfluenceCommand {
             }))
             .then(Commands.literal("gamePhase").then(Commands.argument("set", IntegerArgumentType.integer(0, 6)).executes(context -> {
                 int phase = IntegerArgumentType.getInteger(context, "set");
-                ConfluenceData.get(context.getSource().getLevel()).setGamePhase(phase);
+                ConfluenceData.get(context.getSource().getLevel()).setGamePhase(ConfluenceData.GamePhase.values()[phase]);
                 return phase;
             })).executes(context -> {
-                int phase = ConfluenceData.get(context.getSource().getLevel()).getGamePhase();
-                context.getSource().sendSystemMessage(Component.literal("Game Phase: " + phase));
-                return phase;
+                ConfluenceData.GamePhase phase = ConfluenceData.get(context.getSource().getLevel()).getGamePhase();
+                context.getSource().sendSystemMessage(Component.literal("Game Phase: " + phase.name()));
+                return phase.ordinal();
             }))
         );
     }

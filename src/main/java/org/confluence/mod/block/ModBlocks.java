@@ -110,6 +110,7 @@ public final class ModBlocks {
         DecorativeBlocks.init();
         Pots.init();
         Boxes.init();
+        Torches.init();
         BLOCKS.register(bus);
         BLOCK_ENTITIES.register(bus);
     }

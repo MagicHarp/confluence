@@ -35,7 +35,7 @@ public interface IRangePickup {
 
     interface Star {
         static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getStarRange, itemStack -> itemStack.is(ModTags.PROVIDE_MANA));
+            IRangePickup.apply(player, PlayerAbility::getStarRange, itemStack -> itemStack.is(ModTags.Items.PROVIDE_MANA));
         }
     }
 
@@ -44,7 +44,7 @@ public interface IRangePickup {
             player.level().getEntitiesOfClass(
                 ItemEntity.class,
                 new AABB(player.getOnPos()).inflate(1.75),
-                itemEntity -> itemEntity.getItem().is(ModTags.PROVIDE_LIFE)
+                itemEntity -> itemEntity.getItem().is(ModTags.Items.PROVIDE_LIFE)
             ).forEach(itemEntity -> {
                 if (itemEntity.isRemoved()) return;
                 Vec3 vec3 = player.position()
@@ -58,13 +58,13 @@ public interface IRangePickup {
 
     interface Coin {
         static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getCoinRange, itemStack -> itemStack.is(ModTags.COIN));
+            IRangePickup.apply(player, PlayerAbility::getCoinRange, itemStack -> itemStack.is(ModTags.Items.COIN));
         }
     }
 
     interface Drops {
         static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getDropsRange, itemStack -> !itemStack.is(ModTags.PROVIDE_MANA) && !itemStack.is(ModTags.COIN));
+            IRangePickup.apply(player, PlayerAbility::getDropsRange, itemStack -> !itemStack.is(ModTags.Items.PROVIDE_MANA) && !itemStack.is(ModTags.Items.COIN));
         }
     }
 }

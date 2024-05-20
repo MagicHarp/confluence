@@ -1,6 +1,7 @@
 package org.confluence.mod.item;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -34,10 +35,10 @@ public final class ModItems {
     public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
     public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
     public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
-    public static final RegistryObject<BaseItem> COPPER_COIN = ITEMS.register("copper_coin", BaseItem::new);
-    public static final RegistryObject<BaseItem> SILVER_COIN = ITEMS.register("silver_coin", BaseItem::new);
-    public static final RegistryObject<BaseItem> GOLDEN_COIN = ITEMS.register("golden_coin", BaseItem::new);
-    public static final RegistryObject<BaseItem> PLATINUM_COIN = ITEMS.register("platinum_coin", BaseItem::new);
+    public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
+    public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
+    public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
+    public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<SuspiciousLookingEye> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", SuspiciousLookingEye::new);
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
@@ -49,7 +50,11 @@ public final class ModItems {
     public static final RegistryObject<Item> HEART = ITEMS.register("heart", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CANDY_APPLE = ITEMS.register("candy_heart", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> THROWING_KNIVES = ITEMS.register("throwing_knives", () -> new ThrowingKnivesItem((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new);
+    public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new);
+    public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new);
+    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", BaseItem::new);
+    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BaseItem::new);
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSounds.ALPHA, 12060));
 
     public static void register(IEventBus bus) {
