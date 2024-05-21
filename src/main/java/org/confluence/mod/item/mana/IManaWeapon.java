@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.PrefixProvider;
+import org.confluence.mod.effect.ModEffects;
 
 public interface IManaWeapon {
     default int getManaCost(ItemStack itemStack, int amount) {
@@ -26,9 +27,13 @@ public interface IManaWeapon {
     static float apply(DamageSource damageSource, float amount) {
         if (damageSource.getEntity() instanceof Player player && isMagic(player, damageSource)) {
             AtomicDouble atomic = new AtomicDouble(amount);
-            player.getCapability(ManaProvider.CAPABILITY)
-                .ifPresent(manaStorage -> atomic.set(amount * manaStorage.getMagicAttackBonus()));
-            return atomic.floatValue();
+            player.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage ->
+                atomic.set(amount * manaStorage.getMagicAttackBonus()));
+            float actually = atomic.floatValue();
+            if (player.hasEffect(ModEffects.MAGIC_POWER.get())) {
+                actually *= 1.2F;
+            }
+            return actually;
         }
         return amount;
     }

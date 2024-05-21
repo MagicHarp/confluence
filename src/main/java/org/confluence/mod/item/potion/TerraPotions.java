@@ -1,7 +1,6 @@
 package org.confluence.mod.item.potion;
 
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.effect.ModEffects;
@@ -12,7 +11,7 @@ import java.util.function.Supplier;
 
 public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     //AMMO_RESERVATION_POTION("ammo_reservation_potion", BaseItem::new),
-    //ARCHERY_POTION("archery_potion", BaseItem::new),
+    ARCHERY_POTION("archery_potion", () -> new EffectPotionItem(ModEffects.ARCHERY, 9600)),
     //BATTLE_POTION("battle_potion", BaseItem::new),
     BUILDER_POTION("builder_potion", () -> new EffectPotionItem(ModEffects.BUILDER, 54000)),
     //CALMING_POTION("calming_potion", BaseItem::new),
@@ -20,8 +19,9 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     //DANGERSENSE_POTION("dangersense_potion", BaseItem::new),
     ENDURANCE_POTION("endurance_potion", () -> new EffectPotionItem(ModEffects.ENDURANCE, 4800)),
     FEATHERFALL_POTION("featherfall_potion", () -> new EffectPotionItem(() -> MobEffects.SLOW_FALLING, 12000)),
-    FISHING_POTION("fishing_potion", () -> new EffectPotionItem(ModEffects.FISHING, -1)),
-    //GILLS_POTION("gills_potion", BaseItem::new),
+    FLIPPER_POTION("flipper_potion", () -> new EffectPotionItem(ModEffects.FLIPPER, 9600)),
+    FISHING_POTION("fishing_potion", () -> new EffectPotionItem(ModEffects.FISHING, 9600)),
+    GILLS_POTION("gills_potion", () -> new EffectPotionItem(() -> MobEffects.WATER_BREATHING, 4800)),
     GRAVITATION_POTION("gravitation_potion", () -> new EffectPotionItem(ModEffects.GRAVITATION, 3600)),
     HEART_REACH_POTION("heart_reach_potion", () -> new EffectPotionItem(ModEffects.HEART_REACH, 9600)),
     //HUNTER_POTION("hunter_potion", BaseItem::new),
@@ -39,6 +39,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     NIGHT_OWL_POTION("night_owl_potion", () -> new EffectPotionItem(() -> MobEffects.NIGHT_VISION, 12000)),
     OBSIDIAN_SKIN_POTION("obsidian_skin_potion", () -> new EffectPotionItem(ModEffects.OBSIDIAN_SKIN, 7200)),
     RAGE_POTION("rage_potion", () -> new EffectPotionItem(ModEffects.RAGE, 4800)),
+    RECALL_POTION("recall_potion", RecallPotionItem::new),
     REGENERATION_POTION("regeneration_potion", () -> new EffectPotionItem(() -> MobEffects.REGENERATION, 9600)),
     //SONAR_POTION("sonar_potion", BaseItem::new),
     //SPELUNKER_POTION("spelunker_potion", BaseItem::new),
@@ -49,14 +50,14 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     TITAN_POTION("titan_potion", () -> new EffectPotionItem(ModEffects.TITAN, 9600)),
     WATER_WALKING_POTION("water_walking_potion", () -> new EffectPotionItem(ModEffects.WATER_WALKING, 12000)),
     WRATH_POTION("wrath_potion", () -> new EffectPotionItem(ModEffects.WRATH, 4800)),
-    LESSER_HEALING_POTION("lesser_healing_potion", () -> new HealingPotionItem(50, new Item.Properties().rarity(Rarity.COMMON))),
-    HEALING_POTION("healing_potion", () -> new HealingPotionItem(100, new Item.Properties().rarity(Rarity.UNCOMMON))),
-    GREATER_HEALING_POTION("greater_healing_potion", () -> new HealingPotionItem(200, new Item.Properties().rarity(Rarity.RARE))),
-    SUPER_HEALING_POTION("super_healing_potion", () -> new HealingPotionItem(300, new Item.Properties().rarity(Rarity.EPIC))),
-    LESSER_MANA_POTION("lesser_mana_potion", () -> new ManaPotionItem(50, new Item.Properties().rarity(Rarity.COMMON))),
-    MANA_POTION("mana_potion", () -> new ManaPotionItem(100, new Item.Properties().rarity(Rarity.UNCOMMON))),
-    GREATER_MANA_POTION("greater_mana_potion", () -> new ManaPotionItem(200, new Item.Properties().rarity(Rarity.RARE))),
-    SUPER_MANA_POTION("super_mana_potion", () -> new ManaPotionItem(300, new Item.Properties().rarity(Rarity.EPIC)));
+    LESSER_HEALING_POTION("lesser_healing_potion", () -> new HealingPotionItem(50, Rarity.COMMON)),
+    HEALING_POTION("healing_potion", () -> new HealingPotionItem(100, Rarity.UNCOMMON)),
+    GREATER_HEALING_POTION("greater_healing_potion", () -> new HealingPotionItem(200, Rarity.RARE)),
+    SUPER_HEALING_POTION("super_healing_potion", () -> new HealingPotionItem(300, Rarity.EPIC)),
+    LESSER_MANA_POTION("lesser_mana_potion", () -> new ManaPotionItem(50, Rarity.COMMON)),
+    MANA_POTION("mana_potion", () -> new ManaPotionItem(100, Rarity.UNCOMMON)),
+    GREATER_MANA_POTION("greater_mana_potion", () -> new ManaPotionItem(200, Rarity.RARE)),
+    SUPER_MANA_POTION("super_mana_potion", () -> new ManaPotionItem(300, Rarity.EPIC));
 
     private final RegistryObject<AbstractPotionItem> value;
 

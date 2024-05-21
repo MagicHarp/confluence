@@ -18,12 +18,12 @@ public class ConfluenceCommand {
                 context.getSource().sendSystemMessage(Component.literal("Specific Moon: " + id));
                 return id;
             }))
-            .then(Commands.literal("gamePhase").then(Commands.argument("set", IntegerArgumentType.integer(0, 6)).executes(context -> {
-                int phase = IntegerArgumentType.getInteger(context, "set");
-                ConfluenceData.get(context.getSource().getLevel()).setGamePhase(ConfluenceData.GamePhase.values()[phase]);
-                return phase;
+            .then(Commands.literal("gamePhase").then(Commands.argument("set", GamePhaseArgumentType.gamePhase()).executes(context -> {
+                GamePhase phase = GamePhaseArgumentType.getPhase(context, "set");
+                ConfluenceData.get(context.getSource().getLevel()).setGamePhase(phase);
+                return phase.ordinal();
             })).executes(context -> {
-                ConfluenceData.GamePhase phase = ConfluenceData.get(context.getSource().getLevel()).getGamePhase();
+                GamePhase phase = ConfluenceData.get(context.getSource().getLevel()).getGamePhase();
                 context.getSource().sendSystemMessage(Component.literal("Game Phase: " + phase.name()));
                 return phase.ordinal();
             }))

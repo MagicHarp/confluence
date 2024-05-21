@@ -16,13 +16,8 @@ import org.confluence.mod.misc.ModSounds;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicMirror extends Item {
-    private final int useDuration;
-    private final int coolDown;
-
     public MagicMirror(Rarity rarity) {
         super(new Properties().rarity(rarity).fireResistant().stacksTo(1));
-        this.useDuration = 30;
-        this.coolDown = 10;
     }
 
     public MagicMirror() {
@@ -42,7 +37,7 @@ public class MagicMirror extends Item {
 
     @Override
     public int getUseDuration(@NotNull ItemStack itemStack) {
-        return useDuration;
+        return 30;
     }
 
     @Override
@@ -59,7 +54,7 @@ public class MagicMirror extends Item {
             } else {
                 serverPlayer.teleportTo(pos.getX(), pos.getY(), pos.getZ());
             }
-            serverPlayer.getCooldowns().addCooldown(this, coolDown);
+            serverPlayer.getCooldowns().addCooldown(this, 10);
         }
         return itemStack;
     }

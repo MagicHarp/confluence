@@ -175,7 +175,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         // 狩猎
                         case 7 -> GRAVITATION_POTION.get();
                         case 8 -> THORNS_POTION.get();
-                        // 水上漂
+                        case 9 -> WATER_WALKING_POTION.get();
                         // 战斗
                         case 11 -> HEART_REACH_POTION.get();
                         case 12 -> TITAN_POTION.get();
@@ -189,29 +189,29 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         // 洞穴探险
                         case 1 -> FEATHERFALL_POTION.get();
                         case 2 -> NIGHT_OWL_POTION.get();
-                        // 水上漂
-                        // 箭术
-                        case 5 -> GRAVITATION_POTION.get();
+                        case 3, 4 -> WATER_WALKING_POTION.get();
+                        case 5 -> ARCHERY_POTION.get();
+                        case 6 -> GRAVITATION_POTION.get();
                         // 狩猎
-                        case 7 -> INVISIBILITY_POTION.get();
-                        case 8 -> THORNS_POTION.get();
-                        case 9 -> MINING_POTION.get();
-                        case 10 -> HEART_REACH_POTION.get();
+                        case 8 -> INVISIBILITY_POTION.get();
+                        case 9 -> THORNS_POTION.get();
+                        case 10 -> MINING_POTION.get();
+                        case 11 -> HEART_REACH_POTION.get();
                         // 脚蹼
                         // 危险感
-                        default -> null; // 回忆
+                        default -> RECALL_POTION.get();
                     };
                 } else if (y <= 63.0) {
                     item = switch (level.random.nextInt(11)) {
                         case 0 -> REGENERATION_POTION.get();
                         // 光芒
                         case 2 -> SWIFTNESS_POTION.get();
-                        // 箭术
-                        // 鱼鳃
+                        case 3 -> ARCHERY_POTION.get();
+                        case 4 -> GILLS_POTION.get();
                         // 狩猎
                         case 6 -> MINING_POTION.get();
                         // 危险感
-                        default -> null; // 回忆
+                        default -> RECALL_POTION.get();
                     };
                 } else if (y <= 240.0) {
                     item = switch (level.random.nextInt(10)) {
@@ -222,7 +222,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         case 4 -> MINING_POTION.get();
                         // 镇静
                         case 6 -> BUILDER_POTION.get();
-                        default -> null; // 回忆
+                        default -> RECALL_POTION.get();
                     };
                 }
                 if (item != null) {
@@ -292,11 +292,12 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         private boolean dropAmmo(Level level, Vec3 center) {
             int amount = level.random.nextInt(10, 21);
             Item item = Items.ARROW;
+            boolean hardCore = ConfluenceData.get((ServerLevel) level).isHardCore();
             if (level.random.nextBoolean()) {
-                // 被手里剑手里剑（困难模式之前） / 手榴弹（困难模式）替代
+                item = hardCore ? ModItems.GRENADE.get() : ModItems.SHURIKEN.get();
             } else if (level.dimension() == Confluence.HELL) {
                 // 如果位于地狱，它会被狱炎箭替代
-            } else if (ConfluenceData.get((ServerLevel) level).isHardCore()) {
+            } else if (hardCore) {
                 // 被邪箭或银子弹（在包含银的世界中）/ 钨子弹（在包含钨的世界中）（箭或子弹的几率各为 50%）
             }
             ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level);

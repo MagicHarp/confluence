@@ -31,9 +31,10 @@ public final class ModItems {
 
     public static final RegistryObject<MagicMirror> ICE_MIRROR = ITEMS.register("ice_mirror", MagicMirror::new);
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
-    public static final RegistryObject<BaseItem> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new);
+    public static final RegistryObject<BaseItem> ROPE_COIL = ITEMS.register("rope_coil", BaseItem::new); // todo 绳圈
     public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
-    public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new);
+    public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new); // todo 手里剑
+    public static final RegistryObject<BaseItem> GRENADE = ITEMS.register("grenade", BaseItem::new); // todo 手雷
     public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
     public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
@@ -50,11 +51,11 @@ public final class ModItems {
     public static final RegistryObject<Item> HEART = ITEMS.register("heart", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CANDY_APPLE = ITEMS.register("candy_heart", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new);
-    public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new);
-    public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new);
-    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", BaseItem::new);
-    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BaseItem::new);
+    public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new); // todo 飞刀
+    public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new); // todo 荧光棒
+    public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new); // todo 粘性荧光棒
+    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", BaseItem::new); // todo 炸弹
+    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BaseItem::new); // todo 甲虫炸弹
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSounds.ALPHA, 12060));
 
     public static void register(IEventBus bus) {

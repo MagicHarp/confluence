@@ -20,7 +20,7 @@ public class ConfluenceData extends SavedData {
 
     ConfluenceData() {
         this.moonSpecific = -1;
-        this.gamePhase = GamePhase.BEFORE_SKELETON;
+        this.gamePhase = GamePhase.BEFORE_SKELETRON;
         this.windSpeedX = 0.0F;
         this.windSpeedZ = 0.0F;
         this.revealStep = -1;
@@ -28,7 +28,7 @@ public class ConfluenceData extends SavedData {
 
     ConfluenceData(CompoundTag nbt) {
         this.moonSpecific = nbt.getInt("moonSpecific");
-        this.gamePhase = GamePhase.values()[nbt.getInt("gamePhase")];
+        this.gamePhase = GamePhase.valueOf(nbt.getString("gamePhase"));
         this.windSpeedX = nbt.getFloat("windSpeedX");
         this.windSpeedZ = nbt.getFloat("windSpeedZ");
         this.revealStep = nbt.getInt("revealStep");
@@ -37,7 +37,7 @@ public class ConfluenceData extends SavedData {
     @Override
     public @NotNull CompoundTag save(@NotNull CompoundTag nbt) {
         nbt.putInt("moonSpecific", moonSpecific);
-        nbt.putInt("gamePhase", gamePhase.ordinal());
+        nbt.putString("gamePhase", gamePhase.name());
         nbt.putFloat("windSpeedX", windSpeedX);
         nbt.putFloat("windSpeedZ", windSpeedZ);
         nbt.putInt("revealStep", revealStep);
@@ -101,12 +101,5 @@ public class ConfluenceData extends SavedData {
 
     public int getRevealStep() {
         return revealStep;
-    }
-
-    public enum GamePhase {
-        // 0:骷髅王前, 1:骷髅王后, 2:肉后, 3:新三王后, 4:花后, 5:石巨人后, 6:月后
-        BEFORE_SKELETON,
-        AFTER_SKELETON,
-
     }
 }

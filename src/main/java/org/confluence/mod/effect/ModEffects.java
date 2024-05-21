@@ -49,6 +49,8 @@ public final class ModEffects {
     public static final RegistryObject<WaterWalkingEffect> WATER_WALKING = EFFECTS.register("water_walking", WaterWalkingEffect::new);
     public static final RegistryObject<LoveEffect> LOVE = EFFECTS.register("love", LoveEffect::new);
     public static final RegistryObject<HeartReachEffect> HEART_REACH = EFFECTS.register("heart_reach", HeartReachEffect::new);
+    public static final RegistryObject<ArcheryEffect> ARCHERY = EFFECTS.register("archery", ArcheryEffect::new);
+    public static final RegistryObject<FlipperEffect> FLIPPER = EFFECTS.register("flipper", FlipperEffect::new);
 
     public static void heal(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

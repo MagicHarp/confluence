@@ -10,6 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Pots;
+import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -48,7 +49,7 @@ public final class ModTabs {
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
-
+                for (Torches torches : Torches.values()) output.accept(torches.get());
             })
             .build());
     // 自然方块

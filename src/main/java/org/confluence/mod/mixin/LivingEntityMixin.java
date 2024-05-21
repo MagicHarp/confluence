@@ -138,7 +138,9 @@ public abstract class LivingEntityMixin {
                     self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
                 }
             }
-            return par1.scale(0.6);
+            return self.hasEffect(ModEffects.FLIPPER.get()) ? new Vec3(0.91, par1.y * 0.96, 0.91) : par1.scale(0.6);
+        } else if (self.hasEffect(ModEffects.FLIPPER.get())) {
+            return new Vec3(0.96, par1.y, 0.96);
         }
         return par1;
     }
@@ -162,6 +164,8 @@ public abstract class LivingEntityMixin {
             if (instance == null) return par1;
             double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+        } else if (self.hasEffect(ModEffects.FLIPPER.get())) {
+            return new Vec3(0.86, par1.y * 0.91, 0.86);
         }
         return par1;
     }
