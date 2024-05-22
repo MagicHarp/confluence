@@ -83,7 +83,7 @@ public final class ModBlocks {
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
     // misc
     public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
-    public static final RegistryObject<BlockEntityType<ColorfulTorchBlock.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(ColorfulTorchBlock.Entity::new, Torches.DEMON_TORCH.get(), Torches.RAINBOW_TORCH.get()).build(null));
+    public static final RegistryObject<BlockEntityType<Torches.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(Torches.Entity::new, Torches.DEMON_TORCH.get(), Torches.RAINBOW_TORCH.get()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
