@@ -1,7 +1,7 @@
 package org.confluence.mod.event;
 
 import com.lowdragmc.shimmer.client.light.LightManager;
-import com.lowdragmc.shimmer.forge.event.ForgeShimmerLoadConfigEvent;
+import com.lowdragmc.shimmer.forge.event.ForgeShimmerReloadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.block.common.ColorfulTorchBlock;
@@ -12,7 +12,7 @@ import static org.confluence.mod.Confluence.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ShimmerEvents {
     @SubscribeEvent
-    public static void shimmerLoadConfig(ForgeShimmerLoadConfigEvent event) {
+    public static void shimmerReload(ForgeShimmerReloadEvent event) {
         for (Torches torches : Torches.values()) {
             ColorfulTorchBlock block = torches.get();
             LightManager.INSTANCE.registerBlockLight(block, (blockState, blockPos) -> block.getColor());
