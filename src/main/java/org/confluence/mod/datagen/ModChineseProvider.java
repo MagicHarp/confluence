@@ -547,6 +547,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Torches.GREEN_TORCH.get(), "绿火把");
         add(Torches.BLUE_TORCH.get(), "蓝火把");
         add(Torches.WHITE_TORCH.get(), "白火把");
+        add(Torches.PURPLE_TORCH.get(), "紫火把");
         add(Torches.ICE_TORCH.get(), "冰雪火把");
         add(Torches.PINK_TORCH.get(), "粉火把");
         add(Torches.BONE_TORCH.get(), "骨头火把");
@@ -1214,6 +1215,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.MINING_POTION.get(), "采矿药水");
         add(TerraPotions.RECALL_POTION.get(), "回忆药水");
         add(TerraPotions.NIGHT_OWL_POTION.get(), "夜猫子药水");
+        add(TerraPotions.WATER_WALKING_POTION.get(), "水上漂药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
