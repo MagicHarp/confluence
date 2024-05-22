@@ -1,30 +1,33 @@
 package org.confluence.mod.entity.demoneye;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.FlyingMob;
-import net.minecraft.world.entity.VariantHolder;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEyeVariant> {
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
-    Vec3 moveTargetPoint;
-    AttackPhase attackPhase;
-    BlockPos anchorPoint;
+    public Vec3 moveTargetPoint;
+    public AttackPhase attackPhase;
+    public BlockPos anchorPoint;
 
     public static AttributeSupplier.Builder createAttributes() {
         return FlyingMob.createLivingAttributes()
-            .add(Attributes.MAX_HEALTH, 47f)
-            .add(Attributes.ATTACK_DAMAGE, 14f)
-            .add(Attributes.MOVEMENT_SPEED, 0.25f);
+            .add(Attributes.MAX_HEALTH)
+            .add(Attributes.ATTACK_DAMAGE)
+            .add(Attributes.ARMOR)
+            .add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 
     public DemonEye(EntityType<? extends FlyingMob> p_20806_, Level p_20807_) {
@@ -54,6 +57,14 @@ public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEye
         goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
         goalSelector.addGoal(3, new DemonEyeSweepAttackGoal(this));
         targetSelector.addGoal(1, new DemonEyeAttackPlayerTargetGoal(this));
+    }
+
+    @SuppressWarnings("deprecation")
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, @NotNull DifficultyInstance pDifficulty, @NotNull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        setVariant(DemonEyeVariant.random(pLevel.getRandom()));
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
     public enum AttackPhase {

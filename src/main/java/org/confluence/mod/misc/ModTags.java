@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import top.theillusivec4.curios.Curios;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -29,7 +30,7 @@ public final class ModTags {
     }
 
     public static class Items {
-        public static final TagKey<Item> CURIO = register("curio");
+        public static final TagKey<Item> CURIO = ItemTags.create(new ResourceLocation(Curios.MODID, "curio"));
         public static final TagKey<Item> PROVIDE_MANA = register("provide_mana");
         public static final TagKey<Item> PROVIDE_LIFE = register("provide_life");
         public static final TagKey<Item> COIN = register("coin");

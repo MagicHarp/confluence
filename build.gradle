@@ -35,10 +35,8 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
         }
         client {
-            property 'forge.enabledGameTestNamespaces', mod_id
         }
         server {
-            property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
         }
         data {

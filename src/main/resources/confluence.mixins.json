@@ -19,7 +19,8 @@
         "accessor.LivingEntityAccessor",
         "accessor.LocalPlayerAccessor",
         "accessor.MinecraftAccessor",
-        "accessor.RangedAttributeAccessor"
+        "accessor.RangedAttributeAccessor",
+        "integration.ForgePlatformHelperMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

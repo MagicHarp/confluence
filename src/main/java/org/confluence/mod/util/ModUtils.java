@@ -12,6 +12,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.confluence.mod.item.ModItems;
 
+import java.util.Calendar;
+
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
 public final class ModUtils {
@@ -63,5 +65,11 @@ public final class ModUtils {
     @SuppressWarnings("unchecked")
     public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> getTicker(BlockEntityType<A> a, BlockEntityType<E> b, BlockEntityTicker<? super E> ticker) {
         return a == b ? (BlockEntityTicker<A>) ticker : null;
+    }
+
+    public static boolean isHalloween() {
+        Calendar calendar = Calendar.getInstance();
+        return (calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 15) || // 从 十月中旬
+            (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
     }
 }

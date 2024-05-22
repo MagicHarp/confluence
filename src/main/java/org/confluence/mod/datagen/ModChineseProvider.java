@@ -195,7 +195,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
         add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
-        add("item.confluence.gravity_globe.tooltip1", "可让持有者反转重力");
+        add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
         add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
         add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
