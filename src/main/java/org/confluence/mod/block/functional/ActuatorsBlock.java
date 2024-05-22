@@ -1,13 +1,16 @@
 package org.confluence.mod.block.functional;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -37,7 +40,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.mixin.accessor.BlockItemAccessor;
@@ -69,7 +71,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     }
 
     public float getShadeBrightness(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
             return isCollisionShapeFullBlock(actuatorsBlockEntity.getContain(), blockGetter, blockPos) ? 0.2F : 1.0F;
         }
         return 0.2F;
@@ -78,7 +80,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        return new ActuatorsBlockEntity(blockPos, blockState);
+        return new Entity(blockPos, blockState);
     }
 
     @Override
@@ -89,7 +91,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
             Block block = blockItem.getBlock();
             if (block instanceof ActuatorsBlock) return InteractionResult.PASS;
             BlockState resultState = block.getStateForPlacement(new BlockPlaceContext(level, player, hand, itemStack, blockHitResult));
-            if (resultState != null && level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity blockEntity) {
+            if (resultState != null && level.getBlockEntity(blockPos) instanceof Entity blockEntity) {
                 if (blockEntity.getContain().is(block)) return InteractionResult.PASS;
                 resultState = ((BlockItemAccessor) blockItem).callUpdateBlockStateFromTag(blockPos, level, itemStack, resultState);
                 BlockEntity resultEntity = null;
@@ -133,7 +135,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState blockState, BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getShape(blockGetter, blockPos, context);
         }
@@ -142,7 +144,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @NotNull VoxelShape getVisualShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getVisualShape(blockGetter, blockPos, context);
         }
@@ -151,7 +153,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @NotNull VoxelShape getBlockSupportShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getBlockSupportShape(blockGetter, blockPos);
         }
@@ -160,7 +162,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getOcclusionShape(blockGetter, blockPos);
         }
@@ -170,7 +172,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (!blockState.getValue(StateProperties.DRIVE)) {
-            if (blockGetter.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+            if (blockGetter.getBlockEntity(blockPos) instanceof Entity actuatorsBlockEntity) {
                 BlockState contain = actuatorsBlockEntity.getContain();
                 if (contain.getBlock() instanceof EchoBlock echoBlock) {
                     return echoBlock.getCollisionShape(contain, blockGetter, blockPos, context);
@@ -183,7 +185,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public float getDestroyProgress(@NotNull BlockState pState, @NotNull Player pPlayer, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
-        if (pLevel.getBlockEntity(pPos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (pLevel.getBlockEntity(pPos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getDestroyProgress(pPlayer, pLevel, pPos);
         }
@@ -191,8 +193,8 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     }
 
     @Override
-    public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+    public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable net.minecraft.world.entity.Entity entity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getFriction(level, pos, entity);
         }
@@ -201,7 +203,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getLightEmission(level, pos);
         }
@@ -210,7 +212,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getFireSpreadSpeed(level, pos, direction);
         }
@@ -219,7 +221,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public float getEnchantPowerBonus(BlockState state, LevelReader level, BlockPos pos) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getEnchantPowerBonus(level, pos);
         }
@@ -228,7 +230,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @Nullable BlockPathTypes getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, BlockPathTypes originalType) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getAdjacentBlockPathType(level, pos, mob, originalType);
         }
@@ -237,7 +239,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public @Nullable BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getBlockPathType(level, pos, mob);
         }
@@ -246,7 +248,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getExplosionResistance(level, pos, explosion);
         }
@@ -255,7 +257,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public float @Nullable [] getBeaconColorMultiplier(BlockState state, LevelReader level, BlockPos pos, BlockPos beaconPos) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getBeaconColorMultiplier(level, pos, beaconPos);
         }
@@ -264,7 +266,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        if (level.getBlockEntity(pos) instanceof ActuatorsBlockEntity actuatorsBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof Entity actuatorsBlockEntity) {
             BlockState contain = actuatorsBlockEntity.getContain();
             return contain.getFlammability(level, pos, direction);
         }
@@ -278,7 +280,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     @Override
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel instanceof ServerLevel serverLevel && pLevel.getBlockEntity(pPos) instanceof ActuatorsBlockEntity blockEntity) {
+        if (pLevel instanceof ServerLevel serverLevel && pLevel.getBlockEntity(pPos) instanceof Entity blockEntity) {
             BlockState contain = blockEntity.getContain();
             if (!contain.is(Blocks.BEDROCK)) serverLevel.setBlockAndUpdate(pPos, contain);
             BlockEntity containEntity = blockEntity.getContainEntity();
@@ -290,7 +292,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
-        return ModUtils.getTicker(pBlockEntityType, ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockEntity::tick);
+        return ModUtils.getTicker(pBlockEntityType, ModBlocks.ACTUATORS_ENTITY.get(), Entity::tick);
     }
 
     public static void blockItemPlace(PlayerInteractEvent.RightClickBlock event) {
@@ -308,7 +310,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
                     level.removeBlockEntity(blockPos);
                 }
                 level.setBlockAndUpdate(blockPos, ModBlocks.ACTUATORS.get().defaultBlockState());
-                if (level.getBlockEntity(blockPos) instanceof ActuatorsBlockEntity blockEntity) {
+                if (level.getBlockEntity(blockPos) instanceof Entity blockEntity) {
                     blockEntity.setContain(blockState, entity);
                     if (!player.getAbilities().instabuild) itemStack.shrink(1);
                     success = true;
@@ -320,5 +322,83 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
             event.setUseItem(Event.Result.DENY);
         }
         player.swing(event.getHand());
+    }
+
+    public static class Entity extends BlockEntity {
+        private BlockState contain;
+        private BlockEntity containEntity;
+
+        public Entity(BlockPos blockPos, BlockState blockState) {
+            super(ModBlocks.ACTUATORS_ENTITY.get(), blockPos, blockState);
+            this.contain = Blocks.BEDROCK.defaultBlockState();
+        }
+
+        public BlockState getContain() {
+            return contain;
+        }
+
+        public BlockEntity getContainEntity() {
+            return containEntity;
+        }
+
+        public void setContain(BlockState contain, BlockEntity containEntity) {
+            this.contain = contain;
+            this.containEntity = contain.hasBlockEntity() ? containEntity : null;
+            markUpdated();
+        }
+
+        public void load(@NotNull CompoundTag nbt) {
+            super.load(nbt);
+            try {
+                this.contain = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), nbt.getString("contain"), true).blockState();
+                if (nbt.contains("containEntity")) {
+                    CompoundTag tag = nbt.getCompound("containEntity");
+                    this.containEntity = tag.isEmpty() ? null : BlockEntity.loadStatic(getBlockPos(), contain, tag);
+                } else {
+                    this.containEntity = null;
+                }
+            } catch (CommandSyntaxException e) {
+                this.contain = Blocks.BEDROCK.defaultBlockState();
+                this.containEntity = null;
+            }
+        }
+
+        protected void saveAdditional(@NotNull CompoundTag nbt) {
+            super.saveAdditional(nbt);
+            nbt.putString("contain", BlockStateParser.serialize(contain));
+            nbt.put("containEntity", isEmpty() ? new CompoundTag() : containEntity.saveWithFullMetadata());
+        }
+
+        public ClientboundBlockEntityDataPacket getUpdatePacket() {
+            return ClientboundBlockEntityDataPacket.create(this);
+        }
+
+        public @NotNull CompoundTag getUpdateTag() {
+            CompoundTag nbt = new CompoundTag();
+            nbt.putString("contain", BlockStateParser.serialize(contain));
+            nbt.put("containEntity", isEmpty() ? new CompoundTag() : containEntity.getUpdateTag());
+            return nbt;
+        }
+
+        public void markUpdated() {
+            setChanged();
+            if (level != null) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), UPDATE_CLIENTS);
+            }
+        }
+
+        private boolean isEmpty() {
+            return containEntity == null || containEntity instanceof Entity;
+        }
+
+        @SuppressWarnings("unchecked")
+        public static void tick(Level level, BlockPos blockPos, BlockState blockState, Entity blockEntity) {
+            BlockEntity containEntity = blockEntity.getContainEntity();
+            BlockState contain = blockEntity.getContain();
+            if (containEntity != null && contain.getBlock() instanceof EntityBlock entityBlock) {
+                BlockEntityTicker<BlockEntity> ticker = entityBlock.getTicker(level, contain, (BlockEntityType<BlockEntity>) containEntity.getType());
+                if (ticker != null) ticker.tick(level, blockPos, contain, containEntity);
+            }
+        }
     }
 }

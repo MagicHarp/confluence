@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.capability.prefix.PrefixType;
+import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.handler.GunShootingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
@@ -26,7 +27,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.util.ModUtils;
 
@@ -47,8 +48,9 @@ public final class ForgeClient {
         InformationHandler.update(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
 
-        ModRarity.Animate.doUpdateExpertColor();
-        ModRarity.Animate.doUpdateMasterColor();
+        AnimateColor.doUpdateExpertColor();
+        AnimateColor.doUpdateMasterColor();
+        ShimmerEvents.doUpdateTorchColor();
     }
 
     @SubscribeEvent

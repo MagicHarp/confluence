@@ -14,12 +14,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.client.renderer.Color;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.BeeProjectileRenderer;
 import org.confluence.mod.client.renderer.entity.BulletRenderer;
@@ -135,16 +135,16 @@ public final class ModClient {
 
         int i = Math.abs(pos.getX()) % 12;
         int k = Math.abs(pos.getZ()) % 12;
-        Color x;
-        Color z;
+        IntegerRGB x;
+        IntegerRGB z;
 
-        if (i <= 4) x = Color.HALLOW_A.mixture(Color.HALLOW_B, i * 0.25F);
-        else if (i <= 8) x = Color.HALLOW_B.mixture(Color.HALLOW_C, (i - 4) * 0.25F);
-        else x = Color.HALLOW_C.mixture(Color.HALLOW_A, (i - 8) * 0.25F);
+        if (i <= 4) x = IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, i * 0.25F);
+        else if (i <= 8) x = IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (i - 4) * 0.25F);
+        else x = IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (i - 8) * 0.25F);
 
-        if (k <= 4) z = Color.HALLOW_A.mixture(Color.HALLOW_B, k * 0.25F);
-        else if (k <= 8) z = Color.HALLOW_B.mixture(Color.HALLOW_C, (k - 4) * 0.25F);
-        else z = Color.HALLOW_C.mixture(Color.HALLOW_A, (k - 8) * 0.25F);
+        if (k <= 4) z = IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, k * 0.25F);
+        else if (k <= 8) z = IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (k - 4) * 0.25F);
+        else z = IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (k - 8) * 0.25F);
 
         return x.mixture(z, 0.5F).get();
     };

@@ -2,6 +2,8 @@ package org.confluence.mod.block.common;
 
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.shimmer.DemonTorchColor;
+import org.confluence.mod.client.shimmer.RainbowTorchColor;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -17,11 +19,11 @@ public enum Torches implements EnumRegister<ColorfulTorchBlock> {
     ICE_TORCH("ice_torch", () -> new ColorfulTorchBlock(14.0F, 0.75F, 0.85F, 1.0F)), // 冰雪
     PINK_TORCH("pink_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.0F, 1.0F)), // 粉
     BONE_TORCH("bone_torch", () -> new ColorfulTorchBlock(14.0F, 0.5F, 0.75F, 1.0F)), // 骨头
-   // ULTRABRIGHT_TORCH("ultrabright_torch"), // 超亮
-   // DEMON_TORCH("demon_torch"), // 恶魔
+    ULTRABRIGHT_TORCH("ultrabright_torch", () -> new ColorfulTorchBlock(15.0F, 0.75F, 1.0F, 1.0F)), // 超亮
+    DEMON_TORCH("demon_torch", () -> new ColorfulTorchBlock.NeedUpdate(DemonTorchColor.INSTANCE)), // 恶魔
     CURSED_TORCH("cursed_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 1.0F, 0.5F)), // 诅咒
     ICHOR_TORCH("ichor_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 1.0F, 0.7F)), // 灵液
-   // RAINBOW_TORCH("rainbow_torch"), // 彩虹
+    RAINBOW_TORCH("rainbow_torch", () -> new ColorfulTorchBlock.NeedUpdate(RainbowTorchColor.INSTANCE)), // 彩虹
     DESERT_TORCH("desert_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.85F, 0.55F)), // 沙漠
     CORAL_TORCH("coral_torch", () -> new ColorfulTorchBlock(14.0F, 0.25F, 1.0F, 0.8F)), // 珊瑚
     CORRUPT_TORCH("corrupt_torch", () -> new ColorfulTorchBlock(14.0F, 0.95F, 0.4F, 1.0F)), // 腐化

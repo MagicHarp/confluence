@@ -6,6 +6,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.block.common.ColorfulTorchBlock;
 import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.client.shimmer.DemonTorchColor;
+import org.confluence.mod.client.shimmer.RainbowTorchColor;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -17,5 +19,10 @@ public final class ShimmerEvents {
             ColorfulTorchBlock block = torches.get();
             LightManager.INSTANCE.registerBlockLight(block, (blockState, blockPos) -> block.getColor());
         }
+    }
+
+    public static void doUpdateTorchColor() {
+        RainbowTorchColor.INSTANCE.update();
+        DemonTorchColor.INSTANCE.update();
     }
 }

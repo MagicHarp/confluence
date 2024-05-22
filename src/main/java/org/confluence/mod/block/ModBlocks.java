@@ -17,7 +17,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
-import org.confluence.mod.block.entity.ActuatorsBlockEntity;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.CrispyHoneyBlock;
@@ -74,7 +73,7 @@ public final class ModBlocks {
     // functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
     public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);
-    public static final RegistryObject<BlockEntityType<ActuatorsBlockEntity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlockEntity::new, ACTUATORS.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ActuatorsBlock.Entity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlock.Entity::new, ACTUATORS.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
@@ -84,6 +83,7 @@ public final class ModBlocks {
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
     // misc
     public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
+    public static final RegistryObject<BlockEntityType<ColorfulTorchBlock.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(ColorfulTorchBlock.Entity::new, Torches.DEMON_TORCH.get(), Torches.RAINBOW_TORCH.get()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
