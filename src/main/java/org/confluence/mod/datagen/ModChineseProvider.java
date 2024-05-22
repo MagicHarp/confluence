@@ -1216,6 +1216,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.RECALL_POTION.get(), "回忆药水");
         add(TerraPotions.NIGHT_OWL_POTION.get(), "夜猫子药水");
         add(TerraPotions.WATER_WALKING_POTION.get(), "水上漂药水");
+        add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
