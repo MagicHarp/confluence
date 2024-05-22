@@ -5,6 +5,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.Pots;
+import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.armor.Armors;
@@ -540,6 +541,27 @@ public class ModChineseProvider extends LanguageProvider {
         add(THIN_ICE_BLOCK.get(), "碎冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
 
+        add(Torches.RED_TORCH.get(), "红火把");
+        add(Torches.ORANGE_TORCH.get(), "橙火把");
+        add(Torches.YELLOW_TORCH.get(), "黄火把");
+        add(Torches.GREEN_TORCH.get(), "绿火把");
+        add(Torches.BLUE_TORCH.get(), "蓝火把");
+        add(Torches.WHITE_TORCH.get(), "白火把");
+        add(Torches.ICE_TORCH.get(), "冰雪火把");
+        add(Torches.PINK_TORCH.get(), "粉火把");
+        add(Torches.BONE_TORCH.get(), "骨头火把");
+        add(Torches.ULTRABRIGHT_TORCH.get(), "超亮火把");
+        add(Torches.DEMON_TORCH.get(), "恶魔火把");
+        add(Torches.CURSED_TORCH.get(), "诅咒火把");
+        add(Torches.ICHOR_TORCH.get(), "灵液火把");
+        add(Torches.RAINBOW_TORCH.get(), "彩虹火把");
+        add(Torches.DESERT_TORCH.get(), "沙漠火把");
+        add(Torches.CORAL_TORCH.get(), "珊瑚火把");
+        add(Torches.CORRUPT_TORCH.get(), "腐化火把");
+        add(Torches.CRIMSON_TORCH.get(), "猩红火把");
+        add(Torches.HALLOWED_TORCH.get(), "神圣火把");
+        add(Torches.JUNGLE_TORCH.get(), "丛林火把");
+
         add(Pots.FOREST_POTS.get(), "森林罐子");
         add(Pots.TUNDRA_POTS.get(), "苔原罐子");
         add(Pots.SPIDER_NEST_POTS.get(), "蛛洞罐子");
@@ -955,6 +977,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.ARGON_MOSS_FISHING_BOBBER.get(), "氩苔藓钓鱼浮标");
         add(CurioItems.KRYPTON_MOSS_FISHING_BOBBER.get(), "氪苔藓钓鱼浮标");
         add(CurioItems.XENON_MOSS_FISHING_BOBBER.get(), "氙苔藓钓鱼浮标");
+        add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
@@ -1181,6 +1204,16 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.LESSER_LUCK_POTION.get(), "异域弱效幸运药水");
         add(TerraPotions.GREATER_LUCK_POTION.get(), "异域强效幸运药水");
         add(TerraPotions.LOVE_POTION.get(), "爱情药水");
+        add(TerraPotions.SWIFTNESS_POTION.get(), "迅捷药水");
+        add(TerraPotions.REGENERATION_POTION.get(), "再生药水");
+        add(TerraPotions.FLIPPER_POTION.get(), "脚蹼药水");
+        add(TerraPotions.ARCHERY_POTION.get(), "箭术药水");
+        add(TerraPotions.HEART_REACH_POTION.get(), "拾心药水");
+        add(TerraPotions.GILLS_POTION.get(), "鱼腮药水");
+        add(TerraPotions.INVISIBILITY_POTION.get(), "虫洞药水");
+        add(TerraPotions.MINING_POTION.get(), "采矿药水");
+        add(TerraPotions.RECALL_POTION.get(), "回忆药水");
+        add(TerraPotions.NIGHT_OWL_POTION.get(), "夜猫子药水");
         //药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");

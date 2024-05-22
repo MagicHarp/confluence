@@ -31,7 +31,7 @@ public enum Torches implements EnumRegister<Torches.ColorfulTorchBlock> {
     BLUE_TORCH("blue_torch", () -> new ColorfulTorchBlock(14.0F, 0.0F, 0.1F, 1.0F)), // 蓝
     GREEN_TORCH("green_torch", () -> new ColorfulTorchBlock(14.0F, 0.0F, 1.0F, 0.1F)), // 绿
     RED_TORCH("red_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.1F, 0.1F)), // 红
-    ORANGE("orange_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.1F, 0.0F)), // 橙
+    ORANGE_TORCH("orange_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.1F, 0.0F)), // 橙
     WHITE_TORCH("white_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 1.0F, 1.0F)), // 白
     ICE_TORCH("ice_torch", () -> new ColorfulTorchBlock(14.0F, 0.75F, 0.85F, 1.0F)), // 冰雪
     PINK_TORCH("pink_torch", () -> new ColorfulTorchBlock(14.0F, 1.0F, 0.0F, 1.0F)), // 粉
