@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "confluence:block/ash_jars",
-		"particle": "confluence:block/ash_jars"
+		"2": "confluence:block/tundra_pots",
+		"particle": "confluence:block/tundra_pots"
 	},
 	"elements": [
 		{

@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "confluence:block/underground_desert_pots"
+		},
+		"facing=east": {
+			"model": "confluence:block/underground_desert_pots",
+			"y": 90
+		},
+		"facing=south": {
+			"model": "confluence:block/underground_desert_pots",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "confluence:block/underground_desert_pots",
+			"y": 270
+		}
+	}
+}

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "confluence:block/spider_cave_jars",
-		"particle": "confluence:block/spider_cave_jars"
+		"2": "confluence:block/forest_pots",
+		"particle": "confluence:block/forest_pots"
 	},
 	"elements": [
 		{

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [80, 80],
 	"textures": {
-		"1": "confluence:block/temple_jars",
-		"particle": "confluence:block/temple_jars"
+		"1": "confluence:block/lihzahrd_pots",
+		"particle": "confluence:block/lihzahrd_pots"
 	},
 	"elements": [
 		{

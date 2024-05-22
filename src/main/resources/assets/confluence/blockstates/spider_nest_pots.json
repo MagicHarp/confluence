@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "confluence:block/spider_nest_pots"
+		},
+		"facing=east": {
+			"model": "confluence:block/spider_nest_pots",
+			"y": 90
+		},
+		"facing=south": {
+			"model": "confluence:block/spider_nest_pots",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "confluence:block/spider_nest_pots",
+			"y": 270
+		}
+	}
+}

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "confluence:block/pyramid_jars",
-		"particle": "confluence:block/pyramid_jars"
+		"1": "confluence:block/pyramid_pots",
+		"particle": "confluence:block/pyramid_pots"
 	},
 	"elements": [
 		{
