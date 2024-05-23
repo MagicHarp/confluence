@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.model.new": {
+		"fly": {
 			"loop": true,
 			"animation_length": 0.91667,
 			"bones": {

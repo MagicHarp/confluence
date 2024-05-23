@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.Ghost eater - Converted.new": {
+		"spawn": {
 			"animation_length": 1.5,
 			"bones": {
 				"body": {

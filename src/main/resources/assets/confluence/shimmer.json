@@ -1,3 +1,12 @@
 {
-
+    "LightItem": [
+        {
+            "item_tag" : "confluence:torch",
+            "r": 255,
+            "g": 253,
+            "b": 85,
+            "a": 255,
+            "radius": 7
+        }
+    ]
 }

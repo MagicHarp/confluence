@@ -4,6 +4,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -48,6 +49,10 @@ public class HoneyBucketItem extends BucketItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
-        return ItemUtils.startUsingInstantly(pLevel, pPlayer, pHand);
+        InteractionResultHolder<ItemStack> use = super.use(pLevel, pPlayer, pHand);
+        if (use.getResult() == InteractionResult.PASS) {
+            return ItemUtils.startUsingInstantly(pLevel, pPlayer, pHand);
+        }
+        return use;
     }
 }

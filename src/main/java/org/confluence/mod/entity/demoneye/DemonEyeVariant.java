@@ -30,14 +30,22 @@ public enum DemonEyeVariant implements StringRepresentable {
     private static final IntFunction<DemonEyeVariant> BY_ID = ByIdMap.continuous(DemonEyeVariant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
     final int id;
     private final String name;
+    public final boolean big;
+    public final double health;
+    public final double damage;
+    public final int armor;
 
     DemonEyeVariant(int pId, String pName, boolean big, double health, double damage, int armor) {
         this.id = pId;
         this.name = pName;
+        this.big = big;
+        this.health = health;
+        this.damage = damage;
+        this.armor = armor;
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public static DemonEyeVariant byId(int pId) {
@@ -45,7 +53,20 @@ public enum DemonEyeVariant implements StringRepresentable {
     }
 
     public @NotNull String getSerializedName() {
-        return this.name;
+        return name;
+    }
+
+    public int getTextureIndex() {
+        int ordinal = ordinal();
+        return switch (ordinal) {
+            case 0, 1 -> 0;
+            case 2, 3 -> 1;
+            case 4, 5 -> 2;
+            case 6, 7 -> 3;
+            case 8, 9 -> 4;
+            case 10, 11 -> 5;
+            default -> ordinal - 6;
+        };
     }
 
     public static DemonEyeVariant random(RandomSource randomSource) {

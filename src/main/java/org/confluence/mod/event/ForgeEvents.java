@@ -12,6 +12,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -20,10 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -39,10 +37,12 @@ import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.demoneye.DemonEyeVariant;
+import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
-import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -166,12 +166,6 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
-        LivingEntity original = event.getOriginalTarget();
-        if (RoyalGel.apply(self, original)) {
-            event.setNewTarget(null);
-            return;
-        }
-
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
         self.level().players().stream()
             .filter(player -> player.distanceTo(self) < range)
@@ -189,5 +183,18 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingHeal(LivingHealEvent event) {
         BleedingEffect.apply(event.getEntity(), event);
+    }
+
+    @SubscribeEvent
+    public static void mobFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event) {
+        Mob mob = event.getEntity();
+        RandomSource randomSource = mob.getRandom();
+        if (mob instanceof DemonEye demonEye) {
+            demonEye.setVariant(DemonEyeVariant.random(randomSource));
+        } else if (mob instanceof BlackSlime blackSlime) {
+            int size = 2;
+            if (randomSource.nextFloat() < 0.5F * event.getDifficulty().getSpecialMultiplier()) size = 4;
+            blackSlime.setSize(size, true);
+        }
     }
 }

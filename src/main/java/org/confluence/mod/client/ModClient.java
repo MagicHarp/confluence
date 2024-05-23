@@ -21,10 +21,7 @@ import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
-import org.confluence.mod.client.renderer.entity.BeeProjectileRenderer;
-import org.confluence.mod.client.renderer.entity.BulletRenderer;
-import org.confluence.mod.client.renderer.entity.CustomSlimeRenderer;
-import org.confluence.mod.client.renderer.entity.FallingStarRenderer;
+import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
@@ -98,6 +95,8 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.SAPPHIRE_BULLET.get(), c -> new BulletRenderer(c, "sapphire"));
         event.registerEntityRenderer(ModEntities.SPARK_BULLET.get(), c -> new BulletRenderer(c, "spark"));
         event.registerEntityRenderer(ModEntities.TOPAZ_BULLET.get(), c -> new BulletRenderer(c, "topaz"));
+
+        event.registerEntityRenderer(ModEntities.DEMON_EYE.get(), DemonEyeRenderer::new);
 
         event.registerEntityRenderer(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
         event.registerEntityRenderer(ModEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
