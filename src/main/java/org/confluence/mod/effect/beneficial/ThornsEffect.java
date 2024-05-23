@@ -12,7 +12,7 @@ public class ThornsEffect extends MobEffect {   //荆棘 给予伤害来源反�
     }
 
     public static void apply(LivingEntity self, Entity attacker, float amount) {
-        if (self.hasEffect(ModEffects.THORNS.get())) {
+        if (attacker != null && self.hasEffect(ModEffects.THORNS.get())) {
             attacker.hurt(attacker.damageSources().thorns(self), amount);
         }
     }
