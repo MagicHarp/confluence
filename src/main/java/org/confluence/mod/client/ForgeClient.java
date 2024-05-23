@@ -21,6 +21,7 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.handler.GunShootingHandler;
+import org.confluence.mod.client.handler.HookThrowingHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.effect.ModEffects;
@@ -45,8 +46,9 @@ public final class ForgeClient {
         if (event.phase == TickEvent.Phase.START) return;
         GravitationEffect.tick(localPlayer);
         if (localPlayer == null) return;
-        InformationHandler.update(localPlayer);
+        InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
+        HookThrowingHandler.handle(localPlayer);
 
         AnimateColor.doUpdateExpertColor();
         AnimateColor.doUpdateMasterColor();
@@ -150,8 +152,6 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
-        if (GravitationEffect.isShouldRot()) {
-            event.setRoll(180.0F);
-        }
+        if (GravitationEffect.isShouldRot()) event.setRoll(180.0F);
     }
 }

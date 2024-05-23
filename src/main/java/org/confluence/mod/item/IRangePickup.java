@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio;
+package org.confluence.mod.item;
 
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;

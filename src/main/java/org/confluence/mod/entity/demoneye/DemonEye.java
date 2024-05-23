@@ -29,7 +29,7 @@ public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEye
     public BlockPos anchorPoint;
 
     public static AttributeSupplier.Builder createAttributes() {
-        return FlyingMob.createLivingAttributes()
+        return AttributeSupplier.builder()
             .add(Attributes.MAX_HEALTH)
             .add(Attributes.ATTACK_DAMAGE)
             .add(Attributes.ARMOR)

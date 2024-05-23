@@ -52,7 +52,7 @@ public final class InformationHandler {
     private static float attackDamage = 0;
     private static Component dpsMeterInfo = Component.translatable("info.confluence.dps_meter", 0.00F);
 
-    public static void update(LocalPlayer localPlayer) {
+    public static void handle(LocalPlayer localPlayer) {
         information.clear();
         long gameTime = localPlayer.level().getGameTime();
 
@@ -79,7 +79,7 @@ public final class InformationHandler {
             information.add(IFishermansPocketGuide.getInfo(localPlayer));
             if (fpg < 0 && gameTime % 200 == 3 && check(localPlayer, IFishermansPocketGuide.class)) fpg = 0;
         }
-        if (KeyBindings.metalDetector.get().isDown()) {
+        if (KeyBindings.METAL_DETECTOR.get().isDown()) {
             if (!detectorPressed && metalDetector != 0) {
                 detectorPressed = true;
                 metalDetectorInfo = IMetalDetector.getInfo(localPlayer);

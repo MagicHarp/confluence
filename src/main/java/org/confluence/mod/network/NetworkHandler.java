@@ -44,5 +44,6 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, WingsGlidePacketC2S.class, WingsGlidePacketC2S::encode, WingsGlidePacketC2S::decode, WingsGlidePacketC2S::handle);
         CHANNEL.registerMessage(packetId++, GravitationPacketC2S.class, GravitationPacketC2S::encode, GravitationPacketC2S::decode, GravitationPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, HookThrowingPacketC2S.class, HookThrowingPacketC2S::encode, HookThrowingPacketC2S::decode, HookThrowingPacketC2S::handle);
     }
 }

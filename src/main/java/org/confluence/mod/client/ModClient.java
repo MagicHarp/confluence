@@ -7,7 +7,10 @@ import net.minecraft.client.renderer.entity.FishingHookRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
+import org.confluence.mod.client.model.entity.BaseHookModel;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.particle.BulletParticle;
@@ -29,11 +33,6 @@ import org.confluence.mod.item.common.Gels;
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ModClient {
-    @SubscribeEvent
-    public static void keyBinding(RegisterKeyMappingsEvent event) {
-        event.register(KeyBindings.metalDetector.get());
-    }
-
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -66,6 +65,7 @@ public final class ModClient {
         event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
 
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -102,6 +102,7 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
 
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

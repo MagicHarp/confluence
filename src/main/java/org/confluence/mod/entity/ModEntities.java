@@ -10,6 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.LavaFishingHook;
+import org.confluence.mod.entity.hook.BaseHookEntity;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.confluence.mod.entity.projectile.BeeProjectile;
 import org.confluence.mod.entity.projectile.EffectThrownPotion;
@@ -49,6 +50,8 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BaseBulletEntity>> SAPPHIRE_BULLET = registerBullet("sapphire", BaseBulletEntity.Sapphire::new);
     public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", BaseBulletEntity.Spark::new);
     public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", BaseBulletEntity.Topaz::new);
+
+    public static final RegistryObject<EntityType<BaseHookEntity>> BASE_HOOK = ENTITIES.register("base_hook", ()->EntityType.Builder.<BaseHookEntity>of(BaseHookEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:base_hook"));
 
     public static final RegistryObject<EntityType<FallingStarItemEntity>> FALLING_STAR_ITEM_ENTITY = ENTITIES.register("falling_star", () -> EntityType.Builder.<FallingStarItemEntity>of(FallingStarItemEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(16).updateInterval(20).build("confluence:falling_star"));
     public static final RegistryObject<EntityType<BeeProjectile>> BEE_PROJECTILE = ENTITIES.register("bee_projectile", () -> EntityType.Builder.<BeeProjectile>of(BeeProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:bee_projectile"));

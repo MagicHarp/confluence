@@ -35,6 +35,7 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.beneficial.ArcheryEffect;
 import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
+import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
@@ -54,6 +55,7 @@ import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ForgeEvents {
@@ -182,7 +184,10 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void livingHeal(LivingHealEvent event) {
-        BleedingEffect.apply(event.getEntity(), event);
+        LivingEntity living = event.getEntity();
+        Consumer<Boolean> consumer = event::setCanceled;
+        BleedingEffect.apply(living, consumer);
+        FrostburnEffect.apply(living, consumer);
     }
 
     @SubscribeEvent

@@ -1,5 +1,7 @@
 package org.confluence.mod.item.curio;
 
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModRarity;
@@ -305,4 +307,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     }
 
     public static void init() {}
+
+    public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item> tag) {
+        for (CurioItems curioItems : values()) tag.add(curioItems.get());
+    }
 }

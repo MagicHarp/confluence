@@ -25,6 +25,7 @@ import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
+import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
@@ -134,6 +135,7 @@ public final class ModTabs {
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());
                 for (HammerAxes hammerAxes : HammerAxes.values()) output.accept(hammerAxes.get());
                 for (FishingPoles fishingPoles : FishingPoles.values()) output.accept(fishingPoles.get());
+                for (Hooks hooks : Hooks.values()) output.accept(hooks.get());
             })
             .build());
 

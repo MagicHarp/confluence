@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
     private final ResourceLocation texture;
-    protected final BulletModel model;
+    private final BulletModel model;
 
     public BulletRenderer(EntityRendererProvider.Context context, String type) {
         super(context);

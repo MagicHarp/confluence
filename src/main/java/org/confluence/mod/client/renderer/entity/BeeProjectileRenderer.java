@@ -12,8 +12,8 @@ import org.confluence.mod.entity.projectile.BeeProjectile;
 import org.jetbrains.annotations.NotNull;
 
 public class BeeProjectileRenderer extends EntityRenderer<BeeProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "bee_projectile");
-    protected final BeeProjectileModel model;
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/bee_projectile.png");
+    private final BeeProjectileModel model;
 
     public BeeProjectileRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
