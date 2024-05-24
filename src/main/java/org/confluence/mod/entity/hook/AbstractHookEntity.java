@@ -75,12 +75,14 @@ public abstract class AbstractHookEntity extends Projectile {
         double y = getY() + motion.y;
         double z = getZ() + motion.z;
         setPos(x, y, z);
-        checkInsideBlocks();
 
         HookState hookState = getHookState();
         if (hookState == HookState.POP) {
             setDeltaMovement(getDeltaMovement().scale(0.95).add(owner.position().subtract(position()).normalize().scale(0.1)));
-            if (distanceToSqr(owner) < 2.0) discard();
+            if (distanceToSqr(owner) < 2.0) {
+                discard();
+                return;
+            }
         }
         Level level = level();
         if (level.isClientSide) return;
@@ -89,17 +91,21 @@ public abstract class AbstractHookEntity extends Projectile {
             discard();
             return;
         }
+        if (hookState != HookState.POP && distanceToSqr(owner) > hookRangeSqr) {
+            setHookState(HookState.POP);
+            return;
+        }
 
         if (hookState == HookState.PUSH) {
-            if (distanceToSqr(owner) > hookRangeSqr) {
-                setHookState(HookState.POP);
-                return;
-            }
             Vec3 pos = position();
-            Vec3 nextPos = pos.add(getDeltaMovement());
+            Vec3 nextPos = pos.add(motion);
             BlockHitResult hitResult = level.clip(new ClipContext(pos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
-            if (hitResult.getType() != HitResult.Type.BLOCK) {
-                return;
+            if (hitResult.getType() != HitResult.Type.BLOCK) return;
+            motion = motion.scale(0.5);
+            if (hitResult.isInside()) {
+                setPos(getX() - motion.x, getY() - motion.y, getZ() - motion.z);
+            } else {
+                setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
             }
             onHitBlock(hitResult);
             BlockPos blockPos = hitResult.getBlockPos();
@@ -109,19 +115,12 @@ public abstract class AbstractHookEntity extends Projectile {
             this.hasImpulse = true;
             if (hookType == AbstractHookItem.HookType.INDIVIDUAL && hook.get().getOrCreateTag().get("hooks") instanceof ListTag list) {
                 list.forEach(tag -> {
-                    if (tag instanceof CompoundTag tag1 && level.getEntity(tag1.getInt("id")) instanceof AbstractHookEntity hookEntity && hookEntity != this) {
+                    if (level.getEntity(((CompoundTag) tag).getInt("id")) instanceof AbstractHookEntity hookEntity && hookEntity != this) {
                         hookEntity.setHookState(HookState.POP);
                     }
                 });
             }
         }
-    }
-
-    @Override
-    protected void onHitBlock(@NotNull BlockHitResult pResult) {
-        super.onHitBlock(pResult);
-        Vec3 vec3 = pResult.getLocation().subtract(position()).normalize().scale(0.2);
-        setPosRaw(getX() + vec3.x, getY() + vec3.y, getZ() + vec3.z);
     }
 
     public enum HookState implements StringRepresentable {

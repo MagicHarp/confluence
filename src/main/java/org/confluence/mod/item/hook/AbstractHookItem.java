@@ -34,7 +34,7 @@ public abstract class AbstractHookItem extends Item implements ICurioItem {
     public boolean canHook(ServerLevel level, ItemStack itemStack) {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.get("hooks") instanceof ListTag list) {
-            list.removeIf(tag -> tag instanceof CompoundTag tag1 && level.getEntity(tag1.getInt("id")) == null);
+            list.removeIf(tag -> level.getEntity(((CompoundTag) tag).getInt("id")) == null);
             return list.size() < getHookAmount();
         } else {
             nbt.put("hooks", new ListTag());

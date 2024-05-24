@@ -20,21 +20,20 @@ public final class HookThrowingHandler {
             CompoundTag tag = itemStack.getTag();
             if (tag != null && tag.get("hooks") instanceof ListTag list) {
                 list.forEach(tag1 -> {
-                    if (tag1 instanceof CompoundTag tag2) {
-                        int id = tag2.getInt("id");
-                        if (localPlayer.level().getEntity(id) instanceof AbstractHookEntity hookEntity && hookEntity.getHookState() == AbstractHookEntity.HookState.HOOKED) {
-                            if (localPlayer.input.jumping) {
-                                NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.pop(id));
-                            } else {
-                                Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
-                                if (subtract.lengthSqr() < 1.0) {
-                                    Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
-                                    localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
-                                    PlayerJumpHandler.flushState(false);
-                                } else {
-                                    localPlayer.addDeltaMovement(subtract.normalize().scale(0.15));
-                                }
-                            }
+                    int id = ((CompoundTag) tag1).getInt("id");
+                    if (localPlayer.level().getEntity(id) instanceof AbstractHookEntity hookEntity && hookEntity.getHookState() == AbstractHookEntity.HookState.HOOKED) {
+                        if (localPlayer.input.jumping) {
+                            NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.pop(id));
+                            return;
+                        }
+                        if (localPlayer.isCrouching()) return;
+                        Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
+                        if (subtract.lengthSqr() < 1.0) {
+                            Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
+                            localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
+                            PlayerJumpHandler.flushState(false);
+                        } else {
+                            localPlayer.addDeltaMovement(subtract.normalize().scale(0.15));
                         }
                     }
                 });

@@ -61,10 +61,10 @@ public final class ModEvents {
 
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
-        NetworkHandler.register();
-        ModFluids.registerInteraction();
-
         event.enqueueWork(() -> {
+            NetworkHandler.register();
+            ModFluids.registerInteraction();
+
             if (!ModList.get().isLoaded("attributefix")) {
                 Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
                 if (armor instanceof RangedAttribute rangedAttribute) {
@@ -92,12 +92,14 @@ public final class ModEvents {
 
     @SubscribeEvent
     public static void loadComplete(FMLLoadCompleteEvent event) {
-        int step = 0;
-        for (int state = 0; state < 3; state++) {
-            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get());
-            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get());
-            StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get());
-        }
+        event.enqueueWork(() -> {
+            int step = 0;
+            for (int state = 0; state < 3; state++) {
+                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get());
+                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get());
+                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get());
+            }
+        });
     }
 
     @SubscribeEvent
