@@ -35,7 +35,7 @@ public abstract class AbstractHookItem extends Item implements ICurioItem {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.get("hooks") instanceof ListTag list) {
             list.removeIf(tag -> level.getEntity(((CompoundTag) tag).getInt("id")) == null);
-            return list.size() < getHookAmount();
+            return list.size() <= getHookAmount();
         } else {
             nbt.put("hooks", new ListTag());
             return true;

@@ -8,24 +8,34 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.jetbrains.annotations.NotNull;
 
+import static org.confluence.mod.Confluence.MODID;
+
 public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
-    private final ResourceLocation texture;
+    private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
+        new ResourceLocation(MODID, "textures/entity/bullet/amethyst_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/topaz_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/sapphire_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/emerald_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/ruby_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/amber_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/diamond_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/frost_bullet.png"),
+        new ResourceLocation(MODID, "textures/entity/bullet/spark_bullet.png")
+    };
     private final BulletModel model;
 
-    public BulletRenderer(EntityRendererProvider.Context context, String type) {
+    public BulletRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.texture = new ResourceLocation(Confluence.MODID, "textures/entity/bullet/" + type + "_bullet.png");
         this.model = new BulletModel(context.bakeLayer(BulletModel.RUBY_LAYER));
     }
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull BaseBulletEntity baseBulletEntity) {
-        return texture;
+        return TEXTURES[baseBulletEntity.getVariant().getId()];
     }
 
     @Override
@@ -34,7 +44,7 @@ public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
         poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
         poseStack.scale(2.0F, 2.0F, 2.0F);
-        model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         poseStack.popPose();
         super.render(entity, entityYaw, partialTick, poseStack, multiBufferSource, packedLight);
     }

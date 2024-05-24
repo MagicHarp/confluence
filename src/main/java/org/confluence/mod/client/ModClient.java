@@ -18,14 +18,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
-import org.confluence.mod.client.model.entity.BaseHookModel;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
+import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
+import org.confluence.mod.client.renderer.entity.hook.BaseHookRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
@@ -54,16 +55,7 @@ public final class ModClient {
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         CuriosClient.registerLayers(event::registerLayerDefinition);
 
-        event.registerLayerDefinition(BulletModel.AMBER_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.AMETHYST_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.DIAMOND_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.EMERALD_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.FROST_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.RUBY_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.SAPPHIRE_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.SPARK_LAYER, BulletModel::createBodyLayer);
-        event.registerLayerDefinition(BulletModel.TOPAZ_LAYER, BulletModel::createBodyLayer);
-
+        event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
     }
@@ -86,16 +78,6 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
         event.registerEntityRenderer(ModEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
-        event.registerEntityRenderer(ModEntities.AMBER_BULLET.get(), c -> new BulletRenderer(c, "amber"));
-        event.registerEntityRenderer(ModEntities.AMETHYST_BULLET.get(), c -> new BulletRenderer(c, "amethyst"));
-        event.registerEntityRenderer(ModEntities.DIAMOND_BULLET.get(), c -> new BulletRenderer(c, "diamond"));
-        event.registerEntityRenderer(ModEntities.EMERALD_BULLET.get(), c -> new BulletRenderer(c, "emerald"));
-        event.registerEntityRenderer(ModEntities.FROST_BULLET.get(), c -> new BulletRenderer(c, "frost"));
-        event.registerEntityRenderer(ModEntities.RUBY_BULLET.get(), c -> new BulletRenderer(c, "ruby"));
-        event.registerEntityRenderer(ModEntities.SAPPHIRE_BULLET.get(), c -> new BulletRenderer(c, "sapphire"));
-        event.registerEntityRenderer(ModEntities.SPARK_BULLET.get(), c -> new BulletRenderer(c, "spark"));
-        event.registerEntityRenderer(ModEntities.TOPAZ_BULLET.get(), c -> new BulletRenderer(c, "topaz"));
-
         event.registerEntityRenderer(ModEntities.DEMON_EYE.get(), DemonEyeRenderer::new);
 
         event.registerEntityRenderer(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
@@ -103,6 +85,7 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.BASE_BULLET.get(), BulletRenderer::new);
 
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

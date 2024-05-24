@@ -1,4 +1,4 @@
-package org.confluence.mod.client.model.entity;
+package org.confluence.mod.client.model.entity.hook;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

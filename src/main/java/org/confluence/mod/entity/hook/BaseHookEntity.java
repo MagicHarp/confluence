@@ -45,7 +45,14 @@ public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<
     }
 
     public enum Variant implements StringRepresentable {
-        GRAPPLING(0, "grappling");
+        GRAPPLING(0, "grappling"), // 抓钩
+        AMETHYST(1, "amethyst"), // 紫晶钩
+        TOPAZ(2, "topaz"), // 黄玉钩
+        SAPPHIRE(3, "sapphire"), // 蓝玉钩
+        EMERALD(4, "emerald"), // 翡翠钩
+        RUBY(5, "ruby"), // 红玉钩
+        AMBER(6, "amber"), // 琥珀钩
+        DIAMOND(7, "diamond"); // 钻石钩
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);

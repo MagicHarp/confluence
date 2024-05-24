@@ -1,8 +1,14 @@
 package org.confluence.mod.entity.projectile;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,7 +26,12 @@ import org.confluence.mod.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseBulletEntity extends Projectile {
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
+
+public class BaseBulletEntity extends Projectile {
+    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(BaseBulletEntity.class, EntityDataSerializers.INT);
+
     protected float attackDamage = 0.0F;
     protected float criticalChance = 0.0F;
     protected float knockBack = 0.0F;
@@ -29,11 +40,11 @@ public abstract class BaseBulletEntity extends Projectile {
         super(entityType, level);
     }
 
-    protected BaseBulletEntity(EntityType<BaseBulletEntity> entityType, Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-        this(entityType, level);
+    public BaseBulletEntity(Player player, Level level, @Nullable ItemPrefix itemPrefix, Variant variant) {
+        super(ModEntities.BASE_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
-        setNoGravity(true);
+        setNoGravity(variant.gravity > 0.0);
         if (itemPrefix != null) {
             this.attackDamage = (float) itemPrefix.attackDamage;
             this.criticalChance = (float) itemPrefix.criticalChance;
@@ -41,7 +52,22 @@ public abstract class BaseBulletEntity extends Projectile {
         }
     }
 
-    public abstract SimpleParticleType getParticle();
+    @Override
+    protected void defineSynchedData() {
+        entityData.define(DATA_VARIANT_ID, 0);
+    }
+
+    public void setVariant(Variant pVariant) {
+        entityData.set(DATA_VARIANT_ID, pVariant.id);
+    }
+
+    public @NotNull Variant getVariant() {
+        return Variant.byId(entityData.get(DATA_VARIANT_ID));
+    }
+
+    public SimpleParticleType getParticle() {
+        return getVariant().supplier.get();
+    }
 
     @Override
     public void tick() {
@@ -64,7 +90,7 @@ public abstract class BaseBulletEntity extends Projectile {
         setDeltaMovement(vec3.scale(0.93));
         if (!isNoGravity()) {
             Vec3 vec31 = getDeltaMovement();
-            this.setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
+            setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
         }
         setPos(offX, offY, offZ);
         level().addParticle(getParticle(), getX(), getY(), getZ(), 0.0, 0.0, 0.0);
@@ -78,7 +104,7 @@ public abstract class BaseBulletEntity extends Projectile {
         if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
             float attackKnockBack = getKnockBack() + knockBack;
             if (attackKnockBack > 0.0F && entity instanceof LivingEntity living) {
-                living.knockback(attackKnockBack * 0.5F, Mth.sin(this.getYRot() * (Mth.PI / 180F)), -Mth.cos(this.getYRot() * (Mth.PI / 180F)));
+                living.knockback(attackKnockBack * 0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
             }
         }
@@ -89,141 +115,21 @@ public abstract class BaseBulletEntity extends Projectile {
         return false;
     }
 
-    @Override
-    protected void defineSynchedData() {
-    }
-
     protected float getDamage() {
-        return 5;
+        return getVariant().damage;
     }
 
     protected double getGravity() {
-        return 0.03;
+        return getVariant().gravity;
     }
 
     protected float getKnockBack() {
-        return 1.0F;
-    }
-
-    public static class Amber extends BaseBulletEntity {
-        public Amber(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Amber(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.AMBER_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.AMBER_BULLET.get();
-        }
-    }
-
-    public static class Amethyst extends BaseBulletEntity {
-        public Amethyst(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Amethyst(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.AMETHYST_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.AMETHYST_BULLET.get();
-        }
-    }
-
-    public static class Diamond extends BaseBulletEntity {
-        public Diamond(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Diamond(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.DIAMOND_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.DIAMOND_BULLET.get();
-        }
-    }
-
-    public static class Emerald extends BaseBulletEntity {
-        public Emerald(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Emerald(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.EMERALD_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.EMERALD_BULLET.get();
-        }
-    }
-
-    public static class Frost extends BaseBulletEntity {
-        public Frost(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Frost(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.FROST_BULLET.get(), player, level, itemPrefix);
-            setNoGravity(false);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.RUBY_BULLET.get();
-        }
-
-        @Override
-        protected double getGravity() {
-            return 0.5;
-        }
-    }
-
-    public static class Ruby extends BaseBulletEntity {
-        public Ruby(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Ruby(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.RUBY_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.RUBY_BULLET.get();
-        }
-    }
-
-    public static class Sapphire extends BaseBulletEntity {
-        public Sapphire(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
-        public Sapphire(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.SAPPHIRE_BULLET.get(), player, level, itemPrefix);
-        }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.SAPPHIRE_BULLET.get();
-        }
+        return getVariant().knockBack;
     }
 
     public static class Spark extends BaseBulletEntity {
-        public Spark(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
-        }
-
         public Spark(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.SPARK_BULLET.get(), player, level, itemPrefix);
-            setNoGravity(false);
+            super(player, level, itemPrefix, Variant.SPARK);
         }
 
         @Override
@@ -231,34 +137,48 @@ public abstract class BaseBulletEntity extends Projectile {
             super.onHitEntity(entityHitResult);
             entityHitResult.getEntity().setSecondsOnFire(5);
         }
-
-        @Override
-        public SimpleParticleType getParticle() {
-            return ParticleTypes.LAVA.getType();
-        }
-
-        protected float getDamage() {
-            return 1.3F;
-        }
-
-        @Override
-        protected double getGravity() {
-            return 0.2;
-        }
     }
 
-    public static class Topaz extends BaseBulletEntity {
-        public Topaz(EntityType<BaseBulletEntity> entityType, Level level) {
-            super(entityType, level);
+    public enum Variant implements StringRepresentable {
+        AMETHYST(0, "amethyst", 5.0F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
+        TOPAZ(1, "topaz", 5.0F, -1.0, 1.0F, ModParticles.TOPAZ_BULLET),
+        SAPPHIRE(2, "sapphire", 5.0F, -1.0, 1.0F, ModParticles.SAPPHIRE_BULLET),
+        EMERALD(3, "emerald", 5.0F, -1.0, 1.0F, ModParticles.EMERALD_BULLET),
+        RUBY(4, "ruby", 5.0F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
+        AMBER(5, "amber", 5.0F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
+        DIAMOND(6, "diamond", 5.0F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
+        FROST(7, "frost", 5.0F, 0.5, 1.0F, ModParticles.RUBY_BULLET), // todo particle
+        SPARK(8, "spark", 1.3F, 0.2, 1.0F, () -> ParticleTypes.LAVA.getType());
+
+        public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
+        final int id;
+        private final String name;
+        public final float damage;
+        public final double gravity;
+        public final float knockBack;
+        public final Supplier<SimpleParticleType> supplier;
+
+        Variant(int id, String name, float damage, double gravity, float knockBack, Supplier<SimpleParticleType> supplier) {
+            this.id = id;
+            this.name = name;
+            this.damage = damage;
+            this.gravity = gravity;
+            this.knockBack = knockBack;
+            this.supplier = supplier;
         }
 
-        public Topaz(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(ModEntities.TOPAZ_BULLET.get(), player, level, itemPrefix);
+        public int getId() {
+            return id;
+        }
+
+        public static Variant byId(int pId) {
+            return BY_ID.apply(pId);
         }
 
         @Override
-        public SimpleParticleType getParticle() {
-            return ModParticles.TOPAZ_BULLET.get();
+        public @NotNull String getSerializedName() {
+            return name;
         }
     }
 }

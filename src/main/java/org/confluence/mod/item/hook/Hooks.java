@@ -9,7 +9,14 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum Hooks implements EnumRegister<AbstractHookItem> {
-    GRAPPLING("grappling_hook", GrapplingHookItem::new);
+    GRAPPLING_HOOK("grappling_hook", GrapplingHookItem::new),
+    AMETHYST_HOOK("amethyst_hook", AmethystHookItem::new),
+    TOPAZ_HOOK("topaz_hook", TopazHookItem::new),
+    SAPPHIRE_HOOK("sapphire_hook", SapphireHookItem::new),
+    EMERALD_HOOK("emerald_hook", EmeraldHookItem::new),
+    RUBY_HOOK("ruby_hook", RubyHookItem::new),
+    AMBER_HOOK("amber_hook", AmberHookItem::new),
+    DIAMOND_HOOK("diamond_hook", DiamondHookItem::new);
 
     private final RegistryObject<AbstractHookItem> value;
 

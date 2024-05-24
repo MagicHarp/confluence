@@ -41,15 +41,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.5F, 0.5F).clientTrackingRange(10).build("confluence:demon_eye"));
 
-    public static final RegistryObject<EntityType<BaseBulletEntity>> AMBER_BULLET = registerBullet("amber", BaseBulletEntity.Amber::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> AMETHYST_BULLET = registerBullet("amethyst", BaseBulletEntity.Amethyst::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> DIAMOND_BULLET = registerBullet("diamond", BaseBulletEntity.Diamond::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> EMERALD_BULLET = registerBullet("emerald", BaseBulletEntity.Emerald::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> FROST_BULLET = registerBullet("frost", BaseBulletEntity.Frost::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> RUBY_BULLET = registerBullet("ruby", BaseBulletEntity.Ruby::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> SAPPHIRE_BULLET = registerBullet("sapphire", BaseBulletEntity.Sapphire::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> SPARK_BULLET = registerBullet("spark", BaseBulletEntity.Spark::new);
-    public static final RegistryObject<EntityType<BaseBulletEntity>> TOPAZ_BULLET = registerBullet("topaz", BaseBulletEntity.Topaz::new);
+    public static final RegistryObject<EntityType<BaseBulletEntity>> BASE_BULLET = ENTITIES.register("base_bullet", () -> EntityType.Builder.<BaseBulletEntity>of(BaseBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:base_bullet"));
 
     public static final RegistryObject<EntityType<BaseHookEntity>> BASE_HOOK = ENTITIES.register("base_hook", () -> EntityType.Builder.<BaseHookEntity>of(BaseHookEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:base_hook"));
 
@@ -64,13 +56,5 @@ public final class ModEntities {
                 .sized(2.04F, 2.04F)
                 .clientTrackingRange(10)
                 .build("confluence:" + i + "_slime"));
-    }
-
-    private static RegistryObject<EntityType<BaseBulletEntity>> registerBullet(String i, EntityType.EntityFactory<BaseBulletEntity> factory) {
-        return ENTITIES.register(i + "_bullet", () ->
-            EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(0.25F, 0.25F)
-                .clientTrackingRange(10)
-                .build("confluence:" + i + "_bullet"));
     }
 }
