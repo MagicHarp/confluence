@@ -749,7 +749,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
-        add(Hooks.GRAPPLING.get(), "抓钩");
+        add(Hooks.GRAPPLING_HOOK.get(), "抓钩");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
