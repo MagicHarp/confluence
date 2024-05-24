@@ -30,7 +30,7 @@ public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
 
     public BulletRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new BulletModel(context.bakeLayer(BulletModel.RUBY_LAYER));
+        this.model = new BulletModel(context.bakeLayer(BulletModel.LAYER_LOCATION));
     }
 
     @Override
