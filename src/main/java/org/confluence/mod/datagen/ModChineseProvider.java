@@ -17,6 +17,7 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.Hammers;
+import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
@@ -748,6 +749,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
+        add(Hooks.GRAPPLING.get(), "抓钩");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
