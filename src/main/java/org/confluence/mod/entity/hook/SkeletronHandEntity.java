@@ -6,12 +6,12 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.hook.AbstractHookItem;
 
-public class WebSlingerEntity extends AbstractHookEntity {
-    public WebSlingerEntity(EntityType<WebSlingerEntity> entityType, Level pLevel) {
+public class SkeletronHandEntity extends AbstractHookEntity {
+    public SkeletronHandEntity(EntityType<SkeletronHandEntity> entityType, Level pLevel) {
         super(entityType, pLevel);
     }
 
-    public WebSlingerEntity(AbstractHookItem item, Player player, Level level) {
-        super(ModEntities.WEB_SLINGER.get(), item, player, level);
+    public SkeletronHandEntity(AbstractHookItem item, Player player, Level level) {
+        super(ModEntities.SKELETRON_HAND.get(), item, player, level);
     }
 }
