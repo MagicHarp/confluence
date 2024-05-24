@@ -750,6 +750,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(SHURIKEN.get(), "手里剑");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
         add(Hooks.GRAPPLING_HOOK.get(), "抓钩");
+        add(Hooks.RUBY_HOOK.get(), "红玉钩");
+        add(Hooks.AMBER_HOOK.get(), "琥珀钩");
+        add(Hooks.TOPAZ_HOOK.get(), "黄玉钩");
+        add(Hooks.EMERALD_HOOK.get(), "翡翠钩");
+        add(Hooks.DIAMOND_HOOK.get(), "钻石钩");
+        add(Hooks.AMETHYST_HOOK.get(), "紫晶钩");
+        add(Hooks.WEB_SLINGER.get(), "蛛丝吊索");
+        add(Hooks.SKELETRON_HAND.get(), "骷髅王之手");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
