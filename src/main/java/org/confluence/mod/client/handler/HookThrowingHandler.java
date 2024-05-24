@@ -4,7 +4,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.network.NetworkHandler;
@@ -27,9 +26,14 @@ public final class HookThrowingHandler {
                             if (localPlayer.input.jumping) {
                                 NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.pop(id));
                             } else {
-                                double gravity = localPlayer.getAttributeValue(ForgeMod.ENTITY_GRAVITY.get());
-                                Vec3 vec3 = hookEntity.position().subtract(localPlayer.getX(), localPlayer.getY(), localPlayer.getZ()).normalize().scale(0.1).add(0.0, -gravity, 0.0);
-                                localPlayer.addDeltaMovement(vec3);
+                                Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
+                                if (subtract.lengthSqr() < 1.0) {
+                                    Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
+                                    localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
+                                    PlayerJumpHandler.flushState(false);
+                                } else {
+                                    localPlayer.addDeltaMovement(subtract.normalize().scale(0.15));
+                                }
                             }
                         }
                     }

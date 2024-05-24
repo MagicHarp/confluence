@@ -1,6 +1,7 @@
 package org.confluence.mod.entity.hook;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,12 +12,13 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.item.hook.AbstractHookItem;
@@ -67,7 +69,19 @@ public abstract class AbstractHookEntity extends Projectile {
             discard();
             return;
         }
-        move(MoverType.SELF, getDeltaMovement());
+
+        Vec3 motion = getDeltaMovement();
+        double x = getX() + motion.x;
+        double y = getY() + motion.y;
+        double z = getZ() + motion.z;
+        setPos(x, y, z);
+        checkInsideBlocks();
+
+        HookState hookState = getHookState();
+        if (hookState == HookState.POP) {
+            setDeltaMovement(getDeltaMovement().scale(0.95).add(owner.position().subtract(position()).normalize().scale(0.1)));
+            if (distanceToSqr(owner) < 2.0) discard();
+        }
         Level level = level();
         if (level.isClientSide) return;
         Optional<ItemStack> hook = CuriosUtils.getSlot((LivingEntity) owner, "hook", 0);
@@ -75,29 +89,39 @@ public abstract class AbstractHookEntity extends Projectile {
             discard();
             return;
         }
-        ItemStack itemStack = hook.get();
-        HookState hookState = getHookState();
+
         if (hookState == HookState.PUSH) {
             if (distanceToSqr(owner) > hookRangeSqr) {
                 setHookState(HookState.POP);
                 return;
             }
-            if (ProjectileUtil.getHitResultOnMoveVector(this, entity -> false).getType() != HitResult.Type.BLOCK) {
+            Vec3 pos = position();
+            Vec3 nextPos = pos.add(getDeltaMovement());
+            BlockHitResult hitResult = level.clip(new ClipContext(pos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+            if (hitResult.getType() != HitResult.Type.BLOCK) {
                 return;
             }
+            onHitBlock(hitResult);
+            BlockPos blockPos = hitResult.getBlockPos();
+            level.gameEvent(GameEvent.PROJECTILE_LAND, blockPos, GameEvent.Context.of(this, level.getBlockState(blockPos)));
             setDeltaMovement(Vec3.ZERO);
             setHookState(HookState.HOOKED);
-            if (hookType == AbstractHookItem.HookType.INDIVIDUAL && itemStack.getOrCreateTag().get("hooks") instanceof ListTag list) {
+            this.hasImpulse = true;
+            if (hookType == AbstractHookItem.HookType.INDIVIDUAL && hook.get().getOrCreateTag().get("hooks") instanceof ListTag list) {
                 list.forEach(tag -> {
                     if (tag instanceof CompoundTag tag1 && level.getEntity(tag1.getInt("id")) instanceof AbstractHookEntity hookEntity && hookEntity != this) {
                         hookEntity.setHookState(HookState.POP);
                     }
                 });
             }
-        } else if (hookState == HookState.POP) {
-            addDeltaMovement(owner.position().subtract(getX(), getY(), getZ()).normalize().scale(0.05));
-            if (distanceToSqr(owner) < 4.0) discard();
         }
+    }
+
+    @Override
+    protected void onHitBlock(@NotNull BlockHitResult pResult) {
+        super.onHitBlock(pResult);
+        Vec3 vec3 = pResult.getLocation().subtract(position()).normalize().scale(0.2);
+        setPosRaw(getX() + vec3.x, getY() + vec3.y, getZ() + vec3.z);
     }
 
     public enum HookState implements StringRepresentable {

@@ -47,15 +47,7 @@ public final class PlayerJumpHandler {
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
         if (localPlayer.onGround()) {
-            jumpKeyDown = true;
-            fartFinished = false;
-            remainSandstormTicks = maxSandstormTicks;
-            sandstormFinished = false;
-            remainBlizzardTicks = maxBlizzardTicks;
-            blizzardFinished = false;
-            tsunamiFinished = false;
-            cloudFinished = false;
-            remainFlyTicks = maxFlyTicks;
+            flushState(true);
         } else if (jumping) {
             if (couldGlide) {
                 if (remainFlyTicks-- > 0) {
@@ -99,6 +91,18 @@ public final class PlayerJumpHandler {
             blizzardFinished = remainBlizzardTicks < maxBlizzardTicks;
             onFly = false;
         }
+    }
+
+    public static void flushState(boolean init) {
+        jumpKeyDown = init;
+        fartFinished = false;
+        remainSandstormTicks = maxSandstormTicks;
+        sandstormFinished = false;
+        remainBlizzardTicks = maxBlizzardTicks;
+        blizzardFinished = false;
+        tsunamiFinished = false;
+        cloudFinished = false;
+        remainFlyTicks = maxFlyTicks;
     }
 
     private static void multiJump(LocalPlayer localPlayer, double speed) {

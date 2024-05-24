@@ -49,8 +49,7 @@ public interface IRangePickup {
                 itemEntity -> itemEntity.getItem().is(ModTags.Items.PROVIDE_LIFE)
             ).forEach(itemEntity -> {
                 if (itemEntity.isRemoved()) return;
-                Vec3 vec3 = player.position()
-                    .subtract(itemEntity.getX(), itemEntity.getY(), itemEntity.getZ())
+                Vec3 vec3 = player.position().subtract(itemEntity.position())
                     .normalize().scale(0.05F).add(0, 0.04F, 0);
                 itemEntity.addDeltaMovement(vec3);
                 itemEntity.move(MoverType.SELF, itemEntity.getDeltaMovement());
