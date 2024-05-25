@@ -50,6 +50,13 @@ public final class ModTabs {
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
+                output.accept(RUBY_CHAINS.get());
+                output.accept(AMBER_CHAINS.get());
+                output.accept(TOPAZ_CHAINS.get());
+                output.accept(EMERALD_CHAINS.get());
+                output.accept(SAPPHIRE_CHAINS.get());
+                output.accept(DIAMOND_CHAINS.get());
+                output.accept(AMETHYST_CHAINS.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
             })
             .build());

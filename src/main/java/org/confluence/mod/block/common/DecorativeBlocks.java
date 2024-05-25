@@ -49,8 +49,9 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ANOTHER_GRANITE_COLUMN("another_granite_column", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
     MARBLE_COLUMN("marble_column", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
-    CRYSTAL_BLOCK("crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
+    CRYSTAL_BLOCK("crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))),
 
+;
     private final RegistryObject<Block> value;
 
     DecorativeBlocks(String id, Supplier<Block> block) {

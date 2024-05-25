@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "confluence:block/diamond_chains",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "confluence:block/diamond_chains"
+    },
+    "axis=z": {
+      "model": "confluence:block/diamond_chains",
+      "x": 90
+    }
+  }
+}
