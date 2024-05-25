@@ -36,7 +36,7 @@ public enum Torches {
     ICE_TORCH("ice", 15.0F, 0.7F, 1.5F, 1.5F), // 冰雪
     PINK_TORCH("pink", 14.0F, 1.0F, 0.0F, 1.0F), // 粉
     BONE_TORCH("bone", 14.0F, 0.5F, 0.75F, 1.0F), // 骨头
-    ULTRABRIGHT_TORCH("ultrabright", 17.0F, 0.75F, 1.0F, 1.0F), // 超亮
+    ULTRABRIGHT_TORCH("ultrabright", 15.0F, 0.75F, 1.0F, 1.0F), // 超亮
     DEMON_TORCH("demon", DemonTorchColor.INSTANCE), // 恶魔
     CURSED_TORCH("cursed", 14.0F, 0.4F, 1.0F, 0.1F), // 诅咒
     ICHOR_TORCH("ichor", 14.0F, 1.0F, 1.0F, 0.7F), // 灵液
