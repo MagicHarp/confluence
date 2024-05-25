@@ -5,6 +5,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
@@ -245,7 +246,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
-            if (!(block1 instanceof WallSignBlock)) add(block1, toTitleCase(block.getId().getPath()));
+            if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;
+            add(block1, toTitleCase(block.getId().getPath()));
         });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();

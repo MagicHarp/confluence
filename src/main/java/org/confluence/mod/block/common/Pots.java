@@ -272,15 +272,15 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 }
             } else {
                 if (tundra) {
-                    item = Torches.ICE_TORCH.get().asItem();
+                    item = Torches.ICE_TORCH.item.get();
                 } else if (this == ANOTHER_CRIMSON_POTS.get()) {
-                    item = Torches.CRIMSON_TORCH.get().asItem();
+                    item = Torches.CRIMSON_TORCH.item.get();
                 } else if (this == JUNGLE_POTS.get()) {
-                    item = Torches.JUNGLE_TORCH.get().asItem();
+                    item = Torches.JUNGLE_TORCH.item.get();
                 } else if (this == CORRUPTION_POTS.get()) {
-                    item = Torches.CORRUPT_TORCH.get().asItem();
+                    item = Torches.CORRUPT_TORCH.item.get();
                 } else if (this == UNDERGROUND_DESERT_POTS.get()) {
-                    item = Torches.DESERT_TORCH.get().asItem();
+                    item = Torches.DESERT_TORCH.item.get();
                 } else {
                     item = Items.TORCH;
                 }

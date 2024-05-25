@@ -22,8 +22,11 @@ public final class ShimmerEvents {
     @SubscribeEvent
     public static void reload(ForgeShimmerReloadEvent event) {
         for (Torches torches : Torches.values()) {
-            Torches.ColorfulTorchBlock block = torches.get();
-            LightManager.INSTANCE.registerBlockLight(block, (blockState, blockPos) -> block.getColor());
+            Torches.ColorfulTorchBlock stand = torches.stand.get();
+            LightManager.INSTANCE.registerBlockLight(stand, (blockState, blockPos) -> stand.getColor());
+            Torches.ColorfulWallTorchBlock wall = torches.wall.get();
+            LightManager.INSTANCE.registerBlockLight(wall, (blockState, blockPos) -> wall.getColor());
+
         }
     }
 

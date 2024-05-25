@@ -50,7 +50,7 @@ public final class ModTabs {
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
-                for (Torches torches : Torches.values()) output.accept(torches.get());
+                for (Torches torches : Torches.values()) output.accept(torches.item.get());
             })
             .build());
     // 自然方块

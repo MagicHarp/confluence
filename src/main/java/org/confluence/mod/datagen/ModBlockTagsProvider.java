@@ -129,7 +129,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             HALLOW_GRASS_BLOCK.get()
         );
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> torch = tag(ModTags.Blocks.TORCH);
-        torch.add(Blocks.TORCH, Blocks.SOUL_TORCH);
-        for (Torches torches : Torches.values()) torch.add(torches.get());
+        torch.add(Blocks.TORCH, Blocks.WALL_TORCH, Blocks.SOUL_TORCH, Blocks.SOUL_WALL_TORCH);
+        for (Torches torches : Torches.values()) torch.add(torches.stand.get(), torches.wall.get());
     }
 }
