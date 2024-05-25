@@ -88,7 +88,7 @@ public class BaseBulletEntity extends Projectile {
         double offY = getY() + vec3.y;
         double offZ = getZ() + vec3.z;
         setDeltaMovement(vec3.scale(0.93));
-        if (!isNoGravity()) {
+        if (getGravity() > 0.0) {
             Vec3 vec31 = getDeltaMovement();
             setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
         }
@@ -105,7 +105,7 @@ public class BaseBulletEntity extends Projectile {
             float attackKnockBack = getKnockBack() + knockBack;
             if (attackKnockBack > 0.0F && entity instanceof LivingEntity living) {
                 living.knockback(attackKnockBack * 0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
-                this.setDeltaMovement(this.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
+                setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
             }
         }
     }
