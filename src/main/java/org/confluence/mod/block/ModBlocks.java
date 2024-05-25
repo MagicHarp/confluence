@@ -1,11 +1,9 @@
 package org.confluence.mod.block;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -19,10 +17,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
-import org.confluence.mod.block.natural.CrispyHoneyBlock;
-import org.confluence.mod.block.natural.LogBlocks;
-import org.confluence.mod.block.natural.Ores;
-import org.confluence.mod.block.natural.ThinIceBlock;
+import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModFluids;
@@ -93,6 +88,8 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SAPPHIRE_CHAIN = registerWithItem("sapphire_chain", () -> new BaseChainBlock(MapColor.COLOR_BLUE));
     public static final RegistryObject<BaseChainBlock> DIAMOND_CHAIN = registerWithItem("diamond_chain", () -> new BaseChainBlock(MapColor.DIAMOND));
     public static final RegistryObject<BaseChainBlock> AMETHYST_CHAIN = registerWithItem("amethyst_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
+    //flower
+    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", () -> new BasePlantBlock());
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
