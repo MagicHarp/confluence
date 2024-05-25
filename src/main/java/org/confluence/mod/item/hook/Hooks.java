@@ -18,7 +18,7 @@ public enum Hooks implements EnumRegister<AbstractHookItem> {
     AMBER_HOOK("amber_hook", AmberHookItem::new),
     DIAMOND_HOOK("diamond_hook", DiamondHookItem::new),
     WEB_SLINGER("web_slinger", WebSlingerItem::new),
-    SKELETRON_HAND("skeletron_hand", SkeletronHandItem::new), // 没有模型,使用就崩
+    SKELETRON_HAND("skeletron_hand", SkeletronHandItem::new),
     ;
 
     private final RegistryObject<AbstractHookItem> value;
