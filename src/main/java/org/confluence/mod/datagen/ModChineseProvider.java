@@ -14,6 +14,8 @@ import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.fishing.FishingPoles;
+import org.confluence.mod.item.fishing.HotlineFishingHook;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hammer.Hammers;
@@ -749,7 +751,17 @@ public class ModChineseProvider extends LanguageProvider {
         add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
+        add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(Hooks.GRAPPLING_HOOK.get(), "抓钩");
+        add(Hooks.RUBY_HOOK.get(), "红玉钩");
+        add(Hooks.AMBER_HOOK.get(), "琥珀钩");
+        add(Hooks.TOPAZ_HOOK.get(), "黄玉钩");
+        add(Hooks.EMERALD_HOOK.get(), "翡翠钩");
+        add(Hooks.SAPPHIRE_HOOK.get(), "蓝玉钩");
+        add(Hooks.DIAMOND_HOOK.get(), "钻石钩");
+        add(Hooks.AMETHYST_HOOK.get(), "紫晶钩");
+        add(Hooks.WEB_SLINGER.get(), "蛛丝吊索");
+        add(Hooks.SKELETRON_HAND.get(), "骷髅王之手");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
