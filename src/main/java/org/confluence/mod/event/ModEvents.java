@@ -10,6 +10,8 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FishingRodItem;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -26,6 +28,7 @@ import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
@@ -80,6 +83,16 @@ public final class ModEvents {
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+            ItemProperties.register(FishingPoles.HOTLINE_FISHING_HOOK.get(), new ResourceLocation("cast"), ((itemStack, level, living, speed) -> {
+                if (living == null) {
+                    return 0.0F;
+                } else {
+                    boolean flag = living.getMainHandItem() == itemStack;
+                    boolean flag1 = living.getOffhandItem() == itemStack;
+                    if (living.getMainHandItem().getItem() instanceof FishingRodItem) flag1 = false;
+                    return (flag || flag1) && living instanceof Player && ((Player) living).fishing != null ? 1.0F : 0.0F;
+                }
+            }));
 
             Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "another_crimson"), 1));
             Regions.register(new TheHallowRegion(new ResourceLocation(MODID, "the_hallow"), 1));

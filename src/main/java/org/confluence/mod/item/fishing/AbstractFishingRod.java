@@ -16,11 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.curio.fishing.ILavaproofFishingHook;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.IFishingHook;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractFishingRod extends Item implements Vanishable {
+public abstract class AbstractFishingRod extends Item implements Vanishable, CustomModel {
     public AbstractFishingRod(Properties pProperties) {
         super(pProperties);
     }
@@ -40,8 +42,13 @@ public abstract class AbstractFishingRod extends Item implements Vanishable {
             if (!pLevel.isClientSide) {
                 int luckBonus = EnchantmentHelper.getFishingLuckBonus(itemstack);
                 int speedBonus = EnchantmentHelper.getFishingSpeedBonus(itemstack);
-                if(CuriosUtils.noSameCurio(pPlayer, ILavaproofFishingHook.class))
-                pLevel.addFreshEntity(getHook(itemstack, pPlayer, pLevel, luckBonus, speedBonus));
+                if (CuriosUtils.noSameCurio(pPlayer, ILavaproofFishingHook.class)) {
+                    pLevel.addFreshEntity(getHook(itemstack, pPlayer, pLevel, luckBonus, speedBonus));
+                } else {
+                    FishingHook fishingHook = getHook(itemstack, pPlayer, pLevel, luckBonus, speedBonus);
+                    ((IFishingHook) fishingHook).c$setIsLavaHook();
+                    pLevel.addFreshEntity(fishingHook);
+                }
             }
 
             pPlayer.awardStat(Stats.ITEM_USED.get(this));
