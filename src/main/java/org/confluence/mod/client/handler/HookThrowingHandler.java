@@ -33,7 +33,7 @@ public final class HookThrowingHandler {
                             localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
                             PlayerJumpHandler.flushState(false);
                         } else {
-                            localPlayer.addDeltaMovement(subtract.normalize().scale(0.15));
+                            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().scale(0.95).add(subtract.normalize().scale(0.15)));
                         }
                     }
                 });

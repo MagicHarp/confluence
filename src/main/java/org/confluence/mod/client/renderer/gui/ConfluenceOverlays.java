@@ -1,6 +1,5 @@
 package org.confluence.mod.client.renderer.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,6 @@ public class ConfluenceOverlays {
         if (gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("mana");
-        RenderSystem.enableBlend();
 
         int left = screenWidth / 2 - 91;
         int top = screenHeight - gui.leftHeight;
@@ -42,7 +40,6 @@ public class ConfluenceOverlays {
             guiGraphics.blit(MANA_BAR, left, top, 0, 28, width, 7, 82, 35);
         }
 
-        RenderSystem.disableBlend();
         gui.getMinecraft().getProfiler().pop();
     };
 
@@ -52,7 +49,6 @@ public class ConfluenceOverlays {
         if (gui.getMinecraft().options.hideGui || gui.getMinecraft().options.renderDebug) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("info");
-        RenderSystem.enableBlend();
 
         int top = screenHeight / 2;
         Font font = gui.getFont();
@@ -64,7 +60,6 @@ public class ConfluenceOverlays {
             top += font.lineHeight;
         }
 
-        RenderSystem.disableBlend();
         gui.getMinecraft().getProfiler().pop();
     };
 }

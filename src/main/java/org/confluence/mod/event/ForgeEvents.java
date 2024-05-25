@@ -201,5 +201,10 @@ public final class ForgeEvents {
             if (randomSource.nextFloat() < 0.5F * event.getDifficulty().getSpecialMultiplier()) size = 4;
             blackSlime.setSize(size, true);
         }
+//        if (mob instanceof Enemy && event.getSpawnType() != MobSpawnType.SPAWN_EGG && mob.level() instanceof ServerLevel serverLevel) {
+//            for (int i = 0; i < 4; i++) {
+//                mob.getType().spawn(serverLevel, mob.blockPosition(), MobSpawnType.SPAWN_EGG);
+//            }
+//        }
     }
 }

@@ -85,14 +85,15 @@ public final class ModBlocks {
     public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
     public static final RegistryObject<BlockEntityType<Torches.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(
         Torches.Entity::new, Torches.DEMON_TORCH.stand.get(), Torches.DEMON_TORCH.wall.get(), Torches.RAINBOW_TORCH.stand.get(), Torches.RAINBOW_TORCH.wall.get()).build(null));
-    //chain
-    public static final RegistryObject<BaseChainsBlock> RUBY_CHAINS = registerWithItem("ruby_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> AMBER_CHAINS = registerWithItem("amber_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> TOPAZ_CHAINS = registerWithItem("topaz_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> EMERALD_CHAINS = registerWithItem("emerald_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> SAPPHIRE_CHAINS = registerWithItem("sapphire_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> DIAMOND_CHAINS = registerWithItem("diamond_chains", BaseChainsBlock::new);
-    public static final RegistryObject<BaseChainsBlock> AMETHYST_CHAINS = registerWithItem("amethyst_chains", BaseChainsBlock::new);
+    // chain
+    public static final RegistryObject<BaseChainBlock> RUBY_CHAIN = registerWithItem("ruby_chain", () -> new BaseChainBlock(MapColor.COLOR_RED));
+    public static final RegistryObject<BaseChainBlock> AMBER_CHAIN = registerWithItem("amber_chain", () -> new BaseChainBlock(MapColor.COLOR_ORANGE));
+    public static final RegistryObject<BaseChainBlock> TOPAZ_CHAIN = registerWithItem("topaz_chain", () -> new BaseChainBlock(MapColor.COLOR_YELLOW));
+    public static final RegistryObject<BaseChainBlock> EMERALD_CHAIN = registerWithItem("emerald_chain", () -> new BaseChainBlock(MapColor.EMERALD));
+    public static final RegistryObject<BaseChainBlock> SAPPHIRE_CHAIN = registerWithItem("sapphire_chain", () -> new BaseChainBlock(MapColor.COLOR_BLUE));
+    public static final RegistryObject<BaseChainBlock> DIAMOND_CHAIN = registerWithItem("diamond_chain", () -> new BaseChainBlock(MapColor.DIAMOND));
+    public static final RegistryObject<BaseChainBlock> AMETHYST_CHAIN = registerWithItem("amethyst_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
+
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }

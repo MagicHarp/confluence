@@ -761,13 +761,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hooks.AMETHYST_HOOK.get(), "紫晶钩");
         add(Hooks.WEB_SLINGER.get(), "蛛丝吊索");
         add(Hooks.SKELETRON_HAND.get(), "骷髅王之手");
-        add(RUBY_CHAINS.get(), "红玉锁链");
-        add(AMBER_CHAINS.get(), "琥珀锁链");
-        add(TOPAZ_CHAINS.get(), "黄玉锁链");
-        add(EMERALD_CHAINS.get(), "翡翠锁链");
-        add(SAPPHIRE_CHAINS.get(), "蓝玉锁链");
-        add(DIAMOND_CHAINS.get(), "钻石锁链");
-        add(AMETHYST_CHAINS.get(), "紫晶锁链");
+        add(RUBY_CHAIN.get(), "红玉锁链");
+        add(AMBER_CHAIN.get(), "琥珀锁链");
+        add(TOPAZ_CHAIN.get(), "黄玉锁链");
+        add(EMERALD_CHAIN.get(), "翡翠锁链");
+        add(SAPPHIRE_CHAIN.get(), "蓝玉锁链");
+        add(DIAMOND_CHAIN.get(), "钻石锁链");
+        add(AMETHYST_CHAIN.get(), "紫晶锁链");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");

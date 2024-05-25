@@ -17,7 +17,7 @@ public enum Hooks implements EnumRegister<AbstractHookItem> {
     RUBY_HOOK("ruby_hook", RubyHookItem::new),
     AMBER_HOOK("amber_hook", AmberHookItem::new),
     DIAMOND_HOOK("diamond_hook", DiamondHookItem::new),
-    WEB_SLINGER("web_slinger", WebSlingerItem::new), // 没有模型,使用就崩
+    WEB_SLINGER("web_slinger", WebSlingerItem::new),
     SKELETRON_HAND("skeletron_hand", SkeletronHandItem::new), // 没有模型,使用就崩
     ;
 

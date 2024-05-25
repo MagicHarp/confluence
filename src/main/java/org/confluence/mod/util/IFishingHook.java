@@ -9,6 +9,10 @@ public interface IFishingHook {
     ItemStack c$getBait();
 
     default float c$getBonus() {
-        return ((IBait) c$getBait().getItem()).getBaitBonus();
+        ItemStack itemStack = c$getBait();
+        if (itemStack != null && itemStack.getItem() instanceof IBait iBait) {
+            return iBait.getBaitBonus();
+        }
+        return 0.0F;
     }
 }

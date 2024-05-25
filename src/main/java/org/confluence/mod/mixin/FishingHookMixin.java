@@ -61,19 +61,19 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> isLavaTag(TagKey<Fluid> pTag) {
-        if (c$isLava()) return ModTags.FISHING_ABLE;
+        if (c$isLavaHook) return ModTags.FISHING_ABLE;
         return pTag;
     }
 
     @Redirect(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean isLavaBlock(BlockState instance, Block block) {
-        if (c$isLava()) return instance.is(block) || instance.is(Blocks.LAVA);
+        if (c$isLavaHook) return instance.is(block) || instance.is(Blocks.LAVA);
         return instance.is(block);
     }
 
     @ModifyArg(method = "getOpenWaterTypeForBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> fluidType(TagKey<Fluid> pTag) {
-        if (c$isLava()) return ModTags.FISHING_ABLE;
+        if (c$isLavaHook) return ModTags.FISHING_ABLE;
         return pTag;
     }
 
@@ -157,11 +157,6 @@ public abstract class FishingHookMixin implements IFishingHook {
     @Unique
     private FishingHook c$getSelf() {
         return (FishingHook) (Object) this;
-    }
-
-    @Unique
-    private boolean c$isLava() {
-        return c$isLavaHook;
     }
 
     @Unique

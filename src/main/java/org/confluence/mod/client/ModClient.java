@@ -27,6 +27,8 @@ import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.hook.BaseHookRenderer;
+import org.confluence.mod.client.renderer.entity.hook.SkeletronHandRenderer;
+import org.confluence.mod.client.renderer.entity.hook.WebSlingerRenderer;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
@@ -80,12 +82,14 @@ public final class ModClient {
 
         event.registerEntityRenderer(ModEntities.DEMON_EYE.get(), DemonEyeRenderer::new);
 
+        event.registerEntityRenderer(ModEntities.BASE_BULLET.get(), BulletRenderer::new);
         event.registerEntityRenderer(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
         event.registerEntityRenderer(ModEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.BASE_BULLET.get(), BulletRenderer::new);
+        event.registerEntityRenderer(ModEntities.WEB_SLINGER.get(), WebSlingerRenderer::new);
+        event.registerEntityRenderer(ModEntities.SKELETRON_HAND.get(), SkeletronHandRenderer::new);
 
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

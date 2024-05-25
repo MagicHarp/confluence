@@ -48,18 +48,10 @@ public record HookThrowingPacketC2S(boolean throwing, int id) {
                         if (itemStack.getOrCreateTag().get("hooks") instanceof ListTag list) {
                             AbstractHookItem.HookType hookType = item.getHookType();
                             if (hookType == AbstractHookItem.HookType.SINGLE) {
-                                list.removeIf(tag1 -> {
-                                    int id = ((CompoundTag) tag1).getInt("id");
-                                    if (level.getEntity(id) instanceof AbstractHookEntity hookEntity) {
-                                        hookEntity.discard();
-                                    }
-                                    return true;
-                                });
-                            } else if (hookType == AbstractHookItem.HookType.SIMULTANEOUS) {
-                                int id = ((CompoundTag)list.remove(0)).getInt("id");
-                                if (level.getEntity(id) instanceof AbstractHookEntity hookEntity) {
-                                    hookEntity.discard();
-                                }
+                                AbstractHookItem.removeAll(list, level);
+                            } else if (hookType == AbstractHookItem.HookType.SIMULTANEOUS && list.size() == item.getHookAmount()) {
+                                AbstractHookEntity hookEntity = AbstractHookItem.getHookEntity(list.remove(0), level);
+                                if (hookEntity != null) hookEntity.discard();
                             }
                             list.add(tag);
                         }
