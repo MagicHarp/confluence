@@ -44,7 +44,7 @@ public class BaseBulletEntity extends Projectile {
         super(ModEntities.BASE_BULLET.get(), level);
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
-        setNoGravity(variant.gravity > 0.0);
+        setNoGravity(variant.gravity <= 0.0);
         if (itemPrefix != null) {
             this.attackDamage = (float) itemPrefix.attackDamage;
             this.criticalChance = (float) itemPrefix.criticalChance;
@@ -88,7 +88,7 @@ public class BaseBulletEntity extends Projectile {
         double offY = getY() + vec3.y;
         double offZ = getZ() + vec3.z;
         setDeltaMovement(vec3.scale(0.93));
-        if (getGravity() > 0.0) {
+        if (!isNoGravity()) {
             Vec3 vec31 = getDeltaMovement();
             setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
         }
