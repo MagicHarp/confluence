@@ -67,6 +67,10 @@ public enum Torches implements EnumRegister<Torches.ColorfulTorchBlock> {
     public static class ColorfulTorchBlock extends TorchBlock {
         private final ColorPointLight.Template torchColor;
 
+        public ColorfulTorchBlock(float radius, float r, float g, float b, float a) {
+            this(new ColorPointLight.Template(radius, r, g, b, a));
+        }
+
         public ColorfulTorchBlock(float radius, float r, float g, float b) {
             this(new ColorPointLight.Template(radius, r, g, b, 1.0F));
         }
