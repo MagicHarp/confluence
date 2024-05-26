@@ -58,7 +58,7 @@ public enum Baits implements EnumRegister<Baits.BaitItem> {
     SNAIL("snail", WHITE, 0.1F),
     STINKBUG("stinkbug", WHITE, 0.1F),
     SULPHUR_BUTTERFLY("sulphur_butter", WHITE, 0.1F),
-    TREE_NYMPH_BUTTERFLY("tree_numph_butter_fly", ORANGE, 0.5F),
+    TREE_NYMPH_BUTTERFLY("tree_numph_butterfly", ORANGE, 0.5F),
     TRUFFLE_WORM("truffle_worm", ORANGE, 6.66F),
     ULYSSES_BUTTERFLY("ulysses_butterfly", BLUE, 0.2F),
     WATER_STRIDER("water_strider", BLUE, 0.17F),
