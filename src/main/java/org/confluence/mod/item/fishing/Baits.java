@@ -1,5 +1,6 @@
 package org.confluence.mod.item.fishing;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -93,7 +94,7 @@ public enum Baits implements EnumRegister<Baits.BaitItem> {
 
         @Override
         public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, List<Component> list, @NotNull TooltipFlag pIsAdvanced) {
-            list.add(Component.translatable("info.confluence.bait", ATTRIBUTE_MODIFIER_FORMAT.format(getBaitBonus() * 100.0)));
+            list.add(Component.translatable("info.confluence.bait", ATTRIBUTE_MODIFIER_FORMAT.format(getBaitBonus() * 100.0)).withStyle(style -> style.withColor(ChatFormatting.BLUE)));
         }
     }
 

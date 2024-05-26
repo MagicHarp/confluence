@@ -99,7 +99,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.weather_radio.snow", "Weather: Snow, Wind Speed: %s");
         add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
-        add("info.confluence.bait", "Bait Power: %s");
+        add("info.confluence.bait", "Bait Power: %s%%");
 
         add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
         add("item.confluence.medicated_bandage.tooltip", "Immunity to Poison and Bleeding");
