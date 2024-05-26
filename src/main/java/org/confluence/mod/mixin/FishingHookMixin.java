@@ -18,7 +18,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
-import org.confluence.mod.item.fishing.IBait;
+import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.IFishingHook;
@@ -133,7 +133,7 @@ public abstract class FishingHookMixin implements IFishingHook {
             Inventory inventory = owner.getInventory();
             float bonus = 1.0F;
             for (ItemStack itemStack : inventory.offhand) {
-                if (itemStack.getItem() instanceof IBait iBait) {
+                if (itemStack.getItem() instanceof Baits.IBait iBait) {
                     this.c$bait = itemStack;
                     bonus += iBait.getBaitBonus();
                     break;
@@ -142,7 +142,7 @@ public abstract class FishingHookMixin implements IFishingHook {
             }
             if (c$bait == null) {
                 for (ItemStack itemStack : inventory.items) {
-                    if (itemStack.getItem() instanceof IBait iBait) {
+                    if (itemStack.getItem() instanceof Baits.IBait iBait) {
                         this.c$bait = itemStack;
                         bonus += iBait.getBaitBonus();
                         break;

@@ -20,6 +20,7 @@ import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
@@ -126,7 +127,7 @@ public final class ModTabs {
                 output.accept(ACTUATORS.get());
                 output.accept(ALTAR_BLOCK.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
-
+                for (Baits baits : Baits.values()) output.accept(baits.get());
             })
             .build());
     // 工具

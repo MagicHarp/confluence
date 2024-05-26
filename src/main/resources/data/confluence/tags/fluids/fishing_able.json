@@ -3,6 +3,8 @@
         "minecraft:water",
         "minecraft:flowing_water",
         "minecraft:lava",
-        "minecraft:flowing_lava"
+        "minecraft:flowing_lava",
+        "confluence:honey",
+        "confluence:flowing_honey"
     ]
 }

@@ -109,6 +109,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.weather_radio.snow", "天气: 下雪, 风速: %s");
         add("info.confluence.weather_radio.thunder", "天气: 雷暴, 风速: %s");
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
+        add("info.confluence.bait", "鱼饵力: %s");
 
         add("item.confluence.adhesive_bandage.tooltip", "对流血免疫");
         add("item.confluence.medicated_bandage.tooltip", "对中毒和流血免疫");
