@@ -32,7 +32,7 @@ public enum Hooks implements EnumRegister<AbstractHookItem> {
     ILLUMINANT_HOOK("illuminant_hook", () -> new MimicHookItem(MimicHookEntity.Variant.ILLUMINANT)),
     WORM_HOOK("worm_hook", () -> new MimicHookItem(MimicHookEntity.Variant.WORM)),
     TENDON_HOOK("tendon_hook", () -> new MimicHookItem(MimicHookEntity.Variant.TENDON)),
-    /* todo 反重力钩 */
+    // todo ANTI_GRAVITY_HOOK("anti_gravity_hook", AntiGravityHookItem::new),
     SPOOKY_HOOK("spooky_hook", SpookyHookItem::new),
     CHRISTMAS_HOOK("christmas_hook", ChristmasHookItem::new),
     LUNAR_HOOK("lunar_hook", LunarHookItem::new),

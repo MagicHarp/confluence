@@ -58,10 +58,8 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
             Vec3 vec3 = getPosition(owner, owner.getBbHeight() * 0.65, partialTick);
             Vec3 vec31 = getPosition(entity, 0.25, partialTick);
             Vec3 vec32 = vec3.subtract(vec31).normalize();
-            float f5 = (float) Math.acos(vec32.y);
-            float f6 = (float) Math.atan2(vec32.z, vec32.x);
-            poseStack.mulPose(Axis.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
-            poseStack.mulPose(Axis.XP.rotationDegrees(f5 * Mth.RAD_TO_DEG));
+            poseStack.mulPose(Axis.YP.rotation(Mth.HALF_PI - (float) Math.atan2(vec32.z, vec32.x)));
+            poseStack.mulPose(Axis.XP.rotation((float) Math.acos(vec32.y)));
             poseStack.translate(-0.5, 0.0, -0.75);
             float distance = entity.distanceTo(owner);
             int floor = (int) distance;
@@ -71,7 +69,7 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
                 poseStack.translate(0.0, 1.0, 0.0);
             }
             float delta = distance - floor;
-            if (entity.lastDelta == 0.0 || entity.lastDelta - delta > 0.5F) entity.lastDelta = delta;
+            if (entity.lastDelta - delta > 0.5F || entity.lastDelta == 0.0) entity.lastDelta = delta;
             delta = Mth.lerp(partialTick, entity.lastDelta, delta);
             poseStack.scale(1.0F, delta, 1.0F);
             entity.lastDelta = delta;

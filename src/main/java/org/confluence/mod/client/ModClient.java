@@ -97,7 +97,7 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.HOOK_OF_DISSONANCE.get(), HookOfDissonanceRenderer::new);
         event.registerEntityRenderer(ModEntities.THORN_HOOK.get(), ThornHookRenderer::new);
         event.registerEntityRenderer(ModEntities.MIMIC_HOOK.get(), MimicHookRenderer::new);
-        /* todo 反重力钩 */
+        event.registerEntityRenderer(ModEntities.ANTI_GRAVITY_HOOK.get(), AntiGravityHookRenderer::new);
         event.registerEntityRenderer(ModEntities.SPOOKY_HOOK.get(), SpookyHookRenderer::new);
         event.registerEntityRenderer(ModEntities.CHRISTMAS_HOOK.get(), ChristmasHookRenderer::new);
         event.registerEntityRenderer(ModEntities.LUNAR_HOOK.get(), LunarHookRenderer::new);
