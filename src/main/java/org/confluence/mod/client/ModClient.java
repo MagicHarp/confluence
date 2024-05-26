@@ -26,9 +26,7 @@ import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
-import org.confluence.mod.client.renderer.entity.hook.BaseHookRenderer;
-import org.confluence.mod.client.renderer.entity.hook.SkeletronHandRenderer;
-import org.confluence.mod.client.renderer.entity.hook.WebSlingerRenderer;
+import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
@@ -90,6 +88,20 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(ModEntities.WEB_SLINGER.get(), WebSlingerRenderer::new);
         event.registerEntityRenderer(ModEntities.SKELETRON_HAND.get(), SkeletronHandRenderer::new);
+        event.registerEntityRenderer(ModEntities.SLIME_HOOK.get(), SlimeHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.FISH_HOOK.get(), FishHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.IVY_WHIP.get(), IvyWhipRenderer::new);
+        event.registerEntityRenderer(ModEntities.BAT_HOOK.get(), BatHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.CANDY_CANE_HOOK.get(), CandyCaneHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.DUAL_HOOK.get(), DualHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.HOOK_OF_DISSONANCE.get(), HookOfDissonanceRenderer::new);
+        event.registerEntityRenderer(ModEntities.THORN_HOOK.get(), ThornHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.MIMIC_HOOK.get(), MimicHookRenderer::new);
+        /* todo 反重力钩 */
+        event.registerEntityRenderer(ModEntities.SPOOKY_HOOK.get(), SpookyHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.CHRISTMAS_HOOK.get(), ChristmasHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.LUNAR_HOOK.get(), LunarHookRenderer::new);
+        /* todo 静止钩 */
 
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

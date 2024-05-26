@@ -1,39 +1,43 @@
 package org.confluence.mod.item.hook;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
-import org.confluence.mod.entity.hook.WebSlingerEntity;
+import org.confluence.mod.entity.hook.DualHookEntity;
 import org.confluence.mod.item.ModRarity;
 
-public class WebSlingerItem extends AbstractHookItem implements IHookFastThrow {
-    public WebSlingerItem() {
-        super(ModRarity.GREEN);
+public class DualHookItem extends AbstractHookItem {
+    public DualHookItem() {
+        super(ModRarity.LIGHT_RED);
     }
 
     @Override
     public int getHookAmount() {
-        return 8;
+        return 2;
     }
 
     @Override
     public float getHookRange() {
-        return 15.08F;
+        return 18.33F;
     }
 
     @Override
     public float getHookVelocity() {
-        return 1.0F;
+        return 1.4F;
     }
 
     @Override
     public AbstractHookEntity getHook(ItemStack itemStack, AbstractHookItem item, Player player, Level level) {
-        return new WebSlingerEntity(item, player, level);
+        CompoundTag tag = itemStack.getOrCreateTag();
+        boolean isRed = tag.getBoolean("isRed");
+        tag.putBoolean("isRed", !isRed);
+        return new DualHookEntity(item, player, level, isRed ? DualHookEntity.Variant.RED : DualHookEntity.Variant.BLUE);
     }
 
     @Override
     public HookType getHookType() {
-        return HookType.SIMULTANEOUS;
+        return HookType.INDIVIDUAL;
     }
 }

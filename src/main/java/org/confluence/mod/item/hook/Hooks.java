@@ -3,6 +3,7 @@ package org.confluence.mod.item.hook;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.entity.hook.MimicHookEntity;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
@@ -19,7 +20,23 @@ public enum Hooks implements EnumRegister<AbstractHookItem> {
     DIAMOND_HOOK("diamond_hook", DiamondHookItem::new),
     WEB_SLINGER("web_slinger", WebSlingerItem::new),
     SKELETRON_HAND("skeletron_hand", SkeletronHandItem::new),
-    ;
+    SLIME_HOOK("slime_hook", SlimeHookItem::new),
+    FISH_HOOK("fish_hook", FishHookItem::new),
+    IVY_WHIP("ivy_whip", IvyWhipItem::new),
+    BAT_HOOK("bat_hook", BatHookItem::new),
+    CANDY_CANE_HOOK("candy_cane_hook", CandyCaneHookItem::new),
+    // 困难模式
+    DUAL_HOOK("dual_hook", DualHookItem::new),
+    HOOK_OF_DISSONANCE("hook_of_dissonance", HookOfDissonanceItem::new),
+    THORN_HOOK("thorn_hook", ThornHookItem::new),
+    ILLUMINANT_HOOK("illuminant_hook", () -> new MimicHookItem(MimicHookEntity.Variant.ILLUMINANT)),
+    WORM_HOOK("worm_hook", () -> new MimicHookItem(MimicHookEntity.Variant.WORM)),
+    TENDON_HOOK("tendon_hook", () -> new MimicHookItem(MimicHookEntity.Variant.TENDON)),
+    /* todo 反重力钩 */
+    SPOOKY_HOOK("spooky_hook", SpookyHookItem::new),
+    CHRISTMAS_HOOK("christmas_hook", ChristmasHookItem::new),
+    LUNAR_HOOK("lunar_hook", LunarHookItem::new),
+    /* todo 静止钩 */;
 
     private final RegistryObject<AbstractHookItem> value;
 

@@ -22,7 +22,7 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
     protected final BaseHookModel model;
     protected final BlockRenderDispatcher dispatcher;
 
-    protected AbstractHookRenderer(EntityRendererProvider.Context pContext) {
+    public AbstractHookRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
         this.model = new BaseHookModel(pContext.bakeLayer(BaseHookModel.LAYER_LOCATION));
         this.dispatcher = pContext.getBlockRenderDispatcher();

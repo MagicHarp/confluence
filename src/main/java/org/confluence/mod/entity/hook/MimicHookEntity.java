@@ -15,15 +15,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.IntFunction;
 
-public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<BaseHookEntity.Variant> {
-    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(BaseHookEntity.class, EntityDataSerializers.INT);
+public class MimicHookEntity extends AbstractHookEntity implements VariantHolder<MimicHookEntity.Variant> {
+    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(MimicHookEntity.class, EntityDataSerializers.INT);
 
-    public BaseHookEntity(EntityType<BaseHookEntity> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public MimicHookEntity(EntityType<MimicHookEntity> entityType, Level pLevel) {
+        super(entityType, pLevel);
     }
 
-    public BaseHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
-        super(ModEntities.BASE_HOOK.get(), item, player, level);
+    public MimicHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
+        super(ModEntities.MIMIC_HOOK.get(), item, player, level);
         setVariant(variant);
     }
 
@@ -44,14 +44,9 @@ public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<
     }
 
     public enum Variant implements StringRepresentable {
-        GRAPPLING(0, "grappling"), // 抓钩
-        AMETHYST(1, "amethyst"), // 紫晶钩
-        TOPAZ(2, "topaz"), // 黄玉钩
-        SAPPHIRE(3, "sapphire"), // 蓝玉钩
-        EMERALD(4, "emerald"), // 翡翠钩
-        RUBY(5, "ruby"), // 红玉钩
-        AMBER(6, "amber"), // 琥珀钩
-        DIAMOND(7, "diamond"); // 钻石钩
+        ILLUMINANT(0, "illuminant"),
+        WORM(1, "worm"),
+        TENDON(2, "tendon");
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;

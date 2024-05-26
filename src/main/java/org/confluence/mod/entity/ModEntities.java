@@ -10,9 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.LavaFishingHook;
-import org.confluence.mod.entity.hook.BaseHookEntity;
-import org.confluence.mod.entity.hook.SkeletronHandEntity;
-import org.confluence.mod.entity.hook.WebSlingerEntity;
+import org.confluence.mod.entity.hook.*;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.confluence.mod.entity.projectile.BeeProjectile;
 import org.confluence.mod.entity.projectile.EffectThrownPotion;
@@ -45,9 +43,23 @@ public final class ModEntities {
 
     public static final RegistryObject<EntityType<BaseBulletEntity>> BASE_BULLET = ENTITIES.register("base_bullet", () -> EntityType.Builder.<BaseBulletEntity>of(BaseBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:base_bullet"));
 
-    public static final RegistryObject<EntityType<BaseHookEntity>> BASE_HOOK = ENTITIES.register("base_hook", () -> EntityType.Builder.<BaseHookEntity>of(BaseHookEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:base_hook"));
-    public static final RegistryObject<EntityType<WebSlingerEntity>> WEB_SLINGER = ENTITIES.register("web_slinger", () -> EntityType.Builder.<WebSlingerEntity>of(WebSlingerEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:web_slinger"));
-    public static final RegistryObject<EntityType<SkeletronHandEntity>> SKELETRON_HAND = ENTITIES.register("skeletron_hand", () -> EntityType.Builder.<SkeletronHandEntity>of(SkeletronHandEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:skeletron_hand"));
+    public static final RegistryObject<EntityType<BaseHookEntity>> BASE_HOOK = registerHook("base_hook", BaseHookEntity::new);
+    public static final RegistryObject<EntityType<WebSlingerEntity>> WEB_SLINGER = registerHook("web_slinger", WebSlingerEntity::new);
+    public static final RegistryObject<EntityType<SkeletronHandEntity>> SKELETRON_HAND = registerHook("skeletron_hand", SkeletronHandEntity::new);
+    public static final RegistryObject<EntityType<SlimeHookEntity>> SLIME_HOOK = registerHook("slime_hook", SlimeHookEntity::new);
+    public static final RegistryObject<EntityType<FishHookEntity>> FISH_HOOK = registerHook("fish_hook", FishHookEntity::new);
+    public static final RegistryObject<EntityType<IvyWhipEntity>> IVY_WHIP = registerHook("ivy_whip", IvyWhipEntity::new);
+    public static final RegistryObject<EntityType<BatHookEntity>> BAT_HOOK = registerHook("bat_hook", BatHookEntity::new);
+    public static final RegistryObject<EntityType<CandyCaneHookEntity>> CANDY_CANE_HOOK = registerHook("candy_cane_hook", CandyCaneHookEntity::new);
+    public static final RegistryObject<EntityType<DualHookEntity>> DUAL_HOOK = registerHook("dual_hook", DualHookEntity::new);
+    public static final RegistryObject<EntityType<HookOfDissonanceEntity>> HOOK_OF_DISSONANCE = registerHook("hook_of_dissonance", HookOfDissonanceEntity::new);
+    public static final RegistryObject<EntityType<ThornHookEntity>> THORN_HOOK = registerHook("thorn_hook", ThornHookEntity::new);
+    public static final RegistryObject<EntityType<MimicHookEntity>> MIMIC_HOOK = registerHook("mimic_hook", MimicHookEntity::new);
+    /* todo 反重力钩 */
+    public static final RegistryObject<EntityType<SpookyHookEntity>> SPOOKY_HOOK = registerHook("spooky_hook", SpookyHookEntity::new);
+    public static final RegistryObject<EntityType<ChristmasHookEntity>> CHRISTMAS_HOOK = registerHook("christmas_hook", ChristmasHookEntity::new);
+    public static final RegistryObject<EntityType<LunarHookEntity>> LUNAR_HOOK = registerHook("lunar_hook", LunarHookEntity::new);
+    /* todo 静止钩 */
 
     public static final RegistryObject<EntityType<FallingStarItemEntity>> FALLING_STAR_ITEM_ENTITY = ENTITIES.register("falling_star", () -> EntityType.Builder.<FallingStarItemEntity>of(FallingStarItemEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(16).updateInterval(20).build("confluence:falling_star"));
     public static final RegistryObject<EntityType<BeeProjectile>> BEE_PROJECTILE = ENTITIES.register("bee_projectile", () -> EntityType.Builder.<BeeProjectile>of(BeeProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:bee_projectile"));
@@ -60,5 +72,9 @@ public final class ModEntities {
                 .sized(2.04F, 2.04F)
                 .clientTrackingRange(10)
                 .build("confluence:" + i + "_slime"));
+    }
+
+    private static <E extends AbstractHookEntity> RegistryObject<EntityType<E>> registerHook(String id, EntityType.EntityFactory<E> supplier) {
+        return ENTITIES.register(id, () -> EntityType.Builder.of(supplier, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:" + id));
     }
 }

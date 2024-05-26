@@ -2,8 +2,6 @@ package org.confluence.mod.entity.hook;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -63,6 +61,18 @@ public abstract class AbstractHookEntity extends Projectile {
         entityData.set(DATA_HOOK_STATE, state.id);
     }
 
+    public double getPullVelocity() {
+        return 0.15;
+    }
+
+    protected void onHooked(BlockHitResult hitResult, ItemStack itemStack) {
+        BlockPos blockPos = hitResult.getBlockPos();
+        level().gameEvent(GameEvent.PROJECTILE_LAND, blockPos, GameEvent.Context.of(this, level().getBlockState(blockPos)));
+        setDeltaMovement(Vec3.ZERO);
+        setHookState(HookState.HOOKED);
+        this.hasImpulse = true;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -86,8 +96,7 @@ public abstract class AbstractHookEntity extends Projectile {
                 return;
             }
         }
-        Level level = level();
-        if (level.isClientSide) return;
+        if (level().isClientSide) return;
         Optional<ItemStack> hook = CuriosUtils.getSlot((LivingEntity) owner, "hook", 0);
         if (hook.isEmpty()) {
             discard();
@@ -101,7 +110,7 @@ public abstract class AbstractHookEntity extends Projectile {
         if (hookState == HookState.PUSH) {
             Vec3 pos = position();
             Vec3 nextPos = pos.add(motion);
-            BlockHitResult hitResult = level.clip(new ClipContext(pos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+            BlockHitResult hitResult = level().clip(new ClipContext(pos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
             if (hitResult.getType() != HitResult.Type.BLOCK) return;
             motion = motion.scale(0.5);
             if (hitResult.isInside()) {
@@ -110,18 +119,7 @@ public abstract class AbstractHookEntity extends Projectile {
                 setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
             }
             onHitBlock(hitResult);
-            BlockPos blockPos = hitResult.getBlockPos();
-            level.gameEvent(GameEvent.PROJECTILE_LAND, blockPos, GameEvent.Context.of(this, level.getBlockState(blockPos)));
-            setDeltaMovement(Vec3.ZERO);
-            setHookState(HookState.HOOKED);
-            this.hasImpulse = true;
-            if (hookType == AbstractHookItem.HookType.INDIVIDUAL && hook.get().getOrCreateTag().get("hooks") instanceof ListTag list) {
-                list.forEach(tag -> {
-                    if (level.getEntity(((CompoundTag) tag).getInt("id")) instanceof AbstractHookEntity hookEntity && hookEntity != this) {
-                        hookEntity.setHookState(HookState.POP);
-                    }
-                });
-            }
+            onHooked(hitResult, hook.get());
         }
     }
 

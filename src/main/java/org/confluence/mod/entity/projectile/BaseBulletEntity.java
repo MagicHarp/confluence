@@ -1,6 +1,5 @@
 package org.confluence.mod.entity.projectile;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -150,7 +149,6 @@ public class BaseBulletEntity extends Projectile {
         FROST(7, "frost", 5.0F, 0.5, 1.0F, ModParticles.RUBY_BULLET), // todo particle
         SPARK(8, "spark", 1.3F, 0.2, 1.0F, () -> ParticleTypes.LAVA.getType());
 
-        public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;
         private final String name;

@@ -1,29 +1,33 @@
 package org.confluence.mod.entity.hook;
 
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.hook.AbstractHookItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.IntFunction;
 
-public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<BaseHookEntity.Variant> {
-    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(BaseHookEntity.class, EntityDataSerializers.INT);
+public class DualHookEntity extends AbstractHookEntity implements VariantHolder<DualHookEntity.Variant> {
+    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DualHookEntity.class, EntityDataSerializers.INT);
 
-    public BaseHookEntity(EntityType<BaseHookEntity> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public DualHookEntity(EntityType<DualHookEntity> entityType, Level pLevel) {
+        super(entityType, pLevel);
     }
 
-    public BaseHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
-        super(ModEntities.BASE_HOOK.get(), item, player, level);
+    public DualHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
+        super(ModEntities.DUAL_HOOK.get(), item, player, level);
         setVariant(variant);
     }
 
@@ -43,20 +47,25 @@ public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<
         return Variant.byId(entityData.get(DATA_VARIANT_ID));
     }
 
+    @Override
+    protected void onHooked(BlockHitResult hitResult, ItemStack itemStack) {
+        super.onHooked(hitResult, itemStack);
+        if (itemStack.getOrCreateTag().get("hooks") instanceof ListTag list) {
+            list.forEach(tag -> {
+                AbstractHookEntity hookEntity = AbstractHookItem.getHookEntity(tag, (ServerLevel) level());
+                if (hookEntity != null && hookEntity != this) hookEntity.setHookState(HookState.POP);
+            });
+        }
+    }
+
     public enum Variant implements StringRepresentable {
-        GRAPPLING(0, "grappling"), // 抓钩
-        AMETHYST(1, "amethyst"), // 紫晶钩
-        TOPAZ(2, "topaz"), // 黄玉钩
-        SAPPHIRE(3, "sapphire"), // 蓝玉钩
-        EMERALD(4, "emerald"), // 翡翠钩
-        RUBY(5, "ruby"), // 红玉钩
-        AMBER(6, "amber"), // 琥珀钩
-        DIAMOND(7, "diamond"); // 钻石钩
+        RED(0, "red"),
+        BLUE(1, "blue");
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;
         private final String name;
-
+        
         Variant(int id, String name) {
             this.id = id;
             this.name = name;

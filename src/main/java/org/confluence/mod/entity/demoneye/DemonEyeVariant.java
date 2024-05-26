@@ -1,6 +1,5 @@
 package org.confluence.mod.entity.demoneye;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -26,7 +25,6 @@ public enum DemonEyeVariant implements StringRepresentable {
     OWL(12, "owl", false, 37.5, 8.0, 6),
     SPACESHIP(13, "spaceship", false, 30.0, 10.0, 4);
 
-    public static final Codec<DemonEyeVariant> CODEC = StringRepresentable.fromEnum(DemonEyeVariant::values);
     private static final IntFunction<DemonEyeVariant> BY_ID = ByIdMap.continuous(DemonEyeVariant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
     final int id;
     private final String name;

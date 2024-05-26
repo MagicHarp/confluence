@@ -15,16 +15,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.IntFunction;
 
-public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<BaseHookEntity.Variant> {
-    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(BaseHookEntity.class, EntityDataSerializers.INT);
+public class LunarHookEntity extends AbstractHookEntity implements VariantHolder<LunarHookEntity.Variant> {
+    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(LunarHookEntity.class, EntityDataSerializers.INT);
 
-    public BaseHookEntity(EntityType<BaseHookEntity> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public LunarHookEntity(EntityType<LunarHookEntity> entityType, Level pLevel) {
+        super(entityType, pLevel);
     }
 
-    public BaseHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
-        super(ModEntities.BASE_HOOK.get(), item, player, level);
+    public LunarHookEntity(AbstractHookItem item, Player player, Level level, Variant variant) {
+        super(ModEntities.LUNAR_HOOK.get(), item, player, level);
         setVariant(variant);
+    }
+
+    @Override
+    public double getPullVelocity() {
+        return 0.2196;
     }
 
     @Override
@@ -44,14 +49,10 @@ public class BaseHookEntity extends AbstractHookEntity implements VariantHolder<
     }
 
     public enum Variant implements StringRepresentable {
-        GRAPPLING(0, "grappling"), // 抓钩
-        AMETHYST(1, "amethyst"), // 紫晶钩
-        TOPAZ(2, "topaz"), // 黄玉钩
-        SAPPHIRE(3, "sapphire"), // 蓝玉钩
-        EMERALD(4, "emerald"), // 翡翠钩
-        RUBY(5, "ruby"), // 红玉钩
-        AMBER(6, "amber"), // 琥珀钩
-        DIAMOND(7, "diamond"); // 钻石钩
+        NEBULA(0, "nebula"), // 星云
+        SOLAR(1, "solar"), // 日耀
+        STARDUST(2, "stardust"), // 星尘
+        VORTEX(3, "vortex"); // 星旋
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;
