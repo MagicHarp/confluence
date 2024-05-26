@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -32,6 +33,7 @@ public abstract class AbstractHookEntity extends Projectile {
     private static final EntityDataAccessor<Integer> DATA_HOOK_STATE = SynchedEntityData.defineId(AbstractHookEntity.class, EntityDataSerializers.INT);
     private final float hookRangeSqr;
     private final AbstractHookItem.HookType hookType;
+    public float lastDelta = 0.0F;
 
     public AbstractHookEntity(EntityType<? extends AbstractHookEntity> entityType, Level pLevel) {
         super(entityType, pLevel);
@@ -121,6 +123,16 @@ public abstract class AbstractHookEntity extends Projectile {
                 });
             }
         }
+    }
+
+    @Override
+    public void shootFromRotation(@NotNull Entity pShooter, float pX, float pY, float pZ, float pVelocity, float pInaccuracy) {
+        float x = -Mth.sin(pY * Mth.DEG_TO_RAD) * Mth.cos(pX * Mth.DEG_TO_RAD);
+        float y = -Mth.sin((pX + pZ) * Mth.DEG_TO_RAD);
+        float z = Mth.cos(pY * Mth.DEG_TO_RAD) * Mth.cos(pX * Mth.DEG_TO_RAD);
+        shoot(x, y, z, pVelocity, pInaccuracy);
+        Vec3 motion = pShooter.getDeltaMovement();
+        setDeltaMovement(getDeltaMovement().add(motion.x, 0.0, motion.z));
     }
 
     public enum HookState implements StringRepresentable {

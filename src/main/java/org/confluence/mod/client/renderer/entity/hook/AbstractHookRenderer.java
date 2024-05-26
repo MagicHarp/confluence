@@ -63,11 +63,19 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
             poseStack.mulPose(Axis.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
             poseStack.mulPose(Axis.XP.rotationDegrees(f5 * Mth.RAD_TO_DEG));
             poseStack.translate(-0.5, 0.0, -0.75);
-            int distance = Math.round(entity.distanceTo(owner));
-            for (int i = 0; i < distance; i++) {
-                dispatcher.renderSingleBlock(getChain(entity), poseStack, multiBufferSource, skyLight, OverlayTexture.NO_OVERLAY);
+            float distance = entity.distanceTo(owner);
+            int floor = (int) distance;
+            BlockState chain = getChain(entity);
+            for (int i = 0; i < floor; i++) {
+                dispatcher.renderSingleBlock(chain, poseStack, multiBufferSource, skyLight, OverlayTexture.NO_OVERLAY);
                 poseStack.translate(0.0, 1.0, 0.0);
             }
+            float delta = distance - floor;
+            if (entity.lastDelta == 0.0 || entity.lastDelta - delta > 0.5F) entity.lastDelta = delta;
+            delta = Mth.lerp(partialTick, entity.lastDelta, delta);
+            poseStack.scale(1.0F, delta, 1.0F);
+            entity.lastDelta = delta;
+            dispatcher.renderSingleBlock(chain, poseStack, multiBufferSource, skyLight, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
         }
     }

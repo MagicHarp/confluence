@@ -28,7 +28,7 @@ public class FallingStarRenderer extends ItemEntityRenderer {
         super.render(itemEntity, entityYaw, partialTick, poseStack, multiBufferSource, fullBright);
 
         float delta = ((float) itemEntity.level().getGameTime() + partialTick) / 200.0F;
-        VertexConsumer vertexconsumer2 = multiBufferSource.getBuffer(RenderType.lightning());
+        VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.lightning());
         poseStack.pushPose();
         float y = Mth.sin(((float) itemEntity.getAge() + partialTick) / 10.0F + itemEntity.bobOffs) * 0.1F;
         poseStack.translate(0.0F, 0.35F + y, 0.0F);
@@ -38,10 +38,10 @@ public class FallingStarRenderer extends ItemEntityRenderer {
             poseStack.mulPose(Axis.YN.rotationDegrees(i * 60.0F + delta * 60.0F));
             poseStack.mulPose(Axis.ZP.rotationDegrees(i * 60.0F + delta * 90.0F));
             Matrix4f matrix4f = poseStack.last().pose();
-            vertex1(vertexconsumer2, matrix4f);
-            vertex2(vertexconsumer2, matrix4f);
-            vertex3(vertexconsumer2, matrix4f);
-            vertex4(vertexconsumer2, matrix4f);
+            vertex1(vertexConsumer, matrix4f);
+            vertex2(vertexConsumer, matrix4f);
+            vertex3(vertexConsumer, matrix4f);
+            vertex4(vertexConsumer, matrix4f);
         }
 
         poseStack.popPose();

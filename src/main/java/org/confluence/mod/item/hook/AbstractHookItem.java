@@ -37,9 +37,9 @@ public abstract class AbstractHookItem extends Item implements ICurioItem {
         CompoundTag nbt = itemStack.getOrCreateTag();
         if (nbt.get("hooks") instanceof ListTag list) {
             list.removeIf(tag -> getHookEntity(tag, level) == null);
-            if (getHookType() == HookType.SINGLE) {
+            if (this != Hooks.WEB_SLINGER.get()) {
                 if (list.isEmpty()) return true;
-                return list.stream().anyMatch(tag -> {
+                return list.stream().allMatch(tag -> {
                     AbstractHookEntity hookEntity = getHookEntity(tag, level);
                     return hookEntity == null || hookEntity.getHookState() == AbstractHookEntity.HookState.HOOKED;
                 });

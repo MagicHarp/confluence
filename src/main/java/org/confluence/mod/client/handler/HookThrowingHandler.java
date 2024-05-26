@@ -19,6 +19,7 @@ public final class HookThrowingHandler {
         CuriosUtils.getSlot(localPlayer, "hook", 0).ifPresent(itemStack -> {
             CompoundTag tag = itemStack.getTag();
             if (tag != null && tag.get("hooks") instanceof ListTag list) {
+                int count = list.size();
                 list.forEach(tag1 -> {
                     int id = ((CompoundTag) tag1).getInt("id");
                     if (localPlayer.level().getEntity(id) instanceof AbstractHookEntity hookEntity && hookEntity.getHookState() == AbstractHookEntity.HookState.HOOKED) {
@@ -33,7 +34,8 @@ public final class HookThrowingHandler {
                             localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
                             PlayerJumpHandler.flushState(false);
                         } else {
-                            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().scale(0.95).add(subtract.normalize().scale(0.15)));
+                            Vec3 motion = subtract.normalize().scale(0.15 / count);
+                            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().scale(0.96).add(motion));
                         }
                     }
                 });

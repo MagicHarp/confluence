@@ -50,8 +50,8 @@ public record HookThrowingPacketC2S(boolean throwing, int id) {
                             if (hookType == AbstractHookItem.HookType.SINGLE) {
                                 AbstractHookItem.removeAll(list, level);
                             } else if (hookType == AbstractHookItem.HookType.SIMULTANEOUS && list.size() == item.getHookAmount()) {
-                                AbstractHookEntity hookEntity = AbstractHookItem.getHookEntity(list.remove(0), level);
-                                if (hookEntity != null) hookEntity.discard();
+                                AbstractHookEntity hookEntity = AbstractHookItem.getHookEntity(list.get(0), level);
+                                if (hookEntity != null) hookEntity.setHookState(AbstractHookEntity.HookState.POP);
                             }
                             list.add(tag);
                         }
