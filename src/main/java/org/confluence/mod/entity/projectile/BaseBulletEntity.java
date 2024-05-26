@@ -44,6 +44,7 @@ public class BaseBulletEntity extends Projectile {
         setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
         setOwner(player);
         setNoGravity(variant.gravity <= 0.0);
+        setVariant(variant);
         if (itemPrefix != null) {
             this.attackDamage = (float) itemPrefix.attackDamage;
             this.criticalChance = (float) itemPrefix.criticalChance;
