@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.entity;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;

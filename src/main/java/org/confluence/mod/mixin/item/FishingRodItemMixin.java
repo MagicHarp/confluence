@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.item;
 
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

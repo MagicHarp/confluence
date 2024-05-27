@@ -14,14 +14,16 @@ import org.confluence.mod.effect.ModEffects;
 public interface IManaWeapon {
     default int getManaCost(ItemStack itemStack, int amount) {
         CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
-        if (prefix != null) amount *= (1 + prefix.getDouble("manaCost"));
+        if (prefix != null) amount *= (1.0 + prefix.getDouble("manaCost"));
         return amount;
     }
 
     default int getAttackSpeed(ItemStack itemStack, int amount) {
-        CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
-        if (prefix != null) amount *= (1 - prefix.getDouble("attackSpeed"));
-        return amount;
+        return PrefixProvider.getAttackSpeed(itemStack, amount);
+    }
+
+    default float getVelocity(ItemStack itemStack, float velocity) {
+        return PrefixProvider.getVelocity(itemStack, velocity);
     }
 
     static float apply(DamageSource damageSource, float amount) {

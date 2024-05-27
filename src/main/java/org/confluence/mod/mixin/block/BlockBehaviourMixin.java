@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.block;
 
 import de.dafuqs.revelationary.RevelationRegistry;
 import net.minecraft.core.BlockPos;

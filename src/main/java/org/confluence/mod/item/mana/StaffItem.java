@@ -1,7 +1,6 @@
 package org.confluence.mod.item.mana;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -46,7 +45,7 @@ public class StaffItem extends Item implements IManaWeapon {
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
             BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, optional.orElse(null));
-            baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+            baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, getVelocity(itemStack, 1.5F), 1.0F);
             level.addFreshEntity(baseBulletEntity);
             player.getCooldowns().addCooldown(this, getAttackSpeed(itemStack, 20));
             level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.REGULAR_STAFF_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);

@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.entity;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.ParticleOptions;

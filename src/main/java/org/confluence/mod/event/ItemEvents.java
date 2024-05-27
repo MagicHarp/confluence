@@ -13,6 +13,7 @@ import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -118,5 +119,11 @@ public final class ItemEvents {
         IHighTestFishingLine.apply(event);
         if (event.isCanceled()) return;
         ITackleBox.apply(event.getHookEntity(), event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void arrowLoose(ArrowLooseEvent event) {
+        PrefixProvider.getPrefix(event.getBow()).ifPresent(itemPrefix ->
+            event.setCharge((int) Math.ceil(event.getCharge() * (1.0 + itemPrefix.attackSpeed))));
     }
 }

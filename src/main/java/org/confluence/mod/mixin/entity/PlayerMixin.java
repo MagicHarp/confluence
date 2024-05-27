@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.entity;
 
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
