@@ -8,8 +8,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.datagen.limit.CustomModel;
 
-public class BasePlantBlock extends FlowerBlock {
+public class BasePlantBlock extends FlowerBlock implements CustomModel {
     public BasePlantBlock() {
         super(MobEffects.GLOWING,5,BlockBehaviour.Properties.copy(Blocks.DANDELION));
     }
