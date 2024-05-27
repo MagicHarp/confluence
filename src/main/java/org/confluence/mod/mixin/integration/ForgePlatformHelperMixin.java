@@ -12,4 +12,9 @@ public abstract class ForgePlatformHelperMixin {
     private void disable(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(false);
     }
+
+    @Inject(method = "isDevelopmentEnvironment", at = @At("RETURN"), cancellable = true)
+    private void isNot(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(false);
+    }
 }
