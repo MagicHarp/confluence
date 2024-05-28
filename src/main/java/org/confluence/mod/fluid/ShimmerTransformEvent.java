@@ -1,16 +1,17 @@
 package org.confluence.mod.fluid;
 
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Cancelable
@@ -41,6 +42,32 @@ public class ShimmerTransformEvent extends Event {
                 if (entry.getKey().test(sourceItem)) {
                     this.targets = entry.getValue();
                     return targets;
+                }
+            }
+            RegistryAccess registryAccess = source.level().registryAccess();
+            for (Recipe<?> recipe : ((ServerLevel) source.level()).getServer().getRecipeManager().getRecipes()) {
+                if (recipe.isSpecial() || recipe.isIncomplete()) continue;
+                ItemStack resultItem = recipe.getResultItem(registryAccess);
+                if (sourceItem.getCount() >= resultItem.getCount() && ItemStack.isSameItem(sourceItem, resultItem)) {
+                    int times = sourceItem.getCount() / resultItem.getCount();
+                    List<ItemStack> results = new ArrayList<>();
+                    for (Ingredient ingredient : recipe.getIngredients()) {
+                        ItemStack[] itemStacks = ingredient.getItems();
+                        if (itemStacks.length == 0) continue;
+                        ItemStack result = itemStacks[source.level().random.nextInt(itemStacks.length)].copy();
+                        int count = result.getCount() * times;
+                        while (count > 64) {
+                            ItemStack copy = result.copy();
+                            copy.setCount(64);
+                            results.add(copy);
+                            count -= 64;
+                        }
+                        result.setCount(count);
+                        results.add(result);
+                    }
+                    if (results.isEmpty()) return null;
+                    sourceItem.shrink(resultItem.getCount() * times);
+                    return results;
                 }
             }
             return null;
