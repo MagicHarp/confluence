@@ -27,9 +27,10 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.fluid.FluidBuilder;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
-import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
@@ -138,6 +139,6 @@ public final class ModEvents {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> {
             CraftingHelper.register(new ResourceLocation(MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
         });
-        ModFluids.register(event);
+        FluidBuilder.register(event);
     }
 }

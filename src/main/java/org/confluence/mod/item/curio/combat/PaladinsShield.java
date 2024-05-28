@@ -15,8 +15,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.scores.Team;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 

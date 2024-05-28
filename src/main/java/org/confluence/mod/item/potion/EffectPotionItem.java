@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 
 import java.util.function.Supplier;
 

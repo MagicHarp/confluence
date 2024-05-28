@@ -27,10 +27,10 @@ import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
 
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;

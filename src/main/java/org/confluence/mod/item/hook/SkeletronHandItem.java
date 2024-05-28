@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.entity.hook.SkeletronHandEntity;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 
 public class SkeletronHandItem extends AbstractHookItem {
     public SkeletronHandItem() {

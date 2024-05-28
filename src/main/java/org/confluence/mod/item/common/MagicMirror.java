@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModSounds;
 import org.jetbrains.annotations.NotNull;
 

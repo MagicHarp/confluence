@@ -12,9 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModConfigs;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 

@@ -5,6 +5,8 @@
         "minecraft:lava",
         "minecraft:flowing_lava",
         "confluence:honey",
-        "confluence:flowing_honey"
+        "confluence:flowing_honey",
+        "confluence:shimmer",
+        "confluence:flowing_shimmer"
     ]
 }

@@ -1,9 +1,9 @@
 package org.confluence.mod.item.curio.expert;
 
 import net.minecraft.world.entity.LivingEntity;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.CuriosUtils;
 
 public class WormScarf extends BaseCurioItem implements ModRarity.Expert {

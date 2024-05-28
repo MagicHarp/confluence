@@ -1,13 +1,12 @@
 package org.confluence.mod.item;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
@@ -48,6 +47,7 @@ public final class ModItems {
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);
     public static final RegistryObject<HoneyBucketItem> HONEY_BUCKET = ITEMS.register("honey_bucket", HoneyBucketItem::new);
+    public static final RegistryObject<BucketItem> SHIMMER_BUCKET = ITEMS.register("shimmer_bucket", () -> new BucketItem(ModFluids.SHIMMER.fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> STAR = ITEMS.register("star", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SOUL_CAKE = ITEMS.register("soul_cake", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SUGAR_PLUM = ITEMS.register("sugar_plum", () -> new Item(new Item.Properties()));

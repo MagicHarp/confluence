@@ -1,7 +1,7 @@
 package org.confluence.mod.client.shimmer;
 
 import com.lowdragmc.shimmer.client.light.ColorPointLight;
-import org.confluence.mod.client.color.FloatRGBA;
+import org.confluence.mod.client.color.FloatRGB;
 
 public class DemonTorchColor extends ColorPointLight.Template {
     private static float demonTorch = 0.0F;
@@ -22,7 +22,7 @@ public class DemonTorchColor extends ColorPointLight.Template {
             demonTorch = 0.0F;
             demonTorchDir = 1.0F;
         }
-        FloatRGBA color = FloatRGBA.DEMON_A.mixture(FloatRGBA.DEMON_B, demonTorch);
+        FloatRGB color = FloatRGB.DEMON_A.mixture(FloatRGB.DEMON_B, demonTorch);
         this.r = color.red();
         this.g = color.green();
         this.b = color.blue();

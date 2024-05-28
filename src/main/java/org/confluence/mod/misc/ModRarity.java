@@ -1,4 +1,4 @@
-package org.confluence.mod.item;
+package org.confluence.mod.misc;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

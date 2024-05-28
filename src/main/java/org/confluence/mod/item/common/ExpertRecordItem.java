@@ -6,7 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.RecordItem;
 import org.confluence.mod.datagen.limit.CustomName;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
 public class ExpertRecordItem extends RecordItem implements ModRarity.Expert, CustomName {

@@ -3,7 +3,7 @@ package org.confluence.mod.item.fishing;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.EnumRegister;
 
 public enum QuestedFishes implements EnumRegister<Item> {

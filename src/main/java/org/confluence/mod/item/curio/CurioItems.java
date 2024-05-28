@@ -4,7 +4,6 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
@@ -14,6 +13,7 @@ import org.confluence.mod.item.curio.fishing.*;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;

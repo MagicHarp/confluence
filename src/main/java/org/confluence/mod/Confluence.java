@@ -15,6 +15,7 @@ import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.command.ModArgumentTypeInfos;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.misc.ModConfigs;
@@ -40,6 +41,7 @@ public final class Confluence {
     public Confluence() throws ClassNotFoundException {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
+        ModFluids.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
         ModItems.register(bus);

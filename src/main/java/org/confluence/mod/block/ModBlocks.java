@@ -1,6 +1,5 @@
 package org.confluence.mod.block;
 
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -8,7 +7,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,8 +17,8 @@ import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.spreadable.*;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.misc.ModFluids;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -74,8 +72,9 @@ public final class ModBlocks {
     // crafting
     public static final RegistryObject<AltarBlock> ALTAR_BLOCK = registerWithItem("altar_block", AltarBlock::new);
     // fluid
-    public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
+    public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY.fluid, BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_YELLOW)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
+    public static final RegistryObject<LiquidBlock> SHIMMER = registerWithoutItem("shimmer", () -> new LiquidBlock(ModFluids.SHIMMER.fluid, BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_PINK)));
     // misc
     public static final RegistryObject<RopeBlock> ROPE = registerWithItem("rope", RopeBlock::new);
     public static final RegistryObject<BlockEntityType<Torches.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(
@@ -89,7 +88,7 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> DIAMOND_CHAIN = registerWithItem("diamond_chain", () -> new BaseChainBlock(MapColor.DIAMOND));
     public static final RegistryObject<BaseChainBlock> AMETHYST_CHAIN = registerWithItem("amethyst_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
     //flower
-    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", () -> new BasePlantBlock());
+    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", BasePlantBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

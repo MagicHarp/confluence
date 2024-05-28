@@ -22,12 +22,12 @@ import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
-import org.confluence.mod.misc.ModFluids;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -130,17 +130,15 @@ public abstract class LivingEntityMixin {
             if (instance == null) return par1;
             double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
-        } else if (fluidstate.getType().getFluidType() == ModFluids.HONEY_TYPE.get()) {
-            if (self.level().isClientSide) {
-                if (self instanceof LocalPlayer) return par1.scale(0.6);
-            } else {
+        } else if (fluidstate.getType().getFluidType() == ModFluids.HONEY.fluidType.get()) {
+            if (!self.level().isClientSide) {
                 if (self.isOnFire()) self.clearFire();
                 if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
                     self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
                 }
             }
-            return self.hasEffect(ModEffects.FLIPPER.get()) ? new Vec3(0.91, par1.y * 0.96, 0.91) : par1.scale(0.6);
-        } else if (self.hasEffect(ModEffects.FLIPPER.get())) {
+        }
+        if (self.hasEffect(ModEffects.FLIPPER.get())) {
             return new Vec3(0.96, par1.y, 0.96);
         }
         return par1;

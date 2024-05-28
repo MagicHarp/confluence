@@ -7,7 +7,7 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
 
 import static org.confluence.mod.entity.projectile.BaseAmmoEntity.Variant.*;
-import static org.confluence.mod.item.ModRarity.*;
+import static org.confluence.mod.misc.ModRarity.*;
 
 public enum AmmoItems implements EnumRegister<BaseAmmoItem> {
     MUSKET_BALL("musket_ball", WHITE, MUSKET),

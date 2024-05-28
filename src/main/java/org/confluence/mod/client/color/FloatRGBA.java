@@ -3,8 +3,6 @@ package org.confluence.mod.client.color;
 import net.minecraft.util.Mth;
 
 public record FloatRGBA(float red, float green, float blue, float alpha) {
-    public static final FloatRGBA DEMON_A = new FloatRGBA(0.5F, 0.3F, 1.0F, 1.0F);
-    public static final FloatRGBA DEMON_B = new FloatRGBA(1.0F, 0.3F, 0.0F, 1.0F);
 
     public FloatRGBA mixture(FloatRGBA another, float anotherRatio) {
         float r = Mth.clamp(red - (red - another.red) * anotherRatio, 0.0F, 1.0F);
@@ -15,6 +13,6 @@ public record FloatRGBA(float red, float green, float blue, float alpha) {
     }
 
     public int get() {
-        return ((int) (red * 255) << 16) + ((int) (green * 255) << 8) + (int) (blue * 255);
+        return ((int) (alpha * 255) << 24) + ((int) (red * 255) << 16) + ((int) (green * 255) << 8) + (int) (blue * 255);
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.entity.hook.MimicHookEntity;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 
 public class MimicHookItem extends AbstractHookItem {
     private final MimicHookEntity.Variant variant;

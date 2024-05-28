@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
-import static org.confluence.mod.item.ModRarity.*;
+import static org.confluence.mod.misc.ModRarity.*;
 
 public enum Baits implements EnumRegister<Baits.BaitItem> {
     APPRENTICE_BAIT("apprentice_bait", BLUE, 0.15F),

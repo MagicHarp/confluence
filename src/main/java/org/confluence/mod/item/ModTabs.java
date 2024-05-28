@@ -138,6 +138,7 @@ public final class ModTabs {
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
+                output.accept(ModItems.SHIMMER_BUCKET.get());
                 output.accept(ROPE.get());
                 output.accept(ModItems.THROWING_KNIVES.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) output.accept(pickaxes.get());

@@ -5,7 +5,7 @@ import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.fishing.LavaFishingHook;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 
 public class HotlineFishingHook extends AbstractFishingRod {
     public HotlineFishingHook() {

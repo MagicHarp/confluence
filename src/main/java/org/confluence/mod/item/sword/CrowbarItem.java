@@ -4,8 +4,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.ModTiers;
+import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
 public class CrowbarItem extends SwordItem implements ModRarity.Master, CustomModel {

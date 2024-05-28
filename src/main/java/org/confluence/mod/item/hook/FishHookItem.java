@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.entity.hook.FishHookEntity;
-import org.confluence.mod.item.ModRarity;
+import org.confluence.mod.misc.ModRarity;
 
 public class FishHookItem extends AbstractHookItem implements IHookFastThrow {
     public FishHookItem() {

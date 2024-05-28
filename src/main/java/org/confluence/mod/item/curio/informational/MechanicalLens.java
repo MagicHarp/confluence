@@ -6,8 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
+import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
 public class MechanicalLens extends AbstractInfoCurio implements CustomModel, IFunctionCouldEnable {

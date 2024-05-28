@@ -13,12 +13,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.misc.ModFluids;
+import org.confluence.mod.fluid.ModFluids;
 import org.jetbrains.annotations.NotNull;
 
 public class HoneyBucketItem extends BucketItem {
     public HoneyBucketItem() {
-        super(ModFluids.HONEY, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1));
+        super(ModFluids.HONEY.fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1));
     }
 
     @Override

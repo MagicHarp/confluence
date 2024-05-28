@@ -6,6 +6,21 @@
             "g": 253,
             "b": 85,
             "a": 255,
+            "radius": 10
+        }
+    ],
+    "Bloom": [
+        {
+            "fluid": "confluence:shimmer"
+        }
+    ],
+    "LightBlock": [
+        {
+            "block": "confluence:shimmer",
+            "r": 255,
+            "g": 150,
+            "b": 255,
+            "a": 127,
             "radius": 7
         }
     ]
