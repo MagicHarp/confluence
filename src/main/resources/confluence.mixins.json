@@ -16,6 +16,7 @@
         "entity.AbstractArrowMixin",
         "entity.EntityMixin",
         "entity.FishingHookMixin",
+        "entity.ItemEntityMixin",
         "entity.LivingEntityMixin",
         "entity.PlayerMixin",
         "integration.ForgePlatformHelperMixin",
@@ -31,7 +32,7 @@
         "client.GuiMixin",
         "client.LevelRendererMixin",
         "client.LivingEntityRendererMixin",
-        "client.LocalPlayerMixin",
-        "client.MouseHandlerMixin"
+        "client.MouseHandlerMixin",
+        "entity.LocalPlayerMixin"
     ]
 }

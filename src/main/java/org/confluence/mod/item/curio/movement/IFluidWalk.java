@@ -7,7 +7,7 @@ import org.confluence.mod.fluid.ModFluids;
 
 public interface IFluidWalk {
     default boolean canStandOn(FluidState fluidState) {
-        return fluidState.is(Fluids.WATER) || fluidState.is(ModFluids.HONEY.fluid.get());
+        return fluidState.is(Fluids.WATER) || fluidState.is(ModFluids.HONEY.fluid().get());
     }
 
     Component WATER_HONEY = Component.translatable("curios.tooltip.fluid_walk.part");

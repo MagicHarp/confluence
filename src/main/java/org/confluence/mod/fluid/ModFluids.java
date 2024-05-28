@@ -28,8 +28,8 @@ import org.joml.Vector3f;
 import static org.confluence.mod.Confluence.MODID;
 
 public final class ModFluids {
-    public static FluidBuilder HONEY;
-    public static FluidBuilder SHIMMER;
+    public static FluidTriple HONEY;
+    public static FluidTriple SHIMMER;
 
     public static void initialize() {
         HONEY = FluidBuilder.builder(new ResourceLocation(MODID, "honey"))
@@ -77,7 +77,8 @@ public final class ModFluids {
                 protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, Fluid fluidIn, Direction direction) {
                     return !isSame(fluidIn);
                 }
-            }));
+            }))
+            .build();
 
         SHIMMER = FluidBuilder.builder(new ResourceLocation(MODID, "shimmer"))
             .properties(FluidType.Properties.create()
@@ -119,15 +120,16 @@ public final class ModFluids {
                 }
             })
             .block(ModBlocks.SHIMMER)
-            .bucket(ModItems.SHIMMER_BUCKET);
+            .bucket(ModItems.SHIMMER_BUCKET)
+            .build();
     }
 
     public static void registerInteraction() {
-        FluidInteractionRegistry.addInteraction(HONEY.fluidType.get(), new FluidInteractionRegistry.InteractionInformation(
+        FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
             (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.WATER_TYPE.get(),
             Blocks.HONEY_BLOCK.defaultBlockState()
         ));
-        FluidInteractionRegistry.addInteraction(HONEY.fluidType.get(), new FluidInteractionRegistry.InteractionInformation(
+        FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
             (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.LAVA_TYPE.get(),
             ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState()
         ));

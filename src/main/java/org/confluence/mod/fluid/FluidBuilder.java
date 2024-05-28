@@ -82,6 +82,10 @@ public class FluidBuilder {
         return this;
     }
 
+    public FluidTriple build() {
+        return new FluidTriple(fluidType, fluid, flowingFluid);
+    }
+
     public static FluidBuilder builder(ResourceLocation location) {
         FluidBuilder builder = new FluidBuilder(location);
         BUILDERS.put(location, builder);

@@ -39,6 +39,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int aggro;
     private float fishingPower;
     private int crystals;
+    private int fruits;
     private double starRange;
     private double coinRange;
     private double dropsRange;
@@ -55,6 +56,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = 0;
         this.fishingPower = 0.0F;
         this.crystals = 0;
+        this.fruits = 0;
         this.starRange = 1.75;
         this.coinRange = 2.0;
         this.dropsRange = 0.0;
@@ -177,7 +179,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public boolean increaseCrystals() {
         if (crystals < 15) {
-            crystals++;
+            this.crystals++;
             return true;
         }
         return false;
@@ -185,6 +187,18 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public int getCrystals() {
         return crystals;
+    }
+
+    public boolean increaseFruits() {
+        if (fruits < 20) {
+            this.fruits++;
+            return true;
+        }
+        return false;
+    }
+
+    public int getFruits() {
+        return fruits;
     }
 
     public double getStarRange() {
@@ -212,6 +226,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("aggro", aggro);
         nbt.putFloat("fishingPower", fishingPower);
         nbt.putInt("crystals", crystals);
+        nbt.putInt("fruits", fruits);
         nbt.putDouble("starRange", starRange);
         nbt.putDouble("coinRange", coinRange);
         nbt.putDouble("dropsRange", dropsRange);
@@ -230,6 +245,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = nbt.getInt("aggro");
         this.fishingPower = nbt.getFloat("fishingPower");
         this.crystals = nbt.getInt("crystals");
+        this.fruits = nbt.getInt("fruits");
         this.starRange = nbt.getDouble("starRange");
         this.coinRange = nbt.getDouble("coinRange");
         this.dropsRange = nbt.getDouble("dropsRange");
@@ -246,6 +262,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = playerAbility.aggro;
         this.fishingPower = playerAbility.fishingPower;
         this.crystals = playerAbility.crystals;
+        this.fruits = playerAbility.fruits;
         this.starRange = playerAbility.starRange;
         this.coinRange = playerAbility.coinRange;
         this.dropsRange = playerAbility.dropsRange;

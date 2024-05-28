@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class HoneyBucketItem extends BucketItem {
     public HoneyBucketItem() {
-        super(ModFluids.HONEY.fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1));
+        super(ModFluids.HONEY.fluid(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1));
     }
 
     @Override
