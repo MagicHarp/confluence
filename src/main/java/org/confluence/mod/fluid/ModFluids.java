@@ -26,6 +26,9 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import static org.confluence.mod.Confluence.MODID;
+import static org.confluence.mod.fluid.ShimmerTransformEvent.add;
+import static org.confluence.mod.item.curio.CurioItems.BALLOON_PUFFERFISH;
+import static org.confluence.mod.item.curio.CurioItems.SHINY_RED_BALLOON;
 
 public final class ModFluids {
     public static FluidTriple HONEY;
@@ -133,5 +136,9 @@ public final class ModFluids {
             (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.LAVA_TYPE.get(),
             ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState()
         ));
+    }
+
+    public static void registerShimmerTransform() {
+        add(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
     }
 }

@@ -101,6 +101,10 @@ dependencies {
     implementation fg.deobf("com.lowdragmc.shimmer:Shimmer-forge:1.20.1-0.2.4")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+//    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
+//    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
+//        jarJar.ranged(it, "[0.3.6,)")
+//    }
 }
 
 mixin {

@@ -9,6 +9,7 @@
         "accessor.BlockItemAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.LocalPlayerAccessor",
+        "accessor.LootParamsAccessor",
         "accessor.MinecraftAccessor",
         "accessor.RangedAttributeAccessor",
         "block.BlockBehaviourMixin",

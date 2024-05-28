@@ -68,6 +68,7 @@ public final class ModEvents {
         event.enqueueWork(() -> {
             NetworkHandler.register();
             ModFluids.registerInteraction();
+            ModFluids.registerShimmerTransform();
 
             if (!ModList.get().isLoaded("attributefix")) {
                 Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));

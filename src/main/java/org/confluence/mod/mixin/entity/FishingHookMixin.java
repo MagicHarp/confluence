@@ -15,12 +15,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.mixin.accessor.LootParamsAccessor;
 import org.confluence.mod.util.IFishingHook;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -119,8 +119,8 @@ public abstract class FishingHookMixin implements IFishingHook {
         return par1;
     }
 
-    @Redirect(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootParams$Builder;create(Lnet/minecraft/world/level/storage/loot/parameters/LootContextParamSet;)Lnet/minecraft/world/level/storage/loot/LootParams;"))
-    private LootParams getLuck(LootParams.Builder builder, LootContextParamSet set) {
+    @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
+    private LootParams modifyLuck(LootParams pParams) {
         Player owner = getPlayerOwner();
         AtomicDouble fishing = new AtomicDouble(luck);
         if (owner != null) {
@@ -151,7 +151,8 @@ public abstract class FishingHookMixin implements IFishingHook {
             }
             if (c$bait != null) fishing.set(fishing.get() * bonus);
         }
-        return builder.withLuck(fishing.floatValue()).create(set);
+        ((LootParamsAccessor) pParams).setLuck(fishing.floatValue());
+        return pParams;
     }
 
     @Unique
