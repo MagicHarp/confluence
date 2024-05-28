@@ -69,7 +69,7 @@ public class ShimmerTransformEvent extends Event {
     }
 
     public static void add(ItemStack source, ItemStack target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.isSameItem(itemStack, source), Collections.singletonList(target));
+        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), Collections.singletonList(target));
     }
 
     public static void add(Predicate<ItemStack> source, ItemStack target) {
@@ -77,7 +77,7 @@ public class ShimmerTransformEvent extends Event {
     }
 
     public static void add(ItemStack source, List<ItemStack> target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.isSameItem(itemStack, source), target);
+        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), target);
     }
 
     public static void add(Item source, Item target) {
