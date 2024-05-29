@@ -45,6 +45,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
             }
             if (c$transforming < event.getTransformTime()) {
                 this.c$transforming++;
+                self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
             } else {
                 List<ItemStack> targets = event.getTargets();
                 if (targets == null) {

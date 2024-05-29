@@ -2,21 +2,31 @@ package org.confluence.mod.fluid;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
+import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ * This event is called when an ItemEntity toss in shimmer.
+ * <p>
+ * This event is {@link net.minecraftforge.eventbus.api.Cancelable}
+ * and Server side only.
+ */
 @Cancelable
 public class ShimmerTransformEvent extends Event {
-    static final Hashtable<Predicate<ItemStack>, List<ItemStack>> ITEM_TRANSFORM = new Hashtable<>();
+    static final Hashtable<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> ITEM_TRANSFORM = new Hashtable<>();
     private final ItemEntity source;
     private @Nullable List<ItemStack> targets;
     private int transformTime = 20;
@@ -38,23 +48,12 @@ public class ShimmerTransformEvent extends Event {
     public @Nullable List<ItemStack> getTargets() {
         if (targets == null) {
             ItemStack sourceItem = source.getItem();
-            for (Map.Entry<Predicate<ItemStack>, List<ItemStack>> entry : ITEM_TRANSFORM.entrySet()) {
+            for (Map.Entry<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> entry : ITEM_TRANSFORM.entrySet()) {
                 if (entry.getKey().test(sourceItem)) {
-                    this.targets = entry.getValue();
-                    return targets;
-                }
-            }
-            RegistryAccess registryAccess = source.level().registryAccess();
-            for (Recipe<?> recipe : ((ServerLevel) source.level()).getServer().getRecipeManager().getRecipes()) {
-                if (recipe.isSpecial() || recipe.isIncomplete()) continue;
-                ItemStack resultItem = recipe.getResultItem(registryAccess);
-                if (sourceItem.getCount() >= resultItem.getCount() && ItemStack.isSameItem(sourceItem, resultItem)) {
-                    int times = sourceItem.getCount() / resultItem.getCount();
+                    int shrink = entry.getValue().getB();
+                    int times = sourceItem.getCount() / shrink;
                     List<ItemStack> results = new ArrayList<>();
-                    for (Ingredient ingredient : recipe.getIngredients()) {
-                        ItemStack[] itemStacks = ingredient.getItems();
-                        if (itemStacks.length == 0) continue;
-                        ItemStack result = itemStacks[source.level().random.nextInt(itemStacks.length)].copy();
+                    for (ItemStack result : entry.getValue().getA()) {
                         int count = result.getCount() * times;
                         while (count > 64) {
                             ItemStack copy = result.copy();
@@ -65,9 +64,45 @@ public class ShimmerTransformEvent extends Event {
                         result.setCount(count);
                         results.add(result);
                     }
-                    if (results.isEmpty()) return null;
+                    sourceItem.shrink(shrink * times);
+                    this.targets = results;
+                    return targets;
+                }
+            }
+            if (sourceItem.getDamageValue() != 0) return null;
+            RegistryAccess registryAccess = source.level().registryAccess();
+            boolean isHardCore = ConfluenceData.get((ServerLevel) source.level()).isHardCore();
+            for (Recipe<?> recipe : ((ServerLevel) source.level()).getServer().getRecipeManager().getRecipes()) {
+                if (recipe.isSpecial() || recipe.isIncomplete() || recipe instanceof AbstractCookingRecipe) continue;
+                ItemStack resultItem = recipe.getResultItem(registryAccess);
+                if (sourceItem.getCount() >= resultItem.getCount() && ItemStack.isSameItem(sourceItem, resultItem)) {
+                    int times = sourceItem.getCount() / resultItem.getCount();
+                    List<ItemStack> results = new ArrayList<>();
+                    for (Ingredient ingredient : recipe.getIngredients()) {
+                        ItemStack[] itemStacks = ingredient.getItems();
+                        if (itemStacks.length == 0 || Arrays.stream(itemStacks).allMatch(itemStack -> itemStack.is(ModTags.Items.HARDCORE))) {
+                            continue;
+                        }
+                        ItemStack input = itemStacks[source.level().random.nextInt(itemStacks.length)];
+                        while (!isHardCore && input.is(ModTags.Items.HARDCORE)) {
+                            input = itemStacks[source.level().random.nextInt(itemStacks.length)];
+                        }
+                        ItemStack result = input.copy();
+                        if (result.getItem().hasCraftingRemainingItem(result)) continue;
+                        int count = result.getCount() * times;
+                        while (count > 64) {
+                            ItemStack copy = result.copy();
+                            copy.setCount(64);
+                            results.add(copy);
+                            count -= 64;
+                        }
+                        result.setCount(count);
+                        results.add(result);
+                    }
+                    if (results.isEmpty()) continue;
                     sourceItem.shrink(resultItem.getCount() * times);
-                    return results;
+                    this.targets = results;
+                    return targets;
                 }
             }
             return null;
@@ -79,6 +114,9 @@ public class ShimmerTransformEvent extends Event {
         this.transformTime = transformTime;
     }
 
+    /**
+     * Determines how long should ItemEntity be transformed
+     */
     public int getTransformTime() {
         return transformTime;
     }
@@ -91,23 +129,19 @@ public class ShimmerTransformEvent extends Event {
         return coolDown;
     }
 
-    public static void add(Predicate<ItemStack> source, List<ItemStack> target) {
-        ITEM_TRANSFORM.put(source, target);
+    public static void add(Predicate<ItemStack> source, List<ItemStack> target, int shrink) {
+        ITEM_TRANSFORM.put(source, new Tuple<>(target, shrink));
     }
 
     public static void add(ItemStack source, ItemStack target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), Collections.singletonList(target));
-    }
-
-    public static void add(Predicate<ItemStack> source, ItemStack target) {
-        ITEM_TRANSFORM.put(source, Collections.singletonList(target));
+        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), new Tuple<>(Collections.singletonList(target), source.getCount()));
     }
 
     public static void add(ItemStack source, List<ItemStack> target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), target);
+        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), new Tuple<>(target, source.getCount()));
     }
 
     public static void add(Item source, Item target) {
-        ITEM_TRANSFORM.put(itemStack -> itemStack.is(source), Collections.singletonList(new ItemStack(target)));
+        ITEM_TRANSFORM.put(itemStack -> itemStack.is(source), new Tuple<>(Collections.singletonList(new ItemStack(target)), 1));
     }
 }

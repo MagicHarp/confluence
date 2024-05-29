@@ -18,7 +18,7 @@ import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 
 public final class PlayerUtils {
     public static void syncMana2Client(ServerPlayer serverPlayer, ManaStorage manaStorage) {
@@ -45,7 +45,7 @@ public final class PlayerUtils {
                 return;
             }
 
-            Supplier<Integer> receive = () -> {
+            IntSupplier receive = () -> {
                 float a = manaStorage.getMaxMana() / 7.0F + (manaStorage.hasManaRegenerationBand() ? 25 : 0) + 1;
                 float b = manaStorage.getCurrentMana() * 0.8F / manaStorage.getMaxMana() + 0.2F;
                 if (notMove) a += manaStorage.getMaxMana() / 2.0F;
@@ -56,7 +56,7 @@ public final class PlayerUtils {
         });
     }
 
-    public static boolean extractMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
+    public static boolean extractMana(ServerPlayer serverPlayer, IntSupplier sup) {
         if (serverPlayer.gameMode.isCreative()) return true;
 
         AtomicBoolean success = new AtomicBoolean();
@@ -70,7 +70,7 @@ public final class PlayerUtils {
         return success.get();
     }
 
-    public static void receiveMana(ServerPlayer serverPlayer, Supplier<Integer> sup) {
+    public static void receiveMana(ServerPlayer serverPlayer, IntSupplier sup) {
         serverPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> {
             if (manaStorage.receiveMana(sup)) syncMana2Client(serverPlayer, manaStorage);
         });

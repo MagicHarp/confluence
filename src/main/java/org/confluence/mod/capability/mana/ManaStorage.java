@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
+import java.util.function.IntSupplier;
 
 @AutoRegisterCapability
 public final class ManaStorage implements INBTSerializable<CompoundTag> {
@@ -65,16 +65,16 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.manaRegenerationBand = nbt.getBoolean("manaRegenerationBand");
     }
 
-    public boolean receiveMana(Supplier<Integer> sup) {
+    public boolean receiveMana(IntSupplier sup) {
         if (!canReceive()) return false;
-        int received = Math.min(sup.get(), getMaxMana() - currentMana);
+        int received = Math.min(sup.getAsInt(), getMaxMana() - currentMana);
         this.currentMana += received;
         return true;
     }
 
-    public boolean extractMana(Supplier<Integer> sup, ServerPlayer serverPlayer) {
+    public boolean extractMana(IntSupplier sup, ServerPlayer serverPlayer) {
         if (!canExtract()) return false;
-        int extract = (int) (sup.get() * extractRatio);
+        int extract = (int) (sup.getAsInt() * extractRatio);
         if (currentMana < extract) {
             if (CuriosUtils.noSameCurio(serverPlayer, IAutoGetMana.class)) return false;
             ItemStack toUse = null;

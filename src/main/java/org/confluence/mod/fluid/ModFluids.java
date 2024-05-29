@@ -140,5 +140,6 @@ public final class ModFluids {
 
     public static void registerShimmerTransform() {
         add(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
+        add(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
     }
 }

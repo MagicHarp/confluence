@@ -27,6 +27,7 @@ import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
+import org.confluence.mod.fluid.ShimmerTransformEvent;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
@@ -125,5 +126,10 @@ public final class ItemEvents {
     public static void arrowLoose(ArrowLooseEvent event) {
         PrefixProvider.getPrefix(event.getBow()).ifPresent(itemPrefix ->
             event.setCharge((int) Math.ceil(event.getCharge() * (1.0 + itemPrefix.attackSpeed))));
+    }
+
+    @SubscribeEvent
+    public static void shimmerTransform(ShimmerTransformEvent event) {
+
     }
 }

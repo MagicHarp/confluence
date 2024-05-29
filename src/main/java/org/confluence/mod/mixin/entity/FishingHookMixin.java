@@ -3,6 +3,9 @@ package org.confluence.mod.mixin.entity;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
@@ -15,6 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.LootParams;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.item.fishing.Baits;
@@ -27,14 +31,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
 @Mixin(FishingHook.class)
 public abstract class FishingHookMixin implements IFishingHook {
+    @Unique
+    private static final EntityDataAccessor<Boolean> DATA_LAVA = SynchedEntityData.defineId(FishingHook.class, EntityDataSerializers.BOOLEAN);
+
     @Shadow
     @Nullable
     public abstract Player getPlayerOwner();
@@ -43,14 +52,12 @@ public abstract class FishingHookMixin implements IFishingHook {
     @Final
     private int luck;
     @Unique
-    private boolean c$isLavaHook = false;
-    @Unique
     private ItemStack c$bait = null;
 
     @Unique
     @Override
     public void c$setIsLavaHook() {
-        this.c$isLavaHook = true;
+        c$getSelf().getEntityData().set(DATA_LAVA, true);
     }
 
     @Unique
@@ -61,19 +68,19 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> isLavaTag(TagKey<Fluid> pTag) {
-        if (c$isLavaHook) return ModTags.FISHING_ABLE;
+        if (c$isLavaHook()) return ModTags.FISHING_ABLE;
         return pTag;
     }
 
     @Redirect(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean isLavaBlock(BlockState instance, Block block) {
-        if (c$isLavaHook) return instance.is(block) || instance.is(Blocks.LAVA);
-        return instance.is(block);
+        if (c$isLavaHook()) return instance.is(block) || instance.is(Blocks.LAVA) || instance.is(ModBlocks.HONEY.get()) || instance.is(ModBlocks.SHIMMER.get());
+        return instance.is(block) || instance.is(ModBlocks.HONEY.get()) || instance.is(ModBlocks.SHIMMER.get());
     }
 
     @ModifyArg(method = "getOpenWaterTypeForBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> fluidType(TagKey<Fluid> pTag) {
-        if (c$isLavaHook) return ModTags.FISHING_ABLE;
+        if (c$isLavaHook()) return ModTags.FISHING_ABLE;
         return pTag;
     }
 
@@ -155,6 +162,11 @@ public abstract class FishingHookMixin implements IFishingHook {
         return pParams;
     }
 
+    @Inject(method = "defineSynchedData", at = @At("TAIL"))
+    private void define(CallbackInfo ci) {
+        c$getSelf().getEntityData().define(DATA_LAVA, false);
+    }
+
     @Unique
     private FishingHook c$getSelf() {
         return (FishingHook) (Object) this;
@@ -164,5 +176,10 @@ public abstract class FishingHookMixin implements IFishingHook {
     private boolean c$isInLava() {
         FishingHook self = c$getSelf();
         return self.level().getFluidState(self.blockPosition()).is(FluidTags.LAVA);
+    }
+
+    @Unique
+    private boolean c$isLavaHook() {
+        return c$getSelf().getEntityData().get(DATA_LAVA);
     }
 }
