@@ -17,12 +17,11 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class FluidBuilder {
-    private static final Hashtable<ResourceLocation, FluidBuilder> BUILDERS = new Hashtable<>();
+    static final Hashtable<ResourceLocation, FluidBuilder> BUILDERS = new Hashtable<>();
     public final RegistryObject<FluidType> fluidType;
     public final RegistryObject<FlowingFluid> fluid;
     public final RegistryObject<FlowingFluid> flowingFluid;
-    final String namespace;
-    final String id;
+    private final String namespace;
     private FluidType.Properties properties;
 
     private IClientFluidTypeExtensions extensions;
@@ -34,9 +33,9 @@ public class FluidBuilder {
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> source;
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> flowing;
 
-    private FluidBuilder(ResourceLocation location) {
+    FluidBuilder(ResourceLocation location) {
         this.namespace = location.getNamespace();
-        this.id = location.getPath();
+        String id = location.getPath();
         this.fluidType = RegistryObject.createOptional(location, ForgeRegistries.Keys.FLUID_TYPES.location(), namespace);
         this.fluid = RegistryObject.create(location, ForgeRegistries.FLUIDS);
         this.flowingFluid = RegistryObject.create(new ResourceLocation(namespace, "flowing_" + id), ForgeRegistries.FLUIDS);
@@ -84,12 +83,6 @@ public class FluidBuilder {
 
     public FluidTriple build() {
         return new FluidTriple(fluidType, fluid, flowingFluid);
-    }
-
-    public static FluidBuilder builder(ResourceLocation location) {
-        FluidBuilder builder = new FluidBuilder(location);
-        BUILDERS.put(location, builder);
-        return builder;
     }
 
     public static void register(RegisterEvent event) {

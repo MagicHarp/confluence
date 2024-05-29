@@ -20,12 +20,14 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
+import org.confluence.mod.client.model.entity.fshing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
+import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.entity.ModEntities;
@@ -58,6 +60,10 @@ public final class ModClient {
         event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
+
+        event.registerLayerDefinition(BaseFishingHookModel.WOOD, BaseFishingHookModel::createWoodLayer);
+        event.registerLayerDefinition(BaseFishingHookModel.REINFORCED, BaseFishingHookModel::createReinforcedLayer);
+        event.registerLayerDefinition(BaseFishingHookModel.SOULS, BaseFishingHookModel::createSoulsLayer);
     }
 
     @SubscribeEvent
@@ -84,7 +90,9 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
         event.registerEntityRenderer(ModEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
+        event.registerEntityRenderer(ModEntities.BASE_FISHING_HOOK.get(), BaseFishingHookRenderer::new);
         event.registerEntityRenderer(ModEntities.EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
+
         event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(ModEntities.WEB_SLINGER.get(), WebSlingerRenderer::new);
         event.registerEntityRenderer(ModEntities.SKELETRON_HAND.get(), SkeletronHandRenderer::new);

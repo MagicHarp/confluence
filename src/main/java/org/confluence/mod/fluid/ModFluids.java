@@ -35,7 +35,7 @@ public final class ModFluids {
     public static FluidTriple SHIMMER;
 
     public static void initialize() {
-        HONEY = FluidBuilder.builder(new ResourceLocation(MODID, "honey"))
+        HONEY = FluidTriple.builder(new ResourceLocation(MODID, "honey"))
             .properties(FluidType.Properties.create()
                 .density(1400)
                 .viscosity(2000)
@@ -83,7 +83,7 @@ public final class ModFluids {
             }))
             .build();
 
-        SHIMMER = FluidBuilder.builder(new ResourceLocation(MODID, "shimmer"))
+        SHIMMER = FluidTriple.builder(new ResourceLocation(MODID, "shimmer"))
             .properties(FluidType.Properties.create()
                 .density(800)
                 .lightLevel(7)
