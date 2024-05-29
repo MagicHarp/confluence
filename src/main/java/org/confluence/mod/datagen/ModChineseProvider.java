@@ -753,9 +753,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLDEN_COIN.get(), "金币");
         add(PLATINUM_COIN.get(), "铂金币");
         add(SHURIKEN.get(), "手里剑");
+        add(THROWING_KNIVES.get(), "投刀");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
+        add(SHIMMER_BUCKET.get(), "微光桶");
         //鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
+        add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
+        add(FishingPoles.FISHING_OF_SOULS.get(), "灵魂钓手");
+        add(FishingPoles.REINFORCED_FISHING_POLE.get(), "熔线钓竿");
         //鱼饵
         add(Baits.APPRENTICE_BAIT.get(), "学徒诱饵");
         add(Baits.JOURNEYMAN_BAIT.get(), "熟手诱饵");
