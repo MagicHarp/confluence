@@ -9,6 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
@@ -20,15 +22,17 @@ import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.fluid.ShimmerTransformEvent.add;
-import static org.confluence.mod.item.curio.CurioItems.BALLOON_PUFFERFISH;
-import static org.confluence.mod.item.curio.CurioItems.SHINY_RED_BALLOON;
+import static org.confluence.mod.item.curio.CurioItems.*;
 
 public final class ModFluids {
     public static FluidTriple HONEY;
@@ -139,7 +143,57 @@ public final class ModFluids {
     }
 
     public static void registerShimmerTransform() {
+        //饰品转化
         add(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
         add(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
+        add(MAGMA_STONE.get(), LAVA_CHARM.get());
+        add(LAVA_CHARM.get(), MAGMA_STONE.get());
+        add(SEXTANT.get(), WEATHER_RADIO.get());
+        add(WEATHER_RADIO.get(), FISHERMANS_POCKET_GUIDE.get());
+        add(FISHERMANS_POCKET_GUIDE.get(),SEXTANT.get());
+        add(BEZOAR.get(),ADHESIVE_BANDAGE.get());
+        add(ADHESIVE_BANDAGE.get(),BEZOAR.get());
+        add(ARMOR_POLISH.get(),VITAMINS.get());
+        add(VITAMINS.get(),ARMOR_POLISH.get());
+        add(POCKET_MIRROR.get(),BLINDFOLD.get());
+        add(BLINDFOLD.get(),POCKET_MIRROR.get());
+        add(FAST_CLOCK.get(),TRIFOLD_MAP.get());
+        add(TRIFOLD_MAP.get(),FAST_CLOCK.get());
+        add(NAZAR.get(),MEGAPHONE.get());
+        add(MEGAPHONE.get(),NAZAR.get());
+        add(HIGH_TEST_FISHING_LINE.get(),ANGLER_EARRING.get());
+        add(ANGLER_EARRING.get(),TACKLE_BOX.get());
+        add(TACKLE_BOX.get(),HIGH_TEST_FISHING_LINE.get());
+        //匣子转化
+        //宝石转化
+        add(Materials.TOPAZ.get(),Materials.ANOTHER_AMETHYST.get());
+        add(Materials.SAPPHIRE.get(),Materials.TOPAZ.get());
+        //锭到矿的转化
+        add(Materials.TITANIUM_INGOT.get(), Materials.RAW_TITANIUM.get());
+        add(Materials.ADAMANTITE_INGOT.get(), Materials.RAW_ADAMANTITE.get());
+        add(Materials.ORICHALCUM_INGOT.get(), Materials.RAW_ORICHALCUM.get());
+        add(Materials.MITHRIL_INGOT.get(), Materials.RAW_MITHRIL.get());
+        add(Materials.PALLADIUM_INGOT.get(), Materials.RAW_PALLADIUM.get());
+        add(Materials.COBALT_INGOT.get(), Materials.RAW_COBALT.get());
+        add(Materials.HELLSTONE_INGOT.get(), Materials.PRIMORDIAL_HELLSTONE_INGOT.get());
+        add(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), Materials.RAW_HELLSTONE.get());
+        add(Materials.ANOTHER_CRIMSON_INGOT.get(), Materials.RAW_ANOTHER_CRIMSON.get());
+        add(Materials.EBONY_INGOT.get(), Materials.RAW_EBONY.get());
+        add(Materials.METEORITE_INGOT.get(), Materials.RAW_METEORITE.get());
+        add(Materials.PLATINUM_INGOT.get(), Materials.RAW_PLATINUM.get());
+        add(Materials.TUNGSTEN_INGOT.get(), Materials.RAW_TUNGSTEN.get());
+        add(Materials.SILVER_INGOT.get(), Materials.RAW_SILVER.get());
+        add(Materials.LEAD_INGOT.get(), Materials.RAW_LEAD.get());
+        add(Materials.TIN_INGOT.get(), Materials.RAW_TIN.get());
+        //矿的下级转化（陨石，魔矿，猩红矿不参与这一过程）
+        add(Materials.RAW_TITANIUM.get(), Materials.RAW_ADAMANTITE.get());
+        add(Materials.RAW_ADAMANTITE.get(), Materials.RAW_ORICHALCUM.get());
+        add(Materials.RAW_ORICHALCUM.get(), Materials.RAW_MITHRIL.get());
+        add(Materials.RAW_PALLADIUM.get(), Materials.RAW_COBALT.get());
+        add(Materials.RAW_COBALT.get(), Materials.RAW_PLATINUM.get());
+        add(Materials.RAW_PLATINUM.get(), Materials.RAW_TUNGSTEN.get());
+        add(Materials.RAW_TUNGSTEN.get(), Materials.RAW_SILVER.get());
+        add(Materials.RAW_SILVER.get(), Materials.RAW_LEAD.get());
+        add(Materials.RAW_LEAD.get(), Materials.RAW_TIN.get());
     }
 }
