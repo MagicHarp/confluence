@@ -62,7 +62,13 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @Unique
     @Override
-    public ItemStack c$getBait() {
+    public boolean c$isLavaHook() {
+        return c$getSelf().getEntityData().get(DATA_LAVA);
+    }
+
+    @Unique
+    @Override
+    public @Nullable ItemStack c$getBait() {
         return c$bait;
     }
 
@@ -176,10 +182,5 @@ public abstract class FishingHookMixin implements IFishingHook {
     private boolean c$isInLava() {
         FishingHook self = c$getSelf();
         return self.level().getFluidState(self.blockPosition()).is(FluidTags.LAVA);
-    }
-
-    @Unique
-    private boolean c$isLavaHook() {
-        return c$getSelf().getEntityData().get(DATA_LAVA);
     }
 }

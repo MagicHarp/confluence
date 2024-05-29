@@ -21,6 +21,7 @@ import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IEntity;
+import org.confluence.mod.util.IFishingHook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -148,6 +149,13 @@ public abstract class EntityMixin implements IEntity {
             if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : c$isShouldRot) {
                 cir.setReturnValue(getOnPos(-2.2F));
             }
+        }
+    }
+
+    @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
+    private void fireProof(CallbackInfoReturnable<Boolean> cir) {
+        if (c$getSelf() instanceof IFishingHook fishingHook) {
+            cir.setReturnValue(fishingHook.c$isLavaHook());
         }
     }
 
