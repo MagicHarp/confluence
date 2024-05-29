@@ -123,7 +123,7 @@ public abstract class FishingHookMixin implements IFishingHook {
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
     private ResourceLocation loot(ResourceLocation par1) {
         if (c$isInLava()) return ModLootTables.FISHING_LAVA;
-        return ModTags.NOT_LAVA;
+        return par1;
     }
 
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
