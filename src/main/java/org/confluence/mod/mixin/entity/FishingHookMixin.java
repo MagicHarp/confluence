@@ -81,7 +81,7 @@ public abstract class FishingHookMixin implements IFishingHook {
     @ModifyArg(method = "getOpenWaterTypeForBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> fluidType(TagKey<Fluid> pTag) {
         if (c$isLavaHook()) return ModTags.FISHING_ABLE;
-        return pTag;
+        return ModTags.NOT_LAVA;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 0), index = 0)
@@ -123,7 +123,7 @@ public abstract class FishingHookMixin implements IFishingHook {
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
     private ResourceLocation loot(ResourceLocation par1) {
         if (c$isInLava()) return ModLootTables.FISHING_LAVA;
-        return par1;
+        return ModTags.NOT_LAVA;
     }
 
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
