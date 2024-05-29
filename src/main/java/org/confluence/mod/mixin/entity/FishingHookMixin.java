@@ -75,7 +75,7 @@ public abstract class FishingHookMixin implements IFishingHook {
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> isLavaTag(TagKey<Fluid> pTag) {
         if (c$isLavaHook()) return ModTags.FISHING_ABLE;
-        return pTag;
+        return ModTags.NOT_LAVA;
     }
 
     @Redirect(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))

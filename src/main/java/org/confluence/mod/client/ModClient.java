@@ -64,6 +64,8 @@ public final class ModClient {
         event.registerLayerDefinition(BaseFishingHookModel.WOOD, BaseFishingHookModel::createWoodLayer);
         event.registerLayerDefinition(BaseFishingHookModel.REINFORCED, BaseFishingHookModel::createReinforcedLayer);
         event.registerLayerDefinition(BaseFishingHookModel.SOULS, BaseFishingHookModel::createSoulsLayer);
+        event.registerLayerDefinition(BaseFishingHookModel.FLESH, BaseFishingHookModel::createFleshLayer);
+        event.registerLayerDefinition(BaseFishingHookModel.SCARAB, BaseFishingHookModel::createScarabLayer);
     }
 
     @SubscribeEvent

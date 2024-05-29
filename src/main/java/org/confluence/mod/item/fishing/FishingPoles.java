@@ -13,9 +13,11 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum FishingPoles implements EnumRegister<Item> {
-    WOOD_FISHING_POLE("wod_fishing_pole", WoodFishingPole::new),
+    WOOD_FISHING_POLE("wood_fishing_pole", WoodFishingPole::new),
     REINFORCED_FISHING_POLE("reinforced_fishing_pole", ReinforcedFishingPole::new),
     FISHING_OF_SOULS("fishing_of_souls", FishingOfSouls::new),
+    FLESHCATUCHER("fleshcathcer", Fleshcatcher::new),
+    SCARAB_FISHING_ROD("scarab_fishing_rod", ScarabFishingRod::new),
     HOTLINE_FISHING_HOOK("hotline_fishing_hook", HotlineFishingHook::new);
 
     private final RegistryObject<Item> value;

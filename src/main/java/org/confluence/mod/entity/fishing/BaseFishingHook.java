@@ -47,6 +47,8 @@ public class BaseFishingHook extends AbstractFishingHook implements VariantHolde
         WOOD(0, "wood"),
         REINFORCED(1, "reinforced"),
         SOULS(2, "souls"),
+        FLESH(3, "flesh"),
+        SCARAB(4, "scarab"),
         ;
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
