@@ -659,7 +659,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
-        //add(Materials.ANOTHER_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
@@ -704,7 +703,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.GOLDEN_SHORT_SWORD.get(), "金短剑");
         add(Swords.GOLDEN_BOARD_SWORD.get(), "金阔剑");
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
-        add(Swords.CROWBAR.get(), "物理学圣剑");
+        add(Swords.CROWBAR.get(), "撬棍");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
