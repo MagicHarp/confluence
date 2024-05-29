@@ -116,8 +116,8 @@ public enum Foods implements EnumRegister<Item> {
     CHAOS_FISH("chaos_fish", () -> new BaseFoodItem(FoodType.FISH)),
     MOTTLED_OILFISH("mottled_oilfish", () -> new BaseFoodItem(FoodType.FISH)),
     GOLDEN_CARP("golden_carp", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),
-    OBSIDIAN_FISH("obsidian_fish", () -> new BaseFoodItem(FoodType.FISH)),
-    FLASHFIN_KOI("flashfin_koi", () -> new BaseFoodItem(FoodType.FISH)),
+    OBSIDIAN_FISH("obsidian_fish", () -> new FireproofFoodItem(FoodType.FISH)),
+    FLASHFIN_KOI("flashfin_koi", () -> new FireproofFoodItem(FoodType.FISH)),
     ;
     private final RegistryObject<Item> value;
 
