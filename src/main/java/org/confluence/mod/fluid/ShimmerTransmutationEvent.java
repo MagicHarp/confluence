@@ -27,7 +27,6 @@ import java.util.function.Predicate;
 public abstract class ShimmerTransmutationEvent extends Event {
     static final Hashtable<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> ITEM_TRANSFORM = new Hashtable<>();
     protected final ItemEntity source;
-    protected @Nullable List<ItemStack> targets;
     protected int coolDown;
     protected int shrink = 0;
 
@@ -58,7 +57,7 @@ public abstract class ShimmerTransmutationEvent extends Event {
 
     @Cancelable
     public static class Pre extends ShimmerTransmutationEvent {
-        protected int transformTime = 20;
+        private int transformTime = 20;
 
         public Pre(ItemEntity source) {
             super(source);

@@ -49,8 +49,8 @@ public abstract class ItemEntityMixin implements IItemEntity {
                 self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
             } else {
                 ShimmerTransmutationEvent.Post post = new ShimmerTransmutationEvent.Post(self);
-                self.getItem().shrink(post.getShrink());
                 List<ItemStack> targets = post.getTargets();
+                self.getItem().shrink(post.getShrink());
                 if (targets == null) {
                     c$setup(self, post.getCoolDown());
                     return;
