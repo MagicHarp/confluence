@@ -26,15 +26,13 @@ public class LifeFruit extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (!level.isClientSide) {
-            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-                if (playerAbility.increaseFruits()) {
-                    itemStack.shrink(1);
-                    applyModifier(player, playerAbility);
-                    // todo sound
-                }
-            });
-        }
+        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            if (playerAbility.increaseFruits() && !level.isClientSide) {
+                itemStack.shrink(1);
+                applyModifier(player, playerAbility);
+                // todo sound
+            }
+        });
         return InteractionResultHolder.success(itemStack);
     }
 

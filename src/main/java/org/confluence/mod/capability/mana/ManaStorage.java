@@ -33,6 +33,8 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
     private double extractRatio;
     private boolean manaRegenerationBand;
 
+    private boolean arcaneCrystalUsed;
+
     public ManaStorage() {
         this.stars = 1;
         this.additionalMana = 0;
@@ -41,6 +43,8 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.magicAttackBonus = 1.0;
         this.extractRatio = 1.0;
         this.manaRegenerationBand = false;
+
+        this.arcaneCrystalUsed = false;
     }
 
     @Override
@@ -52,6 +56,7 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         nbt.putDouble("magicAttackBonus", magicAttackBonus);
         nbt.putDouble("extractRatio", extractRatio);
         nbt.putBoolean("manaRegenerationBand", manaRegenerationBand);
+        nbt.putBoolean("arcaneCrystalUsed", arcaneCrystalUsed);
         return nbt;
     }
 
@@ -63,6 +68,7 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.magicAttackBonus = nbt.getDouble("magicAttackBonus");
         this.extractRatio = nbt.getDouble("extractRatio");
         this.manaRegenerationBand = nbt.getBoolean("manaRegenerationBand");
+        this.arcaneCrystalUsed = nbt.getBoolean("arcaneCrystalUsed");
     }
 
     public boolean receiveMana(IntSupplier sup) {
@@ -173,6 +179,14 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         return manaRegenerationBand;
     }
 
+    public void setArcaneCrystalUsed() {
+        this.arcaneCrystalUsed = true;
+    }
+
+    public boolean isArcaneCrystalUsed() {
+        return arcaneCrystalUsed;
+    }
+
     public void copyFrom(ManaStorage manaStorage) {
         this.stars = manaStorage.stars;
         this.additionalMana = manaStorage.additionalMana;
@@ -180,5 +194,7 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.magicAttackBonus = manaStorage.magicAttackBonus;
         this.extractRatio = manaStorage.extractRatio;
         this.manaRegenerationBand = manaStorage.manaRegenerationBand;
+
+        this.arcaneCrystalUsed = manaStorage.arcaneCrystalUsed;
     }
 }

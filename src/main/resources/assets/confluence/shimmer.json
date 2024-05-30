@@ -1,6 +1,6 @@
 {
-    "ColorReference" : {
-        "shimmer" : {
+    "ColorReference": {
+        "shimmer": {
             "r": 255,
             "g": 150,
             "b": 255,
@@ -9,7 +9,15 @@
     },
     "LightItem": [
         {
-            "item_id" : "confluence:purple_torch",
+            "item_id": "minecraft:torch",
+            "r": 255,
+            "g": 253,
+            "b": 85,
+            "a": 255,
+            "radius": 7
+        },
+        {
+            "item_id": "confluence:purple_torch",
             "r": 229,
             "g": 0,
             "b": 229,
@@ -17,7 +25,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:yellow_torch",
+            "item_id": "confluence:yellow_torch",
             "r": 229,
             "g": 229,
             "b": 0,
@@ -25,7 +33,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:blue_torch",
+            "item_id": "confluence:blue_torch",
             "r": 0,
             "g": 25,
             "b": 255,
@@ -33,7 +41,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:green_torch",
+            "item_id": "confluence:green_torch",
             "r": 0,
             "g": 255,
             "b": 25,
@@ -41,7 +49,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:red_torch",
+            "item_id": "confluence:red_torch",
             "r": 255,
             "g": 25,
             "b": 25,
@@ -49,7 +57,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:orange_torch",
+            "item_id": "confluence:orange_torch",
             "r": 204,
             "g": 127,
             "b": 76,
@@ -57,7 +65,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:white_torch",
+            "item_id": "confluence:white_torch",
             "r": 255,
             "g": 255,
             "b": 255,
@@ -65,7 +73,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:ice_torch",
+            "item_id": "confluence:ice_torch",
             "r": 178,
             "g": 255,
             "b": 255,
@@ -73,7 +81,7 @@
             "radius": 12
         },
         {
-            "item_id" : "confluence:pink_torch",
+            "item_id": "confluence:pink_torch",
             "r": 178,
             "g": 76,
             "b": 178,
@@ -81,7 +89,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:bone_torch",
+            "item_id": "confluence:bone_torch",
             "r": 127,
             "g": 191,
             "b": 255,
@@ -89,7 +97,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:ultrabright_torch",
+            "item_id": "confluence:ultrabright_torch",
             "r": 191,
             "g": 255,
             "b": 255,
@@ -97,7 +105,7 @@
             "radius": 15
         },
         {
-            "item_id" : "confluence:cursed_torch",
+            "item_id": "confluence:cursed_torch",
             "r": 102,
             "g": 255,
             "b": 25,
@@ -105,7 +113,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:ichor_torch",
+            "item_id": "confluence:ichor_torch",
             "r": 255,
             "g": 255,
             "b": 178,
@@ -113,7 +121,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:desert_torch",
+            "item_id": "confluence:desert_torch",
             "r": 255,
             "g": 216,
             "b": 140,
@@ -121,7 +129,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:coral_torch",
+            "item_id": "confluence:coral_torch",
             "r": 63,
             "g": 255,
             "b": 204,
@@ -129,7 +137,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:corrupt_torch",
+            "item_id": "confluence:corrupt_torch",
             "r": 242,
             "g": 102,
             "b": 255,
@@ -137,7 +145,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:crimson_torch",
+            "item_id": "confluence:crimson_torch",
             "r": 229,
             "g": 51,
             "b": 76,
@@ -145,7 +153,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:hallowed_torch",
+            "item_id": "confluence:hallowed_torch",
             "r": 255,
             "g": 153,
             "b": 255,
@@ -153,7 +161,7 @@
             "radius": 10
         },
         {
-            "item_id" : "confluence:jungle_torch",
+            "item_id": "confluence:jungle_torch",
             "r": 0,
             "g": 114,
             "b": 0,
@@ -161,7 +169,7 @@
             "radius": 12
         },
         {
-            "item_id" : "confluence:shimmer_bucket",
+            "item_id": "confluence:shimmer_bucket",
             "color": "#shimmer",
             "radius": 5
         }

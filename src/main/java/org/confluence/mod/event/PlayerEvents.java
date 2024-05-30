@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -19,10 +20,10 @@ import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
+import org.confluence.mod.item.common.PlayerAbilityItem;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
-import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
@@ -74,6 +75,7 @@ public final class PlayerEvents {
                 neo.copyFrom(old);
                 LifeCrystal.applyModifier(neoPlayer, neo);
                 LifeFruit.applyModifier(neoPlayer, neo);
+                PlayerAbilityItem.AegisApple.applyModifier(neoPlayer, neo);
             }));
 
         if (PlayerUtils.isServerNotFake(neoPlayer)) {
@@ -101,9 +103,14 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
-        float speed = event.getOriginalSpeed();
-        speed = AncientChisel.apply(event.getEntity(), speed);
-        event.setNewSpeed(speed);
+        MutableFloat speed = new MutableFloat(event.getOriginalSpeed());
+        event.getEntity().getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            float value = speed.floatValue();
+            value *= (1.0F + playerAbility.getBreakSpeedBonus());
+            if (playerAbility.isAmbrosiaUsed()) value *= 1.05F;
+            speed.setValue(value);
+        });
+        event.setNewSpeed(speed.floatValue());
     }
 
     @SubscribeEvent

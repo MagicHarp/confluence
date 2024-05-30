@@ -188,6 +188,12 @@ public final class ForgeEvents {
         Consumer<Boolean> consumer = event::setCanceled;
         BleedingEffect.apply(living, consumer);
         FrostburnEffect.apply(living, consumer);
+        if (event.isCanceled() || !(living instanceof Player player)) return;
+        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            if (playerAbility.isVitalCrystalUsed()) {
+                event.setAmount(event.getAmount() * 1.2F);
+            }
+        });
     }
 
     @SubscribeEvent

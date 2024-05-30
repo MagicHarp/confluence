@@ -38,6 +38,7 @@ public final class PlayerUtils {
             int delay = manaStorage.getRegenerateDelay();
             boolean notMove = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 1.0E-7;
             if (delay > 0) {
+                if (manaStorage.isArcaneCrystalUsed()) delay *= (notMove ? 0.975F : 0.95F);
                 if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
                 int delayReduce = notMove ? 2 : 1;
                 if (manaStorage.hasManaRegenerationBand()) delayReduce += 1;

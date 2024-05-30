@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
@@ -19,6 +20,7 @@ import org.confluence.mod.item.curio.combat.IAggroAttach;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
+import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.fishing.IFishingPower;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -43,8 +45,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private double starRange;
     private double coinRange;
     private double dropsRange;
+    private float breakSpeedBonus;
 
-    private boolean shimmerHeart;
+    private boolean vitalCrystalUsed;
+    private boolean aegisAppleUsed;
+    private boolean ambrosiaUsed;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -62,6 +67,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.starRange = 1.75;
         this.coinRange = 2.0;
         this.dropsRange = 0.0;
+        this.breakSpeedBonus = 0.0F;
+
+        this.vitalCrystalUsed = false;
+        this.aegisAppleUsed = false;
+        this.ambrosiaUsed = false;
     }
 
     public void flushAbility(LivingEntity living) {
@@ -76,6 +86,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicBoolean star = new AtomicBoolean();
         AtomicBoolean coin = new AtomicBoolean();
         AtomicBoolean drops = new AtomicBoolean();
+        MutableFloat speed = new MutableFloat();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -100,6 +111,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof IRangePickup.Star) star.set(true);
                 if (item instanceof IRangePickup.Coin) coin.set(true);
                 if (item instanceof IRangePickup.Drops) drops.set(true);
+                if (item instanceof IBreakSpeedBonus speedBonus) speed.add(speedBonus.getBreakBonus());
             }
         });
         this.jumpBoost = jump.get();
@@ -113,6 +125,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.starRange = star.get() ? 14.25 : 1.75;
         this.coinRange = coin.get() ? 16.67 : 2.0;
         this.dropsRange = drops.get() ? 6.25 : 0.0;
+        this.breakSpeedBonus = speed.floatValue();
     }
 
     public double getJumpBoost() {
@@ -215,6 +228,34 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return dropsRange;
     }
 
+    public float getBreakSpeedBonus() {
+        return breakSpeedBonus;
+    }
+
+    public void setVitalCrystalUsed() {
+        this.vitalCrystalUsed = true;
+    }
+
+    public boolean isVitalCrystalUsed() {
+        return vitalCrystalUsed;
+    }
+
+    public void setAegisAppleUsed() {
+        this.aegisAppleUsed = true;
+    }
+
+    public boolean isAegisAppleUsed() {
+        return aegisAppleUsed;
+    }
+
+    public void setAmbrosiaUsed() {
+        this.ambrosiaUsed = true;
+    }
+
+    public boolean isAmbrosiaUsed() {
+        return ambrosiaUsed;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -232,6 +273,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putDouble("starRange", starRange);
         nbt.putDouble("coinRange", coinRange);
         nbt.putDouble("dropsRange", dropsRange);
+        nbt.putFloat("breakSpeedBonus", breakSpeedBonus);
+
+        nbt.putBoolean("vitalCrystalUsed", vitalCrystalUsed);
+        nbt.putBoolean("aegisAppleUsed", aegisAppleUsed);
+        nbt.putBoolean("ambrosiaUsed", ambrosiaUsed);
         return nbt;
     }
 
@@ -251,6 +297,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.starRange = nbt.getDouble("starRange");
         this.coinRange = nbt.getDouble("coinRange");
         this.dropsRange = nbt.getDouble("dropsRange");
+        this.breakSpeedBonus = nbt.getFloat("breakSpeedBonus");
+
+        this.vitalCrystalUsed = nbt.getBoolean("vitalCrystalUsed");
+        this.aegisAppleUsed = nbt.getBoolean("aegisAppleUsed");
+        this.ambrosiaUsed = nbt.getBoolean("ambrosiaUsed");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -268,5 +319,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.starRange = playerAbility.starRange;
         this.coinRange = playerAbility.coinRange;
         this.dropsRange = playerAbility.dropsRange;
+        this.breakSpeedBonus = playerAbility.breakSpeedBonus;
+
+        this.vitalCrystalUsed = playerAbility.vitalCrystalUsed;
+        this.aegisAppleUsed = playerAbility.aegisAppleUsed;
+        this.ambrosiaUsed = playerAbility.ambrosiaUsed;
     }
 }

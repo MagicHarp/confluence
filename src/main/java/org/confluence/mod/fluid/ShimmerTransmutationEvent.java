@@ -19,10 +19,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 /**
- * This event is called when an ItemEntity toss in shimmer.
- * <p>
- * This event is {@link net.minecraftforge.eventbus.api.Cancelable}
- * and Server side only.
+ * This event is Server side only.
  */
 public abstract class ShimmerTransmutationEvent extends Event {
     static final Hashtable<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> ITEM_TRANSFORM = new Hashtable<>();
@@ -39,6 +36,9 @@ public abstract class ShimmerTransmutationEvent extends Event {
         return source;
     }
 
+    /**
+     * Shrink item stack's count. Defaults to 0.
+     */
     public void setShrink(int count) {
         this.shrink = count;
     }
@@ -47,6 +47,11 @@ public abstract class ShimmerTransmutationEvent extends Event {
         return shrink;
     }
 
+    /**
+     * Determines how long could ItemEntity transmutation next time.
+     * <p>
+     * Defaults to ItemEntity's lifespan(most of the time it is 6000).
+     */
     public void setCoolDown(int coolDown) {
         this.coolDown = coolDown;
     }
@@ -55,6 +60,11 @@ public abstract class ShimmerTransmutationEvent extends Event {
         return coolDown;
     }
 
+    /**
+     * This event fired when an ItemEntity toss in shimmer.
+     * <p>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}
+     */
     @Cancelable
     public static class Pre extends ShimmerTransmutationEvent {
         private int transformTime = 20;
@@ -63,6 +73,9 @@ public abstract class ShimmerTransmutationEvent extends Event {
             super(source);
         }
 
+        /**
+         * Determines how long should ItemEntity transmutation before.
+         */
         public void setTransformTime(int transformTime) {
             this.transformTime = transformTime;
         }
@@ -72,6 +85,9 @@ public abstract class ShimmerTransmutationEvent extends Event {
         }
     }
 
+    /**
+     * This event fired when an ItemEntity trying to transmutation.
+     */
     public static class Post extends ShimmerTransmutationEvent {
         private @Nullable List<ItemStack> targets;
 
@@ -83,6 +99,11 @@ public abstract class ShimmerTransmutationEvent extends Event {
             this.targets = targets;
         }
 
+        /**
+         * Determines what will ItemEntity transmutation to,
+         * <p>
+         * If targets have not set yet, it will try to generate targets.
+         */
         public @Nullable List<ItemStack> getTargets() {
             if (targets == null) {
                 ItemStack sourceItem = source.getItem();

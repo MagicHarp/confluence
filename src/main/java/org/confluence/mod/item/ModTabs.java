@@ -125,6 +125,10 @@ public final class ModTabs {
                 output.accept(ModItems.CANDY_APPLE.get());
                 output.accept(ModItems.CANDY_CANE.get());
                 output.accept(ModItems.ALPHA.get());
+                output.accept(ModItems.VITAL_CRYSTAL.get());
+                output.accept(ModItems.ARCANE_CRYSTAL.get());
+                output.accept(ModItems.AEGIS_APPLE.get());
+                output.accept(ModItems.AMBROSIA.get());
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ModItems.CLAM.get());
