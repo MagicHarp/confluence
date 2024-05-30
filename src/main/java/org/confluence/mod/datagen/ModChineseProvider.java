@@ -755,7 +755,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SHURIKEN.get(), "手里剑");
         add(THROWING_KNIVES.get(), "投刀");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
-        add(SHIMMER_BUCKET.get(), "无底微光桶");
+        add(BOTTOMLESS_SHIMMER_BUCKET.get(), "无底微光桶");
         //鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");

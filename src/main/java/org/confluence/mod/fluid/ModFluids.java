@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import static org.confluence.mod.Confluence.MODID;
-import static org.confluence.mod.fluid.ShimmerTransformEvent.add;
+import static org.confluence.mod.fluid.ShimmerTransmutationEvent.add;
 import static org.confluence.mod.item.curio.CurioItems.*;
 
 public final class ModFluids {
@@ -192,6 +192,10 @@ public final class ModFluids {
         add(Materials.RAW_TUNGSTEN.get(), Materials.RAW_SILVER.get());
         add(Materials.RAW_SILVER.get(), Materials.RAW_LEAD.get());
         add(Materials.RAW_LEAD.get(), Materials.RAW_TIN.get());
+
+        add(Items.WATER_BUCKET, Items.LAVA_BUCKET);
+        add(Items.LAVA_BUCKET, ModItems.HONEY_BUCKET.get());
+        add(ModItems.HONEY_BUCKET.get(), Items.WATER_BUCKET);
         // <---注释后面记得打空格
     }
 }

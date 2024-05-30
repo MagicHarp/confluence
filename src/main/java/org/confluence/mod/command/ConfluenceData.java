@@ -52,6 +52,10 @@ public class ConfluenceData extends SavedData {
         return gamePhase.ordinal() > 1;
     }
 
+    public boolean isGraduated() {
+        return gamePhase.ordinal() == 6;
+    }
+
     public void setMoonSpecific(int moonSpecific) {
         this.moonSpecific = moonSpecific;
         NetworkHandler.CHANNEL.send(

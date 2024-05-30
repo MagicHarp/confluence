@@ -7,7 +7,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.fluid.ShimmerTransformEvent;
+import org.confluence.mod.fluid.ShimmerTransmutationEvent;
 import org.confluence.mod.util.IItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,7 +38,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
         if (fluidType == ForgeMod.EMPTY_TYPE.get()) {
             if (c$coolDown > 0) this.c$coolDown--;
         } else if (c$coolDown == 0 && fluidType == ModFluids.SHIMMER.fluidType().get()) {
-            ShimmerTransformEvent event = new ShimmerTransformEvent(self);
+            ShimmerTransmutationEvent event = new ShimmerTransmutationEvent(self);
             if (MinecraftForge.EVENT_BUS.post(event)) {
                 c$setup(self, event.getCoolDown());
                 return;

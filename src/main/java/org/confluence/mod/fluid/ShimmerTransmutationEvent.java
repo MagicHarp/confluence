@@ -25,14 +25,14 @@ import java.util.function.Predicate;
  * and Server side only.
  */
 @Cancelable
-public class ShimmerTransformEvent extends Event {
+public class ShimmerTransmutationEvent extends Event {
     static final Hashtable<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> ITEM_TRANSFORM = new Hashtable<>();
     private final ItemEntity source;
     private @Nullable List<ItemStack> targets;
     private int transformTime = 20;
     private int coolDown;
 
-    public ShimmerTransformEvent(ItemEntity source) {
+    public ShimmerTransmutationEvent(ItemEntity source) {
         this.source = source;
         this.coolDown = source.lifespan;
     }

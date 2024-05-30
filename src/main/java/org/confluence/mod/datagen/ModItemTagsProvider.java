@@ -34,7 +34,12 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         IntrinsicTagAppender<Item> torch = tag(ModTags.Items.TORCH);
         torch.add(Items.TORCH, Items.SOUL_TORCH);
         for (Torches torches : Torches.values()) torch.add(torches.item.get());
-        tag(ModTags.Items.BOTTOMLESS).add(ModItems.SHIMMER_BUCKET.get());
+        tag(ModTags.Items.BOTTOMLESS).add(
+            ModItems.BOTTOMLESS_WATER_BUCKET.get(),
+            ModItems.BOTTOMLESS_LAVA_BUCKET.get(),
+            ModItems.BOTTOMLESS_HONEY_BUCKET.get(),
+            ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()
+        );
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }

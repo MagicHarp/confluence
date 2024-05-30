@@ -3,12 +3,14 @@ package org.confluence.mod.item.common;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.misc.ModRarity;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.material.FlowingFluid;
 
-public class ShimmerBucketItem extends BucketItem {
-    public ShimmerBucketItem() {
-        super(ModFluids.SHIMMER.fluid(), new Item.Properties().rarity(ModRarity.RED).stacksTo(1));
+import java.util.function.Supplier;
+
+public class BottomlessBucketItem extends BucketItem {
+    public BottomlessBucketItem(Supplier<? extends FlowingFluid> supplier, Rarity rarity) {
+        super(supplier, new Item.Properties().rarity(rarity).stacksTo(1));
     }
 
     @Override

@@ -23,23 +23,37 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-#[[dependencies.confluence]]
-#modId="eventhorizon"
-#mandatory=true
-#versionRange="[1.20.1-1.1.0,)"
-#ordering="NONE"
-#side="CLIENT"
+[[dependencies.confluence]]
+modId="eventhorizon"
+mandatory=true
+versionRange="[1.20.1-1.1.0,)"
+ordering="NONE"
+side="CLIENT"
 
-#[[dependencies.confluence]]
-#modId="geckolib"
-#mandatory=true
-#versionRange="[4.4.2,)"
-#ordering="NONE"
-#side="CLIENT"
+[[dependencies.confluence]]
+modId="geckolib"
+mandatory=true
+versionRange="[4.4.2,)"
+ordering="NONE"
+side="CLIENT"
 
-#[[dependencies.confluence]]
-#modId="fusion"
-#mandatory=true
-#versionRange="[1.1.1,)"
-#ordering="NONE"
-#side="CLIENT"
+[[dependencies.confluence]]
+modId="curios"
+mandatory=true
+versionRange="[5.7.0+1.20.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.confluence]]
+modId="terrablender"
+mandatory=true
+versionRange="[1.20.1-3.0.1.4,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.confluence]]
+modId="shimmer"
+mandatory=true
+versionRange="[1.20.1-0.2.4,)"
+ordering="NONE"
+side="CLIENT"
