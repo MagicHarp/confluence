@@ -26,8 +26,9 @@ public final class ShimmerEvents {
             LightManager.INSTANCE.registerBlockLight(stand, (blockState, blockPos) -> stand.getColor());
             Torches.ColorfulWallTorchBlock wall = torches.wall.get();
             LightManager.INSTANCE.registerBlockLight(wall, (blockState, blockPos) -> wall.getColor());
-
         }
+        LightManager.INSTANCE.registerItemLight(Torches.DEMON_TORCH.item.get(), itemStack -> DemonTorchColor.INSTANCE);
+        LightManager.INSTANCE.registerItemLight(Torches.RAINBOW_TORCH.item.get(), itemStack -> RainbowTorchColor.INSTANCE);
     }
 
     public static void doUpdateTorchColor() {

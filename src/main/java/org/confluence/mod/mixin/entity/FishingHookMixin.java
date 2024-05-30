@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -171,6 +172,12 @@ public abstract class FishingHookMixin implements IFishingHook {
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private void define(CallbackInfo ci) {
         c$getSelf().getEntityData().define(DATA_LAVA, false);
+    }
+
+    @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
+    private ResourceLocation modifyLoot(ResourceLocation par1) {
+        if (c$getSelf().getType() == EntityType.FISHING_BOBBER) return par1;
+        return ModLootTables.FISH;
     }
 
     @Unique
