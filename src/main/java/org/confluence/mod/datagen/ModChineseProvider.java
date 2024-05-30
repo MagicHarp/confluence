@@ -756,6 +756,17 @@ public class ModChineseProvider extends LanguageProvider {
         add(THROWING_KNIVES.get(), "投刀");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
         add(BOTTOMLESS_SHIMMER_BUCKET.get(), "无底微光桶");
+        add(SOUL_CAKE.get(), "灵魂蛋糕");
+        add(STAR.get(), "魔力星");
+        add(SUGAR_PLUM.get(), "糖李");
+        add(HEART.get(), "心");
+        add(CANDY_CANE.get(), "拐杖糖");
+        add(VITAL_CRYSTAL.get(), "活力水晶");
+        add(GALAXY_PEARL.get(), "银河珍珠");
+        add(ARCANE_CRYSTAL.get(), "奥术水晶");
+        add(AEGIS_APPLE.get(), "神盾果");
+        add(AMBROSIA.get(), "仙馔密酒");
+        add(GUMMY_WORM.get(), "黏性蠕虫");
         //鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
@@ -843,6 +854,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(DIAMOND_CHAIN.get(), "钻石锁链");
         add(AMETHYST_CHAIN.get(), "紫晶锁链");
         add(SILK_CHAIN.get(), "蛛丝绳");
+        add(BONE_CHAIN.get(), "骨头锁链");
         //植物
         add(WATERLEAF.get(), "幌菊");
         //法杖
