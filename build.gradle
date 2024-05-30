@@ -12,7 +12,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = "Confluence"
+    archivesName = "TerraCurio"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -35,10 +35,8 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
         }
         client {
-            property 'forge.enabledGameTestNamespaces', mod_id
         }
         server {
-            property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
         }
         data {

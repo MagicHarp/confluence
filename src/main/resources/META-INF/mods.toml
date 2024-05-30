@@ -8,6 +8,7 @@ version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "${mod_authors}"
 description = '''${mod_description}'''
+logoFile = "icon.png"
 
 [[dependencies.confluence]]
 modId = "forge"
@@ -22,24 +23,3 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
-
-#[[dependencies.confluence]]
-#modId="eventhorizon"
-#mandatory=true
-#versionRange="[1.20.1-1.1.0,)"
-#ordering="NONE"
-#side="CLIENT"
-
-#[[dependencies.confluence]]
-#modId="geckolib"
-#mandatory=true
-#versionRange="[4.4.2,)"
-#ordering="NONE"
-#side="CLIENT"
-
-#[[dependencies.confluence]]
-#modId="fusion"
-#mandatory=true
-#versionRange="[1.1.1,)"
-#ordering="NONE"
-#side="CLIENT"
