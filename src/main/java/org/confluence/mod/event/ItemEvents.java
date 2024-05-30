@@ -137,11 +137,14 @@ public final class ItemEvents {
     @SubscribeEvent
     public static void shimmerTransmutation(ShimmerTransmutationEvent event) {
         if (ConfluenceData.get((ServerLevel) event.getSource().level()).isGraduated()) {
-            Item item = event.getSource().getItem().getItem();
+            ItemStack itemStack = event.getSource().getItem();
+            Item item = itemStack.getItem();
             if (item == ModItems.BOTTOMLESS_WATER_BUCKET.get()) {
                 event.setTargets(Collections.singletonList(new ItemStack(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get())));
+                itemStack.shrink(1);
             } else if (item == ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()) {
                 event.setTargets(Collections.singletonList(new ItemStack(ModItems.BOTTOMLESS_WATER_BUCKET.get())));
+                itemStack.shrink(1);
             }
         }
     }
