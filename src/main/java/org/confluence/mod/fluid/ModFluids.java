@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
@@ -24,8 +25,11 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
+
+import java.util.Collections;
 
 import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.fluid.ShimmerTransmutationEvent.add;
@@ -196,6 +200,11 @@ public final class ModFluids {
         add(Items.WATER_BUCKET, Items.LAVA_BUCKET);
         add(Items.LAVA_BUCKET, ModItems.HONEY_BUCKET.get());
         add(ModItems.HONEY_BUCKET.get(), Items.WATER_BUCKET);
+
+        add(Materials.LIFE_CRYSTAL.get(), ModItems.VITAL_CRYSTAL.get());
+        add(Materials.MANA_STAR.get(), ModItems.ARCANE_CRYSTAL.get());
+        add(Materials.LIFE_FRUIT.get(), ModItems.AEGIS_APPLE.get());
+        add(itemStack -> itemStack.is(ModTags.Items.FRUIT), Collections.singletonList(new ItemStack(ModItems.AMBROSIA.get())), 1);
         // <---注释后面记得打空格
     }
 }
