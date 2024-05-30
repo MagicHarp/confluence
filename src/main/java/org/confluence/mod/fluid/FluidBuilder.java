@@ -1,7 +1,7 @@
 package org.confluence.mod.fluid;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -29,7 +29,7 @@ public class FluidBuilder {
     private ResourceLocation flowingTexture;
 
     private Supplier<? extends LiquidBlock> block;
-    private Supplier<? extends BucketItem> bucket;
+    private Supplier<? extends Item> bucket;
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> source;
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> flowing;
 
@@ -66,7 +66,7 @@ public class FluidBuilder {
         return this;
     }
 
-    public FluidBuilder bucket(Supplier<? extends BucketItem> bucket) {
+    public FluidBuilder bucket(Supplier<? extends Item> bucket) {
         this.bucket = bucket;
         return this;
     }

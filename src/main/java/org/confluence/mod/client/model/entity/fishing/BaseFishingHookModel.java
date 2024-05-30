@@ -1,4 +1,4 @@
-package org.confluence.mod.client.model.entity.fshing;
+package org.confluence.mod.client.model.entity.fishing;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

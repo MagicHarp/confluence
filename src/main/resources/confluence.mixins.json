@@ -22,6 +22,7 @@
         "entity.PlayerMixin",
         "integration.ForgePlatformHelperMixin",
         "item.BowItemMixin",
+        "item.BucketItemMixin",
         "item.CrossbowItemMixin",
         "item.FishingRodItemMixin",
         "item.HoneyBottleItemMixin"

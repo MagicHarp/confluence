@@ -47,11 +47,7 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
     @Override
     public void render(T entity, float entityYaw, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
         int skyLight = LightTexture.pack(10, LightTexture.sky(packedLight));
-        poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
-        model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(getTextureLocation(entity))), skyLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        poseStack.popPose();
+        renderHook(entity, poseStack, multiBufferSource, skyLight);
         Entity owner = entity.getOwner();
         if (owner != null) {
             poseStack.pushPose();
@@ -76,6 +72,14 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
             dispatcher.renderSingleBlock(chain, poseStack, multiBufferSource, skyLight, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
         }
+    }
+
+    protected void renderHook(T entity, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int skyLight) {
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));
+        model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(getTextureLocation(entity))), skyLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        poseStack.popPose();
     }
 
     public static Vec3 getPosition(Entity entity, double pYOffset, float pPartialTick) {

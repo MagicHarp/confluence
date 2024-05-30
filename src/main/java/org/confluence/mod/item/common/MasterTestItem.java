@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MasterTestItem extends Item implements ModRarity.Master {
     public MasterTestItem() {
-        super(new Properties());
+        super(new Properties().rarity(ModRarity.MASTER));
     }
 
     @Override

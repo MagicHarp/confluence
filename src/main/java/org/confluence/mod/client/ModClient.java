@@ -20,7 +20,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
-import org.confluence.mod.client.model.entity.fshing.BaseFishingHookModel;
+import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;

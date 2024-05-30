@@ -18,6 +18,7 @@ import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
+import org.confluence.mod.item.common.LifeFruit;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
@@ -72,6 +73,7 @@ public final class PlayerEvents {
             .ifPresent(neo -> {
                 neo.copyFrom(old);
                 LifeCrystal.applyModifier(neoPlayer, neo);
+                LifeFruit.applyModifier(neoPlayer, neo);
             }));
 
         if (PlayerUtils.isServerNotFake(neoPlayer)) {

@@ -44,6 +44,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private double coinRange;
     private double dropsRange;
 
+    private boolean shimmerHeart;
+
     public PlayerAbility() {
         this.jumpBoost = 1.0;
         this.fallResistance = 0;

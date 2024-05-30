@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExpertTestItem extends Item implements ModRarity.Expert {
     public ExpertTestItem() {
-        super(new Properties());
+        super(new Properties().rarity(ModRarity.EXPERT));
     }
 
     @Override

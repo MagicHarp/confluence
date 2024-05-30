@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ToolActions;
 import org.confluence.mod.client.color.IntegerRGB;
-import org.confluence.mod.client.model.entity.fshing.BaseFishingHookModel;
+import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.jetbrains.annotations.NotNull;
 

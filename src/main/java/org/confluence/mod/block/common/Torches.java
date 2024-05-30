@@ -33,7 +33,7 @@ public enum Torches {
     RED_TORCH("red", 14.0F, 1.0F, 0.1F, 0.1F), // 红
     ORANGE_TORCH("orange", 14.0F, 0.8F, 0.5F, 0.3F), // 橙
     WHITE_TORCH("white", 14.0F, 1.0F, 1.0F, 1.0F), // 白
-    ICE_TORCH("ice", 15.0F, 0.7F, 1.5F, 1.5F), // 冰雪
+    ICE_TORCH("ice", 15.0F, 0.7F, 1.0F, 1.0F), // 冰雪
     PINK_TORCH("pink", 14.0F, 0.7F, 0.3F, 0.7F), // 粉
     BONE_TORCH("bone", 14.0F, 0.5F, 0.75F, 1.0F), // 骨头
     ULTRABRIGHT_TORCH("ultrabright", 15.0F, 0.75F, 1.0F, 1.0F), // 超亮
@@ -46,7 +46,7 @@ public enum Torches {
     CORRUPT_TORCH("corrupt", 14.0F, 0.95F, 0.4F, 1.0F), // 腐化
     CRIMSON_TORCH("crimson", 14.0F, 0.9F, 0.2F, 0.3F), // 猩红
     HALLOWED_TORCH("hallowed", 14.0F, 1.0F, 0.6F, 1.0F),// 神圣
-    JUNGLE_TORCH("jungle", 15.0F, -0.25F, 0.45F, -0.1F), // 丛林
+    JUNGLE_TORCH("jungle", 15.0F, 0.0F, 0.45F, 0.0F), // 丛林
     //MUSHROOM_TORCH("mushroom"), // 蘑菇
     //AETHER_TORCH("aether"); // 以太
     ;

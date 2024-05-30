@@ -119,6 +119,10 @@ public final class ModTabs {
                 output.accept(ModItems.MASTER_TEST_ITEM.get());
                 output.accept(ModItems.STAR.get());
                 output.accept(ModItems.SOUL_CAKE.get());
+                output.accept(ModItems.SUGAR_PLUM.get());
+                output.accept(ModItems.HEART.get());
+                output.accept(ModItems.CANDY_APPLE.get());
+                output.accept(ModItems.CANDY_CANE.get());
                 output.accept(ModItems.ALPHA.get());
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());

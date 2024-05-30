@@ -1,26 +1,183 @@
 {
+    "ColorReference" : {
+        "shimmer" : {
+            "r": 255,
+            "g": 150,
+            "b": 255,
+            "a": 255
+        }
+    },
     "LightItem": [
         {
-            "item_tag" : "confluence:torch",
-            "r": 255,
-            "g": 253,
-            "b": 85,
+            "item_id" : "confluence:purple_torch",
+            "r": 229,
+            "g": 0,
+            "b": 229,
             "a": 255,
             "radius": 10
+        },
+        {
+            "item_id" : "confluence:yellow_torch",
+            "r": 229,
+            "g": 229,
+            "b": 0,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:blue_torch",
+            "r": 0,
+            "g": 25,
+            "b": 255,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:green_torch",
+            "r": 0,
+            "g": 255,
+            "b": 25,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:red_torch",
+            "r": 255,
+            "g": 25,
+            "b": 25,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:orange_torch",
+            "r": 204,
+            "g": 127,
+            "b": 76,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:white_torch",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:ice_torch",
+            "r": 178,
+            "g": 255,
+            "b": 255,
+            "a": 255,
+            "radius": 12
+        },
+        {
+            "item_id" : "confluence:pink_torch",
+            "r": 178,
+            "g": 76,
+            "b": 178,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:bone_torch",
+            "r": 127,
+            "g": 191,
+            "b": 255,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:ultrabright_torch",
+            "r": 191,
+            "g": 255,
+            "b": 255,
+            "a": 255,
+            "radius": 15
+        },
+        {
+            "item_id" : "confluence:cursed_torch",
+            "r": 102,
+            "g": 255,
+            "b": 25,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:ichor_torch",
+            "r": 255,
+            "g": 255,
+            "b": 178,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:desert_torch",
+            "r": 255,
+            "g": 216,
+            "b": 140,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:coral_torch",
+            "r": 63,
+            "g": 255,
+            "b": 204,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:corrupt_torch",
+            "r": 242,
+            "g": 102,
+            "b": 255,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:crimson_torch",
+            "r": 229,
+            "g": 51,
+            "b": 76,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:hallowed_torch",
+            "r": 255,
+            "g": 153,
+            "b": 255,
+            "a": 255,
+            "radius": 10
+        },
+        {
+            "item_id" : "confluence:jungle_torch",
+            "r": 0,
+            "g": 114,
+            "b": 0,
+            "a": 255,
+            "radius": 12
+        },
+        {
+            "item_id" : "confluence:shimmer_bucket",
+            "color": "#shimmer",
+            "radius": 5
         }
     ],
     "Bloom": [
         {
             "fluid": "confluence:shimmer"
+        },
+        {
+            "fluid": "minecraft:lava"
         }
     ],
     "LightBlock": [
         {
             "block": "confluence:shimmer",
-            "r": 255,
-            "g": 150,
-            "b": 255,
-            "a": 255,
+            "color": "#shimmer",
             "radius": 7
         }
     ]
