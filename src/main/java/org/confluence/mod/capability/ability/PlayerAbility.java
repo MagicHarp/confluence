@@ -50,6 +50,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private boolean vitalCrystalUsed;
     private boolean aegisAppleUsed;
     private boolean ambrosiaUsed;
+    private boolean gummyWormUsed;
+    private boolean galaxyPearlUsed;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -72,6 +74,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.vitalCrystalUsed = false;
         this.aegisAppleUsed = false;
         this.ambrosiaUsed = false;
+        this.gummyWormUsed = false;
+        this.galaxyPearlUsed = false;
     }
 
     public void flushAbility(LivingEntity living) {
@@ -168,6 +172,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public float getFishingPower(Player player) {
         float base = fishingPower;
+        if (gummyWormUsed) base += 3.0F;
         Level level = player.level();
         long dayTime = level.dayTime() % 24000; // [0, 24000]
         if (level.isRaining()) base *= 1.1F;
@@ -256,6 +261,22 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return ambrosiaUsed;
     }
 
+    public void setGummyWormUsed() {
+        this.gummyWormUsed = true;
+    }
+
+    public boolean isGummyWormUsed() {
+        return gummyWormUsed;
+    }
+
+    public void setGalaxyPearlUsed() {
+        this.galaxyPearlUsed = true;
+    }
+
+    public boolean isGalaxyPearlUsed() {
+        return galaxyPearlUsed;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -278,6 +299,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putBoolean("vitalCrystalUsed", vitalCrystalUsed);
         nbt.putBoolean("aegisAppleUsed", aegisAppleUsed);
         nbt.putBoolean("ambrosiaUsed", ambrosiaUsed);
+        nbt.putBoolean("gummyWormUsed", gummyWormUsed);
+        nbt.putBoolean("galaxyPearlUsed", galaxyPearlUsed);
         return nbt;
     }
 
@@ -302,6 +325,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.vitalCrystalUsed = nbt.getBoolean("vitalCrystalUsed");
         this.aegisAppleUsed = nbt.getBoolean("aegisAppleUsed");
         this.ambrosiaUsed = nbt.getBoolean("ambrosiaUsed");
+        this.gummyWormUsed = nbt.getBoolean("gummyWormUsed");
+        this.galaxyPearlUsed = nbt.getBoolean("galaxyPearlUsed");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -324,5 +349,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.vitalCrystalUsed = playerAbility.vitalCrystalUsed;
         this.aegisAppleUsed = playerAbility.aegisAppleUsed;
         this.ambrosiaUsed = playerAbility.ambrosiaUsed;
+        this.gummyWormUsed = playerAbility.gummyWormUsed;
+        this.galaxyPearlUsed = playerAbility.galaxyPearlUsed;
     }
 }

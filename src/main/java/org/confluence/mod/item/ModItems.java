@@ -73,6 +73,8 @@ public final class ModItems {
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));
     public static final RegistryObject<PlayerAbilityItem> AEGIS_APPLE = ITEMS.register("aegis_apple", PlayerAbilityItem.AegisApple::new);
     public static final RegistryObject<PlayerAbilityItem> AMBROSIA = ITEMS.register("ambrosia", () -> new PlayerAbilityItem(PlayerAbility::isAmbrosiaUsed, PlayerAbility::setAmbrosiaUsed));
+    public static final RegistryObject<PlayerAbilityItem> GUMMY_WORM = ITEMS.register("gummy_worm", () -> new PlayerAbilityItem(PlayerAbility::isGummyWormUsed, PlayerAbility::setGummyWormUsed));
+    public static final RegistryObject<PlayerAbilityItem> GALAXY_PEARL = ITEMS.register("galaxy_pearl", PlayerAbilityItem.GalaxyPearl::new);
 
     public static void register(IEventBus bus) {
         ModTiers.register();

@@ -76,6 +76,7 @@ public final class PlayerEvents {
                 LifeCrystal.applyModifier(neoPlayer, neo);
                 LifeFruit.applyModifier(neoPlayer, neo);
                 PlayerAbilityItem.AegisApple.applyModifier(neoPlayer, neo);
+                PlayerAbilityItem.GalaxyPearl.applyModifier(neoPlayer, neo);
             }));
 
         if (PlayerUtils.isServerNotFake(neoPlayer)) {

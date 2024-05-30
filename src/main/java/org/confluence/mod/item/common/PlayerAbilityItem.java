@@ -87,4 +87,27 @@ public class PlayerAbilityItem extends Item {
             );
         }
     }
+
+    public static class GalaxyPearl extends PlayerAbilityItem {
+        public static final UUID LUCK_UUID = UUID.fromString("E465C610-AA86-AA3B-6223-948C8F6B647C");
+
+        public GalaxyPearl() {
+            super(PlayerAbility::isGalaxyPearlUsed, PlayerAbility::setGalaxyPearlUsed);
+        }
+
+        @Override
+        protected void modifier(Player player, PlayerAbility playerAbility) {
+            applyModifier(player, playerAbility);
+        }
+
+        public static void applyModifier(Player player, PlayerAbility playerAbility) {
+            if (!playerAbility.isGalaxyPearlUsed()) return;
+            AttributeInstance attributeInstance = player.getAttributes().getInstance(Attributes.LUCK);
+            if (attributeInstance == null) return;
+            attributeInstance.removeModifier(LUCK_UUID);
+            attributeInstance.addPermanentModifier(
+                new AttributeModifier(LUCK_UUID, "Galaxy Pearl", 0.03, AttributeModifier.Operation.ADDITION)
+            );
+        }
+    }
 }
