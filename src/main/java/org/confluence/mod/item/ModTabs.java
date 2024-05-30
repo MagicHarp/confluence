@@ -58,6 +58,7 @@ public final class ModTabs {
                 output.accept(SAPPHIRE_CHAIN.get());
                 output.accept(DIAMOND_CHAIN.get());
                 output.accept(AMETHYST_CHAIN.get());
+                output.accept(SILK_CHAIN.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
             })
             .build());

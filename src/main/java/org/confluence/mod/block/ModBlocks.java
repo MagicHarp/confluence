@@ -87,6 +87,7 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SAPPHIRE_CHAIN = registerWithItem("sapphire_chain", () -> new BaseChainBlock(MapColor.COLOR_BLUE));
     public static final RegistryObject<BaseChainBlock> DIAMOND_CHAIN = registerWithItem("diamond_chain", () -> new BaseChainBlock(MapColor.DIAMOND));
     public static final RegistryObject<BaseChainBlock> AMETHYST_CHAIN = registerWithItem("amethyst_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
+    public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
     //flower
     public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", BasePlantBlock::new);
 

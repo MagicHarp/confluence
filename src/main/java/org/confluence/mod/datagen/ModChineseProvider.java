@@ -842,6 +842,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SAPPHIRE_CHAIN.get(), "蓝玉锁链");
         add(DIAMOND_CHAIN.get(), "钻石锁链");
         add(AMETHYST_CHAIN.get(), "紫晶锁链");
+        add(SILK_CHAIN.get(), "蛛丝绳");
         //植物
         add(WATERLEAF.get(), "幌菊");
         //法杖
