@@ -38,23 +38,26 @@ public abstract class ItemEntityMixin implements IItemEntity {
         if (fluidType == ForgeMod.EMPTY_TYPE.get()) {
             if (c$coolDown > 0) this.c$coolDown--;
         } else if (c$coolDown == 0 && fluidType == ModFluids.SHIMMER.fluidType().get()) {
-            ShimmerTransmutationEvent event = new ShimmerTransmutationEvent(self);
-            if (MinecraftForge.EVENT_BUS.post(event)) {
-                c$setup(self, event.getCoolDown());
+            ShimmerTransmutationEvent.Pre pre = new ShimmerTransmutationEvent.Pre(self);
+            if (MinecraftForge.EVENT_BUS.post(pre)) {
+                self.getItem().shrink(pre.getShrink());
+                c$setup(self, pre.getCoolDown());
                 return;
             }
-            if (c$transforming < event.getTransformTime()) {
+            if (c$transforming < pre.getTransformTime()) {
                 this.c$transforming++;
                 self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
             } else {
-                List<ItemStack> targets = event.getTargets();
+                ShimmerTransmutationEvent.Post post = new ShimmerTransmutationEvent.Post(self);
+                self.getItem().shrink(post.getShrink());
+                List<ItemStack> targets = post.getTargets();
                 if (targets == null) {
-                    c$setup(self, event.getCoolDown());
+                    c$setup(self, post.getCoolDown());
                     return;
                 }
                 for (ItemStack target : targets) {
                     ItemEntity itemEntity = new ItemEntity(self.level(), self.getX(), self.getY(), self.getZ(), target);
-                    c$setup(itemEntity, event.getCoolDown());
+                    c$setup(itemEntity, post.getCoolDown());
                     self.level().addFreshEntity(itemEntity);
                 }
             }
