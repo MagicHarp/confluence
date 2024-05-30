@@ -1,5 +1,7 @@
 {
-    "animation": {},
+    "animation": {
+        "frametime": 2
+    },
     "shimmer": {
         "bloom": true
     }
