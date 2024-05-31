@@ -702,6 +702,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.PEARL.get(), "珍珠");
         add(Materials.BLACK_PEARL.get(), "黑珍珠");
         add(Materials.PINK_PEARL.get(), "粉珍珠");
+        add(Materials.LIFE_FRUIT.get(), "生命果");
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
@@ -777,6 +778,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SUGAR_PLUM.get(), "蜜糖李");
         add(HEART.get(), "心");
         add(CANDY_CANE.get(), "拐杖糖");
+        add(CANDY_APPLE.get(), "糖葫芦");
         add(VITAL_CRYSTAL.get(), "活力水晶");
         add(GALAXY_PEARL.get(), "银河珍珠");
         add(ARCANE_CRYSTAL.get(), "奥术水晶");

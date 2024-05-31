@@ -61,7 +61,7 @@ public final class ModItems {
     public static final RegistryObject<Item> SOUL_CAKE = ITEMS.register("soul_cake", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SUGAR_PLUM = ITEMS.register("sugar_plum", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HEART = ITEMS.register("heart", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> CANDY_APPLE = ITEMS.register("candy_heart", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CANDY_APPLE = ITEMS.register("candy_apple", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new Item(new Item.Properties()));
     public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new); // todo 飞刀
     public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new); // todo 荧光棒
