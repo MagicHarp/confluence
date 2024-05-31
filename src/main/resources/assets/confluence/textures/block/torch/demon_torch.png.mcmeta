@@ -1,0 +1,9 @@
+{
+    "animation": {
+        "frametime": 9
+    },
+    "demon_torch": {
+        "bloom": true
+    }
+}
+}
