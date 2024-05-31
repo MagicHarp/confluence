@@ -49,7 +49,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 天界贝壳 */
     COBALT_SHIELD("cobalt_shield", CobaltShield::new), // 钴护盾
     CROSS_NECKLACE("cross_necklace", CrossNecklace::new), // 十字项链
-    /* 游侠徽章 */
+    RANGER_EMBLEM("ranger_emblem", RangerEmblem::new), // 游侠徽章
     /* 召唤师徽章 */
     WARRIOR_EMBLEM("warrior_emblem", WarriorEmblem::new), // 战士徽章
     SORCERER_EMBLEM("sorcerer_emblem", SorcererEmblem::new), // 巫士徽章

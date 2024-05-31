@@ -119,6 +119,7 @@ public final class ForgeEvents {
         MagicCuffs.apply(living, damageSource, amount);
 
         amount = IManaWeapon.apply(damageSource, amount);
+        amount = IProjectileAttack.apply(living, damageSource, amount);
         amount = ArcheryEffect.apply(living, damageSource, amount);
         amount = ManaSicknessEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, amount);

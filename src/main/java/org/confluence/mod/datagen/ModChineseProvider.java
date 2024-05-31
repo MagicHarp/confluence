@@ -68,6 +68,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
         add("curios.tooltip.aggro_attach", "多人模式时，敌人更可能以你为目标");
         add("curios.tooltip.armor_pass", "盔甲穿透力提高%s点");
+        add("curios.tooltip.projectile_attack", "远程伤害提高%s%%");
         add("curios.tooltip.compass", "显示水平位置");
         add("curios.tooltip.depth_meter", "显示深度");
         add("curios.tooltip.dps_meter", "显示你的每秒伤害");
