@@ -7,8 +7,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.apache.commons.lang3.mutable.MutableFloat;
+import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
-import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.combat.IAggroAttach;
+import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.combat.IFireImmune;
+import org.confluence.mod.item.curio.combat.IInvulnerableTime;
+import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -22,11 +28,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int invulnerableTime;
     private double criticalChance;
     private boolean fireImmune;
-    private boolean lavaHurtReduce;
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
 
     private int aggro;
+    private double dropsRange;
+    private float breakSpeedBonus;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -34,11 +41,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = 20;
         this.criticalChance = 0.0;
         this.fireImmune = false;
-        this.lavaHurtReduce = false;
         this.maxLavaImmuneTicks = 0;
-
         this.remainLavaImmuneTicks = 0;
+
         this.aggro = 0;
+        this.dropsRange = 0.0;
+        this.breakSpeedBonus = 0.0F;
     }
 
     public void freshAbility(LivingEntity living) {
@@ -47,9 +55,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger invul = new AtomicInteger(20);
         AtomicDouble chance = new AtomicDouble();
         AtomicBoolean fire = new AtomicBoolean();
-        AtomicBoolean reduce = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
         AtomicInteger aggro = new AtomicInteger();
+        AtomicBoolean drops = new AtomicBoolean();
+        MutableFloat speed = new MutableFloat();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -65,11 +74,12 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 }
                 if (item instanceof ICriticalHit iCriticalHit) chance.addAndGet(iCriticalHit.getChance());
                 if (item instanceof IFireImmune) fire.set(true);
-                if (item instanceof ILavaHurtReduce) reduce.set(true);
                 if (item instanceof ILavaImmune iLavaImmune) {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
                 }
                 if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
+                if (item instanceof IRangePickup.Drops) drops.set(true);
+                if (item instanceof IBreakSpeedBonus speedBonus) speed.add(speedBonus.getBreakBonus());
             }
         });
         this.jumpBoost = jump.get();
@@ -77,9 +87,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = invul.get();
         this.criticalChance = chance.get();
         this.fireImmune = fire.get();
-        this.lavaHurtReduce = reduce.get();
         this.maxLavaImmuneTicks = lava.get();
         this.aggro = aggro.get();
+        this.dropsRange = drops.get() ? 6.25 : 0.0;
+        this.breakSpeedBonus = speed.floatValue();
     }
 
     public double getJumpBoost() {
@@ -102,10 +113,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return fireImmune;
     }
 
-    public boolean isLavaHurtReduce() {
-        return lavaHurtReduce;
-    }
-
     public void increaseLavaImmuneTicks() {
         if (remainLavaImmuneTicks < maxLavaImmuneTicks) {
             remainLavaImmuneTicks++;
@@ -124,6 +131,14 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return aggro;
     }
 
+    public double getDropsRange() {
+        return dropsRange;
+    }
+
+    public float getBreakSpeedBonus() {
+        return breakSpeedBonus;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -132,10 +147,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("invulnerableTime", invulnerableTime);
         nbt.putDouble("criticalChance", criticalChance);
         nbt.putBoolean("fireImmune", fireImmune);
-        nbt.putBoolean("lavaHurtReduce", lavaHurtReduce);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
 
         nbt.putInt("aggro", aggro);
+        nbt.putFloat("breakSpeedBonus", breakSpeedBonus);
         return nbt;
     }
 
@@ -146,10 +161,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = nbt.getInt("invulnerableTime");
         this.criticalChance = nbt.getDouble("criticalChance");
         this.fireImmune = nbt.getBoolean("fireImmune");
-        this.lavaHurtReduce = nbt.getBoolean("lavaHurtReduce");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
 
         this.aggro = nbt.getInt("aggro");
+        this.breakSpeedBonus = nbt.getFloat("breakSpeedBonus");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -158,9 +173,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = playerAbility.invulnerableTime;
         this.criticalChance = playerAbility.criticalChance;
         this.fireImmune = playerAbility.fireImmune;
-        this.lavaHurtReduce = playerAbility.lavaHurtReduce;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
 
         this.aggro = playerAbility.aggro;
+        this.breakSpeedBonus = playerAbility.breakSpeedBonus;
     }
 }

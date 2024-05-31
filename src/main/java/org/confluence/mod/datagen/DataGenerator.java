@@ -2,15 +2,12 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -28,12 +25,8 @@ public class DataGenerator {
         generator.addProvider(client, new ModItemModelProvider(output, helper));
 
         boolean server = event.includeServer();
-        generator.addProvider(server, new ModItemTagsProvider(output, lookup, contentsGetter(), helper));
-    }
-
-    private static CompletableFuture<TagsProvider.TagLookup<Block>> contentsGetter() {
-        CompletableFuture<Void> f = new CompletableFuture<>();
-        f.complete(null);
-        return f.thenApply(v -> t -> Optional.empty());
+        ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(output, lookup, helper);
+        generator.addProvider(server, blockTagsProvider);
+        generator.addProvider(server, new ModItemTagsProvider(output, lookup, blockTagsProvider.contentsGetter(), helper));
     }
 }

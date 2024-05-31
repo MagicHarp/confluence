@@ -29,6 +29,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.fire_attack", "近战攻击造成火焰伤害");
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
         add("curios.tooltip.aggro_attach", "多人模式时，敌人更可能以你为目标");
+        add("curios.tooltip.armor_pass", "盔甲穿透力提高%s点");
         add("curios.tooltip.compass", "显示水平位置");
         add("curios.tooltip.depth_meter", "显示深度");
         add("curios.tooltip.dps_meter", "显示你的每秒伤害");
@@ -159,6 +160,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
         add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
+        add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
+        add("item.confluence.ancient_chisel.tooltip2", "“古老的问题需要古老的解决方案”");
+        add("item.confluence.flower_boots.tooltip", "你走过的草地上会长出花朵");
+        add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
+        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
 
         // 饰品
         add(CurioItems.AGLET.get(), "金属带扣");
@@ -269,5 +275,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.BRAIN_OF_CONFUSION.get(), "混乱之脑");
         add(CurioItems.VITAMINS.get(), "维生素");
         add(CurioItems.GRAVITY_GLOBE.get(), "重力球");
+        add(CurioItems.WARRIOR_EMBLEM.get(), "战士徽章");
+        add(CurioItems.TREASURE_MAGNET.get(), "宝藏磁石");
+        add(CurioItems.FLOWER_BOOTS.get(), "花靴");
+        add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
     }
 }

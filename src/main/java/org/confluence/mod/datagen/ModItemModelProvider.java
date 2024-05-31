@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.IconItem;
@@ -25,12 +26,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
 
         ModItems.ITEMS.getEntries().forEach(item -> {
-            Item value = item.get();
-            if (value instanceof CustomModel) return;
+            try {
+                Item value = item.get();
+                if (value instanceof CustomModel) return;
 
-            String path = item.getId().getPath().toLowerCase();
-            if (value instanceof BaseCurioItem) {
-                withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
+                String path = item.getId().getPath().toLowerCase();
+                if (value instanceof BaseCurioItem) {
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
+                }
+            } catch (Exception e) {
+                Confluence.LOGGER.error(e.getMessage());
             }
         });
     }

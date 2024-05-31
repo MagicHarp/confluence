@@ -35,6 +35,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.fire_attack", "Melee attacks inflict fire damage");
         add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
         add("curios.tooltip.aggro_attach", "Enemies are more likely to target you");
+        add("curios.tooltip.armor_pass", "Increases armor penetration by %s");
         add("curios.tooltip.compass", "Displays horizontal position");
         add("curios.tooltip.depth_meter", "Displays depth");
         add("curios.tooltip.dps_meter", "Displays your damage per second");
@@ -164,6 +165,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
         add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
         add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
+        add("item.confluence.ancient_chisel.tooltip", "25% increased mining speed");
+        add("item.confluence.ancient_chisel.tooltip2", "“Age-old problems require age-old solutions”");
+        add("item.confluence.treasure_magnet.tooltip", "Expanded item pickup");
+        add("item.confluence.flower_boots.tooltip", "Flowers grow on the grass you walk on");
+        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();

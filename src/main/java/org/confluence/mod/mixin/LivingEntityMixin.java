@@ -19,6 +19,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
+import org.confluence.mod.item.curio.missellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
@@ -40,8 +41,10 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+        if (c$getSelf() instanceof Player player) {
+            player.getCapability(AbilityProvider.CAPABILITY)
+                .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+        }
     }
 
     @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
@@ -56,10 +59,13 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private int c$getInvulnerableTime(int constant) {
-        AtomicInteger time = new AtomicInteger(constant);
-        c$getSelf().getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
-        return time.get();
+        if (c$getSelf() instanceof Player player) {
+            AtomicInteger time = new AtomicInteger(constant);
+            player.getCapability(AbilityProvider.CAPABILITY)
+                .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
+            return time.get();
+        }
+        return constant;
     }
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"))
@@ -83,8 +89,13 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
     private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
-        CuriosUtils.findCurio(c$getSelf(), IFluidWalk.class)
-            .ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+        LivingEntity self = c$getSelf();
+        if (self.isCrouching()) {
+            cir.setReturnValue(false);
+        } else {
+            CuriosUtils.findCurio(self, IFluidWalk.class).ifPresent(iFluidWalk ->
+                cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+        }
     }
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canStandOnFluid(Lnet/minecraft/world/level/material/FluidState;)Z"))
@@ -144,6 +155,11 @@ public abstract class LivingEntityMixin {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
+    }
+
+    @Inject(method = "onChangedBlock", at = @At("TAIL"))
+    private void onMoved(BlockPos pPos, CallbackInfo ci) {
+        IFlowerBoots.apply(c$getSelf());
     }
 
     @Unique
