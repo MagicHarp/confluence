@@ -2,13 +2,13 @@ package org.confluence.mod.mixin.entity;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
@@ -73,7 +73,8 @@ public abstract class EntityMixin implements IEntity {
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
         if (c$getSelf() instanceof Player living) {
-            if (living.canStandOnFluid(Fluids.LAVA.defaultFluidState())) return false;
+            BlockPos onPos = living.getOnPos();
+            if (living.level().getFluidState(onPos).is(FluidTags.LAVA) && !living.level().getFluidState(onPos.above()).is(FluidTags.LAVA)) return false;
             living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
                     if (playerAbility.decreaseLavaImmuneTicks()) {

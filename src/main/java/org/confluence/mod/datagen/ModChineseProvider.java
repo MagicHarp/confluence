@@ -206,13 +206,14 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
         add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
         add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
-        add("item.confluence.ancient_chisel.tooltip1", "采矿速度提高25%");
+        add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
         add("item.confluence.ancient_chisel.tooltip2", "“古老的问题需要古老的解决方案”");
         add("item.confluence.lucky_coin.tooltip", "击中敌人有时会掉落额外的钱币");
         add("item.confluence.coin_ring.tooltip", "扩大钱币拾取范围、击中敌人有时会掉落额外的钱币");
         add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
         add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
-
+        add("item.confluence.flower_boots.tooltip", "你走过的草地上会长出花朵");
+        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 

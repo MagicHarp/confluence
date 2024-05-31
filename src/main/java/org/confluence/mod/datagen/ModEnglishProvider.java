@@ -200,6 +200,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.coin_ring.tooltip", "Increasing the coin pickup range and hitting enemies will sometimes drop additional coins");
         add("item.confluence.hive_pack.tooltip", "Increases the strength of friendly bees");
         add("item.confluence.treasure_magnet.tooltip", "Expanded item pickup");
+        add("item.confluence.flower_boots.tooltip", "Flowers grow on the grass you walk on");
+        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 
