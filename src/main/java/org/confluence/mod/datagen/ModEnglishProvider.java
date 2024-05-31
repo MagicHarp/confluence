@@ -202,7 +202,21 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hive_pack.tooltip", "Increases the strength of friendly bees");
         add("item.confluence.treasure_magnet.tooltip", "Expanded item pickup");
         add("item.confluence.flower_boots.tooltip", "Flowers grow on the grass you walk on");
-        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
+        add("item.confluence.high_test_fishing_line.tooltip", "Line never breaks");
+        add("item.confluence.angler_earring.tooltip", "Increases fishing power");
+        add("item.confluence.fishing_bobber.tooltip", "Increases fishing power");
+        add("item.confluence.glowing_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.lava_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.helium_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.neon_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.argon_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.krypton_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.xenon_moss_fishing_bobber.tooltip", "Increases fishing power,Your bobber now glows");
+        add("item.confluence.tackle_box.tooltip", "−5% bait consumption chance");
+        add("item.confluence.angler_tackle_bag.tooltip", "Line never breaks and −5% bait consumption chance");
+        add("item.confluence.lavaproof_fishing_hook.tooltip", "Allows fishing in lava regardless of bait or rod used.");
+        add("item.confluence.lavaproof_tackle_bag.tooltip1", "Allows fishing in lava regardless of bait or rod used.");
+        add("item.confluence.lavaproof_tackle_bag.tooltip2", "Line never breaks and −5% bait consumption chance");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

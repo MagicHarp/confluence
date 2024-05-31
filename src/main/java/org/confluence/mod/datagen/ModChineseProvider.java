@@ -214,7 +214,21 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
         add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
         add("item.confluence.flower_boots.tooltip", "你走过的草地上会长出花朵");
-        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
+        add("item.confluence.high_test_fishing_line.tooltip", "鱼线永远不会断");
+        add("item.confluence.angler_earring.tooltip", "增加渔力");
+        add("item.confluence.fishing_bobber.tooltip", "增加渔力");
+        add("item.confluence.glowing_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.lava_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.helium_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.neon_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.argon_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.krypton_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.xenon_moss_fishing_bobber.tooltip", "增加渔力，钓鱼浮标会发光");
+        add("item.confluence.tackle_box.tooltip", "诱饵消耗率减少5%");
+        add("item.confluence.angler_tackle_bag.tooltip", "鱼线永远不会断、诱饵消耗率减少5%");
+        add("item.confluence.lavaproof_fishing_hook.tooltip", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
+        add("item.confluence.lavaproof_tackle_bag.tooltip1", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
+        add("item.confluence.lavaproof_tackle_bag.tooltip2", "鱼线永远不会断、诱饵消耗率减少5%");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
 
@@ -760,7 +774,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(BOTTOMLESS_SHIMMER_BUCKET.get(), "无底微光桶");
         add(SOUL_CAKE.get(), "灵魂蛋糕");
         add(STAR.get(), "魔力星");
-        add(SUGAR_PLUM.get(), "糖李");
+        add(SUGAR_PLUM.get(), "蜜糖李");
         add(HEART.get(), "心");
         add(CANDY_CANE.get(), "拐杖糖");
         add(VITAL_CRYSTAL.get(), "活力水晶");
@@ -1090,6 +1104,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.KRYPTON_MOSS_FISHING_BOBBER.get(), "氪苔藓钓鱼浮标");
         add(CurioItems.XENON_MOSS_FISHING_BOBBER.get(), "氙苔藓钓鱼浮标");
         add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
+        add(CurioItems.RANGER_EMBLEM.get(), "游侠徽章");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
