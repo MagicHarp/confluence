@@ -21,10 +21,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.item.curio.combat.FrozenTurtleShell;
-import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
-import org.confluence.mod.item.curio.combat.PaladinsShield;
-import org.confluence.mod.item.curio.combat.PanicNecklace;
+import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
@@ -56,6 +53,7 @@ public final class ForgeEvents {
 
         PanicNecklace.apply(living);
 
+        amount = IProjectileAttack.apply(living, damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
