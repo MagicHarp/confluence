@@ -1,6 +1,7 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Boxes;
@@ -18,6 +19,9 @@ import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
+import org.confluence.mod.item.gun.AmmoItems;
+import org.confluence.mod.item.gun.GunItems;
+import org.confluence.mod.item.gun.HandGunItem;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.item.mana.ManaWeapons;
@@ -915,6 +919,25 @@ public class ModChineseProvider extends LanguageProvider {
         add(ManaWeapons.RAZORPINE.get(), "剃刀松");
         add(ManaWeapons.BETSYS_WRATH.get(), "双足翼龙怒气");
 
+        //射手武器
+        add(GunItems.HANDGUN.get(), "手枪");
+        //子弹
+        add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
+        add(AmmoItems.METEOR_BULLET.get(), "流星弹");
+        add(AmmoItems.SILVER_BULLET.get(), "银子弹");
+        add(AmmoItems.CRYSTAL_BILLET.get(), "水晶子弹");
+        add(AmmoItems.CURSED_BULLET.get(), "诅咒弹");
+        add(AmmoItems.CHLOROPHYTE_BULLET.get(), "叶绿弹");
+        add(AmmoItems.HIGH_VELOCITY_BULLET.get(), "高速子弹");
+        add(AmmoItems.ICHOR_BULLET.get(), "灵液弹");
+        add(AmmoItems.VENOM_BULLET.get(), "毒液弹");
+        add(AmmoItems.PARTY_BULLET.get(), "派对弹");
+        add(AmmoItems.NANO_BULLET.get(), "纳米弹");
+        add(AmmoItems.EXPLODING_BULLET.get(), "爆破弹");
+        add(AmmoItems.GOLDEN_BULLET.get(), "金子弹");
+        add(AmmoItems.ENDLESS_MUSKET_POUCH.get(), "无限子弹袋");
+        add(AmmoItems.LUMINITE_BULLET.get(), "夜明弹");
+        add(AmmoItems.TUNGSTEN_BULLET.get(), "钨子弹");
         //刷怪蛋
         add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(), "蓝色史莱姆刷怪蛋");
         add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(), "红色史莱姆刷怪蛋");

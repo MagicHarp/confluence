@@ -46,9 +46,9 @@ public class HandGunItem extends AbstractGunItem {
                 int r = arm == HumanoidArm.RIGHT ? 1 : -1;
                 poseStack.translate(r * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
 
-                poseStack.translate(r * -0.2785682F, 0.18344387F, 0.15731531F);
+                poseStack.translate(r * -0.2785682F, 0.05F, 0.15731531F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(13.935F));
-                poseStack.mulPose(Axis.YP.rotationDegrees(r * 35.3F));
+                poseStack.mulPose(Axis.YP.rotationDegrees(r * 50.3F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(r * -9.785F));
                 poseStack.mulPose(Axis.YN.rotationDegrees(r * 45.0F));
                 return true;
