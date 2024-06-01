@@ -56,7 +56,7 @@ public class BaseAmmoEntity extends Projectile implements VariantHolder<BaseAmmo
         checkInsideBlocks();
         Vec3 vec3 = getDeltaMovement();
         HitResult.Type hitresult$type = hitresult.getType();
-        if (hitresult$type == HitResult.Type.BLOCK || vec3.length() < 0.007) {
+        if (hitresult$type == HitResult.Type.BLOCK) {
             discard();
             return;
         }
@@ -69,6 +69,7 @@ public class BaseAmmoEntity extends Projectile implements VariantHolder<BaseAmmo
         double offZ = getZ() + vec3.z;
         setDeltaMovement(vec3.scale(0.93));
         setPos(offX, offY, offZ);
+        if (tickCount > 200) discard();
     }
 
     @Override
@@ -83,6 +84,7 @@ public class BaseAmmoEntity extends Projectile implements VariantHolder<BaseAmmo
                 setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
             }
         }
+        if (entity.isPickable()) discard();
     }
 
     @Override
@@ -114,21 +116,21 @@ public class BaseAmmoEntity extends Projectile implements VariantHolder<BaseAmmo
     }
 
     public enum Variant implements StringRepresentable {
-        MUSKET(0, "musket", 7.0F, 4.0F, 2, 2.0F),
-        METEOR(1, "meteor", 8.0F, 3.0F, 2, 1.0F),
-        SILVER(2, "silver", 9.0F, 4.5F, 2, 3.0F),
-        CRYSTAL(3, "crystal", 9.0F, 4.5F, 2, 3.0F),
-        CURSED(4, "cursed", 12.0F, 5.0F, 3, 4.5F),
-        CHLOROPHYTE(5, "chlorophyte", 9.0F, 5.0F, 3, 4.5F),
-        HIGH_VELOCITY(6, "high_velocity", 11.0F, 4.0F, 8, 4.0F),
-        ICHOR(7, "ichor", 13.0F, 5.25F, 3, 4.0F),
-        VENOM(8, "venom", 15.0F, 5.3F, 3, 4.1F),
-        PARTY(9, "party", 10.0F, 5.1F, 3, 5.0F),
-        NANO(10, "nano", 15.0F, 4.6F, 3, 3.6F),
-        EXPLODING(11, "exploding", 10.0F, 4.7F, 3, 6.6F),
-        GOLDEN(12, "golden", 10.0F, 4.6F, 3, 3.6F),
-        LUMINITE(13, "luminite", 20.0F, 2.0F, 6, 3.0F),
-        TUNGSTEN(14, "tungsten", 9.0F, 4.5F, 2, 4.0F);
+        MUSKET(0, "musket", 7.0F, 2.0F, 2, 2.0F),
+        METEOR(1, "meteor", 8.0F, 1.5F, 2, 1.0F),
+        SILVER(2, "silver", 9.0F, 2.25F, 2, 3.0F),
+        CRYSTAL(3, "crystal", 9.0F, 2.25F, 2, 3.0F),
+        CURSED(4, "cursed", 12.0F, 1.6667F, 3, 4.5F),
+        CHLOROPHYTE(5, "chlorophyte", 9.0F, 1.6667F, 3, 4.5F),
+        HIGH_VELOCITY(6, "high_velocity", 11.0F, 0.5F, 8, 4.0F),
+        ICHOR(7, "ichor", 13.0F, 1.75F, 3, 4.0F),
+        VENOM(8, "venom", 15.0F, 1.7667F, 3, 4.1F),
+        PARTY(9, "party", 10.0F, 1.7F, 3, 5.0F),
+        NANO(10, "nano", 15.0F, 1.5333F, 3, 3.6F),
+        EXPLODING(11, "exploding", 10.0F, .5667F, 3, 6.6F),
+        GOLDEN(12, "golden", 10.0F, 1.5333F, 3, 3.6F),
+        LUMINITE(13, "luminite", 20.0F, 0.3333F, 6, 3.0F),
+        TUNGSTEN(14, "tungsten", 9.0F, 2.25F, 2, 4.0F);
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;

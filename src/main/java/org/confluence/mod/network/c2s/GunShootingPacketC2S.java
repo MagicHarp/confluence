@@ -9,9 +9,9 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.entity.projectile.BaseAmmoEntity;
+import org.confluence.mod.item.gun.AbstractGunItem;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.BaseAmmoItem;
-import org.confluence.mod.item.gun.BaseGunItem;
 
 import java.util.function.Supplier;
 
@@ -30,26 +30,26 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
             ServerPlayer player = context.getSender();
             if (player == null) return;
             ItemStack itemStack = player.getItemInHand(packet.fromMainHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
-            if (itemStack.getItem() instanceof BaseGunItem baseGunItem) {
-                Tuple<ItemStack, BaseAmmoItem> ammoTuple = baseGunItem.getAmmoTuple(player);
+            if (itemStack.getItem() instanceof AbstractGunItem abstractGunItem) {
+                Tuple<ItemStack, BaseAmmoItem> ammoTuple = abstractGunItem.getAmmoTuple(player);
                 if (ammoTuple == null) return;
                 ItemStack ammoStack = ammoTuple.getA();
                 Level level = player.level();
                 BaseAmmoItem ammoItem = ammoTuple.getB();
                 BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(ammoStack, player, level);
-                ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(itemStack, baseGunItem, ammoEntity), 1.0F);
+                ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(itemStack, abstractGunItem, ammoEntity), 0.0F);
                 level.addFreshEntity(ammoEntity);
                 if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()) {
                     ammoStack.shrink(1);
                 }
-                int coolDown = baseGunItem.getCoolDown();
-                if (coolDown > 0) player.getCooldowns().addCooldown(baseGunItem, coolDown);
+                int coolDown = abstractGunItem.getCoolDown();
+                if (coolDown > 0) player.getCooldowns().addCooldown(abstractGunItem, coolDown);
             }
         });
         context.setPacketHandled(true);
     }
 
-    public static float getVelocity(ItemStack itemStack, BaseGunItem gunItem, BaseAmmoEntity ammoEntity) {
+    public static float getVelocity(ItemStack itemStack, AbstractGunItem gunItem, BaseAmmoEntity ammoEntity) {
         BaseAmmoEntity.Variant variant = ammoEntity.getVariant();
         float velocity = (gunItem.getShootingSpeed() + variant.velocity) * variant.multiplier;
         return PrefixProvider.getVelocity(itemStack, velocity);

@@ -6,17 +6,19 @@ import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
 
-public enum GunItems implements EnumRegister<BaseGunItem> {
-    HANDGUN("handgun", BaseGunItem::new);
+public enum GunItems implements EnumRegister<AbstractGunItem> {
+    HANDGUN("handgun", HandGunItem::new);
 
-    private final RegistryObject<BaseGunItem> value;
+    private final RegistryObject<AbstractGunItem> value;
 
-    GunItems(String id, Supplier<BaseGunItem> supplier) {
+    GunItems(String id, Supplier<AbstractGunItem> supplier) {
         this.value = ModItems.ITEMS.register(id, supplier);
     }
 
     @Override
-    public RegistryObject<BaseGunItem> getValue() {
+    public RegistryObject<AbstractGunItem> getValue() {
         return value;
     }
+
+    public static void init() {}
 }

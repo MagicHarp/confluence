@@ -41,7 +41,7 @@ public record HookThrowingPacketC2S(boolean throwing, int id) {
                 CuriosUtils.getSlot(player, "hook", 0).ifPresent(itemStack -> {
                     if (itemStack.getItem() instanceof AbstractHookItem item && item.canHook(level, itemStack)) {
                         AbstractHookEntity hook = item.getHook(itemStack, item, player, level);
-                        hook.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, item.getHookVelocity(), 1.0F);
+                        hook.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, item.getHookVelocity(), 0.5F);
                         level.addFreshEntity(hook);
                         CompoundTag tag = new CompoundTag();
                         tag.putInt("id", hook.getId());

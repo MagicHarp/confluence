@@ -151,8 +151,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Red extends LightSaber {
-        public Red() {
-        }
+        public Red() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -171,8 +170,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Orange extends LightSaber {
-        public Orange() {
-        }
+        public Orange() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -191,8 +189,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Yellow extends LightSaber {
-        public Yellow() {
-        }
+        public Yellow() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -211,8 +208,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Green extends LightSaber {
-        public Green() {
-        }
+        public Green() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -231,8 +227,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Blue extends LightSaber {
-        public Blue() {
-        }
+        public Blue() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -251,8 +246,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Purple extends LightSaber {
-        public Purple() {
-        }
+        public Purple() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -271,8 +265,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class White extends LightSaber {
-        public White() {
-        }
+        public White() {}
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {

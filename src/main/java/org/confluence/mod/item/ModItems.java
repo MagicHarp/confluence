@@ -21,6 +21,7 @@ import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.gun.AmmoItems;
+import org.confluence.mod.item.gun.GunItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.hook.Hooks;
@@ -97,6 +98,7 @@ public final class ModItems {
         Hooks.init();
         Baits.init();
         AmmoItems.init();
+        GunItems.init();
         ITEMS.register(bus);
     }
 }
