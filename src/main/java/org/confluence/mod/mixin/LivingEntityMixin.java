@@ -19,6 +19,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
+import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.missellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.network.NetworkHandler;
@@ -160,6 +161,13 @@ public abstract class LivingEntityMixin {
     @Inject(method = "onChangedBlock", at = @At("TAIL"))
     private void onMoved(BlockPos pPos, CallbackInfo ci) {
         IFlowerBoots.apply(c$getSelf());
+    }
+
+    @Inject(method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", at = @At("RETURN"), cancellable = true)
+    private void notAttack(LivingEntity pTarget, CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue() && RoyalGel.apply(c$getSelf(), pTarget)) {
+            cir.setReturnValue(false);
+        }
     }
 
     @Unique

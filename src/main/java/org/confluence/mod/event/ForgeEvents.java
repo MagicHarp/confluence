@@ -26,7 +26,6 @@ import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
 import org.confluence.mod.item.curio.combat.PaladinsShield;
 import org.confluence.mod.item.curio.combat.PanicNecklace;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
-import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
@@ -87,12 +86,6 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
-        LivingEntity original = event.getOriginalTarget();
-        if (RoyalGel.apply(self, original)) {
-            event.setNewTarget(null);
-            return;
-        }
-
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
         self.level().players().stream()
             .filter(player -> player.distanceTo(self) < range)

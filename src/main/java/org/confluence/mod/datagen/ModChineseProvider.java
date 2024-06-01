@@ -30,6 +30,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.auto_attack", "启用近战武器自动挥动");
         add("curios.tooltip.aggro_attach", "多人模式时，敌人更可能以你为目标");
         add("curios.tooltip.armor_pass", "盔甲穿透力提高%s点");
+        add("curios.tooltip.projectile_attack", "远程伤害提高%s%%");
         add("curios.tooltip.compass", "显示水平位置");
         add("curios.tooltip.depth_meter", "显示深度");
         add("curios.tooltip.dps_meter", "显示你的每秒伤害");
@@ -99,7 +100,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
         add("item.confluence.ice_skates.tooltip", "提供额外冰面行动力");
-        add("item.confluence.ice_skates.tooltip2", "落到冰上时冰不会碎");
         add("item.confluence.dunerider_boots.tooltip", "穿戴者可飞速奔跑，在沙地上还能跑得更快");
         add("item.confluence.dunerider_boots.tooltip2", "“无节律行走就不会引来蠕虫”");
         add("item.confluence.lucky_horseshoe.tooltip", "“据说能带来好运、驱除邪灵”");
@@ -279,5 +279,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.TREASURE_MAGNET.get(), "宝藏磁石");
         add(CurioItems.FLOWER_BOOTS.get(), "花靴");
         add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
+        add(CurioItems.RANGER_EMBLEM.get(), "游侠徽章");
     }
 }

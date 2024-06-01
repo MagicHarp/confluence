@@ -46,7 +46,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 天界贝壳 */
     COBALT_SHIELD("cobalt_shield", CobaltShield::new), // 钴护盾
     CROSS_NECKLACE("cross_necklace", CrossNecklace::new), // 十字项链
-    /* 游侠徽章 */
+    RANGER_EMBLEM("ranger_emblem", RangerEmblem::new), // 游侠徽章
     /* 召唤师徽章 */
     WARRIOR_EMBLEM("warrior_emblem", WarriorEmblem::new), // 战士徽章
     SORCERER_EMBLEM("sorcerer_emblem", SorcererEmblem::new), // 巫士徽章
@@ -59,7 +59,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FROZEN_SHIELD("frozen_shield", FrozenShield::new), // 冰冻护盾
     /* 暖手宝 */
     HERO_SHIELD("hero_shield", HeroShield::new), // 英雄护盾
-    //HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝 (WIP)
+    //HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝
     SHARK_TOOTH_NECKLACE("shark_tooth_necklace", SharkToothNecklace::new), // 鲨牙项链
     /* 毒刺项链 */
     /* 甜心项链 */

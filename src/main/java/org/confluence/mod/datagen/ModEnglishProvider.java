@@ -36,6 +36,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
         add("curios.tooltip.aggro_attach", "Enemies are more likely to target you");
         add("curios.tooltip.armor_pass", "Increases armor penetration by %s");
+        add("curios.tooltip.projectile_attack", "%s%% increased ranged damage");
         add("curios.tooltip.compass", "Displays horizontal position");
         add("curios.tooltip.depth_meter", "Displays depth");
         add("curios.tooltip.dps_meter", "Displays your damage per second");
@@ -105,7 +106,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magiluminescence.tooltip3", "'A brief light in my dark life.'");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "Allows the holder to do an improved double jump");
         add("item.confluence.ice_skates.tooltip", "Provides extra mobility on ice");
-        add("item.confluence.ice_skates.tooltip2", "Ice will not break when you fall on it");
         add("item.confluence.dunerider_boots.tooltip", "The wearer can run super fast, and even faster on sand");
         add("item.confluence.dunerider_boots.tooltip2", "'Walk without rhythm and you won't attract the worm'");
         add("item.confluence.lucky_horseshoe.tooltip", "'Said to bring good fortune and keep evil spirits at bay'");
