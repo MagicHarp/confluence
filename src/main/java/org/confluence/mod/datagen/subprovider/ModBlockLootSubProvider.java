@@ -15,6 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.DecorativeBlocks;
+import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.common.Materials;
@@ -100,6 +101,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_ADAMANTITE.get()));
         add(Ores.DEEPSLATE_TITANIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_TITANIUM.get()));
         // endregion ore
+        //torch
+        for (Torches torch : Torches.values()) {
+            dropSelf(torch.stand.get());
+            dropSelf(torch.wall.get());
+        }
         // region natural
         dropSelf(EBONY_STONE.get());
         dropSelf(EBONY_SAND.get());
