@@ -1,7 +1,6 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Boxes;
@@ -21,7 +20,6 @@ import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.GunItems;
-import org.confluence.mod.item.gun.HandGunItem;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.item.mana.ManaWeapons;
@@ -144,7 +142,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
         add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
         add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度");
-        add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明(仍在开发中)");
+        add("item.confluence.magiluminescence.tooltip2", "穿戴时可提供照明");
         add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
         add("item.confluence.ice_skates.tooltip", "提供额外冰面行动力");

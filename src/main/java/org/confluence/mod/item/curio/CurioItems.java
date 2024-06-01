@@ -155,7 +155,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 梯凳 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
-    MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符 (WIP)
+    MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符
     FLIPPER("flipper", Flipper::new), // 脚蹼
     /* 潜水装备 */
     /* 水母潜水装备 */

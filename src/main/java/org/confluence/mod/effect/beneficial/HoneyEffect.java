@@ -12,11 +12,6 @@ public class HoneyEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(@NotNull LivingEntity living, int amplifier) {
-        living.heal(1.0F);
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int tick, int amplifier) {
-        return tick % 20 == 0;
+        living.heal(0.05F);
     }
 }

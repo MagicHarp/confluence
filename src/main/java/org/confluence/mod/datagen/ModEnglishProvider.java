@@ -121,7 +121,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.pocket_mirror.tooltip", "Immunity to Petrification");
         add("item.confluence.ankh_charm.tooltip", "Grants immunity to most debuffs");
         add("item.confluence.ankh_shield.tooltip", "Grants immunity to most debuffs");
-        add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged(WIP)");
+        add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
         add("item.confluence.cobalt_shield.tooltip", "Grants immunity to knockback");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
@@ -129,7 +129,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
         add("item.confluence.spectre_goggles.tooltip", "Enables Echo Sight, showing hidden blocks");
         add("item.confluence.magiluminescence.tooltip", "Increases movement speed and acceleration");
-        add("item.confluence.magiluminescence.tooltip2", "Provides light when worn(WIP)");
+        add("item.confluence.magiluminescence.tooltip2", "Provides light when worn");
         add("item.confluence.magiluminescence.tooltip3", "'A brief light in my dark life.'");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "Allows the holder to do an improved double jump");
         add("item.confluence.ice_skates.tooltip", "Provides extra mobility on ice");
