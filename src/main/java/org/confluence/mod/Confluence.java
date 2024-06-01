@@ -18,6 +18,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
+import org.confluence.mod.misc.ModArmPoses;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSounds;
@@ -42,6 +43,7 @@ public final class Confluence {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         GeckoLib.initialize();
         ModFluids.initialize();
+        ModArmPoses.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.register(bus);
         ModItems.register(bus);

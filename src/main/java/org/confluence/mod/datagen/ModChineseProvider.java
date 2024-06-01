@@ -42,7 +42,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.materials", "汇流来世 | 材料");
         add("creativetab.confluence.tools", "汇流来世 | 工具");
         add("creativetab.confluence.warriors", "汇流来世 | 战士武器");
-        add("creativetab.confluence.shooters", "汇流来世 | 射手武器");
+        add("creativetab.confluence.rangers", "汇流来世 | 射手武器");
         add("creativetab.confluence.mages", "汇流来世 | 法师武器");
         add("creativetab.confluence.summoners", "汇流来世 | 召唤师武器");
         add("creativetab.confluence.misc", "汇流来世 | 杂项");

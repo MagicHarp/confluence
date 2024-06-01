@@ -12,7 +12,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMagicAttack {
+public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMagicAttack, IProjectileAttack {
     public static final UUID DAMAGE_UUID = UUID.fromString("35E7BAD6-5998-D35B-2974-4FA8065D29F7");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Destroyer Emblem", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -30,6 +30,11 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMag
     @Override
     public double getMagicBonus() {
         return 0.1;
+    }
+
+    @Override
+    public float getProjectileBonus() {
+        return 0.1F;
     }
 
     @Override

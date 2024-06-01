@@ -113,6 +113,8 @@ public final class ModClient {
         event.registerEntityRenderer(ModEntities.LUNAR_HOOK.get(), LunarHookRenderer::new);
         /* todo 静止钩 */
 
+        event.registerEntityRenderer(ModEntities.BASE_AMMO.get(), AmmoRenderer::new);
+
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }
 

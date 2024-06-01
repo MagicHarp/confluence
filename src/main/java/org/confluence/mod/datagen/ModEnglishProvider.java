@@ -30,7 +30,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.materials", "Confluence | Materials");
         add("creativetab.confluence.tools", "Confluence | Tools");
         add("creativetab.confluence.warriors", "Confluence | Warriors");
-        add("creativetab.confluence.shooters", "Confluence | Shooters");
+        add("creativetab.confluence.rangers", "Confluence | Rangers");
         add("creativetab.confluence.mages", "Confluence | Mages");
         add("creativetab.confluence.summoners", "Confluence | Summoners");
         add("creativetab.confluence.misc", "Confluence | Miscellaneous");

@@ -24,6 +24,8 @@ import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
 import org.confluence.mod.item.food.Foods;
+import org.confluence.mod.item.gun.AmmoItems;
+import org.confluence.mod.item.gun.GunItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.hook.Hooks;
@@ -176,9 +178,10 @@ public final class ModTabs {
     // 射手武器
     public static final RegistryObject<CreativeModeTab> SHOOTERS = TABS.register("shooters",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.REMOTE_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.shooters"))
+            .title(Component.translatable("creativetab.confluence.rangers"))
             .displayItems((parameters, output) -> {
-
+                for (GunItems gunItems : GunItems.values()) output.accept(gunItems.get());
+                for (AmmoItems ammoItems : AmmoItems.values()) output.accept(ammoItems.get());
             })
             .build());
     // 法师武器
