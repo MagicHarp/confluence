@@ -2,6 +2,6 @@
     "parent": "minecraft:block/template_torch_wall",
     "render_type": "cutout",
     "textures": {
-        "torch": "confluence:block/torch/hallow_torch"
+        "torch": "confluence:block/torch/hallowed_torch"
     }
 }
