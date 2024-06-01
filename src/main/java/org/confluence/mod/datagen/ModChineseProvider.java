@@ -118,6 +118,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("key.confluence.hook", "使用钩爪");
         add("key.confluence.metal_detector", "检测矿物");
 
+        add("curios.identifier.hook", "钩爪栏");
+
         add("item.confluence.adhesive_bandage.tooltip", "对流血免疫");
         add("item.confluence.medicated_bandage.tooltip", "对中毒和流血免疫");
         add("item.confluence.armor_bracing.tooltip", "对虚弱和破损盔甲免疫");
