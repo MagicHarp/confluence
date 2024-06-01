@@ -2,6 +2,7 @@ package org.confluence.mod.client.renderer.entity.hook;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -19,12 +20,18 @@ import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends EntityRenderer<T> {
-    protected final BaseHookModel model;
+    protected final EntityModel<? extends AbstractHookEntity> model;
     protected final BlockRenderDispatcher dispatcher;
 
     public AbstractHookRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
         this.model = new BaseHookModel(pContext.bakeLayer(BaseHookModel.LAYER_LOCATION));
+        this.dispatcher = pContext.getBlockRenderDispatcher();
+    }
+
+    public AbstractHookRenderer(EntityRendererProvider.Context pContext, EntityModel<? extends AbstractHookEntity> model) {
+        super(pContext);
+        this.model = model;
         this.dispatcher = pContext.getBlockRenderDispatcher();
     }
 

@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 
 public class HandGunItem extends AbstractGunItem {
     public HandGunItem() {
-        super(ModRarity.BLUE);
+        super(ModRarity.GREEN);
     }
 
     @Override

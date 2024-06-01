@@ -5,15 +5,18 @@
             "g": 150,
             "b": 255,
             "a": 255
+        },
+        "default": {
+            "r": 255,
+            "g": 253,
+            "b": 85,
+            "a": 255
         }
     },
     "LightItem": [
         {
             "item_id": "minecraft:torch",
-            "r": 255,
-            "g": 253,
-            "b": 85,
-            "a": 255,
+            "color": "#default",
             "radius": 7
         },
         {

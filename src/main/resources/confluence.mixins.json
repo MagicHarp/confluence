@@ -21,6 +21,7 @@
         "entity.LivingEntityMixin",
         "entity.PlayerMixin",
         "integration.ForgePlatformHelperMixin",
+        "integration.LightManagerMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
         "item.CrossbowItemMixin",

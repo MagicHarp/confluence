@@ -1,18 +1,26 @@
 package org.confluence.mod.client.handler;
 
+import com.lowdragmc.shimmer.client.light.ColorPointLight;
+import com.lowdragmc.shimmer.client.light.LightManager;
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.network.s2c.*;
 import org.confluence.mod.util.IEntity;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -135,6 +143,31 @@ public final class ClientPacketHandler {
             Entity entity = localPlayer.level().getEntity(packet.entityId());
             if (entity != null) {
                 ((IEntity) entity).c$setShouldRot(packet.enabled());
+            }
+        });
+        context.setPacketHandled(true);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void handleLight(PlayerLightPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            try {
+                Field field = LightManager.class.getDeclaredField("NO_UV_LIGHT_PLAYER");
+                field.setAccessible(true);
+                Map<UUID, ColorPointLight> NO_UV_LIGHT_PLAYER = (Map<UUID, ColorPointLight>) field.get(LightManager.INSTANCE);
+                ClientLevel level = Minecraft.getInstance().level;
+                if (level == null) return;
+                Player player = level.getPlayerByUUID(packet.playerUUID());
+                if (player == null) return;
+                if (packet.enable()) {
+                    PlayerPointLight light = new PlayerPointLight(LightManager.INSTANCE, player.position().toVector3f());
+                    NO_UV_LIGHT_PLAYER.put(packet.playerUUID(), light);
+                } else {
+                    NO_UV_LIGHT_PLAYER.remove(packet.playerUUID());
+                }
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                throw new RuntimeException(e);
             }
         });
         context.setPacketHandled(true);

@@ -20,7 +20,7 @@ public class MagmaSkull extends BaseCurioItem implements IFireImmune, ILavaImmun
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(ILavaImmune.TOOLTIP);
         list.add(IFireImmune.TOOLTIP);
+        list.add(ILavaImmune.TOOLTIP);
     }
 }

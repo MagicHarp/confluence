@@ -137,12 +137,12 @@ public final class PlayerJumpHandler {
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            fartSpeed = packet.fartSpeed();
+            if (packet.fartSpeed() > -1.5) fartSpeed = packet.fartSpeed();
             sandstormSpeed = packet.sandstormSpeed();
             maxSandstormTicks = packet.sandstormTicks();
             blizzardSpeed = packet.blizzardSpeed();
             maxBlizzardTicks = packet.blizzardTicks();
-            tsunamiSpeed = packet.tsunamiSpeed();
+            if (packet.tsunamiSpeed() > -1.5) tsunamiSpeed = packet.tsunamiSpeed();
             cloudSpeed = packet.cloudSpeed();
         });
         context.setPacketHandled(true);

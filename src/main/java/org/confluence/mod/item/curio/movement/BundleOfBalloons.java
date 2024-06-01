@@ -33,12 +33,12 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new PlayerJumpPacketS2C(
-                    -1.0,
+                    -2.0,
                     SandstormInABottle.SPEED,
                     SandstormInABottle.TICKS,
                     BlizzardInABottle.SPEED,
                     BlizzardInABottle.TICKS,
-                    -1.0,
+                    -2.0,
                     CloudInABalloon.SPEED
                 )
             );

@@ -5,15 +5,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
 import org.confluence.mod.entity.hook.WebSlingerEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class WebSlingerRenderer extends AbstractHookRenderer<WebSlingerEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/grappling_hook.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/web_slinger.png");
     private final BlockState CHAIN;
 
     public WebSlingerRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext);
+        super(pContext, new WebSlingerModel(pContext.bakeLayer(WebSlingerModel.LAYER_LOCATION)));
         this.CHAIN = ModBlocks.SILK_CHAIN.get().defaultBlockState();
     }
 

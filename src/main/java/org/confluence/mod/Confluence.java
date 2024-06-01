@@ -55,5 +55,6 @@ public final class Confluence {
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
+        
     }
 }

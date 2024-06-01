@@ -22,6 +22,8 @@ import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.hook.BaseHookModel;
+import org.confluence.mod.client.model.entity.hook.SkeletronHandModel;
+import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.ModParticles;
@@ -60,6 +62,8 @@ public final class ModClient {
         event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
+        event.registerLayerDefinition(WebSlingerModel.LAYER_LOCATION, WebSlingerModel::createBodyLayer);
+        event.registerLayerDefinition(SkeletronHandModel.LAYER_LOCATION, SkeletronHandModel::createBodyLayer);
 
         event.registerLayerDefinition(BaseFishingHookModel.WOOD, BaseFishingHookModel::createWoodLayer);
         event.registerLayerDefinition(BaseFishingHookModel.REINFORCED, BaseFishingHookModel::createReinforcedLayer);
