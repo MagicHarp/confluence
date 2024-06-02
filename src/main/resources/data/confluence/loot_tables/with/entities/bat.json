@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:entity",
+    "pools": [
+        {
+            "rolls": 2,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:radar",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.5
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:compass",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.5
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:depth_meter",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.5
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "type": "confluence:simple_modifier",
+    "conditions": [
+        {
+            "condition": "forge:loot_table_id",
+            "loot_table_id": "minecraft:entities/glow_squid"
+        }
+    ],
+    "with": "confluence:with/entities/glow_squid"
+}
