@@ -15,6 +15,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> SHOES_FLY = register("shoes_fly");
     public static final RegistryObject<SoundEvent> SHOES_FLY_JET = register("shoes_fly_jet");
     public static final RegistryObject<SoundEvent> SHOES_WALK = register("shoes_walk");
+    public static final RegistryObject<SoundEvent> FART_SOUND = register("fart_sound");
 
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));

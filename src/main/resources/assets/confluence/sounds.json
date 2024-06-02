@@ -9,6 +9,11 @@
             "confluence:waving"
         ]
     },
+    "fart_sound": {
+        "sounds": [
+            "confluence:fart_sound"
+        ]
+    },
     "double_jump": {
         "sounds": [
             "confluence:double_jump"
