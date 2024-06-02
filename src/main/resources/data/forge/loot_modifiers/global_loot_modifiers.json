@@ -14,9 +14,6 @@
         "confluence:chests/spawn_bonus_chest",
         "confluence:chests/desert_pyramid",
         "confluence:chests/village/village_fisher",
-        "confluence:chests/",
-        "confluence:chests/",
-        "confluence:chests/",
         "confluence:entities/cave_spider",
         "confluence:entities/evoker",
         "confluence:entities/piglin_brute",
@@ -32,17 +29,6 @@
         "confluence:entities/blaze",
         "confluence:entities/glow_squid",
         "confluence:entities/warden",
-        "confluence:entities/bat",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/",
-        "confluence:entities/"
+        "confluence:entities/bat"
     ]
 }

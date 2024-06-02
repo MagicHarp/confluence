@@ -31,7 +31,8 @@ public class SimpleLootModifier extends LootModifier {
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        context.getResolver().getLootTable(with).getRandomItems(context, generatedLoot::add);
+        if (context.getRandom().nextFloat() < 0.8F) generatedLoot.clear();
+        context.getResolver().getLootTable(with).getRandomItemsRaw(context, generatedLoot::add);
         return generatedLoot;
     }
 
