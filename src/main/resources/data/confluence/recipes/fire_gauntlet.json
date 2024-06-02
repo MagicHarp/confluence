@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:magma_stone"
+        },
+        {
+            "item": "confluence:mechanical_glove"
+        }
+    ],
+    "result": {
+        "item": "confluence:fire_gauntlet",
+        "count": 1
+    }
+}

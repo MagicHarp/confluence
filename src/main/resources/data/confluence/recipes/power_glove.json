@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:feral_claws"
+        },
+        {
+            "item": "confluence:titan_glove"
+        }
+    ],
+    "result": {
+        "item": "confluence:power_glove",
+        "count": 1
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:obsidian_water_walking_boots"
+        },
+        {
+            "item": "confluence:obsidian_rose"
+        },
+        {
+            "item": "confluence:lava_charm"
+        }
+    ],
+    "result": {
+        "item": "confluence:lava_waders",
+        "count": 1
+    }
+}

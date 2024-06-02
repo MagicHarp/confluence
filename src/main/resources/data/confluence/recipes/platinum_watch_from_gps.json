@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "platinum_watch"
+        },
+        {
+            "item": "depth_meter"
+        },
+        {
+            "item": "compass"
+        }
+    ],
+    "result": {
+        "item": "confluence:gps",
+        "count": 1
+    }
+}

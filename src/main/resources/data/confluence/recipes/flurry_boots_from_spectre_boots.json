@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:spectre_boots"
+        },
+        {
+            "item": "confluence:rocket_boots"
+        }
+    ],
+    "result": {
+        "item": "confluence:spectre_boots",
+        "count": 1
+    }
+}

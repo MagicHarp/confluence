@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "radar"
+        },
+        {
+            "item": "life_form_analyzer"
+        },
+        {
+            "item": "tally_counter"
+        }
+    ],
+    "result": {
+        "item": "confluence:rek_3000",
+        "count": 1
+    }
+}

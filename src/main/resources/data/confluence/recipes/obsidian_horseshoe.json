@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:lucky_horseshoe"
+        },
+        {
+            "item": "confluence:obsidian_skull"
+        }
+    ],
+    "result": {
+        "item": "confluence:obsidian_horseshoe",
+        "count": 1
+    }
+}

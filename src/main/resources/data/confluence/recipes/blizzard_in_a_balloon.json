@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:blizzard_in_a_bottle"
+        },
+        {
+            "item": "confluence:shiny_red_balloon"
+        }
+    ],
+    "result": {
+        "item": "confluence:blizzard_in_a_balloon ",
+        "count": 1
+    }
+}

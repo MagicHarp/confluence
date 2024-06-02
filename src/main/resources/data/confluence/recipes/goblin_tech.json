@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "stopwatch"
+        },
+        {
+            "item": "metal_detector"
+        },
+        {
+            "item": "stopwatch"
+        }
+    ],
+    "result": {
+        "item": "confluence:goblin_tech",
+        "count": 1
+    }
+}

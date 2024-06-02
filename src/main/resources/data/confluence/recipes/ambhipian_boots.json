@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:sailfish_boots"
+        },
+        {
+            "item": "confluence:frog_leg"
+        }
+    ],
+    "result": {
+        "item": "confluence:ambhipian_boots",
+        "count": 1
+    }
+}

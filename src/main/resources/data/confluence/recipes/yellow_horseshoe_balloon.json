@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:sandstorm_in_a_balloon"
+        },
+        {
+            "item": "confluence:lucky_horseshoe"
+        }
+    ],
+    "result": {
+        "item": "confluence:yellow_horseshoe_balloon",
+        "count": 1
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:spectre_boots"
+        },
+        {
+            "item": "confluence:aglet"
+        },
+        {
+            "item": "confluence:anklet_of_the_wind"
+        }
+    ],
+    "result": {
+        "item": "confluence:lightning_boots",
+        "count": 1
+    }
+}

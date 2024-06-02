@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "fish_finder"
+        },
+        {
+            "item": "goblin_tech"
+        },
+        {
+            "item": "rek_3000"
+        },
+        {
+            "item": "gps"
+        }
+    ],
+    "result": {
+        "item": "confluence:pda",
+        "count": 1
+    }
+}
