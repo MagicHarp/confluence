@@ -54,6 +54,21 @@
             "confluence:shoot"
         ]
     },
+    "fart_sound": {
+        "sounds": [
+            "confluence:fart_sound"
+        ]
+    },
+    "life_crystal_use": {
+        "sounds": [
+            "confluence:life_crystal_use"
+        ]
+    },
+    "mana_star_use": {
+        "sounds": [
+            "confluence:mana_star_use"
+        ]
+    },
     "sparkle_shoot": {
         "sounds": [
             "confluence:sparkle_shoot"

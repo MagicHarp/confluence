@@ -43,8 +43,8 @@ public final class ModFluids {
     public static void initialize() {
         HONEY = FluidTriple.builder(new ResourceLocation(MODID, "honey"))
             .properties(FluidType.Properties.create()
-                .density(1400)
-                .viscosity(2000)
+                .density(2000)
+                .viscosity(3000)
                 .motionScale(0.0084)
                 .canExtinguish(true)
                 .supportsBoating(true)

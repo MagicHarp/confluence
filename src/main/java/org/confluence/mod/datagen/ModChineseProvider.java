@@ -777,6 +777,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(THROWING_KNIVES.get(), "投刀");
         add(HONEY_BUCKET.get(), "蜂蜜桶");
         add(BOTTOMLESS_SHIMMER_BUCKET.get(), "无底微光桶");
+        add(BOTTOMLESS_WATER_BUCKET.get(), "无底水桶");
+        add(BOTTOMLESS_LAVA_BUCKET.get(), "无底岩浆桶");
+        add(BOTTOMLESS_HONEY_BUCKET.get(), "无底蜂蜜桶");
         add(SOUL_CAKE.get(), "灵魂蛋糕");
         add(STAR.get(), "魔力星");
         add(SUGAR_PLUM.get(), "蜜糖李");
