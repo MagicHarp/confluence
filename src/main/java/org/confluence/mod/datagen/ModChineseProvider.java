@@ -879,6 +879,22 @@ public class ModChineseProvider extends LanguageProvider {
         add(BONE_CHAIN.get(), "骨头锁链");
         //植物
         add(WATERLEAF.get(), "幌菊");
+        add(FLAMEFLOWERS.get(), "火焰花");
+        add(MOONSHINE_GRASS.get(), "月光草");
+        add(SHINE_ROOT.get(), "闪耀根");
+        add(SHIVERINGTHORNS .get(), "寒颤棘");
+        add(SUNFLOWERS.get(), "太阳花");
+        add(DEATHWEED.get(), "死亡草");
+        add(CORRUPT_GRASS.get(), "腐化草");
+        add(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get(), "猩红饿鬼草");
+        add(ANOTHER_CRIMSON_EYEBALL_GRASS.get(), "猩红眼球草");
+        add(ANOTHER_CRIMSON_GRASS.get(), "猩红草");
+        add(HALLOW_GRASS.get(), "神圣草");
+        add(HALLOW_FLOWERS.get(), "神圣花丛");
+        add(ANOTHER_CRIMSON_MUSHROOM.get(), "毒蘑菇");
+        add(EBONY_MUSHROOM.get(), "魔菇");
+        add(GLOWING_MUSHROOM.get(), "发光蘑菇");
+        add(LIFE_MUSHROOM.get(), "生命蘑菇");
         //法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");

@@ -89,8 +89,26 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> AMETHYST_CHAIN = registerWithItem("amethyst_chain", () -> new BaseChainBlock(MapColor.COLOR_PURPLE));
     public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     public static final RegistryObject<BaseChainBlock> BONE_CHAIN = registerWithItem("bone_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
-    //flower
-    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", BasePlantBlock::new);
+    //plant
+    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_MUSHROOM = registerWithItem("another_crimson_mushroom", BasePlantBlock::new);//毒蘑菇
+    public static final RegistryObject<FlowerBlock> EBONY_MUSHROOM = registerWithItem("ebony_mushroom", BasePlantBlock::new);//魔菇
+    public static final RegistryObject<FlowerBlock> GLOWING_MUSHROOM = registerWithItem("glowing_mushroom", BasePlantBlock::new);//发光蘑菇
+    public static final RegistryObject<FlowerBlock> LIFE_MUSHROOM = registerWithItem("life_mushroom", BasePlantBlock::new);//生命蘑菇
+    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", BasePlantBlock::new);//幌菊
+    public static final RegistryObject<FlowerBlock> FLAMEFLOWERS = registerWithItem("flameflowers", BasePlantBlock::new);//火焰花
+    public static final RegistryObject<FlowerBlock> MOONSHINE_GRASS = registerWithItem("moonshine_grass", BasePlantBlock::new);//月光草
+    public static final RegistryObject<FlowerBlock> SHINE_ROOT = registerWithItem("shine_root", BasePlantBlock::new);//闪耀根
+    public static final RegistryObject<FlowerBlock> SHIVERINGTHORNS = registerWithItem("shiveringthorns", BasePlantBlock::new);//寒颤棘
+    public static final RegistryObject<FlowerBlock> SUNFLOWERS = registerWithItem("sunflowers", BasePlantBlock::new);//太阳花
+    public static final RegistryObject<FlowerBlock> DEATHWEED = registerWithItem("deathweed", BasePlantBlock::new);//死亡草
+    //grass
+    public static final RegistryObject<FlowerBlock> CORRUPT_GRASS = registerWithItem("corrupt_grass", BasePlantBlock::new);//腐化草
+    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", BasePlantBlock::new);//猩红饿鬼草
+    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_EYEBALL_GRASS = registerWithItem("another_crimson_eyeball_grass", BasePlantBlock::new);//猩红眼球草
+    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", BasePlantBlock::new);//猩红草
+    public static final RegistryObject<FlowerBlock> HALLOW_GRASS = registerWithItem("hallow_grass", BasePlantBlock::new);//神圣草
+    public static final RegistryObject<FlowerBlock> HALLOW_FLOWERS = registerWithItem("hallow_flowers", BasePlantBlock::new);//神圣花丛
+    //荆棘
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

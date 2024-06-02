@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "confluence:block/flameflowers",
+    "particle": "confluence:block/flameflowers"
+  },
+  "render_type": "cutout"
+}

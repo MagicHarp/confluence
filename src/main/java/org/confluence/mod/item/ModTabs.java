@@ -94,6 +94,21 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
 
                 output.accept(WATERLEAF.get());
+                output.accept(MOONSHINE_GRASS.get());
+                output.accept(SHINE_ROOT.get());
+                output.accept(SHIVERINGTHORNS.get());
+                output.accept(SUNFLOWERS.get());
+                output.accept(DEATHWEED.get());
+                output.accept(ANOTHER_CRIMSON_MUSHROOM.get());
+                output.accept(EBONY_MUSHROOM.get());
+                output.accept(GLOWING_MUSHROOM.get());
+                output.accept(LIFE_MUSHROOM.get());
+                output.accept(CORRUPT_GRASS.get());
+                output.accept(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get());
+                output.accept(ANOTHER_CRIMSON_EYEBALL_GRASS.get());
+                output.accept(ANOTHER_CRIMSON_GRASS.get());
+                output.accept(HALLOW_GRASS.get());
+                output.accept(HALLOW_FLOWERS.get());
 
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());
