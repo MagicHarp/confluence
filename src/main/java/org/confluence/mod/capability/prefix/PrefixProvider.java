@@ -7,7 +7,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.item.ModPrefix;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.gun.AbstractGunItem;
 import org.confluence.mod.item.mana.IManaWeapon;

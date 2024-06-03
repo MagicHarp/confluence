@@ -115,7 +115,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         });
         Team team = serverPlayer.getTeam();
         serverPlayer.serverLevel().players().forEach(player -> {
-            if (player != serverPlayer && player.getTeam() == team) {
+            if (player != serverPlayer && player.getTeam() == team && player.distanceToSqr(serverPlayer) < 1024.0) {
                 NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
             }
         });

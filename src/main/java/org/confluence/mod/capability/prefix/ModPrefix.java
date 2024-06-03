@@ -1,6 +1,4 @@
-package org.confluence.mod.item;
-
-import org.confluence.mod.capability.prefix.ItemPrefix;
+package org.confluence.mod.capability.prefix;
 
 public interface ModPrefix {
     void copyTo(ItemPrefix itemPrefix);

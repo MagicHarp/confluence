@@ -1,7 +1,6 @@
 package org.confluence.mod.capability.prefix;
 
 import net.minecraft.util.RandomSource;
-import org.confluence.mod.item.ModPrefix;
 
 public enum PrefixType {
     UNIVERSAL(new Enum[][]{ModPrefix.Universal.values()}),

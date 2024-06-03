@@ -9,11 +9,11 @@ import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.capability.prefix.ModPrefix;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.ModPrefix;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
