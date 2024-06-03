@@ -40,6 +40,11 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             ModItems.BOTTOMLESS_HONEY_BUCKET.get(),
             ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()
         );
+        tag(ModTags.Items.FRUIT).add(
+            Items.APPLE,
+            Items.MELON_SLICE
+        );
+        tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }

@@ -65,6 +65,7 @@ public final class PlayerJumpHandler {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);
+                localPlayer.playSound(ModSounds.FART_SOUND.get());
             } else if (!sandstormFinished && sandstormSpeed > 0.0) {
                 if (remainSandstormTicks-- > 0) oneTimeJump(localPlayer, sandstormSpeed);
                 else jumpKeyDown = true;
@@ -75,6 +76,7 @@ public final class PlayerJumpHandler {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, tsunamiSpeed);
+                localPlayer.playSound(ModSounds.DOUBLE_JUMP.get());
             } else if (!cloudFinished && cloudSpeed > 0.0) {
                 cloudFinished = true;
                 jumpKeyDown = true;

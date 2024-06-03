@@ -40,6 +40,7 @@ public final class ModTags {
         public static final TagKey<Item> HARDCORE = register("hardcore");
         public static final TagKey<Item> BOTTOMLESS = register("bottomless");
         public static final TagKey<Item> FRUIT = register("fruit");
+        public static final TagKey<Item> MINUTE_WATCH = register("minute_watch");
 
         private static TagKey<Item> curios(String id) {
             return ItemTags.create(new ResourceLocation(Curios.MODID, id));
