@@ -19,13 +19,13 @@ public record PlayerJumpPacketC2S(boolean jumpBySelf) {
     public static void handle(PlayerJumpPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            ServerPlayer serverPlayer = context.getSender();
-            if (serverPlayer == null) return;
-            serverPlayer.resetFallDistance();
-            serverPlayer.hasImpulse = true;
+            ServerPlayer player = context.getSender();
+            if (player == null) return;
+            player.resetFallDistance();
+            player.hasImpulse = true;
             if (packet.jumpBySelf) {
-                serverPlayer.awardStat(Stats.JUMP);
-                serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);
+                player.awardStat(Stats.JUMP);
+                player.causeFoodExhaustion(player.isSprinting() ? 0.2F : 0.05F);
             }
         });
         context.setPacketHandled(true);

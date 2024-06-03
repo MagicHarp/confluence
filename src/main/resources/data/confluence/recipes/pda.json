@@ -2,16 +2,16 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "fish_finder"
+            "item": "confluence:fish_finder"
         },
         {
-            "item": "goblin_tech"
+            "item": "confluence:goblin_tech"
         },
         {
-            "item": "rek_3000"
+            "item": "confluence:rek_3000"
         },
         {
-            "item": "gps"
+            "item": "confluence:gps"
         }
     ],
     "result": {

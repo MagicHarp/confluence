@@ -10,7 +10,7 @@
             "item": "minecraft:chain"
         },
         "c": {
-            "item": "confluence:tungsten_ingot"
+            "tag": "forge:ingots/tungsten"
         },
         "R": {
             "item": "minecraft:redstone"

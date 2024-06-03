@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "platinum_watch"
+            "tag": "confluence:minute_watch"
         },
         {
-            "item": "depth_meter"
+            "item": "confluence:depth_meter"
         },
         {
-            "item": "compass"
+            "item": "confluence:compass"
         }
     ],
     "result": {

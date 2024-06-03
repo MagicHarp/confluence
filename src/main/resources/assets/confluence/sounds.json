@@ -1,9 +1,4 @@
 {
-    "transmission": {
-        "sounds": [
-            "confluence:transmission"
-        ]
-    },
     "waving": {
         "sounds": [
             "confluence:waving"
@@ -19,26 +14,6 @@
             "confluence:double_jump"
         ]
     },
-    "laser": {
-        "sounds": [
-            "confluence:laser"
-        ]
-    },
-    "lightsaber_hit": {
-        "sounds": [
-            "confluence:lightsaber_hit"
-        ]
-    },
-    "lightsaber_open": {
-        "sounds": [
-            "confluence:lightsaber_open"
-        ]
-    },
-    "regular_staff_shoot": {
-        "sounds": [
-            "confluence:regular_staff_shoot"
-        ]
-    },
     "shoes_fly": {
         "sounds": [
             "confluence:shoes_fly"
@@ -52,16 +27,6 @@
     "shoes_walk": {
         "sounds": [
             "confluence:shoes_walk"
-        ]
-    },
-    "shoot": {
-        "sounds": [
-            "confluence:shoot"
-        ]
-    },
-    "sparkle_shoot": {
-        "sounds": [
-            "confluence:sparkle_shoot"
         ]
     }
 }

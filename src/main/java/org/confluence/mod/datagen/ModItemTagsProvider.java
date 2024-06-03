@@ -23,5 +23,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
+        tag(ModTags.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
     }
 }

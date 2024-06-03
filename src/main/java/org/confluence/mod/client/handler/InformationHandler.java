@@ -106,7 +106,7 @@ public final class InformationHandler {
             if (delta % 20 == 0) {
                 float sum = 0.0F;
                 for (float value : attackDamage) sum += value;
-                dpsMeterInfo = IDPSMeter.getInfo(sum / (delta + 20));
+                dpsMeterInfo = IDPSMeter.getInfo(sum / (attackDamage.size() + 1));
             }
             information.add(dpsMeterInfo);
             if (dpsMeter < 0 && gameTime % 200 == IDPSMeter.INDEX && check(localPlayer, IDPSMeter.class)) dpsMeter = 0;

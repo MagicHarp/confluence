@@ -10,7 +10,7 @@
             "item": "minecraft:chain"
         },
         "c": {
-            "item": "confluence:tin_ingot"
+            "tag": "forge:ingots/tin"
         },
         "R": {
             "item": "minecraft:redstone"
