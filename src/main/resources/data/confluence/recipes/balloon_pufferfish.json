@@ -2,14 +2,14 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "confluence:magma_stone"
+            "item": "minecraft:pufferfish"
         },
         {
-            "item": "confluence:mechanical_glove"
+            "item": "confluence:shiny_red_balloon"
         }
     ],
     "result": {
-        "item": "confluence:fire_gauntlet",
+        "item": "confluence:balloon_pufferfish",
         "count": 1
     }
 }

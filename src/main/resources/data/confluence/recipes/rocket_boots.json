@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#I#",
+        "i#i"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:fire_charge"
+        },
+        "I": {
+            "item": "minecraft:iron_boots"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "confluence:rocket_boots",
+        "count": 1
+    }
+}

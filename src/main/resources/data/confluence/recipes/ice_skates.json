@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#S#",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:blue_ice"
+        },
+        "S": {
+            "item": "confluence:hermes_boots"
+        }
+    },
+    "result": {
+        "item": "confluence:ice_skates",
+        "count": 1
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#S#",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:blue_ice"
+        },
+        "S": {
+            "item": "confluence:cloud_in_a_bottle"
+        }
+    },
+    "result": {
+        "item": "confluence:blizzard_in_a_bottle",
+        "count": 1
+    }
+}
