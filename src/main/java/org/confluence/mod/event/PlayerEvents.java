@@ -57,7 +57,12 @@ public final class PlayerEvents {
             IRangePickup.Coin.apply(player);
             IRangePickup.Drops.apply(player);
             if (PlayerUtils.isServerNotFake(player)) {
-                PlayerUtils.regenerateMana((ServerPlayer) player);
+                ServerPlayer serverPlayer = (ServerPlayer) player;
+                PlayerUtils.regenerateMana(serverPlayer);
+                if (serverPlayer.level().getGameTime() % 200 == 0) {
+                    // 每十秒向周围玩家共享一次信息配饰
+                    InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
+                }
             }
         }
     }

@@ -11,6 +11,8 @@ import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
 public class MechanicalLens extends AbstractInfoCurio implements CustomModel, IFunctionCouldEnable {
+    public static final byte INDEX = 12;
+
     public MechanicalLens() {
         super(ModRarity.ORANGE);
     }

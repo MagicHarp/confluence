@@ -18,4 +18,5 @@ public interface IFishermansPocketGuide {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.fishermans_pocket_guide");
+    byte INDEX = 3;
 }

@@ -12,4 +12,5 @@ public interface ICompass {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.compass");
+    byte INDEX = 10;
 }

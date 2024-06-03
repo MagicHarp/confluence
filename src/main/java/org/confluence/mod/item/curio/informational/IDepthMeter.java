@@ -10,4 +10,5 @@ public interface IDepthMeter {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.depth_meter");
+    byte INDEX = 11;
 }

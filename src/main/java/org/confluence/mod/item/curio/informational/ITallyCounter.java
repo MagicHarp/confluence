@@ -8,4 +8,5 @@ public interface ITallyCounter {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.tally_counter");
+    byte INDEX = 7;
 }

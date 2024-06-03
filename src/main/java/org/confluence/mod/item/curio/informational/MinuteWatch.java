@@ -11,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MinuteWatch extends AbstractInfoCurio implements IWatch {
+    public static final byte OWNER = 3;
+    public static final byte OTHER = -128;
+
     public MinuteWatch() {
         super(ModRarity.BLUE);
     }
