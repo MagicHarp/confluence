@@ -9,4 +9,5 @@ public interface ISextant {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.sextant");
+    byte INDEX = 2;
 }

@@ -11,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class HalfHourWatch extends AbstractInfoCurio implements IWatch {
+    public static final byte OWNER = 2;
+    public static final byte OTHER = -127;
+
     public HalfHourWatch() {
         super(ModRarity.WHITE);
     }

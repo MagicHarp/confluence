@@ -25,4 +25,5 @@ public interface IDPSMeter {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.dps_meter");
+    byte INDEX = 8;
 }

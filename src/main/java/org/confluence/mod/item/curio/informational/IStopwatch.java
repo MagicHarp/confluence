@@ -17,4 +17,5 @@ public interface IStopwatch {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.stopwatch");
+    byte INDEX = 9;
 }

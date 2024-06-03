@@ -18,4 +18,5 @@ public interface ILifeFormAnalyzer {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.life_form_analyzer");
+    byte INDEX = 5;
 }

@@ -22,4 +22,5 @@ public interface IWeatherRadio {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.weather_radio");
+    byte INDEX = 1;
 }

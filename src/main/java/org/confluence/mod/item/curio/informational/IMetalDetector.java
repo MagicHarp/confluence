@@ -29,4 +29,5 @@ public interface IMetalDetector {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.metal_detector");
+    byte INDEX = 4;
 }

@@ -10,7 +10,7 @@ import org.lwjgl.glfw.GLFW;
 
 @OnlyIn(Dist.CLIENT)
 public final class KeyBindings {
-    public static final Lazy<KeyMapping> metalDetector = Lazy.of(() -> new KeyMapping(
+    public static final Lazy<KeyMapping> METAL_DETECTOR = Lazy.of(() -> new KeyMapping(
         "key.confluence.metal_detector",
         KeyConflictContext.IN_GAME,
         InputConstants.Type.KEYSYM,

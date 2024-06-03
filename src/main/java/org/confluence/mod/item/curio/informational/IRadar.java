@@ -17,4 +17,5 @@ public interface IRadar {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.radar");
+    byte INDEX = 6;
 }

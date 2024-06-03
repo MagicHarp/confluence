@@ -13,4 +13,5 @@ public interface IWatch {
     }
 
     Component TOOLTIP = Component.translatable("curios.tooltip.watch");
+    byte INDEX = 0;
 }

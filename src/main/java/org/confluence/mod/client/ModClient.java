@@ -12,7 +12,7 @@ import org.confluence.mod.client.gui.ConfluenceOverlays;
 public final class ModClient {
     @SubscribeEvent
     public static void keyBinding(RegisterKeyMappingsEvent event) {
-        event.register(KeyBindings.metalDetector.get());
+        event.register(KeyBindings.METAL_DETECTOR.get());
     }
 
     @SubscribeEvent

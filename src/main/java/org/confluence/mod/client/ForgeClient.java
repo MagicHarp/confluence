@@ -9,11 +9,11 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -25,11 +25,10 @@ public final class ForgeClient {
         if (event.phase == TickEvent.Phase.START) return;
         GravitationEffect.tick(localPlayer);
         if (localPlayer == null) return;
-        InformationHandler.update(localPlayer);
+        InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
 
-        ModRarity.Animate.doUpdateExpertColor();
-        ModRarity.Animate.doUpdateMasterColor();
+        AnimateColor.doUpdateExpertColor();
     }
 
     @SubscribeEvent

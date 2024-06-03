@@ -35,6 +35,11 @@ public final class PlayerEvents {
             if (event.player instanceof LocalPlayer localPlayer) {
                 GravitationEffect.unCrouching(localPlayer);
             }
+        } else if (event.player instanceof ServerPlayer serverPlayer) {
+            if (serverPlayer.level().getGameTime() % 200 == 0) {
+                // 每十秒向周围玩家共享一次信息配饰
+                InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
+            }
         }
     }
 
