@@ -6,16 +6,13 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:eye_of_the_golem"
+                    "name": "confluence:magiluminescence"
                 }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
+            ],
+            "conditions": [
                 {
-                    "type": "minecraft:item",
-                    "name": "confluence:feral_claws"
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.5
                 }
             ]
         },

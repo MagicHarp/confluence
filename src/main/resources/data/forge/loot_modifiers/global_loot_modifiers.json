@@ -13,7 +13,12 @@
         "confluence:chests/bastion_treasure",
         "confluence:chests/spawn_bonus_chest",
         "confluence:chests/desert_pyramid",
+        "confluence:chests/end_city_treasure",
+        "confluence:chests/igloo_chest",
+        "confluence:chests/ancient_city",
         "confluence:chests/village/village_fisher",
+        "confluence:chests/village/village_armorer",
+        "confluence:chests/shipwreck_supply",
         "confluence:entities/cave_spider",
         "confluence:entities/evoker",
         "confluence:entities/piglin_brute",
@@ -29,6 +34,16 @@
         "confluence:entities/blaze",
         "confluence:entities/glow_squid",
         "confluence:entities/warden",
-        "confluence:entities/bat"
+        "confluence:entities/slime",
+        "confluence:entities/zombie",
+        "confluence:entities/husk",
+        "confluence:entities/zombie_villager",
+        "confluence:entities/shulker",
+        "confluence:entities/goat",
+        "confluence:entities/bat",
+        "confluence:entities/dolphin",
+        "confluence:blocks/moss_block",
+        "confluence:gameplay/cat_morning_gift",
+        "confluence:gameplay/hero_of_the_village/librarian_gift"
     ]
 }

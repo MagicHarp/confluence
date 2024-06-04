@@ -6,29 +6,11 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:eye_of_the_golem"
-                }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "confluence:feral_claws"
-                }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
                     "name": "confluence:lucky_horseshoe",
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 0.02
+                            "chance": 0.2
                         }
                     ]
                 }
@@ -43,7 +25,7 @@
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 0.02
+                            "chance": 0.2
                         }
                     ]
                 }
