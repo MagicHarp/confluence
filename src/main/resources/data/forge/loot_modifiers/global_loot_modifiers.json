@@ -19,6 +19,8 @@
         "confluence:chests/village/village_fisher",
         "confluence:chests/village/village_armorer",
         "confluence:chests/shipwreck_supply",
+        "confluence:entities/bee",
+        "confluence:entities/polar_bear",
         "confluence:entities/cave_spider",
         "confluence:entities/evoker",
         "confluence:entities/piglin_brute",

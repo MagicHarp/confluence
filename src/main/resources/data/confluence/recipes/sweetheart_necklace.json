@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:shark_tooth_necklace"
+        },
+        {
+            "item": "confluence:honey_comb"
+        }
+    ],
+    "result": {
+        "item": "confluence:sweetheart_necklace"
+    }
+}

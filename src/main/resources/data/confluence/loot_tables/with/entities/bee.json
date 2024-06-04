@@ -1,25 +1,28 @@
 {
-    "type": "minecraft:chest",
+    "type": "minecraft:entity",
     "pools": [
         {
-            "rolls": {
-                "min": 1,
-                "max": 2
-            },
+            "rolls": 1,
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:star_cloak",
+                    "name": "confluence:hive_pack",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.01
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:honey_comb",
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
                             "chance": 0.2
                         }
                     ]
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "confluence:blindfold"
                 }
             ]
         }
