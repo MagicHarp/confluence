@@ -27,6 +27,9 @@ public class BeeProjectileRenderer extends EntityRenderer<BeeProjectile> {
 
     @Override
     public void render(BeeProjectile entity, float entityYaw, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
+        poseStack.pushPose();
+        if (entity.isGiant()) poseStack.scale(1.5F, 1.5F, 1.5F);
         model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        poseStack.popPose();
     }
 }
