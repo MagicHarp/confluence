@@ -1,4 +1,4 @@
-package org.confluence.mod.client.gui;
+package org.confluence.mod.client.renderer.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;

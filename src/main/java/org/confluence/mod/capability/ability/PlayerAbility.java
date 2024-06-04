@@ -10,10 +10,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
-import org.confluence.mod.item.curio.combat.IAggroAttach;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
-import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.item.curio.combat.IInvulnerableTime;
+import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -34,6 +31,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int aggro;
     private double dropsRange;
     private float breakSpeedBonus;
+    private double magicAttackBonus;
 
     public PlayerAbility() {
         this.jumpBoost = 1.0;
@@ -47,6 +45,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = 0;
         this.dropsRange = 0.0;
         this.breakSpeedBonus = 0.0F;
+        this.magicAttackBonus = 1.0;
     }
 
     public void freshAbility(LivingEntity living) {
@@ -59,6 +58,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger aggro = new AtomicInteger();
         AtomicBoolean drops = new AtomicBoolean();
         MutableFloat speed = new MutableFloat();
+        AtomicDouble bonus = new AtomicDouble(1.0);
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -80,6 +80,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
                 if (item instanceof IRangePickup.Drops) drops.set(true);
                 if (item instanceof IBreakSpeedBonus speedBonus) speed.add(speedBonus.getBreakBonus());
+                if (item instanceof IMagicAttack iMagicAttack) {
+                    bonus.addAndGet(iMagicAttack.getMagicBonus());
+                }
             }
         });
         this.jumpBoost = jump.get();
@@ -91,6 +94,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.aggro = aggro.get();
         this.dropsRange = drops.get() ? 6.25 : 0.0;
         this.breakSpeedBonus = speed.floatValue();
+        this.magicAttackBonus = bonus.get();
     }
 
     public double getJumpBoost() {
@@ -139,6 +143,10 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return breakSpeedBonus;
     }
 
+    public double getMagicAttackBonus() {
+        return magicAttackBonus;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -150,7 +158,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
 
         nbt.putInt("aggro", aggro);
+        nbt.putDouble("dropsRange", dropsRange);
         nbt.putFloat("breakSpeedBonus", breakSpeedBonus);
+        nbt.putDouble("magicAttackBonus", magicAttackBonus);
         return nbt;
     }
 
@@ -164,7 +174,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
 
         this.aggro = nbt.getInt("aggro");
+        this.dropsRange = nbt.getDouble("dropsRange");
         this.breakSpeedBonus = nbt.getFloat("breakSpeedBonus");
+        this.magicAttackBonus = nbt.getDouble("magicAttackBonus");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -176,6 +188,8 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
 
         this.aggro = playerAbility.aggro;
+        this.dropsRange = playerAbility.dropsRange;
         this.breakSpeedBonus = playerAbility.breakSpeedBonus;
+        this.magicAttackBonus = playerAbility.magicAttackBonus;
     }
 }

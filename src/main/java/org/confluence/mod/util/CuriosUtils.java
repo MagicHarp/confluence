@@ -1,6 +1,7 @@
 package org.confluence.mod.util;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.confluence.mod.item.curio.BaseCurioItem;
@@ -71,6 +72,19 @@ public final class CuriosUtils {
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
                 if (!itemStack.isEmpty()) items.add(itemStack);
+            }
+        });
+        return items;
+    }
+
+    public static <C> ArrayList<C> getCurios(LivingEntity living, Class<C> clazz) {
+        ArrayList<C> items = new ArrayList<>();
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
+            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
+                ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
+                Item item = itemStack.getItem();
+                if (clazz.isInstance(item)) items.add(clazz.cast(item));
             }
         });
         return items;

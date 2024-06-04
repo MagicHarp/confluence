@@ -6,6 +6,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.effect.beneficial.HoneyEffect;
 import org.confluence.mod.effect.beneficial.PaladinsShieldEffect;
 import org.confluence.mod.effect.harmful.ConfusedEffect;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
@@ -17,4 +18,5 @@ public final class ModEffects {
     public static final RegistryObject<GravitationEffect> GRAVITATION = EFFECTS.register("gravitation", GravitationEffect::new);
     public static final RegistryObject<PaladinsShieldEffect> PALADINS_SHIELD = EFFECTS.register("paladins_shield", PaladinsShieldEffect::new);
     public static final RegistryObject<CerebralMindtrickEffect> CEREBRAL_MINDTRICK = EFFECTS.register("cerebral_mindtrick", CerebralMindtrickEffect::new);
+    public static final RegistryObject<HoneyEffect> HONEY = EFFECTS.register("honey", HoneyEffect::new);
 }

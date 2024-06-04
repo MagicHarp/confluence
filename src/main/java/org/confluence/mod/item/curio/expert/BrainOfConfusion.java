@@ -6,9 +6,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.phys.AABB;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.item.ModRarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.ModUtils;
 

@@ -4,6 +4,7 @@
     "refmap": "confluence.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "CombatRulesMixin",
         "EntityMixin",
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
@@ -11,7 +12,6 @@
         "LocalPlayerAccessor",
         "MinecraftAccessor",
         "PlayerMixin",
-        ,
         "SlimeBlockMixin"
     ],
     "minVersion": "0.8.5",

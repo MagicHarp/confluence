@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
@@ -29,5 +30,6 @@ public final class Confluence {
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
+        ModEntities.ENTITIES.register(bus);
     }
 }

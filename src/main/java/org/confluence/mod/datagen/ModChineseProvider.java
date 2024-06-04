@@ -74,28 +74,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.weather_radio.thunder", "天气: 雷暴");
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
-        add("item.confluence.adhesive_bandage.tooltip", "对流血免疫");
-        add("item.confluence.medicated_bandage.tooltip", "对中毒和流血免疫");
-        add("item.confluence.armor_bracing.tooltip", "对虚弱和破损盔甲免疫");
-        add("item.confluence.armor_polish.tooltip", "对破损盔甲免疫");
+        add("key.confluence.metal_detector", "检测矿物");
+
         add("item.confluence.vitamins.tooltip", "对虚弱免疫");
-        add("item.confluence.the_plan.tooltip", "对缓慢和困惑免疫");
-        add("item.confluence.fast_clock.tooltip", "对减缓免疫");
-        add("item.confluence.trifold_map.tooltip", "对困惑免疫");
-        add("item.confluence.contercurse_mantra.tooltip", "对沉默和诅咒免疫");
-        add("item.confluence.megaphone.tooltip", "对沉默免疫");
-        add("item.confluence.nazar.tooltip", "对诅咒免疫");
-        add("item.confluence.reflective_shades.tooltip", "对失明和石化免疫");
+        add("item.confluence.fast_clock.tooltip", "对缓慢免疫");
         add("item.confluence.blindfold.tooltip", "对失明免疫");
-        add("item.confluence.pocket_mirror.tooltip", "对石化免疫");
-        add("item.confluence.ankh_charm.tooltip", "对大部分减益免疫");
-        add("item.confluence.ankh_shield.tooltip", "对大部分减益免疫");
+        add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
         add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
         add("item.confluence.band_of_regeneration.tooltip", "缓慢再生生命");
-        add("item.confluence.band_of_starpower.tooltip", "最大魔力增加20");
-        add("item.confluence.mechanical_lens.tooltip", "给予改良的布线视野");
-        add("item.confluence.spectre_goggles.tooltip", "开启回声视觉，显示隐藏物块");
         add("item.confluence.magiluminescence.tooltip", "提高移动速度和加速度");
         add("item.confluence.magiluminescence.tooltip3", "“我黑暗生命中的一道短暂曙光。”");
         add("item.confluence.sandstorm_on_a_bottle.tooltip", "可让持有者更好地二连跳");
@@ -135,29 +122,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.brain_of_confusion.tooltip2", "闪避后暂时增加暴击几率");
         add("item.confluence.brain_of_confusion.tooltip3", "被击中后可能会迷惑附近的敌人");
         add("item.confluence.royal_gel.tooltip", "史莱姆将变成友好生物");
-        add("item.confluence.magic_cuffs.tooltip", "最大魔力值增加20");
-        add("item.confluence.magic_cuffs.tooltip2", "受伤时恢复魔力");
-        add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%");
-        add("item.confluence.magnet_flower.tooltip2", "需要时自动使用魔力药水");
-        add("item.confluence.magnet_flower.tooltip3", "扩大魔力星的拾取范围");
-        add("item.confluence.mana_flower.tooltip", "魔力消耗降低8%");
-        add("item.confluence.mana_flower.tooltip2", "需要时自动使用魔力药水");
-        add("item.confluence.arcane_flower.tooltip", "魔力消耗降低8%");
-        add("item.confluence.arcane_flower.tooltip2", "需要时自动使用魔力药水");
         add("item.confluence.arcane_flower.tooltip3", "敌人不太可能以你为目标");
-        add("item.confluence.celestial_cuffs.tooltip", "扩大魔力星的拾取范围");
-        add("item.confluence.celestial_cuffs.tooltip2", "受到伤害时会恢复魔力");
-        add("item.confluence.celestial_cuffs.tooltip3", "最大魔力增加20");
-        add("item.confluence.celestial_magnet.tooltip", "扩大魔力星的拾取范围");
-        add("item.confluence.celestial_emblem.tooltip", "扩大魔力星的拾取范围");
-        add("item.confluence.celestial_emblem.tooltip2", "魔法伤害提高15%");
         add("item.confluence.celestial_stone.tooltip", "小幅提高属性值");
         add("item.confluence.charm_of_myths.tooltip", "提供生命恢复，减少治疗药水的冷却时间");
         add("item.confluence.philosophers_stone.tooltip", "减少治疗药水的冷却时间");
-        add("item.confluence.mana_regeneration_band.tooltip", "最大魔力值增加20");
-        add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
-        add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
-        add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
         add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
         add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
@@ -165,6 +133,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.flower_boots.tooltip", "你走过的草地上会长出花朵");
         add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
         add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
+        add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
+        add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
+        add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
+        add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
+
+        add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 
         // 饰品
         add(CurioItems.AGLET.get(), "金属带扣");
@@ -280,5 +254,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.FLOWER_BOOTS.get(), "花靴");
         add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
         add(CurioItems.RANGER_EMBLEM.get(), "游侠徽章");
+        add(CurioItems.HAND_WARMER.get(), "暖手宝");
+        add(CurioItems.STAR_CLOAK.get(), "星星斗篷");
+        add(CurioItems.STAR_VEIL.get(), "星星面纱");
+        add(CurioItems.BEE_CLOAK.get(), "蜜蜂斗篷");
+        add(CurioItems.HIVE_PACK.get(), "蜂巢背包");
+        add(CurioItems.HONEY_COMB.get(), "蜂窝");
+        add(CurioItems.STINGER_NECKLACE.get(), "毒刺项链");
+        add(CurioItems.SWEETHEART_NECKLACE.get(), "甜心项链");
+        add(CurioItems.HONEY_BALLOON.get(), "蜂蜜气球");
+        add(CurioItems.AMBER_HORSESHOE_BALLOON.get(), "琥珀马掌气球");
     }
 }

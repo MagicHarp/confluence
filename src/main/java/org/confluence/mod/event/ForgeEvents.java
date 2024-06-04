@@ -51,8 +51,11 @@ public final class ForgeEvents {
         RandomSource random = living.level().random;
         float amount = event.getAmount();
 
+        IHoneycomb.apply(living, random);
+        IStarCloak.apply(living, random);
         PanicNecklace.apply(living);
 
+        amount = IMagicAttack.apply(damageSource, amount);
         amount = IProjectileAttack.apply(living, damageSource, amount);
         amount = PaladinsShield.apply(living, amount);
         amount = FrozenTurtleShell.apply(living, amount);

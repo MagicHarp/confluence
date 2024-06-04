@@ -13,6 +13,7 @@ import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
@@ -35,10 +36,14 @@ public final class PlayerEvents {
             if (event.player instanceof LocalPlayer localPlayer) {
                 GravitationEffect.unCrouching(localPlayer);
             }
-        } else if (event.player instanceof ServerPlayer serverPlayer) {
-            if (serverPlayer.level().getGameTime() % 200 == 0) {
-                // 每十秒向周围玩家共享一次信息配饰
-                InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
+        } else {
+            Player player = event.player;
+            IRangePickup.Drops.apply(player);
+            if (player instanceof ServerPlayer serverPlayer) {
+                if (serverPlayer.level().getGameTime() % 200 == 0) {
+                    // 每十秒向周围玩家共享一次信息配饰
+                    InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
+                }
             }
         }
     }
