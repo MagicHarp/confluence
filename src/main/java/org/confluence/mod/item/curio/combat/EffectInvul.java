@@ -28,6 +28,8 @@ public interface EffectInvul {
             return CuriosUtils.hasCurio(living, Silenced.class);
         } else if (mobEffect == ModEffects.STONED.get()) {
             return CuriosUtils.hasCurio(living, Stoned.class);
+        } else if (mobEffect == ModEffects.FROST_BURN.get()) {
+            return CuriosUtils.hasCurio(living, FrostBurn.class);
         }
         return false;
     }
@@ -51,4 +53,6 @@ public interface EffectInvul {
     interface Silenced {}
 
     interface Stoned {}
+
+    interface FrostBurn {}
 }

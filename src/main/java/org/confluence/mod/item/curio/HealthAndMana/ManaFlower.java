@@ -27,8 +27,7 @@ public class ManaFlower extends BaseCurioItem implements IManaReduce, IAutoGetMa
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.mana_flower.tooltip1"));
+        list.add(Component.translatable("item.confluence.mana_flower.tooltip"));
         list.add(Component.translatable("item.confluence.mana_flower.tooltip2"));
-
     }
 }

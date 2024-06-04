@@ -32,8 +32,9 @@ import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
-import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.Gels;
+
+import static org.confluence.mod.entity.ModEntities.*;
 
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -74,50 +75,51 @@ public final class ModClient {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.BLUE_SLIME.get(), c -> new CustomSlimeRenderer(c, "blue"));
-        event.registerEntityRenderer(ModEntities.GREEN_SLIME.get(), c -> new CustomSlimeRenderer(c, "green"));
-        event.registerEntityRenderer(ModEntities.PINK_SLIME.get(), c -> new CustomSlimeRenderer(c, "pink"));
-        event.registerEntityRenderer(ModEntities.CORRUPTED_SLIME.get(), c -> new CustomSlimeRenderer(c, "corrupted"));
-        event.registerEntityRenderer(ModEntities.DESERT_SLIME.get(), c -> new CustomSlimeRenderer(c, "desert"));
-        event.registerEntityRenderer(ModEntities.EVIL_SLIME.get(), c -> new CustomSlimeRenderer(c, "evil"));
-        event.registerEntityRenderer(ModEntities.ICE_SLIME.get(), c -> new CustomSlimeRenderer(c, "ice"));
-        event.registerEntityRenderer(ModEntities.LAVA_SLIME.get(), c -> new CustomSlimeRenderer(c, "lava"));
-        event.registerEntityRenderer(ModEntities.LUMINOUS_SLIME.get(), c -> new CustomSlimeRenderer(c, "luminous"));
-        event.registerEntityRenderer(ModEntities.CRIMSON_SLIME.get(), c -> new CustomSlimeRenderer(c, "crimson"));
-        event.registerEntityRenderer(ModEntities.PURPLE_SLIME.get(), c -> new CustomSlimeRenderer(c, "purple"));
-        event.registerEntityRenderer(ModEntities.RED_SLIME.get(), c -> new CustomSlimeRenderer(c, "red"));
-        event.registerEntityRenderer(ModEntities.TROPIC_SLIME.get(), c -> new CustomSlimeRenderer(c, "tropic"));
-        event.registerEntityRenderer(ModEntities.YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
-        event.registerEntityRenderer(ModEntities.BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
+        event.registerEntityRenderer(BLUE_SLIME.get(), c -> new CustomSlimeRenderer(c, "blue"));
+        event.registerEntityRenderer(GREEN_SLIME.get(), c -> new CustomSlimeRenderer(c, "green"));
+        event.registerEntityRenderer(PINK_SLIME.get(), c -> new CustomSlimeRenderer(c, "pink"));
+        event.registerEntityRenderer(CORRUPTED_SLIME.get(), c -> new CustomSlimeRenderer(c, "corrupted"));
+        event.registerEntityRenderer(DESERT_SLIME.get(), c -> new CustomSlimeRenderer(c, "desert"));
+        event.registerEntityRenderer(EVIL_SLIME.get(), c -> new CustomSlimeRenderer(c, "evil"));
+        event.registerEntityRenderer(ICE_SLIME.get(), c -> new CustomSlimeRenderer(c, "ice"));
+        event.registerEntityRenderer(LAVA_SLIME.get(), c -> new CustomSlimeRenderer(c, "lava"));
+        event.registerEntityRenderer(LUMINOUS_SLIME.get(), c -> new CustomSlimeRenderer(c, "luminous"));
+        event.registerEntityRenderer(CRIMSON_SLIME.get(), c -> new CustomSlimeRenderer(c, "crimson"));
+        event.registerEntityRenderer(PURPLE_SLIME.get(), c -> new CustomSlimeRenderer(c, "purple"));
+        event.registerEntityRenderer(RED_SLIME.get(), c -> new CustomSlimeRenderer(c, "red"));
+        event.registerEntityRenderer(TROPIC_SLIME.get(), c -> new CustomSlimeRenderer(c, "tropic"));
+        event.registerEntityRenderer(YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
+        event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
-        event.registerEntityRenderer(ModEntities.DEMON_EYE.get(), DemonEyeRenderer::new);
+        event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
 
-        event.registerEntityRenderer(ModEntities.BASE_BULLET.get(), BulletRenderer::new);
-        event.registerEntityRenderer(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
-        event.registerEntityRenderer(ModEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
-        event.registerEntityRenderer(ModEntities.LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.BASE_FISHING_HOOK.get(), BaseFishingHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(BASE_BULLET.get(), BulletRenderer::new);
+        event.registerEntityRenderer(FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
+        event.registerEntityRenderer(BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
+        event.registerEntityRenderer(LAVA_FISHING_HOOK.get(), FishingHookRenderer::new);
+        event.registerEntityRenderer(BASE_FISHING_HOOK.get(), BaseFishingHookRenderer::new);
+        event.registerEntityRenderer(EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(STAR_CLOAK.get(), StarCloakEntityRenderer::new);
 
-        event.registerEntityRenderer(ModEntities.BASE_HOOK.get(), BaseHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.WEB_SLINGER.get(), WebSlingerRenderer::new);
-        event.registerEntityRenderer(ModEntities.SKELETRON_HAND.get(), SkeletronHandRenderer::new);
-        event.registerEntityRenderer(ModEntities.SLIME_HOOK.get(), SlimeHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.FISH_HOOK.get(), FishHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.IVY_WHIP.get(), IvyWhipRenderer::new);
-        event.registerEntityRenderer(ModEntities.BAT_HOOK.get(), BatHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.CANDY_CANE_HOOK.get(), CandyCaneHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.DUAL_HOOK.get(), DualHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.HOOK_OF_DISSONANCE.get(), HookOfDissonanceRenderer::new);
-        event.registerEntityRenderer(ModEntities.THORN_HOOK.get(), ThornHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.MIMIC_HOOK.get(), MimicHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.ANTI_GRAVITY_HOOK.get(), AntiGravityHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.SPOOKY_HOOK.get(), SpookyHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.CHRISTMAS_HOOK.get(), ChristmasHookRenderer::new);
-        event.registerEntityRenderer(ModEntities.LUNAR_HOOK.get(), LunarHookRenderer::new);
+        event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
+        event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);
+        event.registerEntityRenderer(SKELETRON_HAND.get(), SkeletronHandRenderer::new);
+        event.registerEntityRenderer(SLIME_HOOK.get(), SlimeHookRenderer::new);
+        event.registerEntityRenderer(FISH_HOOK.get(), FishHookRenderer::new);
+        event.registerEntityRenderer(IVY_WHIP.get(), IvyWhipRenderer::new);
+        event.registerEntityRenderer(BAT_HOOK.get(), BatHookRenderer::new);
+        event.registerEntityRenderer(CANDY_CANE_HOOK.get(), CandyCaneHookRenderer::new);
+        event.registerEntityRenderer(DUAL_HOOK.get(), DualHookRenderer::new);
+        event.registerEntityRenderer(HOOK_OF_DISSONANCE.get(), HookOfDissonanceRenderer::new);
+        event.registerEntityRenderer(THORN_HOOK.get(), ThornHookRenderer::new);
+        event.registerEntityRenderer(MIMIC_HOOK.get(), MimicHookRenderer::new);
+        event.registerEntityRenderer(ANTI_GRAVITY_HOOK.get(), AntiGravityHookRenderer::new);
+        event.registerEntityRenderer(SPOOKY_HOOK.get(), SpookyHookRenderer::new);
+        event.registerEntityRenderer(CHRISTMAS_HOOK.get(), ChristmasHookRenderer::new);
+        event.registerEntityRenderer(LUNAR_HOOK.get(), LunarHookRenderer::new);
         /* todo 静止钩 */
 
-        event.registerEntityRenderer(ModEntities.BASE_AMMO.get(), AmmoRenderer::new);
+        event.registerEntityRenderer(BASE_AMMO.get(), AmmoRenderer::new);
 
         event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
     }

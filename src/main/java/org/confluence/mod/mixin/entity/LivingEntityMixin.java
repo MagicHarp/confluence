@@ -4,6 +4,8 @@ import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.CombatRules;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,6 +31,7 @@ import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
+import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -177,13 +180,18 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @ModifyArg(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"), index = 1)
-    private float passArmor(float armor) {
-        LivingEntity self = c$getSelf();
-        AtomicDouble atomic = new AtomicDouble(armor);
-        CuriosUtils.getCurios(self, IArmorPass.class)
-            .forEach(iArmorPass -> atomic.addAndGet(-iArmorPass.getPassValue()));
-        return atomic.floatValue();
+    @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
+    private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
+        if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
+            LivingEntity self = c$getSelf();
+            AtomicDouble atomic = new AtomicDouble(pDamageAmount);
+            CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
+                atomic.addAndGet(iArmorPass.getPassValue()));
+            float totalArmor = self.getArmorValue() - atomic.floatValue();
+            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) totalArmor -= 3.0F;
+            pDamageAmount = CombatRules.getDamageAfterAbsorb(pDamageAmount, Math.max(0.0F, totalArmor), (float) self.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+            cir.setReturnValue(pDamageAmount);
+        }
     }
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
@@ -205,6 +213,13 @@ public abstract class LivingEntityMixin {
     private void notAttack(LivingEntity pTarget, CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValue() && RoyalGel.apply(c$getSelf(), pTarget)) {
             cir.setReturnValue(false);
+        }
+    }
+
+    @Inject(method = "canFreeze", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
+    private void checkFreeze(CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue()) {
+            cir.setReturnValue(CuriosUtils.noSameCurio(c$getSelf(), CurioItems.HAND_WARMER.get()));
         }
     }
 

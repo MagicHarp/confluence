@@ -22,13 +22,14 @@ public abstract class GeckoCurioRenderer<A extends BaseCurioItem & GeoAnimatable
         this.animatable = animatable;
     }
 
-    public void modifyPoseStack(PoseStack poseStack) {
-    }
+    public void modifyPoseStack(PoseStack poseStack) {}
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         this.currentItemStack = stack;
         poseStack.pushPose();
+        ICurioRenderer.translateIfSneaking(poseStack, slotContext.entity());
+        ICurioRenderer.rotateIfSneaking(poseStack, slotContext.entity());
         modifyPoseStack(poseStack);
         defaultRender(poseStack, animatable, renderTypeBuffer, null, null, 0, partialTicks, light);
         poseStack.popPose();

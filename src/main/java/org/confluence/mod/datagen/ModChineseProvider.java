@@ -180,30 +180,30 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
         add("item.confluence.worm_scarf.tooltip", "所受伤害减少17%");
         add("item.confluence.shield_of_cthulhu.tooltip", "允许冲刺，疾跑以冲刺");
-        add("item.confluence.brain_of_confusion.tooltip1", "有几率制造幻觉并躲避攻击");
+        add("item.confluence.brain_of_confusion.tooltip", "有几率制造幻觉并躲避攻击");
         add("item.confluence.brain_of_confusion.tooltip2", "闪避后暂时增加暴击几率");
         add("item.confluence.brain_of_confusion.tooltip3", "被击中后可能会迷惑附近的敌人");
         add("item.confluence.royal_gel.tooltip", "史莱姆无法对你造成伤害");
-        add("item.confluence.magic_cuffs.tooltip1", "最大魔力值增加20");
+        add("item.confluence.magic_cuffs.tooltip", "最大魔力值增加20");
         add("item.confluence.magic_cuffs.tooltip2", "受伤时恢复魔力");
-        add("item.confluence.magnet_flower.tooltip1", "魔力消耗降低8%");
+        add("item.confluence.magnet_flower.tooltip", "魔力消耗降低8%");
         add("item.confluence.magnet_flower.tooltip2", "需要时自动使用魔力药水");
         add("item.confluence.magnet_flower.tooltip3", "扩大魔力星的拾取范围");
-        add("item.confluence.mana_flower.tooltip1", "魔力消耗降低8%");
+        add("item.confluence.mana_flower.tooltip", "魔力消耗降低8%");
         add("item.confluence.mana_flower.tooltip2", "需要时自动使用魔力药水");
-        add("item.confluence.arcane_flower.tooltip1", "魔力消耗降低8%");
+        add("item.confluence.arcane_flower.tooltip", "魔力消耗降低8%");
         add("item.confluence.arcane_flower.tooltip2", "需要时自动使用魔力药水");
         add("item.confluence.arcane_flower.tooltip3", "敌人不太可能以你为目标");
-        add("item.confluence.celestial_cuffs.tooltip1", "扩大魔力星的拾取范围");
+        add("item.confluence.celestial_cuffs.tooltip", "扩大魔力星的拾取范围");
         add("item.confluence.celestial_cuffs.tooltip2", "受到伤害时会恢复魔力");
         add("item.confluence.celestial_cuffs.tooltip3", "最大魔力增加20");
         add("item.confluence.celestial_magnet.tooltip", "扩大魔力星的拾取范围");
-        add("item.confluence.celestial_emblem.tooltip1", "扩大魔力星的拾取范围");
+        add("item.confluence.celestial_emblem.tooltip", "扩大魔力星的拾取范围");
         add("item.confluence.celestial_emblem.tooltip2", "魔法伤害提高15%");
         add("item.confluence.celestial_stone.tooltip", "小幅提高属性值");
         add("item.confluence.charm_of_myths.tooltip", "提供生命恢复，减少治疗药水的冷却时间");
         add("item.confluence.philosophers_stone.tooltip", "减少治疗药水的冷却时间");
-        add("item.confluence.mana_regeneration_band.tooltip1", "最大魔力值增加20");
+        add("item.confluence.mana_regeneration_band.tooltip", "最大魔力值增加20");
         add("item.confluence.mana_regeneration_band.tooltip2", "提高魔力再生速度");
         add("item.confluence.natures_gift.tooltip", "魔力消耗减少6%");
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
@@ -233,8 +233,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.lavaproof_fishing_hook.tooltip", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
         add("item.confluence.lavaproof_tackle_bag.tooltip1", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
         add("item.confluence.lavaproof_tackle_bag.tooltip2", "鱼线永远不会断、诱饵消耗率减少5%");
+        add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
+        add("item.confluence.mana_cloak.tooltip", "收集星星会恢复魔力");
+        add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
+        add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 
         add("biome.confluence.the_corruption", "腐化之地");
         add("biome.confluence.another_crimson", "猩红之地");
@@ -1149,6 +1153,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.XENON_MOSS_FISHING_BOBBER.get(), "氙苔藓钓鱼浮标");
         add(CurioItems.FAIRY_BOOTS.get(), "仙灵靴");
         add(CurioItems.RANGER_EMBLEM.get(), "游侠徽章");
+        add(CurioItems.HAND_WARMER.get(), "暖手宝");
+        add(CurioItems.STAR_CLOAK.get(), "星星斗篷");
+        add(CurioItems.STAR_VEIL.get(), "星星面纱");
+        add(CurioItems.MANA_CLOAK.get(), "魔力斗篷");
+        add(CurioItems.BEE_CLOAK.get(), "蜜蜂斗篷");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");

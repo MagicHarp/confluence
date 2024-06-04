@@ -217,6 +217,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.lavaproof_fishing_hook.tooltip", "Allows fishing in lava regardless of bait or rod used.");
         add("item.confluence.lavaproof_tackle_bag.tooltip1", "Allows fishing in lava regardless of bait or rod used.");
         add("item.confluence.lavaproof_tackle_bag.tooltip2", "Line never breaks and −5% bait consumption chance");
+        add("item.confluence.hand_warmer.tooltip", "Provides immunity to chill and freezing effects");
+        add("item.confluence.mana_cloak.tooltip", "Stars restore mana when collected");
+        add("item.confluence.star_cloak.tooltip", "Causes stars to fall after taking damage");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
 

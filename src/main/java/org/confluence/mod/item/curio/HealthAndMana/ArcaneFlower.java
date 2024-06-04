@@ -28,7 +28,7 @@ public class ArcaneFlower extends BaseCurioItem implements IManaReduce, IAggroAt
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.arcane_flower.tooltip1"));
+        list.add(Component.translatable("item.confluence.arcane_flower.tooltip"));
         list.add(Component.translatable("item.confluence.arcane_flower.tooltip2"));
         list.add(Component.translatable("item.confluence.arcane_flower.tooltip3"));
     }

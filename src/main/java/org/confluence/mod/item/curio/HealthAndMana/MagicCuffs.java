@@ -36,7 +36,7 @@ public class MagicCuffs extends BandOfStarpower {
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.magic_cuffs.tooltip1"));
+        list.add(Component.translatable("item.confluence.magic_cuffs.tooltip"));
         list.add(Component.translatable("item.confluence.magic_cuffs.tooltip2"));
     }
 }

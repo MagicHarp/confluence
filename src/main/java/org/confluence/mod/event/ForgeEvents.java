@@ -114,6 +114,7 @@ public final class ForgeEvents {
         float amount = event.getAmount();
 
         IHoneycomb.apply(living, random);
+        IStarCloak.apply(living, random);
         PanicNecklace.apply(living);
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
         MagicCuffs.apply(living, damageSource, amount);
@@ -169,9 +170,11 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
+        if (!(self instanceof Enemy)) return;
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
+        double rangeSqr = range * range;
         self.level().players().stream()
-            .filter(player -> player.distanceTo(self) < range)
+            .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(self))
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
                 playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->

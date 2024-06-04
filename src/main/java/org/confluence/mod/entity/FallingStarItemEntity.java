@@ -21,7 +21,7 @@ public class FallingStarItemEntity extends ItemEntity {
     public FallingStarItemEntity(Level level, Vec3 pos) {
         super(ModEntities.FALLING_STAR_ITEM_ENTITY.get(), level);
         setPos(pos);
-        setDeltaMovement(level.random.nextDouble(), -8, level.random.nextDouble());
+        setDeltaMovement(level.random.nextDouble(), -8.0, level.random.nextDouble());
         setItem(Materials.FALLING_STAR.get().getDefaultInstance());
         this.lifespan = 12000;
         setNeverPickUp();

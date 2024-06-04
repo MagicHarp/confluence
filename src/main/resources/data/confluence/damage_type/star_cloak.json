@@ -1,5 +1,5 @@
 {
     "message_id": "falling_star",
-    "exhaustion": 10,
+    "exhaustion": 5,
     "scaling": "always"
 }

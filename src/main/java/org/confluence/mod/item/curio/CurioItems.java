@@ -37,9 +37,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
     ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
     AVENGER_EMBLEM("avenger_emblem", AvengerEmblem::new), // 复仇者勋章
-    /* 星星斗篷 */
-    /* 星星面纱 */
-    /* 蜜蜂斗篷 */
+    STAR_CLOAK("star_cloak", StarCloak::new), // 星星斗篷
+    STAR_VEIL("star_veil", StarVeil::new), // 星星面纱
+    BEE_CLOAK("bee_cloak", BeeCloak::new), // 蜜蜂斗篷
     BERSERKERS_GLOVE("berserkers_glove", BerserkersGlove::new), // 狂战士手套
     BLACK_BELT("black_belt", BlackBelt::new), // 黑腰带
     /* 天界徽章 */
@@ -60,7 +60,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FLESH_KNUCKLES("flesh_knuckles", FleshKnuckles::new), // 血肉指虎
     FROZEN_TURTLE_SHELL("frozen_turtle_shell", FrozenTurtleShell::new), // 冰冻海龟壳
     FROZEN_SHIELD("frozen_shield", FrozenShield::new), // 冰冻护盾
-    /* 暖手宝 */
+    HAND_WARMER("hand_warmer", HandWarmer::new), // 暖手宝
     HERO_SHIELD("hero_shield", HeroShield::new), // 英雄护盾
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝
     SHARK_TOOTH_NECKLACE("shark_tooth_necklace", SharkToothNecklace::new), // 鲨牙项链
@@ -118,7 +118,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     CHARM_OF_MYTHS("charm_of_myths", CharmOfMyths::new), // 神话护身符
     MAGIC_CUFFS("magic_cuffs", MagicCuffs::new), // 魔法手铐
     MAGNET_FLOWER("magnet_flower", MagnetFlower::new), // 磁花
-    /* 魔力斗篷 */
+    MANA_CLOAK("mana_cloak", ManaCloak::new), // 魔力斗篷
     MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
     MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环
     NATURES_GIFT("natures_gift", NaturesGift::new), // 大自然的恩赐
