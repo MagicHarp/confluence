@@ -57,14 +57,12 @@ public class BaseSpeedBoots extends BaseCurioItem {
         LivingEntity living = slotContext.entity();
         if (living instanceof LocalPlayer localPlayer) {
             int speed = nbt.getInt("speed");
-            if (localPlayer.zza > 0) {
+            if (localPlayer.onGround() && localPlayer.zza > 0) {
                 int actually = Math.min(max - speed, addition);
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
-                if (localPlayer.onGround() && localPlayer.level().getGameTime() % 5 == 0) {
-                    localPlayer.playSound(ModSounds.SHOES_WALK.get());
-                }
+                if (localPlayer.level().getGameTime() % 5 == 0) localPlayer.playSound(ModSounds.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
