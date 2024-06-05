@@ -251,13 +251,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.westernat.title", "WESTERNAT");
         add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC21世纪以来，最具有印象派主义的白桦树绘画!");
         add("painting.confluence.cooobrid.title", "COOOBRID");
-        add("painting.confluence.cooobrid.author", "BiliBili_事一只一只一只鸽子，咕咕咕咕~");
+        add("painting.confluence.cooobrid.author", "BiliBili_事一只一只一只鸽子");
         add("painting.confluence.nakinosi.title", "NAKINOSI");
         add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头");
         add("painting.confluence.maker.title", "MAKER");
         add("painting.confluence.maker.author", "BiliBili_Maker-2333");
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，确实挺严肃的");
+        add("painting.confluence.a_pigeon_delight.title", "A_PIGEON_DELIGHT");
+        add("painting.confluence.a_pigeon_delight.author", "BiliBili_一只鸽子悦");
 
         add("advancements.start.title", "旧的世界，新的旅途！");
         add("advancements.start.descr", "汇合交流的来世");

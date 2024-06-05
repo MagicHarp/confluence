@@ -16,6 +16,7 @@ public final class ModPaintings {
     public static final RegistryObject<PaintingVariant> NAKINOSI = PAINTING_VARIANTS.register("nakinosi", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> MAKER = PAINTING_VARIANTS.register("maker", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> SERIOUS_OBSERVERS = PAINTING_VARIANTS.register("serious_observers", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> A_PIGEON_DELIGHT = PAINTING_VARIANTS.register("a_pigeon_delight", () -> new PaintingVariant(32, 32));
 
     public static void register(IEventBus bus) {
         PAINTING_VARIANTS.register(bus);

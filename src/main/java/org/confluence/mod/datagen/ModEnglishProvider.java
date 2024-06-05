@@ -237,6 +237,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.maker.author", "BiliBili_Maker-2333");
         add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
         add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
+        add("painting.confluence.a_pigeon_delight.title", "A_PIGEON_DELIGHT");
+        add("painting.confluence.a_pigeon_delight.author", "BiliBili_一只鸽子悦");
 
         add("advancements.start.title", "Old World, New Journey!");
         add("advancements.start.descr", "The afterlife of convergence and exchange");
