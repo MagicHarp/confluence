@@ -7,7 +7,6 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -24,12 +23,6 @@ public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallR
     @Override
     public int getFallResistance() {
         return 7;
-    }
-
-    @Override
-    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        super.onUnequip(slotContext, newStack, stack);
-        onEquip(slotContext, newStack, stack);
     }
 
     @Override
