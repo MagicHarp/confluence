@@ -27,6 +27,7 @@ import org.confluence.mod.item.curio.expert.BrainOfConfusion;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.ModUtils;
@@ -65,7 +66,9 @@ public final class ForgeEvents {
         amount = WormScarf.apply(living, amount);
         amount = BrainOfConfusion.apply(living, random, amount);
 
-        amount *= ModUtils.nextFloat(random, 0.8F, 1.2F);
+        if (ModConfigs.randomAttackDamage) {
+            amount *= ModUtils.nextFloat(random, (float) ModConfigs.randomAttackDamageMin, (float) ModConfigs.randomAttackDamageMax);
+        }
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
         event.setAmount(amount);
     }
@@ -90,8 +93,9 @@ public final class ForgeEvents {
         LivingEntity self = event.getEntity();
         if (!(self instanceof Enemy)) return;
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
+        double rangeSqr = range * range;
         self.level().players().stream()
-            .filter(player -> player.distanceTo(self) < range && self.canAttack(player))
+            .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
                 playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->

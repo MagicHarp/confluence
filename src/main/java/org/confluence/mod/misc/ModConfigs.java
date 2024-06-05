@@ -59,10 +59,18 @@ public final class ModConfigs {
         "minecraft:vindicator",
         "minecraft:enderman"
     ), o -> true);
+
+    private static final ForgeConfigSpec.BooleanValue RANDOM_ATTACK_DAMAGE = BUILDER.push("Random Attack Damage").define("enable", true);
+    private static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MIN = BUILDER.defineInRange("min", 0.8, 0.0, 1.0);
+    private static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MAX = BUILDER.defineInRange("max", 1.2, 1.0, 2.0);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static final ArrayList<BlockState> rareBlocks = new ArrayList<>();
     public static final ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
+    public static boolean randomAttackDamage = true;
+    public static double randomAttackDamageMin = 0.8;
+    public static double randomAttackDamageMax = 1.2;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -76,5 +84,8 @@ public final class ModConfigs {
             }
         });
         RARE_CREATURES.get().forEach(s -> rareCreatures.add(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(s))));
+        randomAttackDamage = RANDOM_ATTACK_DAMAGE.get();
+        randomAttackDamageMin = RANDOM_ATTACK_DAMAGE_MIN.get();
+        randomAttackDamageMax = RANDOM_ATTACK_DAMAGE_MAX.get();
     }
 }
