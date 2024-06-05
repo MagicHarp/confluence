@@ -46,8 +46,8 @@ public abstract class LivingEntityMixin {
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
         if (c$getSelf() instanceof Player player) {
-            player.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
+                cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
         }
     }
 
@@ -65,8 +65,8 @@ public abstract class LivingEntityMixin {
     private int c$getInvulnerableTime(int constant) {
         if (c$getSelf() instanceof Player player) {
             AtomicInteger time = new AtomicInteger(constant);
-            player.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
+                time.set(playerAbility.getInvulnerableTime()));
             return time.get();
         }
         return constant;

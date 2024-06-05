@@ -6,8 +6,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
 import org.confluence.mod.network.s2c.BroadcastGravitationRotPacketS2C;
+import org.confluence.mod.network.s2c.FlushPlayerAbilityPacketS2C;
 import org.confluence.mod.network.s2c.ShieldOfCthulhuPacketS2C;
 import org.confluence.mod.util.IEntity;
 
@@ -35,6 +37,18 @@ public final class ClientPacketHandler {
     public static void handleCthulhu(ShieldOfCthulhuPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> hasCthulhu = packet.has());
+        context.setPacketHandled(true);
+    }
+
+    public static void handleFlush(FlushPlayerAbilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            if (packet.flush()) {
+                LocalPlayer localPlayer = Minecraft.getInstance().player;
+                if (localPlayer != null) localPlayer.getCapability(AbilityProvider.CAPABILITY)
+                    .ifPresent(playerAbility -> playerAbility.flushAbility(localPlayer));
+            }
+        });
         context.setPacketHandled(true);
     }
 

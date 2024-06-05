@@ -11,12 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.FlushPlayerAbilityPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,8 +42,12 @@ public class BaseCurioItem extends Item implements ICurioItem {
     }
 
     protected void freshAbility(Item item, LivingEntity living) {
-        living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.freshAbility(living));
+        living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> playerAbility.flushAbility(living));
         if (living instanceof ServerPlayer serverPlayer) {
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new FlushPlayerAbilityPacketS2C(true)
+            );
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
             if (item instanceof IAutoAttack) IAutoAttack.sendMsg(serverPlayer);

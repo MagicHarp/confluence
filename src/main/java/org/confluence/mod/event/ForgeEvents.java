@@ -10,6 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
@@ -87,9 +88,10 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
+        if (!(self instanceof Enemy)) return;
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
         self.level().players().stream()
-            .filter(player -> player.distanceTo(self) < range)
+            .filter(player -> player.distanceTo(self) < range && self.canAttack(player))
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
                 playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->

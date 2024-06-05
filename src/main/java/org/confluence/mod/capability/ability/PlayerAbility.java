@@ -48,7 +48,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.magicAttackBonus = 1.0;
     }
 
-    public void freshAbility(LivingEntity living) {
+    public void flushAbility(LivingEntity living) {
         AtomicDouble jump = new AtomicDouble(1.0);
         AtomicInteger fall = new AtomicInteger();
         AtomicInteger invul = new AtomicInteger(20);

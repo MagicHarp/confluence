@@ -13,21 +13,21 @@
                 {
                     "condition": "minecraft:random_chance",
                     "chance": 0.4
-                },
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
                 {
-                    "rolls": 1,
-                    "entries": [
-                        {
-                            "type": "minecraft:item",
-                            "name": "confluence:shield_of_cthulhu"
-                        }
-                    ],
-                    "conditions": [
-                        {
-                            "condition": "minecraft:random_chance",
-                            "chance": 0.3
-                        }
-                    ]
+                    "type": "minecraft:item",
+                    "name": "confluence:shield_of_cthulhu"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.3
                 }
             ]
         }

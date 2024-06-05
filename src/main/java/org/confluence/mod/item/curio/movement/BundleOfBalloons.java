@@ -28,6 +28,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        super.onEquip(slotContext, prevStack, stack);
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
@@ -46,6 +47,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        super.onUnequip(slotContext, newStack, stack);
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             IMultiJump.sendMsg(serverPlayer);
         }
