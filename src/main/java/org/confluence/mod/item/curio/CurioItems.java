@@ -67,6 +67,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     HONEY_COMB("honey_comb", HoneyComb::new), // 蜂窝
     SHARK_TOOTH_NECKLACE("shark_tooth_necklace", SharkToothNecklace::new), // 鲨牙项链
     STINGER_NECKLACE("stinger_necklace", StingerNecklace::new), // 毒刺项链
+    PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     SWEETHEART_NECKLACE("sweetheart_necklace", SweetheartNecklace::new), // 甜心项链
     /* 熔火箭袋 */
     /* 魔法箭袋 */
@@ -80,7 +81,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     OBSIDIAN_SKULL("obsidian_skull", ObsidianSkull::new), // 黑曜石骷髅头
     MOLTEN_SKULL_ROSE("molten_skull_rose", MoltenSkullRose::new), // 熔火骷髅头玫瑰
     OBSIDIAN_SKULL_ROSE("obsidian_skull_rose", ObsidianSkullRose::new), // 黑曜石骷髅头玫瑰
-    PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     HAND_WARMER("hand_warmer", HandWarmer::new), // 暖手宝
     PUTRID_SCENT("putrid_scent", PutridScent::new), // 腐香囊
     SHACKLE("shackle", Shackle::new), // 脚镣
