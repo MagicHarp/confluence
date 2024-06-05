@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "cloud_in_a_balloon"
+            "item": "confluence:cloud_in_a_balloon"
         },
         {
-            "item": "sandstorm_in_a_balloon"
+            "item": "confluence:sandstorm_in_a_balloon"
         },
         {
-            "item": "blizzard_in_a_balloon"
+            "item": "confluence:blizzard_in_a_balloon"
         }
     ],
     "result": {

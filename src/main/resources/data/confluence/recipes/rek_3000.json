@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "radar"
+            "item": "confluence:radar"
         },
         {
-            "item": "life_form_analyzer"
+            "item": "confluence:life_form_analyzer"
         },
         {
-            "item": "tally_counter"
+            "item": "confluence:tally_counter"
         }
     ],
     "result": {

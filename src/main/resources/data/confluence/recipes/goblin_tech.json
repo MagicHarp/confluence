@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "stopwatch"
+            "item": "confluence:stopwatch"
         },
         {
-            "item": "metal_detector"
+            "item": "confluence:metal_detector"
         },
         {
-            "item": "stopwatch"
+            "item": "confluence:stopwatch"
         }
     ],
     "result": {

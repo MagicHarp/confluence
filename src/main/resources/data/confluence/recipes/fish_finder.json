@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "fishermans_pocket_guide"
+            "item": "confluence:fishermans_pocket_guide"
         },
         {
-            "item": "weather_radio"
+            "item": "confluence:weather_radio"
         },
         {
-            "item": "sextant"
+            "item": "confluence:sextant"
         }
     ],
     "result": {

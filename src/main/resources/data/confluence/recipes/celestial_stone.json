@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "confluence:shiny_red_balloon"
+            "item": "confluence:sun_stone"
         },
         {
-            "item": "confluence:honey_comb"
+            "item": "confluence:moon_stone"
         }
     ],
     "result": {
-        "item": "confluence:honey_balloon"
+        "item": "confluence:celestial_stone"
     }
 }
