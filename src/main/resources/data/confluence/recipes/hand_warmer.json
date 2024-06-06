@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "tag": "minecraft:wool"
+        },
+        {
+            "item": "minecraft:leather"
+        },
+        {
+            "tag": "minecraft:wool"
+        }
+    ],
+    "result": {
+        "item": "confluence:hand_warmer",
+        "count": 1
+    }
+}
