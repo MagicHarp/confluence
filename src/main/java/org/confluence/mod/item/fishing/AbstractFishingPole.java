@@ -22,10 +22,14 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.entity.fishing.CurioFishingHook;
+import org.confluence.mod.item.curio.fishing.FishingBobber;
 import org.confluence.mod.item.curio.fishing.ILavaproofFishingHook;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IFishingHook;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public abstract class AbstractFishingPole extends Item implements Vanishable, CustomModel {
     protected static final ImmutableMultimap<Attribute, AttributeModifier> EMPTY = ImmutableMultimap.of();
@@ -48,7 +52,13 @@ public abstract class AbstractFishingPole extends Item implements Vanishable, Cu
             if (!pLevel.isClientSide) {
                 int luckBonus = EnchantmentHelper.getFishingLuckBonus(itemstack);
                 int speedBonus = EnchantmentHelper.getFishingSpeedBonus(itemstack);
-                FishingHook fishingHook = getHook(itemstack, pPlayer, pLevel, luckBonus, speedBonus);
+                FishingHook fishingHook;
+                Optional<FishingBobber> curio = CuriosUtils.findCurio(pPlayer, FishingBobber.class);
+                if (curio.isEmpty()) {
+                    fishingHook = getHook(itemstack, pPlayer, pLevel, luckBonus, speedBonus);
+                } else {
+                    fishingHook = new CurioFishingHook(pPlayer, pLevel, luckBonus, speedBonus, curio.get().variant);
+                }
                 if (CuriosUtils.noSameCurio(pPlayer, ILavaproofFishingHook.class)) {
                     pLevel.addFreshEntity(fishingHook);
                 } else {

@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
@@ -268,14 +269,14 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     ANGLER_TACKLE_BAG("angler_tackle_bag", AnglerTackleBag::new), // 渔夫渔具袋
     LAVAPROOF_FISHING_HOOK("lavaproof_fishing_hook", LavaproofFishingHook::new), // 防熔岩钓钩
     LAVAPROOF_TACKLE_BAG("lavaproof_tackle_bag", LavaproofTackleBag::new), // 防熔岩渔具袋
-    FISHING_BOBBER("fishing_bobber", FishingBobber::new), // 钓鱼浮标
-    GLOWING_FISHING_BOBBER("glowing_fishing_bobber", FishingBobber::new), // 发光钓鱼浮标
-    LAVA_MOSS_FISHING_BOBBER("lava_moss_fishing_bobber", FishingBobber::new), // 熔岩苔藓钓鱼浮标
-    HELIUM_MOSS_FISHING_BOBBER("helium_moss_fishing_bobber", FishingBobber::new), // 氦苔藓钓鱼浮标
-    NEON_MOSS_FISHING_BOBBER("neon_moss_fishing_bobber", FishingBobber::new), // 氖苔藓钓鱼浮标
-    ARGON_MOSS_FISHING_BOBBER("argon_moss_fishing_bobber", FishingBobber::new), // 氩苔藓钓鱼浮标
-    KRYPTON_MOSS_FISHING_BOBBER("krypton_moss_fishing_bobber", FishingBobber::new), // 氪苔藓钓鱼浮标
-    XENON_MOSS_FISHING_BOBBER("xenon_moss_fishing_bobber", FishingBobber::new), // 氙苔藓钓鱼浮标
+    FISHING_BOBBER("fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.COMMON)), // 钓鱼浮标
+    GLOWING_FISHING_BOBBER("glowing_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.GLOWING)), // 发光钓鱼浮标
+    LAVA_MOSS_FISHING_BOBBER("lava_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.LAVA)), // 熔岩苔藓钓鱼浮标
+    HELIUM_MOSS_FISHING_BOBBER("helium_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.HELIUM)), // 氦苔藓钓鱼浮标
+    NEON_MOSS_FISHING_BOBBER("neon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.NEON)), // 氖苔藓钓鱼浮标
+    ARGON_MOSS_FISHING_BOBBER("argon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.ARGON)), // 氩苔藓钓鱼浮标
+    KRYPTON_MOSS_FISHING_BOBBER("krypton_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.KRYPTON)), // 氪苔藓钓鱼浮标
+    XENON_MOSS_FISHING_BOBBER("xenon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.XENON)), // 氙苔藓钓鱼浮标
 
     /* ** 悠悠球 ** */
     /* ** 时装 ** */

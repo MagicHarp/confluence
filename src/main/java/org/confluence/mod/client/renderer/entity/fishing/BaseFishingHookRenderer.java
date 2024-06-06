@@ -45,7 +45,7 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
         IntegerRGB.GREEN,
         IntegerRGB.RED,
         IntegerRGB.WHITE,
-        IntegerRGB.YELLOW
+        IntegerRGB.CYAN
     };
     private final BaseFishingHookModel[] MODELS;
 

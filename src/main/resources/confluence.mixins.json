@@ -8,6 +8,7 @@
         "InventoryChangeTriggerMixin",
         "PlayerAdvancementsMixin",
         "accessor.BlockItemAccessor",
+        "accessor.FishingHookAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.LocalPlayerAccessor",
         "accessor.LootParamsAccessor",
