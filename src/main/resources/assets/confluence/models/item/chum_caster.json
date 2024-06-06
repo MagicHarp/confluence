@@ -1,14 +1,14 @@
 {
     "parent": "item/handheld_rod",
     "textures": {
-        "layer0": "confluence:item/fleshcathcer"
+        "layer0": "confluence:item/chum_caster"
     },
     "overrides": [
         {
             "predicate": {
                 "cast": 1
             },
-            "model": "confluence:item/fleshcathcer_cast"
+            "model": "confluence:item/chum_caster_cast"
         }
     ]
 }

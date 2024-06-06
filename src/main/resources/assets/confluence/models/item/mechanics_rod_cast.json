@@ -1,6 +1,6 @@
 {
     "parent": "item/fishing_rod",
     "textures": {
-        "layer0": "confluence:item/fishing_of_souls_cast"
+        "layer0": "confluence:item/mechanics_rod_cast"
     }
 }
