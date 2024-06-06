@@ -41,7 +41,6 @@
         "confluence:entities/zombie_villager",
         "confluence:entities/shulker",
         "confluence:entities/bat",
-        "confluence:entities/dolphin",
         "confluence:blocks/moss_block",
         "confluence:gameplay/cat_morning_gift",
         "confluence:gameplay/hero_of_the_village/librarian_gift"
