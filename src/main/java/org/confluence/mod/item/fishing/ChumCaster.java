@@ -10,19 +10,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.fishing.BaseFishingHook;
+import org.confluence.mod.entity.fishing.BloodyFishingHook;
 import org.confluence.mod.misc.ModRarity;
 
 import java.util.UUID;
 
-public class WoodFishingPole extends AbstractFishingPole {
-    public static final UUID LUCK_UUID = UUID.fromString("00526142-0004-ADE9-DA9A-652A62E0EE7E");
+public class ChumCaster extends AbstractFishingPole {
+    public static final UUID LUCK_UUID = UUID.fromString("9D53F775-C8BF-68DD-B98C-5311BD7E4A7F");
     private static final ImmutableMultimap<Attribute, AttributeModifier> LUCK = ImmutableMultimap.of(
-        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "WoodFishing Pole", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Chum Caster", 0.25, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public WoodFishingPole() {
-        super(new Properties().rarity(ModRarity.WHITE).durability(64));
+    public ChumCaster() {
+        super(new Properties().rarity(ModRarity.GREEN).durability(384));
     }
 
     @Override
@@ -33,6 +33,6 @@ public class WoodFishingPole extends AbstractFishingPole {
 
     @Override
     protected FishingHook getHook(ItemStack itemStack, Player player, Level level, int luckBonus, int speedBonus) {
-        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.WOOD);
+        return new BloodyFishingHook(player, level, luckBonus, speedBonus);
     }
 }

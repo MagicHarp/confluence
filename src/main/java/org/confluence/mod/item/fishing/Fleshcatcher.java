@@ -28,11 +28,11 @@ public class Fleshcatcher extends AbstractFishingPole {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         if (slot == EquipmentSlot.MAINHAND) return LUCK;
-        return ImmutableMultimap.of();
+        return EMPTY;
     }
 
     @Override
     protected FishingHook getHook(ItemStack itemStack, Player player, Level level, int luckBonus, int speedBonus) {
-        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.FLESH);
+        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.FLESHCATCHER);
     }
 }

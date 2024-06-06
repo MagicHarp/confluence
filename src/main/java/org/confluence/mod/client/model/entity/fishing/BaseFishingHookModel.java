@@ -9,15 +9,20 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
+import org.jetbrains.annotations.NotNull;
 
 import static org.confluence.mod.Confluence.MODID;
 
 public class BaseFishingHookModel extends EntityModel<BaseFishingHook> {
     public static final ModelLayerLocation WOOD = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "wood");
     public static final ModelLayerLocation REINFORCED = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "reinforced");
-    public static final ModelLayerLocation SOULS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "souls");
-    public static final ModelLayerLocation FLESH = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "flesh");
+    public static final ModelLayerLocation FISHER_OF_SOULS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fisher_of_souls");
+    public static final ModelLayerLocation FLESHCATCHER = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fleshcatcher");
     public static final ModelLayerLocation SCARAB = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "scarab");
+    public static final ModelLayerLocation FIBERGLASS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fiberglass");
+    public static final ModelLayerLocation MECHANICS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "mechanics");
+    public static final ModelLayerLocation SITTING_DUCKS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "sitting_ducks");
+    public static final ModelLayerLocation GOLDEN = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "golden");
     private final ModelPart bb_main;
 
     public BaseFishingHookModel(ModelPart root) {
@@ -42,7 +47,7 @@ public class BaseFishingHookModel extends EntityModel<BaseFishingHook> {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    public static LayerDefinition createSoulsLayer() {
+    public static LayerDefinition createFisherOfSoulsLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
@@ -53,7 +58,7 @@ public class BaseFishingHookModel extends EntityModel<BaseFishingHook> {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    public static LayerDefinition createFleshLayer() {
+    public static LayerDefinition createFleshcatcherLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
@@ -75,12 +80,50 @@ public class BaseFishingHookModel extends EntityModel<BaseFishingHook> {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    @Override
-    public void setupAnim(BaseFishingHook entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public static LayerDefinition createFiberglassLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(0, 6).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(4, 10).addBox(-1.5F, 1.0F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.25F)), PartPose.ZERO);
+        return LayerDefinition.create(meshdefinition, 16, 16);
+    }
+
+    public static LayerDefinition createMechanicsLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(0, 6).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(4, 10).addBox(-1.5F, 1.0F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.25F)), PartPose.ZERO);
+        return LayerDefinition.create(meshdefinition, 16, 16);
+    }
+
+    public static LayerDefinition createSittingDucksLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(0, 6).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(10, 7).addBox(0.0F, 3.0F, -1.5F, 0.0F, 6.0F, 3.0F, CubeDeformation.NONE), PartPose.ZERO);
+        bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(10, 7).addBox(0.0F, 0.0F, -1.5F, 0.0F, 6.0F, 3.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(0.0F, 3.0F, 0.0F, 2.5862F, 0.5582F, 1.8269F));
+        bb_main.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(10, 7).addBox(0.0F, 0.0F, -1.5F, 0.0F, 6.0F, 3.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(0.0F, 3.0F, 0.0F, -0.6557F, 0.1399F, 0.7692F));
+        return LayerDefinition.create(meshdefinition, 16, 16);
+    }
+
+    public static LayerDefinition createGoldenLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(0, 6).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 3.0F, CubeDeformation.NONE)
+            .texOffs(4, 10).addBox(-1.5F, 1.0F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.25F)), PartPose.ZERO);
+        return LayerDefinition.create(meshdefinition, 16, 16);
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void setupAnim(@NotNull BaseFishingHook entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    }
+
+    @Override
+    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

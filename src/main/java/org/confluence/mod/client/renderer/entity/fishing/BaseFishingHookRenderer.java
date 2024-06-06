@@ -18,6 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ToolActions;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
+import org.confluence.mod.entity.fishing.AbstractFishingHook;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,15 +29,23 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
         new ResourceLocation(MODID, "textures/entity/fishing/wood.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/reinforced.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/souls.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/flesh.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/scarab.png")
+        new ResourceLocation(MODID, "textures/entity/fishing/fleshcatcher.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/scarab.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/fiberglass.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/mechanics.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/sitting_ducks.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/golden.png")
     };
     private static final IntegerRGB[] COLORS = new IntegerRGB[]{
         IntegerRGB.BLACK,
         IntegerRGB.GRAY,
         IntegerRGB.PURPLE,
         IntegerRGB.LIGHT_RED,
-        IntegerRGB.BLUE
+        IntegerRGB.BLUE,
+        IntegerRGB.GREEN,
+        IntegerRGB.RED,
+        IntegerRGB.WHITE,
+        IntegerRGB.YELLOW
     };
     private final BaseFishingHookModel[] MODELS;
 
@@ -45,9 +54,13 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
         this.MODELS = new BaseFishingHookModel[]{
             new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.WOOD)),
             new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.REINFORCED)),
-            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.SOULS)),
-            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.FLESH)),
-            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.SCARAB))
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.FISHER_OF_SOULS)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.FLESHCATCHER)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.SCARAB)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.FIBERGLASS)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.MECHANICS)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.SITTING_DUCKS)),
+            new BaseFishingHookModel(pContext.bakeLayer(BaseFishingHookModel.GOLDEN))
         };
     }
 
@@ -61,10 +74,10 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
         int id = pEntity.getVariant().getId();
         BaseFishingHookModel model = MODELS[id];
         model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(getTextureLocation(pEntity))), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        renderString(entityRenderDispatcher, pEntity, pPartialTicks, pPoseStack, pBuffer, id);
+        renderString(entityRenderDispatcher, pEntity, pPartialTicks, pPoseStack, pBuffer, COLORS[id]);
     }
 
-    static void renderString(EntityRenderDispatcher entityRenderDispatcher, BaseFishingHook pEntity, float pPartialTicks, @NotNull PoseStack pPoseStack, MultiBufferSource pBuffer, int id) {
+    static <E extends AbstractFishingHook> void renderString(EntityRenderDispatcher entityRenderDispatcher, E pEntity, float pPartialTicks, @NotNull PoseStack pPoseStack, MultiBufferSource pBuffer, IntegerRGB color) {
         Player player = pEntity.getPlayerOwner();
         if (player == null) return;
         pPoseStack.pushPose();
@@ -109,7 +122,7 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
         PoseStack.Pose last = pPoseStack.last();
 
         for (int k = 0; k <= 16; ++k) {
-            stringVertex(f4, f5, f6, vertexConsumer, last, k / 16.0F, (k + 1) / 16.0F, COLORS[id]);
+            stringVertex(f4, f5, f6, vertexConsumer, last, k / 16.0F, (k + 1) / 16.0F, color);
         }
         pPoseStack.popPose();
     }

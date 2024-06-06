@@ -10,7 +10,7 @@ public final class ModRarity {
     public static final Rarity WHITE = Rarity.create("white", style -> style.withColor(0xFFFFFF));
     public static final Rarity BLUE = Rarity.create("blue", style -> style.withColor(0x9696FF));
     public static final Rarity GREEN = Rarity.create("green", style -> style.withColor(0x96FF96));
-    public static final Rarity ORANGE = Rarity.create("orange", style -> style.withColor(0x96FF96));
+    public static final Rarity ORANGE = Rarity.create("orange", style -> style.withColor(0xFFC896));
     public static final Rarity LIGHT_RED = Rarity.create("light_red", style -> style.withColor(0xFF9696));
     public static final Rarity PINK = Rarity.create("pink", style -> style.withColor(0xFF96FF));
     public static final Rarity LIGHT_PURPLE = Rarity.create("light_purple", style -> style.withColor(0xD2A0FF));

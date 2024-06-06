@@ -46,10 +46,13 @@ public class BaseFishingHook extends AbstractFishingHook implements VariantHolde
     public enum Variant implements StringRepresentable {
         WOOD(0, "wood"),
         REINFORCED(1, "reinforced"),
-        SOULS(2, "souls"),
-        FLESH(3, "flesh"),
+        FISHER_OF_SOULS(2, "fisher_of_souls"),
+        FLESHCATCHER(3, "fleshcatcher"),
         SCARAB(4, "scarab"),
-        ;
+        FIBERGLASS(5, "fiberglass"),
+        MECHANICS(6, "mechanics"),
+        SITTING_DUCKS(7, "sitting_ducks"),
+        GOLDEN(8, "golden");
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;

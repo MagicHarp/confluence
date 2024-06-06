@@ -15,14 +15,14 @@ import org.confluence.mod.misc.ModRarity;
 
 import java.util.UUID;
 
-public class WoodFishingPole extends AbstractFishingPole {
-    public static final UUID LUCK_UUID = UUID.fromString("00526142-0004-ADE9-DA9A-652A62E0EE7E");
+public class FiberglassFishingPole extends AbstractFishingPole {
+    public static final UUID LUCK_UUID = UUID.fromString("BF6DC104-5657-6705-C2D9-93CA81EABB79");
     private static final ImmutableMultimap<Attribute, AttributeModifier> LUCK = ImmutableMultimap.of(
-        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "WoodFishing Pole", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Fiberglass Fishing Pole", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public WoodFishingPole() {
-        super(new Properties().rarity(ModRarity.WHITE).durability(64));
+    public FiberglassFishingPole() {
+        super(new Properties().rarity(ModRarity.GREEN).durability(384));
     }
 
     @Override
@@ -33,6 +33,6 @@ public class WoodFishingPole extends AbstractFishingPole {
 
     @Override
     protected FishingHook getHook(ItemStack itemStack, Player player, Level level, int luckBonus, int speedBonus) {
-        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.WOOD);
+        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.FIBERGLASS);
     }
 }

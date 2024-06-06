@@ -9,7 +9,7 @@ public record IntegerRGB(int red, int green, int blue) {
     public static final IntegerRGB WHITE = IntegerRGB.of(0xFFFFFF);
     public static final IntegerRGB BLUE = IntegerRGB.of(0x9696FF);
     public static final IntegerRGB GREEN = IntegerRGB.of(0x96FF96);
-    public static final IntegerRGB ORANGE = IntegerRGB.of(0x96FF96);
+    public static final IntegerRGB ORANGE = IntegerRGB.of(0xFFC896);
     public static final IntegerRGB LIGHT_RED = IntegerRGB.of(0xFF9696);
     public static final IntegerRGB PINK = IntegerRGB.of(0xFF96FF);
     public static final IntegerRGB LIGHT_PURPLE = IntegerRGB.of(0xD2A0FF);

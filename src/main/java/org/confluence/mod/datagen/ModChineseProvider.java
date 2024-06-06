@@ -801,9 +801,9 @@ public class ModChineseProvider extends LanguageProvider {
         //鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
-        add(FishingPoles.FISHING_OF_SOULS.get(), "灵魂钓手");
+        add(FishingPoles.FISHER_OF_SOULS.get(), "灵魂钓手");
         add(FishingPoles.REINFORCED_FISHING_POLE.get(), "强化钓竿");
-        add(FishingPoles.FLESHCATUCHER.get(), "捕肉手");
+        add(FishingPoles.FLESHCATCHER.get(), "捕肉手");
         add(FishingPoles.SCARAB_FISHING_ROD.get(), "甲虫钓竿");
         //鱼饵
         add(Baits.APPRENTICE_BAIT.get(), "学徒诱饵");

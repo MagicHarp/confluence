@@ -6,14 +6,14 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.util.IFishingHook;
 
-public class LavaFishingHook extends AbstractFishingHook {
-    public LavaFishingHook(Player pPlayer, Level pLevel, int pLuck, int pLureSpeed) {
-        super(ModEntities.LAVA_FISHING_HOOK.get(), pLevel, pLuck, pLureSpeed);
+public class HotlineFishingHook extends AbstractFishingHook {
+    public HotlineFishingHook(Player pPlayer, Level pLevel, int pLuck, int pLureSpeed) {
+        super(ModEntities.HOTLINE_FISHING_HOOK.get(), pLevel, pLuck, pLureSpeed);
         ((IFishingHook) this).c$setIsLavaHook();
         setup(pPlayer);
     }
 
-    public LavaFishingHook(EntityType<LavaFishingHook> entityType, Level level) {
+    public HotlineFishingHook(EntityType<HotlineFishingHook> entityType, Level level) {
         super(entityType, level);
     }
 }

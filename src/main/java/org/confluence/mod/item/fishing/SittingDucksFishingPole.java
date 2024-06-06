@@ -10,29 +10,35 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.confluence.mod.misc.ModRarity;
 
 import java.util.UUID;
 
-public class FishingOfSouls extends AbstractFishingPole {
-    public static final UUID LUCK_UUID = UUID.fromString("F6C9D343-03C4-AB75-4441-D4E46450B17B");
+public class SittingDucksFishingPole extends AbstractFishingPole implements CustomName {
+    public static final UUID LUCK_UUID = UUID.fromString("52C6C522-F8F4-29AC-4475-7ED48C3ABFB5");
     private static final ImmutableMultimap<Attribute, AttributeModifier> LUCK = ImmutableMultimap.of(
-        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Fishing Of Souls", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Sitting Duck's Fishing Pole", 0.4, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public FishingOfSouls() {
-        super(new Properties().rarity(ModRarity.BLUE).durability(256));
+    public SittingDucksFishingPole() {
+        super(new Properties().rarity(ModRarity.GREEN).durability(384));
+    }
+
+    @Override
+    public String getGenName() {
+        return "Sitting Duck's Fishing Pole";
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         if (slot == EquipmentSlot.MAINHAND) return LUCK;
-        return ImmutableMultimap.of();
+        return EMPTY;
     }
 
     @Override
     protected FishingHook getHook(ItemStack itemStack, Player player, Level level, int luckBonus, int speedBonus) {
-        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.SOULS);
+        return new BaseFishingHook(player, level, luckBonus, speedBonus, BaseFishingHook.Variant.SITTING_DUCKS);
     }
 }

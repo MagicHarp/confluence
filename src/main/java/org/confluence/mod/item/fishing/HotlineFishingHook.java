@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.fishing.LavaFishingHook;
 import org.confluence.mod.misc.ModRarity;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public class HotlineFishingHook extends AbstractFishingPole {
     );
 
     public HotlineFishingHook() {
-        super(new Properties().rarity(ModRarity.ORANGE).fireResistant().durability(256));
+        super(new Properties().rarity(ModRarity.ORANGE).fireResistant().durability(512));
     }
 
     @Override
@@ -33,11 +32,11 @@ public class HotlineFishingHook extends AbstractFishingPole {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         if (slot == EquipmentSlot.MAINHAND) return LUCK;
-        return ImmutableMultimap.of();
+        return EMPTY;
     }
 
     @Override
     protected FishingHook getHook(ItemStack itemStack, Player player, Level level, int luckBonus, int speedBonus) {
-        return new LavaFishingHook(player, level, luckBonus, speedBonus);
+        return new org.confluence.mod.entity.fishing.HotlineFishingHook(player, level, luckBonus, speedBonus);
     }
 }

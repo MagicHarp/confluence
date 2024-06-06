@@ -28,7 +28,7 @@ public class ScarabFishingRod extends AbstractFishingPole {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         if (slot == EquipmentSlot.MAINHAND) return LUCK;
-        return ImmutableMultimap.of();
+        return EMPTY;
     }
 
     @Override

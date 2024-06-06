@@ -1,5 +1,6 @@
 package org.confluence.mod.item.fishing;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -27,6 +28,8 @@ import org.confluence.mod.util.IFishingHook;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractFishingPole extends Item implements Vanishable, CustomModel {
+    protected static final ImmutableMultimap<Attribute, AttributeModifier> EMPTY = ImmutableMultimap.of();
+
     public AbstractFishingPole(Properties pProperties) {
         super(pProperties);
     }
