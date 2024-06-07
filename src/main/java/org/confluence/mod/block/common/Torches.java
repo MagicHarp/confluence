@@ -47,8 +47,8 @@ public enum Torches {
     CRIMSON_TORCH("crimson", 14.0F, 0.9F, 0.2F, 0.3F), // 猩红
     HALLOWED_TORCH("hallowed", 14.0F, 1.0F, 0.6F, 1.0F),// 神圣
     JUNGLE_TORCH("jungle", 15.0F, 0.0F, 0.45F, 0.0F), // 丛林
-    //MUSHROOM_TORCH("mushroom"), // 蘑菇
-    //AETHER_TORCH("aether"); // 以太
+    MUSHROOM_TORCH("mushroom",15.0F, 0.7F, 1.0F, 1.0F),//蘑菇
+    AETHER_TORCH("aether",14.0F, 0.9F, 0.0F, 0.9F); //以太
     ;
 
     public final RegistryObject<ColorfulTorchBlock> stand;

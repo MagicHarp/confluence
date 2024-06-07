@@ -599,6 +599,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Torches.CRIMSON_TORCH.item.get(), "猩红火把");
         add(Torches.HALLOWED_TORCH.item.get(), "神圣火把");
         add(Torches.JUNGLE_TORCH.item.get(), "丛林火把");
+        add(Torches.MUSHROOM_TORCH.item.get(), "蘑菇火把");
+        add(Torches.AETHER_TORCH.item.get(), "以太火把");
 
         add(Pots.FOREST_POTS.get(), "森林罐子");
         add(Pots.TUNDRA_POTS.get(), "苔原罐子");
@@ -1376,6 +1378,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.PHO.get(), "河粉");
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
+        add(Foods.ZONGZI.get(), "粽子");
         //药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");

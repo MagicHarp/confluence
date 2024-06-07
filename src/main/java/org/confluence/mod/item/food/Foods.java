@@ -118,6 +118,10 @@ public enum Foods implements EnumRegister<Item> {
     GOLDEN_CARP("golden_carp", () -> new BaseFoodItem(FoodType.GOLDEN_CARP)),
     OBSIDIAN_FISH("obsidian_fish", () -> new FireproofFoodItem(FoodType.FISH)),
     FLASHFIN_KOI("flashfin_koi", () -> new FireproofFoodItem(FoodType.FISH)),
+
+    //节日特有
+    ZONGZI("zongzi", () -> new FireproofFoodItem(FoodType.LOW)),
+
     ;
     private final RegistryObject<Item> value;
 
