@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(CombatRules.class)
+@Mixin(value = CombatRules.class, priority = 2000)
 public abstract class CombatRulesMixin {
     @ModifyArg(method = "getDamageAfterAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F"), index = 2)
     private static float byPass(float pMax) {
