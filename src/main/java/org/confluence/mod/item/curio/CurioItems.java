@@ -154,20 +154,18 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
 
 
     /* 梯凳 */
+    /* 飞毯 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
     MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符
-    FLIPPER("flipper", Flipper::new), // 脚蹼
-    /* 潜水装备 */
-    /* 水母潜水装备 */
-    /* 北极潜水装备 */
+    LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
+    MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
+    MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
     /* 攀爬爪 */
     /* 鞋钉 */
     /* 猛虎攀爬装备 */
     /* 分趾厚底袜 */
     /* 忍者大师装备 */
-    /* 飞毯 */
-    /* 浮游圈 */
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
@@ -178,9 +176,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FAIRY_BOOTS("fairy_boots", FairyBoots::new), // 仙灵靴
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostsparkBoots::new), // 霜花靴
-    LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
-    MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
-    MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
     WATER_WALKING_BOOTS("water_walking_boots", WaterWalkingBoots::new), // 水上漂靴
     OBSIDIAN_WATER_WALKING_BOOTS("obsidian_water_walking_boots", ObsidianWaterWalkingBoots::new), // 黑曜石水上漂靴
     LAVA_WADERS("lava_waders", LavaWaders::new), // 熔岩靴
@@ -208,6 +203,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
     AMBER_HORSESHOE_BALLOON("amber_horseshoe_balloon", AmberHorseshoeBalloon::new), // 琥珀马掌气球
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
+    /* 浮游圈 */
+    FLIPPER("flipper", Flipper::new), // 脚蹼
+    /* 潜水装备 */
+    /* 水母潜水装备 */
+    /* 北极潜水装备 */
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
     FROG_FLIPPER("frog_flipper", FrogFlipper::new), // 青蛙脚蹼
     /* 青蛙蹼 */

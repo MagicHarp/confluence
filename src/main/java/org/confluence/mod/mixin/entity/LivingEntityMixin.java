@@ -53,7 +53,10 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        if (c$getSelf() instanceof Player player) {
+        LivingEntity self = c$getSelf();
+        if (self.hasEffect(ModEffects.STONED.get())) {
+            cir.setReturnValue(0.0F);
+        } else if (self instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
         }

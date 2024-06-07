@@ -25,7 +25,7 @@ public class SpectreGoggles extends BaseCurioItem implements CustomModel, IFunct
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         super.onEquip(slotContext, prevStack, stack);
-        echo(slotContext.entity(), true);
+        echo(slotContext.entity(), stack.getTag() != null && stack.getTag().getBoolean(getEnableKey()));
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.confluence.mod.block.functional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
@@ -18,6 +19,8 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class EchoBlock extends HalfTransparentBlock implements CustomModel, CustomItemModel {
     public EchoBlock() {
         super(BlockBehaviour.Properties.of().isSuffocating((blockState, blockGetter, blockPos) -> false).noOcclusion());
@@ -26,8 +29,14 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player && CuriosUtils.noSameCurio(player, CurioItems.SPECTRE_GOGGLES.get())) {
-            return Shapes.empty();
+        if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player) {
+            Optional<ItemStack> curio = CuriosUtils.findCurio(player, CurioItems.SPECTRE_GOGGLES.get());
+            if (curio.isPresent()) {
+                ItemStack itemStack = curio.get();
+                if (itemStack.getTag() != null && itemStack.getTag().getBoolean("enable")) {
+                    return Shapes.empty();
+                }
+            }
         }
         return Shapes.block();
     }

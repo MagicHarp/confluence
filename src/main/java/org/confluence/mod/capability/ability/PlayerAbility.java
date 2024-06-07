@@ -37,6 +37,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private boolean fireImmune;
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
+    private int airSupplyBonus;
 
     private int aggro;
     private float fishingPower;
@@ -61,6 +62,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = false;
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
+        this.airSupplyBonus = 0;
 
         this.aggro = 0;
         this.fishingPower = 0.0F;
@@ -85,6 +87,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicDouble chance = new AtomicDouble();
         AtomicBoolean fire = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
+
         AtomicInteger aggro = new AtomicInteger();
         AtomicDouble fishing = new AtomicDouble();
         AtomicBoolean star = new AtomicBoolean();
@@ -124,6 +127,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.criticalChance = chance.get();
         this.fireImmune = fire.get();
         this.maxLavaImmuneTicks = lava.get();
+
         this.aggro = aggro.get();
         this.fishingPower = fishing.floatValue();
         this.starRange = star.get() ? 14.25 : 1.75;
@@ -164,6 +168,14 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
             return true;
         }
         return false;
+    }
+
+    public void setAirSupplyBonus(int airSupplyBonus) {
+        this.airSupplyBonus = airSupplyBonus;
+    }
+
+    public int getAirSupplyBonus() {
+        return airSupplyBonus;
     }
 
     public int getAggro() {
