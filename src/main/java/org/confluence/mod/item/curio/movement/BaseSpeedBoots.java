@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModSounds;
 import org.confluence.mod.network.NetworkHandler;
@@ -55,9 +56,10 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     protected void speedUp(SlotContext slotContext, CompoundTag nbt, int addition, int max) {
         LivingEntity living = slotContext.entity();
+        if (living.hasEffect(ModEffects.STONED.get())) return;
         if (living instanceof LocalPlayer localPlayer) {
             int speed = nbt.getInt("speed");
-            if (localPlayer.zza > 0) {
+            if (localPlayer.onGround() && localPlayer.zza > 0) {
                 int actually = Math.min(max - speed, addition);
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));

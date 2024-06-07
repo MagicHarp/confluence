@@ -205,7 +205,7 @@ public final class ModFluids {
         add(Materials.LIFE_CRYSTAL.get(), ModItems.VITAL_CRYSTAL.get());
         add(Materials.MANA_STAR.get(), ModItems.ARCANE_CRYSTAL.get());
         add(Materials.LIFE_FRUIT.get(), ModItems.AEGIS_APPLE.get());
-        add(itemStack -> itemStack.is(ModTags.Items.FRUIT), Collections.singletonList(new ItemStack(ModItems.AMBROSIA.get())), 1);
+        add(ModTags.Items.FRUIT, Collections.singletonList(new ItemStack(ModItems.AMBROSIA.get())), 1);
         add(Baits.GOLD_WORM.get(), ModItems.GUMMY_WORM.get());
         add(Materials.PINK_PEARL.get(), ModItems.GALAXY_PEARL.get());
         // <---注释后面记得打空格

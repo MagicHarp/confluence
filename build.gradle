@@ -89,6 +89,11 @@ repositories {
             includeGroup("com.jozufozu.flywheel")
         }
     }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
 }
 
 dependencies {
@@ -99,6 +104,10 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.7.0+1.20.1")
     implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.20.1-3.0.1.4')
     implementation fg.deobf("com.lowdragmc.shimmer:Shimmer-forge:1.20.1-0.2.4")
+
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:15.3.0.4"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:15.3.0.4"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:15.3.0.4"))
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 //    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))

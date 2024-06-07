@@ -231,7 +231,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.tackle_box.tooltip", "诱饵消耗率减少5%");
         add("item.confluence.angler_tackle_bag.tooltip", "鱼线永远不会断、诱饵消耗率减少5%");
         add("item.confluence.lavaproof_fishing_hook.tooltip", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
-        add("item.confluence.lavaproof_tackle_bag.tooltip1", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
+        add("item.confluence.lavaproof_tackle_bag.tooltip", "无论使用何种诱饵或鱼竿，都可以在熔岩中钓鱼");
         add("item.confluence.lavaproof_tackle_bag.tooltip2", "鱼线永远不会断、诱饵消耗率减少5%");
         add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
         add("item.confluence.mana_cloak.tooltip", "收集星星会恢复魔力");
@@ -367,6 +367,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("prefix.confluence.tooltip.armor", "护甲值");
         add("prefix.confluence.tooltip.additional_mana", "额外魔力");
         add("prefix.confluence.tooltip.movement_speed", "移动速度");
+
+        add("fluid_type.confluence.shimmer", "微光");
+        add("fluid_type.confluence.honey", "蜂蜜");
+        add("title.confluence.shimmer_transmutation", "微光嬗变");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");

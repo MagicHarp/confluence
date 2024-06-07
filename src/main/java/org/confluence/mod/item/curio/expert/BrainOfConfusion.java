@@ -53,7 +53,7 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip1"));
+        list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip"));
         list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip2"));
         list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip3"));
     }

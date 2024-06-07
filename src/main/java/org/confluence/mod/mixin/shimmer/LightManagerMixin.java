@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.integration;
+package org.confluence.mod.mixin.shimmer;
 
 import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import com.lowdragmc.shimmer.client.light.LightManager;

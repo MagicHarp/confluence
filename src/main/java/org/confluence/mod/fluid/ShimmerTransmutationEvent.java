@@ -2,7 +2,7 @@ package org.confluence.mod.fluid;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Tuple;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,14 +15,16 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This event is Server side only.
  */
 public abstract class ShimmerTransmutationEvent extends Event {
-    static final Hashtable<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> ITEM_TRANSFORM = new Hashtable<>();
+    public static final ArrayList<Transmutation> ITEM_TRANSMUTATION = new ArrayList<>();
     protected final ItemEntity source;
     protected int coolDown;
     protected int shrink = 0;
@@ -107,12 +109,11 @@ public abstract class ShimmerTransmutationEvent extends Event {
         public @Nullable List<ItemStack> getTargets() {
             if (targets == null) {
                 ItemStack sourceItem = source.getItem();
-                for (Map.Entry<Predicate<ItemStack>, Tuple<List<ItemStack>, Integer>> entry : ITEM_TRANSFORM.entrySet()) {
-                    if (entry.getKey().test(sourceItem)) {
-                        int shrink = entry.getValue().getB();
-                        int times = sourceItem.getCount() / shrink;
+                for (Transmutation transmutation : ITEM_TRANSMUTATION) {
+                    if (transmutation.source.test(sourceItem)) {
+                        int times = sourceItem.getCount() / transmutation.shrink;
                         List<ItemStack> results = new ArrayList<>();
-                        for (ItemStack result : entry.getValue().getA()) {
+                        for (ItemStack result : transmutation.target) {
                             int count = result.getCount() * times;
                             while (count > 64) {
                                 ItemStack copy = result.copy();
@@ -123,7 +124,7 @@ public abstract class ShimmerTransmutationEvent extends Event {
                             result.setCount(count);
                             results.add(result);
                         }
-                        this.shrink = shrink * times;
+                        this.shrink = transmutation.shrink * times;
                         this.targets = results;
                         return targets;
                     }
@@ -170,19 +171,21 @@ public abstract class ShimmerTransmutationEvent extends Event {
         }
     }
 
-    public static void add(Predicate<ItemStack> source, List<ItemStack> target, int shrink) {
-        ITEM_TRANSFORM.put(source, new Tuple<>(target, shrink));
+    public static void add(TagKey<Item> source, List<ItemStack> target, int shrink) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), target, shrink));
     }
 
-    public static void add(ItemStack source, ItemStack target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), new Tuple<>(Collections.singletonList(target), source.getCount()));
+    public static void add(Ingredient source, List<ItemStack> target, int shrink) {
+        ITEM_TRANSMUTATION.add(new Transmutation(source, target, shrink));
     }
 
-    public static void add(ItemStack source, List<ItemStack> target) {
-        ITEM_TRANSFORM.put(itemStack -> ItemStack.matches(itemStack, source), new Tuple<>(target, source.getCount()));
+    public static void add(Item source, Item target, int shrink) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink));
     }
 
     public static void add(Item source, Item target) {
-        ITEM_TRANSFORM.put(itemStack -> itemStack.is(source), new Tuple<>(Collections.singletonList(new ItemStack(target)), 1));
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), 1));
     }
+
+    public record Transmutation(Ingredient source, List<ItemStack> target, int shrink){}
 }

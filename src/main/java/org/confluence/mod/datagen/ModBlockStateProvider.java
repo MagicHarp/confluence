@@ -96,7 +96,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private static boolean shouldSkip(Block block) {
-        return block instanceof CustomModel || block instanceof SlimeBlock || block instanceof SignBlock;
+        return block instanceof CustomModel || block instanceof SlimeBlock || block instanceof SignBlock || block instanceof LiquidBlock;
     }
 
     private static ResourceLocation texture(String path, String regex) {

@@ -270,6 +270,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("prefix.confluence.tooltip.additional_mana", "Additional Mana");
         add("prefix.confluence.tooltip.movement_speed", "Movement Speed");
 
+        add("fluid_type.confluence.shimmer", "Shimmer");
+        add("fluid_type.confluence.honey", "Honey");
+        add("title.confluence.shimmer_transmutation", "Shimmer Transmutation");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

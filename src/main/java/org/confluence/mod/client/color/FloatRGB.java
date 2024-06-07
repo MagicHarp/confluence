@@ -11,6 +11,10 @@ public record FloatRGB(float red, float green, float blue) {
         return new FloatRGB(vector3f.x, vector3f.y, vector3f.z);
     }
 
+    public static FloatRGB fromInteger(int color) {
+        return new FloatRGB((color >> 16 & 255) / 255.0F, (color >> 8 & 255) / 255.0F, (color & 255) / 255.0F);
+    }
+
     public FloatRGB mixture(FloatRGB another, float anotherRatio) {
         float r = Mth.clamp(red - (red - another.red) * anotherRatio, 0.0F, 1.0F);
         float g = Mth.clamp(green - (green - another.green) * anotherRatio, 0.0F, 1.0F);
