@@ -12,17 +12,22 @@
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.2
+                    "chance": 0.25
                 }
             ]
         },
         {
-            "type": "minecraft:item",
-            "name": "confluence:cloud_in_a_bottle",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:cloud_in_a_bottle"
+                }
+            ],
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.2
+                    "chance": 0.25
                 }
             ]
         }
