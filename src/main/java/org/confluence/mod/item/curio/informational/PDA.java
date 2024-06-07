@@ -18,7 +18,7 @@ public class PDA extends AbstractInfoCurio implements ICompass, IDepthMeter, IDP
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "PDA";
     }
 

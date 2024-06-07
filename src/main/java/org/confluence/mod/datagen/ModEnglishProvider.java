@@ -150,7 +150,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
-            if (item1 instanceof CustomName customName) add(item1, customName.getName());
+            if (item1 instanceof CustomName customName) add(item1, customName.getGenName());
             else add(item1, toTitleCase(item.getId().getPath()));
         });
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));

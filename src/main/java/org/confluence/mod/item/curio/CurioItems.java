@@ -152,8 +152,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 梯凳 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
-    MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符 (WIP)
+    MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符
     FLIPPER("flipper", Flipper::new), // 脚蹼
+    LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
+    MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
+    MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
     /* 潜水装备 */
     /* 水母潜水装备 */
     /* 北极潜水装备 */
@@ -174,9 +177,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     FAIRY_BOOTS("fairy_boots", FairyBoots::new), // 仙灵靴
     LIGHTNING_BOOTS("lightning_boots", LightningBoots::new), // 闪电靴
     FROSTSPARK_BOOTS("frostspark_boots", FrostsparkBoots::new), // 霜花靴
-    LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
-    MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
-    MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
     WATER_WALKING_BOOTS("water_walking_boots", WaterWalkingBoots::new), // 水上漂靴
     OBSIDIAN_WATER_WALKING_BOOTS("obsidian_water_walking_boots", ObsidianWaterWalkingBoots::new), // 黑曜石水上漂靴
     LAVA_WADERS("lava_waders", LavaWaders::new), // 熔岩靴

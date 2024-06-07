@@ -56,7 +56,7 @@ public class FrozenShield extends PaladinsShield {
     }
 
     @Override
-    public String getName() {
+    public String getGenName() {
         return "Frozen Shield";
     }
 }
