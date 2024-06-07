@@ -21,6 +21,8 @@
         "confluence:chests/shipwreck_supply",
         "confluence:chests/shipwreck_treasure",
         "confluence:entities/bee",
+        "confluence:entities/frog",
+        "confluence:entities/ghast",
         "confluence:entities/cave_spider",
         "confluence:entities/evoker",
         "confluence:entities/piglin_brute",
