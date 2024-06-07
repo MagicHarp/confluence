@@ -15,6 +15,16 @@
                     "chance": 0.2
                 }
             ]
+        },
+        {
+            "type": "minecraft:item",
+            "name": "confluence:cloud_in_a_bottle",
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.2
+                }
+            ]
         }
     ]
 }

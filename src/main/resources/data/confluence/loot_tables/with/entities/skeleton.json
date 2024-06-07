@@ -15,52 +15,6 @@
                     "chance": 0.008
                 }
             ]
-        },
-        {
-            "type": "minecraft:item",
-            "conditions": [
-                {
-                    "condition": "minecraft:any_of",
-                    "terms": [
-                        {
-                            "condition": "minecraft:location_check",
-                            "predicate": {
-                                "position": {
-                                    "y": {
-                                        "min": 260.0,
-                                        "max": 320.0
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                }
-            ],
-            "name": "confluence:cloud_in_a_bottle",
-            "weight":0.05
-        },
-        {
-            "type": "minecraft:item",
-            "conditions": [
-                {
-                    "condition": "minecraft:any_of",
-                    "terms": [
-                        {
-                            "condition": "minecraft:location_check",
-                            "predicate": {
-                                "position": {
-                                    "y": {
-                                        "min": 260.0,
-                                        "max": 320.0
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                }
-            ],
-            "name": "confluence:shiny_red_balloon",
-            "weight":0.05
         }
     ]
 }
