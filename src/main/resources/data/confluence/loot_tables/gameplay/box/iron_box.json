@@ -15,11 +15,6 @@
           "weight": 404
         },
         {
-          "type": "minecraft:item",
-          "name": "confluence:iron_box",
-          "weight": 186
-        },
-        {
           "type": "minecraft:empty",
           "weight": 8984
         }
