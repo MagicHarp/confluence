@@ -15,12 +15,12 @@ public class BasePlantBlock extends FlowerBlock implements CustomModel, CustomIt
     public BasePlantBlock() {
         super(MobEffects.GLOWING,5,BlockBehaviour.Properties.copy(Blocks.DANDELION));
     }
-    /*
+
     @Override
     public boolean mayPlaceOn(BlockState groundState, BlockGetter worldIn, BlockPos pos) {
         return groundState.is(Blocks.RED_SAND) || groundState.is(Blocks.SAND);
     }
-*/
+
     @Override
     public boolean canSurvive(BlockState blockstate, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();

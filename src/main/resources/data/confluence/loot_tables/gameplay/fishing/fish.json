@@ -370,7 +370,7 @@
             }
           ],
           "name": "confluence:chaos_fish",
-          "weight": 20
+          "weight": 600
         },
         {
           "type": "minecraft:item",
@@ -388,7 +388,7 @@
             }
           ],
           "name": "confluence:princess_fish",
-          "weight": 40
+          "weight": 1200
         },
         {
           "type": "minecraft:item",
@@ -406,7 +406,7 @@
             }
           ],
           "name": "confluence:colorful_mineral_fish",
-          "weight": 40
+          "weight": 1200
         },
         {
           "type": "minecraft:item",
@@ -2165,7 +2165,7 @@
             }
           ],
           "name": "confluence:bloody_piranhas",
-          "weight": 50
+          "weight": 1500
         },
         {
           "type": "minecraft:item",
@@ -2183,7 +2183,7 @@
             }
           ],
           "name": "confluence:scarlet_tiger_fish",
-          "weight": 50
+          "weight": 1500
         },
         {
           "type": "minecraft:item",
@@ -2201,7 +2201,7 @@
             }
           ],
           "name": "confluence:ebony_koi",
-          "weight": 100
+          "weight": 3000
         }
       ],
       "rolls": 1.0
