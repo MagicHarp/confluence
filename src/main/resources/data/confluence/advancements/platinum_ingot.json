@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "confluence:copper_short_sword"
+      "item": "confluence:tin_ingot"
     },
     "title": {
-      "translate": "advancements.copper_short_sword.title"
+      "translate": "advancements.platinum_ingot.title"
     },
     "description": {
-      "translate": "advancements.copper_short_sword.descr"
+      "translate": "advancements.platinum_ingot.descr"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "confluence:copper_short_sword"
+              "confluence:platinum_ingot"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "confluence:start"
+  "parent": "confluence:tin_ingot"
 }

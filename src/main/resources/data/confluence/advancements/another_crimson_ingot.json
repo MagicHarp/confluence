@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "confluence:falling_star"
+      "item": "confluence:tin_ingot"
     },
     "title": {
-      "translate": "advancements.falling_star.title"
+      "translate": "advancements.another_crimson_ingot.title"
     },
     "description": {
-      "translate": "advancements.falling_star.descr"
+      "translate": "advancements.another_crimson_ingot.descr"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "confluence:falling_star"
+              "confluence:another_crimson_ingot"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "confluence:start"
+  "parent": "confluence:platinum_ingot"
 }

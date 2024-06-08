@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "confluence:copper_pickaxe"
+      "item": "confluence:tin_ingot"
     },
     "title": {
-      "translate": "advancements.copper_pickaxe.title"
+      "translate": "advancements.ebony_ingot.title"
     },
     "description": {
-      "translate": "advancements.copper_pickaxe.descr"
+      "translate": "advancements.ebony_ingot.descr"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "confluence:copper_pickaxe"
+              "confluence:ebony_ingot"
             ],
             "count": {
               "min": 1,
@@ -32,5 +32,5 @@
       }
     }
   },
-  "parent": "confluence:start"
+  "parent": "confluence:platinum_ingot"
 }

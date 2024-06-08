@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "confluence:copper_axe"
+      "item": "confluence:tin_ingot"
     },
     "title": {
-      "translate": "advancements.copper_axe.title"
+      "translate": "advancements.tin_ingot.title"
     },
     "description": {
-      "translate": "advancements.copper_axe.descr"
+      "translate": "advancements.tin_ingot.descr"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "confluence:copper_axe"
+              "confluence:tin_ingot"
             ],
             "count": {
               "min": 1,
