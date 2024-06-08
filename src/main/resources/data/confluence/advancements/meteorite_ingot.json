@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "confluence:tin_ingot"
+      "item": "confluence:meteorite_ingot"
     },
     "title": {
       "translate": "advancements.meteorite_ingot.title"
@@ -21,7 +21,7 @@
         "items": [
           {
             "items": [
-              "confluence:tin_ingot"
+              "confluence:meteorite_ingot"
             ],
             "count": {
               "min": 1,
