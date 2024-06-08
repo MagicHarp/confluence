@@ -1,6 +1,5 @@
 package org.confluence.mod.integration.jei;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,11 +9,16 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.fluid.ShimmerTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTransmutationEvent.Transmutation> {
     public static final RecipeType<ShimmerTransmutationEvent.Transmutation> TYPE = RecipeType.create(Confluence.MODID, "shimmer_transmutation", ShimmerTransmutationEvent.Transmutation.class);
     private static final Component TITLE = Component.translatable("title.confluence.shimmer_transmutation");
+    private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow.png");
     private final IJeiHelpers jeiHelpers;
 
     public ShimmerTransmutationCategory(IJeiHelpers jeiHelpers) {
@@ -66,11 +71,16 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     }
 
     @Override
-    public void draw(ShimmerTransmutationEvent.@NotNull Transmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
-        // todo 箭头
-        poseStack.popPose();
+    public void draw(ShimmerTransmutationEvent.@NotNull Transmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        if (ClientPacketHandler.getGamePhase().ordinal() < recipe.gamePhase().ordinal()) {
+            guiGraphics.blit(ARROW, 54, 46, 22, 0, 21, 28, 42, 42);
+            if (mouseX >= 54 && mouseX <= 75 && mouseY >= 46 && mouseY <= 74) {
+                MutableComponent text = Component.translatable("condition.confluence.shimmer_transmutation", recipe.gamePhase()).withStyle(style -> style.withColor(ChatFormatting.RED));
+                guiGraphics.renderTooltip(Minecraft.getInstance().font, text, (int) mouseX, (int) mouseY);
+            }
+        } else {
+            guiGraphics.blit(ARROW, 54, 46, 0, 0, 21, 28, 42, 42);
+        }
     }
 
     public static class Background implements IDrawable {

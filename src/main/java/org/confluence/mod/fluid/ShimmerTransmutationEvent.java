@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.command.GamePhase;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -131,7 +132,7 @@ public abstract class ShimmerTransmutationEvent extends Event {
                 }
                 if (sourceItem.getDamageValue() != 0) return null;
                 RegistryAccess registryAccess = source.level().registryAccess();
-                boolean isHardCore = ConfluenceData.get((ServerLevel) source.level()).isHardCore();
+                boolean isHardCore = ConfluenceData.get((ServerLevel) source.level()).isHardcore();
                 for (Recipe<?> recipe : ((ServerLevel) source.level()).getServer().getRecipeManager().getRecipes()) {
                     if (recipe.isSpecial() || recipe.isIncomplete() || recipe instanceof AbstractCookingRecipe) continue;
                     ItemStack resultItem = recipe.getResultItem(registryAccess);
@@ -172,20 +173,36 @@ public abstract class ShimmerTransmutationEvent extends Event {
     }
 
     public static void add(TagKey<Item> source, List<ItemStack> target, int shrink) {
-        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), target, shrink));
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), target, shrink, GamePhase.BEFORE_SKELETRON));
     }
 
     public static void add(Ingredient source, List<ItemStack> target, int shrink) {
-        ITEM_TRANSMUTATION.add(new Transmutation(source, target, shrink));
+        ITEM_TRANSMUTATION.add(new Transmutation(source, target, shrink, GamePhase.BEFORE_SKELETRON));
     }
 
     public static void add(Item source, Item target, int shrink) {
-        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink));
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink, GamePhase.BEFORE_SKELETRON));
     }
 
     public static void add(Item source, Item target) {
-        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), 1));
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), 1, GamePhase.BEFORE_SKELETRON));
     }
 
-    public record Transmutation(Ingredient source, List<ItemStack> target, int shrink){}
+    public static void add(TagKey<Item> source, List<ItemStack> target, int shrink, GamePhase gamePhase) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), target, shrink, gamePhase));
+    }
+
+    public static void add(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase) {
+        ITEM_TRANSMUTATION.add(new Transmutation(source, target, shrink, gamePhase));
+    }
+
+    public static void add(Item source, Item target, int shrink, GamePhase gamePhase) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink, gamePhase));
+    }
+
+    public static void add(Item source, Item target, GamePhase gamePhase) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), 1, gamePhase));
+    }
+
+    public record Transmutation(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase){}
 }

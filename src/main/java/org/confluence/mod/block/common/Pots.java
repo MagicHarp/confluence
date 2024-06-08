@@ -292,7 +292,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         private boolean dropAmmo(Level level, Vec3 center) {
             int amount = level.random.nextInt(10, 21);
             Item item = Items.ARROW;
-            boolean hardCore = ConfluenceData.get((ServerLevel) level).isHardCore();
+            boolean hardCore = ConfluenceData.get((ServerLevel) level).isHardcore();
             if (level.random.nextBoolean()) {
                 item = hardCore ? ModItems.GRENADE.get() : ModItems.SHURIKEN.get();
             } else if (level.dimension() == Confluence.HELL) {
@@ -306,7 +306,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
 
         private boolean dropHeal(Level level, Vec3 center) {
             Item item;
-            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardCore()) {
+            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardcore()) {
                 item = TerraPotions.HEALING_POTION.get();
             } else {
                 item = TerraPotions.LESSER_HEALING_POTION.get();
@@ -331,7 +331,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         }
 
         private boolean dropRope(Level level, Vec3 center) {
-            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardCore()) {
+            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardcore()) {
                 return dropMoney(level, center);
             } else {
                 ModUtils.createItemEntity(ModBlocks.ROPE.get().asItem(), level.random.nextInt(20, 41), center.x, center.y, center.z, level);

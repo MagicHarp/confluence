@@ -272,7 +272,9 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("fluid_type.confluence.shimmer", "Shimmer");
         add("fluid_type.confluence.honey", "Honey");
+
         add("title.confluence.shimmer_transmutation", "Shimmer Transmutation");
+        add("condition.confluence.shimmer_transmutation", "Required game phase: %s");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();

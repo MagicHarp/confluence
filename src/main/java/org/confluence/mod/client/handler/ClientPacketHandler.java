@@ -14,6 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
+import org.confluence.mod.command.GamePhase;
 import org.confluence.mod.network.s2c.*;
 import org.confluence.mod.util.IEntity;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +38,7 @@ public final class ClientPacketHandler {
 
     private static ResourceLocation moonTexture = null;
     private static int moonSpecific = -1;
+    private static GamePhase gamePhase;
 
     public static void handleMana(ManaPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
@@ -111,6 +113,18 @@ public final class ClientPacketHandler {
         return moonSpecific;
     }
 
+    public static GamePhase getGamePhase() {
+        return gamePhase;
+    }
+
+    public static boolean isHardcore() {
+        return gamePhase.ordinal() > 1;
+    }
+
+    public boolean isGraduated() {
+        return gamePhase.ordinal() == 6;
+    }
+
     public static void handleSwing(AutoAttackPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> autoAttack = packet.autoAttack());
@@ -170,6 +184,12 @@ public final class ClientPacketHandler {
                 throw new RuntimeException(e);
             }
         });
+        context.setPacketHandled(true);
+    }
+
+    public static void handleGamePhase(GamePhasePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> gamePhase = packet.gamePhase());
         context.setPacketHandled(true);
     }
 }

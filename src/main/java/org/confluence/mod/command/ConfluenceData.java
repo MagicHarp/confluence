@@ -6,6 +6,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.GamePhasePacketS2C;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
 import org.confluence.mod.util.PlayerUtils;
@@ -48,7 +49,7 @@ public class ConfluenceData extends SavedData {
         return serverLevel.getDataStorage().computeIfAbsent(ConfluenceData::new, ConfluenceData::new, "confluence");
     }
 
-    public boolean isHardCore() {
+    public boolean isHardcore() {
         return gamePhase.ordinal() > 1;
     }
 
@@ -71,6 +72,10 @@ public class ConfluenceData extends SavedData {
 
     public void setGamePhase(GamePhase gamePhase) {
         this.gamePhase = gamePhase;
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.ALL.noArg(),
+            new GamePhasePacketS2C(gamePhase)
+        );
         setDirty();
     }
 

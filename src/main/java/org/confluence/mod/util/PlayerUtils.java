@@ -13,6 +13,7 @@ import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.GamePhasePacketS2C;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 import org.confluence.mod.network.s2c.SpecificMoonPacketS2C;
 import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
@@ -85,6 +86,10 @@ public final class PlayerUtils {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new WindSpeedPacketS2C((float) Mth.length(data.getWindSpeedX(), data.getWindSpeedZ())));
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.ALL.noArg(),
+            new GamePhasePacketS2C(data.getGamePhase())
+        );
     }
 
     public static void syncAdvancements(ServerPlayer serverPlayer) {

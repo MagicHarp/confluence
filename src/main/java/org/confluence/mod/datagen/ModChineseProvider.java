@@ -370,7 +370,9 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("fluid_type.confluence.shimmer", "微光");
         add("fluid_type.confluence.honey", "蜂蜜");
+
         add("title.confluence.shimmer_transmutation", "微光嬗变");
+        add("condition.confluence.shimmer_transmutation", "需要的游戏阶段: %s");
 
         //region blocks
         add(Ores.TIN_ORE.get(), "锡矿石");
@@ -767,7 +769,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Gels.PINK_GEL.get(), "粉色粘液球");
         add(Gels.FROZEN_GEL.get(), "冰冻粘液球");
         add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
-        //杂项
+        // 杂项
         add(ICE_MIRROR.get(), "冰雪镜");
         add(CLAM.get(), "牡蛎");
         add(LESSER_HEALING_POTION.get(), "弱效治疗药水");
@@ -804,7 +806,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(AEGIS_APPLE.get(), "神盾果");
         add(AMBROSIA.get(), "仙馔密酒");
         add(GUMMY_WORM.get(), "黏性蠕虫");
-        //鱼竿
+        // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
         add(FishingPoles.FISHER_OF_SOULS.get(), "灵魂钓手");
@@ -816,7 +818,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(FishingPoles.MECHANICS_ROD.get(), "机械师钓竿");
         add(FishingPoles.SITTING_DUCKS_FISHING_POLE.get(), "冤大头钓竿");
         add(FishingPoles.GOLDEN_FISHING_ROD.get(), "金钓竿");
-        //鱼饵
+        // 鱼饵
         add(Baits.APPRENTICE_BAIT.get(), "学徒诱饵");
         add(Baits.JOURNEYMAN_BAIT.get(), "熟手诱饵");
         add(Baits.MASTER_BAIT.get(), "大师诱饵");
@@ -862,7 +864,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Baits.WORM.get(), "蠕虫");
         add(Baits.YELLOW_DRAGONFLY.get(), "黄蜻蜓");
         add(Baits.ZEBRA_SWALLOWTAIL_BUTTERFLY.get(), "带凤蝶");
-        //钩爪
+        // 钩爪
         add(Hooks.GRAPPLING_HOOK.get(), "抓钩");
         add(Hooks.RUBY_HOOK.get(), "红玉钩");
         add(Hooks.AMBER_HOOK.get(), "琥珀钩");
@@ -887,7 +889,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hooks.LUNAR_HOOK.get(), "月钩");
         add(Hooks.SPOOKY_HOOK.get(), "阴森钩");
         add(Hooks.TENDON_HOOK.get(), "肌腱钩");
-        //锁链
+        // 锁链
         add(RUBY_CHAIN.get(), "红玉锁链");
         add(AMBER_CHAIN.get(), "琥珀锁链");
         add(TOPAZ_CHAIN.get(), "黄玉锁链");
@@ -897,12 +899,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(AMETHYST_CHAIN.get(), "紫晶锁链");
         add(SILK_CHAIN.get(), "蛛丝绳");
         add(BONE_CHAIN.get(), "骨头锁链");
-        //植物
+        // 植物
         add(WATERLEAF.get(), "幌菊");
         add(FLAMEFLOWERS.get(), "火焰花");
         add(MOONSHINE_GRASS.get(), "月光草");
         add(SHINE_ROOT.get(), "闪耀根");
-        add(SHIVERINGTHORNS .get(), "寒颤棘");
+        add(SHIVERINGTHORNS.get(), "寒颤棘");
         add(SUNFLOWERS.get(), "太阳花");
         add(DEATHWEED.get(), "死亡草");
         add(CORRUPT_GRASS.get(), "腐化草");
@@ -915,7 +917,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(EBONY_MUSHROOM.get(), "魔菇");
         add(GLOWING_MUSHROOM.get(), "发光蘑菇");
         add(LIFE_MUSHROOM.get(), "生命蘑菇");
-        //法杖
+        // 法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
         add(ManaWeapons.TOPAZ_STAFF.get(), "黄玉法杖");
@@ -955,9 +957,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(ManaWeapons.RAZORPINE.get(), "剃刀松");
         add(ManaWeapons.BETSYS_WRATH.get(), "双足翼龙怒气");
 
-        //射手武器
+        // 射手武器
         add(GunItems.HANDGUN.get(), "手枪");
-        //子弹
+        // 子弹
         add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
         add(AmmoItems.METEOR_BULLET.get(), "流星弹");
         add(AmmoItems.SILVER_BULLET.get(), "银子弹");
@@ -974,7 +976,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(AmmoItems.ENDLESS_MUSKET_POUCH.get(), "无限子弹袋");
         add(AmmoItems.LUMINITE_BULLET.get(), "夜明弹");
         add(AmmoItems.TUNGSTEN_BULLET.get(), "钨子弹");
-        //刷怪蛋
+        // 刷怪蛋
         add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(), "蓝色史莱姆刷怪蛋");
         add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(), "红色史莱姆刷怪蛋");
         add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(), "黄色史莱姆刷怪蛋");
@@ -1257,8 +1259,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.STINKY_FISH.get(), "臭味鱼");
         add(Foods.TUNA.get(), "金枪鱼");
         add(Foods.MOTTLED_OILFISH.get(), "斑驳油鱼");
-        //任务鱼
 
+        // 任务鱼
         add(QuestedFishes.AMANITA_FUNGIFIN.get(), "发光蘑菇鱼");
         add(QuestedFishes.ANGELFISH.get(), "天使鱼");
         add(QuestedFishes.BATFISH.get(), "蝙蝠鱼");
@@ -1301,7 +1303,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(QuestedFishes.WYVERNTAIL.get(), "飞龙尾");
         add(QuestedFishes.ZOMBIE_FISH.get(), "僵尸鱼");
 
-        //食物
+        // 食物
         add(Foods.APPLE_JUICE.get(), "苹果汁");
         add(Foods.BLACKCURRANT.get(), "黑醋栗");
         add(Foods.BLOOD_ORANGE.get(), "血橙");
@@ -1379,7 +1381,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
         add(Foods.ZONGZI.get(), "粽子");
-        //药水
+        // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");
         add(TerraPotions.WRATH_POTION.get(), "怒气药水");
@@ -1410,7 +1412,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.NIGHT_OWL_POTION.get(), "夜猫子药水");
         add(TerraPotions.WATER_WALKING_POTION.get(), "水上漂药水");
         add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
-        //药水效果
+        // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
         add(ModEffects.IRON_SKIN.get(), "铁皮");

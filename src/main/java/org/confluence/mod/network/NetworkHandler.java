@@ -39,6 +39,7 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, FlushPlayerAbilityPacketS2C.class, FlushPlayerAbilityPacketS2C::encode, FlushPlayerAbilityPacketS2C::decode, ClientPacketHandler::handleFlush);
         CHANNEL.registerMessage(packetId++, BroadcastGravitationRotPacketS2C.class, BroadcastGravitationRotPacketS2C::encode, BroadcastGravitationRotPacketS2C::decode, ClientPacketHandler::handleRemoteRot);
         CHANNEL.registerMessage(packetId++, PlayerLightPacketS2C.class, PlayerLightPacketS2C::encode, PlayerLightPacketS2C::decode, ClientPacketHandler::handleLight);
+        CHANNEL.registerMessage(packetId++, GamePhasePacketS2C.class, GamePhasePacketS2C::encode, GamePhasePacketS2C::decode, ClientPacketHandler::handleGamePhase);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
