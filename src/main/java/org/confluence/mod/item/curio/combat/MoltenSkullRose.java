@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILavaImmune {
+public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILavaImmune, ILavaHurtReduce {
     public MoltenSkullRose() {
         super(ModRarity.LIGHT_PURPLE);
     }
@@ -21,5 +21,6 @@ public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILava
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IFireImmune.TOOLTIP);
         list.add(ILavaImmune.TOOLTIP);
+        list.add(ILavaHurtReduce.TOOLTIP);
     }
 }

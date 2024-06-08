@@ -64,6 +64,8 @@ public final class ModConfigs {
     private static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MIN = BUILDER.defineInRange("min", 0.8, 0.0, 1.0);
     private static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MAX = BUILDER.defineInRange("max", 1.2, 1.0, 2.0);
 
+    private static final ForgeConfigSpec.BooleanValue SHOWING_MODEL = BUILDER.pop().comment("If showing curios model").define("showingModel", false);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static final ArrayList<BlockState> rareBlocks = new ArrayList<>();
@@ -71,6 +73,7 @@ public final class ModConfigs {
     public static boolean randomAttackDamage = true;
     public static double randomAttackDamageMin = 0.8;
     public static double randomAttackDamageMax = 1.2;
+    public static boolean showingModel = false;
 
     @SubscribeEvent
     @SuppressWarnings("deprecation")
@@ -88,5 +91,6 @@ public final class ModConfigs {
         randomAttackDamage = RANDOM_ATTACK_DAMAGE.get();
         randomAttackDamageMin = RANDOM_ATTACK_DAMAGE_MIN.get();
         randomAttackDamageMax = RANDOM_ATTACK_DAMAGE_MAX.get();
+        showingModel = SHOWING_MODEL.get();
     }
 }
