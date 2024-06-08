@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.renderer.entity.BeeProjectileRenderer;
@@ -18,6 +19,11 @@ import static org.confluence.mod.entity.ModEntities.STAR_CLOAK;
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ModClient {
     @SubscribeEvent
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(CuriosClient::registerRenderers);
+    }
+
+    @SubscribeEvent
     public static void keyBinding(RegisterKeyMappingsEvent event) {
         event.register(KeyBindings.METAL_DETECTOR.get());
     }
@@ -29,6 +35,7 @@ public final class ModClient {
 
     @SubscribeEvent
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        CuriosClient.registerLayers(event::registerLayerDefinition);
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
     }
 

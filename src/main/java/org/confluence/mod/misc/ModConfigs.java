@@ -73,6 +73,7 @@ public final class ModConfigs {
     public static double randomAttackDamageMax = 1.2;
 
     @SubscribeEvent
+    @SuppressWarnings("deprecation")
     static void onLoad(final ModConfigEvent event) {
         rareBlocks.clear();
         rareCreatures.clear();
