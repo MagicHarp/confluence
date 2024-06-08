@@ -61,12 +61,12 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
 
     private final RegistryObject<BasePotsBlock> value;
 
-    Pots(String id, float moneyHoleChance, float moneyRatio, VoxelShape voxelShape) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, moneyRatio, voxelShape));
+    Pots(String id, float moneyRatio, float moneyHoleChance, VoxelShape voxelShape) {
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, voxelShape));
     }
 
-    Pots(String id, float moneyHoleChance, float moneyRatio) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyHoleChance, moneyRatio, Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12))));
+    Pots(String id, float moneyRatio, float moneyHoleChance) {
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12))));
     }
 
     @Override
@@ -78,14 +78,14 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
 
     public static class BasePotsBlock extends HorizontalDirectionalBlock implements CustomModel {
         private final VoxelShape voxelShape;
-        private final float moneyHoleChance;
         private final float moneyRatio;
+        private final float moneyHoleChance;
 
-        public BasePotsBlock(float moneyHoleChance, float moneyRatio, VoxelShape voxelShape) {
-            super(Properties.of().sound(SoundType.DECORATED_POT).strength(1.0F, 10.0F).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+        public BasePotsBlock(float moneyRatio, float moneyHoleChance, VoxelShape voxelShape) {
+            super(Properties.of().sound(SoundType.DECORATED_POT).instabreak().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
             this.voxelShape = voxelShape;
-            this.moneyHoleChance = moneyHoleChance;
             this.moneyRatio = moneyRatio;
+            this.moneyHoleChance = moneyHoleChance;
             registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
         }
 
@@ -103,6 +103,11 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         @Override
         public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
             return voxelShape;
+        }
+
+        @Override
+        public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
+            return true;
         }
 
         @Override
