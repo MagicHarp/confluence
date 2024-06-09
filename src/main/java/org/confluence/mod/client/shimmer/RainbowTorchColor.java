@@ -7,7 +7,7 @@ public class RainbowTorchColor extends ColorPointLight.Template {
     public static final RainbowTorchColor INSTANCE = new RainbowTorchColor();
 
     public RainbowTorchColor() {
-        super(14.0F, 0.0F, 0.0F, 0.0F, 1.0F);
+        super(14.0F, 0.0F, 0.0F, 0.0F, 0.4F);
     }
 
     public void update() {

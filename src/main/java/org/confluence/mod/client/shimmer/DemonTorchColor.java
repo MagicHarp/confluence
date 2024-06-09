@@ -9,7 +9,7 @@ public class DemonTorchColor extends ColorPointLight.Template {
     public static final DemonTorchColor INSTANCE = new DemonTorchColor();
 
     public DemonTorchColor() {
-        super(14.0F, 0.0F, 0.0F, 0.0F, 1.0F);
+        super(14.0F, 0.0F, 0.0F, 0.0F, 0.4F);
     }
 
     public void update() {

@@ -45,11 +45,10 @@ public enum Torches {
     CORAL_TORCH("coral", 14.0F, 0.25F, 1.0F, 0.8F), // 珊瑚
     CORRUPT_TORCH("corrupt", 14.0F, 0.95F, 0.4F, 1.0F), // 腐化
     CRIMSON_TORCH("crimson", 14.0F, 0.9F, 0.2F, 0.3F), // 猩红
-    HALLOWED_TORCH("hallowed", 14.0F, 1.0F, 0.6F, 1.0F),// 神圣
+    HALLOWED_TORCH("hallowed", 14.0F, 1.0F, 0.6F, 1.0F), // 神圣
     JUNGLE_TORCH("jungle", 15.0F, 0.0F, 0.45F, 0.0F), // 丛林
-    MUSHROOM_TORCH("mushroom",15.0F, 0.7F, 1.0F, 1.0F),//蘑菇
-    AETHER_TORCH("aether",14.0F, 0.9F, 0.0F, 0.9F); //以太
-    ;
+    MUSHROOM_TORCH("mushroom", 15.0F, 0.7F, 1.0F, 1.0F), // 蘑菇
+    AETHER_TORCH("aether", 14.0F, 0.9F, 0.0F, 0.9F); // 以太
 
     public final RegistryObject<ColorfulTorchBlock> stand;
     public final RegistryObject<ColorfulWallTorchBlock> wall;
@@ -62,7 +61,7 @@ public enum Torches {
     }
 
     Torches(String id, float radius, float r, float g, float b) {
-        this(id, radius, r, g, b, 1.0F);
+        this(id, radius, r, g, b, 0.4F);
     }
 
     Torches(String id, ColorPointLight.Template torchColor) {
