@@ -175,7 +175,7 @@ public final class ClientPacketHandler {
                 Player player = level.getPlayerByUUID(packet.playerUUID());
                 if (player == null) return;
                 if (packet.enable()) {
-                    PlayerPointLight light = new PlayerPointLight(LightManager.INSTANCE, player.position().toVector3f());
+                    PlayerPointLight light = new PlayerPointLight(LightManager.INSTANCE, player.position().toVector3f(), packet.color());
                     NO_UV_LIGHT_PLAYER.put(packet.playerUUID(), light);
                 } else {
                     NO_UV_LIGHT_PLAYER.remove(packet.playerUUID());

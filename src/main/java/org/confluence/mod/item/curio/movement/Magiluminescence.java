@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerLightPacketS2C;
@@ -44,7 +45,7 @@ public class Magiluminescence extends BaseCurioItem {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.ALL.noArg(),
-                new PlayerLightPacketS2C(serverPlayer.getUUID(), enable)
+                new PlayerLightPacketS2C(serverPlayer.getUUID(), 0xFFFFFD55, enable || PlayerPointLight.checkLight(living))
             );
         }
     }

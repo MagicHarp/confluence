@@ -127,12 +127,6 @@ public abstract class FishingHookMixin implements IFishingHook {
         return pType;
     }
 
-    @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
-    private ResourceLocation loot(ResourceLocation par1) {
-        if (c$isInLava()) return ModLootTables.FISHING_LAVA;
-        return par1;
-    }
-
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems(Lnet/minecraft/world/level/storage/loot/LootParams;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
     private LootParams modifyLuck(LootParams pParams) {
         Player owner = getPlayerOwner();
@@ -176,6 +170,7 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
     private ResourceLocation modifyLoot(ResourceLocation par1) {
+        if (c$isInLava()) return ModLootTables.FISHING_LAVA;
         if (c$getSelf().getType() == EntityType.FISHING_BOBBER) return par1;
         return ModLootTables.FISH;
     }
