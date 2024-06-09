@@ -137,5 +137,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "minecraft:gameplay/fishing/junk"
+  "random_sequence":"confluence:gameplay/fishing/junk"
 }
