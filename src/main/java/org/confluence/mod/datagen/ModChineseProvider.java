@@ -267,6 +267,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
         add("advancements.mana_star.title", "凝聚众星之力");
         add("advancements.mana_star.descr", "星辰会增长你魔力的造诣");
+        add("advancements.life_crystal.title", "生之希望伴行");
+        add("advancements.life_crystal.descr", "生命给你带来前行的希望");
         add("advancements.tin_ingot.title", "异口铜声");
         add("advancements.tin_ingot.descr", "获得锡锭，更多的异界矿物融入于世");
         add("advancements.meteorite_ingot.title", "天外之物");
