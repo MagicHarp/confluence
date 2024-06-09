@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.shimmer;
+package org.confluence.mod.mixin.integretion.shimmer;
 
 import com.lowdragmc.shimmer.forge.platform.ForgePlatformHelper;
 import org.spongepowered.asm.mixin.Mixin;

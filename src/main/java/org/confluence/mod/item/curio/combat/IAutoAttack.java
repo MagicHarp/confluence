@@ -10,6 +10,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.mixin.accessor.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
@@ -25,6 +26,7 @@ public interface IAutoAttack {
     }
 
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
+        if (Confluence.isBetterCombatLoaded()) return;
         if (ClientPacketHandler.couldAutoAttack() && minecraft.options.keyAttack.isDown()) {
             if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;

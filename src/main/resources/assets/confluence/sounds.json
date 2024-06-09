@@ -19,9 +19,14 @@
             "confluence:laser"
         ]
     },
-    "lightsaber_hit": {
+    "lightsaber_quick": {
         "sounds": [
-            "confluence:lightsaber_hit"
+            "confluence:lightsaber_quick"
+        ]
+    },
+    "lightsaber_slow": {
+        "sounds": [
+            "confluence:lightsaber_slow"
         ]
     },
     "lightsaber_open": {

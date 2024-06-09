@@ -14,7 +14,8 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> WAVING = register("waving");
     public static final RegistryObject<SoundEvent> DOUBLE_JUMP = register("double_jump");
     public static final RegistryObject<SoundEvent> LASER = register("laser");
-    public static final RegistryObject<SoundEvent> LIGHTSABER_HIT = register("lightsaber_hit");
+    public static final RegistryObject<SoundEvent> LIGHTSABER_QUICK = register("lightsaber_quick");
+    public static final RegistryObject<SoundEvent> LIGHTSABER_SLOW = register("lightsaber_slow");
     public static final RegistryObject<SoundEvent> LIGHTSABER_OPEN = register("lightsaber_open");
     public static final RegistryObject<SoundEvent> REGULAR_STAFF_SHOOT = register("regular_staff_shoot");
     public static final RegistryObject<SoundEvent> SHOES_FLY = register("shoes_fly");

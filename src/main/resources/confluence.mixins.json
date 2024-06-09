@@ -22,13 +22,14 @@
         "entity.ItemEntityMixin",
         "entity.LivingEntityMixin",
         "entity.PlayerMixin",
+        "integretion.bettercombat.ServerNetworkMixin",
+        "integretion.shimmer.ForgePlatformHelperMixin",
+        "integretion.shimmer.LightManagerMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
         "item.CrossbowItemMixin",
         "item.FishingRodItemMixin",
-        "item.HoneyBottleItemMixin",
-        "shimmer.ForgePlatformHelperMixin",
-        "shimmer.LightManagerMixin"
+        "item.HoneyBottleItemMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

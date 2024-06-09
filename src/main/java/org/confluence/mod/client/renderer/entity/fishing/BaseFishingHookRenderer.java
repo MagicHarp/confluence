@@ -28,7 +28,7 @@ public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
         new ResourceLocation(MODID, "textures/entity/fishing/wood.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/reinforced.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/souls.png"),
+        new ResourceLocation(MODID, "textures/entity/fishing/fisher_of_souls.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/fleshcatcher.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/scarab.png"),
         new ResourceLocation(MODID, "textures/entity/fishing/fiberglass.png"),
