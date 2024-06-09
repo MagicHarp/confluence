@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -56,9 +55,5 @@ public final class Confluence {
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
-    }
-
-    public static boolean isBetterCombatLoaded() {
-        return ModList.get().isLoaded("bettercombat");
     }
 }

@@ -6,12 +6,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.integration.bettercombat.BetterCombatHelper;
 import org.confluence.mod.mixin.accessor.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
@@ -26,7 +27,10 @@ public interface IAutoAttack {
     }
 
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
-        if (Confluence.isBetterCombatLoaded()) return;
+        if (BetterCombatHelper.isBetterCombatLoaded()) {
+            ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);
+            if (BetterCombatHelper.hasWeaponAttributes(itemStack)) return;
+        }
         if (ClientPacketHandler.couldAutoAttack() && minecraft.options.keyAttack.isDown()) {
             if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;
