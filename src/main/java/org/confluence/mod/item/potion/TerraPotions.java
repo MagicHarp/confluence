@@ -41,6 +41,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     RAGE_POTION("rage_potion", () -> new EffectPotionItem(ModEffects.RAGE, 4800)),
     RECALL_POTION("recall_potion", RecallPotionItem::new),
     REGENERATION_POTION("regeneration_potion", () -> new EffectPotionItem(() -> MobEffects.REGENERATION, 9600)),
+    SHINE_POTION("shine_potion", () -> new EffectPotionItem(ModEffects.SHINE, 12000)),
     //SONAR_POTION("sonar_potion", BaseItem::new),
     //SPELUNKER_POTION("spelunker_potion", BaseItem::new),
     //STRANGE_BREW("strange_brew", BaseItem::new),

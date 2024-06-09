@@ -209,7 +209,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 } else if (y <= 63.0) {
                     item = switch (level.random.nextInt(11)) {
                         case 0 -> REGENERATION_POTION.get();
-                        // 光芒
+                        case 1 -> SHINE_POTION.get();
                         case 2 -> SWIFTNESS_POTION.get();
                         case 3 -> ARCHERY_POTION.get();
                         case 4 -> GILLS_POTION.get();
@@ -221,7 +221,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 } else if (y <= 240.0) {
                     item = switch (level.random.nextInt(10)) {
                         case 0 -> IRON_SKIN_POTION.get();
-                        // 光芒
+                        case 1 -> SHINE_POTION.get();
                         case 2 -> NIGHT_OWL_POTION.get();
                         case 3 -> SWIFTNESS_POTION.get();
                         case 4 -> MINING_POTION.get();

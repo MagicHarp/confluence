@@ -173,9 +173,10 @@ public final class ClientPacketHandler {
                 ClientLevel level = Minecraft.getInstance().level;
                 if (level == null) return;
                 Player player = level.getPlayerByUUID(packet.playerUUID());
-                if (player == null) return;
-                if (packet.enable()) {
-                    PlayerPointLight light = new PlayerPointLight(LightManager.INSTANCE, player.position().toVector3f(), packet.color());
+                if (player == null) {
+                    NO_UV_LIGHT_PLAYER.remove(packet.playerUUID());
+                } else if (packet.enable()) {
+                    PlayerPointLight light = new PlayerPointLight(LightManager.INSTANCE, player.position().toVector3f(), 0xFFFFFD55);
                     NO_UV_LIGHT_PLAYER.put(packet.playerUUID(), light);
                 } else {
                     NO_UV_LIGHT_PLAYER.remove(packet.playerUUID());

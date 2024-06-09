@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.beneficial.LuckEffect;
+import org.confluence.mod.effect.beneficial.ShineEffect;
 import org.confluence.mod.effect.harmful.IchorEffect;
 import org.confluence.mod.effect.neutral.LoveEffect;
 import org.confluence.mod.item.curio.combat.EffectInvul;
@@ -36,6 +37,7 @@ public final class EffectEvents {
         LoveEffect.onAdd(mobEffect, living, event.getEffectSource());
         IchorEffect.onAdd(mobEffect, attributeMap);
         LuckEffect.onAdd(mobEffect, attributeMap, effectInstance.getAmplifier());
+        ShineEffect.onAdd(mobEffect, living);
     }
 
     @SubscribeEvent
@@ -48,6 +50,7 @@ public final class EffectEvents {
 
         IchorEffect.onRemove(mobEffect, attributeMap);
         LuckEffect.onRemove(living, mobEffect, attributeMap, mobEffectInstance.getAmplifier());
+        ShineEffect.onRemove(mobEffect, living);
     }
 
     @SubscribeEvent
@@ -60,5 +63,6 @@ public final class EffectEvents {
 
         IchorEffect.onRemove(mobEffect, attributeMap);
         LuckEffect.onRemove(living, mobEffect, attributeMap, mobEffectInstance.getAmplifier());
+        ShineEffect.onRemove(mobEffect, living);
     }
 }
