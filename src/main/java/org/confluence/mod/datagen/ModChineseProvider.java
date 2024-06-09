@@ -1389,6 +1389,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.ZONGZI.get(), "粽子");
         // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
+        add(TerraPotions.SHINE_POTION.get(), "光环药水");
         add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");
         add(TerraPotions.WRATH_POTION.get(), "怒气药水");
         add(TerraPotions.TITAN_POTION.get(), "泰坦药水");
@@ -1420,6 +1421,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
+        add(ModEffects.SHINE.get(), "发光");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
         add(ModEffects.IRON_SKIN.get(), "铁皮");
         add(ModEffects.ENDURANCE.get(), "耐力");

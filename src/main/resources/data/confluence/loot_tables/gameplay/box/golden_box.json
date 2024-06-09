@@ -106,7 +106,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:golden_ingot",
+          "name": "minecraft:gold_ingot",
           "functions": [
             {
               "function": "set_count",
