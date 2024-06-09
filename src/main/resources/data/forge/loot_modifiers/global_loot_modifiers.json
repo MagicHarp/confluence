@@ -35,6 +35,7 @@
         "confluence:entities/magma_cube",
         "confluence:entities/ender_dragon",
         "confluence:entities/phantom",
+        "confluence:entities/drowned",
         "confluence:entities/blaze",
         "confluence:entities/glow_squid",
         "confluence:entities/warden",
