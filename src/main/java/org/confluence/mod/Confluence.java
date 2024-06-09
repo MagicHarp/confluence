@@ -23,7 +23,6 @@ public final class Confluence {
 
     public Confluence() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
-
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
         ModTabs.TABS.register(bus);
