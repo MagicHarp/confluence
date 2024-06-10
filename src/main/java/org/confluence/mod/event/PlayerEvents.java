@@ -41,6 +41,9 @@ public final class PlayerEvents {
             PlayerUtils.syncSavedData(serverPlayer);
             PlayerUtils.syncAdvancements(serverPlayer);
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
+            IMayFly.sendMsg(serverPlayer);
+            IMultiJump.sendMsg(serverPlayer);
+            IAutoAttack.sendMsg(serverPlayer);
         }
     }
 
