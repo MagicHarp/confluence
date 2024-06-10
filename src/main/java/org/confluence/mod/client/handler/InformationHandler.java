@@ -139,7 +139,7 @@ public final class InformationHandler {
 
     private static boolean check(LocalPlayer self, Class<?> clazz) {
         return self.level().players().stream()
-            .noneMatch(player -> player.distanceTo(self) < 31.5F && CuriosUtils.hasCurio(player, clazz));
+            .noneMatch(player -> player.distanceToSqr(self) > 1024.0 || CuriosUtils.noSameCurio(player, clazz));
     }
 
     public static void handlePacket(InfoCurioCheckPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
@@ -148,7 +148,7 @@ public final class InformationHandler {
             byte[] enabled = packet.enabled();
             byte b = enabled[IWatch.INDEX];
             // 玩家发给自己的信息 || 收到别人共享的信息
-            if ((b >= 0 && time >= 0) || (b != -125 && time < 0)) time = b;
+            if ((b >= 0 && time >= 0) || (b != -125 && time <= 0)) time = b;
             timeInfo = switch (time) {
                 case HourWatch.OWNER, HourWatch.OTHER -> HourWatch::wrapTime;
                 case HalfHourWatch.OWNER, HalfHourWatch.OTHER -> HalfHourWatch::wrapTime;
@@ -156,31 +156,31 @@ public final class InformationHandler {
                 default -> null;
             };
             b = enabled[IWeatherRadio.INDEX];
-            if ((b >= 0 && weatherRadio >= 0) || (b != -128 && weatherRadio < 0)) weatherRadio = b;
+            if ((b >= 0 && weatherRadio >= 0) || (b != -128 && weatherRadio <= 0)) weatherRadio = b;
             b = enabled[ISextant.INDEX];
-            if ((b >= 0 && sextant >= 0) || (b != -128 && sextant < 0)) sextant = b;
+            if ((b >= 0 && sextant >= 0) || (b != -128 && sextant <= 0)) sextant = b;
             b = enabled[IFishermansPocketGuide.INDEX];
-            if ((b >= 0 && fpg >= 0) || (b != -128 && fpg < 0)) fpg = b;
+            if ((b >= 0 && fpg >= 0) || (b != -128 && fpg <= 0)) fpg = b;
             b = enabled[IMetalDetector.INDEX];
-            if ((b >= 0 && metalDetector >= 0) || (b != -128 && metalDetector < 0)) metalDetector = b;
+            if ((b >= 0 && metalDetector >= 0) || (b != -128 && metalDetector <= 0)) metalDetector = b;
             b = enabled[ILifeFormAnalyzer.INDEX];
-            if ((b >= 0 && lfa >= 0) || (b != -128 && lfa < 0)) lfa = b;
+            if ((b >= 0 && lfa >= 0) || (b != -128 && lfa <= 0)) lfa = b;
             b = enabled[IRadar.INDEX];
-            if ((b >= 0 && radar >= 0) || (b != -128 && radar < 0)) radar = b;
+            if ((b >= 0 && radar >= 0) || (b != -128 && radar <= 0)) radar = b;
             b = enabled[ITallyCounter.INDEX];
-            if ((b >= 0 && tallyCounter >= 0) || (b != -128 && tallyCounter < 0)) tallyCounter = b;
+            if ((b >= 0 && tallyCounter >= 0) || (b != -128 && tallyCounter <= 0)) tallyCounter = b;
             b = enabled[IDPSMeter.INDEX];
-            if ((b >= 0 && dpsMeter >= 0) || (b != -128 && dpsMeter < 0)) dpsMeter = b;
+            if ((b >= 0 && dpsMeter >= 0) || (b != -128 && dpsMeter <= 0)) dpsMeter = b;
             b = enabled[IStopwatch.INDEX];
-            if ((b >= 0 && stopwatch >= 0) || (b != -128 && stopwatch < 0)) stopwatch = b;
+            if ((b >= 0 && stopwatch >= 0) || (b != -128 && stopwatch <= 0)) stopwatch = b;
             b = enabled[ICompass.INDEX];
-            if ((b >= 0 && compass >= 0) || (b != -128 && compass < 0)) compass = b;
+            if ((b >= 0 && compass >= 0) || (b != -128 && compass <= 0)) compass = b;
             b = enabled[IDepthMeter.INDEX];
-            if ((b >= 0 && depthMeter >= 0) || (b != -128 && depthMeter < 0)) depthMeter = b;
+            if ((b >= 0 && depthMeter >= 0) || (b != -128 && depthMeter <= 0)) depthMeter = b;
 
             b = enabled[MechanicalLens.INDEX];
             byte c = mechanicalLens;
-            if ((b >= 0 && c >= 0) || (b != -128 && c < 0)) c = b;
+            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) c = b;
             if (mechanicalLens != c) {
                 mechanicalLens = c;
                 ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();

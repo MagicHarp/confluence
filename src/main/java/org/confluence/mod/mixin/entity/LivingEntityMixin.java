@@ -109,6 +109,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
     private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
+        if (fluidState.isEmpty()) return;
         LivingEntity self = c$getSelf();
         if (self.isCrouching()) {
             cir.setReturnValue(false);
