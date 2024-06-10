@@ -24,12 +24,12 @@ public class ModJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerCategories(@NotNull IRecipeCategoryRegistration registration) {
+    public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new ShimmerTransmutationCategory(registration.getJeiHelpers()));
     }
 
     @Override
-    public void registerRecipes(@NotNull IRecipeRegistration registration) {
+    public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(ShimmerTransmutationCategory.TYPE, ShimmerTransmutationEvent.ITEM_TRANSMUTATION);
         for (CurioItems curio : CurioItems.values()) {
             BaseCurioItem item = curio.get();
