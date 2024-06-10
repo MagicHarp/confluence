@@ -16,13 +16,14 @@ import java.util.ArrayList;
 /**
  * @param enabled length == 12
  */
-public record InfoCurioCheckPacketS2C(byte[] enabled) {
+public record InfoCurioCheckPacketS2C(int playerId, byte[] enabled) {
     public static void encode(InfoCurioCheckPacketS2C packet, FriendlyByteBuf friendlyByteBuf) {
+        friendlyByteBuf.writeInt(packet.playerId);
         friendlyByteBuf.writeByteArray(packet.enabled);
     }
 
     public static InfoCurioCheckPacketS2C decode(FriendlyByteBuf friendlyByteBuf) {
-        return new InfoCurioCheckPacketS2C(friendlyByteBuf.readByteArray());
+        return new InfoCurioCheckPacketS2C(friendlyByteBuf.readInt(), friendlyByteBuf.readByteArray());
     }
 
     public static void send(ServerPlayer serverPlayer, Inventory inventory) {
@@ -59,7 +60,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         }
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new InfoCurioCheckPacketS2C(new byte[]{
+            new InfoCurioCheckPacketS2C(serverPlayer.getId(), new byte[]{
                 watch, weatherRadio, sextant, fishermansPocketGuide, metalDetector, lifeFormAnalyzer,
                 radar, tallyCounter, dpsMeter, stopwatch, compass, depthMeter
             })
@@ -101,7 +102,7 @@ public record InfoCurioCheckPacketS2C(byte[] enabled) {
         boolean equals = watch == -125 && weatherRadio == -128 && sextant == -128 && fishermansPocketGuide == -128 && metalDetector == -128 &&
             lifeFormAnalyzer == -128 && radar == -128 && tallyCounter == -128 && dpsMeter == -128 && stopwatch == -128 && compass == -128 && depthMeter == -128;
         if (equals) return; // 如果不需要发送, 则返回
-        InfoCurioCheckPacketS2C packet = new InfoCurioCheckPacketS2C(new byte[]{
+        InfoCurioCheckPacketS2C packet = new InfoCurioCheckPacketS2C(serverPlayer.getId(), new byte[]{
             watch, weatherRadio, sextant, fishermansPocketGuide, metalDetector, lifeFormAnalyzer,
             radar, tallyCounter, dpsMeter, stopwatch, compass, depthMeter
         });
