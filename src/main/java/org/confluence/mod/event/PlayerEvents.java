@@ -27,6 +27,9 @@ public final class PlayerEvents {
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
+            IMayFly.sendMsg(serverPlayer);
+            IMultiJump.sendMsg(serverPlayer);
+            IAutoAttack.sendMsg(serverPlayer);
         }
     }
 
