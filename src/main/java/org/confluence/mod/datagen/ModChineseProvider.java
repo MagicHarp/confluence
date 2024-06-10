@@ -256,8 +256,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头");
         add("painting.confluence.maker.title", "MAKER");
         add("painting.confluence.maker.author", "BiliBili_Maker-2333");
-        add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
-        add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，确实挺严肃的");
+        add("painting.confluence.mustard_oasis.title", "MUSTARD_OASIS");
+        add("painting.confluence.mustard_oasis.author", "BiliBili_芥末Oasis");
         add("painting.confluence.a_pigeon_delight.title", "A_PIGEON_DELIGHT");
         add("painting.confluence.a_pigeon_delight.author", "BiliBili_一只鸽子悦");
 
