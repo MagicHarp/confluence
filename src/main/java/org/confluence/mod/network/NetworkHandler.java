@@ -5,9 +5,9 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
@@ -33,7 +33,7 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, AttackDamagePacketS2C.class, AttackDamagePacketS2C::encode, AttackDamagePacketS2C::decode, InformationHandler::handleAttackDamage);
         CHANNEL.registerMessage(packetId++, AutoAttackPacketS2C.class, AutoAttackPacketS2C::encode, AutoAttackPacketS2C::decode, ClientPacketHandler::handleSwing);
         CHANNEL.registerMessage(packetId++, ShieldOfCthulhuPacketS2C.class, ShieldOfCthulhuPacketS2C::encode, ShieldOfCthulhuPacketS2C::decode, ClientPacketHandler::handleCthulhu);
-        CHANNEL.registerMessage(packetId++, GravityGlobePacketS2C.class, GravityGlobePacketS2C::encode, GravityGlobePacketS2C::decode, GravitationEffect::handleGlobe);
+        CHANNEL.registerMessage(packetId++, GravityGlobePacketS2C.class, GravityGlobePacketS2C::encode, GravityGlobePacketS2C::decode, GravitationHandler::handleGlobe);
         CHANNEL.registerMessage(packetId++, FlushPlayerAbilityPacketS2C.class, FlushPlayerAbilityPacketS2C::encode, FlushPlayerAbilityPacketS2C::decode, ClientPacketHandler::handleFlush);
         CHANNEL.registerMessage(packetId++, BroadcastGravitationRotPacketS2C.class, BroadcastGravitationRotPacketS2C::encode, BroadcastGravitationRotPacketS2C::decode, ClientPacketHandler::handleRemoteRot);
 

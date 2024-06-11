@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
@@ -37,7 +37,7 @@ public final class PlayerEvents {
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             if (event.player instanceof LocalPlayer localPlayer) {
-                GravitationEffect.unCrouching(localPlayer);
+                GravitationHandler.unCrouching(localPlayer);
             }
         } else {
             Player player = event.player;

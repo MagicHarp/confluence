@@ -9,15 +9,15 @@
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
-        "LocalPlayerAccessor",
-        "MinecraftAccessor",
         "PlayerMixin",
         "SlimeBlockMixin"
     ],
     "minVersion": "0.8.5",
     "client": [
         "client.LivingEntityRendererMixin",
+        "client.LocalPlayerAccessor",
         "client.LocalPlayerMixin",
+        "client.MinecraftAccessor",
         "client.MouseHandlerMixin"
     ]
 }

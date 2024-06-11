@@ -17,8 +17,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.expert.RoyalGel;
@@ -75,7 +75,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "checkFallDamage", at = @At("HEAD"))
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
-        if (motionY > 0.0 && self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
+        if (motionY > 0.0 && self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
             self.fallDistance += motionY;
             NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
         }
@@ -84,7 +84,7 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
         if (c$getSelf() instanceof Player player) {
-            if ((player.isLocalPlayer() && GravitationEffect.isShouldRot()) || (player instanceof ServerPlayer && ((IEntity) player).c$isShouldRot())) {
+            if ((player.isLocalPlayer() && GravitationHandler.isShouldRot()) || (player instanceof ServerPlayer && ((IEntity) player).c$isShouldRot())) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
         }
@@ -161,7 +161,7 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
-        if (self instanceof LocalPlayer && GravitationEffect.isShouldRot()) {
+        if (self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;

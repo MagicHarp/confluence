@@ -10,10 +10,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -23,7 +23,7 @@ public final class ForgeClient {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
         if (event.phase == TickEvent.Phase.START) return;
-        GravitationEffect.tick(localPlayer);
+        GravitationHandler.tick(localPlayer);
         if (localPlayer == null) return;
         InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
@@ -35,17 +35,17 @@ public final class ForgeClient {
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
         boolean jumping = event.getInput().jumping;
-        if (GravitationEffect.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
-            GravitationEffect.handle(localPlayer, jumping);
+        if (GravitationHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
+            GravitationHandler.handle(localPlayer, jumping);
         } else {
-            GravitationEffect.expire();
+            GravitationHandler.expire();
             PlayerJumpHandler.handle(localPlayer, jumping);
         }
     }
 
     @SubscribeEvent
     public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
-        if (GravitationEffect.isShouldRot()) {
+        if (GravitationHandler.isShouldRot()) {
             event.setRoll(180.0F);
         }
     }

@@ -2,6 +2,8 @@ package org.confluence.mod.client;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.client.model.curio.*;
 import org.confluence.mod.client.renderer.curio.*;
 import org.confluence.mod.item.curio.CurioItems;
@@ -10,6 +12,7 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
+@OnlyIn(Dist.CLIENT)
 public final class CuriosClient {
     public static void registerRenderers() {
         CuriosRendererRegistry.register(CurioItems.TERRASPARK_BOOTS.get(), TerrasparkBootsRenderer::new);
