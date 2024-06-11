@@ -20,12 +20,8 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.client.color.AnimateColor;
-import org.confluence.mod.client.handler.GunShootingHandler;
-import org.confluence.mod.client.handler.HookThrowingHandler;
-import org.confluence.mod.client.handler.InformationHandler;
-import org.confluence.mod.client.handler.PlayerJumpHandler;
+import org.confluence.mod.client.handler.*;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.event.ShimmerEvents;
@@ -44,7 +40,7 @@ public final class ForgeClient {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
         if (event.phase == TickEvent.Phase.START) return;
-        GravitationEffect.tick(localPlayer);
+        GravitationHandler.tick(localPlayer);
         if (localPlayer == null) return;
         InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
@@ -59,10 +55,10 @@ public final class ForgeClient {
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
         boolean jumping = event.getInput().jumping;
-        if (GravitationEffect.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
-            GravitationEffect.handle(localPlayer, jumping);
+        if (GravitationHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
+            GravitationHandler.handle(localPlayer, jumping);
         } else {
-            GravitationEffect.expire();
+            GravitationHandler.expire();
             PlayerJumpHandler.handle(localPlayer, jumping);
         }
     }
@@ -152,6 +148,6 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
-        if (GravitationEffect.isShouldRot()) event.setRoll(180.0F);
+        if (GravitationHandler.isShouldRot()) event.setRoll(180.0F);
     }
 }

@@ -4,12 +4,15 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.HookThrowingPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
 
+@OnlyIn(Dist.CLIENT)
 public final class HookThrowingHandler {
     public static void handle(LocalPlayer localPlayer) {
         boolean isDown = false;

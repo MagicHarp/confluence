@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.entity;
+package org.confluence.mod.mixin.client;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.Vec3;
@@ -6,7 +6,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.extensions.IForgeLivingEntity;
 import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -21,7 +21,7 @@ public abstract class LocalPlayerMixin implements IForgeLivingEntity {
     @Override
     public void sinkInFluid(FluidType type) {
         Vec3 motion = self().getDeltaMovement();
-        double factor = GravitationEffect.isShouldRot() ? 0.04 : -0.04;
+        double factor = GravitationHandler.isShouldRot() ? 0.04 : -0.04;
         self().setDeltaMovement(motion.x, motion.y + factor * self().getAttributeValue(ForgeMod.SWIM_SPEED.get()), motion.z);
     }
 }

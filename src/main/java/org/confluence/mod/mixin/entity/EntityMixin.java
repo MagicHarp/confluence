@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
@@ -133,21 +133,21 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "getEyeHeight()F", at = @At("RETURN"), cancellable = true)
     private void eyeHeight(CallbackInfoReturnable<Float> cir) {
-        if (c$getSelf() instanceof LocalPlayer localPlayer && GravitationEffect.isShouldRot()) {
+        if (c$getSelf() instanceof LocalPlayer localPlayer && GravitationHandler.isShouldRot()) {
             cir.setReturnValue(localPlayer.getDimensions(localPlayer.getPose()).height * 0.15F);
         }
     }
 
     @ModifyVariable(method = "setOnGroundWithKnownMovement(ZLnet/minecraft/world/phys/Vec3;)V", at = @At("HEAD"), argsOnly = true)
     private boolean checkVertical(boolean bool) {
-        if (!bool) return verticalCollision && c$getSelf() instanceof LocalPlayer && GravitationEffect.isShouldRot();
+        if (!bool) return verticalCollision && c$getSelf() instanceof LocalPlayer && GravitationHandler.isShouldRot();
         return true;
     }
 
     @Inject(method = "getOnPosLegacy", at = @At("RETURN"), cancellable = true)
     private void getOnPosAbove(CallbackInfoReturnable<BlockPos> cir) {
         if (c$getSelf() instanceof Player player) {
-            if (player.isLocalPlayer() ? GravitationEffect.isShouldRot() : c$isShouldRot) {
+            if (player.isLocalPlayer() ? GravitationHandler.isShouldRot() : c$isShouldRot) {
                 cir.setReturnValue(getOnPos(-2.2F));
             }
         }

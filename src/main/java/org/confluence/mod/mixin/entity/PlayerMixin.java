@@ -3,7 +3,7 @@ package org.confluence.mod.mixin.entity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.effect.beneficial.GravitationEffect;
+import org.confluence.mod.client.handler.GravitationHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,12 +19,12 @@ public abstract class PlayerMixin {
 
     @ModifyVariable(method = "maybeBackOffFromEdge", at = @At("HEAD"), argsOnly = true)
     private Vec3 backOff(Vec3 pVec) {
-        return isLocalPlayer() && GravitationEffect.isShouldRot() ? new Vec3(pVec.x, -pVec.y, pVec.z) : pVec;
+        return isLocalPlayer() && GravitationHandler.isShouldRot() ? new Vec3(pVec.x, -pVec.y, pVec.z) : pVec;
     }
 
     @Inject(method = "maybeBackOffFromEdge", at = @At("RETURN"), cancellable = true)
     private void backOff2(Vec3 pVec, MoverType pMover, CallbackInfoReturnable<Vec3> cir) {
-        if (isLocalPlayer() && GravitationEffect.isShouldRot()) {
+        if (isLocalPlayer() && GravitationHandler.isShouldRot()) {
             Vec3 vec3 = cir.getReturnValue();
             cir.setReturnValue(new Vec3(vec3.x, -vec3.y, vec3.z));
         }
@@ -32,6 +32,6 @@ public abstract class PlayerMixin {
 
     @ModifyArg(method = "maybeBackOffFromEdge", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/AABB;move(DDD)Lnet/minecraft/world/phys/AABB;"), index = 1)
     private double backOff3(double pY) {
-        return isLocalPlayer() && GravitationEffect.isShouldRot() ? -pY : pY;
+        return isLocalPlayer() && GravitationHandler.isShouldRot() ? -pY : pY;
     }
 }

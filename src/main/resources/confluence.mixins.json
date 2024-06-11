@@ -10,9 +10,7 @@
         "accessor.BlockItemAccessor",
         "accessor.FishingHookAccessor",
         "accessor.LivingEntityAccessor",
-        "accessor.LocalPlayerAccessor",
         "accessor.LootParamsAccessor",
-        "accessor.MinecraftAccessor",
         "accessor.RangedAttributeAccessor",
         "block.BlockBehaviourMixin",
         "block.SlimeBlockMixin",
@@ -23,8 +21,6 @@
         "entity.LivingEntityMixin",
         "entity.PlayerMixin",
         "integretion.bettercombat.ServerNetworkMixin",
-        "integretion.shimmer.ForgePlatformHelperMixin",
-        "integretion.shimmer.LightManagerMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
         "item.CrossbowItemMixin",
@@ -38,7 +34,11 @@
         "client.GuiMixin",
         "client.LevelRendererMixin",
         "client.LivingEntityRendererMixin",
+        "client.LocalPlayerAccessor",
+        "client.LocalPlayerMixin",
+        "client.MinecraftAccessor",
         "client.MouseHandlerMixin",
-        "entity.LocalPlayerMixin"
+        "integretion.shimmer.ForgePlatformHelperMixin",
+        "integretion.shimmer.LightManagerMixin"
     ]
 }
