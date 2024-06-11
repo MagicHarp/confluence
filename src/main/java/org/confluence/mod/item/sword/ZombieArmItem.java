@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ZombieArmItem extends SwordItem  {
     public ZombieArmItem() {
-        super(ModTiers.TITANIUM, 3, -2.6F, new Properties().rarity(ModRarity.WHITE));
+        super(ModTiers.TITANIUM, 3, -1.4F, new Properties().rarity(ModRarity.WHITE));
     }
 
 }

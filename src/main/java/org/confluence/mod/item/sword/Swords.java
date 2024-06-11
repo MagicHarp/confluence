@@ -37,6 +37,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     UMBRELLA("umbrella", UmbrellaItem::new),
     ZOMBIE_ARM("zombie_arm", ZombieArmItem::new),
     BONE_SWORD("bone_sword", BoneSwordItem::new),
+    PURPLE_CLUBBERFISH("purple_clubberfish", PurpleClubberFishItem::new),
     CROWBAR("crowbar", CrowbarItem::new);
 
     private final RegistryObject<SwordItem> value;

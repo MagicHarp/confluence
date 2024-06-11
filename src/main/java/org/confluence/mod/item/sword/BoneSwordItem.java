@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BoneSwordItem extends SwordItem implements Image32x {
     public BoneSwordItem() {
-        super(ModTiers.TITANIUM, 6, -2.9F, new Properties().rarity(ModRarity.ORANGE));
+        super(ModTiers.TITANIUM, 5, -0.2F, new Properties().rarity(ModRarity.ORANGE));
     }
 
 

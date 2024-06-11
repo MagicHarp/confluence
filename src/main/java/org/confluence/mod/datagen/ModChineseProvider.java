@@ -747,6 +747,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.CROWBAR.get(), "撬棍");
         add(Swords.ZOMBIE_ARM.get(), "僵尸臂");
         add(Swords.BONE_SWORD.get(), "骨剑");
+        add(Swords.PURPLE_LIGHT_SABER.get(), "紫挥棒鱼");
         add(Swords.UMBRELLA.get(), "雨伞");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
