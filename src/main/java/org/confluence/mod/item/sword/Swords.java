@@ -34,6 +34,9 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
     // 其他剑
+    UMBRELLA("umbrella", UmbrellaItem::new),
+    ZOMBIE_ARM("zombie_arm", ZombieArmItem::new),
+    BONE_SWORD("bone_sword", BoneSwordItem::new),
     CROWBAR("crowbar", CrowbarItem::new);
 
     private final RegistryObject<SwordItem> value;
