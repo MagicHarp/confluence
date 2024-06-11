@@ -12,6 +12,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
@@ -41,8 +42,13 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()
         );
         tag(ModTags.Items.FRUIT).add(
-            Items.APPLE,
-            Items.MELON_SLICE
+            Items.APPLE, Items.MELON_SLICE, Foods.APRICOT.get(),
+            Foods.BANANA.get(), Foods.CHERRY.get(), Foods.COCONUT.get(),
+            Foods.DRAGON_FRUIT.get(), Foods.GRAPE_FRUIT.get(), Foods.LEMON.get(),
+            Foods.MANGO.get(), Foods.PEACH.get(), Foods.PINEAPPLE.get(),
+            Foods.PLUM.get(), Foods.GRAPE.get(), Foods.SPICY_PEPPER.get(),
+            Foods.STAR_FRUIT.get(), Foods.POMEGRANATE.get(), Foods.RAMBUTAN.get(),
+            Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
         );
         tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());

@@ -167,6 +167,7 @@ public final class ModFluids {
         add(ANGLER_EARRING.get(), TACKLE_BOX.get());
         add(TACKLE_BOX.get(), HIGH_TEST_FISHING_LINE.get());
         // 匣子转化
+        // <---注释后面记得打空格
         // 宝石转化
         add(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
         add(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
@@ -208,6 +209,5 @@ public final class ModFluids {
         add(ModTags.Items.FRUIT, Collections.singletonList(new ItemStack(ModItems.AMBROSIA.get())), 1);
         add(Baits.GOLD_WORM.get(), ModItems.GUMMY_WORM.get());
         add(Materials.PINK_PEARL.get(), ModItems.GALAXY_PEARL.get());
-        // <---注释后面记得打空格
     }
 }

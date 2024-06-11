@@ -45,7 +45,7 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
 
     @Override
     public @NotNull IDrawable getBackground() {
-        return new Background();
+        return Background.INSTANCE;
     }
 
     @Override
@@ -84,6 +84,8 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     }
 
     public static class Background implements IDrawable {
+        public static final Background INSTANCE = new Background();
+
         @Override
         public int getWidth() {
             return 128;
