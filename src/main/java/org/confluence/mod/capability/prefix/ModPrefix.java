@@ -1,6 +1,9 @@
 package org.confluence.mod.capability.prefix;
 
-public interface ModPrefix {
+import net.minecraftforge.common.IExtensibleEnum;
+
+@SuppressWarnings("unused")
+public interface ModPrefix extends IExtensibleEnum {
     void copyTo(ItemPrefix itemPrefix);
 
     boolean isHarmful();
@@ -68,6 +71,10 @@ public interface ModPrefix {
         public boolean isHarmful() {
             return false;
         }
+
+        public static Curio create(String name, int armor, double criticalChance, double attackDamage, double attackSpeed, double movementSpeed, int additionalMana, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
+        }
     }
 
     enum Universal implements ModPrefix {
@@ -114,6 +121,10 @@ public interface ModPrefix {
         public boolean isHarmful() {
             return tier < 0;
         }
+
+        public static Universal create(String name, double attackDamage, double criticalChance, double knockBack, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
+        }
     }
 
     enum Common implements ModPrefix {
@@ -158,6 +169,10 @@ public interface ModPrefix {
         @Override
         public boolean isHarmful() {
             return tier < 0 && this != ANNOYING;
+        }
+
+        public static Common create(String name, double attackDamage, double attackSpeed, double criticalChance, double knockBack, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
         }
     }
 
@@ -213,6 +228,10 @@ public interface ModPrefix {
         public boolean isHarmful() {
             return tier < 0 && this != SHAMEFUL;
         }
+
+        public static Melee create(String name, double attackDamage, double attackSpeed, double criticalChance, double size, double knockBack, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
+        }
     }
 
     enum Ranged implements ModPrefix {
@@ -263,6 +282,10 @@ public interface ModPrefix {
         public boolean isHarmful() {
             return tier < 0 && this != FRENZYING;
         }
+
+        public static Ranged create(String name, double attackDamage, double attackSpeed, double criticalChance, double velocity, double knockBack, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
+        }
     }
 
     enum MagicAndSumming implements ModPrefix {
@@ -312,6 +335,10 @@ public interface ModPrefix {
         @Override
         public boolean isHarmful() {
             return tier < 0 && this != INTENSE;
+        }
+
+        public static MagicAndSumming create(String name, double attackDamage, double attackSpeed, double criticalChance, double manaCost, double knockBack, int tier, double value) {
+            throw new IllegalStateException("Enum not extended");
         }
     }
 }
