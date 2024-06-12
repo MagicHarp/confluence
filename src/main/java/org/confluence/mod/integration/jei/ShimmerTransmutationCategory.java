@@ -27,10 +27,24 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     public static final RecipeType<ShimmerTransmutationEvent.Transmutation> TYPE = RecipeType.create(Confluence.MODID, "shimmer_transmutation", ShimmerTransmutationEvent.Transmutation.class);
     private static final Component TITLE = Component.translatable("title.confluence.shimmer_transmutation");
     private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow.png");
-    private final IJeiHelpers jeiHelpers;
+    private static final IDrawable BACKGROUND = new IDrawable() {
+        @Override
+        public int getWidth() {
+            return 128;
+        }
+
+        @Override
+        public int getHeight() {
+            return 128;
+        }
+
+        @Override
+        public void draw(@NotNull GuiGraphics guiGraphics, int xOffset, int yOffset) {}
+    };
+    private final IDrawable icon;
 
     public ShimmerTransmutationCategory(IJeiHelpers jeiHelpers) {
-        this.jeiHelpers = jeiHelpers;
+        this.icon = jeiHelpers.getGuiHelper().createDrawableItemStack(new ItemStack(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()));
     }
 
     @Override
@@ -45,12 +59,12 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
 
     @Override
     public @NotNull IDrawable getBackground() {
-        return Background.INSTANCE;
+        return BACKGROUND;
     }
 
     @Override
     public @NotNull IDrawable getIcon() {
-        return jeiHelpers.getGuiHelper().createDrawableItemStack(new ItemStack(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()));
+        return icon;
     }
 
     @Override
@@ -81,22 +95,5 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
         } else {
             guiGraphics.blit(ARROW, 54, 46, 0, 0, 21, 28, 42, 42);
         }
-    }
-
-    public static class Background implements IDrawable {
-        public static final Background INSTANCE = new Background();
-
-        @Override
-        public int getWidth() {
-            return 128;
-        }
-
-        @Override
-        public int getHeight() {
-            return 128;
-        }
-
-        @Override
-        public void draw(@NotNull GuiGraphics guiGraphics, int xOffset, int yOffset) {}
     }
 }

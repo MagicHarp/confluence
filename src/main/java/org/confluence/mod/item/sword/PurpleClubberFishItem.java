@@ -9,6 +9,4 @@ public class PurpleClubberFishItem extends SwordItem implements Image32x {
     public PurpleClubberFishItem() {
         super(ModTiers.TITANIUM, 11, -3.5F, new Properties().rarity(ModRarity.BLUE));
     }
-
-
 }
