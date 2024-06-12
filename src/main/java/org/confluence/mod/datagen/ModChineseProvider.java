@@ -749,6 +749,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.BONE_SWORD.get(), "骨剑");
         add(Swords.PURPLE_CLUBBERFISH.get(), "紫挥棒鱼");
         add(Swords.UMBRELLA.get(), "雨伞");
+        add(Swords.CANDY_CANE_SWORD.get(), "糖棒剑");
+        add(Swords.BREATHING_REED.get(), "芦苇呼吸管");
+        add(Swords.TRAGIC_UMBRELLA.get(), "悲剧雨伞");
+        add(Swords.FALCON_BLADE.get(), "猎鹰刀");
+        add(Swords.BAT_BAT.get(), "蝙蝠棍");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
@@ -760,6 +765,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
         add(Pickaxes.CACTUS_PICKAXE.get(), "仙人掌镐");
+        add(Pickaxes.CANDY_CANE_PICKAXE.get(), "糖棒镐");
         add(Pickaxes.TIN_PICKAXE.get(), "锡镐");
         add(Pickaxes.LEAD_PICKAXE.get(), "铅镐");
         add(Pickaxes.SILVER_PICKAXE.get(), "银镐");
@@ -792,8 +798,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(GREATER_MANA_POTION.get(), "强效魔力药水");
         add(SUPER_MANA_POTION.get(), "超级魔力药水");
         add(MAGIC_MIRROR.get(), "魔镜");
-        add(ROPE.get(), "绳子");
-        add(ROPE_COIL.get(), "绳圈");
         add(COPPER_COIN.get(), "铜币");
         add(SILVER_COIN.get(), "银币");
         add(GOLDEN_COIN.get(), "金币");

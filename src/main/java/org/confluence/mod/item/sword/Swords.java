@@ -34,9 +34,14 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
     // 其他剑
+    CANDY_CANE_SWORD("candy_cane_sword", () -> new BoardSwordItem(ModTiers.CANDY, 5, 1.6F)),
+    BREATHING_REED("breathing_reed", UmbrellaItem::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
+    TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),
+    FALCON_BLADE("falcon_blade", FalconBladeItem::new),
     ZOMBIE_ARM("zombie_arm", ZombieArmItem::new),
     BONE_SWORD("bone_sword", BoneSwordItem::new),
+    BAT_BAT("bat_bat", BatBatItem::new),
     PURPLE_CLUBBERFISH("purple_clubberfish", PurpleClubberFishItem::new),
     CROWBAR("crowbar", CrowbarItem::new);
 

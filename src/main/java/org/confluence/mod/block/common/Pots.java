@@ -16,6 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -339,7 +340,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardcore()) {
                 return dropMoney(level, center);
             } else {
-                ModUtils.createItemEntity(ModBlocks.ROPE.get().asItem(), level.random.nextInt(20, 41), center.x, center.y, center.z, level);
+                ModUtils.createItemEntity(Blocks.SCAFFOLDING.asItem(), level.random.nextInt(5, 11), center.x, center.y, center.z, level);
                 return true;
             }
         }

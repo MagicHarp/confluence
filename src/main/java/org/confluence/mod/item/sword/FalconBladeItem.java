@@ -5,8 +5,8 @@ import org.confluence.mod.datagen.limit.Image32x;
 import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.misc.ModRarity;
 
-public class PurpleClubberFishItem extends SwordItem implements Image32x {
-    public PurpleClubberFishItem() {
-        super(ModTiers.TITANIUM, 10, -3.5F, new Properties().rarity(ModRarity.BLUE));
+public class FalconBladeItem extends SwordItem implements Image32x {
+    public FalconBladeItem() {
+        super(ModTiers.TITANIUM, 3, -1.5F, new Properties().rarity(ModRarity.BLUE));
     }
 }
