@@ -18,6 +18,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
+import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.misc.ModArmPoses;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
@@ -55,5 +56,6 @@ public final class Confluence {
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
+        ModLootModifiers.MODIFIERS.register(bus);
     }
 }
