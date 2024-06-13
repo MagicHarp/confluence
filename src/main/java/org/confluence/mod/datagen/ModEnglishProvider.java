@@ -222,6 +222,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.star_cloak.tooltip", "Causes stars to fall after taking damage");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
+        add("death.attack.boulder", "%1$s  is crushed by boulder");
 
         add("painting.confluence.magic_harp.title", "MAGIC_HARP");
         add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，Looks silly...");

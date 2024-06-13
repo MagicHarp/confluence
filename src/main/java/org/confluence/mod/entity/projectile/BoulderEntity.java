@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BoulderEntity extends Projectile {
-    public static final double SPEED = 0.25;
+    public static final double SPEED = 0.70;
     public static final float DIAMETER = 1.0F;
     public float rotateO;
     public float rotate;

@@ -239,6 +239,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
+        add("death.attack.boulder", "%1$s 被巨石均匀地涂抹在地上");
 
         add("biome.confluence.the_corruption", "腐化之地");
         add("biome.confluence.another_crimson", "猩红之地");
@@ -821,6 +822,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(AEGIS_APPLE.get(), "神盾果");
         add(AMBROSIA.get(), "仙馔密酒");
         add(GUMMY_WORM.get(), "黏性蠕虫");
+        add(BOULDER.get(), "巨石");
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
