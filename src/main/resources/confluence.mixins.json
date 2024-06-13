@@ -12,6 +12,7 @@
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
         "accessor.RangedAttributeAccessor",
+        "block.BlockBehaviour$BlockStateBaseMixin",
         "block.BlockBehaviourMixin",
         "block.SlimeBlockMixin",
         "entity.AbstractArrowMixin",

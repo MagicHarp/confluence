@@ -45,7 +45,7 @@ public final class ModFluids {
             .properties(FluidType.Properties.create()
                 .density(2000)
                 .viscosity(3000)
-                .motionScale(0.0084)
+                .motionScale(0.003)
                 .canExtinguish(true)
                 .supportsBoating(true)
                 .rarity(ModRarity.YELLOW)
@@ -53,7 +53,7 @@ public final class ModFluids {
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH))
-            .client(new IClientFluidTypeExtensions() {
+            .customClient(new IClientFluidTypeExtensions() {
                 private static final ResourceLocation STILL = new ResourceLocation(MODID, "block/fluid/honey_still");
                 private static final ResourceLocation FLOWING = new ResourceLocation(MODID, "block/fluid/honey_flowing");
                 private static final Vector3f FOG_COLOR = new Vector3f(1.0F, 1.0F, 0.0F);
@@ -81,12 +81,12 @@ public final class ModFluids {
             })
             .block(ModBlocks.HONEY)
             .bucket(ModItems.HONEY_BUCKET)
-            .flowing((properties -> new ForgeFlowingFluid.Flowing(properties) {
+            .flowing(properties -> new ForgeFlowingFluid.Flowing(properties) {
                 @Override
                 protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, Fluid fluidIn, Direction direction) {
                     return !isSame(fluidIn);
                 }
-            }))
+            })
             .build();
 
         SHIMMER = FluidTriple.builder(new ResourceLocation(MODID, "shimmer"))
@@ -94,7 +94,7 @@ public final class ModFluids {
                 .density(800)
                 .lightLevel(7)
                 .viscosity(800)
-                .motionScale(0.0147)
+                .motionScale(0.02)
                 .canExtinguish(true)
                 .supportsBoating(true)
                 .rarity(ModRarity.PURPLE)
@@ -102,7 +102,7 @@ public final class ModFluids {
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH))
-            .client(new IClientFluidTypeExtensions() {
+            .customClient(new IClientFluidTypeExtensions() {
                 private static final ResourceLocation STILL = new ResourceLocation(MODID, "block/fluid/shimmer_still");
                 private static final ResourceLocation FLOWING = new ResourceLocation(MODID, "block/fluid/shimmer_flowing");
                 private static final Vector3f FOG_COLOR = new Vector3f(1.0F, 0.5882F, 1.0F);
@@ -130,6 +130,12 @@ public final class ModFluids {
             })
             .block(ModBlocks.SHIMMER)
             .bucket(() -> Items.AIR)
+            .flowing(properties -> new ForgeFlowingFluid.Flowing(properties) {
+                @Override
+                protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, Fluid fluidIn, Direction direction) {
+                    return !isSame(fluidIn);
+                }
+            })
             .build();
     }
 

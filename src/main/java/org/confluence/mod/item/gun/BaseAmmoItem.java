@@ -19,6 +19,11 @@ public class BaseAmmoItem extends Item {
         this.variant = variant;
     }
 
+    public BaseAmmoItem(BaseAmmoEntity.Variant variant, Properties properties) {
+        super(properties);
+        this.variant = variant;
+    }
+
     public BaseAmmoEntity getAmmoEntity(ItemStack itemStack, Player player, Level level) {
         Optional<ItemPrefix> prefix = PrefixProvider.getPrefix(itemStack);
         return new BaseAmmoEntity(player, level, prefix.isEmpty() ? null : prefix.get(), variant);

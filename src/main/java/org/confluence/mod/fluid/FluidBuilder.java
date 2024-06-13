@@ -32,6 +32,7 @@ public class FluidBuilder {
     private Supplier<? extends Item> bucket;
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> source;
     private Function<ForgeFlowingFluid.Properties, FlowingFluid> flowing;
+    private Function<FluidType.Properties, FluidType> fluidTypeFunction;
 
     FluidBuilder(ResourceLocation location) {
         this.namespace = location.getNamespace();
@@ -46,7 +47,7 @@ public class FluidBuilder {
         return this;
     }
 
-    public FluidBuilder client(IClientFluidTypeExtensions extensions) {
+    public FluidBuilder customClient(IClientFluidTypeExtensions extensions) {
         this.extensions = extensions;
         return this;
     }
@@ -81,13 +82,18 @@ public class FluidBuilder {
         return this;
     }
 
+    public FluidBuilder customType(Function<FluidType.Properties, FluidType> function) {
+        this.fluidTypeFunction = function;
+        return this;
+    }
+
     public FluidTriple build() {
         return new FluidTriple(fluidType, fluid, flowingFluid);
     }
 
     public static void register(RegisterEvent event) {
         BUILDERS.forEach((location, builder) -> {
-            event.register(ForgeRegistries.Keys.FLUID_TYPES, helper -> helper.register(location, new FluidType(builder.properties) {
+            event.register(ForgeRegistries.Keys.FLUID_TYPES, helper -> helper.register(location, builder.fluidTypeFunction == null ? new FluidType(builder.properties) {
                 @Override
                 public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
                     consumer.accept(builder.extensions == null ? new IClientFluidTypeExtensions() {
@@ -102,7 +108,7 @@ public class FluidBuilder {
                         }
                     } : builder.extensions);
                 }
-            }));
+            } : builder.fluidTypeFunction.apply(builder.properties)));
 
             event.register(ForgeRegistries.Keys.FLUIDS, helper -> {
                 ForgeFlowingFluid.Properties properties = new ForgeFlowingFluid

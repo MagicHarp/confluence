@@ -19,6 +19,7 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -54,7 +55,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
         LivingEntity self = c$getSelf();
-        if (self.hasEffect(ModEffects.STONED.get())) {
+        if (self.hasEffect(ModEffects.STONED.get()) || self.hasEffect(ModEffects.SHIMMER.get())) {
             cir.setReturnValue(0.0F);
         } else if (self instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY)
@@ -90,7 +91,8 @@ public abstract class LivingEntityMixin {
             self.fallDistance += motionY;
             NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
         }
-        if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
+        if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
+        else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
         if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
@@ -133,16 +135,25 @@ public abstract class LivingEntityMixin {
         LivingEntity self = c$getSelf();
         if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
         FluidState fluidstate = self.level().getFluidState(self.blockPosition());
+        FluidType fluidType = fluidstate.getType().getFluidType();
         if (self.canStandOnFluid(fluidstate)) {
             AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
             if (instance == null) return par1;
             double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
             return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
-        } else if (fluidstate.getType().getFluidType() == ModFluids.HONEY.fluidType().get()) {
+        } else if (fluidType == ModFluids.HONEY.fluidType().get()) {
             if (!self.level().isClientSide) {
                 if (self.isOnFire()) self.clearFire();
                 if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
                     self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
+                }
+            }
+            par1 = par1.scale(0.6);
+        } else if (fluidType == ModFluids.SHIMMER.fluidType().get()) {
+            if (!self.level().isClientSide) {
+                if (self.isOnFire()) self.clearFire();
+                if (fluidstate.isSource() && !self.hasEffect(ModEffects.SHIMMER.get())) {
+                    self.addEffect(new MobEffectInstance(ModEffects.SHIMMER.get(), MobEffectInstance.INFINITE_DURATION));
                 }
             }
         }
@@ -201,6 +212,7 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
         LivingEntity self = c$getSelf();
+        if (self.hasEffect(ModEffects.SHIMMER.get())) return Vec3.ZERO;
         if (self.hasEffect(ModEffects.STONED.get())) return StonedEffect.DOWN;
         if (self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);

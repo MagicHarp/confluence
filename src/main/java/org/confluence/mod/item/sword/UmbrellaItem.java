@@ -22,7 +22,7 @@ public class UmbrellaItem extends SwordItem implements CustomModel {
     public void inventoryTick(@NotNull ItemStack pStack, Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pLevel.isClientSide) return;
         if (pIsSelected && pEntity instanceof LivingEntity living && !living.swinging) {
-            living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 2, 2, false, false));
+            living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 2, 2, false, false, false));
         }
     }
 }

@@ -32,6 +32,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.ArcheryEffect;
 import org.confluence.mod.effect.beneficial.ThornsEffect;
 import org.confluence.mod.effect.harmful.BleedingEffect;
@@ -216,5 +217,13 @@ public final class ForgeEvents {
 //                mob.getType().spawn(serverLevel, mob.blockPosition(), MobSpawnType.SPAWNER);
 //            }
 //        }
+    }
+
+    @SubscribeEvent
+    public static void livingBreathe(LivingBreatheEvent event) {
+        if (event.canBreathe()) return;
+        if (event.getEntity().hasEffect(ModEffects.SHIMMER.get())) {
+            event.setCanBreathe(true);
+        }
     }
 }

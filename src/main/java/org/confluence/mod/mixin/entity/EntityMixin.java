@@ -9,10 +9,13 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
+import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IHurtEvasion;
@@ -44,10 +47,18 @@ public abstract class EntityMixin implements IEntity {
 
     @Shadow
     public boolean verticalCollision;
+
+    @Shadow(remap = false)
+    public abstract FluidType getEyeInFluidType();
+
     @Unique
     private int c$cthulhuSprintingTime = 0;
     @Unique
     private boolean c$isShouldRot = false;
+    @Unique
+    private boolean c$isInShimmer = false;
+    @Unique
+    private boolean c$wasInShimmer = false;
 
     @Override
     public int c$getCthulhuSprintingTime() {
@@ -117,6 +128,16 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))
     private void tickProfiler(CallbackInfo ci) {
         if (c$cthulhuSprintingTime > 0) this.c$cthulhuSprintingTime--;
+        this.c$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
+        if (c$isInShimmer) {
+            if (!c$wasInShimmer && c$getSelf() instanceof Projectile projectile) {
+                Vec3 motion = projectile.getDeltaMovement();
+                projectile.setDeltaMovement(motion.x, -motion.y, motion.z);
+                this.c$wasInShimmer = true;
+            }
+        } else {
+            this.c$wasInShimmer = false;
+        }
     }
 
     @Inject(method = "playerTouch", at = @At("TAIL"))

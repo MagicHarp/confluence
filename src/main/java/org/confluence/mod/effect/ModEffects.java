@@ -10,6 +10,7 @@ import org.confluence.mod.effect.beneficial.*;
 import org.confluence.mod.effect.harmful.*;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.effect.neutral.LoveEffect;
+import org.confluence.mod.effect.neutral.ShimmerEffect;
 
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
@@ -52,6 +53,7 @@ public final class ModEffects {
     public static final RegistryObject<ArcheryEffect> ARCHERY = EFFECTS.register("archery", ArcheryEffect::new);
     public static final RegistryObject<FlipperEffect> FLIPPER = EFFECTS.register("flipper", FlipperEffect::new);
     public static final RegistryObject<ShineEffect> SHINE = EFFECTS.register("shine", ShineEffect::new);
+    public static final RegistryObject<ShimmerEffect> SHIMMER = EFFECTS.register("shimmer", ShimmerEffect::new);
 
     public static void heal(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {
