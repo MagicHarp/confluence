@@ -155,6 +155,7 @@ public final class ModTabs {
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
                 output.accept(ALTAR_BLOCK.get());
+                output.accept(BOULDER.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
                 for (Baits baits : Baits.values()) output.accept(baits.get());
             })

@@ -71,6 +71,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<EffectThrownPotion>> EFFECT_THROWN_POTION = ENTITIES.register("effect_thrown_potion", () -> EntityType.Builder.<EffectThrownPotion>of(EffectThrownPotion::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:effect_thrown_potion"));
     public static final RegistryObject<EntityType<BaseAmmoEntity>> BASE_AMMO = ENTITIES.register("base_ammo", () -> EntityType.Builder.<BaseAmmoEntity>of(BaseAmmoEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(6).build("confluence:base_ammo"));
     public static final RegistryObject<EntityType<StarCloakEntity>> STAR_CLOAK = ENTITIES.register("star_cloak", () -> EntityType.Builder.<StarCloakEntity>of(StarCloakEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(16).updateInterval(20).build("confluence:star_cloak"));
+    public static final RegistryObject<EntityType<BoulderEntity>> BOULDER = ENTITIES.register("boulder", () -> EntityType.Builder.<BoulderEntity>of(BoulderEntity::new, MobCategory.MISC).sized(BoulderEntity.DIAMETER, BoulderEntity.DIAMETER).clientTrackingRange(6).build("confluence:boulder"));
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String i, Supplier<SimpleParticleType> p, int s) {
         return ENTITIES.register(i + "_slime", () -> EntityType.Builder.<BaseSlime>of((e, l) -> new BaseSlime(e, l, p, s), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:" + i + "_slime"));

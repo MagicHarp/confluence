@@ -40,11 +40,15 @@ public class GlowingFishingHookRenderer extends EntityRenderer<CurioFishingHook>
         ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/krypton_moss_glow.png")),
         ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/xenon_moss_glow.png"))
     };
-    private final GlowingFishingHookModel model;
+    private final GlowingFishingHookModel mossModel;
+    private final GlowingFishingHookModel commonModel;
+    private final GlowingFishingHookModel glowingModel;
 
     public GlowingFishingHookRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
-        this.model = new GlowingFishingHookModel(pContext.bakeLayer(GlowingFishingHookModel.LAYER_LOCATION));
+        this.mossModel = new GlowingFishingHookModel(pContext.bakeLayer(GlowingFishingHookModel.MOSS));
+        this.commonModel = new GlowingFishingHookModel(pContext.bakeLayer(GlowingFishingHookModel.COMMON));
+        this.glowingModel = new GlowingFishingHookModel(pContext.bakeLayer(GlowingFishingHookModel.GLOWING));
     }
 
     @Override
@@ -52,10 +56,22 @@ public class GlowingFishingHookRenderer extends EntityRenderer<CurioFishingHook>
         return TEXTURES[pEntity.getVariant().getId()];
     }
 
+    public GlowingFishingHookModel getModel(CurioFishingHook fishingHook) {
+        CurioFishingHook.Variant variant = fishingHook.getVariant();
+        if (variant == CurioFishingHook.Variant.COMMON) {
+            return commonModel;
+        } else if (variant == CurioFishingHook.Variant.GLOWING) {
+            return glowingModel;
+        } else {
+            return mossModel;
+        }
+    }
+
     @Override
     public void render(@NotNull CurioFishingHook pEntity, float pEntityYaw, float pPartialTick, @NotNull PoseStack pPoseStack, @NotNull MultiBufferSource pBuffer, int pPackedLight) {
         int id = pEntity.getVariant().getId();
         ResourceLocation texture = TEXTURES[id];
+        GlowingFishingHookModel model = getModel(pEntity);
         model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(texture)), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         PoseStack finalStack = RenderUtils.copyPoseStack(pPoseStack);
         RenderType glow = GLOWS[id];
