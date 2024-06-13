@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
@@ -15,13 +16,16 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -77,7 +81,9 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
 
     public static void init() {}
 
-    public static class BasePotsBlock extends HorizontalDirectionalBlock implements CustomModel {
+    @SuppressWarnings("deprecation")
+    public static class BasePotsBlock extends HorizontalDirectionalBlock implements CustomModel, SimpleWaterloggedBlock {
+        public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
         private final VoxelShape voxelShape;
         private final float moneyRatio;
         private final float moneyHoleChance;
@@ -87,18 +93,38 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             this.voxelShape = voxelShape;
             this.moneyRatio = moneyRatio;
             this.moneyHoleChance = moneyHoleChance;
-            registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+            registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
         }
 
         @Override
         protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-            builder.add(FACING);
+            builder.add(FACING).add(WATERLOGGED);
         }
 
         @Override
         @Nullable
         public BlockState getStateForPlacement(BlockPlaceContext placeContext) {
-            return defaultBlockState().setValue(FACING, placeContext.getHorizontalDirection().getOpposite());
+            FluidState fluidstate = placeContext.getLevel().getFluidState(placeContext.getClickedPos());
+            return defaultBlockState()
+                .setValue(FACING, placeContext.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+        }
+
+        @Override
+        public @NotNull BlockState updateShape(BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
+            if (pState.getValue(WATERLOGGED)) {
+                pLevel.scheduleTick(pPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+            }
+            return pState;
+        }
+
+        public @NotNull FluidState getFluidState(BlockState pState) {
+            return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
+        }
+
+        @Override
+        public @Nullable BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+            return BlockPathTypes.BLOCKED;
         }
 
         @Override

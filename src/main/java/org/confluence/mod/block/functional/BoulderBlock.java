@@ -38,7 +38,7 @@ public class BoulderBlock extends Block implements CustomModel, CustomItemModel 
     public void wasExploded(@NotNull Level pLevel, BlockPos pPos, @NotNull Explosion pExplosion) {
         Vec3 position = new Vec3(pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5);
         BoulderEntity entity = new BoulderEntity(pLevel, position);
-        entity.targetTo(null);
+        entity.targetTo(pLevel.getNearestPlayer(entity, 31.5));
         pLevel.addFreshEntity(entity);
     }
 }

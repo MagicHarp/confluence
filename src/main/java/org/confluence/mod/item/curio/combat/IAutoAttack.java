@@ -27,7 +27,7 @@ public interface IAutoAttack {
     }
 
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
-        if (BetterCombatHelper.isBetterCombatLoaded()) {
+        if (BetterCombatHelper.isLoaded()) {
             ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);
             if (BetterCombatHelper.hasWeaponAttributes(itemStack)) return;
         }
