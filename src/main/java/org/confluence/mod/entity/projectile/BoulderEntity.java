@@ -91,7 +91,7 @@ public class BoulderEntity extends Projectile {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         if (blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
             Player player = level().getNearestPlayer(this, 31.5);
-            Vec3 vec3 = player.position().subtract(position()).normalize();
+            Vec3 vec3 = player == null ? getDeltaMovement().scale(1.0 + SPEED) : player.position().subtract(position()).normalize();
             setYRot(((float) Mth.atan2(vec3.z, vec3.x)) * Mth.PI);
             setDeltaMovement(vec3.scale(BoulderEntity.SPEED));
         }
