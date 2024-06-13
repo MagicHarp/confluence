@@ -25,6 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BoulderEntity extends Projectile {
     public static final double SPEED = 0.25;
@@ -60,23 +61,22 @@ public class BoulderEntity extends Projectile {
         super.tick();
         Vec3 motion = getDeltaMovement();
         setYRot(((float) Mth.atan2(motion.x, motion.z) * Mth.RAD_TO_DEG));
-        this.yRotO = getYRot();
         setDeltaMovement(motion.x, onGround() ? 0.0 : motion.y - 0.08, motion.z);
         move(MoverType.SELF, getDeltaMovement());
 
-        Vec3 movment = getDeltaMovement().scale(0.99);
-        setDeltaMovement(movment);
-        double s = movment.length();
+        Vec3 delta = getDeltaMovement().scale(0.99);
+        setDeltaMovement(delta);
+        double s = delta.length();
         double r = 2.0 * s / DIAMETER;
         if (rotate > Mth.TWO_PI) this.rotate -= Mth.TWO_PI;
         this.rotateO = rotate;
         this.rotate += r;
 
         Vec3 start = position();
-        Vec3 end = start.add(movment);
+        Vec3 end = start.add(delta);
         HitResult hitResult = level().clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
         if (hitResult.getType() != HitResult.Type.MISS) end = hitResult.getLocation();
-        HitResult hitResult1 = ProjectileUtil.getEntityHitResult(level(), this, start, end, getBoundingBox().expandTowards(movment).inflate(1.0D), entity -> true);
+        HitResult hitResult1 = ProjectileUtil.getEntityHitResult(level(), this, start, end, getBoundingBox().expandTowards(delta).inflate(1.0), entity -> true);
         if (hitResult1 != null) hitResult = hitResult1;
 
         if (hitResult instanceof BlockHitResult blockHitResult) {
@@ -90,10 +90,7 @@ public class BoulderEntity extends Projectile {
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         if (blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
-            Player player = level().getNearestPlayer(this, 31.5);
-            Vec3 vec3 = player == null ? getDeltaMovement().scale(1.0 + SPEED) : player.position().subtract(position()).normalize();
-            setYRot(((float) Mth.atan2(vec3.z, vec3.x)) * Mth.PI);
-            setDeltaMovement(vec3.scale(BoulderEntity.SPEED));
+            targetTo(level().getNearestPlayer(this, 31.5));
         }
     }
 
@@ -101,6 +98,13 @@ public class BoulderEntity extends Projectile {
     protected void onHitEntity(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         entity.hurt(ModDamageTypes.of(entity.level(), ModDamageTypes.BOULDER, this), 100.0F);
+    }
+
+    public void targetTo(@Nullable Player player) {
+        Vec3 vec3 = player == null ? getDeltaMovement().scale(1.0 + SPEED) : player.position().subtract(position()).normalize();
+        setYRot(((float) Mth.atan2(vec3.z, vec3.x)) * Mth.PI);
+        setDeltaMovement(vec3.scale(SPEED));
+        this.yRotO = getYRot();
     }
 
     @Override
