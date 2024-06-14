@@ -15,8 +15,13 @@
           "weight": 404
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:falcon_blade",
+          "weight": 608
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 8984
+          "weight": 8376
         }
       ],
       "rolls": 1

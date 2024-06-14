@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "entries": [
+        "confluence:entities/skeleton",
+        "confluence:entities/bat",
+        "confluence:entities/zombie"
+    ]
+}

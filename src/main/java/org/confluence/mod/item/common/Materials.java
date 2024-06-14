@@ -65,6 +65,7 @@ public enum Materials implements EnumRegister<Item> {
     SHIVERTHRON_SHARD("shiverthron_shard", () -> new BaseItem(WHITE)),
     WATERLEAF_POT("waterleaf_pot", () -> new BaseItem(WHITE)),
     FIREBLOSSOM_BUD("fireblossom_bud", () -> new BaseItem(WHITE)),
+    HOOK("hook", () -> new BaseItem(WHITE)),
     LENS("lens", () -> new BaseItem(WHITE)),
     BLACK_LENS("black_lens", () -> new BaseItem(WHITE)),
     LIFE_CRYSTAL("life_crystal", LifeCrystal::new),

@@ -6,13 +6,13 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:bone_sword"
+                    "name": "confluence:zombie_arm"
                 }
             ],
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.0049
+                    "chance": 0.004
                 }
             ]
         },
@@ -21,28 +21,13 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:carton_of_milk"
+                    "name": "confluence:shackle"
                 }
             ],
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.0067
-                }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "confluence:hook"
-                }
-            ],
-            "conditions": [
-                {
-                    "condition": "minecraft:random_chance",
-                    "chance": 0.04
+                    "chance": 0.02
                 }
             ]
         }

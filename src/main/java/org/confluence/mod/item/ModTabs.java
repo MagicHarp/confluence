@@ -123,6 +123,7 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 for (Materials materials : Materials.values()) output.accept(materials.get());
                 for (Gels gels : Gels.values()) output.accept(gels.get());
+                output.accept(ModItems.WHOOPIE_CUSHION.get());
             })
             .build());
     // 杂项
@@ -152,6 +153,7 @@ public final class ModTabs {
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ModItems.CLAM.get());
+                output.accept(ModItems.CHRISTMAS_GIFT.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
                 output.accept(ALTAR_BLOCK.get());

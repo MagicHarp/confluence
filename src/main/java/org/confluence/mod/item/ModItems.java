@@ -25,6 +25,7 @@ import org.confluence.mod.item.gun.GunItems;
 import org.confluence.mod.item.hammer.HammerAxes;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.item.hook.Hooks;
+import org.confluence.mod.item.loot.ChristmasGiftsItem;
 import org.confluence.mod.item.loot.ClamItem;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
@@ -44,6 +45,8 @@ public final class ModItems {
     public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new); // todo 手里剑
     public static final RegistryObject<BaseItem> GRENADE = ITEMS.register("grenade", BaseItem::new); // todo 手雷
     public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
+    public static final RegistryObject<WhoopieCushionItem> WHOOPIE_CUSHION = ITEMS.register("whoopie_cushion", WhoopieCushionItem::new);
+    public static final RegistryObject<ChristmasGiftsItem> CHRISTMAS_GIFT = ITEMS.register("christmas_gift", ChristmasGiftsItem::new);
     public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));

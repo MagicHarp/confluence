@@ -728,6 +728,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.BLACK_PEARL.get(), "黑珍珠");
         add(Materials.PINK_PEARL.get(), "粉珍珠");
         add(Materials.LIFE_FRUIT.get(), "生命果");
+        add(Materials.HOOK.get(), "爪钩");
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
@@ -753,7 +754,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.CANDY_CANE_SWORD.get(), "糖棒剑");
         add(Swords.BREATHING_REED.get(), "芦苇呼吸管");
         add(Swords.TRAGIC_UMBRELLA.get(), "悲剧雨伞");
-        add(Swords.FALCON_BLADE.get(), "猎鹰刀");
+        add(Swords.FALCON_BLADE.get(), "猎鹰刃");
         add(Swords.BAT_BAT.get(), "蝙蝠棍");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
@@ -823,6 +824,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(AMBROSIA.get(), "仙馔密酒");
         add(GUMMY_WORM.get(), "黏性蠕虫");
         add(BOULDER.get(), "巨石");
+        add(CHRISTMAS_GIFT.get(), "圣诞礼物");
+        add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
@@ -896,7 +899,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hooks.FISH_HOOK.get(), "鱼钩");
         add(Hooks.IVY_WHIP.get(), "常春藤钩");
         add(Hooks.BAT_HOOK.get(), "蝙蝠钩");
-        add(Hooks.CANDY_CANE_HOOK.get(), "拐杖糖钩");
+        add(Hooks.CANDY_CANE_HOOK.get(), "糖棒钩");
         add(Hooks.CHRISTMAS_HOOK.get(), "圣诞挂钩");
         add(Hooks.DUAL_HOOK.get(), "双钩");
         add(Hooks.HOOK_OF_DISSONANCE.get(), "失谐钩");
@@ -1456,5 +1459,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
         //endregion items
+
     }
 }
