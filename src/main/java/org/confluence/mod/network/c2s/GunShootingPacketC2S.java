@@ -37,7 +37,7 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
                 Level level = player.level();
                 BaseAmmoItem ammoItem = ammoTuple.getB();
                 BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(ammoStack, player, level);
-                ammoEntity.shoot(player.getXRot(), player.getYRot(), 0.0F, getVelocity(itemStack, abstractGunItem, ammoEntity), 0.0F);
+                ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(itemStack, abstractGunItem, ammoEntity), 0.0F);
                 level.addFreshEntity(ammoEntity);
                 if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()) {
                     ammoStack.shrink(1);

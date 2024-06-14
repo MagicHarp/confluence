@@ -1,10 +1,10 @@
 package org.confluence.mod.item.curio.informational;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 
 public interface ISextant {
-    static Component getInfo(LocalPlayer localPlayer) {
+    static Component getInfo(Player localPlayer) {
         return Component.translatable("info.confluence.sextant." + localPlayer.level().getMoonPhase());
     }
 

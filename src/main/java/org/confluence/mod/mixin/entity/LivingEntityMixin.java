@@ -1,7 +1,6 @@
 package org.confluence.mod.mixin.entity;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.CombatRules;
@@ -22,7 +21,6 @@ import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.fluid.ModFluids;
@@ -32,8 +30,6 @@ import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModDamageTypes;
-import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IEntity;
 import org.confluence.mod.util.PlayerUtils;
@@ -86,10 +82,6 @@ public abstract class LivingEntityMixin {
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
         LivingEntity self = c$getSelf();
-        if (motionY > 0.0 && self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
-            self.fallDistance += motionY;
-            NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
-        }
         if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
         else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
         if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
@@ -101,7 +93,7 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
         if (c$getSelf() instanceof Player player) {
-            if ((player.isLocalPlayer() && GravitationHandler.isShouldRot()) || (PlayerUtils.isServerNotFake(player) && ((IEntity) player).c$isShouldRot())) {
+            if (PlayerUtils.isServerNotFake(player) && ((IEntity) player).c$isShouldRot()) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
         }
@@ -215,9 +207,6 @@ public abstract class LivingEntityMixin {
         LivingEntity self = c$getSelf();
         if (self.hasEffect(ModEffects.SHIMMER.get())) return Vec3.ZERO;
         if (self.hasEffect(ModEffects.STONED.get())) return StonedEffect.DOWN;
-        if (self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
-            return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
-        }
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
     }
 

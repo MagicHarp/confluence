@@ -60,6 +60,9 @@ public abstract class AbstractFishingPole extends Item implements Vanishable, Cu
                     fishingHook = new CurioFishingHook(pPlayer, pLevel, luckBonus, speedBonus, curio.get().variant);
                 }
                 if (CuriosUtils.noSameCurio(pPlayer, ILavaproofFishingHook.class)) {
+                    if (this == FishingPoles.HOTLINE_FISHING_HOOK.get()) {
+                        ((IFishingHook) fishingHook).c$setIsLavaHook();
+                    }
                     pLevel.addFreshEntity(fishingHook);
                 } else {
                     ((IFishingHook) fishingHook).c$setIsLavaHook();

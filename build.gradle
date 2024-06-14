@@ -33,10 +33,9 @@ minecraft {
             }
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-        }
-        client {
             property 'geckolib.disable_examples', 'true'
         }
+        client {}
         server {
             args '--nogui'
         }

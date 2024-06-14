@@ -33,9 +33,10 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
             Optional<ItemStack> curio = CuriosUtils.findCurio(player, CurioItems.SPECTRE_GOGGLES.get());
             if (curio.isPresent()) {
                 ItemStack itemStack = curio.get();
-                if (itemStack.getTag() != null && !itemStack.getTag().getBoolean("enable")) {
+                if (itemStack.getTag() != null && itemStack.getTag().getBoolean("enable")) {
                     return Shapes.empty();
                 }
+                return Shapes.block();
             }
         }
         return Shapes.block();

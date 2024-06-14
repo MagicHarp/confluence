@@ -20,7 +20,6 @@
         "entity.FishingHookMixin",
         "entity.ItemEntityMixin",
         "entity.LivingEntityMixin",
-        "entity.PlayerMixin",
         "integretion.bettercombat.ServerNetworkMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
@@ -32,6 +31,9 @@
     "client": [
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
+        "client.ClientEntityMixin",
+        "client.ClientLivingEntityMixin",
+        "client.ClientPlayerMixin",
         "client.GuiMixin",
         "client.LevelRendererMixin",
         "client.LivingEntityRendererMixin",

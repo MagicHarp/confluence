@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.integration.bettercombat.BetterCombatHelper;
@@ -26,6 +28,7 @@ public interface IAutoAttack {
         );
     }
 
+    @OnlyIn(Dist.CLIENT)
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
         if (BetterCombatHelper.isLoaded()) {
             ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);

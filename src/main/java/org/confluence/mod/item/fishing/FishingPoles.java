@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
@@ -38,6 +40,7 @@ public enum FishingPoles implements EnumRegister<Item> {
 
     public static void init() {}
 
+    @OnlyIn(Dist.CLIENT)
     public static void registerCast() {
         ResourceLocation cast = new ResourceLocation("cast");
         ClampedItemPropertyFunction function = (itemStack, level, living, speed) -> {

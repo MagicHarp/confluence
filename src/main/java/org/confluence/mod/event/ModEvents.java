@@ -1,6 +1,5 @@
 package org.confluence.mod.event;
 
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,8 +26,6 @@ import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
@@ -78,12 +75,6 @@ public final class ModEvents {
                     ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
                 }
             }
-
-            ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
-            ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
-            FishingPoles.registerCast();
 
             Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "another_crimson"), 1));
             Regions.register(new TheHallowRegion(new ResourceLocation(MODID, "the_hallow"), 1));

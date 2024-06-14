@@ -1,10 +1,10 @@
 package org.confluence.mod.item.curio.informational;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 
 public interface ICompass {
-    static Component getInfo(LocalPlayer localPlayer) {
+    static Component getInfo(Player localPlayer) {
         double x = localPlayer.getX();
         double z = localPlayer.getZ();
         return Component.translatable("info.confluence.compass." + (x > 0 ? "east" : "west"), "%.2f".formatted(x))

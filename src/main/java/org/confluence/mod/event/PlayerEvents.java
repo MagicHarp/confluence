@@ -1,6 +1,5 @@
 package org.confluence.mod.event;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -50,8 +49,8 @@ public final class PlayerEvents {
     @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            if (event.player instanceof LocalPlayer localPlayer) {
-                GravitationHandler.unCrouching(localPlayer);
+            if (event.player.isLocalPlayer()) {
+                GravitationHandler.unCrouching(event.player);
             }
         } else {
             Player player = event.player;
