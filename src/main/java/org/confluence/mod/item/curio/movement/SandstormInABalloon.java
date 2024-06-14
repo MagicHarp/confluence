@@ -25,4 +25,14 @@ public class SandstormInABalloon extends SandstormInABottle implements IJumpBoos
         list.add(IOneTimeJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.sandstorm_in_a_balloon.info"),
+                Component.translatable("item.confluence.sandstorm_in_a_balloon.info2"),
+                Component.translatable("item.confluence.sandstorm_in_a_balloon.info3"),
+                Component.translatable("item.confluence.sandstorm_in_a_balloon.info4")
+        };
+    }
 }

@@ -19,4 +19,14 @@ public class DepthMeter extends AbstractInfoCurio implements IDepthMeter {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IDepthMeter.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.depth_meter.info"),
+                Component.translatable("item.confluence.depth_meter.info2"),
+                Component.translatable("item.confluence.depth_meter.info3"),
+                Component.translatable("item.confluence.depth_meter.info4")
+        };
+    }
 }

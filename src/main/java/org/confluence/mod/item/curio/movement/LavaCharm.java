@@ -21,4 +21,15 @@ public class LavaCharm extends BaseCurioItem implements ILavaImmune {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.lava_charm.info"),
+                Component.translatable("item.confluence.lava_charm.info2"),
+                Component.translatable("item.confluence.lava_charm.info3"),
+                Component.translatable("item.confluence.lava_charm.info4"),
+                Component.translatable("item.confluence.lava_charm.info5")
+        };
+    }
 }

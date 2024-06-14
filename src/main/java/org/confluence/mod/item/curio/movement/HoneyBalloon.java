@@ -22,4 +22,12 @@ public class HoneyBalloon extends HoneyComb implements IJumpBoost {
         list.add(IHoneycomb.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.honey_balloon.info"),
+                Component.translatable("item.confluence.honey_balloon.info2")
+        };
+    }
 }

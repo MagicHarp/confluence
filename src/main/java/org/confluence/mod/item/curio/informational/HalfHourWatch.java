@@ -24,9 +24,9 @@ public class HalfHourWatch extends AbstractInfoCurio implements IWatch {
         if (hour > 23) hour -= 24;
         String half = dayTime % 1000 > 499 ? "30" : "00";
         return Component.translatable(
-            "info.confluence.time",
-            IWatch.format(hour),
-            half
+                "info.confluence.time",
+                IWatch.format(hour),
+                half
         );
     }
 

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallResistance {
-    public AmbhipianBoots(){
+    public AmbhipianBoots() {
         super(ModRarity.PINK);
     }
 
@@ -30,5 +30,12 @@ public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallR
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(IJumpBoost.TOOLTIP);
         list.add(IFallResistance.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.amphibian_boots.info")
+        };
     }
 }

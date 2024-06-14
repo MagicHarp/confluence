@@ -19,4 +19,15 @@ public class TallyCounter extends AbstractInfoCurio implements ITallyCounter {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.tally_counter.info"),
+                Component.translatable("item.confluence.tally_counter.info2"),
+                Component.translatable("item.confluence.tally_counter.info3"),
+                Component.translatable("item.confluence.tally_counter.info4"),
+                Component.translatable("item.confluence.tally_counter.info5")
+        };
+    }
 }

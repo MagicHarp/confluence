@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class PDA extends AbstractInfoCurio implements ICompass, IDepthMeter, IDPSMeter, IFishermansPocketGuide,
-    ILifeFormAnalyzer, IMetalDetector, IRadar, ISextant, IStopwatch, ITallyCounter, IWatch, IWeatherRadio, CustomName {
+        ILifeFormAnalyzer, IMetalDetector, IRadar, ISextant, IStopwatch, ITallyCounter, IWatch, IWeatherRadio, CustomName {
     public PDA() {
         super(ModRarity.PINK);
     }
@@ -36,5 +36,13 @@ public class PDA extends AbstractInfoCurio implements ICompass, IDepthMeter, IDP
         list.add(ITallyCounter.TOOLTIP);
         list.add(IWatch.TOOLTIP);
         list.add(IWeatherRadio.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.pda.info"),
+                Component.translatable("item.confluence.pda.info2")
+        };
     }
 }

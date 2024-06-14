@@ -84,9 +84,9 @@ public class BaseWings extends BaseCurioItem implements IMayFly, NormalGeoItem, 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "wings", state -> PlayState.STOP)
-            .triggerableAnim("standby", RawAnimation.begin().thenLoop("standby"))
-            .triggerableAnim("fly", RawAnimation.begin().thenLoop("fly"))
-            .triggerableAnim("glide", RawAnimation.begin().thenLoop("glide"))
+                .triggerableAnim("standby", RawAnimation.begin().thenLoop("standby"))
+                .triggerableAnim("fly", RawAnimation.begin().thenLoop("fly"))
+                .triggerableAnim("glide", RawAnimation.begin().thenLoop("glide"))
         );
     }
 

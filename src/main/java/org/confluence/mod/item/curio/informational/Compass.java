@@ -19,4 +19,15 @@ public class Compass extends AbstractInfoCurio implements ICompass {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.compass.info"),
+                Component.translatable("item.confluence.compass.info2"),
+                Component.translatable("item.confluence.compass.info3"),
+                Component.translatable("item.confluence.compass.info4"),
+                Component.translatable("item.confluence.compass.info5")
+        };
+    }
 }

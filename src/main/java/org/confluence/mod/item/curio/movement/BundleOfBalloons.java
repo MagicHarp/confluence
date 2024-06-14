@@ -32,16 +32,16 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
         super.onEquip(slotContext, prevStack, stack);
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new PlayerJumpPacketS2C(
-                    -2.0,
-                    SandstormInABottle.SPEED,
-                    SandstormInABottle.TICKS,
-                    BlizzardInABottle.SPEED,
-                    BlizzardInABottle.TICKS,
-                    -2.0,
-                    CloudInABalloon.SPEED
-                )
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new PlayerJumpPacketS2C(
+                            -2.0,
+                            SandstormInABottle.SPEED,
+                            SandstormInABottle.TICKS,
+                            BlizzardInABottle.SPEED,
+                            BlizzardInABottle.TICKS,
+                            -2.0,
+                            CloudInABalloon.SPEED
+                    )
             );
             PrefixProvider.getPrefix(stack).ifPresent(itemPrefix -> itemPrefix.applyCurioPrefix(serverPlayer));
         }
@@ -60,5 +60,14 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(IJumpBoost.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.bundle_of_balloons.info"),
+                Component.translatable("item.confluence.bundle_of_balloons.info2"),
+                Component.translatable("item.confluence.bundle_of_balloons.info3")
+        };
     }
 }

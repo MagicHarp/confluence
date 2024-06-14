@@ -27,4 +27,12 @@ public class REK3000 extends AbstractInfoCurio implements ILifeFormAnalyzer, IRa
         list.add(IRadar.TOOLTIP);
         list.add(ITallyCounter.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.rek_3000.info"),
+                Component.translatable("item.confluence.rek_3000.info2")
+        };
+    }
 }

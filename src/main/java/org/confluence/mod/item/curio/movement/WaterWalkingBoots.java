@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.movement;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModRarity;
@@ -14,5 +15,16 @@ public class WaterWalkingBoots extends BaseCurioItem implements IFluidWalk {
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         return CuriosUtils.noSameCurio(slotContext.entity(), IFluidWalk.class);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.water_walking_boots.info"),
+                Component.translatable("item.confluence.water_walking_boots.info2"),
+                Component.translatable("item.confluence.water_walking_boots.info3"),
+                Component.translatable("item.confluence.water_walking_boots.info4"),
+                Component.translatable("item.confluence.water_walking_boots.info5")
+        };
     }
 }

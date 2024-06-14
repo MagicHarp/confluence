@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.informational;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -21,5 +22,13 @@ public class MechanicalLens extends AbstractInfoCurio implements CustomModel, IF
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         if (!pLevel.isClientSide) cycleEnable(pPlayer.getItemInHand(pUsedHand));
         return super.use(pLevel, pPlayer, pUsedHand);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.mechanical_lens.info"),
+                Component.translatable("item.confluence.mechanical_lens.info2")
+        };
     }
 }

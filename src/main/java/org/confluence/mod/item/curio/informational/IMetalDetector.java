@@ -15,16 +15,16 @@ public interface IMetalDetector {
     static Component getInfo(LocalPlayer localPlayer) {
         AtomicReference<Component> atomic = new AtomicReference<>(Component.translatable("info.confluence.metal_detector.none"));
         localPlayer.level().getBlockStates(new AABB(localPlayer.getOnPos()).inflate(15, 15, 15))
-            .filter(ModConfigs.rareBlocks::contains)
-            .min(Comparator.comparingInt(ModConfigs.rareBlocks::indexOf))
-            .ifPresent(blockState -> {
-                Block block = blockState.getBlock();
-                Item item = block.asItem();
-                atomic.set(Component.translatable(
-                    "info.confluence.metal_detector",
-                    block.getName().withStyle(item.getRarity(new ItemStack(item)).getStyleModifier()))
-                );
-            });
+                .filter(ModConfigs.rareBlocks::contains)
+                .min(Comparator.comparingInt(ModConfigs.rareBlocks::indexOf))
+                .ifPresent(blockState -> {
+                    Block block = blockState.getBlock();
+                    Item item = block.asItem();
+                    atomic.set(Component.translatable(
+                            "info.confluence.metal_detector",
+                            block.getName().withStyle(item.getRarity(new ItemStack(item)).getStyleModifier()))
+                    );
+                });
         return atomic.get();
     }
 

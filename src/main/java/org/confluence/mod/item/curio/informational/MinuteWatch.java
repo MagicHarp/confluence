@@ -24,9 +24,9 @@ public class MinuteWatch extends AbstractInfoCurio implements IWatch {
         if (hour > 23) hour -= 24;
         long minute = (long) ((dayTime % 1000) * 0.06F);
         return Component.translatable(
-            "info.confluence.time",
-            IWatch.format(hour),
-            IWatch.format(minute)
+                "info.confluence.time",
+                IWatch.format(hour),
+                IWatch.format(minute)
         );
     }
 

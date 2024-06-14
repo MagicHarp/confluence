@@ -15,10 +15,20 @@ public class MagnetFlower extends ManaFlower implements IRangePickup.Star {
     public MagnetFlower() {
         super(ModRarity.PINK);
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.magnet_flower.tooltip"));
         list.add(Component.translatable("item.confluence.magnet_flower.tooltip2"));
         list.add(Component.translatable("item.confluence.magnet_flower.tooltip3"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.magnet_flower.info"),
+                Component.translatable("item.confluence.magnet_flower.info2"),
+                Component.translatable("item.confluence.magnet_flower.info3")
+        };
     }
 }

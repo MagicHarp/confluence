@@ -19,4 +19,15 @@ public class MetalDetector extends AbstractInfoCurio implements IMetalDetector {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.metal_detector.info"),
+                Component.translatable("item.confluence.metal_detector.info2"),
+                Component.translatable("item.confluence.metal_detector.info3"),
+                Component.translatable("item.confluence.metal_detector.info4"),
+                Component.translatable("item.confluence.metal_detector.info5")
+        };
+    }
 }

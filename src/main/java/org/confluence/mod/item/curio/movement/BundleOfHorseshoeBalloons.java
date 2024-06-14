@@ -30,4 +30,13 @@ public class BundleOfHorseshoeBalloons extends BundleOfBalloons implements IFall
         list.add(Component.translatable("item.confluence.bundle_of_horseshoe_balloon.tooltip"));
         list.add(Component.translatable("item.confluence.bundle_of_horseshoe_balloon.tooltip2"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info"),
+                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info2"),
+                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info3")
+        };
+    }
 }

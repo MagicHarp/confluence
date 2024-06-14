@@ -22,4 +22,12 @@ public class FairyBoots extends BaseSpeedBoots implements IMayFly, IFlowerBoots 
         list.add(BaseSpeedBoots.TOOLTIP);
         list.add(IFlowerBoots.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.fairy_boots.info"),
+                Component.translatable("item.confluence.fairy_boots.info2")
+        };
+    }
 }

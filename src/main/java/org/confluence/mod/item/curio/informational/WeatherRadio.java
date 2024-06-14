@@ -19,4 +19,12 @@ public class WeatherRadio extends AbstractInfoCurio implements IWeatherRadio {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.weather_radio.info"),
+                Component.translatable("item.confluence.weather_radio.info2")
+        };
+    }
 }

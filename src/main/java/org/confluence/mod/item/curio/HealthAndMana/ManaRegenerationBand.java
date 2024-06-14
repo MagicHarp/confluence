@@ -15,6 +15,13 @@ public class ManaRegenerationBand extends BaseCurioItem {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.mana_regeneration_band.tooltip"));
         list.add(Component.translatable("item.confluence.mana_regeneration_band.tooltip2"));
+    }
 
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.mana_regeneration_band.info"),
+                Component.translatable("item.confluence.mana_regeneration_band.info2")
+        };
     }
 }

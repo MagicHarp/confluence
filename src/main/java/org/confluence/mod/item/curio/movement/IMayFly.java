@@ -42,8 +42,8 @@ public interface IMayFly {
             }
         });
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.get(), glide.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.get(), glide.get())
         );
     }
 

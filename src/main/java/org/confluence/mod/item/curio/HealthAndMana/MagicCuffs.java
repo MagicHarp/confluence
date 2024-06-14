@@ -31,12 +31,23 @@ public class MagicCuffs extends BandOfStarpower {
         if (damageSource.is(DamageTypes.DROWN) || damageSource.is(ModTags.HARMFUL_EFFECT)) return;
         if (CuriosUtils.hasCurio(living, CurioItems.MAGIC_CUFFS.get())) {
             living.getCapability(ManaProvider.CAPABILITY)
-                .ifPresent(manaStorage -> manaStorage.receiveMana(() -> (int) amount));
+                    .ifPresent(manaStorage -> manaStorage.receiveMana(() -> (int) amount));
         }
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.magic_cuffs.tooltip"));
         list.add(Component.translatable("item.confluence.magic_cuffs.tooltip2"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.magic_cuffs.info"),
+                Component.translatable("item.confluence.magic_cuffs.info2"),
+                Component.translatable("item.confluence.magic_cuffs.info3"),
+                Component.translatable("item.confluence.magic_cuffs.info4")
+        };
     }
 }
