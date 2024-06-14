@@ -28,8 +28,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BoulderEntity extends Projectile {
-    public static final double SPEED = 0.70;
+    public static final double SPEED = 0.7;
     public static final float DIAMETER = 1.0F;
+    public static final float SEARCH_RANGE = 31.5F;
     public float rotateO;
     public float rotate;
 
@@ -60,7 +61,7 @@ public class BoulderEntity extends Projectile {
     public void tick() {
         super.tick();
         Vec3 motion = getDeltaMovement();
-        setYRot(((float) Mth.atan2(motion.x, motion.z) * Mth.RAD_TO_DEG));
+        setYRot((float) (Mth.atan2(motion.x, motion.z) * Mth.RAD_TO_DEG));
         setDeltaMovement(motion.x, onGround() ? 0.0 : motion.y - 0.08, motion.z);
         move(MoverType.SELF, getDeltaMovement());
 
@@ -88,9 +89,10 @@ public class BoulderEntity extends Projectile {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult blockHitResult) {
+    protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
+        if (getBlockStateOnLegacy().isAir()) return;
         if (blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
-            targetTo(level().getNearestPlayer(this, 31.5));
+            targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
         }
     }
 
@@ -101,10 +103,16 @@ public class BoulderEntity extends Projectile {
     }
 
     public void targetTo(@Nullable Player player) {
-        Vec3 vec3 = player == null ? getDeltaMovement().scale(1.0 + SPEED) : player.position().subtract(position()).normalize();
-        setYRot(((float) Mth.atan2(vec3.z, vec3.x)) * Mth.PI);
+        Vec3 vec3 = player == null ? getDeltaMovement().normalize().scale(1.0 + SPEED) : player.position().subtract(position()).normalize();
+        vec3 = new Vec3(vec3.x, 0.0, vec3.z);
+        setYRot((float) (Mth.atan2(vec3.x, vec3.z) * Mth.RAD_TO_DEG));
         setDeltaMovement(vec3.scale(SPEED));
         this.yRotO = getYRot();
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
     }
 
     @Override

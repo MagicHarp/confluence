@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
@@ -133,18 +132,20 @@ public abstract class LivingEntityMixin {
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
     private Vec3 waterWalk(Vec3 par1) {
         LivingEntity self = c$getSelf();
-        if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
         FluidState fluidstate = self.level().getFluidState(self.blockPosition());
         FluidType fluidType = fluidstate.getType().getFluidType();
-        if (self.canStandOnFluid(fluidstate)) {
-            AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
-            if (instance == null) return par1;
-            double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
-            return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
-        } else if (fluidType == ModFluids.HONEY.fluidType().get()) {
+        if (self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get()) {
+            if (self.canStandOnFluid(fluidstate)) {
+                AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
+                if (instance == null) return par1;
+                double horizon = Math.min(0.91 * self.getSpeed() / instance.getBaseValue(), 0.93);
+                return self.getDeltaMovement().multiply(horizon, 1.0, horizon);
+            }
+        }
+        if (fluidType == ModFluids.HONEY.fluidType().get()) {
             if (!self.level().isClientSide) {
                 if (self.isOnFire()) self.clearFire();
-                if ((self instanceof Animal || self instanceof ServerPlayer) && (fluidstate.isSource() || fluidstate.getValue(FlowingFluid.LEVEL) > 4)) {
+                if (self instanceof Animal || self instanceof ServerPlayer) {
                     self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
                 }
             }
@@ -152,7 +153,7 @@ public abstract class LivingEntityMixin {
         } else if (fluidType == ModFluids.SHIMMER.fluidType().get()) {
             if (!self.level().isClientSide) {
                 if (self.isOnFire()) self.clearFire();
-                if (fluidstate.isSource() && !self.hasEffect(ModEffects.SHIMMER.get())) {
+                if (!self.hasEffect(ModEffects.SHIMMER.get())) {
                     self.addEffect(new MobEffectInstance(ModEffects.SHIMMER.get(), MobEffectInstance.INFINITE_DURATION));
                 }
             }
