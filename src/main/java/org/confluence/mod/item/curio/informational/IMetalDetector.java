@@ -1,7 +1,7 @@
 package org.confluence.mod.item.curio.informational;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicReference;
 
 public interface IMetalDetector {
-    static Component getInfo(LocalPlayer localPlayer) {
+    static Component getInfo(Player localPlayer) {
         AtomicReference<Component> atomic = new AtomicReference<>(Component.translatable("info.confluence.metal_detector.none"));
         localPlayer.level().getBlockStates(new AABB(localPlayer.getOnPos()).inflate(15, 15, 15))
             .filter(ModConfigs.rareBlocks::contains)

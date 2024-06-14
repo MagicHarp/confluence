@@ -1,6 +1,5 @@
 package org.confluence.mod.mixin;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
-import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IHurtEvasion;
@@ -24,7 +22,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -39,8 +36,6 @@ public abstract class EntityMixin implements IEntity {
     @Shadow
     protected abstract BlockPos getOnPos(float p_216987_);
 
-    @Shadow
-    public boolean verticalCollision;
     @Unique
     private int c$cthulhuSprintingTime = 0;
     @Unique
@@ -124,28 +119,6 @@ public abstract class EntityMixin implements IEntity {
             self.hurt(damageSources().playerAttack(player), 7.8F);
             player.setDeltaMovement(vector.scale(-0.9));
             ((IEntity) player).c$setCthulhuSprintingTime(20);
-        }
-    }
-
-    @Inject(method = "getEyeHeight()F", at = @At("RETURN"), cancellable = true)
-    private void eyeHeight(CallbackInfoReturnable<Float> cir) {
-        if (c$getSelf() instanceof LocalPlayer localPlayer && GravitationHandler.isShouldRot()) {
-            cir.setReturnValue(localPlayer.getDimensions(localPlayer.getPose()).height * 0.15F);
-        }
-    }
-
-    @ModifyVariable(method = "setOnGroundWithKnownMovement(ZLnet/minecraft/world/phys/Vec3;)V", at = @At("HEAD"), argsOnly = true)
-    private boolean checkVertical(boolean bool) {
-        if (!bool) return verticalCollision && c$getSelf() instanceof LocalPlayer && GravitationHandler.isShouldRot();
-        return true;
-    }
-
-    @Inject(method = "getOnPosLegacy", at = @At("RETURN"), cancellable = true)
-    private void getOnPosAbove(CallbackInfoReturnable<BlockPos> cir) {
-        if (c$getSelf() instanceof Player player) {
-            if (player.isLocalPlayer() ? GravitationHandler.isShouldRot() : c$isShouldRot) {
-                cir.setReturnValue(getOnPos(-2.2F));
-            }
         }
     }
 

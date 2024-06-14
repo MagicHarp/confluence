@@ -9,11 +9,13 @@
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
-        "PlayerMixin",
         "SlimeBlockMixin"
     ],
     "minVersion": "0.8.5",
     "client": [
+        "client.ClientEntityMixin",
+        "client.ClientLivingEntityMixin",
+        "client.ClientPlayerMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerAccessor",
         "client.LocalPlayerMixin",

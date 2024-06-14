@@ -10,6 +10,6 @@ import org.confluence.mod.network.NetworkHandler;
 public final class ModEvents {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
-        NetworkHandler.register();
+        event.enqueueWork(NetworkHandler::register);
     }
 }

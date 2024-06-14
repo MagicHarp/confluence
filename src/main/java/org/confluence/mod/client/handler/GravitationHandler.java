@@ -3,6 +3,7 @@ package org.confluence.mod.client.handler;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -54,7 +55,7 @@ public final class GravitationHandler {
         }
     }
 
-    public static void unCrouching(LocalPlayer localPlayer) {
+    public static void unCrouching(Player localPlayer) {
         if (shouldRot && localPlayer.onGround() && localPlayer.isCrouching() && !localPlayer.isShiftKeyDown()) {
             localPlayer.move(MoverType.SELF, new Vec3(0.0, -0.3000001, 0.0));
             localPlayer.setPose(Pose.STANDING);

@@ -88,4 +88,8 @@ public class BaseCurioItem extends Item implements ICurioItem {
         }
         return super.getName(itemStack);
     }
+
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

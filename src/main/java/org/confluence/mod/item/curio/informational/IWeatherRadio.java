@@ -1,12 +1,12 @@
 package org.confluence.mod.item.curio.informational;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 
 public interface IWeatherRadio {
-    static Component getInfo(LocalPlayer localPlayer) {
+    static Component getInfo(Player localPlayer) {
         Level level = localPlayer.level();
         String weather = level.dimension() == Level.OVERWORLD ? "clear" : "cloudy";
         if (level.isRaining()) {

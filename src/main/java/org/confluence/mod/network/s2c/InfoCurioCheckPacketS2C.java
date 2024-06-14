@@ -6,12 +6,17 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.scores.Team;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.util.CuriosUtils;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 /**
  * @param enabled length == 12
@@ -112,5 +117,10 @@ public record InfoCurioCheckPacketS2C(int playerId, byte[] enabled) {
                 NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
             }
         });
+    }
+
+    public static void handle(InfoCurioCheckPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> InformationHandler.handlePacket(packet, ctx)));
+        ctx.get().setPacketHandled(true);
     }
 }
