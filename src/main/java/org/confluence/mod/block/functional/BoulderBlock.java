@@ -16,6 +16,8 @@ import org.confluence.mod.entity.projectile.BoulderEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public class BoulderBlock extends Block implements CustomModel, CustomItemModel {
     public BoulderBlock() {
         super(Properties.of());
@@ -27,18 +29,21 @@ public class BoulderBlock extends Block implements CustomModel, CustomItemModel 
     }
 
     @Override
-    public void playerDestroy(@NotNull Level pLevel, Player pPlayer, BlockPos pPos, @NotNull BlockState pState, @Nullable BlockEntity pBlockEntity, @NotNull ItemStack pTool) {
-        Vec3 position = new Vec3(pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5);
-        BoulderEntity entity = new BoulderEntity(pLevel, position);
-        entity.targetTo(pPlayer);
-        pLevel.addFreshEntity(entity);
+    public void playerDestroy(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull BlockPos pPos, @NotNull BlockState pState, @Nullable BlockEntity pBlockEntity, @NotNull ItemStack pTool) {
+        summon(pLevel, pPos, entity -> pPlayer);
     }
 
     @Override
-    public void wasExploded(@NotNull Level pLevel, BlockPos pPos, @NotNull Explosion pExplosion) {
-        Vec3 position = new Vec3(pPos.getX() + 0.5, pPos.getY(), pPos.getZ() + 0.5);
-        BoulderEntity entity = new BoulderEntity(pLevel, position);
-        entity.targetTo(pLevel.getNearestPlayer(entity, 31.5));
-        pLevel.addFreshEntity(entity);
+    public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
+        summon(pLevel, pPos, entity -> pLevel.getNearestPlayer(entity, BoulderEntity.SEARCH_RANGE));
+    }
+
+    public static void summon(Level level, BlockPos pos, Function<BoulderEntity, Player> function) {
+        Vec3 position = new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        BoulderEntity entity = new BoulderEntity(level, position);
+        if (!level.getBlockState(pos.below()).isAir()) {
+            entity.targetTo(function.apply(entity));
+        }
+        level.addFreshEntity(entity);
     }
 }
