@@ -2,6 +2,7 @@ package org.confluence.mod.item.sword;
 
 import net.minecraft.world.item.SwordItem;
 import org.confluence.mod.datagen.limit.Image32x;
+import org.confluence.mod.datagen.limit.ReversalImage32x;
 import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.misc.ModRarity;
 
