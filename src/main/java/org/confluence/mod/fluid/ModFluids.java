@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -153,6 +154,8 @@ public final class ModFluids {
     }
 
     public static void registerShimmerTransform() {
+        add(ItemTags.WOOL, Collections.singletonList(new ItemStack(Items.WHITE_WOOL)), 1);
+        add(ItemTags.WOOL_CARPETS, Collections.singletonList(new ItemStack(Items.WHITE_CARPET)), 1);
         // 饰品转化
         add(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
         add(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
