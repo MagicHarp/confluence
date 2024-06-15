@@ -578,6 +578,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_SMOOTH_OBSIDIAN.get(), "异域光滑黑曜石块");
         add(CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");
         add(CRYSTAL_BLOCK.get(), "水晶块");
+        add(RAINBOW_BRICK.get(), "彩虹砖");
         add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
         add(ANOTHER_OAK_PLANKS.get(), "经典风情木板");
         add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
@@ -704,6 +705,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.CARRION.get(), "腐肉");
+        add(Materials.VERTEBRA.get(), "椎骨");
         add(Materials.LENS.get(), "晶状体");
         add(Materials.BLACK_LENS.get(), "黑晶状体");
         add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
@@ -724,6 +726,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.LIFE_CRYSTAL.get(), "生命水晶");
         add(Materials.CURSED_FLAME.get(), "诅咒火");
         add(Materials.ICHOR.get(), "灵液");
+        add(Materials.PIXIE_DUST.get(), "妖精尘");
         add(Materials.PEARL.get(), "珍珠");
         add(Materials.BLACK_PEARL.get(), "黑珍珠");
         add(Materials.PINK_PEARL.get(), "粉珍珠");

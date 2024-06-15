@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:torch"
+        },
+        {
+            "item": "minecraft:torch"
+        },
+        {
+            "item": "minecraft:torch"
+        },
+        {
+            "item": "confluence:another_amethyst"
+        }
+    ],
+    "result": {
+        "item": "confluence:purple_torch",
+        "count": 3
+    }
+}

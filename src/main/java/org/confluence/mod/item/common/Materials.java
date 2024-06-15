@@ -54,6 +54,7 @@ public enum Materials implements EnumRegister<Item> {
 
     FALLING_STAR("falling_star", () -> new BaseItem(WHITE)),
     CARRION("carrion", () -> new BaseItem(WHITE)),
+    VERTEBRA("vertebra", () -> new BaseItem(WHITE)),
     BLACK_INK("black_ink", () -> new BaseItem(WHITE)),
     PURPLE_MUCUS("purple_mucus", () -> new BaseItem(WHITE)),
     SHARK_FIN("shark_fin", () -> new BaseItem(WHITE)),
@@ -77,6 +78,7 @@ public enum Materials implements EnumRegister<Item> {
     CRYSTAL_SHARDS_ITEM("crystal_shards_item", () -> new BaseItem(BLUE)),
     CURSED_FLAME("cursed_flame", () -> new BaseItem(ORANGE)),
     ICHOR("ichor", () -> new BaseItem(ORANGE)),
+    PIXIE_DUST("pixie_dust", () -> new BaseItem(BLUE)),
 
     PEARL("pearl", () -> new BaseItem(BLUE)),
     BLACK_PEARL("black_pearl", () -> new BaseItem(BLUE)),
