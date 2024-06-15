@@ -10,7 +10,6 @@
         "confluence:blocks/cherry_leaves",
         "confluence:entities/skeleton",
         "confluence:entities/bat",
-
         "confluence:entities/zombie"
     ]
 }
