@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "template": {
+        "item": "confluence:amethyst_chain"
+    },
+    "base": {
+        "item": "confluence:amethyst_chain"
+    },
+    "addition": {
+        "item": "confluence:big_another_amethyst_block"
+    },
+    "result": {
+        "item": "confluence:amethyst_hook"
+    }
+}
