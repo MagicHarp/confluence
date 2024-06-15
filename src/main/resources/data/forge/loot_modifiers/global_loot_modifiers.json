@@ -1,8 +1,16 @@
 {
     "replace": false,
     "entries": [
+        "confluence:blocks/oak_leaves",
+        "confluence:blocks/spruce_leaves",
+        "confluence:blocks/birch_leaves",
+        "confluence:blocks/jungle_leaves",
+        "confluence:blocks/dark_oak_leaves",
+        "confluence:blocks/mangrove_leaves",
+        "confluence:blocks/cherry_leaves",
         "confluence:entities/skeleton",
         "confluence:entities/bat",
+
         "confluence:entities/zombie"
     ]
 }
