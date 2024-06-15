@@ -37,7 +37,7 @@ public final class ModConfigs {
         "minecraft:nether_gold_ore",
         "minecraft:deepslate_gold_ore",
         "minecraft:gold_ore",
-        "minecraft:quartz_ore",
+        "minecraft:nether_quartz_ore",
         "minecraft:deepslate_iron_ore",
         "minecraft:iron_ore",
         "minecraft:deepslate_copper_ore",

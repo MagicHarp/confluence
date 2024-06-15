@@ -37,7 +37,7 @@ minecraft {
         }
         client {}
         server {
-            args '--nogui'
+            //args '--nogui'
         }
         data {
             workingDirectory project.file('run-data')

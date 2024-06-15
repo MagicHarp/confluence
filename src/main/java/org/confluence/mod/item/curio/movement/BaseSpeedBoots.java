@@ -2,13 +2,13 @@ package org.confluence.mod.item.curio.movement;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
@@ -55,14 +55,14 @@ public class BaseSpeedBoots extends BaseCurioItem {
 
     protected void speedUp(SlotContext slotContext, CompoundTag nbt, int addition, int max) {
         LivingEntity living = slotContext.entity();
-        if (living instanceof LocalPlayer localPlayer) {
+        if (living instanceof Player player && player.isLocalPlayer()) {
             int speed = nbt.getInt("speed");
-            if (localPlayer.onGround() && localPlayer.zza > 0) {
+            if (player.onGround() && player.zza > 0) {
                 int actually = Math.min(max - speed, addition);
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
-                if (localPlayer.level().getGameTime() % 5 == 0) localPlayer.playSound(ModSounds.SHOES_WALK.get());
+                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSounds.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }

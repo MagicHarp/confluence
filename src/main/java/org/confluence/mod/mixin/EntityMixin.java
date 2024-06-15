@@ -1,6 +1,7 @@
 package org.confluence.mod.mixin;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
@@ -119,6 +120,13 @@ public abstract class EntityMixin implements IEntity {
             self.hurt(damageSources().playerAttack(player), 7.8F);
             player.setDeltaMovement(vector.scale(-0.9));
             ((IEntity) player).c$setCthulhuSprintingTime(20);
+        }
+    }
+
+    @Inject(method = "getOnPosLegacy", at = @At("RETURN"), cancellable = true)
+    private void getOnPosAbove(CallbackInfoReturnable<BlockPos> cir) {
+        if (c$getSelf() instanceof ServerPlayer && c$isShouldRot) {
+            cir.setReturnValue(getOnPos(-2.2F));
         }
     }
 
