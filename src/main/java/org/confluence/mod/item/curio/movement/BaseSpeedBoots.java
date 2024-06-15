@@ -64,7 +64,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
-                if (player.level().getGameTime() % 5 == 0) player.playSound(ModSounds.SHOES_WALK.get());
+                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSounds.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }

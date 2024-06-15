@@ -105,6 +105,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");
 
+        add("curios.identifier.hook", "Hook");
+
         add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
         add("item.confluence.medicated_bandage.tooltip", "Immunity to Poison and Bleeding");
         add("item.confluence.armor_bracing.tooltip", "Immunity to Weakness and Broken Armor");

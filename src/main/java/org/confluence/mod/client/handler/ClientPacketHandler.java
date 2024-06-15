@@ -9,6 +9,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
@@ -70,6 +71,9 @@ public final class ClientPacketHandler {
     public static void handleSpecificMoon(SpecificMoonPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
+            if (moonSpecific == 11 || packet.id() == 11) {
+                ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
+            }
             if (packet.id() < 0) {
                 moonSpecific = -1;
                 moonTexture = null;
@@ -111,6 +115,11 @@ public final class ClientPacketHandler {
 
     public static int getMoonSpecific() {
         return moonSpecific;
+    }
+
+    public static boolean isBloodyMoon() {
+        ClientLevel level = Minecraft.getInstance().level;
+        return moonSpecific == 11 && level != null && level.dimension() == Level.OVERWORLD;
     }
 
     public static GamePhase getGamePhase() {

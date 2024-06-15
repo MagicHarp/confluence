@@ -7,6 +7,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
@@ -147,7 +148,27 @@ public final class ForgeClient {
     }
 
     @SubscribeEvent
-    public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
+    public static void computeCameraAngles(ViewportEvent.ComputeCameraAngles event) {
         if (GravitationHandler.isShouldRot()) event.setRoll(180.0F);
+    }
+
+    @SubscribeEvent
+    public static void renderFog(ViewportEvent.RenderFog event) {
+        if (ClientPacketHandler.isBloodyMoon()) {
+            if (event.getType() == FogType.WATER) {
+                event.setFarPlaneDistance(5.0F);
+            } else {
+                event.scaleFarPlaneDistance(0.8F);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
+        if (ClientPacketHandler.isBloodyMoon()) {
+            event.setRed(0.25F);
+            event.setGreen(0.0F);
+            event.setBlue(0.0F);
+        }
     }
 }

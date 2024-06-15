@@ -173,7 +173,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.SAPPHIRE_BULLET.get(), BulletParticle.Provider::new);
     }
 
-    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> -1554953;
+    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0xFF96FF;
 
     @SubscribeEvent
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
