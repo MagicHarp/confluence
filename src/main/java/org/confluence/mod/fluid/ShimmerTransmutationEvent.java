@@ -176,6 +176,10 @@ public abstract class ShimmerTransmutationEvent extends Event {
         ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), target, shrink, GamePhase.BEFORE_SKELETRON));
     }
 
+    public static void add(TagKey<Item> source, Item target, int shrink) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink, GamePhase.BEFORE_SKELETRON));
+    }
+
     public static void add(Ingredient source, List<ItemStack> target, int shrink) {
         ITEM_TRANSMUTATION.add(new Transmutation(source, target, shrink, GamePhase.BEFORE_SKELETRON));
     }
@@ -202,6 +206,10 @@ public abstract class ShimmerTransmutationEvent extends Event {
 
     public static void add(Item source, Item target, GamePhase gamePhase) {
         ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), 1, gamePhase));
+    }
+
+    public static void add(TagKey<Item> source, Item target, int shrink, GamePhase gamePhase) {
+        ITEM_TRANSMUTATION.add(new Transmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink, gamePhase));
     }
 
     public record Transmutation(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase){}

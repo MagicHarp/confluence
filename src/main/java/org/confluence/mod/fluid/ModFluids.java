@@ -10,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
@@ -30,8 +29,6 @@ import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
-
-import java.util.Collections;
 
 import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.fluid.ShimmerTransmutationEvent.add;
@@ -154,8 +151,8 @@ public final class ModFluids {
     }
 
     public static void registerShimmerTransform() {
-        add(ItemTags.WOOL, Collections.singletonList(new ItemStack(Items.WHITE_WOOL)), 1);
-        add(ItemTags.WOOL_CARPETS, Collections.singletonList(new ItemStack(Items.WHITE_CARPET)), 1);
+        add(ItemTags.WOOL, Items.WHITE_WOOL, 1);
+        add(ItemTags.WOOL_CARPETS, Items.WHITE_CARPET, 1);
         // 饰品转化
         add(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
         add(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
@@ -217,7 +214,7 @@ public final class ModFluids {
         add(Materials.LIFE_CRYSTAL.get(), ModItems.VITAL_CRYSTAL.get());
         add(Materials.MANA_STAR.get(), ModItems.ARCANE_CRYSTAL.get());
         add(Materials.LIFE_FRUIT.get(), ModItems.AEGIS_APPLE.get());
-        add(ModTags.Items.FRUIT, Collections.singletonList(new ItemStack(ModItems.AMBROSIA.get())), 1);
+        add(ModTags.Items.FRUIT, ModItems.AMBROSIA.get(), 1);
         add(Baits.GOLD_WORM.get(), ModItems.GUMMY_WORM.get());
         add(Materials.PINK_PEARL.get(), ModItems.GALAXY_PEARL.get());
     }
