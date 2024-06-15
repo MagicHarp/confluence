@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.fluid.ModFluids;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +24,8 @@ public class ShimmerEffect extends MobEffect {
             living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 2, 1, false, false, false));
         }
         if (level.getBlockState(living.getOnPosLegacy()).is(Blocks.BEDROCK) ||
-            level.getBlockStates(living.getBoundingBox().inflate(-0.1)).allMatch(blockState -> blockState.liquid() || blockState.isAir())
+            level.getBlockStates(living.getBoundingBox().inflate(-0.1)).allMatch(blockState ->
+                (blockState.liquid() && !blockState.is(ModBlocks.SHIMMER.get())) || blockState.isAir())
         ) {
             living.removeEffect(this);
         }
