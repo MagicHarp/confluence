@@ -1439,6 +1439,7 @@ public class ModChineseProvider extends LanguageProvider {
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.SHINE.get(), "发光");
+        add(ModEffects.SHIMMER.get(), "闪烁");
         add(ModEffects.EXQUISITELY_STUFFED.get(), "膳食");
         add(ModEffects.IRON_SKIN.get(), "铁皮");
         add(ModEffects.ENDURANCE.get(), "耐力");
