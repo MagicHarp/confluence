@@ -1,6 +1,5 @@
 package org.confluence.mod.item.curio.movement;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -58,7 +57,7 @@ public class BaseWings extends BaseCurioItem implements IMayFly, NormalGeoItem, 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if (slotContext.entity() instanceof Player player) {
-            if (player instanceof LocalPlayer) {
+            if (player.isLocalPlayer()) {
                 boolean onFly = PlayerJumpHandler.isOnGlide();
                 if (!player.onGround() && (stack.getTag() == null || stack.getTag().getBoolean("onFly") != onFly)) {
                     NetworkHandler.CHANNEL.sendToServer(new WingsGlidePacketC2S(onFly, slotContext.index()));
