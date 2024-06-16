@@ -25,6 +25,7 @@ import java.util.List;
  * This event is Server side only.
  */
 public abstract class ShimmerItemTransmutationEvent extends Event {
+    public static final ArrayList<Ingredient> BLACK_LIST = new ArrayList<>();
     public static final ArrayList<ItemTransmutation> ITEM_TRANSMUTATION = new ArrayList<>();
     protected final ItemEntity source;
     protected int coolDown;
@@ -226,4 +227,16 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
     }
 
     public record ItemTransmutation(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase) {}
+
+    public static void blackList(Ingredient ingredient) {
+        BLACK_LIST.add(ingredient);
+    }
+
+    public static void blackList(TagKey<Item> tagKey) {
+        BLACK_LIST.add(Ingredient.of(tagKey));
+    }
+
+    public static void blackList(Item item) {
+        BLACK_LIST.add(Ingredient.of(item));
+    }
 }

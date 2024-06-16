@@ -38,6 +38,7 @@ import org.joml.Vector3f;
 import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.fluid.ShimmerEntityTransmutationEvent.addEntity;
 import static org.confluence.mod.fluid.ShimmerItemTransmutationEvent.addItem;
+import static org.confluence.mod.fluid.ShimmerItemTransmutationEvent.blackList;
 import static org.confluence.mod.item.curio.CurioItems.*;
 
 public final class ModFluids {
@@ -157,6 +158,9 @@ public final class ModFluids {
     }
 
     public static void registerShimmerTransform() {
+        // 黑名单
+        blackList(ItemTags.STAIRS);
+        // 顶替
         addItem(ItemTags.WOOL, Items.WHITE_WOOL, 1);
         addItem(ItemTags.WOOL_CARPETS, Items.WHITE_CARPET, 1);
         // 饰品转化
@@ -180,45 +184,6 @@ public final class ModFluids {
         addItem(ANGLER_EARRING.get(), TACKLE_BOX.get());
         addItem(TACKLE_BOX.get(), HIGH_TEST_FISHING_LINE.get());
         // 匣子转化
-        // 楼梯防刷
-        addItem(Items.STONE_STAIRS, Items.STONE);
-        addItem(Items.COBBLED_DEEPSLATE_STAIRS, Items.COBBLED_DEEPSLATE);
-        addItem(Items.COBBLESTONE_STAIRS, Items.COBBLESTONE);
-        addItem(Items.MOSSY_COBBLESTONE_STAIRS, Items.MOSSY_COBBLESTONE);
-        addItem(Items.STONE_BRICK_STAIRS, Items.STONE_BRICKS);
-        addItem(Items.MOSSY_STONE_BRICK_STAIRS, Items.MOSSY_STONE_BRICKS);
-        addItem(Items.DIORITE_STAIRS, Items.DIORITE);
-        addItem(Items.DEEPSLATE_BRICK_STAIRS, Items.DEEPSLATE_BRICKS);
-        addItem(Items.PRISMARINE_BRICK_STAIRS, Items.PRISMARINE_BRICKS);
-        addItem(Items.PRISMARINE_STAIRS, Items.PRISMARINE);
-        addItem(Items.DARK_PRISMARINE_STAIRS, Items.DARK_PRISMARINE);
-        addItem(Items.ANDESITE_STAIRS, Items.ANDESITE);
-        addItem(Items.BRICK_STAIRS, Items.BRICK);
-        addItem(Items.BLACKSTONE_STAIRS, Items.BLACKSTONE);
-        addItem(Items.PURPUR_STAIRS, Items.PURPUR_BLOCK);
-        addItem(Items.END_STONE_BRICK_STAIRS, Items.END_STONE_BRICKS);
-        addItem(Items.QUARTZ_STAIRS, Items.QUARTZ);
-        addItem(Items.NETHER_BRICK_STAIRS, Items.NETHER_BRICK);
-        addItem(Items.RED_NETHER_BRICK_STAIRS, Items.RED_NETHER_BRICKS);
-        addItem(Items.BLACKSTONE_STAIRS, Items.BLACKSTONE);
-        addItem(Items.POLISHED_BLACKSTONE_BRICK_STAIRS, Items.POLISHED_BLACKSTONE_BRICKS);
-        addItem(Items.POLISHED_BLACKSTONE_STAIRS, Items.POLISHED_BLACKSTONE);
-        addItem(Items.SANDSTONE_STAIRS, Items.SANDSTONE);
-        addItem(Items.SMOOTH_SANDSTONE_STAIRS, Items.SMOOTH_SANDSTONE);
-        addItem(Items.SMOOTH_RED_SANDSTONE_STAIRS, Items.SMOOTH_RED_SANDSTONE);
-        addItem(Items.RED_SANDSTONE_STAIRS, Items.RED_SANDSTONE);
-        addItem(Items.MUD_BRICK_STAIRS, Items.MUD_BRICKS);
-        addItem(Items.RED_SANDSTONE_STAIRS, Items.RED_SANDSTONE);
-        addItem(Items.QUARTZ_STAIRS, Items.QUARTZ);
-        addItem(Items.SMOOTH_QUARTZ_STAIRS, Items.SMOOTH_QUARTZ);
-        addItem(Items.CUT_COPPER_STAIRS, Items.CUT_COPPER);
-        addItem(Items.EXPOSED_CUT_COPPER_STAIRS, Items.EXPOSED_CUT_COPPER);
-        addItem(Items.WEATHERED_CUT_COPPER_STAIRS, Items.WEATHERED_CUT_COPPER);
-        addItem(Items.OXIDIZED_CUT_COPPER_STAIRS, Items.OXIDIZED_CUT_COPPER);
-        addItem(Items.WAXED_CUT_COPPER_STAIRS, Items.WAXED_CUT_COPPER);
-        addItem(Items.WAXED_WEATHERED_CUT_COPPER_STAIRS, Items.WAXED_WEATHERED_CUT_COPPER);
-        addItem(Items.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Items.WAXED_OXIDIZED_CUT_COPPER);
-        addItem(Items.WAXED_EXPOSED_CUT_COPPER_STAIRS, Items.WAXED_EXPOSED_CUT_COPPER);
         // 宝石转化
         addItem(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
         addItem(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
