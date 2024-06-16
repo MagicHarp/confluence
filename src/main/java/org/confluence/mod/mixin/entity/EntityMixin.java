@@ -40,6 +40,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements IEntity {
+    @Unique
+    private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
+
     @Shadow
     public abstract DamageSources damageSources();
 
@@ -159,7 +162,7 @@ public abstract class EntityMixin implements IEntity {
                     c$setup(self, pre.getCoolDown(), pre.getSpeedY());
                 } else if (c$transforming < pre.getTransformTime()) {
                     this.c$transforming++;
-                    self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
+                    self.addDeltaMovement(ANTI_GRAVITY);
                 } else {
                     ShimmerEntityTransmutationEvent.Post post = new ShimmerEntityTransmutationEvent.Post(self);
                     MinecraftForge.EVENT_BUS.post(post);

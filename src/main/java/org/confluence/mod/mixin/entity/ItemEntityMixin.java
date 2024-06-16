@@ -19,6 +19,8 @@ import java.util.List;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin implements IItemEntity {
     @Unique
+    private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
+    @Unique
     private int c$coolDown = 0;
     @Unique
     private int c$transforming = 0;
@@ -41,7 +43,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
                 c$setup(self, pre.getCoolDown(), pre.getSpeedY());
             } else if (c$transforming < pre.getTransformTime()) {
                 this.c$transforming++;
-                self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
+                self.addDeltaMovement(ANTI_GRAVITY);
             } else {
                 ShimmerItemTransmutationEvent.Post post = new ShimmerItemTransmutationEvent.Post(self);
                 MinecraftForge.EVENT_BUS.post(post);

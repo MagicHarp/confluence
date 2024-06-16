@@ -11,6 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
@@ -220,6 +223,18 @@ public final class ModFluids {
         addItem(Baits.GOLD_WORM.get(), ModItems.GUMMY_WORM.get());
         addItem(Materials.PINK_PEARL.get(), ModItems.GALAXY_PEARL.get());
 
-        addEntity(EntityType.VILLAGER, EntityType.WITCH);
+        addEntity(EntityType.WITCH, EntityType.VILLAGER);
+        addEntity(entity -> {
+            EntityType<?> entityType = entity.getType();
+            return entityType == EntityType.PIGLIN ||
+                entityType == EntityType.PIGLIN_BRUTE ||
+                entityType == EntityType.ZOMBIFIED_PIGLIN ||
+                entityType == EntityType.CREEPER;
+        }, EntityType.PIG);
+        addEntity(entity -> entity instanceof AbstractSkeleton || entity.getType() == EntityType.ZOMBIE, EntityType.SKELETON);
+        addEntity(entity -> entity instanceof AbstractHorse, EntityType.HORSE);
+        addEntity(EntityType.VEX, EntityType.ALLAY);
+        addEntity(entity -> entity instanceof Creeper creeper && creeper.isPowered(), EntityType.CREEPER);
+        addEntity(EntityType.MOOSHROOM, EntityType.COW);
     }
 }
