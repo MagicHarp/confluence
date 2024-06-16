@@ -180,10 +180,52 @@ public final class ModFluids {
         addItem(ANGLER_EARRING.get(), TACKLE_BOX.get());
         addItem(TACKLE_BOX.get(), HIGH_TEST_FISHING_LINE.get());
         // 匣子转化
-        // <---注释后面记得打空格
+        // 楼梯防刷
+        addItem(Items.STONE_STAIRS, Items.STONE);
+        addItem(Items.COBBLED_DEEPSLATE_STAIRS, Items.COBBLED_DEEPSLATE);
+        addItem(Items.COBBLESTONE_STAIRS, Items.COBBLESTONE);
+        addItem(Items.MOSSY_COBBLESTONE_STAIRS, Items.MOSSY_COBBLESTONE);
+        addItem(Items.STONE_BRICK_STAIRS, Items.STONE_BRICKS);
+        addItem(Items.MOSSY_STONE_BRICK_STAIRS, Items.MOSSY_STONE_BRICKS);
+        addItem(Items.DIORITE_STAIRS, Items.DIORITE);
+        addItem(Items.DEEPSLATE_BRICK_STAIRS, Items.DEEPSLATE_BRICKS);
+        addItem(Items.PRISMARINE_BRICK_STAIRS, Items.PRISMARINE_BRICKS);
+        addItem(Items.PRISMARINE_STAIRS, Items.PRISMARINE);
+        addItem(Items.DARK_PRISMARINE_STAIRS, Items.DARK_PRISMARINE);
+        addItem(Items.ANDESITE_STAIRS, Items.ANDESITE);
+        addItem(Items.BRICK_STAIRS, Items.BRICK);
+        addItem(Items.BLACKSTONE_STAIRS, Items.BLACKSTONE);
+        addItem(Items.PURPUR_STAIRS, Items.PURPUR_BLOCK);
+        addItem(Items.END_STONE_BRICK_STAIRS, Items.END_STONE_BRICKS);
+        addItem(Items.QUARTZ_STAIRS, Items.QUARTZ);
+        addItem(Items.NETHER_BRICK_STAIRS, Items.NETHER_BRICK);
+        addItem(Items.RED_NETHER_BRICK_STAIRS, Items.RED_NETHER_BRICKS);
+        addItem(Items.BLACKSTONE_STAIRS, Items.BLACKSTONE);
+        addItem(Items.POLISHED_BLACKSTONE_BRICK_STAIRS, Items.POLISHED_BLACKSTONE_BRICKS);
+        addItem(Items.POLISHED_BLACKSTONE_STAIRS, Items.POLISHED_BLACKSTONE);
+        addItem(Items.SANDSTONE_STAIRS, Items.SANDSTONE);
+        addItem(Items.SMOOTH_SANDSTONE_STAIRS, Items.SMOOTH_SANDSTONE);
+        addItem(Items.SMOOTH_RED_SANDSTONE_STAIRS, Items.SMOOTH_RED_SANDSTONE);
+        addItem(Items.RED_SANDSTONE_STAIRS, Items.RED_SANDSTONE);
+        addItem(Items.MUD_BRICK_STAIRS, Items.MUD_BRICKS);
+        addItem(Items.RED_SANDSTONE_STAIRS, Items.RED_SANDSTONE);
+        addItem(Items.QUARTZ_STAIRS, Items.QUARTZ);
+        addItem(Items.SMOOTH_QUARTZ_STAIRS, Items.SMOOTH_QUARTZ);
+        addItem(Items.CUT_COPPER_STAIRS, Items.CUT_COPPER);
+        addItem(Items.EXPOSED_CUT_COPPER_STAIRS, Items.EXPOSED_CUT_COPPER);
+        addItem(Items.WEATHERED_CUT_COPPER_STAIRS, Items.WEATHERED_CUT_COPPER);
+        addItem(Items.OXIDIZED_CUT_COPPER_STAIRS, Items.OXIDIZED_CUT_COPPER);
+        addItem(Items.WAXED_CUT_COPPER_STAIRS, Items.WAXED_CUT_COPPER);
+        addItem(Items.WAXED_WEATHERED_CUT_COPPER_STAIRS, Items.WAXED_WEATHERED_CUT_COPPER);
+        addItem(Items.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Items.WAXED_OXIDIZED_CUT_COPPER);
+        addItem(Items.WAXED_EXPOSED_CUT_COPPER_STAIRS, Items.WAXED_EXPOSED_CUT_COPPER);
         // 宝石转化
         addItem(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
         addItem(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
+        addItem(Items.EMERALD, Materials.SAPPHIRE.get());
+        addItem(Materials.RUBY.get(), Items.EMERALD);
+        addItem(Items.DIAMOND, Materials.RUBY.get());
+        addItem(Materials.ANOTHER_AMETHYST.get(), Items.DIRT);
         // 锭到矿的转化
         addItem(Materials.TITANIUM_INGOT.get(), Materials.RAW_TITANIUM.get());
         addItem(Materials.ADAMANTITE_INGOT.get(), Materials.RAW_ADAMANTITE.get());
@@ -197,10 +239,15 @@ public final class ModFluids {
         addItem(Materials.EBONY_INGOT.get(), Materials.RAW_EBONY.get());
         addItem(Materials.METEORITE_INGOT.get(), Materials.RAW_METEORITE.get());
         addItem(Materials.PLATINUM_INGOT.get(), Materials.RAW_PLATINUM.get());
+        addItem(Items.GOLD_INGOT, Items.RAW_GOLD);
         addItem(Materials.TUNGSTEN_INGOT.get(), Materials.RAW_TUNGSTEN.get());
         addItem(Materials.SILVER_INGOT.get(), Materials.RAW_SILVER.get());
+        addItem(Items.IRON_INGOT, Items.RAW_IRON);
         addItem(Materials.LEAD_INGOT.get(), Materials.RAW_LEAD.get());
         addItem(Materials.TIN_INGOT.get(), Materials.RAW_TIN.get());
+        addItem(Items.COPPER_INGOT, Items.RAW_COPPER);
+        addItem(Items.RAW_COPPER, Items.COBBLESTONE);
+        addItem(Items.COBBLESTONE, Items.DIRT);
         // 矿的下级转化（陨石，魔矿，猩红矿不参与这一过程）
         addItem(Materials.RAW_TITANIUM.get(), Materials.RAW_ADAMANTITE.get());
         addItem(Materials.RAW_ADAMANTITE.get(), Materials.RAW_ORICHALCUM.get());
