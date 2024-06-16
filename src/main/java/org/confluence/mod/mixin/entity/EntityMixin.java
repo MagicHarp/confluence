@@ -74,7 +74,7 @@ public abstract class EntityMixin implements IEntity {
     @Unique
     private int c$e_transforming = 0;
     @Unique
-    private boolean c$originalNoGravity = false;
+    private byte c$transformData = 0;
 
     @Override
     public void c$e_setCoolDown(int ticks) {
@@ -83,7 +83,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Override
     public void c$setOriginalNoGravity(boolean bool) {
-        this.c$originalNoGravity = bool;
+        this.c$transformData = (byte) (bool ? 1 : 0);
     }
 
     @Override
@@ -187,11 +187,12 @@ public abstract class EntityMixin implements IEntity {
         } else {
             this.c$e_transforming = 0;
             if (c$e_coolDown > 0) this.c$e_coolDown--;
-            if (c$e_coolDown == 0 && !(self instanceof ItemEntity)) {
+            if (c$e_coolDown == 0 && c$transformData != -1 && !(self instanceof ItemEntity)) {
                 setGlowingTag(false);
-                if (!c$originalNoGravity) {
+                if (c$transformData == 0) {
                     setNoGravity(false);
                 }
+                this.c$transformData = -1;
             }
             this.c$wasInShimmer = false;
         }
