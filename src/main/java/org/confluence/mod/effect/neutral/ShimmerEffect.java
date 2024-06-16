@@ -1,5 +1,7 @@
 package org.confluence.mod.effect.neutral;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -8,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.fluid.ModFluids;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,5 +37,9 @@ public class ShimmerEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
         return true;
+    }
+
+    public static boolean isInvul(LivingEntity living, DamageSource damageSource) {
+        return damageSource.is(DamageTypes.IN_WALL) && living.hasEffect(ModEffects.SHIMMER.get());
     }
 }

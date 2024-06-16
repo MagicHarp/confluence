@@ -6,19 +6,26 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
+import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerTransmutationEvent;
 import org.confluence.mod.util.IItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin implements IItemEntity {
+    @Shadow
+    @Nullable
+    private UUID target;
     @Unique
     private int c$coolDown = 0;
     @Unique
@@ -49,6 +56,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
                 self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
             } else {
                 ShimmerTransmutationEvent.Post post = new ShimmerTransmutationEvent.Post(self);
+                MinecraftForge.EVENT_BUS.post(post);
                 List<ItemStack> targets = post.getTargets();
                 self.getItem().shrink(post.getShrink());
                 if (targets == null) {
@@ -56,6 +64,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
                     return;
                 }
                 for (ItemStack target : targets) {
+                    if (PrefixProvider.canInit(target)) PrefixProvider.unknown(target);
                     ItemEntity itemEntity = new ItemEntity(self.level(), self.getX(), self.getY(), self.getZ(), target);
                     c$setup(itemEntity, post.getCoolDown());
                     self.level().addFreshEntity(itemEntity);

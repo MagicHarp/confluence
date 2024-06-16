@@ -145,7 +145,7 @@ public abstract class LivingEntityMixin {
         } else if (fluidType == ModFluids.SHIMMER.fluidType().get()) {
             if (!self.level().isClientSide) {
                 if (self.isOnFire()) self.clearFire();
-                if (!self.hasEffect(ModEffects.SHIMMER.get())) {
+                if (self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get() && !self.hasEffect(ModEffects.SHIMMER.get())) {
                     self.addEffect(new MobEffectInstance(ModEffects.SHIMMER.get(), MobEffectInstance.INFINITE_DURATION));
                 }
             }

@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
+import org.confluence.mod.effect.neutral.ShimmerEffect;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
@@ -101,6 +102,7 @@ public abstract class EntityMixin implements IEntity {
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
                 ObsidianSkinEffect.isInvul(living, damageSource) ||
+                ShimmerEffect.isInvul(living, damageSource) ||
                 RoyalGel.isInvul(living, damageSource) ||
                 ShieldOfCthulhu.isInvul(living)
             ) {

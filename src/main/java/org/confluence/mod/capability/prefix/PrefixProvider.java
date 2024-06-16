@@ -16,6 +16,20 @@ import java.util.Optional;
 public final class PrefixProvider {
     public static final String KEY = "confluence:prefix";
 
+    public static boolean canInit(ItemStack itemStack) {
+        Item item = itemStack.getItem();
+        if (item instanceof IUniversalOnly || item instanceof IManaWeapon || item instanceof BaseCurioItem) {
+            return true;
+        } else if (item instanceof Vanishable) {
+            if (item instanceof SwordItem || item instanceof DiggerItem) {
+                return true;
+            } else {
+                return item instanceof BowItem || item instanceof CrossbowItem || item instanceof AbstractGunItem;
+            }
+        }
+        return false;
+    }
+
     public static void initPrefix(ServerPlayer serverPlayer, ItemStack itemStack) {
         Item item = itemStack.getItem();
         RandomSource randomSource = serverPlayer.level().random;
@@ -52,6 +66,10 @@ public final class PrefixProvider {
 
     public static void random(RandomSource randomSource, ItemStack itemStack, PrefixType prefixType) {
         new ItemPrefix(prefixType, itemStack).copyFrom(prefixType.randomPrefix(randomSource));
+    }
+
+    public static void unknown(ItemStack itemStack) {
+        itemStack.getOrCreateTag().put(PrefixProvider.KEY, new ItemPrefix(PrefixType.UNKNOWN, itemStack).serializeNBT());
     }
 
     public static void applyToArrow(ItemStack itemStack, AbstractArrow abstractArrow, Level level) {

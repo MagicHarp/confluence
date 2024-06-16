@@ -112,7 +112,7 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     }
 
     public void copyFrom(ModPrefix modPrefix) {
-        modPrefix.copyTo(this);
+        if (type != PrefixType.UNKNOWN) modPrefix.copyTo(this);
         itemStack.getOrCreateTag().put(PrefixProvider.KEY, serializeNBT());
     }
 
