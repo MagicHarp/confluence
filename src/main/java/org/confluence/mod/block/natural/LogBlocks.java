@@ -14,15 +14,18 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.block.WoodSetType;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.function.Supplier;
 
 import static org.confluence.mod.block.ModBlocks.registerWithItem;
 import static org.confluence.mod.block.ModBlocks.registerWithoutItem;
 
 public final class LogBlocks {
     public static final ArrayList<LogBlocks> LOG_BLOCKS = new ArrayList<>();
+    private static final Hashtable<Supplier<RotatedPillarBlock>, Supplier<RotatedPillarBlock>> STRIP_TABLE = new Hashtable<>();
+    public static final Hashtable<Block, Block> WRAPPED_STRIP = new Hashtable<>();
 
     public final String id;
     public final RegistryObject<Block> PLANKS;
@@ -58,6 +61,10 @@ public final class LogBlocks {
             BlockBehaviour.Properties finalWood = ignitedByLava ? wood.ignitedByLava() : wood;
             this.WOOD = registerWithItem(id + "_wood", () -> new RotatedPillarBlock(finalWood));
             this.STRIPPED_WOOD = registerWithItem(id + "_stripped_wood", () -> new RotatedPillarBlock(finalWood));
+
+            STRIP_TABLE.put(LOG, STRIPPED_LOG);
+            STRIP_TABLE.put(WOOD, STRIPPED_WOOD);
+
         }
         this.BUTTON = registerWithItem(id + "_button", () -> new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), blockSetType, 30, true));
         BlockBehaviour.Properties fence = BlockBehaviour.Properties.of().forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
@@ -145,6 +152,28 @@ public final class LogBlocks {
             tag.add(logBlocks.SIGN.get());
             tag.add(logBlocks.TRAPDOOR.get());
             tag.add(logBlocks.DOOR.get());
+        }
+    }
+
+    public static void wrapStrip() {
+        STRIP_TABLE.forEach((s1, s2) -> WRAPPED_STRIP.put(s1.get(), s2.get()));
+        STRIP_TABLE.clear();
+    }
+
+    public enum WoodSetType {
+        EBONY("ebony"),
+        PEARL("pearl"),
+        SHADOW("shadow"),
+        PALM("palm"),
+        ASH("ash"),
+        SPOOKY("spooky");
+
+        public final BlockSetType SET;
+        public final WoodType TYPE;
+
+        WoodSetType(String id) {
+            this.SET = BlockSetType.register(new BlockSetType(id));
+            this.TYPE = WoodType.register(new WoodType(id, SET));
         }
     }
 }

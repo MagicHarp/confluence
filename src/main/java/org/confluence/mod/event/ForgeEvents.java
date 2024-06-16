@@ -18,16 +18,22 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
@@ -224,6 +230,17 @@ public final class ForgeEvents {
         if (event.canBreathe()) return;
         if (event.getEntity().hasEffect(ModEffects.SHIMMER.get())) {
             event.setCanBreathe(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void blockToolModification(BlockEvent.BlockToolModificationEvent event) {
+        if (event.getToolAction() == ToolActions.AXE_STRIP) {
+            BlockState originalState = event.getState();
+            Block block = LogBlocks.WRAPPED_STRIP.get(originalState.getBlock());
+            if (block != null) {
+                event.setFinalState(block.defaultBlockState().setValue(RotatedPillarBlock.AXIS, originalState.getValue(RotatedPillarBlock.AXIS)));
+            }
         }
     }
 }

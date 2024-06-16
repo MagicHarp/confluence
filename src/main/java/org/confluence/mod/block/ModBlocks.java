@@ -27,7 +27,7 @@ import org.confluence.mod.item.ModItems;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.confluence.mod.block.WoodSetType.*;
+import static org.confluence.mod.block.natural.LogBlocks.WoodSetType.*;
 
 @SuppressWarnings("unused")
 public final class ModBlocks {

@@ -139,10 +139,11 @@ public final class ItemEvents {
         if (ConfluenceData.get((ServerLevel) event.getSource().level()).isGraduated()) {
             ItemStack itemStack = event.getSource().getItem();
             Item item = itemStack.getItem();
-            event.setShrink(1);
             if (item == ModItems.BOTTOMLESS_WATER_BUCKET.get()) {
+                event.setShrink(1);
                 event.setTargets(Collections.singletonList(new ItemStack(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get())));
             } else if (item == ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()) {
+                event.setShrink(1);
                 event.setTargets(Collections.singletonList(new ItemStack(ModItems.BOTTOMLESS_WATER_BUCKET.get())));
             }
         }

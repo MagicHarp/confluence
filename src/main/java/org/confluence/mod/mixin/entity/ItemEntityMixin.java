@@ -21,28 +21,28 @@ public abstract class ItemEntityMixin implements IItemEntity {
     @Unique
     private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
     @Unique
-    private int c$coolDown = 0;
+    private int c$i_coolDown = 0;
     @Unique
-    private int c$transforming = 0;
+    private int c$i_transforming = 0;
 
     @Override
-    public void c$setCoolDown(int ticks) {
-        this.c$coolDown = ticks;
+    public void c$i_setCoolDown(int ticks) {
+        this.c$i_coolDown = ticks;
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void endTick(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) (Object) this;
         if (self.level().isClientSide || self.isRemoved()) return;
-        if (c$coolDown < 0) this.c$coolDown = 0;
+        if (c$i_coolDown < 0) this.c$i_coolDown = 0;
         boolean isInShimmer = self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
-        if (c$coolDown == 0 && isInShimmer) {
+        if (c$i_coolDown == 0 && isInShimmer) {
             ShimmerItemTransmutationEvent.Pre pre = new ShimmerItemTransmutationEvent.Pre(self);
             if (MinecraftForge.EVENT_BUS.post(pre)) {
                 self.getItem().shrink(pre.getShrink());
                 c$setup(self, pre.getCoolDown(), pre.getSpeedY());
-            } else if (c$transforming < pre.getTransformTime()) {
-                this.c$transforming++;
+            } else if (c$i_transforming < pre.getTransformTime()) {
+                this.c$i_transforming++;
                 self.addDeltaMovement(ANTI_GRAVITY);
             } else {
                 ShimmerItemTransmutationEvent.Post post = new ShimmerItemTransmutationEvent.Post(self);
@@ -60,8 +60,8 @@ public abstract class ItemEntityMixin implements IItemEntity {
                     }
                 }
             }
-        } else if (c$coolDown > 0) {
-            this.c$coolDown--;
+        } else if (c$i_coolDown > 0) {
+            this.c$i_coolDown--;
         }
     }
 
@@ -70,6 +70,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x, y, motion.z);
-        ((IItemEntity) entity).c$setCoolDown(coolDown);
+        ((IItemEntity) entity).c$i_setCoolDown(coolDown);
+        entity.setGlowingTag(true);
     }
 }

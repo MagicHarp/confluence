@@ -58,6 +58,9 @@ public abstract class EntityMixin implements IEntity {
     @Shadow
     public abstract void setNoGravity(boolean pNoGravity);
 
+    @Shadow
+    public abstract void setGlowingTag(boolean pHasGlowingTag);
+
     @Unique
     private int c$cthulhuSprintingTime = 0;
     @Unique
@@ -67,15 +70,15 @@ public abstract class EntityMixin implements IEntity {
     @Unique
     private boolean c$wasInShimmer = false;
     @Unique
-    private int c$coolDown = 0;
+    private int c$e_coolDown = 0;
     @Unique
-    private int c$transforming = 0;
+    private int c$e_transforming = 0;
     @Unique
     private boolean c$originalNoGravity = false;
 
     @Override
-    public void c$setCoolDown(int ticks) {
-        this.c$coolDown = ticks;
+    public void c$e_setCoolDown(int ticks) {
+        this.c$e_coolDown = ticks;
     }
 
     @Override
@@ -152,16 +155,16 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))
     private void tickProfiler(CallbackInfo ci) {
         if (c$cthulhuSprintingTime > 0) this.c$cthulhuSprintingTime--;
-        if (c$coolDown < 0) this.c$coolDown = 0;
+        if (c$e_coolDown < 0) this.c$e_coolDown = 0;
         this.c$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
         Entity self = c$getSelf();
         if (c$isInShimmer) {
-            if (!self.level().isClientSide && c$coolDown == 0) {
+            if (!self.level().isClientSide && c$e_coolDown == 0) {
                 ShimmerEntityTransmutationEvent.Pre pre = new ShimmerEntityTransmutationEvent.Pre(self);
                 if (MinecraftForge.EVENT_BUS.post(pre)) {
                     c$setup(self, pre.getCoolDown(), pre.getSpeedY());
-                } else if (c$transforming < pre.getTransformTime()) {
-                    this.c$transforming++;
+                } else if (c$e_transforming < pre.getTransformTime()) {
+                    this.c$e_transforming++;
                     self.addDeltaMovement(ANTI_GRAVITY);
                 } else {
                     ShimmerEntityTransmutationEvent.Post post = new ShimmerEntityTransmutationEvent.Post(self);
@@ -182,10 +185,13 @@ public abstract class EntityMixin implements IEntity {
                 this.c$wasInShimmer = true;
             }
         } else {
-            this.c$transforming = 0;
-            if (c$coolDown > 0) this.c$coolDown--;
-            if (!c$originalNoGravity && c$coolDown == 0 && !(self instanceof ItemEntity)) {
-                setNoGravity(false);
+            this.c$e_transforming = 0;
+            if (c$e_coolDown > 0) this.c$e_coolDown--;
+            if (c$e_coolDown == 0 && !(self instanceof ItemEntity)) {
+                setGlowingTag(false);
+                if (!c$originalNoGravity) {
+                    setNoGravity(false);
+                }
             }
             this.c$wasInShimmer = false;
         }
@@ -220,9 +226,10 @@ public abstract class EntityMixin implements IEntity {
     private static void c$setup(Entity entity, int coolDown, double y) {
         IEntity iEntity = (IEntity) entity;
         iEntity.c$setOriginalNoGravity(entity.isNoGravity());
-        iEntity.c$setCoolDown(coolDown);
+        iEntity.c$e_setCoolDown(coolDown);
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x, y, motion.z);
+        entity.setGlowingTag(true);
     }
 }

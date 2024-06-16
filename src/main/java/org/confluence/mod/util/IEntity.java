@@ -13,7 +13,7 @@ public interface IEntity {
 
     boolean c$isShouldRot();
 
-    void c$setCoolDown(int ticks);
+    void c$e_setCoolDown(int ticks);
 
     void c$setOriginalNoGravity(boolean bool);
 }

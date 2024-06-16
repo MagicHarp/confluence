@@ -13,7 +13,7 @@ import org.confluence.mod.datagen.limit.CustomModel;
 
 public class BasePlantBlock extends FlowerBlock implements CustomModel, CustomItemModel {
     public BasePlantBlock() {
-        super(MobEffects.GLOWING,5,BlockBehaviour.Properties.copy(Blocks.DANDELION));
+        super(() -> MobEffects.GLOWING, 5, BlockBehaviour.Properties.copy(Blocks.DANDELION));
     }
 
     @Override
@@ -27,5 +27,4 @@ public class BasePlantBlock extends FlowerBlock implements CustomModel, CustomIt
         BlockState groundState = worldIn.getBlockState(blockpos);
         return this.mayPlaceOn(groundState, worldIn, blockpos);
     }
-
 }

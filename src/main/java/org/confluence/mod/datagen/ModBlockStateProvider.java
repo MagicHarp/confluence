@@ -7,7 +7,6 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.WoodSetType;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.SpreadingGrassBlock;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -20,7 +19,7 @@ import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.block.ModBlocks.*;
 
 public class ModBlockStateProvider extends BlockStateProvider {
-    private static final String[] WOODS = Arrays.stream(WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
+    private static final String[] WOODS = Arrays.stream(LogBlocks.WoodSetType.values()).map(woodSetType -> woodSetType.name().toLowerCase()).toArray(String[]::new);
 
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MODID, exFileHelper);
