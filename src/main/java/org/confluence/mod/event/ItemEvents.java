@@ -30,7 +30,7 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.fluid.ShimmerTransmutationEvent;
+import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
@@ -135,7 +135,7 @@ public final class ItemEvents {
     }
 
     @SubscribeEvent
-    public static void shimmerTransmutation$post(ShimmerTransmutationEvent.Post event) {
+    public static void shimmerTransmutation$post(ShimmerItemTransmutationEvent.Post event) {
         if (ConfluenceData.get((ServerLevel) event.getSource().level()).isGraduated()) {
             ItemStack itemStack = event.getSource().getItem();
             Item item = itemStack.getItem();

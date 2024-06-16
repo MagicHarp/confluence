@@ -8,7 +8,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.fluid.ShimmerTransmutationEvent;
+import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
@@ -30,7 +30,7 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(ShimmerTransmutationCategory.TYPE, ShimmerTransmutationEvent.ITEM_TRANSMUTATION);
+        registration.addRecipes(ShimmerTransmutationCategory.TYPE, ShimmerItemTransmutationEvent.ITEM_TRANSMUTATION);
         for (CurioItems curio : CurioItems.values()) {
             BaseCurioItem item = curio.get();
             registration.addItemStackInfo(new ItemStack(item), item.getInformation());
