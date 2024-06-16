@@ -20,4 +20,13 @@ public class MagmaStone extends BaseCurioItem implements IFireAttack {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.magma_stone.info"),
+                Component.translatable("item.confluence.magma_stone.info2"),
+                Component.translatable("item.confluence.magma_stone.info3")
+        };
+    }
 }

@@ -45,4 +45,11 @@ public class AvengerEmblem extends BaseCurioItem implements IMagicAttack, IProje
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.avenger_emblem.info")
+        };
+    }
 }

@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -51,5 +52,13 @@ public class PanicNecklace extends BaseCurioItem {
     public static void apply(LivingEntity living) {
         CuriosUtils.findCurio(living, CurioItems.PANIC_NECKLACE.get())
             .ifPresent(itemStack -> itemStack.getOrCreateTag().putLong("lastHurt", living.level().getGameTime()));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.panic_necklace.info"),
+                Component.translatable("item.confluence.panic_necklace.info2")
+        };
     }
 }

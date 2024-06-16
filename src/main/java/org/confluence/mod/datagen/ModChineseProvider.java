@@ -128,7 +128,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.the_plan.tooltip", "对缓慢和困惑免疫");
         add("item.confluence.fast_clock.tooltip", "对减缓免疫");
         add("item.confluence.trifold_map.tooltip", "对困惑免疫");
-        add("item.confluence.contercurse_mantra.tooltip", "对沉默和诅咒免疫");
+        add("item.confluence.countercurse_mantra.tooltip", "对沉默和诅咒免疫");
         add("item.confluence.megaphone.tooltip", "对沉默免疫");
         add("item.confluence.nazar.tooltip", "对诅咒免疫");
         add("item.confluence.reflective_shades.tooltip", "对失明和石化免疫");

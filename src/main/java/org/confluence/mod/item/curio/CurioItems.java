@@ -34,7 +34,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     THE_PLAN("the_plan", ThePlan::new), // 计划书
     MEGAPHONE("megaphone", Megaphone::new), // 扩音器
     NAZAR("nazar", Nazar::new), // 邪眼
-    COUNTERCURSE_MANTRA("contercurse_mantra", CountercurseMantra::new), // 反诅咒咒语
+    COUNTERCURSE_MANTRA("countercurse_mantra", CountercurseMantra::new), // 反诅咒咒语
     ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
     ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
     STAR_CLOAK("star_cloak", StarCloak::new), // 星星斗篷

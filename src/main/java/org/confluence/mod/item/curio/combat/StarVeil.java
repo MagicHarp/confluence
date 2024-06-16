@@ -21,4 +21,11 @@ public class StarVeil extends BaseCurioItem implements IStarCloak, IInvulnerable
         list.add(IStarCloak.TOOLTIP);
         list.add(Component.translatable("item.confluence.cross_necklace.tooltip"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.star_veil.info")
+        };
+    }
 }

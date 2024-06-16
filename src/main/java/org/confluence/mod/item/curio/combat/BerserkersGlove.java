@@ -45,4 +45,18 @@ public class BerserkersGlove extends BaseCurioItem implements IAggroAttach, IAut
         list.add(IAutoAttack.TOOLTIP);
         list.add(IAggroAttach.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.berserkers_glove.info"),
+                Component.translatable("item.confluence.berserkers_glove.info2"),
+                Component.translatable("item.confluence.berserkers_glove.info3"),
+                Component.translatable("item.confluence.berserkers_glove.info4"),
+                Component.translatable("item.confluence.berserkers_glove.info5"),
+                Component.translatable("item.confluence.berserkers_glove.info6"),
+                Component.translatable("item.confluence.berserkers_glove.info7"),
+                Component.translatable("item.confluence.berserkers_glove.info8")
+        };
+    }
 }

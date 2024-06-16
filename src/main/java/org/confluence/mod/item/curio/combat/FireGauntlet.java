@@ -45,4 +45,19 @@ public class FireGauntlet extends BaseCurioItem implements IFireAttack, IAutoAtt
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(IAutoAttack.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.fire_gauntlet.info"),
+                Component.translatable("item.confluence.fire_gauntlet.info2"),
+                Component.translatable("item.confluence.fire_gauntlet.info3"),
+                Component.translatable("item.confluence.fire_gauntlet.info4"),
+                Component.translatable("item.confluence.fire_gauntlet.info5"),
+                Component.translatable("item.confluence.fire_gauntlet.info6"),
+                Component.translatable("item.confluence.fire_gauntlet.info7"),
+                Component.translatable("item.confluence.fire_gauntlet.info8"),
+                Component.translatable("item.confluence.fire_gauntlet.info9")
+        };
+    }
 }

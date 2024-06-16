@@ -31,4 +31,13 @@ public class Shackle extends BaseCurioItem {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.shackle.info"),
+                Component.translatable("item.confluence.shackle.info2"),
+                Component.translatable("item.confluence.shackle.info3")
+        };
+    }
 }

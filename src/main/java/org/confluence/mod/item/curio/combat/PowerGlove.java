@@ -42,4 +42,13 @@ public class PowerGlove extends BaseCurioItem implements IAutoAttack {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.power_glove.info"),
+                Component.translatable("item.confluence.power_glove.info2"),
+                Component.translatable("item.confluence.power_glove.info3")
+        };
+    }
 }

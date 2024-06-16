@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.combat;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Rarity;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModRarity;
@@ -12,5 +13,12 @@ public class AnkhCharm extends BaseCurioItem implements EffectInvul.Poison, Effe
 
     public AnkhCharm() {
         super(ModRarity.LIGHT_PURPLE);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.ankh_charm.info")
+        };
     }
 }
