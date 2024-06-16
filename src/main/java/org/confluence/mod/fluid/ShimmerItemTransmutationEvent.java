@@ -29,10 +29,12 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
     protected final ItemEntity source;
     protected int coolDown;
     protected int shrink = 0;
+    protected double speedY;
 
     public ShimmerItemTransmutationEvent(ItemEntity source) {
         this.source = source;
         this.coolDown = source.lifespan;
+        this.speedY = 0.1;
     }
 
     public ItemEntity getSource() {
@@ -61,6 +63,14 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
 
     public int getCoolDown() {
         return coolDown;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
+    }
+
+    public double getSpeedY() {
+        return speedY;
     }
 
     /**

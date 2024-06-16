@@ -172,7 +172,7 @@
             "radius": 12
         },
         {
-            "item_id": "confluence:shimmer_bucket",
+            "item_id": "confluence:bottomless_shimmer_bucket",
             "color": "#shimmer",
             "radius": 5
         }

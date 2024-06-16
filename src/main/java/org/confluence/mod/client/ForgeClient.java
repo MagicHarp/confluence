@@ -56,7 +56,7 @@ public final class ForgeClient {
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
         boolean jumping = event.getInput().jumping;
-        if (jumping && localPlayer.hasEffect(ModEffects.SHIMMER.get())) {
+        if (jumping && !localPlayer.getAbilities().instabuild && localPlayer.hasEffect(ModEffects.SHIMMER.get())) {
             event.getInput().jumping = false;
         } else if (GravitationHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
             GravitationHandler.handle(localPlayer, jumping);

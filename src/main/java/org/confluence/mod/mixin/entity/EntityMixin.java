@@ -7,6 +7,7 @@ import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.Vec3;
@@ -150,12 +151,12 @@ public abstract class EntityMixin implements IEntity {
         if (c$cthulhuSprintingTime > 0) this.c$cthulhuSprintingTime--;
         if (c$coolDown < 0) this.c$coolDown = 0;
         this.c$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
+        Entity self = c$getSelf();
         if (c$isInShimmer) {
-            Entity self = c$getSelf();
             if (!self.level().isClientSide && c$coolDown == 0) {
                 ShimmerEntityTransmutationEvent.Pre pre = new ShimmerEntityTransmutationEvent.Pre(self);
                 if (MinecraftForge.EVENT_BUS.post(pre)) {
-                    c$setup(self, pre.getCoolDown());
+                    c$setup(self, pre.getCoolDown(), pre.getSpeedY());
                 } else if (c$transforming < pre.getTransformTime()) {
                     this.c$transforming++;
                     self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
@@ -165,7 +166,7 @@ public abstract class EntityMixin implements IEntity {
                     Entity target = post.getTarget();
                     if (target != null) {
                         discard();
-                        c$setup(target, post.getCoolDown());
+                        c$setup(target, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(target);
                         return;
                     }
@@ -180,7 +181,9 @@ public abstract class EntityMixin implements IEntity {
         } else {
             this.c$transforming = 0;
             if (c$coolDown > 0) this.c$coolDown--;
-            if (!c$originalNoGravity && c$coolDown == 0) setNoGravity(false);
+            if (!c$originalNoGravity && c$coolDown == 0 && !(self instanceof ItemEntity)) {
+                setNoGravity(false);
+            }
             this.c$wasInShimmer = false;
         }
     }
@@ -211,12 +214,12 @@ public abstract class EntityMixin implements IEntity {
     }
 
     @Unique
-    private static void c$setup(Entity entity, int coolDown) {
+    private static void c$setup(Entity entity, int coolDown, double y) {
         IEntity iEntity = (IEntity) entity;
         iEntity.c$setOriginalNoGravity(entity.isNoGravity());
         iEntity.c$setCoolDown(coolDown);
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
-        entity.setDeltaMovement(motion.x, 0.1, motion.z);
+        entity.setDeltaMovement(motion.x, y, motion.z);
     }
 }

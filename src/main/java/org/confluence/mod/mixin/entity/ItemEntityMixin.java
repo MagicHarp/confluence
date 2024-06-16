@@ -38,7 +38,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
             ShimmerItemTransmutationEvent.Pre pre = new ShimmerItemTransmutationEvent.Pre(self);
             if (MinecraftForge.EVENT_BUS.post(pre)) {
                 self.getItem().shrink(pre.getShrink());
-                c$setup(self, pre.getCoolDown());
+                c$setup(self, pre.getCoolDown(), pre.getSpeedY());
             } else if (c$transforming < pre.getTransformTime()) {
                 this.c$transforming++;
                 self.addDeltaMovement(new Vec3(0.0, -5.0E-4F, 0.0));
@@ -48,12 +48,12 @@ public abstract class ItemEntityMixin implements IItemEntity {
                 List<ItemStack> targets = post.getTargets();
                 self.getItem().shrink(post.getShrink());
                 if (targets == null) {
-                    c$setup(self, post.getCoolDown());
+                    c$setup(self, post.getCoolDown(), post.getSpeedY());
                 } else {
                     for (ItemStack target : targets) {
                         if (PrefixProvider.canInit(target)) PrefixProvider.unknown(target);
                         ItemEntity itemEntity = new ItemEntity(self.level(), self.getX(), self.getY(), self.getZ(), target);
-                        c$setup(itemEntity, post.getCoolDown());
+                        c$setup(itemEntity, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(itemEntity);
                     }
                 }
@@ -64,10 +64,10 @@ public abstract class ItemEntityMixin implements IItemEntity {
     }
 
     @Unique
-    private static void c$setup(ItemEntity entity, int coolDown) {
+    private static void c$setup(ItemEntity entity, int coolDown, double y) {
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
-        entity.setDeltaMovement(motion.x, 0.1, motion.z);
+        entity.setDeltaMovement(motion.x, y, motion.z);
         ((IItemEntity) entity).c$setCoolDown(coolDown);
     }
 }

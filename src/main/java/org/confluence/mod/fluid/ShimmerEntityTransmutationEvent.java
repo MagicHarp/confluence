@@ -15,10 +15,12 @@ public abstract class ShimmerEntityTransmutationEvent extends Event {
     public static final ArrayList<EntityTransmutation> ENTITY_TRANSMUTATION = new ArrayList<>();
     protected final Entity sourceEntity;
     protected int coolDown;
+    protected double speedY;
 
     public ShimmerEntityTransmutationEvent(Entity source) {
         this.sourceEntity = source;
         this.coolDown = 200;
+        this.speedY = 0.6;
     }
 
     public Entity getSource() {
@@ -31,6 +33,14 @@ public abstract class ShimmerEntityTransmutationEvent extends Event {
 
     public int getCoolDown() {
         return coolDown;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
+    }
+
+    public double getSpeedY() {
+        return speedY;
     }
 
     @Cancelable
