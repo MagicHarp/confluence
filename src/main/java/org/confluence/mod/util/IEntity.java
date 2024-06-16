@@ -16,4 +16,8 @@ public interface IEntity {
     void c$e_setCoolDown(int ticks);
 
     void c$setOriginalNoGravity(boolean bool);
+
+    byte HAD_SETUP = -1;
+    byte HAS_GRAVITY = 0;
+    byte NO_GRAVITY = 1;
 }
