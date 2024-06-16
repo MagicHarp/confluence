@@ -365,7 +365,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.fledgling_wings.info3","At top speed, they allow traveling at 15 mph horizontally and 22 mph vertically.");
         add("item.confluence.fledgling_wings.info4","They have a flight time of 1.25 seconds and a vertical speed multiplier of 150%.");
         add("item.confluence.fledgling_wings.info5","The Fledgling Wings can be obtained from Skyware Chests on Floating Islands, as well as Sky Crates and Azure Crates from fishing.");
-
         add("item.confluence.hand_warmer.info","The Hand Warmer is an immunity accessory that grants the player immunity to the Chilled and Frozen debuffs.");
         add("item.confluence.hand_warmer.info2","It is obtained from Presents, with a chance of 0.62% in pre-Hardmode and 0.58% in Hardmode.");
         add("item.confluence.hermes_boots.info","Hermes Boots are an accessory that can be found in Chests in the Underground and Cavern layers.");
