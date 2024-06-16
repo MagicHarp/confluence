@@ -43,7 +43,7 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
             float range = ModUtils.nextFloat(randomSource, rangeMin, rangeMax) / 24;
             int duration = randomSource.nextInt((int) ((90 + amount / 3) / 50), (int) ((300 + amount / 2) / 50));
             living.level().getEntitiesOfClass(Monster.class, new AABB(living.getOnPos()).inflate(range))
-                .forEach(monster -> monster.addEffect(new MobEffectInstance(ModEffects.CONFUSED.get(), duration)));
+                    .forEach(monster -> monster.addEffect(new MobEffectInstance(ModEffects.CONFUSED.get(), duration)));
         }
         if (randomSource.nextFloat() < 0.1667F && !living.hasEffect(ModEffects.CEREBRAL_MINDTRICK.get())) {
             living.addEffect(new MobEffectInstance(ModEffects.CEREBRAL_MINDTRICK.get(), 80));
@@ -51,10 +51,23 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
         }
         return amount;
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip"));
         list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip2"));
         list.add(Component.translatable("item.confluence.brain_of_confusion.tooltip3"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.brain_of_confusion.info"),
+                Component.translatable("item.confluence.brain_of_confusion.info2"),
+                Component.translatable("item.confluence.brain_of_confusion.info3"),
+                Component.translatable("item.confluence.brain_of_confusion.info4"),
+                Component.translatable("item.confluence.brain_of_confusion.info5"),
+                Component.translatable("item.confluence.brain_of_confusion.info6")
+        };
     }
 }

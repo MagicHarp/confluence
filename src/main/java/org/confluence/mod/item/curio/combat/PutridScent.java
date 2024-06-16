@@ -21,7 +21,7 @@ import java.util.UUID;
 public class PutridScent extends BaseCurioItem implements IAggroAttach, ICriticalHit {
     public static final UUID DAMAGE_UUID = UUID.fromString("70F6E4B4-64AC-4B2A-AAD6-8C35AFB9507D");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public PutridScent() {

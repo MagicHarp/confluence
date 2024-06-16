@@ -8,6 +8,7 @@ public class ArmorPolish extends BaseCurioItem implements EffectInvul.BrokenArmo
     public ArmorPolish() {
         super(ModRarity.LIGHT_RED);
     }
+
     @Override
     public Component[] getInformation() {
         return new Component[]{

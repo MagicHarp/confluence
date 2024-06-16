@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Shackle extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("AD2BC718-506A-D43B-BE7A-98F60EE41A33");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shackle", 1, AttributeModifier.Operation.ADDITION)
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shackle", 1, AttributeModifier.Operation.ADDITION)
     );
 
     @Override

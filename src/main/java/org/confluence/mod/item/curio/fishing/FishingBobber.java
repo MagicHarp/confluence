@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.fishing;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.item.curio.BaseCurioItem;
@@ -21,5 +22,12 @@ public class FishingBobber extends BaseCurioItem implements IFishingPower {
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         return CuriosUtils.noSameCurio(slotContext.entity(), FishingBobber.class);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.fishing_bobber.info")
+        };
     }
 }

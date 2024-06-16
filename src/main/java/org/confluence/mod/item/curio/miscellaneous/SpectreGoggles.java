@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.miscellaneous;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -37,8 +38,8 @@ public class SpectreGoggles extends BaseCurioItem implements CustomModel, IFunct
     private static void echo(LivingEntity living, boolean value) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EchoBlockVisibilityPacketS2C(value)
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new EchoBlockVisibilityPacketS2C(value)
             );
         }
     }
@@ -47,5 +48,12 @@ public class SpectreGoggles extends BaseCurioItem implements CustomModel, IFunct
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         if (!pLevel.isClientSide) cycleEnable(pPlayer.getItemInHand(pUsedHand));
         return super.use(pLevel, pPlayer, pUsedHand);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.spectre_goggles.info")
+        };
     }
 }

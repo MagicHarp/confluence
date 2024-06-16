@@ -307,7 +307,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
         return value;
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 
     public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item> tag) {
         for (CurioItems curioItems : values()) tag.add(curioItems.get());

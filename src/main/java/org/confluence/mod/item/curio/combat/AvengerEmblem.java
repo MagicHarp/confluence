@@ -21,7 +21,7 @@ import java.util.UUID;
 public class AvengerEmblem extends BaseCurioItem implements IMagicAttack, IProjectileAttack {
     public static final UUID DAMAGE_UUID = UUID.fromString("3D20DB42-C40E-23BF-6CE4-FBDD7CC14222");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Avenger Emblem", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Avenger Emblem", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public AvengerEmblem() {
@@ -44,7 +44,8 @@ public class AvengerEmblem extends BaseCurioItem implements IMagicAttack, IProje
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
+    }
 
     @Override
     public Component[] getInformation() {

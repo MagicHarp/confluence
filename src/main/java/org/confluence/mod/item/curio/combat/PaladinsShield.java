@@ -27,8 +27,8 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
     public static final UUID ARMOR_UUID = UUID.fromString("276CFD23-08F7-50D5-8797-C7F4E1DAD96E");
     public static final UUID RESISTANCE_UUID = UUID.fromString("E4816CB8-0453-3050-70A6-2D0075E84FC5");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Paladins Shield", 6, AttributeModifier.Operation.ADDITION),
-        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Paladins Shield", 1.0, AttributeModifier.Operation.ADDITION)
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Paladins Shield", 6, AttributeModifier.Operation.ADDITION),
+            Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Paladins Shield", 1.0, AttributeModifier.Operation.ADDITION)
     );
 
     public PaladinsShield(Rarity rarity) {
@@ -60,12 +60,12 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
             AtomicDouble atomic = new AtomicDouble(amount);
             Team team = serverPlayer.getTeam();
             serverPlayer.level().players().stream()
-                .filter(player -> !shouldSkip(player, team, serverPlayer) && player.getHealth() / player.getMaxHealth() > 0.25F && CuriosUtils.hasCurio(player, PaladinsShield.class))
-                .min((playerA, playerB) -> (int) (playerA.distanceTo(serverPlayer) - playerB.distanceTo(serverPlayer))).ifPresent(player -> {
-                    float damage = amount * 0.25F;
-                    player.hurt(living.damageSources().playerAttack(serverPlayer), damage);
-                    atomic.set(amount - damage);
-                });
+                    .filter(player -> !shouldSkip(player, team, serverPlayer) && player.getHealth() / player.getMaxHealth() > 0.25F && CuriosUtils.hasCurio(player, PaladinsShield.class))
+                    .min((playerA, playerB) -> (int) (playerA.distanceTo(serverPlayer) - playerB.distanceTo(serverPlayer))).ifPresent(player -> {
+                        float damage = amount * 0.25F;
+                        player.hurt(living.damageSources().playerAttack(serverPlayer), damage);
+                        atomic.set(amount - damage);
+                    });
             return atomic.floatValue();
         }
         return amount;

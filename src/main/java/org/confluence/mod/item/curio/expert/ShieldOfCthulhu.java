@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.expert;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +26,7 @@ import java.util.UUID;
 public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, ICriticalHit {
     public static final UUID ARMOR_UUID = UUID.fromString("C99AA305-E0CF-9E8F-06AB-8F61C28EAF51");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", 2, AttributeModifier.Operation.ADDITION)
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", 2, AttributeModifier.Operation.ADDITION)
     );
 
     public ShieldOfCthulhu() {
@@ -68,9 +69,18 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
     private static void sendMsg(LivingEntity living, boolean has) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new ShieldOfCthulhuPacketS2C(has)
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new ShieldOfCthulhuPacketS2C(has)
             );
         }
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.shield_of_cthulhu.info"),
+                Component.translatable("item.confluence.shield_of_cthulhu.info2"),
+                Component.translatable("item.confluence.shield_of_cthulhu.info3")
+        };
     }
 }

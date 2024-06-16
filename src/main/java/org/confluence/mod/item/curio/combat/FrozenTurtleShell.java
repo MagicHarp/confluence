@@ -14,8 +14,8 @@ public class FrozenTurtleShell extends BaseCurioItem {
 
     public static float apply(LivingEntity living, float amount) {
         if (living.getHealth() / living.getMaxHealth() > 0.5F ||
-            CuriosUtils.noSameCurio(living, CurioItems.FROZEN_TURTLE_SHELL.get()) ||
-            CuriosUtils.noSameCurio(living, CurioItems.FROZEN_SHIELD.get())
+                CuriosUtils.noSameCurio(living, CurioItems.FROZEN_TURTLE_SHELL.get()) ||
+                CuriosUtils.noSameCurio(living, CurioItems.FROZEN_SHIELD.get())
         ) return amount;
         return amount * 0.75F;
     }

@@ -43,10 +43,18 @@ public class GravityGlobe extends BaseCurioItem implements ModRarity.Expert {
     private static void sendMsg(LivingEntity living, boolean has) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new GravityGlobePacketS2C(has)
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new GravityGlobePacketS2C(has)
             );
         }
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.gravity_globe.info"),
+                Component.translatable("item.confluence.gravity_globe.info2")
+        };
     }
 
 }

@@ -21,8 +21,8 @@ public class AnkhShield extends AnkhCharm implements IFireImmune {
     public static final UUID RESISTANCE_UUID = UUID.fromString("0CC93916-D898-70F9-DFC5-32BA1F26143E");
     public static final UUID ARMOR_UUID = UUID.fromString("60956345-C87A-59D4-DE11-E592491E5FB0");
     static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Ankh Shield", 1.0, AttributeModifier.Operation.ADDITION),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Ankh Shield", 4.0, AttributeModifier.Operation.ADDITION)
+            Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Ankh Shield", 1.0, AttributeModifier.Operation.ADDITION),
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Ankh Shield", 4.0, AttributeModifier.Operation.ADDITION)
     );
 
     public AnkhShield() {

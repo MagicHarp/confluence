@@ -34,25 +34,36 @@ public interface EffectInvul {
         return false;
     }
 
-    interface Poison {}
+    interface Poison {
+    }
 
-    interface Blindness {}
+    interface Blindness {
+    }
 
-    interface Slowness {}
+    interface Slowness {
+    }
 
-    interface Weakness {}
+    interface Weakness {
+    }
 
-    interface Bleeding {}
+    interface Bleeding {
+    }
 
-    interface BrokenArmor {}
+    interface BrokenArmor {
+    }
 
-    interface Confused {}
+    interface Confused {
+    }
 
-    interface Cursed {}
+    interface Cursed {
+    }
 
-    interface Silenced {}
+    interface Silenced {
+    }
 
-    interface Stoned {}
+    interface Stoned {
+    }
 
-    interface FrostBurn {}
+    interface FrostBurn {
+    }
 }

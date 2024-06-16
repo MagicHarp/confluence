@@ -49,8 +49,8 @@ public class BaseCurioItem extends Item implements ICurioItem {
         living.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage -> manaStorage.flushAbility(living));
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new FlushPlayerAbilityPacketS2C(true)
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new FlushPlayerAbilityPacketS2C(true)
             );
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);

@@ -23,9 +23,9 @@ public class MoonStone extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("35D05688-D0BE-3387-DAD8-82C79B46AB46");
 
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION)
+            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION)
     );
 
     public MoonStone() {

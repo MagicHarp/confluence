@@ -11,14 +11,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public interface IFireImmune {
     static boolean isInvul(LivingEntity living, DamageSource damageSource) {
         if (damageSource.is(DamageTypes.IN_FIRE) ||
-            damageSource.is(DamageTypes.ON_FIRE) ||
-            damageSource.is(DamageTypes.HOT_FLOOR) ||
-            damageSource.is(DamageTypes.UNATTRIBUTED_FIREBALL) ||
-            damageSource.is(DamageTypes.FIREBALL)
+                damageSource.is(DamageTypes.ON_FIRE) ||
+                damageSource.is(DamageTypes.HOT_FLOOR) ||
+                damageSource.is(DamageTypes.UNATTRIBUTED_FIREBALL) ||
+                damageSource.is(DamageTypes.FIREBALL)
         ) {
             AtomicBoolean atomic = new AtomicBoolean();
             living.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> atomic.set(playerAbility.isFireImmune()));
+                    .ifPresent(playerAbility -> atomic.set(playerAbility.isFireImmune()));
             return atomic.get();
         }
         return false;

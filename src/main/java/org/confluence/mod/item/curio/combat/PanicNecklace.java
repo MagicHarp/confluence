@@ -21,7 +21,7 @@ import java.util.UUID;
 public class PanicNecklace extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("E939EBB6-41D9-4B5D-9778-A019B820D7A8");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public PanicNecklace(Rarity rarity) {
@@ -51,7 +51,7 @@ public class PanicNecklace extends BaseCurioItem {
 
     public static void apply(LivingEntity living) {
         CuriosUtils.findCurio(living, CurioItems.PANIC_NECKLACE.get())
-            .ifPresent(itemStack -> itemStack.getOrCreateTag().putLong("lastHurt", living.level().getGameTime()));
+                .ifPresent(itemStack -> itemStack.getOrCreateTag().putLong("lastHurt", living.level().getGameTime()));
     }
 
     @Override

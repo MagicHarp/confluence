@@ -24,10 +24,10 @@ public class BerserkersGlove extends BaseCurioItem implements IAggroAttach, IAut
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("DF71E32B-22B5-8F93-4550-12A6B8E98B4B");
     public static final UUID DISTANCE_UUID = UUID.fromString("65B1BF75-500B-76D2-1FE6-F4510BFDEF63");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Berserkers Glove", 8, AttributeModifier.Operation.ADDITION),
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Berserkers Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Berserkers Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Berserkers Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Berserkers Glove", 8, AttributeModifier.Operation.ADDITION),
+            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Berserkers Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+            Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Berserkers Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+            ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Berserkers Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     @Override

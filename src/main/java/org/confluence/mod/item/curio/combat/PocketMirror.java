@@ -8,6 +8,7 @@ public class PocketMirror extends BaseCurioItem implements EffectInvul.Stoned {
     public PocketMirror() {
         super(ModRarity.ORANGE);
     }
+
     @Override
     public Component[] getInformation() {
         return new Component[]{

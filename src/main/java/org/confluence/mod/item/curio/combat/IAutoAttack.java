@@ -23,8 +23,8 @@ import org.confluence.mod.util.CuriosUtils;
 public interface IAutoAttack {
     static void sendMsg(ServerPlayer serverPlayer) {
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new AutoAttackPacketS2C(CuriosUtils.hasCurio(serverPlayer, IAutoAttack.class))
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new AutoAttackPacketS2C(CuriosUtils.hasCurio(serverPlayer, IAutoAttack.class))
         );
     }
 
@@ -43,8 +43,8 @@ public interface IAutoAttack {
             Vec3 viewVector = localPlayer.getViewVector(1.0F);
             Vec3 to = from.add(viewVector.x * reach, viewVector.y * reach, viewVector.z * reach);
             EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(
-                localPlayer, from, to, new AABB(from, to),
-                entity -> !entity.isSpectator() && entity.isPickable(), reach);
+                    localPlayer, from, to, new AABB(from, to),
+                    entity -> !entity.isSpectator() && entity.isPickable(), reach);
             if (entityhitresult != null && minecraft.gameMode != null) {
                 minecraft.gameMode.attack(localPlayer, entityhitresult.getEntity());
             }

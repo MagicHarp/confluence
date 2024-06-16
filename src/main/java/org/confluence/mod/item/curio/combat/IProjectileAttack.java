@@ -22,8 +22,8 @@ public interface IProjectileAttack {
 
     default Component getComponent() {
         return Component.translatable(
-            "curios.tooltip.projectile_attack",
-            ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(getProjectileBonus() * 100.0)
+                "curios.tooltip.projectile_attack",
+                ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(getProjectileBonus() * 100.0)
         );
     }
 }
