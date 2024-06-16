@@ -12,4 +12,8 @@ public interface IEntity {
     void c$setShouldRot(boolean bool);
 
     boolean c$isShouldRot();
+
+    void c$setCoolDown(int ticks);
+
+    void c$setOriginalNoGravity(boolean bool);
 }

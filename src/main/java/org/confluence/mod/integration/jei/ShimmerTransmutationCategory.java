@@ -19,12 +19,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.fluid.ShimmerTransmutationEvent;
+import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
-public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTransmutationEvent.Transmutation> {
-    public static final RecipeType<ShimmerTransmutationEvent.Transmutation> TYPE = RecipeType.create(Confluence.MODID, "shimmer_transmutation", ShimmerTransmutationEvent.Transmutation.class);
+public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerItemTransmutationEvent.ItemTransmutation> {
+    public static final RecipeType<ShimmerItemTransmutationEvent.ItemTransmutation> TYPE = RecipeType.create(Confluence.MODID, "shimmer_transmutation", ShimmerItemTransmutationEvent.ItemTransmutation.class);
     private static final Component TITLE = Component.translatable("title.confluence.shimmer_transmutation");
     private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow.png");
     private static final IDrawable BACKGROUND = new IDrawable() {
@@ -48,7 +48,7 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     }
 
     @Override
-    public @NotNull RecipeType<ShimmerTransmutationEvent.Transmutation> getRecipeType() {
+    public @NotNull RecipeType<ShimmerItemTransmutationEvent.ItemTransmutation> getRecipeType() {
         return TYPE;
     }
 
@@ -68,7 +68,7 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     }
 
     @Override
-    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, ShimmerTransmutationEvent.@NotNull Transmutation recipe, @NotNull IFocusGroup focuses) {
+    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, ShimmerItemTransmutationEvent.@NotNull ItemTransmutation recipe, @NotNull IFocusGroup focuses) {
         // input
         ItemStack[] items = recipe.source().getItems();
         IRecipeSlotBuilder inputSlot = builder.addSlot(RecipeIngredientRole.INPUT, 56, 16);
@@ -85,7 +85,7 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerTran
     }
 
     @Override
-    public void draw(ShimmerTransmutationEvent.@NotNull Transmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(ShimmerItemTransmutationEvent.@NotNull ItemTransmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (ClientPacketHandler.getGamePhase().ordinal() < recipe.gamePhase().ordinal()) {
             guiGraphics.blit(ARROW, 54, 46, 22, 0, 21, 28, 42, 42);
             if (mouseX >= 54 && mouseX <= 75 && mouseY >= 46 && mouseY <= 74) {
