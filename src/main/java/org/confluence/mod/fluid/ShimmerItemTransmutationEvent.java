@@ -121,6 +121,12 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
         public @Nullable List<ItemStack> getTargets() {
             if (targets == null) {
                 ItemStack sourceItem = source.getItem();
+                for (Ingredient ingredient : BLACK_LIST) {
+                    if (ingredient.test(sourceItem)) {
+                        return null;
+                    }
+                }
+
                 ConfluenceData data = ConfluenceData.get((ServerLevel) source.level());
                 int ordinal = data.getGamePhase().ordinal();
                 for (ItemTransmutation transmutation : ITEM_TRANSMUTATION) {
