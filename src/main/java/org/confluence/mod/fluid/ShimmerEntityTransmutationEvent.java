@@ -1,10 +1,12 @@
 package org.confluence.mod.fluid;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
+import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.command.GamePhase;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +75,9 @@ public abstract class ShimmerEntityTransmutationEvent extends Event {
 
         public @Nullable Entity getTarget() {
             if (target == null) {
+                int ordinal = ConfluenceData.get((ServerLevel) sourceEntity.level()).getGamePhase().ordinal();
                 for (EntityTransmutation transmutation : ENTITY_TRANSMUTATION) {
+                    if (ordinal < transmutation.gamePhase.ordinal()) continue;
                     if (transmutation.source.test(sourceEntity)) {
                         this.target = transmutation.target.create(sourceEntity.level());
                         if (target == null) continue;

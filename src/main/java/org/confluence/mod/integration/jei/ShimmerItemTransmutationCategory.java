@@ -23,27 +23,12 @@ import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
-public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerItemTransmutationEvent.ItemTransmutation> {
-    public static final RecipeType<ShimmerItemTransmutationEvent.ItemTransmutation> TYPE = RecipeType.create(Confluence.MODID, "shimmer_transmutation", ShimmerItemTransmutationEvent.ItemTransmutation.class);
-    private static final Component TITLE = Component.translatable("title.confluence.shimmer_transmutation");
-    private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow.png");
-    private static final IDrawable BACKGROUND = new IDrawable() {
-        @Override
-        public int getWidth() {
-            return 128;
-        }
-
-        @Override
-        public int getHeight() {
-            return 128;
-        }
-
-        @Override
-        public void draw(@NotNull GuiGraphics guiGraphics, int xOffset, int yOffset) {}
-    };
+public class ShimmerItemTransmutationCategory implements IRecipeCategory<ShimmerItemTransmutationEvent.ItemTransmutation> {
+    public static final RecipeType<ShimmerItemTransmutationEvent.ItemTransmutation> TYPE = RecipeType.create(Confluence.MODID, "item_transmutation", ShimmerItemTransmutationEvent.ItemTransmutation.class);
+    private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow_down.png");
     private final IDrawable icon;
 
-    public ShimmerTransmutationCategory(IJeiHelpers jeiHelpers) {
+    public ShimmerItemTransmutationCategory(IJeiHelpers jeiHelpers) {
         this.icon = jeiHelpers.getGuiHelper().createDrawableItemStack(new ItemStack(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()));
     }
 
@@ -54,12 +39,12 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerItem
 
     @Override
     public @NotNull Component getTitle() {
-        return TITLE;
+        return ModJeiPlugin.SHIMMER_TRANSMUTATION_TITLE;
     }
 
     @Override
     public @NotNull IDrawable getBackground() {
-        return BACKGROUND;
+        return ModJeiPlugin.BACKGROUND;
     }
 
     @Override
@@ -87,7 +72,7 @@ public class ShimmerTransmutationCategory implements IRecipeCategory<ShimmerItem
     @Override
     public void draw(ShimmerItemTransmutationEvent.@NotNull ItemTransmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (ClientPacketHandler.getGamePhase().ordinal() < recipe.gamePhase().ordinal()) {
-            guiGraphics.blit(ARROW, 54, 46, 22, 0, 21, 28, 42, 42);
+            guiGraphics.blit(ARROW, 54, 46, 21, 0, 21, 28, 42, 42);
             if (mouseX >= 54 && mouseX <= 75 && mouseY >= 46 && mouseY <= 74) {
                 MutableComponent text = Component.translatable("condition.confluence.shimmer_transmutation", recipe.gamePhase()).withStyle(style -> style.withColor(ChatFormatting.RED));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, text, (int) mouseX, (int) mouseY);

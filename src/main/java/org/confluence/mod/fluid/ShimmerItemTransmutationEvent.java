@@ -120,7 +120,10 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
         public @Nullable List<ItemStack> getTargets() {
             if (targets == null) {
                 ItemStack sourceItem = source.getItem();
+                ConfluenceData data = ConfluenceData.get((ServerLevel) source.level());
+                int ordinal = data.getGamePhase().ordinal();
                 for (ItemTransmutation transmutation : ITEM_TRANSMUTATION) {
+                    if (ordinal < transmutation.gamePhase.ordinal()) continue;
                     if (transmutation.source.test(sourceItem)) {
                         int times = sourceItem.getCount() / transmutation.shrink;
                         List<ItemStack> results = new ArrayList<>();
@@ -142,7 +145,7 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
                 }
                 if (sourceItem.getDamageValue() != 0) return null;
                 RegistryAccess registryAccess = source.level().registryAccess();
-                boolean isHardCore = ConfluenceData.get((ServerLevel) source.level()).isHardcore();
+                boolean isHardCore = data.isHardcore();
                 for (Recipe<?> recipe : ((ServerLevel) source.level()).getServer().getRecipeManager().getRecipes()) {
                     if (recipe.isSpecial() || recipe.isIncomplete() || recipe instanceof AbstractCookingRecipe) continue;
                     ItemStack resultItem = recipe.getResultItem(registryAccess);
@@ -222,5 +225,5 @@ public abstract class ShimmerItemTransmutationEvent extends Event {
         ITEM_TRANSMUTATION.add(new ItemTransmutation(Ingredient.of(source), Collections.singletonList(new ItemStack(target)), shrink, gamePhase));
     }
 
-    public record ItemTransmutation(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase){}
+    public record ItemTransmutation(Ingredient source, List<ItemStack> target, int shrink, GamePhase gamePhase) {}
 }
