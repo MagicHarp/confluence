@@ -166,6 +166,7 @@ public abstract class EntityMixin implements IEntity {
                     if (target != null) {
                         discard();
                         c$setup(target, post.getCoolDown());
+                        self.level().addFreshEntity(target);
                         return;
                     }
                 }
