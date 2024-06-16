@@ -29,6 +29,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.fishing.Baits;
+import org.confluence.mod.item.sword.Swords;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
@@ -159,7 +160,6 @@ public final class ModFluids {
         addItem(ItemTags.WOOL, Items.WHITE_WOOL, 1);
         addItem(ItemTags.WOOL_CARPETS, Items.WHITE_CARPET, 1);
         // 饰品转化
-        addItem(SHINY_RED_BALLOON.get(), BALLOON_PUFFERFISH.get());
         addItem(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
         addItem(MAGMA_STONE.get(), LAVA_CHARM.get());
         addItem(LAVA_CHARM.get(), MAGMA_STONE.get());
@@ -207,14 +207,18 @@ public final class ModFluids {
         addItem(Materials.RAW_ORICHALCUM.get(), Materials.RAW_MITHRIL.get());
         addItem(Materials.RAW_PALLADIUM.get(), Materials.RAW_COBALT.get());
         addItem(Materials.RAW_COBALT.get(), Materials.RAW_PLATINUM.get());
-        addItem(Materials.RAW_PLATINUM.get(), Materials.RAW_TUNGSTEN.get());
+        addItem(Materials.RAW_PLATINUM.get(), Items.RAW_GOLD);
+        addItem(Items.RAW_GOLD,Materials.RAW_TUNGSTEN.get());
         addItem(Materials.RAW_TUNGSTEN.get(), Materials.RAW_SILVER.get());
         addItem(Materials.RAW_SILVER.get(), Materials.RAW_LEAD.get());
-        addItem(Materials.RAW_LEAD.get(), Materials.RAW_TIN.get());
+        addItem(Materials.RAW_LEAD.get(),Items.RAW_IRON);
+        addItem(Items.RAW_IRON, Materials.RAW_TIN.get());
+        addItem(Materials.RAW_TIN.get(), Items.RAW_COPPER);
 
         addItem(Items.WATER_BUCKET, Items.LAVA_BUCKET);
         addItem(Items.LAVA_BUCKET, ModItems.HONEY_BUCKET.get());
         addItem(ModItems.HONEY_BUCKET.get(), Items.WATER_BUCKET);
+        addItem(ModItems.WHOOPIE_CUSHION.get(), Swords.ZOMBIE_ARM.get());
 
         addItem(Materials.LIFE_CRYSTAL.get(), ModItems.VITAL_CRYSTAL.get());
         addItem(Materials.MANA_STAR.get(), ModItems.ARCANE_CRYSTAL.get());
