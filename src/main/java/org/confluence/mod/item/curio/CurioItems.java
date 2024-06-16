@@ -126,12 +126,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     PHILOSOPHERS_STONE("philosophers_stone", PhilosophersStone::new), // 点金石
 
 
-    COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
-    TIN_WATCH("tin_watch", HourWatch::new), // 锡表
-    SILVER_WATCH("silver_watch", HalfHourWatch::new), // 银表
-    TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
-    GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
-    PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
+    COPPER_WATCH("copper_watch", CopperWatch::new), // 铜表
+    TIN_WATCH("tin_watch", TinWatch::new), // 锡表
+    SILVER_WATCH("silver_watch", SilverWatch::new), // 银表
+    TUNGSTEN_WATCH("tungsten_watch", TungstenWatch::new), // 钨表
+    GOLD_WATCH("gold_watch", GoldWatch::new), // 金表
+    PLATINUM_WATCH("platinum_watch", PlatinumWatch::new), // 铂金表
     DEPTH_METER("depth_meter", DepthMeter::new), // 深度计
     COMPASS("compass", Compass::new), // 罗盘
     RADAR("radar", Radar::new), // 雷达
@@ -167,9 +167,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 分趾厚底袜 */
     /* 忍者大师装备 */
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
-    HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
-    FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
-    SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
+    HERMES_BOOTS("hermes_boots", HermesBoots::new), // 赫尔墨斯靴
+    FLURRY_BOOTS("flurry_boots", FlurryBoots::new), // 疾风雪靴
+    SAILFISH_BOOTS("sailfish_boots", SailfishBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
@@ -185,8 +185,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
-    SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
-    BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
+    SHINY_RED_BALLOON("shiny_red_balloon", ShinyRedBalloon::new), // 闪亮红气球
+    BALLOON_PUFFERFISH("balloon_pufferfish", BallonPuffefish::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
     BLIZZARD_IN_A_BALLOON("blizzard_in_a_balloon", BlizzardInABalloon::new), // 暴雪气球
     SANDSTORM_IN_A_BALLOON("sandstorm_in_a_balloon", SandstormInABalloon::new), // 沙暴气球
@@ -214,7 +214,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     /* 青蛙装备 */
     AMBHIPIAN_BOOTS("ambhipian_boots", AmbhipianBoots::new), // 水陆两用靴
 
-    FLEDGLING_WINGS("fledgling_wings", () -> new BaseWings(ModRarity.WHITE, 25, 1.5)), // 雏翼
+    FLEDGLING_WINGS("fledgling_wings", FledglingWings::new), // 雏翼
     /* 天使之翼 */
     /* 恶魔之翼 */
     /* 仙灵之翼 */

@@ -50,7 +50,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             Foods.STAR_FRUIT.get(), Foods.POMEGRANATE.get(), Foods.RAMBUTAN.get(),
             Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
         );
-        tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
+        tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLD_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }

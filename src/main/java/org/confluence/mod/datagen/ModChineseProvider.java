@@ -1086,7 +1086,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.TIN_WATCH.get(), "锡表");
         add(CurioItems.SILVER_WATCH.get(), "银表");
         add(CurioItems.TUNGSTEN_WATCH.get(), "钨表");
-        add(CurioItems.GOLDEN_WATCH.get(), "金表");
+        add(CurioItems.GOLD_WATCH.get(), "金表");
         add(CurioItems.PLATINUM_WATCH.get(), "铂金表");
         add(CurioItems.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(CurioItems.RADAR.get(), "雷达");
