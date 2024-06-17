@@ -71,9 +71,13 @@ public class BaseSpeedBoots extends BaseCurioItem {
         }
     }
 
+    protected static AttributeModifier getSpeedModifier(ItemStack stack) {
+        return new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    }
+
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return ImmutableMultimap.of(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        return ImmutableMultimap.of(Attributes.MOVEMENT_SPEED, getSpeedModifier(stack));
     }
 
     @Override

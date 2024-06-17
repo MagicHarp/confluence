@@ -13,7 +13,7 @@ public class CharmOfMyths extends PhilosophersStone {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        ModEffects.heal(slotContext.entity(), 1);
+        ModEffects.healPerSecond(slotContext.entity(), 1);
     }
 
     @Override

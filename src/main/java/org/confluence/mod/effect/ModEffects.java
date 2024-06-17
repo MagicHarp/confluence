@@ -55,7 +55,7 @@ public final class ModEffects {
     public static final RegistryObject<ShineEffect> SHINE = EFFECTS.register("shine", ShineEffect::new);
     public static final RegistryObject<ShimmerEffect> SHIMMER = EFFECTS.register("shimmer", ShimmerEffect::new);
 
-    public static void heal(LivingEntity living, float amount) {
+    public static void healPerSecond(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {
             if (living.hasEffect(HONEY.get())) amount += 1;
             living.heal(amount);

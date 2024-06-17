@@ -23,7 +23,7 @@ public class ThinIceBlock extends IceBlock {
 
     @Override
     public void updateEntityAfterFallOn(@NotNull BlockGetter blockGetter, @NotNull Entity entity) {
-        if (blockGetter.getBlockState(entity.getOnPosLegacy()).is(ModBlocks.THIN_ICE_BLOCK.get())) {
+        if (blockGetter.getBlockState(entity.getOnPos()).is(ModBlocks.THIN_ICE_BLOCK.get())) {
             super.updateEntityAfterFallOn(blockGetter, entity);
         }
     }
@@ -34,6 +34,5 @@ public class ThinIceBlock extends IceBlock {
         player.causeFoodExhaustion(0.005F);
     }
 
-    public interface IceSafe {
-    }
+    public interface IceSafe {}
 }

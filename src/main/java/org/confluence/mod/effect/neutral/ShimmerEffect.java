@@ -26,7 +26,7 @@ public class ShimmerEffect extends MobEffect {
         if (level.getFluidState(living.getOnPos()).getType().getFluidType() != ModFluids.SHIMMER.fluidType().get()) {
             living.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 2, 1, false, false, false));
         }
-        if (level.getBlockState(living.getOnPosLegacy()).is(Blocks.BEDROCK) ||
+        if (level.getBlockState(living.getOnPos()).is(Blocks.BEDROCK) ||
             level.getBlockStates(living.getBoundingBox().inflate(-0.1)).allMatch(blockState ->
                 (blockState.liquid() && !blockState.is(ModBlocks.SHIMMER.get())) || blockState.isAir())
         ) {

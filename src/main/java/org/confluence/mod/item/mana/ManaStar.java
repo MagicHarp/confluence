@@ -20,7 +20,7 @@ public class ManaStar extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        level.playSound(player, player.getOnPos(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1, 1);
+        level.playSound(player, player.getOnPos().above(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1, 1);
 
         ItemStack itemStack = player.getItemInHand(hand);
         if (player instanceof ServerPlayer serverPlayer) {

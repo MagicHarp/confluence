@@ -49,7 +49,7 @@ public class BoulderEntity extends Projectile {
 
     public void remove() {
         if (level() instanceof ServerLevel serverLevel) {
-            BlockPos pos = getOnPos();
+            BlockPos pos = getOnPos().above();
             serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.COBBLESTONE.defaultBlockState())
                 .setPos(pos), getX(), getY() + 0.5, getZ(), 175, 0.0, 0.0, 0.0, 0.15);
             serverLevel.playSound(null, pos, SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 5.0F, 1.0F);
@@ -90,7 +90,7 @@ public class BoulderEntity extends Projectile {
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
-        if (getBlockStateOnLegacy().isAir()) return;
+        if (getBlockStateOn().isAir()) return;
         if (blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
             targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
         }

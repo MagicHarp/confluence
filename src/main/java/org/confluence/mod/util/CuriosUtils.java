@@ -1,5 +1,6 @@
 package org.confluence.mod.util;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -11,11 +12,11 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public final class CuriosUtils {
@@ -26,9 +27,15 @@ public final class CuriosUtils {
     public static boolean noSameCurio(LivingEntity living, Predicate<ItemStack> predicate) {
         AtomicBoolean isEmpty = new AtomicBoolean(true);
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                if (predicate.test(itemHandlerModifiable.getStackInSlot(i))) isEmpty.set(false);
+            for (ICurioStacksHandler curioStacksHandler : handler.getCurios().values()) {
+                IDynamicStackHandler stackHandler = curioStacksHandler.getStacks();
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack stack = stackHandler.getStackInSlot(i);
+                    if (!stack.isEmpty() && predicate.test(stackHandler.getStackInSlot(i))) {
+                        isEmpty.set(false);
+                        return;
+                    }
+                }
             }
         });
         return isEmpty.get();
@@ -50,12 +57,29 @@ public final class CuriosUtils {
         return !noSameCurio(living, curio);
     }
 
+    public static <C> double calculateValue(LivingEntity living, Class<C> clazz, Function<C, Number> function, double baseValue) {
+        AtomicDouble atomic = new AtomicDouble(baseValue);
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            for (ICurioStacksHandler curioStacksHandler : handler.getCurios().values()) {
+                IDynamicStackHandler stackHandler = curioStacksHandler.getStacks();
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack stack = stackHandler.getStackInSlot(i);
+                    Item item = stack.getItem();
+                    if (!stack.isEmpty() && clazz.isInstance(item)) {
+                        atomic.addAndGet(function.apply(clazz.cast(item)).doubleValue());
+                    }
+                }
+            }
+        });
+        return atomic.get();
+    }
+
     public static <C> Optional<C> findCurio(LivingEntity living, Class<C> clazz) {
         AtomicReference<Optional<C>> atomic = new AtomicReference<>(Optional.empty());
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            List<SlotResult> results = handler.findCurios(itemStack -> clazz.isInstance(itemStack.getItem()));
+            Optional<SlotResult> results = handler.findFirstCurio(itemStack -> clazz.isInstance(itemStack.getItem()));
             if (results.isEmpty()) return;
-            atomic.set(Optional.of(clazz.cast(results.get(0).stack().getItem())));
+            atomic.set(Optional.of(clazz.cast(results.get().stack().getItem())));
         });
         return atomic.get();
     }
@@ -63,9 +87,9 @@ public final class CuriosUtils {
     public static <C extends Item & ICurioItem> Optional<ItemStack> findCurio(LivingEntity living, C curio) {
         AtomicReference<Optional<ItemStack>> atomic = new AtomicReference<>(Optional.empty());
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
-            List<SlotResult> results = handler.findCurios(itemStack -> itemStack.getItem() == curio);
+            Optional<SlotResult> results = handler.findFirstCurio(itemStack -> itemStack.getItem() == curio);
             if (results.isEmpty()) return;
-            atomic.set(Optional.of(results.get(0).stack()));
+            atomic.set(Optional.of(results.get().stack()));
         });
         return atomic.get();
     }

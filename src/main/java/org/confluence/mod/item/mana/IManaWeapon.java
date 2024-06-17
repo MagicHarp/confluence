@@ -41,6 +41,8 @@ public interface IManaWeapon {
     }
 
     static boolean isMagic(Player player, DamageSource damageSource) {
-        return damageSource.is(DamageTypes.MAGIC) || player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IManaWeapon;
+        return damageSource.is(DamageTypes.MAGIC) ||
+            damageSource.is(DamageTypes.INDIRECT_MAGIC) ||
+            player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof IManaWeapon;
     }
 }
