@@ -17,6 +17,8 @@ import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
+import org.confluence.mod.block.natural.ambience.*;
+import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.natural.spreadable.SpreadingBlock;
 import org.confluence.mod.block.natural.spreadable.SpreadingGrassBlock;
@@ -94,17 +96,22 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     public static final RegistryObject<BaseChainBlock> BONE_CHAIN = registerWithItem("bone_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     // plant
-    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_MUSHROOM = registerWithItem("another_crimson_mushroom", BasePlantBlock::new);//毒蘑菇
-    public static final RegistryObject<FlowerBlock> EBONY_MUSHROOM = registerWithItem("ebony_mushroom", BasePlantBlock::new);//魔菇
-    public static final RegistryObject<FlowerBlock> GLOWING_MUSHROOM = registerWithItem("glowing_mushroom", BasePlantBlock::new);//发光蘑菇
-    public static final RegistryObject<FlowerBlock> LIFE_MUSHROOM = registerWithItem("life_mushroom", BasePlantBlock::new);//生命蘑菇
-    public static final RegistryObject<FlowerBlock> WATERLEAF = registerWithItem("waterleaf", BasePlantBlock::new);//幌菊
-    public static final RegistryObject<FlowerBlock> FLAMEFLOWERS = registerWithItem("flameflowers", BasePlantBlock::new);//火焰花
-    public static final RegistryObject<FlowerBlock> MOONSHINE_GRASS = registerWithItem("moonshine_grass", BasePlantBlock::new);//月光草
-    public static final RegistryObject<FlowerBlock> SHINE_ROOT = registerWithItem("shine_root", BasePlantBlock::new);//闪耀根
-    public static final RegistryObject<FlowerBlock> SHIVERINGTHORNS = registerWithItem("shiveringthorns", BasePlantBlock::new);//寒颤棘
-    public static final RegistryObject<FlowerBlock> SUNFLOWERS = registerWithItem("sunflowers", BasePlantBlock::new);//太阳花
-    public static final RegistryObject<FlowerBlock> DEATHWEED = registerWithItem("deathweed", BasePlantBlock::new);//死亡草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", CrimsonMushroom::new);//毒蘑菇
+    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", EbonyMushroom::new);//魔菇
+    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", GlowingMushroom::new);//发光蘑菇
+    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", LifeMushroom::new);//生命蘑菇
+    public static final RegistryObject<Block> JUNGLE_SPORE = registerWithoutItem("jungle_spore", JungleSpore::new); // 丛林孢子
+    // 草药
+    public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
+    public static final RegistryObject<BaseHerbBlock> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
+    public static final RegistryObject<BaseHerbBlock> MOONSHINE_GRASS = registerWithoutItem("moonshine_grass", MoonshineGrass::new);//月光草
+    public static final RegistryObject<BaseHerbBlock> SHINE_ROOT = registerWithoutItem("shine_root", ShineRoot::new);//闪耀根
+    public static final RegistryObject<BaseHerbBlock> SHIVERINGTHORNS = registerWithoutItem("shiveringthorns", ShiveringThorn::new);//寒颤棘
+    public static final RegistryObject<BaseHerbBlock> SUNFLOWERS = registerWithoutItem("sunflowers", SunFlower::new);//太阳花
+    public static final RegistryObject<BaseHerbBlock> DEATHWEED = registerWithoutItem("deathweed", DeathWeed::new);//死亡草
+    public static final RegistryObject<BlockEntityType<BaseHerbBlock.Entity>> HERBS_ENTITY = BLOCK_ENTITIES.register("herbs_entity", () -> BlockEntityType.Builder.of(BaseHerbBlock.Entity::new,
+        WATERLEAF.get(),FLAMEFLOWERS.get(),MOONSHINE_GRASS.get(),SHINE_ROOT.get(),SHIVERINGTHORNS.get(),SUNFLOWERS.get(),DEATHWEED.get()).build(null));
+
     // grass
     public static final RegistryObject<FlowerBlock> CORRUPT_GRASS = registerWithItem("corrupt_grass", BasePlantBlock::new);//腐化草
     public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", BasePlantBlock::new);//猩红饿鬼草

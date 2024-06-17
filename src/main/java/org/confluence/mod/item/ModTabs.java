@@ -92,17 +92,26 @@ public final class ModTabs {
                 output.accept(ASH_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
-
-                output.accept(WATERLEAF.get());
-                output.accept(MOONSHINE_GRASS.get());
-                output.accept(SHINE_ROOT.get());
-                output.accept(SHIVERINGTHORNS.get());
-                output.accept(SUNFLOWERS.get());
-                output.accept(DEATHWEED.get());
-                output.accept(ANOTHER_CRIMSON_MUSHROOM.get());
-                output.accept(EBONY_MUSHROOM.get());
-                output.accept(GLOWING_MUSHROOM.get());
-                output.accept(LIFE_MUSHROOM.get());
+                // 草药 种子
+                output.accept(ModItems.WATERLEAF.get());
+                output.accept(ModItems.MOONSHINE_GRASS.get());
+                output.accept(ModItems.SHINE_ROOT.get());
+                output.accept(ModItems.SHIVERINGTHORNS.get());
+                output.accept(ModItems.SUNFLOWERS.get());
+                output.accept(ModItems.DEATHWEED.get());
+                output.accept(ModItems.FLAMEFLOWERS.get());
+                output.accept(ModItems.WATERLEAF_SEED.get());
+                output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
+                output.accept(ModItems.SHINE_ROOT_SEED.get());
+                output.accept(ModItems.SHIVERINGTHORNS_SEED.get());
+                output.accept(ModItems.SUNFLOWERS_SEED.get());
+                output.accept(ModItems.DEATHWEED_SEED.get());
+                output.accept(ModItems.FLAMEFLOWERS_SEED.get());
+                // 蘑菇 草
+                output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
+                output.accept(ModItems.EBONY_MUSHROOM.get());
+                output.accept(ModItems.GLOWING_MUSHROOM.get());
+                output.accept(ModItems.LIFE_MUSHROOM.get());
                 output.accept(CORRUPT_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_EYEBALL_GRASS.get());

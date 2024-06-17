@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.*;
@@ -48,7 +49,9 @@ public class ModItemModelProvider extends ItemModelProvider {
             String path = item.getId().getPath().toLowerCase();
             boolean isBlockItem = false;
             try {
-                if (value instanceof BlockItem blockItem) {
+                if(value instanceof ItemNameBlockItem){
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                }else if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;

@@ -1,23 +1,29 @@
 package org.confluence.mod.datagen.subprovider;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.block.natural.BaseHerbBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 
@@ -149,6 +155,14 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             dropSelf(decorativeBlocks.get());
         }
         for (Boxes boxes : Boxes.values()) dropSelf(boxes.get());
+
+        addHerbDrop(WATERLEAF.get(), ModItems.WATERLEAF.get(), ModItems.WATERLEAF_SEED.get());
+        addHerbDrop(FLAMEFLOWERS.get(), ModItems.FLAMEFLOWERS.get(), ModItems.FLAMEFLOWERS_SEED.get());
+        addHerbDrop(MOONSHINE_GRASS.get(), ModItems.MOONSHINE_GRASS.get(), ModItems.MOONSHINE_GRASS_SEED.get());
+        addHerbDrop(SHINE_ROOT.get(), ModItems.SHINE_ROOT.get(), ModItems.SHINE_ROOT_SEED.get());
+        addHerbDrop(SHIVERINGTHORNS.get(), ModItems.SHIVERINGTHORNS.get(), ModItems.SHIVERINGTHORNS_SEED.get());
+        addHerbDrop(SUNFLOWERS.get(), ModItems.SUNFLOWERS.get(), ModItems.SUNFLOWERS_SEED.get());
+        addHerbDrop(DEATHWEED.get(), ModItems.DEATHWEED.get(), ModItems.DEATHWEED_SEED.get());
     }
 
     @Override
@@ -163,4 +177,30 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));
     }
+
+    private void addHerbDrop(BaseHerbBlock block,Item herb,Item seed) {
+        add(block,LootTable.lootTable()
+            .withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .setBonusRolls(ConstantValue.exactly(0.5f))
+                .add(LootItem.lootTableItem(herb))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(BaseHerbBlock.AGE,2))))
+            .withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(seed)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(BaseHerbBlock.AGE,2))))
+            .withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(herb))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(BaseHerbBlock.AGE,1)))));
+    }
+
+
 }

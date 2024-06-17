@@ -1,6 +1,7 @@
 package org.confluence.mod.item;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.level.material.Fluids;
@@ -9,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.fluid.ModFluids;
@@ -78,6 +80,29 @@ public final class ModItems {
     public static final RegistryObject<PlayerAbilityItem> AMBROSIA = ITEMS.register("ambrosia", () -> new PlayerAbilityItem(PlayerAbility::isAmbrosiaUsed, PlayerAbility::setAmbrosiaUsed));
     public static final RegistryObject<PlayerAbilityItem> GUMMY_WORM = ITEMS.register("gummy_worm", () -> new PlayerAbilityItem(PlayerAbility::isGummyWormUsed, PlayerAbility::setGummyWormUsed));
     public static final RegistryObject<PlayerAbilityItem> GALAXY_PEARL = ITEMS.register("galaxy_pearl", PlayerAbilityItem.GalaxyPearl::new);
+
+    public static final RegistryObject<Item> WATERLEAF_SEED = ITEMS.register("waterleaf_seed", ()->new ItemNameBlockItem(ModBlocks.WATERLEAF.get(),new Item.Properties()));
+    public static final RegistryObject<Item> FLAMEFLOWERS_SEED = ITEMS.register("flameflowers_seed", ()->new ItemNameBlockItem(ModBlocks.FLAMEFLOWERS.get(),new Item.Properties()));
+    public static final RegistryObject<Item> MOONSHINE_GRASS_SEED = ITEMS.register("moonshine_grass_seed", ()->new ItemNameBlockItem(ModBlocks.MOONSHINE_GRASS.get(),new Item.Properties()));
+    public static final RegistryObject<Item> SHINE_ROOT_SEED = ITEMS.register("shine_root_seed", ()->new ItemNameBlockItem(ModBlocks.SHINE_ROOT.get(),new Item.Properties()));
+    public static final RegistryObject<Item> SHIVERINGTHORNS_SEED = ITEMS.register("shiveringthorns_seed", ()->new ItemNameBlockItem(ModBlocks.SHIVERINGTHORNS.get(),new Item.Properties()));
+    public static final RegistryObject<Item> SUNFLOWERS_SEED = ITEMS.register("sunflowers_seed", ()->new ItemNameBlockItem(ModBlocks.SUNFLOWERS.get(),new Item.Properties()));
+    public static final RegistryObject<Item> DEATHWEED_SEED = ITEMS.register("deathweed_seed", ()->new ItemNameBlockItem(ModBlocks.DEATHWEED.get(),new Item.Properties()));
+
+    public static final RegistryObject<Item> WATERLEAF = ITEMS.register("waterleaf", HerbItem::new);
+    public static final RegistryObject<Item> FLAMEFLOWERS = ITEMS.register("flameflowers", HerbItem::new);
+    public static final RegistryObject<Item> MOONSHINE_GRASS = ITEMS.register("moonshine_grass", HerbItem::new);
+    public static final RegistryObject<Item> SHINE_ROOT = ITEMS.register("shine_root", HerbItem::new);
+    public static final RegistryObject<Item> SHIVERINGTHORNS = ITEMS.register("shiveringthorns", HerbItem::new);
+    public static final RegistryObject<Item> SUNFLOWERS = ITEMS.register("sunflowers", HerbItem::new);
+    public static final RegistryObject<Item> DEATHWEED = ITEMS.register("deathweed", HerbItem::new);
+
+    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", ()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", ()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new Item(new Item.Properties()));
+
 
     public static void register(IEventBus bus) {
         ModTiers.register();
