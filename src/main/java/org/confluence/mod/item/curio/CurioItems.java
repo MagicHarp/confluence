@@ -7,6 +7,8 @@ import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
 import org.confluence.mod.item.curio.expert.*;
+import org.confluence.mod.item.curio.fishing.AnglerEarring;
+import org.confluence.mod.item.curio.health.BandOfRegeneration;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.missellaneous.FlowerBoots;
 import org.confluence.mod.item.curio.missellaneous.TreasureMagnet;
@@ -69,12 +71,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     STINGER_NECKLACE("stinger_necklace", StingerNecklace::new), // 毒刺项链
     PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     SWEETHEART_NECKLACE("sweetheart_necklace", SweetheartNecklace::new), // 甜心项链
-    /* 熔火箭袋 */
-    /* 魔法箭袋 */
+    MAGIC_QUIVER("magic_quiver", MagicQuiver::new), // 魔法箭袋
+    MOLTEN_QUIVER("molten_quiver", MoltenQuiver::new), // 熔火箭袋
+    STALKERS_QUIVER("stalkers_quiver", StalkersQuiver::new), // 潜行者箭袋
     /* 侦察镜 */
     /* 步枪瞄准镜 */
     /* 狙击镜 */
-    /* 潜行者箭袋 */
     MAGMA_STONE("magma_stone", MagmaStone::new), // 岩浆石
     OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
     OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾
@@ -105,22 +107,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     ANCIENT_CHISEL("ancient_chisel", AncientChisel::new), // 远古凿子
     /* 创造之手 */
 
-
-    //ARCANE_FLOWER("arcane_flower", ArcaneFlower::new), // 奥术花
-    //BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
-    //BAND_OF_STARPOWER("band_of_starpower", BandOfStarpower::new), // 星力手环
-    //CELESTIAL_CUFFS("celestial_cuffs", CelestialCuffs::new), // 天界手铐
-    //CELESTIAL_MAGNET("celestial_magnet", CelestialMagnet::new), // 天界磁石
-    //CELESTIAL_EMBLEM("celestial_emblem", CelestialEmblem::new), // 天界徽章
-    //CHARM_OF_MYTHS("charm_of_myths", CharmOfMyths::new), // 神话护身符
-    //MAGIC_CUFFS("magic_cuffs", MagicCuffs::new), // 魔法手铐
-    //MAGNET_FLOWER("magnet_flower", MagnetFlower::new), // 磁花
-    /* 魔力斗篷 */
-    //MANA_FLOWER("mana_flower", ManaFlower::new), // 魔力花
-    //MANA_REGENERATION_BAND("mana_regeneration_band", ManaRegenerationBand::new), // 魔力再生手环
-    //NATURES_GIFT("natures_gift", NaturesGift::new), // 大自然的恩赐
-    //PHILOSOPHERS_STONE("philosophers_stone", PhilosophersStone::new), // 点金石
-
+    BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
 
     COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
     TIN_WATCH("tin_watch", HourWatch::new), // 锡表
@@ -150,23 +137,18 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
 
 
     /* 梯凳 */
+    /* 飞毯 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯
     MAGILUMINESCENCE("magiluminescence", Magiluminescence::new), // 魔光护符
-    FLIPPER("flipper", Flipper::new), // 脚蹼
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
     MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
-    /* 潜水装备 */
-    /* 水母潜水装备 */
-    /* 北极潜水装备 */
     /* 攀爬爪 */
     /* 鞋钉 */
     /* 猛虎攀爬装备 */
     /* 分趾厚底袜 */
     /* 忍者大师装备 */
-    /* 飞毯 */
-    /* 浮游圈 */
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
@@ -204,6 +186,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
     AMBER_HORSESHOE_BALLOON("amber_horseshoe_balloon", AmberHorseshoeBalloon::new), // 琥珀马掌气球
     BUNDLE_OF_HORSESHOE_BALLOONS("bundle_of_horseshoe_balloons", BundleOfHorseshoeBalloons::new), // 马掌气球束
+    /* 浮游圈 */
+    FLIPPER("flipper", Flipper::new), // 脚蹼
+    /* 潜水装备 */
+    /* 水母潜水装备 */
+    /* 北极潜水装备 */
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
     FROG_FLIPPER("frog_flipper", FrogFlipper::new), // 青蛙脚蹼
     /* 青蛙蹼 */
@@ -226,6 +213,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     //SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
     /* 炫彩斗篷 */
 
+    ANGLER_EARRING("angler_earring", AnglerEarring::new), // 渔夫耳环
 
     ROYAL_GEL("royal_gel", RoyalGel::new), // 皇家凝胶
     SHIELD_OF_CTHULHU("shield_of_cthulhu", ShieldOfCthulhu::new), // 克苏鲁护盾

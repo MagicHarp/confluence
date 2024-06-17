@@ -46,7 +46,7 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
         LivingEntity living = slotContext.entity();
         ModEffects.healPerSecond(living, 2.0F);
         MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
-        if (effect != null && effect.getDuration() < 5) {
+        if (effect == null || effect.getDuration() < 5) {
             living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
         }
     }

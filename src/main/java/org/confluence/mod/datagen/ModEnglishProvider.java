@@ -145,6 +145,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged");
         add("item.confluence.sweetheart_necklace.tooltip", "When damaged, the bee is released and the user is immersed in honey and increases movement speed");
         add("item.confluence.hive_pack.tooltip", "Increases the strength of friendly bees");
+        add("item.confluence.magic_quiver.tooltip", "Increases arrow damage by 10% and greatly increases arrow speed");
+        add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
+        add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
+        add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 

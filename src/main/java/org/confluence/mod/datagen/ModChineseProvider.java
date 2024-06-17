@@ -137,6 +137,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
         add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
         add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
+        add("item.confluence.magic_quiver.tooltip", "箭的伤害提高10%，箭的速度大大提高");
+        add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
+        add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
+        add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
 
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 
@@ -264,5 +268,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.SWEETHEART_NECKLACE.get(), "甜心项链");
         add(CurioItems.HONEY_BALLOON.get(), "蜂蜜气球");
         add(CurioItems.AMBER_HORSESHOE_BALLOON.get(), "琥珀马掌气球");
+        add(CurioItems.MAGIC_QUIVER.get(), "魔法箭袋");
+        add(CurioItems.MOLTEN_QUIVER.get(), "熔火箭袋");
+        add(CurioItems.STALKERS_QUIVER.get(), "潜行者箭袋");
+        add(CurioItems.BAND_OF_REGENERATION.get(), "再生手环");
+        add(CurioItems.ANGLER_EARRING.get(), "渔夫耳环");
     }
 }

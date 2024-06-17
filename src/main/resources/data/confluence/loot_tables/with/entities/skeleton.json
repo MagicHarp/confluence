@@ -15,6 +15,21 @@
                     "chance": 0.008
                 }
             ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:magic_quiver"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.025
+                }
+            ]
         }
     ]
 }
