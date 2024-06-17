@@ -561,7 +561,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magnet_flower.info2","It will use the first available Mana Potion in the player's inventory when out of mana (from left to right and top to bottom).");
         add("item.confluence.magnet_flower.info3","The Magnet Flower has the exact same functional effects of both its component items.");
         add("item.confluence.mana_cloak.info","The Mana Cloak is a Hardmode accessory that combines the effects of the Mana Flower and Star Cloak. It also adds a new effect to the stars spawned by the Star Cloak.");
-        add("item.confluence.mana_cloak.info2","When the player takes damage, the Mana Cloak will spawn three stars that damage enemies.");
+        add("item.confluence.mana_cloak.info2","It also adds a new effect to the stars spawned by the Star Cloak.");
         add("item.confluence.mana_cloak.info3","When the player takes damage, the Mana Cloak will spawn three stars that damage enemies.");
         add("item.confluence.mana_cloak.info4","The mana star will disappear 5 seconds after it is spawned if not picked up.");
         add("item.confluence.mana_cloak.info5","Note that only one mana-restoring star can spawn per second, no matter how many times the Mana Cloak is triggered.");
@@ -594,7 +594,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.berserkers_glove.info4","+12% increased melee speed");
         add("item.confluence.berserkers_glove.info5","+100% increased melee knockback");
         add("item.confluence.berserkers_glove.info6","+10% increased melee weapon size");
-        add("item.confluence.berserkers_glove.info7","+10% increased melee weapon size");
+        add("item.confluence.berserkers_glove.info7","+400 aggro");
         add("item.confluence.berserkers_glove.info8","Autoswing for melee weapons and whips");
         add("item.confluence.bezoar.info","The Bezoar is an immunity accessory that grants the player immunity to the Poisoned debuff.");
         add("item.confluence.bezoar.info2","It has a 1/100 (1%) / 1/50 (2%) chance to drop from Hornets, Moss Hornets, and Toxic Sludges.");
