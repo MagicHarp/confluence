@@ -17,7 +17,7 @@ public interface IFallResistance {
         if (!damageSource.is(DamageTypes.FALL) || living.hasEffect(ModEffects.STONED.get())) return amount;
         AtomicInteger atomic = new AtomicInteger();
         living.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance()));
+            .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance()));
         int reduce = atomic.get();
         if (reduce < 0) return 0.0F;
         return Math.max(amount - reduce, 0.0F);
@@ -27,7 +27,7 @@ public interface IFallResistance {
         if (!damageSource.is(DamageTypes.FALL) || living.hasEffect(ModEffects.STONED.get())) return false;
         AtomicBoolean atomic = new AtomicBoolean();
         living.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance() < 0));
+            .ifPresent(playerAbility -> atomic.set(playerAbility.getFallResistance() < 0));
         return atomic.get();
     }
 

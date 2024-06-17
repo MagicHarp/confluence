@@ -35,8 +35,8 @@ public class ManaFlower extends BaseCurioItem implements IManaReduce, IAutoGetMa
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.mana_flower.info"),
-                Component.translatable("item.confluence.mana_flower.info2")
+            Component.translatable("item.confluence.mana_flower.info"),
+            Component.translatable("item.confluence.mana_flower.info2")
         };
     }
 }

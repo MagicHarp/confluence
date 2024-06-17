@@ -38,10 +38,10 @@ public class SharkronBalloon extends TsunamiInABottle implements IJumpBoost {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.sharkron_balloon.info"),
-                Component.translatable("item.confluence.sharkron_balloon.info2"),
-                Component.translatable("item.confluence.sharkron_balloon.info3"),
-                Component.translatable("item.confluence.sharkron_balloon.info4")
+            Component.translatable("item.confluence.sharkron_balloon.info"),
+            Component.translatable("item.confluence.sharkron_balloon.info2"),
+            Component.translatable("item.confluence.sharkron_balloon.info3"),
+            Component.translatable("item.confluence.sharkron_balloon.info4")
 
         };
     }

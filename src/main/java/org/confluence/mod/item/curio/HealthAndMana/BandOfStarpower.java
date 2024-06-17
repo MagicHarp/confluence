@@ -17,8 +17,8 @@ public class BandOfStarpower extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.band_of_starpower.info"),
-                Component.translatable("item.confluence.band_of_starpower.info2")
+            Component.translatable("item.confluence.band_of_starpower.info"),
+            Component.translatable("item.confluence.band_of_starpower.info2")
         };
     }
 }

@@ -12,7 +12,7 @@ public class AnglerEarring extends BaseCurioItem implements IFishingPower {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.angler_earring.info")
+            Component.translatable("item.confluence.angler_earring.info")
         };
     }
 }

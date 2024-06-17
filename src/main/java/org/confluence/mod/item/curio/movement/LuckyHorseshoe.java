@@ -20,7 +20,7 @@ import java.util.UUID;
 public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
     public static final UUID LUCKY_UUID = UUID.fromString("EEFDE523-84A5-60DE-4176-71EBE048D5F3");
     static final ImmutableMultimap<Attribute, AttributeModifier> LUCKY = ImmutableMultimap.of(
-            Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Horseshoe", 0.05, AttributeModifier.Operation.ADDITION)
+        Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Horseshoe", 0.05, AttributeModifier.Operation.ADDITION)
     );
 
     @Override
@@ -42,8 +42,8 @@ public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.lucky_horseshoe.info"),
-                Component.translatable("item.confluence.lucky_horseshoe.info2")
+            Component.translatable("item.confluence.lucky_horseshoe.info"),
+            Component.translatable("item.confluence.lucky_horseshoe.info2")
         };
     }
 }

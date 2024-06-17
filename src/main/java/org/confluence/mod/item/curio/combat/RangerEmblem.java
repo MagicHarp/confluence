@@ -29,7 +29,7 @@ public class RangerEmblem extends BaseCurioItem implements IProjectileAttack {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.ranger_emblem.info")
+            Component.translatable("item.confluence.ranger_emblem.info")
         };
     }
 }

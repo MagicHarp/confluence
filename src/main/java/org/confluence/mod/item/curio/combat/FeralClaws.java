@@ -21,7 +21,7 @@ import java.util.UUID;
 public class FeralClaws extends BaseCurioItem implements IAutoAttack {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("069AEF75-87F4-9B81-A3D1-82114C18103D");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTACK_SPEED = ImmutableMultimap.of(
-            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Feral Claws", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Feral Claws", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public FeralClaws() {
@@ -41,9 +41,9 @@ public class FeralClaws extends BaseCurioItem implements IAutoAttack {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.feral_claws.info"),
-                Component.translatable("item.confluence.feral_claws.info2"),
-                Component.translatable("item.confluence.feral_claws.info3")
+            Component.translatable("item.confluence.feral_claws.info"),
+            Component.translatable("item.confluence.feral_claws.info2"),
+            Component.translatable("item.confluence.feral_claws.info3")
         };
     }
 }

@@ -12,9 +12,9 @@ public class Blindfold extends BaseCurioItem implements EffectInvul.Blindness {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.blindfold.info"),
-                Component.translatable("item.confluence.blindfold.info2"),
-                Component.translatable("item.confluence.blindfold.info3")
+            Component.translatable("item.confluence.blindfold.info"),
+            Component.translatable("item.confluence.blindfold.info2"),
+            Component.translatable("item.confluence.blindfold.info3")
         };
     }
 }

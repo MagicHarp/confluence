@@ -23,8 +23,8 @@ public class Radar extends AbstractInfoCurio implements IRadar {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.radar.info"),
-                Component.translatable("item.confluence.radar.info2")
+            Component.translatable("item.confluence.radar.info"),
+            Component.translatable("item.confluence.radar.info2")
         };
     }
 }

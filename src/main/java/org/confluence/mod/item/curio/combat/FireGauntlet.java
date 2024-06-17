@@ -25,10 +25,10 @@ public class FireGauntlet extends BaseCurioItem implements IFireAttack, IAutoAtt
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("AAFC960E-43F6-B0D4-859C-9C198E60D057");
     public static final UUID DISTANCE_UUID = UUID.fromString("4EC038D4-318C-EEC7-C7E8-29E614E8572E");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public FireGauntlet() {
@@ -49,15 +49,15 @@ public class FireGauntlet extends BaseCurioItem implements IFireAttack, IAutoAtt
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.fire_gauntlet.info"),
-                Component.translatable("item.confluence.fire_gauntlet.info2"),
-                Component.translatable("item.confluence.fire_gauntlet.info3"),
-                Component.translatable("item.confluence.fire_gauntlet.info4"),
-                Component.translatable("item.confluence.fire_gauntlet.info5"),
-                Component.translatable("item.confluence.fire_gauntlet.info6"),
-                Component.translatable("item.confluence.fire_gauntlet.info7"),
-                Component.translatable("item.confluence.fire_gauntlet.info8"),
-                Component.translatable("item.confluence.fire_gauntlet.info9")
+            Component.translatable("item.confluence.fire_gauntlet.info"),
+            Component.translatable("item.confluence.fire_gauntlet.info2"),
+            Component.translatable("item.confluence.fire_gauntlet.info3"),
+            Component.translatable("item.confluence.fire_gauntlet.info4"),
+            Component.translatable("item.confluence.fire_gauntlet.info5"),
+            Component.translatable("item.confluence.fire_gauntlet.info6"),
+            Component.translatable("item.confluence.fire_gauntlet.info7"),
+            Component.translatable("item.confluence.fire_gauntlet.info8"),
+            Component.translatable("item.confluence.fire_gauntlet.info9")
         };
     }
 }

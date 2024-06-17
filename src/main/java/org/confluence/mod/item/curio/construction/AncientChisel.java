@@ -25,7 +25,7 @@ public class AncientChisel extends BaseCurioItem implements IBreakSpeedBonus {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.ancient_chisel.info")
+            Component.translatable("item.confluence.ancient_chisel.info")
         };
     }
 }

@@ -22,10 +22,10 @@ public class AnglerTackleBag extends BaseCurioItem implements IHighTestFishingLi
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.angler_tackle_bag.info"),
-                Component.translatable("item.confluence.angler_tackle_bag.info2"),
-                Component.translatable("item.confluence.angler_tackle_bag.info3"),
-                Component.translatable("item.confluence.angler_tackle_bag.info4")
+            Component.translatable("item.confluence.angler_tackle_bag.info"),
+            Component.translatable("item.confluence.angler_tackle_bag.info2"),
+            Component.translatable("item.confluence.angler_tackle_bag.info3"),
+            Component.translatable("item.confluence.angler_tackle_bag.info4")
         };
     }
 }

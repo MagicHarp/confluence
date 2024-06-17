@@ -35,7 +35,7 @@ public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallR
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.amphibian_boots.info")
+            Component.translatable("item.confluence.amphibian_boots.info")
         };
     }
 }

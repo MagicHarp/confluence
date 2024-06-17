@@ -31,7 +31,7 @@ public class GPS extends AbstractInfoCurio implements IWatch, IDepthMeter, IComp
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.goblin_tech.info")
+            Component.translatable("item.confluence.goblin_tech.info")
         };
     }
 }

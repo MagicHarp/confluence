@@ -26,9 +26,9 @@ public class MagnetFlower extends ManaFlower implements IRangePickup.Star {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.magnet_flower.info"),
-                Component.translatable("item.confluence.magnet_flower.info2"),
-                Component.translatable("item.confluence.magnet_flower.info3")
+            Component.translatable("item.confluence.magnet_flower.info"),
+            Component.translatable("item.confluence.magnet_flower.info2"),
+            Component.translatable("item.confluence.magnet_flower.info3")
         };
     }
 }

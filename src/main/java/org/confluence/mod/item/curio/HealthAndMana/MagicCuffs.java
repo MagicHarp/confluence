@@ -31,7 +31,7 @@ public class MagicCuffs extends BandOfStarpower {
         if (damageSource.is(DamageTypes.DROWN) || damageSource.is(ModTags.HARMFUL_EFFECT)) return;
         if (CuriosUtils.hasCurio(living, CurioItems.MAGIC_CUFFS.get())) {
             living.getCapability(ManaProvider.CAPABILITY)
-                    .ifPresent(manaStorage -> manaStorage.receiveMana(() -> (int) amount));
+                .ifPresent(manaStorage -> manaStorage.receiveMana(() -> (int) amount));
         }
     }
 
@@ -44,10 +44,10 @@ public class MagicCuffs extends BandOfStarpower {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.magic_cuffs.info"),
-                Component.translatable("item.confluence.magic_cuffs.info2"),
-                Component.translatable("item.confluence.magic_cuffs.info3"),
-                Component.translatable("item.confluence.magic_cuffs.info4")
+            Component.translatable("item.confluence.magic_cuffs.info"),
+            Component.translatable("item.confluence.magic_cuffs.info2"),
+            Component.translatable("item.confluence.magic_cuffs.info3"),
+            Component.translatable("item.confluence.magic_cuffs.info4")
         };
     }
 }

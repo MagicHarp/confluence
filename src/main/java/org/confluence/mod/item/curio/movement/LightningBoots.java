@@ -33,8 +33,8 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ImmutableMultimap.of(
-                Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
-                Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
+            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL)
         );
     }
 
@@ -46,9 +46,9 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.lightning_boots.info"),
-                Component.translatable("item.confluence.lightning_boots.info2"),
-                Component.translatable("item.confluence.lightning_boots.info3")
+            Component.translatable("item.confluence.lightning_boots.info"),
+            Component.translatable("item.confluence.lightning_boots.info2"),
+            Component.translatable("item.confluence.lightning_boots.info3")
         };
     }
 }

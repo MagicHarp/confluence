@@ -21,7 +21,7 @@ import java.util.UUID;
 public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
     public static final UUID ARMOR_UUID = UUID.fromString("91F63796-420A-FFCB-504C-FEAA53C7DFC4");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", 8, AttributeModifier.Operation.ADDITION)
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", 8, AttributeModifier.Operation.ADDITION)
     );
 
     public FleshKnuckles() {
@@ -46,8 +46,8 @@ public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.flesh_knuckles.info"),
-                Component.translatable("item.confluence.flesh_knuckles.info2")
+            Component.translatable("item.confluence.flesh_knuckles.info"),
+            Component.translatable("item.confluence.flesh_knuckles.info2")
         };
     }
 }

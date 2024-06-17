@@ -23,8 +23,8 @@ public class NaturesGift extends BaseCurioItem implements IManaReduce, CustomNam
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.natures_gift.info"),
-                Component.translatable("item.confluence.natures_gift.info2")
+            Component.translatable("item.confluence.natures_gift.info"),
+            Component.translatable("item.confluence.natures_gift.info2")
         };
     }
 }

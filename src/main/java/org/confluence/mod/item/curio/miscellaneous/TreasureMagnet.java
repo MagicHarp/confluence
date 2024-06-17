@@ -9,9 +9,9 @@ public class TreasureMagnet extends BaseCurioItem implements IRangePickup.Drops 
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.treasure_magnet.info"),
-                Component.translatable("item.confluence.treasure_magnet.info2"),
-                Component.translatable("item.confluence.treasure_magnet.info3")
+            Component.translatable("item.confluence.treasure_magnet.info"),
+            Component.translatable("item.confluence.treasure_magnet.info2"),
+            Component.translatable("item.confluence.treasure_magnet.info3")
         };
     }
 }

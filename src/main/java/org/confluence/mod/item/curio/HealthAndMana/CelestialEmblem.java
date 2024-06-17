@@ -32,7 +32,7 @@ public class CelestialEmblem extends BaseCurioItem implements IMagicAttack, IRan
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.celestial_emblem.info")
+            Component.translatable("item.confluence.celestial_emblem.info")
         };
     }
 }

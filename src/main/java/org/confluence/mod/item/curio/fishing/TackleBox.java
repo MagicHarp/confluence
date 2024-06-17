@@ -8,7 +8,7 @@ public class TackleBox extends BaseCurioItem implements ITackleBox {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.tackle_box.info")
+            Component.translatable("item.confluence.tackle_box.info")
         };
     }
 }

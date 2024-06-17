@@ -25,8 +25,8 @@ public class ObsidianSkullRose extends BaseCurioItem implements IFireImmune, ILa
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.obsidian_skull_rose.info"),
-                Component.translatable("item.confluence.obsidian_skull_rose.info2")
+            Component.translatable("item.confluence.obsidian_skull_rose.info"),
+            Component.translatable("item.confluence.obsidian_skull_rose.info2")
         };
     }
 }

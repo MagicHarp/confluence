@@ -13,10 +13,10 @@ public class CelestialMagnet extends BaseCurioItem implements IRangePickup.Star 
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.celestial_magnet.info"),
-                Component.translatable("item.confluence.celestial_magnet.info2"),
-                Component.translatable("item.confluence.celestial_magnet.info3"),
-                Component.translatable("item.confluence.celestial_magnet.info4")
+            Component.translatable("item.confluence.celestial_magnet.info"),
+            Component.translatable("item.confluence.celestial_magnet.info2"),
+            Component.translatable("item.confluence.celestial_magnet.info3"),
+            Component.translatable("item.confluence.celestial_magnet.info4")
         };
     }
 }

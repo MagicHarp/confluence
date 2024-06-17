@@ -34,9 +34,9 @@ public class BundleOfHorseshoeBalloons extends BundleOfBalloons implements IFall
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info"),
-                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info2"),
-                Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info3")
+            Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info"),
+            Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info2"),
+            Component.translatable("item.confluence.bundle_of_horseshoe_balloons.info3")
         };
     }
 }

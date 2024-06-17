@@ -20,11 +20,11 @@ public class WaterWalkingBoots extends BaseCurioItem implements IFluidWalk {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.water_walking_boots.info"),
-                Component.translatable("item.confluence.water_walking_boots.info2"),
-                Component.translatable("item.confluence.water_walking_boots.info3"),
-                Component.translatable("item.confluence.water_walking_boots.info4"),
-                Component.translatable("item.confluence.water_walking_boots.info5")
+            Component.translatable("item.confluence.water_walking_boots.info"),
+            Component.translatable("item.confluence.water_walking_boots.info2"),
+            Component.translatable("item.confluence.water_walking_boots.info3"),
+            Component.translatable("item.confluence.water_walking_boots.info4"),
+            Component.translatable("item.confluence.water_walking_boots.info5")
         };
     }
 }

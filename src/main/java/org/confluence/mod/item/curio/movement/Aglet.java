@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Aglet extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("2B6DC797-A802-DF05-8231-BC8FCA9D770A");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Aglet", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Aglet", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     @Override
@@ -35,8 +35,8 @@ public class Aglet extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.aglet.info"),
-                Component.translatable("item.confluence.aglet.info2")
+            Component.translatable("item.confluence.aglet.info"),
+            Component.translatable("item.confluence.aglet.info2")
         };
     }
 }

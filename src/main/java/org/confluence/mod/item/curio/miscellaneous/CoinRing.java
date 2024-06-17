@@ -7,8 +7,8 @@ public class CoinRing extends LuckyCoin implements IRangePickup.Coin {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.coin_ring.info"),
-                Component.translatable("item.confluence.coin_ring.info2")
+            Component.translatable("item.confluence.coin_ring.info"),
+            Component.translatable("item.confluence.coin_ring.info2")
         };
     }
 }

@@ -8,8 +8,8 @@ public class HighTestFishingLine extends BaseCurioItem implements IHighTestFishi
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.high_test_fishing_line.info"),
-                Component.translatable("item.confluence.high_test_fishing_line.info2")
+            Component.translatable("item.confluence.high_test_fishing_line.info"),
+            Component.translatable("item.confluence.high_test_fishing_line.info2")
         };
     }
 }

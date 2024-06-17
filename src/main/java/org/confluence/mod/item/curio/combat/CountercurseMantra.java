@@ -12,9 +12,9 @@ public class CountercurseMantra extends BaseCurioItem implements EffectInvul.Sil
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.countercurse_mantra.info"),
-                Component.translatable("item.confluence.countercurse_mantra.info2"),
-                Component.translatable("item.confluence.countercurse_mantra.info3")
+            Component.translatable("item.confluence.countercurse_mantra.info"),
+            Component.translatable("item.confluence.countercurse_mantra.info2"),
+            Component.translatable("item.confluence.countercurse_mantra.info3")
         };
     }
 }

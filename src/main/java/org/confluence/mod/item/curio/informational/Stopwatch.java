@@ -23,8 +23,8 @@ public class Stopwatch extends AbstractInfoCurio implements IStopwatch {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.stopwatch.info"),
-                Component.translatable("item.confluence.stopwatch.info2")
+            Component.translatable("item.confluence.stopwatch.info"),
+            Component.translatable("item.confluence.stopwatch.info2")
         };
     }
 }

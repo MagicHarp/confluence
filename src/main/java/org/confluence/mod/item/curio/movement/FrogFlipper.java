@@ -18,8 +18,8 @@ public class FrogFlipper extends FrogLeg {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.frog_flipper.info"),
-                Component.translatable("item.confluence.frog_flipper.info2")
+            Component.translatable("item.confluence.frog_flipper.info"),
+            Component.translatable("item.confluence.frog_flipper.info2")
         };
     }
 

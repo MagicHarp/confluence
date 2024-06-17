@@ -31,8 +31,8 @@ public class REK3000 extends AbstractInfoCurio implements ILifeFormAnalyzer, IRa
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.rek_3000.info"),
-                Component.translatable("item.confluence.rek_3000.info2")
+            Component.translatable("item.confluence.rek_3000.info"),
+            Component.translatable("item.confluence.rek_3000.info2")
         };
     }
 }

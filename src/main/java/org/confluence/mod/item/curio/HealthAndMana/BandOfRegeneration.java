@@ -15,9 +15,9 @@ public class BandOfRegeneration extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.band_of_regeneration.info"),
-                Component.translatable("item.confluence.band_of_regeneration.info2"),
-                Component.translatable("item.confluence.band_of_regeneration.info3")
+            Component.translatable("item.confluence.band_of_regeneration.info"),
+            Component.translatable("item.confluence.band_of_regeneration.info2"),
+            Component.translatable("item.confluence.band_of_regeneration.info3")
 
         };
     }

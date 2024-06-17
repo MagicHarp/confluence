@@ -6,7 +6,7 @@ import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModRarity;
 
 public class AnkhCharm extends BaseCurioItem implements EffectInvul.Poison, EffectInvul.Blindness, EffectInvul.Slowness, EffectInvul.Weakness,
-        EffectInvul.Bleeding, EffectInvul.BrokenArmor, EffectInvul.Confused, EffectInvul.Cursed, EffectInvul.Silenced, EffectInvul.Stoned {
+    EffectInvul.Bleeding, EffectInvul.BrokenArmor, EffectInvul.Confused, EffectInvul.Cursed, EffectInvul.Silenced, EffectInvul.Stoned {
     public AnkhCharm(Rarity rarity) {
         super(rarity);
     }
@@ -18,7 +18,7 @@ public class AnkhCharm extends BaseCurioItem implements EffectInvul.Poison, Effe
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.ankh_charm.info")
+            Component.translatable("item.confluence.ankh_charm.info")
         };
     }
 }

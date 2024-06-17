@@ -12,9 +12,9 @@ public class Bezoar extends BaseCurioItem implements EffectInvul.Poison {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.bezoar.info"),
-                Component.translatable("item.confluence.bezoar.info2"),
-                Component.translatable("item.confluence.bezoar.info3")
+            Component.translatable("item.confluence.bezoar.info"),
+            Component.translatable("item.confluence.bezoar.info2"),
+            Component.translatable("item.confluence.bezoar.info3")
         };
     }
 }

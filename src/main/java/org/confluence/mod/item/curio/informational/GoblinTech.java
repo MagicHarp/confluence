@@ -25,8 +25,8 @@ public class GoblinTech extends AbstractInfoCurio implements IMetalDetector, ISt
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.goblin_tech.info"),
-                Component.translatable("item.confluence.goblin_tech.info2")
+            Component.translatable("item.confluence.goblin_tech.info"),
+            Component.translatable("item.confluence.goblin_tech.info2")
         };
     }
 }

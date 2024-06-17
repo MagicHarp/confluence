@@ -26,10 +26,10 @@ public interface IFlowerBoots {
                 if (serverLevel.getBlockState(aroundPos).isCollisionShapeFullBlock(serverLevel, aroundPos)) continue;
                 if (random.nextFloat() < 0.3F && serverLevel.getBlockState(aroundPos).isAir()) {
                     List<ConfiguredFeature<?, ?>> list = serverLevel.getBiome(aroundPos).value()
-                            .getGenerationSettings().getFlowerFeatures();
+                        .getGenerationSettings().getFlowerFeatures();
                     if (list.isEmpty()) continue;
                     ((RandomPatchConfiguration) list.get(0).config()).feature().value()
-                            .place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, aroundPos);
+                        .place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, aroundPos);
                 }
             }
         }

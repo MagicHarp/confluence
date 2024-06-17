@@ -21,7 +21,7 @@ import java.util.UUID;
 public class PutridScent extends BaseCurioItem implements IAggroAttach, ICriticalHit {
     public static final UUID DAMAGE_UUID = UUID.fromString("70F6E4B4-64AC-4B2A-AAD6-8C35AFB9507D");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public PutridScent() {
@@ -52,9 +52,9 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach, ICritica
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.putrid_scent.info"),
-                Component.translatable("item.confluence.putrid_scent.info2"),
-                Component.translatable("item.confluence.putrid_scent.info3")
+            Component.translatable("item.confluence.putrid_scent.info"),
+            Component.translatable("item.confluence.putrid_scent.info2"),
+            Component.translatable("item.confluence.putrid_scent.info3")
         };
     }
 }

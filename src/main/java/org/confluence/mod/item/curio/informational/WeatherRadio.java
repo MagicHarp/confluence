@@ -23,8 +23,8 @@ public class WeatherRadio extends AbstractInfoCurio implements IWeatherRadio {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.weather_radio.info"),
-                Component.translatable("item.confluence.weather_radio.info2")
+            Component.translatable("item.confluence.weather_radio.info"),
+            Component.translatable("item.confluence.weather_radio.info2")
         };
     }
 }

@@ -41,9 +41,9 @@ public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance,
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.obsidian_horseshoe.info"),
-                Component.translatable("item.confluence.obsidian_horseshoe.info2"),
-                Component.translatable("item.confluence.obsidian_horseshoe.info3")
+            Component.translatable("item.confluence.obsidian_horseshoe.info"),
+            Component.translatable("item.confluence.obsidian_horseshoe.info2"),
+            Component.translatable("item.confluence.obsidian_horseshoe.info3")
         };
     }
 }

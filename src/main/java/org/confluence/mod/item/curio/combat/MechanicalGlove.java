@@ -25,10 +25,10 @@ public class MechanicalGlove extends BaseCurioItem implements IAutoAttack {
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("FDA86C95-41F9-1A50-EF0B-A9B9AFFD5AB3");
     public static final UUID DISTANCE_UUID = UUID.fromString("95983B7C-53EF-E066-32E2-B4FDCA0C5F00");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public MechanicalGlove() {
@@ -48,9 +48,9 @@ public class MechanicalGlove extends BaseCurioItem implements IAutoAttack {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.mechanical_glove.info"),
-                Component.translatable("item.confluence.mechanical_glove.info2"),
-                Component.translatable("item.confluence.mechanical_glove.info3")
+            Component.translatable("item.confluence.mechanical_glove.info"),
+            Component.translatable("item.confluence.mechanical_glove.info2"),
+            Component.translatable("item.confluence.mechanical_glove.info3")
         };
     }
 }

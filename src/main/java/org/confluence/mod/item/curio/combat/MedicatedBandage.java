@@ -12,9 +12,9 @@ public class MedicatedBandage extends BaseCurioItem implements EffectInvul.Poiso
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.medicated_bandage.info"),
-                Component.translatable("item.confluence.medicated_bandage.info2"),
-                Component.translatable("item.confluence.medicated_bandage.info3")
+            Component.translatable("item.confluence.medicated_bandage.info"),
+            Component.translatable("item.confluence.medicated_bandage.info2"),
+            Component.translatable("item.confluence.medicated_bandage.info3")
         };
     }
 }

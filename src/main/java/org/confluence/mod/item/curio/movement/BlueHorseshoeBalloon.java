@@ -44,8 +44,8 @@ public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResist
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.blue_horseshoe_balloon.info"),
-                Component.translatable("item.confluence.blue_horseshoe_balloon.info2")
+            Component.translatable("item.confluence.blue_horseshoe_balloon.info"),
+            Component.translatable("item.confluence.blue_horseshoe_balloon.info2")
         };
     }
 }

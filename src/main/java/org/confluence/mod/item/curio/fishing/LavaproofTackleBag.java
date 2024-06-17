@@ -11,10 +11,10 @@ public class LavaproofTackleBag extends AnglerTackleBag implements ILavaproofFis
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.lavaproof_tackle_bag.info"),
-                Component.translatable("item.confluence.lavaproof_tackle_bag.info2"),
-                Component.translatable("item.confluence.lavaproof_tackle_bag.info3"),
-                Component.translatable("item.confluence.lavaproof_tackle_bag.info4")
+            Component.translatable("item.confluence.lavaproof_tackle_bag.info"),
+            Component.translatable("item.confluence.lavaproof_tackle_bag.info2"),
+            Component.translatable("item.confluence.lavaproof_tackle_bag.info3"),
+            Component.translatable("item.confluence.lavaproof_tackle_bag.info4")
         };
     }
 }

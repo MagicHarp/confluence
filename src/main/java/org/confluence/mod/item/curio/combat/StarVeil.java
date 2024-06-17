@@ -25,7 +25,7 @@ public class StarVeil extends BaseCurioItem implements IStarCloak, IInvulnerable
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.star_veil.info")
+            Component.translatable("item.confluence.star_veil.info")
         };
     }
 }

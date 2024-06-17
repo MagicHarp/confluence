@@ -6,10 +6,10 @@ public class GoldWatch extends MinuteWatch {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.gold_watch.info"),
-                Component.translatable("item.confluence.gold_watch.info2"),
-                Component.translatable("item.confluence.gold_watch.info3"),
-                Component.translatable("item.confluence.gold_watch.info4")
+            Component.translatable("item.confluence.gold_watch.info"),
+            Component.translatable("item.confluence.gold_watch.info2"),
+            Component.translatable("item.confluence.gold_watch.info3"),
+            Component.translatable("item.confluence.gold_watch.info4")
         };
     }
 }

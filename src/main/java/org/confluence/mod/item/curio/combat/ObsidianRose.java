@@ -24,8 +24,8 @@ public class ObsidianRose extends BaseCurioItem implements ILavaHurtReduce {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.obsidian_rose.info"),
-                Component.translatable("item.confluence.obsidian_rose.info2")
+            Component.translatable("item.confluence.obsidian_rose.info"),
+            Component.translatable("item.confluence.obsidian_rose.info2")
         };
     }
 }

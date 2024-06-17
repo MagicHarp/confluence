@@ -32,14 +32,14 @@ public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILa
         LivingEntity living = slotContext.entity();
         if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
             return ImmutableMultimap.of(
-                    Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
-                    Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                    Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
+                Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
+                Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
             );
         }
         return ImmutableMultimap.of(
-                Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
-                Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
+            Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL)
         );
     }
 
@@ -59,8 +59,8 @@ public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILa
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.terraspark_boots.info"),
-                Component.translatable("item.confluence.terraspark_boots.info2")
+            Component.translatable("item.confluence.terraspark_boots.info"),
+            Component.translatable("item.confluence.terraspark_boots.info2")
         };
     }
 }

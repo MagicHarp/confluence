@@ -8,11 +8,11 @@ import net.minecraft.world.phys.AABB;
 public interface IRadar {
     static Component getInfo(Player localPlayer) {
         return Component.translatable(
-                "info.confluence.radar",
-                localPlayer.level()
-                        .getEntities(localPlayer, new AABB(localPlayer.getOnPos()).inflate(63.5), entity ->
-                                entity instanceof Enemy
-                        ).size()
+            "info.confluence.radar",
+            localPlayer.level()
+                .getEntities(localPlayer, new AABB(localPlayer.getOnPos()).inflate(63.5), entity ->
+                    entity instanceof Enemy
+                ).size()
         );
     }
 

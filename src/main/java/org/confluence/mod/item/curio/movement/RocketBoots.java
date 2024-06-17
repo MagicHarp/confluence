@@ -19,11 +19,11 @@ public class RocketBoots extends BaseCurioItem implements IMayFly {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.rocket_boots.info"),
-                Component.translatable("item.confluence.rocket_boots.info2"),
-                Component.translatable("item.confluence.rocket_boots.info3"),
-                Component.translatable("item.confluence.rocket_boots.info4"),
-                Component.translatable("item.confluence.rocket_boots.info5")
+            Component.translatable("item.confluence.rocket_boots.info"),
+            Component.translatable("item.confluence.rocket_boots.info2"),
+            Component.translatable("item.confluence.rocket_boots.info3"),
+            Component.translatable("item.confluence.rocket_boots.info4"),
+            Component.translatable("item.confluence.rocket_boots.info5")
         };
     }
 }

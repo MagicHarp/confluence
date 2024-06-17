@@ -20,8 +20,8 @@ public class ManaRegenerationBand extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.mana_regeneration_band.info"),
-                Component.translatable("item.confluence.mana_regeneration_band.info2")
+            Component.translatable("item.confluence.mana_regeneration_band.info"),
+            Component.translatable("item.confluence.mana_regeneration_band.info2")
         };
     }
 }

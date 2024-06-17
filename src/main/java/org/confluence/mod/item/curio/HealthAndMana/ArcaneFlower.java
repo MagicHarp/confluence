@@ -37,7 +37,7 @@ public class ArcaneFlower extends BaseCurioItem implements IManaReduce, IAggroAt
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.arcane_flower.info")
+            Component.translatable("item.confluence.arcane_flower.info")
         };
     }
 }

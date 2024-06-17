@@ -24,7 +24,7 @@ import java.util.UUID;
 public class LuckyCoin extends BaseCurioItem {
     public static final UUID LUCKY_UUID = UUID.fromString("C136140E-2C12-14F2-ED0D-A6848D4F4EED");
     public static final ImmutableMultimap<Attribute, AttributeModifier> LUCKY = ImmutableMultimap.of(
-            Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Coin", 0.05, AttributeModifier.Operation.ADDITION)
+        Attributes.LUCK, new AttributeModifier(LUCKY_UUID, "Lucky Coin", 0.05, AttributeModifier.Operation.ADDITION)
     );
 
     public LuckyCoin() {
@@ -56,14 +56,14 @@ public class LuckyCoin extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.lucky_coin.info"),
-                Component.translatable("item.confluence.lucky_coin.info2"),
-                Component.translatable("item.confluence.lucky_coin.info3"),
-                Component.translatable("item.confluence.lucky_coin.info4"),
-                Component.translatable("item.confluence.lucky_coin.info5"),
-                Component.translatable("item.confluence.lucky_coin.info6"),
-                Component.translatable("item.confluence.lucky_coin.info7"),
-                Component.translatable("item.confluence.lucky_coin.info8")
+            Component.translatable("item.confluence.lucky_coin.info"),
+            Component.translatable("item.confluence.lucky_coin.info2"),
+            Component.translatable("item.confluence.lucky_coin.info3"),
+            Component.translatable("item.confluence.lucky_coin.info4"),
+            Component.translatable("item.confluence.lucky_coin.info5"),
+            Component.translatable("item.confluence.lucky_coin.info6"),
+            Component.translatable("item.confluence.lucky_coin.info7"),
+            Component.translatable("item.confluence.lucky_coin.info8")
         };
     }
 }

@@ -38,8 +38,8 @@ public class SpectreGoggles extends BaseCurioItem implements CustomModel, IFunct
     private static void echo(LivingEntity living, boolean value) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                    PacketDistributor.PLAYER.with(() -> serverPlayer),
-                    new EchoBlockVisibilityPacketS2C(value)
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new EchoBlockVisibilityPacketS2C(value)
             );
         }
     }
@@ -53,7 +53,7 @@ public class SpectreGoggles extends BaseCurioItem implements CustomModel, IFunct
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.spectre_goggles.info")
+            Component.translatable("item.confluence.spectre_goggles.info")
         };
     }
 }

@@ -34,8 +34,8 @@ public class FartInABottle extends BaseCurioItem implements IMultiJump {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.fart_in_a_bottle.info"),
-                Component.translatable("item.confluence.fart_in_a_bottle.info2")
+            Component.translatable("item.confluence.fart_in_a_bottle.info"),
+            Component.translatable("item.confluence.fart_in_a_bottle.info2")
         };
     }
 }

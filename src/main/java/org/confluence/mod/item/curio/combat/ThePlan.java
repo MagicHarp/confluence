@@ -12,8 +12,8 @@ public class ThePlan extends BaseCurioItem implements EffectInvul.Slowness, Effe
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.the_plan.info"),
-                Component.translatable("item.confluence.the_plan.info2")
+            Component.translatable("item.confluence.the_plan.info"),
+            Component.translatable("item.confluence.the_plan.info2")
         };
     }
 }

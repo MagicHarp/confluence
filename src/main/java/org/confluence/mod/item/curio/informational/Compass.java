@@ -23,11 +23,11 @@ public class Compass extends AbstractInfoCurio implements ICompass {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.compass.info"),
-                Component.translatable("item.confluence.compass.info2"),
-                Component.translatable("item.confluence.compass.info3"),
-                Component.translatable("item.confluence.compass.info4"),
-                Component.translatable("item.confluence.compass.info5")
+            Component.translatable("item.confluence.compass.info"),
+            Component.translatable("item.confluence.compass.info2"),
+            Component.translatable("item.confluence.compass.info3"),
+            Component.translatable("item.confluence.compass.info4"),
+            Component.translatable("item.confluence.compass.info5")
         };
     }
 }

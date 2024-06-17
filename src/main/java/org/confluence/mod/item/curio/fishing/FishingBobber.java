@@ -27,7 +27,7 @@ public class FishingBobber extends BaseCurioItem implements IFishingPower {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.fishing_bobber.info")
+            Component.translatable("item.confluence.fishing_bobber.info")
         };
     }
 }

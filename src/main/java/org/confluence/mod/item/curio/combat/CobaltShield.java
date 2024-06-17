@@ -17,8 +17,8 @@ public class CobaltShield extends BaseCurioItem {
     public static final UUID RESISTANCE_UUID = UUID.fromString("358E02EF-951D-84B6-4ED4-1E03AF3520E2");
     public static final UUID ARMOR_UUID = UUID.fromString("113FC2B9-A34D-7A7C-D928-27321947F59C");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION),
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION)
+        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION),
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Cobalt Shield", 1.0, AttributeModifier.Operation.ADDITION)
     );
 
     public CobaltShield() {
@@ -33,8 +33,8 @@ public class CobaltShield extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.cobalt_shield.info"),
-                Component.translatable("item.confluence.cobalt_shield.info2")
+            Component.translatable("item.confluence.cobalt_shield.info"),
+            Component.translatable("item.confluence.cobalt_shield.info2")
         };
     }
 }

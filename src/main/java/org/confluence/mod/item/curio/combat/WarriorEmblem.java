@@ -21,7 +21,7 @@ import java.util.UUID;
 public class WarriorEmblem extends BaseCurioItem {
     public static final UUID DAMAGE_UUID = UUID.fromString("595F6B45-6487-A65A-29C9-D00096A3D7AE");
     private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Warrior Emblem", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Warrior Emblem", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public WarriorEmblem() {
@@ -40,7 +40,7 @@ public class WarriorEmblem extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.warrior_emblem.info")
+            Component.translatable("item.confluence.warrior_emblem.info")
         };
     }
 }

@@ -13,11 +13,11 @@ public class GoldRing extends BaseCurioItem implements IRangePickup.Coin {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.gold_ring.info"),
-                Component.translatable("item.confluence.gold_ring.info2"),
-                Component.translatable("item.confluence.gold_ring.info3"),
-                Component.translatable("item.confluence.gold_ring.info4"),
-                Component.translatable("item.confluence.gold_ring.info5")
+            Component.translatable("item.confluence.gold_ring.info"),
+            Component.translatable("item.confluence.gold_ring.info2"),
+            Component.translatable("item.confluence.gold_ring.info3"),
+            Component.translatable("item.confluence.gold_ring.info4"),
+            Component.translatable("item.confluence.gold_ring.info5")
         };
     }
 }

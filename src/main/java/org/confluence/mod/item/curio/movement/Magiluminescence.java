@@ -26,7 +26,7 @@ import java.util.UUID;
 public class Magiluminescence extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("F0E9149C-E146-5D87-A319-A45CE63A2C65");
     private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Magiluminescence", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Magiluminescence", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     @Override
@@ -34,8 +34,8 @@ public class Magiluminescence extends BaseCurioItem {
         super.onEquip(slotContext, prevStack, stack);
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                    PacketDistributor.ALL.noArg(),
-                    new PlayerLightPacketS2C(serverPlayer.getUUID(), true)
+                PacketDistributor.ALL.noArg(),
+                new PlayerLightPacketS2C(serverPlayer.getUUID(), true)
             );
         }
     }
@@ -46,8 +46,8 @@ public class Magiluminescence extends BaseCurioItem {
         LivingEntity living = slotContext.entity();
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                    PacketDistributor.ALL.noArg(),
-                    new PlayerLightPacketS2C(serverPlayer.getUUID(), living.hasEffect(ModEffects.SHINE.get()))
+                PacketDistributor.ALL.noArg(),
+                new PlayerLightPacketS2C(serverPlayer.getUUID(), living.hasEffect(ModEffects.SHINE.get()))
             );
         }
     }
@@ -67,10 +67,10 @@ public class Magiluminescence extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.magiluminescence.info"),
-                Component.translatable("item.confluence.magiluminescence.info2"),
-                Component.translatable("item.confluence.magiluminescence.info3"),
-                Component.translatable("item.confluence.magiluminescence.info4")
+            Component.translatable("item.confluence.magiluminescence.info"),
+            Component.translatable("item.confluence.magiluminescence.info2"),
+            Component.translatable("item.confluence.magiluminescence.info3"),
+            Component.translatable("item.confluence.magiluminescence.info4")
         };
     }
 }

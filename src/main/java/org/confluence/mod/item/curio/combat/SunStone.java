@@ -23,9 +23,9 @@ public class SunStone extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
 
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION)
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION)
     );
 
     public SunStone() {
@@ -50,17 +50,17 @@ public class SunStone extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.sun_stone.info"),
-                Component.translatable("item.confluence.sun_stone.info2"),
-                Component.translatable("item.confluence.sun_stone.info3"),
-                Component.translatable("item.confluence.sun_stone.info4"),
-                Component.translatable("item.confluence.sun_stone.info5"),
-                Component.translatable("item.confluence.sun_stone.info6"),
-                Component.translatable("item.confluence.sun_stone.info7"),
-                Component.translatable("item.confluence.sun_stone.info8"),
-                Component.translatable("item.confluence.sun_stone.info9"),
-                Component.translatable("item.confluence.sun_stone.info10"),
-                Component.translatable("item.confluence.sun_stone.info11")
+            Component.translatable("item.confluence.sun_stone.info"),
+            Component.translatable("item.confluence.sun_stone.info2"),
+            Component.translatable("item.confluence.sun_stone.info3"),
+            Component.translatable("item.confluence.sun_stone.info4"),
+            Component.translatable("item.confluence.sun_stone.info5"),
+            Component.translatable("item.confluence.sun_stone.info6"),
+            Component.translatable("item.confluence.sun_stone.info7"),
+            Component.translatable("item.confluence.sun_stone.info8"),
+            Component.translatable("item.confluence.sun_stone.info9"),
+            Component.translatable("item.confluence.sun_stone.info10"),
+            Component.translatable("item.confluence.sun_stone.info11")
         };
     }
 }

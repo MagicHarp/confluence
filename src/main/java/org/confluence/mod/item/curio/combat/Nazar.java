@@ -12,9 +12,9 @@ public class Nazar extends BaseCurioItem implements EffectInvul.Cursed {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.nazar.info"),
-                Component.translatable("item.confluence.nazar.info2"),
-                Component.translatable("item.confluence.nazar.info3")
+            Component.translatable("item.confluence.nazar.info"),
+            Component.translatable("item.confluence.nazar.info2"),
+            Component.translatable("item.confluence.nazar.info3")
         };
     }
 }

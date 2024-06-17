@@ -11,7 +11,7 @@ public class SweetheartNecklace extends PanicNecklace implements IHoneycomb {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.sweetheart_necklace.info")
+            Component.translatable("item.confluence.sweetheart_necklace.info")
         };
     }
 }

@@ -14,8 +14,8 @@ public class FrozenTurtleShell extends BaseCurioItem {
 
     public static float apply(LivingEntity living, float amount) {
         if (living.getHealth() / living.getMaxHealth() > 0.5F ||
-                CuriosUtils.noSameCurio(living, CurioItems.FROZEN_TURTLE_SHELL.get()) ||
-                CuriosUtils.noSameCurio(living, CurioItems.FROZEN_SHIELD.get())
+            CuriosUtils.noSameCurio(living, CurioItems.FROZEN_TURTLE_SHELL.get()) ||
+            CuriosUtils.noSameCurio(living, CurioItems.FROZEN_SHIELD.get())
         ) return amount;
         return amount * 0.75F;
     }
@@ -23,9 +23,9 @@ public class FrozenTurtleShell extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.frozen_turtle_shell.info"),
-                Component.translatable("item.confluence.frozen_turtle_shell.info2"),
-                Component.translatable("item.confluence.frozen_turtle_shell.info3")
+            Component.translatable("item.confluence.frozen_turtle_shell.info"),
+            Component.translatable("item.confluence.frozen_turtle_shell.info2"),
+            Component.translatable("item.confluence.frozen_turtle_shell.info3")
         };
     }
 }

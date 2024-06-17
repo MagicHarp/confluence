@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Shackle extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("AD2BC718-506A-D43B-BE7A-98F60EE41A33");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shackle", 1, AttributeModifier.Operation.ADDITION)
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shackle", 1, AttributeModifier.Operation.ADDITION)
     );
 
     @Override
@@ -35,9 +35,9 @@ public class Shackle extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.shackle.info"),
-                Component.translatable("item.confluence.shackle.info2"),
-                Component.translatable("item.confluence.shackle.info3")
+            Component.translatable("item.confluence.shackle.info"),
+            Component.translatable("item.confluence.shackle.info2"),
+            Component.translatable("item.confluence.shackle.info3")
         };
     }
 }

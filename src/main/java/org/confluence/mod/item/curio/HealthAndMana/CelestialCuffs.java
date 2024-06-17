@@ -26,13 +26,13 @@ public class CelestialCuffs extends MagicCuffs implements IRangePickup.Star {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.celestial_cuffs.info"),
-                Component.translatable("item.confluence.celestial_cuffs.info2"),
-                Component.translatable("item.confluence.celestial_cuffs.info3"),
-                Component.translatable("item.confluence.celestial_cuffs.info4"),
-                Component.translatable("item.confluence.celestial_cuffs.info5"),
-                Component.translatable("item.confluence.celestial_cuffs.info6"),
-                Component.translatable("item.confluence.celestial_cuffs.info7")
+            Component.translatable("item.confluence.celestial_cuffs.info"),
+            Component.translatable("item.confluence.celestial_cuffs.info2"),
+            Component.translatable("item.confluence.celestial_cuffs.info3"),
+            Component.translatable("item.confluence.celestial_cuffs.info4"),
+            Component.translatable("item.confluence.celestial_cuffs.info5"),
+            Component.translatable("item.confluence.celestial_cuffs.info6"),
+            Component.translatable("item.confluence.celestial_cuffs.info7")
         };
     }
 }

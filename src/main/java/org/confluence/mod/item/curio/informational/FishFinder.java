@@ -25,7 +25,7 @@ public class FishFinder extends AbstractInfoCurio implements IFishermansPocketGu
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.fish_finder.info"),
+            Component.translatable("item.confluence.fish_finder.info"),
         };
     }
 }

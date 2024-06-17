@@ -12,9 +12,9 @@ public class BlackBelt extends BaseCurioItem implements IHurtEvasion {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.black_belt.info"),
-                Component.translatable("item.confluence.black_belt.info2"),
-                Component.translatable("item.confluence.black_belt.info3")
+            Component.translatable("item.confluence.black_belt.info"),
+            Component.translatable("item.confluence.black_belt.info2"),
+            Component.translatable("item.confluence.black_belt.info3")
         };
     }
 }

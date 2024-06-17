@@ -24,9 +24,9 @@ public class PowerGlove extends BaseCurioItem implements IAutoAttack {
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("4D04974E-FCA5-11DE-2C75-F29679DE9CF1");
     public static final UUID DISTANCE_UUID = UUID.fromString("955047C4-BF9C-D87C-9B6D-05F274392BD4");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Power Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Power Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-            ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Power Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Power Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Power Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+        ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Power Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
     public PowerGlove() {
@@ -46,9 +46,9 @@ public class PowerGlove extends BaseCurioItem implements IAutoAttack {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.power_glove.info"),
-                Component.translatable("item.confluence.power_glove.info2"),
-                Component.translatable("item.confluence.power_glove.info3")
+            Component.translatable("item.confluence.power_glove.info"),
+            Component.translatable("item.confluence.power_glove.info2"),
+            Component.translatable("item.confluence.power_glove.info3")
         };
     }
 }

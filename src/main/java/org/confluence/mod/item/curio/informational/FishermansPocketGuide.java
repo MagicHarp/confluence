@@ -29,8 +29,8 @@ public class FishermansPocketGuide extends AbstractInfoCurio implements IFisherm
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.fishermans_pocket_guide.info"),
-                Component.translatable("item.confluence.fishermans_pocket_guide.info2")
+            Component.translatable("item.confluence.fishermans_pocket_guide.info"),
+            Component.translatable("item.confluence.fishermans_pocket_guide.info2")
         };
     }
 }

@@ -29,8 +29,8 @@ public class BlizzardInABalloon extends BlizzardInABottle implements IJumpBoost 
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.blizzard_in_a_balloon.info"),
-                Component.translatable("item.confluence.blizzard_in_a_balloon.info2")
+            Component.translatable("item.confluence.blizzard_in_a_balloon.info"),
+            Component.translatable("item.confluence.blizzard_in_a_balloon.info2")
         };
     }
 }

@@ -6,10 +6,10 @@ public class SilverWatch extends HalfHourWatch {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.silver_watch.info"),
-                Component.translatable("item.confluence.silver_watch.info2"),
-                Component.translatable("item.confluence.silver_watch.info3"),
-                Component.translatable("item.confluence.silver_watch.info4")
+            Component.translatable("item.confluence.silver_watch.info"),
+            Component.translatable("item.confluence.silver_watch.info2"),
+            Component.translatable("item.confluence.silver_watch.info3"),
+            Component.translatable("item.confluence.silver_watch.info4")
         };
     }
 }

@@ -24,9 +24,9 @@ public class CharmOfMyths extends PhilosophersStone {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.charm_of_myths.info"),
-                Component.translatable("item.confluence.charm_of_myths.info2"),
-                Component.translatable("item.confluence.charm_of_myths.info3")
+            Component.translatable("item.confluence.charm_of_myths.info"),
+            Component.translatable("item.confluence.charm_of_myths.info2"),
+            Component.translatable("item.confluence.charm_of_myths.info3")
         };
     }
 }

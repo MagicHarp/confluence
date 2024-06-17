@@ -39,9 +39,9 @@ public class PinkHorseshoeBalloon extends SharkronBalloon implements IFallResist
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.pink_horseshoe_balloon.info"),
-                Component.translatable("item.confluence.pink_horseshoe_balloon.info2"),
-                Component.translatable("item.confluence.pink_horseshoe_balloon.info3")
+            Component.translatable("item.confluence.pink_horseshoe_balloon.info"),
+            Component.translatable("item.confluence.pink_horseshoe_balloon.info2"),
+            Component.translatable("item.confluence.pink_horseshoe_balloon.info3")
         };
     }
 }

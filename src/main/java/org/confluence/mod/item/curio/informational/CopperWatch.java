@@ -6,8 +6,8 @@ public class CopperWatch extends HourWatch {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.copper_watch.info"),
-                Component.translatable("item.confluence.copper_watch.info2")
+            Component.translatable("item.confluence.copper_watch.info"),
+            Component.translatable("item.confluence.copper_watch.info2")
         };
     }
 }

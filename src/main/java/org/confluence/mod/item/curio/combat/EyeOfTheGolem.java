@@ -17,8 +17,8 @@ public class EyeOfTheGolem extends BaseCurioItem implements ICriticalHit {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.eye_of_the_golem.info"),
-                Component.translatable("item.confluence.eye_of_the_golem.info2")
+            Component.translatable("item.confluence.eye_of_the_golem.info"),
+            Component.translatable("item.confluence.eye_of_the_golem.info2")
         };
     }
 }

@@ -14,7 +14,6 @@ import org.confluence.mod.item.curio.fishing.*;
 import org.confluence.mod.item.curio.informational.*;
 import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
-import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;

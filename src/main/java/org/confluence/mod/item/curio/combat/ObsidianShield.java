@@ -22,8 +22,8 @@ public class ObsidianShield extends BaseCurioItem implements IFireImmune {
     public static final UUID RESISTANCE_UUID = UUID.fromString("EFB2AB28-B09E-29DB-1572-2ECCD7240CE9");
     public static final UUID ARMOR_UUID = UUID.fromString("696A9E98-F842-2657-89FF-7B8BB2CEBC7C");
     static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-            Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Obsidian Shield", 1.0, AttributeModifier.Operation.ADDITION),
-            Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Obsidian Shield", 2.0, AttributeModifier.Operation.ADDITION)
+        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Obsidian Shield", 1.0, AttributeModifier.Operation.ADDITION),
+        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Obsidian Shield", 2.0, AttributeModifier.Operation.ADDITION)
     );
 
     public ObsidianShield() {
@@ -43,8 +43,8 @@ public class ObsidianShield extends BaseCurioItem implements IFireImmune {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.obsidian_shield.info"),
-                Component.translatable("item.confluence.obsidian_shield.info2")
+            Component.translatable("item.confluence.obsidian_shield.info"),
+            Component.translatable("item.confluence.obsidian_shield.info2")
         };
     }
 }

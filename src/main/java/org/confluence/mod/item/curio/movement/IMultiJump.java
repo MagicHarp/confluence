@@ -49,16 +49,16 @@ public interface IMultiJump {
             }
         });
         NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new PlayerJumpPacketS2C(
-                        fartSpeed.get(),
-                        sandstormSpeed.get(),
-                        sandstormTicks.get(),
-                        blizzardSpeed.get(),
-                        blizzardTicks.get(),
-                        tsunamiSpeed.get(),
-                        cloudSpeed.get()
-                )
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new PlayerJumpPacketS2C(
+                fartSpeed.get(),
+                sandstormSpeed.get(),
+                sandstormTicks.get(),
+                blizzardSpeed.get(),
+                blizzardTicks.get(),
+                tsunamiSpeed.get(),
+                cloudSpeed.get()
+            )
         );
     }
 

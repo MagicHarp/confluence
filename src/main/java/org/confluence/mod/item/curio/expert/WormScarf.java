@@ -20,9 +20,9 @@ public class WormScarf extends BaseCurioItem implements ModRarity.Expert {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.worm_scarf.info"),
-                Component.translatable("item.confluence.worm_scarf.info2"),
-                Component.translatable("item.confluence.worm_scarf.info3")
+            Component.translatable("item.confluence.worm_scarf.info"),
+            Component.translatable("item.confluence.worm_scarf.info2"),
+            Component.translatable("item.confluence.worm_scarf.info3")
         };
     }
 }

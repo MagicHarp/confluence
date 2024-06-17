@@ -7,12 +7,12 @@ import net.minecraft.world.entity.player.Player;
 public interface IStopwatch {
     static Component getInfo(Player localPlayer) {
         return Component.translatable(
-                "info.confluence.stopwatch",
-                "%.2f".formatted(Mth.length(
-                        localPlayer.getX() - localPlayer.xOld,
-                        localPlayer.getY() - localPlayer.yOld,
-                        localPlayer.getZ() - localPlayer.zOld
-                ) * 20)
+            "info.confluence.stopwatch",
+            "%.2f".formatted(Mth.length(
+                localPlayer.getX() - localPlayer.xOld,
+                localPlayer.getY() - localPlayer.yOld,
+                localPlayer.getZ() - localPlayer.zOld
+            ) * 20)
         );
     }
 

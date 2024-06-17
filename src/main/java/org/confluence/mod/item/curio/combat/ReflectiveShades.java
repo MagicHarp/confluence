@@ -12,8 +12,8 @@ public class ReflectiveShades extends BaseCurioItem implements EffectInvul.Blind
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.reflective_shades.info"),
-                Component.translatable("item.confluence.reflective_shades.info2")
+            Component.translatable("item.confluence.reflective_shades.info"),
+            Component.translatable("item.confluence.reflective_shades.info2")
         };
     }
 }

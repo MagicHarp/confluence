@@ -12,9 +12,9 @@ public class ArmorBracing extends BaseCurioItem implements EffectInvul.BrokenArm
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.armor_bracing.info"),
-                Component.translatable("item.confluence.armor_bracing.info2"),
-                Component.translatable("item.confluence.armor_bracing.info3")
+            Component.translatable("item.confluence.armor_bracing.info"),
+            Component.translatable("item.confluence.armor_bracing.info2"),
+            Component.translatable("item.confluence.armor_bracing.info3")
         };
     }
 }
