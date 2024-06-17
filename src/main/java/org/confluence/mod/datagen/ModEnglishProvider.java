@@ -444,7 +444,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sandstorm_in_a_bottle.info","The Sandstorm in a Bottle is an accessory found inside Gold Chests within Pyramids.");
         add("item.confluence.sandstorm_in_a_bottle.info2","it can also be obtained by throwing a Pharaoh's Mask into Shimmer, opening Oasis/Mirage Crates, and via crafting in Hardmode.");
         add("item.confluence.sandstorm_in_a_bottle.info3","It is similar to the Cloud in a Bottle, providing a double-jump that allows for some extra height, but instead of a cloud beneath the feet, a sand jet appears and the character visually spins as they ascend on that jet.");
-        add("item.confluence.sandstorm_in_a_bottle.info4","It is similar to the Cloud in a Bottle, providing a double-jump that allows for some extra height, but instead of a cloud beneath the feet, a sand jet appears and the character visually spins as they ascend on that jet.");
+        add("item.confluence.sandstorm_in_a_bottle.info4","The Sandstorm jump goes 15 tiles into the air, totalling 21 tiles when put together with the first jump. This is nearly twice as high as the height achievable with the Cloud in a Bottle.");
         add("item.confluence.sharkron_balloon.info","The Sharkron Balloon is an accessory that combines the effects of the Tsunami in a Bottle and the Balloon Pufferfish.");
         add("item.confluence.sharkron_balloon.info2","It boosts jump height by 33% and jump speed by 30% increasing your first jump's height to ~10½ blocks (~75% increase), and provides a double jump that now goes 13 blocks, for a total height of 23½ blocks.");
         add("item.confluence.sharkron_balloon.info3","Jump height is oddly reduced when underwater, reducing your total underwater height from 17½ blocks (8 blocks + 9½ blocks from Tsunami jump) to 15 blocks (7 blocks + 8 blocks from Tsunami jump).");
@@ -561,7 +561,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magnet_flower.info2","It will use the first available Mana Potion in the player's inventory when out of mana (from left to right and top to bottom).");
         add("item.confluence.magnet_flower.info3","The Magnet Flower has the exact same functional effects of both its component items.");
         add("item.confluence.mana_cloak.info","The Mana Cloak is a Hardmode accessory that combines the effects of the Mana Flower and Star Cloak. It also adds a new effect to the stars spawned by the Star Cloak.");
-        add("item.confluence.mana_cloak.info2","When the player takes damage, the Mana Cloak will spawn three stars that damage enemies.");
+        add("item.confluence.mana_cloak.info2","It also adds a new effect to the stars spawned by the Star Cloak.");
         add("item.confluence.mana_cloak.info3","When the player takes damage, the Mana Cloak will spawn three stars that damage enemies.");
         add("item.confluence.mana_cloak.info4","The mana star will disappear 5 seconds after it is spawned if not picked up.");
         add("item.confluence.mana_cloak.info5","Note that only one mana-restoring star can spawn per second, no matter how many times the Mana Cloak is triggered.");
@@ -594,7 +594,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.berserkers_glove.info4","+12% increased melee speed");
         add("item.confluence.berserkers_glove.info5","+100% increased melee knockback");
         add("item.confluence.berserkers_glove.info6","+10% increased melee weapon size");
-        add("item.confluence.berserkers_glove.info7","+10% increased melee weapon size");
+        add("item.confluence.berserkers_glove.info7","+400 aggro");
         add("item.confluence.berserkers_glove.info8","Autoswing for melee weapons and whips");
         add("item.confluence.bezoar.info","The Bezoar is an immunity accessory that grants the player immunity to the Poisoned debuff.");
         add("item.confluence.bezoar.info2","It has a 1/100 (1%) / 1/50 (2%) chance to drop from Hornets, Moss Hornets, and Toxic Sludges.");
