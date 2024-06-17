@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,9 +12,11 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -145,6 +148,17 @@ public final class ItemEvents {
             } else if (item == ModItems.BOTTOMLESS_SHIMMER_BUCKET.get()) {
                 event.setShrink(1);
                 event.setTargets(Collections.singletonList(new ItemStack(ModItems.BOTTOMLESS_WATER_BUCKET.get())));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void livingEntityUseItem$tick(LivingEntityUseItemEvent.Tick event) {
+        ItemStack itemStack = event.getItem();
+        if (itemStack.is(Tags.Items.TOOLS_BOWS) || itemStack.is(Tags.Items.TOOLS_CROSSBOWS)) {
+            CompoundTag tag = itemStack.getTagElement(PrefixProvider.KEY);
+            if (tag != null && event.getEntity().level().getGameTime() % (int) (1.0 / tag.getDouble("attackSpeed")) == 0) {
+                event.setDuration(Math.round(event.getDuration() - 1));
             }
         }
     }

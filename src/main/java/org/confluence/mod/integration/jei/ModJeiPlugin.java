@@ -53,7 +53,9 @@ public class ModJeiPlugin implements IModPlugin {
         registration.addRecipes(ShimmerItemTransmutationCategory.TYPE, ShimmerItemTransmutationEvent.ITEM_TRANSMUTATION);
         for (CurioItems curio : CurioItems.values()) {
             BaseCurioItem item = curio.get();
-            registration.addItemStackInfo(new ItemStack(item), item.getInformation());
+            Component[] information = item.getInformation();
+            if (information.length == 0) continue;
+            registration.addItemStackInfo(new ItemStack(item), information);
         }
     }
 

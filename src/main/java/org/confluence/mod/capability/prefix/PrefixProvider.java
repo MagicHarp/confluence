@@ -92,7 +92,7 @@ public final class PrefixProvider {
 
     public static float getVelocity(ItemStack itemStack, float velocity) {
         CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
-        if (prefix != null) velocity *= (1 + prefix.getDouble("attackSpeed"));
+        if (prefix != null) velocity *= (1.0 + prefix.getDouble("attackSpeed"));
         return velocity;
     }
 }
