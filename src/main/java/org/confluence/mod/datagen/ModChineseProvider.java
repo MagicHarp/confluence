@@ -236,6 +236,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
         add("item.confluence.mana_cloak.tooltip", "收集星星会恢复魔力");
         add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
+        add("item.confluence.magic_quiver.tooltip", "箭的伤害提高10%，箭的速度大大提高");
+        add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
+        add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
+        add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
@@ -1718,6 +1722,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.STAR_VEIL.get(), "星星面纱");
         add(CurioItems.MANA_CLOAK.get(), "魔力斗篷");
         add(CurioItems.BEE_CLOAK.get(), "蜜蜂斗篷");
+        add(CurioItems.MAGIC_QUIVER.get(), "魔法箭袋");
+        add(CurioItems.MOLTEN_QUIVER.get(), "熔火箭袋");
+        add(CurioItems.STALKERS_QUIVER.get(), "潜行者箭袋");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");

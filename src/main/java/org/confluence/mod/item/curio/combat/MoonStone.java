@@ -45,7 +45,7 @@ public class MoonStone extends BaseCurioItem {
         if (living.level().getDayTime() % 24000 < 12000) return;
         ModEffects.healPerSecond(living, 2.0F);
         MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
-        if (effect != null && effect.getDuration() < 5) {
+        if (effect == null || effect.getDuration() < 5) {
             living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
         }
     }

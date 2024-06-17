@@ -72,12 +72,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     STINGER_NECKLACE("stinger_necklace", StingerNecklace::new), // 毒刺项链
     PANIC_NECKLACE("panic_necklace", PanicNecklace::new), // 恐慌项链
     SWEETHEART_NECKLACE("sweetheart_necklace", SweetheartNecklace::new), // 甜心项链
-    /* 魔法箭袋 */
-    /* 熔火箭袋 */
+    MAGIC_QUIVER("magic_quiver", MagicQuiver::new), // 魔法箭袋
+    MOLTEN_QUIVER("molten_quiver", MoltenQuiver::new), // 熔火箭袋
+    STALKERS_QUIVER("stalkers_quiver", StalkersQuiver::new), // 潜行者箭袋
     /* 侦察镜 */
     /* 步枪瞄准镜 */
     /* 狙击镜 */
-    /* 潜行者箭袋 */
     MAGMA_STONE("magma_stone", MagmaStone::new), // 岩浆石
     OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
     OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾

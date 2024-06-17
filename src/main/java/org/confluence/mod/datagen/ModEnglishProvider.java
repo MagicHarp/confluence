@@ -222,6 +222,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_warmer.tooltip", "Provides immunity to chill and freezing effects");
         add("item.confluence.mana_cloak.tooltip", "Stars restore mana when collected");
         add("item.confluence.star_cloak.tooltip", "Causes stars to fall after taking damage");
+        add("item.confluence.magic_quiver.tooltip", "Increases arrow damage by 10% and greatly increases arrow speed");
+        add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
+        add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
+        add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");

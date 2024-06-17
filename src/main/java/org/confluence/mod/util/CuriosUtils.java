@@ -31,7 +31,7 @@ public final class CuriosUtils {
                 IDynamicStackHandler stackHandler = curioStacksHandler.getStacks();
                 for (int i = 0; i < stackHandler.getSlots(); i++) {
                     ItemStack stack = stackHandler.getStackInSlot(i);
-                    if (!stack.isEmpty() && predicate.test(stackHandler.getStackInSlot(i))) {
+                    if (!stack.isEmpty() && predicate.test(stack)) {
                         isEmpty.set(false);
                         return;
                     }
