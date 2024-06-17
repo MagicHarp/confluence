@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
@@ -43,7 +44,10 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        living.heal(2);
-        living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1, 0, false, false, false));
+        ModEffects.healPerSecond(living, 2.0F);
+        MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
+        if (effect != null && effect.getDuration() < 5) {
+            living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
+        }
     }
 }

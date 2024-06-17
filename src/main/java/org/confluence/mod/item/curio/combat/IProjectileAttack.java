@@ -7,15 +7,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.util.CuriosUtils;
 
-import java.util.Optional;
-
 public interface IProjectileAttack {
     float getProjectileBonus();
 
-    static float apply(LivingEntity living, DamageSource damageSource, float amount) {
-        Optional<IProjectileAttack> curio;
-        if (damageSource.is(DamageTypeTags.IS_PROJECTILE) && (curio = CuriosUtils.findCurio(living, IProjectileAttack.class)).isPresent()) {
-            return amount * (1.0F + curio.get().getProjectileBonus());
+    static float apply(DamageSource damageSource, float amount) {
+        if (damageSource.is(DamageTypeTags.IS_PROJECTILE) && damageSource.getEntity() instanceof LivingEntity attacker) {
+            float bonus = (float) CuriosUtils.calculateValue(attacker, IProjectileAttack.class, IProjectileAttack::getProjectileBonus, 1.0);
+            return amount * bonus;
         }
         return amount;
     }

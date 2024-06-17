@@ -17,7 +17,7 @@ public interface IFlowerBoots {
     static void apply(LivingEntity living) {
         if (living.onGround() && living instanceof ServerPlayer && CuriosUtils.hasCurio(living, IFlowerBoots.class)) {
             ServerLevel serverLevel = (ServerLevel) living.level();
-            BlockPos blockPos = living.getOnPosLegacy();
+            BlockPos blockPos = living.getOnPos();
             if (!serverLevel.getBlockState(blockPos).is(ModTags.FLOWER_BOOTS_AVAILABLE)) return;
             BlockPos abovePos = blockPos.above();
             RandomSource random = serverLevel.random;

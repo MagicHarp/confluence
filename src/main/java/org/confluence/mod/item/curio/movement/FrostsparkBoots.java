@@ -3,9 +3,9 @@ package org.confluence.mod.item.curio.movement;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -28,14 +28,25 @@ public class FrostsparkBoots extends LightningBoots {
     }
 
     @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        super.curioTick(slotContext, stack);
+        IceSkates.tick(slotContext.entity(), stack);
+    }
+
+    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
-            return ImmutableMultimap.of(
-                Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
-                Attributes.MOVEMENT_SPEED, new AttributeModifier(BaseSpeedBoots.SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
-            );
+        if (living != null) {
+            if (stack.getOrCreateTag().getBoolean("onPosIsIce")) {
+                return ImmutableMultimap.of(
+                    Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
+                    Attributes.MOVEMENT_SPEED, getSpeedModifier(stack),
+                    Attributes.MOVEMENT_SPEED, IceSkates.MODIFIER
+                );
+            } else {
+                AttributeInstance attribute = living.getAttribute(Attributes.MOVEMENT_SPEED);
+                if (attribute != null) attribute.removeModifier(IceSkates.SPEED_UUID);
+            }
         }
         return super.getAttributeModifiers(slotContext, uuid, stack);
     }

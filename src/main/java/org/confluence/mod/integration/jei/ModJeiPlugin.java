@@ -3,6 +3,7 @@ package org.confluence.mod.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
@@ -23,7 +24,9 @@ public class ModJeiPlugin implements IModPlugin {
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
         for (CurioItems curio : CurioItems.values()) {
             BaseCurioItem item = curio.get();
-            registration.addItemStackInfo(new ItemStack(item), item.getInformation());
+            Component[] information = item.getInformation();
+            if (information.length == 0) continue;
+            registration.addItemStackInfo(new ItemStack(item), information);
         }
     }
 }

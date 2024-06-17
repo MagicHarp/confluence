@@ -34,7 +34,7 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ImmutableMultimap.of(
             Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
-            Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Speed Boots", stack.getOrCreateTag().getInt("speed") * 0.01, AttributeModifier.Operation.MULTIPLY_TOTAL)
+            Attributes.MOVEMENT_SPEED, getSpeedModifier(stack)
         );
     }
 

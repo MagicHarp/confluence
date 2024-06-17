@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -26,10 +27,25 @@ public class IceSkates extends BaseCurioItem {
     }
 
     @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        tick(slotContext.entity(), stack);
+    }
+
+    static void tick(LivingEntity living, ItemStack itemStack) {
+        if (living.level().isClientSide) return;
+        itemStack.getOrCreateTag().putBoolean("onPosIsIce", living.level().getBlockState(living.getOnPos()).is(BlockTags.ICE));
+    }
+
+    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         LivingEntity living = slotContext.entity();
-        if (living != null && living.level().getBlockState(living.getOnPos().below()).is(BlockTags.ICE)) {
-            return SPEED;
+        if (living != null) {
+            if (stack.getOrCreateTag().getBoolean("onPosIsIce")) {
+                return SPEED;
+            } else {
+                AttributeInstance attribute = living.getAttribute(Attributes.MOVEMENT_SPEED);
+                if (attribute != null) attribute.removeModifier(IceSkates.SPEED_UUID);
+            }
         }
         return EMPTY_ATTRIBUTE;
     }

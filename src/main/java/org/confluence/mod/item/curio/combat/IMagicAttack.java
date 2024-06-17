@@ -10,12 +10,16 @@ public interface IMagicAttack {
     double getMagicBonus();
 
     static float apply(DamageSource damageSource, float amount) {
-        if (damageSource.getEntity() instanceof Player player && damageSource.is(DamageTypes.MAGIC)) {
+        if (damageSource.getEntity() instanceof Player player && isMagic(damageSource)) {
             AtomicDouble atomic = new AtomicDouble(amount);
             player.getCapability(AbilityProvider.CAPABILITY).ifPresent(manaStorage ->
                 atomic.set(amount * manaStorage.getMagicAttackBonus()));
             return atomic.floatValue();
         }
         return amount;
+    }
+
+    static boolean isMagic(DamageSource damageSource) {
+        return damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.INDIRECT_MAGIC);
     }
 }
