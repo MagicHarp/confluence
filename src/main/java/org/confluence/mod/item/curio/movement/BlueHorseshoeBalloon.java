@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,12 +23,12 @@ public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResist
 
     @Override
     public double getBoost() {
-        return 1.75;
+        return ModConfigs.BLUE_HORSESHOE_BALLOON_JUMP_BOOST.get();
     }
 
     @Override
     public int getFallResistance() {
-        return -1;
+        return ModConfigs.BLUE_HORSESHOE_BALLOON_FALL_RESISTANCE.get();
     }
 
     @Override

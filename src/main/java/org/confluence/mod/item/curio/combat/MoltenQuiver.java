@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +14,11 @@ import java.util.List;
 public class MoltenQuiver extends MagicQuiver {
     public MoltenQuiver() {
         super(ModRarity.PINK);
+    }
+
+    @Override
+    public float getProjectileBonus() {
+        return ModConfigs.MOLTEN_QUIVER_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override

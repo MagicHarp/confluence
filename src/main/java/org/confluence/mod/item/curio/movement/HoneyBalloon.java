@@ -6,6 +6,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.combat.HoneyComb;
 import org.confluence.mod.item.curio.combat.IHoneycomb;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class HoneyBalloon extends HoneyComb implements IJumpBoost {
     @Override
     public double getBoost() {
-        return 1.33;
+        return ModConfigs.HONEY_BALLOON_JUMP_BOOST.get();
     }
 
     @Override

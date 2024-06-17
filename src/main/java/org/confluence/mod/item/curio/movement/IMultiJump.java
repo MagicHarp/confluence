@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -40,11 +41,11 @@ public interface IMultiJump {
                 } else if (curio instanceof CloudInABottle cloud) {
                     cloudSpeed.set(cloud.getJumpSpeed());
                 } else if (curio instanceof BundleOfBalloons) {
-                    sandstormSpeed.set(SandstormInABottle.SPEED);
-                    sandstormTicks.set(SandstormInABottle.TICKS);
-                    blizzardSpeed.set(BlizzardInABottle.SPEED);
-                    blizzardTicks.set(BlizzardInABottle.TICKS);
-                    cloudSpeed.set(CloudInABottle.SPEED);
+                    sandstormSpeed.set(ModConfigs.SANDSTORM_IN_A_BALLOON_JUMP_SPEED.get());
+                    sandstormTicks.set(ModConfigs.SANDSTORM_IN_A_BALLOON_JUMP_TICKS.get());
+                    blizzardSpeed.set(ModConfigs.BLIZZARD_IN_A_BALLOON_JUMP_SPEED.get());
+                    blizzardTicks.set(ModConfigs.BLIZZARD_IN_A_BALLOON_JUMP_TICKS.get());
+                    cloudSpeed.set(ModConfigs.CLOUD_IN_A_BALLOON_JUMP_SPEED.get());
                 }
             }
         });

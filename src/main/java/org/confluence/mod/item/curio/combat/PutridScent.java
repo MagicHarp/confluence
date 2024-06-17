@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,11 +42,11 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach, ICritica
 
     @Override
     public int getAggro() {
-        return -400;
+        return ModConfigs.PUTRID_SCENT_AGGRO.get();
     }
 
     @Override
     public double getChance() {
-        return 0.05;
+        return ModConfigs.PUTRID_SCENT_CRITICAL_CHANCE.get();
     }
 }

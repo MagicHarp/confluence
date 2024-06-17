@@ -11,6 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -32,7 +33,7 @@ public class BerserkersGlove extends BaseCurioItem implements IAggroAttach, IAut
 
     @Override
     public int getAggro() {
-        return 400;
+        return ModConfigs.BERSERKERS_GLOVE_AGGRO.get();
     }
 
     @Override

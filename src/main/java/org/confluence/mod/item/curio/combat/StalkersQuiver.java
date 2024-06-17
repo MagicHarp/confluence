@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.datagen.limit.CustomName;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,8 +18,13 @@ public class StalkersQuiver extends MagicQuiver implements IAggroAttach, CustomN
     }
 
     @Override
+    public float getProjectileBonus() {
+        return ModConfigs.STALKER_QUIVER_PROJECTILE_BONUS.get().floatValue();
+    }
+
+    @Override
     public int getAggro() {
-        return -400;
+        return ModConfigs.STALKERS_QUIVER_AGGRO.get();
     }
 
     @Override

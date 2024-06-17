@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -24,17 +25,17 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMag
 
     @Override
     public double getChance() {
-        return 0.08;
+        return ModConfigs.DESTROYER_EMBLEM_CRITICAL_CHANCE.get();
     }
 
     @Override
     public double getMagicBonus() {
-        return 0.1;
+        return ModConfigs.DESTROYER_EMBLEM_MAGIC_BONUS.get();
     }
 
     @Override
     public float getProjectileBonus() {
-        return 0.1F;
+        return ModConfigs.DESTROYER_EMBLEM_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override

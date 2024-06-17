@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,7 @@ public class HeroShield extends PaladinsShield implements IAggroAttach {
     }
 
     public int getAggro() {
-        return 400;
+        return ModConfigs.HERO_SHIELD_AGGRO.get();
     }
 
     @Override

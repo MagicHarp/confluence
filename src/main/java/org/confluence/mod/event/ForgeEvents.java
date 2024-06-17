@@ -66,8 +66,11 @@ public final class ForgeEvents {
         amount = WormScarf.apply(living, amount);
         amount = BrainOfConfusion.apply(living, random, amount);
 
-        if (ModConfigs.randomAttackDamage) {
-            amount *= ModUtils.nextFloat(random, (float) ModConfigs.randomAttackDamageMin, (float) ModConfigs.randomAttackDamageMax);
+        if (ModConfigs.RANDOM_ATTACK_DAMAGE.get()) {
+            amount *= ModUtils.nextFloat(random,
+                ModConfigs.RANDOM_ATTACK_DAMAGE_MIN.get().floatValue(),
+                ModConfigs.RANDOM_ATTACK_DAMAGE_MAX.get().floatValue()
+            );
         }
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
         event.setAmount(amount);

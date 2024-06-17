@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +18,7 @@ public class StingerNecklace extends HoneyComb implements IArmorPass {
 
     @Override
     public int getPassValue() {
-        return 5;
+        return ModConfigs.STINGER_NECKLACE_ARMOR_PASS.get();
     }
 
     @Override

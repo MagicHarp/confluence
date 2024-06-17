@@ -1,6 +1,7 @@
 package org.confluence.mod.item.curio.combat;
 
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 
 public class EyeOfTheGolem extends BaseCurioItem implements ICriticalHit {
@@ -10,6 +11,6 @@ public class EyeOfTheGolem extends BaseCurioItem implements ICriticalHit {
 
     @Override
     public double getChance() {
-        return 0.1;
+        return ModConfigs.EYE_OF_GOLEM_CRITICAL_CHANCE.get();
     }
 }

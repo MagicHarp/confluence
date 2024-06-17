@@ -6,6 +6,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +24,7 @@ public class FartInABottle extends BaseCurioItem implements IMultiJump {
 
     @Override
     public double getJumpSpeed() {
-        return 2.8;
+        return ModConfigs.FART_IN_A_BOTTLE_JUMP_SPEED.get();
     }
 
     @Override

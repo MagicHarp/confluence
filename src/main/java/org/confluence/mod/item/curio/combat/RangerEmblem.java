@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,7 +19,7 @@ public class RangerEmblem extends BaseCurioItem implements IProjectileAttack {
 
     @Override
     public float getProjectileBonus() {
-        return 0.15F;
+        return ModConfigs.RANGER_EMBLEM_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override

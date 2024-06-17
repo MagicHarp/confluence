@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -17,7 +18,12 @@ import java.util.UUID;
 public class BundleOfHorseshoeBalloons extends BundleOfBalloons implements IFallResistance {
     @Override
     public int getFallResistance() {
-        return -1;
+        return ModConfigs.BUNDLE_OF_HORSESHOE_BALLOONS_FALL_RESISTANCE.get();
+    }
+
+    @Override
+    public double getBoost() {
+        return ModConfigs.BUNDLE_OF_HORSESHOE_BALLOONS_JUMP_BOOST.get();
     }
 
     @Override

@@ -13,6 +13,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ShieldOfCthulhuPacketS2C;
@@ -34,7 +35,7 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
 
     @Override
     public double getChance() {
-        return 0.04;
+        return ModConfigs.SHIELD_OF_CTHULHU_CRITICAL_CHANCE.get();
     }
 
     @Override

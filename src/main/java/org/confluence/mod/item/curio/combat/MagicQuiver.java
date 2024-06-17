@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +33,7 @@ public class MagicQuiver extends BaseCurioItem implements IProjectileAttack {
 
     @Override
     public float getProjectileBonus() {
-        return 0.1F;
+        return ModConfigs.MAGIC_QUIVER_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override
