@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:magic_quiver"
+        },
+        {
+            "item": "confluence:magma_stone"
+        }
+    ],
+    "result": {
+        "item": "confluence:molten_quiver"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:putrid_scent"
+        },
+        {
+            "item": "confluence:magic_quiver"
+        }
+    ],
+    "result": {
+        "item": "confluence:stalkers_quiver"
+    }
+}
