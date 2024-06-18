@@ -27,7 +27,7 @@ public interface IMultiJump {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 Item curio = itemHandlerModifiable.getStackInSlot(i).getItem();
-                if (curio instanceof FartInABottle fart) {
+                if (curio instanceof FartInAJar fart) {
                     fartSpeed.set(fart.getJumpSpeed());
                 } else if (curio instanceof SandstormInABottle sandstorm) {
                     sandstormSpeed.set(sandstorm.getJumpSpeed());

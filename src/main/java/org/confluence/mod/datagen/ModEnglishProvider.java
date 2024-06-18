@@ -329,8 +329,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.fart_in_a_balloon.info","The Fart in a Balloon is an accessory that combines the effects of the Fart in a Jar and the Shiny Red Balloon.");
         add("item.confluence.fart_in_a_balloon.info2","It boosts jump height by 33% and jump speed by 30%, increasing the player's first jump's height to ~10.5 blocks (~75% increase), and provides a double jump that goes to 18.5 blocks, for a total of 29 blocks.");
         add("item.confluence.fart_in_a_balloon.info3","Unlike most other double-jump balloons, the Fart in a Balloon's full jump is high enough for the player to take minor fall damage, unless the player has fall damage immunity accessories like the Lucky Horseshoe. The double jump also makes a fart sound.");
-        add("item.confluence.fart_in_a_bottle.info","The Fart in a Jar is an accessory that allows the player to perform a double jump, accompanied by a farting sound effect.");
-        add("item.confluence.fart_in_a_bottle.info2","The Fart jump goes 10.5 tiles into the air, totalling 16.5 tiles when put together with the first jump.");
+        add("item.confluence.fart_in_a_jar.info","The Fart in a Jar is an accessory that allows the player to perform a double jump, accompanied by a farting sound effect.");
+        add("item.confluence.fart_in_a_jar.info2","The Fart jump goes 10.5 tiles into the air, totalling 16.5 tiles when put together with the first jump.");
         add("item.confluence.flippers.info","The Flipper is an accessory that allows a player to swim in liquid.");
         add("item.confluence.flippers.info2","With the Flipper equipped in an accessory slot, the player can swim upwards in Water, Lava, or Honey, by holding or pressing Jump Key repeatedly — essentially allowing unlimited multi-jumps while within liquid.");
         add("item.confluence.flippers.info3","It can be found in Water Chests and Ocean/Seaside Crates.");

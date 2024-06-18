@@ -12,12 +12,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FartInABottle extends BaseCurioItem implements IMultiJump {
-    public FartInABottle(Rarity rarity) {
+public class FartInAJar extends BaseCurioItem implements IMultiJump {
+    public FartInAJar(Rarity rarity) {
         super(rarity);
     }
 
-    public FartInABottle() {
+    public FartInAJar() {
         super(ModRarity.GREEN);
     }
 
@@ -34,8 +34,8 @@ public class FartInABottle extends BaseCurioItem implements IMultiJump {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.fart_in_a_bottle.info"),
-            Component.translatable("item.confluence.fart_in_a_bottle.info2")
+            Component.translatable("item.confluence.fart_in_a_jar.info"),
+            Component.translatable("item.confluence.fart_in_a_jar.info2")
         };
     }
 }

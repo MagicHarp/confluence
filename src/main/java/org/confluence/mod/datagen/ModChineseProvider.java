@@ -430,8 +430,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.fart_in_a_balloon.info","臭屁气球是一件配饰，组合了罐中臭屁和闪亮红气球的效果。");
         add("item.confluence.fart_in_a_balloon.info2","它可以让跳跃高度提高 33% 并让跳跃速度提高 30%，让玩家的首跳高度达到约 10.5 格（提高了约 75%），并让第二跳达到 18.5 格，总高度达 29 格。");
         add("item.confluence.fart_in_a_balloon.info3","不像大多数其他二连跳气球，臭屁气球的完整跳跃高度足以导致玩家承受轻微的掉落伤害，除非玩家有诸如幸运马掌这类能免疫掉落伤害的配饰。二连跳还会发出放屁声。");
-        add("item.confluence.fart_in_a_bottle.info","罐中臭屁是一件配饰，让玩家能够二连跳，跳跃时会伴随放屁音效。");
-        add("item.confluence.fart_in_a_bottle.info2","臭屁跳会跳起 10.5 图格高，算上初次跳跃后共 16.5 图格高。");
+        add("item.confluence.fart_in_a_jar.info","罐中臭屁是一件配饰，让玩家能够二连跳，跳跃时会伴随放屁音效。");
+        add("item.confluence.fart_in_a_jar.info2","臭屁跳会跳起 10.5 图格高，算上初次跳跃后共 16.5 图格高。");
         add("item.confluence.flippers.info","脚蹼是一种让玩家能在液体中游泳的配饰。");
         add("item.confluence.flippers.info2","将脚蹼装备在配饰栏中时，玩家可以在通过按住或反复按↷ 跳在水、熔岩、或蜂蜜中向上游——基本上就是允许在液体中无限连跳。");
         add("item.confluence.flippers.info3","它会出现在水中箱和海洋/海边匣中。");
@@ -1605,7 +1605,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.MAGILUMINESCENCE.get(), "魔光护符");
         add(CurioItems.FLIPPER.get(), "脚蹼");
         add(CurioItems.SANDSTORM_IN_A_BOTTLE.get(), "沙暴瓶");
-        add(CurioItems.FART_IN_A_BOTTLE.get(), "罐中臭屁");
+        add(CurioItems.FART_IN_A_Jar.get(), "罐中臭屁");
         add(CurioItems.SANDSTORM_IN_A_BALLOON.get(), "沙暴气球");
         add(CurioItems.FART_IN_A_BALLOON.get(), "臭屁气球");
         add(CurioItems.FROG_FLIPPER.get(), "青蛙脚蹼");

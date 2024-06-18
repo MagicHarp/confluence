@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FartInABalloon extends FartInABottle implements IJumpBoost {
+public class FartInABalloon extends FartInAJar implements IJumpBoost {
     public FartInABalloon() {
         super(ModRarity.LIGHT_RED);
     }
