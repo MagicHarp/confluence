@@ -118,7 +118,7 @@ public final class ModItems {
         TerraPotions.init();
         SpawnEggs.init();
         Armors.init();
-        CurioItems.init();
+        CurioItems.initialize();
         QuestedFishes.init();
         Foods.init();
         FishingPoles.init();

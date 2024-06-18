@@ -29,8 +29,7 @@ public class Aglet extends BaseCurioItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-    }
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
 
     @Override
     public Component[] getInformation() {

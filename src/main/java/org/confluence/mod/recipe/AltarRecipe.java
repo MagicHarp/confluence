@@ -27,13 +27,11 @@ import java.util.HashSet;
 
 public class AltarRecipe implements Recipe<Container> {
     private final ResourceLocation id;
-    private final String group;
     private final ItemStack result;
     private final NonNullList<Ingredient> ingredients;
 
-    public AltarRecipe(ResourceLocation pId, String pGroup, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
+    public AltarRecipe(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
         this.id = pId;
-        this.group = pGroup;
         this.result = pResult;
         this.ingredients = pIngredients;
     }
@@ -118,7 +116,7 @@ public class AltarRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull String getGroup() {
-        return group;
+        return "altar";
     }
 
     @Override
@@ -139,7 +137,6 @@ public class AltarRecipe implements Recipe<Container> {
     public static class Serializer implements RecipeSerializer<AltarRecipe> {
         @Override
         public @NotNull AltarRecipe fromJson(@NotNull ResourceLocation pRecipeId, @NotNull JsonObject pJson) {
-            String group = GsonHelper.getAsString(pJson, "group", "");
             ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pJson, "result"), true, true);
             JsonArray ingredients = GsonHelper.getAsJsonArray(pJson, "ingredients");
             NonNullList<Ingredient> nonNullList = NonNullList.withSize(ingredients.size(), AmountIngredient.EMPTY);
@@ -156,28 +153,25 @@ public class AltarRecipe implements Recipe<Container> {
                 }
             }
             if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for altar recipe");
-            return new AltarRecipe(pRecipeId, group, result, nonNullList);
+            return new AltarRecipe(pRecipeId, result, nonNullList);
         }
 
         @Override
         public @Nullable AltarRecipe fromNetwork(@NotNull ResourceLocation pRecipeId, @NotNull FriendlyByteBuf pBuffer) {
-//            String group = pBuffer.readUtf();
-//            int size = pBuffer.readVarInt();
-//            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, AmountIngredient.EMPTY);
-//            ingredients.replaceAll(ignored -> AmountIngredient.Serializer.INSTANCE.parse(pBuffer));
-//            ItemStack result = pBuffer.readItem();
-//            return new AltarRecipe(pRecipeId, group, result, ingredients);
-            return null;
+            int size = pBuffer.readVarInt();
+            NonNullList<Ingredient> ingredients = NonNullList.withSize(size, AmountIngredient.EMPTY);
+            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(pBuffer));
+            ItemStack result = pBuffer.readItem();
+            return new AltarRecipe(pRecipeId, result, ingredients);
         }
 
         @Override
         public void toNetwork(@NotNull FriendlyByteBuf pBuffer, @NotNull AltarRecipe pRecipe) {
-//            pBuffer.writeUtf(pRecipe.group);
-//            pBuffer.writeVarInt(pRecipe.ingredients.size());
-//            for (Ingredient ingredient : pRecipe.ingredients) {
-//                ingredient.toNetwork(pBuffer);
-//            }
-//            pBuffer.writeItem(pRecipe.result);
+            pBuffer.writeVarInt(pRecipe.ingredients.size());
+            for (Ingredient ingredient : pRecipe.ingredients) {
+                ingredient.toNetwork(pBuffer);
+            }
+            pBuffer.writeItem(pRecipe.result);
         }
     }
 

@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio;
 
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.item.ModItems;
@@ -9,6 +10,8 @@ import org.confluence.mod.item.curio.HealthAndMana.*;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
+import org.confluence.mod.item.curio.datadriven.DataDrivenCurioGenerator;
+import org.confluence.mod.item.curio.datadriven.DataDrivenCurioInfo;
 import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.fishing.*;
 import org.confluence.mod.item.curio.informational.*;
@@ -16,9 +19,11 @@ import org.confluence.mod.item.curio.miscellaneous.*;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-public enum CurioItems implements EnumRegister<BaseCurioItem> {
+public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     ADHESIVE_BANDAGE("adhesive_bandage", AdhesiveBandage::new), // 粘性绷带
     BEZOAR("bezoar", Bezoar::new), // 牛黄
     MEDICATED_BANDAGE("medicated_bandage", MedicatedBandage::new), // 药用绷带
@@ -195,8 +200,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     BUNDLE_OF_BALLOONS("bundle_of_balloons", BundleOfBalloons::new), // 气球束
     LUCKY_HORSESHOE("lucky_horseshoe", LuckyHorseshoe::new), // 幸运马掌
     OBSIDIAN_HORSESHOE("obsidian_horseshoe", ObsidianHorseshoe::new), // 黑曜石马掌
-    BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
+    BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
     PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
@@ -306,7 +311,18 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
         return value;
     }
 
-    public static void init() {
+    public static CurioItems create(String name, String id, Supplier<BaseCurioItem> curio) {
+        throw new IllegalStateException("Enum not extended");
+    }
+
+    public static void initialize() {
+        DataDrivenCurioInfo.generatingInfos().forEach(info -> {
+            String id = info.id();
+            String className = Arrays.stream(id.split("_"))
+                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining());
+            create(id.toUpperCase(), id.toLowerCase(), () -> new DataDrivenCurioGenerator(className, info.rarity(), info.tooltips(), info.classMap()).newInstance());
+        });
     }
 
     public static void acceptTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item> tag) {

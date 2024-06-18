@@ -1,6 +1,5 @@
 package org.confluence.mod;
 
-import com.google.gson.Gson;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +9,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.command.ModArgumentTypeInfos;
@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 
+import java.nio.file.Path;
 import java.util.HashSet;
 
 @SuppressWarnings("unused")
@@ -34,10 +35,10 @@ import java.util.HashSet;
 public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
-    public static final Gson GSON = new Gson();
 
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
     public static final ResourceKey<Level> HELL = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID, "hell"));
+    public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
 
     public Confluence() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
@@ -55,5 +56,6 @@ public final class Confluence {
         ModSounds.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
+        //ASMifier.main(new String[]{"org.confluence.mod.item.curio.movement.Balloon"});
     }
 }
