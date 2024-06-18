@@ -5,15 +5,17 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SandBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.jetbrains.annotations.NotNull;
 
 public class SpreadingSandBlock extends SandBlock implements ISpreadable {
     private final Type type;
 
     public SpreadingSandBlock(Type type, int color, Properties properties) {
-        super(color, properties.randomTicks());
+        super(color, properties.randomTicks().instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND));
         this.type = type;
         registerDefaultState(stateDefinition.any().setValue(STILL_ALIVE, true));
     }

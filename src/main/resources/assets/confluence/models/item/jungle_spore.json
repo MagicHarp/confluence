@@ -1,7 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "confluence:item/jungle_spore",
-        "_comment_delete_me": "方块和物品的贴图不一样"
+        "layer0": "confluence:item/jungle_spore"
     }
 }

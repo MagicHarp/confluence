@@ -2,10 +2,11 @@ package org.confluence.mod.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,7 +18,6 @@ import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.natural.*;
-import org.confluence.mod.block.natural.MushroomBlock;
 import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.natural.spreadable.SpreadingBlock;
@@ -26,6 +26,7 @@ import org.confluence.mod.block.natural.spreadable.SpreadingSandBlock;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -39,17 +40,17 @@ public final class ModBlocks {
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CORRUPT, 0x372B4B, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CORRUPT, 0x372B4B, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> CORRUPT_GRASS_BLOCK = registerWithItem("corrupt_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     // hallow
     public static final LogBlocks PEARL_LOG_BLOCKS = new LogBlocks("pearl", PEARL);
     public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SpreadingSandBlock(ISpreadable.Type.HALLOW, 0xEDD5F6, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SpreadingSandBlock(ISpreadable.Type.HALLOW, 0xEDD5F6, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY)));
     public static final RegistryObject<Block> HALLOW_GRASS_BLOCK = registerWithItem("hallow_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     // crimson
     public static final LogBlocks SHADOW_LOG_BLOCKS = new LogBlocks("shadow", SHADOW);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CRIMSON, 0x5313E0, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CRIMSON, 0x5313E0, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCK = registerWithItem("another_crimson_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     // desert
     public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM);
@@ -96,11 +97,11 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     public static final RegistryObject<BaseChainBlock> BONE_CHAIN = registerWithItem("bone_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     // plant
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", ()->new MushroomBlock(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get()));//毒蘑菇
-    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", ()->new MushroomBlock(ModBlocks.CORRUPT_GRASS_BLOCK.get()));//魔菇
-    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", ()->new MushroomBlock(ModBlocks.MUSHROOM_GRASS_BLOCK.get()));//发光蘑菇
-    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", ()->new MushroomBlock(Blocks.GRASS_BLOCK));//生命蘑菇
-    public static final RegistryObject<Block> JUNGLE_SPORE = registerWithoutItem("jungle_spore", ()->new MushroomBlock(Blocks.GRASS_BLOCK)); // TODO: 丛林草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//毒蘑菇
+    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//魔菇
+    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.MUSHROOM_GRASS_BLOCK.get())));//发光蘑菇
+    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", ()->new MushroomBlock(Set.of(Blocks.GRASS_BLOCK,HALLOW_GRASS_BLOCK.get())));//生命蘑菇
+    public static final RegistryObject<Block> JUNGLE_SPORE = registerWithoutItem("jungle_spore", ()->new MushroomBlock(Set.of(Blocks.GRASS_BLOCK))); // TODO: 丛林草
     // 草药
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
     public static final RegistryObject<BaseHerbBlock> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
@@ -113,12 +114,12 @@ public final class ModBlocks {
         WATERLEAF.get(),FLAMEFLOWERS.get(),MOONSHINE_GRASS.get(),SHINE_ROOT.get(),SHIVERINGTHORNS.get(),SUNFLOWERS.get(),DEATHWEED.get()).build(null));
 
     // grass
-    public static final RegistryObject<FlowerBlock> CORRUPT_GRASS = registerWithItem("corrupt_grass", BasePlantBlock::new);//腐化草
-    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", BasePlantBlock::new);//猩红饿鬼草
-    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_EYEBALL_GRASS = registerWithItem("another_crimson_eyeball_grass", BasePlantBlock::new);//猩红眼球草
-    public static final RegistryObject<FlowerBlock> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", BasePlantBlock::new);//猩红草
-    public static final RegistryObject<FlowerBlock> HALLOW_GRASS = registerWithItem("hallow_grass", BasePlantBlock::new);//神圣草
-    public static final RegistryObject<FlowerBlock> HALLOW_FLOWERS = registerWithItem("hallow_flowers", BasePlantBlock::new);//神圣花丛
+    public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", ()->new BasePlantBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//腐化草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红饿鬼草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_EYEBALL_GRASS = registerWithItem("another_crimson_eyeball_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红眼球草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
+    public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
+    public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
     // <--空格呢?!
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {

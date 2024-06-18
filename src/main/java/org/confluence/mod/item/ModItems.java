@@ -99,6 +99,7 @@ public final class ModItems {
     // 蘑菇
     public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", ()->new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get()));
     public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", ()->new MushroomItem(ModBlocks.EBONY_MUSHROOM.get()));
+    // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
     public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get()));
     public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new MushroomItem(ModBlocks.LIFE_MUSHROOM.get()));
     public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new MushroomItem(ModBlocks.JUNGLE_SPORE.get()));
