@@ -156,6 +156,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         }
         for (Boxes boxes : Boxes.values()) dropSelf(boxes.get());
 
+        // 草药
         addHerbDrop(WATERLEAF.get(), ModItems.WATERLEAF.get(), ModItems.WATERLEAF_SEED.get());
         addHerbDrop(FLAMEFLOWERS.get(), ModItems.FLAMEFLOWERS.get(), ModItems.FLAMEFLOWERS_SEED.get());
         addHerbDrop(MOONSHINE_GRASS.get(), ModItems.MOONSHINE_GRASS.get(), ModItems.MOONSHINE_GRASS_SEED.get());
@@ -163,6 +164,15 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         addHerbDrop(SHIVERINGTHORNS.get(), ModItems.SHIVERINGTHORNS.get(), ModItems.SHIVERINGTHORNS_SEED.get());
         addHerbDrop(SUNFLOWERS.get(), ModItems.SUNFLOWERS.get(), ModItems.SUNFLOWERS_SEED.get());
         addHerbDrop(DEATHWEED.get(), ModItems.DEATHWEED.get(), ModItems.DEATHWEED_SEED.get());
+
+        dropOther(ANOTHER_CRIMSON_MUSHROOM.get(), ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
+        dropOther(EBONY_MUSHROOM.get(), ModItems.EBONY_MUSHROOM.get());
+        dropOther(GLOWING_MUSHROOM.get(), ModItems.GLOWING_MUSHROOM.get());
+        dropOther(LIFE_MUSHROOM.get(), ModItems.LIFE_MUSHROOM.get());
+        add(JUNGLE_SPORE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+            .add(LootItem.lootTableItem(ModItems.JUNGLE_SPORE.get())
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))));
+
     }
 
     @Override
@@ -178,6 +188,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         ));
     }
 
+    // TODO: 时运 再生法杖 再生之斧
     private void addHerbDrop(BaseHerbBlock block,Item herb,Item seed) {
         add(block,LootTable.lootTable()
             .withPool(LootPool.lootPool()
