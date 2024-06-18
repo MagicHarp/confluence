@@ -1605,7 +1605,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.MAGILUMINESCENCE.get(), "魔光护符");
         add(CurioItems.FLIPPER.get(), "脚蹼");
         add(CurioItems.SANDSTORM_IN_A_BOTTLE.get(), "沙暴瓶");
-        add(CurioItems.FART_IN_A_Jar.get(), "罐中臭屁");
+        add(CurioItems.FART_IN_A_JAR.get(), "罐中臭屁");
         add(CurioItems.SANDSTORM_IN_A_BALLOON.get(), "沙暴气球");
         add(CurioItems.FART_IN_A_BALLOON.get(), "臭屁气球");
         add(CurioItems.FROG_FLIPPER.get(), "青蛙脚蹼");
