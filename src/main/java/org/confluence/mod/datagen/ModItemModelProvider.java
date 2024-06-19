@@ -2,11 +2,7 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -15,6 +11,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.*;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.HerbSeedItem;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.food.BaseFoodItem;
@@ -49,7 +46,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             String path = item.getId().getPath().toLowerCase();
             boolean isBlockItem = false;
             try {
-                if(value instanceof ItemNameBlockItem){
+                if(value instanceof HerbSeedItem){
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }else if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;

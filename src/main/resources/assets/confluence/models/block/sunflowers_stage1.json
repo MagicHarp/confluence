@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "confluence:block/sunflowers_stage1",
+    "particle": "confluence:block/sunflowers_stage1"
+  },
+  "render_type": "cutout"
+}

@@ -32,12 +32,15 @@ import org.jetbrains.annotations.Nullable;
 /** @author voila1106 */
 public abstract class BaseHerbBlock extends CropBlock implements CustomModel, CustomItemModel, EntityBlock {
     public static final int MAX_AGE = 2;
+    public static final int BRIGHTNESS = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
-    // TODO: 按实际情况修改
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
 
     public BaseHerbBlock(){
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION).randomTicks());
+    }
+    public BaseHerbBlock(Properties prop){
+        super(prop);
     }
 
     @Override
@@ -48,13 +51,14 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
     }
 
     // 重写，不检查光照，不检查合理密植
+    // TODO: 部分草药有粒子
     @Override
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom){
         int age = getAge(pState);
         if(age < getMaxAge() - 1){
             // 抄的父方法
             if(!pLevel.isAreaLoaded(pPos, 1)) return;
-            float f = 25F;   /* getGrowthSpeed(this, pLevel, pPos); */
+            float f = 0.7F;   /* getGrowthSpeed(this, pLevel, pPos); */
             if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)){
                 pLevel.setBlock(pPos, this.getStateForAge(age + 1), 2);
                 net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
@@ -111,13 +115,14 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
         if(pLevel.isClientSide()){
             return null;
         }
+        // 每刻判断能不能开花
         return ModUtils.getTicker(pBlockEntityType, ModBlocks.HERBS_ENTITY.get(), (level, blockPos, blockState, e) -> {
-            int age = getAge(pState);
+            int age = getAge(blockState);
             if(age < MAX_AGE - 1) return;
-            if(canBloom((ServerLevel) pLevel, blockState)){
-                pLevel.setBlock(blockPos, pState.setValue(AGE, MAX_AGE), 2);
+            if(canBloom((ServerLevel) level, blockState)){
+                level.setBlock(blockPos, blockState.setValue(AGE, MAX_AGE), 2);
             }else if(age == MAX_AGE){ // 如果不能开花且已经开花
-                pLevel.setBlock(blockPos, pState.setValue(AGE, MAX_AGE - 1), 2);
+                level.setBlock(blockPos, blockState.setValue(AGE, MAX_AGE - 1), 2);
             }
         });
     }

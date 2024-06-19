@@ -6,6 +6,7 @@ import com.lowdragmc.shimmer.forge.event.ForgeShimmerReloadEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.client.shimmer.DemonTorchColor;
 import org.confluence.mod.client.shimmer.RainbowTorchColor;
@@ -27,6 +28,9 @@ public final class ShimmerEvents {
             Torches.ColorfulWallTorchBlock wall = torches.wall.get();
             LightManager.INSTANCE.registerBlockLight(wall, (blockState, blockPos) -> wall.getColor());
         }
+        LightManager.INSTANCE.registerBlockLight(ModBlocks.MOONSHINE_GRASS.get(), (blockState, blockPos) -> ModBlocks.MOONSHINE_GRASS.get().getColor(blockState));
+        LightManager.INSTANCE.registerBlockLight(ModBlocks.DEATHWEED.get(), (blockState, blockPos) -> ModBlocks.DEATHWEED.get().getColor(blockState));
+
         LightManager.INSTANCE.registerItemLight(Torches.DEMON_TORCH.item.get(), itemStack -> DemonTorchColor.INSTANCE);
         LightManager.INSTANCE.registerItemLight(Torches.RAINBOW_TORCH.item.get(), itemStack -> RainbowTorchColor.INSTANCE);
     }
