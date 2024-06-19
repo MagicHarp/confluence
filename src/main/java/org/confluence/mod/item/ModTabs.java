@@ -162,7 +162,10 @@ public final class ModTabs {
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ModItems.CLAM.get());
+                output.accept(ModItems.HERB_BAG.get());
+                output.accept(ModItems.CAN_OF_WORMS.get());
                 output.accept(ModItems.CHRISTMAS_GIFT.get());
+                output.accept(ModItems.RED_ENVELOPE.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
                 output.accept(ALTAR_BLOCK.get());

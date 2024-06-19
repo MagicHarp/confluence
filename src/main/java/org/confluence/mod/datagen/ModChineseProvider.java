@@ -1242,13 +1242,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.BLACK_LENS.get(), "黑晶状体");
         add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
         add(Materials.ANTLION_MANDIBLE.get(), "蚁狮下颚");
-        add(Materials.BLINKROOT_GAINS.get(), "闪耀假果");
-        add(Materials.DAYBLOOM_POLLEN.get(), "太阳花粉");
-        add(Materials.DEATHWEED_FLESH.get(), "死亡舌叶");
-        add(Materials.FIREBLOSSOM_BUD.get(), "火焰花蕾");
-        add(Materials.MOONGLOW_PETAL.get(), "月光之叶");
-        add(Materials.SHIVERTHRON_SHARD.get(), "寒颤棘刺");
-        add(Materials.WATERLEAF_POT.get(), "幌菊精华");
         add(Materials.BLACK_INK.get(), "黑墨水");
         add(Materials.SHARK_FIN.get(), "鲨鱼鳍");
         add(Materials.SHADOW_SCALE.get(), "暗影鳞片");
@@ -1360,6 +1353,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(GUMMY_WORM.get(), "黏性蠕虫");
         add(BOULDER.get(), "巨石");
         add(CHRISTMAS_GIFT.get(), "圣诞礼物");
+        add(RED_ENVELOPE.get(), "红包");
+        add(CAN_OF_WORMS.get(), "蠕虫罐头");
+        add(HERB_BAG.get(), "草药袋");
         add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");

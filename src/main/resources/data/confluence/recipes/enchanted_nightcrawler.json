@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:worm"
+        },
+        {
+            "item": "minecraft:falling_star"
+        }
+    ],
+    "result": {
+        "item": "confluence:enchanted_nightcrawler",
+        "count": 1
+    }
+}
