@@ -16,6 +16,7 @@ import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
+import org.confluence.mod.item.curio.combat.IScope;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
@@ -29,6 +30,7 @@ public final class PlayerEvents {
             IMayFly.sendMsg(serverPlayer);
             IMultiJump.sendMsg(serverPlayer);
             IAutoAttack.sendMsg(serverPlayer);
+            IScope.sendMsg(serverPlayer);
         }
     }
 
@@ -63,6 +65,7 @@ public final class PlayerEvents {
             IMultiJump.sendMsg(serverPlayer);
             IMayFly.sendMsg(serverPlayer);
             IAutoAttack.sendMsg(serverPlayer);
+            IScope.sendMsg(serverPlayer);
         }
     }
 

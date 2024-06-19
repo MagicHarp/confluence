@@ -16,6 +16,7 @@ public record GravityGlobePacketS2C(boolean has) {
     public static GravityGlobePacketS2C decode(FriendlyByteBuf friendlyByteBuf) {
         return new GravityGlobePacketS2C(friendlyByteBuf.readBoolean());
     }
+
     public static void handle(GravityGlobePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> GravitationHandler.handleGlobe(packet, ctx)));
         ctx.get().setPacketHandled(true);

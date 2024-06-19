@@ -155,6 +155,9 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue SHARKRON_BALLOON_JUMP_SPEED = BUILDER.defineInRange("SharkronBalloon", 1.1, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue TSUNAMI_IN_A_BOTTLE_JUMP_SPEED = BUILDER.defineInRange("TsunamiInABottle", 1.0, 0.0, Double.MAX_VALUE);
 
+    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_ARROW_SPEED = BUILDER.pop().pop().push("Magic Quiver").defineInRange("arrowSpeedMultiplier", 2.0, 0.0, Double.MAX_VALUE);
+    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_NO_CONSUME_CHANCE = BUILDER.defineInRange("arrowNoConsumeChance", 0.2, 0.0, 1.0);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static final ArrayList<BlockState> rareBlocks = new ArrayList<>();

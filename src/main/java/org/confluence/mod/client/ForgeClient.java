@@ -2,7 +2,10 @@ package org.confluence.mod.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -10,11 +13,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
+import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.misc.ModTags;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ForgeClient {
@@ -29,6 +34,7 @@ public final class ForgeClient {
         IAutoAttack.apply(minecraft, localPlayer);
 
         AnimateColor.doUpdateExpertColor();
+        AnimateColor.doUpdateMasterColor();
     }
 
     @SubscribeEvent
@@ -47,6 +53,17 @@ public final class ForgeClient {
     public static void cameraSetup(ViewportEvent.ComputeCameraAngles event) {
         if (GravitationHandler.isShouldRot()) {
             event.setRoll(180.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public static void fov(ComputeFovModifierEvent event) {
+        Player player = event.getPlayer();
+        if (ClientPacketHandler.isHasScope() && player.isCrouching() &&
+            Minecraft.getInstance().options.getCameraType().isFirstPerson() &&
+            player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.RANGED_WEAPON)
+        ) {
+            event.setNewFovModifier(0.1F);
         }
     }
 }

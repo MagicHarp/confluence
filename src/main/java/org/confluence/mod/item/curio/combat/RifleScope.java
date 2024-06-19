@@ -6,30 +6,24 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MagicQuiver extends BaseCurioItem implements IProjectileAttack, IMagicQuiver {
-    public MagicQuiver() {
+public class RifleScope extends BaseCurioItem implements IScope {
+    public RifleScope() {
         super(ModRarity.LIGHT_RED);
     }
 
-    public MagicQuiver(Rarity rarity) {
+    public RifleScope(Rarity rarity) {
         super(rarity);
     }
 
     @Override
-    public float getProjectileBonus() {
-        return ModConfigs.MAGIC_QUIVER_PROJECTILE_BONUS.get().floatValue();
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.magic_quiver.tooltip"));
-        list.add(Component.translatable("item.confluence.magic_quiver.tooltip2"));
+        list.add(TOOLTIP);
+        list.add(TOOLTIP2);
     }
 }

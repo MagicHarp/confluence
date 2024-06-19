@@ -11,7 +11,8 @@
         "InventoryChangeTriggerMixin",
         "LivingEntityAccessor",
         "LivingEntityMixin",
-        "SlimeBlockMixin"
+        "SlimeBlockMixin",
+        "TagLoaderMixin"
     ],
     "minVersion": "0.8.5",
     "client": [

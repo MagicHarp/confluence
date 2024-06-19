@@ -48,6 +48,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.stopwatch", "Displays how fast the player is moving");
         add("curios.tooltip.tally_counter", "Displays how many monsters have been killed");
         add("curios.tooltip.weather_radio", "Displays the weather");
+        add("curios.tooltip.scope", "Increases view range for ranged weapons");
+        add("curios.tooltip.scope2", "Hold ranged weapon and crouch to zoom out");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -86,6 +88,18 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.fast_clock.tooltip", "Immunity to Slow");
         add("item.confluence.blindfold.tooltip", "Immunity to Blindness");
         add("item.confluence.bezoar.tooltip", "Immunity to Poison");
+        add("item.confluence.trifold_map.tooltip", "Immunity to Nausea");
+        add("item.confluence.the_plan.tooltip", "Immunity to Slow and Nausea");
+        add("item.confluence.holy_water.tooltip", "Immunity to Wither");
+        add("item.confluence.energy_bar.tooltip", "Immunity to Hunger");
+        add("item.confluence.flashlight.tooltip", "Immunity to Darkness");
+        add("item.confluence.hand_drill.tooltip", "Immunity to Mining Fatigue");
+        add("item.confluence.shot_put.tooltip", "Immunity to Levitation");
+        add("item.confluence.searchlight.tooltip", "Immunity to Blindness and Darkness");
+        add("item.confluence.detoxification_capsule.tooltip", "Immunity to Poison and Wither");
+        add("item.confluence.explorers_equipment.tooltip", "Immunity to Mining Fatigue and Levitation");
+        add("item.confluence.nutrient_solution.tooltip", "Immunity to Weakness and Hunger");
+        add("item.confluence.ankh_charm.tooltip", "Grants immunity to most debuffs");
         add("item.confluence.cobalt_shield.tooltip", "Grants immunity to knockback");
         add("item.confluence.band_of_regeneration.tooltip", "Slowly regenerates life");
         add("item.confluence.mechanical_lens.tooltip", "Grants improved wire vision");
@@ -149,6 +163,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
         add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
+        add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
+        add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 

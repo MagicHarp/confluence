@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:vitamins"
+        },
+        {
+            "item": "confluence:energy_bar"
+        }
+    ],
+    "result": {
+        "item": "confluence:nutrient_solution"
+    }
+}

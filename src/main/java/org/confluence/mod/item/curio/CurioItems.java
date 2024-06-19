@@ -1,11 +1,13 @@
 package org.confluence.mod.item.curio;
 
+import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.AncientChisel;
 import org.confluence.mod.item.curio.construction.ExtendoGrip;
+import org.confluence.mod.item.curio.datadriven.DataDrivenCurioGenerator;
+import org.confluence.mod.item.curio.datadriven.DataDrivenCurioInfo;
 import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.fishing.AnglerEarring;
 import org.confluence.mod.item.curio.health.BandOfRegeneration;
@@ -15,26 +17,28 @@ import org.confluence.mod.item.curio.missellaneous.TreasureMagnet;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-public enum CurioItems implements EnumRegister<BaseCurioItem> {
-    //ADHESIVE_BANDAGE("adhesive_bandage", AdhesiveBandage::new), // 粘性绷带
-    BEZOAR("bezoar", Bezoar::new), // 牛黄
-    //MEDICATED_BANDAGE("medicated_bandage", MedicatedBandage::new), // 药用绷带
-    BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布
-    //POCKET_MIRROR("pocket_mirror", PocketMirror::new), // 袖珍镜
-    //REFLECTIVE_SHADES("reflective_shades", ReflectiveShades::new), // 反光墨镜
-    VITAMINS("vitamins", Vitamins::new), // 维生素
-    //ARMOR_POLISH("armor_polish", ArmorPolish::new), // 盔甲抛光剂
-    //ARMOR_BRACING("armor_bracing", ArmorBracing::new), // 盔甲背带
-    FAST_CLOCK("fast_clock", FastClock::new), // 快走时钟
-    //TRIFOLD_MAP("trifold_map", TrifoldMap::new), // 三折地图
-    //THE_PLAN("the_plan", ThePlan::new), // 计划书
-    //MEGAPHONE("megaphone", Megaphone::new), // 扩音器
-    //NAZAR("nazar", Nazar::new), // 邪眼
-    //COUNTERCURSE_MANTRA("contercurse_mantra", CountercurseMantra::new), // 反诅咒咒语
-    //ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
-    //ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
+public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
+    BEZOAR("bezoar", Bezoar::new), // 牛黄 中毒
+    HOLY_WATER("holy_water", HolyWater::new), // 圣水 凋零
+    DETOXIFICATION_CAPSULE("detoxification_capsule", DetoxificationCapsule::new), // 解毒囊
+    VITAMINS("vitamins", Vitamins::new), // 维生素 虚弱
+    ENERGY_BAR("energy_bar", EnergyBar::new), // 能量棒 饥饿
+    NUTRIENT_SOLUTION("nutrient_solution", NutrientSolution::new), // 营养液
+    BLINDFOLD("blindfold", Blindfold::new), // 蒙眼布 失明
+    FLASHLIGHT("flashlight", Flashlight::new), // 手电筒 黑暗
+    SEARCHLIGHT("searchlight", Searchlight::new), // 探照灯
+    FAST_CLOCK("fast_clock", FastClock::new), // 快走时钟 缓慢
+    TRIFOLD_MAP("trifold_map", TrifoldMap::new), // 三折地图 反胃
+    THE_PLAN("the_plan", ThePlan::new), // 计划书
+    HAND_DRILL("hand_drill", HandDrill::new), // 手钻 挖掘疲劳
+    SHOT_PUT("shot_put", ShotPut::new), // 铅球 漂浮
+    EXPLORERS_EQUIPMENT("explorers_equipment", ExplorersEquipment::new), // 探险家宝具
+    ANKH_CHARM("ankh_charm", AnkhCharm::new), // 十字章护身符
+    ANKH_SHIELD("ankh_shield", AnkhShield::new), // 十字章护盾
     STAR_CLOAK("star_cloak", StarCloak::new), // 星星斗篷
     STAR_VEIL("star_veil", StarVeil::new), // 星星面纱
     BEE_CLOAK("bee_cloak", BeeCloak::new), // 蜜蜂斗篷
@@ -74,9 +78,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     MAGIC_QUIVER("magic_quiver", MagicQuiver::new), // 魔法箭袋
     MOLTEN_QUIVER("molten_quiver", MoltenQuiver::new), // 熔火箭袋
     STALKERS_QUIVER("stalkers_quiver", StalkersQuiver::new), // 潜行者箭袋
-    /* 侦察镜 */
-    /* 步枪瞄准镜 */
-    /* 狙击镜 */
+    RIFLE_SCOPE("rifle_scope", RifleScope::new), // 步枪瞄准镜
+    SNIPER_SCOPE("sniper_scope", SniperScope::new), // 狙击镜
+    RECON_SCOPE("recon_scope", ReconScope::new), // 侦察镜
     MAGMA_STONE("magma_stone", MagmaStone::new), // 岩浆石
     OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
     OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾
@@ -164,10 +168,10 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     LAVA_WADERS("lava_waders", LavaWaders::new), // 熔岩靴
     TERRASPARK_BOOTS("terraspark_boots", TerrasparkBoots::new), // 泰拉闪耀靴
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
-    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
+    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球
@@ -179,8 +183,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
     BUNDLE_OF_BALLOONS("bundle_of_balloons", BundleOfBalloons::new), // 气球束
     LUCKY_HORSESHOE("lucky_horseshoe", LuckyHorseshoe::new), // 幸运马掌
     OBSIDIAN_HORSESHOE("obsidian_horseshoe", ObsidianHorseshoe::new), // 黑曜石马掌
-    BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     WHITE_HORSESHOE_BALLOON("white_horseshoe_balloon", WhiteHorseshoeBalloon::new), // 白马掌气球
+    BLUE_HORSESHOE_BALLOON("blue_horseshoe_balloon", BlueHorseshoeBalloon::new), // 蓝马掌气球
     YELLOW_HORSESHOE_BALLOON("yellow_horseshoe_balloon", YellowHorseshoeBalloon::new), // 黄马掌气球
     GREEN_HORSESHOE_BALLOON("green_horseshoe_balloon", GreenHorseshoeBalloon::new), // 绿马掌气球
     PINK_HORSESHOE_BALLOON("pink_horseshoe_balloon", PinkHorseshoeBalloon::new), // 粉马掌气球
@@ -239,7 +243,17 @@ public enum CurioItems implements EnumRegister<BaseCurioItem> {
         return value;
     }
 
-    public static void init() {
-        Confluence.LOGGER.info("Registering curio items");
+    public static CurioItems create(String name, String id, Supplier<BaseCurioItem> curio) {
+        throw new IllegalStateException("Enum not extended");
+    }
+
+    public static void initialize() {
+        DataDrivenCurioInfo.generatingInfos().forEach(info -> {
+            String id = info.id();
+            String className = Arrays.stream(id.split("_"))
+                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining());
+            create(id.toUpperCase(), id.toLowerCase(), () -> new DataDrivenCurioGenerator(className, info.rarity(), info.tooltips(), info.classMap()).newInstance());
+        });
     }
 }

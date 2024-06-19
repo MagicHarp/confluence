@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:hand_drill"
+        },
+        {
+            "item": "confluence:shot_put"
+        }
+    ],
+    "result": {
+        "item": "confluence:explorers_equipment"
+    }
+}

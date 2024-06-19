@@ -1,6 +1,8 @@
 package org.confluence.mod.client.handler;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +13,9 @@ import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.mixin.client.LocalPlayerAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
+import org.confluence.mod.network.s2c.BroadcastGravitationRotPacketS2C;
 import org.confluence.mod.network.s2c.GravityGlobePacketS2C;
+import org.confluence.mod.util.IEntity;
 
 import java.util.function.Supplier;
 
@@ -71,5 +75,18 @@ public final class GravitationHandler {
 
     public static boolean isHasGlobe() {
         return hasGlobe;
+    }
+
+    public static void handleRemoteRot(BroadcastGravitationRotPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            LocalPlayer localPlayer = Minecraft.getInstance().player;
+            if (localPlayer == null) return;
+            Entity entity = localPlayer.level().getEntity(packet.entityId());
+            if (entity != null) {
+                ((IEntity) entity).c$setShouldRot(packet.enabled());
+            }
+        });
+        context.setPacketHandled(true);
     }
 }

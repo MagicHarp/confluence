@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:rifle_scope"
+        },
+        {
+            "item": "confluence:destroyer_emblem"
+        }
+    ],
+    "result": {
+        "item": "confluence:sniper_scope"
+    }
+}

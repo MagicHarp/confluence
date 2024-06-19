@@ -9,7 +9,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.item.curio.combat.MagicQuiver;
+import org.confluence.mod.item.curio.combat.IMagicQuiver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public abstract class CrossbowItemMixin {
     @Inject(method = "shootProjectile", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private static void modifyProjectile(Level pLevel, LivingEntity pShooter, InteractionHand pHand, ItemStack pCrossbowStack, ItemStack pAmmoStack, float pSoundPitch, boolean pIsCreativeMode, float pVelocity, float pInaccuracy, float pProjectileAngle, CallbackInfo ci, boolean flag, Projectile projectile) {
         if (projectile instanceof AbstractArrow abstractArrow) {
-            MagicQuiver.applyToArrow(pShooter, abstractArrow);
+            IMagicQuiver.applyToArrow(pShooter, abstractArrow);
         }
         // todo 其它射弹
     }
@@ -29,7 +29,7 @@ public abstract class CrossbowItemMixin {
     @WrapWithCondition(method = "onCrossbowShot", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/CrossbowItem;clearChargedProjectiles(Lnet/minecraft/world/item/ItemStack;)V"))
     private static boolean canClear(ItemStack pCrossbowStack, @Local LivingEntity pShooter) {
         if (pShooter.level().isClientSide) return true;
-        boolean consume = MagicQuiver.shouldConsume(pShooter);
+        boolean consume = IMagicQuiver.shouldConsume(pShooter);
         pCrossbowStack.getOrCreateTag().putBoolean("canceled", !consume);
         return consume;
     }

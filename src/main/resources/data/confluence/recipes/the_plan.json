@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:fast_clock"
+        },
+        {
+            "item": "confluence:trifold_map"
+        }
+    ],
+    "result": {
+        "item": "confluence:the_plan"
+    }
+}

@@ -53,4 +53,31 @@ public final class AnimateColor {
     public static int getExpertColor() {
         return (DiscoR << 16) + (DiscoG << 8) + DiscoB;
     }
+
+    private static int mouseTextColor = 0;
+    private static int mouseTextColorChange = 1;
+    private static float masterColor = 1.0F;
+    private static int masterColorDir = 1;
+
+    public static void doUpdateMasterColor() {
+        mouseTextColor += mouseTextColorChange;
+        if (mouseTextColor == 255) {
+            mouseTextColorChange = -1;
+        }
+        if (mouseTextColor <= 190) {
+            mouseTextColorChange = 1;
+        }
+        masterColor += masterColorDir * 0.05F;
+        if (masterColor > 1.0F) {
+            masterColor = 1.0F;
+            masterColorDir = -1;
+        }
+        if (masterColor >= 0.0F) return;
+        masterColor = 0.0F;
+        masterColorDir = 1;
+    }
+
+    public static int getMasterColor() {
+        return (mouseTextColor << 16) + ((int) (masterColor * 190) << 8);
+    }
 }

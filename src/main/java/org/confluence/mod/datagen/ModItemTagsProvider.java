@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.item.curio.CurioItems;
@@ -24,5 +25,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
         tag(ModTags.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
+        IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.RANGED_WEAPON);
+        rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
+        rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);
+        rangedWeapon.addTag(Tags.Items.TOOLS_TRIDENTS);
     }
 }

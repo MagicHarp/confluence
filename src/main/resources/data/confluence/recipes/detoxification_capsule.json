@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:bezoar"
+        },
+        {
+            "item": "confluence:holy_water"
+        }
+    ],
+    "result": {
+        "item": "confluence:detoxification_capsule"
+    }
+}

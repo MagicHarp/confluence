@@ -15,6 +15,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.item.curio.combat.IScope;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.misc.ModRarity;
@@ -51,6 +52,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);
             if (item instanceof IAutoAttack) IAutoAttack.sendMsg(serverPlayer);
+            if (item instanceof IScope) IScope.sendMsg(serverPlayer);
         }
     }
 

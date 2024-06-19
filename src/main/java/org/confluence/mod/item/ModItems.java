@@ -18,7 +18,7 @@ public final class ModItems {
 
     public static void register(IEventBus bus) {
         IconItem.Icons.init();
-        CurioItems.init();
+        CurioItems.initialize();
         ITEMS.register(bus);
     }
 }

@@ -15,6 +15,18 @@ public interface EffectInvul {
             return CuriosUtils.hasCurio(living, Slowness.class);
         } else if (mobEffect == MobEffects.WEAKNESS) {
             return CuriosUtils.hasCurio(living, Weakness.class);
+        } else if (mobEffect == MobEffects.DIG_SLOWDOWN) {
+            return CuriosUtils.hasCurio(living, MiningFatigue.class);
+        } else if (mobEffect == MobEffects.CONFUSION) {
+            return CuriosUtils.hasCurio(living, Nausea.class);
+        } else if (mobEffect == MobEffects.HUNGER) {
+            return CuriosUtils.hasCurio(living, Hunger.class);
+        } else if (mobEffect == MobEffects.WITHER) {
+            return CuriosUtils.hasCurio(living, Wither.class);
+        } else if (mobEffect == MobEffects.LEVITATION) {
+            return CuriosUtils.hasCurio(living, Levitation.class);
+        } else if (mobEffect == MobEffects.DARKNESS) {
+            return CuriosUtils.hasCurio(living, Darkness.class);
         }
         return false;
     }
@@ -26,4 +38,16 @@ public interface EffectInvul {
     interface Slowness {}
 
     interface Weakness {}
+
+    interface MiningFatigue {}
+
+    interface Nausea {}
+
+    interface Hunger {}
+
+    interface Wither {}
+
+    interface Levitation {}
+
+    interface Darkness {}
 }
