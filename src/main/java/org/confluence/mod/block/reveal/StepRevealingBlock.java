@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import org.confluence.mod.block.natural.Ores;
 
 public class StepRevealingBlock extends Block {
     public static final IntegerProperty REVEAL_STEP = IntegerProperty.create("reveal_step", 0, 2);
@@ -31,5 +32,14 @@ public class StepRevealingBlock extends Block {
         revJson.addProperty("advancement", "confluence:reveal/step" + step);
         revJson.add("block_states", stateJson);
         RevelationRegistry.registerFromJson(revJson);
+    }
+
+    public static void registerOurOwn() {
+        int step = 0;
+        for (int state = 0; state < 3; state++) {
+            create(state, step++, Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get());
+            create(state, step++, Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get());
+            create(state, step++, Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get());
+        }
     }
 }

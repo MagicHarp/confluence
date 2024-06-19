@@ -7,6 +7,7 @@
         "CombatRulesMixin",
         "InventoryChangeTriggerMixin",
         "PlayerAdvancementsMixin",
+        "TagLoaderMixin",
         "accessor.BlockItemAccessor",
         "accessor.FishingHookAccessor",
         "accessor.LivingEntityAccessor",

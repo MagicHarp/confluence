@@ -4,8 +4,22 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagEntry;
+import net.minecraft.tags.TagLoader;
 import net.minecraft.util.GsonHelper;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.curio.HealthAndMana.IAutoGetMana;
+import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
+import org.confluence.mod.item.curio.ILavaImmune;
+import org.confluence.mod.item.curio.combat.*;
+import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
+import org.confluence.mod.item.curio.fishing.IFishingPower;
+import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
+import org.confluence.mod.item.curio.fishing.ILavaproofFishingHook;
+import org.confluence.mod.item.curio.fishing.ITackleBox;
+import org.confluence.mod.item.curio.movement.*;
+import org.confluence.mod.misc.ModTags;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,35 +34,35 @@ import java.util.Map;
 
 public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltips, Map<Class<?>, Number[]> classMap) {
     private static final ArrayList<DataDrivenCurioInfo> INFOS = new ArrayList<>();
-    private static final Hashtable<String, String> MAP = new Hashtable<>();
+    private static final Hashtable<String, Class<?>> MAP = new Hashtable<>();
 
     static {
-        MAP.put("AggroAttach", "org.confluence.mod.item.curio.combat.IAggroAttach");
-        MAP.put("ArmorPass", "org.confluence.mod.item.curio.combat.IArmorPass");
-        MAP.put("AutoAttack", "org.confluence.mod.item.curio.combat.IAutoAttack");
-        MAP.put("CriticalHit", "org.confluence.mod.item.curio.combat.ICriticalHit");
-        MAP.put("FireAttack", "org.confluence.mod.item.curio.combat.IFireAttack");
-        MAP.put("FireImmune", "org.confluence.mod.item.curio.combat.IFireImmune");
-        MAP.put("Honeycomb", "org.confluence.mod.item.curio.combat.IHoneycomb");
-        MAP.put("HurtEvasion", "org.confluence.mod.item.curio.combat.IHurtEvasion");
-        MAP.put("InvulnerableTime", "org.confluence.mod.item.curio.combat.IInvulnerableTime");
-        MAP.put("LavaHurtReduce", "org.confluence.mod.item.curio.combat.ILavaHurtReduce");
-        MAP.put("MagicAttack", "org.confluence.mod.item.curio.combat.IMagicAttack");
-        MAP.put("ProjectileAttack", "org.confluence.mod.item.curio.combat.IProjectileAttack");
-        MAP.put("StarCloak", "org.confluence.mod.item.curio.combat.IStarCloak");
-        MAP.put("BreakSpeedBonus", "org.confluence.mod.item.curio.construction.IBreakSpeedBonus");
-        MAP.put("FishingPower", "org.confluence.mod.item.curio.fishing.IFishingPower");
-        MAP.put("HighTestFishingLine", "org.confluence.mod.item.curio.fishing.IHighTestFishingLine");
-        MAP.put("LavaproofFishingHook", "org.confluence.mod.item.curio.fishing.ILavaproofFishingHook");
-        MAP.put("TackleBox", "org.confluence.mod.item.curio.fishing.ITackleBox");
-        MAP.put("AutoGetMana", "org.confluence.mod.item.curio.HealthAndMana.IAutoGetMana");
-        MAP.put("ManaReduce", "org.confluence.mod.item.curio.HealthAndMana.IManaReduce");
-        MAP.put("FallResistance", "org.confluence.mod.item.curio.movement.IFallResistance");
-        MAP.put("JumpBoost", "org.confluence.mod.item.curio.movement.IJumpBoost");
-        MAP.put("MayFly", "org.confluence.mod.item.curio.movement.IMayFly");
-        MAP.put("MultiJump", "org.confluence.mod.item.curio.movement.IMultiJump");
-        MAP.put("OneTimeJump", "org.confluence.mod.item.curio.movement.IOneTimeJump");
-        MAP.put("LavaImmune", "org.confluence.mod.item.curio.ILavaImmune");
+        MAP.put("AggroAttach", IAggroAttach.class);
+        MAP.put("ArmorPass", IArmorPass.class);
+        MAP.put("AutoAttack", IAutoAttack.class);
+        MAP.put("CriticalHit", ICriticalHit.class);
+        MAP.put("FireAttack", IFireAttack.class);
+        MAP.put("FireImmune", IFireImmune.class);
+        MAP.put("Honeycomb", IHoneycomb.class);
+        MAP.put("HurtEvasion", IHurtEvasion.class);
+        MAP.put("InvulnerableTime", IInvulnerableTime.class);
+        MAP.put("LavaHurtReduce", ILavaHurtReduce.class);
+        MAP.put("MagicAttack", IMagicAttack.class);
+        MAP.put("ProjectileAttack", IProjectileAttack.class);
+        MAP.put("StarCloak", IStarCloak.class);
+        MAP.put("BreakSpeedBonus", IBreakSpeedBonus.class);
+        MAP.put("FishingPower", IFishingPower.class);
+        MAP.put("HighTestFishingLine", IHighTestFishingLine.class);
+        MAP.put("LavaproofFishingHook", ILavaproofFishingHook.class);
+        MAP.put("TackleBox", ITackleBox.class);
+        MAP.put("AutoGetMana", IAutoGetMana.class);
+        MAP.put("ManaReduce", IManaReduce.class);
+        MAP.put("FallResistance", IFallResistance.class);
+        MAP.put("JumpBoost", IJumpBoost.class);
+        MAP.put("MayFly", IMayFly.class);
+        MAP.put("MultiJump", IMultiJump.class);
+        MAP.put("OneTimeJump", IOneTimeJump.class);
+        MAP.put("LavaImmune", ILavaImmune.class);
     }
 
     public static ArrayList<DataDrivenCurioInfo> generatingInfos() {
@@ -60,7 +74,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                 Files.writeString(path, """
                     {
                         "data_driven_test": {
-                            "rarity": "PURPLE",
+                            "rarity": "MASTER",
                             "tooltips": ["It's a Data Driven item", "Hi from Confluence Team!"],
                             "interfaces": {
                                 "AutoAttack": {},
@@ -77,15 +91,17 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         try (InputStream inputStream = new FileInputStream(path.toFile())) {
             JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "data driven curio");
             for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-                JsonObject attributes = GsonHelper.convertToJsonObject(entry.getValue(), "attributes");
-                String rarity = GsonHelper.getAsString(attributes, "rarity", "WHITE").toUpperCase();
+                JsonObject context = GsonHelper.convertToJsonObject(entry.getValue(), "context");
+                String rarity = GsonHelper.getAsString(context, "rarity", "WHITE").toUpperCase();
                 ArrayList<String> tooltips = new ArrayList<>();
-                GsonHelper.getAsJsonArray(attributes, "tooltips", new JsonArray()).forEach(jsonElement ->
-                    tooltips.add(GsonHelper.convertToString(jsonElement, "tooltip")));
+                GsonHelper.getAsJsonArray(context, "tooltips", new JsonArray()).forEach(jsonElement -> tooltips.add(GsonHelper.convertToString(jsonElement, "tooltip")));
                 Hashtable<Class<?>, Number[]> classMap = new Hashtable<>();
-                ClassLoader classLoader = Confluence.class.getClassLoader();
-                for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(attributes, "interfaces").entrySet()) {
-                    Class<?> clazz = classLoader.loadClass(MAP.get(entry1.getKey()));
+                for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(context, "interfaces").entrySet()) {
+                    Class<?> clazz = MAP.get(entry1.getKey());
+                    if (clazz == null) {
+                        Confluence.LOGGER.error("Unknown interface {}", entry1.getKey());
+                        continue;
+                    }
                     Number[] numbers;
                     JsonElement value = entry1.getValue();
                     if (value.isJsonPrimitive()) {
@@ -107,5 +123,16 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
             Confluence.LOGGER.error(e.getMessage());
         }
         return INFOS;
+    }
+
+    public static void bindTags(Map<ResourceLocation, List<TagLoader.EntryWithSource>> map) {
+        List<TagLoader.EntryWithSource> list = map.computeIfAbsent(ModTags.Items.CURIO.location(), location -> new ArrayList<>());
+        INFOS.forEach(info -> {
+            ResourceLocation location = new ResourceLocation(Confluence.MODID, info.id.toLowerCase());
+            if (list.stream().noneMatch(entryWithSource -> entryWithSource.entry().getId().equals(location))) {
+                list.add(new TagLoader.EntryWithSource(TagEntry.element(location), "data_driven"));
+            }
+        });
+        INFOS.clear();
     }
 }

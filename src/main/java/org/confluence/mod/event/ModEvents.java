@@ -22,7 +22,7 @@ import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.block.natural.LogBlocks;
-import org.confluence.mod.block.natural.Ores;
+import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.fluid.FluidBuilder;
@@ -89,14 +89,9 @@ public final class ModEvents {
     @SubscribeEvent
     public static void loadComplete(FMLLoadCompleteEvent event) {
         event.enqueueWork(() -> {
-            int step = 0;
-            for (int state = 0; state < 3; state++) {
-                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_COBALT_ORE.get(), Ores.DEEPSLATE_PALLADIUM_ORE.get());
-                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.DEEPSLATE_ORICHALCUM_ORE.get());
-                StepRevealingBlock.create(state, step++, Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.DEEPSLATE_TITANIUM_ORE.get());
-            }
-
+            StepRevealingBlock.registerOurOwn();
             LogBlocks.wrapStrip();
+            ISpreadable.Type.buildMap();
         });
     }
 
