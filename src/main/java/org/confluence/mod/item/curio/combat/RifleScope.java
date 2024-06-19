@@ -12,23 +12,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MagicQuiver extends BaseCurioItem implements IProjectileAttack, IMagicQuiver {
-    public MagicQuiver() {
+public class RifleScope extends BaseCurioItem implements IScope {
+    public RifleScope() {
         super(ModRarity.LIGHT_RED);
     }
 
-    public MagicQuiver(Rarity rarity) {
+    public RifleScope(Rarity rarity) {
         super(rarity);
     }
 
     @Override
-    public float getProjectileBonus() {
-        return 0.1F;
-    }
-
-    @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.magic_quiver.tooltip"));
-        list.add(Component.translatable("item.confluence.magic_quiver.tooltip2"));
+        list.add(TOOLTIP);
+        list.add(TOOLTIP2);
     }
 }

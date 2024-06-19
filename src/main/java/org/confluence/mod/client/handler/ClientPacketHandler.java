@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +16,6 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
 import org.confluence.mod.network.s2c.*;
-import org.confluence.mod.util.IEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -36,6 +34,7 @@ public final class ClientPacketHandler {
     private static boolean showHolyWaterColor = false;
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
+    private static boolean hasScope = false;
 
     private static ResourceLocation moonTexture = null;
     private static int moonSpecific = -1;
@@ -109,6 +108,10 @@ public final class ClientPacketHandler {
         return hasCthulhu;
     }
 
+    public static boolean isHasScope() {
+        return hasScope;
+    }
+
     public static @Nullable ResourceLocation getMoonTexture() {
         return moonTexture;
     }
@@ -158,19 +161,6 @@ public final class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleRemoteRot(BroadcastGravitationRotPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> {
-            LocalPlayer localPlayer = Minecraft.getInstance().player;
-            if (localPlayer == null) return;
-            Entity entity = localPlayer.level().getEntity(packet.entityId());
-            if (entity != null) {
-                ((IEntity) entity).c$setShouldRot(packet.enabled());
-            }
-        });
-        context.setPacketHandled(true);
-    }
-
     @SuppressWarnings("unchecked")
     public static void handleLight(PlayerLightPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
@@ -200,6 +190,12 @@ public final class ClientPacketHandler {
     public static void handleGamePhase(GamePhasePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> gamePhase = packet.gamePhase());
+        context.setPacketHandled(true);
+    }
+
+    public static void handleScope(ScopeEnablePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> hasScope = packet.enable());
         context.setPacketHandled(true);
     }
 }

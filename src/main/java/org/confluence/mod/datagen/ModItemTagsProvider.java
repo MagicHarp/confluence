@@ -7,6 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.Torches;
@@ -51,6 +52,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
         );
         tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLD_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
+        IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.Items.RANGED_WEAPON);
+        rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
+        rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);
+        rangedWeapon.addTag(Tags.Items.TOOLS_TRIDENTS);
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }

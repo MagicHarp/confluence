@@ -63,6 +63,8 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         MAP.put("MultiJump", IMultiJump.class);
         MAP.put("OneTimeJump", IOneTimeJump.class);
         MAP.put("LavaImmune", ILavaImmune.class);
+        MAP.put("MagicQuiver", IMagicQuiver.class);
+        MAP.put("Scope", IScope.class);
     }
 
     public static ArrayList<DataDrivenCurioInfo> generatingInfos() {
@@ -75,7 +77,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                     {
                         "data_driven_test": {
                             "rarity": "MASTER",
-                            "tooltips": ["It's a Data Driven item", "Hi from Confluence Team!"],
+                            "tooltips": ["It's a Data Driven item", "More information will in Github Wiki"],
                             "interfaces": {
                                 "AutoAttack": {},
                                 "FallResistance": -1,

@@ -69,6 +69,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.stopwatch", "Displays how fast the player is moving");
         add("curios.tooltip.tally_counter", "Displays how many monsters have been killed");
         add("curios.tooltip.weather_radio", "Displays the weather");
+        add("curios.tooltip.scope", "Increases view range for ranged weapons");
+        add("curios.tooltip.scope2", "Hold ranged weapon and crouch to zoom out");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -226,6 +228,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
         add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
+        add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
+        add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");

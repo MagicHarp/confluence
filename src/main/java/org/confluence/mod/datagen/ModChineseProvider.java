@@ -84,6 +84,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.stopwatch", "显示玩家的移动速度");
         add("curios.tooltip.tally_counter", "显示怪物击杀数量");
         add("curios.tooltip.weather_radio", "显示天气");
+        add("curios.tooltip.scope", "扩大远程武器的视野范围");
+        add("curios.tooltip.scope2", "手持远程武器并潜行可拉远视野");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -242,6 +244,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
         add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
         add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
+        add("item.confluence.sniper_scope.tooltip", "远程伤害和暴击率各提高10%");
+        add("item.confluence.recon_scope.tooltip", "“发现敌人”");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
@@ -1747,6 +1751,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.MAGIC_QUIVER.get(), "魔法箭袋");
         add(CurioItems.MOLTEN_QUIVER.get(), "熔火箭袋");
         add(CurioItems.STALKERS_QUIVER.get(), "潜行者箭袋");
+        add(CurioItems.RIFLE_SCOPE.get(), "步枪瞄准镜");
+        add(CurioItems.SNIPER_SCOPE.get(), "狙击镜");
+        add(CurioItems.RECON_SCOPE.get(), "侦察镜");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");

@@ -80,9 +80,9 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     MAGIC_QUIVER("magic_quiver", MagicQuiver::new), // 魔法箭袋
     MOLTEN_QUIVER("molten_quiver", MoltenQuiver::new), // 熔火箭袋
     STALKERS_QUIVER("stalkers_quiver", StalkersQuiver::new), // 潜行者箭袋
-    /* 侦察镜 */
-    /* 步枪瞄准镜 */
-    /* 狙击镜 */
+    RIFLE_SCOPE("rifle_scope", RifleScope::new), // 步枪瞄准镜
+    SNIPER_SCOPE("sniper_scope", SniperScope::new), // 狙击镜
+    RECON_SCOPE("recon_scope", ReconScope::new), // 侦察镜
     MAGMA_STONE("magma_stone", MagmaStone::new), // 岩浆石
     OBSIDIAN_ROSE("obsidian_rose", ObsidianRose::new), // 黑曜石玫瑰
     OBSIDIAN_SHIELD("obsidian_shield", ObsidianShield::new), // 黑曜石护盾
@@ -185,10 +185,10 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     LAVA_WADERS("lava_waders", LavaWaders::new), // 熔岩靴
     TERRASPARK_BOOTS("terraspark_boots", TerrasparkBoots::new), // 泰拉闪耀靴
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
-    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
     FART_IN_A_JAR("fart_in_a_jar", FartInAJar::new), // 罐中臭屁
+    TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     SHINY_RED_BALLOON("shiny_red_balloon", ShinyRedBalloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", BallonPuffefish::new), // 气球河豚鱼
     CLOUD_IN_A_BALLOON("cloud_in_a_balloon", CloudInABalloon::new), // 云朵气球

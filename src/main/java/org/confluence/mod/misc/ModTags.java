@@ -41,6 +41,7 @@ public final class ModTags {
         public static final TagKey<Item> BOTTOMLESS = register("bottomless");
         public static final TagKey<Item> FRUIT = register("fruit");
         public static final TagKey<Item> MINUTE_WATCH = register("minute_watch");
+        public static final TagKey<Item> RANGED_WEAPON = register("ranged_weapon");
 
         private static TagKey<Item> curios(String id) {
             return ItemTags.create(new ResourceLocation(Curios.MODID, id));

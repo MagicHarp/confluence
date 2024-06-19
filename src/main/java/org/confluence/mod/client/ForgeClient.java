@@ -6,13 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.MovementInputUpdateEvent;
-import net.minecraftforge.client.event.RenderTooltipEvent;
-import net.minecraftforge.client.event.ViewportEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +26,7 @@ import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
@@ -171,6 +171,16 @@ public final class ForgeClient {
             event.setRed(0.25F);
             event.setGreen(0.0F);
             event.setBlue(0.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public static void fov(ComputeFovModifierEvent event) {
+        Player player = event.getPlayer();
+        if (ClientPacketHandler.isHasScope() && player.isCrouching()) {
+            if (player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)) {
+                event.setNewFovModifier(0.1F);
+            }
         }
     }
 }
