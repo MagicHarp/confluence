@@ -1,18 +1,18 @@
 {
-    "type": "minecraft:entity",
+    "type": "minecraft:chest",
     "pools": [
         {
             "rolls": 1,
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:black_belt"
+                    "name": "confluence:flashlight"
                 }
             ],
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.08
+                    "chance": 0.25
                 }
             ]
         },
@@ -21,13 +21,28 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:holy_water"
+                    "name": "confluence:hand_drill"
                 }
             ],
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.06
+                    "chance": 0.25
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:shot_put"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.25
                 }
             ]
         }
