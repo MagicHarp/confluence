@@ -25,17 +25,18 @@ public class DataDrivenCurioGenerator {
 
     public DataDrivenCurioGenerator(String className, String rarity, List<String> tooltips, Map<Class<?>, Number[]> classMap) {
         this.classMap = classMap;
-        this.dumped = new DataDrivenClassLoader(Confluence.class.getClassLoader()).defineClass(className,
-            create(className, rarity.toUpperCase(), tooltips, new HashSet<>(classMap.keySet()))
-        );
-    }
-
-    private byte[] create(String className, String rarity, List<String> tooltips, Set<Class<?>> interfaces) {
+        HashSet<Class<?>> interfaces = new HashSet<>(classMap.keySet());
         if ("EXPERT".equals(rarity)) {
             interfaces.add(ModRarity.Expert.class);
         } else if ("MASTER".equals(rarity)) {
             interfaces.add(ModRarity.Master.class);
         }
+        this.dumped = new DataDrivenClassLoader(Confluence.class.getClassLoader()).defineClass(className,
+            create(className, rarity.toUpperCase(), tooltips, interfaces)
+        );
+    }
+
+    private byte[] create(String className, String rarity, List<String> tooltips, Set<Class<?>> interfaces) {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
         cw.visit(V17, ACC_PUBLIC | ACC_SUPER, className, null, BASE_CURIO_ITEM,
             interfaces.stream().map(DataDrivenCurioGenerator::getName).toArray(String[]::new));

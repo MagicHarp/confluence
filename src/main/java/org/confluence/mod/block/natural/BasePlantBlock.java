@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -45,8 +44,8 @@ public class BasePlantBlock extends BushBlock implements CustomModel, CustomItem
         BlockState after = super.updateShape(originState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
         if(pFacing != Direction.DOWN) return after;
         ISpreadable.Type type = pFacingState.getBlock() instanceof ISpreadable sp ? sp.getType() : ISpreadable.Type.PURE;
-        RegistryObject<? extends Block> b = type.getMap().get(originState.getBlock());
-        BlockState transformResult = b == null ? originState : b.get().defaultBlockState();  // 默认不转化，如果结果是摧毁则是写到map里面
+        Block b = type.getBlockMap().get(originState.getBlock());
+        BlockState transformResult = b == null ? originState : b.defaultBlockState();  // 默认不转化，如果结果是摧毁则是写到map里面
         return transformResult.canSurvive(pLevel, pCurrentPos) ? transformResult : Blocks.AIR.defaultBlockState();
     }
 }

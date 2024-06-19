@@ -147,6 +147,10 @@ public interface ISpreadable {
             this.supplierMap = map;
         }
 
+        public Map<Block, Block> getBlockMap() {
+            return blockMap;
+        }
+
         public static void buildMap() {
             for (Type type : values()) {
                 ImmutableMap.Builder<Block, Block> map = ImmutableMap.builder();
