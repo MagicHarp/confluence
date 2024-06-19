@@ -177,10 +177,11 @@ public final class ForgeClient {
     @SubscribeEvent
     public static void fov(ComputeFovModifierEvent event) {
         Player player = event.getPlayer();
-        if (ClientPacketHandler.isHasScope() && player.isCrouching()) {
-            if (player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)) {
-                event.setNewFovModifier(0.1F);
-            }
+        if (ClientPacketHandler.isHasScope() && player.isCrouching() &&
+            Minecraft.getInstance().options.getCameraType().isFirstPerson() &&
+            player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)
+        ) {
+            event.setNewFovModifier(0.1F);
         }
     }
 }
