@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 
-public class SailfishBoots extends BaseSpeedBoots{
+public class SailfishBoots extends BaseSpeedBoots {
     @Override
     public Component[] getInformation() {
         return new Component[]{

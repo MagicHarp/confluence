@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AncientChisel extends BaseCurioItem implements IBreakSpeedBonus  {
+public class AncientChisel extends BaseCurioItem implements IBreakSpeedBonus {
     @Override
     public float getBreakBonus() {
         return 0.25F;

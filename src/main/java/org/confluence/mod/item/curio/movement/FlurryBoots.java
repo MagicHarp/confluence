@@ -1,2 +1,4 @@
-package org.confluence.mod.item.curio.movement;public class FlurryBoots {
+package org.confluence.mod.item.curio.movement;
+
+public class FlurryBoots {
 }

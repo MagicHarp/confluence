@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallResistance {
-    public AmbhipianBoots(){
+    public AmbhipianBoots() {
         super(ModRarity.PINK);
     }
 

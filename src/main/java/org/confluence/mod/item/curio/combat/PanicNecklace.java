@@ -23,7 +23,7 @@ public class PanicNecklace extends BaseCurioItem {
         Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL)
     );
 
-    public PanicNecklace(){
+    public PanicNecklace() {
         super();
     }
 
