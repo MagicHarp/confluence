@@ -114,7 +114,7 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
-        MutableFloat speed = new MutableFloat(event.getOriginalSpeed());
+        MutableFloat speed = new MutableFloat(event.getNewSpeed());
         event.getEntity().getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
             float value = speed.floatValue();
             value *= (1.0F + playerAbility.getBreakSpeedBonus());
