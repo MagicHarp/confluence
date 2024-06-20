@@ -104,7 +104,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> JUNGLE_SPORE = registerWithoutItem("jungle_spore", ()->new MushroomBlock(Set.of(Blocks.GRASS_BLOCK))); // TODO: 丛林草
     // 草药
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
-    public static final RegistryObject<BaseHerbBlock> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
+    public static final RegistryObject<FlameFlower> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
     public static final RegistryObject<MoonshineGrass> MOONSHINE_GRASS = registerWithoutItem("moonshine_grass", MoonshineGrass::new);//月光草
     public static final RegistryObject<BaseHerbBlock> SHINE_ROOT = registerWithoutItem("shine_root", ShineRoot::new);//闪耀根
     public static final RegistryObject<BaseHerbBlock> SHIVERINGTHORNS = registerWithoutItem("shiveringthorns", ShiveringThorn::new);//寒颤棘

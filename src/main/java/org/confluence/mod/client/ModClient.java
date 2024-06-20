@@ -32,6 +32,7 @@ import org.confluence.mod.client.model.entity.hook.SkeletronHandModel;
 import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
 import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
+import org.confluence.mod.client.particle.FlameFlowerParticle;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
@@ -174,6 +175,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.DIAMOND_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.AMETHYST_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.SAPPHIRE_BULLET.get(), BulletParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
     }
 
     public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0xFF96FF;

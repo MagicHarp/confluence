@@ -21,4 +21,5 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> SAPPHIRE_BULLET = PARTICLES.register("sapphire_bullet", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> DIAMOND_BULLET = PARTICLES.register("diamond_bullet", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> AMETHYST_BULLET = PARTICLES.register("amethyst_bullet", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> FLAMEFLOWER_BLOOM = PARTICLES.register("flameflower_bloom", () -> new SimpleParticleType(false));
 }
