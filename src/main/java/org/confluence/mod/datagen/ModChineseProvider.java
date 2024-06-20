@@ -273,5 +273,18 @@ public class ModChineseProvider extends LanguageProvider {
         add(CurioItems.STALKERS_QUIVER.get(), "潜行者箭袋");
         add(CurioItems.BAND_OF_REGENERATION.get(), "再生手环");
         add(CurioItems.ANGLER_EARRING.get(), "渔夫耳环");
+        add(CurioItems.HOLY_WATER.get(), "圣水");
+        add(CurioItems.DETOXIFICATION_CAPSULE.get(), "解毒囊");
+        add(CurioItems.ENERGY_BAR.get(), "能量棒");
+        add(CurioItems.NUTRIENT_SOLUTION.get(), "营养液");
+        add(CurioItems.FLASHLIGHT.get(), "手电筒");
+        add(CurioItems.SEARCHLIGHT.get(), "探照灯");
+        add(CurioItems.TRIFOLD_MAP.get(), "三折地图");
+        add(CurioItems.THE_PLAN.get(), "计划书");
+        add(CurioItems.HAND_DRILL.get(), "手钻");
+        add(CurioItems.SHOT_PUT.get(), "铅球");
+        add(CurioItems.EXPLORERS_EQUIPMENT.get(), "探险家宝具");
+        add(CurioItems.ANKH_CHARM.get(), "十字章护身符");
+        add(CurioItems.ANKH_SHIELD.get(), "十字章护盾");
     }
 }
