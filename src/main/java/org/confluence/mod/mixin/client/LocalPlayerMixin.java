@@ -1,5 +1,6 @@
 package org.confluence.mod.mixin.client;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
@@ -9,13 +10,12 @@ import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(LocalPlayer.class)
 public abstract class LocalPlayerMixin implements IForgeLivingEntity {
-    @Redirect(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z", ordinal = 0))
-    private boolean notCheckOnGround(LocalPlayer instance) {
-        return ClientPacketHandler.isHasCthulhu() || instance.onGround();
+    @ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z", ordinal = 0))
+    private boolean notCheckOnGround(boolean original) {
+        return original || ClientPacketHandler.isHasCthulhu();
     }
 
     @Override
