@@ -267,9 +267,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magiluminescence.info5","The Magiluminescence's movement speed buffs are disabled when the player is not grounded.");
         add("item.confluence.magma_skull.info","The Magma Skull is a pre-Hardmode immunity accessory that grants the player immunity from blocks that inflict the Burning debuff and grants immunity to lava for 7 seconds.");
         add("item.confluence.magma_skull.info2","It can be crafted at a Crafting Table with a Obsidian Skull and a Lava Charm.");
-        add("item.confluence.magma_skull.info","The Molten Charm is a pre-Hardmode accessory crafted from a Lava Charm and an Obsidian Skull, combining the effects of both items.");
-        add("item.confluence.magma_skull.info2","The Molten Charm also grants immunity to the burning damage normally inflicted by contact with Meteorite, Hellstone, and Hellstone Brick. ");
-        add("item.confluence.magma_skull.info3","It does not grant immunity to other fire-based damage.");
+        add("item.confluence.molten_charm.info","The Molten Charm is a pre-Hardmode accessory crafted from a Lava Charm and an Obsidian Skull, combining the effects of both items.");
+        add("item.confluence.molten_charm.info2","The Molten Charm also grants immunity to the burning damage normally inflicted by contact with Meteorite, Hellstone, and Hellstone Brick. ");
+        add("item.confluence.molten_charm.info3","It does not grant immunity to other fire-based damage.");
         add("item.confluence.obsidian_horseshoe.info","The Obsidian Horseshoe is an accessory that combines the functionality of the Lucky Horseshoe and the Obsidian Skull.");
         add("item.confluence.obsidian_horseshoe.info2","It grants immunity to the burning damage inflicted by Meteorite, Hellstone, and Hellstone Bricks, negates fall damage and grants +0.05 luck.");
         add("item.confluence.obsidian_horseshoe.info3","However, it does not provide the extra 1 point of defense that is granted by the Obsidian Skull.");
