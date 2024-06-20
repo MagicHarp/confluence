@@ -242,7 +242,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.honey_balloon.info","The Honey Balloon is an accessory that combines the functions of a Shiny Red Balloon and a Honey Comb.");
         add("item.confluence.honey_balloon.info2","It boosts jump height by 33% and jump speed by 30%, increasing your first jump's height to ~10½ blocks (~75% increase), and releases a small swarm of angry bees when the player is hurt, which seek out and deal small amounts of damage to enemies.");
         add("item.confluence.honey_balloon.info3","It can be crafted at a Crafting Table with a Shiny Red Balloon and a Honey Comb.");
-        add("item.confluence.ice_skates.info","Ice Skates are a pre-Hardmode accessory that improves a player's movement control on Thin Ice, all Ice Blocks, Ice Rod blocks, Frozen Slime Blocks and Aetherium Blocks.");
+        add("item.confluence.ice_skates.info","Ice Skates are a pre-Hardmode accessory that improves a player's movement control on all Ice Blocks.");
         add("item.confluence.ice_skates.info2","The player accelerates faster, slides shorter distances, and will no longer cause Thin Ice to break when landing from falls or jumps.");
         add("item.confluence.ice_skates.info3","It can be crafted at a Crafting Table with a Hermes Boots and a Blue Ice.");
         add("item.confluence.lava_charm.info","The Lava Charm is an accessory that grants immunity to lava for 7 seconds.");
@@ -263,8 +263,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.magiluminescence.info","The Magiluminescence is a pre-Hardmode accessory that increases the player's maximum movement speed by 15% and their acceleration and deceleration by 75%.");
         add("item.confluence.magiluminescence.info2","It can be found in End City Chests.");
         add("item.confluence.magiluminescence.info3","This increase stacks with the bonus of the Hermes Boots and their variants.");
-        add("item.confluence.magiluminescence.info4","It also creates an aura of light around the player, which can be useful when exploring underground.");
-        add("item.confluence.magiluminescence.info5","The Magiluminescence's movement speed buffs are disabled when the player is not grounded.");
+        add("item.confluence.magiluminescence.info4","The Magiluminescence's movement speed buffs are disabled when the player is not grounded.");
         add("item.confluence.magma_skull.info","The Magma Skull is a pre-Hardmode immunity accessory that grants the player immunity from blocks that inflict the Burning debuff and grants immunity to lava for 7 seconds.");
         add("item.confluence.magma_skull.info2","It can be crafted at a Crafting Table with a Obsidian Skull and a Lava Charm.");
         add("item.confluence.molten_charm.info","The Molten Charm is a pre-Hardmode accessory crafted from a Lava Charm and an Obsidian Skull, combining the effects of both items.");
@@ -298,6 +297,18 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sandstorm_in_a_bottle.info4","This is nearly twice as high as the height achievable with the Cloud in a Bottle.");
         add("item.confluence.sharkron_balloon.info","The Sharkron Balloon is an accessory that combines the effects of the Tsunami in a Bottle and the Balloon Pufferfish.");
         add("item.confluence.sharkron_balloon.info2","It boosts jump height by 33% and jump speed by 30% increasing your first jump's height to ~10½ blocks (~75% increase), and provides a double jump that now goes 13 blocks, for a total height of 23½ blocks.");
+        add("item.confluence.shiny_red_balloon.info","The Shiny Red Balloon is an accessory that increases the player's jump height by 33% and jump speed by 30%, increasing the height that the player can jump from 6 blocks (12 feet) to ~10½ blocks (21 feet), effectively a ~75% boost. However, it oddly reduces jump height when underwater, from 8 blocks (16 feet) to ~7 blocks (14 feet).");
+        add("item.confluence.shiny_red_balloon.info2","When the player has the Hero of the Village effect, the librarian has a chance to give the player this item.");
+        add("item.confluence.shiny_red_balloon.info3","The Shiny Red Balloon stacks with other jump-boosting accessories:");
+        add("item.confluence.shiny_red_balloon.info4","The Cloud in a Bottle's double-jump height is increased from 5 blocks (10 feet) to 9 blocks (18 feet), for a total jump height of 19½ blocks (39 feet).");
+        add("item.confluence.shiny_red_balloon.info5","The Blizzard in a Bottle's double-jump height is increased from 8 blocks (16 feet) to 14½ blocks (29 feet), for a total jump height of 25 blocks (50 feet).");
+        add("item.confluence.shiny_red_balloon.info6","The Sandstorm in a Bottle's double-jump height is increased from 14½ blocks (29 feet) to 26½ blocks (53 feet), for a total jump height of 37 blocks (74 feet).");
+        add("item.confluence.shiny_red_balloon.info7","The Fart in a Jar's double-jump height is increased from 10½ blocks (21 feet) to 18½ blocks (37 feet), for a total jump height of 29 blocks (58 feet).");
+        add("item.confluence.shiny_red_balloon.info8","The Tsunami in a Bottle's double-jump height is increased from 7 blocks (14 feet) to 12 blocks (24 feet), for a total jump height of 23½ blocks (47 feet).");
+        add("item.confluence.shiny_red_balloon.info9","With the Rocket/Spectre Boots, flight is accelerated, making the same flight time carry the player higher and/or farther.");
+        add("item.confluence.shiny_red_balloon.info10","The Frog Leg jump bonus stacks additively with the Shiny Red Balloon bonus, letting the first jump reach 16½ blocks (33 feet).");
+        add("item.confluence.shiny_red_balloon.info11","With wings, flight time is increased.");
+        add("item.confluence.shiny_red_balloon.info12","However, the Honey Balloon and Balloon Pufferfish do not stack with the Shiny Red Balloon; they all grant the same benefits.");
         add("item.confluence.spectre_boots.info","Spectre Boots are an accessory crafted from Rocket Boots and either Flurry Boots, Hermes Boots, Dunerider Boots, or Sailfish Boots, and combine their functionality.");
         add("item.confluence.spectre_boots.info2","During flight, they emit a white/blue cloud trail, but unlike the Rocket Boots, they do not produce any light. Their flight time is about 1.6 seconds, identical to Rocket Boots.");
         add("item.confluence.terraspark_boots.info","The Terraspark Boots are a pre-Hardmode accessory crafted by combining Frostspark Boots and Lava Waders at a Crafting Table, providing the benefits of both items.");

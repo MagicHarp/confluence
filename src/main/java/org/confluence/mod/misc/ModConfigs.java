@@ -149,7 +149,7 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue CLOUD_IN_A_BALLOON_JUMP_SPEED = BUILDER.defineInRange("CloudInABalloon", 1.1, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue CLOUD_IN_A_BOTTLE_JUMP_SPEED = BUILDER.defineInRange("CloudInABottle", 1.1, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue FART_IN_A_BALLOON_JUMP_SPEED = BUILDER.defineInRange("FartInABalloon", 2.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue FART_IN_A_BOTTLE_JUMP_SPEED = BUILDER.defineInRange("FartInABottle", 2.8, 0.0, Double.MAX_VALUE);
+    public static final ForgeConfigSpec.DoubleValue FART_IN_A_JAR_JUMP_SPEED = BUILDER.defineInRange("FartInAJar", 2.8, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue SANDSTORM_IN_A_BALLOON_JUMP_SPEED = BUILDER.defineInRange("SandstormInABalloon", 0.45, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue SANDSTORM_IN_A_BOTTLE_JUMP_SPEED = BUILDER.defineInRange("SandstormInABottle", 0.45, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue SHARKRON_BALLOON_JUMP_SPEED = BUILDER.defineInRange("SharkronBalloon", 1.1, 0.0, Double.MAX_VALUE);

@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:fart_in_a_bottle",
+                    "name": "confluence:fart_in_a_jar",
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
