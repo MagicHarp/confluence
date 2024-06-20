@@ -13,7 +13,6 @@ import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModSounds;
-import org.objectweb.asm.util.ASMifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +35,5 @@ public final class Confluence {
         ModSounds.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModEntities.ENTITIES.register(bus);
-        ASMifier.main(new String[]{"org.confluence.mod.item.curio.combat.CobaltShield"});
     }
 }
