@@ -90,7 +90,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
             }
         }
         try (InputStream inputStream = new FileInputStream(path.toFile())) {
-            JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "data driven curio");
+            JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "data_driven");
             for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                 String id = entry.getKey();
                 JsonObject context = GsonHelper.convertToJsonObject(entry.getValue(), "context");
@@ -111,6 +111,10 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                 Hashtable<Class<?>, Number[]> classMap = new Hashtable<>();
                 for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(context, "interfaces", new JsonObject()).entrySet()) {
                     Class<?> clazz = MAP.get(entry1.getKey());
+                    if (clazz == null) {
+                        Confluence.LOGGER.warn("Unknown interface: {}", entry1.getKey());
+                        continue;
+                    }
                     Number[] numbers;
                     JsonElement value = entry1.getValue();
                     if (value.isJsonPrimitive()) {
