@@ -20,13 +20,9 @@ import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
 import org.confluence.mod.item.common.PlayerAbilityItem;
-import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
-import org.confluence.mod.item.curio.combat.IScope;
 import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
-import org.confluence.mod.item.curio.movement.IMayFly;
-import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.PlayerUtils;
 
@@ -40,11 +36,8 @@ public final class PlayerEvents {
             PlayerUtils.syncMana2Client(serverPlayer);
             PlayerUtils.syncSavedData(serverPlayer);
             PlayerUtils.syncAdvancements(serverPlayer);
+            PlayerUtils.resetClientPacket(serverPlayer);
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
-            IMayFly.sendMsg(serverPlayer);
-            IMultiJump.sendMsg(serverPlayer);
-            IAutoAttack.sendMsg(serverPlayer);
-            IScope.sendMsg(serverPlayer);
         }
     }
 
@@ -79,21 +72,16 @@ public final class PlayerEvents {
         oldPlayer.revive();
 
         oldPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(ManaProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
-        oldPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(AbilityProvider.CAPABILITY)
-            .ifPresent(neo -> {
-                neo.copyFrom(old);
-                LifeCrystal.applyModifier(neoPlayer, neo);
-                LifeFruit.applyModifier(neoPlayer, neo);
-                PlayerAbilityItem.AegisApple.applyModifier(neoPlayer, neo);
-                PlayerAbilityItem.GalaxyPearl.applyModifier(neoPlayer, neo);
-            }));
+        oldPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(neo -> {
+            neo.copyFrom(old);
+            LifeCrystal.applyModifier(neoPlayer, neo);
+            LifeFruit.applyModifier(neoPlayer, neo);
+            PlayerAbilityItem.AegisApple.applyModifier(neoPlayer, neo);
+            PlayerAbilityItem.GalaxyPearl.applyModifier(neoPlayer, neo);
+        }));
 
         if (PlayerUtils.isServerNotFake(neoPlayer)) {
-            ServerPlayer serverPlayer = (ServerPlayer) neoPlayer;
-            IMultiJump.sendMsg(serverPlayer);
-            IMayFly.sendMsg(serverPlayer);
-            IAutoAttack.sendMsg(serverPlayer);
-            IScope.sendMsg(serverPlayer);
+            PlayerUtils.resetClientPacket((ServerPlayer) neoPlayer);
         }
     }
 

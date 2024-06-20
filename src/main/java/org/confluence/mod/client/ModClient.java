@@ -22,6 +22,7 @@ import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.BoulderModel;
 import org.confluence.mod.client.model.entity.BulletModel;
+import org.confluence.mod.client.model.entity.MoneyHoleModel;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.BloodyFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.GlowingFishingHookModel;
@@ -82,6 +83,7 @@ public final class ModClient {
         event.registerLayerDefinition(BulletModel.LAYER_LOCATION, BulletModel::createBodyLayer);
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BoulderModel.LAYER_LOCATION, BoulderModel::createBodyLayer);
+        event.registerLayerDefinition(MoneyHoleModel.LAYER_LOCATION, MoneyHoleModel::createBodyLayer);
 
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
         event.registerLayerDefinition(WebSlingerModel.LAYER_LOCATION, WebSlingerModel::createBodyLayer);
@@ -133,6 +135,7 @@ public final class ModClient {
         event.registerEntityRenderer(EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(STAR_CLOAK.get(), StarCloakEntityRenderer::new);
         event.registerEntityRenderer(BOULDER.get(), BoulderRenderer::new);
+        event.registerEntityRenderer(MONEY_HOLE.get(), MoneyHoleRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);

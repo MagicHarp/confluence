@@ -46,7 +46,6 @@ public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
         poseStack.scale(2.0F, 2.0F, 2.0F);
         model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         poseStack.popPose();
-        super.render(entity, entityYaw, partialTick, poseStack, multiBufferSource, packedLight);
     }
 
     @Override

@@ -36,6 +36,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.entity.MoneyHoleEntity;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.misc.ModConfigs;
@@ -185,7 +186,8 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
 
         private boolean summonHole(Level level, Vec3 center) {
             if (level.random.nextFloat() < moneyHoleChance) {
-                // 金钱洞
+                MoneyHoleEntity moneyHole = new MoneyHoleEntity(level, center);
+                level.addFreshEntity(moneyHole);
                 return true;
             }
             return false;

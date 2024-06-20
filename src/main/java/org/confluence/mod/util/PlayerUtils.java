@@ -12,6 +12,10 @@ import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.item.curio.combat.IScope;
+import org.confluence.mod.item.curio.movement.IMayFly;
+import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.GamePhasePacketS2C;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
@@ -103,5 +107,12 @@ public final class PlayerUtils {
 
     public static boolean isServerNotFake(Player player) {
         return player instanceof ServerPlayer && !(player instanceof FakePlayer);
+    }
+
+    public static void resetClientPacket(ServerPlayer serverPlayer) {
+        IMultiJump.sendMsg(serverPlayer);
+        IMayFly.sendMsg(serverPlayer);
+        IAutoAttack.sendMsg(serverPlayer);
+        IScope.sendMsg(serverPlayer);
     }
 }

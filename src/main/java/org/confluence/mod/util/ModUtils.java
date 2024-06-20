@@ -26,15 +26,23 @@ public final class ModUtils {
     }
 
     public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level) {
+        createItemEntity(itemStack, x, y, z, level, 40);
+    }
+
+    public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level, int pickUpDelay) {
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
-        itemEntity.setPickUpDelay(40);
+        itemEntity.setPickUpDelay(pickUpDelay);
         level.addFreshEntity(itemEntity);
     }
 
     public static void createItemEntity(Item item, int count, double x, double y, double z, Level level) {
+        createItemEntity(item, count, x, y, z, level, 40);
+    }
+
+    public static void createItemEntity(Item item, int count, double x, double y, double z, Level level, int pickUpDelay) {
         if (count <= 0) return;
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, new ItemStack(item, count));
-        itemEntity.setPickUpDelay(40);
+        itemEntity.setPickUpDelay(pickUpDelay);
         level.addFreshEntity(itemEntity);
     }
 
@@ -46,10 +54,10 @@ public final class ModUtils {
         int golden_count = j % 9;
         int k = (j - golden_count) / 9;
         int platinum_count = k % 9;
-        createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level);
-        createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level);
-        createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level);
-        createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level);
+        createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level, 0);
+        createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level, 0);
+        createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level, 0);
+        createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level, 0);
     }
 
     public static Component getModifierTooltip(double amount, String type) {

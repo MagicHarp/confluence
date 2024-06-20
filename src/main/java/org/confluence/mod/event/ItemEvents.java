@@ -158,7 +158,7 @@ public final class ItemEvents {
         if (itemStack.is(Tags.Items.TOOLS_BOWS) || itemStack.is(Tags.Items.TOOLS_CROSSBOWS)) {
             CompoundTag tag = itemStack.getTagElement(PrefixProvider.KEY);
             if (tag != null && event.getEntity().level().getGameTime() % (int) (1.0 / tag.getDouble("attackSpeed")) == 0) {
-                event.setDuration(Math.round(event.getDuration() - 1));
+                event.setDuration(event.getDuration() - 1);
             }
         }
     }
