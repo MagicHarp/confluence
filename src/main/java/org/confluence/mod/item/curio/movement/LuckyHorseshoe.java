@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -26,7 +25,7 @@ public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
 
     @Override
     public int getFallResistance() {
-        return ModConfigs.LUCKY_HORSESHOE_FALL_RESISTANCE.get();
+        return -1;
     }
 
     @Override
@@ -38,5 +37,13 @@ public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("curios.tooltip.negates_fall_damage"));
         super.appendHoverText(itemStack, level, list, tooltipFlag);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.lucky_horseshoe.info"),
+            Component.translatable("item.confluence.lucky_horseshoe.info2")
+        };
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.combat.HoneyComb;
 import org.confluence.mod.item.curio.combat.IHoneycomb;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,12 +24,12 @@ public class AmberHorseshoeBalloon extends HoneyComb implements IFallResistance,
 
     @Override
     public int getFallResistance() {
-        return ModConfigs.AMBER_HORSESHOE_BALLOON_FALL_RESISTANCE.get();
+        return -1;
     }
 
     @Override
     public double getBoost() {
-        return ModConfigs.AMBER_HORSESHOE_BALLOON_JUMP_BOOST.get();
+        return 1.75;
     }
 
     @Override
@@ -42,5 +41,14 @@ public class AmberHorseshoeBalloon extends HoneyComb implements IFallResistance,
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IHoneycomb.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.amber_horseshoe_balloon.info"),
+            Component.translatable("item.confluence.amber_horseshoe_balloon.info2"),
+            Component.translatable("item.confluence.amber_horseshoe_balloon.info3")
+        };
     }
 }

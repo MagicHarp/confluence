@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,16 +31,6 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     }
 
     @Override
-    public int getFlyTicks() {
-        return ModConfigs.LIGHTNING_BOOTS_FLY_TICKS.get();
-    }
-
-    @Override
-    public double getFlySpeed() {
-        return ModConfigs.LIGHTNING_BOOTS_FLY_SPEED.get();
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ImmutableMultimap.of(
             Attributes.MOVEMENT_SPEED, SPEED_MODIFIER,
@@ -52,5 +41,14 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.lightning_boots.tooltip"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.lightning_boots.info"),
+            Component.translatable("item.confluence.lightning_boots.info2"),
+            Component.translatable("item.confluence.lightning_boots.info3")
+        };
     }
 }

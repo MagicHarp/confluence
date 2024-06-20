@@ -5,7 +5,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,17 +21,25 @@ public class SharkronBalloon extends TsunamiInABottle implements IJumpBoost {
 
     @Override
     public double getBoost() {
-        return ModConfigs.SHARKRON_BALLOON_JUMP_BOOST.get();
+        return 1.33;
     }
 
     @Override
     public double getJumpSpeed() {
-        return ModConfigs.SHARKRON_BALLOON_JUMP_SPEED.get();
+        return 1.1;
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IMultiJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.sharkron_balloon.info"),
+            Component.translatable("item.confluence.sharkron_balloon.info2")
+        };
     }
 }

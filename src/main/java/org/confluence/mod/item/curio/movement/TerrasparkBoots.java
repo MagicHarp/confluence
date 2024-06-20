@@ -16,7 +16,6 @@ import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -27,16 +26,6 @@ import java.util.UUID;
 public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILavaImmune, ILavaHurtReduce, IFluidWalk {
     public static final UUID SPEED_UUID = UUID.fromString("73456995-B70B-48D9-7EA4-191BD76C94C9");
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Terraspark Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
-
-    @Override
-    public int getFlyTicks() {
-        return ModConfigs.TERRASPARK_BOOTS_FLY_TICKS.get();
-    }
-
-    @Override
-    public double getFlySpeed() {
-        return ModConfigs.TERRASPARK_BOOTS_FLY_SPEED.get();
-    }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
@@ -76,5 +65,13 @@ public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILa
         list.add(IFluidWalk.ALL_FLUID);
         list.add(Component.translatable("item.confluence.terraspark_boots.tooltip2"));
         list.add(ILavaHurtReduce.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.terraspark_boots.info"),
+            Component.translatable("item.confluence.terraspark_boots.info2")
+        };
     }
 }

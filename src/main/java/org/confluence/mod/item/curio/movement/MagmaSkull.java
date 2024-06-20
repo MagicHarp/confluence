@@ -23,4 +23,12 @@ public class MagmaSkull extends BaseCurioItem implements IFireImmune, ILavaImmun
         list.add(ILavaImmune.TOOLTIP);
         list.add(IFireImmune.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.magma_skull.info"),
+            Component.translatable("item.confluence.magma_skull.info2")
+        };
+    }
 }

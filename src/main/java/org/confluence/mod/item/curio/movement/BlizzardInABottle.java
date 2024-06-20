@@ -6,13 +6,15 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
+    public static final int TICKS = 16;
+    public static final double SPEED = 0.4;
+
     public BlizzardInABottle(Rarity rarity) {
         super(rarity);
     }
@@ -23,16 +25,25 @@ public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
 
     @Override
     public int getJumpTicks() {
-        return ModConfigs.BLIZZARD_IN_A_BOTTLE_JUMP_TICKS.get();
+        return TICKS;
     }
 
     @Override
     public double getJumpSpeed() {
-        return ModConfigs.BLIZZARD_IN_A_BOTTLE_JUMP_SPEED.get();
+        return SPEED;
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IOneTimeJump.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.blizzard_in_a_bottole.info"),
+            Component.translatable("item.confluence.blizzard_in_a_bottole.info2"),
+            Component.translatable("item.confluence.blizzard_in_a_bottole.info3")
+        };
     }
 }

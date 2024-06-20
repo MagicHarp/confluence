@@ -156,7 +156,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
     HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
-    SAILFISH_BOOTS("sailfish_boots", BaseSpeedBoots::new), // 旗鱼靴
+    SAILFISH_BOOTS("sailfish_boots", SailfishBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
     SPECTRE_BOOTS("spectre_boots", SpectreBoots::new), // 幽灵靴
@@ -170,7 +170,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     CLOUD_IN_A_BOTTLE("cloud_in_a_bottle", CloudInABottle::new), // 云朵瓶
     BLIZZARD_IN_A_BOTTLE("blizzard_in_a_bottle", BlizzardInABottle::new), // 暴雪瓶
     SANDSTORM_IN_A_BOTTLE("sandstorm_in_a_bottle", SandstormInABottle::new), // 沙暴瓶
-    FART_IN_A_BOTTLE("fart_in_a_bottle", FartInABottle::new), // 罐中臭屁
+    FART_IN_A_JAR("fart_in_a_bottle", FartInAJar::new), // 罐中臭屁
     TSUNAMI_IN_A_BOTTLE("tsunami_in_a_bottle", TsunamiInABottle::new), // 海啸瓶
     SHINY_RED_BALLOON("shiny_red_balloon", Balloon::new), // 闪亮红气球
     BALLOON_PUFFERFISH("balloon_pufferfish", Balloon::new), // 气球河豚鱼

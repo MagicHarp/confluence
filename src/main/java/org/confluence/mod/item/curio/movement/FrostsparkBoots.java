@@ -11,7 +11,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,16 +25,6 @@ public class FrostsparkBoots extends LightningBoots {
 
     public FrostsparkBoots() {
         super(ModRarity.LIME);
-    }
-
-    @Override
-    public int getFlyTicks() {
-        return ModConfigs.FROSTSPARK_BOOTS_FLY_TICKS.get();
-    }
-
-    @Override
-    public double getFlySpeed() {
-        return ModConfigs.FROSTSPARK_BOOTS_FLY_SPEED.get();
     }
 
     @Override

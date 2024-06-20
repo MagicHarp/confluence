@@ -2,7 +2,7 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "confluence:fart_in_a_bottle"
+            "item": "confluence:fart_in_a_jar"
         },
         {
             "item": "confluence:shiny_red_balloon"

@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -18,12 +17,7 @@ import java.util.UUID;
 public class WhiteHorseshoeBalloon extends BlizzardInABalloon implements IFallResistance {
     @Override
     public int getFallResistance() {
-        return ModConfigs.WHITE_HORSESHOE_BALLOON_FALL_RESISTANCE.get();
-    }
-
-    @Override
-    public double getBoost() {
-        return ModConfigs.WHITE_HORSESHOE_BALLOON_JUMP_BOOST.get();
+        return -1;
     }
 
     @Override
@@ -35,5 +29,14 @@ public class WhiteHorseshoeBalloon extends BlizzardInABalloon implements IFallRe
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IMultiJump.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.white_horseshoe_balloon.info"),
+            Component.translatable("item.confluence.white_horseshoe_balloon.info2"),
+            Component.translatable("item.confluence.white_horseshoe_balloon.info3")
+        };
     }
 }

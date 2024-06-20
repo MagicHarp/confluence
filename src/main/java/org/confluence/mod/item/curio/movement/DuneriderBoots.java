@@ -35,4 +35,15 @@ public class DuneriderBoots extends BaseSpeedBoots {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(Component.translatable("item.confluence.dunerider_boots.tooltip2"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.dunerider_boots.info"),
+            Component.translatable("item.confluence.dunerider_boots.info2"),
+            Component.translatable("item.confluence.dunerider_boots.info3"),
+            Component.translatable("item.confluence.dunerider_boots.info4"),
+            Component.translatable("item.confluence.dunerider_boots.info5")
+        };
+    }
 }

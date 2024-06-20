@@ -7,7 +7,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
@@ -24,7 +23,7 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
 
     @Override
     public double getBoost() {
-        return ModConfigs.BUNDLE_OF_BALLOONS_JUMP_BOOST.get();
+        return 1.33;
     }
 
     @Override
@@ -35,12 +34,12 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new PlayerJumpPacketS2C(
                     -2.0,
-                    ModConfigs.SANDSTORM_IN_A_BALLOON_JUMP_SPEED.get(),
-                    ModConfigs.SANDSTORM_IN_A_BALLOON_JUMP_TICKS.get(),
-                    ModConfigs.BLIZZARD_IN_A_BALLOON_JUMP_SPEED.get(),
-                    ModConfigs.BLIZZARD_IN_A_BALLOON_JUMP_TICKS.get(),
+                    SandstormInABottle.SPEED,
+                    SandstormInABottle.TICKS,
+                    BlizzardInABottle.SPEED,
+                    BlizzardInABottle.TICKS,
                     -2.0,
-                    ModConfigs.CLOUD_IN_A_BALLOON_JUMP_SPEED.get()
+                    CloudInABalloon.SPEED
                 )
             );
         }
@@ -58,5 +57,13 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(IJumpBoost.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.bundle_of_balloons.info"),
+            Component.translatable("item.confluence.bundle_of_balloons.info2")
+        };
     }
 }

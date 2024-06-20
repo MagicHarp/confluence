@@ -9,7 +9,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +24,7 @@ public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance,
 
     @Override
     public int getFallResistance() {
-        return ModConfigs.OBSIDIAN_HORSESHOE_FALL_RESISTANCE.get();
+        return -1;
     }
 
     @Override
@@ -37,5 +36,15 @@ public class ObsidianHorseshoe extends BaseCurioItem implements IFallResistance,
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IFallResistance.TOOLTIP);
         list.add(IFireImmune.TOOLTIP);
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.obsidian_horseshoe.info"),
+            Component.translatable("item.confluence.obsidian_horseshoe.info2"),
+            Component.translatable("item.confluence.obsidian_horseshoe.info3"),
+            Component.translatable("item.confluence.obsidian_horseshoe.info4")
+        };
     }
 }
