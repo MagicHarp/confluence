@@ -142,6 +142,5 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                 list.add(new TagLoader.EntryWithSource(TagEntry.element(location), "data_driven"));
             }
         });
-        INFOS.clear();
     }
 }
