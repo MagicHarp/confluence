@@ -42,6 +42,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.stopwatch", "显示玩家的移动速度");
         add("curios.tooltip.tally_counter", "显示怪物击杀数量");
         add("curios.tooltip.weather_radio", "显示天气");
+        add("curios.tooltip.scope", "扩大远程武器的视野范围");
+        add("curios.tooltip.scope2", "手持远程武器并潜行可拉远视野");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -79,6 +81,18 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.vitamins.tooltip", "对虚弱免疫");
         add("item.confluence.fast_clock.tooltip", "对缓慢免疫");
         add("item.confluence.blindfold.tooltip", "对失明免疫");
+        add("item.confluence.trifold_map.tooltip", "对反胃免疫");
+        add("item.confluence.the_plan.tooltip", "对缓慢和反胃免疫");
+        add("item.confluence.holy_water.tooltip", "对凋零免疫");
+        add("item.confluence.energy_bar.tooltip", "对饥饿免疫");
+        add("item.confluence.flashlight.tooltip", "对黑暗免疫");
+        add("item.confluence.hand_drill.tooltip", "对挖掘疲劳免疫");
+        add("item.confluence.shot_put.tooltip", "对漂浮免疫");
+        add("item.confluence.searchlight.tooltip", "对失明和黑暗免疫");
+        add("item.confluence.detoxification_capsule.tooltip", "对中毒和凋零免疫");
+        add("item.confluence.explorers_equipment.tooltip", "对挖掘疲劳和漂浮免疫");
+        add("item.confluence.nutrient_solution.tooltip", "对虚弱和饥饿免疫");
+        add("item.confluence.ankh_charm.tooltip", "对大部分减益免疫");
         add("item.confluence.honey_comb.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中");
         add("item.confluence.bezoar.tooltip", "对中毒免疫");
         add("item.confluence.cobalt_shield.tooltip", "对击退免疫");
@@ -141,6 +155,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
         add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
         add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
+        add("item.confluence.sniper_scope.tooltip", "远程伤害和暴击率各提高10%");
+        add("item.confluence.recon_scope.tooltip", "“发现敌人”");
 
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 

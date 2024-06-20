@@ -17,9 +17,7 @@ import org.confluence.mod.item.curio.missellaneous.TreasureMagnet;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 
-import java.util.Arrays;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     BEZOAR("bezoar", Bezoar::new), // 牛黄 中毒
@@ -250,10 +248,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     public static void initialize() {
         DataDrivenCurioInfo.generatingInfos().forEach(info -> {
             String id = info.id();
-            String className = Arrays.stream(id.split("_"))
-                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
-                .collect(Collectors.joining());
-            create(id.toUpperCase(), id.toLowerCase(), () -> new DataDrivenCurioGenerator(className, info.rarity(), info.tooltips(), info.classMap()).newInstance());
+            create(id.toUpperCase(), id.toLowerCase(), () -> new DataDrivenCurioGenerator(info).newInstance());
         });
     }
 }

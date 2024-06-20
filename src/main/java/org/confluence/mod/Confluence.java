@@ -13,9 +13,11 @@ import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModSounds;
+import org.objectweb.asm.util.ASMifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 @SuppressWarnings("unused")
@@ -25,7 +27,7 @@ public final class Confluence {
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
 
-    public Confluence() {
+    public Confluence() throws IOException {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
@@ -34,5 +36,6 @@ public final class Confluence {
         ModSounds.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModEntities.ENTITIES.register(bus);
+        ASMifier.main(new String[]{"org.confluence.mod.item.curio.combat.CobaltShield"});
     }
 }

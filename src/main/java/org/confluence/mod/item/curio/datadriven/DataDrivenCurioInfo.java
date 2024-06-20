@@ -13,7 +13,7 @@ import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.movement.*;
-import org.confluence.mod.misc.ModTags;
+import top.theillusivec4.curios.Curios;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,12 +21,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltips, Map<Class<?>, Number[]> classMap) {
+public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltips, String slot, ArrayList<DataDrivenAttributeInfo> infos, Map<Class<?>, Number[]> classMap) {
     private static final ArrayList<DataDrivenCurioInfo> INFOS = new ArrayList<>();
     private static final Hashtable<String, Class<?>> MAP = new Hashtable<>();
 
@@ -65,7 +62,19 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                     {
                         "data_driven_test": {
                             "rarity": "MASTER",
-                            "tooltips": ["It's a Data Driven curio", "More information will in Github Wiki"],
+                            "tooltips": [
+                                "It's a Data Driven curio",
+                                "More information in Github Wiki"
+                            ],
+                            "slot": "curio",
+                            "attributes": {
+                                "minecraft:generic.movement_speed": {
+                                    "uuid": "DC2CE9B0-2637-329F-2E1F-998F1A8FA5A1",
+                                    "name": "Data Driven",
+                                    "value": 0.05,
+                                    "operation": "MULTIPLY_TOTAL"
+                                }
+                            },
                             "interfaces": {
                                 "AutoAttack": {},
                                 "FallResistance": -1,
@@ -81,12 +90,24 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         try (InputStream inputStream = new FileInputStream(path.toFile())) {
             JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "data driven curio");
             for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-                JsonObject attributes = GsonHelper.convertToJsonObject(entry.getValue(), "attributes");
-                String rarity = GsonHelper.getAsString(attributes, "rarity", "WHITE").toUpperCase();
+                String id = entry.getKey();
+                JsonObject context = GsonHelper.convertToJsonObject(entry.getValue(), "context");
+                String rarity = GsonHelper.getAsString(context, "rarity", "WHITE").toUpperCase();
                 ArrayList<String> tooltips = new ArrayList<>();
-                GsonHelper.getAsJsonArray(attributes, "tooltips", new JsonArray()).forEach(jsonElement -> tooltips.add(GsonHelper.convertToString(jsonElement, "tooltip")));
+                GsonHelper.getAsJsonArray(context, "tooltips", new JsonArray()).forEach(jsonElement -> tooltips.add(GsonHelper.convertToString(jsonElement, "tooltip")));
+                String slot = GsonHelper.getAsString(context, "slot", "curio");
+                ArrayList<DataDrivenAttributeInfo> infos = new ArrayList<>();
+                for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(context, "attributes", new JsonObject()).entrySet()) {
+                    ResourceLocation location = new ResourceLocation(entry1.getKey());
+                    JsonObject attribute = GsonHelper.convertToJsonObject(entry1.getValue(), "attribute");
+                    String uuid = GsonHelper.getAsString(attribute, "uuid", UUID.nameUUIDFromBytes((id + infos.size()).getBytes()).toString());
+                    String name = GsonHelper.getAsString(attribute, "name", id);
+                    double value = GsonHelper.getAsDouble(attribute, "value", 1.0);
+                    String operation = GsonHelper.getAsString(attribute, "operation", "ADDITION").toUpperCase();
+                    infos.add(new DataDrivenAttributeInfo(location.getNamespace(), location.getPath(), uuid, name, value, operation));
+                }
                 Hashtable<Class<?>, Number[]> classMap = new Hashtable<>();
-                for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(attributes, "interfaces").entrySet()) {
+                for (Map.Entry<String, JsonElement> entry1 : GsonHelper.getAsJsonObject(context, "interfaces", new JsonObject()).entrySet()) {
                     Class<?> clazz = MAP.get(entry1.getKey());
                     Number[] numbers;
                     JsonElement value = entry1.getValue();
@@ -103,7 +124,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                     }
                     classMap.put(clazz, numbers);
                 }
-                INFOS.add(new DataDrivenCurioInfo(entry.getKey(), rarity, tooltips, classMap));
+                INFOS.add(new DataDrivenCurioInfo(id, rarity, tooltips, slot, infos, classMap));
             }
         } catch (Exception e) {
             Confluence.LOGGER.error(e.getMessage());
@@ -112,8 +133,8 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
     }
 
     public static void bindTags(Map<ResourceLocation, List<TagLoader.EntryWithSource>> map) {
-        List<TagLoader.EntryWithSource> list = map.computeIfAbsent(ModTags.CURIO.location(), location -> new ArrayList<>());
         INFOS.forEach(info -> {
+            List<TagLoader.EntryWithSource> list = map.computeIfAbsent(new ResourceLocation(Curios.MODID, info.slot), location -> new ArrayList<>());
             ResourceLocation location = new ResourceLocation(Confluence.MODID, info.id.toLowerCase());
             if (list.stream().noneMatch(entryWithSource -> entryWithSource.entry().getId().equals(location))) {
                 list.add(new TagLoader.EntryWithSource(TagEntry.element(location), "data_driven"));
