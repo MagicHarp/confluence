@@ -4,8 +4,7 @@ import net.minecraftforge.common.IExtensibleEnum;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.combat.*;
-import org.confluence.mod.item.curio.construction.AncientChisel;
-import org.confluence.mod.item.curio.construction.ExtendoGrip;
+import org.confluence.mod.item.curio.construction.*;
 import org.confluence.mod.item.curio.datadriven.DataDrivenCurioGenerator;
 import org.confluence.mod.item.curio.datadriven.DataDrivenCurioInfo;
 import org.confluence.mod.item.curio.expert.*;
@@ -98,13 +97,13 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     /* 矮人项链 */
 
 
-    /* 工具腰带 */
-    /* 工具箱 */
+    TOOLBELT("toolbelt", Toolbelt::new), // 工具腰带
+    TOOLBOX("toolbox", Toolbox::new), // 工具箱
     /* 喷漆器 */
     EXTENDO_GRIP("extendo_grip", ExtendoGrip::new), // 加长握爪
-    /* 便携式水泥搅拌机 */
-    /* 砌砖刀 */
-    /* 建筑师发明背包 */
+    PORTABLE_CEMENT_MIXER("portable_cement_mixer", PortableCementMixer::new), // 便携式水泥搅拌机
+    BRICK_LAYER("brick_layer", BrickLayer::new), // 砌砖刀
+    ARCHITECT_GIZMO_PACK("architect_gizmo_pack", ArchitectGizmoPack::new), // 建筑师发明背包
     /* 自动安放器 */
     ANCIENT_CHISEL("ancient_chisel", AncientChisel::new), // 远古凿子
     /* 创造之手 */

@@ -6,6 +6,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ComputeFovModifierEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -20,6 +21,7 @@ import org.confluence.mod.client.handler.PlayerJumpHandler;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.mixin.client.MinecraftAccessor;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ForgeClient {
@@ -64,6 +66,15 @@ public final class ForgeClient {
             player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.RANGED_WEAPON)
         ) {
             event.setNewFovModifier(0.1F);
+        }
+    }
+
+    @SubscribeEvent
+    public static void interactionKeyMappingTriggered(InputEvent.InteractionKeyMappingTriggered event) {
+        if (event.isUseItem()) {
+            MinecraftAccessor instance = (MinecraftAccessor) Minecraft.getInstance();
+            int delay = instance.getRightClickDelay() - ClientPacketHandler.getRightClickSubtractor();
+            instance.setRightClickDelay(Math.max(0, delay));
         }
     }
 }

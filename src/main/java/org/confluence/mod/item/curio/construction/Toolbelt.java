@@ -18,13 +18,13 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class ExtendoGrip extends BaseCurioItem {
-    public static final UUID REACH_UUID = UUID.fromString("E4F0BF95-655D-7657-F58E-1C7053FACAFC");
-    static final ImmutableMultimap<Attribute, AttributeModifier> REACH = ImmutableMultimap.of(
-        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Extendo Grip", 3, AttributeModifier.Operation.ADDITION)
+public class Toolbelt extends BaseCurioItem {
+    public static final UUID REACH_UUID = UUID.fromString("08EC05A7-A199-F630-9112-DD6F154CF406");
+    private static final ImmutableMultimap<Attribute, AttributeModifier> REACH = ImmutableMultimap.of(
+        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Toolbelt", 1, AttributeModifier.Operation.ADDITION)
     );
 
-    public ExtendoGrip() {
+    public Toolbelt() {
         super(ModRarity.ORANGE);
     }
 
@@ -34,6 +34,5 @@ public class ExtendoGrip extends BaseCurioItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-    }
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
 }

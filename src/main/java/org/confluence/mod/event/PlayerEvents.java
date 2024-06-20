@@ -13,13 +13,10 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.item.IRangePickup;
-import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
-import org.confluence.mod.item.curio.combat.IScope;
-import org.confluence.mod.item.curio.movement.IMayFly;
-import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
+import org.confluence.mod.util.ModUtils;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class PlayerEvents {
@@ -27,10 +24,7 @@ public final class PlayerEvents {
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
-            IMayFly.sendMsg(serverPlayer);
-            IMultiJump.sendMsg(serverPlayer);
-            IAutoAttack.sendMsg(serverPlayer);
-            IScope.sendMsg(serverPlayer);
+            ModUtils.updateClientPacket(serverPlayer);
         }
     }
 
@@ -62,10 +56,7 @@ public final class PlayerEvents {
         oldPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
 
         if (neoPlayer instanceof ServerPlayer serverPlayer) {
-            IMultiJump.sendMsg(serverPlayer);
-            IMayFly.sendMsg(serverPlayer);
-            IAutoAttack.sendMsg(serverPlayer);
-            IScope.sendMsg(serverPlayer);
+            ModUtils.updateClientPacket(serverPlayer);
         }
     }
 
