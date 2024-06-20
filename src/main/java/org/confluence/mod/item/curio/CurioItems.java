@@ -154,8 +154,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     /* 分趾厚底袜 */
     /* 忍者大师装备 */
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
-    HERMES_BOOTS("hermes_boots", BaseSpeedBoots::new), // 赫尔墨斯靴
-    FLURRY_BOOTS("flurry_boots", BaseSpeedBoots::new), // 疾风雪靴
+    HERMES_BOOTS("hermes_boots", HermesBoots::new), // 赫尔墨斯靴
+    FLURRY_BOOTS("flurry_boots", FlurryBoots::new), // 疾风雪靴
     SAILFISH_BOOTS("sailfish_boots", SailfishBoots::new), // 旗鱼靴
     DUNERIDER_BOOTS("dunerider_boots", DuneriderBoots::new), // 沙丘行者靴
     ROCKET_BOOTS("rocket_boots", RocketBoots::new), // 火箭靴
