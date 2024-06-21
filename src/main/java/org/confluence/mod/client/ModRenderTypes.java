@@ -20,7 +20,7 @@ import static org.confluence.mod.Confluence.MODID;
 public final class ModRenderTypes extends RenderStateShard {
     public static RenderType shimmerStillDynamic;
 
-    public ModRenderTypes() {
+    private ModRenderTypes() {
         super(null, null, null);
     }
 
@@ -50,7 +50,7 @@ public final class ModRenderTypes extends RenderStateShard {
     public static RenderType getBlockDynamic(ResourceLocation... textures) {
         MultiTextureStateShard.Builder builder = MultiTextureStateShard.builder();
         for (ResourceLocation texture : textures) {
-            builder.add(texture, false, false);
+            builder.add(texture, false, true);
         }
         return RenderType.create(
             MODID + ":block_dynamic",

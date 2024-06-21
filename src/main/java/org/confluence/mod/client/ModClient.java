@@ -69,7 +69,7 @@ public final class ModClient {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.EBONY_LOG_BLOCKS.DOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.EBONY_LOG_BLOCKS.TRAPDOOR.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALM_LOG_BLOCKS.DOOR.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModFluids.SHIMMER.fluid().get(), ModRenderTypes.shimmerStillDynamic);
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SHIMMER.fluid().get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.SHIMMER.flowingFluid().get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.fluid().get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.flowingFluid().get(), RenderType.translucent());
