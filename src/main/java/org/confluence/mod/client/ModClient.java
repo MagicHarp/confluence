@@ -24,10 +24,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
-import org.confluence.mod.client.model.entity.BeeProjectileModel;
-import org.confluence.mod.client.model.entity.BoulderModel;
-import org.confluence.mod.client.model.entity.BulletModel;
-import org.confluence.mod.client.model.entity.MoneyHoleModel;
+import org.confluence.mod.client.model.entity.*;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.BloodyFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.GlowingFishingHookModel;
@@ -96,6 +93,7 @@ public final class ModClient {
         event.registerLayerDefinition(BeeProjectileModel.LAYER_LOCATION, BeeProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BoulderModel.LAYER_LOCATION, BoulderModel::createBodyLayer);
         event.registerLayerDefinition(MoneyHoleModel.LAYER_LOCATION, MoneyHoleModel::createBodyLayer);
+        event.registerLayerDefinition(AmmoModel.LAYER_LOCATION, AmmoModel::createBodyLayer);
 
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
         event.registerLayerDefinition(WebSlingerModel.LAYER_LOCATION, WebSlingerModel::createBodyLayer);

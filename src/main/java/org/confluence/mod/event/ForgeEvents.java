@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -56,6 +57,7 @@ import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
 import org.confluence.mod.misc.ModConfigs;
+import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.ModUtils;
@@ -117,6 +119,11 @@ public final class ForgeEvents {
         if (living.level().isClientSide) return;
         DamageSource damageSource = event.getSource();
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
+
+        if (damageSource.is(ModDamageTypes.BOULDER) && living.getType().is(Tags.EntityTypes.BOSSES)) {
+            event.setCanceled(true);
+        }
+
         RandomSource random = living.level().random;
         float amount = event.getAmount();
 

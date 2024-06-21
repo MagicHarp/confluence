@@ -26,6 +26,6 @@ public class BaseAmmoItem extends Item {
 
     public BaseAmmoEntity getAmmoEntity(ItemStack itemStack, Player player, Level level) {
         Optional<ItemPrefix> prefix = PrefixProvider.getPrefix(itemStack);
-        return new BaseAmmoEntity(player, level, prefix.isEmpty() ? null : prefix.get(), variant);
+        return new BaseAmmoEntity(player, level, prefix.orElse(null), variant);
     }
 }

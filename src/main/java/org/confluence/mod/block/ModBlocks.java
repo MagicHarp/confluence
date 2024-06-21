@@ -17,6 +17,7 @@ import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.EchoBlock;
+import org.confluence.mod.block.functional.InstantExplosionBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
@@ -75,6 +76,7 @@ public final class ModBlocks {
     public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);
     public static final RegistryObject<BlockEntityType<ActuatorsBlock.Entity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlock.Entity::new, ACTUATORS.get()).build(null));
     public static final RegistryObject<BoulderBlock> BOULDER = registerWithItem("boulder", BoulderBlock::new);
+    public static final RegistryObject<InstantExplosionBlock> INSTANT_EXPLOSION_BLOCK = registerWithItem("instant_explosion_block", InstantExplosionBlock::new);
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
@@ -119,7 +121,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
     public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
     public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
-    // <--空格呢?!
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
