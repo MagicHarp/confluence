@@ -4,6 +4,8 @@
     },
     "shimmer": {
         "bloom": true
+    },
+    "forge": {
+        "loader": "confluence:still_fluid"
     }
-}
 }
