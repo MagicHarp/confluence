@@ -122,6 +122,7 @@ public final class ForgeEvents {
 
         if (damageSource.is(ModDamageTypes.BOULDER) && living.getType().is(Tags.EntityTypes.BOSSES)) {
             event.setCanceled(true);
+            return;
         }
 
         RandomSource random = living.level().random;
