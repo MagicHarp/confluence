@@ -42,6 +42,7 @@
         "client.LocalPlayerMixin",
         "client.MinecraftAccessor",
         "client.MouseHandlerMixin",
+        "client.RenderTypeMixin",
         "integretion.shimmer.ForgePlatformHelperMixin",
         "integretion.shimmer.LightManagerMixin"
     ]
