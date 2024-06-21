@@ -140,14 +140,14 @@ public class BaseBulletEntity extends Projectile {
     }
 
     public enum Variant implements StringRepresentable {
-        AMETHYST(0, "amethyst", 5.0F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
-        TOPAZ(1, "topaz", 5.0F, -1.0, 1.0F, ModParticles.TOPAZ_BULLET),
-        SAPPHIRE(2, "sapphire", 5.0F, -1.0, 1.0F, ModParticles.SAPPHIRE_BULLET),
-        EMERALD(3, "emerald", 5.0F, -1.0, 1.0F, ModParticles.EMERALD_BULLET),
-        RUBY(4, "ruby", 5.0F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
-        AMBER(5, "amber", 5.0F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
-        DIAMOND(6, "diamond", 5.0F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
-        FROST(7, "frost", 5.0F, 0.5, 1.0F, ModParticles.RUBY_BULLET), // todo particle
+        AMETHYST(0, "amethyst", 4.0F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
+        TOPAZ(1, "topaz", 4.0F, -1.0, 1.0F, ModParticles.TOPAZ_BULLET),
+        SAPPHIRE(2, "sapphire", 4.5F, -1.0, 1.0F, ModParticles.SAPPHIRE_BULLET),
+        EMERALD(3, "emerald", 4.5F, -1.0, 1.0F, ModParticles.EMERALD_BULLET),
+        RUBY(4, "ruby", 5.5F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
+        AMBER(5, "amber", 5.5F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
+        DIAMOND(6, "diamond", 6F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
+        FROST(7, "frost", 5.0F, 0.5, 1.0F, () -> ParticleTypes.SNOWFLAKE.getType()), // todo particle
         SPARK(8, "spark", 1.3F, 0.2, 1.0F, () -> ParticleTypes.LAVA.getType());
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
