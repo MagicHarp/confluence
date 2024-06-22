@@ -1,0 +1,12 @@
+{
+    "type": "forge:add_spawns",
+    "biomes": [
+        "minecraft:plains"
+    ],
+    "spawners": {
+        "type": "confluence:green_slime",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+    }
+}

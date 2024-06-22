@@ -37,7 +37,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -151,8 +150,8 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
 
         @Override
         public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-            controllers.add(new AnimationController<>(this, "controller", state -> PlayState.STOP)
-                .triggerableAnim("default", RawAnimation.begin().thenLoop("default"))
+            controllers.add(new AnimationController<>(this, "controller", state ->
+                state.setAndContinue(RawAnimation.begin().thenLoop("default")))
                 .triggerableAnim("crafting", RawAnimation.begin().thenPlay("crafting"))
             );
         }

@@ -1,0 +1,12 @@
+{
+    "type": "forge:add_spawns",
+    "biomes": [
+        "confluence:the_corruption"
+    ],
+    "spawners": {
+        "type": "confluence:corrupted_slime",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+    }
+}
