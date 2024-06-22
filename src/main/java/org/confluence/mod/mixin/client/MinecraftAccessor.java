@@ -10,5 +10,11 @@ public interface MinecraftAccessor {
     int getMissTime();
 
     @Accessor
-    void setMissTime(int missTime);
+    void setMissTime(int missTime); // left click
+
+    @Accessor
+    int getRightClickDelay();
+
+    @Accessor
+    void setRightClickDelay(int rightClickDelay); // right click
 }

@@ -2,7 +2,6 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,11 +13,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.scores.Team;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModRarity;
-import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
@@ -49,30 +48,31 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer && serverPlayer.level().getGameTime() % 200 == 0) {
             Team team = serverPlayer.getTeam();
             for (Player player : serverPlayer.level().players()) {
-                if (shouldSkip(player, team, serverPlayer)) continue;
-                player.addEffect(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 200));
+                if (player.getTeam() != team) continue;
+                player.addEffect(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 300, player == serverPlayer ? 1 : 0));
             }
         }
     }
 
     public static float apply(LivingEntity living, float amount) {
-        if (living instanceof ServerPlayer serverPlayer && serverPlayer.hasEffect(ModEffects.PALADINS_SHIELD.get()) && !CuriosUtils.hasCurio(serverPlayer, PaladinsShield.class)) {
-            AtomicDouble atomic = new AtomicDouble(amount);
+        if (living instanceof ServerPlayer serverPlayer && !isOwner(serverPlayer)) {
+            MutableFloat atomic = new MutableFloat(amount);
             Team team = serverPlayer.getTeam();
             serverPlayer.level().players().stream()
-                .filter(player -> !shouldSkip(player, team, serverPlayer) && player.getHealth() / player.getMaxHealth() > 0.25F && CuriosUtils.hasCurio(player, PaladinsShield.class))
-                .min((playerA, playerB) -> (int) (playerA.distanceTo(serverPlayer) - playerB.distanceTo(serverPlayer))).ifPresent(player -> {
+                .filter(player -> player != serverPlayer && player.getTeam() == team && player.getHealth() / player.getMaxHealth() > 0.25F && isOwner(player) && player.distanceToSqr(serverPlayer) < 1024.0)
+                .min((playerA, playerB) -> (int) (playerA.distanceToSqr(serverPlayer) - playerB.distanceToSqr(serverPlayer))).ifPresent(player -> {
                     float damage = amount * 0.25F;
                     player.hurt(living.damageSources().playerAttack(serverPlayer), damage);
-                    atomic.set(amount - damage);
+                    atomic.subtract(damage);
                 });
-            return atomic.floatValue();
+            return atomic.getValue();
         }
         return amount;
     }
 
-    protected static boolean shouldSkip(Player playerA, Team team, Player playerB) {
-        return playerA.getTeam() != team || playerA.getScoreboardName().equals(playerB.getScoreboardName());
+    public static boolean isOwner(LivingEntity living) {
+        MobEffectInstance effect = living.getEffect(ModEffects.PALADINS_SHIELD.get());
+        return effect != null && effect.getAmplifier() != 0;
     }
 
     @Override

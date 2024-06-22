@@ -27,6 +27,7 @@ import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.mixin.client.MinecraftAccessor;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
@@ -182,6 +183,15 @@ public final class ForgeClient {
             player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)
         ) {
             event.setNewFovModifier(0.1F);
+        }
+    }
+
+    @SubscribeEvent
+    public static void interactionKeyMappingTriggered(InputEvent.InteractionKeyMappingTriggered event) {
+        if (event.isUseItem()) {
+            MinecraftAccessor instance = (MinecraftAccessor) Minecraft.getInstance();
+            int delay = instance.getRightClickDelay() - ClientPacketHandler.getRightClickSubtractor();
+            instance.setRightClickDelay(Math.max(0, delay));
         }
     }
 }

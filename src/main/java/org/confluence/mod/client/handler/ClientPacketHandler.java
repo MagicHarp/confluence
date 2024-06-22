@@ -35,6 +35,7 @@ public final class ClientPacketHandler {
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
     private static boolean hasScope = false;
+    private static int rightClickSubtractor = 0;
 
     private static ResourceLocation moonTexture = null;
     private static int moonSpecific = -1;
@@ -112,6 +113,10 @@ public final class ClientPacketHandler {
         return hasScope;
     }
 
+    public static int getRightClickSubtractor() {
+        return rightClickSubtractor;
+    }
+
     public static @Nullable ResourceLocation getMoonTexture() {
         return moonTexture;
     }
@@ -131,6 +136,12 @@ public final class ClientPacketHandler {
 
     public static boolean isHardcore() {
         return gamePhase.ordinal() > 1;
+    }
+
+    public static void handleDivisor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> rightClickSubtractor = packet.amount());
+        context.setPacketHandled(true);
     }
 
     public boolean isGraduated() {
