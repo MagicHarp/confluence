@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.expert;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -73,5 +74,13 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
                 new ShieldOfCthulhuPacketS2C(has)
             );
         }
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.shield_of_cthulhu.info"),
+            Component.translatable("item.confluence.shield_of_cthulhu.info2")
+        };
     }
 }

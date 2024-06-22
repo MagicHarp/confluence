@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio.informational;
 
 import net.minecraft.network.chat.Component;
 
-public class SilverWatch extends HalfHourWatch{
+public class SilverWatch extends HalfHourWatch {
     @Override
     public Component[] getInformation() {
         return new Component[]{

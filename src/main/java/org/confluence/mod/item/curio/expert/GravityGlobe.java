@@ -48,4 +48,12 @@ public class GravityGlobe extends BaseCurioItem implements ModRarity.Expert {
             );
         }
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.gravity_globe.info"),
+            Component.translatable("item.confluence.gravity_globe.info2")
+        };
+    }
 }

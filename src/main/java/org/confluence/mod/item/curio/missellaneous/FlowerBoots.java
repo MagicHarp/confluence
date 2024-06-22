@@ -20,4 +20,12 @@ public class FlowerBoots extends BaseCurioItem implements IFlowerBoots {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.flower_boots.info"),
+            Component.translatable("item.confluence.flower_boots.info2")
+        };
+    }
 }

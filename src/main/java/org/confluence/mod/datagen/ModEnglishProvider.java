@@ -380,6 +380,40 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.tally_counter.info2","The Tally Counter a Chance to be dropped from Creeper.");
         add("item.confluence.weather_radio.info","The Weather Radio is an informational accessory that displays the current weather and wind speed on the Surface, even if the player is in the Underground, Cavern, or Underworld layers.");
         add("item.confluence.weather_radio.info2","This item can be located in the chests found within Fisherman Villagers' houses.");
+        add("item.confluence.band_of_regeneration.info","The Band of Regeneration is an accessory that have a Chance to be dropped from Witch");
+        add("item.confluence.band_of_regeneration.info2","When equipped, it regenerates 1 health every second.");
+        add("item.confluence.angler_earring.info","The Angler Earring is an accessory that increases the player's current Fishing Power by 10 when equipped. ");
+        add("item.confluence.angler_earring.info2","This item can be located in the chests found within Fisherman Villagers' houses.");
+        add("item.confluence.brain_of_confusion.info","The Brain of Confusion is a accessory , upon taking damage while equipped, nearby enemies have a 3/5 (60%) chance of receiving the Confused debuff for at minimum 1.5 seconds.");
+        add("item.confluence.brain_of_confusion.info2","The Brain of Confusion have a Chance to be dropped from Zombie Villager.");
+        add("item.confluence.gravity_globe.info","The Gravity Globe is a accessory that allows the holder to flip gravity, so that the player falls up instead of down, and toggle gravity back to normal afterward.");
+        add("item.confluence.gravity_globe.info2","The Gravity Glob have a Chance to be dropped from Shulker.");
+        add("item.confluence.hive_pack.info","The Hive Pack is a accessory , when equipped, grants a 1/2 (50%) chance of replacing friendly Bee projectiles with larger \"Giant Bees\".");
+        add("item.confluence.hive_pack.info2","The Hive Pack have a Chance to be dropped from Bee.");
+        add("item.confluence.royal_gel.info","The Royal Gel is a pre-Hardmode accessory that pacifies most slimes when equipped, causing them to no longer pursue the player, and will deal no contact damage or fire projectiles, even if the player deals damage to them.");
+        add("item.confluence.royal_gel.info2","The Royal Gel have a Chance to be dropped from Slime.");
+        add("item.confluence.shield_of_cthulhu.info","The Shield of Cthulhu is a pre-Hardmode shield accessory that allows the player to perform a dash attack by double-tapping either the Left or Right key.");
+        add("item.confluence.shield_of_cthulhu.info2","The Shield of Cthulhu have a Chance to be dropped from Ravager.");
+        add("item.confluence.worm_scarf.info","The Worm Scarf is a pre-Hardmode accessory that reduces incoming damage by 17%.");
+        add("item.confluence.worm_scarf.info2","When a player has a tamed cat, the cat may give the player this item when they wake up.");
+        add("item.confluence.ancient_chisel.info","The Ancient Chisel is an accessory that increases mining speed by 25%.");
+        add("item.confluence.ancient_chisel.info2","The item can be pass the Archaeology to obtained.");
+        add("item.confluence.architect_gizmo_pack.info","The Architect Gizmo Pack is an accessory which increases block and wall placement speed and reach and automatically paints placed objects, essentially granting all of the effects of the accessories used to craft it.");
+        add("item.confluence.architect_gizmo_pack.info2","This item can be crafted at a Crafting Table using a Brick Layer, a Extendo Grip, a Paint Sprayer, and a Portable Cement Mixer.");
+        add("item.confluence.brick_layer.info","The Brick Layer is an accessory which increases the player's placement speed by 50% when placing blocks, furniture, and any other placeable items.");
+        add("item.confluence.brick_layer.info2","This item can be located in the chests found within Toolsmith Villagers' houses.");
+        add("item.confluence.extendo_grip.info","The Extendo Grip is an accessory that extends block mining and placement reach by 3 tiles horizontally and 2 tiles vertically.");
+        add("item.confluence.extendo_grip.info2","It can be discovered in chests found within Desert Pyramids.");
+        add("item.confluence.portable_cement_mixer.info","The Portable Cement Mixer is an accessory that increases the speed at which the player can place background walls by 50%.");
+        add("item.confluence.portable_cement_mixer.info2","This item can be located in the chests found within Toolsmith Villagers' houses.");
+        add("item.confluence.toolbelt.info","The Toolbelt is an accessory item that increases the range of block placement by one tile.");
+        add("item.confluence.toolbelt.info2","This item can be located in the chests found within Toolsmith Villagers' houses.");
+        add("item.confluence.toolbox.info","The Toolbox can be located in the chests found within Toolsmith Villagers' houses.");
+        add("item.confluence.toolbox.info2","It increases item placement and tool range by 1");
+        add("item.confluence.flower_boots.info","Flower Boots are a rare accessory which cause flowers to grow when the player walks on grass.");
+        add("item.confluence.flower_boots.info2","The Flower Boots have a Chance to be dropped from Moss Block.");
+        add("item.confluence.treasure_magnet.info","The Treasure Magnet is a accessory which increases the pickup range of items from 2.625 tiles to 12 tiles[1] while equipped.");
+        add("item.confluence.treasure_magnet.info2","It can be discovered in chests found within Desert Pyramids, End City, Jungle Pyramids, or Ancient Cities.");
 
 
 

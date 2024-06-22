@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.expert;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,5 +40,13 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
             return 0.0F;
         }
         return amount;
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.brain_of_confusion.info"),
+            Component.translatable("item.confluence.brain_of_confusion.info2")
+        };
     }
 }

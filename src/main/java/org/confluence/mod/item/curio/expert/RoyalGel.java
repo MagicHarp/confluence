@@ -1,5 +1,6 @@
 package org.confluence.mod.item.curio.expert;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Slime;
@@ -31,5 +32,13 @@ public class RoyalGel extends BaseCurioItem implements ModRarity.Expert {
 
     public static boolean isInvul(LivingEntity living, DamageSource damageSource) {
         return damageSource.getEntity() instanceof Slime && CuriosUtils.hasCurio(living, CurioItems.ROYAL_GEL.get());
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.royal_gel.info"),
+            Component.translatable("item.confluence.royal_gel.info2")
+        };
     }
 }
