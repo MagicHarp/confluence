@@ -24,6 +24,10 @@ public class BasePlantBlock extends BushBlock implements CustomModel, CustomItem
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION));
         this.survive = survive;
     }
+    public BasePlantBlock(Set<Block> survive,Properties prop){
+        super(prop);
+        this.survive = survive;
+    }
 
     @Override
     public boolean mayPlaceOn(BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){

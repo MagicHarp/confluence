@@ -133,13 +133,13 @@ public interface ISpreadable {
             ModBlocks.HALLOW_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK
         );
 
-        private Map<Supplier<Block>, Supplier<Block>> supplierMap;
+        private Map<Supplier<? extends Block>, Supplier<? extends Block>> supplierMap;
         private Map<Block, Block> blockMap;
 
         @SafeVarargs
-        Type(Supplier<Block>... suppliers) {
+        Type(Supplier<? extends Block>... suppliers) {
             if (suppliers.length % 2 != 0) throw new RuntimeException("Not enough suppliers!");
-            Hashtable<Supplier<Block>, Supplier<Block>> map = new Hashtable<>();
+            Hashtable<Supplier<? extends Block>, Supplier<? extends Block>> map = new Hashtable<>();
             for (int i = 0; i < suppliers.length / 2; i++) {
                 int j = i * 2;
                 map.put(suppliers[j], suppliers[j + 1]);

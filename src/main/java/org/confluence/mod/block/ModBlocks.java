@@ -80,7 +80,9 @@ public final class ModBlocks {
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
-    public static final RegistryObject<AltarBlock> ALTAR_BLOCK = registerWithItem("altar_block", AltarBlock::new);
+    public static final RegistryObject<AltarBlock> DEMON_ALTAR = registerWithItem("demon_altar", () -> new AltarBlock(AltarBlock.Variant.DEMON));
+    public static final RegistryObject<AltarBlock> CRIMSON_ALTAR = registerWithItem("crimson_altar", () -> new AltarBlock(AltarBlock.Variant.CRIMSON));
+    public static final RegistryObject<BlockEntityType<AltarBlock.Entity>> ALTAR_BLOCK_ENTITY = BLOCK_ENTITIES.register("altar_block_entity", () -> BlockEntityType.Builder.of(AltarBlock.Entity::new, DEMON_ALTAR.get(), CRIMSON_ALTAR.get()).build(null));
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY.fluid(), BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_YELLOW)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
@@ -99,11 +101,11 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     public static final RegistryObject<BaseChainBlock> BONE_CHAIN = registerWithItem("bone_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     // plant
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//毒蘑菇
-    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//魔菇
-    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", ()->new MushroomBlock(Set.of(ModBlocks.MUSHROOM_GRASS_BLOCK.get())));//发光蘑菇
-    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", ()->new MushroomBlock(Set.of(Blocks.GRASS_BLOCK,HALLOW_GRASS_BLOCK.get())));//生命蘑菇
-    public static final RegistryObject<Block> JUNGLE_SPORE = registerWithoutItem("jungle_spore", ()->new MushroomBlock(Set.of(Blocks.GRASS_BLOCK))); // TODO: 丛林草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//毒蘑菇
+    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//魔菇
+    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.MUSHROOM_GRASS_BLOCK.get())));//发光蘑菇
+    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", () -> new MushroomBlock(Set.of(Blocks.GRASS_BLOCK, HALLOW_GRASS_BLOCK.get())));//生命蘑菇
+    public static final RegistryObject<JungleSporeBlock> JUNGLE_SPORE = registerWithoutItem("jungle_spore", JungleSporeBlock::new);
     // 草药
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
     public static final RegistryObject<FlameFlower> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
@@ -113,14 +115,14 @@ public final class ModBlocks {
     public static final RegistryObject<BaseHerbBlock> SUNFLOWERS = registerWithoutItem("sunflowers", SunFlower::new);//太阳花
     public static final RegistryObject<DeathWeed> DEATHWEED = registerWithoutItem("deathweed", DeathWeed::new);//死亡草
     public static final RegistryObject<BlockEntityType<BaseHerbBlock.Entity>> HERBS_ENTITY = BLOCK_ENTITIES.register("herbs_entity", () -> BlockEntityType.Builder.of(BaseHerbBlock.Entity::new,
-        WATERLEAF.get(),FLAMEFLOWERS.get(),MOONSHINE_GRASS.get(),SHINE_ROOT.get(),SHIVERINGTHORNS.get(),SUNFLOWERS.get(),DEATHWEED.get()).build(null));
+        WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(), SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
     // grass
-    public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", ()->new BasePlantBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//腐化草
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红饿鬼草
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_EYEBALL_GRASS = registerWithItem("another_crimson_eyeball_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红眼球草
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", ()->new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
-    public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
-    public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", ()->new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
+    public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", () -> new BasePlantBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//腐化草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS = registerWithItem("another_crimson_hungry_ghost_grass", () -> new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红饿鬼草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_EYEBALL_GRASS = registerWithItem("another_crimson_eyeball_grass", () -> new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红眼球草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", () -> new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
+    public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
+    public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

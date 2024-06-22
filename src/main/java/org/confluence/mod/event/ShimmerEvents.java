@@ -31,6 +31,7 @@ public final class ShimmerEvents {
         LightManager.INSTANCE.registerBlockLight(ModBlocks.MOONSHINE_GRASS.get(), (blockState, blockPos) -> ModBlocks.MOONSHINE_GRASS.get().getColor(blockState));
         LightManager.INSTANCE.registerBlockLight(ModBlocks.DEATHWEED.get(), (blockState, blockPos) -> ModBlocks.DEATHWEED.get().getColor(blockState));
         LightManager.INSTANCE.registerBlockLight(ModBlocks.FLAMEFLOWERS.get(), (blockState, blockPos) -> ModBlocks.FLAMEFLOWERS.get().getColor(blockState));
+        LightManager.INSTANCE.registerBlockLight(ModBlocks.JUNGLE_SPORE.get(), (blockState, blockPos) -> ModBlocks.JUNGLE_SPORE.get().getColor());
 
         LightManager.INSTANCE.registerItemLight(Torches.DEMON_TORCH.item.get(), itemStack -> DemonTorchColor.INSTANCE);
         LightManager.INSTANCE.registerItemLight(Torches.RAINBOW_TORCH.item.get(), itemStack -> RainbowTorchColor.INSTANCE);

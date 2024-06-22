@@ -138,7 +138,7 @@ public final class ClientPacketHandler {
         return gamePhase.ordinal() > 1;
     }
 
-    public static void handleDivisor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleSubstractor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> rightClickSubtractor = packet.amount());
         context.setPacketHandled(true);

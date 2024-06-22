@@ -1,29 +1,48 @@
 package org.confluence.mod.block.common;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.function.IntFunction;
 
 @SuppressWarnings("deprecation")
-public class AltarBlock extends Block {
+public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomItemModel {
     public static final VoxelShape SHAPE = Shapes.box(-0.125, 0.0, -0.125, 1.125, 0.8, 1.125);
+    private final Variant variant;
 
-    public AltarBlock() {
+    public AltarBlock(Variant variant) {
         super(Properties.of().strength(3.0F, 18000.0F));
+        this.variant = variant;
     }
 
     @Override
@@ -61,6 +80,99 @@ public class AltarBlock extends Block {
                     "event.confluence.reveal_step" + data.getRevealStep()
                 ), false);
             }
+        }
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+        return new Entity(pPos, pState).setVariant(variant);
+    }
+
+    public static class Entity extends BlockEntity implements GeoBlockEntity {
+        private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+        private Variant variant;
+
+        public Entity(BlockPos pPos, BlockState pBlockState) {
+            super(ModBlocks.ALTAR_BLOCK_ENTITY.get(), pPos, pBlockState);
+            SingletonGeoAnimatable.registerSyncedAnimatable(this);
+        }
+
+        Entity setVariant(Variant variant) {
+            this.variant = variant;
+            markUpdated();
+            return this;
+        }
+
+        public Variant getVariant() {
+            return variant;
+        }
+
+        public void load(@NotNull CompoundTag nbt) {
+            super.load(nbt);
+            this.variant = Variant.byId(nbt.getInt("variant"));
+        }
+
+        protected void saveAdditional(@NotNull CompoundTag nbt) {
+            super.saveAdditional(nbt);
+            nbt.putInt("variant", variant.id);
+        }
+
+        public ClientboundBlockEntityDataPacket getUpdatePacket() {
+            return ClientboundBlockEntityDataPacket.create(this);
+        }
+
+        public @NotNull CompoundTag getUpdateTag() {
+            CompoundTag nbt = new CompoundTag();
+            nbt.putInt("variant", variant.id);
+            return nbt;
+        }
+
+        public void markUpdated() {
+            setChanged();
+            if (level != null) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), UPDATE_CLIENTS);
+            }
+        }
+
+        @Override
+        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+            controllers.add(new AnimationController<>(this, "controller", state -> PlayState.STOP)
+                .triggerableAnim("default", RawAnimation.begin().thenLoop("default"))
+                .triggerableAnim("crafting", RawAnimation.begin().thenPlay("crafting"))
+            );
+        }
+
+        @Override
+        public AnimatableInstanceCache getAnimatableInstanceCache() {
+            return CACHE;
+        }
+    }
+
+    public enum Variant implements StringRepresentable {
+        DEMON(0, "demon"),
+        CRIMSON(1, "crimson");
+
+        private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
+        final int id;
+        private final String name;
+
+        Variant(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public static Variant byId(int pId) {
+            return BY_ID.apply(pId);
+        }
+
+        @Override
+        public @NotNull String getSerializedName() {
+            return name;
         }
     }
 }

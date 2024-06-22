@@ -65,7 +65,6 @@ public class DeathWeed extends BaseHerbBlock {
         if(r < 10){
             pLevel.setBlockAndUpdate(pPos, pState.setValue(PROP_LIGHT, 5));
             Vec3 center = pPos.getCenter().offsetRandom(pRandom,0.6f);
-//            pLevel.addParticle(new DustParticleOptions(new Vector3f(0, 0.7f, 1), 1), center.x, center.y / 2, center.z, 0.2, 0.2, 0.2);
             pLevel.addParticle(new DustParticleOptions(new Vector3f(1, 0, 1), 1), center.x, center.y / 2, center.z, 10,10,10);
             center = pPos.getCenter().offsetRandom(pRandom,0.6f);
             pLevel.addParticle(new DustParticleOptions(new Vector3f(1, 0, 1), 1), center.x, center.y / 2, center.z, 10,10,10);

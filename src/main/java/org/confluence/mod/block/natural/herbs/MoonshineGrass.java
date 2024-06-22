@@ -42,7 +42,7 @@ public class MoonshineGrass extends BaseHerbBlock {
 	}
 
 	public ColorPointLight.Template getColor(BlockState blockState){
-		LIGHT.radius = getAge(blockState) == MAX_AGE ? blockState.getValue(PROP_LIGHT) : BRIGHTNESS;
+		LIGHT.radius = getAge(blockState) == MAX_AGE ? blockState.getValue(PROP_LIGHT) : 0;
 		return LIGHT;
 	}
 
