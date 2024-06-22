@@ -84,6 +84,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("key.confluence.metal_detector", "Detect Metal");
 
+        add("curios.identifier.accessory", "Accessory");
+
         add("item.confluence.vitamins.tooltip", "Immunity to Weakness");
         add("item.confluence.fast_clock.tooltip", "Immunity to Slow");
         add("item.confluence.blindfold.tooltip", "Immunity to Blindness");
@@ -165,6 +167,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
         add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
         add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
+        add("item.confluence.portable_cement_mixer.tooltip", "Decreased 'Right Click Delay' by 1");
+        add("item.confluence.brick_layer.tooltip", "Decreased 'Right Click Delay' by 1");
+        add("item.confluence.architect_gizmo_pack.tooltip", "Decreased 'Right Click Delay' by 2, cannot stack the decrease of its materials");
 
         add("item.confluence.aglet.info","The Aglet is an accessory that increases the player's movement speed by 5%.");
         add("item.confluence.aglet.info2","It can be found in Shipwreck Chests.");

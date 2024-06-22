@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +29,16 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
 
     public LightningBoots() {
         super(ModRarity.PINK);
+    }
+
+    @Override
+    public int getFlyTicks() {
+        return ModConfigs.LIGHTNING_BOOTS_FLY_TICKS.get();
+    }
+
+    @Override
+    public double getFlySpeed() {
+        return ModConfigs.LIGHTNING_BOOTS_FLY_SPEED.get();
     }
 
     @Override

@@ -6,6 +6,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,9 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class SandstormInABottle extends BaseCurioItem implements IOneTimeJump {
-    public static final int TICKS = 20;
-    public static final double SPEED = 0.45;
-
     public SandstormInABottle(Rarity rarity) {
         super(rarity);
     }
@@ -26,12 +24,12 @@ public class SandstormInABottle extends BaseCurioItem implements IOneTimeJump {
 
     @Override
     public int getJumpTicks() {
-        return TICKS;
+        return ModConfigs.SANDSTORM_IN_A_BOTTLE_JUMP_TICKS.get();
     }
 
     @Override
     public double getJumpSpeed() {
-        return SPEED;
+        return ModConfigs.SANDSTORM_IN_A_BOTTLE_JUMP_SPEED.get();
     }
 
     @Override

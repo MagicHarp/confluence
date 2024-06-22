@@ -6,14 +6,13 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class CloudInABottle extends BaseCurioItem implements IMultiJump {
-    public static final double SPEED = 1.0;
-
     public CloudInABottle(Rarity rarity) {
         super(rarity);
     }
@@ -24,7 +23,7 @@ public class CloudInABottle extends BaseCurioItem implements IMultiJump {
 
     @Override
     public double getJumpSpeed() {
-        return SPEED;
+        return ModConfigs.CLOUD_IN_A_BOTTLE_JUMP_SPEED.get();
     }
 
     @Override

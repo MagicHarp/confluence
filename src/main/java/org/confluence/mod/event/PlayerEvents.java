@@ -24,7 +24,7 @@ public final class PlayerEvents {
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
-            ModUtils.updateClientPacket(serverPlayer);
+            ModUtils.resetClientPacket(serverPlayer);
         }
     }
 
@@ -56,7 +56,7 @@ public final class PlayerEvents {
         oldPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(old -> neoPlayer.getCapability(AbilityProvider.CAPABILITY).ifPresent(neo -> neo.copyFrom(old)));
 
         if (neoPlayer instanceof ServerPlayer serverPlayer) {
-            ModUtils.updateClientPacket(serverPlayer);
+            ModUtils.resetClientPacket(serverPlayer);
         }
     }
 

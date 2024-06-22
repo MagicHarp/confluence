@@ -42,8 +42,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     BLACK_BELT("black_belt", BlackBelt::new), // 黑腰带
     /* 天界徽章 */
     /* 月光护身符 */
-    SUN_STONE("sun_stone", SunStone::new), // 太阳石 (WIP)
-    MOON_STONE("moon_stone", MoonStone::new), // 月亮石 (WIP)
+    SUN_STONE("sun_stone", SunStone::new), // 太阳石
+    MOON_STONE("moon_stone", MoonStone::new), // 月亮石
     CELESTIAL_STONE("celestial_stone", CelestialStone::new), // 天界石
     /* 月亮贝壳 */
     /* 天界贝壳 */

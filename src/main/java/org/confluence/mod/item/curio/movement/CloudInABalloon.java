@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,12 +25,12 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
 
     @Override
     public double getBoost() {
-        return 1.33;
+        return ModConfigs.CLOUD_IN_A_BALLOON_JUMP_BOOST.get();
     }
 
     @Override
     public double getJumpSpeed() {
-        return SPEED;
+        return ModConfigs.CLOUD_IN_A_BALLOON_JUMP_SPEED.get();
     }
 
     @Override

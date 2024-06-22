@@ -1,0 +1,50 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:toolbelt",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.3
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:toolbox",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.3
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:portable_cement_mixer",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.1
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "confluence:brick_layer",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

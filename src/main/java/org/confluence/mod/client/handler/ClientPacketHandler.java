@@ -15,7 +15,7 @@ public final class ClientPacketHandler {
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
     private static boolean hasScope = false;
-    private static int rightClickSubtractor = 1;
+    private static int rightClickSubtractor = 0;
 
     public static boolean couldAutoAttack() {
         return autoAttack;

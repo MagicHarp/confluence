@@ -31,7 +31,7 @@ public final class ModUtils {
         ).withStyle(b ? ChatFormatting.BLUE : ChatFormatting.RED);
     }
 
-    public static void updateClientPacket(ServerPlayer serverPlayer) {
+    public static void resetClientPacket(ServerPlayer serverPlayer) {
         IMultiJump.sendMsg(serverPlayer);
         IMayFly.sendMsg(serverPlayer);
         IAutoAttack.sendMsg(serverPlayer);

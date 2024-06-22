@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -17,7 +18,12 @@ import java.util.UUID;
 public class WhiteHorseshoeBalloon extends BlizzardInABalloon implements IFallResistance {
     @Override
     public int getFallResistance() {
-        return -1;
+        return ModConfigs.WHITE_HORSESHOE_BALLOON_FALL_RESISTANCE.get();
+    }
+
+    @Override
+    public double getBoost() {
+        return ModConfigs.WHITE_HORSESHOE_BALLOON_JUMP_BOOST.get();
     }
 
     @Override

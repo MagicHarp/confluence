@@ -3,6 +3,7 @@ package org.confluence.mod.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.effect.ModEffects;
 
 import static org.confluence.mod.item.curio.CurioItems.*;
 
@@ -78,6 +79,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
         add("key.confluence.metal_detector", "检测矿物");
+
+        add("curios.identifier.accessory", "配饰");
 
         add("item.confluence.vitamins.tooltip", "对虚弱免疫");
         add("item.confluence.fast_clock.tooltip", "对缓慢免疫");
@@ -158,8 +161,17 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
         add("item.confluence.sniper_scope.tooltip", "远程伤害和暴击率各提高10%");
         add("item.confluence.recon_scope.tooltip", "“发现敌人”");
+        add("item.confluence.portable_cement_mixer.tooltip", "右键点击延迟降低1");
+        add("item.confluence.brick_layer.tooltip", "右键点击延迟降低1");
+        add("item.confluence.architect_gizmo_pack.tooltip", "右键点击延迟降低2，且降低效果不能与其材料的降低效果叠加");
 
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
+
+        add(ModEffects.PALADINS_SHIELD.get(), "圣骑士护盾");
+        add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
+        add(ModEffects.CONFUSED.get(), "困惑");
+        add(ModEffects.HONEY.get(), "蜂蜜");
+        add(ModEffects.GRAVITATION.get(), "重力反转");
 
         // 饰品
         add(AGLET.get(), "金属带扣");
@@ -306,5 +318,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(RIFLE_SCOPE.get(), "步枪瞄准镜");
         add(SNIPER_SCOPE.get(), "狙击镜");
         add(RECON_SCOPE.get(), "侦察镜");
+        add(TOOLBELT.get(), "工具腰带");
+        add(TOOLBOX.get(), "工具箱");
+        add(PORTABLE_CEMENT_MIXER.get(), "便携式水泥搅拌机");
+        add(BRICK_LAYER.get(), "砌砖刀");
+        add(ARCHITECT_GIZMO_PACK.get(), "建筑师发明背包");
     }
 }

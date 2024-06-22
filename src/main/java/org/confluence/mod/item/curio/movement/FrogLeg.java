@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,12 +14,12 @@ import java.util.List;
 public class FrogLeg extends BaseCurioItem implements IJumpBoost, IFallResistance {
     @Override
     public double getBoost() {
-        return 1.6;
+        return ModConfigs.FROG_LEG_JUMP_BOOST.get();
     }
 
     @Override
     public int getFallResistance() {
-        return 7;
+        return ModConfigs.FROG_LEG_FALL_RESISTANCE.get();
     }
 
     @Override
