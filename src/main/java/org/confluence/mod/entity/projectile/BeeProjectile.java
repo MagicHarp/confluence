@@ -3,6 +3,7 @@ package org.confluence.mod.entity.projectile;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
@@ -65,7 +66,10 @@ public class BeeProjectile extends AbstractHurtingProjectile {
                 }
             }
         }
-        move(MoverType.SELF, getDeltaMovement());
+        Vec3 motion = getDeltaMovement();
+        setYRot((float) (Mth.atan2(motion.x, motion.z) * Mth.RAD_TO_DEG));
+        setXRot((float) (Mth.atan2(motion.y, motion.horizontalDistance()) * Mth.RAD_TO_DEG));
+        move(MoverType.SELF, motion);
         if (lifeTime++ > (isGiant() ? 220 : 200)) discard();
     }
 
