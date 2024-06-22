@@ -81,6 +81,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("key.confluence.metal_detector", "检测矿物");
 
         add("curios.identifier.accessory", "配饰");
+        add("curios.modifiers.accessory", "佩戴配饰时：");
 
         add("item.confluence.vitamins.tooltip", "对虚弱免疫");
         add("item.confluence.fast_clock.tooltip", "对缓慢免疫");

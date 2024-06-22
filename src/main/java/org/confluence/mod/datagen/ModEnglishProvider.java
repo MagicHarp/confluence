@@ -85,6 +85,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("key.confluence.metal_detector", "Detect Metal");
 
         add("curios.identifier.accessory", "Accessory");
+        add("curios.modifiers.accessory", "When worn as accessory:");
 
         add("item.confluence.vitamins.tooltip", "Immunity to Weakness");
         add("item.confluence.fast_clock.tooltip", "Immunity to Slow");

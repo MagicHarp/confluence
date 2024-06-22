@@ -18,7 +18,7 @@ public record RightClickSubtractorPacketS2C(int amount) {
     }
 
     public static void handle(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handleDivisor(packet, ctx)));
+        ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handleSubstractor(packet, ctx)));
         ctx.get().setPacketHandled(true);
     }
 }

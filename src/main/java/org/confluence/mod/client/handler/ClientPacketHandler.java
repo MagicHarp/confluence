@@ -63,7 +63,7 @@ public final class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
-    public static void handleDivisor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handleSubstractor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> rightClickSubtractor = packet.amount());
         context.setPacketHandled(true);
