@@ -103,7 +103,7 @@ public final class ModItems {
     // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
     public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get()));
     public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new MushroomItem(ModBlocks.LIFE_MUSHROOM.get()));
-    public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new MushroomItem(ModBlocks.JUNGLE_SPORE.get()));
+    public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new Item(new Item.Properties()));
 
 
     public static void register(IEventBus bus) {

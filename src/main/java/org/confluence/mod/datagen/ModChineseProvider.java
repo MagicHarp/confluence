@@ -1489,11 +1489,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModBlocks.GLOWING_MUSHROOM.get(), "发光蘑菇");
         add(ModBlocks.LIFE_MUSHROOM.get(), "生命蘑菇");
         add(ModBlocks.JUNGLE_SPORE.get(), "丛林孢子");
-//        add(ModItems.ANOTHER_CRIMSON_MUSHROOM.get(), "毒蘑菇");
-//        add(ModItems.EBONY_MUSHROOM.get(), "魔菇");
-//        add(ModItems.GLOWING_MUSHROOM.get(), "发光蘑菇");
-//        add(ModItems.LIFE_MUSHROOM.get(), "生命蘑菇");
-//        add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
+        add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
         // 法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
