@@ -26,7 +26,7 @@
         "minecraft:old_growth_pine_taiga"
     ],
     "spawners": {
-        "type": "confluence:green_slime",
+        "type": "confluence:purple_slime",
         "weight": 60,
         "minCount": 3,
         "maxCount": 3

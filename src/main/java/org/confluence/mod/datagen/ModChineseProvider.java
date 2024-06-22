@@ -55,6 +55,20 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
+        add("entity.confluence.ice_slime", "冰冻史莱姆");
+        add("entity.confluence.blue_slime", "蓝色史莱姆");
+        add("entity.confluence.red_slime", "红色史莱姆");
+        add("entity.confluence.purple_slime", "紫色史莱姆");
+        add("entity.confluence.pink_slime", "粉色史莱姆");
+        add("entity.confluence.yellow_slime", "黄色史莱姆");
+        add("entity.confluence.crimson_slime", "猩红史莱姆");
+        add("entity.confluence.corrupted_slime", "腐化史莱姆");
+        add("entity.confluence.desert_slime", "沙漠史莱姆");
+        add("entity.confluence.tropic_slime", "热带史莱姆");
+        add("entity.confluence.green_slime", "绿色史莱姆");
+        add("entity.confluence.black_slime", "史莱姆之母");
+        add("entity.confluence.lava_slime", "岩浆史莱姆");
+
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
         add("curios.tooltip.jump_boost", "增加跳跃高度");
@@ -1262,6 +1276,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.PINK_PEARL.get(), "粉珍珠");
         add(Materials.LIFE_FRUIT.get(), "生命果");
         add(Materials.HOOK.get(), "爪钩");
+        add(Materials.GEL.get(), "凝胶");
+        add(Materials.PINK_GEL.get(), "粉凝胶");
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");

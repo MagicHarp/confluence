@@ -1,0 +1,14 @@
+{
+    "type": "forge:add_spawns",
+    "biomes": [
+        "minecraft:warm_ocean",
+        "minecraft:ocean",
+        "minecraft:beach"
+    ],
+    "spawners": {
+        "type": "confluence:tropic_slime",
+        "weight": 60,
+        "minCount": 3,
+        "maxCount": 3
+    }
+}
