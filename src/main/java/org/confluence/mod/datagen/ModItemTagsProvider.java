@@ -24,7 +24,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         IntrinsicTagAppender<Item> appender = tag(ModTags.CURIO);
         for (CurioItems curioItems : CurioItems.values()) appender.add(curioItems.get());
-        tag(ModTags.MINUTE_WATCH).add(CurioItems.GOLDEN_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
+        tag(ModTags.MINUTE_WATCH).add(CurioItems.GOLD_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
         IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.RANGED_WEAPON);
         rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);

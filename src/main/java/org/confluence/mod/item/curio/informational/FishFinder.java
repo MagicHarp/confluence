@@ -21,4 +21,12 @@ public class FishFinder extends AbstractInfoCurio implements IFishermansPocketGu
         list.add(ISextant.TOOLTIP);
         list.add(IWeatherRadio.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.fish_finder.info"),
+            Component.translatable("item.confluence.fish_finder.info2")
+        };
+    }
 }

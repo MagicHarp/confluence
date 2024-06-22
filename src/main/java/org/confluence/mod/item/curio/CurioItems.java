@@ -110,12 +110,12 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
 
     BAND_OF_REGENERATION("band_of_regeneration", BandOfRegeneration::new), // 再生手环
 
-    COPPER_WATCH("copper_watch", HourWatch::new), // 铜表
-    TIN_WATCH("tin_watch", HourWatch::new), // 锡表
-    SILVER_WATCH("silver_watch", HalfHourWatch::new), // 银表
-    TUNGSTEN_WATCH("tungsten_watch", HalfHourWatch::new), // 钨表
-    GOLDEN_WATCH("golden_watch", MinuteWatch::new), // 金表
-    PLATINUM_WATCH("platinum_watch", MinuteWatch::new), // 铂金表
+    COPPER_WATCH("copper_watch", CopperWatch::new), // 铜表
+    TIN_WATCH("tin_watch", TinWatch::new), // 锡表
+    SILVER_WATCH("silver_watch", SilverWatch::new), // 银表
+    TUNGSTEN_WATCH("tungsten_watch", TungstenWatch::new), // 钨表
+    GOLD_WATCH("gold_watch", GoldWatch::new), // 金表
+    PLATINUM_WATCH("platinum_watch", PlatinumWatch::new), // 铂金表
     DEPTH_METER("depth_meter", DepthMeter::new), // 深度计
     COMPASS("compass", Compass::new), // 罗盘
     RADAR("radar", Radar::new), // 雷达

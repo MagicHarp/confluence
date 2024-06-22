@@ -25,4 +25,12 @@ public class FishermansPocketGuide extends AbstractInfoCurio implements IFisherm
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.fishermans_pocket_guide.info"),
+            Component.translatable("item.confluence.fishermans_pocket_guide.info2")
+        };
+    }
 }

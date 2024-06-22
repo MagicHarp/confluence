@@ -230,7 +230,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TIN_WATCH.get(), "锡表");
         add(SILVER_WATCH.get(), "银表");
         add(TUNGSTEN_WATCH.get(), "钨表");
-        add(GOLDEN_WATCH.get(), "金表");
+        add(GOLD_WATCH.get(), "金表");
         add(PLATINUM_WATCH.get(), "铂金表");
         add(PALADINS_SHIELD.get(), "圣骑士护盾");
         add(RADAR.get(), "雷达");
