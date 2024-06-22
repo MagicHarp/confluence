@@ -60,7 +60,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
             if(!pLevel.isAreaLoaded(pPos, 1)) return;
             float f = 0.7F;   /* getGrowthSpeed(this, pLevel, pPos); */
             if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)){
-                pLevel.setBlock(pPos, this.getStateForAge(age + 1), 2);
+                pLevel.setBlockAndUpdate(pPos, this.getStateForAge(age + 1));
                 net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
             }
         }
@@ -120,9 +120,11 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
             int age = getAge(blockState);
             if(age < MAX_AGE - 1) return;
             if(canBloom((ServerLevel) level, blockState)){
-                level.setBlock(blockPos, blockState.setValue(AGE, MAX_AGE), 2);
+                if(age != MAX_AGE){
+                    level.setBlockAndUpdate(blockPos, blockState.setValue(AGE, MAX_AGE));
+                }
             }else if(age == MAX_AGE){ // 如果不能开花且已经开花
-                level.setBlock(blockPos, blockState.setValue(AGE, MAX_AGE - 1), 2);
+                level.setBlockAndUpdate(blockPos, blockState.setValue(AGE, MAX_AGE - 1));
             }
         });
     }
