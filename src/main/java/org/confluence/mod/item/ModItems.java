@@ -115,7 +115,6 @@ public final class ModItems {
         Pickaxes.init();
         Hammers.init();
         HammerAxes.init();
-        Gels.init();
         ManaWeapons.init();
         TerraPotions.init();
         SpawnEggs.init();

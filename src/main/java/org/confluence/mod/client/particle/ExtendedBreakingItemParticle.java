@@ -26,7 +26,9 @@ public class ExtendedBreakingItemParticle extends BreakingItemParticle {
         }
 
         public Particle createParticle(@NotNull SimpleParticleType type, @NotNull ClientLevel level, double x, double y, double z, double mx, double my, double mz) {
-            return new ExtendedBreakingItemParticle(level, x, y, z, item);
+            ExtendedBreakingItemParticle particle = new ExtendedBreakingItemParticle(level, x, y, z, item);
+            particle.setColor((float) mx, (float) my, (float) mz);
+            return particle;
         }
     }
 }

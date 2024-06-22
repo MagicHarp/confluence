@@ -35,6 +35,7 @@ import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
@@ -114,13 +115,20 @@ public final class ItemEvents {
 
     @SubscribeEvent
     public static void itemStackedOnOther(ItemStackedOnOtherEvent event) {
-        if (event.getClickAction() == ClickAction.PRIMARY) return;
         ItemStack onSlot = event.getCarriedItem();
-        if (event.getStackedOnItem().isEmpty() && onSlot.getItem() instanceof IFunctionCouldEnable couldEnable) {
-            if (!event.getPlayer().level().isClientSide) {
-                couldEnable.cycleEnable(onSlot);
+        ItemStack carried = event.getStackedOnItem(); // 非常奇怪,但事实如此
+        Item item = onSlot.getItem();
+        if (event.getClickAction() == ClickAction.SECONDARY) {
+            if (carried.isEmpty() && item instanceof IFunctionCouldEnable couldEnable) {
+                if (!event.getPlayer().level().isClientSide) {
+                    couldEnable.cycleEnable(onSlot);
+                }
+                event.setCanceled(true);
             }
-            event.setCanceled(true);
+        } else if (ItemStack.isSameItem(onSlot, carried)) {
+            if (item instanceof ColoredItem) {
+                ColoredItem.setColor(carried, ColoredItem.getColor(onSlot));
+            }
         }
     }
 

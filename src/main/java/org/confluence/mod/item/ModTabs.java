@@ -15,7 +15,6 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
-import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
@@ -131,7 +130,6 @@ public final class ModTabs {
             .title(Component.translatable("creativetab.confluence.materials"))
             .displayItems((parameters, output) -> {
                 for (Materials materials : Materials.values()) output.accept(materials.get());
-                for (Gels gels : Gels.values()) output.accept(gels.get());
                 output.accept(ModItems.WHOOPIE_CUSHION.get());
             })
             .build());

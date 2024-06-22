@@ -12,7 +12,6 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
-import org.confluence.mod.item.common.Gels;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.fishing.Baits;
@@ -1318,10 +1317,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hammers.PLATINUM_HAMMER.get(), "铂金锤");
 
         /* HammerAxes */
-        add(Gels.BLUE_GEL.get(), "蓝色粘液球");
-        add(Gels.PINK_GEL.get(), "粉色粘液球");
-        add(Gels.FROZEN_GEL.get(), "冰冻粘液球");
-        add(Gels.HONEY_GEL.get(), "蜂蜜粘液球");
         // 杂项
         add(ICE_MIRROR.get(), "冰雪镜");
         add(CLAM.get(), "牡蛎");

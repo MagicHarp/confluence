@@ -13,6 +13,7 @@
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
         "accessor.RangedAttributeAccessor",
+        "accessor.SlimeAccessor",
         "accessor.SpreadingSnowyDirtBlockAccessor",
         "block.BlockBehaviour$BlockStateBaseMixin",
         "block.BlockBehaviourMixin",

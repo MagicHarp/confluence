@@ -2,6 +2,7 @@ package org.confluence.mod.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -46,7 +47,8 @@ import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRende
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.item.common.Gels;
+import org.confluence.mod.item.common.ColoredItem;
+import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.misc.ModArmPoses;
@@ -174,10 +176,8 @@ public final class ModClient {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpecial(ModParticles.ITEM_BLUE_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.BLUE_GEL.get()));
-        event.registerSpecial(ModParticles.ITEM_PINK_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.PINK_GEL.get()));
-        event.registerSpecial(ModParticles.ITEM_HONEY_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.HONEY_GEL.get()));
-        event.registerSpecial(ModParticles.ITEM_FROZEN_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Gels.FROZEN_GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Materials.GEL.get()));
+        event.registerSpecial(ModParticles.ITEM_PINK_GEL.get(), new ExtendedBreakingItemParticle.SlimeBallProvider(Materials.PINK_GEL.get()));
 
         event.registerSpriteSet(ModParticles.RUBY_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.AMBER_BULLET.get(), BulletParticle.Provider::new);
@@ -218,6 +218,13 @@ public final class ModClient {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(HALLOW_LEAVES_COLOR, ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
+    }
+
+    public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
+
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register(SIMPLE, Materials.GEL.get());
     }
 
     @SubscribeEvent
