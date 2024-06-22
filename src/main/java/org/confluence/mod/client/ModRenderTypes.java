@@ -47,11 +47,7 @@ public final class ModRenderTypes extends RenderStateShard {
         );
     }
 
-    public static RenderType getBlockDynamic(ResourceLocation... textures) {
-        MultiTextureStateShard.Builder builder = MultiTextureStateShard.builder();
-        for (ResourceLocation texture : textures) {
-            builder.add(texture, false, true);
-        }
+    public static RenderType getBlockDynamic() {
         return RenderType.create(
             MODID + ":block_dynamic",
             DefaultVertexFormat.BLOCK,
@@ -60,7 +56,7 @@ public final class ModRenderTypes extends RenderStateShard {
             RenderType.CompositeState.builder()
                 .setLightmapState(LIGHTMAP)
                 .setShaderState(BLOCK_DYNAMIC_SHADER)
-                .setTextureState(builder.build())
+                .setTextureState(BLOCK_SHEET_MIPPED)
                 .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                 .setOutputState(TRANSLUCENT_TARGET)
                 .createCompositeState(true)

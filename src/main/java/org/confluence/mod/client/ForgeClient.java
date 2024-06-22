@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -69,12 +70,14 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void gatherComponents(RenderTooltipEvent.GatherComponents event) {
-        Optional<FormattedText> displayName = event.getTooltipElements().get(0).left();
+        List<Either<FormattedText, TooltipComponent>> tooltipElements = event.getTooltipElements();
+        if (tooltipElements.isEmpty()) return;
+        Optional<FormattedText> displayName = tooltipElements.get(0).left();
         if (displayName.isEmpty()) return;
 
         if (displayName.get() instanceof Component component) {
             PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix ->
-                event.getTooltipElements().set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name)
+                tooltipElements.set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name)
                     .withStyle(itemPrefix.tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
                     .append(" ").append(component)
                 )));
