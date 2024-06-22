@@ -20,6 +20,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -34,7 +36,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.IntFunction;
 
 @SuppressWarnings("deprecation")
-public class AltarBlock extends BaseEntityBlock {
+public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomItemModel {
     public static final VoxelShape SHAPE = Shapes.box(-0.125, 0.0, -0.125, 1.125, 0.8, 1.125);
     private final Variant variant;
 
