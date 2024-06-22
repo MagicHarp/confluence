@@ -28,7 +28,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        CurioItems.acceptTag(tag(ModTags.Items.CURIO));
+        CurioItems.acceptTag(tag(ModTags.Items.ACCESSORY));
         Hooks.acceptTag(tag(ModTags.Items.HOOK));
         tag(ModTags.Items.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get(), ModItems.SUGAR_PLUM.get());
         tag(ModTags.Items.PROVIDE_LIFE).add(ModItems.HEART.get(), ModItems.CANDY_APPLE.get(), ModItems.CANDY_CANE.get());

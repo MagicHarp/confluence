@@ -14,6 +14,7 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.item.curio.combat.IScope;
+import org.confluence.mod.item.curio.construction.IRightClickSubtractor;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
 import org.confluence.mod.network.NetworkHandler;
@@ -43,7 +44,7 @@ public final class PlayerUtils {
             int delay = manaStorage.getRegenerateDelay();
             boolean notMove = Math.abs(serverPlayer.xCloak - serverPlayer.xCloakO) < 1.0E-7;
             if (delay > 0) {
-                if (manaStorage.isArcaneCrystalUsed()) delay *= (notMove ? 0.975F : 0.95F);
+                if (manaStorage.isArcaneCrystalUsed()) delay = (int) ((float) delay * (notMove ? 0.975F : 0.95F));
                 if (delay > 20 && serverPlayer.hasEffect(ModEffects.MANA_REGENERATION.get())) delay = 20;
                 int delayReduce = notMove ? 2 : 1;
                 if (manaStorage.hasManaRegenerationBand()) delayReduce += 1;
@@ -114,5 +115,6 @@ public final class PlayerUtils {
         IMayFly.sendMsg(serverPlayer);
         IAutoAttack.sendMsg(serverPlayer);
         IScope.sendMsg(serverPlayer);
+        IRightClickSubtractor.sendMsg(serverPlayer);
     }
 }

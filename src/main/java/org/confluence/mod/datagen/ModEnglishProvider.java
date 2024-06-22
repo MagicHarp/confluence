@@ -108,6 +108,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("key.confluence.metal_detector", "Detect Metal");
 
         add("curios.identifier.hook", "Hook");
+        add("curios.identifier.accessory", "Accessory");
 
         add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
         add("item.confluence.medicated_bandage.tooltip", "Immunity to Poison and Bleeding");
@@ -230,6 +231,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
         add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
         add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
+        add("item.confluence.portable_cement_mixer.tooltip", "Decreased 'Right Click Delay' by 1");
+        add("item.confluence.brick_layer.tooltip", "Decreased 'Right Click Delay' by 1");
+        add("item.confluence.architect_gizmo_pack.tooltip", "Decreased 'Right Click Delay' by 2, cannot stack the decrease of its materials");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");
