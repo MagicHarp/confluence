@@ -80,8 +80,8 @@ public final class ModBlocks {
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
-    public static final RegistryObject<AltarBlock> DEMON_ALTAR = registerWithItem("demon_altar", () -> new AltarBlock(AltarBlock.Variant.DEMON));
-    public static final RegistryObject<AltarBlock> CRIMSON_ALTAR = registerWithItem("crimson_altar", () -> new AltarBlock(AltarBlock.Variant.CRIMSON));
+    public static final RegistryObject<AltarBlock> DEMON_ALTAR = registerWithItem("demon_altar", () -> new AltarBlock(AltarBlock.Variant.DEMON), supplier -> () -> new AltarBlock.Item(supplier.get()));
+    public static final RegistryObject<AltarBlock> CRIMSON_ALTAR = registerWithItem("crimson_altar", () -> new AltarBlock(AltarBlock.Variant.CRIMSON), supplier -> () -> new AltarBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<AltarBlock.Entity>> ALTAR_BLOCK_ENTITY = BLOCK_ENTITIES.register("altar_block_entity", () -> BlockEntityType.Builder.of(AltarBlock.Entity::new, DEMON_ALTAR.get(), CRIMSON_ALTAR.get()).build(null));
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY.fluid(), BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_YELLOW)));
