@@ -167,7 +167,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
         dropOther(ANOTHER_CRIMSON_MUSHROOM.get(), ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
         dropOther(EBONY_MUSHROOM.get(), ModItems.EBONY_MUSHROOM.get());
-        dropOther(GLOWING_MUSHROOM.get(), ModItems.GLOWING_MUSHROOM.get());
+        dropOther(GLOWING_MUSHROOM.get(), ModItems.GLOWING_MUSHROOM.get()); // TODO: 掉落概率不是100%；掉落蘑菇草种子
         dropOther(LIFE_MUSHROOM.get(), ModItems.LIFE_MUSHROOM.get());
         add(JUNGLE_SPORE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
             .add(LootItem.lootTableItem(ModItems.JUNGLE_SPORE.get())

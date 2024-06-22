@@ -103,6 +103,7 @@ public final class ModBlocks {
     // plant
     public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//毒蘑菇
     public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//魔菇
+    // TODO: 发光蘑菇可以长在天花板上，可以长很长；天花板上的属于藤蔓，还没做
     public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.MUSHROOM_GRASS_BLOCK.get())));//发光蘑菇
     public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", () -> new MushroomBlock(Set.of(Blocks.GRASS_BLOCK, HALLOW_GRASS_BLOCK.get())));//生命蘑菇
     public static final RegistryObject<JungleSporeBlock> JUNGLE_SPORE = registerWithoutItem("jungle_spore", JungleSporeBlock::new);
