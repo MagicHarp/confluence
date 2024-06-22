@@ -168,7 +168,8 @@ public final class ModTabs {
                 output.accept(ModItems.RED_ENVELOPE.get());
                 output.accept(ECHO_BLOCK.get());
                 output.accept(ACTUATORS.get());
-                output.accept(ALTAR_BLOCK.get());
+                output.accept(DEMON_ALTAR.get());
+                output.accept(CRIMSON_ALTAR.get());
                 output.accept(BOULDER.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
