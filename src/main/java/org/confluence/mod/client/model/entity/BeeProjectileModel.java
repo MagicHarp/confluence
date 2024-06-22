@@ -24,7 +24,7 @@ public class BeeProjectileModel extends EntityModel<BeeProjectile> {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -4.0F, 4.0F, 4.0F, 5.0F, new CubeDeformation(0.0F))
-            .texOffs(0, 0).addBox(0.0F, -0.25F, 0.5F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.1F, 0.0F));
+            .texOffs(0, 0).addBox(0.0F, -0.25F, 0.5F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 9).addBox(-4.3922F, 2.0F, -2.3309F, 3.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.2182F, 0.0F));
 
