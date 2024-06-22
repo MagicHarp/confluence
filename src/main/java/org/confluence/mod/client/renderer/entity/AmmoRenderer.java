@@ -17,7 +17,11 @@ import static org.confluence.mod.Confluence.MODID;
 
 public class AmmoRenderer extends EntityRenderer<BaseAmmoEntity> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
-        new ResourceLocation(MODID, "textures/entity/ammo/base_ammo.png")
+        new ResourceLocation(MODID, "textures/entity/ammo/base_ammo.png"),
+        new ResourceLocation(MODID, "textures/entity/ammo/crystal_ammo.png"),
+        new ResourceLocation(MODID, "textures/entity/ammo/golden_ammo.png"),
+        new ResourceLocation(MODID, "textures/entity/ammo/party_ammo.png"),
+        new ResourceLocation(MODID, "textures/entity/ammo/luminous_ammo.png")
     };
     private final AmmoModel model;
 
