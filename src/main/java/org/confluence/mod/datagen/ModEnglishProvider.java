@@ -109,6 +109,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("curios.identifier.hook", "Hook");
         add("curios.identifier.accessory", "Accessory");
+        add("curios.modifiers.accessory", "When worn as accessory:");
 
         add("item.confluence.adhesive_bandage.tooltip", "Immunity to Bleeding");
         add("item.confluence.medicated_bandage.tooltip", "Immunity to Poison and Bleeding");

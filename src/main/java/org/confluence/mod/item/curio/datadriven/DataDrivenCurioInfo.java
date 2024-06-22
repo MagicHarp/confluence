@@ -80,7 +80,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
                                 "It's a Data Driven curio",
                                 "More information in Github Wiki"
                             ],
-                            "slot": "curio",
+                            "slot": "accessory",
                             "attributes": {
                                 "minecraft:generic.movement_speed": {
                                     "uuid": "DC2CE9B0-2637-329F-2E1F-998F1A8FA5A1",

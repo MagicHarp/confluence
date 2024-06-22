@@ -1,5 +1,6 @@
 package org.confluence.mod.block.common;
 
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -8,31 +9,39 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.model.item.AltarBlockItemModel;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 @SuppressWarnings("deprecation")
@@ -43,6 +52,11 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
     public AltarBlock(Variant variant) {
         super(Properties.of().strength(3.0F, 18000.0F));
         this.variant = variant;
+    }
+
+    @Override
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -142,6 +156,41 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
                 .triggerableAnim("crafting", RawAnimation.begin().thenPlay("crafting"))
             );
         }
+
+        @Override
+        public AnimatableInstanceCache getAnimatableInstanceCache() {
+            return CACHE;
+        }
+    }
+
+    public static class Item extends BlockItem implements GeoItem {
+        private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+
+        public Item(AltarBlock pBlock) {
+            super(pBlock, new Properties().rarity(ModRarity.PURPLE));
+        }
+
+        public Variant getVariant() {
+            return ((AltarBlock) getBlock()).variant;
+        }
+
+        @Override
+        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+            consumer.accept(new IClientItemExtensions() {
+                private GeoItemRenderer<Item> renderer;
+
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    if (renderer == null) {
+                        this.renderer = new GeoItemRenderer<>(new AltarBlockItemModel());
+                    }
+                    return renderer;
+                }
+            });
+        }
+
+        @Override
+        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
 
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
