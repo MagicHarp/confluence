@@ -30,7 +30,7 @@ public class ShiveringThorn extends BaseHerbBlock {
 	@Override
 	public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom){
 		if(getAge(pState) == MAX_AGE - 1){
-			pLevel.setBlock(pPos, pState.setValue(AGE, MAX_AGE), 2);
+			pLevel.setBlockAndUpdate(pPos, pState.setValue(AGE, MAX_AGE));
 		}
 		super.randomTick(pState, pLevel, pPos, pRandom);
 	}

@@ -29,10 +29,11 @@ public class ShineRoot extends BaseHerbBlock {
 	@Override
 	public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom){
 		int age = getAge(pState);
-		if(age == MAX_AGE){
-			pLevel.setBlock(pPos, pState.setValue(AGE, MAX_AGE - 1), 2);
-		}else if(age == MAX_AGE - 1){
-			pLevel.setBlock(pPos, pState.setValue(AGE, MAX_AGE), 2);
+		int r = pRandom.nextInt(10);
+		if(age == MAX_AGE && r < 2){
+			pLevel.setBlockAndUpdate(pPos, pState.setValue(AGE, MAX_AGE - 1));
+		}else if(age == MAX_AGE - 1 && r <= 5){
+			pLevel.setBlockAndUpdate(pPos, pState.setValue(AGE, MAX_AGE));
 		}
 		super.randomTick(pState, pLevel, pPos, pRandom);
 	}

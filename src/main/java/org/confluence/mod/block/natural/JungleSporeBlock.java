@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class JungleSporeBlock extends BasePlantBlock{
     private static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(4, 0.7f, 0.8f, 0.16f, 1);
-    private static final VoxelShape SHAPE=Block.box(4.0D, 0.0D, 4.0D, 12.0D, 9.0D, 12.0D);
+    private static final VoxelShape SHAPE=Block.box(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
 
 
     public JungleSporeBlock(){
