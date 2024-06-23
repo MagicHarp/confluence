@@ -31,7 +31,7 @@ public class DataDrivenCurioGenerator {
         } else if ("MASTER".equals(rarity)) {
             interfaces.add(ModRarity.Master.class);
         }
-        String className = Arrays.stream(info.id().split("_"))
+        String className = "DataDrivenCurio$" + Arrays.stream(info.id().split("_"))
             .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
             .collect(Collectors.joining());
         this.dumped = new DataDrivenClassLoader(Confluence.class.getClassLoader()).defineClass(

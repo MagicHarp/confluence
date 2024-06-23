@@ -1,15 +1,17 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
-            "item": "confluence:obsidian_skull"
-        },
-        {
-            "item": "confluence:lava_charm"
-        }
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ba"
     ],
+    "key": {
+        "a": {
+            "item": "confluence:lava_charm"
+        },
+        "b": {
+            "item": "confluence:obsidian_skull"
+        }
+    },
     "result": {
-        "item": "confluence:magma_skull",
-        "count": 1
+        "item": "confluence:magma_skull"
     }
 }
