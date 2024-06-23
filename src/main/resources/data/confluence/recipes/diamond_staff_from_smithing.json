@@ -7,7 +7,7 @@
         "item": "confluence:platinum_ingot"
     },
     "addition": {
-        "item": "minecraft:diamond"
+        "item": "minecraft:diamond_block"
     },
     "result": {
         "item": "confluence:diamond_staff"

@@ -7,7 +7,7 @@
         "item": "confluence:tungsten_ingot"
     },
     "addition": {
-        "item": "minecraft:emerald"
+        "item": "minecraft:emerald_block"
     },
     "result": {
         "item": "confluence:emerald_staff"
