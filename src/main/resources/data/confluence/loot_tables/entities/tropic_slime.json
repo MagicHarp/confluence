@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "confluence:gameplay/slime_carry",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:tropical_fish",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 13
+        }
+      ]
+    }
+  ],
+  "random_sequence": "confluence:entity/tropic_slime"
+}

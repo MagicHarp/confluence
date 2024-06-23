@@ -31,11 +31,25 @@
             {
               "function": "set_count",
               "count": {
-                "min": 25,
-                "max": 50
+                "min": 10,
+                "max": 30
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "confluence:gameplay/slime_carry",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 19
         }
       ]
     }

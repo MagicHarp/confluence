@@ -70,7 +70,9 @@ public final class ModConfigs {
         "In order for the creature to be found by the Life Form Analyzer",
         "You need to fill the list with string like 'modid:entity'",
         "The higher the creature in the list, the higher the value"
-    ).defineListAllowEmpty("rareCreatures", List.of("minecraft:skeleton_horse",
+    ).defineListAllowEmpty("rareCreatures", List.of(
+        "confluence:pink_slime",
+        "minecraft:skeleton_horse",
         "minecraft:sniffer",
         "minecraft:allay",
         "minecraft:warden",
