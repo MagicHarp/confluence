@@ -34,7 +34,7 @@ public class BaseSlime extends Slime {
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {
-                float f = random.nextFloat() * Mth.HALF_PI;
+                float f = random.nextFloat() * Mth.TWO_PI;
                 float f1 = random.nextFloat() * 0.5F + 0.5F;
                 float f2 = Mth.sin(f) * (float) i * 0.5F * f1;
                 float f3 = Mth.cos(f) * (float) i * 0.5F * f1;

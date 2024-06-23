@@ -5,11 +5,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.functional.mechanical.BaseMechanicalBlock;
 import org.confluence.mod.datagen.limit.ICubeBottomTop;
-import org.confluence.mod.datagen.limit.ICubeTop;
 import org.jetbrains.annotations.NotNull;
 
-public class InstantExplosionBlock extends Block implements ICubeBottomTop {
+public class InstantExplosionBlock extends BaseMechanicalBlock implements ICubeBottomTop {
     public InstantExplosionBlock() {
         super(Properties.copy(Blocks.TNT));
     }

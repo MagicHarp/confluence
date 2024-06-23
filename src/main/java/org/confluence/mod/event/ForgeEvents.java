@@ -28,12 +28,16 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.functional.mechanical.NetworkService;
+import org.confluence.mod.block.functional.mechanical.PathService;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
@@ -70,6 +74,18 @@ import java.util.function.Consumer;
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ForgeEvents {
     @SubscribeEvent
+    public static void serverAboutToStart(ServerAboutToStartEvent event) {
+        PathService.INSTANCE.onServerStart();
+        NetworkService.INSTANCE.onServerStart();
+    }
+
+    @SubscribeEvent
+    public static void serverStop(ServerStoppedEvent event) {
+        PathService.INSTANCE.onServerStop();
+        NetworkService.INSTANCE.onServerStop();
+    }
+
+    @SubscribeEvent
     public static void registerCommand(RegisterCommandsEvent event) {
         ConfluenceCommand.register(event.getDispatcher());
     }
@@ -93,6 +109,7 @@ public final class ForgeEvents {
 
         ServerLevel serverLevel = (ServerLevel) event.level;
         FallingStarItemEntity.summon(serverLevel);
+        PathService.INSTANCE.pathFindingTick();
         int dayTime = (int) (serverLevel.getDayTime() % 24000);
         RandomSource random = serverLevel.random;
 

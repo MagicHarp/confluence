@@ -70,6 +70,7 @@ public final class ModTabs {
             .title(Component.translatable("creativetab.confluence.natural_blocks"))
             .displayItems((parameters, output) -> {
                 for (Ores ores : Ores.values()) output.accept(ores.get());
+                output.accept(LIFE_CRYSTAL_BLOCK.get());
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
@@ -187,6 +188,9 @@ public final class ModTabs {
                 output.accept(ModItems.BOTTOMLESS_HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get());
                 output.accept(ModItems.THROWING_KNIVES.get());
+                output.accept(ModItems.RED_WRENCH.get());
+                output.accept(ModItems.GREEN_WRENCH.get());
+                output.accept(ModItems.BLUE_WRENCH.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) output.accept(pickaxes.get());
                 for (Axes axes : Axes.values()) output.accept(axes.get());
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());
