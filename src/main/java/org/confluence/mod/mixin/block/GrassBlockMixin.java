@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(GrassBlock.class)
-public class GrassBlockMixin extends SpreadingSnowyDirtBlock{
+public abstract class GrassBlockMixin extends SpreadingSnowyDirtBlock{
     private GrassBlockMixin(Properties pProperties){
         super(pProperties);
     }
