@@ -4,14 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.FlyingMob;
 import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -21,7 +23,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEyeVariant>, GeoEntity {
+public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVariant>, GeoEntity {
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;
@@ -36,7 +38,7 @@ public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEye
             .add(Attributes.MOVEMENT_SPEED);
     }
 
-    public DemonEye(EntityType<? extends FlyingMob> entityType, Level level) {
+    public DemonEye(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         this.moveTargetPoint = Vec3.ZERO;
         this.xpReward = 5;
@@ -64,11 +66,32 @@ public class DemonEye extends FlyingMob implements Enemy, VariantHolder<DemonEye
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0, new DemonEyeParabolicMovementGoal(this));
-        goalSelector.addGoal(1, new DemonEyeCircleAroundAnchorGoal(this));
-        goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
-        goalSelector.addGoal(3, new DemonEyeSweepAttackGoal(this));
-        targetSelector.addGoal(1, new DemonEyeAttackPlayerTargetGoal(this));
+        goalSelector.addGoal(0,new MoveAroundGoal(this,level().getNearestPlayer(this,30)));
+//        goalSelector.addGoal(0, new DemonEyeParabolicMovementGoal(this));
+//        goalSelector.addGoal(1, new DemonEyeCircleAroundAnchorGoal(this));
+//        goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
+//        goalSelector.addGoal(3,new RandomStrollGoal(this,2,10));
+//        goalSelector.addGoal(3, new DemonEyeSweepAttackGoal(this));
+//        targetSelector.addGoal(1, new DemonEyeAttackPlayerTargetGoal(this));
+//        goalSelector.addGoal(0,new RandomLookAroundGoal(this));
+//        goalSelector.addGoal(1,new LookAtPlayerGoal(this, Player.class,6f,1));
+    }
+
+    @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, @NotNull BlockState pState, @NotNull BlockPos pPos){
+    }
+
+    @Override
+    public boolean isPushable(){
+        return false;
+    }
+
+    @Override
+    public void push(@NotNull Entity pEntity){
+    }
+
+    @Override
+    protected void pushEntities(){
     }
 
     @Override
