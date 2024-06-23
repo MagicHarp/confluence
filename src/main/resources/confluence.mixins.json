@@ -5,7 +5,6 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BowItemMixin",
-        "CombatRulesMixin",
         "CrossbowItemMixin",
         "EntityMixin",
         "InventoryChangeTriggerMixin",
