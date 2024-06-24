@@ -21,10 +21,7 @@ import org.confluence.mod.block.functional.InstantExplosionBlock;
 import org.confluence.mod.block.functional.mechanical.BaseMechanicalBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;
-import org.confluence.mod.block.natural.spreadable.ISpreadable;
-import org.confluence.mod.block.natural.spreadable.SpreadingBlock;
-import org.confluence.mod.block.natural.spreadable.SpreadingGrassBlock;
-import org.confluence.mod.block.natural.spreadable.SpreadingSandBlock;
+import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 
@@ -61,6 +58,7 @@ public final class ModBlocks {
     // ash
     public static final LogBlocks ASH_LOG_BLOCKS = new LogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
     public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", BaseBlock::new);
+    public static final RegistryObject<Block> ASH_GRASS_BLOCK = registerWithItem("ash_grass_block", AshGrassBlock::new);
     // mushroom
     public static final RegistryObject<Block> MUSHROOM_GRASS_BLOCK = registerWithItem("mushroom_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.GLOWING, BlockBehaviour.Properties.of()));
     // jewelry
@@ -129,6 +127,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", () -> new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
     public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
     public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
+    public static final RegistryObject<Block> ASH_GRASS = registerWithItem("ash_grass", () -> new BasePlantBlock(Set.of(ASH_GRASS_BLOCK.get())));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

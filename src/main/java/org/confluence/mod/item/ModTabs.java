@@ -90,6 +90,7 @@ public final class ModTabs {
                 output.accept(PEARL_LOG_BLOCKS.LOG.get());
                 output.accept(PEARL_LOG_BLOCKS.LEAVES.get());
                 output.accept(ASH_BLOCK.get());
+                output.accept(ASH_GRASS_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 // 草药 种子
@@ -113,6 +114,7 @@ public final class ModTabs {
                 output.accept(ModItems.GLOWING_MUSHROOM.get());
                 output.accept(ModItems.LIFE_MUSHROOM.get());
                 output.accept(CORRUPT_GRASS.get());
+                output.accept(ASH_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_EYEBALL_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_GRASS.get());

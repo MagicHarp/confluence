@@ -30,7 +30,7 @@ public interface ISpreadable {
             BlockState source = serverLevel.getBlockState(pos);
             Block target = getType().blockMap.get(source.getBlock());
             if (target == null || source.is(Blocks.GRASS) || source.is(Blocks.FERN) || source.is(Blocks.TALL_GRASS)) continue; // 不要直接传播草
-            if (source.is(Blocks.DIRT)) {
+            if (source.is(Blocks.DIRT) || source.is(ModBlocks.ASH_BLOCK.get())) {
                 if (!isFullBlock(serverLevel, pos.above())) {
                     spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, target.defaultBlockState(), pos);
                 }
@@ -118,6 +118,7 @@ public interface ISpreadable {
         ),
 
         PURE(
+            ModBlocks.ASH_BLOCK,ModBlocks.ASH_GRASS_BLOCK,
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, () -> Blocks.GRASS,
