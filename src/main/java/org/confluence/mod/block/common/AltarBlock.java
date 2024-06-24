@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
@@ -23,7 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.client.model.item.AltarBlockItemModel;
+import org.confluence.mod.client.model.block.AltarBlockModel;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -37,6 +38,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -181,7 +183,22 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
                 @Override
                 public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                     if (renderer == null) {
-                        this.renderer = new GeoItemRenderer<>(new AltarBlockItemModel());
+                        this.renderer = new GeoItemRenderer<>(new GeoModel<>() {
+                            @Override
+                            public ResourceLocation getModelResource(AltarBlock.Item animatable) {
+                                return AltarBlockModel.MODELS[animatable.getVariant().getId()];
+                            }
+
+                            @Override
+                            public ResourceLocation getTextureResource(AltarBlock.Item animatable) {
+                                return AltarBlockModel.TEXTURES[animatable.getVariant().getId()];
+                            }
+
+                            @Override
+                            public ResourceLocation getAnimationResource(AltarBlock.Item animatable) {
+                                return null;
+                            }
+                        });
                     }
                     return renderer;
                 }

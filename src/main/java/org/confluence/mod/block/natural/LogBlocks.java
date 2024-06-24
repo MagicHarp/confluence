@@ -4,8 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -14,6 +18,10 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -42,6 +50,7 @@ public final class LogBlocks {
     public final RegistryObject<StairBlock> STAIRS;
     public final RegistryObject<StandingSignBlock> SIGN;
     public final RegistryObject<WallSignBlock> WALL_SIGN;
+    public final RegistryObject<SignItem> SIGN_ITEM;
     public final RegistryObject<TrapDoorBlock> TRAPDOOR;
     public final RegistryObject<DoorBlock> DOOR;
 
@@ -76,10 +85,13 @@ public final class LogBlocks {
         BlockBehaviour.Properties slab = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
         this.SLAB = registerWithItem(id + "_slab", () -> new SlabBlock(ignitedByLava ? slab.ignitedByLava() : slab));
         this.STAIRS = registerWithItem(id + "_stairs", () -> new StairBlock(() -> PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(PLANKS.get())));
+
         BlockBehaviour.Properties sign = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F);
-        this.SIGN = registerWithItem(id + "_sign", () -> new StandingSignBlock(ignitedByLava ? sign.ignitedByLava() : sign, woodType));
+        this.SIGN = registerWithoutItem(id + "_sign", () -> new ModStandingSignBlock(ignitedByLava ? sign.ignitedByLava() : sign, woodType));
         BlockBehaviour.Properties wall_sign = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).lootFrom(SIGN);
-        this.WALL_SIGN = registerWithoutItem(id + "_wall_sign", () -> new WallSignBlock(ignitedByLava ? wall_sign.ignitedByLava() : wall_sign, woodType));
+        this.WALL_SIGN = registerWithoutItem(id + "_wall_sign", () -> new ModWallSignBlock(ignitedByLava ? wall_sign.ignitedByLava() : wall_sign, woodType));
+        this.SIGN_ITEM = ModItems.ITEMS.register(id + "_sign", () -> new SignItem(new Item.Properties().stacksTo(16), SIGN.get(), WALL_SIGN.get()));
+
         BlockBehaviour.Properties trapdoor = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().isValidSpawn(LogBlocks::never);
         this.TRAPDOOR = registerWithItem(id + "_trapdoor", () -> new TrapDoorBlock(ignitedByLava ? trapdoor.ignitedByLava() : trapdoor, blockSetType));
         BlockBehaviour.Properties door = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().pushReaction(PushReaction.DESTROY);
@@ -122,7 +134,7 @@ public final class LogBlocks {
             output.accept(logBlocks.PRESSURE_PLATE.get());
             output.accept(logBlocks.SLAB.get());
             output.accept(logBlocks.STAIRS.get());
-            output.accept(logBlocks.SIGN.get());
+            output.accept(logBlocks.SIGN_ITEM.get());
             output.accept(logBlocks.TRAPDOOR.get());
             output.accept(logBlocks.DOOR.get());
         }
@@ -160,6 +172,49 @@ public final class LogBlocks {
         STRIP_TABLE.clear();
     }
 
+    private static SignBlock[] SIGN_BLOCKS;
+
+    public static SignBlock[] getSignBlocks() {
+        if (SIGN_BLOCKS == null) {
+            SignBlock[] signBlocks = new SignBlock[LOG_BLOCKS.size() * 2];
+            for (int i = 0; i < LOG_BLOCKS.size(); i++) {
+                LogBlocks logBlocks = LOG_BLOCKS.get(i);
+                signBlocks[i * 2] = logBlocks.SIGN.get();
+                signBlocks[i * 2 + 1] = logBlocks.WALL_SIGN.get();
+            }
+            SIGN_BLOCKS = signBlocks;
+        }
+        return SIGN_BLOCKS;
+    }
+
+    public static class ModSignBlockEntity extends SignBlockEntity {
+        public ModSignBlockEntity(BlockPos pPos, BlockState pBlockState) {
+            super(ModBlocks.SIGN_BLOCK_ENTITY.get(), pPos, pBlockState);
+        }
+    }
+
+    public static class ModStandingSignBlock extends StandingSignBlock {
+        public ModStandingSignBlock(Properties pProperties, WoodType pType) {
+            super(pProperties, pType);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+            return new ModSignBlockEntity(pPos, pState);
+        }
+    }
+
+    public static class ModWallSignBlock extends WallSignBlock {
+        public ModWallSignBlock(Properties pProperties, WoodType pType) {
+            super(pProperties, pType);
+        }
+
+        @Override
+        public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+            return new ModSignBlockEntity(pPos, pState);
+        }
+    }
+
     public enum WoodSetType {
         EBONY("ebony"),
         PEARL("pearl"),
@@ -172,6 +227,7 @@ public final class LogBlocks {
         public final WoodType TYPE;
 
         WoodSetType(String id) {
+            id = Confluence.MODID + ":" + id;
             this.SET = BlockSetType.register(new BlockSetType(id));
             this.TYPE = WoodType.register(new WoodType(id, SET));
         }
