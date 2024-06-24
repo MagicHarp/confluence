@@ -156,7 +156,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
 
     public static void growNewHerb(BlockState groundState, BlockPos groundPos, Level level){
         RegistryObject<? extends Block> target = groundHerbMap.get(getRegistry(groundState.getBlock()));
-        if(target != null && level.getBlockState(groundPos.above()).isAir() && !BaseHerbBlock.hasHerbInRange(level, groundPos)){
+        if(target != null && !BaseHerbBlock.hasHerbInRange(level, groundPos)){
             level.setBlockAndUpdate(groundPos.above(), target.get().defaultBlockState());
         }
     }
