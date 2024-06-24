@@ -26,7 +26,7 @@ public class FlameFlower extends BaseHerbBlock {
 
     @Override
     public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-        return groundState.is(ModBlocks.ASH_BLOCK.get()); // TODO: 灰烬草
+        return groundState.is(ModBlocks.ASH_BLOCK.get()) || groundState.is(ModBlocks.ASH_GRASS_BLOCK.get());
     }
 
     @Override

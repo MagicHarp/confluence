@@ -73,7 +73,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             CORRUPT_GRASS_BLOCK.get(),
             ASH_BLOCK.get(),
             ANOTHER_CRIMSON_GRASS_BLOCK.get(),
-            HALLOW_GRASS_BLOCK.get()
+            HALLOW_GRASS_BLOCK.get(),
+            ASH_GRASS_BLOCK.get()
         );
         tag(BlockTags.PLANKS).add(
             EBONY_LOG_BLOCKS.PLANKS.get(),

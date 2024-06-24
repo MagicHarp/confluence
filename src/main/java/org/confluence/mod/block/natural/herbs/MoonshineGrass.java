@@ -26,7 +26,7 @@ public class MoonshineGrass extends BaseHerbBlock {
 
 	@Override
 	public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-		return groundState.is(Blocks.GRASS_BLOCK); // TODO: 丛林草
+		return groundState.is(Blocks.GRASS_BLOCK) || groundState.is(Blocks.MOSS_BLOCK);
 	}
 
 	@Override

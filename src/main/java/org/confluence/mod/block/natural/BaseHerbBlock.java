@@ -40,7 +40,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
     private static final Map<RegistryObject<? extends Block>, RegistryObject<? extends Block>> groundHerbMap = new ImmutableMap.Builder<RegistryObject<? extends Block>, RegistryObject<? extends Block>>()
         .put(getRegistry(Blocks.GRASS_BLOCK), ModBlocks.SUNFLOWERS)
         .put(ModBlocks.HALLOW_GRASS_BLOCK, ModBlocks.SUNFLOWERS)
-        // TODO: 丛林草
+        .put(getRegistry(Blocks.MOSS_BLOCK),ModBlocks.MOONSHINE_GRASS)
         .put(getRegistry(Blocks.DIRT), ModBlocks.SHINE_ROOT)
         .put(getRegistry(Blocks.MUD), ModBlocks.SHINE_ROOT)
         .put(ModBlocks.CORRUPT_GRASS_BLOCK, ModBlocks.DEATHWEED)
@@ -51,7 +51,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
         .put(getRegistry(Blocks.SAND), ModBlocks.WATERLEAF)
         .put(ModBlocks.PEARL_SAND, ModBlocks.WATERLEAF)
         .put(ModBlocks.ASH_BLOCK, ModBlocks.FLAMEFLOWERS)
-        // TODO: 灰烬草
+        .put(ModBlocks.ASH_GRASS_BLOCK,ModBlocks.FLAMEFLOWERS)
         .put(getRegistry(Blocks.SNOW_BLOCK), ModBlocks.SHIVERINGTHORNS)
         .put(getRegistry(Blocks.ICE), ModBlocks.SHIVERINGTHORNS)
         .build();
@@ -72,7 +72,6 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
     }
 
     // 重写，不检查光照，不检查合理密植
-    // TODO: 部分草药有粒子
     @Override
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom){
         int age = getAge(pState);
