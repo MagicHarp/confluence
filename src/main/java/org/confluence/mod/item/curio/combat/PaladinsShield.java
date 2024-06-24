@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -77,5 +78,14 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
     @Override
     public String getGenName() {
         return "Paladin's Shield";
+    }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.paladins_shield.info"),
+            Component.translatable("item.confluence.paladins_shield.info2"),
+            Component.translatable("item.confluence.paladins_shield.info3"),
+            Component.translatable("item.confluence.paladins_shield.info4")
+        };
     }
 }

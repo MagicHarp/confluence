@@ -20,4 +20,12 @@ public class ObsidianSkull extends BaseCurioItem implements IFireImmune {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.obsidian_skull.info"),
+            Component.translatable("item.confluence.obsidian_skull.info2"),
+            Component.translatable("item.confluence.obsidian_skull.info3")
+        };
+    }
 }

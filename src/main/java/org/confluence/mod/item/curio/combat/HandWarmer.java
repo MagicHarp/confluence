@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.movement;
+package org.confluence.mod.item.curio.combat;
 
 import net.minecraft.network.chat.Component;
 import org.confluence.mod.item.curio.BaseCurioItem;

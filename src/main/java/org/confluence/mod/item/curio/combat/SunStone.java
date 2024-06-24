@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,5 +48,19 @@ public class SunStone extends BaseCurioItem {
         if (effect == null || effect.getDuration() < 5) {
             living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
         }
+    }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.sun_stone.info"),
+            Component.translatable("item.confluence.sun_stone.info2"),
+            Component.translatable("item.confluence.sun_stone.info3"),
+            Component.translatable("item.confluence.sun_stone.info4"),
+            Component.translatable("item.confluence.sun_stone.info5"),
+            Component.translatable("item.confluence.sun_stone.info6"),
+            Component.translatable("item.confluence.sun_stone.info7"),
+            Component.translatable("item.confluence.sun_stone.info8"),
+            Component.translatable("item.confluence.sun_stone.info9")
+        };
     }
 }

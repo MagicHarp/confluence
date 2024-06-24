@@ -20,4 +20,11 @@ public class ObsidianRose extends BaseCurioItem implements ILavaHurtReduce {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.obsidian_rose.info"),
+            Component.translatable("item.confluence.obsidian_rose.info2")
+        };
+    }
 }

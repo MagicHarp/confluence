@@ -36,4 +36,11 @@ public class ReconScope extends SniperScope implements IAggroAttach {
         list.add(Component.translatable("item.confluence.putrid_scent.tooltip"));
         list.add(Component.translatable("item.confluence.recon_scope.tooltip"));
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.recon_scope.info"),
+            Component.translatable("item.confluence.recon_scope.info2")
+        };
+    }
 }

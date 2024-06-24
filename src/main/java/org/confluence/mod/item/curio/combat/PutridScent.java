@@ -49,4 +49,11 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach, ICritica
     public double getChance() {
         return ModConfigs.PUTRID_SCENT_CRITICAL_CHANCE.get();
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.putrid_scent.info"),
+            Component.translatable("item.confluence.putrid_scent.info2")
+        };
+    }
 }

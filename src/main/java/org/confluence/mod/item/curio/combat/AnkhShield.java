@@ -40,4 +40,11 @@ public class AnkhShield extends BaseCurioItem implements IFireImmune {
         list.add(TOOLTIP);
         list.add(Component.translatable("item.confluence.ankh_charm.tooltip"));
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.ankh_shield.info"),
+            Component.translatable("item.confluence.ankh_shield.info2")
+        };
+    }
 }

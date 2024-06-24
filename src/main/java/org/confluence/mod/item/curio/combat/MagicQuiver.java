@@ -32,4 +32,17 @@ public class MagicQuiver extends BaseCurioItem implements IProjectileAttack, IMa
         list.add(Component.translatable("item.confluence.magic_quiver.tooltip"));
         list.add(Component.translatable("item.confluence.magic_quiver.tooltip2"));
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.magic_quiver.info"),
+            Component.translatable("item.confluence.magic_quiver.info2"),
+            Component.translatable("item.confluence.magic_quiver.info3"),
+            Component.translatable("item.confluence.magic_quiver.info4"),
+            Component.translatable("item.confluence.magic_quiver.info5"),
+            Component.translatable("item.confluence.magic_quiver.info6"),
+            Component.translatable("item.confluence.magic_quiver.info7")
+
+        };
+    }
 }

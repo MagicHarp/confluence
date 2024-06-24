@@ -21,4 +21,10 @@ public class ObsidianSkullRose extends BaseCurioItem implements IFireImmune, ILa
         list.add(IFireImmune.TOOLTIP);
         list.add(ILavaHurtReduce.TOOLTIP);
     }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.obsidian_skull_rose.info")
+        };
+    }
 }

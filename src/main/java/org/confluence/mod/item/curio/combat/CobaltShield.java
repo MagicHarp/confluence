@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,5 +28,12 @@ public class CobaltShield extends BaseCurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ATTRIBUTE;
+    }
+
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.cobalt_shield.info"),
+            Component.translatable("item.confluence.cobalt_shield.info2")
+        };
     }
 }
