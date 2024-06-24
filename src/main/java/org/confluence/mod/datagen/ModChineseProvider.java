@@ -308,6 +308,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.ebony_ingot.descr", "获得魔矿锭");
         add("advancements.another_crimson_ingot.title", "猩红血肉");
         add("advancements.another_crimson_ingot.descr", "获得猩红矿锭");
+        add("advancements.pretty_in_pink.title", "粉红佳人");
+        add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
 
         add("prefix.confluence.hard", "坚硬");
         add("prefix.confluence.guarding", "守护");
@@ -1146,7 +1148,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
         add(THIN_ICE_BLOCK.get(), "碎冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
-        add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶块");
+        add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶");
         add(CRIMSON_ALTAR.get(), "猩红祭坛");
         add(DEMON_ALTAR.get(), "恶魔祭坛");
 

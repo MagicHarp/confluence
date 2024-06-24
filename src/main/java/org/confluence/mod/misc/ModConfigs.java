@@ -29,6 +29,7 @@ public final class ModConfigs {
         "You need to fill the list with string like 'modid:block[state1=true]' or 'modid:block'",
         "The higher the block in the list, the higher the value"
     ).defineListAllowEmpty("rareBlocks", List.of(
+        "confluence:life_crystal_block",
         "confluence:another_crimson_ore",
         "confluence:deepslate_another_crimson_ore",
         "confluence:ebony_ore",

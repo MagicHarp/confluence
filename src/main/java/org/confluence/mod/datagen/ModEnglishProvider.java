@@ -71,6 +71,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.weather_radio", "Displays the weather");
         add("curios.tooltip.scope", "Increases view range for ranged weapons");
         add("curios.tooltip.scope2", "Hold ranged weapon and crouch to zoom out");
+        add("advancements.pretty_in_pink.title", "pretty_in_pink");
+        add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
