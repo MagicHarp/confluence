@@ -93,6 +93,12 @@ public final class ModTabs {
                 output.accept(ASH_GRASS_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+                output.accept(RED_ICE.get());
+                output.accept(RED_PACKED_ICE.get());
+                output.accept(PINK_ICE.get());
+                output.accept(PINK_PACKED_ICE.get());
+                output.accept(PURPLE_ICE.get());
+                output.accept(PURPLE_PACKED_ICE.get());
                 // 草药 种子
                 output.accept(ModItems.WATERLEAF.get());
                 output.accept(ModItems.MOONSHINE_GRASS.get());

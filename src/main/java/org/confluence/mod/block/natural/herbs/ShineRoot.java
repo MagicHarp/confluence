@@ -13,7 +13,7 @@ import org.jetbrains.annotations.*;
 public class ShineRoot extends BaseHerbBlock {
 	@Override
 	public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-		return groundState.is(Blocks.DIRT) || groundState.is(Blocks.MUD);
+		return groundState.is(Blocks.DIRT) || groundState.is(Blocks.MUD) || groundState.is(Blocks.STONE);
 	}
 
 	@Override

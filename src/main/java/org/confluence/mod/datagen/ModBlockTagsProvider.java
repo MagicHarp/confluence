@@ -105,7 +105,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             HALLOW_GRASS_BLOCK.get(),
             MUSHROOM_GRASS_BLOCK.get()
         );
-
+        tag((BlockTags.ICE)).add(
+            RED_ICE.get(),
+            RED_PACKED_ICE.get(),
+            PINK_ICE.get(),
+            PINK_PACKED_ICE.get(),
+            PURPLE_ICE.get(),
+            PURPLE_PACKED_ICE.get()
+        );
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
             Ores.ANOTHER_CRIMSON_ORE.get(), Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), Ores.ANOTHER_CRIMSON_BLOCK.get(), Ores.RAW_ANOTHER_CRIMSON_BLOCK.get()

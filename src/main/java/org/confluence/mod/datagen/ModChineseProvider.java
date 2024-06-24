@@ -1085,6 +1085,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
+        add(RED_ICE.get(), "红冰块");
+        add(RED_PACKED_ICE.get(), "红浮冰块");
+        add(PINK_ICE.get(), "粉冰块");
+        add(PINK_PACKED_ICE.get(), "粉浮冰块");
+        add(PURPLE_ICE.get(), "紫冰块");
+        add(PURPLE_PACKED_ICE.get(), "紫浮冰块");
         add(ANOTHER_CRIMSON_GRASS_BLOCK.get(), "猩红草方块");
         add(MUSHROOM_GRASS_BLOCK.get(), "蘑菇草方块");
         add(ASH_BLOCK.get(), "灰烬块");
