@@ -33,6 +33,7 @@
         "confluence:entities/zombified_piglin",
         "confluence:entities/cave_spider",
         "confluence:entities/creeper",
+        "confluence:entities/turtle",
         "confluence:entities/evoker",
         "confluence:entities/piglin_brute",
         "confluence:entities/ravager",
