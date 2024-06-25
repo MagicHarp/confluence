@@ -1,20 +1,10 @@
 {
-    "type": "minecraft:gift",
-    "pools": [
+    "type": "confluence:simple_modifier",
+    "conditions": [
         {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "confluence:shiny_red_balloon",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:random_chance",
-                            "chance": 0.5
-                        }
-                    ]
-                }
-            ]
+            "condition": "forge:loot_table_id",
+            "loot_table_id": "minecraft:gameplay/hero_of_the_village/librarian_gift"
         }
-    ]
+    ],
+    "with": "confluence:with/gameplay/hero_of_the_village/librarian_gift"
 }
