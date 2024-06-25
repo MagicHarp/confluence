@@ -48,13 +48,13 @@ public class Network {
 
     // 调用时需要保证n1大于n2
     private static Network mergeInPrior(Network n1, Network n2) {
-        //将n2的所有结点的所属网络设置为n1
+        // 将n2的所有结点的所属网络设置为n1
         for (NetworkNode node : n2.nodes) {
             node.addNetwork(n1);
         }
-        //将n2的所有节点加入到n1中
+        // 将n2的所有节点加入到n1中
         n1.nodes.addAll(n2.nodes);
-        //清空n2
+        // 清空n2
         n2.nodes.clear();
         return n1;
     }

@@ -29,7 +29,8 @@ public class WrenchItem extends Item {
     }
 
     public static @Nullable BlockPos readBlockPos(ItemStack itemStack) {
-        return itemStack.getTag() == null ? null : NbtUtils.readBlockPos(itemStack.getTag());
+        if (itemStack.getTag() == null) return null;
+        return itemStack.getTag().contains("blockPos") ? NbtUtils.readBlockPos(itemStack.getTag().getCompound("blockPos")) : null;
     }
 
     public static void removeBlockPos(ItemStack itemStack) {

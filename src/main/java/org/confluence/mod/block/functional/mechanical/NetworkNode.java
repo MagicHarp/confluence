@@ -32,9 +32,9 @@ public class NetworkNode {
         networks.put(network.getColor(), network);
     }
 
-    private final BaseMechanicalBlock.Entity blockEntity;
+    private final AbstractMechanicalBlock.Entity blockEntity;
 
-    public NetworkNode(int id, BaseMechanicalBlock.Entity blockEntity) {
+    public NetworkNode(int id, AbstractMechanicalBlock.Entity blockEntity) {
         this.id = id;
         this.blockEntity = blockEntity;
         this.networks = new Int2ObjectOpenHashMap<>();
@@ -44,7 +44,7 @@ public class NetworkNode {
         return blockEntity.getBlockPos();
     }
 
-    public BaseMechanicalBlock.Entity getBlockEntity() {
+    public AbstractMechanicalBlock.Entity getBlockEntity() {
         return blockEntity;
     }
 }

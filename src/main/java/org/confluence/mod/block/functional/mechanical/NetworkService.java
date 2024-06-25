@@ -27,7 +27,7 @@ public class NetworkService {
         return network;
     }
 
-    public void createNetworkNode(BaseMechanicalBlock.Entity blockEntity) {
+    public void createNetworkNode(AbstractMechanicalBlock.Entity blockEntity) {
         NetworkNode node = new NetworkNode(nodeID.insert(), blockEntity);
         blockEntity.setNetworkNode(node);
         Confluence.LOGGER.debug("Create network node#{}", node.getId());
@@ -41,9 +41,6 @@ public class NetworkService {
 
     public void removeNetworkNode(NetworkNode node) {
         Confluence.LOGGER.debug("Remove network node#{}", node.getId());
-        for (Network network : node.getNetworks().values()) {
-            removeNodeInNetwork(node, network);
-        }
         nodeID.remove(node.getId());
     }
 
@@ -53,6 +50,7 @@ public class NetworkService {
     }
 
     public void removeNodeInNetwork(NetworkNode node, Network network) {
+        Confluence.LOGGER.debug("Remove network node#{} from network#{}", node.getId(), network.getColor());
         network.removeNode(node);
         node.removeNetwork(network.getColor());
     }

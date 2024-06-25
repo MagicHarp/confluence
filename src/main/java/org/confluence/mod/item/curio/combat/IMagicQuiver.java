@@ -26,12 +26,13 @@ public interface IMagicQuiver {
                         isEmpty.set(false);
                         if (item == CurioItems.MOLTEN_QUIVER.get()) {
                             hasFire.set(true);
+                            return;
                         }
                     }
                 }
             }
         });
-        if (!isEmpty.get()) arrow.setDeltaMovement(arrow.getDeltaMovement().scale(2.0));
+        if (!isEmpty.get()) arrow.setDeltaMovement(arrow.getDeltaMovement().scale(1.2));
         if (hasFire.get()) arrow.setSecondsOnFire(100);
     }
 
