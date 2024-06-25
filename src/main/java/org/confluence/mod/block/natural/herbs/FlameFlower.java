@@ -4,14 +4,12 @@ import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.BaseHerbBlock;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.item.ModItems;
@@ -22,11 +20,6 @@ public class FlameFlower extends BaseHerbBlock {
 
     public FlameFlower(){
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION).randomTicks().lightLevel(value -> value.getValue(AGE) == MAX_AGE ? 4 : 0));
-    }
-
-    @Override
-    public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-        return groundState.is(ModBlocks.ASH_BLOCK.get()) || groundState.is(ModBlocks.ASH_GRASS_BLOCK.get());
     }
 
     @Override

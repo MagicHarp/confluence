@@ -13,7 +13,6 @@
         "accessor.LootParamsAccessor",
         "accessor.RangedAttributeAccessor",
         "accessor.SlimeAccessor",
-        "block.AirBlockMixin",
         "block.BlockBehaviour$BlockStateBaseMixin",
         "block.BlockBehaviourMixin",
         "block.SlimeBlockMixin",

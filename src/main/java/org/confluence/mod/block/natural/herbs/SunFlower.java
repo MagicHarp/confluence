@@ -1,22 +1,13 @@
 package org.confluence.mod.block.natural.herbs;
 
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.natural.*;
-import org.confluence.mod.item.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.natural.BaseHerbBlock;
+import org.confluence.mod.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 public class SunFlower extends BaseHerbBlock {
-
-	@Override
-	public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-		return groundState.is(Blocks.GRASS_BLOCK) || groundState.is(ModBlocks.HALLOW_GRASS_BLOCK.get());
-	}
-
 	@Override
 	protected @NotNull ItemLike getBaseSeedId(){
 		return ModItems.SUNFLOWERS_SEED.get();
