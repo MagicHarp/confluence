@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:another_crimson",
+  "features": "confluence:another_crimson_eyeball_grass",
+  "step": "vegetal_decoration"
+}

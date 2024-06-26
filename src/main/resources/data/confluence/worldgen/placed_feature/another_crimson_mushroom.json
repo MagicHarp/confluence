@@ -1,13 +1,13 @@
 {
-  "feature": "confluence:waterleaf",
+  "feature": "confluence:another_crimson_mushroom",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 2
+      "count": 3
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 16
+      "chance": 32
     },
     {
       "type": "minecraft:in_square"
