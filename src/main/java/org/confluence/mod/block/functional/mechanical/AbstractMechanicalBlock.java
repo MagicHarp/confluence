@@ -121,7 +121,7 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
     public static class Entity extends BlockEntity {
         private NetworkNode networkNode;
         public final Int2ObjectMap<Set<BlockPos>> connectedPoses; // 主动连接,用于寻路与渲染
-        public final Int2ObjectMap<Set<BlockPos>> relativePoses; // 被动连接,用于朔源
+        final Int2ObjectMap<Set<BlockPos>> relativePoses; // 被动连接,用于朔源
 
         public Entity(BlockEntityType<? extends Entity> entityType, BlockPos pPos, BlockState pBlockState) {
             super(entityType, pPos, pBlockState);
@@ -222,10 +222,16 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
 
         public void connectTo(int color, BlockPos relatedPos, Entity related) {
             if (relatedPos.equals(getBlockPos())) return;
-            connectedPoses.computeIfAbsent(color, i -> new HashSet<>()).add(relatedPos);
-            markUpdated();
-            related.relativePoses.computeIfAbsent(color, i -> new HashSet<>()).add(getBlockPos());
-            related.markUpdated();
+            Set<BlockPos> posSet = connectedPoses.computeIfAbsent(color, i -> new HashSet<>());
+            if (!posSet.contains(relatedPos)) {
+                posSet.add(relatedPos);
+                markUpdated();
+            }
+            posSet = related.relativePoses.computeIfAbsent(color, i -> new HashSet<>());
+            if (!posSet.contains(getBlockPos())) {
+                posSet.add(getBlockPos());
+                related.markUpdated();
+            }
         }
 
         public void disconnectWith(int color, BlockPos relatedPos, Entity related) {

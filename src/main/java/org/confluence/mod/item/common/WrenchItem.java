@@ -48,11 +48,13 @@ public class WrenchItem extends Item implements ReversalImage16x {
             if (storedPos == null) {
                 writeBlockPos(itemStack, pPos);
             } else if (pLevel.getBlockEntity(storedPos) instanceof AbstractMechanicalBlock.Entity entity1) {
-                if (!(entity.connectedPoses.containsKey(color) || entity1.relativePoses.containsKey(color))) {
+                if (entity1.connectedPoses.int2ObjectEntrySet().stream()
+                    .noneMatch(entry -> entry.getIntKey() == color && entry.getValue().contains(pPos))
+                ) {
                     entity.connectTo(color, storedPos, entity1);
                     PathService.INSTANCE.addToQueue(entity);
-                    removeBlockPos(itemStack);
                 }
+                removeBlockPos(itemStack);
             }
             return InteractionResult.CONSUME;
         }
