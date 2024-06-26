@@ -2,26 +2,27 @@
     "type": "minecraft:entity",
     "pools": [
         {
-            "rolls": 1,
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:damage_source_properties",
+                    "predicate": {
+                        "tags": [
+                            {
+                                "expected": true,
+                                "id": "minecraft:is_freezing"
+                            }
+                        ]
+                    }
+                }
+            ],
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:frozen_turtle_shell",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:damage_source_properties",
-                            "predicate": {
-                                "tags": [
-                                    {
-                                    "expected": true,
-                                    "id": "minecraft:freeze"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
+                    "name": "confluence:frozen_turtle_shell"
                 }
-            ]
+            ],
+            "rolls": 1.0
         }
     ]
 }
