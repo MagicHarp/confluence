@@ -89,7 +89,7 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
         }
     }
 
-    private void internalExecute(ServerLevel pLevel, BlockPos pPos, Entity entity, boolean hasSignal) {
+    static void internalExecute(ServerLevel pLevel, BlockPos pPos, Entity entity, boolean hasSignal) {
         BlockState blockState = entity.getBlockState();
         BlockPos blockPos = entity.getBlockPos();
         if (blockPos.equals(pPos)) return; // 被直接激活的方块最后再执行

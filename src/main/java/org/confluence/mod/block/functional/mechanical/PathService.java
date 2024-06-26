@@ -2,6 +2,7 @@ package org.confluence.mod.block.functional.mechanical;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.Confluence;
 
@@ -25,7 +26,6 @@ public class PathService {
     // 方块加载时,创捷网络结点
     public void onBlockEntityLoad(AbstractMechanicalBlock.Entity blockEntity) {
         NetworkService.INSTANCE.createNetworkNode(blockEntity);
-        addToQueue(blockEntity);
     }
 
     // 方块卸载时,删除网络结点和所属网络
@@ -60,8 +60,8 @@ public class PathService {
             flag = true;
             NetworkNode cur = queue.remove();
             cur.inQueue = false;
-            Level world = cur.getBlockEntity().getLevel();
-            if (world == null || !world.isLoaded(cur.getPos())) continue;
+            Level level = cur.getBlockEntity().getLevel();
+            if (level == null || !level.isLoaded(cur.getPos())) continue;
             AbstractMechanicalBlock.Entity entity = cur.getBlockEntity();
             if (entity.isRemoved()) continue;
 
@@ -70,8 +70,8 @@ public class PathService {
                 Iterator<BlockPos> iterator = entry1.getValue().iterator();
                 while (iterator.hasNext()) {
                     BlockPos pos = iterator.next();
-                    if (!world.isLoaded(pos)) continue;
-                    if (world.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
+                    if (!level.isLoaded(pos)) continue;
+                    if (level.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
                         Network curNetwork = cur.getOrCreateNetwork(color);
                         NetworkNode next = blockEntity.getNetworkNode();
                         Network nextNetwork = next.getNetwork(color);
@@ -82,6 +82,11 @@ public class PathService {
                         } else if (curNetwork != nextNetwork) {
                             // 合并网络
                             NetworkService.INSTANCE.mergeNetwork(curNetwork, nextNetwork);
+                            curNetwork = cur.getNetwork(color);
+                        }
+                        if (curNetwork.hasSignal() != cur.cachedSignal) {
+                            cur.cachedSignal = curNetwork.hasSignal();
+                            AbstractMechanicalBlock.internalExecute((ServerLevel) level, cur.getPos(), entity, cur.cachedSignal);
                         }
                     } else {
                         // 移除不存在的坐标
