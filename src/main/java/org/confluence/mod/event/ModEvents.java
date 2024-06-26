@@ -29,6 +29,7 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
@@ -60,7 +61,7 @@ public final class ModEvents {
         event.put(ModEntities.TROPIC_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntities.YELLOW_SLIME.get(), Monster.createMonsterAttributes().build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.DEMON_EYE.get(), Monster.createMonsterAttributes().build());
+        event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
     }
 
     @SubscribeEvent

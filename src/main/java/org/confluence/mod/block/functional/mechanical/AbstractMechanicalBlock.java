@@ -8,10 +8,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -19,12 +15,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.handler.InformationHandler;
-import org.confluence.mod.item.common.WrenchItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -124,29 +118,10 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
         return new Entity(pPos, pState);
     }
 
-    @Override
-    public @NotNull InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        if (pLevel.isClientSide) return InteractionResult.SUCCESS;
-        ItemStack itemStack = pPlayer.getItemInHand(pHand);
-        if (itemStack.getItem() instanceof WrenchItem wrenchItem && pLevel.getBlockEntity(pPos) instanceof Entity entity) {
-            BlockPos storedPos = WrenchItem.readBlockPos(itemStack);
-            if (storedPos == null) {
-                WrenchItem.writeBlockPos(itemStack, pPos);
-            } else if (pLevel.getBlockEntity(storedPos) instanceof Entity entity1) {
-                entity.connectTo(wrenchItem.color, storedPos, entity1);
-                PathService.INSTANCE.addToQueue(entity);
-                WrenchItem.removeBlockPos(itemStack);
-            }
-            return InteractionResult.CONSUME;
-        }
-        WrenchItem.removeBlockPos(itemStack);
-        return InteractionResult.PASS;
-    }
-
     public static class Entity extends BlockEntity {
         private NetworkNode networkNode;
         public final Int2ObjectMap<Set<BlockPos>> connectedPoses; // 主动连接,用于寻路与渲染
-        final Int2ObjectMap<Set<BlockPos>> relativePoses; // 被动连接,用于朔源
+        public final Int2ObjectMap<Set<BlockPos>> relativePoses; // 被动连接,用于朔源
 
         public Entity(BlockEntityType<? extends Entity> entityType, BlockPos pPos, BlockState pBlockState) {
             super(entityType, pPos, pBlockState);

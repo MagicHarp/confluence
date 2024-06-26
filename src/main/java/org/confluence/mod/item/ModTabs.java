@@ -198,6 +198,8 @@ public final class ModTabs {
                 output.accept(ModItems.RED_WRENCH.get());
                 output.accept(ModItems.GREEN_WRENCH.get());
                 output.accept(ModItems.BLUE_WRENCH.get());
+                output.accept(ModItems.YELLOW_WRENCH.get());
+                output.accept(ModItems.WIRE_CUTTER.get());
                 for (Pickaxes pickaxes : Pickaxes.values()) output.accept(pickaxes.get());
                 for (Axes axes : Axes.values()) output.accept(axes.get());
                 for (Hammers hammers : Hammers.values()) output.accept(hammers.get());
