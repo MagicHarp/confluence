@@ -18,12 +18,12 @@ public class InstantExplosionBlock extends AbstractMechanicalBlock implements IC
     @Override
     public void neighborChanged(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Block pNeighborBlock, @NotNull BlockPos pNeighborPos, boolean pMovedByPiston) {
         if (!pLevel.isClientSide && pLevel.hasNeighborSignal(pPos)) {
-            execute(pState, (ServerLevel) pLevel, pPos);
+            execute(pState, (ServerLevel) pLevel, pPos, true);
         }
     }
 
     @Override
-    public void executable(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
         pLevel.removeBlock(pPos, false);
         pLevel.explode(null, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, 10.0F, false, Level.ExplosionInteraction.BLOCK);
     }

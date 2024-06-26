@@ -40,6 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.mixin.accessor.BlockItemAccessor;
@@ -48,7 +49,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, CustomModel, CustomItemModel {
+public class ActuatorsBlock extends AbstractMechanicalBlock implements EntityBlock, CustomModel, CustomItemModel {
     public ActuatorsBlock() {
         super(BlockBehaviour.Properties.of()
             .pushReaction(PushReaction.BLOCK).mapColor(MapColor.COLOR_ORANGE)
@@ -108,7 +109,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
                 return InteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.PASS;
+        return super.use(blockState, level, blockPos, player, hand, blockHitResult);
     }
 
     @Override
@@ -118,13 +119,17 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
 
     public void neighborChanged(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Block block, @NotNull BlockPos blockPos1, boolean b) {
         if (level.isClientSide) return;
-        boolean drive = blockState.getValue(StateProperties.DRIVE);
-        if (drive == level.hasNeighborSignal(blockPos)) return;
-        if (drive) {
-            level.scheduleTick(blockPos, this, 1);
-        } else {
-            level.setBlock(blockPos, blockState.cycle(StateProperties.DRIVE), Block.UPDATE_CLIENTS);
-        }
+        execute(blockState, (ServerLevel) level, blockPos, level.hasNeighborSignal(blockPos));
+    }
+
+    @Override
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+        pLevel.setBlock(pPos, pState.setValue(StateProperties.DRIVE, true), Block.UPDATE_CLIENTS);
+    }
+
+    @Override
+    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+        pLevel.setBlock(pPos, pState.setValue(StateProperties.DRIVE, false), Block.UPDATE_CLIENTS);
     }
 
     public void tick(BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
@@ -324,7 +329,7 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
         player.swing(event.getHand());
     }
 
-    public static class Entity extends BlockEntity {
+    public static class Entity extends AbstractMechanicalBlock.Entity {
         private BlockState contain;
         private BlockEntity containEntity;
 
@@ -374,17 +379,10 @@ public class ActuatorsBlock extends Block implements EntityBlock, IMechanical, C
         }
 
         public @NotNull CompoundTag getUpdateTag() {
-            CompoundTag nbt = new CompoundTag();
+            CompoundTag nbt = super.getUpdateTag();
             nbt.putString("contain", BlockStateParser.serialize(contain));
             nbt.put("containEntity", isEmpty() ? new CompoundTag() : containEntity.getUpdateTag());
             return nbt;
-        }
-
-        public void markUpdated() {
-            setChanged();
-            if (level != null) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), UPDATE_CLIENTS);
-            }
         }
 
         private boolean isEmpty() {

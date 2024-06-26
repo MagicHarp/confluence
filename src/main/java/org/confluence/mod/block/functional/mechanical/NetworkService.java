@@ -62,6 +62,7 @@ public class NetworkService {
     public void mergeNetwork(Network n1, Network n2) {
         // n3为合并后的网络
         Network n3 = Network.merge(n1, n2);
+        n3.setSignal(n1.hasSignal() || n2.hasSignal());
         // 将被合并的网络删除
         if (n3 == n1) removeNetwork(n2);
         else removeNetwork(n1);

@@ -29,4 +29,8 @@ public record FloatRGB(float red, float green, float blue) {
     public Vector3f toVector() {
         return new Vector3f(red, green, blue);
     }
+
+    public float[] toArray() {
+        return new float[]{red, green, blue};
+    }
 }

@@ -34,7 +34,13 @@ public class PathService {
         if (networkNode == null) return;
         for (Network network : networkNode.getNetworks().values()) {
             // 网络已损坏,需要将所拥有的全部结点重新处理,放入处理队列中
-            queue.addAll(network.getNodes());
+            for (NetworkNode node : network.getNodes()) {
+                if (!node.inQueue) {
+                    node.inQueue = true;
+                    node.cachedSignal = network.hasSignal();
+                    queue.add(node);
+                }
+            }
             NetworkService.INSTANCE.removeNodeInNetwork(networkNode, network);
             NetworkService.INSTANCE.removeNetwork(network);
         }
@@ -53,6 +59,7 @@ public class PathService {
         while (!queue.isEmpty()) {
             flag = true;
             NetworkNode cur = queue.remove();
+            cur.inQueue = false;
             Level world = cur.getBlockEntity().getLevel();
             if (world == null || !world.isLoaded(cur.getPos())) continue;
             AbstractMechanicalBlock.Entity entity = cur.getBlockEntity();
@@ -64,13 +71,8 @@ public class PathService {
                 while (iterator.hasNext()) {
                     BlockPos pos = iterator.next();
                     if (!world.isLoaded(pos)) continue;
-                    if (cur.getNetworks().isEmpty()) {
-                        // 如果没有所属网络则创建一个
-                        Network network = NetworkService.INSTANCE.createNetwork(color);
-                        NetworkService.INSTANCE.addNodeToNetwork(cur, network);
-                    }
                     if (world.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
-                        Network curNetwork = cur.getNetwork(color);
+                        Network curNetwork = cur.getOrCreateNetwork(color);
                         NetworkNode next = blockEntity.getNetworkNode();
                         Network nextNetwork = next.getNetwork(color);
                         if (nextNetwork == null) {
@@ -84,6 +86,8 @@ public class PathService {
                     } else {
                         // 移除不存在的坐标
                         iterator.remove();
+                        Network network = cur.getNetwork(color);
+                        if (network != null) queue.addAll(network.getNodes());
                     }
                 }
                 if (entry1.getValue().isEmpty()) {

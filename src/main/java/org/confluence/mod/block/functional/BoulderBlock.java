@@ -51,18 +51,18 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
     public void neighborChanged(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Block pNeighborBlock, @NotNull BlockPos pNeighborPos, boolean pMovedByPiston) {
         if (!pLevel.isClientSide) {
             if (pLevel.hasNeighborSignal(pPos)) {
-                execute(pState, (ServerLevel) pLevel, pPos);
+                execute(pState, (ServerLevel) pLevel, pPos, true);
             } else {
                 BlockState below = pLevel.getBlockState(pPos.below());
                 if (below.isAir() || (below.is(ModBlocks.ACTUATORS.get()) && below.getValue(StateProperties.DRIVE))) {
-                    executable(pState, (ServerLevel) pLevel, pPos);
+                    onExecute(pState, (ServerLevel) pLevel, pPos);
                 }
             }
         }
     }
 
     @Override
-    public void executable(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
         pLevel.removeBlock(pPos, false);
         summon(pLevel, pPos, entity -> pLevel.getNearestPlayer(entity, BoulderEntity.SEARCH_RANGE));
     }

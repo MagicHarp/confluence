@@ -1,6 +1,5 @@
 package org.confluence.mod.client.handler;
 
-import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -201,11 +200,7 @@ public final class InformationHandler {
 
             b = enabled[MechanicalLens.INDEX];
             c = infoData[MechanicalLens.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) c = b;
-            if (c != b) {
-                infoData[MechanicalLens.INDEX] = b;
-                ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
-            }
+            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[MechanicalLens.INDEX] = b;
         });
         context.setPacketHandled(true);
     }
@@ -221,7 +216,7 @@ public final class InformationHandler {
         context.setPacketHandled(true);
     }
 
-    public static boolean isMechanicalBlockVisible() {
+    public static boolean hasMechanicalView() {
         return infoData[MechanicalLens.INDEX] != 0;
     }
 

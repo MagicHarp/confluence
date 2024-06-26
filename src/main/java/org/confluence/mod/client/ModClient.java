@@ -41,6 +41,7 @@ import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.block.AltarBlockRenderer;
 import org.confluence.mod.client.renderer.block.LifeCrystalBlockRenderer;
+import org.confluence.mod.client.renderer.block.MechanicalBlockRenderer;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
@@ -179,6 +180,7 @@ public final class ModClient {
         event.registerBlockEntityRenderer(ModBlocks.ALTAR_BLOCK_ENTITY.get(), AltarBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.LIFE_CRYSTAL_BLOCK_ENTITY.get(), LifeCrystalBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.SIGN_BLOCK_ENTITY.get(), SignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.MECHANICAL_BLOCK_ENTITY.get(), MechanicalBlockRenderer::new);
     }
 
     @SubscribeEvent

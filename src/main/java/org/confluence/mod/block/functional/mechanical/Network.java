@@ -8,7 +8,6 @@ public class Network {
     private final Set<NetworkNode> nodes;
     private boolean signal;
 
-
     public Network(int color) {
         this.color = color;
         this.nodes = new HashSet<>();
@@ -41,7 +40,7 @@ public class Network {
 
     public void destroy() {
         for (NetworkNode node : nodes) {
-            node.clearNetworks();
+            node.removeNetwork(color);
         }
         nodes.clear();
     }

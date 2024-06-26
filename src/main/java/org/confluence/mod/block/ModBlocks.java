@@ -87,7 +87,7 @@ public final class ModBlocks {
     public static final RegistryObject<BoulderBlock> BOULDER = registerWithItem("boulder", BoulderBlock::new);
     public static final RegistryObject<InstantExplosionBlock> INSTANTANEOUS_EXPLOSION_TNT = registerWithItem("instantaneous_explosion_tnt", InstantExplosionBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
-        INSTANTANEOUS_EXPLOSION_TNT.get()).build(null));
+        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting

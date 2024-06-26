@@ -5,10 +5,8 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.functional.EchoBlock;
-import org.confluence.mod.block.functional.IMechanical;
 import org.confluence.mod.block.functional.StateProperties;
 import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.client.handler.InformationHandler;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,9 +29,6 @@ public abstract class BlockModelShaperMixin {
     private void ifEchoBlock(BlockState blockState, CallbackInfoReturnable<BakedModel> cir) {
         if (blockState.getBlock() instanceof EchoBlock) {
             BlockState visible = blockState.setValue(StateProperties.VISIBLE, ClientPacketHandler.isEchoBlockVisible());
-            cir.setReturnValue(modelByStateCache.getOrDefault(visible, modelManager.getMissingModel()));
-        } else if (blockState.getBlock() instanceof IMechanical) {
-            BlockState visible = blockState.setValue(StateProperties.VISIBLE, InformationHandler.isMechanicalBlockVisible());
             cir.setReturnValue(modelByStateCache.getOrDefault(visible, modelManager.getMissingModel()));
         }
     }
