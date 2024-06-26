@@ -14,6 +14,7 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
+import org.confluence.mod.item.common.WrenchItem;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
@@ -1389,6 +1390,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
         add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         add(BOMB.get(), "炸弹");
+        add(RED_WRENCH.get(), "红扳手");
+        add(BLUE_WRENCH.get(), "蓝扳手");
+        add(GREEN_WRENCH.get(), "绿扳手");
+
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
         add(FishingPoles.WOOD_FISHING_POLE.get(), "木钓竿");
