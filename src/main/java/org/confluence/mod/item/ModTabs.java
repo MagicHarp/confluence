@@ -174,7 +174,6 @@ public final class ModTabs {
                 output.accept(ModItems.CHRISTMAS_GIFT.get());
                 output.accept(ModItems.RED_ENVELOPE.get());
                 output.accept(ECHO_BLOCK.get());
-                output.accept(ACTUATORS.get());
                 output.accept(DEMON_ALTAR.get());
                 output.accept(CRIMSON_ALTAR.get());
                 output.accept(BOULDER.get());

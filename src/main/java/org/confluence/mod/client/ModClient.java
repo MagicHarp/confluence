@@ -38,7 +38,6 @@ import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.FlameFlowerParticle;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.client.renderer.block.ActuatorsBlockRenderer;
 import org.confluence.mod.client.renderer.block.AltarBlockRenderer;
 import org.confluence.mod.client.renderer.block.LifeCrystalBlockRenderer;
 import org.confluence.mod.client.renderer.block.MechanicalBlockRenderer;
@@ -176,7 +175,6 @@ public final class ModClient {
 
         event.registerEntityRenderer(BASE_AMMO.get(), AmmoRenderer::new);
 
-        event.registerBlockEntityRenderer(ModBlocks.ACTUATORS_ENTITY.get(), ActuatorsBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.ALTAR_BLOCK_ENTITY.get(), AltarBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.LIFE_CRYSTAL_BLOCK_ENTITY.get(), LifeCrystalBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.SIGN_BLOCK_ENTITY.get(), SignRenderer::new);

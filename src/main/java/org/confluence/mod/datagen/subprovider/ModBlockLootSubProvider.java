@@ -28,18 +28,12 @@ import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.confluence.mod.block.ModBlocks.*;
 
 public class ModBlockLootSubProvider extends BlockLootSubProvider {
-    private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(
-        ModBlocks.ACTUATORS.get()
-    ).map(Block::asItem).collect(Collectors.toSet());
-
     public ModBlockLootSubProvider() {
-        super(EXPLOSION_RESISTANT, FeatureFlags.REGISTRY.allFlags());
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     @Override

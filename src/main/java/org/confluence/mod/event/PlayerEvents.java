@@ -7,12 +7,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
@@ -110,10 +108,5 @@ public final class PlayerEvents {
             speed.setValue(value);
         });
         event.setNewSpeed(speed.floatValue());
-    }
-
-    @SubscribeEvent
-    public static void rightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        ActuatorsBlock.blockItemPlace(event);
     }
 }

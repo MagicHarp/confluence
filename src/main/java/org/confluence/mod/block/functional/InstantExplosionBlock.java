@@ -2,6 +2,7 @@ package org.confluence.mod.block.functional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -20,6 +21,11 @@ public class InstantExplosionBlock extends AbstractMechanicalBlock implements IC
         if (!pLevel.isClientSide && pLevel.hasNeighborSignal(pPos)) {
             execute(pState, (ServerLevel) pLevel, pPos, true);
         }
+    }
+
+    @Override
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 10.0F, false, Level.ExplosionInteraction.BLOCK);
     }
 
     @Override

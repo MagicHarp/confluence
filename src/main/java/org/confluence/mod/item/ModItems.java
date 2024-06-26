@@ -84,6 +84,7 @@ public final class ModItems {
     public static final RegistryObject<WrenchItem> RED_WRENCH = ITEMS.register("red_wrench", () -> new WrenchItem(0xFF0000));
     public static final RegistryObject<WrenchItem> GREEN_WRENCH = ITEMS.register("green_wrench", () -> new WrenchItem(0x00FF00));
     public static final RegistryObject<WrenchItem> BLUE_WRENCH = ITEMS.register("blue_wrench", () -> new WrenchItem(0x0000FF));
+    public static final RegistryObject<WrenchItem> YELLOW_WRENCH = ITEMS.register("yellow_wrench", () -> new WrenchItem(0xFFFF00));
     // 草药种子
     public static final RegistryObject<Item> WATERLEAF_SEED = ITEMS.register("waterleaf_seed", ()->new HerbSeedItem(ModBlocks.WATERLEAF.get()));
     public static final RegistryObject<Item> FLAMEFLOWERS_SEED = ITEMS.register("flameflowers_seed", ()->new HerbSeedItem(ModBlocks.FLAMEFLOWERS.get()));

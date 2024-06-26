@@ -14,7 +14,6 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
-import org.confluence.mod.item.common.WrenchItem;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
@@ -1382,13 +1381,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(AEGIS_APPLE.get(), "神盾果");
         add(AMBROSIA.get(), "仙馔密酒");
         add(GUMMY_WORM.get(), "黏性蠕虫");
-        add(BOULDER.get(), "巨石");
         add(CHRISTMAS_GIFT.get(), "圣诞礼物");
         add(RED_ENVELOPE.get(), "红包");
         add(CAN_OF_WORMS.get(), "蠕虫罐头");
         add(HERB_BAG.get(), "草药袋");
         add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
-        add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         add(BOMB.get(), "炸弹");
         add(RED_WRENCH.get(), "红扳手");
         add(BLUE_WRENCH.get(), "蓝扳手");
@@ -1605,7 +1602,8 @@ public class ModChineseProvider extends LanguageProvider {
 
         // 功能方块
         add(ECHO_BLOCK.get(), "回声块");
-        add(ACTUATORS.get(), "促动器");
+        add(BOULDER.get(), "巨石");
+        add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         // 饰品
         add(MECHANICAL_LENS.get(), "机械晶状体");
         add(SPECTRE_GOGGLES.get(), "幽灵护目镜");

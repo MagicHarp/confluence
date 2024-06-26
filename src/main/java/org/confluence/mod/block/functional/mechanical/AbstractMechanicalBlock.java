@@ -109,10 +109,13 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
     }
 
     /**
-     * 定义机械方块的可执行代码
+     * 正脉冲执行的代码
      */
     public abstract void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos);
 
+    /**
+     * 负脉冲执行的代码
+     */
     public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {}
 
     @Nullable

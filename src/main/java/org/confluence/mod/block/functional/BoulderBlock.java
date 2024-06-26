@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -54,9 +53,7 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
                 execute(pState, (ServerLevel) pLevel, pPos, true);
             } else {
                 BlockState below = pLevel.getBlockState(pPos.below());
-                if (below.isAir() || (below.is(ModBlocks.ACTUATORS.get()) && below.getValue(StateProperties.DRIVE))) {
-                    onExecute(pState, (ServerLevel) pLevel, pPos);
-                }
+                if (below.isAir()) onExecute(pState, (ServerLevel) pLevel, pPos);
             }
         }
     }

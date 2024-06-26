@@ -2,7 +2,10 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -46,9 +49,9 @@ public class ModItemModelProvider extends ItemModelProvider {
             String path = item.getId().getPath().toLowerCase();
             boolean isBlockItem = false;
             try {
-                if(value instanceof HerbSeedItem){
+                if (value instanceof HerbSeedItem) {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
-                }else if (value instanceof BlockItem blockItem) {
+                } else if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;
@@ -76,6 +79,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
                 } else if (value instanceof BottleFoodItem) {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
+                } else if (value instanceof ReversalImage16x) {
+                    withExistingParent(path, "confluence:item/handheld_mirror").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 } else {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }

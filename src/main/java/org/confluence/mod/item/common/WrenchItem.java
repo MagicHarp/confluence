@@ -4,9 +4,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.datagen.limit.ReversalImage16x;
 import org.jetbrains.annotations.Nullable;
 
-public class WrenchItem extends Item {
+public class WrenchItem extends Item implements ReversalImage16x {
     public final int color;
 
     public WrenchItem(int color) {

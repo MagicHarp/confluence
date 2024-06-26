@@ -16,7 +16,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
-import org.confluence.mod.block.functional.ActuatorsBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.EchoBlock;
 import org.confluence.mod.block.functional.InstantExplosionBlock;
@@ -82,8 +81,6 @@ public final class ModBlocks {
     public static final LogBlocks SPOOKY_LOG_BLOCKS = new LogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
     // functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
-    public static final RegistryObject<ActuatorsBlock> ACTUATORS = registerWithItem("actuators", ActuatorsBlock::new);
-    public static final RegistryObject<BlockEntityType<ActuatorsBlock.Entity>> ACTUATORS_ENTITY = BLOCK_ENTITIES.register("actuators_entity", () -> BlockEntityType.Builder.of(ActuatorsBlock.Entity::new, ACTUATORS.get()).build(null));
     public static final RegistryObject<BoulderBlock> BOULDER = registerWithItem("boulder", BoulderBlock::new);
     public static final RegistryObject<InstantExplosionBlock> INSTANTANEOUS_EXPLOSION_TNT = registerWithItem("instantaneous_explosion_tnt", InstantExplosionBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
