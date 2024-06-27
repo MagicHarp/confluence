@@ -85,7 +85,7 @@ public final class ModBlocks {
     public static final RegistryObject<SignalAdapterBlock> SIGNAL_ADAPTER = registerWithItem("signal_adapter", SignalAdapterBlock::new);
     public static final RegistryObject<DartTrapBlock> DART_TRAP = registerWithItem("dart_trap", DartTrapBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
-        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get()).build(null));
+        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
