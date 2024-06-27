@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": "confluence:the_corruption",
+  "biomes": [
+    "confluence:the_corruption"
+  ],
   "features": "confluence:corrupt_grass",
   "step": "vegetal_decoration"
 }

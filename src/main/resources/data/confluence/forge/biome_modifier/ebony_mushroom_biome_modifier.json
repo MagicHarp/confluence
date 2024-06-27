@@ -1,8 +1,8 @@
 {
   "type": "forge:add_features",
-  "biomes": {
-    "type": "forge:any"
-  },
+  "biomes": [
+    "confluence:the_corruption"
+  ],
   "features": "confluence:ebony_mushroom",
   "step": "vegetal_decoration"
 }

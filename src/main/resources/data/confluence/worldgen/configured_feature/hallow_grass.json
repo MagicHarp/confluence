@@ -1,7 +1,7 @@
 {
   "type": "minecraft:random_patch",
   "config": {
-    "tries": 45,
+    "tries": 40,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -9,7 +9,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "confluence:corrupt_grass"
+              "Name": "confluence:hallow_grass"
             }
           }
         }

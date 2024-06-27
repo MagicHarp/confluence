@@ -31,12 +31,6 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "minecraft:sparse_jungle"
-                  }
-                },
-                {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
                     "biome": "minecraft:bamboo_jungle"
                   }
                 }
@@ -62,12 +56,6 @@
                   "condition": "minecraft:location_check",
                   "predicate": {
                     "biome": "minecraft:lush_caves"
-                  }
-                },
-                {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
-                    "biome": "minecraft:sparse_jungle"
                   }
                 },
                 {
@@ -115,12 +103,6 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "minecraft:sparse_jungle"
-                  }
-                },
-                {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
                     "biome": "minecraft:bamboo_jungle"
                   }
                 }
@@ -146,12 +128,6 @@
                   "condition": "minecraft:location_check",
                   "predicate": {
                     "biome": "minecraft:lush_caves"
-                  }
-                },
-                {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
-                    "biome": "minecraft:sparse_jungle"
                   }
                 },
                 {
