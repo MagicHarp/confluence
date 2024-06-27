@@ -1390,6 +1390,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(RED_WRENCH.get(), "红扳手");
         add(BLUE_WRENCH.get(), "蓝扳手");
         add(GREEN_WRENCH.get(), "绿扳手");
+        add(YELLOW_WRENCH.get(), "黄扳手");
+        add(SWITCH.get(), "开关");
+        add(SIGNAL_ADAPTER.get(), "信号适配器");
+        add(WIRE_CUTTER.get(), "电工钳");
 
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");
