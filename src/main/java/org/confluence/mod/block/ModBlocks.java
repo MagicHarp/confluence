@@ -16,10 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
-import org.confluence.mod.block.functional.BoulderBlock;
-import org.confluence.mod.block.functional.EchoBlock;
-import org.confluence.mod.block.functional.InstantExplosionBlock;
-import org.confluence.mod.block.functional.SwitchBlock;
+import org.confluence.mod.block.functional.*;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;
@@ -85,8 +82,9 @@ public final class ModBlocks {
     public static final RegistryObject<BoulderBlock> BOULDER = registerWithItem("boulder", BoulderBlock::new);
     public static final RegistryObject<InstantExplosionBlock> INSTANTANEOUS_EXPLOSION_TNT = registerWithItem("instantaneous_explosion_tnt", InstantExplosionBlock::new);
     public static final RegistryObject<SwitchBlock> SWITCH = registerWithItem("switch", SwitchBlock::new);
+    public static final RegistryObject<SignalAdapterBlock> SIGNAL_ADAPTER = registerWithItem("signal_adapter", SignalAdapterBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
-        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get()).build(null));
+        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting

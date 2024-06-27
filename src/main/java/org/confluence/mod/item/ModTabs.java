@@ -179,6 +179,7 @@ public final class ModTabs {
                 output.accept(BOULDER.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
                 output.accept(SWITCH.get());
+                output.accept(SIGNAL_ADAPTER.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
                 for (Baits baits : Baits.values()) output.accept(baits.get());
             })

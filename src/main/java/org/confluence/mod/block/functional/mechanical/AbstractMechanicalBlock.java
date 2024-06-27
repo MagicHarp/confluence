@@ -88,7 +88,11 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
                         .forEach(entity1 -> internalExecute(pLevel, pPos, entity1, hasSignal));
                 }
             }
-            onExecute(pState, pLevel, pPos);
+            if (hasSignal) {
+                onExecute(pState, pLevel, pPos);
+            } else {
+                onUnExecute(pState, pLevel, pPos);
+            }
         }
     }
 

@@ -29,6 +29,7 @@ public class PathService {
     // 方块加载时,创捷网络结点
     public void onBlockEntityLoad(AbstractMechanicalBlock.Entity blockEntity) {
         NetworkService.INSTANCE.createNetworkNode(blockEntity);
+        addToQueue(blockEntity);
     }
 
     // 方块卸载时,删除网络结点和所属网络
@@ -111,11 +112,15 @@ public class PathService {
                 if (network.schedule) {
                     network.schedule = false;
                     network.getNodes().stream()
-                        .peek(node -> Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString()))
+                        .peek(node -> Confluence.LOGGER.debug("Scheduled Node#{}: {}", node.getId(), node.getPos().toShortString()))
                         .filter(node -> node.cachedSignal != network.hasSignal())
                         .map(NetworkNode::getBlockEntity)
                         .collect(Collectors.toSet())
                         .forEach(entity -> internalExecute((ServerLevel) entity.getLevel(), null, entity, network.hasSignal()));
+                } else {
+                    for (NetworkNode node : network.getNodes()) {
+                        Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());
+                    }
                 }
             }
         }
