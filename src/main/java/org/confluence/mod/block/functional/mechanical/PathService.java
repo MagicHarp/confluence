@@ -108,16 +108,14 @@ public class PathService {
             Confluence.LOGGER.debug("Path finding finish");
             for (Network network : NetworkService.INSTANCE.getNetworks()) {
                 Confluence.LOGGER.debug("Network${}, #{}:", network.hasSignal(), network.getColor());
-                if (network.schedule) { //
+                if (network.schedule) {
                     network.schedule = false;
                     network.getNodes().stream()
+                        .peek(node -> Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString()))
                         .filter(node -> node.cachedSignal != network.hasSignal())
                         .map(NetworkNode::getBlockEntity)
                         .collect(Collectors.toSet())
                         .forEach(entity -> internalExecute((ServerLevel) entity.getLevel(), null, entity, network.hasSignal()));
-                }
-                for (NetworkNode node : network.getNodes()) {
-                    Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());
                 }
             }
         }
