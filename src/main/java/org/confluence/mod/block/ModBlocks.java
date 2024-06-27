@@ -83,6 +83,7 @@ public final class ModBlocks {
     public static final RegistryObject<InstantExplosionBlock> INSTANTANEOUS_EXPLOSION_TNT = registerWithItem("instantaneous_explosion_tnt", InstantExplosionBlock::new);
     public static final RegistryObject<SwitchBlock> SWITCH = registerWithItem("switch", SwitchBlock::new);
     public static final RegistryObject<SignalAdapterBlock> SIGNAL_ADAPTER = registerWithItem("signal_adapter", SignalAdapterBlock::new);
+    public static final RegistryObject<DartTrapBlock> DART_TRAP = registerWithItem("dart_trap", DartTrapBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
         BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get()).build(null));
     // frost
