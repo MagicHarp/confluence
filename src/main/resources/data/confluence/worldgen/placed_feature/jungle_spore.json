@@ -1,9 +1,9 @@
 {
-  "feature": "confluence:shine_root",
+  "feature": "confluence:jungle_spore",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 4
     },
     {
       "type": "minecraft:rarity_filter",
