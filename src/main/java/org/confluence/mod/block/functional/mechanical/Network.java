@@ -1,5 +1,8 @@
 package org.confluence.mod.block.functional.mechanical;
 
+import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.functional.StateProperties;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,11 +10,13 @@ public class Network {
     private final int color;
     private final Set<NetworkNode> nodes;
     private boolean signal;
+    boolean schedule;
 
     public Network(int color) {
         this.color = color;
         this.nodes = new HashSet<>();
         this.signal = false;
+        this.schedule = false;
     }
 
     public int getColor() {
@@ -35,6 +40,14 @@ public class Network {
     }
 
     public boolean hasSignal() {
+        return signal;
+    }
+
+    public boolean calculateSignal() {
+        this.signal = nodes.stream().anyMatch(node -> {
+            BlockState blockState = node.getBlockEntity().getBlockState();
+            return blockState.hasProperty(StateProperties.SIGNAL) && blockState.getValue(StateProperties.SIGNAL);
+        });
         return signal;
     }
 

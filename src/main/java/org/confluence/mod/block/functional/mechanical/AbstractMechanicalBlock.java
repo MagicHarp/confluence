@@ -8,6 +8,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -19,6 +20,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.handler.InformationHandler;
+import org.confluence.mod.item.common.WireCutterItem;
+import org.confluence.mod.item.common.WrenchItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +37,7 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
 
     @Override
     public void onRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pNewState, boolean pMovedByPiston) {
-        if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof Entity entity) {
+        if (!pLevel.isClientSide && !pState.is(pNewState.getBlock()) && pLevel.getBlockEntity(pPos) instanceof Entity entity) {
             PathService.INSTANCE.onBlockEntityUnload(entity);
             // 根据relativePoses,断开与该方块的连接
             for (Int2ObjectMap.Entry<Set<BlockPos>> entry : entity.relativePoses.int2ObjectEntrySet()) {
@@ -89,10 +92,16 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
         }
     }
 
-    static void internalExecute(ServerLevel pLevel, BlockPos pPos, Entity entity, boolean hasSignal) {
+    /**
+     * 仅执行特定的机械方块
+     *
+     * @param pPos 激活该方块的来源坐标
+     */
+    protected static void internalExecute(ServerLevel pLevel, @Nullable BlockPos pPos, Entity entity, boolean hasSignal) {
+        if (pLevel == null) return;
         BlockState blockState = entity.getBlockState();
         BlockPos blockPos = entity.getBlockPos();
-        if (blockPos.equals(pPos)) return; // 被直接激活的方块最后再执行
+        if (blockPos.equals(pPos)) return; // 确保被直接激活的方块最后再执行
         if (blockState.getBlock() instanceof AbstractMechanicalBlock block) {
             if (hasSignal) {
                 block.onExecute(blockState, pLevel, blockPos);
@@ -111,6 +120,10 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
      * 负脉冲执行的代码
      */
     public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {}
+
+    public boolean cannotInteractWith(Item item) {
+        return item instanceof WrenchItem || item instanceof WireCutterItem;
+    }
 
     @Nullable
     @Override

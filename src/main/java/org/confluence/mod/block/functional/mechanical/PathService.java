@@ -10,6 +10,9 @@ import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock.internalExecute;
 
 public class PathService {
     public static final PathService INSTANCE = new PathService();
@@ -71,8 +74,9 @@ public class PathService {
                 while (iterator.hasNext()) {
                     BlockPos pos = iterator.next();
                     if (!level.isLoaded(pos)) continue;
+                    Network curNetwork = null;
                     if (level.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
-                        Network curNetwork = cur.getOrCreateNetwork(color);
+                        curNetwork = cur.getOrCreateNetwork(color);
                         NetworkNode next = blockEntity.getNetworkNode();
                         Network nextNetwork = next.getNetwork(color);
                         if (nextNetwork == null) {
@@ -84,15 +88,15 @@ public class PathService {
                             NetworkService.INSTANCE.mergeNetwork(curNetwork, nextNetwork);
                             curNetwork = cur.getNetwork(color);
                         }
-                        if (curNetwork.hasSignal() != cur.cachedSignal) {
-                            cur.cachedSignal = curNetwork.hasSignal();
-                            AbstractMechanicalBlock.internalExecute((ServerLevel) level, cur.getPos(), entity, cur.cachedSignal);
-                        }
                     } else {
                         // 移除不存在的坐标
                         iterator.remove();
                         Network network = cur.getNetwork(color);
                         if (network != null) queue.addAll(network.getNodes());
+                    }
+                    if (curNetwork != null) { // 获取新网络的信号
+                        cur.cachedSignal = curNetwork.calculateSignal();
+                        curNetwork.schedule = true;
                     }
                 }
                 if (entry1.getValue().isEmpty()) {
@@ -103,7 +107,15 @@ public class PathService {
         if (flag) {
             Confluence.LOGGER.debug("Path finding finish");
             for (Network network : NetworkService.INSTANCE.getNetworks()) {
-                Confluence.LOGGER.debug("Network#{}:", network.getColor());
+                Confluence.LOGGER.debug("Network${}, #{}:", network.hasSignal(), network.getColor());
+                if (network.schedule) { //
+                    network.schedule = false;
+                    network.getNodes().stream()
+                        .filter(node -> node.cachedSignal != network.hasSignal())
+                        .map(NetworkNode::getBlockEntity)
+                        .collect(Collectors.toSet())
+                        .forEach(entity -> internalExecute((ServerLevel) entity.getLevel(), null, entity, network.hasSignal()));
+                }
                 for (NetworkNode node : network.getNodes()) {
                     Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());
                 }
