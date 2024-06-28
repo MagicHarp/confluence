@@ -38,7 +38,7 @@ public record GravitationPacketC2S(boolean enable) {
                     attributeInstance.removeModifier(GravitationEffect.GRAVITY_UUID);
                 }
             }
-            ((IEntity) serverPlayer).c$setShouldRot(packet.enable);
+            ((IEntity) serverPlayer).confluence$setShouldRot(packet.enable);
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.ALL.noArg(),
                 new BroadcastGravitationRotPacketS2C(serverPlayer.getId(), packet.enable)

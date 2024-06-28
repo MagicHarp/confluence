@@ -62,54 +62,54 @@ public abstract class EntityMixin implements IEntity {
     public abstract void setGlowingTag(boolean pHasGlowingTag);
 
     @Unique
-    private int c$cthulhuSprintingTime = 0;
+    private int confluence$cthulhuSprintingTime = 0;
     @Unique
-    private boolean c$isShouldRot = false;
+    private boolean confluence$isShouldRot = false;
     @Unique
-    private boolean c$isInShimmer = false;
+    private boolean confluence$isInShimmer = false;
     @Unique
-    private boolean c$wasInShimmer = false;
+    private boolean confluence$wasInShimmer = false;
     @Unique
-    private int c$e_coolDown = 0;
+    private int confluence$entity_coolDown = 0;
     @Unique
-    private int c$e_transforming = 0;
+    private int confluence$entity_transforming = 0;
     @Unique
-    private byte c$transformData = HAD_SETUP;
+    private byte confluence$transformData = HAD_SETUP;
 
     @Override
-    public void c$e_setCoolDown(int ticks) {
-        this.c$e_coolDown = ticks;
+    public void confluence$entity_setCoolDown(int ticks) {
+        this.confluence$entity_coolDown = ticks;
     }
 
     @Override
-    public void c$setOriginalNoGravity(boolean bool) {
-        this.c$transformData = bool ? NO_GRAVITY : HAS_GRAVITY;
+    public void confluence$setOriginalNoGravity(boolean bool) {
+        this.confluence$transformData = bool ? NO_GRAVITY : HAS_GRAVITY;
     }
 
     @Override
-    public int c$getCthulhuSprintingTime() {
-        return c$cthulhuSprintingTime;
+    public int confluence$getCthulhuSprintingTime() {
+        return confluence$cthulhuSprintingTime;
     }
 
     @Override
-    public void c$setCthulhuSprintingTime(int amount) {
-        this.c$cthulhuSprintingTime = amount;
+    public void confluence$setCthulhuSprintingTime(int amount) {
+        this.confluence$cthulhuSprintingTime = amount;
     }
 
     @Override
-    public void c$setShouldRot(boolean bool) {
-        this.c$isShouldRot = bool;
+    public void confluence$setShouldRot(boolean bool) {
+        this.confluence$isShouldRot = bool;
     }
 
     @Override
-    public boolean c$isShouldRot() {
-        return c$isShouldRot;
+    public boolean confluence$isShouldRot() {
+        return confluence$isShouldRot;
     }
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
-        if (c$getSelf() instanceof Player living) {
+        if (confluence$getSelf() instanceof Player living) {
             BlockPos onPos = living.getOnPos();
             if (living.level().getFluidState(onPos).is(FluidTags.LAVA) && !living.level().getFluidState(onPos.above()).is(FluidTags.LAVA)) return false;
             living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
@@ -128,7 +128,7 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
-        if (c$getSelf() instanceof LivingEntity living) {
+        if (confluence$getSelf() instanceof LivingEntity living) {
             if (IHurtEvasion.isInvul(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
@@ -144,27 +144,27 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
-        if (bool && c$getSelf() instanceof Player living) {
-            if (c$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
+        if (bool && confluence$getSelf() instanceof Player living) {
+            if (confluence$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(living);
-                this.c$cthulhuSprintingTime = 32;
+                this.confluence$cthulhuSprintingTime = 32;
             }
         }
     }
 
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))
     private void tickProfiler(CallbackInfo ci) {
-        if (c$cthulhuSprintingTime > 0) this.c$cthulhuSprintingTime--;
-        if (c$e_coolDown < 0) this.c$e_coolDown = 0;
-        this.c$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
-        Entity self = c$getSelf();
-        if (c$isInShimmer) {
-            if (!self.level().isClientSide && c$e_coolDown == 0) {
+        if (confluence$cthulhuSprintingTime > 0) this.confluence$cthulhuSprintingTime--;
+        if (confluence$entity_coolDown < 0) this.confluence$entity_coolDown = 0;
+        this.confluence$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
+        Entity self = confluence$getSelf();
+        if (confluence$isInShimmer) {
+            if (!self.level().isClientSide && confluence$entity_coolDown == 0) {
                 ShimmerEntityTransmutationEvent.Pre pre = new ShimmerEntityTransmutationEvent.Pre(self);
                 if (MinecraftForge.EVENT_BUS.post(pre)) {
-                    c$setup(self, pre.getCoolDown(), pre.getSpeedY());
-                } else if (c$e_transforming < pre.getTransformTime()) {
-                    this.c$e_transforming++;
+                    confluence$setup(self, pre.getCoolDown(), pre.getSpeedY());
+                } else if (confluence$entity_transforming < pre.getTransformTime()) {
+                    this.confluence$entity_transforming++;
                     self.addDeltaMovement(ANTI_GRAVITY);
                 } else {
                     ShimmerEntityTransmutationEvent.Post post = new ShimmerEntityTransmutationEvent.Post(self);
@@ -172,62 +172,62 @@ public abstract class EntityMixin implements IEntity {
                     Entity target = post.getTarget();
                     if (target != null) {
                         discard();
-                        c$setup(target, post.getCoolDown(), post.getSpeedY());
+                        confluence$setup(target, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(target);
                         return;
                     }
                 }
             }
 
-            if (!c$wasInShimmer && self instanceof Projectile projectile) {
+            if (!confluence$wasInShimmer && self instanceof Projectile projectile) {
                 Vec3 motion = projectile.getDeltaMovement();
                 projectile.setDeltaMovement(motion.x, -motion.y, motion.z);
-                this.c$wasInShimmer = true;
+                this.confluence$wasInShimmer = true;
             }
         } else {
-            this.c$e_transforming = 0;
-            if (c$e_coolDown > 0) this.c$e_coolDown--;
-            if (c$e_coolDown == 0 && c$transformData != HAD_SETUP && !(self instanceof ItemEntity)) {
+            this.confluence$entity_transforming = 0;
+            if (confluence$entity_coolDown > 0) this.confluence$entity_coolDown--;
+            if (confluence$entity_coolDown == 0 && confluence$transformData != HAD_SETUP && !(self instanceof ItemEntity)) {
                 setGlowingTag(false);
-                if (c$transformData == 0) {
+                if (confluence$transformData == 0) {
                     setNoGravity(false);
                 }
-                this.c$transformData = HAD_SETUP;
+                this.confluence$transformData = HAD_SETUP;
             }
-            this.c$wasInShimmer = false;
+            this.confluence$wasInShimmer = false;
         }
     }
 
     @Inject(method = "playerTouch", at = @At("TAIL"))
     private void collidingCheck(Player player, CallbackInfo ci) {
         IEntity iEntity = (IEntity) player;
-        if (iEntity.c$isOnCthulhuSprinting()) {
-            Entity self = c$getSelf();
+        if (iEntity.confluence$isOnCthulhuSprinting()) {
+            Entity self = confluence$getSelf();
             Vec3 vector = player.getDeltaMovement();
             self.addDeltaMovement(new Vec3(vector.x * 1.6, 0.6, vector.z * 1.6));
             self.hurt(damageSources().playerAttack(player), 7.8F);
             player.setDeltaMovement(vector.scale(-0.9));
-            iEntity.c$setCthulhuSprintingTime(20);
+            iEntity.confluence$setCthulhuSprintingTime(20);
         }
     }
 
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
     private void fireProof(CallbackInfoReturnable<Boolean> cir) {
-        if (c$getSelf() instanceof IFishingHook fishingHook) {
-            cir.setReturnValue(fishingHook.c$isLavaHook());
+        if (confluence$getSelf() instanceof IFishingHook fishingHook) {
+            cir.setReturnValue(fishingHook.confluence$isLavaHook());
         }
     }
 
     @Unique
-    private Entity c$getSelf() {
+    private Entity confluence$getSelf() {
         return (Entity) (Object) this;
     }
 
     @Unique
-    private static void c$setup(Entity entity, int coolDown, double y) {
+    private static void confluence$setup(Entity entity, int coolDown, double y) {
         IEntity iEntity = (IEntity) entity;
-        iEntity.c$setOriginalNoGravity(entity.isNoGravity());
-        iEntity.c$e_setCoolDown(coolDown);
+        iEntity.confluence$setOriginalNoGravity(entity.isNoGravity());
+        iEntity.confluence$entity_setCoolDown(coolDown);
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x, y, motion.z);

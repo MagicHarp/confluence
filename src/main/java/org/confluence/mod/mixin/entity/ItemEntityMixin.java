@@ -21,28 +21,28 @@ public abstract class ItemEntityMixin implements IItemEntity {
     @Unique
     private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
     @Unique
-    private int c$i_coolDown = 0;
+    private int confluence$item_coolDown = 0;
     @Unique
-    private int c$i_transforming = 0;
+    private int confluence$item_transforming = 0;
 
     @Override
-    public void c$i_setCoolDown(int ticks) {
-        this.c$i_coolDown = ticks;
+    public void confluence$item_setCoolDown(int ticks) {
+        this.confluence$item_coolDown = ticks;
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void endTick(CallbackInfo ci) {
         ItemEntity self = (ItemEntity) (Object) this;
         if (self.level().isClientSide || self.isRemoved()) return;
-        if (c$i_coolDown < 0) this.c$i_coolDown = 0;
+        if (confluence$item_coolDown < 0) this.confluence$item_coolDown = 0;
         boolean isInShimmer = self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
-        if (c$i_coolDown == 0 && isInShimmer) {
+        if (confluence$item_coolDown == 0 && isInShimmer) {
             ShimmerItemTransmutationEvent.Pre pre = new ShimmerItemTransmutationEvent.Pre(self);
             if (MinecraftForge.EVENT_BUS.post(pre)) {
                 self.getItem().shrink(pre.getShrink());
-                c$setup(self, pre.getCoolDown(), pre.getSpeedY());
-            } else if (c$i_transforming < pre.getTransformTime()) {
-                this.c$i_transforming++;
+                confluence$setup(self, pre.getCoolDown(), pre.getSpeedY());
+            } else if (confluence$item_transforming < pre.getTransformTime()) {
+                this.confluence$item_transforming++;
                 self.addDeltaMovement(ANTI_GRAVITY);
             } else {
                 ShimmerItemTransmutationEvent.Post post = new ShimmerItemTransmutationEvent.Post(self);
@@ -50,27 +50,27 @@ public abstract class ItemEntityMixin implements IItemEntity {
                 List<ItemStack> targets = post.getTargets();
                 self.getItem().shrink(post.getShrink());
                 if (targets == null) {
-                    c$setup(self, post.getCoolDown(), post.getSpeedY());
+                    confluence$setup(self, post.getCoolDown(), post.getSpeedY());
                 } else {
                     for (ItemStack target : targets) {
                         if (PrefixProvider.canInit(target)) PrefixProvider.unknown(target);
                         ItemEntity itemEntity = new ItemEntity(self.level(), self.getX(), self.getY(), self.getZ(), target);
-                        c$setup(itemEntity, post.getCoolDown(), post.getSpeedY());
+                        confluence$setup(itemEntity, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(itemEntity);
                     }
                 }
             }
-        } else if (c$i_coolDown > 0) {
-            this.c$i_coolDown--;
+        } else if (confluence$item_coolDown > 0) {
+            this.confluence$item_coolDown--;
         }
     }
 
     @Unique
-    private static void c$setup(ItemEntity entity, int coolDown, double y) {
+    private static void confluence$setup(ItemEntity entity, int coolDown, double y) {
         entity.setNoGravity(true);
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x, y, motion.z);
-        ((IItemEntity) entity).c$i_setCoolDown(coolDown);
+        ((IItemEntity) entity).confluence$item_setCoolDown(coolDown);
         entity.setGlowingTag(true);
     }
 }

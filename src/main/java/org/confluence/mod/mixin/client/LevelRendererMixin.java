@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
     @Unique
-    private static final float c$size = 10.0F;
+    private static final float confluence$size = 10.0F;
     @Unique
     private static final ResourceLocation NO_MOON = new ResourceLocation(Confluence.MODID, "textures/environment/no_moon.png");
 
@@ -33,10 +33,10 @@ public abstract class LevelRendererMixin {
         if (ClientPacketHandler.getMoonTexture() == null) return;
         RenderSystem.setShaderTexture(0, ClientPacketHandler.getMoonTexture());
         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferbuilder.vertex(matrix4f1, -c$size, -100.0F, c$size).uv(0.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(matrix4f1, c$size, -100.0F, c$size).uv(1.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(matrix4f1, c$size, -100.0F, -c$size).uv(1.0F, 0.0F).endVertex();
-        bufferbuilder.vertex(matrix4f1, -c$size, -100.0F, -c$size).uv(0.0F, 0.0F).endVertex();
+        bufferbuilder.vertex(matrix4f1, -confluence$size, -100.0F, confluence$size).uv(0.0F, 1.0F).endVertex();
+        bufferbuilder.vertex(matrix4f1, confluence$size, -100.0F, confluence$size).uv(1.0F, 1.0F).endVertex();
+        bufferbuilder.vertex(matrix4f1, confluence$size, -100.0F, -confluence$size).uv(1.0F, 0.0F).endVertex();
+        bufferbuilder.vertex(matrix4f1, -confluence$size, -100.0F, -confluence$size).uv(0.0F, 0.0F).endVertex();
         BufferUploader.drawWithShader(bufferbuilder.end());
     }
 

@@ -53,77 +53,77 @@ public abstract class FishingHookMixin implements IFishingHook {
     @Final
     private int luck;
     @Unique
-    private ItemStack c$bait = null;
+    private ItemStack confluence$bait = null;
 
     @Unique
     @Override
-    public void c$setIsLavaHook() {
-        c$getSelf().getEntityData().set(DATA_LAVA, true);
+    public void confluence$setIsLavaHook() {
+        confluence$getSelf().getEntityData().set(DATA_LAVA, true);
     }
 
     @Unique
     @Override
-    public boolean c$isLavaHook() {
-        return c$getSelf().getEntityData().get(DATA_LAVA);
+    public boolean confluence$isLavaHook() {
+        return confluence$getSelf().getEntityData().get(DATA_LAVA);
     }
 
     @Unique
     @Override
-    public @Nullable ItemStack c$getBait() {
-        return c$bait;
+    public @Nullable ItemStack confluence$getBait() {
+        return confluence$bait;
     }
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> isLavaTag(TagKey<Fluid> pTag) {
-        if (c$isLavaHook()) return ModTags.FISHING_ABLE;
+        if (confluence$isLavaHook()) return ModTags.FISHING_ABLE;
         return ModTags.NOT_LAVA;
     }
 
     @Redirect(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private boolean isLavaBlock(BlockState instance, Block block) {
-        if (c$isLavaHook()) return instance.is(block) || instance.is(Blocks.LAVA) || instance.is(ModBlocks.HONEY.get()) || instance.is(ModBlocks.SHIMMER.get());
+        if (confluence$isLavaHook()) return instance.is(block) || instance.is(Blocks.LAVA) || instance.is(ModBlocks.HONEY.get()) || instance.is(ModBlocks.SHIMMER.get());
         return instance.is(block) || instance.is(ModBlocks.HONEY.get()) || instance.is(ModBlocks.SHIMMER.get());
     }
 
     @ModifyArg(method = "getOpenWaterTypeForBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/material/FluidState;is(Lnet/minecraft/tags/TagKey;)Z"))
     private TagKey<Fluid> fluidType(TagKey<Fluid> pTag) {
-        if (c$isLavaHook()) return ModTags.FISHING_ABLE;
+        if (confluence$isLavaHook()) return ModTags.FISHING_ABLE;
         return ModTags.NOT_LAVA;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 0), index = 0)
     private ParticleOptions smokeParticle(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.SMOKE;
+        if (confluence$isInLava()) return ParticleTypes.SMOKE;
         return pType;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 1), index = 0)
     private ParticleOptions flameParticle(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.FLAME;
+        if (confluence$isInLava()) return ParticleTypes.FLAME;
         return pType;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 2), index = 0)
     private ParticleOptions flameParticle2(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.FLAME;
+        if (confluence$isInLava()) return ParticleTypes.FLAME;
         return pType;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 3), index = 0)
     private ParticleOptions smokeParticle2(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.SMOKE;
+        if (confluence$isInLava()) return ParticleTypes.SMOKE;
         return pType;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 4), index = 0)
     private ParticleOptions flameParticle3(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.FLAME;
+        if (confluence$isInLava()) return ParticleTypes.FLAME;
         return pType;
     }
 
     @ModifyArg(method = "catchingFish", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I", ordinal = 5), index = 0)
     private ParticleOptions lavaParticle(ParticleOptions pType) {
-        if (c$isInLava()) return ParticleTypes.LAVA;
+        if (confluence$isInLava()) return ParticleTypes.LAVA;
         return pType;
     }
 
@@ -142,22 +142,22 @@ public abstract class FishingHookMixin implements IFishingHook {
             float bonus = 1.0F;
             for (ItemStack itemStack : inventory.offhand) {
                 if (itemStack.getItem() instanceof Baits.IBait iBait) {
-                    this.c$bait = itemStack;
+                    this.confluence$bait = itemStack;
                     bonus += iBait.getBaitBonus();
                     break;
                 }
-                this.c$bait = null;
+                this.confluence$bait = null;
             }
-            if (c$bait == null) {
+            if (confluence$bait == null) {
                 for (ItemStack itemStack : inventory.items) {
                     if (itemStack.getItem() instanceof Baits.IBait iBait) {
-                        this.c$bait = itemStack;
+                        this.confluence$bait = itemStack;
                         bonus += iBait.getBaitBonus();
                         break;
                     }
                 }
             }
-            if (c$bait != null) fishing.set(fishing.get() * bonus);
+            if (confluence$bait != null) fishing.set(fishing.get() * bonus);
         }
         ((LootParamsAccessor) pParams).setLuck(fishing.floatValue());
         return pParams;
@@ -165,24 +165,24 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private void define(CallbackInfo ci) {
-        c$getSelf().getEntityData().define(DATA_LAVA, false);
+        confluence$getSelf().getEntityData().define(DATA_LAVA, false);
     }
 
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
     private ResourceLocation modifyLoot(ResourceLocation par1) {
-        if (c$isInLava()) return ModLootTables.FISHING_LAVA;
-        if (c$getSelf().getType() == EntityType.FISHING_BOBBER) return par1;
+        if (confluence$isInLava()) return ModLootTables.FISHING_LAVA;
+        if (confluence$getSelf().getType() == EntityType.FISHING_BOBBER) return par1;
         return ModLootTables.FISH;
     }
 
     @Unique
-    private FishingHook c$getSelf() {
+    private FishingHook confluence$getSelf() {
         return (FishingHook) (Object) this;
     }
 
     @Unique
-    private boolean c$isInLava() {
-        FishingHook self = c$getSelf();
+    private boolean confluence$isInLava() {
+        FishingHook self = confluence$getSelf();
         return self.level().getFluidState(self.blockPosition()).is(FluidTags.LAVA);
     }
 }

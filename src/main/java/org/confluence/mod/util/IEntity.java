@@ -1,21 +1,21 @@
 package org.confluence.mod.util;
 
 public interface IEntity {
-    int c$getCthulhuSprintingTime();
+    int confluence$getCthulhuSprintingTime();
 
-    void c$setCthulhuSprintingTime(int amount);
+    void confluence$setCthulhuSprintingTime(int amount);
 
-    default boolean c$isOnCthulhuSprinting() {
-        return c$getCthulhuSprintingTime() > 20;
+    default boolean confluence$isOnCthulhuSprinting() {
+        return confluence$getCthulhuSprintingTime() > 20;
     }
 
-    void c$setShouldRot(boolean bool);
+    void confluence$setShouldRot(boolean bool);
 
-    boolean c$isShouldRot();
+    boolean confluence$isShouldRot();
 
-    void c$e_setCoolDown(int ticks);
+    void confluence$entity_setCoolDown(int ticks);
 
-    void c$setOriginalNoGravity(boolean bool);
+    void confluence$setOriginalNoGravity(boolean bool);
 
     byte HAD_SETUP = -1;
     byte HAS_GRAVITY = 0;

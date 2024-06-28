@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityRendererMixin {
     @Inject(method = "isEntityUpsideDown", at = @At("RETURN"), cancellable = true)
     private static void upsideDown(LivingEntity living, CallbackInfoReturnable<Boolean> cir) {
-        if ((living instanceof LocalPlayer && GravitationHandler.isShouldRot()) || (living instanceof RemotePlayer && ((IEntity)living).c$isShouldRot())) {
+        if ((living instanceof LocalPlayer && GravitationHandler.isShouldRot()) || (living instanceof RemotePlayer && ((IEntity)living).confluence$isShouldRot())) {
             cir.setReturnValue(true);
         }
     }

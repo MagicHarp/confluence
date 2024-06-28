@@ -26,7 +26,7 @@ public abstract class ClientLivingEntityMixin {
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"))
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (motionY > 0.0 && self instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
             self.fallDistance += motionY;
             NetworkHandler.CHANNEL.sendToServer(new FallDistancePacketC2S(self.fallDistance));
@@ -35,7 +35,7 @@ public abstract class ClientLivingEntityMixin {
 
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
-        if (c$getSelf() instanceof Player player) {
+        if (confluence$getSelf() instanceof Player player) {
             if (player.isLocalPlayer() && GravitationHandler.isShouldRot()) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
@@ -45,14 +45,14 @@ public abstract class ClientLivingEntityMixin {
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
-        if (c$getSelf() instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
+        if (confluence$getSelf() instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
             return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
         }
         return vec3;
     }
 
     @Unique
-    private LivingEntity c$getSelf() {
+    private LivingEntity confluence$getSelf() {
         return (LivingEntity) (Object) this;
     }
 }

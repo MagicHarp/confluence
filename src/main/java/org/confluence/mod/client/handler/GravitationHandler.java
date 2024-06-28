@@ -84,7 +84,7 @@ public final class GravitationHandler {
             if (localPlayer == null) return;
             Entity entity = localPlayer.level().getEntity(packet.entityId());
             if (entity != null) {
-                ((IEntity) entity).c$setShouldRot(packet.enabled());
+                ((IEntity) entity).confluence$setShouldRot(packet.enabled());
             }
         });
         context.setPacketHandled(true);

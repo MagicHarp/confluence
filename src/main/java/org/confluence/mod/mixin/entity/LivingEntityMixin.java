@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (self.hasEffect(ModEffects.STONED.get()) || self.hasEffect(ModEffects.SHIMMER.get())) {
             cir.setReturnValue(0.0F);
         } else if (self instanceof Player player) {
@@ -70,7 +70,7 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private int c$getInvulnerableTime(int constant) {
-        if (c$getSelf() instanceof Player player) {
+        if (confluence$getSelf() instanceof Player player) {
             AtomicInteger time = new AtomicInteger(constant);
             player.getCapability(AbilityProvider.CAPABILITY)
                 .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
@@ -81,7 +81,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"), cancellable = true)
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
         else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
         if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
@@ -92,8 +92,8 @@ public abstract class LivingEntityMixin {
 
     @ModifyArg(method = "checkFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"), index = 2)
     private double fall2(double pPosY) {
-        if (c$getSelf() instanceof Player player) {
-            if (PlayerUtils.isServerNotFake(player) && ((IEntity) player).c$isShouldRot()) {
+        if (confluence$getSelf() instanceof Player player) {
+            if (PlayerUtils.isServerNotFake(player) && ((IEntity) player).confluence$isShouldRot()) {
                 return pPosY + getDimensions(player.getPose()).height;
             }
         }
@@ -103,7 +103,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "canStandOnFluid", at = @At("RETURN"), cancellable = true)
     private void standOnFluid(FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
         if (fluidState.isEmpty()) return;
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (self.isCrouching()) {
             cir.setReturnValue(false);
         } else {
@@ -123,7 +123,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
     private Vec3 waterWalk(Vec3 par1) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         FluidState fluidstate = self.level().getFluidState(self.blockPosition());
         FluidType fluidType = fluidstate.getType().getFluidType();
         if (self.getEyeInFluidType() == ForgeMod.EMPTY_TYPE.get()) {
@@ -168,7 +168,7 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private Vec3 c$getInLavaVec(Vec3 par1) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (self.getEyeInFluidType() != ForgeMod.EMPTY_TYPE.get()) return par1;
         if (self.canStandOnFluid(self.level().getFluidState(self.blockPosition()))) {
             AttributeInstance instance = self.getAttribute(Attributes.MOVEMENT_SPEED);
@@ -183,7 +183,7 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
     private void speed(float friction, CallbackInfoReturnable<Float> cir) {
-        if (CuriosUtils.hasCurio(c$getSelf(), CurioItems.MAGILUMINESCENCE.get())) {
+        if (CuriosUtils.hasCurio(confluence$getSelf(), CurioItems.MAGILUMINESCENCE.get())) {
             cir.setReturnValue(cir.getReturnValue() * 1.75F);
         }
     }
@@ -191,7 +191,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
     private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            LivingEntity self = c$getSelf();
+            LivingEntity self = confluence$getSelf();
             AtomicDouble atomic = new AtomicDouble(pDamageAmount);
             CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
                 atomic.addAndGet(iArmorPass.getPassValue()));
@@ -204,7 +204,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
-        LivingEntity self = c$getSelf();
+        LivingEntity self = confluence$getSelf();
         if (self.hasEffect(ModEffects.SHIMMER.get())) return Vec3.ZERO;
         if (self.hasEffect(ModEffects.STONED.get())) return StonedEffect.DOWN;
         return self.hasEffect(ModEffects.CONFUSED.get()) ? vec3.reverse() : vec3;
@@ -212,12 +212,12 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "onChangedBlock", at = @At("TAIL"))
     private void onMoved(BlockPos pPos, CallbackInfo ci) {
-        IFlowerBoots.apply(c$getSelf());
+        IFlowerBoots.apply(confluence$getSelf());
     }
 
     @Inject(method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", at = @At("RETURN"), cancellable = true)
     private void notAttack(LivingEntity pTarget, CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue() && RoyalGel.apply(c$getSelf(), pTarget)) {
+        if (cir.getReturnValue() && RoyalGel.apply(confluence$getSelf(), pTarget)) {
             cir.setReturnValue(false);
         }
     }
@@ -225,12 +225,12 @@ public abstract class LivingEntityMixin {
     @Inject(method = "canFreeze", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
     private void checkFreeze(CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValue()) {
-            cir.setReturnValue(CuriosUtils.noSameCurio(c$getSelf(), CurioItems.HAND_WARMER.get()));
+            cir.setReturnValue(CuriosUtils.noSameCurio(confluence$getSelf(), CurioItems.HAND_WARMER.get()));
         }
     }
 
     @Unique
-    private LivingEntity c$getSelf() {
+    private LivingEntity confluence$getSelf() {
         return (LivingEntity) (Object) this;
     }
 }

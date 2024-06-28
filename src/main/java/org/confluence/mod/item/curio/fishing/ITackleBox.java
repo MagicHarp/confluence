@@ -9,10 +9,10 @@ import org.confluence.mod.util.IFishingHook;
 public interface ITackleBox {
     static void apply(FishingHook hook, Player player) {
         IFishingHook fishingHook = (IFishingHook) hook;
-        ItemStack bait = fishingHook.c$getBait();
+        ItemStack bait = fishingHook.confluence$getBait();
         if (bait == null) return;
         float factor = CuriosUtils.noSameCurio(player, ITackleBox.class) ? 1.0F : 2.0F;
-        if (player.getRandom().nextFloat() < 1.0F / (factor + fishingHook.c$getBonus() / 6.0F)) {
+        if (player.getRandom().nextFloat() < 1.0F / (factor + fishingHook.confluence$getBonus() / 6.0F)) {
             bait.shrink(1);
         }
     }

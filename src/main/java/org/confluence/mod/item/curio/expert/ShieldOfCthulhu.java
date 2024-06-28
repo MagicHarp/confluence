@@ -63,7 +63,7 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
 
     public static boolean isInvul(LivingEntity living) {
         if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) return false;
-        return ((IEntity) living).c$isOnCthulhuSprinting();
+        return ((IEntity) living).confluence$isOnCthulhuSprinting();
     }
 
     private static void sendMsg(LivingEntity living, boolean has) {

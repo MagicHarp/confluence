@@ -31,7 +31,7 @@ public abstract class FishingRodItemMixin {
             );
         }
         if (CuriosUtils.hasCurio(fishingHook.getPlayerOwner(), ILavaproofFishingHook.class)) {
-            ((IFishingHook) fishingHook).c$setIsLavaHook();
+            ((IFishingHook) fishingHook).confluence$setIsLavaHook();
         }
         return fishingHook;
     }

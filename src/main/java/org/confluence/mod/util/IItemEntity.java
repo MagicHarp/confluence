@@ -1,5 +1,5 @@
 package org.confluence.mod.util;
 
 public interface IItemEntity {
-    void c$i_setCoolDown(int ticks);
+    void confluence$item_setCoolDown(int ticks);
 }

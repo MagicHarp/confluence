@@ -5,14 +5,14 @@ import org.confluence.mod.item.fishing.Baits;
 import org.jetbrains.annotations.Nullable;
 
 public interface IFishingHook {
-    void c$setIsLavaHook();
+    void confluence$setIsLavaHook();
 
-    boolean c$isLavaHook();
+    boolean confluence$isLavaHook();
 
-    @Nullable ItemStack c$getBait();
+    @Nullable ItemStack confluence$getBait();
 
-    default float c$getBonus() {
-        ItemStack itemStack = c$getBait();
+    default float confluence$getBonus() {
+        ItemStack itemStack = confluence$getBait();
         if (itemStack != null && itemStack.getItem() instanceof Baits.IBait iBait) {
             return iBait.getBaitBonus();
         }
