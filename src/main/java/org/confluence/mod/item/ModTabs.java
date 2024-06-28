@@ -99,6 +99,7 @@ public final class ModTabs {
                 output.accept(PINK_PACKED_ICE.get());
                 output.accept(PURPLE_ICE.get());
                 output.accept(PURPLE_PACKED_ICE.get());
+                output.accept(MUSHROOM_GRASS_BLOCK.get());
                 // 草药 种子
                 output.accept(ModItems.WATERLEAF.get());
                 output.accept(ModItems.MOONSHINE_GRASS.get());
@@ -140,6 +141,7 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 for (Materials materials : Materials.values()) output.accept(materials.get());
                 output.accept(ModItems.WHOOPIE_CUSHION.get());
+                output.accept(ModItems.JUNGLE_SPORE.get());
             })
             .build());
     // 杂项
@@ -181,6 +183,7 @@ public final class ModTabs {
                 output.accept(SWITCH.get());
                 output.accept(SIGNAL_ADAPTER.get());
                 output.accept(DART_TRAP.get());
+                output.accept(JUNGLE_ROSE.get());
                 output.accept(TIMERS_BLOCK_1_1.get());
                 output.accept(TIMERS_BLOCK_3_1.get());
                 output.accept(TIMERS_BLOCK_5_1.get());

@@ -14,6 +14,7 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
@@ -1536,6 +1537,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModBlocks.LIFE_MUSHROOM.get(), "生命蘑菇");
         add(ModBlocks.JUNGLE_SPORE.get(), "丛林孢子");
         add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
+        add(JUNGLE_ROSE.get(), "丛林玫瑰");
         // 法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
@@ -1736,7 +1738,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(MAGNET_FLOWER.get(), "磁花");
         add(MANA_FLOWER.get(), "魔力花");
         add(MANA_REGENERATION_BAND.get(), "魔力再生手环");
-        add(NATURES_GIFT.get(), "大自然的恩赐");
+        add(CurioItems.NATURES_GIFT.get(), "大自然的恩赐");
+        add(ModBlocks.NATURES_GIFT.get(), "大自然的恩赐");
         add(PHILOSOPHERS_STONE.get(), "点金石");
         add(ROYAL_GEL.get(), "皇家凝胶");
         add(SHIELD_OF_CTHULHU.get(), "克苏鲁护盾");

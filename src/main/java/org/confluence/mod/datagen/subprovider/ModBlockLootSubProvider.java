@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
@@ -25,6 +26,7 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.curio.CurioItems;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -122,6 +124,9 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(PEARL_LOG_BLOCKS.LOG.get());
         dropSelf(PALM_LOG_BLOCKS.LOG.get());
         dropSelf(ASH_LOG_BLOCKS.LOG.get());
+        dropOther(NATURES_GIFT.get(), CurioItems.NATURES_GIFT.get());
+        add(JUNGLE_ROSE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+            .add(LootItem.lootTableItem(JUNGLE_ROSE.get()).when(LootItemRandomChanceCondition.randomChance(0.05f)))));
         // endregion natural
 
         dropSelf(BIG_RUBY_BLOCK.get());

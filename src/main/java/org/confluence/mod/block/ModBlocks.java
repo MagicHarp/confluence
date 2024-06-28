@@ -139,6 +139,9 @@ public final class ModBlocks {
     public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
     public static final RegistryObject<Block> HALLOW_FLOWERS = registerWithItem("hallow_flowers", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣花丛
     public static final RegistryObject<Block> ASH_GRASS = registerWithItem("ash_grass", () -> new BasePlantBlock(Set.of(ASH_GRASS_BLOCK.get())));
+    public static final RegistryObject<Block> NATURES_GIFT = registerWithoutItem("natures_gift", NaturesGiftBlock::new);
+    // TODO: 头盔栏时装，shape，不可放置
+    public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", ()->new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK,Blocks.MOSS_BLOCK,Blocks.CLAY)));
 
     public static final RegistryObject<Block> CRIMSON_THORN = registerWithoutItem("crimson_thorn", () -> new BaseThornBlock(1));
     public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new BaseThornBlock(1));
