@@ -181,6 +181,11 @@ public final class ModTabs {
                 output.accept(SWITCH.get());
                 output.accept(SIGNAL_ADAPTER.get());
                 output.accept(DART_TRAP.get());
+                output.accept(TIMERS_BLOCK_1_1.get());
+                output.accept(TIMERS_BLOCK_3_1.get());
+                output.accept(TIMERS_BLOCK_5_1.get());
+                output.accept(TIMERS_BLOCK_1_2.get());
+                output.accept(TIMERS_BLOCK_1_4.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
                 for (Baits baits : Baits.values()) output.accept(baits.get());
             })

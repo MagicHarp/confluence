@@ -25,7 +25,7 @@ import static org.confluence.mod.block.functional.StateProperties.SIGNAL;
 @SuppressWarnings("deprecation")
 public class SignalAdapterBlock extends AbstractMechanicalBlock {
     public SignalAdapterBlock() {
-        super(Properties.copy(Blocks.TARGET));
+        super(Properties.copy(Blocks.REDSTONE_BLOCK));
         this.registerDefaultState(stateDefinition.any()
             .setValue(SIGNAL, false) // 同时代表了signal和power(强度15)
             .setValue(REVERSE, false)); // false代表signal->power;true代表power->signal

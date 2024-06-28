@@ -1403,6 +1403,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(SIGNAL_ADAPTER.get(), "信号适配器");
         add(WIRE_CUTTER.get(), "钢丝钳");
         add(DART_TRAP.get(), "毒镖机关");
+        add(TIMERS_BLOCK_1_1.get(), "1秒计时器");
+        add(TIMERS_BLOCK_3_1.get(), "3秒计时器");
+        add(TIMERS_BLOCK_5_1.get(), "5秒计时器");
+        add(TIMERS_BLOCK_1_2.get(), "1/2秒计时器");
+        add(TIMERS_BLOCK_1_4.get(), "1/4秒计时器");
 
         // 鱼竿
         add(FishingPoles.HOTLINE_FISHING_HOOK.get(), "熔线钓竿");

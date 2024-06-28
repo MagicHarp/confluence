@@ -823,17 +823,34 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info2","This damage reduction from this item is calculated after defense is applied.");
         add("item.confluence.worm_scarf.info3","The Worm Scarf is always dropped from the Eater of Worlds' Treasure Bag in Expert Mode.");
 
+        add("block.confluence.timers_block_1_1", "1 Second Timer");
+        add("block.confluence.timers_block_3_1", "3 Second Timer");
+        add("block.confluence.timers_block_5_1", "5 Second TImer");
+        add("block.confluence.timers_block_1_2", "1/2 Second Timer");
+        add("block.confluence.timers_block_1_4", "1/4 Second TImer");
+
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;
-            add(block1, toTitleCase(block.getId().getPath()));
+            if (block1 instanceof CustomName customName) {
+                if (customName.getGenName() != null) {
+                    add(block1, customName.getGenName());
+                }
+            } else {
+                add(block1, toTitleCase(block.getId().getPath()));
+            }
         });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
             if (item1 instanceof BlockItem) return;
-            if (item1 instanceof CustomName customName) add(item1, customName.getGenName());
-            else add(item1, toTitleCase(item.getId().getPath()));
+            if (item1 instanceof CustomName customName) {
+                if (customName.getGenName() != null) {
+                    add(item1, customName.getGenName());
+                }
+            } else {
+                add(item1, toTitleCase(item.getId().getPath()));
+            }
         });
         ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
