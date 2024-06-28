@@ -118,7 +118,8 @@ public interface ISpreadable {
         ),
 
         PURE(
-            ModBlocks.ASH_BLOCK,ModBlocks.ASH_GRASS_BLOCK,
+            ModBlocks.ASH_BLOCK, ModBlocks.ASH_GRASS_BLOCK,
+            () -> Blocks.MUD, ModBlocks.MUSHROOM_GRASS_BLOCK,
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, () -> Blocks.GRASS,

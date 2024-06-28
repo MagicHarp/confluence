@@ -131,6 +131,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
 
         dropOther(LIFE_CRYSTAL_BLOCK.get(), Materials.LIFE_CRYSTAL.get());
+        dropOther(MUSHROOM_GRASS_BLOCK.get(), Items.MUD);
 
         for (LogBlocks logBlocks : LogBlocks.LOG_BLOCKS) {
             dropSelf(logBlocks.PLANKS.get());

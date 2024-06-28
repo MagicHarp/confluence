@@ -10,10 +10,13 @@ public class SurfaceRuleData {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource SAND = makeStateRule(Blocks.SAND);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
+    private static final SurfaceRules.RuleSource CLAY = makeStateRule(Blocks.CLAY);
     private static final SurfaceRules.RuleSource CORRUPT_GRASS_BLOCK = makeStateRule(ModBlocks.CORRUPT_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource EBONY_STONE = makeStateRule(ModBlocks.EBONY_STONE.get());
     private static final SurfaceRules.RuleSource HALLOW_GRASS_BLOCK = makeStateRule(ModBlocks.HALLOW_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource ANOTHER_CRIMSON_GRASS_BLOCK = makeStateRule(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get());
+    private static final SurfaceRules.RuleSource MUSHROOM_GRASS_BLOCK = makeStateRule(ModBlocks.MUSHROOM_GRASS_BLOCK.get());
+    private static final SurfaceRules.RuleSource MUD = makeStateRule(Blocks.MUD);
 
     //地狱
     private static final SurfaceRules.RuleSource ASH_BLOCK = makeStateRule(ModBlocks.ASH_BLOCK.get());
@@ -29,6 +32,8 @@ public class SurfaceRuleData {
         SurfaceRules.RuleSource anotherCrimsonGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ANOTHER_CRIMSON_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource corruptStoneSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, EBONY_STONE), EBONY_STONE);
         SurfaceRules.RuleSource ashSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ASH_BLOCK), ASH_BLOCK);
+        SurfaceRules.RuleSource mushroomSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isUnderWaterLevel, MUSHROOM_GRASS_BLOCK), CLAY);
+        SurfaceRules.RuleSource mudSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isUnderWaterLevel, MUD), CLAY);
         SurfaceRules.ConditionSource netherrackNoised = SurfaceRules.noiseCondition(Noises.NETHERRACK, 0.54D);
         return SurfaceRules.sequence(
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.THE_CORRUPTION),
@@ -46,6 +51,10 @@ public class SurfaceRuleData {
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ASH_WASTELAND),
                 SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ashSurface))),
+            SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.GLOWING_MUSHROOM),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, mudSurface),
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,mushroomSurface))),
 
             SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, grassSurface)
         );

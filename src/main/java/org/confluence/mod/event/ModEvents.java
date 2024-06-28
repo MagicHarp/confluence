@@ -87,6 +87,7 @@ public final class ModEvents {
             Regions.register(new TheCorruptionRegion(new ResourceLocation(MODID, "the_corruption"), 1));
             Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 0));
             Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 0));
+            Regions.register(new GlowingMushroomRegion(new ResourceLocation(MODID, "glowing_mushroom"), 1));
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
         });
     }
