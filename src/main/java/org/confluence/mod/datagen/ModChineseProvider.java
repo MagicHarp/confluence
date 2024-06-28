@@ -1391,6 +1391,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(BLUE_WRENCH.get(), "蓝扳手");
         add(GREEN_WRENCH.get(), "绿扳手");
         add(YELLOW_WRENCH.get(), "黄扳手");
+
+        // 功能性方块
+        add(ECHO_BLOCK.get(), "回声块");
+        add(BOULDER.get(), "巨石");
+        add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         add(SWITCH.get(), "开关");
         add(SIGNAL_ADAPTER.get(), "信号适配器");
         add(WIRE_CUTTER.get(), "钢丝钳");
@@ -1605,10 +1610,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.PURPLE_LIGHT_SABER.get(), "陨石紫光剑");
         add(Swords.WHITE_LIGHT_SABER.get(), "陨石白光剑");
 
-        // 功能方块
-        add(ECHO_BLOCK.get(), "回声块");
-        add(BOULDER.get(), "巨石");
-        add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         // 饰品
         add(MECHANICAL_LENS.get(), "机械晶状体");
         add(SPECTRE_GOGGLES.get(), "幽灵护目镜");
