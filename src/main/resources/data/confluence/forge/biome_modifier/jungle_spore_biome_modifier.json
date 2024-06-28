@@ -1,10 +1,7 @@
 {
   "type": "forge:add_features",
   "biomes": [
-    "minecraft:jungle",
-    "minecraft:lush_caves",
-    "minecraft:sparse_jungle",
-    "minecraft:bamboo_jungle"
+    "minecraft:lush_caves"
   ],
   "features": "confluence:jungle_spore",
   "step": "vegetal_decoration"

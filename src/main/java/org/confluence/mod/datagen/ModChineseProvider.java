@@ -279,8 +279,6 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("painting.confluence.magic_harp.title", "MAGIC_HARP");
         add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，看上去傻傻的...");
-        add("painting.confluence.amanita.title", "AMANITA");
-        add("painting.confluence.amanita.author", "BiliBili_蘑菇人怎么还不来，一个蘑菇人镁铝！");
         add("painting.confluence.westernat.title", "WESTERNAT");
         add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC21世纪以来，最具有印象派主义的白桦树绘画!");
         add("painting.confluence.cooobrid.title", "COOOBRID");
@@ -293,6 +291,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.mustard_oasis.author", "BiliBili_芥末Oasis");
         add("painting.confluence.a_pigeon_delight.title", "A_PIGEON_DELIGHT");
         add("painting.confluence.a_pigeon_delight.author", "BiliBili_一只鸽子悦");
+        add("painting.confluence.sheep_mink.title", "SHEEP_MINK");
+        add("painting.confluence.sheep_mink.author", "BiliBili_眠羊敏克");
+        add("painting.confluence.voila.title", "VOILA");
+        add("painting.confluence.voila.author", "BiliBili_风起下片灬");
+        add("painting.confluence.xuanyu_1725.title", "XUANYU");
+        add("painting.confluence.xuanyu_1725.author", "BiliBili_轩宇1725");
+        add("painting.confluence.shadow_end.title", "SHADOW_END");
+        add("painting.confluence.shadow_end.author", "BiliBili_影末子");
+
 
         add("advancements.start.title", "旧的世界，新的旅途！");
         add("advancements.start.descr", "汇合交流的来世");

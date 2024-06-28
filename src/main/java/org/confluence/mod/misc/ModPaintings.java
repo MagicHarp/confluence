@@ -17,6 +17,10 @@ public final class ModPaintings {
     public static final RegistryObject<PaintingVariant> MAKER = PAINTING_VARIANTS.register("maker", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> MUSTARD_OASIS = PAINTING_VARIANTS.register("mustard_oasis", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> A_PIGEON_DELIGHT = PAINTING_VARIANTS.register("a_pigeon_delight", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> SHEEP_MINK = PAINTING_VARIANTS.register("sheep_mink", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> VOILA = PAINTING_VARIANTS.register("voila", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> XUANYU_1725 = PAINTING_VARIANTS.register("xuanyu_1725", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> SHADOW_END = PAINTING_VARIANTS.register("shadow_end", () -> new PaintingVariant(32, 32));
 
     public static void register(IEventBus bus) {
         PAINTING_VARIANTS.register(bus);
