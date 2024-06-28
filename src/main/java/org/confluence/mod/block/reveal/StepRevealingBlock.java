@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.confluence.mod.block.natural.Ores;
 
-public class StepRevealingBlock extends Block {
+public class StepRevealingBlock extends Block implements IRevealed {
     public static final IntegerProperty REVEAL_STEP = IntegerProperty.create("reveal_step", 0, 2);
 
     public StepRevealingBlock(Properties properties) {

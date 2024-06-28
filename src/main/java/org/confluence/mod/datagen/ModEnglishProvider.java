@@ -25,6 +25,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("config.jade.plugin_confluence.jade_mechanical_component", "Mechanical Info");
+
         add("creativetab.confluence.building_blocks", "Confluence | Buildings");
         add("creativetab.confluence.natural_blocks", "Confluence | Naturals");
         add("creativetab.confluence.materials", "Confluence | Materials");
@@ -105,6 +107,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.weather_radio.thunder", "Weather: Thunder, Wind Speed: %s");
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
         add("info.confluence.bait", "Bait Power: %s%%");
+        add("info.confluence.network", "#%s Signal: %s");
 
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");
