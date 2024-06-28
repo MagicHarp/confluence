@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.block.natural.spreadable.MushroomGrassBlock;
 import org.confluence.mod.client.shimmer.DemonTorchColor;
 import org.confluence.mod.client.shimmer.RainbowTorchColor;
 
@@ -32,6 +33,7 @@ public final class ShimmerEvents {
         LightManager.INSTANCE.registerBlockLight(ModBlocks.DEATHWEED.get(), (blockState, blockPos) -> ModBlocks.DEATHWEED.get().getColor(blockState));
         LightManager.INSTANCE.registerBlockLight(ModBlocks.FLAMEFLOWERS.get(), (blockState, blockPos) -> ModBlocks.FLAMEFLOWERS.get().getColor(blockState));
         LightManager.INSTANCE.registerBlockLight(ModBlocks.JUNGLE_SPORE.get(), (blockState, blockPos) -> ModBlocks.JUNGLE_SPORE.get().getColor());
+        LightManager.INSTANCE.registerBlockLight(ModBlocks.MUSHROOM_GRASS_BLOCK.get(), (blockState, blockPos) -> MushroomGrassBlock.LIGHT);
 
         LightManager.INSTANCE.registerItemLight(Torches.DEMON_TORCH.item.get(), itemStack -> DemonTorchColor.INSTANCE);
         LightManager.INSTANCE.registerItemLight(Torches.RAINBOW_TORCH.item.get(), itemStack -> RainbowTorchColor.INSTANCE);
