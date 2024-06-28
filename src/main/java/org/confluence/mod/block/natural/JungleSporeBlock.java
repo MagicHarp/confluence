@@ -24,7 +24,7 @@ public class JungleSporeBlock extends BasePlantBlock{
 
 
     public JungleSporeBlock(){
-        super(Set.of(Blocks.GRASS_BLOCK,Blocks.MOSS_BLOCK), BlockBehaviour.Properties.copy(Blocks.DANDELION).lightLevel(value -> 4));
+        super(Set.of(Blocks.GRASS_BLOCK,Blocks.MOSS_BLOCK,Blocks.CLAY), BlockBehaviour.Properties.copy(Blocks.DANDELION).lightLevel(value -> 4));
     }
 
     public ColorPointLight.Template getColor(){

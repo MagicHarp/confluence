@@ -1,7 +1,7 @@
 {
   "type": "minecraft:random_patch",
   "config": {
-    "tries": 55,
+    "tries": 32,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -9,7 +9,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "confluence:shine_root"
+              "Name": "confluence:moonshine_grass"
             }
           }
         }
