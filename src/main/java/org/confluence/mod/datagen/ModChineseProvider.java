@@ -1239,6 +1239,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
 
+
         //endregion blocks
 
         //region items
@@ -1532,12 +1533,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS_SEED.get(), "寒颤棘种子");
         add(ModItems.SUNFLOWERS_SEED.get(), "太阳花种子");
         add(ModItems.DEATHWEED_SEED.get(), "死亡草种子");
-        add(CORRUPT_GRASS.get(), "腐化草");
-        add(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get(), "猩红饿鬼草");
-        add(ANOTHER_CRIMSON_EYEBALL_GRASS.get(), "猩红眼球草");
-        add(ANOTHER_CRIMSON_GRASS.get(), "猩红草");
-        add(HALLOW_GRASS.get(), "神圣草");
-        add(HALLOW_FLOWERS.get(), "神圣花丛");
+
         add(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");
         add(ModBlocks.GLOWING_MUSHROOM.get(), "发光蘑菇");
@@ -1545,6 +1541,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModBlocks.JUNGLE_SPORE.get(), "丛林孢子");
         add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
         add(JUNGLE_ROSE.get(), "丛林玫瑰");
+        add(CORRUPT_GRASS.get(), "腐化草");
+        add(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get(), "猩红饿鬼草");
+        add(ANOTHER_CRIMSON_EYEBALL_GRASS.get(), "猩红眼球草");
+        add(ANOTHER_CRIMSON_GRASS.get(), "猩红草");
+        add(HALLOW_GRASS.get(), "神圣草");
+        add(HALLOW_FLOWERS.get(), "神圣花丛");
+        add(ModBlocks.NATURES_GIFT.get(), "大自然的恩赐");
         // 法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");
         add(ManaWeapons.AMBER_STAFF.get(), "琥珀法杖");
@@ -1746,7 +1749,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(MANA_FLOWER.get(), "魔力花");
         add(MANA_REGENERATION_BAND.get(), "魔力再生手环");
         add(CurioItems.NATURES_GIFT.get(), "大自然的恩赐");
-        add(ModBlocks.NATURES_GIFT.get(), "大自然的恩赐");
         add(PHILOSOPHERS_STONE.get(), "点金石");
         add(ROYAL_GEL.get(), "皇家凝胶");
         add(SHIELD_OF_CTHULHU.get(), "克苏鲁护盾");
