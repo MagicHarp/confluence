@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 /** @author voila1106 */
 public abstract class BaseHerbBlock extends CropBlock implements CustomModel, CustomItemModel, EntityBlock {
@@ -40,32 +42,14 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
 
-    public static final Map<Block, RegistryObject<? extends Block>> groundHerbMap = new ImmutableMap.Builder<Block, RegistryObject<? extends Block>>()
-        .put(Blocks.GRASS_BLOCK, ModBlocks.SUNFLOWERS)
-        .put(ModBlocks.HALLOW_GRASS_BLOCK.get(), ModBlocks.SUNFLOWERS)
-        .put(Blocks.MOSS_BLOCK, ModBlocks.MOONSHINE_GRASS)
-        .put(Blocks.DIRT, ModBlocks.SHINE_ROOT)
-        .put(Blocks.MUD, ModBlocks.SHINE_ROOT)
-        .put(Blocks.STONE, ModBlocks.SHINE_ROOT)
-        .put(Blocks.DEEPSLATE, ModBlocks.SHINE_ROOT)
-        .put(ModBlocks.CORRUPT_GRASS_BLOCK.get(), ModBlocks.DEATHWEED)
-        .put(ModBlocks.EBONY_STONE.get(), ModBlocks.DEATHWEED)
-        .put(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get(), ModBlocks.DEATHWEED)
-        .put(ModBlocks.ANOTHER_CRIMSON_STONE.get(), ModBlocks.DEATHWEED)
-        // TODO: 邪恶丛林草
-        .put(Blocks.SAND, ModBlocks.WATERLEAF)
-        .put(Blocks.RED_SAND, ModBlocks.WATERLEAF)
-        .put(ModBlocks.PEARL_SAND.get(), ModBlocks.WATERLEAF)
-        .put(ModBlocks.ASH_BLOCK.get(), ModBlocks.FLAMEFLOWERS)
-        .put(ModBlocks.ASH_GRASS_BLOCK.get(), ModBlocks.FLAMEFLOWERS)
-        .put(Blocks.SNOW_BLOCK, ModBlocks.SHIVERINGTHORNS)
-        .put(Blocks.ICE, ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.RED_ICE.get(), ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.RED_PACKED_ICE.get(), ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.PINK_ICE.get(), ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.PINK_PACKED_ICE.get(), ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.PURPLE_ICE.get(), ModBlocks.SHIVERINGTHORNS)
-        .put(ModBlocks.PURPLE_PACKED_ICE.get(), ModBlocks.SHIVERINGTHORNS)
+    public static Map<RegistryObject<? extends Block>, Set<Block>> herbGroundMap = new ImmutableMap.Builder<RegistryObject<? extends Block>, Set<Block>>()
+        .put(ModBlocks.SUNFLOWERS, Set.of(Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK.get()))
+        .put(ModBlocks.MOONSHINE_GRASS, Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK))
+        .put(ModBlocks.SHIVERINGTHORNS, Set.of(Blocks.GRASS_BLOCK, Blocks.ICE, ModBlocks.RED_ICE.get(), ModBlocks.RED_PACKED_ICE.get(), ModBlocks.PINK_PACKED_ICE.get(), ModBlocks.PINK_ICE.get(), ModBlocks.PURPLE_ICE.get(), ModBlocks.PURPLE_PACKED_ICE.get()))
+        .put(ModBlocks.SHINE_ROOT, Set.of(Blocks.DIRT, Blocks.MUD, Blocks.STONE, Blocks.DEEPSLATE))
+        .put(ModBlocks.DEATHWEED, Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get(), ModBlocks.EBONY_STONE.get(), ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get(), ModBlocks.ANOTHER_CRIMSON_STONE.get()))
+        .put(ModBlocks.WATERLEAF, Set.of(Blocks.SAND, Blocks.RED_SAND, ModBlocks.PEARL_SAND.get()))
+        .put(ModBlocks.FLAMEFLOWERS, Set.of(ModBlocks.ASH_BLOCK.get(), ModBlocks.ASH_GRASS_BLOCK.get()))
         .build();
 
     public BaseHerbBlock(){
@@ -78,8 +62,8 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
 
     @Override
     public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-        RegistryObject<? extends Block> reg = groundHerbMap.get(groundState.getBlock());
-        return reg != null && reg.get() == this;
+        Set<Block> blocks = herbGroundMap.get(RegistryObject.create(ForgeRegistries.BLOCKS.getKey(this), ForgeRegistries.BLOCKS));
+        return blocks != null && blocks.contains(groundState.getBlock());
     }
 
     public boolean canBloom(ServerLevel world, BlockState state){

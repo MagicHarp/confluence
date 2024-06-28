@@ -25,11 +25,6 @@ public class MoonshineGrass extends BaseHerbBlock {
 	}
 
 	@Override
-	public boolean mayPlaceOn(@NotNull BlockState groundState, @NotNull BlockGetter worldIn, @NotNull BlockPos pos){
-		return groundState.is(Blocks.GRASS_BLOCK) || groundState.is(Blocks.MOSS_BLOCK);
-	}
-
-	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder){
 		super.createBlockStateDefinition(pBuilder);
 		pBuilder.add(PROP_LIGHT);
