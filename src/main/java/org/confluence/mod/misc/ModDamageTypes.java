@@ -16,6 +16,7 @@ public final class ModDamageTypes {
     public static final ResourceKey<DamageType> FROST_BURN = register("frost_burn");
     public static final ResourceKey<DamageType> STAR_CLOAK = register("star_cloak");
     public static final ResourceKey<DamageType> BOULDER = register("boulder");
+    public static final ResourceKey<DamageType> THORN = register("thorn");
 
     private static ResourceKey<DamageType> register(String id) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Confluence.MODID, id));
