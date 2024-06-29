@@ -1,6 +1,6 @@
 {
 	"credit": "Made by Mesdag",
-	"render_type": "cutout",
+	"render_type": "translucent",
 	"textures": {
 		"5": "confluence:block/air",
 		"inner_top": "confluence:block/timers_inner_top",
