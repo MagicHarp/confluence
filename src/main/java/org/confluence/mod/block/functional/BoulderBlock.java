@@ -2,6 +2,7 @@ package org.confluence.mod.block.functional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -22,6 +24,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 
 public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel {
+    public static final ResourceLocation NORMAL = new ResourceLocation(Confluence.MODID, "boulder");
+
     public BoulderBlock() {
         super(Properties.of());
     }

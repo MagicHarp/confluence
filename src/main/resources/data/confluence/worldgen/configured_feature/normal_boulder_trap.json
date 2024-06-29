@@ -1,0 +1,6 @@
+{
+    "type": "confluence:boulder_trap",
+    "config": {
+        "boulderId": "confluence:boulder"
+    }
+}

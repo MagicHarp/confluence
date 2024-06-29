@@ -23,6 +23,7 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSounds;
 import org.confluence.mod.recipe.ModRecipes;
+import org.confluence.mod.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -56,6 +57,7 @@ public final class Confluence {
         ModSounds.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
+        ModFeatures.FEATURES.register(bus);
         //ASMifier.main(new String[]{"org.confluence.mod.item.curio.movement.Balloon"});
     }
 }

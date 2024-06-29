@@ -1,0 +1,8 @@
+{
+    "type": "forge:add_features",
+    "biomes": "#minecraft:is_overworld",
+    "features": [
+        "confluence:normal_boulder_trap"
+    ],
+    "step": "underground_structures"
+}
