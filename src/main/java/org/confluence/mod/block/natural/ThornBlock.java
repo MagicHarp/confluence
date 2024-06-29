@@ -19,12 +19,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
+import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ThornBlock extends PipeBlock implements CustomModel {
+public class ThornBlock extends PipeBlock implements CustomModel, CustomItemModel {
     private final float amount;
     private static final IntegerProperty PROP_AGE = IntegerProperty.create("age", 0, 7);
 
