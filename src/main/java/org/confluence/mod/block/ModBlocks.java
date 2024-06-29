@@ -143,10 +143,10 @@ public final class ModBlocks {
     // TODO: 头盔栏时装，shape，不可放置
     public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", ()->new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK,Blocks.MOSS_BLOCK,Blocks.CLAY)));
 
-    public static final RegistryObject<Block> CRIMSON_THORN = registerWithoutItem("crimson_thorn", () -> new BaseThornBlock(1));
-    public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new BaseThornBlock(1));
-    public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new BaseThornBlock(1.7f));
-    public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new BaseThornBlock(10));
+    public static final RegistryObject<Block> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new ThornBlock(1));
+    public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new ThornBlock(1));
+    public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f));
+    public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
 
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
 

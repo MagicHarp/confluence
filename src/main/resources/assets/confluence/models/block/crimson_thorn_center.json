@@ -1,0 +1,42 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "texture": "confluence:block/crimson_thorn",
+        "inside": "confluence:block/crimson_thorn",
+        "particle": "confluence:block/crimson_thorn"
+    },
+    "elements": [
+        {
+            "from": [
+                3,
+                3,
+                3
+            ],
+            "to": [
+                13,
+                13,
+                13
+            ],
+            "faces": {
+                "down": {
+                    "texture": "#texture"
+                },
+                "up": {
+                    "texture": "#texture"
+                },
+                "north": {
+                    "texture": "#texture"
+                },
+                "south": {
+                    "texture": "#texture"
+                },
+                "west": {
+                    "texture": "#texture"
+                },
+                "east": {
+                    "texture": "#texture"
+                }
+            }
+        }
+    ]
+}
