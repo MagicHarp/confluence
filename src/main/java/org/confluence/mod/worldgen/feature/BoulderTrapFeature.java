@@ -42,8 +42,8 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
                 Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
                 BlockPos boulderPos = blockPos.atY(range.ceiling());
                 safeSetBlock(level, boulderPos, block.defaultBlockState(), predicate);
-                BlockState pressurePlate = level.isStateAtPosition(blockPos.atY(range.floor()), blockState -> blockState.is(Blocks.STONE)) ?
-                    Blocks.STONE_PRESSURE_PLATE.defaultBlockState() : ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState();
+                BlockState pressurePlate = level.isStateAtPosition(blockPos.atY(range.floor()), blockState -> blockState.is(Blocks.DEEPSLATE)) ?
+                    ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : Blocks.STONE_PRESSURE_PLATE.defaultBlockState();
                 safeSetBlock(level, blockPos.atY(range.floor() + 1), pressurePlate, predicate);
                 BlockPos adapterPos = blockPos.atY(range.floor() - 1);
                 BlockState signalAdapter = ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true);
