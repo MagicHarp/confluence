@@ -7,6 +7,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.Pots;
 import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.ModItems;
@@ -1406,7 +1407,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
-        add(BOULDER.get(), "巨石");
+        add(BoulderBlock.Variant.NORMAL.get(), "巨石");
         add(INSTANTANEOUS_EXPLOSION_TNT.get(), "瞬爆TNT");
         add(SWITCH.get(), "开关");
         add(SIGNAL_ADAPTER.get(), "信号适配器");

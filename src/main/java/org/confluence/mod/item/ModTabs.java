@@ -11,6 +11,7 @@ import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Pots;
 import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -178,7 +179,7 @@ public final class ModTabs {
                 output.accept(ECHO_BLOCK.get());
                 output.accept(DEMON_ALTAR.get());
                 output.accept(CRIMSON_ALTAR.get());
-                output.accept(BOULDER.get());
+                for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
                 output.accept(SWITCH.get());
                 output.accept(SIGNAL_ADAPTER.get());

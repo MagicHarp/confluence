@@ -1,9 +1,12 @@
 package org.confluence.mod.block.functional;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -13,15 +16,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.entity.projectile.BoulderEntity;
+import org.confluence.mod.util.EnumRegister;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
 
 public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel {
     public static final ResourceLocation NORMAL = new ResourceLocation(Confluence.MODID, "boulder");
@@ -75,5 +83,41 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
             entity.targetTo(function.apply(entity));
         }
         level.addFreshEntity(entity);
+    }
+
+    public enum Variant implements EnumRegister<BoulderBlock>, StringRepresentable {
+        NORMAL(0, "boulder", BoulderBlock::new);
+
+        private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
+        public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private final int id;
+        private final String name;
+        private final RegistryObject<BoulderBlock> value;
+
+        Variant(int id, String name, Supplier<BoulderBlock> supplier) {
+            this.id = id;
+            this.name = name;
+            this.value = ModBlocks.registerWithItem(name, supplier);
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public static Variant byId(int pId) {
+            return BY_ID.apply(pId);
+        }
+
+        @Override
+        public @NotNull String getSerializedName() {
+            return name;
+        }
+
+        @Override
+        public RegistryObject<BoulderBlock> getValue() {
+            return value;
+        }
+
+        public static void init() {}
     }
 }

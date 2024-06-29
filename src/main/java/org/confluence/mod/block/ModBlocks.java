@@ -2,13 +2,11 @@ package org.confluence.mod.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.IceBlock;
-import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +16,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.*;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
+import org.confluence.mod.block.natural.MushroomBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.*;
@@ -79,7 +78,6 @@ public final class ModBlocks {
     public static final LogBlocks SPOOKY_LOG_BLOCKS = new LogBlocks("spooky", SPOOKY.SET, SPOOKY.TYPE, false, true);
     // functional block
     public static final RegistryObject<EchoBlock> ECHO_BLOCK = registerWithItem("echo_block", EchoBlock::new);
-    public static final RegistryObject<BoulderBlock> BOULDER = registerWithItem("boulder", BoulderBlock::new);
     public static final RegistryObject<InstantExplosionBlock> INSTANTANEOUS_EXPLOSION_TNT = registerWithItem("instantaneous_explosion_tnt", InstantExplosionBlock::new);
     public static final RegistryObject<SwitchBlock> SWITCH = registerWithItem("switch", SwitchBlock::new);
     public static final RegistryObject<SignalAdapterBlock> SIGNAL_ADAPTER = registerWithItem("signal_adapter", SignalAdapterBlock::new);
@@ -90,7 +88,7 @@ public final class ModBlocks {
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_1_2 = registerWithItem("timers_1_2", () -> new TimersBlock(10)); // 1/2s
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_1_4 = registerWithItem("timers_1_4", () -> new TimersBlock(5)); // 1/4s
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
-        BOULDER.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get(), TIMERS_BLOCK_1_1.get(), TIMERS_BLOCK_3_1.get(), TIMERS_BLOCK_5_1.get(), TIMERS_BLOCK_1_2.get(), TIMERS_BLOCK_1_4.get()).build(null));
+        BoulderBlock.Variant.NORMAL.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get(), TIMERS_BLOCK_1_1.get(), TIMERS_BLOCK_3_1.get(), TIMERS_BLOCK_5_1.get(), TIMERS_BLOCK_1_2.get(), TIMERS_BLOCK_1_4.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
@@ -141,12 +139,14 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ASH_GRASS = registerWithItem("ash_grass", () -> new BasePlantBlock(Set.of(ASH_GRASS_BLOCK.get())));
     public static final RegistryObject<Block> NATURES_GIFT = registerWithoutItem("natures_gift", NaturesGiftBlock::new);
     // TODO: 头盔栏时装，shape，不可放置
-    public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", ()->new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK,Blocks.MOSS_BLOCK,Blocks.CLAY)));
+    public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY)));
 
     public static final RegistryObject<Block> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new ThornBlock(1));
     public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new ThornBlock(1));
     public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f));
     public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
+
+    public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
 
@@ -176,6 +176,7 @@ public final class ModBlocks {
         Pots.init();
         Boxes.init();
         Torches.init();
+        BoulderBlock.Variant.init();
         BLOCKS.register(bus);
         BLOCK_ENTITIES.register(bus);
     }
