@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
+import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -23,7 +25,7 @@ import static org.confluence.mod.block.functional.StateProperties.REVERSE;
 import static org.confluence.mod.block.functional.StateProperties.SIGNAL;
 
 @SuppressWarnings("deprecation")
-public class SignalAdapterBlock extends AbstractMechanicalBlock {
+public class SignalAdapterBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel {
     public SignalAdapterBlock() {
         super(Properties.copy(Blocks.REDSTONE_BLOCK));
         this.registerDefaultState(stateDefinition.any()
