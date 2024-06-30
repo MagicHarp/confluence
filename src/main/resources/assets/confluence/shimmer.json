@@ -179,17 +179,7 @@
     ],
     "Bloom": [
         {
-            "fluid": "confluence:shimmer"
-        },
-        {
             "fluid": "minecraft:lava"
-        }
-    ],
-    "LightBlock": [
-        {
-            "block": "confluence:shimmer",
-            "color": "#shimmer",
-            "radius": 7
         }
     ]
 }

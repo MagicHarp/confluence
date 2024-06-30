@@ -1,4 +1,4 @@
-package org.confluence.mod.client;
+package org.confluence.mod.client.shader;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -18,14 +18,14 @@ import java.io.IOException;
 import static org.confluence.mod.Confluence.MODID;
 
 public final class ModRenderTypes extends RenderStateShard {
-    public static RenderType shimmerStillDynamic;
+    public static RenderType shimmerLiquid;
 
     private ModRenderTypes() {
         super(null, null, null);
     }
 
     public static final ShaderStateShard ENTITY_DYNAMIC_SHADER = new ShaderStateShard(() -> Shaders.entityDynamic);
-    public static final ShaderStateShard BLOCK_DYNAMIC_SHADER = new ShaderStateShard(() -> Shaders.blockDynamic);
+    public static final ShaderStateShard SHIMMER_LIQUID_SHADER = new ShaderStateShard(() -> Shaders.shimmerLiquid);
 
     public static RenderType getEntityDynamic(ResourceLocation... textures) {
         MultiTextureStateShard.Builder builder = MultiTextureStateShard.builder();
@@ -47,18 +47,16 @@ public final class ModRenderTypes extends RenderStateShard {
         );
     }
 
-    public static RenderType getBlockDynamic() {
+    public static RenderType getShimmerLiquid() {
         return RenderType.create(
-            MODID + ":block_dynamic",
+            MODID + ":shimmer_liquid",
             DefaultVertexFormat.BLOCK,
             VertexFormat.Mode.QUADS,
-            2097152, true, true,
+            2097152, true, false,
             RenderType.CompositeState.builder()
                 .setLightmapState(LIGHTMAP)
-                .setShaderState(BLOCK_DYNAMIC_SHADER)
+                .setShaderState(SHIMMER_LIQUID_SHADER)
                 .setTextureState(BLOCK_SHEET_MIPPED)
-                .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                .setOutputState(TRANSLUCENT_TARGET)
                 .createCompositeState(true)
         );
     }
@@ -66,7 +64,7 @@ public final class ModRenderTypes extends RenderStateShard {
     @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class Shaders {
         private static ShaderInstance entityDynamic;
-        private static ShaderInstance blockDynamic;
+        private static ShaderInstance shimmerLiquid;
 
         @SubscribeEvent
         public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
@@ -81,9 +79,9 @@ public final class ModRenderTypes extends RenderStateShard {
             event.registerShader(
                 new ShaderInstance(
                     resourceProvider,
-                    new ResourceLocation(MODID, "rendertype_block_dynamic"),
+                    new ResourceLocation(MODID, "shimmer_liquid"),
                     DefaultVertexFormat.BLOCK),
-                shader -> blockDynamic = shader
+                shader -> shimmerLiquid = shader
             );
         }
     }

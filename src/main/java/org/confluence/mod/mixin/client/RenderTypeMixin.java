@@ -2,7 +2,7 @@ package org.confluence.mod.mixin.client;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.RenderType;
-import org.confluence.mod.client.ModRenderTypes;
+import org.confluence.mod.client.shader.ModRenderTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,13 +18,13 @@ public abstract class RenderTypeMixin {
 
     @Inject(method = "chunkBufferLayers", at = @At("RETURN"), cancellable = true)
     private static void put(CallbackInfoReturnable<List<RenderType>> cir) {
-        if (ModRenderTypes.shimmerStillDynamic == null) {
-            ModRenderTypes.shimmerStillDynamic = ModRenderTypes.getBlockDynamic();
+        if (ModRenderTypes.shimmerLiquid == null) {
+            ModRenderTypes.shimmerLiquid = ModRenderTypes.getShimmerLiquid();
         }
         if (confluence$renderTypes == null) {
             confluence$renderTypes = ImmutableList.<RenderType>builder()
                 .addAll(cir.getReturnValue())
-                .add(ModRenderTypes.shimmerStillDynamic)
+                .add(ModRenderTypes.shimmerLiquid)
                 .build();
         }
         cir.setReturnValue(confluence$renderTypes);
