@@ -20,6 +20,7 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
+import org.confluence.mod.item.food.FoodType;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.GunItems;
@@ -103,11 +104,11 @@ public final class ModItems {
     public static final RegistryObject<Item> SUNFLOWERS = ITEMS.register("sunflowers", HerbItem::new);
     public static final RegistryObject<Item> DEATHWEED = ITEMS.register("deathweed", HerbItem::new);
     // 蘑菇
-    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", ()->new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get()));
-    public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", ()->new MushroomItem(ModBlocks.EBONY_MUSHROOM.get()));
+    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", ()->new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(),0));
+    public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", ()->new MushroomItem(ModBlocks.EBONY_MUSHROOM.get(),0));
     // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
-    public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get()));
-    public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new MushroomItem(ModBlocks.LIFE_MUSHROOM.get()));
+    public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get(),0));
+    public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new MushroomItem(ModBlocks.LIFE_MUSHROOM.get(),50));
     public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new Item(new Item.Properties()));
 
 
