@@ -30,6 +30,7 @@ public class LifeCrystal extends Item {
             if (playerAbility.increaseCrystals() && !level.isClientSide) {
                 itemStack.shrink(1);
                 applyModifier(player, playerAbility);
+                player.heal(4.0F);
                 // todo sound
             }
         });
@@ -42,7 +43,7 @@ public class LifeCrystal extends Item {
         attributeInstance.removeModifier(HEALTH_UUID);
         attributeInstance.addPermanentModifier(new AttributeModifier(
             HEALTH_UUID, "Life Crystal",
-            playerAbility.getCrystals() * 4,
+            playerAbility.getCrystals() * 4.0,
             AttributeModifier.Operation.ADDITION
         ));
     }

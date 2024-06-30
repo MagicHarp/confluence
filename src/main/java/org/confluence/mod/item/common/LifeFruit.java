@@ -30,6 +30,7 @@ public class LifeFruit extends Item {
             if (playerAbility.increaseFruits() && !level.isClientSide) {
                 itemStack.shrink(1);
                 applyModifier(player, playerAbility);
+                player.heal(1.0F);
                 // todo sound
             }
         });
