@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "confluence:block/corrupt_grass"
-    }
+    "": [
+      {
+        "model": "confluence:block/corrupt_grass_0"
+      },
+      {
+        "model": "confluence:block/corrupt_grass_1"
+      },
+      {
+        "model": "confluence:block/corrupt_grass_2"
+      },
+      {
+        "model": "confluence:block/corrupt_grass_3"
+      },
+      {
+        "model": "confluence:block/corrupt_grass_4"
+      }
+    ]
   }
 }

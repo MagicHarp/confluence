@@ -15,7 +15,7 @@
             "apply": {
                 "model": "confluence:block/crimson_thorn_side",
                 "y": 90,
-                "uvlock": true
+                "uvlock": false
             }
         },
         {
@@ -25,7 +25,7 @@
             "apply": {
                 "model": "confluence:block/crimson_thorn_side",
                 "y": 180,
-                "uvlock": true
+                "uvlock": false
             }
         },
         {
@@ -35,7 +35,7 @@
             "apply": {
                 "model": "confluence:block/crimson_thorn_side",
                 "y": 270,
-                "uvlock": true
+                "uvlock": false
             }
         },
         {
@@ -45,7 +45,7 @@
             "apply": {
                 "model": "confluence:block/crimson_thorn_side",
                 "x": 270,
-                "uvlock": true
+                "uvlock": false
             }
         },
         {
@@ -55,13 +55,13 @@
             "apply": {
                 "model": "confluence:block/crimson_thorn_side",
                 "x": 90,
-                "uvlock": true
+                "uvlock": false
             }
         },
         {
             "apply": {
                 "model": "confluence:block/crimson_thorn_center",
-                "uvlock": true
+                "uvlock": false
             }
         }
     ]

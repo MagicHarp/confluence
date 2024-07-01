@@ -1,19 +1,18 @@
 {
 	"variants": {
-		"facing=north": {
-			"model": "confluence:block/forest_pots"
-		},
-		"facing=east": {
-			"model": "confluence:block/forest_pots",
-			"y": 90
-		},
-		"facing=south": {
-			"model": "confluence:block/forest_pots",
-			"y": 180
-		},
-		"facing=west": {
-			"model": "confluence:block/forest_pots",
-			"y": 270
-		}
+		"": [
+			{
+				"model": "confluence:block/pots/forest/forest_pots_0"
+			},
+			{
+				"model": "confluence:block/pots/forest/forest_pots_1"
+			},
+			{
+				"model": "confluence:block/pots/forest/forest_pots_2"
+			},
+			{
+				"model": "confluence:block/pots/forest/forest_pots_3"
+			}
+		]
 	}
 }
