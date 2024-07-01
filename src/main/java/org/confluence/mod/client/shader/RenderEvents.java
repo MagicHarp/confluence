@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,7 +27,7 @@ import org.joml.Matrix4f;
 public final class RenderEvents {
     @SubscribeEvent
     public static void renderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
             RenderType pRenderType = ModRenderTypes.shimmerLiquid;
             LevelRenderer levelRenderer = event.getLevelRenderer();
             Minecraft minecraft = Minecraft.getInstance();
@@ -39,10 +40,35 @@ public final class RenderEvents {
 
             RenderSystem.assertOnRenderThread();
             pRenderType.setupRenderState();
+            LevelRendererAccessor accessor = (LevelRendererAccessor) levelRenderer;
+
+            minecraft.getProfiler().push("translucent_sort");
+            double d0 = pCamX - accessor.getXTransparentOld();
+            double d1 = pCamY - accessor.getYTransparentOld();
+            double d2 = pCamZ - accessor.getZTransparentOld();
+            if (d0 * d0 + d1 * d1 + d2 * d2 > 1.0D) {
+                int j = SectionPos.posToSectionCoord(pCamX);
+                int k = SectionPos.posToSectionCoord(pCamY);
+                int l = SectionPos.posToSectionCoord(pCamZ);
+                boolean flag = j != SectionPos.posToSectionCoord(accessor.getXTransparentOld()) || l != SectionPos.posToSectionCoord(accessor.getZTransparentOld()) || k != SectionPos.posToSectionCoord(accessor.getYTransparentOld());
+                accessor.setXTransparentOld(pCamX);
+                accessor.setYTransparentOld(pCamY);
+                accessor.setZTransparentOld(pCamZ);
+                int i1 = 0;
+
+                for(LevelRenderer.RenderChunkInfo levelrenderer$renderchunkinfo : accessor.getRenderChunksInFrustum()) {
+                    if (i1 < 15 && (flag || levelrenderer$renderchunkinfo.isAxisAlignedWith(j, k, l)) && ((RenderChunkInfoAccessor) levelrenderer$renderchunkinfo).getChunk().resortTransparency(pRenderType, accessor.getChunkRenderDispatcher())) {
+                        ++i1;
+                    }
+                }
+            }
+
+            minecraft.getProfiler().pop();
+
             minecraft.getProfiler().push("filterempty");
             minecraft.getProfiler().popPush(() -> "render_" + pRenderType);
-            ObjectArrayList<LevelRenderer.RenderChunkInfo> renderChunksInFrustum = ((LevelRendererAccessor) levelRenderer).getRenderChunksInFrustum();
-            ObjectListIterator<LevelRenderer.RenderChunkInfo> objectlistiterator = renderChunksInFrustum.listIterator(0);
+            ObjectArrayList<LevelRenderer.RenderChunkInfo> renderChunksInFrustum = accessor.getRenderChunksInFrustum();
+            ObjectListIterator<LevelRenderer.RenderChunkInfo> objectlistiterator = renderChunksInFrustum.listIterator(renderChunksInFrustum.size());
             ShaderInstance shaderinstance = RenderSystem.getShader();
 
             for (int i = 0; i < 12; ++i) {
@@ -94,8 +120,8 @@ public final class RenderEvents {
             shaderinstance.apply();
             Uniform uniform = shaderinstance.CHUNK_OFFSET;
 
-            while (objectlistiterator.hasNext()) {
-                LevelRenderer.RenderChunkInfo levelrenderer$renderchunkinfo1 = objectlistiterator.next();
+            while (objectlistiterator.hasPrevious()) {
+                LevelRenderer.RenderChunkInfo levelrenderer$renderchunkinfo1 = objectlistiterator.previous();
                 ChunkRenderDispatcher.RenderChunk chunkrenderdispatcher$renderchunk = ((RenderChunkInfoAccessor) levelrenderer$renderchunkinfo1).getChunk();
                 if (!chunkrenderdispatcher$renderchunk.getCompiledChunk().isEmpty(pRenderType)) {
                     VertexBuffer vertexbuffer = chunkrenderdispatcher$renderchunk.getBuffer(pRenderType);

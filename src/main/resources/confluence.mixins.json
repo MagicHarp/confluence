@@ -33,6 +33,7 @@
     "client": [
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
+        "client.ChunkRenderDispatcher$RenderChunk$RebuildTaskMixin",
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
         "client.ClientPlayerMixin",

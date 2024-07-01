@@ -52,11 +52,13 @@ public final class ModRenderTypes extends RenderStateShard {
             MODID + ":shimmer_liquid",
             DefaultVertexFormat.BLOCK,
             VertexFormat.Mode.QUADS,
-            2097152, true, false,
+            2097152, true, true,
             RenderType.CompositeState.builder()
                 .setLightmapState(LIGHTMAP)
                 .setShaderState(SHIMMER_LIQUID_SHADER)
                 .setTextureState(BLOCK_SHEET_MIPPED)
+                .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                .setOutputState(TRANSLUCENT_TARGET)
                 .createCompositeState(true)
         );
     }
