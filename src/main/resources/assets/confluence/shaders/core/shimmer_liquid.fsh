@@ -35,10 +35,12 @@ void main() {
     if(perlin_noise3D(pos.xyz) > 0.0){
         diffuse=mix(
             diffuse,
-            perlin_noise3D(pos.xyz) > 0.3?diffuse * abs(rgbColor):vec4(1.0),
+            perlin_noise3D(pos.xyz) > 0.3?diffuse * abs(rgbColor):vec4(1.0, 1.0, 1.0, diffuse.a),
             perlin_noise3D(pos.xyz)
         );
     }
+
+    if(diffuse.a < 0.1)discard;
 
     vec4 color = diffuse * vertexColor * ColorModulator;
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
