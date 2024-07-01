@@ -55,15 +55,15 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     FOREST_POTS("forest_pots", 1.0F, 0.002F),
     TUNDRA_POTS("tundra_pots", 1.25F, 0.002167F),
     SPIDER_NEST_POTS("spider_nest_pots", 3.5F, 0.003676F),
-    UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(4, 10, 4, 12, 11, 12), box(4, 17, 4, 12, 19, 12), box(5, 11, 5, 11, 17, 11), box(3, 1, 3, 13, 3, 13), box(3, 8, 3, 13, 10, 13), box(2, 3, 2, 14, 8, 14))),
-    JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F, Shapes.or(box(3, 1, 3, 13, 13, 13), box(4, 14, 4, 12, 15, 12), box(5, 13, 5, 11, 14, 11), box(4, 0, 4, 12, 1, 12))),
-    MARBLE_CAVE_POTS("marble_cave_pots", 2.0F, 0.002667F, Shapes.or((box(4, 2, 4, 12, 3, 12)), box(5, 1, 5, 11, 2, 11), box(5, 12, 5, 11, 13, 11), box(4, 11, 4, 12, 12, 12), box(4, 13, 4, 12, 14, 12), box(4, 0, 4, 12, 1, 12), box(3, 3, 3, 13, 4, 13), box(2, 4, 2, 14, 10, 14), box(3, 10, 3, 13, 11, 13))),
-    ANOTHER_CRIMSON_POTS("another_crimson_pots", 1.6F, 0.00274F, Shapes.or(box(4, 0, 4, 12, 1, 12), box(5, 11, 5, 11, 12, 11), box(4, 3, 4, 12, 11, 12), box(5, 1, 5, 11, 3, 11))),
-    PYRAMID_POTS("pyramid_pots", 10.0F, 0.008F, Shapes.or(box(2, 2, 2, 14, 13, 14), box(3, 1, 3, 13, 2, 13), box(2, 0, 2, 14, 1, 14), box(3, 13, 3, 13, 15, 13), box(2, 15, 2, 14, 17, 14))),
-    CORRUPTION_POTS("corruption_pots", 1.6F, 0.00274F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14))),
-    DUNGEON_POTS("dungeon_pots", 1.9F, 0.002604F, Shapes.or(box(3, 0, 3, 13, 6, 13), box(3, 15, 3, 13, 16, 13), box(2, 6, 2, 14, 15, 14))),
+    UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F),
+    JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F),
+    MARBLE_CAVE_POTS("marble_cave_pots", 2.0F, 0.002667F),
+    ANOTHER_CRIMSON_POTS("another_crimson_pots", 1.6F, 0.00274F),
+    PYRAMID_POTS("pyramid_pots", 10.0F, 0.008F),
+    CORRUPTION_POTS("corruption_pots", 1.6F, 0.00274F),
+    DUNGEON_POTS("dungeon_pots", 1.9F, 0.002604F),
     UNDERWORLD_POTS("underworld_pots", 2.1F, 0.00274F),
-    LIHZAHRD_POTS("lihzahrd_pots", 4.0F, 0.004F, Shapes.or(box(3, 0, 3, 13, 1, 13), box(4, 1, 4, 12, 3, 12), box(3, 3, 3, 13, 12, 13), box(2, 12, 2, 14, 14, 14)));
+    LIHZAHRD_POTS("lihzahrd_pots", 4.0F, 0.004F);
 
     private final RegistryObject<BasePotsBlock> value;
 
@@ -72,7 +72,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     }
 
     Pots(String id, float moneyRatio, float moneyHoleChance) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, Shapes.or(box(3, 1, 3, 13, 10, 13), box(4, 11, 4, 12, 12, 12), box(5, 10, 5, 11, 11, 11), box(4, 0, 4, 12, 1, 12))));
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, Shapes.or(box(2, 0, 2, 14, 12, 14))));
     }
 
     @Override

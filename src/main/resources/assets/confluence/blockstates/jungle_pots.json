@@ -1,19 +1,15 @@
 {
 	"variants": {
-		"facing=north": {
-			"model": "confluence:block/jungle_pots"
-		},
-		"facing=east": {
-			"model": "confluence:block/jungle_pots",
-			"y": 90
-		},
-		"facing=south": {
-			"model": "confluence:block/jungle_pots",
-			"y": 180
-		},
-		"facing=west": {
-			"model": "confluence:block/jungle_pots",
-			"y": 270
-		}
+		"": [
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_0"
+			},
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_1"
+			},
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_2"
+			}
+		]
 	}
 }
