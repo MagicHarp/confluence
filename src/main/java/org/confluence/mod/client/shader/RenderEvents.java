@@ -27,7 +27,7 @@ import org.joml.Matrix4f;
 public final class RenderEvents {
     @SubscribeEvent
     public static void renderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
             RenderType pRenderType = ModRenderTypes.shimmerLiquid;
             LevelRenderer levelRenderer = event.getLevelRenderer();
             Minecraft minecraft = Minecraft.getInstance();
