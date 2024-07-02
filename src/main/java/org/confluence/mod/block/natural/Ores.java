@@ -67,6 +67,7 @@ public enum Ores implements EnumRegister<Block> {
     RAW_ANOTHER_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
     // 狱石矿
     HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
+    ASH_HELLSTONE("ash_hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
 
     // 钴
     DEEPSLATE_COBALT_ORE("deepslate_cobalt_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
