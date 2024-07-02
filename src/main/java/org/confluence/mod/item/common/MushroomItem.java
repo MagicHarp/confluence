@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MushroomItem extends BlockItem implements CustomModel {
 
-    private final int amount;
+    private final float amount;
 
-    public MushroomItem(Block pBlock, int amount) {
+    public MushroomItem(Block pBlock, float amount) {
         super(pBlock, new Properties());
         this.amount = amount;
     }

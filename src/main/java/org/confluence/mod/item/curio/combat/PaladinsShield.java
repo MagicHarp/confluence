@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -54,12 +55,18 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
         }
     }
 
-    public static float apply(LivingEntity living, float amount) {
+    public static float apply(LivingEntity living, DamageSource damageSource, float amount) {
         if (living instanceof ServerPlayer serverPlayer && !isOwner(serverPlayer)) {
             MutableFloat atomic = new MutableFloat(amount);
             Team team = serverPlayer.getTeam();
             serverPlayer.level().players().stream()
-                .filter(player -> player != serverPlayer && player.getTeam() == team && player.getHealth() / player.getMaxHealth() > 0.25F && isOwner(player) && player.distanceToSqr(serverPlayer) < 1024.0)
+                .filter(player -> player != serverPlayer && // player不是自己
+                    player != damageSource.getEntity() && // player不是给自己造成过伤害的
+                    player.getTeam() == team && // player的队伍与自己的相同
+                    player.getHealth() / player.getMaxHealth() > 0.25F && // player血量大于最大血量的25%
+                    isOwner(player) && // player拥有圣骑士盾
+                    player.distanceToSqr(serverPlayer) < 1024.0 // player与自己的距离在32米内
+                )
                 .min((playerA, playerB) -> (int) (playerA.distanceToSqr(serverPlayer) - playerB.distanceToSqr(serverPlayer))).ifPresent(player -> {
                     float damage = amount * 0.25F;
                     player.hurt(living.damageSources().playerAttack(serverPlayer), damage);

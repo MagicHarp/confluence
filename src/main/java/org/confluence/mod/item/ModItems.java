@@ -20,7 +20,6 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
-import org.confluence.mod.item.food.FoodType;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.GunItems;
@@ -88,13 +87,13 @@ public final class ModItems {
     public static final RegistryObject<WrenchItem> YELLOW_WRENCH = ITEMS.register("yellow_wrench", () -> new WrenchItem(0xFFFF00));
     public static final RegistryObject<WireCutterItem> WIRE_CUTTER = ITEMS.register("wire_cutter", WireCutterItem::new);
     // 草药种子
-    public static final RegistryObject<Item> WATERLEAF_SEED = ITEMS.register("waterleaf_seed", ()->new HerbSeedItem(ModBlocks.WATERLEAF.get()));
-    public static final RegistryObject<Item> FLAMEFLOWERS_SEED = ITEMS.register("flameflowers_seed", ()->new HerbSeedItem(ModBlocks.FLAMEFLOWERS.get()));
-    public static final RegistryObject<Item> MOONSHINE_GRASS_SEED = ITEMS.register("moonshine_grass_seed", ()->new HerbSeedItem(ModBlocks.MOONSHINE_GRASS.get()));
-    public static final RegistryObject<Item> SHINE_ROOT_SEED = ITEMS.register("shine_root_seed", ()->new HerbSeedItem(ModBlocks.SHINE_ROOT.get()));
-    public static final RegistryObject<Item> SHIVERINGTHORNS_SEED = ITEMS.register("shiveringthorns_seed", ()->new HerbSeedItem(ModBlocks.SHIVERINGTHORNS.get()));
-    public static final RegistryObject<Item> SUNFLOWERS_SEED = ITEMS.register("sunflowers_seed", ()->new HerbSeedItem(ModBlocks.SUNFLOWERS.get()));
-    public static final RegistryObject<Item> DEATHWEED_SEED = ITEMS.register("deathweed_seed", ()->new HerbSeedItem(ModBlocks.DEATHWEED.get()));
+    public static final RegistryObject<Item> WATERLEAF_SEED = ITEMS.register("waterleaf_seed", () -> new HerbSeedItem(ModBlocks.WATERLEAF.get()));
+    public static final RegistryObject<Item> FLAMEFLOWERS_SEED = ITEMS.register("flameflowers_seed", () -> new HerbSeedItem(ModBlocks.FLAMEFLOWERS.get()));
+    public static final RegistryObject<Item> MOONSHINE_GRASS_SEED = ITEMS.register("moonshine_grass_seed", () -> new HerbSeedItem(ModBlocks.MOONSHINE_GRASS.get()));
+    public static final RegistryObject<Item> SHINE_ROOT_SEED = ITEMS.register("shine_root_seed", () -> new HerbSeedItem(ModBlocks.SHINE_ROOT.get()));
+    public static final RegistryObject<Item> SHIVERINGTHORNS_SEED = ITEMS.register("shiveringthorns_seed", () -> new HerbSeedItem(ModBlocks.SHIVERINGTHORNS.get()));
+    public static final RegistryObject<Item> SUNFLOWERS_SEED = ITEMS.register("sunflowers_seed", () -> new HerbSeedItem(ModBlocks.SUNFLOWERS.get()));
+    public static final RegistryObject<Item> DEATHWEED_SEED = ITEMS.register("deathweed_seed", () -> new HerbSeedItem(ModBlocks.DEATHWEED.get()));
     // 草药
     public static final RegistryObject<Item> WATERLEAF = ITEMS.register("waterleaf", HerbItem::new);
     public static final RegistryObject<Item> FLAMEFLOWERS = ITEMS.register("flameflowers", HerbItem::new);
@@ -104,12 +103,12 @@ public final class ModItems {
     public static final RegistryObject<Item> SUNFLOWERS = ITEMS.register("sunflowers", HerbItem::new);
     public static final RegistryObject<Item> DEATHWEED = ITEMS.register("deathweed", HerbItem::new);
     // 蘑菇
-    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", ()->new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(),0));
-    public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", ()->new MushroomItem(ModBlocks.EBONY_MUSHROOM.get(),0));
+    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", () -> new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), 0.0F));
+    public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", () -> new MushroomItem(ModBlocks.EBONY_MUSHROOM.get(), 0.0F));
     // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
-    public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", ()->new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get(),0));
-    public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", ()->new MushroomItem(ModBlocks.LIFE_MUSHROOM.get(),30));
-    public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", ()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", () -> new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get(), 0.0F));
+    public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", () -> new MushroomItem(ModBlocks.LIFE_MUSHROOM.get(), 6.0F));
+    public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", () -> new Item(new Item.Properties()));
 
 
     public static void register(IEventBus bus) {
