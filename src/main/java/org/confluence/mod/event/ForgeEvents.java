@@ -59,7 +59,7 @@ public final class ForgeEvents {
 
         amount = IMagicAttack.apply(damageSource, amount);
         amount = IProjectileAttack.apply(damageSource, amount);
-        amount = PaladinsShield.apply(living, amount);
+        amount = PaladinsShield.apply(living, damageSource, amount);
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);
         amount = IFallResistance.apply(living, damageSource, amount);

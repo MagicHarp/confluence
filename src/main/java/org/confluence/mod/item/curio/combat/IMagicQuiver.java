@@ -27,6 +27,7 @@ public interface IMagicQuiver {
                         isEmpty.set(false);
                         if (item == CurioItems.MOLTEN_QUIVER.get()) {
                             hasFire.set(true);
+                            return;
                         }
                     }
                 }

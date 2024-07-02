@@ -31,33 +31,23 @@ public interface EffectInvul {
         return false;
     }
 
-    interface Poison {
-    }
+    interface Poison {}
 
-    interface Blindness {
-    }
+    interface Blindness {}
 
-    interface Slowness {
-    }
+    interface Slowness {}
 
-    interface Weakness {
-    }
+    interface Weakness {}
 
-    interface MiningFatigue {
-    }
+    interface MiningFatigue {}
 
-    interface Nausea {
-    }
+    interface Nausea {}
 
-    interface Hunger {
-    }
+    interface Hunger {}
 
-    interface Wither {
-    }
+    interface Wither {}
 
-    interface Levitation {
-    }
+    interface Levitation {}
 
-    interface Darkness {
-    }
+    interface Darkness {}
 }
