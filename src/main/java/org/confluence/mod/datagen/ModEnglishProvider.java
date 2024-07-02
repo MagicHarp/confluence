@@ -435,7 +435,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.bezoar.info2","It have a Chance to be dropped from Cave Spider.");
         add("item.confluence.black_belt.info","The Black Belt is a accessory that grants a 10% chance to dodge an attack, including instances of damage taken from hazards such as traps and lava. ");
         add("item.confluence.black_belt.info2","It have a Chance to be dropped from Wither Skeleton.");
-        add("item.confluence.blindfold.info","The Blindfold is a immunity accessory that grants the player immunity to the Darkness debuff.");
+        add("item.confluence.blindfold.info","The Blindfold is a immunity accessory that grants the player immunity to the Blindness debuff.");
         add("item.confluence.blindfold.info2","It can be discovered in chests found within Ancient City.");
         add("item.confluence.celestial_stone.info","The Celestial Stone is a accessory crafted from a Moon Stone and a Sun Stone at the Crafting Table");
         add("item.confluence.celestial_stone.info2","It offers the same boosts as its components do, and as such, it is active during both day and night.");
