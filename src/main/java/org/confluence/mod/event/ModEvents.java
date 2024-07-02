@@ -30,6 +30,7 @@ import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
@@ -46,21 +47,21 @@ import static org.confluence.mod.Confluence.MODID;
 public final class ModEvents {
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.BLUE_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.GREEN_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.PINK_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.CORRUPTED_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.DESERT_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.EVIL_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.ICE_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.LAVA_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.LUMINOUS_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.CRIMSON_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.PURPLE_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.RED_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.TROPIC_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.YELLOW_SLIME.get(), Monster.createMonsterAttributes().build());
-        event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build());
+        event.put(ModEntities.BLUE_SLIME.get(), BaseSlime.createSlimeAttributes(4.0F, 0, 16.0F).build());
+        event.put(ModEntities.GREEN_SLIME.get(), BaseSlime.createSlimeAttributes(3.0F, 0, 9.0F).build());
+        event.put(ModEntities.PINK_SLIME.get(), BaseSlime.createSlimeAttributes(2.0F, 2, 97.0F).build());
+        event.put(ModEntities.CORRUPTED_SLIME.get(), Monster.createMonsterAttributes().build()); // 没设置
+        event.put(ModEntities.DESERT_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 0 ,21.0F).build());
+        event.put(ModEntities.EVIL_SLIME.get(), Monster.createMonsterAttributes().build()); // 没设置
+        event.put(ModEntities.ICE_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
+        event.put(ModEntities.LAVA_SLIME.get(), BaseSlime.createSlimeAttributes(10.0F, 2, 30.0F).build());
+        event.put(ModEntities.LUMINOUS_SLIME.get(), Monster.createMonsterAttributes().build()); // 没设置
+        event.put(ModEntities.CRIMSON_SLIME.get(), Monster.createMonsterAttributes().build()); // 没设置
+        event.put(ModEntities.PURPLE_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 1, 25.0F).build());
+        event.put(ModEntities.RED_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 1, 25.0F).build());
+        event.put(ModEntities.TROPIC_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
+        event.put(ModEntities.YELLOW_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
+        event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
     }
 

@@ -243,9 +243,7 @@ public final class ForgeEvents {
         if (mob instanceof DemonEye demonEye) {
             demonEye.setVariant(DemonEyeVariant.random(randomSource));
         } else if (mob instanceof BlackSlime blackSlime) {
-            int size = 2;
-            if (randomSource.nextFloat() < 0.5F * event.getDifficulty().getSpecialMultiplier()) size = 4;
-            blackSlime.setSize(size, true);
+            blackSlime.finalizeSpawn(randomSource, event.getDifficulty());
         }
 //        if (mob instanceof Enemy && event.getSpawnType() != MobSpawnType.SPAWNER && mob.level() instanceof ServerLevel serverLevel) {
 //            for (int i = 0; i < 4; i++) {

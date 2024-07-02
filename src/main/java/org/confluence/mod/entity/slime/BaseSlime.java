@@ -3,6 +3,9 @@ package org.confluence.mod.entity.slime;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,6 +30,13 @@ public class BaseSlime extends Slime {
         ColoredItem.setColor(itemStack, color);
         this.itemStack = itemStack;
         this.color = FloatRGB.fromInteger(color);
+    }
+
+    public static AttributeSupplier.Builder createSlimeAttributes(float attackDamage, int armor, float maxHealth) {
+        return Mob.createMobAttributes()
+            .add(Attributes.ATTACK_DAMAGE, attackDamage)
+            .add(Attributes.ARMOR, armor)
+            .add(Attributes.MAX_HEALTH, maxHealth);
     }
 
     @Override
