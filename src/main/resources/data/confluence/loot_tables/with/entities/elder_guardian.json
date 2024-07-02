@@ -1,15 +1,12 @@
 {
-    "type": "minecraft:chest",
+    "type": "minecraft:entity",
     "pools": [
         {
-            "rolls": {
-                "min": 1,
-                "max": 2
-            },
+            "rolls": 1,
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "confluence:star_cloak",
+                    "name": "confluence:hand_drill",
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
