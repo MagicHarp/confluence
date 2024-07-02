@@ -436,7 +436,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.black_belt.info","The Black Belt is a accessory that grants a 10% chance to dodge an attack, including instances of damage taken from hazards such as traps and lava. ");
         add("item.confluence.black_belt.info2","It have a Chance to be dropped from Wither Skeleton.");
         add("item.confluence.blindfold.info","The Blindfold is a immunity accessory that grants the player immunity to the Darkness debuff.");
-        add("item.confluence.blindfold.info2","It can be discovered in chests found within Woodland Mansion.");
+        add("item.confluence.blindfold.info2","It can be discovered in chests found within Ancient City.");
         add("item.confluence.celestial_stone.info","The Celestial Stone is a accessory crafted from a Moon Stone and a Sun Stone at the Crafting Table");
         add("item.confluence.celestial_stone.info2","It offers the same boosts as its components do, and as such, it is active during both day and night.");
         add("item.confluence.celestial_stone.info3","It can be combined with the Moon Shell to form a Celestial Shell.");
@@ -484,7 +484,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.info","The Frozen Turtle Shell is a The Frozen Turtle Shell is accessory that grants the Ice Barrier buff when equipped for Gives 25% damage reduction as long as their health remains at or below 50%.");
         add("item.confluence.frozen_turtle_shell.info2","When the Turtle died for Freezing chance to dropped this item.");
         add("item.confluence.hand_drill.info","The Hand Drill is an accessory that grants the player immunity to the Mining Fatigue debuff.");
-        add("item.confluence.hand_drill.info2","It can be discovered in chests found within Stronghold.");
+        add("item.confluence.hand_drill.info2","It have a Chance to be dropped from Elder Guardian.");
         add("item.confluence.hero_shield.info","The Hero Shield is a accessory that redirects 25% of damage from players on the same team while above 25% health, similar to the effect of the Paladin's Shield.");
         add("item.confluence.hero_shield.info2","It can be crafted at a Crafting Table with a Paladin's Shield and a Flesh Knuckles.");
         add("item.confluence.holy_water.info","The Explorers Equipment is an accessory that grants the player immunity to the Wither debuff.");
