@@ -23,7 +23,7 @@ public class HealthHudOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (ModConfigs.terraStyleHealth && gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
+        if (!ModConfigs.terraStyleHealth && gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("health");
 
