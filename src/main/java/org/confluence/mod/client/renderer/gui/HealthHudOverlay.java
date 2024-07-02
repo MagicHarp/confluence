@@ -1,0 +1,160 @@
+package org.confluence.mod.client.renderer.gui;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.item.common.LifeFruit;
+import org.confluence.mod.misc.ModConfigs;
+
+import static org.confluence.mod.Confluence.MODID;
+
+public class HealthHudOverlay implements IGuiOverlay {
+    public static final ResourceLocation HEART_SINGLE_FANCY = new ResourceLocation(MODID, "textures/gui/screens/heart_single_fancy.png");
+    public static final ResourceLocation HEART_LEFT = new ResourceLocation(MODID, "textures/gui/screens/heart_left.png");
+    public static final ResourceLocation HEART_MIDDLE = new ResourceLocation(MODID, "textures/gui/screens/heart_middle.png");
+    public static final ResourceLocation HEART_RIGHT_FANCY = new ResourceLocation(MODID, "textures/gui/screens/heart_right_fancy.png");
+    public static final ResourceLocation HEART_RIGHT = new ResourceLocation(MODID, "textures/gui/screens/heart_right.png");
+    public static final ResourceLocation HEART_FILL = new ResourceLocation(MODID, "textures/gui/screens/heart_fill.png");
+
+    @Override
+    public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+        if (ModConfigs.terraStyleHealth && gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
+        gui.setupOverlayRenderState(true, false);
+        gui.getMinecraft().getProfiler().push("health");
+
+        float maxHealth = 0.0F;
+        float currentHealth = 0.0F;
+        float lifeFruitHealth = 0.0F; // 生命果
+
+        Player player = gui.getMinecraft().player;
+        if (player != null) {
+            maxHealth = player.getMaxHealth();
+            currentHealth = player.getHealth();
+            AttributeInstance instance = player.getAttribute(Attributes.MAX_HEALTH);
+            assert instance != null;
+            AttributeModifier modifier = instance.getModifier(LifeFruit.HEALTH_UUID);
+            if (modifier != null) {
+                lifeFruitHealth = (float) modifier.getAmount();
+            }
+        }
+
+        //以下是为了画出ui做的坐标计算
+        int maxHeartCount = ((int) maxHealth) / 4;
+        int currentHealthCount = ((int) currentHealth) / 4;
+        double lastHeart = 0.0d;
+        if (((int) maxHealth) % 4 != 0) {
+            maxHeartCount += 1;
+        }
+        if (((int) currentHealth) % 4 != 0) {
+            currentHealthCount += 1;
+            lastHeart = (currentHealth % 4) / 4;
+        }
+        int count;
+        int heartCount;
+        int smP = maxHeartCount / 10;
+        int heartSmP = currentHealthCount / 10;
+        int move = 0;
+        int heartMove = 0;
+        if (maxHeartCount % 10 != 0) {
+            smP += 1;
+        }
+        int cSmP = smP;
+        if (currentHealthCount % 10 != 0) {
+            heartSmP += 1;
+        }
+        int line = smP * 14;
+        int heartLine = heartSmP * 14;
+
+        //绘制血量槽
+        while (smP > 0) {
+            if (smP > 1) {
+                count = 8;
+            } else if (maxHeartCount % 10 != 0) {
+                count = maxHeartCount % 10 - 2;
+            } else {
+                count = 8;
+            }
+            if (cSmP == 1) {
+                move = (8 - count) * 12;
+            }
+            int setCount = 8 - count;
+            if (maxHeartCount <= 1) {//绘制血量槽左端
+                guiGraphics.blit(HEART_SINGLE_FANCY, screenWidth - 20 - 28 - setCount * 12 + move, 10 + line - smP * 14, 0, 0, 18, 19, 18, 19);
+            } else {
+                guiGraphics.blit(HEART_LEFT, screenWidth - 20 - (count + 1) * 12 - 26 - setCount * 12 + move, 12 + line - smP * 14, 0, 0, 14, 15, 14, 15);
+
+                //绘制血量槽中部
+                if (count >= 1) {
+                    while (count > 0) {
+                        guiGraphics.blit(HEART_MIDDLE, screenWidth - 20 - count * 12 - 24 - setCount * 12 + move, 12 + line - smP * 14, 0, 0, 12, 15, 12, 15);
+                        count -= 1;
+                    }
+                }
+
+                //绘制血量槽右端
+                if (smP == 1) {//按情况判断使用哪种右端材质
+                    guiGraphics.blit(HEART_RIGHT_FANCY, screenWidth - 20 - 28 - setCount * 12 + move, 10 + line - smP * 14, 0, 0, 18, 19, 18, 19);
+                } else {
+                    guiGraphics.blit(HEART_RIGHT, screenWidth - 20 - 24 - setCount * 12 + move, 12 + line - smP * 14, 0, 0, 13, 15, 13, 15);
+                }
+            }
+            smP -= 1;
+        }
+
+        //绘制血量
+        while (heartSmP > 0) {
+            if (heartSmP > 1) {
+                heartCount = 8;
+            } else if (currentHealthCount % 10 != 0) {
+                heartCount = currentHealthCount % 10 - 2;
+            } else {
+                heartCount = 8;
+            }
+            if (heartSmP == 1) {
+                smP = maxHeartCount / 10;
+                if (maxHeartCount % 10 != 0) {
+                    smP += 1;
+                }
+                if (maxHeartCount % 10 != 0) {
+                    count = maxHeartCount % 10 - 2;
+                } else {
+                    count = 8;
+                }
+                if (smP == 1) {
+                    heartMove = (8 - count) * 12;
+                }
+            }
+            int setHeartCount = 8 - heartCount;
+            if (currentHealthCount <= 1) {//绘制血条左端
+                guiGraphics.blit(HEART_FILL, screenWidth - 20 - 28 + 4 - setHeartCount * 12 + heartMove, 10 + heartLine - heartSmP * 14 + 4, 0, 0, 11, 11, 11, 11);
+            } else {
+                if ((currentHealthCount % 10) != 1 || (heartSmP == 1 && lastHeart == 0.0f) || heartSmP >= 2) {
+                    guiGraphics.blit(HEART_FILL, screenWidth - 20 - (heartCount + 1) * 12 - 26 + 2 - setHeartCount * 12 + heartMove, 12 + heartLine - heartSmP * 14 + 2, 0, 0, 11, 11, 11, 11);
+                }
+                //绘制血条中部
+
+                if (heartCount >= 1) {
+                    while (heartCount > 0) {
+                        guiGraphics.blit(HEART_FILL, screenWidth - 20 - heartCount * 12 - 24 - setHeartCount * 12 + heartMove, 12 + heartLine - heartSmP * 14 + 2, 0, 0, 11, 11, 11, 11);
+                        heartCount -= 1;
+                    }
+                }
+
+                //绘制血条右端
+                if (heartSmP == 1 && lastHeart != 0.0f) {
+                    guiGraphics.blit(HEART_FILL, screenWidth - 20 - 24 - setHeartCount * 12 + (int) ((11 - 11 * lastHeart) / 2 + 0.5d) + heartMove, 12 + heartLine - heartSmP * 14 + 2 + (int) ((11 - 11 * lastHeart) / 2 + 0.5d), 0, 0, ((int) (11 * lastHeart)), ((int) (11 * lastHeart)), ((int) (11 * lastHeart)), ((int) (11 * lastHeart)));
+                } else {
+                    guiGraphics.blit(HEART_FILL, screenWidth - 20 - 24 - setHeartCount * 12 + heartMove, 12 + heartLine - heartSmP * 14 + 2, 0, 0, 11, 11, 11, 11);
+                }
+            }
+            heartSmP -= 1;
+        }
+
+        gui.getMinecraft().getProfiler().pop();
+    }
+}

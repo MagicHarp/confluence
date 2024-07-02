@@ -37,7 +37,7 @@ public class LuckyCoin extends BaseCurioItem {
     }
 
     public static void apply(Player player, Entity target) {
-        if (!ModConfigs.dropsMoney) return;
+        if (!ModConfigs.DROP_MONEY.get()) return;
         RandomSource randomSource = player.getRandom();
         if (randomSource.nextFloat() < 0.2F && CuriosUtils.hasCurio(player, LuckyCoin.class)) {
             Item item;

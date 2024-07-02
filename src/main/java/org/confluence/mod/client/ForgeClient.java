@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +28,7 @@ import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.client.MinecraftAccessor;
 import org.confluence.mod.util.ModUtils;
@@ -195,6 +197,13 @@ public final class ForgeClient {
             MinecraftAccessor instance = (MinecraftAccessor) Minecraft.getInstance();
             int delay = instance.getRightClickDelay() - ClientPacketHandler.getRightClickSubtractor();
             instance.setRightClickDelay(Math.max(0, delay));
+        }
+    }
+
+    @SubscribeEvent
+    public static void renderGuiOverlay$pre(RenderGuiOverlayEvent.Pre event) {
+        if (ModConfigs.terraStyleHealth && event.getOverlay() == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
+            event.setCanceled(true);
         }
     }
 }

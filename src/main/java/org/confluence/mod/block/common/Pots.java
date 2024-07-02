@@ -374,7 +374,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         }
 
         private boolean dropMoney(Level level, Vec3 center) {
-            if (!ModConfigs.dropsMoney) return false;
+            if (!ModConfigs.DROP_MONEY.get()) return false;
             float random = level.random.nextFloat();
             float ratio = 1.0F;
             double y = center.y;

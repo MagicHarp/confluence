@@ -5,9 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.confluence.mod.block.ModBlocks;
@@ -42,7 +40,7 @@ public final class Confluence {
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
 
     public Confluence() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
+        ModConfigs.registerCommon();
         GeckoLib.initialize();
         ModFluids.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

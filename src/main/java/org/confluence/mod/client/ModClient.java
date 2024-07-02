@@ -47,13 +47,16 @@ import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRender
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
-import org.confluence.mod.client.renderer.gui.ConfluenceOverlays;
+import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
+import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
+import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.misc.ModArmPoses;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -65,6 +68,7 @@ public final class ModClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            ModConfigs.registerClient();
             ModArmPoses.initialize();
             CuriosClient.registerRenderers();
 
@@ -89,8 +93,9 @@ public final class ModClient {
 
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerBelow(VanillaGuiOverlay.ITEM_NAME.id(), "mana_hud", ConfluenceOverlays.HUD_MANA);
-        event.registerAboveAll("info_hud", ConfluenceOverlays.INFO_HUD);
+        event.registerBelow(VanillaGuiOverlay.ITEM_NAME.id(), "mana_hud", new ManaHudOverlay());
+        event.registerAboveAll("info_hud", new InfoHudOverlay());
+        event.registerAboveAll("health_hud", new HealthHudOverlay());
     }
 
     @SubscribeEvent

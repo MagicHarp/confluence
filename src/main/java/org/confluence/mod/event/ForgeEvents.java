@@ -181,7 +181,7 @@ public final class ForgeEvents {
                 )
             );
 
-            if (ModConfigs.dropsMoney && living instanceof Enemy) {
+            if (ModConfigs.DROP_MONEY.get() && living instanceof Enemy) {
                 Level level = living.level();
                 AttributeInstance attack = living.getAttribute(Attributes.ATTACK_DAMAGE);
                 AttributeInstance armor = living.getAttribute(Attributes.ARMOR);
