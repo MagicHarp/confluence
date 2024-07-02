@@ -211,21 +211,18 @@ public final class ModClient {
     public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
         if (pos == null) return -1;
 
-        int i = Math.abs(pos.getX()) % 12;
-        int k = Math.abs(pos.getZ()) % 12;
-        IntegerRGB x;
-        IntegerRGB z;
+        IntegerRGB x = hallowMixture(Math.abs(pos.getX()) % 12);
+        IntegerRGB y = hallowMixture(Math.abs(pos.getY()) % 12);
+        IntegerRGB z = hallowMixture(Math.abs(pos.getZ()) % 12);
 
-        if (i <= 4) x = IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, i * 0.25F);
-        else if (i <= 8) x = IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (i - 4) * 0.25F);
-        else x = IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (i - 8) * 0.25F);
-
-        if (k <= 4) z = IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, k * 0.25F);
-        else if (k <= 8) z = IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (k - 4) * 0.25F);
-        else z = IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (k - 8) * 0.25F);
-
-        return x.mixture(z, 0.5F).get();
+        return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
     };
+
+    private static IntegerRGB hallowMixture(int m) {
+        if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
+        if (m <= 8) return IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (m - 4) * 0.25F);
+        return IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (m - 8) * 0.25F);
+    }
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
