@@ -3,6 +3,7 @@ package org.confluence.mod.worldgen.feature;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.WorldGenLevel;
@@ -25,6 +26,8 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
+    private static final Direction[] HORIZONTAL = new Direction[]{Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
+
     public BoulderTrapFeature(Codec<Config> pCodec) {
         super(pCodec);
     }
@@ -39,13 +42,19 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
         if (level.isStateAtPosition(blockPos, BlockBehaviour.BlockStateBase::isAir)) {
             Optional<Column> optionalColumn = Column.scan(level, blockPos, config.maxHeight, BlockBehaviour.BlockStateBase::isAir, blockState -> blockState.is(BlockTags.BASE_STONE_OVERWORLD));
             if (optionalColumn.isPresent() && optionalColumn.get() instanceof Column.Range range && range.height() > 4) {
-                Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
+                BlockPos adapterPos = blockPos.atY(range.floor() - 1);
+                for (Direction direction : HORIZONTAL) {
+                    if (level.isStateAtPosition(adapterPos.offset(direction.getNormal()), BlockBehaviour.BlockStateBase::isAir)) {
+                        return false;
+                    }
+                }
+
                 BlockPos boulderPos = blockPos.atY(range.ceiling());
+                Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
                 safeSetBlock(level, boulderPos, block.defaultBlockState(), predicate);
                 BlockState pressurePlate = level.isStateAtPosition(blockPos.atY(range.floor()), blockState -> blockState.is(Blocks.DEEPSLATE)) ?
                     ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : Blocks.STONE_PRESSURE_PLATE.defaultBlockState();
                 safeSetBlock(level, blockPos.atY(range.floor() + 1), pressurePlate, predicate);
-                BlockPos adapterPos = blockPos.atY(range.floor() - 1);
                 BlockState signalAdapter = ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true);
                 safeSetBlock(level, adapterPos, signalAdapter, predicate);
                 AbstractMechanicalBlock.Entity boulder = getEntity(level, boulderPos);

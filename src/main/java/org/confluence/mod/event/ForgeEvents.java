@@ -200,6 +200,7 @@ public final class ForgeEvents {
         }
         if (!living.level().isClientSide) {
             BaseSlime.dropColoredGel(living);
+            BlackSlime.dropColoredGel(living);
         }
     }
 

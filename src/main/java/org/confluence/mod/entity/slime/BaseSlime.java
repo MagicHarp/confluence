@@ -60,8 +60,14 @@ public class BaseSlime extends Slime {
     }
 
     @Override
-    public void setSize(int s, boolean setAttr) {
-        super.setSize(size, setAttr);
+    public void setSize(int pSize, boolean pResetHealth) {
+        int i = Mth.clamp(size, 1, 127);
+        entityData.set(ID_SIZE, i);
+        reapplyPosition();
+        refreshDimensions();
+        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2F + 0.1F * i);
+
+        this.xpReward = i;
     }
 
     @Override

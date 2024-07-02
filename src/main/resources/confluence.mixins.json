@@ -33,7 +33,6 @@
     "client": [
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
-        "client.ChunkRenderDispatcher$RenderChunk$RebuildTaskMixin",
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
         "client.ClientPlayerMixin",
@@ -46,7 +45,6 @@
         "client.MinecraftAccessor",
         "client.MouseHandlerMixin",
         "client.RenderChunkInfoAccessor",
-        "client.RenderTypeMixin",
         "integretion.shimmer.ForgePlatformHelperMixin",
         "integretion.shimmer.LightManagerMixin"
     ]

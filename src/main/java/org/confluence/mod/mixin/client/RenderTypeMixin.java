@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(value = RenderType.class, priority = 10000)
-public abstract class RenderTypeMixin {
+public class RenderTypeMixin { // 移除abstract是标记为待定,所以没有加入mixin.json
     @Unique
     private static List<RenderType> confluence$renderTypes;
 

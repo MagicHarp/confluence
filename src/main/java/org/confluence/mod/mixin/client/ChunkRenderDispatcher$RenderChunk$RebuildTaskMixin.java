@@ -19,13 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.Set;
 
 @Mixin(ChunkRenderDispatcher.RenderChunk.RebuildTask.class)
-public abstract class ChunkRenderDispatcher$RenderChunk$RebuildTaskMixin {
-    @Inject(method = "compile", at= @At(value = "INVOKE", target = "Ljava/util/Set;contains(Ljava/lang/Object;)Z"),locals = LocalCapture.CAPTURE_FAILSOFT)
+public class ChunkRenderDispatcher$RenderChunk$RebuildTaskMixin { // 移除abstract是标记为待定,所以没有加入mixin.json
+    @Inject(method = "compile", at = @At(value = "INVOKE", target = "Ljava/util/Set;contains(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void shimmer(float pX, float pY, float pZ, ChunkBufferBuilderPack pChunkBufferBuilderPack, CallbackInfoReturnable<ChunkRenderDispatcher.RenderChunk.RebuildTask.CompileResults> cir, ChunkRenderDispatcher.RenderChunk.RebuildTask.CompileResults chunkrenderdispatcher$renderchunk$rebuildtask$compileresults, int i, BlockPos blockpos, BlockPos blockpos1, VisGraph visgraph, RenderChunkRegion renderchunkregion, PoseStack posestack, Set<RenderType> set) {
         if (set.contains(ModRenderTypes.shimmerLiquid)) {
             BufferBuilder bufferbuilder1 = pChunkBufferBuilderPack.builder(ModRenderTypes.shimmerLiquid);
             if (!bufferbuilder1.isCurrentBatchEmpty()) {
-                bufferbuilder1.setQuadSorting(VertexSorting.byDistance(pX - (float)blockpos.getX(), pY - (float)blockpos.getY(), pZ - (float)blockpos.getZ()));
+                bufferbuilder1.setQuadSorting(VertexSorting.byDistance(pX - (float) blockpos.getX(), pY - (float) blockpos.getY(), pZ - (float) blockpos.getZ()));
                 chunkrenderdispatcher$renderchunk$rebuildtask$compileresults.transparencyState = bufferbuilder1.getSortState();
             }
         }
