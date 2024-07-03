@@ -67,27 +67,63 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_ADAMANTITE_BLOCK.get());
         dropSelf(Ores.TITANIUM_BLOCK.get());
         dropSelf(Ores.RAW_TITANIUM_BLOCK.get());
+        dropSelf(Ores.CHLOROPHYTE_BLOCK.get());
+        dropSelf(Ores.RAW_CHLOROPHYTE_BLOCK.get());
+        dropSelf(Ores.LUMINITE_BLOCK.get());
+        dropSelf(Ores.RAW_LUMINITE_BLOCK.get());
+        dropSelf(Ores.HELLSTONE_BLOCK.get());
+        dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
 
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
+        add(Ores.PEARL_STONE_TIN_ORE.get(), this::createTinOreDrop);
+        add(Ores.EBONY_STONE_TIN_ORE.get(), this::createTinOreDrop);
+        add(Ores.ANOTHER_CRIMSON_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
+        add(Ores.PEARL_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
+        add(Ores.EBONY_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.DEEPSLATE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
+        add(Ores.PEARL_STONE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
+        add(Ores.EBONY_STONE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
         add(Ores.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
         add(Ores.TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
+        add(Ores.PEARL_STONE_TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
+        add(Ores.EBONY_STONE_TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
+        add(Ores.PEARL_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
+        add(Ores.EBONY_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         // 宝石
         add(Ores.RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
+        add(Ores.PEARL_STONE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
+        add(Ores.EBONY_STONE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.DEEPSLATE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
+        add(Ores.PEARL_STONE_AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
+        add(Ores.EBONY_STONE_AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
         add(Ores.DEEPSLATE_AMBER_ORE.get(), block -> createOreDrop(block, Materials.AMBER.get()));
         add(Ores.TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.PEARL_STONE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.EBONY_STONE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
         add(Ores.DEEPSLATE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
         add(Ores.SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
+        add(Ores.PEARL_STONE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
+        add(Ores.EBONY_STONE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+        add(Ores.PEARL_STONE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+        add(Ores.EBONY_STONE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+        add(Ores.ANOTHER_CRIMSON_STONE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
         add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
 
         add(Ores.METEORITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_METEORITE.get()));
@@ -96,12 +132,14 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
         add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
         add(Ores.HELLSTONE.get(), block -> createOreDrop(block, Materials.RAW_HELLSTONE.get()));
+        add(Ores.ASH_HELLSTONE.get(), block -> createOreDrop(block, Materials.RAW_HELLSTONE.get()));
         add(Ores.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(block, Materials.RAW_COBALT.get()));
         add(Ores.DEEPSLATE_PALLADIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PALLADIUM.get()));
         add(Ores.DEEPSLATE_MITHRIL_ORE.get(), block -> createOreDrop(block, Materials.RAW_MITHRIL.get()));
         add(Ores.DEEPSLATE_ORICHALCUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_ORICHALCUM.get()));
         add(Ores.DEEPSLATE_ADAMANTITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_ADAMANTITE.get()));
         add(Ores.DEEPSLATE_TITANIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_TITANIUM.get()));
+        add(Ores.CHLOROPHYTE_ORE.get(), block -> createOreDrop(block, Materials.RAW_CHLOROPHYTE.get()));
         // endregion ore
         //torch
         for (Torches torch : Torches.values()) {
