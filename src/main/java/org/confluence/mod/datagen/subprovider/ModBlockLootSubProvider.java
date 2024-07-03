@@ -74,14 +74,17 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.HELLSTONE_BLOCK.get());
         dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
 
+        add(Ores.PEARL_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
+        add(Ores.EBONY_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
+        add(Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.PEARL_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.EBONY_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.ANOTHER_CRIMSON_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
-        add(Ores.PEARL_STONE_COPPER_ORE.get(), block -> createOreDrop(block,Items.RAW_COPPER));
-        add(Ores.EBONY_STONE_COPPER_ORE.get(), block -> createOreDrop(block,Items.RAW_COPPER));
-        add(Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.get(), block -> createOreDrop(block,Items.RAW_COPPER));
+        add(Ores.PEARL_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
+        add(Ores.EBONY_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
+        add(Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
         add(Ores.LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.PEARL_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.EBONY_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
@@ -108,6 +111,13 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.EBONY_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
+        // 红石青金石
+        add(Ores.PEARL_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
+        add(Ores.EBONY_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
+        add(Ores.ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
+        add(Ores.PEARL_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
+        add(Ores.EBONY_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
+        add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
         // 宝石
         add(Ores.RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.PEARL_STONE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
@@ -238,6 +248,25 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
     private LootTable.Builder createTinOreDrop(Block block) {
         return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RAW_TIN.get())
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
+            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+        ));
+    }
+    private LootTable.Builder createCopperOreDrop(Block block) {
+        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.RAW_COPPER)
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
+            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+        ));
+    }
+
+    private LootTable.Builder createLazuliOreDrop(Block block) {
+        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.LAPIS_LAZULI)
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
+            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+        ));
+    }
+    private LootTable.Builder createRedstoneOreDrop(Block block) {
+        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE)
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));

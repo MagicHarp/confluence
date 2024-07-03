@@ -101,21 +101,10 @@ public final class ModTabs {
                 output.accept(PURPLE_ICE.get());
                 output.accept(PURPLE_PACKED_ICE.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
-                // 草药 种子
-                output.accept(ModItems.WATERLEAF.get());
-                output.accept(ModItems.MOONSHINE_GRASS.get());
-                output.accept(ModItems.SHINE_ROOT.get());
-                output.accept(ModItems.SHIVERINGTHORNS.get());
-                output.accept(ModItems.SUNFLOWERS.get());
-                output.accept(ModItems.DEATHWEED.get());
-                output.accept(ModItems.FLAMEFLOWERS.get());
-                output.accept(ModItems.WATERLEAF_SEED.get());
-                output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
-                output.accept(ModItems.SHINE_ROOT_SEED.get());
-                output.accept(ModItems.SHIVERINGTHORNS_SEED.get());
-                output.accept(ModItems.SUNFLOWERS_SEED.get());
-                output.accept(ModItems.DEATHWEED_SEED.get());
-                output.accept(ModItems.FLAMEFLOWERS_SEED.get());
+                output.accept(CLOUD_BLOCK.get());
+                output.accept(CUMULONIMBUS_BLOCK.get());
+                output.accept(JUNGLE_HONEYCOMB_BLOCK.get());
+
                 // 蘑菇 草
                 output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());
@@ -128,6 +117,8 @@ public final class ModTabs {
 
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());
+                output.accept(DEMON_ALTAR.get());
+                output.accept(CRIMSON_ALTAR.get());
 
                 for (Pots pots : Pots.values()) output.accept(pots.get());
             })
@@ -166,6 +157,21 @@ public final class ModTabs {
                 output.accept(ModItems.AMBROSIA.get());
                 output.accept(ModItems.GUMMY_WORM.get());
                 output.accept(ModItems.GALAXY_PEARL.get());
+                // 草药 种子
+                output.accept(ModItems.WATERLEAF.get());
+                output.accept(ModItems.MOONSHINE_GRASS.get());
+                output.accept(ModItems.SHINE_ROOT.get());
+                output.accept(ModItems.SHIVERINGTHORNS.get());
+                output.accept(ModItems.SUNFLOWERS.get());
+                output.accept(ModItems.DEATHWEED.get());
+                output.accept(ModItems.FLAMEFLOWERS.get());
+                output.accept(ModItems.WATERLEAF_SEED.get());
+                output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
+                output.accept(ModItems.SHINE_ROOT_SEED.get());
+                output.accept(ModItems.SHIVERINGTHORNS_SEED.get());
+                output.accept(ModItems.SUNFLOWERS_SEED.get());
+                output.accept(ModItems.DEATHWEED_SEED.get());
+                output.accept(ModItems.FLAMEFLOWERS_SEED.get());
                 for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 output.accept(ModItems.CLAM.get());
@@ -174,8 +180,6 @@ public final class ModTabs {
                 output.accept(ModItems.CHRISTMAS_GIFT.get());
                 output.accept(ModItems.RED_ENVELOPE.get());
                 output.accept(ECHO_BLOCK.get());
-                output.accept(DEMON_ALTAR.get());
-                output.accept(CRIMSON_ALTAR.get());
                 for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
                 output.accept(SWITCH.get());

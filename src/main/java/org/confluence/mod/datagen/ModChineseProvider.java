@@ -946,6 +946,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info2", "该物品的伤害减免是在施加防御后计算的。");
         add("item.confluence.worm_scarf.info3", "在专家模式中，蠕虫围巾总是从世界吞噬者的宝藏袋中掉落。");
         //region blocks
+        add(Ores.PEARL_STONE_COAL_ORE.get(), "珍珠石煤矿石");
+        add(Ores.EBONY_STONE_COAL_ORE.get(), "黑檀石煤矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.get(), "猩红石煤矿石");
         add(Ores.TIN_ORE.get(), "锡矿石");
         add(Ores.PEARL_STONE_TIN_ORE.get(), "珍珠石锡矿石");
         add(Ores.EBONY_STONE_TIN_ORE.get(), "黑檀石锡矿石");
@@ -959,6 +962,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.PEARL_STONE_IRON_ORE.get(), "珍珠石铁矿石");
         add(Ores.EBONY_STONE_IRON_ORE.get(), "黑檀石铁矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.get(), "猩红石铁矿石");
+        add(Ores.LEAD_ORE.get(), "铅矿石");
         add(Ores.PEARL_STONE_LEAD_ORE.get(), "珍珠石铅矿石");
         add(Ores.EBONY_STONE_LEAD_ORE.get(), "黑檀石铅矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE.get(), "猩红石铅矿石");
@@ -1020,6 +1024,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.PEARL_STONE_DIAMOND_ORE.get(), "珍珠石钻石矿石");
         add(Ores.EBONY_STONE_DIAMOND_ORE.get(), "黑檀石钻石矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.get(), "猩红石钻石矿石");
+        add(Ores.PEARL_STONE_LAPIS_ORE.get(), "珍珠石青金石矿石");
+        add(Ores.EBONY_STONE_LAPIS_ORE.get(), "黑檀石青金石矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), "猩红石青金石矿石");
+        add(Ores.PEARL_STONE_REDSTONE_ORE.get(), "珍珠石红石矿石");
+        add(Ores.EBONY_STONE_REDSTONE_ORE.get(), "黑檀石红石矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), "猩红石红石矿石");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.RAW_METEORITE_BLOCK.get(), "粗陨石块");
         add(Ores.METEORITE_BLOCK.get(), "陨石块");
@@ -1223,6 +1233,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶");
         add(CRIMSON_ALTAR.get(), "猩红祭坛");
         add(DEMON_ALTAR.get(), "恶魔祭坛");
+        add(CLOUD_BLOCK.get(), "云块");
+        add(CUMULONIMBUS_BLOCK.get(), "积雨云块");
+        add(JUNGLE_HONEYCOMB_BLOCK.get(), "丛林蜂巢");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");

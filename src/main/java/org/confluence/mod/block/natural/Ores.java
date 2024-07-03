@@ -14,16 +14,24 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum Ores implements EnumRegister<Block> {
-    TIN_ORE("tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
-    PEARL_STONE_TIN_ORE("pearl_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
-    EBONY_STONE_TIN_ORE("ebony_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
-    ANOTHER_CRIMSON_STONE_TIN_ORE("another_crimson_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    PEARL_STONE_COAL_ORE("pearl_stone_coal_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_ORE))),
+    EBONY_STONE_COAL_ORE("ebony_stone_coal_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_ORE))),
+    ANOTHER_CRIMSON_STONE_COAL_ORE("another_crimson_stone_coal_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_ORE))),
+
     PEARL_STONE_COPPER_ORE("pearl_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
     EBONY_STONE_COPPER_ORE("ebony_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
     ANOTHER_CRIMSON_STONE_COPPER_ORE("another_crimson_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    ANOTHER_CRIMSON_STONE_TIN_ORE("another_crimson_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    TIN_ORE("tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    PEARL_STONE_TIN_ORE("pearl_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    EBONY_STONE_TIN_ORE("ebony_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+
     DEEPSLATE_TIN_ORE("deepslate_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE))),
     RAW_TIN_BLOCK("raw_tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK))),
     TIN_BLOCK("tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
+    PEARL_STONE_IRON_ORE("pearl_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    EBONY_STONE_IRON_ORE("ebony_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    ANOTHER_CRIMSON_STONE_IRON_ORE("another_crimson_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     LEAD_ORE("lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
@@ -32,9 +40,7 @@ public enum Ores implements EnumRegister<Block> {
     ANOTHER_CRIMSON_STONE_LEAD_ORE("another_crimson_stone_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     DEEPSLATE_LEAD_ORE("deepslate_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
-    PEARL_STONE_IRON_ORE("pearl_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    EBONY_STONE_IRON_ORE("ebony_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    ANOTHER_CRIMSON_STONE_IRON_ORE("another_crimson_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+
     RAW_LEAD_BLOCK("raw_lead_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     LEAD_BLOCK("lead_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
 
@@ -67,6 +73,7 @@ public enum Ores implements EnumRegister<Block> {
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
     RAW_METEORITE_BLOCK("raw_meteorite_block", MeteoriteOre::new),
     METEORITE_BLOCK("meteorite_block", MeteoriteOre::new),
+
     //绿宝石
     PEARL_STONE_EMERALD_ORE("pearl_stone_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
     EBONY_STONE_EMERALD_ORE("ebony_stone_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
@@ -105,6 +112,14 @@ public enum Ores implements EnumRegister<Block> {
     EBONY_STONE_SAPPHIRE_ORE("ebony_stone_sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     ANOTHER_CRIMSON_STONE_SAPPHIRE_ORE("another_crimson_stone_sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     DEEPSLATE_SAPPHIRE_ORE("deepslate_sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    //青金石矿
+    PEARL_STONE_LAPIS_ORE("pearl_stone_lapis_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.LAPIS_ORE))),
+    EBONY_STONE_LAPIS_ORE("ebony_stone_lapis_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.LAPIS_ORE))),
+    ANOTHER_CRIMSON_STONE_LAPIS_ORE("another_crimson_stone_lapis_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.LAPIS_ORE))),
+    //红石矿
+    PEARL_STONE_REDSTONE_ORE("pearl_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
+    EBONY_STONE_REDSTONE_ORE("ebony_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
+    ANOTHER_CRIMSON_STONE_REDSTONE_ORE("another_crimson_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
     // 魔矿
     EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     PEARL_STONE_EBONY_ORE("pearl_stone_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
@@ -119,20 +134,24 @@ public enum Ores implements EnumRegister<Block> {
     EBONY_STONE_ANOTHER_CRIMSON_ORE("ebony_stone_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     ANOTHER_CRIMSON_STONE_ANOTHER_CRIMSON_ORE("another_crimson_stone_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     DEEPSLATE_ANOTHER_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
-    ANOTHER_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     RAW_ANOTHER_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    ANOTHER_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+
     // 叶绿矿
     CHLOROPHYTE_ORE("chlorophyte_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     RAW_CHLOROPHYTE_BLOCK("raw_chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+
     // 夜明矿
-    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     RAW_LUMINITE_BLOCK("raw_luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+
     // 狱石矿
     HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     ASH_HELLSTONE("ash_hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
-    HELLSTONE_BLOCK("hellstone_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_HELLSTONE_BLOCK("raw_hellstone_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
+    HELLSTONE_BLOCK("hellstone_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
+
 
     // 钴
     DEEPSLATE_COBALT_ORE("deepslate_cobalt_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),

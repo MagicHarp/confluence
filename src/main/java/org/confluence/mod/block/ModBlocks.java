@@ -142,7 +142,11 @@ public final class ModBlocks {
     public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new ThornBlock(1));
     public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f));
     public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
-
+    // 云块
+    public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
+    public static final RegistryObject<Block> CUMULONIMBUS_BLOCK = registerWithItem("cumulonimbus_block", CumulonimbusBlock::new);
+    // 丛林蜂巢
+    public static final RegistryObject<Block> JUNGLE_HONEYCOMB_BLOCK = registerWithItem("jungle_honeycomb_block", JungleHoneycomBlock::new);
 
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
