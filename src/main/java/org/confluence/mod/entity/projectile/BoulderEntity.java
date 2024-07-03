@@ -33,6 +33,7 @@ public class BoulderEntity extends Projectile {
     public static final float SEARCH_RANGE = 31.5F;
     public float rotateO;
     public float rotate;
+    public boolean isVertical = false;
 
     public BoulderEntity(EntityType<BoulderEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -85,7 +86,14 @@ public class BoulderEntity extends Projectile {
         } else {
             onHitEntity((EntityHitResult) hitResult);
         }
-        if (getDeltaMovement().length() < 0.007) remove();
+        if (getDeltaMovement().length() < 0.007) {
+            if (isVertical) {
+                targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
+                this.isVertical = false;
+            }else {
+                remove();
+            }
+        }
     }
 
     @Override
