@@ -2,7 +2,6 @@ package org.confluence.mod.item.common;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 public class MushroomItem extends BlockItem implements CustomModel {
 
     private final float amount;
-    Entity entity;
 
     public MushroomItem(Block pBlock, float amount) {
         super(pBlock, new Properties());
