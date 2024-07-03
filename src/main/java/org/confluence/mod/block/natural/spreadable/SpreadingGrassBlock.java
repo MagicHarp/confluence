@@ -7,10 +7,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.datagen.limit.ICubeBottomTop;
 import org.jetbrains.annotations.NotNull;
 
-public class SpreadingGrassBlock extends SpreadingBlock implements ICubeBottomTop {
+public class SpreadingGrassBlock extends SpreadingBlock implements  CustomModel {
     public SpreadingGrassBlock(Type type, Properties properties) {
         super(type, properties);
     }

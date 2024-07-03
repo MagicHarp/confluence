@@ -9,9 +9,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-public class SpreadingSandBlock extends SandBlock implements ISpreadable {
+public class SpreadingSandBlock extends SandBlock implements ISpreadable, CustomModel {
     private final Type type;
 
     public SpreadingSandBlock(Type type, int color, Properties properties) {
