@@ -147,8 +147,8 @@ public enum Ores implements EnumRegister<Block> {
     LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
 
     // 狱石矿
-    HELLSTONE("hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
-    ASH_HELLSTONE("ash_hellstone", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
+    HELLSTONE("hellstone", HellStoneBlock::new),
+    ASH_HELLSTONE("ash_hellstone", HellStoneBlock::new),
     RAW_HELLSTONE_BLOCK("raw_hellstone_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     HELLSTONE_BLOCK("hellstone_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
 
