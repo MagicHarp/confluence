@@ -66,12 +66,9 @@ public interface ISpreadable {
             () -> Blocks.SAND, ModBlocks.PEARL_SAND,
             () -> Blocks.GRASS, ModBlocks.HALLOW_GRASS,
             () -> Blocks.TALL_GRASS, ModBlocks.HALLOW_GRASS,
-            () -> Blocks.FERN, ModBlocks.HALLOW_FLOWERS,
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, ModBlocks.HALLOW_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS, ModBlocks.HALLOW_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_EYEBALL_GRASS, ModBlocks.HALLOW_GRASS,
             ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS
         ),
 
@@ -82,15 +79,12 @@ public interface ISpreadable {
             () -> Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
             () -> Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND,
             () -> Blocks.GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            () -> Blocks.TALL_GRASS, ModBlocks.ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS,
-            () -> Blocks.FERN, ModBlocks.ANOTHER_CRIMSON_EYEBALL_GRASS,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
             ModBlocks.GLOWING_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
             ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
             ModBlocks.JUNGLE_SPORE, ModBlocks.ANOTHER_CRIMSON_GRASS,
             ModBlocks.CORRUPT_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.HALLOW_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.HALLOW_FLOWERS, ModBlocks.ANOTHER_CRIMSON_GRASS
+            ModBlocks.HALLOW_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS
         ),
 
         CORRUPT(
@@ -105,11 +99,8 @@ public interface ISpreadable {
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.EBONY_MUSHROOM,
             ModBlocks.LIFE_MUSHROOM, ModBlocks.EBONY_MUSHROOM,
             ModBlocks.JUNGLE_SPORE, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_EYEBALL_GRASS, ModBlocks.CORRUPT_GRASS,
             ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.HALLOW_GRASS, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.HALLOW_FLOWERS, ModBlocks.CORRUPT_GRASS
+            ModBlocks.HALLOW_GRASS, ModBlocks.CORRUPT_GRASS
         ),
 
         GLOWING(
@@ -123,11 +114,8 @@ public interface ISpreadable {
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, () -> Blocks.GRASS,
-            ModBlocks.ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS, () -> Blocks.GRASS,
-            ModBlocks.ANOTHER_CRIMSON_EYEBALL_GRASS, () -> Blocks.GRASS,
             ModBlocks.ANOTHER_CRIMSON_GRASS, () -> Blocks.GRASS,
             ModBlocks.HALLOW_GRASS, () -> Blocks.GRASS,
-            ModBlocks.HALLOW_FLOWERS, () -> Blocks.GRASS,
             ModBlocks.ANOTHER_CRIMSON_STONE, () -> Blocks.STONE,
             ModBlocks.ANOTHER_CRIMSON_SAND, () -> Blocks.SAND,
             ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,

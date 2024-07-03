@@ -123,11 +123,8 @@ public final class ModTabs {
                 output.accept(ModItems.LIFE_MUSHROOM.get());
                 output.accept(CORRUPT_GRASS.get());
                 output.accept(ASH_GRASS.get());
-                output.accept(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get());
-                output.accept(ANOTHER_CRIMSON_EYEBALL_GRASS.get());
                 output.accept(ANOTHER_CRIMSON_GRASS.get());
                 output.accept(HALLOW_GRASS.get());
-                output.accept(HALLOW_FLOWERS.get());
 
                 output.accept(THIN_ICE_BLOCK.get());
                 output.accept(CRISPY_HONEY_BLOCK.get());

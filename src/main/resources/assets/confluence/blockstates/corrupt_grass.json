@@ -2,19 +2,24 @@
   "variants": {
     "": [
       {
-        "model": "confluence:block/corrupt_grass_0"
+        "model": "confluence:block/corrupt_grass_0",
+        "weight": 10
       },
       {
-        "model": "confluence:block/corrupt_grass_1"
+        "model": "confluence:block/corrupt_grass_1",
+        "weight": 10
       },
       {
-        "model": "confluence:block/corrupt_grass_2"
+        "model": "confluence:block/corrupt_grass_2",
+        "weight": 10
       },
       {
-        "model": "confluence:block/corrupt_grass_3"
+        "model": "confluence:block/corrupt_grass_3",
+        "weight": 10
       },
       {
-        "model": "confluence:block/corrupt_grass_4"
+        "model": "confluence:block/corrupt_grass_4",
+        "weight": 1
       }
     ]
   }

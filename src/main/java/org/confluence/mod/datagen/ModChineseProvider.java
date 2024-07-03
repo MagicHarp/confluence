@@ -1591,11 +1591,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
         add(JUNGLE_ROSE.get(), "丛林玫瑰");
         add(CORRUPT_GRASS.get(), "腐化草");
-        add(ANOTHER_CRIMSON_HUNGRY_GHOST_GRASS.get(), "猩红饿鬼草");
-        add(ANOTHER_CRIMSON_EYEBALL_GRASS.get(), "猩红眼球草");
         add(ANOTHER_CRIMSON_GRASS.get(), "猩红草");
         add(HALLOW_GRASS.get(), "神圣草");
-        add(HALLOW_FLOWERS.get(), "神圣花丛");
         add(ModBlocks.NATURES_GIFT.get(), "大自然的恩赐");
         // 法杖
         add(ManaWeapons.RUBY_STAFF.get(), "红玉法杖");

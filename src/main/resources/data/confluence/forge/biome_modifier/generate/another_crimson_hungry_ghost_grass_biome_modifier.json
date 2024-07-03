@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "confluence:another_crimson",
-  "features": "confluence:another_crimson_hungry_ghost_grass",
-  "step": "vegetal_decoration"
-}
