@@ -23,10 +23,10 @@ public class GlowingMushroomRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
         new ParameterPointListBuilder()
-            .temperature(Temperature.FULL_RANGE)
-            .humidity(Humidity.FULL_RANGE)
-            .continentalness(Continentalness.INLAND)
-            .erosion(Erosion.EROSION_4, Erosion.EROSION_6)
+            .temperature(Temperature.UNFROZEN)
+            .humidity(Humidity.NEUTRAL)
+            .continentalness(Continentalness.MUSHROOM_FIELDS)
+            .erosion(Erosion.EROSION_1, Erosion.EROSION_2)
             .depth(Climate.Parameter.span(0.75f,1.5f))
             .weirdness(Weirdness.MID_SLICE_VARIANT_ASCENDING)
             .build().forEach(point -> builder.add(point, ModBiomes.GLOWING_MUSHROOM));
