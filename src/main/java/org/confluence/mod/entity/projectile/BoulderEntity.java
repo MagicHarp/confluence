@@ -5,6 +5,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -33,7 +36,11 @@ public class BoulderEntity extends Projectile {
     public static final float SEARCH_RANGE = 31.5F;
     public float rotateO;
     public float rotate;
-    public boolean isVertical = false;
+    public static final EntityDataAccessor<Boolean> isVertical = SynchedEntityData.defineId(BoulderEntity.class,EntityDataSerializers.BOOLEAN);
+
+    public boolean isNoGravity() {
+        return this.entityData.get(isVertical);
+    }
 
     public BoulderEntity(EntityType<BoulderEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -87,9 +94,9 @@ public class BoulderEntity extends Projectile {
             onHitEntity((EntityHitResult) hitResult);
         }
         if (getDeltaMovement().length() < 0.007) {
-            if (isVertical) {
+            if (isNoGravity()) {
                 targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
-                this.isVertical = false;
+                entityData.set(isVertical,false);
             }else {
                 remove();
             }
@@ -124,7 +131,9 @@ public class BoulderEntity extends Projectile {
     }
 
     @Override
-    protected void defineSynchedData() {}
+    protected void defineSynchedData() {
+        entityData.define(isVertical,false);
+    }
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag pCompound) {}

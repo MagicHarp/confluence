@@ -31,6 +31,7 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
+
 public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel {
     public static final ResourceLocation NORMAL = new ResourceLocation(Confluence.MODID, "boulder");
 
@@ -80,10 +81,10 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
         Vec3 position = new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         BoulderEntity entity = new BoulderEntity(level, position);
         if (level.getBlockState(pos.below()).isAir()) {
-            entity.isVertical = true;
+            entity.getEntityData().set(BoulderEntity.isVertical,true);
         }else {
             entity.targetTo(function.apply(entity));
-            entity.isVertical = false;
+            entity.getEntityData().set(BoulderEntity.isVertical,false);
         }
         level.addFreshEntity(entity);
     }
