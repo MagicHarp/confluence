@@ -55,6 +55,8 @@ public enum Ores implements EnumRegister<Block> {
     PLATINUM_BLOCK("platinum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK))),
     // 陨铁
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
+    RAW_METEORITE_BLOCK("raw_meteorite_block", MeteoriteOre::new),
+    METEORITE_BLOCK("meteorite_block", MeteoriteOre::new),
     //红玉矿
     RUBY_ORE("ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     PEARL_STONE_RUBY_ORE("pearl_stone_ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
