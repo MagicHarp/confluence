@@ -28,7 +28,7 @@
     "spawners": {
         "type": "confluence:blue_slime",
         "weight": 60,
-        "minCount": 3,
-        "maxCount": 3
+        "minCount": 2,
+        "maxCount": 4
     }
 }
