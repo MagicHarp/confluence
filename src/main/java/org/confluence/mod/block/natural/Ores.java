@@ -18,15 +18,23 @@ public enum Ores implements EnumRegister<Block> {
     PEARL_STONE_TIN_ORE("pearl_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
     EBONY_STONE_TIN_ORE("ebony_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
     ANOTHER_CRIMSON_STONE_TIN_ORE("another_crimson_stone_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    PEARL_STONE_COPPER_ORE("pearl_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    EBONY_STONE_COPPER_ORE("ebony_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
+    ANOTHER_CRIMSON_STONE_COPPER_ORE("another_crimson_stone_copper_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE))),
     DEEPSLATE_TIN_ORE("deepslate_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE))),
     RAW_TIN_BLOCK("raw_tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_COPPER_BLOCK))),
     TIN_BLOCK("tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
 
     LEAD_ORE("lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+
     PEARL_STONE_LEAD_ORE("pearl_stone_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     EBONY_STONE_LEAD_ORE("ebony_stone_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     ANOTHER_CRIMSON_STONE_LEAD_ORE("another_crimson_stone_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+
     DEEPSLATE_LEAD_ORE("deepslate_lead_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
+    PEARL_STONE_IRON_ORE("pearl_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    EBONY_STONE_IRON_ORE("ebony_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    ANOTHER_CRIMSON_STONE_IRON_ORE("another_crimson_stone_iron_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     RAW_LEAD_BLOCK("raw_lead_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     LEAD_BLOCK("lead_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
 
@@ -45,7 +53,9 @@ public enum Ores implements EnumRegister<Block> {
     DEEPSLATE_TUNGSTEN_ORE("deepslate_tungsten_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE))),
     RAW_TUNGSTEN_BLOCK("raw_tungsten_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
     TUNGSTEN_BLOCK("tungsten_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
-
+    PEARL_STONE_GOLD_ORE("pearl_stone_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
+    EBONY_STONE_GOLD_ORE("ebony_stone_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
+    ANOTHER_CRIMSON_STONE_GOLD_ORE("another_crimson_stone_gold_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
     PLATINUM_ORE("platinum_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
     PEARL_STONE_PLATINUM_ORE("pearl_stone_platinum_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
     EBONY_STONE_PLATINUM_ORE("ebony_stone_platinum_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE))),
@@ -57,6 +67,14 @@ public enum Ores implements EnumRegister<Block> {
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
     RAW_METEORITE_BLOCK("raw_meteorite_block", MeteoriteOre::new),
     METEORITE_BLOCK("meteorite_block", MeteoriteOre::new),
+    //绿宝石
+    PEARL_STONE_EMERALD_ORE("pearl_stone_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
+    EBONY_STONE_EMERALD_ORE("ebony_stone_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
+    ANOTHER_CRIMSON_STONE_EMERALD_ORE("another_crimson_stone_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
+    //钻石
+    PEARL_STONE_DIAMOND_ORE("pearl_stone_diamond_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    EBONY_STONE_DIAMOND_ORE("ebony_stone_diamond_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    ANOTHER_CRIMSON_STONE_DIAMOND_ORE("another_crimson_stone_diamond_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
     //红玉矿
     RUBY_ORE("ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     PEARL_STONE_RUBY_ORE("pearl_stone_ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),

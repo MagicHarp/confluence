@@ -953,7 +953,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_TIN_ORE.get(), "深层锡矿石");
         add(Ores.RAW_TIN_BLOCK.get(), "粗锡块");
         add(Ores.TIN_BLOCK.get(), "锡块");
-        add(Ores.LEAD_ORE.get(), "铅矿石");
+        add(Ores.PEARL_STONE_COPPER_ORE.get(), "珍珠石铜矿石");
+        add(Ores.EBONY_STONE_COPPER_ORE.get(), "黑檀石铜矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.get(), "猩红石铜矿石");
+        add(Ores.PEARL_STONE_IRON_ORE.get(), "珍珠石铁矿石");
+        add(Ores.EBONY_STONE_IRON_ORE.get(), "黑檀石铁矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.get(), "猩红石铁矿石");
         add(Ores.PEARL_STONE_LEAD_ORE.get(), "珍珠石铅矿石");
         add(Ores.EBONY_STONE_LEAD_ORE.get(), "黑檀石铅矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE.get(), "猩红石铅矿石");
@@ -974,6 +979,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_TUNGSTEN_ORE.get(), "深层钨矿石");
         add(Ores.RAW_TUNGSTEN_BLOCK.get(), "粗钨块");
         add(Ores.TUNGSTEN_BLOCK.get(), "钨块");
+        add(Ores.PEARL_STONE_GOLD_ORE.get(), "珍珠石金矿石");
+        add(Ores.EBONY_STONE_GOLD_ORE.get(), "黑檀石金矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.get(), "猩红石金矿石");
         add(Ores.PLATINUM_ORE.get(), "铂金矿石");
         add(Ores.PEARL_STONE_PLATINUM_ORE.get(), "珍珠石铂金矿石");
         add(Ores.EBONY_STONE_PLATINUM_ORE.get(), "黑檀石铂金矿石");
@@ -1006,6 +1014,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.EBONY_STONE_SAPPHIRE_ORE.get(), "黑檀石蓝玉矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_SAPPHIRE_ORE.get(), "猩红石蓝玉矿石");
         add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), "深层蓝玉矿石");
+        add(Ores.PEARL_STONE_EMERALD_ORE.get(), "珍珠石绿宝石矿石");
+        add(Ores.EBONY_STONE_EMERALD_ORE.get(), "黑檀石绿宝石矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE.get(), "猩红石绿宝石矿石");
+        add(Ores.PEARL_STONE_DIAMOND_ORE.get(), "珍珠石钻石矿石");
+        add(Ores.EBONY_STONE_DIAMOND_ORE.get(), "黑檀石钻石矿石");
+        add(Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.get(), "猩红石钻石矿石");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.RAW_METEORITE_BLOCK.get(), "粗陨石块");
         add(Ores.METEORITE_BLOCK.get(), "陨石块");

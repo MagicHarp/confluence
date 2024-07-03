@@ -143,6 +143,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f));
     public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
 
+
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
