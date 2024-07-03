@@ -1162,12 +1162,18 @@ public class ModChineseProvider extends LanguageProvider {
 
 
         add(EBONY_STONE.get(), "黑檀石块");
+        add(EBONY_COBBLESTONE.get(), "黑檀圆石");
+        add(EBONY_SANDSTONE.get(), "黑檀砂岩");
         add(EBONY_SAND.get(), "黑檀沙块");
         add(CORRUPT_GRASS_BLOCK.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
+        add(PEARL_COBBLESTONE.get(), "珍珠圆石");
+        add(PEARL_SANDSTONE.get(), "珍珠砂岩");
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
+        add(ANOTHER_CRIMSON_COBBLESTONE.get(), "猩红圆石");
+        add(ANOTHER_CRIMSON_SANDSTONE.get(), "猩红砂岩");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
         add(RED_ICE.get(), "红冰块");
         add(RED_PACKED_ICE.get(), "红浮冰块");

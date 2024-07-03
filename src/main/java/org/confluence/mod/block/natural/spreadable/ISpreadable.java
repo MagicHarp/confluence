@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.command.ConfluenceData;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,6 +64,8 @@ public interface ISpreadable {
             () -> Blocks.DIRT_PATH, ModBlocks.HALLOW_GRASS_BLOCK,
             () -> Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.PEARL_STONE,
+            () -> Blocks.COBBLESTONE, ModBlocks.PEARL_COBBLESTONE,
+            () -> Blocks.SANDSTONE, ModBlocks.PEARL_SANDSTONE,
             () -> Blocks.SAND, ModBlocks.PEARL_SAND,
             () -> Blocks.GRASS, ModBlocks.HALLOW_GRASS,
             () -> Blocks.TALL_GRASS, ModBlocks.HALLOW_GRASS,
@@ -77,6 +80,8 @@ public interface ISpreadable {
             () -> Blocks.DIRT_PATH, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
             () -> Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
+            () -> Blocks.COBBLESTONE, ModBlocks.ANOTHER_CRIMSON_COBBLESTONE,
+            () -> Blocks.SANDSTONE, ModBlocks.ANOTHER_CRIMSON_SANDSTONE,
             () -> Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND,
             () -> Blocks.GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
@@ -92,6 +97,8 @@ public interface ISpreadable {
             () -> Blocks.DIRT_PATH, ModBlocks.CORRUPT_GRASS_BLOCK,
             () -> Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.EBONY_STONE,
+            () -> Blocks.COBBLESTONE, ModBlocks.EBONY_COBBLESTONE,
+            () -> Blocks.SANDSTONE, ModBlocks.EBONY_SANDSTONE,
             () -> Blocks.SAND, ModBlocks.EBONY_SAND,
             () -> Blocks.GRASS, ModBlocks.CORRUPT_GRASS,
             () -> Blocks.TALL_GRASS, ModBlocks.CORRUPT_GRASS,
