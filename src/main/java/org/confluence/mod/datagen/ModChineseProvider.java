@@ -1027,9 +1027,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.PEARL_STONE_LAPIS_ORE.get(), "珍珠石青金石矿石");
         add(Ores.EBONY_STONE_LAPIS_ORE.get(), "黑檀石青金石矿石");
         add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), "猩红石青金石矿石");
-        add(Ores.PEARL_STONE_REDSTONE_ORE.get(), "珍珠石红石矿石");
-        add(Ores.EBONY_STONE_REDSTONE_ORE.get(), "黑檀石红石矿石");
-        add(Ores.ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), "猩红石红石矿石");
         add(Ores.METEORITE_ORE.get(), "陨石矿石");
         add(Ores.RAW_METEORITE_BLOCK.get(), "粗陨石块");
         add(Ores.METEORITE_BLOCK.get(), "陨石块");

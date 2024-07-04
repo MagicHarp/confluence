@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.BaseBlock;
-import org.confluence.mod.block.common.MeteoriteOre;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.util.EnumRegister;
 
@@ -89,22 +88,22 @@ public enum Ores implements EnumRegister<Block> {
     ANOTHER_CRIMSON_STONE_RUBY_ORE("another_crimson_stone_ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     DEEPSLATE_RUBY_ORE("deepslate_ruby_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     //黄玉矿
-    TOPAZ_ORE("topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    PEARL_STONE_TOPAZ_ORE("pearl_stone_topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    EBONY_STONE_TOPAZ_ORE("ebony_stone_topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    ANOTHER_CRIMSON_STONE_TOPAZ_ORE("another_crimson_stone_topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    DEEPSLATE_TOPAZ_ORE("deepslate_topaz_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    TOPAZ_ORE("topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    PEARL_STONE_TOPAZ_ORE("pearl_stone_topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    EBONY_STONE_TOPAZ_ORE("ebony_stone_topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    ANOTHER_CRIMSON_STONE_TOPAZ_ORE("another_crimson_stone_topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_TOPAZ_ORE("deepslate_topaz_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     //琥珀矿
     AMBER_ORE("amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     PEARL_STONE_AMBER_ORE("pearl_stone_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     EBONY_STONE_AMBER_ORE("ebony_stone_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     ANOTHER_CRIMSON_STONE_AMBER_ORE("another_crimson_stone_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    DEEPSLATE_AMBER_ORE("deepslate_amber_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_AMBER_ORE("deepslate_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     //异域紫晶矿
-    ANOTHER_AMETHYST_ORE("another_amethyst_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    PEARL_STONE_ANOTHER_AMETHYST_ORE("pearl_stone_another_amethyst_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    EBONY_STONE_ANOTHER_AMETHYST_ORE("ebony_stone_another_amethyst_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    ANOTHER_CRIMSON_STONE_ANOTHER_AMETHYST_ORE("another_crimson_stone_another_amethyst_ore",  () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    ANOTHER_AMETHYST_ORE("another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    PEARL_STONE_ANOTHER_AMETHYST_ORE("pearl_stone_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    EBONY_STONE_ANOTHER_AMETHYST_ORE("ebony_stone_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    ANOTHER_CRIMSON_STONE_ANOTHER_AMETHYST_ORE("another_crimson_stone_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     DEEPSLATE_ANOTHER_AMETHYST_ORE("deepslate_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     //蓝玉矿
     SAPPHIRE_ORE("sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
@@ -117,9 +116,7 @@ public enum Ores implements EnumRegister<Block> {
     EBONY_STONE_LAPIS_ORE("ebony_stone_lapis_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.LAPIS_ORE))),
     ANOTHER_CRIMSON_STONE_LAPIS_ORE("another_crimson_stone_lapis_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.LAPIS_ORE))),
     //红石矿
-    PEARL_STONE_REDSTONE_ORE("pearl_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
-    EBONY_STONE_REDSTONE_ORE("ebony_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
-    ANOTHER_CRIMSON_STONE_REDSTONE_ORE("another_crimson_stone_redstone_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.REDSTONE_ORE))),
+
     // 魔矿
     EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
     PEARL_STONE_EBONY_ORE("pearl_stone_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
@@ -195,5 +192,6 @@ public enum Ores implements EnumRegister<Block> {
         }
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

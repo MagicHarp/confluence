@@ -112,9 +112,6 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         // 红石青金石
-        add(Ores.PEARL_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
-        add(Ores.EBONY_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
-        add(Ores.ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), this::createRedstoneOreDrop);
         add(Ores.PEARL_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
         add(Ores.EBONY_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
         add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
