@@ -150,7 +150,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
     // 云块
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
-    public static final RegistryObject<Block> CUMULONIMBUS_BLOCK = registerWithItem("cumulonimbus_block", CumulonimbusBlock::new);
     // 丛林蜂巢
     public static final RegistryObject<Block> JUNGLE_HONEYCOMB_BLOCK = registerWithItem("jungle_honeycomb_block", JungleHiveBlock::new);
 

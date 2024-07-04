@@ -105,7 +105,6 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
                 output.accept(CLOUD_BLOCK.get());
-                output.accept(CUMULONIMBUS_BLOCK.get());
                 output.accept(JUNGLE_HONEYCOMB_BLOCK.get());
 
                 // 蘑菇 草

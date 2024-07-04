@@ -7,9 +7,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-public class JungleHiveBlock extends Block {
+public class JungleHiveBlock extends Block  implements CustomModel {
 
     public JungleHiveBlock() {
         super(BlockBehaviour.Properties.of());
