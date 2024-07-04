@@ -3,12 +3,11 @@ package org.confluence.mod.block.natural.spreadable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.ThornBlock;
 import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.datagen.limit.ICubeBottomTop;
 import org.jetbrains.annotations.NotNull;
 
 public class SpreadingGrassBlock extends SpreadingBlock implements  CustomModel {
@@ -23,19 +22,19 @@ public class SpreadingGrassBlock extends SpreadingBlock implements  CustomModel 
         if (ISpreadable.isFullBlock(serverLevel, above)) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
         } else {
-            Block thorn=switch(getType()){
+            ThornBlock thorn=switch(getType()){
                 case CRIMSON -> ModBlocks.CRIMSON_THORN.get();
                 case CORRUPT -> ModBlocks.CORRUPTION_THORN.get();
                 default -> null;
             };
-            if(thorn != null && randomSource.nextInt(20) == 0
+            if(thorn != null && randomSource.nextInt(10) == 0
                 && serverLevel.getBlockState(above).isAir()
                 && serverLevel.getBlockState(above.east()).isAir()
                 && serverLevel.getBlockState(above.west()).isAir()
                 && serverLevel.getBlockState(above.south()).isAir()
                 && serverLevel.getBlockState(above.north()).isAir()
             ){
-                serverLevel.setBlockAndUpdate(above, thorn.defaultBlockState());
+                serverLevel.setBlockAndUpdate(above, thorn.getStateForPlacement(serverLevel,above));
             }
             super.randomTick(blockState, serverLevel, blockPos, randomSource);
         }
