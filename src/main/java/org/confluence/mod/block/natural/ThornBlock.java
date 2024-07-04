@@ -28,10 +28,12 @@ import org.jetbrains.annotations.Nullable;
 public class ThornBlock extends PipeBlock implements CustomModel, CustomItemModel {
     private final float amount;
     private static final IntegerProperty PROP_AGE = IntegerProperty.create("age", 0, 7);
+    private final Block ground;
 
-    public ThornBlock(float amount) {
+    public ThornBlock(float amount, Block ground) {
         super(0.3125f, BlockBehaviour.Properties.of().replaceable().noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY).randomTicks());
         this.amount = amount;
+        this.ground = ground;
         this.registerDefaultState(this.stateDefinition.any().setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(UP, false).setValue(DOWN, false));
     }
 
@@ -44,7 +46,8 @@ public class ThornBlock extends PipeBlock implements CustomModel, CustomItemMode
     public BlockState getStateForPlacement(BlockGetter pLevel, BlockPos pPos) {
         BlockState blockState = defaultBlockState();
         for (Direction direction : Direction.values()) {
-            blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), pLevel.getBlockState(pPos.offset(direction.getNormal())).is(this));
+            BlockState nearState = pLevel.getBlockState(pPos.offset(direction.getNormal()));
+            blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), nearState.is(this) || nearState.is(ground));
         }
         return blockState;
     }
@@ -74,12 +77,10 @@ public class ThornBlock extends PipeBlock implements CustomModel, CustomItemMode
 
     @Override
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
-        // TODO: 降低概率
+        if(pRandom.nextInt(10) != 0) return;
         Direction dir = Direction.getRandom(pRandom);
         BlockPos targetPos = pPos.relative(dir);
         if (!pLevel.getBlockState(targetPos).isAir() || checkBorder(pLevel, targetPos, dir)) return;
-
-
         int age = pState.getValue(PROP_AGE);
         pLevel.setBlock(targetPos, getStateForPlacement(pLevel, targetPos).setValue(PROP_AGE, Math.min(7, age + pRandom.nextInt(1, 3))), Block.UPDATE_CLIENTS);
         pLevel.setBlock(pPos, pState.setValue(PROPERTY_BY_DIRECTION.get(dir), true).setValue(PROP_AGE, pRandom.nextBoolean() ? 7 : age + 1), Block.UPDATE_CLIENTS);
@@ -98,6 +99,6 @@ public class ThornBlock extends PipeBlock implements CustomModel, CustomItemMode
     @Override
     @NotNull
     public BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
-        return pState.setValue(PROPERTY_BY_DIRECTION.get(pDirection), pNeighborState.is(this));
+        return pState.setValue(PROPERTY_BY_DIRECTION.get(pDirection), pNeighborState.is(this) || pNeighborState.is(ground));
     }
 }

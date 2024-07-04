@@ -144,10 +144,10 @@ public final class ModBlocks {
     // TODO: 头盔栏时装，shape，不可放置
     public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY)));
 
-    public static final RegistryObject<Block> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new ThornBlock(1));
-    public static final RegistryObject<Block> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new ThornBlock(1));
-    public static final RegistryObject<Block> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f));
-    public static final RegistryObject<Block> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10));
+    public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new ThornBlock(1,ANOTHER_CRIMSON_GRASS_BLOCK.get()));
+    public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithoutItem("corruption_thorn", () -> new ThornBlock(1,CORRUPT_GRASS_BLOCK.get()));
+    public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithoutItem("jungle_thorn", () -> new ThornBlock(1.7f,Blocks.MOSS_BLOCK));
+    public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithoutItem("plantera_thorn", () -> new ThornBlock(10,null));
     // 云块
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
     // 丛林蜂巢
