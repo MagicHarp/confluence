@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModDamageTypes;
@@ -72,7 +73,7 @@ public class ThornBlock extends PipeBlock implements CustomModel, CustomItemMode
 
     @Override
     public boolean isRandomlyTicking(@NotNull BlockState pState) {
-        return pState.getValue(PROP_AGE) < 7;
+        return !pState.is(ModBlocks.PLANTERA_THORN.get()) && pState.getValue(PROP_AGE) < 7;
     }
 
     @Override

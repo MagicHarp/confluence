@@ -1614,6 +1614,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SUNFLOWERS_SEED.get(), "太阳花种子");
         add(ModItems.DEATHWEED_SEED.get(), "死亡草种子");
 
+        add(CRIMSON_THORN.get(), "猩红荆棘");
+        add(CORRUPTION_THORN.get(), "腐化荆棘");
+        add(JUNGLE_THORN.get(), "丛林荆棘");
+        add(PLANTERA_THORN.get(), "世纪之花荆棘");
+
         add(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");
         add(ModBlocks.GLOWING_MUSHROOM.get(), "发光蘑菇");

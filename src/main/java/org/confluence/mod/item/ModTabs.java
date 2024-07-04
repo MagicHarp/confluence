@@ -121,6 +121,11 @@ public final class ModTabs {
                 output.accept(CRISPY_HONEY_BLOCK.get());
                 output.accept(DEMON_ALTAR.get());
                 output.accept(CRIMSON_ALTAR.get());
+                // 荆棘
+                output.accept(CRIMSON_THORN.get());
+                output.accept(CORRUPTION_THORN.get());
+                output.accept(JUNGLE_THORN.get());
+                output.accept(PLANTERA_THORN.get());
 
                 for (Pots pots : Pots.values()) output.accept(pots.get());
             })
