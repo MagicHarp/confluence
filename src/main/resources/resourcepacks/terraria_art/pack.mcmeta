@@ -4,5 +4,8 @@
             "text": "Replace some vanilla textures with Terraria style"
         },
         "pack_format": 15
-    }
+    },
+    "fusion": {
+            "overrides_folder": "fusion"
+        }
 }
