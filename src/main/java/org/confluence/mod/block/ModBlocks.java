@@ -144,10 +144,10 @@ public final class ModBlocks {
     // TODO: 头盔栏时装，shape，不可放置
     public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY)));
 
-    public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new ThornBlock(1,ANOTHER_CRIMSON_GRASS_BLOCK.get()));
-    public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithItem("corruption_thorn", () -> new ThornBlock(1,CORRUPT_GRASS_BLOCK.get()));
-    public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithItem("jungle_thorn", () -> new ThornBlock(1.7f,Blocks.MOSS_BLOCK));
-    public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(10,null));
+    public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new SpreadingThornBlock(2,ANOTHER_CRIMSON_GRASS_BLOCK.get(), ISpreadable.Type.CRIMSON));
+    public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithItem("corruption_thorn", () -> new SpreadingThornBlock(2,CORRUPT_GRASS_BLOCK.get(), ISpreadable.Type.CORRUPT));
+    public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithItem("jungle_thorn", () -> new ThornBlock(3.4f,Blocks.MOSS_BLOCK));
+    public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(20,null));
     // 云块
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
     // 丛林蜂巢

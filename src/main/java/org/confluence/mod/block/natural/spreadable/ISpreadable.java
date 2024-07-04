@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.command.ConfluenceData;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,25 +22,27 @@ public interface ISpreadable {
 
     Type getType();
 
-    default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
-        if (!blockState.getValue(STILL_ALIVE)) return;
+    default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource){
+        if(!blockState.getValue(STILL_ALIVE)) return;
         int phase = ConfluenceData.get(serverLevel).getGamePhase().ordinal();
-        for (int i = 0; i < 4; ++i) {
-            BlockPos pos = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(5) - 3, randomSource.nextInt(3) - 1);
-            BlockState source = serverLevel.getBlockState(pos);
-            Block target = getType().blockMap.get(source.getBlock());
-            if (target == null || source.is(Blocks.GRASS) || source.is(Blocks.FERN) || source.is(Blocks.TALL_GRASS)) continue; // 不要直接传播草
-            if (source.is(Blocks.DIRT) || source.is(ModBlocks.ASH_BLOCK.get())) {
-                if (!isFullBlock(serverLevel, pos.above())) {
-                    spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, target.defaultBlockState(), pos);
-                }
-            } else {
-                spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, target.defaultBlockState(), pos);
+        for(int i = 0; i < 4; ++i){
+            BlockPos targetPos = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(5) - 3, randomSource.nextInt(3) - 1);
+            BlockState beforeTransformState = serverLevel.getBlockState(targetPos);
+            Block targetBlock = getType().blockMap.get(beforeTransformState.getBlock());
+            if(targetBlock == null || beforeTransformState.is(Blocks.GRASS) || beforeTransformState.is(Blocks.FERN) || beforeTransformState.is(Blocks.TALL_GRASS)){
+                continue; // 不要直接传播草
             }
-            BlockState above = serverLevel.getBlockState(pos.above());
-            if (above.is(Blocks.GRASS) || above.is(Blocks.FERN) || above.is(Blocks.TALL_GRASS)) {  // 被动传播草
-                target = getType().blockMap.get(above.getBlock());
-                serverLevel.setBlockAndUpdate(pos.above(), target == null ? above : target.defaultBlockState());
+            if(beforeTransformState.is(Blocks.DIRT) || beforeTransformState.is(ModBlocks.ASH_BLOCK.get())){
+                if(!isFullBlock(serverLevel, targetPos.above())){
+                    spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, targetBlock.defaultBlockState(), targetPos);
+                }
+            }else{
+                spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, targetBlock.defaultBlockState(), targetPos);
+            }
+            BlockState above = serverLevel.getBlockState(targetPos.above());
+            if(above.is(Blocks.GRASS) || above.is(Blocks.FERN) || above.is(Blocks.TALL_GRASS)){  // 被动传播草
+                targetBlock = getType().blockMap.get(above.getBlock());
+                serverLevel.setBlockAndUpdate(targetPos.above(), targetBlock == null ? above : targetBlock.defaultBlockState());
             }
 
         }
@@ -58,6 +59,7 @@ public interface ISpreadable {
         }
     }
 
+    // 到时候溶液也用这个
     enum Type {
         HALLOW(
             () -> Blocks.DIRT, ModBlocks.HALLOW_GRASS_BLOCK,
@@ -72,7 +74,11 @@ public interface ISpreadable {
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, ModBlocks.HALLOW_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS
+            ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS,
+            ModBlocks.CRIMSON_THORN, () -> Blocks.AIR,
+            ModBlocks.CORRUPTION_THORN, () -> Blocks.AIR,
+            ModBlocks.JUNGLE_THORN, () -> Blocks.AIR,
+            ModBlocks.PLANTERA_THORN, () -> Blocks.AIR
         ),
 
         CRIMSON(
@@ -89,7 +95,10 @@ public interface ISpreadable {
             ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
             ModBlocks.JUNGLE_SPORE, ModBlocks.ANOTHER_CRIMSON_GRASS,
             ModBlocks.CORRUPT_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.HALLOW_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS
+            ModBlocks.HALLOW_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
+            ModBlocks.CORRUPTION_THORN, ModBlocks.CRIMSON_THORN,
+            ModBlocks.JUNGLE_THORN, ModBlocks.CRIMSON_THORN,
+            ModBlocks.PLANTERA_THORN, ModBlocks.CRIMSON_THORN
         ),
 
         CORRUPT(
@@ -107,7 +116,10 @@ public interface ISpreadable {
             ModBlocks.LIFE_MUSHROOM, ModBlocks.EBONY_MUSHROOM,
             ModBlocks.JUNGLE_SPORE, ModBlocks.CORRUPT_GRASS,
             ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.HALLOW_GRASS, ModBlocks.CORRUPT_GRASS
+            ModBlocks.HALLOW_GRASS, ModBlocks.CORRUPT_GRASS,
+            ModBlocks.CRIMSON_THORN, ModBlocks.CORRUPTION_THORN,
+            ModBlocks.JUNGLE_THORN, ModBlocks.CORRUPTION_THORN,
+            ModBlocks.PLANTERA_THORN, ModBlocks.CORRUPTION_THORN
         ),
 
         GLOWING(
@@ -127,7 +139,9 @@ public interface ISpreadable {
             ModBlocks.ANOTHER_CRIMSON_SAND, () -> Blocks.SAND,
             ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
             ModBlocks.CORRUPT_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
-            ModBlocks.HALLOW_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK
+            ModBlocks.HALLOW_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
+            ModBlocks.CRIMSON_THORN, () -> Blocks.AIR,
+            ModBlocks.CORRUPTION_THORN, () -> Blocks.AIR
         );
 
         private Map<Supplier<? extends Block>, Supplier<? extends Block>> supplierMap;
