@@ -31,9 +31,9 @@ public enum Materials implements EnumRegister<Item> {
     EBONY_INGOT("ebony_ingot", () -> new BaseItem(BLUE)),
     RAW_ANOTHER_CRIMSON("raw_another_crimson", () -> new BaseItem(BLUE)),
     ANOTHER_CRIMSON_INGOT("another_crimson_ingot", () -> new BaseItem(BLUE)),
-    HELLSTONE_INGOT("hellstone_ingot", () -> new HellStoneRawItem(ORANGE)),
-    RAW_HELLSTONE("raw_hellstone", () -> new HellStoneRawItem(ORANGE)),
-    PRIMORDIAL_HELLSTONE_INGOT("primordial_hellstone_ingot", () -> new HellStoneRawItem(ORANGE)),
+    HELLSTONE_INGOT("hellstone_ingot", () -> new HellStoneItem(ORANGE)),
+    RAW_HELLSTONE("raw_hellstone", () -> new HellStoneItem(ORANGE)),
+    PRIMORDIAL_HELLSTONE_INGOT("primordial_hellstone_ingot", () -> new HellStoneItem(ORANGE)),
 
     RAW_COBALT("raw_cobalt", () -> new BaseItem(LIGHT_RED)),
     COBALT_INGOT("cobalt_ingot", () -> new BaseItem(LIGHT_RED)),
