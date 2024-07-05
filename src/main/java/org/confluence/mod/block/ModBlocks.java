@@ -157,7 +157,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", CloudBlock::new);
     public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", CloudBlock::new);
     // 丛林蜂巢
-    public static final RegistryObject<Block> JUNGLE_HONEYCOMB_BLOCK = registerWithItem("jungle_honeycomb_block", JungleHiveBlock::new);
+    public static final RegistryObject<Block> JUNGLE_HIVE_BLOCK = registerWithItem("jungle_hive_block", JungleHiveBlock::new);
     // 红石变种
     public static final RegistryObject<Block> PEARL_STONE_REDSTONE_ORE = registerWithItem("pearl_stone_redstone_ore", CustomModelBlock::new);
     public static final RegistryObject<Block> EBONY_STONE_REDSTONE_ORE = registerWithItem("ebony_stone_redstone_ore", CustomModelBlock::new);

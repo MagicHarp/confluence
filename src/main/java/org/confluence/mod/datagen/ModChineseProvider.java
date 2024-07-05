@@ -1243,7 +1243,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(CLOUD_BLOCK.get(), "云块");
         add(RAIN_CLOUD_BLOCK.get(), "雨云块");
         add(SNOW_CLOUD_BLOCK.get(), "雪云块");
-        add(JUNGLE_HONEYCOMB_BLOCK.get(), "丛林蜂巢");
+        add(JUNGLE_HIVE_BLOCK.get(), "丛林蜂巢");
         add(PEARL_STONE_REDSTONE_ORE.get(), "珍珠石红石矿石");
         add(EBONY_STONE_REDSTONE_ORE.get(), "黑檀石红石矿石");
         add(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), "猩红石红石矿石");

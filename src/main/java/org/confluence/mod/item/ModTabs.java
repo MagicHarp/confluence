@@ -110,7 +110,7 @@ public final class ModTabs {
                 output.accept(CLOUD_BLOCK.get());
                 output.accept(RAIN_CLOUD_BLOCK.get());
                 output.accept(SNOW_CLOUD_BLOCK.get());
-                output.accept(JUNGLE_HONEYCOMB_BLOCK.get());
+                output.accept(JUNGLE_HIVE_BLOCK.get());
 
                 // 蘑菇 草
                 output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());

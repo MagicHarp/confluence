@@ -12,4 +12,8 @@ public class BaseItem extends Item {
     public BaseItem(Rarity rarity) {
         super(new Properties().rarity(rarity));
     }
+
+    public BaseItem(Rarity rarity,Boolean isFireResistant) {
+        super(new Properties().rarity(rarity).fireResistant());
+    }
 }
