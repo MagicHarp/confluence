@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.command.ConfluenceData;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +64,66 @@ public interface ISpreadable {
     enum Type {
         HALLOW(
             () -> Blocks.DIRT, ModBlocks.HALLOW_GRASS_BLOCK,
-            () -> Blocks.DIRT_PATH, ModBlocks.HALLOW_GRASS_BLOCK,
+            // 原木
+            () -> Blocks.OAK_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.ACACIA_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.BIRCH_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.CHERRY_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.JUNGLE_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.DARK_OAK_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.MANGROVE_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            () -> Blocks.SPRUCE_LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            ModBlocks.PALM_LOG_BLOCKS.LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            ModBlocks.EBONY_LOG_BLOCKS.LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            ModBlocks.SHADOW_LOG_BLOCKS.LOG, ModBlocks.PEARL_LOG_BLOCKS.LOG,
+            // 树皮
+            () -> Blocks.OAK_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.ACACIA_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.BIRCH_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.CHERRY_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.JUNGLE_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.DARK_OAK_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.MANGROVE_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            () -> Blocks.SPRUCE_WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            ModBlocks.EBONY_LOG_BLOCKS.WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            ModBlocks.SHADOW_LOG_BLOCKS.WOOD, ModBlocks.PEARL_LOG_BLOCKS.WOOD,
+            // 去皮原木
+            () -> Blocks.STRIPPED_ACACIA_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_CHERRY_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_BIRCH_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_DARK_OAK_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_OAK_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_MANGROVE_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_SPRUCE_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG,
+            // 去皮树皮
+            () -> Blocks.STRIPPED_ACACIA_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_CHERRY_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_BIRCH_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_DARK_OAK_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_OAK_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_MANGROVE_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_SPRUCE_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD,
+            // 树叶
+            () -> Blocks.OAK_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.ACACIA_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.BIRCH_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.CHERRY_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.JUNGLE_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.DARK_OAK_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.MANGROVE_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            () -> Blocks.SPRUCE_LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            ModBlocks.PALM_LOG_BLOCKS.LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            ModBlocks.EBONY_LOG_BLOCKS.LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+            ModBlocks.SHADOW_LOG_BLOCKS.LEAVES, ModBlocks.PEARL_LOG_BLOCKS.LEAVES,
+
+            // 原版环境方块
             () -> Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.PEARL_STONE,
             () -> Blocks.COBBLESTONE, ModBlocks.PEARL_COBBLESTONE,
@@ -71,8 +131,44 @@ public interface ISpreadable {
             () -> Blocks.SAND, ModBlocks.PEARL_SAND,
             () -> Blocks.GRASS, ModBlocks.HALLOW_GRASS,
             () -> Blocks.TALL_GRASS, ModBlocks.HALLOW_GRASS,
+            () -> Blocks.ICE, ModBlocks.PINK_ICE,
+            () -> Blocks.PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
+            // 邪恶环境方块
+            ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
+            ModBlocks.CORRUPT_GRASS_BLOCK,ModBlocks.HALLOW_GRASS_BLOCK,
+
+            ModBlocks.EBONY_STONE,ModBlocks.PEARL_STONE,
+            ModBlocks.ANOTHER_CRIMSON_STONE,ModBlocks.PEARL_STONE,
+
+            ModBlocks.EBONY_COBBLESTONE,ModBlocks.PEARL_COBBLESTONE,
+            ModBlocks.ANOTHER_CRIMSON_COBBLESTONE,ModBlocks.PEARL_COBBLESTONE,
+
+            ModBlocks.HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
+            ModBlocks.EBONY_HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
+            ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
+
+            ModBlocks.EBONY_SANDSTONE, ModBlocks.PEARL_SANDSTONE,
+            ModBlocks.ANOTHER_CRIMSON_SANDSTONE, ModBlocks.PEARL_SANDSTONE,
+
+            ModBlocks.PURPLE_ICE, ModBlocks.PINK_ICE,
+            ModBlocks.PURPLE_PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
+            ModBlocks.RED_ICE, ModBlocks.PINK_ICE,
+            ModBlocks.RED_PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
+            // 蘑菇
             ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
+            //矿物
+            () -> Blocks.REDSTONE_ORE,ModBlocks.PEARL_STONE_REDSTONE_ORE,
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            () -> Blocks.COPPER_ORE, () -> Ores.PEARL_STONE_COPPER_ORE.get(),
+            () -> Blocks.IRON_ORE, () -> Ores.PEARL_STONE_IRON_ORE.get(),
+            () -> Blocks.EMERALD_ORE, () -> Ores.PEARL_STONE_EMERALD_ORE.get(),
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            () -> Blocks.COAL_ORE, () -> Ores.PEARL_STONE_COAL_ORE.get(),
+            // 植物
             ModBlocks.CORRUPT_GRASS, ModBlocks.HALLOW_GRASS,
             ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS,
             ModBlocks.CRIMSON_THORN, () -> Blocks.AIR,
@@ -83,27 +179,135 @@ public interface ISpreadable {
 
         CRIMSON(
             () -> Blocks.DIRT, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
-            () -> Blocks.DIRT_PATH, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
+            // 原木
+            () -> Blocks.OAK_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.ACACIA_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.BIRCH_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.CHERRY_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.JUNGLE_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.DARK_OAK_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.MANGROVE_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            () -> Blocks.SPRUCE_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+            ModBlocks.PALM_LOG_BLOCKS.LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
+
+            // 树皮
+            () -> Blocks.OAK_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.ACACIA_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.BIRCH_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.CHERRY_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.JUNGLE_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.DARK_OAK_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.MANGROVE_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            () -> Blocks.SPRUCE_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.WOOD, ModBlocks.SHADOW_LOG_BLOCKS.WOOD,
+
+            // 去皮原木
+            () -> Blocks.STRIPPED_ACACIA_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_CHERRY_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_BIRCH_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_DARK_OAK_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_OAK_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_MANGROVE_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_SPRUCE_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_LOG,
+
+            // 去皮树皮
+            () -> Blocks.STRIPPED_ACACIA_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_CHERRY_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_BIRCH_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_DARK_OAK_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_OAK_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_MANGROVE_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_SPRUCE_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.SHADOW_LOG_BLOCKS.STRIPPED_WOOD,
+
+            // 树叶
+            () -> Blocks.OAK_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.ACACIA_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.BIRCH_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.CHERRY_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.JUNGLE_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.DARK_OAK_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.MANGROVE_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            () -> Blocks.SPRUCE_LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+            ModBlocks.PALM_LOG_BLOCKS.LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
+
+            // 原版环境方块
             () -> Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
             () -> Blocks.COBBLESTONE, ModBlocks.ANOTHER_CRIMSON_COBBLESTONE,
             () -> Blocks.SANDSTONE, ModBlocks.ANOTHER_CRIMSON_SANDSTONE,
             () -> Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND,
             () -> Blocks.GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.EBONY_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
-            ModBlocks.GLOWING_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
-            ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM,
-            ModBlocks.JUNGLE_SPORE, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.CORRUPT_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.HALLOW_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            ModBlocks.CORRUPTION_THORN, ModBlocks.CRIMSON_THORN,
-            ModBlocks.JUNGLE_THORN, ModBlocks.CRIMSON_THORN,
-            ModBlocks.PLANTERA_THORN, ModBlocks.CRIMSON_THORN
+            () -> Blocks.TALL_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
+            () -> Blocks.ICE, ModBlocks.RED_ICE,
+            () -> Blocks.PACKED_ICE, ModBlocks.RED_PACKED_ICE,
+
+            // 蘑菇
+            ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM
         ),
+
 
         CORRUPT(
             () -> Blocks.DIRT, ModBlocks.CORRUPT_GRASS_BLOCK,
-            () -> Blocks.DIRT_PATH, ModBlocks.CORRUPT_GRASS_BLOCK,
+            // 原木
+            () -> Blocks.OAK_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.ACACIA_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.BIRCH_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.CHERRY_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.JUNGLE_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.DARK_OAK_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.MANGROVE_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            () -> Blocks.SPRUCE_LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            ModBlocks.PALM_LOG_BLOCKS.LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            ModBlocks.PEARL_LOG_BLOCKS.LOG, ModBlocks.EBONY_LOG_BLOCKS.LOG,
+            // 树皮
+            () -> Blocks.OAK_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.ACACIA_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.BIRCH_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.CHERRY_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.JUNGLE_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.DARK_OAK_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.MANGROVE_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            () -> Blocks.SPRUCE_WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+            ModBlocks.PEARL_LOG_BLOCKS.WOOD, ModBlocks.EBONY_LOG_BLOCKS.WOOD,
+
+            // 去皮原木
+            () -> Blocks.STRIPPED_ACACIA_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_CHERRY_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_BIRCH_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_DARK_OAK_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_OAK_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_MANGROVE_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            () -> Blocks.STRIPPED_SPRUCE_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+            ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_LOG, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_LOG,
+
+            // 去皮树皮
+            () -> Blocks.STRIPPED_ACACIA_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_CHERRY_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_BIRCH_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_DARK_OAK_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_OAK_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_MANGROVE_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            () -> Blocks.STRIPPED_SPRUCE_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.PALM_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            ModBlocks.PEARL_LOG_BLOCKS.STRIPPED_WOOD, ModBlocks.EBONY_LOG_BLOCKS.STRIPPED_WOOD,
+            // 树叶
+            () -> Blocks.OAK_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.ACACIA_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.BIRCH_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.CHERRY_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.JUNGLE_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.DARK_OAK_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.MANGROVE_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            () -> Blocks.SPRUCE_LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            ModBlocks.PALM_LOG_BLOCKS.LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+            ModBlocks.PEARL_LOG_BLOCKS.LEAVES, ModBlocks.EBONY_LOG_BLOCKS.LEAVES,
+
+
+            // 原版环境方块
             () -> Blocks.GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK,
             () -> Blocks.STONE, ModBlocks.EBONY_STONE,
             () -> Blocks.COBBLESTONE, ModBlocks.EBONY_COBBLESTONE,
@@ -111,11 +315,27 @@ public interface ISpreadable {
             () -> Blocks.SAND, ModBlocks.EBONY_SAND,
             () -> Blocks.GRASS, ModBlocks.CORRUPT_GRASS,
             () -> Blocks.TALL_GRASS, ModBlocks.CORRUPT_GRASS,
-            () -> Blocks.FERN, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.EBONY_MUSHROOM,
+            () -> Blocks.ICE, ModBlocks.PURPLE_ICE,
+            () -> Blocks.PACKED_ICE, ModBlocks.PURPLE_PACKED_ICE,
+            // 邪恶环境方块
+            ModBlocks.HALLOW_GRASS_BLOCK, ModBlocks.CORRUPT_GRASS_BLOCK,
+
+            ModBlocks.PEARL_STONE,ModBlocks.EBONY_STONE,
+
+            ModBlocks.PEARL_COBBLESTONE,ModBlocks.EBONY_COBBLESTONE,
+
+            ModBlocks.HARDENED_SAND_BLOCK, ModBlocks.EBONY_HARDENED_SAND_BLOCK,
+            ModBlocks.PEARL_HARDENED_SAND_BLOCK, ModBlocks.EBONY_HARDENED_SAND_BLOCK,
+
+            ModBlocks.PEARL_SANDSTONE, ModBlocks.EBONY_SANDSTONE,
+
+            ModBlocks.PINK_ICE, ModBlocks.PURPLE_ICE,
+            ModBlocks.PINK_PACKED_ICE, ModBlocks.PURPLE_PACKED_ICE,
+
+            // 蘑菇
             ModBlocks.LIFE_MUSHROOM, ModBlocks.EBONY_MUSHROOM,
-            ModBlocks.JUNGLE_SPORE, ModBlocks.CORRUPT_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.CORRUPT_GRASS,
+
+            // 植物
             ModBlocks.HALLOW_GRASS, ModBlocks.CORRUPT_GRASS,
             ModBlocks.CRIMSON_THORN, ModBlocks.CORRUPTION_THORN,
             ModBlocks.JUNGLE_THORN, ModBlocks.CORRUPTION_THORN,

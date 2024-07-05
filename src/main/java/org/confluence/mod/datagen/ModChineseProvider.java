@@ -30,6 +30,7 @@ import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ModBlocks.*;
+import static org.confluence.mod.block.ModBlocks.EBONY_HARDENED_SAND_BLOCK;
 import static org.confluence.mod.block.common.DecorativeBlocks.*;
 import static org.confluence.mod.item.ModItems.*;
 import static org.confluence.mod.item.curio.CurioItems.*;
@@ -1157,19 +1158,22 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
         add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
 
-
+        add(HARDENED_SAND_BLOCK.get(), "硬化沙块");
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_COBBLESTONE.get(), "黑檀圆石");
+        add(EBONY_HARDENED_SAND_BLOCK.get(), "硬化黑檀沙块");
         add(EBONY_SANDSTONE.get(), "黑檀砂岩");
         add(EBONY_SAND.get(), "黑檀沙块");
         add(CORRUPT_GRASS_BLOCK.get(), "腐化草方块");
         add(PEARL_STONE.get(), "珍珠石块");
         add(PEARL_COBBLESTONE.get(), "珍珠圆石");
+        add(PEARL_HARDENED_SAND_BLOCK.get(), "硬化珍珠沙块");
         add(PEARL_SANDSTONE.get(), "珍珠砂岩");
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
         add(ANOTHER_CRIMSON_COBBLESTONE.get(), "猩红圆石");
+        add(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(), "硬化猩红沙块");
         add(ANOTHER_CRIMSON_SANDSTONE.get(), "猩红砂岩");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
         add(RED_ICE.get(), "红冰块");
@@ -1237,7 +1241,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(CRIMSON_ALTAR.get(), "猩红祭坛");
         add(DEMON_ALTAR.get(), "恶魔祭坛");
         add(CLOUD_BLOCK.get(), "云块");
+        add(RAIN_CLOUD_BLOCK.get(), "雨云块");
+        add(SNOW_CLOUD_BLOCK.get(), "雪云块");
         add(JUNGLE_HONEYCOMB_BLOCK.get(), "丛林蜂巢");
+        add(PEARL_STONE_REDSTONE_ORE.get(), "珍珠石红石矿石");
+        add(EBONY_STONE_REDSTONE_ORE.get(), "黑檀石红石矿石");
+        add(ANOTHER_CRIMSON_REDSTONE_ORE.get(), "猩红石红石矿石");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");

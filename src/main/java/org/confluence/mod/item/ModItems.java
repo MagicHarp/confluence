@@ -111,6 +111,7 @@ public final class ModItems {
     public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", () -> new Item(new Item.Properties()));
 
 
+
     public static void register(IEventBus bus) {
         ModTiers.register();
         IconItem.Icons.init();

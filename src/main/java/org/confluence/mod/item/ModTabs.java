@@ -71,6 +71,9 @@ public final class ModTabs {
             .title(Component.translatable("creativetab.confluence.natural_blocks"))
             .displayItems((parameters, output) -> {
                 for (Ores ores : Ores.values()) output.accept(ores.get());
+                output.accept(PEARL_STONE_REDSTONE_ORE.get());
+                output.accept(EBONY_STONE_REDSTONE_ORE.get());
+                output.accept(ANOTHER_CRIMSON_REDSTONE_ORE.get());
                 output.accept(LIFE_CRYSTAL_BLOCK.get());
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
@@ -105,6 +108,8 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
                 output.accept(CLOUD_BLOCK.get());
+                output.accept(RAIN_CLOUD_BLOCK.get());
+                output.accept(SNOW_CLOUD_BLOCK.get());
                 output.accept(JUNGLE_HONEYCOMB_BLOCK.get());
 
                 // 蘑菇 草

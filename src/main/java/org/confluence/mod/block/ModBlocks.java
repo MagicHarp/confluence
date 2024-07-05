@@ -36,11 +36,13 @@ public final class ModBlocks {
 
     public static final RegistryObject<LifeCrystalBlock> LIFE_CRYSTAL_BLOCK = registerWithItem("life_crystal_block", LifeCrystalBlock::new, supplier -> () -> new LifeCrystalBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<LifeCrystalBlock.Entity>> LIFE_CRYSTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("life_crystal_block_entity", () -> BlockEntityType.Builder.of(LifeCrystalBlock.Entity::new, LIFE_CRYSTAL_BLOCK.get()).build(null));
+    public static final RegistryObject<Block>HARDENED_SAND_BLOCK = registerWithItem("hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_COBBLESTONE = registerWithItem("ebony_cobblestone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_SANDSTONE = registerWithItem("ebony_sandstone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> EBONY_HARDENED_SAND_BLOCK = registerWithItem("ebony_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CORRUPT, 0x372B4B, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> CORRUPT_GRASS_BLOCK = registerWithItem("corrupt_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> PURPLE_ICE = registerWithItem("purple_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
@@ -49,6 +51,7 @@ public final class ModBlocks {
     public static final LogBlocks PEARL_LOG_BLOCKS = new LogBlocks("pearl", PEARL);
     public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_COBBLESTONE = registerWithItem("pearl_cobblestone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_HARDENED_SAND_BLOCK = registerWithItem("pearl_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_SANDSTONE = registerWithItem("pearl_sandstone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SpreadingSandBlock(ISpreadable.Type.HALLOW, 0xEDD5F6, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY)));
     public static final RegistryObject<Block> HALLOW_GRASS_BLOCK = registerWithItem("hallow_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
@@ -58,6 +61,7 @@ public final class ModBlocks {
     public static final LogBlocks SHADOW_LOG_BLOCKS = new LogBlocks("shadow", SHADOW);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLESTONE = registerWithItem("another_crimson_cobblestone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_HARDENED_SAND_BLOCK = registerWithItem("another_crimson_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SANDSTONE = registerWithItem("another_crimson_sandstone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CRIMSON, 0x5313E0, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCK = registerWithItem("another_crimson_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
@@ -150,8 +154,14 @@ public final class ModBlocks {
     public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(20,null));
     // 云块
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
+    public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", CloudBlock::new);
+    public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", CloudBlock::new);
     // 丛林蜂巢
     public static final RegistryObject<Block> JUNGLE_HONEYCOMB_BLOCK = registerWithItem("jungle_honeycomb_block", JungleHiveBlock::new);
+    // 红石变种
+    public static final RegistryObject<Block> PEARL_STONE_REDSTONE_ORE = registerWithItem("pearl_stone_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> EBONY_STONE_REDSTONE_ORE = registerWithItem("ebony_stone_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_REDSTONE_ORE = registerWithItem("another_crimson_redstone_ore", CustomModelBlock::new);
 
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
