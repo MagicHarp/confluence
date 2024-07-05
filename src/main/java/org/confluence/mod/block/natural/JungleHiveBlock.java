@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class JungleHiveBlock extends Block  implements CustomModel {
+public class JungleHiveBlock extends Block implements CustomModel {
 
     public JungleHiveBlock() {
         super(BlockBehaviour.Properties.of());
@@ -26,7 +26,7 @@ public class JungleHiveBlock extends Block  implements CustomModel {
     public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
         if (level instanceof ServerLevel && !player.isCreative()) {
             level.setBlockAndUpdate(pos, ModBlocks.HONEY.get().defaultBlockState());
-        }else {
+        } else {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
     }

@@ -36,7 +36,7 @@ public class HellStoneBlock extends Block {
     public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
         if (level instanceof ServerLevel && !player.isCreative()) {
             level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
-        }else {
+        } else {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
     }
