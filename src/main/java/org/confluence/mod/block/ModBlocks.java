@@ -161,7 +161,7 @@ public final class ModBlocks {
     // 红石变种
     public static final RegistryObject<Block> PEARL_STONE_REDSTONE_ORE = registerWithItem("pearl_stone_redstone_ore", CustomModelBlock::new);
     public static final RegistryObject<Block> EBONY_STONE_REDSTONE_ORE = registerWithItem("ebony_stone_redstone_ore", CustomModelBlock::new);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_REDSTONE_ORE = registerWithItem("another_crimson_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_REDSTONE_ORE = registerWithItem("another_crimson_stone_redstone_ore", CustomModelBlock::new);
 
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 

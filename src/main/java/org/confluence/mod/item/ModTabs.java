@@ -73,7 +73,7 @@ public final class ModTabs {
                 for (Ores ores : Ores.values()) output.accept(ores.get());
                 output.accept(PEARL_STONE_REDSTONE_ORE.get());
                 output.accept(EBONY_STONE_REDSTONE_ORE.get());
-                output.accept(ANOTHER_CRIMSON_REDSTONE_ORE.get());
+                output.accept(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get());
                 output.accept(LIFE_CRYSTAL_BLOCK.get());
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
