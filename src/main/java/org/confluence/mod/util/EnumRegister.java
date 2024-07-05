@@ -2,7 +2,9 @@ package org.confluence.mod.util;
 
 import net.minecraftforge.registries.RegistryObject;
 
-public interface EnumRegister<E> {
+import java.util.function.Supplier;
+
+public interface EnumRegister<E> extends Supplier<E> {
     RegistryObject<E> getValue();
 
     default E get() {

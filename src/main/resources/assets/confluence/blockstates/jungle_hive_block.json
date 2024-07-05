@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "confluence:block/jungle_hive_block",
+        "weight": 12
+      },
+      {
+        "model": "confluence:block/jungle_hive_block_0",
+        "weight": 3
+      },
+      {
+        "model": "confluence:block/jungle_hive_block_1",
+        "weight": 3
+      },
+      {
+        "model": "confluence:block/jungle_hive_block_2",
+        "weight": 3
+      },
+      {
+        "model": "confluence:block/jungle_hive_block_3",
+        "weight": 3
+      },
+      {
+        "model": "confluence:block/jungle_hive_block_4",
+        "weight": 3
+      }
+    ]
+  }
+}
