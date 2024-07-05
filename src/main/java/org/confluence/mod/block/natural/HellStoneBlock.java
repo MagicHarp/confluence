@@ -4,14 +4,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 
 public class HellStoneBlock extends Block {
@@ -29,9 +33,11 @@ public class HellStoneBlock extends Block {
     }
 
     @Override
-    public void destroy(@NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockState blockState) {
-        if (level instanceof ServerLevel) {
-            ((ServerLevel) level).setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
+    public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
+        if (level instanceof ServerLevel && !player.isCreative()) {
+            level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
+        }else {
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
     }
 }
