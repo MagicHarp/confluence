@@ -134,14 +134,6 @@ public enum Ores implements EnumRegister<Block> {
     RAW_ANOTHER_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
     ANOTHER_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
 
-    // 叶绿矿
-    CHLOROPHYTE_ORE("chlorophyte_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    RAW_CHLOROPHYTE_BLOCK("raw_chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
-    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
-
-    // 夜明矿
-    RAW_LUMINITE_BLOCK("raw_luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
-    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
 
     // 狱石矿
     HELLSTONE("hellstone", HellStoneBlock::new),
@@ -173,7 +165,22 @@ public enum Ores implements EnumRegister<Block> {
     // 钛金
     DEEPSLATE_TITANIUM_ORE("deepslate_titanium_ore", () -> new StepRevealingBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops())),
     RAW_TITANIUM_BLOCK("raw_titanium_block", BaseBlock::new),
-    TITANIUM_BLOCK("titanium_block", BaseBlock::new);
+    TITANIUM_BLOCK("titanium_block", BaseBlock::new),
+    // 神圣矿
+    HALLOWED_BLOCK("hallowed_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+
+    // 叶绿矿
+    CHLOROPHYTE_ORE("chlorophyte_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    RAW_CHLOROPHYTE_BLOCK("raw_chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK))),
+
+    // 蘑菇矿
+    SHROOMITE_BLOCK("shroomite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    // 幽灵矿
+    SPECTRE_BLOCK("spectre_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    // 夜明矿
+    RAW_LUMINITE_BLOCK("raw_luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
 
     private final RegistryObject<Block> value;
 

@@ -51,6 +51,10 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     MARBLE_COLUMN("marble_column", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
 
     CHISELED_ANOTHER_OBSIDIAN_BRICKS("chiseled_another_obsidian_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+    BLUE_BRICK("blue_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+    GREEN_BRICK("green_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+    PINK_BRICK("pink_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+    AETHERIUM_BRICK("aetherium_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
     CRYSTAL_BLOCK("crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))),
     RAINBOW_BRICK("rainbow_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
 

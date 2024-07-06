@@ -179,7 +179,12 @@ public final class ModBlocks {
     public static final RegistryObject<Block> PUPIL_BLOCKS = registerWithItem("pupil_blocks", CustomModelBlock::new);
     // 深板岩压力板
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
-
+    // 地牢碎砖
+    public static final RegistryObject<CrackedBrickBlock> CRACKED_BLUE_BRICK = registerWithItem("cracked_blue_brick", CrackedBrickBlock::new);
+    public static final RegistryObject<CrackedBrickBlock> CRACKED_GREEN_BRICK = registerWithItem("cracked_green_brick", CrackedBrickBlock::new);
+    public static final RegistryObject<CrackedBrickBlock> CRACKED_PINK_BRICK = registerWithItem("cracked_pink_brick", CrackedBrickBlock::new);
+    // 镒块
+    public static final RegistryObject<Block> AETHERIUM_BLOCKS = registerWithItem("aetherium_blocks", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {

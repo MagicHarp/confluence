@@ -1075,6 +1075,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.RAW_CHLOROPHYTE_BLOCK.get(), "叶绿粗矿块");
         add(Ores.LUMINITE_BLOCK.get(), "夜明块");
         add(Ores.RAW_LUMINITE_BLOCK.get(), "夜明粗矿块");
+        add(Ores.HALLOWED_BLOCK.get(), "神圣块");
+        add(Ores.SPECTRE_BLOCK.get(), "幽灵块");
+        add(Ores.SHROOMITE_BLOCK.get(), "蘑菇矿块");
 
 
         add(EBONY_LOG_BLOCKS.BUTTON.get(), "乌木按钮");
@@ -1263,6 +1266,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(DIAMOND_BRANCHES.get(), "钻石枝杈");
         add(SAPPHIRE_BRANCHES.get(), "蓝玉石枝杈");
         add(ANOTHER_AMETHYST_BRANCHES.get(), "紫晶石枝杈");
+        add(CRACKED_BLUE_BRICK.get(), "碎裂蓝色地牢砖");
+        add(CRACKED_GREEN_BRICK.get(), "碎裂绿色地牢砖");
+        add(CRACKED_PINK_BRICK.get(), "碎裂粉色地牢砖");
+        add(BLUE_BRICK.get(), "蓝色地牢砖");
+        add(GREEN_BRICK.get(), "绿色地牢砖");
+        add(PINK_BRICK.get(), "粉色地牢砖");
+        add(AETHERIUM_BLOCKS.get(), "镒块");
+        add(AETHERIUM_BRICK.get(), "镒砖");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");
@@ -1379,6 +1390,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.CHLOROPHYTE_INGOT.get(), "叶绿锭");
         add(Materials.RAW_LUMINITE.get(), "夜明原矿");
         add(Materials.LUMINITE_INGOT.get(), "夜明锭");
+        add(Materials.HALLOWED_INGOT.get(), "神圣锭");
+        add(Materials.SHROOMITE_INGOT.get(), "蘑菇矿锭");
+        add(Materials.SPECTRE_INGOT.get(), "幽灵锭");
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");

@@ -137,6 +137,9 @@ public final class ModTabs {
 
                 output.accept(JUNGLE_HIVE_BLOCK.get());
 
+                output.accept(CRACKED_BLUE_BRICK.get());
+                output.accept(CRACKED_GREEN_BRICK.get());
+                output.accept(CRACKED_PINK_BRICK.get());
                 // 蘑菇 草
                 output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());

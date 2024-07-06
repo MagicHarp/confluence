@@ -47,8 +47,11 @@ public enum Materials implements EnumRegister<Item> {
     ADAMANTITE_INGOT("adamantite_ingot", () -> new BaseItem(LIGHT_RED)),
     RAW_TITANIUM("raw_titanium", () -> new BaseItem(LIGHT_RED)),
     TITANIUM_INGOT("titanium_ingot", () -> new BaseItem(LIGHT_RED)),
-    RAW_CHLOROPHYTE("raw_chlorophyte", () -> new BaseItem(ORANGE)),
+    HALLOWED_INGOT("hallowed_ingot", () -> new BaseItem(LIGHT_RED)),
     CHLOROPHYTE_INGOT("chlorophyte_ingot", () -> new BaseItem(ORANGE)),
+    RAW_CHLOROPHYTE("raw_chlorophyte", () -> new BaseItem(ORANGE)),
+    SHROOMITE_INGOT("shroomite_ingot", () -> new BaseItem(ORANGE)),
+    SPECTRE_INGOT("spectre_ingot", () -> new BaseItem(ORANGE)),
     RAW_LUMINITE("raw_luminite", () -> new BaseItem(ORANGE)),
     LUMINITE_INGOT("luminite_ingot", () -> new BaseItem(ORANGE)),
 
