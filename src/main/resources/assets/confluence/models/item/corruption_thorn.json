@@ -1,5 +1,6 @@
 {
     "parent": "confluence:block/corruption_thorn_center",
+    "gui_light": "front",
     "display": {
         "thirdperson_righthand": {
             "scale":[ 0.5, 0.5, 0.5]
