@@ -163,6 +163,10 @@ public final class ModBlocks {
     public static final RegistryObject<Block> EBONY_STONE_REDSTONE_ORE = registerWithItem("ebony_stone_redstone_ore", CustomModelBlock::new);
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_REDSTONE_ORE = registerWithItem("another_crimson_stone_redstone_ore", CustomModelBlock::new);
 
+    // 石中剑
+    public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", CustomModelBlock::new);
+    // 血肉眼球块
+    public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));

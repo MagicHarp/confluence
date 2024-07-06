@@ -1247,6 +1247,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(PEARL_STONE_REDSTONE_ORE.get(), "珍珠石红石矿石");
         add(EBONY_STONE_REDSTONE_ORE.get(), "黑檀石红石矿石");
         add(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), "猩红石红石矿石");
+        add(OCULAR_BLOCKS.get(), "血肉眼球块");
+        add(SWORD_IN_STONE.get(), "石中剑");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");

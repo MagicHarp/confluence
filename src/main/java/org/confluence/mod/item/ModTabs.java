@@ -78,9 +78,12 @@ public final class ModTabs {
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
+                output.accept(HARDENED_SAND_BLOCK.get());
+
                 output.accept(CORRUPT_GRASS_BLOCK.get());
                 output.accept(EBONY_SAND.get());
                 output.accept(EBONY_STONE.get());
+                output.accept(EBONY_HARDENED_SAND_BLOCK.get());
                 output.accept(EBONY_SANDSTONE.get());
                 output.accept(PURPLE_ICE.get());
                 output.accept(PURPLE_PACKED_ICE.get());
@@ -89,14 +92,17 @@ public final class ModTabs {
                 output.accept(ANOTHER_CRIMSON_GRASS_BLOCK.get());
                 output.accept(ANOTHER_CRIMSON_SAND.get());
                 output.accept(ANOTHER_CRIMSON_STONE.get());
+                output.accept(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get());
                 output.accept(ANOTHER_CRIMSON_SANDSTONE.get());
                 output.accept(RED_ICE.get());
                 output.accept(RED_PACKED_ICE.get());
                 output.accept(SHADOW_LOG_BLOCKS.LOG.get());
                 output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
+                output.accept(OCULAR_BLOCKS.get());
                 output.accept(HALLOW_GRASS_BLOCK.get());
                 output.accept(PEARL_SAND.get());
                 output.accept(PEARL_STONE.get());
+                output.accept(PEARL_HARDENED_SAND_BLOCK.get());
                 output.accept(PEARL_SANDSTONE.get());
                 output.accept(PINK_ICE.get());
                 output.accept(PINK_PACKED_ICE.get());
