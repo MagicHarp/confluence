@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_straight",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel"
       }
     },
     {
@@ -16,7 +16,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_up",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel"
       }
     },
     {
@@ -25,7 +25,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_down",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel"
       }
     },
     {
@@ -34,7 +34,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_bifurcate",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel"
       }
     },
     {
@@ -43,7 +43,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_tnt",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel_1"
       }
     },
     {
@@ -52,7 +52,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:mine_tunnels/mine_tunnels_lava",
-        "processors": "minecraft:empty"
+        "processors": "confluence:mine_tunnel_1"
       }
     }
   ]
