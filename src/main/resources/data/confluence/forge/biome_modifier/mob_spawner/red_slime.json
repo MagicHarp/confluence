@@ -3,8 +3,8 @@
     "biomes": "#minecraft:is_overworld",
     "spawners": {
         "type": "confluence:red_slime",
-        "weight": 80,
+        "weight": 40,
         "minCount": 1,
-        "maxCount": 3
+        "maxCount": 2
     }
 }
