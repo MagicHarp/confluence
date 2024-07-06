@@ -278,6 +278,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("biome.confluence.the_corruption", "腐化之地");
         add("biome.confluence.another_crimson", "猩红之地");
         add("biome.confluence.the_hallow", "神圣之地");
+        add("biome.confluence.glowing_mushroom", "发光蘑菇群系");
+        add("biome.confluence.ash_wasteland", "灰烬荒地");
+        add("biome.confluence.ash_forest", "白蜡木林");
 
         add("painting.confluence.magic_harp.title", "MAGIC_HARP");
         add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，看上去傻傻的...");
@@ -1249,6 +1252,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get(), "猩红石红石矿石");
         add(OCULAR_BLOCKS.get(), "血肉眼球块");
         add(SWORD_IN_STONE.get(), "石中剑");
+        add(WOOD_STONE_SLATTED_BLOCKS.get(), "木石板条块");
+        add(DEEPSLATE_PRESSURE_PLATE.get(), "深板岩压力板");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");

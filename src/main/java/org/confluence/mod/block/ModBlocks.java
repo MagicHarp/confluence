@@ -167,6 +167,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", CustomModelBlock::new);
     // 血肉眼球块
     public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
+    // 深板岩压力板
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
 
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));

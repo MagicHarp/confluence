@@ -51,8 +51,10 @@ public final class ModTabs {
                 output.accept(BIG_TOPAZ_BLOCK.get());
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
+
                 output.accept(ANOTHER_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
+
                 output.accept(RUBY_CHAIN.get());
                 output.accept(AMBER_CHAIN.get());
                 output.accept(TOPAZ_CHAIN.get());
@@ -62,6 +64,8 @@ public final class ModTabs {
                 output.accept(AMETHYST_CHAIN.get());
                 output.accept(SILK_CHAIN.get());
                 output.accept(BONE_CHAIN.get());
+
+                output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
             })
             .build());
