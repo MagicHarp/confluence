@@ -80,6 +80,15 @@ public final class ModTabs {
                 output.accept(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get());
                 output.accept(LIFE_CRYSTAL_BLOCK.get());
                 output.accept(SWORD_IN_STONE.get());
+                output.accept(STONY_LOGS.get());
+                output.accept(RUBY_BRANCHES.get());
+                output.accept(AMBER_BRANCHES.get());
+                output.accept(TOPAZ_BRANCHES.get());
+                output.accept(EMERALD_BRANCHES.get());
+                output.accept(DIAMOND_BRANCHES.get());
+                output.accept(SAPPHIRE_BRANCHES.get());
+                output.accept(ANOTHER_AMETHYST_BRANCHES.get());
+
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
@@ -94,6 +103,7 @@ public final class ModTabs {
                 output.accept(PURPLE_PACKED_ICE.get());
                 output.accept(EBONY_LOG_BLOCKS.LOG.get());
                 output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
+
                 output.accept(ANOTHER_CRIMSON_GRASS_BLOCK.get());
                 output.accept(ANOTHER_CRIMSON_SAND.get());
                 output.accept(ANOTHER_CRIMSON_STONE.get());
@@ -105,6 +115,7 @@ public final class ModTabs {
                 output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
                 output.accept(OCULAR_BLOCKS.get());
                 output.accept(PUPIL_BLOCKS.get());
+
                 output.accept(HALLOW_GRASS_BLOCK.get());
                 output.accept(PEARL_SAND.get());
                 output.accept(PEARL_STONE.get());
@@ -119,9 +130,11 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
+
                 output.accept(CLOUD_BLOCK.get());
                 output.accept(RAIN_CLOUD_BLOCK.get());
                 output.accept(SNOW_CLOUD_BLOCK.get());
+
                 output.accept(JUNGLE_HIVE_BLOCK.get());
 
                 // 蘑菇 草

@@ -1255,6 +1255,14 @@ public class ModChineseProvider extends LanguageProvider {
         add(SWORD_IN_STONE.get(), "石中剑");
         add(WOOD_STONE_SLATTED_BLOCKS.get(), "木石板条块");
         add(DEEPSLATE_PRESSURE_PLATE.get(), "深板岩压力板");
+        add(STONY_LOGS.get(), "石质原木");
+        add(AMBER_BRANCHES.get(), "琥珀石枝杈");
+        add(RUBY_BRANCHES.get(), "红玉石枝杈");
+        add(TOPAZ_BRANCHES.get(), "黄玉石枝杈");
+        add(EMERALD_BRANCHES.get(), "翡翠石枝杈");
+        add(DIAMOND_BRANCHES.get(), "钻石枝杈");
+        add(SAPPHIRE_BRANCHES.get(), "蓝玉石枝杈");
+        add(ANOTHER_AMETHYST_BRANCHES.get(), "紫晶石枝杈");
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");
