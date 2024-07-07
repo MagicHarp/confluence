@@ -17,6 +17,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -26,6 +29,7 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -63,10 +67,13 @@ import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
+import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
+import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -269,6 +276,25 @@ public final class ForgeEvents {
             if (block != null) {
                 event.setFinalState(block.defaultBlockState().setValue(RotatedPillarBlock.AXIS, originalState.getValue(RotatedPillarBlock.AXIS)));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void entityMount(EntityMountEvent event) {
+        if (event.isMounting() || event.getLevel().isClientSide) return;
+        if (event.getEntityMounting() instanceof Player player && event.getEntityBeingMounted() instanceof AbstractMinecart abstractMinecart) {
+            Item item = Confluence.CURIO_MINECART.get(abstractMinecart.getClass());
+            if (item == null) return;
+            ItemStack itemStack = new ItemStack(item);
+            if (CuriosUtils.getSlot(player, "minecart", 0).isEmpty()) {
+                CuriosApi.getCuriosInventory(player).ifPresent(inv -> inv.setEquippedCurio("minecart", 0, itemStack));
+            } else {
+                player.addItem(itemStack);
+            }
+            ((EntityAccessor) player).setVehicle(null);
+            ((EntityAccessor) abstractMinecart).callRemovePassenger(player);
+            abstractMinecart.discard();
+            event.setCanceled(true);
         }
     }
 }

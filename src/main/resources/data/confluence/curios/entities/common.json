@@ -4,6 +4,7 @@
     ],
     "slots": [
         "accessory",
-        "hook"
+        "hook",
+        "minecart"
     ]
 }

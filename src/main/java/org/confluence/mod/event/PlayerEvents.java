@@ -1,12 +1,24 @@
 package org.confluence.mod.event;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableFloat;
@@ -21,8 +33,12 @@ import org.confluence.mod.item.common.PlayerAbilityItem;
 import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
+import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
+import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.PlayerUtils;
+
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class PlayerEvents {
@@ -108,5 +124,33 @@ public final class PlayerEvents {
             speed.setValue(value);
         });
         event.setNewSpeed(speed.floatValue());
+    }
+
+    @SubscribeEvent
+    public static void rightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getItemStack().is(ModTags.Items.MINECART)) return;
+        Level level = event.getLevel();
+        BlockPos blockPos = event.getPos();
+        BlockState blockState = level.getBlockState(blockPos);
+        if (blockState.getBlock() instanceof BaseRailBlock railBlock) {
+            Optional<ItemStack> optionalItemStack = CuriosUtils.getSlot(event.getEntity(), "minecart", 0);
+            if (optionalItemStack.isEmpty()) return;
+            event.getEntity().swing(InteractionHand.MAIN_HAND);
+            if (!level.isClientSide) {
+                ItemStack itemStack = optionalItemStack.get();
+                RailShape railShape = railBlock.getRailDirection(blockState, level, blockPos, null);
+                double offsetY = railShape.isAscending() ? 0.5 : 0.0;
+                Item item = itemStack.getItem();
+                AbstractMinecart abstractMinecart = null;
+                if (item == Items.MINECART) {
+                    abstractMinecart = new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5);
+                }
+                if (abstractMinecart != null) {
+                    itemStack.shrink(1);
+                    level.addFreshEntity(abstractMinecart);
+                    event.getEntity().startRiding(abstractMinecart, true);
+                }
+            }
+        }
     }
 }
