@@ -22,8 +22,6 @@ import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-
 public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemModel {
     private static final Block ground = ModBlocks.STONY_LOGS.get();
 
@@ -71,33 +69,23 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        BlockState $$1 = level.getBlockState(pos.below());
-        boolean $$4 = !level.getBlockState(pos.above()).isAir() && !$$1.isAir();
-        Iterator<Direction> var6 = Direction.Plane.HORIZONTAL.iterator();
+    public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
+        int horizontalRange = 5; // 水平方向检测范围
+        int verticalRange = 5; // 竖直方向检测范围
 
-        BlockState $$8;
-        do {
-            BlockPos $$6;
-            BlockState $$7;
-            do {
-                if (!var6.hasNext()) {
-                    return $$1.is(this) || $$1.is(ground);
+        for (int i = -horizontalRange; i <= horizontalRange; i++) {
+            for (int j = -verticalRange; j <= verticalRange; j++) {
+                for (int k = -horizontalRange; k <= horizontalRange; k++) {
+                    BlockPos checkPos = pos.offset(i, j, k);
+                    BlockState checkBlock = level.getBlockState(checkPos);
+                    if (checkBlock.is(ground)) {
+                        return true;
+                    }
                 }
-
-                Direction $$5 = var6.next();
-                $$6 = pos.relative($$5);
-                $$7 = level.getBlockState($$6);
-            } while (!$$7.is(this));
-
-            if ($$4) {
-                return false;
             }
+        }
 
-            $$8 = level.getBlockState($$6.below());
-        } while (!$$8.is(this) && !$$8.is(ground));
-
-        return true;
+        return false;
     }
 
 
