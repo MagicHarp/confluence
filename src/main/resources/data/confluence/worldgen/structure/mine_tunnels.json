@@ -7,9 +7,14 @@
   "size": 7,
   "step": "underground_structures",
   "start_height": {
-    "absolute": -60
+    "type": "uniform",
+    "min_inclusive": {
+      "absolute": 30
+    },
+    "max_inclusive": {
+      "absolute": -30
+    }
   },
-  "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "max_distance_from_center": 116,
   "terrain_adaptation": "none",
   "use_expansion_hack": false
