@@ -26,6 +26,7 @@ public class JungleHiveBlock extends Block implements CustomModel {
 
     @Override
     public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
+        super.playerDestroy(level, player, pos, state, blockEntity, tool);
         Random random = new Random();
         int randomNumber = random.nextInt(2);
         if (randomNumber == 0 && level instanceof ServerLevel && !player.isCreative()) {
