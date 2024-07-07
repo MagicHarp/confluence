@@ -3,6 +3,7 @@ package org.confluence.mod.worldgen.feature;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.WorldGenLevel;
@@ -39,20 +40,22 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
                 BlockPos adapterPos = blockPos.atY(range.floor() - 1);
                 if (ModFeatures.isPosExposed(level, adapterPos)) return false;
 
-                BlockPos boulderPos = blockPos.atY(range.ceiling());
-                Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
-                safeSetBlock(level, boulderPos, block.defaultBlockState(), predicate);
-                safeSetBlock(level, blockPos.atY(range.floor() + 1), ModFeatures.getPressurePlate(level, blockPos.atY(range.floor())), predicate);
-                safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), predicate);
-                AbstractMechanicalBlock.Entity boulder = ModFeatures.getEntity(level, boulderPos);
-                AbstractMechanicalBlock.Entity adapter = ModFeatures.getEntity(level, adapterPos);
-                if (boulder != null && adapter != null) boulder.connectTo(0xFF0000, adapterPos, adapter);
-                return true;
+                BlockPos supportPos = blockPos.atY(range.floor());
+                if (ModFeatures.isPosSturdy(level, supportPos, Direction.UP)) {
+                    Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
+                    BlockPos boulderPos = blockPos.atY(range.ceiling());
+                    safeSetBlock(level, boulderPos, block.defaultBlockState(), predicate);
+                    safeSetBlock(level, blockPos.atY(range.floor() + 1), ModFeatures.getPressurePlate(level, supportPos), predicate);
+                    safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), predicate);
+                    AbstractMechanicalBlock.Entity boulder = ModFeatures.getEntity(level, boulderPos);
+                    AbstractMechanicalBlock.Entity adapter = ModFeatures.getEntity(level, adapterPos);
+                    if (boulder != null && adapter != null) boulder.connectTo(0xFF0000, adapterPos, adapter);
+                    return true;
+                }
             }
         }
         return false;
     }
-
 
 
     public record Config(BoulderBlock.Variant variant, int maxHeight) implements FeatureConfiguration {

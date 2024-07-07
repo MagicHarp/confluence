@@ -48,4 +48,8 @@ public final class ModFeatures {
     static boolean isPosAir(WorldGenLevel level, BlockPos blockPos) {
         return level.isStateAtPosition(blockPos, BlockBehaviour.BlockStateBase::isAir);
     }
+
+    static boolean isPosSturdy(WorldGenLevel level, BlockPos blockPos, Direction face) {
+        return level.isStateAtPosition(blockPos, blockState -> blockState.isFaceSturdy(level, blockPos, face));
+    }
 }

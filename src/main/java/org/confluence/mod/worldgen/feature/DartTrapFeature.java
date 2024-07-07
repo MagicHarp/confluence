@@ -29,26 +29,25 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
         Config config = pContext.config();
         WorldGenLevel level = pContext.level();
         BlockPos blockPos = pContext.origin();
-        if (ModFeatures.isPosAir(level, blockPos)) return false;
+        if (!ModFeatures.isPosAir(level, blockPos)) return false;
         BlockPos.MutableBlockPos mutablePos = blockPos.mutable();
         for (int v = 1; v < config.maxSearchDown && ModFeatures.isPosAir(level, mutablePos); ++v) {
-            mutablePos.move(Direction.DOWN, 1);
+            mutablePos.move(Direction.DOWN);
         }
-        if (ModFeatures.isPosAir(level, mutablePos)) return false;
-        if (level.isStateAtPosition(mutablePos, blockState -> blockState.isFaceSturdy(level, mutablePos, Direction.UP))) {
+        if (ModFeatures.isPosSturdy(level, mutablePos, Direction.UP)) {
             BlockPos supportPos = mutablePos.immutable();
             BlockPos adapterPos = supportPos.below();
             if (ModFeatures.isPosExposed(level, adapterPos)) return false;
-            BlockPos.MutableBlockPos cache = mutablePos.move(Direction.UP, 1);
+            BlockPos dartPos = mutablePos.offset(0, 2, 0);
             Direction opposite = null;
             for (Direction direction : ModFeatures.HORIZONTAL) {
-                BlockPos.MutableBlockPos copy = new BlockPos.MutableBlockPos(mutablePos.getX(), mutablePos.getY(), mutablePos.getZ());
+                BlockPos.MutableBlockPos copy = dartPos.mutable();
                 int h;
                 for (h = 1; h < config.maxDistance && ModFeatures.isPosAir(level, copy); ++h) {
-                    copy.move(direction, 1);
+                    copy.move(direction);
                 }
                 if (h >= 4 && !ModFeatures.isPosAir(level, copy)) {
-                    cache = copy;
+                    dartPos = copy.immutable();
                     opposite = direction.getOpposite();
                     break;
                 }
@@ -56,7 +55,6 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
             if (opposite == null) return false;
             Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
             BlockState dartTrap = ModBlocks.DART_TRAP.get().defaultBlockState().setValue(FACING, opposite);
-            BlockPos dartPos = cache.offset(0, 1, 0);
             safeSetBlock(level, dartPos, dartTrap, predicate);
             safeSetBlock(level, supportPos.above(), ModFeatures.getPressurePlate(level, supportPos), predicate);
             safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), predicate);
