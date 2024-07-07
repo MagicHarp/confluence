@@ -174,11 +174,11 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
 
         public void load(@NotNull CompoundTag nbt) {
             super.load(nbt);
-            serializePoses(nbt, "connectedPoses", connectedPoses);
-            serializePoses(nbt, "relativePoses", relativePoses);
+            deserializePoses(nbt, "connectedPoses", connectedPoses);
+            deserializePoses(nbt, "relativePoses", relativePoses);
         }
 
-        private void serializePoses(@NotNull CompoundTag nbt, String posesKey, Int2ObjectMap<Set<BlockPos>> map) {
+        private void deserializePoses(@NotNull CompoundTag nbt, String posesKey, Int2ObjectMap<Set<BlockPos>> map) {
             map.clear();
             CompoundTag compoundTag = nbt.getCompound(posesKey);
             for (String key : compoundTag.getAllKeys()) {
@@ -187,7 +187,8 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
                     Set<BlockPos> posSet = new HashSet<>();
                     listTag.forEach(tag -> {
                         if (tag instanceof CompoundTag tag1) {
-                            posSet.add(NbtUtils.readBlockPos(tag1));
+                            BlockPos offset = NbtUtils.readBlockPos(tag1);
+                            posSet.add(getBlockPos().offset(offset.getX(), offset.getY(), offset.getZ()));
                         }
                     });
                     map.put(color, posSet);
@@ -197,8 +198,8 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
 
         protected void saveAdditional(@NotNull CompoundTag nbt) {
             super.saveAdditional(nbt);
-            deserializePoses(nbt, "connectedPoses", connectedPoses);
-            deserializePoses(nbt, "relativePoses", relativePoses);
+            serializePoses(nbt, "connectedPoses", connectedPoses);
+            serializePoses(nbt, "relativePoses", relativePoses);
         }
 
         public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -206,15 +207,16 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
         }
 
         public @NotNull CompoundTag getUpdateTag() {
-            return deserializePoses(super.getUpdateTag(), "connectedPoses", connectedPoses);
+            return serializePoses(super.getUpdateTag(), "connectedPoses", connectedPoses);
         }
 
-        public CompoundTag deserializePoses(CompoundTag nbt, String posesKey, Int2ObjectMap<Set<BlockPos>> map) {
+        public CompoundTag serializePoses(CompoundTag nbt, String posesKey, Int2ObjectMap<Set<BlockPos>> map) {
             CompoundTag compoundTag = new CompoundTag();
             for (Int2ObjectMap.Entry<Set<BlockPos>> entry : map.int2ObjectEntrySet()) {
                 ListTag listTag = new ListTag();
                 for (BlockPos blockPos : entry.getValue()) {
-                    listTag.add(NbtUtils.writeBlockPos(blockPos));
+                    BlockPos offset = blockPos.subtract(getBlockPos()); // 调整为相对坐标
+                    listTag.add(NbtUtils.writeBlockPos(offset));
                 }
                 compoundTag.put(String.valueOf(entry.getIntKey()), listTag);
             }
