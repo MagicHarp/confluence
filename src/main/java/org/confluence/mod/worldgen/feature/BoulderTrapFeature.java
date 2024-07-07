@@ -26,8 +26,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
-    private static final Direction[] HORIZONTAL = new Direction[]{Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
-
     public BoulderTrapFeature(Codec<Config> pCodec) {
         super(pCodec);
     }
@@ -43,7 +41,7 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
             Optional<Column> optionalColumn = Column.scan(level, blockPos, config.maxHeight, BlockBehaviour.BlockStateBase::isAir, blockState -> blockState.is(BlockTags.BASE_STONE_OVERWORLD));
             if (optionalColumn.isPresent() && optionalColumn.get() instanceof Column.Range range && range.height() > 4) {
                 BlockPos adapterPos = blockPos.atY(range.floor() - 1);
-                for (Direction direction : HORIZONTAL) {
+                for (Direction direction : ModFeatures.HORIZONTAL) {
                     if (level.isStateAtPosition(adapterPos.offset(direction.getNormal()), BlockBehaviour.BlockStateBase::isAir)) {
                         return false;
                     }
