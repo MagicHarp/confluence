@@ -23,25 +23,25 @@ public interface ISpreadable {
 
     Type getType();
 
-    default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource){
-        if(!blockState.getValue(STILL_ALIVE)) return;
+    default void spread(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
+        if (!blockState.getValue(STILL_ALIVE)) return;
         int phase = ConfluenceData.get(serverLevel).getGamePhase().ordinal();
-        for(int i = 0; i < 4; ++i){
+        for (int i = 0; i < 4; ++i) {
             BlockPos targetPos = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(5) - 3, randomSource.nextInt(3) - 1);
             BlockState beforeTransformState = serverLevel.getBlockState(targetPos);
             Block targetBlock = getType().blockMap.get(beforeTransformState.getBlock());
-            if(targetBlock == null || beforeTransformState.is(Blocks.GRASS) || beforeTransformState.is(Blocks.FERN) || beforeTransformState.is(Blocks.TALL_GRASS)){
+            if (targetBlock == null || beforeTransformState.is(Blocks.GRASS) || beforeTransformState.is(Blocks.FERN) || beforeTransformState.is(Blocks.TALL_GRASS)) {
                 continue; // 不要直接传播草
             }
-            if(beforeTransformState.is(Blocks.DIRT) || beforeTransformState.is(ModBlocks.ASH_BLOCK.get())){
-                if(!isFullBlock(serverLevel, targetPos.above())){
+            if (beforeTransformState.is(Blocks.DIRT) || beforeTransformState.is(ModBlocks.ASH_BLOCK.get())) {
+                if (!isFullBlock(serverLevel, targetPos.above())) {
                     spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, targetBlock.defaultBlockState(), targetPos);
                 }
-            }else{
+            } else {
                 spreadOrDie(phase, blockState, serverLevel, blockPos, randomSource, targetBlock.defaultBlockState(), targetPos);
             }
             BlockState above = serverLevel.getBlockState(targetPos.above());
-            if(above.is(Blocks.GRASS) || above.is(Blocks.FERN) || above.is(Blocks.TALL_GRASS)){  // 被动传播草
+            if (above.is(Blocks.GRASS) || above.is(Blocks.FERN) || above.is(Blocks.TALL_GRASS)) {  // 被动传播草
                 targetBlock = getType().blockMap.get(above.getBlock());
                 serverLevel.setBlockAndUpdate(targetPos.above(), targetBlock == null ? above : targetBlock.defaultBlockState());
             }
@@ -159,40 +159,40 @@ public interface ISpreadable {
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             //矿物
             () -> Blocks.REDSTONE_ORE, ModBlocks.PEARL_STONE_REDSTONE_ORE,
-            () -> Blocks.COAL_ORE, Ores.PEARL_STONE_COAL_ORE.getValue(),
-            () -> Blocks.LAPIS_ORE, Ores.PEARL_STONE_LAPIS_ORE.getValue(),
-            () -> Blocks.COPPER_ORE, Ores.PEARL_STONE_COPPER_ORE.getValue(),
-            () -> Blocks.IRON_ORE, Ores.PEARL_STONE_IRON_ORE.getValue(),
-            () -> Blocks.EMERALD_ORE, Ores.PEARL_STONE_EMERALD_ORE.getValue(),
-            () -> Blocks.DIAMOND_ORE, Ores.PEARL_STONE_DIAMOND_ORE.getValue(),
-            () -> Blocks.GOLD_ORE, Ores.PEARL_STONE_GOLD_ORE.getValue(),
-            Ores.TIN_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.LEAD_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.SILVER_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.TUNGSTEN_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.PLATINUM_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
+            () -> Blocks.COAL_ORE, Ores.PEARL_STONE_COAL_ORE,
+            () -> Blocks.LAPIS_ORE, Ores.PEARL_STONE_LAPIS_ORE,
+            () -> Blocks.COPPER_ORE, Ores.PEARL_STONE_COPPER_ORE,
+            () -> Blocks.IRON_ORE, Ores.PEARL_STONE_IRON_ORE,
+            () -> Blocks.EMERALD_ORE, Ores.PEARL_STONE_EMERALD_ORE,
+            () -> Blocks.DIAMOND_ORE, Ores.PEARL_STONE_DIAMOND_ORE,
+            () -> Blocks.GOLD_ORE, Ores.PEARL_STONE_GOLD_ORE,
+            Ores.TIN_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.LEAD_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.SILVER_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.TUNGSTEN_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.PLATINUM_ORE, Ores.PEARL_STONE_COAL_ORE,
 
-            Ores.EBONY_STONE_TIN_ORE.getValue(), Ores.PEARL_STONE_TIN_ORE.getValue(),
-            Ores.EBONY_STONE_LEAD_ORE.getValue(), Ores.PEARL_STONE_LEAD_ORE.getValue(),
-            Ores.EBONY_STONE_SILVER_ORE.getValue(), Ores.PEARL_STONE_SILVER_ORE.getValue(),
-            Ores.EBONY_STONE_TUNGSTEN_ORE.getValue(), Ores.PEARL_STONE_TUNGSTEN_ORE.getValue(),
-            Ores.EBONY_STONE_PLATINUM_ORE.getValue(), Ores.PEARL_STONE_PLATINUM_ORE.getValue(),
-            Ores.EBONY_STONE_COAL_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.EBONY_STONE_COPPER_ORE.getValue(), Ores.PEARL_STONE_COPPER_ORE.getValue(),
-            Ores.EBONY_STONE_IRON_ORE.getValue(), Ores.PEARL_STONE_IRON_ORE.getValue(),
-            Ores.EBONY_STONE_GOLD_ORE.getValue(), Ores.PEARL_STONE_GOLD_ORE.getValue(),
-            Ores.EBONY_STONE_DIAMOND_ORE.getValue(), Ores.PEARL_STONE_DIAMOND_ORE.getValue(),
+            Ores.EBONY_STONE_TIN_ORE, Ores.PEARL_STONE_TIN_ORE,
+            Ores.EBONY_STONE_LEAD_ORE, Ores.PEARL_STONE_LEAD_ORE,
+            Ores.EBONY_STONE_SILVER_ORE, Ores.PEARL_STONE_SILVER_ORE,
+            Ores.EBONY_STONE_TUNGSTEN_ORE, Ores.PEARL_STONE_TUNGSTEN_ORE,
+            Ores.EBONY_STONE_PLATINUM_ORE, Ores.PEARL_STONE_PLATINUM_ORE,
+            Ores.EBONY_STONE_COAL_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.EBONY_STONE_COPPER_ORE, Ores.PEARL_STONE_COPPER_ORE,
+            Ores.EBONY_STONE_IRON_ORE, Ores.PEARL_STONE_IRON_ORE,
+            Ores.EBONY_STONE_GOLD_ORE, Ores.PEARL_STONE_GOLD_ORE,
+            Ores.EBONY_STONE_DIAMOND_ORE, Ores.PEARL_STONE_DIAMOND_ORE,
             ModBlocks.EBONY_STONE_REDSTONE_ORE, ModBlocks.PEARL_STONE_REDSTONE_ORE,
-            Ores.ANOTHER_CRIMSON_STONE_TIN_ORE.getValue(), Ores.PEARL_STONE_TIN_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE.getValue(), Ores.PEARL_STONE_LEAD_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_SILVER_ORE.getValue(), Ores.PEARL_STONE_SILVER_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_TUNGSTEN_ORE.getValue(), Ores.PEARL_STONE_TUNGSTEN_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE.getValue(), Ores.PEARL_STONE_PLATINUM_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(), Ores.PEARL_STONE_COAL_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.getValue(), Ores.PEARL_STONE_COPPER_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.getValue(), Ores.PEARL_STONE_IRON_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.getValue(), Ores.PEARL_STONE_GOLD_ORE.getValue(),
-            Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.getValue(), Ores.PEARL_STONE_DIAMOND_ORE.getValue(),
+            Ores.ANOTHER_CRIMSON_STONE_TIN_ORE, Ores.PEARL_STONE_TIN_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE, Ores.PEARL_STONE_LEAD_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_SILVER_ORE, Ores.PEARL_STONE_SILVER_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_TUNGSTEN_ORE, Ores.PEARL_STONE_TUNGSTEN_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE, Ores.PEARL_STONE_PLATINUM_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_COAL_ORE, Ores.PEARL_STONE_COAL_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE, Ores.PEARL_STONE_COPPER_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_IRON_ORE, Ores.PEARL_STONE_IRON_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE, Ores.PEARL_STONE_GOLD_ORE,
+            Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE, Ores.PEARL_STONE_DIAMOND_ORE,
             ModBlocks.ANOTHER_CRIMSON_STONE_REDSTONE_ORE, ModBlocks.PEARL_STONE_REDSTONE_ORE,
             // 植物
             ModBlocks.CORRUPT_GRASS, ModBlocks.HALLOW_GRASS,
@@ -270,18 +270,18 @@ public interface ISpreadable {
             () -> Blocks.PACKED_ICE, ModBlocks.RED_PACKED_ICE,
             //矿物
             () -> Blocks.REDSTONE_ORE, ModBlocks.ANOTHER_CRIMSON_STONE_REDSTONE_ORE,
-            () -> Blocks.COAL_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            () -> Blocks.LAPIS_ORE, Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.getValue(),
-            () -> Blocks.COPPER_ORE, Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.getValue(),
-            () -> Blocks.IRON_ORE, Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.getValue(),
-            () -> Blocks.EMERALD_ORE, Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE.getValue(),
-            () -> Blocks.DIAMOND_ORE, Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.getValue(),
-            () -> Blocks.GOLD_ORE, Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.getValue(),
-            Ores.TIN_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.LEAD_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.SILVER_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.TUNGSTEN_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.PLATINUM_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
+            () -> Blocks.COAL_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            () -> Blocks.LAPIS_ORE, Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE,
+            () -> Blocks.COPPER_ORE, Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE,
+            () -> Blocks.IRON_ORE, Ores.ANOTHER_CRIMSON_STONE_IRON_ORE,
+            () -> Blocks.EMERALD_ORE, Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE,
+            () -> Blocks.DIAMOND_ORE, Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE,
+            () -> Blocks.GOLD_ORE, Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE,
+            Ores.TIN_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.LEAD_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.SILVER_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.TUNGSTEN_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.PLATINUM_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
 
             // 蘑菇
             ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM
@@ -359,29 +359,29 @@ public interface ISpreadable {
             () -> Blocks.PACKED_ICE, ModBlocks.PURPLE_PACKED_ICE,
             //矿物
             () -> Blocks.REDSTONE_ORE, ModBlocks.ANOTHER_CRIMSON_STONE_REDSTONE_ORE,
-            () -> Blocks.COAL_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            () -> Blocks.LAPIS_ORE, Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.getValue(),
-            () -> Blocks.COPPER_ORE, Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.getValue(),
-            () -> Blocks.IRON_ORE, Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.getValue(),
-            () -> Blocks.EMERALD_ORE, Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE.getValue(),
-            () -> Blocks.DIAMOND_ORE, Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.getValue(),
-            () -> Blocks.GOLD_ORE, Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.getValue(),
-            Ores.TIN_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.LEAD_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.SILVER_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.TUNGSTEN_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
-            Ores.PLATINUM_ORE.getValue(), Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.getValue(),
+            () -> Blocks.COAL_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            () -> Blocks.LAPIS_ORE, Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE,
+            () -> Blocks.COPPER_ORE, Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE,
+            () -> Blocks.IRON_ORE, Ores.ANOTHER_CRIMSON_STONE_IRON_ORE,
+            () -> Blocks.EMERALD_ORE, Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE,
+            () -> Blocks.DIAMOND_ORE, Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE,
+            () -> Blocks.GOLD_ORE, Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE,
+            Ores.TIN_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.LEAD_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.SILVER_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.TUNGSTEN_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
+            Ores.PLATINUM_ORE, Ores.ANOTHER_CRIMSON_STONE_COAL_ORE,
 
-            Ores.PEARL_STONE_TIN_ORE.getValue(), Ores.EBONY_STONE_TIN_ORE.getValue(),
-            Ores.PEARL_STONE_LEAD_ORE.getValue(), Ores.EBONY_STONE_LEAD_ORE.getValue(),
-            Ores.PEARL_STONE_SILVER_ORE.getValue(), Ores.EBONY_STONE_SILVER_ORE.getValue(),
-            Ores.PEARL_STONE_TUNGSTEN_ORE.getValue(), Ores.EBONY_STONE_TUNGSTEN_ORE.getValue(),
-            Ores.PEARL_STONE_PLATINUM_ORE.getValue(), Ores.EBONY_STONE_PLATINUM_ORE.getValue(),
-            Ores.PEARL_STONE_COAL_ORE.getValue(), Ores.EBONY_STONE_COAL_ORE.getValue(),
-            Ores.PEARL_STONE_COPPER_ORE.getValue(), Ores.EBONY_STONE_COPPER_ORE.getValue(),
-            Ores.PEARL_STONE_IRON_ORE.getValue(), Ores.EBONY_STONE_IRON_ORE.getValue(),
-            Ores.PEARL_STONE_GOLD_ORE.getValue(), Ores.EBONY_STONE_GOLD_ORE.getValue(),
-            Ores.PEARL_STONE_DIAMOND_ORE.getValue(), Ores.EBONY_STONE_DIAMOND_ORE.getValue(),
+            Ores.PEARL_STONE_TIN_ORE, Ores.EBONY_STONE_TIN_ORE,
+            Ores.PEARL_STONE_LEAD_ORE, Ores.EBONY_STONE_LEAD_ORE,
+            Ores.PEARL_STONE_SILVER_ORE, Ores.EBONY_STONE_SILVER_ORE,
+            Ores.PEARL_STONE_TUNGSTEN_ORE, Ores.EBONY_STONE_TUNGSTEN_ORE,
+            Ores.PEARL_STONE_PLATINUM_ORE, Ores.EBONY_STONE_PLATINUM_ORE,
+            Ores.PEARL_STONE_COAL_ORE, Ores.EBONY_STONE_COAL_ORE,
+            Ores.PEARL_STONE_COPPER_ORE, Ores.EBONY_STONE_COPPER_ORE,
+            Ores.PEARL_STONE_IRON_ORE, Ores.EBONY_STONE_IRON_ORE,
+            Ores.PEARL_STONE_GOLD_ORE, Ores.EBONY_STONE_GOLD_ORE,
+            Ores.PEARL_STONE_DIAMOND_ORE, Ores.EBONY_STONE_DIAMOND_ORE,
             ModBlocks.PEARL_STONE_REDSTONE_ORE, ModBlocks.EBONY_STONE_REDSTONE_ORE,
 
             // 邪恶环境方块

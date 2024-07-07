@@ -1,7 +1,6 @@
 package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,11 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import org.confluence.mod.item.common.Materials;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 
 public class HellStoneBlock extends Block {
@@ -36,12 +33,9 @@ public class HellStoneBlock extends Block {
 
     @Override
     public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
-        if (level instanceof ServerLevel && !player.isCreative()) {
-            ItemStack drops = new ItemStack(Materials.RAW_HELLSTONE.get());
-            popResource(level, pos, drops);
+        super.playerDestroy(level, player, pos, state, blockEntity, tool);
+        if (!level.isClientSide && !player.getAbilities().instabuild) {
             level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
-        } else {
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
     }
 }
