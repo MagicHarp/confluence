@@ -15,6 +15,8 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.vehicle.Minecart;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
@@ -32,6 +34,7 @@ import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
@@ -97,6 +100,8 @@ public final class ModEvents {
             Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 0));
             Regions.register(new GlowingMushroomRegion(new ResourceLocation(MODID, "glowing_mushroom"), 1));
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
+
+            Confluence.CURIO_MINECART.put(Minecart.class, Items.MINECART);
         });
     }
 

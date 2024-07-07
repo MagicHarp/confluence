@@ -33,6 +33,7 @@ public final class ModTags {
     public static class Items {
         public static final TagKey<Item> ACCESSORY = curios("accessory");
         public static final TagKey<Item> HOOK = curios("hook");
+        public static final TagKey<Item> MINECART = curios("minecart");
         public static final TagKey<Item> PROVIDE_MANA = register("provide_mana");
         public static final TagKey<Item> PROVIDE_LIFE = register("provide_life");
         public static final TagKey<Item> COIN = register("coin");

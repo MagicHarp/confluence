@@ -3,6 +3,8 @@ package org.confluence.mod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +30,7 @@ import software.bernie.geckolib.GeckoLib;
 
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.Hashtable;
 
 @SuppressWarnings("unused")
 @Mod(Confluence.MODID)
@@ -38,6 +41,7 @@ public final class Confluence {
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
     public static final ResourceKey<Level> HELL = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID, "hell"));
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
+    public static final Hashtable<Class<? extends AbstractMinecart>, Item> CURIO_MINECART = new Hashtable<>();
 
     public Confluence() {
         ModConfigs.registerCommon();
