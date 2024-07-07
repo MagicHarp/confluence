@@ -168,7 +168,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_REDSTONE_ORE = registerWithItem("another_crimson_stone_redstone_ore", CustomModelBlock::new);
 
     // 石中剑
-    public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", () -> new SwordInStoneBlock(StateProperties.SwordType.Null));
+    public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", SwordInStoneBlock::new);
     // 宝石树
     public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", BranchesBlock::new);
