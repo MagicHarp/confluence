@@ -2,6 +2,8 @@ package org.confluence.mod.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
@@ -22,6 +24,7 @@ import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.Materials;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -167,13 +170,13 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", CustomModelBlock::new);
     // 宝石树
     public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", CustomModelBlock::new);
-    public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> EMERALD_BRANCHES = registerWithItem("emerald_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", CustomModelBlock::new);
-    public static final RegistryObject<Block> ANOTHER_AMETHYST_BRANCHES = registerWithItem("another_amethyst_branches", CustomModelBlock::new);
+    public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches",  BranchesBlock::new);
+    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches",  BranchesBlock::new);
+    public static final RegistryObject<Block> EMERALD_BRANCHES = registerWithItem("emerald_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> ANOTHER_AMETHYST_BRANCHES = registerWithItem("another_amethyst_branches", BranchesBlock::new);
     // 血肉眼球块
     public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
     public static final RegistryObject<Block> PUPIL_BLOCKS = registerWithItem("pupil_blocks", CustomModelBlock::new);
