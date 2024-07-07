@@ -69,9 +69,9 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
     }
 
     @Override
-    public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
-        int horizontalRange = 5; // 水平方向检测范围
-        int verticalRange = 5; // 竖直方向检测范围
+    public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+        int horizontalRange = 2; // 水平方向检测范围
+        int verticalRange = 3; // 竖直方向检测范围
 
         for (int i = -horizontalRange; i <= horizontalRange; i++) {
             for (int j = -verticalRange; j <= verticalRange; j++) {

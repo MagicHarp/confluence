@@ -26,6 +26,7 @@ import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 
+import java.util.Properties;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -167,9 +168,9 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_REDSTONE_ORE = registerWithItem("another_crimson_stone_redstone_ore", CustomModelBlock::new);
 
     // 石中剑
-    public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", CustomModelBlock::new);
+    public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", () -> new SwordInStoneBlock(StateProperties.SwordType.Null));
     // 宝石树
-    public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", CustomModelBlock::new);
+    public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", BranchesBlock::new);
     public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches",  BranchesBlock::new);
     public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches",  BranchesBlock::new);
