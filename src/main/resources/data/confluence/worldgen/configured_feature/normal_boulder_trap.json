@@ -1,6 +1,4 @@
 {
     "type": "confluence:boulder_trap",
-    "config": {
-        "variant": "boulder"
-    }
+    "config": {}
 }

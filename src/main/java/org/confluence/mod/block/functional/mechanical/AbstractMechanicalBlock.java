@@ -235,7 +235,7 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
             this.networkNode = node;
         }
 
-        public NetworkNode getNetworkNode() {
+        public @Nullable NetworkNode getNetworkNode() {
             return networkNode;
         }
 

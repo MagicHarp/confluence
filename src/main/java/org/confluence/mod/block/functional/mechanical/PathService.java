@@ -79,6 +79,7 @@ public class PathService {
                     if (level.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
                         curNetwork = cur.getOrCreateNetwork(color);
                         NetworkNode next = blockEntity.getNetworkNode();
+                        if (next == null) continue;
                         Network nextNetwork = next.getNetwork(color);
                         if (nextNetwork == null) {
                             // 将结点加入到网络中

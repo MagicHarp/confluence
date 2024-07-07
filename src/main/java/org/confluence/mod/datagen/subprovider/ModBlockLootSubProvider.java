@@ -74,25 +74,25 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.HELLSTONE_BLOCK.get());
         dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
 
-        add(Ores.PEARL_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
-        add(Ores.EBONY_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
-        add(Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.get(), block -> createOreDrop(block,Items.COAL));
+        add(Ores.PEARL_STONE_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
+        add(Ores.EBONY_STONE_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
+        add(Ores.ANOTHER_CRIMSON_STONE_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
         add(Ores.TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.PEARL_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.EBONY_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.ANOTHER_CRIMSON_STONE_TIN_ORE.get(), this::createTinOreDrop);
         add(Ores.DEEPSLATE_TIN_ORE.get(), this::createTinOreDrop);
-        add(Ores.PEARL_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
-        add(Ores.EBONY_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
-        add(Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.get(), this::createCopperOreDrop);
+        add(Ores.PEARL_STONE_COPPER_ORE.get(), super::createCopperOreDrops);
+        add(Ores.EBONY_STONE_COPPER_ORE.get(), super::createCopperOreDrops);
+        add(Ores.ANOTHER_CRIMSON_STONE_COPPER_ORE.get(), super::createCopperOreDrops);
         add(Ores.LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.PEARL_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.EBONY_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.ANOTHER_CRIMSON_STONE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
         add(Ores.DEEPSLATE_LEAD_ORE.get(), block -> createOreDrop(block, Materials.RAW_LEAD.get()));
-        add(Ores.PEARL_STONE_IRON_ORE.get(), block -> createOreDrop(block,Items.RAW_IRON));
-        add(Ores.EBONY_STONE_IRON_ORE.get(), block -> createOreDrop(block,Items.RAW_IRON));
-        add(Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.get(), block -> createOreDrop(block,Items.RAW_IRON));
+        add(Ores.PEARL_STONE_IRON_ORE.get(), block -> createOreDrop(block, Items.RAW_IRON));
+        add(Ores.EBONY_STONE_IRON_ORE.get(), block -> createOreDrop(block, Items.RAW_IRON));
+        add(Ores.ANOTHER_CRIMSON_STONE_IRON_ORE.get(), block -> createOreDrop(block, Items.RAW_IRON));
         add(Ores.SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
         add(Ores.PEARL_STONE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
         add(Ores.EBONY_STONE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_SILVER.get()));
@@ -103,18 +103,18 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.EBONY_STONE_TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.ANOTHER_CRIMSON_STONE_TUNGSTEN_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
         add(Ores.DEEPSLATE_SILVER_ORE.get(), block -> createOreDrop(block, Materials.RAW_TUNGSTEN.get()));
-        add(Ores.PEARL_STONE_GOLD_ORE.get(), block -> createOreDrop(block,Items.RAW_GOLD));
-        add(Ores.EBONY_STONE_GOLD_ORE.get(), block -> createOreDrop(block,Items.RAW_GOLD));
-        add(Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.get(), block -> createOreDrop(block,Items.RAW_GOLD));
+        add(Ores.PEARL_STONE_GOLD_ORE.get(), block -> createOreDrop(block, Items.RAW_GOLD));
+        add(Ores.EBONY_STONE_GOLD_ORE.get(), block -> createOreDrop(block, Items.RAW_GOLD));
+        add(Ores.ANOTHER_CRIMSON_STONE_GOLD_ORE.get(), block -> createOreDrop(block, Items.RAW_GOLD));
         add(Ores.PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.PEARL_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.EBONY_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.ANOTHER_CRIMSON_STONE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         add(Ores.DEEPSLATE_PLATINUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PLATINUM.get()));
         // 红石青金石
-        add(Ores.PEARL_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
-        add(Ores.EBONY_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
-        add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), this::createLazuliOreDrop);
+        add(Ores.PEARL_STONE_LAPIS_ORE.get(), super::createLapisOreDrops);
+        add(Ores.EBONY_STONE_LAPIS_ORE.get(), super::createLapisOreDrops);
+        add(Ores.ANOTHER_CRIMSON_STONE_LAPIS_ORE.get(), super::createLapisOreDrops);
         // 宝石
         add(Ores.RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
         add(Ores.PEARL_STONE_RUBY_ORE.get(), block -> createOreDrop(block, Materials.RUBY.get()));
@@ -141,12 +141,12 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.EBONY_STONE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
         add(Ores.ANOTHER_CRIMSON_STONE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
         add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
-        add(Ores.PEARL_STONE_EMERALD_ORE.get(), block -> createOreDrop(block,Items.EMERALD));
-        add(Ores.EBONY_STONE_EMERALD_ORE.get(), block -> createOreDrop(block,Items.EMERALD));
-        add(Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE.get(), block -> createOreDrop(block,Items.EMERALD));
-        add(Ores.PEARL_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block,Items.DIAMOND));
-        add(Ores.EBONY_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block,Items.DIAMOND));
-        add(Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block,Items.DIAMOND));
+        add(Ores.PEARL_STONE_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
+        add(Ores.EBONY_STONE_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
+        add(Ores.ANOTHER_CRIMSON_STONE_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
+        add(Ores.PEARL_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block, Items.DIAMOND));
+        add(Ores.EBONY_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block, Items.DIAMOND));
+        add(Ores.ANOTHER_CRIMSON_STONE_DIAMOND_ORE.get(), block -> createOreDrop(block, Items.DIAMOND));
 
         add(Ores.METEORITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_METEORITE.get()));
         add(Ores.EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
@@ -164,15 +164,15 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.ASH_HELLSTONE.get(), block -> createOreDrop(block, Materials.RAW_HELLSTONE.get()));
         // endregion ore
 
-        //gems
-        add(ModBlocks.RUBY_BRANCHES.get(), this::createRubyDrop);
-        add(ModBlocks.AMBER_BRANCHES.get(), this::createAmberDrop);
-        add(ModBlocks.TOPAZ_BRANCHES.get(), this::createTopazDrop);
-        add(ModBlocks.EMERALD_BRANCHES.get(), this::createEmeraldDrop);
-        add(ModBlocks.DIAMOND_BRANCHES.get(), this::createDiamondDrop);
-        add(ModBlocks.SAPPHIRE_BRANCHES.get(), this::createSapphireDrop);
-        add(ModBlocks.ANOTHER_AMETHYST_BRANCHES.get(), this::createAnother_AmethystDrop);
-        //torch
+        // gems
+        add(ModBlocks.RUBY_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.AMBER_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.TOPAZ_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.EMERALD_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.DIAMOND_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.SAPPHIRE_BRANCHES.get(), this::createGemDrops);
+        add(ModBlocks.ANOTHER_AMETHYST_BRANCHES.get(), this::createGemDrops);
+        // torch
         for (Torches torch : Torches.values()) {
             dropSelf(torch.stand.get());
             dropSelf(torch.wall.get());
@@ -242,7 +242,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropOther(LIFE_MUSHROOM.get(), ModItems.LIFE_MUSHROOM.get());
         add(JUNGLE_SPORE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
             .add(LootItem.lootTableItem(ModItems.JUNGLE_SPORE.get())
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))));
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
 
     }
 
@@ -258,92 +258,35 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));
     }
-    private LootTable.Builder createCopperOreDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.RAW_COPPER)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-
-    private LootTable.Builder createLazuliOreDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.LAPIS_LAZULI)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createRedstoneOreDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.REDSTONE)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createRubyDrop(Block block) {
+    private LootTable.Builder createGemDrops(Block block) {
         return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RUBY.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createAmberDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.AMBER.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createTopazDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.TOPAZ.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createDiamondDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.DIAMOND)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createEmeraldDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.EMERALD)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createSapphireDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.SAPPHIRE.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createAnother_AmethystDrop(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.ANOTHER_AMETHYST.get())
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 24.0F)))
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));
     }
 
     // TODO: 时运 再生法杖 再生之斧
-    private void addHerbDrop(BaseHerbBlock block,Item herb,Item seed) {
-        add(block,LootTable.lootTable()
+    private void addHerbDrop(BaseHerbBlock block, Item herb, Item seed) {
+        add(block, LootTable.lootTable()
             .withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .setBonusRolls(ConstantValue.exactly(0.5f))
                 .add(LootItem.lootTableItem(herb))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                     .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(BaseHerbBlock.AGE,2))))
+                        .hasProperty(BaseHerbBlock.AGE, 2))))
             .withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(seed)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1,3))))
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                     .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(BaseHerbBlock.AGE,2))))
+                        .hasProperty(BaseHerbBlock.AGE, 2))))
             .withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(herb))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                     .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(BaseHerbBlock.AGE,1)))));
+                        .hasProperty(BaseHerbBlock.AGE, 1)))));
     }
-
-
 }
