@@ -72,7 +72,7 @@ public class DartTrapBlock extends AbstractMechanicalBlock implements CustomMode
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
             arrow.setEffectsFromItem(poisonArrow);
             arrow.setBaseDamage(5.0);
-            arrow.shoot(direction.getStepX(), direction.getStepY() + 0.1, direction.getStepZ(), 3.0F, 0.0F);
+            arrow.shoot(direction.getStepX(), direction.getStepY(), direction.getStepZ(), 3.0F, 0.0F);
             pLevel.addFreshEntity(arrow);
         }
     }
