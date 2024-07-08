@@ -19,18 +19,21 @@ import org.jetbrains.annotations.NotNull;
 public class SwordInStoneBlock extends Block implements CustomModel, CustomItemModel {
     public static final EnumProperty<StateProperties.SwordType> swordType = EnumProperty.create("sword_type", StateProperties.SwordType.class);
 
+    public SwordInStoneBlock() {
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instabreak());
+        this.registerDefaultState(this.getStateDefinition().any().setValue(swordType, StateProperties.SwordType.Null));
+    }
+
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        super.getShape(state, world, pos, context);
         if (state.getValue(swordType) == StateProperties.SwordType.Null) {
             return Shapes.or(box(2, 0, 2, 14, 3, 14), box(3, 3, 3, 13, 6, 13));
         } else {
             return Shapes.or(box(2, 0, 2, 14, 3, 14), box(3, 3, 3, 13, 6, 13), box(5, 6, 5, 11, 16, 11));
         }
     }
-    public SwordInStoneBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instabreak());
-        this.registerDefaultState(this.getStateDefinition().any().setValue(swordType, StateProperties.SwordType.Null));
-    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(swordType);
