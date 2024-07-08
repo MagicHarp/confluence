@@ -218,7 +218,7 @@ public final class ForgeEvents {
         double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
         double rangeSqr = range * range;
         self.level().players().stream()
-            .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(self))
+            .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
             .max((playerA, playerB) -> {
                 AtomicInteger atomic = new AtomicInteger();
                 playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
