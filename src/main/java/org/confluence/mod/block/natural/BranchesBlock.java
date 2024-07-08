@@ -94,7 +94,7 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
 
     @Override
     public void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (!canSurvive(state, level, pos)) {
+        if (!state.canSurvive(level, pos)) {
             level.destroyBlock(pos, true);
             dropResources(state, level, pos);
         }
@@ -109,7 +109,7 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
                 for (int k = -horizontalRange; k <= horizontalRange; k++) {
                     BlockPos checkPos = pos.offset(i, j, k);
                     BlockState checkBlock = level.getBlockState(checkPos);
-                    if (checkBlock.is(ground) || checkBlock.getBlock() instanceof BranchesBlock) {
+                    if (checkBlock.is(ground)) {
                         return true;
                     }
                 }
