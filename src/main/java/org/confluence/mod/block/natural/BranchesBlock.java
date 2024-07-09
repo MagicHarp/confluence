@@ -23,6 +23,7 @@ import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.EnumMap;
 
@@ -100,22 +101,29 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
         }
     }
 
-    @Override
-    public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
-        int horizontalRange = 2; // 水平方向检测范围
-        int verticalRange = 3; // 竖直方向检测范围
-        for (int i = -horizontalRange; i <= horizontalRange; i++) {
-            for (int j = -verticalRange; j <= verticalRange; j++) {
-                for (int k = -horizontalRange; k <= horizontalRange; k++) {
-                    BlockPos checkPos = pos.offset(i, j, k);
-                    BlockState checkBlock = level.getBlockState(checkPos);
-                    if (checkBlock.is(ground)) {
-                        return true;
-                    }
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        BlockState $$3 = pLevel.getBlockState(pPos.below());
+        boolean $$4 = !pLevel.getBlockState(pPos.above()).isAir() && !$$3.isAir();
+        Iterator var6 = Direction.Plane.HORIZONTAL.iterator();
+
+        BlockState $$8;
+        do {
+            BlockPos $$6;
+            BlockState $$7;
+            do {
+                if (!var6.hasNext()) {
+                    return $$3.is(this) || $$3.is(ground);
                 }
-            }
-        }
-        return false;
+
+                Direction $$5 = (Direction)var6.next();
+                $$6 = pPos.relative($$5);
+                $$7 = pLevel.getBlockState($$6);
+            } while(!$$7.is(this));
+
+            $$8 = pLevel.getBlockState($$6.below());
+        } while(!$$8.is(this) && !$$8.is(ground));
+
+        return true;
     }
 
     @Override
