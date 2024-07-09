@@ -63,7 +63,7 @@ public final class ModTiers {
         TierSortingRegistry.registerTier(TITANIUM, titanium, List.of(adamantite), List.of());
     }
 
-    private record ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) implements Tier {
+    public record ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) implements Tier {
         @Override
         public int getUses() {
             return uses;

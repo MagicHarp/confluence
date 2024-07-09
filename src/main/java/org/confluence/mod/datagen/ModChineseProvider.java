@@ -30,7 +30,6 @@ import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ModBlocks.*;
-import static org.confluence.mod.block.ModBlocks.EBONY_HARDENED_SAND_BLOCK;
 import static org.confluence.mod.block.common.DecorativeBlocks.*;
 import static org.confluence.mod.item.ModItems.*;
 import static org.confluence.mod.item.curio.CurioItems.*;
@@ -949,6 +948,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "蠕虫围巾是困难模式前的配饰，可减少 17% 的伤害。");
         add("item.confluence.worm_scarf.info2", "该物品的伤害减免是在施加防御后计算的。");
         add("item.confluence.worm_scarf.info3", "在专家模式中，蠕虫围巾总是从世界吞噬者的宝藏袋中掉落。");
+
+
+        add("block.confluence.base_chest_block.locked_golden", "上锁的金箱子");
+        add("block.confluence.base_chest_block.unlocked_golden", "金箱子");
+
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");

@@ -66,16 +66,6 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
     }
 
     @Override
-    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return SHAPE;
-    }
-
-    @Override
-    public @NotNull VoxelShape getInteractionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
-        return SHAPE;
-    }
-
-    @Override
     public float getDestroyProgress(@NotNull BlockState pState, @NotNull Player pPlayer, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
         return 0.0F;
     }
@@ -123,20 +113,24 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
             return variant;
         }
 
+        @Override
         public void load(@NotNull CompoundTag nbt) {
             super.load(nbt);
             this.variant = Variant.byId(nbt.getInt("variant"));
         }
 
+        @Override
         protected void saveAdditional(@NotNull CompoundTag nbt) {
             super.saveAdditional(nbt);
             nbt.putInt("variant", variant.id);
         }
 
+        @Override
         public ClientboundBlockEntityDataPacket getUpdatePacket() {
             return ClientboundBlockEntityDataPacket.create(this);
         }
 
+        @Override
         public @NotNull CompoundTag getUpdateTag() {
             CompoundTag nbt = new CompoundTag();
             nbt.putInt("variant", variant.id);

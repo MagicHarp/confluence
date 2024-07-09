@@ -7,10 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.common.Boxes;
-import org.confluence.mod.block.common.DecorativeBlocks;
-import org.confluence.mod.block.common.Pots;
-import org.confluence.mod.block.common.Torches;
+import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
@@ -67,6 +64,11 @@ public final class ModTabs {
 
                 output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
+
+                output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), BaseChestBlock.Variant.GOLDEN, true));
+                for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
+                    output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant, false));
+                }
             })
             .build());
     // 自然方块

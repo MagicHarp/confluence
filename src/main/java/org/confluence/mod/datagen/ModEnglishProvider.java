@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.capability.prefix.ModPrefix;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
@@ -829,6 +828,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("block.confluence.timers_block_5_1", "5 Second TImer");
         add("block.confluence.timers_block_1_2", "1/2 Second Timer");
         add("block.confluence.timers_block_1_4", "1/4 Second TImer");
+        add("block.confluence.base_chest_block.locked_golden", "Locked Golden Chest");
+        add("block.confluence.base_chest_block.unlocked_golden", "Golden Chest");
 
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {

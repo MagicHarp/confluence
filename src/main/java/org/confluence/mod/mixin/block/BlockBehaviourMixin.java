@@ -19,6 +19,6 @@ public abstract class BlockBehaviourMixin {
         if (RevelationRegistry.isVisibleTo(state, player)) return;
         BlockState target = RevelationRegistry.getCloak(state);
         if (target == null) return;
-        cir.setReturnValue(player.getDigSpeed(target, pos) / f / (float) i);
+        cir.setReturnValue(player.getDigSpeed(target, pos) / target.getDestroySpeed(getter, pos) / (float) i);
     }
 }

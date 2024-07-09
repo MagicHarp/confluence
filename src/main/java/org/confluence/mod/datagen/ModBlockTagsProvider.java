@@ -132,6 +132,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.RAW_ADAMANTITE_BLOCK.get(), Ores.ADAMANTITE_BLOCK.get(),
             Ores.DEEPSLATE_TITANIUM_ORE.get(), Ores.RAW_TITANIUM_BLOCK.get(), Ores.TITANIUM_BLOCK.get()
         );
+        IntrinsicTagAppender<Block> needsNonVanillaLevel = tag(ModTags.Blocks.NEEDS_NON_VANILLA_LEVEL);
+        needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_4_LEVEL);
+        needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_5_LEVEL);
+        needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_6_LEVEL);
+        needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_7_LEVEL);
         tag(ModTags.Blocks.FLOWER_BOOTS_AVAILABLE).add(
             Blocks.GRASS_BLOCK,
             HALLOW_GRASS_BLOCK.get()

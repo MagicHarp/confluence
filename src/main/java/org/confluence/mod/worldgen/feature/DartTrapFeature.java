@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,8 +13,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.StateProperties;
 import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
-
-import java.util.function.Predicate;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
@@ -46,18 +43,17 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
                 for (h = 1; h < config.maxDistance && ModFeatures.isPosAir(level, copy); ++h) {
                     copy.move(direction);
                 }
-                if (h >= 4 && !ModFeatures.isPosAir(level, copy)) {
+                if (h >= 4 && !level.isStateAtPosition(copy, blockState -> blockState.isAir() || blockState.getCollisionShape(level, copy).isEmpty())) {
                     dartPos = copy.immutable();
                     opposite = direction.getOpposite();
                     break;
                 }
             }
             if (opposite == null) return false;
-            Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
             BlockState dartTrap = ModBlocks.DART_TRAP.get().defaultBlockState().setValue(FACING, opposite);
-            safeSetBlock(level, dartPos, dartTrap, predicate);
-            safeSetBlock(level, supportPos.above(), ModFeatures.getPressurePlate(level, supportPos), predicate);
-            safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), predicate);
+            safeSetBlock(level, dartPos, dartTrap, ModFeatures.IS_REPLACEABLE);
+            safeSetBlock(level, supportPos.above(), ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
+            safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), ModFeatures.IS_REPLACEABLE);
             AbstractMechanicalBlock.Entity dart = ModFeatures.getEntity(level, dartPos);
             AbstractMechanicalBlock.Entity adapter = ModFeatures.getEntity(level, adapterPos);
             if (dart != null && adapter != null) dart.connectTo(0x00FF00, adapterPos, adapter);

@@ -2,8 +2,6 @@ package org.confluence.mod.block;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
@@ -24,9 +22,7 @@ import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.common.Materials;
 
-import java.util.Properties;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -40,7 +36,7 @@ public final class ModBlocks {
 
     public static final RegistryObject<LifeCrystalBlock> LIFE_CRYSTAL_BLOCK = registerWithItem("life_crystal_block", LifeCrystalBlock::new, supplier -> () -> new LifeCrystalBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<LifeCrystalBlock.Entity>> LIFE_CRYSTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("life_crystal_block_entity", () -> BlockEntityType.Builder.of(LifeCrystalBlock.Entity::new, LIFE_CRYSTAL_BLOCK.get()).build(null));
-    public static final RegistryObject<Block>HARDENED_SAND_BLOCK = registerWithItem("hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Block> HARDENED_SAND_BLOCK = registerWithItem("hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
@@ -152,10 +148,10 @@ public final class ModBlocks {
     // TODO: 头盔栏时装，shape，不可放置
     public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY)));
 
-    public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new SpreadingThornBlock(2,ANOTHER_CRIMSON_GRASS_BLOCK.get(), ISpreadable.Type.CRIMSON));
-    public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithItem("corruption_thorn", () -> new SpreadingThornBlock(2,CORRUPT_GRASS_BLOCK.get(), ISpreadable.Type.CORRUPT));
-    public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithItem("jungle_thorn", () -> new ThornBlock(3.4f,Blocks.MOSS_BLOCK));
-    public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(20,null));
+    public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new SpreadingThornBlock(2, ANOTHER_CRIMSON_GRASS_BLOCK.get(), ISpreadable.Type.CRIMSON));
+    public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithItem("corruption_thorn", () -> new SpreadingThornBlock(2, CORRUPT_GRASS_BLOCK.get(), ISpreadable.Type.CORRUPT));
+    public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithItem("jungle_thorn", () -> new ThornBlock(3.4f, Blocks.MOSS_BLOCK));
+    public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(20, null));
     // 云块
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
     public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", CloudBlock::new);
@@ -172,8 +168,8 @@ public final class ModBlocks {
     // 宝石树
     public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches",  BranchesBlock::new);
-    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches",  BranchesBlock::new);
+    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches", BranchesBlock::new);
     public static final RegistryObject<Block> EMERALD_BRANCHES = registerWithItem("emerald_branches", BranchesBlock::new);
     public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", BranchesBlock::new);
     public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", BranchesBlock::new);
@@ -190,6 +186,9 @@ public final class ModBlocks {
     // 镒块
     public static final RegistryObject<Block> AETHERIUM_BLOCKS = registerWithItem("aetherium_blocks", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
+    // 箱子
+    public static final RegistryObject<BaseChestBlock> BASE_CHEST_BLOCK = registerWithItem("base_chest_block", BaseChestBlock::new);
+    public static final RegistryObject<BlockEntityType<BaseChestBlock.Entity>> BASE_CHEST_BLOCK_ENTITY = BLOCK_ENTITIES.register("base_chest_block_entity", () -> BlockEntityType.Builder.of(BaseChestBlock.Entity::new, BASE_CHEST_BLOCK.get()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

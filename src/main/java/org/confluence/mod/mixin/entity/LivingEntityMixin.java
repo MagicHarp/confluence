@@ -1,9 +1,11 @@
 package org.confluence.mod.mixin.entity;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityDimensions;
@@ -135,20 +137,15 @@ public abstract class LivingEntityMixin {
             }
         }
         if (fluidType == ModFluids.HONEY.fluidType().get()) {
-            if (!self.level().isClientSide) {
-                if (self.isOnFire()) self.clearFire();
-                if (self instanceof Animal || self instanceof ServerPlayer) {
-                    self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
-                }
+            if (!self.level().isClientSide && self instanceof Animal || self instanceof ServerPlayer) {
+                self.addEffect(new MobEffectInstance(ModEffects.HONEY.get(), 600));
             }
             par1 = par1.scale(0.6);
         } else if (fluidType == ModFluids.SHIMMER.fluidType().get()) {
-            if (!self.level().isClientSide) {
-                if (self.isOnFire()) self.clearFire();
-                if (self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get() && !self.hasEffect(ModEffects.SHIMMER.get())) {
-                    self.addEffect(new MobEffectInstance(ModEffects.SHIMMER.get(), MobEffectInstance.INFINITE_DURATION));
-                }
+            if (!self.level().isClientSide && self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get() && !self.hasEffect(ModEffects.SHIMMER.get())) {
+                self.addEffect(new MobEffectInstance(ModEffects.SHIMMER.get(), MobEffectInstance.INFINITE_DURATION));
             }
+            par1 = par1.add(0.0, -0.003, 0.0);
         }
         if (self.hasEffect(ModEffects.FLIPPER.get())) {
             return new Vec3(0.96, par1.y, 0.96);
@@ -188,18 +185,30 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
-    private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
+//    @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
+//    private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
+//        if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
+//            LivingEntity self = confluence$getSelf();
+//            AtomicDouble atomic = new AtomicDouble(pDamageAmount);
+//            CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
+//                atomic.addAndGet(iArmorPass.getPassValue()));
+//            float totalArmor = self.getArmorValue() - atomic.floatValue();
+//            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) totalArmor -= 3.0F;
+//            pDamageAmount = CombatRules.getDamageAfterAbsorb(pDamageAmount, Math.max(0.0F, totalArmor), (float) self.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+//            cir.setReturnValue(pDamageAmount);
+//        }
+//    }
+
+    @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
+    private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            LivingEntity self = confluence$getSelf();
-            AtomicDouble atomic = new AtomicDouble(pDamageAmount);
+            AtomicDouble atomic = new AtomicDouble(pDamage);
             CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
                 atomic.addAndGet(iArmorPass.getPassValue()));
-            float totalArmor = self.getArmorValue() - atomic.floatValue();
-            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) totalArmor -= 3.0F;
-            pDamageAmount = CombatRules.getDamageAfterAbsorb(pDamageAmount, Math.max(0.0F, totalArmor), (float) self.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-            cir.setReturnValue(pDamageAmount);
+            pTotalArmor -= atomic.floatValue();
+            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
+        return original.call(pDamage, pTotalArmor, pToughnessAttribute);
     }
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)

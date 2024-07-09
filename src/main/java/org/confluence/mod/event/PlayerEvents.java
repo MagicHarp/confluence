@@ -10,6 +10,7 @@ import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -116,6 +117,20 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.getEntity().getMainHandItem().getItem() instanceof TieredItem tieredItem) {
+            BlockState blockState = event.getState();
+            int tier = tieredItem.getTier().getLevel();
+            if ((tier < 8 && blockState.is(ModTags.Blocks.NEEDS_8_LEVEL)) ||
+                (tier < 7 && blockState.is(ModTags.Blocks.NEEDS_7_LEVEL)) ||
+                (tier < 6 && blockState.is(ModTags.Blocks.NEEDS_6_LEVEL)) ||
+                (tier < 5 && blockState.is(ModTags.Blocks.NEEDS_5_LEVEL)) ||
+                (tier < 4 && blockState.is(ModTags.Blocks.NEEDS_4_LEVEL))
+            ) {
+                event.setNewSpeed(0.0F);
+                return;
+            }
+        }
+
         MutableFloat speed = new MutableFloat(event.getNewSpeed());
         event.getEntity().getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
             float value = speed.floatValue();
@@ -144,7 +159,7 @@ public final class PlayerEvents {
                 AbstractMinecart abstractMinecart = null;
                 if (item == Items.MINECART) {
                     abstractMinecart = new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5);
-                }
+                } // else if
                 if (abstractMinecart != null) {
                     itemStack.shrink(1);
                     level.addFreshEntity(abstractMinecart);
