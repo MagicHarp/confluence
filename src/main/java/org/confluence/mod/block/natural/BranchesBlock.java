@@ -101,29 +101,32 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
         }
     }
 
+    @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        BlockState $$3 = pLevel.getBlockState(pPos.below());
-        boolean $$4 = !pLevel.getBlockState(pPos.above()).isAir() && !$$3.isAir();
-        Iterator var6 = Direction.Plane.HORIZONTAL.iterator();
+        // 获取当前方块下方的方块状态
+        BlockState stateBelow = pLevel.getBlockState(pPos.below());
 
-        BlockState $$8;
-        do {
-            BlockPos $$6;
-            BlockState $$7;
-            do {
-                if (!var6.hasNext()) {
-                    return $$3.is(this) || $$3.is(ground);
-                }
+        // 检查当前方块下方是否是同类方块或ground
+        if (stateBelow.is(this) || stateBelow.is(ground)) {
+            return true;
+        }
 
-                Direction $$5 = (Direction)var6.next();
-                $$6 = pPos.relative($$5);
-                $$7 = pLevel.getBlockState($$6);
-            } while(!$$7.is(this));
+        // 遍历所有水平方向（北、南、东、西）
+        Iterator<Direction> horizontalDirections = Direction.Plane.HORIZONTAL.iterator();
 
-            $$8 = pLevel.getBlockState($$6.below());
-        } while(!$$8.is(this) && !$$8.is(ground));
+        // 循环检查水平相邻的方块
+        while (horizontalDirections.hasNext()) {
+            Direction direction = horizontalDirections.next();
+            BlockPos posAtSide = pPos.relative(direction);
+            BlockState stateAtSide = pLevel.getBlockState(posAtSide);
 
-        return true;
+            // 检查相邻的方块是否是同类方块或ground
+            if (stateAtSide.is(this) || stateAtSide.is(ground)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
