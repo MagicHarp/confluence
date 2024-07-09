@@ -103,24 +103,19 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
 
     @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        // 获取当前方块下方的方块状态
         BlockState stateBelow = pLevel.getBlockState(pPos.below());
 
-        // 检查当前方块下方是否是同类方块或ground
         if (stateBelow.is(this) || stateBelow.is(ground)) {
             return true;
         }
 
-        // 遍历所有水平方向（北、南、东、西）
         Iterator<Direction> horizontalDirections = Direction.Plane.HORIZONTAL.iterator();
 
-        // 循环检查水平相邻的方块
         while (horizontalDirections.hasNext()) {
             Direction direction = horizontalDirections.next();
             BlockPos posAtSide = pPos.relative(direction);
             BlockState stateAtSide = pLevel.getBlockState(posAtSide);
 
-            // 检查相邻的方块是否是同类方块或ground
             if (stateAtSide.is(this) || stateAtSide.is(ground)) {
                 return true;
             }
