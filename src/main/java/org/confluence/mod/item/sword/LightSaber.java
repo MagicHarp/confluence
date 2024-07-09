@@ -38,6 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public abstract class LightSaber extends BoardSwordItem implements GeoItem {
+    public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlay("turn_off");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ON = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 9, AttributeModifier.Operation.ADDITION),
         Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
@@ -46,7 +47,6 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
         Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 0, AttributeModifier.Operation.ADDITION),
         Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
     );
-
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public LightSaber() {
@@ -82,6 +82,10 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
             }
         }, 10, 3, new Properties().fireResistant());
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    public static boolean isTurnOff(ItemStack itemStack) {
+        return itemStack.getOrCreateTag().getBoolean("turnOff");
     }
 
     @Override
@@ -128,8 +132,6 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
         }
     }
 
-    public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlay("turn_off");
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "light", state -> PlayState.STOP)
@@ -143,12 +145,9 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
         return cache;
     }
 
-    public static boolean isTurnOff(ItemStack itemStack) {
-        return itemStack.getOrCreateTag().getBoolean("turnOff");
-    }
-
     public static class Red extends LightSaber {
-        public Red() {}
+        public Red() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -167,7 +166,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Orange extends LightSaber {
-        public Orange() {}
+        public Orange() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -186,7 +186,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Yellow extends LightSaber {
-        public Yellow() {}
+        public Yellow() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -205,7 +206,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Green extends LightSaber {
-        public Green() {}
+        public Green() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -224,7 +226,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Blue extends LightSaber {
-        public Blue() {}
+        public Blue() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -243,7 +246,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class Purple extends LightSaber {
-        public Purple() {}
+        public Purple() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -262,7 +266,8 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
     }
 
     public static class White extends LightSaber {
-        public White() {}
+        public White() {
+        }
 
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
