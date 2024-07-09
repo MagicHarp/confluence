@@ -33,6 +33,10 @@ public enum Swords implements EnumRegister<SwordItem> {
     BLUE_LIGHT_SABER("blue_light_saber", LightSaber.Blue::new),
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
+
+    ENCHANTED_SWORD("enchanted_sword", EnchantedSwordItem::new),
+
+    TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
     CANDY_CANE_SWORD("candy_cane_sword", () -> new BoardSwordItem(ModTiers.CANDY, 5, 1.6F)),
     BREATHING_REED("breathing_reed", UmbrellaItem::new),
@@ -51,10 +55,11 @@ public enum Swords implements EnumRegister<SwordItem> {
         this.value = ModItems.ITEMS.register(id, sword);
     }
 
+    public static void init() {
+    }
+
     @Override
     public RegistryObject<SwordItem> getValue() {
         return value;
     }
-
-    public static void init() {}
 }

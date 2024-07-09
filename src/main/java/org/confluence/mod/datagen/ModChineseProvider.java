@@ -1750,7 +1750,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.BLUE_LIGHT_SABER.get(), "陨石蓝光剑");
         add(Swords.PURPLE_LIGHT_SABER.get(), "陨石紫光剑");
         add(Swords.WHITE_LIGHT_SABER.get(), "陨石白光剑");
-
+        //剑气
+        add(Swords.ENCHANTED_SWORD.get(),"附魔剑");
+        //快攻
+        add(Swords.TERRAGRIM.get(),"泰拉魔刃");
         // 饰品
         add(MECHANICAL_LENS.get(), "机械晶状体");
         add(SPECTRE_GOGGLES.get(), "幽灵护目镜");

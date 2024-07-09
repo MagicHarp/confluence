@@ -115,8 +115,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
-            Ores.ANOTHER_CRIMSON_ORE.get(), Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), Ores.ANOTHER_CRIMSON_BLOCK.get(), Ores.RAW_ANOTHER_CRIMSON_BLOCK.get(),
-            Ores.HELLSTONE.get(),Ores.ASH_HELLSTONE.get()
+            Ores.ANOTHER_CRIMSON_ORE.get(), Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), Ores.ANOTHER_CRIMSON_BLOCK.get(), Ores.RAW_ANOTHER_CRIMSON_BLOCK.get()
         );
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
             Ores.HELLSTONE.get(),Ores.ASH_HELLSTONE.get()
