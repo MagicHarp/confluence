@@ -1,0 +1,13 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 15511220,
+    "separation": 10,
+    "spacing": 15,
+    "spread_type": "triangular"
+  },
+  "structures": [{
+    "structure": "confluence:enchanted_sword_shrine",
+    "weight": 1
+  }]
+}
