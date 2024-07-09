@@ -75,9 +75,9 @@ public final class ModTabs {
             .title(Component.translatable("creativetab.confluence.natural_blocks"))
             .displayItems((parameters, output) -> {
                 for (Ores ores : Ores.values()) output.accept(ores.get());
-                output.accept(PEARL_STONE_REDSTONE_ORE.get());
-                output.accept(EBONY_STONE_REDSTONE_ORE.get());
-                output.accept(ANOTHER_CRIMSON_STONE_REDSTONE_ORE.get());
+                output.accept(SANCTIFICATION_REDSTONE_ORE.get());
+                output.accept(CORRUPTION_REDSTONE_ORE.get());
+                output.accept(FLESHIFICATION_REDSTONE_ORE.get());
                 output.accept(LIFE_CRYSTAL_BLOCK.get());
                 output.accept(SWORD_IN_STONE.get());
                 output.accept(STONY_LOGS.get());

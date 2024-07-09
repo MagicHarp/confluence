@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.capability.prefix.ModPrefix;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;

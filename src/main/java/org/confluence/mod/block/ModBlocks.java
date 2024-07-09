@@ -163,9 +163,9 @@ public final class ModBlocks {
     // 丛林蜂巢
     public static final RegistryObject<Block> JUNGLE_HIVE_BLOCK = registerWithItem("jungle_hive_block", JungleHiveBlock::new);
     // 红石变种
-    public static final RegistryObject<Block> PEARL_STONE_REDSTONE_ORE = registerWithItem("pearl_stone_redstone_ore", CustomModelBlock::new);
-    public static final RegistryObject<Block> EBONY_STONE_REDSTONE_ORE = registerWithItem("ebony_stone_redstone_ore", CustomModelBlock::new);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE_REDSTONE_ORE = registerWithItem("another_crimson_stone_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> SANCTIFICATION_REDSTONE_ORE = registerWithItem("sanctification_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> CORRUPTION_REDSTONE_ORE = registerWithItem("corruption_redstone_ore", CustomModelBlock::new);
+    public static final RegistryObject<Block> FLESHIFICATION_REDSTONE_ORE = registerWithItem("fleshification_redstone_ore", CustomModelBlock::new);
 
     // 石中剑
     public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", SwordInStoneBlock::new);
