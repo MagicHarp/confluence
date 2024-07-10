@@ -1,6 +1,6 @@
 {
     "type": "forge:add_features",
-    "biomes": "desert",
+    "biomes": "beach",
     "features": "confluence:palm_trees",
     "step": "surface_structures"
 }

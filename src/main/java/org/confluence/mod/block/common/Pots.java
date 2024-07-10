@@ -13,10 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -149,7 +146,16 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
             dropSequence(pLevel, pPos);
         }
-
+        @Override
+        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
+            BlockPos below = pPos.below();
+            BlockState blockBelow = pLevel.getBlockState(below);
+            if (blockBelow.is(Blocks.STONE)|| blockBelow.is(Blocks.DIRT)|| blockBelow.is(ModBlocks.HARDENED_SAND_BLOCK.get())
+                || blockBelow.is(ModBlocks.RED_HARDENED_SAND_BLOCK.get())) {
+                return true;
+            }
+            return false;
+        }
         @Override
         public void onProjectileHit(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockHitResult pHit, @NotNull Projectile pProjectile) {
             BlockPos blockPos = pHit.getBlockPos();
