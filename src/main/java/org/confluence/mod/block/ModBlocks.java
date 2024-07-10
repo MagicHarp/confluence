@@ -188,7 +188,7 @@ public final class ModBlocks {
     public static final RegistryObject<CrackedBrickBlock> CRACKED_GREEN_BRICK = registerWithItem("cracked_green_brick", CrackedBrickBlock::new);
     public static final RegistryObject<CrackedBrickBlock> CRACKED_PINK_BRICK = registerWithItem("cracked_pink_brick", CrackedBrickBlock::new);
     // 镒块
-    public static final RegistryObject<Block> AETHERIUM_BLOCKS = registerWithItem("aetherium_blocks", CustomModelBlock::new);
+    public static final RegistryObject<Block> AETHERIUM_BLOCK = registerWithItem("aetherium_block", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
     // 箱子
     public static final RegistryObject<BaseChestBlock> BASE_CHEST_BLOCK = registerWithItem("base_chest_block", BaseChestBlock::new);

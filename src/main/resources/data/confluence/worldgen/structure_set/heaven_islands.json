@@ -1,0 +1,13 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 17811220,
+    "separation": 15,
+    "spacing": 20,
+    "spread_type": "triangular"
+  },
+  "structures": [{
+    "structure": "confluence:heaven_islands",
+    "weight": 1
+  }]
+}
