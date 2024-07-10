@@ -96,6 +96,9 @@ public final class ModTabs {
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
                 output.accept(HARDENED_SAND_BLOCK.get());
+                output.accept(RED_HARDENED_SAND_BLOCK.get());
+                output.accept(DESERT_FOSSIL.get());
+                output.accept(SLUSH.get());
 
                 output.accept(CORRUPT_GRASS_BLOCK.get());
                 output.accept(EBONY_SAND.get());

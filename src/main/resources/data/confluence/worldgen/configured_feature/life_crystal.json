@@ -19,7 +19,7 @@
           "type": "minecraft:block_predicate_filter",
           "predicate": {
             "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:cave_air"
+            "blocks": "minecraft:air"
           }
         }
       ]

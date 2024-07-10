@@ -275,8 +275,14 @@ public class ModChineseProvider extends LanguageProvider {
         add("death.attack.boulder", "%1$s 被巨石均匀地涂抹在地上");
 
         add("biome.confluence.the_corruption", "腐化之地");
+        add("biome.confluence.the_corruption_desert", "腐化沙漠");
+        add("biome.confluence.the_corruption_tundra", "腐化苔原");
         add("biome.confluence.another_crimson", "猩红之地");
+        add("biome.confluence.another_crimson_desert", "猩红沙漠");
+        add("biome.confluence.another_crimson_tundra", "猩红苔原");
         add("biome.confluence.the_hallow", "神圣之地");
+        add("biome.confluence.the_hallow_desert", "神圣沙漠");
+        add("biome.confluence.the_hallow_tundra", "神圣苔原");
         add("biome.confluence.glowing_mushroom", "发光蘑菇群系");
         add("biome.confluence.ash_wasteland", "灰烬荒地");
         add("biome.confluence.ash_forest", "白蜡木林");
@@ -1168,7 +1174,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
         add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
 
+
+        add(DESERT_FOSSIL.get(), "沙漠化石");
         add(HARDENED_SAND_BLOCK.get(), "硬化沙块");
+        add(RED_HARDENED_SAND_BLOCK.get(), "硬化红沙块");
+        add(SLUSH.get(), "雪泥块");
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_COBBLESTONE.get(), "黑檀圆石");
         add(EBONY_HARDENED_SAND_BLOCK.get(), "硬化黑檀沙块");
@@ -1278,6 +1288,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PINK_BRICK.get(), "粉色地牢砖");
         add(AETHERIUM_BLOCKS.get(), "镒块");
         add(AETHERIUM_BRICK.get(), "镒砖");
+
 
         add(Torches.RED_TORCH.item.get(), "红火把");
         add(Torches.ORANGE_TORCH.item.get(), "橙火把");
