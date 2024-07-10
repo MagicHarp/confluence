@@ -62,4 +62,9 @@ public final class Confluence {
         ModFeatures.FEATURES.register(bus);
         //ASMifier.main(new String[]{"org.confluence.mod.item.curio.movement.Balloon"});
     }
+
+    public static Object debugMethod(Object... args){
+        return false;
+    }
+
 }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(NoiseBasedChunkGenerator.class)
-public class DebugInfoMixin {
+public abstract class DebugInfoMixin {
     @Inject(method = "addDebugScreenInfo", at = @At("RETURN"))
     private void addInfo(List<String> pInfo, RandomState pRandom, BlockPos pPos, CallbackInfo ci){
         String info = pInfo.get(pInfo.size() - 1);
