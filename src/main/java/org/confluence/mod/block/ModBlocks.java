@@ -162,6 +162,9 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", CloudBlock::new);
     // 丛林蜂巢
     public static final RegistryObject<Block> JUNGLE_HIVE_BLOCK = registerWithItem("jungle_hive_block", JungleHiveBlock::new);
+    //变种蜂蜜块
+    public static final RegistryObject<Block> THIN_HONEY_BLOCK = registerWithItem("thin_honey_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HONEY_BLOCK)));
+    public static final RegistryObject<Block> LOOSE_HONEY_BLOCK = registerWithItem("loose_honey_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HONEY_BLOCK)));
     // 红石变种
     public static final RegistryObject<Block> SANCTIFICATION_REDSTONE_ORE = registerWithItem("sanctification_redstone_ore", CustomModelBlock::new);
     public static final RegistryObject<Block> CORRUPTION_REDSTONE_ORE = registerWithItem("corruption_redstone_ore", CustomModelBlock::new);

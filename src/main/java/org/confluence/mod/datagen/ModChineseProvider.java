@@ -1265,6 +1265,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(RAIN_CLOUD_BLOCK.get(), "雨云块");
         add(SNOW_CLOUD_BLOCK.get(), "雪云块");
         add(JUNGLE_HIVE_BLOCK.get(), "丛林蜂巢");
+        add(THIN_HONEY_BLOCK.get(), "稀薄蜂蜜块");
+        add(LOOSE_HONEY_BLOCK.get(), "松散蜂蜜块");
         add(SANCTIFICATION_REDSTONE_ORE.get(), "圣化红石矿石");
         add(CORRUPTION_REDSTONE_ORE.get(), "腐化红石矿石");
         add(FLESHIFICATION_REDSTONE_ORE.get(), "血化红石矿石");

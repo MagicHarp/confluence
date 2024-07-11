@@ -145,6 +145,8 @@ public final class ModTabs {
                 output.accept(SNOW_CLOUD_BLOCK.get());
 
                 output.accept(JUNGLE_HIVE_BLOCK.get());
+                output.accept(LOOSE_HONEY_BLOCK.get());
+                output.accept(THIN_HONEY_BLOCK.get());
 
                 output.accept(CRACKED_BLUE_BRICK.get());
                 output.accept(CRACKED_GREEN_BRICK.get());
