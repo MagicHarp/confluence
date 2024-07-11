@@ -1289,8 +1289,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(BLUE_BRICK.get(), "蓝色地牢砖");
         add(GREEN_BRICK.get(), "绿色地牢砖");
         add(PINK_BRICK.get(), "粉色地牢砖");
-        add(AETHERIUM_BLOCK.get(), "镒块");
-        add(AETHERIUM_BRICK.get(), "镒砖");
+        add(AETHERIUM_BLOCK.get(), "以太块");
+        add(AETHERIUM_BRICK.get(), "以太砖");
+        add(DARK_AETHERIUM_BLOCK.get(),"黯淡以太块");
 
 
         add(Torches.RED_TORCH.item.get(), "红火把");

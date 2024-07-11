@@ -1,5 +1,6 @@
 package org.confluence.mod.block;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -157,9 +158,9 @@ public final class ModBlocks {
     public static final RegistryObject<ThornBlock> JUNGLE_THORN = registerWithItem("jungle_thorn", () -> new ThornBlock(3.4f, Blocks.MOSS_BLOCK));
     public static final RegistryObject<ThornBlock> PLANTERA_THORN = registerWithItem("plantera_thorn", () -> new ThornBlock(20, null));
     // 云块
-    public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
-    public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", CloudBlock::new);
-    public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", CloudBlock::new);
+    public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", () -> new CloudBlock(ParticleTypes.CLOUD));
+    public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", () -> new CloudBlock(ParticleTypes.FALLING_WATER));
+    public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", () -> new CloudBlock(ParticleTypes.FALLING_WATER));
     // 丛林蜂巢
     public static final RegistryObject<Block> JUNGLE_HIVE_BLOCK = registerWithItem("jungle_hive_block", JungleHiveBlock::new);
     //变种蜂蜜块
@@ -193,6 +194,7 @@ public final class ModBlocks {
     // 镒块
     public static final RegistryObject<Block> AETHERIUM_BLOCK = registerWithItem("aetherium_block", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
+    public static final RegistryObject<Block> DARK_AETHERIUM_BLOCK = registerWithItem("dark_aetherium_block", CustomModelBlock::new);
     // 箱子
     public static final RegistryObject<BaseChestBlock> BASE_CHEST_BLOCK = registerWithItem("base_chest_block", BaseChestBlock::new);
     public static final RegistryObject<BlockEntityType<BaseChestBlock.Entity>> BASE_CHEST_BLOCK_ENTITY = BLOCK_ENTITIES.register("base_chest_block_entity", () -> BlockEntityType.Builder.of(BaseChestBlock.Entity::new, BASE_CHEST_BLOCK.get()).build(null));

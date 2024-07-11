@@ -16,6 +16,7 @@ import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
@@ -87,12 +88,6 @@ public final class ModFluids {
             })
             .block(ModBlocks.HONEY)
             .bucket(ModItems.HONEY_BUCKET)
-            .flowing(properties -> new ForgeFlowingFluid.Flowing(properties) {
-                @Override
-                protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, Fluid fluidIn, Direction direction) {
-                    return !isSame(fluidIn);
-                }
-            })
             .build();
 
         SHIMMER = FluidTriple.builder(new ResourceLocation(MODID, "shimmer"))
@@ -137,23 +132,24 @@ public final class ModFluids {
             })
             .block(ModBlocks.SHIMMER)
             .bucket(() -> Items.AIR)
-            .flowing(properties -> new ForgeFlowingFluid.Flowing(properties) {
-                @Override
-                protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, Fluid fluidIn, Direction direction) {
-                    return !isSame(fluidIn);
-                }
-            })
             .build();
     }
 
     public static void registerInteraction() {
         FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.WATER_TYPE.get(),
-            Blocks.HONEY_BLOCK.defaultBlockState()
+            ForgeMod.WATER_TYPE.get(),fluidState -> fluidState.isSource() ? Blocks.HONEY_BLOCK.defaultBlockState() : ModBlocks.THIN_HONEY_BLOCK.get().defaultBlockState()
         ));
         FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            (level, currentPos, relativePos, currentState) -> currentState.isSource() && level.getFluidState(relativePos).getFluidType() == ForgeMod.LAVA_TYPE.get(),
-            ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState()
+            ForgeMod.LAVA_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState() : ModBlocks.LOOSE_HONEY_BLOCK.get().defaultBlockState()
+        ));
+        FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
+            ForgeMod.WATER_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
+        ));
+        FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
+            ForgeMod.LAVA_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
+        ));
+        FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
+            HONEY.fluidType().get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
         ));
     }
 
