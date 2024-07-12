@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 import static org.confluence.mod.block.ModBlocks.*;
+import static org.confluence.mod.block.ModBlocks.PEARL_COBBLESTONE;
 
 public class ModBlockLootSubProvider extends BlockLootSubProvider {
     public ModBlockLootSubProvider() {
@@ -178,16 +179,19 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             dropSelf(torch.wall.get());
         }
         // region natural
-        dropSelf(EBONY_STONE.get());
+        dropSelf(EBONY_COBBLESTONE.get());
         dropSelf(EBONY_SAND.get());
-        dropSelf(PEARL_STONE.get());
+        dropSelf(PEARL_COBBLESTONE.get());
         dropSelf(PEARL_SAND.get());
-        dropSelf(ANOTHER_CRIMSON_STONE.get());
+        dropSelf(ANOTHER_CRIMSON_COBBLESTONE.get());
         dropSelf(ANOTHER_CRIMSON_SAND.get());
         dropSelf(ASH_BLOCK.get());
         dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(CORRUPT_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(HALLOW_GRASS_BLOCK.get(), Items.DIRT);
+        dropOther(ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_COBBLESTONE.get());
+        dropOther(EBONY_STONE.get(), EBONY_COBBLESTONE.get());
+        dropOther(PEARL_STONE.get(), PEARL_COBBLESTONE.get());
         dropSelf(EBONY_LOG_BLOCKS.LOG.get());
         dropSelf(SHADOW_LOG_BLOCKS.LOG.get());
         dropSelf(PEARL_LOG_BLOCKS.LOG.get());
