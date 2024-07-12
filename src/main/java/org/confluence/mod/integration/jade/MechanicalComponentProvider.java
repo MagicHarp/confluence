@@ -45,8 +45,7 @@ public class MechanicalComponentProvider implements IBlockComponentProvider, ISe
     @Override
     public void appendServerData(CompoundTag compoundTag, BlockAccessor blockAccessor) {
         if (blockAccessor.getBlockEntity() instanceof AbstractMechanicalBlock.Entity entity) {
-            NetworkNode networkNode = entity.getNetworkNode();
-            if (networkNode == null) return;
+            NetworkNode networkNode = entity.getOrCreateNetworkNode();
             ListTag listTag = new ListTag();
             networkNode.getNetworks().int2ObjectEntrySet().stream()
                 .sorted(Comparator.comparingInt(Int2ObjectMap.Entry::getIntKey))

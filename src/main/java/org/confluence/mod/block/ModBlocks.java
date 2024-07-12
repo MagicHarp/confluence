@@ -198,6 +198,8 @@ public final class ModBlocks {
     // 箱子
     public static final RegistryObject<BaseChestBlock> BASE_CHEST_BLOCK = registerWithItem("base_chest_block", BaseChestBlock::new);
     public static final RegistryObject<BlockEntityType<BaseChestBlock.Entity>> BASE_CHEST_BLOCK_ENTITY = BLOCK_ENTITIES.register("base_chest_block_entity", () -> BlockEntityType.Builder.of(BaseChestBlock.Entity::new, BASE_CHEST_BLOCK.get()).build(null));
+    public static final RegistryObject<BaseChestBlock> DEATH_CHEST_BLOCK = registerWithItem("death_chest_block", BaseChestBlock::new);
+    public static final RegistryObject<BlockEntityType<DeathChestBlock.Entity>> DEATH_CHEST_BLOCK_ENTITY = BLOCK_ENTITIES.register("death_chest_block_entity", () -> BlockEntityType.Builder.of(DeathChestBlock.Entity::new, DEATH_CHEST_BLOCK.get()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

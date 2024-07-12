@@ -65,6 +65,7 @@ import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
+import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
@@ -169,6 +170,7 @@ public final class ForgeEvents {
         amount = IFallResistance.apply(living, damageSource, amount);
         amount = WormScarf.apply(living, amount);
         amount = BrainOfConfusion.apply(living, random, damageSource, amount);
+        amount = BreathingReed.apply(living, damageSource, amount);
 
         amount *= ModUtils.nextFloat(random, 0.8F, 1.2F);
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
@@ -263,8 +265,11 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingBreathe(LivingBreatheEvent event) {
         if (event.canBreathe()) return;
-        if (event.getEntity().hasEffect(ModEffects.SHIMMER.get())) {
+        LivingEntity living = event.getEntity();
+        if (living.hasEffect(ModEffects.SHIMMER.get())) {
             event.setCanBreathe(true);
+        } else if (BreathingReed.hasReed(living)) {
+            event.setConsumeAirAmount(BreathingReed.getDecrease(living.getRandom()));
         }
     }
 

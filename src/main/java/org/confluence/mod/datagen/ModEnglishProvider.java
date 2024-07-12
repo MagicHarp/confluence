@@ -830,6 +830,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("block.confluence.timers_block_1_4", "1/4 Second TImer");
         add("block.confluence.base_chest_block.locked_golden", "Locked Golden Chest");
         add("block.confluence.base_chest_block.unlocked_golden", "Golden Chest");
+        add("block.confluence.base_chest_block.death_golden", "Death Golden Chest");
 
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {

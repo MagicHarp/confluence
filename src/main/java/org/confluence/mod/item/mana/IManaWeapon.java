@@ -12,7 +12,7 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.effect.ModEffects;
 
 public interface IManaWeapon {
-    default int getManaCost(ItemStack itemStack, int amount) {
+    default int calculateManaCost(ItemStack itemStack, int amount) {
         CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
         if (prefix != null) amount *= (1.0 + prefix.getDouble("manaCost"));
         return amount;

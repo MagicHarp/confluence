@@ -38,10 +38,7 @@ import org.confluence.mod.client.particle.BulletParticle;
 import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
 import org.confluence.mod.client.particle.FlameFlowerParticle;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.client.renderer.block.AltarBlockRenderer;
-import org.confluence.mod.client.renderer.block.BaseChestBlockRenderer;
-import org.confluence.mod.client.renderer.block.LifeCrystalBlockRenderer;
-import org.confluence.mod.client.renderer.block.MechanicalBlockRenderer;
+import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
@@ -186,6 +183,7 @@ public final class ModClient {
         event.registerBlockEntityRenderer(ModBlocks.SIGN_BLOCK_ENTITY.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.MECHANICAL_BLOCK_ENTITY.get(), MechanicalBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), BaseChestBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.DEATH_CHEST_BLOCK_ENTITY.get(), DeathChestBlockRenderer::new);
     }
 
     @SubscribeEvent

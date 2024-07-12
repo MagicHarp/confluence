@@ -18,19 +18,18 @@ import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 public class StaffItem extends Item implements IManaWeapon {
     private final BulletSupplier bulletSupplier;
+    private int manaCost;
 
 
-    public StaffItem(BulletSupplier bulletSupplier, Properties properties) {
+    public StaffItem(int manaCost, BulletSupplier bulletSupplier, Properties properties) {
         super(properties.stacksTo(1));
         this.bulletSupplier = bulletSupplier;
     }
 
-    public StaffItem(BulletSupplier bulletSupplier) {
-        this(bulletSupplier, new Properties());
+    public StaffItem(int manaCost, BulletSupplier bulletSupplier) {
+        this(manaCost, bulletSupplier, new Properties());
     }
 
     @Override
@@ -41,10 +40,9 @@ public class StaffItem extends Item implements IManaWeapon {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (player instanceof ServerPlayer serverPlayer && PlayerUtils.extractMana(serverPlayer, () -> getManaCost(itemStack, 20))) {
+        if (player instanceof ServerPlayer serverPlayer && PlayerUtils.extractMana(serverPlayer, () -> calculateManaCost(itemStack, manaCost))) {
             serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-            Optional<ItemPrefix> optional = PrefixProvider.getPrefix(itemStack);
-            BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, optional.orElse(null));
+            BaseBulletEntity baseBulletEntity = bulletSupplier.create(serverPlayer, level, PrefixProvider.getPrefix(itemStack).orElse(null));
             baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, getVelocity(itemStack, 1.5F), 1.0F);
             level.addFreshEntity(baseBulletEntity);
             player.getCooldowns().addCooldown(this, getAttackSpeed(itemStack, 20));

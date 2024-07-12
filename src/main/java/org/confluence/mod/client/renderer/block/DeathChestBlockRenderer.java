@@ -10,23 +10,19 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.BaseChestBlock;
 import org.jetbrains.annotations.NotNull;
 
-public class BaseChestBlockRenderer extends ChestRenderer<BaseChestBlock.Entity> {
-    public static final Material LOCKED_GOLDEN = chest("locked_golden");
-    public static final Material LOCKED_GOLDEN_LEFT = chest("locked_golden_left");
-    public static final Material LOCKED_GOLDEN_RIGHT = chest("locked_golden_right");
-    public static final Material UNLOCKED_GOLDEN = chest("unlocked_golden");
-    public static final Material UNLOCKED_GOLDEN_LEFT = chest("unlocked_golden_left");
-    public static final Material UNLOCKED_GOLDEN_RIGHT = chest("unlocked_golden_right");
+public class DeathChestBlockRenderer extends ChestRenderer<BaseChestBlock.Entity> { // 死人箱没有上锁变种
+    public static final Material DEATH_GOLDEN = chest("death_golden");
+    public static final Material DEATH_GOLDEN_LEFT = chest("death_golden_left");
+    public static final Material DEATH_GOLDEN_RIGHT = chest("death_golden_right");
 
-    public BaseChestBlockRenderer(BlockEntityRendererProvider.Context pContext) {
+    public DeathChestBlockRenderer(BlockEntityRendererProvider.Context pContext) {
         super(pContext);
     }
 
     @Override
     protected @NotNull Material getMaterial(BaseChestBlock.Entity blockEntity, @NotNull ChestType chestType) {
         return switch (blockEntity.variant) {
-            case LOCKED_GOLDEN -> chooseMaterial(chestType, LOCKED_GOLDEN, LOCKED_GOLDEN_LEFT, LOCKED_GOLDEN_RIGHT);
-            case UNLOCKED_GOLDEN -> chooseMaterial(chestType, UNLOCKED_GOLDEN, UNLOCKED_GOLDEN_LEFT, UNLOCKED_GOLDEN_RIGHT);
+            default -> chooseMaterial(chestType, DEATH_GOLDEN, DEATH_GOLDEN_LEFT, DEATH_GOLDEN_RIGHT);
         };
     }
 

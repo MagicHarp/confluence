@@ -65,9 +65,11 @@ public final class ModTabs {
                 output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
 
-                output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), BaseChestBlock.Variant.GOLDEN, true));
                 for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
-                    output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant, false));
+                    output.accept(BaseChestBlock.setNormal(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
+                    if (variant.getSerializedName().startsWith("unlocked")) { // 只放解锁的
+                        output.accept(BaseChestBlock.setDeath(new ItemStack(DEATH_CHEST_BLOCK.get().asItem()), variant));
+                    }
                 }
             })
             .build());

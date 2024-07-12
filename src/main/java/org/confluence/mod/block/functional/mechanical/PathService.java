@@ -52,9 +52,7 @@ public class PathService {
     }
 
     public void addToQueue(AbstractMechanicalBlock.Entity blockEntity) {
-        NetworkNode networkNode = blockEntity.getNetworkNode();
-        if (networkNode == null) return;
-        queue.add(networkNode);
+        queue.add(blockEntity.getOrCreateNetworkNode());
     }
 
     public void pathFindingTick() {
@@ -78,11 +76,7 @@ public class PathService {
                     Network curNetwork = null;
                     if (level.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
                         curNetwork = cur.getOrCreateNetwork(color);
-                        NetworkNode next = blockEntity.getNetworkNode();
-                        if (next == null) {
-                            NetworkService.INSTANCE.createNetworkNode(blockEntity);
-                            next = blockEntity.getNetworkNode();
-                        }
+                        NetworkNode next = blockEntity.getOrCreateNetworkNode();
                         Network nextNetwork = next.getNetwork(color);
                         if (nextNetwork == null) {
                             // 将结点加入到网络中

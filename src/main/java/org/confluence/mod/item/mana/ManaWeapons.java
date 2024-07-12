@@ -10,15 +10,15 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum ManaWeapons implements EnumRegister<Item> {
-    WOND_OF_SPARKING("wond_of_sparking", () -> new StaffItem(BaseBulletEntity.Spark::new)),
-    WOND_OF_FROSTING("wond_of_frosting", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.FROST))),
-    RUBY_STAFF("ruby_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.RUBY))),
-    AMBER_STAFF("amber_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.AMBER))),
-    TOPAZ_STAFF("topaz_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.TOPAZ))),
-    EMERALD_STAFF("emerald_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.EMERALD))),
-    SAPPHIRE_STAFF("sapphire_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.SAPPHIRE))),
-    AMETHYST_STAFF("amethyst_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.AMETHYST))),
-    DIAMOND_STAFF("diamond_staff", () -> new StaffItem((player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.DIAMOND))),
+    WOND_OF_SPARKING("wond_of_sparking", () -> new StaffItem(2, BaseBulletEntity.Spark::new)),
+    WOND_OF_FROSTING("wond_of_frosting", () -> new StaffItem(2, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.FROST))),
+    RUBY_STAFF("ruby_staff", () -> new StaffItem(7, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.RUBY))),
+    AMBER_STAFF("amber_staff", () -> new StaffItem(7, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.AMBER))),
+    TOPAZ_STAFF("topaz_staff", () -> new StaffItem(5, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.TOPAZ))),
+    EMERALD_STAFF("emerald_staff", () -> new StaffItem(6, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.EMERALD))),
+    SAPPHIRE_STAFF("sapphire_staff", () -> new StaffItem(6, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.SAPPHIRE))),
+    AMETHYST_STAFF("amethyst_staff", () -> new StaffItem(5, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.AMETHYST))),
+    DIAMOND_STAFF("diamond_staff", () -> new StaffItem(8, (player, level, itemPrefix) -> new BaseBulletEntity(player, level, itemPrefix, BaseBulletEntity.Variant.DIAMOND))),
     AQUA_SCEPTER("aqua_scepter", BaseItem::new), // 海蓝权杖
     THUNDER_ZAPPER("thunder_zapper", BaseItem::new), // 雷霆法杖
     VILETHORN("vilethorn", BaseItem::new), // 魔刺

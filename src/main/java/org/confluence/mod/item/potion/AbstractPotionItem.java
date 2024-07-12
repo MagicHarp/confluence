@@ -32,7 +32,9 @@ public abstract class AbstractPotionItem extends Item {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         apply(itemStack, level, living);
-        itemStack.shrink(1);
+        if (living instanceof Player player && !player.getAbilities().instabuild) {
+            itemStack.shrink(1); // 创造模式不消耗
+        }
         if (itemStack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         } else {

@@ -959,6 +959,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("block.confluence.base_chest_block.locked_golden", "上锁的金箱子");
         add("block.confluence.base_chest_block.unlocked_golden", "金箱子");
+        add("block.confluence.base_chest_block.death_golden", "死人金箱子");
 
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");

@@ -72,9 +72,9 @@ public class TimersBlock extends AbstractMechanicalBlock implements CustomModel,
     }
 
     private static void timer(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        if (level.isClientSide || entity.getNetworkNode() == null || !blockState.getValue(DRIVE)) return;
+        if (level.isClientSide || !blockState.getValue(DRIVE)) return;
         TimersBlock timersBlock = (TimersBlock) blockState.getBlock();
-        if ((level.getGameTime() + entity.getNetworkNode().getId()) % timersBlock.duration == 0) {
+        if ((level.getGameTime() + entity.getOrCreateNetworkNode().getId()) % timersBlock.duration == 0) {
             level.setBlockAndUpdate(blockPos, blockState.setValue(SIGNAL, true));
             timersBlock.execute(blockState, (ServerLevel) level, blockPos, true);
         } else if (blockState.getValue(SIGNAL)) { // 确保只激活一次负脉冲

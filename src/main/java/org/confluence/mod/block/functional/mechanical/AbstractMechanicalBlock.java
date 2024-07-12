@@ -239,6 +239,13 @@ public abstract class AbstractMechanicalBlock extends Block implements EntityBlo
             return networkNode;
         }
 
+        public NetworkNode getOrCreateNetworkNode() {
+            if (networkNode == null) {
+                PathService.INSTANCE.onBlockEntityLoad(this);
+            }
+            return networkNode;
+        }
+
         public void connectTo(int color, BlockPos relatedPos, Entity related) {
             if (relatedPos.equals(getBlockPos())) return;
             Set<BlockPos> posSet = connectedPoses.computeIfAbsent(color, i -> new HashSet<>());

@@ -17,12 +17,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
@@ -32,10 +31,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntFunction;
+import java.util.function.Supplier;
 
 public class BaseChestBlock extends ChestBlock implements CustomModel, CustomItemModel, CustomName {
     public BaseChestBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.CHEST), ModBlocks.BASE_CHEST_BLOCK_ENTITY::get);
+    }
+
+    public BaseChestBlock(Properties properties, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
+        super(properties, supplier);
     }
 
     @Override
@@ -50,57 +54,42 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         if (tag == null) return;
         if (pLevel.getBlockEntity(pPos) instanceof Entity entity) {
             entity.variant = Variant.byId(tag.getInt("VariantId"));
-            entity.locked = tag.getBoolean("Locked");
         }
     }
 
+    @Nullable
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if(pLevel.getBlockEntity(pPos) instanceof Entity entity && entity.locked){
+    protected Direction candidatePartnerFacing(BlockPlaceContext pContext, @NotNull Direction pDirection) {
+        BlockPos relative = pContext.getClickedPos().relative(pDirection);
+        if (pContext.getLevel().getBlockEntity(relative) instanceof Entity entity) {
+            ItemStack itemStack = pContext.getItemInHand();
+            if (itemStack.getTag() == null || Variant.byId(itemStack.getTag().getInt("VariantId")) != entity.variant) return null;
+
+            BlockState blockstate = pContext.getLevel().getBlockState(relative);
+            return blockstate.is(this) && blockstate.getValue(TYPE) == ChestType.SINGLE ? blockstate.getValue(FACING) : null;
+        }
+        return null;
+    }
+
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+        if(pLevel.getBlockEntity(pPos) instanceof Entity entity && entity.isLocked()){
             return InteractionResult.PASS;
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        ChestType chesttype = ChestType.SINGLE;
-        Direction direction = pContext.getHorizontalDirection().getOpposite(); // 箱子朝向
-        FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
-        boolean flag = pContext.isSecondaryUseActive();
-        Direction direction1 = pContext.getClickedFace();
-        if (direction1.getAxis().isHorizontal() && flag) {
-            Direction direction2 = candidatePartnerFacing(pContext, direction1.getOpposite());
-            if (direction2 != null && direction2.getAxis() != direction1.getAxis()) {
-                direction = direction2;
-                chesttype = direction2.getCounterClockWise() == direction1.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
-            }
-        }
-
-        ItemStack itemStack = pContext.getItemInHand();
-            boolean locked =itemStack.getTag() != null&& itemStack.getTag().getBoolean("Locked");
-            if (chesttype == ChestType.SINGLE && !flag) {
-                if (direction == candidatePartnerFacing(pContext, direction.getClockWise())) {
-                    chesttype = ChestType.LEFT;
-                } else if (direction == candidatePartnerFacing(pContext, direction.getCounterClockWise())) {
-                    chesttype = ChestType.RIGHT;
-                }
-            }
-        return defaultBlockState().setValue(FACING, direction).setValue(TYPE, chesttype).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
-    }
-
-    @javax.annotation.Nullable
-    private Direction candidatePartnerFacing(BlockPlaceContext pContext, Direction pDirection) {
-        BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos().relative(pDirection));
-        return blockstate.is(this) && blockstate.getValue(TYPE) == ChestType.SINGLE ? blockstate.getValue(FACING) : null;
-    }
-
-    public static ItemStack setData(ItemStack itemStack, Variant variant, boolean locked) {
+    public static ItemStack setNormal(ItemStack itemStack, Variant variant) {
         CompoundTag tag = itemStack.getOrCreateTag();
         tag.putInt("VariantId", variant.id);
-        tag.putBoolean("Locked", locked);
-        String info = (locked ? "locked" : "unlocked") + "_" + variant.name;
-        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + info));
+        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name));
+        return itemStack;
+    }
+
+    public static ItemStack setDeath(ItemStack itemStack, Variant variant) {
+        CompoundTag tag = itemStack.getOrCreateTag();
+        tag.putInt("VariantId", variant.id);
+        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name.replace("unlocked", "death")));
         return itemStack;
     }
 
@@ -111,45 +100,34 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
 
     public static class Entity extends ChestBlockEntity {
         public Variant variant;
-        boolean locked;
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
             super(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), pPos, pBlockState);
         }
 
-        public void unlock() {
-            this.locked = false;
-            markUpdated();
+        public Entity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+            super(pType, pPos, pBlockState);
         }
 
         public boolean isLocked() {
-            return locked;
+            return variant == Variant.LOCKED_GOLDEN;
         }
 
         @Override
         public boolean canOpen(@NotNull Player pPlayer) {
-            return !locked && super.canOpen(pPlayer);
+            return !isLocked() && super.canOpen(pPlayer);
         }
 
         @Override
         public void load(@NotNull CompoundTag pTag) {
             super.load(pTag);
             this.variant = Variant.byId(pTag.getInt("VariantId"));
-            this.locked = pTag.getBoolean("Locked");
         }
 
         @Override
         protected void saveAdditional(@NotNull CompoundTag pTag) {
             super.saveAdditional(pTag);
             pTag.putInt("VariantId", variant.id);
-            pTag.putBoolean("Locked", locked);
-        }
-
-        @Override
-        public @NotNull CompoundTag getUpdateTag() {
-            CompoundTag updateTag = super.getUpdateTag();
-            updateTag.putBoolean("Locked", locked);
-            return updateTag;
         }
 
         @Override
@@ -157,16 +135,17 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
             return ClientboundBlockEntityDataPacket.create(this);
         }
 
-        public void markUpdated() {
-            setChanged();
-            if (level != null) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), UPDATE_CLIENTS);
-            }
+        @Override
+        public @NotNull CompoundTag getUpdateTag() {
+            CompoundTag nbt = super.getUpdateTag();
+            nbt.putInt("VariantId", variant.id);
+            return nbt;
         }
     }
 
     public enum Variant implements StringRepresentable {
-        GOLDEN(0, "golden");
+        LOCKED_GOLDEN(0, "locked_golden"),
+        UNLOCKED_GOLDEN(1, "unlocked_golden"); // 对于死人箱，只使用unlocked开头的
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         private final int id;
