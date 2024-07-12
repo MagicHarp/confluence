@@ -23,11 +23,7 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
     public static final UUID DAMAGE_UUID = UUID.fromString("2B80C158-EBB2-39C0-E246-E401C544D9D8");
     public static final UUID ARMOR_UUID = UUID.fromString("814ABB7D-ADB4-F0C6-B7BD-A2E3FB23EE8D");
 
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", 4, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public CelestialStone() {
         super(ModRarity.LIME);
@@ -35,6 +31,13 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ATTRIBUTE;
     }
 

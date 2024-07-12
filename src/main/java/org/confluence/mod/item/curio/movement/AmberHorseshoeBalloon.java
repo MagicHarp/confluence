@@ -35,7 +35,7 @@ public class AmberHorseshoeBalloon extends HoneyComb implements IFallResistance,
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return LuckyHorseshoe.LUCKY;
+        return LuckyHorseshoe.getOrCreateAttributes();
     }
 
     @Override

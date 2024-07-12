@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class AnkletOfTheWind extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("355067F2-9D3A-92F8-B557-31ED341BFAC3");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Anklet of the Wind", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> SPEED;
 
     public AnkletOfTheWind() {
         super(ModRarity.ORANGE);
@@ -30,6 +29,11 @@ public class AnkletOfTheWind extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (SPEED == null) {
+            SPEED = ImmutableMultimap.of(
+                Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Anklet of the Wind", ModConfigs.ANKLET_OF_THE_WIND.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
         return SPEED;
     }
 

@@ -9,7 +9,7 @@ import top.theillusivec4.curios.api.SlotContext;
 public class BandOfRegeneration extends BaseCurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        ModEffects.healPerSecond(slotContext.entity(), 1.0F);
+        ModEffects.healPerSecond(slotContext.entity(), 0.2F);
     }
 
     @Override

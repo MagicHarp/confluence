@@ -13,6 +13,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class PanicNecklace extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("E939EBB6-41D9-4B5D-9778-A019B820D7A8");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> SPEED = ImmutableMultimap.of(
-        Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> SPEED;
 
     public PanicNecklace() {
         super();
@@ -46,6 +45,11 @@ public class PanicNecklace extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (SPEED == null) {
+            SPEED = ImmutableMultimap.of(
+                Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID, "Panic Necklace", ModConfigs.PANIC_NECKLACE_MOVEMENT.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
         return stack.getOrCreateTag().getLong("lastHurt") == 0 ? EMPTY_ATTRIBUTE : SPEED;
     }
 

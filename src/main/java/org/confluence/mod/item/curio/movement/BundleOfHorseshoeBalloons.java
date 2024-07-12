@@ -28,7 +28,7 @@ public class BundleOfHorseshoeBalloons extends BundleOfBalloons implements IFall
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return LuckyHorseshoe.LUCKY;
+        return LuckyHorseshoe.getOrCreateAttributes();
     }
 
     @Override

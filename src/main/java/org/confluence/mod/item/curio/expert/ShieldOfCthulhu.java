@@ -26,9 +26,7 @@ import java.util.UUID;
 
 public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, ICriticalHit {
     public static final UUID ARMOR_UUID = UUID.fromString("C99AA305-E0CF-9E8F-06AB-8F61C28EAF51");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", 2, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ARMOR;
 
     public ShieldOfCthulhu() {
         super(ModRarity.EXPERT);
@@ -53,6 +51,11 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ARMOR == null) {
+            ARMOR = ImmutableMultimap.of(
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", ModConfigs.SHIELD_OF_CTHULHU_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ARMOR;
     }
 

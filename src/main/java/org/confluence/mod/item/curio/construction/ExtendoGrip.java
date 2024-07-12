@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class ExtendoGrip extends BaseCurioItem {
     public static final UUID REACH_UUID = UUID.fromString("E4F0BF95-655D-7657-F58E-1C7053FACAFC");
-    static final ImmutableMultimap<Attribute, AttributeModifier> REACH = ImmutableMultimap.of(
-        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Extendo Grip", 3, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> REACH;
 
     public ExtendoGrip() {
         super(ModRarity.ORANGE);
@@ -30,12 +29,11 @@ public class ExtendoGrip extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return REACH;
+        return getOrCreateAttributes();
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-    }
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
 
     @Override
     public Component[] getInformation() {
@@ -43,5 +41,14 @@ public class ExtendoGrip extends BaseCurioItem {
             Component.translatable("item.confluence.extendo_grip.info"),
             Component.translatable("item.confluence.extendo_grip.info2")
         };
+    }
+
+    static Multimap<Attribute, AttributeModifier> getOrCreateAttributes() {
+        if (REACH == null) {
+            REACH = ImmutableMultimap.of(
+                ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Extendo Grip", ModConfigs.EXTENDO_GRIP_REACH.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
+        return REACH;
     }
 }

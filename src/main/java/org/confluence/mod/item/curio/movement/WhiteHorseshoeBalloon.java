@@ -28,7 +28,7 @@ public class WhiteHorseshoeBalloon extends BlizzardInABalloon implements IFallRe
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return LuckyHorseshoe.LUCKY;
+        return LuckyHorseshoe.getOrCreateAttributes();
     }
 
     @Override

@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class Toolbox extends BaseCurioItem {
     public static final UUID REACH_UUID = UUID.fromString("DE30BE59-DA5B-27C5-611D-9A39A9D7061E");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> REACH = ImmutableMultimap.of(
-        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Toolbox", 1, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> REACH;
 
     public Toolbox() {
         super(ModRarity.GREEN);
@@ -30,6 +29,11 @@ public class Toolbox extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (REACH == null) {
+            REACH = ImmutableMultimap.of(
+                ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Toolbox", ModConfigs.TOOLBOX_REACH.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return REACH;
     }
 

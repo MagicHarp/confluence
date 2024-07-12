@@ -18,6 +18,7 @@ import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -26,10 +27,7 @@ import java.util.UUID;
 public class PaladinsShield extends BaseCurioItem implements CustomName {
     public static final UUID ARMOR_UUID = UUID.fromString("276CFD23-08F7-50D5-8797-C7F4E1DAD96E");
     public static final UUID RESISTANCE_UUID = UUID.fromString("E4816CB8-0453-3050-70A6-2D0075E84FC5");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Paladins Shield", 6, AttributeModifier.Operation.ADDITION),
-        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Paladins Shield", 1.0, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public PaladinsShield(Rarity rarity) {
         super(rarity);
@@ -41,6 +39,12 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Paladins Shield", ModConfigs.PALADINS_SHIELD_ARMOR.get(), AttributeModifier.Operation.ADDITION),
+                Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Paladins Shield", ModConfigs.PALADINS_SHIELD_RESISTANCE.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ATTRIBUTE;
     }
 

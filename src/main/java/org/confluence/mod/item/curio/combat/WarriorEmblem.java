@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class WarriorEmblem extends BaseCurioItem {
     public static final UUID DAMAGE_UUID = UUID.fromString("595F6B45-6487-A65A-29C9-D00096A3D7AE");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Warrior Emblem", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> DAMAGE;
 
     public WarriorEmblem() {
         super(ModRarity.LIGHT_RED);
@@ -30,6 +29,11 @@ public class WarriorEmblem extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (DAMAGE == null) {
+            DAMAGE = ImmutableMultimap.of(
+                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Warrior Emblem", ModConfigs.WARRIOR_EMBLEM_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
         return DAMAGE;
     }
 

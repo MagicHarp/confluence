@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -19,12 +20,15 @@ import java.util.UUID;
 
 public class AnglerEarring extends BaseCurioItem {
     public static final UUID LUCK_UUID = UUID.fromString("FF9B64BC-4199-3B58-D520-A854E79600AE");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> LUCK = ImmutableMultimap.of(
-        Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Angler Earring", 10, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> LUCK;
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (LUCK == null) {
+            LUCK = ImmutableMultimap.of(
+                Attributes.LUCK, new AttributeModifier(LUCK_UUID, "Angler Earring", ModConfigs.ANGLER_EARRING_LUCK.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return LUCK;
     }
 

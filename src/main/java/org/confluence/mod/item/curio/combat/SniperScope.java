@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,12 +23,12 @@ public class SniperScope extends RifleScope implements IProjectileAttack, ICriti
 
     @Override
     public double getChance() {
-        return 0.1;
+        return ModConfigs.SNIPER_SCOPE_CRITICAL_CHANCE.get();
     }
 
     @Override
     public float getProjectileBonus() {
-        return 0.1F;
+        return ModConfigs.SNIPER_SCOPE_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override

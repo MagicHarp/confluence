@@ -21,9 +21,7 @@ import java.util.UUID;
 
 public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
     public static final UUID ARMOR_UUID = UUID.fromString("91F63796-420A-FFCB-504C-FEAA53C7DFC4");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", 8, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ARMOR;
 
     public FleshKnuckles() {
         super(ModRarity.PINK);
@@ -36,6 +34,11 @@ public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ARMOR == null) {
+            ARMOR = ImmutableMultimap.of(
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ARMOR;
     }
 

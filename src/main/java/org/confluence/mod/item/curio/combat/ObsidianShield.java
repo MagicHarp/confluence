@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,10 +22,7 @@ import java.util.UUID;
 public class ObsidianShield extends BaseCurioItem implements IFireImmune {
     public static final UUID RESISTANCE_UUID = UUID.fromString("EFB2AB28-B09E-29DB-1572-2ECCD7240CE9");
     public static final UUID ARMOR_UUID = UUID.fromString("696A9E98-F842-2657-89FF-7B8BB2CEBC7C");
-    static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Obsidian Shield", 1.0, AttributeModifier.Operation.ADDITION),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Obsidian Shield", 2.0, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public ObsidianShield() {
         super(ModRarity.LIGHT_RED);
@@ -32,6 +30,12 @@ public class ObsidianShield extends BaseCurioItem implements IFireImmune {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Obsidian Shield", ModConfigs.OBSIDIAN_SHIELD_RESISTANCE.get(), AttributeModifier.Operation.ADDITION),
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Obsidian Shield", ModConfigs.OBSIDIAN_SHIELD_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ATTRIBUTE;
     }
 

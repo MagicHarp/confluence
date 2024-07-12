@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public interface IMetalDetector {
     static Component getInfo(Player localPlayer) {
         AtomicReference<Component> atomic = new AtomicReference<>(Component.translatable("info.confluence.metal_detector.none"));
-        localPlayer.level().getBlockStates(new AABB(localPlayer.getOnPos()).inflate(15, 15, 15))
+        localPlayer.level().getBlockStates(new AABB(localPlayer.getOnPos()).inflate(15.5))
             .filter(ModConfigs.rareBlocks::contains)
             .min(Comparator.comparingInt(ModConfigs.rareBlocks::indexOf))
             .ifPresent(blockState -> {

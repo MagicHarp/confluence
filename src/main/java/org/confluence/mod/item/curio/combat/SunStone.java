@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -21,12 +22,7 @@ public class SunStone extends BaseCurioItem {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("6B2CFC65-3C84-7C1F-69D8-7B37556578E0");
     public static final UUID DAMAGE_UUID = UUID.fromString("56A08AD3-ADA1-F838-E09C-28B08935F5C2");
     public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
-
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public SunStone() {
         super(ModRarity.LIME);
@@ -36,6 +32,13 @@ public class SunStone extends BaseCurioItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         LivingEntity living = slotContext.entity();
         if (living == null) return EMPTY_ATTRIBUTE;
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", ModConfigs.SUN_STONE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", ModConfigs.SUN_STONE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", ModConfigs.SUN_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
     }
 

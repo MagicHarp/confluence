@@ -13,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
-    public static final double SPEED = 1.1;
-
     public CloudInABalloon(Rarity rarity) {
         super(rarity);
     }
@@ -44,8 +42,7 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
         return new Component[]{
             Component.translatable("item.confluence.cloud_in_a_balloon.info"),
             Component.translatable("item.confluence.cloud_in_a_balloon.info2"),
-            Component.translatable("item.confluence.cloud_in_a_balloon.info3"),
-            Component.translatable("item.confluence.cloud_in_a_balloon.info4")
+            Component.translatable("item.confluence.cloud_in_a_balloon.info3")
         };
     }
 }

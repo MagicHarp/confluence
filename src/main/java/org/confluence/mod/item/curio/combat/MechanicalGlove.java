@@ -11,6 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,12 +25,7 @@ public class MechanicalGlove extends BaseCurioItem implements IAutoAttack {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("32488AC2-6D30-E40C-2722-8630E4BA101E");
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("FDA86C95-41F9-1A50-EF0B-A9B9AFFD5AB3");
     public static final UUID DISTANCE_UUID = UUID.fromString("95983B7C-53EF-E066-32E2-B4FDCA0C5F00");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", 0.12, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", 1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-        ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public MechanicalGlove() {
         super(ModRarity.LIGHT_PURPLE);
@@ -37,6 +33,14 @@ public class MechanicalGlove extends BaseCurioItem implements IAutoAttack {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Mechanical Glove", ModConfigs.MECHANICAL_GLOVE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Mechanical Glove", ModConfigs.MECHANICAL_GLOVE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Mechanical Glove", ModConfigs.MECHANICAL_GLOVE_KNOCKBACK.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                ForgeMod.ENTITY_REACH.get(), new AttributeModifier(DISTANCE_UUID, "Mechanical Glove", ModConfigs.MECHANICAL_GLOVE_REACH.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
         return ATTRIBUTE;
     }
 

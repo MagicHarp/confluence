@@ -16,7 +16,6 @@ import org.confluence.mod.misc.ModSounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 @SuppressWarnings("unused")
@@ -26,7 +25,7 @@ public final class Confluence {
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
 
-    public Confluence() throws IOException {
+    public Confluence() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);

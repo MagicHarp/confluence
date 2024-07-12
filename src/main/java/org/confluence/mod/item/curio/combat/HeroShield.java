@@ -21,10 +21,7 @@ import java.util.UUID;
 public class HeroShield extends PaladinsShield implements IAggroAttach {
     public static final UUID ARMOR_UUID = UUID.fromString("164D0FAC-7E8E-1629-33E1-FEC6BEFFDF5B");
     public static final UUID RESISTANCE_UUID = UUID.fromString("DF9BB853-E184-8546-7602-CF4DA5D47BBC");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Hero Shield", 10, AttributeModifier.Operation.ADDITION),
-        Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Hero Shield", 1.0, AttributeModifier.Operation.ADDITION)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public HeroShield() {
         super(ModRarity.PINK);
@@ -36,6 +33,12 @@ public class HeroShield extends PaladinsShield implements IAggroAttach {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTE == null) {
+            ATTRIBUTE = ImmutableMultimap.of(
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Hero Shield", ModConfigs.HERO_SHIELD_ARMOR.get(), AttributeModifier.Operation.ADDITION),
+                Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(RESISTANCE_UUID, "Hero Shield", ModConfigs.HERO_SHIELD_RESISTANCE.get(), AttributeModifier.Operation.ADDITION)
+            );
+        }
         return ATTRIBUTE;
     }
 

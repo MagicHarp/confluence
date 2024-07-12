@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,7 @@ import java.util.UUID;
 
 public class Flipper extends BaseCurioItem {
     public static final UUID SWIM_SPEED_UUID = UUID.fromString("6D8F5968-0A9A-9A33-ED76-1935C3F03BB1");
-    static final ImmutableMultimap<Attribute, AttributeModifier> SWIM_SPEED = ImmutableMultimap.of(
-        ForgeMod.SWIM_SPEED.get(), new AttributeModifier(SWIM_SPEED_UUID, "Flipper", 0.5, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> SWIM_SPEED;
 
     public Flipper() {
         super(ModRarity.BLUE);
@@ -30,7 +29,7 @@ public class Flipper extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return SWIM_SPEED;
+        return getOrCreateAttributes();
     }
 
     @Override
@@ -43,5 +42,15 @@ public class Flipper extends BaseCurioItem {
             Component.translatable("item.confluence.flipper.info"),
             Component.translatable("item.confluence.flipper.info2")
         };
+    }
+
+    @NotNull
+    static ImmutableMultimap<Attribute, AttributeModifier> getOrCreateAttributes() {
+        if (SWIM_SPEED == null) {
+            SWIM_SPEED = ImmutableMultimap.of(
+                ForgeMod.SWIM_SPEED.get(), new AttributeModifier(SWIM_SPEED_UUID, "Flipper", ModConfigs.FLIPPER_SWIM.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
+        return SWIM_SPEED;
     }
 }

@@ -16,9 +16,7 @@ import java.util.UUID;
 
 public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMagicAttack, IProjectileAttack {
     public static final UUID DAMAGE_UUID = UUID.fromString("35E7BAD6-5998-D35B-2974-4FA8065D29F7");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> DAMAGE = ImmutableMultimap.of(
-        Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Destroyer Emblem", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
-    );
+    private static ImmutableMultimap<Attribute, AttributeModifier> DAMAGE;
 
     public DestroyerEmblem() {
         super(ModRarity.LIME);
@@ -41,6 +39,11 @@ public class DestroyerEmblem extends BaseCurioItem implements ICriticalHit, IMag
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (DAMAGE == null) {
+            DAMAGE = ImmutableMultimap.of(
+                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Destroyer Emblem", ModConfigs.DESTROYER_EMBLEM_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+            );
+        }
         return DAMAGE;
     }
 

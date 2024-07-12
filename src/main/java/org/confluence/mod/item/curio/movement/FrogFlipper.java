@@ -22,6 +22,6 @@ public class FrogFlipper extends FrogLeg {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return Flipper.SWIM_SPEED;
+        return Flipper.getOrCreateAttributes();
     }
 }

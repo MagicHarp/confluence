@@ -33,7 +33,7 @@ public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResist
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return LuckyHorseshoe.LUCKY;
+        return LuckyHorseshoe.getOrCreateAttributes();
     }
 
     @Override
@@ -47,8 +47,7 @@ public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResist
         return new Component[]{
             Component.translatable("item.confluence.blue_horseshoe_balloon.info"),
             Component.translatable("item.confluence.blue_horseshoe_balloon.info2"),
-            Component.translatable("item.confluence.blue_horseshoe_balloon.info3"),
-            Component.translatable("item.confluence.blue_horseshoe_balloon.info4")
+            Component.translatable("item.confluence.blue_horseshoe_balloon.info3")
         };
     }
 }

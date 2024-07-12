@@ -2,7 +2,7 @@ package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 
-public class ShinyRedBalloon extends Balloon{
+public class ShinyRedBalloon extends Balloon {
     @Override
     public Component[] getInformation() {
         return new Component[]{
