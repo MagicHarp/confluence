@@ -185,30 +185,13 @@ public abstract class LivingEntityMixin {
         }
     }
 
-//    @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
-//    private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
-//        if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-//            LivingEntity self = confluence$getSelf();
-//            AtomicDouble atomic = new AtomicDouble(pDamageAmount);
-//            CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
-//                atomic.addAndGet(iArmorPass.getPassValue()));
-//            float totalArmor = self.getArmorValue() - atomic.floatValue();
-//            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) totalArmor -= 3.0F;
-//            pDamageAmount = CombatRules.getDamageAfterAbsorb(pDamageAmount, Math.max(0.0F, totalArmor), (float) self.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-//            cir.setReturnValue(pDamageAmount);
-//        }
-//    }
-
     @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
     private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            AtomicDouble atomic = new AtomicDouble(pDamage);
-            CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
-                atomic.addAndGet(iArmorPass.getPassValue()));
-            pTotalArmor -= atomic.floatValue();
+            pTotalArmor -= CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
             if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
-        return original.call(pDamage, pTotalArmor, pToughnessAttribute);
+        return original.call(pDamage, Math.max(pTotalArmor, 0.0F), pToughnessAttribute);
     }
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
