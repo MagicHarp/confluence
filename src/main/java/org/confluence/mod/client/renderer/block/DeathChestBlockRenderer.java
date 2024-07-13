@@ -47,7 +47,9 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
 
     @Override
     public boolean shouldRender(@NotNull DeathChestBlock.Entity pBlockEntity, @NotNull Vec3 pCameraPos) {
-        return InformationHandler.hasMechanicalView() && pBlockEntity.getBlockPos().getCenter().multiply(1.0, 0.0, 1.0).closerThan(pCameraPos.multiply(1.0, 0.0, 1.0), getViewDistance());
+        return InformationHandler.hasMechanicalView()
+            ? pBlockEntity.getBlockPos().getCenter().multiply(1.0, 0.0, 1.0).closerThan(pCameraPos.multiply(1.0, 0.0, 1.0), getViewDistance())
+            : super.shouldRender(pBlockEntity, pCameraPos);
     }
 
     @Override
