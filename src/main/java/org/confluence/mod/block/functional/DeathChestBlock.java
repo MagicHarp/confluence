@@ -1,20 +1,23 @@
-package org.confluence.mod.block.common;
+package org.confluence.mod.block.functional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.TrappedChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.common.BaseChestBlock;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
@@ -40,7 +43,14 @@ public class DeathChestBlock extends BaseChestBlock {
     }
 
     public int getDirectSignal(@NotNull BlockState pBlockState, @NotNull BlockGetter pBlockAccess, @NotNull BlockPos pPos, @NotNull Direction pSide) {
-        return pBlockState.getSignal(pBlockAccess, pPos, pSide);
+        return pSide == Direction.UP ? pBlockState.getSignal(pBlockAccess, pPos, pSide) : 0;
+    }
+
+    public static ItemStack setData(ItemStack itemStack, Variant variant) {
+        CompoundTag tag = itemStack.getOrCreateTag();
+        tag.putInt("VariantId", variant.getId());
+        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.getSerializedName().replace("unlocked", "death")));
+        return itemStack;
     }
 
     public static class Entity extends BaseChestBlock.Entity {

@@ -79,17 +79,10 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
-    public static ItemStack setNormal(ItemStack itemStack, Variant variant) {
+    public static ItemStack setData(ItemStack itemStack, Variant variant) {
         CompoundTag tag = itemStack.getOrCreateTag();
         tag.putInt("VariantId", variant.id);
         itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name));
-        return itemStack;
-    }
-
-    public static ItemStack setDeath(ItemStack itemStack, Variant variant) {
-        CompoundTag tag = itemStack.getOrCreateTag();
-        tag.putInt("VariantId", variant.id);
-        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name.replace("unlocked", "death")));
         return itemStack;
     }
 
@@ -125,7 +118,7 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         }
 
         @Override
-        protected void saveAdditional(@NotNull CompoundTag pTag) {
+        public void saveAdditional(@NotNull CompoundTag pTag) {
             super.saveAdditional(pTag);
             pTag.putInt("VariantId", variant.id);
         }

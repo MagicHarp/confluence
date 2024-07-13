@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.BoulderBlock;
+import org.confluence.mod.block.functional.DeathChestBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -64,13 +65,6 @@ public final class ModTabs {
 
                 output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
-
-                for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
-                    output.accept(BaseChestBlock.setNormal(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
-                    if (variant.getSerializedName().startsWith("unlocked")) { // 只放解锁的
-                        output.accept(BaseChestBlock.setDeath(new ItemStack(DEATH_CHEST_BLOCK.get().asItem()), variant));
-                    }
-                }
             })
             .build());
     // 自然方块
@@ -174,6 +168,8 @@ public final class ModTabs {
                 output.accept(JUNGLE_THORN.get());
                 output.accept(PLANTERA_THORN.get());
 
+                output.accept(JUNGLE_ROSE.get());
+
                 for (Pots pots : Pots.values()) output.accept(pots.get());
             })
             .build());
@@ -211,6 +207,11 @@ public final class ModTabs {
                 output.accept(ModItems.AMBROSIA.get());
                 output.accept(ModItems.GUMMY_WORM.get());
                 output.accept(ModItems.GALAXY_PEARL.get());
+                output.accept(ModItems.CLAM.get());
+                output.accept(ModItems.HERB_BAG.get());
+                output.accept(ModItems.CAN_OF_WORMS.get());
+                output.accept(ModItems.CHRISTMAS_GIFT.get());
+                output.accept(ModItems.RED_ENVELOPE.get());
                 // 草药 种子
                 output.accept(ModItems.WATERLEAF.get());
                 output.accept(ModItems.MOONSHINE_GRASS.get());
@@ -226,25 +227,27 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS_SEED.get());
                 output.accept(ModItems.DEATHWEED_SEED.get());
                 output.accept(ModItems.FLAMEFLOWERS_SEED.get());
-                for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
-                for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
-                output.accept(ModItems.CLAM.get());
-                output.accept(ModItems.HERB_BAG.get());
-                output.accept(ModItems.CAN_OF_WORMS.get());
-                output.accept(ModItems.CHRISTMAS_GIFT.get());
-                output.accept(ModItems.RED_ENVELOPE.get());
+                // 功能性方块
                 output.accept(ECHO_BLOCK.get());
                 for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
                 output.accept(SWITCH.get());
                 output.accept(SIGNAL_ADAPTER.get());
                 output.accept(DART_TRAP.get());
-                output.accept(JUNGLE_ROSE.get());
                 output.accept(TIMERS_BLOCK_1_1.get());
                 output.accept(TIMERS_BLOCK_3_1.get());
                 output.accept(TIMERS_BLOCK_5_1.get());
                 output.accept(TIMERS_BLOCK_1_2.get());
                 output.accept(TIMERS_BLOCK_1_4.get());
+                for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
+                    output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
+                    if (variant.getSerializedName().startsWith("unlocked")) { // 只放解锁的
+                        output.accept(DeathChestBlock.setData(new ItemStack(DEATH_CHEST_BLOCK.get().asItem()), variant));
+                    }
+                }
+
+                for (SpawnEggs spawnEggs : SpawnEggs.values()) output.accept(spawnEggs.get());
+                for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
                 for (Baits baits : Baits.values()) output.accept(baits.get());
             })

@@ -23,7 +23,6 @@ import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import top.theillusivec4.curios.Curios;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,40 +66,9 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
     }
 
     public static ArrayList<DataDrivenCurioInfo> generatingInfos() {
-        File file = Confluence.CONFIG_PATH.toFile();
-        if (!file.exists()) file.mkdir();
         Path path = Confluence.CONFIG_PATH.resolve("curio.json");
-        if (Files.notExists(path)) {
-            try {
-                Files.writeString(path, """
-                    {
-                        "data_driven_test": {
-                            "rarity": "MASTER",
-                            "tooltips": [
-                                "It's a Data Driven curio",
-                                "More information in Github Wiki"
-                            ],
-                            "slot": "accessory",
-                            "attributes": {
-                                "minecraft:generic.movement_speed": {
-                                    "uuid": "DC2CE9B0-2637-329F-2E1F-998F1A8FA5A1",
-                                    "name": "Data Driven",
-                                    "value": 0.05,
-                                    "operation": "MULTIPLY_TOTAL"
-                                }
-                            },
-                            "interfaces": {
-                                "AutoAttack": {},
-                                "FallResistance": -1,
-                                "MayFly": [32, 0.3]
-                            }
-                        }
-                    }
-                    """);
-            } catch (Exception e) {
-                Confluence.LOGGER.error(e.getMessage());
-            }
-        }
+        if (Files.notExists(path)) return new ArrayList<>(); // 不生成文件，防止卡审核
+
         try (InputStream inputStream = new FileInputStream(path.toFile())) {
             JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "data_driven");
             for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {

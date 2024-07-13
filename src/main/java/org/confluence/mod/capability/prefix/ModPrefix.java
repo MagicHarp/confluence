@@ -2,6 +2,9 @@ package org.confluence.mod.capability.prefix;
 
 import net.minecraftforge.common.IExtensibleEnum;
 
+/**
+ * After your extending, don't forget to invoke {@link PrefixType#updatePrefix()}
+ */
 @SuppressWarnings("unused")
 public interface ModPrefix extends IExtensibleEnum {
     void copyTo(ItemPrefix itemPrefix);
