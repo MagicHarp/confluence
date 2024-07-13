@@ -1,9 +1,10 @@
 package org.confluence.mod.mixin;
 
-import com.google.common.util.concurrent.AtomicDouble;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
@@ -130,18 +131,13 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "getDamageAfterArmorAbsorb", at = @At("RETURN"), cancellable = true)
-    private void passArmor(DamageSource pDamageSource, float pDamageAmount, CallbackInfoReturnable<Float> cir) {
+    @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
+    private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            LivingEntity self = c$getSelf();
-            AtomicDouble atomic = new AtomicDouble(pDamageAmount);
-            CuriosUtils.getCurios(attacker, IArmorPass.class).forEach(iArmorPass ->
-                atomic.addAndGet(iArmorPass.getPassValue()));
-            float totalArmor = self.getArmorValue() - atomic.floatValue();
-            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) totalArmor -= 3.0F;
-            pDamageAmount = CombatRules.getDamageAfterAbsorb(pDamageAmount, Math.max(0.0F, totalArmor), (float) self.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-            cir.setReturnValue(pDamageAmount);
+            pTotalArmor -= CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
+            if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
+        return original.call(pDamage, Math.max(pTotalArmor, 0.0F), pToughnessAttribute);
     }
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)

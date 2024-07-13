@@ -107,6 +107,14 @@ public final class ForgeEvents {
                     )
                 );
                 return atomic.get();
-            }).ifPresent(event::setNewTarget);
+            }).ifPresent(player -> // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                event.getOriginalTarget().getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
+                    player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
+                        if (abilityO.getAggro() < ability.getAggro()) {
+                            event.setNewTarget(player);
+                        }
+                    })
+                )
+            );
     }
 }

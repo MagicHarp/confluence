@@ -77,9 +77,9 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.3.0.4")
 
     compileOnly fg.deobf('maven.modrinth:better-combat:1.8.5+1.20.1-forge')
-    runtimeOnly fg.deobf('maven.modrinth:better-combat:1.8.5+1.20.1-forge')
-    runtimeOnly fg.deobf('maven.modrinth:playeranimator:1.0.2-rc1+1.20-forge')
-    runtimeOnly fg.deobf('maven.modrinth:cloth-config:11.1.118+forge')
+    //runtimeOnly fg.deobf('maven.modrinth:better-combat:1.8.5+1.20.1-forge')
+    //runtimeOnly fg.deobf('maven.modrinth:playeranimator:1.0.2-rc1+1.20-forge')
+    //runtimeOnly fg.deobf('maven.modrinth:cloth-config:11.1.118+forge')
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
