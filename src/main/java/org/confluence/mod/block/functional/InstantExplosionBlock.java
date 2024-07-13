@@ -6,7 +6,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.ICubeBottomTop;
 import org.jetbrains.annotations.NotNull;
 

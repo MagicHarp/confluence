@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
+import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

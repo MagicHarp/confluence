@@ -1,7 +1,7 @@
-package org.confluence.mod.block.functional.mechanical;
+package org.confluence.mod.block.functional.network;
 
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.functional.StateProperties;
+import org.confluence.mod.block.StateProperties;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,7 +45,7 @@ public class Network {
 
     public boolean calculateSignal() {
         this.signal = nodes.stream().anyMatch(node -> {
-            BlockState blockState = node.getBlockEntity().getBlockState();
+            BlockState blockState = node.getEntity().getSelf().getBlockState();
             return blockState.hasProperty(StateProperties.SIGNAL) && blockState.getValue(StateProperties.SIGNAL);
         });
         return signal;

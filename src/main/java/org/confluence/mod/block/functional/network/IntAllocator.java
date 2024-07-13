@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional.mechanical;
+package org.confluence.mod.block.functional.network;
 
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;

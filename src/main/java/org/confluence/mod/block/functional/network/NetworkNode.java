@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional.mechanical;
+package org.confluence.mod.block.functional.network;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -7,11 +7,11 @@ import net.minecraft.core.BlockPos;
 public class NetworkNode {
     private final int id;
     private final Int2ObjectMap<Network> networks;
-    private final AbstractMechanicalBlock.Entity blockEntity;
+    private final INetworkEntity blockEntity;
     boolean inQueue; // 仅用于寻路服务
     boolean cachedSignal; // 仅用于寻路服务
 
-    public NetworkNode(int id, AbstractMechanicalBlock.Entity blockEntity) {
+    public NetworkNode(int id, INetworkEntity blockEntity) {
         this.id = id;
         this.blockEntity = blockEntity;
         this.networks = new Int2ObjectOpenHashMap<>();
@@ -52,10 +52,10 @@ public class NetworkNode {
     }
 
     public BlockPos getPos() {
-        return blockEntity.getBlockPos();
+        return blockEntity.getSelf().getBlockPos();
     }
 
-    public AbstractMechanicalBlock.Entity getBlockEntity() {
+    public INetworkEntity getEntity() {
         return blockEntity;
     }
 }

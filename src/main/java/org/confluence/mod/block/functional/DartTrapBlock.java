@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +69,7 @@ public class DartTrapBlock extends AbstractMechanicalBlock implements CustomMode
             double z = pPos.getZ() + 0.5 + 0.7 * direction.getStepZ();
             Arrow arrow = new Arrow(pLevel, x, y, z);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
+            arrow.setNoGravity(true);
             arrow.setEffectsFromItem(poisonArrow);
             arrow.setBaseDamage(5.0);
             arrow.shoot(direction.getStepX(), direction.getStepY(), direction.getStepZ(), 3.0F, 0.0F);

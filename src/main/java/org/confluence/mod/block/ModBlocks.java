@@ -16,7 +16,6 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.*;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.block.natural.MushroomBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;

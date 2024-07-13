@@ -7,8 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
-import org.confluence.mod.block.functional.mechanical.PathService;
+import org.confluence.mod.block.functional.network.INetworkEntity;
+import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.datagen.limit.ReversalImage16x;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +43,12 @@ public class WrenchItem extends Item implements ReversalImage16x {
 
         ItemStack itemStack = pContext.getItemInHand();
         BlockPos pPos = pContext.getClickedPos();
-        if (pLevel.getBlockEntity(pPos) instanceof AbstractMechanicalBlock.Entity entity) {
+        if (pLevel.getBlockEntity(pPos) instanceof INetworkEntity entity) {
             BlockPos storedPos = readBlockPos(itemStack);
             if (storedPos == null) {
                 writeBlockPos(itemStack, pPos);
-            } else if (pLevel.getBlockEntity(storedPos) instanceof AbstractMechanicalBlock.Entity entity1) {
-                if (entity1.connectedPoses.int2ObjectEntrySet().stream()
+            } else if (pLevel.getBlockEntity(storedPos) instanceof INetworkEntity entity1) {
+                if (entity1.getConnectedPoses().int2ObjectEntrySet().stream()
                     .noneMatch(entry -> entry.getIntKey() == color && entry.getValue().contains(pPos))
                 ) {
                     entity.connectTo(color, storedPos, entity1);

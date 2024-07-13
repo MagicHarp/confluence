@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional.mechanical;
+package org.confluence.mod.block.functional.network;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.BlockPos;
@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock.internalExecute;
+import static org.confluence.mod.block.functional.network.INetworkBlock.internalExecute;
 
 public class PathService {
     public static final PathService INSTANCE = new PathService();
@@ -27,13 +27,13 @@ public class PathService {
     }
 
     // 方块加载时,创捷网络结点
-    public void onBlockEntityLoad(AbstractMechanicalBlock.Entity blockEntity) {
+    public void onBlockEntityLoad(INetworkEntity blockEntity) {
         NetworkService.INSTANCE.createNetworkNode(blockEntity);
         addToQueue(blockEntity);
     }
 
     // 方块卸载时,删除网络结点和所属网络
-    public void onBlockEntityUnload(AbstractMechanicalBlock.Entity blockEntity) {
+    public void onBlockEntityUnload(INetworkEntity blockEntity) {
         NetworkNode networkNode = blockEntity.getNetworkNode();
         if (networkNode == null) return;
         for (Network network : networkNode.getNetworks().values()) {
@@ -51,7 +51,7 @@ public class PathService {
         NetworkService.INSTANCE.removeNetworkNode(networkNode);
     }
 
-    public void addToQueue(AbstractMechanicalBlock.Entity blockEntity) {
+    public void addToQueue(INetworkEntity blockEntity) {
         queue.add(blockEntity.getOrCreateNetworkNode());
     }
 
@@ -62,19 +62,18 @@ public class PathService {
             flag = true;
             NetworkNode cur = queue.remove();
             cur.inQueue = false;
-            Level level = cur.getBlockEntity().getLevel();
-            if (level == null || !level.isLoaded(cur.getPos())) continue;
-            AbstractMechanicalBlock.Entity entity = cur.getBlockEntity();
-            if (entity.isRemoved()) continue;
+            INetworkEntity entity = cur.getEntity();
+            Level level = entity.getSelf().getLevel();
+            if (level == null || !level.isLoaded(cur.getPos()) || entity.getSelf().isRemoved()) continue;
 
-            for (Int2ObjectMap.Entry<Set<BlockPos>> entry1 : entity.connectedPoses.int2ObjectEntrySet()) {
+            for (Int2ObjectMap.Entry<Set<BlockPos>> entry1 : entity.getConnectedPoses().int2ObjectEntrySet()) {
                 int color = entry1.getIntKey();
                 Iterator<BlockPos> iterator = entry1.getValue().iterator();
                 while (iterator.hasNext()) {
                     BlockPos pos = iterator.next();
                     if (!level.isLoaded(pos)) continue;
                     Network curNetwork = null;
-                    if (level.getBlockEntity(pos) instanceof AbstractMechanicalBlock.Entity blockEntity) {
+                    if (level.getBlockEntity(pos) instanceof INetworkEntity blockEntity) {
                         curNetwork = cur.getOrCreateNetwork(color);
                         NetworkNode next = blockEntity.getOrCreateNetworkNode();
                         Network nextNetwork = next.getNetwork(color);
@@ -99,7 +98,7 @@ public class PathService {
                     }
                 }
                 if (entry1.getValue().isEmpty()) {
-                    entity.connectedPoses.remove(color);
+                    entity.getConnectedPoses().remove(color);
                 }
             }
         }
@@ -112,9 +111,9 @@ public class PathService {
                     network.getNodes().stream()
                         .peek(node -> Confluence.LOGGER.debug("Scheduled Node#{}: {}", node.getId(), node.getPos().toShortString()))
                         .filter(node -> node.cachedSignal != network.hasSignal())
-                        .map(NetworkNode::getBlockEntity)
+                        .map(NetworkNode::getEntity)
                         .collect(Collectors.toSet())
-                        .forEach(entity -> internalExecute((ServerLevel) entity.getLevel(), null, entity, network.hasSignal()));
+                        .forEach(entity -> internalExecute((ServerLevel) entity.getSelf().getLevel(), null, entity, network.hasSignal()));
                 } else {
                     for (NetworkNode node : network.getNodes()) {
                         Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());

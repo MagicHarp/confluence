@@ -14,9 +14,9 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.StateProperties;
+import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
-import org.confluence.mod.block.functional.StateProperties;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 
 import java.util.Optional;
 

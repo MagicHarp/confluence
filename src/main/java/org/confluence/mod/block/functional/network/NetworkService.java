@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional.mechanical;
+package org.confluence.mod.block.functional.network;
 
 import org.confluence.mod.Confluence;
 
@@ -27,7 +27,7 @@ public class NetworkService {
         return network;
     }
 
-    public void createNetworkNode(AbstractMechanicalBlock.Entity blockEntity) {
+    public void createNetworkNode(INetworkEntity blockEntity) {
         NetworkNode node = new NetworkNode(nodeID.insert(), blockEntity);
         blockEntity.setNetworkNode(node);
         Confluence.LOGGER.debug("Create network node#{}", node.getId());

@@ -6,8 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
-import org.confluence.mod.block.functional.mechanical.PathService;
+import org.confluence.mod.block.functional.network.INetworkEntity;
+import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.datagen.limit.ReversalImage16x;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
@@ -34,16 +34,16 @@ public class WireCutterItem extends Item implements ReversalImage16x {
 
         ItemStack itemStack = pContext.getItemInHand();
         BlockPos pPos = pContext.getClickedPos();
-        if (level.getBlockEntity(pPos) instanceof AbstractMechanicalBlock.Entity entity) {
+        if (level.getBlockEntity(pPos) instanceof INetworkEntity entity) {
             BlockPos storedPos = WrenchItem.readBlockPos(itemStack);
             if (storedPos == null) {
                 WrenchItem.writeBlockPos(itemStack, pPos);
-            } else if (level.getBlockEntity(storedPos) instanceof AbstractMechanicalBlock.Entity entity1) {
-                entity.connectedPoses.int2ObjectEntrySet().stream()
+            } else if (level.getBlockEntity(storedPos) instanceof INetworkEntity entity1) {
+                entity.getConnectedPoses().int2ObjectEntrySet().stream()
                     .filter(entry -> entry.getValue().contains(storedPos))
                     .forEach(entry -> entity.disconnectWith(entry.getIntKey(), storedPos, entity1));
 
-                entity1.connectedPoses.int2ObjectEntrySet().stream()
+                entity1.getConnectedPoses().int2ObjectEntrySet().stream()
                     .filter(entry -> entry.getValue().contains(pPos))
                     .forEach(entry -> entity1.disconnectWith(entry.getIntKey(), pPos, entity));
 

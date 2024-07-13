@@ -4,8 +4,8 @@ import de.dafuqs.revelationary.RevelationRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 import org.confluence.mod.block.functional.DeathChestBlock;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.block.reveal.IRevealed;
 import snownee.jade.api.*;
 
@@ -25,7 +25,7 @@ public class ModJadePlugin implements IWailaPlugin {
                 if (!player.isCreative() && blockAccessor.getBlockEntity() instanceof DeathChestBlock.Entity entity) { // 隐藏死人箱
                     CompoundTag serverData = blockAccessor.getServerData();
                     serverData.putString("givenName", "{\"translate\":\"block.confluence.base_chest_block." + entity.variant.getSerializedName() + "\"}");
-                    return registration.blockAccessor().from(blockAccessor).blockEntity(entity).serverData(serverData).build();
+                    return registration.blockAccessor().from(blockAccessor).serverData(serverData).build();
                 }
                 BlockState blockState = blockAccessor.getBlockState();
                 if (blockAccessor.getBlock() instanceof IRevealed && !RevelationRegistry.isVisibleTo(blockState, player)) { // 隐藏Clocked方块

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.functional.mechanical.AbstractMechanicalBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.datagen.limit.CustomName;
@@ -23,8 +22,8 @@ import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static org.confluence.mod.block.functional.StateProperties.DRIVE;
-import static org.confluence.mod.block.functional.StateProperties.SIGNAL;
+import static org.confluence.mod.block.StateProperties.DRIVE;
+import static org.confluence.mod.block.StateProperties.SIGNAL;
 
 public class TimersBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel, CustomName {
     private final int duration;
