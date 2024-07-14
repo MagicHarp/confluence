@@ -1,26 +1,26 @@
 {
     "parent": "confluence:item/chest_variant",
     "textures": {
-        "0": "confluence:block/chest/locked_golden"
+        "0": "confluence:item/chest/locked_golden"
     },
     "overrides": [
         {
             "predicate": {
                 "confluence:variant": 1
             },
-            "model": "confluence:item/chest_variant_1"
+            "model": "confluence:item/chest_unlocked_golden"
         },
         {
             "predicate": {
                 "confluence:variant": 2
             },
-            "model": "confluence:item/chest_variant_2"
+            "model": "confluence:item/chest_locked_shadow"
         },
         {
             "predicate": {
                 "confluence:variant": 3
             },
-            "model": "confluence:item/chest_variant_3"
+            "model": "confluence:item/chest_unlocked_shadow"
         }
     ]
 }

@@ -28,6 +28,10 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
     public static final Material DEATH_GOLDEN_LEFT = chest("death_golden_left");
     public static final Material DEATH_GOLDEN_RIGHT = chest("death_golden_right");
 
+    public static final Material DEATH_SHADOW = chest("death_shadow");
+    public static final Material DEATH_SHADOW_LEFT = chest("death_shadow_left");
+    public static final Material DEATH_SHADOW_RIGHT = chest("death_shadow_right");
+
     private final Int2ObjectMap<float[]> map;
 
     public DeathChestBlockRenderer(BlockEntityRendererProvider.Context pContext) {
@@ -80,6 +84,7 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
     protected @NotNull Material getMaterial(DeathChestBlock.Entity blockEntity, @NotNull ChestType chestType) {
         return switch (blockEntity.variant) {
             default -> chooseMaterial(chestType, DEATH_GOLDEN, DEATH_GOLDEN_LEFT, DEATH_GOLDEN_RIGHT);
+            case UNLOCKED_SHADOW -> chooseMaterial(chestType, DEATH_SHADOW, DEATH_SHADOW_LEFT, DEATH_SHADOW_RIGHT);
         };
     }
 

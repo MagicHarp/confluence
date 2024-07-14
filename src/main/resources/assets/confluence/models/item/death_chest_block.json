@@ -1,3 +1,14 @@
 {
-    "parent": "confluence:item/base_chest_block"
+    "parent": "confluence:item/chest_variant",
+    "textures": {
+        "0": "confluence:item/chest/death_golden"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "confluence:variant": 3
+            },
+            "model": "confluence:item/chest_death_shadow"
+        }
+    ]
 }
