@@ -8,10 +8,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.LogBlocks;
-import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +20,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.block.ModBlocks.*;
+import static org.confluence.mod.block.natural.Ores.*;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
     public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, @Nullable ExistingFileHelper helper) {
@@ -30,7 +31,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     public void addTags(HolderLookup.@NotNull Provider provider) {
         LogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
-        Ores.acceptTag(mineableWithPickaxe);
+        acceptTag(mineableWithPickaxe);
         mineableWithPickaxe.add(
             BIG_RUBY_BLOCK.get(),
             BIG_AMBER_BLOCK.get(),
@@ -67,7 +68,19 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             DecorativeBlocks.ANOTHER_GRANITE_COLUMN.get(),
             DecorativeBlocks.MARBLE_COLUMN.get(),
             DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(),
-            DecorativeBlocks.CRYSTAL_BLOCK.get()
+            DecorativeBlocks.CRYSTAL_BLOCK.get(),
+            ModBlocks.RUBY_CHAIN.get(),
+            ModBlocks.AMBER_CHAIN.get(),
+            ModBlocks.TOPAZ_CHAIN.get(),
+            ModBlocks.EMERALD_CHAIN.get(),
+            ModBlocks.SAPPHIRE_CHAIN.get(),
+            ModBlocks.DIAMOND_CHAIN.get(),
+            ModBlocks.AMETHYST_CHAIN.get(),
+            ModBlocks.SILK_CHAIN.get(),
+            ModBlocks.BONE_CHAIN.get(),
+            ModBlocks.EBONY_COBBLESTONE.get(),
+            ModBlocks.ANOTHER_CRIMSON_COBBLESTONE.get(),
+            ModBlocks.PEARL_COBBLESTONE.get()
         );
         tag(BlockTags.DIRT).add(
             CORRUPT_GRASS_BLOCK.get(),
@@ -114,23 +127,24 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             PURPLE_PACKED_ICE.get()
         );
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-            Ores.EBONY_ORE.get(), Ores.DEEPSLATE_EBONY_ORE.get(), Ores.EBONY_BLOCK.get(), Ores.RAW_EBONY_BLOCK.get(),
-            Ores.ANOTHER_CRIMSON_ORE.get(), Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), Ores.ANOTHER_CRIMSON_BLOCK.get(), Ores.RAW_ANOTHER_CRIMSON_BLOCK.get()
+            EBONY_ORE.get(), DEEPSLATE_EBONY_ORE.get(), EBONY_BLOCK.get(), RAW_EBONY_BLOCK.get(),
+            ANOTHER_CRIMSON_ORE.get(), DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), ANOTHER_CRIMSON_BLOCK.get(), RAW_ANOTHER_CRIMSON_BLOCK.get()
         );
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
-            Ores.HELLSTONE.get(),Ores.ASH_HELLSTONE.get()
+            HELLSTONE.get(),ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
+            PEARL_STONE.get(), PEARL_SANDSTONE.get()
         );
         tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
-            Ores.DEEPSLATE_COBALT_ORE.get(), Ores.RAW_COBALT_BLOCK.get(), Ores.COBALT_BLOCK.get(),
-            Ores.DEEPSLATE_PALLADIUM_ORE.get(), Ores.RAW_PALLADIUM_BLOCK.get(), Ores.PALLADIUM_BLOCK.get()
+            DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
+            DEEPSLATE_PALLADIUM_ORE.get(), RAW_PALLADIUM_BLOCK.get(), PALLADIUM_BLOCK.get()
         );
         tag(ModTags.Blocks.NEEDS_6_LEVEL).add(
-            Ores.DEEPSLATE_MITHRIL_ORE.get(), Ores.RAW_MITHRIL_BLOCK.get(), Ores.MITHRIL_BLOCK.get(),
-            Ores.DEEPSLATE_ORICHALCUM_ORE.get(), Ores.RAW_ORICHALCUM_BLOCK.get(), Ores.ORICHALCUM_BLOCK.get()
+            DEEPSLATE_MITHRIL_ORE.get(), RAW_MITHRIL_BLOCK.get(), MITHRIL_BLOCK.get(),
+            DEEPSLATE_ORICHALCUM_ORE.get(), RAW_ORICHALCUM_BLOCK.get(), ORICHALCUM_BLOCK.get()
         );
         tag(ModTags.Blocks.NEEDS_7_LEVEL).add(
-            Ores.DEEPSLATE_ADAMANTITE_ORE.get(), Ores.RAW_ADAMANTITE_BLOCK.get(), Ores.ADAMANTITE_BLOCK.get(),
-            Ores.DEEPSLATE_TITANIUM_ORE.get(), Ores.RAW_TITANIUM_BLOCK.get(), Ores.TITANIUM_BLOCK.get()
+            DEEPSLATE_ADAMANTITE_ORE.get(), RAW_ADAMANTITE_BLOCK.get(), ADAMANTITE_BLOCK.get(),
+            DEEPSLATE_TITANIUM_ORE.get(), RAW_TITANIUM_BLOCK.get(), TITANIUM_BLOCK.get()
         );
         IntrinsicTagAppender<Block> needsNonVanillaLevel = tag(ModTags.Blocks.NEEDS_NON_VANILLA_LEVEL);
         needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_4_LEVEL);

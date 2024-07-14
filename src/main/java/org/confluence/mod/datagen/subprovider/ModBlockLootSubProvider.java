@@ -211,6 +211,17 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropOther(LIFE_CRYSTAL_BLOCK.get(), Materials.LIFE_CRYSTAL.get());
         dropOther(MUSHROOM_GRASS_BLOCK.get(), Items.MUD);
 
+        //chain
+        dropSelf(RUBY_CHAIN.get());
+        dropSelf(AMBER_CHAIN.get());
+        dropSelf(TOPAZ_CHAIN.get());
+        dropSelf(EMERALD_CHAIN.get());
+        dropSelf(SAPPHIRE_CHAIN.get());
+        dropSelf(DIAMOND_CHAIN.get());
+        dropSelf(AMETHYST_CHAIN.get());
+        dropSelf(SILK_CHAIN.get());
+        dropSelf(BONE_CHAIN.get());
+
         for (LogBlocks logBlocks : LogBlocks.LOG_BLOCKS) {
             dropSelf(logBlocks.PLANKS.get());
             if (logBlocks.STRIPPED_LOG != null) dropSelf(logBlocks.STRIPPED_LOG.get());
