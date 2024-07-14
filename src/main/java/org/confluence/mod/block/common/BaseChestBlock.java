@@ -6,6 +6,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -92,12 +93,13 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
                         itemStack.shrink(1);
                     }
                     entity.variant = Variant.byId(unlock);
-                    entity.setCustomName(Component.translatable("block.confluence.base_chest_block." + entity.variant.name));
+                    MutableComponent name = Component.translatable("block.confluence.base_chest_block." + entity.variant.name);
+                    entity.setCustomName(name);
                     Direction relativeDir = ChestBlock.getConnectedDirection(pState);
                     boolean isDouble = false;
                     if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(pPos.relative(relativeDir)) instanceof Entity entity1) {
                         entity1.variant = entity.variant;
-                        entity1.setCustomName(entity.getCustomName());
+                        entity1.setCustomName(name);
                         isDouble = true;
                     }
                     if (pLevel instanceof ServerLevel serverLevel) {

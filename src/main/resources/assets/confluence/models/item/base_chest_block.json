@@ -9,6 +9,18 @@
                 "confluence:variant": 1
             },
             "model": "confluence:item/chest_variant_1"
+        },
+        {
+            "predicate": {
+                "confluence:variant": 2
+            },
+            "model": "confluence:item/chest_variant_2"
+        },
+        {
+            "predicate": {
+                "confluence:variant": 3
+            },
+            "model": "confluence:item/chest_variant_3"
         }
     ]
 }
