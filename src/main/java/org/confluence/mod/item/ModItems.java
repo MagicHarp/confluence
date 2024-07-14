@@ -110,6 +110,8 @@ public final class ModItems {
     public static final RegistryObject<Item> LIFE_MUSHROOM = ITEMS.register("life_mushroom", () -> new MushroomItem(ModBlocks.LIFE_MUSHROOM.get(), 6.0F));
     public static final RegistryObject<Item> JUNGLE_SPORE = ITEMS.register("jungle_spore", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> GOLDEN_KEY = ITEMS.register("golden_key", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> SHADOW_KEY = ITEMS.register("shadow_key", () -> new Item(new Item.Properties().stacksTo(1).rarity(ModRarity.WHITE)));
 
 
     public static void register(IEventBus bus) {

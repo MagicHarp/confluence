@@ -2,9 +2,14 @@ package org.confluence.mod.block.common;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
@@ -29,6 +34,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.datagen.limit.CustomName;
+import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,6 +83,39 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (pLevel.getBlockEntity(pPos) instanceof Entity entity && entity.isLocked()) {
+            ItemStack itemStack = pPlayer.getItemInHand(pHand);
+            boolean isShadow = itemStack.is(ModItems.SHADOW_KEY.get());
+            if ((entity.variant == Variant.LOCKED_SHADOW && isShadow) || itemStack.is(ModItems.GOLDEN_KEY.get())) {
+                int unlock = entity.variant.unlock;
+                if (unlock > 0) {
+                    if (!isShadow && !pPlayer.getAbilities().instabuild) {
+                        itemStack.shrink(1);
+                    }
+                    entity.variant = Variant.byId(unlock);
+                    entity.setCustomName(Component.translatable("block.confluence.base_chest_block." + entity.variant.name));
+                    Direction relativeDir = ChestBlock.getConnectedDirection(pState);
+                    boolean isDouble = false;
+                    if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(pPos.relative(relativeDir)) instanceof Entity entity1) {
+                        entity1.variant = entity.variant;
+                        entity1.setCustomName(entity.getCustomName());
+                        isDouble = true;
+                    }
+                    if (pLevel instanceof ServerLevel serverLevel) {
+                        serverLevel.playSound(null, pPos, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS);
+                        double posX = pPos.getX() + 0.5;
+                        double posZ = pPos.getZ() + 0.5;
+                        if (isDouble) {
+                            posX += relativeDir.getStepX() * 0.5;
+                            posZ += relativeDir.getStepZ() * 0.5;
+                        }
+                        serverLevel.sendParticles(
+                            new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CHAIN.defaultBlockState()),
+                            posX, pPos.getY() + 0.5, posZ, 200, 0.0625, 0.0625, 0.0625, 0.15
+                        );
+                    }
+                }
+                return InteractionResult.SUCCESS;
+            }
             return InteractionResult.PASS;
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -149,16 +188,24 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
     }
 
     public enum Variant implements StringRepresentable {
-        LOCKED_GOLDEN(0, "locked_golden"),
-        UNLOCKED_GOLDEN(1, "unlocked_golden"); // 对于死人箱，只使用unlocked开头的
+        LOCKED_GOLDEN(0, "locked_golden", 1),
+        UNLOCKED_GOLDEN(1, "unlocked_golden"),
+        LOCKED_SHADOW(2, "locked_shadow", 3),
+        UNLOCKED_SHADOW(3, "unlocked_shadow"); // 对于死人箱，只使用unlocked开头的
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         private final int id;
         private final String name;
+        private final int unlock;
 
-        Variant(int id, String name) {
+        Variant(int id, String name, int unlock) {
             this.id = id;
             this.name = name;
+            this.unlock = unlock;
+        }
+
+        Variant(int id, String name) {
+            this(id, name, -1);
         }
 
         public int getId() {

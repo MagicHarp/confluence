@@ -6,7 +6,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.functional.AbstractMechanicalBlock;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.block.functional.network.NetworkNode;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -44,7 +44,7 @@ public class MechanicalComponentProvider implements IBlockComponentProvider, ISe
 
     @Override
     public void appendServerData(CompoundTag compoundTag, BlockAccessor blockAccessor) {
-        if (blockAccessor.getBlockEntity() instanceof AbstractMechanicalBlock.Entity entity) {
+        if (blockAccessor.getBlockEntity() instanceof INetworkEntity entity) {
             NetworkNode networkNode = entity.getOrCreateNetworkNode();
             ListTag listTag = new ListTag();
             networkNode.getNetworks().int2ObjectEntrySet().stream()

@@ -18,6 +18,13 @@ public class BaseChestBlockRenderer extends ChestRenderer<BaseChestBlock.Entity>
     public static final Material UNLOCKED_GOLDEN_LEFT = chest("unlocked_golden_left");
     public static final Material UNLOCKED_GOLDEN_RIGHT = chest("unlocked_golden_right");
 
+    public static final Material LOCKED_SHADOW = chest("locked_shadow");
+    public static final Material LOCKED_SHADOW_LEFT = chest("locked_shadow_left");
+    public static final Material LOCKED_SHADOW_RIGHT = chest("locked_shadow_right");
+    public static final Material UNLOCKED_SHADOW = chest("unlocked_shadow");
+    public static final Material UNLOCKED_SHADOW_LEFT = chest("unlocked_shadow_left");
+    public static final Material UNLOCKED_SHADOW_RIGHT = chest("unlocked_shadow_right");
+
     public BaseChestBlockRenderer(BlockEntityRendererProvider.Context pContext) {
         super(pContext);
     }
@@ -25,8 +32,10 @@ public class BaseChestBlockRenderer extends ChestRenderer<BaseChestBlock.Entity>
     @Override
     protected @NotNull Material getMaterial(BaseChestBlock.Entity blockEntity, @NotNull ChestType chestType) {
         return switch (blockEntity.variant) {
-            case LOCKED_GOLDEN -> chooseMaterial(chestType, LOCKED_GOLDEN, LOCKED_GOLDEN_LEFT, LOCKED_GOLDEN_RIGHT);
+            default -> chooseMaterial(chestType, LOCKED_GOLDEN, LOCKED_GOLDEN_LEFT, LOCKED_GOLDEN_RIGHT);
             case UNLOCKED_GOLDEN -> chooseMaterial(chestType, UNLOCKED_GOLDEN, UNLOCKED_GOLDEN_LEFT, UNLOCKED_GOLDEN_RIGHT);
+            case LOCKED_SHADOW -> chooseMaterial(chestType, LOCKED_SHADOW, LOCKED_SHADOW_LEFT, LOCKED_SHADOW_RIGHT);
+            case UNLOCKED_SHADOW -> chooseMaterial(chestType, UNLOCKED_SHADOW, UNLOCKED_SHADOW_LEFT, UNLOCKED_SHADOW_RIGHT);
         };
     }
 
