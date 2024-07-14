@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.datagen.limit.ICubeBottomTop;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +23,7 @@ public class InstantExplosionBlock extends AbstractMechanicalBlock implements IC
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         pLevel.removeBlock(pPos, false);
         pLevel.explode(null, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, 10.0F, false, Level.ExplosionInteraction.BLOCK);
     }

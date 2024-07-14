@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
@@ -76,14 +77,14 @@ public class SignalAdapterBlock extends AbstractMechanicalBlock implements Custo
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         if (!pState.getValue(SIGNAL)) {
             pLevel.setBlockAndUpdate(pPos, pState.setValue(SIGNAL, true));
         }
     }
 
     @Override
-    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         if (pState.getValue(SIGNAL)) {
             pLevel.setBlockAndUpdate(pPos, pState.setValue(SIGNAL, false));
         }

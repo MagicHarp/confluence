@@ -47,7 +47,7 @@ public class ThornBlock extends PipeBlock implements CustomModel, CustomItemMode
     public BlockState getStateForPlacement(BlockGetter pLevel, BlockPos pPos){
         BlockState blockState = defaultBlockState();
         for(Direction direction : Direction.values()){
-            BlockState nearState = pLevel.getBlockState(pPos.offset(direction.getNormal()));
+            BlockState nearState = pLevel.getBlockState(pPos.relative(direction));
             blockState = blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), nearState.is(this) || nearState.is(ground));
         }
         return blockState;

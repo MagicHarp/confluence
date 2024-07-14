@@ -19,9 +19,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,6 +32,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.BaseChestBlock;
 import org.confluence.mod.block.functional.network.INetworkBlock;
 import org.confluence.mod.block.functional.network.INetworkEntity;
+import org.confluence.mod.block.functional.network.Network;
 import org.confluence.mod.block.functional.network.NetworkNode;
 import org.confluence.mod.client.handler.InformationHandler;
 import org.confluence.mod.mixin.accessor.ChestBlockEntityAccessor;
@@ -37,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
 public class DeathChestBlock extends BaseChestBlock implements INetworkBlock {
@@ -88,7 +92,33 @@ public class DeathChestBlock extends BaseChestBlock implements INetworkBlock {
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {}
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
+        if (pColor == -1) return;
+        BlockPos relative = pPos.relative(getConnectedDirection(pState));
+        if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(relative) instanceof INetworkEntity entity) {
+            execution(pLevel, relative, pColor, true, entity); // 让相邻箱子执行
+        }
+    }
+
+    @Override
+    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
+        if (pColor == -1) return;
+        BlockPos relative = pPos.relative(getConnectedDirection(pState));
+        if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(relative) instanceof INetworkEntity entity) {
+            execution(pLevel, relative, pColor, false, entity); // 同上
+        }
+    }
+
+    private void execution(ServerLevel level, BlockPos blockPos, int color, boolean hasSignal, INetworkEntity entity) {
+        Network network = entity.getOrCreateNetworkNode().getNetwork(color);
+        if (network != null && hasSignal != network.hasSignal()) {
+            network.setSignal(hasSignal);
+            network.getNodes().stream()
+                .map(NetworkNode::getEntity)
+                .collect(Collectors.toSet())
+                .forEach(entity1 -> INetworkBlock.internalExecute(level, blockPos, color, hasSignal, entity1));
+        }
+    }
 
     public static ItemStack setData(ItemStack itemStack, Variant variant) {
         CompoundTag tag = itemStack.getOrCreateTag();
@@ -193,6 +223,15 @@ public class DeathChestBlock extends BaseChestBlock implements INetworkBlock {
         @Override
         public Int2ObjectMap<Set<BlockPos>> getRelativePoses() {
             return relativePoses;
+        }
+
+        @Override
+        public void connectTo(int color, BlockPos relatedPos, INetworkEntity related) {
+            if (getBlockState().getValue(TYPE) == ChestType.SINGLE ||
+                !relatedPos.equals(getBlockPos().relative(ChestBlock.getConnectedDirection(getBlockState())))
+            ) {
+                INetworkEntity.super.connectTo(color, relatedPos, related); // 确保大箱子之间不连接
+            }
         }
     }
 }

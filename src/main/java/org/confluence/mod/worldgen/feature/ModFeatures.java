@@ -42,7 +42,7 @@ public final class ModFeatures {
 
     static boolean isPosExposed(WorldGenLevel level, BlockPos blockPos) {
         for (Direction direction : HORIZONTAL) {
-            if (level.isStateAtPosition(blockPos.offset(direction.getNormal()), BlockBehaviour.BlockStateBase::isAir)) {
+            if (level.isStateAtPosition(blockPos.relative(direction), BlockBehaviour.BlockStateBase::isAir)) {
                 return true;
             }
         }

@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.datagen.limit.CustomName;
@@ -62,7 +63,7 @@ public class TimersBlock extends AbstractMechanicalBlock implements CustomModel,
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {}
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {}
 
     @Nullable
     @Override

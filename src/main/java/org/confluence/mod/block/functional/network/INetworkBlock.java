@@ -3,10 +3,10 @@ package org.confluence.mod.block.functional.network;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 import org.confluence.mod.item.common.WireCutterItem;
 import org.confluence.mod.item.common.WrenchItem;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public interface INetworkBlock {
     default void onNodeRemove(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pNewState) {
-        if (!pLevel.isClientSide && !pState.is(pNewState.getBlock()) && pLevel.getBlockEntity(pPos) instanceof AbstractMechanicalBlock.Entity entity) {
+        if (!pLevel.isClientSide && !pState.is(pNewState.getBlock()) && pLevel.getBlockEntity(pPos) instanceof INetworkEntity entity) {
             PathService.INSTANCE.onBlockEntityUnload(entity);
             // 根据relativePoses,断开与该方块的连接
             for (Int2ObjectMap.Entry<Set<BlockPos>> entry : entity.getRelativePoses().int2ObjectEntrySet()) {
@@ -54,9 +54,9 @@ public interface INetworkBlock {
                 entity.getOrCreateNetworkNode().getNetworks().values().stream()
                     .filter(network -> hasSignal != network.hasSignal()) // 只处理不同的信号
                     .peek(network -> network.setSignal(hasSignal))
-                    .flatMap(network -> network.getNodes().stream().map(NetworkNode::getEntity))
+                    .flatMap(network -> network.getNodes().stream().map(networkNode -> new Tuple<>(network.getColor(), networkNode.getEntity())))
                     .collect(Collectors.toSet())
-                    .forEach(entity1 -> internalExecute(pLevel, pPos, entity1, hasSignal));
+                    .forEach(tuple -> internalExecute(pLevel, pPos, tuple.getA(), hasSignal, tuple.getB()));
             } else {
                 Network network = entity.getOrCreateNetworkNode().getNetwork(color);
                 if (network != null && hasSignal != network.hasSignal()) { // 同样只处理不同的信号
@@ -64,13 +64,13 @@ public interface INetworkBlock {
                     network.getNodes().stream()
                         .map(NetworkNode::getEntity)
                         .collect(Collectors.toSet())
-                        .forEach(entity1 -> internalExecute(pLevel, pPos, entity1, hasSignal));
+                        .forEach(entity1 -> internalExecute(pLevel, pPos, color, hasSignal, entity1));
                 }
             }
             if (hasSignal) {
-                onExecute(pState, pLevel, pPos);
+                onExecute(pState, pLevel, pPos, color, entity);
             } else {
-                onUnExecute(pState, pLevel, pPos);
+                onUnExecute(pState, pLevel, pPos, color, entity);
             }
         }
     }
@@ -80,16 +80,16 @@ public interface INetworkBlock {
      *
      * @param pPos 激活该方块的来源坐标
      */
-    static void internalExecute(ServerLevel pLevel, @Nullable BlockPos pPos, INetworkEntity entity, boolean hasSignal) {
+    static void internalExecute(ServerLevel pLevel, @Nullable BlockPos pPos, int color, boolean hasSignal, INetworkEntity entity) {
         if (pLevel == null) return;
         BlockState blockState = entity.getSelf().getBlockState();
         BlockPos blockPos = entity.getSelf().getBlockPos();
         if (blockPos.equals(pPos)) return; // 确保被直接激活的方块最后再执行
         if (blockState.getBlock() instanceof INetworkBlock block) {
             if (hasSignal) {
-                block.onExecute(blockState, pLevel, blockPos);
+                block.onExecute(blockState, pLevel, blockPos, color, entity);
             } else {
-                block.onUnExecute(blockState, pLevel, blockPos);
+                block.onUnExecute(blockState, pLevel, blockPos, color, entity);
             }
         }
     }
@@ -97,12 +97,12 @@ public interface INetworkBlock {
     /**
      * 正脉冲执行的代码
      */
-    void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos);
+    void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity);
 
     /**
      * 负脉冲执行的代码
      */
-    default void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {}
+    default void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {}
 
     default boolean cannotInteractWith(Item item) {
         return item instanceof WrenchItem || item instanceof WireCutterItem;

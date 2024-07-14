@@ -113,7 +113,7 @@ public class PathService {
                         .filter(node -> node.cachedSignal != network.hasSignal())
                         .map(NetworkNode::getEntity)
                         .collect(Collectors.toSet())
-                        .forEach(entity -> internalExecute((ServerLevel) entity.getSelf().getLevel(), null, entity, network.hasSignal()));
+                        .forEach(entity -> internalExecute((ServerLevel) entity.getSelf().getLevel(), null, -1, network.hasSignal(), entity));
                 } else {
                     for (NetworkNode node : network.getNodes()) {
                         Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());

@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,7 +61,7 @@ public class DartTrapBlock extends AbstractMechanicalBlock implements CustomMode
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         if (!pState.getValue(TRIGGERED)) {
             pLevel.setBlockAndUpdate(pPos, pState.setValue(TRIGGERED, true));
             Direction direction = pState.getValue(FACING);
@@ -78,7 +79,7 @@ public class DartTrapBlock extends AbstractMechanicalBlock implements CustomMode
     }
 
     @Override
-    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         if (pState.getValue(TRIGGERED)) {
             pLevel.setBlockAndUpdate(pPos, pState.setValue(TRIGGERED, false));
         }

@@ -19,6 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.entity.projectile.BoulderEntity;
@@ -63,15 +64,15 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
         if (!pLevel.isClientSide) {
             if (pLevel.hasNeighborSignal(pPos)) {
                 execute(pState, (ServerLevel) pLevel, pPos, true);
-            } else {
+            } else if (pLevel.getBlockEntity(pPos) instanceof INetworkEntity entity) {
                 BlockState below = pLevel.getBlockState(pPos.below());
-                if (below.isAir()) onExecute(pState, (ServerLevel) pLevel, pPos);
+                if (below.isAir()) onExecute(pState, (ServerLevel) pLevel, pPos, -1, entity);
             }
         }
     }
 
     @Override
-    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
+    public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
         pLevel.removeBlock(pPos, false);
         summon(pLevel, pPos, entity -> pLevel.getNearestPlayer(entity, BoulderEntity.SEARCH_RANGE));
     }
