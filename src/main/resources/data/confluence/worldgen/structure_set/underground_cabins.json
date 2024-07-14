@@ -2,12 +2,15 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 12311220,
-    "separation": 7,
-    "spacing": 10,
+    "separation": 10,
+    "spacing": 15,
     "spread_type": "triangular"
   },
   "structures": [{
     "structure": "confluence:underground_cabins",
     "weight": 1
-  }]
+  }],
+  "values": [
+    
+  ]
 }
