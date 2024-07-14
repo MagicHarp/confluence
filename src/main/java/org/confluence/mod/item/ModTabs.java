@@ -239,6 +239,7 @@ public final class ModTabs {
                 output.accept(TIMERS_BLOCK_5_1.get());
                 output.accept(TIMERS_BLOCK_1_2.get());
                 output.accept(TIMERS_BLOCK_1_4.get());
+                output.accept(GEYSER_BLOCK.get());
                 for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
                     output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
                     if (variant.getSerializedName().startsWith("unlocked")) { // 只放解锁的

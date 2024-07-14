@@ -1,0 +1,14 @@
+{
+    "parent": "confluence:item/chest_variant",
+    "textures": {
+        "0": "confluence:block/chest/locked_golden"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "confluence:variant": 1
+            },
+            "model": "confluence:item/chest_variant_1"
+        }
+    ]
+}

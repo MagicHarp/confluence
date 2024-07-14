@@ -1,0 +1,6 @@
+{
+    "parent": "confluence:item/chest_variant",
+    "textures": {
+        "0": "confluence:block/chest/unlocked_golden"
+    }
+}

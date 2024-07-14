@@ -101,6 +101,7 @@ public final class ModBlocks {
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_5_1 = registerWithItem("timers_5_1", () -> new TimersBlock(100)); // 5s
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_1_2 = registerWithItem("timers_1_2", () -> new TimersBlock(10)); // 1/2s
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_1_4 = registerWithItem("timers_1_4", () -> new TimersBlock(5)); // 1/4s
+    public static final RegistryObject<GeyserBlock> GEYSER_BLOCK = registerWithItem("geyser_block", GeyserBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
         BoulderBlock.Variant.NORMAL.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get(), TIMERS_BLOCK_1_1.get(), TIMERS_BLOCK_3_1.get(), TIMERS_BLOCK_5_1.get(), TIMERS_BLOCK_1_2.get(), TIMERS_BLOCK_1_4.get()).build(null));
     // frost

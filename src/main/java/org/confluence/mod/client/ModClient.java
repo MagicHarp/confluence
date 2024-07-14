@@ -85,6 +85,8 @@ public final class ModClient {
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+            ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
+                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
         });
     }

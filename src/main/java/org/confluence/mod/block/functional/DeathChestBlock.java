@@ -93,30 +93,26 @@ public class DeathChestBlock extends BaseChestBlock implements INetworkBlock {
 
     @Override
     public void onExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
-        if (pColor == -1) return;
-        BlockPos relative = pPos.relative(getConnectedDirection(pState));
-        if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(relative) instanceof INetworkEntity entity) {
-            execution(pLevel, relative, pColor, true, entity); // 让相邻箱子执行
-        }
+        execution(pState, pLevel, pPos, pColor, true);
     }
 
     @Override
     public void onUnExecute(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, INetworkEntity pEntity) {
+        execution(pState, pLevel, pPos, pColor, false);
+    }
+
+    private void execution(BlockState pState, ServerLevel pLevel, BlockPos pPos, int pColor, boolean hasSignal) {
         if (pColor == -1) return;
         BlockPos relative = pPos.relative(getConnectedDirection(pState));
         if (pState.getValue(TYPE) != ChestType.SINGLE && pLevel.getBlockEntity(relative) instanceof INetworkEntity entity) {
-            execution(pLevel, relative, pColor, false, entity); // 同上
-        }
-    }
-
-    private void execution(ServerLevel level, BlockPos blockPos, int color, boolean hasSignal, INetworkEntity entity) {
-        Network network = entity.getOrCreateNetworkNode().getNetwork(color);
-        if (network != null && hasSignal != network.hasSignal()) {
-            network.setSignal(hasSignal);
-            network.getNodes().stream()
-                .map(NetworkNode::getEntity)
-                .collect(Collectors.toSet())
-                .forEach(entity1 -> INetworkBlock.internalExecute(level, blockPos, color, hasSignal, entity1));
+            Network network = entity.getOrCreateNetworkNode().getNetwork(pColor);
+            if (network != null && hasSignal != network.hasSignal()) {
+                network.setSignal(hasSignal);
+                network.getNodes().stream()
+                    .map(NetworkNode::getEntity)
+                    .collect(Collectors.toSet())
+                    .forEach(entity1 -> INetworkBlock.internalExecute(pLevel, relative, pColor, hasSignal, entity1));
+            }
         }
     }
 
