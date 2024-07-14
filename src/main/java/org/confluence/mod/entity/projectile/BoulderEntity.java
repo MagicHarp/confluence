@@ -31,16 +31,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BoulderEntity extends Projectile {
+    public static final EntityDataAccessor<Boolean> DATA_VERTICAL = SynchedEntityData.defineId(BoulderEntity.class, EntityDataSerializers.BOOLEAN);
     public static final double SPEED = 0.7;
     public static final float DIAMETER = 1.0F;
     public static final float SEARCH_RANGE = 31.5F;
     public float rotateO;
     public float rotate;
-    public static final EntityDataAccessor<Boolean> isVertical = SynchedEntityData.defineId(BoulderEntity.class,EntityDataSerializers.BOOLEAN);
-
-    public boolean isNoGravity() {
-        return this.entityData.get(isVertical);
-    }
 
     public BoulderEntity(EntityType<BoulderEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -53,6 +49,10 @@ public class BoulderEntity extends Projectile {
         this.rotateO = 0.0F;
         this.rotate = 0.0F;
         setPos(pos);
+    }
+
+    public boolean isVertical() {
+        return entityData.get(DATA_VERTICAL);
     }
 
     public void remove() {
@@ -94,10 +94,10 @@ public class BoulderEntity extends Projectile {
             onHitEntity((EntityHitResult) hitResult);
         }
         if (getDeltaMovement().length() < 0.007) {
-            if (isNoGravity()) {
+            if (isVertical()) {
                 targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
-                entityData.set(isVertical,false);
-            }else {
+                entityData.set(DATA_VERTICAL, false);
+            } else {
                 remove();
             }
         }
@@ -105,8 +105,7 @@ public class BoulderEntity extends Projectile {
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
-        if (getBlockStateOn().isAir()) return;
-        if (blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
+        if (isVertical() && !getBlockStateOn().isAir() && blockHitResult.getDirection().getAxis() == Direction.Axis.Y) {
             targetTo(level().getNearestPlayer(this, SEARCH_RANGE));
         }
     }
@@ -132,7 +131,7 @@ public class BoulderEntity extends Projectile {
 
     @Override
     protected void defineSynchedData() {
-        entityData.define(isVertical,false);
+        entityData.define(DATA_VERTICAL, false);
     }
 
     @Override

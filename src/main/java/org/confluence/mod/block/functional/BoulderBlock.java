@@ -81,10 +81,10 @@ public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel
         Vec3 position = new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         BoulderEntity entity = new BoulderEntity(level, position);
         if (level.getBlockState(pos.below()).isAir()) {
-            entity.getEntityData().set(BoulderEntity.isVertical,true);
+            entity.getEntityData().set(BoulderEntity.DATA_VERTICAL,true);
         }else {
             entity.targetTo(function.apply(entity));
-            entity.getEntityData().set(BoulderEntity.isVertical,false);
+            entity.getEntityData().set(BoulderEntity.DATA_VERTICAL,false);
         }
         level.addFreshEntity(entity);
     }
