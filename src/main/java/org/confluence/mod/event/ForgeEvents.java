@@ -95,26 +95,29 @@ public final class ForgeEvents {
     public static void livingChangeTarget(LivingChangeTargetEvent event) {
         LivingEntity self = event.getEntity();
         if (!(self instanceof Enemy)) return;
-        double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
-        double rangeSqr = range * range;
-        self.level().players().stream()
-            .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
-            .max((playerA, playerB) -> {
-                AtomicInteger atomic = new AtomicInteger();
-                playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                    playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
-                        atomic.set(abilityA.getAggro() - abilityB.getAggro())
-                    )
-                );
-                return atomic.get();
-            }).ifPresent(player -> // 只有当新目标的仇恨值大于旧目标时，才设置新目标
-                event.getOriginalTarget().getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
-                    player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
-                        if (abilityO.getAggro() < ability.getAggro()) {
-                            event.setNewTarget(player);
-                        }
-                    })
-                )
-            );
+        if (event.getNewTarget() instanceof Player playerO) { // 当新目标为玩家时
+            double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
+            double rangeSqr = range * range;
+            self.level().players().stream()
+                .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
+                .max((playerA, playerB) -> {
+                    AtomicInteger atomic = new AtomicInteger();
+                    playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
+                        playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
+                            atomic.set(abilityA.getAggro() - abilityB.getAggro())
+                        )
+                    );
+                    return atomic.get();
+                }).ifPresent(player -> {
+                    if (player == playerO) return;
+                    playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
+                        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
+                            if (abilityO.getAggro() < ability.getAggro()) {
+                                event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                            }
+                        })
+                    );
+                });
+        }
     }
 }
