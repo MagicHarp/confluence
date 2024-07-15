@@ -17,6 +17,8 @@ import java.util.function.Supplier;
 import static org.confluence.mod.Confluence.MODID;
 
 public final class ModTiers {
+    public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
+
     public static final ModTier CACTUS = new ModTier(0, 144, 3, 1, 4, () -> Ingredient.of(Items.CACTUS));
     public static final ModTier COPPER = new ModTier(1, 250, 4, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ModTier TIN = new ModTier(1, 270, 4, 1, 5, () -> Ingredient.of(Materials.TIN_INGOT.get()));
@@ -37,8 +39,7 @@ public final class ModTiers {
     public static final ForgeTier ORICHALCUM = new ForgeTier(7, 3000, 4, 1, 5, ModTags.Blocks.NEEDS_7_LEVEL, () -> Ingredient.of(Materials.ORICHALCUM_INGOT.get()));
     public static final ForgeTier ADAMANTITE = new ForgeTier(8, 4000, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.ADAMANTITE_INGOT.get()));
     public static final ForgeTier TITANIUM = new ForgeTier(8, 4000, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.TITANIUM_INGOT.get()));
-    //糖(圣诞限定）
-    public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR));
+
     public static void register() {
         ResourceLocation netherite = TierSortingRegistry.getName(Tiers.NETHERITE);
         ResourceLocation ebony = new ResourceLocation(MODID, "ebony");

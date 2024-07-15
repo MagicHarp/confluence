@@ -299,7 +299,7 @@ public final class ForgeEvents {
     public static void entityMount(EntityMountEvent event) {
         if (event.isMounting() || event.getLevel().isClientSide) return;
         if (event.getEntityMounting() instanceof Player player && event.getEntityBeingMounted() instanceof AbstractMinecart abstractMinecart) {
-            Item item = Confluence.CURIO_MINECART.get(abstractMinecart.getClass());
+            Item item = Confluence.MINECART_CURIO.get(abstractMinecart.getClass());
             if (item == null) return;
             ItemStack itemStack = new ItemStack(item);
             if (CuriosUtils.getSlot(player, "minecart", 0).isEmpty()) {

@@ -1,5 +1,7 @@
 package org.confluence.mod;
 
+import com.mojang.datafixers.util.Function3;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +44,8 @@ public final class Confluence {
     public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
     public static final ResourceKey<Level> HELL = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID, "hell"));
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
-    public static final Hashtable<Class<? extends AbstractMinecart>, Item> CURIO_MINECART = new Hashtable<>();
+    public static final Hashtable<Class<? extends AbstractMinecart>, Item> MINECART_CURIO = new Hashtable<>();
+    public static final Hashtable<Item, Function3<Level, BlockPos, Double, AbstractMinecart>> CURIO_MINECART = new Hashtable<>();
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
 
     public Confluence() {
@@ -68,5 +71,4 @@ public final class Confluence {
     public static Object debugMethod(Object... args){
         return false;
     }
-
 }

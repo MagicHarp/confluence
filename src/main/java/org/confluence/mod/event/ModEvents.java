@@ -62,7 +62,7 @@ public final class ModEvents {
         event.put(ModEntities.GREEN_SLIME.get(), BaseSlime.createSlimeAttributes(3.0F, 0, 9.0F).build());
         event.put(ModEntities.PINK_SLIME.get(), BaseSlime.createSlimeAttributes(2.0F, 2, 97.0F).build());
         event.put(ModEntities.CORRUPTED_SLIME.get(), BaseSlime.createSlimeAttributes(35.0F, 6, 110.0F).build());
-        event.put(ModEntities.DESERT_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 0 ,21.0F).build());
+        event.put(ModEntities.DESERT_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 0, 21.0F).build());
         event.put(ModEntities.EVIL_SLIME.get(), BaseSlime.createSlimeAttributes(29.0F, 2, 58.0F).build());
         event.put(ModEntities.ICE_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
         event.put(ModEntities.LAVA_SLIME.get(), BaseSlime.createSlimeAttributes(10.0F, 2, 30.0F).build());
@@ -102,7 +102,8 @@ public final class ModEvents {
             Regions.register(new GlowingMushroomRegion(new ResourceLocation(MODID, "glowing_mushroom"), 1));
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
 
-            Confluence.CURIO_MINECART.put(Minecart.class, Items.MINECART);
+            Confluence.MINECART_CURIO.put(Minecart.class, Items.MINECART);
+            Confluence.CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
             Confluence.SPREADABLE_CHANCE = GameRules.register("confluenceSpreadableChance", GameRules.Category.MISC, GameRules.IntegerValue.create(10));
         });
     }
@@ -160,19 +161,19 @@ public final class ModEvents {
     }
 
     public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        Level level=null;
-        if(pLevel instanceof Level){
+        Level level = null;
+        if (pLevel instanceof Level) {
             level = (Level) pLevel;
         }
-        if(!Mob.checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)){
+        if (!Mob.checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
             return false;
-        }else if(type == ModEntities.PINK_SLIME.get()){
+        } else if (type == ModEntities.PINK_SLIME.get()) {
             return true;
-        }else if(type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()){
+        } else if (type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()) {
             return pPos.getY() > 30 && level != null && level.isDay() && pLevel.canSeeSky(pPos);
-        }else if(type == ModEntities.YELLOW_SLIME.get() || type == ModEntities.RED_SLIME.get()){
+        } else if (type == ModEntities.YELLOW_SLIME.get() || type == ModEntities.RED_SLIME.get()) {
             return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() > 30;
-        }else if(type == ModEntities.BLACK_SLIME.get()){
+        } else if (type == ModEntities.BLACK_SLIME.get()) {
             return pPos.getY() <= 30;
         }
         // 剩下的条件用方块的isValidSpawn方法

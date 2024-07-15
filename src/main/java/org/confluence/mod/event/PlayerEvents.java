@@ -1,20 +1,18 @@
 package org.confluence.mod.event;
 
+import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
-import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
@@ -117,9 +115,12 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
-        if (event.getEntity().getMainHandItem().getItem() instanceof TieredItem tieredItem) {
-            BlockState blockState = event.getState();
-            int tier = tieredItem.getTier().getLevel();
+        BlockState blockState = event.getState();
+        if (blockState.is(ModTags.Blocks.NEEDS_NON_VANILLA_LEVEL)) {
+            int tier = 0;
+            if (event.getEntity().getMainHandItem().getItem() instanceof TieredItem tieredItem) {
+                tier = tieredItem.getTier().getLevel();
+            }
             if ((tier < 8 && blockState.is(ModTags.Blocks.NEEDS_8_LEVEL)) ||
                 (tier < 7 && blockState.is(ModTags.Blocks.NEEDS_7_LEVEL)) ||
                 (tier < 6 && blockState.is(ModTags.Blocks.NEEDS_6_LEVEL)) ||
@@ -153,13 +154,13 @@ public final class PlayerEvents {
             event.getEntity().swing(InteractionHand.MAIN_HAND);
             if (!level.isClientSide) {
                 ItemStack itemStack = optionalItemStack.get();
-                RailShape railShape = railBlock.getRailDirection(blockState, level, blockPos, null);
-                double offsetY = railShape.isAscending() ? 0.5 : 0.0;
                 Item item = itemStack.getItem();
                 AbstractMinecart abstractMinecart = null;
-                if (item == Items.MINECART) {
-                    abstractMinecart = new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5);
-                } // else if
+                Function3<Level, BlockPos, Double, AbstractMinecart> factory = Confluence.CURIO_MINECART.get(item);
+                if (factory != null) {
+                    boolean ascending = railBlock.getRailDirection(blockState, level, blockPos, null).isAscending();
+                    abstractMinecart = factory.apply(level, blockPos, ascending ? 0.5 : 0.0);
+                }
                 if (abstractMinecart != null) {
                     itemStack.shrink(1);
                     level.addFreshEntity(abstractMinecart);
