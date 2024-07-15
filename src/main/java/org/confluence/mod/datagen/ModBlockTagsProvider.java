@@ -69,6 +69,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             DecorativeBlocks.MARBLE_COLUMN.get(),
             DecorativeBlocks.CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(),
             DecorativeBlocks.CRYSTAL_BLOCK.get(),
+            DecorativeBlocks.BLUE_BRICK.get(),
+            DecorativeBlocks.GREEN_BRICK.get(),
+            DecorativeBlocks.PINK_BRICK.get(),
             ModBlocks.RUBY_CHAIN.get(),
             ModBlocks.AMBER_CHAIN.get(),
             ModBlocks.TOPAZ_CHAIN.get(),
@@ -132,7 +135,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
             HELLSTONE.get(),ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
-            PEARL_STONE.get(), PEARL_SANDSTONE.get()
+            PEARL_STONE.get(), PEARL_SANDSTONE.get(),DecorativeBlocks.BLUE_BRICK.get(),DecorativeBlocks.PINK_BRICK.get(),DecorativeBlocks.GREEN_BRICK.get()
         );
         tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
             DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
