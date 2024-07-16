@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import top.theillusivec4.curios.Curios;
@@ -58,4 +59,5 @@ public final class ModTags {
     public static final TagKey<Fluid> NOT_LAVA = FluidTags.create(new ResourceLocation(MODID, "not_lava"));
 
     public static final TagKey<DamageType> HARMFUL_EFFECT = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MODID, "harmful_effect"));
+    public static final TagKey<Biome> SPREADING = TagKey.create(Registries.BIOME, new ResourceLocation(MODID, "spreading"));
 }
