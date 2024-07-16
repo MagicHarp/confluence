@@ -957,10 +957,20 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info3", "在专家模式中，蠕虫围巾总是从世界吞噬者的宝藏袋中掉落。");
 
 
-        add("block.confluence.base_chest_block.locked_golden", "上锁的金箱子");
-        add("block.confluence.base_chest_block.unlocked_golden", "金箱子");
-        add("block.confluence.base_chest_block.death_golden", "死人金箱子");
-
+        add("block.confluence.base_chest_block.locked_golden", "上锁的金箱");
+        add("block.confluence.base_chest_block.unlocked_golden", "金箱");
+        add("block.confluence.base_chest_block.death_golden", "死人金箱");
+        add("block.confluence.base_chest_block.locked_shadow", "上锁的暗影箱");
+        add("block.confluence.base_chest_block.unlocked_shadow", "暗影箱");
+        add("block.confluence.base_chest_block.death_shadow", "死人暗影箱");
+        add("block.confluence.base_chest_block.unlocked_lvy", "常春藤箱");
+        add("block.confluence.base_chest_block.death_lvy", "死人常春藤箱");
+        add("block.confluence.base_chest_block.unlocked_frozen", "冰冻箱");
+        add("block.confluence.base_chest_block.death_frozen", "死人冰冻箱");
+        add("block.confluence.base_chest_block.unlocked_water", "水中箱");
+        add("block.confluence.base_chest_block.death_water", "死人水中箱");
+        add("block.confluence.base_chest_block.unlocked_skyware", "天域箱");
+        add("block.confluence.base_chest_block.death_skyware", "死人天域箱");
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");

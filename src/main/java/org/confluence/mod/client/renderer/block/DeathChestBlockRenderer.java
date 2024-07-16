@@ -28,6 +28,22 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
     public static final Material DEATH_GOLDEN_LEFT = chest("death_golden_left");
     public static final Material DEATH_GOLDEN_RIGHT = chest("death_golden_right");
 
+    public static final Material DEATH_FROZEN = chest("death_frozen");
+    public static final Material DEATH_FROZEN_LEFT = chest("death_frozen_left");
+    public static final Material DEATH_FROZEN_RIGHT = chest("death_frozen_right");
+
+    public static final Material DEATH_LVY = chest("death_lvy");
+    public static final Material DEATH_LVY_LEFT = chest("death_lvy_left");
+    public static final Material DEATH_LVY_RIGHT = chest("death_lvy_right");
+
+    public static final Material DEATH_WATER = chest("death_water");
+    public static final Material DEATH_WATER_LEFT = chest("death_water_left");
+    public static final Material DEATH_WATER_RIGHT = chest("death_water_right");
+
+    public static final Material DEATH_SKYWARE = chest("death_skyware");
+    public static final Material DEATH_SKYWARE_LEFT = chest("death_skyware_left");
+    public static final Material DEATH_SKYWARE_RIGHT = chest("death_skyware_right");
+
     public static final Material DEATH_SHADOW = chest("death_shadow");
     public static final Material DEATH_SHADOW_LEFT = chest("death_shadow_left");
     public static final Material DEATH_SHADOW_RIGHT = chest("death_shadow_right");
@@ -85,6 +101,10 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
         return switch (blockEntity.variant) {
             default -> chooseMaterial(chestType, DEATH_GOLDEN, DEATH_GOLDEN_LEFT, DEATH_GOLDEN_RIGHT);
             case UNLOCKED_SHADOW -> chooseMaterial(chestType, DEATH_SHADOW, DEATH_SHADOW_LEFT, DEATH_SHADOW_RIGHT);
+            case UNLOCKED_FROZEN -> chooseMaterial(chestType, DEATH_FROZEN, DEATH_FROZEN_LEFT, DEATH_FROZEN_RIGHT);
+            case UNLOCKED_WATER -> chooseMaterial(chestType, DEATH_WATER, DEATH_WATER_LEFT, DEATH_WATER_RIGHT);
+            case UNLOCKED_SKYWARE -> chooseMaterial(chestType, DEATH_SKYWARE, DEATH_SKYWARE_LEFT, DEATH_SKYWARE_RIGHT);
+            case UNLOCKED_LVY -> chooseMaterial(chestType, DEATH_LVY, DEATH_LVY_LEFT, DEATH_LVY_RIGHT);
         };
     }
 

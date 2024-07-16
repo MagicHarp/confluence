@@ -831,7 +831,17 @@ public class ModEnglishProvider extends LanguageProvider {
         add("block.confluence.base_chest_block.locked_golden", "Locked Golden Chest");
         add("block.confluence.base_chest_block.unlocked_golden", "Golden Chest");
         add("block.confluence.base_chest_block.death_golden", "Death Golden Chest");
-
+        add("block.confluence.base_chest_block.locked_shadow", "Locked Shadow Chest");
+        add("block.confluence.base_chest_block.unlocked_shadow", "Shadow Chest");
+        add("block.confluence.base_chest_block.death_shadow", "Death Shadow Chest");
+        add("block.confluence.base_chest_block.unlocked_lvy", "Lvy Chest");
+        add("block.confluence.base_chest_block.death_lvy", "Death Lvy Chest");
+        add("block.confluence.base_chest_block.unlocked_frozen", "Frozen Chest");
+        add("block.confluence.base_chest_block.death_frozen", "Death Frozen Chest");
+        add("block.confluence.base_chest_block.unlocked_water", "Water Chest");
+        add("block.confluence.base_chest_block.death_water", "Death Water Chest");
+        add("block.confluence.base_chest_block.unlocked_skyware", "Skyware Chest");
+        add("block.confluence.base_chest_block.death_skyware", "Death Skyware Chest");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
