@@ -40,13 +40,13 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         super.onEquip(slotContext, prevStack, stack);
-        sendMsg(slotContext.entity(), true);
+        send(slotContext.entity(), true);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
-        sendMsg(slotContext.entity(), false);
+        send(slotContext.entity(), false);
     }
 
     @Override
@@ -59,9 +59,17 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
         return ARMOR;
     }
 
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.shield_of_cthulhu.info"),
+            Component.translatable("item.confluence.shield_of_cthulhu.info2")
+        };
+    }
+
     public static void apply(LivingEntity living) {
-        float f = living.getYRot() * (Mth.PI / 180F);
-        float factor = living.onGround() ? 1.6F : 1.2F;
+        float f = living.getYRot() * Mth.DEG_TO_RAD;
+        double factor = living.onGround() ? 1.6 : 1.2;
         living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * factor, 0.0D, Mth.cos(f) * factor));
     }
 
@@ -70,20 +78,12 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
         return ((IEntity) living).c$isOnCthulhuSprinting();
     }
 
-    private static void sendMsg(LivingEntity living, boolean has) {
+    private static void send(LivingEntity living, boolean has) {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
                 new ShieldOfCthulhuPacketS2C(has)
             );
         }
-    }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.shield_of_cthulhu.info"),
-            Component.translatable("item.confluence.shield_of_cthulhu.info2")
-        };
     }
 }

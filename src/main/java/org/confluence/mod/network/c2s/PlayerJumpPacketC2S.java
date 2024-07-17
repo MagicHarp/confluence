@@ -7,25 +7,28 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public record PlayerJumpPacketC2S(boolean jumpBySelf) {
+public record PlayerJumpPacketC2S(boolean jumpBySelf, boolean resetFallDistance) {
     public static void encode(PlayerJumpPacketC2S packet, FriendlyByteBuf friendlyByteBuf) {
         friendlyByteBuf.writeBoolean(packet.jumpBySelf);
+        friendlyByteBuf.writeBoolean(packet.resetFallDistance);
     }
 
     public static PlayerJumpPacketC2S decode(FriendlyByteBuf friendlyByteBuf) {
-        return new PlayerJumpPacketC2S(friendlyByteBuf.readBoolean());
+        return new PlayerJumpPacketC2S(friendlyByteBuf.readBoolean(), friendlyByteBuf.readBoolean());
     }
 
     public static void handle(PlayerJumpPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            ServerPlayer player = context.getSender();
-            if (player == null) return;
-            player.resetFallDistance();
-            player.hasImpulse = true;
+            ServerPlayer serverPlayer = context.getSender();
+            if (serverPlayer == null) return;
+            serverPlayer.hasImpulse = true;
             if (packet.jumpBySelf) {
-                player.awardStat(Stats.JUMP);
-                player.causeFoodExhaustion(player.isSprinting() ? 0.2F : 0.05F);
+                serverPlayer.awardStat(Stats.JUMP);
+                serverPlayer.causeFoodExhaustion(serverPlayer.isSprinting() ? 0.2F : 0.05F);
+            }
+            if (packet.resetFallDistance) {
+                serverPlayer.resetFallDistance();
             }
         });
         context.setPacketHandled(true);

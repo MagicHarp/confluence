@@ -19,6 +19,8 @@ import org.confluence.mod.item.curio.combat.IScope;
 import org.confluence.mod.item.curio.construction.IRightClickSubtractor;
 import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.item.curio.movement.IMultiJump;
+import org.confluence.mod.item.curio.movement.ITabi;
+import org.confluence.mod.item.curio.movement.IWallClimb;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.FlushPlayerAbilityPacketS2C;
@@ -55,6 +57,8 @@ public class BaseCurioItem extends Item implements ICurioItem {
             if (item instanceof IAutoAttack) IAutoAttack.sendMsg(serverPlayer);
             if (item instanceof IScope) IScope.sendMsg(serverPlayer);
             if (item instanceof IRightClickSubtractor) IRightClickSubtractor.sendMsg(serverPlayer);
+            if (item instanceof IWallClimb) IWallClimb.sendMsg(serverPlayer);
+            if (item instanceof ITabi) ITabi.sendMsg(serverPlayer);
         }
     }
 

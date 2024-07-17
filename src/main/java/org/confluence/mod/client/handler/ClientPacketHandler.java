@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 public final class ClientPacketHandler {
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
+    private static boolean hasTabi = false;
     private static boolean hasScope = false;
     private static int rightClickSubtractor = 0;
 
@@ -23,6 +24,10 @@ public final class ClientPacketHandler {
 
     public static boolean isHasCthulhu() {
         return hasCthulhu;
+    }
+
+    public static boolean isHasTabi() {
+        return hasTabi;
     }
 
     public static boolean isHasScope() {
@@ -42,6 +47,12 @@ public final class ClientPacketHandler {
     public static void handleCthulhu(ShieldOfCthulhuPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> hasCthulhu = packet.has());
+        context.setPacketHandled(true);
+    }
+
+    public static void handleTabi(TabiPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> hasTabi = packet.has());
         context.setPacketHandled(true);
     }
 

@@ -1,6 +1,7 @@
 package org.confluence.mod.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -14,10 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
-import org.confluence.mod.client.handler.ClientPacketHandler;
-import org.confluence.mod.client.handler.GravitationHandler;
-import org.confluence.mod.client.handler.InformationHandler;
-import org.confluence.mod.client.handler.PlayerJumpHandler;
+import org.confluence.mod.client.handler.*;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModTags;
@@ -32,8 +30,8 @@ public final class ForgeClient {
         if (event.phase == TickEvent.Phase.START) return;
         GravitationHandler.tick(localPlayer);
         if (localPlayer == null) return;
-        InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
+        InformationHandler.handle(localPlayer);
 
         AnimateColor.doUpdateExpertColor();
         AnimateColor.doUpdateMasterColor();
@@ -42,13 +40,16 @@ public final class ForgeClient {
     @SubscribeEvent
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
-        boolean jumping = event.getInput().jumping;
+        Input input = event.getInput();
+        boolean jumping = input.jumping;
         if (GravitationHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
             GravitationHandler.handle(localPlayer, jumping);
         } else {
             GravitationHandler.expire();
             PlayerJumpHandler.handle(localPlayer, jumping);
+            PlayerClimbHandler.handle(localPlayer, input.getMoveVector(), jumping);
         }
+        if (ClientPacketHandler.isHasTabi()) PlayerSprintingHandler.handle(localPlayer, input);
     }
 
     @SubscribeEvent

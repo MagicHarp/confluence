@@ -15,6 +15,7 @@ import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import org.confluence.mod.item.curio.movement.IMayFly;
+import org.confluence.mod.item.curio.movement.IWallClimb;
 import top.theillusivec4.curios.Curios;
 
 import java.io.FileInputStream;
@@ -51,6 +52,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         MAP.put("LavaImmune", ILavaImmune.class);
         MAP.put("MagicQuiver", IMagicQuiver.class);
         MAP.put("Scope", IScope.class);
+        MAP.put("WallClimb", IWallClimb.class);
     }
 
     public static ArrayList<DataDrivenCurioInfo> generatingInfos() {

@@ -46,6 +46,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.weather_radio", "显示天气");
         add("curios.tooltip.scope", "扩大远程武器的视野范围");
         add("curios.tooltip.scope2", "手持远程武器并潜行可拉远视野");
+        add("curios.tooltip.wall_climb", "可爬墙，按住shift键可快速下滑");
+        add("curios.tooltip.wall_slide", "可沿墙滑下，按住shift键可更快地下滑");
+        add("curios.tooltip.tabi", "双击一个方向可猛冲");
+        add("curios.tooltip.hurt_evasion", "有几率避开攻击");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -132,7 +136,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
         add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
-        add("item.confluence.black_belt.tooltip", "有几率避开攻击");
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
         add("item.confluence.worm_scarf.tooltip", "所受伤害减少17%");
@@ -165,6 +168,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.portable_cement_mixer.tooltip", "右键点击延迟降低1");
         add("item.confluence.brick_layer.tooltip", "右键点击延迟降低1");
         add("item.confluence.architect_gizmo_pack.tooltip", "右键点击延迟降低2，且降低效果不能与其材料的降低效果叠加");
+        add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
+        add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
+        add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
 
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 
@@ -324,5 +330,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(PORTABLE_CEMENT_MIXER.get(), "便携式水泥搅拌机");
         add(BRICK_LAYER.get(), "砌砖刀");
         add(ARCHITECT_GIZMO_PACK.get(), "建筑师发明背包");
+        add(CLIMBING_CLAWS.get(), "攀爬爪");
+        add(SHOE_SPIKES.get(), "鞋钉");
+        add(TIGER_CLIMBING_GEAR.get(), "猛虎攀爬装备");
+        add(TABI.get(), "分趾厚底袜");
+        add(MASTER_NINJA_GEAR.get(), "忍者大师装备");
+        add(FROG_WEBBING.get(), "青蛙蹼");
+        add(FROG_GEAR.get(), "青蛙装备");
     }
 }

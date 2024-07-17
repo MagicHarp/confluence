@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.combat;
+package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -11,20 +11,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlackBelt extends BaseCurioItem implements IHurtEvasion {
-    public BlackBelt() {
+public class Tabi extends BaseCurioItem implements ITabi {
+    public Tabi() {
         super(ModRarity.LIME);
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(IHurtEvasion.TOOLTIP);
-    }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.black_belt.info"),
-            Component.translatable("item.confluence.black_belt.info2")
-        };
+        list.add(ITabi.TOOLTIP);
     }
 }
