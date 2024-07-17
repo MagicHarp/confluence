@@ -95,8 +95,8 @@ public final class PlayerJumpHandler {
         }
     }
 
-    public static void flushState(boolean init) {
-        jumpKeyDown = init;
+    public static void flushState(boolean jumpKey) {
+        jumpKeyDown = jumpKey;
         fartFinished = false;
         remainSandstormTicks = maxSandstormTicks;
         sandstormFinished = false;
@@ -112,12 +112,12 @@ public final class PlayerJumpHandler {
         double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * speed;
         localPlayer.setDeltaMovement(vec3.x, motionY, vec3.z);
         if (localPlayer.isSprinting()) {
-            float f = localPlayer.getYRot() * ((float) Math.PI / 180F);
-            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().add(-Mth.sin(f) * 0.2F, 0.0D, Mth.cos(f) * 0.2F));
+            float f = localPlayer.getYRot() * Mth.DEG_TO_RAD;
+            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().add(-Mth.sin(f) * 0.2, 0.0, Mth.cos(f) * 0.2));
         }
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, true));
     }
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
@@ -125,7 +125,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
     }
 
     private static void fly(LocalPlayer localPlayer, double speed) {
@@ -133,7 +133,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

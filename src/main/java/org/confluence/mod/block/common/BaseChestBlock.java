@@ -156,7 +156,7 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         }
 
         public boolean isLocked() {
-            return variant == Variant.LOCKED_GOLDEN;
+            return variant.unlock > 0;
         }
 
         @Override

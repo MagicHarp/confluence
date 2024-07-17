@@ -3,6 +3,7 @@ package org.confluence.mod.client;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -47,8 +48,8 @@ public final class ForgeClient {
         if (event.phase == TickEvent.Phase.START) return;
         GravitationHandler.tick(localPlayer);
         if (localPlayer == null) return;
-        InformationHandler.handle(localPlayer);
         IAutoAttack.apply(minecraft, localPlayer);
+        InformationHandler.handle(localPlayer);
         HookThrowingHandler.handle(localPlayer);
 
         AnimateColor.doUpdateExpertColor();
@@ -59,15 +60,18 @@ public final class ForgeClient {
     @SubscribeEvent
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
         LocalPlayer localPlayer = (LocalPlayer) event.getEntity();
-        boolean jumping = event.getInput().jumping;
-        if (jumping && !localPlayer.getAbilities().instabuild && localPlayer.hasEffect(ModEffects.SHIMMER.get())) {
-            event.getInput().jumping = false;
+        Input input = event.getInput();
+        boolean jumping = input.jumping;
+        if (jumping && !localPlayer.getAbilities().mayfly && localPlayer.hasEffect(ModEffects.SHIMMER.get())) {
+            input.jumping = false;
         } else if (GravitationHandler.isHasGlobe() || localPlayer.hasEffect(ModEffects.GRAVITATION.get())) {
             GravitationHandler.handle(localPlayer, jumping);
         } else {
             GravitationHandler.expire();
             PlayerJumpHandler.handle(localPlayer, jumping);
+            PlayerClimbHandler.handle(localPlayer, input.getMoveVector(), jumping);
         }
+        if (ClientPacketHandler.isHasTabi()) PlayerSprintingHandler.handle(localPlayer, input);
     }
 
     @SubscribeEvent

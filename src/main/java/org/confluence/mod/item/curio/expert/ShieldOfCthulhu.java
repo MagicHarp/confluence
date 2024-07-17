@@ -41,38 +41,18 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         super.onEquip(slotContext, prevStack, stack);
-        sendMsg(slotContext.entity(), true);
+        send(slotContext.entity(), true);
     }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
-        sendMsg(slotContext.entity(), false);
+        send(slotContext.entity(), false);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ARMOR;
-    }
-
-    public static void apply(LivingEntity living) {
-        float f = living.getYRot() * (Mth.PI / 180F);
-        float factor = living.onGround() ? 1.6F : 1.2F;
-        living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * factor, 0.0D, Mth.cos(f) * factor));
-    }
-
-    public static boolean isInvul(LivingEntity living) {
-        if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) return false;
-        return ((IEntity) living).confluence$isOnCthulhuSprinting();
-    }
-
-    private static void sendMsg(LivingEntity living, boolean has) {
-        if (living instanceof ServerPlayer serverPlayer) {
-            NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new ShieldOfCthulhuPacketS2C(has)
-            );
-        }
     }
 
     @Override
@@ -82,5 +62,25 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
             Component.translatable("item.confluence.shield_of_cthulhu.info2"),
             Component.translatable("item.confluence.shield_of_cthulhu.info3")
         };
+    }
+
+    public static void apply(LivingEntity living) {
+        float f = living.getYRot() * Mth.DEG_TO_RAD;
+        double factor = living.onGround() ? 1.6 : 1.2;
+        living.setDeltaMovement(living.getDeltaMovement().add(-Mth.sin(f) * factor, 0.0, Mth.cos(f) * factor));
+    }
+
+    public static boolean isInvul(LivingEntity living) {
+        if (CuriosUtils.noSameCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) return false;
+        return ((IEntity) living).confluence$isOnCthulhuSprinting();
+    }
+
+    private static void send(LivingEntity living, boolean has) {
+        if (living instanceof ServerPlayer serverPlayer) {
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new ShieldOfCthulhuPacketS2C(has)
+            );
+        }
     }
 }

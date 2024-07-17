@@ -162,11 +162,11 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     LAVA_CHARM("lava_charm", LavaCharm::new), // 熔岩护身符
     MAGMA_SKULL("magma_skull", MagmaSkull::new), // 岩浆骷髅头
     MOLTEN_CHARM("molten_charm", MoltenCharm::new), // 熔火护身符
-    /* 攀爬爪 */
-    /* 鞋钉 */
-    /* 猛虎攀爬装备 */
-    /* 分趾厚底袜 */
-    /* 忍者大师装备 */
+    CLIMBING_CLAWS("climbing_claws", ClimbingClaws::new), // 攀爬爪
+    SHOE_SPIKES("shoe_spikes", ShoeSpikes::new), // 鞋钉
+    TIGER_CLIMBING_GEAR("tiger_climbing_gear", TigerClimbingGear::new), // 猛虎攀爬装备
+    TABI("tabi", Tabi::new), // 分趾厚底袜
+    MASTER_NINJA_GEAR("master_ninja_gear", MasterNinjaGear::new), // 忍者大师装备
     ICE_SKATES("ice_skates", IceSkates::new), // 溜冰鞋
     HERMES_BOOTS("hermes_boots", HermesBoots::new), // 赫尔墨斯靴
     FLURRY_BOOTS("flurry_boots", FlurryBoots::new), // 疾风雪靴
@@ -211,8 +211,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     /* 北极潜水装备 */
     FROG_LEG("frog_leg", FrogLeg::new), // 蛙腿
     FROG_FLIPPER("frog_flipper", FrogFlipper::new), // 青蛙脚蹼
-    /* 青蛙蹼 */
-    /* 青蛙装备 */
+    FROG_WEBBING("frog_webbing", FrogWebbing::new), // 青蛙蹼
+    FROG_GEAR("frog_gear", FrogGear::new), // 青蛙装备
     AMBHIPIAN_BOOTS("ambhipian_boots", AmbhipianBoots::new), // 水陆两用靴
 
     FLEDGLING_WINGS("fledgling_wings", FledglingWings::new), // 雏翼
