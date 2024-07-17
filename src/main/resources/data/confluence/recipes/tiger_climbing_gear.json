@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "confluence:climbing_claws"
+        },
+        {
+            "item": "confluence:shoe_spikes"
+        }
+    ],
+    "result": {
+        "item": "confluence:tiger_climbing_gear",
+        "count": 1
+    }
+}
