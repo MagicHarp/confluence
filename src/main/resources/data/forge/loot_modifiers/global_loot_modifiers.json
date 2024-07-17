@@ -42,6 +42,7 @@
         "confluence:entities/ravager",
         "confluence:entities/skeleton",
         "confluence:entities/stray",
+        "confluence:entities/spider",
         "confluence:entities/vindicator",
         "confluence:entities/witch",
         "confluence:entities/wither_skeleton",
@@ -58,6 +59,7 @@
         "confluence:entities/zombie_villager",
         "confluence:entities/shulker",
         "confluence:entities/bat",
+        "confluence:entities/wither",
         "confluence:blocks/moss_block",
         "confluence:gameplay/cat_morning_gift",
         "confluence:gameplay/hero_of_the_village/librarian_gift"
