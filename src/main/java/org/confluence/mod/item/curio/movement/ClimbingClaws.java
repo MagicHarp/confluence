@@ -16,4 +16,11 @@ public class ClimbingClaws extends BaseCurioItem implements IWallClimb {
         list.add(IWallClimb.WALL_SLIDE);
         list.add(Component.translatable("item.confluence.climbing_claws.tooltip"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.climbing_claws.info")
+        };
+    }
 }

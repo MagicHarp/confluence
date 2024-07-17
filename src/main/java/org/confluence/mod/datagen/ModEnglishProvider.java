@@ -266,8 +266,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.lava_waders.info4", "The countdown only applies when submerged in lava, whereas the player can stand on its surface indefinitely.");
         add("item.confluence.lava_waders.info5", "It also reduces lava's base damage from 80 to 35.");
         add("item.confluence.lava_waders.info6", "It can be crafted at a Crafting Table using a Obsidian Water Walking Boots, a Lava Charm, and a Obsidian Rose or \n " +
-                "a Molten Charm, a Water Walking Boots, and a Obsidian Rose or Molten Charm , a Obsidian Water Walking Boots ,and a Obsidian Rose or \n " +
-                "a Molten Skull Rose ,and a Obsidian Water Walking Boots or a Molten Skull Rose ,and a Water Walking Boots.");
+            "a Molten Charm, a Water Walking Boots, and a Obsidian Rose or Molten Charm , a Obsidian Water Walking Boots ,and a Obsidian Rose or \n " +
+            "a Molten Skull Rose ,and a Obsidian Water Walking Boots or a Molten Skull Rose ,and a Water Walking Boots.");
         add("item.confluence.lightning_boots.info", "Lightning Boots are an accessory that have essentially the same functionality as Spectre Boots, but with enhanced running speed.");
         add("item.confluence.lightning_boots.info2", "They have an 8% movement speed bonus compared to the Spectre Boots.");
         add("item.confluence.lightning_boots.info3", "This item can be crafted at a Crafting Table using a Spectre Boots, a Anklet of the Wind, and a Aglet.");
@@ -594,6 +594,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.vitamins.info2", "It have a Chance to be dropped from Witch.");
         add("item.confluence.warrior_emblem.info", "The Warrior Emblem is a accessory that increases melee damage by 15%.");
         add("item.confluence.warrior_emblem.info2", "It have a Chance to be dropped from Vindicator.");
+        add("item.confluence.demon_heart.info", "It to be dropped from Wither.");
+        add("item.confluence.climbing_claws.info", "It have a Chance to be dropped from Spider.");
+        add("item.confluence.shoe_spikes.info", "It have a Chance to be dropped from Cave Spider.");
+        add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 
@@ -607,7 +611,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
     private static String toTitleCase(String raw) {
         return Arrays.stream(raw.split("_"))
-                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
-                .collect(Collectors.joining(" "));
+            .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+            .collect(Collectors.joining(" "));
     }
 }

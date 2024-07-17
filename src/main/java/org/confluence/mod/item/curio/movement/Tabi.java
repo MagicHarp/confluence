@@ -20,4 +20,11 @@ public class Tabi extends BaseCurioItem implements ITabi {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(ITabi.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.tabi.info")
+        };
+    }
 }

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,7 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
+        registration.addItemStackInfo(new ItemStack(ModItems.DEMON_HEART.get()), Component.translatable("item.confluence.demon_heart.info"));
         for (CurioItems curio : CurioItems.values()) {
             BaseCurioItem item = curio.get();
             Component[] information = item.getInformation();

@@ -33,6 +33,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 String path = item.getId().getPath().toLowerCase();
                 if (value instanceof BaseCurioItem) {
                     withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
+                } else {
+                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
                 }
             } catch (Exception e) {
                 Confluence.LOGGER.error(e.getMessage());
