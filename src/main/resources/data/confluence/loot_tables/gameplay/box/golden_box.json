@@ -21,6 +21,21 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "confluence:enchanted_sword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 49
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "confluence:golden_coin",
           "functions": [
             {

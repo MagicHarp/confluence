@@ -35,8 +35,13 @@
           "weight": 1
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:climbing_claws",
+          "weight": 1
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 18
+          "weight": 17
         }
       ],
       "rolls": 1
