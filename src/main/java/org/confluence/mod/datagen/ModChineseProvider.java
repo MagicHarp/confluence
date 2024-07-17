@@ -1559,6 +1559,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(BLUE_WRENCH.get(), "蓝扳手");
         add(GREEN_WRENCH.get(), "绿扳手");
         add(YELLOW_WRENCH.get(), "黄扳手");
+        add(GOLDEN_KEY.get(), "金钥匙");
+        add(SHADOW_KEY.get(), "暗影钥匙");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
@@ -2220,6 +2222,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.NIGHT_OWL_POTION.get(), "夜猫子药水");
         add(TerraPotions.WATER_WALKING_POTION.get(), "水上漂药水");
         add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
+        add(TerraPotions.RANDOM_TELEPORT_POTION.get(), "传送药水");
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.SHINE.get(), "发光");
