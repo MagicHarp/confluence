@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.item.common.DemonHeart;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.curio.CurioItems;
 
@@ -15,6 +16,7 @@ public final class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Confluence.MODID);
 
     public static final RegistryObject<Item> STAR = ITEMS.register("star", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DEMON_HEART = ITEMS.register("demon_heart", DemonHeart::new);
 
     public static void register(IEventBus bus) {
         IconItem.Icons.init();

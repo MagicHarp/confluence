@@ -54,7 +54,7 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
             Team team = serverPlayer.getTeam();
             for (Player player : serverPlayer.level().players()) {
                 if (player.getTeam() != team) continue;
-                player.addEffect(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 300, player == serverPlayer ? 1 : 0));
+                player.addEffect(new MobEffectInstance(ModEffects.PALADINS_SHIELD.get(), 600, player == serverPlayer ? 1 : 0));
             }
         }
     }

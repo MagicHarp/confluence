@@ -132,7 +132,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     GOBLIN_TECH("goblin_tech", GoblinTech::new), // 哥布林数据仪
     FISH_FINDER("fish_finder", FishFinder::new), // 探鱼器
     PDA("pda", PDA::new), // 个人数字助手
-    //MECHANICAL_LENS("mechanical_lens", MechanicalLens::new), // 机械晶状体
     /* 标尺 */
     /* 机械标尺 */
 
@@ -199,8 +198,6 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     AMBHIPIAN_BOOTS("ambhipian_boots", AmbhipianBoots::new), // 水陆两用靴
 
 
-    /* 向导巫毒娃娃 */
-    /* 服装商巫毒娃娃 */
     //LUCKY_COIN("lucky_coin", LuckyCoin::new), // 幸运币
     //GOLD_RING("gold_ring", GoldRing::new), // 金戒指
     //COIN_RING("coin_ring", CoinRing::new), // 钱币戒指
@@ -208,11 +205,8 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     /* 贪婪戒指 */
     TREASURE_MAGNET("treasure_magnet", TreasureMagnet::new), // 宝藏磁石
     FLOWER_BOOTS("flower_boots", FlowerBoots::new), // 花靴
-    /* 植物纤维绳索宝典 */
     /* 水母项链 */
     /* 收音机 */
-    //SPECTRE_GOGGLES("spectre_goggles", SpectreGoggles::new), // 幽灵护目镜
-    /* 炫彩斗篷 */
 
     ANGLER_EARRING("angler_earring", AnglerEarring::new), // 渔夫耳环
 

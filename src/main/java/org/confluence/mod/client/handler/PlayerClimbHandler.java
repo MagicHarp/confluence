@@ -51,7 +51,7 @@ public final class PlayerClimbHandler {
             }
             localPlayer.hasImpulse = true;
             localPlayer.fallDistance = 0.0F;
-            localPlayer.setDeltaMovement(motion.x, motionY, motion.z);
+            localPlayer.setDeltaMovement(motion.x * 0.93, motionY, motion.z * 0.93);
             PlayerJumpHandler.flushState(true);
             NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
         }

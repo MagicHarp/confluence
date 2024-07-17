@@ -91,6 +91,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.identifier.accessory", "Accessory");
         add("curios.modifiers.accessory", "When worn as accessory:");
 
+        add("item.confluence.demon_heart.tooltip", "Permanently increases the number of accessory slots");
         add("item.confluence.vitamins.tooltip", "Immunity to Weakness");
         add("item.confluence.fast_clock.tooltip", "Immunity to Slow");
         add("item.confluence.blindfold.tooltip", "Immunity to Blindness");

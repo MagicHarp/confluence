@@ -30,7 +30,7 @@ public final class InformationHandler {
     private static final Int2ObjectOpenHashMap<byte[]> REMOTE_DATA = new Int2ObjectOpenHashMap<>();
 
     private static @Nullable Function<Long, Component> timeInfo = null;
-    private static Component weatherRadioInfo = Component.translatable("info.confluence.weather_radio.clear", "0.00");
+    private static Component weatherRadioInfo = Component.translatable("info.confluence.weather_radio.clear");
     private static boolean detectorPressed = false;
     private static Component metalDetectorInfo = Component.translatable("info.confluence.metal_detector.none");
     private static Component lifeFormAnalyzerInfo = Component.translatable("info.confluence.life_form_analyzer.none");

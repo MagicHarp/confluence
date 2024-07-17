@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.item.ModItems;
 
 import static org.confluence.mod.item.curio.CurioItems.*;
 
@@ -87,6 +88,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.identifier.accessory", "配饰");
         add("curios.modifiers.accessory", "佩戴配饰时：");
 
+        add("item.confluence.demon_heart.tooltip", "永久增加配饰栏数量");
         add("item.confluence.vitamins.tooltip", "对虚弱免疫");
         add("item.confluence.fast_clock.tooltip", "对缓慢免疫");
         add("item.confluence.blindfold.tooltip", "对失明免疫");
@@ -179,6 +181,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.CONFUSED.get(), "困惑");
         add(ModEffects.HONEY.get(), "蜂蜜");
         add(ModEffects.GRAVITATION.get(), "重力反转");
+
+        add(ModItems.DEMON_HEART.get(), "恶魔之心");
 
         // 饰品
         add(AGLET.get(), "金属带扣");

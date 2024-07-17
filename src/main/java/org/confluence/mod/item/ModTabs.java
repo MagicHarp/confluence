@@ -18,6 +18,7 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ACCESSORIES_ICON.get()))
             .title(Component.translatable("creativetab.confluence.curios"))
             .displayItems((parameters, output) -> {
+                output.accept(ModItems.DEMON_HEART.get());
                 for (CurioItems curioItems : CurioItems.values()) output.accept(curioItems.get());
             })
             .build());
