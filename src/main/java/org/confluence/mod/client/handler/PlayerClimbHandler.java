@@ -49,8 +49,11 @@ public final class PlayerClimbHandler {
             } else if (climberAmount >= 2) {
                 motionY = 0.0;
             }
+            localPlayer.hasImpulse = true;
+            localPlayer.fallDistance = 0.0F;
             localPlayer.setDeltaMovement(motion.x, motionY, motion.z);
             PlayerJumpHandler.flushState(true);
+            NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
         }
     }
 
