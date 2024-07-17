@@ -112,6 +112,7 @@ public final class ModItems {
 
     public static final RegistryObject<Item> GOLDEN_KEY = ITEMS.register("golden_key", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SHADOW_KEY = ITEMS.register("shadow_key", () -> new Item(new Item.Properties().stacksTo(1).rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> DEMON_HEART = ITEMS.register("demon_heart", DemonHeart::new);
 
 
     public static void register(IEventBus bus) {

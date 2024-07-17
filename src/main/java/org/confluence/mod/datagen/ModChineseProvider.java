@@ -149,6 +149,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.identifier.minecart", "矿车");
         add("curios.modifiers.accessory", "佩戴配饰时：");
 
+        add("item.confluence.demon_heart.tooltip", "永久增加配饰栏数量");
         add("item.confluence.adhesive_bandage.tooltip", "对流血免疫");
         add("item.confluence.medicated_bandage.tooltip", "对中毒和流血免疫");
         add("item.confluence.armor_bracing.tooltip", "对虚弱和破损盔甲免疫");
