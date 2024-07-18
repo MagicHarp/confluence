@@ -1,21 +1,29 @@
 package org.confluence.mod.mixin.chunk;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.chunk.PalettedContainerRO;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.util.IChunkSection;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(LevelChunkSection.class)
 public abstract class LevelChunkSectionMixin implements IChunkSection {
+    @Shadow private PalettedContainerRO<Holder<Biome>> biomes;
     @Unique public int confluence$crimsonCount;
     @Unique public int confluence$corruptCount;
     @Unique public int confluence$hallowCount;
+    @Unique private PalettedContainerRO<Holder<Biome>> confluence$backupBiome;
 
     @Override
     public void confluence$countCrimson(int count){
@@ -45,6 +53,27 @@ public abstract class LevelChunkSectionMixin implements IChunkSection {
     @Override
     public int confluence$getHallow(){
         return confluence$hallowCount;
+    }
+
+    @Override
+    public PalettedContainerRO<Holder<Biome>> confluence$getBackupBiome(){
+        return confluence$backupBiome;
+    }
+
+    @Override
+    public void confluence$setBackupBiome(PalettedContainerRO<Holder<Biome>> biome){
+        confluence$backupBiome = biome;
+    }
+
+    @Override
+    public void confluence$setBiomes(PalettedContainerRO<Holder<Biome>> biomes){
+        this.biomes = biomes;
+    }
+
+
+    @Inject(method = "<init>(Lnet/minecraft/core/Registry;)V",at = @At("RETURN"))
+    private void constr(Registry<Biome> pBiomeRegistry, CallbackInfo ci){
+        confluence$backupBiome = biomes.recreate();
     }
 
     // 世界生成的方块放置也是调这个方法

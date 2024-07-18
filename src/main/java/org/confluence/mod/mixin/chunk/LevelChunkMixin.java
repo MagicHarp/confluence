@@ -10,7 +10,6 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -18,8 +17,8 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.UpgradeData;
 import net.minecraft.world.level.levelgen.blending.BlendingData;
 import net.minecraft.world.ticks.LevelChunkTicks;
-import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.util.IChunkSection;
+import org.confluence.mod.util.IPalettedContainer;
 import org.confluence.mod.worldgen.biome.ModBiomes;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -34,17 +33,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
+import static org.confluence.mod.util.DynamicBiomeUtils.*;
+
 @Mixin(LevelChunk.class)
 public abstract class LevelChunkMixin extends ChunkAccess {
     @Shadow
     @Final
     Level level;
 
-    @Unique private static final int BIOME_THRESHOLD = 256;
-    @Unique private static Holder<Biome> BIOME_CRIMSON;
-    @Unique private static Holder<Biome> BIOME_CORRUPT;
-    @Unique private static Holder<Biome> BIOME_HALLOW;
-    @Unique private static Holder<Biome> BIOME_PLAINS;
     @Unique private ServerLevel confluence$serverLevel;
 
     private LevelChunkMixin(ChunkPos pChunkPos, UpgradeData pUpgradeData, LevelHeightAccessor pLevelHeightAccessor, Registry<Biome> pBiomeRegistry, long pInhabitedTime, @Nullable LevelChunkSection[] pSections, @Nullable BlendingData pBlendingData){
@@ -54,74 +50,81 @@ public abstract class LevelChunkMixin extends ChunkAccess {
     @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/ChunkPos;Lnet/minecraft/world/level/chunk/UpgradeData;Lnet/minecraft/world/ticks/LevelChunkTicks;Lnet/minecraft/world/ticks/LevelChunkTicks;J[Lnet/minecraft/world/level/chunk/LevelChunkSection;Lnet/minecraft/world/level/chunk/LevelChunk$PostLoadProcessor;Lnet/minecraft/world/level/levelgen/blending/BlendingData;)V", at = @At("RETURN"))
     private void constr(Level pLevel, ChunkPos pPos, UpgradeData pData, LevelChunkTicks pBlockTicks, LevelChunkTicks pFluidTicks, long pInhabitedTime, LevelChunkSection[] pSections, LevelChunk.PostLoadProcessor pPostLoad, BlendingData pBlendingData, CallbackInfo ci){
         if(level.isClientSide()) return;
-        BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.ANOTHER_CRIMSON);
-        BIOME_CORRUPT = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_CORRUPTION);
-        BIOME_HALLOW = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_HALLOW);
-        BIOME_PLAINS = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(Biomes.PLAINS);
+        if(BIOME_CORRUPT == null){
+            BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.ANOTHER_CRIMSON);
+            BIOME_CORRUPT = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_CORRUPTION);
+            BIOME_HALLOW = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_HALLOW);
+        }
         confluence$serverLevel = (ServerLevel) level;
     }
 
     @Inject(method = "setBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getBlock()Lnet/minecraft/world/level/block/Block;"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void setBlock(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, int i, LevelChunkSection section, boolean flag, int j, int k, int l, BlockState beforeState){
+    private void setBlock(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, int $, LevelChunkSection section, boolean flag, int j, int k, int l, BlockState beforeState){
         if(level.isClientSide()) return;
-
         IChunkSection counter = (IChunkSection) section;
-        int crimson = counter.confluence$getCrimson();
-        int corrupt = counter.confluence$getCorrupt();
-        int hallow = counter.confluence$getHallow();
+        int[] i = {counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()};
+        Holder<Biome> targetBiome = balanceEvil(i);
 
-        // (假设)同时存在400个猩红块和400个腐化块的时候，只要400个神圣块就能完全抵消，邪恶不会相加
-        int evil = Math.max(crimson, corrupt);
-        crimson -= hallow;
-        corrupt -= hallow;
-        hallow -= evil;
-
-        if(corrupt >= BIOME_THRESHOLD && corrupt >= crimson){
-            infect(section, pPos, BIOME_CORRUPT, true);
-        }else if(crimson >= BIOME_THRESHOLD){
-            infect(section, pPos, BIOME_CRIMSON, true);
-        }else if(hallow >= BIOME_THRESHOLD){
-            infect(section, pPos, BIOME_HALLOW, true);
+        if(targetBiome != null){
+            confluence$infect(section, pPos, targetBiome, true);
         }else{
-            checkBelow(section, pPos);
+            confluence$checkBelow(section, pPos);
         }
     }
 
-    private Holder<Biome> checkCross(LevelChunkSection centerSection, BlockPos centerPos){
-        Holder<Biome> centerBiome = centerSection.getNoiseBiome(0, 0, 0);
-        if(!centerBiome.is(ModTags.SPREADING)){
-            return BIOME_PLAINS;
+    /** @return 返回十字上方的该有的邪恶群系，null则是净化，让infect方法决定用平原还是恢复原群系 */
+    @Unique
+    private Holder<Biome> confluence$checkCross(LevelChunkSection centerSection, BlockPos centerPos){
+        Holder<Biome> centerBiome = getTypicalBiome(centerSection, true,null);
+        if(centerBiome == null){
+            return null;
         }
         for(LevelChunk c : List.of(level.getChunkAt(centerPos.south(16)),
             level.getChunkAt(centerPos.north(16)),
             level.getChunkAt(centerPos.east(16)),
             level.getChunkAt(centerPos.west(16)))){
-            if(!confluence$serverLevel.getChunkSource().isPositionTicking(c.getPos().toLong())
-                || c.getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(centerPos.getY()))).getNoiseBiome(0, 0, 0).get() != centerBiome.get()){
-                return BIOME_PLAINS;
+            Holder<Biome> sideBiome = getTypicalBiome(c.getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(centerPos.getY()))), true,centerBiome);
+            if(!confluence$serverLevel.getChunkSource().isPositionTicking(c.getPos().toLong()) || sideBiome != centerBiome){
+                return null;
             }
         }
         return centerBiome;
     }
 
-    private void checkBelow(LevelChunkSection selfSection, BlockPos pPos){
+    @Unique
+    private void confluence$checkBelow(LevelChunkSection selfSection, BlockPos pPos){
         BlockPos belowPos = pPos.offset(0, -16, 0);
         if(level.isOutsideBuildHeight(belowPos.getY())) return;
         LevelChunkSection belowSection = getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(belowPos.getY())));
-        Holder<Biome> targetBiome = checkCross(belowSection, belowPos);
-        infect(selfSection, pPos, targetBiome,true);
+        Holder<Biome> targetBiome = confluence$checkCross(belowSection, belowPos);
+        confluence$infect(selfSection, pPos, targetBiome, true);
     }
 
-    private void infect(LevelChunkSection section, BlockPos pPos, Holder<Biome> biome, boolean checkAbove){
-        BlockPos abovePos = pPos.above(16);
-        Holder<Biome> beforeBiome = section.getNoiseBiome(0, 0, 0);
-        if(biome.get() == beforeBiome.get()){
+    @SuppressWarnings("unchecked")
+    @Unique
+    private void confluence$infect(LevelChunkSection section, BlockPos pPos, @Nullable Holder<Biome> biome, boolean checkAbove){
+        Holder<Biome> beforeBiome = getTypicalBiome(section, biome == null, biome); // 传播的话一点纯净都不能放过，净化的话一点邪恶都不能放过
+        if(biome == beforeBiome){
             return;
         }
-        section.fillBiomesFromNoise((pX, pY, pZ, pSampler) -> biome, null, 0, 0, 0);
-        if(checkAbove && !level.isOutsideBuildHeight(abovePos)){
-            infect(getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(abovePos.getY()))), abovePos, checkCross(section, pPos),false);
+
+        if(biome == null){ // 判定为纯净
+            IChunkSection counter = (IChunkSection) section;
+            counter.confluence$setBiomes(counter.confluence$getBackupBiome());
+        }else{
+//            section.fillBiomesFromNoise((pX, pY, pZ, pSampler) -> biome, null, 0, 0, 0);
+            ((IChunkSection) section).confluence$setBiomes(((IPalettedContainer<Holder<Biome>>) section.getBiomes()).confluence$recreateSingle(biome));
         }
-        confluence$serverLevel.getChunkSource().chunkMap.resendBiomesForChunks(List.of(this));
+        BlockPos abovePos = pPos.above(16);
+        if(checkAbove && !level.isOutsideBuildHeight(abovePos)){
+            LevelChunkSection aboveSection = getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(abovePos.getY())));
+            Holder<Biome> aboveTargetBiome = confluence$checkCross(section, pPos); // 根据十字决定的顶部群系
+            Holder<Biome> supposeAboveBiome = judgeSection(aboveSection); // 顶部根据邪恶方块数量决定的应有的群系
+            Holder<Biome> finalBiome = supposeAboveBiome != null ? supposeAboveBiome : aboveTargetBiome;  // 自身邪恶块足够就听自己的，否则听下面的
+            confluence$infect(aboveSection, abovePos, finalBiome, false);
+        }
+        if(checkAbove){
+            confluence$serverLevel.getChunkSource().chunkMap.resendBiomesForChunks(List.of(this));
+        }
     }
 }
