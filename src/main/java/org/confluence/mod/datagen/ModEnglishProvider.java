@@ -197,7 +197,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.blizzard_in_a_balloon.info2", "It can be crafted at a Crafting Table with a Blizzard in a Bottle and a Shiny Red Balloon.");
         add("item.confluence.blizzard_in_a_bottole.info", "The Blizzard in a Bottle is a pre-Hardmode accessory which works similarly to the Cloud in a Bottle, allowing the player to double-jump.");
         add("item.confluence.blizzard_in_a_bottole.info2", "The Blizzard jump goes 8 meters into the air, totaling 14 meters when put together with the first jump. ");
-        add("item.confluence.blizzard_in_a_bottole.info3", "It can be crafted at a Crafting Table with a Cloud in a Bottle and a Shiny Red Balloon.");
+        add("item.confluence.blizzard_in_a_bottole.info3", "It can be crafted at a Crafting Table with a Cloud in a Bottle and a blue ice.");
         add("item.confluence.blue_horseshoe_balloon.info", "The Blue Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 75%, grants a double-jump, and grants +0.05 luck.");
         add("item.confluence.blue_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks, while the double-jump's height is increased from 5 blocks to 9 blocks, reaching a total of 19.5 blocks with both jumps.");
         add("item.confluence.blue_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Cloud in a Balloon and a Lucky Horseshoe.");
@@ -295,7 +295,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.pink_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Sharkron Balloon and a Lucky Horseshoe.");
         add("item.confluence.rocket_boots.info", "Rocket Boots are an accessory that allows a player to fly for a period of around 1.6 seconds (100 game frames).");
         add("item.confluence.rocket_boots.info2", "They require a jump from midair to activate (a double-jump, or a jump while falling).");
-        add("item.confluence.rocket_boots.info3", "This item can be crafted at a Crafting Table using a Cloud in a Balloon, a Blizzard in a Balloon, and a Sandstorm in a Balloon.");
+        add("item.confluence.rocket_boots.info3", "This item can be crafted at a Crafting Table using a Iron Boots,Iron Ingots and a Fire Charge.");
         add("item.confluence.rocket_boots.info4", "If the Cloud in a Bottle is also equipped, its double-jump effect will engage first; pressing and holding the jump key afterward while still in midair will then activate the Rocket Boots.");
         add("item.confluence.sailfish_boots.info", "Sailfish Boots are an accessory that allows the user to sprint.");
         add("item.confluence.sailfish_boots.info2", "It can be found in Shipwreck Chests.");
@@ -494,7 +494,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_drill.info2", "It have a Chance to be dropped from Elder Guardian.");
         add("item.confluence.hero_shield.info", "The Hero Shield is a accessory that redirects 25% of damage from players on the same team while above 25% health, similar to the effect of the Paladin's Shield.");
         add("item.confluence.hero_shield.info2", "It can be crafted at a Crafting Table with a Paladin's Shield and a Flesh Knuckles.");
-        add("item.confluence.holy_water.info", "The Explorers Equipment is an accessory that grants the player immunity to the Wither debuff.");
+        add("item.confluence.holy_water.info", "The Holy Water is an accessory that grants the player immunity to the Wither debuff.");
         add("item.confluence.holy_water.info2", "It have a Chance to be dropped from Wither Skeleton.");
         add("item.confluence.honey_comb.info", "The Honey Comb is a accessory which, when equipped, spawns 1–3 (or 1–4 with a Hive Pack equipped) bee projectiles which attack nearby enemies each time the player takes damage.");
         add("item.confluence.honey_comb.info2", "It have a Chance to be dropped from Wither Bee.");
