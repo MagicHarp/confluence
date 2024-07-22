@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import static org.confluence.mod.util.DynamicBiomeUtils.*;
 
 @Mixin(ProtoChunk.class)
-public class ProtoChunkMixin {
+public abstract class ProtoChunkMixin {
     @Inject(method = "setBlockState",at = @At(value = "INVOKE",target = "Lnet/minecraft/world/level/chunk/ChunkStatus;isOrAfter(Lnet/minecraft/world/level/chunk/ChunkStatus;)Z"),locals = LocalCapture.CAPTURE_FAILSOFT)
     private void setBlock(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, int $$3, int $$4, int $$5, int $$6, LevelChunkSection section, boolean $$8, int $$9, int $$10, int $$11, BlockState beforeState){
         IChunkSection counter = (IChunkSection) section;

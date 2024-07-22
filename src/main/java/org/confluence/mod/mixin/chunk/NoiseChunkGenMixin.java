@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(NoiseBasedChunkGenerator.class)
-public class NoiseChunkGenMixin {
+public abstract class NoiseChunkGenMixin {
     @Inject(method = "doCreateBiomes",at = @At("RETURN"))
     private void doCreateBiomes(Blender pBlender, RandomState pRandom, StructureManager pStructureManager, ChunkAccess pChunk, CallbackInfo ci){
         for(LevelChunkSection section : pChunk.getSections()){

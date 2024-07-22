@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(PalettedContainer.class)
-public class PalettedContainerMixin<T> implements IPalettedContainer<T> {
+public abstract class PalettedContainerMixin<T> implements IPalettedContainer<T> {
 
     @Shadow @Final private IdMap<T> registry;
     @Shadow @Final private PalettedContainer.Strategy strategy;
