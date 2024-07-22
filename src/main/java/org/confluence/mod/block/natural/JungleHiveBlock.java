@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,14 +22,14 @@ import java.util.Random;
 public class JungleHiveBlock extends Block implements CustomModel {
 
     public JungleHiveBlock() {
-        super(BlockBehaviour.Properties.of());
+        super(BlockBehaviour.Properties.copy(Blocks.BEEHIVE));
     }
 
     @Override
     public void playerDestroy(@NotNull Level level, @NotNull Player player, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable BlockEntity blockEntity, @NotNull ItemStack tool) {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         Random random = new Random();
-        int randomNumber = random.nextInt(2);
+        int randomNumber = random.nextInt(3);
         if (randomNumber == 0 && level instanceof ServerLevel && !player.isCreative()) {
             level.setBlockAndUpdate(pos, ModBlocks.HONEY.get().defaultBlockState());
         } else if (randomNumber == 1 && level instanceof ServerLevel && !player.isCreative()){
@@ -37,6 +38,8 @@ public class JungleHiveBlock extends Block implements CustomModel {
                 Beeentity.setPos(pos.getX() + 1, pos.getY() + 3, pos.getZ() + 1);
                 level.addFreshEntity(Beeentity);
             }
+        }else if (randomNumber == 2 && level instanceof ServerLevel && !player.isCreative()){
+          popResource(level, pos, new ItemStack(ModBlocks.JUNGLE_HIVE_BLOCK.get(), 1));
         } else if (level instanceof ServerLevel && player.isCreative()){
             level.setBlockAndUpdate(pos, ModBlocks.HONEY.get().defaultBlockState());
         }
