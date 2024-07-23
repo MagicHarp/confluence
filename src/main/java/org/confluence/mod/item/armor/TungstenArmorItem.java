@@ -61,7 +61,7 @@ public class TungstenArmorItem extends ArmorItem implements NormalGeoItem {
 
             @Override
             public @NotNull String getName() {
-                return "silver";
+                return "tungsten";
             }
 
             @Override
