@@ -28,8 +28,10 @@ public enum Armors implements EnumRegister<ArmorItem> {
     INSULATED_PANTS("insulated_pants", () -> new SnowArmorItem(ArmorItem.Type.LEGGINGS)),
     INSULATED_SHOES("insulated_shoes", () -> new SnowArmorItem(ArmorItem.Type.BOOTS)),
     //粉色防雪衣
-    SNOW_PINK_CAPS("snow_pink_caps", () -> new SnowPinkArmorItem(ArmorItem.Type.HELMET)),
-    SNOW_PINK_SUITS("snow_pink_suits", () -> new SnowPinkArmorItem(ArmorItem.Type.CHESTPLATE)),
+    PINK_SNOW_CAPS("pink_snow_caps", () -> new SnowPinkArmorItem(ArmorItem.Type.HELMET)),
+    PINK_SNOW_SUITS("pink_snow_suits", () -> new SnowPinkArmorItem(ArmorItem.Type.CHESTPLATE)),
+    PINK_INSULATED_PANTS("pink_insulated_pants", () -> new SnowPinkArmorItem(ArmorItem.Type.LEGGINGS)),
+    PINK_INSULATED_SHOES("pink_insulated_shoes", () -> new SnowPinkArmorItem(ArmorItem.Type.BOOTS)),
     //暗影木套
     SHADOW_HELMET("shadow_helmet", () -> new ShadowArmorItem(ArmorItem.Type.HELMET)),
     SHADOW_CHESTPLATE("shadow_chestplate", () -> new ShadowArmorItem(ArmorItem.Type.CHESTPLATE)),

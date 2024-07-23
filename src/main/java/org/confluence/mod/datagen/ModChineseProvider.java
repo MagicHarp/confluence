@@ -443,11 +443,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.aglet.info", "金属带扣是能将玩家移动速度提升5%的配饰");
         add("item.confluence.aglet.info2", "它出现在地表宝箱，木匣，珍珠木匣中");
         add("item.confluence.amber_horseshoe_balloon.info", "琥珀马掌气球是个配饰，能增加跳跃高度 75%（6 格 → 10.5 格）、在水下时则降低 15% （8 格 → 7 格）、让玩家免疫掉落伤害、并在被攻击时释放会寻找并伤害敌怪的蜜蜂。");
-        add("item.confluence.amber_horseshoe_balloon.info2", " 能给予 +0.05 运气加成。");
+        add("item.confluence.amber_horseshoe_balloon.info2", "能给予 +0.05 运气加成。");
         add("item.confluence.amber_horseshoe_balloon.info3", "它可以在工匠作坊处用幸运马掌和蜂蜜气球制作而成。");
         add("item.confluence.amber_horseshoe_balloon.info4", "在电脑版、主机版、和移动版上，它还能在受到伤害后给予蜂蜜增益。");
-        add("item.confluence.amphibian_boots.info", "水陆两用靴是个配饰，可由旗鱼靴和蛙腿在工匠作坊处制作而来。它提供了所有这两种物品的功能。");
-        add("item.confluence.anklet_of_the_wind.info", "疾风脚镯是个配饰 ，为移动速度提供 10% 加成。");
+        add("item.confluence.amphibian_boots.info", "水陆两用靴是一种配饰，可由旗鱼靴和蛙腿在工匠作坊处制作而来。它提供了所有这两种物品的功能。");
+        add("item.confluence.anklet_of_the_wind.info", "疾风脚镯是一种配饰，为移动速度提供 10% 加成。");
         add("item.confluence.anklet_of_the_wind.info2", "其效果和金属带扣的移动速度奖励可以叠加。");
         add("item.confluence.anklet_of_the_wind.info3", "它出现在丛林匣和荆棘匣中，几率为 19%；也出现在位于丛林神龛中和地下丛林内生命红木树底部的常春藤箱中，几率为 9/40 (22.5%)。");
         add("item.confluence.balloon_pufferfish.info", "气球河豚鱼是一种配饰，能将玩家的跳跃高度提高 33%、跳跃速度提高 30%，从而将玩家的跳跃高度从 6 格（12 英尺）提高到约 10½ 格（21 英尺），效果上说提高了约 75%");
@@ -2011,8 +2011,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.SNOW_SUITS.get(), "防雪衣");
         add(Armors.INSULATED_PANTS.get(), "保温裤");
         add(Armors.INSULATED_SHOES.get(), "保温鞋");
-        add(Armors.SNOW_PINK_CAPS.get(), "粉色防雪帽");
-        add(Armors.SNOW_PINK_SUITS.get(), "粉色防雪衣");
+        add(Armors.PINK_SNOW_CAPS.get(), "粉色防雪帽");
+        add(Armors.PINK_SNOW_SUITS.get(), "粉色防雪衣");
+        add(Armors.PINK_INSULATED_PANTS.get(), "粉色保温裤");
+        add(Armors.PINK_INSULATED_SHOES.get(), "粉色保温鞋");
         add(Armors.COPPER_HELMET.get(), "铜头盔");
         add(Armors.COPPER_CHESTPLATE.get(), "铜胸甲");
         add(Armors.COPPER_LEGGINGS.get(), "铜护腿");

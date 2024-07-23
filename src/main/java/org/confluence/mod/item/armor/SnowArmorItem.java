@@ -57,7 +57,7 @@ public class SnowArmorItem extends ArmorItem implements NormalGeoItem {
 
             @Override
             public @NotNull String getName() {
-                return "planks";
+                return "wools";
             }
 
             @Override
