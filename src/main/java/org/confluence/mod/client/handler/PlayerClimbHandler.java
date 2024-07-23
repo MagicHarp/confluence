@@ -21,7 +21,7 @@ public final class PlayerClimbHandler {
     private static int climberAmount = 0;
 
     public static void handle(LocalPlayer localPlayer, Vec2 vector, boolean jumping) {
-        if (climberAmount <= 0 || localPlayer.onGround() || vector.x + vector.y == 0.0){
+        if (climberAmount <= 0 || localPlayer.onGround() || (vector.x == 0.0 && vector.y == 0.0)){
             wallJumped = true;
             return;
         }
