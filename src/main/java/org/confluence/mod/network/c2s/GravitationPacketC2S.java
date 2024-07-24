@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.effect.beneficial.GravitationEffect;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.BroadcastGravitationRotPacketS2C;
-import org.confluence.mod.util.IEntity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 
 import java.util.function.Supplier;
 

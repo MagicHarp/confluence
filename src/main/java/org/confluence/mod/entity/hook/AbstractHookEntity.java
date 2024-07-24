@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -20,6 +19,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.entity.projectile.ChainingEntity;
 import org.confluence.mod.item.hook.AbstractHookItem;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
@@ -27,11 +27,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.function.IntFunction;
 
-public abstract class AbstractHookEntity extends Projectile {
+public abstract class AbstractHookEntity extends ChainingEntity {
     private static final EntityDataAccessor<Integer> DATA_HOOK_STATE = SynchedEntityData.defineId(AbstractHookEntity.class, EntityDataSerializers.INT);
     private final float hookRangeSqr;
     private final AbstractHookItem.HookType hookType;
-    public float lastDelta = 0.0F;
 
     public AbstractHookEntity(EntityType<? extends AbstractHookEntity> entityType, Level pLevel) {
         super(entityType, pLevel);

@@ -160,7 +160,7 @@ public final class ModEvents {
         event.register(ModEntities.BLACK_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 
-    public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+    private static boolean checkSlimeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
         Level level = null;
         if (pLevel instanceof Level) {
             level = (Level) pLevel;

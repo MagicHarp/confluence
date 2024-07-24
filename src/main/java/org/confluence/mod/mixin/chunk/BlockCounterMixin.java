@@ -3,7 +3,7 @@ package org.confluence.mod.mixin.chunk;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
-import org.confluence.mod.util.IChunkSection;
+import org.confluence.mod.mixinauxiliary.IChunkSection;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

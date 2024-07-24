@@ -1,5 +1,7 @@
 package org.confluence.mod;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -9,6 +11,7 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -25,6 +28,7 @@ import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.mixin.accessor.LevelRendererAccessor;
 import org.confluence.mod.recipe.ModRecipes;
 import org.confluence.mod.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
@@ -69,6 +73,7 @@ public final class Confluence {
     }
 
     public static Object debugMethod(Object... args){
+        LevelRendererAccessor.callRenderShape((PoseStack) args[0], (VertexConsumer) args[1], (VoxelShape) args[2], 0, 0, 0, 1, 1, 0, 1);
         return false;
     }
 }

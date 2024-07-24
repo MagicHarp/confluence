@@ -26,7 +26,7 @@ import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.accessor.LootParamsAccessor;
-import org.confluence.mod.util.IFishingHook;
+import org.confluence.mod.mixinauxiliary.IFishingHook;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

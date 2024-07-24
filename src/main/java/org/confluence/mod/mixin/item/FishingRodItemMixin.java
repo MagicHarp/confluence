@@ -8,7 +8,7 @@ import org.confluence.mod.item.curio.fishing.FishingBobber;
 import org.confluence.mod.item.curio.fishing.ILavaproofFishingHook;
 import org.confluence.mod.mixin.accessor.FishingHookAccessor;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.IFishingHook;
+import org.confluence.mod.mixinauxiliary.IFishingHook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;

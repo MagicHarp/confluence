@@ -7,7 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
-import org.confluence.mod.util.IItemEntity;
+import org.confluence.mod.mixinauxiliary.IItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

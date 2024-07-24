@@ -5,7 +5,7 @@ import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.client.handler.GravitationHandler;
-import org.confluence.mod.util.IEntity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

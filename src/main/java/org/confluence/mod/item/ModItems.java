@@ -20,6 +20,7 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
+import org.confluence.mod.item.flail.FlailItems;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.GunItems;
@@ -136,6 +137,7 @@ public final class ModItems {
         Baits.init();
         AmmoItems.init();
         GunItems.init();
+        FlailItems.init();
         ITEMS.register(bus);
     }
 }

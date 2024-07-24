@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import org.confluence.mod.util.DynamicBiomeUtils;
-import org.confluence.mod.util.IChunkSection;
+import org.confluence.mod.mixinauxiliary.IChunkSection;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

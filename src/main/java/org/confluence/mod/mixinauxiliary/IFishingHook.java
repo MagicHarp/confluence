@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.mixinauxiliary;
 
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.item.fishing.Baits;

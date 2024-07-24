@@ -6,6 +6,7 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.chunk.PalettedContainerAccessor;
+import org.confluence.mod.mixinauxiliary.IChunkSection;
 
 public class DynamicBiomeUtils {
     public static Holder<Biome> BIOME_CRIMSON;

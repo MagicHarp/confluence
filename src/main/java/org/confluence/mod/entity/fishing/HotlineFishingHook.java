@@ -4,7 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.util.IFishingHook;
+import org.confluence.mod.mixinauxiliary.IFishingHook;
 
 public class HotlineFishingHook extends AbstractFishingHook {
     public HotlineFishingHook(Player pPlayer, Level pLevel, int pLuck, int pLureSpeed) {

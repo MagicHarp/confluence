@@ -103,22 +103,22 @@ public class PathService {
             }
         }
         if (flag) {
-            Confluence.LOGGER.debug("Path finding finish");
+//            Confluence.LOGGER.debug("Path finding finish");
             for (Network network : NetworkService.INSTANCE.getNetworks()) {
-                Confluence.LOGGER.debug("Network${}, #{}:", network.hasSignal(), network.getColor());
+//                Confluence.LOGGER.debug("Network${}, #{}:", network.hasSignal(), network.getColor());
                 if (network.schedule) {
                     network.schedule = false;
                     network.getNodes().stream()
-                        .peek(node -> Confluence.LOGGER.debug("Scheduled Node#{}: {}", node.getId(), node.getPos().toShortString()))
+//                        .peek(node -> Confluence.LOGGER.debug("Scheduled Node#{}: {}", node.getId(), node.getPos().toShortString()))
                         .filter(node -> node.cachedSignal != network.hasSignal())
                         .map(NetworkNode::getEntity)
                         .collect(Collectors.toSet())
                         .forEach(entity -> internalExecute((ServerLevel) entity.getSelf().getLevel(), null, -1, network.hasSignal(), entity));
-                } else {
+                }/* else {
                     for (NetworkNode node : network.getNodes()) {
                         Confluence.LOGGER.debug("Node#{}: {}", node.getId(), node.getPos().toShortString());
                     }
-                }
+                }*/
             }
         }
     }

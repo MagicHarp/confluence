@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.mixinauxiliary;
 
 import net.minecraft.world.level.chunk.PalettedContainer;
 

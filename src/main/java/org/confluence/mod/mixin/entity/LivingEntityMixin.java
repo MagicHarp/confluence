@@ -1,6 +1,5 @@
 package org.confluence.mod.mixin.entity;
 
-import com.google.common.util.concurrent.AtomicDouble;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -33,7 +32,7 @@ import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.IEntity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.util.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

@@ -1,4 +1,4 @@
-package org.confluence.mod.util;
+package org.confluence.mod.mixinauxiliary;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.Biome;

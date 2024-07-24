@@ -15,7 +15,7 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;
 import org.confluence.mod.network.s2c.BroadcastGravitationRotPacketS2C;
 import org.confluence.mod.network.s2c.GravityGlobePacketS2C;
-import org.confluence.mod.util.IEntity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 
 import java.util.function.Supplier;
 

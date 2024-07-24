@@ -16,11 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.model.entity.hook.BaseHookModel;
-import org.confluence.mod.entity.hook.AbstractHookEntity;
+import org.confluence.mod.entity.projectile.ChainingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends EntityRenderer<T> {
-    protected final EntityModel<? extends AbstractHookEntity> model;
+public abstract class AbstractHookRenderer<T extends ChainingEntity> extends EntityRenderer<T> {
+    protected final EntityModel<? extends ChainingEntity> model;
     protected final BlockRenderDispatcher dispatcher;
 
     public AbstractHookRenderer(EntityRendererProvider.Context pContext) {
@@ -29,7 +29,7 @@ public abstract class AbstractHookRenderer<T extends AbstractHookEntity> extends
         this.dispatcher = pContext.getBlockRenderDispatcher();
     }
 
-    public AbstractHookRenderer(EntityRendererProvider.Context pContext, EntityModel<? extends AbstractHookEntity> model) {
+    public AbstractHookRenderer(EntityRendererProvider.Context pContext, EntityModel<? extends ChainingEntity> model) {
         super(pContext);
         this.model = model;
         this.dispatcher = pContext.getBlockRenderDispatcher();

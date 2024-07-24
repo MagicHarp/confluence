@@ -18,7 +18,7 @@ import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ShieldOfCthulhuPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.IEntity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;

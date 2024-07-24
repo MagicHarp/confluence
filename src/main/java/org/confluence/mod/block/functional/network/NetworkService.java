@@ -23,24 +23,24 @@ public class NetworkService {
     public Network createNetwork(int color) {
         Network network = new Network(color);
         networks.add(network);
-        Confluence.LOGGER.info("Create network#{}", network.getColor());
+//        Confluence.LOGGER.info("Create network#{}", network.getColor());
         return network;
     }
 
     public void createNetworkNode(INetworkEntity blockEntity) {
         NetworkNode node = new NetworkNode(nodeID.insert(), blockEntity);
         blockEntity.setNetworkNode(node);
-        Confluence.LOGGER.debug("Create network node#{}", node.getId());
+//        Confluence.LOGGER.debug("Create network node#{}", node.getId());
     }
 
     public void removeNetwork(Network network) {
-        Confluence.LOGGER.debug("Remove network#{}", network.getColor());
+//        Confluence.LOGGER.debug("Remove network#{}", network.getColor());
         networks.remove(network);
         network.destroy();
     }
 
     public void removeNetworkNode(NetworkNode node) {
-        Confluence.LOGGER.debug("Remove network node#{}", node.getId());
+//        Confluence.LOGGER.debug("Remove network node#{}", node.getId());
         nodeID.remove(node.getId());
     }
 
@@ -50,7 +50,7 @@ public class NetworkService {
     }
 
     public void removeNodeInNetwork(NetworkNode node, Network network) {
-        Confluence.LOGGER.debug("Remove network node#{} from network#{}", node.getId(), network.getColor());
+//        Confluence.LOGGER.debug("Remove network node#{} from network#{}", node.getId(), network.getColor());
         network.removeNode(node);
         node.removeNetwork(network.getColor());
     }
