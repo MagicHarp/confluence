@@ -698,7 +698,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(FISHERMANS_POCKET_GUIDE.get(), "渔民袖珍宝典");
         add(WEATHER_RADIO.get(), "天气收音机");
         add(SEXTANT.get(), "六分仪");
-        add(GPS.get(), " 全球定位系统");
+        add(GPS.get(), "全球定位系统");
         add(GOBLIN_TECH.get(), "哥布林数据仪");
         add(FISH_FINDER.get(), "探鱼器");
         add(PDA.get(), "个人数字助手");
