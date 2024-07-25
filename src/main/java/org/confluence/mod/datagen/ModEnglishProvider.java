@@ -545,7 +545,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.putrid_scent.info", "The Putrid Scent is a accessory which increases damage and critical strike chance by 5% and decreases aggro by 400.");
         add("item.confluence.putrid_scent.info2", "It can be found in Chests in the Dungeon.");
         add("item.confluence.ranger_emblem.info", "The Ranger Emblem is a Hardmode accessory that increases ranged damage by 15%.");
-        add("item.confluence.ranger_emblem.info2", "It have a Chance to be dropped from Wither Skeleton.");
+        add("item.confluence.ranger_emblem.info2", "It have a Chance to be dropped from Skeleton.");
         add("item.confluence.recon_scope.info", "The Recon Scope is a accessory that combines the effects of the Sniper Scope and the aggro-reducing effect of the Putrid Scent.");
         add("item.confluence.recon_scope.info2", "It can be crafted at a Crafting Table using a Sniper Scope and a Putrid Scent.");
         add("item.confluence.rifle_scope.info", "The Rifle Scope is a accessory.");
