@@ -7,7 +7,7 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum FlailItems implements EnumRegister<AbstractFlailItem> {
-    MACE("mace", AbstractFlailItem::new);
+    MACE("mace", () -> new AbstractFlailItem(3, null, null, 0)),;
 
     private final RegistryObject<AbstractFlailItem> value;
     FlailItems(String id, Supplier<AbstractFlailItem> flail){

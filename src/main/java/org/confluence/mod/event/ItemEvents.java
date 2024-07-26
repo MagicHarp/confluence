@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -42,6 +43,7 @@ import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
+import org.confluence.mod.item.flail.AbstractFlailItem;
 import org.confluence.mod.item.flail.FlailItems;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
@@ -89,20 +91,24 @@ public final class ItemEvents {
     @SubscribeEvent
     public static void onStartUseItem(LivingEntityUseItemEvent.Start event){
         ItemStack item = event.getItem();
-        if(!item.is(FlailItems.MACE.get()))return; // TODO: item tag
-        if(!(event.getEntity() instanceof Player player))return;
+        if(!(item.getItem() instanceof AbstractFlailItem flailItem)) return; // TODO: item tag
+        if(!(event.getEntity() instanceof Player player)) return;
         IPlayer fp = (IPlayer) player;
+        InteractionHand hand;
+        ItemStack mainItem = player.getItemInHand(InteractionHand.MAIN_HAND);
+        ItemStack offItem = player.getItemInHand(InteractionHand.OFF_HAND);
+        hand = mainItem == item ? InteractionHand.MAIN_HAND : offItem == item ? InteractionHand.OFF_HAND : null;
+        if(hand==null) return;
         if(fp.confluence$flailEntity() == null){
-            FlailEntity flail = new FlailEntity(ModEntities.FLAIL.get(), player.level(), player);
-            float radians = (float) Math.toRadians(player.getYRot());
-            flail.setPos(player.position().add(-0.6 * Mth.cos(radians), 0, -0.6 * Mth.sin(radians)));
+            FlailEntity flail = new FlailEntity(ModEntities.FLAIL.get(), player.level(), player, hand, flailItem);
             player.level().addFreshEntity(flail);
             fp.confluence$flailEntity(flail);
         }
     }
+
     @SubscribeEvent
     public static void onStopUseItem(LivingEntityUseItemEvent.Stop event){
-        if(!(event.getEntity() instanceof Player player))return;
+        if(!(event.getEntity() instanceof Player player)) return;
         IPlayer fp = (IPlayer) player;
         FlailEntity flail = fp.confluence$flailEntity();
         if(flail != null){

@@ -1,17 +1,28 @@
 package org.confluence.mod.item.flail;
 
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.FlailEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class AbstractFlailItem extends Item {
-    public AbstractFlailItem(){
+    public final float damage;
+    public final ParticleOptions particle;
+    public final MobEffect effect;
+    public final double chance;
+    public AbstractFlailItem(float damage, ParticleOptions particle, MobEffect effect, double chance){
         super(new Properties().stacksTo(1));
+        this.damage = damage;
+        this.particle = particle;
+        this.effect = effect;
+        this.chance = chance;
     }
 
     @Override
@@ -21,7 +32,6 @@ public class AbstractFlailItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand){
-//        Confluence.LOGGER.info("use");
         pPlayer.startUsingItem(pUsedHand);
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
 //

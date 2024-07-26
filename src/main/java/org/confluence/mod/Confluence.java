@@ -73,7 +73,6 @@ public final class Confluence {
     }
 
     public static Object debugMethod(Object... args){
-        LevelRendererAccessor.callRenderShape((PoseStack) args[0], (VertexConsumer) args[1], (VoxelShape) args[2], 0, 0, 0, 1, 1, 0, 1);
         return false;
     }
 }
