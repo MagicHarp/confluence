@@ -3,8 +3,6 @@ package org.confluence.mod.event;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -35,19 +33,14 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.entity.projectile.FlailEntity;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
-import org.confluence.mod.item.flail.AbstractFlailItem;
-import org.confluence.mod.item.flail.FlailItems;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.mixinauxiliary.IPlayer;
 
 import java.util.Collections;
 
@@ -86,35 +79,6 @@ public final class ItemEvents {
         SilencedEffect.onRightClick(player, event);
         CursedEffect.onRightClick(player, event::setCanceled);
         StonedEffect.onRightClick(player, event::setCanceled);
-    }
-
-    @SubscribeEvent
-    public static void onStartUseItem(LivingEntityUseItemEvent.Start event){
-        ItemStack item = event.getItem();
-        if(!(item.getItem() instanceof AbstractFlailItem flailItem)) return; // TODO: item tag
-        if(!(event.getEntity() instanceof Player player)) return;
-        IPlayer fp = (IPlayer) player;
-        InteractionHand hand;
-        ItemStack mainItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-        ItemStack offItem = player.getItemInHand(InteractionHand.OFF_HAND);
-        hand = mainItem == item ? InteractionHand.MAIN_HAND : offItem == item ? InteractionHand.OFF_HAND : null;
-        if(hand==null) return;
-        if(fp.confluence$flailEntity() == null){
-            FlailEntity flail = new FlailEntity(ModEntities.FLAIL.get(), player.level(), player, hand, flailItem);
-            player.level().addFreshEntity(flail);
-            fp.confluence$flailEntity(flail);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onStopUseItem(LivingEntityUseItemEvent.Stop event){
-        if(!(event.getEntity() instanceof Player player)) return;
-        IPlayer fp = (IPlayer) player;
-        FlailEntity flail = fp.confluence$flailEntity();
-        if(flail != null){
-            flail.discard();
-            fp.confluence$flailEntity((FlailEntity) null);
-        }
     }
 
     @SubscribeEvent

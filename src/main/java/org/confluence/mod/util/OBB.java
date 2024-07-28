@@ -53,14 +53,13 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
         super(Shapes.block(), Direction.Axis.X, 0);
     }
 
-    public OBB(Vec3 center, double width, double height, double depth, float yaw, float pitch){
+    public OBB(Vec3 center, double x, double y, double z, float yaw, float pitch){
         this();
         this.rotation = new Matrix3f();
         this.center = center;
-        this.extent = new Vec3(width / 2.0, height / 2.0, depth / 2.0);
+        this.extent = new Vec3(x / 2.0, y / 2.0, z / 2.0);
         this.axisZ = Vec3.directionFromRotation(yaw, pitch).normalize();
         this.axisY = Vec3.directionFromRotation(yaw + 90.0F, pitch).reverse().normalize();
-//        this.axisX = Vec3.directionFromRotation(yaw, pitch).normalize();
         this.axisX = this.axisZ.cross(this.axisY);
     }
 
@@ -173,8 +172,9 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
         return Intersects(this, otherOBB);
     }
 
-    public boolean collide(AABB boundingBox){
-        return isColliding(this, new OBB(boundingBox).updateVertex());
+    // TODO: 大问题
+    public boolean collide(AABB boundingBox, Vec3 myMotion, Vec3 othersMotion){
+        return isColliding(this, new OBB(boundingBox).updateVertex(), myMotion, othersMotion);
     }
 
     public boolean intersects(OBB otherOBB){
@@ -256,63 +256,75 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
     }
 
     public AABB getBorder(){
+        if(border == null){
+            updateVertex();
+        }
         return border;
     }
+
     private Vec3[] getAxes(){
         return new Vec3[]{axisX, axisY, axisZ};
     }
 
+    public OBB inflate(double x, double y, double z){
+        extent.add(x, y, z);
+        return updateVertex();
+    }
 
-    public static boolean isColliding(OBB obb1, OBB obb2) {
+    public OBB inflate(double length){
+        return inflate(length, length, length);
+    }
+
+    public static boolean isColliding(OBB obb1, OBB obb2, Vec3 motion1, Vec3 motion2){
         Vec3[] axes1 = obb1.getAxes();
         Vec3[] axes2 = obb2.getAxes();
-
-        // 需要测试的轴包括 OBB1 的3个轴，OBB2 的3个轴，以及这些轴的叉乘结果
+        Vec3 relativeVelocity = motion1.subtract(motion2);
         Vec3[] testAxes = new Vec3[15];
         int index = 0;
-
-        for (Vec3 axis : axes1) {
+        for(Vec3 axis : axes1){
             testAxes[index++] = axis;
         }
-
-        for (Vec3 axis : axes2) {
+        for(Vec3 axis : axes2){
             testAxes[index++] = axis;
         }
-
-        for (Vec3 axis1 : axes1) {
-            for (Vec3 axis2 : axes2) {
+        for(Vec3 axis1 : axes1){
+            for(Vec3 axis2 : axes2){
                 testAxes[index++] = axis1.cross(axis2);
             }
         }
-
-        // 使用分离轴定理来测试
-        for (Vec3 axis : testAxes) {
-            if (!overlapOnAxis(obb1, obb2, axis)) {
+        for(Vec3 axis : testAxes){
+            if(!overlapOnAxis(obb1, obb2, axis, relativeVelocity)){
                 return false;
             }
         }
-
         return true;
     }
 
 
-    private static boolean overlapOnAxis(OBB obb1, OBB obb2, Vec3 axis) {
+    private static boolean overlapOnAxis(OBB obb1, OBB obb2, Vec3 axis, Vec3 relativeVelocity){
         double[] range1 = getProjectionRange(obb1, axis);
         double[] range2 = getProjectionRange(obb2, axis);
+
+        double velocityProjection = relativeVelocity.dot(axis);
+        if(velocityProjection < 0){
+            range1[0] += velocityProjection;
+        }else{
+            range1[1] += velocityProjection;
+        }
 
         return range1[0] <= range2[1] && range1[1] >= range2[0];
     }
 
-    private static double[] getProjectionRange(OBB obb, Vec3 axis) {
+    private static double[] getProjectionRange(OBB obb, Vec3 axis){
         double min = obb.vertices[0].dot(axis);
         double max = min;
 
-        for (int i = 1; i < obb.vertices.length; i++) {
+        for(int i = 1; i < obb.vertices.length; i++){
             double projection = obb.vertices[i].dot(axis);
-            if (projection < min) {
+            if(projection < min){
                 min = projection;
             }
-            if (projection > max) {
+            if(projection > max){
                 max = projection;
             }
         }

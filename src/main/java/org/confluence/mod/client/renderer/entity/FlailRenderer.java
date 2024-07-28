@@ -3,6 +3,7 @@ package org.confluence.mod.client.renderer.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -37,14 +38,19 @@ public class FlailRenderer extends AbstractHookRenderer<FlailEntity> {
 
     @Override
     public void render(FlailEntity entity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight){
-        if(entity.getOwner() == null) return;
-        poseStack.pushPose();
-        Vec3 pos = calculatePos(entity, entity.getOwner());
-        poseStack.translate(pos.x, pos.y, pos.z);
-//        super.render(entity, entityYaw, partialTick, poseStack, multiBufferSource, packedLight);
-        renderHook(entity, poseStack, multiBufferSource, packedLight);
-        entity.frameCount++;
-        poseStack.popPose();
+        Entity owner = entity.getOwner();
+        if(owner == null) return;
+        entity.setYRot(-Mth.rotLerp(partialTick, owner.yRotO, owner.getYRot()));
+        if(entity.getPhase() == FlailEntity.PHASE_SPIN){
+            poseStack.pushPose();
+            Vec3 pos = calculatePos(entity, owner);
+            poseStack.translate(pos.x, pos.y, pos.z);
+            renderHook(entity, poseStack, multiBufferSource, packedLight);
+            entity.frameCount++;
+            poseStack.popPose();
+        }else {
+            model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        }
         // TODO: 链条
     }
 
@@ -54,7 +60,6 @@ public class FlailRenderer extends AbstractHookRenderer<FlailEntity> {
         double offsetY = semiMinorAxis / 2.0;
         float angle = (float) (2 * Math.PI * flail.frameCount / 25);
         float ownerYRot = owner.getYRot();
-        flail.setYRot(-ownerYRot);
         float radians = (float) Math.toRadians(ownerYRot);
         double xPos = semiMajorAxis * Mth.cos(angle) * Mth.sin(radians) + 0.25 * Mth.sin(radians);
         double yPos = offsetY * Mth.sin(angle) + 1;

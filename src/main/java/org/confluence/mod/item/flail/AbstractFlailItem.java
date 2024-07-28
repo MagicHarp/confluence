@@ -4,12 +4,15 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.FlailEntity;
+import org.confluence.mod.mixinauxiliary.IPlayer;
 import org.jetbrains.annotations.NotNull;
 
 public class AbstractFlailItem extends Item {
@@ -17,6 +20,7 @@ public class AbstractFlailItem extends Item {
     public final ParticleOptions particle;
     public final MobEffect effect;
     public final double chance;
+
     public AbstractFlailItem(float damage, ParticleOptions particle, MobEffect effect, double chance){
         super(new Properties().stacksTo(1));
         this.damage = damage;
@@ -31,32 +35,42 @@ public class AbstractFlailItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand){
+    @NotNull
+    public InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, Player pPlayer, @NotNull InteractionHand pUsedHand){
         pPlayer.startUsingItem(pUsedHand);
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
-//
-//        if(true){
-//            entity = new FlailEntity(ModEntities.FLAIL.get(), pLevel, pPlayer);
-//            float radians = (float) Math.toRadians(pPlayer.getYRot());
-//            entity.setPos(pPlayer.position().add(-0.6 * Mth.cos(radians), 0, -0.6 * Mth.sin(radians)));
-//            pLevel.addFreshEntity(entity);
-//        }
+        IPlayer fp = (IPlayer) pPlayer;
+        FlailEntity flail = fp.confluence$flailEntity();
+        if(flail == null){
+            flail = new FlailEntity(pPlayer.level(), pPlayer, pUsedHand, this); // TODO: 应该传ItemStack
+            pPlayer.level().addFreshEntity(flail);
+            fp.confluence$flailEntity(flail);
+        }else if(flail.getPhase() != FlailEntity.PHASE_FORCE_RETRACT){
+            flail.setPhase(FlailEntity.PHASE_STAY);
+        }
         return InteractionResultHolder.success(itemstack);
-//        return super.use(pLevel, pPlayer, pUsedHand);
     }
 
     @Override
-    public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack){
-        return super.canContinueUsing(oldStack, newStack);
+    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged){
+//        Confluence.LOGGER.info("releaseUsing {}",pLivingEntity);
+        super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
+        if(!(pLivingEntity instanceof IPlayer player))return;
+        FlailEntity flail = player.confluence$flailEntity();
+        if(flail == null) return;
+        int phase = flail.getPhase();
+        Player owner = (Player) player;
+        if(phase == FlailEntity.PHASE_SPIN){
+            flail.setPhase(FlailEntity.PHASE_THROWN);
+            flail.setPos(flail.position().add(0, 1, 0));
+        }else{
+            flail.setPhase(FlailEntity.PHASE_FORCE_RETRACT);
+        }
     }
 
     @Override
-    public boolean useOnRelease(ItemStack pStack){
-//        Confluence.LOGGER.info("release");
-//        if(entity != null){
-//            entity.discard();
-//        }
-//        entity = null;
+    public boolean useOnRelease(@NotNull ItemStack pStack){
+
         return super.useOnRelease(pStack);
 
     }
