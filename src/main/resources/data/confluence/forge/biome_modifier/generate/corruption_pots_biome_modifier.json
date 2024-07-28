@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "confluence:the_corruption"
+  ],
+  "features": "confluence:corruption_pots",
+  "step": "vegetal_decoration"
+}

@@ -150,8 +150,11 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
             BlockPos below = pPos.below();
             BlockState blockBelow = pLevel.getBlockState(below);
-            if (blockBelow.is(Blocks.STONE)|| blockBelow.is(Blocks.DIRT)|| blockBelow.is(ModBlocks.HARDENED_SAND_BLOCK.get())
-                || blockBelow.is(ModBlocks.RED_HARDENED_SAND_BLOCK.get())) {
+            if (blockBelow.is(Blocks.STONE)|| blockBelow.is(Blocks.DIRT)||
+                blockBelow.is(ModBlocks.EBONY_STONE.get())|| blockBelow.is(Blocks.SANDSTONE)||
+                blockBelow.is(Blocks.MOSS_BLOCK)|| blockBelow.is(ModBlocks.EBONY_STONE.get())||
+                blockBelow.is(ModBlocks.ANOTHER_CRIMSON_STONE.get())|| blockBelow.is(Blocks.DIRT)||
+                blockBelow.is(ModBlocks.HARDENED_SAND_BLOCK.get()) || blockBelow.is(ModBlocks.RED_HARDENED_SAND_BLOCK.get())) {
                 return true;
             }
             return false;
