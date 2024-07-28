@@ -26,7 +26,7 @@ public class MagmaSkullModel extends HumanoidModel<LivingEntity> {
         MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 24).addBox(-4.0F, -28.0F, -4.375F, 8.0F, 6.0F, 2.0F,  CubeDeformation.NONE), PartPose.offset(0.0F, 24.0F, 0.0F));
         head.addOrReplaceChild("magma", CubeListBuilder.create().texOffs(0, 24).addBox(-4.0F, -28.0F, -4.375F, 8.0F, 6.0F, 2.0F, CubeDeformation.NONE), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 32, 32);
