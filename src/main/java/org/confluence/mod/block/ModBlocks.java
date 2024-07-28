@@ -182,6 +182,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", BranchesBlock::new);
     public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", BranchesBlock::new);
     public static final RegistryObject<Block> ANOTHER_AMETHYST_BRANCHES = registerWithItem("another_amethyst_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> ASH_BRANCHES = registerWithItem("ash_branches", BranchesBlock::new);
     // 血肉眼球块
     public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
     public static final RegistryObject<Block> PUPIL_BLOCKS = registerWithItem("pupil_blocks", CustomModelBlock::new);

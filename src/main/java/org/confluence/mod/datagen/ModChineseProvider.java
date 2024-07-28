@@ -1302,6 +1302,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(DIAMOND_BRANCHES.get(), "钻石枝杈");
         add(SAPPHIRE_BRANCHES.get(), "蓝玉石枝杈");
         add(ANOTHER_AMETHYST_BRANCHES.get(), "紫晶石枝杈");
+        add(ASH_BRANCHES.get(), "白蜡枝杈");
         add(CRACKED_BLUE_BRICK.get(), "碎裂蓝色地牢砖");
         add(CRACKED_GREEN_BRICK.get(), "碎裂绿色地牢砖");
         add(CRACKED_PINK_BRICK.get(), "碎裂粉色地牢砖");
