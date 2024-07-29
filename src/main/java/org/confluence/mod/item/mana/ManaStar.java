@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.misc.ModSounds;
 import org.jetbrains.annotations.NotNull;
 
 public class ManaStar extends Item {
@@ -20,7 +21,7 @@ public class ManaStar extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        level.playSound(player, player.getOnPos().above(), SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 1, 1);
+        level.playSound(player, player.getOnPos().above(), ModSounds.MANA_STAR_USE.get(), SoundSource.PLAYERS, 1, 1);
 
         ItemStack itemStack = player.getItemInHand(hand);
         if (player instanceof ServerPlayer serverPlayer) {

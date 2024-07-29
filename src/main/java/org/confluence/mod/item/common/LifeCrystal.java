@@ -1,5 +1,6 @@
 package org.confluence.mod.item.common;
 
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.misc.ModSounds;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -31,7 +33,7 @@ public class LifeCrystal extends Item {
                 itemStack.shrink(1);
                 applyModifier(player, playerAbility);
                 player.heal(4.0F);
-                // todo sound
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.LIFE_CRYSTAL_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         });
         return InteractionResultHolder.success(itemStack);

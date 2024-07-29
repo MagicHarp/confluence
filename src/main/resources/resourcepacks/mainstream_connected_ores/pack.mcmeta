@@ -1,0 +1,11 @@
+{
+    "pack": {
+        "description": {
+            "text": "Uses Terraria style connected ore texture"
+        },
+        "pack_format": 15
+    },
+    "fusion": {
+            "overrides_folder": "fusion"
+        }
+}

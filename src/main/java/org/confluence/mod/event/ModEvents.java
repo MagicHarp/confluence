@@ -132,8 +132,20 @@ public final class ModEvents {
                     consumer.accept(pack);
                 }
             });
+
+            event.addRepositorySource(consumer -> {
+                Pack pack = Pack.readMetaAndCreate(
+                    "confluence:mainstream_connected_ores", Component.literal("Mainstream Connected Ores"), false,
+                    id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
+                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                );
+                if (pack != null) {
+                    consumer.accept(pack);
+                }
+            });
         }
     }
+
 
     @SubscribeEvent
     public static void register(RegisterEvent event) {

@@ -121,6 +121,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             HALLOW_GRASS_BLOCK.get(),
             MUSHROOM_GRASS_BLOCK.get()
         );
+        tag(BlockTags.SAND).add(
+            ANOTHER_CRIMSON_SAND.get(),
+            EBONY_SAND.get(),
+            PEARL_SAND.get()
+        );
         tag((BlockTags.ICE)).add(
             RED_ICE.get(),
             RED_PACKED_ICE.get(),
