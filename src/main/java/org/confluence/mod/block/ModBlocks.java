@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -175,14 +176,14 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SWORD_IN_STONE = registerWithItem("sword_in_stone", SwordInStoneBlock::new);
     // 宝石树
     public static final RegistryObject<Block> STONY_LOGS = registerWithItem("stony_logs", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BLACK).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> EMERALD_BRANCHES = registerWithItem("emerald_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> ANOTHER_AMETHYST_BRANCHES = registerWithItem("another_amethyst_branches", BranchesBlock::new);
-    public static final RegistryObject<Block> ASH_BRANCHES = registerWithItem("ash_branches", BranchesBlock::new);
+    public static final RegistryObject<Block> RUBY_BRANCHES = registerWithItem("ruby_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> AMBER_BRANCHES = registerWithItem("amber_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> TOPAZ_BRANCHES = registerWithItem("topaz_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> EMERALD_BRANCHES = registerWithItem("emerald_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> DIAMOND_BRANCHES = registerWithItem("diamond_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> SAPPHIRE_BRANCHES = registerWithItem("sapphire_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> ANOTHER_AMETHYST_BRANCHES = registerWithItem("another_amethyst_branches", () -> new BranchesBlock(ModBlocks.STONY_LOGS.get()));
+    public static final RegistryObject<Block> ASH_BRANCHES = registerWithItem("ash_branches", () -> new BranchesBlock(ModBlocks.ASH_LOG_BLOCKS.LOG.get()));
     // 血肉眼球块
     public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
     public static final RegistryObject<Block> PUPIL_BLOCKS = registerWithItem("pupil_blocks", CustomModelBlock::new);

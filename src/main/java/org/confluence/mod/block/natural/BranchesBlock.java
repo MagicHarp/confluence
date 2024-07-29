@@ -9,7 +9,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -18,17 +17,15 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.EnumMap;
 
 public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemModel {
-    private static final Block ground = ModBlocks.STONY_LOGS.get();
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
@@ -46,10 +43,13 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
         PROPERTY_BY_DIRECTION.put(Direction.DOWN, DOWN);
     }
 
-    public BranchesBlock() {
+    private final Block ground;
+
+    public BranchesBlock(Block GroundBlocks) {
         super(0.3125f, BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY).randomTicks());
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(UP, false).setValue(DOWN, false));
+            .setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(UP, false).setValue(DOWN, false));
+        ground = GroundBlocks;
     }
 
     @Override
