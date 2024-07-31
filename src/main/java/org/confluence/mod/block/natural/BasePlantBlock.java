@@ -21,7 +21,7 @@ public class BasePlantBlock extends BushBlock implements CustomModel, CustomItem
     private final Set<Block> survive;
 
     public BasePlantBlock(Set<Block> survive){
-        super(BlockBehaviour.Properties.copy(Blocks.DANDELION));
+        super(BlockBehaviour.Properties.copy(Blocks.DANDELION).replaceable());
         this.survive = survive;
     }
     public BasePlantBlock(Set<Block> survive,Properties prop){
