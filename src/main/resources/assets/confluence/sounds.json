@@ -74,6 +74,11 @@
             "confluence:mana_star_use"
         ]
     },
+    "coins": {
+        "sounds": [
+            "confluence:coins"
+        ]
+    },
     "sparkle_shoot": {
         "sounds": [
             "confluence:sparkle_shoot"

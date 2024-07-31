@@ -75,7 +75,7 @@ public final class ModBlocks {
     public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM);
     // ash
     public static final LogBlocks ASH_LOG_BLOCKS = new LogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
-    public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", CustomModelBlock::new);
+    public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", AshBlock::new);
     public static final RegistryObject<Block> ASH_GRASS_BLOCK = registerWithItem("ash_grass_block", AshGrassBlock::new);
     // mushroom
     public static final RegistryObject<MushroomGrassBlock> MUSHROOM_GRASS_BLOCK = registerWithItem("mushroom_grass_block", MushroomGrassBlock::new);

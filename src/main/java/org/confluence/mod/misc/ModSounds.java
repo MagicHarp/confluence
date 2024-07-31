@@ -26,6 +26,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> FART_SOUND = register("fart_sound");
     public static final RegistryObject<SoundEvent> LIFE_CRYSTAL_USE = register("life_crystal_use");
     public static final RegistryObject<SoundEvent> MANA_STAR_USE = register("mana_star_use");
+    public static final RegistryObject<SoundEvent> COINS = register("coins");
     public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
 
     private static RegistryObject<SoundEvent> register(String id) {
