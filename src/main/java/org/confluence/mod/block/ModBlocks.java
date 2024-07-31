@@ -203,7 +203,15 @@ public final class ModBlocks {
     public static final RegistryObject<DeathChestBlock> DEATH_CHEST_BLOCK = registerWithItem("death_chest_block", DeathChestBlock::new);
     public static final RegistryObject<BlockEntityType<DeathChestBlock.Entity>> DEATH_CHEST_BLOCK_ENTITY = BLOCK_ENTITIES.register("death_chest_block_entity", () -> BlockEntityType.Builder.of(DeathChestBlock.Entity::new, DEATH_CHEST_BLOCK.get()).build(null));
     //TODO:半成品硬币堆 可以无视
-    public static final RegistryObject<CoinPileBlock> COIN_STACK_BLOCK = registerWithItem("coin_stack_block", CoinPileBlock::new);
+    public static final RegistryObject<Block> COPPER_COIN_STACK_BLOCK = registerWithItem("copper_coin_stack_block", CoinPileBlock::new);
+    public static final RegistryObject<Block> SILVER_COIN_STACK_BLOCK = registerWithItem("silver_coin_stack_block", CoinPileBlock::new);
+    public static final RegistryObject<Block> GOLD_COIN_STACK_BLOCK = registerWithItem("gold_coin_stack_block", CoinPileBlock::new);
+    public static final RegistryObject<Block> PLATINUM_COIN_STACK_BLOCK = registerWithItem("platinum_coin_stack_block", CoinPileBlock::new);
+    public static final RegistryObject<Block> CORRUPT_SAND_LAYER_BLOCK = registerWithItem("corrupt_sand_layer_block", SandLayerBlock::new);
+    public static final RegistryObject<Block> HALLOW_SAND_LAYER_BLOCK = registerWithItem("hallow_sand_layer_block", SandLayerBlock::new);
+    public static final RegistryObject<Block> ANOTHER_SAND_LAYER_BLOCK = registerWithItem("another_sand_layer_block", SandLayerBlock::new);
+    public static final RegistryObject<Block> SAND_LAYER_BLOCK = registerWithItem("sand_layer_block", SandLayerBlock::new);
+    public static final RegistryObject<Block> RED_SAND_LAYER_BLOCK = registerWithItem("red_sand_layer_block", SandLayerBlock::new);
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

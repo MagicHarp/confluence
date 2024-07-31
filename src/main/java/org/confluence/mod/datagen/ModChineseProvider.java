@@ -1197,6 +1197,8 @@ public class ModChineseProvider extends LanguageProvider {
 
         add(DESERT_FOSSIL.get(), "沙漠化石");
         add(HARDENED_SAND_BLOCK.get(), "硬化沙块");
+        add(SAND_LAYER_BLOCK.get(),"沙片");
+        add(RED_SAND_LAYER_BLOCK.get(), "红沙片");
         add(RED_HARDENED_SAND_BLOCK.get(), "硬化红沙块");
         add(SLUSH.get(), "雪泥块");
         add(EBONY_STONE.get(), "黑檀石块");
@@ -1205,17 +1207,20 @@ public class ModChineseProvider extends LanguageProvider {
         add(EBONY_SANDSTONE.get(), "黑檀砂岩");
         add(EBONY_SAND.get(), "黑檀沙块");
         add(CORRUPT_GRASS_BLOCK.get(), "腐化草方块");
+        add(CORRUPT_SAND_LAYER_BLOCK.get(), "腐化沙片");
         add(PEARL_STONE.get(), "珍珠石块");
         add(PEARL_COBBLESTONE.get(), "珍珠圆石");
         add(PEARL_HARDENED_SAND_BLOCK.get(), "硬化珍珠沙块");
         add(PEARL_SANDSTONE.get(), "珍珠砂岩");
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
+        add(HALLOW_SAND_LAYER_BLOCK.get(),"神圣沙片");
         add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
         add(ANOTHER_CRIMSON_COBBLESTONE.get(), "猩红圆石");
         add(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(), "硬化猩红沙块");
         add(ANOTHER_CRIMSON_SANDSTONE.get(), "猩红砂岩");
         add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
+        add(ANOTHER_SAND_LAYER_BLOCK.get(),"猩红沙片");
         add(RED_ICE.get(), "红冰块");
         add(RED_PACKED_ICE.get(), "红浮冰块");
         add(PINK_ICE.get(), "粉冰块");
@@ -1313,6 +1318,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(AETHERIUM_BLOCK.get(), "以太块");
         add(AETHERIUM_BRICK.get(), "以太砖");
         add(DARK_AETHERIUM_BLOCK.get(),"黯淡以太块");
+        add(COPPER_COIN_STACK_BLOCK.get(),"铜币堆");
+        add(SILVER_COIN_STACK_BLOCK.get(),"银币堆");
+        add(GOLD_COIN_STACK_BLOCK.get(),"金币堆");
+        add(PLATINUM_COIN_STACK_BLOCK.get(),"铂金币堆");
 
 
         add(Torches.RED_TORCH.item.get(), "红火把");
