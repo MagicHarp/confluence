@@ -11,7 +11,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.natural.CoinPileBlock;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.fluid.ModFluids;
@@ -35,7 +34,7 @@ import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.sword.Swords;
 import org.confluence.mod.misc.ModRarity;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundsEvent;
 
 
 @SuppressWarnings("unused")
@@ -77,7 +76,7 @@ public final class ModItems {
     public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new); // todo 粘性荧光棒
     public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", BaseItem::new); // todo 炸弹
     public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BaseItem::new); // todo 甲虫炸弹
-    public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSounds.ALPHA, 12060));
+    public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSoundsEvent.ALPHA, 12060));
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));
     public static final RegistryObject<PlayerAbilityItem> AEGIS_APPLE = ITEMS.register("aegis_apple", PlayerAbilityItem.AegisApple::new);

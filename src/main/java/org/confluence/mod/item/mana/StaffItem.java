@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundsEvent;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +46,7 @@ public class StaffItem extends Item implements IManaWeapon {
             baseBulletEntity.shootFromRotation(serverPlayer, serverPlayer.getXRot(), serverPlayer.getYRot(), 0.0F, getVelocity(itemStack, 1.5F), 1.0F);
             level.addFreshEntity(baseBulletEntity);
             player.getCooldowns().addCooldown(this, getAttackSpeed(itemStack, 20));
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.REGULAR_STAFF_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundsEvent.REGULAR_STAFF_SHOOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide);
     }

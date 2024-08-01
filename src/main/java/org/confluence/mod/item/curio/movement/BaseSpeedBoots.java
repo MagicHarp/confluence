@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundsEvent;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -64,7 +64,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
-                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSounds.SHOES_WALK.get());
+                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundsEvent.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }

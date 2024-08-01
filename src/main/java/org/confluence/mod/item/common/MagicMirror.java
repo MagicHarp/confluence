@@ -12,7 +12,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
 import org.confluence.mod.misc.ModRarity;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundsEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicMirror extends Item {
@@ -31,7 +31,7 @@ public class MagicMirror extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        player.playSound(ModSounds.TRANSMISSION.get());
+        player.playSound(ModSoundsEvent.TRANSMISSION.get());
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 

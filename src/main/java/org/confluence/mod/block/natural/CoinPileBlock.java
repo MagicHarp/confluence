@@ -18,6 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
+import org.confluence.mod.misc.ModSoundsType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -27,7 +28,7 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     private static final IntegerProperty HEAPS = IntegerProperty.create("heaps", 1, 12);
 
     public CoinPileBlock() {
-        super(Properties.of().sound(SoundType.AMETHYST));
+        super(Properties.of().sound(ModSoundsType.COIN));
         registerDefaultState(this.defaultBlockState().setValue(HEAPS, 1).setValue(ISBASE, true));
     }
 
