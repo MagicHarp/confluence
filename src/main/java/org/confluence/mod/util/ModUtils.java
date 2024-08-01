@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.item.ModItems;
 
 import java.util.Calendar;

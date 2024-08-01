@@ -1318,10 +1318,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(AETHERIUM_BLOCK.get(), "以太块");
         add(AETHERIUM_BRICK.get(), "以太砖");
         add(DARK_AETHERIUM_BLOCK.get(),"黯淡以太块");
-        add(COPPER_COIN_STACK_BLOCK.get(),"铜币堆");
-        add(SILVER_COIN_STACK_BLOCK.get(),"银币堆");
-        add(GOLD_COIN_STACK_BLOCK.get(),"金币堆");
-        add(PLATINUM_COIN_STACK_BLOCK.get(),"铂金币堆");
 
 
         add(Torches.RED_TORCH.item.get(), "红火把");

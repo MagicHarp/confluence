@@ -198,6 +198,10 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(PEARL_LOG_BLOCKS.LOG.get());
         dropSelf(PALM_LOG_BLOCKS.LOG.get());
         dropSelf(ASH_LOG_BLOCKS.LOG.get());
+        dropOther(COPPER_COIN_PILE.get(),ModItems.COPPER_COIN.get());
+        dropOther(SILVER_COIN_PILE.get(),ModItems.SILVER_COIN.get());
+        dropOther(GOLDEN_COIN_PILE.get(),ModItems.GOLDEN_COIN.get());
+        dropOther(PLATINUM_COIN_PILE.get(),ModItems.PLATINUM_COIN.get());
         dropOther(NATURES_GIFT.get(), CurioItems.NATURES_GIFT.get());
         add(JUNGLE_ROSE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
             .add(LootItem.lootTableItem(JUNGLE_ROSE.get()).when(LootItemRandomChanceCondition.randomChance(0.05f)))));

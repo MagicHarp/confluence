@@ -1,5 +1,6 @@
 package org.confluence.mod.item;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
@@ -10,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.CoinPileBlock;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.fluid.ModFluids;
@@ -51,10 +53,10 @@ public final class ModItems {
     public static final RegistryObject<CanOfWormsItem> CAN_OF_WORMS = ITEMS.register("can_of_worms", CanOfWormsItem::new);
     public static final RegistryObject<HerbBagItem> HERB_BAG = ITEMS.register("herb_bag", HerbBagItem::new);
     public static final RegistryObject<RedEnvelopeItem> RED_ENVELOPE = ITEMS.register("red_envelope", RedEnvelopeItem::new);
-    public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
-    public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
-    public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
-    public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> COPPER_COIN = ITEMS.register("copper_coin", () -> new BlockItem(ModBlocks.COPPER_COIN_PILE.get(),new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
+    public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new BlockItem(ModBlocks.SILVER_COIN_PILE.get(),new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
+    public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new BlockItem(ModBlocks.GOLDEN_COIN_PILE.get(),new Item.Properties().rarity(Rarity.RARE).fireResistant()));
+    public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new BlockItem(ModBlocks.PLATINUM_COIN_PILE.get(),new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<SuspiciousLookingEye> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", SuspiciousLookingEye::new);
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);

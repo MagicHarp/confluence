@@ -173,10 +173,6 @@ public final class ModTabs {
                 output.accept(JUNGLE_ROSE.get());
 
                 // 片
-                output.accept(COPPER_COIN_STACK_BLOCK.get());
-                output.accept(SILVER_COIN_STACK_BLOCK.get());
-                output.accept(GOLD_COIN_STACK_BLOCK.get());
-                output.accept(PLATINUM_COIN_STACK_BLOCK.get());
                 output.accept(CORRUPT_SAND_LAYER_BLOCK.get());
                 output.accept(HALLOW_SAND_LAYER_BLOCK.get());
                 output.accept(ANOTHER_SAND_LAYER_BLOCK.get());
