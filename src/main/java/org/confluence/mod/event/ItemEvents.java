@@ -16,6 +16,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -168,6 +169,15 @@ public final class ItemEvents {
             if (tag != null && event.getEntity().level().getGameTime() % (int) (1.0 / tag.getDouble("attackSpeed")) == 0) {
                 event.setDuration(event.getDuration() - 1);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemToss(ItemTossEvent event) {
+        ItemEntity entity = event.getEntity();
+        ItemStack itemStack = entity.getItem();
+        if (itemStack.is(ModTags.Items.COIN)) {
+            entity.setPickUpDelay(40);
         }
     }
 }
