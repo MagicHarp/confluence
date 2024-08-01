@@ -8,7 +8,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -26,6 +25,12 @@ import javax.annotation.Nullable;
 public class CoinPileBlock extends FallingBlock implements CustomModel, CustomItemModel {
     public static final BooleanProperty ISBASE = BooleanProperty.create("isbase");
     private static final IntegerProperty HEAPS = IntegerProperty.create("heaps", 1, 12);
+    private static final VoxelShape ONE_CUBE = Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
+    private static final VoxelShape TWO_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0);
+    private static final VoxelShape THREE_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 5.0, 13.0);
+    private static final VoxelShape FOUR_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 9.0, 13.0);
+    private static final VoxelShape FIVE_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 11.0, 13.0);
+    private static final VoxelShape SIX_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
 
     public CoinPileBlock() {
         super(Properties.of().sound(ModSoundsType.COIN));
@@ -36,17 +41,17 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         int heaps = state.getValue(HEAPS);
         if (heaps <= 1) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
+            return ONE_CUBE;
         } else if (heaps <= 3) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0);
+            return TWO_CUBES;
         } else if (heaps <= 4) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 5.0, 13.0);
+            return THREE_CUBES;
         } else if (heaps <= 5) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 9.0, 13.0);
+            return FOUR_CUBES;
         } else if (heaps <= 8) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 11.0, 13.0);
+            return FIVE_CUBES;
         } else {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
+            return SIX_CUBES;
         }
     }
 
