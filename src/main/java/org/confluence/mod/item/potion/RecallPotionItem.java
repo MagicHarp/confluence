@@ -28,7 +28,7 @@ public class RecallPotionItem extends AbstractPotionItem {
                 ServerLevel serverLevel = serverPlayer.server.getLevel(Level.OVERWORLD);
                 if (serverLevel == null) serverLevel = (ServerLevel) level;
                 LevelData data = serverLevel.getLevelData();
-                serverPlayer.teleportTo(data.getXSpawn(), data.getYSpawn(), data.getXSpawn());
+                serverPlayer.teleportTo(data.getXSpawn(), data.getYSpawn(), data.getZSpawn());
             } else {
                 serverPlayer.teleportTo(pos.getX(), pos.getY(), pos.getZ());
             }
