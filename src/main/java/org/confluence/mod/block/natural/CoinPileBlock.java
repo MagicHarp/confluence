@@ -13,10 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.extensions.IForgeBlock;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
@@ -75,7 +73,6 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
         return state;
     }
 
-
     @Override
     public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
         BlockState Below = level.getBlockState(pos.below());
@@ -83,15 +80,15 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     }
 
     @Override
-    public @NotNull BlockState updateShape(BlockState state, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor level, @NotNull BlockPos CurrentPos, @NotNull BlockPos facingPos) {
+    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor level, @NotNull BlockPos CurrentPos, @NotNull BlockPos facingPos) {
         level.scheduleTick(CurrentPos, this, this.getDelayAfterPlace());
         facingState = level.getBlockState(CurrentPos.below());
-        if (facingState.is(this)){
-            state.setValue(ISBASE, true);
-        }else {
-            state.setValue(ISBASE, false);
+        if (facingState.is(this)) {
+            state = state.setValue(ISBASE, true);
+        } else {
+            state = state.setValue(ISBASE, false);
         }
-        return super.updateShape(state, facing, facingState, level, CurrentPos, facingPos);
+        return state;
     }
 
     @Override
