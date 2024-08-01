@@ -50,8 +50,6 @@ public final class ModTabs {
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
                 output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
 
-                output.accept(ANOTHER_POLISHED_GRANITE.get());
-                output.accept(POLISHED_MARBLE.get());
 
                 output.accept(RUBY_CHAIN.get());
                 output.accept(AMBER_CHAIN.get());
@@ -137,6 +135,8 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
+                output.accept(ANOTHER_POLISHED_GRANITE.get());
+                output.accept(POLISHED_MARBLE.get());
 
                 output.accept(CLOUD_BLOCK.get());
                 output.accept(RAIN_CLOUD_BLOCK.get());
