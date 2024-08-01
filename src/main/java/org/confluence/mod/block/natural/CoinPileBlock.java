@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,7 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
 
     public CoinPileBlock() {
         super(Properties.of().sound(SoundType.AMETHYST));
-        registerDefaultState(this.defaultBlockState().setValue(HEAPS, 1).setValue(ISBASE, false));
+        registerDefaultState(this.defaultBlockState().setValue(HEAPS, 1).setValue(ISBASE, true));
     }
 
     @Override
@@ -64,11 +65,10 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
         }
 
         BlockState clickedBlockBelowState = context.getLevel().getBlockState(context.getClickedPos().below());
-        if (clickedBlockBelowState.is(this)) {
-            state = state.setValue(ISBASE, true);
-            return state;
-        } else {
+        if (isCoinPileBlock(clickedBlockBelowState)) {
             state = state.setValue(ISBASE, false);
+        } else {
+            state = state.setValue(ISBASE, true);
         }
         return state;
     }
@@ -76,23 +76,26 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     @Override
     public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
         BlockState Below = level.getBlockState(pos.below());
-        return Below.is(this) || !Below.isAir();
+        return isCoinPileBlock(Below) || !Below.isAir();
     }
 
     @Override
-    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor level, @NotNull BlockPos CurrentPos, @NotNull BlockPos facingPos) {
+    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction facing, @NotNull BlockState blockstate, @NotNull LevelAccessor level, @NotNull BlockPos CurrentPos, @NotNull BlockPos facingPos) {
         level.scheduleTick(CurrentPos, this, this.getDelayAfterPlace());
-        facingState = level.getBlockState(CurrentPos.below());
-        if (facingState.is(this)) {
-            state = state.setValue(ISBASE, true);
-        } else {
-            state = state.setValue(ISBASE, false);
-        }
+        blockstate = level.getBlockState(CurrentPos.below());
+        boolean isBaseBlock = !isCoinPileBlock(blockstate);
+        state = state.setValue(ISBASE, isBaseBlock);
         return state;
+    }
+
+    private boolean isCoinPileBlock(BlockState blockState) {
+        return blockState.is(this) || blockState.is(ModBlocks.COPPER_COIN_PILE.get()) || blockState.is(ModBlocks.SILVER_COIN_PILE.get()) ||
+            blockState.is(ModBlocks.GOLDEN_COIN_PILE.get()) || blockState.is(ModBlocks.PLATINUM_COIN_PILE.get());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HEAPS, ISBASE);
     }
+
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
@@ -37,5 +36,6 @@ public class CrackedBrickBlock extends Block {
         player.causeFoodExhaustion(0.005F);
     }
 
-    public interface IceSafe {}
+    public interface IceSafe {
+    }
 }
