@@ -173,9 +173,9 @@ public final class ModTabs {
                 output.accept(JUNGLE_ROSE.get());
 
                 // 片
-                output.accept(CORRUPT_SAND_LAYER_BLOCK.get());
-                output.accept(HALLOW_SAND_LAYER_BLOCK.get());
-                output.accept(ANOTHER_SAND_LAYER_BLOCK.get());
+                output.accept(EBONY_SAND_LAYER_BLOCK.get());
+                output.accept(PEARL_SAND_LAYER_BLOCK.get());
+                output.accept(ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get());
                 output.accept(SAND_LAYER_BLOCK.get());
                 output.accept(RED_SAND_LAYER_BLOCK.get());
 

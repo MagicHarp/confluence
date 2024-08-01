@@ -124,7 +124,7 @@ public final class ModEvents {
             IModFile modFile = modFileInfo.getFile();
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                    "confluence:terraria_art", Component.literal("Terraria Art"), false,
+                    "confluence:terraria_art", Component.translatable("resourcepack.terraria_art"), false,
                     id -> new ModResources(id, modFile, "resourcepacks/terraria_art"),
                     PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
@@ -135,9 +135,20 @@ public final class ModEvents {
 
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                    "confluence:mainstream_connected_ores", Component.literal("Mainstream Connected Ores"), false,
-                    id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
-                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                        "confluence:mainstream_connected_ores", Component.translatable("resourcepack.mainstream_connected_ores"), false,
+                        id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
+                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                );
+                if (pack != null) {
+                    consumer.accept(pack);
+                }
+            });
+
+            event.addRepositorySource(consumer -> {
+                Pack pack = Pack.readMetaAndCreate(
+                        "confluence:ter_armor", Component.translatable("resourcepack.ter_armor"), false,
+                        id -> new ModResources(id, modFile, "resourcepacks/ter_armor"),
+                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
                 if (pack != null) {
                     consumer.accept(pack);

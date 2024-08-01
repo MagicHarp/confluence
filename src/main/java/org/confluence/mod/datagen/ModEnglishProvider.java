@@ -850,6 +850,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("block.confluence.base_chest_block.unlocked_skyware", "Skyware Chest");
         add("block.confluence.base_chest_block.death_skyware", "Death Skyware Chest");
 
+        add("resourcepack.terraria_art", "Terraria Art");
+        add("resourcepack.mainstream_connected_ores", "Mainstream Connected Ores");
+        add("resourcepack.ter_armor", "Mainstream Terraria Armor Textures");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

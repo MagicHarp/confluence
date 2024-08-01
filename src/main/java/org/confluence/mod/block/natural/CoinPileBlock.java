@@ -35,14 +35,18 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         int heaps = state.getValue(HEAPS);
-        if (heaps <= 3) {
-            return Block.box(6.0, 0.0, 6.0, 10.0, 6.0, 10.0);
-        } else if (heaps <= 6) {
-            return Block.box(3.0, 0.0, 3.0, 13.0, 6.0, 13.0);
-        } else if (heaps <= 9) {
-            return Block.box(2.0, 0.0, 2.0, 14.0, 6.0, 14.0);
+        if (heaps <= 1) {
+            return Block.box(3.0, 0.0, 3.0, 13.0, 3.0, 13.0);
+        } else if (heaps <= 3) {
+            return Block.box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0);
+        } else if (heaps <= 4) {
+            return Block.box(3.0, 0.0, 3.0, 13.0, 5.0, 13.0);
+        } else if (heaps <= 5) {
+            return Block.box(3.0, 0.0, 3.0, 13.0, 9.0, 13.0);
+        } else if (heaps <= 8) {
+            return Block.box(3.0, 0.0, 3.0, 13.0, 11.0, 13.0);
         } else {
-            return Block.box(2.0, 0.0, 2.0, 14.0, 7.0, 14.0);
+            return Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
         }
     }
 

@@ -1,0 +1,11 @@
+{
+    "pack": {
+        "description": {
+            "text": "This resource pack will make the armor in ‘Minecraft’ display in an art style close to that of ‘Terraria’"
+        },
+        "pack_format": 15
+    },
+    "fusion": {
+            "overrides_folder": "fusion"
+        }
+}

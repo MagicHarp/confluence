@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "confluence:block/pearl_sandstone_bottom",
+    "side": "confluence:block/pearl_sandstone",
+    "top": "confluence:block/pearl_sandstone_top"
+  }
+}
