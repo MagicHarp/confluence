@@ -55,7 +55,7 @@ public class AbstractFlailItem extends Item {
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged){
 //        Confluence.LOGGER.info("releaseUsing {}",pLivingEntity);
         super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
-        if(!(pLivingEntity instanceof IPlayer player))return;
+        if(!(pLivingEntity instanceof IPlayer player)) return;
         FlailEntity flail = player.confluence$flailEntity();
         if(flail == null) return;
         int phase = flail.getPhase();
@@ -63,6 +63,8 @@ public class AbstractFlailItem extends Item {
         if(phase == FlailEntity.PHASE_SPIN){
             flail.setPhase(FlailEntity.PHASE_THROWN);
             flail.setPos(flail.position().add(0, 1, 0));
+            Vec3 direction = Vec3.directionFromRotation(owner.getXRot() - 3, owner.getYRot() - 3).scale(3); // TODO: 发射速度，近战速度加成
+            flail.setDeltaMovement(direction.add(owner.getDeltaMovement()));
         }else{
             flail.setPhase(FlailEntity.PHASE_FORCE_RETRACT);
         }

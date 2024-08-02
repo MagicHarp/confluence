@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.flail.AbstractFlailItem;
+import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.confluence.mod.mixinauxiliary.IPlayer;
 import org.confluence.mod.util.IOriented;
 import org.confluence.mod.util.OBB;
@@ -72,7 +73,8 @@ public class FlailEntity extends ChainingEntity implements IOriented {
             return;
         }
         super.tick();
-        move(MoverType.SELF,getDeltaMovement());
+        Vec3 motion = getDeltaMovement();
+        move(MoverType.SELF, motion);
         switch(phase){
             case PHASE_SPIN -> {
                 float offset = getEntityData().get(DATA_OFFSET);
@@ -81,19 +83,18 @@ public class FlailEntity extends ChainingEntity implements IOriented {
             }
             case PHASE_THROWN -> {
                 // TODO: 反弹
-                if(direction == null){
-                    direction = Vec3.directionFromRotation(owner.getXRot() - 3, owner.getYRot() - 3).scale(3); // TODO: 发射速度，近战速度加成
-                }
-                setDeltaMovement(direction.add(owner.getDeltaMovement()));
+//                if(direction == null){
+//                    direction = Vec3.directionFromRotation(owner.getXRot() - 3, owner.getYRot() - 3).scale(3); // TODO: 发射速度，近战速度加成
+//                }
+//                setDeltaMovement(direction.add(owner.getDeltaMovement()));
                 noPhysics = false;
-                if(position().distanceTo(owner.position()) > 16){  // TODO: 抛出时间固定，时间决定速度和距离
-                    setPhase(PHASE_RETRACT);
-                }
+
             }
             case PHASE_STAY -> {
                 noPhysics = false;
                 setNoGravity(false);
-                setDeltaMovement(0, -0.2, 0);
+//                Vec3 newMotion = new Vec3(motion.x * 0.7, Math.min(motion.y, 0), motion.z * 0.7);
+//                this.setDeltaMovement(newMotion);
             }
             case PHASE_RETRACT, PHASE_FORCE_RETRACT -> {
                 noPhysics = true;
@@ -101,11 +102,20 @@ public class FlailEntity extends ChainingEntity implements IOriented {
                 setDeltaMovement(owner.position().add(0,1,0).subtract(position()).normalize().scale(3)); // TODO: 时间决定速度
             }
         }
+        if(position().distanceTo(owner.position()) > 16){  // TODO: 抛出时间固定，时间决定速度和距离
+            setPhase(PHASE_RETRACT);
+        }
         refreshDimensions();
         if(!level().isClientSide()){
             OBB obb = getOrientedBoundingBox();
             AABB border = obb.getBorder();
-            for(LivingEntity living : level().getEntitiesOfClass(LivingEntity.class, border, EntitySelector.NO_SPECTATORS.and(e -> obb.inflate(0.1).collide(e.getBoundingBox(),getDeltaMovement(),e.getDeltaMovement())))){
+            for(LivingEntity living : level().getEntitiesOfClass(LivingEntity.class, border, EntitySelector.NO_SPECTATORS
+                .and(e -> {
+                    //if(phase == PHASE_SPIN){
+                        return obb.inflate(10).collide(e.getBoundingBox(), motion, e.getDeltaMovement());
+                    //}
+                    //return true;
+                }))){
                 if(living == owner){
                     if(phase == PHASE_RETRACT || phase == PHASE_FORCE_RETRACT){
                         if(owner instanceof IPlayer fp){
@@ -115,7 +125,7 @@ public class FlailEntity extends ChainingEntity implements IOriented {
                     }
                     return;
                 }
-                living.hurt(damageSources().mobAttack(owner instanceof LivingEntity lo ? lo : null), item.damage);
+                living.hurt(damageSources().mobAttack(owner instanceof LivingEntity lo ? lo : null), item.damage); // TODO: 不同阶段伤害不同
 //                living.knockback();
                 // TODO: 击退
             }
@@ -123,8 +133,27 @@ public class FlailEntity extends ChainingEntity implements IOriented {
     }
 
     @Override
-    public void move(MoverType pType, Vec3 pPos){
-        super.move(pType, pPos);
+    public void move(MoverType pType, Vec3 motion){
+        int phase = getPhase();
+        if(phase == PHASE_THROWN){
+            Vec3 collide = ((EntityAccessor) this).callCollide(motion);
+            if(collide.x !=motion.x){
+                motion=new Vec3(-motion.x/2, motion.y, motion.z);
+            }
+            if(collide.y !=motion.y){
+                motion=new Vec3(motion.x, -motion.y/2, motion.z);
+            }
+            if(collide.z !=motion.z){
+                motion=new Vec3(motion.x, motion.y, -motion.z/2);
+            }
+        }else if(phase == PHASE_STAY){
+            motion = new Vec3(motion.x * 0.7, Math.min(0, motion.y - 0.4), motion.z * 0.7);
+        }
+//        if(!isNoGravity()){
+//            motion = motion.add(0, -0.4, 0);
+//        }
+        setDeltaMovement(motion);
+        super.move(pType, motion);
     }
 
     public int getPhase(){

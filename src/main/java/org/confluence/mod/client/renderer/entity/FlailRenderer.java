@@ -1,6 +1,7 @@
 package org.confluence.mod.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -40,8 +41,8 @@ public class FlailRenderer extends AbstractHookRenderer<FlailEntity> {
     public void render(FlailEntity entity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight){
         Entity owner = entity.getOwner();
         if(owner == null) return;
-        entity.setYRot(-Mth.rotLerp(partialTick, owner.yRotO, owner.getYRot()));
         if(entity.getPhase() == FlailEntity.PHASE_SPIN){
+            entity.setYRot(-Mth.rotLerp(partialTick, owner.yRotO, owner.getYRot()));
             poseStack.pushPose();
             Vec3 pos = calculatePos(entity, owner);
             poseStack.translate(pos.x, pos.y, pos.z);
@@ -49,7 +50,14 @@ public class FlailRenderer extends AbstractHookRenderer<FlailEntity> {
             entity.frameCount++;
             poseStack.popPose();
         }else {
+            Vec3 pt = entity.position().vectorTo(owner.position());
+            float rot = (float) Mth.wrapDegrees(Math.toDegrees(Mth.atan2(pt.x, pt.z)));
+            poseStack.mulPose(Axis.YP.rotationDegrees(rot - 90.0F));
             model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+//            entity.setYRot(rot);
+//            Confluence.LOGGER.info("{}", rot);
+//            renderHook(entity, poseStack, multiBufferSource, packedLight);
+
         }
         // TODO: 链条
     }

@@ -278,7 +278,7 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
     public static boolean isColliding(OBB obb1, OBB obb2, Vec3 motion1, Vec3 motion2){
         Vec3[] axes1 = obb1.getAxes();
         Vec3[] axes2 = obb2.getAxes();
-        Vec3 relativeVelocity = motion1.subtract(motion2);
+//        Vec3 relativeVelocity = motion1.subtract(motion2);
         Vec3[] testAxes = new Vec3[15];
         int index = 0;
         for(Vec3 axis : axes1){
@@ -293,7 +293,7 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
             }
         }
         for(Vec3 axis : testAxes){
-            if(!overlapOnAxis(obb1, obb2, axis, relativeVelocity)){
+            if(!overlapOnAxis(obb1, motion1, obb2, motion2, axis)){
                 return false;
             }
         }
@@ -301,32 +301,64 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
     }
 
 
-    private static boolean overlapOnAxis(OBB obb1, OBB obb2, Vec3 axis, Vec3 relativeVelocity){
-        double[] range1 = getProjectionRange(obb1, axis);
-        double[] range2 = getProjectionRange(obb2, axis);
+//    private static boolean overlapOnAxis(OBB obb1, OBB obb2, Vec3 axis, Vec3 relativeVelocity){
+//        double[] range1 = getProjectionRange(obb1, axis);
+//        double[] range2 = getProjectionRange(obb2, axis);
+//
+//        double velocityProjection = relativeVelocity.dot(axis);
+//        if(velocityProjection < 0){
+//            range1[0] += velocityProjection;
+//        }else{
+//            range1[1] += velocityProjection;
+//        }
+//
+//        return range1[0] <= range2[1] && range1[1] >= range2[0];
+//    }
+//
+//    private static double[] getProjectionRange(OBB obb, Vec3 axis){
+//        double min = obb.vertices[0].dot(axis);
+//        double max = min;
+//
+//        for(int i = 1; i < obb.vertices.length; i++){
+//            double projection = obb.vertices[i].dot(axis);
+//            if(projection < min){
+//                min = projection;
+//            }
+//            if(projection > max){
+//                max = projection;
+//            }
+//        }
+//
+//        return new double[]{min, max};
+//    }
 
-        double velocityProjection = relativeVelocity.dot(axis);
-        if(velocityProjection < 0){
-            range1[0] += velocityProjection;
-        }else{
-            range1[1] += velocityProjection;
-        }
+    private static boolean overlapOnAxis(OBB obb1, Vec3 velocity1, OBB obb2, Vec3 velocity2, Vec3 axis) {
+        double[] range1 = getProjectionRange(obb1, velocity1, axis);
+        double[] range2 = getProjectionRange(obb2, velocity2, axis);
 
         return range1[0] <= range2[1] && range1[1] >= range2[0];
     }
 
-    private static double[] getProjectionRange(OBB obb, Vec3 axis){
+    private static double[] getProjectionRange(OBB obb, Vec3 velocity, Vec3 axis) {
         double min = obb.vertices[0].dot(axis);
         double max = min;
 
-        for(int i = 1; i < obb.vertices.length; i++){
+        for (int i = 1; i < obb.vertices.length; i++) {
             double projection = obb.vertices[i].dot(axis);
-            if(projection < min){
+            if (projection < min) {
                 min = projection;
             }
-            if(projection > max){
+            if (projection > max) {
                 max = projection;
             }
+        }
+
+        // 考虑速度对投影范围的影响
+        double velocityProjection = velocity.dot(axis);
+        if (velocityProjection < 0) {
+            min += velocityProjection;
+        } else {
+            max += velocityProjection;
         }
 
         return new double[]{min, max};
