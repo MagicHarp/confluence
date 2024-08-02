@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "confluence:block/pearl_planks",
+    "side": "confluence:block/pearl_planks",
+    "top": "confluence:block/pearl_planks"
+  }
+}

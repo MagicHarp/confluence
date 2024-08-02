@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "confluence:block/another_copper_plate_side",
+    "top": "confluence:block/another_copper_plate_top"
+  }
+}

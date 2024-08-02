@@ -1,0 +1,10 @@
+{
+  "values": [
+    "confluence:deepslate_mithril_ore",
+    "confluence:raw_mithril_block",
+    "confluence:mithril_block",
+    "confluence:deepslate_orichalcum_ore",
+    "confluence:raw_orichalcum_block",
+    "confluence:orichalcum_block"
+  ]
+}
