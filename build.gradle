@@ -31,9 +31,9 @@ minecraft {
                     source sourceSets.main
                 }
             }
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            property 'geckolib.disable_examples', 'true'
+                property 'mixin.env.remapRefMap', 'true'
+                property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+                property 'geckolib.disable_examples', 'true'
         }
         client {}
         server {
@@ -119,11 +119,11 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
-        jarJar.ranged(it, "[0.3.6,)")
-    }
+        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+        compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
+        implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
+            jarJar.ranged(it, "[0.3.6,)")
+        }
 }
 
 mixin {
