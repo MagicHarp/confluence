@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "confluence:item/developer_icon"
+    "layer0": "confluence:item/mechanical_icon"
   }
 }
