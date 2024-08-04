@@ -1478,6 +1478,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.HOOK.get(), "爪钩");
         add(Materials.GEL.get(), "凝胶");
         add(Materials.PINK_GEL.get(), "粉凝胶");
+        add(Materials.STURDY_FOSSIL.get(), "坚固化石");
 
 
         add(Swords.COPPER_SHORT_SWORD.get(), "铜短剑");
