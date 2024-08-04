@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-04T08:15:55.3060702	Block States: confluence
+// 1.20.1	2024-08-04T14:49:14.5428863	Block States: confluence
 43710825054d13056b02ad854d6f28d18cc7a004 assets/confluence/blockstates/amber_ore.json
 515b0e96feeebe996b7259a46a3051a1921429bc assets/confluence/blockstates/another_amethyst_ore.json
 f1c0ca5aff033b5e2bb882d52cff0ee1160ec2a8 assets/confluence/blockstates/another_copper_bricks.json
@@ -383,7 +383,6 @@ ad1bba4a8dedac4d5473be19d7d1603baa85438f assets/confluence/models/block/deepslat
 68e9e7ee4a88fbffaa60a7c0bccbb59a800bf71d assets/confluence/models/block/deepslate_topaz_ore.json
 93b22c1cddcb2841b31e724468d47ac649ceb4fa assets/confluence/models/block/deepslate_tungsten_ore.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/defaced_box.json
-f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/desert_fossil.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/dungeon_box.json
 ee24b8e6ce1c1c3ed9c29f0b8e6250b8c2f050b3 assets/confluence/models/block/ebony_block.json
 a87512f60512bd9c0f5e81d40ae2b7ecfb03f8db assets/confluence/models/block/ebony_button.json

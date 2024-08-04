@@ -1,0 +1,26 @@
+{
+    "variants": {
+        "": [
+            {
+                "model": "confluence:block/desert_fossil_0",
+                "weight": 1
+            },
+            {
+                "model": "confluence:block/desert_fossil_1",
+                "weight": 1
+            },
+            {
+                "model": "confluence:block/desert_fossil_2",
+                "weight": 1
+            },
+            {
+                "model": "confluence:block/desert_fossil_3",
+                "weight": 1
+            },
+            {
+                "model": "confluence:block/desert_fossil_4",
+                "weight": 1
+            }
+        ]
+    }
+}
