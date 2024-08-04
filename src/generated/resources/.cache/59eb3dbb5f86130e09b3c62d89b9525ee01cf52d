@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-02T20:25:36.7278983	Loot Tables
+// 1.20.1	2024-08-04T08:15:55.311055	Loot Tables
 a36a63634ccafcc0a139b6534fb154d67560166c data/confluence/loot_tables/blocks/adamantite_block.json
 0a1e24dcd7300d1e1120e34989a29c5b4ad7d24f data/confluence/loot_tables/blocks/aetherium_brick.json
 5d568530f55b125124d5e31e354af4304be2b8d3 data/confluence/loot_tables/blocks/aether_torch.json
@@ -8,8 +8,13 @@ a36a63634ccafcc0a139b6534fb154d67560166c data/confluence/loot_tables/blocks/adam
 c56af0642bfde41e26bb3d499799250559b3cb45 data/confluence/loot_tables/blocks/amber_ore.json
 a0b00e61b6627aff966b79bc536750377639b428 data/confluence/loot_tables/blocks/amethyst_chain.json
 ea27b84e5f654c81c7be436593f2bad8772faf85 data/confluence/loot_tables/blocks/ancient_copper_bricks.json
+123c6cae7a3566b748aafc2752d4a9bd7709704f data/confluence/loot_tables/blocks/ancient_gold_bricks.json
 fd84608e4cd93c1f7abf5fa86e39b35a9994fd9b data/confluence/loot_tables/blocks/ancient_iron_bricks.json
+8092c6bf697688a9694b211052e4cc7a4e19667d data/confluence/loot_tables/blocks/ancient_lead_bricks.json
+13b33c8b7566064ef24723b9be77ff2ae75c59a9 data/confluence/loot_tables/blocks/ancient_platinum_bricks.json
+49d02db7971d1b2bf70e328812606a4f6278a3d2 data/confluence/loot_tables/blocks/ancient_silver_bricks.json
 82374f5047c510c76cf982ca1b681b71572a04f8 data/confluence/loot_tables/blocks/ancient_tin_bricks.json
+301494da7192d675b417847116e5b90c5c2383e3 data/confluence/loot_tables/blocks/ancient_tungsten_bricks.json
 2700d9c62c8f810566e1bf7c61205d391207c436 data/confluence/loot_tables/blocks/another_amethyst_branches.json
 deef428d2b656c7c3a04422d84a1d7bdf24736da data/confluence/loot_tables/blocks/another_amethyst_ore.json
 1506d190eec45df9efb2d9d3adb30d6f5bdddf0a data/confluence/loot_tables/blocks/another_copper_bricks.json

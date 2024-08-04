@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-02T20:25:36.7331978	Item Models: confluence
+// 1.20.1	2024-08-04T08:15:55.3130465	Item Models: confluence
 3e633ae55ab3cc24189583e9a2471b1318786802 assets/confluence/models/item/accessories_icon.json
 7e6a690676293668239cf87b854d49b20314b931 assets/confluence/models/item/adamantite_block.json
 ef0224a04488fc5f1341a62578984b0dbaf8b150 assets/confluence/models/item/adamantite_ingot.json
@@ -20,8 +20,13 @@ d8683fc7b63963d5d8f94ebd5220cea3d7f99f35 assets/confluence/models/item/ambrosia.
 a448b4b37f7a86ebd6d9cf45565f22b2dd540fd7 assets/confluence/models/item/amethyst_staff.json
 e6dc09a3e855158f386f885036bf7dac275d74d5 assets/confluence/models/item/ancient_chisel.json
 abd0d084ae52cc062748a578185b4c86f3887526 assets/confluence/models/item/ancient_copper_bricks.json
+0b003acf1e4cea36b2016a33d57984bd3145eaa7 assets/confluence/models/item/ancient_gold_bricks.json
 5b551c480be159f2d5deff8ed19a5adfc3ff47c4 assets/confluence/models/item/ancient_iron_bricks.json
+8915ca3320bc17593c733ce66a26caa03ad75f48 assets/confluence/models/item/ancient_lead_bricks.json
+c6f9d7a021de54fa43bb7f6f7645203a874cc95b assets/confluence/models/item/ancient_platinum_bricks.json
+7b74787ba1b291c84f6991281b199054373b7e5a assets/confluence/models/item/ancient_silver_bricks.json
 e334447dbf9dec3da5d568c41a3ea74515f9beba assets/confluence/models/item/ancient_tin_bricks.json
+3ac7d5da6af5aef398dae37393f3070390853ac4 assets/confluence/models/item/ancient_tungsten_bricks.json
 d76a461311de7f700602469b83525ee97f3cb138 assets/confluence/models/item/angelfish.json
 fedc96853b5fc38b6f3cf373b80d7716be99718a assets/confluence/models/item/angler_earring.json
 4c26b1ff69ce1fb5b76334a8ce685675f27fe044 assets/confluence/models/item/angler_tackle_bag.json

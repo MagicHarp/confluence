@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-02T20:25:36.7214781	Block States: confluence
+// 1.20.1	2024-08-04T08:15:55.3060702	Block States: confluence
 43710825054d13056b02ad854d6f28d18cc7a004 assets/confluence/blockstates/amber_ore.json
 515b0e96feeebe996b7259a46a3051a1921429bc assets/confluence/blockstates/another_amethyst_ore.json
 f1c0ca5aff033b5e2bb882d52cff0ee1160ec2a8 assets/confluence/blockstates/another_copper_bricks.json
@@ -251,8 +251,13 @@ f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/adamanti
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/aetherium_brick.json
 f136d0ce605f5cb938d8503d3a42fed3c29c7bd8 assets/confluence/models/block/amber_ore.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_copper_bricks.json
+f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_gold_bricks.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_iron_bricks.json
+f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_lead_bricks.json
+f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_platinum_bricks.json
+f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_silver_bricks.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_tin_bricks.json
+f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/ancient_tungsten_bricks.json
 04244e8fcc1dae0c63d937b7a1a98d85d048f7a1 assets/confluence/models/block/another_amethyst_ore.json
 90e0996a05dd6154d51d4e7684c132b73d8a5d4c assets/confluence/models/block/another_copper_bricks.json
 80a66f0aa8ff240932cb24b91df0259a9b762bcd assets/confluence/models/block/another_copper_plate.json

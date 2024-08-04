@@ -187,6 +187,7 @@
     "confluence:worm_scarf",
     "confluence:brain_of_confusion",
     "confluence:hive_pack",
-    "confluence:gravity_globe"
+    "confluence:gravity_globe",
+    "confluence:data_driven_test"
   ]
 }
