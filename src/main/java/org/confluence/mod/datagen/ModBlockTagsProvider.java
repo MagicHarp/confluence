@@ -83,7 +83,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.BONE_CHAIN.get(),
             ModBlocks.EBONY_COBBLESTONE.get(),
             ModBlocks.ANOTHER_CRIMSON_COBBLESTONE.get(),
-            ModBlocks.PEARL_COBBLESTONE.get()
+            ModBlocks.PEARL_COBBLESTONE.get(),
+            ModBlocks.HARDENED_SAND_BLOCK.get(),
+            ModBlocks.RED_HARDENED_SAND_BLOCK.get(),
+            ModBlocks.EBONY_HARDENED_SAND_BLOCK.get(),
+            ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(),
+            ModBlocks.PEARL_HARDENED_SAND_BLOCK.get()
         );
         tag(BlockTags.DIRT).add(
             CORRUPT_GRASS_BLOCK.get(),

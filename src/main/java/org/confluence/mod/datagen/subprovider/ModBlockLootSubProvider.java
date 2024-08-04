@@ -213,6 +213,12 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(BIG_SAPPHIRE_BLOCK.get());
         dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
 
+        dropSelf(HARDENED_SAND_BLOCK.get());
+        dropSelf(RED_HARDENED_SAND_BLOCK.get());
+        dropSelf(EBONY_HARDENED_SAND_BLOCK.get());
+        dropSelf(PEARL_HARDENED_SAND_BLOCK.get());
+        dropSelf(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get());
+
         dropOther(LIFE_CRYSTAL_BLOCK.get(), Materials.LIFE_CRYSTAL.get());
         dropOther(MUSHROOM_GRASS_BLOCK.get(), Items.MUD);
 
