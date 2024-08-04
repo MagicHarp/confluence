@@ -236,19 +236,6 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS_SEED.get());
                 output.accept(ModItems.DEATHWEED_SEED.get());
                 output.accept(ModItems.FLAMEFLOWERS_SEED.get());
-                // 功能性方块
-                output.accept(ECHO_BLOCK.get());
-                for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
-                output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
-                output.accept(SWITCH.get());
-                output.accept(SIGNAL_ADAPTER.get());
-                output.accept(DART_TRAP.get());
-                output.accept(TIMERS_BLOCK_1_1.get());
-                output.accept(TIMERS_BLOCK_3_1.get());
-                output.accept(TIMERS_BLOCK_5_1.get());
-                output.accept(TIMERS_BLOCK_1_2.get());
-                output.accept(TIMERS_BLOCK_1_4.get());
-                output.accept(GEYSER_BLOCK.get());
 
                 output.accept(ModItems.GOLDEN_KEY.get());
                 output.accept(ModItems.SHADOW_KEY.get());
@@ -344,11 +331,31 @@ public final class ModTabs {
             .build());
     // 饰品
     public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("curios",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ACCESSORIES_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.curios"))
-            .displayItems((parameters, output) -> {
-                output.accept(ModItems.DEMON_HEART.get());
-                for (CurioItems curioItems : CurioItems.values()) output.accept(curioItems.get());
-            })
-            .build());
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ACCESSORIES_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.curios"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(ModItems.DEMON_HEART.get());
+                        for (CurioItems curioItems : CurioItems.values()) output.accept(curioItems.get());
+                    })
+                    .build());
+    // 器械
+    public static final RegistryObject<CreativeModeTab> MECHANICAL = TABS.register("mechanical",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MECHANICAL_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.mechanical"))
+                    .displayItems((parameters, output) -> {
+                        // 功能性方块
+                        output.accept(ECHO_BLOCK.get());
+                        for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
+                        output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
+                        output.accept(SWITCH.get());
+                        output.accept(SIGNAL_ADAPTER.get());
+                        output.accept(DART_TRAP.get());
+                        output.accept(TIMERS_BLOCK_1_1.get());
+                        output.accept(TIMERS_BLOCK_3_1.get());
+                        output.accept(TIMERS_BLOCK_5_1.get());
+                        output.accept(TIMERS_BLOCK_1_2.get());
+                        output.accept(TIMERS_BLOCK_1_4.get());
+                        output.accept(GEYSER_BLOCK.get());
+                    })
+                    .build());
 }

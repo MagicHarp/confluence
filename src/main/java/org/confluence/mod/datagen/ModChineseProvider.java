@@ -56,6 +56,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
         add("creativetab.confluence.curios", "汇流来世 | 饰品");
+        add("creativetab.confluence.mechanical", "汇流来世 | 器械");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 

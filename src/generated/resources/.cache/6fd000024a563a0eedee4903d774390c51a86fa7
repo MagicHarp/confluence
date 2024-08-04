@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-04T14:49:14.5428863	Block States: confluence
+// 1.20.1	2024-08-04T22:32:19.0929774	Block States: confluence
 43710825054d13056b02ad854d6f28d18cc7a004 assets/confluence/blockstates/amber_ore.json
 515b0e96feeebe996b7259a46a3051a1921429bc assets/confluence/blockstates/another_amethyst_ore.json
 f1c0ca5aff033b5e2bb882d52cff0ee1160ec2a8 assets/confluence/blockstates/another_copper_bricks.json
@@ -225,6 +225,7 @@ dfe9b78f7f9ee3e21ea9c33c987ffbf27c962203 assets/confluence/blockstates/shadow_wo
 1c4a88b6848e704af42668e3cdb55933b7de3ed1 assets/confluence/blockstates/silver_bricks.json
 9d00aa84c0c1bd0983ce57d570d24751bdcd35ad assets/confluence/blockstates/silver_ore.json
 081100d985f1edccff91f69bfcc19c950736c7f5 assets/confluence/blockstates/sky_box.json
+6138df1ff2598877ad0f135f6246c00af320559c assets/confluence/blockstates/slush.json
 01b7c373bcba7b6fbbc905d57b433d449cb412c5 assets/confluence/blockstates/snow_bricks.json
 5d26b67c4941d57dd144a104bf3ada4dbf04103f assets/confluence/blockstates/snow_cloud_block.json
 8f3bc2c26949dd30324408445bbc7c21c807bd05 assets/confluence/blockstates/spooky_button.json
@@ -663,7 +664,7 @@ f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/shroomit
 b22b1faa37a85aa3bdb2f1a91a67e215d209c778 assets/confluence/models/block/silver_bricks.json
 47019d16228e3506e9b3dc86e8ec575ac77e69c8 assets/confluence/models/block/silver_ore.json
 00e065307c5cf61ff9d25b1a5f2d4f3ec0f47708 assets/confluence/models/block/sky_box.json
-f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/slush.json
+fa5a0403bfe9870e6c4eea6b84ef792b27a373ac assets/confluence/models/block/slush.json
 21889964c07950379e994cb5824b2b929d4d092b assets/confluence/models/block/snow_bricks.json
 dc8f747010d9ed9e072f7ac0e62beb3e2230d6cc assets/confluence/models/block/snow_cloud_block.json
 f8081fce5f2a7f148a48bdf910533ec578278b02 assets/confluence/models/block/space_box.json

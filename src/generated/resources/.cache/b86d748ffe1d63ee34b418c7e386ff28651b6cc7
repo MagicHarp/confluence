@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-04T14:49:14.5594399	Item Models: confluence
+// 1.20.1	2024-08-04T23:00:24.2203506	Item Models: confluence
 3e633ae55ab3cc24189583e9a2471b1318786802 assets/confluence/models/item/accessories_icon.json
 7e6a690676293668239cf87b854d49b20314b931 assets/confluence/models/item/adamantite_block.json
 ef0224a04488fc5f1341a62578984b0dbaf8b150 assets/confluence/models/item/adamantite_ingot.json
@@ -295,10 +295,9 @@ d9103fb18733aacaadf74c3a1b080d61dc5dbe33 assets/confluence/models/item/demonic_h
 2fdaee14f621323840c70307d65fe0776e4671e4 assets/confluence/models/item/demon_heart.json
 5ed049ad3887b74d205187b5fbde2e183de106a6 assets/confluence/models/item/depth_meter.json
 bca09f73a598efbc7e15bd12f9b14d8aba7db459 assets/confluence/models/item/derpfish.json
-814767628060e6f7f96c4b42c314bf01af1423b8 assets/confluence/models/item/desert_fossil.json
+9c774874b0de11e70d6d1f6f1dd3ac500b65216c assets/confluence/models/item/desert_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/confluence/models/item/desert_slime_spawn_egg.json
 b9f1e3c39548a169c12f200d4ab37363fa26462e assets/confluence/models/item/destroyer_emblem.json
-607f08dc3b6203b940cda73363bb3693b9eb2dac assets/confluence/models/item/developer_icon.json
 7810f995057b7b0e4f831544920a7e0f51c8fa7d assets/confluence/models/item/diamond_hook.json
 d76d7432cb2a6adc65e249762fae034e41c81a10 assets/confluence/models/item/diamond_staff.json
 5f2f6c8c17203d1597eedca5b0b20459c9c1746b assets/confluence/models/item/dirtfish.json
@@ -349,7 +348,6 @@ e6d48fd9cda3cb64d2e60ef87e53c411375eb4d7 assets/confluence/models/item/enchanted
 53a9f24c3bffe04f2b9c5d2d2f9db786687143e3 assets/confluence/models/item/enchanted_sword.json
 9e9aaa60dc7b244ae646aba99d93d89c5823f25f assets/confluence/models/item/endless_musket_pouch.json
 a1ff12245293e90ba1299e428349cbe37d33464f assets/confluence/models/item/endurance_potion.json
-9742fe84144259807bb80b4eafe51994e230c329 assets/confluence/models/item/enemy_icon.json
 9669315a81a554dd7be226c95a5a1d4c9ed692c6 assets/confluence/models/item/escargot.json
 8fc42a1c8cf341765417597593aa6e5261afe4c4 assets/confluence/models/item/evaporative_cloud_block.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/confluence/models/item/evil_slime_spawn_egg.json
@@ -408,7 +406,6 @@ ae49d453775025d904a89c5b2a9dced30e191807 assets/confluence/models/item/flower_bo
 4c5b403d5188a47dd607618061af8a8d43a4d7d9 assets/confluence/models/item/flower_of_fire.json
 4c5b403d5188a47dd607618061af8a8d43a4d7d9 assets/confluence/models/item/flower_of_frost.json
 a787ec0c14da88df23ae7483a54ea0f6163ebf9d assets/confluence/models/item/flurry_boots.json
-de25b1e9e0e82b121f3e6d844c4b91262ee1e5ae assets/confluence/models/item/food_icon.json
 78abb15a07003a1882ab1e883f3914d33c80199e assets/confluence/models/item/forest_pots.json
 aacff786e3b22fbbf81ac51eef7b4f50919eecaa assets/confluence/models/item/freeze_box.json
 164a5594fb4d005b0588d2ff619537a6d03aeb2a assets/confluence/models/item/fried_egg.json
@@ -609,8 +606,8 @@ b850e568b28aab4fdfec87f026505fbb2cf2d9e5 assets/confluence/models/item/marble_ca
 b30b8c8559464ef9e36a321d865b97dca0e73dd7 assets/confluence/models/item/master_bait.json
 795b81a7893377543eb69710ae6479aac9886cff assets/confluence/models/item/master_ninja_gear.json
 4c5b403d5188a47dd607618061af8a8d43a4d7d9 assets/confluence/models/item/master_test_item.json
-c48ac4ead31c49ba519284ac024c643adf8d2dd2 assets/confluence/models/item/material_icon.json
 92fca82faf514c47436437950283c71d4611204e assets/confluence/models/item/mechanical_glove.json
+1c625031164f00003145eea8bf5ac9bebd944e92 assets/confluence/models/item/mechanical_icon.json
 0026997ecc73f4082ea4669c1c88bc005ab5c47a assets/confluence/models/item/medicated_bandage.json
 4407b493d7506801de0d635b5177cf7900f0cfec assets/confluence/models/item/megaphone.json
 485dfb7f720ed5350798c3d5e960382767d39015 assets/confluence/models/item/melee_icon.json
