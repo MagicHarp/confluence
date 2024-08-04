@@ -854,6 +854,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("resourcepack.mainstream_connected_ores", "Mainstream Connected Ores");
         add("resourcepack.ter_armor", "Mainstream Terraria Armor Textures");
 
+        add("event.confluence.blood_moon", "The Blood Moon is rising...");
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

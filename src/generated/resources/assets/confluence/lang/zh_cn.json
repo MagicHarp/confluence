@@ -586,6 +586,7 @@
   "entity.confluence.red_slime": "红色史莱姆",
   "entity.confluence.tropic_slime": "热带史莱姆",
   "entity.confluence.yellow_slime": "黄色史莱姆",
+  "event.confluence.blood_moon": "血月正在升起...",
   "fluid_type.confluence.honey": "蜂蜜",
   "fluid_type.confluence.shimmer": "微光",
   "info.confluence.bait": "鱼饵力: %s%%",

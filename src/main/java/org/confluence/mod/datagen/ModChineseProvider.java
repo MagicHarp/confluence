@@ -981,6 +981,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("resourcepack.terraria_art", "泰拉艺术");
         add("resourcepack.mainstream_connected_ores", "主流：连接矿石材质");
         add("resourcepack.ter_armor", "主流：泰拉盔甲样式材质");
+
+        add("event.confluence.blood_moon", "血月正在升起...");
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");
