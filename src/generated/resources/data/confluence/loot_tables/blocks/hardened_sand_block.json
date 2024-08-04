@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:platinum_coin"
+          "name": "confluence:hardened_sand_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/platinum_coin_pile"
+  "random_sequence": "confluence:blocks/hardened_sand_block"
 }

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:golden_coin"
+          "name": "confluence:pearl_hardened_sand_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/golden_coin_pile"
+  "random_sequence": "confluence:blocks/pearl_hardened_sand_block"
 }

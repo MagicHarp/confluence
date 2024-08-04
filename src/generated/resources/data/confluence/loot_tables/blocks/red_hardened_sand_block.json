@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:silver_coin"
+          "name": "confluence:red_hardened_sand_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/silver_coin_pile"
+  "random_sequence": "confluence:blocks/red_hardened_sand_block"
 }

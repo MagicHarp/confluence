@@ -179,6 +179,11 @@
     "confluence:bone_chain",
     "confluence:ebony_cobblestone",
     "confluence:another_crimson_cobblestone",
-    "confluence:pearl_cobblestone"
+    "confluence:pearl_cobblestone",
+    "confluence:hardened_sand_block",
+    "confluence:red_hardened_sand_block",
+    "confluence:ebony_hardened_sand_block",
+    "confluence:another_crimson_hardened_sand_block",
+    "confluence:pearl_hardened_sand_block"
   ]
 }

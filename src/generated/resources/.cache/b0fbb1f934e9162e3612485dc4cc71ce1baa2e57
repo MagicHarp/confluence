@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-02T20:25:36.7204667	Tags for minecraft:block mod id confluence
+// 1.20.1	2024-08-04T09:24:38.2405824	Tags for minecraft:block mod id confluence
 baa744a826a1587f8d3b38aa11aafe870e44ca82 data/confluence/tags/blocks/flower_boots_available.json
 7575fac83c5e745adf618080803f7b3892bec062 data/confluence/tags/blocks/needs_4_level.json
 c41879719cf3a4e63df7412a7e04b6dcd008bc92 data/confluence/tags/blocks/needs_5_level.json
@@ -11,7 +11,7 @@ d0d9c813b4531beb2700f3206e6ebf08fa28e88d data/confluence/tags/blocks/needs_non_v
 775128009cbefae17e19e8772eb9064d87e1ff04 data/minecraft/tags/blocks/ice.json
 ea43eff9adda5c5ae364c238b9dae84e3280baf9 data/minecraft/tags/blocks/logs.json
 0068cc19068cbbf7ddd1cd0b2d3648b9a5ae84fc data/minecraft/tags/blocks/mineable/axe.json
-8f8c3d171b8de656141cb62b9485a5879b89b972 data/minecraft/tags/blocks/mineable/pickaxe.json
+b6dddc3438143fd3ae5f0be7f001cc30a4ad1dfe data/minecraft/tags/blocks/mineable/pickaxe.json
 d750387db36844b3c794a4833068c5a1b5ebbfe5 data/minecraft/tags/blocks/needs_diamond_tool.json
 94d22bb1cf88a1381eaaf58bd7dfaa60697bc49d data/minecraft/tags/blocks/planks.json
 c67bfb47adf2508a10589bfa44f17f9e9423b4a0 data/minecraft/tags/blocks/sand.json
