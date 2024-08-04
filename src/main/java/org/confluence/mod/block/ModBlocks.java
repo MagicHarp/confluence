@@ -41,7 +41,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> RED_HARDENED_SAND_BLOCK = registerWithItem("red_hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
     //雪泥块
     public static final RegistryObject<Block> DESERT_FOSSIL = registerWithItem("desert_fossil", DesertFossilBlock::new);
-    public static final RegistryObject<Block> SLUSH = registerWithItem("slush", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
+    public static final RegistryObject<Block> SLUSH = registerWithItem("slush", (SlushBlock::new));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));

@@ -75,6 +75,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.HELLSTONE_BLOCK.get());
         dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
         dropSelf(DESERT_FOSSIL.get());
+        dropSelf(SLUSH.get());
 
         add(Ores.SANCTIFICATION_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
         add(Ores.CORRUPTION_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
