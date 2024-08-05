@@ -8,6 +8,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.entity.hook.AbstractHookEntity;
+import org.confluence.mod.item.hook.AntiGravityHookItem;
+import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.HookThrowingPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -25,19 +27,21 @@ public final class HookThrowingHandler {
                 list.forEach(tag1 -> {
                     int id = ((CompoundTag) tag1).getInt("id");
                     if (localPlayer.level().getEntity(id) instanceof AbstractHookEntity hookEntity && hookEntity.getHookState() == AbstractHookEntity.HookState.HOOKED) {
-                        if (localPlayer.input.jumping) {
+                        if (localPlayer.input.jumping && localPlayer.input.shiftKeyDown) {
                             NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.pop(id));
                             return;
                         }
-                        if (localPlayer.isCrouching()) return;
-                        Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
-                        if (subtract.lengthSqr() < 1.0) {
-                            Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
-                            localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
-                            PlayerJumpHandler.flushState(false);
-                        } else {
-                            Vec3 motion = subtract.normalize().scale(hookEntity.getPullVelocity());
-                            localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().scale(0.96).add(motion));
+                        if (itemStack.getItem() != Hooks.ANTI_GRAVITY_HOOK.get()){
+                            if (localPlayer.isCrouching()) return;
+                            Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
+                            if (subtract.lengthSqr() < 1.0) {
+                                Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
+                                localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);
+                                PlayerJumpHandler.flushState(false);
+                            } else {
+                                Vec3 motion = subtract.normalize().scale(hookEntity.getPullVelocity());
+                                localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().scale(0.96).add(motion));
+                            }
                         }
                     }
                 });

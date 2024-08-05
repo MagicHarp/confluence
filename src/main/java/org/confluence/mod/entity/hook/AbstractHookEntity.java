@@ -29,7 +29,7 @@ import java.util.function.IntFunction;
 
 public abstract class AbstractHookEntity extends ChainingEntity {
     private static final EntityDataAccessor<Integer> DATA_HOOK_STATE = SynchedEntityData.defineId(AbstractHookEntity.class, EntityDataSerializers.INT);
-    private final float hookRangeSqr;
+    public final float hookRangeSqr;
     private final AbstractHookItem.HookType hookType;
 
     public AbstractHookEntity(EntityType<? extends AbstractHookEntity> entityType, Level pLevel) {

@@ -3,7 +3,6 @@ package org.confluence.mod.item.hook;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.hook.AbstractHookEntity;
 import org.confluence.mod.entity.hook.AntiGravityHookEntity;
 import org.confluence.mod.misc.ModRarity;
 
@@ -28,7 +27,7 @@ public class AntiGravityHookItem extends AbstractHookItem {
     }
 
     @Override
-    public AbstractHookEntity getHook(ItemStack itemStack, AbstractHookItem item, Player player, Level level) {
+    public AntiGravityHookEntity getHook(ItemStack itemStack, AbstractHookItem item, Player player, Level level) {
         return new AntiGravityHookEntity(item, player, level);
     }
 

@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 public enum Hooks implements EnumRegister<AbstractHookItem> {
     GRAPPLING_HOOK("grappling_hook", GrapplingHookItem::new),
     AMETHYST_HOOK("amethyst_hook", AmethystHookItem::new),
+    ANTI_GRAVITY_HOOK("anti_gravity_hook", AntiGravityHookItem::new),
     TOPAZ_HOOK("topaz_hook", TopazHookItem::new),
     SAPPHIRE_HOOK("sapphire_hook", SapphireHookItem::new),
     EMERALD_HOOK("emerald_hook", EmeraldHookItem::new),
@@ -32,7 +33,6 @@ public enum Hooks implements EnumRegister<AbstractHookItem> {
     ILLUMINANT_HOOK("illuminant_hook", () -> new MimicHookItem(MimicHookEntity.Variant.ILLUMINANT)),
     WORM_HOOK("worm_hook", () -> new MimicHookItem(MimicHookEntity.Variant.WORM)),
     TENDON_HOOK("tendon_hook", () -> new MimicHookItem(MimicHookEntity.Variant.TENDON)),
-    // todo ANTI_GRAVITY_HOOK("anti_gravity_hook", AntiGravityHookItem::new),
     SPOOKY_HOOK("spooky_hook", SpookyHookItem::new),
     CHRISTMAS_HOOK("christmas_hook", ChristmasHookItem::new),
     LUNAR_HOOK("lunar_hook", LunarHookItem::new),

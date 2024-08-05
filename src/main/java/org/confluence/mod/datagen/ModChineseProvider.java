@@ -1664,6 +1664,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hooks.SAPPHIRE_HOOK.get(), "蓝玉钩");
         add(Hooks.DIAMOND_HOOK.get(), "钻石钩");
         add(Hooks.AMETHYST_HOOK.get(), "紫晶钩");
+        add(Hooks.ANTI_GRAVITY_HOOK.get(), "反重力钩");
         add(Hooks.WEB_SLINGER.get(), "蛛丝吊索");
         add(Hooks.SKELETRON_HAND.get(), "骷髅王之手");
         add(Hooks.SLIME_HOOK.get(), "史莱姆钩");

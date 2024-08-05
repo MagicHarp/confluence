@@ -1,5 +1,7 @@
 package org.confluence.mod.network.c2s;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -41,7 +43,8 @@ public record HookThrowingPacketC2S(boolean throwing, int id) {
                 CuriosUtils.getSlot(player, "hook", 0).ifPresent(itemStack -> {
                     if (itemStack.getItem() instanceof AbstractHookItem item && item.canHook(level, itemStack)) {
                         AbstractHookEntity hook = item.getHook(itemStack, item, player, level);
-                        hook.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, item.getHookVelocity(), 0.5F);
+                        LocalPlayer localPlayer = Minecraft.getInstance().player;
+                        hook.shootFromRotation(player, localPlayer.getXRot(), localPlayer.getYRot(), 0.0F, item.getHookVelocity(), 0.5F);
                         level.addFreshEntity(hook);
                         CompoundTag tag = new CompoundTag();
                         tag.putInt("id", hook.getId());

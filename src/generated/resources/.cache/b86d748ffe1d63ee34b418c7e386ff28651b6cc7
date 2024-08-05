@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-05T14:14:27.254451	Item Models: confluence
+// 1.20.1	2024-08-05T15:44:14.2968387	Item Models: confluence
 3e633ae55ab3cc24189583e9a2471b1318786802 assets/confluence/models/item/accessories_icon.json
 7e6a690676293668239cf87b854d49b20314b931 assets/confluence/models/item/adamantite_block.json
 ef0224a04488fc5f1341a62578984b0dbaf8b150 assets/confluence/models/item/adamantite_ingot.json
@@ -71,6 +71,7 @@ c852bc29e5e04c94cf7dfac942b18bebd9f9016e assets/confluence/models/item/another_p
 0c324138fce54d17036e05598d933c82ca17e5e8 assets/confluence/models/item/another_salmon.json
 fa060cb5e13cd5a99b2b141c31bb1b70964ba440 assets/confluence/models/item/another_smooth_obsidian.json
 ffdcb867ec8ce8f425eecfd3266b60189ca255ba assets/confluence/models/item/another_stone_bricks.json
+4c5b403d5188a47dd607618061af8a8d43a4d7d9 assets/confluence/models/item/anti_gravity_hook.json
 1ad2f52b26c98394fad17eae0ce078b1db1118c3 assets/confluence/models/item/antlion_mandible.json
 e21870e9d1e7b7183c6c718620bbb6cfed37e200 assets/confluence/models/item/apple_juice.json
 2aa29d759a0634a612f510e9698d34e65e797a77 assets/confluence/models/item/apprentice_bait.json
