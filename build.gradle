@@ -118,6 +118,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:jade-324717:5390389")
 
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
+    runtimeOnly fg.deobf("curse.maven:spark-361579:4738952")
 
         annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
         compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
