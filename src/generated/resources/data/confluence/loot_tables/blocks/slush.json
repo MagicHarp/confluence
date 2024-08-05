@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:desert_fossil"
+          "name": "confluence:slush"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/desert_fossil"
+  "random_sequence": "confluence:blocks/slush"
 }

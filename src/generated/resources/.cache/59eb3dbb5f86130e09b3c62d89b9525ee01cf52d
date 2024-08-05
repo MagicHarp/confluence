@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-04T09:24:38.243573	Loot Tables
+// 1.20.1	2024-08-05T13:52:40.1060907	Loot Tables
 a36a63634ccafcc0a139b6534fb154d67560166c data/confluence/loot_tables/blocks/adamantite_block.json
 0a1e24dcd7300d1e1120e34989a29c5b4ad7d24f data/confluence/loot_tables/blocks/aetherium_brick.json
 5d568530f55b125124d5e31e354af4304be2b8d3 data/confluence/loot_tables/blocks/aether_torch.json
@@ -131,7 +131,7 @@ bdd1f1c026955f17ab014d14f9935bcaf3e66efc data/confluence/loot_tables/blocks/deep
 88003d1efd59c6784f8eb0d96b22c96f839d5eba data/confluence/loot_tables/blocks/defaced_box.json
 187a96745fedc0c8c116e6652f91c5bf307dea17 data/confluence/loot_tables/blocks/demon_torch.json
 c2a94a19cc86b2de331a7bd3c5af7b62325bf42e data/confluence/loot_tables/blocks/demon_wall_torch.json
-7f01a3b39108a1a0aa603a6ba31a48c0c523ddf3 data/confluence/loot_tables/blocks/desert_fossil.json
+aae1c190fff038964330b2531f96013b8d1b9236 data/confluence/loot_tables/blocks/desert_fossil.json
 701cba0ecfef7767c53f1943e4238788f0193f05 data/confluence/loot_tables/blocks/desert_torch.json
 d6cd9428f75c98c62f69a42818f2d627e7b522fa data/confluence/loot_tables/blocks/desert_wall_torch.json
 5e241b24b967e645423c075673d90a6940c42797 data/confluence/loot_tables/blocks/diamond_branches.json
@@ -342,6 +342,7 @@ c9e83a79875903654ac4e36930e37fe368086c03 data/confluence/loot_tables/blocks/silv
 fd5f9628a3643008423112642609c89709d3221e data/confluence/loot_tables/blocks/silver_bricks.json
 1115560e5d985a0b1e9b4f867927a1a71c9358fb data/confluence/loot_tables/blocks/silver_ore.json
 152667840c31219fff05110019ee2d6ad188dcf9 data/confluence/loot_tables/blocks/sky_box.json
+d60e1adfe921def5eed82203060f48c7ed10763a data/confluence/loot_tables/blocks/slush.json
 5d0bc41a660cc4b78fc3db50e6f92b7946d1cb28 data/confluence/loot_tables/blocks/snow_bricks.json
 95a7bd3d0392f7442a0cbefa31c191b49010c228 data/confluence/loot_tables/blocks/space_box.json
 e32161abcc4554592f297f0f69a46f747a5dad98 data/confluence/loot_tables/blocks/spooky_button.json
