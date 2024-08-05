@@ -1,16 +1,11 @@
 package org.confluence.mod.block.natural;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 
-public class SlushBlock extends FallingBlock  {
-    public SlushBlock(int color) {
-        super(Properties.copy(Blocks.GRAVEL)
-            .strength(1.0F, 1.0F)
-            .sound(SoundType.GRAVEL)
-        );
+public class SlushBlock extends SandBlock  {
+    public SlushBlock(int color,Properties properties) {
+        super(color,properties.strength(0.7F).sound(SoundType.GRAVEL));
     }
 }
