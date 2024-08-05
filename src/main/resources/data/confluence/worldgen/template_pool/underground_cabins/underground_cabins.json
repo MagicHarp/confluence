@@ -7,11 +7,8 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "confluence:underground_cabins/underground_cabins",
-        "processors": "confluence:natural"
+        "processors": "confluence:underground_cabins"
       }
     }
-  ],
-  "values": [
-
   ]
 }

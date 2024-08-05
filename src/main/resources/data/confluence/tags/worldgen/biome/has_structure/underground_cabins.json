@@ -6,7 +6,6 @@
     "minecraft:flower_forest",
     "minecraft:forest",
     "minecraft:mangrove_swamp",
-    "minecraft:mushroom_fields",
     "minecraft:old_growth_birch_forest",
     "minecraft:old_growth_spruce_taiga",
     "minecraft:river",
@@ -22,6 +21,20 @@
     "minecraft:windswept_gravelly_hills",
     "minecraft:windswept_hills",
     "minecraft:windswept_savanna",
-    "minecraft:old_growth_pine_taiga"
+    "minecraft:old_growth_pine_taiga",
+    "minecraft:frozen_peaks",
+    "minecraft:frozen_river",
+    "minecraft:grove",
+    "minecraft:ice_spikes",
+    "minecraft:jagged_peaks",
+    "minecraft:snowy_beach",
+    "minecraft:snowy_plains",
+    "minecraft:snowy_slopes",
+    "minecraft:snowy_taiga",
+    "minecraft:jungle",
+    "minecraft:sparse_jungle",
+    "minecraft:bamboo_jungle",
+    "minecraft:lush_caves",
+    "minecraft:dripstone_caves"
   ]
 }
