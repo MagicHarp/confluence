@@ -16,6 +16,8 @@ import org.confluence.mod.util.CuriosUtils;
 
 @OnlyIn(Dist.CLIENT)
 public final class HookThrowingHandler {
+    private static final Vec3 LEFT_VEC = new Vec3(0.0, -0.008, 0.0);
+    private static final Vec3 RIGHT_VEC = new Vec3(0.0, 0.008, 0.0);
     public static void handle(LocalPlayer localPlayer) {
         boolean isDown = false;
         while (KeyBindings.HOOK.get().consumeClick()) isDown = true;
@@ -31,9 +33,25 @@ public final class HookThrowingHandler {
                             NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.pop(id));
                             return;
                         }
-                        if (itemStack.getItem() != Hooks.ANTI_GRAVITY_HOOK.get()){
+
+                        Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
+                        if (itemStack.getItem() == Hooks.ANTI_GRAVITY_HOOK.get()) {
+                            Vec3 deltaMovement = localPlayer.getDeltaMovement();
+                            if (localPlayer.input.up) {
+                                localPlayer.setDeltaMovement(deltaMovement.add(Vec3.directionFromRotation(localPlayer.getXRot(), localPlayer.getYRot()).scale(0.05)));
+                            }
+                            if (localPlayer.input.leftImpulse != 0.0) {
+                                localPlayer.setDeltaMovement(deltaMovement.add(subtract.cross(localPlayer.input.left ? LEFT_VEC : RIGHT_VEC)));
+
+                            }
+                            if (localPlayer.input.jumping) {
+                                localPlayer.setDeltaMovement(deltaMovement.add(0, 0.2, 0));
+                            }
+                            if (localPlayer.input.shiftKeyDown) {
+                                localPlayer.setDeltaMovement(deltaMovement.add(0, -0.3, 0));
+                            }
+                        } else {
                             if (localPlayer.isCrouching()) return;
-                            Vec3 subtract = hookEntity.position().subtract(localPlayer.position());
                             if (subtract.lengthSqr() < 1.0) {
                                 Vec3 motion = localPlayer.getDeltaMovement().scale(0.05);
                                 localPlayer.setDeltaMovement(motion.x, 0.0, motion.z);

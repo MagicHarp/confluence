@@ -57,32 +57,6 @@ public class AntiGravityHookEntity extends AbstractHookEntity {
             Vec3 speed = owner.getDeltaMovement();
             owner.setDeltaMovement(speed.x, 0.0, speed.z);
             owner.fallDistance = 0.0F;
-            if (owner instanceof LocalPlayer localPlayer) {
-                Vec3 deltaMovement = owner.getDeltaMovement();
-                Vec3 subtract = position().subtract(localPlayer.position());
-                // 增加WASD移动幅度
-                if (localPlayer.input.up) {
-                    //Hook.LOGGER.info("up" + deltaMovement);
-                    localPlayer.setDeltaMovement(deltaMovement.add(Vec3.directionFromRotation(owner.getXRot(), owner.getYRot()).scale(0.05)));
-                }
-                if (localPlayer.input.left) {
-                    //Hook.LOGGER.info("left" + deltaMovement);
-                    localPlayer.setDeltaMovement(deltaMovement.add(subtract.cross(new Vec3(0, -0.008, 0))));
-                }
-                if (localPlayer.input.right) {
-                    //Hook.LOGGER.info("right" + deltaMovement);
-                    localPlayer.setDeltaMovement(deltaMovement.add(subtract.cross(new Vec3(0, 0.008, 0))));
-                }
-                if (localPlayer.input.jumping) {
-                    //Hook.LOGGER.info("jumping" + deltaMovement);
-                    owner.setDeltaMovement(deltaMovement.add(0, 0.2, 0));
-                }
-                if (localPlayer.input.shiftKeyDown) {
-                    //Hook.LOGGER.info("jumping" + deltaMovement);
-                    owner.setDeltaMovement(deltaMovement.add(0, -0.3, 0));
-                }
-            }
-
             return;
         }
 
