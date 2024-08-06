@@ -15,22 +15,24 @@ import org.confluence.mod.util.CuriosUtils;
 
 import java.util.function.Supplier;
 
-public record HookThrowingPacketC2S(boolean throwing, int id) {
-    public static HookThrowingPacketC2S push() {
-        return new HookThrowingPacketC2S(true, 0);
+public record HookThrowingPacketC2S(boolean throwing, int id, float x, float y) {
+    public static HookThrowingPacketC2S push(float rotX, float rotY) {
+        return new HookThrowingPacketC2S(true, 0, rotX, rotY);
     }
 
     public static HookThrowingPacketC2S pop(int id) {
-        return new HookThrowingPacketC2S(false, id);
+        return new HookThrowingPacketC2S(false, id, 0, 0);
     }
 
     public static void encode(HookThrowingPacketC2S packet, FriendlyByteBuf friendlyByteBuf) {
         friendlyByteBuf.writeBoolean(packet.throwing);
         friendlyByteBuf.writeInt(packet.id);
+        friendlyByteBuf.writeFloat(packet.x);
+        friendlyByteBuf.writeFloat(packet.y);
     }
 
     public static HookThrowingPacketC2S decode(FriendlyByteBuf friendlyByteBuf) {
-        return new HookThrowingPacketC2S(friendlyByteBuf.readBoolean(), friendlyByteBuf.readInt());
+        return new HookThrowingPacketC2S(friendlyByteBuf.readBoolean(), friendlyByteBuf.readInt(), friendlyByteBuf.readFloat(), friendlyByteBuf.readFloat());
     }
 
     public static void handle(HookThrowingPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
@@ -43,8 +45,7 @@ public record HookThrowingPacketC2S(boolean throwing, int id) {
                 CuriosUtils.getSlot(player, "hook", 0).ifPresent(itemStack -> {
                     if (itemStack.getItem() instanceof AbstractHookItem item && item.canHook(level, itemStack)) {
                         AbstractHookEntity hook = item.getHook(itemStack, item, player, level);
-                        LocalPlayer localPlayer = Minecraft.getInstance().player;
-                        hook.shootFromRotation(player, localPlayer.getXRot(), localPlayer.getYRot(), 0.0F, item.getHookVelocity(), 0.5F);
+                        hook.shootFromRotation(player, packet.x, packet.y, 0.0F, item.getHookVelocity(), 0.5F);
                         level.addFreshEntity(hook);
                         CompoundTag tag = new CompoundTag();
                         tag.putInt("id", hook.getId());

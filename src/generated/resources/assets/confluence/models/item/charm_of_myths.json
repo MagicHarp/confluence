@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "confluence:item/curio/charm_of_myths"
-  }
-}

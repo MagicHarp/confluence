@@ -1,5 +1,6 @@
 package org.confluence.mod.client.handler;
 
+import net.minecraft.client.Camera;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -18,10 +19,12 @@ import org.confluence.mod.util.CuriosUtils;
 public final class HookThrowingHandler {
     private static final Vec3 LEFT_VEC = new Vec3(0.0, -0.008, 0.0);
     private static final Vec3 RIGHT_VEC = new Vec3(0.0, 0.008, 0.0);
-    public static void handle(LocalPlayer localPlayer) {
+    public static void handle(LocalPlayer localPlayer, Camera camera) {
         boolean isDown = false;
+        float rotX = camera.getXRot();
+        float rotY = camera.getYRot();
         while (KeyBindings.HOOK.get().consumeClick()) isDown = true;
-        if (isDown) NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.push());
+        if (isDown) NetworkHandler.CHANNEL.sendToServer(HookThrowingPacketC2S.push(rotX, rotY));
 
         CuriosUtils.getSlot(localPlayer, "hook", 0).ifPresent(itemStack -> {
             CompoundTag tag = itemStack.getTag();

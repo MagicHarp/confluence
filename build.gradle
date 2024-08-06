@@ -85,9 +85,6 @@ repositories {
     maven {
         name = "tterrag maven"
         url = uri("https://maven.tterrag.com/")
-        content {
-            includeGroup("com.jozufozu.flywheel")
-        }
     }
     maven {
         // location of the maven that hosts JEI files
@@ -117,14 +114,17 @@ dependencies {
     compileOnly fg.deobf("curse.maven:jade-324717:5390389")
     runtimeOnly fg.deobf("curse.maven:jade-324717:5390389")
 
+    compileOnly fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+6')
+    runtimeOnly fg.deobf('team.chisel.ctm:CTM:1.20.1-1.1.8+6')
+
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
     runtimeOnly fg.deobf("curse.maven:spark-361579:4738952")
 
-        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-        compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
-        implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
-            jarJar.ranged(it, "[0.3.6,)")
-        }
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
+        jarJar.ranged(it, "[0.3.6,)")
+    }
 }
 
 mixin {
