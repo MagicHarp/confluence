@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confluence:item/food/chocolate_chip_cookie"
+  }
+}

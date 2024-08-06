@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "confluence:block/ash_door_bottom",
+    "top": "confluence:block/ash_door_top"
+  }
+}
