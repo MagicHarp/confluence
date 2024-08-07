@@ -10,6 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.DeathChestBlock;
+import org.confluence.mod.block.furniture.chair.WhitePlasticChairBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -60,6 +61,8 @@ public final class ModTabs {
                 output.accept(AMETHYST_CHAIN.get());
                 output.accept(SILK_CHAIN.get());
                 output.accept(BONE_CHAIN.get());
+
+                output.accept(WHITE_PLASTIC_CHAIR_BLOCK.get());
 
                 output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());

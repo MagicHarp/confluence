@@ -34,10 +34,13 @@ import java.util.function.Consumer;
 
 public class WhitePlasticChairBlock extends AbstractChairBlock implements EntityBlock, CustomModel, CustomItemModel {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.8, 0.8125);
-    private static final Vec3 playerPos =  new Vec3(0, 0.16,0);
+    private static final Vec3 playerPos = new Vec3(0, 0.16, 0);
 
     public WhitePlasticChairBlock() {
-        super(BlockBehaviour.Properties.of().lightLevel((BlockState)->1));
+        super(BlockBehaviour.Properties.of()
+                .lightLevel((BlockState) -> 1)
+                .explosionResistance(3600000.8F)
+        );
     }
 
     @Override
@@ -69,13 +72,15 @@ public class WhitePlasticChairBlock extends AbstractChairBlock implements Entity
         }
 
         @Override
-        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        }
 
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
             return CACHE;
         }
     }
+
     public static class Item extends BlockItem implements GeoItem {
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
@@ -114,7 +119,8 @@ public class WhitePlasticChairBlock extends AbstractChairBlock implements Entity
         }
 
         @Override
-        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        }
 
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
