@@ -38,8 +38,8 @@ public class WhitePlasticChairBlock extends AbstractChairBlock implements Entity
 
     public WhitePlasticChairBlock() {
         super(BlockBehaviour.Properties.of()
-                .lightLevel((BlockState) -> 1)
-                .explosionResistance(3600000.8F)
+            .lightLevel(BlockState -> 1)
+            .explosionResistance(3600000.8F)
         );
     }
 
