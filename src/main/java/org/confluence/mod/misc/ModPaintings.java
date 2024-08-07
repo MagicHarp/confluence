@@ -21,6 +21,9 @@ public final class ModPaintings {
     public static final RegistryObject<PaintingVariant> VOILA = PAINTING_VARIANTS.register("voila", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> XUANYU_1725 = PAINTING_VARIANTS.register("xuanyu_1725", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> SHADOW_END = PAINTING_VARIANTS.register("shadow_end", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> HUNAO = PAINTING_VARIANTS.register("hunao", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> KL_JIANA = PAINTING_VARIANTS.register("kl_jiana", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> SIHUAI_2412 = PAINTING_VARIANTS.register("sihuai_2412", () -> new PaintingVariant(32, 32));
 
     public static void register(IEventBus bus) {
         PAINTING_VARIANTS.register(bus);

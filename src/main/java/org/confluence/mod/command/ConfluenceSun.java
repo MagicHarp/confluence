@@ -1,9 +1,11 @@
 package org.confluence.mod.command;
 
 public enum ConfluenceSun {
-    SUN_1,
-    SUN_2,
-    SUN_3,
+    MC_SUN,
+    TR_SUN,
+// 日食
+    MC_ECLIPSE,
+    TR_ECLIPSE,
 
     UNKNOWN;
 
