@@ -32,7 +32,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class WhitePlasticChairBlock extends AbstractChairBlock implements EntityBlock, CustomModel, CustomItemModel {
+public class WhitePlasticChairBlock extends AbstractChairBlock implements EntityBlock, CustomModel {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.8, 0.8125);
     private static final Vec3 playerPos = new Vec3(0, 0.16, 0);
 
