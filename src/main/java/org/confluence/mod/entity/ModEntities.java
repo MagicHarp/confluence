@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.entity.chair.ChairEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.confluence.mod.entity.fishing.BloodyFishingHook;
@@ -70,6 +71,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BoulderEntity>> BOULDER = ENTITIES.register("boulder", () -> EntityType.Builder.<BoulderEntity>of(BoulderEntity::new, MobCategory.MISC).sized(BoulderEntity.DIAMETER, BoulderEntity.DIAMETER).clientTrackingRange(6).build("confluence:boulder"));
     public static final RegistryObject<EntityType<MoneyHoleEntity>> MONEY_HOLE = ENTITIES.register("money_hole", () -> EntityType.Builder.<MoneyHoleEntity>of(MoneyHoleEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(6).build("confluence:money_hole"));
     public static final RegistryObject<EntityType<FlailEntity>> FLAIL = ENTITIES.register("flail", () -> EntityType.Builder.<FlailEntity>of((pEntityType, pLevel) -> new FlailEntity(pLevel,null), MobCategory.MISC).sized(0.5F, 2F)/*.clientTrackingRange(6)*/.noSave().build("confluence:flail"));
+    public static final RegistryObject<EntityType<ChairEntity>> CHAIR = ENTITIES.register("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.05F, 0.02F).build("confluence:chair"));
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
         return ENTITIES.register(prefix + "_slime", () -> EntityType.Builder.<BaseSlime>of((entityType, level) -> new BaseSlime(entityType, level, color, size), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:" + prefix + "_slime"));

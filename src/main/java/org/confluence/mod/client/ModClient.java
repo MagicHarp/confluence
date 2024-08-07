@@ -6,6 +6,7 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.texture.SpriteContents;
@@ -189,9 +190,10 @@ public final class ModClient {
         event.registerBlockEntityRenderer(ModBlocks.MECHANICAL_BLOCK_ENTITY.get(), MechanicalBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), BaseChestBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.DEATH_CHEST_BLOCK_ENTITY.get(), DeathChestBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.WHITE_PLASTIC_CHAIR_ENTITY.get(), WhitePlasticChairRenderer::new);
 
         event.registerEntityRenderer(FLAIL.get(), FlailRenderer::new);
-
+        event.registerEntityRenderer(CHAIR.get(), NoopRenderer::new);
     }
 
     @SubscribeEvent

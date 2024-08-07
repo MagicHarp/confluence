@@ -3,14 +3,12 @@ package org.confluence.mod.block;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.*;
+import org.confluence.mod.block.furniture.chair.WhitePlasticChairBlock;
 import org.confluence.mod.block.natural.MushroomBlock;
 import org.confluence.mod.block.natural.*;
 import org.confluence.mod.block.natural.herbs.*;
@@ -214,6 +213,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND_LAYER_BLOCK = registerWithItem("another_crimson_sand_layer_block", SandLayerBlock::new);
     public static final RegistryObject<Block> SAND_LAYER_BLOCK = registerWithItem("sand_layer_block", SandLayerBlock::new);
     public static final RegistryObject<Block> RED_SAND_LAYER_BLOCK = registerWithItem("red_sand_layer_block", SandLayerBlock::new);
+    public static final RegistryObject<WhitePlasticChairBlock> WHITE_PLASTIC_CHAIR_BLOCK = registerWithItem("white_plastic_chair", WhitePlasticChairBlock::new, supplier -> () -> new WhitePlasticChairBlock.Item(supplier.get()));
+    public static final RegistryObject<BlockEntityType<WhitePlasticChairBlock.Entity>> WHITE_PLASTIC_CHAIR_ENTITY = BLOCK_ENTITIES.register("white_plastic_chair_entity", () -> BlockEntityType.Builder.of(WhitePlasticChairBlock.Entity::new, WHITE_PLASTIC_CHAIR_BLOCK.get()).build(null));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
