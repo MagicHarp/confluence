@@ -1,5 +1,4 @@
 {
-  "texture_size": [128, 128],
   "credit": "Made with Blockbench",
   "parent": "builtin/entity",
   "textures": {

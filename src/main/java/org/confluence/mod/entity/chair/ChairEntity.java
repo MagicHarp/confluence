@@ -23,6 +23,14 @@ public class ChairEntity extends Entity {
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {}
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.getPassengers().isEmpty()) {
+            this.discard();
+        }
+    }
+
+    @Override
     public @NotNull Vec3 getDismountLocationForPassenger(@NotNull LivingEntity passenger) {
         return new Vec3(this.getX(), this.getY() + 1.0D, this.getZ());
     }
