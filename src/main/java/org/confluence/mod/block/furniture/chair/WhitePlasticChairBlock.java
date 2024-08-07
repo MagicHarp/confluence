@@ -5,9 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -36,6 +34,7 @@ import java.util.function.Consumer;
 
 public class WhitePlasticChairBlock extends AbstractChairBlock implements EntityBlock, CustomModel, CustomItemModel {
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.8, 0.8125);
+    private static final Vec3 playerPos =  new Vec3(0, 0.16,0);
 
     public WhitePlasticChairBlock() {
         super(BlockBehaviour.Properties.of().lightLevel((BlockState)->1));
@@ -43,7 +42,7 @@ public class WhitePlasticChairBlock extends AbstractChairBlock implements Entity
 
     @Override
     public Vec3 sitPos() {
-        return new Vec3(0, 0.16,0);
+        return playerPos;
     }
 
     @Override
