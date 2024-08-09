@@ -64,6 +64,18 @@ import static org.confluence.mod.entity.ModEntities.*;
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ModClient {
+    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0xFF96FF;
+    public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
+        if (pos == null) return -1;
+
+        IntegerRGB x = hallowMixture(Math.abs(pos.getX()) % 12);
+        IntegerRGB y = hallowMixture(Math.abs(pos.getY()) % 12);
+        IntegerRGB z = hallowMixture(Math.abs(pos.getZ()) % 12);
+
+        return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
+    };
+    public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
+
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -83,13 +95,13 @@ public final class ModClient {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.flowingFluid().get(), RenderType.translucent());
 
             ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
-                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
-                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
         });
     }
@@ -110,6 +122,7 @@ public final class ModClient {
         event.registerLayerDefinition(BoulderModel.LAYER_LOCATION, BoulderModel::createBodyLayer);
         event.registerLayerDefinition(MoneyHoleModel.LAYER_LOCATION, MoneyHoleModel::createBodyLayer);
         event.registerLayerDefinition(AmmoModel.LAYER_LOCATION, AmmoModel::createBodyLayer);
+        event.registerLayerDefinition(EnchantedSwordProjectileModel.LAYER_LOCATION, EnchantedSwordProjectileModel::createBodyLayer);
 
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
         event.registerLayerDefinition(WebSlingerModel.LAYER_LOCATION, WebSlingerModel::createBodyLayer);
@@ -163,6 +176,7 @@ public final class ModClient {
         event.registerEntityRenderer(STAR_CLOAK.get(), StarCloakEntityRenderer::new);
         event.registerEntityRenderer(BOULDER.get(), BoulderRenderer::new);
         event.registerEntityRenderer(MONEY_HOLE.get(), MoneyHoleRenderer::new);
+        event.registerEntityRenderer(ENCHANTED_SWORD_PROJECTILE.get(), EnchantedSwordProjectileRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);
@@ -211,22 +225,10 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
     }
 
-    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0xFF96FF;
-
     @SubscribeEvent
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(HALLOW_WATER_RESOLVER);
     }
-
-    public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
-        if (pos == null) return -1;
-
-        IntegerRGB x = hallowMixture(Math.abs(pos.getX()) % 12);
-        IntegerRGB y = hallowMixture(Math.abs(pos.getY()) % 12);
-        IntegerRGB z = hallowMixture(Math.abs(pos.getZ()) % 12);
-
-        return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
-    };
 
     private static IntegerRGB hallowMixture(int m) {
         if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
@@ -238,8 +240,6 @@ public final class ModClient {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(HALLOW_LEAVES_COLOR, ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get());
     }
-
-    public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
@@ -256,7 +256,8 @@ public final class ModClient {
 
             @Override
             public @NotNull TextureAtlasSprite makeSprite(ResourceLocation atlasName, SpriteContents contents, int atlasWidth, int atlasHeight, int spriteX, int spriteY, int mipmapLevel) {
-                return new TextureAtlasSprite(atlasName, contents, 16, 512, 0, 0) {};
+                return new TextureAtlasSprite(atlasName, contents, 16, 512, 0, 0) {
+                };
             }
         });
     }

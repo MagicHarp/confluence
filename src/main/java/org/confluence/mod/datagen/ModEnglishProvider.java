@@ -23,6 +23,12 @@ public class ModEnglishProvider extends LanguageProvider {
         super(output, Confluence.MODID, "en_us");
     }
 
+    private static String toTitleCase(String raw) {
+        return Arrays.stream(raw.split("_"))
+                .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
+    }
+
     @Override
     protected void addTranslations() {
         add("config.jade.plugin_confluence.jade_mechanical_component", "Mechanical Info");
@@ -901,11 +907,5 @@ public class ModEnglishProvider extends LanguageProvider {
             if (curio == ModPrefix.Curio.HASTY || curio == ModPrefix.Curio.QUICK) continue;
             add("prefix.confluence." + curio.name().toLowerCase(), toTitleCase(curio.name()));
         }
-    }
-
-    private static String toTitleCase(String raw) {
-        return Arrays.stream(raw.split("_"))
-            .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
-            .collect(Collectors.joining(" "));
     }
 }

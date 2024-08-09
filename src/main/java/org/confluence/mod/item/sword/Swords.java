@@ -1,9 +1,11 @@
 package org.confluence.mod.item.sword;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTiers;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
@@ -34,7 +36,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
-    ENCHANTED_SWORD("enchanted_sword", EnchantedSwordItem::new),
+    ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
 
     TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
