@@ -77,14 +77,28 @@ public class BlackSlime extends Slime {
 
     public void finalizeSpawn(RandomSource randomSource, DifficultyInstance difficulty) {
         int size = 2;
-        if (randomSource.nextFloat() < 0.5F * difficulty.getSpecialMultiplier()) size = 4;
+        float specialMultiplier = difficulty.getSpecialMultiplier();
+
+        float probability;
+        if (specialMultiplier <= 0.5F) {
+            probability = 0.15F;
+        } else if (specialMultiplier <= 1.0F) {
+            probability = 0.60F;
+        } else {
+            probability = 0.85F;
+        }
+
+        if (randomSource.nextFloat() < probability) {
+            size = 4;
+        }
+
         setSize(size, false);
         AttributeInstance attackDamage = getAttribute(Attributes.ATTACK_DAMAGE);
         AttributeInstance maxHealth = getAttribute(Attributes.MAX_HEALTH);
         assert attackDamage != null && maxHealth != null;
         if (size == 2) {
-            attackDamage.setBaseValue(4.0F);
-            maxHealth.setBaseValue(10.0F);
+            attackDamage.setBaseValue(6.0F);
+            maxHealth.setBaseValue(25.0F);
         } else {
             attackDamage.setBaseValue(12.0F);
             Objects.requireNonNull(getAttribute(Attributes.ARMOR)).setBaseValue(2);
@@ -92,7 +106,6 @@ public class BlackSlime extends Slime {
         }
         setHealth(getMaxHealth());
     }
-
     public static void dropColoredGel(LivingEntity living) {
         if (living instanceof BlackSlime blackSlime) {
             ModUtils.createItemEntity(blackSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
