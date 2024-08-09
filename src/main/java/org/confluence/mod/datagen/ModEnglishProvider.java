@@ -257,21 +257,34 @@ public class ModEnglishProvider extends LanguageProvider {
         add("death.attack.boulder", "%1$s  is crushed by boulder");
 
         add("painting.confluence.magic_harp.title", "MAGIC_HARP");
-        add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，Looks silly...");
-        add("painting.confluence.amanita.title", "AMANITA");
-        add("painting.confluence.amanita.author", "BiliBili_蘑菇人怎么还不来，A mushroom lady !");
+        add("painting.confluence.magic_harp.author", "BiliBili_魔法竖琴waaa，看上去傻傻的...");
         add("painting.confluence.westernat.title", "WESTERNAT");
-        add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC 21st century, the most impressionist birch painting!");
+        add("painting.confluence.westernat.author", "BiliBili_Westernat233，MC21世纪以来，最具有印象派主义的白桦树绘画!");
         add("painting.confluence.cooobrid.title", "COOOBRID");
-        add("painting.confluence.cooobrid.author", "BiliBili_事一只一只一只鸽子，咕咕咕咕~");
+        add("painting.confluence.cooobrid.author", "BiliBili_事一只一只一只鸽子，事一只只会咕咕咕的鸽子");
         add("painting.confluence.nakinosi.title", "NAKINOSI");
-        add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头");
+        add("painting.confluence.nakinosi.author", "BiliBili_咕咕咕的屑枕头，世界上最好看的渐变头发！");
         add("painting.confluence.maker.title", "MAKER");
-        add("painting.confluence.maker.author", "BiliBili_Maker-2333");
-        add("painting.confluence.serious_observers.title", "SERIOUS_OBSERVERS");
-        add("painting.confluence.serious_observers.author", "BiliBili_严肃的侦测器，Quite serious indeed");
+        add("painting.confluence.maker.author", "BiliBili_Maker-2333，是Maker不是Marker！");
+        add("painting.confluence.mustard_oasis.title", "MUSTARD_OASIS");
+        add("painting.confluence.mustard_oasis.author", "BiliBili_芥末Oasis，芥末配fish，豪赤😋");
         add("painting.confluence.a_pigeon_delight.title", "A_PIGEON_DELIGHT");
         add("painting.confluence.a_pigeon_delight.author", "BiliBili_一只鸽子悦");
+        add("painting.confluence.sheep_mink.title", "SHEEP_MINK");
+        add("painting.confluence.sheep_mink.author", "BiliBili_眠羊敏克，“啊？我打json？”");
+        add("painting.confluence.voila.title", "VOILA");
+        add("painting.confluence.voila.author", "BiliBili_风起下片灬");
+        add("painting.confluence.xuanyu_1725.title", "XUANYU");
+        add("painting.confluence.xuanyu_1725.author", "BiliBili_轩宇1725");
+        add("painting.confluence.shadow_end.title", "SHADOW_END");
+        add("painting.confluence.shadow_end.author", "BiliBili_影末子");
+        add("painting.confluence.kl_jiana.title", "KL_JIANA");
+        add("painting.confluence.kl_jiana.author", "BiliBili_KL_JIANA");
+        add("painting.confluence.hunao.title", "HUNAO");
+        add("painting.confluence.hunao.author", "BiliBili_小胡闹鸭");
+        add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
+        add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
+
 
         add("advancements.start.title", "Old World, New Journey!");
         add("advancements.start.descr", "The afterlife of convergence and exchange");

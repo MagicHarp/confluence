@@ -25,7 +25,15 @@ public enum ConfluenceMoon {
     // 事件月亮
     MC_FROST, // 霜月
     MC_PUMPKIN, // 南瓜月
-    MC_BLOOD, // 血月
+    // 血月
+    MC_BLOOD_FULL_MOON,// 满月
+    MC_BLOOD_WANING_GIBBOUS,// 亏凸月
+    MC_BLOOD_THIRD_QUARTER,// 下弦月
+    MC_BLOOD_WANING_CRESCENT,// 残月
+    MC_BLOOD_NEW_MOON,// 新月
+    MC_BLOOD_WAXING_CRESCENT,// 峨眉月
+    MC_BLOOD_FIRST_QUARTER,// 上弦月
+    MC_BLOOD_WAXING_GIBBOUS,// 盈凸月
 
 
     // TR风格
@@ -52,7 +60,15 @@ public enum ConfluenceMoon {
     // 事件月亮
     TR_FROST, // 霜月
     TR_PUMPKIN, // 南瓜月
-    TR_BLOOD, // 血月
+    // 血月
+    TR_BLOOD_FULL_MOON,// 满月
+    TR_BLOOD_WANING_GIBBOUS,// 亏凸月
+    TR_BLOOD_THIRD_QUARTER,// 下弦月
+    TR_BLOOD_WANING_CRESCENT,// 残月
+    TR_BLOOD_NEW_MOON,// 新月
+    TR_BLOOD_WAXING_CRESCENT,// 峨眉月
+    TR_BLOOD_FIRST_QUARTER,// 上弦月
+    TR_BLOOD_WAXING_GIBBOUS,// 盈凸月
 
     UNKNOWN;
 
