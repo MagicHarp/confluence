@@ -73,6 +73,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.green_slime", "绿色史莱姆");
         add("entity.confluence.black_slime", "史莱姆之母");
         add("entity.confluence.lava_slime", "岩浆史莱姆");
+        add("entity.confluence.demon_eye", "恶魔眼");
 
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
@@ -1809,6 +1810,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(), "热带史莱姆刷怪蛋");
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
+        add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
         // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
         add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");

@@ -181,6 +181,8 @@ public final class ModEvents {
         event.register(ModEntities.YELLOW_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.RED_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.BLACK_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+
+        event.register(ModEntities.DEMON_EYE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkDemonEyeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 
     private static boolean checkSlimeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
@@ -200,6 +202,19 @@ public final class ModEvents {
             return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() <= 30;
         }
         // 剩下的条件用方块的isValidSpawn方法
+        return true;
+    }
+    private static boolean checkDemonEyeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        Level level = null;
+        if (pLevel instanceof Level) {
+            level = (Level) pLevel;
+        }
+        if (!Mob.checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
+            return false;
+        } else if (type == ModEntities.DEMON_EYE.get()) {
+            int y = pPos.getY();
+            return y > 40 && y < 260 && level != null && !level.isDay() && pLevel.canSeeSky(pPos);
+        }
         return true;
     }
 }
