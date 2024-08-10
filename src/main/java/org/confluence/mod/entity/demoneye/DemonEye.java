@@ -1,11 +1,14 @@
 package org.confluence.mod.entity.demoneye;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -15,6 +18,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -29,9 +33,10 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public Vec3 moveTargetPoint;
     public AttackPhase attackPhase;
     public BlockPos anchorPoint;
+    public SurroundTargetGoal surroundTargetGoal;
 
     public static AttributeSupplier.Builder createAttributes() {
-        return AttributeSupplier.builder()
+        return Monster.createMonsterAttributes()
             .add(Attributes.MAX_HEALTH)
             .add(Attributes.ATTACK_DAMAGE)
             .add(Attributes.ARMOR)
@@ -66,7 +71,10 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     @Override
     protected void registerGoals() {
-        goalSelector.addGoal(0,new MoveAroundGoal(this,level().getNearestPlayer(this,30)));
+        surroundTargetGoal = new SurroundTargetGoal(this);
+        goalSelector.addGoal(0, surroundTargetGoal);
+        goalSelector.addGoal(1, new WanderGoal(this));
+        goalSelector.addGoal(2, new LeaveGoal(this));
 //        goalSelector.addGoal(0, new DemonEyeParabolicMovementGoal(this));
 //        goalSelector.addGoal(1, new DemonEyeCircleAroundAnchorGoal(this));
 //        goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
@@ -92,6 +100,43 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     @Override
     protected void pushEntities(){
+    }
+
+    /** @author voila */
+    public void move(@NotNull MoverType pType, @NotNull Vec3 motion){
+        Vec3 collide = ((EntityAccessor) this).callCollide(motion);
+        if(collide.x !=motion.x){
+            motion = new Vec3(motion.x < 0 ? 0.22 : -0.22, motion.y, motion.z);
+        }
+        if(collide.y !=motion.y){
+            boolean downward = motion.y < 0;
+            motion=new Vec3(motion.x,downward? Mth.clamp(-motion.y,0.1,0.22):Mth.clamp(-motion.y,-0.22,-0.1), motion.z);
+            if(surroundTargetGoal.targetPos != null && getTarget() != null){
+                surroundTargetGoal.targetPos = surroundTargetGoal.targetPos.with(Direction.Axis.Y, getTarget().position().y + (downward ? 2 : -1));
+            }
+        }
+        if(collide.z !=motion.z){
+            motion=new Vec3(motion.x, motion.y, motion.z < 0 ? 0.3 : -0.3);
+        }
+        setDeltaMovement(motion);
+        super.move(pType, motion);
+    }
+
+    @Override
+    public void tick(){
+        // TODO: 仇恨值
+        Vec3 pos = position();
+        setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
+        super.tick();
+    }
+
+    @Override
+    public void setXRot(float pXRot){
+        if(pXRot == 0 || pXRot == getXRot()){
+            return;
+        }
+        xRotO = getXRot();
+        super.setXRot(pXRot);
     }
 
     @Override

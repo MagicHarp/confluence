@@ -190,14 +190,14 @@ public final class ModEvents {
         }
         if (!Mob.checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
             return false;
-        } else if (type == ModEntities.PINK_SLIME.get()) {
-            return true;
-        } else if (type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()) {
-            return pPos.getY() > 30 && level != null && level.isDay() && pLevel.canSeeSky(pPos);
+        } else if (type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()
+            || type == ModEntities.ICE_SLIME.get() || type == ModEntities.DESERT_SLIME.get() || type == ModEntities.PINK_SLIME.get()) {
+            int y = pPos.getY();
+            return y > 30 && y < 260 && level != null && level.isDay() && pLevel.canSeeSky(pPos);
         } else if (type == ModEntities.YELLOW_SLIME.get() || type == ModEntities.RED_SLIME.get()) {
             return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() > 30;
         } else if (type == ModEntities.BLACK_SLIME.get()) {
-            return pPos.getY() <= 30;
+            return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() <= 30;
         }
         // 剩下的条件用方块的isValidSpawn方法
         return true;

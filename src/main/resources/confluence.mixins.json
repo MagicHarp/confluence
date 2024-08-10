@@ -10,6 +10,7 @@
         "TagLoaderMixin",
         "accessor.BlockItemAccessor",
         "accessor.ChestBlockEntityAccessor",
+        "accessor.DistanceManagerAccessor",
         "accessor.EntityAccessor",
         "accessor.FishingHookAccessor",
         "accessor.LivingEntityAccessor",
