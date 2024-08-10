@@ -108,7 +108,9 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
             if (!pPlayer.isShiftKeyDown()) {
                 if (entity.setItem(pPlayer.getItemInHand(pHand))) {
                     pPlayer.playSound(SoundEvents.WOLF_DEATH, 2F, 2.2F);
-                    pPlayer.setItemInHand(pHand, new ItemStack((pPlayer.getItemInHand(pHand).getItem()), 0));
+                    if (!pPlayer.isCreative()) {
+                        pPlayer.setItemInHand(pHand, new ItemStack((pPlayer.getItemInHand(pHand).getItem()), 0));
+                    }
                 }
             } else {
                 pPlayer.playSound(SoundEvents.GHAST_HURT, 1F, 1F);
