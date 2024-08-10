@@ -64,6 +64,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.blue_slime", "蓝色史莱姆");
         add("entity.confluence.red_slime", "红色史莱姆");
         add("entity.confluence.purple_slime", "紫色史莱姆");
+        add("entity.confluence.jungle_slime", "丛林史莱姆");
         add("entity.confluence.pink_slime", "粉色史莱姆");
         add("entity.confluence.yellow_slime", "黄色史莱姆");
         add("entity.confluence.crimson_slime", "猩红史莱姆");
@@ -1802,6 +1803,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(), "黄色史莱姆刷怪蛋");
         add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(), "紫色史莱姆刷怪蛋");
         add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(), "沙漠史莱姆刷怪蛋");
+        add(SpawnEggs.JUNGLE_SLIME_SPAWN_EGG.get(), "丛林史莱姆刷怪蛋");
         add(SpawnEggs.PINK_SLIME_SPAWN_EGG.get(), "粉色史莱姆刷怪蛋");
         add(SpawnEggs.ICE_SLIME_SPAWN_EGG.get(), "冰冻史莱姆刷怪蛋");
         add(SpawnEggs.GREEN_SLIME_SPAWN_EGG.get(), "绿色史莱姆刷怪蛋");

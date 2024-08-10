@@ -63,6 +63,7 @@ public final class ModEvents {
         event.put(ModEntities.PINK_SLIME.get(), BaseSlime.createSlimeAttributes(2.0F, 2, 97.0F).build());
         event.put(ModEntities.CORRUPTED_SLIME.get(), BaseSlime.createSlimeAttributes(35.0F, 6, 110.0F).build());
         event.put(ModEntities.DESERT_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 0, 21.0F).build());
+        event.put(ModEntities.JUNGLE_SLIME.get(), BaseSlime.createSlimeAttributes(12.0F, 0, 46.0F).build());
         event.put(ModEntities.EVIL_SLIME.get(), BaseSlime.createSlimeAttributes(29.0F, 2, 58.0F).build());
         event.put(ModEntities.ICE_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
         event.put(ModEntities.LAVA_SLIME.get(), BaseSlime.createSlimeAttributes(10.0F, 2, 30.0F).build());
@@ -175,6 +176,7 @@ public final class ModEvents {
         // pink
         event.register(ModEntities.CORRUPTED_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.DESERT_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.JUNGLE_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.ICE_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.TROPIC_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.CRIMSON_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ModEvents::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
@@ -193,7 +195,8 @@ public final class ModEvents {
         if (!Mob.checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
             return false;
         } else if (type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()
-            || type == ModEntities.ICE_SLIME.get() || type == ModEntities.DESERT_SLIME.get() || type == ModEntities.PINK_SLIME.get()) {
+            || type == ModEntities.ICE_SLIME.get() || type == ModEntities.DESERT_SLIME.get() || type == ModEntities.JUNGLE_SLIME.get()
+            || type == ModEntities.PINK_SLIME.get()) {
             int y = pPos.getY();
             return y > 30 && y < 260 && level != null && level.isDay() && pLevel.canSeeSky(pPos);
         } else if (type == ModEntities.YELLOW_SLIME.get() || type == ModEntities.RED_SLIME.get()) {
