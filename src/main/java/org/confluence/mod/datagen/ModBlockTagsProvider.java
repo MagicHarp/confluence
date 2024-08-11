@@ -88,7 +88,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.RED_HARDENED_SAND_BLOCK.get(),
             ModBlocks.EBONY_HARDENED_SAND_BLOCK.get(),
             ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(),
-            ModBlocks.PEARL_HARDENED_SAND_BLOCK.get()
+            ModBlocks.PEARL_HARDENED_SAND_BLOCK.get(),
+            DESERT_FOSSIL.get()
         );
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
         acceptTag(mineableWithShovel);
