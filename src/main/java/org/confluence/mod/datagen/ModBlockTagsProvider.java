@@ -90,6 +90,17 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(),
             ModBlocks.PEARL_HARDENED_SAND_BLOCK.get()
         );
+        IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
+        acceptTag(mineableWithShovel);
+        mineableWithShovel.add(
+            SLUSH.get(),
+            EBONY_SAND.get(),
+            PEARL_SAND.get(),
+            ANOTHER_CRIMSON_SAND.get(),
+            EBONY_SAND_LAYER_BLOCK.get(),
+            PEARL_SAND_LAYER_BLOCK.get(),
+            ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get()
+        );
         tag(BlockTags.DIRT).add(
             CORRUPT_GRASS_BLOCK.get(),
             ASH_BLOCK.get(),
@@ -138,6 +149,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             PINK_PACKED_ICE.get(),
             PURPLE_ICE.get(),
             PURPLE_PACKED_ICE.get()
+        );
+        tag((BlockTags.STONE_ORE_REPLACEABLES)).add(
+            HARDENED_SAND_BLOCK.get(),
+            RED_HARDENED_SAND_BLOCK.get(),
+            EBONY_STONE.get(),
+            PEARL_STONE.get(),
+            ANOTHER_CRIMSON_STONE.get()
         );
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             EBONY_ORE.get(), DEEPSLATE_EBONY_ORE.get(), EBONY_BLOCK.get(), RAW_EBONY_BLOCK.get(),
