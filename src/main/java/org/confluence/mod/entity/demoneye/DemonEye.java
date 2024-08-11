@@ -18,6 +18,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -128,6 +129,18 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         Vec3 pos = position();
         setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
         super.tick();
+    }
+
+    @Override
+    public void knockback(double pStrength, double pX, double pZ){
+//        Confluence.LOGGER.info("{}",pStrength);
+        super.knockback(pStrength, pX, pZ);
+    }
+
+    @Override
+    public void onAddedToWorld(){
+        super.onAddedToWorld();
+        setNoGravity(true);
     }
 
     @Override

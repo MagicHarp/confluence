@@ -39,7 +39,6 @@ public class SurroundTargetGoal extends Goal {
         if(target == null) return;
         locateCount++;
         ticksLeft=40;
-        mob.setNoGravity(true);
         mob.setDeltaMovement(mob.getDeltaMovement().with(Direction.Axis.Y, 0));
         Vec3 targetDir = mob.position().with(Direction.Axis.Y,target.position().y).vectorTo(target.position());  // 先确定水平方向
         float[] offsetAngle = dirToRot(targetDir);

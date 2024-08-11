@@ -27,12 +27,11 @@ public class WanderGoal extends SurroundTargetGoal {
     public void start(){
         locateCount++;
         mob.setDeltaMovement(mob.getDeltaMovement().with(Direction.Axis.Y, 0));
-
         if(Double.isNaN(anchorY)){
             anchorY = mob.position().y;
         }
         double x = random.nextDouble() * 10 - 5;
-        double y = getOffsetY() - 1;
+        double y = getOffsetY() + 5;
         double z = random.nextDouble() * 10 - 5;
         targetPos = new Vec3(x, 0, z).normalize().scale(15).add(mob.position()).with(Direction.Axis.Y, y + anchorY);
         ticksLeft = 30;
