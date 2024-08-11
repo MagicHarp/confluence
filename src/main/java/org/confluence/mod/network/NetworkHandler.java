@@ -48,5 +48,6 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
         CHANNEL.registerMessage(packetId++, HookThrowingPacketC2S.class, HookThrowingPacketC2S::encode, HookThrowingPacketC2S::decode, HookThrowingPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, GunShootingPacketC2S.class, GunShootingPacketC2S::encode, GunShootingPacketC2S::decode, GunShootingPacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, EnchantedSwordShootingPacketC2S.class, EnchantedSwordShootingPacketC2S::encode, EnchantedSwordShootingPacketC2S::decode, EnchantedSwordShootingPacketC2S::handle);
     }
 }
