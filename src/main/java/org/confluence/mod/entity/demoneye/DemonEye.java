@@ -6,19 +6,19 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.VariantHolder;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -48,6 +48,21 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         super(entityType, level);
         this.moveTargetPoint = Vec3.ZERO;
         this.xpReward = 5;
+    }
+
+    public static boolean checkDemonEyeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        if (!(pLevel instanceof Level level)) {
+            return false;
+        }
+        if (!checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
+            return false;
+        } else if (type == ModEntities.DEMON_EYE.get()) {
+            int y = pPos.getY();
+            boolean levelCon = y > 40 && y < 260 && level.isNight() && pLevel.canSeeSky(pPos);
+            // 新月100%，其他80%
+            return level.getMoonPhase() == 4 ? levelCon : level.random.nextInt(99) < 80;  // 从六分仪的翻译看的
+        }
+        return false;
     }
 
     @Override
