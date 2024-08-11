@@ -50,11 +50,11 @@ public class SurroundTargetGoal extends Goal {
         targetPos = direction.normalize().scale(4).with(Direction.Axis.Y, offsetY).add(target.position());  // 然后设置垂直坐标
     }
 
-    /** 按正弦函数确定Y坐标偏移 */
+    /** 按余弦函数确定Y坐标偏移 */
     public float getOffsetY(){
         float period = 6.1f;
         float radians = 2f * Mth.PI * (locateCount % period) / period;
-        return 2.57f * Mth.sin(radians) + 1;
+        return 2.57f * Mth.cos(radians) + 1;
     }
 
     /** 把向量转成角度 */
