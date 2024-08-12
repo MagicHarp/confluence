@@ -2212,7 +2212,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.CREAM_SODA.get(), "奶油苏打");
         add(Foods.ICE_CREAM.get(), "冰淇淋");
         add(Foods.MILKSHAKE.get(), "奶昔");
-        add(Foods.JOJA_COLA.get(), "乔家可乐");
+        add(Foods.JOJA_COLA.get(), "Joja可乐");
         add(Foods.CARTON_OF_MILK.get(), "卡通牛奶");
         add(Foods.TEACUP.get(), "一小杯茶");
         add(Foods.COFFEE.get(), "咖啡");
