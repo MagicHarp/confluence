@@ -28,6 +28,8 @@ public final class ModSoundsEvent {
     public static final RegistryObject<SoundEvent> MANA_STAR_USE = register("mana_star_use");
     public static final RegistryObject<SoundEvent> COINS = register("coins");
     public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
+    public static final RegistryObject<SoundEvent> ROUTINE_HURT = register("routine_hurt");
+    public static final RegistryObject<SoundEvent> ROUTINE_DEATH = register("routine_death");
 
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));

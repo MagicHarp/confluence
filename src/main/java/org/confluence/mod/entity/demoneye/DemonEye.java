@@ -5,8 +5,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.misc.ModSoundsEvent;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -149,7 +152,17 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     @Override
     public void knockback(double pStrength, double pX, double pZ){
 //        Confluence.LOGGER.info("{}",pStrength);
-        super.knockback(pStrength, pX, pZ);
+        super.knockback(pStrength * 2, pX, pZ);
+    }
+
+    @Override
+    protected SoundEvent getDeathSound(){
+        return ModSoundsEvent.ROUTINE_DEATH.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource){
+        return ModSoundsEvent.ROUTINE_HURT.get();
     }
 
     @Override
