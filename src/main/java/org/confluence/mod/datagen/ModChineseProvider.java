@@ -1590,6 +1590,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(YELLOW_WRENCH.get(), "黄扳手");
         add(GOLDEN_KEY.get(), "金钥匙");
         add(SHADOW_KEY.get(), "暗影钥匙");
+        add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
+        add(DEMON_HEART.get(), "恶魔之心");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
