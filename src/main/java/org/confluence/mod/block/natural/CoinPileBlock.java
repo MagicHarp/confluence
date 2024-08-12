@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
-import org.confluence.mod.misc.ModSoundsType;
+import org.confluence.mod.misc.ModSoundsTypes;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -33,7 +33,7 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     private static final VoxelShape SIX_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
 
     public CoinPileBlock() {
-        super(Properties.of().sound(ModSoundsType.COIN));
+        super(Properties.of().sound(ModSoundsTypes.COIN));
         registerDefaultState(this.defaultBlockState().setValue(HEAPS, 1).setValue(ISBASE, true));
     }
 
