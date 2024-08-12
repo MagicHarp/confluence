@@ -1,14 +1,19 @@
 package org.confluence.mod.entity.slime;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LightLayer;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
@@ -37,6 +42,26 @@ public class BaseSlime extends Slime {
             .add(Attributes.ATTACK_DAMAGE, attackDamage)
             .add(Attributes.ARMOR, armor)
             .add(Attributes.MAX_HEALTH, maxHealth);
+    }
+
+    public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        if (!(pLevel instanceof Level level)) {
+            return false;
+        }
+        if (!checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
+            return false;
+        } else if (type == ModEntities.BLUE_SLIME.get() || type == ModEntities.GREEN_SLIME.get() || type == ModEntities.PURPLE_SLIME.get()
+            || type == ModEntities.ICE_SLIME.get() || type == ModEntities.DESERT_SLIME.get() || type == ModEntities.JUNGLE_SLIME.get()
+            || type == ModEntities.PINK_SLIME.get()) {
+            int y = pPos.getY();
+            return y > 30 && y < 260 && level.isDay() && pLevel.canSeeSky(pPos);
+        } else if (type == ModEntities.YELLOW_SLIME.get() || type == ModEntities.RED_SLIME.get()) {
+            return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() > 30;
+        } else if (type == ModEntities.BLACK_SLIME.get()) {
+            return pLevel.getBrightness(LightLayer.SKY, pPos) == 0 && pPos.getY() <= 30;
+        }
+        // 剩下的条件用方块的isValidSpawn方法
+        return false;
     }
 
     @Override
@@ -82,4 +107,6 @@ public class BaseSlime extends Slime {
             ModUtils.createItemEntity(baseSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
         }
     }
+
+
 }

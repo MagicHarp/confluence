@@ -24,7 +24,6 @@ public class LeaveGoal extends Goal {
         double y = 0.1 + (0.6 - 0.1) * random.nextDouble();  // 0.1-0.6
         double z = random.nextDouble() - 0.5;
         targetMotion = new Vec3(x, y, z).normalize().scale(0.25);
-        mob.setNoGravity(true);
     }
 
     @Override

@@ -39,7 +39,6 @@ public class SurroundTargetGoal extends Goal {
         if(target == null) return;
         locateCount++;
         ticksLeft=40;
-        mob.setNoGravity(true);
         mob.setDeltaMovement(mob.getDeltaMovement().with(Direction.Axis.Y, 0));
         Vec3 targetDir = mob.position().with(Direction.Axis.Y,target.position().y).vectorTo(target.position());  // 先确定水平方向
         float[] offsetAngle = dirToRot(targetDir);
@@ -51,11 +50,11 @@ public class SurroundTargetGoal extends Goal {
         targetPos = direction.normalize().scale(4).with(Direction.Axis.Y, offsetY).add(target.position());  // 然后设置垂直坐标
     }
 
-    /** 按正弦函数确定Y坐标偏移 */
+    /** 按余弦函数确定Y坐标偏移 */
     public float getOffsetY(){
         float period = 6.1f;
         float radians = 2f * Mth.PI * (locateCount % period) / period;
-        return 2.57f * Mth.sin(radians) + 1;
+        return 2.57f * Mth.cos(radians) + 1;
     }
 
     /** 把向量转成角度 */

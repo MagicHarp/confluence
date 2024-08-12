@@ -20,11 +20,13 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
     BLACK_SLIME_SPAWN_EGG("black_slime_spawn_egg", ModEntities.BLACK_SLIME, 0x7E7E7E, 0x373535),
     PINK_SLIME_SPAWN_EGG("pink_slime_spawn_egg", ModEntities.PINK_SLIME, 0xFF87B3, 0xf89fe3),
     DESERT_SLIME_SPAWN_EGG("desert_slime_spawn_egg", ModEntities.DESERT_SLIME, 0xDCC59a, 0xC7AB5E),
+    JUNGLE_SLIME_SPAWN_EGG("jungle_slime_spawn_egg", ModEntities.JUNGLE_SLIME, 0x9ae920, 0xC7AB5E),
     ICE_SLIME_SPAWN_EGG("ice_slime_spawn_egg", ModEntities.ICE_SLIME, 0xB3F0EA, 0x7FDEDF),
     LAVA_SLIME_SPAWN_EGG("lava_slime_spawn_egg", ModEntities.LAVA_SLIME, 0xFFB150, 0xC45737),
     CRIMSON_SLIME_SPAWN_EGG("crimson_slime_spawn_egg", ModEntities.CRIMSON_SLIME, 0x8B4949, 0x7D1D1D),
     TROPIC_SLIME_SPAWN_EGG("tropic_slime_spawn_egg", ModEntities.TROPIC_SLIME, 0x73bcf4, 0x7374f4),
-    LUMINOUS_SLIME_SPAWN_EGG("evil_slime_spawn_egg", ModEntities.LUMINOUS_SLIME, 0xFF00FF, 0xEDFFFA);
+    LUMINOUS_SLIME_SPAWN_EGG("evil_slime_spawn_egg", ModEntities.LUMINOUS_SLIME, 0xFF00FF, 0xEDFFFA),
+    DEMON_EYE_SPAWN_EGG("demon_eye_spawn_egg", ModEntities.DEMON_EYE, 0xffffff,0xab0d0d);
 
     private final RegistryObject<ForgeSpawnEggItem> value;
 

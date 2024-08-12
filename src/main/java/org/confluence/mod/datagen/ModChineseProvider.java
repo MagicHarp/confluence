@@ -64,6 +64,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.blue_slime", "蓝色史莱姆");
         add("entity.confluence.red_slime", "红色史莱姆");
         add("entity.confluence.purple_slime", "紫色史莱姆");
+        add("entity.confluence.jungle_slime", "丛林史莱姆");
         add("entity.confluence.pink_slime", "粉色史莱姆");
         add("entity.confluence.yellow_slime", "黄色史莱姆");
         add("entity.confluence.crimson_slime", "猩红史莱姆");
@@ -73,6 +74,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.green_slime", "绿色史莱姆");
         add("entity.confluence.black_slime", "史莱姆之母");
         add("entity.confluence.lava_slime", "岩浆史莱姆");
+        add("entity.confluence.demon_eye", "恶魔眼");
 
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
@@ -1588,6 +1590,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(YELLOW_WRENCH.get(), "黄扳手");
         add(GOLDEN_KEY.get(), "金钥匙");
         add(SHADOW_KEY.get(), "暗影钥匙");
+        add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
+        add(DEMON_HEART.get(), "恶魔之心");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
@@ -1801,6 +1805,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(), "黄色史莱姆刷怪蛋");
         add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(), "紫色史莱姆刷怪蛋");
         add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(), "沙漠史莱姆刷怪蛋");
+        add(SpawnEggs.JUNGLE_SLIME_SPAWN_EGG.get(), "丛林史莱姆刷怪蛋");
         add(SpawnEggs.PINK_SLIME_SPAWN_EGG.get(), "粉色史莱姆刷怪蛋");
         add(SpawnEggs.ICE_SLIME_SPAWN_EGG.get(), "冰冻史莱姆刷怪蛋");
         add(SpawnEggs.GREEN_SLIME_SPAWN_EGG.get(), "绿色史莱姆刷怪蛋");
@@ -1809,6 +1814,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.TROPIC_SLIME_SPAWN_EGG.get(), "热带史莱姆刷怪蛋");
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
+        add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
         // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
         add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");
@@ -2208,7 +2214,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.CREAM_SODA.get(), "奶油苏打");
         add(Foods.ICE_CREAM.get(), "冰淇淋");
         add(Foods.MILKSHAKE.get(), "奶昔");
-        add(Foods.JOJA_COLA.get(), "乔家可乐");
+        add(Foods.JOJA_COLA.get(), "Joja可乐");
         add(Foods.CARTON_OF_MILK.get(), "卡通牛奶");
         add(Foods.TEACUP.get(), "一小杯茶");
         add(Foods.COFFEE.get(), "咖啡");

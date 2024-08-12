@@ -22,6 +22,7 @@ import java.util.List;
 public class EnchantedSwordProjectile extends Projectile {
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(EnchantedSwordProjectile.class, EntityDataSerializers.INT);
     private static final float damage = 9.0F;
+    private static final int timeExistence = 40;
 
     public EnchantedSwordProjectile(EntityType<EnchantedSwordProjectile> entityType, Level pLevel) {
         super(entityType, pLevel);
@@ -42,7 +43,7 @@ public class EnchantedSwordProjectile extends Projectile {
         double offZ = getZ() + vec3.z;
         setDeltaMovement(vec3.scale(0.93));
         setPos(offX, offY, offZ);
-        if (tickCount >= 60) this.remove(RemovalReason.KILLED);
+        if (tickCount >= timeExistence) this.remove(RemovalReason.KILLED);
     }
 
     private void checkCollision() {
