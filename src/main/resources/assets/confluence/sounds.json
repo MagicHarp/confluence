@@ -91,5 +91,15 @@
                 "stream": true
             }
         ]
+    },
+    "routine_hurt": {
+        "sounds": [
+            "confluence:mob/routine_hurt"
+        ]
+    },
+    "routine_death": {
+        "sounds": [
+            "confluence:mob/routine_death"
+        ]
     }
 }

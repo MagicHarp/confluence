@@ -44,6 +44,7 @@
     "minVersion": "0.8.5",
     "client": [
         "ConnectionMixin",
+        "accessor.CompileResultsAccessor",
         "accessor.LevelRendererAccessor",
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",

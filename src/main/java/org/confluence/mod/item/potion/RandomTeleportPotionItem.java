@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.misc.ModSoundsEvent;
 
 public class RandomTeleportPotionItem extends AbstractPotionItem {
     public static final double RANGE = 200.0;
@@ -38,8 +39,8 @@ public class RandomTeleportPotionItem extends AbstractPotionItem {
                 Vec3 vec3 = living.position();
                 level.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(living));
                 if (living.randomTeleport(nx, ny, nz, true)) {
-                    level.playSound(null, x, y, z, SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    living.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+                    level.playSound(null, x, y, z, ModSoundsEvent.TRANSMISSION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    living.playSound(ModSoundsEvent.TRANSMISSION.get(), 1.0F, 1.0F);
                     break;
                 }
             }

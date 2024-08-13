@@ -97,6 +97,7 @@ public final class ForgeClient {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
         GunShootingHandler.handle(event, localPlayer);
+        EnchantedSwordShootingHandler.handle(event, localPlayer);
         CursedEffect.onLeftClick(localPlayer, event);
         StonedEffect.onLeftClick(localPlayer, event);
     }
