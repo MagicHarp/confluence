@@ -52,7 +52,7 @@ public final class ModFluids {
                 .density(2000)
                 .canSwim(false)
                 .viscosity(3000)
-                .motionScale(0.003)
+                .motionScale(0.0003)
                 .canExtinguish(true)
                 .supportsBoating(true)
                 .rarity(ModRarity.YELLOW)
