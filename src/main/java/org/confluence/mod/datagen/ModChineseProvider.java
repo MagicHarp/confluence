@@ -1299,6 +1299,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶");
         add(CRIMSON_ALTAR.get(), "猩红祭坛");
         add(DEMON_ALTAR.get(), "恶魔祭坛");
+        add(EXTRACTINATOR.get(), "提炼机");
         add(CLOUD_BLOCK.get(), "云块");
         add(RAIN_CLOUD_BLOCK.get(), "雨云块");
         add(SNOW_CLOUD_BLOCK.get(), "雪云块");

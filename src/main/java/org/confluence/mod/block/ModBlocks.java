@@ -108,6 +108,7 @@ public final class ModBlocks {
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
+    public static final RegistryObject<ExtractinatorBlock> EXTRACTINATOR = registerWithItem("extractinator", () -> new ExtractinatorBlock(BlockBehaviour.Properties.of().strength(2.2F, 5.0F)));
     public static final RegistryObject<AltarBlock> DEMON_ALTAR = registerWithItem("demon_altar", () -> new AltarBlock(AltarBlock.Variant.DEMON), supplier -> () -> new AltarBlock.Item(supplier.get()));
     public static final RegistryObject<AltarBlock> CRIMSON_ALTAR = registerWithItem("crimson_altar", () -> new AltarBlock(AltarBlock.Variant.CRIMSON), supplier -> () -> new AltarBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<AltarBlock.Entity>> ALTAR_BLOCK_ENTITY = BLOCK_ENTITIES.register("altar_block_entity", () -> BlockEntityType.Builder.of(AltarBlock.Entity::new, DEMON_ALTAR.get(), CRIMSON_ALTAR.get()).build(null));

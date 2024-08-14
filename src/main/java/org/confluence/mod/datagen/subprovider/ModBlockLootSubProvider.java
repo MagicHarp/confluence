@@ -32,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 import static org.confluence.mod.block.ModBlocks.*;
-import static org.confluence.mod.block.ModBlocks.PEARL_COBBLESTONE;
 
 public class ModBlockLootSubProvider extends BlockLootSubProvider {
     public ModBlockLootSubProvider() {
@@ -76,6 +75,8 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
         dropSelf(DESERT_FOSSIL.get());
         dropSelf(SLUSH.get());
+
+        dropSelf(EXTRACTINATOR.get());
 
         add(Ores.SANCTIFICATION_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));
         add(Ores.CORRUPTION_COAL_ORE.get(), block -> createOreDrop(block, Items.COAL));

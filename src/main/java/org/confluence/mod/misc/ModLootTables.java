@@ -11,6 +11,10 @@ public final class ModLootTables {
     public static final ResourceLocation CAN_OF_WORMS = register("gameplay/can_of_worms");
     public static final ResourceLocation FISHING_LAVA = register("gameplay/fishing/lava");
     public static final ResourceLocation FISH = register("gameplay/fishing");
+    public static final ResourceLocation E_DF = register("gameplay/extract/with_desert_fossil");
+    public static final ResourceLocation E_G = register("gameplay/extract/with_gravel");
+    public static final ResourceLocation E_J = register("gameplay/extract/with_junk");
+    public static final ResourceLocation E_S = register("gameplay/extract/with_slush");
 
     private static ResourceLocation register(String id) {
         return new ResourceLocation(Confluence.MODID, id);
