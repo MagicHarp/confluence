@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ModelPart.class)
-public class ModelPartMixin implements IModelPart {
+public abstract class ModelPartMixin implements IModelPart {
     @Unique private LivingEntity confluence$renderingLiving;
     @Unique private float confluence$renderingPartialTick;
 

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(Player.class)
-public class PlayerMixin implements IPlayer {
+public abstract class PlayerMixin implements IPlayer {
     @Unique private FlailEntity confluence$flailEntity;
 
     @Override
