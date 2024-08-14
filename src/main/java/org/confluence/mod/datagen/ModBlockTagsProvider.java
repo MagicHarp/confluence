@@ -89,8 +89,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.EBONY_HARDENED_SAND_BLOCK.get(),
             ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(),
             ModBlocks.PEARL_HARDENED_SAND_BLOCK.get(),
-                DESERT_FOSSIL.get(),
-                EXTRACTINATOR.get()
+            ModBlocks.DESERT_FOSSIL.get(),
+            ModBlocks.EXTRACTINATOR.get(),
+            ModBlocks.DART_TRAP.get(),
+            ModBlocks.SIGNAL_ADAPTER.get(),
+            ModBlocks.SWITCH.get(),
+            ModBlocks.TIMERS_BLOCK_1_1.get(),
+            ModBlocks.TIMERS_BLOCK_3_1.get(),
+            ModBlocks.TIMERS_BLOCK_5_1.get(),
+            ModBlocks.TIMERS_BLOCK_1_2.get(),
+            ModBlocks.TIMERS_BLOCK_1_4.get()
         );
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
         acceptTag(mineableWithShovel);
@@ -101,7 +109,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ANOTHER_CRIMSON_SAND.get(),
             EBONY_SAND_LAYER_BLOCK.get(),
             PEARL_SAND_LAYER_BLOCK.get(),
-            ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get()
+            ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get(),
+            ASH_BLOCK.get()
         );
         tag(BlockTags.DIRT).add(
             CORRUPT_GRASS_BLOCK.get(),

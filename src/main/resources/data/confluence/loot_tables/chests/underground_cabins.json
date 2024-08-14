@@ -25,8 +25,18 @@
           "weight": 1
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:extractinator",
+          "weight": 0.5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:shoe_spikes",
+          "weight": 1
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 9
+          "weight": 7
         }
       ],
       "rolls": 1

@@ -15,8 +15,13 @@
           "weight": 244
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:extractinator",
+          "weight": 186
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 9320
+          "weight": 9134
         }
       ],
       "rolls": 1
