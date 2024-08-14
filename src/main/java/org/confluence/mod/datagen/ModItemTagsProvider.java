@@ -38,6 +38,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
         tag(ModTags.Items.DESERT_FOSSIL).add(ModBlocks.DESERT_FOSSIL.get().asItem());
         tag(ModTags.Items.GRAVEL).add(Blocks.GRAVEL.asItem());
+        tag(ModTags.Items.SLUSH).add(ModBlocks.SLUSH.get().asItem());
+        tag(ModTags.Items.JUNK).add(Blocks.LILY_PAD.asItem(),Items.LEATHER_BOOTS,Blocks.SEAGRASS.asItem());
         IntrinsicTagAppender<Item> torch = tag(ModTags.Items.TORCH);
         torch.add(Items.TORCH, Items.SOUL_TORCH);
         for (Torches torches : Torches.values()) torch.add(torches.item.get());
