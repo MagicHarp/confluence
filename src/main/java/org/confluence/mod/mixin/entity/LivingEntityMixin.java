@@ -3,8 +3,13 @@ package org.confluence.mod.mixin.entity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityDimensions;
@@ -31,8 +36,10 @@ import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModDamageTypes;
-import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.mixinauxiliary.IEntity;
+import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.DeathAnimUtils;
 import org.confluence.mod.util.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,11 +47,22 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.util.RenderUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+public abstract class LivingEntityMixin implements ILivingEntity {
+    // 位移，旋转
+    @Unique private final Map<GeoBone, float[]> confluence$boneMotions = new HashMap<>();
+    @Unique private final Map<ModelPart, float[]> confluence$partMotions = new HashMap<>();
+
     @Shadow
     public abstract EntityDimensions getDimensions(Pose pPose);
 
@@ -218,6 +236,51 @@ public abstract class LivingEntityMixin {
         if (cir.getReturnValue()) {
             cir.setReturnValue(CuriosUtils.noSameCurio(confluence$getSelf(), CurioItems.HAND_WARMER.get()));
         }
+    }
+
+    @Inject(method = "tick", at = @At("RETURN"))
+    private void tick(CallbackInfo ci){
+        if(!confluence$getSelf().level().isClientSide() || confluence$getSelf().deathTime != 1) return;
+        if(confluence$getSelf() instanceof GeoAnimatable){
+            confluence$initGeoDeathAnim();
+        }else{
+            confluence$initVanillaDeathAnim();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Unique
+    private void confluence$initGeoDeathAnim(){
+        GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(confluence$getSelf());
+        RandomSource random = confluence$getSelf().level().getRandom();
+        if(model != null){
+            BakedGeoModel bakedModel = model.getBakedModel(model.getModelResource((GeoAnimatable) confluence$getSelf()));
+            for(GeoBone bone : bakedModel.topLevelBones()){
+                confluence$boneMotions.put(bone, DeathAnimUtils.createOffsets(random, confluence$getSelf().getDeltaMovement(),bone.getPosY()));
+            }
+        }
+    }
+    @Unique
+    private void confluence$initVanillaDeathAnim(){
+        EntityRenderer<?> r = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(confluence$getSelf());
+        if(r instanceof LivingEntityRenderer<?,?> renderer){
+            RandomSource random = confluence$getSelf().level().getRandom();
+            for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+                confluence$partMotions.putIfAbsent(modelPart, DeathAnimUtils.createOffsets(random, confluence$getSelf().getDeltaMovement(),modelPart.y));
+            }
+        }
+    }
+
+    @Override
+    public float[] confluence$getMotionsForBone(GeoBone bone){
+        float[] f = confluence$boneMotions.get(bone);
+        return f != null ? f : new float[6];
+    }
+
+    @Override
+    public float[] confluence$getMotionsForPart(ModelPart bone){
+        float[] f = confluence$partMotions.get(bone);
+        return f != null ? f : new float[6];
     }
 
     @Unique
