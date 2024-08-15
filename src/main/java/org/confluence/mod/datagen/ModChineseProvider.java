@@ -1294,7 +1294,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
         add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
-        add(THIN_ICE_BLOCK.get(), "碎冰块");
+        add(THIN_ICE_BLOCK.get(), "薄冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
         add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶");
         add(CRIMSON_ALTAR.get(), "猩红祭坛");

@@ -7,7 +7,7 @@
     ],
     "key": {
         "/": {
-            "item": "minecraft:iron_ingot"
+            "tag": "confluence:lead_and_iron"
         },
         "S": {
             "item": "minecraft:string"

@@ -3,19 +3,15 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
-    },
-    "@": {
-      "item": "confluence:lead_ingot"
+      "tag": "confluence:lead_and_iron"
     }
   },
   "pattern": [
-    "@@",
-    "##",
-    "##"
+    "# #",
+    "###"
   ],
   "result": {
-    "item": "minecraft:smithing_table"
+    "item": "minecraft:minecart"
   },
   "show_notification": true
 }

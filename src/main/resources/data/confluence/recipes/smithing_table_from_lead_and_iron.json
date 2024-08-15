@@ -3,15 +3,19 @@
   "category": "misc",
   "key": {
     "#": {
+      "tag": "confluence:tr_planks"
+    },
+    "@": {
       "item": "confluence:lead_ingot"
     }
   },
   "pattern": [
-    "# #",
-    "###"
+    "@@",
+    "##",
+    "##"
   ],
   "result": {
-    "item": "minecraft:minecart"
+    "item": "minecraft:smithing_table"
   },
   "show_notification": true
 }

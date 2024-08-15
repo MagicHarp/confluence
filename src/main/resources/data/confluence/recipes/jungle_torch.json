@@ -11,11 +11,11 @@
             "item": "minecraft:torch"
         },
         {
-            "item": "confluence:hardened_sand_block"
+            "item": "confluence:jungle_spore"
         }
     ],
     "result": {
-        "item": "confluence:desert_torch",
+        "item": "confluence:jungle_torch",
         "count": 3
     }
 }

@@ -9,10 +9,10 @@
       "item": "minecraft:redstone"
     },
     "T": {
-      "tag": "minecraft:planks"
+      "tag": "confluence:tr_planks"
     },
     "X": {
-      "item": "confluence:lead_ingot"
+      "tag": "confluence:lead_and_iron"
     }
   },
   "pattern": [

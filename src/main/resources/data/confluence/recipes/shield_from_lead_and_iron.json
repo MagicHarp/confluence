@@ -7,10 +7,10 @@
     ],
     "key": {
         "#": {
-            "tag": "minecraft:planks"
+            "tag": "confluence:tr_planks"
         },
         "O": {
-            "item": "confluence:lead_ingot"
+            "tag": "confluence:lead_and_iron"
         }
     },
     "result": {

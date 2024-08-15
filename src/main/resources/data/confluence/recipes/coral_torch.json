@@ -11,11 +11,11 @@
             "item": "minecraft:torch"
         },
         {
-            "item": "confluence:hardened_sand_block"
+            "tag": "confluence:coral"
         }
     ],
     "result": {
-        "item": "confluence:desert_torch",
+        "item": "confluence:coral_torch",
         "count": 3
     }
 }

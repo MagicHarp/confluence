@@ -11,11 +11,11 @@
             "item": "minecraft:torch"
         },
         {
-            "item": "confluence:hardened_sand_block"
+            "item": "minecraft:bone"
         }
     ],
     "result": {
-        "item": "confluence:desert_torch",
+        "item": "confluence:bone_torch",
         "count": 3
     }
 }

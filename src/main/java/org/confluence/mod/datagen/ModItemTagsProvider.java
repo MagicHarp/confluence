@@ -14,6 +14,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hook.Hooks;
@@ -40,6 +41,15 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.GRAVEL).add(Blocks.GRAVEL.asItem());
         tag(ModTags.Items.SLUSH).add(ModBlocks.SLUSH.get().asItem());
         tag(ModTags.Items.JUNK).add(Blocks.LILY_PAD.asItem(),Items.LEATHER_BOOTS,Blocks.SEAGRASS.asItem());
+        tag(ModTags.Items.CORAL).add(Blocks.TUBE_CORAL.asItem(),Blocks.TUBE_CORAL_FAN.asItem(),Blocks.TUBE_CORAL_BLOCK.asItem(),Blocks.BRAIN_CORAL.asItem(),Blocks.BRAIN_CORAL_FAN.asItem(),Blocks.BRAIN_CORAL_BLOCK.asItem(),
+            Blocks.BUBBLE_CORAL.asItem(),Blocks.BUBBLE_CORAL_FAN.asItem(),Blocks.BUBBLE_CORAL_BLOCK.asItem(),Blocks.FIRE_CORAL.asItem(),Blocks.FIRE_CORAL_FAN.asItem(),Blocks.FIRE_CORAL_BLOCK.asItem(),Blocks.HORN_CORAL.asItem(),Blocks.HORN_CORAL_FAN.asItem(),Blocks.HORN_CORAL_BLOCK.asItem(),
+            Blocks.DEAD_TUBE_CORAL.asItem(),Blocks.DEAD_TUBE_CORAL_FAN.asItem(),Blocks.DEAD_TUBE_CORAL_BLOCK.asItem(),Blocks.DEAD_BRAIN_CORAL.asItem(),Blocks.DEAD_BRAIN_CORAL_FAN.asItem(),Blocks.DEAD_BRAIN_CORAL_BLOCK.asItem(),
+            Blocks.DEAD_BUBBLE_CORAL.asItem(),Blocks.DEAD_BUBBLE_CORAL_FAN.asItem(),Blocks.DEAD_BUBBLE_CORAL_BLOCK.asItem(),Blocks.DEAD_FIRE_CORAL.asItem(),Blocks.DEAD_FIRE_CORAL_FAN.asItem(),Blocks.DEAD_FIRE_CORAL_BLOCK.asItem(),Blocks.DEAD_HORN_CORAL.asItem(),Blocks.DEAD_HORN_CORAL_FAN.asItem(),Blocks.DEAD_HORN_CORAL_BLOCK.asItem());
+        tag(ModTags.Items.TR_PLANKS).add(ModBlocks.EBONY_LOG_BLOCKS.PLANKS.get().asItem(),ModBlocks.SHADOW_LOG_BLOCKS.PLANKS.get().asItem(),ModBlocks.PALM_LOG_BLOCKS.PLANKS.get().asItem()
+        ,ModBlocks.SPOOKY_LOG_BLOCKS.PLANKS.get().asItem(),ModBlocks.ASH_LOG_BLOCKS.PLANKS.get().asItem(),ModBlocks.PEARL_LOG_BLOCKS.PLANKS.get().asItem(),Blocks.OAK_PLANKS.asItem(),Blocks.SPRUCE_PLANKS.asItem(),
+            Blocks.ACACIA_PLANKS.asItem(),Blocks.DARK_OAK_PLANKS.asItem(),Blocks.JUNGLE_PLANKS.asItem(),Blocks.MANGROVE_PLANKS.asItem(),Blocks.CHERRY_PLANKS.asItem(),Blocks.BAMBOO_PLANKS.asItem(),Blocks.CRIMSON_PLANKS.asItem(),
+            Blocks.BIRCH_PLANKS.asItem(),Blocks.WARPED_PLANKS.asItem());
+        tag(ModTags.Items.LEAD_AND_IRON).add(Items.IRON_INGOT, Materials.LEAD_INGOT.get());
         IntrinsicTagAppender<Item> torch = tag(ModTags.Items.TORCH);
         torch.add(Items.TORCH, Items.SOUL_TORCH);
         for (Torches torches : Torches.values()) torch.add(torches.item.get());
