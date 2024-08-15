@@ -186,6 +186,14 @@
     "confluence:another_crimson_hardened_sand_block",
     "confluence:pearl_hardened_sand_block",
     "confluence:desert_fossil",
-    "confluence:extractinator"
+    "confluence:extractinator",
+    "confluence:dart_trap",
+    "confluence:signal_adapter",
+    "confluence:switch",
+    "confluence:timers_1_1",
+    "confluence:timers_3_1",
+    "confluence:timers_5_1",
+    "confluence:timers_1_2",
+    "confluence:timers_1_4"
   ]
 }
