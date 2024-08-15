@@ -2,6 +2,7 @@ package org.confluence.mod.entity.demoneye;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -86,6 +87,18 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         attributeMap.getInstance(Attributes.ARMOR).setBaseValue(pVariant.armor);
         attributeMap.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(pVariant.big ? 0.1 : 0.2);
         setHealth(getMaxHealth());
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag pCompound){
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putInt("Variant", this.getVariant().id);
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound){
+        super.readAdditionalSaveData(pCompound);
+        this.setVariant(DemonEyeVariant.byId(pCompound.getInt("Variant")));
     }
 
     @Override
