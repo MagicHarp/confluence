@@ -28,7 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.block.ExtractinatorBlockModel;
-import org.confluence.mod.client.model.block.LifeCrystalBlockModel;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModLootTables;
@@ -62,7 +61,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
-        return new LifeCrystalBlock.Entity(pPos, pState);
+        return new ExtractinatorBlock.Entity(pPos, pState);
     }
     @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
@@ -146,7 +145,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
 
                             @Override
                             public ResourceLocation getAnimationResource(ExtractinatorBlock.Item animatable) {
-                                return null;
+                                return ExtractinatorBlockModel.ANIMATIONS;
                             }
                         });
                     }
