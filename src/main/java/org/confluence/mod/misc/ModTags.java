@@ -45,6 +45,13 @@ public final class ModTags {
         public static final TagKey<Item> FRUIT = register("fruit");
         public static final TagKey<Item> MINUTE_WATCH = register("minute_watch");
         public static final TagKey<Item> RANGED_WEAPON = register("ranged_weapon");
+        public static final TagKey<Item> DESERT_FOSSIL = register("desert_fossil");
+        public static final TagKey<Item> GRAVEL = register("gravel");
+        public static final TagKey<Item> JUNK = register("junk");
+        public static final TagKey<Item> SLUSH = register("slush");
+        public static final TagKey<Item> CORAL = register("coral");
+        public static final TagKey<Item> TR_PLANKS = register("tr_planks");
+        public static final TagKey<Item> LEAD_AND_IRON = register("lead_and_iron");
 
         private static TagKey<Item> curios(String id) {
             return ItemTags.create(new ResourceLocation(Curios.MODID, id));

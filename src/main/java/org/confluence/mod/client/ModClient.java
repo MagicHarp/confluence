@@ -201,6 +201,7 @@ public final class ModClient {
 
         event.registerBlockEntityRenderer(ModBlocks.ALTAR_BLOCK_ENTITY.get(), AltarBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.LIFE_CRYSTAL_BLOCK_ENTITY.get(), LifeCrystalBlockRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.EXTRACTINATOR_ENTITY.get(), ExtractinatorBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.SIGN_BLOCK_ENTITY.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.MECHANICAL_BLOCK_ENTITY.get(), MechanicalBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), BaseChestBlockRenderer::new);

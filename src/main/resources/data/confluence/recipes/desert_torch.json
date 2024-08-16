@@ -11,7 +11,7 @@
             "item": "minecraft:torch"
         },
         {
-            "item": "minecraft:sandstone"
+            "item": "confluence:hardened_sand_block"
         }
     ],
     "result": {

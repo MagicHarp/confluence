@@ -10,7 +10,6 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.DeathChestBlock;
-import org.confluence.mod.block.furniture.chair.WhitePlasticChairBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
@@ -153,6 +152,21 @@ public final class ModTabs {
                 output.accept(CRACKED_BLUE_BRICK.get());
                 output.accept(CRACKED_GREEN_BRICK.get());
                 output.accept(CRACKED_PINK_BRICK.get());
+                // 草药 种子
+                output.accept(ModItems.WATERLEAF.get());
+                output.accept(ModItems.MOONSHINE_GRASS.get());
+                output.accept(ModItems.SHINE_ROOT.get());
+                output.accept(ModItems.SHIVERINGTHORNS.get());
+                output.accept(ModItems.SUNFLOWERS.get());
+                output.accept(ModItems.DEATHWEED.get());
+                output.accept(ModItems.FLAMEFLOWERS.get());
+                output.accept(ModItems.WATERLEAF_SEED.get());
+                output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
+                output.accept(ModItems.SHINE_ROOT_SEED.get());
+                output.accept(ModItems.SHIVERINGTHORNS_SEED.get());
+                output.accept(ModItems.SUNFLOWERS_SEED.get());
+                output.accept(ModItems.DEATHWEED_SEED.get());
+                output.accept(ModItems.FLAMEFLOWERS_SEED.get());
                 // 蘑菇 草
                 output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());
@@ -224,26 +238,13 @@ public final class ModTabs {
                 output.accept(ModItems.CAN_OF_WORMS.get());
                 output.accept(ModItems.CHRISTMAS_GIFT.get());
                 output.accept(ModItems.RED_ENVELOPE.get());
-                // 草药 种子
-                output.accept(ModItems.WATERLEAF.get());
-                output.accept(ModItems.MOONSHINE_GRASS.get());
-                output.accept(ModItems.SHINE_ROOT.get());
-                output.accept(ModItems.SHIVERINGTHORNS.get());
-                output.accept(ModItems.SUNFLOWERS.get());
-                output.accept(ModItems.DEATHWEED.get());
-                output.accept(ModItems.FLAMEFLOWERS.get());
-                output.accept(ModItems.WATERLEAF_SEED.get());
-                output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
-                output.accept(ModItems.SHINE_ROOT_SEED.get());
-                output.accept(ModItems.SHIVERINGTHORNS_SEED.get());
-                output.accept(ModItems.SUNFLOWERS_SEED.get());
-                output.accept(ModItems.DEATHWEED_SEED.get());
-                output.accept(ModItems.FLAMEFLOWERS_SEED.get());
+
 
                 output.accept(ModItems.GOLDEN_KEY.get());
                 output.accept(ModItems.SHADOW_KEY.get());
 
                 output.accept(ModItems.SUSPICIOUS_LOOKING_EYE.get());
+
                 for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
                     output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
                     if (variant.getSerializedName().startsWith("unlocked")) { // 只放解锁的
@@ -361,6 +362,7 @@ public final class ModTabs {
                         output.accept(TIMERS_BLOCK_1_2.get());
                         output.accept(TIMERS_BLOCK_1_4.get());
                         output.accept(GEYSER_BLOCK.get());
+                        output.accept(EXTRACTINATOR.get());
                     })
                     .build());
 }

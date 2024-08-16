@@ -2,6 +2,7 @@ package org.confluence.mod.entity.demoneye;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.misc.ModSoundsEvent;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
@@ -38,6 +38,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public AttackPhase attackPhase;
     public BlockPos anchorPoint;
     public SurroundTargetGoal surroundTargetGoal;
+    private boolean dead=false;
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
@@ -89,6 +90,18 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     }
 
     @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag pCompound){
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putInt("Variant", this.getVariant().id);
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound){
+        super.readAdditionalSaveData(pCompound);
+        this.setVariant(DemonEyeVariant.byId(pCompound.getInt("Variant")));
+    }
+
+    @Override
     protected void registerGoals() {
         surroundTargetGoal = new SurroundTargetGoal(this);
         goalSelector.addGoal(0, surroundTargetGoal);
@@ -123,6 +136,10 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     /** @author voila */
     public void move(@NotNull MoverType pType, @NotNull Vec3 motion){
+        if(dead){
+            super.move(pType, motion);
+            return;
+        }
         Vec3 collide = ((EntityAccessor) this).callCollide(motion);
         if(collide.x !=motion.x){
             motion = new Vec3(motion.x < 0 ? 0.22 : -0.22, motion.y, motion.z);
@@ -145,7 +162,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public void tick(){
         // TODO: 仇恨值
         Vec3 pos = position();
-        setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
+        setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, false));
         super.tick();
     }
 
@@ -169,6 +186,18 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public void onAddedToWorld(){
         super.onAddedToWorld();
         setNoGravity(true);
+    }
+
+    @Override
+    protected void tickDeath(){
+        if(!dead){
+            // 我怕频繁set会影响性能，虽然会检查是否不同再真的set，但是它会从map里面get，
+            // 每次get都有锁的操作，我怕锁太慢了，但是其实所有生物每刻都要检查一次生命值来决定是否要
+            // 调这个方法，所以我也不确定会不会慢
+            setNoGravity(false);
+            dead = true;
+        }
+        super.tickDeath();
     }
 
     @Override

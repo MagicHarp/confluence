@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderDispatcher.class)
-public class EntityRenderDispatcherMixin {
+public abstract class EntityRenderDispatcherMixin {
     @Inject(method = "renderHitbox",at = @At("RETURN"))
     private static void renderObb(PoseStack pPoseStack, VertexConsumer pBuffer, Entity pEntity, float pPartialTicks, CallbackInfo ci){
         if(pEntity instanceof IOriented oe){

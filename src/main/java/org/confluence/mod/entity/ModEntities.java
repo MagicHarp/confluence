@@ -75,6 +75,8 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<ChairEntity>> CHAIR = ENTITIES.register("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.05F, 0.02F).build("confluence:chair"));
     public static final RegistryObject<EntityType<EnchantedSwordProjectile>> ENCHANTED_SWORD_PROJECTILE = ENTITIES.register("enchanted_sword_projectile", () -> EntityType.Builder.of(EnchantedSwordProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:enchanted_sword_projectile"));
 
+    public static final RegistryObject<EntityType<BaseBombEntity>> BOMB_ENTITY = ENTITIES.register("bomb_entity",() -> EntityType.Builder.<BaseBombEntity>of(BaseBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:base_bomb_entity"));
+
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
         return ENTITIES.register(prefix + "_slime", () -> EntityType.Builder.<BaseSlime>of((entityType, level) -> new BaseSlime(entityType, level, color, size), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:" + prefix + "_slime"));
     }

@@ -6,6 +6,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.misc.ModTags;
@@ -19,6 +20,7 @@ import static org.confluence.mod.Confluence.MODID;
 public final class ModTiers {
     public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
 
+    public static final ModTier WOODEN  = new ModTier(0, 144, 4, 1, 5, () -> Ingredient.of(Items.OAK_PLANKS));
     public static final ModTier CACTUS = new ModTier(0, 144, 3, 1, 4, () -> Ingredient.of(Items.CACTUS));
     public static final ModTier COPPER = new ModTier(1, 250, 4, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ModTier TIN = new ModTier(1, 270, 4, 1, 5, () -> Ingredient.of(Materials.TIN_INGOT.get()));
@@ -26,6 +28,7 @@ public final class ModTiers {
     public static final ModTier SILVER = new ModTier(2, 304, 6, 2, 14, () -> Ingredient.of(Materials.SILVER_INGOT.get()));
     public static final ModTier TUNGSTEN = new ModTier(2, 648, 8, 2, 18, () -> Ingredient.of(Materials.TUNGSTEN_INGOT.get()));
     public static final ModTier GOLD = new ModTier(3, 1600, 8, 3, 22, () -> Ingredient.of(Items.GOLD_INGOT));
+    public static final ModTier FOSSIL = new ModTier(3, 1200, 8, 3, 22, () -> Ingredient.of(Materials.STURDY_FOSSIL.get()));
     public static final ModTier PLATINUM = new ModTier(3, 1661, 8, 3, 22, () -> Ingredient.of(Materials.PLATINUM_INGOT.get()));
     public static final ModTier METEORITE = new ModTier(3, 1933, 9, 3, 23, () -> Ingredient.of(Materials.METEORITE_INGOT.get()));
 

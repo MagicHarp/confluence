@@ -18,7 +18,8 @@ public enum Pickaxes implements EnumRegister<PickaxeItem> {
     GOLDEN_PICKAXE("golden_pickaxe", () -> new BasePickaxeItem(ModTiers.GOLD, 5, 1)),
     PLATINUM_PICKAXE("platinum_pickaxe", () -> new BasePickaxeItem(ModTiers.PLATINUM, 5, 1)),
 //其他镐
-    CANDY_CANE_PICKAXE("candy_cane_pickaxe", () -> new BasePickaxeItem(ModTiers.CANDY, 3, 1));
+    CANDY_CANE_PICKAXE("candy_cane_pickaxe", () -> new BasePickaxeItem(ModTiers.CANDY, 3, 1)),
+    FOSSIL_PICKAXE("fossil_pickaxe", () -> new BasePickaxeItem(ModTiers.FOSSIL, 5, 1));
     private final RegistryObject<PickaxeItem> value;
 
     Pickaxes(String id, Supplier<PickaxeItem> pickaxe) {

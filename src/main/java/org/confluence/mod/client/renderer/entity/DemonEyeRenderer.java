@@ -18,4 +18,9 @@ public class DemonEyeRenderer extends GeoEntityRenderer<DemonEye> {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
         poseStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(partialTick,animatable.xRotO,animatable.getXRot())));
     }
+
+    @Override
+    protected float getDeathMaxRotation(DemonEye animatable){
+        return 0;
+    }
 }

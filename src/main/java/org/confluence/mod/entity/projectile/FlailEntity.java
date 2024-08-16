@@ -164,9 +164,6 @@ public class FlailEntity extends ChainingEntity implements IOriented {
         if(phase < PHASE_SPIN || phase > PHASE_STAY){
             throw new IllegalArgumentException("Invalid phase");
         }
-        if(phase == PHASE_FORCE_RETRACT){
-            Confluence.debugMethod();
-        }
         getEntityData().set(DATA_PHASE, phase);
     }
 

@@ -74,7 +74,7 @@ public enum Ores implements EnumRegister<Block> {
     METEORITE_ORE("meteorite_ore", MeteoriteOre::new),
     RAW_METEORITE_BLOCK("raw_meteorite_block", MeteoriteOre::new),
     METEORITE_BLOCK("meteorite_block", MeteoriteOre::new),
-    // 沙漠化石
+    // 坚固化石
     STURDY_FOSSIL_BLOCK("sturdy_fossil_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK))),
     //绿宝石
     SANCTIFICATION_EMERALD_ORE("sanctification_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_ORE))),
