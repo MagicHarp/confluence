@@ -27,6 +27,8 @@ import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.common.Boxes;
+import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.fishing.Baits;
@@ -159,6 +161,7 @@ public final class ModFluids {
         // 顶替
         addItem(ItemTags.WOOL, Items.WHITE_WOOL, 1);
         addItem(ItemTags.WOOL_CARPETS, Items.WHITE_CARPET, 1);
+        addItem(Items.CRAFTING_TABLE, Items.OAK_PLANKS,4);
         // 饰品转化
         addItem(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
         addItem(MAGMA_STONE.get(), LAVA_CHARM.get());
@@ -179,6 +182,29 @@ public final class ModFluids {
         addItem(HIGH_TEST_FISHING_LINE.get(), ANGLER_EARRING.get());
         addItem(ANGLER_EARRING.get(), TACKLE_BOX.get());
         addItem(TACKLE_BOX.get(), HIGH_TEST_FISHING_LINE.get());
+        // 火把转化
+        addItem(Torches.RED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.ORANGE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.YELLOW_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.GREEN_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.BLUE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.WHITE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.PURPLE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.ICE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.PINK_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.BONE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.ULTRABRIGHT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.DEMON_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.CURSED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.ICHOR_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.RAINBOW_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.DESERT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.CORAL_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.CORRUPT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.CRIMSON_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.HALLOWED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.JUNGLE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(Torches.MUSHROOM_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
         // 匣子转化
         // 宝石转化
         addItem(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
