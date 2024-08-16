@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -25,6 +26,9 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.block.ExtractinatorBlockModel;
@@ -49,7 +53,11 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
     public ExtractinatorBlock(Properties pProperties) {
         super(pProperties);
     }
-
+    private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
+    @Override
+    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+        return SHAPE;
+    }
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
