@@ -43,6 +43,8 @@ import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -118,7 +120,11 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         }
 
         @Override
-        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+        public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+            controllers.add(new AnimationController<>(this, "controller", state ->
+                state.setAndContinue(RawAnimation.begin().thenLoop("default")))
+                );
+        }
 
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
