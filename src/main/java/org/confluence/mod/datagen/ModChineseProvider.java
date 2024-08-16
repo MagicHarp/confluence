@@ -1528,6 +1528,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
         add(Pickaxes.CACTUS_PICKAXE.get(), "仙人掌镐");
         add(Pickaxes.CANDY_CANE_PICKAXE.get(), "糖棒镐");
+        add(Pickaxes.FOSSIL_PICKAXE.get(), "化石镐");
         add(Pickaxes.TIN_PICKAXE.get(), "锡镐");
         add(Pickaxes.LEAD_PICKAXE.get(), "铅镐");
         add(Pickaxes.SILVER_PICKAXE.get(), "银镐");
@@ -1535,6 +1536,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pickaxes.GOLDEN_PICKAXE.get(), "金镐");
         add(Pickaxes.PLATINUM_PICKAXE.get(), "铂金镐");
         /* Hammers */
+        add(Hammers.WOODEN_HAMMER.get(), "木锤");
         add(Hammers.COPPER_HAMMER.get(), "铜锤");
         add(Hammers.TIN_HAMMER.get(), "锡锤");
         add(Hammers.LEAD_HAMMER.get(), "铅锤");
@@ -2077,6 +2079,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.PLATINUM_CHESTPLATE.get(), "铂金胸甲");
         add(Armors.PLATINUM_LEGGINGS.get(), "铂金护腿");
         add(Armors.PLATINUM_BOOTS.get(), "铂金靴子");
+        add(Armors.FOSSIL_HELMET.get(), "化石头盔");
+        add(Armors.FOSSIL_CHESTPLATE.get(), "化石胸甲");
+        add(Armors.FOSSIL_LEGGINGS.get(), "化石护腿");
+        add(Armors.FOSSIL_BOOTS.get(), "化石靴子");
 
         // 鱼
         add(Foods.SEA_BASS.get(), "鲈鱼");
