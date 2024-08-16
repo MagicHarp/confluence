@@ -986,6 +986,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("block.confluence.base_chest_block.unlocked_water", "§r§f水中箱");
         add("block.confluence.base_chest_block.death_water", "§r§f死人水中箱");
         add("block.confluence.base_chest_block.unlocked_skyware", "§r§f天域箱");
+        add("block.confluence.white_plastic_chair", "大排档凳子");
 
         add("resourcepack.terraria_art", "泰拉艺术");
         add("resourcepack.mainstream_connected_ores", "主流：连接矿石材质");

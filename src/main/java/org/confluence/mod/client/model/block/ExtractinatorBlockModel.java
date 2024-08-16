@@ -2,12 +2,8 @@ package org.confluence.mod.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.block.common.ExtractinatorBlock;
-import org.confluence.mod.block.common.LifeCrystalBlock;
 import software.bernie.geckolib.model.GeoModel;
-
-import static org.confluence.mod.Confluence.MODID;
 
 public class ExtractinatorBlockModel extends GeoModel<ExtractinatorBlock.Entity> {
     public static final ResourceLocation MODEL = new ResourceLocation(Confluence.MODID, "geo/block/extractinator.geo.json");

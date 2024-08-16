@@ -141,24 +141,24 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         @Override
         public void initializeClient(Consumer<IClientItemExtensions> consumer) {
             consumer.accept(new IClientItemExtensions() {
-                private GeoItemRenderer<ExtractinatorBlock.Item> renderer;
+                private GeoItemRenderer<Item> renderer;
 
                 @Override
                 public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                     if (renderer == null) {
                         this.renderer = new GeoItemRenderer<>(new GeoModel<>() {
                             @Override
-                            public ResourceLocation getModelResource(ExtractinatorBlock.Item animatable) {
+                            public ResourceLocation getModelResource(Item animatable) {
                                 return ExtractinatorBlockModel.MODEL;
                             }
 
                             @Override
-                            public ResourceLocation getTextureResource(ExtractinatorBlock.Item animatable) {
+                            public ResourceLocation getTextureResource(Item animatable) {
                                 return ExtractinatorBlockModel.TEXTURE;
                             }
 
                             @Override
-                            public ResourceLocation getAnimationResource(ExtractinatorBlock.Item animatable) {
+                            public ResourceLocation getAnimationResource(Item animatable) {
                                 return ExtractinatorBlockModel.ANIMATIONS;
                             }
                         });
