@@ -2,6 +2,7 @@ package org.confluence.mod.util;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.item.ModItems;
 
@@ -80,5 +82,17 @@ public final class ModUtils {
         Calendar calendar = Calendar.getInstance();
         return (calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 15) || // 从 十月中旬
             (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
+    }
+
+    /** 把向量转成角度 */
+    public static float[] dirToRot(Vec3 vec){
+        double x = vec.x;
+        double y = vec.y;
+        double z = vec.z;
+
+        double yaw = Math.toDegrees(Mth.atan2(-x, z));
+        double pitch = Math.toDegrees(Mth.atan2(-y, Math.sqrt(x * x + z * z)));
+
+        return new float[]{(float) yaw, (float) -pitch};
     }
 }

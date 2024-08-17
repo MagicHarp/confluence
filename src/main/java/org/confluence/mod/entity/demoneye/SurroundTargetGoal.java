@@ -1,8 +1,6 @@
 package org.confluence.mod.entity.demoneye;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -10,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class SurroundTargetGoal extends Goal {
         ticksLeft=40;
         mob.setDeltaMovement(mob.getDeltaMovement().with(Direction.Axis.Y, 0));
         Vec3 targetDir = mob.position().with(Direction.Axis.Y,target.position().y).vectorTo(target.position());  // 先确定水平方向
-        float[] offsetAngle = dirToRot(targetDir);
+        float[] offsetAngle = ModUtils.dirToRot(targetDir);
         double offsetY = getOffsetY();
         if(random.nextInt(3) == 0){
             offsetAngle[0] += random.nextBoolean() ? 20 : -20;
@@ -55,18 +54,6 @@ public class SurroundTargetGoal extends Goal {
         float period = 6.1f;
         float radians = 2f * Mth.PI * (locateCount % period) / period;
         return 2.57f * Mth.cos(radians) + 1;
-    }
-
-    /** 把向量转成角度 */
-    public static float[] dirToRot(Vec3 vec){
-        double x = vec.x;
-        double y = vec.y;
-        double z = vec.z;
-
-        double yaw = Math.toDegrees(Mth.atan2(-x, z));
-        double pitch = Math.toDegrees(Mth.atan2(-y, Math.sqrt(x * x + z * z)));
-
-        return new float[]{(float) yaw, (float) -pitch};
     }
 
     @Override
@@ -98,7 +85,7 @@ public class SurroundTargetGoal extends Goal {
         if(angleBetween(targetDir, motion) > 15 || targetMotion.length() < maxSpeed){
             mob.setDeltaMovement(targetMotion);
         }
-        float[] angle = dirToRot(targetMotion);
+        float[] angle = ModUtils.dirToRot(targetMotion);
         mob.setYRot(angle[0]);
         mob.setXRot(angle[1]);
 //        ((ServerLevel) (mob.level())).sendParticles(ParticleTypes.FLAME, targetPos.x, targetPos.y, targetPos.z, 1, 0, 0, 0, 0);
