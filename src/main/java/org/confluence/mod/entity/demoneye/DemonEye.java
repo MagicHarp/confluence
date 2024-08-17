@@ -162,7 +162,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public void tick(){
         // TODO: 仇恨值
         Vec3 pos = position();
-        setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, false));
+        setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
         super.tick();
     }
 
