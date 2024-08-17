@@ -135,7 +135,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
         public Item(ExtractinatorBlock pBlock) {
-            super(pBlock, new Properties().rarity(ModRarity.WHITE));
+            super(pBlock, new Properties().rarity(ModRarity.WHITE).stacksTo(1));
         }
 
         @Override
