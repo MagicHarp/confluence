@@ -22,7 +22,7 @@ public abstract class ModelPartMixin implements IModelPart, SelfGetter<ModelPart
     @Unique private float[] confluence$parentOffset = new float[6];
     @Unique private ModelPart confluence$root;
 
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", at = @At("HEAD"))
+    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"))
     private void renderStart(PoseStack pPoseStack, VertexConsumer pVertexConsumer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha, CallbackInfo ci){
         pPoseStack.pushPose();
         if(confluence$renderingLiving != null){
@@ -32,8 +32,7 @@ public abstract class ModelPartMixin implements IModelPart, SelfGetter<ModelPart
 
     // TODO: 抵消父模型旋转
 
-
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", at = @At("RETURN"))
+    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V"))
     private void renderEnd(PoseStack pPoseStack, VertexConsumer pVertexConsumer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha, CallbackInfo ci){
         pPoseStack.popPose();
         confluence$renderingLiving = null;

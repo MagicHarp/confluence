@@ -1,6 +1,8 @@
 package org.confluence.mod.event;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -69,9 +72,11 @@ import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.DeathAnimUtils;
 import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -311,6 +316,28 @@ public final class ForgeEvents {
             ((EntityAccessor) abstractMinecart).callRemovePassenger(player);
             abstractMinecart.discard();
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void beforeRenderLiving(RenderLivingEvent.Pre<?, ?> event){
+        LivingEntity entity = event.getEntity();
+        LivingEntityRenderer<?, ?> renderer = event.getRenderer();
+        float partialTick = event.getPartialTick();
+        if(entity.isAlive()) return;
+        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+            ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(entity);
+            ((IModelPart) (Object) modelPart).confluence$setRenderingPartialTick(partialTick);
+        }
+    }
+
+    @SubscribeEvent
+    public static void afterRenderLiving(RenderLivingEvent.Post<?, ?> event){
+        LivingEntity entity = event.getEntity();
+        LivingEntityRenderer<?, ?> renderer = event.getRenderer();
+        if(entity.isAlive()) return;
+        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+            ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(null);
         }
     }
 }
