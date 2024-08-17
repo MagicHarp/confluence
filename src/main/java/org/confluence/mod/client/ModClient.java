@@ -35,10 +35,7 @@ import org.confluence.mod.client.model.entity.fishing.HotlineFishingHookModel;
 import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.model.entity.hook.SkeletronHandModel;
 import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
-import org.confluence.mod.client.particle.BulletParticle;
-import org.confluence.mod.client.particle.ExtendedBreakingItemParticle;
-import org.confluence.mod.client.particle.FlameFlowerParticle;
-import org.confluence.mod.client.particle.ModParticles;
+import org.confluence.mod.client.particle.*;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
@@ -225,6 +222,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.AMETHYST_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.SAPPHIRE_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.CURRENT_DUST.get(), CurrentColorDustParticle.Provider::new);
     }
 
     @SubscribeEvent

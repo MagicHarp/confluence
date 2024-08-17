@@ -1,11 +1,15 @@
 package org.confluence.mod.client.particle;
 
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.particles.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.particle.opt.CurrentDustOptions;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Confluence.MODID);
@@ -20,4 +24,13 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> DIAMOND_BULLET = PARTICLES.register("diamond_bullet", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> AMETHYST_BULLET = PARTICLES.register("amethyst_bullet", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> FLAMEFLOWER_BLOOM = PARTICLES.register("flameflower_bloom", () -> new SimpleParticleType(false));
+    public static final RegistryObject<ParticleType<CurrentDustOptions>> CURRENT_DUST = register("current_dust", false, CurrentDustOptions.DESERIALIZER, (p_123819_) -> CurrentDustOptions.CODEC);
+    @SuppressWarnings("all")
+    private static <T extends ParticleOptions> RegistryObject<ParticleType<T>> register(String pKey, boolean pOverrideLimiter, ParticleOptions.Deserializer<T> pDeserializer, final Function<ParticleType<T>, Codec<T>> pCodecFactory) {
+        return PARTICLES.register(pKey, () -> new ParticleType<T>(pOverrideLimiter, pDeserializer) {
+            public @NotNull Codec<T> codec() {
+                return pCodecFactory.apply(this);
+            }
+        });
+    }
 }

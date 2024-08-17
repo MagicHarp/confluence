@@ -13,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.client.particle.opt.CurrentDustOptions;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModSoundsEvent;
@@ -21,6 +23,7 @@ import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -42,12 +45,29 @@ public class BaseSpeedBoots extends BaseCurioItem {
     public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
         return EMPTY_TOOLTIP;
     }
-
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         speedUp(slotContext, stack.getOrCreateTag(), 1, 40);
     }
 
+    public void spawnParticles(Level level, Vec3 vec3) {
+        int rand = level.getRandom().nextInt(3, 5);
+        double particleRandX = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        double particleRandY = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        double particleRandZ = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        CurrentDustOptions options = new CurrentDustOptions(getParticleColorStart(), getParticleColorEnd(), 1.2F);
+        System.out.println(options.getColor());
+        for (int i = 0; i < rand; ++i) {
+            level.addParticle(options, vec3.x + particleRandX , vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
+        }
+    }
+    private static final Vector3f COLOR = Vec3.fromRGB24(0xFFFFFF).toVector3f();
+    public Vector3f getParticleColorStart() {
+        return COLOR;
+    }
+    public Vector3f getParticleColorEnd() {
+        return COLOR;
+    }
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
@@ -68,6 +88,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
+            if (player.zza > 0 &&slotContext.entity().level().isClientSide) spawnParticles(slotContext.entity().level(), slotContext.entity().position());
         }
     }
 
