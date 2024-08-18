@@ -127,9 +127,9 @@ public final class ModEvents {
 
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                        "confluence:mainstream_connected_ores", Component.translatable("resourcepack.mainstream_connected_ores"), false,
-                        id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
-                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                    "confluence:mainstream_connected_ores", Component.translatable("resourcepack.mainstream_connected_ores"), false,
+                    id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
+                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
                 if (pack != null) {
                     consumer.accept(pack);
@@ -138,9 +138,9 @@ public final class ModEvents {
 
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                        "confluence:ter_armor", Component.translatable("resourcepack.ter_armor"), false,
-                        id -> new ModResources(id, modFile, "resourcepacks/ter_armor"),
-                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                    "confluence:ter_armor", Component.translatable("resourcepack.ter_armor"), false,
+                    id -> new ModResources(id, modFile, "resourcepacks/ter_armor"),
+                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
                 if (pack != null) {
                     consumer.accept(pack);
@@ -164,7 +164,6 @@ public final class ModEvents {
         event.register(ModEntities.GREEN_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.PURPLE_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.PINK_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        // pink
         event.register(ModEntities.CORRUPTED_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.DESERT_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.JUNGLE_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);

@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.misc.ModRarity;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ public class LifeCrystal extends Item {
                 itemStack.shrink(1);
                 applyModifier(player, playerAbility);
                 player.heal(4.0F);
-                level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundsEvent.LIFE_CRYSTAL_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundEvents.LIFE_CRYSTAL_USE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         });
         return InteractionResultHolder.success(itemStack);

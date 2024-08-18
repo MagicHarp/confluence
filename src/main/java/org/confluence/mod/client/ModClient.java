@@ -174,7 +174,7 @@ public final class ModClient {
         event.registerEntityRenderer(STAR_CLOAK.get(), StarCloakEntityRenderer::new);
         event.registerEntityRenderer(BOULDER.get(), BoulderRenderer::new);
         event.registerEntityRenderer(MONEY_HOLE.get(), MoneyHoleRenderer::new);
-        event.registerEntityRenderer(ENCHANTED_SWORD_PROJECTILE.get(), EnchantedSwordProjectileRenderer::new);
+        event.registerEntityRenderer(SWORD_PROJECTILE.get(), EnchantedSwordProjectileRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);

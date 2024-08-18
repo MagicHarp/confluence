@@ -29,7 +29,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.datagen.limit.CustomModel;
@@ -146,19 +145,12 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
             dropSequence(pLevel, pPos);
         }
+
         @Override
         public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-            BlockPos below = pPos.below();
-            BlockState blockBelow = pLevel.getBlockState(below);
-            if (blockBelow.is(Blocks.STONE)|| blockBelow.is(Blocks.DIRT)||
-                blockBelow.is(ModBlocks.EBONY_STONE.get())|| blockBelow.is(Blocks.SANDSTONE)||
-                blockBelow.is(Blocks.MOSS_BLOCK)|| blockBelow.is(ModBlocks.EBONY_STONE.get())||
-                blockBelow.is(ModBlocks.ANOTHER_CRIMSON_STONE.get())|| blockBelow.is(Blocks.DIRT)||
-                blockBelow.is(ModBlocks.HARDENED_SAND_BLOCK.get()) || blockBelow.is(ModBlocks.RED_HARDENED_SAND_BLOCK.get())) {
-                return true;
-            }
-            return false;
+            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
         }
+
         @Override
         public void onProjectileHit(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockHitResult pHit, @NotNull Projectile pProjectile) {
             BlockPos blockPos = pHit.getBlockPos();
@@ -207,7 +199,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             if (level.random.nextFloat() < 0.0222F) {
                 double y = center.y;
                 Item item = null;
-                if (level.dimension() == Confluence.HELL) {
+                if (level.dimension() == Level.NETHER) {
                     item = switch (level.random.nextInt(14)) {
                         // 洞穴探险
                         case 1 -> FEATHERFALL_POTION.get();
@@ -225,7 +217,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                         default -> null;
                     };
                     if (level.random.nextFloat() < 0.2F) {
-                        // 返回
+                        // 返回药水
                     }
                 } else if (y <= 0.0) {
                     item = switch (level.random.nextInt(15)) {
@@ -269,7 +261,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                     };
                 }
                 if (item != null) {
-                    ModUtils.createItemEntity(item, 1, center.x, y, center.z, level);
+                    ModUtils.createItemEntity(item, 1, center.x, y, center.z, level, 0);
                     return true;
                 }
             }
@@ -293,7 +285,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                     int amount = 1;
                     if (level.random.nextBoolean()) amount++;
                     /* 在专家模式中，有 1/8 的几率掉落 1 个心，3/8 的几率掉落 2 个心，3/8 的几率掉落 3 个心，以及 1/8 的几率掉落 4 个心。*/
-                    ModUtils.createItemEntity(ModItems.HEART.get(), amount, center.x, center.y, center.z, level);
+                    ModUtils.createItemEntity(ModItems.HEART.get(), amount, center.x, center.y, center.z, level, 0);
                 } else if (player.getInventory().hasAnyMatching(itemStack -> itemStack.getCount() < 20 && itemStack.is(ModTags.Items.TORCH))) {
                     return dropTorch(level, blockPos, center);
                 } else {
@@ -328,7 +320,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                     item = Items.TORCH;
                 }
             }
-            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level);
+            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level, 0);
             return true;
         }
 
@@ -338,24 +330,24 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             boolean hardCore = ConfluenceData.get((ServerLevel) level).isHardcore();
             if (level.random.nextBoolean()) {
                 item = hardCore ? ModItems.GRENADE.get() : ModItems.SHURIKEN.get();
-            } else if (level.dimension() == Confluence.HELL) {
+            } else if (level.dimension() == Level.NETHER) {
                 // 如果位于地狱，它会被狱炎箭替代
             } else if (hardCore) {
                 // 被邪箭或银子弹（在包含银的世界中）/ 钨子弹（在包含钨的世界中）（箭或子弹的几率各为 50%）
             }
-            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level);
+            ModUtils.createItemEntity(item, amount, center.x, center.y, center.z, level, 0);
             return true;
         }
 
         private boolean dropHeal(Level level, Vec3 center) {
             Item item;
-            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardcore()) {
+            if (level.dimension() == Level.NETHER || ConfluenceData.get((ServerLevel) level).isHardcore()) {
                 item = TerraPotions.HEALING_POTION.get();
             } else {
                 item = TerraPotions.LESSER_HEALING_POTION.get();
             }
             // 在专家模式，有 1/3 的几率额外掉落 1 个
-            ModUtils.createItemEntity(item, 1, center.x, center.y, center.z, level);
+            ModUtils.createItemEntity(item, 1, center.x, center.y, center.z, level, 0);
             return true;
         }
 
@@ -369,15 +361,15 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
                 return dropRope(level, center);
             }
             // 专家模式 1-7 个
-            ModUtils.createItemEntity(item, level.random.nextInt(1, 5), center.x, center.y, center.z, level);
+            ModUtils.createItemEntity(item, level.random.nextInt(1, 5), center.x, center.y, center.z, level, 0);
             return true;
         }
 
         private boolean dropRope(Level level, Vec3 center) {
-            if (level.dimension() == Confluence.HELL || ConfluenceData.get((ServerLevel) level).isHardcore()) {
+            if (level.dimension() == Level.NETHER || ConfluenceData.get((ServerLevel) level).isHardcore()) {
                 return dropMoney(level, center);
             } else {
-                ModUtils.createItemEntity(Blocks.SCAFFOLDING.asItem(), level.random.nextInt(5, 11), center.x, center.y, center.z, level);
+                ModUtils.createItemEntity(Blocks.SCAFFOLDING.asItem(), level.random.nextInt(5, 11), center.x, center.y, center.z, level, 0);
                 return true;
             }
         }

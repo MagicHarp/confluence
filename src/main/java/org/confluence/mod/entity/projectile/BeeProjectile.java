@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -14,6 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BeeProjectile extends AbstractHurtingProjectile {
     private static final EntityDataAccessor<Boolean> DATA_IS_GIANT = SynchedEntityData.defineId(BeeProjectile.class, EntityDataSerializers.BOOLEAN);
@@ -29,7 +31,7 @@ public class BeeProjectile extends AbstractHurtingProjectile {
         this.lifeTime = 0;
     }
 
-    public BeeProjectile(Level level, LivingEntity owner, boolean isGiant) {
+    public BeeProjectile(Level level, @Nullable LivingEntity owner, boolean isGiant) {
         this(ModEntities.BEE_PROJECTILE.get(), level);
         setOwner(owner);
         this.blockHitCount = 0;
@@ -51,7 +53,7 @@ public class BeeProjectile extends AbstractHurtingProjectile {
     public void tick() {
         super.tick();
         if (tickCount % 20 == 2) {
-            level().getEntities(getOwner(), new AABB(getOnPos()).inflate(8.0), entity -> entity instanceof Enemy)
+            level().getEntities(getOwner(), new AABB(getOnPos()).inflate(8.0), entity -> entity instanceof Enemy || entity instanceof Player)
                 .stream().min((a, b) -> (int) (a.distanceToSqr(this) - b.distanceToSqr(this)))
                 .ifPresent(monster -> this.target = monster);
         }

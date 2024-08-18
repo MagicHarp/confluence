@@ -7,14 +7,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.projectile.EnchantedSwordProjectile;
-import org.confluence.mod.item.sword.Swords;
 
 import java.util.function.Supplier;
 
-public record EnchantedSwordShootingPacketC2S() {
+public record EnchantedSwordShootingPacketC2S() { // todo 兼容其他剑气
     public static void encode(EnchantedSwordShootingPacketC2S packet, FriendlyByteBuf friendlyByteBuf) {}
 
-    public static EnchantedSwordShootingPacketC2S decode(FriendlyByteBuf friendlyByteBuf) {return new EnchantedSwordShootingPacketC2S();}
+    public static EnchantedSwordShootingPacketC2S decode(FriendlyByteBuf friendlyByteBuf) {
+        return new EnchantedSwordShootingPacketC2S();
+    }
 
     public static void handle(EnchantedSwordShootingPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
@@ -22,7 +23,6 @@ public record EnchantedSwordShootingPacketC2S() {
             ServerPlayer player = context.getSender();
             if (player == null) return;
             ServerLevel level = player.serverLevel();
-            player.getMainHandItem().hurtAndBreak(1, player, null);
 
             Vec3 lookDirection = player.getViewVector(1.5F);
             Vec3 spawnPos = player.position().add(lookDirection.scale(0.2F));

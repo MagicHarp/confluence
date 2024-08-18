@@ -24,8 +24,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
-import org.confluence.mod.Confluence;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.ThinIceBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
@@ -37,15 +35,14 @@ import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModDamageTypes;
+import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
-import org.confluence.mod.mixinauxiliary.HotswapHelper;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.DeathAnimUtils;
 import org.confluence.mod.util.PlayerUtils;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -115,7 +112,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         LivingEntity self = self();
         if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
         else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
-        if (self.fallDistance >= 3.0F && blockState.is(ModBlocks.THIN_ICE_BLOCK.get()) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
+        if (self.fallDistance >= 3.0F && blockState.is(ModTags.Blocks.EASY_CRASH) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             self.level().destroyBlock(blockPos, true, self);
             ci.cancel();
         }

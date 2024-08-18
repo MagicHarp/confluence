@@ -14,35 +14,13 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.Map;
-
 public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemModel {
-    public static final BooleanProperty NORTH = BooleanProperty.create("north");
-    public static final BooleanProperty EAST = BooleanProperty.create("east");
-    public static final BooleanProperty SOUTH = BooleanProperty.create("south");
-    public static final BooleanProperty WEST = BooleanProperty.create("west");
-    public static final BooleanProperty UP = BooleanProperty.create("up");
-    public static final BooleanProperty DOWN = BooleanProperty.create("down");
-    private static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = new EnumMap<>(Direction.class);
-
-    static {
-        PROPERTY_BY_DIRECTION.put(Direction.NORTH, NORTH);
-        PROPERTY_BY_DIRECTION.put(Direction.EAST, EAST);
-        PROPERTY_BY_DIRECTION.put(Direction.SOUTH, SOUTH);
-        PROPERTY_BY_DIRECTION.put(Direction.WEST, WEST);
-        PROPERTY_BY_DIRECTION.put(Direction.UP, UP);
-        PROPERTY_BY_DIRECTION.put(Direction.DOWN, DOWN);
-    }
-
     private final Block ground;
 
     public BranchesBlock(Block GroundBlocks) {
@@ -109,10 +87,7 @@ public class BranchesBlock extends PipeBlock implements CustomModel, CustomItemM
             return true;
         }
 
-        Iterator<Direction> horizontalDirections = Direction.Plane.HORIZONTAL.iterator();
-
-        while (horizontalDirections.hasNext()) {
-            Direction direction = horizontalDirections.next();
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos posAtSide = pPos.relative(direction);
             BlockState stateAtSide = pLevel.getBlockState(posAtSide);
 

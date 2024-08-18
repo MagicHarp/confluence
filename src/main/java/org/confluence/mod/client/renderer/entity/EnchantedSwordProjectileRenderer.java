@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.EnchantedSwordProjectileModel;
-import org.confluence.mod.entity.projectile.EnchantedSwordProjectile;
+import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.jetbrains.annotations.NotNull;
 
-public class EnchantedSwordProjectileRenderer extends EntityRenderer<EnchantedSwordProjectile> {
+public class EnchantedSwordProjectileRenderer extends EntityRenderer<SwordProjectile> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/enchanted_sword_projectile.png");
     private final EnchantedSwordProjectileModel model;
 
@@ -23,12 +23,12 @@ public class EnchantedSwordProjectileRenderer extends EntityRenderer<EnchantedSw
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EnchantedSwordProjectile enchantedSwordProjectile) {
+    public ResourceLocation getTextureLocation(SwordProjectile swordProjectile) {
         return TEXTURE;
     }
 
     @Override
-    public void render(EnchantedSwordProjectile entity, float entityYaw, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
+    public void render(SwordProjectile entity, float entityYaw, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(0.00F, 0.125F, -0.125F);
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90.0F));

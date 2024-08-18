@@ -6,10 +6,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-public class SpreadingBlock extends Block implements ISpreadable, CustomModel {
+public class SpreadingBlock extends Block implements ISpreadable {
     private final Type type;
 
     public SpreadingBlock(Type type, Properties properties) {

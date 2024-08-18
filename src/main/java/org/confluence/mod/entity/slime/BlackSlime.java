@@ -106,7 +106,8 @@ public class BlackSlime extends Slime {
         }
         setHealth(getMaxHealth());
     }
-    public static void dropColoredGel(LivingEntity living) {
+
+    public static void dropColoredGel(LivingEntity living) { // todo 删除硬编码
         if (living instanceof BlackSlime blackSlime) {
             ModUtils.createItemEntity(blackSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
         }

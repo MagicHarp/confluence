@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.particle.opt.CurrentDustOptions;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -84,7 +84,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
                 if (actually > 0) {
                     NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                 }
-                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundsEvent.SHOES_WALK.get());
+                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundEvents.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }

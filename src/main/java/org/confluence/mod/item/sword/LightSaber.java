@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.renderer.item.LightSaberRenderer;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -117,7 +117,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
         boolean turnOff = isTurnOff(itemStack);
         itemStack.getOrCreateTag().putBoolean("turnOff", !turnOff);
         triggerAnim(living, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", turnOff ? "on" : "off");
-        level.playSound(null, living.getOnPos().above(), ModSoundsEvent.LIGHTSABER_OPEN.get(), SoundSource.PLAYERS, 2, 1);
+        level.playSound(null, living.getOnPos().above(), ModSoundEvents.LIGHTSABER_OPEN.get(), SoundSource.PLAYERS, 2, 1);
         if (living instanceof Player player) player.getCooldowns().addCooldown(this, 10);
         return itemStack;
     }
@@ -128,7 +128,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
             if (PlayerUtils.extractMana(serverPlayer, () -> 1)) return;
             itemStack.getOrCreateTag().putBoolean("turnOff", true);
             triggerAnim(entity, GeoItem.getOrAssignId(itemStack, (ServerLevel) level), "light", "off");
-            level.playSound(null, entity.getOnPos().above(), ModSoundsEvent.LIGHTSABER_OPEN.get(), SoundSource.PLAYERS);
+            level.playSound(null, entity.getOnPos().above(), ModSoundEvents.LIGHTSABER_OPEN.get(), SoundSource.PLAYERS);
         }
     }
 

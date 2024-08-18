@@ -21,7 +21,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -174,12 +174,12 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     @Override
     protected SoundEvent getDeathSound(){
-        return ModSoundsEvent.ROUTINE_DEATH.get();
+        return ModSoundEvents.ROUTINE_DEATH.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource){
-        return ModSoundsEvent.ROUTINE_HURT.get();
+        return ModSoundEvents.ROUTINE_HURT.get();
     }
 
     @Override

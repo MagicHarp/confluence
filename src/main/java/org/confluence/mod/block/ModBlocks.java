@@ -40,34 +40,34 @@ public final class ModBlocks {
     public static final RegistryObject<Block> HARDENED_SAND_BLOCK = registerWithItem("hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
     public static final RegistryObject<Block> RED_HARDENED_SAND_BLOCK = registerWithItem("red_hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
     //雪泥块
-    public static final RegistryObject<Block> DESERT_FOSSIL = registerWithItem("desert_fossil", DesertFossilBlock::new);
-    public static final RegistryObject<Block> SLUSH = registerWithItem("slush",() -> new SlushBlock(0xcfddde,BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+    public static final RegistryObject<Block> DESERT_FOSSIL = registerWithItem("desert_fossil", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1.5F, 1.0F)));
+    public static final RegistryObject<Block> SLUSH = registerWithItem("slush", () -> new SandBlock(0xcfddde, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.7F).sound(SoundType.GRAVEL)));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
-    public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_COBBLESTONE = registerWithItem("ebony_cobblestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> EBONY_SANDSTONE = registerWithItem("ebony_sandstone", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> EBONY_HARDENED_SAND_BLOCK = registerWithItem("ebony_hardened_sand_block", () -> new SpreadingFixedBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> EBONY_SANDSTONE = registerWithItem("ebony_sandstone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> EBONY_HARDENED_SAND_BLOCK = registerWithItem("ebony_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> EBONY_SAND = registerWithItem("ebony_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CORRUPT, 0x372B4B, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK)));
     public static final RegistryObject<Block> CORRUPT_GRASS_BLOCK = registerWithItem("corrupt_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> PURPLE_ICE = registerWithItem("purple_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
     public static final RegistryObject<Block> PURPLE_PACKED_ICE = registerWithItem("purple_packed_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE)));
     // hallow
     public static final LogBlocks PEARL_LOG_BLOCKS = new LogBlocks("pearl", PEARL);
-    public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_STONE = registerWithItem("pearl_stone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_COBBLESTONE = registerWithItem("pearl_cobblestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> PEARL_HARDENED_SAND_BLOCK = registerWithItem("pearl_hardened_sand_block", () -> new SpreadingFixedBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> PEARL_SANDSTONE = registerWithItem("pearl_sandstone", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_HARDENED_SAND_BLOCK = registerWithItem("pearl_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> PEARL_SANDSTONE = registerWithItem("pearl_sandstone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> PEARL_SAND = registerWithItem("pearl_sand", () -> new SpreadingSandBlock(ISpreadable.Type.HALLOW, 0xEDD5F6, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY)));
     public static final RegistryObject<Block> HALLOW_GRASS_BLOCK = registerWithItem("hallow_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.HALLOW, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> RED_ICE = registerWithItem("red_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
     public static final RegistryObject<Block> RED_PACKED_ICE = registerWithItem("red_packed_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE)));
     // crimson
     public static final LogBlocks SHADOW_LOG_BLOCKS = new LogBlocks("shadow", SHADOW);
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_STONE = registerWithItem("another_crimson_stone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_COBBLESTONE = registerWithItem("another_crimson_cobblestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_HARDENED_SAND_BLOCK = registerWithItem("another_crimson_hardened_sand_block", () -> new SpreadingFixedBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_SANDSTONE = registerWithItem("another_crimson_sandstone", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_HARDENED_SAND_BLOCK = registerWithItem("another_crimson_hardened_sand_block", () -> new SpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_SANDSTONE = registerWithItem("another_crimson_sandstone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_SAND = registerWithItem("another_crimson_sand", () -> new SpreadingSandBlock(ISpreadable.Type.CRIMSON, 0x5313E0, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS_BLOCK = registerWithItem("another_crimson_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> PINK_ICE = registerWithItem("pink_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
@@ -148,13 +148,13 @@ public final class ModBlocks {
     public static final RegistryObject<BlockEntityType<BaseHerbBlock.Entity>> HERBS_ENTITY = BLOCK_ENTITIES.register("herbs_entity", () -> BlockEntityType.Builder.of(BaseHerbBlock.Entity::new,
         WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(), SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
     // grass
-    public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", () -> new BasePlantBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//腐化草
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", () -> new BasePlantBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//猩红草
-    public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", () -> new BasePlantBlock(Set.of(HALLOW_GRASS_BLOCK.get())));//神圣草
-    public static final RegistryObject<Block> ASH_GRASS = registerWithItem("ash_grass", () -> new BasePlantBlock(Set.of(ASH_GRASS_BLOCK.get())));
+    public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", () -> new BasePlantBlock(ModBlocks.CORRUPT_GRASS_BLOCK.get()));//腐化草
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_GRASS = registerWithItem("another_crimson_grass", () -> new BasePlantBlock(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get()));//猩红草
+    public static final RegistryObject<Block> HALLOW_GRASS = registerWithItem("hallow_grass", () -> new BasePlantBlock(HALLOW_GRASS_BLOCK.get()));//神圣草
+    public static final RegistryObject<Block> ASH_GRASS = registerWithItem("ash_grass", () -> new BasePlantBlock(ASH_GRASS_BLOCK.get()));
     public static final RegistryObject<Block> NATURES_GIFT = registerWithoutItem("natures_gift", NaturesGiftBlock::new);
     // TODO: 头盔栏时装，shape，不可放置
-    public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY)));
+    public static final RegistryObject<Block> JUNGLE_ROSE = registerWithItem("jungle_rose", () -> new BasePlantBlock(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY));
 
     public static final RegistryObject<ThornBlock> CRIMSON_THORN = registerWithItem("crimson_thorn", () -> new SpreadingThornBlock(2, ANOTHER_CRIMSON_GRASS_BLOCK.get(), ISpreadable.Type.CRIMSON));
     public static final RegistryObject<ThornBlock> CORRUPTION_THORN = registerWithItem("corruption_thorn", () -> new SpreadingThornBlock(2, CORRUPT_GRASS_BLOCK.get(), ISpreadable.Type.CORRUPT));

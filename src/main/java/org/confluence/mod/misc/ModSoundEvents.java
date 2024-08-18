@@ -2,12 +2,13 @@ package org.confluence.mod.misc;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 
-public final class ModSoundsEvent {
+public final class ModSoundEvents {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Confluence.MODID);
 
     public static final RegistryObject<SoundEvent> TRANSMISSION = register("transmission");
@@ -30,6 +31,9 @@ public final class ModSoundsEvent {
     public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
     public static final RegistryObject<SoundEvent> ROUTINE_HURT = register("routine_hurt");
     public static final RegistryObject<SoundEvent> ROUTINE_DEATH = register("routine_death");
+
+
+    public static final SoundType COIN = new SoundType(1.0F, 1.0F, COINS.get(), COINS.get(), COINS.get(), COINS.get(), COINS.get());
 
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));

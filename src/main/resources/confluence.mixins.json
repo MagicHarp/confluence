@@ -6,7 +6,6 @@
     "mixins": [
         "DebugInfoMixin",
         "InventoryChangeTriggerMixin",
-        "PlayerAdvancementsMixin",
         "TagLoaderMixin",
         "accessor.BlockItemAccessor",
         "accessor.ChestBlockEntityAccessor",

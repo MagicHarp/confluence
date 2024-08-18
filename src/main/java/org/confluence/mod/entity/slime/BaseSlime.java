@@ -107,6 +107,4 @@ public class BaseSlime extends Slime {
             ModUtils.createItemEntity(baseSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
         }
     }
-
-
 }

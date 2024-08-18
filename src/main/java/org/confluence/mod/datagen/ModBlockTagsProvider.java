@@ -173,8 +173,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ANOTHER_CRIMSON_ORE.get(), DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), ANOTHER_CRIMSON_BLOCK.get(), RAW_ANOTHER_CRIMSON_BLOCK.get()
         );
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
-            HELLSTONE.get(),ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
-            PEARL_STONE.get(), PEARL_SANDSTONE.get(),DecorativeBlocks.BLUE_BRICK.get(),DecorativeBlocks.PINK_BRICK.get(),DecorativeBlocks.GREEN_BRICK.get()
+            HELLSTONE.get(), ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
+            PEARL_STONE.get(), PEARL_SANDSTONE.get(), DecorativeBlocks.BLUE_BRICK.get(), DecorativeBlocks.PINK_BRICK.get(), DecorativeBlocks.GREEN_BRICK.get()
         );
         tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
             DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
@@ -200,5 +200,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> torch = tag(ModTags.Blocks.TORCH);
         torch.add(Blocks.TORCH, Blocks.WALL_TORCH, Blocks.SOUL_TORCH, Blocks.SOUL_WALL_TORCH);
         for (Torches torches : Torches.values()) torch.add(torches.stand.get(), torches.wall.get());
+        tag(ModTags.Blocks.POTS_SURVIVE).add(
+            Blocks.STONE, Blocks.DIRT, Blocks.SANDSTONE, Blocks.MOSS_BLOCK,
+            ModBlocks.EBONY_STONE.get(), ModBlocks.EBONY_STONE.get(), ModBlocks.ANOTHER_CRIMSON_STONE.get(), ModBlocks.HARDENED_SAND_BLOCK.get(), ModBlocks.RED_HARDENED_SAND_BLOCK.get()
+        );
+        tag(ModTags.Blocks.COIN_PILE).add(COPPER_COIN_PILE.get(), SILVER_COIN_PILE.get(), GOLDEN_COIN_PILE.get(), PLATINUM_COIN_PILE.get());
+        tag(ModTags.Blocks.EASY_CRASH).add(THIN_ICE_BLOCK.get(), CRACKED_BLUE_BRICK.get(), CRACKED_GREEN_BRICK.get(), CRACKED_PINK_BRICK.get());
     }
 }

@@ -2,9 +2,6 @@ package org.confluence.mod;
 
 import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
@@ -24,7 +21,7 @@ import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.recipe.ModRecipes;
 import org.confluence.mod.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
@@ -32,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("unused")
@@ -41,8 +37,6 @@ public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
 
-    public static final HashSet<ResourceLocation> REQUIRE_PARENT_DONE = new HashSet<>();
-    public static final ResourceKey<Level> HELL = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID, "hell"));
     public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
     public static final Hashtable<Class<? extends AbstractMinecart>, Item> MINECART_CURIO = new Hashtable<>();
     public static final Hashtable<Item, Function3<Level, BlockPos, Double, AbstractMinecart>> CURIO_MINECART = new Hashtable<>();
@@ -61,14 +55,9 @@ public final class Confluence {
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
         ModEffects.EFFECTS.register(bus);
-        ModSoundsEvent.SOUNDS.register(bus);
+        ModSoundEvents.SOUNDS.register(bus);
         ModArgumentTypeInfos.INFOS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
-        //ASMifier.main(new String[]{"org.confluence.mod.item.curio.movement.Balloon"});
-    }
-
-    public static Object debugMethod(Object... args){
-        return false;
     }
 }

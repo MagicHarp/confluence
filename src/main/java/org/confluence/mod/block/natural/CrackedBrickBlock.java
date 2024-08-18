@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,9 +23,7 @@ public class CrackedBrickBlock extends Block {
     @Override
     public void updateEntityAfterFallOn(@NotNull BlockGetter blockGetter, @NotNull Entity entity) {
         BlockState blockState = blockGetter.getBlockState(entity.getOnPos());
-        if (blockState.is(ModBlocks.CRACKED_BLUE_BRICK.get())
-            || blockState.is(ModBlocks.CRACKED_GREEN_BRICK.get())
-            || blockState.is(ModBlocks.CRACKED_PINK_BRICK.get())) {
+        if (blockState.is(ModTags.Blocks.EASY_CRASH)) {
             super.updateEntityAfterFallOn(blockGetter, entity);
         }
     }
@@ -34,8 +32,5 @@ public class CrackedBrickBlock extends Block {
     public void playerDestroy(Level p_54157_, Player player, BlockPos p_54159_, BlockState p_54160_, @Nullable BlockEntity p_54161_, ItemStack p_54162_) {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
-    }
-
-    public interface IceSafe {
     }
 }

@@ -4,10 +4,8 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -37,6 +35,7 @@ import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -52,14 +51,17 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class ExtractinatorBlock extends HorizontalDirectionalBlock implements EntityBlock, CustomModel, CustomItemModel {
-    public ExtractinatorBlock(Properties pProperties) {
+    public ExtractinatorBlock(Properties pProperties) { // todo 多方块
         super(pProperties);
     }
+
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
+
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return SHAPE;
     }
+
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
@@ -68,11 +70,13 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
     }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
         return new ExtractinatorBlock.Entity(pPos, pState);
     }
+
     @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
@@ -80,33 +84,29 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
 
     @Override
     public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
-        ItemStack item = pPlayer.getItemInHand(pHand);
-
         if (pLevel instanceof ServerLevel level) {
+            ItemStack item = pPlayer.getItemInHand(pHand);
             if (level.random.nextFloat() <= 0.2F) {
-                LootParams lootparams = new LootParams.Builder(level)
-                        .withParameter(LootContextParams.ORIGIN, pPlayer.position())
-                        .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
-                        .create(LootContextParamSets.GIFT);
-                LootTable loottable;
+                ResourceLocation path;
                 if (item.is(ModTags.Items.DESERT_FOSSIL)) {
-                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_DF);
+                    path = ModLootTables.EXTRACT_DESERT_FOSSIL;
                 } else if (item.is(ModTags.Items.GRAVEL)) {
-                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_G);
+                    path = ModLootTables.EXTRACT_GRAVEL;
                 } else if (item.is(ModTags.Items.JUNK)) {
-                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_J);
+                    path = ModLootTables.EXTRACT_JUNK;
                 } else if (item.is(ModTags.Items.SLUSH)) {
-                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_S);
+                    path = ModLootTables.EXTRACT_SLUSH;
                 } else {
                     return InteractionResult.PASS;
                 }
 
-                SimpleContainer inventory = new SimpleContainer(10);
-                int p = 0;
-                for (ItemStack loot : loottable.getRandomItems(lootparams)) {
-                    inventory.setItem(p, loot);
-                    p++;
-                    Containers.dropContents(level, pPos.below(-1), inventory);
+                LootTable lootTable = level.getServer().getLootData().getLootTable(path);
+                LootParams lootparams = new LootParams.Builder(level)
+                    .withParameter(LootContextParams.ORIGIN, pPlayer.position())
+                    .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
+                    .create(LootContextParamSets.GIFT);
+                for (ItemStack loot : lootTable.getRandomItems(lootparams)) {
+                    ModUtils.createItemEntity(loot, pPos.getX() + 0.5, pPos.getY() + 1.0, pPos.getZ() + 0.5, level);
                 }
             }
 
@@ -114,6 +114,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         }
         return InteractionResult.SUCCESS;
     }
+
     public static class Entity extends BlockEntity implements GeoBlockEntity {
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
@@ -125,7 +126,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
             controllers.add(new AnimationController<>(this, "controller", state ->
                 state.setAndContinue(RawAnimation.begin().thenLoop("default")))
-                );
+            );
         }
 
         @Override
@@ -133,6 +134,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
             return CACHE;
         }
     }
+
     public static class Item extends BlockItem implements GeoItem {
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
 
