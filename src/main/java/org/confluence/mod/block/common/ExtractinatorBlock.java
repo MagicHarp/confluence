@@ -83,29 +83,31 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         ItemStack item = pPlayer.getItemInHand(pHand);
 
         if (pLevel instanceof ServerLevel level) {
-            LootParams lootparams = new LootParams.Builder(level)
-                    .withParameter(LootContextParams.ORIGIN, pPlayer.position())
-                    .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
-                    .create(LootContextParamSets.GIFT);
-            LootTable loottable;
-            if (item.is(ModTags.Items.DESERT_FOSSIL)) {
-                loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_DF);
-            } else if (item.is(ModTags.Items.GRAVEL)) {
-                loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_G);
-            } else if (item.is(ModTags.Items.JUNK)) {
-                loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_J);
-            } else if (item.is(ModTags.Items.SLUSH)) {
-                loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_S);
-            } else {
-                return InteractionResult.PASS;
-            }
+            if (level.random.nextFloat() <= 0.2F) {
+                LootParams lootparams = new LootParams.Builder(level)
+                        .withParameter(LootContextParams.ORIGIN, pPlayer.position())
+                        .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
+                        .create(LootContextParamSets.GIFT);
+                LootTable loottable;
+                if (item.is(ModTags.Items.DESERT_FOSSIL)) {
+                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_DF);
+                } else if (item.is(ModTags.Items.GRAVEL)) {
+                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_G);
+                } else if (item.is(ModTags.Items.JUNK)) {
+                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_J);
+                } else if (item.is(ModTags.Items.SLUSH)) {
+                    loottable = level.getServer().getLootData().getLootTable(ModLootTables.E_S);
+                } else {
+                    return InteractionResult.PASS;
+                }
 
-            SimpleContainer inventory = new SimpleContainer(10);
-            int p = 0;
-            for (ItemStack loot : loottable.getRandomItems(lootparams)) {
-                inventory.setItem(p, loot);
-                p++;
-                Containers.dropContents(level, pPos.below(-1), inventory);
+                SimpleContainer inventory = new SimpleContainer(10);
+                int p = 0;
+                for (ItemStack loot : loottable.getRandomItems(lootparams)) {
+                    inventory.setItem(p, loot);
+                    p++;
+                    Containers.dropContents(level, pPos.below(-1), inventory);
+                }
             }
 
             pPlayer.getItemInHand(pHand).setCount(item.getCount() - 1);
