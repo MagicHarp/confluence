@@ -20,11 +20,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class StaffItem extends Item implements IManaWeapon {
     private final BulletSupplier bulletSupplier;
-    private int manaCost;
+    private final int manaCost;
 
 
     public StaffItem(int manaCost, BulletSupplier bulletSupplier, Properties properties) {
         super(properties.stacksTo(1));
+        this.manaCost = manaCost;
         this.bulletSupplier = bulletSupplier;
     }
 

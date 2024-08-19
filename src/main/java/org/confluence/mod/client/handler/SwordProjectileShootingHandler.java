@@ -14,7 +14,7 @@ import org.confluence.mod.network.c2s.EnchantedSwordShootingPacketC2S;
 @OnlyIn(Dist.CLIENT)
 public final class SwordProjectileShootingHandler {
     public static void handle(Minecraft minecraft, LocalPlayer localPlayer) {
-        if (localPlayer.isUsingItem() || !minecraft.options.keyAttack.isDown()) return;
+        if (minecraft.gameMode == null || minecraft.gameMode.isDestroying() || !minecraft.options.keyAttack.isDown()) return;
         Item item = localPlayer.getMainHandItem().getItem();
         if (item instanceof ISwordProjectile swordProjectile && !localPlayer.getCooldowns().isOnCooldown(item)) {
             NetworkHandler.CHANNEL.sendToServer(new EnchantedSwordShootingPacketC2S());

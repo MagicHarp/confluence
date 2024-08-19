@@ -30,6 +30,7 @@ public interface IAutoAttack {
 
     @OnlyIn(Dist.CLIENT)
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
+        if(minecraft.gameMode == null || minecraft.gameMode.isDestroying()) return;
         if (BetterCombatHelper.isLoaded()) {
             ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);
             if (BetterCombatHelper.hasWeaponAttributes(itemStack)) return;

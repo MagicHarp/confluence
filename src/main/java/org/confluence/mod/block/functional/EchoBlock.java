@@ -29,7 +29,7 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
     }
 
     @Override
-    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player) {
             Optional<ItemStack> curio = CuriosUtils.findCurio(player, CurioItems.SPECTRE_GOGGLES.get());
             if (curio.isPresent()) {
@@ -41,11 +41,6 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
             }
         }
         return Shapes.block();
-    }
-
-    @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        return getCollisionShape(blockState, blockGetter, blockPos, context);
     }
 
     @Override

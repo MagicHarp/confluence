@@ -193,6 +193,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_5_LEVEL);
         needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_6_LEVEL);
         needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_7_LEVEL);
+        needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_8_LEVEL);
         tag(ModTags.Blocks.FLOWER_BOOTS_AVAILABLE).add(
             Blocks.GRASS_BLOCK,
             HALLOW_GRASS_BLOCK.get()

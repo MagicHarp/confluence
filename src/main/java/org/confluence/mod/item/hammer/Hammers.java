@@ -1,5 +1,6 @@
 package org.confluence.mod.item.hammer;
 
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTiers;
@@ -8,7 +9,7 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum Hammers implements EnumRegister<HammerItem> {
-    WOODEN_HAMMER("wooden_hammer", () -> new HammerItem(ModTiers.WOODEN, 1, 1)),
+    WOODEN_HAMMER("wooden_hammer", () -> new HammerItem(Tiers.WOOD, 1, 1)),
     COPPER_HAMMER("copper_hammer", () -> new HammerItem(ModTiers.COPPER, 2, 1)),
     TIN_HAMMER("tin_hammer", () -> new HammerItem(ModTiers.TIN, 2, 1)),
     LEAD_HAMMER("lead_hammer", () -> new HammerItem(ModTiers.LEAD, 3, 1)),

@@ -85,14 +85,14 @@ public final class PrefixProvider {
 
     public static int getAttackSpeed(ItemStack itemStack, int amount) {
         CompoundTag prefix = itemStack.getTagElement(KEY);
-        if (prefix != null) amount *= (1.0 - prefix.getDouble("attackSpeed"));
+        if (prefix != null) amount = Math.max((int) ((double) amount * (1.0 - prefix.getDouble("attackSpeed"))), 1);
         return amount;
     }
 
 
     public static float getVelocity(ItemStack itemStack, float velocity) {
         CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
-        if (prefix != null) velocity *= (1.0 + prefix.getDouble("attackSpeed"));
+        if (prefix != null) velocity = Math.max((int) (velocity * (1.0 - prefix.getDouble("velocity"))), 1);
         return velocity;
     }
 }

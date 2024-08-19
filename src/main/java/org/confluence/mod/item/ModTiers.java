@@ -6,7 +6,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.misc.ModTags;
@@ -20,7 +19,6 @@ import static org.confluence.mod.Confluence.MODID;
 public final class ModTiers {
     public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
 
-    public static final ModTier WOODEN  = new ModTier(0, 144, 4, 1, 5, () -> Ingredient.of(Items.OAK_PLANKS));
     public static final ModTier CACTUS = new ModTier(0, 144, 3, 1, 4, () -> Ingredient.of(Items.CACTUS));
     public static final ModTier COPPER = new ModTier(1, 250, 4, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ModTier TIN = new ModTier(1, 270, 4, 1, 5, () -> Ingredient.of(Materials.TIN_INGOT.get()));

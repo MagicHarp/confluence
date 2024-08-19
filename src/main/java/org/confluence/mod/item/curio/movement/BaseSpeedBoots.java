@@ -14,6 +14,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.opt.CurrentDustOptions;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
@@ -32,6 +33,7 @@ import java.util.UUID;
 public class BaseSpeedBoots extends BaseCurioItem {
     public static final UUID SPEED_UUID = UUID.fromString("EE6FAFF5-A69D-6101-F82A-93E55A01F65E");
     public static final Component TOOLTIP = Component.translatable("curios.tooltip.speed_boots");
+    private static final Vector3f COLOR = FloatRGB.fromInteger(0xFFFFFF).toVector();
 
     public BaseSpeedBoots(Rarity rarity) {
         super(rarity);
@@ -45,6 +47,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
     public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
         return EMPTY_TOOLTIP;
     }
+
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         speedUp(slotContext, stack.getOrCreateTag(), 1, 40);
@@ -58,16 +61,18 @@ public class BaseSpeedBoots extends BaseCurioItem {
         CurrentDustOptions options = new CurrentDustOptions(getParticleColorStart(), getParticleColorEnd(), 1.2F);
         System.out.println(options.getColor());
         for (int i = 0; i < rand; ++i) {
-            level.addParticle(options, vec3.x + particleRandX , vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
+            level.addParticle(options, vec3.x + particleRandX, vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
         }
     }
-    private static final Vector3f COLOR = Vec3.fromRGB24(0xFFFFFF).toVector3f();
+
     public Vector3f getParticleColorStart() {
         return COLOR;
     }
+
     public Vector3f getParticleColorEnd() {
         return COLOR;
     }
+
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
@@ -79,16 +84,19 @@ public class BaseSpeedBoots extends BaseCurioItem {
         if (living.hasEffect(ModEffects.STONED.get())) return;
         if (living instanceof Player player && player.isLocalPlayer()) {
             int speed = nbt.getInt("speed");
-            if (player.onGround() && player.zza > 0) {
-                int actually = Math.min(max - speed, addition);
-                if (actually > 0) {
-                    NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
+            if (player.zza > 0) {
+                if (player.onGround()) {
+                    int actually = Math.min(max - speed, addition);
+                    if (actually > 0) {
+                        NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
+                    }
+                    if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundEvents.SHOES_WALK.get());
                 }
-                if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundEvents.SHOES_WALK.get());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
-            if (player.zza > 0 &&slotContext.entity().level().isClientSide) spawnParticles(slotContext.entity().level(), slotContext.entity().position());
+            if (player.zza > 0 && slotContext.entity().level().isClientSide)
+                spawnParticles(slotContext.entity().level(), slotContext.entity().position());
         }
     }
 
