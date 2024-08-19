@@ -22,8 +22,8 @@ public class FartInAJar extends BaseCurioItem implements IMultiJump {
     }
 
     @Override
-    public double getJumpSpeed() {
-        return 2.8;
+    public float getJumpSpeed() {
+        return 2.8F;
     }
 
     @Override

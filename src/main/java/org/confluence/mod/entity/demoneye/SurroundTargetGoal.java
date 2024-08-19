@@ -52,7 +52,7 @@ public class SurroundTargetGoal extends Goal {
     /** 按余弦函数确定Y坐标偏移 */
     public float getOffsetY(){
         float period = 6.1f;
-        float radians = 2f * Mth.PI * (locateCount % period) / period;
+        float radians = Mth.TWO_PI * (locateCount % period) / period;
         return 2.57f * Mth.cos(radians) + 1;
     }
 

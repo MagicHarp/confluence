@@ -2,7 +2,6 @@ package org.confluence.mod.client;
 
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
@@ -46,13 +45,13 @@ public final class ForgeClient {
     public static void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
-        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
         if (event.phase == TickEvent.Phase.START) return;
         GravitationHandler.tick(localPlayer);
         if (localPlayer == null) return;
         IAutoAttack.apply(minecraft, localPlayer);
+        SwordProjectileShootingHandler.handle(minecraft, localPlayer);
         InformationHandler.handle(localPlayer);
-        HookThrowingHandler.handle(localPlayer, camera);
+        HookThrowingHandler.handle(localPlayer);
 
         AnimateColor.doUpdateExpertColor();
         AnimateColor.doUpdateMasterColor();
@@ -97,7 +96,6 @@ public final class ForgeClient {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
         GunShootingHandler.handle(event, localPlayer);
-        SwordProjectileShootingHandler.handle(event, localPlayer);
         CursedEffect.onLeftClick(localPlayer, event);
         StonedEffect.onLeftClick(localPlayer, event);
     }

@@ -14,13 +14,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.item.curio.CurioItems;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
-
 public class NaturesGiftBlock extends BasePlantBlock {
     private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
 
     public NaturesGiftBlock() {
-        super(Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY));
+        super(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY);
     }
 
     @Override

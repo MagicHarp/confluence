@@ -11,11 +11,9 @@ import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
-
 public class MushroomBlock extends BasePlantBlock implements CustomModel, CustomItemModel {
     private static final VoxelShape SHAPE=Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
-    public MushroomBlock(Set<Block> surviveBlock){
+    public MushroomBlock(Block... surviveBlock){
         super(surviveBlock);
     }
 

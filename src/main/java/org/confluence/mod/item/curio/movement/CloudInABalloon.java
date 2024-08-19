@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
-    public static final double SPEED = 1.1;
+    public static final float SPEED = 1.1F;
 
     public CloudInABalloon(Rarity rarity) {
         super(rarity);
@@ -28,7 +28,7 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
     }
 
     @Override
-    public double getJumpSpeed() {
+    public float getJumpSpeed() {
         return SPEED;
     }
 

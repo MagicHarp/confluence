@@ -36,7 +36,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.MINECART).add(Items.MINECART);
         tag(ModTags.Items.PROVIDE_MANA).add(ModItems.STAR.get(), ModItems.SOUL_CAKE.get(), ModItems.SUGAR_PLUM.get());
         tag(ModTags.Items.PROVIDE_LIFE).add(ModItems.HEART.get(), ModItems.CANDY_APPLE.get(), ModItems.CANDY_CANE.get());
-        copy(ModTags.Blocks.COIN_PILE, ModTags.Items.COIN);
         tag(ModTags.Items.DESERT_FOSSIL).add(ModBlocks.DESERT_FOSSIL.get().asItem());
         tag(ModTags.Items.GRAVEL).add(Blocks.GRAVEL.asItem());
         tag(ModTags.Items.SLUSH).add(ModBlocks.SLUSH.get().asItem());
@@ -73,6 +72,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_TRIDENTS);
+        tag(ModTags.Items.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }
 }

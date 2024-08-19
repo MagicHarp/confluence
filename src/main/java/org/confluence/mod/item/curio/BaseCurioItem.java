@@ -54,7 +54,7 @@ public class BaseCurioItem extends Item implements ICurioItem {
         if (living instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new FlushPlayerAbilityPacketS2C(true)
+                new FlushPlayerAbilityPacketS2C()
             );
             if (item instanceof IMayFly) IMayFly.sendMsg(serverPlayer);
             if (item instanceof IMultiJump) IMultiJump.sendMsg(serverPlayer);

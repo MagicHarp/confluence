@@ -38,7 +38,7 @@ public interface IAutoAttack {
             if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;
             if (accessor.getMissTime() > 0) accessor.setMissTime(0);
-            double reach = localPlayer.getEntityReach();
+            double reach = Math.max(localPlayer.getEntityReach(), localPlayer.getBlockReach());
             Vec3 from = localPlayer.getEyePosition(1.0F);
             Vec3 viewVector = localPlayer.getViewVector(1.0F);
             Vec3 to = from.add(viewVector.x * reach, viewVector.y * reach, viewVector.z * reach);

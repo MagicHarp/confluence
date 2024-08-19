@@ -34,7 +34,7 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
     private static final VoxelShape SIX_CUBES = Block.box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
 
     public CoinPileBlock() {
-        super(Properties.of().sound(ModSoundEvents.COIN));
+        super(Properties.of().sound(ModSoundEvents.Types.COIN));
         registerDefaultState(stateDefinition.any().setValue(HEAPS, 1).setValue(IS_BASE, true));
     }
 

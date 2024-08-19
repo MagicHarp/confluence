@@ -33,9 +33,11 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> ROUTINE_DEATH = register("routine_death");
 
 
-    public static final SoundType COIN = new SoundType(1.0F, 1.0F, COINS.get(), COINS.get(), COINS.get(), COINS.get(), COINS.get());
-
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));
+    }
+
+    public static class Types {
+        public static final SoundType COIN = new SoundType(1.0F, 1.0F, COINS.get(), COINS.get(), COINS.get(), COINS.get(), COINS.get());
     }
 }

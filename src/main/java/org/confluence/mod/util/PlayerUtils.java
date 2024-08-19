@@ -1,6 +1,5 @@
 package org.confluence.mod.util;
 
-import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.mana.ManaStorage;
@@ -115,15 +115,15 @@ public final class PlayerUtils {
     }
 
     public static void resetClientPacket(ServerPlayer serverPlayer) {
-        AtomicDouble fartSpeed = new AtomicDouble(-1.0);
-        AtomicDouble sandstormSpeed = new AtomicDouble(-1.0);
+        MutableFloat fartSpeed = new MutableFloat(-1.0F);
+        MutableFloat sandstormSpeed = new MutableFloat(-1.0F);
         AtomicInteger sandstormTicks = new AtomicInteger();
-        AtomicDouble blizzardSpeed = new AtomicDouble(-1.0);
+        MutableFloat blizzardSpeed = new MutableFloat(-1.0F);
         AtomicInteger blizzardTicks = new AtomicInteger();
-        AtomicDouble tsunamiSpeed = new AtomicDouble(-1.0);
-        AtomicDouble cloudSpeed = new AtomicDouble(-1.0);
+        MutableFloat tsunamiSpeed = new MutableFloat(-1.0F);
+        MutableFloat cloudSpeed = new MutableFloat(-1.0F);
         AtomicInteger maxFlyTicks = new AtomicInteger();
-        AtomicDouble flySpeed = new AtomicDouble();
+        MutableFloat flySpeed = new MutableFloat();
         AtomicBoolean glide = new AtomicBoolean();
         AtomicBoolean autoAttack = new AtomicBoolean();
         AtomicBoolean scope = new AtomicBoolean();
@@ -149,27 +149,27 @@ public final class PlayerUtils {
                     continue;
                 }
                 if (curio instanceof FartInAJar fart) {
-                    fartSpeed.set(fart.getJumpSpeed());
+                    fartSpeed.setValue(fart.getJumpSpeed());
                 } else if (curio instanceof SandstormInABottle sandstorm) {
-                    sandstormSpeed.set(sandstorm.getJumpSpeed());
+                    sandstormSpeed.setValue(sandstorm.getJumpSpeed());
                     sandstormTicks.set(sandstorm.getJumpTicks());
                 } else if (curio instanceof BlizzardInABottle blizzard) {
-                    blizzardSpeed.set(blizzard.getJumpSpeed());
+                    blizzardSpeed.setValue(blizzard.getJumpSpeed());
                     blizzardTicks.set(blizzard.getJumpTicks());
                 } else if (curio instanceof TsunamiInABottle tsunami) {
-                    tsunamiSpeed.set(tsunami.getJumpSpeed());
+                    tsunamiSpeed.setValue(tsunami.getJumpSpeed());
                 } else if (curio instanceof CloudInABottle cloud) {
-                    cloudSpeed.set(cloud.getJumpSpeed());
+                    cloudSpeed.setValue(cloud.getJumpSpeed());
                 } else if (curio instanceof BundleOfBalloons) {
-                    sandstormSpeed.set(SandstormInABottle.SPEED);
+                    sandstormSpeed.setValue(SandstormInABottle.SPEED);
                     sandstormTicks.set(SandstormInABottle.TICKS);
-                    blizzardSpeed.set(BlizzardInABottle.SPEED);
+                    blizzardSpeed.setValue(BlizzardInABottle.SPEED);
                     blizzardTicks.set(BlizzardInABottle.TICKS);
-                    cloudSpeed.set(CloudInABottle.SPEED);
+                    cloudSpeed.setValue(CloudInABottle.SPEED);
                 }
                 if (curio instanceof IMayFly iMayFly) {
                     maxFlyTicks.set(Math.max(iMayFly.getFlyTicks(), maxFlyTicks.get()));
-                    flySpeed.set(Math.max(iMayFly.getFlySpeed(), flySpeed.get()));
+                    flySpeed.setValue(Math.max(iMayFly.getFlySpeed(), flySpeed.getValue()));
                     if (iMayFly.couldGlide()) glide.set(true);
                 }
                 if (curio instanceof IAutoAttack) {
@@ -203,18 +203,18 @@ public final class PlayerUtils {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new PlayerJumpPacketS2C(
-                fartSpeed.get(),
-                sandstormSpeed.get(),
+                fartSpeed.getValue(),
+                sandstormSpeed.getValue(),
                 sandstormTicks.get(),
-                blizzardSpeed.get(),
+                blizzardSpeed.getValue(),
                 blizzardTicks.get(),
-                tsunamiSpeed.get(),
-                cloudSpeed.get()
+                tsunamiSpeed.getValue(),
+                cloudSpeed.getValue()
             )
         );
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.get(), glide.get())
+            new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.getValue(), glide.get())
         );
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),

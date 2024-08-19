@@ -24,7 +24,6 @@ import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -131,11 +130,11 @@ public final class ModBlocks {
     public static final RegistryObject<BaseChainBlock> SILK_CHAIN = registerWithItem("silk_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     public static final RegistryObject<BaseChainBlock> BONE_CHAIN = registerWithItem("bone_chain", () -> new BaseChainBlock(MapColor.TERRACOTTA_WHITE));
     // plant
-    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get())));//毒蘑菇
-    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get())));//魔菇
+    public static final RegistryObject<Block> ANOTHER_CRIMSON_MUSHROOM = registerWithoutItem("another_crimson_mushroom", () -> new MushroomBlock(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get()));//毒蘑菇
+    public static final RegistryObject<Block> EBONY_MUSHROOM = registerWithoutItem("ebony_mushroom", () -> new MushroomBlock(ModBlocks.CORRUPT_GRASS_BLOCK.get()));//魔菇
     // TODO: 发光蘑菇可以长在天花板上，可以长很长；天花板上的属于藤蔓，还没做
-    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", () -> new MushroomBlock(Set.of(ModBlocks.MUSHROOM_GRASS_BLOCK.get())));//发光蘑菇
-    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", () -> new MushroomBlock(Set.of(Blocks.GRASS_BLOCK, HALLOW_GRASS_BLOCK.get())));//生命蘑菇
+    public static final RegistryObject<Block> GLOWING_MUSHROOM = registerWithoutItem("glowing_mushroom", () -> new MushroomBlock(ModBlocks.MUSHROOM_GRASS_BLOCK.get()));//发光蘑菇
+    public static final RegistryObject<Block> LIFE_MUSHROOM = registerWithoutItem("life_mushroom", () -> new MushroomBlock(Blocks.GRASS_BLOCK, HALLOW_GRASS_BLOCK.get()));//生命蘑菇
     public static final RegistryObject<JungleSporeBlock> JUNGLE_SPORE = registerWithoutItem("jungle_spore", JungleSporeBlock::new);
     // 草药
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
