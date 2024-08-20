@@ -30,13 +30,18 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
         }
     }
 
-    // 有潜在的兼容性问题
+    // 有潜在的兼容性问题，如果别的mod加了旋转可能ordinal会变
     @ModifyArg(method = "setupRotations", at = @At(value = "INVOKE", target = "Lcom/mojang/math/Axis;rotationDegrees(F)Lorg/joml/Quaternionf;", ordinal = 1))
     private float rot(float pDegrees){
         if(DeathAnimUtils.hasDeathAnimOptions(confluence$rendering)){
             return 0;
         }
         return pDegrees;
+    }
+
+    @ModifyArg(method = "getOverlayCoords",at = @At(value = "INVOKE",target = "Lnet/minecraft/client/renderer/texture/OverlayTexture;v(Z)I"))
+    private static boolean v(boolean pHurt){
+        return false;
     }
 
     @Override
