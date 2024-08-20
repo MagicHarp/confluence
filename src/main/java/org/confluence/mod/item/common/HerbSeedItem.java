@@ -8,4 +8,8 @@ public class HerbSeedItem extends ItemNameBlockItem {
     public HerbSeedItem(Block pBlock){
         super(pBlock, new Properties());
     }
+
+    public HerbSeedItem(Block pBlock, Properties properties){
+        super(pBlock, properties);
+    }
 }
