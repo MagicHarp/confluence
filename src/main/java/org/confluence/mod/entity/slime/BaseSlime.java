@@ -3,10 +3,7 @@ package org.confluence.mod.entity.slime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
@@ -20,10 +17,11 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
+import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class BaseSlime extends Slime {
+public class BaseSlime extends Slime implements DeathAnimOptions {
     private final int size;
     private final ItemStack itemStack;
     private final FloatRGB color;
@@ -106,5 +104,10 @@ public class BaseSlime extends Slime {
         if (living instanceof BaseSlime baseSlime && living.getType() != ModEntities.PINK_SLIME.get()) {
             ModUtils.createItemEntity(baseSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
         }
+    }
+
+    @Override
+    public float[] getBloodColor(){
+        return color.toArray();
     }
 }

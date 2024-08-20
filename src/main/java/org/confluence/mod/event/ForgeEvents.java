@@ -72,6 +72,7 @@ import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
@@ -324,20 +325,22 @@ public final class ForgeEvents {
         LivingEntity entity = event.getEntity();
         LivingEntityRenderer<?, ?> renderer = event.getRenderer();
         float partialTick = event.getPartialTick();
-        if(entity.isAlive()) return;
+        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
         for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
             ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(entity);
             ((IModelPart) (Object) modelPart).confluence$setRenderingPartialTick(partialTick);
         }
+        ((ILivingEntityRenderer) renderer).confluence$setRendering(entity);
     }
 
     @SubscribeEvent
     public static void afterRenderLiving(RenderLivingEvent.Post<?, ?> event){
         LivingEntity entity = event.getEntity();
         LivingEntityRenderer<?, ?> renderer = event.getRenderer();
-        if(entity.isAlive()) return;
+        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
         for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
             ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(null);
         }
+        ((ILivingEntityRenderer) renderer).confluence$setRendering(null);
     }
 }
