@@ -108,6 +108,6 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public float[] getBloodColor(){
-        return color.toArray();
+        return color.mixture(new FloatRGB(0,0,0),0.5f).toArray();
     }
 }
