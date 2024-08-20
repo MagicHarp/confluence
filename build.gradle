@@ -31,9 +31,9 @@ minecraft {
                     source sourceSets.main
                 }
             }
-                property 'mixin.env.remapRefMap', 'true'
-                property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-                property 'geckolib.disable_examples', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            property 'geckolib.disable_examples', 'true'
         }
         client {}
         server {
@@ -44,7 +44,6 @@ minecraft {
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
-    mappings channel: 'parchment', version: '2023.09.03-1.20.1'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 }
 

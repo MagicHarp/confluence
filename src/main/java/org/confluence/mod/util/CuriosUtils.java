@@ -94,6 +94,25 @@ public final class CuriosUtils {
         return atomic.get();
     }
 
+    public static <C extends Item & ICurioItem> Optional<ItemStack> findCurioAt(LivingEntity living, C curio, String id) {
+        AtomicReference<Optional<ItemStack>> atomic = new AtomicReference<>(Optional.empty());
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            Map<String, ICurioStacksHandler> curios = handler.getCurios();
+            ICurioStacksHandler stacksHandler = curios.get(id);
+            if (stacksHandler != null) {
+                IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack stack = stackHandler.getStackInSlot(i);
+                    if (!stack.isEmpty() && stack.getItem() == curio) {
+                        atomic.set(Optional.of(stack));
+                        return;
+                    }
+                }
+            }
+        });
+        return atomic.get();
+    }
+
     public static ArrayList<ItemStack> getCurios(LivingEntity living) {
         ArrayList<ItemStack> items = new ArrayList<>();
         CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
