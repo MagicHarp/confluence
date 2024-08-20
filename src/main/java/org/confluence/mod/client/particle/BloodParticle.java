@@ -12,8 +12,11 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.RandomSource;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 public class BloodParticle extends TextureSheetParticle {
 
@@ -75,7 +78,7 @@ public class BloodParticle extends TextureSheetParticle {
         private final double vy;
         private final double vz;
 
-        public BloodParticleOptions(float r, float g, float b,double vx, double vy, double vz){
+        public BloodParticleOptions(float r, float g, float b, double vx, double vy, double vz){
             this.r = r;
             this.g = g;
             this.b = b;
@@ -103,7 +106,11 @@ public class BloodParticle extends TextureSheetParticle {
         @Override
         @NotNull
         public String writeToString(){
-            return toString();
+            return String.format(
+                Locale.ROOT,
+                "%s %.2f %.2f %.2f %.2f %.2f %.2f",
+                ForgeRegistries.PARTICLE_TYPES.getKey(this.getType()), r, g, b, vx, vy, vz);
+
         }
     }
 
