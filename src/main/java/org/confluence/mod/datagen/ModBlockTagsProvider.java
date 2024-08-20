@@ -54,7 +54,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         addTagsForBlocks(Ores.values());
         // 其他需要镐挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
-        acceptTag(mineableWithPickaxe);
         mineableWithPickaxe.add(
             BIG_RUBY_BLOCK.get(),
             BIG_AMBER_BLOCK.get(),
@@ -125,7 +124,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         );
         // 其他需要铲挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
-        acceptTag(mineableWithShovel);
         mineableWithShovel.add(
             SLUSH.get(),
             EBONY_SAND.get(),
@@ -192,26 +190,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             PEARL_STONE.get(),
             ANOTHER_CRIMSON_STONE.get()
         );
-//        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-//            EBONY_ORE.get(), DEEPSLATE_EBONY_ORE.get(), EBONY_BLOCK.get(), RAW_EBONY_BLOCK.get(),
-//            ANOTHER_CRIMSON_ORE.get(), DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), ANOTHER_CRIMSON_BLOCK.get(), RAW_ANOTHER_CRIMSON_BLOCK.get()
-//        );
-//        tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
-//            HELLSTONE.get(), ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
-//            PEARL_STONE.get(), PEARL_SANDSTONE.get(), DecorativeBlocks.BLUE_BRICK.get(), DecorativeBlocks.PINK_BRICK.get(), DecorativeBlocks.GREEN_BRICK.get()
-//        );
-//        tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
-//            DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
-//            DEEPSLATE_PALLADIUM_ORE.get(), RAW_PALLADIUM_BLOCK.get(), PALLADIUM_BLOCK.get()
-//        );
-//        tag(ModTags.Blocks.NEEDS_6_LEVEL).add(
-//            DEEPSLATE_MITHRIL_ORE.get(), RAW_MITHRIL_BLOCK.get(), MITHRIL_BLOCK.get(),
-//            DEEPSLATE_ORICHALCUM_ORE.get(), RAW_ORICHALCUM_BLOCK.get(), ORICHALCUM_BLOCK.get()
-//        );
-//        tag(ModTags.Blocks.NEEDS_7_LEVEL).add(
-//            DEEPSLATE_ADAMANTITE_ORE.get(), RAW_ADAMANTITE_BLOCK.get(), ADAMANTITE_BLOCK.get(),
-//            DEEPSLATE_TITANIUM_ORE.get(), RAW_TITANIUM_BLOCK.get(), TITANIUM_BLOCK.get()
-//        );
 
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
             EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
