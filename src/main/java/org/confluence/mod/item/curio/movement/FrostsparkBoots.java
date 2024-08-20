@@ -12,9 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.block.natural.ThinIceBlock;
+import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -26,6 +28,16 @@ public class FrostsparkBoots extends LightningBoots implements ThinIceBlock.IceS
 
     public FrostsparkBoots() {
         super(ModRarity.LIME);
+    }
+
+    @Override
+    public Vector3f getParticleColorStart() {
+        return FloatRGB.fromInteger(0x69cffc).toVector();
+    }
+
+    @Override
+    public Vector3f getParticleColorEnd() {
+        return FloatRGB.fromInteger(0x69cffc).toVector();
     }
 
     @Override

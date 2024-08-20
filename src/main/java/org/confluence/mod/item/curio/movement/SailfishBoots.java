@@ -1,8 +1,20 @@
 package org.confluence.mod.item.curio.movement;
 
 import net.minecraft.network.chat.Component;
+import org.confluence.mod.client.color.FloatRGB;
+import org.joml.Vector3f;
 
 public class SailfishBoots extends BaseSpeedBoots {
+    @Override
+    public Vector3f getParticleColorStart() {
+        return FloatRGB.fromInteger(0x46579f).toVector();
+    }
+
+    @Override
+    public Vector3f getParticleColorEnd() {
+        return FloatRGB.fromInteger(0x46579f).toVector();
+    }
+
     @Override
     public Component[] getInformation() {
         return new Component[]{

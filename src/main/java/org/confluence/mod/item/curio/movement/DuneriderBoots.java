@@ -7,9 +7,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -17,6 +19,16 @@ import java.util.List;
 public class DuneriderBoots extends BaseSpeedBoots {
     public DuneriderBoots() {
         super(ModRarity.BLUE);
+    }
+
+    @Override
+    public Vector3f getParticleColorStart() {
+        return FloatRGB.fromInteger(0xab603f).toVector();
+    }
+
+    @Override
+    public Vector3f getParticleColorEnd() {
+        return FloatRGB.fromInteger(0xab603f).toVector();
     }
 
     @Override

@@ -2,6 +2,8 @@ package org.confluence.mod.block.common;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -12,10 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -88,17 +87,28 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
             ItemStack item = pPlayer.getItemInHand(pHand);
             if (level.random.nextFloat() <= 0.2F) {
                 ResourceLocation path;
+                Block block;
                 if (item.is(ModTags.Items.DESERT_FOSSIL)) {
                     path = ModLootTables.EXTRACT_DESERT_FOSSIL;
+                    block = ModBlocks.DESERT_FOSSIL.get();
                 } else if (item.is(ModTags.Items.GRAVEL)) {
                     path = ModLootTables.EXTRACT_GRAVEL;
+                    block = Blocks.GRAVEL;
                 } else if (item.is(ModTags.Items.JUNK)) {
                     path = ModLootTables.EXTRACT_JUNK;
+                    block = Blocks.LILY_PAD;
                 } else if (item.is(ModTags.Items.SLUSH)) {
                     path = ModLootTables.EXTRACT_SLUSH;
+                    block = ModBlocks.SLUSH.get();
                 } else {
                     return InteractionResult.PASS;
                 }
+
+                level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, block.defaultBlockState()),
+                        pPos.getX() + 0.5F,
+                        pPos.getY() + 0.75F,
+                        pPos.getZ() + 0.5F,
+                        100, 0F, 0.0625F, 0F, 0.25F);
 
                 LootTable lootTable = level.getServer().getLootData().getLootTable(path);
                 LootParams lootparams = new LootParams.Builder(level)
