@@ -26,6 +26,8 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> FLAMEFLOWER_BLOOM = PARTICLES.register("flameflower_bloom", () -> new SimpleParticleType(false));
     public static final RegistryObject<ParticleType<CurrentDustOptions>> CURRENT_DUST = register("current_dust", false, CurrentDustOptions.DESERIALIZER, (p_123819_) -> CurrentDustOptions.CODEC);
     public static final RegistryObject<ParticleType<BloodParticle.BloodParticleOptions>> BLOOD = register("blood", false, BloodParticle.DESERIALIZER, type-> BloodParticle.CODEC);
+    public static final RegistryObject<ParticleType<LightsBaneParticle.LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", false, LightsBaneParticle.DESERIALIZER, type-> LightsBaneParticle.CODEC);
+
     @SuppressWarnings("all")
     private static <T extends ParticleOptions> RegistryObject<ParticleType<T>> register(String pKey, boolean pOverrideLimiter, ParticleOptions.Deserializer<T> pDeserializer, final Function<ParticleType<T>, Codec<T>> pCodecFactory) {
         return PARTICLES.register(pKey, () -> new ParticleType<T>(pOverrideLimiter, pDeserializer) {

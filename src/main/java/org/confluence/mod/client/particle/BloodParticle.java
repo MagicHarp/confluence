@@ -110,7 +110,6 @@ public class BloodParticle extends TextureSheetParticle {
                 Locale.ROOT,
                 "%s %.2f %.2f %.2f %.2f %.2f %.2f",
                 ForgeRegistries.PARTICLE_TYPES.getKey(this.getType()), r, g, b, vx, vy, vz);
-
         }
     }
 
