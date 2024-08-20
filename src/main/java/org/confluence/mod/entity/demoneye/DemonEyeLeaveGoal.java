@@ -6,15 +6,14 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.mixin.accessor.DistanceManagerAccessor;
-import org.confluence.mod.util.ModUtils;
 
 /** 白天的AI
  * @author voila */
-public class LeaveGoal extends Goal {
+public class DemonEyeLeaveGoal extends Goal {
     protected final DemonEye mob;
     private Vec3 targetMotion;
 
-    public LeaveGoal(DemonEye mob){
+    public DemonEyeLeaveGoal(DemonEye mob){
         this.mob = mob;
     }
 
@@ -46,9 +45,6 @@ public class LeaveGoal extends Goal {
         if(motion.length() < 0.5){
             mob.addDeltaMovement(targetMotion);
         }
-        float[] angle = ModUtils.dirToRot(mob.getDeltaMovement());
-        mob.setXRot(angle[1]);
-        mob.setYRot(angle[0]);
         // 如果大于这个速度也不用管，不管哪个方向
     }
 }

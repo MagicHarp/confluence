@@ -2,6 +2,8 @@
   "values": [
     "confluence:hellstone",
     "confluence:ash_hellstone",
+    "confluence:raw_hellstone_block",
+    "confluence:hellstone_block",
     "confluence:ebony_stone",
     "confluence:ebony_sandstone",
     "confluence:another_crimson_stone",

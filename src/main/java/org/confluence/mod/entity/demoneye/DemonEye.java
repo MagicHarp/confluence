@@ -23,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -37,7 +38,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public Vec3 moveTargetPoint;
     public AttackPhase attackPhase;
     public BlockPos anchorPoint;
-    public SurroundTargetGoal surroundTargetGoal;
+    public DemonEyeSurroundTargetGoal surroundTargetGoal;
     private boolean dead=false;
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -103,10 +104,10 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     @Override
     protected void registerGoals() {
-        surroundTargetGoal = new SurroundTargetGoal(this);
+        surroundTargetGoal = new DemonEyeSurroundTargetGoal(this);
         goalSelector.addGoal(0, surroundTargetGoal);
-        goalSelector.addGoal(1, new WanderGoal(this));
-        goalSelector.addGoal(2, new LeaveGoal(this));
+        goalSelector.addGoal(1, new DemonEyeWanderGoal(this));
+        goalSelector.addGoal(2, new DemonEyeLeaveGoal(this));
 //        goalSelector.addGoal(0, new DemonEyeParabolicMovementGoal(this));
 //        goalSelector.addGoal(1, new DemonEyeCircleAroundAnchorGoal(this));
 //        goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
@@ -164,6 +165,8 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         Vec3 pos = position();
         setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
         super.tick();
+        // 在super.tick()结束后更新面向方向即可覆盖原版AI
+        ModUtils.updateEntityRotation(this, this.getDeltaMovement());
     }
 
     @Override
@@ -200,14 +203,15 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         super.tickDeath();
     }
 
-    @Override
-    public void setXRot(float pXRot){
-        if(pXRot == 0 || pXRot == getXRot()){
-            return;
-        }
-        xRotO = getXRot();
-        super.setXRot(pXRot);
-    }
+        // 貌似不用：1.原版的setXRot并不吃性能 2.详见tick()部分的朝向更新
+//    @Override
+//    public void setXRot(float pXRot){
+////        if(pXRot == 0 || pXRot == getXRot()){
+////            return;
+////        }
+//        xRotO = getXRot();
+//        super.setXRot(pXRot);
+//    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

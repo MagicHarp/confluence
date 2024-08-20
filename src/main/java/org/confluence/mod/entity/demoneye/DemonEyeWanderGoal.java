@@ -5,10 +5,10 @@ import net.minecraft.world.phys.Vec3;
 
 /** 周围没有目标的AI，乱逛
  * @author voila */
-public class WanderGoal extends SurroundTargetGoal {
+public class DemonEyeWanderGoal extends DemonEyeSurroundTargetGoal {
     private double anchorY=Double.NaN;
 
-    public WanderGoal(DemonEye mob){
+    public DemonEyeWanderGoal(DemonEye mob){
         super(mob);
         maxSpeed=0.2;
     }

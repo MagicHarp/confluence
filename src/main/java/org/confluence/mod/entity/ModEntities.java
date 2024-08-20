@@ -14,6 +14,7 @@ import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.entity.fishing.HotlineFishingHook;
 import org.confluence.mod.entity.hook.*;
 import org.confluence.mod.entity.projectile.*;
+import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 
