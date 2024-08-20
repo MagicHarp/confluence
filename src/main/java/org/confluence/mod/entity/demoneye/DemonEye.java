@@ -36,8 +36,6 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;
-    public AttackPhase attackPhase;
-    public BlockPos anchorPoint;
     public SurroundTargetGoal surroundTargetGoal;
     private boolean dead=false;
 
@@ -108,14 +106,6 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         goalSelector.addGoal(0, surroundTargetGoal);
         goalSelector.addGoal(1, new WanderGoal(this));
         goalSelector.addGoal(2, new LeaveGoal(this));
-//        goalSelector.addGoal(0, new DemonEyeParabolicMovementGoal(this));
-//        goalSelector.addGoal(1, new DemonEyeCircleAroundAnchorGoal(this));
-//        goalSelector.addGoal(2, new DemonEyeAttackGoal(this));
-//        goalSelector.addGoal(3,new RandomStrollGoal(this,2,10));
-//        goalSelector.addGoal(3, new DemonEyeSweepAttackGoal(this));
-//        targetSelector.addGoal(1, new DemonEyeAttackPlayerTargetGoal(this));
-//        goalSelector.addGoal(0,new RandomLookAroundGoal(this));
-//        goalSelector.addGoal(1,new LookAtPlayerGoal(this, Player.class,6f,1));
     }
 
     @Override
@@ -135,7 +125,6 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     protected void pushEntities(){
     }
 
-    /** @author voila */
     public void move(@NotNull MoverType pType, @NotNull Vec3 motion){
         if(dead){
             super.move(pType, motion);
@@ -169,7 +158,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 
     @Override
     public void knockback(double pStrength, double pX, double pZ){
-//        Confluence.LOGGER.info("{}",pStrength);
+        // TODO: 调数值
         super.knockback(pStrength * 2, pX, pZ);
     }
 
@@ -220,9 +209,5 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         return CACHE;
     }
 
-    public enum AttackPhase {
-        CIRCLE,
-        SWOOP
-    }
 }
 
