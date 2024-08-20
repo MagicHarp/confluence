@@ -10,6 +10,6 @@ public class EnchantedSwordItem extends SwordItem implements ISwordProjectile {
 
     @Override
     public int getCooldown() {
-        return 40;
+        return 10;
     }
 }

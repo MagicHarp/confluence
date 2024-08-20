@@ -35,6 +35,7 @@ public class BlackSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void tick() {
+        resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {

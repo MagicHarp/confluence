@@ -3,7 +3,10 @@ package org.confluence.mod.entity.slime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
@@ -64,6 +67,7 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void tick() {
+        resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {
