@@ -23,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.util.DeathAnimOptions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -31,7 +32,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVariant>, GeoEntity {
+public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVariant>, GeoEntity, DeathAnimOptions {
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;

@@ -27,6 +27,14 @@ public final class ModUtils {
         }
     }
 
+    public static double nextDouble(RandomSource randomSource, double origin, double bound) {
+        if (origin >= bound) {
+            throw new IllegalArgumentException("bound - origin is non positive");
+        } else {
+            return origin + randomSource.nextDouble() * (bound - origin);
+        }
+    }
+
     public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level) {
         createItemEntity(itemStack, x, y, z, level, 40);
     }

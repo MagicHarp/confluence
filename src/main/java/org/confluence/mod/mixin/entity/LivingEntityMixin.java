@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -41,6 +42,7 @@ import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.DeathAnimUtils;
 import org.confluence.mod.util.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,8 +67,10 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
     @Unique private final Map<GeoBone, float[]> confluence$boneMotions = new HashMap<>();
     @Unique private final Map<ModelPart, float[]> confluence$partMotions = new HashMap<>();
     @Unique private final Map<ModelPart, PartPose> confluence$deathPose = new HashMap<>();
-    @Unique private double confluence$lastMotionY=0;  // 复用，上一刻速度和落地时间
-    @Unique private double confluence$landMotionY =Double.NaN;
+    @Unique private Vec3 confluence$lastMotion = Vec3.ZERO;
+    @Unique private int confluence$landTicks = 0;
+    @Unique private Vec3 confluence$landMotion = new Vec3(0, Double.NaN, 0);
+    @Unique private boolean confluence$bled = false;  // bleed的过去式
 
     private LivingEntityMixin(EntityType<?> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
@@ -74,6 +78,8 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
 
     @Shadow
     public abstract EntityDimensions getDimensions(Pose pPose);
+
+    @Shadow public abstract boolean isDeadOrDying();
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
@@ -247,72 +253,86 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         }
     }
 
+    /** @author voila  */
     @Inject(method = "tickDeath", at = @At("HEAD"))
     private void tickDeath(CallbackInfo ci){
+        DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(self());
+        if(options!=null){
+            self().addDeltaMovement(new Vec3(0, -options.getExtraGravity(), 0));
+        }else {
+            return;
+        }
         if(!self().level().isClientSide()){
             return;
         }
-
         if(self().deathTime > 0){
             Vec3 motion = getDeltaMovement();
             Vec3 clip = ((EntityAccessor) self()).callCollide(motion);
-            if(clip.y > -0.1 && clip.y <= 0 && Double.isNaN(confluence$landMotionY) && onGround()){
-                confluence$landMotionY = confluence$lastMotionY < -0.1 ? confluence$lastMotionY : Math.min(motion.y, -0.1);
-//                Confluence.LOGGER.info("origin {}", confluence$landMotionY);
-                if(confluence$landMotionY <= -0.25){
-                    confluence$landMotionY *= 0.6;
+            if(clip.y > -0.1 && clip.y <= 0 && Double.isNaN(confluence$landMotion.y) && onGround()){
+                confluence$landMotion = confluence$lastMotion.y < -0.1 ? confluence$lastMotion : motion.y < -0.1 ? motion : motion.with(Direction.Axis.Y, -0.1);
+                if(confluence$landMotion.y <= -0.25){
+                    confluence$landMotion.with(Direction.Axis.Y, confluence$landMotion.y * 0.6);
                 }
-                confluence$lastMotionY = 0;
+                confluence$landTicks = 0;
             }
-            if(!Double.isNaN(confluence$landMotionY)){
-                confluence$lastMotionY++;
+            if(!Double.isNaN(confluence$landMotion.y)){
+                confluence$landTicks++;
             }else{
-                confluence$lastMotionY = motion.y;
+                confluence$lastMotion = motion;
             }
         }
         if(self().deathTime != 0){
             return;
         }
         if(self() instanceof GeoAnimatable){
-            confluence$initGeoDeathAnim();
+            confluence$initGeoDeathAnim(options);
         }else{
-            confluence$initVanillaDeathAnim();
+            confluence$initVanillaDeathAnim(options);
+        }
+    }
+
+    @Inject(method = "hurt",at = @At("RETURN"))
+    private void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir){
+        if(!confluence$bled && isDeadOrDying()){ //TODO: 开关
+            DeathAnimUtils.addBloodParticles(self());
+            confluence$bled = true;
         }
     }
 
     @SuppressWarnings("unchecked")
     @Unique
-    private void confluence$initGeoDeathAnim(){
+    private void confluence$initGeoDeathAnim(DeathAnimOptions options){
         GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(self());
         RandomSource random = self().level().getRandom();
         if(model != null){
             BakedGeoModel bakedModel = model.getBakedModel(model.getModelResource((GeoAnimatable) self()));
             for(GeoBone bone : bakedModel.topLevelBones()){
-                confluence$boneMotions.put(bone, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), bone.getPosY()));
+                confluence$boneMotions.put(bone, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), bone.getPosY(),options));
             }
         }
     }
 
     @Unique
-    private void confluence$initVanillaDeathAnim(){
+    private void confluence$initVanillaDeathAnim(DeathAnimOptions options){
         EntityRenderer<?> r = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(self());
         if(r instanceof LivingEntityRenderer<?, ?> renderer){
             RandomSource random = self().level().getRandom();
             for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
-                confluence$partMotions.putIfAbsent(modelPart, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), modelPart));
+                confluence$partMotions.putIfAbsent(modelPart, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), modelPart,options));
                 confluence$deathPose.putIfAbsent(modelPart, modelPart.storePose()); // 记录死亡瞬间的姿势
+                // TODO: 死了别转
             }
         }
     }
 
     @Override
-    public int confluence$landTick(){
-        return (int) confluence$lastMotionY;
+    public int confluence$landTicks(){
+        return confluence$landTicks;
     }
 
     @Override
-    public double confluence$landMotionY(){
-        return confluence$landMotionY;
+    public Vec3 confluence$landMotion(){
+        return confluence$landMotion;
     }
 
     @Override

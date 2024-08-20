@@ -223,6 +223,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.SAPPHIRE_BULLET.get(), BulletParticle.Provider::new);
         event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
         event.registerSpriteSet(ModParticles.CURRENT_DUST.get(), CurrentColorDustParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.BLOOD.get(), BloodParticle.Provider::new);
     }
 
     @SubscribeEvent
