@@ -37,7 +37,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;
-    public AttackPhase attackPhase;
+//    public AttackPhase attackPhase;
     public BlockPos anchorPoint;
     public DemonEyeSurroundTargetGoal surroundTargetGoal;
     private boolean dead=false;
@@ -107,8 +107,8 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     protected void registerGoals() {
         surroundTargetGoal = new DemonEyeSurroundTargetGoal(this);
         goalSelector.addGoal(0, surroundTargetGoal);
-        goalSelector.addGoal(1, new WanderGoal(this));
-        goalSelector.addGoal(2, new LeaveGoal(this));
+        goalSelector.addGoal(1, new DemonEyeWanderGoal(this));
+        goalSelector.addGoal(2, new DemonEyeLeaveGoal(this));
     }
 
     @Override
