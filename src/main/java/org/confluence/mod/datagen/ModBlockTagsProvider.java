@@ -4,18 +4,22 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.confluence.mod.block.EnumBlockRegister;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.LogBlocks;
+import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -27,9 +31,28 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         super(output, lookup, MODID, helper);
     }
 
+    /**
+     * 批量为方块的注册信息添加内部对应的tag
+     *
+     * @param enumBlocks EnumBlockRegister类型的方块注册信息
+     */
+    @SafeVarargs
+    public final void addTagsForBlocks(EnumBlockRegister<Block>... enumBlocks) {
+        HashMap<TagKey<Block>, IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> memoi = new HashMap<>();
+        for (EnumBlockRegister<Block> enumBlock : enumBlocks) {
+            for (TagKey<Block> tagKey : enumBlock.getBlockTags().getTags()) {
+                memoi.computeIfAbsent(tagKey, this::tag).add(enumBlock.get());
+            }
+        }
+    }
+
     @Override
     public void addTags(HolderLookup.@NotNull Provider provider) {
+        // 木制方块
         LogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
+        // 矿物方块
+        addTagsForBlocks(Ores.values());
+        // 其他需要镐挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
         acceptTag(mineableWithPickaxe);
         mineableWithPickaxe.add(
@@ -100,6 +123,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.TIMERS_BLOCK_1_2.get(),
             ModBlocks.TIMERS_BLOCK_1_4.get()
         );
+        // 其他需要铲挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
         acceptTag(mineableWithShovel);
         mineableWithShovel.add(
@@ -168,25 +192,30 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             PEARL_STONE.get(),
             ANOTHER_CRIMSON_STONE.get()
         );
-        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-            EBONY_ORE.get(), DEEPSLATE_EBONY_ORE.get(), EBONY_BLOCK.get(), RAW_EBONY_BLOCK.get(),
-            ANOTHER_CRIMSON_ORE.get(), DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), ANOTHER_CRIMSON_BLOCK.get(), RAW_ANOTHER_CRIMSON_BLOCK.get()
-        );
+//        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
+//            EBONY_ORE.get(), DEEPSLATE_EBONY_ORE.get(), EBONY_BLOCK.get(), RAW_EBONY_BLOCK.get(),
+//            ANOTHER_CRIMSON_ORE.get(), DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), ANOTHER_CRIMSON_BLOCK.get(), RAW_ANOTHER_CRIMSON_BLOCK.get()
+//        );
+//        tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
+//            HELLSTONE.get(), ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
+//            PEARL_STONE.get(), PEARL_SANDSTONE.get(), DecorativeBlocks.BLUE_BRICK.get(), DecorativeBlocks.PINK_BRICK.get(), DecorativeBlocks.GREEN_BRICK.get()
+//        );
+//        tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
+//            DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
+//            DEEPSLATE_PALLADIUM_ORE.get(), RAW_PALLADIUM_BLOCK.get(), PALLADIUM_BLOCK.get()
+//        );
+//        tag(ModTags.Blocks.NEEDS_6_LEVEL).add(
+//            DEEPSLATE_MITHRIL_ORE.get(), RAW_MITHRIL_BLOCK.get(), MITHRIL_BLOCK.get(),
+//            DEEPSLATE_ORICHALCUM_ORE.get(), RAW_ORICHALCUM_BLOCK.get(), ORICHALCUM_BLOCK.get()
+//        );
+//        tag(ModTags.Blocks.NEEDS_7_LEVEL).add(
+//            DEEPSLATE_ADAMANTITE_ORE.get(), RAW_ADAMANTITE_BLOCK.get(), ADAMANTITE_BLOCK.get(),
+//            DEEPSLATE_TITANIUM_ORE.get(), RAW_TITANIUM_BLOCK.get(), TITANIUM_BLOCK.get()
+//        );
+
         tag(ModTags.Blocks.NEEDS_4_LEVEL).add(
-            HELLSTONE.get(), ASH_HELLSTONE.get(), EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
+            EBONY_STONE.get(), EBONY_SANDSTONE.get(), ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_SANDSTONE.get(),
             PEARL_STONE.get(), PEARL_SANDSTONE.get(), DecorativeBlocks.BLUE_BRICK.get(), DecorativeBlocks.PINK_BRICK.get(), DecorativeBlocks.GREEN_BRICK.get()
-        );
-        tag(ModTags.Blocks.NEEDS_5_LEVEL).add(
-            DEEPSLATE_COBALT_ORE.get(), RAW_COBALT_BLOCK.get(), COBALT_BLOCK.get(),
-            DEEPSLATE_PALLADIUM_ORE.get(), RAW_PALLADIUM_BLOCK.get(), PALLADIUM_BLOCK.get()
-        );
-        tag(ModTags.Blocks.NEEDS_6_LEVEL).add(
-            DEEPSLATE_MITHRIL_ORE.get(), RAW_MITHRIL_BLOCK.get(), MITHRIL_BLOCK.get(),
-            DEEPSLATE_ORICHALCUM_ORE.get(), RAW_ORICHALCUM_BLOCK.get(), ORICHALCUM_BLOCK.get()
-        );
-        tag(ModTags.Blocks.NEEDS_7_LEVEL).add(
-            DEEPSLATE_ADAMANTITE_ORE.get(), RAW_ADAMANTITE_BLOCK.get(), ADAMANTITE_BLOCK.get(),
-            DEEPSLATE_TITANIUM_ORE.get(), RAW_TITANIUM_BLOCK.get(), TITANIUM_BLOCK.get()
         );
         IntrinsicTagAppender<Block> needsNonVanillaLevel = tag(ModTags.Blocks.NEEDS_NON_VANILLA_LEVEL);
         needsNonVanillaLevel.addTag(ModTags.Blocks.NEEDS_4_LEVEL);

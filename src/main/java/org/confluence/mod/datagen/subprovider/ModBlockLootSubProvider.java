@@ -160,6 +160,9 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.METEORITE_ORE.get(), block -> createOreDrop(block, Materials.RAW_METEORITE.get()));
         add(Ores.EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
         add(Ores.DEEPSLATE_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
+        add(Ores.SANCTIFICATION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
+        add(Ores.CORRUPTION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
+        add(Ores.FLESHIFICATION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
         add(Ores.ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
         add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
         add(Ores.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(block, Materials.RAW_COBALT.get()));
