@@ -2,22 +2,31 @@ package org.confluence.mod.mixin.entity;
 
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
+import org.confluence.mod.item.ModItems;
+import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.mixinauxiliary.IItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin implements IItemEntity {
+    @Shadow
+    public abstract ItemStack getItem();
+
     @Unique
     private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
     @Unique
@@ -62,6 +71,18 @@ public abstract class ItemEntityMixin implements IItemEntity {
             }
         } else if (confluence$item_coolDown > 0) {
             this.confluence$item_coolDown--;
+        }
+    }
+
+    @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
+    public void highRarityForbiddenBurn(CallbackInfoReturnable<Boolean> cir) {
+        if ((!getItem().getRarity().equals(ModRarity.WHITE)) &&
+                (!getItem().getRarity().equals(ModRarity.GRAY)) &&
+                (!getItem().getRarity().equals(Rarity.COMMON))) {
+            cir.setReturnValue(true);
+        } else if (getItem().is(Blocks.OBSIDIAN.asItem()) || getItem().is(Blocks.CRYING_OBSIDIAN.asItem()) ||
+                getItem().is(ModItems.FLAMEFLOWERS.get()) || getItem().is(ModItems.FLAMEFLOWERS_SEED.get())) {
+            cir.setReturnValue(true);
         }
     }
 
