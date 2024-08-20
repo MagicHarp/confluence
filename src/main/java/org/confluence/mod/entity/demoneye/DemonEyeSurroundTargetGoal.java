@@ -14,7 +14,7 @@ import java.util.List;
 
 /** 平时的AI
  * @author voila  */
-public class SurroundTargetGoal extends Goal {
+public class DemonEyeSurroundTargetGoal extends Goal {
     protected final DemonEye mob;
     protected final RandomSource random;
     protected int locateCount = 0;  // 用来确定目标Y坐标
@@ -22,7 +22,7 @@ public class SurroundTargetGoal extends Goal {
     public Vec3 targetPos;
     public double maxSpeed = 0.4;  // 给游荡眼球怪用的，以后估计还有别的字段
 
-    public SurroundTargetGoal(DemonEye mob){
+    public DemonEyeSurroundTargetGoal(DemonEye mob){
         this.mob = mob;
         random = mob.getRandom();
     }
@@ -85,9 +85,6 @@ public class SurroundTargetGoal extends Goal {
         if(angleBetween(targetDir, motion) > 15 || targetMotion.length() < maxSpeed){
             mob.setDeltaMovement(targetMotion);
         }
-        float[] angle = ModUtils.dirToRot(targetMotion);
-        mob.setYRot(angle[0]);
-        mob.setXRot(angle[1]);
 //        ((ServerLevel) (mob.level())).sendParticles(ParticleTypes.FLAME, targetPos.x, targetPos.y, targetPos.z, 1, 0, 0, 0, 0);
         List<Player> entities = mob.level().getEntities(EntityType.PLAYER, mob.getBoundingBox().expandTowards(targetMotion).inflate(0.15),e -> !e.isSpectator());
         for(Player player : entities){

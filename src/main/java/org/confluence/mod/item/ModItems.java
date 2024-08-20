@@ -75,7 +75,9 @@ public final class ModItems {
     public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new); // todo 荧光棒
     public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new); // todo 粘性荧光棒
     public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", Bomb::new); // todo 炸弹
-    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BaseItem::new); // todo 甲虫炸弹
+    public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", BombBouncy::new); // todo 弹力炸弹
+    public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", BombSticky::new); // todo 粘性炸弹
+    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BombScarab::new); // todo 甲虫炸弹
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSoundEvents.ALPHA, 12060));
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));
