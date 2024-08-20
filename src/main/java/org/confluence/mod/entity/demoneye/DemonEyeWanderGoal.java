@@ -20,7 +20,8 @@ public class DemonEyeWanderGoal extends DemonEyeSurroundTargetGoal {
 
     @Override
     public boolean canContinueToUse(){
-        return canUse() && ticksLeft > 0 && mob.position().distanceTo(targetPos) > 1.5;
+        return canUse() && ticksLeft > 0 &&
+                mob.position().distanceToSqr(targetPos) > 2.25; // 1.5*1.5
     }
 
     @Override

@@ -63,8 +63,8 @@ public class DemonEyeSurroundTargetGoal extends Goal {
             && Math.abs(pos.x - targetPos.x) > 0.1
             && Math.abs(pos.y - targetPos.y) > 0.1
             && Math.abs(pos.z - targetPos.z) > 0.1
-            && mob.position().distanceTo(targetPos)>0.3
-            && mob.getTarget().position().distanceTo(targetPos) < 10  // canUse保证了target!=null
+            && mob.position().distanceToSqr(targetPos)>0.09 // 0.3 * 0.3
+            && mob.getTarget().position().distanceToSqr(targetPos) < 100  // 10 * 10; canUse保证了target!=null
             && ticksLeft > 0;
     }
 

@@ -79,7 +79,7 @@ public class BaseBombEntity extends ThrowableItemProjectile {
             BlockHitResult blockHitResult = (BlockHitResult) pResult;
 
             blockHitCallBack(blockHitResult);
-            Vec3 velocity = this.getDeltaMovement().multiply(frictionFactor, frictionFactor, frictionFactor);
+            Vec3 velocity = this.getDeltaMovement().scale(frictionFactor);
             // 弹幕弹跳/摩擦
             Direction collDir = blockHitResult.getDirection();
             velocity = switch (collDir) {

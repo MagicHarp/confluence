@@ -65,7 +65,7 @@ public class FlailEntity extends ChainingEntity implements IOriented {
         if(owner == null || owner.isRemoved()  // 没有owner
             || (!level().isClientSide() && item == null)  // 没有物品
             || !level().isClientSide() && owner instanceof LivingEntity living && living.getItemInHand(hand).getItem() != item   // 切换物品
-            || position().distanceTo(owner.position()) >= 30){  //距离太远，自动消失的距离是固定的 TODO: 调整数值
+            || position().distanceToSqr(owner.position()) >= 30 * 30){  //距离太远，自动消失的距离是固定的 TODO: 调整数值
             discard();
             if(owner instanceof IPlayer fp){
                 fp.confluence$flailEntity((FlailEntity) null);
@@ -102,7 +102,7 @@ public class FlailEntity extends ChainingEntity implements IOriented {
                 setDeltaMovement(owner.position().add(0,1,0).subtract(position()).normalize().scale(3)); // TODO: 时间决定速度
             }
         }
-        if(position().distanceTo(owner.position()) > 16){  // TODO: 抛出时间固定，时间决定速度和距离
+        if(position().distanceToSqr(owner.position()) > 16 * 16){  // TODO: 抛出时间固定，时间决定速度和距离
             setPhase(PHASE_RETRACT);
         }
         refreshDimensions();
