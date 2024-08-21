@@ -47,7 +47,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
         .put(ModBlocks.MOONSHINE_GRASS, Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK))
         .put(ModBlocks.SHIVERINGTHORNS, Set.of(Blocks.GRASS_BLOCK, Blocks.ICE, ModBlocks.RED_ICE.get(), ModBlocks.RED_PACKED_ICE.get(), ModBlocks.PINK_PACKED_ICE.get(), ModBlocks.PINK_ICE.get(), ModBlocks.PURPLE_ICE.get(), ModBlocks.PURPLE_PACKED_ICE.get()))
         .put(ModBlocks.SHINE_ROOT, Set.of(Blocks.DIRT, Blocks.MUD, Blocks.STONE, Blocks.DEEPSLATE))
-        .put(ModBlocks.DEATHWEED, Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get(), ModBlocks.EBONY_STONE.get(), ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get(), ModBlocks.ANOTHER_CRIMSON_STONE.get()))
+        .put(ModBlocks.DEATHWEED, Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get(), ModBlocks.EBONY_STONE.get(), ModBlocks.TR_CRIMSON_GRASS_BLOCK.get(), ModBlocks.TR_CRIMSON_STONE.get()))
         .put(ModBlocks.WATERLEAF, Set.of(Blocks.SAND, Blocks.RED_SAND, ModBlocks.PEARL_SAND.get()))
         .put(ModBlocks.FLAMEFLOWERS, Set.of(ModBlocks.ASH_BLOCK.get(), ModBlocks.ASH_GRASS_BLOCK.get()))
         .build();

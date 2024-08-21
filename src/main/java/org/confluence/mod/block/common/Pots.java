@@ -54,7 +54,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F),
     JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F),
     MARBLE_CAVE_POTS("marble_cave_pots", 2.0F, 0.002667F),
-    ANOTHER_CRIMSON_POTS("another_crimson_pots", 1.6F, 0.00274F),
+    TR_CRIMSON_POTS("another_crimson_pots", 1.6F, 0.00274F),
     PYRAMID_POTS("pyramid_pots", 10.0F, 0.008F),
     CORRUPTION_POTS("corruption_pots", 1.6F, 0.00274F),
     DUNGEON_POTS("dungeon_pots", 1.9F, 0.002604F),
@@ -308,7 +308,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             } else {
                 if (tundra) {
                     item = Torches.ICE_TORCH.item.get();
-                } else if (this == ANOTHER_CRIMSON_POTS.get()) {
+                } else if (this == TR_CRIMSON_POTS.get()) {
                     item = Torches.CRIMSON_TORCH.item.get();
                 } else if (this == JUNGLE_POTS.get()) {
                     item = Torches.JUNGLE_TORCH.item.get();

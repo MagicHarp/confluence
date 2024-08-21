@@ -14,7 +14,7 @@ public class SurfaceRuleData {
     private static final SurfaceRules.RuleSource CORRUPT_GRASS_BLOCK = makeStateRule(ModBlocks.CORRUPT_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource EBONY_STONE = makeStateRule(ModBlocks.EBONY_STONE.get());
     private static final SurfaceRules.RuleSource HALLOW_GRASS_BLOCK = makeStateRule(ModBlocks.HALLOW_GRASS_BLOCK.get());
-    private static final SurfaceRules.RuleSource ANOTHER_CRIMSON_GRASS_BLOCK = makeStateRule(ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK.get());
+    private static final SurfaceRules.RuleSource ANOTHER_CRIMSON_GRASS_BLOCK = makeStateRule(ModBlocks.TR_CRIMSON_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource MUSHROOM_GRASS_BLOCK = makeStateRule(ModBlocks.MUSHROOM_GRASS_BLOCK.get());
     private static final SurfaceRules.RuleSource MUD = makeStateRule(Blocks.MUD);
 

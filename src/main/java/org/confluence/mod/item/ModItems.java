@@ -107,7 +107,7 @@ public final class ModItems {
     public static final RegistryObject<Item> SUNFLOWERS = ITEMS.register("sunflowers", HerbItem::new);
     public static final RegistryObject<Item> DEATHWEED = ITEMS.register("deathweed", HerbItem::new);
     // 蘑菇
-    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", () -> new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), 0.0F));
+    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", () -> new MushroomItem(ModBlocks.TR_CRIMSON_MUSHROOM.get(), 0.0F));
     public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", () -> new MushroomItem(ModBlocks.EBONY_MUSHROOM.get(), 0.0F));
     // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
     public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", () -> new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get(), 0.0F));

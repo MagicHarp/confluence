@@ -99,7 +99,7 @@ public enum Foods implements EnumRegister<Item> {
     PARTIAL_MOUTH_FISH("partial_mouth_fish", () -> new BaseFoodItem(FoodType.FISH)),
     ROCK_LOBSTER("rock_lobster", () -> new BaseFoodItem(FoodType.FISH)),
     SHRIMP("shrimp", () -> new BaseFoodItem(FoodType.FISH)),
-    ANOTHER_SALMON("another_salmon", () -> new BaseFoodItem(FoodType.FISH)),
+    TR_SALMON("another_salmon", () -> new BaseFoodItem(FoodType.FISH)),
     TUNA("tuna", () -> new BaseFoodItem(FoodType.FISH)),
     RED_SNAPPER("red_snapper", () -> new BaseFoodItem(FoodType.FISH)),
     TROUT("trout", () -> new BaseFoodItem(FoodType.FISH)),

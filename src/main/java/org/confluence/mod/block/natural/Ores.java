@@ -106,11 +106,11 @@ public enum Ores implements EnumBlockRegister<Block> {
     FLESHIFICATION_AMBER_ORE("fleshification_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     // 异域紫晶矿
-    ANOTHER_AMETHYST_ORE("another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    DEEPSLATE_ANOTHER_AMETHYST_ORE("deepslate_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    SANCTIFICATION_ANOTHER_AMETHYST_ORE("sanctification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    CORRUPTION_ANOTHER_AMETHYST_ORE("corruption_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    FLESHIFICATION_ANOTHER_AMETHYST_ORE("fleshification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    TR_AMETHYST_ORE("another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_TR_AMETHYST_ORE("deepslate_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    SANCTIFICATION_TR_AMETHYST_ORE("sanctification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    CORRUPTION_TR_AMETHYST_ORE("corruption_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    FLESHIFICATION_TR_AMETHYST_ORE("fleshification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     // 蓝玉矿
     SAPPHIRE_ORE("sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
@@ -135,14 +135,14 @@ public enum Ores implements EnumBlockRegister<Block> {
     EBONY_BLOCK("ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
     RAW_EBONY_BLOCK("raw_ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
     // 猩红矿
-    ANOTHER_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    DEEPSLATE_ANOTHER_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    SANCTIFICATION_ANOTHER_CRIMSON_ORE("sanctification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    CORRUPTION_ANOTHER_CRIMSON_ORE("corruption_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    FLESHIFICATION_ANOTHER_CRIMSON_ORE("fleshification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    TR_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    DEEPSLATE_TR_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    SANCTIFICATION_TR_CRIMSON_ORE("sanctification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    CORRUPTION_TR_CRIMSON_ORE("corruption_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    FLESHIFICATION_TR_CRIMSON_ORE("fleshification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
 
-    RAW_ANOTHER_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
-    ANOTHER_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
+    RAW_TR_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
+    TR_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
 
 
     // 狱石矿

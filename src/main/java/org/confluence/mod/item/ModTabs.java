@@ -48,7 +48,7 @@ public final class ModTabs {
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
-                output.accept(BIG_ANOTHER_AMETHYST_BLOCK.get());
+                output.accept(BIG_TR_AMETHYST_BLOCK.get());
 
 
                 output.accept(RUBY_CHAIN.get());
@@ -86,7 +86,7 @@ public final class ModTabs {
                 output.accept(DIAMOND_BRANCHES.get());
                 output.accept(SAPPHIRE_BRANCHES.get());
                 output.accept(ASH_BRANCHES.get());
-                output.accept(ANOTHER_AMETHYST_BRANCHES.get());
+                output.accept(TR_AMETHYST_BRANCHES.get());
                 output.accept(AETHERIUM_BLOCK.get());
                 output.accept(DARK_AETHERIUM_BLOCK.get());
 
@@ -109,12 +109,12 @@ public final class ModTabs {
                 output.accept(EBONY_LOG_BLOCKS.LOG.get());
                 output.accept(EBONY_LOG_BLOCKS.LEAVES.get());
 
-                output.accept(ANOTHER_CRIMSON_GRASS_BLOCK.get());
-                output.accept(ANOTHER_CRIMSON_SAND.get());
-                output.accept(ANOTHER_CRIMSON_STONE.get());
-                output.accept(ANOTHER_CRIMSON_COBBLESTONE.get());
-                output.accept(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get());
-                output.accept(ANOTHER_CRIMSON_SANDSTONE.get());
+                output.accept(TR_CRIMSON_GRASS_BLOCK.get());
+                output.accept(TR_CRIMSON_SAND.get());
+                output.accept(TR_CRIMSON_STONE.get());
+                output.accept(TR_CRIMSON_COBBLESTONE.get());
+                output.accept(TR_CRIMSON_HARDENED_SAND_BLOCK.get());
+                output.accept(TR_CRIMSON_SANDSTONE.get());
                 output.accept(RED_ICE.get());
                 output.accept(RED_PACKED_ICE.get());
                 output.accept(SHADOW_LOG_BLOCKS.LOG.get());
@@ -137,7 +137,7 @@ public final class ModTabs {
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
-                output.accept(ANOTHER_POLISHED_GRANITE.get());
+                output.accept(TR_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
 
                 output.accept(CLOUD_BLOCK.get());
@@ -174,7 +174,7 @@ public final class ModTabs {
                 output.accept(ModItems.LIFE_MUSHROOM.get());
                 output.accept(CORRUPT_GRASS.get());
                 output.accept(ASH_GRASS.get());
-                output.accept(ANOTHER_CRIMSON_GRASS.get());
+                output.accept(TR_CRIMSON_GRASS.get());
                 output.accept(HALLOW_GRASS.get());
 
                 output.accept(THIN_ICE_BLOCK.get());
@@ -192,7 +192,7 @@ public final class ModTabs {
                 // 片
                 output.accept(EBONY_SAND_LAYER_BLOCK.get());
                 output.accept(PEARL_SAND_LAYER_BLOCK.get());
-                output.accept(ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get());
+                output.accept(TR_CRIMSON_SAND_LAYER_BLOCK.get());
                 output.accept(SAND_LAYER_BLOCK.get());
                 output.accept(RED_SAND_LAYER_BLOCK.get());
 

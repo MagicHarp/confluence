@@ -21,7 +21,7 @@ public enum QuestedFishes implements EnumRegister<Item> {
     MUDFISH("mudfish"), // 泥鱼
     MUTANT_FLINXFIN("mutant_flinxfin"), // 突变弗林鱼
     CLOUDFISH("cloudfish"), // 云朵鱼
-    ANOTHER_CLOWNFISH("another_clownfish"), // 异域小丑鱼
+    TR_CLOWNFISH("another_clownfish"), // 异域小丑鱼
     DEMONIC_HELLFISH("demonic_hellfish"), // 地狱恶魔鱼
     DERPFISH("derpfish"), // 跳跳鱼
     ICHORFISH("ichorfish"), // 灵液鱼
