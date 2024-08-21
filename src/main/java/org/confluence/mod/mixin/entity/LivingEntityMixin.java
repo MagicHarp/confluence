@@ -18,6 +18,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -284,7 +285,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         if(self().deathTime != 0){
             return;
         }
-        if(self() instanceof GeoAnimatable){
+        if(self() instanceof GeoAnimatable){  // TODO: 原版生物能穿geo甲，geo生物能穿原版甲
             confluence$initGeoDeathAnim(options);
         }else{
             confluence$initVanillaDeathAnim(options);
@@ -320,7 +321,6 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
             for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
                 confluence$partMotions.putIfAbsent(modelPart, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), modelPart,options));
                 confluence$deathPose.putIfAbsent(modelPart, modelPart.storePose()); // 记录死亡瞬间的姿势
-                // TODO: 死了别转
             }
         }
     }
@@ -350,5 +350,14 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
     @Override
     public PartPose confluence$getPoseForPart(ModelPart part){
         return confluence$deathPose.get(part);
+    }
+
+    // 死了就别乱转了
+    @Override
+    public void setYRot(float pYRot){
+        if(!(self() instanceof EnderDragon) && self().isDeadOrDying()){
+            return;
+        }
+        super.setYRot(pYRot);
     }
 }
