@@ -31,10 +31,17 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
     public static final RegistryObject<SoundEvent> ROUTINE_HURT = register("routine_hurt");
     public static final RegistryObject<SoundEvent> ROUTINE_DEATH = register("routine_death");
-    public static final RegistryObject<SoundEvent> COOLDOWN_RECOVERY = register("cooldown_recovery");
-    public static final RegistryObject<SoundEvent> FROZEN_ARROW = register("frozen_arrow");
+    public static final RegistryObject<SoundEvent> COOLDOWN_RECOVERY = register("cooldown_recovery");  // CD冷却
+    public static final RegistryObject<SoundEvent> FROZEN_ARROW = register("frozen_arrow");  // 冰雪射弹
     public static final RegistryObject<SoundEvent> FROZEN_BROKEN = register("frozen_broken");
-    public static final RegistryObject<SoundEvent> TERRA_SWINGS = register("terra_swings");
+    public static final RegistryObject<SoundEvent> SHIMMER_DETACHMENT = register("shimmer_detachment"); // 脱离微光
+    public static final RegistryObject<SoundEvent> SHIMMER_EVOLUTION = register("shimmer_evolution");// 嬗变
+    public static final RegistryObject<SoundEvent> SHIMMER_IMMERSION = register("shimmer_immersion");// 生物入微光
+    public static final RegistryObject<SoundEvent> SHIMMER_ITEM_INTERACTIONS = register("shimmer_item_interactions"); // 物品入微光
+    public static final RegistryObject<SoundEvent> STAR = register("star");  // 坠星
+    public static final RegistryObject<SoundEvent> STAR_LANDS = register("star_lands");  // 星星落地
+    public static final RegistryObject<SoundEvent> TERRA_OPERATION = register("terra_operation");  // 操作音效
+    public static final RegistryObject<SoundEvent> USE_MOUNTS = register("use_mounts");   // 召唤坐骑
 
 
     private static RegistryObject<SoundEvent> register(String id) {

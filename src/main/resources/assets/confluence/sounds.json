@@ -102,11 +102,6 @@
             "confluence:mob/routine_death"
         ]
     },
-    "terra_swings": {
-        "sounds": [
-            "confluence:terra_swings"
-        ]
-    },
     "frozen_broken": {
         "sounds": [
             "confluence:frozen_broken"
@@ -120,6 +115,46 @@
     "cooldown_recovery": {
         "sounds": [
             "confluence:cooldown_recovery"
+        ]
+    },
+    "shimmer_detachment": {
+        "sounds": [
+            "confluence:shimmer_detachment"
+        ]
+    },
+    "shimmer_evolution": {
+        "sounds": [
+            "confluence:shimmer_evolution"
+        ]
+    },
+    "shimmer_immersion": {
+        "sounds": [
+            "confluence:shimmer_immersion"
+        ]
+    },
+    "shimmer_item_interactions": {
+        "sounds": [
+            "confluence:shimmer_item_interactions"
+        ]
+    },
+    "star": {
+        "sounds": [
+            "confluence:star"
+        ]
+    },
+    "star_lands": {
+        "sounds": [
+            "confluence:star_lands"
+        ]
+    },
+    "terra_operation": {
+        "sounds": [
+            "confluence:terra_operation"
+        ]
+    },
+    "use_mounts": {
+        "sounds": [
+            "confluence:use_mounts"
         ]
     }
 }
