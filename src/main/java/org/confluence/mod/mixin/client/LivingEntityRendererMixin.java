@@ -1,6 +1,7 @@
 package org.confluence.mod.mixin.client;
 
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -17,11 +18,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> implements ILivingEntityRenderer {
     @Shadow protected M model;
 
     @Unique private LivingEntity confluence$rendering;
+    @Unique private final List<ModelPart> confluence$partsCache = new ArrayList<>();
 
     @Inject(method = "isEntityUpsideDown", at = @At("RETURN"), cancellable = true)
     private static void upsideDown(LivingEntity living, CallbackInfoReturnable<Boolean> cir) {
@@ -47,5 +52,10 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     @Override
     public void confluence$setRendering(LivingEntity living){
         confluence$rendering = living;
+    }
+
+    @Override
+    public List<ModelPart> confluence$getPartsCache(){
+        return confluence$partsCache;
     }
 }

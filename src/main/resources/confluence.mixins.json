@@ -45,6 +45,7 @@
     "client": [
         "ConnectionMixin",
         "accessor.CompileResultsAccessor",
+        "accessor.CustomHeadLayerAccessor",
         "accessor.LevelRendererAccessor",
         "accessor.LivingEntityRendererAccessor",
         "accessor.ModelPart$CubeAccessor",
@@ -54,6 +55,7 @@
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
         "client.ClientPlayerMixin",
+        "client.CustomHeadLayerMixin",
         "client.EntityModelSetMixin",
         "client.EntityRenderDispatcherMixin",
         "client.EntityRendererProvider$ContextMixin",

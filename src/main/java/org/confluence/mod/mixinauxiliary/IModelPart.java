@@ -11,4 +11,5 @@ public interface IModelPart {
     ModelPart confluence$root(ModelPart... root);
     /** 读/写<strong>模型</strong>落地的速度 */
     Vec2 confluence$landMotion(Vec2... root);
+    boolean confluence$isSkull(boolean... isSkull);
 }
