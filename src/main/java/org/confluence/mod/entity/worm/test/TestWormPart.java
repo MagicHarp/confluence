@@ -1,10 +1,8 @@
 package org.confluence.mod.entity.worm.test;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.worm.AbstractWormEntity;
 import org.confluence.mod.entity.worm.BaseWormPart;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -16,12 +14,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEntity {
     int indexAI = 0;
 
-    public TestWormPart(EntityType<Entity> entityEntityType, Level level) {
-        super(null, null, 0, 0f);
+    public TestWormPart(EntityType<? extends TestWormPart> pEntityType, Level pLevel) {
+        super(null, 0, 0f);
     }
     public TestWormPart(TestWormEntity parent, int segmentIndex, float maxHealth) {
-        super(null, parent, segmentIndex, maxHealth);
+        super(parent, segmentIndex, maxHealth);
     }
+
 
 
     @Override

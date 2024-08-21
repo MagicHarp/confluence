@@ -19,6 +19,7 @@ import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.NonDropSlime;
+import org.confluence.mod.entity.worm.BaseWormPart;
 import org.confluence.mod.entity.worm.test.TestWormEntity;
 import org.confluence.mod.entity.worm.test.TestWormPart;
 
@@ -45,7 +46,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.5F, 0.5F).clientTrackingRange(10).build("confluence:demon_eye"));
     public static final RegistryObject<EntityType<TestWormEntity>> TEST_WORM = ENTITIES.register("test_worm", () -> EntityType.Builder.of(TestWormEntity::new, MobCategory.MONSTER).sized(2.0F, 2.0F).clientTrackingRange(10).build("confluence:test_worm"));
-    public static final RegistryObject<EntityType<TestWormPart>> TEST_WORM_PART = ENTITIES.register("test_worm_segment", () -> EntityType.Builder.of(TestWormPart::new, MobCategory.MONSTER).sized(2.0F, 2.0F).clientTrackingRange(10).build("confluence:test_worm_segment"));
+    public static final RegistryObject<EntityType<TestWormPart>> TEST_WORM_PART = ENTITIES.register("test_worm_segment", () -> EntityType.Builder.<TestWormPart>of(TestWormPart::new, MobCategory.MONSTER).sized(2.0F, 2.0F).clientTrackingRange(10).build("confluence:test_worm_segment"));
 
     public static final RegistryObject<EntityType<BaseBulletEntity>> BASE_BULLET = ENTITIES.register("base_bullet", () -> EntityType.Builder.<BaseBulletEntity>of(BaseBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:base_bullet"));
 

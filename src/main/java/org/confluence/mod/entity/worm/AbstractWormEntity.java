@@ -2,23 +2,25 @@ package org.confluence.mod.entity.worm;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractWormEntity extends Monster {
-    protected ArrayList<BaseWormPart<? extends AbstractWormEntity>> wormParts;
-    private int length;
-    private float maxHealth;
+    protected final ArrayList<BaseWormPart<? extends AbstractWormEntity>> wormParts;
+    private final int length;
+    private final float maxHealth;
 
     protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
         ModUtils.testMessage(level(), "partConstructor没有Override，李哉赣神魔");
-        return new BaseWormPart<>(null, this, index, maxHealth);
+        return new BaseWormPart<>(this, index, maxHealth);
     }
     private void spawnWormParts() {
         for (int i = 0; i < length; i ++) {
@@ -29,20 +31,15 @@ public abstract class AbstractWormEntity extends Monster {
     public AbstractWormEntity(EntityType<? extends AbstractWormEntity> pEntityType, Level pLevel, int length, float maxHealth) {
         super(pEntityType, pLevel);
 
-        try {
-            this.maxHealth = maxHealth;
-            this.wormParts = new ArrayList<>(length);
-            // 生成各体节
-            spawnWormParts();
-            // 初始化各体节的头/身体/尾节信息
-            for (BaseWormPart<? extends AbstractWormEntity> part : wormParts) {
-                part.updateSegmentType();
-            }
-            this.length = length;
-        } catch (Exception e) {
-            ModUtils.testMessage(level(), e.toString());
+        this.maxHealth = maxHealth;
+        this.wormParts = new ArrayList<>(length);
+        // 生成各体节
+        spawnWormParts();
+        // 初始化各体节的头/身体/尾节信息
+        for (BaseWormPart<? extends AbstractWormEntity> part : wormParts) {
+            part.updateSegmentType();
         }
-        ModUtils.testMessage(level(), "INIT COMPLETE!");
+        this.length = length;
     }
 
     @Override
@@ -92,7 +89,8 @@ public abstract class AbstractWormEntity extends Monster {
         // TODO: 此方法移除实体是否合理？EnderDragon内部的逻辑类似，但有可能需要调整
         if (shouldDie) {
             deathCallback();
-            kill();
+            this.remove(Entity.RemovalReason.KILLED);
+            this.gameEvent(GameEvent.ENTITY_DIE);
             return;
         }
 
