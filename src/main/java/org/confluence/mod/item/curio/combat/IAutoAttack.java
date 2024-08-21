@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.integration.bettercombat.BetterCombatHelper;
-import org.confluence.mod.mixin.client.MinecraftAccessor;
+import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
 import org.confluence.mod.util.CuriosUtils;

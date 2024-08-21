@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.accessor;
+package org.confluence.mod.mixin.client.accessor;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import org.spongepowered.asm.mixin.Mixin;

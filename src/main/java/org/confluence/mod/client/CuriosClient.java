@@ -24,6 +24,7 @@ public final class CuriosClient {
         CuriosRendererRegistry.register(CurioItems.HERMES_BOOTS.get(), HermesBootsRenderer::new);
         CuriosRendererRegistry.register(CurioItems.OBSIDIAN_SKULL.get(), ObsidianSkullRenderer::new);
         CuriosRendererRegistry.register(CurioItems.SHIELD_OF_CTHULHU.get(), ShieldOfCthulhuRenderer::new);
+        CuriosRendererRegistry.register(CurioItems.STEP_STOOL.get(), StepStoolRenderer::new);
 
         // Gecko x Curio
         CuriosRendererRegistry.register(CurioItems.FLEDGLING_WINGS.get(), FledglingWingsRenderer::new);
@@ -39,5 +40,6 @@ public final class CuriosClient {
         layerDefinition.accept(HermesBootsModel.LAYER_LOCATION, HermesBootsModel::createBodyLayer);
         layerDefinition.accept(ObsidianSkullModel.LAYER_LOCATION, ObsidianSkullModel::createBodyLayer);
         layerDefinition.accept(ShieldOfCthulhuModel.LAYER_LOCATION, ShieldOfCthulhuModel::createBodyLayer);
+        layerDefinition.accept(StepStoolModel.LAYER_LOCATION, StepStoolModel::createBodyLayer);
     }
 }

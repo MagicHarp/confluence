@@ -10,7 +10,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.mixin.client.LocalPlayerAccessor;
+import org.confluence.mod.mixin.client.accessor.LocalPlayerAccessor;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.GravitationPacketC2S;

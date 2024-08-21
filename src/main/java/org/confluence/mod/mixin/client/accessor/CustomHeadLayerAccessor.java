@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.accessor;
+package org.confluence.mod.mixin.client.accessor;
 
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;

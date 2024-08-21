@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.chunk.RenderChunkRegion;
 import net.minecraft.client.renderer.chunk.VisGraph;
 import net.minecraft.core.BlockPos;
 import org.confluence.mod.client.shader.ModRenderTypes;
-import org.confluence.mod.mixin.accessor.CompileResultsAccessor;
+import org.confluence.mod.mixin.client.accessor.CompileResultsAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;

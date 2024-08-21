@@ -7,6 +7,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.client.KeyBindings;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.c2s.StepStoolNBTPacketC2S;
 import org.confluence.mod.network.s2c.StepStoolPacketS2C;
 
 import java.util.function.Supplier;
@@ -25,14 +27,14 @@ public final class StepStoolHandler {
 
         if (step > 0 && localPlayer.input.jumping) {
             localPlayer.jumpFromGround();
-            step = 0;
+            setStep(0);
             return;
         }
 
         if (KeyBindings.STEP_STOOL.get().isDown()) {
             if (!upKeyDown && step < maxStep) {
                 localPlayer.move(MoverType.SELF, UP);
-                step++;
+                setStep(step + 1);
                 upKeyDown = true;
             }
         } else {
@@ -42,7 +44,7 @@ public final class StepStoolHandler {
         if (!upKeyDown && localPlayer.isShiftKeyDown()) {
             if (!shiftKeyDown && step > 0) {
                 localPlayer.move(MoverType.SELF, DOWN);
-                step--;
+                setStep(step - 1);
                 shiftKeyDown = true;
             }
         } else {
@@ -54,6 +56,11 @@ public final class StepStoolHandler {
         }
     }
 
+    public static void setStep(int step) {
+        StepStoolHandler.step = step;
+        NetworkHandler.CHANNEL.sendToServer(new StepStoolNBTPacketC2S(step));
+    }
+
     public static int getStep() {
         return step;
     }
@@ -62,7 +69,7 @@ public final class StepStoolHandler {
         return step > 0;
     }
 
-    public static void handlePacket(StepStoolPacketS2C packet, Supplier<NetworkEvent.Context> ctx){
+    public static void handlePacket(StepStoolPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> maxStep = packet.maxStep());
         context.setPacketHandled(true);

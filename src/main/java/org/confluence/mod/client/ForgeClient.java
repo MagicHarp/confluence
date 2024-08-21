@@ -31,7 +31,7 @@ import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.mixin.client.MinecraftAccessor;
+import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
