@@ -85,39 +85,37 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
     public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (pLevel instanceof ServerLevel level) {
             ItemStack item = pPlayer.getItemInHand(pHand);
-            {
-                ResourceLocation path;
-                Block block;
-                if (item.is(ModTags.Items.DESERT_FOSSIL)) {
-                    path = ModLootTables.EXTRACT_DESERT_FOSSIL;
-                    block = ModBlocks.DESERT_FOSSIL.get();
-                } else if (item.is(ModTags.Items.GRAVEL)) {
-                    path = ModLootTables.EXTRACT_GRAVEL;
-                    block = Blocks.GRAVEL;
-                } else if (item.is(ModTags.Items.JUNK)) {
-                    path = ModLootTables.EXTRACT_JUNK;
-                    block = Blocks.LILY_PAD;
-                } else if (item.is(ModTags.Items.SLUSH)) {
-                    path = ModLootTables.EXTRACT_SLUSH;
-                    block = ModBlocks.SLUSH.get();
-                } else {
-                    return InteractionResult.PASS;
-                }
+            ResourceLocation path;
+            Block block;
+            if (item.is(ModTags.Items.DESERT_FOSSIL)) {
+                path = ModLootTables.EXTRACT_DESERT_FOSSIL;
+                block = ModBlocks.DESERT_FOSSIL.get();
+            } else if (item.is(ModTags.Items.GRAVEL)) {
+                path = ModLootTables.EXTRACT_GRAVEL;
+                block = Blocks.GRAVEL;
+            } else if (item.is(ModTags.Items.JUNK)) {
+                path = ModLootTables.EXTRACT_JUNK;
+                block = Blocks.LILY_PAD;
+            } else if (item.is(ModTags.Items.SLUSH)) {
+                path = ModLootTables.EXTRACT_SLUSH;
+                block = ModBlocks.SLUSH.get();
+            } else {
+                return InteractionResult.PASS;
+            }
 
-                level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, block.defaultBlockState()),
-                        pPos.getX() + 0.5F,
-                        pPos.getY() + 0.75F,
-                        pPos.getZ() + 0.5F,
-                        100, 0F, 0.0625F, 0F, 0.25F);
+            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, block.defaultBlockState()),
+                pPos.getX() + 0.5F,
+                pPos.getY() + 0.75F,
+                pPos.getZ() + 0.5F,
+                100, 0F, 0.0625F, 0F, 0.25F);
 
-                LootTable lootTable = level.getServer().getLootData().getLootTable(path);
-                LootParams lootparams = new LootParams.Builder(level)
-                    .withParameter(LootContextParams.ORIGIN, pPlayer.position())
-                    .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
-                    .create(LootContextParamSets.GIFT);
-                for (ItemStack loot : lootTable.getRandomItems(lootparams)) {
-                    ModUtils.createItemEntity(loot, pPos.getX() + 0.5, pPos.getY() + 1.0, pPos.getZ() + 0.5, level);
-                }
+            LootTable lootTable = level.getServer().getLootData().getLootTable(path);
+            LootParams lootparams = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, pPlayer.position())
+                .withParameter(LootContextParams.THIS_ENTITY, pPlayer)
+                .create(LootContextParamSets.GIFT);
+            for (ItemStack loot : lootTable.getRandomItems(lootparams)) {
+                ModUtils.createItemEntity(loot, pPos.getX() + 0.5, pPos.getY() + 1.0, pPos.getZ() + 0.5, level);
             }
 
             pPlayer.getItemInHand(pHand).setCount(item.getCount() - 1);

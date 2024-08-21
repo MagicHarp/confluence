@@ -211,17 +211,18 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         return par1;
     }
 
-    @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
-    private void speed(float friction, CallbackInfoReturnable<Float> cir) {
-        if (CuriosUtils.hasCurio(self(), CurioItems.MAGILUMINESCENCE.get())) {
-            cir.setReturnValue(cir.getReturnValue() * 1.75F);
-        }
-    }
+    // todo 改为真正的加速度
+//    @Inject(method = "getFrictionInfluencedSpeed", at = @At("RETURN"), cancellable = true)
+//    private void speed(float friction, CallbackInfoReturnable<Float> cir) {
+//        if (CuriosUtils.hasCurio(self(), CurioItems.MAGILUMINESCENCE.get())) {
+//            cir.setReturnValue(cir.getReturnValue() * 1.75F);
+//        }
+//    }
 
     @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
     private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            pTotalArmor -= CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
+            pTotalArmor -= (float) CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
             if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
         return original.call(pDamage, Math.max(pTotalArmor, 0.0F), pToughnessAttribute);

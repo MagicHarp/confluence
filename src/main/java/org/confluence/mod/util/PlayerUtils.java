@@ -131,7 +131,8 @@ public final class PlayerUtils {
         AtomicInteger climb = new AtomicInteger();
         AtomicBoolean shield = new AtomicBoolean();
         AtomicBoolean tabi = new AtomicBoolean();
-
+        AtomicBoolean echo = new AtomicBoolean();
+        AtomicInteger stepStool = new AtomicInteger();
 
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
@@ -142,12 +143,13 @@ public final class PlayerUtils {
                     shield.set(true);
                     continue;
                 } else if (curio == CurioItems.SPECTRE_GOGGLES.get()) {
-                    NetworkHandler.CHANNEL.send(
-                        PacketDistributor.PLAYER.with(() -> serverPlayer),
-                        new EchoBlockVisibilityPacketS2C(itemStack.getTag() != null && itemStack.getTag().getBoolean(((SpectreGoggles) itemStack.getItem()).getEnableKey()))
-                    );
+                    echo.set(itemStack.getTag() != null && itemStack.getTag().getBoolean(((SpectreGoggles) itemStack.getItem()).getEnableKey()));
+                    continue;
+                } else if (curio == CurioItems.STEP_STOOL.get()) {
+                    stepStool.set(itemStack.getOrCreateTag().getInt("extraStep") + 1);
                     continue;
                 }
+
                 if (curio instanceof FartInAJar fart) {
                     fartSpeed.setValue(fart.getJumpSpeed());
                 } else if (curio instanceof SandstormInABottle sandstorm) {
@@ -239,6 +241,14 @@ public final class PlayerUtils {
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new TabiPacketS2C(tabi.get())
+        );
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new EchoBlockVisibilityPacketS2C(echo.get())
+        );
+        NetworkHandler.CHANNEL.send(
+            PacketDistributor.PLAYER.with(() -> serverPlayer),
+            new StepStoolPacketS2C(stepStool.get())
         );
     }
 }

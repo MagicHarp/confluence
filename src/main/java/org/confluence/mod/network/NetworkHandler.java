@@ -40,6 +40,7 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, RightClickSubtractorPacketS2C.class, RightClickSubtractorPacketS2C::encode, RightClickSubtractorPacketS2C::decode, RightClickSubtractorPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, PlayerClimbPacketS2C.class, PlayerClimbPacketS2C::encode, PlayerClimbPacketS2C::decode, PlayerClimbPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, TabiPacketS2C.class, TabiPacketS2C::encode, TabiPacketS2C::decode, TabiPacketS2C::handle);
+        CHANNEL.registerMessage(packetId++, StepStoolPacketS2C.class, StepStoolPacketS2C::encode, StepStoolPacketS2C::decode, StepStoolPacketS2C::handle);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);

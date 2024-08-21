@@ -52,6 +52,7 @@ public final class ForgeClient {
         SwordProjectileShootingHandler.handle(minecraft, localPlayer);
         InformationHandler.handle(localPlayer);
         HookThrowingHandler.handle(localPlayer);
+        StepStoolHandler.handle(localPlayer);
 
         AnimateColor.doUpdateExpertColor();
         AnimateColor.doUpdateMasterColor();

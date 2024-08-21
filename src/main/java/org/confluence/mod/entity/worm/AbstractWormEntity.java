@@ -11,11 +11,13 @@ import java.util.ArrayList;
 public abstract class AbstractWormEntity extends LivingEntity {
     protected final ArrayList<BaseWormPart<? extends AbstractWormEntity>> wormParts;
     private final int length;
+    private final int size;
 
-    public AbstractWormEntity(EntityType<? extends AbstractWormEntity> pEntityType, Level pLevel, int length) {
+    public AbstractWormEntity(EntityType<? extends AbstractWormEntity> pEntityType, Level pLevel, int length, int size) {
         super(pEntityType, pLevel);
         this.wormParts = new ArrayList<>(length);
         this.length = length;
+        this.size = size;
     }
 
     @Override
@@ -26,7 +28,7 @@ public abstract class AbstractWormEntity extends LivingEntity {
             float maxHealth = getMaxHealth() / length;
             listTag.forEach(tag -> {
                 if (tag instanceof CompoundTag compoundTag) {
-                    BaseWormPart<? extends AbstractWormEntity> part = new BaseWormPart<>(this, maxHealth);
+                    BaseWormPart<? extends AbstractWormEntity> part = new BaseWormPart<>(this, maxHealth, size);
                     part.deserializeNBT(compoundTag);
                     wormParts.add(part);
                 }

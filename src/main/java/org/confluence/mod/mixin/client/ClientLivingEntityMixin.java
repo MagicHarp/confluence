@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.handler.GravitationHandler;
+import org.confluence.mod.client.handler.StepStoolHandler;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.spongepowered.asm.mixin.Mixin;
@@ -45,8 +46,12 @@ public abstract class ClientLivingEntityMixin {
 
     @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
     private Vec3 confused(Vec3 vec3) {
-        if (confluence$getSelf() instanceof LocalPlayer && GravitationHandler.isShouldRot()) {
-            return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
+        if (confluence$getSelf() instanceof LocalPlayer) {
+            if (GravitationHandler.isShouldRot()) {
+                return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
+            } else if (StepStoolHandler.getStep() > 0) {
+                return Vec3.ZERO;
+            }
         }
         return vec3;
     }

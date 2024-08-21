@@ -18,7 +18,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
     private final float maxHealth;
     protected final AbstractWormEntity parentMob;
 
-    public BaseWormPart(E parent, float maxHealth) {
+    public BaseWormPart(E parent, float maxHealth, int size) {
         super(parent);
         this.maxHealth = maxHealth;
         this.parentMob = parent;
@@ -64,10 +64,10 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
     }
 
     public void setHealth(float pHealth) {
-        this.entityData.set(DATA_HEALTH_ID, Mth.clamp(pHealth, 0.0F, getMaxHealth()));
+        entityData.set(DATA_HEALTH_ID, Mth.clamp(pHealth, 0.0F, getMaxHealth()));
     }
 
-    public final float getMaxHealth() {
+    public float getMaxHealth() {
         return maxHealth;
     }
 
