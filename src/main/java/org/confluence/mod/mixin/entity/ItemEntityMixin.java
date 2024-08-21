@@ -1,5 +1,6 @@
 package org.confluence.mod.mixin.entity;
 
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -7,10 +8,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.misc.ModSoundEvents;
+import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,8 +46,8 @@ public abstract class ItemEntityMixin implements IItemEntity {
         ItemEntity self = (ItemEntity) (Object) this;
         if (self.level().isClientSide || self.isRemoved()) return;
         if (confluence$item_coolDown < 0) this.confluence$item_coolDown = 0;
-        boolean isInShimmer = self.getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
-        if (confluence$item_coolDown == 0 && isInShimmer) {
+
+        if (confluence$item_coolDown == 0 && ((IEntity) self).confluence$isInShimmer()) {
             ShimmerItemTransmutationEvent.Pre pre = new ShimmerItemTransmutationEvent.Pre(self);
             if (MinecraftForge.EVENT_BUS.post(pre)) {
                 self.getItem().shrink(pre.getShrink());
@@ -66,6 +68,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
                         ItemEntity itemEntity = new ItemEntity(self.level(), self.getX(), self.getY(), self.getZ(), target);
                         confluence$setup(itemEntity, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(itemEntity);
+                        self.level().playSound(null, self.getX(), self.getY(), self.getZ(), ModSoundEvents.SHIMMER_EVOLUTION.get(), SoundSource.AMBIENT, 1.0F, 1.0F);
                     }
                 }
             }
@@ -77,11 +80,11 @@ public abstract class ItemEntityMixin implements IItemEntity {
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
     public void highRarityForbiddenBurn(CallbackInfoReturnable<Boolean> cir) {
         if ((!getItem().getRarity().equals(ModRarity.WHITE)) &&
-                (!getItem().getRarity().equals(ModRarity.GRAY)) &&
-                (!getItem().getRarity().equals(Rarity.COMMON))) {
+            (!getItem().getRarity().equals(ModRarity.GRAY)) &&
+            (!getItem().getRarity().equals(Rarity.COMMON))) {
             cir.setReturnValue(true);
         } else if (getItem().is(Blocks.OBSIDIAN.asItem()) || getItem().is(Blocks.CRYING_OBSIDIAN.asItem()) ||
-                getItem().is(ModItems.FLAMEFLOWERS.get()) || getItem().is(ModItems.FLAMEFLOWERS_SEED.get())) {
+            getItem().is(ModItems.FLAMEFLOWERS.get()) || getItem().is(ModItems.FLAMEFLOWERS_SEED.get())) {
             cir.setReturnValue(true);
         }
     }

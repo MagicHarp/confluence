@@ -54,6 +54,7 @@
         "client.BlockModelShaperMixin",
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
+        "client.ClientPacketListenerMixin",
         "client.ClientPlayerMixin",
         "client.CustomHeadLayerMixin",
         "client.EntityModelSetMixin",
