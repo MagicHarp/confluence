@@ -92,6 +92,7 @@ public class NonDropSlime extends Slime implements DeathAnimOptions {
             if (this.level().getDifficulty().equals(Difficulty.NORMAL) || this.level().getDifficulty().equals(Difficulty.HARD)) {
                 if (this.level().getBlockState(BlockPos.containing(this.position())).isAir() ||
                         this.level().getBlockState(BlockPos.containing(this.position())).canBeReplaced(Fluids.LAVA)) {
+                    //todo 未知且非固定出现的渲染bug
                     this.level().setBlock(BlockPos.containing(this.position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
                 }
             }

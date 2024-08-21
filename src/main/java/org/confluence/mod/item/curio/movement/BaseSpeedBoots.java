@@ -59,7 +59,6 @@ public class BaseSpeedBoots extends BaseCurioItem {
         double particleRandY = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
         double particleRandZ = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
         CurrentDustOptions options = new CurrentDustOptions(getParticleColorStart(), getParticleColorEnd(), 1.2F);
-        System.out.println(options.getColor());
         for (int i = 0; i < rand; ++i) {
             level.addParticle(options, vec3.x + particleRandX, vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
         }
