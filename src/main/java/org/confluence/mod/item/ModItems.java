@@ -44,7 +44,7 @@ public final class ModItems {
     public static final RegistryObject<MagicMirror> ICE_MIRROR = ITEMS.register("ice_mirror", MagicMirror::new);
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
-    public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new); // todo 手里剑
+    public static final RegistryObject<ShurikenItem> SHURIKEN = ITEMS.register("shuriken", ShurikenItem::new);
     public static final RegistryObject<BaseItem> GRENADE = ITEMS.register("grenade", BaseItem::new); // todo 手雷
     public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
     public static final RegistryObject<WhoopieCushionItem> WHOOPIE_CUSHION = ITEMS.register("whoopie_cushion", WhoopieCushionItem::new);

@@ -19,13 +19,13 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
-public class ThrowingKnivesProjectile extends ThrowableProjectile {
-    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(ThrowingKnivesProjectile.class, EntityDataSerializers.INT);
+public class ShurikenProjectile extends ThrowableProjectile {
+    private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(ShurikenProjectile.class, EntityDataSerializers.INT);
     private static int entityHurt;
-    private static final float damage = 6F;
+    private static final float damage = 5.2F;
     private static final int timeExistence = 60;
 
-    public ThrowingKnivesProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
+    public ShurikenProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         entityHurt = 0;
     }
@@ -46,12 +46,12 @@ public class ThrowingKnivesProjectile extends ThrowableProjectile {
     protected void onHitEntity(@NotNull EntityHitResult pResult) {
         super.onHitEntity(pResult);
         entityHurt++;
-        if (entityHurt >= 3) {
+        if (entityHurt >= 5) {
             if (this.level().random.nextFloat() <= 0.5F) {
                 this.remove(RemovalReason.KILLED);
             } else {
                 SimpleContainer inventory = new SimpleContainer(1);
-                inventory.addItem(new ItemStack(ModItems.THROWING_KNIVES.get(), 1));
+                inventory.addItem(new ItemStack(ModItems.SHURIKEN.get(), 1));
                 Containers.dropContents(this.level(), BlockPos.containing(this.position()), inventory);
                 this.remove(RemovalReason.KILLED);
             }
@@ -71,7 +71,7 @@ public class ThrowingKnivesProjectile extends ThrowableProjectile {
             this.remove(RemovalReason.KILLED);
         } else {
             SimpleContainer inventory = new SimpleContainer(1);
-            inventory.addItem(new ItemStack(ModItems.THROWING_KNIVES.get(), 1));
+            inventory.addItem(new ItemStack(ModItems.SHURIKEN.get(), 1));
             Containers.dropContents(this.level(), BlockPos.containing(this.position()), inventory);
             this.remove(RemovalReason.KILLED);
         }

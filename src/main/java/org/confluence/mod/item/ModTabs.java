@@ -263,6 +263,8 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.TOOLS_ICON.get()))
             .title(Component.translatable("creativetab.confluence.tools"))
             .displayItems((parameters, output) -> {
+                output.accept(ModItems.THROWING_KNIVES.get());
+                output.accept(ModItems.SHURIKEN.get());
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
@@ -270,7 +272,6 @@ public final class ModTabs {
                 output.accept(ModItems.BOTTOMLESS_LAVA_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get());
-                output.accept(ModItems.THROWING_KNIVES.get());
                 output.accept(ModItems.RED_WRENCH.get());
                 output.accept(ModItems.GREEN_WRENCH.get());
                 output.accept(ModItems.BLUE_WRENCH.get());
