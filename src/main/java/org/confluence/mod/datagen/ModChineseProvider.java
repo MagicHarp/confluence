@@ -180,22 +180,18 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.amber_horseshoe_balloon.info2", "能给予运气加成。");
         add("item.confluence.amber_horseshoe_balloon.info3", "它可以在工作台处用幸运马掌和蜂蜜气球制作。");
         add("item.confluence.amphibian_boots.info", "水陆两用靴是一种配饰，它可以在工作台处用旗鱼靴和蛙腿制作。");
-        add("item.confluence.amphibian_boots.info2", "装备它具有以下效果：");   // 待删除
-        add("item.confluence.amphibian_boots.info3", "提高玩家的最大移动速度");// 英文待改
-        add("item.confluence.amphibian_boots.info4", "允许自动跳跃");
-        add("item.confluence.amphibian_boots.info5", "增加最大安全坠落距离");   // 待删除
-        add("item.confluence.amphibian_boots.info6", "提高跳跃速度");
+        add("item.confluence.amphibian_boots.info2", "提高玩家的最大移动速度");// 英文待改
+        add("item.confluence.amphibian_boots.info3", "允许自动跳跃");
+        add("item.confluence.amphibian_boots.info4", "提高跳跃速度");
         add("item.confluence.anklet_of_the_wind.info", "疾风脚镯是一种配饰，为移动速度提供加成。");
         add("item.confluence.anklet_of_the_wind.info2", "其效果和金属带扣的移动速度奖励可以叠加。");
         add("item.confluence.anklet_of_the_wind.info3", "它可以在工作台处用孢子花和藤蔓制作。");
         add("item.confluence.blizzard_in_a_balloon.info", "它使跳跃高度、跳跃速度提高、并允许二段跳。");    // 气球通用    英文待改
         add("item.confluence.blizzard_in_a_balloon.info2", "它可以在工作台处用暴雪瓶和闪亮红气球制作。");
         add("item.confluence.blizzard_in_a_bottole.info", "暴风瓶是困难模式前的配饰，其工作原理类似于云朵瓶，允许玩家进行二段跳。");
-        add("item.confluence.blizzard_in_a_bottole.info2", "暴风瓶跳跃上升到空中 8 米，与第一次跳跃放在一起时总共 14 米。 ");  // 待删除
-        add("item.confluence.blizzard_in_a_bottole.info3", "它可以在工作台处用云朵瓶和蓝冰制作。");
+        add("item.confluence.blizzard_in_a_bottole.info2", "它可以在工作台处用云朵瓶和蓝冰制作。");
         add("item.confluence.blue_horseshoe_balloon.info", "蓝色马蹄气球是一种配饰，佩戴后可以免疫坠落伤害，增加跳跃高度，允许二段跳，并提供 +0.05 的幸运。");  // 马蹄气球通用
-        add("item.confluence.blue_horseshoe_balloon.info2", "第一跳的高度从 6 个方块增加到 10.5 个方块，而二段跳的高度从 5 个方块增加到 9 个方块，两次跳跃总共达到 19.5 个方块。");  // 待删除
-        add("item.confluence.blue_horseshoe_balloon.info3", "它可以在工作台处用云朵气球和幸运马掌制作。");
+        add("item.confluence.blue_horseshoe_balloon.info2", "它可以在工作台处用云朵气球和幸运马掌制作。");
         add("item.confluence.bundle_of_balloons.info", "气球束是一种配饰，可让佩戴者进行四段跳，并将玩家的跳跃持续时间增加，跳跃速度增加。");
         add("item.confluence.bundle_of_balloons.info2", "它可以在工作台处用云朵气球、沙暴气球、暴雪气球制作。");
         add("item.confluence.bundle_of_horseshoe_balloons.info", "马掌气球束是一种结合了气球束和幸运马掌功能的配饰。");
@@ -207,21 +203,17 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.cloud_in_a_balloon.info3", "它可以在工作台处用云朵瓶和闪亮红气球制作。");
         add("item.confluence.cloud_in_a_bottle.info", "云朵瓶是一种配饰，可以在矿井和地牢的宝箱中找到。");
         add("item.confluence.cloud_in_a_bottle.info2", "装备后，佩戴者可以进行二段跳");
-        add("item.confluence.cloud_in_a_bottle.info3", "与普通跳跃相比，额外的跳跃持续时间为 75%，将玩家在没有其他配件的情况下可以达到的最大高度增加了 5 米，总共 11 米。"); // 待删除
         add("item.confluence.dunerider_boots.info", "沙丘行者靴是一种可以提高玩家最大移动速度的配饰");
         add("item.confluence.dunerider_boots.info2", "它有几率从尸壳中掉落。");
-        add("item.confluence.dunerider_boots.info3", "装备它具有以下效果：");// 待删除
-        add("item.confluence.dunerider_boots.info4", "提高玩家的最大移动速度");
-        add("item.confluence.dunerider_boots.info5", "在任何沙子、砂岩上移动时，提高最大移动速度，加强加速和减速变化");
+        add("item.confluence.dunerider_boots.info3", "提高玩家的最大移动速度");
+        add("item.confluence.dunerider_boots.info4", "在任何沙子、砂岩上移动时，提高最大移动速度，加强加速和减速变化");
         add("item.confluence.fairy_boots.info", "仙灵靴是一种配饰，它可以在工作台处用幽灵靴和花靴制作");
-        add("item.confluence.fairy_boots.info2", "他们将这两种效果结合到一双靴子中。");// 待删除
+        add("item.confluence.fairy_boots.info2", "他们将这两种效果结合到一双靴子中。");
         add("item.confluence.fart_in_a_balloon.info", "臭屁气球是一个配饰，结合了罐中臭屁和闪亮红气球的效果。");
         add("item.confluence.fart_in_a_balloon.info2", "它使跳跃高度、跳跃速度提高、并允许二段跳。");
         add("item.confluence.fart_in_a_balloon.info3", "与大多数其他二段跳气球不同，臭屁气球完全跳跃的高度足以让玩家受到轻微的坠落伤害，除非玩家有像幸运马掌这样的坠落伤害免疫配饰。 ");
         add("item.confluence.fart_in_a_balloon.info4", "它可以在工作台处用罐中臭屁和闪亮红气球制作。");
         add("item.confluence.fart_in_a_jar.info", "罐中臭屁是一种配饰，佩戴者可以进行二段跳");
-        add("item.confluence.fart_in_a_jar.info2", "放屁跳升空 10.5 米，与第一次跳合在一起总共 16.5 米。"); // 待删除
-        add("item.confluence.fart_in_a_jar.info3", "这些效果也适用于装备的翅膀。"); // 待删除
         add("item.confluence.flipper.info", "脚蹼是一种配饰，可以让玩家在液体中游泳。当脚蹼装备在配件槽中时，玩家可以通过反复按住或按下跳跃键，在水、熔岩或蜂蜜中向上游动——基本上允许在液体中无限次跳跃。");
         add("item.confluence.flipper.info2", "它出现在沉船宝箱中");
         add("item.confluence.flurry_boots.info", "疾风雪靴是一种可以在雪地小屋找到的配饰。");
@@ -229,24 +221,17 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.frog_flipper.info", "青蛙脚蹼是由蛙腿和脚蹼在工作台上制成的配饰。");
         add("item.confluence.frog_flipper.info2", "它结合了这两个配饰的能力，增加了玩家的跳跃速度和安全坠落距离，允许自动跳跃，并赋予玩家游泳的能力。");
         add("item.confluence.frog_leg.info", "蛙腿有几率从青蛙掉落。");
-        add("item.confluence.frog_leg.info2", "蛙腿是一种配饰，可以在任何可行的水体中钓鱼。它通过以下方式帮助跳跃："); // 待删除
-        add("item.confluence.frog_leg.info3", "提高玩家的跳跃速度");
-        add("item.confluence.frog_leg.info4", "玩家在按住跳跃键时自动跳跃。");  // 待删除
-        add("item.confluence.frog_leg.info5", "此效果也适用于攀岩爪和其他攀爬配件。");
-        add("item.confluence.frog_leg.info6", "最大安全坠落距离增加 10");
-        add("item.confluence.frog_leg.info7", "这些效果也适用于装备的翅膀。"); // 待删除
+        add("item.confluence.frog_leg.info2", "提高玩家的跳跃速度");
+        add("item.confluence.frog_leg.info3", "此效果也适用于攀岩爪和其他攀爬配件。");
+        add("item.confluence.frog_leg.info4", "最大安全坠落距离增加 10");
         add("item.confluence.frostspark_boots.info", "霜花靴是将闪电靴和溜冰鞋组合在工作台上制作的配饰。");
         add("item.confluence.frostspark_boots.info2", "它提供了两者的效果。");
-        add("item.confluence.frostspark_boots.info3", "它们提供的移动速度加成也提高了 8%。"); // 待删除
         add("item.confluence.green_horseshoe_balloon.info", "绿马蹄气球是一个配饰，它使跳跃高度、跳跃速度提高、并允许二段跳。");
-        add("item.confluence.green_horseshoe_balloon.info2", "第一跳的高度从 6 个方块增加到 10.5 个方块（~增加 75%），而双跳的高度从 10.5 个方块增加到 18.5 个方块，两次跳跃总共达到 29 个方块。");  // 待删除
-        add("item.confluence.green_horseshoe_balloon.info3", "它可以在工作台处用臭屁气球和幸运马掌制作。");
+        add("item.confluence.green_horseshoe_balloon.info2", "它可以在工作台处用臭屁气球和幸运马掌制作。");
         add("item.confluence.hand_warmer.info", "暖手器是一种免疫配饰，可赋予玩家对冰冻和冰冻减益的免疫力。");
         add("item.confluence.hand_warmer.info2", "它可以在工作台处用羊毛和皮革制作。");
         add("item.confluence.hermes_boots.info", "赫尔墨斯靴是一种配饰，可以在村庄盔甲匠的宝箱中找到。");
         add("item.confluence.hermes_boots.info2", "装备后，它们允许玩家在连续奔跑一定距离后获得移动速度提升。");
-        add("item.confluence.hermes_boots.info3", "速度将继续增加，直到达到最大速度。在全速冲刺时，它们会将玩家的水平移动速度提高到 30 英里/小时。");// 待删除
-        add("item.confluence.hermes_boots.info4", "但是，如果玩家在没有自动跳跃的情况下撞到墙上，玩家将停下来，不得不再次加速。");// 待删除
         add("item.confluence.honey_balloon.info", "蜂蜜气球是一款结合了闪亮红色气球和蜂窝功能的配件。");
         add("item.confluence.honey_balloon.info2", "它使跳跃高度、跳跃速度提高，并在玩家受伤时释放一小群愤怒的蜜蜂，它们会寻找并对敌人造成少量伤害。");
         add("item.confluence.honey_balloon.info3", "它可以在工作台处用闪亮红气球和蜂窝制作。");
@@ -259,13 +244,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.lava_waders.info2", "熔岩靴还允许玩家安全地浸入熔岩中 7 秒，而不会受到熔岩伤害或触发着火。");
         add("item.confluence.lava_waders.info3", "所有液体，包括熔岩，都可以在熔岩靴装备时无限期地行走。");
         add("item.confluence.lava_waders.info4", "倒计时只适用于淹没在熔岩中的情况，而玩家可以无限期地站在熔岩表面。");
-        add("item.confluence.lava_waders.info5", "它还将熔岩的基础伤害从 80 降低到 35。");// 待删除
-        add("item.confluence.lava_waders.info6", "它可以在工作台上使用黑曜石水上漂靴、熔岩护身符和黑曜石玫瑰或\n " +
+        add("item.confluence.lava_waders.info5", "它可以在工作台上使用黑曜石水上漂靴、熔岩护身符和黑曜石玫瑰或\n " +
             "熔火护身符、水上漂靴和黑曜石玫瑰或熔火护身符、黑曜石水上漂靴和黑曜石玫瑰或\n " +
             "熔火骷髅玫瑰，一双黑曜石水上漂靴或熔火骷髅玫瑰，以及一双水上漂靴。");
         add("item.confluence.lightning_boots.info", "闪电靴是一种配饰，其功能与幽灵靴基本相同，但运行速度更快。");
-        add("item.confluence.lightning_boots.info2", "与幽灵靴相比，它们有 8% 的移动速度加成。");// 待删除
-        add("item.confluence.lightning_boots.info3", "它可以在工作台处用幽灵靴，疾风脚镯和金属带扣制作。");
+        add("item.confluence.lightning_boots.info2", "它可以在工作台处用幽灵靴，疾风脚镯和金属带扣制作。");
         add("item.confluence.lucky_horseshoe.info", "幸运马掌是一个配饰，可以抵消坠落伤害并给予+0.05点幸运。");
         add("item.confluence.lucky_horseshoe.info2", "它可以在沙漠神殿、末地城、丛林神庙或古代城内的宝箱中找到。");
         add("item.confluence.magiluminescence.info", "魔光护符是困难模式前的配饰，可将玩家的最大移动速度提高，提高玩家的加速和减速");
@@ -286,54 +269,33 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.obsidian_water_walking_boots.info3", "他们不允许在熔岩上行走。");
         add("item.confluence.obsidian_water_walking_boots.info4", "它可以在工作台处用水上漂靴和黑曜石骷髅头制作");
         add("item.confluence.pink_horseshoe_balloon.info", "粉红马蹄气球是一个配饰，可以免疫坠落伤害，增加跳跃高度和跳跃速度，提供二段跳，并给予+0.05的运气。");
-        add("item.confluence.pink_horseshoe_balloon.info2", "第一跳的高度从 6 个方块增加到 10.5 个方块（~75% 增加），而双跳的高度从 7 个方块增加到 13 个方块，两次跳跃总共达到 23.5 个方块。");// 待删除
-        add("item.confluence.pink_horseshoe_balloon.info3", "它可以在工作台处用鲨鱼龙气球和幸运马掌制作。");
+        add("item.confluence.pink_horseshoe_balloon.info2", "它可以在工作台处用鲨鱼龙气球和幸运马掌制作。");
         add("item.confluence.rocket_boots.info", "火箭靴是一种配饰，可让玩家飞行约 1.6 秒（100 个游戏帧）。");
         add("item.confluence.rocket_boots.info2", "它们需要从半空中跳跃才能激活（二段跳，或坠落时跳跃）。");
         add("item.confluence.rocket_boots.info3", "它可以在工作台处用铁锭,铁靴和烈焰弹制作。");
-        add("item.confluence.rocket_boots.info4", "如果还装备了云朵瓶，其二段跳效果将首先生效;之后在半空中按住跳跃键将激活火箭靴。");// 待删除
         add("item.confluence.sailfish_boots.info", "旗鱼靴是一种允许玩家加速的配饰。");
         add("item.confluence.sailfish_boots.info2", "它可以在沉船宝箱中找到.");
         add("item.confluence.sailfish_boots.info3", "装备后，它们允许玩家在连续奔跑一定距离后获得速度提升。");
-        add("item.confluence.sailfish_boots.info4", "通过向一个方向奔跑，玩家的移动速度会增加多达40%。");// 待删除
         add("item.confluence.sandstorm_in_a_balloon.info", "沙暴气球是一种结合了沙暴瓶和闪亮红气球功能的配饰。");
         add("item.confluence.sandstorm_in_a_balloon.info2", "它可以在工作台处用沙暴瓶和闪亮红气球制作。");
         add("item.confluence.sandstorm_in_a_balloon.info3", "它使跳跃高度、跳跃速度提高、并允许二段跳。");
         add("item.confluence.sandstorm_in_a_bottle.info", "沙暴瓶是一种配饰，可以在沙漠神殿的宝箱中找到。");
-        add("item.confluence.sandstorm_in_a_bottle.info2", "它类似于云朵瓶，提供了一个二段跳，允许一些额外的高度，但脚下不是云，而是出现一个沙暴流，角色在跳跃上上升时在视觉上旋转。");// 待删除
-        add("item.confluence.sandstorm_in_a_bottle.info3", "沙暴跳跃上升到空中 15 米，与第一次跳跃放在一起时总共 21 米。");// 待删除
-        add("item.confluence.sandstorm_in_a_bottle.info4", "这几乎是云朵瓶所能达到的高度的两倍。");// 待删除
         add("item.confluence.sharkron_balloon.info", "鲨鱼龙气球是一个结合了海啸瓶和气球河豚鱼效果的配饰。");
         add("item.confluence.sharkron_balloon.info2", "它使跳跃高度、跳跃速度提高。");
         add("item.confluence.shiny_red_balloon.info", "闪亮红气球是一个配饰，它使跳跃高度、跳跃速度提高。");
         add("item.confluence.shiny_red_balloon.info2", "当玩家拥有村庄英雄效果时，图书管理员有几率将此物品交给玩家。");
-        add("item.confluence.shiny_red_balloon.info3", "闪亮红气球与其他跳跃增强配件叠加：");// 待删除
-        add("item.confluence.shiny_red_balloon.info4", "云朵瓶的二段跳高度从 5 个方块（10 英尺）增加到 9 个方块（18 英尺），总跳跃高度为 19.5 个方块（39 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info5", "暴雪瓶的二段跳高度从 8 个方块（16 英尺）增加到 14.5个方块（29 英尺），总跳跃高度为 25 个方块（50 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info6", "沙暴瓶的二段跳高度从 14.5 格（29 英尺）增加到 26.5 格（53 英尺），总跳跃高度为 37 格（74 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info7", "罐中臭屁的二段跳高度从 101.5 块（21 英尺）增加到 18.5 块（37 英尺），总跳跃高度为 29 块（58 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info8", "海啸瓶的二段跳高度从 7 个方块（14 英尺）增加到 12 个方块（24 英尺），总跳跃高度为 231/2 个方块（47 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info9", "使用火箭/幽灵靴，飞行速度会加快，使相同的飞行时间将玩家带到更高和/或更远的地方。");// 待删除
-        add("item.confluence.shiny_red_balloon.info10", "蛙腿跳跃加成与闪亮红气球加成叠加，让第一次跳跃达到 16.5 格（33 英尺）。");// 待删除
-        add("item.confluence.shiny_red_balloon.info11", "有了翅膀，飞行时间就会增加。");// 待删除
-        add("item.confluence.shiny_red_balloon.info12", "但是，蜂蜜气球和气球河豚鱼不会与闪亮红气球叠加;他们都给予相同的好处。");// 待删除
         add("item.confluence.spectre_boots.info", "幽灵靴是由 火箭靴 和 疾风雪靴、赫尔墨斯靴、沙丘行者靴或 旗鱼靴制成的配饰，并结合了它们的功能。");
-        add("item.confluence.spectre_boots.info2", "在飞行过程中，它们会发出白色/蓝色的云迹，但与火箭靴不同的是，它们不会产生任何光。它们的飞行时间约为 1.6 秒，与火箭靴相同。");// 待删除
         add("item.confluence.terraspark_boots.info", "泰拉闪耀靴是困难模式前的配饰，它可以在工作台处用霜花靴和熔岩靴制作。提供这两种物品的效果。");
         add("item.confluence.terraspark_boots.info2", "它们是 疾风雪靴、赫尔墨斯靴、沙丘行者靴、旗鱼靴和水上漂靴的最终升级。");
         add("item.confluence.tsunami_in_a_bottle.info", "海啸瓶是一种配饰，可以在沉船宝箱中找到");
         add("item.confluence.tsunami_in_a_bottle.info2", "与云朵瓶类似，它允许玩家进行二段跳。");
-        add("item.confluence.tsunami_in_a_bottle.info3", "海啸跳跃上升到空中 7 米，与第一次跳跃放在一起时总共 13 米。");// 待删除
         add("item.confluence.water_walking_boots.info", "水上漂靴是一种配饰，可让玩家在水、蜂蜜和微光上行走。");
         add("item.confluence.water_walking_boots.info2", "玩家以正常速度在这些液体中移动而不会下沉。");
-        add("item.confluence.water_walking_boots.info3", "他们不允许在熔岩上行走。");// 需改英文
-        add("item.confluence.water_walking_boots.info4", "它可以在海洋废墟宝箱中找到。");
+        add("item.confluence.water_walking_boots.info3", "它可以在海洋废墟宝箱中找到。");
         add("item.confluence.white_horseshoe_balloon.info", "白马掌气球是一个配饰，它使跳跃高度、跳跃速度提高、并允许二段跳。并给予+0.05的运气。");
-        add("item.confluence.white_horseshoe_balloon.info2", "第一跳的高度从 6 个方块增加到 10.5 个方块（~增加 75%），而二段跳的高度从 8 个方块增加到 14.5 个方块，两次跳跃总共达到 25 个方块。");// 待删除
-        add("item.confluence.white_horseshoe_balloon.info3", "它可以在工作台处用暴雪瓶和闪亮红气球制作。");
+        add("item.confluence.white_horseshoe_balloon.info2", "它可以在工作台处用暴雪瓶和闪亮红气球制作。");
         add("item.confluence.yellow_horseshoe_balloon.info", "黄马掌气球是一个配饰，它使跳跃高度、跳跃速度提高、并允许二段跳。并给予+0.05的运气。");
-        add("item.confluence.yellow_horseshoe_balloon.info2", "第一跳的高度从 6 个方块增加到 10.5 个方块，而双跳的高度从 15 个方块增加到 26.5 个方块，两次跳跃总共达到 37 个方块。");// 待删除
-        add("item.confluence.yellow_horseshoe_balloon.info3", "它可以在工作台处用沙暴瓶和闪亮红气球制作。");
+        add("item.confluence.yellow_horseshoe_balloon.info2", "它可以在工作台处用沙暴瓶和闪亮红气球制作。");
         add("item.confluence.copper_watch.info", "铜表是一种低级表。");
         add("item.confluence.copper_watch.info2", "当装备到配饰栏或者放在物品栏时，游戏内的时间（精确到一小时）就会以表的形式显示在屏幕的右上角。");
         add("item.confluence.copper_watch.info3", "它可以在工作台处用红石粉，铜锭，锁链制作。");
@@ -431,8 +393,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.berserkers_glove.info4", "近战速度提高 +12%");
         add("item.confluence.berserkers_glove.info5", "+100% 近战击退增加");
         add("item.confluence.berserkers_glove.info6", "近战武器尺寸增加 +10%");
-        add("item.confluence.berserkers_glove.info7", "+400 仇恨");// 待删除
-        add("item.confluence.berserkers_glove.info8", "近战武器和鞭子的自动挥舞");
+        add("item.confluence.berserkers_glove.info7", "近战武器和鞭子的自动挥舞");
         add("item.confluence.bezoar.info", "牛黄是一种免疫配饰，可赋予玩家对中毒减益的免疫力。");
         add("item.confluence.bezoar.info2", "它有几率从洞穴蜘蛛中掉落。");
         add("item.confluence.black_belt.info", "黑腰带是一种配饰，有 10% 的几率躲避攻击，包括从陷阱和熔岩等危险中受到的伤害。 ");
@@ -449,7 +410,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.celestial_stone.info8", "+1 HP/s 生命恢复");
         add("item.confluence.celestial_stone.info9", "+4 防御");
         add("item.confluence.celestial_stone.info10", "+15% 挖矿速度");
-        add("item.confluence.celestial_stone.info11", "+0.5 仆从击退");// 待删除
         add("item.confluence.cobalt_shield.info", "钴盾是一种护盾配饰，装备后可使玩家免疫击退，并提供 1 点防御。");
         add("item.confluence.cobalt_shield.info2", "它有几率从劫掠兽身上掉落。");
         add("item.confluence.cross_necklace.info", "十字项链是一种配饰，可使玩家在受到伤害后获得的无敌持续时间翻倍，从大约 0.67 秒增加到大约 1.33 秒。");
@@ -518,7 +478,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.moon_stone.info7", "+1 生命值/秒恢复");
         add("item.confluence.moon_stone.info8", "+4 防御");
         add("item.confluence.moon_stone.info9", "+15% 挖矿速度");
-        add("item.confluence.moon_stone.info10", "+0.5 仆从击退");// 待删除
         add("item.confluence.nutrient_solution.info", "营养液是一种配饰，可使玩家对虚弱减益和饥饿减益产生免疫力");
         add("item.confluence.nutrient_solution.info2", "它可以在带有维生素和能量棒的工作台上制作。");
         add("item.confluence.obsidian_rose.info", "黑曜石玫瑰是一种配件，可将从熔岩中获取的基础伤害从 80 降低到并减半 On Fire！它造成的减益从 7 / 14 / 17.5 秒降低到 3.5 / 7 / 8.75 秒。");
@@ -576,7 +535,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.sun_stone.info6", "+1 生命值/秒恢复");
         add("item.confluence.sun_stone.info7", "+4 防御");
         add("item.confluence.sun_stone.info8", "+15% 挖矿速度");
-        add("item.confluence.sun_stone.info9", "+0.5 仆从击退");// 待删除
         add("item.confluence.sweetheart_necklace.info", "甜心项链是一种配饰，可以释放出集中的蜜蜂爆发并赋予玩家恐慌！和蜂蜜增益时受到伤害，移动速度提高 100%，持续 8 秒，生命恢复 5 秒。");
         add("item.confluence.sweetheart_necklace.info2", "它可以在工作台上使用蜂窝和恐慌项链制作。");
         add("item.confluence.the_plan.info", "计划书是一个困难模式免疫配饰，结合了快走时钟和三折地图的功能，赋予对慢速和恶心减益的免疫。");
