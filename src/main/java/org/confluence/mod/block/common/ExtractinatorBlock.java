@@ -85,7 +85,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
     public InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         if (pLevel instanceof ServerLevel level) {
             ItemStack item = pPlayer.getItemInHand(pHand);
-            if (level.random.nextFloat() <= 0.2F) {
+            {
                 ResourceLocation path;
                 Block block;
                 if (item.is(ModTags.Items.DESERT_FOSSIL)) {
