@@ -3,12 +3,12 @@ package org.confluence.mod.item.sword;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
-import org.confluence.mod.datagen.limit.ReversalImage32x;
+import org.confluence.mod.datagen.limit.ReversalImage24x;
 import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
-public class BatBatItem extends SwordItem implements ReversalImage32x {
+public class BatBatItem extends SwordItem implements ReversalImage24x {
     public BatBatItem() {
         super(ModTiers.TITANIUM, 12, -3.7F, new Properties().rarity(ModRarity.ORANGE));
     }

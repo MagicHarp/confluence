@@ -64,9 +64,9 @@ public class ModItemModelProvider extends ItemModelProvider {
                     }
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
-                    if (value instanceof Image32x i32) {
+                    if (value instanceof Image24x i32) {
                         i32.preset(builder);
-                    } else if (value instanceof ReversalImage32x i32) {
+                    } else if (value instanceof ReversalImage24x i32) {
                         i32.preset(builder);
                     } else if (value instanceof Image64x i64) {
                         i64.preset(builder);

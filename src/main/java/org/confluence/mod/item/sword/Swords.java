@@ -28,6 +28,9 @@ public enum Swords implements EnumRegister<SwordItem> {
     GOLDEN_BOARD_SWORD("golden_board_sword", () -> new BoardSwordItem(ModTiers.GOLD, 7, 1.6F)),
     PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ModTiers.PLATINUM, 7, 1.6F)),
 
+    LIGHTS_BANE("lights_bane", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 魔光剑
+    BLOOD_BUTCHERER("blood_butchere", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, 1.6F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 血腥屠刀 （给予被伤害的单位流血效果）蓄力才触发
+
     RED_LIGHT_SABER("red_light_saber", LightSaber.Red::new),
     ORANGE_LIGHT_SABER("orange_light_saber", LightSaber.Orange::new),
     YELLOW_LIGHT_SABER("yellow_light_saber", LightSaber.Yellow::new),
@@ -36,7 +39,10 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
+    ICE_BLADE("ice_blade", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),  //TODO 冰雪剑
+    STARFURY("starfury", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
     ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
+
 
     TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
@@ -44,11 +50,15 @@ public enum Swords implements EnumRegister<SwordItem> {
     BREATHING_REED("breathing_reed", BreathingReed::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
     TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),
-    FALCON_BLADE("falcon_blade", FalconBladeItem::new),
-    ZOMBIE_ARM("zombie_arm", ZombieArmItem::new),
-    BONE_SWORD("bone_sword", BoneSwordItem::new),
+    FALCON_BLADE("falcon_blade", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.45F, new Item.Properties().rarity(ModRarity.BLUE))),
+    ZOMBIE_ARM("zombie_arm", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.4F, new Item.Properties().rarity(ModRarity.WHITE))),
+    MANDIBLE_BLADE("mandible_blade", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -1.4F, new Item.Properties().rarity(ModRarity.GREEN))),
+    BONE_SWORD("bone_sword", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
     BAT_BAT("bat_bat", BatBatItem::new),
-    PURPLE_CLUBBERFISH("purple_clubberfish", PurpleClubberFishItem::new),
+    PURPLE_CLUBBERFISH("purple_clubberfish", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 10, -3.5F, new Item.Properties().rarity(ModRarity.BLUE))),
+    STYLISH_SCISSORS("stylish_scissors", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
+    EXOTIC_SCIMITAR("exotic_scimitar", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
+    KATANA("katana",() -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
     CROWBAR("crowbar", CrowbarItem::new);
 
     private final RegistryObject<SwordItem> value;

@@ -1509,6 +1509,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
         add(Swords.CROWBAR.get(), "撬棍");
         add(Swords.ZOMBIE_ARM.get(), "僵尸臂");
+        add(Swords.MANDIBLE_BLADE.get(), "颌骨剑");
+        add(Swords.STYLISH_SCISSORS.get(), "时尚剪刀");
         add(Swords.BONE_SWORD.get(), "骨剑");
         add(Swords.PURPLE_CLUBBERFISH.get(), "紫挥棒鱼");
         add(Swords.UMBRELLA.get(), "雨伞");
@@ -1517,6 +1519,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.TRAGIC_UMBRELLA.get(), "悲剧雨伞");
         add(Swords.FALCON_BLADE.get(), "猎鹰刃");
         add(Swords.BAT_BAT.get(), "蝙蝠棍");
+        add(Swords.STARFURY.get(), "星怒");
+        add(Swords.LIGHTS_BANE.get(), "魔光剑");
+        add(Swords.BLOOD_BUTCHERER.get(), "血腥屠刀");
+        add(Swords.KATANA.get(), "武士刀");
+        add(Swords.ICE_BLADE.get(), "冰雪剑");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
