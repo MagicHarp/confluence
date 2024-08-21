@@ -46,7 +46,7 @@ public final class PlayerJumpHandler {
     public static boolean onFly = false;
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
-        if (StepStoolHandler.getStep() > 0) return;
+        if (StepStoolHandler.onStool()) return;
 
         if (localPlayer.onGround()) {
             flushState(true);

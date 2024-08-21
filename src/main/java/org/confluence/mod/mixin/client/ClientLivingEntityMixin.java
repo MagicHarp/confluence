@@ -49,7 +49,7 @@ public abstract class ClientLivingEntityMixin {
         if (confluence$getSelf() instanceof LocalPlayer) {
             if (GravitationHandler.isShouldRot()) {
                 return new Vec3(vec3.x * -1.0, vec3.y, vec3.z);
-            } else if (StepStoolHandler.getStep() > 0) {
+            } else if (StepStoolHandler.onStool()) {
                 return Vec3.ZERO;
             }
         }

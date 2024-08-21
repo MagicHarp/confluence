@@ -58,6 +58,10 @@ public final class StepStoolHandler {
         return step;
     }
 
+    public static boolean onStool() {
+        return step > 0;
+    }
+
     public static void handlePacket(StepStoolPacketS2C packet, Supplier<NetworkEvent.Context> ctx){
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> maxStep = packet.maxStep());
