@@ -101,5 +101,25 @@
         "sounds": [
             "confluence:mob/routine_death"
         ]
+    },
+    "terra_swings": {
+        "sounds": [
+            "confluence:terra_swings"
+        ]
+    },
+    "frozen_broken": {
+        "sounds": [
+            "confluence:frozen_broken"
+        ]
+    },
+    "frozen_arrow": {
+        "sounds": [
+            "confluence:frozen_arrow"
+        ]
+    },
+    "cooldown_recovery": {
+        "sounds": [
+            "confluence:cooldown_recovery"
+        ]
     }
 }

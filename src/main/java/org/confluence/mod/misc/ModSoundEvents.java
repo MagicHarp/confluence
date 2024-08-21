@@ -31,6 +31,10 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> ALPHA = register("alpha");
     public static final RegistryObject<SoundEvent> ROUTINE_HURT = register("routine_hurt");
     public static final RegistryObject<SoundEvent> ROUTINE_DEATH = register("routine_death");
+    public static final RegistryObject<SoundEvent> COOLDOWN_RECOVERY = register("cooldown_recovery");
+    public static final RegistryObject<SoundEvent> FROZEN_ARROW = register("frozen_arrow");
+    public static final RegistryObject<SoundEvent> FROZEN_BROKEN = register("frozen_broken");
+    public static final RegistryObject<SoundEvent> TERRA_SWINGS = register("terra_swings");
 
 
     private static RegistryObject<SoundEvent> register(String id) {
