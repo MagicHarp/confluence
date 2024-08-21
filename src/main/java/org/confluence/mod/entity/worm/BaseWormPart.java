@@ -6,22 +6,33 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.entity.PartEntity;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
+public class BaseWormPart<E extends AbstractWormEntity> extends Monster {
+    public enum SegmentType {
+        HEAD, BODY, TAIL;
+    }
     protected static final EntityDataAccessor<Float> DATA_HEALTH_ID = SynchedEntityData.defineId(BaseWormPart.class, EntityDataSerializers.FLOAT);
     protected static final EntityDataAccessor<Vector3f> DATA_DIR_ID = SynchedEntityData.defineId(BaseWormPart.class, EntityDataSerializers.VECTOR3);
     private final float maxHealth;
     protected final AbstractWormEntity parentMob;
+    // 体节在wormParts中的index
+    protected final int segmentIndex;
+    // 不要给final，世吞可以被打断
+    protected SegmentType segmentType;
 
-    public BaseWormPart(E parent, float maxHealth) {
-        super(parent);
-        this.maxHealth = maxHealth;
+    public BaseWormPart(EntityType<? extends Monster> entityType, E parent, int segmentIndex, float maxHealth) {
+        super(entityType, parent.level());
         this.parentMob = parent;
+        this.segmentIndex = segmentIndex;
+        this.maxHealth = maxHealth;
         setHealth(maxHealth);
     }
 
@@ -32,10 +43,10 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {}
+    public void readAdditionalSaveData(CompoundTag compoundTag) {}
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {}
+    public void addAdditionalSaveData(CompoundTag compoundTag) {}
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
@@ -67,10 +78,11 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
         this.entityData.set(DATA_HEALTH_ID, Mth.clamp(pHealth, 0.0F, getMaxHealth()));
     }
 
-    public final float getMaxHealth() {
-        return maxHealth;
-    }
+//    public final float getMaxHealth() {
+//        return maxHealth;
+//    }
 
+    // “可被选中”
     public boolean isPickable() {
         return true;
     }
@@ -86,5 +98,22 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
 
     public boolean shouldBeSaved() {
         return false;
+    }
+
+    /** 更新体节类型，对于世界吞噬者可在segmentAI中重复调用，而对于一般蠕虫在AbstractWormEntity的构造器中调用即可 */
+    protected void updateSegmentType() {
+        SegmentType result;
+        if (segmentIndex == 0 || ! ((List<BaseWormPart<?>>) parentMob.wormParts).get(segmentIndex - 1).isAlive()) {
+            result = SegmentType.HEAD;
+        } else if (segmentIndex + 1 > ((List<BaseWormPart<?>>) parentMob.wormParts).size() || ! ((List<BaseWormPart<?>>) parentMob.wormParts).get(segmentIndex + 1).isAlive()) {
+            result = SegmentType.TAIL;
+        } else {
+            result = SegmentType.BODY;
+        }
+        this.segmentType = result;
+    }
+    // 覆盖此方法以实现额外AI，如头部移动/体节发射弹幕等
+    protected void tickSegment() {
+        updateSegmentType();
     }
 }

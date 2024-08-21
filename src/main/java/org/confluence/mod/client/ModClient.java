@@ -46,6 +46,7 @@ import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
+import org.confluence.mod.entity.worm.test.TestWormEntity;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
@@ -163,6 +164,7 @@ public final class ModClient {
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
         event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
+        event.registerEntityRenderer(TEST_WORM_PART.get(), TestWormRenderer::new);
 
         event.registerEntityRenderer(BASE_BULLET.get(), BulletRenderer::new);
         event.registerEntityRenderer(FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);
