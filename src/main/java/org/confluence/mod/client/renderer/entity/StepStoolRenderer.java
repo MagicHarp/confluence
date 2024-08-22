@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.model.curio.StepStoolModel;
+import org.confluence.mod.client.model.entity.StepStoolModel;
 import org.confluence.mod.entity.StepStoolEntity;
 
 public class StepStoolRenderer extends EntityRenderer<StepStoolEntity> {
