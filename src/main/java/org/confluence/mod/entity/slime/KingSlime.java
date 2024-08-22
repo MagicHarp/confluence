@@ -1,8 +1,13 @@
 package org.confluence.mod.entity.slime;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -16,14 +21,16 @@ import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class KingSlime extends Slime implements DeathAnimOptions {
     private final FloatRGB color;
+    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_20);
 
-    public KingSlime(EntityType<? extends Slime> slime, Level level, int size) {
+    public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
         this.color = FloatRGB.fromInteger(0x73bcf4);
     }
@@ -38,6 +45,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void tick() {
+        bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
@@ -52,7 +60,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         this.setSize((int) (getHealth() / getMaxHealth() * 7 + 4), false);
 
         List<Player> playersInRange = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(40));
-        if (playersInRange.isEmpty() || level().random.nextFloat() <= 0.01D) {
+        if (playersInRange.isEmpty() || level().random.nextFloat() <= 0.02D) {
 
             for (int i = getSize(); i > 1; i--) {
                 setSize(i, false);
@@ -75,12 +83,22 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         super.tick();
     }
 
+    public void startSeenByPlayer(@NotNull ServerPlayer pPlayer) {
+        super.startSeenByPlayer(pPlayer);
+        this.bossEvent.addPlayer(pPlayer);
+    }
+
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
+        if (!pSource.is(DamageTypes.PLAYER_ATTACK) && !pSource.is(DamageTypes.IN_FIRE) && !pSource.is(DamageTypes.LAVA)) {  //防止窒息
+            return false;
+        }
         if (level() instanceof ServerLevel serverLevel) {
-            BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, 0x73bcf4, serverLevel.random.nextInt(1, 3));
+            BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, 0x73bcf4, serverLevel.random.nextInt(1, 4));
             slime.setPos(getOnPos().getX(), getOnPos().getY(), getOnPos().getZ());
-
+            if (ModUtils.isExpert(serverLevel)) {
+                //todo 尖刺史莱姆
+            }
             serverLevel.addFreshEntity(slime);
         }
         return super.hurt(pSource, pAmount);
@@ -114,5 +132,4 @@ public class KingSlime extends Slime implements DeathAnimOptions {
     public float[] getBloodColor() {
         return color.mixture(new FloatRGB(0, 0, 0), 0.5f).toArray();
     }
-
 }

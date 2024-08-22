@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -137,5 +138,13 @@ public final class ModUtils {
     }
     public static void testMessage(Player player, String msg) {
         player.sendSystemMessage(Component.literal(msg));
+    }
+
+    public static boolean isExpert(Level level) {
+        return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
+    }
+
+    public static boolean isMaster(Level level) {
+        return level.getDifficulty().equals(Difficulty.HARD);
     }
 }
