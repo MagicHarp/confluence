@@ -2,6 +2,7 @@ package org.confluence.mod.mixin.entity;
 
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Blocks;
@@ -79,12 +80,14 @@ public abstract class ItemEntityMixin implements IItemEntity {
 
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
     public void highRarityForbiddenBurn(CallbackInfoReturnable<Boolean> cir) {
-        if ((!getItem().getRarity().equals(ModRarity.WHITE)) &&
-            (!getItem().getRarity().equals(ModRarity.GRAY)) &&
-            (!getItem().getRarity().equals(Rarity.COMMON))) {
+        Item item = getItem().getItem();
+        Rarity rarity = item.getRarity(getItem());
+        if (rarity != ModRarity.WHITE &&
+            rarity != ModRarity.GRAY &&
+            rarity != Rarity.COMMON) {
             cir.setReturnValue(true);
-        } else if (getItem().is(Blocks.OBSIDIAN.asItem()) || getItem().is(Blocks.CRYING_OBSIDIAN.asItem()) ||
-            getItem().is(ModItems.FLAMEFLOWERS.get()) || getItem().is(ModItems.FLAMEFLOWERS_SEED.get())) {
+        } else if (item == Blocks.OBSIDIAN.asItem() || item == Blocks.CRYING_OBSIDIAN.asItem() ||
+            item == ModItems.FLAMEFLOWERS.get() || item == ModItems.FLAMEFLOWERS_SEED.get()) {
             cir.setReturnValue(true);
         }
     }
