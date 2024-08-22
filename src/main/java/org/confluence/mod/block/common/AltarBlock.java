@@ -30,7 +30,6 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.items.ItemStackHandler;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.block.AltarBlockModel;
@@ -111,8 +110,8 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
-    public static void onLeftClick(PlayerInteractEvent.LeftClickBlock event) { // 合成
-        if (event.getLevel().getBlockState(event.getPos()).getBlock() instanceof AltarBlock altarBlock) {
+    public static void onLeftClick(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand) { // 合成
+        if (pState.getBlock() instanceof AltarBlock altarBlock) {
 
         }
     }
