@@ -3,7 +3,6 @@ package org.confluence.mod.entity.projectile;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class SwordProjectile extends Projectile {
@@ -56,12 +56,11 @@ public abstract class SwordProjectile extends Projectile {
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
-        if (!level().isClientSide) {   //todo 为client side导致剑气无伤害
+        if (!level().isClientSide) {
             Entity entity = entityHitResult.getEntity();
             if (entity.hurt(damageSources().mobProjectile(this, (LivingEntity) getOwner()), getDamage())) {
-                LivingEntity living = (LivingEntity) entity;
-                living.knockback(0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
-                kill();
+                ModUtils.knockBackA2B(this, entity, 0.5, 0.2);
+                discard();
             }
         }
     }

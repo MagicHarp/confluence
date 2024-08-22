@@ -4,6 +4,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -58,7 +59,8 @@ public class BeeProjectile extends AbstractHurtingProjectile {
                 .ifPresent(monster -> this.target = monster);
         }
         if (target != null) {
-            if (target.isSpectator() || (target instanceof LivingEntity living && living.isDeadOrDying())) this.target = null;
+            if (target.isSpectator() || (target instanceof LivingEntity living && living.isDeadOrDying()))
+                this.target = null;
             if (target != null) {
                 Vec3 vec3 = new Vec3(target.getX() - getX(), target.getY() + target.getEyeHeight() / 2.0 - getY(), target.getZ() - getZ());
                 double lengthSqr = vec3.lengthSqr();
@@ -111,5 +113,10 @@ public class BeeProjectile extends AbstractHurtingProjectile {
     @Override
     public @NotNull EntityDimensions getDimensions(@NotNull Pose pPose) {
         return isGiant() ? GIANT : SMALL;
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return false;
     }
 }

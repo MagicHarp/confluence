@@ -6,12 +6,10 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
-import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -22,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -103,8 +102,8 @@ public class BaseBulletEntity extends Projectile {
         Entity entity = entityHitResult.getEntity();
         if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
             float attackKnockBack = getKnockBack() * (1.0F + knockBack);
-            if (attackKnockBack > 0.0F && entity instanceof LivingEntity living) {
-                living.knockback(attackKnockBack * 0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
+            if (attackKnockBack > 0.0F) {
+                ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
                 setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
             }
         }

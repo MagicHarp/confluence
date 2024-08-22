@@ -10,9 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.ShurikenProjectileModel;
-import org.confluence.mod.client.model.entity.ThrowingKnivesProjectileModel;
 import org.confluence.mod.entity.projectile.ShurikenProjectile;
-import org.confluence.mod.entity.projectile.ThrowingKnivesProjectile;
 import org.jetbrains.annotations.NotNull;
 
 public class ShurikenProjectileRenderer extends EntityRenderer<ShurikenProjectile> {
@@ -35,7 +33,7 @@ public class ShurikenProjectileRenderer extends EntityRenderer<ShurikenProjectil
         poseStack.translate(0.00F, 0.125F, -0.125F);
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
-        poseStack.mulPose(Axis.YP.rotation(-Mth.HALF_PI));
+        poseStack.mulPose(Axis.YP.rotation(entity.level().getGameTime() + partialTick));
         model.renderToBuffer(poseStack, multiBufferSource.getBuffer(model.renderType(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         poseStack.popPose();
     }

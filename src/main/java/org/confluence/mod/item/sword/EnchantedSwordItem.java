@@ -30,6 +30,6 @@ public class EnchantedSwordItem extends SwordItem implements ISwordProjectile {
 
     @Override
     public float getBaseVelocity() {
-        return 1.0F;
+        return 2.5F;
     }
 }
