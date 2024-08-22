@@ -49,6 +49,7 @@ import static org.confluence.mod.Confluence.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModEvents {
+
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
         event.put(ModEntities.BLUE_SLIME.get(), BaseSlime.createSlimeAttributes(4.0F, 0, 16.0F).build());
@@ -69,7 +70,8 @@ public final class ModEvents {
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
 
-        event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes(25.0F, 10, 928.0F).build());
+        event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes(1,
+                1).build());
     }
 
     @SubscribeEvent

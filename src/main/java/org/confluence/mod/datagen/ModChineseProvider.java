@@ -1829,6 +1829,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
         add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
+        add(SpawnEggs.KING_SLIME_SPAWN_EGG.get(), "史莱姆王刷怪蛋");
         // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
         add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");
