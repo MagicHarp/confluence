@@ -270,6 +270,11 @@ public final class ModTabs {
                 output.accept(ModItems.BOTTOMLESS_LAVA_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get());
+                output.accept(ModItems.BOMB.get());
+                output.accept(ModItems.STICKY_BOMB.get());
+                output.accept(ModItems.BOUNCY_BOMB.get());
+                output.accept(ModItems.SCARAB_BOMB.get());
+                output.accept(ModItems.BOTTOMLESS_SHIMMER_BUCKET.get());
                 output.accept(ModItems.RED_WRENCH.get());
                 output.accept(ModItems.GREEN_WRENCH.get());
                 output.accept(ModItems.BLUE_WRENCH.get());

@@ -1598,6 +1598,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(HERB_BAG.get(), "草药袋");
         add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
         add(BOMB.get(), "炸弹");
+        add(BOUNCY_BOMB.get(), "弹力炸弹");
+        add(STICKY_BOMB.get(), "粘性炸弹");
+        add(SCARAB_BOMB.get(), "甲虫炸弹");
         add(RED_WRENCH.get(), "红扳手");
         add(BLUE_WRENCH.get(), "蓝扳手");
         add(GREEN_WRENCH.get(), "绿扳手");
