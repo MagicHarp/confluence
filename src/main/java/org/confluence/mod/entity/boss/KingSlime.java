@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.slime;
+package org.confluence.mod.entity.boss;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -19,6 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
@@ -37,10 +38,10 @@ public class KingSlime extends Slime implements DeathAnimOptions {
 
     public static AttributeSupplier.Builder createSlimeAttributes(float attackDamage, int armor, float maxHealth) {
         return Mob.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, attackDamage)
-                .add(Attributes.ARMOR, armor)
-                .add(Attributes.MAX_HEALTH, maxHealth)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 100);
+            .add(Attributes.ATTACK_DAMAGE, attackDamage)
+            .add(Attributes.ARMOR, armor)
+            .add(Attributes.MAX_HEALTH, maxHealth)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 100);
     }
 
     @Override
@@ -83,9 +84,16 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         super.tick();
     }
 
-    public void startSeenByPlayer(@NotNull ServerPlayer pPlayer) {
-        super.startSeenByPlayer(pPlayer);
-        this.bossEvent.addPlayer(pPlayer);
+    @Override
+    public void startSeenByPlayer(@NotNull ServerPlayer pServerPlayer) {
+        super.startSeenByPlayer(pServerPlayer);
+        bossEvent.addPlayer(pServerPlayer);
+    }
+
+    @Override
+    public void stopSeenByPlayer(@NotNull ServerPlayer pServerPlayer) {
+        super.stopSeenByPlayer(pServerPlayer);
+        bossEvent.removePlayer(pServerPlayer);
     }
 
     @Override

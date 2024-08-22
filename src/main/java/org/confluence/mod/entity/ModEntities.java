@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.chair.ChairEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
@@ -17,7 +18,6 @@ import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
-import org.confluence.mod.entity.slime.KingSlime;
 import org.confluence.mod.entity.slime.NonDropSlime;
 
 @SuppressWarnings("unused")
