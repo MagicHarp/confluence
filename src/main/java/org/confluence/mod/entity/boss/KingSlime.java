@@ -51,7 +51,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
     private void init() {
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(isMaster(level()) ? 928.0D : isExpert(level()) ? 812.0D : 580.0D);
         this.setHealth(isMaster(level()) ? 928.0F : isExpert(level()) ? 812.0F : 580.0F);
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(isMaster(level()) ? 25.0D : isExpert(level()) ? 18.0D : 9.0D);
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(isMaster(level()) ? 12.5D : isExpert(level()) ? 9.0D : 4.5D);
     }
 
     @Override
