@@ -53,7 +53,7 @@ public abstract class LevelChunkMixin extends ChunkAccess {
         if(!(level instanceof ServerLevel)) return;
         confluence$serverLevel = (ServerLevel) level;
         if(BIOME_CORRUPT == null){
-            BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.ANOTHER_CRIMSON);
+            BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.TR_CRIMSON);
             BIOME_CORRUPT = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_CORRUPTION);
             BIOME_HALLOW = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_HALLOW);
         }

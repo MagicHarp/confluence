@@ -22,6 +22,7 @@ public final class ModTags {
         public static final TagKey<Block> NEEDS_6_LEVEL = register("needs_6_level");
         public static final TagKey<Block> NEEDS_7_LEVEL = register("needs_7_level");
         public static final TagKey<Block> NEEDS_8_LEVEL = register("needs_8_level");
+        public static final TagKey<Block> NEEDS_9_LEVEL = register("needs_9_level");
         public static final TagKey<Block> NEEDS_NON_VANILLA_LEVEL = register("needs_non_vanilla_level");
         public static final TagKey<Block> FLOWER_BOOTS_AVAILABLE = register("flower_boots_available");
         public static final TagKey<Block> TORCH = register("torch");

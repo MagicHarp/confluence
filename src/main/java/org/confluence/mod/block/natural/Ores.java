@@ -106,11 +106,11 @@ public enum Ores implements EnumBlockRegister<Block> {
     FLESHIFICATION_AMBER_ORE("fleshification_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     // 异域紫晶矿
-    TR_AMETHYST_ORE("another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    DEEPSLATE_TR_AMETHYST_ORE("deepslate_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    SANCTIFICATION_TR_AMETHYST_ORE("sanctification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    CORRUPTION_TR_AMETHYST_ORE("corruption_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
-    FLESHIFICATION_TR_AMETHYST_ORE("fleshification_another_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    TR_AMETHYST_ORE("tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    DEEPSLATE_TR_AMETHYST_ORE("deepslate_tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    SANCTIFICATION_TR_AMETHYST_ORE("sanctification_tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    CORRUPTION_TR_AMETHYST_ORE("corruption_tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
+    FLESHIFICATION_TR_AMETHYST_ORE("fleshification_tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
 
     // 蓝玉矿
     SAPPHIRE_ORE("sapphire_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE))),
@@ -126,23 +126,23 @@ public enum Ores implements EnumBlockRegister<Block> {
     // 红石矿
 
     // 魔矿
-    EBONY_ORE(              "ebony_ore",                () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    DEEPSLATE_EBONY_ORE(    "deepslate_ebony_ore",      () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    EBONY_ORE("ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    DEEPSLATE_EBONY_ORE("deepslate_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
     SANCTIFICATION_EBONY_ORE("sanctification_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    CORRUPTION_EBONY_ORE(   "corruption_ebony_ore",     () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    CORRUPTION_EBONY_ORE("corruption_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
     FLESHIFICATION_EBONY_ORE("fleshification_ebony_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
 
     EBONY_BLOCK("ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
     RAW_EBONY_BLOCK("raw_ebony_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
     // 猩红矿
-    TR_CRIMSON_ORE("another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    DEEPSLATE_TR_CRIMSON_ORE("deepslate_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    SANCTIFICATION_TR_CRIMSON_ORE("sanctification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    CORRUPTION_TR_CRIMSON_ORE("corruption_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
-    FLESHIFICATION_TR_CRIMSON_ORE("fleshification_another_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    TR_CRIMSON_ORE("tr_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    DEEPSLATE_TR_CRIMSON_ORE("deepslate_tr_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    SANCTIFICATION_TR_CRIMSON_ORE("sanctification_tr_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    CORRUPTION_TR_CRIMSON_ORE("corruption_tr_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
+    FLESHIFICATION_TR_CRIMSON_ORE("fleshification_tr_crimson_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_DIAMOND_TOOL),
 
-    RAW_TR_CRIMSON_BLOCK("raw_another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
-    TR_CRIMSON_BLOCK("another_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
+    RAW_TR_CRIMSON_BLOCK("raw_tr_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
+    TR_CRIMSON_BLOCK("tr_crimson_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_DIAMOND_TOOL),
 
 
     // 狱石矿
@@ -177,20 +177,20 @@ public enum Ores implements EnumBlockRegister<Block> {
     RAW_TITANIUM_BLOCK("raw_titanium_block", BaseBlock::new, TAGS_ORE_TIER_7_TOOL),
     TITANIUM_BLOCK("titanium_block", BaseBlock::new, TAGS_ORE_TIER_7_TOOL),
     // 神圣矿
-    HALLOWED_BLOCK("hallowed_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_7_TOOL),
+    HALLOWED_BLOCK("hallowed_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
 
     // 叶绿矿
-    CHLOROPHYTE_ORE("chlorophyte_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_TIER_8_TOOL),
-    RAW_CHLOROPHYTE_BLOCK("raw_chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
-    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
+    CHLOROPHYTE_ORE("chlorophyte_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), TAGS_ORE_TIER_9_TOOL),
+    RAW_CHLOROPHYTE_BLOCK("raw_chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL),
+    CHLOROPHYTE_BLOCK("chlorophyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL),
 
     // 蘑菇矿
-    SHROOMITE_BLOCK("shroomite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
+    SHROOMITE_BLOCK("shroomite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL),
     // 幽灵矿
-    SPECTRE_BLOCK("spectre_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
+    SPECTRE_BLOCK("spectre_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL),
     // 夜明矿
-    RAW_LUMINITE_BLOCK("raw_luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL),
-    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_TIER_8_TOOL);
+    RAW_LUMINITE_BLOCK("raw_luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL),
+    LUMINITE_BLOCK("luminite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), TAGS_ORE_TIER_9_TOOL);
 
     private final RegistryObject<Block> value;
     private final BlockTagsHolder tagsHolder;
@@ -198,6 +198,7 @@ public enum Ores implements EnumBlockRegister<Block> {
     Ores(String id, Supplier<Block> ore) {
         this(id, ore, TAGS_ORE_BASIC);
     }
+
     Ores(String id, Supplier<Block> ore, BlockTagsHolder tagsHolder) {
         this.value = ModBlocks.registerWithItem(id, ore);
         this.tagsHolder = tagsHolder;

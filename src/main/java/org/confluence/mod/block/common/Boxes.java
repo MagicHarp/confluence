@@ -33,7 +33,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
     JUNGLE_BOX("jungle_box"),
     SKY_BOX("sky_box"),
     CORRUPT_BOX("corrupt_box"),
-    TR_CRIMSON_BOX("another_crimson_box"),
+    TR_CRIMSON_BOX("tr_crimson_box"),
     SACRED_BOX("sacred_box"),
     DUNGEON_BOX("dungeon_box"),
     FREEZE_BOX("freeze_box"),

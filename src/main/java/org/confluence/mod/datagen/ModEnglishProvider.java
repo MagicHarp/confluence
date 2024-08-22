@@ -298,8 +298,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("advancements.platinum_ingot.descr", "Acquire platinum ingot");
         add("advancements.ebony_ingot.title", "Corrupt will");
         add("advancements.ebony_ingot.descr", "Acquire ebony ingot");
-        add("advancements.another_crimson_ingot.title", "Crimson flesh");
-        add("advancements.another_crimson_ingot.descr", "Acquire crimson ingot");
+        add("advancements.tr_crimson_ingot.title", "Crimson flesh");
+        add("advancements.tr_crimson_ingot.descr", "Acquire crimson ingot");
         add("advancements.pretty_in_pink.title", "pretty_in_pink");
         add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
 

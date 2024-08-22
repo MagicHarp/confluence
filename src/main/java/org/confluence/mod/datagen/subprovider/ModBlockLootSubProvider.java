@@ -268,7 +268,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         addHerbDrop(SUNFLOWERS.get(), ModItems.SUNFLOWERS.get(), ModItems.SUNFLOWERS_SEED.get());
         addHerbDrop(DEATHWEED.get(), ModItems.DEATHWEED.get(), ModItems.DEATHWEED_SEED.get());
 
-        dropOther(TR_CRIMSON_MUSHROOM.get(), ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
+        dropOther(TR_CRIMSON_MUSHROOM.get(), ModItems.TR_CRIMSON_MUSHROOM.get());
         dropOther(EBONY_MUSHROOM.get(), ModItems.EBONY_MUSHROOM.get());
         dropOther(GLOWING_MUSHROOM.get(), ModItems.GLOWING_MUSHROOM.get()); // TODO: 掉落概率不是100%；掉落蘑菇草种子
         dropOther(LIFE_MUSHROOM.get(), ModItems.LIFE_MUSHROOM.get());

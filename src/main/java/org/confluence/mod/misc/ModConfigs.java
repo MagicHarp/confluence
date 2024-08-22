@@ -61,8 +61,8 @@ public final class ModConfigs {
             "The higher the block in the list, the higher the value"
         ).defineListAllowEmpty("rareBlocks", List.of(
             "confluence:life_crystal_block",
-            "confluence:another_crimson_ore",
-            "confluence:deepslate_another_crimson_ore",
+            "confluence:tr_crimson_ore",
+            "confluence:deepslate_tr_crimson_ore",
             "confluence:ebony_ore",
             "confluence:deepslate_ebony_ore",
             "minecraft:ancient_debris",
@@ -81,7 +81,7 @@ public final class ModConfigs {
             "confluence:marble_cave_pots",
             "confluence:pyramid_pots",
             "confluence:corruption_pots",
-            "confluence:another_crimson_pots",
+            "confluence:tr_crimson_pots",
             "confluence:dungeon_pots",
             "confluence:underworld_pots",
             "confluence:lihzahrd_pots",

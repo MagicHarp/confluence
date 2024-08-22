@@ -7,12 +7,12 @@
     "confluence:fleshification_ebony_ore",
     "confluence:ebony_block",
     "confluence:raw_ebony_block",
-    "confluence:another_crimson_ore",
-    "confluence:deepslate_another_crimson_ore",
-    "confluence:sanctification_another_crimson_ore",
-    "confluence:corruption_another_crimson_ore",
-    "confluence:fleshification_another_crimson_ore",
-    "confluence:raw_another_crimson_block",
-    "confluence:another_crimson_block"
+    "confluence:tr_crimson_ore",
+    "confluence:deepslate_tr_crimson_ore",
+    "confluence:sanctification_tr_crimson_ore",
+    "confluence:corruption_tr_crimson_ore",
+    "confluence:fleshification_tr_crimson_ore",
+    "confluence:raw_tr_crimson_block",
+    "confluence:tr_crimson_block"
   ]
 }

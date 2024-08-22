@@ -166,7 +166,7 @@ public final class ModTabs {
                 output.accept(ModItems.DEATHWEED_SEED.get());
                 output.accept(ModItems.FLAMEFLOWERS_SEED.get());
                 // 蘑菇 草
-                output.accept(ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
+                output.accept(ModItems.TR_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());
                 output.accept(ModItems.GLOWING_MUSHROOM.get());
                 output.accept(ModItems.LIFE_MUSHROOM.get());
