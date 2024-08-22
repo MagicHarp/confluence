@@ -103,7 +103,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
         SegmentType result;
         if (segmentIndex == 0 || ! ((List<BaseWormPart<?>>) parentMob.wormParts).get(segmentIndex - 1).isAlive()) {
             result = SegmentType.HEAD;
-        } else if (segmentIndex + 1 > ((List<BaseWormPart<?>>) parentMob.wormParts).size() || ! ((List<BaseWormPart<?>>) parentMob.wormParts).get(segmentIndex + 1).isAlive()) {
+        } else if (segmentIndex + 1 >= ((List<BaseWormPart<?>>) parentMob.wormParts).size() || ! ((List<BaseWormPart<?>>) parentMob.wormParts).get(segmentIndex + 1).isAlive()) {
             result = SegmentType.TAIL;
         } else {
             result = SegmentType.BODY;

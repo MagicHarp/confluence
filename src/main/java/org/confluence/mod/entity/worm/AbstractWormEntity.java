@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.confluence.mod.util.DelayedTaskExecutor;
 import org.confluence.mod.util.ModUtils;
 import software.bernie.geckolib.animatable.GeoEntity;
 
@@ -16,7 +17,7 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     protected final ArrayList<BaseWormPart<? extends AbstractWormEntity>> wormParts;
     private final int length;
     private final float maxHealth;
-    private boolean pendingSegmentsSpawn = false;
+    private boolean pendingSegmentsSpawn = true;
 
     /** 子类应该完全覆盖此方法以自定义蠕虫体节的构造器 */
     protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
@@ -25,14 +26,15 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     }
     /** 生成一个新的体节并记录在wormParts中 */
     private BaseWormPart<? extends AbstractWormEntity> spawnWormPart() {
-        ModUtils.testMessage(level(), "SPN:"+wormParts.size());
+        // 无论为何生成体节，都默认判定为体节已生成完毕
+        pendingSegmentsSpawn = false;
 //        Tadpole tadpole = EntityType.TADPOLE.create(pLevel);
         BaseWormPart<? extends AbstractWormEntity> part = partConstructor( wormParts.size() );
         part.moveTo( position() );
+
         level().addFreshEntity(part);
 
         this.wormParts.add(part);
-        ModUtils.testMessage(level(), part.toString());
         return part;
     }
     public AbstractWormEntity(EntityType<? extends AbstractWormEntity> pEntityType, Level pLevel, int length, float maxHealth) {
@@ -42,6 +44,25 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
         this.wormParts = new ArrayList<>(length);
         this.length = length;
         // 不要马上生成体节，constructor被调用时还在(0,0,0)
+
+        // 顺手把测试丢这里了，可以删掉的
+        if (false && ! level().isClientSide()) {
+            DelayedTaskExecutor executor = DelayedTaskExecutor.getInstance(getServer());
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 3; j ++) {
+                    int finalI = i * 10 + j;
+                    executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
+                        ModUtils.testMessage(level(), "MSG" + finalI);
+                    }, i * 10));
+                }
+            }
+            executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
+                ModUtils.testMessage(level(), "AAA");
+            }, 20, true));
+            executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
+                ModUtils.testMessage(level(), "BBB");
+            }, 10, true));
+        }
     }
 
     @Override
@@ -78,14 +99,11 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     // AI: 循环遍历所有体节并进行AI判定
     @Override
     public void tick() {
-        ModUtils.testMessage("AISTART");
         super.tick();
 
         // 生成体节
         if (pendingSegmentsSpawn) {
-            pendingSegmentsSpawn = false;
-
-            for (int i = 0; i < length; i ++) {
+            for (int i = 0; i < length; i++) {
                 spawnWormPart();
             }
             // 初始化各体节的头/身体/尾节信息
@@ -95,9 +113,7 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
         }
 
         boolean shouldDie = true;
-        ModUtils.testMessage("AISTEP");
         for (BaseWormPart<? extends AbstractWormEntity> part : wormParts) {
-            ModUtils.testMessage(level(), part.toString());
             if (part.isAlive()) {
                 shouldDie = false;
                 break;
@@ -120,5 +136,11 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
                 }
             }
         }
+
+        // 拔剑四顾心茫然
+        if (! level().isClientSide()) {
+            // 不知道什么需要放这里，反正测试用的，摆了
+        }
+
     }
 }

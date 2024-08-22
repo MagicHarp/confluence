@@ -79,7 +79,7 @@ public class WormMovementUtils {
             Vec3 segDVec; // 方向向量
 
             // 尾节，体节间的方向设为上一节-本节
-            if (segmentCurrent.segmentType == BaseWormPart.SegmentType.TAIL) {
+            if (segmentCurrent.segmentType == BaseWormPart.SegmentType.TAIL || i + 1 >= endIndex) {
                 segDVec = ModUtils.getDirection(segmentCurrent.position(), segmentLast.position(), 1.0);
             }
             // 非尾节，体节间的方向设为上一节-下一节
