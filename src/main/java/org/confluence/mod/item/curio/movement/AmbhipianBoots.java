@@ -13,6 +13,8 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallResistance {
+    private static final Vector3f START_COLOR = FloatRGB.fromInteger(0x39b64e).toVector();
+    private static final Vector3f END_COLOR = FloatRGB.fromInteger(0x39b64e).toVector();
 
     public AmbhipianBoots() {
         super(ModRarity.PINK);
@@ -20,12 +22,12 @@ public class AmbhipianBoots extends BaseSpeedBoots implements IJumpBoost, IFallR
 
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0x39b64e).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0x39b64e).toVector();
+        return END_COLOR;
     }
 
     @Override

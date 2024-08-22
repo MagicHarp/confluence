@@ -14,18 +14,21 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class FairyBoots extends BaseSpeedBoots implements IMayFly, IFlowerBoots {
+    private static final Vector3f START_COLOR = FloatRGB.fromInteger(0xfc83f8).toVector();
+    private static final Vector3f END_COLOR = FloatRGB.fromInteger(0xfc83f8).toVector();
+
     public FairyBoots() {
         super(ModRarity.PINK);
     }
 
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0xfc83f8).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0xfc83f8).toVector();
+        return END_COLOR;
     }
 
     @Override
