@@ -31,6 +31,7 @@ import static org.confluence.mod.util.ModUtils.isMaster;
 
 public class KingSlime extends Slime implements DeathAnimOptions {
     private final FloatRGB color;
+    private static int waitTick;
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
 
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
@@ -55,6 +56,9 @@ public class KingSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void tick() {
+        if (waitTick > 0) {
+            waitTick--;
+        }
         bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         resetFallDistance();
         if (level().random.nextDouble() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.035D : 0.015D)) {
@@ -75,21 +79,24 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         List<Player> playersInRange = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(40));
         if (playersInRange.isEmpty() || level().random.nextFloat() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.03D : 0.01D)) {
 
-            for (int i = getSize(); i > 1; i--) {
-                setSize(i, false);
-            }
-            if (level() instanceof ServerLevel serverLevel) {
-                Vec3 closestPlayerPos;
-                if (serverLevel.getRandomPlayer() != null) {
-                    closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
-                    this.teleportTo(closestPlayerPos.x, closestPlayerPos.y, closestPlayerPos.z);
+            if (waitTick == 0) {
+                for (int i = getSize(); i > 1; i--) {
+                    setSize(i, false);
                 }
-            }
+                if (level() instanceof ServerLevel serverLevel) {
+                    Vec3 closestPlayerPos;
+                    if (serverLevel.getRandomPlayer() != null) {
+                        closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
+                        this.teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
+                    }
+                }
 
-            playersInRange.clear();
+                playersInRange.clear();
 
-            for (int i = 1; i < (int) ((getHealth() / 600) * 7 + 4); i++) {
-                setSize(i, false);
+                for (int i = 1; i < (int) ((getHealth() / 600) * 7 + 4); i++) {
+                    setSize(i, false);
+                }
+                waitTick = 40;
             }
         }
 
@@ -137,7 +144,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         entityData.set(ID_SIZE, i);
         reapplyPosition();
         refreshDimensions();
-        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2F * i);
+        getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.1F * i);
 
         this.xpReward = i;
     }
