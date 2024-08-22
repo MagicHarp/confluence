@@ -1608,6 +1608,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLDEN_KEY.get(), "金钥匙");
         add(SHADOW_KEY.get(), "暗影钥匙");
         add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
+        add(SLIME_CROWN.get(), "史莱姆皇冠");
         add(DEMON_HEART.get(), "恶魔之心");
 
         // 功能性方块
@@ -2034,6 +2035,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(MASTER_NINJA_GEAR.get(), "忍者大师装备");
         add(FROG_WEBBING.get(), "青蛙蹼");
         add(FROG_GEAR.get(), "青蛙装备");
+        add(PLATINUM_CROWN.get(), "铂金冠");
+        add(GOLD_CROWN.get(), "金冠");
+        add(STEP_STOOL.get(), "梯凳");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");

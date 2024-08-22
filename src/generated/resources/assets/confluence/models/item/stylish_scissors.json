@@ -1,3 +1,6 @@
 {
-  "parent": "confluence:item/item_icon"
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "confluence:item/stylish_scissors"
+  }
 }

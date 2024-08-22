@@ -40,7 +40,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
     ICE_BLADE("ice_blade", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),
-    STARFURY("starfury", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
+    STARFURY("starfury", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
     ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
 
 
@@ -52,11 +52,11 @@ public enum Swords implements EnumRegister<SwordItem> {
     TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),
     FALCON_BLADE("falcon_blade", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.45F, new Item.Properties().rarity(ModRarity.BLUE))),
     ZOMBIE_ARM("zombie_arm", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.4F, new Item.Properties().rarity(ModRarity.WHITE))),
-    MANDIBLE_BLADE("mandible_blade", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -1.4F, new Item.Properties().rarity(ModRarity.GREEN))),
+    MANDIBLE_BLADE("mandible_blade", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 4, -1.4F, new Item.Properties().rarity(ModRarity.GREEN))),
     BONE_SWORD("bone_sword", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
     BAT_BAT("bat_bat", BatBatItem::new),
     PURPLE_CLUBBERFISH("purple_clubberfish", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 10, -3.5F, new Item.Properties().rarity(ModRarity.BLUE))),
-    STYLISH_SCISSORS("stylish_scissors", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
+    STYLISH_SCISSORS("stylish_scissors", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
     EXOTIC_SCIMITAR("exotic_scimitar", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
     KATANA("katana",() -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
     CROWBAR("crowbar", CrowbarItem::new);

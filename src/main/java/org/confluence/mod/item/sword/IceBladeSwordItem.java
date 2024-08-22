@@ -4,11 +4,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import org.confluence.mod.datagen.limit.Image24x;
 import org.confluence.mod.entity.projectile.IceBladeSwordProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.misc.ModSoundEvents;
 
-public class IceBladeSwordItem extends SwordItem implements ISwordProjectile {
+public class IceBladeSwordItem extends SwordItem implements ISwordProjectile, Image24x {
     public IceBladeSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }

@@ -241,6 +241,7 @@ public final class ModTabs {
                 output.accept(ModItems.SHADOW_KEY.get());
 
                 output.accept(ModItems.SUSPICIOUS_LOOKING_EYE.get());
+                output.accept(ModItems.SLIME_CROWN.get());
 
                 for (BaseChestBlock.Variant variant : BaseChestBlock.Variant.values()) {
                     output.accept(BaseChestBlock.setData(new ItemStack(BASE_CHEST_BLOCK.get().asItem()), variant));
