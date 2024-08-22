@@ -70,8 +70,7 @@ public final class ModEvents {
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
 
-        event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes(1,
-                1).build());
+        event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
     }
 
     @SubscribeEvent

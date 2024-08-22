@@ -30,40 +30,43 @@ import static org.confluence.mod.util.ModUtils.isExpert;
 import static org.confluence.mod.util.ModUtils.isMaster;
 
 public class KingSlime extends Slime implements DeathAnimOptions {
-    private final FloatRGB color;
-    private static int waitTick;
+    private static final FloatRGB COLOR = FloatRGB.fromInteger(0x73bcf4);
+    private static final float[] BLOOD_COLOR = COLOR.mixture(FloatRGB.ZERO, 0.5f).toArray();
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
+    private int waitTick;
 
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
-        this.color = FloatRGB.fromInteger(0x73bcf4);
-        this.init();
+        this.waitTick = 40;
+        init();
     }
 
-    public static AttributeSupplier.Builder createSlimeAttributes(double attackDamage, double maxHealth) {
+    public static AttributeSupplier.Builder createSlimeAttributes() {
         return Mob.createMobAttributes()
-            .add(Attributes.ATTACK_DAMAGE, attackDamage)
-                .add(Attributes.ARMOR, 10.0D)
-            .add(Attributes.MAX_HEALTH, maxHealth)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 100)
-                .add(Attributes.FOLLOW_RANGE, 100D);
+            .add(Attributes.ATTACK_DAMAGE, 1.0)
+            .add(Attributes.ARMOR, 10.0)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 10.00)
+            .add(Attributes.FOLLOW_RANGE, 100.0);
     }
 
     private void init() {
-        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(isMaster(level()) ? 928.0D : isExpert(level()) ? 812.0D : 580.0D);
-        this.setHealth(isMaster(level()) ? 928.0F : isExpert(level()) ? 812.0F : 580.0F);
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(isMaster(level()) ? 12.5D : isExpert(level()) ? 9.0D : 4.5D);
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(isMaster(level()) ? 928.0 : isExpert(level()) ? 812.0 : 580.0);
+        setHealth(isMaster(level()) ? 928.0F : isExpert(level()) ? 812.0F : 580.0F);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(isMaster(level()) ? 12.5 : isExpert(level()) ? 9.0 : 4.5);
     }
 
     @Override
     public void tick() {
-        if (waitTick > 0) {
-            waitTick--;
+        if (!level().isClientSide) {
+            if (waitTick > 0) {
+                waitTick--;
+            }
         }
-        bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
+        bossEvent.setProgress(getHealth() / getMaxHealth());
         resetFallDistance();
-        if (level().random.nextDouble() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.035D : 0.015D)) {
-            this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + (isMaster(level()) ? 0.6D : 0.35D), this.getDeltaMovement().z);
+        if (level().random.nextDouble() <= (isMaster(level()) ? 0.05 : isExpert(level()) ? 0.035 : 0.015)) {
+            Vec3 motion = getDeltaMovement();
+            setDeltaMovement(motion.x, motion.y + (isMaster(level()) ? 0.6 : 0.35), motion.z);
         }
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
@@ -72,19 +75,19 @@ public class KingSlime extends Slime implements DeathAnimOptions {
                 float f1 = random.nextFloat() * 0.5F + 0.5F;
                 float f2 = Mth.sin(f) * (float) i * 0.5F * f1;
                 float f3 = Mth.cos(f) * (float) i * 0.5F * f1;
-                level().addParticle(ModParticles.ITEM_GEL.get(), getX() + (double) f2, getY(), getZ() + (double) f3, color.red(), color.green(), color.blue());
+                level().addParticle(ModParticles.ITEM_GEL.get(), getX() + (double) f2, getY(), getZ() + (double) f3, COLOR.red(), COLOR.green(), COLOR.blue());
             }
         }
-        this.setSize((int) ((getHealth() / 600) * 7 + 4), false);
+        setSize((int) ((getHealth() / 600) * 7 + 4), false);
 
-        List<Player> playersInRange = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100));
-        List<Player> playersInRange2 = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(150));
+        List<Player> playersInRange = level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(100));
+        List<Player> playersInRange2 = level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(150));
         if (playersInRange.isEmpty() && playersInRange2.isEmpty()) {
-            this.discard();
+            discard();
         }
         if (playersInRange.isEmpty() || level().random.nextFloat() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.03D : 0.01D)) {
 
-            if (waitTick == 0) {
+            if (this.waitTick == 0) {
                 for (int i = getSize(); i > 1; i--) {
                     setSize(i, false);
                 }
@@ -92,7 +95,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
                     Vec3 closestPlayerPos;
                     if (serverLevel.getRandomPlayer() != null) {
                         closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
-                        this.teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
+                        teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
                     }
                 }
 
@@ -101,7 +104,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
                 for (int i = 1; i < (int) ((getHealth() / 600) * 7 + 4); i++) {
                     setSize(i, false);
                 }
-                waitTick = 40;
+                this.waitTick = 40;
             }
         }
 
@@ -164,6 +167,6 @@ public class KingSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public float[] getBloodColor() {
-        return color.mixture(new FloatRGB(0, 0, 0), 0.5f).toArray();
+        return BLOOD_COLOR;
     }
 }
