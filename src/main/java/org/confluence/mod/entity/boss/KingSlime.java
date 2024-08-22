@@ -45,7 +45,8 @@ public class KingSlime extends Slime implements DeathAnimOptions {
             .add(Attributes.ATTACK_DAMAGE, attackDamage)
                 .add(Attributes.ARMOR, 10.0D)
             .add(Attributes.MAX_HEALTH, maxHealth)
-            .add(Attributes.KNOCKBACK_RESISTANCE, 100);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 100)
+                .add(Attributes.FOLLOW_RANGE, 100D);
     }
 
     private void init() {
@@ -76,7 +77,11 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         }
         this.setSize((int) ((getHealth() / 600) * 7 + 4), false);
 
-        List<Player> playersInRange = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(40));
+        List<Player> playersInRange = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100));
+        List<Player> playersInRange2 = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(150));
+        if (playersInRange.isEmpty() && playersInRange2.isEmpty()) {
+            this.discard();
+        }
         if (playersInRange.isEmpty() || level().random.nextFloat() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.03D : 0.01D)) {
 
             if (waitTick == 0) {
