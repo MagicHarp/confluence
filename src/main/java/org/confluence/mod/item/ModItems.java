@@ -18,6 +18,8 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.curio.cosmetic.BaseCosmeticItem;
+import org.confluence.mod.item.curio.cosmetic.GoldCrown;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
@@ -117,6 +119,10 @@ public final class ModItems {
     public static final RegistryObject<Item> GOLDEN_KEY = ITEMS.register("golden_key", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SHADOW_KEY = ITEMS.register("shadow_key", () -> new Item(new Item.Properties().stacksTo(1).rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> DEMON_HEART = ITEMS.register("demon_heart", DemonHeart::new);
+
+    // 时装
+    public static final RegistryObject<Item> GOLD_CROWN = ITEMS.register("gold_crown", GoldCrown::new);
+    public static final RegistryObject<Item> PLATINUM_CROWN = ITEMS.register("platinum_crown", () -> new BaseCosmeticItem(ModRarity.WHITE));
 
 
     public static void register(IEventBus bus) {

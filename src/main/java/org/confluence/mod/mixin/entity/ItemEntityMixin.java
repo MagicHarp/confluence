@@ -80,6 +80,7 @@ public abstract class ItemEntityMixin implements IItemEntity {
 
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
     public void highRarityForbiddenBurn(CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue()) return;
         Item item = getItem().getItem();
         Rarity rarity = item.getRarity(getItem());
         if (rarity != ModRarity.WHITE &&

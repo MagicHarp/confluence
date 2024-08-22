@@ -253,6 +253,9 @@ public final class ModTabs {
                 for (QuestedFishes questedFishes : QuestedFishes.values()) output.accept(questedFishes.get());
                 for (Boxes boxes : Boxes.values()) output.accept(boxes.get());
                 for (Baits baits : Baits.values()) output.accept(baits.get());
+
+                output.accept(ModItems.GOLD_CROWN.get());
+                output.accept(ModItems.PLATINUM_CROWN.get());
             })
             .build());
     // 工具
