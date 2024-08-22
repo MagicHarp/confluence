@@ -28,7 +28,7 @@ import java.util.List;
 
 public class KingSlime extends Slime implements DeathAnimOptions {
     private final FloatRGB color;
-    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_20);
+    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
 
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
@@ -90,7 +90,7 @@ public class KingSlime extends Slime implements DeathAnimOptions {
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!pSource.is(DamageTypes.PLAYER_ATTACK) && !pSource.is(DamageTypes.IN_FIRE) && !pSource.is(DamageTypes.LAVA)) {  //防止窒息
+        if (pSource.is(DamageTypes.IN_WALL)) {
             return false;
         }
         if (level() instanceof ServerLevel serverLevel) {
