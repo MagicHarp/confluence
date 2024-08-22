@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:another_crimson_hardened_sand_block"
+          "name": "minecraft:dirt"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/another_crimson_hardened_sand_block"
+  "random_sequence": "confluence:blocks/tr_crimson_grass_block"
 }

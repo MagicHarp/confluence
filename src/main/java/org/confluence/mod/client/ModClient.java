@@ -27,6 +27,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
+import org.confluence.mod.client.model.curio.StepStoolModel;
 import org.confluence.mod.client.model.entity.*;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.BloodyFishingHookModel;
@@ -73,6 +74,12 @@ public final class ModClient {
     };
     public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
 
+    private static IntegerRGB hallowMixture(int m) {
+        if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
+        if (m <= 8) return IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (m - 4) * 0.25F);
+        return IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (m - 8) * 0.25F);
+    }
+
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
@@ -92,13 +99,13 @@ public final class ModClient {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.flowingFluid().get(), RenderType.translucent());
 
             ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
-                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
-                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
-                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
         });
     }
@@ -123,6 +130,7 @@ public final class ModClient {
         event.registerLayerDefinition(IceBladeSwordProjectileModel.LAYER_LOCATION, IceBladeSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ThrowingKnivesProjectileModel.LAYER_LOCATION, ThrowingKnivesProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ShurikenProjectileModel.LAYER_LOCATION, ShurikenProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(StepStoolModel.LAYER_LOCATION, StepStoolModel::createBodyLayer);
 
         event.registerLayerDefinition(BaseHookModel.LAYER_LOCATION, BaseHookModel::createBodyLayer);
         event.registerLayerDefinition(WebSlingerModel.LAYER_LOCATION, WebSlingerModel::createBodyLayer);
@@ -181,6 +189,7 @@ public final class ModClient {
         event.registerEntityRenderer(ICE_BLADE_SWORD_PROJECTILE.get(), IceBladeSwordProjectileRenderer::new);
         event.registerEntityRenderer(THROW_KNIVES_PROJECTILE.get(), ThrowingKnivesProjectileRenderer::new);
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
+        event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);
@@ -237,12 +246,6 @@ public final class ModClient {
     @SubscribeEvent
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
         event.register(HALLOW_WATER_RESOLVER);
-    }
-
-    private static IntegerRGB hallowMixture(int m) {
-        if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
-        if (m <= 8) return IntegerRGB.HALLOW_B.mixture(IntegerRGB.HALLOW_C, (m - 4) * 0.25F);
-        return IntegerRGB.HALLOW_C.mixture(IntegerRGB.HALLOW_A, (m - 8) * 0.25F);
     }
 
     @SubscribeEvent

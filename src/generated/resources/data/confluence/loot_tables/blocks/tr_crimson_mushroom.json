@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:another_crimson_sand"
+          "name": "confluence:another_crimson_mushroom"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/another_crimson_sand"
+  "random_sequence": "confluence:blocks/tr_crimson_mushroom"
 }

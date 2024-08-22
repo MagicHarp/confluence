@@ -8,7 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
@@ -25,6 +24,8 @@ import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.*;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -132,123 +133,129 @@ public final class PlayerUtils {
         AtomicBoolean shield = new AtomicBoolean();
         AtomicBoolean tabi = new AtomicBoolean();
         AtomicBoolean echo = new AtomicBoolean();
-        AtomicInteger stepStool = new AtomicInteger();
+        AtomicInteger stepStoolSlot = new AtomicInteger(-1);
+        AtomicInteger stepStoolMaxStep = new AtomicInteger();
 
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
-            IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
-            for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
-                ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
-                Item curio = itemStack.getItem();
-                if (curio == CurioItems.SHIELD_OF_CTHULHU.get()) {
-                    shield.set(true);
-                    continue;
-                } else if (curio == CurioItems.SPECTRE_GOGGLES.get()) {
-                    echo.set(itemStack.getTag() != null && itemStack.getTag().getBoolean(((SpectreGoggles) itemStack.getItem()).getEnableKey()));
-                    continue;
-                } else if (curio == CurioItems.STEP_STOOL.get()) {
-                    stepStool.set(itemStack.getOrCreateTag().getInt("extraStep") + 1);
-                    continue;
-                }
+            for (ICurioStacksHandler curioStacksHandler : curiosItemHandler.getCurios().values()) {
+                IDynamicStackHandler stackHandler = curioStacksHandler.getStacks();
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack itemStack = stackHandler.getStackInSlot(i);
+                    if (itemStack.isEmpty()) continue;
+                    Item curio = itemStack.getItem();
+                    if (curio == CurioItems.SHIELD_OF_CTHULHU.get()) {
+                        shield.set(true);
+                        continue;
+                    } else if (curio == CurioItems.SPECTRE_GOGGLES.get()) {
+                        echo.set(itemStack.getTag() != null && itemStack.getTag().getBoolean(((SpectreGoggles) itemStack.getItem()).getEnableKey()));
+                        continue;
+                    } else if (curio instanceof StepStool) {
+                        stepStoolSlot.set(i);
+                        stepStoolMaxStep.set(itemStack.getOrCreateTag().getInt("maxStep"));
+                        continue;
+                    }
 
-                if (curio instanceof FartInAJar fart) {
-                    fartSpeed.setValue(fart.getJumpSpeed());
-                } else if (curio instanceof SandstormInABottle sandstorm) {
-                    sandstormSpeed.setValue(sandstorm.getJumpSpeed());
-                    sandstormTicks.set(sandstorm.getJumpTicks());
-                } else if (curio instanceof BlizzardInABottle blizzard) {
-                    blizzardSpeed.setValue(blizzard.getJumpSpeed());
-                    blizzardTicks.set(blizzard.getJumpTicks());
-                } else if (curio instanceof TsunamiInABottle tsunami) {
-                    tsunamiSpeed.setValue(tsunami.getJumpSpeed());
-                } else if (curio instanceof CloudInABottle cloud) {
-                    cloudSpeed.setValue(cloud.getJumpSpeed());
-                } else if (curio instanceof BundleOfBalloons) {
-                    sandstormSpeed.setValue(SandstormInABottle.SPEED);
-                    sandstormTicks.set(SandstormInABottle.TICKS);
-                    blizzardSpeed.setValue(BlizzardInABottle.SPEED);
-                    blizzardTicks.set(BlizzardInABottle.TICKS);
-                    cloudSpeed.setValue(CloudInABottle.SPEED);
-                }
-                if (curio instanceof IMayFly iMayFly) {
-                    maxFlyTicks.set(Math.max(iMayFly.getFlyTicks(), maxFlyTicks.get()));
-                    flySpeed.setValue(Math.max(iMayFly.getFlySpeed(), flySpeed.getValue()));
-                    if (iMayFly.couldGlide()) glide.set(true);
-                }
-                if (curio instanceof IAutoAttack) {
-                    autoAttack.set(true);
-                }
-                if (curio instanceof IScope) {
-                    scope.set(true);
-                }
-                if (substractor.get() < 2 && curio instanceof IRightClickSubtractor) {
-                    if (curio == CurioItems.ARCHITECT_GIZMO_PACK.get()) {
-                        substractor.set(2);
-                    } else {
-                        substractor.addAndGet(1);
+                    if (curio instanceof FartInAJar fart) {
+                        fartSpeed.setValue(fart.getJumpSpeed());
+                    } else if (curio instanceof SandstormInABottle sandstorm) {
+                        sandstormSpeed.setValue(sandstorm.getJumpSpeed());
+                        sandstormTicks.set(sandstorm.getJumpTicks());
+                    } else if (curio instanceof BlizzardInABottle blizzard) {
+                        blizzardSpeed.setValue(blizzard.getJumpSpeed());
+                        blizzardTicks.set(blizzard.getJumpTicks());
+                    } else if (curio instanceof TsunamiInABottle tsunami) {
+                        tsunamiSpeed.setValue(tsunami.getJumpSpeed());
+                    } else if (curio instanceof CloudInABottle cloud) {
+                        cloudSpeed.setValue(cloud.getJumpSpeed());
+                    } else if (curio instanceof BundleOfBalloons) {
+                        sandstormSpeed.setValue(SandstormInABottle.SPEED);
+                        sandstormTicks.set(SandstormInABottle.TICKS);
+                        blizzardSpeed.setValue(BlizzardInABottle.SPEED);
+                        blizzardTicks.set(BlizzardInABottle.TICKS);
+                        cloudSpeed.setValue(CloudInABottle.SPEED);
                     }
-                }
-                if (climb.get() < 2 && curio instanceof IWallClimb wallClimb) {
-                    if (wallClimb.fullyWallClimb()) {
-                        climb.set(2);
-                        return;
-                    } else {
-                        climb.addAndGet(1);
+
+                    if (curio instanceof IMayFly iMayFly) {
+                        maxFlyTicks.set(Math.max(iMayFly.getFlyTicks(), maxFlyTicks.get()));
+                        flySpeed.setValue(Math.max(iMayFly.getFlySpeed(), flySpeed.getValue()));
+                        if (iMayFly.couldGlide()) glide.set(true);
                     }
-                }
-                if (curio instanceof ITabi) {
-                    tabi.set(true);
+                    if (curio instanceof IAutoAttack) {
+                        autoAttack.set(true);
+                    }
+                    if (curio instanceof IScope) {
+                        scope.set(true);
+                    }
+                    if (substractor.get() < 2 && curio instanceof IRightClickSubtractor) {
+                        if (curio == CurioItems.ARCHITECT_GIZMO_PACK.get()) {
+                            substractor.set(2);
+                        } else {
+                            substractor.addAndGet(1);
+                        }
+                    }
+                    if (climb.get() < 2 && curio instanceof IWallClimb wallClimb) {
+                        if (wallClimb.fullyWallClimb()) {
+                            climb.set(2);
+                            return;
+                        } else {
+                            climb.addAndGet(1);
+                        }
+                    }
+                    if (curio instanceof ITabi) {
+                        tabi.set(true);
+                    }
                 }
             }
+
+
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerJumpPacketS2C(
+                    fartSpeed.getValue(),
+                    sandstormSpeed.getValue(),
+                    sandstormTicks.get(),
+                    blizzardSpeed.getValue(),
+                    blizzardTicks.get(),
+                    tsunamiSpeed.getValue(),
+                    cloudSpeed.getValue()
+                )
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.getValue(), glide.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new AutoAttackPacketS2C(autoAttack.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new ScopeEnablePacketS2C(scope.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new RightClickSubtractorPacketS2C(substractor.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerClimbPacketS2C(climb.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new ShieldOfCthulhuPacketS2C(shield.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new TabiPacketS2C(tabi.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new EchoBlockVisibilityPacketS2C(echo.get())
+            );
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new StepStoolStepPacketS2C(stepStoolSlot.get(), stepStoolMaxStep.get())
+            );
         });
-
-
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(
-                fartSpeed.getValue(),
-                sandstormSpeed.getValue(),
-                sandstormTicks.get(),
-                blizzardSpeed.getValue(),
-                blizzardTicks.get(),
-                tsunamiSpeed.getValue(),
-                cloudSpeed.getValue()
-            )
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.getValue(), glide.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new AutoAttackPacketS2C(autoAttack.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new ScopeEnablePacketS2C(scope.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new RightClickSubtractorPacketS2C(substractor.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerClimbPacketS2C(climb.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new ShieldOfCthulhuPacketS2C(shield.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new TabiPacketS2C(tabi.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new EchoBlockVisibilityPacketS2C(echo.get())
-        );
-        NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new StepStoolPacketS2C(stepStool.get())
-        );
     }
 }

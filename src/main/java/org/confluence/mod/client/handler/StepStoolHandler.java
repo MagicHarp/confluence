@@ -8,8 +8,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.network.c2s.StepStoolNBTPacketC2S;
-import org.confluence.mod.network.s2c.StepStoolPacketS2C;
+import org.confluence.mod.network.c2s.StepStoolStepPacketC2S;
+import org.confluence.mod.network.s2c.StepStoolStepPacketS2C;
 
 import java.util.function.Supplier;
 
@@ -21,14 +21,27 @@ public final class StepStoolHandler {
     private static boolean shiftKeyDown = false;
     private static int step = 0;
     private static int maxStep = 0;
+    private static int slot = StepStoolStepPacketS2C.NO_CURIO;
 
     public static void handle(LocalPlayer localPlayer) {
-        if (maxStep == 0 || (step == 0 && !localPlayer.onGround())) return;
-
-        if (step > 0 && localPlayer.input.jumping) {
-            localPlayer.jumpFromGround();
-            setStep(0);
+        if (localPlayer == null) {
+            step = 0;
+            maxStep = 0;
+            slot = StepStoolStepPacketS2C.NO_CURIO;
             return;
+        } else if (slot == StepStoolStepPacketS2C.NO_CURIO || (step == 0 && !localPlayer.onGround())) {
+            return;
+        }
+
+        if (step > 0) {
+            if (localPlayer.input.jumping) {
+                localPlayer.jumpFromGround();
+                setStep(0);
+                return;
+            } else if (localPlayer.getVehicle() != null) {
+                setStep(0);
+                return;
+            }
         }
 
         if (KeyBindings.STEP_STOOL.get().isDown()) {
@@ -52,13 +65,13 @@ public final class StepStoolHandler {
         }
 
         if (step > 0) {
-            localPlayer.setDeltaMovement(Vec3.ZERO);
+            localPlayer.setDeltaMovement(new Vec3(0.0, localPlayer.getDeltaMovement().y, 0.0));
         }
     }
 
     public static void setStep(int step) {
         StepStoolHandler.step = step;
-        NetworkHandler.CHANNEL.sendToServer(new StepStoolNBTPacketC2S(step));
+        NetworkHandler.CHANNEL.sendToServer(new StepStoolStepPacketC2S(slot, step));
     }
 
     public static int getStep() {
@@ -69,9 +82,16 @@ public final class StepStoolHandler {
         return step > 0;
     }
 
-    public static void handlePacket(StepStoolPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handlePacket(StepStoolStepPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> maxStep = packet.maxStep());
+        context.enqueueWork(() -> {
+            if (packet.slot() == StepStoolStepPacketS2C.RESET_STEP) {
+                step = 0;
+            } else {
+                maxStep = packet.maxStep();
+                slot = maxStep == 0 ? StepStoolStepPacketS2C.NO_CURIO : packet.slot();
+            }
+        });
         context.setPacketHandled(true);
     }
 }

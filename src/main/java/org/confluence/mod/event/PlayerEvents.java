@@ -144,7 +144,7 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void rightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getItemStack().is(ModTags.Items.MINECART)) return;
+        if (event.getEntity().isCrouching() || event.getItemStack().is(ModTags.Items.MINECART)) return;
         Level level = event.getLevel();
         BlockPos blockPos = event.getPos();
         BlockState blockState = level.getBlockState(blockPos);

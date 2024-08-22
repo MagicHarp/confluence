@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:another_crimson_cobblestone"
+          "name": "confluence:tr_crimson_cobblestone"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/another_crimson_cobblestone"
+  "random_sequence": "confluence:blocks/tr_crimson_cobblestone"
 }

@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "confluence:another_amethyst_branches"
+              "name": "confluence:tr_amethyst_branches"
             },
             {
               "type": "minecraft:item",
@@ -55,5 +55,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confluence:blocks/another_amethyst_branches"
+  "random_sequence": "confluence:blocks/tr_amethyst_branches"
 }
