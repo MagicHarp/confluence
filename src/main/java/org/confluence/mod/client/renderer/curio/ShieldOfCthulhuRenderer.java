@@ -21,7 +21,7 @@ public class ShieldOfCthulhuRenderer implements ICurioRenderer {
     private final ShieldOfCthulhuModel model;
 
     public ShieldOfCthulhuRenderer() {
-        this.model = new ShieldOfCthulhuModel((Minecraft.getInstance().getEntityModels().bakeLayer(ShieldOfCthulhuModel.LAYER_LOCATION)));
+        this.model = new ShieldOfCthulhuModel(Minecraft.getInstance().getEntityModels().bakeLayer(ShieldOfCthulhuModel.LAYER_LOCATION));
     }
 
     @Override
