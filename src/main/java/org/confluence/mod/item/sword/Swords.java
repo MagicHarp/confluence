@@ -39,7 +39,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_LIGHT_SABER("purple_light_saber", LightSaber.Purple::new),
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
-    ICE_BLADE("ice_blade", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),  //TODO 冰雪剑
+    ICE_BLADE("ice_blade", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),
     STARFURY("starfury", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
     ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
 

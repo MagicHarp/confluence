@@ -120,6 +120,7 @@ public final class ModClient {
         event.registerLayerDefinition(MoneyHoleModel.LAYER_LOCATION, MoneyHoleModel::createBodyLayer);
         event.registerLayerDefinition(AmmoModel.LAYER_LOCATION, AmmoModel::createBodyLayer);
         event.registerLayerDefinition(EnchantedSwordProjectileModel.LAYER_LOCATION, EnchantedSwordProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(IceBladeSwordProjectileModel.LAYER_LOCATION, IceBladeSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ThrowingKnivesProjectileModel.LAYER_LOCATION, ThrowingKnivesProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ShurikenProjectileModel.LAYER_LOCATION, ShurikenProjectileModel::createBodyLayer);
 
@@ -177,6 +178,7 @@ public final class ModClient {
         event.registerEntityRenderer(BOULDER.get(), BoulderRenderer::new);
         event.registerEntityRenderer(MONEY_HOLE.get(), MoneyHoleRenderer::new);
         event.registerEntityRenderer(ENCHANTED_SWORD_PROJECTILE.get(), EnchantedSwordProjectileRenderer::new);
+        event.registerEntityRenderer(ICE_BLADE_SWORD_PROJECTILE.get(), IceBladeSwordProjectileRenderer::new);
         event.registerEntityRenderer(THROW_KNIVES_PROJECTILE.get(), ThrowingKnivesProjectileRenderer::new);
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
 

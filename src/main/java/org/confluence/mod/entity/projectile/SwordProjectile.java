@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -21,7 +22,6 @@ import java.util.List;
 
 public abstract class SwordProjectile extends Projectile { // todo 修改
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(SwordProjectile.class, EntityDataSerializers.INT);
-    private static final float DAMAGE = 9.0F;
     private static final int TIME_EXISTENCE = 40;
 
     public SwordProjectile(EntityType<? extends SwordProjectile> entityType, Level pLevel) {
@@ -32,6 +32,8 @@ public abstract class SwordProjectile extends Projectile { // todo 修改
     protected void defineSynchedData() {
         entityData.define(DATA_VARIANT_ID, 0);
     }
+
+    protected abstract int getDamage();
 
     @Override
     public void tick() {
@@ -75,10 +77,10 @@ public abstract class SwordProjectile extends Projectile { // todo 修改
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
-        if (!this.level().isClientSide) {
+        if (this.level() instanceof ServerLevel) {   //todo 为client side导致剑气无伤害
             super.onHitEntity(entityHitResult);
             Entity entity = entityHitResult.getEntity();
-            if (entity.hurt(damageSources().thrown(this, this.getOwner()), DAMAGE)) {
+            if (entity.hurt(damageSources().thrown(this, this.getOwner()), getDamage())) {
                 LivingEntity living = (LivingEntity) entity;
                 living.knockback(0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
                 this.remove(RemovalReason.KILLED);

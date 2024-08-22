@@ -12,4 +12,9 @@ public class EnchantedSwordProjectile extends SwordProjectile {
     public EnchantedSwordProjectile(Level level) {
         this(ModEntities.ENCHANTED_SWORD_PROJECTILE.get(), level);
     }
+
+    @Override
+    protected int getDamage() {
+        return 9;
+    }
 }
