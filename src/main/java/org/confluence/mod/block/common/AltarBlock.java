@@ -2,22 +2,26 @@ package org.confluence.mod.block.common;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,10 +31,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemStackHandler;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.block.AltarBlockModel;
 import org.confluence.mod.command.ConfluenceData;
@@ -38,6 +38,10 @@ import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.hammer.Hammers;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.recipe.AltarRecipe;
+import org.confluence.mod.recipe.ItemStackContainer;
+import org.confluence.mod.recipe.ModRecipes;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -51,12 +55,13 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 @SuppressWarnings("deprecation")
 /*todo: 祭坛配方与合成*/
-public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomItemModel, GeoBlockEntity {
+public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomItemModel {
     public static final VoxelShape SHAPE = Shapes.box(-0.125, 0.0, -0.125, 1.125, 0.8, 1.125);
     private final Variant variant;
 
@@ -99,10 +104,18 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
     }
 
     @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (pLevel.getBlockEntity(pPos) instanceof Entity entity) {
+            Containers.dropContents(pLevel, pPos, entity.itemHandler);
+            pLevel.removeBlockEntity(pPos);
+        }
+    }
+
+    @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pPlayer instanceof ServerPlayer serverPlayer && pLevel.getBlockEntity(pPos) instanceof Entity entity) { // 放/取物品
+        if (!pLevel.isClientSide && pLevel.getBlockEntity(pPos) instanceof Entity entity) { // 放/取物品
             if (pPlayer.isCrouching()) { // 取物品
-                pPlayer.setItemInHand(pHand, entity.takeItem(entity.lastActivatedSlot));
+                pPlayer.addItem(entity.takeItem(-1));
             } else { // 存物品
                 pPlayer.setItemInHand(pHand, entity.addItem(pPlayer.getItemInHand(pHand)));
             }
@@ -110,9 +123,27 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
         return InteractionResult.sidedSuccess(pLevel.isClientSide);
     }
 
-    public static void onLeftClick(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand) { // 合成
-        if (pState.getBlock() instanceof AltarBlock altarBlock) {
-
+    public static void onLeftClick(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) { // 合成
+        if (pLevel instanceof ServerLevel serverLevel && pState.getBlock() instanceof AltarBlock block && pLevel.getBlockEntity(pPos) instanceof Entity entity) {
+            RecipeManager recipeManager = serverLevel.getServer().getRecipeManager();
+            if (pPlayer.isCrouching()) { // 全部合成
+                List<AltarRecipe> recipes;
+                boolean crafted = false;
+                while (!(recipes = recipeManager.getRecipesFor(ModRecipes.ALTAR_TYPE.get(), entity.itemHandler, pLevel)).isEmpty()) {
+                    crafted = true;
+                    AltarRecipe recipe = recipes.get(0); // 先只取第一个合成表
+                    ItemStack result = recipe.assemble(entity.itemHandler, pLevel);
+                    ModUtils.createItemEntity(result, pPos.getX() + 0.5, pPos.getY() + 0.75, pPos.getZ() + 0.5, pLevel, 0);
+                }
+                if (crafted) entity.playAnimation(serverLevel, pPos);
+            } else { // 合成一个
+                List<AltarRecipe> recipes = recipeManager.getRecipesFor(ModRecipes.ALTAR_TYPE.get(), entity.itemHandler, pLevel); // todo 多态合成
+                if (recipes.isEmpty()) return;
+                AltarRecipe recipe = recipes.get(0); // 先只取第一个合成表
+                ItemStack result = recipe.assemble(entity.itemHandler, pLevel);
+                ModUtils.createItemEntity(result, pPos.getX() + 0.5, pPos.getY() + 0.75, pPos.getZ() + 0.5, pLevel, 0);
+                entity.playAnimation(serverLevel, pPos);
+            }
         }
     }
 
@@ -122,29 +153,17 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
         return new Entity(pPos, pState).setVariant(variant);
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", state ->
-            state.setAndContinue(RawAnimation.begin().thenLoop("default")))
-            .triggerableAnim("crafting", RawAnimation.begin().thenPlay("crafting")));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return GeckoLibUtil.createInstanceCache(this);
-    }
-
     public static class Entity extends BlockEntity implements GeoBlockEntity {
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
         private Variant variant;
         private transient int lastActivatedSlot;
 
-        private final ItemStackHandler itemHandler = new ItemStackHandler(6); //5 Inputs and 1 Output.
-        private LazyOptional<ItemStackHandler> lazyItemHandler = LazyOptional.empty();
+        private final ItemStackContainer itemHandler; //5 Inputs and 1 Output.
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
             super(ModBlocks.ALTAR_BLOCK_ENTITY.get(), pPos, pBlockState);
             this.lastActivatedSlot = -1;
+            this.itemHandler = new ItemStackContainer(this, 6);
             SingletonGeoAnimatable.registerSyncedAnimatable(this);
         }
 
@@ -157,12 +176,15 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
                 }
                 if (ItemStack.isSameItemSameTags(stack, toAdd)) {
                     this.lastActivatedSlot = i;
-                    return itemHandler.insertItem(i, toAdd, false);
+                    ItemStack result = itemHandler.insertItem(i, toAdd, false);
+                    setChanged();
+                    return result;
                 }
             }
             if (firstEmptySlot != -1) {
                 itemHandler.setStackInSlot(firstEmptySlot, toAdd);
                 this.lastActivatedSlot = firstEmptySlot;
+                setChanged();
                 return ItemStack.EMPTY;
             }
             this.lastActivatedSlot = -1;
@@ -173,61 +195,18 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
             if (slot == -1) {
                 for (int i = 0; i < 5; i++) {
                     if (!itemHandler.getStackInSlot(i).isEmpty()) {
-                        return itemHandler.extractItem(i, 64, false);
+                        ItemStack stack = itemHandler.extractItem(i, 64, false);
+                        setChanged();
+                        return stack;
                     }
                 }
                 return ItemStack.EMPTY;
             } else {
                 ItemStack stack = itemHandler.getStackInSlot(slot).copy();
                 itemHandler.setStackInSlot(slot, ItemStack.EMPTY);
+                setChanged();
                 return stack;
             }
-
-//            SimpleContainer inventory = new SimpleContainer(1);
-//            for (int i = 0; i < 5; i++) {
-//                if (!itemHandler.getStackInSlot(i).getItem().equals(Items.AIR)) {
-//                    inventory.setItem(0, itemHandler.getStackInSlot(i));
-//                    if (level != null) {
-//                        Containers.dropContents(level, worldPosition.below(-1), inventory);
-//                        triggerAnim("controller", "crafting");
-//                        if (getBlockState().is(ModBlocks.DEMON_ALTAR.get())) {
-//                            level.sendParticles(ParticleTypes.SOUL,
-//                                worldPosition.getX() + 0.5F,
-//                                worldPosition.getY() + 0.75F,
-//                                worldPosition.getZ() + 0.5F,
-//                                500, 0.0625F, 0.0625F, 0.0625F, 0.15F);
-//                        } else if (getBlockState().is(ModBlocks.CRIMSON_ALTAR.get())) {
-//                            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.REDSTONE_BLOCK.defaultBlockState()),
-//                                worldPosition.getX() + 0.5F,
-//                                worldPosition.getY() + 0.75F,
-//                                worldPosition.getZ() + 0.5F,
-//                                500, 0F, 0.0625F, 0F, 0.25F);
-//                        }
-//                    }
-//                    itemHandler.setStackInSlot(i, new ItemStack(Items.AIR));
-//                    return;
-//                }
-//            }
-        }
-
-        @Override
-        public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-            if (cap == ForgeCapabilities.ITEM_HANDLER) {
-                return lazyItemHandler.cast();
-            }
-            return super.getCapability(cap);
-        }
-
-        @Override
-        public void onLoad() {
-            super.onLoad();
-            lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        }
-
-        @Override
-        public void invalidateCaps() {
-            super.invalidateCaps();
-            lazyItemHandler.invalidate();
         }
 
         Entity setVariant(Variant variant) {
@@ -263,6 +242,7 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
         public @NotNull CompoundTag getUpdateTag() {
             CompoundTag nbt = new CompoundTag();
             nbt.putInt("variant", variant.id);
+            nbt.put("inventory", itemHandler.serializeNBT());
             return nbt;
         }
 
@@ -284,6 +264,26 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
             return CACHE;
+        }
+
+        private void playAnimation(ServerLevel level, BlockPos pos) {
+            triggerAnim("controller", "crafting");
+            switch (variant) {
+                case DEMON -> {
+                    level.sendParticles(ParticleTypes.SOUL,
+                        pos.getX() + 0.5F,
+                        pos.getY() + 0.75F,
+                        pos.getZ() + 0.5F,
+                        500, 0.0625F, 0.0625F, 0.0625F, 0.15F);
+                }
+                case CRIMSON -> {
+                    level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.REDSTONE_BLOCK.defaultBlockState()),
+                        pos.getX() + 0.5F,
+                        pos.getY() + 0.75F,
+                        pos.getZ() + 0.5F,
+                        500, 0F, 0.0625F, 0F, 0.25F);
+                }
+            }
         }
     }
 

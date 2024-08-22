@@ -175,6 +175,6 @@ public final class PlayerEvents {
     public static void leftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
-        AltarBlock.onLeftClick(level.getBlockState(pos), level, pos, event.getEntity(), event.getHand());
+        AltarBlock.onLeftClick(level.getBlockState(pos), level, pos, event.getEntity());
     }
 }
