@@ -172,6 +172,8 @@ public final class ModClient {
         event.registerEntityRenderer(YELLOW_SLIME.get(), c -> new CustomSlimeRenderer(c, "yellow"));
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
+        event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
+
         event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
 
         event.registerEntityRenderer(BASE_BULLET.get(), BulletRenderer::new);

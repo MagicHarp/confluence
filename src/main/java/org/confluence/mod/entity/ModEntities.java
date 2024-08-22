@@ -17,6 +17,7 @@ import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
+import org.confluence.mod.entity.slime.KingSlime;
 import org.confluence.mod.entity.slime.NonDropSlime;
 
 @SuppressWarnings("unused")
@@ -82,6 +83,8 @@ public final class ModEntities {
 
     public static final RegistryObject<EntityType<BaseBombEntity>> BOMB_ENTITY = ENTITIES.register("bomb_entity", () -> EntityType.Builder.<BaseBombEntity>of(BaseBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:base_bomb_entity"));
     public static final RegistryObject<EntityType<StepStoolEntity>> STEP_STOOL = ENTITIES.register("step_stool", () -> EntityType.Builder.<StepStoolEntity>of(StepStoolEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).build("confluence:step_stool"));
+
+    public static final RegistryObject<EntityType<KingSlime>> KING_SLIME = ENTITIES.register("king_slime", () -> EntityType.Builder.<KingSlime>of((entityType, level) -> new KingSlime(entityType, level, 7), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:king_slime"));
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
         return ENTITIES.register(prefix + "_slime", () -> EntityType.Builder.<BaseSlime>of((entityType, level) -> new BaseSlime(entityType, level, color, size), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:" + prefix + "_slime"));
