@@ -15,7 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
-import org.confluence.mod.client.particle.opt.CurrentDustOptions;
+import org.confluence.mod.client.particle.options.CurrentDustOptions;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModSoundEvents;

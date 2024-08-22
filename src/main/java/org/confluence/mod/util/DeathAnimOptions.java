@@ -4,6 +4,7 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.function.Consumer;
 
+// TODO: 不够灵活，待重构
 public interface DeathAnimOptions {
     default float[] getRotations(){
         return new float[]{30, 270, 30};

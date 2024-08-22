@@ -3,15 +3,8 @@ package org.confluence.mod.mixin.entity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -38,7 +31,6 @@ import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
@@ -52,30 +44,16 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.cache.object.GeoBone;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.util.RenderUtils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements ILivingEntity, SelfGetter<LivingEntity> {
-    // 位移，旋转
-    @Unique private final Map<GeoBone, float[]> confluence$boneMotions = new HashMap<>();
-    @Unique private final Map<ModelPart, float[]> confluence$partMotions = new HashMap<>();
-    @Unique private final Map<ModelPart, PartPose> confluence$deathPose = new HashMap<>();
-    @Unique private Vec3 confluence$lastMotion = Vec3.ZERO;
-    @Unique private int confluence$landTicks = 0;
-    @Unique private Vec3 confluence$landMotion = new Vec3(0, Double.NaN, 0);
-    @Unique private boolean confluence$bled = false;  // bleed的过去式
-
     private LivingEntityMixin(EntityType<?> pEntityType, Level pLevel){
         super(pEntityType, pLevel);
     }
+
+    @Unique private boolean confluence$bled = false;  // bleed的过去式
 
     @Shadow
     public abstract EntityDimensions getDimensions(Pose pPose);
@@ -261,39 +239,10 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(self());
         if(options!=null){
             self().addDeltaMovement(new Vec3(0, -options.getExtraGravity(), 0));
-        }else {
-            return;
-        }
-        if(!self().level().isClientSide()){
-            return;
-        }
-        if(self().deathTime > 0){
-            Vec3 motion = getDeltaMovement();
-            Vec3 clip = ((EntityAccessor) self()).callCollide(motion);
-            if(clip.y > -0.1 && clip.y <= 0 && Double.isNaN(confluence$landMotion.y) && onGround()){
-                confluence$landMotion = confluence$lastMotion.y < -0.1 ? confluence$lastMotion : motion.y < -0.1 ? motion : motion.with(Direction.Axis.Y, -0.1);
-                if(confluence$landMotion.y <= -0.25){
-                    confluence$landMotion.with(Direction.Axis.Y, confluence$landMotion.y * 0.6);
-                }
-                confluence$landTicks = 0;
-            }
-            if(!Double.isNaN(confluence$landMotion.y)){
-                confluence$landTicks++;
-            }else{
-                confluence$lastMotion = motion;
-            }
-        }
-        if(self().deathTime != 0){
-            return;
-        }
-        if(self() instanceof GeoAnimatable){  // TODO: 原版生物能穿geo甲，geo生物能穿原版甲
-            confluence$initGeoDeathAnim(options);
-        }else{
-            confluence$initVanillaDeathAnim(options);
         }
     }
 
-    @Inject(method = "hurt",at = @At("RETURN"))
+    @Inject(method = "hurt", at = @At("RETURN"))
     private void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir){
         if(!confluence$bled && isDeadOrDying()){ //TODO: 开关
             DeathAnimUtils.addBloodParticles(self());
@@ -301,57 +250,6 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @Unique
-    private void confluence$initGeoDeathAnim(DeathAnimOptions options){
-        GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(self());
-        RandomSource random = self().level().getRandom();
-        if(model != null){
-            BakedGeoModel bakedModel = model.getBakedModel(model.getModelResource((GeoAnimatable) self()));
-            for(GeoBone bone : bakedModel.topLevelBones()){
-                confluence$boneMotions.put(bone, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), bone.getPosY(),options));
-            }
-        }
-    }
-
-    @Unique
-    private void confluence$initVanillaDeathAnim(DeathAnimOptions options){
-        EntityRenderer<?> r = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(self());
-        if(r instanceof LivingEntityRenderer<?, ?> renderer){
-            RandomSource random = self().level().getRandom();
-            for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
-                confluence$partMotions.putIfAbsent(modelPart, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), modelPart,options));
-                confluence$deathPose.putIfAbsent(modelPart, modelPart.storePose()); // 记录死亡瞬间的姿势
-            }
-        }
-    }
-
-    @Override
-    public int confluence$landTicks(){
-        return confluence$landTicks;
-    }
-
-    @Override
-    public Vec3 confluence$landMotion(){
-        return confluence$landMotion;
-    }
-
-    @Override
-    public float[] confluence$getMotionsForBone(GeoBone bone){
-        float[] f = confluence$boneMotions.get(bone);
-        return f != null ? f : new float[6];
-    }
-
-    @Override
-    public float[] confluence$getMotionsForPart(ModelPart part){
-        float[] f = confluence$partMotions.get(part);
-        return f != null ? f : new float[6];
-    }
-
-    @Override
-    public PartPose confluence$getPoseForPart(ModelPart part){
-        return confluence$deathPose.get(part);
-    }
 
     // 死了就别乱转了
     @Override

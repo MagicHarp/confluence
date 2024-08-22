@@ -7,7 +7,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.confluence.mod.client.particle.opt.CurrentDustOptions;
+import org.confluence.mod.client.particle.options.CurrentDustOptions;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 

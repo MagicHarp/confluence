@@ -6,7 +6,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.particle.opt.CurrentDustOptions;
+import org.confluence.mod.client.particle.options.BloodParticleOptions;
+import org.confluence.mod.client.particle.options.CurrentDustOptions;
+import org.confluence.mod.client.particle.options.LightsBaneParticleOptions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -25,8 +27,8 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> AMETHYST_BULLET = PARTICLES.register("amethyst_bullet", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> FLAMEFLOWER_BLOOM = PARTICLES.register("flameflower_bloom", () -> new SimpleParticleType(false));
     public static final RegistryObject<ParticleType<CurrentDustOptions>> CURRENT_DUST = register("current_dust", false, CurrentDustOptions.DESERIALIZER, (p_123819_) -> CurrentDustOptions.CODEC);
-    public static final RegistryObject<ParticleType<BloodParticle.BloodParticleOptions>> BLOOD = register("blood", false, BloodParticle.DESERIALIZER, type-> BloodParticle.CODEC);
-    public static final RegistryObject<ParticleType<LightsBaneParticle.LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", false, LightsBaneParticle.DESERIALIZER, type-> LightsBaneParticle.CODEC);
+    public static final RegistryObject<ParticleType<BloodParticleOptions>> BLOOD = register("blood", false, BloodParticleOptions.DESERIALIZER, type-> BloodParticleOptions.CODEC);
+    public static final RegistryObject<ParticleType<LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", true, LightsBaneParticleOptions.DESERIALIZER, type-> LightsBaneParticleOptions.CODEC);
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_DUST = PARTICLES.register("lights_bane_dust", () -> new SimpleParticleType(true));
 
 

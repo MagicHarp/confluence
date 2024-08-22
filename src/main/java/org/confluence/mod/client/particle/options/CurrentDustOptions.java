@@ -1,4 +1,4 @@
-package org.confluence.mod.client.particle.opt;
+package org.confluence.mod.client.particle.options;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

@@ -3,11 +3,14 @@ package org.confluence.mod.client;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +35,9 @@ import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
+import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
+import org.confluence.mod.mixinauxiliary.IModelPart;
+import org.confluence.mod.util.DeathAnimUtils;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
@@ -212,4 +218,29 @@ public final class ForgeClient {
             event.setCanceled(true);
         }
     }
+
+    @SubscribeEvent
+    public static void beforeRenderLiving(RenderLivingEvent.Pre<?, ?> event){
+        LivingEntity entity = event.getEntity();
+        LivingEntityRenderer<?, ?> renderer = event.getRenderer();
+        float partialTick = event.getPartialTick();
+        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
+        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+            ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(entity);
+            ((IModelPart) (Object) modelPart).confluence$setRenderingPartialTick(partialTick);
+        }
+        ((ILivingEntityRenderer) renderer).confluence$setRendering(entity);
+    }
+
+    @SubscribeEvent
+    public static void afterRenderLiving(RenderLivingEvent.Post<?, ?> event){
+        LivingEntity entity = event.getEntity();
+        LivingEntityRenderer<?, ?> renderer = event.getRenderer();
+        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
+        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+            ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(null);
+        }
+        ((ILivingEntityRenderer) renderer).confluence$setRendering(null);
+    }
+
 }
