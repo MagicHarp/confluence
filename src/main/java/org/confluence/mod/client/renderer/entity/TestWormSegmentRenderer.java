@@ -5,24 +5,22 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
 import org.confluence.mod.client.model.entity.TestWormSegmentModel;
-import org.confluence.mod.client.model.entity.WormOverallModel;
-import org.confluence.mod.entity.worm.AbstractWormEntity;
-import org.confluence.mod.entity.worm.test.TestWormEntity;
+import org.confluence.mod.entity.worm.test.TestWormPart;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class TestWormRenderer extends GeoEntityRenderer<AbstractWormEntity> {
-    public TestWormRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new WormOverallModel());
+public class TestWormSegmentRenderer extends GeoEntityRenderer<TestWormPart> {
+    public TestWormSegmentRenderer(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new TestWormSegmentModel());
     }
 
     @Override
-    protected void applyRotations(AbstractWormEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick){
+    protected void applyRotations(TestWormPart animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick){
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
         poseStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(partialTick,animatable.xRotO,animatable.getXRot())));
     }
 
     @Override
-    protected float getDeathMaxRotation(AbstractWormEntity animatable){
+    protected float getDeathMaxRotation(TestWormPart animatable){
         return 0;
     }
 }

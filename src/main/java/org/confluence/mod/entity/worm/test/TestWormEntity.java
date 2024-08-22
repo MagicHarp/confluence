@@ -13,6 +13,13 @@ import org.confluence.mod.entity.worm.AbstractWormEntity;
 import org.confluence.mod.entity.worm.BaseWormPart;
 import org.confluence.mod.entity.worm.WormMovementUtils;
 import org.confluence.mod.util.ModUtils;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.ArrayList;
 
 public class TestWormEntity extends AbstractWormEntity {
     public static final int WORM_LENGTH = 40;
@@ -23,13 +30,13 @@ public class TestWormEntity extends AbstractWormEntity {
                     .setStraighteningMultiplier(-0.1)
                     .setVelocityOrTeleport(true);
 
-    @Override
-    protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
-        return new TestWormPart(this, index, WORM_HEALTH);
-    }
     public TestWormEntity(EntityType<? extends AbstractWormEntity> entityType, Level level) {
         super(entityType, level, WORM_LENGTH, WORM_HEALTH);
         ModUtils.testMessage(level(), "constructor");
+    }
+    @Override
+    protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
+        return new TestWormPart(this, index, WORM_HEALTH);
     }
     @Override
     protected WormMovementUtils.WormSegmentMovementOptions getWormFollowOption() {
@@ -58,7 +65,7 @@ public class TestWormEntity extends AbstractWormEntity {
 
     @Override
     public Iterable<ItemStack> getArmorSlots() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -73,6 +80,21 @@ public class TestWormEntity extends AbstractWormEntity {
 
     @Override
     public HumanoidArm getMainArm() {
-        return null;
+        return HumanoidArm.RIGHT;
+    }
+
+
+
+    // GeoEntity
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, state -> state.setAndContinue(RawAnimation.begin().thenLoop("fly"))));
+    }
+
+    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return CACHE;
     }
 }

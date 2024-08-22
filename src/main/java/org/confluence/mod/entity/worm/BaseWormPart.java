@@ -114,4 +114,16 @@ public class BaseWormPart<E extends AbstractWormEntity> extends PartEntity<E> {
     protected void tickSegment() {
         updateSegmentType();
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+        // 蠕虫实体不存在/自己不再是这一体节后死掉
+        if (parentMob == null ||
+                parentMob.wormParts == null ||
+                parentMob.wormParts.size() <= segmentIndex ||
+                parentMob.wormParts.get(segmentIndex) != this) {
+            this.remove(RemovalReason.DISCARDED);
+        }
+    }
 }
