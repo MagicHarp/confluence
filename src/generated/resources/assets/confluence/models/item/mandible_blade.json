@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "confluence:item/handheld_mirror",
   "textures": {
     "layer0": "confluence:item/mandible_blade"
   }

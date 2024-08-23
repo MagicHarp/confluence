@@ -1,27 +1,52 @@
 {
-  "type": "minecraft:gift",
+  "type": "minecraft:chest",
   "pools": [
     {
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:blizzard_in_a_bottle",
+          "name": "confluence:throwing_knives",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 50,
+                "max": 64
+              }
+            }
+          ],
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:ice_blade",
+          "name": "confluence:umbrella",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:flurry_boots",
+          "name": "confluence:aglet",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:ice_skates",
+          "name": "confluence:climbing_claws",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:wond_of_sparking",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:radar",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:step_stool",
           "weight": 1
         }
       ],
@@ -32,12 +57,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:fledgling_wings",
-          "weight": 1
+          "name": "confluence:throwing_knives",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 50,
+                "max": 64
+              }
+            }
+          ],
+          "weight": 1667
         },
         {
           "type": "minecraft:empty",
-          "weight": 39
+          "weight": 8333
         }
       ],
       "rolls": 1
@@ -47,22 +82,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:golden_coin",
+          "name": "confluence:herb_bag",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 4,
-                "max": 10
+                "min": 1,
+                "max": 4
               }
             }
           ],
-          "weight": 25
+          "weight": 1667
         },
         {
           "type": "minecraft:empty",
-          "weight": 75
+          "weight": 8333
         }
       ],
       "rolls": 1
@@ -72,108 +107,43 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:raw_gold",
+          "name": "confluence:can_of_worms",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 6
+                "min": 1,
+                "max": 4
               }
             }
           ],
           "weight": 1667
         },
         {
-          "type": "minecraft:item",
-          "name": "minecraft:raw_copper",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 6
-              }
-            }
-          ],
-          "weight": 1667
-        },
+          "type": "minecraft:empty",
+          "weight": 8333
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:raw_iron",
+          "name": "minecraft:copper_ingot",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 6
+                "min": 2,
+                "max": 5
               }
             }
           ],
-          "weight": 1667
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:raw_lead",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 6
-              }
-            }
-          ],
-          "weight": 1667
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:raw_platinum",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 6
-              }
-            }
-          ],
-          "weight": 1667
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:raw_silver",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 6
-              }
-            }
-          ],
-          "weight": 1667
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:raw_tungsten",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 6
-              }
-            }
-          ],
-          "weight": 1667
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -183,12 +153,37 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 4
+                "min": 2,
+                "max": 5
               }
             }
           ],
-          "weight": 2083
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 2
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_ingot",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ],
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -198,106 +193,16 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 4
+                "min": 2,
+                "max": 5
               }
             }
           ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:silver_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:tungsten_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:platinum_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:gold_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:copper_ingot",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2083
+          "weight": 1
         },
         {
           "type": "minecraft:empty",
-          "weight": 15000
+          "weight": 2
         }
       ],
       "rolls": 1
@@ -307,22 +212,47 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:obsidian_skin_potion",
+          "name": "minecraft:arrow",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 2,
-                "max": 4
+                "min": 20,
+                "max": 35
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:gravitation_potion",
+          "name": "confluence:shuriken",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 20,
+                "max": 35
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 2
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:lesser_healing_potion",
           "functions": [
             {
               "function": "set_count",
@@ -333,22 +263,77 @@
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:shine_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:flipper_potion",
+          "name": "confluence:iron_skin_potion",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 2,
-                "max": 4
+                "min": 1,
+                "max": 2
               }
             }
           ],
-          "weight": 2500
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:night_owl_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:builder_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -358,61 +343,31 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 2,
-                "max": 4
+                "min": 1,
+                "max": 2
               }
             }
           ],
-          "weight": 2500
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:heart_reach_potion",
+          "name": "confluence:swiftness_potion",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 2,
-                "max": 4
+                "min": 1,
+                "max": 2
               }
             }
           ],
-          "weight": 2500
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:healing_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 7
-              }
-            }
-          ],
-          "weight": 2500
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:mana_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 3,
-                "max": 7
-              }
-            }
-          ],
-          "weight": 2500
+          "weight": 2
         },
         {
           "type": "minecraft:empty",
-          "weight": 8250
+          "weight": 6
         }
       ],
       "rolls": 1
@@ -422,41 +377,118 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:journeyman_bait",
+          "name": "minecraft:torch",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 1,
-                "max": 4
+                "min": 10,
+                "max": 20
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:master_bait",
+          "name": "minecraft:glass_bottle",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 1,
-                "max": 4
+                "min": 10,
+                "max": 20
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:empty",
-          "weight": 5000
+          "weight": 1
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:recall_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 3,
+                "max": 5
+              }
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:silver_coin",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 5,
+                "max": 8
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:oak_log",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 12,
+                "max": 20
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
         }
       ],
       "rolls": 1
     }
   ],
-  "random_sequence": "minecraft:gameplay/fishing/fish"
+  "random_sequence": "confluence:chests/surface_chests",
+  "values": [
+  ]
 }
