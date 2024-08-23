@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-// TODO: 这些是get fixed boi和for thr worthy的特性
+// TODO: 这些是get fixed boi和for the worthy的特性
 public class CrispyHoneyBlock extends Block implements CustomModel, CustomItemModel {
     public CrispyHoneyBlock() {
         super(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(1.2F));

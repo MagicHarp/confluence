@@ -27,6 +27,7 @@ public class StepStoolEntity extends Entity implements TraceableEntity {
 
     public StepStoolEntity(EntityType<StepStoolEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.blocksBuilding = true;
     }
 
     public StepStoolEntity(Player player) {

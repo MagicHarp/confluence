@@ -14,6 +14,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.command.ModArgumentTypeInfos;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModAttributes;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
@@ -52,6 +53,7 @@ public final class Confluence {
         ModPaintings.register(bus);
         ModRecipes.register(bus);
         ModParticles.PARTICLES.register(bus);
+        ModAttributes.ATTRIBUTES.register(bus);
         ModEntities.ENTITIES.register(bus);
         ModTabs.TABS.register(bus);
         ModEffects.EFFECTS.register(bus);

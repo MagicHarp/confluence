@@ -233,6 +233,21 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         }
     }
 
+//    @WrapWithCondition(method = "causeFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
+//    private boolean shouldPlayFallSound(LivingEntity instance, SoundEvent soundEvent, float pVolume, float pPitch) {
+//        return IFallResistance.noResistance(instance); // 禁用摔落音效
+//    }
+//
+//    @WrapWithCondition(method = "handleDamageEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
+//    private boolean shouldPlayFallSound(LivingEntity instance, SoundEvent soundEvent, float pVolume, float pPitch, @Local(argsOnly = true) DamageSource damageSource) {
+//        return IFallResistance.noResistance(instance); // 禁用摔落音效
+//    }
+//
+//    @WrapWithCondition(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"))
+//    private boolean shouldPlayFallSound(LivingEntity instance, DamageSource pSource) {
+//        return IFallResistance.noResistance(instance, pSource); // 禁用摔落时的受伤音效
+//    }
+
     /** @author voila  */
     @Inject(method = "tickDeath", at = @At("HEAD"))
     private void tickDeath(CallbackInfo ci){

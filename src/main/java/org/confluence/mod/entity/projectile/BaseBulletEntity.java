@@ -146,8 +146,8 @@ public class BaseBulletEntity extends Projectile {
         RUBY(4, "ruby", 5.5F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
         AMBER(5, "amber", 5.5F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
         DIAMOND(6, "diamond", 6F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
-        FROST(7, "frost", 5.0F, 0.5, 1.0F, () -> ParticleTypes.SNOWFLAKE.getType()), // todo particle
-        SPARK(8, "spark", 1.3F, 0.2, 1.0F, () -> ParticleTypes.LAVA.getType());
+        FROST(7, "frost", 5.0F, 0.5, 1.0F, ParticleTypes.SNOWFLAKE::getType), // todo particle
+        SPARK(8, "spark", 1.3F, 0.2, 1.0F, ParticleTypes.LAVA::getType);
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;

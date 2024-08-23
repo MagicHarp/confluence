@@ -20,11 +20,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
-import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.DeathAnimOptions;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -54,17 +53,16 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         super(entityType, level);
         this.moveTargetPoint = Vec3.ZERO;
         this.xpReward = 5;
+
     }
 
     public static boolean checkDemonEyeSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
         if (!(pLevel instanceof Level level)) {
             return false;
         }
-        if (!checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
-            return false;
-        } else if (type == ModEntities.DEMON_EYE.get()) {
+        if (checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
             int y = pPos.getY();
-            boolean levelCon = y > 40 && y < 260 && level.isNight() && pLevel.canSeeSky(pPos);
+            boolean levelCon = y < 260 && level.isNight() && pLevel.canSeeSky(pPos);
             // 新月100%，其他80%
             return level.getMoonPhase() == 4 ? levelCon : level.random.nextInt(99) < 80;  // 从六分仪的翻译看的
         }
@@ -205,6 +203,12 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
 //        super.setXRot(pXRot);
 //    }
 
+
+    @Override
+    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pDimensions) {
+        return pDimensions.height * 0.5F;
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> state.setAndContinue(RawAnimation.begin().thenLoop("fly"))));
@@ -214,6 +218,5 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return CACHE;
     }
-
 }
 

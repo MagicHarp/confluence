@@ -60,7 +60,6 @@ import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 @SuppressWarnings("deprecation")
-/*todo: 祭坛配方与合成*/
 public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomItemModel {
     public static final VoxelShape SHAPE = Shapes.box(-0.125, 0.0, -0.125, 1.125, 0.8, 1.125);
     private final Variant variant;

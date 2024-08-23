@@ -274,4 +274,9 @@ public final class ModClient {
             }
         });
     }
+
+    @SubscribeEvent
+    public static void registerEntitySpectatorShaders(RegisterEntitySpectatorShadersEvent event) {
+        event.register(DEMON_EYE.get(), new ResourceLocation(MODID, "shaders/post/red.json"));
+    }
 }
