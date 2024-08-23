@@ -22,7 +22,7 @@ public class ShurikenItem extends Item {
         if (!pLevel.isClientSide) {
             pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSoundEvents.WAVING.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
             ShurikenProjectile projectile = new ShurikenProjectile(pPlayer);
-            projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.2F, 0.5F);
+            projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.8F, 0.5F);
             pLevel.addFreshEntity(projectile);
         }
 
