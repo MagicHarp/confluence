@@ -310,7 +310,6 @@ public class DeathAnimUtils {
                 if(ModelPart.class.isAssignableFrom(field.getType())){
                     field.setAccessible(true);
                     ModelPart part = (ModelPart) field.get(model);
-                    ret.add(part);
                     ret.addAll(((IModelPart) (Object) part).confluence$root().getAllParts().toList());
                     break;
                 }
