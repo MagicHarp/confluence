@@ -29,6 +29,7 @@ import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModAttributes;
+import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
@@ -114,6 +115,7 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
+        if (ApothicHelper.isAttributesLoaded()) return;
         Player player = event.getEntity();
         if (!event.isVanillaCritical()) {
             double chance = player.getAttributeValue(ModAttributes.getCriticalChance());
