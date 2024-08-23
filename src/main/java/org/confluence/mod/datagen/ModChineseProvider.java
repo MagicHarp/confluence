@@ -2038,6 +2038,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PLATINUM_CROWN.get(), "铂金冠");
         add(GOLD_CROWN.get(), "金冠");
         add(STEP_STOOL.get(), "梯凳");
+        add(HAND_OF_CREATION.get(), "创造之手");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
