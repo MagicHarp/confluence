@@ -6,9 +6,9 @@ import net.minecraft.core.particles.SimpleParticleType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LightsBaneDustParticle extends TextureSheetParticle {
+public class LightsBaneFadeParticle extends TextureSheetParticle {
 
-    protected LightsBaneDustParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet){
+    protected LightsBaneFadeParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet){
         super(pLevel, pX, pY, pZ);
         lifetime = 16;
     }
@@ -16,7 +16,7 @@ public class LightsBaneDustParticle extends TextureSheetParticle {
     @Override
     @NotNull
     public ParticleRenderType getRenderType(){
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {
@@ -29,7 +29,7 @@ public class LightsBaneDustParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(@NotNull SimpleParticleType pType, @NotNull ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed){
-            return new LightsBaneDustParticle(pLevel, pX, pY, pZ, spriteSet);
+            return new LightsBaneFadeParticle(pLevel, pX, pY, pZ, spriteSet);
         }
     }
 

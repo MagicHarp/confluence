@@ -30,6 +30,7 @@ public class ModParticles {
     public static final RegistryObject<ParticleType<BloodParticleOptions>> BLOOD = register("blood", false, BloodParticleOptions.DESERIALIZER, type-> BloodParticleOptions.CODEC);
     public static final RegistryObject<ParticleType<LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", true, LightsBaneParticleOptions.DESERIALIZER, type-> LightsBaneParticleOptions.CODEC);
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_DUST = PARTICLES.register("lights_bane_dust", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_FADE = PARTICLES.register("lights_bane_fade", () -> new SimpleParticleType(true));
 
 
     @SuppressWarnings("all")
