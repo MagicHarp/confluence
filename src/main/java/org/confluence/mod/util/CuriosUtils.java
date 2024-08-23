@@ -5,7 +5,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import org.confluence.mod.item.curio.BaseCurioItem;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -13,6 +12,7 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -41,7 +41,7 @@ public final class CuriosUtils {
         return isEmpty.get();
     }
 
-    public static <C extends BaseCurioItem> boolean noSameCurio(LivingEntity living, C curio) {
+    public static <C extends Item & ICurioItem> boolean noSameCurio(LivingEntity living, C curio) {
         return noSameCurio(living, (Predicate<ItemStack>) itemStack -> itemStack.getItem() == curio);
     }
 
@@ -53,7 +53,7 @@ public final class CuriosUtils {
         return !noSameCurio(living, predicate);
     }
 
-    public static <C extends BaseCurioItem> boolean hasCurio(LivingEntity living, C curio) {
+    public static <C extends Item & ICurioItem> boolean hasCurio(LivingEntity living, C curio) {
         return !noSameCurio(living, curio);
     }
 
@@ -94,6 +94,25 @@ public final class CuriosUtils {
         return atomic.get();
     }
 
+    public static <C extends Item & ICurioItem> Optional<ItemStack> findCurioAt(LivingEntity living, C curio, String id) {
+        AtomicReference<Optional<ItemStack>> atomic = new AtomicReference<>(Optional.empty());
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            Map<String, ICurioStacksHandler> curios = handler.getCurios();
+            ICurioStacksHandler stacksHandler = curios.get(id);
+            if (stacksHandler != null) {
+                IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack stack = stackHandler.getStackInSlot(i);
+                    if (!stack.isEmpty() && stack.getItem() == curio) {
+                        atomic.set(Optional.of(stack));
+                        return;
+                    }
+                }
+            }
+        });
+        return atomic.get();
+    }
+
     public static ArrayList<ItemStack> getCurios(LivingEntity living) {
         ArrayList<ItemStack> items = new ArrayList<>();
         CuriosApi.getCuriosInventory(living).ifPresent(curiosItemHandler -> {
@@ -117,5 +136,21 @@ public final class CuriosUtils {
             }
         });
         return items;
+    }
+
+    public static Optional<ItemStack> getSlot(LivingEntity living, String id, int index) {
+        AtomicReference<Optional<ItemStack>> atomic = new AtomicReference<>(Optional.empty());
+        CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
+            Map<String, ICurioStacksHandler> curios = handler.getCurios();
+            ICurioStacksHandler stacksHandler = curios.get(id);
+            if (stacksHandler != null) {
+                IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                if (index < stackHandler.getSlots()) {
+                    ItemStack stack = stackHandler.getStackInSlot(index);
+                    if (!stack.isEmpty()) atomic.set(Optional.of(stack));
+                }
+            }
+        });
+        return atomic.get();
     }
 }

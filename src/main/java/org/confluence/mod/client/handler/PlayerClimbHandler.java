@@ -21,7 +21,13 @@ public final class PlayerClimbHandler {
     private static int climberAmount = 0;
 
     public static void handle(LocalPlayer localPlayer, Vec2 vector, boolean jumping) {
-        if (climberAmount <= 0 || localPlayer.onGround() || vector.x + vector.y == 0.0) return;
+        if (climberAmount <= 0 || localPlayer.onGround() || (vector.x == 0.0 && vector.y == 0.0)){
+            wallJumped = true;
+            return;
+        }
+        Vec3 motion = localPlayer.getDeltaMovement();
+        double motionY = motion.y;
+        if (motionY > 0.0) return;
         float rad = localPlayer.getYRot() * Mth.DEG_TO_RAD;
         float cos = Mth.cos(rad);
         float sin = Mth.sin(rad);
@@ -38,10 +44,6 @@ public final class PlayerClimbHandler {
             } else {
                 wallJumped = false;
             }
-            Vec3 motion = localPlayer.getDeltaMovement();
-            double motionY = motion.y;
-            if (motionY > 0.0) return;
-
             if (localPlayer.isShiftKeyDown()) {
                 motionY = -0.1;
             } else if (climberAmount == 1) {
@@ -67,7 +69,7 @@ public final class PlayerClimbHandler {
     private static void wallJump(LocalPlayer localPlayer, double x, double z) {
         double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower();
         Vec3 vec3 = localPlayer.getDeltaMovement();
-        localPlayer.setDeltaMovement(vec3.add(vec3.x - x * 0.3, motionY * 1.1, vec3.z - z * 0.3));
+        localPlayer.setDeltaMovement(vec3.add(vec3.x - x * 0.11, motionY * 1.1, vec3.z - z * 0.11));
         localPlayer.hasImpulse = true;
         NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, false));
     }

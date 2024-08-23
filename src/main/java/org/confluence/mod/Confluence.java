@@ -11,6 +11,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModSounds;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ public final class Confluence {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
         ModTabs.TABS.register(bus);
+        ModAttributes.ATTRIBUTES.register(bus);
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);

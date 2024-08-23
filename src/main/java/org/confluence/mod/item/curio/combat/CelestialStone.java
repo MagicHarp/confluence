@@ -12,18 +12,19 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class CelestialStone extends BaseCurioItem implements ICriticalHit {
+public class CelestialStone extends BaseCurioItem implements IMagicAttack, IProjectileAttack {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("A1F8AB0C-8285-3BE9-575A-E05787707241");
     public static final UUID DAMAGE_UUID = UUID.fromString("2B80C158-EBB2-39C0-E246-E401C544D9D8");
+    public static final UUID CRIT_UUID = UUID.fromString("6057460F-D258-0529-6891-2BD9336D36C2");
     public static final UUID ARMOR_UUID = UUID.fromString("814ABB7D-ADB4-F0C6-B7BD-A2E3FB23EE8D");
-
-    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public CelestialStone() {
         super(ModRarity.LIME);
@@ -31,19 +32,25 @@ public class CelestialStone extends BaseCurioItem implements ICriticalHit {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        if (ATTRIBUTE == null) {
-            ATTRIBUTE = ImmutableMultimap.of(
+        if (ATTRIBUTES == null) {
+            ATTRIBUTES = ImmutableMultimap.of(
                 Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_CRITICAL_CHANCE.get(), AttributeModifier.Operation.ADDITION),
                 Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", ModConfigs.CELESTIAL_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION)
             );
         }
-        return ATTRIBUTE;
+        return ATTRIBUTES;
     }
 
     @Override
-    public double getChance() {
-        return ModConfigs.CELESTIAL_STONE_CRITICAL_CHANCE.get();
+    public double getMagicBonus() {
+        return ModConfigs.CELESTIAL_STONE_MAGIC_BONUS.get().floatValue();
+    }
+
+    @Override
+    public float getProjectileBonus() {
+        return ModConfigs.CELESTIAL_STONE_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override

@@ -1,22 +1,21 @@
 package org.confluence.mod.client.renderer.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import org.confluence.mod.client.handler.InformationHandler;
 
-@OnlyIn(Dist.CLIENT)
-public class ConfluenceOverlays {
+public class InfoHudOverlay implements IGuiOverlay {
     private static final int background = (0x90 << 24) + 0x505050;
     private static final int textColor = 0xE0E0E0;
-    public static final IGuiOverlay INFO_HUD = (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+
+    @Override
+    public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (gui.getMinecraft().options.hideGui || gui.getMinecraft().options.renderDebug) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("info");
-        RenderSystem.enableBlend();
 
         int top = screenHeight / 2;
         Font font = gui.getFont();
@@ -28,7 +27,6 @@ public class ConfluenceOverlays {
             top += font.lineHeight;
         }
 
-        RenderSystem.disableBlend();
         gui.getMinecraft().getProfiler().pop();
-    };
+    }
 }

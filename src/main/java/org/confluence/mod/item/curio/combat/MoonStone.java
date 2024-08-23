@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
@@ -22,6 +23,7 @@ public class MoonStone extends BaseCurioItem {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("E11BBE53-8620-4795-296E-B1E512E04EFF");
     public static final UUID DAMAGE_UUID = UUID.fromString("51D0544E-0AA8-CB0C-5FBC-1A4C6B5C99B7");
     public static final UUID ARMOR_UUID = UUID.fromString("35D05688-D0BE-3387-DAD8-82C79B46AB46");
+    public static final UUID CRIT_UUID = UUID.fromString("3CCCFFBE-2975-FFF3-FF4C-2AF08AA74CC4");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public MoonStone() {
@@ -36,7 +38,8 @@ public class MoonStone extends BaseCurioItem {
             ATTRIBUTE = ImmutableMultimap.of(
                 Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", ModConfigs.MOON_STONE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", ModConfigs.MOON_STONE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", ModConfigs.MOON_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", ModConfigs.MOON_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION),
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", ModConfigs.MOON_STONE_CRITICAL_CHANCE.get(), AttributeModifier.Operation.ADDITION)
             );
         }
         return living.level().getDayTime() % 24000 > 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;

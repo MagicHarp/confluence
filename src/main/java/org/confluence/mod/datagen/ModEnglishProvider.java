@@ -87,6 +87,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
 
         add("key.confluence.metal_detector", "Detect Metal");
+        add("key.confluence.step_stool", "Step Stool");
 
         add("curios.identifier.accessory", "Accessory");
         add("curios.modifiers.accessory", "When worn as accessory:");
@@ -178,6 +179,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "Improved ability if combined with Shoe Spikes");
         add("item.confluence.shoe_spikes.tooltip", "Improved ability if combined with Climbing Claws");
         add("item.confluence.frog_gear.tooltip", "'It ain't easy being green'");
+        add("item.confluence.hand_of_creation.tooltip", "Increases mining speed by 25%");
+        add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
+        add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
+        add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
 
         add("item.confluence.aglet.info", "The Aglet is an accessory that increases the player's movement speed by 5%.");
         add("item.confluence.aglet.info2", "It can be found in Shipwreck Chests.");

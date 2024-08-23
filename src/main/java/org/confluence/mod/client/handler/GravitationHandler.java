@@ -26,7 +26,8 @@ public final class GravitationHandler {
     private static boolean hasGlobe = false;
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
-        if (localPlayer.getAbilities().flying) return;
+        if (StepStoolHandler.onStool() || localPlayer.getAbilities().flying) return;
+
         if (jumping) {
             if (!keyDown) {
                 shouldRot = !shouldRot;

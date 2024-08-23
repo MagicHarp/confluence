@@ -29,6 +29,7 @@ public final class ForgeClient {
         LocalPlayer localPlayer = minecraft.player;
         if (event.phase == TickEvent.Phase.START) return;
         GravitationHandler.tick(localPlayer);
+        StepStoolHandler.handle(localPlayer);
         if (localPlayer == null) return;
         IAutoAttack.apply(minecraft, localPlayer);
         InformationHandler.handle(localPlayer);

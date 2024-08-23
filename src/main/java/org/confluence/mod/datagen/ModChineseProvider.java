@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 
 import static org.confluence.mod.item.curio.CurioItems.*;
@@ -84,6 +85,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
 
         add("key.confluence.metal_detector", "检测矿物");
+        add("key.confluence.step_stool", "梯凳");
 
         add("curios.identifier.accessory", "配饰");
         add("curios.modifiers.accessory", "佩戴配饰时：");
@@ -173,6 +175,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
         add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
         add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
+        add("item.confluence.hand_of_creation.tooltip", "采矿速度提高25%");
+        add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
+        add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
+        add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
 
         add("item.confluence.aglet.info", "金属带扣是能提升玩家移动速度的配饰");
         add("item.confluence.aglet.info2", "它出现在沉船宝箱中");
@@ -719,5 +725,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(MASTER_NINJA_GEAR.get(), "忍者大师装备");
         add(FROG_WEBBING.get(), "青蛙蹼");
         add(FROG_GEAR.get(), "青蛙装备");
+        add(STEP_STOOL.get(), "梯凳");
+        add(HAND_OF_CREATION.get(), "创造之手");
+
+        add(ModEntities.BEE_PROJECTILE.get(), "蜜蜂射弹");
+        add(ModEntities.STAR_CLOAK.get(), "坠星");
+        add(ModEntities.STEP_STOOL.get(), "梯凳");
     }
 }

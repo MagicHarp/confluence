@@ -4,10 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.network.c2s.FallDistancePacketC2S;
-import org.confluence.mod.network.c2s.GravitationPacketC2S;
-import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
-import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
+import org.confluence.mod.network.c2s.*;
 import org.confluence.mod.network.s2c.*;
 
 public final class NetworkHandler {
@@ -36,10 +33,12 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, RightClickSubtractorPacketS2C.class, RightClickSubtractorPacketS2C::encode, RightClickSubtractorPacketS2C::decode, RightClickSubtractorPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, PlayerClimbPacketS2C.class, PlayerClimbPacketS2C::encode, PlayerClimbPacketS2C::decode, PlayerClimbPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, TabiPacketS2C.class, TabiPacketS2C::encode, TabiPacketS2C::decode, TabiPacketS2C::handle);
+        CHANNEL.registerMessage(packetId++, StepStoolStepPacketS2C.class, StepStoolStepPacketS2C::encode, StepStoolStepPacketS2C::decode, StepStoolStepPacketS2C::handle);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, GravitationPacketC2S.class, GravitationPacketC2S::encode, GravitationPacketC2S::decode, GravitationPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, StepStoolStepPacketC2S.class, StepStoolStepPacketC2S::encode, StepStoolStepPacketC2S::decode, StepStoolStepPacketC2S::handle);
     }
 }
