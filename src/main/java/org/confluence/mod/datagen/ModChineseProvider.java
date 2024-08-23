@@ -2108,6 +2108,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.FOSSIL_CHESTPLATE.get(), "化石胸甲");
         add(Armors.FOSSIL_LEGGINGS.get(), "化石护腿");
         add(Armors.FOSSIL_BOOTS.get(), "化石靴子");
+        add(Armors.NINJA_HELMET.get(), "忍者头盔");
+        add(Armors.NINJA_CHESTPLATE.get(), "忍者胸甲");
+        add(Armors.NINJA_LEGGINGS.get(), "忍者护腿");
+        add(Armors.NINJA_BOOTS.get(), "忍者靴子");
 
         // 鱼
         add(Foods.SEA_BASS.get(), "鲈鱼");
