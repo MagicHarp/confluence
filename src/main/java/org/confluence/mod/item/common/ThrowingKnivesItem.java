@@ -22,7 +22,7 @@ public class ThrowingKnivesItem extends Item {
         if (!pLevel.isClientSide) {
             pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSoundEvents.WAVING.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
             ThrowingKnivesProjectile projectile = new ThrowingKnivesProjectile(pPlayer);
-            projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2.0F, 0.5F);
+            projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 0.5F);
             pLevel.addFreshEntity(projectile);
         }
 
