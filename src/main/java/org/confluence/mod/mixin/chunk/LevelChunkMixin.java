@@ -35,6 +35,7 @@ import java.util.List;
 
 import static org.confluence.mod.util.DynamicBiomeUtils.*;
 
+/** @author voila  */
 @Mixin(LevelChunk.class)
 public abstract class LevelChunkMixin extends ChunkAccess {
     @Shadow
@@ -49,18 +50,18 @@ public abstract class LevelChunkMixin extends ChunkAccess {
 
     @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/ChunkPos;Lnet/minecraft/world/level/chunk/UpgradeData;Lnet/minecraft/world/ticks/LevelChunkTicks;Lnet/minecraft/world/ticks/LevelChunkTicks;J[Lnet/minecraft/world/level/chunk/LevelChunkSection;Lnet/minecraft/world/level/chunk/LevelChunk$PostLoadProcessor;Lnet/minecraft/world/level/levelgen/blending/BlendingData;)V", at = @At("RETURN"))
     private void constr(Level pLevel, ChunkPos pPos, UpgradeData pData, LevelChunkTicks pBlockTicks, LevelChunkTicks pFluidTicks, long pInhabitedTime, LevelChunkSection[] pSections, LevelChunk.PostLoadProcessor pPostLoad, BlendingData pBlendingData, CallbackInfo ci){
-        if(level.isClientSide()) return;
+        if(!(level instanceof ServerLevel)) return;
+        confluence$serverLevel = (ServerLevel) level;
         if(BIOME_CORRUPT == null){
-            BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.ANOTHER_CRIMSON);
+            BIOME_CRIMSON = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.TR_CRIMSON);
             BIOME_CORRUPT = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_CORRUPTION);
             BIOME_HALLOW = level.registryAccess().registryOrThrow(Registries.BIOME).getHolderOrThrow(ModBiomes.THE_HALLOW);
         }
-        confluence$serverLevel = (ServerLevel) level;
     }
 
     @Inject(method = "setBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getBlock()Lnet/minecraft/world/level/block/Block;"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void setBlock(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, int $, LevelChunkSection section, boolean flag, int j, int k, int l, BlockState beforeState){
-        if(level.isClientSide()) return;
+        if(confluence$serverLevel == null) return;
         IChunkSection counter = (IChunkSection) section;
         int[] i = {counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()};
         Holder<Biome> targetBiome = balanceEvil(i);
@@ -75,7 +76,7 @@ public abstract class LevelChunkMixin extends ChunkAccess {
     /** @return 返回十字上方的该有的邪恶群系，null则是净化，让infect方法决定用平原还是恢复原群系 */
     @Unique
     private Holder<Biome> confluence$checkCross(LevelChunkSection centerSection, BlockPos centerPos){
-        Holder<Biome> centerBiome = getTypicalBiome(centerSection, true,null);
+        Holder<Biome> centerBiome = getTypicalBiome(centerSection, true, null);
         if(centerBiome == null){
             return null;
         }
@@ -83,7 +84,7 @@ public abstract class LevelChunkMixin extends ChunkAccess {
             level.getChunkAt(centerPos.north(16)),
             level.getChunkAt(centerPos.east(16)),
             level.getChunkAt(centerPos.west(16)))){
-            Holder<Biome> sideBiome = getTypicalBiome(c.getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(centerPos.getY()))), true,centerBiome);
+            Holder<Biome> sideBiome = getTypicalBiome(c.getSection(getSectionIndexFromSectionY(SectionPos.blockToSectionCoord(centerPos.getY()))), true, centerBiome);
             if(!confluence$serverLevel.getChunkSource().isPositionTicking(c.getPos().toLong()) || sideBiome != centerBiome){
                 return null;
             }

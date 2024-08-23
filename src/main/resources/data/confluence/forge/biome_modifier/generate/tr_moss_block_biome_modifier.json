@@ -6,5 +6,5 @@
     "minecraft:bamboo_jungle"
   ],
   "features": "confluence:tr_moss_block",
-  "step": "surface_structures"
+  "step": "underground_decoration"
 }

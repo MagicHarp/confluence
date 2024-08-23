@@ -1,11 +1,11 @@
 package org.confluence.mod.item.curio.movement;
 
-import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.PacketDistributor;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.PlayerJumpPacketS2C;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -13,51 +13,51 @@ import top.theillusivec4.curios.api.CuriosApi;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IMultiJump {
-    double getJumpSpeed();
+    float getJumpSpeed();
 
     static void sendMsg(ServerPlayer serverPlayer) {
-        AtomicDouble fartSpeed = new AtomicDouble(-1.0);
-        AtomicDouble sandstormSpeed = new AtomicDouble(-1.0);
+        MutableFloat fartSpeed = new MutableFloat(-1.0F);
+        MutableFloat sandstormSpeed = new MutableFloat(-1.0F);
         AtomicInteger sandstormTicks = new AtomicInteger();
-        AtomicDouble blizzardSpeed = new AtomicDouble(-1.0);
+        MutableFloat blizzardSpeed = new MutableFloat(-1.0F);
         AtomicInteger blizzardTicks = new AtomicInteger();
-        AtomicDouble tsunamiSpeed = new AtomicDouble(-1.0);
-        AtomicDouble cloudSpeed = new AtomicDouble(-1.0);
+        MutableFloat tsunamiSpeed = new MutableFloat(-1.0F);
+        MutableFloat cloudSpeed = new MutableFloat(-1.0F);
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
             IItemHandlerModifiable itemHandlerModifiable = curiosItemHandler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 Item curio = itemHandlerModifiable.getStackInSlot(i).getItem();
                 if (curio instanceof FartInAJar fart) {
-                    fartSpeed.set(fart.getJumpSpeed());
+                    fartSpeed.setValue(fart.getJumpSpeed());
                 } else if (curio instanceof SandstormInABottle sandstorm) {
-                    sandstormSpeed.set(sandstorm.getJumpSpeed());
+                    sandstormSpeed.setValue(sandstorm.getJumpSpeed());
                     sandstormTicks.set(sandstorm.getJumpTicks());
                 } else if (curio instanceof BlizzardInABottle blizzard) {
-                    blizzardSpeed.set(blizzard.getJumpSpeed());
+                    blizzardSpeed.setValue(blizzard.getJumpSpeed());
                     blizzardTicks.set(blizzard.getJumpTicks());
                 } else if (curio instanceof TsunamiInABottle tsunami) {
-                    tsunamiSpeed.set(tsunami.getJumpSpeed());
+                    tsunamiSpeed.setValue(tsunami.getJumpSpeed());
                 } else if (curio instanceof CloudInABottle cloud) {
-                    cloudSpeed.set(cloud.getJumpSpeed());
+                    cloudSpeed.setValue(cloud.getJumpSpeed());
                 } else if (curio instanceof BundleOfBalloons) {
-                    sandstormSpeed.set(SandstormInABottle.SPEED);
+                    sandstormSpeed.setValue(SandstormInABottle.SPEED);
                     sandstormTicks.set(SandstormInABottle.TICKS);
-                    blizzardSpeed.set(BlizzardInABottle.SPEED);
+                    blizzardSpeed.setValue(BlizzardInABottle.SPEED);
                     blizzardTicks.set(BlizzardInABottle.TICKS);
-                    cloudSpeed.set(CloudInABottle.SPEED);
+                    cloudSpeed.setValue(CloudInABottle.SPEED);
                 }
             }
         });
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new PlayerJumpPacketS2C(
-                fartSpeed.get(),
-                sandstormSpeed.get(),
+                fartSpeed.getValue(),
+                sandstormSpeed.getValue(),
                 sandstormTicks.get(),
-                blizzardSpeed.get(),
+                blizzardSpeed.getValue(),
                 blizzardTicks.get(),
-                tsunamiSpeed.get(),
-                cloudSpeed.get()
+                tsunamiSpeed.getValue(),
+                cloudSpeed.getValue()
             )
         );
     }

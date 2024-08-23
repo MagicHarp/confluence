@@ -2,15 +2,20 @@ package org.confluence.mod.util;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.confluence.mod.block.ModBlocks;
+import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 
 import java.util.Calendar;
@@ -23,6 +28,14 @@ public final class ModUtils {
             throw new IllegalArgumentException("bound - origin is non positive");
         } else {
             return origin + randomSource.nextFloat() * (bound - origin);
+        }
+    }
+
+    public static double nextDouble(RandomSource randomSource, double origin, double bound) {
+        if (origin >= bound) {
+            throw new IllegalArgumentException("bound - origin is non positive");
+        } else {
+            return origin + randomSource.nextDouble() * (bound - origin);
         }
     }
 
@@ -54,11 +67,10 @@ public final class ModUtils {
         int j = ((i - silver_count) / 9);
         int golden_count = j % 9;
         int k = (j - golden_count) / 9;
-        int platinum_count = k % 9;
         createItemEntity(ModItems.COPPER_COIN.get(), copper_count, x, y, z, level, 0);
         createItemEntity(ModItems.SILVER_COIN.get(), silver_count, x, y, z, level, 0);
         createItemEntity(ModItems.GOLDEN_COIN.get(), golden_count, x, y, z, level, 0);
-        createItemEntity(ModItems.PLATINUM_COIN.get(), platinum_count, x, y, z, level, 0);
+        createItemEntity(ModItems.PLATINUM_COIN.get(), k, x, y, z, level, 0);
     }
 
     public static Component getModifierTooltip(double amount, String type) {
@@ -80,5 +92,75 @@ public final class ModUtils {
         Calendar calendar = Calendar.getInstance();
         return (calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 15) || // 从 十月中旬
             (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
+    }
+
+    /**
+     * 把向量转成角度
+     */
+    public static float[] dirToRot(Vec3 vec) {
+        double x = vec.x;
+        double y = vec.y;
+        double z = vec.z;
+
+        double yaw = Math.toDegrees(Mth.atan2(-x, z));
+        double pitch = Math.toDegrees(Mth.atan2(-y, Math.sqrt(x * x + z * z)));
+
+        return new float[]{(float) yaw, (float) pitch};
+    }
+
+    /**
+     * 把角度转成向量
+     *
+     * @param yaw   角度的yaw，单位为角度而非弧度
+     * @param pitch 角度的pitch，单位为角度
+     * @return 返回朝向对应角度（yaw、pitch）的单位向量
+     */
+    public static Vec3 rotToDir(float yaw, float pitch) {
+        double yawRad = Math.toRadians(yaw);
+        double pitchRad = Math.toRadians(pitch);
+        double y = -1 * Math.sin(pitchRad);
+        double div = Math.cos(pitchRad);
+        double x = -1 * Math.sin(yawRad);
+        double z = Math.cos(yawRad);
+        x *= div;
+        z *= div;
+        return new Vec3(x, y, z);
+    }
+
+    /**
+     * 更新实体朝向
+     */
+    public static void updateEntityRotation(Entity entity, Vec3 dir) {
+        float[] angle = dirToRot(dir);
+        entity.setYRot(angle[0]);
+        // 内部的XRot与F3中的显示信息符号相反
+        entity.setXRot(-angle[1]);
+    }
+
+    /**
+     * 测试信息；使用此接口有助于集中管理防止漏网之鱼
+     */
+    public static void testMessage(String msg) {
+        Confluence.LOGGER.info(msg);
+    }
+
+    public static void testMessage(Player player, String msg) {
+        player.sendSystemMessage(Component.literal(msg));
+    }
+
+    public static boolean isExpert(Level level) {
+        return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
+    }
+
+    public static boolean isMaster(Level level) {
+        return level.getDifficulty().equals(Difficulty.HARD);
+    }
+
+    public static Vec3 getVectorA2B(Entity a, Entity b) {
+        return b.position().subtract(a.position()).normalize();
+    }
+
+    public static void knockBackA2B(Entity a, Entity b, double scale, double motionY) {
+        b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
     }
 }

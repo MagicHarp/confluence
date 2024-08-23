@@ -6,7 +6,7 @@ import org.confluence.mod.misc.ModRarity;
 public class FledglingWings extends BaseWings {
 
     public FledglingWings() {
-        super(ModRarity.WHITE, 25, 1.5);
+        super(ModRarity.WHITE, 25, 1.5F);
     }
 
     @Override

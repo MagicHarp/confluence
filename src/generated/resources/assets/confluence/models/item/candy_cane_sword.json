@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "confluence:item/handheld_mirror",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

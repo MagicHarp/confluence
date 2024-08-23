@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -23,13 +21,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.LAYERS;
+
 public class SandLayerBlock extends Block implements CustomModel, CustomItemModel {
-    public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{
-        Shapes.empty(), Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0), Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-        Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0), Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-        Block.box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0), Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
-        Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0), Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
+        Shapes.empty(), box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0), box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
+        box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0), box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+        box(0.0, 0.0, 0.0, 16.0, 10.0, 16.0), box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
+        box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0), box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
 
     public SandLayerBlock() {
@@ -39,21 +38,6 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
 
     @Override
     public VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return SHAPE_BY_LAYER[state.getValue(LAYERS)];
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return SHAPE_BY_LAYER[state.getValue(LAYERS) - 1];
-    }
-
-    @Override
-    public VoxelShape getBlockSupportShape(BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos) {
-        return SHAPE_BY_LAYER[state.getValue(LAYERS)];
-    }
-
-    @Override
-    public VoxelShape getVisualShape(BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE_BY_LAYER[state.getValue(LAYERS)];
     }
 
@@ -70,7 +54,7 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
     @Override
     public boolean canBeReplaced(BlockState state, BlockPlaceContext UseContext) {
         int StackLayers = state.getValue(LAYERS);
-        if (UseContext.getItemInHand().is(this.asItem()) && StackLayers < 8) {
+        if (UseContext.getItemInHand().is(asItem()) && StackLayers < 8) {
             if (UseContext.replacingClickedOnBlock()) {
                 return UseContext.getClickedFace() == Direction.UP;
             } else {
@@ -83,10 +67,9 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState $$1 = context.getLevel().getBlockState(context.getClickedPos());
-        if ($$1.is(this)) {
-            int StackLayers = $$1.getValue(LAYERS);
-            return $$1.setValue(LAYERS, Math.min(8, StackLayers + 1));
+        BlockState state = context.getLevel().getBlockState(context.getClickedPos());
+        if (state.getValue(LAYERS) < 8) {
+            return state.cycle(LAYERS);
         } else {
             return super.getStateForPlacement(context);
         }
@@ -94,8 +77,8 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
 
     @Override
     public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
-        BlockState Below = level.getBlockState(pos.below());
-        return Below.is(this) || !Below.isAir();
+        BlockState below = level.getBlockState(pos.below());
+        return below.is(this) || !below.isAir();
     }
 
     @Override

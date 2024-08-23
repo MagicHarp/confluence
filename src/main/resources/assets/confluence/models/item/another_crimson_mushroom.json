@@ -1,6 +1,0 @@
-{
-    "parent": "minecraft:item/generated",
-    "textures": {
-        "layer0": "confluence:block/another_crimson_mushroom"
-    }
-}

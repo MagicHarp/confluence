@@ -108,7 +108,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     ARCHITECT_GIZMO_PACK("architect_gizmo_pack", ArchitectGizmoPack::new), // 建筑师发明背包
     /* 自动安放器 */
     ANCIENT_CHISEL("ancient_chisel", AncientChisel::new), // 远古凿子
-    /* 创造之手 */
+    HAND_OF_CREATION("hand_of_creation", HandOfCreation::new), // 创造之手
 
 
     ARCANE_FLOWER("arcane_flower", ArcaneFlower::new), // 奥术花
@@ -154,7 +154,7 @@ public enum CurioItems implements EnumRegister<BaseCurioItem>, IExtensibleEnum {
     /* 机械标尺 */
 
 
-    /* 梯凳 */
+    STEP_STOOL("step_stool", StepStool::new), // 梯凳
     /* 飞毯 */
     AGLET("aglet", Aglet::new), // 金属带扣
     ANKLET_OF_THE_WIND("anklet_of_the_wind", AnkletOfTheWind::new), // 疾风脚镯

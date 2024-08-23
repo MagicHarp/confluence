@@ -6,12 +6,10 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
-import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -22,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -103,8 +102,8 @@ public class BaseBulletEntity extends Projectile {
         Entity entity = entityHitResult.getEntity();
         if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
             float attackKnockBack = getKnockBack() * (1.0F + knockBack);
-            if (attackKnockBack > 0.0F && entity instanceof LivingEntity living) {
-                living.knockback(attackKnockBack * 0.5F, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
+            if (attackKnockBack > 0.0F) {
+                ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
                 setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
             }
         }
@@ -147,8 +146,8 @@ public class BaseBulletEntity extends Projectile {
         RUBY(4, "ruby", 5.5F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
         AMBER(5, "amber", 5.5F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
         DIAMOND(6, "diamond", 6F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
-        FROST(7, "frost", 5.0F, 0.5, 1.0F, () -> ParticleTypes.SNOWFLAKE.getType()), // todo particle
-        SPARK(8, "spark", 1.3F, 0.2, 1.0F, () -> ParticleTypes.LAVA.getType());
+        FROST(7, "frost", 5.0F, 0.5, 1.0F, ParticleTypes.SNOWFLAKE::getType), // todo particle
+        SPARK(8, "spark", 1.3F, 0.2, 1.0F, ParticleTypes.LAVA::getType);
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         final int id;

@@ -15,12 +15,13 @@ import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
+import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class BlackSlime extends Slime {
+public class BlackSlime extends Slime implements DeathAnimOptions {
     private final ItemStack itemStack;
     private final FloatRGB color;
 
@@ -34,6 +35,7 @@ public class BlackSlime extends Slime {
 
     @Override
     public void tick() {
+        resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {
@@ -106,9 +108,15 @@ public class BlackSlime extends Slime {
         }
         setHealth(getMaxHealth());
     }
-    public static void dropColoredGel(LivingEntity living) {
+
+    public static void dropColoredGel(LivingEntity living) { // todo 删除硬编码
         if (living instanceof BlackSlime blackSlime) {
             ModUtils.createItemEntity(blackSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
         }
+    }
+
+    @Override
+    public float[] getBloodColor(){
+        return color.toArray();
     }
 }

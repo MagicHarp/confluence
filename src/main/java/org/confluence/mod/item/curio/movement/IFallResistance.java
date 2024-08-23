@@ -31,5 +31,26 @@ public interface IFallResistance {
         return atomic.get();
     }
 
+    static boolean noResistance(LivingEntity living, DamageSource damageSource) {
+        if (!damageSource.is(DamageTypes.FALL) || living.hasEffect(ModEffects.STONED.get())) return true;
+        AtomicBoolean atomic = new AtomicBoolean();
+        living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            atomic.set(playerAbility.getFallResistance() == 0);
+        });
+        return atomic.get();
+    }
+
+    /**
+     * 已确认伤害来源是摔落
+     */
+    static boolean noResistance(LivingEntity living) {
+        if (living.hasEffect(ModEffects.STONED.get())) return true;
+        AtomicBoolean atomic = new AtomicBoolean();
+        living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+            atomic.set(playerAbility.getFallResistance() == 0);
+        });
+        return atomic.get();
+    }
+
     Component TOOLTIP = Component.translatable("curios.tooltip.fall_resistance");
 }

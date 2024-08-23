@@ -295,13 +295,13 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "confluence:another_crimson"
+                    "biome": "confluence:tr_crimson"
                   }
                 }
               ]
             }
           ],
-          "name": "confluence:another_crimson_box",
+          "name": "confluence:tr_crimson_box",
           "weight": 93
         },
         {

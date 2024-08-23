@@ -25,8 +25,8 @@ public class SharkronBalloon extends TsunamiInABottle implements IJumpBoost {
     }
 
     @Override
-    public double getJumpSpeed() {
-        return 1.1;
+    public float getJumpSpeed() {
+        return 1.1F;
     }
 
     @Override

@@ -73,7 +73,7 @@
               ]
             }
           ],
-          "name": "confluence:another_salmon",
+          "name": "confluence:tr_salmon",
           "weight": 10
         },
         {
@@ -603,7 +603,7 @@
               ]
             }
           ],
-          "name": "confluence:another_salmon",
+          "name": "confluence:tr_salmon",
           "weight": 5
         },
         {
@@ -1341,7 +1341,7 @@
               ]
             }
           ],
-          "name": "confluence:another_salmon",
+          "name": "confluence:tr_salmon",
           "weight": 5
         },
         {
@@ -1924,7 +1924,7 @@
               ]
             }
           ],
-          "name": "confluence:another_salmon",
+          "name": "confluence:tr_salmon",
           "weight": 5
         },
         {
@@ -2134,7 +2134,7 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "confluence:another_crimson"
+                    "biome": "confluence:tr_crimson"
                   }
                 }
               ]
@@ -2152,7 +2152,7 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "confluence:another_crimson"
+                    "biome": "confluence:tr_crimson"
                   }
                 }
               ]

@@ -9,7 +9,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-public class AshGrassBlock extends SpreadingBlock implements CustomModel {
+public class AshGrassBlock extends CustomModelSpreadingBlock implements CustomModel {
     public AshGrassBlock(){
         super(Type.PURE, Properties.copy(Blocks.GRASS_BLOCK));
     }

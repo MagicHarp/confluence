@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item":"confluence:tr_crimson_block"
+    },
+    "result": "confluence:tr_crimson_ore_bricks",
+    "count": 9
+}

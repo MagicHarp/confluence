@@ -22,10 +22,14 @@ public final class ModTags {
         public static final TagKey<Block> NEEDS_6_LEVEL = register("needs_6_level");
         public static final TagKey<Block> NEEDS_7_LEVEL = register("needs_7_level");
         public static final TagKey<Block> NEEDS_8_LEVEL = register("needs_8_level");
+        public static final TagKey<Block> NEEDS_9_LEVEL = register("needs_9_level");
         public static final TagKey<Block> NEEDS_NON_VANILLA_LEVEL = register("needs_non_vanilla_level");
         public static final TagKey<Block> FLOWER_BOOTS_AVAILABLE = register("flower_boots_available");
         public static final TagKey<Block> TORCH = register("torch");
         public static final TagKey<Block> HARDCORE = register("hardcore");
+        public static final TagKey<Block> POTS_SURVIVE = register("pots_survive");
+        public static final TagKey<Block> COIN_PILE = register("coin_pile");
+        public static final TagKey<Block> EASY_CRASH = register("easy_crash");
 
         private static TagKey<Block> register(String id) {
             return BlockTags.create(new ResourceLocation(MODID, id));

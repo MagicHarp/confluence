@@ -8,13 +8,11 @@ import org.confluence.mod.client.handler.ClientPacketHandler;
 
 import java.util.function.Supplier;
 
-public record FlushPlayerAbilityPacketS2C(boolean flush) {
-    public static void encode(FlushPlayerAbilityPacketS2C packet, FriendlyByteBuf friendlyByteBuf) {
-        friendlyByteBuf.writeBoolean(packet.flush);
-    }
+public record FlushPlayerAbilityPacketS2C() {
+    public static void encode(FlushPlayerAbilityPacketS2C packet, FriendlyByteBuf friendlyByteBuf) {}
 
     public static FlushPlayerAbilityPacketS2C decode(FriendlyByteBuf friendlyByteBuf) {
-        return new FlushPlayerAbilityPacketS2C(friendlyByteBuf.readBoolean());
+        return new FlushPlayerAbilityPacketS2C();
     }
 
     public static void handle(FlushPlayerAbilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

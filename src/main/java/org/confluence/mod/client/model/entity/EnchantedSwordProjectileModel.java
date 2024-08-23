@@ -9,9 +9,9 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.projectile.EnchantedSwordProjectile;
+import org.confluence.mod.entity.projectile.SwordProjectile;
 
-public class EnchantedSwordProjectileModel extends EntityModel<EnchantedSwordProjectile> {
+public class EnchantedSwordProjectileModel extends EntityModel<SwordProjectile> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "enchanted_sword_projectile"), "main");
     private final ModelPart bb_main;
 
@@ -37,7 +37,7 @@ public class EnchantedSwordProjectileModel extends EntityModel<EnchantedSwordPro
     }
 
     @Override
-    public void setupAnim(EnchantedSwordProjectile enchantedSwordProjectile, float v, float v1, float v2, float v3, float v4) {
+    public void setupAnim(SwordProjectile swordProjectile, float v, float v1, float v2, float v3, float v4) {
 
     }
 }

@@ -8,4 +8,8 @@ public class CustomModelBlock extends Block implements CustomModel {
     public CustomModelBlock() {
         super(BlockBehaviour.Properties.of());
     }
+
+    public CustomModelBlock(Properties properties) {
+        super(properties);
+    }
 }

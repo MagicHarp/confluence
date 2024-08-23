@@ -3,6 +3,9 @@ package org.confluence.mod.block.reveal;
 import com.google.gson.JsonObject;
 import de.dafuqs.revelationary.RevelationRegistry;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -20,6 +23,12 @@ public class StepRevealingBlock extends Block implements IRevealed {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(REVEAL_STEP);
+    }
+
+    @Override
+    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
+        BlockState cloak = RevelationRegistry.getCloak(state);
+        return super.canHarvestBlock(cloak == null ? state : cloak, level, pos, player);
     }
 
     public static void create(int state, int step, Block... blocks) {

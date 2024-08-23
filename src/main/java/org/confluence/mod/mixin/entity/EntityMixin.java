@@ -1,6 +1,7 @@
 package org.confluence.mod.mixin.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
@@ -24,9 +25,10 @@ import org.confluence.mod.item.curio.combat.IHurtEvasion;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
 import org.confluence.mod.item.curio.movement.IFallResistance;
-import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
+import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -106,12 +108,18 @@ public abstract class EntityMixin implements IEntity {
         return confluence$isShouldRot;
     }
 
+    @Override
+    public boolean confluence$isInShimmer() {
+        return confluence$isInShimmer;
+    }
+
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(Entity instance) {
         AtomicBoolean inLava = new AtomicBoolean(instance.isInLava());
         if (confluence$getSelf() instanceof Player living) {
             BlockPos onPos = living.getOnPos();
-            if (living.level().getFluidState(onPos).is(FluidTags.LAVA) && !living.level().getFluidState(onPos.above()).is(FluidTags.LAVA)) return false;
+            if (living.level().getFluidState(onPos).is(FluidTags.LAVA) && !living.level().getFluidState(onPos.above()).is(FluidTags.LAVA))
+                return false;
             living.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
                 if (inLava.get()) {
                     if (playerAbility.decreaseLavaImmuneTicks()) {
@@ -156,10 +164,23 @@ public abstract class EntityMixin implements IEntity {
     private void tickProfiler(CallbackInfo ci) {
         if (confluence$cthulhuSprintingTime > 0) this.confluence$cthulhuSprintingTime--;
         if (confluence$entity_coolDown < 0) this.confluence$entity_coolDown = 0;
-        this.confluence$isInShimmer = getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get();
+
         Entity self = confluence$getSelf();
+        boolean isItem = self instanceof ItemEntity;
+        if (getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get()) {
+            if (!confluence$isInShimmer) { // 入微光
+                this.confluence$isInShimmer = true;
+                self.level().playSound(null, self.getX(), self.getY(), self.getZ(), isItem ? ModSoundEvents.SHIMMER_ITEM_INTERACTIONS.get() : ModSoundEvents.SHIMMER_IMMERSION.get(), SoundSource.AMBIENT, 1.0F, 1.0F);
+            }
+        } else {
+            if (confluence$isInShimmer) { // 出微光
+                this.confluence$isInShimmer = false;
+                self.level().playSound(null, self.getX(), self.getY(), self.getZ(), ModSoundEvents.SHIMMER_DETACHMENT.get(), SoundSource.AMBIENT, 1.0F, 1.0F);
+            }
+        }
+
         if (confluence$isInShimmer) {
-            if (!self.level().isClientSide && confluence$entity_coolDown == 0) {
+            if (!self.level().isClientSide && confluence$entity_coolDown == 0 && !isItem) {
                 ShimmerEntityTransmutationEvent.Pre pre = new ShimmerEntityTransmutationEvent.Pre(self);
                 if (MinecraftForge.EVENT_BUS.post(pre)) {
                     confluence$setup(self, pre.getCoolDown(), pre.getSpeedY());
@@ -174,6 +195,7 @@ public abstract class EntityMixin implements IEntity {
                         discard();
                         confluence$setup(target, post.getCoolDown(), post.getSpeedY());
                         self.level().addFreshEntity(target);
+                        self.level().playSound(null, self.getX(), self.getY(), self.getZ(), ModSoundEvents.SHIMMER_EVOLUTION.get(), SoundSource.AMBIENT, 1.0F, 1.0F);
                         return;
                     }
                 }
@@ -187,9 +209,9 @@ public abstract class EntityMixin implements IEntity {
         } else {
             this.confluence$entity_transforming = 0;
             if (confluence$entity_coolDown > 0) this.confluence$entity_coolDown--;
-            if (confluence$entity_coolDown == 0 && confluence$transformData != HAD_SETUP && !(self instanceof ItemEntity)) {
+            if (confluence$entity_coolDown == 0 && confluence$transformData != HAD_SETUP && !isItem) {
                 setGlowingTag(false);
-                if (confluence$transformData == 0) {
+                if (confluence$transformData == HAS_GRAVITY) {
                     setNoGravity(false);
                 }
                 this.confluence$transformData = HAD_SETUP;

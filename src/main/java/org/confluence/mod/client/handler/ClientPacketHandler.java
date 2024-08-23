@@ -174,11 +174,9 @@ public final class ClientPacketHandler {
     public static void handleFlush(FlushPlayerAbilityPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            if (packet.flush()) {
-                LocalPlayer localPlayer = Minecraft.getInstance().player;
-                if (localPlayer != null) localPlayer.getCapability(AbilityProvider.CAPABILITY)
-                    .ifPresent(playerAbility -> playerAbility.flushAbility(localPlayer));
-            }
+            LocalPlayer localPlayer = Minecraft.getInstance().player;
+            if (localPlayer != null) localPlayer.getCapability(AbilityProvider.CAPABILITY)
+                .ifPresent(playerAbility -> playerAbility.flushAbility(localPlayer));
         });
         context.setPacketHandled(true);
     }

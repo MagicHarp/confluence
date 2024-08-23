@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.integration.bettercombat.BetterCombatHelper;
-import org.confluence.mod.mixin.client.MinecraftAccessor;
+import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.AutoAttackPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
@@ -30,6 +30,7 @@ public interface IAutoAttack {
 
     @OnlyIn(Dist.CLIENT)
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
+        if(minecraft.gameMode == null || minecraft.gameMode.isDestroying()) return;
         if (BetterCombatHelper.isLoaded()) {
             ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);
             if (BetterCombatHelper.hasWeaponAttributes(itemStack)) return;
@@ -38,7 +39,7 @@ public interface IAutoAttack {
             if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;
             if (accessor.getMissTime() > 0) accessor.setMissTime(0);
-            double reach = localPlayer.getEntityReach();
+            double reach = Math.max(localPlayer.getEntityReach(), localPlayer.getBlockReach());
             Vec3 from = localPlayer.getEyePosition(1.0F);
             Vec3 viewVector = localPlayer.getViewVector(1.0F);
             Vec3 to = from.add(viewVector.x * reach, viewVector.y * reach, viewVector.z * reach);

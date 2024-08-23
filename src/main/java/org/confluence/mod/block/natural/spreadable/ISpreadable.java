@@ -136,28 +136,28 @@ public interface ISpreadable {
             () -> Blocks.ICE, ModBlocks.PINK_ICE,
             () -> Blocks.PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
             // 邪恶环境方块
-            ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
+            ModBlocks.TR_CRIMSON_GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
             ModBlocks.CORRUPT_GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK,
 
             ModBlocks.EBONY_STONE, ModBlocks.PEARL_STONE,
-            ModBlocks.ANOTHER_CRIMSON_STONE, ModBlocks.PEARL_STONE,
+            ModBlocks.TR_CRIMSON_STONE, ModBlocks.PEARL_STONE,
 
             ModBlocks.EBONY_COBBLESTONE, ModBlocks.PEARL_COBBLESTONE,
-            ModBlocks.ANOTHER_CRIMSON_COBBLESTONE, ModBlocks.PEARL_COBBLESTONE,
+            ModBlocks.TR_CRIMSON_COBBLESTONE, ModBlocks.PEARL_COBBLESTONE,
 
             ModBlocks.HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
             ModBlocks.EBONY_HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
-            ModBlocks.ANOTHER_CRIMSON_HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
+            ModBlocks.TR_CRIMSON_HARDENED_SAND_BLOCK, ModBlocks.PEARL_HARDENED_SAND_BLOCK,
 
             ModBlocks.EBONY_SANDSTONE, ModBlocks.PEARL_SANDSTONE,
-            ModBlocks.ANOTHER_CRIMSON_SANDSTONE, ModBlocks.PEARL_SANDSTONE,
+            ModBlocks.TR_CRIMSON_SANDSTONE, ModBlocks.PEARL_SANDSTONE,
 
             ModBlocks.PURPLE_ICE, ModBlocks.PINK_ICE,
             ModBlocks.PURPLE_PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
             ModBlocks.RED_ICE, ModBlocks.PINK_ICE,
             ModBlocks.RED_PACKED_ICE, ModBlocks.PINK_PACKED_ICE,
             // 蘑菇
-            ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
+            ModBlocks.TR_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             //矿物
             () -> Blocks.REDSTONE_ORE, ModBlocks.SANCTIFICATION_REDSTONE_ORE,
@@ -197,14 +197,14 @@ public interface ISpreadable {
             Ores.FLESHIFICATION_DIAMOND_ORE, Ores.SANCTIFICATION_DIAMOND_ORE,
             ModBlocks.FLESHIFICATION_REDSTONE_ORE, ModBlocks.SANCTIFICATION_REDSTONE_ORE,
             Ores.EBONY_ORE, Ores.SANCTIFICATION_EBONY_ORE,
-            Ores.ANOTHER_CRIMSON_ORE, Ores.SANCTIFICATION_ANOTHER_CRIMSON_ORE,
+            Ores.TR_CRIMSON_ORE, Ores.SANCTIFICATION_TR_CRIMSON_ORE,
             Ores.FLESHIFICATION_EBONY_ORE, Ores.FLESHIFICATION_EBONY_ORE,
-            Ores.FLESHIFICATION_ANOTHER_CRIMSON_ORE, Ores.SANCTIFICATION_ANOTHER_CRIMSON_ORE,
+            Ores.FLESHIFICATION_TR_CRIMSON_ORE, Ores.SANCTIFICATION_TR_CRIMSON_ORE,
             Ores.CORRUPTION_EBONY_ORE, Ores.FLESHIFICATION_EBONY_ORE,
-            Ores.CORRUPTION_ANOTHER_CRIMSON_ORE, Ores.SANCTIFICATION_ANOTHER_CRIMSON_ORE,
+            Ores.CORRUPTION_TR_CRIMSON_ORE, Ores.SANCTIFICATION_TR_CRIMSON_ORE,
             // 植物
             ModBlocks.CORRUPT_GRASS, ModBlocks.HALLOW_GRASS,
-            ModBlocks.ANOTHER_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS,
+            ModBlocks.TR_CRIMSON_GRASS, ModBlocks.HALLOW_GRASS,
             ModBlocks.CRIMSON_THORN, () -> Blocks.AIR,
             ModBlocks.CORRUPTION_THORN, () -> Blocks.AIR,
             ModBlocks.JUNGLE_THORN, () -> Blocks.AIR,
@@ -212,7 +212,7 @@ public interface ISpreadable {
         ),
 
         CRIMSON(
-            () -> Blocks.DIRT, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
+            () -> Blocks.DIRT, ModBlocks.TR_CRIMSON_GRASS_BLOCK,
             // 原木
             () -> Blocks.OAK_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
             () -> Blocks.ACACIA_LOG, ModBlocks.SHADOW_LOG_BLOCKS.LOG,
@@ -267,13 +267,13 @@ public interface ISpreadable {
             ModBlocks.PALM_LOG_BLOCKS.LEAVES, ModBlocks.SHADOW_LOG_BLOCKS.LEAVES,
 
             // 原版环境方块
-            () -> Blocks.GRASS_BLOCK, ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK,
-            () -> Blocks.STONE, ModBlocks.ANOTHER_CRIMSON_STONE,
-            () -> Blocks.COBBLESTONE, ModBlocks.ANOTHER_CRIMSON_COBBLESTONE,
-            () -> Blocks.SANDSTONE, ModBlocks.ANOTHER_CRIMSON_SANDSTONE,
-            () -> Blocks.SAND, ModBlocks.ANOTHER_CRIMSON_SAND,
-            () -> Blocks.GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
-            () -> Blocks.TALL_GRASS, ModBlocks.ANOTHER_CRIMSON_GRASS,
+            () -> Blocks.GRASS_BLOCK, ModBlocks.TR_CRIMSON_GRASS_BLOCK,
+            () -> Blocks.STONE, ModBlocks.TR_CRIMSON_STONE,
+            () -> Blocks.COBBLESTONE, ModBlocks.TR_CRIMSON_COBBLESTONE,
+            () -> Blocks.SANDSTONE, ModBlocks.TR_CRIMSON_SANDSTONE,
+            () -> Blocks.SAND, ModBlocks.TR_CRIMSON_SAND,
+            () -> Blocks.GRASS, ModBlocks.TR_CRIMSON_GRASS,
+            () -> Blocks.TALL_GRASS, ModBlocks.TR_CRIMSON_GRASS,
             () -> Blocks.ICE, ModBlocks.RED_ICE,
             () -> Blocks.PACKED_ICE, ModBlocks.RED_PACKED_ICE,
             //矿物
@@ -291,10 +291,10 @@ public interface ISpreadable {
             Ores.TUNGSTEN_ORE, Ores.FLESHIFICATION_TUNGSTEN_ORE,
             Ores.PLATINUM_ORE, Ores.FLESHIFICATION_PLATINUM_ORE,
             Ores.EBONY_ORE, Ores.FLESHIFICATION_EBONY_ORE,
-            Ores.ANOTHER_CRIMSON_ORE, Ores.FLESHIFICATION_ANOTHER_CRIMSON_ORE,
+            Ores.TR_CRIMSON_ORE, Ores.FLESHIFICATION_TR_CRIMSON_ORE,
 
             // 蘑菇
-            ModBlocks.LIFE_MUSHROOM, ModBlocks.ANOTHER_CRIMSON_MUSHROOM
+            ModBlocks.LIFE_MUSHROOM, ModBlocks.TR_CRIMSON_MUSHROOM
         ),
 
 
@@ -382,7 +382,7 @@ public interface ISpreadable {
             Ores.TUNGSTEN_ORE, Ores.CORRUPTION_TUNGSTEN_ORE,
             Ores.PLATINUM_ORE, Ores.CORRUPTION_PLATINUM_ORE,
             Ores.EBONY_ORE, Ores.CORRUPTION_EBONY_ORE,
-            Ores.ANOTHER_CRIMSON_ORE, Ores.CORRUPTION_ANOTHER_CRIMSON_ORE,
+            Ores.TR_CRIMSON_ORE, Ores.CORRUPTION_TR_CRIMSON_ORE,
 
             Ores.SANCTIFICATION_TIN_ORE, Ores.CORRUPTION_TIN_ORE,
             Ores.SANCTIFICATION_LEAD_ORE, Ores.CORRUPTION_LEAD_ORE,
@@ -429,14 +429,14 @@ public interface ISpreadable {
         PURE(
             ModBlocks.ASH_BLOCK, ModBlocks.ASH_GRASS_BLOCK,
             () -> Blocks.MUD, ModBlocks.MUSHROOM_GRASS_BLOCK,
-            ModBlocks.ANOTHER_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
+            ModBlocks.TR_CRIMSON_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.EBONY_MUSHROOM, ModBlocks.LIFE_MUSHROOM,
             ModBlocks.CORRUPT_GRASS, () -> Blocks.GRASS,
-            ModBlocks.ANOTHER_CRIMSON_GRASS, () -> Blocks.GRASS,
+            ModBlocks.TR_CRIMSON_GRASS, () -> Blocks.GRASS,
             ModBlocks.HALLOW_GRASS, () -> Blocks.GRASS,
-            ModBlocks.ANOTHER_CRIMSON_STONE, () -> Blocks.STONE,
-            ModBlocks.ANOTHER_CRIMSON_SAND, () -> Blocks.SAND,
-            ModBlocks.ANOTHER_CRIMSON_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
+            ModBlocks.TR_CRIMSON_STONE, () -> Blocks.STONE,
+            ModBlocks.TR_CRIMSON_SAND, () -> Blocks.SAND,
+            ModBlocks.TR_CRIMSON_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
             ModBlocks.CORRUPT_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
             ModBlocks.HALLOW_GRASS_BLOCK, () -> Blocks.GRASS_BLOCK,
             ModBlocks.CRIMSON_THORN, () -> Blocks.AIR,

@@ -6,7 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
@@ -46,6 +46,8 @@ public final class PlayerJumpHandler {
     public static boolean onFly = false;
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
+        if (StepStoolHandler.onStool()) return;
+
         if (localPlayer.onGround()) {
             flushState(true);
         } else if (jumping) {
@@ -65,7 +67,7 @@ public final class PlayerJumpHandler {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);
-                localPlayer.playSound(ModSoundsEvent.FART_SOUND.get());
+                localPlayer.playSound(ModSoundEvents.FART_SOUND.get());
             } else if (!sandstormFinished && sandstormSpeed > 0.0) {
                 if (remainSandstormTicks-- > 0) oneTimeJump(localPlayer, sandstormSpeed);
                 else jumpKeyDown = true;
@@ -76,12 +78,12 @@ public final class PlayerJumpHandler {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, tsunamiSpeed);
-                localPlayer.playSound(ModSoundsEvent.DOUBLE_JUMP.get());
+                localPlayer.playSound(ModSoundEvents.DOUBLE_JUMP.get());
             } else if (!cloudFinished && cloudSpeed > 0.0) {
                 cloudFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, cloudSpeed);
-                localPlayer.playSound(ModSoundsEvent.DOUBLE_JUMP.get());
+                localPlayer.playSound(ModSoundEvents.DOUBLE_JUMP.get());
             } else if (remainFlyTicks-- > 0) {
                 fly(localPlayer, flySpeed);
             } else {

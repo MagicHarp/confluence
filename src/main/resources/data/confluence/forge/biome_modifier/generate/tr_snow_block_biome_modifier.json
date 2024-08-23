@@ -11,5 +11,5 @@
     "minecraft:snowy_taiga"
   ],
   "features": "confluence:tr_snow_block",
-  "step": "surface_structures"
+  "step": "underground_decoration"
 }

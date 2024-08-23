@@ -21,8 +21,8 @@ public class TsunamiInABottle extends BaseCurioItem implements IMultiJump {
     }
 
     @Override
-    public double getJumpSpeed() {
-        return 1.0;
+    public float getJumpSpeed() {
+        return 1.0F;
     }
 
     @Override

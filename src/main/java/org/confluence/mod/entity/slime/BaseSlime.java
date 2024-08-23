@@ -20,10 +20,11 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
+import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class BaseSlime extends Slime {
+public class BaseSlime extends Slime implements DeathAnimOptions {
     private final int size;
     private final ItemStack itemStack;
     private final FloatRGB color;
@@ -66,6 +67,7 @@ public class BaseSlime extends Slime {
 
     @Override
     public void tick() {
+        resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {
@@ -108,5 +110,8 @@ public class BaseSlime extends Slime {
         }
     }
 
-
+    @Override
+    public float[] getBloodColor(){
+        return color.mixture(new FloatRGB(0,0,0),0.5f).toArray();
+    }
 }

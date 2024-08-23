@@ -1,6 +1,5 @@
 package org.confluence.mod.item.common;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +11,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
 import org.confluence.mod.misc.ModRarity;
-import org.confluence.mod.misc.ModSoundsEvent;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicMirror extends Item {
@@ -31,7 +30,7 @@ public class MagicMirror extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        player.playSound(ModSoundsEvent.TRANSMISSION.get());
+        player.playSound(ModSoundEvents.TRANSMISSION.get());
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
@@ -43,7 +42,7 @@ public class MagicMirror extends Item {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         if (level.isClientSide) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(itemStack);
+            //Minecraft.getInstance().gameRenderer.displayItemActivation(itemStack);
         } else if (living instanceof ServerPlayer serverPlayer) {
             BlockPos pos = serverPlayer.getRespawnPosition();
             if (pos == null) {

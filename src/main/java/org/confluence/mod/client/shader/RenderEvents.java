@@ -18,8 +18,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.mixin.client.LevelRendererAccessor;
-import org.confluence.mod.mixin.client.RenderChunkInfoAccessor;
+import org.confluence.mod.mixin.client.accessor.LevelRendererAccessor;
+import org.confluence.mod.mixin.client.accessor.RenderChunkInfoAccessor;
 import org.joml.Matrix4f;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)

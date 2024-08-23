@@ -29,12 +29,12 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
     }
 
     @Override
-    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
         if (context instanceof EntityCollisionContext context1 && context1.getEntity() instanceof Player player) {
-            Optional<ItemStack> curio = CuriosUtils.findCurio(player, CurioItems.SPECTRE_GOGGLES.get());
+            Optional<ItemStack> curio = CuriosUtils.findCurioAt(player, CurioItems.SPECTRE_GOGGLES.get(), "accessory");
             if (curio.isPresent()) {
                 ItemStack itemStack = curio.get();
-                if (itemStack.getTag() != null && itemStack.getTag().getBoolean("enable")) {
+                if (itemStack.getTag() == null || !itemStack.getTag().getBoolean("enable")) {
                     return Shapes.empty();
                 }
                 return Shapes.block();
@@ -44,8 +44,8 @@ public class EchoBlock extends HalfTransparentBlock implements CustomModel, Cust
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext context) {
-        return getCollisionShape(blockState, blockGetter, blockPos, context);
+    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return getShape(pState, pLevel, pPos, pContext);
     }
 
     @Override

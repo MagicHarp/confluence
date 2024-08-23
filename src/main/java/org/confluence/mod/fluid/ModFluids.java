@@ -5,8 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
@@ -15,19 +13,13 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.common.Boxes;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
@@ -139,19 +131,19 @@ public final class ModFluids {
 
     public static void registerInteraction() {
         FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            ForgeMod.WATER_TYPE.get(),fluidState -> fluidState.isSource() ? Blocks.HONEY_BLOCK.defaultBlockState() : ModBlocks.THIN_HONEY_BLOCK.get().defaultBlockState()
+            ForgeMod.WATER_TYPE.get(), fluidState -> fluidState.isSource() ? Blocks.HONEY_BLOCK.defaultBlockState() : ModBlocks.THIN_HONEY_BLOCK.get().defaultBlockState()
         ));
         FluidInteractionRegistry.addInteraction(HONEY.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            ForgeMod.LAVA_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState() : ModBlocks.LOOSE_HONEY_BLOCK.get().defaultBlockState()
+            ForgeMod.LAVA_TYPE.get(), fluidState -> fluidState.isSource() ? ModBlocks.CRISPY_HONEY_BLOCK.get().defaultBlockState() : ModBlocks.LOOSE_HONEY_BLOCK.get().defaultBlockState()
         ));
         FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            ForgeMod.WATER_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
+            ForgeMod.WATER_TYPE.get(), fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
         ));
         FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            ForgeMod.LAVA_TYPE.get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
+            ForgeMod.LAVA_TYPE.get(), fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
         ));
         FluidInteractionRegistry.addInteraction(SHIMMER.fluidType().get(), new FluidInteractionRegistry.InteractionInformation(
-            HONEY.fluidType().get(),fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
+            HONEY.fluidType().get(), fluidState -> fluidState.isSource() ? ModBlocks.AETHERIUM_BLOCK.get().defaultBlockState() : ModBlocks.DARK_AETHERIUM_BLOCK.get().defaultBlockState()
         ));
     }
 
@@ -161,7 +153,7 @@ public final class ModFluids {
         // 顶替
         addItem(ItemTags.WOOL, Items.WHITE_WOOL, 1);
         addItem(ItemTags.WOOL_CARPETS, Items.WHITE_CARPET, 1);
-        addItem(Items.CRAFTING_TABLE, Items.OAK_PLANKS,4);
+        addItem(Items.CRAFTING_TABLE, Items.OAK_PLANKS, 4);
         // 饰品转化
         addItem(BALLOON_PUFFERFISH.get(), SHINY_RED_BALLOON.get());
         addItem(MAGMA_STONE.get(), LAVA_CHARM.get());
@@ -207,12 +199,12 @@ public final class ModFluids {
         addItem(Torches.MUSHROOM_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
         // 匣子转化
         // 宝石转化
-        addItem(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
+        addItem(Materials.TOPAZ.get(), Materials.TR_AMETHYST.get());
         addItem(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
         addItem(Items.EMERALD, Materials.SAPPHIRE.get());
         addItem(Materials.RUBY.get(), Items.EMERALD);
         addItem(Items.DIAMOND, Materials.RUBY.get());
-        addItem(Materials.ANOTHER_AMETHYST.get(), Items.DIRT);
+        addItem(Materials.TR_AMETHYST.get(), Items.DIRT);
         // 锭到矿的转化
         addItem(Materials.TITANIUM_INGOT.get(), Materials.RAW_TITANIUM.get());
         addItem(Materials.ADAMANTITE_INGOT.get(), Materials.RAW_ADAMANTITE.get());
@@ -222,7 +214,7 @@ public final class ModFluids {
         addItem(Materials.COBALT_INGOT.get(), Materials.RAW_COBALT.get());
         addItem(Materials.HELLSTONE_INGOT.get(), Materials.PRIMORDIAL_HELLSTONE_INGOT.get());
         addItem(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), Materials.RAW_HELLSTONE.get());
-        addItem(Materials.ANOTHER_CRIMSON_INGOT.get(), Materials.RAW_ANOTHER_CRIMSON.get());
+        addItem(Materials.TR_CRIMSON_INGOT.get(), Materials.RAW_TR_CRIMSON.get());
         addItem(Materials.EBONY_INGOT.get(), Materials.RAW_EBONY.get());
         addItem(Materials.METEORITE_INGOT.get(), Materials.RAW_METEORITE.get());
         addItem(Materials.PLATINUM_INGOT.get(), Materials.RAW_PLATINUM.get());
@@ -242,10 +234,10 @@ public final class ModFluids {
         addItem(Materials.RAW_PALLADIUM.get(), Materials.RAW_COBALT.get());
         addItem(Materials.RAW_COBALT.get(), Materials.RAW_PLATINUM.get());
         addItem(Materials.RAW_PLATINUM.get(), Items.RAW_GOLD);
-        addItem(Items.RAW_GOLD,Materials.RAW_TUNGSTEN.get());
+        addItem(Items.RAW_GOLD, Materials.RAW_TUNGSTEN.get());
         addItem(Materials.RAW_TUNGSTEN.get(), Materials.RAW_SILVER.get());
         addItem(Materials.RAW_SILVER.get(), Materials.RAW_LEAD.get());
-        addItem(Materials.RAW_LEAD.get(),Items.RAW_IRON);
+        addItem(Materials.RAW_LEAD.get(), Items.RAW_IRON);
         addItem(Items.RAW_IRON, Materials.RAW_TIN.get());
         addItem(Materials.RAW_TIN.get(), Items.RAW_COPPER);
 

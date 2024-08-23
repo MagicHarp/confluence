@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SandstormInABottle extends BaseCurioItem implements IOneTimeJump {
     public static final int TICKS = 20;
-    public static final double SPEED = 0.45;
+    public static final float SPEED = 0.45F;
 
     public SandstormInABottle(Rarity rarity) {
         super(rarity);
@@ -30,7 +30,7 @@ public class SandstormInABottle extends BaseCurioItem implements IOneTimeJump {
     }
 
     @Override
-    public double getJumpSpeed() {
+    public float getJumpSpeed() {
         return SPEED;
     }
 

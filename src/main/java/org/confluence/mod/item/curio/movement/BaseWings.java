@@ -25,12 +25,12 @@ import top.theillusivec4.curios.api.SlotContext;
 public class BaseWings extends BaseCurioItem implements IMayFly, NormalGeoItem, IFallResistance {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final int flyTicks;
-    private final double flySpeed;
+    private final float flySpeed;
 
-    public BaseWings(Rarity rarity, int flyTicks, double multiY) {
+    public BaseWings(Rarity rarity, int flyTicks, float multiY) {
         super(rarity);
         this.flyTicks = flyTicks;
-        this.flySpeed = 0.2 * multiY;
+        this.flySpeed = 0.2F * multiY;
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
@@ -40,7 +40,7 @@ public class BaseWings extends BaseCurioItem implements IMayFly, NormalGeoItem, 
     }
 
     @Override
-    public double getFlySpeed() {
+    public float getFlySpeed() {
         return flySpeed;
     }
 

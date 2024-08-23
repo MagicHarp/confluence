@@ -1,5 +1,6 @@
 package org.confluence.mod.item.hammer;
 
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTiers;
@@ -8,7 +9,7 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum Hammers implements EnumRegister<HammerItem> {
-    WOODEN_HAMMER("wooden_hammer", () -> new HammerItem(ModTiers.WOODEN, 1, 1)),
+    WOODEN_HAMMER("wooden_hammer", () -> new HammerItem(Tiers.WOOD, 1, 1)),
     COPPER_HAMMER("copper_hammer", () -> new HammerItem(ModTiers.COPPER, 2, 1)),
     TIN_HAMMER("tin_hammer", () -> new HammerItem(ModTiers.TIN, 2, 1)),
     LEAD_HAMMER("lead_hammer", () -> new HammerItem(ModTiers.LEAD, 3, 1)),
@@ -17,7 +18,8 @@ public enum Hammers implements EnumRegister<HammerItem> {
     GOLDEN_HAMMER("golden_hammer", () -> new HammerItem(ModTiers.GOLD, 5, 1)),
     PLATINUM_HAMMER("platinum_hammer", () -> new HammerItem(ModTiers.PLATINUM, 5, 1)),
     EBONY_HAMMER("ebony_hammer", () -> new HammerItem(ModTiers.EBONY, 6, 1)),
-    ANOTHER_CRIMSON_HAMMER("another_crimson_hammer", () -> new HammerItem(ModTiers.ANOTHER_CRIMSON, 6, 1));
+    TR_CRIMSON_HAMMER("tr_crimson_hammer", () -> new HammerItem(ModTiers.TR_CRIMSON, 6, 1)),
+    PWNHAMMER("pwnhammer", () -> new HammerItem(ModTiers.HALLOWED, 7, 1));
 
     private final RegistryObject<HammerItem> value;
 

@@ -7,36 +7,36 @@
         {
           "type": "minecraft:item",
           "name": "confluence:cloud_in_a_bottle",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "confluence:band_of_regeneration",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "confluence:hermes_boots",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "confluence:magic_mirror",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:item",
           "name": "confluence:extractinator",
-          "weight": 0.5
+          "weight": 1
         },
         {
           "type": "minecraft:item",
           "name": "confluence:shoe_spikes",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:empty",
-          "weight": 7
+          "weight": 14
         }
       ],
       "rolls": 1
