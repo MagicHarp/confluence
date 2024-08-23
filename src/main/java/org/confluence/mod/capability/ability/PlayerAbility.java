@@ -17,7 +17,6 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.IAggroAttach;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
@@ -33,7 +32,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private double jumpBoost;
     private int fallResistance;
     private int invulnerableTime;
-    private double criticalChance;
     private boolean fireImmune;
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
@@ -58,7 +56,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.jumpBoost = 1.0;
         this.fallResistance = 0;
         this.invulnerableTime = 20;
-        this.criticalChance = 0.0;
         this.fireImmune = false;
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
@@ -84,7 +81,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicDouble jump = new AtomicDouble(1.0);
         AtomicInteger fall = new AtomicInteger();
         AtomicInteger invul = new AtomicInteger(20);
-        AtomicDouble chance = new AtomicDouble();
         AtomicBoolean fire = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
 
@@ -108,7 +104,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof IInvulnerableTime iInvulnerableTime) {
                     invul.set(Math.max(iInvulnerableTime.getTime(), invulnerableTime));
                 }
-                if (item instanceof ICriticalHit iCriticalHit) chance.addAndGet(iCriticalHit.getChance());
                 if (item instanceof IFireImmune) fire.set(true);
                 if (item instanceof ILavaImmune iLavaImmune) {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
@@ -124,7 +119,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.jumpBoost = jump.get();
         this.fallResistance = fall.get();
         this.invulnerableTime = invul.get();
-        this.criticalChance = chance.get();
         this.fireImmune = fire.get();
         this.maxLavaImmuneTicks = lava.get();
 
@@ -146,10 +140,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public int getInvulnerableTime() {
         return invulnerableTime;
-    }
-
-    public double getCriticalChance() {
-        return criticalChance;
     }
 
     public boolean isFireImmune() {
@@ -295,7 +285,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putDouble("jumpBoost", jumpBoost);
         nbt.putInt("fallResistance", fallResistance);
         nbt.putInt("invulnerableTime", invulnerableTime);
-        nbt.putDouble("criticalChance", criticalChance);
         nbt.putBoolean("fireImmune", fireImmune);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
 
@@ -321,7 +310,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.jumpBoost = nbt.getDouble("jumpBoost");
         this.fallResistance = nbt.getInt("fallResistance");
         this.invulnerableTime = nbt.getInt("invulnerableTime");
-        this.criticalChance = nbt.getDouble("criticalChance");
         this.fireImmune = nbt.getBoolean("fireImmune");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
 
@@ -345,7 +333,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.jumpBoost = playerAbility.jumpBoost;
         this.fallResistance = playerAbility.fallResistance;
         this.invulnerableTime = playerAbility.invulnerableTime;
-        this.criticalChance = playerAbility.criticalChance;
         this.fireImmune = playerAbility.fireImmune;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
 

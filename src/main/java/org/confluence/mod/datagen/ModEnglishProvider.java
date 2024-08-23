@@ -650,12 +650,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.celestial_stone.info2", "It offers the same boosts as its components do, and as such, it is active during both day and night.");
         add("item.confluence.celestial_stone.info3", "It can be combined with the Moon Shell to form a Celestial Shell。");
         add("item.confluence.celestial_stone.info4", "Stat boosts:");
-        add("item.confluence.celestial_stone.info5", "+10% melee speed");
-        add("item.confluence.celestial_stone.info6", "+10% damage (all types)");
-        add("item.confluence.celestial_stone.info7", "+2% critical strike chance");
+        add("item.confluence.celestial_stone.info5", "+%s%% melee speed");
+        add("item.confluence.celestial_stone.info6", "+%s%% damage (all types)");
+        add("item.confluence.celestial_stone.info7", "+%s%% critical strike chance");
         add("item.confluence.celestial_stone.info8", "+1 HP/s life regeneration");
-        add("item.confluence.celestial_stone.info9", "+4 defense");
-        add("item.confluence.celestial_stone.info10", "+15% mining speed");
+        add("item.confluence.celestial_stone.info9", "+%s defense");
+        add("item.confluence.celestial_stone.info10", "+%s%% mining speed");
         add("item.confluence.celestial_stone.info11", "+0.5 minion knockback");
         add("item.confluence.cobalt_shield.info", "The Cobalt Shield is a pre-Hardmode shield accessory that grants the player immunity to knockback when equipped, and also provides 1 defense.");
         add("item.confluence.cobalt_shield.info2", "The Cobalt Shield has a 1/7 (14.29%) chance of being obtained from the Locked Gold Chests found in the Dungeon, as well as a 1/7 (14.29%) chance of being obtained from Golden Lock Boxes.");

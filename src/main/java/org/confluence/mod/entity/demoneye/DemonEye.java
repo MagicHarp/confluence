@@ -36,10 +36,10 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;
-//    public AttackPhase attackPhase;
+    //    public AttackPhase attackPhase;
     public BlockPos anchorPoint;
     public DemonEyeSurroundTargetGoal surroundTargetGoal;
-    private boolean dead=false;
+    private boolean dead = false;
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
@@ -61,10 +61,19 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
             return false;
         }
         if (checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
-            int y = pPos.getY();
-            boolean levelCon = y < 260 && level.isNight() && pLevel.canSeeSky(pPos);
             // 新月100%，其他80%
-            return level.getMoonPhase() == 4 ? levelCon : level.random.nextInt(99) < 80;  // 从六分仪的翻译看的
+            if (level.getMoonPhase() == 4) {
+                if (pPos.getY() < 260 && level.isNight()) {
+                    for (BlockPos.MutableBlockPos blockPos = pPos.mutable(); blockPos.getY() < level.getMaxBuildHeight(); blockPos.move(0, 1, 0)) {
+                        if (level.getBlockState(blockPos).isCollisionShapeFullBlock(level, blockPos)) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            } else {
+                return level.random.nextInt(99) < 80;
+            }
         }
         return false;
     }
@@ -90,13 +99,13 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     }
 
     @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag pCompound){
+    public void addAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getVariant().id);
     }
 
     @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag pCompound){
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setVariant(DemonEyeVariant.byId(pCompound.getInt("Variant")));
     }
@@ -110,47 +119,47 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     }
 
     @Override
-    protected void checkFallDamage(double pY, boolean pOnGround, @NotNull BlockState pState, @NotNull BlockPos pPos){
+    protected void checkFallDamage(double pY, boolean pOnGround, @NotNull BlockState pState, @NotNull BlockPos pPos) {
     }
 
     @Override
-    public boolean isPushable(){
+    public boolean isPushable() {
         return false;
     }
 
     @Override
-    public void push(@NotNull Entity pEntity){
+    public void push(@NotNull Entity pEntity) {
     }
 
     @Override
-    protected void pushEntities(){
+    protected void pushEntities() {
     }
 
-    public void move(@NotNull MoverType pType, @NotNull Vec3 motion){
-        if(dead){
+    public void move(@NotNull MoverType pType, @NotNull Vec3 motion) {
+        if (dead) {
             super.move(pType, motion);
             return;
         }
         Vec3 collide = ((EntityAccessor) this).callCollide(motion);
-        if(collide.x !=motion.x){
+        if (collide.x != motion.x) {
             motion = new Vec3(motion.x < 0 ? 0.22 : -0.22, motion.y, motion.z);
         }
-        if(collide.y !=motion.y){
+        if (collide.y != motion.y) {
             boolean downward = motion.y < 0;
-            motion=new Vec3(motion.x,downward? Mth.clamp(-motion.y,0.1,0.22):Mth.clamp(-motion.y,-0.22,-0.1), motion.z);
-            if(surroundTargetGoal.targetPos != null && getTarget() != null){
+            motion = new Vec3(motion.x, downward ? Mth.clamp(-motion.y, 0.1, 0.22) : Mth.clamp(-motion.y, -0.22, -0.1), motion.z);
+            if (surroundTargetGoal.targetPos != null && getTarget() != null) {
                 surroundTargetGoal.targetPos = surroundTargetGoal.targetPos.with(Direction.Axis.Y, getTarget().position().y + (downward ? 2 : -1));
             }
         }
-        if(collide.z !=motion.z){
-            motion=new Vec3(motion.x, motion.y, motion.z < 0 ? 0.3 : -0.3);
+        if (collide.z != motion.z) {
+            motion = new Vec3(motion.x, motion.y, motion.z < 0 ? 0.3 : -0.3);
         }
         setDeltaMovement(motion);
         super.move(pType, motion);
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         // TODO: 仇恨值
         Vec3 pos = position();
         setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
@@ -160,30 +169,30 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     }
 
     @Override
-    public void knockback(double pStrength, double pX, double pZ){
+    public void knockback(double pStrength, double pX, double pZ) {
         // TODO: 调数值
         super.knockback(pStrength * 2, pX, pZ);
     }
 
     @Override
-    protected SoundEvent getDeathSound(){
+    protected SoundEvent getDeathSound() {
         return ModSoundEvents.ROUTINE_DEATH.get();
     }
 
     @Override
-    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource){
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return ModSoundEvents.ROUTINE_HURT.get();
     }
 
     @Override
-    public void onAddedToWorld(){
+    public void onAddedToWorld() {
         super.onAddedToWorld();
         setNoGravity(true);
     }
 
     @Override
-    protected void tickDeath(){
-        if(!dead){
+    protected void tickDeath() {
+        if (!dead) {
             // 我怕频繁set会影响性能，虽然会检查是否不同再真的set，但是它会从map里面get，
             // 每次get都有锁的操作，我怕锁太慢了，但是其实所有生物每刻都要检查一次生命值来决定是否要
             // 调这个方法，所以我也不确定会不会慢
@@ -193,7 +202,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         super.tickDeath();
     }
 
-        // 貌似不用：1.原版的setXRot并不吃性能 2.详见tick()部分的朝向更新
+    // 貌似不用：1.原版的setXRot并不吃性能 2.详见tick()部分的朝向更新
 //    @Override
 //    public void setXRot(float pXRot){
 ////        if(pXRot == 0 || pXRot == getXRot()){

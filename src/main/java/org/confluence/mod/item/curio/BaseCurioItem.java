@@ -1,6 +1,7 @@
 package org.confluence.mod.item.curio;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -106,5 +108,10 @@ public class BaseCurioItem extends Item implements ICurioItem {
 
     public Component[] getInformation() {
         return new Component[]{};
+    }
+
+    public String[] getModifierValues(Attribute... attributes) {
+        Multimap<Attribute, AttributeModifier> modifiers = getAttributeModifiers(new SlotContext(null, null, -1, false, false), null, null);
+        return Arrays.stream(attributes).map(attribute -> ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(((AttributeModifier) modifiers.get(attribute).toArray()[0]).getAmount() * 100.0)).toArray(String[]::new);
     }
 }

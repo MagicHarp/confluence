@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableFloat;
@@ -26,11 +27,13 @@ import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
+import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModAttributes;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
 import org.confluence.mod.item.common.PlayerAbilityItem;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
 import org.confluence.mod.misc.ModTags;
@@ -111,7 +114,21 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
-        ICriticalHit.apply(event);
+        Player player = event.getEntity();
+        if (!event.isVanillaCritical()) {
+            double chance = player.getAttributeValue(ModAttributes.getCriticalChance());
+            if (player.level().getDayTime() % 24000 > 12000) {
+                if (CuriosUtils.hasCurio(player, CurioItems.MOON_STONE.get())) chance += 0.02;
+            } else {
+                if (CuriosUtils.hasCurio(player, CurioItems.SUN_STONE.get())) chance += 0.02;
+            }
+            if (player.hasEffect(ModEffects.CEREBRAL_MINDTRICK.get())) chance += 0.04;
+            if (player.hasEffect(ModEffects.RAGE.get())) chance *= 1.1;
+            if (player.level().random.nextFloat() < chance) {
+                event.setDamageModifier(1.5F);
+                event.setResult(Event.Result.ALLOW);
+            }
+        }
     }
 
     @SubscribeEvent

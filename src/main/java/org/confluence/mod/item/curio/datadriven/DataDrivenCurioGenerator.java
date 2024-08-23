@@ -70,8 +70,8 @@ public class DataDrivenCurioGenerator {
                 intValue(cw, "getAggro", clazz);
             } else if (clazz == IArmorPass.class) {
                 intValue(cw, "getPassValue", clazz);
-            } else if (clazz == ICriticalHit.class) {
-                doubleValue(cw, "getChance", clazz);
+//            } else if (clazz == ICriticalHit.class) {
+//                doubleValue(cw, "getChance", clazz);
             } else if (clazz == IInvulnerableTime.class) {
                 intValue(cw, "getTime", clazz);
             } else if (clazz == IMagicAttack.class) {
