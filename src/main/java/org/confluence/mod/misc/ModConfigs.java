@@ -64,7 +64,9 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MIN = BUILDER.defineInRange("min", 0.8, 0.0, 1.0);
     public static final ForgeConfigSpec.DoubleValue RANDOM_ATTACK_DAMAGE_MAX = BUILDER.defineInRange("max", 1.2, 1.0, 2.0);
 
-    public static final ForgeConfigSpec.IntValue BERSERKERS_GLOVE_AGGRO = BUILDER.pop().push("Aggro Attach").defineInRange("BerserkersGlove", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    public static final ForgeConfigSpec.IntValue MAX_ACCESSORIES = BUILDER.pop().defineInRange("Max Accessory Amount", 7, 6, 100);
+
+    public static final ForgeConfigSpec.IntValue BERSERKERS_GLOVE_AGGRO = BUILDER.push("Aggro Attach").defineInRange("BerserkersGlove", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final ForgeConfigSpec.IntValue FLESH_KNUCKLES_AGGRO = BUILDER.defineInRange("FleshKnuckles", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final ForgeConfigSpec.IntValue HERO_SHIELD_AGGRO = BUILDER.defineInRange("HeroShield", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final ForgeConfigSpec.IntValue PUTRID_SCENT_AGGRO = BUILDER.defineInRange("PutridScent", -400, Integer.MIN_VALUE, Integer.MAX_VALUE);

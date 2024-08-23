@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,7 +28,7 @@ public class DemonHeart extends Item implements ModRarity.Expert {
         CuriosApi.getCuriosInventory(pPlayer).ifPresent(iCuriosItemHandler -> {
             ICurioStacksHandler iCurioStacksHandler = iCuriosItemHandler.getCurios().get("accessory");
             if (iCurioStacksHandler != null) {
-                if (iCurioStacksHandler.getSlots() < 7) {
+                if (iCurioStacksHandler.getSlots() < ModConfigs.MAX_ACCESSORIES.get()) {
                     itemStack.shrink(1);
                     iCurioStacksHandler.grow(1);
                 }
