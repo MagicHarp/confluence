@@ -128,8 +128,7 @@ public final class ModUtils {
     public static void updateEntityRotation(Entity entity, Vec3 dir){
         float[] angle = dirToRot(dir);
         entity.setYRot(angle[0]);
-        // 内部的XRot与F3中的显示信息符号相反
-        entity.setXRot(- angle[1]);
+        entity.setXRot(angle[1]);
     }
 
     /**

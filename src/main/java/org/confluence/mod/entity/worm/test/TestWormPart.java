@@ -23,6 +23,7 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
     /** 实际使用的constructor */
     public TestWormPart(TestWormEntity parent, int segmentIndex, float maxHealth) {
         super(parent, segmentIndex, maxHealth);
+        ModUtils.testMessage(level(), segmentIndex + "I2");
     }
 
 
@@ -30,6 +31,8 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
     @Override
     protected void tickSegment() {
         super.tickSegment();
+        ModUtils.testMessage(level(), segmentIndex + " : " + position());
+        ModUtils.testMessage(level(), segmentType + ", " + getDeltaMovement());
 
         if (this.segmentType == SegmentType.HEAD) {
             setDeltaMovement(0.5, Mth.sin(++indexAI * Mth.TWO_PI / 60f), 0);

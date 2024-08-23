@@ -32,7 +32,6 @@ public class TestWormEntity extends AbstractWormEntity {
 
     public TestWormEntity(EntityType<? extends AbstractWormEntity> entityType, Level level) {
         super(entityType, level, WORM_LENGTH, WORM_HEALTH);
-        ModUtils.testMessage(level(), "constructor");
     }
     @Override
     protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {

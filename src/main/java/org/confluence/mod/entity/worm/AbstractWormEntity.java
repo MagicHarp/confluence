@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.util.DelayedTaskExecutor;
 import org.confluence.mod.util.ModUtils;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -28,13 +29,13 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     private BaseWormPart<? extends AbstractWormEntity> spawnWormPart() {
         // 无论为何生成体节，都默认判定为体节已生成完毕
         pendingSegmentsSpawn = false;
-//        Tadpole tadpole = EntityType.TADPOLE.create(pLevel);
-        BaseWormPart<? extends AbstractWormEntity> part = partConstructor( wormParts.size() );
-        part.moveTo( position() );
 
+        BaseWormPart<? extends AbstractWormEntity> part = partConstructor( this.wormParts.size() );
+        this.wormParts.add(part);
+
+        part.moveTo( position() );
         level().addFreshEntity(part);
 
-        this.wormParts.add(part);
         return part;
     }
     public AbstractWormEntity(EntityType<? extends AbstractWormEntity> pEntityType, Level pLevel, int length, float maxHealth) {
