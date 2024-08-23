@@ -35,6 +35,7 @@
     "minVersion": "0.8.5",
     "mixins": [
         "DebugInfoMixin",
+        "ForgeHookMixin",
         "InventoryChangeTriggerMixin",
         "TagLoaderMixin",
         "accessor.BlockItemAccessor",
@@ -42,6 +43,7 @@
         "accessor.DistanceManagerAccessor",
         "accessor.EntityAccessor",
         "accessor.FishingHookAccessor",
+        "accessor.ItemEntityAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
         "accessor.RangedAttributeAccessor",

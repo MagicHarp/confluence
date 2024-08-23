@@ -13,7 +13,7 @@ import org.confluence.mod.client.model.entity.StepStoolModel;
 import org.confluence.mod.entity.StepStoolEntity;
 
 public class StepStoolRenderer extends EntityRenderer<StepStoolEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/curio/step_stool.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/step_stool.png");
 
     private final StepStoolModel model;
 

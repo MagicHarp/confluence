@@ -10,6 +10,7 @@ import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
@@ -282,6 +283,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
         add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
         add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
+        add("item.confluence.hand_of_creation.tooltip", "采矿速度提高25%");
+        add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
+        add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
+        add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
@@ -2314,5 +2319,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.STONED.get(), "石化");
         //endregion items
 
+        //region entities
+        add(ModEntities.STEP_STOOL.get(), "梯凳");
+        //endregion entities
     }
 }
