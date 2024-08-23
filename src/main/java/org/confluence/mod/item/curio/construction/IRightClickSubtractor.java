@@ -18,8 +18,11 @@ public interface IRightClickSubtractor {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 Item item = itemHandlerModifiable.getStackInSlot(i).getItem();
-                if (item == CurioItems.ARCHITECT_GIZMO_PACK.get() || item == CurioItems.HAND_OF_CREATION.get()) {
+                if (item == CurioItems.ARCHITECT_GIZMO_PACK.get()) {
                     atomic.set(2);
+                    break;
+                } else if (item == CurioItems.HAND_OF_CREATION.get()) {
+                    atomic.set(3);
                     break;
                 }
                 if (item instanceof IRightClickSubtractor) atomic.addAndGet(1);

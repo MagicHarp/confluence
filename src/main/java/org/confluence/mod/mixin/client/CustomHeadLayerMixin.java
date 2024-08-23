@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** 修头戴物品不肢解 */
+/** 修头戴物品不肢解（不包括头颅） */
 @Mixin(CustomHeadLayer.class)
 public abstract class CustomHeadLayerMixin<T extends LivingEntity, M extends EntityModel<T> & HeadedModel> extends RenderLayer<T, M> {
     private CustomHeadLayerMixin(RenderLayerParent<T, M> pRenderer){

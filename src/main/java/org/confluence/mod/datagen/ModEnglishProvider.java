@@ -252,6 +252,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "Improved ability if combined with Shoe Spikes");
         add("item.confluence.shoe_spikes.tooltip", "Improved ability if combined with Climbing Claws");
         add("item.confluence.frog_gear.tooltip", "'It ain't easy being green'");
+        add("item.confluence.hand_of_creation.tooltip", "Increases mining speed by 25%");
+        add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
+        add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
+        add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");
@@ -655,7 +659,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.celestial_stone.info7", "+%s%% critical strike chance");
         add("item.confluence.celestial_stone.info8", "+1 HP/s life regeneration");
         add("item.confluence.celestial_stone.info9", "+%s defense");
-        add("item.confluence.celestial_stone.info10", "+%s%% mining speed");
+        add("item.confluence.celestial_stone.info10", "+15% mining speed");
         add("item.confluence.celestial_stone.info11", "+0.5 minion knockback");
         add("item.confluence.cobalt_shield.info", "The Cobalt Shield is a pre-Hardmode shield accessory that grants the player immunity to knockback when equipped, and also provides 1 defense.");
         add("item.confluence.cobalt_shield.info2", "The Cobalt Shield has a 1/7 (14.29%) chance of being obtained from the Locked Gold Chests found in the Dungeon, as well as a 1/7 (14.29%) chance of being obtained from Golden Lock Boxes.");

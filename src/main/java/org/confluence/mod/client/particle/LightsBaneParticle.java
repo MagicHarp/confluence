@@ -14,6 +14,7 @@ public class LightsBaneParticle extends TextureSheetParticle {
         super(pLevel, pX, pY, pZ);
         this.spriteSet = sprites;
         this.direction = dir;
+        lifetime = 16;
     }
 
     @Override

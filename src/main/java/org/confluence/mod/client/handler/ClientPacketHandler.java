@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -146,6 +147,18 @@ public final class ClientPacketHandler {
     public static void handleSubstractor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> rightClickSubtractor = packet.amount());
+        context.setPacketHandled(true);
+    }
+
+    public static void handlePickupDelay(SetItemEntityPickupDelayPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            ClientLevel level = Minecraft.getInstance().level;
+            if (level == null) return;
+            if (level.getEntity(packet.id()) instanceof ItemEntity itemEntity) {
+                itemEntity.setPickUpDelay(packet.delay());
+            }
+        });
         context.setPacketHandled(true);
     }
 
