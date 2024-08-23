@@ -7,8 +7,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.entity.PartEntity;
 import org.confluence.mod.util.ModUtils;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
@@ -34,20 +34,46 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
         this.parentMob = parent;
         this.segmentIndex = segmentIndex;
         this.maxHealth = maxHealth;
+        // 不会撞墙等等
         setHealth(maxHealth);
+    }
+
+
+    @Override
+    public boolean isPushable(){
+        return false;
+    }
+    @Override
+    public void push(@NotNull Entity pEntity){
+    }
+    @Override
+    protected void pushEntities(){
+    }
+
+    @Override
+    public void onAddedToWorld(){
+        super.onAddedToWorld();
+        setNoGravity(true);
+        this.noPhysics = true;
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
     }
 
     @Override
     protected void defineSynchedData() {
+        super.defineSynchedData();
+        // 这素在……？
         entityData.define(DATA_HEALTH_ID, 1.0F);
         entityData.define(DATA_DIR_ID, new Vector3f(0.0F));
     }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compoundTag) {}
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compoundTag) {}
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
@@ -92,23 +118,21 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
 
     @Override
     public void setItemSlot(EquipmentSlot pSlot, ItemStack pStack) {
-
     }
 
 //    public final float getMaxHealth() {
 //        return maxHealth;
 //    }
 
-    // “可被选中”
-    public boolean isPickable() {
-        return true;
-    }
-
     @Override
     public HumanoidArm getMainArm() {
         return null;
     }
 
+    // 创造模式选中
+    public boolean isPickable() {
+        return true;
+    }
     @Nullable
     public ItemStack getPickResult() {
         return this.parentMob.getPickResult();
@@ -118,6 +142,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
         return this == pEntity || this.parentMob == pEntity;
     }
 
+    @Override
     public boolean shouldBeSaved() {
         return false;
     }
@@ -141,10 +166,8 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
 
     @Override
     public void tick() {
-        ModUtils.testMessage(level(), "STT");
-        ModUtils.testMessage(getSleepingPos() + ".");
-
         super.tick();
+
         // 蠕虫实体不存在/自己不再是这一体节后死掉
         if (parentMob == null ||
                 parentMob.wormParts == null ||

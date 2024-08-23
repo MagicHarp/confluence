@@ -2,6 +2,7 @@ package org.confluence.mod.entity.worm;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.util.DelayedTaskExecutor;
 import org.confluence.mod.util.ModUtils;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
 import java.util.ArrayList;
@@ -45,25 +47,30 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
         this.wormParts = new ArrayList<>(length);
         this.length = length;
         // 不要马上生成体节，constructor被调用时还在(0,0,0)
+    }
 
-        // 顺手把测试丢这里了，可以删掉的
-        if (false && ! level().isClientSide()) {
-            DelayedTaskExecutor executor = DelayedTaskExecutor.getInstance(getServer());
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 3; j ++) {
-                    int finalI = i * 10 + j;
-                    executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
-                        ModUtils.testMessage(level(), "MSG" + finalI);
-                    }, i * 10));
-                }
-            }
-            executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
-                ModUtils.testMessage(level(), "AAA");
-            }, 20, true));
-            executor.registerTask(new DelayedTaskExecutor.DelayedTask(() -> {
-                ModUtils.testMessage(level(), "BBB");
-            }, 10, true));
-        }
+    @Override
+    public boolean isPushable(){
+        return false;
+    }
+    @Override
+    public void push(@NotNull Entity pEntity){
+    }
+    @Override
+    protected void pushEntities(){
+    }
+
+    @Override
+    public void onAddedToWorld(){
+        super.onAddedToWorld();
+        setNoGravity(true);
+        this.noPhysics = true;
+    }
+
+    // 蠕虫本身不要因为原版原因受伤；体节可以
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return false;
     }
 
     @Override
@@ -113,6 +120,7 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
             }
         }
 
+        // 移除判定
         boolean shouldDie = true;
         for (BaseWormPart<? extends AbstractWormEntity> part : wormParts) {
             if (part.isAlive()) {
@@ -127,6 +135,9 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
             this.gameEvent(GameEvent.ENTITY_DIE);
             return;
         }
+
+        // 移动到第一节的位置
+        setPos( wormParts.get(0).position() );
 
         // 各体节AI
         for (BaseWormPart<? extends AbstractWormEntity> part : wormParts) {
