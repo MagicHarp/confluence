@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.ModAttributes;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

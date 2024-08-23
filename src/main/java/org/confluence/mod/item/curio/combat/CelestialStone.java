@@ -11,9 +11,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.entity.ModAttributes;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 

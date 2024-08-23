@@ -1,4 +1,4 @@
-package org.confluence.mod.entity;
+package org.confluence.mod.misc;
 
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;

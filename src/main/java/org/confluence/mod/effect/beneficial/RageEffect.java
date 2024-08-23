@@ -3,7 +3,7 @@ package org.confluence.mod.effect.beneficial;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.confluence.mod.entity.ModAttributes;
+import org.confluence.mod.misc.ModAttributes;
 
 
 public class RageEffect extends MobEffect {
