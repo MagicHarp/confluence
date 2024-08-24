@@ -16,6 +16,7 @@ import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.network.s2c.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,6 +49,9 @@ public final class ClientPacketHandler {
         context.enqueueWork(() -> {
             maxMana = packet.maxMana();
             currentMana = packet.currentMana();
+            if (currentMana == maxMana && Minecraft.getInstance().player != null) {
+                Minecraft.getInstance().player.playSound(ModSoundEvents.COOLDOWN_RECOVERY.get());
+            }
         });
         context.setPacketHandled(true);
     }
