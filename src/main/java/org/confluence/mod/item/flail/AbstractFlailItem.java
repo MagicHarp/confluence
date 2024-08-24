@@ -10,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.FlailEntity;
 import org.confluence.mod.mixinauxiliary.IPlayer;
 import org.jetbrains.annotations.NotNull;

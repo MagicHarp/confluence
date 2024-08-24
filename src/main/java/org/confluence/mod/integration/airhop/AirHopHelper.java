@@ -29,7 +29,7 @@ public class AirHopHelper {
 
     public static boolean notFinishJump(Player player) {
         try {
-            if (getAirHops == null) {
+            if (canJump == null) {
                 ClassLoader classLoader = AirHopHelper.class.getClassLoader();
                 Class<?> AirHopHandler = classLoader.loadClass("fuzs.airhop.client.handler.AirHopHandler");
                 canJump = AirHopHandler.getDeclaredMethod("canJump", Player.class);

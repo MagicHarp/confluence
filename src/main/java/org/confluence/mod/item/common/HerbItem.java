@@ -1,7 +1,7 @@
 package org.confluence.mod.item.common;
 
-import net.minecraft.world.item.*;
-import org.confluence.mod.datagen.limit.*;
+import net.minecraft.world.item.Item;
+import org.confluence.mod.datagen.limit.CustomModel;
 
 public class HerbItem extends Item implements CustomModel {
     public HerbItem(){

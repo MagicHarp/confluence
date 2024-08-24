@@ -1,6 +1,5 @@
 package org.confluence.mod.block.natural.herbs;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -16,8 +15,6 @@ import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
 public class FlameFlower extends BaseHerbBlock {
-    private static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(4, 1, 0.86f, 0, 1);
-
     public FlameFlower(){
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION).randomTicks().lightLevel(value -> value.getValue(AGE) == MAX_AGE ? 4 : 0));
     }
@@ -31,11 +28,6 @@ public class FlameFlower extends BaseHerbBlock {
     public boolean canBloom(ServerLevel world, BlockState state){
         long dayTime = world.dayTime() % 24000;
         return dayTime >= 9760L && world.isDay() && !world.isRaining();
-    }
-
-    public ColorPointLight.Template getColor(BlockState blockState){
-        LIGHT.radius = getAge(blockState) == MAX_AGE ? 4 : 0;
-        return LIGHT;
     }
 
     @Override
