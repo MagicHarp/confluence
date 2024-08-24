@@ -1,5 +1,7 @@
 package org.confluence.mod.client.particle;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import org.confluence.mod.client.particle.options.LightsBaneParticleOptions;
@@ -15,6 +17,14 @@ public class LightsBaneParticle extends TextureSheetParticle {
         this.spriteSet = sprites;
         this.direction = dir;
         lifetime = 16;
+        setSpriteFromAge(spriteSet);
+        scale(5);
+    }
+
+    @Override
+    public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks){
+        // TODO: 倾斜方向
+        super.render(pBuffer, pRenderInfo, pPartialTicks);
     }
 
     @Override
@@ -41,5 +51,4 @@ public class LightsBaneParticle extends TextureSheetParticle {
             return new LightsBaneParticle(level, x, y, z, spriteSet, type.direction);
         }
     }
-
 }

@@ -11,6 +11,16 @@ public class LightsBaneFadeParticle extends TextureSheetParticle {
     protected LightsBaneFadeParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet){
         super(pLevel, pX, pY, pZ);
         lifetime = 16;
+        setSprite(spriteSet.get(0, 16));
+        quadSize = 0.5f;
+        roll = 45f;
+        oRoll = 45f;
+    }
+
+    @Override
+    public void tick(){
+        alpha = 1 - (age / (float)lifetime);
+        super.tick();
     }
 
     @Override
@@ -32,5 +42,4 @@ public class LightsBaneFadeParticle extends TextureSheetParticle {
             return new LightsBaneFadeParticle(pLevel, pX, pY, pZ, spriteSet);
         }
     }
-
 }

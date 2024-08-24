@@ -29,7 +29,6 @@ public class FlameFlowerParticle extends TextureSheetParticle {
     public void tick(){
         super.tick();
         scale(0.7f);
-
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {

@@ -60,5 +60,4 @@ public class BloodParticle extends TextureSheetParticle {
             return particle;
         }
     }
-
 }
