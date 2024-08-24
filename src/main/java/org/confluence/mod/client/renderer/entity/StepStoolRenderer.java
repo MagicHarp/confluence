@@ -34,7 +34,7 @@ public class StepStoolRenderer extends EntityRenderer<StepStoolEntity> {
         pPoseStack.mulPose(Axis.ZP.rotation(Mth.PI));
         for (int i = 0; i < pEntity.getStep(); i++) {
             model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(getTextureLocation(pEntity))), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-            pPoseStack.translate(0.0F, 1.0F, 0.0F);
+            pPoseStack.translate(0.0F, -1.0F, 0.0F);
         }
         pPoseStack.popPose();
     }

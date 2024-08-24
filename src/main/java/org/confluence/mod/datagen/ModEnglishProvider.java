@@ -256,6 +256,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
         add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
+        add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");
@@ -853,6 +854,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "The Worm Scarf is a pre-Hardmode accessory that reduces incoming damage by 17%.");
         add("item.confluence.worm_scarf.info2", "This damage reduction from this item is calculated after defense is applied.");
         add("item.confluence.worm_scarf.info3", "The Worm Scarf is always dropped from the Eater of Worlds' Treasure Bag in Expert Mode.");
+        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
 
         add("block.confluence.timers_block_1_1", "1 Second Timer");
         add("block.confluence.timers_block_3_1", "3 Second Timer");
@@ -879,6 +881,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("resourcepack.ter_armor", "Mainstream Terraria Armor Textures");
 
         add("event.confluence.blood_moon", "The Blood Moon is rising...");
+
+        add("attribute.name.generic.critical_chance", "Critical Chance");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

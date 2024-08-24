@@ -78,11 +78,16 @@ public class StepStoolEntity extends Entity implements TraceableEntity {
         return entityData.get(DATA_STEP_ID);
     }
 
-    public void setOwner(@Nullable Entity pOwner) {
-        if (pOwner != null) {
-            this.ownerUUID = pOwner.getUUID();
-            this.cachedOwner = pOwner;
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        if (DATA_STEP_ID.equals(pKey)) {
+            refreshDimensions();
         }
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    public void setOwner(@Nullable Entity pOwner) {
+        this.ownerUUID = pOwner == null ? null : pOwner.getUUID();
+        this.cachedOwner = pOwner;
     }
 
     @Override

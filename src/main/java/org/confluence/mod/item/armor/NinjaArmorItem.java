@@ -10,7 +10,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.confluence.mod.client.renderer.item.armor.LeadArmorRenderer;
 import org.confluence.mod.client.renderer.item.armor.NinjaArmorRenderer;
 import org.confluence.mod.datagen.limit.NormalGeoItem;
 import org.confluence.mod.item.common.Materials;

@@ -1,6 +1,5 @@
 package org.confluence.mod.block.natural;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +16,6 @@ import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
 public class JungleSporeBlock extends BasePlantBlock {
-    private static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(4, 0.7f, 0.8f, 0.16f, 1);
     private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
 
 
@@ -25,13 +23,8 @@ public class JungleSporeBlock extends BasePlantBlock {
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION).lightLevel(value -> 4), Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK, Blocks.CLAY);
     }
 
-    public ColorPointLight.Template getColor() {
-        return LIGHT;
-    }
-
     @Override
     @NotNull
-    @SuppressWarnings("deprecation")
     public VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         Vec3 vec3 = pState.getOffset(pLevel, pPos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);

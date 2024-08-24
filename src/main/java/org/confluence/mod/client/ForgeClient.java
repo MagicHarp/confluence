@@ -30,7 +30,6 @@ import org.confluence.mod.client.handler.*;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
-import org.confluence.mod.event.ShimmerEvents;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;

@@ -10,14 +10,15 @@ import org.confluence.mod.util.CuriosUtils;
 
 import java.util.function.Supplier;
 
-public record StepStoolStepPacketC2S(int slot, int step) {
+public record StepStoolStepPacketC2S(int slot, int step, boolean increase) {
     public static void encode(StepStoolStepPacketC2S packet, FriendlyByteBuf friendlyByteBuf) {
         friendlyByteBuf.writeInt(packet.slot);
         friendlyByteBuf.writeInt(packet.step);
+        friendlyByteBuf.writeBoolean(packet.increase);
     }
 
     public static StepStoolStepPacketC2S decode(FriendlyByteBuf friendlyByteBuf) {
-        return new StepStoolStepPacketC2S(friendlyByteBuf.readInt(), friendlyByteBuf.readInt());
+        return new StepStoolStepPacketC2S(friendlyByteBuf.readInt(), friendlyByteBuf.readInt(), friendlyByteBuf.readBoolean());
     }
 
     public static void handle(StepStoolStepPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
@@ -25,7 +26,7 @@ public record StepStoolStepPacketC2S(int slot, int step) {
         context.enqueueWork(() -> {
             ServerPlayer serverPlayer = context.getSender();
             if (serverPlayer == null || packet.slot == -1) return;
-            if (packet.step == 1) {
+            if (packet.step == 1 && packet.increase) {
                 StepStoolEntity pEntity = new StepStoolEntity(serverPlayer);
                 serverPlayer.level().addFreshEntity(pEntity);
                 CuriosUtils.getSlot(serverPlayer, "accessory", packet.slot).ifPresent(itemStack -> {
@@ -40,7 +41,7 @@ public record StepStoolStepPacketC2S(int slot, int step) {
                         Entity entity = serverPlayer.level().getEntity(id);
                         if (entity instanceof StepStoolEntity stepStool) {
                             if (packet.step == 0) {
-                                stepStool.discard();
+                                stepStool.setOwner(null);
                             } else {
                                 stepStool.setStep(packet.step);
                             }

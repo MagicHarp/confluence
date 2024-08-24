@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.ShurikenProjectile;
-import org.confluence.mod.entity.projectile.ThrowingKnivesProjectile;
 
 public class ShurikenProjectileModel extends EntityModel<ShurikenProjectile> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "shuriken_projectile"), "main");

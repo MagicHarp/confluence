@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
 public final class StepStoolHandler {
-    private static final Vec3 UP = new Vec3(0.0, 1.0000001, 0.0);
-    private static final Vec3 DOWN = new Vec3(0.0, -1.0000001, 0.0);
+    private static final Vec3 UP = new Vec3(0.0, 1.001, 0.0);
+    private static final Vec3 DOWN = new Vec3(0.0, -1.001, 0.0);
     private static boolean upKeyDown = false;
     private static boolean shiftKeyDown = false;
     private static int step = 0;
@@ -30,16 +30,17 @@ public final class StepStoolHandler {
             slot = StepStoolStepPacketS2C.NO_CURIO;
             return;
         } else if (slot == StepStoolStepPacketS2C.NO_CURIO || (step == 0 && !localPlayer.onGround())) {
+            step = 0;
             return;
         }
 
         if (step > 0) {
             if (localPlayer.input.jumping) {
                 localPlayer.jumpFromGround();
-                setStep(0);
+                setStep(0, false);
                 return;
             } else if (localPlayer.getVehicle() != null) {
-                setStep(0);
+                setStep(0, false);
                 return;
             }
         }
@@ -47,7 +48,7 @@ public final class StepStoolHandler {
         if (KeyBindings.STEP_STOOL.get().isDown()) {
             if (!upKeyDown && step < maxStep) {
                 localPlayer.move(MoverType.SELF, UP);
-                setStep(step + 1);
+                setStep(step + 1, true);
                 upKeyDown = true;
             }
         } else {
@@ -57,7 +58,7 @@ public final class StepStoolHandler {
         if (!upKeyDown && localPlayer.isShiftKeyDown()) {
             if (!shiftKeyDown && step > 0) {
                 localPlayer.move(MoverType.SELF, DOWN);
-                setStep(step - 1);
+                setStep(step - 1, false);
                 shiftKeyDown = true;
             }
         } else {
@@ -69,9 +70,9 @@ public final class StepStoolHandler {
         }
     }
 
-    public static void setStep(int step) {
+    public static void setStep(int step, boolean increase) {
         StepStoolHandler.step = step;
-        NetworkHandler.CHANNEL.sendToServer(new StepStoolStepPacketC2S(slot, step));
+        NetworkHandler.CHANNEL.sendToServer(new StepStoolStepPacketC2S(slot, step, increase));
     }
 
     public static int getStep() {

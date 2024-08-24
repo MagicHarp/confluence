@@ -1,6 +1,5 @@
 package org.confluence.mod.block.natural.spreadable;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -9,8 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class MushroomGrassBlock extends CustomModelSpreadingBlock {
-    public static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(5, 0, 0, 1, 1);
-
     public MushroomGrassBlock() {
         super(Type.PURE, Properties.copy(Blocks.GRASS_BLOCK).lightLevel(value -> 5));
     }

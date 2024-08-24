@@ -287,6 +287,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
         add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
+        add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
@@ -978,6 +979,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "蠕虫围巾是困难模式前的配饰，可减少 17% 的伤害。");
         add("item.confluence.worm_scarf.info2", "该物品的伤害减免是在施加防御后计算的。");
         add("item.confluence.worm_scarf.info3", "在专家模式中，蠕虫围巾总是从世界吞噬者的宝藏袋中掉落。");
+        add("item.confluence.step_stool.info", "你可以在锻造台使用梯凳升级它的额外高度");
 
 
         add("block.confluence.base_chest_block.locked_golden", "§r§f上锁的金箱");
@@ -1000,6 +1002,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("resourcepack.ter_armor", "主流：泰拉盔甲样式材质");
 
         add("event.confluence.blood_moon", "血月正在升起...");
+
+        add("attribute.name.generic.critical_chance", "暴击率");
+
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");

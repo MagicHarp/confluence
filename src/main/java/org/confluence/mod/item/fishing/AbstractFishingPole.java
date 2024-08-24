@@ -25,8 +25,8 @@ import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.item.curio.fishing.FishingBobber;
 import org.confluence.mod.item.curio.fishing.ILavaproofFishingHook;
-import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
