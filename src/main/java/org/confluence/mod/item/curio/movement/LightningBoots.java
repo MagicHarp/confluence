@@ -23,6 +23,8 @@ import java.util.UUID;
 public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     public static final UUID SPEED_UUID = UUID.fromString("6270BA48-067E-4093-1366-E01CDB4888F3");
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Lightning Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0xfcd60e).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0xfcd60e).toVector();
 
     public LightningBoots(Rarity rarity) {
         super(rarity);
@@ -32,15 +34,14 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
         super(ModRarity.PINK);
     }
 
-
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0xfcd60e).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0xfcd60e).toVector();
+        return END_COLOR;
     }
 
     @Override

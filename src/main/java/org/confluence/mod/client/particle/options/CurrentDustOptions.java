@@ -26,6 +26,7 @@ public class CurrentDustOptions extends DustParticleOptionsBase {
         ).apply(thisOptionsInstance, CurrentDustOptions::new)
     );
     public static final ParticleOptions.Deserializer<CurrentDustOptions> DESERIALIZER = new ParticleOptions.Deserializer<>() {
+        @Override
         public @NotNull CurrentDustOptions fromCommand(@NotNull ParticleType<CurrentDustOptions> type, @NotNull StringReader reader) throws CommandSyntaxException {
             Vector3f vector3f = DustParticleOptionsBase.readVector3f(reader);
             reader.expect(' ');
@@ -34,6 +35,7 @@ public class CurrentDustOptions extends DustParticleOptionsBase {
             return new CurrentDustOptions(vector3f, vector3f1, f);
         }
 
+        @Override
         public @NotNull CurrentDustOptions fromNetwork(@NotNull ParticleType<CurrentDustOptions> type, @NotNull FriendlyByteBuf buf) {
             Vector3f vector3f = DustParticleOptionsBase.readVector3f(buf);
             float f = buf.readFloat();
@@ -42,16 +44,21 @@ public class CurrentDustOptions extends DustParticleOptionsBase {
         }
     };
     private final Vector3f toColor;
+
     public CurrentDustOptions(Vector3f color1, Vector3f color2, float scale) {
         super(color1, scale);
         this.toColor = color2;
     }
+
     public Vector3f getFromColor() {
         return this.color;
     }
+
     public Vector3f getToColor() {
         return this.toColor;
     }
+
+    @Override
     public void writeToNetwork(@NotNull FriendlyByteBuf pBuffer) {
         super.writeToNetwork(pBuffer);
         pBuffer.writeFloat(this.toColor.x());
@@ -59,6 +66,7 @@ public class CurrentDustOptions extends DustParticleOptionsBase {
         pBuffer.writeFloat(this.toColor.z());
     }
 
+    @Override
     public @NotNull String writeToString() {
         return String.format(
             Locale.ROOT,
@@ -73,6 +81,8 @@ public class CurrentDustOptions extends DustParticleOptionsBase {
             this.toColor.z()
         );
     }
+
+    @Override
     public @NotNull ParticleType<CurrentDustOptions> getType() {
         return ModParticles.CURRENT_DUST.get();
     }

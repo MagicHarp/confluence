@@ -5,14 +5,17 @@ import org.confluence.mod.client.color.FloatRGB;
 import org.joml.Vector3f;
 
 public class HermesBoots extends BaseSpeedBoots {
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0x009409).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0x009409).toVector();
+
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0x009409).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0x009409).toVector();
+        return END_COLOR;
     }
 
     @Override

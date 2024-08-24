@@ -13,18 +13,21 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class SpectreBoots extends BaseSpeedBoots implements IMayFly {
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0x56b8e7).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0x56b8e7).toVector();
+
     public SpectreBoots() {
         super(ModRarity.LIGHT_RED);
     }
 
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0x56b8e7).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0x56b8e7).toVector();
+        return END_COLOR;
     }
 
     @Override

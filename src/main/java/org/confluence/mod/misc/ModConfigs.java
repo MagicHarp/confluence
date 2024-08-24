@@ -32,7 +32,7 @@ public final class ModConfigs {
     public static boolean terraStyleHealth = true;
 
     @SubscribeEvent
-    public static void onLoad(ModConfigEvent event) {
+    public static void onLoad(ModConfigEvent.Loading event) {
         RARE_BLOCKS.get().forEach(s -> {
             try {
                 rareBlocks.add(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, false).blockState());

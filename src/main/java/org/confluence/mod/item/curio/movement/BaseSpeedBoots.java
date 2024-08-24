@@ -53,25 +53,6 @@ public class BaseSpeedBoots extends BaseCurioItem {
         speedUp(slotContext, stack.getOrCreateTag(), 1, 40);
     }
 
-    public void spawnParticles(Level level, Vec3 vec3) {
-        int rand = level.getRandom().nextInt(3, 5);
-        double particleRandX = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
-        double particleRandY = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
-        double particleRandZ = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
-        CurrentDustOptions options = new CurrentDustOptions(getParticleColorStart(), getParticleColorEnd(), 1.2F);
-        for (int i = 0; i < rand; ++i) {
-            level.addParticle(options, vec3.x + particleRandX, vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
-        }
-    }
-
-    public Vector3f getParticleColorStart() {
-        return COLOR;
-    }
-
-    public Vector3f getParticleColorEnd() {
-        return COLOR;
-    }
-
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         super.onUnequip(slotContext, newStack, stack);
@@ -91,12 +72,30 @@ public class BaseSpeedBoots extends BaseCurioItem {
                     }
                     if (player.level().getGameTime() % 4 == 0) player.playSound(ModSoundEvents.SHOES_WALK.get());
                 }
+                spawnParticles(player.level(), player.position());
             } else if (speed != 0) {
                 NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), 0));
             }
-            if (player.zza > 0 && slotContext.entity().level().isClientSide)
-                spawnParticles(slotContext.entity().level(), slotContext.entity().position());
         }
+    }
+
+    public void spawnParticles(Level level, Vec3 vec3) {
+        int rand = level.getRandom().nextInt(3, 5);
+        double particleRandX = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        double particleRandY = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        double particleRandZ = (double) (level.getRandom().nextInt(100, 300) - 200) / 1000;
+        CurrentDustOptions options = new CurrentDustOptions(getParticleColorStart(), getParticleColorEnd(), 1.2F);
+        for (int i = 0; i < rand; ++i) {
+            level.addParticle(options, vec3.x + particleRandX, vec3.y + particleRandY, vec3.z + particleRandZ, 0, 0, 0);
+        }
+    }
+
+    public Vector3f getParticleColorStart() {
+        return COLOR;
+    }
+
+    public Vector3f getParticleColorEnd() {
+        return COLOR;
     }
 
     protected static AttributeModifier getSpeedModifier(ItemStack stack) {
