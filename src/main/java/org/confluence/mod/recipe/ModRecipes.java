@@ -15,6 +15,8 @@ public final class ModRecipes {
     public static final RegistryObject<RecipeSerializer<AltarRecipe>> ALTAR_SERIALIZER = SERIALIZERS.register("altar", AltarRecipe.Serializer::new);
     public static final RegistryObject<RecipeType<AltarRecipe>> ALTAR_TYPE = TYPES.register("altar_type", AltarRecipe.Type::new);
 
+    public static final RegistryObject<RecipeSerializer<ExtraStepStoolRecipe>> EXTRA_STEP_STOOL_SERIALIZER = SERIALIZERS.register("extra_step_stool", () -> new SimpleSmithingTransformRecipeSerializer<>(ExtraStepStoolRecipe::new));
+
     public static void register(IEventBus bus) {
         SERIALIZERS.register(bus);
         TYPES.register(bus);

@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.construction;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -19,7 +20,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class HandOfCreation extends StepStool implements IRightClickSubtractor, IBreakSpeedBonus, IRangePickup.Drops {
+public class HandOfCreation extends StepStool implements IRightClickSubtractor, IBreakSpeedBonus, IRangePickup {
     public static final UUID REACH_UUID = UUID.fromString("25EAB0F2-81C1-254D-156E-7CDAEBA54DC2");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
         ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Hand Of Creation", 3, AttributeModifier.Operation.ADDITION)
@@ -40,6 +41,10 @@ public class HandOfCreation extends StepStool implements IRightClickSubtractor, 
         list.add(Component.translatable("item.confluence.hand_of_creation.tooltip2"));
         list.add(Component.translatable("item.confluence.hand_of_creation.tooltip3"));
         list.add(StepStool.TOOLTIP);
+        if (itemStack.getTag() != null) {
+            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep"))
+                .withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+        }
     }
 
     @Override
