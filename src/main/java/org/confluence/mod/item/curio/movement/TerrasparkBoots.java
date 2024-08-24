@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
+import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.item.curio.ILavaImmune;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.ILavaHurtReduce;
@@ -19,6 +20,7 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -27,6 +29,18 @@ import java.util.UUID;
 public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILavaImmune, ILavaHurtReduce, IFluidWalk {
     public static final UUID SPEED_UUID = UUID.fromString("73456995-B70B-48D9-7EA4-191BD76C94C9");
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Terraspark Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0x147775).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0xfcfc54).toVector();
+
+    @Override
+    public Vector3f getParticleColorStart() {
+        return START_COLOR;
+    }
+
+    @Override
+    public Vector3f getParticleColorEnd() {
+        return END_COLOR;
+    }
 
     @Override
     public int getFlyTicks() {

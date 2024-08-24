@@ -6,6 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.confluence.mod.client.ClientConfigs;
+import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
@@ -29,6 +31,7 @@ public final class Confluence {
 
     public Confluence() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
         ModTabs.TABS.register(bus);
@@ -38,5 +41,6 @@ public final class Confluence {
         ModLootModifiers.MODIFIERS.register(bus);
         ModEntities.ENTITIES.register(bus);
         ModRecipes.SERIALIZERS.register(bus);
+        ModParticles.PARTICLES.register(bus);
     }
 }

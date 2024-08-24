@@ -6,16 +6,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModConfigs {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_BLOCKS = BUILDER.comment(
@@ -268,9 +264,8 @@ public final class ModConfigs {
     public static final ArrayList<BlockState> rareBlocks = new ArrayList<>();
     public static final ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
 
-    @SubscribeEvent
     @SuppressWarnings("deprecation")
-    static void onLoad(final ModConfigEvent event) {
+    public static void onLoad() {
         rareBlocks.clear();
         rareCreatures.clear();
         RARE_BLOCKS.get().forEach(s -> {
