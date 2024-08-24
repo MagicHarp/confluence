@@ -179,6 +179,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
         add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
+        add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
         add("item.confluence.aglet.info", "金属带扣是能提升玩家移动速度的配饰");
         add("item.confluence.aglet.info2", "它出现在沉船宝箱中");
@@ -557,8 +558,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.info", "它有几率从蜘蛛身上掉落。");
         add("item.confluence.shoe_spikes.info", "它有几率从洞穴蜘蛛中掉落。");
         add("item.confluence.tabi.info", "它可以在要塞的宝箱中找到。");
+        add("item.confluence.step_stool.info", "你可以在锻造台使用梯凳升级它的额外高度");
 
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
+
+        add("attribute.name.generic.critical_chance", "暴击率");
 
         add(ModEffects.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");

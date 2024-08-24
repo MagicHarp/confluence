@@ -183,6 +183,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
         add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
+        add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
 
         add("item.confluence.aglet.info", "The Aglet is an accessory that increases the player's movement speed by 5%.");
         add("item.confluence.aglet.info2", "It can be found in Shipwreck Chests.");
@@ -603,8 +604,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.info", "It have a Chance to be dropped from Spider.");
         add("item.confluence.shoe_spikes.info", "It have a Chance to be dropped from Cave Spider.");
         add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
+        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
+
+        add("attribute.name.generic.critical_chance", "Critical Chance");
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();

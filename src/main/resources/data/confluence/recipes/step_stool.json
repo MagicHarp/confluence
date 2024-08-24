@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "bbb",
+        "b b",
+        "a a"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:stick"
+        },
+        "b": {
+            "tag": "minecraft:wooden_slabs"
+        }
+    },
+    "result": {
+        "item": "confluence:step_stool"
+    }
+}

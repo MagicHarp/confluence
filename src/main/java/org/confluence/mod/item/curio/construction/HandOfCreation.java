@@ -2,6 +2,7 @@ package org.confluence.mod.item.curio.construction;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -40,6 +41,10 @@ public class HandOfCreation extends StepStool implements IRightClickSubtractor, 
         list.add(Component.translatable("item.confluence.hand_of_creation.tooltip2"));
         list.add(Component.translatable("item.confluence.hand_of_creation.tooltip3"));
         list.add(StepStool.TOOLTIP);
+        if (itemStack.getTag() != null) {
+            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep"))
+                .withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+        }
     }
 
     @Override
