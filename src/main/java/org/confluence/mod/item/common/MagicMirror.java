@@ -1,5 +1,6 @@
 package org.confluence.mod.item.common;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,7 +43,7 @@ public class MagicMirror extends Item {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity living) {
         if (level.isClientSide) {
-            //Minecraft.getInstance().gameRenderer.displayItemActivation(itemStack);
+            Minecraft.getInstance().gameRenderer.displayItemActivation(itemStack);
         } else if (living instanceof ServerPlayer serverPlayer) {
             BlockPos pos = serverPlayer.getRespawnPosition();
             if (pos == null) {
