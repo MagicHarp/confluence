@@ -49,7 +49,7 @@ public final class ForgeEvents {
         LivingEntity living = event.getEntity();
         if (living.level().isClientSide) return;
         DamageSource damageSource = event.getSource();
-        if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
+        if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD) || damageSource.is(DamageTypes.GENERIC_KILL)) return;
         RandomSource random = living.level().random;
         float amount = event.getAmount();
 

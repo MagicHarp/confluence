@@ -4,12 +4,17 @@ import net.bettercombat.logic.WeaponRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
 
-public interface BetterCombatHelper {
-    static boolean isLoaded() {
-        return ModList.get().isLoaded("bettercombat");
+public class BetterCombatHelper {
+    private static Boolean isLoaded;
+
+    public static boolean isLoaded() {
+        if (isLoaded == null) {
+            isLoaded = ModList.get().isLoaded("bettercombat");
+        }
+        return isLoaded;
     }
 
-    static boolean hasWeaponAttributes(ItemStack itemStack) {
+    public static boolean hasWeaponAttributes(ItemStack itemStack) {
         return WeaponRegistry.getAttributes(itemStack) != null;
     }
 }
