@@ -31,7 +31,6 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
@@ -213,7 +212,7 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void renderGuiOverlay$pre(RenderGuiOverlayEvent.Pre event) {
-        if (ModConfigs.terraStyleHealth && event.getOverlay() == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
+        if (ClientConfigs.terraStyleHealth && event.getOverlay() == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
             event.setCanceled(true);
         }
     }

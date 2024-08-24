@@ -9,8 +9,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.item.common.LifeFruit;
-import org.confluence.mod.misc.ModConfigs;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -24,7 +24,7 @@ public class HealthHudOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!ModConfigs.terraStyleHealth) return;
+        if (!ClientConfigs.terraStyleHealth) return;
         if (gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("health");

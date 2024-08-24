@@ -41,6 +41,7 @@ import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.misc.ModAttributes;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
@@ -80,6 +81,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ModConfigs.onCommonLoad();
             NetworkHandler.register();
             ModFluids.registerInteraction();
             ModFluids.registerShimmerTransform();

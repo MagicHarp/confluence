@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.command.ModArgumentTypeInfos;
 import org.confluence.mod.effect.ModEffects;
@@ -45,6 +46,7 @@ public final class Confluence {
 
     public Confluence() {
         ModConfigs.registerCommon();
+        ClientConfigs.registerClient();
         GeckoLib.initialize();
         ModFluids.initialize();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

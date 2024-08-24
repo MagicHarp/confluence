@@ -52,7 +52,6 @@ import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.misc.ModArmPoses;
-import org.confluence.mod.misc.ModConfigs;
 import org.jetbrains.annotations.NotNull;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -82,7 +81,7 @@ public final class ModClient {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ModConfigs.registerClient();
+            ClientConfigs.onClientLoad();
             ModArmPoses.initialize();
             CuriosClient.registerRenderers();
 
