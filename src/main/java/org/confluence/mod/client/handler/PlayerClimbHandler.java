@@ -55,7 +55,7 @@ public final class PlayerClimbHandler {
             localPlayer.fallDistance = 0.0F;
             localPlayer.setDeltaMovement(motion.x * 0.93, motionY, motion.z * 0.93);
             PlayerJumpHandler.flushState(true);
-            NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
+            NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) motionY));
         }
     }
 
@@ -67,11 +67,11 @@ public final class PlayerClimbHandler {
     }
 
     private static void wallJump(LocalPlayer localPlayer, double x, double z) {
-        double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower();
+        double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * 1.1;
         Vec3 vec3 = localPlayer.getDeltaMovement();
-        localPlayer.setDeltaMovement(vec3.add(vec3.x - x * 0.11, motionY * 1.1, vec3.z - z * 0.11));
+        localPlayer.setDeltaMovement(vec3.add(vec3.x - x * 0.11, motionY, vec3.z - z * 0.11));
         localPlayer.hasImpulse = true;
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, false));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, false, (float) motionY));
     }
 
     public static void handlePacket(PlayerClimbPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

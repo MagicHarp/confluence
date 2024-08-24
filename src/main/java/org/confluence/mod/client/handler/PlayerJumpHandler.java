@@ -125,7 +125,7 @@ public final class PlayerJumpHandler {
         }
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, true, (float) speed));
     }
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
@@ -133,7 +133,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
     }
 
     private static void fly(LocalPlayer localPlayer, double speed) {
@@ -141,7 +141,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
