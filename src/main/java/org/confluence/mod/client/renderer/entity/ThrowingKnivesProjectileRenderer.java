@@ -30,7 +30,7 @@ public class ThrowingKnivesProjectileRenderer extends EntityRenderer<ThrowingKni
     @Override
     public void render(ThrowingKnivesProjectile entity, float entityYaw, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
         poseStack.pushPose();
-        poseStack.translate(0.00F, 0.125F, -0.125F);
+        poseStack.translate(0.00F, 0.125F, 0.00F);
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
         poseStack.mulPose(Axis.YP.rotation(-Mth.HALF_PI));
