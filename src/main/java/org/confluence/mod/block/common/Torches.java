@@ -35,10 +35,10 @@ public enum Torches {
     PINK_TORCH("pink", 14.0F, 0.7F, 0.3F, 0.7F), // 粉
     BONE_TORCH("bone", 14.0F, 0.5F, 0.75F, 1.0F), // 骨头
     ULTRABRIGHT_TORCH("ultrabright", 15.0F, 0.75F, 1.0F, 1.0F), // 超亮
-    DEMON_TORCH("demon", new ColorPointLightData(0.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 恶魔
+    DEMON_TORCH("demon", new ColorPointLightData(14.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 恶魔
     CURSED_TORCH("cursed", 14.0F, 0.4F, 1.0F, 0.1F), // 诅咒
     ICHOR_TORCH("ichor", 14.0F, 1.0F, 1.0F, 0.7F), // 灵液
-    RAINBOW_TORCH("rainbow", new ColorPointLightData(0.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 彩虹
+    RAINBOW_TORCH("rainbow", new ColorPointLightData(14.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 彩虹
     DESERT_TORCH("desert", 14.0F, 1.0F, 0.85F, 0.55F), // 沙漠
     CORAL_TORCH("coral", 14.0F, 0.25F, 1.0F, 0.8F), // 珊瑚
     CORRUPT_TORCH("corrupt", 14.0F, 0.95F, 0.4F, 1.0F), // 腐化
