@@ -22,11 +22,11 @@ public class WormScarfModel extends HumanoidModel<LivingEntity> {
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
         PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.0F, -4.0F, 3.0F, 7.0F, 2.0F, CubeDeformation.NONE)
-            .texOffs(0, 13).addBox(-2.0F, -2.0F, -3.25F, 3.0F, 6.0F, 2.0F, CubeDeformation.NONE)
-            .texOffs(10, 17).addBox(0.0F, 5.0F, -4.0F, 3.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-            .texOffs(10, 13).addBox(-2.0F, 4.0F, -3.25F, 3.0F, 2.0F, 2.0F, CubeDeformation.NONE), PartPose.ZERO);
-        body.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -26.0F, -5.0F, 10.0F, 3.0F, 10.0F, CubeDeformation.NONE), PartPose.ZERO);
+        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 2.0F, -4.0F, 3.0F, 7.0F, 2.0F, CubeDeformation.NONE)
+            .texOffs(0, 13).addBox(-2.0F, 2.0F, -3.25F, 3.0F, 6.0F, 2.0F, CubeDeformation.NONE)
+            .texOffs(10, 17).addBox(0.0F, 9.0F, -4.0F, 3.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+            .texOffs(10, 13).addBox(-2.0F, 8.0F, -3.25F, 3.0F, 2.0F, 2.0F, CubeDeformation.NONE), PartPose.ZERO);
+        body.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -1.0F, -5.0F, 10.0F, 3.0F, 10.0F, CubeDeformation.NONE), PartPose.ZERO);
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
