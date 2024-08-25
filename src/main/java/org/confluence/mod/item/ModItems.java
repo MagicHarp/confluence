@@ -16,6 +16,7 @@ import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.cosmetic.BaseCosmeticItem;
@@ -150,6 +151,7 @@ public final class ModItems {
         AmmoItems.init();
         GunItems.init();
         FlailItems.init();
+        Bows.init();
         ITEMS.register(bus);
     }
 }
