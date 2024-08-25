@@ -1,9 +1,9 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 17811220,
-    "separation": 60,
-    "spacing": 65,
+    "salt": 12311220,
+    "separation": 30,
+    "spacing": 50,
     "spread_type": "triangular",
     "exclusion_zone": {
       "chunk_count": 16,
@@ -11,7 +11,7 @@
     }
   },
   "structures": [{
-    "structure": "confluence:heaven_islands",
+    "structure": "confluence:sky_village",
     "weight": 1
   }]
 }
