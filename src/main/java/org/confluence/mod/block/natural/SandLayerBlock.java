@@ -42,6 +42,11 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
     }
 
     @Override
+    public VoxelShape getCollisionShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return SHAPE_BY_LAYER[state.getValue(LAYERS) - 1];
+    }
+
+    @Override
     public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
         return true;
     }
@@ -68,7 +73,7 @@ public class SandLayerBlock extends Block implements CustomModel, CustomItemMode
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = context.getLevel().getBlockState(context.getClickedPos());
-        if (state.getValue(LAYERS) < 8) {
+        if (state.is(this) && state.getValue(LAYERS) < 8) {
             return state.cycle(LAYERS);
         } else {
             return super.getStateForPlacement(context);
