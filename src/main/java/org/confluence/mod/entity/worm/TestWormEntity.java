@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.worm.test;
+package org.confluence.mod.entity.worm;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -6,12 +6,9 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.AirItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.entity.worm.AbstractWormEntity;
-import org.confluence.mod.entity.worm.BaseWormPart;
-import org.confluence.mod.entity.worm.WormMovementUtils;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.util.ModUtils;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -22,11 +19,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 
 public class TestWormEntity extends AbstractWormEntity {
-    public static final int WORM_LENGTH = 40;
-    public static final float WORM_HEALTH = 20f;
+    public static final int WORM_LENGTH = 72;
+    public static final float WORM_HEALTH = 5f;
     public static final WormMovementUtils.WormSegmentMovementOptions FOLLOW_INFO =
             new WormMovementUtils.WormSegmentMovementOptions()
-                    .setFollowDistance(1.5)
+                    .setFollowDistance(0.5)
                     .setStraighteningMultiplier(-0.1)
                     .setVelocityOrTeleport(true);
 
@@ -35,7 +32,10 @@ public class TestWormEntity extends AbstractWormEntity {
     }
     @Override
     protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
-        return new TestWormPart(this, index, WORM_HEALTH);
+//        return new TestWormPart(this, index, WORM_HEALTH);
+        TestWormPart result = new TestWormPart(ModEntities.TEST_WORM_PART.get(), level());
+        result.setInfo(this, index, WORM_HEALTH);
+        return result;
     }
     @Override
     protected WormMovementUtils.WormSegmentMovementOptions getWormFollowOption() {

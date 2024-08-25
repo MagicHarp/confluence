@@ -46,7 +46,6 @@ import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
-import org.confluence.mod.entity.worm.test.TestWormEntity;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;

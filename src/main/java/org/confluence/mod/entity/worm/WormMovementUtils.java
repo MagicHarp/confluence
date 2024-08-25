@@ -63,6 +63,7 @@ public class WormMovementUtils {
     }
     /**
      * 判定体节移动，此方法指定头部和尾节后的index
+     * 注意头节的视角应该由实体AI部分处理（头部移动的具体实现可以是速度或者TP，所以不统一编写）
      * @param endIndex 尾节的index + 1
      * */
     public static void handleSegmentsFollow(List<BaseWormPart<?>> segments, WormSegmentMovementOptions moveOption,
@@ -95,7 +96,7 @@ public class WormMovementUtils {
 
             // 体节移动/朝向更新
             if (dVec.lengthSqr() > 1e-9) {
-                dVec.normalize().scale(moveOption.followDistance);
+                dVec = dVec.normalize().scale(moveOption.followDistance);
                 Vec3 targetLoc = segmentLast.position().subtract(dVec);
                 // 移动
                 if (moveOption.velocityOrTeleport) {

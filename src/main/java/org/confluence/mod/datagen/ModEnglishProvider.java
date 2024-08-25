@@ -179,7 +179,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and melee attacks inflict fire damage");
         add("item.confluence.eye_of_the_golem.tooltip", "10% increased critical strike chance");
         add("item.confluence.destroyer_emblem.tooltip", "8% increased critical strike chance");
-        add("item.confluence.cross_necklace.tooltip", "Increases length of invincibility after taking damage");
+        add("item.confluence.cross_necklace.tooltip", "Increases TOTAL_LENGTH of invincibility after taking damage");
         add("item.confluence.terraspark_boots.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.fledgling_wings.tooltip", "Allows flight and slow fall");
         add("item.confluence.worm_scarf.tooltip", "Reduces damage taken by 17%");
@@ -761,7 +761,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.star_cloak.info3", "They pierce through an unlimited number of enemies.");
         add("item.confluence.star_cloak.info4", "The Star Cloak has a 1/6 (16.67%) chance to be dropped by Mimics.");
         add("item.confluence.star_cloak.info5", "The stars deal 75 / 150 / 225 damage which is not classified as any of the four damage types and therefore cannot be modified by any buffs or equipment. Furthermore, the stars have 25 armor penetration.");
-        add("item.confluence.star_veil.info", "The Star Veil is a Hardmode accessory that combines the functions of the Star Cloak and the Cross Necklace, spawning falling star projectiles and increasing the length of the invincibility frames granted when the player is hurt.");
+        add("item.confluence.star_veil.info", "The Star Veil is a Hardmode accessory that combines the functions of the Star Cloak and the Cross Necklace, spawning falling star projectiles and increasing the TOTAL_LENGTH of the invincibility frames granted when the player is hurt.");
         add("item.confluence.stinger_necklace.info", "The Stinger Necklace is a pre-Hardmode accessory that is obtainable after defeating the Queen Bee.");
         add("item.confluence.stinger_necklace.info2", "This item combines the Shark Tooth Necklace and the Honey Comb accessories, giving the player 5 armor penetration as well as releasing 1–3 / 1–4 bees when the wearer takes damage and granting the Honey buff for 5 seconds.");
         add("item.confluence.sun_stone.info", "The Sun Stone is a Hardmode, post-Golem accessory which has a 1/7 (14.29%) chance of being dropped by Golem.");

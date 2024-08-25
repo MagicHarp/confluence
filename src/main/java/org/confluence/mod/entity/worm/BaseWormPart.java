@@ -4,10 +4,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.mod.util.ModUtils;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
@@ -20,24 +23,35 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     public enum SegmentType {
         HEAD, BODY, TAIL;
     }
-    protected static final EntityDataAccessor<Float> DATA_HEALTH_ID = SynchedEntityData.defineId(BaseWormPart.class, EntityDataSerializers.FLOAT);
     protected static final EntityDataAccessor<Vector3f> DATA_DIR_ID = SynchedEntityData.defineId(BaseWormPart.class, EntityDataSerializers.VECTOR3);
-    private final float maxHealth;
-    protected final AbstractWormEntity parentMob;
+    private float maxHealth = 10;
+    private AbstractWormEntity parentMob;
+    protected AbstractWormEntity getParentMob() {return parentMob;}
     // 体节在wormParts中的index
-    protected final int segmentIndex;
+    private int segmentIndex;
+    protected int getSegmentIndex() {return segmentIndex;}
     // 不要给final，世吞可以被打断
     protected SegmentType segmentType;
 
-    public BaseWormPart(E parent, int segmentIndex, float maxHealth) {
-        super((EntityType<? extends LivingEntity>) parent.getType(), parent.level());
-        this.parentMob = parent;
+    public BaseWormPart(EntityType<? extends LivingEntity> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    protected void setInfo(E parentMob, int segmentIndex, float maxHealth) {
+        this.parentMob = parentMob;
         this.segmentIndex = segmentIndex;
         this.maxHealth = maxHealth;
-        // 不会撞墙等等
         setHealth(maxHealth);
     }
 
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        // 不会窒息
+        if (pSource == damageSources().inWall()) {
+            return false;
+        }
+        return super.hurt(pSource, pAmount);
+    }
 
     @Override
     public boolean isPushable(){
@@ -53,6 +67,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     @Override
     public void onAddedToWorld(){
         super.onAddedToWorld();
+        // 不会撞墙等等
         setNoGravity(true);
         this.noPhysics = true;
     }
@@ -71,38 +86,27 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     protected void defineSynchedData() {
         super.defineSynchedData();
         // 这素在……？
-        entityData.define(DATA_HEALTH_ID, 1.0F);
-        entityData.define(DATA_DIR_ID, new Vector3f(0.0F));
+//        entityData.define(DATA_DIR_ID, new Vector3f(0.0F));
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
-        entityData.set(DATA_HEALTH_ID, nbt.getFloat("Health"));
-        entityData.set(DATA_DIR_ID, new Vector3f(
-            nbt.getFloat("DirX"),
-            nbt.getFloat("DirY"),
-            nbt.getFloat("DirZ")
-        ));
+//        entityData.set(DATA_DIR_ID, new Vector3f(
+//            nbt.getFloat("DirX"),
+//            nbt.getFloat("DirY"),
+//            nbt.getFloat("DirZ")
+//        ));
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag compoundTag = super.serializeNBT();
-        compoundTag.putFloat("Health", entityData.get(DATA_HEALTH_ID));
-        Vector3f vector3f = entityData.get(DATA_DIR_ID);
-        compoundTag.putFloat("DirX", vector3f.x);
-        compoundTag.putFloat("DirY", vector3f.y);
-        compoundTag.putFloat("DirZ", vector3f.z);
+//        Vector3f vector3f = entityData.get(DATA_DIR_ID);
+//        compoundTag.putFloat("DirX", vector3f.x);
+//        compoundTag.putFloat("DirY", vector3f.y);
+//        compoundTag.putFloat("DirZ", vector3f.z);
         return compoundTag;
-    }
-
-    public float getHealth() {
-        return entityData.get(DATA_HEALTH_ID);
-    }
-
-    public void setHealth(float pHealth) {
-        this.entityData.set(DATA_HEALTH_ID, Mth.clamp(pHealth, 0.0F, getMaxHealth()));
     }
 
 
@@ -121,7 +125,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     }
 
 //    public final float getMaxHealth() {
-//        return maxHealth;
+//        return MAX_HEALTH;
 //    }
 
     @Override
@@ -161,20 +165,20 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     }
     // 覆盖此方法以实现额外AI，如头部移动/体节发射弹幕等
     protected void tickSegment() {
+        // 蠕虫实体不存在/自己不再是这一体节后死掉
+        if (parentMob == null ||
+                parentMob.wormParts == null ||
+                parentMob.wormParts.size() <= segmentIndex ||
+                parentMob.wormParts.get(segmentIndex) != this) {
+            this.discard();
+        }
+
         updateSegmentType();
     }
 
     @Override
     public void tick() {
         super.tick();
-
-        // 蠕虫实体不存在/自己不再是这一体节后死掉
-        if (parentMob == null ||
-                parentMob.wormParts == null ||
-                parentMob.wormParts.size() <= segmentIndex ||
-                parentMob.wormParts.get(segmentIndex) != this) {
-            this.remove(RemovalReason.DISCARDED);
-        }
     }
 
 

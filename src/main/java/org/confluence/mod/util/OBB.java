@@ -319,7 +319,7 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
 //        double min = obb.vertices[0].dot(axis);
 //        double max = min;
 //
-//        for(int i = 1; i < obb.vertices.length; i++){
+//        for(int i = 1; i < obb.vertices.TOTAL_LENGTH; i++){
 //            double projection = obb.vertices[i].dot(axis);
 //            if(projection < min){
 //                min = projection;

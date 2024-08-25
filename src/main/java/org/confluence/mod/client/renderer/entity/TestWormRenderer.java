@@ -4,10 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
-import org.confluence.mod.client.model.entity.TestWormSegmentModel;
 import org.confluence.mod.client.model.entity.WormOverallModel;
 import org.confluence.mod.entity.worm.AbstractWormEntity;
-import org.confluence.mod.entity.worm.test.TestWormEntity;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class TestWormRenderer extends GeoEntityRenderer<AbstractWormEntity> {

@@ -1,7 +1,7 @@
 package org.confluence.mod.client.model.entity;
 
 import net.minecraft.resources.ResourceLocation;
-import org.confluence.mod.entity.worm.test.TestWormPart;
+import org.confluence.mod.entity.worm.TestWormPart;
 import software.bernie.geckolib.model.GeoModel;
 
 import static org.confluence.mod.Confluence.MODID;
