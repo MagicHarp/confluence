@@ -2,12 +2,15 @@ package org.confluence.mod.block.common;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +21,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -50,24 +54,70 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class ExtractinatorBlock extends HorizontalDirectionalBlock implements EntityBlock, CustomModel, CustomItemModel {
+    public static final EnumProperty<ExtractinatorPart> PART = EnumProperty.create("part", ExtractinatorPart.class);
+    private static final VoxelShape BASE_SHAPE_SOUTH = Shapes.box(0.1875, 0.0, 0.1875, 1.0, 1.0, 0.8125);
+    private static final VoxelShape BASE_SHAPE_WEST = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 1.0);
+    private static final VoxelShape BASE_SHAPE_NORTH = Shapes.box(0.0, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
+    private static final VoxelShape BASE_SHAPE_EAST = Shapes.box(0.1875, 0.0, 0.0, 0.8125, 1.0, 0.8125);
+    private static final VoxelShape RIGHT_SHAPE_SOUTH = Shapes.box(0.0, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
+    private static final VoxelShape RIGHT_SHAPE_WEST = Shapes.box(0.1875, 0.0, 0.0, 0.8125, 1.0, 0.8125);
+    private static final VoxelShape RIGHT_SHAPE_NORTH = Shapes.box(0.1875, 0.0, 0.1875, 1.0, 1.0, 0.8125);
+    private static final VoxelShape RIGHT_SHAPE_EAST = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 1.0);
+    private static final VoxelShape[] BASE_SHAPES = new VoxelShape[]{BASE_SHAPE_SOUTH, BASE_SHAPE_WEST, BASE_SHAPE_NORTH, BASE_SHAPE_EAST};
+    private static final VoxelShape[] RIGHT_SHAPES = new VoxelShape[]{RIGHT_SHAPE_SOUTH, RIGHT_SHAPE_WEST, RIGHT_SHAPE_NORTH, RIGHT_SHAPE_EAST};
+
     public ExtractinatorBlock(Properties pProperties) { // todo 多方块
         super(pProperties);
+        registerDefaultState(stateDefinition.any().setValue(PART, ExtractinatorPart.BASE).setValue(FACING, Direction.NORTH));
     }
-
-    private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return SHAPE;
+        int index = pState.getValue(FACING).get2DDataValue();
+        return pState.getValue(PART) == ExtractinatorPart.BASE ? BASE_SHAPES[index] : RIGHT_SHAPES[index];
     }
 
+    @Override
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+        if (!pLevel.isClientSide) {
+            BlockPos relativePos = pPos.relative(getConnectedDirection(pState));
+            pLevel.setBlockAndUpdate(relativePos, defaultBlockState().setValue(PART, ExtractinatorPart.RIGHT).setValue(FACING, pState.getValue(FACING)));
+        }
+    }
+
+    /**
+     * 获取与该方块相连的多方块的相对方向
+     * <p>
+     * 注：是以玩家视角看向的相对方向
+     *
+     * @param blockState 该方块的方块状态
+     * @return 相对方向
+     */
+    public static Direction getConnectedDirection(BlockState blockState) {
+        Direction facing = blockState.getValue(FACING);
+        return switch (blockState.getValue(PART)) {
+            case BASE -> facing.getCounterClockWise(); // 获取其相对右边
+            case RIGHT -> facing.getClockWise(); // 获取其相对左边
+        };
+    }
+
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        Level level = pContext.getLevel();
+        BlockState blockState = defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        BlockPos relativePos = pContext.getClickedPos().relative(getConnectedDirection(blockState));
+        return level.getBlockState(relativePos).canBeReplaced(pContext) && level.getWorldBorder().isWithinBounds(relativePos) ? blockState : null;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+        pLevel.setBlockAndUpdate(pPos.relative(getConnectedDirection(pState)), Blocks.AIR.defaultBlockState());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(PART, FACING);
     }
 
     @Nullable
@@ -171,7 +221,7 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
 
                             @Override
                             public ResourceLocation getAnimationResource(Item animatable) {
-                                return ExtractinatorBlockModel.ANIMATIONS;
+                                return null;
                             }
                         });
                     }
@@ -186,6 +236,25 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
         @Override
         public AnimatableInstanceCache getAnimatableInstanceCache() {
             return CACHE;
+        }
+    }
+
+    public enum ExtractinatorPart implements StringRepresentable {
+        BASE("base"),
+        RIGHT("right");
+
+        private final String name;
+
+        ExtractinatorPart(String pName) {
+            this.name = pName;
+        }
+
+        public String toString() {
+            return name;
+        }
+
+        public @NotNull String getSerializedName() {
+            return name;
         }
     }
 }

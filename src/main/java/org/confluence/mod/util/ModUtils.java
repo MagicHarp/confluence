@@ -207,10 +207,23 @@ public final class ModUtils {
         return level.getDifficulty().equals(Difficulty.HARD);
     }
 
+    /**
+     * 获得从实体A到实体B的单位向量，即A→B
+     * @param a 实体A
+     * @param b 实体B
+     * @return A→B的单位向量
+     */
     public static Vec3 getVectorA2B(Entity a, Entity b) {
         return b.position().subtract(a.position()).normalize();
     }
 
+    /**
+     * 给予实体B一个击退动量，方向为A→B
+     * @param a 实体A
+     * @param b 实体B
+     * @param scale 击退动量的缩放
+     * @param motionY 击退的Y轴动量
+     */
     public static void knockBackA2B(Entity a, Entity b, double scale, double motionY) {
         b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
     }
