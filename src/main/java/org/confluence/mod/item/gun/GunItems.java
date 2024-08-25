@@ -7,7 +7,8 @@ import org.confluence.mod.util.EnumRegister;
 import java.util.function.Supplier;
 
 public enum GunItems implements EnumRegister<AbstractGunItem> {
-    HANDGUN("handgun", HandGunItem::new);
+    HANDGUN("handgun", HandGunItem::new),
+    MUSKET("musket", MusketItem::new);
 
     private final RegistryObject<AbstractGunItem> value;
 
