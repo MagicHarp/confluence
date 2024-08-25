@@ -39,7 +39,7 @@ public abstract class AbstractArrowMixin implements IAbstractArrow, SelfGetter<A
 
     @ModifyVariable(method = "shoot", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private float boost(float velocity) {
-        if (((AbstractArrow) (Object) this).getOwner() instanceof LivingEntity living && living.hasEffect(ModEffects.ARCHERY.get())) {
+        if (self().getOwner() instanceof LivingEntity living && living.hasEffect(ModEffects.ARCHERY.get())) {
             return velocity * 1.2F;
         }
         return velocity;
