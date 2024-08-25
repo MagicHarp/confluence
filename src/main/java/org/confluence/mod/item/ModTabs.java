@@ -266,6 +266,7 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
+                output.accept(ModItems.MAGIC_CONCH.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_WATER_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_LAVA_BUCKET.get());
@@ -356,7 +357,12 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MECHANICAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mechanical"))
             .displayItems((parameters, output) -> {
-                // 功能性方块
+                output.accept(ModItems.RED_WRENCH.get());
+                output.accept(ModItems.GREEN_WRENCH.get());
+                output.accept(ModItems.BLUE_WRENCH.get());
+                output.accept(ModItems.YELLOW_WRENCH.get());
+                output.accept(ModItems.WIRE_CUTTER.get());
+                output.accept(CurioItems.SPECTRE_GOGGLES.get());
                 output.accept(ECHO_BLOCK.get());
                 for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());
