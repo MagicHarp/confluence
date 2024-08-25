@@ -7,7 +7,7 @@
         "item": "minecraft:copper_ingot"
     },
     "addition": {
-        "item": "confluence:big_another_amethyst_block"
+        "item": "confluence:big_tr_amethyst_block"
     },
     "result": {
         "item": "confluence:amethyst_staff"

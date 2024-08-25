@@ -8,7 +8,7 @@ import org.confluence.mod.Confluence;
 
 public class ModBiomes {
     public static final ResourceKey<Biome> THE_CORRUPTION = register("the_corruption");
-    public static final ResourceKey<Biome> ANOTHER_CRIMSON = register("another_crimson");
+    public static final ResourceKey<Biome> TR_CRIMSON = register("tr_crimson");
     public static final ResourceKey<Biome> THE_HALLOW = register("the_hallow");
     public static final ResourceKey<Biome> ASH_FOREST = register("ash_forest");
     public static final ResourceKey<Biome> ASH_WASTELAND = register("ash_wasteland");

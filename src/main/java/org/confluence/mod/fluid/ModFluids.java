@@ -199,12 +199,12 @@ public final class ModFluids {
         addItem(Torches.MUSHROOM_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
         // 匣子转化
         // 宝石转化
-        addItem(Materials.TOPAZ.get(), Materials.ANOTHER_AMETHYST.get());
+        addItem(Materials.TOPAZ.get(), Materials.TR_AMETHYST.get());
         addItem(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
         addItem(Items.EMERALD, Materials.SAPPHIRE.get());
         addItem(Materials.RUBY.get(), Items.EMERALD);
         addItem(Items.DIAMOND, Materials.RUBY.get());
-        addItem(Materials.ANOTHER_AMETHYST.get(), Items.DIRT);
+        addItem(Materials.TR_AMETHYST.get(), Items.DIRT);
         // 锭到矿的转化
         addItem(Materials.TITANIUM_INGOT.get(), Materials.RAW_TITANIUM.get());
         addItem(Materials.ADAMANTITE_INGOT.get(), Materials.RAW_ADAMANTITE.get());
@@ -214,7 +214,7 @@ public final class ModFluids {
         addItem(Materials.COBALT_INGOT.get(), Materials.RAW_COBALT.get());
         addItem(Materials.HELLSTONE_INGOT.get(), Materials.PRIMORDIAL_HELLSTONE_INGOT.get());
         addItem(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), Materials.RAW_HELLSTONE.get());
-        addItem(Materials.ANOTHER_CRIMSON_INGOT.get(), Materials.RAW_ANOTHER_CRIMSON.get());
+        addItem(Materials.TR_CRIMSON_INGOT.get(), Materials.RAW_TR_CRIMSON.get());
         addItem(Materials.EBONY_INGOT.get(), Materials.RAW_EBONY.get());
         addItem(Materials.METEORITE_INGOT.get(), Materials.RAW_METEORITE.get());
         addItem(Materials.PLATINUM_INGOT.get(), Materials.RAW_PLATINUM.get());

@@ -7,7 +7,9 @@ import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.fishing.IFishingPower;
-import org.confluence.mod.item.curio.movement.*;
+import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.item.curio.movement.IJumpBoost;
+import org.confluence.mod.item.curio.movement.IMayFly;
 import org.confluence.mod.misc.ModRarity;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
@@ -68,8 +70,8 @@ public class DataDrivenCurioGenerator {
                 intValue(cw, "getAggro", clazz);
             } else if (clazz == IArmorPass.class) {
                 intValue(cw, "getPassValue", clazz);
-            } else if (clazz == ICriticalHit.class) {
-                doubleValue(cw, "getChance", clazz);
+//            } else if (clazz == ICriticalHit.class) {
+//                doubleValue(cw, "getChance", clazz);
             } else if (clazz == IInvulnerableTime.class) {
                 intValue(cw, "getTime", clazz);
             } else if (clazz == IMagicAttack.class) {
@@ -90,13 +92,7 @@ public class DataDrivenCurioGenerator {
                 Number[] numbers = classMap.get(clazz);
                 intValue(cw, "getFlyTicks", numbers[0].intValue());
                 doubleValue(cw, "getFlySpeed", numbers[1].doubleValue());
-                // todo boolValue
-            } else if (clazz == IMultiJump.class) {
-                doubleValue(cw, "getJumpSpeed", clazz);
-            } else if (clazz == IOneTimeJump.class) {
-                Number[] numbers = classMap.get(clazz);
-                intValue(cw, "getJumpTicks", numbers[0].intValue());
-                doubleValue(cw, "getJumpSpeed", numbers[1].doubleValue());
+                // todo couldGlide
             }
         }
         if (!tooltips.isEmpty()) {

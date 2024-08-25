@@ -1,5 +1,6 @@
 package org.confluence.mod.client.renderer.gui;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -24,7 +25,7 @@ public class ManaHudOverlay implements IGuiOverlay {
         int currentMana = ClientPacketHandler.getCurrentMana();
         int maxManaCount = ClientPacketHandler.getMaxMana() / 20;
         int currentManaCount = currentMana / 20;
-        double lastMana = (currentMana - currentManaCount * 20.0) / 20.0;
+        float lastManaSize = (currentMana - currentManaCount * 20.0F) / 20.0F;
         int manaCount = -1;
         if (maxManaCount >= 2) {
             manaCount = maxManaCount - 2;
@@ -46,7 +47,14 @@ public class ManaHudOverlay implements IGuiOverlay {
         }
 
         //绘制最下方不完整的星
-        guiGraphics.blit(STAR_FILL, screenWidth - 18 + (int) ((11 - 11 * lastMana) / 2 + 0.5d), 12 + currentManaCount * 11 + (int) ((12 - 12 * lastMana) / 2 + 0.5d), 0, 0, ((int) (11 * lastMana)), ((int) (12 * lastMana)), ((int) (11 * lastMana)), ((int) (12 * lastMana)));
+        if (lastManaSize != 0.0F) {
+            PoseStack pose = guiGraphics.pose();
+            pose.pushPose();
+            pose.translate(screenWidth - 18 + (11 - 11 * lastManaSize) / 2, 12 + currentManaCount * 11 + (12 - 12 * lastManaSize) / 2, 0.0F);
+            pose.scale(lastManaSize, lastManaSize, 0.0F);
+            guiGraphics.blit(STAR_FILL, 0, 0, 0, 0, 11, 12, 11, 12);
+            pose.popPose();
+        }
 
         //绘制完整的星
         while (currentManaCount > 0) {

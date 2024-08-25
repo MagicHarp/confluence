@@ -18,7 +18,8 @@ public enum Hammers implements EnumRegister<HammerItem> {
     GOLDEN_HAMMER("golden_hammer", () -> new HammerItem(ModTiers.GOLD, 5, 1)),
     PLATINUM_HAMMER("platinum_hammer", () -> new HammerItem(ModTiers.PLATINUM, 5, 1)),
     EBONY_HAMMER("ebony_hammer", () -> new HammerItem(ModTiers.EBONY, 6, 1)),
-    ANOTHER_CRIMSON_HAMMER("another_crimson_hammer", () -> new HammerItem(ModTiers.ANOTHER_CRIMSON, 6, 1));
+    TR_CRIMSON_HAMMER("tr_crimson_hammer", () -> new HammerItem(ModTiers.TR_CRIMSON, 6, 1)),
+    PWNHAMMER("pwnhammer", () -> new HammerItem(ModTiers.HALLOWED, 7, 1));
 
     private final RegistryObject<HammerItem> value;
 

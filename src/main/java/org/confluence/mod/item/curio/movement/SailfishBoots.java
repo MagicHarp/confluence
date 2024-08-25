@@ -5,14 +5,17 @@ import org.confluence.mod.client.color.FloatRGB;
 import org.joml.Vector3f;
 
 public class SailfishBoots extends BaseSpeedBoots {
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0x46579f).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0x46579f).toVector();
+
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0x46579f).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0x46579f).toVector();
+        return END_COLOR;
     }
 
     @Override

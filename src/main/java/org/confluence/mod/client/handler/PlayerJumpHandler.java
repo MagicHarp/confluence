@@ -6,6 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.integration.airhop.AirHopHelper;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.accessor.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
@@ -46,9 +47,16 @@ public final class PlayerJumpHandler {
     public static boolean onFly = false;
 
     public static void handle(LocalPlayer localPlayer, boolean jumping) {
+        if (StepStoolHandler.onStool()) return;
+
         if (localPlayer.onGround()) {
             flushState(true);
         } else if (jumping) {
+            if (AirHopHelper.isLoaded() && AirHopHelper.notFinishJump(localPlayer)) {
+                jumpKeyDown = true;
+                return;
+            }
+
             if (couldGlide) {
                 if (remainFlyTicks-- > 0) {
                     onFly = true;
@@ -117,7 +125,7 @@ public final class PlayerJumpHandler {
         }
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(true, true, (float) speed));
     }
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
@@ -125,7 +133,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
     }
 
     private static void fly(LocalPlayer localPlayer, double speed) {
@@ -133,7 +141,7 @@ public final class PlayerJumpHandler {
         localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

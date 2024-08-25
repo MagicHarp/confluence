@@ -28,15 +28,17 @@ import java.util.UUID;
 public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILavaImmune, ILavaHurtReduce, IFluidWalk {
     public static final UUID SPEED_UUID = UUID.fromString("73456995-B70B-48D9-7EA4-191BD76C94C9");
     private static final AttributeModifier SPEED_MODIFIER = new AttributeModifier(SPEED_UUID, "Terraspark Boots", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final Vector3f START_COLOR = FloatRGB.fromInteger(0x147775).toVector();
+    public static final Vector3f END_COLOR = FloatRGB.fromInteger(0xfcfc54).toVector();
 
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0x147775).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0xfcfc54).toVector();
+        return END_COLOR;
     }
 
     @Override

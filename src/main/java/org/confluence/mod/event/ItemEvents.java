@@ -16,6 +16,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -24,6 +25,7 @@ import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.ItemPrefix;
@@ -41,6 +43,9 @@ import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.mixin.accessor.ItemEntityAccessor;
+import org.confluence.mod.network.NetworkHandler;
+import org.confluence.mod.network.s2c.SetItemEntityPickupDelayPacketS2C;
 
 import java.util.Collections;
 
@@ -56,19 +61,19 @@ public final class ItemEvents {
             if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.type != PrefixType.MELEE) return;
             if (itemPrefix.attackDamage != 0.0) {
                 event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,
-                        "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
+                    "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
             }
             if (itemPrefix.type == PrefixType.MELEE && itemPrefix.attackSpeed != 0.0) {
                 event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ItemPrefix.ATTACK_SPEED_UUID_HAND,
-                        "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
+                    "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
             }
             if (itemPrefix.knockBack != 0.0) {
                 event.addModifier(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ItemPrefix.KNOCK_BACK_UUID_HAND,
-                        "Item Prefix", itemPrefix.knockBack, MULTIPLY_TOTAL));
+                    "Item Prefix", itemPrefix.knockBack, MULTIPLY_TOTAL));
             }
             if (itemPrefix.size != 0.0) {
                 event.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(ItemPrefix.ENTITY_REACH_UUID_HAND,
-                        "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
+                    "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
             }
         });
     }
@@ -88,7 +93,7 @@ public final class ItemEvents {
         Player player = event.getEntity();
         if (itemStack.is(ModTags.Items.PROVIDE_MANA)) {
             player.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage ->
-                    manaStorage.receiveMana(() -> itemStack.getCount() * 100));
+                manaStorage.receiveMana(() -> itemStack.getCount() * 100));
             itemEntity.discard();
             event.setCanceled(true);
         } else if (itemStack.is(ModTags.Items.PROVIDE_LIFE)) {
@@ -142,7 +147,7 @@ public final class ItemEvents {
     @SubscribeEvent
     public static void arrowLoose(ArrowLooseEvent event) {
         PrefixProvider.getPrefix(event.getBow()).ifPresent(itemPrefix ->
-                event.setCharge((int) Math.ceil(event.getCharge() * (1.0 + itemPrefix.attackSpeed))));
+            event.setCharge((int) Math.ceil(event.getCharge() * (1.0 + itemPrefix.attackSpeed))));
     }
 
     @SubscribeEvent
@@ -165,9 +170,20 @@ public final class ItemEvents {
         ItemStack itemStack = event.getItem();
         if (itemStack.is(Tags.Items.TOOLS_BOWS) || itemStack.is(Tags.Items.TOOLS_CROSSBOWS)) {
             CompoundTag tag = itemStack.getTagElement(PrefixProvider.KEY);
-            if (tag != null && event.getEntity().level().getGameTime() % (int) (1.0 / tag.getDouble("attackSpeed")) == 0) {
+            if (tag != null && event.getEntity().level().getGameTime() % (int) (1.0 / tag.getFloat("attackSpeed")) == 0) {
                 event.setDuration(event.getDuration() - 1);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void itemToss(ItemTossEvent event) {
+        ItemEntity itemEntity = event.getEntity();
+        if (!itemEntity.level().isClientSide) {
+            NetworkHandler.CHANNEL.send(
+                PacketDistributor.ALL.noArg(),
+                new SetItemEntityPickupDelayPacketS2C(itemEntity.getId(), ((ItemEntityAccessor) itemEntity).getPickupDelay())
+            );
         }
     }
 }

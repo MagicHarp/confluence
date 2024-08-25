@@ -1,23 +1,25 @@
 package org.confluence.mod.block.natural.herbs;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.server.level.*;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.block.natural.*;
-import org.confluence.mod.item.*;
-import org.jetbrains.annotations.*;
+import org.confluence.mod.block.natural.BaseHerbBlock;
+import org.confluence.mod.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 public class MoonshineGrass extends BaseHerbBlock {
-	private static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(BRIGHTNESS,0,0,1,1);
-	private static final IntegerProperty PROP_LIGHT = IntegerProperty.create("level", BRIGHTNESS, 5);
+	public static final IntegerProperty PROP_LIGHT = IntegerProperty.create("level", BRIGHTNESS, 5);
 
 
 	public MoonshineGrass(){
@@ -34,11 +36,6 @@ public class MoonshineGrass extends BaseHerbBlock {
 	@Override
 	protected @NotNull ItemLike getBaseSeedId(){
 		return ModItems.MOONSHINE_GRASS_SEED.get();
-	}
-
-	public ColorPointLight.Template getColor(BlockState blockState){
-		LIGHT.radius = getAge(blockState) == MAX_AGE ? blockState.getValue(PROP_LIGHT) : 0;
-		return LIGHT;
 	}
 
 	@Override

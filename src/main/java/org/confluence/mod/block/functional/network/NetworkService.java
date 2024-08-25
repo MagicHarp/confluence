@@ -1,7 +1,5 @@
 package org.confluence.mod.block.functional.network;
 
-import org.confluence.mod.Confluence;
-
 import java.util.HashSet;
 import java.util.Set;
 

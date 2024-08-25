@@ -5,14 +5,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
 
@@ -28,11 +24,7 @@ public final class ModConfigs {
     public static ArrayList<BlockState> rareBlocks = new ArrayList<>();
     public static ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
 
-    private static ForgeConfigSpec.BooleanValue TERRA_STYLE_HEALTH;
-    public static boolean terraStyleHealth = true;
-
-    @SubscribeEvent
-    public static void onLoad(ModConfigEvent event) {
+    public static void onCommonLoad() {
         RARE_BLOCKS.get().forEach(s -> {
             try {
                 rareBlocks.add(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), s, false).blockState());
@@ -41,10 +33,6 @@ public final class ModConfigs {
             }
         });
         RARE_CREATURES.get().forEach(s -> rareCreatures.add(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(s))));
-
-        if (TERRA_STYLE_HEALTH != null) {
-            terraStyleHealth = TERRA_STYLE_HEALTH.get();
-        }
     }
 
     public static void registerCommon() {
@@ -61,8 +49,8 @@ public final class ModConfigs {
             "The higher the block in the list, the higher the value"
         ).defineListAllowEmpty("rareBlocks", List.of(
             "confluence:life_crystal_block",
-            "confluence:another_crimson_ore",
-            "confluence:deepslate_another_crimson_ore",
+            "confluence:tr_crimson_ore",
+            "confluence:deepslate_tr_crimson_ore",
             "confluence:ebony_ore",
             "confluence:deepslate_ebony_ore",
             "minecraft:ancient_debris",
@@ -81,7 +69,7 @@ public final class ModConfigs {
             "confluence:marble_cave_pots",
             "confluence:pyramid_pots",
             "confluence:corruption_pots",
-            "confluence:another_crimson_pots",
+            "confluence:tr_crimson_pots",
             "confluence:dungeon_pots",
             "confluence:underworld_pots",
             "confluence:lihzahrd_pots",
@@ -113,10 +101,4 @@ public final class ModConfigs {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BUILDER.build());
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static void registerClient() {
-        ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-        TERRA_STYLE_HEALTH = BUILDER.push("HUD").define("drawVanillaHealth", true);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, BUILDER.build());
-    }
 }

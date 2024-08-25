@@ -4,6 +4,7 @@
     "#confluence:needs_5_level",
     "#confluence:needs_6_level",
     "#confluence:needs_7_level",
-    "#confluence:needs_8_level"
+    "#confluence:needs_8_level",
+    "#confluence:needs_9_level"
   ]
 }

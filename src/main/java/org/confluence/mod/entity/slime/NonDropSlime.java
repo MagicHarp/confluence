@@ -2,7 +2,6 @@ package org.confluence.mod.entity.slime;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
@@ -16,6 +15,7 @@ import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class NonDropSlime extends Slime implements DeathAnimOptions {
@@ -89,9 +89,10 @@ public class NonDropSlime extends Slime implements DeathAnimOptions {
         var stateDefinition = Blocks.LAVA.getStateDefinition();
         Property<?> levelProperty = stateDefinition.getProperty("level");
         if (levelProperty instanceof IntegerProperty integerProperty) {
-            if (this.level().getDifficulty().equals(Difficulty.NORMAL) || this.level().getDifficulty().equals(Difficulty.HARD)) {
+            if (ModUtils.isExpert(level())) {
                 if (this.level().getBlockState(BlockPos.containing(this.position())).isAir() ||
                         this.level().getBlockState(BlockPos.containing(this.position())).canBeReplaced(Fluids.LAVA)) {
+                    //todo 未知且非固定出现的渲染bug
                     this.level().setBlock(BlockPos.containing(this.position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
                 }
             }

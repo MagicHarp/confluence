@@ -1,5 +1,6 @@
 package org.confluence.mod.client.renderer.gui;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -8,8 +9,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.item.common.LifeFruit;
-import org.confluence.mod.misc.ModConfigs;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -23,7 +24,7 @@ public class HealthHudOverlay implements IGuiOverlay {
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!ModConfigs.terraStyleHealth) return;
+        if (!ClientConfigs.terraStyleHealth) return;
         if (gui.getMinecraft().options.hideGui || !gui.shouldDrawSurvivalElements()) return;
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("health");
@@ -47,13 +48,13 @@ public class HealthHudOverlay implements IGuiOverlay {
         //以下是为了画出ui做的坐标计算
         int maxHeartCount = ((int) maxHealth) / 4;
         int currentHealthCount = ((int) currentHealth) / 4;
-        double lastHeart = 0.0d;
+        float lastHeartSize = 0.0F;
         if (((int) maxHealth) % 4 != 0) {
             maxHeartCount += 1;
         }
         if (((int) currentHealth) % 4 != 0) {
             currentHealthCount += 1;
-            lastHeart = (currentHealth % 4) / 4;
+            lastHeartSize = (currentHealth % 4) / 4;
         }
         int count;
         int heartCount;
@@ -134,7 +135,7 @@ public class HealthHudOverlay implements IGuiOverlay {
             if (currentHealthCount <= 1) {//绘制血条左端
                 guiGraphics.blit(HEART_FILL, screenWidth - 20 - 28 + 4 - setHeartCount * 12 + heartMove, 10 + heartLine - heartSmP * 14 + 4, 0, 0, 11, 11, 11, 11);
             } else {
-                if ((currentHealthCount % 10) != 1 || (heartSmP == 1 && lastHeart == 0.0f) || heartSmP >= 2) {
+                if ((currentHealthCount % 10) != 1 || (heartSmP == 1 && lastHeartSize == 0.0f) || heartSmP >= 2) {
                     guiGraphics.blit(HEART_FILL, screenWidth - 20 - (heartCount + 1) * 12 - 26 + 2 - setHeartCount * 12 + heartMove, 12 + heartLine - heartSmP * 14 + 2, 0, 0, 11, 11, 11, 11);
                 }
                 //绘制血条中部
@@ -147,8 +148,14 @@ public class HealthHudOverlay implements IGuiOverlay {
                 }
 
                 //绘制血条右端
-                if (heartSmP == 1 && lastHeart != 0.0f) {
-                    guiGraphics.blit(HEART_FILL, screenWidth - 20 - 24 - setHeartCount * 12 + (int) ((11 - 11 * lastHeart) / 2 + 0.5d) + heartMove, 12 + heartLine - heartSmP * 14 + 2 + (int) ((11 - 11 * lastHeart) / 2 + 0.5d), 0, 0, ((int) (11 * lastHeart)), ((int) (11 * lastHeart)), ((int) (11 * lastHeart)), ((int) (11 * lastHeart)));
+                if (heartSmP == 1 && lastHeartSize != 0.0f) {
+                    PoseStack pose = guiGraphics.pose();
+                    pose.pushPose();
+                    float delta = (11 - 11 * lastHeartSize) / 2;
+                    pose.translate(screenWidth - 20 - 24 - setHeartCount * 12 + heartMove + delta, 12 + heartLine - heartSmP * 14 + 2 + delta, 0.0F);
+                    pose.scale(lastHeartSize, lastHeartSize, 0.0F);
+                    guiGraphics.blit(HEART_FILL, 0, 0, 0, 0, 11, 11, 11, 11);
+                    pose.popPose();
                 } else {
                     guiGraphics.blit(HEART_FILL, screenWidth - 20 - 24 - setHeartCount * 12 + heartMove, 12 + heartLine - heartSmP * 14 + 2, 0, 0, 11, 11, 11, 11);
                 }

@@ -3,6 +3,7 @@ package org.confluence.mod.block.common;
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +22,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.util.EnumRegister;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +33,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
     JUNGLE_BOX("jungle_box"),
     SKY_BOX("sky_box"),
     CORRUPT_BOX("corrupt_box"),
-    ANOTHER_CRIMSON_BOX("another_crimson_box"),
+    TR_CRIMSON_BOX("tr_crimson_box"),
     SACRED_BOX("sacred_box"),
     DUNGEON_BOX("dungeon_box"),
     FREEZE_BOX("freeze_box"),
@@ -98,6 +100,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
                     if (!player.addItem(loot)) player.drop(loot, false, false);
                 }
                 itemStack.shrink(1);
+                serverLevel.playSound(null, player.blockPosition(), ModSoundEvents.TERRA_OPERATION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
             }
             return InteractionResultHolder.success(itemStack);
         }

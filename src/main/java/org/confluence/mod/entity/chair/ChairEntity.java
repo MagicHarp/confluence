@@ -5,7 +5,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.block.furniture.chair.AbstractChairBlock;
 import org.jetbrains.annotations.NotNull;
 
 public class ChairEntity extends Entity {
@@ -25,7 +27,8 @@ public class ChairEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (this.getPassengers().isEmpty()) {
+        Block chair = level().getBlockState(this.getOnPos()).getBlock();
+        if (this.getPassengers().isEmpty() || !(chair instanceof AbstractChairBlock)) {
             this.discard();
         }
     }

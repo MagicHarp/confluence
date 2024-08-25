@@ -1,6 +1,5 @@
 package org.confluence.mod.block.natural.herbs;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -21,8 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 public class DeathWeed extends BaseHerbBlock {
-    private static final ColorPointLight.Template LIGHT = new ColorPointLight.Template(BRIGHTNESS, 1, 0, 1, 1);
-    private static final IntegerProperty PROP_LIGHT = IntegerProperty.create("level", 0, 5);
+    public static final IntegerProperty PROP_LIGHT = IntegerProperty.create("level", 0, 5);
 
     public DeathWeed(){
         super(BlockBehaviour.Properties.copy(Blocks.DANDELION).randomTicks().lightLevel(value -> value.getValue(AGE) == MAX_AGE ? value.getValue(PROP_LIGHT) : 0));
@@ -42,11 +40,6 @@ public class DeathWeed extends BaseHerbBlock {
     @Override
     public boolean canBloom(ServerLevel world, BlockState state){
         return world.isNight() && (world.getMoonPhase() == 0 || ConfluenceData.get(world).getMoonSpecific() == 11);
-    }
-
-    public ColorPointLight.Template getColor(BlockState blockState){
-        LIGHT.radius = getAge(blockState) == MAX_AGE ? blockState.getValue(PROP_LIGHT) : 0;
-        return LIGHT;
     }
 
     @Override

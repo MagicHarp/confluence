@@ -9,12 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
-import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.function.Function;
 
 public class Bomb extends Item {
     protected float throwSpeed;

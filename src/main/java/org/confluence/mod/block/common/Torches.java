@@ -1,6 +1,5 @@
 package org.confluence.mod.block.common;
 
-import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,8 +15,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.client.shimmer.DemonTorchColor;
-import org.confluence.mod.client.shimmer.RainbowTorchColor;
+import org.confluence.mod.client.color.ColorPointLightData;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.ModItems;
@@ -37,10 +35,10 @@ public enum Torches {
     PINK_TORCH("pink", 14.0F, 0.7F, 0.3F, 0.7F), // 粉
     BONE_TORCH("bone", 14.0F, 0.5F, 0.75F, 1.0F), // 骨头
     ULTRABRIGHT_TORCH("ultrabright", 15.0F, 0.75F, 1.0F, 1.0F), // 超亮
-    DEMON_TORCH("demon", DemonTorchColor.INSTANCE), // 恶魔
+    DEMON_TORCH("demon", new ColorPointLightData(14.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 恶魔
     CURSED_TORCH("cursed", 14.0F, 0.4F, 1.0F, 0.1F), // 诅咒
     ICHOR_TORCH("ichor", 14.0F, 1.0F, 1.0F, 0.7F), // 灵液
-    RAINBOW_TORCH("rainbow", RainbowTorchColor.INSTANCE), // 彩虹
+    RAINBOW_TORCH("rainbow", new ColorPointLightData(14.0F, 0.0F, 0.0F, 0.0F, 0.0F)), // 彩虹
     DESERT_TORCH("desert", 14.0F, 1.0F, 0.85F, 0.55F), // 沙漠
     CORAL_TORCH("coral", 14.0F, 0.25F, 1.0F, 0.8F), // 珊瑚
     CORRUPT_TORCH("corrupt", 14.0F, 0.95F, 0.4F, 1.0F), // 腐化
@@ -64,7 +62,7 @@ public enum Torches {
         this(id, radius, r, g, b, 0.4F);
     }
 
-    Torches(String id, ColorPointLight.Template torchColor) {
+    Torches(String id, ColorPointLightData torchColor) {
         this.stand = ModBlocks.registerWithoutItem(id + "_torch", () -> new UpdatingColorfulTorchBlock(torchColor));
         this.wall = ModBlocks.registerWithoutItem(id + "_wall_torch", () -> new UpdatingColorfulWallTorchBlock(torchColor));
         this.item = ModItems.ITEMS.register(id + "_torch", () -> new StandingAndWallBlockItem(stand.get(), wall.get(), new Item.Properties(), Direction.DOWN));
@@ -73,35 +71,35 @@ public enum Torches {
     public static void init() {}
 
     public static class ColorfulTorchBlock extends TorchBlock implements CustomModel, CustomItemModel {
-        private final ColorPointLight.Template torchColor;
+        private final ColorPointLightData torchColor;
 
         public ColorfulTorchBlock(float radius, float r, float g, float b, float a) {
-            this(new ColorPointLight.Template(radius, r, g, b, a));
+            this(new ColorPointLightData(radius, r, g, b, a));
         }
 
-        public ColorfulTorchBlock(ColorPointLight.Template torchColor) {
-            super(Properties.copy(Blocks.TORCH).lightLevel(state -> (int) torchColor.radius), ParticleTypes.FLAME);
+        public ColorfulTorchBlock(ColorPointLightData torchColor) {
+            super(Properties.copy(Blocks.TORCH).lightLevel(state -> (int) torchColor.radius()), ParticleTypes.FLAME);
             this.torchColor = torchColor;
         }
 
-        public ColorPointLight.Template getColor() {
+        public ColorPointLightData getColor() {
             return torchColor;
         }
     }
 
     public static class ColorfulWallTorchBlock extends WallTorchBlock implements CustomModel, CustomItemModel {
-        private final ColorPointLight.Template torchColor;
+        private final ColorPointLightData torchColor;
 
         public ColorfulWallTorchBlock(float radius, float r, float g, float b, float a) {
-            this(new ColorPointLight.Template(radius, r, g, b, a));
+            this(new ColorPointLightData(radius, r, g, b, a));
         }
 
-        public ColorfulWallTorchBlock(ColorPointLight.Template torchColor) {
-            super(Properties.copy(Blocks.TORCH).lightLevel(state -> (int) torchColor.radius), ParticleTypes.FLAME);
+        public ColorfulWallTorchBlock(ColorPointLightData torchColor) {
+            super(Properties.copy(Blocks.TORCH).lightLevel(state -> (int) torchColor.radius()), ParticleTypes.FLAME);
             this.torchColor = torchColor;
         }
 
-        public ColorPointLight.Template getColor() {
+        public ColorPointLightData getColor() {
             return torchColor;
         }
     }
@@ -119,7 +117,7 @@ public enum Torches {
     public static final BooleanProperty UPDATE = BooleanProperty.create("update");
 
     public static class UpdatingColorfulTorchBlock extends ColorfulTorchBlock implements EntityBlock {
-        public UpdatingColorfulTorchBlock(ColorPointLight.Template torchColor) {
+        public UpdatingColorfulTorchBlock(ColorPointLightData torchColor) {
             super(torchColor);
             registerDefaultState(stateDefinition.any().setValue(UPDATE, false));
         }
@@ -143,7 +141,7 @@ public enum Torches {
     }
 
     public static class UpdatingColorfulWallTorchBlock extends ColorfulWallTorchBlock implements EntityBlock {
-        public UpdatingColorfulWallTorchBlock(ColorPointLight.Template torchColor) {
+        public UpdatingColorfulWallTorchBlock(ColorPointLightData torchColor) {
             super(torchColor);
             registerDefaultState(stateDefinition.any().setValue(UPDATE, false));
         }

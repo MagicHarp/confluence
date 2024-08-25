@@ -6,10 +6,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.phys.AABB;
-import org.confluence.mod.datagen.limit.Image32x;
+import org.confluence.mod.datagen.limit.Image24x;
 import org.jetbrains.annotations.NotNull;
 
-public class BoardSwordItem extends SwordItem implements Image32x {
+public class BoardSwordItem extends SwordItem implements Image24x {
     public BoardSwordItem(Tier tier, int rawDamage, float rawSpeed) {
         this(tier, rawDamage, rawSpeed, new Properties());
     }

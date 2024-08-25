@@ -10,6 +10,7 @@ import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
@@ -75,6 +76,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.black_slime", "史莱姆之母");
         add("entity.confluence.lava_slime", "岩浆史莱姆");
         add("entity.confluence.demon_eye", "恶魔眼");
+
+        add("entity.confluence.king_slime", "史莱姆王");
 
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
@@ -280,6 +283,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
         add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
         add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
+        add("item.confluence.hand_of_creation.tooltip", "采矿速度提高25%");
+        add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
+        add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
+        add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
+        add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
         add("death.attack.falling_star", "%1$s 被坠星压扁了");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
@@ -288,9 +296,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("biome.confluence.the_corruption", "腐化之地");
         add("biome.confluence.the_corruption_desert", "腐化沙漠");
         add("biome.confluence.the_corruption_tundra", "腐化苔原");
-        add("biome.confluence.another_crimson", "猩红之地");
-        add("biome.confluence.another_crimson_desert", "猩红沙漠");
-        add("biome.confluence.another_crimson_tundra", "猩红苔原");
+        add("biome.confluence.tr_crimson", "猩红之地");
+        add("biome.confluence.tr_crimson_desert", "猩红沙漠");
+        add("biome.confluence.tr_crimson_tundra", "猩红苔原");
         add("biome.confluence.the_hallow", "神圣之地");
         add("biome.confluence.the_hallow_desert", "神圣沙漠");
         add("biome.confluence.the_hallow_tundra", "神圣苔原");
@@ -344,8 +352,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.platinum_ingot.descr", "获得铂金锭");
         add("advancements.ebony_ingot.title", "腐化意志");
         add("advancements.ebony_ingot.descr", "获得魔矿锭");
-        add("advancements.another_crimson_ingot.title", "猩红血肉");
-        add("advancements.another_crimson_ingot.descr", "获得猩红矿锭");
+        add("advancements.tr_crimson_ingot.title", "猩红血肉");
+        add("advancements.tr_crimson_ingot.descr", "获得猩红矿锭");
         add("advancements.pretty_in_pink.title", "粉红佳人");
         add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
 
@@ -971,6 +979,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "蠕虫围巾是困难模式前的配饰，可减少 17% 的伤害。");
         add("item.confluence.worm_scarf.info2", "该物品的伤害减免是在施加防御后计算的。");
         add("item.confluence.worm_scarf.info3", "在专家模式中，蠕虫围巾总是从世界吞噬者的宝藏袋中掉落。");
+        add("item.confluence.step_stool.info", "你可以在锻造台使用梯凳升级它的额外高度");
 
 
         add("block.confluence.base_chest_block.locked_golden", "§r§f上锁的金箱");
@@ -993,6 +1002,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("resourcepack.ter_armor", "主流：泰拉盔甲样式材质");
 
         add("event.confluence.blood_moon", "血月正在升起...");
+
+        add("attribute.name.generic.critical_chance", "暴击率");
+
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");
@@ -1056,11 +1068,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.CORRUPTION_AMBER_ORE.get(), "腐化琥珀矿石");
         add(Ores.FLESHIFICATION_AMBER_ORE.get(), "血化琥珀矿石");
         add(Ores.DEEPSLATE_AMBER_ORE.get(), "深层琥珀矿石");
-        add(Ores.ANOTHER_AMETHYST_ORE.get(), "异域紫晶矿石");
-        add(Ores.SANCTIFICATION_ANOTHER_AMETHYST_ORE.get(), "圣化异域紫晶矿石");
-        add(Ores.CORRUPTION_ANOTHER_AMETHYST_ORE.get(), "腐化异域紫晶矿石");
-        add(Ores.FLESHIFICATION_ANOTHER_AMETHYST_ORE.get(), "血化异域紫晶矿石");
-        add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), "深层异域紫晶矿石");
+        add(Ores.TR_AMETHYST_ORE.get(), "异域紫晶矿石");
+        add(Ores.SANCTIFICATION_TR_AMETHYST_ORE.get(), "圣化异域紫晶矿石");
+        add(Ores.CORRUPTION_TR_AMETHYST_ORE.get(), "腐化异域紫晶矿石");
+        add(Ores.FLESHIFICATION_TR_AMETHYST_ORE.get(), "血化异域紫晶矿石");
+        add(Ores.DEEPSLATE_TR_AMETHYST_ORE.get(), "深层异域紫晶矿石");
         add(Ores.SAPPHIRE_ORE.get(), "蓝玉矿石");
         add(Ores.SANCTIFICATION_SAPPHIRE_ORE.get(), "圣化蓝玉矿石");
         add(Ores.CORRUPTION_SAPPHIRE_ORE.get(), "腐化蓝玉矿石");
@@ -1086,13 +1098,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.DEEPSLATE_EBONY_ORE.get(), "深层魔矿石");
         add(Ores.EBONY_BLOCK.get(), "魔矿块");
         add(Ores.RAW_EBONY_BLOCK.get(), "魔原矿块");
-        add(Ores.ANOTHER_CRIMSON_ORE.get(), "猩红矿石");
-        add(Ores.SANCTIFICATION_ANOTHER_CRIMSON_ORE.get(), "圣化猩红矿石");
-        add(Ores.CORRUPTION_ANOTHER_CRIMSON_ORE.get(), "腐化猩红矿石");
-        add(Ores.FLESHIFICATION_ANOTHER_CRIMSON_ORE.get(), "血化猩红矿石");
-        add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), "深层猩红矿石");
-        add(Ores.ANOTHER_CRIMSON_BLOCK.get(), "猩红矿块");
-        add(Ores.RAW_ANOTHER_CRIMSON_BLOCK.get(), "猩红原矿块");
+        add(Ores.TR_CRIMSON_ORE.get(), "猩红矿石");
+        add(Ores.SANCTIFICATION_TR_CRIMSON_ORE.get(), "圣化猩红矿石");
+        add(Ores.CORRUPTION_TR_CRIMSON_ORE.get(), "腐化猩红矿石");
+        add(Ores.FLESHIFICATION_TR_CRIMSON_ORE.get(), "血化猩红矿石");
+        add(Ores.DEEPSLATE_TR_CRIMSON_ORE.get(), "深层猩红矿石");
+        add(Ores.TR_CRIMSON_BLOCK.get(), "猩红矿块");
+        add(Ores.RAW_TR_CRIMSON_BLOCK.get(), "猩红原矿块");
         add(Ores.HELLSTONE.get(), "下界狱石");
         add(Ores.ASH_HELLSTONE.get(), "灰烬狱石");
         add(Ores.HELLSTONE_BLOCK.get(), "狱石块");
@@ -1230,19 +1242,19 @@ public class ModChineseProvider extends LanguageProvider {
         add(PEARL_SAND.get(), "珍珠沙块");
         add(HALLOW_GRASS_BLOCK.get(), "神圣草方块");
         add(PEARL_SAND_LAYER_BLOCK.get(),"神圣沙片");
-        add(ANOTHER_CRIMSON_STONE.get(), "猩红石块");
-        add(ANOTHER_CRIMSON_COBBLESTONE.get(), "猩红圆石");
-        add(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get(), "硬化猩红沙块");
-        add(ANOTHER_CRIMSON_SANDSTONE.get(), "猩红砂岩");
-        add(ANOTHER_CRIMSON_SAND.get(), "猩红沙块");
-        add(ANOTHER_CRIMSON_SAND_LAYER_BLOCK.get(),"猩红沙片");
+        add(TR_CRIMSON_STONE.get(), "猩红石块");
+        add(TR_CRIMSON_COBBLESTONE.get(), "猩红圆石");
+        add(TR_CRIMSON_HARDENED_SAND_BLOCK.get(), "硬化猩红沙块");
+        add(TR_CRIMSON_SANDSTONE.get(), "猩红砂岩");
+        add(TR_CRIMSON_SAND.get(), "猩红沙块");
+        add(TR_CRIMSON_SAND_LAYER_BLOCK.get(),"猩红沙片");
         add(RED_ICE.get(), "红冰块");
         add(RED_PACKED_ICE.get(), "红浮冰块");
         add(PINK_ICE.get(), "粉冰块");
         add(PINK_PACKED_ICE.get(), "粉浮冰块");
         add(PURPLE_ICE.get(), "紫冰块");
         add(PURPLE_PACKED_ICE.get(), "紫浮冰块");
-        add(ANOTHER_CRIMSON_GRASS_BLOCK.get(), "猩红草方块");
+        add(TR_CRIMSON_GRASS_BLOCK.get(), "猩红草方块");
         add(MUSHROOM_GRASS_BLOCK.get(), "蘑菇草方块");
         add(ASH_BLOCK.get(), "灰烬块");
         add(ASH_GRASS_BLOCK.get(), "灰烬草块");
@@ -1251,16 +1263,16 @@ public class ModChineseProvider extends LanguageProvider {
         add(BIG_AMBER_BLOCK.get(), "大琥珀块");
         add(BIG_TOPAZ_BLOCK.get(), "大黄玉块");
         add(BIG_SAPPHIRE_BLOCK.get(), "大蓝玉块");
-        add(BIG_ANOTHER_AMETHYST_BLOCK.get(), "大紫晶块");
-        add(ANOTHER_POLISHED_GRANITE.get(), "异域花岗岩块");
+        add(BIG_TR_AMETHYST_BLOCK.get(), "大紫晶块");
+        add(TR_POLISHED_GRANITE.get(), "异域花岗岩块");
         add(POLISHED_MARBLE.get(), "异域大理石块");
-        add(ANOTHER_COPPER_BRICKS.get(), "铜砖块");
-        add(ANOTHER_COPPER_PLATE.get(), "铜条板块");
-        add(ANOTHER_CRIMSON_ORE_BRICKS.get(), "猩红矿砖");
-        add(ANOTHER_CRIMSON_ROCK_BRICKS.get(), "猩红石砖");
-        add(ANOTHER_GOLD_BRICKS.get(), "金砖块");
-        add(ANOTHER_IRON_BRICKS.get(), "铁砖块");
-        add(ANOTHER_STONE_BRICKS.get(), "异域石砖");
+        add(TR_COPPER_BRICKS.get(), "铜砖块");
+        add(TR_COPPER_PLATE.get(), "铜条板块");
+        add(TR_CRIMSON_ORE_BRICKS.get(), "猩红矿砖");
+        add(TR_CRIMSON_ROCK_BRICKS.get(), "猩红石砖");
+        add(TR_GOLD_BRICKS.get(), "金砖块");
+        add(TR_IRON_BRICKS.get(), "铁砖块");
+        add(TR_STONE_BRICKS.get(), "异域石砖");
         add(EBONY_ORE_BRICKS.get(), "魔矿砖");
         add(EBONY_ROCK_BRICKS.get(), "黑檀石砖");
         add(BLUE_GEL_BLOCK.get(), "凝胶块");
@@ -1279,21 +1291,21 @@ public class ModChineseProvider extends LanguageProvider {
         add(TIN_BRICKS.get(), "锡砖块");
         add(TIN_PLATE.get(), "锡条板块");
         add(TUNGSTEN_BRICKS.get(), "钨砖块");
-        add(ANOTHER_LAVA_BEAM.get(), "异域熔岩梁");
-        add(ANOTHER_LAVA_BRICKS.get(), "异域熔岩砖块");
-        add(ANOTHER_OBSIDIAN_BEAM.get(), "异域黑曜石梁");
-        add(ANOTHER_OBSIDIAN_BRICKS.get(), "异域黑曜石砖");
-        add(ANOTHER_OBSIDIAN_PLATE.get(), "异域黑曜石条板块");
-        add(ANOTHER_OBSIDIAN_SMALL_BRICKS.get(), "异域切制黑曜石砖");
-        add(ANOTHER_SMOOTH_OBSIDIAN.get(), "异域光滑黑曜石块");
-        add(CHISELED_ANOTHER_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");
+        add(TR_LAVA_BEAM.get(), "异域熔岩梁");
+        add(TR_LAVA_BRICKS.get(), "异域熔岩砖块");
+        add(TR_OBSIDIAN_BEAM.get(), "异域黑曜石梁");
+        add(TR_OBSIDIAN_BRICKS.get(), "异域黑曜石砖");
+        add(TR_OBSIDIAN_PLATE.get(), "异域黑曜石条板块");
+        add(TR_OBSIDIAN_SMALL_BRICKS.get(), "异域切制黑曜石砖");
+        add(TR_SMOOTH_OBSIDIAN.get(), "异域光滑黑曜石块");
+        add(CHISELED_TR_OBSIDIAN_BRICKS.get(), "錾制异域黑曜石块");
         add(CRYSTAL_BLOCK.get(), "水晶块");
         add(RAINBOW_BRICK.get(), "彩虹砖");
-        add(ANOTHER_OAK_BEAM.get(), "经典风情木梁");
-        add(ANOTHER_OAK_PLANKS.get(), "经典风情木板");
-        add(ANOTHER_NORTHLAND_BEAM.get(), "北地风情木梁");
-        add(ANOTHER_NORTHLAND_PLANKS.get(), "北地风情木板");
-        add(ANOTHER_GRANITE_COLUMN.get(), "异域花岗岩梁");
+        add(TR_OAK_BEAM.get(), "经典风情木梁");
+        add(TR_OAK_PLANKS.get(), "经典风情木板");
+        add(TR_NORTHLAND_BEAM.get(), "北地风情木梁");
+        add(TR_NORTHLAND_PLANKS.get(), "北地风情木板");
+        add(TR_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
         add(THIN_ICE_BLOCK.get(), "薄冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
@@ -1323,7 +1335,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(EMERALD_BRANCHES.get(), "翡翠石枝杈");
         add(DIAMOND_BRANCHES.get(), "钻石枝杈");
         add(SAPPHIRE_BRANCHES.get(), "蓝玉石枝杈");
-        add(ANOTHER_AMETHYST_BRANCHES.get(), "紫晶石枝杈");
+        add(TR_AMETHYST_BRANCHES.get(), "紫晶石枝杈");
         add(ASH_BRANCHES.get(), "白蜡枝杈");
         add(CRACKED_BLUE_BRICK.get(), "碎裂蓝色地牢砖");
         add(CRACKED_GREEN_BRICK.get(), "碎裂绿色地牢砖");
@@ -1374,7 +1386,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pots.MARBLE_CAVE_POTS.get(), "尘封罐子");
         add(Pots.PYRAMID_POTS.get(), "祭祀罐子");
         add(Pots.CORRUPTION_POTS.get(), "蠕虫罐子");
-        add(Pots.ANOTHER_CRIMSON_POTS.get(), "血肉罐子");
+        add(Pots.TR_CRIMSON_POTS.get(), "血肉罐子");
         add(Pots.DUNGEON_POTS.get(), "地牢罐子");
         add(Pots.UNDERWORLD_POTS.get(), "炎烬罐子");
         add(Pots.LIHZAHRD_POTS.get(), "神庙罐子");
@@ -1385,7 +1397,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Boxes.JUNGLE_BOX.get(), "丛林匣");
         add(Boxes.SKY_BOX.get(), "天空匣");
         add(Boxes.CORRUPT_BOX.get(), "腐化匣");
-        add(Boxes.ANOTHER_CRIMSON_BOX.get(), "猩红匣");
+        add(Boxes.TR_CRIMSON_BOX.get(), "猩红匣");
         add(Boxes.SACRED_BOX.get(), "神圣匣");
         add(Boxes.DUNGEON_BOX.get(), "地牢匣");
         add(Boxes.FREEZE_BOX.get(), "冰冻匣");
@@ -1436,8 +1448,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.METEORITE_INGOT.get(), "陨铁锭");
         add(Materials.RAW_EBONY.get(), "粗魔矿");
         add(Materials.EBONY_INGOT.get(), "魔矿锭");
-        add(Materials.RAW_ANOTHER_CRIMSON.get(), "粗猩红矿");
-        add(Materials.ANOTHER_CRIMSON_INGOT.get(), "猩红矿锭");
+        add(Materials.RAW_TR_CRIMSON.get(), "粗猩红矿");
+        add(Materials.TR_CRIMSON_INGOT.get(), "猩红矿锭");
         add(Materials.RAW_HELLSTONE.get(), "狱石矿");
         add(Materials.PRIMORDIAL_HELLSTONE_INGOT.get(), "原始狱石矿锭");
         add(Materials.HELLSTONE_INGOT.get(), "狱石矿锭");
@@ -1464,7 +1476,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
         add(Materials.SAPPHIRE.get(), "蓝玉");
-        add(Materials.ANOTHER_AMETHYST.get(), "异域紫晶石");
+        add(Materials.TR_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.VERTEBRA.get(), "椎骨");
@@ -1509,6 +1521,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.CACTUS_SWORD.get(), "仙人掌剑");
         add(Swords.CROWBAR.get(), "撬棍");
         add(Swords.ZOMBIE_ARM.get(), "僵尸臂");
+        add(Swords.MANDIBLE_BLADE.get(), "颌骨剑");
+        add(Swords.STYLISH_SCISSORS.get(), "时尚剪刀");
         add(Swords.BONE_SWORD.get(), "骨剑");
         add(Swords.PURPLE_CLUBBERFISH.get(), "紫挥棒鱼");
         add(Swords.UMBRELLA.get(), "雨伞");
@@ -1517,6 +1531,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.TRAGIC_UMBRELLA.get(), "悲剧雨伞");
         add(Swords.FALCON_BLADE.get(), "猎鹰刃");
         add(Swords.BAT_BAT.get(), "蝙蝠棍");
+        add(Swords.STARFURY.get(), "星怒");
+        add(Swords.LIGHTS_BANE.get(), "魔光剑");
+        add(Swords.BLOOD_BUTCHERER.get(), "血腥屠刀");
+        add(Swords.KATANA.get(), "武士刀");
+        add(Swords.ICE_BLADE.get(), "冰雪剑");
+        add(Swords.EXOTIC_SCIMITAR.get(), "异域弯刀");
 
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
@@ -1588,6 +1608,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(HERB_BAG.get(), "草药袋");
         add(WHOOPIE_CUSHION.get(), "整蛊坐垫");
         add(BOMB.get(), "炸弹");
+        add(BOUNCY_BOMB.get(), "弹力炸弹");
+        add(STICKY_BOMB.get(), "粘性炸弹");
+        add(SCARAB_BOMB.get(), "甲虫炸弹");
         add(RED_WRENCH.get(), "红扳手");
         add(BLUE_WRENCH.get(), "蓝扳手");
         add(GREEN_WRENCH.get(), "绿扳手");
@@ -1595,6 +1618,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLDEN_KEY.get(), "金钥匙");
         add(SHADOW_KEY.get(), "暗影钥匙");
         add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
+        add(SLIME_CROWN.get(), "史莱姆皇冠");
         add(DEMON_HEART.get(), "恶魔之心");
 
         // 功能性方块
@@ -1733,7 +1757,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(JUNGLE_THORN.get(), "丛林荆棘");
         add(PLANTERA_THORN.get(), "世纪之花荆棘");
 
-        add(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), "毒蘑菇");
+        add(ModBlocks.TR_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");
         add(ModBlocks.GLOWING_MUSHROOM.get(), "发光蘑菇");
         add(ModBlocks.LIFE_MUSHROOM.get(), "生命蘑菇");
@@ -1741,7 +1765,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.JUNGLE_SPORE.get(), "丛林孢子");
         add(JUNGLE_ROSE.get(), "丛林玫瑰");
         add(CORRUPT_GRASS.get(), "腐化草");
-        add(ANOTHER_CRIMSON_GRASS.get(), "猩红草");
+        add(TR_CRIMSON_GRASS.get(), "猩红草");
         add(HALLOW_GRASS.get(), "神圣草");
         add(ModBlocks.NATURES_GIFT.get(), "大自然的恩赐");
         // 法杖
@@ -1819,6 +1843,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
         add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
+        add(SpawnEggs.KING_SLIME_SPAWN_EGG.get(), "史莱姆王刷怪蛋");
         // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
         add(Swords.ORANGE_LIGHT_SABER.get(), "陨石橙光剑");
@@ -2020,6 +2045,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(MASTER_NINJA_GEAR.get(), "忍者大师装备");
         add(FROG_WEBBING.get(), "青蛙蹼");
         add(FROG_GEAR.get(), "青蛙装备");
+        add(PLATINUM_CROWN.get(), "铂金冠");
+        add(GOLD_CROWN.get(), "金冠");
+        add(STEP_STOOL.get(), "梯凳");
+        add(HAND_OF_CREATION.get(), "创造之手");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
@@ -2084,6 +2113,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Armors.FOSSIL_CHESTPLATE.get(), "化石胸甲");
         add(Armors.FOSSIL_LEGGINGS.get(), "化石护腿");
         add(Armors.FOSSIL_BOOTS.get(), "化石靴子");
+        add(Armors.NINJA_HELMET.get(), "忍者头盔");
+        add(Armors.NINJA_CHESTPLATE.get(), "忍者胸甲");
+        add(Armors.NINJA_LEGGINGS.get(), "忍者护腿");
+        add(Armors.NINJA_BOOTS.get(), "忍者靴子");
 
         // 鱼
         add(Foods.SEA_BASS.get(), "鲈鱼");
@@ -2106,7 +2139,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.RED_SNAPPER.get(), "红鲷鱼");
         add(Foods.TROUT.get(), "鳟鱼");
         add(Foods.ROCK_LOBSTER.get(), "岩石龙虾");
-        add(Foods.ANOTHER_SALMON.get(), "异域鲑鱼");
+        add(Foods.TR_SALMON.get(), "异域鲑鱼");
         add(Foods.SHRIMP.get(), "虾");
         add(Foods.MIRROR_FISH.get(), "镜面鱼");
         add(Foods.STINKY_FISH.get(), "臭味鱼");
@@ -2124,7 +2157,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(QuestedFishes.CAP_TUNABEARD.get(), "金枪鱼船长");
         add(QuestedFishes.CATFISH.get(), "猫猫鱼");
         add(QuestedFishes.CLOUDFISH.get(), "云朵鱼");
-        add(QuestedFishes.ANOTHER_CLOWNFISH.get(), "异域小丑鱼");
+        add(QuestedFishes.TR_CLOWNFISH.get(), "异域小丑鱼");
         add(QuestedFishes.CURSEDFISH.get(), "诅咒鱼");
         add(QuestedFishes.DEMONIC_HELLFISH.get(), "地狱恶魔鱼");
         add(QuestedFishes.DERPFISH.get(), "跳跳鱼");
@@ -2295,5 +2328,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.STONED.get(), "石化");
         //endregion items
 
+        //region entities
+        add(ModEntities.STEP_STOOL.get(), "梯凳");
+        //endregion entities
     }
 }

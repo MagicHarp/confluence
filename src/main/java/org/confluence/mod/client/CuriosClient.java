@@ -1,7 +1,13 @@
 package org.confluence.mod.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.client.model.curio.*;
@@ -39,5 +45,14 @@ public final class CuriosClient {
         layerDefinition.accept(HermesBootsModel.LAYER_LOCATION, HermesBootsModel::createBodyLayer);
         layerDefinition.accept(ObsidianSkullModel.LAYER_LOCATION, ObsidianSkullModel::createBodyLayer);
         layerDefinition.accept(ShieldOfCthulhuModel.LAYER_LOCATION, ShieldOfCthulhuModel::createBodyLayer);
+    }
+
+    public static void onlyFollowMainBody(LivingEntity livingEntity, ModelPart... renderers) {
+        EntityRenderer<? super LivingEntity> render = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(livingEntity);
+        if (render instanceof LivingEntityRenderer<?, ?> livingRenderer && livingRenderer.getModel() instanceof HumanoidModel<?> humanoidModel) {
+            for (ModelPart renderer : renderers) {
+                renderer.copyFrom(humanoidModel.body);
+            }
+        }
     }
 }

@@ -252,6 +252,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "Improved ability if combined with Shoe Spikes");
         add("item.confluence.shoe_spikes.tooltip", "Improved ability if combined with Climbing Claws");
         add("item.confluence.frog_gear.tooltip", "'It ain't easy being green'");
+        add("item.confluence.hand_of_creation.tooltip", "Increases mining speed by 25%");
+        add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
+        add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
+        add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
+        add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");
@@ -298,8 +303,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("advancements.platinum_ingot.descr", "Acquire platinum ingot");
         add("advancements.ebony_ingot.title", "Corrupt will");
         add("advancements.ebony_ingot.descr", "Acquire ebony ingot");
-        add("advancements.another_crimson_ingot.title", "Crimson flesh");
-        add("advancements.another_crimson_ingot.descr", "Acquire crimson ingot");
+        add("advancements.tr_crimson_ingot.title", "Crimson flesh");
+        add("advancements.tr_crimson_ingot.descr", "Acquire crimson ingot");
         add("advancements.pretty_in_pink.title", "pretty_in_pink");
         add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
 
@@ -650,11 +655,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.celestial_stone.info2", "It offers the same boosts as its components do, and as such, it is active during both day and night.");
         add("item.confluence.celestial_stone.info3", "It can be combined with the Moon Shell to form a Celestial Shell。");
         add("item.confluence.celestial_stone.info4", "Stat boosts:");
-        add("item.confluence.celestial_stone.info5", "+10% melee speed");
-        add("item.confluence.celestial_stone.info6", "+10% damage (all types)");
-        add("item.confluence.celestial_stone.info7", "+2% critical strike chance");
+        add("item.confluence.celestial_stone.info5", "+%s%% melee speed");
+        add("item.confluence.celestial_stone.info6", "+%s%% damage (all types)");
+        add("item.confluence.celestial_stone.info7", "+%s%% critical strike chance");
         add("item.confluence.celestial_stone.info8", "+1 HP/s life regeneration");
-        add("item.confluence.celestial_stone.info9", "+4 defense");
+        add("item.confluence.celestial_stone.info9", "+%s defense");
         add("item.confluence.celestial_stone.info10", "+15% mining speed");
         add("item.confluence.celestial_stone.info11", "+0.5 minion knockback");
         add("item.confluence.cobalt_shield.info", "The Cobalt Shield is a pre-Hardmode shield accessory that grants the player immunity to knockback when equipped, and also provides 1 defense.");
@@ -849,6 +854,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "The Worm Scarf is a pre-Hardmode accessory that reduces incoming damage by 17%.");
         add("item.confluence.worm_scarf.info2", "This damage reduction from this item is calculated after defense is applied.");
         add("item.confluence.worm_scarf.info3", "The Worm Scarf is always dropped from the Eater of Worlds' Treasure Bag in Expert Mode.");
+        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
 
         add("block.confluence.timers_block_1_1", "1 Second Timer");
         add("block.confluence.timers_block_3_1", "3 Second Timer");
@@ -875,6 +881,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("resourcepack.ter_armor", "Mainstream Terraria Armor Textures");
 
         add("event.confluence.blood_moon", "The Blood Moon is rising...");
+
+        add("attribute.name.generic.critical_chance", "Critical Chance");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

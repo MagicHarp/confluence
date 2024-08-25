@@ -27,38 +27,38 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     public PrefixType type;
     public String name;
 
-    public double attackDamage;
-    public double attackSpeed;
-    public double criticalChance;
-    public double knockBack;
+    public float attackDamage;
+    public float attackSpeed;
+    public float criticalChance;
+    public float knockBack;
     public int tier;
-    public double value;
+    public float value;
 
-    public double size;
-    public double velocity;
-    public double manaCost;
+    public float size;
+    public float velocity;
+    public float manaCost;
     public int armor;
     public int additionalMana;
-    public double movementSpeed;
+    public float movementSpeed;
 
     public ItemPrefix(PrefixType type, ItemStack itemStack) {
         this.itemStack = itemStack;
         this.type = type;
         this.name = "unknown";
 
-        this.attackDamage = 0.0;
-        this.attackSpeed = 0.0;
-        this.criticalChance = 0.0;
-        this.knockBack = 0.0;
+        this.attackDamage = 0.0F;
+        this.attackSpeed = 0.0F;
+        this.criticalChance = 0.0F;
+        this.knockBack = 0.0F;
         this.tier = 0;
-        this.value = 0.0;
+        this.value = 0.0F;
 
-        this.size = 0.0;
-        this.velocity = 0.0;
-        this.manaCost = 0.0;
+        this.size = 0.0F;
+        this.velocity = 0.0F;
+        this.manaCost = 0.0F;
         this.armor = 0;
         this.additionalMana = 0;
-        this.movementSpeed = 0.0;
+        this.movementSpeed = 0.0F;
     }
 
     public ItemPrefix(ItemStack itemStack) {
@@ -70,20 +70,20 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
         CompoundTag nbt = new CompoundTag();
         nbt.putString("type", type.name());
         nbt.putString("name", name);
-        nbt.putDouble("attackDamage", attackDamage);
-        if (type != PrefixType.UNIVERSAL) nbt.putDouble("attackSpeed", attackSpeed);
-        nbt.putDouble("criticalChance", criticalChance);
-        nbt.putDouble("knockBack", knockBack);
+        nbt.putFloat("attackDamage", attackDamage);
+        if (type != PrefixType.UNIVERSAL) nbt.putFloat("attackSpeed", attackSpeed);
+        nbt.putFloat("criticalChance", criticalChance);
+        nbt.putFloat("knockBack", knockBack);
         nbt.putInt("tier", tier);
-        nbt.putDouble("value", value);
+        nbt.putFloat("value", value);
         switch (type) {
-            case MELEE -> nbt.putDouble("size", size);
-            case RANGED -> nbt.putDouble("velocity", velocity);
-            case MAGIC_AND_SUMMING -> nbt.putDouble("manaCost", manaCost);
+            case MELEE -> nbt.putFloat("size", size);
+            case RANGED -> nbt.putFloat("velocity", velocity);
+            case MAGIC_AND_SUMMING -> nbt.putFloat("manaCost", manaCost);
             case CURIO -> {
                 nbt.putInt("armor", armor);
                 nbt.putInt("additionalMana", additionalMana);
-                nbt.putDouble("movementSpeed", movementSpeed);
+                nbt.putFloat("movementSpeed", movementSpeed);
             }
         }
         return nbt;
@@ -93,20 +93,20 @@ public final class ItemPrefix implements INBTSerializable<CompoundTag> {
     public void deserializeNBT(CompoundTag nbt) {
         this.type = PrefixType.valueOf(nbt.getString("type"));
         this.name = nbt.getString("name");
-        this.attackDamage = nbt.getDouble("attackDamage");
-        if (type != PrefixType.UNIVERSAL) this.attackSpeed = nbt.getDouble("attackSpeed");
-        this.criticalChance = nbt.getDouble("criticalChance");
-        this.knockBack = nbt.getDouble("knockBack");
+        this.attackDamage = nbt.getFloat("attackDamage");
+        if (type != PrefixType.UNIVERSAL) this.attackSpeed = nbt.getFloat("attackSpeed");
+        this.criticalChance = nbt.getFloat("criticalChance");
+        this.knockBack = nbt.getFloat("knockBack");
         this.tier = nbt.getInt("tier");
-        this.value = nbt.getDouble("value");
+        this.value = nbt.getFloat("value");
         switch (type) {
-            case MELEE -> this.size = nbt.getDouble("size");
-            case RANGED -> this.velocity = nbt.getDouble("velocity");
-            case MAGIC_AND_SUMMING -> this.manaCost = nbt.getDouble("manaCost");
+            case MELEE -> this.size = nbt.getFloat("size");
+            case RANGED -> this.velocity = nbt.getFloat("velocity");
+            case MAGIC_AND_SUMMING -> this.manaCost = nbt.getFloat("manaCost");
             case CURIO -> {
                 this.armor = nbt.getInt("armor");
                 this.additionalMana = nbt.getInt("additionalMana");
-                this.movementSpeed = nbt.getDouble("movementSpeed");
+                this.movementSpeed = nbt.getFloat("movementSpeed");
             }
         }
     }

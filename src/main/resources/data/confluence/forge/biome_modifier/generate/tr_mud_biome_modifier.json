@@ -7,5 +7,5 @@
     "minecraft:lush_caves"
   ],
   "features": "confluence:tr_mud",
-  "step": "surface_structures"
+  "step": "underground_decoration"
 }

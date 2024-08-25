@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.model.block.WhitePlasticChairBlockModel;
-import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;

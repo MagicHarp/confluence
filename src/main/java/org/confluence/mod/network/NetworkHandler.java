@@ -40,6 +40,8 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, RightClickSubtractorPacketS2C.class, RightClickSubtractorPacketS2C::encode, RightClickSubtractorPacketS2C::decode, RightClickSubtractorPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, PlayerClimbPacketS2C.class, PlayerClimbPacketS2C::encode, PlayerClimbPacketS2C::decode, PlayerClimbPacketS2C::handle);
         CHANNEL.registerMessage(packetId++, TabiPacketS2C.class, TabiPacketS2C::encode, TabiPacketS2C::decode, TabiPacketS2C::handle);
+        CHANNEL.registerMessage(packetId++, StepStoolStepPacketS2C.class, StepStoolStepPacketS2C::encode, StepStoolStepPacketS2C::decode, StepStoolStepPacketS2C::handle);
+        CHANNEL.registerMessage(packetId++, SetItemEntityPickupDelayPacketS2C.class, SetItemEntityPickupDelayPacketS2C::encode, SetItemEntityPickupDelayPacketS2C::decode, SetItemEntityPickupDelayPacketS2C::handle);
 
         CHANNEL.registerMessage(packetId++, PlayerJumpPacketC2S.class, PlayerJumpPacketC2S::encode, PlayerJumpPacketC2S::decode, PlayerJumpPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, SpeedBootsNBTPacketC2S.class, SpeedBootsNBTPacketC2S::encode, SpeedBootsNBTPacketC2S::decode, SpeedBootsNBTPacketC2S::handle);
@@ -48,6 +50,7 @@ public final class NetworkHandler {
         CHANNEL.registerMessage(packetId++, FallDistancePacketC2S.class, FallDistancePacketC2S::encode, FallDistancePacketC2S::decode, FallDistancePacketC2S::handle);
         CHANNEL.registerMessage(packetId++, HookThrowingPacketC2S.class, HookThrowingPacketC2S::encode, HookThrowingPacketC2S::decode, HookThrowingPacketC2S::handle);
         CHANNEL.registerMessage(packetId++, GunShootingPacketC2S.class, GunShootingPacketC2S::encode, GunShootingPacketC2S::decode, GunShootingPacketC2S::handle);
-        CHANNEL.registerMessage(packetId++, EnchantedSwordShootingPacketC2S.class, EnchantedSwordShootingPacketC2S::encode, EnchantedSwordShootingPacketC2S::decode, EnchantedSwordShootingPacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, SwordShootingPacketC2S.class, SwordShootingPacketC2S::encode, SwordShootingPacketC2S::decode, SwordShootingPacketC2S::handle);
+        CHANNEL.registerMessage(packetId++, StepStoolStepPacketC2S.class, StepStoolStepPacketC2S::encode, StepStoolStepPacketC2S::decode, StepStoolStepPacketC2S::handle);
     }
 }

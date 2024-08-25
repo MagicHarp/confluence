@@ -53,8 +53,8 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_PLATINUM_BLOCK.get());
         dropSelf(Ores.EBONY_BLOCK.get());
         dropSelf(Ores.RAW_EBONY_BLOCK.get());
-        dropSelf(Ores.ANOTHER_CRIMSON_BLOCK.get());
-        dropSelf(Ores.RAW_ANOTHER_CRIMSON_BLOCK.get());
+        dropSelf(Ores.TR_CRIMSON_BLOCK.get());
+        dropSelf(Ores.RAW_TR_CRIMSON_BLOCK.get());
         dropSelf(Ores.COBALT_BLOCK.get());
         dropSelf(Ores.RAW_COBALT_BLOCK.get());
         dropSelf(Ores.PALLADIUM_BLOCK.get());
@@ -145,11 +145,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.CORRUPTION_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.FLESHIFICATION_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.DEEPSLATE_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
-        add(Ores.ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
-        add(Ores.SANCTIFICATION_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
-        add(Ores.CORRUPTION_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
-        add(Ores.FLESHIFICATION_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
-        add(Ores.DEEPSLATE_ANOTHER_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.ANOTHER_AMETHYST.get()));
+        add(Ores.TR_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.TR_AMETHYST.get()));
+        add(Ores.SANCTIFICATION_TR_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.TR_AMETHYST.get()));
+        add(Ores.CORRUPTION_TR_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.TR_AMETHYST.get()));
+        add(Ores.FLESHIFICATION_TR_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.TR_AMETHYST.get()));
+        add(Ores.DEEPSLATE_TR_AMETHYST_ORE.get(), block -> createOreDrop(block, Materials.TR_AMETHYST.get()));
         add(Ores.SANCTIFICATION_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
         add(Ores.CORRUPTION_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
         add(Ores.FLESHIFICATION_EMERALD_ORE.get(), block -> createOreDrop(block, Items.EMERALD));
@@ -163,8 +163,8 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.SANCTIFICATION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
         add(Ores.CORRUPTION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
         add(Ores.FLESHIFICATION_EBONY_ORE.get(), block -> createOreDrop(block, Materials.RAW_EBONY.get()));
-        add(Ores.ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
-        add(Ores.DEEPSLATE_ANOTHER_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_ANOTHER_CRIMSON.get()));
+        add(Ores.TR_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_TR_CRIMSON.get()));
+        add(Ores.DEEPSLATE_TR_CRIMSON_ORE.get(), block -> createOreDrop(block, Materials.RAW_TR_CRIMSON.get()));
         add(Ores.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(block, Materials.RAW_COBALT.get()));
         add(Ores.DEEPSLATE_PALLADIUM_ORE.get(), block -> createOreDrop(block, Materials.RAW_PALLADIUM.get()));
         add(Ores.DEEPSLATE_MITHRIL_ORE.get(), block -> createOreDrop(block, Materials.RAW_MITHRIL.get()));
@@ -183,7 +183,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(ModBlocks.EMERALD_BRANCHES.get(), this::createEmeraldDrops);
         add(ModBlocks.DIAMOND_BRANCHES.get(), this::createDiamondDrops);
         add(ModBlocks.SAPPHIRE_BRANCHES.get(), this::createSapphireDrops);
-        add(ModBlocks.ANOTHER_AMETHYST_BRANCHES.get(), this::createAnother_AmethystDrops);
+        add(ModBlocks.TR_AMETHYST_BRANCHES.get(), this::createAnother_AmethystDrops);
         // torch
         for (Torches torch : Torches.values()) {
             dropSelf(torch.stand.get());
@@ -194,13 +194,13 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(EBONY_SAND.get());
         dropSelf(PEARL_COBBLESTONE.get());
         dropSelf(PEARL_SAND.get());
-        dropSelf(ANOTHER_CRIMSON_COBBLESTONE.get());
-        dropSelf(ANOTHER_CRIMSON_SAND.get());
+        dropSelf(TR_CRIMSON_COBBLESTONE.get());
+        dropSelf(TR_CRIMSON_SAND.get());
         dropSelf(ASH_BLOCK.get());
-        dropOther(ANOTHER_CRIMSON_GRASS_BLOCK.get(), Items.DIRT);
+        dropOther(TR_CRIMSON_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(CORRUPT_GRASS_BLOCK.get(), Items.DIRT);
         dropOther(HALLOW_GRASS_BLOCK.get(), Items.DIRT);
-        dropOther(ANOTHER_CRIMSON_STONE.get(), ANOTHER_CRIMSON_COBBLESTONE.get());
+        dropOther(TR_CRIMSON_STONE.get(), TR_CRIMSON_COBBLESTONE.get());
         dropOther(EBONY_STONE.get(), EBONY_COBBLESTONE.get());
         dropOther(PEARL_STONE.get(), PEARL_COBBLESTONE.get());
         dropSelf(EBONY_LOG_BLOCKS.LOG.get());
@@ -217,13 +217,13 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(BIG_AMBER_BLOCK.get());
         dropSelf(BIG_TOPAZ_BLOCK.get());
         dropSelf(BIG_SAPPHIRE_BLOCK.get());
-        dropSelf(BIG_ANOTHER_AMETHYST_BLOCK.get());
+        dropSelf(BIG_TR_AMETHYST_BLOCK.get());
 
         dropSelf(HARDENED_SAND_BLOCK.get());
         dropSelf(RED_HARDENED_SAND_BLOCK.get());
         dropSelf(EBONY_HARDENED_SAND_BLOCK.get());
         dropSelf(PEARL_HARDENED_SAND_BLOCK.get());
-        dropSelf(ANOTHER_CRIMSON_HARDENED_SAND_BLOCK.get());
+        dropSelf(TR_CRIMSON_HARDENED_SAND_BLOCK.get());
 
         dropOther(LIFE_CRYSTAL_BLOCK.get(), Materials.LIFE_CRYSTAL.get());
         dropOther(MUSHROOM_GRASS_BLOCK.get(), Items.MUD);
@@ -268,7 +268,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         addHerbDrop(SUNFLOWERS.get(), ModItems.SUNFLOWERS.get(), ModItems.SUNFLOWERS_SEED.get());
         addHerbDrop(DEATHWEED.get(), ModItems.DEATHWEED.get(), ModItems.DEATHWEED_SEED.get());
 
-        dropOther(ANOTHER_CRIMSON_MUSHROOM.get(), ModItems.ANOTHER_CRIMSON_MUSHROOM.get());
+        dropOther(TR_CRIMSON_MUSHROOM.get(), ModItems.TR_CRIMSON_MUSHROOM.get());
         dropOther(EBONY_MUSHROOM.get(), ModItems.EBONY_MUSHROOM.get());
         dropOther(GLOWING_MUSHROOM.get(), ModItems.GLOWING_MUSHROOM.get()); // TODO: 掉落概率不是100%；掉落蘑菇草种子
         dropOther(LIFE_MUSHROOM.get(), ModItems.LIFE_MUSHROOM.get());
@@ -327,7 +327,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         ));
     }
     private LootTable.Builder createAnother_AmethystDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.ANOTHER_AMETHYST.get())
+        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.TR_AMETHYST.get())
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));

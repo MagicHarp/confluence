@@ -1,8 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "confluence:block/another_crimson_mushroom",
-    "particle": "confluence:block/another_crimson_mushroom"
-  },
-  "render_type": "cutout"
-}

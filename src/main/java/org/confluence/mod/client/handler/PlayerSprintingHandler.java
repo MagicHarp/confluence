@@ -16,6 +16,8 @@ public final class PlayerSprintingHandler {
     private static boolean zzKeyDown = false;
 
     public static void handle(LocalPlayer localPlayer, Input input) {
+        if (StepStoolHandler.onStool()) return;
+
         if (coolDown > 0) {
             coolDown--;
             return;

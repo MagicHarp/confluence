@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item":"confluence:tr_lava_bricks"
+    },
+    "result": "confluence:tr_lava_beam",
+    "count": 1
+}

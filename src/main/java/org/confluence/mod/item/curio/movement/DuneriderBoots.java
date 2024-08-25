@@ -17,18 +17,21 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 
 public class DuneriderBoots extends BaseSpeedBoots {
+    private static final Vector3f START_COLOR = FloatRGB.fromInteger(0xab603f).toVector();
+    private static final Vector3f END_COLOR = FloatRGB.fromInteger(0xab603f).toVector();
+
     public DuneriderBoots() {
         super(ModRarity.BLUE);
     }
 
     @Override
     public Vector3f getParticleColorStart() {
-        return FloatRGB.fromInteger(0xab603f).toVector();
+        return START_COLOR;
     }
 
     @Override
     public Vector3f getParticleColorEnd() {
-        return FloatRGB.fromInteger(0xab603f).toVector();
+        return END_COLOR;
     }
 
     @Override

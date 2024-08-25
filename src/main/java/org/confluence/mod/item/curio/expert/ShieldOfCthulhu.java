@@ -13,29 +13,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.PacketDistributor;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.ShieldOfCthulhuPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.mixinauxiliary.IEntity;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.UUID;
 
-public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, ICriticalHit {
+public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert {
     public static final UUID ARMOR_UUID = UUID.fromString("C99AA305-E0CF-9E8F-06AB-8F61C28EAF51");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ARMOR = ImmutableMultimap.of(
-        Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", 2, AttributeModifier.Operation.ADDITION)
-    );
+    public static final UUID CRIT_UUID = UUID.fromString("46A0C13B-7ADA-7648-777E-64FE56402A49");
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public ShieldOfCthulhu() {
         super(ModRarity.EXPERT);
-    }
-
-    @Override
-    public double getChance() {
-        return 0.04;
     }
 
     @Override
@@ -52,7 +46,13 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert, 
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return ARMOR;
+        if (ATTRIBUTES == null) {
+            ATTRIBUTES = ImmutableMultimap.of(
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Shield Of Cthulhu", 2, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Shield Of Cthulhu", 0.04, AttributeModifier.Operation.ADDITION)
+            );
+        }
+        return ATTRIBUTES;
     }
 
     @Override

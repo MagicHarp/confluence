@@ -17,6 +17,8 @@ public interface IEntity {
 
     void confluence$setOriginalNoGravity(boolean bool);
 
+    boolean confluence$isInShimmer();
+
     byte HAD_SETUP = -1;
     byte HAS_GRAVITY = 0;
     byte NO_GRAVITY = 1;

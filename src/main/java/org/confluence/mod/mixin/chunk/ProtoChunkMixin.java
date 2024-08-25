@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import static org.confluence.mod.util.DynamicBiomeUtils.*;
+import static org.confluence.mod.util.DynamicBiomeUtils.balanceEvil;
+import static org.confluence.mod.util.DynamicBiomeUtils.getTypicalBiome;
 
 @Mixin(ProtoChunk.class)
 public abstract class ProtoChunkMixin {

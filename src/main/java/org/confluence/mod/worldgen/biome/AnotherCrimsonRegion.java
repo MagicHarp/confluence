@@ -32,7 +32,7 @@ public class AnotherCrimsonRegion extends Region {
             .erosion(Erosion.EROSION_4, Erosion.EROSION_5)
             .depth(Depth.SURFACE, Depth.FLOOR)
             .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.FULL_RANGE)
-            .build().forEach(point -> builder.add(point, ModBiomes.ANOTHER_CRIMSON));
+            .build().forEach(point -> builder.add(point, ModBiomes.TR_CRIMSON));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);

@@ -18,6 +18,8 @@ import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.curio.cosmetic.BaseCosmeticItem;
+import org.confluence.mod.item.curio.cosmetic.GoldCrown;
 import org.confluence.mod.item.fishing.Baits;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.fishing.QuestedFishes;
@@ -44,7 +46,7 @@ public final class ModItems {
     public static final RegistryObject<MagicMirror> ICE_MIRROR = ITEMS.register("ice_mirror", MagicMirror::new);
     public static final RegistryObject<MagicMirror> MAGIC_MIRROR = ITEMS.register("magic_mirror", MagicMirror::new);
     public static final RegistryObject<CellPhone> CELL_PHONE = ITEMS.register("cell_phone", CellPhone::new);
-    public static final RegistryObject<BaseItem> SHURIKEN = ITEMS.register("shuriken", BaseItem::new); // todo 手里剑
+    public static final RegistryObject<ShurikenItem> SHURIKEN = ITEMS.register("shuriken", ShurikenItem::new);
     public static final RegistryObject<BaseItem> GRENADE = ITEMS.register("grenade", BaseItem::new); // todo 手雷
     public static final RegistryObject<ClamItem> CLAM = ITEMS.register("clam", ClamItem::new);
     public static final RegistryObject<WhoopieCushionItem> WHOOPIE_CUSHION = ITEMS.register("whoopie_cushion", WhoopieCushionItem::new);
@@ -57,6 +59,7 @@ public final class ModItems {
     public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new BlockItem(ModBlocks.GOLDEN_COIN_PILE.get(), new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new BlockItem(ModBlocks.PLATINUM_COIN_PILE.get(), new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
     public static final RegistryObject<SuspiciousLookingEye> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", SuspiciousLookingEye::new);
+    public static final RegistryObject<SlimeCrown> SLIME_CROWN = ITEMS.register("slime_crown", SlimeCrown::new);
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);
@@ -107,7 +110,7 @@ public final class ModItems {
     public static final RegistryObject<Item> SUNFLOWERS = ITEMS.register("sunflowers", HerbItem::new);
     public static final RegistryObject<Item> DEATHWEED = ITEMS.register("deathweed", HerbItem::new);
     // 蘑菇
-    public static final RegistryObject<Item> ANOTHER_CRIMSON_MUSHROOM = ITEMS.register("another_crimson_mushroom", () -> new MushroomItem(ModBlocks.ANOTHER_CRIMSON_MUSHROOM.get(), 0.0F));
+    public static final RegistryObject<Item> TR_CRIMSON_MUSHROOM = ITEMS.register("tr_crimson_mushroom", () -> new MushroomItem(ModBlocks.TR_CRIMSON_MUSHROOM.get(), 0.0F));
     public static final RegistryObject<Item> EBONY_MUSHROOM = ITEMS.register("ebony_mushroom", () -> new MushroomItem(ModBlocks.EBONY_MUSHROOM.get(), 0.0F));
     // TODO: 发光蘑菇可以放置，但此蘑菇非彼蘑菇
     public static final RegistryObject<Item> GLOWING_MUSHROOM = ITEMS.register("glowing_mushroom", () -> new MushroomItem(ModBlocks.GLOWING_MUSHROOM.get(), 0.0F));
@@ -117,6 +120,10 @@ public final class ModItems {
     public static final RegistryObject<Item> GOLDEN_KEY = ITEMS.register("golden_key", () -> new Item(new Item.Properties().rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> SHADOW_KEY = ITEMS.register("shadow_key", () -> new Item(new Item.Properties().stacksTo(1).rarity(ModRarity.WHITE)));
     public static final RegistryObject<Item> DEMON_HEART = ITEMS.register("demon_heart", DemonHeart::new);
+
+    // 时装
+    public static final RegistryObject<Item> GOLD_CROWN = ITEMS.register("gold_crown", GoldCrown::new);
+    public static final RegistryObject<Item> PLATINUM_CROWN = ITEMS.register("platinum_crown", () -> new BaseCosmeticItem(ModRarity.WHITE));
 
 
     public static void register(IEventBus bus) {

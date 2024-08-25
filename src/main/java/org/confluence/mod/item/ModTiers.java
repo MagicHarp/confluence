@@ -28,23 +28,24 @@ public final class ModTiers {
     public static final ModTier GOLD = new ModTier(3, 1600, 8, 3, 22, () -> Ingredient.of(Items.GOLD_INGOT));
     public static final ModTier FOSSIL = new ModTier(3, 1200, 8, 3, 22, () -> Ingredient.of(Materials.STURDY_FOSSIL.get()));
     public static final ModTier PLATINUM = new ModTier(3, 1661, 8, 3, 22, () -> Ingredient.of(Materials.PLATINUM_INGOT.get()));
-    public static final ModTier METEORITE = new ModTier(3, 1933, 9, 3, 23, () -> Ingredient.of(Materials.METEORITE_INGOT.get()));
+    public static final ModTier METEORITE = new ModTier(3, 0, 9, 3, 23, () -> Ingredient.of(Materials.METEORITE_INGOT.get()));
 
     // Sorted
-    public static final ForgeTier EBONY = new ForgeTier(4, 1988, 10, 4, 24, ModTags.Blocks.NEEDS_4_LEVEL, () -> Ingredient.of(Materials.EBONY_INGOT.get()));
-    public static final ForgeTier ANOTHER_CRIMSON = new ForgeTier(4, 1999, 11, 4, 25, ModTags.Blocks.NEEDS_4_LEVEL, () -> Ingredient.of(Materials.ANOTHER_CRIMSON_INGOT.get()));
-    public static final ForgeTier HELLSTONE = new ForgeTier(5, 2001, 14, 6, 27, ModTags.Blocks.NEEDS_5_LEVEL, () -> Ingredient.of(Materials.HELLSTONE_INGOT.get()));
-    public static final ForgeTier COBALT = new ForgeTier(6, 2012, 4, 1, 5, ModTags.Blocks.NEEDS_6_LEVEL, () -> Ingredient.of(Materials.COBALT_INGOT.get()));
-    public static final ForgeTier PALLADIUM = new ForgeTier(6, 2049, 4, 1, 5, ModTags.Blocks.NEEDS_6_LEVEL, () -> Ingredient.of(Materials.PALLADIUM_INGOT.get()));
-    public static final ForgeTier MITHRIL = new ForgeTier(7, 3000, 4, 1, 5, ModTags.Blocks.NEEDS_7_LEVEL, () -> Ingredient.of(Materials.MITHRIL_INGOT.get()));
-    public static final ForgeTier ORICHALCUM = new ForgeTier(7, 3000, 4, 1, 5, ModTags.Blocks.NEEDS_7_LEVEL, () -> Ingredient.of(Materials.ORICHALCUM_INGOT.get()));
-    public static final ForgeTier ADAMANTITE = new ForgeTier(8, 4000, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.ADAMANTITE_INGOT.get()));
-    public static final ForgeTier TITANIUM = new ForgeTier(8, 4000, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.TITANIUM_INGOT.get()));
+    public static final ForgeTier EBONY = new ForgeTier(4, 0, 10, 4, 24, ModTags.Blocks.NEEDS_4_LEVEL, () -> Ingredient.of(Materials.EBONY_INGOT.get()));
+    public static final ForgeTier TR_CRIMSON = new ForgeTier(4, 0, 11, 4, 25, ModTags.Blocks.NEEDS_4_LEVEL, () -> Ingredient.of(Materials.TR_CRIMSON_INGOT.get()));
+    public static final ForgeTier HELLSTONE = new ForgeTier(5, 0, 14, 6, 27, ModTags.Blocks.NEEDS_5_LEVEL, () -> Ingredient.of(Materials.HELLSTONE_INGOT.get()));
+    public static final ForgeTier COBALT = new ForgeTier(6, 0, 4, 1, 5, ModTags.Blocks.NEEDS_6_LEVEL, () -> Ingredient.of(Materials.COBALT_INGOT.get()));
+    public static final ForgeTier PALLADIUM = new ForgeTier(6, 0, 4, 1, 5, ModTags.Blocks.NEEDS_6_LEVEL, () -> Ingredient.of(Materials.PALLADIUM_INGOT.get()));
+    public static final ForgeTier MITHRIL = new ForgeTier(7, 0, 4, 1, 5, ModTags.Blocks.NEEDS_7_LEVEL, () -> Ingredient.of(Materials.MITHRIL_INGOT.get()));
+    public static final ForgeTier ORICHALCUM = new ForgeTier(7, 0, 4, 1, 5, ModTags.Blocks.NEEDS_7_LEVEL, () -> Ingredient.of(Materials.ORICHALCUM_INGOT.get()));
+    public static final ForgeTier ADAMANTITE = new ForgeTier(8, 0, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.ADAMANTITE_INGOT.get()));
+    public static final ForgeTier TITANIUM = new ForgeTier(8, 0, 4, 1, 5, ModTags.Blocks.NEEDS_8_LEVEL, () -> Ingredient.of(Materials.TITANIUM_INGOT.get()));
+    public static final ForgeTier HALLOWED = new ForgeTier(9, 0, 4, 1, 5, ModTags.Blocks.NEEDS_9_LEVEL, () -> Ingredient.of(Materials.HALLOWED_INGOT.get()));
 
     public static void register() {
         ResourceLocation netherite = TierSortingRegistry.getName(Tiers.NETHERITE);
         ResourceLocation ebony = new ResourceLocation(MODID, "ebony");
-        ResourceLocation another_crimson = new ResourceLocation(MODID, "another_crimson");
+        ResourceLocation tr_crimson = new ResourceLocation(MODID, "tr_crimson");
         ResourceLocation hellstone = new ResourceLocation(MODID, "hellstone");
         ResourceLocation cobalt = new ResourceLocation(MODID, "cobalt");
         ResourceLocation palladium = new ResourceLocation(MODID, "palladium");
@@ -52,9 +53,10 @@ public final class ModTiers {
         ResourceLocation orichalcum = new ResourceLocation(MODID, "orichalcum");
         ResourceLocation adamantite = new ResourceLocation(MODID, "adamantite");
         ResourceLocation titanium = new ResourceLocation(MODID, "titanium");
+        ResourceLocation hallowed = new ResourceLocation(MODID, "hallowed");
         assert netherite != null;
-        TierSortingRegistry.registerTier(EBONY, ebony, List.of(), List.of(another_crimson));
-        TierSortingRegistry.registerTier(ANOTHER_CRIMSON, another_crimson, List.of(ebony), List.of(netherite));
+        TierSortingRegistry.registerTier(EBONY, ebony, List.of(), List.of(tr_crimson));
+        TierSortingRegistry.registerTier(TR_CRIMSON, tr_crimson, List.of(ebony), List.of(netherite));
         /* 下界合金 */
         TierSortingRegistry.registerTier(HELLSTONE, hellstone, List.of(netherite), List.of(cobalt));
         TierSortingRegistry.registerTier(COBALT, cobalt, List.of(hellstone), List.of(palladium));
@@ -62,7 +64,7 @@ public final class ModTiers {
         TierSortingRegistry.registerTier(MITHRIL, mithril, List.of(palladium), List.of(orichalcum));
         TierSortingRegistry.registerTier(ORICHALCUM, orichalcum, List.of(mithril), List.of(adamantite));
         TierSortingRegistry.registerTier(ADAMANTITE, adamantite, List.of(orichalcum), List.of(titanium));
-        TierSortingRegistry.registerTier(TITANIUM, titanium, List.of(adamantite), List.of());
+        TierSortingRegistry.registerTier(TITANIUM, titanium, List.of(adamantite), List.of(hallowed));
     }
 
     public record ModTier(int level, int uses, float speed, float attackDamageBonus, int enchantmentValue, @NotNull Supplier<Ingredient> repairIngredient) implements Tier {

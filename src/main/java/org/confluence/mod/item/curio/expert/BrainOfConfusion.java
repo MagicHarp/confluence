@@ -5,7 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -41,9 +41,12 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
             else if (amount <= 100) rangeMax = amount * 0.75F + 525;
             else rangeMax = amount * 0.1875F + 806.25F;
             float range = ModUtils.nextFloat(randomSource, rangeMin, rangeMax) / 24;
-            int duration = randomSource.nextInt((int) ((90 + amount / 3) / 50), (int) ((300 + amount / 2) / 50));
-            living.level().getEntitiesOfClass(Monster.class, new AABB(living.getOnPos()).inflate(range))
-                .forEach(monster -> monster.addEffect(new MobEffectInstance(ModEffects.CONFUSED.get(), duration)));
+            int duration = randomSource.nextInt((int) (90 + amount / 3), (int) (300 + amount / 2));
+            living.level().getEntities(living, new AABB(living.getOnPos()).inflate(range), entity -> entity instanceof Enemy).forEach(enemy -> {
+                if (enemy instanceof LivingEntity living1) {
+                    living1.addEffect(new MobEffectInstance(ModEffects.CONFUSED.get(), duration));
+                }
+            });
         }
         if (randomSource.nextFloat() < 0.1667F && !living.hasEffect(ModEffects.CEREBRAL_MINDTRICK.get())) {
             living.addEffect(new MobEffectInstance(ModEffects.CEREBRAL_MINDTRICK.get(), 80));

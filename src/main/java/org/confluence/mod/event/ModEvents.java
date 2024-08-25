@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -32,12 +34,16 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.worm.TestWormEntity;
 import org.confluence.mod.entity.worm.TestWormPart;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
+import org.confluence.mod.integration.apothic.ApothicHelper;
+import org.confluence.mod.misc.ModAttributes;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.recipe.AmountIngredient;
@@ -50,6 +56,7 @@ import static org.confluence.mod.Confluence.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModEvents {
+
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
         event.put(ModEntities.BLUE_SLIME.get(), BaseSlime.createSlimeAttributes(4.0F, 0, 16.0F).build());
@@ -69,6 +76,7 @@ public final class ModEvents {
         event.put(ModEntities.YELLOW_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
+        event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
 
         event.put(ModEntities.TEST_WORM.get(), TestWormEntity.createAttributes().build());
         event.put(ModEntities.TEST_WORM_PART.get(), TestWormPart.createAttributes().build());
@@ -77,6 +85,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ModConfigs.onCommonLoad();
             NetworkHandler.register();
             ModFluids.registerInteraction();
             ModFluids.registerShimmerTransform();
@@ -92,7 +101,7 @@ public final class ModEvents {
                 }
             }
 
-            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "another_crimson"), 1));
+            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "tr_crimson"), 1));
             Regions.register(new TheCorruptionRegion(new ResourceLocation(MODID, "the_corruption"), 1));
             Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 0));
             Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 0));
@@ -180,5 +189,12 @@ public final class ModEvents {
         event.register(ModEntities.BLACK_SLIME.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BaseSlime::checkSlimeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
         event.register(ModEntities.DEMON_EYE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEye::checkDemonEyeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+    }
+
+    @SubscribeEvent
+    public static void modify(EntityAttributeModificationEvent event) {
+        if (!ApothicHelper.isAttributesLoaded()) {
+            event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
+        }
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -93,8 +94,10 @@ public final class ModUtils {
             (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
     }
 
-    /** 把向量转成角度 */
-    public static float[] dirToRot(Vec3 vec){
+    /**
+     * 把向量转成角度
+     */
+    public static float[] dirToRot(Vec3 vec) {
         double x = vec.x;
         double y = vec.y;
         double z = vec.z;
@@ -104,12 +107,12 @@ public final class ModUtils {
 
         return new float[]{(float) yaw, (float) pitch};
     }
+
     /**
      * 把角度转成向量
      *
-     * @param yaw 角度的yaw，单位为角度而非弧度
+     * @param yaw   角度的yaw，单位为角度而非弧度
      * @param pitch 角度的pitch，单位为角度
-     *
      * @return 返回朝向对应角度（yaw、pitch）的单位向量
      * */
     public static Vec3 rotToDir(float yaw, float pitch){
@@ -124,8 +127,11 @@ public final class ModUtils {
         z *= div;
         return new Vec3(x, y, z);
     }
-    /** 更新实体朝向 */
-    public static void updateEntityRotation(Entity entity, Vec3 dir){
+
+    /**
+     * 更新实体朝向
+     */
+    public static void updateEntityRotation(Entity entity, Vec3 dir) {
         float[] angle = dirToRot(dir);
         entity.setYRot(angle[0]);
         entity.setXRot(angle[1]);
@@ -177,15 +183,35 @@ public final class ModUtils {
         return result;
     }
 
-    /** 测试信息；使用此接口有助于集中管理防止漏网之鱼 */
+    /**
+     * 测试信息；使用此接口有助于集中管理防止漏网之鱼
+     */
     public static void testMessage(String msg) {
         Confluence.LOGGER.info(msg);
     }
+
     public static void testMessage(Player player, String msg) {
         player.sendSystemMessage(Component.literal(msg));
     }
+
     public static void testMessage(Level level, String msg) {
         for (Player ply : level.players())
             ply.sendSystemMessage(Component.literal(msg));
+    }
+
+    public static boolean isExpert(Level level) {
+        return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
+    }
+
+    public static boolean isMaster(Level level) {
+        return level.getDifficulty().equals(Difficulty.HARD);
+    }
+
+    public static Vec3 getVectorA2B(Entity a, Entity b) {
+        return b.position().subtract(a.position()).normalize();
+    }
+
+    public static void knockBackA2B(Entity a, Entity b, double scale, double motionY) {
+        b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
     }
 }

@@ -3,9 +3,12 @@ package org.confluence.mod.util;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -19,10 +22,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.particle.BloodParticle;
+import org.confluence.mod.client.particle.options.BloodParticleOptions;
 import org.confluence.mod.mixin.accessor.LivingEntityRendererAccessor;
-import org.confluence.mod.mixin.accessor.ModelPartAccessor;
+import org.confluence.mod.mixin.client.accessor.CustomHeadLayerAccessor;
+import org.confluence.mod.mixin.client.accessor.ModelPartAccessor;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -33,6 +38,7 @@ import java.util.*;
 
 import static net.minecraft.world.entity.EntityType.*;
 
+/** @author voila  */
 public class DeathAnimUtils {
     public static final Map<EntityType<? extends LivingEntity>, DeathAnimOptions> options = new HashMap<>();
 
@@ -58,7 +64,7 @@ public class DeathAnimUtils {
         options.put(HUSK, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.45f, 0f, 0f));
         options.put(ZOGLIN, DeathAnimOptions.Builtin.LOW_SPIN.bloodColor(0.45f, 0f, 0f));
         options.put(WITHER_SKELETON, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.2f, 0.2f, 0.2f));
-        options.put(SKELETON, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.95f, 0.95f, 0.95f));
+        options.put(SKELETON, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.631f, 0.631f, 0.631f));
         options.put(STRAY, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.95f, 0.95f, 0.95f));
         options.put(CREEPER, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.44f, 0.44f, 0.44f));
         options.put(WITCH, DeathAnimOptions.Builtin.LOW_SPIN);
@@ -90,7 +96,7 @@ public class DeathAnimUtils {
         options.put(CHICKEN, DeathAnimOptions.Builtin.DEFAULT);
         options.put(RABBIT, DeathAnimOptions.Builtin.DEFAULT);
         options.put(HORSE, DeathAnimOptions.Builtin.DEFAULT);
-        options.put(SKELETON_HORSE, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.95f, 0.95f, 0.95f));
+        options.put(SKELETON_HORSE, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.631f, 0.631f, 0.631f));
         options.put(CAMEL, DeathAnimOptions.Builtin.LOW_SPIN);
         options.put(MULE, DeathAnimOptions.Builtin.DEFAULT);
         options.put(LLAMA, DeathAnimOptions.Builtin.DEFAULT);
@@ -161,10 +167,17 @@ public class DeathAnimUtils {
                     if(ty != footY){  // 模型未落地
                         double speed = landMotion.length();
                         float[] rot = ModUtils.dirToRot(landMotion);
-                        float motionYaw = Mth.wrapDegrees(-rot[0] + 180 + entity.getYRot());  // 我不知道为什么是这样，是试出来的
+                        float motionYaw;
+                        float renderYHeadRot = entity.getViewYRot(partialTick);
+                        float renderYRot = Mth.rotLerp(partialTick, entity.yRotO, entity.getYRot());
+                        if(((IModelPart) (Object) p).confluence$isSkull()){ // 头戴头颅要特殊处理
+                            motionYaw = Mth.wrapDegrees(-rot[0] + renderYRot + (renderYHeadRot - renderYRot));
+                        }else {
+                            motionYaw = Mth.wrapDegrees(-rot[0] + 180 + renderYRot);  // 我不知道为什么是这样，是试出来的
+                        }
                         landMotion = Vec3.directionFromRotation(rot[1], motionYaw).normalize().scale(speed);
-                        tx += Mth.lerp(partialTick, (landMotion.x * Math.pow(0.96, lastTick)) * lastTick, (landMotion.x * Math.pow(0.96, landTicks)) * landTicks);
-                        tz += Mth.lerp(partialTick, (landMotion.z * Math.pow(0.96, lastTick)) * lastTick, (landMotion.z * Math.pow(0.96, landTicks)) * landTicks);
+                        tx += Mth.lerp(partialTick, (landMotion.x * Math.pow(0.96, lastTick)) * lastTick, (landMotion.x * Math.pow(0.9, landTicks)) * landTicks);
+                        tz += Mth.lerp(partialTick, (landMotion.z * Math.pow(0.96, lastTick)) * lastTick, (landMotion.z * Math.pow(0.9, landTicks)) * landTicks);
                     }else if(xz != null){
                         tx = xz.x;
                         tz = xz.y;
@@ -258,7 +271,11 @@ public class DeathAnimUtils {
         return bezierValue * max;
     }
 
-    public static List<ModelPart> findAllModelPart(LivingEntityRenderer<?, ?> renderer){  // TODO: 缓存ModelPart
+    public static List<ModelPart> findAllModelPart(LivingEntityRenderer<?, ?> renderer){  // 用List是为了保证顺序
+        List<ModelPart> cache = ((ILivingEntityRenderer) renderer).confluence$getPartsCache();
+        if(!cache.isEmpty()){  // 要是有哪个Layer是中途加进去的而不是构造的时候就加的就会出问题
+            return cache;
+        }
         EntityModel<?> model = renderer.getModel();
         List<ModelPart> ret = findAllModelPart(model, model.getClass());
         for(RenderLayer<LivingEntity, EntityModel<LivingEntity>> layer : ((LivingEntityRendererAccessor) renderer).getLayers()){
@@ -273,19 +290,26 @@ public class DeathAnimUtils {
                     }
                 }
             }
-
+            if(layer instanceof CustomHeadLayer<?, ?>){
+                for(SkullModelBase skullModels : ((CustomHeadLayerAccessor) layer).getSkullModels().values()){
+                    for(ModelPart skull : findAllModelPart(skullModels, skullModels.getClass())){
+                        ((IModelPart) (Object) skull).confluence$isSkull(true);
+                        ret.add(skull);
+                    }
+                }
+            }
         }
+        cache.addAll(ret);
         return ret;
     }
 
-    public static List<ModelPart> findAllModelPart(EntityModel<?> model, Class<?> finding){
+    public static List<ModelPart> findAllModelPart(Object model, Class<?> finding){
         List<ModelPart> ret = new ArrayList<>();
         for(Field field : finding.getDeclaredFields()){
             try{
                 if(ModelPart.class.isAssignableFrom(field.getType())){
                     field.setAccessible(true);
                     ModelPart part = (ModelPart) field.get(model);
-                    ret.add(part);
                     ret.addAll(((IModelPart) (Object) part).confluence$root().getAllParts().toList());
                     break;
                 }
@@ -293,7 +317,7 @@ public class DeathAnimUtils {
                 Confluence.LOGGER.error("field.get: ", e);
             }
         }
-        if(ret.isEmpty() && EntityModel.class.isAssignableFrom(finding.getSuperclass())){
+        if(ret.isEmpty() && Model.class.isAssignableFrom(finding.getSuperclass())){
             ret.addAll(findAllModelPart(model, finding.getSuperclass()));
         }
         return ret;
@@ -314,7 +338,7 @@ public class DeathAnimUtils {
         }else{
             color = DeathAnimOptions.Builtin.DEFAULT.getBloodColor();
         }
-        ParticleOptions particle = new BloodParticle.BloodParticleOptions(color[0], color[1], color[2], motion.x, motion.y, motion.z);
+        ParticleOptions particle = new BloodParticleOptions(color[0], color[1], color[2], motion.x, motion.y, motion.z);
         serverLevel.sendParticles(particle, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
     }
 
@@ -329,7 +353,7 @@ public class DeathAnimUtils {
 
     public static int calcParticleCount(AABB range){
         double x = range.getXsize() * range.getYsize() * range.getZsize();
-        return (int) (/*146.2*/73 * x);  // 一次函数，过原点和 (0.342, 50) 僵尸三边相乘=0.342
+        return (int) (/*146.2*/73 * x);  // 一次函数，过原点和 (0.342, 50) 僵尸三边相乘=0.342  后来觉得太多就减半了
     }
 
 }

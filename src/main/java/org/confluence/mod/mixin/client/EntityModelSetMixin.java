@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityModelSet.class)
-public class EntityModelSetMixin {
+public abstract class EntityModelSetMixin {
     @Inject(method = "bakeLayer", at = @At("RETURN"))
     private void bakeLayer(ModelLayerLocation pModelLayerLocation, CallbackInfoReturnable<ModelPart> cir){
         ModelPart root = cir.getReturnValue();

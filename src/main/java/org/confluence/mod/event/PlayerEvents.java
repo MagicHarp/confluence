@@ -18,20 +18,23 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
+import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
 import org.confluence.mod.item.common.PlayerAbilityItem;
-import org.confluence.mod.item.curio.combat.ICriticalHit;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.item.curio.miscellaneous.LuckyCoin;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
@@ -110,7 +113,15 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
-        ICriticalHit.apply(event);
+        if (ApothicHelper.isAttributesLoaded()) return;
+        Player player = event.getEntity();
+        if (!event.isVanillaCritical()) {
+            double chance = player.getAttributeValue(ModAttributes.getCriticalChance());
+            if (player.level().random.nextFloat() < chance) {
+                event.setDamageModifier(1.5F);
+                event.setResult(Event.Result.ALLOW);
+            }
+        }
     }
 
     @SubscribeEvent
@@ -144,7 +155,7 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void rightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getItemStack().is(ModTags.Items.MINECART)) return;
+        if (event.getEntity().isCrouching() || event.getItemStack().is(ModTags.Items.MINECART)) return;
         Level level = event.getLevel();
         BlockPos blockPos = event.getPos();
         BlockState blockState = level.getBlockState(blockPos);
@@ -168,5 +179,12 @@ public final class PlayerEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void leftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        AltarBlock.onLeftClick(level.getBlockState(pos), level, pos, event.getEntity());
     }
 }

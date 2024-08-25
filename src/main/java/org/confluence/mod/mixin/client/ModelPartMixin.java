@@ -27,6 +27,7 @@ public abstract class ModelPartMixin implements IModelPart, SelfGetter<ModelPart
     @Unique private float[] confluence$parentOffset = new float[6];
     @Unique private ModelPart confluence$root;
     @Unique private Vec2 confluence$landMotion;
+    @Unique private boolean confluence$isSkull = false;
 
     @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", at = @At(value = "INVOKE",target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"))
     private void renderStart(PoseStack pPoseStack, VertexConsumer pVertexConsumer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha, CallbackInfo ci){
@@ -75,5 +76,13 @@ public abstract class ModelPartMixin implements IModelPart, SelfGetter<ModelPart
             confluence$landMotion = m[0];
         }
         return confluence$landMotion;
+    }
+
+    @Override
+    public boolean confluence$isSkull(boolean... isSkull){
+        if(isSkull.length > 0){
+            confluence$isSkull = isSkull[0];
+        }
+        return confluence$isSkull;
     }
 }

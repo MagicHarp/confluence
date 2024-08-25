@@ -26,8 +26,10 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
     CRIMSON_SLIME_SPAWN_EGG("crimson_slime_spawn_egg", ModEntities.CRIMSON_SLIME, 0x8B4949, 0x7D1D1D),
     TROPIC_SLIME_SPAWN_EGG("tropic_slime_spawn_egg", ModEntities.TROPIC_SLIME, 0x73bcf4, 0x7374f4),
     LUMINOUS_SLIME_SPAWN_EGG("evil_slime_spawn_egg", ModEntities.LUMINOUS_SLIME, 0xFF00FF, 0xEDFFFA),
-    DEMON_EYE_SPAWN_EGG("demon_eye_spawn_egg", ModEntities.DEMON_EYE, 0xffffff,0xab0d0d),
+    DEMON_EYE_SPAWN_EGG("demon_eye_spawn_egg", ModEntities.DEMON_EYE, 0xffffff, 0xab0d0d),
 
+    KING_SLIME_SPAWN_EGG("king_slime_spawn_egg", ModEntities.KING_SLIME, 0x73bcf4, 0xf8e234);
+  
     TEST_WORM_SPAWN_EGG("test_worm_spawn_egg", ModEntities.TEST_WORM, 0xffffff,0xab0d0d);
 
     private final RegistryObject<ForgeSpawnEggItem> value;

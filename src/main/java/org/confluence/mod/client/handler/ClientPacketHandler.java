@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,6 +16,7 @@ import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.network.s2c.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +49,9 @@ public final class ClientPacketHandler {
         context.enqueueWork(() -> {
             maxMana = packet.maxMana();
             currentMana = packet.currentMana();
+            if (currentMana == maxMana && Minecraft.getInstance().player != null) {
+                Minecraft.getInstance().player.playSound(ModSoundEvents.COOLDOWN_RECOVERY.get());
+            }
         });
         context.setPacketHandled(true);
     }
@@ -146,6 +151,18 @@ public final class ClientPacketHandler {
     public static void handleSubstractor(RightClickSubtractorPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> rightClickSubtractor = packet.amount());
+        context.setPacketHandled(true);
+    }
+
+    public static void handlePickupDelay(SetItemEntityPickupDelayPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> {
+            ClientLevel level = Minecraft.getInstance().level;
+            if (level == null) return;
+            if (level.getEntity(packet.id()) instanceof ItemEntity itemEntity) {
+                itemEntity.setPickUpDelay(packet.delay());
+            }
+        });
         context.setPacketHandled(true);
     }
 
