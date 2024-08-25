@@ -2,8 +2,10 @@ package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -14,10 +16,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.misc.ModSoundEvents;
+import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -34,7 +36,7 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
 
     public CoinPileBlock() {
         super(Properties.of().sound(ModSoundEvents.Types.COIN));
-        registerDefaultState(this.defaultBlockState().setValue(HEAPS, 1).setValue(ISBASE, true));
+        registerDefaultState(stateDefinition.any().setValue(HEAPS, 1).setValue(ISBASE, true));
     }
 
     @Override
@@ -44,9 +46,9 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
             return ONE_CUBE;
         } else if (heaps <= 3) {
             return TWO_CUBES;
-        } else if (heaps <= 4) {
+        } else if (heaps == 4) {
             return THREE_CUBES;
-        } else if (heaps <= 5) {
+        } else if (heaps == 5) {
             return FOUR_CUBES;
         } else if (heaps <= 8) {
             return FIVE_CUBES;
@@ -62,25 +64,17 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
 
     @Override
     public boolean canBeReplaced(BlockState state, BlockPlaceContext UseContext) {
-        return !UseContext.isSecondaryUseActive() && UseContext.getItemInHand().is(this.asItem()) && state.getValue(HEAPS) < 12 || super.canBeReplaced(state, UseContext);
+        return !UseContext.isSecondaryUseActive() && UseContext.getItemInHand().is(asItem()) && state.getValue(HEAPS) < 12 || super.canBeReplaced(state, UseContext);
     }
 
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState clickedBlockState = context.getLevel().getBlockState(context.getClickedPos());
-        BlockState state = this.defaultBlockState();
-        if (clickedBlockState.is(this)) {
-            return clickedBlockState.setValue(HEAPS, Math.min(12, clickedBlockState.getValue(HEAPS) + 1));
+        if (clickedBlockState.is(this) && clickedBlockState.getValue(HEAPS) < 12) {
+            return clickedBlockState.cycle(HEAPS);
         }
-
-        BlockState clickedBlockBelowState = context.getLevel().getBlockState(context.getClickedPos().below());
-        if (isCoinPileBlock(clickedBlockBelowState)) {
-            state = state.setValue(ISBASE, false);
-        } else {
-            state = state.setValue(ISBASE, true);
-        }
-        return state;
+        return defaultBlockState().setValue(ISBASE, !isCoinPileBlock(context.getLevel().getBlockState(context.getClickedPos().below())));
     }
 
     @Override
@@ -91,20 +85,27 @@ public class CoinPileBlock extends FallingBlock implements CustomModel, CustomIt
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction facing, @NotNull BlockState blockstate, @NotNull LevelAccessor level, @NotNull BlockPos CurrentPos, @NotNull BlockPos facingPos) {
-        level.scheduleTick(CurrentPos, this, this.getDelayAfterPlace());
-        blockstate = level.getBlockState(CurrentPos.below());
-        boolean isBaseBlock = !isCoinPileBlock(blockstate);
-        state = state.setValue(ISBASE, isBaseBlock);
+        level.scheduleTick(CurrentPos, this, getDelayAfterPlace());
+        if (blockstate.isAir()) {
+            return state;
+        }
+        if (facing == Direction.DOWN) {
+            return state.setValue(ISBASE, !isCoinPileBlock(blockstate));
+        }
         return state;
     }
 
     private boolean isCoinPileBlock(BlockState blockState) {
-        return blockState.is(this) || blockState.is(ModBlocks.COPPER_COIN_PILE.get()) || blockState.is(ModBlocks.SILVER_COIN_PILE.get()) ||
-            blockState.is(ModBlocks.GOLDEN_COIN_PILE.get()) || blockState.is(ModBlocks.PLATINUM_COIN_PILE.get());
+        return blockState.is(this) || blockState.is(ModTags.Blocks.COIN_PILE);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HEAPS, ISBASE);
+    }
+
+    @Override
+    public void onLand(Level pLevel, BlockPos pPos, BlockState pState, BlockState pReplaceableState, FallingBlockEntity pFallingBlock) {
+        pLevel.setBlockAndUpdate(pPos, pState.setValue(ISBASE, !isCoinPileBlock(pLevel.getBlockState(pPos.below()))));
     }
 }
