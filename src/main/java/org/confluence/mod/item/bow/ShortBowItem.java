@@ -3,9 +3,10 @@ package org.confluence.mod.item.bow;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.mixinauxiliary.IAbstractArrow;
 
-public class ShortBowItem extends BowItem {
+public class ShortBowItem extends BowItem implements CustomModel {
     public static final float FULL_POWER_TICKS = 4.0F;
 
     public ShortBowItem(Properties pProperties) {
