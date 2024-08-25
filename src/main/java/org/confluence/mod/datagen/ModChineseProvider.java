@@ -149,6 +149,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("key.confluence.hook", "使用钩爪");
         add("key.confluence.metal_detector", "检测矿物");
+        add("key.confluence.step_stool", "上梯凳");
 
         add("curios.identifier.hook", "钩爪");
         add("curios.identifier.accessory", "配饰");

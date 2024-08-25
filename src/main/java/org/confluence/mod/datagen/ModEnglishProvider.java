@@ -120,6 +120,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");
+        add("key.confluence.step_stool", "Step Stool");
 
         add("curios.identifier.hook", "Hook");
         add("curios.identifier.accessory", "Accessory");
