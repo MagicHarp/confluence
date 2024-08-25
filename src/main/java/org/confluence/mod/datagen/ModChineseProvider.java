@@ -1620,6 +1620,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
         add(SLIME_CROWN.get(), "史莱姆皇冠");
         add(DEMON_HEART.get(), "恶魔之心");
+        add(MAGIC_CONCH.get(), "魔法海螺");
+        add(DEMON_CONCH.get(), "恶魔海螺");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");

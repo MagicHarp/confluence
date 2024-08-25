@@ -1,3 +1,6 @@
 {
-  "parent": "confluence:item/item_icon"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confluence:item/magic_conch"
+  }
 }
