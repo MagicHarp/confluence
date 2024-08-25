@@ -5,12 +5,15 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.mixinauxiliary.IAbstractArrow;
+import org.jetbrains.annotations.NotNull;
 
 public class ShortBowItem extends BowItem implements CustomModel {
     public static final float FULL_POWER_TICKS = 4.0F;
+    private final float baseDamage;
 
-    public ShortBowItem(Properties pProperties) {
+    public ShortBowItem(float baseDamage, Properties pProperties) {
         super(pProperties);
+        this.baseDamage = baseDamage;
     }
 
     public float getShortPowerForTime(int pCharge) {
@@ -24,6 +27,12 @@ public class ShortBowItem extends BowItem implements CustomModel {
 
     public float getVelocityMultiplier() {
         return 2.0F;
+    }
+
+    @Override
+    public @NotNull AbstractArrow customArrow(AbstractArrow arrow) {
+        arrow.setBaseDamage(baseDamage);
+        return arrow;
     }
 
     public static void applyToArrow(ItemStack itemStack, AbstractArrow arrow) {

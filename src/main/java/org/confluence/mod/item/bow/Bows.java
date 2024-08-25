@@ -12,7 +12,8 @@ import org.confluence.mod.misc.ModRarity;
 import static org.confluence.mod.item.ModItems.ITEMS;
 
 public final class Bows {
-    public static final RegistryObject<ShortBowItem> WOODEN_SHORT_BOW = ITEMS.register("wooden_short_bow", () -> new ShortBowItem(new Item.Properties().rarity(ModRarity.WHITE).durability(384)));
+    public static final RegistryObject<ShortBowItem> WOODEN_SHORT_BOW = ITEMS.register("wooden_short_bow", () -> new ShortBowItem(4.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(384)));
+    public static final RegistryObject<ShortBowItem> COPPER_SHORT_BOW = ITEMS.register("copper_short_bow", () -> new ShortBowItem(4.5F, new Item.Properties().rarity(ModRarity.BLUE).durability(640)));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerPull() {
@@ -23,6 +24,8 @@ public final class Bows {
 
         ItemProperties.register(WOODEN_SHORT_BOW.get(), pull, shortBowPull);
         ItemProperties.register(WOODEN_SHORT_BOW.get(), pulling, shortBowPulling);
+        ItemProperties.register(COPPER_SHORT_BOW.get(), pull, shortBowPull);
+        ItemProperties.register(COPPER_SHORT_BOW.get(), pulling, shortBowPulling);
     }
 
     public static void init() {}
