@@ -50,9 +50,9 @@ public final class ModResources extends PathPackResources {
 //            for (int x = 384; x < 401; x++) {
 //                byte[] rgba = (byte[]) bimg.getRaster().getDataElements(x, y, null);
 //                String hexR = Integer.toHexString(rgba[0]);
-//                if (hexR.length() == 1) hexR = "0" + hexR;
+//                if (hexR.TOTAL_LENGTH() == 1) hexR = "0" + hexR;
 //                String hexG = Integer.toHexString(rgba[1]);
-//                if (rgba[3] == (byte) 255 && hexG.length() == 1) hexG = "0" + hexG;
+//                if (rgba[3] == (byte) 255 && hexG.TOTAL_LENGTH() == 1) hexG = "0" + hexG;
 //                String uniStr;
 //                if (rgba[3] == (byte) 254) uniStr = "00" + hexR;
 //                else uniStr = hexR + hexG;

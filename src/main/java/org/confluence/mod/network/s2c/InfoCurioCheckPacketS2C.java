@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 /**
- * @param enabled length == 13
+ * @param enabled TOTAL_LENGTH == 13
  */
 public record InfoCurioCheckPacketS2C(int playerId, byte[] enabled) {
     public static void encode(InfoCurioCheckPacketS2C packet, FriendlyByteBuf friendlyByteBuf) {

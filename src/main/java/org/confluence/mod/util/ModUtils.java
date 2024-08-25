@@ -114,14 +114,15 @@ public final class ModUtils {
      * @param yaw   角度的yaw，单位为角度而非弧度
      * @param pitch 角度的pitch，单位为角度
      * @return 返回朝向对应角度（yaw、pitch）的单位向量
-     */
-    public static Vec3 rotToDir(float yaw, float pitch) {
-        double yawRad = Math.toRadians(yaw);
-        double pitchRad = Math.toRadians(pitch);
-        double y = -1 * Math.sin(pitchRad);
-        double div = Math.cos(pitchRad);
-        double x = -1 * Math.sin(yawRad);
-        double z = Math.cos(yawRad);
+     * */
+    public static Vec3 rotToDir(float yaw, float pitch){
+        float yawRad = (float) Math.toRadians(yaw);
+        float pitchRad = (float) Math.toRadians(pitch);
+        // Mth类的三角函数优化较好
+        double y = -1 * Mth.sin(pitchRad);
+        double div = Mth.cos(pitchRad);
+        double x = -1 * Mth.sin(yawRad);
+        double z = Mth.cos(yawRad);
         x *= div;
         z *= div;
         return new Vec3(x, y, z);
@@ -133,8 +134,53 @@ public final class ModUtils {
     public static void updateEntityRotation(Entity entity, Vec3 dir) {
         float[] angle = dirToRot(dir);
         entity.setYRot(angle[0]);
-        // 内部的XRot与F3中的显示信息符号相反
-        entity.setXRot(-angle[1]);
+        entity.setXRot(angle[1]);
+    }
+
+    /**
+     * 获得两个位置之间的方向向量；若两点重合则默认返回向上的向量
+     * 若要自定义默认返回的向量，请在length后传入一个默认向量
+     * @param start 开始位置的位置向量
+     * @param end 结束位置的位置向量
+     * @param length 返回向量的长度
+     * */
+    public static Vec3 getDirection(Vec3 start, Vec3 end, double length) {
+        return getDirection(start, end, length, new Vec3(0, length, 0));
+    }
+    /**
+     * 获得两个位置之间的方向向量；若两点重合则默认返回的向量
+     * @param start 开始位置的位置向量
+     * @param end 结束位置的位置向量
+     * @param length 返回向量的长度
+     * @param defaultVec 两点重合时返回的默认向量（注：直接原样返回，不会判定该向量的长度）
+     * */
+    public static Vec3 getDirection(Vec3 start, Vec3 end, double length, Vec3 defaultVec) {
+        return getDirection(start, end, length, defaultVec, false);
+    }
+    /**
+     * 获得两个位置之间的方向向量
+     * 若preserveShorterVectors为true且两点之间的距离大于length则将向量长度重设为length
+     * @param start 开始位置的位置向量
+     * @param end 结束位置的位置向量
+     * @param length 返回向量的长度
+     * @param preserveShorterVectors 返回向量的长度
+     * */
+    public static Vec3 getDirection(Vec3 start, Vec3 end, double length,
+                                    Vec3 defaultVec, boolean preserveShorterVectors) {
+        Vec3 result = end.subtract(start);
+        double distSqr = result.lengthSqr();
+        // 此时直接返回比length更短的向量
+        if (preserveShorterVectors && distSqr <= length * length) {
+            return result;
+        }
+        // 向量长度重设为length
+
+        // 两点之间过近
+        if (distSqr < 1e-9) {
+            return defaultVec;
+        }
+        result.scale(length / Math.sqrt(distSqr));
+        return result;
     }
 
     /**
@@ -146,6 +192,11 @@ public final class ModUtils {
 
     public static void testMessage(Player player, String msg) {
         player.sendSystemMessage(Component.literal(msg));
+    }
+
+    public static void testMessage(Level level, String msg) {
+        for (Player ply : level.players())
+            ply.sendSystemMessage(Component.literal(msg));
     }
 
     public static boolean isExpert(Level level) {
