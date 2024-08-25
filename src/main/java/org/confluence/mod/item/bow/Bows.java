@@ -12,7 +12,7 @@ import org.confluence.mod.misc.ModRarity;
 import static org.confluence.mod.item.ModItems.ITEMS;
 
 public final class Bows {
-    public static final RegistryObject<ShortBowItem> WOOD_SHORT_BOW = ITEMS.register("wood_short_bow", () -> new ShortBowItem(new Item.Properties().rarity(ModRarity.WHITE).durability(384)));
+    public static final RegistryObject<ShortBowItem> WOODEN_SHORT_BOW = ITEMS.register("wooden_short_bow", () -> new ShortBowItem(new Item.Properties().rarity(ModRarity.WHITE).durability(384)));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerPull() {
@@ -21,8 +21,8 @@ public final class Bows {
         ResourceLocation pulling = new ResourceLocation("pulling");
         ClampedItemPropertyFunction shortBowPulling = (itemStack, clientLevel, living, speed) -> living != null && living.isUsingItem() && living.getUseItem() == itemStack ? 1.0F : 0.0F;
 
-        ItemProperties.register(WOOD_SHORT_BOW.get(), pull, shortBowPull);
-        ItemProperties.register(WOOD_SHORT_BOW.get(), pulling, shortBowPulling);
+        ItemProperties.register(WOODEN_SHORT_BOW.get(), pull, shortBowPull);
+        ItemProperties.register(WOODEN_SHORT_BOW.get(), pulling, shortBowPulling);
     }
 
     public static void init() {}

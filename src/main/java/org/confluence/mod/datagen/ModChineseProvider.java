@@ -14,6 +14,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
@@ -1814,6 +1815,7 @@ public class ModChineseProvider extends LanguageProvider {
         // 射手武器
         add(GunItems.HANDGUN.get(), "手枪");
         add(GunItems.MUSKET.get(), "火枪");
+        add(Bows.WOODEN_SHORT_BOW.get(), "火枪");
         // 子弹
         add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
         add(AmmoItems.METEOR_BULLET.get(), "流星弹");
