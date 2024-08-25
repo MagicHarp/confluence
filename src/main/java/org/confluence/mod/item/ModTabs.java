@@ -14,6 +14,7 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
@@ -307,7 +308,9 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.THROWING_KNIVES.get());
                 output.accept(ModItems.SHURIKEN.get());
-                for (GunItems gunItems : GunItems.values()) output.accept(gunItems.get());
+                output.accept(Bows.WOODEN_SHORT_BOW.get());
+                output.accept(GunItems.HANDGUN.get());
+                output.accept(GunItems.MUSKET.get());
                 for (AmmoItems ammoItems : AmmoItems.values()) output.accept(ammoItems.get());
             })
             .build());

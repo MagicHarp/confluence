@@ -18,15 +18,15 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 
 import java.util.function.Consumer;
 
-public class MusketItem extends AbstractGunItem {
-    public MusketItem() {
+public class MusketGunItem extends AbstractGunItem {
+    public MusketGunItem() {
         super(ModRarity.GREEN);
     }
 
     @Override
     public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private DefaultGunItemRenderer<MusketItem> renderer;
+            private DefaultGunItemRenderer<MusketGunItem> renderer;
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
