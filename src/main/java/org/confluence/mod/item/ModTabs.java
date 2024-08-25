@@ -309,6 +309,14 @@ public final class ModTabs {
                 output.accept(ModItems.THROWING_KNIVES.get());
                 output.accept(ModItems.SHURIKEN.get());
                 output.accept(Bows.WOODEN_SHORT_BOW.get());
+                output.accept(Bows.COPPER_SHORT_BOW.get());
+                output.accept(Bows.TIN_SHORT_BOW.get());
+                output.accept(Bows.IRON_SHORT_BOW.get());
+                output.accept(Bows.LEAD_SHORT_BOW.get());
+                output.accept(Bows.SILVER_SHORT_BOW.get());
+                output.accept(Bows.TUNGSTEN_SHORT_BOW.get());
+                output.accept(Bows.GOLDEN_SHORT_BOW.get());
+                output.accept(Bows.PLATINUM_SHORT_BOW.get());
                 output.accept(GunItems.HANDGUN.get());
                 output.accept(GunItems.MUSKET.get());
                 for (AmmoItems ammoItems : AmmoItems.values()) output.accept(ammoItems.get());
