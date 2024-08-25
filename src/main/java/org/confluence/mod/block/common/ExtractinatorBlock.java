@@ -26,9 +26,9 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.block.ModBlocks;
@@ -55,18 +55,18 @@ import java.util.function.Consumer;
 
 public class ExtractinatorBlock extends HorizontalDirectionalBlock implements EntityBlock, CustomModel, CustomItemModel {
     public static final EnumProperty<ExtractinatorPart> PART = EnumProperty.create("part", ExtractinatorPart.class);
-    private static final VoxelShape BASE_SHAPE_SOUTH = Shapes.box(0.1875, 0.0, 0.1875, 1.0, 1.0, 0.8125);
-    private static final VoxelShape BASE_SHAPE_WEST = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 1.0);
-    private static final VoxelShape BASE_SHAPE_NORTH = Shapes.box(0.0, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
-    private static final VoxelShape BASE_SHAPE_EAST = Shapes.box(0.1875, 0.0, 0.0, 0.8125, 1.0, 0.8125);
-    private static final VoxelShape RIGHT_SHAPE_SOUTH = Shapes.box(0.0, 0.0, 0.1875, 0.8125, 1.0, 0.8125);
-    private static final VoxelShape RIGHT_SHAPE_WEST = Shapes.box(0.1875, 0.0, 0.0, 0.8125, 1.0, 0.8125);
-    private static final VoxelShape RIGHT_SHAPE_NORTH = Shapes.box(0.1875, 0.0, 0.1875, 1.0, 1.0, 0.8125);
-    private static final VoxelShape RIGHT_SHAPE_EAST = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 1.0, 1.0);
+    private static final VoxelShape BASE_SHAPE_SOUTH = box(3.0, 0.0, 3.0, 16.0, 16.0, 13.0);
+    private static final VoxelShape BASE_SHAPE_WEST = box(3.0, 0.0, 3.0, 13.0, 16.0, 16.0);
+    private static final VoxelShape BASE_SHAPE_NORTH = box(0.0, 0.0, 3.0, 13.0, 16.0, 13.0);
+    private static final VoxelShape BASE_SHAPE_EAST = box(3.0, 0.0, 0.0, 13.0, 16.0, 13.0);
+    private static final VoxelShape RIGHT_SHAPE_SOUTH = box(0.0, 0.0, 3.0, 13.0, 16.0, 13.0);
+    private static final VoxelShape RIGHT_SHAPE_WEST = box(3.0, 0.0, 0.0, 13.0, 16.0, 13.0);
+    private static final VoxelShape RIGHT_SHAPE_NORTH = box(3.0, 0.0, 3.0, 16.0, 16.0, 13.0);
+    private static final VoxelShape RIGHT_SHAPE_EAST = box(3.0, 0.0, 3.0, 13.0, 16.0, 16.0);
     private static final VoxelShape[] BASE_SHAPES = new VoxelShape[]{BASE_SHAPE_SOUTH, BASE_SHAPE_WEST, BASE_SHAPE_NORTH, BASE_SHAPE_EAST};
     private static final VoxelShape[] RIGHT_SHAPES = new VoxelShape[]{RIGHT_SHAPE_SOUTH, RIGHT_SHAPE_WEST, RIGHT_SHAPE_NORTH, RIGHT_SHAPE_EAST};
 
-    public ExtractinatorBlock(Properties pProperties) { // todo 多方块
+    public ExtractinatorBlock(Properties pProperties) {
         super(pProperties);
         registerDefaultState(stateDefinition.any().setValue(PART, ExtractinatorPart.BASE).setValue(FACING, Direction.NORTH));
     }
@@ -178,6 +178,11 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
             super(ModBlocks.EXTRACTINATOR_ENTITY.get(), pPos, pBlockState);
+        }
+
+        @Override
+        public AABB getRenderBoundingBox() { // 使其能在屏幕外渲染
+            return INFINITE_EXTENT_AABB;
         }
 
         @Override
