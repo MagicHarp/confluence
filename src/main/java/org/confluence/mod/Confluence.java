@@ -2,6 +2,7 @@ package org.confluence.mod;
 
 import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.GameRules;
@@ -63,5 +64,9 @@ public final class Confluence {
         ModArgumentTypeInfos.INFOS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return new ResourceLocation(MODID, path);
     }
 }

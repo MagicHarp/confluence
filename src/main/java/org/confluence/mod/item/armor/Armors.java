@@ -1,6 +1,7 @@
 package org.confluence.mod.item.armor;
 
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.EnumRegister;
@@ -101,6 +102,10 @@ public enum Armors implements EnumRegister<ArmorItem> {
     @Override
     public RegistryObject<ArmorItem> getValue() {
         return value;
+    }
+
+    public Ingredient getIngredient() {
+        return Ingredient.of(value.get());
     }
 
     public static void init() {}
