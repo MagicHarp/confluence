@@ -4,7 +4,11 @@
     "salt": 15511220,
     "separation": 17,
     "spacing": 22,
-    "spread_type": "triangular"
+    "spread_type": "triangular",
+    "exclusion_zone": {
+      "chunk_count": 10,
+      "other_set": "confluence:shimmer_lake"
+    }
   },
   "structures": [{
     "structure": "confluence:enchanted_sword_shrine",

@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 12311145,
+    "salt": 12312312,
     "separation": 30,
     "spacing": 50,
     "spread_type": "triangular",
@@ -11,7 +11,7 @@
     }
   },
   "structures": [{
-    "structure": "confluence:sky_village",
+    "structure": "confluence:shimmer_lake",
     "weight": 1
   }]
 }
