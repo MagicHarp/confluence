@@ -1,12 +1,9 @@
 package org.confluence.mod.item.common;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -18,40 +15,39 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MagicConch extends Item {
-    public MagicConch() {
-        super(new Properties().stacksTo(1).rarity(ModRarity.BLUE));
+public class DemonConch extends Item {
+    public DemonConch() {
+        super(new Properties().stacksTo(1).rarity(ModRarity.LIGHT_RED));
     }
 
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         Level level = pContext.getLevel();
-        if (!level.isClientSide && pContext.getClickedFace() == Direction.UP && level.dimension() == Level.OVERWORLD) {
-            BlockPos clickedPos = pContext.getClickedPos();
-            Holder<Biome> biome = level.getBiome(clickedPos);
-            if (!biome.is(BiomeTags.IS_OCEAN) && !biome.is(BiomeTags.IS_BEACH)) return InteractionResult.PASS;
+        if (pContext.getPlayer() == null && level.dimension() != Level.NETHER) return InteractionResult.PASS;
+        if (!level.isClientSide && level.getBlockState(pContext.getClickedPos()).is(Blocks.NETHER_PORTAL)) {
+            BlockPos playerPos = pContext.getPlayer().getOnPos();
             CompoundTag tag = pContext.getItemInHand().getOrCreateTag();
             if (!tag.contains("pos1")) {
-                tag.put("pos1", NbtUtils.writeBlockPos(clickedPos));
+                tag.put("pos1", NbtUtils.writeBlockPos(playerPos));
             } else if (!tag.contains("pos2")) {
-                tag.put("pos2", NbtUtils.writeBlockPos(clickedPos));
+                tag.put("pos2", NbtUtils.writeBlockPos(playerPos));
             } else {
                 BlockPos pos1 = NbtUtils.readBlockPos(tag.getCompound("pos1"));
                 BlockPos pos2 = NbtUtils.readBlockPos(tag.getCompound("pos2"));
-                if (pos1.equals(clickedPos)) {
+                if (pos1.equals(playerPos)) {
                     tag.remove("pos1");
-                } else if (pos2.equals(clickedPos)) {
+                } else if (pos2.equals(playerPos)) {
                     tag.remove("pos2");
                 } else {
-                    double distanceToPos1 = clickedPos.distSqr(pos1);
-                    double distanceToPos2 = clickedPos.distSqr(pos2);
-                    tag.put(distanceToPos1 > distanceToPos2 ? "pos2" : "pos1", NbtUtils.writeBlockPos(clickedPos));
+                    double distanceToPos1 = playerPos.distSqr(pos1);
+                    double distanceToPos2 = playerPos.distSqr(pos2);
+                    tag.put(distanceToPos1 > distanceToPos2 ? "pos2" : "pos1", NbtUtils.writeBlockPos(playerPos));
                 }
             }
             return InteractionResult.SUCCESS;
@@ -82,7 +78,7 @@ public class MagicConch extends Item {
                 pLivingEntity.teleportTo(target.getX() + 0.5, target.getY() + 1.0, target.getZ() + 0.5);
             } else {
                 BlockPos pos1 = NbtUtils.readBlockPos(tag.getCompound("pos1"));
-                pLivingEntity.teleportTo(pos1.getX() + 0.5, pos1.getY() + 1.0, pos1.getZ() + 0.5);
+                pLivingEntity.teleportTo(pos1.getX() + 0.5, pos1.getY(), pos1.getZ() + 0.5);
             }
         } else { // pos1不存在时，pos2必存在
             BlockPos pos2 = NbtUtils.readBlockPos(tag.getCompound("pos2"));

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.mixin.accessor.LevelRendererAccessor;
+import org.confluence.mod.mixin.client.accessor.LevelRendererAccessor;
 import org.confluence.mod.util.IOriented;
 import org.confluence.mod.util.OBB;
 import org.spongepowered.asm.mixin.Mixin;

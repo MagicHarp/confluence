@@ -1,8 +1,6 @@
 {
     "client": [
         "ConnectionMixin",
-        "accessor.LevelRendererAccessor",
-        "accessor.LivingEntityRendererAccessor",
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
@@ -25,6 +23,7 @@
         "client.accessor.CompileResultsAccessor",
         "client.accessor.CustomHeadLayerAccessor",
         "client.accessor.LevelRendererAccessor",
+        "client.accessor.LivingEntityRendererAccessor",
         "client.accessor.LocalPlayerAccessor",
         "client.accessor.MinecraftAccessor",
         "client.accessor.ModelPart$CubeAccessor",
