@@ -17,14 +17,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEntity {
     int indexAI = 0;
 
-    /** 注册用的constructor；实际使用下方的另一个。体节应该被主实体集中创建 */
     public TestWormPart(EntityType<? extends TestWormPart> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-//    /** 实际使用的constructor */
-//    public TestWormPart(TestWormEntity parent, int segmentIndex, float MAX_HEALTH) {
-//        super(parent, segmentIndex, MAX_HEALTH);
-//    }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()

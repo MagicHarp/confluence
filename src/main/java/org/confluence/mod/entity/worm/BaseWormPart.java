@@ -6,9 +6,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +20,6 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     public enum SegmentType {
         HEAD, BODY, TAIL;
     }
-    protected static final EntityDataAccessor<Vector3f> DATA_DIR_ID = SynchedEntityData.defineId(BaseWormPart.class, EntityDataSerializers.VECTOR3);
     private float maxHealth = 10;
     private AbstractWormEntity parentMob;
     protected AbstractWormEntity getParentMob() {return parentMob;}
@@ -85,27 +81,16 @@ public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        // 这素在……？
-//        entityData.define(DATA_DIR_ID, new Vector3f(0.0F));
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
         super.deserializeNBT(nbt);
-//        entityData.set(DATA_DIR_ID, new Vector3f(
-//            nbt.getFloat("DirX"),
-//            nbt.getFloat("DirY"),
-//            nbt.getFloat("DirZ")
-//        ));
     }
 
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag compoundTag = super.serializeNBT();
-//        Vector3f vector3f = entityData.get(DATA_DIR_ID);
-//        compoundTag.putFloat("DirX", vector3f.x);
-//        compoundTag.putFloat("DirY", vector3f.y);
-//        compoundTag.putFloat("DirZ", vector3f.z);
         return compoundTag;
     }
 
