@@ -9,6 +9,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,6 +56,7 @@ import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
 import org.confluence.mod.entity.slime.BaseSlime;
@@ -132,7 +135,7 @@ public final class ForgeEvents {
                 ConfluenceData.get(serverLevel).setMoonSpecific(-1);
             }
         } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
-            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
+                serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
         ) {
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED), false);
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
@@ -183,11 +186,11 @@ public final class ForgeEvents {
         if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
             EntityType<?> entityType = living.getType();
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EntityKilledPacketS2C(
-                    serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
-                    ForgeRegistries.ENTITY_TYPES.getKey(entityType)
-                )
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new EntityKilledPacketS2C(
+                            serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
+                            ForgeRegistries.ENTITY_TYPES.getKey(entityType)
+                    )
             );
 
             if (ModConfigs.DROP_MONEY.get() && living instanceof Enemy) {
@@ -221,25 +224,25 @@ public final class ForgeEvents {
             double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
             double rangeSqr = range * range;
             self.level().players().stream()
-                .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
-                .max((playerA, playerB) -> {
-                    AtomicInteger atomic = new AtomicInteger();
-                    playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                        playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
-                            atomic.set(abilityA.getAggro() - abilityB.getAggro())
-                        )
-                    );
-                    return atomic.get();
-                }).ifPresent(player -> {
-                    if (player == playerO) return;
-                    playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
-                        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
-                            if (abilityO.getAggro() < ability.getAggro()) {
-                                event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
-                            }
-                        })
-                    );
-                });
+                    .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
+                    .max((playerA, playerB) -> {
+                        AtomicInteger atomic = new AtomicInteger();
+                        playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
+                                playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
+                                        atomic.set(abilityA.getAggro() - abilityB.getAggro())
+                                )
+                        );
+                        return atomic.get();
+                    }).ifPresent(player -> {
+                        if (player == playerO) return;
+                        playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
+                                player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
+                                    if (abilityO.getAggro() < ability.getAggro()) {
+                                        event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                                    }
+                                })
+                        );
+                    });
         }
     }
 
@@ -255,6 +258,40 @@ public final class ForgeEvents {
                 event.setAmount(event.getAmount() * 1.2F);
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void livingAttack(LivingAttackEvent event) {
+        if (event.getSource().getEntity() instanceof BlackSlime blackSlime) {
+            if (blackSlime.getSize() == 2) {
+                if (ModUtils.isMaster(blackSlime.level())) {
+                    if (event.getEntity() instanceof Player player) {
+                        player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0, false, false, false));
+                    }
+                } else if (ModUtils.isExpert(blackSlime.level())) {
+                    if (blackSlime.level().random.nextFloat() <= 0.5F) {
+                        if (event.getEntity() instanceof Player player) {
+                            player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0, false, false, false));
+                        }
+                    }
+                }
+            }
+        }
+        if (event.getSource().getEntity() instanceof BaseSlime slime) {
+            if (slime.getType().equals(ModEntities.ICE_SLIME.get())) {
+                if (ModUtils.isMaster(slime.level())) {
+                    if (event.getEntity() instanceof Player player) {
+                        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
+                    }
+                } else if (ModUtils.isExpert(slime.level())) {
+                    if (slime.level().random.nextFloat() <= 0.5F) {
+                        if (event.getEntity() instanceof Player player) {
+                            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent
