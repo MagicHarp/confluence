@@ -1,24 +1,12 @@
 package org.confluence.mod.item.gun;
 
 import net.minecraftforge.registries.RegistryObject;
-import org.confluence.mod.item.ModItems;
-import org.confluence.mod.util.EnumRegister;
 
-import java.util.function.Supplier;
+import static org.confluence.mod.item.ModItems.ITEMS;
 
-public enum GunItems implements EnumRegister<AbstractGunItem> {
-    HANDGUN("handgun", HandGunItem::new);
-
-    private final RegistryObject<AbstractGunItem> value;
-
-    GunItems(String id, Supplier<AbstractGunItem> supplier) {
-        this.value = ModItems.ITEMS.register(id, supplier);
-    }
-
-    @Override
-    public RegistryObject<AbstractGunItem> getValue() {
-        return value;
-    }
+public final class GunItems {
+    public static final RegistryObject<HandGunItem> HANDGUN = ITEMS.register("handgun", HandGunItem::new);
+    public static final RegistryObject<MusketGunItem> MUSKET = ITEMS.register("musket", MusketGunItem::new);
 
     public static void init() {}
 }

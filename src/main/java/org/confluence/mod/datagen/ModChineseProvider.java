@@ -14,6 +14,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
 import org.confluence.mod.item.curio.CurioItems;
@@ -149,6 +150,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("key.confluence.hook", "使用钩爪");
         add("key.confluence.metal_detector", "检测矿物");
+        add("key.confluence.step_stool", "上梯凳");
 
         add("curios.identifier.hook", "钩爪");
         add("curios.identifier.accessory", "配饰");
@@ -1620,6 +1622,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(SUSPICIOUS_LOOKING_EYE.get(), "可疑眼球");
         add(SLIME_CROWN.get(), "史莱姆皇冠");
         add(DEMON_HEART.get(), "恶魔之心");
+        add(MAGIC_CONCH.get(), "魔法海螺");
+        add(DEMON_CONCH.get(), "恶魔海螺");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
@@ -1810,6 +1814,16 @@ public class ModChineseProvider extends LanguageProvider {
 
         // 射手武器
         add(GunItems.HANDGUN.get(), "手枪");
+        add(GunItems.MUSKET.get(), "火枪");
+        add(Bows.WOODEN_SHORT_BOW.get(), "木短弓");
+        add(Bows.COPPER_SHORT_BOW.get(), "铜短弓");
+        add(Bows.TIN_SHORT_BOW.get(), "锡短弓");
+        add(Bows.IRON_SHORT_BOW.get(), "铁短弓");
+        add(Bows.LEAD_SHORT_BOW.get(), "铅短弓");
+        add(Bows.SILVER_SHORT_BOW.get(), "银短弓");
+        add(Bows.TUNGSTEN_SHORT_BOW.get(), "钨短弓");
+        add(Bows.GOLDEN_SHORT_BOW.get(), "金短弓");
+        add(Bows.PLATINUM_SHORT_BOW.get(), "铂金短弓");
         // 子弹
         add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
         add(AmmoItems.METEOR_BULLET.get(), "流星弹");

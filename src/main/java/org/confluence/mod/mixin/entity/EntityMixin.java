@@ -29,6 +29,7 @@ import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
+import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements IEntity {
+public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
     @Unique
     private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
 
@@ -116,7 +117,7 @@ public abstract class EntityMixin implements IEntity {
     @ModifyExpressionValue(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
     private boolean resetLavaImmune(boolean original) {
         AtomicBoolean inLava = new AtomicBoolean(original);
-        if (confluence$getSelf() instanceof Player living) {
+        if (self() instanceof Player living) {
             BlockPos onPos = living.getOnPos();
             if (living.level().getFluidState(onPos).is(FluidTags.LAVA) && !living.level().getFluidState(onPos.above()).is(FluidTags.LAVA))
                 return false;
@@ -136,7 +137,7 @@ public abstract class EntityMixin implements IEntity {
     @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
-        if (confluence$getSelf() instanceof LivingEntity living) {
+        if (self() instanceof LivingEntity living) {
             if (IHurtEvasion.isInvul(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
@@ -152,7 +153,7 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "setSprinting", at = @At("TAIL"))
     private void sprinting(boolean bool, CallbackInfo ci) {
-        if (bool && confluence$getSelf() instanceof Player living) {
+        if (bool && self() instanceof Player living) {
             if (confluence$cthulhuSprintingTime == 0 && CuriosUtils.hasCurio(living, CurioItems.SHIELD_OF_CTHULHU.get())) {
                 ShieldOfCthulhu.apply(living);
                 this.confluence$cthulhuSprintingTime = 32;
@@ -165,7 +166,7 @@ public abstract class EntityMixin implements IEntity {
         if (confluence$cthulhuSprintingTime > 0) this.confluence$cthulhuSprintingTime--;
         if (confluence$entity_coolDown < 0) this.confluence$entity_coolDown = 0;
 
-        Entity self = confluence$getSelf();
+        Entity self = self();
         boolean isItem = self instanceof ItemEntity;
         if (getEyeInFluidType() == ModFluids.SHIMMER.fluidType().get()) {
             if (!confluence$isInShimmer) { // 入微光
@@ -224,7 +225,7 @@ public abstract class EntityMixin implements IEntity {
     private void collidingCheck(Player player, CallbackInfo ci) {
         IEntity iEntity = (IEntity) player;
         if (iEntity.confluence$isOnCthulhuSprinting()) {
-            Entity self = confluence$getSelf();
+            Entity self = self();
             Vec3 vector = player.getDeltaMovement();
             self.addDeltaMovement(new Vec3(vector.x * 1.6, 0.6, vector.z * 1.6));
             self.hurt(damageSources().playerAttack(player), 7.8F);
@@ -235,14 +236,9 @@ public abstract class EntityMixin implements IEntity {
 
     @Inject(method = "fireImmune", at = @At("RETURN"), cancellable = true)
     private void fireProof(CallbackInfoReturnable<Boolean> cir) {
-        if (confluence$getSelf() instanceof IFishingHook fishingHook) {
+        if (self() instanceof IFishingHook fishingHook) {
             cir.setReturnValue(fishingHook.confluence$isLavaHook());
         }
-    }
-
-    @Unique
-    private Entity confluence$getSelf() {
-        return (Entity) (Object) this;
     }
 
     @Unique

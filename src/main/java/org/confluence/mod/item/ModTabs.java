@@ -14,6 +14,7 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.IconItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.common.SpawnEggs;
@@ -266,6 +267,8 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.MAGIC_MIRROR.get());
                 output.accept(ModItems.ICE_MIRROR.get());
+                output.accept(ModItems.MAGIC_CONCH.get());
+                output.accept(ModItems.DEMON_CONCH.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_WATER_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_LAVA_BUCKET.get());
@@ -305,7 +308,17 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.THROWING_KNIVES.get());
                 output.accept(ModItems.SHURIKEN.get());
-                for (GunItems gunItems : GunItems.values()) output.accept(gunItems.get());
+                output.accept(Bows.WOODEN_SHORT_BOW.get());
+                output.accept(Bows.COPPER_SHORT_BOW.get());
+                output.accept(Bows.TIN_SHORT_BOW.get());
+                output.accept(Bows.IRON_SHORT_BOW.get());
+                output.accept(Bows.LEAD_SHORT_BOW.get());
+                output.accept(Bows.SILVER_SHORT_BOW.get());
+                output.accept(Bows.TUNGSTEN_SHORT_BOW.get());
+                output.accept(Bows.GOLDEN_SHORT_BOW.get());
+                output.accept(Bows.PLATINUM_SHORT_BOW.get());
+                output.accept(GunItems.HANDGUN.get());
+                output.accept(GunItems.MUSKET.get());
                 for (AmmoItems ammoItems : AmmoItems.values()) output.accept(ammoItems.get());
             })
             .build());
@@ -356,7 +369,12 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MECHANICAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mechanical"))
             .displayItems((parameters, output) -> {
-                // 功能性方块
+                output.accept(ModItems.RED_WRENCH.get());
+                output.accept(ModItems.GREEN_WRENCH.get());
+                output.accept(ModItems.BLUE_WRENCH.get());
+                output.accept(ModItems.YELLOW_WRENCH.get());
+                output.accept(ModItems.WIRE_CUTTER.get());
+                output.accept(CurioItems.SPECTRE_GOGGLES.get());
                 output.accept(ECHO_BLOCK.get());
                 for (BoulderBlock.Variant variant : BoulderBlock.Variant.values()) output.accept(variant.get());
                 output.accept(INSTANTANEOUS_EXPLOSION_TNT.get());

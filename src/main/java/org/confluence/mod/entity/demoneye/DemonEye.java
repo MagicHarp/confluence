@@ -62,17 +62,17 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         }
         if (checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
             // 新月100%，其他80%
-            if (level.getMoonPhase() == 4) {
-                if (pPos.getY() < 260 && level.isNight()) {
+            if (pPos.getY() < 260 && level.isNight()) {
+                if (level.getMoonPhase() == 4) {
                     for (BlockPos.MutableBlockPos blockPos = pPos.mutable(); blockPos.getY() < level.getMaxBuildHeight(); blockPos.move(0, 1, 0)) {
                         if (level.getBlockState(blockPos).isCollisionShapeFullBlock(level, blockPos)) {
                             return false;
                         }
                     }
+                    return true;
+                } else {
+                    return level.random.nextInt(99) < 80;
                 }
-                return true;
-            } else {
-                return level.random.nextInt(99) < 80;
             }
         }
         return false;

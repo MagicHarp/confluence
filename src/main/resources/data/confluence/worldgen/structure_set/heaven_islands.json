@@ -4,7 +4,11 @@
     "salt": 17811220,
     "separation": 60,
     "spacing": 65,
-    "spread_type": "triangular"
+    "spread_type": "triangular",
+    "exclusion_zone": {
+      "chunk_count": 16,
+      "other_set": "confluence:air"
+    }
   },
   "structures": [{
     "structure": "confluence:heaven_islands",

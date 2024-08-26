@@ -47,6 +47,7 @@ import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
 import org.confluence.mod.fluid.ModFluids;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
@@ -105,6 +106,7 @@ public final class ModClient {
             ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
+            Bows.registerPull();
         });
     }
 

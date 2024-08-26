@@ -120,6 +120,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");
+        add("key.confluence.step_stool", "Step Stool");
 
         add("curios.identifier.hook", "Hook");
         add("curios.identifier.accessory", "Accessory");
@@ -257,6 +258,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
         add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
+
+        add("item.confluence.magic_conch.pos", "Pos: [%s, %s, %s]");
 
         add("death.attack.falling_star", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");

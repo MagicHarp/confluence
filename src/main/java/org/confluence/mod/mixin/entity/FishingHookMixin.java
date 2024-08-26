@@ -27,6 +27,7 @@ import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.accessor.LootParamsAccessor;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
+import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,7 +42,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 @Mixin(FishingHook.class)
-public abstract class FishingHookMixin implements IFishingHook {
+public abstract class FishingHookMixin implements IFishingHook, SelfGetter<FishingHook> {
     @Unique
     private static final EntityDataAccessor<Boolean> DATA_LAVA = SynchedEntityData.defineId(FishingHook.class, EntityDataSerializers.BOOLEAN);
 
@@ -58,13 +59,13 @@ public abstract class FishingHookMixin implements IFishingHook {
     @Unique
     @Override
     public void confluence$setIsLavaHook() {
-        confluence$getSelf().getEntityData().set(DATA_LAVA, true);
+        self().getEntityData().set(DATA_LAVA, true);
     }
 
     @Unique
     @Override
     public boolean confluence$isLavaHook() {
-        return confluence$getSelf().getEntityData().get(DATA_LAVA);
+        return self().getEntityData().get(DATA_LAVA);
     }
 
     @Unique
@@ -165,24 +166,19 @@ public abstract class FishingHookMixin implements IFishingHook {
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private void define(CallbackInfo ci) {
-        confluence$getSelf().getEntityData().define(DATA_LAVA, false);
+        self().getEntityData().define(DATA_LAVA, false);
     }
 
     @ModifyArg(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/loot/LootDataManager;getLootTable(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/world/level/storage/loot/LootTable;"))
     private ResourceLocation modifyLoot(ResourceLocation par1) {
         if (confluence$isInLava()) return ModLootTables.FISHING_LAVA;
-        if (confluence$getSelf().getType() == EntityType.FISHING_BOBBER) return par1;
+        if (self().getType() == EntityType.FISHING_BOBBER) return par1;
         return ModLootTables.FISH;
     }
 
     @Unique
-    private FishingHook confluence$getSelf() {
-        return (FishingHook) (Object) this;
-    }
-
-    @Unique
     private boolean confluence$isInLava() {
-        FishingHook self = confluence$getSelf();
+        FishingHook self = self();
         return self.level().getFluidState(self.blockPosition()).is(FluidTags.LAVA);
     }
 }

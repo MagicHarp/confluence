@@ -1,0 +1,6 @@
+{
+    "parent": "confluence:item/copper_short_bow",
+    "textures": {
+        "layer0": "confluence:item/copper_short_bow_pulling_0"
+    }
+}
