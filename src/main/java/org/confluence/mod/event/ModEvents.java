@@ -103,10 +103,11 @@ public final class ModEvents {
 
             Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "tr_crimson"), 1));
             Regions.register(new TheCorruptionRegion(new ResourceLocation(MODID, "the_corruption"), 1));
-            Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 0));
-            Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 0));
+            Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 1));
+            Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 1));
             Regions.register(new GlowingMushroomRegion(new ResourceLocation(MODID, "glowing_mushroom"), 1));
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, SurfaceRuleData.makeRules());
 
             Confluence.MINECART_CURIO.put(Minecart.class, Items.MINECART);
             Confluence.CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
