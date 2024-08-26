@@ -26,6 +26,7 @@ public final class ModFeatures {
 
     public static final RegistryObject<BoulderTrapFeature> BOULDER_TRAP = FEATURES.register("boulder_trap", () -> new BoulderTrapFeature(BoulderTrapFeature.Config.CODEC));
     public static final RegistryObject<DartTrapFeature> DART_TRAP = FEATURES.register("dart_trap", () -> new DartTrapFeature(DartTrapFeature.Config.CODEC));
+    public static final RegistryObject<JewelryTreeFeature> JEWELRY_TREE = FEATURES.register("jewelry_tree", () -> new JewelryTreeFeature(JewelryTreeFeature.Config.CODEC));
 
     static @NotNull BlockState getPressurePlate(WorldGenLevel level, BlockPos supportPos) {
         return level.isStateAtPosition(supportPos, blockState -> blockState.is(Blocks.DEEPSLATE)) ?
