@@ -159,11 +159,12 @@ public final class ModUtils {
     }
     /**
      * 获得两个位置之间的方向向量
-     * 若preserveShorterVectors为true且两点之间的距离大于length则将向量长度重设为length
+     * 若preserveShorterVectors为true且两点之间的距离小于length则不会改变向量长度
      * @param start 开始位置的位置向量
      * @param end 结束位置的位置向量
      * @param length 返回向量的长度
-     * @param preserveShorterVectors 返回向量的长度
+     * @param defaultVec 两点重合时返回的默认向量（注：直接原样返回，不会判定该向量的长度）
+     * @param preserveShorterVectors 若向量比length短，是否保留原向量
      * */
     public static Vec3 getDirection(Vec3 start, Vec3 end, double length,
                                     Vec3 defaultVec, boolean preserveShorterVectors) {

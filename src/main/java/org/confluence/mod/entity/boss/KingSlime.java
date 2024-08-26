@@ -1,5 +1,6 @@
 package org.confluence.mod.entity.boss;
 
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +13,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.Control;
+import net.minecraft.world.entity.ai.control.JumpControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -22,24 +28,181 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.opengl.INTELBlackholeRender;
 
 import java.util.List;
 
 import static org.confluence.mod.util.ModUtils.isExpert;
 import static org.confluence.mod.util.ModUtils.isMaster;
 
-public class KingSlime extends Slime implements DeathAnimOptions {
-    private static final FloatRGB COLOR = FloatRGB.fromInteger(0x73bcf4);
+public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
+    private static final int COLOR_INT = 0x73bcf4;
+    // 缩小/膨胀时长，单位：刻
+    private static final int SHRINK_ENLARGE_DURATION = 60;
+    // 大师 专家 普通
+    private static final int[] TOTAL_SPLITS = {75, 50, 30};
+    private static final float[] MAX_HEALTHS = {928f, 812f, 580f};
+    private static final float[] DAMAGE = {12.5f, 9f, 4.5f};
+    private static final float[] JUMP_SPEED_HORIZONTAL = {1f, 1.25f, 1.5f};
+    private static final float[] JUMP_SPEED_VERTICAL = {1.5f, 1.75f, 2f};
+    private static final float[] JUMP_SPEED_VERTICAL_THIRD = {2f, 2.25f, 2.5f};
+    private static final float[] SWIM_SPEED_HORIZONTAL = {0.1f, 0.15f, 0.2f};
+    private static final float FLOATING_ACCELERATION = 0.05f;
+    private static final FloatRGB COLOR = FloatRGB.fromInteger(COLOR_INT);
     private static final float[] BLOOD_COLOR = COLOR.mixture(FloatRGB.ZERO, 0.5f).toArray();
+    private static final State<KingSlime> STATE_NORMAL = new State<>() {
+        private Vec3 horVel = Vec3.ZERO;
+        @Override
+        public void tick(KingSlime boss) {
+            // 脱战
+            List<Player> playersInRange = boss.getNearbyPlayers(100);
+            if (! boss.shouldDisappear) {
+                // 不要每次都初始化playersInRange2
+                if (playersInRange.isEmpty() && boss.getNearbyPlayers(150).isEmpty()) {
+                    boss.shouldDisappear = true;
+                }
+            }
+            // 更新BOSS大小
+            boss.setSize( boss.getMaxSize(), false );
+            // 在地面上/液体中
+            boolean inLiquid = boss.isInWater() || boss.isInLava();
+            if (boss.onGround() || inLiquid) {
+                boss.indexAI ++;
+                // 缩地消失
+                if (boss.shouldDisappear) {
+                    boss.toState(STATE_SHRINK);
+                    return;
+                }
+                double horizontalSpd;
+                double verticalAcc;
+                // 漂浮、移动
+                if (inLiquid) {
+                    horizontalSpd = SWIM_SPEED_HORIZONTAL[boss.difficultyIdx];
+                    verticalAcc = FLOATING_ACCELERATION;
+                }
+                // 跳跃
+                else {
+                    switch (boss.indexAI) {
+                        case 20, 40, 60 -> {
+                            horizontalSpd = JUMP_SPEED_HORIZONTAL[boss.difficultyIdx];
+                            verticalAcc = (boss.indexAI == 60 ? JUMP_SPEED_VERTICAL_THIRD : JUMP_SPEED_VERTICAL)[boss.difficultyIdx];
+                        }
+                        default -> {
+                            horizontalSpd = 0;
+                            verticalAcc = 0;
+                        }
+                    }
+                }
+                // 调整速度
+                horVel = ModUtils.rotToDir(boss.getYRot(), 0).scale(horizontalSpd);
+                if (verticalAcc != 0) {
+                    Vec3 motion = boss.getDeltaMovement();
+                    motion = motion.add(0, verticalAcc, 0);
+                    boss.setDeltaMovement(motion);
+                }
+
+                // 下一阶段
+                if (boss.indexAI >= 65) {
+                    boss.toState(STATE_SHRINK);
+                }
+                // 水平方向速度更新
+                boss.setHorizontalSpeed(horVel);
+            }
+            // 重置水平方向速度
+            else {
+                horVel = Vec3.ZERO;
+            }
+        }
+    };
+    private static final State<KingSlime> STATE_SHRINK = new State<>() {
+        @Override
+        public void tick(KingSlime boss) {
+            boss.indexAI ++;
+            // 防止BOSS水平方向的移动
+            boss.setHorizontalSpeed(Vec3.ZERO);
+            // 更新BOSS大小
+            int maxSize = boss.getMaxSize();
+            boss.setSize( Mth.clamp(1, boss.getMaxSize() *
+                    (SHRINK_ENLARGE_DURATION - boss.indexAI) / SHRINK_ENLARGE_DURATION, maxSize), false );
+            if (boss.indexAI >= SHRINK_ENLARGE_DURATION) {
+                // BOSS脱战
+                if (boss.shouldDisappear) {
+                    boss.discard();
+                    return;
+                }
+                // TP到玩家位置并开始膨胀
+                if (boss.level() instanceof ServerLevel serverLevel) {
+                    Vec3 closestPlayerPos;
+                    if (serverLevel.getRandomPlayer() != null) {
+                        closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
+                        boss.teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
+                    }
+                }
+                boss.toState(STATE_ENLARGE);
+            }
+        }
+    };
+    private static final State<KingSlime> STATE_ENLARGE = new State<>() {
+        @Override
+        public void tick(KingSlime boss) {
+            boss.indexAI ++;
+            // 防止BOSS水平方向的移动
+            boss.setHorizontalSpeed(Vec3.ZERO);
+            // 更新BOSS大小
+            int maxSize = boss.getMaxSize();
+            boss.setSize( Mth.clamp(1, boss.getMaxSize() *
+                    boss.indexAI / SHRINK_ENLARGE_DURATION, maxSize), false );
+            if (boss.indexAI >= SHRINK_ENLARGE_DURATION) {
+                boss.toState(STATE_NORMAL);
+            }
+        }
+    };
+
+    // 变量
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
-    private int waitTick;
+    private int indexAI;
+    private int difficultyIdx;
+    private boolean shouldDisappear;
+    private State<KingSlime> AIState;
+    // 重写跳跃-水平方向的移动
+    private Vec3 horMoveDir;
 
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
-        this.waitTick = 40;
-        init();
+        this.shouldDisappear = false;
+        this.difficultyIdx = isMaster(level()) ? 0 : isExpert(level()) ? 1 : 2;
+        this.indexAI = 0;
+        this.AIState = STATE_NORMAL;
+
+        // 重写跳跃-防止垂直方向的跳跃
+        this.jumpControl = new JumpControl(this) {
+            @Override
+            public void jump() {}
+        };
+        // 水平方向移动
+        horMoveDir = Vec3.ZERO;
+
+        attrInit();
     }
+
+    @Override
+    public void toState(State newState) {
+        if (newState == this.AIState)
+            return;
+        this.AIState.leave(this);
+        this.AIState = newState;
+        this.AIState.enter(this);
+        // 重置index
+        this.indexAI = 0;
+    }
+
+    @Override
+    public List<Player> getNearbyPlayers(double radius) {
+        return level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(radius));
+    }
+
 
     public static AttributeSupplier.Builder createSlimeAttributes() {
         return Mob.createMobAttributes()
@@ -49,25 +212,46 @@ public class KingSlime extends Slime implements DeathAnimOptions {
             .add(Attributes.FOLLOW_RANGE, 100.0);
     }
 
-    private void init() {
-        getAttribute(Attributes.MAX_HEALTH).setBaseValue(isMaster(level()) ? 928.0 : isExpert(level()) ? 812.0 : 580.0);
-        setHealth(isMaster(level()) ? 928.0F : isExpert(level()) ? 812.0F : 580.0F);
-        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(isMaster(level()) ? 12.5 : isExpert(level()) ? 9.0 : 4.5);
+    private void setHorizontalSpeed(Vec3 newDir) {
+        Vec3 vel = getDeltaMovement();
+        vel = vel.with(Direction.Axis.X, newDir.x()).with(Direction.Axis.Z, newDir.z());
+        setDeltaMovement(vel);
+    }
+
+    // 原版跳跃依旧会略微顿一下，给调整到几乎不会触发的间隔
+    @Override
+    protected int getJumpDelay() {
+        return 999999;
+    }
+
+    private void attrInit() {
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx]);
+        setHealth(MAX_HEALTHS[difficultyIdx]);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(DAMAGE[difficultyIdx]);
+    }
+
+    private int getMaxSize() {
+        return Math.round(getHealth() / getMaxHealth() * 10) + 6;
     }
 
     @Override
+    public void AI() {
+        // tick
+        if (! level().isClientSide()) {
+            this.AIState.tick(this);
+//            ModUtils.testMessage(level(), this.jumping + ", " + getJumpDelay());
+        }
+    }
+    @Override
     public void tick() {
-        if (!level().isClientSide) {
-            if (waitTick > 0) {
-                waitTick--;
-            }
-        }
+        // 先进行super.tick()
+        super.tick();
+
+        // 更新boss血条
         bossEvent.setProgress(getHealth() / getMaxHealth());
+        // 不会受到摔落伤害
         resetFallDistance();
-        if (level().random.nextDouble() <= (isMaster(level()) ? 0.05 : isExpert(level()) ? 0.035 : 0.015)) {
-            Vec3 motion = getDeltaMovement();
-            setDeltaMovement(motion.x, motion.y + (isMaster(level()) ? 0.6 : 0.35), motion.z);
-        }
+        // 落地的粒子效果，十分的高级
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
             for (int j = 0; j < i * 8; ++j) {
@@ -78,37 +262,11 @@ public class KingSlime extends Slime implements DeathAnimOptions {
                 level().addParticle(ModParticles.ITEM_GEL.get(), getX() + (double) f2, getY(), getZ() + (double) f3, COLOR.red(), COLOR.green(), COLOR.blue());
             }
         }
-        setSize((int) ((getHealth() / 600) * 7 + 4), false);
 
-        List<Player> playersInRange = level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(100));
-        List<Player> playersInRange2 = level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(150));
-        if (playersInRange.isEmpty() && playersInRange2.isEmpty()) {
-            discard();
+        // 额外的AI行为
+        if (! isNoAi()) {
+            AI();
         }
-        if (playersInRange.isEmpty() || level().random.nextFloat() <= (isMaster(level()) ? 0.05D : isExpert(level()) ? 0.03D : 0.01D)) {
-
-            if (this.waitTick == 0) {
-                for (int i = getSize(); i > 1; i--) {
-                    setSize(i, false);
-                }
-                if (level() instanceof ServerLevel serverLevel) {
-                    Vec3 closestPlayerPos;
-                    if (serverLevel.getRandomPlayer() != null) {
-                        closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
-                        teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
-                    }
-                }
-
-                playersInRange.clear();
-
-                for (int i = 1; i < (int) ((getHealth() / 600) * 7 + 4); i++) {
-                    setSize(i, false);
-                }
-                this.waitTick = 40;
-            }
-        }
-
-        super.tick();
     }
 
     @Override
@@ -123,24 +281,58 @@ public class KingSlime extends Slime implements DeathAnimOptions {
         bossEvent.removePlayer(pServerPlayer);
     }
 
+    private int getSlimesLeft() {
+        return (int) (getHealth() / getMaxHealth() * TOTAL_SPLITS[difficultyIdx]);
+    }
+    private void spawnSlime() {
+        if (level() instanceof ServerLevel serverLevel) {
+            BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, COLOR_INT, 3);
+            slime.setPos(getOnPos().getX(), getOnPos().getY() + 0.5, getOnPos().getZ());
+            if (isExpert(serverLevel)) {
+                //todo 尖刺史莱姆
+                //尖刺史莱姆，你的头顶怎么尖尖的
+            }
+            serverLevel.addFreshEntity(slime);
+        }
+    }
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (pSource.is(DamageTypes.IN_WALL)) {
             return false;
         }
-        if (level() instanceof ServerLevel serverLevel) {
-            if (level().random.nextDouble() <= (isMaster(level()) ? 0.9D : isExpert(level()) ? 0.75D : 0.5D)) {
-                BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, 0x73bcf4, 3);
-                slime.setPos(getOnPos().getX(), getOnPos().getY(), getOnPos().getZ());
-                if (isExpert(serverLevel)) {
-                    //todo 尖刺史莱姆
-                }
-                serverLevel.addFreshEntity(slime);
-            }
+        // 在大小改变时不会受伤
+        if (AIState != STATE_NORMAL) {
+            return false;
         }
-        return super.hurt(pSource, pAmount);
+        // 记录受伤前生命对应的剩余分裂次数
+        int lastSlimesLeft = getSlimesLeft();
+
+        boolean result = super.hurt(pSource, pAmount);
+
+        // 根据受伤前后剩余分裂次数差生成史莱姆
+        for (int i = 0; i < lastSlimesLeft - getSlimesLeft(); i ++) {
+            spawnSlime();
+        }
+
+        return result;
     }
 
+    // 不要被推来推去
+    @Override
+    public boolean isPushable(){
+        return false;
+    }
+
+    // 缩地期间不要伤害玩家
+    public void playerTouch(Player pEntity) {
+        if (AIState != STATE_NORMAL) {
+            return;
+        }
+
+        super.playerTouch(pEntity);
+    }
+
+    // 不要让史莱姆生成默认落地粒子
     @Override
     protected boolean spawnCustomParticles() {
         return true;

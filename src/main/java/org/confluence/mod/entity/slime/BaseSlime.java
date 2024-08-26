@@ -32,6 +32,8 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
     public BaseSlime(EntityType<? extends Slime> slime, Level level, int color, int size) {
         super(slime, level);
         this.size = size;
+        // setSize在constructor中调用时size还没更新，再变一遍
+        setSize(size, false);
         ItemStack itemStack = new ItemStack(Materials.GEL.get());
         ColoredItem.setColor(itemStack, color);
         this.itemStack = itemStack;
