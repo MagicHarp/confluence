@@ -1,5 +1,6 @@
 package org.confluence.mod.entity.boss;
 
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +13,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.Control;
+import net.minecraft.world.entity.ai.control.JumpControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Slime;
@@ -26,6 +30,7 @@ import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.opengl.INTELBlackholeRender;
 
 import java.util.List;
 
@@ -35,15 +40,20 @@ import static org.confluence.mod.util.ModUtils.isMaster;
 public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int COLOR_INT = 0x73bcf4;
     // 缩小/膨胀时长，单位：刻
-    private static final int SHRINK_ENLARGE_DURATION = 40;
+    private static final int SHRINK_ENLARGE_DURATION = 60;
     // 大师 专家 普通
     private static final int[] TOTAL_SPLITS = {75, 50, 30};
     private static final float[] MAX_HEALTHS = {928f, 812f, 580f};
     private static final float[] DAMAGE = {12.5f, 9f, 4.5f};
+    private static final float[] JUMP_SPEED_HORIZONTAL = {1f, 1.25f, 1.5f};
+    private static final float[] JUMP_SPEED_VERTICAL = {1.5f, 1.75f, 2f};
+    private static final float[] JUMP_SPEED_VERTICAL_THIRD = {2f, 2.25f, 2.5f};
+    private static final float[] SWIM_SPEED_HORIZONTAL = {0.1f, 0.15f, 0.2f};
+    private static final float FLOATING_ACCELERATION = 0.05f;
     private static final FloatRGB COLOR = FloatRGB.fromInteger(COLOR_INT);
     private static final float[] BLOOD_COLOR = COLOR.mixture(FloatRGB.ZERO, 0.5f).toArray();
-    // AI状态
     private static final State<KingSlime> STATE_NORMAL = new State<>() {
+        private Vec3 horVel = Vec3.ZERO;
         @Override
         public void tick(KingSlime boss) {
             // 脱战
@@ -56,24 +66,53 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
             }
             // 更新BOSS大小
             boss.setSize( boss.getMaxSize(), false );
-            // 仅在地面时增加tick
-            if (boss.onGround()) {
+            // 在地面上/液体中
+            boolean inLiquid = boss.isInWater() || boss.isInLava();
+            if (boss.onGround() || inLiquid) {
                 boss.indexAI ++;
                 // 缩地消失
                 if (boss.shouldDisappear) {
                     boss.toState(STATE_SHRINK);
                     return;
                 }
-                switch (boss.indexAI) {
-                    // 跳跃
-                    case 20, 40, 60 -> {
-                        Vec3 motion = boss.getDeltaMovement();
-                        motion = motion.add(0, isMaster(boss.level()) ? 0.6 : 0.35, 0);
-                        boss.setDeltaMovement(motion);
-                    }
-                    // 下一阶段
-                    case 65 -> boss.toState(STATE_SHRINK);
+                double horizontalSpd;
+                double verticalAcc;
+                // 漂浮、移动
+                if (inLiquid) {
+                    horizontalSpd = SWIM_SPEED_HORIZONTAL[boss.difficultyIdx];
+                    verticalAcc = FLOATING_ACCELERATION;
                 }
+                // 跳跃
+                else {
+                    switch (boss.indexAI) {
+                        case 20, 40, 60 -> {
+                            horizontalSpd = JUMP_SPEED_HORIZONTAL[boss.difficultyIdx];
+                            verticalAcc = (boss.indexAI == 60 ? JUMP_SPEED_VERTICAL_THIRD : JUMP_SPEED_VERTICAL)[boss.difficultyIdx];
+                        }
+                        default -> {
+                            horizontalSpd = 0;
+                            verticalAcc = 0;
+                        }
+                    }
+                }
+                // 调整速度
+                horVel = ModUtils.rotToDir(boss.getYRot(), 0).scale(horizontalSpd);
+                if (verticalAcc != 0) {
+                    Vec3 motion = boss.getDeltaMovement();
+                    motion = motion.add(0, verticalAcc, 0);
+                    boss.setDeltaMovement(motion);
+                }
+
+                // 下一阶段
+                if (boss.indexAI >= 65) {
+                    boss.toState(STATE_SHRINK);
+                }
+                // 水平方向速度更新
+                boss.setHorizontalSpeed(horVel);
+            }
+            // 重置水平方向速度
+            else {
+                horVel = Vec3.ZERO;
             }
         }
     };
@@ -81,6 +120,8 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         @Override
         public void tick(KingSlime boss) {
             boss.indexAI ++;
+            // 防止BOSS水平方向的移动
+            boss.setHorizontalSpeed(Vec3.ZERO);
             // 更新BOSS大小
             int maxSize = boss.getMaxSize();
             boss.setSize( Mth.clamp(1, boss.getMaxSize() *
@@ -107,6 +148,8 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         @Override
         public void tick(KingSlime boss) {
             boss.indexAI ++;
+            // 防止BOSS水平方向的移动
+            boss.setHorizontalSpeed(Vec3.ZERO);
             // 更新BOSS大小
             int maxSize = boss.getMaxSize();
             boss.setSize( Mth.clamp(1, boss.getMaxSize() *
@@ -123,6 +166,8 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private int difficultyIdx;
     private boolean shouldDisappear;
     private State<KingSlime> AIState;
+    // 重写跳跃-水平方向的移动
+    private Vec3 horMoveDir;
 
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
@@ -131,19 +176,15 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         this.indexAI = 0;
         this.AIState = STATE_NORMAL;
 
-        attrInit();
-    }
+        // 重写跳跃-防止垂直方向的跳跃
+        this.jumpControl = new JumpControl(this) {
+            @Override
+            public void jump() {}
+        };
+        // 水平方向移动
+        horMoveDir = Vec3.ZERO;
 
-    @Override
-    protected void registerGoals() {
-//        this.goalSelector.addGoal(1, new Slime.SlimeFloatGoal(this));
-//        this.goalSelector.addGoal(2, new Slime.SlimeAttackGoal(this));
-//        this.goalSelector.addGoal(3, new Slime.SlimeRandomDirectionGoal(this));
-//        this.goalSelector.addGoal(5, new Slime.SlimeKeepOnJumpingGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_289461_) -> {
-            return Math.abs(p_289461_.getY() - this.getY()) <= 4.0D;
-        }));
-//        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        attrInit();
     }
 
     @Override
@@ -171,6 +212,18 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
             .add(Attributes.FOLLOW_RANGE, 100.0);
     }
 
+    private void setHorizontalSpeed(Vec3 newDir) {
+        Vec3 vel = getDeltaMovement();
+        vel = vel.with(Direction.Axis.X, newDir.x()).with(Direction.Axis.Z, newDir.z());
+        setDeltaMovement(vel);
+    }
+
+    // 原版跳跃依旧会略微顿一下，给调整到几乎不会触发的间隔
+    @Override
+    protected int getJumpDelay() {
+        return 999999;
+    }
+
     private void attrInit() {
         getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx]);
         setHealth(MAX_HEALTHS[difficultyIdx]);
@@ -178,7 +231,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     }
 
     private int getMaxSize() {
-        return (int) ((getHealth() / getMaxHealth()) * 7 + 4);
+        return Math.round(getHealth() / getMaxHealth() * 10) + 6;
     }
 
     @Override
@@ -186,7 +239,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         // tick
         if (! level().isClientSide()) {
             this.AIState.tick(this);
-//            ModUtils.testMessage(level(), this.AIState + " : " + this.indexAI);
+//            ModUtils.testMessage(level(), this.jumping + ", " + getJumpDelay());
         }
     }
     @Override
