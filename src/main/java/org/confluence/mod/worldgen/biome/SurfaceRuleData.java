@@ -21,6 +21,7 @@ public class SurfaceRuleData {
 
     //地狱
     private static final SurfaceRules.RuleSource ASH_BLOCK = makeStateRule(ModBlocks.ASH_BLOCK.get());
+    private static final SurfaceRules.RuleSource ASH_GRASS_BLOCK = makeStateRule(ModBlocks.ASH_GRASS_BLOCK.get());
 
     public static SurfaceRules.RuleSource makeRules() {
         SurfaceRules.ConditionSource isAtOrAboveWaterLevel = SurfaceRules.waterBlockCheck(-1, 0);
@@ -33,6 +34,7 @@ public class SurfaceRuleData {
         SurfaceRules.RuleSource anotherCrimsonGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, TR_CRIMSON_GRASS_BLOCK), DIRT);
         SurfaceRules.RuleSource corruptStoneSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, EBONY_STONE), EBONY_STONE);
         SurfaceRules.RuleSource ashSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 300, CaveSurface.FLOOR), ASH_BLOCK));
+        SurfaceRules.RuleSource ashGrassSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isAtOrAboveWaterLevel, ASH_GRASS_BLOCK), ASH_BLOCK);
         SurfaceRules.RuleSource mushroomSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isUnderWaterLevel, MUSHROOM_GRASS_BLOCK), CLAY);
         SurfaceRules.RuleSource mudSurface = SurfaceRules.sequence(SurfaceRules.ifTrue(isUnderWaterLevel, MUD), CLAY);
         SurfaceRules.ConditionSource netherrackNoised = SurfaceRules.noiseCondition(Noises.NETHERRACK, 0.54D);
@@ -47,7 +49,8 @@ public class SurfaceRuleData {
                 SurfaceRules.sequence(
                     SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, anotherCrimsonGrassSurface))),
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ASH_FOREST),
-                SurfaceRules.sequence(ashSurface)),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ashGrassSurface))),
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ASH_WASTELAND),
                 SurfaceRules.sequence(ashSurface)),
             SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.GLOWING_MUSHROOM),
