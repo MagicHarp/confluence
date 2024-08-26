@@ -28,6 +28,7 @@
         "client.accessor.MinecraftAccessor",
         "client.accessor.ModelPart$CubeAccessor",
         "client.accessor.ModelPartAccessor",
+        "client.accessor.PostPassAccessor",
         "client.accessor.RenderChunkInfoAccessor",
         "integretion.shimmer.ForgePlatformHelperMixin",
         "integretion.shimmer.LightManagerMixin"

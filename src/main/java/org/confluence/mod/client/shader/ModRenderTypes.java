@@ -67,6 +67,7 @@ public final class ModRenderTypes extends RenderStateShard {
     public static class Shaders {
         private static ShaderInstance entityDynamic;
         private static ShaderInstance shimmerLiquid;
+        public static ShaderInstance aether;
 
         @SubscribeEvent
         public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
@@ -85,6 +86,13 @@ public final class ModRenderTypes extends RenderStateShard {
                     DefaultVertexFormat.BLOCK),
                 shader -> shimmerLiquid = shader
             );
+//            event.registerShader(
+//                new ShaderInstance(
+//                    resourceProvider,
+//                    new ResourceLocation(MODID, "color"),
+//                    DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR),
+//                shader -> aether = shader
+//            );
         }
     }
 }

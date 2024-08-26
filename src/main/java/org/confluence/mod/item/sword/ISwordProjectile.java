@@ -20,14 +20,14 @@ public interface ISwordProjectile { // 剑气
     default float getVelocity(LivingEntity living) {
         float velocity = getBaseVelocity();
         AttributeInstance attributeInstance = living.getAttribute(ModAttributes.getRangedVelocity());
-        if (attributeInstance != null) velocity *= (float) attributeInstance.getValue();
+        if (attributeInstance != null) return velocity * (float) attributeInstance.getValue();
         return velocity;
     }
 
     default int getAttackSpeed(LivingEntity living) {
         int cooldown = getCooldown();
         AttributeInstance attributeInstance = living.getAttribute(Attributes.ATTACK_SPEED);
-        if (attributeInstance != null) return Math.max((int) (cooldown - cooldown * attributeInstance.getValue()), 0);
+        if (attributeInstance != null) return Math.max(cooldown - (int) (attributeInstance.getValue() / 3.0), 0);
         return cooldown;
     }
 }
