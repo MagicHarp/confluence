@@ -87,7 +87,7 @@ public final class ModFluids {
         SHIMMER = FluidTriple.builder(new ResourceLocation(MODID, "shimmer"))
             .properties(FluidType.Properties.create()
                 .density(800)
-                .lightLevel(7)
+                .lightLevel(10)
                 .viscosity(800)
                 .canSwim(false)
                 .motionScale(0.02)
@@ -175,28 +175,7 @@ public final class ModFluids {
         addItem(ANGLER_EARRING.get(), TACKLE_BOX.get());
         addItem(TACKLE_BOX.get(), HIGH_TEST_FISHING_LINE.get());
         // 火把转化
-        addItem(Torches.RED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.ORANGE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.YELLOW_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.GREEN_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.BLUE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.WHITE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.PURPLE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.ICE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.PINK_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.BONE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.ULTRABRIGHT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.DEMON_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.CURSED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.ICHOR_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.RAINBOW_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.DESERT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.CORAL_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.CORRUPT_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.CRIMSON_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.HALLOWED_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.JUNGLE_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
-        addItem(Torches.MUSHROOM_TORCH.item.get(), Torches.AETHER_TORCH.item.get());
+        addItem(ModTags.Items.TORCH, Torches.AETHER_TORCH.item.get(), 1);
         // 匣子转化
         // 宝石转化
         addItem(Materials.TOPAZ.get(), Materials.TR_AMETHYST.get());

@@ -251,7 +251,7 @@ public interface ModPrefix extends IExtensibleEnum {
         FRENZYING(-0.15F, 0.15F, 0, 0, 0, 0, -0.0445F), // 暴怒
         UNREAL(0.15F, 0.1F, 0.05F, 0.1F, 0.15F, 2, 2.0985F); // 虚幻
 
-        public final float attackDamage;
+        public final float rangedDamage;
         public final float attackSpeed;
         public final float criticalChance;
         public final float velocity;
@@ -259,8 +259,8 @@ public interface ModPrefix extends IExtensibleEnum {
         public final int tier;
         public final float value;
 
-        Ranged(float attackDamage, float attackSpeed, float criticalChance, float velocity, float knockBack, int tier, float value) {
-            this.attackDamage = attackDamage;
+        Ranged(float rangedDamage, float attackSpeed, float criticalChance, float velocity, float knockBack, int tier, float value) {
+            this.rangedDamage = rangedDamage;
             this.attackSpeed = attackSpeed;
             this.criticalChance = criticalChance;
             this.velocity = velocity;
@@ -272,7 +272,7 @@ public interface ModPrefix extends IExtensibleEnum {
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
             itemPrefix.name = name().toLowerCase();
-            itemPrefix.attackDamage = attackDamage;
+            itemPrefix.rangedDamage = rangedDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;
             itemPrefix.velocity = velocity;
@@ -291,7 +291,7 @@ public interface ModPrefix extends IExtensibleEnum {
         }
     }
 
-    enum MagicAndSumming implements ModPrefix {
+    enum Magic implements ModPrefix {
         MYTHIC(0.1F, 0, 0, -0.15F, 0, 2, 0.6002F), // 神秘
         ADEPT(0, 0, 0, -0.15F, 0, 1, 0.3225F), // 精巧
         MASTERFUL(0.15F, 0, 0, -0.15F, 0.05F, 2, 0.9263F), // 精湛
@@ -305,7 +305,7 @@ public interface ModPrefix extends IExtensibleEnum {
         MANIC(-0.1F, 0.1F, 0, -0.1F, 0, 1, 0.1859F), // 狂躁
         MYTHICAL(0.15F, 0.1F, 0.05F, -0.1F, 0.15F, 2, 2.0985F); // 神话
 
-        public final float attackDamage;
+        public final float rangedDamage;
         public final float attackSpeed;
         public final float criticalChance;
         public final float manaCost;
@@ -313,8 +313,8 @@ public interface ModPrefix extends IExtensibleEnum {
         public final int tier;
         public final float value;
 
-        MagicAndSumming(float attackDamage, float attackSpeed, float criticalChance, float manaCost, float knockBack, int tier, float value) {
-            this.attackDamage = attackDamage;
+        Magic(float rangedDamage, float attackSpeed, float criticalChance, float manaCost, float knockBack, int tier, float value) {
+            this.rangedDamage = rangedDamage;
             this.attackSpeed = attackSpeed;
             this.criticalChance = criticalChance;
             this.manaCost = manaCost;
@@ -326,7 +326,7 @@ public interface ModPrefix extends IExtensibleEnum {
         @Override
         public void copyTo(ItemPrefix itemPrefix) {
             itemPrefix.name = name().toLowerCase();
-            itemPrefix.attackDamage = attackDamage;
+            itemPrefix.rangedDamage = rangedDamage;
             itemPrefix.attackSpeed = attackSpeed;
             itemPrefix.criticalChance = criticalChance;
             itemPrefix.manaCost = manaCost;
@@ -340,7 +340,7 @@ public interface ModPrefix extends IExtensibleEnum {
             return tier < 0 && this != INTENSE;
         }
 
-        public static MagicAndSumming create(String name, float attackDamage, float attackSpeed, float criticalChance, float manaCost, float knockBack, int tier, float value) {
+        public static Magic create(String name, float attackDamage, float attackSpeed, float criticalChance, float manaCost, float knockBack, int tier, float value) {
             throw new IllegalStateException("Enum not extended");
         }
     }

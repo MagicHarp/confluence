@@ -30,7 +30,7 @@ public record SwordShootingPacketC2S(Item item) {
             if (mainHandItem.is(packet.item) && packet.item instanceof ISwordProjectile swordProjectile) {
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), swordProjectile.getSound(), SoundSource.AMBIENT, 1.0F, 1.0F);
                 SwordProjectile projectile = swordProjectile.getProjectile(player);
-                projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, swordProjectile.getVelocity(mainHandItem), 0.0F);
+                projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, swordProjectile.getVelocity(player), 0.0F);
                 player.level().addFreshEntity(projectile);
             }
         });

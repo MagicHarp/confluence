@@ -88,7 +88,7 @@ public final class ModItems {
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));
     public static final RegistryObject<PlayerAbilityItem> AEGIS_APPLE = ITEMS.register("aegis_apple", PlayerAbilityItem.AegisApple::new);
-    public static final RegistryObject<PlayerAbilityItem> AMBROSIA = ITEMS.register("ambrosia", () -> new PlayerAbilityItem(PlayerAbility::isAmbrosiaUsed, PlayerAbility::setAmbrosiaUsed));
+    public static final RegistryObject<PlayerAbilityItem> AMBROSIA = ITEMS.register("ambrosia", PlayerAbilityItem.Ambrosia::new);
     public static final RegistryObject<PlayerAbilityItem> GUMMY_WORM = ITEMS.register("gummy_worm", () -> new PlayerAbilityItem(PlayerAbility::isGummyWormUsed, PlayerAbility::setGummyWormUsed));
     public static final RegistryObject<PlayerAbilityItem> GALAXY_PEARL = ITEMS.register("galaxy_pearl", PlayerAbilityItem.GalaxyPearl::new);
     public static final RegistryObject<WrenchItem> RED_WRENCH = ITEMS.register("red_wrench", () -> new WrenchItem(0xFF0000));

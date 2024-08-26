@@ -3,9 +3,6 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -23,6 +20,7 @@ public class CelestialStone extends BaseCurioItem implements IMagicAttack, IProj
     public static final UUID DAMAGE_UUID = UUID.fromString("2B80C158-EBB2-39C0-E246-E401C544D9D8");
     public static final UUID CRIT_UUID = UUID.fromString("6057460F-D258-0529-6891-2BD9336D36C2");
     public static final UUID ARMOR_UUID = UUID.fromString("814ABB7D-ADB4-F0C6-B7BD-A2E3FB23EE8D");
+    public static final UUID MINING_UUID = UUID.fromString("11644D19-DAE5-3871-3C77-FC6DF7972AA4");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public CelestialStone() {
@@ -36,7 +34,8 @@ public class CelestialStone extends BaseCurioItem implements IMagicAttack, IProj
                 Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Celestial Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Celestial Stone", 0.02, AttributeModifier.Operation.ADDITION),
-                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", 4, AttributeModifier.Operation.ADDITION)
+                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Celestial Stone", 4, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Celestial Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTES;
@@ -54,12 +53,7 @@ public class CelestialStone extends BaseCurioItem implements IMagicAttack, IProj
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        LivingEntity living = slotContext.entity();
-        ModEffects.healPerSecond(living, 2.0F);
-        MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
-        if (effect == null || effect.getDuration() < 5) {
-            living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
-        }
+        ModEffects.healPerSecond(slotContext.entity(), 2.0F);
     }
 
     @Override

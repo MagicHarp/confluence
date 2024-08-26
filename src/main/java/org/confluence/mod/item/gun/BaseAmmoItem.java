@@ -1,15 +1,10 @@
 package org.confluence.mod.item.gun;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.capability.prefix.ItemPrefix;
-import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.entity.projectile.BaseAmmoEntity;
-
-import java.util.Optional;
 
 public class BaseAmmoItem extends Item {
     private final BaseAmmoEntity.Variant variant;
@@ -24,8 +19,7 @@ public class BaseAmmoItem extends Item {
         this.variant = variant;
     }
 
-    public BaseAmmoEntity getAmmoEntity(ItemStack itemStack, Player player, Level level) {
-        Optional<ItemPrefix> prefix = PrefixProvider.getPrefix(itemStack);
-        return new BaseAmmoEntity(player, level, prefix.orElse(null), variant);
+    public BaseAmmoEntity getAmmoEntity(LivingEntity living, Level level) {
+        return new BaseAmmoEntity(living, level, variant);
     }
 }

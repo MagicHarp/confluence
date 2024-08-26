@@ -14,10 +14,12 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.food.Foods;
 import org.confluence.mod.item.hook.Hooks;
+import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -68,10 +70,22 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
         );
         tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLD_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
+        tag(Tags.Items.TOOLS_BOWS).add(
+            Bows.WOODEN_SHORT_BOW.get(),
+            Bows.COPPER_SHORT_BOW.get(),
+            Bows.TIN_SHORT_BOW.get(),
+            Bows.IRON_SHORT_BOW.get(),
+            Bows.LEAD_SHORT_BOW.get(),
+            Bows.SILVER_SHORT_BOW.get(),
+            Bows.TUNGSTEN_SHORT_BOW.get(),
+            Bows.GOLDEN_SHORT_BOW.get(),
+            Bows.PLATINUM_SHORT_BOW.get()
+        );
         IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.Items.RANGED_WEAPON);
         rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_TRIDENTS);
+        for (ManaWeapons manaWeapons : ManaWeapons.values()) rangedWeapon.add(manaWeapons.get());
         tag(ModTags.Items.COIN).add(ModItems.COPPER_COIN.get(), ModItems.SILVER_COIN.get(), ModItems.GOLDEN_COIN.get(), ModItems.PLATINUM_COIN.get());
         tag(ItemTags.MUSIC_DISCS).add(ModItems.ALPHA.get());
     }

@@ -4,9 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.gun.AbstractGunItem;
 import org.confluence.mod.item.mana.IManaWeapon;
@@ -42,7 +40,7 @@ public final class PrefixProvider {
                 create(randomSource, itemStack, PrefixType.RANGED);
             }
         } else if (item instanceof IManaWeapon) {
-            create(randomSource, itemStack, PrefixType.MAGIC_AND_SUMMING);
+            create(randomSource, itemStack, PrefixType.MAGIC);
         } else if (item instanceof BaseCurioItem) {
             create(randomSource, itemStack, PrefixType.CURIO);
         }
@@ -70,33 +68,5 @@ public final class PrefixProvider {
 
     public static void unknown(ItemStack itemStack) {
         itemStack.getOrCreateTag().put(PrefixProvider.KEY, new ItemPrefix(PrefixType.UNKNOWN, itemStack).serializeNBT());
-    }
-
-    public static void applyToArrow(ItemStack itemStack, AbstractArrow abstractArrow, Level level) {
-        getPrefix(itemStack).ifPresent(itemPrefix -> {
-            abstractArrow.setBaseDamage(abstractArrow.getBaseDamage() * (1.0 + itemPrefix.attackDamage));
-            abstractArrow.setKnockback((int) Math.ceil(abstractArrow.getKnockback() * (1.0 + itemPrefix.knockBack)));
-            abstractArrow.setDeltaMovement(abstractArrow.getDeltaMovement().scale(1.0 + itemPrefix.velocity));
-            if (!abstractArrow.isCritArrow()) {
-                abstractArrow.setCritArrow(level.random.nextFloat() < itemPrefix.criticalChance);
-            }
-        });
-    }
-
-    public static int getAttackSpeed(ItemStack itemStack, int amount) {
-        CompoundTag prefix = itemStack.getTagElement(KEY);
-        if (prefix != null) {
-            return Math.max((int) (amount - amount * prefix.getFloat("attackSpeed")), 0);
-        }
-        return amount;
-    }
-
-
-    public static float getVelocity(ItemStack itemStack, float velocity) {
-        CompoundTag prefix = itemStack.getTagElement(PrefixProvider.KEY);
-        if (prefix != null) {
-            return Math.max((int) (velocity - velocity * prefix.getFloat("velocity")), 0);
-        }
-        return velocity;
     }
 }

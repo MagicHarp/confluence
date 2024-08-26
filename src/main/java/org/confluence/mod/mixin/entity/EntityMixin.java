@@ -22,10 +22,10 @@ import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerEntityTransmutationEvent;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.item.curio.combat.IHurtEvasion;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
@@ -138,7 +138,7 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         if (self() instanceof LivingEntity living) {
-            if (IHurtEvasion.isInvul(living) ||
+            if (ModAttributes.applyDodge(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
                 ObsidianSkinEffect.isInvul(living, damageSource) ||

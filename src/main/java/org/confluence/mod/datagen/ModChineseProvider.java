@@ -115,7 +115,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.wall_climb", "可爬墙，按住shift键可快速下滑");
         add("curios.tooltip.wall_slide", "可沿墙滑下，按住shift键可更快地下滑");
         add("curios.tooltip.tabi", "双击一个方向可猛冲");
-        add("curios.tooltip.hurt_evasion", "有几率避开攻击");
+        add("curios.tooltip.dodge", "有几率避开攻击");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");

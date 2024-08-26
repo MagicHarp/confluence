@@ -30,7 +30,6 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.SilencedEffect;
@@ -41,6 +40,7 @@ import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.curio.IFunctionCouldEnable;
 import org.confluence.mod.item.curio.fishing.IHighTestFishingLine;
 import org.confluence.mod.item.curio.fishing.ITackleBox;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.accessor.ItemEntityAccessor;
@@ -49,6 +49,7 @@ import org.confluence.mod.network.s2c.SetItemEntityPickupDelayPacketS2C;
 
 import java.util.Collections;
 
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -58,22 +59,30 @@ public final class ItemEvents {
         if (event.getSlotType() != EquipmentSlot.MAINHAND) return;
         ItemStack itemStack = event.getItemStack();
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
-            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.type != PrefixType.MELEE) return;
             if (itemPrefix.attackDamage != 0.0) {
-                event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND,
-                    "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
+                if (itemStack.is(ModTags.Items.RANGED_WEAPON)) {
+                    event.addModifier(ModAttributes.getRangedDamage(), new AttributeModifier(ItemPrefix.RANGED_DAMAGE_UUID_HAND, "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
+                } else {
+                    event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(ItemPrefix.ATTACK_DAMAGE_UUID_HAND, "Item Prefix", itemPrefix.attackDamage, MULTIPLY_TOTAL));
+                }
             }
-            if (itemPrefix.type == PrefixType.MELEE && itemPrefix.attackSpeed != 0.0) {
-                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ItemPrefix.ATTACK_SPEED_UUID_HAND,
-                    "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
+            if (itemPrefix.attackSpeed != 0.0) {
+                event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ItemPrefix.ATTACK_SPEED_UUID_HAND, "Item Prefix", itemPrefix.attackSpeed, MULTIPLY_TOTAL));
             }
             if (itemPrefix.knockBack != 0.0) {
-                event.addModifier(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ItemPrefix.KNOCK_BACK_UUID_HAND,
-                    "Item Prefix", itemPrefix.knockBack, MULTIPLY_TOTAL));
+                event.addModifier(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ItemPrefix.KNOCK_BACK_UUID_HAND, "Item Prefix", itemPrefix.knockBack, ADDITION));
             }
             if (itemPrefix.size != 0.0) {
-                event.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(ItemPrefix.ENTITY_REACH_UUID_HAND,
-                    "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
+                event.addModifier(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(ItemPrefix.ENTITY_REACH_UUID_HAND, "Item Prefix", itemPrefix.size, MULTIPLY_TOTAL));
+            }
+            if (itemPrefix.criticalChance != 0.0) {
+                event.addModifier(ModAttributes.getCriticalChance(), new AttributeModifier(ItemPrefix.CRIT_CHANCE_UUID_HAND, "Item Prefix", itemPrefix.criticalChance, ADDITION));
+            }
+            if (itemPrefix.rangedDamage != 0.0) {
+                event.addModifier(ModAttributes.getRangedDamage(), new AttributeModifier(ItemPrefix.RANGED_DAMAGE_UUID_HAND, "Item Prefix", itemPrefix.rangedDamage, MULTIPLY_TOTAL));
+            }
+            if (itemPrefix.velocity != 0.0) {
+                event.addModifier(ModAttributes.getRangedVelocity(), new AttributeModifier(ItemPrefix.RANGED_VELOCITY_UUID_HAND, "Item Prefix", itemPrefix.velocity, MULTIPLY_TOTAL));
             }
         });
     }

@@ -22,7 +22,7 @@ public final class SwordProjectileShootingHandler {
         Item item = mainHandItem.getItem();
         if (item instanceof ISwordProjectile swordProjectile && !localPlayer.getCooldowns().isOnCooldown(item)) {
             NetworkHandler.CHANNEL.sendToServer(new SwordShootingPacketC2S(item));
-            localPlayer.getCooldowns().addCooldown(mainHandItem.getItem(), swordProjectile.getAttackSpeed(mainHandItem));
+            localPlayer.getCooldowns().addCooldown(mainHandItem.getItem(), swordProjectile.getAttackSpeed(localPlayer));
             localPlayer.swing(InteractionHand.MAIN_HAND);
         }
     }

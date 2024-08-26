@@ -10,26 +10,27 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.capability.prefix.ItemPrefix;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.integration.apothic.ApothicHelper;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
 public class BaseBulletEntity extends Projectile {
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(BaseBulletEntity.class, EntityDataSerializers.INT);
-
     protected float attackDamage = 0.0F;
     protected float criticalChance = 0.0F;
     protected float knockBack = 0.0F;
@@ -38,16 +39,24 @@ public class BaseBulletEntity extends Projectile {
         super(entityType, level);
     }
 
-    public BaseBulletEntity(Player player, Level level, @Nullable ItemPrefix itemPrefix, Variant variant) {
+    public BaseBulletEntity(LivingEntity living, Level level, Variant variant) {
         super(ModEntities.BASE_BULLET.get(), level);
-        setOwner(player);
+        setOwner(living);
         setNoGravity(variant.gravity <= 0.0);
         setVariant(variant);
-        setPos(player.getX(), player.getEyeY() - 0.1, player.getZ());
-        if (itemPrefix != null) {
-            this.attackDamage = (float) itemPrefix.attackDamage;
-            this.criticalChance = (float) itemPrefix.criticalChance;
-            this.knockBack = (float) itemPrefix.knockBack;
+        setPos(living.getX(), living.getEyeY() - 0.1, living.getZ());
+        AttributeInstance attributeInstance = living.getAttribute(Attributes.ATTACK_KNOCKBACK);
+        if (attributeInstance != null) {
+            this.knockBack = (float) attributeInstance.getValue();
+        }
+        attributeInstance = living.getAttribute(ModAttributes.getRangedDamage());
+        if (attributeInstance != null) {
+            this.attackDamage = (float) attributeInstance.getValue();
+        }
+        if (ApothicHelper.isAttributesLoaded()) return;
+        attributeInstance = living.getAttribute(ModAttributes.CRIT_CHANCE.get());
+        if (attributeInstance != null) {
+            this.criticalChance = (float) attributeInstance.getValue();
         }
     }
 
@@ -97,16 +106,18 @@ public class BaseBulletEntity extends Projectile {
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
-        float damage = getDamage() * (1.0F + attackDamage);
-        if (random.nextFloat() < criticalChance) damage *= 1.5F;
         Entity entity = entityHitResult.getEntity();
-        if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
-            float attackKnockBack = getKnockBack() * (1.0F + knockBack);
-            if (attackKnockBack > 0.0F) {
-                ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
-                setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
+        if (!level().isClientSide) {
+            float damage = getBaseDamage() * (1.0F + attackDamage);
+            if (random.nextFloat() < criticalChance) damage *= 1.5F;
+            if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
+                float attackKnockBack = getBaseKnockBack() * (1.0F + knockBack);
+                if (attackKnockBack > 0.0F) {
+                    ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
+                }
             }
         }
+        if (entity.isPickable()) discard();
     }
 
     @Override
@@ -114,7 +125,7 @@ public class BaseBulletEntity extends Projectile {
         return false;
     }
 
-    protected float getDamage() {
+    protected float getBaseDamage() {
         return getVariant().damage;
     }
 
@@ -122,13 +133,13 @@ public class BaseBulletEntity extends Projectile {
         return getVariant().gravity;
     }
 
-    protected float getKnockBack() {
+    protected float getBaseKnockBack() {
         return getVariant().knockBack;
     }
 
     public static class Spark extends BaseBulletEntity {
-        public Spark(Player player, Level level, @Nullable ItemPrefix itemPrefix) {
-            super(player, level, itemPrefix, Variant.SPARK);
+        public Spark(LivingEntity living, Level level) {
+            super(living, level, Variant.SPARK);
         }
 
         @Override
@@ -146,7 +157,7 @@ public class BaseBulletEntity extends Projectile {
         RUBY(4, "ruby", 5.5F, -1.0, 1.0F, ModParticles.RUBY_BULLET),
         AMBER(5, "amber", 5.5F, -1.0, 1.0F, ModParticles.AMBER_BULLET),
         DIAMOND(6, "diamond", 6F, -1.0, 1.0F, ModParticles.DIAMOND_BULLET),
-        FROST(7, "frost", 5.0F, 0.5, 1.0F, ParticleTypes.SNOWFLAKE::getType), // todo particle
+        FROST(7, "frost", 5.0F, 0.5, 1.0F, ParticleTypes.SNOWFLAKE::getType),
         SPARK(8, "spark", 1.3F, 0.2, 1.0F, ParticleTypes.LAVA::getType);
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);

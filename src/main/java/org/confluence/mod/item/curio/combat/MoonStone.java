@@ -3,8 +3,6 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -23,6 +21,7 @@ public class MoonStone extends BaseCurioItem {
     public static final UUID DAMAGE_UUID = UUID.fromString("51D0544E-0AA8-CB0C-5FBC-1A4C6B5C99B7");
     public static final UUID ARMOR_UUID = UUID.fromString("35D05688-D0BE-3387-DAD8-82C79B46AB46");
     public static final UUID CRIT_UUID = UUID.fromString("3CCCFFBE-2975-FFF3-FF4C-2AF08AA74CC4");
+    public static final UUID MINING_UUID = UUID.fromString("BD0CC75B-8DE2-CDAC-35C7-B8947CB285F2");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
 
     public MoonStone() {
@@ -36,7 +35,8 @@ public class MoonStone extends BaseCurioItem {
                 Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
                 Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION),
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", 0.02, AttributeModifier.Operation.ADDITION)
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", 0.02, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Moon Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         LivingEntity living = slotContext.entity();
@@ -49,10 +49,6 @@ public class MoonStone extends BaseCurioItem {
         LivingEntity living = slotContext.entity();
         if (living.level().getDayTime() % 24000 < 12000) return;
         ModEffects.healPerSecond(living, 2.0F);
-        MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
-        if (effect == null || effect.getDuration() < 5) {
-            living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
-        }
     }
 
     @Override

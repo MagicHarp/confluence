@@ -8,7 +8,7 @@ import org.confluence.mod.mixinauxiliary.IAbstractArrow;
 import org.jetbrains.annotations.NotNull;
 
 public class ShortBowItem extends BowItem implements CustomModel {
-    public static final float FULL_POWER_TICKS = 4.0F;
+    public static final float FULL_POWER_TICKS = 4.0F; // 满蓄力时间为4 tick
     private final float baseDamage;
 
     public ShortBowItem(float baseDamage, Properties pProperties) {
@@ -17,7 +17,7 @@ public class ShortBowItem extends BowItem implements CustomModel {
     }
 
     public float getShortPowerForTime(int pCharge) {
-        float f = (float) pCharge / FULL_POWER_TICKS; // 满蓄力时间为4 tick
+        float f = (float) pCharge / FULL_POWER_TICKS;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;

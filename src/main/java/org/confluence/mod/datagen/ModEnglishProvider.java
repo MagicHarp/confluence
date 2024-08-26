@@ -83,7 +83,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.wall_climb", "Allows the ability to climb walls, hold shift key to slide down");
         add("curios.tooltip.wall_slide", "Allows the ability to slide down walls, hold shift key to slide down quickly");
         add("curios.tooltip.tabi", "Allows the ability to dash while double tap a direction");
-        add("curios.tooltip.hurt_evasion", "Gives a chance to dodge attacks");
+        add("curios.tooltip.dodge", "Gives a chance to dodge attacks");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -925,7 +925,7 @@ public class ModEnglishProvider extends LanguageProvider {
             if (ranged == ModPrefix.Ranged.HASTY || ranged == ModPrefix.Ranged.DEADLY) continue;
             add("prefix.confluence." + ranged.name().toLowerCase(), toTitleCase(ranged.name()));
         }
-        for (ModPrefix.MagicAndSumming magicAndSumming : ModPrefix.MagicAndSumming.values()) {
+        for (ModPrefix.Magic magicAndSumming : ModPrefix.Magic.values()) {
             add("prefix.confluence." + magicAndSumming.name().toLowerCase(), toTitleCase(magicAndSumming.name()));
         }
         for (ModPrefix.Curio curio : ModPrefix.Curio.values()) {

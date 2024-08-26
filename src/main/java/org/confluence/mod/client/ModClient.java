@@ -106,7 +106,7 @@ public final class ModClient {
             ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
-            Bows.registerPull();
+            Bows.registerProperties();
         });
     }
 

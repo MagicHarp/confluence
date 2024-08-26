@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.movement.StepStool;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,19 +21,13 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class HandOfCreation extends StepStool implements IRightClickSubtractor, IBreakSpeedBonus, IRangePickup {
+public class HandOfCreation extends StepStool implements IRightClickSubtractor, IRangePickup {
     public static final UUID REACH_UUID = UUID.fromString("25EAB0F2-81C1-254D-156E-7CDAEBA54DC2");
-    private static final ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE = ImmutableMultimap.of(
-        ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Hand Of Creation", 3, AttributeModifier.Operation.ADDITION)
-    );
+    public static final UUID MINING_UUID = UUID.fromString("AA9BD00D-6660-91B6-B5F3-DCF7F5BB317D");
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public HandOfCreation() {
         super(ModRarity.LIGHT_PURPLE);
-    }
-
-    @Override
-    public float getBreakBonus() {
-        return 0.25F;
     }
 
     @Override
@@ -49,6 +44,12 @@ public class HandOfCreation extends StepStool implements IRightClickSubtractor, 
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return ATTRIBUTE;
+        if (ATTRIBUTES == null) {
+            ATTRIBUTES = ImmutableMultimap.of(
+                ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Hand Of Creation", 3, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Hand Of Creation", 0.25, AttributeModifier.Operation.MULTIPLY_BASE)
+            );
+        }
+        return ATTRIBUTES;
     }
 }

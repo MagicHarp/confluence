@@ -4,14 +4,16 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.entity.projectile.BaseAmmoEntity;
 import org.confluence.mod.item.gun.AbstractGunItem;
 import org.confluence.mod.item.gun.AmmoItems;
 import org.confluence.mod.item.gun.BaseAmmoItem;
+import org.confluence.mod.misc.ModAttributes;
 
 import java.util.function.Supplier;
 
@@ -36,8 +38,8 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
                 ItemStack ammoStack = ammoTuple.getA();
                 Level level = player.level();
                 BaseAmmoItem ammoItem = ammoTuple.getB();
-                BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(ammoStack, player, level);
-                ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(itemStack, abstractGunItem, ammoEntity), 0.0F);
+                BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(player, level);
+                ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(player, abstractGunItem, ammoEntity), 0.0F);
                 level.addFreshEntity(ammoEntity);
                 if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()) {
                     ammoStack.shrink(1);
@@ -49,9 +51,11 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
         context.setPacketHandled(true);
     }
 
-    public static float getVelocity(ItemStack itemStack, AbstractGunItem gunItem, BaseAmmoEntity ammoEntity) {
+    public static float getVelocity(Player player, AbstractGunItem gunItem, BaseAmmoEntity ammoEntity) {
         BaseAmmoEntity.Variant variant = ammoEntity.getVariant();
         float velocity = (gunItem.getShootingSpeed() + variant.velocity) * variant.multiplier;
-        return PrefixProvider.getVelocity(itemStack, velocity);
+        AttributeInstance attributeInstance = player.getAttribute(ModAttributes.getRangedVelocity());
+        if (attributeInstance != null) velocity *= (float) attributeInstance.getValue();
+        return velocity;
     }
 }

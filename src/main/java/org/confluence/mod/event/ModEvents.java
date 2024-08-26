@@ -195,6 +195,10 @@ public final class ModEvents {
     public static void modify(EntityAttributeModificationEvent event) {
         if (!ApothicHelper.isAttributesLoaded()) {
             event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
+            event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
+            event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
+            event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
+            event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
         }
     }
 }

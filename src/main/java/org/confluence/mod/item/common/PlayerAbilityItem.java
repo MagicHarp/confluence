@@ -14,6 +14,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.ability.PlayerAbility;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,8 +23,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class PlayerAbilityItem extends Item {
-    private final Function<PlayerAbility, Boolean> toCheck;
-    private final Consumer<PlayerAbility> toEnable;
+    protected final Function<PlayerAbility, Boolean> toCheck;
+    protected final Consumer<PlayerAbility> toEnable;
 
     public PlayerAbilityItem(Function<PlayerAbility, Boolean> toCheck, Consumer<PlayerAbility> toEnable) {
         super(new Properties().rarity(ModRarity.LIGHT_PURPLE).fireResistant());
@@ -107,6 +108,29 @@ public class PlayerAbilityItem extends Item {
             attributeInstance.removeModifier(LUCK_UUID);
             attributeInstance.addPermanentModifier(
                 new AttributeModifier(LUCK_UUID, "Galaxy Pearl", 0.03, AttributeModifier.Operation.ADDITION)
+            );
+        }
+    }
+
+    public static class Ambrosia extends PlayerAbilityItem {
+        public static final UUID MINING_UUID = UUID.fromString("9AD9D287-DE74-01FF-4D82-8C9E0A552D49");
+
+        public Ambrosia() {
+            super(PlayerAbility::isAmbrosiaUsed, PlayerAbility::setAmbrosiaUsed);
+        }
+
+        @Override
+        protected void modifier(Player player, PlayerAbility playerAbility) {
+            applyModifier(player, playerAbility);
+        }
+
+        public static void applyModifier(Player player, PlayerAbility playerAbility) {
+            if (!playerAbility.isAmbrosiaUsed()) return;
+            AttributeInstance attributeInstance = player.getAttributes().getInstance(ModAttributes.getMiningSpeed());
+            if (attributeInstance == null) return;
+            attributeInstance.removeModifier(MINING_UUID);
+            attributeInstance.addPermanentModifier(
+                new AttributeModifier(MINING_UUID, "Ambrosia", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
     }

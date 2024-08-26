@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
@@ -21,7 +22,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
@@ -94,6 +94,7 @@ public final class PlayerEvents {
             LifeFruit.applyModifier(neoPlayer, neo);
             PlayerAbilityItem.AegisApple.applyModifier(neoPlayer, neo);
             PlayerAbilityItem.GalaxyPearl.applyModifier(neoPlayer, neo);
+            PlayerAbilityItem.Ambrosia.applyModifier(neoPlayer, neo);
         }));
 
         if (PlayerUtils.isServerNotFake(neoPlayer)) {
@@ -127,9 +128,10 @@ public final class PlayerEvents {
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
         BlockState blockState = event.getState();
+        Player player = event.getEntity();
         if (blockState.is(ModTags.Blocks.NEEDS_NON_VANILLA_LEVEL)) {
             int tier = 0;
-            if (event.getEntity().getMainHandItem().getItem() instanceof TieredItem tieredItem) {
+            if (player.getMainHandItem().getItem() instanceof TieredItem tieredItem) {
                 tier = tieredItem.getTier().getLevel();
             }
             if ((tier < 8 && blockState.is(ModTags.Blocks.NEEDS_8_LEVEL)) ||
@@ -143,14 +145,10 @@ public final class PlayerEvents {
             }
         }
 
-        MutableFloat speed = new MutableFloat(event.getNewSpeed());
-        event.getEntity().getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-            float value = speed.floatValue();
-            value *= (1.0F + playerAbility.getBreakSpeedBonus());
-            if (playerAbility.isAmbrosiaUsed()) value *= 1.05F;
-            speed.setValue(value);
-        });
-        event.setNewSpeed(speed.floatValue());
+        if (ApothicHelper.isAttributesLoaded()) return;
+        AttributeInstance attributeInstance = player.getAttribute(ModAttributes.MINING_SPEED.get());
+        if (attributeInstance == null) return;
+        event.setNewSpeed(event.getNewSpeed() * (float) attributeInstance.getValue());
     }
 
     @SubscribeEvent

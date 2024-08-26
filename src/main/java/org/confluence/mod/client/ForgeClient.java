@@ -36,7 +36,6 @@ import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.confluence.mod.util.DeathAnimUtils;
-import org.confluence.mod.util.ModUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -112,25 +111,7 @@ public final class ForgeClient {
         List<Component> tooltip = event.getToolTip();
 
         PrefixProvider.getPrefix(itemStack).ifPresent(itemPrefix -> {
-            if (itemPrefix.type != PrefixType.UNIVERSAL && itemPrefix.type != PrefixType.MELEE) {
-                if (itemPrefix.attackDamage != 0.0) {
-                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.attackDamage, "attack_damage"));
-                }
-                if (itemPrefix.attackSpeed != 0.0) {
-                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.attackSpeed, "attack_speed"));
-                }
-                if (itemPrefix.knockBack != 0.0) {
-                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.knockBack, "knock_back"));
-                }
-            }
-            if (itemPrefix.criticalChance != 0.0) {
-                tooltip.add(ModUtils.getModifierTooltip(itemPrefix.criticalChance, "critical_chance"));
-            }
-            if (itemPrefix.type == PrefixType.RANGED) {
-                if (itemPrefix.velocity != 0.0) {
-                    tooltip.add(ModUtils.getModifierTooltip(itemPrefix.velocity, "velocity"));
-                }
-            } else if (itemPrefix.type == PrefixType.MAGIC_AND_SUMMING) {
+            if (itemPrefix.type == PrefixType.MAGIC) {
                 if (itemPrefix.manaCost != 0.0) {
                     boolean b = itemPrefix.manaCost > 0.0;
                     tooltip.add(Component.translatable(
@@ -218,12 +199,12 @@ public final class ForgeClient {
     }
 
     @SubscribeEvent
-    public static void beforeRenderLiving(RenderLivingEvent.Pre<?, ?> event){
+    public static void beforeRenderLiving(RenderLivingEvent.Pre<?, ?> event) {
         LivingEntity entity = event.getEntity();
         LivingEntityRenderer<?, ?> renderer = event.getRenderer();
         float partialTick = event.getPartialTick();
-        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
-        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+        if (entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
+        for (ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)) {
             ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(entity);
             ((IModelPart) (Object) modelPart).confluence$setRenderingPartialTick(partialTick);
         }
@@ -231,11 +212,11 @@ public final class ForgeClient {
     }
 
     @SubscribeEvent
-    public static void afterRenderLiving(RenderLivingEvent.Post<?, ?> event){
+    public static void afterRenderLiving(RenderLivingEvent.Post<?, ?> event) {
         LivingEntity entity = event.getEntity();
         LivingEntityRenderer<?, ?> renderer = event.getRenderer();
-        if(entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
-        for(ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)){
+        if (entity.isAlive() || !DeathAnimUtils.hasDeathAnimOptions(entity)) return;
+        for (ModelPart modelPart : DeathAnimUtils.findAllModelPart(renderer)) {
             ((IModelPart) (Object) modelPart).confluence$setRenderingLiving(null);
         }
         ((ILivingEntityRenderer) renderer).confluence$setRendering(null);
