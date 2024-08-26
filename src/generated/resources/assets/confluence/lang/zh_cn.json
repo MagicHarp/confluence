@@ -597,6 +597,7 @@
   "event.confluence.blood_moon": "血月正在升起...",
   "fluid_type.confluence.honey": "蜂蜜",
   "fluid_type.confluence.shimmer": "微光",
+  "gamerule.confluenceSpreadableChance": "邪恶群系蔓延设置",
   "info.confluence.bait": "鱼饵力: %s%%",
   "info.confluence.compass.east": "东: %s, ",
   "info.confluence.compass.north": "北: %s",
