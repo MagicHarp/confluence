@@ -319,6 +319,22 @@ public final class ModTabs {
                 output.accept(Bows.PLATINUM_SHORT_BOW.get());
                 output.accept(GunItems.HANDGUN.get());
                 output.accept(GunItems.MUSKET.get());
+                output.accept(GunItems.BOOMSTICK.get());
+                output.accept(GunItems.FLINTLOCKPISTOL.get());
+                output.accept(GunItems.FLAREGUN.get());
+                output.accept(GunItems.MINISHARK.get());
+                output.accept(GunItems.SHOTGUN.get());
+                output.accept(GunItems.TACTICALSHOTGUN.get());
+                output.accept(GunItems.UZI.get());
+                output.accept(GunItems.REVOLVER.get());
+                output.accept(GunItems.PHOENIXBLASTER.get());
+                output.accept(GunItems.ONYXBLASTER.get());
+                output.accept(GunItems.SNIPERRIFLE.get());
+                output.accept(GunItems.SLIMEGUN.get());
+                output.accept(GunItems.SNOWBALLCANNON.get());
+                output.accept(GunItems.STARCANNON.get());
+                output.accept(GunItems.BLOWPIPE.get());
+                output.accept(GunItems.BLOWGUN.get());
                 for (AmmoItems ammoItems : AmmoItems.values()) output.accept(ammoItems.get());
             })
             .build());
