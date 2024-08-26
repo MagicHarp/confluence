@@ -11,9 +11,7 @@ public interface IBossFSM {
         default void enter(E boss) {};
         /** 于离开此state时触发 */
         default void leave(E boss) {};
-        /** 每刻触发
-         * @return 下一刻的State（可为自身）
-         * */
+        /** 每刻触发 */
         void tick(E boss);
     }
 
