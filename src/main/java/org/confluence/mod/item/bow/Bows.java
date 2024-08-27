@@ -3,6 +3,7 @@ package org.confluence.mod.item.bow;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,7 +23,7 @@ public final class Bows {
     public static final RegistryObject<ShortBowItem> GOLDEN_SHORT_BOW = ITEMS.register("golden_short_bow", () -> new ShortBowItem(6.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1408)));
     public static final RegistryObject<ShortBowItem> PLATINUM_SHORT_BOW = ITEMS.register("platinum_short_bow", () -> new ShortBowItem(6.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1536)));
 
-    public static final RegistryObject<ShortBowItem> COPPER_BOW = ITEMS.register("copper_bow", () -> new ShortBowItem(4.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(640)));
+    public static final RegistryObject<BowItem> COPPER_BOW = ITEMS.register("copper_bow", () -> new BowItem(new Item.Properties().rarity(ModRarity.WHITE).durability(640)));
     public static final RegistryObject<ShortBowItem> TIN_BOW = ITEMS.register("tin_bow", () -> new ShortBowItem(4.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(768)));
     public static final RegistryObject<ShortBowItem> IRON_BOW = ITEMS.register("iron_bow", () -> new ShortBowItem(5.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(896)));
     public static final RegistryObject<ShortBowItem> LEAD_BOW = ITEMS.register("lead_bow", () -> new ShortBowItem(5.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1024)));
@@ -35,6 +36,7 @@ public final class Bows {
     public static void registerProperties() {
         ResourceLocation pull = new ResourceLocation("pull");
         ClampedItemPropertyFunction shortBowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / ShortBowItem.FULL_POWER_TICKS : 0.0F;
+        ClampedItemPropertyFunction bowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / 20.0F : 0.0F;
         ResourceLocation pulling = new ResourceLocation("pulling");
         ClampedItemPropertyFunction bowPulling = (itemStack, clientLevel, living, speed) -> living != null && living.isUsingItem() && living.getUseItem() == itemStack ? 1.0F : 0.0F;
 
@@ -56,6 +58,9 @@ public final class Bows {
         ItemProperties.register(GOLDEN_SHORT_BOW.get(), pulling, bowPulling);
         ItemProperties.register(PLATINUM_SHORT_BOW.get(), pull, shortBowPull);
         ItemProperties.register(PLATINUM_SHORT_BOW.get(), pulling, bowPulling);
+
+        ItemProperties.register(COPPER_BOW.get(), pull, bowPull);
+        ItemProperties.register(COPPER_BOW.get(), pulling, bowPulling);
     }
 
     public static void init() {}
