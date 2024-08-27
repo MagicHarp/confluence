@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -33,9 +35,11 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -61,6 +65,8 @@ import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
+import org.confluence.mod.entity.slime.HoneySlime;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -289,6 +295,31 @@ public final class ForgeEvents {
                             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void livingInteract(PlayerInteractEvent.EntityInteract event) {
+        event.setResult(Event.Result.DEFAULT);
+        Player player = event.getEntity();
+        Entity entity = event.getTarget();
+        Level level = event.getLevel();
+        ItemStack item = event.getItemStack();
+        if (entity instanceof BaseSlime slime){
+            if (item.is(ModItems.HONEY_BUCKET.get()) || item.is(ModItems.BOTTOMLESS_HONEY_BUCKET.get())){
+                if (slime.getType().equals(ModEntities.BLUE_SLIME.get()) || slime.getType().equals(ModEntities.GREEN_SLIME.get()) ||
+                        slime.getType().equals(ModEntities.PURPLE_SLIME.get())) {
+                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234, 2);
+                    honeySlime.setPos(entity.getX(), entity.getY(), entity.getZ());
+                    honeySlime.setDeltaMovement(entity.getDeltaMovement());
+                    level.addFreshEntity(honeySlime);
+                    entity.discard();
+                    if (item.is(ModItems.HONEY_BUCKET.get())){
+                        player.setItemInHand(event.getHand(), new ItemStack(Items.BUCKET));
+                    }
+                    player.playSound(SoundEvents.HONEY_DRINK, 1, 1);
                 }
             }
         }
