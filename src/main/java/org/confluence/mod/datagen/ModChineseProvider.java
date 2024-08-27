@@ -1817,6 +1817,22 @@ public class ModChineseProvider extends LanguageProvider {
 
         // 射手武器
         add(GunItems.HANDGUN.get(), "手枪");
+        add(GunItems.BLOWGUN.get(), "吹箭筒");
+        add(GunItems.BLOWPIPE.get(), "吹管");
+        add(GunItems.BOOMSTICK.get(), "三发猎枪");
+        add(GunItems.FLAREGUN.get(), "信号枪");
+        add(GunItems.FLINTLOCKPISTOL.get(), "燧发枪");
+        add(GunItems.MINISHARK.get(), "迷你鲨");
+        add(GunItems.ONYXBLASTER.get(), "玛瑙爆破枪");
+        add(GunItems.PHOENIXBLASTER.get(), "凤凰爆破枪");
+        add(GunItems.REVOLVER.get(), "左轮手枪");
+        add(GunItems.SLIMEGUN.get(), "史莱姆枪");
+        add(GunItems.SNIPERRIFLE.get(), "狙击步枪");
+        add(GunItems.SNOWBALLCANNON.get(), "雪球炮");
+        add(GunItems.STARCANNON.get(), "星星炮");
+        add(GunItems.TACTICALSHOTGUN.get(), "战术霰弹枪");
+        add(GunItems.UZI.get(), "乌兹冲锋枪");
+        add(GunItems.SHOTGUN.get(), "霰弹枪");
         add(GunItems.MUSKET.get(), "火枪");
         add(Bows.WOODEN_SHORT_BOW.get(), "木短弓");
         add(Bows.COPPER_SHORT_BOW.get(), "铜短弓");

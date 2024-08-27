@@ -5,6 +5,7 @@
     64,
     64
   ],
+  "gui_light": "front",
   "display": {
     "thirdperson_righthand": {
       "translation": [
@@ -59,8 +60,13 @@
       ],
       "translation": [
         0,
-        -7.5,
+        -3.5,
         0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
       ]
     },
     "fixed": {
