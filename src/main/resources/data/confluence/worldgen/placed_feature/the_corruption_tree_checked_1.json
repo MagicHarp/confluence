@@ -6,27 +6,12 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "confluence:corrupt_grass_block"
+          "Name": "minecraft:air",
+          "Properties": {
+            "stage": "0"
+          }
         }
       }
-    },
-    {
-      "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 0
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 6
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
-    },
-    {
-      "type": "minecraft:biome"
     }
   ]
 }
