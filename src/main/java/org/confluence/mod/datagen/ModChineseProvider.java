@@ -1482,6 +1482,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.TR_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
+        add(Materials.STAR_PETALS.get(), "星辰花瓣");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.VERTEBRA.get(), "椎骨");
         add(Materials.LENS.get(), "晶状体");
