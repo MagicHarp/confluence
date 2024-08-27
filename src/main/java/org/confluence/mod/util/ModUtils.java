@@ -200,10 +200,12 @@ public final class ModUtils {
             ply.sendSystemMessage(Component.literal(msg));
     }
 
+    /**为专家?在处理if...else if时应先使用isMaster*/
     public static boolean isExpert(Level level) {
         return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
     }
 
+    /**为大师?在处理if...else if时应先使用此方法*/
     public static boolean isMaster(Level level) {
         return level.getDifficulty().equals(Difficulty.HARD);
     }
