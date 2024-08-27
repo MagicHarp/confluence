@@ -1,5 +1,5 @@
 {
-    "feature": "confluence:pearl_acacia_trees",
+    "feature": "confluence:pearl_tree_checked_0",
     "placement": [
         {
             "type": "minecraft:block_predicate_filter",
@@ -16,7 +16,7 @@
         },
         {
             "type": "minecraft:rarity_filter",
-            "chance": 5
+            "chance": 4
         },
         {
             "type": "minecraft:in_square"

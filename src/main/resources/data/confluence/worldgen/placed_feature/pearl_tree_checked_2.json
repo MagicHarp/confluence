@@ -1,5 +1,5 @@
 {
-    "feature": "confluence:pearl_spruce_trees",
+    "feature": "confluence:pearl_tree_checked_2",
     "placement": [
         {
             "type": "minecraft:block_predicate_filter",
@@ -15,11 +15,11 @@
             "max_water_depth": 0
         },
         {
-            "type": "minecraft:in_square"
-        },
-        {
             "type": "minecraft:rarity_filter",
             "chance": 6
+        },
+        {
+            "type": "minecraft:in_square"
         },
         {
             "type": "minecraft:heightmap",

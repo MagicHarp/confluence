@@ -1,12 +1,12 @@
 {
-  "feature": "confluence:the_corruption_tall_trees",
+  "feature": "confluence:tr_crimson_tree_checked_0",
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "confluence:corrupt_grass_block"
+          "Name": "confluence:tr_crimson_grass_block"
         }
       }
     },
@@ -16,7 +16,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 6
+      "chance": 3
     },
     {
       "type": "minecraft:in_square"

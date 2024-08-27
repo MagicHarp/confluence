@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "confluence:tr_crimson",
+  "features": "confluence:tr_crimson_tree_checked_1",
+  "step": "surface_structures"
+}

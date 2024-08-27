@@ -1,5 +1,5 @@
 {
-    "feature": "confluence:palm_trees",
+    "feature": "confluence:palm_tree_checked",
     "placement": [
         {
             "type": "minecraft:block_predicate_filter",
