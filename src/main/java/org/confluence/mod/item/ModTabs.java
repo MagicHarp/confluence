@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.*;
 import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.functional.DeathChestBlock;
@@ -159,6 +160,7 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS.get());
                 output.accept(ModItems.DEATHWEED.get());
                 output.accept(ModItems.FLAMEFLOWERS.get());
+                output.accept(ModBlocks.STELLAR_BLOSSOM.get());
                 output.accept(ModItems.WATERLEAF_SEED.get());
                 output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
                 output.accept(ModItems.SHINE_ROOT_SEED.get());
@@ -166,6 +168,7 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS_SEED.get());
                 output.accept(ModItems.DEATHWEED_SEED.get());
                 output.accept(ModItems.FLAMEFLOWERS_SEED.get());
+                output.accept(ModItems.STELLAR_BLOSSOM_SEED.get());
                 // 蘑菇 草
                 output.accept(ModItems.TR_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());
@@ -317,6 +320,14 @@ public final class ModTabs {
                 output.accept(Bows.TUNGSTEN_SHORT_BOW.get());
                 output.accept(Bows.GOLDEN_SHORT_BOW.get());
                 output.accept(Bows.PLATINUM_SHORT_BOW.get());
+                output.accept(Bows.COPPER_BOW.get());
+                output.accept(Bows.TIN_BOW.get());
+                output.accept(Bows.IRON_BOW.get());
+                output.accept(Bows.LEAD_BOW.get());
+                output.accept(Bows.SILVER_BOW.get());
+                output.accept(Bows.TUNGSTEN_BOW.get());
+                output.accept(Bows.GOLDEN_BOW.get());
+                output.accept(Bows.PLATINUM_BOW.get());
                 output.accept(GunItems.HANDGUN.get());
                 output.accept(GunItems.MUSKET.get());
                 output.accept(GunItems.BOOMSTICK.get());

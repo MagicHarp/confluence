@@ -1482,6 +1482,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.TR_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
+        add(Materials.STAR_PETALS.get(), "星辰花瓣");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.VERTEBRA.get(), "椎骨");
         add(Materials.LENS.get(), "晶状体");
@@ -1816,6 +1817,22 @@ public class ModChineseProvider extends LanguageProvider {
 
         // 射手武器
         add(GunItems.HANDGUN.get(), "手枪");
+        add(GunItems.BLOWGUN.get(), "吹箭筒");
+        add(GunItems.BLOWPIPE.get(), "吹管");
+        add(GunItems.BOOMSTICK.get(), "三发猎枪");
+        add(GunItems.FLAREGUN.get(), "信号枪");
+        add(GunItems.FLINTLOCKPISTOL.get(), "燧发枪");
+        add(GunItems.MINISHARK.get(), "迷你鲨");
+        add(GunItems.ONYXBLASTER.get(), "玛瑙爆破枪");
+        add(GunItems.PHOENIXBLASTER.get(), "凤凰爆破枪");
+        add(GunItems.REVOLVER.get(), "左轮手枪");
+        add(GunItems.SLIMEGUN.get(), "史莱姆枪");
+        add(GunItems.SNIPERRIFLE.get(), "狙击步枪");
+        add(GunItems.SNOWBALLCANNON.get(), "雪球炮");
+        add(GunItems.STARCANNON.get(), "星星炮");
+        add(GunItems.TACTICALSHOTGUN.get(), "战术霰弹枪");
+        add(GunItems.UZI.get(), "乌兹冲锋枪");
+        add(GunItems.SHOTGUN.get(), "霰弹枪");
         add(GunItems.MUSKET.get(), "火枪");
         add(Bows.WOODEN_SHORT_BOW.get(), "木短弓");
         add(Bows.COPPER_SHORT_BOW.get(), "铜短弓");
@@ -1826,6 +1843,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(Bows.TUNGSTEN_SHORT_BOW.get(), "钨短弓");
         add(Bows.GOLDEN_SHORT_BOW.get(), "金短弓");
         add(Bows.PLATINUM_SHORT_BOW.get(), "铂金短弓");
+
+        add(Bows.COPPER_BOW.get(), "铜弓");
+        add(Bows.TIN_BOW.get(), "锡弓");
+        add(Bows.IRON_BOW.get(), "铁弓");
+        add(Bows.LEAD_BOW.get(), "铅弓");
+        add(Bows.SILVER_BOW.get(), "银弓");
+        add(Bows.TUNGSTEN_BOW.get(), "钨弓");
+        add(Bows.GOLDEN_BOW.get(), "金弓");
+        add(Bows.PLATINUM_BOW.get(), "铂金弓");
         // 子弹
         add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
         add(AmmoItems.METEOR_BULLET.get(), "流星弹");

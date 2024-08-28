@@ -5,6 +5,7 @@
     32,
     32
   ],
+  "gui_light": "front",
   "display": {
     "thirdperson_righthand": {
       "translation": [

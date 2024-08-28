@@ -13,11 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.Control;
 import net.minecraft.world.entity.ai.control.JumpControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -30,7 +26,6 @@ import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.opengl.INTELBlackholeRender;
 
 import java.util.List;
 
@@ -40,7 +35,7 @@ import static org.confluence.mod.util.ModUtils.isMaster;
 public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int COLOR_INT = 0x73bcf4;
     // 缩小/膨胀时长，单位：刻
-    private static final int SHRINK_ENLARGE_DURATION = 60;
+    private static final int SHRINK_ENLARGE_DURATION = 20;
     // 大师 专家 普通
     private static final int[] TOTAL_SPLITS = {75, 50, 30};
     private static final float[] MAX_HEALTHS = {928f, 812f, 580f};

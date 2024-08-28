@@ -100,6 +100,7 @@ public final class ModItems {
     public static final RegistryObject<Item> WATERLEAF_SEED = ITEMS.register("waterleaf_seed", () -> new HerbSeedItem(ModBlocks.WATERLEAF.get()));
     public static final RegistryObject<Item> FLAMEFLOWERS_SEED = ITEMS.register("flameflowers_seed", () -> new HerbSeedItem(ModBlocks.FLAMEFLOWERS.get(), new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> MOONSHINE_GRASS_SEED = ITEMS.register("moonshine_grass_seed", () -> new HerbSeedItem(ModBlocks.MOONSHINE_GRASS.get()));
+    public static final RegistryObject<Item> STELLAR_BLOSSOM_SEED = ITEMS.register("stellar_blossom_seed", () -> new HerbSeedItem(ModBlocks.STELLAR_BLOSSOM.get()));
     public static final RegistryObject<Item> SHINE_ROOT_SEED = ITEMS.register("shine_root_seed", () -> new HerbSeedItem(ModBlocks.SHINE_ROOT.get()));
     public static final RegistryObject<Item> SHIVERINGTHORNS_SEED = ITEMS.register("shiveringthorns_seed", () -> new HerbSeedItem(ModBlocks.SHIVERINGTHORNS.get()));
     public static final RegistryObject<Item> SUNFLOWERS_SEED = ITEMS.register("sunflowers_seed", () -> new HerbSeedItem(ModBlocks.SUNFLOWERS.get()));

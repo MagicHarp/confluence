@@ -1,0 +1,6 @@
+{
+    "parent": "confluence:item/tungsten_bow",
+    "textures": {
+        "layer0": "confluence:item/tungsten_bow_pulling_0"
+    }
+}
