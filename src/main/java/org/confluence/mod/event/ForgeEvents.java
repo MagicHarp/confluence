@@ -67,6 +67,8 @@ import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.ColoredItem;
+import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -311,7 +313,7 @@ public final class ForgeEvents {
             if (item.is(ModItems.HONEY_BUCKET.get()) || item.is(ModItems.BOTTOMLESS_HONEY_BUCKET.get())){
                 if (slime.getType().equals(ModEntities.BLUE_SLIME.get()) || slime.getType().equals(ModEntities.GREEN_SLIME.get()) ||
                         slime.getType().equals(ModEntities.PURPLE_SLIME.get())) {
-                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234, 2);
+                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234);
                     honeySlime.setPos(entity.getX(), entity.getY(), entity.getZ());
                     honeySlime.setDeltaMovement(entity.getDeltaMovement());
                     level.addFreshEntity(honeySlime);
@@ -320,6 +322,19 @@ public final class ForgeEvents {
                         player.setItemInHand(event.getHand(), new ItemStack(Items.BUCKET));
                     }
                     player.playSound(SoundEvents.HONEY_DRINK, 1, 1);
+                }
+            }
+        }
+        if (entity instanceof HoneySlime slime){
+            if (slime.getSize() == 3){
+                if (item.is(Items.GLASS_BOTTLE)) {
+                    slime.setSize(level.random.nextInt(1, 3), false);
+                    player.addItem(new ItemStack(Items.HONEY_BOTTLE));
+                    player.setItemInHand(event.getHand(), new ItemStack(Items.GLASS_BOTTLE, player.getItemInHand(event.getHand()).getCount() - 1));
+                    player.playSound(SoundEvents.HONEY_DRINK, 3, 1.5F);
+                    ItemStack itemStack = new ItemStack(Materials.GEL.get(), level.random.nextInt(1, 30));
+                    ColoredItem.setColor(itemStack, 0xf8e234);
+                    ModUtils.createItemEntity(itemStack, slime.getX(), slime.getY(), slime.getZ(), level);
                 }
             }
         }

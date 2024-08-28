@@ -37,6 +37,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.slime.BaseSlime;
+import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.entity.worm.TestWormEntity;
 import org.confluence.mod.entity.worm.TestWormPart;
 import org.confluence.mod.fluid.FluidBuilder;
@@ -74,7 +75,7 @@ public final class ModEvents {
         event.put(ModEntities.RED_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 1, 25.0F).build());
         event.put(ModEntities.TROPIC_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
         event.put(ModEntities.YELLOW_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
-        event.put(ModEntities.HONEY_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
+        event.put(ModEntities.HONEY_SLIME.get(), HoneySlime.createSlimeAttributes(0F, 2, 25.0F).build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
         event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
