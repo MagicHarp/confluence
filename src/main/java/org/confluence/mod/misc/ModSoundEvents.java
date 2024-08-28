@@ -43,7 +43,6 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> TERRA_OPERATION = register("terra_operation"); // 操作音效
     public static final RegistryObject<SoundEvent> USE_MOUNTS = register("use_mounts"); // 召唤坐骑
 
-
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));
     }

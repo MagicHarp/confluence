@@ -28,8 +28,8 @@ public enum Swords implements EnumRegister<SwordItem> {
     GOLDEN_BOARD_SWORD("golden_board_sword", () -> new BoardSwordItem(ModTiers.GOLD, 7, 1.6F)),
     PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ModTiers.PLATINUM, 7, 1.6F)),
 
-    LIGHTS_BANE("lights_bane", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 魔光剑
-    BLOOD_BUTCHERER("blood_butchere", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, 1.6F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 血腥屠刀 （给予被伤害的单位流血效果）蓄力才触发
+    LIGHTS_BANE("lights_bane", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 魔光剑
+    BLOOD_BUTCHERER("blood_butchere", () -> new BloodButchereSword(ModTiers.TITANIUM, 7, -1.7F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 血腥屠刀 （给予被伤害的单位流血效果）蓄力才触发
 
     RED_LIGHT_SABER("red_light_saber", LightSaber.Red::new),
     ORANGE_LIGHT_SABER("orange_light_saber", LightSaber.Orange::new),

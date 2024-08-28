@@ -76,6 +76,7 @@ import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
+import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
@@ -297,6 +298,23 @@ public final class ForgeEvents {
                             player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
                         }
                     }
+                }
+            }
+        }
+        if (event.getSource().getEntity() instanceof LivingEntity livingEntity){
+            if (livingEntity.getMainHandItem().getItem() instanceof BloodButchereSword){
+                if (event.getEntity().hasEffect(ModEffects.BLOOD_BUTCHERED.get())){
+                    if (event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4){
+                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180,
+                                event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() + 1,
+                                false, false, false));
+                    } else {
+                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 4,
+                                false, false, false));
+                    }
+                } else {
+                    event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0,
+                            false, false, false));
                 }
             }
         }
