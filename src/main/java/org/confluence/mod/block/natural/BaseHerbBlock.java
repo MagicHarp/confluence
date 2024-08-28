@@ -45,7 +45,7 @@ public abstract class BaseHerbBlock extends CropBlock implements CustomModel, Cu
     public static Map<RegistryObject<? extends Block>, Set<Block>> herbGroundMap = new ImmutableMap.Builder<RegistryObject<? extends Block>, Set<Block>>()
         .put(ModBlocks.SUNFLOWERS, Set.of(Blocks.GRASS_BLOCK, ModBlocks.HALLOW_GRASS_BLOCK.get()))
         .put(ModBlocks.MOONSHINE_GRASS, Set.of(Blocks.GRASS_BLOCK, Blocks.MOSS_BLOCK))
-        .put(ModBlocks.STELLAR_BLOSSOM, Set.of(Blocks.GRASS_BLOCK))  //todo 云
+        .put(ModBlocks.STELLAR_BLOSSOM, Set.of(ModBlocks.CLOUD_BLOCK.get()))
         .put(ModBlocks.SHIVERINGTHORNS, Set.of(Blocks.GRASS_BLOCK, Blocks.ICE, ModBlocks.RED_ICE.get(), ModBlocks.RED_PACKED_ICE.get(), ModBlocks.PINK_PACKED_ICE.get(), ModBlocks.PINK_ICE.get(), ModBlocks.PURPLE_ICE.get(), ModBlocks.PURPLE_PACKED_ICE.get()))
         .put(ModBlocks.SHINE_ROOT, Set.of(Blocks.DIRT, Blocks.MUD, Blocks.STONE, Blocks.DEEPSLATE))
         .put(ModBlocks.DEATHWEED, Set.of(ModBlocks.CORRUPT_GRASS_BLOCK.get(), ModBlocks.EBONY_STONE.get(), ModBlocks.TR_CRIMSON_GRASS_BLOCK.get(), ModBlocks.TR_CRIMSON_STONE.get()))
