@@ -146,10 +146,10 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             dropSequence(pLevel, pPos);
         }
 
-        @Override
-        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
-        }
+//        @Override
+//        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
+//            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
+//        }
 
         @Override
         public void onProjectileHit(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockHitResult pHit, @NotNull Projectile pProjectile) {
