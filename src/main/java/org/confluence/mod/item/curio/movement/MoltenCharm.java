@@ -23,13 +23,4 @@ public class MoltenCharm extends BaseCurioItem implements IFireImmune, ILavaImmu
         list.add(IFireImmune.TOOLTIP);
         list.add(ILavaImmune.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.molten_charm.info"),
-            Component.translatable("item.confluence.molten_charm.info2"),
-            Component.translatable("item.confluence.molten_charm.info3")
-        };
-    }
 }

@@ -59,12 +59,4 @@ public class BundleOfBalloons extends BaseCurioItem implements IJumpBoost {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(IJumpBoost.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.bundle_of_balloons.info"),
-            Component.translatable("item.confluence.bundle_of_balloons.info2")
-        };
-    }
 }

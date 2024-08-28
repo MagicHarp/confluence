@@ -41,8 +41,7 @@ public class LuckyHorseshoe extends BaseCurioItem implements IFallResistance {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.lucky_horseshoe.info"),
-            Component.translatable("item.confluence.lucky_horseshoe.info2")
+            Component.translatable("item.confluence.lucky_horseshoe.info")
         };
     }
 

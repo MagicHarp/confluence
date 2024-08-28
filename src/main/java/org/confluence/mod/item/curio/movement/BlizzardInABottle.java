@@ -35,13 +35,4 @@ public class BlizzardInABottle extends BaseCurioItem implements IOneTimeJump {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IOneTimeJump.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.blizzard_in_a_bottole.info"),
-            Component.translatable("item.confluence.blizzard_in_a_bottole.info2"),
-            Component.translatable("item.confluence.blizzard_in_a_bottole.info3")
-        };
-    }
 }

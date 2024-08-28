@@ -38,16 +38,4 @@ public class LavaWaders extends BaseCurioItem implements IFireImmune, ILavaImmun
         list.add(IFluidWalk.ALL_FLUID);
         list.add(Component.translatable("item.confluence.lava_waders.tooltip2"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.lava_waders.info"),
-            Component.translatable("item.confluence.lava_waders.info2"),
-            Component.translatable("item.confluence.lava_waders.info3"),
-            Component.translatable("item.confluence.lava_waders.info4"),
-            Component.translatable("item.confluence.lava_waders.info5"),
-            Component.translatable("item.confluence.lava_waders.info6")
-        };
-    }
 }

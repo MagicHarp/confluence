@@ -36,13 +36,4 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
         list.add(IMultiJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.cloud_in_a_balloon.info"),
-            Component.translatable("item.confluence.cloud_in_a_balloon.info2"),
-            Component.translatable("item.confluence.cloud_in_a_balloon.info3")
-        };
-    }
 }

@@ -46,12 +46,4 @@ public class SpectreBoots extends BaseSpeedBoots implements IMayFly {
         list.add(IMayFly.TOOLTIP);
         list.add(BaseSpeedBoots.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.spectre_boots.info"),
-            Component.translatable("item.confluence.spectre_boots.info2")
-        };
-    }
 }

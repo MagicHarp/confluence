@@ -49,13 +49,4 @@ public class IceSkates extends BaseCurioItem {
         }
         return EMPTY_ATTRIBUTE;
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.ice_skates.info"),
-            Component.translatable("item.confluence.ice_skates.info2"),
-            Component.translatable("item.confluence.ice_skates.info3")
-        };
-    }
 }

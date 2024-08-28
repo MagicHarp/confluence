@@ -36,13 +36,4 @@ public class WhiteHorseshoeBalloon extends BlizzardInABalloon implements IFallRe
         list.add(IMultiJump.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.white_horseshoe_balloon.info"),
-            Component.translatable("item.confluence.white_horseshoe_balloon.info2"),
-            Component.translatable("item.confluence.white_horseshoe_balloon.info3")
-        };
-    }
 }

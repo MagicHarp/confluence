@@ -185,166 +185,27 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
         add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
 
-        add("item.confluence.aglet.info", "The Aglet is an accessory that increases the player's movement speed by 5%.");
-        add("item.confluence.aglet.info2", "It can be found in Shipwreck Chests.");
-        add("item.confluence.amber_horseshoe_balloon.info", "The Amber Horseshoe Balloon is an accessory that increases jump height by 75% (6 blocks → 10.5 blocks), makes the player immune to fall damage, and releases bees when attacked, which seek out and damage enemies.");
-        add("item.confluence.amber_horseshoe_balloon.info2", "It also grants +0.05 luck.");
-        add("item.confluence.amber_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Lucky Horseshoe and a Honey Balloon.");
-        add("item.confluence.amphibian_boots.info", "The Amphibian Boots are an accessory crafted by combining the Sailfish Boots and Frog Leg at a Crafting Table.");
-        add("item.confluence.amphibian_boots.info2", "Equipping it has the following effects:");// 待删除
-        add("item.confluence.amphibian_boots.info3", "Increases the player's maximum movement speed to 22.5 meters/second (31 mph)");// 英文待改
-        add("item.confluence.amphibian_boots.info4", "Allows auto-jumping");
-        add("item.confluence.amphibian_boots.info5", "Increases the maximum safe falling distance by 10 meters");// 待删除
-        add("item.confluence.amphibian_boots.info6", "Increases jump speed by 1.6");
-        add("item.confluence.anklet_of_the_wind.info", "The Anklet of the Wind is an accessory that gives a 10% bonus to movement speed.");// 英文待改
-        add("item.confluence.anklet_of_the_wind.info2", "The effect also stacks with the movement speed bonus of the Aglet.");
-        add("item.confluence.anklet_of_the_wind.info3", "It can be crafted at a Crafting Table with a Spore Blossom and a Vines.");
-        add("item.confluence.blizzard_in_a_balloon.info", "It boosts jump height by 33% and jump speed by 30%, increasing your first jump's height to ~10½ blocks (~75% increase), and provides a double jump that now goes 14½ blocks, for a total height of 25 blocks.");// 英文待改
-        add("item.confluence.blizzard_in_a_balloon.info2", "It can be crafted at a Crafting Table with a Blizzard in a Bottle and a Shiny Red Balloon.");
-        add("item.confluence.blizzard_in_a_bottole.info", "The Blizzard in a Bottle is a pre-Hardmode accessory which works similarly to the Cloud in a Bottle, allowing the player to double-jump.");
-        add("item.confluence.blizzard_in_a_bottole.info2", "The Blizzard jump goes 8 meters into the air, totaling 14 meters when put together with the first jump. ");// 英文待改
-        add("item.confluence.blizzard_in_a_bottole.info3", "It can be crafted at a Crafting Table with a Cloud in a Bottle and a blue ice.");
-        add("item.confluence.blue_horseshoe_balloon.info", "The Blue Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 75%, grants a double-jump, and grants +0.05 luck.");// 英文待改
-        add("item.confluence.blue_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks, while the double-jump's height is increased from 5 blocks to 9 blocks, reaching a total of 19.5 blocks with both jumps.");
-        add("item.confluence.blue_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Cloud in a Balloon and a Lucky Horseshoe.");
-        add("item.confluence.bundle_of_balloons.info", "The Bundle of Balloons is an accessory that allows the wearer to perform a quadruple jump, as well as increasing the player's jump duration by 33% and jump speed by 30%.");// 英文待改
-        add("item.confluence.bundle_of_balloons.info2", "This item can be crafted at a Crafting Table using a Cloud in a Balloon, a Blizzard in a Balloon, and a Sandstorm in a Balloon.");
-        add("item.confluence.bundle_of_horseshoe_balloons.info", "The Bundle of Horseshoe Balloons is an accessory which combines the functionalities of the Bundle of Balloons and the Lucky Horseshoe.");
-        add("item.confluence.bundle_of_horseshoe_balloons.info2", "When equipped, it allows the wearer to perform a quadruple jump, as well as increasing the player's jump duration by 33%, jump speed by 30%, and luck by 0.05.");// 英文待改
-        add("item.confluence.bundle_of_horseshoe_balloons.info3", "Having it equipped also prevents the player from taking fall damage.");
-        add("item.confluence.bundle_of_horseshoe_balloons.info4", "It can be crafted at a Crafting Table with a Bundle of Balloons and a Lucky Horseshoe.");
-        add("item.confluence.cloud_in_a_balloon.info", "The Cloud in a Balloon is an accessory that combines the functionality of the Cloud in a Bottle and the Shiny Red Balloon.");
-        add("item.confluence.cloud_in_a_balloon.info2", "It boosts jump height by 33%, and jump speed by 30%, increasing the player's first jump's height to 10.5 blocks (~75% increase), and provides a double jump that hits 9 blocks, for a total height of 19.5 blocks.");// 英文待改
-        add("item.confluence.cloud_in_a_balloon.info3", "It can be crafted at a Crafting Table with a Cloud in a Bottle and a Shiny Red Balloon.");
-        add("item.confluence.cloud_in_a_bottle.info", "The Cloud in a Bottle is an accessory that can be found in Chests in the Mineshaft and Dungeon.");
-        add("item.confluence.cloud_in_a_bottle.info2", "When equipped, it allows the player an extra jump.");
-        add("item.confluence.cloud_in_a_bottle.info3", "The extra jump has a 75% jump duration compared to a normal jump, increasing the maximum height the player can reach without other accessories by 5 meters, for a total of 11 meters.");// 英文待改
-        add("item.confluence.dunerider_boots.info", "The Dunerider Boots are an accessory that increases the player's maximum movement speed");
-        add("item.confluence.dunerider_boots.info2", "It have a Chance to be dropped from Husk.");
-        add("item.confluence.dunerider_boots.info3", "When equipped, it grants the following bonuses:");
-        add("item.confluence.dunerider_boots.info4", "Increases the player's maximum movement speed to 22.5 merters/second");// 英文待改
-        add("item.confluence.dunerider_boots.info5", "When moving on any Sand, Sandstone, or Hardened Sand, increases maximum movement speed by 15% and increases acceleration and deceleration by 75%, respectively");// 英文待改
-        add("item.confluence.fairy_boots.info", "Fairy Boots are an accessory that are made from the Spectre Boots and Flower Boots at a Crafting Table.");
-        add("item.confluence.fairy_boots.info2", "They combine both effects into one pair of boots.");
-        add("item.confluence.fart_in_a_balloon.info", "The Fart in a Balloon is an accessory that combines the effects of the Fart in a Jar and the Shiny Red Balloon.");
-        add("item.confluence.fart_in_a_balloon.info2", "It boosts jump height by 33% and jump speed by 30%, increasing the player's first jump's height to ~10.5 blocks (~75% increase), and provides a double jump that goes to 18.5 blocks, for a total of 29 blocks.");// 英文待改
-        add("item.confluence.fart_in_a_balloon.info3", "Unlike most other double-jump balloons, the Fart in a Balloon's full jump is high enough for the player to take minor fall damage, unless the player has fall damage immunity accessories like the Lucky Horseshoe. ");// 英文待改
-        add("item.confluence.fart_in_a_balloon.info4", "It can be crafted at a Crafting Table with a Fart in a Jar and a Shiny Red Balloon.");
-        add("item.confluence.fart_in_a_jar.info", "The Fart in a Jar is an accessory that allows the player to perform a double jump.");
-        add("item.confluence.fart_in_a_jar.info2", "The Fart jump goes 10.5 meters into the air, totalling 16.5 meters when put together with the first jump.");// 英文待改
-        add("item.confluence.fart_in_a_jar.info3", "These effects also apply with wings equipped.");
-        add("item.confluence.flipper.info", "The Flipper is an accessory that allows a player to swim in liquid. With the Flipper equipped in an accessory slot, the player can swim upwards in Water, Lava, or Honey, by holding or pressing Jump Key repeatedly — essentially allowing unlimited multi-jumps while within liquid.");
-        add("item.confluence.flipper.info2", "It can be found in Chests in the Shipwreck.");
-        add("item.confluence.flurry_boots.info", "Flurry Boots are an accessory that can be found in Igloo's chest.");
-        add("item.confluence.flurry_boots.info2", "When equipped, they allow the player to gain a speed boost after running for a certain distance continuously.");
-        add("item.confluence.frog_flipper.info", "Frog Flipper are an accessory that are made from the Frog Leg and Flipper at a Crafting Table.");
-        add("item.confluence.frog_flipper.info2", "It combines the abilities of these two items, increasing the player's jump speed and safe falling distance, allowing auto-jump, and giving the player the ability to swim.");
+        add("item.confluence.aglet.info", "It can be found in Shipwreck Chests.");
+        add("item.confluence.anklet_of_the_wind.info", "The effect also stacks with the movement speed bonus of the Aglet.");
+        add("item.confluence.climbing_claws.info", "It have a Chance to be dropped from Spider.");
+        add("item.confluence.cloud_in_a_bottle.info", "It can be found in Chests in the Mineshaft and Dungeon.");
+        add("item.confluence.dunerider_boots.info", "It have a Chance to be dropped from Husk.");
+        add("item.confluence.fart_in_a_jar.info", "It have a Chance to be dropped from Ghost.");
+        add("item.confluence.flipper.info", "It can be found in Chests in the Shipwreck.");
+        add("item.confluence.flurry_boots.info", "It can be found in Igloo's chest.");
         add("item.confluence.frog_leg.info", "The Frog Leg have a Chance to be dropped from Frog.");
-        add("item.confluence.frog_leg.info2", "The Frog Leg is an accessory that can be fished in any viable body of water. It aids jumping in the following ways:");
-        add("item.confluence.frog_leg.info3", "Increases the player's jump speed by 1.6");// 英文待改
-        add("item.confluence.frog_leg.info4", "The player automatically jumps while the Jump key is held.");
-        add("item.confluence.frog_leg.info5", "This effect also works with Climbing Claws and other climbing accessories.");
-        add("item.confluence.frog_leg.info6", "Increases the maximum safe falling distance by 10");// 英文待改
-        add("item.confluence.frog_leg.info7", "These effects also apply with wings equipped.");
-        add("item.confluence.frostspark_boots.info", "The Frostspark Boots are an accessory crafted by combining Lightning Boots and Ice Skates together at a Crafting Table.");
-        add("item.confluence.frostspark_boots.info2", "It provides the benefits of both.");
-        add("item.confluence.frostspark_boots.info3", "They also have an 8% increased movement speed.");// 英文待改
-        add("item.confluence.green_horseshoe_balloon.info", "The Green Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 33%, jump speed by 30%, grants a double jump, and grants +0.05 luck.");// 英文待改
-        add("item.confluence.green_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks (~75% increase), while the double jump's height is increased from 10.5 blocks to 18.5 blocks, reaching a total of 29 blocks with both jumps.");// 英文待改
-        add("item.confluence.green_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Fart in a Balloon and a Lucky Horseshoe.");
-        add("item.confluence.hand_warmer.info", "The Hand Warmer is an immunity accessory that grants the player immunity to the Chilled and Frozen debuffs.");
-        add("item.confluence.hand_warmer.info2", "It can be crafted at a Crafting Table with a Wool and a Leather.");
-        add("item.confluence.hermes_boots.info", "Hermes Boots are an accessory that can be found in Chests in the Village Armorer.");
-        add("item.confluence.hermes_boots.info2", "When equipped, they allow the player to gain a movement speed boost after running for a certain distance continuously.");
-        add("item.confluence.hermes_boots.info3", "The speed will continue increasing until maximum speed is attained. At full sprint, they will increase the player's horizontal movement speed to 30 mph.");
-        add("item.confluence.hermes_boots.info4", "However, if the player runs into a wall without autojumping, the player will stop and have to speed up again.");
-        add("item.confluence.honey_balloon.info", "The Honey Balloon is an accessory that combines the functions of a Shiny Red Balloon and a Honey Comb.");
-        add("item.confluence.honey_balloon.info2", "It boosts jump height by 33% and jump speed by 30%, increasing your first jump's height to ~10½ blocks (~75% increase), and releases a small swarm of angry bees when the player is hurt, which seek out and deal small amounts of damage to enemies.");// 英文待改
-        add("item.confluence.honey_balloon.info3", "It can be crafted at a Crafting Table with a Shiny Red Balloon and a Honey Comb.");
-        add("item.confluence.ice_skates.info", "Ice Skates are a pre-Hardmode accessory that improves a player's movement control on all Ice Blocks.");
-        add("item.confluence.ice_skates.info2", "The player accelerates faster, slides shorter distances, and will no longer cause Thin Ice to break when landing from falls or jumps.");
-        add("item.confluence.ice_skates.info3", "It can be crafted at a Crafting Table with a Hermes Boots and a Blue Ice.");
-        add("item.confluence.lava_charm.info", "The Lava Charm is an accessory that grants immunity to lava for 7 seconds.");
-        add("item.confluence.lava_charm.info2", "It have a Chance to be dropped from Blaze.");
-        add("item.confluence.lava_waders.info", "The Lava Waders are an accessory that allow the player to walk on the surface of all liquids, including water, honey, shimmer and even lava, without taking lava damage or triggering the On Fire! debuff (unlike the Water Walking Boots and Obsidian Water Walking Boots, which only allow walking on water and honey).");
-        add("item.confluence.lava_waders.info2", "Lava Waders also allow the player to submerge in lava safely for 7 seconds (press the Down key to submerge), without incurring lava damage or triggering the On Fire! debuff.");
-        add("item.confluence.lava_waders.info3", "All liquids, including lava, can be walked on indefinitely while the Lava Waders are equipped. ");
-        add("item.confluence.lava_waders.info4", "The countdown only applies when submerged in lava, whereas the player can stand on its surface indefinitely.");
-        add("item.confluence.lava_waders.info5", "It also reduces lava's base damage from 80 to 35.");
-        add("item.confluence.lava_waders.info6", "It can be crafted at a Crafting Table using a Obsidian Water Walking Boots, a Lava Charm, and a Obsidian Rose or \n " +
-            "a Molten Charm, a Water Walking Boots, and a Obsidian Rose or Molten Charm , a Obsidian Water Walking Boots ,and a Obsidian Rose or \n " +
-            "a Molten Skull Rose ,and a Obsidian Water Walking Boots or a Molten Skull Rose ,and a Water Walking Boots.");
-        add("item.confluence.lightning_boots.info", "Lightning Boots are an accessory that have essentially the same functionality as Spectre Boots, but with enhanced running speed.");
-        add("item.confluence.lightning_boots.info2", "They have an 8% movement speed bonus compared to the Spectre Boots.");
-        add("item.confluence.lightning_boots.info3", "This item can be crafted at a Crafting Table using a Spectre Boots, a Anklet of the Wind, and a Aglet.");
-        add("item.confluence.lucky_horseshoe.info", "The Lucky Horseshoe is an accessory that negates fall damage and grants +0.05 luck.");
-        add("item.confluence.lucky_horseshoe.info2", "It can be discovered in chests found within Desert Pyramids, End City, Jungle Pyramids, or Ancient Cities.");
-        add("item.confluence.magiluminescence.info", "The Magiluminescence is a pre-Hardmode accessory that increases the player's maximum movement speed by 15% and their acceleration and deceleration by 75%.");
-        add("item.confluence.magiluminescence.info2", "It can be found in End City Chests.");
-        add("item.confluence.magiluminescence.info3", "This increase stacks with the bonus of the Hermes Boots and their variants.");
-        add("item.confluence.magiluminescence.info4", "The Magiluminescence's movement speed buffs are disabled when the player is not grounded.");
-        add("item.confluence.magma_skull.info", "The Magma Skull is a pre-Hardmode immunity accessory that grants the player immunity from blocks that inflict the Burning debuff and grants immunity to lava for 7 seconds.");
-        add("item.confluence.magma_skull.info2", "It can be crafted at a Crafting Table with a Obsidian Skull and a Lava Charm.");
-        add("item.confluence.molten_charm.info", "The Molten Charm is a pre-Hardmode accessory crafted from a Lava Charm and an Obsidian Skull, combining the effects of both items.");
-        add("item.confluence.molten_charm.info2", "The Molten Charm also grants immunity to the burning damage normally inflicted by contact with Meteorite, Hellstone, and Hellstone Brick. ");
-        add("item.confluence.molten_charm.info3", "It does not grant immunity to other fire-based damage.");
-        add("item.confluence.obsidian_horseshoe.info", "The Obsidian Horseshoe is an accessory that combines the functionality of the Lucky Horseshoe and the Obsidian Skull.");
-        add("item.confluence.obsidian_horseshoe.info2", "It grants immunity to the burning damage inflicted by Meteorite, Hellstone, and Hellstone Bricks, negates fall damage and grants +0.05 luck.");
-        add("item.confluence.obsidian_horseshoe.info3", "However, it does not provide the extra 1 point of defense that is granted by the Obsidian Skull.");
-        add("item.confluence.obsidian_horseshoe.info4", "It can be crafted at a Crafting Table with a Lucky Horseshoe and a Obsidian Skull.");
-        add("item.confluence.obsidian_water_walking_boots.info", "Obsidian Water Walking Boots are an accessory which combines the abilities of the Water Walking Boots and the Obsidian Skull.");
-        add("item.confluence.obsidian_water_walking_boots.info2", "They allow the wearer to walk on water, honey, and shimmer, while also giving immunity to the Burning debuff.");
-        add("item.confluence.obsidian_water_walking_boots.info3", "They do not allow walking on lava.");
-        add("item.confluence.obsidian_water_walking_boots.info4", "It can be crafted at a Crafting Table with a Water Walking Boots and a Obsidian Skull.");
-        add("item.confluence.pink_horseshoe_balloon.info", "The Pink Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 33% and jump speed by 30%, grants a double jump, and grants +0.05 luck.");
-        add("item.confluence.pink_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks (~75% increase), while the double jump's height is increased from 7 blocks to 13 blocks, reaching a total of 23.5 blocks with both jumps.");// 英文待改
-        add("item.confluence.pink_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Sharkron Balloon and a Lucky Horseshoe.");
-        add("item.confluence.rocket_boots.info", "Rocket Boots are an accessory that allows a player to fly for a period of around 1.6 seconds (100 game frames).");
-        add("item.confluence.rocket_boots.info2", "They require a jump from midair to activate (a double-jump, or a jump while falling).");
-        add("item.confluence.rocket_boots.info3", "This item can be crafted at a Crafting Table using a Iron Boots,Iron Ingots and a Fire Charge.");
-        add("item.confluence.rocket_boots.info4", "If the Cloud in a Bottle is also equipped, its double-jump effect will engage first; pressing and holding the jump key afterward while still in midair will then activate the Rocket Boots.");// 英文待改
-        add("item.confluence.sailfish_boots.info", "Sailfish Boots are an accessory that allows the user to sprint.");
-        add("item.confluence.sailfish_boots.info2", "It can be found in Shipwreck Chests.");
-        add("item.confluence.sailfish_boots.info3", "When equipped, they allow the player to gain a speed boost after running for a certain distance continuously.");
-        add("item.confluence.sailfish_boots.info4", "By running in one direction, the player's movement speed increases up to 40%.");
-        add("item.confluence.sandstorm_in_a_balloon.info", "The Sandstorm in a Balloon is an accessory that combines the functions of the Sandstorm in a Bottle and the Shiny Red Balloon.");
-        add("item.confluence.sandstorm_in_a_balloon.info2", "It can be crafted at a Crafting Table with a Sandstorm in a Bottle and a Shiny Red Balloon.");// 英文待改
-        add("item.confluence.sandstorm_in_a_balloon.info3", "It boosts jump height by 33% and jump speed by 30%, increasing the player's first jump's height to 10.5 meters, and provides a double jump that can reach a height of 26.5 meters, for a total height of 37 meters.");
+        add("item.confluence.hermes_boots.info", "It can be found in Chests in the Village Armorer.");
+        add("item.confluence.lava_charm.info", "It have a Chance to be dropped from Blaze.");
+        add("item.confluence.lucky_horseshoe.info", "It can be discovered in chests found within Desert Pyramids, End City, Jungle Pyramids, or Ancient Cities.");
+        add("item.confluence.magiluminescence.info", "It can be found in End City Chests.");
+        add("item.confluence.sailfish_boots.info", "It can be found in Shipwreck Chests.");
         add("item.confluence.sandstorm_in_a_bottle.info", "The Sandstorm in a Bottle is an accessory that can be found in Chests in the Desert Pyramid.");
-        add("item.confluence.sandstorm_in_a_bottle.info2", "It is similar to the Cloud in a Bottle, providing a double-jump that allows for some extra height, but instead of a cloud beneath the feet, a sand jet appears and the character visually spins as they ascend on that jet.");
-        add("item.confluence.sandstorm_in_a_bottle.info3", "The Sandstorm jump goes 15 meters into the air, totalling 21 meters when put together with the first jump.");// 英文待改
-        add("item.confluence.sandstorm_in_a_bottle.info4", "This is nearly twice as high as the height achievable with the Cloud in a Bottle.");
-        add("item.confluence.sharkron_balloon.info", "The Sharkron Balloon is an accessory that combines the effects of the Tsunami in a Bottle and the Balloon Pufferfish.");
-        add("item.confluence.sharkron_balloon.info2", "It boosts jump height by 33% and jump speed by 30% increasing your first jump's height to ~10½ blocks (~75% increase), and provides a double jump that now goes 13 blocks, for a total height of 23½ blocks.");// 英文待改
-        add("item.confluence.shiny_red_balloon.info", "The Shiny Red Balloon is an accessory that increases the player's jump height by 33% and jump speed by 30%, increasing the height that the player can jump from 6 blocks (12 feet) to ~10½ blocks (21 feet), effectively a ~75% boost. However, it oddly reduces jump height when underwater, from 8 blocks (16 feet) to ~7 blocks (14 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info2", "When the player has the Hero of the Village effect, the librarian has a chance to give the player this item.");
-        add("item.confluence.shiny_red_balloon.info3", "The Shiny Red Balloon stacks with other jump-boosting accessories:");
-        add("item.confluence.shiny_red_balloon.info4", "The Cloud in a Bottle's double-jump height is increased from 5 blocks (10 feet) to 9 blocks (18 feet), for a total jump height of 19½ blocks (39 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info5", "The Blizzard in a Bottle's double-jump height is increased from 8 blocks (16 feet) to 14½ blocks (29 feet), for a total jump height of 25 blocks (50 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info6", "The Sandstorm in a Bottle's double-jump height is increased from 14½ blocks (29 feet) to 26½ blocks (53 feet), for a total jump height of 37 blocks (74 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info7", "The Fart in a Jar's double-jump height is increased from 10½ blocks (21 feet) to 18½ blocks (37 feet), for a total jump height of 29 blocks (58 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info8", "The Tsunami in a Bottle's double-jump height is increased from 7 blocks (14 feet) to 12 blocks (24 feet), for a total jump height of 23½ blocks (47 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info9", "With the Rocket/Spectre Boots, flight is accelerated, making the same flight time carry the player higher and/or farther.");
-        add("item.confluence.shiny_red_balloon.info10", "The Frog Leg jump bonus stacks additively with the Shiny Red Balloon bonus, letting the first jump reach 16½ blocks (33 feet).");// 英文待改
-        add("item.confluence.shiny_red_balloon.info11", "With wings, flight time is increased.");
-        add("item.confluence.shiny_red_balloon.info12", "However, the Honey Balloon and Balloon Pufferfish do not stack with the Shiny Red Balloon; they all grant the same benefits.");
-        add("item.confluence.spectre_boots.info", "Spectre Boots are an accessory crafted from Rocket Boots and either Flurry Boots, Hermes Boots, Dunerider Boots, or Sailfish Boots, and combine their functionality.");
-        add("item.confluence.spectre_boots.info2", "During flight, they emit a white/blue cloud trail, but unlike the Rocket Boots, they do not produce any light. Their flight time is about 1.6 seconds, identical to Rocket Boots.");
-        add("item.confluence.terraspark_boots.info", "The Terraspark Boots are a pre-Hardmode accessory crafted by combining Frostspark Boots and Lava Waders at a Crafting Table, providing the benefits of both items.");
-        add("item.confluence.terraspark_boots.info2", "They are the final upgrade of the Hermes/Sailfish/Flurry/Dunerider and Water Walking Boots.");
-        add("item.confluence.tsunami_in_a_bottle.info", "The Tsunami in a Bottle is an accessory which can be found in Shipwreck Chests");
-        add("item.confluence.tsunami_in_a_bottle.info2", "Similar to the Cloud in a Bottle, it allows the player to double-jump.");
-        add("item.confluence.tsunami_in_a_bottle.info3", "The Tsunami jump goes 7 meters into the air, totalling 13 meters when put together with the first jump.");// 英文待改
-        add("item.confluence.water_walking_boots.info", "Water Walking Boots are an accessory that allows a player to walk on water, honey, and shimmer.");
-        add("item.confluence.water_walking_boots.info2", "The player moves across these liquids at normal speed without sinking.");
-        add("item.confluence.water_walking_boots.info3", "They do not allow walking on lava. When the player is on a liquid, they may press Down to fall through the liquid, similar to a platform.");
-        add("item.confluence.water_walking_boots.info4", "It can be found in Ocean Ruins Chests.");
-        add("item.confluence.white_horseshoe_balloon.info", "The White Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 33% and jump speed by 30%, grants a double-jump, and grants +0.05 luck.");
-        add("item.confluence.white_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks (~75% increase), while the double-jump's height is increased from 8 blocks to 14.5 blocks, reaching a total of 25 blocks with both jumps.");// 英文待改
-        add("item.confluence.white_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Lucky Horseshoe and a Blizzard in a Balloon.");
-        add("item.confluence.yellow_horseshoe_balloon.info", "The Yellow Horseshoe Balloon is an accessory that grants immunity to fall damage, increases jump height by 75%, grants a double-jump, and grants +0.05 luck.");
-        add("item.confluence.yellow_horseshoe_balloon.info2", "The height of the first jump is increased from 6 blocks to 10.5 blocks, while the double-jump's height is increased from 15 blocks to 26.5 blocks, reaching a total of 37 blocks with both jumps.");// 英文待改
-        add("item.confluence.yellow_horseshoe_balloon.info3", "It can be crafted at a Crafting Table with a Lucky Horseshoe and a Sandstorm in a Balloon.");
+        add("item.confluence.shiny_red_balloon.info", "When the player has the Hero of the Village effect, the librarian has a chance to give the player this item.");
+        add("item.confluence.shoe_spikes.info", "It have a Chance to be dropped from Cave Spider.");
+        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
+        add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
+        add("item.confluence.tsunami_in_a_bottle.info", "It can be found in Shipwreck Chests");
+        add("item.confluence.water_walking_boots.info", "It can be found in Ocean Ruins Chests.");
         add("item.confluence.copper_watch.info", "The Copper Watch is a low-tier watch.");
         add("item.confluence.copper_watch.info2", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last hour.");
         add("item.confluence.copper_watch.info3", "This item can be crafted at a Crafting Table using redstone, a copper ingot, and a chain.");
@@ -403,11 +264,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gravity_globe.info2", "The Gravity Glob have a Chance to be dropped from Shulker.");
         add("item.confluence.hive_pack.info", "The Hive Pack is a accessory , when equipped, grants a 1/2 (50%) chance of replacing friendly Bee projectiles with larger \"Giant Bees\".");
         add("item.confluence.hive_pack.info2", "The Hive Pack have a Chance to be dropped from Bee.");
-        add("item.confluence.royal_gel.info", "The Royal Gel is a pre-Hardmode accessory that pacifies most slimes when equipped, causing them to no longer pursue the player, and will deal no contact damage or fire projectiles, even if the player deals damage to them.");
+        add("item.confluence.royal_gel.info", "The Royal Gel is a accessory that pacifies most slimes when equipped, causing them to no longer pursue the player, and will deal no contact damage or fire projectiles, even if the player deals damage to them.");
         add("item.confluence.royal_gel.info2", "The Royal Gel have a Chance to be dropped from Slime.");
-        add("item.confluence.shield_of_cthulhu.info", "The Shield of Cthulhu is a pre-Hardmode shield accessory that allows the player to perform a dash attack by double-tapping either the Left or Right key.");
+        add("item.confluence.shield_of_cthulhu.info", "The Shield of Cthulhu is a shield accessory that allows the player to perform a dash attack by double-tapping either the Left or Right key.");
         add("item.confluence.shield_of_cthulhu.info2", "It have a Chance to be dropped from Ravager.");
-        add("item.confluence.worm_scarf.info", "The Worm Scarf is a pre-Hardmode accessory that reduces incoming damage by 17%.");
+        add("item.confluence.worm_scarf.info", "The Worm Scarf is a accessory that reduces incoming damage by 17%.");
         add("item.confluence.worm_scarf.info2", "When a player has a tamed cat, the cat may give the player this item when they wake up.");
         add("item.confluence.ancient_chisel.info", "The Ancient Chisel is an accessory that increases mining speed by 25%.");
         add("item.confluence.ancient_chisel.info2", "The item can be pass the Archaeology to obtained.");
@@ -498,6 +359,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.info2", "When the Turtle died for Freezing chance to dropped this item.");
         add("item.confluence.hand_drill.info", "The Hand Drill is an accessory that grants the player immunity to the Mining Fatigue debuff.");
         add("item.confluence.hand_drill.info2", "It have a Chance to be dropped from Elder Guardian.");
+        add("item.confluence.hand_warmer.info", "The Hand Warmer is an immunity accessory that grants the player immunity to the Chilled and Frozen debuffs.");
+        add("item.confluence.hand_warmer.info2", "It can be crafted at a Crafting Table with a Wool and a Leather.");
         add("item.confluence.hero_shield.info", "The Hero Shield is a accessory that redirects 25% of damage from players on the same team while above 25% health, similar to the effect of the Paladin's Shield.");
         add("item.confluence.hero_shield.info2", "It can be crafted at a Crafting Table with a Paladin's Shield and a Flesh Knuckles.");
         add("item.confluence.holy_water.info", "The Holy Water is an accessory that grants the player immunity to the Wither debuff.");
@@ -601,10 +464,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.warrior_emblem.info", "The Warrior Emblem is a accessory that increases melee damage by 15%.");
         add("item.confluence.warrior_emblem.info2", "It have a Chance to be dropped from Vindicator.");
         add("item.confluence.demon_heart.info", "It to be dropped from Wither.");
-        add("item.confluence.climbing_claws.info", "It have a Chance to be dropped from Spider.");
-        add("item.confluence.shoe_spikes.info", "It have a Chance to be dropped from Cave Spider.");
-        add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
-        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 

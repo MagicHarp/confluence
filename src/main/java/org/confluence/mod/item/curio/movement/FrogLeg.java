@@ -27,4 +27,11 @@ public class FrogLeg extends BaseCurioItem implements IJumpBoost, IFallResistanc
         list.add(IJumpBoost.TOOLTIP);
         list.add(IFallResistance.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.frog_leg.info")
+        };
+    }
 }

@@ -44,9 +44,7 @@ public class AnkletOfTheWind extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.anklet_of_the_wind.info"),
-            Component.translatable("item.confluence.anklet_of_the_wind.info2"),
-            Component.translatable("item.confluence.anklet_of_the_wind.info3")
+            Component.translatable("item.confluence.anklet_of_the_wind.info")
         };
     }
 }
