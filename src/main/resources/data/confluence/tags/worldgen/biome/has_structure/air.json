@@ -35,6 +35,8 @@
     "minecraft:sparse_jungle",
     "minecraft:bamboo_jungle",
     "minecraft:lush_caves",
-    "minecraft:dripstone_caves"
+    "minecraft:dripstone_caves",
+    "confluence:the_corruption",
+    "confluence:tr_crimson"
   ]
 }

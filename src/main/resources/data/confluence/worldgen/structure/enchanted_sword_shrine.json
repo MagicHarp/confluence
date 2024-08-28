@@ -5,7 +5,7 @@
   "type": "minecraft:jigsaw",
   "start_pool": "confluence:enchanted_sword_shrine/enchanted_sword_shrine",
   "size": 7,
-  "step": "underground_structures",
+  "step": "strongholds",
   "start_height": {
     "type": "uniform",
     "min_inclusive": {
