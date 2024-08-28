@@ -4,5 +4,5 @@
     "confluence:the_corruption"
   ],
   "features": "confluence:corruption_pots",
-  "step": "vegetal_decoration"
+  "step": "local_modifications"
 }
