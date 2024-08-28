@@ -60,6 +60,10 @@ public final class ModUtils {
         level.addFreshEntity(itemEntity);
     }
 
+    public static void createItemEntity(ItemStack itemStack, Vec3 vec, Level level) {
+        createItemEntity(itemStack, vec.x, vec.y, vec.z, level, 40);
+    }
+
     public static void dropMoney(int amount, double x, double y, double z, Level level) {
         int copper_count = amount % 9;
         int i = ((amount - copper_count) / 9);

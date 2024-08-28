@@ -1752,6 +1752,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS.get(), "寒颤棘");
         add(ModItems.SUNFLOWERS.get(), "太阳花");
         add(ModItems.DEATHWEED.get(), "死亡草");
+        add(STELLAR_BLOSSOM.get(), "星辰草");
         add(WATERLEAF_SEED.get(), "幌菊种子");
         add(ModItems.FLAMEFLOWERS_SEED.get(), "火焰花种子");
         add(ModItems.MOONSHINE_GRASS_SEED.get(), "月光草种子");
@@ -1759,6 +1760,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS_SEED.get(), "寒颤棘种子");
         add(ModItems.SUNFLOWERS_SEED.get(), "太阳花种子");
         add(ModItems.DEATHWEED_SEED.get(), "死亡草种子");
+        add(STELLAR_BLOSSOM_SEED.get(), "星辰草种子");
 
         add(CRIMSON_THORN.get(), "猩红荆棘");
         add(CORRUPTION_THORN.get(), "腐化荆棘");
