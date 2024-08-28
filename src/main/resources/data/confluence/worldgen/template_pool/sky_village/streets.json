@@ -6,6 +6,15 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
+        "location": "confluence:sky_village/sky_village_street_0",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
         "location": "confluence:sky_village/sky_village_street_1",
         "processors": "minecraft:empty"
       }
@@ -15,7 +24,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "confluence:sky_village/sky_village_street_0",
+        "location": "confluence:sky_village/sky_village_street_2",
         "processors": "minecraft:empty"
       }
     },
