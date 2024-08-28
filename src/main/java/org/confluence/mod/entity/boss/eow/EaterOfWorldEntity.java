@@ -15,7 +15,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class TestWormEntity extends AbstractWormEntity {
+public class EaterOfWorldEntity extends AbstractWormEntity {
     public static final int WORM_LENGTH = 72;
     public static final float WORM_HEALTH = 5f;
     public static final WormMovementUtils.WormSegmentMovementOptions FOLLOW_INFO =
@@ -24,12 +24,12 @@ public class TestWormEntity extends AbstractWormEntity {
                     .setStraighteningMultiplier(-0.1)
                     .setVelocityOrTeleport(true);
 
-    public TestWormEntity(EntityType<? extends AbstractWormEntity> entityType, Level level) {
+    public EaterOfWorldEntity(EntityType<? extends AbstractWormEntity> entityType, Level level) {
         super(entityType, level, WORM_LENGTH, WORM_HEALTH);
     }
     @Override
     protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
-        TestWormPart result = new TestWormPart(ModEntities.TEST_WORM_PART.get(), level());
+        EaterOfWorldPart result = new EaterOfWorldPart(ModEntities.EATER_OF_WORLD_PART.get(), level());
         result.setInfo(this, index, WORM_HEALTH);
         return result;
     }

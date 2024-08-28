@@ -6,6 +6,7 @@ import software.bernie.geckolib.model.GeoModel;
 
 import static org.confluence.mod.Confluence.MODID;
 
+// 对于所有蠕虫的总实体通用（因为它们不应该向客户端显示）
 // TODO: 暂时使用恶魔眼模型
 public class WormOverallModel extends GeoModel<AbstractWormEntity> {
     private static final ResourceLocation MODEL = new ResourceLocation(MODID, "geo/entity/demon_eye.geo.json");

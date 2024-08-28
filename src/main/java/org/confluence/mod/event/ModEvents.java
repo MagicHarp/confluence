@@ -37,8 +37,8 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.slime.BaseSlime;
-import org.confluence.mod.entity.boss.eow.TestWormEntity;
-import org.confluence.mod.entity.boss.eow.TestWormPart;
+import org.confluence.mod.entity.boss.eow.EaterOfWorldEntity;
+import org.confluence.mod.entity.boss.eow.EaterOfWorldPart;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.integration.apothic.ApothicHelper;
@@ -79,8 +79,8 @@ public final class ModEvents {
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
         event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
 
-        event.put(ModEntities.TEST_WORM.get(), TestWormEntity.createAttributes().build());
-        event.put(ModEntities.TEST_WORM_PART.get(), TestWormPart.createAttributes().build());
+        event.put(ModEntities.EATER_OF_WORLD.get(), EaterOfWorldEntity.createAttributes().build());
+        event.put(ModEntities.EATER_OF_WORLD_PART.get(), EaterOfWorldPart.createAttributes().build());
     }
 
     @SubscribeEvent

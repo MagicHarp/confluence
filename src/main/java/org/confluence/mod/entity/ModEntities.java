@@ -20,8 +20,8 @@ import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.entity.slime.NonDropSlime;
-import org.confluence.mod.entity.boss.eow.TestWormEntity;
-import org.confluence.mod.entity.boss.eow.TestWormPart;
+import org.confluence.mod.entity.boss.eow.EaterOfWorldEntity;
+import org.confluence.mod.entity.boss.eow.EaterOfWorldPart;
 
 @SuppressWarnings("unused")
 public final class ModEntities {
@@ -47,8 +47,8 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:demon_eye"));
   
-    public static final RegistryObject<EntityType<TestWormEntity>> TEST_WORM = ENTITIES.register("test_worm", () -> EntityType.Builder.of(TestWormEntity::new, MobCategory.MONSTER).sized(0.1F, 0.1F).clientTrackingRange(10).build("confluence:test_worm"));
-    public static final RegistryObject<EntityType<TestWormPart>> TEST_WORM_PART = ENTITIES.register("test_worm_segment", () -> EntityType.Builder.<TestWormPart>of(TestWormPart::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:test_worm_segment"));
+    public static final RegistryObject<EntityType<EaterOfWorldEntity>> EATER_OF_WORLD = ENTITIES.register("eater_of_world", () -> EntityType.Builder.of(EaterOfWorldEntity::new, MobCategory.MONSTER).sized(0.1F, 0.1F).clientTrackingRange(10).build("confluence:eater_of_world"));
+    public static final RegistryObject<EntityType<EaterOfWorldPart>> EATER_OF_WORLD_PART = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorldPart>of(EaterOfWorldPart::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:eater_of_world_segment"));
 
     public static final RegistryObject<EntityType<BaseBulletEntity>> BASE_BULLET = ENTITIES.register("base_bullet", () -> EntityType.Builder.<BaseBulletEntity>of(BaseBulletEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(10).build("confluence:base_bullet"));
 

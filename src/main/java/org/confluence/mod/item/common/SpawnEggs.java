@@ -31,7 +31,7 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
 
     KING_SLIME_SPAWN_EGG("king_slime_spawn_egg", ModEntities.KING_SLIME, 0x73bcf4, 0xf8e234),
   
-    TEST_WORM_SPAWN_EGG("test_worm_spawn_egg", ModEntities.TEST_WORM, 0xffffff,0xab0d0d);
+    EATER_OF_WORLD_SPAWN_EGG("eater_of_world_spawn_egg", ModEntities.EATER_OF_WORLD, 0xffffff,0xab0d0d);
 
     private final RegistryObject<ForgeSpawnEggItem> value;
 

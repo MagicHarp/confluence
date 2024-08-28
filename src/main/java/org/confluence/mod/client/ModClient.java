@@ -176,8 +176,8 @@ public final class ModClient {
         event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
 
         event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
-        event.registerEntityRenderer(TEST_WORM.get(), TestWormRenderer::new);
-        event.registerEntityRenderer(TEST_WORM_PART.get(), TestWormSegmentRenderer::new);
+        event.registerEntityRenderer(EATER_OF_WORLD.get(), EaterOfWorldRenderer::new);
+        event.registerEntityRenderer(EATER_OF_WORLD_PART.get(), EaterOfWorldSegmentRenderer::new);
 
         event.registerEntityRenderer(BASE_BULLET.get(), BulletRenderer::new);
         event.registerEntityRenderer(FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);

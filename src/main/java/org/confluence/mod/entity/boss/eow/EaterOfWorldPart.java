@@ -20,18 +20,39 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
 
-public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEntity, IBossFSM {
+public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implements GeoEntity, IBossFSM {
+    // 吐口水间隔
+    public static final int SPIT_INTERVAL = 20;
+    // 口水速度
+    public static final double SPIT_SPEED = 1d;
+    // 冲刺时加速度大小
+    public static final double DASH_ACCELERATION_MAG = 0.5d;
+    // 冲刺刚结束时向下移动的效率
+    public static final double GRADUAL_DESCEND_FACTOR = 0.025d;
+    // 停止冲刺变向的距离
+    public static final double DASH_END_DISTANCE = 8d;
+    // 冲刺变向结束后多少刻从过渡期转到下一次冲刺的准备期
+    public static final int DASH_HOLD_DURATION = 25;
+    // 准备下一次冲刺前加速度大小
+    public static final double WINDUP_ACCELERATION_MAG = 0.35d;
+    // 准备下一次冲刺前向下移动的效率
+    public static final double AGGRESSIVE_DESCEND_FACTOR = 0.05d;
+    // 准备下一次冲刺的时长
+    public static final int DASH_WINDUP_DURATION = 40;
+    // 多久没有目标后脱战？
+    public static final int TIMEOUT_THRESHOLD = 20;
+
     // 吐口水；所有体节都从这里开始，头节会改为冲撞行为模式
-    public static final State<TestWormPart> STATE_SPIT = new State<>() {
+    public static final State<EaterOfWorldPart> STATE_SPIT = new State<>() {
         @Override
-        public void tick(TestWormPart boss) {
+        public void tick(EaterOfWorldPart boss) {
             // 如果变成头的话直接开创
             if (boss.getSegmentType() == SegmentType.HEAD) {
                 boss.toState(STATE_RUSH);
                 return;
             }
             // TODO: 平衡一下发射间隔
-            int shootInterval = 20;
+            int shootInterval = SPIT_INTERVAL;
             if (boss.indexAI % shootInterval == 0) {
                 boss.spit();
             }
@@ -39,37 +60,31 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
         }
     };
     // 冲向玩家
-    public static final State<TestWormPart> STATE_RUSH = new State<>() {
+    public static final State<EaterOfWorldPart> STATE_RUSH = new State<>() {
         @Override
-        public void tick(TestWormPart boss) {
+        public void tick(EaterOfWorldPart boss) {
             LivingEntity target = boss.getTarget();
-
-            // 脱战
-            if (target == null) {
-                boss.getParentMob().discard();
-                return;
-            }
 
             // 注：indexAI = 0时为冲刺，后续则为过渡时期
 
             double distSqr = boss.position().distanceToSqr(target.position());
             // 速度
             boolean shouldIncreaseIdx = true;
-            // 还没靠近过玩家
+            // 还没靠近过玩家，冲刺，冲刺，冲！冲！
             if (boss.indexAI == 0) {
                 // 在足够接近前不要停止冲刺
-                if (distSqr > 64) {
+                if (distSqr > DASH_END_DISTANCE * DASH_END_DISTANCE) {
                     Vec3 targetLoc = target.getEyePosition();
-                    boss.acc = ModUtils.getDirection(boss.position(), targetLoc, 0.5);
+                    boss.acc = ModUtils.getDirection(boss.position(), targetLoc, DASH_ACCELERATION_MAG);
                     shouldIncreaseIdx = false;
                 }
             }
-            // 略微向下加速使后续移动更平滑
+            // 冲刺结束后略微向下加速
             else {
-                boss.acc = boss.acc.scale(0.975).subtract(0, 0.025, 0);
+                boss.acc = boss.acc.scale(1 - GRADUAL_DESCEND_FACTOR).subtract(0, GRADUAL_DESCEND_FACTOR, 0);
             }
             // 不久后进入缩地阶段
-            if (boss.indexAI >= 25) {
+            if (boss.indexAI >= DASH_HOLD_DURATION) {
                 boss.toState(STATE_WINDUP);
             }
             // 更新速度
@@ -80,16 +95,10 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
         }
     };
     // 转个圈再撞过来
-    public static final State<TestWormPart> STATE_WINDUP = new State<>() {
+    public static final State<EaterOfWorldPart> STATE_WINDUP = new State<>() {
         @Override
-        public void tick(TestWormPart boss) {
+        public void tick(EaterOfWorldPart boss) {
             LivingEntity target = boss.getTarget();
-
-            // 脱战
-            if (target == null) {
-                boss.getParentMob().discard();
-                return;
-            }
 
             boolean shouldIncreaseIdx = true;
             // 没有下落到比玩家更低时，不要增加index
@@ -99,12 +108,12 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
             // 比玩家更低之后快速向玩家脚下移动（实际上不会真的到脚下）
             else {
                 Vec3 targetLoc = target.position().subtract(0, 20, 0);
-                boss.acc = ModUtils.getDirection(boss.position(), targetLoc, 0.35);
+                boss.acc = ModUtils.getDirection(boss.position(), targetLoc, WINDUP_ACCELERATION_MAG);
             }
             // 更快地获得向下的加速度
-            boss.acc = boss.acc.scale(0.95).subtract(0, 0.05, 0);
+            boss.acc = boss.acc.scale(1 - AGGRESSIVE_DESCEND_FACTOR).subtract(0, AGGRESSIVE_DESCEND_FACTOR, 0);
             // 不久后进入冲刺阶段
-            if (boss.indexAI >= 40) {
+            if (boss.indexAI >= DASH_WINDUP_DURATION) {
                 boss.toState(STATE_RUSH);
             }
             // 更新速度
@@ -114,14 +123,18 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
                 boss.indexAI ++;
         }
     };
-    private State<TestWormPart> AIState = STATE_SPIT;
+    private State<EaterOfWorldPart> AIState = STATE_SPIT;
     // 随机化初始indexAI防止吐口水过于同步
-    int indexAI = level().random.nextInt(100);
+    int indexAI = level().random.nextInt(SPIT_INTERVAL);
+    // 一段时间内没有目标后脱战
+    int ticksWithoutTarget = 0;
     Vec3 pooledVel = Vec3.ZERO;
     Vec3 acc = Vec3.ZERO;
 
-    public TestWormPart(EntityType<? extends TestWormPart> pEntityType, Level pLevel) {
+    public EaterOfWorldPart(EntityType<? extends EaterOfWorldPart> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        // 跟随较远，因为脱战完全由目标玩家控制
+        getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(100d);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -143,6 +156,15 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
 
     @Override
     public void AI() {
+        // 脱战
+        if (getTarget() == null) {
+            setDeltaMovement(getDeltaMovement().scale(0.5));
+            if (++ticksWithoutTarget >= TIMEOUT_THRESHOLD)
+                getParentMob().discard();
+            return;
+        }
+        // 重置脱战计数器
+        ticksWithoutTarget = 0;
         // tick
         if (! level().isClientSide()) {
             this.AIState.tick(this);
@@ -174,8 +196,7 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
 
     /** TODO:吐魔唾液的方法；默认在触发时目标存在！ */
     private void spit() {
-        // TODO: 平衡弹幕速度
-        Vec3 projVel = ModUtils.getDirection(getEyePosition(), getTarget().getEyePosition(), 1);
+        Vec3 projVel = ModUtils.getDirection(getEyePosition(), getTarget().getEyePosition(), SPIT_SPEED);
         // TODO: he~tui
     }
 
