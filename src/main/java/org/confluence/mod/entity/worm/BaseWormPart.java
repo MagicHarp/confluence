@@ -1,39 +1,36 @@
 package org.confluence.mod.entity.worm;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 // 不要用PartEntity，PartEntity不是LivingEntity，连移动功能都没有
-public class BaseWormPart<E extends AbstractWormEntity> extends LivingEntity {
+public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
     public enum SegmentType {
         HEAD, BODY, TAIL;
     }
     private float maxHealth = 10;
     private AbstractWormEntity parentMob;
-    protected AbstractWormEntity getParentMob() {return parentMob;}
+    public AbstractWormEntity getParentMob() {return parentMob;}
     // 体节在wormParts中的index
     private int segmentIndex;
-    protected int getSegmentIndex() {return segmentIndex;}
+    public int getSegmentIndex() {return segmentIndex;}
     // 不要给final，世吞可以被打断
     protected SegmentType segmentType;
+    public SegmentType getSegmentType() {return segmentType;}
 
-    public BaseWormPart(EntityType<? extends LivingEntity> entityType, Level level) {
+    public BaseWormPart(EntityType<? extends Mob> entityType, Level level) {
         super(entityType, level);
     }
 
-    protected void setInfo(E parentMob, int segmentIndex, float maxHealth) {
+    public void setInfo(E parentMob, int segmentIndex, float maxHealth) {
         this.parentMob = parentMob;
         this.segmentIndex = segmentIndex;
         this.maxHealth = maxHealth;

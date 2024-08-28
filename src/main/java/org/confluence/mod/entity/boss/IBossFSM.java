@@ -1,9 +1,5 @@
 package org.confluence.mod.entity.boss;
 
-import net.minecraft.world.entity.player.Player;
-
-import java.util.List;
-
 /** Finite State Machine */
 public interface IBossFSM {
     interface State<E extends IBossFSM> {
@@ -19,6 +15,4 @@ public interface IBossFSM {
     void toState(State newState);
 
     void AI();
-
-    List<Player> getNearbyPlayers(double radius);
 }

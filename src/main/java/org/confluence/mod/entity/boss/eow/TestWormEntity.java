@@ -1,25 +1,47 @@
-package org.confluence.mod.entity.worm;
+package org.confluence.mod.entity.boss.eow;
 
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.util.ModUtils;
-import software.bernie.geckolib.animatable.GeoEntity;
+import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.worm.AbstractWormEntity;
+import org.confluence.mod.entity.worm.BaseWormPart;
+import org.confluence.mod.entity.worm.WormMovementUtils;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEntity {
-    int indexAI = 0;
+public class TestWormEntity extends AbstractWormEntity {
+    public static final int WORM_LENGTH = 72;
+    public static final float WORM_HEALTH = 5f;
+    public static final WormMovementUtils.WormSegmentMovementOptions FOLLOW_INFO =
+            new WormMovementUtils.WormSegmentMovementOptions()
+                    .setFollowDistance(0.5)
+                    .setStraighteningMultiplier(-0.1)
+                    .setVelocityOrTeleport(true);
 
-    public TestWormPart(EntityType<? extends TestWormPart> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public TestWormEntity(EntityType<? extends AbstractWormEntity> entityType, Level level) {
+        super(entityType, level, WORM_LENGTH, WORM_HEALTH);
     }
+    @Override
+    protected BaseWormPart<? extends AbstractWormEntity> partConstructor(int index) {
+        TestWormPart result = new TestWormPart(ModEntities.TEST_WORM_PART.get(), level());
+        result.setInfo(this, index, WORM_HEALTH);
+        return result;
+    }
+    @Override
+    protected WormMovementUtils.WormSegmentMovementOptions getWormFollowOption() {
+        return FOLLOW_INFO;
+    }
+    @Override
+    protected void deathCallback() {
+
+    }
+
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
@@ -30,24 +52,6 @@ public class TestWormPart extends BaseWormPart<TestWormEntity> implements GeoEnt
     }
 
 
-    @Override
-    protected void tickSegment() {
-        super.tickSegment();
-
-        if (this.segmentType == SegmentType.HEAD) {
-            setDeltaMovement(Mth.sin(indexAI * Mth.TWO_PI / 100f) * 0.5,
-                    Mth.sin(indexAI * Mth.TWO_PI / 60f) * 0.25,
-                    Mth.cos(indexAI * Mth.TWO_PI / 100f) * 0.5);
-            ModUtils.updateEntityRotation(this, getDeltaMovement());
-        }
-
-        indexAI ++;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-    }
 
 
 

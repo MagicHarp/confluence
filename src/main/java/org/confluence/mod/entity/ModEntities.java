@@ -20,8 +20,8 @@ import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.entity.slime.NonDropSlime;
-import org.confluence.mod.entity.worm.TestWormEntity;
-import org.confluence.mod.entity.worm.TestWormPart;
+import org.confluence.mod.entity.boss.eow.TestWormEntity;
+import org.confluence.mod.entity.boss.eow.TestWormPart;
 
 @SuppressWarnings("unused")
 public final class ModEntities {

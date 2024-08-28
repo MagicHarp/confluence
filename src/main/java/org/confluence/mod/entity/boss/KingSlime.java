@@ -193,7 +193,6 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         this.indexAI = 0;
     }
 
-    @Override
     public List<Player> getNearbyPlayers(double radius) {
         return level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(radius));
     }

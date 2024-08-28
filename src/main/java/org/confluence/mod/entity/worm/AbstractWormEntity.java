@@ -5,7 +5,10 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     protected final ArrayList<BaseWormPart<? extends AbstractWormEntity>> wormParts;
+    public ArrayList<BaseWormPart<? extends AbstractWormEntity>> getWormParts() {return wormParts;}
     protected final int TOTAL_LENGTH;
     protected final float MAX_HEALTH;
     protected boolean pendingSegmentSpawn = true;
@@ -176,5 +180,27 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
         if (! level().isClientSide()) {
         }
 
+    }
+
+
+
+    @Override
+    public Iterable<ItemStack> getArmorSlots() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public ItemStack getItemBySlot(EquipmentSlot pSlot) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot pSlot, ItemStack pStack) {
+
+    }
+
+    @Override
+    public HumanoidArm getMainArm() {
+        return HumanoidArm.RIGHT;
     }
 }
