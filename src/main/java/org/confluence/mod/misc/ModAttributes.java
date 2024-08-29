@@ -1,7 +1,11 @@
 package org.confluence.mod.misc;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -15,12 +19,16 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.integration.apothic.ApothicHelper;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Hashtable;
+import java.util.Map;
+
 public final class ModAttributes {
-    private static Attribute CRIT_CHANCE_CACHE;
-    private static Attribute RANGED_VELOCITY_CACHE;
-    private static Attribute RANGED_DAMAGE_CACHE;
-    private static Attribute DODGE_CHANCE_CACHE;
-    private static Attribute MINING_SPEED_CACHE;
+    private static final Hashtable<Attribute, Attribute> MAP = new Hashtable<>();
 
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Confluence.MODID);
 
@@ -51,57 +59,13 @@ public final class ModAttributes {
     }
 
     public static Attribute getCustomAttribute(Attribute attribute) {
-        if (attribute == CRIT_CHANCE.get()) {
-            if (CRIT_CHANCE_CACHE == null) {
-                if (ModConfigs.CRI_CHANCE.getDefault().equals(ModConfigs.CRI_CHANCE.get()) && !ApothicHelper.isAttributesLoaded()) {
-                    CRIT_CHANCE_CACHE = attribute;
-                } else {
-                    CRIT_CHANCE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.CRI_CHANCE.get()));
-                }
-            }
-            return CRIT_CHANCE_CACHE;
-        } else if (attribute == RANGED_VELOCITY.get()) {
-            if (RANGED_VELOCITY_CACHE == null) {
-                if (ModConfigs.RANGED_VELOCITY.getDefault().equals(ModConfigs.RANGED_VELOCITY.get()) && !ApothicHelper.isAttributesLoaded()) {
-                    RANGED_VELOCITY_CACHE = attribute;
-                } else {
-                    RANGED_VELOCITY_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.RANGED_VELOCITY.get()));
-                }
-            }
-            return RANGED_VELOCITY_CACHE;
-        } else if (attribute == RANGED_DAMAGE.get()) {
-            if (RANGED_DAMAGE_CACHE == null) {
-                if (ModConfigs.RANGED_DAMAGE.getDefault().equals(ModConfigs.RANGED_DAMAGE.get()) && !ApothicHelper.isAttributesLoaded()) {
-                    RANGED_DAMAGE_CACHE = attribute;
-                } else {
-                    RANGED_DAMAGE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.RANGED_DAMAGE.get()));
-                }
-            }
-            return RANGED_DAMAGE_CACHE;
-        } else if (attribute == DODGE_CHANCE.get()) {
-            if (DODGE_CHANCE_CACHE == null) {
-                if (ModConfigs.DODGE_CHANCE.getDefault().equals(ModConfigs.DODGE_CHANCE.get()) && !ApothicHelper.isAttributesLoaded()) {
-                    DODGE_CHANCE_CACHE = attribute;
-                } else {
-                    DODGE_CHANCE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.DODGE_CHANCE.get()));
-                }
-            }
-            return DODGE_CHANCE_CACHE;
-        } else if (attribute == MINING_SPEED.get()) {
-            if (MINING_SPEED_CACHE == null) {
-                if (ModConfigs.MINING_SPEED.getDefault().equals(ModConfigs.MINING_SPEED.get()) && !ApothicHelper.isAttributesLoaded()) {
-                    MINING_SPEED_CACHE = attribute;
-                } else {
-                    MINING_SPEED_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.MINING_SPEED.get()));
-                }
-            }
-            return MINING_SPEED_CACHE;
-        }
-        return attribute;
+        Attribute target = MAP.get(attribute);
+        if (target == null) return attribute;
+        return target;
     }
 
     public static boolean hasCustomAttribute(Attribute attribute) {
-        return getCustomAttribute(attribute) != attribute;
+        return MAP.get(attribute) != null;
     }
 
     public static void applyToArrow(LivingEntity living, AbstractArrow abstractArrow) {
@@ -137,5 +101,37 @@ public final class ModAttributes {
         AttributeInstance attributeInstance = living.getAttribute(RANGED_DAMAGE.get());
         if (attributeInstance == null) return amount;
         return amount * (float) attributeInstance.getValue();
+    }
+
+    public static void readJsonConfig() {
+        Map<String, Attribute> available = Map.of(
+            "crit_chance", CRIT_CHANCE.get(),
+            "ranged_velocity", RANGED_VELOCITY.get(),
+            "ranged_damage", RANGED_DAMAGE.get(),
+            "dodge_chance", DODGE_CHANCE.get(),
+            "mining_speed", MINING_SPEED.get()
+        );
+
+        if (ApothicHelper.isAttributesLoaded()) {
+            MAP.put(CRIT_CHANCE.get(), ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.CRIT_CHANCE));
+            MAP.put(RANGED_VELOCITY.get(), ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.ARROW_VELOCITY));
+            MAP.put(RANGED_DAMAGE.get(), ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.ARROW_DAMAGE));
+            MAP.put(DODGE_CHANCE.get(), ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.DODGE_CHANCE));
+            MAP.put(MINING_SPEED.get(), ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.MINING_SPEED));
+        }
+
+        Path path = Confluence.CONFIG_PATH.resolve("attributes.json");
+        if (Files.notExists(path)) return;
+        try (InputStream inputStream = new FileInputStream(path.toFile())) {
+            JsonObject jsonObject = GsonHelper.convertToJsonObject(JsonParser.parseReader(new InputStreamReader(inputStream)), "replaceable");
+            for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+                Attribute raw = available.get(entry.getKey());
+                if (raw == null) continue;
+                ResourceLocation resourceLocation = new ResourceLocation(entry.getValue().getAsString());
+                if (ForgeRegistries.ATTRIBUTES.containsKey(resourceLocation)) {
+                    MAP.put(raw, ForgeRegistries.ATTRIBUTES.getValue(resourceLocation));
+                }
+            }
+        } catch (Exception ignored) {}
     }
 }
