@@ -134,9 +134,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:puzzles-lib-495476:5475403") // 多段跳的前置
 
     //EquipmentBenediction-1.20.1-0.0.5.jar  libs
-    implementation(jarJar("com.xiaohunao.equipment_benediction:EquipmentBenediction:1.20.1-0.0.5")) {
-        jarJar.ranged(it, "[1.20.1-0.0.5,)")
-    }
+    implementation fg.deobf("com.xiaohunao.equipment_benediction:EquipmentBenediction:1.20.1-0.0.5")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
