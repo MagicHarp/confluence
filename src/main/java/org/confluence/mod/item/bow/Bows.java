@@ -35,8 +35,8 @@ public final class Bows {
     @OnlyIn(Dist.CLIENT)
     public static void registerProperties() {
         ResourceLocation pull = new ResourceLocation("pull");
-        ClampedItemPropertyFunction shortBowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / ShortBowItem.FULL_POWER_TICKS : 0.0F;
-        ClampedItemPropertyFunction bowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / 20.0F : 0.0F;
+        ClampedItemPropertyFunction shortBowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / ShortBowItem.MAX_DRAW_DURATION : 0.0F;
+        ClampedItemPropertyFunction bowPull = (itemStack, clientLevel, living, speed) -> living != null && living.getUseItem() == itemStack ? (float) (itemStack.getUseDuration() - living.getUseItemRemainingTicks()) / BowItem.MAX_DRAW_DURATION : 0.0F;
         ResourceLocation pulling = new ResourceLocation("pulling");
         ClampedItemPropertyFunction bowPulling = (itemStack, clientLevel, living, speed) -> living != null && living.isUsingItem() && living.getUseItem() == itemStack ? 1.0F : 0.0F;
 
@@ -75,7 +75,6 @@ public final class Bows {
         ItemProperties.register(GOLDEN_BOW.get(), pulling, bowPulling);
         ItemProperties.register(PLATINUM_BOW.get(), pull, bowPull);
         ItemProperties.register(PLATINUM_BOW.get(), pulling, bowPulling);
-
     }
 
     public static void init() {}

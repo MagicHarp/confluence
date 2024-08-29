@@ -44,7 +44,6 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         MAP.put("InvulnerableTime", IInvulnerableTime.class);
         MAP.put("LavaHurtReduce", ILavaHurtReduce.class);
         MAP.put("MagicAttack", IMagicAttack.class);
-        MAP.put("ProjectileAttack", IProjectileAttack.class);
         MAP.put("StarCloak", IStarCloak.class);
         MAP.put("FishingPower", IFishingPower.class);
         MAP.put("HighTestFishingLine", IHighTestFishingLine.class);

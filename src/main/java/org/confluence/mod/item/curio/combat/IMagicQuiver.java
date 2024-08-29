@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface IMagicQuiver {
     static void applyToArrow(LivingEntity living, AbstractArrow arrow) {
-        AtomicBoolean isEmpty = new AtomicBoolean(true);
         AtomicBoolean hasFire = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             for (ICurioStacksHandler curioStacksHandler : handler.getCurios().values()) {
@@ -23,7 +22,6 @@ public interface IMagicQuiver {
                     ItemStack stack = stackHandler.getStackInSlot(i);
                     Item item = stack.getItem();
                     if (!stack.isEmpty() && item instanceof MagicQuiver) {
-                        isEmpty.set(false);
                         if (item == CurioItems.MOLTEN_QUIVER.get()) {
                             hasFire.set(true);
                             return;
@@ -32,7 +30,6 @@ public interface IMagicQuiver {
                 }
             }
         });
-        if (!isEmpty.get()) arrow.setDeltaMovement(arrow.getDeltaMovement().scale(1.2));
         if (hasFire.get()) arrow.setSecondsOnFire(100);
     }
 

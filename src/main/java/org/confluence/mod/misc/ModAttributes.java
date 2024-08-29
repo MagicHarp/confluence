@@ -1,5 +1,7 @@
 package org.confluence.mod.misc;
 
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -41,6 +43,10 @@ public final class ModAttributes {
         return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.MINING_SPEED) : MINING_SPEED.get();
     }
 
+    public static boolean hasCustomAttribute(Attribute attribute) { // todo
+        return false;
+    }
+
     public static void applyToArrow(LivingEntity living, AbstractArrow abstractArrow) {
         AttributeInstance attributeInstance = living.getAttribute(Attributes.ATTACK_KNOCKBACK);
         if (attributeInstance != null) {
@@ -48,11 +54,6 @@ public final class ModAttributes {
         }
 
         if (ApothicHelper.isAttributesLoaded()) return;
-
-        attributeInstance = living.getAttribute(RANGED_DAMAGE.get());
-        if (attributeInstance != null) {
-            abstractArrow.setBaseDamage(abstractArrow.getBaseDamage() * attributeInstance.getValue());
-        }
         attributeInstance = living.getAttribute(RANGED_VELOCITY.get());
         if (attributeInstance != null) {
             abstractArrow.setDeltaMovement(abstractArrow.getDeltaMovement().scale(attributeInstance.getValue()));
@@ -70,5 +71,13 @@ public final class ModAttributes {
         AttributeInstance attributeInstance = living.getAttribute(ModAttributes.DODGE_CHANCE.get());
         if (attributeInstance == null) return false;
         return living.level().random.nextFloat() < attributeInstance.getValue();
+    }
+
+    public static float applyRangedDamage(LivingEntity living, DamageSource damageSource, float amount) {
+        if (ApothicHelper.isAttributesLoaded()) return amount; // 使用神化的算法
+        if (damageSource.is(DamageTypeTags.IS_PROJECTILE)) return amount;
+        AttributeInstance attributeInstance = living.getAttribute(ModAttributes.RANGED_DAMAGE.get());
+        if (attributeInstance == null) return amount;
+        return amount * (float) attributeInstance.getValue();
     }
 }
