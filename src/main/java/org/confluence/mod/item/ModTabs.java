@@ -340,6 +340,7 @@ public final class ModTabs {
                 output.accept(GunItems.TACTICALSHOTGUN.get());
                 output.accept(GunItems.UZI.get());
                 output.accept(GunItems.REVOLVER.get());
+                output.accept(GunItems.THEUNDERTAKER.get());
                 output.accept(GunItems.PHOENIXBLASTER.get());
                 output.accept(GunItems.ONYXBLASTER.get());
                 output.accept(GunItems.SNIPERRIFLE.get());

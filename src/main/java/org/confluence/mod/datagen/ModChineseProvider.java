@@ -1833,6 +1833,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GunItems.ONYXBLASTER.get(), "玛瑙爆破枪");
         add(GunItems.PHOENIXBLASTER.get(), "凤凰爆破枪");
         add(GunItems.REVOLVER.get(), "左轮手枪");
+        add(GunItems.THEUNDERTAKER.get(), "夺命枪");
         add(GunItems.SLIMEGUN.get(), "史莱姆枪");
         add(GunItems.SNIPERRIFLE.get(), "狙击步枪");
         add(GunItems.SNOWBALLCANNON.get(), "雪球炮");
