@@ -20,12 +20,4 @@ public class ArchitectGizmoPack extends BaseCurioItem implements IRightClickSubt
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return ExtendoGrip.getOrCreateAttributes();
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.architect_gizmo_pack.info"),
-            Component.translatable("item.confluence.architect_gizmo_pack.info2")
-        };
-    }
 }

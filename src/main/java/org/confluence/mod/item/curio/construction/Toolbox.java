@@ -43,8 +43,7 @@ public class Toolbox extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.toolbox.info"),
-            Component.translatable("item.confluence.toolbox.info2")
+            Component.translatable("item.confluence.toolbox.info")
         };
     }
 }

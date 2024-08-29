@@ -24,7 +24,6 @@ public class DepthMeter extends AbstractInfoCurio implements IDepthMeter {
     public Component[] getInformation() {
         return new Component[]{
             Component.translatable("item.confluence.depth_meter.info"),
-            Component.translatable("item.confluence.depth_meter.info2")
         };
     }
 }

@@ -12,8 +12,7 @@ public class PortableCementMixer extends BaseCurioItem implements IRightClickSub
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.portable_cement_mixer.info"),
-            Component.translatable("item.confluence.portable_cement_mixer.info2")
+            Component.translatable("item.confluence.portable_cement_mixer.info")
         };
     }
 }

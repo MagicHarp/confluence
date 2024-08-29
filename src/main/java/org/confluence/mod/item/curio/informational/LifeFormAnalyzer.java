@@ -23,8 +23,7 @@ public class LifeFormAnalyzer extends AbstractInfoCurio implements ILifeFormAnal
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.life_form_analyzer.info"),
-            Component.translatable("item.confluence.life_form_analyzer.info2")
+            Component.translatable("item.confluence.life_form_analyzer.info")
         };
     }
 }

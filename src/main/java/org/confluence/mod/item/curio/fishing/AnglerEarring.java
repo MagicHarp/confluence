@@ -39,8 +39,7 @@ public class AnglerEarring extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.angler_earring.info"),
-            Component.translatable("item.confluence.angler_earring.info2")
+            Component.translatable("item.confluence.angler_earring.info")
         };
     }
 }

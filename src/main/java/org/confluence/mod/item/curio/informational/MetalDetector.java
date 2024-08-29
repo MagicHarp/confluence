@@ -23,8 +23,7 @@ public class MetalDetector extends AbstractInfoCurio implements IMetalDetector {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.metal_detector.info"),
-            Component.translatable("item.confluence.metal_detector.info2")
+            Component.translatable("item.confluence.metal_detector.info")
         };
     }
 }

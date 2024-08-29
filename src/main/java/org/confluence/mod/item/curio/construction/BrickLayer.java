@@ -12,8 +12,7 @@ public class BrickLayer extends BaseCurioItem implements IRightClickSubtractor {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.brick_layer.info"),
-            Component.translatable("item.confluence.brick_layer.info2")
+            Component.translatable("item.confluence.brick_layer.info")
         };
     }
 }

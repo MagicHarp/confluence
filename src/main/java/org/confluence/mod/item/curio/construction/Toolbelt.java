@@ -43,8 +43,7 @@ public class Toolbelt extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.toolbelt.info"),
-            Component.translatable("item.confluence.toolbelt.info2")
+            Component.translatable("item.confluence.toolbelt.info")
         };
     }
 }

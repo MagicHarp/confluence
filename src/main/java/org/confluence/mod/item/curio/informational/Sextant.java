@@ -23,8 +23,7 @@ public class Sextant extends AbstractInfoCurio implements ISextant {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.sextant.info"),
-            Component.translatable("item.confluence.sextant.info2")
+            Component.translatable("item.confluence.sextant.info")
         };
     }
 }

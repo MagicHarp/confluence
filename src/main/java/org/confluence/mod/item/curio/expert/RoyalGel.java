@@ -37,8 +37,7 @@ public class RoyalGel extends BaseCurioItem implements ModRarity.Expert {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.royal_gel.info"),
-            Component.translatable("item.confluence.royal_gel.info2")
+            Component.translatable("item.confluence.royal_gel.info")
         };
     }
 }

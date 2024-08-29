@@ -41,8 +41,7 @@ public class AncientChisel extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.ancient_chisel.info"),
-            Component.translatable("item.confluence.ancient_chisel.info2")
+            Component.translatable("item.confluence.ancient_chisel.info")
         };
     }
 }

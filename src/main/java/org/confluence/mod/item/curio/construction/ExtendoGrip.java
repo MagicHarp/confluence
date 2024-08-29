@@ -38,8 +38,7 @@ public class ExtendoGrip extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.extendo_grip.info"),
-            Component.translatable("item.confluence.extendo_grip.info2")
+            Component.translatable("item.confluence.extendo_grip.info")
         };
     }
 
