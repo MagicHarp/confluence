@@ -33,7 +33,6 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         MAP.put("AggroAttach", IAggroAttach.class);
         MAP.put("ArmorPass", IArmorPass.class);
         MAP.put("AutoAttack", IAutoAttack.class);
-        //MAP.put("CriticalHit", ICriticalHit.class);
         MAP.put("FireAttack", IFireAttack.class);
         MAP.put("FireImmune", IFireImmune.class);
         MAP.put("Honeycomb", IHoneycomb.class);
@@ -41,7 +40,6 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
         MAP.put("InvulnerableTime", IInvulnerableTime.class);
         MAP.put("LavaHurtReduce", ILavaHurtReduce.class);
         MAP.put("MagicAttack", IMagicAttack.class);
-        MAP.put("ProjectileAttack", IProjectileAttack.class);
         MAP.put("StarCloak", IStarCloak.class);
         MAP.put("BreakSpeedBonus", IBreakSpeedBonus.class);
         MAP.put("FallResistance", IFallResistance.class);

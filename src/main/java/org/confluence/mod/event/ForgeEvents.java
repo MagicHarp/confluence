@@ -27,6 +27,7 @@ import org.confluence.mod.item.curio.expert.BrainOfConfusion;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
@@ -58,7 +59,7 @@ public final class ForgeEvents {
         PanicNecklace.apply(living);
 
         amount = IMagicAttack.apply(damageSource, amount);
-        amount = IProjectileAttack.apply(damageSource, amount);
+        amount = ModAttributes.applyRangedDamage(living, damageSource, amount);
         amount = PaladinsShield.apply(living, damageSource, amount);
         amount = FrozenTurtleShell.apply(living, amount);
         amount = ILavaHurtReduce.apply(living, damageSource, amount);

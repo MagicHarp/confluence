@@ -265,7 +265,7 @@ public final class ModConfigs {
     public static final ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
 
     @SuppressWarnings("deprecation")
-    public static void onLoad() {
+    public static void onLoadCommon() {
         rareBlocks.clear();
         rareCreatures.clear();
         RARE_BLOCKS.get().forEach(s -> {

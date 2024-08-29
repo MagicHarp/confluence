@@ -563,6 +563,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
 
         add("attribute.name.generic.critical_chance", "暴击率");
+        add("attribute.name.generic.ranged_velocity", "远程速度");
+        add("attribute.name.generic.ranged_damage", "远程伤害");
+        add("attribute.name.generic.dodge_chance", "闪避率");
+        add("attribute.name.generic.mining_speed", "挖掘速率");
 
         add(ModEffects.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");

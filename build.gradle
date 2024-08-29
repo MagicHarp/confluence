@@ -65,6 +65,12 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
@@ -80,6 +86,9 @@ dependencies {
     //runtimeOnly fg.deobf('maven.modrinth:better-combat:1.8.5+1.20.1-forge')
     //runtimeOnly fg.deobf('maven.modrinth:playeranimator:1.0.2-rc1+1.20-forge')
     //runtimeOnly fg.deobf('maven.modrinth:cloth-config:11.1.118+forge')
+
+    //runtimeOnly fg.deobf("curse.maven:apothic-attributes-898963:5634071") // 神化属性
+    //runtimeOnly fg.deobf("curse.maven:placebo-283644:5414631")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))

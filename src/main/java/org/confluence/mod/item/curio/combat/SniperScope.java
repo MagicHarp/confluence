@@ -10,7 +10,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.misc.ModAttributes;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,8 +18,9 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class SniperScope extends RifleScope implements IProjectileAttack {
+public class SniperScope extends RifleScope {
     public static final UUID CRIT_UUID = UUID.fromString("EF0F0AE1-685D-D312-CD47-78ABA87308A2");
+    public static final UUID RANGED_UUID = UUID.fromString("815F8A67-C78D-B4FC-1C18-19C531DB0225");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public SniperScope() {
@@ -29,11 +29,6 @@ public class SniperScope extends RifleScope implements IProjectileAttack {
 
     public SniperScope(Rarity rarity) {
         super(rarity);
-    }
-
-    @Override
-    public float getProjectileBonus() {
-        return ModConfigs.SNIPER_SCOPE_PROJECTILE_BONUS.get().floatValue();
     }
 
     @Override
@@ -53,7 +48,8 @@ public class SniperScope extends RifleScope implements IProjectileAttack {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sniper Scope", ModConfigs.SNIPER_SCOPE_CRITICAL_CHANCE.get(), AttributeModifier.Operation.ADDITION)
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sniper Scope", 0.1, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Sniper Scope", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTES;

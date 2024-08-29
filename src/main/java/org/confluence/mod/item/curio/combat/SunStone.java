@@ -3,8 +3,6 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -13,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModAttributes;
-import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -24,7 +21,9 @@ public class SunStone extends BaseCurioItem {
     public static final UUID DAMAGE_UUID = UUID.fromString("56A08AD3-ADA1-F838-E09C-28B08935F5C2");
     public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
     public static final UUID CRIT_UUID = UUID.fromString("840A63CB-F274-75C1-09B1-BC8092B076F4");
-    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
+    public static final UUID MINING_UUID = UUID.fromString("B599894C-1157-3875-C28C-E4F0681F04E9");
+    public static final UUID RANGED_UUID = UUID.fromString("171921EE-AB4F-E630-D69E-BB31E17A22C8");
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public SunStone() {
         super(ModRarity.LIME);
@@ -32,17 +31,19 @@ public class SunStone extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (ATTRIBUTES == null) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION));
+            builder.put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sun Stone", 0.02, AttributeModifier.Operation.ADDITION));
+            builder.put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Sun Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            ATTRIBUTES = builder.build();
+        }
         LivingEntity living = slotContext.entity();
         if (living == null) return EMPTY_ATTRIBUTE;
-        if (ATTRIBUTE == null) {
-            ATTRIBUTE = ImmutableMultimap.of(
-                Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", ModConfigs.SUN_STONE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", ModConfigs.SUN_STONE_DAMAGE.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", ModConfigs.SUN_STONE_ARMOR.get(), AttributeModifier.Operation.ADDITION),
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", ModConfigs.SUN_STONE_CRITICAL_CHANCE.get(), AttributeModifier.Operation.ADDITION)
-            );
-        }
-        return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
+        return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTES : EMPTY_ATTRIBUTE;
     }
 
     @Override
@@ -50,10 +51,6 @@ public class SunStone extends BaseCurioItem {
         LivingEntity living = slotContext.entity();
         if (living.level().getDayTime() % 24000 > 12000) return;
         ModEffects.healPerSecond(living, 2.0F);
-        MobEffectInstance effect = living.getEffect(MobEffects.DIG_SPEED);
-        if (effect == null || effect.getDuration() < 5) {
-            living.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 0, false, false, false));
-        }
     }
 
     public Component[] getInformation() {

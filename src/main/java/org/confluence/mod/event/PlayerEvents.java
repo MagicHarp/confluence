@@ -1,6 +1,7 @@
 package org.confluence.mod.event;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -9,11 +10,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.commons.lang3.mutable.MutableFloat;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
-import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.misc.ModAttributes;
@@ -69,10 +68,10 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
-        if (ApothicHelper.isAttributesLoaded()) return;
+        if (ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) return;
         Player player = event.getEntity();
         if (!event.isVanillaCritical()) {
-            double chance = player.getAttributeValue(ModAttributes.getCriticalChance());
+            double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
             if (player.level().random.nextFloat() < chance) {
                 event.setDamageModifier(1.5F);
                 event.setResult(Event.Result.ALLOW);
@@ -82,12 +81,9 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {
-        MutableFloat speed = new MutableFloat(event.getNewSpeed());
-        event.getEntity().getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-            float value = speed.floatValue();
-            value *= (1.0F + playerAbility.getBreakSpeedBonus());
-            speed.setValue(value);
-        });
-        event.setNewSpeed(speed.floatValue());
+        if (ModAttributes.hasCustomAttribute(ModAttributes.MINING_SPEED.get())) return;
+        AttributeInstance attributeInstance = event.getEntity().getAttribute(ModAttributes.MINING_SPEED.get());
+        if (attributeInstance == null) return;
+        event.setNewSpeed(event.getNewSpeed() * (float) attributeInstance.getValue());
     }
 }

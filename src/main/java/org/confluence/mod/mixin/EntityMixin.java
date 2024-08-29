@@ -13,10 +13,10 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.combat.IFireImmune;
-import org.confluence.mod.item.curio.combat.IHurtEvasion;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.expert.ShieldOfCthulhu;
 import org.confluence.mod.item.curio.movement.IFallResistance;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -85,7 +85,7 @@ public abstract class EntityMixin implements IEntity {
     private void immune(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         if (c$getSelf() instanceof Player living) {
-            if (IHurtEvasion.isInvul(living) ||
+            if (ModAttributes.applyDodge(living) ||
                 IFallResistance.isInvul(living, damageSource) ||
                 IFireImmune.isInvul(living, damageSource) ||
                 RoyalGel.isInvul(living, damageSource) ||

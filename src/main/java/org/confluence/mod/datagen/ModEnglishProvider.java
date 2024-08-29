@@ -36,7 +36,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.auto_attack", "Enables auto swing for melee weapons");
         add("curios.tooltip.aggro_attach", "Enemies are more likely to target you");
         add("curios.tooltip.armor_pass", "Increases armor penetration by %s");
-        add("curios.tooltip.projectile_attack", "%s%% increased ranged damage");
         add("curios.tooltip.compass", "Displays horizontal position");
         add("curios.tooltip.depth_meter", "Displays depth");
         add("curios.tooltip.dps_meter", "Displays your damage per second");
@@ -468,6 +467,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 
         add("attribute.name.generic.critical_chance", "Critical Chance");
+        add("attribute.name.generic.ranged_velocity", "Ranged Velocity");
+        add("attribute.name.generic.ranged_damage", "Ranged Damage");
+        add("attribute.name.generic.dodge_chance", "Dodge Chance");
+        add("attribute.name.generic.mining_speed", "Mining Speed");
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
