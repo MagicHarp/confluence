@@ -75,6 +75,8 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(Ores.RAW_HELLSTONE_BLOCK.get());
         dropSelf(DESERT_FOSSIL.get());
         dropSelf(SLUSH.get());
+        dropSelf(MARINE_GRAVEL.get());
+        dropSelf(DIATOMACEOUS.get());
         dropSelf(CLOUD_BLOCK.get());
         dropSelf(RAIN_CLOUD_BLOCK.get());
         dropSelf(SNOW_CLOUD_BLOCK.get());

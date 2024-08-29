@@ -149,6 +149,9 @@ public class ExtractinatorBlock extends HorizontalDirectionalBlock implements En
             } else if (item.is(ModTags.Items.SLUSH)) {
                 path = ModLootTables.EXTRACT_SLUSH;
                 block = ModBlocks.SLUSH.get();
+            } else if (item.is(ModTags.Items.MARINE_GRAVEL)) {
+                path = ModLootTables.EXTRACT_MARINE_GRAVEL;
+                block = ModBlocks.MARINE_GRAVEL.get();
             } else {
                 return InteractionResult.PASS;
             }

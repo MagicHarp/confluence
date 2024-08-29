@@ -36,11 +36,14 @@ public final class ModBlocks {
 
     public static final RegistryObject<LifeCrystalBlock> LIFE_CRYSTAL_BLOCK = registerWithItem("life_crystal_block", LifeCrystalBlock::new, supplier -> () -> new LifeCrystalBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<LifeCrystalBlock.Entity>> LIFE_CRYSTAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("life_crystal_block_entity", () -> BlockEntityType.Builder.of(LifeCrystalBlock.Entity::new, LIFE_CRYSTAL_BLOCK.get()).build(null));
+    // 环境辅助
     public static final RegistryObject<Block> HARDENED_SAND_BLOCK = registerWithItem("hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
     public static final RegistryObject<Block> RED_HARDENED_SAND_BLOCK = registerWithItem("red_hardened_sand_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
-    //雪泥块
+    public static final RegistryObject<Block> DIATOMACEOUS = registerWithItem("diatomaceous", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
+    // 提取块
     public static final RegistryObject<Block> DESERT_FOSSIL = registerWithItem("desert_fossil", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1.5F, 1.0F)));
     public static final RegistryObject<Block> SLUSH = registerWithItem("slush", () -> new SandBlock(0xcfddde, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.7F).sound(SoundType.GRAVEL)));
+    public static final RegistryObject<Block> MARINE_GRAVEL = registerWithItem("marine_gravel", () -> new SandBlock(0xdedede, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.8F).sound(SoundType.GRAVEL)));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
@@ -189,7 +192,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> ASH_BRANCHES = registerWithItem("ash_branches", () -> new BranchesBlock(ModBlocks.ASH_LOG_BLOCKS.LOG.get()));
     // 血肉眼球块
     public static final RegistryObject<Block> OCULAR_BLOCKS = registerWithItem("ocular_blocks", CustomModelBlock::new);
-    public static final RegistryObject<Block> PUPIL_BLOCKS = registerWithItem("pupil_blocks", CustomModelBlock::new);
     // 深板岩压力板
     public static final RegistryObject<PressurePlateBlock> DEEPSLATE_PRESSURE_PLATE = registerWithItem("deepslate_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.DEEPSLATE).strength(0.1F), BlockSetType.STONE));
     // 地牢碎砖

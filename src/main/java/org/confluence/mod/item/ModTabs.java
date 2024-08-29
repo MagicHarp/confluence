@@ -95,8 +95,10 @@ public final class ModTabs {
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
                 output.accept(HARDENED_SAND_BLOCK.get());
                 output.accept(RED_HARDENED_SAND_BLOCK.get());
+                output.accept(DIATOMACEOUS.get());
                 output.accept(DESERT_FOSSIL.get());
                 output.accept(SLUSH.get());
+                output.accept(MARINE_GRAVEL.get());
 
                 output.accept(CORRUPT_GRASS_BLOCK.get());
                 output.accept(EBONY_SAND.get());
@@ -120,7 +122,6 @@ public final class ModTabs {
                 output.accept(SHADOW_LOG_BLOCKS.LOG.get());
                 output.accept(SHADOW_LOG_BLOCKS.LEAVES.get());
                 output.accept(OCULAR_BLOCKS.get());
-                output.accept(PUPIL_BLOCKS.get());
 
                 output.accept(HALLOW_GRASS_BLOCK.get());
                 output.accept(PEARL_SAND.get());

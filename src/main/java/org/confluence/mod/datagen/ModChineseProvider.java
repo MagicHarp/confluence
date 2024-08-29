@@ -1232,7 +1232,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(SAND_LAYER_BLOCK.get(),"沙片");
         add(RED_SAND_LAYER_BLOCK.get(), "红沙片");
         add(RED_HARDENED_SAND_BLOCK.get(), "硬化红沙块");
+        add(DIATOMACEOUS.get(), "硅藻土");
         add(SLUSH.get(), "雪泥块");
+        add(MARINE_GRAVEL.get(), "海洋砂砾");
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_COBBLESTONE.get(), "黑檀圆石");
         add(EBONY_HARDENED_SAND_BLOCK.get(), "硬化黑檀沙块");
@@ -1329,7 +1331,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(CORRUPTION_REDSTONE_ORE.get(), "腐化红石矿石");
         add(FLESHIFICATION_REDSTONE_ORE.get(), "血化红石矿石");
         add(OCULAR_BLOCKS.get(), "血肉眼球块");
-        add(PUPIL_BLOCKS.get(), "血肉瞳孔块");
         add(SWORD_IN_STONE.get(), "石中剑");
         add(WOOD_STONE_SLATTED_BLOCKS.get(), "木石板条块");
         add(DEEPSLATE_PRESSURE_PLATE.get(), "深板岩压力板");
@@ -1389,6 +1390,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pots.UNDERGROUND_DESERT_POTS.get(), "沙漠罐子");
         add(Pots.JUNGLE_POTS.get(), "丛林罐子");
         add(Pots.MARBLE_CAVE_POTS.get(), "尘封罐子");
+        add(Pots.OCEAN_POTS.get(), "海洋罐子");
         add(Pots.PYRAMID_POTS.get(), "祭祀罐子");
         add(Pots.CORRUPTION_POTS.get(), "蠕虫罐子");
         add(Pots.TR_CRIMSON_POTS.get(), "血肉罐子");
