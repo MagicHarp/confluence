@@ -32,7 +32,11 @@ public final class ModFeatures {
     public static final RegistryObject<DartTrapFeature> DART_TRAP = FEATURES.register("dart_trap", () -> new DartTrapFeature(DartTrapFeature.Config.CODEC));
     public static final RegistryObject<JewelryTreeFeature> JEWELRY_TREE = FEATURES.register("jewelry_tree", () -> new JewelryTreeFeature(JewelryTreeFeature.Config.CODEC));
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SHADOW = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "shadow"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHADOW = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "trees_set/trees_tr_crimson"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EBONY = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "trees_set/trees_corruption"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "palm_tree_checked"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PEARL = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "trees_set/trees_hallow"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RUBY = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "ruby_tree"));
 
     static @NotNull BlockState getPressurePlate(WorldGenLevel level, BlockPos supportPos) {
         return level.isStateAtPosition(supportPos, blockState -> blockState.is(Blocks.DEEPSLATE)) ?

@@ -23,7 +23,7 @@ import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.worldgen.feature.ShadowTreeGrower;
+import org.confluence.mod.worldgen.feature.*;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -75,7 +75,12 @@ public final class ModBlocks {
     public static final RegistryObject<Block> TR_CRIMSON_GRASS_BLOCK = registerWithItem("tr_crimson_grass_block", () -> new SpreadingGrassBlock(ISpreadable.Type.CRIMSON, BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> PINK_ICE = registerWithItem("pink_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.ICE)));
     public static final RegistryObject<Block> PINK_PACKED_ICE = registerWithItem("pink_packed_ice", () -> new IceBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE)));
-    public static final RegistryObject<Block> SHADOW_SAPLING = registerWithItem("shadow_sapling", () -> new SaplingBlock(new ShadowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    // 树苗
+    public static final RegistryObject<Block> SHADOW_SAPLING = registerWithItem("shadow_sapling", () -> new ShadowSaplingBlock(new ShadowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> EBONY_SAPLING = registerWithItem("ebony_sapling", () -> new EbonySaplingBlock(new EbonyTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> PALM_SAPLING = registerWithItem("palm_sapling", () -> new PalmSaplingBlock(new PalmTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> PEARL_SAPLING = registerWithItem("pearl_sapling", () -> new PearlSaplingBlock(new PearlTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> RUBY_SAPLING = registerWithItem("ruby_sapling", () -> new StoneSaplingBlock(new RubyTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     // desert
     public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM);
     // ash

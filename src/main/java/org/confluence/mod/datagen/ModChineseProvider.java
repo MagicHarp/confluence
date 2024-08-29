@@ -1770,6 +1770,12 @@ public class ModChineseProvider extends LanguageProvider {
         add(CORRUPTION_THORN.get(), "腐化荆棘");
         add(JUNGLE_THORN.get(), "丛林荆棘");
         add(PLANTERA_THORN.get(), "世纪之花荆棘");
+        // 树苗
+        add(SHADOW_SAPLING.get(), "暗影树苗");
+        add(EBONY_SAPLING.get(), "乌木树苗");
+        add(PALM_SAPLING.get(), "棕榈树苗");
+        add(PEARL_SAPLING.get(), "珍珠树苗");
+        add(RUBY_SAPLING.get(), "红玉树苗");
 
         add(ModBlocks.TR_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");

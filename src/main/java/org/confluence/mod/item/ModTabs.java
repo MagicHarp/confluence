@@ -90,6 +90,7 @@ public final class ModTabs {
                 output.accept(TR_AMETHYST_BRANCHES.get());
                 output.accept(AETHERIUM_BLOCK.get());
                 output.accept(DARK_AETHERIUM_BLOCK.get());
+                output.accept(RUBY_SAPLING.get());
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());
@@ -137,6 +138,11 @@ public final class ModTabs {
                 output.accept(ASH_GRASS_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+                // 树苗
+                output.accept(SHADOW_SAPLING.get());
+                output.accept(EBONY_SAPLING.get());
+                output.accept(PALM_SAPLING.get());
+                output.accept(PEARL_SAPLING.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
                 output.accept(TR_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());
