@@ -42,7 +42,6 @@ import org.confluence.mod.entity.worm.TestWormEntity;
 import org.confluence.mod.entity.worm.TestWormPart;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
@@ -196,12 +195,11 @@ public final class ModEvents {
 
     @SubscribeEvent
     public static void modify(EntityAttributeModificationEvent event) {
-        if (!ApothicHelper.isAttributesLoaded()) {
-            event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
-            event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
-            event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
-        }
+        // todo使用自定义配置确认是否需要注册
+        event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
+        event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
+        event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
+        event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
+        event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
     }
 }

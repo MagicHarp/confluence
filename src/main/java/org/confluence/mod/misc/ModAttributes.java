@@ -1,5 +1,6 @@
 package org.confluence.mod.misc;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,12 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.integration.apothic.ApothicHelper;
 
 public final class ModAttributes {
+    private static Attribute CRIT_CHANCE_CACHE;
+    private static Attribute RANGED_VELOCITY_CACHE;
+    private static Attribute RANGED_DAMAGE_CACHE;
+    private static Attribute DODGE_CHANCE_CACHE;
+    private static Attribute MINING_SPEED_CACHE;
+
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Confluence.MODID);
 
     public static final RegistryObject<Attribute> CRIT_CHANCE = ATTRIBUTES.register("crit_chance", () -> new RangedAttribute("attribute.name.generic.critical_chance", 0.0, 0.0, 10.0).setSyncable(true)); // ADDITION
@@ -24,27 +31,77 @@ public final class ModAttributes {
     public static final RegistryObject<Attribute> MINING_SPEED = ATTRIBUTES.register("mining_speed", () -> new RangedAttribute("attribute.name.generic.mining_speed", 1.0, 0.0, 10.0).setSyncable(true)); // MULTIPLY_TOTAL
 
     public static Attribute getCriticalChance() {
-        return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.CRIT_CHANCE) : CRIT_CHANCE.get();
+        return getCustomAttribute(CRIT_CHANCE.get());
     }
 
     public static Attribute getRangedVelocity() {
-        return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.ARROW_VELOCITY) : RANGED_VELOCITY.get();
+        return getCustomAttribute(RANGED_VELOCITY.get());
     }
 
     public static Attribute getRangedDamage() {
-        return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.ARROW_DAMAGE) : RANGED_DAMAGE.get();
+        return getCustomAttribute(RANGED_DAMAGE.get());
     }
 
     public static Attribute getDodgeChance() {
-        return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.DODGE_CHANCE) : DODGE_CHANCE.get();
+        return getCustomAttribute(DODGE_CHANCE.get());
     }
 
     public static Attribute getMiningSpeed() {
-        return ApothicHelper.isAttributesLoaded() ? ForgeRegistries.ATTRIBUTES.getValue(ApothicHelper.MINING_SPEED) : MINING_SPEED.get();
+        return getCustomAttribute(MINING_SPEED.get());
     }
 
-    public static boolean hasCustomAttribute(Attribute attribute) { // todo
-        return false;
+    public static Attribute getCustomAttribute(Attribute attribute) {
+        if (attribute == CRIT_CHANCE.get()) {
+            if (CRIT_CHANCE_CACHE == null) {
+                if (ModConfigs.CRI_CHANCE.getDefault().equals(ModConfigs.CRI_CHANCE.get()) && !ApothicHelper.isAttributesLoaded()) {
+                    CRIT_CHANCE_CACHE = attribute;
+                } else {
+                    CRIT_CHANCE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.CRI_CHANCE.get()));
+                }
+            }
+            return CRIT_CHANCE_CACHE;
+        } else if (attribute == RANGED_VELOCITY.get()) {
+            if (RANGED_VELOCITY_CACHE == null) {
+                if (ModConfigs.RANGED_VELOCITY.getDefault().equals(ModConfigs.RANGED_VELOCITY.get()) && !ApothicHelper.isAttributesLoaded()) {
+                    RANGED_VELOCITY_CACHE = attribute;
+                } else {
+                    RANGED_VELOCITY_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.RANGED_VELOCITY.get()));
+                }
+            }
+            return RANGED_VELOCITY_CACHE;
+        } else if (attribute == RANGED_DAMAGE.get()) {
+            if (RANGED_DAMAGE_CACHE == null) {
+                if (ModConfigs.RANGED_DAMAGE.getDefault().equals(ModConfigs.RANGED_DAMAGE.get()) && !ApothicHelper.isAttributesLoaded()) {
+                    RANGED_DAMAGE_CACHE = attribute;
+                } else {
+                    RANGED_DAMAGE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.RANGED_DAMAGE.get()));
+                }
+            }
+            return RANGED_DAMAGE_CACHE;
+        } else if (attribute == DODGE_CHANCE.get()) {
+            if (DODGE_CHANCE_CACHE == null) {
+                if (ModConfigs.DODGE_CHANCE.getDefault().equals(ModConfigs.DODGE_CHANCE.get()) && !ApothicHelper.isAttributesLoaded()) {
+                    DODGE_CHANCE_CACHE = attribute;
+                } else {
+                    DODGE_CHANCE_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.DODGE_CHANCE.get()));
+                }
+            }
+            return DODGE_CHANCE_CACHE;
+        } else if (attribute == MINING_SPEED.get()) {
+            if (MINING_SPEED_CACHE == null) {
+                if (ModConfigs.MINING_SPEED.getDefault().equals(ModConfigs.MINING_SPEED.get()) && !ApothicHelper.isAttributesLoaded()) {
+                    MINING_SPEED_CACHE = attribute;
+                } else {
+                    MINING_SPEED_CACHE = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(ModConfigs.MINING_SPEED.get()));
+                }
+            }
+            return MINING_SPEED_CACHE;
+        }
+        return attribute;
+    }
+
+    public static boolean hasCustomAttribute(Attribute attribute) {
+        return getCustomAttribute(attribute) != attribute;
     }
 
     public static void applyToArrow(LivingEntity living, AbstractArrow abstractArrow) {
@@ -53,12 +110,13 @@ public final class ModAttributes {
             abstractArrow.setKnockback((int) Math.ceil(abstractArrow.getKnockback() * (1.0 + attributeInstance.getValue())));
         }
 
-        if (ApothicHelper.isAttributesLoaded()) return;
-        attributeInstance = living.getAttribute(RANGED_VELOCITY.get());
-        if (attributeInstance != null) {
-            abstractArrow.setDeltaMovement(abstractArrow.getDeltaMovement().scale(attributeInstance.getValue()));
+        if (!ModAttributes.hasCustomAttribute(RANGED_VELOCITY.get())) {
+            attributeInstance = living.getAttribute(RANGED_VELOCITY.get());
+            if (attributeInstance != null) {
+                abstractArrow.setDeltaMovement(abstractArrow.getDeltaMovement().scale(attributeInstance.getValue()));
+            }
         }
-        if (!abstractArrow.isCritArrow()) {
+        if (!abstractArrow.isCritArrow() && !ModAttributes.hasCustomAttribute(CRIT_CHANCE.get())) {
             attributeInstance = living.getAttribute(CRIT_CHANCE.get());
             if (attributeInstance != null) {
                 abstractArrow.setCritArrow(living.getRandom().nextFloat() < attributeInstance.getValue());
@@ -67,16 +125,16 @@ public final class ModAttributes {
     }
 
     public static boolean applyDodge(LivingEntity living) {
-        if (ApothicHelper.isAttributesLoaded()) return false; // 使用神化的算法
-        AttributeInstance attributeInstance = living.getAttribute(ModAttributes.DODGE_CHANCE.get());
+        if (hasCustomAttribute(DODGE_CHANCE.get())) return false;
+        AttributeInstance attributeInstance = living.getAttribute(DODGE_CHANCE.get());
         if (attributeInstance == null) return false;
         return living.level().random.nextFloat() < attributeInstance.getValue();
     }
 
     public static float applyRangedDamage(LivingEntity living, DamageSource damageSource, float amount) {
-        if (ApothicHelper.isAttributesLoaded()) return amount; // 使用神化的算法
+        if (hasCustomAttribute(RANGED_DAMAGE.get())) return amount;
         if (damageSource.is(DamageTypeTags.IS_PROJECTILE)) return amount;
-        AttributeInstance attributeInstance = living.getAttribute(ModAttributes.RANGED_DAMAGE.get());
+        AttributeInstance attributeInstance = living.getAttribute(RANGED_DAMAGE.get());
         if (attributeInstance == null) return amount;
         return amount * (float) attributeInstance.getValue();
     }

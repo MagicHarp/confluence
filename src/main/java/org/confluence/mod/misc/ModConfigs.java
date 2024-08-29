@@ -4,6 +4,7 @@ import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -11,6 +12,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.effect.beneficial.RageEffect;
+import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,11 @@ public final class ModConfigs {
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_CREATURES;
     public static ArrayList<BlockState> rareBlocks = new ArrayList<>();
     public static ArrayList<EntityType<?>> rareCreatures = new ArrayList<>();
+    public static ForgeConfigSpec.ConfigValue<String> CRI_CHANCE;
+    public static ForgeConfigSpec.ConfigValue<String> RANGED_VELOCITY;
+    public static ForgeConfigSpec.ConfigValue<String> RANGED_DAMAGE;
+    public static ForgeConfigSpec.ConfigValue<String> DODGE_CHANCE;
+    public static ForgeConfigSpec.ConfigValue<String> MINING_SPEED;
 
     public static void onCommonLoad() {
         RARE_BLOCKS.get().forEach(s -> {
@@ -33,6 +42,8 @@ public final class ModConfigs {
             }
         });
         RARE_CREATURES.get().forEach(s -> rareCreatures.add(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(s))));
+        ModEffects.RAGE.get().addAttributeModifier(ModAttributes.getCriticalChance(), RageEffect.CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        ModEffects.CEREBRAL_MINDTRICK.get().addAttributeModifier(ModAttributes.getCriticalChance(), CerebralMindtrickEffect.CRIT_UUID, 0.04, AttributeModifier.Operation.ADDITION);
     }
 
     public static void registerCommon() {
@@ -98,7 +109,13 @@ public final class ModConfigs {
             "minecraft:warden",
             "minecraft:mooshroom",
             "minecraft:panda"), o -> true);
+        BUILDER.push("Custom Attributes");
+        CRI_CHANCE = BUILDER.define("critcalChance", "attributeslib:crit_chance");
+        RANGED_VELOCITY = BUILDER.define("rangedVelocity", "attributeslib:arrow_velocity");
+        RANGED_DAMAGE = BUILDER.define("rangedDamage", "attributeslib:arrow_damage");
+        DODGE_CHANCE = BUILDER.define("dodgeChance", "attributeslib:dodge_chance");
+        MINING_SPEED = BUILDER.define("miningSpeed", "attributeslib:mining_speed");
+        BUILDER.pop();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BUILDER.build());
     }
-
 }
