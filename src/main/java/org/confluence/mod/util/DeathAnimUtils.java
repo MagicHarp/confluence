@@ -45,8 +45,8 @@ public class DeathAnimUtils {
     static{
         options.put(GHAST, DeathAnimOptions.Builtin.NO_GRAVITY_LOW_SPIN.customParticle(e->{}));
         options.put(PHANTOM, DeathAnimOptions.Builtin.LOW_SPIN);
-        options.put(SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0, 0.37f, 0.72f));
-        options.put(CAVE_SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0, 0.37f, 0.72f));
+        options.put(SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
+        options.put(CAVE_SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
         options.put(BLAZE, DeathAnimOptions.Builtin.EXTRA_FALL.bloodColor(0.89f, 0.65f, 0.07f));
         options.put(GIANT, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.45f, 0f, 0f));
         options.put(WITHER, DeathAnimOptions.Builtin.EXTRA_FALL.customParticle(entity -> {}));
@@ -353,7 +353,6 @@ public class DeathAnimUtils {
 
     public static int calcParticleCount(AABB range){
         double x = range.getXsize() * range.getYsize() * range.getZsize();
-        return (int) (/*146.2*/73 * x);  // 一次函数，过原点和 (0.342, 50) 僵尸三边相乘=0.342  后来觉得太多就减半了
+        return (int) (85 * Math.log(x + 1));
     }
-
 }
