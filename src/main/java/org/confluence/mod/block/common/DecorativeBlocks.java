@@ -18,6 +18,9 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     ICE_BRICKS("ice_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BLUE_ICE))),
     SNOW_BRICKS("snow_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
     TR_STONE_BRICKS("tr_stone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+
+    PURE_GLASS("pure_glass", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS))),
+
     TR_COPPER_BRICKS("tr_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
     ANCIENT_COPPER_BRICKS("ancient_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
     TR_COPPER_PLATE("tr_copper_plate", () -> new BeamLikeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
