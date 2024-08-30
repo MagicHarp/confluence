@@ -12,5 +12,5 @@
     "minecraft:snowy_taiga"
   ],
   "features": "confluence:tundra_pots",
-  "step": "vegetal_decoration"
+  "step": "local_modifications"
 }

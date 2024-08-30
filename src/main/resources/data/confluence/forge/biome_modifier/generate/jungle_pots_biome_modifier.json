@@ -7,5 +7,5 @@
     "minecraft:bamboo_jungle"
   ],
   "features": "confluence:jungle_pots",
-  "step": "vegetal_decoration"
+  "step": "local_modifications"
 }

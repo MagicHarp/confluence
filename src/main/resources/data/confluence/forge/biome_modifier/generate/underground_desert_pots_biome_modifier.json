@@ -6,5 +6,5 @@
     "minecraft:wooded_badlands"
   ],
   "features": "confluence:underground_desert_pots",
-  "step": "vegetal_decoration"
+  "step": "local_modifications"
 }

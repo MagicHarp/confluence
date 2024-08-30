@@ -61,15 +61,15 @@ public class LifeCrystalBlock extends HorizontalDirectionalBlock implements Enti
         return SHAPE;
     }
 
-    @Override
-    public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        BlockPos below = pPos.below();
-        BlockState blockBelow = pLevel.getBlockState(below);
-        if (blockBelow.is(Blocks.DEEPSLATE)|| blockBelow.is(Blocks.SCULK)) {
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
+//        BlockPos below = pPos.below();
+//        BlockState blockBelow = pLevel.getBlockState(below);
+//        if (blockBelow.is(Blocks.AIR)|| blockBelow.is(Blocks.SCULK)) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     @Nullable
     @Override

@@ -67,6 +67,8 @@ import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.ColoredItem;
+import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -74,7 +76,9 @@ import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.mana.IManaWeapon;
+import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
@@ -141,7 +145,7 @@ public final class ForgeEvents {
                 ConfluenceData.get(serverLevel).setMoonSpecific(-1);
             }
         } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
-                serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
+            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
         ) {
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED), false);
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
@@ -170,7 +174,7 @@ public final class ForgeEvents {
         MagicCuffs.apply(living, damageSource, amount);
 
         amount = IManaWeapon.apply(damageSource, amount);
-        amount = IProjectileAttack.apply(damageSource, amount);
+        amount = ModAttributes.applyRangedDamage(living, damageSource, amount);
         amount = ArcheryEffect.apply(living, damageSource, amount);
         amount = ManaSicknessEffect.apply(damageSource, amount);
         amount = PaladinsShield.apply(living, damageSource, amount);
@@ -192,11 +196,11 @@ public final class ForgeEvents {
         if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
             EntityType<?> entityType = living.getType();
             NetworkHandler.CHANNEL.send(
-                    PacketDistributor.PLAYER.with(() -> serverPlayer),
-                    new EntityKilledPacketS2C(
-                            serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
-                            ForgeRegistries.ENTITY_TYPES.getKey(entityType)
-                    )
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new EntityKilledPacketS2C(
+                    serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
+                    ForgeRegistries.ENTITY_TYPES.getKey(entityType)
+                )
             );
 
             if (ModConfigs.DROP_MONEY.get() && living instanceof Enemy) {
@@ -230,25 +234,25 @@ public final class ForgeEvents {
             double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
             double rangeSqr = range * range;
             self.level().players().stream()
-                    .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
-                    .max((playerA, playerB) -> {
-                        AtomicInteger atomic = new AtomicInteger();
-                        playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                                playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
-                                        atomic.set(abilityA.getAggro() - abilityB.getAggro())
-                                )
-                        );
-                        return atomic.get();
-                    }).ifPresent(player -> {
-                        if (player == playerO) return;
-                        playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
-                                player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
-                                    if (abilityO.getAggro() < ability.getAggro()) {
-                                        event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
-                                    }
-                                })
-                        );
-                    });
+                .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
+                .max((playerA, playerB) -> {
+                    AtomicInteger atomic = new AtomicInteger();
+                    playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
+                        playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
+                            atomic.set(abilityA.getAggro() - abilityB.getAggro())
+                        )
+                    );
+                    return atomic.get();
+                }).ifPresent(player -> {
+                    if (player == playerO) return;
+                    playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
+                        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
+                            if (abilityO.getAggro() < ability.getAggro()) {
+                                event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                            }
+                        })
+                    );
+                });
         }
     }
 
@@ -298,6 +302,19 @@ public final class ForgeEvents {
                 }
             }
         }
+        if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {
+            if (livingEntity.getMainHandItem().getItem() instanceof BloodButchereSword) {
+                if (event.getEntity().hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
+                    if (event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4) {
+                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() + 1, false, false, false));
+                    } else {
+                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 4, false, false, false));
+                    }
+                } else {
+                    event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0, false, false, false));
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -307,19 +324,32 @@ public final class ForgeEvents {
         Entity entity = event.getTarget();
         Level level = event.getLevel();
         ItemStack item = event.getItemStack();
-        if (entity instanceof BaseSlime slime){
-            if (item.is(ModItems.HONEY_BUCKET.get()) || item.is(ModItems.BOTTOMLESS_HONEY_BUCKET.get())){
+        if (entity instanceof BaseSlime slime) {
+            if (item.is(ModItems.HONEY_BUCKET.get()) || item.is(ModItems.BOTTOMLESS_HONEY_BUCKET.get())) {
                 if (slime.getType().equals(ModEntities.BLUE_SLIME.get()) || slime.getType().equals(ModEntities.GREEN_SLIME.get()) ||
-                        slime.getType().equals(ModEntities.PURPLE_SLIME.get())) {
-                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234, 2);
+                    slime.getType().equals(ModEntities.PURPLE_SLIME.get())) {
+                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234);
                     honeySlime.setPos(entity.getX(), entity.getY(), entity.getZ());
                     honeySlime.setDeltaMovement(entity.getDeltaMovement());
                     level.addFreshEntity(honeySlime);
                     entity.discard();
-                    if (item.is(ModItems.HONEY_BUCKET.get())){
+                    if (item.is(ModItems.HONEY_BUCKET.get())) {
                         player.setItemInHand(event.getHand(), new ItemStack(Items.BUCKET));
                     }
                     player.playSound(SoundEvents.HONEY_DRINK, 1, 1);
+                }
+            }
+        }
+        if (entity instanceof HoneySlime slime) {
+            if (slime.getSize() == 3) {
+                if (item.is(Items.GLASS_BOTTLE)) {
+                    slime.setSize(level.random.nextInt(1, 3), false);
+                    player.addItem(new ItemStack(Items.HONEY_BOTTLE));
+                    player.setItemInHand(event.getHand(), new ItemStack(Items.GLASS_BOTTLE, player.getItemInHand(event.getHand()).getCount() - 1));
+                    player.playSound(SoundEvents.HONEY_DRINK, 3, 1.5F);
+                    ItemStack itemStack = new ItemStack(Materials.GEL.get(), level.random.nextInt(1, 30));
+                    ColoredItem.setColor(itemStack, 0xf8e234);
+                    ModUtils.createItemEntity(itemStack, slime.getX(), slime.getY(), slime.getZ(), level);
                 }
             }
         }

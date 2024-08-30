@@ -17,7 +17,7 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
     GREEN_SLIME_SPAWN_EGG("green_slime_spawn_egg", ModEntities.GREEN_SLIME, 0xa2f89f, 0x3de838),
     RED_SLIME_SPAWN_EGG("red_slime_spawn_egg", ModEntities.RED_SLIME, 0xf83434, 0xA51E1E),
     YELLOW_SLIME_SPAWN_EGG("yellow_slime_spawn_egg", ModEntities.YELLOW_SLIME, 0xf8e234, 0xd19519),
-    HONEY_SLIME_SPAWN_EGG("honey_slime_spawn_egg", ModEntities.HONEY_SLIME, 0xf8e234, 0xd19519),
+    HONEY_SLIME_SPAWN_EGG("honey_slime_spawn_egg", ModEntities.HONEY_SLIME, 0xfed167, 0xfcd58c),
     BLACK_SLIME_SPAWN_EGG("black_slime_spawn_egg", ModEntities.BLACK_SLIME, 0x7E7E7E, 0x373535),
     PINK_SLIME_SPAWN_EGG("pink_slime_spawn_egg", ModEntities.PINK_SLIME, 0xFF87B3, 0xf89fe3),
     DESERT_SLIME_SPAWN_EGG("desert_slime_spawn_egg", ModEntities.DESERT_SLIME, 0xDCC59a, 0xC7AB5E),

@@ -31,7 +31,7 @@ public class AncientChisel extends BaseCurioItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTE == null) {
             ATTRIBUTE = ImmutableMultimap.of(
-                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Ancient Chisel", 0.25, AttributeModifier.Operation.MULTIPLY_BASE)
+                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Ancient Chisel", 0.25, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTE;

@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,10 +118,10 @@ public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
     public boolean isPickable() {
         return true;
     }
-    @Nullable
+/*    @Nullable
     public ItemStack getPickResult() {
         return this.parentMob.getPickResult();
-    }
+    }*/
 
     public boolean is(Entity pEntity) {
         return this == pEntity || this.parentMob == pEntity;

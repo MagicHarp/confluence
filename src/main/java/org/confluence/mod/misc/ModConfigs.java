@@ -100,5 +100,4 @@ public final class ModConfigs {
             "minecraft:panda"), o -> true);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BUILDER.build());
     }
-
 }

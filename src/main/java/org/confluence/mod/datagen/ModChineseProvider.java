@@ -71,6 +71,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.jungle_slime", "丛林史莱姆");
         add("entity.confluence.pink_slime", "粉色史莱姆");
         add("entity.confluence.yellow_slime", "黄色史莱姆");
+        add("entity.confluence.honey_slime", "蜂蜜史莱姆");
         add("entity.confluence.crimson_slime", "猩红史莱姆");
         add("entity.confluence.corrupted_slime", "腐化史莱姆");
         add("entity.confluence.desert_slime", "沙漠史莱姆");
@@ -1231,7 +1232,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(SAND_LAYER_BLOCK.get(),"沙片");
         add(RED_SAND_LAYER_BLOCK.get(), "红沙片");
         add(RED_HARDENED_SAND_BLOCK.get(), "硬化红沙块");
+        add(DIATOMACEOUS.get(), "硅藻土");
         add(SLUSH.get(), "雪泥块");
+        add(MARINE_GRAVEL.get(), "海洋砂砾");
         add(EBONY_STONE.get(), "黑檀石块");
         add(EBONY_COBBLESTONE.get(), "黑檀圆石");
         add(EBONY_HARDENED_SAND_BLOCK.get(), "硬化黑檀沙块");
@@ -1311,6 +1314,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(TR_NORTHLAND_PLANKS.get(), "北地风情木板");
         add(TR_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
+        add(PURE_GLASS.get(), "纯净玻璃块");
+
         add(THIN_ICE_BLOCK.get(), "薄冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
         add(LIFE_CRYSTAL_BLOCK.get(), "生命水晶");
@@ -1328,7 +1333,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(CORRUPTION_REDSTONE_ORE.get(), "腐化红石矿石");
         add(FLESHIFICATION_REDSTONE_ORE.get(), "血化红石矿石");
         add(OCULAR_BLOCKS.get(), "血肉眼球块");
-        add(PUPIL_BLOCKS.get(), "血肉瞳孔块");
         add(SWORD_IN_STONE.get(), "石中剑");
         add(WOOD_STONE_SLATTED_BLOCKS.get(), "木石板条块");
         add(DEEPSLATE_PRESSURE_PLATE.get(), "深板岩压力板");
@@ -1388,6 +1392,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Pots.UNDERGROUND_DESERT_POTS.get(), "沙漠罐子");
         add(Pots.JUNGLE_POTS.get(), "丛林罐子");
         add(Pots.MARBLE_CAVE_POTS.get(), "尘封罐子");
+        add(Pots.OCEAN_POTS.get(), "海洋罐子");
         add(Pots.PYRAMID_POTS.get(), "祭祀罐子");
         add(Pots.CORRUPTION_POTS.get(), "蠕虫罐子");
         add(Pots.TR_CRIMSON_POTS.get(), "血肉罐子");
@@ -1751,6 +1756,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS.get(), "寒颤棘");
         add(ModItems.SUNFLOWERS.get(), "太阳花");
         add(ModItems.DEATHWEED.get(), "死亡草");
+        add(STELLAR_BLOSSOM.get(), "星辰草");
         add(WATERLEAF_SEED.get(), "幌菊种子");
         add(ModItems.FLAMEFLOWERS_SEED.get(), "火焰花种子");
         add(ModItems.MOONSHINE_GRASS_SEED.get(), "月光草种子");
@@ -1758,11 +1764,18 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS_SEED.get(), "寒颤棘种子");
         add(ModItems.SUNFLOWERS_SEED.get(), "太阳花种子");
         add(ModItems.DEATHWEED_SEED.get(), "死亡草种子");
+        add(STELLAR_BLOSSOM_SEED.get(), "星辰草种子");
 
         add(CRIMSON_THORN.get(), "猩红荆棘");
         add(CORRUPTION_THORN.get(), "腐化荆棘");
         add(JUNGLE_THORN.get(), "丛林荆棘");
         add(PLANTERA_THORN.get(), "世纪之花荆棘");
+        // 树苗
+        add(SHADOW_SAPLING.get(), "暗影树苗");
+        add(EBONY_SAPLING.get(), "乌木树苗");
+        add(PALM_SAPLING.get(), "棕榈树苗");
+        add(PEARL_SAPLING.get(), "珍珠树苗");
+        add(RUBY_SAPLING.get(), "红玉树苗");
 
         add(ModBlocks.TR_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");
@@ -1826,6 +1839,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GunItems.ONYXBLASTER.get(), "玛瑙爆破枪");
         add(GunItems.PHOENIXBLASTER.get(), "凤凰爆破枪");
         add(GunItems.REVOLVER.get(), "左轮手枪");
+        add(GunItems.THEUNDERTAKER.get(), "夺命枪");
         add(GunItems.SLIMEGUN.get(), "史莱姆枪");
         add(GunItems.SNIPERRIFLE.get(), "狙击步枪");
         add(GunItems.SNOWBALLCANNON.get(), "雪球炮");
@@ -1873,6 +1887,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.BLUE_SLIME_SPAWN_EGG.get(), "蓝色史莱姆刷怪蛋");
         add(SpawnEggs.RED_SLIME_SPAWN_EGG.get(), "红色史莱姆刷怪蛋");
         add(SpawnEggs.YELLOW_SLIME_SPAWN_EGG.get(), "黄色史莱姆刷怪蛋");
+        add(SpawnEggs.HONEY_SLIME_SPAWN_EGG.get(), "蜂蜜史莱姆刷怪蛋");
         add(SpawnEggs.PURPLE_SLIME_SPAWN_EGG.get(), "紫色史莱姆刷怪蛋");
         add(SpawnEggs.DESERT_SLIME_SPAWN_EGG.get(), "沙漠史莱姆刷怪蛋");
         add(SpawnEggs.JUNGLE_SLIME_SPAWN_EGG.get(), "丛林史莱姆刷怪蛋");

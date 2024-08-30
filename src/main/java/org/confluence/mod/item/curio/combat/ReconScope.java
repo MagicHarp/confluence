@@ -19,6 +19,7 @@ import java.util.UUID;
 
 public class ReconScope extends SniperScope implements IAggroAttach {
     public static final UUID CRIT_UUID = UUID.fromString("9F9D07C4-B7EF-F6F3-A9F5-2D6833E32C28");
+    public static final UUID RANGED_UUID = UUID.fromString("057340AC-3837-20ED-E89F-B171F71EA00C");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public ReconScope() {
@@ -48,7 +49,8 @@ public class ReconScope extends SniperScope implements IAggroAttach {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.ADDITION)
+                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.ADDITION),
+                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTES;

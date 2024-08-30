@@ -125,6 +125,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);
         mineableWithShovel.add(
             SLUSH.get(),
+            MARINE_GRAVEL.get(),
+            DIATOMACEOUS.get(),
             EBONY_SAND.get(),
             PEARL_SAND.get(),
             TR_CRIMSON_SAND.get(),

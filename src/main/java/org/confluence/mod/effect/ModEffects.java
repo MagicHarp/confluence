@@ -54,6 +54,7 @@ public final class ModEffects {
     public static final RegistryObject<FlipperEffect> FLIPPER = EFFECTS.register("flipper", FlipperEffect::new);
     public static final RegistryObject<ShineEffect> SHINE = EFFECTS.register("shine", ShineEffect::new);
     public static final RegistryObject<ShimmerEffect> SHIMMER = EFFECTS.register("shimmer", ShimmerEffect::new);
+    public static final RegistryObject<BloodButcheredEffect> BLOOD_BUTCHERED = EFFECTS.register("blood_butchered", BloodButcheredEffect::new);
 
     public static void healPerSecond(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

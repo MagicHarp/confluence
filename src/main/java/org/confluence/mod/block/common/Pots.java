@@ -50,6 +50,7 @@ import static org.confluence.mod.item.potion.TerraPotions.*;
 public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     FOREST_POTS("forest_pots", 1.0F, 0.002F),
     TUNDRA_POTS("tundra_pots", 1.25F, 0.002167F),
+    OCEAN_POTS("ocean_pots", 1.25F, 0.002167F),
     SPIDER_NEST_POTS("spider_nest_pots", 3.5F, 0.003676F),
     UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F),
     JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F),
@@ -146,10 +147,10 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             dropSequence(pLevel, pPos);
         }
 
-        @Override
-        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
-        }
+//        @Override
+//        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
+//            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
+//        }
 
         @Override
         public void onProjectileHit(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockHitResult pHit, @NotNull Projectile pProjectile) {

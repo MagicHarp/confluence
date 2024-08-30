@@ -61,8 +61,8 @@ public final class ModItems {
     public static final RegistryObject<Item> SILVER_COIN = ITEMS.register("silver_coin", () -> new BlockItem(ModBlocks.SILVER_COIN_PILE.get(), new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final RegistryObject<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new BlockItem(ModBlocks.GOLDEN_COIN_PILE.get(), new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final RegistryObject<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new BlockItem(ModBlocks.PLATINUM_COIN_PILE.get(), new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<SuspiciousLookingEye> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", SuspiciousLookingEye::new);
-    public static final RegistryObject<SlimeCrown> SLIME_CROWN = ITEMS.register("slime_crown", SlimeCrown::new);
+    public static final RegistryObject<BossSpwanItem> SUSPICIOUS_LOOKING_EYE = ITEMS.register("suspicious_looking_eye", () -> new BossSpwanItem(12000, "cthulhuEye"));
+    public static final RegistryObject<BossSpwanItem> SLIME_CROWN = ITEMS.register("slime_crown", () -> new BossSpwanItem(0, "kingSlime"));
 
     public static final RegistryObject<ExpertTestItem> EXPERT_TEST_ITEM = ITEMS.register("expert_test_item", ExpertTestItem::new);
     public static final RegistryObject<MasterTestItem> MASTER_TEST_ITEM = ITEMS.register("master_test_item", MasterTestItem::new);

@@ -41,6 +41,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.DESERT_FOSSIL).add(ModBlocks.DESERT_FOSSIL.get().asItem());
         tag(ModTags.Items.GRAVEL).add(Blocks.GRAVEL.asItem());
         tag(ModTags.Items.SLUSH).add(ModBlocks.SLUSH.get().asItem());
+        tag(ModTags.Items.MARINE_GRAVEL).add(ModBlocks.MARINE_GRAVEL.get().asItem());
         tag(ModTags.Items.JUNK).add(Blocks.LILY_PAD.asItem(), Items.LEATHER_BOOTS, Blocks.SEAGRASS.asItem());
         tag(ModTags.Items.CORAL).add(Blocks.TUBE_CORAL.asItem(), Blocks.TUBE_CORAL_FAN.asItem(), Blocks.TUBE_CORAL_BLOCK.asItem(), Blocks.BRAIN_CORAL.asItem(), Blocks.BRAIN_CORAL_FAN.asItem(), Blocks.BRAIN_CORAL_BLOCK.asItem(),
             Blocks.BUBBLE_CORAL.asItem(), Blocks.BUBBLE_CORAL_FAN.asItem(), Blocks.BUBBLE_CORAL_BLOCK.asItem(), Blocks.FIRE_CORAL.asItem(), Blocks.FIRE_CORAL_FAN.asItem(), Blocks.FIRE_CORAL_BLOCK.asItem(), Blocks.HORN_CORAL.asItem(), Blocks.HORN_CORAL_FAN.asItem(), Blocks.HORN_CORAL_BLOCK.asItem(),

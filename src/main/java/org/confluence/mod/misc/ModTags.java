@@ -53,6 +53,7 @@ public final class ModTags {
         public static final TagKey<Item> GRAVEL = register("gravel");
         public static final TagKey<Item> JUNK = register("junk");
         public static final TagKey<Item> SLUSH = register("slush");
+        public static final TagKey<Item> MARINE_GRAVEL = register("marine_gravel");
         public static final TagKey<Item> CORAL = register("coral");
         public static final TagKey<Item> TR_PLANKS = register("tr_planks");
         public static final TagKey<Item> LEAD_AND_IRON = register("lead_and_iron");

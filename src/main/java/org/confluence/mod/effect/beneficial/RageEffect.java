@@ -2,8 +2,6 @@ package org.confluence.mod.effect.beneficial;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.confluence.mod.misc.ModAttributes;
 
 
 public class RageEffect extends MobEffect {
@@ -11,6 +9,5 @@ public class RageEffect extends MobEffect {
 
     public RageEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xFF4500);
-        addAttributeModifier(ModAttributes.getCriticalChance(), CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 }

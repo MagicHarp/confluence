@@ -22,7 +22,8 @@ public class SunStone extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("7E929677-A019-1C19-1A2C-36A07268A66B");
     public static final UUID CRIT_UUID = UUID.fromString("840A63CB-F274-75C1-09B1-BC8092B076F4");
     public static final UUID MINING_UUID = UUID.fromString("B599894C-1157-3875-C28C-E4F0681F04E9");
-    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
+    public static final UUID RANGED_UUID = UUID.fromString("171921EE-AB4F-E630-D69E-BB31E17A22C8");
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public SunStone() {
         super(ModRarity.LIME);
@@ -30,18 +31,19 @@ public class SunStone extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        if (ATTRIBUTE == null) {
-            ATTRIBUTE = ImmutableMultimap.of(
-                Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION),
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sun Stone", 0.02, AttributeModifier.Operation.ADDITION),
-                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Sun Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
-            );
+        if (ATTRIBUTES == null) {
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION));
+            builder.put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sun Stone", 0.02, AttributeModifier.Operation.ADDITION));
+            builder.put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Sun Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            builder.put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            ATTRIBUTES = builder.build();
         }
         LivingEntity living = slotContext.entity();
         if (living == null) return EMPTY_ATTRIBUTE;
-        return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTE : EMPTY_ATTRIBUTE;
+        return living.level().getDayTime() % 24000 < 12000 ? ATTRIBUTES : EMPTY_ATTRIBUTE;
     }
 
     @Override

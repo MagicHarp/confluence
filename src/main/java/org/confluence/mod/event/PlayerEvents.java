@@ -27,7 +27,6 @@ import org.confluence.mod.block.common.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
-import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
@@ -114,10 +113,10 @@ public final class PlayerEvents {
 
     @SubscribeEvent
     public static void criticalHit(CriticalHitEvent event) {
-        if (ApothicHelper.isAttributesLoaded()) return;
+        if (ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) return;
         Player player = event.getEntity();
         if (!event.isVanillaCritical()) {
-            double chance = player.getAttributeValue(ModAttributes.getCriticalChance());
+            double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
             if (player.level().random.nextFloat() < chance) {
                 event.setDamageModifier(1.5F);
                 event.setResult(Event.Result.ALLOW);
@@ -145,7 +144,7 @@ public final class PlayerEvents {
             }
         }
 
-        if (ApothicHelper.isAttributesLoaded()) return;
+        if (ModAttributes.hasCustomAttribute(ModAttributes.MINING_SPEED.get())) return;
         AttributeInstance attributeInstance = player.getAttribute(ModAttributes.MINING_SPEED.get());
         if (attributeInstance == null) return;
         event.setNewSpeed(event.getNewSpeed() * (float) attributeInstance.getValue());

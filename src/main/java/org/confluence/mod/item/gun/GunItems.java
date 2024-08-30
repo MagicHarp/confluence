@@ -15,6 +15,7 @@ public final class GunItems {
     public static final RegistryObject<TacticalShotgunItem> TACTICALSHOTGUN = ITEMS.register("tacticalshotgun", TacticalShotgunItem::new);
     public static final RegistryObject<UZIItem> UZI = ITEMS.register("uzi", UZIItem::new);
     public static final RegistryObject<RevolverItem> REVOLVER = ITEMS.register("revolver", RevolverItem::new);
+    public static final RegistryObject<TheUndertakerItem> THEUNDERTAKER = ITEMS.register("theundertaker", TheUndertakerItem::new);
     public static final RegistryObject<PhoenixBlasterItem> PHOENIXBLASTER = ITEMS.register("phoenixblaster", PhoenixBlasterItem::new);
     public static final RegistryObject<OnyxBlasterItem> ONYXBLASTER = ITEMS.register("onyxblaster", OnyxBlasterItem::new);
     public static final RegistryObject<SniperRifleItem> SNIPERRIFLE = ITEMS.register("sniperrifle", SniperRifleItem::new);

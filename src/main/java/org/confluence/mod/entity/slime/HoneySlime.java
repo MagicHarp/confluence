@@ -22,15 +22,13 @@ import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class HoneySlime extends Slime implements DeathAnimOptions {
-    private final int size;
     private final ItemStack itemStack;
     private final FloatRGB color;
 
-    public HoneySlime(EntityType<? extends Slime> slime, Level level, int color, int size) {
+    public HoneySlime(EntityType<? extends Slime> slime, Level level, int color) {
         super(slime, level);
-        this.size = size;
         // setSize在constructor中调用时size还没更新，再变一遍
-        setSize(size, false);
+        setSize(2, true);
         ItemStack itemStack = new ItemStack(Materials.GEL.get());
         ColoredItem.setColor(itemStack, color);
         this.itemStack = itemStack;
@@ -46,6 +44,7 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void tick() {
+        this.setTarget(null);
         resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
@@ -57,6 +56,11 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
                 level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HONEY_BLOCK.defaultBlockState()), getX() + (double) f2, getY(), getZ() + (double) f3, color.red(), color.green(), color.blue());
             }
         }
+        if (getSize() < 3){
+            if (level().random.nextDouble() <= 0.00005D) {
+                setSize(getSize() + 1, false);
+            }
+        }
         super.tick();
     }
     @Override
@@ -65,8 +69,13 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
     }
 
     @Override
-    public void setSize(int pSize, boolean pResetHealth) {
-        int i = Mth.clamp(size, 1, 127);
+    public void setSize(int pSize, boolean init) {
+        int i;
+        if (!init){
+            i = Mth.clamp(pSize, 1, 127);
+        } else {
+            i = 2;
+        }
         entityData.set(ID_SIZE, i);
         reapplyPosition();
         refreshDimensions();

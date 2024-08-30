@@ -40,7 +40,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int[] TOTAL_SPLITS = {75, 50, 30};
     private static final float[] MAX_HEALTHS = {928f, 812f, 580f};
     private static final float[] DAMAGE = {12.5f, 9f, 4.5f};
-    private static final float[] JUMP_SPEED_HORIZONTAL = {1f, 1.25f, 1.5f};
+    private static final float[] JUMP_SPEED_HORIZONTAL = {1.1f, 1.35f, 1.55f};
     private static final float[] JUMP_SPEED_VERTICAL = {1.5f, 1.75f, 2f};
     private static final float[] JUMP_SPEED_VERTICAL_THIRD = {2f, 2.25f, 2.5f};
     private static final float[] SWIM_SPEED_HORIZONTAL = {0.1f, 0.15f, 0.2f};
@@ -179,7 +179,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         // 水平方向移动
         horMoveDir = Vec3.ZERO;
 
-        attrInit();
+        attrInit(this.getNearbyPlayers(100.0D));
     }
 
     @Override
@@ -218,10 +218,14 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         return 999999;
     }
 
-    private void attrInit() {
+    private void attrInit(List<Player> nearbyPlayers) {
         getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx]);
         setHealth(MAX_HEALTHS[difficultyIdx]);
         getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(DAMAGE[difficultyIdx]);
+
+        for (Player player : nearbyPlayers){
+            //todo music
+        }
     }
 
     private int getMaxSize() {

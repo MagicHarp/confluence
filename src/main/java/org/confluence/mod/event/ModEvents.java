@@ -9,6 +9,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Minecart;
@@ -33,15 +34,18 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
+import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.effect.beneficial.RageEffect;
+import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.slime.BaseSlime;
+import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.entity.boss.eow.EaterOfWorldEntity;
 import org.confluence.mod.entity.boss.eow.EaterOfWorldPart;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
@@ -56,7 +60,6 @@ import static org.confluence.mod.Confluence.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModEvents {
-
     @SubscribeEvent
     public static void attributeCreate(EntityAttributeCreationEvent event) {
         event.put(ModEntities.BLUE_SLIME.get(), BaseSlime.createSlimeAttributes(4.0F, 0, 16.0F).build());
@@ -74,7 +77,7 @@ public final class ModEvents {
         event.put(ModEntities.RED_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 1, 25.0F).build());
         event.put(ModEntities.TROPIC_SLIME.get(), BaseSlime.createSlimeAttributes(5.0F, 0, 13.0F).build());
         event.put(ModEntities.YELLOW_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
-        event.put(ModEntities.HONEY_SLIME.get(), BaseSlime.createSlimeAttributes(6.0F, 2, 25.0F).build());
+        event.put(ModEntities.HONEY_SLIME.get(), HoneySlime.createSlimeAttributes(0F, 0, 16.0F).build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
         event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
@@ -110,8 +113,6 @@ public final class ModEvents {
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, SurfaceRuleData.makeRules());
 
-            Confluence.MINECART_CURIO.put(Minecart.class, Items.MINECART);
-            Confluence.CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
             Confluence.SPREADABLE_CHANCE = GameRules.register("confluenceSpreadableChance", GameRules.Category.MISC, GameRules.IntegerValue.create(10));
         });
     }
@@ -122,6 +123,12 @@ public final class ModEvents {
             StepRevealingBlock.registerOurOwn();
             LogBlocks.wrapStrip();
             ISpreadable.Type.buildMap();
+
+            Confluence.MINECART_CURIO.put(Minecart.class, Items.MINECART);
+            Confluence.CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
+
+            ModEffects.RAGE.get().addAttributeModifier(ModAttributes.getCriticalChance(), RageEffect.CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            ModEffects.CEREBRAL_MINDTRICK.get().addAttributeModifier(ModAttributes.getCriticalChance(), CerebralMindtrickEffect.CRIT_UUID, 0.04, AttributeModifier.Operation.ADDITION);
         });
     }
 
@@ -195,11 +202,21 @@ public final class ModEvents {
 
     @SubscribeEvent
     public static void modify(EntityAttributeModificationEvent event) {
-        if (!ApothicHelper.isAttributesLoaded()) {
+        ModAttributes.readJsonConfig();
+
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) {
             event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
+        }
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_VELOCITY.get())) {
             event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
+        }
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_DAMAGE.get())) {
             event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
+        }
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.DODGE_CHANCE.get())) {
             event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
+        }
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.MINING_SPEED.get())) {
             event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
         }
     }

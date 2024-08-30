@@ -13,7 +13,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.integration.apothic.ApothicHelper;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +39,7 @@ public abstract class SwordProjectile extends Projectile {
         if (attributeInstance != null) {
             this.attackDamage = (float) attributeInstance.getValue();
         }
-        if (ApothicHelper.isAttributesLoaded()) return;
+        if (ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) return;
         attributeInstance = living.getAttribute(ModAttributes.CRIT_CHANCE.get());
         if (attributeInstance != null) {
             this.criticalChance = (float) attributeInstance.getValue();
