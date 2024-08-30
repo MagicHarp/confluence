@@ -9,8 +9,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import org.confluence.mod.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 
-public class SkyMillerRecipe extends AbstractAmountRecipe {
-    public SkyMillerRecipe(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
+public class SkyMillRecipe extends AbstractAmountRecipe {
+    public SkyMillRecipe(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
         super(pId, pResult, pIngredients);
     }
 
@@ -26,25 +26,25 @@ public class SkyMillerRecipe extends AbstractAmountRecipe {
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return ModRecipes.SKY_MILLER_SERIALIZER.get();
+        return ModRecipes.SKY_MILL_SERIALIZER.get();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return ModRecipes.SKY_MILLER_TYPE.get();
+        return ModRecipes.SKY_MILL_TYPE.get();
     }
 
-    public static class Serializer extends AbstractAmountRecipe.Serializer<SkyMillerRecipe> {
+    public static class Serializer extends AbstractAmountRecipe.Serializer<SkyMillRecipe> {
         @Override
-        protected SkyMillerRecipe newInstance(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
-            return new SkyMillerRecipe(pId, pResult, pIngredients);
+        protected SkyMillRecipe newInstance(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
+            return new SkyMillRecipe(pId, pResult, pIngredients);
         }
     }
 
-    public static class Type implements RecipeType<SkyMillerRecipe> {
+    public static class Type implements RecipeType<SkyMillRecipe> {
         @Override
         public String toString() {
-            return "confluence:sky_miller_type";
+            return "confluence:sky_mill_type";
         }
     }
 }

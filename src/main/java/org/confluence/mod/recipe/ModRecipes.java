@@ -14,8 +14,8 @@ public final class ModRecipes {
 
     public static final RegistryObject<RecipeType<AltarRecipe>> ALTAR_TYPE = TYPES.register("altar_type", AltarRecipe.Type::new);
     public static final RegistryObject<RecipeSerializer<AltarRecipe>> ALTAR_SERIALIZER = SERIALIZERS.register("altar", AltarRecipe.Serializer::new);
-    public static final RegistryObject<RecipeType<SkyMillerRecipe>> SKY_MILLER_TYPE = TYPES.register("sky_miller_type", SkyMillerRecipe.Type::new);
-    public static final RegistryObject<RecipeSerializer<SkyMillerRecipe>> SKY_MILLER_SERIALIZER = SERIALIZERS.register("sky_miller", SkyMillerRecipe.Serializer::new);
+    public static final RegistryObject<RecipeType<SkyMillRecipe>> SKY_MILL_TYPE = TYPES.register("sky_mill_type", SkyMillRecipe.Type::new);
+    public static final RegistryObject<RecipeSerializer<SkyMillRecipe>> SKY_MILL_SERIALIZER = SERIALIZERS.register("sky_mill", SkyMillRecipe.Serializer::new);
 
     public static final RegistryObject<RecipeSerializer<ExtraStepStoolRecipe>> EXTRA_STEP_STOOL_SERIALIZER = SERIALIZERS.register("extra_step_stool", () -> new SimpleSmithingTransformRecipeSerializer<>(ExtraStepStoolRecipe::new));
 
