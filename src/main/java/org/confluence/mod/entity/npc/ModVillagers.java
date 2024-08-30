@@ -31,7 +31,7 @@ public final class ModVillagers {
     public static final RegistryObject<VillagerProfession> SKY_MILLER = PROFESSIONS.register("sky_miller", () -> new VillagerProfession("sky", holder -> holder.is(SKY_POI.getKey()), holder -> holder.is(SKY_POI.getKey()), ImmutableSet.of(Materials.FALLING_STAR.get()), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_WEAPONSMITH));
 
     // 村民的群系
-    public static final RegistryObject<VillagerType> SKY_TYPE = RegistryObject.create(new ResourceLocation(MODID, "sky"), BuiltInRegistries.VILLAGER_TYPE.key(), MODID);
+    public static final RegistryObject<VillagerType> SKY_TYPE = RegistryObject.create(new ResourceLocation(MODID, "sky"), BuiltInRegistries.VILLAGER_TYPE.key(), MODID); // 天域村民
 
     public static void registerTypes(RegisterEvent event) {
         event.register(BuiltInRegistries.VILLAGER_TYPE.key(), helper -> {

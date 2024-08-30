@@ -1010,6 +1010,8 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("attribute.name.generic.critical_chance", "暴击率");
 
+        add("entity.minecraft.villager.confluence.sky_miller", "天师");
+
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");

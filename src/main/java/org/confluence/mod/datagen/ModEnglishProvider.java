@@ -887,6 +887,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("attribute.name.generic.critical_chance", "Critical Chance");
 
+        add("entity.minecraft.villager.confluence.sky_miller", "Sky Miller");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;
