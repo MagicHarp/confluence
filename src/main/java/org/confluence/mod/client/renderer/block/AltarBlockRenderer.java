@@ -1,7 +1,7 @@
 package org.confluence.mod.client.renderer.block;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import org.confluence.mod.block.common.AltarBlock;
+import org.confluence.mod.block.functional.AltarBlock;
 import org.confluence.mod.client.model.block.AltarBlockModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 

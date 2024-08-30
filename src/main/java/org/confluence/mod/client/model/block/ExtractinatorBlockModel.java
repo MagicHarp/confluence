@@ -2,7 +2,7 @@ package org.confluence.mod.client.model.block;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.common.ExtractinatorBlock;
+import org.confluence.mod.block.functional.ExtractinatorBlock;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ExtractinatorBlockModel extends GeoModel<ExtractinatorBlock.Entity> {

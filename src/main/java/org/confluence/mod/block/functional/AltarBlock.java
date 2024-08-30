@@ -1,4 +1,4 @@
-package org.confluence.mod.block.common;
+package org.confluence.mod.block.functional;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
@@ -155,13 +155,11 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
     public static class Entity extends BlockEntity implements GeoBlockEntity {
         private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
         private Variant variant;
-        private transient int lastActivatedSlot;
 
         private final ItemStackContainer itemHandler; //5 Inputs and 1 Output.
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
             super(ModBlocks.ALTAR_BLOCK_ENTITY.get(), pPos, pBlockState);
-            this.lastActivatedSlot = -1;
             this.itemHandler = new ItemStackContainer(this, 6);
             SingletonGeoAnimatable.registerSyncedAnimatable(this);
         }
@@ -174,7 +172,6 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
                     firstEmptySlot = i;
                 }
                 if (ItemStack.isSameItemSameTags(stack, toAdd)) {
-                    this.lastActivatedSlot = i;
                     ItemStack result = itemHandler.insertItem(i, toAdd, false);
                     setChanged();
                     return result;
@@ -182,11 +179,9 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
             }
             if (firstEmptySlot != -1) {
                 itemHandler.setStackInSlot(firstEmptySlot, toAdd);
-                this.lastActivatedSlot = firstEmptySlot;
                 setChanged();
                 return ItemStack.EMPTY;
             }
-            this.lastActivatedSlot = -1;
             return ItemStack.EMPTY;
         }
 

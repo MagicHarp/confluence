@@ -1,4 +1,4 @@
-package org.confluence.mod.block.common;
+package org.confluence.mod.block.functional;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;

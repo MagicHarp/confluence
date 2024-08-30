@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NetworkService {
-    private IntAllocator nodeID;
-    private Set<Network> networks;
+    private IntAllocator nodeID = new IntAllocator();
+    private Set<Network> networks = new HashSet<>();
     public static final NetworkService INSTANCE = new NetworkService();
 
     public void onServerStart() {

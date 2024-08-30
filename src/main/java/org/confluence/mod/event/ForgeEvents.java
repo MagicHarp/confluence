@@ -370,11 +370,6 @@ public final class ForgeEvents {
         } else if (mob instanceof BlackSlime blackSlime) {
             blackSlime.finalizeSpawn(randomSource, event.getDifficulty());
         }
-//        if (mob instanceof Enemy && event.getSpawnType() != MobSpawnType.SPAWNER && mob.level() instanceof ServerLevel serverLevel) {
-//            for (int i = 0; i < 4; i++) {
-//                mob.getType().spawn(serverLevel, mob.blockPosition(), MobSpawnType.SPAWNER);
-//            }
-//        }
     }
 
     @SubscribeEvent
