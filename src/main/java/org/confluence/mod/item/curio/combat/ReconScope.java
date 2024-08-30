@@ -39,13 +39,6 @@ public class ReconScope extends SniperScope implements IAggroAttach {
         list.add(Component.translatable("item.confluence.recon_scope.tooltip"));
     }
 
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.recon_scope.info"),
-            Component.translatable("item.confluence.recon_scope.info2")
-        };
-    }
-
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {

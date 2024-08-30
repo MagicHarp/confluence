@@ -11,8 +11,7 @@ public class ShotPut extends BaseCurioItem implements EffectInvul.Levitation {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.shot_put.info"),
-            Component.translatable("item.confluence.shot_put.info2")
+            Component.translatable("item.confluence.shot_put.info")
         };
     }
 }

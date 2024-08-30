@@ -11,8 +11,7 @@ public class StarCloak extends BaseCurioItem implements IStarCloak {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.star_cloak.info"),
-            Component.translatable("item.confluence.star_cloak.info2")
+            Component.translatable("item.confluence.star_cloak.info")
         };
     }
 }

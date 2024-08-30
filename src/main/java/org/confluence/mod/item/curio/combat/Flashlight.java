@@ -11,8 +11,7 @@ public class Flashlight extends BaseCurioItem implements EffectInvul.Darkness {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.flashlight.info"),
-            Component.translatable("item.confluence.flashlight.info2")
+            Component.translatable("item.confluence.flashlight.info")
         };
     }
 }

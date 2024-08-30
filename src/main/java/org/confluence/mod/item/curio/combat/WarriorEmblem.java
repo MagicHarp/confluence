@@ -43,8 +43,7 @@ public class WarriorEmblem extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.warrior_emblem.info"),
-            Component.translatable("item.confluence.warrior_emblem.info2")
+            Component.translatable("item.confluence.warrior_emblem.info")
         };
     }
 }

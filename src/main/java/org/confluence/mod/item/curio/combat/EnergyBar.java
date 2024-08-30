@@ -11,8 +11,7 @@ public class EnergyBar extends BaseCurioItem implements EffectInvul.Hunger {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.energy_bar.info"),
-            Component.translatable("item.confluence.energy_bar.info2")
+            Component.translatable("item.confluence.energy_bar.info")
         };
     }
 }

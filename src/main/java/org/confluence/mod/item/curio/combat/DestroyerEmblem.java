@@ -41,11 +41,4 @@ public class DestroyerEmblem extends BaseCurioItem implements IMagicAttack {
         }
         return ATTRIBUTES;
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.destroyer_emblem.info"),
-            Component.translatable("item.confluence.destroyer_emblem.info2")
-        };
-    }
 }

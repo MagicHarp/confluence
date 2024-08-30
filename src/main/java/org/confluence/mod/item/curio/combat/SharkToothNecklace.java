@@ -24,8 +24,7 @@ public class SharkToothNecklace extends BaseCurioItem implements IArmorPass {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.shark_tooth_necklace.info"),
-            Component.translatable("item.confluence.shark_tooth_necklace.info2")
+            Component.translatable("item.confluence.shark_tooth_necklace.info")
         };
     }
 }

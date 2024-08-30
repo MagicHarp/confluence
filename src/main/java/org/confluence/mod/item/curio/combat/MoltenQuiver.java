@@ -43,11 +43,4 @@ public class MoltenQuiver extends MagicQuiver {
         list.add(Component.translatable("item.confluence.molten_quiver.tooltip"));
         list.add(Component.translatable("item.confluence.molten_quiver.tooltip2"));
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.molten_quiver.info"),
-            Component.translatable("item.confluence.molten_quiver.info2")
-        };
-    }
 }

@@ -60,16 +60,7 @@ public class MoonStone extends BaseCurioItem implements IMagicAttack {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.moon_stone.info"),
-            Component.translatable("item.confluence.moon_stone.info2"),
-            Component.translatable("item.confluence.moon_stone.info3"),
-            Component.translatable("item.confluence.moon_stone.info4"),
-            Component.translatable("item.confluence.moon_stone.info5"),
-            Component.translatable("item.confluence.moon_stone.info6"),
-            Component.translatable("item.confluence.moon_stone.info7"),
-            Component.translatable("item.confluence.moon_stone.info8"),
-            Component.translatable("item.confluence.moon_stone.info9"),
-            Component.translatable("item.confluence.moon_stone.info10")
+            Component.translatable("item.confluence.moon_stone.info")
         };
     }
 }

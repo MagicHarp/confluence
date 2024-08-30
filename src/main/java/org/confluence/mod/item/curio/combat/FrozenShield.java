@@ -47,12 +47,4 @@ public class FrozenShield extends PaladinsShield {
     public String getGenName() {
         return "Frozen Shield";
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.frozen_shield.info"),
-            Component.translatable("item.confluence.frozen_shield.info2"),
-            Component.translatable("item.confluence.frozen_shield.info3")
-        };
-    }
 }

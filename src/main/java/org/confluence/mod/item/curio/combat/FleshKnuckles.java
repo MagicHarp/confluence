@@ -49,8 +49,7 @@ public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.flesh_knuckles.info"),
-            Component.translatable("item.confluence.flesh_knuckles.info2")
+            Component.translatable("item.confluence.flesh_knuckles.info")
         };
     }
 }

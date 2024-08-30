@@ -22,8 +22,7 @@ public class FrozenTurtleShell extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.frozen_turtle_shell.info"),
-            Component.translatable("item.confluence.frozen_turtle_shell.info2")
+            Component.translatable("item.confluence.frozen_turtle_shell.info")
         };
     }
 }

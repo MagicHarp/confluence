@@ -53,20 +53,4 @@ public class CelestialStone extends BaseCurioItem implements IMagicAttack {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         ModEffects.healPerSecond(slotContext.entity(), 2.0F);
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.celestial_stone.info"),
-            Component.translatable("item.confluence.celestial_stone.info2"),
-            Component.translatable("item.confluence.celestial_stone.info3"),
-            Component.translatable("item.confluence.celestial_stone.info4"),
-            Component.translatable("item.confluence.celestial_stone.info5"),
-            Component.translatable("item.confluence.celestial_stone.info6"),
-            Component.translatable("item.confluence.celestial_stone.info7"),
-            Component.translatable("item.confluence.celestial_stone.info8"),
-            Component.translatable("item.confluence.celestial_stone.info9"),
-            Component.translatable("item.confluence.celestial_stone.info10"),
-            Component.translatable("item.confluence.celestial_stone.info11")
-        };
-    }
 }

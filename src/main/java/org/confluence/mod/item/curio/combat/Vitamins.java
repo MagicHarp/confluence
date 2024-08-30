@@ -11,8 +11,7 @@ public class Vitamins extends BaseCurioItem implements EffectInvul.Weakness {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.vitamins.info"),
-            Component.translatable("item.confluence.vitamins.info2")
+            Component.translatable("item.confluence.vitamins.info")
         };
     }
 }

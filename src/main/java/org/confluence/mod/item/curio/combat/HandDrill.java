@@ -11,8 +11,7 @@ public class HandDrill extends BaseCurioItem implements EffectInvul.MiningFatigu
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.hand_drill.info"),
-            Component.translatable("item.confluence.hand_drill.info2")
+            Component.translatable("item.confluence.hand_drill.info")
         };
     }
 }

@@ -38,8 +38,7 @@ public class Shackle extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.shackle.info"),
-            Component.translatable("item.confluence.shackle.info2")
+            Component.translatable("item.confluence.shackle.info")
         };
     }
 }

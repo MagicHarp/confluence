@@ -54,12 +54,4 @@ public class StalkersQuiver extends MagicQuiver implements IAggroAttach, CustomN
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(Component.translatable("item.confluence.putrid_scent.tooltip"));
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.stalkers_quiver.info"),
-            Component.translatable("item.confluence.stalkers_quiver.info2"),
-            Component.translatable("item.confluence.stalkers_quiver.info3")
-        };
-    }
 }

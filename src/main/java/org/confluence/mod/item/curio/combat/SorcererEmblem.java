@@ -17,8 +17,7 @@ public class SorcererEmblem extends BaseCurioItem implements IMagicAttack {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.sorcerer_emblem.info"),
-            Component.translatable("item.confluence.sorcerer_emblem.info2")
+            Component.translatable("item.confluence.sorcerer_emblem.info")
         };
     }
 }

@@ -26,12 +26,4 @@ public class StingerNecklace extends HoneyComb implements IArmorPass {
         list.add(getArmorPassToolTip());
         list.add(IHoneycomb.TOOLTIP);
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.stinger_necklace.info"),
-            Component.translatable("item.confluence.stinger_necklace.info2"),
-            Component.translatable("item.confluence.stinger_necklace.info3")
-        };
-    }
 }

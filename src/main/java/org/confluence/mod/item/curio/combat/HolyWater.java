@@ -11,8 +11,7 @@ public class HolyWater extends BaseCurioItem implements EffectInvul.Wither {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.holy_water.info"),
-            Component.translatable("item.confluence.holy_water.info2")
+            Component.translatable("item.confluence.holy_water.info")
         };
     }
 }

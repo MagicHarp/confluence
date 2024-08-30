@@ -17,8 +17,7 @@ public class CrossNecklace extends BaseCurioItem implements IInvulnerableTime {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.cross_necklace.info"),
-            Component.translatable("item.confluence.cross_necklace.info2")
+            Component.translatable("item.confluence.cross_necklace.info")
         };
     }
 }

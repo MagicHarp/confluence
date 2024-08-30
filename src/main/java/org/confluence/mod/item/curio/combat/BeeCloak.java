@@ -21,12 +21,4 @@ public class BeeCloak extends BaseCurioItem implements IStarCloak, IHoneycomb {
         list.add(IStarCloak.TOOLTIP);
         list.add(IHoneycomb.TOOLTIP);
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.bee_cloak.info"),
-            Component.translatable("item.confluence.bee_cloak.info2"),
-            Component.translatable("item.confluence.bee_cloak.info3")
-        };
-    }
 }
