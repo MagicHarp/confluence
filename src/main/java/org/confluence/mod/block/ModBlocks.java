@@ -163,7 +163,7 @@ public final class ModBlocks {
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
     public static final RegistryObject<FlameFlower> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
     public static final RegistryObject<MoonshineGrass> MOONSHINE_GRASS = registerWithoutItem("moonshine_grass", MoonshineGrass::new);//月光草
-    public static final RegistryObject<StellarBlossom> STELLAR_BLOSSOM = registerWithoutItem("stellar_blossom_stage0", StellarBlossom::new);//星辰花
+    public static final RegistryObject<StellarBlossom> STELLAR_BLOSSOM = registerWithoutItem("stellar_blossom", StellarBlossom::new);//星辰花
     public static final RegistryObject<BaseHerbBlock> SHINE_ROOT = registerWithoutItem("shine_root", ShineRoot::new);//闪耀根
     public static final RegistryObject<BaseHerbBlock> SHIVERINGTHORNS = registerWithoutItem("shiveringthorns", ShiveringThorn::new);//寒颤棘
     public static final RegistryObject<BaseHerbBlock> SUNFLOWERS = registerWithoutItem("sunflowers", SunFlower::new);//太阳花
