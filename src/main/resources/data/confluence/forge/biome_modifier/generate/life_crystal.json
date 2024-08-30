@@ -1,8 +1,6 @@
 {
     "type": "forge:add_features",
-    "biomes": {
-        "type": "forge:any"
-    },
+    "biomes": "#minecraft:is_overworld",
     "features": "confluence:life_crystal",
     "step": "vegetal_decoration"
 }

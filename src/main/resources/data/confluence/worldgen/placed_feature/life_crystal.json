@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 7
+      "count": 5
     },
     {
       "type": "minecraft:in_square"
@@ -45,7 +45,7 @@
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "OCEAN_FLOOR",
       "min_inclusive": -110,
-      "max_inclusive": -50
+      "max_inclusive": -70
     }
   ]
 }

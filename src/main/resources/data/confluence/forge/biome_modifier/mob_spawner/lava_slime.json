@@ -1,0 +1,18 @@
+{
+    "type": "forge:add_spawns",
+    "biomes": [
+        "confluence:ash_forest",
+        "confluence:ash_wasteland",
+        "minecraft:basalt_deltas",
+        "minecraft:crimson_forest",
+        "minecraft:nether_wastes",
+        "minecraft:warped_forest",
+        "minecraft:soul_sand_valley"
+    ],
+    "spawners": {
+        "type": "confluence:lava_slime",
+        "weight": 35,
+        "minCount": 1,
+        "maxCount": 1
+    }
+}
