@@ -16,7 +16,7 @@ public class SkyMillRecipe extends AbstractAmountRecipe {
 
     @Override
     public @NotNull String getGroup() {
-        return "sky_miller";
+        return "sky_mill";
     }
 
     @Override
