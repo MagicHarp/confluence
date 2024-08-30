@@ -13,6 +13,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
@@ -47,6 +48,9 @@ public class NonDropSlime extends Slime implements DeathAnimOptions {
 
         if (this.getFluidTypeHeight(Fluids.LAVA.getFluidType()) > (double) f) {
             this.setUnderLavaMovement();
+        }
+        if (this.getType().equals(ModEntities.LAVA_SLIME.get())) {
+            this.hurt(this.level().damageSources().freeze(), 0.8F);
         }
         super.tick();
     }

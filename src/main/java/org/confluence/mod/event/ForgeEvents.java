@@ -66,6 +66,7 @@ import org.confluence.mod.entity.demoneye.DemonEyeVariant;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
+import org.confluence.mod.entity.slime.NonDropSlime;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
@@ -300,6 +301,11 @@ public final class ForgeEvents {
                         }
                     }
                 }
+            }
+        }
+        if (event.getSource().getEntity() instanceof NonDropSlime slime) {
+            if (slime.getType().equals(ModEntities.LAVA_SLIME.get())) {
+                event.getEntity().setRemainingFireTicks(100);
             }
         }
         if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {

@@ -3,6 +3,8 @@ package org.confluence.mod.entity.slime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -115,5 +117,23 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
     @Override
     public float[] getBloodColor(){
         return color.mixture(new FloatRGB(0,0,0),0.5f).toArray();
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (this.getType().equals(ModEntities.TROPIC_SLIME.get())){
+            if (pSource.is(DamageTypes.DROWN)) {
+                return false;
+            }
+        }
+        return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    public boolean isInWater() {
+        if (this.getType().equals(ModEntities.TROPIC_SLIME.get())){
+            return false;
+        }
+        return super.isInWater();
     }
 }
