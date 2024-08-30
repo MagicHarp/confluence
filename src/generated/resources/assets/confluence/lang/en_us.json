@@ -496,6 +496,7 @@
   "block.confluence.white_torch": "White Torch",
   "block.confluence.wood_stone_slatted_blocks": "Wood Stone Slatted Blocks",
   "block.confluence.wooden_box": "Wooden Box",
+  "block.confluence.workshop": "Workshop",
   "block.confluence.yellow_torch": "Yellow Torch",
   "condition.confluence.shimmer_transmutation": "Required game phase: %s",
   "config.jade.plugin_confluence.jade_mechanical_component": "Mechanical Info",

@@ -1,4 +1,4 @@
-package org.confluence.mod.block.functional;
+package org.confluence.mod.block.crafting;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;

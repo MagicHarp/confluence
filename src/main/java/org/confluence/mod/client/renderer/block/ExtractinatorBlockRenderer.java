@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import org.confluence.mod.block.functional.ExtractinatorBlock;
+import org.confluence.mod.block.crafting.ExtractinatorBlock;
 import org.confluence.mod.client.model.block.ExtractinatorBlockModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

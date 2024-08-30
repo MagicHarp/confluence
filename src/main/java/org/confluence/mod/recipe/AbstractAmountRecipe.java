@@ -132,7 +132,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
                     throw new IllegalArgumentException("Duplicate ingredient " + item);
                 }
             }
-            if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for altar recipe");
+            if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for this recipe");
             return newInstance(pRecipeId, result, nonNullList);
         }
 

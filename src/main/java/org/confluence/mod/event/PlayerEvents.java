@@ -23,7 +23,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.block.functional.AltarBlock;
+import org.confluence.mod.block.crafting.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;

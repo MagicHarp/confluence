@@ -280,6 +280,7 @@ public final class ModTabs {
                 output.accept(ModItems.ICE_MIRROR.get());
                 output.accept(ModItems.MAGIC_CONCH.get());
                 output.accept(ModItems.DEMON_CONCH.get());
+                output.accept(ModItems.CELL_PHONE.get());
                 output.accept(ModItems.HONEY_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_WATER_BUCKET.get());
                 output.accept(ModItems.BOTTOMLESS_LAVA_BUCKET.get());
