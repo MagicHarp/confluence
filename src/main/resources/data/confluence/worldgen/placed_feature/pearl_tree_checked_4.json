@@ -24,7 +24,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:oak_sapling",
+          "Name": "confluence:pearl_sapling",
           "Properties": {
             "stage": "0"
           }
