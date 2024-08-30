@@ -2,79 +2,74 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:star_fruit",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 199
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
           "name": "confluence:dragon_fruit",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
+          "weight": 1
         },
         {
-          "type": "minecraft:item",
-          "name": "confluence:star_fruit",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
-        },
+          "type": "minecraft:empty",
+          "weight": 199
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "name": "minecraft:stick",
-          "weight": 203,
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 0,
-                "max": 1
+                "type": "uniform",
+                "min": 1,
+                "max": 2
               }
             }
-          ]
+          ],
+          "weight": 1
         },
         {
-          "type": "minecraft:item",
-          "name": "minecraft:air",
-          "weight": 800,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:oak_sapling",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
+          "type": "minecraft:empty",
+          "weight": 49
         }
-      ]
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:pearl_sapling",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 19
+        }
+      ],
+      "rolls": 1
     }
   ],
   "random_sequence": "confluence:blocks/pearl_leaves"
