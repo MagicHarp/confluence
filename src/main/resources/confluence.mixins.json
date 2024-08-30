@@ -19,6 +19,7 @@
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.ModelPartMixin",
+        "client.MooshroomMushroomLayerMixin",
         "client.MouseHandlerMixin",
         "client.accessor.CompileResultsAccessor",
         "client.accessor.CustomHeadLayerAccessor",
