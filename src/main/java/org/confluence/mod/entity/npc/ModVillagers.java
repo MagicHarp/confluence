@@ -45,11 +45,10 @@ public final class ModVillagers {
         }
     }
 
-    public static VillagerType setVillagerType(Villager villager, VillagerType original) {
+    public static void setVillagerType(Villager villager) {
         if (villager.position().y >= 240.0) {
-            return SKY_TYPE.get();
+            villager.setVariant(SKY_TYPE.get());
         }
-        return original;
     }
 
     public static void register(IEventBus bus) {
