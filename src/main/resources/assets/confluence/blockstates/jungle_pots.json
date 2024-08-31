@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_0"
+			},
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_1"
+			},
+			{
+				"model": "confluence:block/pots/jungle/jungle_pots_2"
+			}
+		]
+	}
+}

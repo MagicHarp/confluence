@@ -1,0 +1,160 @@
+{
+    "transmission": {
+        "sounds": [
+            "confluence:transmission"
+        ]
+    },
+    "waving": {
+        "sounds": [
+            "confluence:waving"
+        ]
+    },
+    "double_jump": {
+        "sounds": [
+            "confluence:double_jump"
+        ]
+    },
+    "laser": {
+        "sounds": [
+            "confluence:laser"
+        ]
+    },
+    "lightsaber_quick": {
+        "sounds": [
+            "confluence:lightsaber_quick"
+        ]
+    },
+    "lightsaber_slow": {
+        "sounds": [
+            "confluence:lightsaber_slow"
+        ]
+    },
+    "lightsaber_open": {
+        "sounds": [
+            "confluence:lightsaber_open"
+        ]
+    },
+    "regular_staff_shoot": {
+        "sounds": [
+            "confluence:regular_staff_shoot"
+        ]
+    },
+    "shoes_fly": {
+        "sounds": [
+            "confluence:shoes_fly"
+        ]
+    },
+    "shoes_fly_jet": {
+        "sounds": [
+            "confluence:shoes_fly_jet"
+        ]
+    },
+    "shoes_walk": {
+        "sounds": [
+            "confluence:shoes_walk"
+        ]
+    },
+    "shoot": {
+        "sounds": [
+            "confluence:shoot"
+        ]
+    },
+    "fart_sound": {
+        "sounds": [
+            "confluence:fart_sound"
+        ]
+    },
+    "life_crystal_use": {
+        "sounds": [
+            "confluence:life_crystal_use"
+        ]
+    },
+    "mana_star_use": {
+        "sounds": [
+            "confluence:mana_star_use"
+        ]
+    },
+    "coins": {
+        "sounds": [
+            "confluence:coins"
+        ]
+    },
+    "sparkle_shoot": {
+        "sounds": [
+            "confluence:sparkle_shoot"
+        ]
+    },
+    "alpha": {
+        "sounds": [
+            {
+                "name": "minecraft:music/game/end/credits",
+                "stream": true
+            }
+        ]
+    },
+    "routine_hurt": {
+        "sounds": [
+            "confluence:mob/routine_hurt"
+        ]
+    },
+    "routine_death": {
+        "sounds": [
+            "confluence:mob/routine_death"
+        ]
+    },
+    "frozen_broken": {
+        "sounds": [
+            "confluence:frozen_broken"
+        ]
+    },
+    "frozen_arrow": {
+        "sounds": [
+            "confluence:frozen_arrow"
+        ]
+    },
+    "cooldown_recovery": {
+        "sounds": [
+            "confluence:cooldown_recovery"
+        ]
+    },
+    "shimmer_detachment": {
+        "sounds": [
+            "confluence:shimmer_detachment"
+        ]
+    },
+    "shimmer_evolution": {
+        "sounds": [
+            "confluence:shimmer_evolution"
+        ]
+    },
+    "shimmer_immersion": {
+        "sounds": [
+            "confluence:shimmer_immersion"
+        ]
+    },
+    "shimmer_item_interactions": {
+        "sounds": [
+            "confluence:shimmer_item_interactions"
+        ]
+    },
+    "star": {
+        "sounds": [
+            "confluence:star"
+        ]
+    },
+    "star_lands": {
+        "sounds": [
+            "confluence:star_lands"
+        ]
+    },
+    "terra_operation": {
+        "sounds": [
+            "confluence:terra_operation"
+        ]
+    },
+    "use_mounts": {
+        "sounds": [
+            "confluence:use_mounts"
+        ]
+    }
+}

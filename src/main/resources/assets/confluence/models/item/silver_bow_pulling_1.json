@@ -1,0 +1,6 @@
+{
+    "parent": "confluence:item/silver_bow",
+    "textures": {
+        "layer0": "confluence:item/silver_bow_pulling_1"
+    }
+}

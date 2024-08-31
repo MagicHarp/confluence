@@ -1,0 +1,6 @@
+{
+    "parent": "confluence:item/lead_bow",
+    "textures": {
+        "layer0": "confluence:item/lead_bow_pulling_1"
+    }
+}
