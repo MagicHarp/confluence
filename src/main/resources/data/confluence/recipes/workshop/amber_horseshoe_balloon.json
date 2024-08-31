@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:honey_balloon"
+        },
+        {
+            "item": "confluence:lucky_horseshoe"
+        }
+    ],
+    "result": {
+        "item": "confluence:amber_horseshoe_balloon"
+    }
+}

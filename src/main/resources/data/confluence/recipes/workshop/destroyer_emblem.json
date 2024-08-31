@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:avenger_emblem"
+        },
+        {
+            "item": "confluence:eye_of_the_golem"
+        }
+    ],
+    "result": {
+        "item": "confluence:destroyer_emblem"
+    }
+}

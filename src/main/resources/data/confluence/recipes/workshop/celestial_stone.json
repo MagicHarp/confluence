@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:sun_stone"
+        },
+        {
+            "item": "confluence:moon_stone"
+        }
+    ],
+    "result": {
+        "item": "confluence:celestial_stone"
+    }
+}

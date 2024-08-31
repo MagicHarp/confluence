@@ -1,0 +1,21 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:fish_finder"
+        },
+        {
+            "item": "confluence:goblin_tech"
+        },
+        {
+            "item": "confluence:rek_3000"
+        },
+        {
+            "item": "confluence:gps"
+        }
+    ],
+    "result": {
+        "item": "confluence:pda",
+        "count": 1
+    }
+}

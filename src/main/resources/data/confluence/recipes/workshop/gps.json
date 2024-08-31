@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "tag": "confluence:minute_watch"
+        },
+        {
+            "item": "confluence:depth_meter"
+        },
+        {
+            "item": "confluence:compass"
+        }
+    ],
+    "result": {
+        "item": "confluence:gps",
+        "count": 1
+    }
+}

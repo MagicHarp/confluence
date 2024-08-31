@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:putrid_scent"
+        },
+        {
+            "item": "confluence:magic_quiver"
+        }
+    ],
+    "result": {
+        "item": "confluence:stalkers_quiver"
+    }
+}

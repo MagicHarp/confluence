@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:obsidian_water_walking_boots"
+        },
+        {
+            "item": "confluence:molten_skull_rose"
+        }
+    ],
+    "result": {
+        "item": "confluence:lava_waders",
+        "count": 1
+    }
+}

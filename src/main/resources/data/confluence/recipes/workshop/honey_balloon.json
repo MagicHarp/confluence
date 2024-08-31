@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:honey_comb"
+        },
+        {
+            "item": "confluence:shiny_red_balloon"
+        }
+    ],
+    "result": {
+        "item": "confluence:honey_balloon"
+    }
+}

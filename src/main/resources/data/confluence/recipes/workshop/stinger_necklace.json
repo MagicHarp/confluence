@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:honey_comb"
+        },
+        {
+            "item": "confluence:shark_tooth_necklace"
+        }
+    ],
+    "result": {
+        "item": "confluence:stinger_necklace"
+    }
+}

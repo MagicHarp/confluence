@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:fishermans_pocket_guide"
+        },
+        {
+            "item": "confluence:weather_radio"
+        },
+        {
+            "item": "confluence:sextant"
+        }
+    ],
+    "result": {
+        "item": "confluence:fish_finder",
+        "count": 1
+    }
+}

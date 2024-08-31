@@ -1,0 +1,17 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:warrior_emblem"
+        },
+        {
+            "item": "confluence:sorcerer_emblem"
+        },
+        {
+            "item": "confluence:ranger_emblem"
+        }
+    ],
+    "result": {
+        "item": "confluence:avenger_emblem"
+    }
+}

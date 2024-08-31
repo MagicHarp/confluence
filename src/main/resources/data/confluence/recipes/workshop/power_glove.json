@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:feral_claws"
+        },
+        {
+            "item": "confluence:titan_glove"
+        }
+    ],
+    "result": {
+        "item": "confluence:power_glove",
+        "count": 1
+    }
+}

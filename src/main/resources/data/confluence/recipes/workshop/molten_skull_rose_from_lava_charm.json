@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:obsidian_skull_rose"
+        },
+        {
+            "item": "confluence:lava_charm"
+        }
+    ],
+    "result": {
+        "item": "confluence:molten_skull_rose",
+        "count": 1
+    }
+}

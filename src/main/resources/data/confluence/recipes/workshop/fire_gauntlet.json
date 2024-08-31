@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:magma_stone"
+        },
+        {
+            "item": "confluence:mechanical_glove"
+        }
+    ],
+    "result": {
+        "item": "confluence:fire_gauntlet",
+        "count": 1
+    }
+}

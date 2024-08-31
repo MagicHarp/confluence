@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:radar"
+        },
+        {
+            "item": "confluence:life_form_analyzer"
+        },
+        {
+            "item": "confluence:tally_counter"
+        }
+    ],
+    "result": {
+        "item": "confluence:rek_3000",
+        "count": 1
+    }
+}

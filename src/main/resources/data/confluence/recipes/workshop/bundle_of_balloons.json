@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:cloud_in_a_balloon"
+        },
+        {
+            "item": "confluence:sandstorm_in_a_balloon"
+        },
+        {
+            "item": "confluence:blizzard_in_a_balloon"
+        }
+    ],
+    "result": {
+        "item": "confluence:bundle_of_balloons",
+        "count": 1
+    }
+}

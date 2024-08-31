@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:stopwatch"
+        },
+        {
+            "item": "confluence:metal_detector"
+        },
+        {
+            "item": "confluence:dps_meter"
+        }
+    ],
+    "result": {
+        "item": "confluence:goblin_tech",
+        "count": 1
+    }
+}

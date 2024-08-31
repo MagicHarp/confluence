@@ -1,0 +1,17 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:extendo_grip"
+        },
+        {
+            "item": "confluence:portable_cement_mixer"
+        },
+        {
+            "item": "confluence:brick_layer"
+        }
+    ],
+    "result": {
+        "item": "confluence:architect_gizmo_pack"
+    }
+}

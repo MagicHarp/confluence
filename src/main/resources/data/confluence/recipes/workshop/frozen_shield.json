@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:paladins_shield"
+        },
+        {
+            "item": "confluence:frozen_turtle_shell"
+        }
+    ],
+    "result": {
+        "item": "confluence:frozen_shield",
+        "count": 1
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:blizzard_in_a_balloon"
+        },
+        {
+            "item": "confluence:lucky_horseshoe"
+        }
+    ],
+    "result": {
+        "item": "confluence:white_horseshoe_balloon",
+        "count": 1
+    }
+}

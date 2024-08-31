@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:frog_leg"
+        },
+        {
+            "item": "confluence:flipper"
+        }
+    ],
+    "result": {
+        "item": "confluence:frog_flipper",
+        "count": 1
+    }
+}

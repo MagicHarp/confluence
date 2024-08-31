@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:tsunami_in_a_bottle"
+        },
+        {
+            "item": "confluence:balloon_pufferfish"
+        }
+    ],
+    "result": {
+        "item": "confluence:sharkron_balloon",
+        "count": 1
+    }
+}

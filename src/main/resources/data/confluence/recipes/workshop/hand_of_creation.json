@@ -1,0 +1,20 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:step_stool"
+        },
+        {
+            "item": "confluence:architect_gizmo_pack"
+        },
+        {
+            "item": "confluence:ancient_chisel"
+        },
+        {
+            "item": "confluence:treasure_magnet"
+        }
+    ],
+    "result": {
+        "item": "confluence:hand_of_creation"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:black_belt"
+        },
+        {
+            "item": "confluence:tiger_climbing_gear"
+        },
+        {
+            "item": "confluence:tabi"
+        }
+    ],
+    "result": {
+        "item": "confluence:master_ninja_gear"
+    }
+}

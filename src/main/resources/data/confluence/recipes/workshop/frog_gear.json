@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:tiger_climbing_gear"
+        },
+        {
+            "item": "confluence:frog_flipper"
+        }
+    ],
+    "result": {
+        "item": "confluence:frog_gear",
+        "count": 1
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:sniper_scope"
+        },
+        {
+            "item": "confluence:putrid_scent"
+        }
+    ],
+    "result": {
+        "item": "confluence:recon_scope"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:lava_charm"
+        },
+        {
+            "item": "confluence:obsidian_skull"
+        }
+    ],
+    "result": {
+        "item": "confluence:magma_skull"
+    }
+}

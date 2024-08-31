@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:star_cloak"
+        },
+        {
+            "item": "confluence:cross_necklace"
+        }
+    ],
+    "result": {
+        "item": "confluence:star_veil"
+    }
+}

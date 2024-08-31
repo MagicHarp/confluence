@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:frostspark_boots"
+        },
+        {
+            "item": "confluence:lava_waders"
+        }
+    ],
+    "result": {
+        "item": "confluence:terraspark_boots",
+        "count": 1
+    }
+}

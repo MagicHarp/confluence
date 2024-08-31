@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:sandstorm_in_a_bottle"
+        },
+        {
+            "item": "confluence:shiny_red_balloon"
+        }
+    ],
+    "result": {
+        "item": "confluence:sandstorm_in_a_balloon",
+        "count": 1
+    }
+}

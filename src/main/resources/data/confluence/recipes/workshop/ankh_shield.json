@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:ankh_charm"
+        },
+        {
+            "item": "confluence:obsidian_shield"
+        }
+    ],
+    "result": {
+        "item": "confluence:ankh_shield"
+    }
+}

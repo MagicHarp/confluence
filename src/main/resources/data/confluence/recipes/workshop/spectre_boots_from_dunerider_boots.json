@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:dunerider_boots"
+        },
+        {
+            "item": "confluence:rocket_boots"
+        }
+    ],
+    "result": {
+        "item": "confluence:spectre_boots",
+        "count": 1
+    }
+}
