@@ -8,9 +8,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +24,7 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     protected final int TOTAL_LENGTH;
     protected final float MAX_HEALTH;
     protected boolean pendingSegmentSpawn = true;
+    public Player target = null;
 
     /** 子类应该完全覆盖此方法以自定义蠕虫体节的构造器
      * 警告：需要调用setInfo方法！
@@ -124,6 +125,9 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
     public void tick() {
         super.tick();
 
+        // 为了自定义限度，让后续的AI自行决定哪些功能仅限服务端
+
+        // 需要时生成所有体节
         if (pendingSegmentSpawn) {
             // 在spawnWormPart中pendingSegmentsSpawn被设置为false
             for (int i = 0; i < TOTAL_LENGTH; i++) {
@@ -140,14 +144,12 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
                 break;
             }
         }
-        // TODO: 此方法移除实体是否合理？EnderDragon内部的逻辑类似，但有可能需要调整
         if (shouldRemove) {
             try {
                 deathCallback();
             }
             finally {
-                this.remove(Entity.RemovalReason.KILLED);
-                this.gameEvent(GameEvent.ENTITY_DIE);
+                discard();
             }
             return;
         }
@@ -175,11 +177,6 @@ public abstract class AbstractWormEntity extends Monster implements GeoEntity {
                 }
             }
         }
-
-        // 不知道什么应该局限到服务端，所以，试试吧.jpg
-        if (! level().isClientSide()) {
-        }
-
     }
 
 

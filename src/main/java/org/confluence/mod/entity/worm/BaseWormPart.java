@@ -3,6 +3,7 @@ package org.confluence.mod.entity.worm;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,6 @@ public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
     public enum SegmentType {
         HEAD, BODY, TAIL;
     }
-    private float maxHealth = 10;
     private AbstractWormEntity parentMob;
     public AbstractWormEntity getParentMob() {return parentMob;}
     // 体节在wormParts中的index
@@ -32,7 +32,7 @@ public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
     public void setInfo(E parentMob, int segmentIndex, float maxHealth) {
         this.parentMob = parentMob;
         this.segmentIndex = segmentIndex;
-        this.maxHealth = maxHealth;
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(maxHealth);
         setHealth(maxHealth);
     }
 
@@ -105,10 +105,6 @@ public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
     public void setItemSlot(EquipmentSlot pSlot, ItemStack pStack) {
     }
 
-//    public final float getMaxHealth() {
-//        return MAX_HEALTH;
-//    }
-
     @Override
     public HumanoidArm getMainArm() {
         return null;
@@ -144,22 +140,28 @@ public class BaseWormPart<E extends AbstractWormEntity> extends Mob {
         }
         this.segmentType = result;
     }
+
+    // tick方法放到tickSegment中以便统一调用
+    public void vanillaTick() {
+        super.tick();
+    }
     // 覆盖此方法以实现额外AI，如头部移动/体节发射弹幕等
     protected void tickSegment() {
-        // 蠕虫实体不存在/自己不再是这一体节后死掉
-        if (parentMob == null ||
-                parentMob.wormParts == null ||
-                parentMob.wormParts.size() <= segmentIndex ||
-                parentMob.wormParts.get(segmentIndex) != this) {
-            this.discard();
-        }
-
         updateSegmentType();
+        vanillaTick();
     }
-
+    // tick方法放到tickSegment中以便统一调用
     @Override
     public void tick() {
-        super.tick();
+        // 蠕虫实体不存在/自己不再是这一体节后死掉
+        if (! level().isClientSide()) {
+            if (parentMob == null || !parentMob.isAlive() ||
+                    parentMob.wormParts == null ||
+                    parentMob.wormParts.size() <= segmentIndex ||
+                    parentMob.wormParts.get(segmentIndex) != this) {
+                this.discard();
+            }
+        }
     }
 
 

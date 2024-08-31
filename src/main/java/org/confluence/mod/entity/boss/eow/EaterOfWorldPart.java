@@ -39,13 +39,13 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
     public static final double AGGRESSIVE_DESCEND_FACTOR = 0.05d;
     // 准备下一次冲刺的时长
     public static final int DASH_WINDUP_DURATION = 40;
-    // 多久没有目标后脱战？
-    public static final int TIMEOUT_THRESHOLD = 20;
 
     // 吐口水；所有体节都从这里开始，头节会改为冲撞行为模式
     public static final State<EaterOfWorldPart> STATE_SPIT = new State<>() {
         @Override
         public void tick(EaterOfWorldPart boss) {
+            if (boss.getSegmentIndex() < 2)
+                ModUtils.testMessage(boss.getSegmentIndex() + ", " + boss.level().isClientSide + ", " + boss.getDeltaMovement() + boss.position());
             // 如果变成头的话直接开创
             if (boss.getSegmentType() == SegmentType.HEAD) {
                 boss.toState(STATE_RUSH);
@@ -63,7 +63,9 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
     public static final State<EaterOfWorldPart> STATE_RUSH = new State<>() {
         @Override
         public void tick(EaterOfWorldPart boss) {
-            LivingEntity target = boss.getTarget();
+            LivingEntity target = boss.getParentMob().target;
+
+            ModUtils.testMessage(boss.getSegmentIndex() + ", " + boss.level().isClientSide + ", " + boss.getDeltaMovement() + boss.position());
 
             // 注：indexAI = 0时为冲刺，后续则为过渡时期
 
@@ -98,7 +100,7 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
     public static final State<EaterOfWorldPart> STATE_WINDUP = new State<>() {
         @Override
         public void tick(EaterOfWorldPart boss) {
-            LivingEntity target = boss.getTarget();
+            LivingEntity target = boss.getParentMob().target;
 
             boolean shouldIncreaseIdx = true;
             // 没有下落到比玩家更低时，不要增加index
@@ -126,15 +128,17 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
     private State<EaterOfWorldPart> AIState = STATE_SPIT;
     // 随机化初始indexAI防止吐口水过于同步
     int indexAI = level().random.nextInt(SPIT_INTERVAL);
-    // 一段时间内没有目标后脱战
-    int ticksWithoutTarget = 0;
     Vec3 pooledVel = Vec3.ZERO;
     Vec3 acc = Vec3.ZERO;
 
     public EaterOfWorldPart(EntityType<? extends EaterOfWorldPart> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        // 跟随较远，因为脱战完全由目标玩家控制
-        getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(100d);
+    }
+
+    // 体节不要因为距离消失
+    @Override
+    public boolean requiresCustomPersistence() {
+        return true;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -156,19 +160,18 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
 
     @Override
     public void AI() {
-        // 脱战
-        if (getTarget() == null) {
-            setDeltaMovement(getDeltaMovement().scale(0.5));
-            if (++ticksWithoutTarget >= TIMEOUT_THRESHOLD)
-                getParentMob().discard();
-            return;
-        }
-        // 重置脱战计数器
-        ticksWithoutTarget = 0;
         // tick
-        if (! level().isClientSide()) {
-            this.AIState.tick(this);
-        }
+//        if (! level().isClientSide()) {
+            // 没有目标：速度减缓
+            if (getParentMob().target == null) {
+                if (segmentType == SegmentType.HEAD)
+                    setDeltaMovement(getDeltaMovement().scale(0.5));
+            }
+            // 有目标：tick
+            else {
+                this.AIState.tick(this);
+            }
+//        }
     }
 
     // 根据池化“速度”（主要是方向信息）和加速度更新移动方向
@@ -196,7 +199,7 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
 
     /** TODO:吐魔唾液的方法；默认在触发时目标存在！ */
     private void spit() {
-        Vec3 projVel = ModUtils.getDirection(getEyePosition(), getTarget().getEyePosition(), SPIT_SPEED);
+        Vec3 projVel = ModUtils.getDirection(getEyePosition(), getParentMob().target.getEyePosition(), SPIT_SPEED);
         // TODO: he~tui
     }
 
@@ -210,6 +213,9 @@ public class EaterOfWorldPart extends BaseWormPart<EaterOfWorldEntity> implement
         }
 
         indexAI ++;
+
+//        if (!level().isClientSide() && getSegmentIndex() < 5)
+//            ModUtils.testMessage(level(), getSegmentIndex() + ", " + getDeltaMovement() + "|||" + position());
     }
 
 
