@@ -2326,6 +2326,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
         add(Foods.ZONGZI.get(), "粽子");
+        add(Foods.CRUDE_CLOUD_BREAD.get(), "粗制云朵面包");
+        add(Foods.CLOUD_BREAD.get(), "云朵面包");
         // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");

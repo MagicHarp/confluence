@@ -30,4 +30,9 @@ public class FoodType {
         .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 1), 1.0F)
         .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0), 1.0F)
         .build();
+    //云朵面包
+    public static final FoodProperties CLOUD_BREAD = new FoodProperties.Builder().nutrition(3).saturationMod(2.5f).fast().meat().alwaysEat()
+        .effect(() -> new MobEffectInstance(ModEffects.EXQUISITELY_STUFFED.get(), 6000), 1f)
+        .effect(() -> new MobEffectInstance(MobEffects.SLOW_FALLING, 600, 1), 1.0F)
+        .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 300, 1), 1.0F).build();
 }
