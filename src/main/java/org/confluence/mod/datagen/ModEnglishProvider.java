@@ -117,6 +117,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.fishermans_pocket_guide", "Fishing Power: %s");
         add("info.confluence.bait", "Bait Power: %s%%");
         add("info.confluence.network", "#%s Signal: %s");
+        add("info.confluence.mobattackmob", "%s Try Attack %s");
 
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");

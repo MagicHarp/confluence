@@ -9,9 +9,13 @@ import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
@@ -39,6 +43,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(Entity.class)
@@ -63,6 +68,18 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
 
     @Shadow
     public abstract void setGlowingTag(boolean pHasGlowingTag);
+
+    @Shadow public abstract Vec3 getPosition(float pPartialTicks);
+
+    @Shadow public abstract Vec3 getDeltaMovement();
+
+    @Shadow public abstract AABB getBoundingBox();
+
+    @Shadow public abstract Level level();
+
+    @Shadow public abstract boolean isFree(double pX, double pY, double pZ);
+
+    @Shadow protected abstract boolean isFree(AABB pBox);
 
     @Unique
     private int confluence$cthulhuSprintingTime = 0;
@@ -241,6 +258,28 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
         }
     }
 
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void tick(CallbackInfo ci) {
+        Vec3 start = getPosition(1.0F);
+        Vec3 end = start.add(getDeltaMovement());
+
+        AABB boundingBox = getBoundingBox().expandTowards(getDeltaMovement()).inflate(0.1);
+
+        List<Entity> entities = level().getEntities(this.self(), boundingBox, Entity::isAlive);
+        for (Entity entity : entities) {
+            if (entity instanceof Mob mob) {
+                if (this.self() instanceof Mob selfMob){
+                    if (selfMob.getTarget() != null && selfMob.getTarget().equals(mob)){
+                        if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
+                            mob.hurt(level().damageSources().mobAttack(selfMob), (float) selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
     @Unique
     private static void confluence$setup(Entity entity, int coolDown, double y) {
         IEntity iEntity = (IEntity) entity;

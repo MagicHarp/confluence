@@ -70,6 +70,7 @@ import org.confluence.mod.entity.slime.NonDropSlime;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
+import org.confluence.mod.item.common.TestStickItem;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -356,6 +357,32 @@ public final class ForgeEvents {
                     ItemStack itemStack = new ItemStack(Materials.GEL.get(), level.random.nextInt(1, 30));
                     ColoredItem.setColor(itemStack, 0xf8e234);
                     ModUtils.createItemEntity(itemStack, slime.getX(), slime.getY(), slime.getZ(), level);
+                }
+            }
+        }
+        if (item.is(ModItems.TEST_STICK.get())){
+            if (item.getItem() instanceof TestStickItem stickItem) {
+                Mob mob = (Mob) entity;
+                if (stickItem.getClickCount() == 0) {
+                    if (stickItem.getWaitTick() == 0) {
+                        if (mob != null){
+                            stickItem.setFirstClickEntity((LivingEntity) entity);
+                            stickItem.setClickCount(1);
+                            stickItem.setWaitTick(20);
+                        }
+                    }
+                } else if (stickItem.getClickCount() == 1) {
+                    if (stickItem.getWaitTick() == 0){
+                        if (!mob.equals(stickItem.getFirstClickEntity()) && stickItem.getFirstClickEntity() != null){
+                            mob.setTarget(stickItem.getFirstClickEntity());
+                            Mob selfMob = (Mob) stickItem.getFirstClickEntity();
+                            selfMob.setTarget(mob);
+                            player.sendSystemMessage(Component.translatable("info.confluence.mobattackmob", mob.getDisplayName(), selfMob.getDisplayName()));
+                            stickItem.setClickCount(0);
+                            stickItem.setWaitTick(20);
+                            stickItem.setFirstClickEntity(null);
+                        }
+                    }
                 }
             }
         }

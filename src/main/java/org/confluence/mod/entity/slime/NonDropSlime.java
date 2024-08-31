@@ -2,6 +2,8 @@ package org.confluence.mod.entity.slime;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
@@ -10,7 +12,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
@@ -44,13 +45,11 @@ public class NonDropSlime extends Slime implements DeathAnimOptions {
                 level().addParticle(ModParticles.ITEM_GEL.get(), getX() + (double) f2, getY(), getZ() + (double) f3, color.red(), color.green(), color.blue());
             }
         }
-        float f = this.getEyeHeight() - 0.11111111F;
-
-        if (this.getFluidTypeHeight(Fluids.LAVA.getFluidType()) > (double) f) {
-            this.setUnderLavaMovement();
-        }
         if (this.getType().equals(ModEntities.LAVA_SLIME.get())) {
-            this.hurt(this.level().damageSources().freeze(), 0.8F);
+            if (isInWater()){
+                this.hurt(this.level().damageSources().freeze(), 0.8F);
+            }
+            this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 500, 4, false, true));
         }
         super.tick();
     }
@@ -100,23 +99,6 @@ public class NonDropSlime extends Slime implements DeathAnimOptions {
                     this.level().setBlock(BlockPos.containing(this.position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
                 }
             }
-        }
-    }
-
-    @Override
-    public boolean isOnFire() {
-        return !name.equals("lava") && super.isOnFire();
-    }
-
-    @Override
-    public boolean isInLava() {
-        return !name.equals("lava") && super.isInLava();
-    }
-
-    private void setUnderLavaMovement() {
-        if (name.equals("lava")) {
-            Vec3 vec3 = this.getDeltaMovement();
-            this.setDeltaMovement(vec3.x * 1.121D, vec3.y + (this.getFluidTypeHeight(Fluids.LAVA.getFluidType()) > (double) 0.1111111F ? 0.2822D : -200.0D), vec3.z * 1.121D);
         }
     }
 }
