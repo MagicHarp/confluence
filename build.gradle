@@ -76,13 +76,23 @@ repositories {
 }
 
 dependencies {
+    def projects = ["TerraCurio","TerraGuns","EquipmentBenediction","MineTeam","EnemyBanner"]
+    projects.each { projectName ->
+        implementation(jarJar(project(":${projectName}")))
+    }
+
+
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-4.1.0.0"
 
+
     compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+
+
+
 }
 
 tasks.withType(ProcessResources).configureEach {
