@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemStackContainer extends ItemStackHandler implements Container {
     public final BlockEntity blockEntity;
@@ -25,22 +26,22 @@ public class ItemStackContainer extends ItemStackHandler implements Container {
     }
 
     @Override
-    public ItemStack getItem(int pSlot) {
+    public @NotNull ItemStack getItem(int pSlot) {
         return getStackInSlot(pSlot);
     }
 
     @Override
-    public ItemStack removeItem(int pSlot, int pAmount) {
+    public @NotNull ItemStack removeItem(int pSlot, int pAmount) {
         return extractItem(pSlot, pAmount, false);
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int pSlot) {
+    public @NotNull ItemStack removeItemNoUpdate(int pSlot) {
         return extractItem(pSlot, 64, true);
     }
 
     @Override
-    public void setItem(int pSlot, ItemStack pStack) {
+    public void setItem(int pSlot, @NotNull ItemStack pStack) {
         setStackInSlot(pSlot, pStack);
     }
 
@@ -50,7 +51,7 @@ public class ItemStackContainer extends ItemStackHandler implements Container {
     }
 
     @Override
-    public boolean stillValid(Player pPlayer) {
+    public boolean stillValid(@NotNull Player pPlayer) {
         return true;
     }
 

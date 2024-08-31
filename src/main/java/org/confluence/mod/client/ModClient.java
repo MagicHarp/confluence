@@ -3,6 +3,7 @@ package org.confluence.mod.client;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -46,12 +47,14 @@ import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
+import org.confluence.mod.client.renderer.gui.SkyMillScreen;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
+import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModArmPoses;
 import org.jetbrains.annotations.NotNull;
 
@@ -107,6 +110,7 @@ public final class ModClient {
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
             Bows.registerProperties();
+            MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
         });
     }
 

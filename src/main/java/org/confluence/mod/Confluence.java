@@ -22,6 +22,7 @@ import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
+import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
@@ -66,6 +67,7 @@ public final class Confluence {
         ModArgumentTypeInfos.INFOS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
+        ModMenus.TYPES.register(bus);
     }
 
     public static ResourceLocation asResource(String path) {
