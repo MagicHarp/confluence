@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "confluence:item/food/fish_and_mushroom_soup"
-  }
-}

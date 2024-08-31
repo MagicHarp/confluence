@@ -63,14 +63,4 @@ public class Magiluminescence extends BaseCurioItem {
         list.add(Component.translatable("item.confluence.magiluminescence.tooltip2"));
         list.add(Component.translatable("item.confluence.magiluminescence.tooltip3"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.magiluminescence.info"),
-            Component.translatable("item.confluence.magiluminescence.info2"),
-            Component.translatable("item.confluence.magiluminescence.info3"),
-            Component.translatable("item.confluence.magiluminescence.info4")
-        };
-    }
 }

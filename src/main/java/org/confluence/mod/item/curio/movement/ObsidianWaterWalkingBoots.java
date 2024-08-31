@@ -29,13 +29,4 @@ public class ObsidianWaterWalkingBoots extends BaseCurioItem implements IFluidWa
         list.add(IFluidWalk.NOT_LAVA);
         list.add(IFireImmune.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.obsidian_water_walking_boots.info"),
-            Component.translatable("item.confluence.obsidian_water_walking_boots.info2"),
-            Component.translatable("item.confluence.obsidian_water_walking_boots.info3")
-        };
-    }
 }

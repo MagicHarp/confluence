@@ -40,12 +40,4 @@ public class BlueHorseshoeBalloon extends CloudInABalloon implements IFallResist
         list.add(IMultiJump.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.blue_horseshoe_balloon.info"),
-            Component.translatable("item.confluence.blue_horseshoe_balloon.info2")
-        };
-    }
 }

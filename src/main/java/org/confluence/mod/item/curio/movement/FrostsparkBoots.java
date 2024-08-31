@@ -70,13 +70,4 @@ public class FrostsparkBoots extends LightningBoots implements ThinIceBlock.IceS
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.frostspark_boots.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.frostspark_boots.info"),
-            Component.translatable("item.confluence.frostspark_boots.info2"),
-            Component.translatable("item.confluence.frostspark_boots.info3")
-        };
-    }
 }

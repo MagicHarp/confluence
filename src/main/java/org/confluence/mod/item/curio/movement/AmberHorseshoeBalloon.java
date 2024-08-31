@@ -47,9 +47,7 @@ public class AmberHorseshoeBalloon extends HoneyComb implements IFallResistance,
     public Component[] getInformation() {
         return new Component[]{
             Component.translatable("item.confluence.amber_horseshoe_balloon.info"),
-            Component.translatable("item.confluence.amber_horseshoe_balloon.info2"),
-            Component.translatable("item.confluence.amber_horseshoe_balloon.info3"),
-            Component.translatable("item.confluence.amber_horseshoe_balloon.info4")
+            Component.translatable("item.confluence.amber_horseshoe_balloon.info2")
         };
     }
 }

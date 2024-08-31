@@ -80,12 +80,4 @@ public class TerrasparkBoots extends FrostsparkBoots implements IFireImmune, ILa
         list.add(Component.translatable("item.confluence.terraspark_boots.tooltip2"));
         list.add(ILavaHurtReduce.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.terraspark_boots.info"),
-            Component.translatable("item.confluence.terraspark_boots.info2")
-        };
-    }
 }

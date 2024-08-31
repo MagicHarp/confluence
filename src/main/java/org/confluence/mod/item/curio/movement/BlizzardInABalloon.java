@@ -25,12 +25,4 @@ public class BlizzardInABalloon extends BlizzardInABottle implements IJumpBoost 
         list.add(IOneTimeJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.blizzard_in_a_balloon.info"),
-            Component.translatable("item.confluence.blizzard_in_a_balloon.info2")
-        };
-    }
 }

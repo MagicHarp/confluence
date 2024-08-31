@@ -34,8 +34,7 @@ public class Aglet extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.aglet.info"),
-            Component.translatable("item.confluence.aglet.info2")
+            Component.translatable("item.confluence.aglet.info")
         };
     }
 }

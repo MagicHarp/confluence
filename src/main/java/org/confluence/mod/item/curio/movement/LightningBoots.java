@@ -56,13 +56,4 @@ public class LightningBoots extends BaseSpeedBoots implements IMayFly {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(Component.translatable("item.confluence.lightning_boots.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.lightning_boots.info"),
-            Component.translatable("item.confluence.lightning_boots.info2"),
-            Component.translatable("item.confluence.lightning_boots.info3")
-        };
-    }
 }

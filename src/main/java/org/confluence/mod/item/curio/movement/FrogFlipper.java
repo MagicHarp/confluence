@@ -14,13 +14,4 @@ public class FrogFlipper extends FrogLeg {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         return Flipper.SWIM_SPEED;
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.frog_flipper.info"),
-            Component.translatable("item.confluence.frog_flipper.info2")
-        };
-    }
-
 }

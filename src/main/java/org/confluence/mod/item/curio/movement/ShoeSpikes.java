@@ -16,4 +16,11 @@ public class ShoeSpikes extends BaseCurioItem implements IWallClimb {
         list.add(IWallClimb.WALL_SLIDE);
         list.add(Component.translatable("item.confluence.shoe_spikes.tooltip"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.shoe_spike.info")
+        };
+    }
 }

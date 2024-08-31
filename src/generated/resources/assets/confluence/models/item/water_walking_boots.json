@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "confluence:item/curio/water_walking_boots"
-  }
-}

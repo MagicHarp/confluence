@@ -13,8 +13,7 @@ public class HandWarmer extends BaseCurioItem implements EffectInvul.FrostBurn {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.hand_warmer.info"),
-            Component.translatable("item.confluence.hand_warmer.info2")
+            Component.translatable("item.confluence.hand_warmer.info")
         };
     }
 }

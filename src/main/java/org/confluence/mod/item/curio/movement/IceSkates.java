@@ -64,9 +64,7 @@ public class IceSkates extends BaseCurioItem implements ThinIceBlock.IceSafe {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.ice_skates.info"),
-            Component.translatable("item.confluence.ice_skates.info2"),
-            Component.translatable("item.confluence.ice_skates.info3")
+            Component.translatable("item.confluence.ice_skates.info")
         };
     }
 }

@@ -25,11 +25,7 @@ public class LavaCharm extends BaseCurioItem implements ILavaImmune {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.lava_charm.info"),
-            Component.translatable("item.confluence.lava_charm.info2"),
-            Component.translatable("item.confluence.lava_charm.info3"),
-            Component.translatable("item.confluence.lava_charm.info4"),
-            Component.translatable("item.confluence.lava_charm.info5")
+            Component.translatable("item.confluence.lava_charm.info")
         };
     }
 }

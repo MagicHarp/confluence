@@ -68,4 +68,11 @@ public class StepStool extends BaseCurioItem {
             );
         }
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{
+            Component.translatable("item.confluence.step_stool.info")
+        };
+    }
 }

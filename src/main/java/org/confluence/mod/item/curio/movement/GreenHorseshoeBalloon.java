@@ -30,14 +30,4 @@ public class GreenHorseshoeBalloon extends FartInABalloon implements IFallResist
         list.add(IMultiJump.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.green_horseshoe_balloon.info"),
-            Component.translatable("item.confluence.green_horseshoe_balloon.info2"),
-            Component.translatable("item.confluence.green_horseshoe_balloon.info3"),
-            Component.translatable("item.confluence.green_horseshoe_balloon.info4")
-        };
-    }
 }

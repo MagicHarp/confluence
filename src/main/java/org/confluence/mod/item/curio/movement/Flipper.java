@@ -40,9 +40,7 @@ public class Flipper extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.flippers.info"),
-            Component.translatable("item.confluence.flippers.info2"),
-            Component.translatable("item.confluence.flippers.info3")
+            Component.translatable("item.confluence.flippers.info")
         };
     }
 }

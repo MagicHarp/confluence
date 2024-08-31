@@ -12,11 +12,7 @@ public class FledglingWings extends BaseWings {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.fledgling_wings.info"),
-            Component.translatable("item.confluence.fledgling_wings.info2"),
-            Component.translatable("item.confluence.fledgling_wings.info3"),
-            Component.translatable("item.confluence.fledgling_wings.info4"),
-            Component.translatable("item.confluence.fledgling_wings.info5")
+            Component.translatable("item.confluence.fledgling_wings.info")
         };
     }
 }
