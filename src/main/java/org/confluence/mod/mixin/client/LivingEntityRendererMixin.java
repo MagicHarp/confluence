@@ -5,7 +5,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
@@ -44,9 +46,11 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
         return pDegrees;
     }
 
-    @ModifyArg(method = "getOverlayCoords",at = @At(value = "INVOKE",target = "Lnet/minecraft/client/renderer/texture/OverlayTexture;v(Z)I"))
-    private static boolean v(boolean pHurt){
-        return false;
+    @Inject(method = "getOverlayCoords",at = @At("HEAD"),cancellable = true)
+    private static void getOverlayCoords(LivingEntity pLivingEntity, float pU, CallbackInfoReturnable<Integer> cir){
+        if(!ClientConfigs.hurtRedOverlay || pLivingEntity.isDeadOrDying()){
+            cir.setReturnValue(OverlayTexture.pack(OverlayTexture.u(pU), OverlayTexture.v(false)));
+        }
     }
 
     @Override
