@@ -36,8 +36,6 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
     private static final EntityDataAccessor<Integer> DATA_VARIANT_ID = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
     public Vec3 moveTargetPoint;
-    //    public AttackPhase attackPhase;
-    public BlockPos anchorPoint;
     public DemonEyeSurroundTargetGoal surroundTargetGoal;
     private boolean dead = false;
 
@@ -165,7 +163,7 @@ public class DemonEye extends Monster implements Enemy, VariantHolder<DemonEyeVa
         setTarget(level().getNearestPlayer(pos.x, pos.y, pos.z, 40, true));
         super.tick();
         // 在super.tick()结束后更新面向方向即可覆盖原版AI
-        ModUtils.updateEntityRotation(this, this.getDeltaMovement());
+        ModUtils.updateEntityRotation(this, this.getDeltaMovement().multiply(1, -1, 1));
     }
 
     @Override
