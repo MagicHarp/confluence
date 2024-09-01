@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confluence:item/curio/helium_moss_fishing_bobber"
+  }
+}

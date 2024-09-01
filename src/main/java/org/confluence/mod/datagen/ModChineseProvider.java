@@ -150,7 +150,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.fishermans_pocket_guide", "渔力: %s");
         add("info.confluence.bait", "鱼饵力: %s%%");
         add("info.confluence.network", "#%s 信号: %s");
-        add("info.confluence.mobattackmob", "%s尝试攻击%s");
+        add("info.confluence.mobattackmob", "%s 尝试攻击 %s ...");
+        add("info.confluence.choosemob", "选择了 %s ...");
 
         add("key.confluence.hook", "使用钩爪");
         add("key.confluence.metal_detector", "检测矿物");

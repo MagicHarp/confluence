@@ -1,0 +1,29 @@
+{
+  "values": [
+    "minecraft:torch",
+    "minecraft:soul_torch",
+    "confluence:purple_torch",
+    "confluence:yellow_torch",
+    "confluence:blue_torch",
+    "confluence:green_torch",
+    "confluence:red_torch",
+    "confluence:orange_torch",
+    "confluence:white_torch",
+    "confluence:ice_torch",
+    "confluence:pink_torch",
+    "confluence:bone_torch",
+    "confluence:ultrabright_torch",
+    "confluence:demon_torch",
+    "confluence:cursed_torch",
+    "confluence:ichor_torch",
+    "confluence:rainbow_torch",
+    "confluence:desert_torch",
+    "confluence:coral_torch",
+    "confluence:corrupt_torch",
+    "confluence:crimson_torch",
+    "confluence:hallowed_torch",
+    "confluence:jungle_torch",
+    "confluence:mushroom_torch",
+    "confluence:aether_torch"
+  ]
+}

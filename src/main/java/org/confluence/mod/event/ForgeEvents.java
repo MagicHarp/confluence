@@ -367,6 +367,7 @@ public final class ForgeEvents {
                     if (stickItem.getWaitTick() == 0) {
                         if (mob != null){
                             stickItem.setFirstClickEntity((LivingEntity) entity);
+                            player.sendSystemMessage(Component.translatable("info.confluence.choosemob", stickItem.getFirstClickEntity().getDisplayName()));
                             stickItem.setClickCount(1);
                             stickItem.setWaitTick(20);
                         }
@@ -376,8 +377,10 @@ public final class ForgeEvents {
                         if (!mob.equals(stickItem.getFirstClickEntity()) && stickItem.getFirstClickEntity() != null){
                             mob.setTarget(stickItem.getFirstClickEntity());
                             Mob selfMob = (Mob) stickItem.getFirstClickEntity();
-                            selfMob.setTarget(mob);
-                            player.sendSystemMessage(Component.translatable("info.confluence.mobattackmob", mob.getDisplayName(), selfMob.getDisplayName()));
+                            if (selfMob != null){
+                                selfMob.setTarget(mob);
+                                player.sendSystemMessage(Component.translatable("info.confluence.mobattackmob", mob.getDisplayName(), selfMob.getDisplayName()));
+                            }
                             stickItem.setClickCount(0);
                             stickItem.setWaitTick(20);
                             stickItem.setFirstClickEntity(null);

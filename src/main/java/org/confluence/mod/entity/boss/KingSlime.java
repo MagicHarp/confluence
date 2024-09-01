@@ -10,6 +10,7 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -131,7 +132,11 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
                 if (boss.level() instanceof ServerLevel serverLevel) {
                     Vec3 closestPlayerPos;
                     if (serverLevel.getRandomPlayer() != null) {
-                        closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
+                        if (boss.getTarget() != null){
+                            closestPlayerPos = boss.getTarget().getOnPos().getCenter();
+                        } else {
+                            closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
+                        }
                         boss.teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
                     }
                 }
@@ -283,10 +288,11 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private int getSlimesLeft() {
         return (int) (getHealth() / getMaxHealth() * TOTAL_SPLITS[difficultyIdx]);
     }
-    private void spawnSlime() {
+    private void spawnSlime(LivingEntity target) {
         if (level() instanceof ServerLevel serverLevel) {
             BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, COLOR_INT, 3);
             slime.setPos(getOnPos().getX(), getOnPos().getY() + 0.5, getOnPos().getZ());
+            slime.setTarget(target);
             if (isExpert(serverLevel)) {
                 //todo 尖刺史莱姆
                 //尖刺史莱姆，你的头顶怎么尖尖的
@@ -310,7 +316,11 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
 
         // 根据受伤前后剩余分裂次数差生成史莱姆
         for (int i = 0; i < lastSlimesLeft - getSlimesLeft(); i ++) {
-            spawnSlime();
+            if (this.getTarget() != null){
+                spawnSlime(this.getTarget());
+            } else {
+                spawnSlime(null);
+            }
         }
 
         return result;

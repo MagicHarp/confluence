@@ -270,7 +270,7 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
         for (Entity entity : entities) {
             if (entity instanceof Mob mob) {
                 if (this.self() instanceof Mob selfMob){
-                    if (selfMob.getTarget() != null && selfMob.getTarget().equals(mob)){
+                    if ((selfMob.getTarget() != null && mob.getTarget() != null) && (selfMob.getTarget().equals(mob) || mob.getTarget().equals(selfMob))){
                         if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
                             mob.hurt(level().damageSources().mobAttack(selfMob), (float) selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
                             break;
