@@ -31,25 +31,29 @@ import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
 import static net.minecraft.world.entity.EntityType.*;
 
-/** @author voila  */
+/** @author voila */
 public class DeathAnimUtils {
     public static final Map<EntityType<? extends LivingEntity>, DeathAnimOptions> options = new HashMap<>();
 
     static{
-        options.put(GHAST, DeathAnimOptions.Builtin.NO_GRAVITY_LOW_SPIN.customParticle(e->{}));
+        options.put(GHAST, DeathAnimOptions.Builtin.NO_GRAVITY_LOW_SPIN.customParticle(e -> {
+        }));
         options.put(PHANTOM, DeathAnimOptions.Builtin.LOW_SPIN);
         options.put(SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
         options.put(CAVE_SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
         options.put(BLAZE, DeathAnimOptions.Builtin.EXTRA_FALL.bloodColor(0.89f, 0.65f, 0.07f));
         options.put(GIANT, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.45f, 0f, 0f));
-        options.put(WITHER, DeathAnimOptions.Builtin.EXTRA_FALL.customParticle(entity -> {}));
+        options.put(WITHER, DeathAnimOptions.Builtin.EXTRA_FALL.customParticle(entity -> {
+        }));
         options.put(VEX, DeathAnimOptions.Builtin.LOW_SPIN);
         options.put(ENDERMAN, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.627f, 0.000f, 0.659f));
         options.put(GUARDIAN, DeathAnimOptions.Builtin.LOW_SPIN);
@@ -125,7 +129,14 @@ public class DeathAnimUtils {
         if(!(animatable instanceof LivingEntity entity) || entity.isAlive()) return;
         float[] motions;
         if(bone instanceof GeoBone b){ // TODO: children
+            GeoBone parent = b.getParent();
             motions = ((ILivingEntity) entity).confluence$getMotionsForBone(b);
+            if(parent != null){
+                float[] pm = ((ILivingEntity) entity).confluence$getMotionsForBone(parent);
+                for(int i = 0, motionsLength = motions.length; i < motionsLength; i++){
+                    motions[i] -= pm[i];
+                }
+            }
             poseStack.translate(getOffset(entity.deathTime, motions[0], partialTick),
                 getOffset(entity.deathTime, motions[1], partialTick),
                 getOffset(entity.deathTime, motions[2], partialTick));
@@ -172,7 +183,7 @@ public class DeathAnimUtils {
                         float renderYRot = Mth.rotLerp(partialTick, entity.yRotO, entity.getYRot());
                         if(((IModelPart) (Object) p).confluence$isSkull()){ // 头戴头颅要特殊处理
                             motionYaw = Mth.wrapDegrees(-rot[0] + renderYRot + (renderYHeadRot - renderYRot));
-                        }else {
+                        }else{
                             motionYaw = Mth.wrapDegrees(-rot[0] + 180 + renderYRot);  // 我不知道为什么是这样，是试出来的
                         }
                         landMotion = Vec3.directionFromRotation(rot[1], motionYaw).normalize().scale(speed);
@@ -322,6 +333,29 @@ public class DeathAnimUtils {
         }
         return ret;
     }
+
+    public static List<CoreGeoBone> findAllBones(BakedGeoModel model){
+        List<CoreGeoBone> ret = new ArrayList<>(/*model.topLevelBones()*/);
+        for(GeoBone bone : model.topLevelBones()){
+            ret.addAll(addChildBones(bone));
+        }
+        return ret;
+    }
+
+    private static List<GeoBone> addChildBones(GeoBone bone){
+        List<GeoBone> ret = new ArrayList<>();
+        List<GeoBone> children = bone.getChildBones();
+        if(children.size() == 0){
+            ret.add(bone);
+//            Confluence.LOGGER.info("{} {} {} {}",bone.getName(),bone.getPivotX(),bone.getPosX(),bone.getLocalPosition());
+        }else {
+            for(GeoBone child : children){
+                ret.addAll(addChildBones(child));
+            }
+        }
+        return ret;
+    }
+
 
     public static void addBloodParticles(Entity entity){
         if(!(entity.level() instanceof ServerLevel serverLevel)) return;

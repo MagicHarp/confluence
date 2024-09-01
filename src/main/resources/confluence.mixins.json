@@ -31,6 +31,7 @@
         "client.accessor.ModelPartAccessor",
         "client.accessor.PostPassAccessor",
         "client.accessor.RenderChunkInfoAccessor",
+        "gecko.GeoArmorRendererMixin",
         "integretion.shimmer.ForgePlatformHelperMixin",
         "integretion.shimmer.LightManagerMixin"
     ],

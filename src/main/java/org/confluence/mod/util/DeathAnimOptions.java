@@ -20,6 +20,7 @@ public interface DeathAnimOptions {
         return new float[]{0.7f, 0, 0};
     }
 
+    /** @return 是否已经添加过粒子，不用再添加默认粒子了 */
     default boolean makeParticle(Entity entity){
         return false;
     }

@@ -11,9 +11,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.client.handler.StepStoolHandler;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
@@ -23,6 +26,7 @@ import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.DeathAnimUtils;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,19 +35,23 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.RenderUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(LivingEntity.class)
 public abstract class ClientLivingEntityMixin extends Entity implements ILivingEntity, SelfGetter<LivingEntity> {
     // 位移，旋转
-    @Unique private final Map<GeoBone, float[]> confluence$boneMotions = new HashMap<>();
+    @Unique private final Map<CoreGeoBone, float[]> confluence$boneMotions = new HashMap<>();
     @Unique private final Map<ModelPart, float[]> confluence$partMotions = new HashMap<>();
     @Unique private final Map<ModelPart, PartPose> confluence$deathPose = new HashMap<>();
     @Unique private Vec3 confluence$lastMotion = Vec3.ZERO;
@@ -54,7 +62,7 @@ public abstract class ClientLivingEntityMixin extends Entity implements ILivingE
         super(pEntityType, pLevel);
     }
 
-    @Shadow public abstract EntityDimensions getDimensions(Pose pPose);
+    @Shadow @NotNull public abstract EntityDimensions getDimensions(@NotNull Pose pPose);
 
     @Inject(method = "checkFallDamage", at = @At("HEAD"))
     private void fall(double motionY, boolean onGround, BlockState blockState, BlockPos blockPos, CallbackInfo ci) {
@@ -87,6 +95,7 @@ public abstract class ClientLivingEntityMixin extends Entity implements ILivingE
         return vec3;
     }
 
+    @SuppressWarnings("unchecked")
     @Inject(method = "tickDeath", at = @At("HEAD"))
     private void tickDeath(CallbackInfo ci){
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(self());
@@ -110,21 +119,42 @@ public abstract class ClientLivingEntityMixin extends Entity implements ILivingE
         if(self().deathTime != 0){
             return;
         }
-        if(self() instanceof GeoAnimatable){  // TODO: 原版生物能穿geo甲，geo生物能穿原版甲
-            confluence$initGeoDeathAnim(options);
+        if(self() instanceof GeoAnimatable animatable){  // TODO: 原版生物能穿geo甲，geo生物能穿原版甲
+            GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(self());
+            confluence$initGeoDeathAnim(model, options,animatable);
         }else{
             confluence$initVanillaDeathAnim(options);
         }
+        confluence$initGeoArmorAnim(options);
     }
 
-    @SuppressWarnings("unchecked")
     @Unique
-    private void confluence$initGeoDeathAnim(DeathAnimOptions options){
-        GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(self());
+    private <T extends Item & GeoItem> void confluence$initGeoArmorAnim(DeathAnimOptions options){
+        ItemStack head = self().getItemBySlot(EquipmentSlot.HEAD);
+        ItemStack chest = self().getItemBySlot(EquipmentSlot.CHEST);
+        ItemStack legs = self().getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack feet = self().getItemBySlot(EquipmentSlot.FEET);
+
+        IClientItemExtensions.of(head).getHumanoidArmorModel(self(), head, EquipmentSlot.HEAD, null);
+        for(Object model : new Object[]{IClientItemExtensions.of(head).getHumanoidArmorModel(self(), head, EquipmentSlot.HEAD, null),
+            IClientItemExtensions.of(head).getHumanoidArmorModel(self(), chest, EquipmentSlot.CHEST, null),
+            IClientItemExtensions.of(legs).getHumanoidArmorModel(self(), legs, EquipmentSlot.LEGS, null),
+            IClientItemExtensions.of(feet).getHumanoidArmorModel(self(), feet, EquipmentSlot.FEET, null)}){
+            if(model instanceof GeoArmorRenderer<?>){
+                GeoArmorRenderer<T> gr = (GeoArmorRenderer<T>) model;
+                confluence$initGeoDeathAnim(gr.getGeoModel(), options,gr.getAnimatable());
+            }
+        }
+    }
+
+    @Unique
+    private <T extends GeoAnimatable> void confluence$initGeoDeathAnim(GeoModel<T> model, DeathAnimOptions options,T animatable){
+//        GeoModel<GeoAnimatable> model = (GeoModel<GeoAnimatable>) RenderUtils.getGeoModelForEntity(self());
         RandomSource random = self().level().getRandom();
         if(model != null){
-            BakedGeoModel bakedModel = model.getBakedModel(model.getModelResource((GeoAnimatable) self()));
-            for(GeoBone bone : bakedModel.topLevelBones()){
+            BakedGeoModel bakedModel = model.getBakedModel(model.getModelResource(animatable));
+            for(CoreGeoBone bone : DeathAnimUtils.findAllBones(bakedModel)){
+//            for(GeoBone bone : bakedModel.topLevelBones()){
                 confluence$boneMotions.put(bone, DeathAnimUtils.createOffsets(random, self().getDeltaMovement(), bone.getPosY(), options));
             }
         }
@@ -155,13 +185,13 @@ public abstract class ClientLivingEntityMixin extends Entity implements ILivingE
     @Override
     public float[] confluence$getMotionsForBone(GeoBone bone){
         float[] f = confluence$boneMotions.get(bone);
-        return f != null ? f : new float[6];
+        return f != null ? Arrays.copyOf(f, 6) : new float[6];
     }
 
     @Override
     public float[] confluence$getMotionsForPart(ModelPart part){
         float[] f = confluence$partMotions.get(part);
-        return f != null ? f : new float[6];
+        return f != null ? Arrays.copyOf(f, 6) : new float[6];
     }
 
     @Override
