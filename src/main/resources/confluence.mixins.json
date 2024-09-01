@@ -21,6 +21,7 @@
         "client.ModelPartMixin",
         "client.MooshroomMushroomLayerMixin",
         "client.MouseHandlerMixin",
+        "client.SnowGolemHeadLayerMixin",
         "client.accessor.CompileResultsAccessor",
         "client.accessor.CustomHeadLayerAccessor",
         "client.accessor.LevelRendererAccessor",

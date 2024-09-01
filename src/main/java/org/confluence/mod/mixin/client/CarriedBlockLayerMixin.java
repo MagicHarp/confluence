@@ -27,15 +27,14 @@ public class CarriedBlockLayerMixin {
     private void constr(RenderLayerParent<EnderMan, EndermanModel<EnderMan>> pRenderer, BlockRenderDispatcher pBlockRenderer, CallbackInfo ci){
         confluence$renderer = pRenderer;
     }
+
     @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/monster/EnderMan;FFFFFF)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"))
     private void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, EnderMan pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci){
-        if(confluence$renderer instanceof LivingEntityRenderer<?,?> renderer){
+        if(confluence$renderer instanceof LivingEntityRenderer<?, ?> renderer){
             List<ModelPart> parts = DeathAnimUtils.findAllModelPart(renderer);
             ModelPart part = parts.size() > 1 ? parts.get(1) : parts.isEmpty() ? null : parts.get(0);
             DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(pLivingEntity);
-            if(part != null && options != null){
-                DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, part, pPartialTicks, options);
-            }
+            DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, part, pPartialTicks, options);
         }
     }
 }

@@ -22,9 +22,7 @@ public abstract class GeoEntityRendererMixin<T extends Entity & GeoAnimatable> {
     private void renderStart(PoseStack poseStack, T animatable, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, CallbackInfo ci){
         poseStack.pushPose();
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(animatable);
-        if(options != null){
-            DeathAnimUtils.moveParts(poseStack, animatable, bone, partialTick, options);
-        }
+        DeathAnimUtils.moveParts(poseStack, animatable, bone, partialTick, options);
     }
 
     @Inject(method = "renderRecursively(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V", at = @At("RETURN"))

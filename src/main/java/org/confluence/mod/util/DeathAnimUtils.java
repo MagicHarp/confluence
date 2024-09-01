@@ -126,7 +126,7 @@ public class DeathAnimUtils {
     }
 
     public static void moveParts(PoseStack poseStack, Entity animatable, Object bone, float partialTick, DeathAnimOptions options){
-        if(!(animatable instanceof LivingEntity entity) || entity.isAlive()) return;
+        if(!(animatable instanceof LivingEntity entity) || entity.isAlive() || options == null) return;
         float[] motions;
         if(bone instanceof GeoBone b){ // TODO: children
             GeoBone parent = b.getParent();

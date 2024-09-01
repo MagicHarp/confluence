@@ -44,9 +44,7 @@ public abstract class ItemInHandLayerMixin<T extends LivingEntity, M extends Ent
             List<ModelPart> parts = DeathAnimUtils.findAllModelPart(renderer);
             ModelPart part = parts.size() > 1 ? parts.get(1) : parts.isEmpty() ? null : parts.get(0);
             DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(pLivingEntity);
-            if(part != null && options != null){
-                DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, part, confluence$partialTicks, options);
-            }
+            DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, part, confluence$partialTicks, options);
         }
     }
 }

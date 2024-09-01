@@ -28,8 +28,6 @@ public abstract class CustomHeadLayerMixin<T extends LivingEntity, M extends Ent
     private void renderItem(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci){
         ModelPart head = getParentModel().getHead();
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(pLivingEntity);
-        if(options != null){
-            DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, head, pPartialTicks, options);
-        }
+        DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, head, pPartialTicks, options);
     }
 }
