@@ -322,7 +322,13 @@ public final class ForgeEvents {
                 }
             }
             if (livingEntity.getMainHandItem().getItem() instanceof TestStickItem){
-                event.getEntity().remove(Entity.RemovalReason.DISCARDED);
+                if (event.getSource().getEntity().isShiftKeyDown()){
+                    for (Entity entity : event.getSource().getEntity().level().getEntitiesOfClass(event.getEntity().getClass(), event.getSource().getEntity().getBoundingBox().inflate(50))){
+                        entity.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                } else {
+                    event.getEntity().remove(Entity.RemovalReason.DISCARDED);
+                }
             }
         }
     }

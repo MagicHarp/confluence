@@ -19,6 +19,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.item.ModItems;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -43,7 +44,13 @@ public final class ModUtils {
         createItemEntity(itemStack, x, y, z, level, 40);
     }
 
-    public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level, int pickUpDelay) {
+    public static void createItemEntity(List<ItemStack> itemStacks, double x, double y, double z, Level level) {
+        for (ItemStack itemStack : itemStacks){
+            createItemEntity(itemStack, x, y, z, level, 40);
+        }
+    }
+
+        public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level, int pickUpDelay) {
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
         itemEntity.setPickUpDelay(pickUpDelay);
         level.addFreshEntity(itemEntity);

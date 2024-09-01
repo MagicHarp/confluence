@@ -235,6 +235,10 @@ public final class ModBlocks {
     public static final RegistryObject<WhitePlasticChairBlock> WHITE_PLASTIC_CHAIR_BLOCK = registerWithItem("white_plastic_chair", WhitePlasticChairBlock::new, supplier -> () -> new WhitePlasticChairBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<WhitePlasticChairBlock.Entity>> WHITE_PLASTIC_CHAIR_ENTITY = BLOCK_ENTITIES.register("white_plastic_chair_entity", () -> BlockEntityType.Builder.of(WhitePlasticChairBlock.Entity::new, WHITE_PLASTIC_CHAIR_BLOCK.get()).build(null));
 
+    public static final RegistryObject<Block> TEST_CROP = registerWithItem("test_crop", () -> new TestCropBlock(BlockBehaviour.Properties.copy(
+            Blocks.WHEAT
+    )));
+
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }

@@ -1,9 +1,6 @@
 package org.confluence.mod.item;
 
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -131,6 +128,7 @@ public final class ModItems {
 
 
     public static final RegistryObject<Item> TEST_STICK = ITEMS.register("test_stick", () -> new TestStickItem(new Item.Properties().rarity(ModRarity.EXPERT)));
+    public static final RegistryObject<Item> TEST_SEED =  ITEMS.register("test_seed", () -> new ItemNameBlockItem(ModBlocks.TEST_CROP.get(), new Item.Properties()));
 
     public static void register(IEventBus bus) {
         ModTiers.register();
