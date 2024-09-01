@@ -207,6 +207,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     public static AttributeSupplier.Builder createSlimeAttributes() {
         return Mob.createMobAttributes()
             .add(Attributes.ATTACK_DAMAGE, 1.0)
+            .add(Attributes.ATTACK_KNOCKBACK, 2.2)
             .add(Attributes.ARMOR, 10.0)
             .add(Attributes.KNOCKBACK_RESISTANCE, 10.00)
             .add(Attributes.FOLLOW_RANGE, 100.0);
@@ -221,7 +222,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     // 原版跳跃依旧会略微顿一下，给调整到几乎不会触发的间隔
     @Override
     protected int getJumpDelay() {
-        return 999999;
+        return Short.MAX_VALUE;
     }
 
     private void attrInit(List<Player> nearbyPlayers) {

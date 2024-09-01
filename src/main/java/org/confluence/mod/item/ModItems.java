@@ -130,7 +130,7 @@ public final class ModItems {
     public static final RegistryObject<Item> PLATINUM_CROWN = ITEMS.register("platinum_crown", () -> new BaseCosmeticItem(ModRarity.WHITE));
 
 
-    public static final RegistryObject<Item> TEST_STICK = ITEMS.register("test_stick", () -> new TestStickItem(new Item.Properties().rarity(ModRarity.MASTER)));
+    public static final RegistryObject<Item> TEST_STICK = ITEMS.register("test_stick", () -> new TestStickItem(new Item.Properties().rarity(ModRarity.EXPERT)));
 
     public static void register(IEventBus bus) {
         ModTiers.register();

@@ -321,6 +321,9 @@ public final class ForgeEvents {
                     event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0, false, false, false));
                 }
             }
+            if (livingEntity.getMainHandItem().getItem() instanceof TestStickItem){
+                event.getEntity().remove(Entity.RemovalReason.DISCARDED);
+            }
         }
     }
 
@@ -362,7 +365,13 @@ public final class ForgeEvents {
         }
         if (item.is(ModItems.TEST_STICK.get())){
             if (item.getItem() instanceof TestStickItem stickItem) {
-                Mob mob = (Mob) entity;
+                Mob mob;
+                if (entity instanceof Mob m) {
+                    mob = m;
+                } else {
+                    entity.remove(Entity.RemovalReason.KILLED);
+                    mob = null;
+                }
                 if (stickItem.getClickCount() == 0) {
                     if (stickItem.getWaitTick() == 0) {
                         if (mob != null){

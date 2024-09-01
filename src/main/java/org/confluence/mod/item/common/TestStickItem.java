@@ -3,19 +3,20 @@ package org.confluence.mod.item.common;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.item.ModTiers;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 
-public class TestStickItem extends Item implements ModRarity.Master {
+public class TestStickItem extends SwordItem implements ModRarity.Expert {
     private int clickCount;
     private LivingEntity firstClickEntity;
     private int waitTick;
 
     public TestStickItem(Properties pProperties) {
-        super(pProperties);
+        super(ModTiers.TITANIUM, Short.MAX_VALUE, Short.MAX_VALUE, pProperties);
         clickCount = 0;
         waitTick = 20;
     }

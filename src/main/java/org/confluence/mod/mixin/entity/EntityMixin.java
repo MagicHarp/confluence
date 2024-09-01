@@ -35,6 +35,7 @@ import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.ModUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -272,7 +273,15 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
                 if (this.self() instanceof Mob selfMob){
                     if ((selfMob.getTarget() != null && mob.getTarget() != null) && (selfMob.getTarget().equals(mob) || mob.getTarget().equals(selfMob))){
                         if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
+                            if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue() <= 0) {
+                                selfMob.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.0);
+                            }
                             mob.hurt(level().damageSources().mobAttack(selfMob), (float) selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                            if (mob.getAttribute(Attributes.KNOCKBACK_RESISTANCE) != null) {
+                                if (mob.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getValue() == 100) {
+                                    ModUtils.knockBackA2B(selfMob, entity, selfMob.getAttribute(Attributes.ATTACK_KNOCKBACK).getValue(), 0.2);
+                                }
+                            }
                             break;
                         }
                     }
