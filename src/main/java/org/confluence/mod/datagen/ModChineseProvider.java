@@ -1492,6 +1492,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.TR_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");
         add(Materials.STAR_PETALS.get(), "星辰花瓣");
+        add(Materials.WEAVING_CLOUD_COTTON.get(), "织云棉");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.VERTEBRA.get(), "椎骨");
         add(Materials.LENS.get(), "晶状体");
@@ -1760,7 +1761,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SHIVERINGTHORNS.get(), "寒颤棘");
         add(ModItems.SUNFLOWERS.get(), "太阳花");
         add(ModItems.DEATHWEED.get(), "死亡草");
-        add(STELLAR_BLOSSOM.get(), "星辰花");
+        add(ModBlocks.STELLAR_BLOSSOM.get(), "星辰花");
+        add(ModBlocks.CLOUDWEAVER.get(), "云织草");
+        add(ModBlocks.FLOATING_WHEAT.get(), "飘飘麦");
         add(WATERLEAF_SEED.get(), "幌菊种子");
         add(ModItems.FLAMEFLOWERS_SEED.get(), "火焰花种子");
         add(ModItems.MOONSHINE_GRASS_SEED.get(), "月光草种子");
@@ -1769,6 +1772,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModItems.SUNFLOWERS_SEED.get(), "太阳花种子");
         add(ModItems.DEATHWEED_SEED.get(), "死亡草种子");
         add(STELLAR_BLOSSOM_SEED.get(), "星辰花种子");
+        add(CLOUDWEAVER_SEED.get(), "云织草种子");
+        add(FLOATING_WHEAT_SEED.get(), "飘飘麦种子");
 
         add(CRIMSON_THORN.get(), "猩红荆棘");
         add(CORRUPTION_THORN.get(), "腐化荆棘");

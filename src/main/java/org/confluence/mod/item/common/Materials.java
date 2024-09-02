@@ -64,6 +64,7 @@ public enum Materials implements EnumRegister<Item> {
 
     STAR_PETALS("star_petals", () -> new FallingStarItem(WHITE)),
     FALLING_STAR("falling_star", () -> new FallingStarItem(WHITE)),
+    WEAVING_CLOUD_COTTON("weaving_cloud_cotton", () -> new BaseItem(WHITE)),
     CARRION("carrion", () -> new BaseItem(WHITE)),
     VERTEBRA("vertebra", () -> new BaseItem(WHITE)),
     BLACK_INK("black_ink", () -> new BaseItem(WHITE)),

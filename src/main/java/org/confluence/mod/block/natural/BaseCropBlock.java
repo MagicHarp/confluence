@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class BaseCropBlock extends CropBlock implements CustomModel, CustomItemModel {
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
-    public static final int MAX_AGE = 6;
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 7);
+    public static final int MAX_AGE = 7;
 
     public BaseCropBlock(Properties pProperties) {
         super(pProperties);

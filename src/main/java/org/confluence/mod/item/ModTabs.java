@@ -167,6 +167,7 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS.get());
                 output.accept(ModItems.DEATHWEED.get());
                 output.accept(ModItems.FLAMEFLOWERS.get());
+
                 output.accept(ModBlocks.STELLAR_BLOSSOM.get());
 
                 output.accept(ModItems.WATERLEAF_SEED.get());
@@ -176,7 +177,9 @@ public final class ModTabs {
                 output.accept(ModItems.SUNFLOWERS_SEED.get());
                 output.accept(ModItems.DEATHWEED_SEED.get());
                 output.accept(ModItems.FLAMEFLOWERS_SEED.get());
+
                 output.accept(ModItems.STELLAR_BLOSSOM_SEED.get());
+
                 // 蘑菇 草
                 output.accept(ModItems.TR_CRIMSON_MUSHROOM.get());
                 output.accept(ModItems.EBONY_MUSHROOM.get());

@@ -130,6 +130,8 @@ public final class ModItems {
     public static final RegistryObject<Item> TEST_STICK = ITEMS.register("test_stick", () -> new TestStickItem(new Item.Properties().rarity(ModRarity.EXPERT)));
     public static final RegistryObject<Item> TEST_SEED =  ITEMS.register("test_seed", () -> new ItemNameBlockItem(ModBlocks.TEST_CROP.get(), new Item.Properties()));
     public static final RegistryObject<Item> STELLAR_BLOSSOM_SEED = ITEMS.register("stellar_blossom_seed", () -> new ItemNameBlockItem(ModBlocks.STELLAR_BLOSSOM.get(),new Item.Properties()));
+    public static final RegistryObject<Item> CLOUDWEAVER_SEED = ITEMS.register("cloudweaver_seed", () -> new ItemNameBlockItem(ModBlocks.CLOUDWEAVER.get(),new Item.Properties()));
+    public static final RegistryObject<Item> FLOATING_WHEAT_SEED = ITEMS.register("floating_wheat_seed", () -> new ItemNameBlockItem(ModBlocks.FLOATING_WHEAT.get(),new Item.Properties()));
     public static void register(IEventBus bus) {
         ModTiers.register();
         IconItem.Icons.init();
