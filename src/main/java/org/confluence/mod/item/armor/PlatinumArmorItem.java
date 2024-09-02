@@ -21,7 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class PlatinumArmorItem extends ArmorItem implements NormalGeoItem {
-    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache PLATINUM = GeckoLibUtil.createInstanceCache(this);
 
     public PlatinumArmorItem(Type type) {
         super(new ArmorMaterial() {
@@ -99,6 +99,6 @@ public class PlatinumArmorItem extends ArmorItem implements NormalGeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
+        return PLATINUM;
     }
 }

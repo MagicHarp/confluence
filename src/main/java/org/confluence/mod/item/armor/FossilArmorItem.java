@@ -21,7 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class FossilArmorItem extends ArmorItem implements NormalGeoItem {
-    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache FOSSIL = GeckoLibUtil.createInstanceCache(this);
 
     public FossilArmorItem(Type type) {
         super(new ArmorMaterial() {
@@ -99,6 +99,6 @@ public class FossilArmorItem extends ArmorItem implements NormalGeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
+        return FOSSIL;
     }
 }

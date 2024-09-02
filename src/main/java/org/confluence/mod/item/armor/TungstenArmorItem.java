@@ -21,7 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class TungstenArmorItem extends ArmorItem implements NormalGeoItem {
-    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache TUNGSTEN = GeckoLibUtil.createInstanceCache(this);
 
     public TungstenArmorItem(Type type) {
         super(new ArmorMaterial() {
@@ -100,6 +100,6 @@ public class TungstenArmorItem extends ArmorItem implements NormalGeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
+        return TUNGSTEN;
     }
 }

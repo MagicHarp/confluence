@@ -21,7 +21,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public class SnowPinkArmorItem extends ArmorItem implements NormalGeoItem {
-    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache SNOW = GeckoLibUtil.createInstanceCache(this);
 
     public SnowPinkArmorItem(Type type) {
         super(new ArmorMaterial() {
@@ -96,6 +96,6 @@ public class SnowPinkArmorItem extends ArmorItem implements NormalGeoItem {
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return CACHE;
+        return SNOW;
     }
 }
