@@ -163,13 +163,12 @@ public final class ModBlocks {
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
     public static final RegistryObject<FlameFlower> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
     public static final RegistryObject<MoonshineGrass> MOONSHINE_GRASS = registerWithoutItem("moonshine_grass", MoonshineGrass::new);//月光草
-    public static final RegistryObject<StellarBlossom> STELLAR_BLOSSOM = registerWithoutItem("stellar_blossom", StellarBlossom::new);//星辰花
     public static final RegistryObject<BaseHerbBlock> SHINE_ROOT = registerWithoutItem("shine_root", ShineRoot::new);//闪耀根
     public static final RegistryObject<BaseHerbBlock> SHIVERINGTHORNS = registerWithoutItem("shiveringthorns", ShiveringThorn::new);//寒颤棘
     public static final RegistryObject<BaseHerbBlock> SUNFLOWERS = registerWithoutItem("sunflowers", SunFlower::new);//太阳花
     public static final RegistryObject<DeathWeed> DEATHWEED = registerWithoutItem("deathweed", DeathWeed::new);//死亡草
     public static final RegistryObject<BlockEntityType<BaseHerbBlock.Entity>> HERBS_ENTITY = BLOCK_ENTITIES.register("herbs_entity", () -> BlockEntityType.Builder.of(BaseHerbBlock.Entity::new,
-        WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(), STELLAR_BLOSSOM.get(), SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
+        WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(),SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
     // grass
     public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", () -> new BasePlantBlock(ModBlocks.CORRUPT_GRASS_BLOCK.get()));//腐化草
     public static final RegistryObject<Block> TR_CRIMSON_GRASS = registerWithItem("tr_crimson_grass", () -> new BasePlantBlock(ModBlocks.TR_CRIMSON_GRASS_BLOCK.get()));//猩红草
@@ -237,6 +236,9 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> TEST_CROP = registerWithItem("test_crop", () -> new TestCropBlock(BlockBehaviour.Properties.copy(
             Blocks.WHEAT
+    )));
+    public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(
+        Blocks.DANDELION
     )));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {

@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "confluence:item/test_stick"
-  }
+  "parent": "confluence:item/item_icon"
 }
