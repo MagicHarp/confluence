@@ -17,8 +17,23 @@ public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
     }
 
     @Override
+    protected void init() {
+        super.init();
+        this.imageWidth = 176;
+        this.imageHeight = 166;
+        this.titleLabelX = imageWidth - 8 - font.width(title);
+        this.inventoryLabelX = imageWidth - 8 - font.width(playerInventoryTitle);
+    }
+
+    @Override
+    public void render(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+    }
+
+    @Override
     protected void renderBg(@NotNull GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         renderBackground(pGuiGraphics);
-        pGuiGraphics.blit(BG_LOCATION, leftPos, topPos, 0, 0, 176, 166);
+        pGuiGraphics.blit(BG_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }
