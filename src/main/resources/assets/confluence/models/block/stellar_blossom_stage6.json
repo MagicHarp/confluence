@@ -1,8 +1,8 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "confluence:block/stellar_blossom_stage6",
-    "particle": "confluence:block/stellar_blossom_stage6"
+    "cross": "confluence:block/crops/stellar_blossom_stage6",
+    "particle": "confluence:block/crops/stellar_blossom_stage6"
   },
   "render_type": "cutout"
 }

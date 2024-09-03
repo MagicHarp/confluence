@@ -212,7 +212,7 @@ public final class ModBlocks {
     public static final RegistryObject<CrackedBrickBlock> CRACKED_BLUE_BRICK = registerWithItem("cracked_blue_brick", CrackedBrickBlock::new);
     public static final RegistryObject<CrackedBrickBlock> CRACKED_GREEN_BRICK = registerWithItem("cracked_green_brick", CrackedBrickBlock::new);
     public static final RegistryObject<CrackedBrickBlock> CRACKED_PINK_BRICK = registerWithItem("cracked_pink_brick", CrackedBrickBlock::new);
-    // 镒块
+    // 以太块
     public static final RegistryObject<Block> AETHERIUM_BLOCK = registerWithItem("aetherium_block", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
     public static final RegistryObject<Block> DARK_AETHERIUM_BLOCK = registerWithItem("dark_aetherium_block", CustomModelBlock::new);
@@ -239,13 +239,13 @@ public final class ModBlocks {
     )));
     public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(
         Blocks.DANDELION
-    )));
+    ).offsetType(BlockBehaviour.OffsetType.NONE)));
     public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(
         Blocks.DANDELION
-    )));
+    ).offsetType(BlockBehaviour.OffsetType.NONE)));
     public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(
         Blocks.WHEAT
-    )));
+    ).offsetType(BlockBehaviour.OffsetType.NONE)));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
