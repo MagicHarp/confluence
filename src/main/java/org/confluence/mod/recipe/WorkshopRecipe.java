@@ -15,6 +15,11 @@ public class WorkshopRecipe extends AbstractAmountRecipe {
     }
 
     @Override
+    protected int maxIngredientSize() {
+        return 12;
+    }
+
+    @Override
     public @NotNull String getGroup() {
         return "workshop";
     }

@@ -14,7 +14,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.confluence.mod.Confluence;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ShimmerItemTransmutationCategory implements IRecipeCategory<ShimmerItemTransmutationEvent.ItemTransmutation> {
     public static final RecipeType<ShimmerItemTransmutationEvent.ItemTransmutation> TYPE = RecipeType.create(Confluence.MODID, "item_transmutation", ShimmerItemTransmutationEvent.ItemTransmutation.class);
-    private static final ResourceLocation ARROW = new ResourceLocation(Confluence.MODID, "textures/gui/arrow_down.png");
+    private static final Component SHIMMER_TRANSMUTATION_TITLE = Component.translatable("title.confluence.shimmer_transmutation");
     private final IDrawable icon;
 
     public ShimmerItemTransmutationCategory(IJeiHelpers jeiHelpers) {
@@ -39,12 +38,12 @@ public class ShimmerItemTransmutationCategory implements IRecipeCategory<Shimmer
 
     @Override
     public @NotNull Component getTitle() {
-        return ModJeiPlugin.SHIMMER_TRANSMUTATION_TITLE;
+        return SHIMMER_TRANSMUTATION_TITLE;
     }
 
     @Override
     public @NotNull IDrawable getBackground() {
-        return ModJeiPlugin.BACKGROUND;
+        return ModJeiPlugin.FULL_BACKGROUND;
     }
 
     @Override
@@ -65,20 +64,19 @@ public class ShimmerItemTransmutationCategory implements IRecipeCategory<Shimmer
             inputSlot.addItemStack(input);
         }
         // output
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 56, 88)
-            .addItemStacks(recipe.target());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 56, 88).addItemStacks(recipe.target());
     }
 
     @Override
     public void draw(ShimmerItemTransmutationEvent.@NotNull ItemTransmutation recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (ClientPacketHandler.getGamePhase().ordinal() < recipe.gamePhase().ordinal()) {
-            guiGraphics.blit(ARROW, 54, 46, 21, 0, 21, 28, 42, 42);
+            ModJeiPlugin.drawArrowDown(guiGraphics, 54, 46, false);
             if (mouseX >= 54 && mouseX <= 75 && mouseY >= 46 && mouseY <= 74) {
                 MutableComponent text = Component.translatable("condition.confluence.shimmer_transmutation", recipe.gamePhase()).withStyle(style -> style.withColor(ChatFormatting.RED));
                 guiGraphics.renderTooltip(Minecraft.getInstance().font, text, (int) mouseX, (int) mouseY);
             }
         } else {
-            guiGraphics.blit(ARROW, 54, 46, 0, 0, 21, 28, 42, 42);
+            ModJeiPlugin.drawArrowDown(guiGraphics, 54, 46, true);
         }
     }
 }

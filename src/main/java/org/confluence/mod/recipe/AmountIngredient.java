@@ -41,6 +41,10 @@ public class AmountIngredient extends AbstractIngredient {
         return itemStack.getCount();
     }
 
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
+
     @Override
     public ItemStack @NotNull [] getItems() {
         return new ItemStack[]{itemStack};

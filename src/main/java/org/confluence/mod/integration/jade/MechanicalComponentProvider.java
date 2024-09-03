@@ -6,6 +6,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.network.INetworkEntity;
 import org.confluence.mod.block.functional.network.NetworkNode;
 import snownee.jade.api.BlockAccessor;
@@ -30,7 +31,7 @@ public class MechanicalComponentProvider implements IBlockComponentProvider, ISe
                     String hexString = Integer.toHexString(color).toUpperCase();
                     hexString = "0".repeat(6 - hexString.length()) + hexString;
                     iTooltip.add(Component.translatable("info.confluence.network", hexString, tag1.getBoolean("signal"))
-                        .withStyle(style -> style.withColor(color))
+                            .withStyle(style -> style.withColor(color))
                     );
                 }
             });
@@ -44,17 +45,18 @@ public class MechanicalComponentProvider implements IBlockComponentProvider, ISe
 
     @Override
     public void appendServerData(CompoundTag compoundTag, BlockAccessor blockAccessor) {
+        if (!blockAccessor.getPlayer().isCreative() && blockAccessor.getBlock() == ModBlocks.DEATH_CHEST_BLOCK.get()) return;
         if (blockAccessor.getBlockEntity() instanceof INetworkEntity entity) {
             NetworkNode networkNode = entity.getOrCreateNetworkNode();
             ListTag listTag = new ListTag();
             networkNode.getNetworks().int2ObjectEntrySet().stream()
-                .sorted(Comparator.comparingInt(Int2ObjectMap.Entry::getIntKey))
-                .forEach(entry -> {
-                    CompoundTag tag = new CompoundTag();
-                    tag.putInt("color", entry.getIntKey());
-                    tag.putBoolean("signal", entry.getValue().hasSignal());
-                    listTag.add(tag);
-                });
+                    .sorted(Comparator.comparingInt(Int2ObjectMap.Entry::getIntKey))
+                    .forEach(entry -> {
+                        CompoundTag tag = new CompoundTag();
+                        tag.putInt("color", entry.getIntKey());
+                        tag.putBoolean("signal", entry.getValue().hasSignal());
+                        listTag.add(tag);
+                    });
             compoundTag.put("networkInfo", listTag);
         }
     }

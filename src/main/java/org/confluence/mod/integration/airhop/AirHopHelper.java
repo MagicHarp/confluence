@@ -49,9 +49,7 @@ public class AirHopHelper {
                 getAirHops = AirHopsCapabilityImpl.getDeclaredMethod("getAirHops");
                 getAirHops.setAccessible(true);
             }
-            boolean canJump = (boolean) AirHopHelper.canJump.invoke(null, player);
-            boolean isSaturated = (boolean) AirHopHelper.isSaturated.invoke(null, player);
-            if (canJump && isSaturated) {
+            if (((boolean) canJump.invoke(null, player)) && ((boolean) isSaturated.invoke(null, player))) {
                 Optional<?> optional = (Optional<?>) maybeGet.invoke(AIR_HOPS_CAPABILITY, player);
                 if (optional.isPresent()) {
                     int airHops = (int) getAirHops.invoke(optional.get());

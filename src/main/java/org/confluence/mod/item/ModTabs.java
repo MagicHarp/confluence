@@ -429,6 +429,10 @@ public final class ModTabs {
                 output.accept(TIMERS_BLOCK_1_4.get());
                 output.accept(GEYSER_BLOCK.get());
                 output.accept(EXTRACTINATOR.get());
+                output.accept(DEMON_ALTAR.get());
+                output.accept(CRIMSON_ALTAR.get());
+                output.accept(SKY_MILL.get());
+                output.accept(WORKSHOP.get());
             })
             .build());
 }

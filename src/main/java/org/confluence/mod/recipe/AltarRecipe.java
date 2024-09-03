@@ -15,6 +15,11 @@ public class AltarRecipe extends AbstractAmountRecipe {
     }
 
     @Override
+    protected int maxIngredientSize() {
+        return 4;
+    }
+
+    @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
         return ModRecipes.ALTAR_SERIALIZER.get();
     }

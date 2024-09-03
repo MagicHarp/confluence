@@ -15,6 +15,11 @@ public class SkyMillRecipe extends AbstractAmountRecipe {
     }
 
     @Override
+    protected int maxIngredientSize() {
+        return 3;
+    }
+
+    @Override
     public @NotNull String getGroup() {
         return "sky_mill";
     }

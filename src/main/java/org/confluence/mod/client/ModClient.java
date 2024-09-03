@@ -44,10 +44,7 @@ import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRender
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
-import org.confluence.mod.client.renderer.gui.HealthHudOverlay;
-import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
-import org.confluence.mod.client.renderer.gui.ManaHudOverlay;
-import org.confluence.mod.client.renderer.gui.SkyMillScreen;
+import org.confluence.mod.client.renderer.gui.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.ColoredItem;
@@ -111,6 +108,7 @@ public final class ModClient {
             FishingPoles.registerCast();
             Bows.registerProperties();
             MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
+            MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
         });
     }
 

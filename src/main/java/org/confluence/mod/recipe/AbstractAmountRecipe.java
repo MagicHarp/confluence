@@ -98,7 +98,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(@NotNull RegistryAccess registryAccess) {
+    public @NotNull ItemStack getResultItem(@Nullable RegistryAccess registryAccess) {
         return result;
     }
 
@@ -111,6 +111,8 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
     public @NotNull NonNullList<Ingredient> getIngredients() {
         return ingredients;
     }
+
+    protected abstract int maxIngredientSize();
 
     public static abstract class Serializer<R extends AbstractAmountRecipe> implements RecipeSerializer<R> {
         protected abstract R newInstance(ResourceLocation pId, ItemStack pResult, NonNullList<Ingredient> pIngredients);
@@ -133,7 +135,9 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
                 }
             }
             if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for " + pRecipeId);
-            return newInstance(pRecipeId, result, nonNullList);
+            R recipe = newInstance(pRecipeId, result, nonNullList);
+            if (ingredients.size() > recipe.maxIngredientSize()) throw new IndexOutOfBoundsException("The ingredient size of '" + pRecipeId + "' is out of 3");
+            return recipe;
         }
 
         @Override
