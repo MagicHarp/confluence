@@ -1639,6 +1639,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(DEMON_HEART.get(), "恶魔之心");
         add(MAGIC_CONCH.get(), "魔法海螺");
         add(DEMON_CONCH.get(), "恶魔海螺");
+        add(SKY_MILL.get(), "天磨");
+        add(WORKSHOP.get(), "工匠作坊");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
@@ -1787,6 +1789,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(PALM_SAPLING.get(), "棕榈树苗");
         add(PEARL_SAPLING.get(), "珍珠树苗");
         add(RUBY_SAPLING.get(), "红玉树苗");
+        add(AMBER_SAPLING.get(), "琥珀树苗");
+        add(TOPAZ_SAPLING.get(), "黄玉树苗");
+        add(EMERALD_SAPLING.get(), "翡翠树苗");
+        add(DIAMOND_SAPLING.get(), "钻石树苗");
+        add(SAPPHIRE_SAPLING.get(), "蓝玉树苗");
+        add(TR_AMETHYST_SAPLING.get(), "紫晶树苗");
+        add(ASH_SAPLING.get(), "白蜡树苗");
 
         add(ModBlocks.TR_CRIMSON_MUSHROOM.get(), "毒蘑菇");
         add(ModBlocks.EBONY_MUSHROOM.get(), "魔菇");

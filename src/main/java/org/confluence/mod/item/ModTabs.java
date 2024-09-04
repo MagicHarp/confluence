@@ -143,6 +143,14 @@ public final class ModTabs {
                 output.accept(EBONY_SAPLING.get());
                 output.accept(PALM_SAPLING.get());
                 output.accept(PEARL_SAPLING.get());
+                output.accept(RUBY_SAPLING.get());
+                output.accept(AMBER_SAPLING.get());
+                output.accept(TOPAZ_SAPLING.get());
+                output.accept(EMERALD_SAPLING.get());
+                output.accept(DIAMOND_SAPLING.get());
+                output.accept(SAPPHIRE_SAPLING.get());
+                output.accept(TR_AMETHYST_SAPLING.get());
+                output.accept(ASH_SAPLING.get());
                 output.accept(MUSHROOM_GRASS_BLOCK.get());
                 output.accept(TR_POLISHED_GRANITE.get());
                 output.accept(POLISHED_MARBLE.get());

@@ -37,6 +37,13 @@ public final class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALM = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "palm_tree_checked"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> PEARL = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "trees_set/trees_hallow"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> RUBY = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "ruby_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBER = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "amber_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TOPAZ = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "topaz_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EMERALD = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "emerald_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DIAMOND = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "diamond_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SAPPHIRE = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "sapphire_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TR_AMETHYST = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "tr_amethyst_tree"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASH = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Confluence.MODID, "ash_tree"));
 
     static @NotNull BlockState getPressurePlate(WorldGenLevel level, BlockPos supportPos) {
         return level.isStateAtPosition(supportPos, blockState -> blockState.is(Blocks.DEEPSLATE)) ?
