@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "confluence:item/curio/eye_of_the_golem"
-  }
-}

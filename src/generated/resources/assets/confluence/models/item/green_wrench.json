@@ -1,6 +1,0 @@
-{
-  "parent": "confluence:item/handheld_mirror",
-  "textures": {
-    "layer0": "confluence:item/green_wrench"
-  }
-}
