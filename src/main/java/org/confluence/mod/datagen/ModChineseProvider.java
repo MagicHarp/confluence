@@ -1014,6 +1014,8 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("entity.minecraft.villager.confluence.sky_miller", "天师");
 
+        add("container.confluence.workshop", "工匠作坊");
+
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");
         add(Ores.CORRUPTION_COAL_ORE.get(), "腐化煤矿石");
@@ -2115,8 +2117,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLD_CROWN.get(), "金冠");
         add(STEP_STOOL.get(), "梯凳");
         add(HAND_OF_CREATION.get(), "创造之手");
-
-        add(TEST_STICK.get(), "斗蛐蛐棒");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");

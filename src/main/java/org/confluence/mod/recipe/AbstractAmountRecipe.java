@@ -85,7 +85,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
                 }
             }
         }
-        return result.copy();
+        return getResultItem(pRegistryAccess);
     }
 
     public ItemStack assemble(Container container, Level level) {
@@ -99,7 +99,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull ItemStack getResultItem(@Nullable RegistryAccess registryAccess) {
-        return result;
+        return result.copy();
     }
 
     @Override

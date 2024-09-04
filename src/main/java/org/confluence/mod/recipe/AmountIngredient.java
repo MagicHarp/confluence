@@ -56,7 +56,7 @@ public class AmountIngredient extends AbstractIngredient {
         if (pStack == itemStack) {
             return true;
         } else {
-            return pStack.getCount() >= itemStack.getCount() && ItemStack.isSameItemSameTags(pStack, itemStack);
+            return pStack.getCount() >= itemStack.getCount() && (itemStack.hasTag() ? ItemStack.isSameItemSameTags(pStack, itemStack) : ItemStack.isSameItem(pStack, itemStack));
         }
     }
 

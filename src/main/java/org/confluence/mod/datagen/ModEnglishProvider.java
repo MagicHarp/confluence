@@ -734,6 +734,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("entity.minecraft.villager.confluence.sky_miller", "Sky Miller");
 
+        add("container.confluence.workshop", "Workshop");
+
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
             if (block1 instanceof WallSignBlock || block1 instanceof WallTorchBlock) return;

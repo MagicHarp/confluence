@@ -117,7 +117,7 @@ public final class ModBlocks {
     public static final RegistryObject<TimersBlock> TIMERS_BLOCK_1_4 = registerWithItem("timers_1_4", () -> new TimersBlock(5)); // 1/4s
     public static final RegistryObject<GeyserBlock> GEYSER_BLOCK = registerWithItem("geyser_block", GeyserBlock::new);
     public static final RegistryObject<BlockEntityType<AbstractMechanicalBlock.Entity>> MECHANICAL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mechanical_block_entity", () -> BlockEntityType.Builder.of(AbstractMechanicalBlock.Entity::new,
-        BoulderBlock.Variant.NORMAL.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get(), TIMERS_BLOCK_1_1.get(), TIMERS_BLOCK_3_1.get(), TIMERS_BLOCK_5_1.get(), TIMERS_BLOCK_1_2.get(), TIMERS_BLOCK_1_4.get()).build(null));
+            BoulderBlock.Variant.NORMAL.get(), INSTANTANEOUS_EXPLOSION_TNT.get(), SWITCH.get(), SIGNAL_ADAPTER.get(), DART_TRAP.get(), TIMERS_BLOCK_1_1.get(), TIMERS_BLOCK_3_1.get(), TIMERS_BLOCK_5_1.get(), TIMERS_BLOCK_1_2.get(), TIMERS_BLOCK_1_4.get()).build(null));
     // frost
     public static final RegistryObject<ThinIceBlock> THIN_ICE_BLOCK = registerWithItem("thin_ice_block", ThinIceBlock::new);
     // crafting
@@ -129,14 +129,13 @@ public final class ModBlocks {
     public static final RegistryObject<SkyMillBlock> SKY_MILL = registerWithItem("sky_mill", SkyMillBlock::new);
     public static final RegistryObject<BlockEntityType<SkyMillBlock.Entity>> SKY_MILL_ENTITY = BLOCK_ENTITIES.register("sky_mill_entity", () -> BlockEntityType.Builder.of(SkyMillBlock.Entity::new, SKY_MILL.get()).build(null));
     public static final RegistryObject<WorkshopBlock> WORKSHOP = registerWithItem("workshop", WorkshopBlock::new);
-    public static final RegistryObject<BlockEntityType<WorkshopBlock.Entity>> WORKSHOP_ENTITY = BLOCK_ENTITIES.register("workshop_entity", () -> BlockEntityType.Builder.of(WorkshopBlock.Entity::new, WORKSHOP.get()).build(null));
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY.fluid(), BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_YELLOW)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
     public static final RegistryObject<LiquidBlock> SHIMMER = registerWithoutItem("shimmer", () -> new LiquidBlock(ModFluids.SHIMMER.fluid(), BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_PINK).lightLevel(blockState -> 10)));
     // misc
     public static final RegistryObject<BlockEntityType<Torches.Entity>> COLORFUL_TORCH_ENTITY = BLOCK_ENTITIES.register("colorful_block_entity", () -> BlockEntityType.Builder.of(
-        Torches.Entity::new, Torches.DEMON_TORCH.stand.get(), Torches.DEMON_TORCH.wall.get(), Torches.RAINBOW_TORCH.stand.get(), Torches.RAINBOW_TORCH.wall.get()).build(null));
+            Torches.Entity::new, Torches.DEMON_TORCH.stand.get(), Torches.DEMON_TORCH.wall.get(), Torches.RAINBOW_TORCH.stand.get(), Torches.RAINBOW_TORCH.wall.get()).build(null));
     // chain
     public static final RegistryObject<BaseChainBlock> RUBY_CHAIN = registerWithItem("ruby_chain", () -> new BaseChainBlock(MapColor.COLOR_RED));
     public static final RegistryObject<BaseChainBlock> AMBER_CHAIN = registerWithItem("amber_chain", () -> new BaseChainBlock(MapColor.COLOR_ORANGE));
@@ -168,7 +167,7 @@ public final class ModBlocks {
     public static final RegistryObject<BaseHerbBlock> SUNFLOWERS = registerWithoutItem("sunflowers", SunFlower::new);//太阳花
     public static final RegistryObject<DeathWeed> DEATHWEED = registerWithoutItem("deathweed", DeathWeed::new);//死亡草
     public static final RegistryObject<BlockEntityType<BaseHerbBlock.Entity>> HERBS_ENTITY = BLOCK_ENTITIES.register("herbs_entity", () -> BlockEntityType.Builder.of(BaseHerbBlock.Entity::new,
-        WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(),SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
+            WATERLEAF.get(), FLAMEFLOWERS.get(), MOONSHINE_GRASS.get(), SHINE_ROOT.get(), SHIVERINGTHORNS.get(), SUNFLOWERS.get(), DEATHWEED.get()).build(null));
     // grass
     public static final RegistryObject<Block> CORRUPT_GRASS = registerWithItem("corrupt_grass", () -> new BasePlantBlock(ModBlocks.CORRUPT_GRASS_BLOCK.get()));//腐化草
     public static final RegistryObject<Block> TR_CRIMSON_GRASS = registerWithItem("tr_crimson_grass", () -> new BasePlantBlock(ModBlocks.TR_CRIMSON_GRASS_BLOCK.get()));//猩红草
@@ -212,7 +211,7 @@ public final class ModBlocks {
     public static final RegistryObject<CrackedBrickBlock> CRACKED_BLUE_BRICK = registerWithItem("cracked_blue_brick", CrackedBrickBlock::new);
     public static final RegistryObject<CrackedBrickBlock> CRACKED_GREEN_BRICK = registerWithItem("cracked_green_brick", CrackedBrickBlock::new);
     public static final RegistryObject<CrackedBrickBlock> CRACKED_PINK_BRICK = registerWithItem("cracked_pink_brick", CrackedBrickBlock::new);
-    // 以太块
+    // 镒块
     public static final RegistryObject<Block> AETHERIUM_BLOCK = registerWithItem("aetherium_block", CustomModelBlock::new);
     public static final RegistryObject<BlockEntityType<SignBlockEntity>> SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register("sign_block_entity", () -> BlockEntityType.Builder.of(SignBlockEntity::new, LogBlocks.getSignBlocks()).build(null));
     public static final RegistryObject<Block> DARK_AETHERIUM_BLOCK = registerWithItem("dark_aetherium_block", CustomModelBlock::new);
@@ -234,18 +233,9 @@ public final class ModBlocks {
     public static final RegistryObject<WhitePlasticChairBlock> WHITE_PLASTIC_CHAIR_BLOCK = registerWithItem("white_plastic_chair", WhitePlasticChairBlock::new, supplier -> () -> new WhitePlasticChairBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<WhitePlasticChairBlock.Entity>> WHITE_PLASTIC_CHAIR_ENTITY = BLOCK_ENTITIES.register("white_plastic_chair_entity", () -> BlockEntityType.Builder.of(WhitePlasticChairBlock.Entity::new, WHITE_PLASTIC_CHAIR_BLOCK.get()).build(null));
 
-    public static final RegistryObject<Block> TEST_CROP = registerWithItem("test_crop", () -> new TestCropBlock(BlockBehaviour.Properties.copy(
-            Blocks.WHEAT
-    )));
-    public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(
-        Blocks.DANDELION
-    ).offsetType(BlockBehaviour.OffsetType.NONE)));
-    public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(
-        Blocks.DANDELION
-    ).offsetType(BlockBehaviour.OffsetType.NONE)));
-    public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(
-        Blocks.WHEAT
-    ).offsetType(BlockBehaviour.OffsetType.NONE)));
+    public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
+    public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
+    public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
 
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());

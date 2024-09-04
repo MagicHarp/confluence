@@ -9,8 +9,6 @@ import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -35,7 +33,6 @@ import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
-import org.confluence.mod.util.ModUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -44,7 +41,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(Entity.class)
@@ -259,36 +255,6 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
         }
     }
 
-
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void tick(CallbackInfo ci) {
-        Vec3 start = getPosition(1.0F);
-        Vec3 end = start.add(getDeltaMovement());
-
-        AABB boundingBox = getBoundingBox().expandTowards(getDeltaMovement()).inflate(0.1);
-
-        List<Entity> entities = level().getEntities(this.self(), boundingBox, Entity::isAlive);
-        for (Entity entity : entities) {
-            if (entity instanceof Mob mob) {
-                if (this.self() instanceof Mob selfMob){
-                    if ((selfMob.getTarget() != null && mob.getTarget() != null) && (selfMob.getTarget().equals(mob) || mob.getTarget().equals(selfMob))){
-                        if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
-                            if (selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue() <= 0) {
-                                selfMob.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.0);
-                            }
-                            mob.hurt(level().damageSources().mobAttack(selfMob), (float) selfMob.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                            if (mob.getAttribute(Attributes.KNOCKBACK_RESISTANCE) != null) {
-                                if (mob.getAttribute(Attributes.KNOCKBACK_RESISTANCE).getValue() == 100) {
-                                    ModUtils.knockBackA2B(selfMob, entity, selfMob.getAttribute(Attributes.ATTACK_KNOCKBACK).getValue(), 0.2);
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
     @Unique
     private static void confluence$setup(Entity entity, int coolDown, double y) {
         IEntity iEntity = (IEntity) entity;

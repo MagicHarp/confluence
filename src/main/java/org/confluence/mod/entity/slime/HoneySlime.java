@@ -2,28 +2,34 @@ package org.confluence.mod.entity.slime;
 
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.confluence.mod.client.color.FloatRGB;
-import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
-import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HoneySlime extends Slime implements DeathAnimOptions {
-    private final ItemStack itemStack;
+    public static final int GROW_TIME = 20000;
     private final FloatRGB color;
+    private int growTime = GROW_TIME;
 
     public HoneySlime(EntityType<? extends Slime> slime, Level level, int color) {
         super(slime, level);
@@ -31,20 +37,21 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
         setSize(2, true);
         ItemStack itemStack = new ItemStack(Materials.GEL.get());
         ColoredItem.setColor(itemStack, color);
-        this.itemStack = itemStack;
         this.color = FloatRGB.fromInteger(color);
     }
 
     public static AttributeSupplier.Builder createSlimeAttributes(float attackDamage, int armor, float maxHealth) {
         return Mob.createMobAttributes()
-            .add(Attributes.ATTACK_DAMAGE, attackDamage)
-            .add(Attributes.ARMOR, armor)
-            .add(Attributes.MAX_HEALTH, maxHealth);
+                .add(Attributes.ATTACK_DAMAGE, attackDamage)
+                .add(Attributes.ARMOR, armor)
+                .add(Attributes.MAX_HEALTH, maxHealth);
     }
 
     @Override
+    public void setTarget(@Nullable LivingEntity pTarget) {}
+
+    @Override
     public void tick() {
-        this.setTarget(null);
         resetFallDistance();
         if (onGround() && !((SlimeAccessor) this).isWasOnGround()) {
             int i = getSize();
@@ -56,13 +63,13 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
                 level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HONEY_BLOCK.defaultBlockState()), getX() + (double) f2, getY(), getZ() + (double) f3, color.red(), color.green(), color.blue());
             }
         }
-        if (getSize() < 3){
-            if (level().random.nextDouble() <= 0.00005D) {
-                setSize(getSize() + 1, false);
-            }
+        if (!level().isClientSide && getSize() < 3 && growTime-- <= 0) {
+            setSize(getSize() + 1, false);
+            growTime = GROW_TIME;
         }
         super.tick();
     }
+
     @Override
     protected boolean spawnCustomParticles() {
         return true;
@@ -70,12 +77,7 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
 
     @Override
     public void setSize(int pSize, boolean init) {
-        int i;
-        if (!init){
-            i = Mth.clamp(pSize, 1, 127);
-        } else {
-            i = 2;
-        }
+        int i = init ? 2 : Mth.clamp(pSize, 1, 127);
         entityData.set(ID_SIZE, i);
         reapplyPosition();
         refreshDimensions();
@@ -91,14 +93,24 @@ public class HoneySlime extends Slime implements DeathAnimOptions {
         invalidateCaps();
     }
 
-    public static void dropColoredGel(LivingEntity living) {
-        if (living instanceof HoneySlime baseSlime && living.getType() != ModEntities.PINK_SLIME.get()) {
-            ModUtils.createItemEntity(baseSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
-        }
+    @Override
+    public float[] getBloodColor() {
+        return color.mixture(FloatRGB.ZERO, 0.5F).toArray();
     }
 
     @Override
-    public float[] getBloodColor(){
-        return color.mixture(new FloatRGB(0,0,0),0.5f).toArray();
+    protected @NotNull InteractionResult mobInteract(@NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+        if (level().isClientSide) return super.mobInteract(pPlayer, pHand);
+        ItemStack item = pPlayer.getItemInHand(pHand);
+        if (getSize() == 3 && item.is(Items.GLASS_BOTTLE)) {
+            setSize(level().random.nextInt(1, 3), false);
+            pPlayer.addItem(new ItemStack(Items.HONEY_BOTTLE));
+            if (!pPlayer.getAbilities().instabuild) item.shrink(1);
+            level().playSound(null, getX(), getY(), getZ(), SoundEvents.HONEY_DRINK, SoundSource.AMBIENT, 3.0F, 1.5F);
+
+            dropFromLootTable(damageSources().playerAttack(pPlayer), true);
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.PASS;
     }
 }

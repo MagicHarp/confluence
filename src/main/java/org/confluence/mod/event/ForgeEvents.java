@@ -5,13 +5,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -35,11 +32,9 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -60,17 +55,9 @@ import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
-import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
-import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
-import org.confluence.mod.entity.slime.HoneySlime;
-import org.confluence.mod.entity.slime.NonDropSlime;
-import org.confluence.mod.item.ModItems;
-import org.confluence.mod.item.common.ColoredItem;
-import org.confluence.mod.item.common.Materials;
-import org.confluence.mod.item.common.TestStickItem;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
 import org.confluence.mod.item.curio.expert.BrainOfConfusion;
@@ -222,10 +209,6 @@ public final class ForgeEvents {
                 ModUtils.dropMoney(amount, living.getX(), living.getEyeY() - 0.3, living.getZ(), level);
             }
         }
-        if (!living.level().isClientSide) {
-            BaseSlime.dropColoredGel(living);
-            BlackSlime.dropColoredGel(living);
-        }
     }
 
     @SubscribeEvent
@@ -274,41 +257,6 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void livingAttack(LivingAttackEvent event) {
-        if (event.getSource().getEntity() instanceof BlackSlime blackSlime) {
-            if (blackSlime.getSize() == 2) {
-                if (ModUtils.isMaster(blackSlime.level())) {
-                    if (event.getEntity() instanceof Player player) {
-                        player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0, false, false, false));
-                    }
-                } else if (ModUtils.isExpert(blackSlime.level())) {
-                    if (blackSlime.level().random.nextFloat() <= 0.5F) {
-                        if (event.getEntity() instanceof Player player) {
-                            player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0, false, false, false));
-                        }
-                    }
-                }
-            }
-        }
-        if (event.getSource().getEntity() instanceof BaseSlime slime) {
-            if (slime.getType().equals(ModEntities.ICE_SLIME.get())) {
-                if (ModUtils.isMaster(slime.level())) {
-                    if (event.getEntity() instanceof Player player) {
-                        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
-                    }
-                } else if (ModUtils.isExpert(slime.level())) {
-                    if (slime.level().random.nextFloat() <= 0.5F) {
-                        if (event.getEntity() instanceof Player player) {
-                            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, false, false));
-                        }
-                    }
-                }
-            }
-        }
-        if (event.getSource().getEntity() instanceof NonDropSlime slime) {
-            if (slime.getType().equals(ModEntities.LAVA_SLIME.get())) {
-                event.getEntity().setRemainingFireTicks(100);
-            }
-        }
         if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {
             if (livingEntity.getMainHandItem().getItem() instanceof BloodButchereSword) {
                 if (event.getEntity().hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
@@ -319,88 +267,6 @@ public final class ForgeEvents {
                     }
                 } else {
                     event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0, false, false, false));
-                }
-            }
-            if (livingEntity.getMainHandItem().getItem() instanceof TestStickItem){
-                if (event.getSource().getEntity().isShiftKeyDown()){
-                    for (Entity entity : event.getSource().getEntity().level().getEntitiesOfClass(event.getEntity().getClass(), event.getSource().getEntity().getBoundingBox().inflate(50))){
-                        entity.remove(Entity.RemovalReason.DISCARDED);
-                    }
-                } else {
-                    event.getEntity().remove(Entity.RemovalReason.DISCARDED);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void livingInteract(PlayerInteractEvent.EntityInteract event) {
-        event.setResult(Event.Result.DEFAULT);
-        Player player = event.getEntity();
-        Entity entity = event.getTarget();
-        Level level = event.getLevel();
-        ItemStack item = event.getItemStack();
-        if (entity instanceof BaseSlime slime) {
-            if (item.is(ModItems.HONEY_BUCKET.get()) || item.is(ModItems.BOTTOMLESS_HONEY_BUCKET.get())) {
-                if (slime.getType().equals(ModEntities.BLUE_SLIME.get()) || slime.getType().equals(ModEntities.GREEN_SLIME.get()) ||
-                    slime.getType().equals(ModEntities.PURPLE_SLIME.get())) {
-                    HoneySlime honeySlime = new HoneySlime(ModEntities.HONEY_SLIME.get(), level, 0xf8e234);
-                    honeySlime.setPos(entity.getX(), entity.getY(), entity.getZ());
-                    honeySlime.setDeltaMovement(entity.getDeltaMovement());
-                    level.addFreshEntity(honeySlime);
-                    entity.discard();
-                    if (item.is(ModItems.HONEY_BUCKET.get())) {
-                        player.setItemInHand(event.getHand(), new ItemStack(Items.BUCKET));
-                    }
-                    player.playSound(SoundEvents.HONEY_DRINK, 1, 1);
-                }
-            }
-        }
-        if (entity instanceof HoneySlime slime) {
-            if (slime.getSize() == 3) {
-                if (item.is(Items.GLASS_BOTTLE)) {
-                    slime.setSize(level.random.nextInt(1, 3), false);
-                    player.addItem(new ItemStack(Items.HONEY_BOTTLE));
-                    player.setItemInHand(event.getHand(), new ItemStack(Items.GLASS_BOTTLE, player.getItemInHand(event.getHand()).getCount() - 1));
-                    player.playSound(SoundEvents.HONEY_DRINK, 3, 1.5F);
-                    ItemStack itemStack = new ItemStack(Materials.GEL.get(), level.random.nextInt(1, 30));
-                    ColoredItem.setColor(itemStack, 0xf8e234);
-                    ModUtils.createItemEntity(itemStack, slime.getX(), slime.getY(), slime.getZ(), level);
-                }
-            }
-        }
-        if (item.is(ModItems.TEST_STICK.get())){
-            if (item.getItem() instanceof TestStickItem stickItem) {
-                Mob mob;
-                if (entity instanceof Mob m) {
-                    mob = m;
-                } else {
-                    entity.remove(Entity.RemovalReason.KILLED);
-                    mob = null;
-                }
-                if (stickItem.getClickCount() == 0) {
-                    if (stickItem.getWaitTick() == 0) {
-                        if (mob != null){
-                            stickItem.setFirstClickEntity((LivingEntity) entity);
-                            player.sendSystemMessage(Component.translatable("info.confluence.choosemob", stickItem.getFirstClickEntity().getDisplayName()));
-                            stickItem.setClickCount(1);
-                            stickItem.setWaitTick(20);
-                        }
-                    }
-                } else if (stickItem.getClickCount() == 1) {
-                    if (stickItem.getWaitTick() == 0){
-                        if (!mob.equals(stickItem.getFirstClickEntity()) && stickItem.getFirstClickEntity() != null){
-                            mob.setTarget(stickItem.getFirstClickEntity());
-                            Mob selfMob = (Mob) stickItem.getFirstClickEntity();
-                            if (selfMob != null){
-                                selfMob.setTarget(mob);
-                                player.sendSystemMessage(Component.translatable("info.confluence.mobattackmob", mob.getDisplayName(), selfMob.getDisplayName()));
-                            }
-                            stickItem.setClickCount(0);
-                            stickItem.setWaitTick(20);
-                            stickItem.setFirstClickEntity(null);
-                        }
-                    }
                 }
             }
         }

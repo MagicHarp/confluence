@@ -1,5 +1,6 @@
 package org.confluence.mod.entity.slime;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -10,31 +11,21 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.item.common.ColoredItem;
-import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 public class BlackSlime extends Slime implements DeathAnimOptions {
-    private final ItemStack itemStack;
     private final FloatRGB color;
 
     public BlackSlime(EntityType<BlackSlime> slime, Level level) {
         super(slime, level);
-        ItemStack itemStack = new ItemStack(Materials.GEL.get());
-        ColoredItem.setColor(itemStack, 0x373535);
-        this.itemStack = itemStack;
         this.color = FloatRGB.fromInteger(0x373535);
     }
 
@@ -114,14 +105,23 @@ public class BlackSlime extends Slime implements DeathAnimOptions {
         setHealth(getMaxHealth());
     }
 
-    public static void dropColoredGel(LivingEntity living) { // todo 删除硬编码
-        if (living instanceof BlackSlime blackSlime) {
-            ModUtils.createItemEntity(blackSlime.itemStack.copy(), living.getX(), living.getY(), living.getZ(), living.level(), 0);
-        }
-    }
-
     @Override
     public float[] getBloodColor(){
         return color.toArray();
+    }
+
+    @Override
+    protected void dealDamage(@NotNull LivingEntity pLivingEntity) {
+        if (isAlive()) {
+            int i = getSize();
+            if (distanceToSqr(pLivingEntity) < 0.6 * (double)i * 0.6 * (double)i && hasLineOfSight(pLivingEntity) && pLivingEntity.hurt(damageSources().mobAttack(this), getAttackDamage())) {
+                playSound(SoundEvents.SLIME_ATTACK, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+                doEnchantDamageEffects(this, pLivingEntity);
+
+                if (ModUtils.isMaster(level()) || (ModUtils.isExpert(level()) && level().random.nextBoolean())) {
+                    pLivingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0), this);
+                }
+            }
+        }
     }
 }
