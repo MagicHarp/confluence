@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:lucky_coin"
+        },
+        {
+            "item": "confluence:gold_ring"
+        }
+    ],
+    "result": {
+        "item": "confluence:coin_ring"
+    }
+}

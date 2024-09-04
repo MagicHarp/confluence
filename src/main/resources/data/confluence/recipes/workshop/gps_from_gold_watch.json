@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:compass"
+        },
+        {
+            "item": "confluence:depth_meter"
+        },
+        {
+            "item": "confluence:gold_watch"
+        }
+    ],
+    "result": {
+        "item": "confluence:gps",
+        "count": 1
+    }
+}

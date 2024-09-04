@@ -2,13 +2,13 @@
     "type": "confluence:workshop",
     "ingredients": [
         {
-            "tag": "confluence:minute_watch"
+            "item": "confluence:compass"
         },
         {
             "item": "confluence:depth_meter"
         },
         {
-            "item": "confluence:compass"
+            "item": "confluence:platinum_watch"
         }
     ],
     "result": {

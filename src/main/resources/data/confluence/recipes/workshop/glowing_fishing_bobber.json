@@ -1,0 +1,16 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:fishing_bobber"
+        },
+        {
+            "item": "confluence:falling_star",
+            "count": 5
+        }
+    ],
+    "result": {
+        "item": "confluence:glowing_fishing_bobber",
+        "count": 1
+    }
+}
