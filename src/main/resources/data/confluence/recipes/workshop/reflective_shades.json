@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:blindfold"
+        },
+        {
+            "item": "confluence:pocket_mirror"
+        }
+    ],
+    "result": {
+        "item": "confluence:reflective_shades",
+        "count": 1
+    }
+}

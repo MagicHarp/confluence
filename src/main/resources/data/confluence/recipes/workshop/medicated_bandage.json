@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:adhesive_bandage"
+        },
+        {
+            "item": "confluence:bezoar"
+        }
+    ],
+    "result": {
+        "item": "confluence:medicated_bandage",
+        "count": 1
+    }
+}
