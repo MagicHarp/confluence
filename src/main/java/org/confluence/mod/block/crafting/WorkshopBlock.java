@@ -16,6 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.menu.WorkshopMenu;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class WorkshopBlock extends Block implements CustomModel {
     private static final Component CONTAINER_TITLE = Component.translatable("container.confluence.workshop");
@@ -29,12 +30,13 @@ public class WorkshopBlock extends Block implements CustomModel {
         if (pLevel.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            pPlayer.openMenu(getMenuProvider(pLevel, pPos));
+            pPlayer.openMenu(pState.getMenuProvider(pLevel, pPos));
             return InteractionResult.CONSUME;
         }
     }
 
-    public static @NotNull MenuProvider getMenuProvider(Level pLevel, @NotNull BlockPos pPos) {
+    @Override
+    public @Nullable MenuProvider getMenuProvider(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
         return new SimpleMenuProvider((pContainerId, pPlayerInventory, pPlayer) -> new WorkshopMenu(pContainerId, pPlayerInventory, ContainerLevelAccess.create(pLevel, pPos)), CONTAINER_TITLE);
     }
 }
