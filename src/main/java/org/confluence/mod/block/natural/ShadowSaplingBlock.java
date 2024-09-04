@@ -1,17 +1,16 @@
 package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.jetbrains.annotations.NotNull;
 
-public class ShadowSaplingBlock extends SaplingBlock implements CustomModel {
+public class ShadowSaplingBlock extends SaplingBlock implements CustomModel, CustomItemModel {
     public ShadowSaplingBlock(AbstractTreeGrower pTreeGrower, Properties pProperties) {
         super(pTreeGrower, pProperties);
     }
