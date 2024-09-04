@@ -2,19 +2,19 @@
     "type": "confluence:workshop",
     "ingredients": [
         {
-            "item": "confluence:detoxification_capsule"
+            "item": "confluence:reflective_shades"
         },
         {
-            "item": "confluence:nutrient_solution"
+            "item": "confluence:countercurse_mantra"
         },
         {
-            "item": "confluence:searchlight"
+            "item": "confluence:medicated_bandage"
         },
         {
             "item": "confluence:the_plan"
         },
         {
-            "item": "confluence:explorers_equipment"
+            "item": "confluence:armor_bracing"
         }
     ],
     "result": {

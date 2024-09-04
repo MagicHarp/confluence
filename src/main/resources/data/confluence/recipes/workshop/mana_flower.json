@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:mana_potion"
+        },
+        {
+            "item": "confluence:natures_gift"
+        }
+    ],
+    "result": {
+        "item": "confluence:mana_flower"
+    }
+}

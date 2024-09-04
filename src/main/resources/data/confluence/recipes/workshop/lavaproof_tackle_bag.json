@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:angler_tackle_bag"
+        },
+        {
+            "item": "confluence:lavaproof_fishing_hook"
+        }
+    ],
+    "result": {
+        "item": "confluence:lavaproof_tackle_bag",
+        "count": 1
+    }
+}

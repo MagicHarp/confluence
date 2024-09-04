@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:mana_regeneration_band"
+        },
+        {
+            "item": "confluence:shackle"
+        }
+    ],
+    "result": {
+        "item": "confluence:magic_cuffs",
+        "count": 1
+    }
+}

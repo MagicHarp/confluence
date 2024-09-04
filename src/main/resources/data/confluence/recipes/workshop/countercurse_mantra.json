@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:megaphone"
+        },
+        {
+            "item": "confluence:nazar"
+        }
+    ],
+    "result": {
+        "item": "confluence:countercurse_mantra",
+        "count": 1
+    }
+}

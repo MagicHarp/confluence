@@ -1,0 +1,18 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:high_test_fishing_line"
+        },
+        {
+            "item": "confluence:tackle_box"
+        },
+        {
+            "item": "confluence:angler_earring"
+        }
+    ],
+    "result": {
+        "item": "confluence:angler_tackle_bag",
+        "count": 1
+    }
+}

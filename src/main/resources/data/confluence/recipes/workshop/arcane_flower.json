@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:mana_flower"
+        },
+        {
+            "item": "confluence:putrid_scent"
+        }
+    ],
+    "result": {
+        "item": "confluence:arcane_flower",
+        "count": 1
+    }
+}

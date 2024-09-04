@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:magic_cuffs"
+        },
+        {
+            "item": "confluence:celestial_magnet"
+        }
+    ],
+    "result": {
+        "item": "confluence:celestial_cuffs",
+        "count": 1
+    }
+}

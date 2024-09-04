@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:celestial_magnet"
+        },
+        {
+            "item": "confluence:avenger_emblem"
+        }
+    ],
+    "result": {
+        "item": "confluence:celestial_emblem",
+        "count": 1
+    }
+}

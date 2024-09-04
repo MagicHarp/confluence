@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:band_of_regeneration"
+        },
+        {
+            "item": "confluence:philosophers_stone"
+        }
+    ],
+    "result": {
+        "item": "confluence:charm_of_myths",
+        "count": 1
+    }
+}

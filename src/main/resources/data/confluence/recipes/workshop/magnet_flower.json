@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:celestial_magnet"
+        },
+        {
+            "item": "confluence:mana_flower"
+        }
+    ],
+    "result": {
+        "item": "confluence:magnet_flower",
+        "count": 1
+    }
+}

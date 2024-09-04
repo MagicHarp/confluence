@@ -1,0 +1,15 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:star_cloak"
+        },
+        {
+            "item": "confluence:mana_flower"
+        }
+    ],
+    "result": {
+        "item": "confluence:mana_cloak",
+        "count": 1
+    }
+}
