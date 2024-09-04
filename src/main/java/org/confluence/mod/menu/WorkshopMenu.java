@@ -24,17 +24,31 @@ public class WorkshopMenu extends AbstractContainerMenu {
         this(pContainerId, inventory, ContainerLevelAccess.NULL);
     }
 
+    /*
+     * 00 01 02 03
+     * 11       04
+     * 10       05
+     * 09 08 07 06
+     */
     public WorkshopMenu(int pContainerId, Inventory pPlayerInventory, final ContainerLevelAccess pAccess) {
         super(ModMenus.WORKSHOP.get(), pContainerId);
         this.player = pPlayerInventory.player;
         this.access = pAccess;
-        addSlot(new AmountResultSlot(craftSlots, resultSlots, 0, 143, 33));
+        addSlot(new AmountResultSlot(craftSlots, resultSlots, 0, 80, 35));
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 3; j++) {
-                addSlot(new Slot(craftSlots, j + i * 3, 13 + j * 18, 8 + i * 18));
-            }
-        }
+        addSlot(new Slot(craftSlots, 0, 53, 8));
+        addSlot(new Slot(craftSlots, 1, 71, 8));
+        addSlot(new Slot(craftSlots, 2, 89, 8));
+        addSlot(new Slot(craftSlots, 3, 107, 8));
+        addSlot(new Slot(craftSlots, 4, 107, 26));
+        addSlot(new Slot(craftSlots, 5, 107, 44));
+        addSlot(new Slot(craftSlots, 6, 107, 62));
+        addSlot(new Slot(craftSlots, 7, 89, 62));
+        addSlot(new Slot(craftSlots, 8, 71, 62));
+        addSlot(new Slot(craftSlots, 9, 53, 62));
+        addSlot(new Slot(craftSlots, 10, 53, 44));
+        addSlot(new Slot(craftSlots, 11, 53, 26));
+
         for (int k = 0; k < 3; k++) {
             for (int l = 0; l < 9; l++) {
                 addSlot(new Slot(pPlayerInventory, l + k * 9 + 9, 8 + l * 18, 84 + k * 18));

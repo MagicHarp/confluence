@@ -1,7 +1,6 @@
 package org.confluence.mod.client.handler;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,8 +14,6 @@ import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
 public final class StepStoolHandler {
-    private static final Vec3 UP = new Vec3(0.0, 1.001, 0.0);
-    private static final Vec3 DOWN = new Vec3(0.0, -1.001, 0.0);
     private static boolean upKeyDown = false;
     private static boolean shiftKeyDown = false;
     private static int step = 0;
@@ -47,7 +44,6 @@ public final class StepStoolHandler {
 
         if (KeyBindings.STEP_STOOL.get().isDown()) {
             if (!upKeyDown && step < maxStep) {
-                localPlayer.move(MoverType.SELF, UP);
                 setStep(step + 1, true);
                 upKeyDown = true;
             }
@@ -57,7 +53,6 @@ public final class StepStoolHandler {
 
         if (!upKeyDown && localPlayer.isShiftKeyDown()) {
             if (!shiftKeyDown && step > 0) {
-                localPlayer.move(MoverType.SELF, DOWN);
                 setStep(step - 1, false);
                 shiftKeyDown = true;
             }

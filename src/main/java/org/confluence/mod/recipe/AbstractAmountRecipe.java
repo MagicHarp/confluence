@@ -10,7 +10,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -36,19 +35,6 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
-        if (pContainer instanceof Inventory inventory) {
-            found:
-            for (Ingredient ingredient : ingredients) {
-                for (ItemStack itemStack : inventory.items) {
-                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
-                        continue found;
-                    }
-                }
-                return false;
-            }
-            return true;
-        }
-
         found:
         for (Ingredient ingredient : ingredients) {
             for (int index = 0; index < pContainer.getContainerSize(); index++) {
@@ -64,28 +50,20 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull ItemStack assemble(@NotNull Container pContainer, @NotNull RegistryAccess pRegistryAccess) {
-        if (pContainer instanceof Inventory inventory) {
-            for (Ingredient ingredient : ingredients) {
-                for (int index = 0; index < inventory.items.size(); index++) {
-                    ItemStack itemStack = inventory.items.get(index);
-                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
-                        pContainer.removeItem(index, ((AmountIngredient) ingredient).getCount());
-                        break;
-                    }
-                }
-            }
-        } else {
-            for (Ingredient ingredient : ingredients) {
-                for (int index = 0; index < pContainer.getContainerSize(); index++) {
-                    ItemStack itemStack = pContainer.getItem(index);
-                    if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
-                        pContainer.removeItem(index, ((AmountIngredient) ingredient).getCount());
-                        break;
-                    }
+        extractIngredients(pContainer, ingredients);
+        return getResultItem(pRegistryAccess);
+    }
+
+    public static void extractIngredients(Container pContainer, NonNullList<Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients) {
+            for (int index = 0; index < pContainer.getContainerSize(); index++) {
+                ItemStack itemStack = pContainer.getItem(index);
+                if (!itemStack.isEmpty() && ingredient.test(itemStack)) {
+                    pContainer.removeItem(index, ((AmountIngredient) ingredient).getCount());
+                    break;
                 }
             }
         }
-        return getResultItem(pRegistryAccess);
     }
 
     public ItemStack assemble(Container container, Level level) {

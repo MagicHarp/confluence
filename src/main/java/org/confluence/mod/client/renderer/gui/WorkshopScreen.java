@@ -10,7 +10,8 @@ import org.confluence.mod.menu.WorkshopMenu;
 import org.jetbrains.annotations.NotNull;
 
 public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
-    private static final ResourceLocation BG_LOCATION = new ResourceLocation(Confluence.MODID, "textures/gui/container/workshop.png");
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(Confluence.MODID, "textures/gui/container/workshop.png");
+    private static final ResourceLocation BLANK = new ResourceLocation(Confluence.MODID, "textures/gui/container/blank.png");
 
     public WorkshopScreen(WorkshopMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -19,10 +20,7 @@ public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
     @Override
     protected void init() {
         super.init();
-        this.imageWidth = 176;
-        this.imageHeight = 166;
-        this.titleLabelX = imageWidth - 8 - font.width(title);
-        this.inventoryLabelX = imageWidth - 8 - font.width(playerInventoryTitle);
+        this.titleLabelY = -3;
     }
 
     @Override
@@ -34,6 +32,10 @@ public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
     @Override
     protected void renderBg(@NotNull GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         renderBackground(pGuiGraphics);
-        pGuiGraphics.blit(BG_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+        int top = topPos - 9;
+        int blankHeight = font.lineHeight + 3;
+        pGuiGraphics.blit(BACKGROUND, leftPos, top, 0, 0, imageWidth, 4);
+        pGuiGraphics.blit(BLANK, leftPos, top += 4, 0, 0, imageWidth, blankHeight, imageWidth, 1);
+        pGuiGraphics.blit(BACKGROUND, leftPos, top + blankHeight, 0, 7, imageWidth, imageHeight - 7);
     }
 }

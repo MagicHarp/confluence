@@ -29,6 +29,7 @@ public record StepStoolStepPacketC2S(int slot, int step, boolean increase) {
             if (packet.step == 1 && packet.increase) {
                 StepStoolEntity pEntity = new StepStoolEntity(serverPlayer);
                 serverPlayer.level().addFreshEntity(pEntity);
+                serverPlayer.teleportRelative(0.0, 1.001, 0.0);
                 CuriosUtils.getSlot(serverPlayer, "accessory", packet.slot).ifPresent(itemStack -> {
                     if (itemStack.getItem() instanceof StepStool) {
                         itemStack.getOrCreateTag().putInt("id", pEntity.getId());
@@ -44,6 +45,9 @@ public record StepStoolStepPacketC2S(int slot, int step, boolean increase) {
                                 stepStool.setOwner(null);
                             } else {
                                 stepStool.setStep(packet.step);
+                                if (packet.increase) {
+                                    serverPlayer.teleportRelative(0.0, 1.001, 0.0);
+                                }
                             }
                         }
                     }
