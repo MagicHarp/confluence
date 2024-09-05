@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:medicated_bandage",
-        "count": 1
+        "item": "confluence:medicated_bandage"
     }
 }

@@ -141,9 +141,7 @@ public class WorkshopMenu extends AbstractContainerMenu {
             ItemStack itemStack = recipe.getResultItem(null).copy();
             if (itemStack.isItemEnabled(player.level().enabledFeatures())) {
                 resultSlot.setItem(0, itemStack);
-                if (getSlot(0) instanceof AmountResultSlot amountResultSlot) {
-                    amountResultSlot.setCurrentRecipe(recipe);
-                }
+                setCurrentRecipe(recipe);
             } else {
                 resultSlot.setItem(0, ItemStack.EMPTY);
             }
@@ -173,21 +171,27 @@ public class WorkshopMenu extends AbstractContainerMenu {
     public void slotsChanged(@NotNull Container pContainer) {
         recipes.clear();
         this.recipes = player.level().getRecipeManager().getRecipesFor(ModRecipes.WORKSHOP_TYPE.get(), pContainer, player.level());
+        if (selectedRecipeIndex.get() >= recipes.size()) selectedRecipeIndex.set(recipes.size() - 1);
         access.execute((level, pos) -> {
             if (player instanceof ServerPlayer serverPlayer) {
                 ItemStack itemStack = ItemStack.EMPTY;
                 if (!recipes.isEmpty()) {
-                    WorkshopRecipe recipe = recipes.get(0);
-                    itemStack = recipe.getResultItem(level.registryAccess()).copy();
-                    if (getSlot(0) instanceof AmountResultSlot amountResultSlot) {
-                        amountResultSlot.setCurrentRecipe(recipe);
-                    }
+                    if (selectedRecipeIndex.get() == -1) selectedRecipeIndex.set(0);
+                    WorkshopRecipe recipe = recipes.get(selectedRecipeIndex.get());
+                    itemStack = recipe.getResultItem(null).copy();
+                    setCurrentRecipe(recipe);
                 }
                 resultSlot.setItem(0, itemStack);
                 setRemoteSlot(0, itemStack);
                 serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(containerId, incrementStateId(), 0, itemStack));
             }
         });
+    }
+
+    private void setCurrentRecipe(WorkshopRecipe recipe) {
+        if (getSlot(0) instanceof AmountResultSlot amountResultSlot) {
+            amountResultSlot.setCurrentRecipe(recipe);
+        }
     }
 
     @Override

@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:gps",
-        "count": 1
+        "item": "confluence:gps"
     }
 }

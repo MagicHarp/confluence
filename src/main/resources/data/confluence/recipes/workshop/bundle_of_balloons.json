@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:bundle_of_balloons",
-        "count": 1
+        "item": "confluence:bundle_of_balloons"
     }
 }

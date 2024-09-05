@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:fish_finder",
-        "count": 1
+        "item": "confluence:fish_finder"
     }
 }
