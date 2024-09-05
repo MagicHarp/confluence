@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "confluence:ash_tree"
+  }
+}
