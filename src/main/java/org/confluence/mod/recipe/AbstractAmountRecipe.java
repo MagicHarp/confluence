@@ -51,7 +51,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
     @Override
     public @NotNull ItemStack assemble(@NotNull Container pContainer, @NotNull RegistryAccess pRegistryAccess) {
         extractIngredients(pContainer, ingredients);
-        return getResultItem(pRegistryAccess);
+        return getResultItem(pRegistryAccess).copy();
     }
 
     public static void extractIngredients(Container pContainer, NonNullList<Ingredient> ingredients) {
@@ -77,7 +77,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull ItemStack getResultItem(@Nullable RegistryAccess registryAccess) {
-        return result.copy();
+        return result;
     }
 
     @Override

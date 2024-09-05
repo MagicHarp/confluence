@@ -8,17 +8,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.recipe.AbstractAmountRecipe;
 import org.confluence.mod.recipe.ModRecipes;
 import org.confluence.mod.recipe.WorkshopRecipe;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkshopMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     private final Player player;
     private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 3, 4);
-    private final ResultContainer resultSlots = new ResultContainer();
+    private final ResultContainer resultSlot = new ResultContainer();
+    private final DataSlot selectedRecipeIndex = DataSlot.standalone();
+    private List<WorkshopRecipe> recipes = new ArrayList<>();
 
     public WorkshopMenu(int pContainerId, Inventory inventory) {
         this(pContainerId, inventory, ContainerLevelAccess.NULL);
@@ -34,20 +38,28 @@ public class WorkshopMenu extends AbstractContainerMenu {
         super(ModMenus.WORKSHOP.get(), pContainerId);
         this.player = pPlayerInventory.player;
         this.access = pAccess;
-        addSlot(new AmountResultSlot(craftSlots, resultSlots, 0, 80, 35));
+        addSlot(new AmountResultSlot(craftSlots, resultSlot, 0, 62, 35) {
+            @Override
+            public void onTake(@NotNull Player pPlayer, @NotNull ItemStack pStack) {
+                if (recipe != null) {
+                    AbstractAmountRecipe.extractIngredients(crafting, recipe.getIngredients());
+                    WorkshopMenu.this.setupResultSlot();
+                }
+            }
+        });
 
-        addSlot(new Slot(craftSlots, 0, 53, 8));
-        addSlot(new Slot(craftSlots, 1, 71, 8));
-        addSlot(new Slot(craftSlots, 2, 89, 8));
-        addSlot(new Slot(craftSlots, 3, 107, 8));
-        addSlot(new Slot(craftSlots, 4, 107, 26));
-        addSlot(new Slot(craftSlots, 5, 107, 44));
-        addSlot(new Slot(craftSlots, 6, 107, 62));
-        addSlot(new Slot(craftSlots, 7, 89, 62));
-        addSlot(new Slot(craftSlots, 8, 71, 62));
-        addSlot(new Slot(craftSlots, 9, 53, 62));
-        addSlot(new Slot(craftSlots, 10, 53, 44));
-        addSlot(new Slot(craftSlots, 11, 53, 26));
+        addSlot(new Slot(craftSlots, 0, 35, 8));
+        addSlot(new Slot(craftSlots, 1, 53, 8));
+        addSlot(new Slot(craftSlots, 2, 71, 8));
+        addSlot(new Slot(craftSlots, 3, 89, 8));
+        addSlot(new Slot(craftSlots, 4, 89, 26));
+        addSlot(new Slot(craftSlots, 5, 89, 44));
+        addSlot(new Slot(craftSlots, 6, 89, 62));
+        addSlot(new Slot(craftSlots, 7, 71, 62));
+        addSlot(new Slot(craftSlots, 8, 53, 62));
+        addSlot(new Slot(craftSlots, 9, 35, 62));
+        addSlot(new Slot(craftSlots, 10, 35, 44));
+        addSlot(new Slot(craftSlots, 11, 35, 26));
 
         for (int k = 0; k < 3; k++) {
             for (int l = 0; l < 9; l++) {
@@ -57,6 +69,117 @@ public class WorkshopMenu extends AbstractContainerMenu {
         for (int m = 0; m < 9; m++) {
             addSlot(new Slot(pPlayerInventory, m, 8 + m * 18, 142));
         }
+
+        addDataSlot(selectedRecipeIndex);
+    }
+
+    public ItemStack getUpResult() {
+        int index = getUpIndex();
+        if (index == -1) return resultSlot.getItem(0);
+        return recipes.get(index).getResultItem(null);
+    }
+
+    public int getUpIndex() {
+        if (recipes.isEmpty()) return -1;
+        if (recipes.size() == 1) {
+            return 0;
+        } else if (isValidRecipeIndex(selectedRecipeIndex.get())) {
+            if (selectedRecipeIndex.get() == 0) {
+                return recipes.size() - 1;
+            } else {
+                return selectedRecipeIndex.get() - 1;
+            }
+        }
+        return -1;
+    }
+
+    public ItemStack getDownResult() {
+        int index = getDownIndex();
+        if (index == -1) return resultSlot.getItem(0);
+        return recipes.get(index).getResultItem(null);
+    }
+
+    public int getDownIndex() {
+        if (recipes.isEmpty()) return -1;
+        if (recipes.size() == 1) {
+            return 0;
+        } else if (isValidRecipeIndex(selectedRecipeIndex.get())) {
+            int next = selectedRecipeIndex.get() + 1;
+            if (next == recipes.size()) {
+                return 0;
+            } else {
+                return next;
+            }
+        }
+        return -1;
+    }
+
+    private boolean isValidRecipeIndex(int pRecipeIndex) {
+        return pRecipeIndex >= 0 && pRecipeIndex < recipes.size();
+    }
+
+    @Override
+    public boolean clickMenuButton(@NotNull Player pPlayer, int pId) {
+        if (isValidRecipeIndex(pId)) {
+            selectedRecipeIndex.set(pId);
+            setupResultSlot();
+        }
+        return true;
+    }
+
+    private void setupResultSlot() {
+        if (!recipes.isEmpty() && isValidRecipeIndex(selectedRecipeIndex.get())) {
+            WorkshopRecipe recipe = recipes.get(selectedRecipeIndex.get());
+            ItemStack itemStack = recipe.getResultItem(null).copy();
+            if (itemStack.isItemEnabled(player.level().enabledFeatures())) {
+                resultSlot.setItem(0, itemStack);
+                if (getSlot(0) instanceof AmountResultSlot amountResultSlot) {
+                    amountResultSlot.setCurrentRecipe(recipe);
+                }
+            } else {
+                resultSlot.setItem(0, ItemStack.EMPTY);
+            }
+        } else {
+            resultSlot.setItem(0, ItemStack.EMPTY);
+        }
+        broadcastChanges();
+    }
+
+    @Override
+    public boolean stillValid(@NotNull Player pPlayer) {
+        return stillValid(access, pPlayer, ModBlocks.WORKSHOP.get());
+    }
+
+    @Override
+    public void removed(@NotNull Player pPlayer) {
+        super.removed(pPlayer);
+        access.execute((level, blockPos) -> clearContainer(pPlayer, craftSlots));
+    }
+
+    @Override
+    public boolean canTakeItemForPickAll(@NotNull ItemStack pStack, Slot pSlot) {
+        return pSlot.container != resultSlot && super.canTakeItemForPickAll(pStack, pSlot);
+    }
+
+    @Override
+    public void slotsChanged(@NotNull Container pContainer) {
+        recipes.clear();
+        this.recipes = player.level().getRecipeManager().getRecipesFor(ModRecipes.WORKSHOP_TYPE.get(), pContainer, player.level());
+        access.execute((level, pos) -> {
+            if (player instanceof ServerPlayer serverPlayer) {
+                ItemStack itemStack = ItemStack.EMPTY;
+                if (!recipes.isEmpty()) {
+                    WorkshopRecipe recipe = recipes.get(0);
+                    itemStack = recipe.getResultItem(level.registryAccess()).copy();
+                    if (getSlot(0) instanceof AmountResultSlot amountResultSlot) {
+                        amountResultSlot.setCurrentRecipe(recipe);
+                    }
+                }
+                resultSlot.setItem(0, itemStack);
+                setRemoteSlot(0, itemStack);
+                serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(containerId, incrementStateId(), 0, itemStack));
+            }
+        });
     }
 
     @Override
@@ -104,40 +227,5 @@ public class WorkshopMenu extends AbstractContainerMenu {
         }
 
         return itemStack;
-    }
-
-    @Override
-    public boolean stillValid(@NotNull Player pPlayer) {
-        return stillValid(access, pPlayer, ModBlocks.WORKSHOP.get());
-    }
-
-    @Override
-    public void removed(@NotNull Player pPlayer) {
-        super.removed(pPlayer);
-        access.execute((level, blockPos) -> clearContainer(pPlayer, craftSlots));
-    }
-
-    @Override
-    public boolean canTakeItemForPickAll(@NotNull ItemStack pStack, Slot pSlot) {
-        return pSlot.container != resultSlots && super.canTakeItemForPickAll(pStack, pSlot);
-    }
-
-    @Override
-    public void slotsChanged(@NotNull Container pContainer) {
-        access.execute((level, pos) -> {
-            if (player instanceof ServerPlayer serverPlayer) {
-                ItemStack itemstack = ItemStack.EMPTY;
-                Optional<WorkshopRecipe> optional = level.getRecipeManager().getRecipeFor(ModRecipes.WORKSHOP_TYPE.get(), pContainer, level);
-                if (optional.isPresent()) {
-                    itemstack = optional.get().getResultItem(level.registryAccess());
-                    if (getSlot(0) instanceof AmountResultSlot resultSlot) {
-                        resultSlot.setCurrentRecipe(optional.get());
-                    }
-                }
-                resultSlots.setItem(0, itemstack);
-                setRemoteSlot(0, itemstack);
-                serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(containerId, incrementStateId(), 0, itemstack));
-            }
-        });
     }
 }

@@ -1,0 +1,16 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "stone",
+            "count": 64
+        },
+        {
+            "item": "stone",
+            "count": 36
+        }
+    ],
+    "result": {
+        "item": "dirt"
+    }
+}

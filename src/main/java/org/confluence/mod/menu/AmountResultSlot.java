@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class AmountResultSlot extends Slot {
-    private final CraftingContainer crafting;
-    private @Nullable AbstractAmountRecipe recipe;
+    protected final CraftingContainer crafting;
+    protected @Nullable AbstractAmountRecipe recipe;
 
     public AmountResultSlot(CraftingContainer crafting, Container pContainer, int pSlot, int pX, int pY) {
         super(pContainer, pSlot, pX, pY);
