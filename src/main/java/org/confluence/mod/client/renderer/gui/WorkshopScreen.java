@@ -47,6 +47,8 @@ public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
             this.upItem = null;
             this.downItem = null;
         }
+        String text = menu.getRecipesAmount() == 0 ? "0/0" : menu.getCurrentIndex() + 1 + "/" + menu.getRecipesAmount();
+        pGuiGraphics.drawString(font, text, leftPos + 144, topPos + 37 + (16 - font.lineHeight) / 2, 4210752, false);
     }
 
     @Override
@@ -85,10 +87,15 @@ public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
             }
             return false;
         } else {
-            this.upButtonClicked = false;
-            this.downButtonClicked = false;
             return super.mouseClicked(pMouseX, pMouseY, pButton);
         }
+    }
+
+    @Override
+    public boolean mouseReleased(double pMouseX, double pMouseY, int pButton) {
+        this.upButtonClicked = false;
+        this.downButtonClicked = false;
+        return super.mouseReleased(pMouseX, pMouseY, pButton);
     }
 
     private static boolean isOverUpButton(int x, int y) {

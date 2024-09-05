@@ -73,6 +73,14 @@ public class WorkshopMenu extends AbstractContainerMenu {
         addDataSlot(selectedRecipeIndex);
     }
 
+    public int getCurrentIndex() {
+        return selectedRecipeIndex.get();
+    }
+
+    public int getRecipesAmount() {
+        return recipes.size();
+    }
+
     public ItemStack getUpResult() {
         int index = getUpIndex();
         if (index == -1) return resultSlot.getItem(0);
