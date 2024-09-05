@@ -90,7 +90,7 @@ public final class ModTabs {
                 output.accept(TR_AMETHYST_BRANCHES.get());
                 output.accept(AETHERIUM_BLOCK.get());
                 output.accept(DARK_AETHERIUM_BLOCK.get());
-                output.accept(RUBY_SAPLING.get());
+
 
                 output.accept(PALM_LOG_BLOCKS.LOG.get());
                 output.accept(PALM_LOG_BLOCKS.LEAVES.get());

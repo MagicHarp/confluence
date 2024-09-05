@@ -11,7 +11,7 @@
     ],
     "spawners": {
         "type": "confluence:lava_slime",
-        "weight": 35,
+        "weight": 25,
         "minCount": 1,
         "maxCount": 1
     }

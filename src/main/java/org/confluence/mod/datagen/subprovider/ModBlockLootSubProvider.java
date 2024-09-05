@@ -179,13 +179,6 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         // endregion ore
 
         // gems
-        add(ModBlocks.RUBY_BRANCHES.get(), this::createRubyDrops);
-        add(ModBlocks.AMBER_BRANCHES.get(), this::createAmberDrops);
-        add(ModBlocks.TOPAZ_BRANCHES.get(), this::createTopazDrops);
-        add(ModBlocks.EMERALD_BRANCHES.get(), this::createEmeraldDrops);
-        add(ModBlocks.DIAMOND_BRANCHES.get(), this::createDiamondDrops);
-        add(ModBlocks.SAPPHIRE_BRANCHES.get(), this::createSapphireDrops);
-        add(ModBlocks.TR_AMETHYST_BRANCHES.get(), this::createAnother_AmethystDrops);
         // torch
         for (Torches torch : Torches.values()) {
             dropSelf(torch.stand.get());
@@ -289,48 +282,6 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
     private LootTable.Builder createTinOreDrop(Block block) {
         return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RAW_TIN.get())
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createRubyDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.RUBY.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createAmberDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.AMBER.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createTopazDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.TOPAZ.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createEmeraldDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.EMERALD)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createDiamondDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.DIAMOND)
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createSapphireDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.SAPPHIRE.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-            .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-        ));
-    }
-    private LootTable.Builder createAnother_AmethystDrops(Block block) {
-        return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Materials.TR_AMETHYST.get())
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
             .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
         ));
     }

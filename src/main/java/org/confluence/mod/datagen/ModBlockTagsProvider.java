@@ -113,6 +113,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.DESERT_FOSSIL.get(),
             ModBlocks.EXTRACTINATOR.get(),
             ModBlocks.DART_TRAP.get(),
+            ModBlocks.STONY_LOGS.get(),
             ModBlocks.SIGNAL_ADAPTER.get(),
             ModBlocks.SWITCH.get(),
             ModBlocks.TIMERS_BLOCK_1_1.get(),
