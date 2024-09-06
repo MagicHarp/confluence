@@ -9,5 +9,6 @@ public class ModBlocks {
 
     public static void register(IEventBus eventBus) {
         ModOreBlocks.BLOCKS.register(eventBus);
+        ModDecorativeBlocks.BLOCKS.register(eventBus);
     }
 }
