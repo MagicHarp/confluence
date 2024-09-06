@@ -8,13 +8,15 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.init.block.ModDecorativeBlocks;
 import org.confluence.mod.common.init.block.ModOreBlocks;
 
-import java.util.function.Supplier;
 
 public final class ModTabs {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Confluence.MODID);
+
+    //TODO 图标暂时为空
 
     public static final DeferredHolder<CreativeModeTab,CreativeModeTab> BUILDING_BLOCKS = TABS.register("building_blocks",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
@@ -30,6 +32,15 @@ public final class ModTabs {
                     .title(Component.translatable("creativetab.confluence.natural_blocks"))
                     .displayItems((parameters, output) -> {
                         ModOreBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get().asItem()));
+                    })
+                    .build()
+    );
+
+    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> CREATIVES = TABS.register("misc",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
+                    .title(Component.translatable("creativetab.confluence.misc"))
+                    .displayItems((parameters, output) -> {
+                        ModBlocks.BOX.getEntries().forEach(block -> output.accept(block.get().asItem()));
                     })
                     .build()
     );
