@@ -53,14 +53,14 @@ public class AchievementToast implements Toast {
     }
 
     private void renderDescription(@NotNull GuiGraphics pGuiGraphics, Font font) {
-        pGuiGraphics.blit(TEXTURE, 0, height(), 0, 0, width(), height());
+        pGuiGraphics.blit(TEXTURE, 0, height(), 0, height(), width(), height());
         List<FormattedCharSequence> list = font.split(displayinfo.getDescription(), 141);
         if (list.size() == 1) {
             pGuiGraphics.drawString(font, list.get(0), 8, 18 + height(), -1, false);
         } else {
             int l = height() * 3 / 2 - list.size() * 9 / 2;
             for (FormattedCharSequence formattedcharsequence : list) {
-                pGuiGraphics.drawString(font, formattedcharsequence, 8, l, 16777215, false);
+                pGuiGraphics.drawString(font, formattedcharsequence, 8, l, 0, false);
                 l += 9;
             }
         }
