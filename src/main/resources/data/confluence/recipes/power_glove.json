@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:feral_claws"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:power_glove",
-        "count": 1
+        "item": "confluence:power_glove"
     }
 }

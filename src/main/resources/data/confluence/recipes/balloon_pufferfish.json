@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "minecraft:pufferfish"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:balloon_pufferfish",
-        "count": 1
+        "item": "confluence:balloon_pufferfish"
     }
 }

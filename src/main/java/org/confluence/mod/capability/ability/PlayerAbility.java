@@ -7,12 +7,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
-import org.confluence.mod.item.curio.combat.IAggroAttach;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
-import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -28,10 +25,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private int maxLavaImmuneTicks;
     private transient int remainLavaImmuneTicks;
 
-    private int aggro;
-    private double dropsRange;
-    private double magicAttackBonus;
-
     public PlayerAbility() {
         this.jumpBoost = 1.0;
         this.fallResistance = 0;
@@ -39,10 +32,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = false;
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
-
-        this.aggro = 0;
-        this.dropsRange = 0.0;
-        this.magicAttackBonus = 1.0;
     }
 
     public void flushAbility(LivingEntity living) {
@@ -51,9 +40,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicInteger invul = new AtomicInteger(20);
         AtomicBoolean fire = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
-        AtomicInteger aggro = new AtomicInteger();
-        AtomicBoolean drops = new AtomicBoolean();
-        AtomicDouble bonus = new AtomicDouble(1.0);
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -71,11 +57,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof ILavaImmune iLavaImmune) {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
                 }
-                if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
-                if (item instanceof IRangePickup.Drops) drops.set(true);
-                if (item instanceof IMagicAttack iMagicAttack) {
-                    bonus.addAndGet(iMagicAttack.getMagicBonus());
-                }
             }
         });
         this.jumpBoost = jump.get();
@@ -83,9 +64,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = invul.get();
         this.fireImmune = fire.get();
         this.maxLavaImmuneTicks = lava.get();
-        this.aggro = aggro.get();
-        this.dropsRange = drops.get() ? 6.25 : 0.0;
-        this.magicAttackBonus = bonus.get();
     }
 
     public double getJumpBoost() {
@@ -118,18 +96,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return false;
     }
 
-    public int getAggro() {
-        return aggro;
-    }
-
-    public double getDropsRange() {
-        return dropsRange;
-    }
-
-    public double getMagicAttackBonus() {
-        return magicAttackBonus;
-    }
-
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
@@ -138,10 +104,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putInt("invulnerableTime", invulnerableTime);
         nbt.putBoolean("fireImmune", fireImmune);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
-
-        nbt.putInt("aggro", aggro);
-        nbt.putDouble("dropsRange", dropsRange);
-        nbt.putDouble("magicAttackBonus", magicAttackBonus);
         return nbt;
     }
 
@@ -152,10 +114,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = nbt.getInt("invulnerableTime");
         this.fireImmune = nbt.getBoolean("fireImmune");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
-
-        this.aggro = nbt.getInt("aggro");
-        this.dropsRange = nbt.getDouble("dropsRange");
-        this.magicAttackBonus = nbt.getDouble("magicAttackBonus");
     }
 
     public void copyFrom(PlayerAbility playerAbility) {
@@ -164,9 +122,5 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.invulnerableTime = playerAbility.invulnerableTime;
         this.fireImmune = playerAbility.fireImmune;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
-
-        this.aggro = playerAbility.aggro;
-        this.dropsRange = playerAbility.dropsRange;
-        this.magicAttackBonus = playerAbility.magicAttackBonus;
     }
 }

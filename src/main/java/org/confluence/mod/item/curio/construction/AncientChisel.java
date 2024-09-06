@@ -24,7 +24,6 @@ public class AncientChisel extends BaseCurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.ancient_chisel.tooltip"));
         list.add(Component.translatable("item.confluence.ancient_chisel.tooltip2"));
     }
 
@@ -32,7 +31,7 @@ public class AncientChisel extends BaseCurioItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTE == null) {
             ATTRIBUTE = ImmutableMultimap.of(
-                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Ancient Chisel", ModConfigs.ANCIENT_CHISEL_BREAK_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Ancient Chisel", ModConfigs.ANCIENT_CHISEL_MINING.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTE;

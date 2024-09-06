@@ -3,6 +3,7 @@ package org.confluence.mod.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
@@ -16,7 +17,7 @@ public class ModChineseProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("creativetab.confluence.curios", "汇流来世 | 饰品");
+        add("creativetab.confluence.accessories", "汇流来世 | 配饰");
 
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");
@@ -129,16 +130,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
         add("item.confluence.putrid_scent.tooltip", "多人模式下，敌怪不太可能以你为目标");
-        add("item.confluence.putrid_scent.tooltip2", "伤害和暴击率增加5%");
-        add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_shield.tooltip2", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
-        add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
-        add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
@@ -154,20 +151,16 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.philosophers_stone.tooltip", "减少治疗药水的冷却时间");
         add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
-        add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
         add("item.confluence.ancient_chisel.tooltip2", "“古老的问题需要古老的解决方案”");
         add("item.confluence.flower_boots.tooltip", "你走过的草地上会长出花朵");
         add("item.confluence.treasure_magnet.tooltip", "扩大物品拾取范围");
-        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
         add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
         add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
         add("item.confluence.hive_pack.tooltip", "增加友好蜜蜂的力量");
         add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
-        add("item.confluence.magic_quiver.tooltip", "箭的伤害提高10%，箭的速度大大提高");
         add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
         add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
         add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
-        add("item.confluence.sniper_scope.tooltip", "远程伤害和暴击率各提高10%");
         add("item.confluence.recon_scope.tooltip", "“发现敌人”");
         add("item.confluence.portable_cement_mixer.tooltip", "右键点击延迟降低1");
         add("item.confluence.brick_layer.tooltip", "右键点击延迟降低1");
@@ -175,9 +168,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
         add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
         add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
-        add("item.confluence.hand_of_creation.tooltip", "采矿速度提高25%");
         add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
-        add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
         add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
@@ -195,7 +186,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.anklet_of_the_wind.info3", "它可以在工作台处用孢子花和藤蔓制作。");
         add("item.confluence.blizzard_in_a_balloon.info", "它使跳跃高度、跳跃速度提高、并允许二段跳。");    // 气球通用    英文待改
         add("item.confluence.blizzard_in_a_balloon.info2", "它可以在工作台处用暴雪瓶和闪亮红气球制作。");
-        add("item.confluence.blizzard_in_a_bottole.info", "暴风瓶是困难模式前的配饰，其工作原理类似于云朵瓶，允许玩家进行二段跳。");
+        add("item.confluence.blizzard_in_a_bottole.info", "暴风瓶是配饰，其工作原理类似于云朵瓶，允许玩家进行二段跳。");
         add("item.confluence.blizzard_in_a_bottole.info2", "它可以在工作台处用云朵瓶和蓝冰制作。");
         add("item.confluence.blue_horseshoe_balloon.info", "蓝色马蹄气球是一种配饰，佩戴后可以免疫坠落伤害，增加跳跃高度，允许二段跳，并提供 +0.05 的幸运。");  // 马蹄气球通用
         add("item.confluence.blue_horseshoe_balloon.info2", "它可以在工作台处用云朵气球和幸运马掌制作。");
@@ -242,7 +233,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.honey_balloon.info", "蜂蜜气球是一款结合了闪亮红色气球和蜂窝功能的配件。");
         add("item.confluence.honey_balloon.info2", "它使跳跃高度、跳跃速度提高，并在玩家受伤时释放一小群愤怒的蜜蜂，它们会寻找并对敌人造成少量伤害。");
         add("item.confluence.honey_balloon.info3", "它可以在工作台处用闪亮红气球和蜂窝制作。");
-        add("item.confluence.ice_skates.info", "溜冰鞋是困难模式前的配饰，可以提高玩家在所有冰块上的移动控制。");
+        add("item.confluence.ice_skates.info", "溜冰鞋是配饰，可以提高玩家在所有冰块上的移动控制。");
         add("item.confluence.ice_skates.info2", "玩家加速更快，滑行距离更短，并且在坠落或跳跃着陆时不再导致薄冰破裂。");
         add("item.confluence.ice_skates.info3", "它可以在工作台处用赫尔墨斯靴和蓝冰制作。");
         add("item.confluence.lava_charm.info", "熔岩护身符是一种配饰，可以免疫熔岩 7 秒。");
@@ -251,20 +242,17 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.lava_waders.info2", "熔岩靴还允许玩家安全地浸入熔岩中 7 秒，而不会受到熔岩伤害或触发着火。");
         add("item.confluence.lava_waders.info3", "所有液体，包括熔岩，都可以在熔岩靴装备时无限期地行走。");
         add("item.confluence.lava_waders.info4", "倒计时只适用于淹没在熔岩中的情况，而玩家可以无限期地站在熔岩表面。");
-        add("item.confluence.lava_waders.info5", "它可以在工作台上使用黑曜石水上漂靴、熔岩护身符和黑曜石玫瑰或\n " +
-            "熔火护身符、水上漂靴和黑曜石玫瑰或熔火护身符、黑曜石水上漂靴和黑曜石玫瑰或\n " +
-            "熔火骷髅玫瑰，一双黑曜石水上漂靴或熔火骷髅玫瑰，以及一双水上漂靴。");
         add("item.confluence.lightning_boots.info", "闪电靴是一种配饰，其功能与幽灵靴基本相同，但运行速度更快。");
         add("item.confluence.lightning_boots.info2", "它可以在工作台处用幽灵靴，疾风脚镯和金属带扣制作。");
         add("item.confluence.lucky_horseshoe.info", "幸运马掌是一个配饰，可以抵消坠落伤害并给予+0.05点幸运。");
         add("item.confluence.lucky_horseshoe.info2", "它可以在沙漠神殿、末地城、丛林神庙或古代城内的宝箱中找到。");
-        add("item.confluence.magiluminescence.info", "魔光护符是困难模式前的配饰，可将玩家的最大移动速度提高，提高玩家的加速和减速");
+        add("item.confluence.magiluminescence.info", "魔光护符是配饰，可将玩家的最大移动速度提高，提高玩家的加速和减速");
         add("item.confluence.magiluminescence.info2", "它可以在末地城的宝箱中找到。");
         add("item.confluence.magiluminescence.info3", "这种增加与赫尔墨斯靴及其变种的加成叠加。");
         add("item.confluence.magiluminescence.info4", "当玩家不接地时，魔光护符的移动速度增益会被禁用。");
-        add("item.confluence.magma_skull.info", "岩浆骷髅头是困难模式前的免疫配饰，可使玩家免疫造成燃烧减益的方块，并给予熔岩免疫 7 秒。");
+        add("item.confluence.magma_skull.info", "岩浆骷髅头是免疫配饰，可使玩家免疫造成燃烧减益的方块，并给予熔岩免疫 7 秒。");
         add("item.confluence.magma_skull.info2", "它可以在工作台处用黑曜石骷髅头和熔岩护身符制作");
-        add("item.confluence.molten_charm.info", "熔火护身符是由熔岩护身符和黑曜石骷髅头制成的前困难模式配饰，结合了这两种物品的效果。");
+        add("item.confluence.molten_charm.info", "熔火护身符是由熔岩护身符和黑曜石骷髅头制成的配饰，结合了这两种物品的效果。");
         add("item.confluence.molten_charm.info2", "熔火护身符还可以免疫通常因接触岩浆块而造成的燃烧伤害。");// 需改英文
         add("item.confluence.molten_charm.info3", "它不能免疫其他火焰伤害");
         add("item.confluence.obsidian_horseshoe.info", "黑曜石马掌是一种结合了幸运马掌和黑曜石骷髅头功能的配饰。");
@@ -292,7 +280,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.shiny_red_balloon.info", "闪亮红气球是一个配饰，它使跳跃高度、跳跃速度提高。");
         add("item.confluence.shiny_red_balloon.info2", "当玩家拥有村庄英雄效果时，图书管理员有几率将此物品交给玩家。");
         add("item.confluence.spectre_boots.info", "幽灵靴是由 火箭靴 和 疾风雪靴、赫尔墨斯靴、沙丘行者靴或 旗鱼靴制成的配饰，并结合了它们的功能。");
-        add("item.confluence.terraspark_boots.info", "泰拉闪耀靴是困难模式前的配饰，它可以在工作台处用霜花靴和熔岩靴制作。提供这两种物品的效果。");
+        add("item.confluence.terraspark_boots.info", "泰拉闪耀靴是配饰，它可以在工作台处用霜花靴和熔岩靴制作。提供这两种物品的效果。");
         add("item.confluence.terraspark_boots.info2", "它们是 疾风雪靴、赫尔墨斯靴、沙丘行者靴、旗鱼靴和水上漂靴的最终升级。");
         add("item.confluence.tsunami_in_a_bottle.info", "海啸瓶是一种配饰，可以在沉船宝箱中找到");
         add("item.confluence.tsunami_in_a_bottle.info2", "与云朵瓶类似，它允许玩家进行二段跳。");
@@ -361,11 +349,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.gravity_globe.info2", "重力球有几率从潜影贝中掉落。");
         add("item.confluence.hive_pack.info", "蜜蜂背包是一个配件，装备后，有 1/2 （50%） 的几率用更大的“巨型蜜蜂”替换友方蜜蜂射弹。");
         add("item.confluence.hive_pack.info2", "蜜蜂背包有几率从蜜蜂身上掉落。");
-        add("item.confluence.royal_gel.info", "皇家凝胶是困难模式前的配饰，装备后可以安抚大多数史莱姆，使它们不再追击玩家，并且不会造成接触伤害或发射射弹，即使玩家对它们造成伤害。");
+        add("item.confluence.royal_gel.info", "皇家凝胶是配饰，装备后可以安抚大多数史莱姆，使它们不再追击玩家，并且不会造成接触伤害或发射射弹，即使玩家对它们造成伤害。");
         add("item.confluence.royal_gel.info2", "皇家凝胶有几率从史莱姆中掉落。");
-        add("item.confluence.shield_of_cthulhu.info", "克苏鲁之盾是困难模式前的盾牌配饰，允许玩家通过双击左键或右键来执行冲刺攻击。");
+        add("item.confluence.shield_of_cthulhu.info", "克苏鲁之盾是盾牌配饰，允许玩家通过双击左键或右键来执行冲刺攻击。");
         add("item.confluence.shield_of_cthulhu.info2", "它有几率从劫掠兽身上掉落。");
-        add("item.confluence.worm_scarf.info", "蠕虫围巾是困难模式前的配饰，可减少 17% 的伤害。");
+        add("item.confluence.worm_scarf.info", "蠕虫围巾是配饰，可减少 17% 的伤害。");
         add("item.confluence.worm_scarf.info2", "当玩家有一只被驯服的猫时，猫可能会在玩家醒来时给玩家这个物品。");
         add("item.confluence.ancient_chisel.info", "远古凿子是一种配饰，可将采矿速度提高 25%。");
         add("item.confluence.ancient_chisel.info2", "该物品可以通过考古获得。");
@@ -385,22 +373,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.flower_boots.info2", "花靴有几率从苔藓块掉落。");
         add("item.confluence.treasure_magnet.info", "宝藏磁铁是一种配饰，装备后可将物品的拾取范围增加到 6.25 米。");
         add("item.confluence.treasure_magnet.info2", "它可以在沙漠神殿、末地城、丛林神庙或古代城内的宝箱中找到。");
-        add("item.confluence.ankh_charm.info", "十字章护身符是一款困难模式免疫配饰，结合了解毒囊、营养液、计划书、探照灯和探险家宝具的效果");
+        add("item.confluence.ankh_charm.info", "十字章护身符是一款免疫配饰，结合了解毒囊、营养液、计划书、探照灯和探险家宝具的效果");
         add("item.confluence.ankh_charm.info2", "这件物品可以在工作台上使用护甲支架、药用绷带、计划书、反诅咒咒语和反光阴影制作。");  // 待改
-        add("item.confluence.ankh_shield.info", "十字章护盾 是一种困难模式护盾和免疫配饰，可提供对 10 种不同 debuff 的免疫、击退免疫和额外的 4 种防御。");
+        add("item.confluence.ankh_shield.info", "十字章护盾 是一种护盾和免疫配饰，可提供对10种不同减益的免疫、击退免疫和额外的4种防御。");
         add("item.confluence.ankh_shield.info2", "它可以在工作台处用黑曜石盾，十字章护身符制作。");
-        add("item.confluence.avenger_emblem.info", "复仇者勋章是一种困难模式配饰，可使所有武器的伤害增加 12%。");
-        add("item.confluence.avenger_emblem.info2", "这件物品可以在工作台上使用战士/游侠/巫师/召唤师徽章、五个力量之魂、五个视觉之魂和五个恐惧之魂来制作。");   // 待改
-        add("item.confluence.bee_cloak.info", "蜜蜂斗篷是困难模式的配饰，结合了星星斗篷和蜂窝的效果。");
+        add("item.confluence.avenger_emblem.info", "复仇者勋章是一种配饰，可使所有武器的伤害增加 12%。");
+        add("item.confluence.bee_cloak.info", "蜜蜂斗篷是配饰，结合了星星斗篷和蜂窝的效果。");
         add("item.confluence.bee_cloak.info2", "当玩家受伤时，三颗星星会落在玩家的当前位置，蜜蜂会被释放。");
         add("item.confluence.bee_cloak.info3", "它可以在带有蜂窝和星星斗篷的制作台上制作。");
         add("item.confluence.berserkers_glove.info", "狂战士手套是由泰坦手套和血肉指关节制作的配饰，具有两者的能力。");
-        add("item.confluence.berserkers_glove.info2", "它给予以下效果：");
-        add("item.confluence.berserkers_glove.info3", "+8 防御");
-        add("item.confluence.berserkers_glove.info4", "近战速度提高 +12%");
-        add("item.confluence.berserkers_glove.info5", "+100% 近战击退增加");
-        add("item.confluence.berserkers_glove.info6", "近战武器尺寸增加 +10%");
-        add("item.confluence.berserkers_glove.info7", "近战武器和鞭子的自动挥舞");
         add("item.confluence.bezoar.info", "牛黄是一种免疫配饰，可赋予玩家对中毒减益的免疫力。");
         add("item.confluence.bezoar.info2", "它有几率从洞穴蜘蛛中掉落。");
         add("item.confluence.black_belt.info", "黑腰带是一种配饰，有 10% 的几率躲避攻击，包括从陷阱和熔岩等危险中受到的伤害。 ");
@@ -409,14 +390,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.blindfold.info2", "它可以在古代城内的箱子中找到。");
         add("item.confluence.celestial_stone.info", "天界石是用月亮石和太阳石在工作台上制成的配饰");
         add("item.confluence.celestial_stone.info2", "它提供与其组件相同的提升，因此，它在白天和晚上都处于活动状态。");
-        add("item.confluence.celestial_stone.info3", "它可以与月亮壳结合形成天界壳。");
-        add("item.confluence.celestial_stone.info4", "属性提升：");
-        add("item.confluence.celestial_stone.info5", "+10% 近战速度");
-        add("item.confluence.celestial_stone.info6", "+10% 伤害（所有类型）");
-        add("item.confluence.celestial_stone.info7", "+2% 暴击率");
-        add("item.confluence.celestial_stone.info8", "+1 HP/s 生命恢复");
-        add("item.confluence.celestial_stone.info9", "+4 防御");
-        add("item.confluence.celestial_stone.info10", "+15% 挖矿速度");
         add("item.confluence.cobalt_shield.info", "钴盾是一种护盾配饰，装备后可使玩家免疫击退，并提供 1 点防御。");
         add("item.confluence.cobalt_shield.info2", "它有几率从劫掠兽身上掉落。");
         add("item.confluence.cross_necklace.info", "十字项链是一种配饰，可使玩家在受到伤害后获得的无敌持续时间翻倍，从大约 0.67 秒增加到大约 1.33 秒。");
@@ -429,20 +402,13 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.energy_bar.info2", "它有几率从僵尸猪灵身上掉落。");
         add("item.confluence.explorers_equipment.info", "探险家宝具是一种配件，可赋予玩家对中毒减益和凋零减益的免疫力。");
         add("item.confluence.explorers_equipment.info2", "它可以在工作台上用手钻和铅球制作。");
-        add("item.confluence.eye_of_the_golem.info", "石巨人之眼是困难模式后石巨人的配饰，可提供+10%的暴击率。");
+        add("item.confluence.eye_of_the_golem.info", "石巨人之眼是配饰，可提供+10%的暴击率。");
         add("item.confluence.eye_of_the_golem.info2", "它可以在丛林神庙内的箱子中找到。");
-        add("item.confluence.fast_clock.info", "快走时钟是一种困难模式免疫配饰，可赋予玩家对慢速减益的免疫力。");
+        add("item.confluence.fast_clock.info", "快走时钟是一种免疫配饰，可赋予玩家对慢速减益的免疫力。");
         add("item.confluence.fast_clock.info2", "它有几率从流浪者中掉落。");
         add("item.confluence.feral_claws.info", "狂爪手套是一种配件，可以将近战攻击速度提高 12%，并与所有其他攻击速度提升叠加。");
         add("item.confluence.feral_claws.info2", "它可以在丛林神庙内的箱子中找到。");
-        add("item.confluence.fire_gauntlet.info", "烈火手套是一种困难模式配饰，可通过以下方式增强近战武器：");
-        add("item.confluence.fire_gauntlet.info2", "它们会导致着火减益");
-        add("item.confluence.fire_gauntlet.info3", "+100% 击退");
-        add("item.confluence.fire_gauntlet.info4", "+12% 伤害");
-        add("item.confluence.fire_gauntlet.info5", "+12% 攻击速度");
-        add("item.confluence.fire_gauntlet.info6", "他们获得自动挥舞");
-        add("item.confluence.fire_gauntlet.info7", "某些近战武器的 +10% 大小");
-        add("item.confluence.fire_gauntlet.info8", "这件物品可以在带有岩浆石和机械手套的工作台上制作。");
+        add("item.confluence.fire_gauntlet.info", "烈火手套是一种配饰，可增强近战武器");
         add("item.confluence.flashlight.info", "探险家宝具是一种配饰，可赋予玩家对黑暗减益的免疫力。");
         add("item.confluence.flashlight.info2", "它可以在要塞内的箱子中找到。");
         add("item.confluence.flesh_knuckles.info", "血肉指虎是一种配件，可使玩家的防御力提高 8 点，仇恨值提高 400 点。");
@@ -460,12 +426,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.holy_water.info2", "它有几率从凋零骷髅中掉落。");
         add("item.confluence.honey_comb.info", "蜂窝是一种配饰，装备后会生成 1-3 个（或装备蜂巢包时生成 1-4 个）蜜蜂射弹，每次玩家受到伤害时都会攻击附近的敌人。");
         add("item.confluence.honey_comb.info2", "它有几率从蜜蜂身上掉落。");
-        add("item.confluence.magic_quiver.info", "魔法箭袋是一种可以增加箭和木桩伤害的配饰。");
-        add("item.confluence.magic_quiver.info2", "它为箭矢和木桩射击武器提供以下提升：");
-        add("item.confluence.magic_quiver.info3", "+10% 伤害");
-        add("item.confluence.magic_quiver.info4", "+20% 速度");
-        add("item.confluence.magic_quiver.info5", "+20% 几率不消耗弹药");
-        add("item.confluence.magic_quiver.info6", "它还将使所有射箭和木桩武器的击退率提高 10%。");
         add("item.confluence.magic_quiver.info7", "这件物品有几率从凋零骷髅中掉落。");
         add("item.confluence.magma_stone.info", "岩浆石是从烈焰人掉落的配件。");
         add("item.confluence.magma_stone.info2", "它使佩戴者的近战攻击对敌人造成着火。");
@@ -477,17 +437,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.molten_skull_rose.info2", "它提供 7 秒的熔岩免疫力、火焰方块免疫力，并减少熔岩造成的伤害。");
         add("item.confluence.molten_skull_rose.info3", "它可以在工作台上使用黑曜石骷髅玫瑰和熔岩护身符，或岩浆骷髅头和黑曜石玫瑰，或岩浆骷髅头和黑曜石骷髅玫瑰制作。");
         add("item.confluence.moon_stone.info", "月亮石是一个配饰，有几率从幻翼掉落");
-        add("item.confluence.moon_stone.info2", "它提供与太阳石相同的属性加成，但这些加成只会在夜间或日食期间激活。");
-        add("item.confluence.moon_stone.info3", "属性加成是：");
-        add("item.confluence.moon_stone.info4", "+10% 近战速度");
-        add("item.confluence.moon_stone.info5", "+10% 伤害（所有类型）");
-        add("item.confluence.moon_stone.info6", "+2% 暴击率");
-        add("item.confluence.moon_stone.info7", "+1 生命值/秒恢复");
-        add("item.confluence.moon_stone.info8", "+4 防御");
-        add("item.confluence.moon_stone.info9", "+15% 挖矿速度");
+        add("item.confluence.moon_stone.info2", "它提供与太阳石相同的属性加成，但这些加成只会在夜间激活。");
         add("item.confluence.nutrient_solution.info", "营养液是一种配饰，可使玩家对虚弱减益和饥饿减益产生免疫力");
         add("item.confluence.nutrient_solution.info2", "它可以在带有维生素和能量棒的工作台上制作。");
-        add("item.confluence.obsidian_rose.info", "黑曜石玫瑰是一种配件，可将从熔岩中获取的基础伤害从 80 降低到并减半 On Fire！它造成的减益从 7 / 14 / 17.5 秒降低到 3.5 / 7 / 8.75 秒。");
+        add("item.confluence.obsidian_rose.info", "黑曜石玫瑰是一种配件，可将从熔岩中获取的基础伤害减半。");
         add("item.confluence.obsidian_rose.info2", "它可以在堡垒遗迹中发现的箱子中发现。");
         add("item.confluence.obsidian_shield.info", "黑曜石盾牌是由钴盾和黑曜石骷髅头制成的盾牌配饰，结合了它们的功能和防御提升。");
         add("item.confluence.obsidian_shield.info2", "它提供击退免疫，以及燃烧减益的免疫，并提供 2 点防御。");
@@ -501,28 +454,27 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.paladins_shield.info4", "它将从末影龙中掉落。");
         add("item.confluence.panic_necklace.info", "恐慌项链是一种配饰，装备后，玩家将获得恐慌！当受到火焰方块以外的任何伤害源的伤害时，增益 8 秒，移动速度提高 100%。");
         add("item.confluence.panic_necklace.info2", "它可以在地牢中的宝箱中找到。");
-        add("item.confluence.power_glove.info", "强力手套是一种困难模式配饰，可使近战击退加倍，并增加 12% 的近战速度。");
+        add("item.confluence.power_glove.info", "强力手套是一种配饰，可使近战击退加倍，并增加 12% 的近战速度。");
         add("item.confluence.power_glove.info2", "它可以在制作台上使用泰坦手套和狂爪手套制作。");
         add("item.confluence.putrid_scent.info", "腐香囊是一个配件，可以增加5%的伤害和暴击率，并减少400点仇恨。");
         add("item.confluence.putrid_scent.info2", "它可以在地牢中的宝箱中找到。");
-        add("item.confluence.ranger_emblem.info", "游侠徽章是困难模式的配件，可增加15%的远程伤害。");
+        add("item.confluence.ranger_emblem.info", "游侠徽章是配件，可增加15%的远程伤害。");
         add("item.confluence.ranger_emblem.info2", "它有几率从凋零骷髅中掉落。");
         add("item.confluence.recon_scope.info", "侦察镜是一种结合了狙击瞄准镜效果和腐香囊减少仇恨效果的配件。");
         add("item.confluence.recon_scope.info2", "它可以在工作台上使用狙击镜和腐香囊制作.");
         add("item.confluence.rifle_scope.info", "步枪瞄准镜是一种配件。");
         add("item.confluence.rifle_scope.info2", "它赋予了在持枪时增加视野范围的能力。");
         add("item.confluence.rifle_scope.info3", "它有几率从末影人身上掉落。");
-        add("item.confluence.searchlight.info", "探照灯是一种配件，可使玩家免疫 黑暗 debuff 和 失明 debuff。");
+        add("item.confluence.searchlight.info", "探照灯是一种配件，可使玩家免疫 黑暗 和 失明 。");
         add("item.confluence.searchlight.info2", "它可以在工作台上使用蒙眼布和手电筒制作。");
         add("item.confluence.shackle.info", "镣铐是一种提供 1 点防御的配饰。");
         add("item.confluence.shackle.info2", "它可以在地牢中的宝箱中找到。");
         add("item.confluence.shark_tooth_necklace.info", "鲨牙项链是一种配件，有几率从溺尸身上掉落。");
-        add("item.confluence.shark_tooth_necklace.info2", "装备后，玩家的护甲穿透力增加5点。");
         add("item.confluence.shot_put.info", "铅球是一种配件，可使玩家对漂浮减益产生免疫力。");
         add("item.confluence.shot_put.info2", "它可以在要塞的宝箱中找到。");
         add("item.confluence.sniper_scope.info", "狙击镜是一种配件，可提供 10% 的远程伤害增加和 10% 的远程暴击率。");
         add("item.confluence.sniper_scope.info2", "它可以在工作台上使用步枪瞄准镜和毁灭者勋章制作。");
-        add("item.confluence.sorcerer_emblem.info", "巫师徽章是困难模式的配件，可增加15%的魔法伤害。");
+        add("item.confluence.sorcerer_emblem.info", "巫师徽章是配件，可增加15%的魔法伤害。");
         add("item.confluence.sorcerer_emblem.info2", "它有几率从唤魔者身上掉落。");
         add("item.confluence.stalkers_quiver.info", "潜行者箭袋是一种结合了魔法箭袋效果和腐香囊减少仇恨效果的配件。");
         add("item.confluence.stalkers_quiver.info2", "与一般的远程伤害加成不同，它只会提高武器的伤害，而不会影响弹药的伤害。");
@@ -531,20 +483,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.star_cloak.info2", "它可以在林地府邸内的箱子中找到。");
         add("item.confluence.star_veil.info", "星星面纱是一种结合了星星斗篷和十字项链功能的配饰，可以生成流星弹，并增加玩家受伤时获得的无敌帧的长度。");
         add("item.confluence.star_veil.info2", "它可以在工作台上使用星星斗篷和十字架项链制作。");
-        add("item.confluence.stinger_necklace.info", "毒刺项链是一种配饰。");
-        add("item.confluence.stinger_necklace.info2", "这件物品结合了鲨牙项链和蜂窝配饰，为玩家提供 5 点护甲穿透力，并在佩戴者受到伤害时释放 1-3 只蜜蜂，并给予 5 秒的蜂蜜增益。");
-        add("item.confluence.stinger_necklace.info3", "它可以在工作台上使用鲨牙项链和蜂窝进行制作。");
         add("item.confluence.sun_stone.info", "太阳石是一个配饰，有几率被烈焰人掉落。");
-        add("item.confluence.sun_stone.info2", "属性加成是：");
-        add("item.confluence.sun_stone.info3", "+10% 近战速度");
-        add("item.confluence.sun_stone.info4", "+10% 伤害（所有类型）");
-        add("item.confluence.sun_stone.info5", "+2% 暴击率");
-        add("item.confluence.sun_stone.info6", "+1 生命值/秒恢复");
-        add("item.confluence.sun_stone.info7", "+4 防御");
-        add("item.confluence.sun_stone.info8", "+15% 挖矿速度");
         add("item.confluence.sweetheart_necklace.info", "甜心项链是一种配饰，可以释放出集中的蜜蜂爆发并赋予玩家恐慌！和蜂蜜增益时受到伤害，移动速度提高 100%，持续 8 秒，生命恢复 5 秒。");
         add("item.confluence.sweetheart_necklace.info2", "它可以在工作台上使用蜂窝和恐慌项链制作。");
-        add("item.confluence.the_plan.info", "计划书是一个困难模式免疫配饰，结合了快走时钟和三折地图的功能，赋予对慢速和恶心减益的免疫。");
+        add("item.confluence.the_plan.info", "计划书是一个免疫配饰，结合了快走时钟和三折地图的功能，赋予对慢速和恶心减益的免疫。");
         add("item.confluence.the_plan.info2", "它可以在制作台上使用快走时钟和三折地图制作。");
         add("item.confluence.titan_glove.info", "泰坦手套是一种配饰，可以使玩家造成的近战击退加倍。");
         add("item.confluence.titan_glove.info2", "它可以在废弃矿井的宝箱中找到。");
@@ -567,6 +509,16 @@ public class ModChineseProvider extends LanguageProvider {
         add("attribute.name.generic.ranged_damage", "远程伤害");
         add("attribute.name.generic.dodge_chance", "闪避率");
         add("attribute.name.generic.mining_speed", "挖掘速率");
+        add("attribute.name.generic.aggro", "仇恨");
+        add("attribute.name.generic.magic_damage", "魔法伤害");
+        add("attribute.name.generic.armor_pass", "护甲穿透");
+        add("attribute.name.generic.pickup_range", "拾取范围");
+
+        add("container.confluence.workshop", "工匠作坊");
+        add("title.confluence.workshop", "工匠作坊");
+
+        add("achievements.confluence.boots_of_the_hero.title", "英雄之靴");
+        add("achievements.confluence.boots_of_the_hero.description", "获得泰拉闪耀靴，这是用最好的火靴和最好的冰靴铸成的。");
 
         add(ModEffects.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
@@ -739,5 +691,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEntities.BEE_PROJECTILE.get(), "蜜蜂射弹");
         add(ModEntities.STAR_CLOAK.get(), "坠星");
         add(ModEntities.STEP_STOOL.get(), "梯凳");
+
+        add(ModBlocks.WORKSHOP.get(), "工匠作坊");
     }
 }

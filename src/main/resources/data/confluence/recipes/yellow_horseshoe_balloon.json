@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:sandstorm_in_a_balloon"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:yellow_horseshoe_balloon",
-        "count": 1
+        "item": "confluence:yellow_horseshoe_balloon"
     }
 }

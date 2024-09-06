@@ -18,10 +18,10 @@ import net.minecraftforge.common.ForgeMod;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.missellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.IEntity;
@@ -43,7 +43,7 @@ public abstract class LivingEntityMixin {
     private void multiY(CallbackInfoReturnable<Float> cir) {
         if (c$getSelf() instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
-                cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+                    cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
         }
     }
 
@@ -61,8 +61,7 @@ public abstract class LivingEntityMixin {
     private int c$getInvulnerableTime(int constant) {
         if (c$getSelf() instanceof Player player) {
             AtomicInteger time = new AtomicInteger(constant);
-            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility ->
-                time.set(playerAbility.getInvulnerableTime()));
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
             return time.get();
         }
         return constant;
@@ -85,8 +84,7 @@ public abstract class LivingEntityMixin {
         if (self.isCrouching()) {
             cir.setReturnValue(false);
         } else {
-            CuriosUtils.findCurio(self, IFluidWalk.class).ifPresent(iFluidWalk ->
-                cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+            CuriosUtils.findCurio(self, IFluidWalk.class).ifPresent(iFluidWalk -> cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
         }
     }
 
@@ -134,7 +132,8 @@ public abstract class LivingEntityMixin {
     @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
     private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            pTotalArmor -= CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
+            AttributeInstance attributeInstance = attacker.getAttribute(ModAttributes.getArmorPass());
+            if (attributeInstance != null) pTotalArmor -= (float) attributeInstance.getValue();
             if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
         return original.call(pDamage, Math.max(pTotalArmor, 0.0F), pToughnessAttribute);

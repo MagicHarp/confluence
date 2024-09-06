@@ -1,0 +1,17 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:platinum_watch"
+        },
+        {
+            "item": "confluence:depth_meter"
+        },
+        {
+            "item": "confluence:compass"
+        }
+    ],
+    "result": {
+        "item": "confluence:gps"
+    }
+}

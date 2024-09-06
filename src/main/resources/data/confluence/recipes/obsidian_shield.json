@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:cobalt_shield"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:obsidian_shield",
-        "count": 1
+        "item": "confluence:obsidian_shield"
     }
 }

@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:sharkron_balloon"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:pink_horseshoe_balloon",
-        "count": 1
+        "item": "confluence:pink_horseshoe_balloon"
     }
 }

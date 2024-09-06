@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:stopwatch"
@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:goblin_tech",
-        "count": 1
+        "item": "confluence:goblin_tech"
     }
 }

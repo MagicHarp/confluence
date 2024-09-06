@@ -1,6 +1,5 @@
 package org.confluence.mod.event;
 
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,21 +33,14 @@ public final class ModEvents {
     @SubscribeEvent
     public static void modify(EntityAttributeModificationEvent event) {
         ModAttributes.readJsonConfig();
-
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_VELOCITY.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_DAMAGE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.DODGE_CHANCE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.MINING_SPEED.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
-        }
+        ModAttributes.registerAttribute(ModAttributes.CRIT_CHANCE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.RANGED_VELOCITY.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.RANGED_DAMAGE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.DODGE_CHANCE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.MINING_SPEED.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.AGGRO.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.MAGIC_DAMAGE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.ARMOR_PASS.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.PICKUP_RANGE.get(), event::add);
     }
 }

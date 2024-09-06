@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:fart_in_a_jar"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:fart_in_a_balloon",
-        "count": 1
+        "item": "confluence:fart_in_a_balloon"
     }
 }

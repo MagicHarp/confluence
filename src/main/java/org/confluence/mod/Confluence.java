@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.effect.ModEffects;
@@ -13,6 +14,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.ModTabs;
 import org.confluence.mod.loot.ModLootModifiers;
+import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModSounds;
@@ -34,13 +36,15 @@ public final class Confluence {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
+        ModRecipes.register(bus);
+        ModBlocks.BLOCKS.register(bus);
         ModTabs.TABS.register(bus);
         ModAttributes.ATTRIBUTES.register(bus);
         ModEffects.EFFECTS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModEntities.ENTITIES.register(bus);
-        ModRecipes.SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
+        ModMenus.TYPES.register(bus);
     }
 }

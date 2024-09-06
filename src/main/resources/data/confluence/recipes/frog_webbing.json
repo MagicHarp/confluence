@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:tiger_climbing_gear"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:frog_webbing",
-        "count": 1
+        "item": "confluence:frog_webbing"
     }
 }

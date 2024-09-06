@@ -15,45 +15,45 @@ import java.util.List;
 public final class ModConfigs {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_BLOCKS = BUILDER.comment(
-        "In order for the block to be found by the Metal Detector",
-        "You need to fill the list with string like 'modid:block[state1=true]' or 'modid:block'",
-        "The higher the block in the list, the higher the value"
+            "In order for the block to be found by the Metal Detector",
+            "You need to fill the list with string like 'modid:block[state1=true]' or 'modid:block'",
+            "The order of the blocks in the list is the order of their rarity"
     ).defineListAllowEmpty("rareBlocks", List.of(
-        "minecraft:ancient_debris",
-        "minecraft:suspicious_gravel",
-        "minecraft:suspicious_sand",
-        "minecraft:deepslate_emerald_ore",
-        "minecraft:emerald_ore",
-        "minecraft:deepslate_diamond_ore",
-        "minecraft:diamond_ore",
-        "minecraft:deepslate_lapis_ore",
-        "minecraft:lapis_ore",
-        "minecraft:deepslate_redstone_ore",
-        "minecraft:redstone_ore",
-        "minecraft:nether_gold_ore",
-        "minecraft:deepslate_gold_ore",
-        "minecraft:gold_ore",
-        "minecraft:nether_quartz_ore",
-        "minecraft:deepslate_iron_ore",
-        "minecraft:iron_ore",
-        "minecraft:deepslate_copper_ore",
-        "minecraft:copper_ore",
-        "minecraft:deepslate_coal_ore",
-        "minecraft:coal_ore"
+            "minecraft:ancient_debris",
+            "minecraft:suspicious_gravel",
+            "minecraft:suspicious_sand",
+            "minecraft:deepslate_emerald_ore",
+            "minecraft:emerald_ore",
+            "minecraft:deepslate_diamond_ore",
+            "minecraft:diamond_ore",
+            "minecraft:deepslate_lapis_ore",
+            "minecraft:lapis_ore",
+            "minecraft:deepslate_redstone_ore",
+            "minecraft:redstone_ore",
+            "minecraft:nether_gold_ore",
+            "minecraft:deepslate_gold_ore",
+            "minecraft:gold_ore",
+            "minecraft:nether_quartz_ore",
+            "minecraft:deepslate_iron_ore",
+            "minecraft:iron_ore",
+            "minecraft:deepslate_copper_ore",
+            "minecraft:copper_ore",
+            "minecraft:deepslate_coal_ore",
+            "minecraft:coal_ore"
     ), o -> true);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_CREATURES = BUILDER.comment(
-        "In order for the creature to be found by the Life Form Analyzer",
-        "You need to fill the list with string like 'modid:entity'",
-        "The higher the creature in the list, the higher the value"
+            "In order for the creature to be found by the Life Form Analyzer",
+            "You need to fill the list with string like 'modid:entity'",
+            "The order of the entities in the list is the order of their rarity"
     ).defineListAllowEmpty("rareCreatures", List.of(
-        "minecraft:panda",
-        "minecraft:skeleton_horse",
-        "minecraft:allay",
-        "minecraft:axolotl",
-        "minecraft:evoker",
-        "minecraft:piglin_prute",
-        "minecraft:vindicator",
-        "minecraft:enderman"
+            "minecraft:panda",
+            "minecraft:skeleton_horse",
+            "minecraft:allay",
+            "minecraft:axolotl",
+            "minecraft:evoker",
+            "minecraft:piglin_prute",
+            "minecraft:vindicator",
+            "minecraft:enderman"
     ), o -> true);
 
     public static final ForgeConfigSpec.BooleanValue RANDOM_ATTACK_DAMAGE = BUILDER.push("Random Attack Damage").define("enable", false);
@@ -62,35 +62,8 @@ public final class ModConfigs {
 
     public static final ForgeConfigSpec.IntValue MAX_ACCESSORIES = BUILDER.pop().defineInRange("Max Accessory Amount", 7, 6, 100);
 
-    public static final ForgeConfigSpec.IntValue BERSERKERS_GLOVE_AGGRO = BUILDER.push("Aggro Attach").defineInRange("BerserkersGlove", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue FLESH_KNUCKLES_AGGRO = BUILDER.defineInRange("FleshKnuckles", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue HERO_SHIELD_AGGRO = BUILDER.defineInRange("HeroShield", 400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue PUTRID_SCENT_AGGRO = BUILDER.defineInRange("PutridScent", -400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue STALKERS_QUIVER_AGGRO = BUILDER.defineInRange("StalkersQuiver", -400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue RECON_SCOPE_AGGRO = BUILDER.defineInRange("ReconScope", -400, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-    public static final ForgeConfigSpec.IntValue SHARK_TOOTH_NECKLACE_ARMOR_PASS = BUILDER.pop().push("Armor Pass").defineInRange("SharkToothNecklace", 5, 0, Integer.MAX_VALUE);
-    public static final ForgeConfigSpec.IntValue STINGER_NECKLACE_ARMOR_PASS = BUILDER.defineInRange("StingerNecklace", 5, 0, Integer.MAX_VALUE);
-
-    public static final ForgeConfigSpec.DoubleValue HURT_EVASION_CHANCE = BUILDER.pop().defineInRange("Hurt Evasion Chance", 0.1, 0.0, 1.0);
-
     public static final ForgeConfigSpec.IntValue CROSS_NECKLACE_INVULNERABLE_TIME = BUILDER.push("Invulnerable Time").defineInRange("CrossNecklace", 40, 0, Integer.MAX_VALUE);
     public static final ForgeConfigSpec.IntValue STAR_VEIL_INVULNERABLE_TIME = BUILDER.defineInRange("StarVeil", 40, 0, Integer.MAX_VALUE);
-
-    public static final ForgeConfigSpec.DoubleValue SORCERER_EMBLEM_MAGIC_BONUS = BUILDER.pop().push("Magic Attack Bonus").defineInRange("SorcererEmblem", 0.15, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue AVENGER_EMBLEM_MAGIC_BONUS = BUILDER.defineInRange("AvengerEmblem", 0.12, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_MAGIC_BONUS = BUILDER.defineInRange("DestroyerEmblem", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_MAGIC_BONUS = BUILDER.defineInRange("CelestialStone", 0.1, 0.0, Double.MAX_VALUE);
-
-    public static final ForgeConfigSpec.DoubleValue AVENGER_EMBLEM_PROJECTILE_BONUS = BUILDER.pop().push("Projectile Attack Bonus").defineInRange("AvengerEmblem", 0.12, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_PROJECTILE_BONUS = BUILDER.defineInRange("DestroyerEmblem", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue RANGER_EMBLEM_PROJECTILE_BONUS = BUILDER.defineInRange("RangerEmblem", 0.15, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_PROJECTILE_BONUS = BUILDER.defineInRange("MagicQuiver", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue MOLTEN_QUIVER_PROJECTILE_BONUS = BUILDER.defineInRange("MoltenQuiver", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue STALKER_QUIVER_PROJECTILE_BONUS = BUILDER.defineInRange("StalkersQuiver", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue RECON_SCOPE_PROJECTILE_BONUS = BUILDER.defineInRange("ReconScope", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue SNIPER_SCOPE_PROJECTILE_BONUS = BUILDER.defineInRange("SniperScope", 0.1, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_PROJECTILE_BONUS = BUILDER.defineInRange("CelestialStone", 0.1, 0.0, Double.MAX_VALUE);
 
     public static final ForgeConfigSpec.IntValue AMBER_HORSESHOE_BALLOON_FALL_RESISTANCE = BUILDER.pop().push("Fall Resistance").defineInRange("AmberHorseshoeBalloon", -1, -1, Integer.MAX_VALUE);
     public static final ForgeConfigSpec.IntValue AMBHIPIAN_BOOTS_FALL_RESISTANCE = BUILDER.defineInRange("AmbhipianBoots", 7, -1, Integer.MAX_VALUE);
@@ -152,33 +125,40 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue SHARKRON_BALLOON_JUMP_SPEED = BUILDER.defineInRange("SharkronBalloon", 1.1, 0.0, Double.MAX_VALUE);
     public static final ForgeConfigSpec.DoubleValue TSUNAMI_IN_A_BOTTLE_JUMP_SPEED = BUILDER.defineInRange("TsunamiInABottle", 1.0, 0.0, Double.MAX_VALUE);
 
-    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_ARROW_SPEED = BUILDER.pop().pop().push("Magic Quiver").defineInRange("arrowSpeedMultiplier", 1.2, 0.0, Double.MAX_VALUE);
-    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_NO_CONSUME_CHANCE = BUILDER.defineInRange("arrowNoConsumeChance", 0.2, 0.0, 1.0);
-
-    public static final ForgeConfigSpec.DoubleValue ANCIENT_CHISEL_BREAK_SPEED = BUILDER.pop().push("Break Speed Bonus").defineInRange("AncientChisel", 0.25, 0.0, Double.MAX_VALUE);
+    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_NO_CONSUME_CHANCE = BUILDER.pop().pop().push("Magic Quiver").defineInRange("arrowNoConsumeChance", 0.2, 0.0, 1.0);
 
 
     // Attributes
-    public static final ForgeConfigSpec.DoubleValue ANKH_SHIELD_RESISTANCE = BUILDER.pop().push("Attributes").push("Ankh Shield").defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue ANCIENT_CHISEL_MINING = BUILDER.pop().push("Attributes").push("Ancient Chisel").defineInRange("miningSpeed", 0.25, 0.0, 10.0);
+
+    public static final ForgeConfigSpec.DoubleValue ANKH_SHIELD_RESISTANCE = BUILDER.pop().push("Ankh Shield").defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
     public static final ForgeConfigSpec.IntValue ANKH_SHIELD_ARMOR = BUILDER.defineInRange("armor", 4, 0, 1024);
 
     public static final ForgeConfigSpec.DoubleValue AVENGER_EMBLEM_DAMAGE = BUILDER.pop().push("Avenger Emblem").defineInRange("attackDamage", 0.12, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue AVENGER_EMBLEM_RANGED = BUILDER.defineInRange("rangedDamage", 0.12, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue AVENGER_EMBLEM_MAGIC = BUILDER.defineInRange("magicDamage", 0.12, 0.0, 10.0);
 
     public static final ForgeConfigSpec.IntValue BERSERKERS_GLOVE_ARMOR = BUILDER.pop().push("Berserker's Glove").defineInRange("armor", 8, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue BERSERKERS_GLOVE_SPEED = BUILDER.defineInRange("attackSpeed", 0.12, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue BERSERKERS_GLOVE_KNOCKBACK = BUILDER.defineInRange("attackKnockback", 1.0, 0.0, 1.0);
     public static final ForgeConfigSpec.DoubleValue BERSERKERS_GLOVE_REACH = BUILDER.defineInRange("entityReach", 0.1, 0.0, 1024.0);
+    public static final ForgeConfigSpec.IntValue BERSERKERS_GLOVE_AGGRO = BUILDER.defineInRange("aggro", 400, -10000, 10000);
 
     public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_SPEED = BUILDER.pop().push("Celestial Stone").defineInRange("attackSpeed", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_DAMAGE = BUILDER.defineInRange("attackDamage", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.IntValue CELESTIAL_STONE_ARMOR = BUILDER.defineInRange("armor", 4, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_CRITICAL_CHANCE = BUILDER.defineInRange("criticalChance", 0.02, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_MINING = BUILDER.defineInRange("miningSpeed", 0.15, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue CELESTIAL_STONE_MAGIC = BUILDER.defineInRange("magicDamage", 0.1, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue COBALT_SHIELD_RESISTANCE = BUILDER.pop().push("Cobalt Shield").defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
     public static final ForgeConfigSpec.IntValue COBALT_SHIELD_ARMOR = BUILDER.defineInRange("armor", 1, 0, 1024);
 
     public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_DAMAGE = BUILDER.pop().push("Destroyer Emblem").defineInRange("attackDamage", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_CRITICAL_CHANCE = BUILDER.defineInRange("criticalChance", 0.08, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue DESTROYER_EMBLEM_MAGIC = BUILDER.defineInRange("magicDamage", 0.1, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue EYE_OF_GOLEM_CRITICAL_CHANCE = BUILDER.pop().push("EyeOfTheGolem").defineInRange("criticalChance", 0.1, 0.0, 1.0);
 
@@ -190,22 +170,36 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue FIRE_GAUNTLET_REACH = BUILDER.defineInRange("entityReach", 0.1, 0.0, 1024.0);
 
     public static final ForgeConfigSpec.IntValue FLESH_KNUCKLES_ARMOR = BUILDER.pop().push("Flesh Knuckles").defineInRange("armor", 8, 0, 1024);
+    public static final ForgeConfigSpec.IntValue FLESH_KNUCKLES_AGGRO = BUILDER.defineInRange("aggro", 400, -10000, 10000);
 
     public static final ForgeConfigSpec.IntValue FROZEN_SHIELD_ARMOR = BUILDER.pop().push("Frozen Shield").defineInRange("armor", 6, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue FROZEN_SHIELD_RESISTANCE = BUILDER.defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
 
+    public static final ForgeConfigSpec.DoubleValue HAND_OF_CREATION_REACH = BUILDER.pop().push("Hand Of Creation").defineInRange("blockReach", 3.0, 0.0, 1024.0);
+    public static final ForgeConfigSpec.DoubleValue HAND_OF_CREATION_MINING = BUILDER.defineInRange("miningSpeed", 0.25, 0.0, 10.0);
+
     public static final ForgeConfigSpec.IntValue HERO_SHIELD_ARMOR = BUILDER.pop().push("Hero Shield").defineInRange("armor", 10, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue HERO_SHIELD_RESISTANCE = BUILDER.defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
+    public static final ForgeConfigSpec.IntValue HERO_SHIELD_AGGRO = BUILDER.defineInRange("aggro", 400, -10000, 10000);
+
+    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_RANGED = BUILDER.pop().push("Magic Quiver").defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue MAGIC_QUIVER_VELOCITY = BUILDER.defineInRange("rangedVelocity", 0.2, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue MECHANICAL_GLOVE_DAMAGE = BUILDER.pop().push("Mechanical Glove").defineInRange("attackDamage", 0.12, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue MECHANICAL_GLOVE_SPEED = BUILDER.defineInRange("attackDamage", 0.12, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue MECHANICAL_GLOVE_KNOCKBACK = BUILDER.defineInRange("attackKnockback", 1.0, 0.0, 1.0);
     public static final ForgeConfigSpec.DoubleValue MECHANICAL_GLOVE_REACH = BUILDER.defineInRange("entityReach", 0.1, 0.0, 1024.0);
 
+    public static final ForgeConfigSpec.DoubleValue MOLTEN_QUIVER_RANGED = BUILDER.pop().push("Molten Quiver").defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue MOLTEN_QUIVER_VELOCITY = BUILDER.defineInRange("rangedVelocity", 0.2, 0.0, 10.0);
+
     public static final ForgeConfigSpec.DoubleValue MOON_STONE_SPEED = BUILDER.pop().push("Moon Stone").defineInRange("attackSpeed", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue MOON_STONE_DAMAGE = BUILDER.defineInRange("attackDamage", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.IntValue MOON_STONE_ARMOR = BUILDER.defineInRange("armor", 4, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue MOON_STONE_CRITICAL_CHANCE = BUILDER.defineInRange("criticalChance", 0.02, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue MOON_STONE_MINING = BUILDER.defineInRange("miningSpeed", 0.15, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue MOON_STONE_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue MOON_STONE_MAGIC = BUILDER.defineInRange("magicDamage", 0.1, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue OBSIDIAN_SHIELD_RESISTANCE = BUILDER.pop().push("Obsidian Shield").defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
     public static final ForgeConfigSpec.IntValue OBSIDIAN_SHIELD_ARMOR = BUILDER.defineInRange("armor", 2, 0, 1024);
@@ -221,23 +215,44 @@ public final class ModConfigs {
 
     public static final ForgeConfigSpec.DoubleValue PUTRID_SCENT_DAMAGE = BUILDER.pop().push("Putrid Scent").defineInRange("attackDamage", 0.05, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue PUTRID_SCENT_CRITICAL_CHANCE = BUILDER.defineInRange("criticalChance", 0.05, 0.0, 1.0);
+    public static final ForgeConfigSpec.IntValue PUTRID_SCENT_AGGRO = BUILDER.defineInRange("aggro", -400, -10000, 10000);
+
+    public static final ForgeConfigSpec.DoubleValue RANGER_EMBLEM_RANGED = BUILDER.pop().push("Ranger Emblem").defineInRange("rangedDamage", 0.15, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue RECON_SCOPE_CRITICAL_CHANCE = BUILDER.pop().push("Recon Scope").defineInRange("criticalChance", 0.1, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue RECON_SCOPE_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.IntValue RECON_SCOPE_AGGRO = BUILDER.defineInRange("aggro", -400, -10000, 10000);
 
     public static final ForgeConfigSpec.IntValue SHACKLE_ARMOR = BUILDER.pop().push("Shackle").defineInRange("armor", 1, 0, 1024);
+
+    public static final ForgeConfigSpec.IntValue SHARK_TOOTH_NECKLACE_ARMOR_PASS = BUILDER.pop().push("Shark Tooth Necklace").defineInRange("armorPass", 5, 0, 10000);
 
     public static final ForgeConfigSpec.DoubleValue SHIELD_OF_CTHULHU_CRITICAL_CHANCE = BUILDER.pop().push("Shield Of Cthulhu").defineInRange("criticalChance", 0.04, 0.0, 1.0);
     public static final ForgeConfigSpec.IntValue SHIELD_OF_CTHULHU_ARMOR = BUILDER.defineInRange("armor", 2, 0, 1024);
 
     public static final ForgeConfigSpec.DoubleValue SNIPER_SCOPE_CRITICAL_CHANCE = BUILDER.pop().push("Sniper Scope").defineInRange("criticalChance", 0.1, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue SNIPER_SCOPE_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+
+    public static final ForgeConfigSpec.DoubleValue SORCERER_EMBLEM_MAGIC = BUILDER.pop().push("Sorcerer Emblem").defineInRange("magicDamage", 0.15, 0.0, 10.0);
+
+    public static final ForgeConfigSpec.DoubleValue STALKER_QUIVER_RANGED = BUILDER.pop().push("Stalker Quiver").defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue STALKER_QUIVER_VELOCITY = BUILDER.defineInRange("rangedVelocity", 0.2, 0.0, 10.0);
+    public static final ForgeConfigSpec.IntValue STALKERS_QUIVER_AGGRO = BUILDER.defineInRange("aggro", -400, -10000, 10000);
+
+    public static final ForgeConfigSpec.IntValue STINGER_NECKLACE_ARMOR_PASS = BUILDER.pop().push("Stinger Necklace").defineInRange("armorPass", 5, 0, 10000);
 
     public static final ForgeConfigSpec.DoubleValue SUN_STONE_SPEED = BUILDER.pop().push("Sun Stone").defineInRange("attackSpeed", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue SUN_STONE_DAMAGE = BUILDER.defineInRange("attackDamage", 0.1, 0.0, 10.0);
     public static final ForgeConfigSpec.IntValue SUN_STONE_ARMOR = BUILDER.defineInRange("armor", 4, 0, 1024);
     public static final ForgeConfigSpec.DoubleValue SUN_STONE_CRITICAL_CHANCE = BUILDER.defineInRange("criticalChance", 0.02, 0.0, 1.0);
+    public static final ForgeConfigSpec.DoubleValue SUN_STONE_MINING = BUILDER.defineInRange("miningSpeed", 0.15, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue SUN_STONE_RANGED = BUILDER.defineInRange("rangedDamage", 0.1, 0.0, 10.0);
+    public static final ForgeConfigSpec.DoubleValue SUN_STONE_MAGIC = BUILDER.defineInRange("magicDamage", 0.1, 0.0, 10.0);
 
     public static final ForgeConfigSpec.DoubleValue TITAN_GLOVE_KNOCKBACK = BUILDER.pop().push("Titan Glove").defineInRange("attackKnockback", 1.0, 0.0, 10.0);
     public static final ForgeConfigSpec.DoubleValue TITAN_GLOVE_REACH = BUILDER.defineInRange("entityReach", 0.1, 0.0, 1024.0);
+
+    public static final ForgeConfigSpec.DoubleValue TREASURE_MAGNET_PICKUP = BUILDER.pop().push("Treasure Magnet").defineInRange("pickupRange", 6.25, 0.0, 64.0);
 
     public static final ForgeConfigSpec.DoubleValue WARRIOR_EMBLEM_DAMAGE = BUILDER.pop().push("Warrior Emblem").defineInRange("attackDamage", 0.15, 0.0, 10.0);
 

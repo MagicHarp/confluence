@@ -1,8 +1,8 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
-            "tag": "confluence:minute_watch"
+            "item": "confluence:gold_watch"
         },
         {
             "item": "confluence:depth_meter"
@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:gps",
-        "count": 1
+        "item": "confluence:gps"
     }
 }

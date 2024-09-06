@@ -6,6 +6,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("creativetab.confluence.curios", "Confluence | Curios");
+        add("creativetab.confluence.accessories", "Confluence | Accessories");
 
         add("curios.tooltip.speed_boots", "The wearer can run super fast");
         add("curios.tooltip.may_fly", "Allows flight");
@@ -131,15 +132,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sun_stone.tooltip", "During daytime, grants minor increase");
         add("item.confluence.moon_stone.tooltip", "During nighttime, grants minor increase");
         add("item.confluence.putrid_scent.tooltip", "Enemies are less likely to target you");
-        add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and melee attacks inflict fire damage");
-        add("item.confluence.eye_of_the_golem.tooltip", "10% increased critical strike chance");
-        add("item.confluence.destroyer_emblem.tooltip", "8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip", "Increases length of invincibility after taking damage");
         add("item.confluence.terraspark_boots.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.fledgling_wings.tooltip", "Allows flight and slow fall");
@@ -156,21 +154,17 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
         add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
         add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
-        add("item.confluence.ancient_chisel.tooltip", "25% increased mining speed");
         add("item.confluence.ancient_chisel.tooltip2", "“Age-old problems require age-old solutions”");
         add("item.confluence.treasure_magnet.tooltip", "Expanded item pickup");
         add("item.confluence.flower_boots.tooltip", "Flowers grow on the grass you walk on");
-        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
         add("item.confluence.hand_warmer.tooltip", "Provides immunity to chill and freezing effects");
         add("item.confluence.star_cloak.tooltip", "Causes stars to fall after taking damage");
         add("item.confluence.honey_comb.tooltip", "Releases bees and douses the user in honey when damaged");
         add("item.confluence.sweetheart_necklace.tooltip", "When damaged, the bee is released and the user is immersed in honey and increases movement speed");
         add("item.confluence.hive_pack.tooltip", "Increases the strength of friendly bees");
-        add("item.confluence.magic_quiver.tooltip", "Increases arrow damage by 10% and greatly increases arrow speed");
         add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
         add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
-        add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
         add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
         add("item.confluence.portable_cement_mixer.tooltip", "Decreased 'Right Click Delay' by 1");
         add("item.confluence.brick_layer.tooltip", "Decreased 'Right Click Delay' by 1");
@@ -178,9 +172,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "Improved ability if combined with Shoe Spikes");
         add("item.confluence.shoe_spikes.tooltip", "Improved ability if combined with Climbing Claws");
         add("item.confluence.frog_gear.tooltip", "'It ain't easy being green'");
-        add("item.confluence.hand_of_creation.tooltip", "Increases mining speed by 25%");
         add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
-        add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
         add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
 
@@ -201,7 +193,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sandstorm_in_a_bottle.info", "The Sandstorm in a Bottle is an accessory that can be found in Chests in the Desert Pyramid.");
         add("item.confluence.shiny_red_balloon.info", "When the player has the Hero of the Village effect, the librarian has a chance to give the player this item.");
         add("item.confluence.shoe_spikes.info", "It have a Chance to be dropped from Cave Spider.");
-        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing");
+        add("item.confluence.step_stool.info", "You can use Step Stool to upgrade its Extra Step from Smithing Table");
         add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
         add("item.confluence.tsunami_in_a_bottle.info", "It can be found in Shipwreck Chests");
         add("item.confluence.water_walking_boots.info", "It can be found in Ocean Ruins Chests.");
@@ -280,12 +272,23 @@ public class ModEnglishProvider extends LanguageProvider {
         add("attribute.name.generic.ranged_damage", "Ranged Damage");
         add("attribute.name.generic.dodge_chance", "Dodge Chance");
         add("attribute.name.generic.mining_speed", "Mining Speed");
+        add("attribute.name.generic.aggro", "Aggro");
+        add("attribute.name.generic.magic_damage", "Magic Damage");
+        add("attribute.name.generic.armor_pass", "Armor Pass");
+        add("attribute.name.generic.pickup_range", "Pickup Range");
+
+        add("container.confluence.workshop", "Workshop");
+        add("title.confluence.workshop", "Workshop");
+
+        add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
+        add("achievements.confluence.boots_of_the_hero.description", "Obtain the Terraspark Boots, forged from the finest boots of fire and ice.");
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
             if (item1 instanceof CustomName customName) add(item1, customName.getGenName());
             else add(item1, toTitleCase(item.getId().getPath()));
         });
+        ModEntities.ENTITIES.getEntries().forEach(entity -> add(entity.get(), toTitleCase(entity.getId().getPath())));
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), toTitleCase(effect.getId().getPath())));
     }
 

@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
-import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.combat.IFireAttack;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
@@ -35,14 +34,10 @@ public final class PlayerEvents {
             if (event.player.isLocalPlayer()) {
                 GravitationHandler.unCrouching(event.player);
             }
-        } else {
-            Player player = event.player;
-            IRangePickup.Drops.apply(player);
-            if (player instanceof ServerPlayer serverPlayer) {
-                if (serverPlayer.level().getGameTime() % 200 == 0) {
-                    // 每十秒向周围玩家共享一次信息配饰
-                    InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
-                }
+        } else if (event.player instanceof ServerPlayer serverPlayer) {
+            if (serverPlayer.level().getGameTime() % 200 == 0) {
+                // 每十秒向周围玩家共享一次信息配饰
+                InfoCurioCheckPacketS2C.sendToOthers(serverPlayer);
             }
         }
     }

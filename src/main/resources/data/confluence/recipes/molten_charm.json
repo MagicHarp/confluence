@@ -1,16 +1,13 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "ab"
-    ],
-    "key": {
-        "a": {
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
             "item": "confluence:lava_charm"
         },
-        "b": {
+        {
             "item": "confluence:obsidian_skull"
         }
-    },
+    ],
     "result": {
         "item": "confluence:molten_charm"
     }

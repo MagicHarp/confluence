@@ -15,6 +15,7 @@
     ],
     "minVersion": "0.8.5",
     "client": [
+        "client.ClientAdvancementsMixin",
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
         "client.ClientPlayerMixin",

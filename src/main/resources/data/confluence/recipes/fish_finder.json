@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:fishermans_pocket_guide"
@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:fish_finder",
-        "count": 1
+        "item": "confluence:fish_finder"
     }
 }

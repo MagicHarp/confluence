@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModAttributes;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +31,7 @@ public class RangerEmblem extends BaseCurioItem {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTE == null) {
             ATTRIBUTE = ImmutableMultimap.of(
-                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Ranger Emblem", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Ranger Emblem", ModConfigs.RANGER_EMBLEM_RANGED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTE;

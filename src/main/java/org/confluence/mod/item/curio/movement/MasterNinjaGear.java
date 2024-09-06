@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.combat.IHurtEvasion;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +35,7 @@ public class MasterNinjaGear extends BaseCurioItem implements IWallClimb, ITabi 
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(IWallClimb.WALL_CLIMB);
         list.add(ITabi.TOOLTIP);
-        list.add(IHurtEvasion.TOOLTIP);
+        list.add(Component.translatable("curios.tooltip.hurt_evasion"));
     }
 
     @Override

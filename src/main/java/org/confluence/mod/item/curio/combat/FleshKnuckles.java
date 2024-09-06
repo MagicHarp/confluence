@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
@@ -19,8 +20,9 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
+public class FleshKnuckles extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("91F63796-420A-FFCB-504C-FEAA53C7DFC4");
+    public static final UUID AGGRO_UUID = UUID.fromString("D22468D3-5FC6-A35C-A1CC-C27F398BE5DF");
     private static ImmutableMultimap<Attribute, AttributeModifier> ARMOR;
 
     public FleshKnuckles() {
@@ -28,15 +30,11 @@ public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
     }
 
     @Override
-    public int getAggro() {
-        return ModConfigs.FLESH_KNUCKLES_AGGRO.get();
-    }
-
-    @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ARMOR == null) {
             ARMOR = ImmutableMultimap.of(
-                Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_ARMOR.get(), AttributeModifier.Operation.ADDITION)
+                    Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_ARMOR.get(), AttributeModifier.Operation.ADDITION),
+                    ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_AGGRO.get(), AttributeModifier.Operation.ADDITION)
             );
         }
         return ARMOR;
@@ -44,12 +42,13 @@ public class FleshKnuckles extends BaseCurioItem implements IAggroAttach {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(TOOLTIP);
+        list.add(Component.translatable("curios.tooltip.aggro_attach"));
     }
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.flesh_knuckles.info")
+                Component.translatable("item.confluence.flesh_knuckles.info"),
+                Component.translatable("item.confluence.flesh_knuckles.info2")
         };
     }
 }

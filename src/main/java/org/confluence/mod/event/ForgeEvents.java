@@ -9,12 +9,14 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,8 +34,6 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.ModUtils;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ForgeEvents {
@@ -58,7 +58,7 @@ public final class ForgeEvents {
         IStarCloak.apply(living, random);
         PanicNecklace.apply(living);
 
-        amount = IMagicAttack.apply(damageSource, amount);
+        amount = ModAttributes.applyMagicDamage(damageSource, amount);
         amount = ModAttributes.applyRangedDamage(living, damageSource, amount);
         amount = PaladinsShield.apply(living, damageSource, amount);
         amount = FrozenTurtleShell.apply(living, amount);
@@ -69,8 +69,8 @@ public final class ForgeEvents {
 
         if (ModConfigs.RANDOM_ATTACK_DAMAGE.get()) {
             amount *= ModUtils.nextFloat(random,
-                ModConfigs.RANDOM_ATTACK_DAMAGE_MIN.get().floatValue(),
-                ModConfigs.RANDOM_ATTACK_DAMAGE_MAX.get().floatValue()
+                    ModConfigs.RANDOM_ATTACK_DAMAGE_MIN.get().floatValue(),
+                    ModConfigs.RANDOM_ATTACK_DAMAGE_MAX.get().floatValue()
             );
         }
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
@@ -83,11 +83,11 @@ public final class ForgeEvents {
         if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
             EntityType<?> entityType = living.getType();
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EntityKilledPacketS2C(
-                    serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
-                    ForgeRegistries.ENTITY_TYPES.getKey(entityType)
-                )
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new EntityKilledPacketS2C(
+                            serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
+                            ForgeRegistries.ENTITY_TYPES.getKey(entityType)
+                    )
             );
         }
     }
@@ -100,25 +100,27 @@ public final class ForgeEvents {
             double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
             double rangeSqr = range * range;
             self.level().players().stream()
-                .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
-                .max((playerA, playerB) -> {
-                    AtomicInteger atomic = new AtomicInteger();
-                    playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                        playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
-                            atomic.set(abilityA.getAggro() - abilityB.getAggro())
-                        )
-                    );
-                    return atomic.get();
-                }).ifPresent(player -> {
-                    if (player == playerO) return;
-                    playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
-                        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
-                            if (abilityO.getAggro() < ability.getAggro()) {
-                                event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
-                            }
-                        })
-                    );
-                });
+                    .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
+                    .max((playerA, playerB) -> {
+                        AttributeInstance instanceA = playerA.getAttribute(ModAttributes.getAggro());
+                        AttributeInstance instanceB = playerB.getAttribute(ModAttributes.getAggro());
+                        if (instanceA != null && instanceB != null) {
+                            return (int) (instanceA.getValue() - instanceB.getValue());
+                        }
+                        return 0;
+                    }).ifPresent(player -> {
+                        if (player == playerO) return;
+                        AttributeInstance instanceO = playerO.getAttribute(ModAttributes.getAggro());
+                        AttributeInstance instance = player.getAttribute(ModAttributes.getAggro());
+                        if (instanceO != null && instance != null && instanceO.getValue() < instance.getValue()) {
+                            event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                        }
+                    });
         }
+    }
+
+    @SubscribeEvent
+    public static void livingTick(LivingEvent.LivingTickEvent event) {
+        ModAttributes.applyPickupRange(event.getEntity());
     }
 }

@@ -3,10 +3,7 @@ package org.confluence.mod.item.curio.datadriven;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.item.curio.combat.IAggroAttach;
-import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
-import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.curio.construction.IBreakSpeedBonus;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.misc.ModRarity;
@@ -65,14 +62,8 @@ public class DataDrivenCurioGenerator {
             mv.visitEnd();
         }
         for (Class<?> clazz : interfaces) {
-            if (clazz == IAggroAttach.class) {
-                intValue(cw, "getAggro", clazz);
-            } else if (clazz == IArmorPass.class) {
-                intValue(cw, "getPassValue", clazz);
-            } else if (clazz == IInvulnerableTime.class) {
+            if (clazz == IInvulnerableTime.class) {
                 intValue(cw, "getTime", clazz);
-            } else if (clazz == IMagicAttack.class) {
-                doubleValue(cw, "getMagicBonus", clazz);
             } else if (clazz == IBreakSpeedBonus.class) {
                 floatValue(cw, "getBreakBonus", clazz);
             } else if (clazz == IFallResistance.class) {

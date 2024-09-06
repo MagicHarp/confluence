@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:power_glove"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:berserkers_glove",
-        "count": 1
+        "item": "confluence:berserkers_glove"
     }
 }

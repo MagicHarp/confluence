@@ -30,23 +30,17 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
     private static final Hashtable<String, Class<?>> MAP = new Hashtable<>();
 
     static {
-        MAP.put("AggroAttach", IAggroAttach.class);
-        MAP.put("ArmorPass", IArmorPass.class);
         MAP.put("AutoAttack", IAutoAttack.class);
         MAP.put("FireAttack", IFireAttack.class);
         MAP.put("FireImmune", IFireImmune.class);
         MAP.put("Honeycomb", IHoneycomb.class);
-        MAP.put("HurtEvasion", IHurtEvasion.class);
         MAP.put("InvulnerableTime", IInvulnerableTime.class);
         MAP.put("LavaHurtReduce", ILavaHurtReduce.class);
-        MAP.put("MagicAttack", IMagicAttack.class);
         MAP.put("StarCloak", IStarCloak.class);
         MAP.put("BreakSpeedBonus", IBreakSpeedBonus.class);
         MAP.put("FallResistance", IFallResistance.class);
         MAP.put("JumpBoost", IJumpBoost.class);
         MAP.put("MayFly", IMayFly.class);
-        //MAP.put("MultiJump", IMultiJump.class);
-        //MAP.put("OneTimeJump", IOneTimeJump.class);
         MAP.put("LavaImmune", ILavaImmune.class);
         MAP.put("MagicQuiver", IMagicQuiver.class);
         MAP.put("Scope", IScope.class);

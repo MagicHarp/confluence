@@ -1,18 +1,15 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "bbb",
-        "b b",
-        "a a"
-    ],
-    "key": {
-        "a": {
-            "item": "minecraft:stick"
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "minecraft:stick",
+            "count": 2
         },
-        "b": {
-            "tag": "minecraft:wooden_slabs"
+        {
+            "item": "minecraft:scaffolding",
+            "count": 5
         }
-    },
+    ],
     "result": {
         "item": "confluence:step_stool"
     }

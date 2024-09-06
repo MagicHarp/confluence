@@ -3,13 +3,18 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModAttributes;
+import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -26,12 +31,16 @@ public class MoltenQuiver extends MagicQuiver {
         super(ModRarity.PINK);
     }
 
+    public static void applyToArrow(LivingEntity living, AbstractArrow arrow) {
+        if (CuriosUtils.hasCurio(living, CurioItems.MOLTEN_QUIVER.get())) arrow.setSecondsOnFire(100);
+    }
+
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_DAMAGE_UUID, "Molten Quiver", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                ModAttributes.getRangedVelocity(), new AttributeModifier(RANGED_VELOCITY_UUID, "Molten Quiver", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_DAMAGE_UUID, "Molten Quiver", ModConfigs.MOLTEN_QUIVER_RANGED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                ModAttributes.getRangedVelocity(), new AttributeModifier(RANGED_VELOCITY_UUID, "Molten Quiver", ModConfigs.MOLTEN_QUIVER_VELOCITY.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
             );
         }
         return ATTRIBUTES;

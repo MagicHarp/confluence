@@ -13,7 +13,7 @@ import org.confluence.mod.item.curio.movement.StepStool;
 
 public class ExtraStepStoolRecipe extends SmithingTransformRecipe {
     public ExtraStepStoolRecipe(ResourceLocation pId) {
-        super(pId, Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.of(CurioItems.STEP_STOOL.get()), new ItemStack(CurioItems.STEP_STOOL.get()));
+        super(pId, Ingredient.EMPTY, Ingredient.of(CurioItems.STEP_STOOL.get(), CurioItems.HAND_OF_CREATION.get()), Ingredient.of(CurioItems.STEP_STOOL.get()), new ItemStack(CurioItems.STEP_STOOL.get()));
     }
 
     @Override

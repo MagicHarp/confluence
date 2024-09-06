@@ -1,0 +1,16 @@
+{
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "confluence:terraspark_boots"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

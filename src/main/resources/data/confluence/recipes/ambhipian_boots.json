@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:sailfish_boots"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:ambhipian_boots",
-        "count": 1
+        "item": "confluence:ambhipian_boots"
     }
 }

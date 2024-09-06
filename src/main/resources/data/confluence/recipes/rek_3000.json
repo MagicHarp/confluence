@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:radar"
@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:rek_3000",
-        "count": 1
+        "item": "confluence:rek_3000"
     }
 }

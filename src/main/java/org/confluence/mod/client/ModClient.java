@@ -1,5 +1,6 @@
 package org.confluence.mod.client;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -16,6 +17,8 @@ import org.confluence.mod.client.renderer.entity.BeeProjectileRenderer;
 import org.confluence.mod.client.renderer.entity.StarCloakEntityRenderer;
 import org.confluence.mod.client.renderer.entity.StepStoolRenderer;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
+import org.confluence.mod.client.renderer.gui.WorkshopScreen;
+import org.confluence.mod.menu.ModMenus;
 
 import static org.confluence.mod.entity.ModEntities.*;
 
@@ -26,6 +29,7 @@ public final class ModClient {
         event.enqueueWork(() -> {
             CuriosClient.registerRenderers();
             ClientConfigs.onLoad();
+            MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
         });
     }
 

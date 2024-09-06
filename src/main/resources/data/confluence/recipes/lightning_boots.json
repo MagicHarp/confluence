@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:spectre_boots"
@@ -12,7 +12,6 @@
         }
     ],
     "result": {
-        "item": "confluence:lightning_boots",
-        "count": 1
+        "item": "confluence:lightning_boots"
     }
 }

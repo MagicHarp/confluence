@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:crafting_shapeless",
+    "type": "confluence:workshop",
     "ingredients": [
         {
             "item": "confluence:water_walking_boots"
@@ -9,7 +9,6 @@
         }
     ],
     "result": {
-        "item": "confluence:lava_waders",
-        "count": 1
+        "item": "confluence:lava_waders"
     }
 }

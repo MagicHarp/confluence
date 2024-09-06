@@ -19,9 +19,10 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class StalkersQuiver extends MagicQuiver implements IAggroAttach, CustomName {
+public class StalkersQuiver extends MagicQuiver implements CustomName {
     public static final UUID RANGED_DAMAGE_UUID = UUID.fromString("B2071F24-9C45-35EC-A75E-96DABF0EEA9F");
     public static final UUID RANGED_VELOCITY_UUID = UUID.fromString("D03F9003-CB2E-7164-96C4-9C0E29FC4244");
+    public static final UUID AGGRO_UUID = UUID.fromString("94FC4648-9A8D-9B55-A035-BD6060EB496D");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public StalkersQuiver() {
@@ -32,16 +33,12 @@ public class StalkersQuiver extends MagicQuiver implements IAggroAttach, CustomN
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_DAMAGE_UUID, "Stalker's Quiver", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                ModAttributes.getRangedVelocity(), new AttributeModifier(RANGED_VELOCITY_UUID, "Stalker's Quiver", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                    ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_DAMAGE_UUID, "Stalker's Quiver", ModConfigs.STALKER_QUIVER_RANGED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    ModAttributes.getRangedVelocity(), new AttributeModifier(RANGED_VELOCITY_UUID, "Stalker's Quiver", ModConfigs.STALKER_QUIVER_VELOCITY.get(), AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Stalker's Quiver", ModConfigs.STALKERS_QUIVER_AGGRO.get(), AttributeModifier.Operation.ADDITION)
             );
         }
         return ATTRIBUTES;
-    }
-
-    @Override
-    public int getAggro() {
-        return ModConfigs.STALKERS_QUIVER_AGGRO.get();
     }
 
     @Override
@@ -53,5 +50,13 @@ public class StalkersQuiver extends MagicQuiver implements IAggroAttach, CustomN
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
         list.add(Component.translatable("item.confluence.putrid_scent.tooltip"));
+    }
+
+    public Component[] getInformation() {
+        return new Component[]{
+                Component.translatable("item.confluence.stalkers_quiver.info"),
+                Component.translatable("item.confluence.stalkers_quiver.info2"),
+                Component.translatable("item.confluence.stalkers_quiver.info3")
+        };
     }
 }
