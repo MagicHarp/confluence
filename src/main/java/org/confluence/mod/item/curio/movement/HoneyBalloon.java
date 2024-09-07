@@ -23,4 +23,9 @@ public class HoneyBalloon extends HoneyComb implements IJumpBoost {
         list.add(IHoneycomb.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

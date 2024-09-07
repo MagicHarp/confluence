@@ -43,4 +43,9 @@ public class AmberHorseshoeBalloon extends HoneyComb implements IFallResistance,
         list.add(IHoneycomb.TOOLTIP);
         list.add(Component.translatable("item.confluence.horseshoe_balloon.tooltip"));
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

@@ -21,6 +21,8 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModBlocks.WORKSHOP.get());
                 output.accept(ModItems.DEMON_HEART.get());
+                output.accept(ModItems.MAGIC_MIRROR.get());
+                output.accept(ModItems.CELL_PHONE.get());
                 for (CurioItems curioItems : CurioItems.values()) output.accept(curioItems.get());
             })
             .build());

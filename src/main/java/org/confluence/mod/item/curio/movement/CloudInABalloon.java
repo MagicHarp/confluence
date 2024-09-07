@@ -36,4 +36,9 @@ public class CloudInABalloon extends CloudInABottle implements IJumpBoost {
         list.add(IMultiJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

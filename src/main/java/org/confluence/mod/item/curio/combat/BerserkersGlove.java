@@ -26,12 +26,12 @@ public class BerserkersGlove extends BaseCurioItem implements IAutoAttack {
     public static final UUID KNOCK_BACK_UUID = UUID.fromString("DF71E32B-22B5-8F93-4550-12A6B8E98B4B");
     public static final UUID DISTANCE_UUID = UUID.fromString("65B1BF75-500B-76D2-1FE6-F4510BFDEF63");
     public static final UUID AGGRO_UUID = UUID.fromString("D918E5BA-E38B-7D46-51B6-53A573AA8079");
-    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTE;
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        if (ATTRIBUTE == null) {
-            ATTRIBUTE = ImmutableMultimap.<Attribute, AttributeModifier>builder()
+        if (ATTRIBUTES == null) {
+            ATTRIBUTES = ImmutableMultimap.<Attribute, AttributeModifier>builder()
                     .put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Berserkers Glove", ModConfigs.BERSERKERS_GLOVE_ARMOR.get(), AttributeModifier.Operation.ADDITION))
                     .put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Berserkers Glove", ModConfigs.BERSERKERS_GLOVE_SPEED.get(), AttributeModifier.Operation.MULTIPLY_TOTAL))
                     .put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(KNOCK_BACK_UUID, "Berserkers Glove", ModConfigs.BERSERKERS_GLOVE_KNOCKBACK.get(), AttributeModifier.Operation.MULTIPLY_TOTAL))
@@ -39,7 +39,7 @@ public class BerserkersGlove extends BaseCurioItem implements IAutoAttack {
                     .put(ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Berserkers Glove", ModConfigs.BERSERKERS_GLOVE_AGGRO.get(), AttributeModifier.Operation.ADDITION))
                     .build();
         }
-        return ATTRIBUTE;
+        return ATTRIBUTES;
     }
 
     @Override
@@ -51,6 +51,7 @@ public class BerserkersGlove extends BaseCurioItem implements IAutoAttack {
     public Component[] getInformation() {
         return new Component[]{
                 Component.translatable("item.confluence.berserkers_glove.info"),
+                Component.translatable("item.confluence.berserkers_glove.info2")
         };
     }
 }

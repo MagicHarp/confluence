@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
-import org.confluence.mod.item.curio.missellaneous.TreasureMagnet;
+import org.confluence.mod.item.curio.miscellaneous.TreasureMagnet;
 import org.confluence.mod.item.curio.movement.StepStool;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;

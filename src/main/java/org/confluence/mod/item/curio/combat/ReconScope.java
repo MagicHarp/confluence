@@ -35,13 +35,6 @@ public class ReconScope extends SniperScope {
         list.add(Component.translatable("item.confluence.recon_scope.tooltip"));
     }
 
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.recon_scope.info"),
-                Component.translatable("item.confluence.recon_scope.info2")
-        };
-    }
-
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
@@ -52,5 +45,10 @@ public class ReconScope extends SniperScope {
             );
         }
         return ATTRIBUTES;
+    }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
     }
 }

@@ -7,7 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import org.confluence.mod.integration.airhop.AirHopHelper;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixin.LivingEntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.PlayerJumpPacketC2S;
@@ -61,7 +61,7 @@ public final class PlayerJumpHandler {
                 fartFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, fartSpeed);
-                localPlayer.playSound(ModSounds.FART_SOUND.get());
+                localPlayer.playSound(ModSoundEvents.FART_SOUND.get());
             } else if (!sandstormFinished && sandstormSpeed > 0.0) {
                 if (remainSandstormTicks-- > 0) oneTimeJump(localPlayer, sandstormSpeed);
                 else jumpKeyDown = true;
@@ -72,12 +72,12 @@ public final class PlayerJumpHandler {
                 tsunamiFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, tsunamiSpeed);
-                localPlayer.playSound(ModSounds.DOUBLE_JUMP.get());
+                localPlayer.playSound(ModSoundEvents.DOUBLE_JUMP.get());
             } else if (!cloudFinished && cloudSpeed > 0.0) {
                 cloudFinished = true;
                 jumpKeyDown = true;
                 multiJump(localPlayer, cloudSpeed);
-                localPlayer.playSound(ModSounds.DOUBLE_JUMP.get());
+                localPlayer.playSound(ModSoundEvents.DOUBLE_JUMP.get());
             } else if (remainFlyTicks-- > 0) {
                 fly(localPlayer, flySpeed);
             } else {
@@ -108,7 +108,7 @@ public final class PlayerJumpHandler {
         double motionY = ((LivingEntityAccessor) localPlayer).callGetJumpPower() * speed;
         localPlayer.setDeltaMovement(vec3.x, motionY, vec3.z);
         if (localPlayer.isSprinting()) {
-            float f = localPlayer.getYRot() * ((float) Math.PI / 180F);
+            float f = localPlayer.getYRot() * Mth.DEG_TO_RAD;
             localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().add(-Mth.sin(f) * 0.2F, 0.0D, Mth.cos(f) * 0.2F));
         }
         localPlayer.hasImpulse = true;
@@ -118,18 +118,30 @@ public final class PlayerJumpHandler {
 
     private static void oneTimeJump(LocalPlayer localPlayer, double speed) {
         Vec3 vec3 = localPlayer.getDeltaMovement();
-        localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
+        double y = vec3.y;
+        if (y < speed) {
+            y += speed / 2.5;
+        } else {
+            y = speed;
+        }
+        localPlayer.setDeltaMovement(vec3.x, y, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) y));
     }
 
     private static void fly(LocalPlayer localPlayer, double speed) {
         Vec3 vec3 = localPlayer.getDeltaMovement();
-        localPlayer.setDeltaMovement(vec3.x, speed, vec3.z);
+        double y = vec3.y;
+        if (y < speed) {
+            y += speed / 2.5;
+        } else {
+            y = speed;
+        }
+        localPlayer.setDeltaMovement(vec3.x, y, vec3.z);
         localPlayer.hasImpulse = true;
         localPlayer.resetFallDistance();
-        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) speed));
+        NetworkHandler.CHANNEL.sendToServer(new PlayerJumpPacketC2S(false, true, (float) y));
     }
 
     public static void handleJumpPacket(PlayerJumpPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

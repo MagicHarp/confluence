@@ -35,4 +35,9 @@ public class SharkronBalloon extends TsunamiInABottle implements IJumpBoost {
         list.add(IMultiJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

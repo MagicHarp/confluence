@@ -52,7 +52,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("curios.tooltip.wall_climb", "可爬墙，按住shift键可快速下滑");
         add("curios.tooltip.wall_slide", "可沿墙滑下，按住shift键可更快地下滑");
         add("curios.tooltip.tabi", "双击一个方向可猛冲");
-        add("curios.tooltip.hurt_evasion", "有几率避开攻击");
+        add("curios.tooltip.dodge", "有几率避开攻击");
 
         add("info.confluence.time", "时间: [%s:%s]");
         add("info.confluence.radar", "敌人: %s");
@@ -171,6 +171,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
         add("item.confluence.step_stool.tooltip2", "额外高度：%s");
+        add("item.confluence.magic_mirror.tooltip", "盯着镜子便可回家");
+        add("item.confluence.cell_phone.tooltip", "显示所有信息");
+        add("item.confluence.cell_phone.tooltip2", "可随意回家");
 
         add("item.confluence.aglet.info", "金属带扣是能提升玩家移动速度的配饰");
         add("item.confluence.aglet.info2", "它出现在沉船宝箱中");
@@ -382,6 +385,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.bee_cloak.info2", "当玩家受伤时，三颗星星会落在玩家的当前位置，蜜蜂会被释放。");
         add("item.confluence.bee_cloak.info3", "它可以在带有蜂窝和星星斗篷的制作台上制作。");
         add("item.confluence.berserkers_glove.info", "狂战士手套是由泰坦手套和血肉指关节制作的配饰，具有两者的能力。");
+        add("item.confluence.berserkers_glove.info2", "可使近战武器和鞭能够自动挥舞");
         add("item.confluence.bezoar.info", "牛黄是一种免疫配饰，可赋予玩家对中毒减益的免疫力。");
         add("item.confluence.bezoar.info2", "它有几率从洞穴蜘蛛中掉落。");
         add("item.confluence.black_belt.info", "黑腰带是一种配饰，有 10% 的几率躲避攻击，包括从陷阱和熔岩等危险中受到的伤害。 ");
@@ -394,8 +398,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.cobalt_shield.info2", "它有几率从劫掠兽身上掉落。");
         add("item.confluence.cross_necklace.info", "十字项链是一种配饰，可使玩家在受到伤害后获得的无敌持续时间翻倍，从大约 0.67 秒增加到大约 1.33 秒。");
         add("item.confluence.cross_necklace.info2", "它有几率从唤魔者身上掉落。");
-        add("item.confluence.destroyer_emblem.info", "毁灭者勋章是一个配饰，可以让玩家的伤害增加 10%，暴击率增加 8%。");
-        add("item.confluence.destroyer_emblem.info2", "它可以在带有复仇者勋章和石巨人之眼的工作台上制作。");
         add("item.confluence.detoxification_capsule.info", "解毒囊是一种配饰，可使玩家对中毒减益和凋零减益产生免疫力。");
         add("item.confluence.detoxification_capsule.info2", "它可以在带有牛黄和圣水的工作台上制作。");
         add("item.confluence.energy_bar.info", "能量条是一种配饰，可使玩家对饥饿减益免疫。");
@@ -425,7 +427,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.holy_water.info", "圣水是一种配饰，可赋予玩家对凋零减益的免疫力。");
         add("item.confluence.holy_water.info2", "它有几率从凋零骷髅中掉落。");
         add("item.confluence.honey_comb.info", "蜂窝是一种配饰，装备后会生成 1-3 个（或装备蜂巢包时生成 1-4 个）蜜蜂射弹，每次玩家受到伤害时都会攻击附近的敌人。");
-        add("item.confluence.honey_comb.info2", "它有几率从蜜蜂身上掉落。");
+        add("item.confluence.honey_comb.info2", "它还会在受到伤害后提供蜂蜜增益，持续 5 秒。");
+        add("item.confluence.honey_comb.info3", "它有几率从蜜蜂身上掉落。");
         add("item.confluence.magic_quiver.info7", "这件物品有几率从凋零骷髅中掉落。");
         add("item.confluence.magma_stone.info", "岩浆石是从烈焰人掉落的配件。");
         add("item.confluence.magma_stone.info2", "它使佩戴者的近战攻击对敌人造成着火。");
@@ -456,29 +459,19 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.panic_necklace.info2", "它可以在地牢中的宝箱中找到。");
         add("item.confluence.power_glove.info", "强力手套是一种配饰，可使近战击退加倍，并增加 12% 的近战速度。");
         add("item.confluence.power_glove.info2", "它可以在制作台上使用泰坦手套和狂爪手套制作。");
-        add("item.confluence.putrid_scent.info", "腐香囊是一个配件，可以增加5%的伤害和暴击率，并减少400点仇恨。");
-        add("item.confluence.putrid_scent.info2", "它可以在地牢中的宝箱中找到。");
+        add("item.confluence.putrid_scent.info", "它可以在地牢中的宝箱中找到。");
         add("item.confluence.ranger_emblem.info", "游侠徽章是配件，可增加15%的远程伤害。");
         add("item.confluence.ranger_emblem.info2", "它有几率从凋零骷髅中掉落。");
-        add("item.confluence.recon_scope.info", "侦察镜是一种结合了狙击瞄准镜效果和腐香囊减少仇恨效果的配件。");
-        add("item.confluence.recon_scope.info2", "它可以在工作台上使用狙击镜和腐香囊制作.");
-        add("item.confluence.rifle_scope.info", "步枪瞄准镜是一种配件。");
-        add("item.confluence.rifle_scope.info2", "它赋予了在持枪时增加视野范围的能力。");
-        add("item.confluence.rifle_scope.info3", "它有几率从末影人身上掉落。");
+        add("item.confluence.rifle_scope.info", "它有几率从末影人身上掉落。");
         add("item.confluence.searchlight.info", "探照灯是一种配件，可使玩家免疫 黑暗 和 失明 。");
-        add("item.confluence.searchlight.info2", "它可以在工作台上使用蒙眼布和手电筒制作。");
         add("item.confluence.shackle.info", "镣铐是一种提供 1 点防御的配饰。");
         add("item.confluence.shackle.info2", "它可以在地牢中的宝箱中找到。");
         add("item.confluence.shark_tooth_necklace.info", "鲨牙项链是一种配件，有几率从溺尸身上掉落。");
         add("item.confluence.shot_put.info", "铅球是一种配件，可使玩家对漂浮减益产生免疫力。");
         add("item.confluence.shot_put.info2", "它可以在要塞的宝箱中找到。");
         add("item.confluence.sniper_scope.info", "狙击镜是一种配件，可提供 10% 的远程伤害增加和 10% 的远程暴击率。");
-        add("item.confluence.sniper_scope.info2", "它可以在工作台上使用步枪瞄准镜和毁灭者勋章制作。");
         add("item.confluence.sorcerer_emblem.info", "巫师徽章是配件，可增加15%的魔法伤害。");
         add("item.confluence.sorcerer_emblem.info2", "它有几率从唤魔者身上掉落。");
-        add("item.confluence.stalkers_quiver.info", "潜行者箭袋是一种结合了魔法箭袋效果和腐香囊减少仇恨效果的配件。");
-        add("item.confluence.stalkers_quiver.info2", "与一般的远程伤害加成不同，它只会提高武器的伤害，而不会影响弹药的伤害。");
-        add("item.confluence.stalkers_quiver.info3", "它可以在工作台上使用魔法箭袋和腐香囊制作。");
         add("item.confluence.star_cloak.info", "星星斗篷是一种配饰，每当玩家受到伤害时，它就会使三颗星星落在玩家周围。");
         add("item.confluence.star_cloak.info2", "它可以在林地府邸内的箱子中找到。");
         add("item.confluence.star_veil.info", "星星面纱是一种结合了星星斗篷和十字项链功能的配饰，可以生成流星弹，并增加玩家受伤时获得的无敌帧的长度。");
@@ -687,6 +680,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(FROG_GEAR.get(), "青蛙装备");
         add(STEP_STOOL.get(), "梯凳");
         add(HAND_OF_CREATION.get(), "创造之手");
+        add(ModItems.MAGIC_MIRROR.get(), "魔镜");
+        add(ModItems.CELL_PHONE.get(), "手机");
 
         add(ModEntities.BEE_PROJECTILE.get(), "蜜蜂射弹");
         add(ModEntities.STAR_CLOAK.get(), "坠星");

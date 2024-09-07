@@ -46,12 +46,4 @@ public class DestroyerEmblem extends BaseCurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {}
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.destroyer_emblem.info"),
-                Component.translatable("item.confluence.destroyer_emblem.info2")
-        };
-    }
 }

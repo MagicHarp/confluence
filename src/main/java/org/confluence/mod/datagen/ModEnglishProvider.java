@@ -53,7 +53,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.wall_climb", "Allows the ability to climb walls, hold shift key to slide down");
         add("curios.tooltip.wall_slide", "Allows the ability to slide down walls, hold shift key to slide down quickly");
         add("curios.tooltip.tabi", "Allows the ability to dash while double tap a direction");
-        add("curios.tooltip.hurt_evasion", "Gives a chance to dodge attacks");
+        add("curios.tooltip.dodge", "Gives a chance to dodge attacks");
 
         add("info.confluence.time", "Time: [%s:%s]");
         add("info.confluence.radar", "Enemies: %s");
@@ -175,6 +175,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
         add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
+        add("item.confluence.magic_mirror.tooltip", "Gaze in the mirror to return home");
+        add("item.confluence.cell_phone.tooltip", "Displays everything");
+        add("item.confluence.cell_phone.tooltip2", "Allows you to return home at will");
 
         add("item.confluence.aglet.info", "It can be found in Shipwreck Chests.");
         add("item.confluence.anklet_of_the_wind.info", "The effect also stacks with the movement speed bonus of the Aglet.");
@@ -205,7 +208,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.platinum_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last minute.");
         add("item.confluence.depth_meter.info", "The Depth Meter have a Chance to be dropped from Bats.");
         add("item.confluence.compass.info", "The Compass have a Chance to be dropped from Bats.");
-        add("item.confluence.dps_meter.info", "The DPS Meter a Chance to be dropped from Creeper.");
+        add("item.confluence.dps_meter.info", "The DPS Meter have a Chance to be dropped from Creeper.");
         add("item.confluence.fishermans_pocket_guide.info", "This item can be located in the chests found within Fisherman Villagers' houses.");
         add("item.confluence.life_form_analyzer.info", "The Lifeform Analyzer have a Chance to be dropped from Glow Squid.");
         add("item.confluence.metal_detector.info", "The Metal Detector have a Chance to be dropped from Warden.");
@@ -243,7 +246,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.info", "When the Turtle died for Freezing chance to dropped this item.");
         add("item.confluence.hand_drill.info", "It have a Chance to be dropped from Elder Guardian.");
         add("item.confluence.holy_water.info", "It have a Chance to be dropped from Wither Skeleton.");
-        add("item.confluence.honey_comb.info", "It have a Chance to be dropped from Wither Bee.");
+        add("item.confluence.honey_comb.info", "The Honey Comb is a accessory which, when equipped, spawns 1–3 (or 1–4 with a Hive Pack equipped) bee projectiles which attack nearby enemies each time the player takes damage.");
+        add("item.confluence.honey_comb.info2", "It also grants the Honey buff for 5 seconds after being damaged.");
+        add("item.confluence.honey_comb.info3", "It have a Chance to be dropped from Bee.");
         add("item.confluence.magic_quiver.info", "This item have a Chance to be dropped from Wither Skeleton.");
         add("item.confluence.magma_stone.info", "It have a Chance to be dropped from Blaze.");
         add("item.confluence.moon_stone.info", "It have a Chance to be dropped from Phantom.");
@@ -264,6 +269,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.vitamins.info", "It have a Chance to be dropped from Witch.");
         add("item.confluence.warrior_emblem.info", "It have a Chance to be dropped from Vindicator.");
         add("item.confluence.demon_heart.info", "It to be dropped from Wither.");
+        add("item.confluence.berserkers_glove.info", "The Berserker's Glove is a Hardmode accessory crafted from the Power Glove and Flesh Knuckles, granting the abilities of both.");
+        add("item.confluence.berserkers_glove.info2", "Autoswing for melee weapons and whips");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 

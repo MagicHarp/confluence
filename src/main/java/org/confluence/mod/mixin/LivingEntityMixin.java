@@ -19,7 +19,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.expert.RoyalGel;
-import org.confluence.mod.item.curio.missellaneous.IFlowerBoots;
+import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModDamageTypes;

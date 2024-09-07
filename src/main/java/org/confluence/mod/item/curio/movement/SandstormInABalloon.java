@@ -36,4 +36,9 @@ public class SandstormInABalloon extends SandstormInABottle implements IJumpBoos
         list.add(IOneTimeJump.TOOLTIP);
         list.add(IJumpBoost.TOOLTIP);
     }
+
+    @Override
+    public Component[] getInformation() {
+        return new Component[]{};
+    }
 }

@@ -27,6 +27,7 @@ public class RifleScope extends BaseCurioItem implements IScope {
         list.add(TOOLTIP2);
     }
 
+    @Override
     public Component[] getInformation() {
         return new Component[]{
             Component.translatable("item.confluence.rifle_scope.info")

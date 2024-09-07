@@ -7,9 +7,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 
-public final class ModSounds {
+public final class ModSoundEvents {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Confluence.MODID);
 
+    public static final RegistryObject<SoundEvent> TRANSMISSION = register("transmission");
     public static final RegistryObject<SoundEvent> WAVING = register("waving");
     public static final RegistryObject<SoundEvent> DOUBLE_JUMP = register("double_jump");
     public static final RegistryObject<SoundEvent> SHOES_FLY = register("shoes_fly");

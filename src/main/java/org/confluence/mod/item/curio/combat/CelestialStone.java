@@ -2,7 +2,6 @@ package org.confluence.mod.item.curio.combat;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -49,12 +48,5 @@ public class CelestialStone extends BaseCurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         ModEffects.healPerSecond(slotContext.entity(), 2.0F);
-    }
-
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.celestial_stone.info"),
-                Component.translatable("item.confluence.celestial_stone.info2")
-        };
     }
 }

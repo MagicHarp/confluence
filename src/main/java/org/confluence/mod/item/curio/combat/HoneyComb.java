@@ -16,7 +16,9 @@ public class HoneyComb extends BaseCurioItem implements IHoneycomb {
 
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.honey_comb.info")
+                Component.translatable("item.confluence.honey_comb.info"),
+                Component.translatable("item.confluence.honey_comb.info2"),
+                Component.translatable("item.confluence.honey_comb.info3")
         };
     }
 }

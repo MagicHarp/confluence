@@ -17,7 +17,7 @@ import org.confluence.mod.loot.ModLootModifiers;
 import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public final class Confluence {
         ModTabs.TABS.register(bus);
         ModAttributes.ATTRIBUTES.register(bus);
         ModEffects.EFFECTS.register(bus);
-        ModSounds.SOUNDS.register(bus);
+        ModSoundEvents.SOUNDS.register(bus);
         ModLootModifiers.MODIFIERS.register(bus);
         ModEntities.ENTITIES.register(bus);
         ModParticles.PARTICLES.register(bus);

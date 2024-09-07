@@ -28,7 +28,7 @@ public class BlackBelt extends BaseCurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("curios.tooltip.hurt_evasion"));
+        list.add(Component.translatable("curios.tooltip.dodge"));
     }
 
     @Override

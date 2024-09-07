@@ -18,7 +18,7 @@ import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.options.CurrentDustOptions;
 import org.confluence.mod.item.curio.BaseCurioItem;
-import org.confluence.mod.misc.ModSounds;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.SpeedBootsNBTPacketC2S;
 import org.confluence.mod.util.CuriosUtils;
@@ -70,7 +70,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
                         NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
                     }
                     if (ClientConfigs.playShoesSound && player.level().getGameTime() % 4 == 0) {
-                        player.playSound(ModSounds.SHOES_WALK.get());
+                        player.playSound(ModSoundEvents.SHOES_WALK.get());
                     }
                 }
                 if (ClientConfigs.showShoesParticle) {

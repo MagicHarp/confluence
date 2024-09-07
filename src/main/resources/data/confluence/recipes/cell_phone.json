@@ -1,0 +1,14 @@
+{
+    "type": "confluence:workshop",
+    "ingredients": [
+        {
+            "item": "confluence:pda"
+        },
+        {
+            "item": "confluence:magic_mirror"
+        }
+    ],
+    "result": {
+        "item": "confluence:cell_phone"
+    }
+}

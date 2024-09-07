@@ -11,8 +11,8 @@ import org.confluence.mod.item.curio.expert.*;
 import org.confluence.mod.item.curio.fishing.AnglerEarring;
 import org.confluence.mod.item.curio.health.BandOfRegeneration;
 import org.confluence.mod.item.curio.informational.*;
-import org.confluence.mod.item.curio.missellaneous.FlowerBoots;
-import org.confluence.mod.item.curio.missellaneous.TreasureMagnet;
+import org.confluence.mod.item.curio.miscellaneous.FlowerBoots;
+import org.confluence.mod.item.curio.miscellaneous.TreasureMagnet;
 import org.confluence.mod.item.curio.movement.*;
 import org.confluence.mod.util.EnumRegister;
 

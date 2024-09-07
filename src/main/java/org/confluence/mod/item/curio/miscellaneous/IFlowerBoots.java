@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.missellaneous;
+package org.confluence.mod.item.curio.miscellaneous;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

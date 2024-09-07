@@ -1,4 +1,4 @@
-package org.confluence.mod.item.curio.missellaneous;
+package org.confluence.mod.item.curio.miscellaneous;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;

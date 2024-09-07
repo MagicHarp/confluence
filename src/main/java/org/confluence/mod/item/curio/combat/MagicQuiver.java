@@ -51,12 +51,6 @@ public class MagicQuiver extends BaseCurioItem implements IMagicQuiver {
         list.add(Component.translatable("item.confluence.magic_quiver.tooltip2"));
     }
 
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.magic_quiver.info7")
-        };
-    }
-
     public static boolean shouldConsume(LivingEntity living) {
         return living.getRandom().nextFloat() >= ModConfigs.MAGIC_QUIVER_NO_CONSUME_CHANCE.get() || CuriosUtils.noSameCurio(living, IMagicQuiver.class);
     }

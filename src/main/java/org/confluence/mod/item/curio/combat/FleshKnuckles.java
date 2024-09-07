@@ -23,7 +23,7 @@ import java.util.UUID;
 public class FleshKnuckles extends BaseCurioItem {
     public static final UUID ARMOR_UUID = UUID.fromString("91F63796-420A-FFCB-504C-FEAA53C7DFC4");
     public static final UUID AGGRO_UUID = UUID.fromString("D22468D3-5FC6-A35C-A1CC-C27F398BE5DF");
-    private static ImmutableMultimap<Attribute, AttributeModifier> ARMOR;
+    private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public FleshKnuckles() {
         super(ModRarity.PINK);
@@ -31,13 +31,13 @@ public class FleshKnuckles extends BaseCurioItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        if (ARMOR == null) {
-            ARMOR = ImmutableMultimap.of(
+        if (ATTRIBUTES == null) {
+            ATTRIBUTES = ImmutableMultimap.of(
                     Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_ARMOR.get(), AttributeModifier.Operation.ADDITION),
                     ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Flesh Knuckles", ModConfigs.FLESH_KNUCKLES_AGGRO.get(), AttributeModifier.Operation.ADDITION)
             );
         }
-        return ARMOR;
+        return ATTRIBUTES;
     }
 
     @Override
@@ -47,8 +47,7 @@ public class FleshKnuckles extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.flesh_knuckles.info"),
-                Component.translatable("item.confluence.flesh_knuckles.info2")
+                Component.translatable("item.confluence.flesh_knuckles.info")
         };
     }
 }

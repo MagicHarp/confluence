@@ -58,8 +58,7 @@ public class MoonStone extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.moon_stone.info"),
-                Component.translatable("item.confluence.moon_stone.info2"),
+                Component.translatable("item.confluence.moon_stone.info")
         };
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.client.color.FloatRGB;
-import org.confluence.mod.item.curio.missellaneous.IFlowerBoots;
+import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;
