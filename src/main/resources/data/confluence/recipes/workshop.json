@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "aba",
+        "cdc",
+        "c c"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:red_wool"
+        },
+        "b": {
+            "item": "minecraft:crafting_table"
+        },
+        "c": {
+            "item": "minecraft:stick"
+        },
+        "d": {
+            "item": "minecraft:bookshelf"
+        }
+    },
+    "result": {
+        "item": "confluence:workshop"
+    }
+}
