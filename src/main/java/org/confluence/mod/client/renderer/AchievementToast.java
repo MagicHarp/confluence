@@ -40,7 +40,7 @@ public class AchievementToast implements Toast {
     public @NotNull Visibility render(@NotNull GuiGraphics pGuiGraphics, @NotNull ToastComponent pToastComponent, long pTimeSinceLastVisible) {
         Font font = pToastComponent.getMinecraft().font;
         pGuiGraphics.pose().pushPose();
-        pGuiGraphics.pose().translate(0.0F, 128.0F, 0.0F);
+        pGuiGraphics.pose().translate(0.0F, 80.0F, 0.0F);
         pGuiGraphics.blit(TEXTURE, 0, 0, 0, 0, width(), height());
         renderTitle(pGuiGraphics, pTimeSinceLastVisible, font);
         renderDescription(pGuiGraphics, font);
@@ -62,7 +62,7 @@ public class AchievementToast implements Toast {
     private void renderDescription(@NotNull GuiGraphics pGuiGraphics, Font font) {
         List<FormattedCharSequence> list = font.split(display.description(), 141);
         if (list.size() == 1) {
-            pGuiGraphics.drawString(font, list.get(0), 8, 18 + 32, -1, false);
+            pGuiGraphics.drawString(font, list.get(0), 8, 44, 0, false);
         } else {
             int l = 48 - list.size() * 9 / 2;
             for (FormattedCharSequence formattedcharsequence : list) {
