@@ -31,7 +31,6 @@ public class MagicMirror extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
-        player.playSound(ModSoundEvents.TRANSMISSION.get());
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
@@ -56,6 +55,7 @@ public class MagicMirror extends Item {
             }
             serverPlayer.getCooldowns().addCooldown(this, 10);
         }
+        living.playSound(ModSoundEvents.TRANSMISSION.get());
         return itemStack;
     }
 }

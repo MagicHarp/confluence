@@ -17,7 +17,6 @@
         }
     },
     "result": {
-        "item": "confluence:magic_mirror",
-        "count": 1
+        "item": "confluence:magic_mirror"
     }
 }

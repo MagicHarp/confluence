@@ -64,7 +64,6 @@ import org.confluence.mod.item.curio.expert.BrainOfConfusion;
 import org.confluence.mod.item.curio.expert.WormScarf;
 import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
-import org.confluence.mod.item.mana.IManaWeapon;
 import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.misc.ModAttributes;
@@ -78,7 +77,6 @@ import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.CuriosApi;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -162,7 +160,7 @@ public final class ForgeEvents {
         ThornsEffect.apply(living, damageSource.getEntity(), amount);
         MagicCuffs.apply(living, damageSource, amount);
 
-        amount = IManaWeapon.apply(damageSource, amount);
+        amount = ModAttributes.applyMagicDamage(damageSource, amount);
         amount = ModAttributes.applyRangedDamage(living, damageSource, amount);
         amount = ArcheryEffect.apply(living, damageSource, amount);
         amount = ManaSicknessEffect.apply(damageSource, amount);
@@ -219,26 +217,28 @@ public final class ForgeEvents {
             double range = self.getAttributeValue(Attributes.FOLLOW_RANGE);
             double rangeSqr = range * range;
             self.level().players().stream()
-                .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
-                .max((playerA, playerB) -> {
-                    AtomicInteger atomic = new AtomicInteger();
-                    playerA.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityA ->
-                        playerB.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityB ->
-                            atomic.set(abilityA.getAggro() - abilityB.getAggro())
-                        )
-                    );
-                    return atomic.get();
-                }).ifPresent(player -> {
-                    if (player == playerO) return;
-                    playerO.getCapability(AbilityProvider.CAPABILITY).ifPresent(abilityO ->
-                        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(ability -> {
-                            if (abilityO.getAggro() < ability.getAggro()) {
-                                event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
-                            }
-                        })
-                    );
-                });
+                    .filter(player -> player.distanceToSqr(self) < rangeSqr && self.canAttack(player))
+                    .max((playerA, playerB) -> {
+                        AttributeInstance instanceA = playerA.getAttribute(ModAttributes.getAggro());
+                        AttributeInstance instanceB = playerB.getAttribute(ModAttributes.getAggro());
+                        if (instanceA != null && instanceB != null) {
+                            return (int) (instanceA.getValue() - instanceB.getValue());
+                        }
+                        return 0;
+                    }).ifPresent(player -> {
+                        if (player == playerO) return;
+                        AttributeInstance instanceO = playerO.getAttribute(ModAttributes.getAggro());
+                        AttributeInstance instance = player.getAttribute(ModAttributes.getAggro());
+                        if (instanceO != null && instance != null && instanceO.getValue() < instance.getValue()) {
+                            event.setNewTarget(player); // 只有当新目标的仇恨值大于旧目标时，才设置新目标
+                        }
+                    });
         }
+    }
+
+    @SubscribeEvent
+    public static void livingTick(LivingEvent.LivingTickEvent event) {
+        ModAttributes.applyPickupRange(event.getEntity());
     }
 
     @SubscribeEvent

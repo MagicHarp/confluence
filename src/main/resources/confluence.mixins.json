@@ -4,6 +4,7 @@
         "client.BiomeColorsMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
+        "client.ClientAdvancementsMixin",
         "client.ClientEntityMixin",
         "client.ClientLivingEntityMixin",
         "client.ClientPacketListenerMixin",

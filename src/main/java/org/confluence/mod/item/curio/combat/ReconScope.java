@@ -17,18 +17,14 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class ReconScope extends SniperScope implements IAggroAttach {
+public class ReconScope extends SniperScope {
     public static final UUID CRIT_UUID = UUID.fromString("9F9D07C4-B7EF-F6F3-A9F5-2D6833E32C28");
     public static final UUID RANGED_UUID = UUID.fromString("057340AC-3837-20ED-E89F-B171F71EA00C");
+    public static final UUID AGGRO_UUID = UUID.fromString("44F5BB79-B985-DDCB-7D63-C074D967BAAC");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public ReconScope() {
         super(ModRarity.PINK);
-    }
-
-    @Override
-    public int getAggro() {
-        return -400;
     }
 
     @Override
@@ -38,19 +34,13 @@ public class ReconScope extends SniperScope implements IAggroAttach {
         list.add(Component.translatable("item.confluence.recon_scope.tooltip"));
     }
 
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.recon_scope.info"),
-            Component.translatable("item.confluence.recon_scope.info2")
-        };
-    }
-
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.ADDITION),
-                ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                    ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.ADDITION),
+                    ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Recon Scope", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Recon Scope", -400, AttributeModifier.Operation.ADDITION)
             );
         }
         return ATTRIBUTES;

@@ -403,10 +403,11 @@ public final class ModTabs {
             })
             .build());
     // 饰品
-    public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("curios",
+    public static final RegistryObject<CreativeModeTab> JEWELRY = TABS.register("accessories",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ACCESSORIES_ICON.get()))
-            .title(Component.translatable("creativetab.confluence.curios"))
+            .title(Component.translatable("creativetab.confluence.accessories"))
             .displayItems((parameters, output) -> {
+                output.accept(ModBlocks.WORKSHOP.get());
                 output.accept(ModItems.DEMON_HEART.get());
                 for (CurioItems curioItems : CurioItems.values()) output.accept(curioItems.get());
             })

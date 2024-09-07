@@ -67,7 +67,6 @@ public final class PlayerEvents {
             IRangePickup.Star.apply(player);
             IRangePickup.Heart.apply(player);
             IRangePickup.Coin.apply(player);
-            IRangePickup.Drops.apply(player);
             if (PlayerUtils.isServerNotFake(player)) {
                 ServerPlayer serverPlayer = (ServerPlayer) player;
                 PlayerUtils.regenerateMana(serverPlayer);

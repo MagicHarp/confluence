@@ -13,7 +13,6 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.HealthAndMana.IAutoGetMana;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
-import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.potion.ManaPotionItem;
 import org.confluence.mod.util.CuriosUtils;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -29,7 +28,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
     private int currentMana;
     private transient int regenerateDelay;
     private transient Integer maxMana;
-    private float magicAttackBonus;
     private float extractRatio;
     private boolean manaRegenerationBand;
 
@@ -40,7 +38,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.additionalMana = 0;
         this.currentMana = 20;
         this.regenerateDelay = 0;
-        this.magicAttackBonus = 1.0F;
         this.extractRatio = 1.0F;
         this.manaRegenerationBand = false;
 
@@ -53,7 +50,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         nbt.putInt("stars", stars);
         nbt.putInt("additionalMana", additionalMana);
         nbt.putInt("currentMana", currentMana);
-        nbt.putFloat("magicAttackBonus", magicAttackBonus);
         nbt.putFloat("extractRatio", extractRatio);
         nbt.putBoolean("manaRegenerationBand", manaRegenerationBand);
         nbt.putBoolean("arcaneCrystalUsed", arcaneCrystalUsed);
@@ -65,7 +61,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.stars = nbt.getInt("stars");
         this.additionalMana = nbt.getInt("additionalMana");
         this.currentMana = nbt.getInt("currentMana");
-        this.magicAttackBonus = nbt.getFloat("magicAttackBonus");
         this.extractRatio = nbt.getFloat("extractRatio");
         this.manaRegenerationBand = nbt.getBoolean("manaRegenerationBand");
         this.arcaneCrystalUsed = nbt.getBoolean("arcaneCrystalUsed");
@@ -143,7 +138,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     public void flushAbility(LivingEntity living) {
-        MutableFloat bonus = new MutableFloat(1.0);
         MutableFloat ratio = new MutableFloat(1.0);
         AtomicBoolean band = new AtomicBoolean();
         AtomicInteger mana = new AtomicInteger();
@@ -152,9 +146,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
                 ItemStack itemStack = itemHandlerModifiable.getStackInSlot(i);
                 Item item = itemStack.getItem();
-                if (item instanceof IMagicAttack iMagicAttack) {
-                    bonus.addAndGet(iMagicAttack.getMagicBonus());
-                }
                 if (item instanceof IManaReduce iManaReduce) {
                     ratio.addAndGet(-iManaReduce.getManaReduce());
                 }
@@ -165,14 +156,9 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
                     .ifPresent(itemPrefix -> mana.addAndGet(itemPrefix.additionalMana));
             }
         });
-        this.magicAttackBonus = bonus.getValue();
         this.extractRatio = ratio.getValue();
         this.manaRegenerationBand = band.get();
         this.additionalMana = mana.get();
-    }
-
-    public float getMagicAttackBonus() {
-        return magicAttackBonus;
     }
 
     public boolean hasManaRegenerationBand() {
@@ -191,7 +177,6 @@ public final class ManaStorage implements INBTSerializable<CompoundTag> {
         this.stars = manaStorage.stars;
         this.additionalMana = manaStorage.additionalMana;
         this.currentMana = manaStorage.currentMana;
-        this.magicAttackBonus = manaStorage.magicAttackBonus;
         this.extractRatio = manaStorage.extractRatio;
         this.manaRegenerationBand = manaStorage.manaRegenerationBand;
 

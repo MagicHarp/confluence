@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(CarriedBlockLayer.class)
-public class CarriedBlockLayerMixin {
+public abstract class CarriedBlockLayerMixin {
     @Unique private RenderLayerParent<EnderMan, EndermanModel<EnderMan>> confluence$renderer;
 
     @Inject(method = "<init>", at = @At("RETURN"))

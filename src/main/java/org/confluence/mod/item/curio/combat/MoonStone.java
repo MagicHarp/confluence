@@ -23,6 +23,7 @@ public class MoonStone extends BaseCurioItem {
     public static final UUID CRIT_UUID = UUID.fromString("3CCCFFBE-2975-FFF3-FF4C-2AF08AA74CC4");
     public static final UUID MINING_UUID = UUID.fromString("BD0CC75B-8DE2-CDAC-35C7-B8947CB285F2");
     public static final UUID RANGED_UUID = UUID.fromString("6E8B22E4-8888-8C96-12B0-4B4C5CE84593");
+    public static final UUID MAGIC_UUID = UUID.fromString("303F8134-E854-5D38-5722-1457C99605E2");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public MoonStone() {
@@ -32,14 +33,15 @@ public class MoonStone extends BaseCurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", 0.02, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Moon Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            ATTRIBUTES = builder.build();
+            ATTRIBUTES = ImmutableMultimap.<Attribute, AttributeModifier>builder()
+                    .put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Moon Stone", 4, AttributeModifier.Operation.ADDITION))
+                    .put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Moon Stone", 0.02, AttributeModifier.Operation.ADDITION))
+                    .put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Moon Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(ModAttributes.getMagicDamage(), new AttributeModifier(MAGIC_UUID, "Moon Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .build();
         }
         LivingEntity living = slotContext.entity();
         if (living == null) return EMPTY_ATTRIBUTE;
@@ -53,19 +55,10 @@ public class MoonStone extends BaseCurioItem {
         ModEffects.healPerSecond(living, 2.0F);
     }
 
-    @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.moon_stone.info"),
-            Component.translatable("item.confluence.moon_stone.info2"),
-            Component.translatable("item.confluence.moon_stone.info3"),
-            Component.translatable("item.confluence.moon_stone.info4"),
-            Component.translatable("item.confluence.moon_stone.info5"),
-            Component.translatable("item.confluence.moon_stone.info6"),
-            Component.translatable("item.confluence.moon_stone.info7"),
-            Component.translatable("item.confluence.moon_stone.info8"),
-            Component.translatable("item.confluence.moon_stone.info9"),
-            Component.translatable("item.confluence.moon_stone.info10")
+                Component.translatable("item.confluence.moon_stone.info"),
+                Component.translatable("item.confluence.moon_stone.info2"),
         };
     }
 }

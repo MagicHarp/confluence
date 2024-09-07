@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(Connection.class)
-public class ConnectionMixin {
+public abstract class ConnectionMixin {
     @Unique private static final Map<Object, Long> counter = new HashMap<>();
     @Inject(method = "genericsFtw",at = @At("HEAD"))
     private static void packet(Packet pPacket, PacketListener pListener, CallbackInfo ci){

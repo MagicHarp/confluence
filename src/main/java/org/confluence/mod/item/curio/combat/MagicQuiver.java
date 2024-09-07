@@ -3,6 +3,7 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -45,7 +47,10 @@ public class MagicQuiver extends BaseCurioItem implements IMagicQuiver {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.magic_quiver.tooltip"));
         list.add(Component.translatable("item.confluence.magic_quiver.tooltip2"));
+    }
+
+    public static boolean shouldConsume(LivingEntity living) {
+        return living.getRandom().nextFloat() >= 0.2 || CuriosUtils.noSameCurio(living, IMagicQuiver.class);
     }
 }

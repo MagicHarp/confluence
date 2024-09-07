@@ -23,7 +23,6 @@ public class AncientChisel extends BaseCurioItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
-        list.add(Component.translatable("item.confluence.ancient_chisel.tooltip"));
         list.add(Component.translatable("item.confluence.ancient_chisel.tooltip2"));
     }
 

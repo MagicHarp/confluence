@@ -19,9 +19,10 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class PutridScent extends BaseCurioItem implements IAggroAttach {
+public class PutridScent extends BaseCurioItem {
     public static final UUID DAMAGE_UUID = UUID.fromString("70F6E4B4-64AC-4B2A-AAD6-8C35AFB9507D");
     public static final UUID CRIT_UUID = UUID.fromString("7C35023D-57DA-189C-6CD1-BA987AFF6142");
+    public static final UUID AGGRO_UUID = UUID.fromString("492B12F5-5FB1-9FA3-A34A-BC7C3B206E76");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public PutridScent() {
@@ -32,8 +33,9 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL),
-                ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Recon Scope", 0.05, AttributeModifier.Operation.ADDITION)
+                    Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.MULTIPLY_TOTAL),
+                    ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Putrid Scent", 0.05, AttributeModifier.Operation.ADDITION),
+                    ModAttributes.getAggro(), new AttributeModifier(AGGRO_UUID, "Putrid Scent", -400, AttributeModifier.Operation.ADDITION)
             );
         }
         return ATTRIBUTES;
@@ -45,16 +47,11 @@ public class PutridScent extends BaseCurioItem implements IAggroAttach {
     }
 
     @Override
-    public int getAggro() {
-        return -400;
-    }
-
-    @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.putrid_scent.info"),
-            Component.translatable("item.confluence.putrid_scent.info2"),
-            Component.translatable("item.confluence.putrid_scent.info3")
+                Component.translatable("item.confluence.putrid_scent.info"),
+                Component.translatable("item.confluence.putrid_scent.info2"),
+                Component.translatable("item.confluence.putrid_scent.info3")
         };
     }
 }

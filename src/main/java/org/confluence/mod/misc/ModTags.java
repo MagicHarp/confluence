@@ -47,7 +47,6 @@ public final class ModTags {
         public static final TagKey<Item> HARDCORE = register("hardcore");
         public static final TagKey<Item> BOTTOMLESS = register("bottomless");
         public static final TagKey<Item> FRUIT = register("fruit");
-        public static final TagKey<Item> MINUTE_WATCH = register("minute_watch");
         public static final TagKey<Item> RANGED_WEAPON = register("ranged_weapon");
         public static final TagKey<Item> DESERT_FOSSIL = register("desert_fossil");
         public static final TagKey<Item> GRAVEL = register("gravel");

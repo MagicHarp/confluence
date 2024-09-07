@@ -77,10 +77,4 @@ public interface IRangePickup {
             });
         }
     }
-
-    interface Drops {
-        static void apply(Player player) {
-            IRangePickup.apply(player, PlayerAbility::getDropsRange, itemStack -> !itemStack.is(ModTags.Items.PROVIDE_MANA) && !itemStack.is(ModTags.Items.PROVIDE_LIFE) && !itemStack.is(ModTags.Items.COIN));
-        }
-    }
 }

@@ -70,7 +70,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             Foods.STAR_FRUIT.get(), Foods.POMEGRANATE.get(), Foods.RAMBUTAN.get(),
             Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
         );
-        tag(ModTags.Items.MINUTE_WATCH).add(CurioItems.GOLD_WATCH.get(), CurioItems.PLATINUM_WATCH.get());
         tag(Tags.Items.TOOLS_BOWS).add(
             Bows.WOODEN_SHORT_BOW.get(),
             Bows.COPPER_SHORT_BOW.get(),

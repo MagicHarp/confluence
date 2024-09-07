@@ -3,13 +3,17 @@ package org.confluence.mod.item.curio.combat;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModRarity;
+import org.confluence.mod.util.CuriosUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
@@ -24,6 +28,10 @@ public class MoltenQuiver extends MagicQuiver {
 
     public MoltenQuiver() {
         super(ModRarity.PINK);
+    }
+
+    public static void applyToArrow(LivingEntity living, AbstractArrow arrow) {
+        if (CuriosUtils.hasCurio(living, CurioItems.MOLTEN_QUIVER.get())) arrow.setSecondsOnFire(100);
     }
 
     @Override

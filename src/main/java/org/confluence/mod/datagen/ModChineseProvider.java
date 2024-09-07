@@ -57,7 +57,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.misc", "汇流来世 | 杂项");
         add("creativetab.confluence.food_and_potions", "汇流来世 | 食物与药水");
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
-        add("creativetab.confluence.curios", "汇流来世 | 饰品");
+        add("creativetab.confluence.accessories", "汇流来世 | 配饰");
         add("creativetab.confluence.mechanical", "汇流来世 | 器械");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
@@ -207,16 +207,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.sun_stone.tooltip", "在白天时略微增强属性值");
         add("item.confluence.moon_stone.tooltip", "在夜晚时略微增强属性值");
         add("item.confluence.putrid_scent.tooltip", "多人模式下，敌怪不太可能以你为目标");
-        add("item.confluence.putrid_scent.tooltip2", "伤害和暴击率增加5%");
-        add("item.confluence.power_glove.tooltip", "增加近战击退、近战速度增加12%");
         add("item.confluence.panic_necklace.tooltip", "受到伤害后增加移动速度");
         add("item.confluence.paladins_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_shield.tooltip", "当生命值超过25%时，吸收对团队中玩家造成的25%伤害");
         add("item.confluence.frozen_shield.tooltip2", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "当生命值低于50%时，在主人周围放置一个外壳，使伤害降低25%");
         add("item.confluence.fire_gauntlet.tooltip", "增加近战击退并使攻击附着火焰伤害");
-        add("item.confluence.eye_of_the_golem.tooltip", "暴击率提高10%");
-        add("item.confluence.destroyer_emblem.tooltip", "暴击率提高8%");
         add("item.confluence.cross_necklace.tooltip", "增加受到伤害后的无敌时间");
         add("item.confluence.terraspark_boots.tooltip2", "对火块免疫并在7秒内对熔岩免疫");
         add("item.confluence.fledgling_wings.tooltip", "提供飞行的能力");
@@ -251,9 +247,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "扩大钱币的拾取范围");
         add("item.confluence.gravity_globe.tooltip", "可让持有者反转重力");
         add("item.confluence.gravity_globe.tooltip2", "按跳跃键可改变重力");
-        add("item.confluence.sorcerer_emblem.tooltip", "魔法伤害提高15%");
         add("item.confluence.sweetheart_necklace.tooltip", "受到伤害后释放蜜蜂并将使用者浸入蜂蜜中、并提高移动速度");
-        add("item.confluence.ancient_chisel.tooltip", "采矿速度提高25%");
         add("item.confluence.ancient_chisel.tooltip2", "“古老的问题需要古老的解决方案”");
         add("item.confluence.lucky_coin.tooltip", "击中敌人有时会掉落额外的钱币");
         add("item.confluence.coin_ring.tooltip", "扩大钱币拾取范围、击中敌人有时会掉落额外的钱币");
@@ -278,7 +272,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.hand_warmer.tooltip", "对寒冷和冰冻效果免疫");
         add("item.confluence.mana_cloak.tooltip", "收集星星会恢复魔力");
         add("item.confluence.star_cloak.tooltip", "受到伤害后会使星星坠落");
-        add("item.confluence.magic_quiver.tooltip", "箭的伤害提高10%，箭的速度大大提高");
         add("item.confluence.magic_quiver.tooltip2", "20%几率不消耗箭");
         add("item.confluence.molten_quiver.tooltip", "点燃木箭，火光熊熊");
         add("item.confluence.molten_quiver.tooltip2", "“在恐惧中颤抖吧！”");
@@ -290,9 +283,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "结合鞋钉使用时能力还会有所提升");
         add("item.confluence.shoe_spikes.tooltip", "结合攀爬爪使用时能力还会有所提升");
         add("item.confluence.frog_gear.tooltip", "“身为绿皮生物可太难了”");
-        add("item.confluence.hand_of_creation.tooltip", "采矿速度提高25%");
         add("item.confluence.hand_of_creation.tooltip2", "右键点击延迟降低3，且降低效果不能与其材料的降低效果叠加");
-        add("item.confluence.hand_of_creation.tooltip3", "物品的拾取范围扩大");
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
         add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
@@ -767,13 +758,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.bee_cloak.info", "蜜蜂斗篷是一种困难模式配饰，结合了星星斗篷和蜂窝的效果。");
         add("item.confluence.bee_cloak.info2", "当玩家受伤时，会有三颗星星落到玩家当前的位置，还会释放出蜜蜂。");
         add("item.confluence.berserkers_glove.info", "狂战士手套是一种困难模式配饰，可由强力手套和血肉指虎制作而来，提供二者的加成。");
-        add("item.confluence.berserkers_glove.info2", "其提供的加成如下：");
-        add("item.confluence.berserkers_glove.info3", "+8 防御");
-        add("item.confluence.berserkers_glove.info4", "提升 12% 近战速度");
-        add("item.confluence.berserkers_glove.info5", "提升 100% 近战击退");
-        add("item.confluence.berserkers_glove.info6", "提升 10% 近战武器大小");
-        add("item.confluence.berserkers_glove.info7", "+400 仇恨");
-        add("item.confluence.berserkers_glove.info8", "可使近战武器和鞭能够自动挥舞");
         add("item.confluence.bezoar.info", "牛黄是个配饰，可以提供给玩家对中毒减益的免疫能力。");
         add("item.confluence.bezoar.info2", "它有 1/100 (1%) / 1/50 (2%) 的几率由地下丛林生物群系的黄蜂和困难模式的苔藓黄蜂掉落。牛黄也可以由地下和洞穴中的毒泥掉落。");
         add("item.confluence.bezoar.info3", "它是制作药用绷带的材料之一，后者是制作十字章护身符所需要的制作材料。十字章护身符可用于进一步制作十字章护盾。");
@@ -912,7 +896,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.sun_stone.info9", "+4 防御");
         add("item.confluence.sun_stone.info10", "+15% 挖矿速度");
         add("item.confluence.sun_stone.info11", "+0.5 仆从击退");
-        add("item.confluence.sweetheart_necklace.info", "甜心项链是一个配饰，在玩家受伤时会释放一群蜜蜂，还会为玩家提供恐慌！和蜂蜜增益，提高 100% 移动速度速度，持续 8 /  5 秒，并提高生命再生，持续 5 秒。");
+        add("item.confluence.sweetheart_necklace.info", "甜心项链是一个配饰，在玩家受伤时会释放一群蜜蜂，还会为玩家提供恐慌！和蜂蜜增益，提高 100% 移动速度速度，持续 5 秒，并提高生命再生，持续 5 秒。");
         add("item.confluence.the_plan.info", "计划书是一种困难模式免疫配饰，结合了快走时钟和三折地图的功能，给予了对缓慢和困惑减益的免疫力。");
         add("item.confluence.the_plan.info2", "它是制作十字章护身符所需的材料之一，而后者又进一步为制作十字章护盾所需。");
         add("item.confluence.titan_glove.info", "泰坦手套是困难模式中的配饰，让玩家所造成的近战击退翻倍。");
@@ -1011,6 +995,14 @@ public class ModChineseProvider extends LanguageProvider {
         add("event.confluence.blood_moon", "血月正在升起...");
 
         add("attribute.name.generic.critical_chance", "暴击率");
+        add("attribute.name.generic.ranged_velocity", "远程速度");
+        add("attribute.name.generic.ranged_damage", "远程伤害");
+        add("attribute.name.generic.dodge_chance", "闪避率");
+        add("attribute.name.generic.mining_speed", "挖掘速率");
+        add("attribute.name.generic.aggro", "仇恨");
+        add("attribute.name.generic.magic_damage", "魔法伤害");
+        add("attribute.name.generic.armor_pass", "护甲穿透");
+        add("attribute.name.generic.pickup_range", "拾取范围");
 
         add("entity.minecraft.villager.confluence.sky_miller", "天师");
 

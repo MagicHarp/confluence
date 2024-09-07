@@ -1,6 +1,7 @@
 package org.confluence.mod.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import net.minecraft.advancements.FrameType;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.texture.SpriteContents;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.client.resources.metadata.animation.FrameSize;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.level.ColorResolver;
@@ -37,6 +39,8 @@ import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.model.entity.hook.SkeletronHandModel;
 import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
 import org.confluence.mod.client.particle.*;
+import org.confluence.mod.client.renderer.AchievementDisplay;
+import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
@@ -107,6 +111,14 @@ public final class ModClient {
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
             Bows.registerProperties();
+
+            AchievementToast.registerToast(new ResourceLocation(MODID, "boots_of_the_hero"), new AchievementToast(
+                    new ResourceLocation(MODID, "textures/achievement/boots_of_the_hero.png"),
+                    new AchievementDisplay(FrameType.CHALLENGE,
+                            Component.translatable("achievements.confluence.boots_of_the_hero.title"),
+                            Component.translatable("achievements.confluence.boots_of_the_hero.description")
+                    )));
+
             MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
         });

@@ -4,10 +4,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.curio.HealthAndMana.IManaReduce;
-import org.confluence.mod.item.curio.combat.IAggroAttach;
-import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
-import org.confluence.mod.item.curio.combat.IMagicAttack;
 import org.confluence.mod.item.curio.fishing.IFishingPower;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.curio.movement.IJumpBoost;
@@ -68,14 +65,8 @@ public class DataDrivenCurioGenerator {
             mv.visitEnd();
         }
         for (Class<?> clazz : interfaces) {
-            if (clazz == IAggroAttach.class) {
-                intValue(cw, "getAggro", clazz);
-            } else if (clazz == IArmorPass.class) {
-                intValue(cw, "getPassValue", clazz);
-            } else if (clazz == IInvulnerableTime.class) {
+            if (clazz == IInvulnerableTime.class) {
                 intValue(cw, "getTime", clazz);
-            } else if (clazz == IMagicAttack.class) {
-                doubleValue(cw, "getMagicBonus", clazz);
             } else if (clazz == IFishingPower.class) {
                 floatValue(cw, "getFishingBonus", clazz);
             } else if (clazz == IManaReduce.class) {

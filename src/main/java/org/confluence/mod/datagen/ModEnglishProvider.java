@@ -44,7 +44,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.misc", "Confluence | Miscellaneous");
         add("creativetab.confluence.food_and_potions", "Confluence | Food & Potions");
         add("creativetab.confluence.armors", "Confluence | Armors");
-        add("creativetab.confluence.curios", "Confluence | Curios");
+        add("creativetab.confluence.accessories", "Confluence | Accessories");
         add("creativetab.confluence.mechanical", "Confluence | Mechanical");
 
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
@@ -173,15 +173,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.sun_stone.tooltip", "During daytime, grants minor increase");
         add("item.confluence.moon_stone.tooltip", "During nighttime, grants minor increase");
         add("item.confluence.putrid_scent.tooltip", "Enemies are less likely to target you");
-        add("item.confluence.putrid_scent.tooltip2", "5% increased damage and critical strike chance");
         add("item.confluence.panic_necklace.tooltip", "Increases movement speed after taking damage");
         add("item.confluence.paladins_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip", "Absorbs 25% of damage done to players on your team when above 25% life");
         add("item.confluence.frozen_shield.tooltip2", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.frozen_turtle_shell.tooltip", "Puts a shell around the owner when below 50% life that reduces damage by 25%");
         add("item.confluence.fire_gauntlet.tooltip", "Increases melee knockback and melee attacks inflict fire damage");
-        add("item.confluence.eye_of_the_golem.tooltip", "10% increased critical strike chance");
-        add("item.confluence.destroyer_emblem.tooltip", "8% increased critical strike chance");
         add("item.confluence.cross_necklace.tooltip", "Increases TOTAL_LENGTH of invincibility after taking damage");
         add("item.confluence.terraspark_boots.tooltip2", "Grants immunity to fire blocks and 7 seconds of immunity to lava");
         add("item.confluence.fledgling_wings.tooltip", "Allows flight and slow fall");
@@ -216,9 +213,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.gold_ring.tooltip", "Expanded coin pickup");
         add("item.confluence.gravity_globe.tooltip", "Allows the holder to reverse gravity");
         add("item.confluence.gravity_globe.tooltip2", "Press Jump to change gravity");
-        add("item.confluence.sorcerer_emblem.tooltip", "15% increased magic damage");
         add("item.confluence.sweetheart_necklace.tooltip", "When damaged, the bee is released and the user is immersed in honey and increases movement speed");
-        add("item.confluence.ancient_chisel.tooltip", "25% increased mining speed");
         add("item.confluence.ancient_chisel.tooltip2", "“Age-old problems require age-old solutions”");
         add("item.confluence.lucky_coin.tooltip", "Hitting an enemy can sometimes drop extra coins");
         add("item.confluence.coin_ring.tooltip", "Increasing the coin pickup range and hitting enemies will sometimes drop additional coins");
@@ -243,11 +238,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_warmer.tooltip", "Provides immunity to chill and freezing effects");
         add("item.confluence.mana_cloak.tooltip", "Stars restore mana when collected");
         add("item.confluence.star_cloak.tooltip", "Causes stars to fall after taking damage");
-        add("item.confluence.magic_quiver.tooltip", "Increases arrow damage by 10% and greatly increases arrow speed");
         add("item.confluence.magic_quiver.tooltip2", "20% chance to not consume arrows");
         add("item.confluence.molten_quiver.tooltip", "Lights wooden arrows ablaze");
         add("item.confluence.molten_quiver.tooltip2", "'Quiver in fear!'");
-        add("item.confluence.sniper_scope.tooltip", "10% increased ranged damage and critical strike chance");
         add("item.confluence.recon_scope.tooltip", "'Enemy spotted'");
         add("item.confluence.portable_cement_mixer.tooltip", "Decreased 'Right Click Delay' by 1");
         add("item.confluence.brick_layer.tooltip", "Decreased 'Right Click Delay' by 1");
@@ -255,7 +248,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.climbing_claws.tooltip", "Improved ability if combined with Shoe Spikes");
         add("item.confluence.shoe_spikes.tooltip", "Improved ability if combined with Climbing Claws");
         add("item.confluence.frog_gear.tooltip", "'It ain't easy being green'");
-        add("item.confluence.hand_of_creation.tooltip", "Increases mining speed by 25%");
         add("item.confluence.hand_of_creation.tooltip2", "Decreased 'Right Click Delay' by 3, cannot stack the decrease of its material");
         add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
@@ -484,13 +476,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.bee_cloak.info", "The Bee Cloak is a Hardmode accessory that combines the effects of the Star Cloak and the Honey Comb.");
         add("item.confluence.bee_cloak.info2", "When the player is injured, three stars will fall on the player's current location and bees are released.");
         add("item.confluence.berserkers_glove.info", "The Berserker's Glove is a Hardmode accessory crafted from the Power Glove and Flesh Knuckles, granting the abilities of both.");
-        add("item.confluence.berserkers_glove.info2", "It grants the following:");
-        add("item.confluence.berserkers_glove.info3", "+8 defense");
-        add("item.confluence.berserkers_glove.info4", "+12% increased melee speed");
-        add("item.confluence.berserkers_glove.info5", "+100% increased melee knockback");
-        add("item.confluence.berserkers_glove.info6", "+10% increased melee weapon size");
-        add("item.confluence.berserkers_glove.info7", "+400 aggro");
-        add("item.confluence.berserkers_glove.info8", "Autoswing for melee weapons and whips");
         add("item.confluence.bezoar.info", "The Bezoar is an immunity accessory that grants the player immunity to the Poisoned debuff.");
         add("item.confluence.bezoar.info2", "It has a 1/100 (1%) / 1/50 (2%) chance to drop from Hornets, Moss Hornets, and Toxic Sludges.");
         add("item.confluence.bezoar.info3", "It is one of the ingredients required to make the Medicated Bandage, which is a crafting material required to make the Ankh Charm, further required to make the Ankh Shield.");
@@ -617,19 +602,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.star_cloak.info5", "The stars deal 75 / 150 / 225 damage which is not classified as any of the four damage types and therefore cannot be modified by any buffs or equipment. Furthermore, the stars have 25 armor penetration.");
         add("item.confluence.star_veil.info", "The Star Veil is a Hardmode accessory that combines the functions of the Star Cloak and the Cross Necklace, spawning falling star projectiles and increasing the TOTAL_LENGTH of the invincibility frames granted when the player is hurt.");
         add("item.confluence.stinger_necklace.info", "The Stinger Necklace is a pre-Hardmode accessory that is obtainable after defeating the Queen Bee.");
+        add("item.confluence.stinger_necklace.info", "The Stinger Necklace is a pre-Hardmode accessory that is obtainable after defeating the Queen Bee.");
         add("item.confluence.stinger_necklace.info2", "This item combines the Shark Tooth Necklace and the Honey Comb accessories, giving the player 5 armor penetration as well as releasing 1–3 / 1–4 bees when the wearer takes damage and granting the Honey buff for 5 seconds.");
         add("item.confluence.sun_stone.info", "The Sun Stone is a Hardmode, post-Golem accessory which has a 1/7 (14.29%) chance of being dropped by Golem.");
         add("item.confluence.sun_stone.info2", "It grants the same stat bonuses as the Moon Stone;");
         add("item.confluence.sun_stone.info3", "however, these bonuses only activate during the day.");
-        add("item.confluence.sun_stone.info4", "The stat bonuses are:");
-        add("item.confluence.sun_stone.info5", "+10% melee speed");
-        add("item.confluence.sun_stone.info6", "+10% damage (all types)");
-        add("item.confluence.sun_stone.info7", "+2% critical strike chance");
-        add("item.confluence.sun_stone.info8", "+1 HP/s health regeneration");
-        add("item.confluence.sun_stone.info9", "+4 defense");
-        add("item.confluence.sun_stone.info10", "+15% mining speed");
-        add("item.confluence.sun_stone.info11", "+0.5 minion knockback");
-        add("item.confluence.sweetheart_necklace.info", "The Sweetheart Necklace is which releases a concentrated burst of bees and grants the player the Panic! and  Honey buffs when damaged, increasing movement speed by 100% for 8 seconds and  health regeneration for 5 seconds.");
         add("item.confluence.the_plan.info", "The Plan is a Hardmode immunity accessory which combines the functions of the Fast Clock and the Trifold Map, granting immunity to the Slow and Confusion debuffs.");
         add("item.confluence.the_plan.info2", "It is one of the ingredients required to make the Ankh Charm, which is further required to make the Ankh Shield.");
         add("item.confluence.titan_glove.info", "The Titan Glove is a Hardmode accessory that doubles player-inflicted melee knockback.");
@@ -731,10 +708,22 @@ public class ModEnglishProvider extends LanguageProvider {
         add("event.confluence.blood_moon", "The Blood Moon is rising...");
 
         add("attribute.name.generic.critical_chance", "Critical Chance");
+        add("attribute.name.generic.ranged_velocity", "Ranged Velocity");
+        add("attribute.name.generic.ranged_damage", "Ranged Damage");
+        add("attribute.name.generic.dodge_chance", "Dodge Chance");
+        add("attribute.name.generic.mining_speed", "Mining Speed");
+        add("attribute.name.generic.aggro", "Aggro");
+        add("attribute.name.generic.magic_damage", "Magic Damage");
+        add("attribute.name.generic.armor_pass", "Armor Pass");
+        add("attribute.name.generic.pickup_range", "Pickup Range");
 
         add("entity.minecraft.villager.confluence.sky_miller", "Sky Miller");
 
         add("container.confluence.workshop", "Workshop");
+        add("title.confluence.workshop", "Workshop");
+
+        add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
+        add("achievements.confluence.boots_of_the_hero.description", "Obtain the Terraspark Boots, forged from the finest boots of fire and ice.");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();

@@ -15,7 +15,6 @@ import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.curio.ILavaImmune;
-import org.confluence.mod.item.curio.combat.IAggroAttach;
 import org.confluence.mod.item.curio.combat.IFireImmune;
 import org.confluence.mod.item.curio.combat.IInvulnerableTime;
 import org.confluence.mod.item.curio.fishing.IFishingPower;
@@ -35,13 +34,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     private transient int remainLavaImmuneTicks;
     private int airSupplyBonus;
 
-    private int aggro;
     private float fishingPower;
     private int crystals;
     private int fruits;
     private double starRange;
     private double coinRange;
-    private double dropsRange;
 
     private boolean vitalCrystalUsed;
     private boolean aegisAppleUsed;
@@ -58,13 +55,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.remainLavaImmuneTicks = 0;
         this.airSupplyBonus = 0;
 
-        this.aggro = 0;
         this.fishingPower = 0.0F;
         this.crystals = 0;
         this.fruits = 0;
         this.starRange = 1.75;
         this.coinRange = 2.0;
-        this.dropsRange = 0.0;
 
         this.vitalCrystalUsed = false;
         this.aegisAppleUsed = false;
@@ -80,11 +75,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         AtomicBoolean fire = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
 
-        AtomicInteger aggro = new AtomicInteger();
         AtomicDouble fishing = new AtomicDouble();
         AtomicBoolean star = new AtomicBoolean();
         AtomicBoolean coin = new AtomicBoolean();
-        AtomicBoolean drops = new AtomicBoolean();
         CuriosApi.getCuriosInventory(living).ifPresent(handler -> {
             IItemHandlerModifiable itemHandlerModifiable = handler.getEquippedCurios();
             for (int i = 0; i < itemHandlerModifiable.getSlots(); i++) {
@@ -103,11 +96,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
                 if (item instanceof ILavaImmune iLavaImmune) {
                     lava.set(Math.max(iLavaImmune.getLavaImmuneTicks(), lava.get()));
                 }
-                if (item instanceof IAggroAttach iAggroAttach) aggro.addAndGet(iAggroAttach.getAggro());
                 if (item instanceof IFishingPower iFishingPower) fishing.addAndGet(iFishingPower.getFishingBonus());
                 if (item instanceof IRangePickup.Star) star.set(true);
                 if (item instanceof IRangePickup.Coin) coin.set(true);
-                if (item instanceof IRangePickup.Drops) drops.set(true);
             }
         });
         this.jumpBoost = jump.get();
@@ -116,11 +107,9 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = fire.get();
         this.maxLavaImmuneTicks = lava.get();
 
-        this.aggro = aggro.get();
         this.fishingPower = fishing.floatValue();
         this.starRange = star.get() ? 14.25 : 1.75;
         this.coinRange = coin.get() ? 16.67 : 2.0;
-        this.dropsRange = drops.get() ? 6.25 : 0.0;
     }
 
     public double getJumpBoost() {
@@ -159,10 +148,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
 
     public int getAirSupplyBonus() {
         return airSupplyBonus;
-    }
-
-    public int getAggro() {
-        return aggro;
     }
 
     public float getFishingPower(Player player) {
@@ -224,10 +209,6 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         return coinRange;
     }
 
-    public double getDropsRange() {
-        return dropsRange;
-    }
-
     public void setVitalCrystalUsed() {
         this.vitalCrystalUsed = true;
     }
@@ -277,13 +258,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         nbt.putBoolean("fireImmune", fireImmune);
         nbt.putInt("maxLavaImmuneTicks", maxLavaImmuneTicks);
 
-        nbt.putInt("aggro", aggro);
         nbt.putFloat("fishingPower", fishingPower);
         nbt.putInt("crystals", crystals);
         nbt.putInt("fruits", fruits);
         nbt.putDouble("starRange", starRange);
         nbt.putDouble("coinRange", coinRange);
-        nbt.putDouble("dropsRange", dropsRange);
 
         nbt.putBoolean("vitalCrystalUsed", vitalCrystalUsed);
         nbt.putBoolean("aegisAppleUsed", aegisAppleUsed);
@@ -301,13 +280,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = nbt.getBoolean("fireImmune");
         this.maxLavaImmuneTicks = nbt.getInt("maxLavaImmuneTicks");
 
-        this.aggro = nbt.getInt("aggro");
         this.fishingPower = nbt.getFloat("fishingPower");
         this.crystals = nbt.getInt("crystals");
         this.fruits = nbt.getInt("fruits");
         this.starRange = nbt.getDouble("starRange");
         this.coinRange = nbt.getDouble("coinRange");
-        this.dropsRange = nbt.getDouble("dropsRange");
 
         this.vitalCrystalUsed = nbt.getBoolean("vitalCrystalUsed");
         this.aegisAppleUsed = nbt.getBoolean("aegisAppleUsed");
@@ -323,13 +300,11 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
         this.fireImmune = playerAbility.fireImmune;
         this.maxLavaImmuneTicks = playerAbility.maxLavaImmuneTicks;
 
-        this.aggro = playerAbility.aggro;
         this.fishingPower = playerAbility.fishingPower;
         this.crystals = playerAbility.crystals;
         this.fruits = playerAbility.fruits;
         this.starRange = playerAbility.starRange;
         this.coinRange = playerAbility.coinRange;
-        this.dropsRange = playerAbility.dropsRange;
 
         this.vitalCrystalUsed = playerAbility.vitalCrystalUsed;
         this.aegisAppleUsed = playerAbility.aegisAppleUsed;

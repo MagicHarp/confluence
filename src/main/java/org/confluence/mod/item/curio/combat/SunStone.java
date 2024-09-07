@@ -23,6 +23,7 @@ public class SunStone extends BaseCurioItem {
     public static final UUID CRIT_UUID = UUID.fromString("840A63CB-F274-75C1-09B1-BC8092B076F4");
     public static final UUID MINING_UUID = UUID.fromString("B599894C-1157-3875-C28C-E4F0681F04E9");
     public static final UUID RANGED_UUID = UUID.fromString("171921EE-AB4F-E630-D69E-BB31E17A22C8");
+    public static final UUID MAGIC_UUID = UUID.fromString("B9A4443F-E08B-19CD-0EBD-679F5267CB14");
     private static ImmutableMultimap<Attribute, AttributeModifier> ATTRIBUTES;
 
     public SunStone() {
@@ -32,14 +33,15 @@ public class SunStone extends BaseCurioItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sun Stone", 0.02, AttributeModifier.Operation.ADDITION));
-            builder.put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Sun Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            builder.put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            ATTRIBUTES = builder.build();
+            ATTRIBUTES = ImmutableMultimap.<Attribute, AttributeModifier>builder()
+                    .put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(Attributes.ARMOR, new AttributeModifier(ARMOR_UUID, "Sun Stone", 4, AttributeModifier.Operation.ADDITION))
+                    .put(ModAttributes.getCriticalChance(), new AttributeModifier(CRIT_UUID, "Sun Stone", 0.02, AttributeModifier.Operation.ADDITION))
+                    .put(ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Sun Stone", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(ModAttributes.getRangedDamage(), new AttributeModifier(RANGED_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .put(ModAttributes.getMagicDamage(), new AttributeModifier(MAGIC_UUID, "Sun Stone", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                    .build();
         }
         LivingEntity living = slotContext.entity();
         if (living == null) return EMPTY_ATTRIBUTE;
@@ -53,20 +55,11 @@ public class SunStone extends BaseCurioItem {
         ModEffects.healPerSecond(living, 2.0F);
     }
 
-    @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.sun_stone.info"),
-            Component.translatable("item.confluence.sun_stone.info2"),
-            Component.translatable("item.confluence.sun_stone.info3"),
-            Component.translatable("item.confluence.sun_stone.info4"),
-            Component.translatable("item.confluence.sun_stone.info5"),
-            Component.translatable("item.confluence.sun_stone.info6"),
-            Component.translatable("item.confluence.sun_stone.info7"),
-            Component.translatable("item.confluence.sun_stone.info8"),
-            Component.translatable("item.confluence.sun_stone.info9"),
-            Component.translatable("item.confluence.sun_stone.info10"),
-            Component.translatable("item.confluence.sun_stone.info11")
+                Component.translatable("item.confluence.sun_stone.info"),
+                Component.translatable("item.confluence.sun_stone.info2"),
+                Component.translatable("item.confluence.sun_stone.info3")
         };
     }
 }

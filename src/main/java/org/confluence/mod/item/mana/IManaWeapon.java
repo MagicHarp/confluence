@@ -9,10 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.apache.commons.lang3.mutable.MutableFloat;
-import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.capability.prefix.PrefixProvider;
-import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.misc.ModAttributes;
 
 public interface IManaWeapon {
@@ -34,20 +31,6 @@ public interface IManaWeapon {
         AttributeInstance attributeInstance = living.getAttribute(ModAttributes.getRangedVelocity());
         if (attributeInstance != null) return velocity * (float) attributeInstance.getValue();
         return velocity;
-    }
-
-    static float apply(DamageSource damageSource, float amount) {
-        if (damageSource.getEntity() instanceof Player player && isMagic(player, damageSource)) {
-            MutableFloat atomic = new MutableFloat(amount);
-            player.getCapability(ManaProvider.CAPABILITY).ifPresent(manaStorage ->
-                atomic.setValue(amount * manaStorage.getMagicAttackBonus()));
-            float actually = atomic.getValue();
-            if (player.hasEffect(ModEffects.MAGIC_POWER.get())) {
-                actually *= 1.2F;
-            }
-            return actually;
-        }
-        return amount;
     }
 
     static boolean isMagic(Player player, DamageSource damageSource) {

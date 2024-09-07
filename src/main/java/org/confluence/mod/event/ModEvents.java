@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -35,6 +34,7 @@ import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.effect.beneficial.MagicPowerEffect;
 import org.confluence.mod.effect.beneficial.RageEffect;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.entity.ModEntities;
@@ -129,6 +129,7 @@ public final class ModEvents {
 
             ModEffects.RAGE.get().addAttributeModifier(ModAttributes.getCriticalChance(), RageEffect.CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
             ModEffects.CEREBRAL_MINDTRICK.get().addAttributeModifier(ModAttributes.getCriticalChance(), CerebralMindtrickEffect.CRIT_UUID, 0.04, AttributeModifier.Operation.ADDITION);
+            ModEffects.MAGIC_POWER.get().addAttributeModifier(ModAttributes.getMagicDamage(), MagicPowerEffect.MAGIC_UUID, 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
         });
     }
 
@@ -203,21 +204,14 @@ public final class ModEvents {
     @SubscribeEvent
     public static void modify(EntityAttributeModificationEvent event) {
         ModAttributes.readJsonConfig();
-
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.CRIT_CHANCE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_VELOCITY.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_VELOCITY.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.RANGED_DAMAGE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.RANGED_DAMAGE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.DODGE_CHANCE.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.DODGE_CHANCE.get());
-        }
-        if (!ModAttributes.hasCustomAttribute(ModAttributes.MINING_SPEED.get())) {
-            event.add(EntityType.PLAYER, ModAttributes.MINING_SPEED.get());
-        }
+        ModAttributes.registerAttribute(ModAttributes.CRIT_CHANCE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.RANGED_VELOCITY.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.RANGED_DAMAGE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.DODGE_CHANCE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.MINING_SPEED.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.AGGRO.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.MAGIC_DAMAGE.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.ARMOR_PASS.get(), event::add);
+        ModAttributes.registerAttribute(ModAttributes.PICKUP_RANGE.get(), event::add);
     }
 }

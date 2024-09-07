@@ -25,10 +25,10 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.curio.CurioItems;
-import org.confluence.mod.item.curio.combat.IArmorPass;
 import org.confluence.mod.item.curio.expert.RoyalGel;
 import org.confluence.mod.item.curio.miscellaneous.IFlowerBoots;
 import org.confluence.mod.item.curio.movement.IFluidWalk;
+import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixinauxiliary.IEntity;
@@ -200,7 +200,8 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
     @WrapOperation(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(FFF)F"))
     private float passArmor(float pDamage, float pTotalArmor, float pToughnessAttribute, Operation<Float> original, @Local(argsOnly = true) DamageSource pDamageSource) {
         if (pDamageSource.getEntity() instanceof LivingEntity attacker) {
-            pTotalArmor -= (float) CuriosUtils.calculateValue(attacker, IArmorPass.class, IArmorPass::getPassValue, 0.0);
+            AttributeInstance attributeInstance = attacker.getAttribute(ModAttributes.getArmorPass());
+            if (attributeInstance != null) pTotalArmor -= (float) attributeInstance.getValue();
             if (pDamageSource.is(ModDamageTypes.STAR_CLOAK)) pTotalArmor -= 3.0F;
         }
         return original.call(pDamage, Math.max(pTotalArmor, 0.0F), pToughnessAttribute);
