@@ -13,7 +13,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +29,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.block.ModBlocks;
@@ -69,7 +71,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
     }
 
     Pots(String id, float moneyRatio, float moneyHoleChance) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, Shapes.or(box(2, 0, 2, 14, 12, 14))));
+        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, box(2, 0, 2, 14, 12, 14)));
     }
 
     @Override

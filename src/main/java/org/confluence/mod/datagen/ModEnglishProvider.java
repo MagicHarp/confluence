@@ -602,7 +602,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.star_cloak.info5", "The stars deal 75 / 150 / 225 damage which is not classified as any of the four damage types and therefore cannot be modified by any buffs or equipment. Furthermore, the stars have 25 armor penetration.");
         add("item.confluence.star_veil.info", "The Star Veil is a Hardmode accessory that combines the functions of the Star Cloak and the Cross Necklace, spawning falling star projectiles and increasing the TOTAL_LENGTH of the invincibility frames granted when the player is hurt.");
         add("item.confluence.stinger_necklace.info", "The Stinger Necklace is a pre-Hardmode accessory that is obtainable after defeating the Queen Bee.");
-        add("item.confluence.stinger_necklace.info", "The Stinger Necklace is a pre-Hardmode accessory that is obtainable after defeating the Queen Bee.");
         add("item.confluence.stinger_necklace.info2", "This item combines the Shark Tooth Necklace and the Honey Comb accessories, giving the player 5 armor penetration as well as releasing 1–3 / 1–4 bees when the wearer takes damage and granting the Honey buff for 5 seconds.");
         add("item.confluence.sun_stone.info", "The Sun Stone is a Hardmode, post-Golem accessory which has a 1/7 (14.29%) chance of being dropped by Golem.");
         add("item.confluence.sun_stone.info2", "It grants the same stat bonuses as the Moon Stone;");
@@ -723,7 +722,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("title.confluence.workshop", "Workshop");
 
         add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
-        add("achievements.confluence.boots_of_the_hero.description", "Obtain the Terraspark Boots, forged from the finest boots of fire and ice.");
+        add("achievements.confluence.boots_of_the_hero.description", "Forged from the finest boots of fire and ice.");
+        add("achievements.confluence.black_mirror.title", "Black Mirror");
+        add("achievements.confluence.black_mirror.description", "You'll never leave home without it again.");
+        add("achievements.confluence.ankhumulation_complete.title", "Ankhumulation Complete");
+        add("achievements.confluence.ankhumulation_complete.description", "The finest protection from unpleasant maladies and ailments.");
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();

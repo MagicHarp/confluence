@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
@@ -19,10 +20,10 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class AchievementToast implements Toast {
-    private static final Hashtable<ResourceLocation, AchievementToast> ACHIEVEMENTS = new Hashtable<>();
+    private static final Hashtable<ResourceLocation, Toast> ACHIEVEMENTS = new Hashtable<>();
     private final ResourceLocation icon;
     private final AchievementDisplay display;
-    private boolean playedSound;
+    public boolean playedSound;
 
     public AchievementToast(ResourceLocation icon, AchievementDisplay display) {
         this.icon = icon;
@@ -101,11 +102,22 @@ public class AchievementToast implements Toast {
         }
     }
 
-    public static void registerToast(ResourceLocation advancement, AchievementToast toast) {
+    public static void registerToast(ResourceLocation advancement, Toast toast) {
         ACHIEVEMENTS.put(advancement, toast);
     }
 
-    public static AchievementToast getToast(ResourceLocation advancement) {
+    public static void registerToast(ResourceLocation advancement) {
+        String namespace = advancement.getNamespace();
+        String path = advancement.getPath();
+        ACHIEVEMENTS.put(advancement, new AchievementToast(
+                new ResourceLocation(namespace, "textures/achievement/" + path + ".png"),
+                new AchievementDisplay(FrameType.CHALLENGE,
+                        Component.translatable("achievements." + namespace + "." + path + ".title"),
+                        Component.translatable("achievements." + namespace + "." + path + ".description")
+                )));
+    }
+
+    public static Toast getToast(ResourceLocation advancement) {
         return ACHIEVEMENTS.get(advancement);
     }
 
