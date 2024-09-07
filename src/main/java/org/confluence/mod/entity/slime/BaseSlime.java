@@ -24,6 +24,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.Fluids;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
@@ -85,8 +92,11 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
                 level().addParticle(ModParticles.ITEM_GEL.get(), getX() + (double) f2, getY(), getZ() + (double) f3, color.red(), color.green(), color.blue());
             }
         }
-        if (super.isInWater() && getType() == ModEntities.LAVA_SLIME.get()) {
-            hurt(level().damageSources().freeze(), 0.8F);
+        if (this.getType().equals(ModEntities.LAVA_SLIME.get())) {
+            if (isInWater()){
+                this.hurt(this.level().damageSources().freeze(), 0.8F);
+            }
+            this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 500, 4, false, true));
         }
         super.tick();
     }
@@ -172,6 +182,24 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
                     }
                 } else if (getType() == ModEntities.LAVA_SLIME.get()) {
                     pLivingEntity.setSecondsOnFire(5);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void tickDeath() {
+        super.tickDeath();
+        if (this.getType().equals(ModEntities.LAVA_SLIME.get())){
+            StateDefinition<Block, BlockState> stateDefinition = Blocks.LAVA.getStateDefinition();
+            Property<?> levelProperty = stateDefinition.getProperty("level");
+            if (levelProperty instanceof IntegerProperty integerProperty) {
+                if (ModUtils.isExpert(level())) {
+                    if (this.level().getBlockState(BlockPos.containing(this.position())).isAir() ||
+                            this.level().getBlockState(BlockPos.containing(this.position())).canBeReplaced(Fluids.LAVA)) {
+                        //todo 未知且非固定出现的渲染bug
+                        this.level().setBlock(BlockPos.containing(this.position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
+                    }
                 }
             }
         }

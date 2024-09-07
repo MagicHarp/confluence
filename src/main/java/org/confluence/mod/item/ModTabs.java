@@ -383,7 +383,6 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.SUMMON_ICON.get()))
             .title(Component.translatable("creativetab.confluence.summoners"))
             .displayItems((parameters, output) -> {
-
             })
             .build());
     // 食物与药水
