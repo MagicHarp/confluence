@@ -1,0 +1,17 @@
+{
+    "parent": "confluence:boots_of_the_hero",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "confluence:cell_phone"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@ package org.confluence.mod.mixin.client;
 
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +27,12 @@ public abstract class ClientAdvancementsMixin {
     @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/advancements/Advancement;getDisplay()Lnet/minecraft/advancements/DisplayInfo;", ordinal = 0), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void showAchievementToast(ClientboundUpdateAdvancementsPacket pPacket, CallbackInfo ci, Iterator<Map.Entry<ResourceLocation, AdvancementProgress>> var2, Map.Entry<ResourceLocation, AdvancementProgress> entry) {
         if (!entry.getValue().isDone()) return;
-        AchievementToast toast = AchievementToast.getToast(entry.getKey());
-        if (toast != null) minecraft.getToasts().addToast(toast);
+        Toast toast = AchievementToast.getToast(entry.getKey());
+        if (toast != null) {
+            if (toast instanceof AchievementToast achievementToast) {
+                achievementToast.playedSound = false;
+            }
+            minecraft.getToasts().addToast(toast);
+        }
     }
 }

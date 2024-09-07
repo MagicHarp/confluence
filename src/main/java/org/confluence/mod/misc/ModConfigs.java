@@ -51,7 +51,7 @@ public final class ModConfigs {
             "minecraft:allay",
             "minecraft:axolotl",
             "minecraft:evoker",
-            "minecraft:piglin_prute",
+            "minecraft:piglin_brute",
             "minecraft:vindicator",
             "minecraft:enderman"
     ), o -> true);

@@ -511,7 +511,11 @@ public class ModChineseProvider extends LanguageProvider {
         add("title.confluence.workshop", "工匠作坊");
 
         add("achievements.confluence.boots_of_the_hero.title", "英雄之靴");
-        add("achievements.confluence.boots_of_the_hero.description", "获得泰拉闪耀靴，这是用最好的火靴和最好的冰靴铸成的。");
+        add("achievements.confluence.boots_of_the_hero.description", "这是用最好的火靴和最好的冰靴铸成的。");
+        add("achievements.confluence.black_mirror.title", "黑镜");
+        add("achievements.confluence.black_mirror.description", "你以后再也不会不带它就出门。");
+        add("achievements.confluence.ankhumulation_complete.title", "十字章收集完成");
+        add("achievements.confluence.ankhumulation_complete.description", "这是对抗烦人疾病的最佳防护。");
 
         add(ModEffects.PALADINS_SHIELD.get(), "圣骑士护盾");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");

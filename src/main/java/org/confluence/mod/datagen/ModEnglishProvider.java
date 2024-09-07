@@ -288,7 +288,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("title.confluence.workshop", "Workshop");
 
         add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
-        add("achievements.confluence.boots_of_the_hero.description", "Obtain the Terraspark Boots, forged from the finest boots of fire and ice.");
+        add("achievements.confluence.boots_of_the_hero.description", "Forged from the finest boots of fire and ice.");
+        add("achievements.confluence.black_mirror.title", "Black Mirror");
+        add("achievements.confluence.black_mirror.description", "You'll never leave home without it again.");
+        add("achievements.confluence.ankhumulation_complete.title", "Ankhumulation Complete");
+        add("achievements.confluence.ankhumulation_complete.description", "The finest protection from unpleasant maladies and ailments.");
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();

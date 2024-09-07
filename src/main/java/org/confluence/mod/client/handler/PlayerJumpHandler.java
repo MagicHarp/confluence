@@ -120,7 +120,7 @@ public final class PlayerJumpHandler {
         Vec3 vec3 = localPlayer.getDeltaMovement();
         double y = vec3.y;
         if (y < speed) {
-            y += speed / 2.5;
+            y += speed / 3.5;
         } else {
             y = speed;
         }

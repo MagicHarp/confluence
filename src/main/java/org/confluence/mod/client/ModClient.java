@@ -1,8 +1,6 @@
 package org.confluence.mod.client;
 
-import net.minecraft.advancements.FrameType;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,7 +13,6 @@ import org.confluence.mod.client.model.entity.BeeProjectileModel;
 import org.confluence.mod.client.model.entity.StepStoolModel;
 import org.confluence.mod.client.particle.CurrentColorDustParticle;
 import org.confluence.mod.client.particle.ModParticles;
-import org.confluence.mod.client.renderer.AchievementDisplay;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.entity.BeeProjectileRenderer;
 import org.confluence.mod.client.renderer.entity.StarCloakEntityRenderer;
@@ -34,12 +31,9 @@ public final class ModClient {
         event.enqueueWork(() -> {
             CuriosClient.registerRenderers();
             ClientConfigs.onLoad();
-            AchievementToast.registerToast(new ResourceLocation(MODID, "boots_of_the_hero"), new AchievementToast(
-                    new ResourceLocation(MODID, "textures/achievement/boots_of_the_hero.png"),
-                    new AchievementDisplay(FrameType.CHALLENGE,
-                            Component.translatable("achievements.confluence.boots_of_the_hero.title"),
-                            Component.translatable("achievements.confluence.boots_of_the_hero.description")
-                    )));
+            AchievementToast.registerToast(new ResourceLocation(MODID, "boots_of_the_hero"));
+            AchievementToast.registerToast(new ResourceLocation(MODID, "black_mirror"));
+            AchievementToast.registerToast(new ResourceLocation(MODID, "ankhumulation_complete"));
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
         });
     }

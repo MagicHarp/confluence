@@ -2,6 +2,7 @@ package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -28,7 +29,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         ModItems.ITEMS.getEntries().forEach(item -> {
             try {
                 Item value = item.get();
-                if (value instanceof CustomModel) return;
+                if (value instanceof CustomModel || (value instanceof BlockItem blockItem && blockItem.getBlock() instanceof CustomModel)) return;
 
                 String path = item.getId().getPath().toLowerCase();
                 if (value instanceof BaseCurioItem) {
