@@ -8,12 +8,12 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Hashtable;
@@ -55,7 +55,7 @@ public class AchievementToast implements Toast {
         if (!playedSound && pTimeSinceLastVisible > 0L) {
             this.playedSound = true;
             if (display.frame() == FrameType.CHALLENGE) {
-                pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+                pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(ModSoundEvents.ACHIEVEMENTS.get(), 1.0F, 1.0F));
             }
         }
     }
