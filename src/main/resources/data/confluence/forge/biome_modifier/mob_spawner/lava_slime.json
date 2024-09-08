@@ -3,15 +3,11 @@
     "biomes": [
         "confluence:ash_forest",
         "confluence:ash_wasteland",
-        "minecraft:basalt_deltas",
-        "minecraft:crimson_forest",
-        "minecraft:nether_wastes",
-        "minecraft:warped_forest",
-        "minecraft:soul_sand_valley"
+        "minecraft:nether_wastes"
     ],
     "spawners": {
         "type": "confluence:lava_slime",
-        "weight": 25,
+        "weight": 10,
         "minCount": 1,
         "maxCount": 1
     }
