@@ -245,7 +245,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
     public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     // 雕像
-    public static final RegistryObject<BaseStatueBlock> STATUE_A = registerWithItem("statue_a", () -> new BaseStatueBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).noOcclusion()));
+    public static final RegistryObject<BaseStatueBlock> STATUE_A = registerWithItem("statue_a", () -> new BaseStatueBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }
