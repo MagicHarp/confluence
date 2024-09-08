@@ -1,0 +1,30 @@
+{
+    "display": {
+        "icon": {
+            "item": "confluence:life_crystal"
+        },
+        "title": {
+            "translate": "achievements.confluence.heart_breaker.title"
+        },
+        "description": {
+            "translate": "achievements.confluence.heart_breaker.description"
+        },
+        "frame": "challenge",
+        "show_toast": false,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "parent": "confluence:achievements/boots_of_the_hero",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "confluence:life_crystal"
+                    }
+                ]
+            }
+        }
+    }
+}

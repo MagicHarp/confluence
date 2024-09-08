@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:anvil"
+        },
+        "title": {
+            "translate": "achievements.confluence.heavy_metal.title"
+        },
+        "description": {
+            "translate": "achievements.confluence.heavy_metal.description"
+        },
+        "frame": "challenge",
+        "show_toast": false,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "parent": "confluence:achievements/boots_of_the_hero",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:anvil"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

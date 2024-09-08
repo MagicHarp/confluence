@@ -1,0 +1,30 @@
+{
+    "display": {
+        "icon": {
+            "item": "confluence:silver_hammer"
+        },
+        "title": {
+            "translate": "achievements.confluence.hammer_time.title"
+        },
+        "description": {
+            "translate": "achievements.confluence.hammer_time.description"
+        },
+        "frame": "challenge",
+        "show_toast": false,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "parent": "confluence:achievements/boots_of_the_hero",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag": "confluence:hammers"
+                    }
+                ]
+            }
+        }
+    }
+}

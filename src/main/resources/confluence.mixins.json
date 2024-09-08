@@ -1,7 +1,7 @@
 {
     "client": [
         "ConnectionMixin",
-        "client.BiomeColorsMixin",
+        "client.AdvancementWidgetMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
         "client.ClientAdvancementsMixin",
@@ -43,6 +43,7 @@
         "DebugInfoMixin",
         "ForgeHookMixin",
         "InventoryChangeTriggerMixin",
+        "ServerAdvancementManagerMixin",
         "TagLoaderMixin",
         "VillagerTrades$EmeraldsForVillagerTypeItemMixin",
         "accessor.BlockItemAccessor",

@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "confluence:grappling_hook"
+        },
+        "title": {
+            "translate": "achievements.confluence.hold_on_tight.title"
+        },
+        "description": {
+            "translate": "achievements.confluence.hold_on_tight.description"
+        },
+        "frame": "challenge",
+        "show_toast": false,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "parent": "confluence:achievements/boots_of_the_hero",
+    "criteria": {
+        "requirement": {
+            "trigger": "confluence:curios_equipped",
+            "conditions": {
+                "item": {
+                    "tag": "curios:hook"
+                }
+            }
+        }
+    }
+}

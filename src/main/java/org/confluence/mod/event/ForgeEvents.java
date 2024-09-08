@@ -41,6 +41,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.advancement.ModTriggers;
 import org.confluence.mod.block.functional.network.NetworkService;
 import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.block.natural.LogBlocks;
@@ -76,6 +77,7 @@ import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.event.CurioEquipEvent;
 
 import java.util.function.Consumer;
 
@@ -132,7 +134,7 @@ public final class ForgeEvents {
                 ConfluenceData.get(serverLevel).setMoonSpecific(-1);
             }
         } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
-            serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
+                serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
         ) {
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED), false);
             ConfluenceData.get(serverLevel).setMoonSpecific(11);
@@ -183,11 +185,11 @@ public final class ForgeEvents {
         if (event.getSource().getEntity() instanceof ServerPlayer serverPlayer) {
             EntityType<?> entityType = living.getType();
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new EntityKilledPacketS2C(
-                    serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
-                    ForgeRegistries.ENTITY_TYPES.getKey(entityType)
-                )
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new EntityKilledPacketS2C(
+                            serverPlayer.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)),
+                            ForgeRegistries.ENTITY_TYPES.getKey(entityType)
+                    )
             );
 
             if (ModConfigs.DROP_MONEY.get() && living instanceof Enemy) {
@@ -321,6 +323,13 @@ public final class ForgeEvents {
             ((EntityAccessor) abstractMinecart).callRemovePassenger(player);
             abstractMinecart.discard();
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void curios(CurioEquipEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            ModTriggers.CURIOS_EQUIPPED.trigger(serverPlayer, event.getStack());
         }
     }
 }

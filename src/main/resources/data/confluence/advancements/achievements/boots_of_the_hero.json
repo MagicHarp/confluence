@@ -1,0 +1,32 @@
+{
+    "display": {
+        "background": "minecraft:textures/block/stone.png",
+        "icon": {
+            "item": "confluence:terraspark_boots"
+        },
+        "title": {
+            "translate": "achievements.confluence.boots_of_the_hero.title"
+        },
+        "description": {
+            "translate": "achievements.confluence.boots_of_the_hero.description"
+        },
+        "frame": "challenge",
+        "show_toast": false,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "confluence:terraspark_boots"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

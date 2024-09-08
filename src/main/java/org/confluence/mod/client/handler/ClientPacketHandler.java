@@ -2,7 +2,6 @@ package org.confluence.mod.client.handler;
 
 import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import com.lowdragmc.shimmer.client.light.LightManager;
-import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -17,6 +16,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
 import org.confluence.mod.misc.ModSoundEvents;
+import org.confluence.mod.mixinauxiliary.ILevelRenderer;
 import org.confluence.mod.network.s2c.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +33,6 @@ public final class ClientPacketHandler {
     private static int currentMana = 20;
 
     private static boolean echoBlockVisible = false;
-    private static boolean showHolyWaterColor = false;
     private static boolean autoAttack = false;
     private static boolean hasCthulhu = false;
     private static boolean hasTabi = false;
@@ -60,16 +59,7 @@ public final class ClientPacketHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             echoBlockVisible = packet.visible();
-            ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
-        });
-        context.setPacketHandled(true);
-    }
-
-    public static void handleHolyWater(HolyWaterColorUpdatePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
-        NetworkEvent.Context context = ctx.get();
-        context.enqueueWork(() -> {
-            showHolyWaterColor = packet.show();
-            ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
+            rebuildAllChunks();
         });
         context.setPacketHandled(true);
     }
@@ -78,7 +68,7 @@ public final class ClientPacketHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
             if (moonSpecific == 11 || packet.id() == 11) {
-                ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).rebuildAllChunks();
+                rebuildAllChunks();
             }
             if (packet.id() < 0) {
                 moonSpecific = -1;
@@ -91,6 +81,10 @@ public final class ClientPacketHandler {
         context.setPacketHandled(true);
     }
 
+    private static void rebuildAllChunks() {
+        ((ILevelRenderer) Minecraft.getInstance().levelRenderer).confluence$rebuildAllChunks();
+    }
+
     public static int getCurrentMana() {
         return currentMana;
     }
@@ -101,10 +95,6 @@ public final class ClientPacketHandler {
 
     public static boolean isEchoBlockVisible() {
         return echoBlockVisible;
-    }
-
-    public static boolean showHolyWaterColor() {
-        return showHolyWaterColor;
     }
 
     public static boolean couldAutoAttack() {

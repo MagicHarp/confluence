@@ -56,6 +56,7 @@ public final class ModTags {
         public static final TagKey<Item> CORAL = register("coral");
         public static final TagKey<Item> TR_PLANKS = register("tr_planks");
         public static final TagKey<Item> LEAD_AND_IRON = register("lead_and_iron");
+        public static final TagKey<Item> HAMMER = register("hammer");
 
         private static TagKey<Item> curios(String id) {
             return ItemTags.create(new ResourceLocation(Curios.MODID, id));

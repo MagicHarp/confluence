@@ -173,7 +173,6 @@ public final class ModEvents {
         }
     }
 
-
     @SubscribeEvent
     public static void register(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> {

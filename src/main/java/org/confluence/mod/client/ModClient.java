@@ -16,7 +16,6 @@ import net.minecraft.client.resources.metadata.animation.AnimationMetadataSectio
 import net.minecraft.client.resources.metadata.animation.FrameSize;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.world.level.ColorResolver;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -62,7 +61,6 @@ import static org.confluence.mod.entity.ModEntities.*;
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ModClient {
-    public static final ColorResolver HALLOW_WATER_RESOLVER = (biome, x, z) -> 0xFF96FF;
     public static final BlockColor HALLOW_LEAVES_COLOR = (blockState, getter, pos, tint) -> {
         if (pos == null) return -1;
 
@@ -109,9 +107,18 @@ public final class ModClient {
             FishingPoles.registerCast();
             Bows.registerProperties();
 
-            AchievementToast.registerToast(new ResourceLocation(MODID, "boots_of_the_hero"));
-            AchievementToast.registerToast(new ResourceLocation(MODID, "black_mirror"));
-            AchievementToast.registerToast(new ResourceLocation(MODID, "ankhumulation_complete"));
+            // Collector
+            AchievementToast.registerToast("timber");
+            AchievementToast.registerToast("hammer_time");
+            AchievementToast.registerToast("heavy_metal");
+            AchievementToast.registerToast("star_power");
+            AchievementToast.registerToast("hold_on_tight");
+            AchievementToast.registerToast("boots_of_the_hero");
+            AchievementToast.registerToast("black_mirror");
+            AchievementToast.registerToast("ankhumulation_complete");
+            // Explorer
+            AchievementToast.registerToast("ooo_shinny");
+            AchievementToast.registerToast("heart_breaker");
 
             MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
@@ -255,11 +262,6 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.LIGHTS_BANE.get(), LightsBaneParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_DUST.get(), LightsBaneDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_FADE.get(), LightsBaneFadeParticle.Provider::new);
-    }
-
-    @SubscribeEvent
-    public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
-        event.register(HALLOW_WATER_RESOLVER);
     }
 
     @SubscribeEvent

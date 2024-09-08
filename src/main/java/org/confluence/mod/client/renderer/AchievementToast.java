@@ -13,6 +13,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Hashtable;
@@ -106,15 +107,17 @@ public class AchievementToast implements Toast {
         ACHIEVEMENTS.put(advancement, toast);
     }
 
-    public static void registerToast(ResourceLocation advancement) {
-        String namespace = advancement.getNamespace();
-        String path = advancement.getPath();
-        ACHIEVEMENTS.put(advancement, new AchievementToast(
+    public static void registerToast(String namespace, String path) {
+        registerToast(new ResourceLocation(namespace, "achievements/" + path), new AchievementToast(
                 new ResourceLocation(namespace, "textures/achievement/" + path + ".png"),
                 new AchievementDisplay(FrameType.CHALLENGE,
                         Component.translatable("achievements." + namespace + "." + path + ".title"),
                         Component.translatable("achievements." + namespace + "." + path + ".description")
                 )));
+    }
+
+    public static void registerToast(String path) {
+        registerToast(Confluence.MODID, path);
     }
 
     public static Toast getToast(ResourceLocation advancement) {
