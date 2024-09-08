@@ -156,5 +156,10 @@
         "sounds": [
             "confluence:use_mounts"
         ]
+    },
+    "achievements": {
+        "sounds": [
+            "confluence:achievements"
+        ]
     }
 }
