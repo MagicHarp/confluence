@@ -2405,6 +2405,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
+        // 雕像
+        add(STATUE_A.get(), "A雕像");
         //endregion items
 
         //region entities

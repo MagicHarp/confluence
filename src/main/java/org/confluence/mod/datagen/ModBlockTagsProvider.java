@@ -120,7 +120,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             ModBlocks.TIMERS_BLOCK_3_1.get(),
             ModBlocks.TIMERS_BLOCK_5_1.get(),
             ModBlocks.TIMERS_BLOCK_1_2.get(),
-            ModBlocks.TIMERS_BLOCK_1_4.get()
+            ModBlocks.TIMERS_BLOCK_1_4.get(),
+            STATUE_A.get()
         );
         // 其他需要铲挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithShovel = tag(BlockTags.MINEABLE_WITH_SHOVEL);

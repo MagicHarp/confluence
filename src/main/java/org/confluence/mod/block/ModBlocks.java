@@ -237,13 +237,15 @@ public final class ModBlocks {
     public static final RegistryObject<Block> TR_CRIMSON_SAND_LAYER_BLOCK = registerWithItem("tr_crimson_sand_layer_block", SandLayerBlock::new);
     public static final RegistryObject<Block> SAND_LAYER_BLOCK = registerWithItem("sand_layer_block", SandLayerBlock::new);
     public static final RegistryObject<Block> RED_SAND_LAYER_BLOCK = registerWithItem("red_sand_layer_block", SandLayerBlock::new);
+    // 椅子
     public static final RegistryObject<WhitePlasticChairBlock> WHITE_PLASTIC_CHAIR_BLOCK = registerWithItem("white_plastic_chair", WhitePlasticChairBlock::new, supplier -> () -> new WhitePlasticChairBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<WhitePlasticChairBlock.Entity>> WHITE_PLASTIC_CHAIR_ENTITY = BLOCK_ENTITIES.register("white_plastic_chair_entity", () -> BlockEntityType.Builder.of(WhitePlasticChairBlock.Entity::new, WHITE_PLASTIC_CHAIR_BLOCK.get()).build(null));
-
+    // 作物
     public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
     public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
     public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
-
+    // 雕像
+    public static final RegistryObject<BaseStatueBlock> STATUE_A = registerWithItem("statue_a", () -> new BaseStatueBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }

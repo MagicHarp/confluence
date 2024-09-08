@@ -65,6 +65,9 @@ public final class ModTabs {
                 output.accept(WHITE_PLASTIC_CHAIR_BLOCK.get());
 
                 output.accept(DEEPSLATE_PRESSURE_PLATE.get());
+
+                // 雕像
+                output.accept(STATUE_A.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
             })
             .build());
