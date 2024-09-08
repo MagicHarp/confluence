@@ -333,7 +333,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
 
-
+        // old
         add("advancements.start.title", "旧的世界，新的旅途！");
         add("advancements.start.descr", "汇合交流的来世");
         add("advancements.falling_star.title", "寻觅坠落之光");
@@ -354,6 +354,31 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.tr_crimson_ingot.descr", "获得猩红矿锭");
         add("advancements.pretty_in_pink.title", "粉红佳人");
         add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
+        // new
+        add("achievements.confluence.timber.title", "木材！！");
+        add("achievements.confluence.timber.description", "砍倒第一棵树。");
+        add("achievements.confluence.star_power.title", "星之力");
+        add("achievements.confluence.star_power.description", "使用坠落之星制作魔力水晶并使用它。");
+        add("achievements.confluence.ooo_shinny.title", "哦！亮闪闪！");
+        add("achievements.confluence.ooo_shinny.description", "用镐开采第一块矿石。");
+        add("achievements.confluence.i_am_loot.title", "我要洗劫！");
+        add("achievements.confluence.i_am_loot.description", "在地下发现一个金箱子并看看里面有什么。");
+        add("achievements.confluence.hold_on_tight.title", "抓紧！");
+        add("achievements.confluence.hold_on_tight.description", "首次装备抓钩。");
+        add("achievements.confluence.heavy_metal.title", "重金属");
+        add("achievements.confluence.heavy_metal.description", "获得由铁或铅制成的砧子。");
+        add("achievements.confluence.heart_breaker.title", "伤心者");
+        add("achievements.confluence.heart_breaker.description", "首次在地下发现并粉碎水晶之心。");
+        add("achievements.confluence.hammer_time.title", "停！锤子时间到！");
+        add("achievements.confluence.hammer_time.description", "通过制作或其他方式获得第一把锤子。");
+        add("achievements.confluence.boots_of_the_hero.title", "英雄之靴");
+        add("achievements.confluence.boots_of_the_hero.description", "这是用最好的火靴和最好的冰靴铸成的。");
+        add("achievements.confluence.black_mirror.title", "黑镜");
+        add("achievements.confluence.black_mirror.description", "你以后再也不会不带它就出门。");
+        add("achievements.confluence.ankhumulation_complete.title", "十字章收集完成");
+        add("achievements.confluence.ankhumulation_complete.description", "这是对抗烦人疾病的最佳防护。");
+        add("achievements.confluence.a_shimmer_in_the_dark.title", "暗中微光");
+        add("achievements.confluence.a_shimmer_in_the_dark.description", "用微光将一个物品变成另一个物品。你还能找到哪些其他变化？");
 
         add("prefix.confluence.hard", "坚硬");
         add("prefix.confluence.guarding", "守护");
@@ -1009,12 +1034,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("container.confluence.workshop", "工匠作坊");
         add("title.confluence.workshop", "工匠作坊");
 
-        add("achievements.confluence.boots_of_the_hero.title", "英雄之靴");
-        add("achievements.confluence.boots_of_the_hero.description", "这是用最好的火靴和最好的冰靴铸成的。");
-        add("achievements.confluence.black_mirror.title", "黑镜");
-        add("achievements.confluence.black_mirror.description", "你以后再也不会不带它就出门。");
-        add("achievements.confluence.ankhumulation_complete.title", "十字章收集完成");
-        add("achievements.confluence.ankhumulation_complete.description", "这是对抗烦人疾病的最佳防护。");
+
 
         //region blocks
         add(Ores.SANCTIFICATION_COAL_ORE.get(), "圣化煤矿石");

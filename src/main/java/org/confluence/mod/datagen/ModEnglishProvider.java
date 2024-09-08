@@ -287,7 +287,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
 
-
+        // old
         add("advancements.start.title", "Old World, New Journey!");
         add("advancements.start.descr", "The afterlife of convergence and exchange");
         add("advancements.mana_star.title", "Gather the power of the stars");
@@ -304,7 +304,31 @@ public class ModEnglishProvider extends LanguageProvider {
         add("advancements.tr_crimson_ingot.descr", "Acquire crimson ingot");
         add("advancements.pretty_in_pink.title", "pretty_in_pink");
         add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
-
+        // new
+        add("achievements.confluence.timber.title", "Timber!! ");
+        add("achievements.confluence.timber.description", "Chop down your first tree.");
+        add("achievements.confluence.star_power.title", "Star Power");
+        add("achievements.confluence.star_power.description", "Craft a mana crystal out of fallen stars, and consume it.");
+        add("achievements.confluence.ooo_shinny.title", "Ooo! Shiny!");
+        add("achievements.confluence.ooo_shinny.description", "Mine your first nugget of ore with a pickaxe.");
+        add("achievements.confluence.i_am_loot.title", "I Am Loot!");
+        add("achievements.confluence.i_am_loot.description", "Discover a golden chest underground and take a peek at its contents.");
+        add("achievements.confluence.hold_on_tight.title", "Hold on Tight!");
+        add("achievements.confluence.hold_on_tight.description", "Equip your first grappling hook.");
+        add("achievements.confluence.heavy_metal.title", "Heavy Metal");
+        add("achievements.confluence.heavy_metal.description", "Obtain an anvil made from iron or lead.");
+        add("achievements.confluence.heart_breaker.title", "Heart Breaker");
+        add("achievements.confluence.heart_breaker.description", "Discover and smash your first heart crystal underground.");
+        add("achievements.confluence.hammer_time.title", "Stop! Hammer Time! ");
+        add("achievements.confluence.hammer_time.description", "Obtain your first hammer via crafting or otherwise.");
+        add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
+        add("achievements.confluence.boots_of_the_hero.description", "Forged from the finest boots of fire and ice.");
+        add("achievements.confluence.black_mirror.title", "Black Mirror");
+        add("achievements.confluence.black_mirror.description", "You'll never leave home without it again.");
+        add("achievements.confluence.ankhumulation_complete.title", "Ankhumulation Complete");
+        add("achievements.confluence.ankhumulation_complete.description", "The finest protection from unpleasant maladies and ailments.");
+        add("achievements.confluence.a_shimmer_in_the_dark.title", "A Shimmer In The Dark");
+        add("achievements.confluence.a_shimmer_in_the_dark.description", "Shimmer an item into another item. What other transmutations can you find?");
 
         add("prefix.confluence.quick", "Quick");
         add("prefix.confluence.hasty", "Hasty");
@@ -649,12 +673,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("container.confluence.workshop", "Workshop");
         add("title.confluence.workshop", "Workshop");
 
-        add("achievements.confluence.boots_of_the_hero.title", "Boots of the Hero");
-        add("achievements.confluence.boots_of_the_hero.description", "Forged from the finest boots of fire and ice.");
-        add("achievements.confluence.black_mirror.title", "Black Mirror");
-        add("achievements.confluence.black_mirror.description", "You'll never leave home without it again.");
-        add("achievements.confluence.ankhumulation_complete.title", "Ankhumulation Complete");
-        add("achievements.confluence.ankhumulation_complete.description", "The finest protection from unpleasant maladies and ailments.");
+
 
         ModBlocks.BLOCKS.getEntries().forEach(block -> {
             Block block1 = block.get();
