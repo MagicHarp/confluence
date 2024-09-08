@@ -41,10 +41,32 @@ public final class ModAchievements {
         /* No Hobo (6, 0) */
         offset("ooo_shinny", 7, 0);
         offset("heart_breaker", 8, 0);
-        /* I Am Loot (9, 0) */
+        offset("i_am_loot", 9, 0);
         /* Smashing Poppet (10, 0) */
         /* Wheres My Honey (6, 1) */
-        // todo 可以按你喜好排序(看到了删掉这行)
+        /* Dungeon Heist (7, 1) */
+        /* Its Getting Hot in Here (8, 1) */
+        /* Its Hard (9, 1) */
+        /* Begone Evil (10, 1) */
+        /* Extra Shiny (6, 2) */
+        /* Photosynthesis (7, 2) */
+        /* Get a Life (8, 2) */
+        /* Robbing the Grave (9, 2) */
+        /* Big Booty (10, 2) */
+        /* Bloodbath (6, 3) */
+        /* Kill the Sun (7, 3) */
+        /* Sticky Situation (8, 3) */
+        /* Jeepers Creepers (9, 3) */
+        /* Funkytown (10, 3) */
+        /* Into Orbit (6, 4) */
+        /* Rock Bottom (7, 4) */
+        /* It Can Talk (8, 4) */
+        /* Watch Your Step (9, 4) */
+        /* You Can Do It (10, 4) */
+        /* Quiet Neighborhood (6.5, 5) */
+        /* Hey Listen (7.5, 5) */
+        /* A Rare Realm (8.5, 5) */
+        offset("a_shimmer_in_the_dark", 9.5F, 5);
     }
 
     private static void offset(String path, float x, float y) {

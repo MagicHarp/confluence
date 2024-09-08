@@ -1,5 +1,6 @@
 package org.confluence.mod.mixin.entity;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
+import org.confluence.mod.advancement.ModTriggers;
 import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.fluid.ShimmerItemTransmutationEvent;
 import org.confluence.mod.item.ModItems;
@@ -71,6 +73,9 @@ public abstract class ItemEntityMixin implements IItemEntity {
                         self.level().addFreshEntity(itemEntity);
                         self.level().playSound(null, self.getX(), self.getY(), self.getZ(), ModSoundEvents.SHIMMER_EVOLUTION.get(), SoundSource.AMBIENT, 1.0F, 1.0F);
                     }
+                    if (self.getOwner() instanceof ServerPlayer serverPlayer) {
+                        ModTriggers.SHIMMER_TRANSMUTATION.trigger(serverPlayer, self);
+                    }
                 }
             }
         } else if (confluence$item_coolDown > 0) {
@@ -84,11 +89,11 @@ public abstract class ItemEntityMixin implements IItemEntity {
         Item item = getItem().getItem();
         Rarity rarity = item.getRarity(getItem());
         if (rarity != ModRarity.WHITE &&
-            rarity != ModRarity.GRAY &&
-            rarity != Rarity.COMMON) {
+                rarity != ModRarity.GRAY &&
+                rarity != Rarity.COMMON) {
             cir.setReturnValue(true);
         } else if (item == Blocks.OBSIDIAN.asItem() || item == Blocks.CRYING_OBSIDIAN.asItem() ||
-            item == ModItems.FLAMEFLOWERS.get() || item == ModItems.FLAMEFLOWERS_SEED.get()) {
+                item == ModItems.FLAMEFLOWERS.get() || item == ModItems.FLAMEFLOWERS_SEED.get()) {
             cir.setReturnValue(true);
         }
     }

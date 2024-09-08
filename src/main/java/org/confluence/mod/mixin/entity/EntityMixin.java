@@ -13,7 +13,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
@@ -66,17 +65,9 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
     @Shadow
     public abstract void setGlowingTag(boolean pHasGlowingTag);
 
-    @Shadow public abstract Vec3 getPosition(float pPartialTicks);
-
     @Shadow public abstract Vec3 getDeltaMovement();
 
-    @Shadow public abstract AABB getBoundingBox();
-
     @Shadow public abstract Level level();
-
-    @Shadow public abstract boolean isFree(double pX, double pY, double pZ);
-
-    @Shadow protected abstract boolean isFree(AABB pBox);
 
     @Unique
     private int confluence$cthulhuSprintingTime = 0;

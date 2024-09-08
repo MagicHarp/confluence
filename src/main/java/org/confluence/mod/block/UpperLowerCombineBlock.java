@@ -28,8 +28,7 @@ public abstract class UpperLowerCombineBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        Level level = pContext.getLevel();
-        return level.getBlockState(pContext.getClickedPos().above()).canBeReplaced(pContext) ? defaultBlockState() : null;
+        return pContext.getLevel().getBlockState(pContext.getClickedPos().above()).canBeReplaced(pContext) ? defaultBlockState() : null;
     }
 
     @Override

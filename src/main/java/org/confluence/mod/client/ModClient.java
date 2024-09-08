@@ -119,6 +119,8 @@ public final class ModClient {
             // Explorer
             AchievementToast.registerToast("ooo_shinny");
             AchievementToast.registerToast("heart_breaker");
+            AchievementToast.registerToast("i_am_loot");
+            AchievementToast.registerToast("a_shimmer_in_the_dark");
 
             MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
