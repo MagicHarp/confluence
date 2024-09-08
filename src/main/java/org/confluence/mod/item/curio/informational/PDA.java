@@ -37,12 +37,4 @@ public class PDA extends AbstractInfoCurio implements ICompass, IDepthMeter, IDP
         list.add(IWatch.TOOLTIP);
         list.add(IWeatherRadio.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.pda.info"),
-            Component.translatable("item.confluence.pda.info2")
-        };
-    }
 }

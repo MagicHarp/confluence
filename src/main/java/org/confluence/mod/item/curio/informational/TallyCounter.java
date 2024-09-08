@@ -23,11 +23,7 @@ public class TallyCounter extends AbstractInfoCurio implements ITallyCounter {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.tally_counter.info"),
-            Component.translatable("item.confluence.tally_counter.info2"),
-            Component.translatable("item.confluence.tally_counter.info3"),
-            Component.translatable("item.confluence.tally_counter.info4"),
-            Component.translatable("item.confluence.tally_counter.info5")
+            Component.translatable("item.confluence.tally_counter.info")
         };
     }
 }

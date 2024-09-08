@@ -10,6 +10,6 @@ public class ExquisitelyStuffedEffect extends MobEffect {   //吃得好/很满�
 
     public ExquisitelyStuffedEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
-        addAttributeModifier(Attributes.MOVEMENT_SPEED, SPEED_UUID, 0.05, AttributeModifier.Operation.ADDITION);
+        addAttributeModifier(Attributes.MOVEMENT_SPEED, SPEED_UUID, 0.03, AttributeModifier.Operation.ADDITION);
     }
 }

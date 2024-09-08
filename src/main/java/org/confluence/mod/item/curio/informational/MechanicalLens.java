@@ -27,8 +27,7 @@ public class MechanicalLens extends AbstractInfoCurio implements CustomModel, IF
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.mechanical_lens.info"),
-            Component.translatable("item.confluence.mechanical_lens.info2")
+            Component.translatable("item.confluence.mechanical_lens.info")
         };
     }
 }

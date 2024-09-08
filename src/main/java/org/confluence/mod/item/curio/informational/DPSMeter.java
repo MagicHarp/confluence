@@ -29,8 +29,7 @@ public class DPSMeter extends AbstractInfoCurio implements IDPSMeter, CustomName
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.dps_meter.info"),
-            Component.translatable("item.confluence.dps_meter.info2")
+            Component.translatable("item.confluence.dps_meter.info")
         };
     }
 }

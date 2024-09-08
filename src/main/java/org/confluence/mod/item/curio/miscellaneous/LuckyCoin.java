@@ -56,14 +56,7 @@ public class LuckyCoin extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.lucky_coin.info"),
-            Component.translatable("item.confluence.lucky_coin.info2"),
-            Component.translatable("item.confluence.lucky_coin.info3"),
-            Component.translatable("item.confluence.lucky_coin.info4"),
-            Component.translatable("item.confluence.lucky_coin.info5"),
-            Component.translatable("item.confluence.lucky_coin.info6"),
-            Component.translatable("item.confluence.lucky_coin.info7"),
-            Component.translatable("item.confluence.lucky_coin.info8")
+            Component.translatable("item.confluence.lucky_coin.info")
         };
     }
 }

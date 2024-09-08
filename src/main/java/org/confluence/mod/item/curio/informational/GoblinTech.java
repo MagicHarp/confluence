@@ -21,12 +21,4 @@ public class GoblinTech extends AbstractInfoCurio implements IMetalDetector, ISt
         list.add(IMetalDetector.TOOLTIP);
         list.add(IStopwatch.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.goblin_tech.info"),
-            Component.translatable("item.confluence.goblin_tech.info2")
-        };
-    }
 }
