@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelData.Builder;
 import net.minecraftforge.client.model.data.ModelProperty;
+import org.confluence.mod.client.connected.behaviour.ConnectedTextureBehaviour;
 import org.confluence.mod.util.ModUtils;
 
 import java.util.ArrayList;

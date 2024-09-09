@@ -1,10 +1,13 @@
-package org.confluence.mod.client.connected;
+package org.confluence.mod.client.connected.behaviour;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.client.connected.CTSpriteShiftEntry;
+import org.confluence.mod.client.connected.CasingConnectivity;
+import org.confluence.mod.client.connected.ModConnectives;
 import org.jetbrains.annotations.Nullable;
 
 public class EncasedCTBehaviour extends ConnectedTextureBehaviour.Base {

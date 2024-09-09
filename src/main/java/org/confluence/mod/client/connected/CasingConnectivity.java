@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 public class CasingConnectivity {
-
 	private Map<Block, Entry> entries;
 
 	public CasingConnectivity() {

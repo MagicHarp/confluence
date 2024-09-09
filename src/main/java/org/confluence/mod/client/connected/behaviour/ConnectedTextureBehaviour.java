@@ -1,4 +1,4 @@
-package org.confluence.mod.client.connected;
+package org.confluence.mod.client.connected.behaviour;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
@@ -8,13 +8,15 @@ import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.client.connected.CTSpriteShiftEntry;
+import org.confluence.mod.client.connected.CTType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ConnectedTextureBehaviour {
 	@Nullable
 	public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction,
-		@NotNull TextureAtlasSprite sprite);
+												@NotNull TextureAtlasSprite sprite);
 
 	// TODO: allow more than one data type per state/face?
 	@Nullable
@@ -243,8 +245,7 @@ public abstract class ConnectedTextureBehaviour {
 	public static abstract class Base extends ConnectedTextureBehaviour {
 		@Override
 		@Nullable
-		public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction,
-													@NotNull TextureAtlasSprite sprite);
+		public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction, @NotNull TextureAtlasSprite sprite);
 
 		@Override
 		@Nullable

@@ -2,6 +2,7 @@ package org.confluence.mod.client.connected;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.connected.behaviour.ConnectedTextureBehaviour;
 
 import java.util.Locale;
 
