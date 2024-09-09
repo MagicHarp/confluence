@@ -87,7 +87,7 @@ public enum Foods implements EnumRegister<Item> {
     MILKSHAKE("milkshake", () -> new BottleFoodItem(FoodType.SENIOR)),//奶昔
     //不掉落瓶子的饮料
     JOJA_COLA("joja_cola", () -> new BottleFoodItem(FoodType.LOW)),//乔家可乐
-    CARTON_OF_MILK("carton_of_milk", () -> new BaseFoodItem(FoodType.SENIOR)),//卡通牛奶
+    CARTON_OF_MILK("carton_of_milk", () -> new BottleFoodItem(FoodType.SENIOR)),//卡通牛奶
     TEACUP("teacup", () -> new BottleFoodItem(FoodType.LOW)),//一小杯茶
     COFFEE("coffee", () -> new BottleFoodItem(FoodType.SENIOR)),//咖啡
 

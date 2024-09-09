@@ -1695,6 +1695,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Baits.BLACK_DRAGONFLY.get(), "黑蜻蜓");
         add(Baits.BLACK_SCORPION.get(), "黑蝎子");
         add(Baits.BLUE_JELLYFISH.get(), "蓝水母");
+        add(Baits.BLUE_DRAGONFLY.get(), "蓝蜻蜓");
         add(Baits.BUGGY.get(), "蚜虫");
         add(Baits.ENCHANTED_NIGHTCRAWLER.get(), "附魔夜行者");
         add(Baits.FIREFLY.get(), "萤火虫");
@@ -2146,6 +2147,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GOLD_CROWN.get(), "金冠");
         add(STEP_STOOL.get(), "梯凳");
         add(HAND_OF_CREATION.get(), "创造之手");
+        add(CELL_PHONE.get(), "手机");
 
         // 盔甲
         add(Armors.CACTUS_CHESTPLATE.get(), "仙人掌胸甲");
