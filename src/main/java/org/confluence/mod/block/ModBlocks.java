@@ -247,6 +247,8 @@ public final class ModBlocks {
     // 雕像
     public static final RegistryObject<BaseStatueBlock> STATUE_A = registerWithItem("statue_a", () -> new BaseStatueBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
+    public static final RegistryObject<Block> ANDESITE_CASING = registerWithItem("andesite_casing", () -> new Block(BlockBehaviour.Properties.of()));
+
     public static <B extends Block> RegistryObject<B> registerWithItem(String id, Supplier<B> block) {
         return registerWithItem(id, block, new Item.Properties());
     }

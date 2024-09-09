@@ -1,6 +1,7 @@
 package org.confluence.mod.util;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -24,6 +25,8 @@ import java.util.List;
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
 public final class ModUtils {
+    public static final Direction[] directions = Direction.values();
+
     public static float nextFloat(RandomSource randomSource, float origin, float bound) {
         if (origin >= bound) {
             throw new IllegalArgumentException("bound - origin is non positive");
@@ -45,12 +48,12 @@ public final class ModUtils {
     }
 
     public static void createItemEntity(List<ItemStack> itemStacks, double x, double y, double z, Level level) {
-        for (ItemStack itemStack : itemStacks){
+        for (ItemStack itemStack : itemStacks) {
             createItemEntity(itemStack, x, y, z, level, 40);
         }
     }
 
-        public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level, int pickUpDelay) {
+    public static void createItemEntity(ItemStack itemStack, double x, double y, double z, Level level, int pickUpDelay) {
         ItemEntity itemEntity = new ItemEntity(level, x, y, z, itemStack);
         itemEntity.setPickUpDelay(pickUpDelay);
         level.addFreshEntity(itemEntity);
@@ -88,9 +91,9 @@ public final class ModUtils {
         boolean b = amount > 0.0;
         amount *= 100.0;
         return Component.translatable(
-            "prefix.confluence.tooltip." + (b ? "plus" : "take"),
-            ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
-            Component.translatable("prefix.confluence.tooltip." + type)
+                "prefix.confluence.tooltip." + (b ? "plus" : "take"),
+                ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
+                Component.translatable("prefix.confluence.tooltip." + type)
         ).withStyle(b ? ChatFormatting.BLUE : ChatFormatting.RED);
     }
 
@@ -102,7 +105,7 @@ public final class ModUtils {
     public static boolean isHalloween() {
         Calendar calendar = Calendar.getInstance();
         return (calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 15) || // 从 十月中旬
-            (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
+                (calendar.get(Calendar.MONTH) == Calendar.NOVEMBER && calendar.get(Calendar.DATE) <= 15); // 到 十一月中旬
     }
 
     /**
@@ -125,8 +128,8 @@ public final class ModUtils {
      * @param yaw   角度的yaw，单位为角度而非弧度
      * @param pitch 角度的pitch，单位为角度
      * @return 返回朝向对应角度（yaw、pitch）的单位向量
-     * */
-    public static Vec3 rotToDir(float yaw, float pitch){
+     */
+    public static Vec3 rotToDir(float yaw, float pitch) {
         float yawRad = (float) Math.toRadians(yaw);
         float pitchRad = (float) Math.toRadians(pitch);
         // Mth类的三角函数优化较好
@@ -151,32 +154,37 @@ public final class ModUtils {
     /**
      * 获得两个位置之间的方向向量；若两点重合则默认返回向上的向量
      * 若要自定义默认返回的向量，请在length后传入一个默认向量
-     * @param start 开始位置的位置向量
-     * @param end 结束位置的位置向量
+     *
+     * @param start  开始位置的位置向量
+     * @param end    结束位置的位置向量
      * @param length 返回向量的长度
-     * */
+     */
     public static Vec3 getDirection(Vec3 start, Vec3 end, double length) {
         return getDirection(start, end, length, new Vec3(0, length, 0));
     }
+
     /**
      * 获得两个位置之间的方向向量；若两点重合则默认返回的向量
-     * @param start 开始位置的位置向量
-     * @param end 结束位置的位置向量
-     * @param length 返回向量的长度
+     *
+     * @param start      开始位置的位置向量
+     * @param end        结束位置的位置向量
+     * @param length     返回向量的长度
      * @param defaultVec 两点重合时返回的默认向量（注：直接原样返回，不会判定该向量的长度）
-     * */
+     */
     public static Vec3 getDirection(Vec3 start, Vec3 end, double length, Vec3 defaultVec) {
         return getDirection(start, end, length, defaultVec, false);
     }
+
     /**
      * 获得两个位置之间的方向向量
      * 若preserveShorterVectors为true且两点之间的距离小于length则不会改变向量长度
-     * @param start 开始位置的位置向量
-     * @param end 结束位置的位置向量
-     * @param length 返回向量的长度
-     * @param defaultVec 两点重合时返回的默认向量（注：直接原样返回，不会判定该向量的长度）
+     *
+     * @param start                  开始位置的位置向量
+     * @param end                    结束位置的位置向量
+     * @param length                 返回向量的长度
+     * @param defaultVec             两点重合时返回的默认向量（注：直接原样返回，不会判定该向量的长度）
      * @param preserveShorterVectors 若向量比length短，是否保留原向量
-     * */
+     */
     public static Vec3 getDirection(Vec3 start, Vec3 end, double length,
                                     Vec3 defaultVec, boolean preserveShorterVectors) {
         Vec3 result = end.subtract(start);
@@ -211,18 +219,23 @@ public final class ModUtils {
             ply.sendSystemMessage(Component.literal(msg));
     }
 
-    /**为专家?在处理if...else if时应先使用isMaster*/
+    /**
+     * 为专家?在处理if...else if时应先使用isMaster
+     */
     public static boolean isExpert(Level level) {
         return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
     }
 
-    /**为大师?在处理if...else if时应先使用此方法*/
+    /**
+     * 为大师?在处理if...else if时应先使用此方法
+     */
     public static boolean isMaster(Level level) {
         return level.getDifficulty().equals(Difficulty.HARD);
     }
 
     /**
      * 获得从实体A到实体B的单位向量，即A→B
+     *
      * @param a 实体A
      * @param b 实体B
      * @return A→B的单位向量
@@ -233,12 +246,29 @@ public final class ModUtils {
 
     /**
      * 给予实体B一个击退动量，方向为A→B
-     * @param a 实体A
-     * @param b 实体B
-     * @param scale 击退动量的缩放
+     *
+     * @param a       实体A
+     * @param b       实体B
+     * @param scale   击退动量的缩放
      * @param motionY 击退的Y轴动量
      */
     public static void knockBackA2B(Entity a, Entity b, double scale, double motionY) {
         b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
+    }
+
+    public static Vec3 componentMin(Vec3 vec1, Vec3 vec2) {
+        return new Vec3(Math.min(vec1.x, vec2.x), Math.min(vec1.y, vec2.y), Math.min(vec1.z, vec2.z));
+    }
+
+    public static Vec3 componentMax(Vec3 vec1, Vec3 vec2) {
+        return new Vec3(Math.max(vec1.x, vec2.x), Math.max(vec1.y, vec2.y), Math.max(vec1.z, vec2.z));
+    }
+
+    public static Direction[] directionsInAxis(Direction.Axis axis) {
+        return switch (axis) {
+            case X -> new Direction[]{Direction.EAST, Direction.WEST};
+            case Y -> new Direction[]{Direction.UP, Direction.DOWN};
+            default -> new Direction[]{Direction.SOUTH, Direction.NORTH};
+        };
     }
 }

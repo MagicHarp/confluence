@@ -420,6 +420,7 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MECHANICAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mechanical"))
             .displayItems((parameters, output) -> {
+                output.accept(ANDESITE_CASING.get());
                 output.accept(ModItems.RED_WRENCH.get());
                 output.accept(ModItems.GREEN_WRENCH.get());
                 output.accept(ModItems.BLUE_WRENCH.get());
