@@ -89,8 +89,8 @@ public final class ModTabs {
                 output.accept(EMERALD_BRANCHES.get());
                 output.accept(DIAMOND_BRANCHES.get());
                 output.accept(SAPPHIRE_BRANCHES.get());
-                output.accept(ASH_BRANCHES.get());
                 output.accept(TR_AMETHYST_BRANCHES.get());
+                output.accept(ASH_BRANCHES.get());
                 output.accept(AETHERIUM_BLOCK.get());
                 output.accept(DARK_AETHERIUM_BLOCK.get());
 
