@@ -32,7 +32,7 @@
             },
             {
               "function": "set_nbt",
-              "tag": "{color: 0x48E920}"
+              "tag": "{color: 4778272}"
             }
           ],
           "name": "confluence:gel",
