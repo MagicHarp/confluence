@@ -241,9 +241,9 @@ public final class ModBlocks {
     public static final RegistryObject<WhitePlasticChairBlock> WHITE_PLASTIC_CHAIR_BLOCK = registerWithItem("white_plastic_chair", WhitePlasticChairBlock::new, supplier -> () -> new WhitePlasticChairBlock.Item(supplier.get()));
     public static final RegistryObject<BlockEntityType<WhitePlasticChairBlock.Entity>> WHITE_PLASTIC_CHAIR_ENTITY = BLOCK_ENTITIES.register("white_plastic_chair_entity", () -> BlockEntityType.Builder.of(WhitePlasticChairBlock.Entity::new, WHITE_PLASTIC_CHAIR_BLOCK.get()).build(null));
     // 作物
-    public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
-    public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION)));
-    public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
+    public static final RegistryObject<Block> STELLAR_BLOSSOM = registerWithItem("stellar_blossom", () -> new StellarBlossomBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION).offsetType(BlockBehaviour.OffsetType.NONE)));
+    public static final RegistryObject<Block> CLOUDWEAVER = registerWithItem("cloudweaver", () -> new CloudWeaverBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION).offsetType(BlockBehaviour.OffsetType.NONE)));
+    public static final RegistryObject<Block> FLOATING_WHEAT = registerWithItem("floating_wheat", () -> new FloatingWheatBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).offsetType(BlockBehaviour.OffsetType.NONE)));
     // 雕像
     public static final RegistryObject<BaseStatueBlock> STATUE_A = registerWithItem("statue_a", () -> new BaseStatueBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
