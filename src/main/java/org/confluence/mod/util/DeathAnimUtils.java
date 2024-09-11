@@ -36,6 +36,7 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 import java.util.*;
 
 import static net.minecraft.world.entity.EntityType.*;
@@ -128,7 +129,7 @@ public class DeathAnimUtils {
     public static void moveParts(PoseStack poseStack, Entity animatable, Object bone, float partialTick, DeathAnimOptions options){
         if(!(animatable instanceof LivingEntity entity) || entity.isAlive() || options == null) return;
         float[] motions;
-        if(bone instanceof GeoBone b){ // TODO: children
+        if(bone instanceof GeoBone b){ // TODO: 既然GeoBone也实现了IModelPart(还没提交)就不用分开处理了
             GeoBone parent = b.getParent();
             motions = ((ILivingEntity) entity).confluence$getMotionsForBone(b);
             if(parent != null){
@@ -291,14 +292,13 @@ public class DeathAnimUtils {
         List<ModelPart> ret = findAllModelPart(model, model.getClass());
         for(RenderLayer<LivingEntity, EntityModel<LivingEntity>> layer : ((LivingEntityRendererAccessor) renderer).getLayers()){
             for(Field field : layer.getClass().getDeclaredFields()){
-                if(EntityModel.class.isAssignableFrom(field.getType())){
+                try{
                     field.setAccessible(true);
-                    try{
-                        EntityModel<?> layerModel = (EntityModel<?>) field.get(layer);
+                    if(field.get(layer) instanceof EntityModel<?> layerModel){
                         ret.addAll(findAllModelPart(layerModel, layerModel.getClass()));
-                    }catch(IllegalAccessException e){
-                        Confluence.LOGGER.error("field.get: ", e);
                     }
+                }catch(IllegalAccessException | InaccessibleObjectException e){
+                    Confluence.LOGGER.error("field.get: ", e);
                 }
             }
             if(layer instanceof CustomHeadLayer<?, ?>){
@@ -318,13 +318,12 @@ public class DeathAnimUtils {
         List<ModelPart> ret = new ArrayList<>();
         for(Field field : finding.getDeclaredFields()){
             try{
-                if(ModelPart.class.isAssignableFrom(field.getType())){
-                    field.setAccessible(true);
-                    ModelPart part = (ModelPart) field.get(model);
-                    ret.addAll(((IModelPart) (Object) part).confluence$root().getAllParts().toList());
+                field.setAccessible(true);
+                if(field.get(model) instanceof IModelPart part){
+                    ret.addAll(part.confluence$root().getAllParts().toList());
                     break;
                 }
-            }catch(IllegalAccessException e){
+            }catch(IllegalAccessException | InaccessibleObjectException e){
                 Confluence.LOGGER.error("field.get: ", e);
             }
         }
@@ -348,7 +347,7 @@ public class DeathAnimUtils {
         if(children.size() == 0){
             ret.add(bone);
 //            Confluence.LOGGER.info("{} {} {} {}",bone.getName(),bone.getPivotX(),bone.getPosX(),bone.getLocalPosition());
-        }else {
+        }else{
             for(GeoBone child : children){
                 ret.addAll(addChildBones(child));
             }
