@@ -43,15 +43,13 @@ public class PutridScent extends BaseCurioItem {
 
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, list, tooltipFlag);
-        list.add(Component.translatable("item.confluence.putrid_scent.tooltip2"));
+        list.add(Component.translatable("item.confluence.putrid_scent.tooltip"));
     }
 
     @Override
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.putrid_scent.info"),
-                Component.translatable("item.confluence.putrid_scent.info2"),
-                Component.translatable("item.confluence.putrid_scent.info3")
+                Component.translatable("item.confluence.putrid_scent.info")
         };
     }
 }

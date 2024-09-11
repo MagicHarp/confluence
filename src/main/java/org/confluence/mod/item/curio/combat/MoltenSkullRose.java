@@ -23,14 +23,4 @@ public class MoltenSkullRose extends BaseCurioItem implements IFireImmune, ILava
         list.add(ILavaImmune.TOOLTIP);
         list.add(ILavaHurtReduce.TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.molten_skull_rose.info"),
-            Component.translatable("item.confluence.molten_skull_rose.info2"),
-            Component.translatable("item.confluence.molten_skull_rose.info3"),
-            Component.translatable("item.confluence.molten_skull_rose.info4")
-        };
-    }
 }

@@ -24,9 +24,7 @@ public class MagmaStone extends BaseCurioItem implements IFireAttack {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.magma_stone.info"),
-            Component.translatable("item.confluence.magma_stone.info2"),
-            Component.translatable("item.confluence.magma_stone.info3")
+            Component.translatable("item.confluence.magma_stone.info")
         };
     }
 }

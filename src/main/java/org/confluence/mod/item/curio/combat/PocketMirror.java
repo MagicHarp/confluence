@@ -12,9 +12,7 @@ public class PocketMirror extends BaseCurioItem implements EffectInvul.Stoned {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.pocket_mirror.info"),
-            Component.translatable("item.confluence.pocket_mirror.info2"),
-            Component.translatable("item.confluence.pocket_mirror.info3")
+            Component.translatable("item.confluence.pocket_mirror.info")
         };
     }
 }

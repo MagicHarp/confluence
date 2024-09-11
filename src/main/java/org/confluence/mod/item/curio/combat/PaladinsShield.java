@@ -90,9 +90,7 @@ public class PaladinsShield extends BaseCurioItem implements CustomName {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.paladins_shield.info"),
-            Component.translatable("item.confluence.paladins_shield.info2"),
-            Component.translatable("item.confluence.paladins_shield.info3")
+            Component.translatable("item.confluence.paladins_shield.info")
         };
     }
 }

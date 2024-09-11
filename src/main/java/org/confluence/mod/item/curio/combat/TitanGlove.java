@@ -43,9 +43,7 @@ public class TitanGlove extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.titan_glove.info"),
-            Component.translatable("item.confluence.titan_glove.info2"),
-            Component.translatable("item.confluence.titan_glove.info3")
+            Component.translatable("item.confluence.titan_glove.info")
         };
     }
 }

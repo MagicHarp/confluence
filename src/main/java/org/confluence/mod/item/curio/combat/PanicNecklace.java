@@ -57,8 +57,7 @@ public class PanicNecklace extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.panic_necklace.info"),
-            Component.translatable("item.confluence.panic_necklace.info2")
+            Component.translatable("item.confluence.panic_necklace.info")
         };
     }
 }

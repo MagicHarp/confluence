@@ -12,8 +12,7 @@ public class AdhesiveBandage extends BaseCurioItem implements EffectInvul.Bleedi
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.adhesive_bandage.info"),
-            Component.translatable("item.confluence.adhesive_bandage.info2")
+            Component.translatable("item.confluence.adhesive_bandage.info")
         };
     }
 }

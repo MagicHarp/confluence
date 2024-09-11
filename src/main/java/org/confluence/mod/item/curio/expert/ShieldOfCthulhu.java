@@ -58,9 +58,7 @@ public class ShieldOfCthulhu extends BaseCurioItem implements ModRarity.Expert {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.shield_of_cthulhu.info"),
-            Component.translatable("item.confluence.shield_of_cthulhu.info2"),
-            Component.translatable("item.confluence.shield_of_cthulhu.info3")
+            Component.translatable("item.confluence.shield_of_cthulhu.info")
         };
     }
 

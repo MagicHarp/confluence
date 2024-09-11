@@ -57,9 +57,7 @@ public class SunStone extends BaseCurioItem {
 
     public Component[] getInformation() {
         return new Component[]{
-                Component.translatable("item.confluence.sun_stone.info"),
-                Component.translatable("item.confluence.sun_stone.info2"),
-                Component.translatable("item.confluence.sun_stone.info3")
+                Component.translatable("item.confluence.sun_stone.info")
         };
     }
 }

@@ -12,9 +12,7 @@ public class TrifoldMap extends BaseCurioItem implements EffectInvul.Confused {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.trifold_map.info"),
-            Component.translatable("item.confluence.trifold_map.info2"),
-            Component.translatable("item.confluence.trifold_map.info3")
+            Component.translatable("item.confluence.trifold_map.info")
         };
     }
 }

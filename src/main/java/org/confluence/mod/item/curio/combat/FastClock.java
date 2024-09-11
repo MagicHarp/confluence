@@ -12,9 +12,7 @@ public class FastClock extends BaseCurioItem implements EffectInvul.Slowness {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.fast_clock.info"),
-            Component.translatable("item.confluence.fast_clock.info2"),
-            Component.translatable("item.confluence.fast_clock.info3")
+            Component.translatable("item.confluence.fast_clock.info")
         };
     }
 }

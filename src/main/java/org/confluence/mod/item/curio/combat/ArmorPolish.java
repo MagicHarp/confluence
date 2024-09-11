@@ -12,9 +12,7 @@ public class ArmorPolish extends BaseCurioItem implements EffectInvul.BrokenArmo
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.armor_polish.info"),
-            Component.translatable("item.confluence.armor_polish.info2"),
-            Component.translatable("item.confluence.armor_polish.info3")
+            Component.translatable("item.confluence.armor_polish.info")
         };
     }
 }

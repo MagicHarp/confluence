@@ -47,11 +47,4 @@ public class ArcaneFlower extends BaseCurioItem implements IManaReduce {
         list.add(Component.translatable("item.confluence.arcane_flower.tooltip2"));
         list.add(Component.translatable("item.confluence.arcane_flower.tooltip3"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.arcane_flower.info")
-        };
-    }
 }

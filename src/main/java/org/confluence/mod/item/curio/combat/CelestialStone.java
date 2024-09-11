@@ -49,12 +49,4 @@ public class CelestialStone extends BaseCurioItem {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         ModEffects.healPerSecond(slotContext.entity(), 2.0F);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.celestial_stone.info"),
-            Component.translatable("item.confluence.celestial_stone.info2")
-        };
-    }
 }

@@ -39,12 +39,4 @@ public class ObsidianShield extends BaseCurioItem implements IFireImmune {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.obsidian_shield.info"),
-            Component.translatable("item.confluence.obsidian_shield.info2")
-        };
-    }
 }

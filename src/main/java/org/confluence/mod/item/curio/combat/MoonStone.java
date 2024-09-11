@@ -54,11 +54,4 @@ public class MoonStone extends BaseCurioItem {
         if (living.level().getDayTime() % 24000 < 12000) return;
         ModEffects.healPerSecond(living, 2.0F);
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.moon_stone.info"),
-                Component.translatable("item.confluence.moon_stone.info2"),
-        };
-    }
 }

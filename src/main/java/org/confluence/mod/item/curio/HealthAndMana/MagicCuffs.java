@@ -40,14 +40,4 @@ public class MagicCuffs extends BandOfStarpower {
         list.add(Component.translatable("item.confluence.magic_cuffs.tooltip"));
         list.add(Component.translatable("item.confluence.magic_cuffs.tooltip2"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.magic_cuffs.info"),
-            Component.translatable("item.confluence.magic_cuffs.info2"),
-            Component.translatable("item.confluence.magic_cuffs.info3"),
-            Component.translatable("item.confluence.magic_cuffs.info4")
-        };
-    }
 }

@@ -39,12 +39,4 @@ public class AnkhShield extends AnkhCharm implements IFireImmune {
         list.add(TOOLTIP);
         list.add(Component.translatable("item.confluence.ankh_shield.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.ankh_shield.info"),
-            Component.translatable("item.confluence.ankh_shield.info2"),
-        };
-    }
 }

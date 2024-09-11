@@ -33,8 +33,7 @@ public class CobaltShield extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.cobalt_shield.info"),
-            Component.translatable("item.confluence.cobalt_shield.info2")
+            Component.translatable("item.confluence.cobalt_shield.info")
         };
     }
 }

@@ -65,12 +65,7 @@ public class BrainOfConfusion extends BaseCurioItem implements ModRarity.Expert 
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.brain_of_confusion.info"),
-            Component.translatable("item.confluence.brain_of_confusion.info2"),
-            Component.translatable("item.confluence.brain_of_confusion.info3"),
-            Component.translatable("item.confluence.brain_of_confusion.info4"),
-            Component.translatable("item.confluence.brain_of_confusion.info5"),
-            Component.translatable("item.confluence.brain_of_confusion.info6")
+            Component.translatable("item.confluence.brain_of_confusion.info")
         };
     }
 }

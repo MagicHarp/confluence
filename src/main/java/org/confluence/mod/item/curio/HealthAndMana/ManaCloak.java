@@ -27,15 +27,4 @@ public class ManaCloak extends ManaFlower implements IStarCloak {
         list.add(IStarCloak.TOOLTIP);
         list.add(Component.translatable("item.confluence.mana_cloak.tooltip"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.mana_cloak.info"),
-            Component.translatable("item.confluence.mana_cloak.info2"),
-            Component.translatable("item.confluence.mana_cloak.info3"),
-            Component.translatable("item.confluence.mana_cloak.info4"),
-            Component.translatable("item.confluence.mana_cloak.info5")
-        };
-    }
 }

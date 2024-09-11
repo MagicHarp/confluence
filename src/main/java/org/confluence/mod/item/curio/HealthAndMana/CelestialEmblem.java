@@ -42,11 +42,4 @@ public class CelestialEmblem extends BaseCurioItem implements IRangePickup.Star 
         list.add(Component.translatable("item.confluence.celestial_emblem.tooltip"));
         list.add(Component.translatable("item.confluence.celestial_emblem.tooltip2"));
     }
-
-    @Override
-    public Component[] getInformation() {
-        return new Component[]{
-            Component.translatable("item.confluence.celestial_emblem.info")
-        };
-    }
 }

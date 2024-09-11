@@ -12,8 +12,7 @@ public class HivePack extends BaseCurioItem implements ModRarity.Expert {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.hive_pack.info"),
-            Component.translatable("item.confluence.hive_pack.info2")
+            Component.translatable("item.confluence.hive_pack.info")
         };
     }
 }

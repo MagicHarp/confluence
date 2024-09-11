@@ -49,11 +49,4 @@ public class HeroShield extends PaladinsShield {
     public String getGenName() {
         return "Hero Shield";
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.hero_shield.info"),
-                Component.translatable("item.confluence.hero_shield.info2")
-        };
-    }
 }

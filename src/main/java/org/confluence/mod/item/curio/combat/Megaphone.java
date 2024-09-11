@@ -13,8 +13,6 @@ public class Megaphone extends BaseCurioItem implements EffectInvul.Silenced {
     public Component[] getInformation() {
         return new Component[]{
             Component.translatable("item.confluence.megaphone.info"),
-            Component.translatable("item.confluence.megaphone.info2"),
-            Component.translatable("item.confluence.megaphone.info3")
         };
     }
 }
