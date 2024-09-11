@@ -23,14 +23,14 @@ public final class Bows {
     public static final RegistryObject<ShortBowItem> GOLDEN_SHORT_BOW = ITEMS.register("golden_short_bow", () -> new ShortBowItem(6.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1408)));
     public static final RegistryObject<ShortBowItem> PLATINUM_SHORT_BOW = ITEMS.register("platinum_short_bow", () -> new ShortBowItem(6.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1536)));
 
-    public static final RegistryObject<RoutineBowItem> COPPER_BOW = ITEMS.register("copper_bow", () -> new RoutineBowItem(2.7F,new Item.Properties().rarity(ModRarity.WHITE).durability(640)));
-    public static final RegistryObject<RoutineBowItem> TIN_BOW = ITEMS.register("tin_bow", () -> new RoutineBowItem(2.7F, new Item.Properties().rarity(ModRarity.WHITE).durability(768)));
-    public static final RegistryObject<RoutineBowItem> IRON_BOW = ITEMS.register("iron_bow", () -> new RoutineBowItem(3.2F, new Item.Properties().rarity(ModRarity.WHITE).durability(896)));
-    public static final RegistryObject<RoutineBowItem> LEAD_BOW = ITEMS.register("lead_bow", () -> new RoutineBowItem(3.2F, new Item.Properties().rarity(ModRarity.WHITE).durability(1024)));
-    public static final RegistryObject<RoutineBowItem> SILVER_BOW = ITEMS.register("silver_bow", () -> new RoutineBowItem(3.7F, new Item.Properties().rarity(ModRarity.WHITE).durability(1152)));
-    public static final RegistryObject<RoutineBowItem> TUNGSTEN_BOW = ITEMS.register("tungsten_bow", () -> new RoutineBowItem(3.7F, new Item.Properties().rarity(ModRarity.WHITE).durability(1280)));
-    public static final RegistryObject<RoutineBowItem> GOLDEN_BOW = ITEMS.register("golden_bow", () -> new RoutineBowItem(4.3F, new Item.Properties().rarity(ModRarity.WHITE).durability(1408)));
-    public static final RegistryObject<RoutineBowItem> PLATINUM_BOW = ITEMS.register("platinum_bow", () -> new RoutineBowItem(4.3F, new Item.Properties().rarity(ModRarity.WHITE).durability(1536)));
+    public static final RegistryObject<RoutineBowItem> COPPER_BOW = ITEMS.register("copper_bow", () -> new RoutineBowItem(3.0F,new Item.Properties().rarity(ModRarity.WHITE).durability(640)));
+    public static final RegistryObject<RoutineBowItem> TIN_BOW = ITEMS.register("tin_bow", () -> new RoutineBowItem(3.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(768)));
+    public static final RegistryObject<RoutineBowItem> IRON_BOW = ITEMS.register("iron_bow", () -> new RoutineBowItem(3.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(896)));
+    public static final RegistryObject<RoutineBowItem> LEAD_BOW = ITEMS.register("lead_bow", () -> new RoutineBowItem(3.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(1024)));
+    public static final RegistryObject<RoutineBowItem> SILVER_BOW = ITEMS.register("silver_bow", () -> new RoutineBowItem(4.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1152)));
+    public static final RegistryObject<RoutineBowItem> TUNGSTEN_BOW = ITEMS.register("tungsten_bow", () -> new RoutineBowItem(4.0F, new Item.Properties().rarity(ModRarity.WHITE).durability(1280)));
+    public static final RegistryObject<RoutineBowItem> GOLDEN_BOW = ITEMS.register("golden_bow", () -> new RoutineBowItem(4.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(1408)));
+    public static final RegistryObject<RoutineBowItem> PLATINUM_BOW = ITEMS.register("platinum_bow", () -> new RoutineBowItem(4.5F, new Item.Properties().rarity(ModRarity.WHITE).durability(1536)));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerProperties() {
