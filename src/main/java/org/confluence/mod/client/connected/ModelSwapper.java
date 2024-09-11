@@ -43,9 +43,7 @@ public class ModelSwapper {
 	public static List<ModelResourceLocation> getAllBlockStateModelLocations(Block block) {
 		List<ModelResourceLocation> models = new ArrayList<>();
 		ResourceLocation blockRl = ForgeRegistries.BLOCKS.getKey(block);
-		block.getStateDefinition()
-			.getPossibleStates()
-			.forEach(state -> models.add(BlockModelShaper.stateToModelLocation(blockRl, state)));
+		block.getStateDefinition().getPossibleStates().forEach(state -> models.add(BlockModelShaper.stateToModelLocation(blockRl, state)));
 		return models;
 	}
 

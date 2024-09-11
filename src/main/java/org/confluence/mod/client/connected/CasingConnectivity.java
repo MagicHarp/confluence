@@ -32,7 +32,6 @@ public class CasingConnectivity {
 	}
 
 	public class Entry {
-
 		private Block block;
 		private CTSpriteShiftEntry casing;
 		private BiPredicate<BlockState, Direction> predicate;

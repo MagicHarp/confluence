@@ -28,60 +28,59 @@ public enum AllCTTypes implements CTType {
 	OMNIDIRECTIONAL(8, ConnectedTextureBehaviour.ContextRequirement.builder().all().build()) {
 		@Override
 		public int getTextureIndex(ConnectedTextureBehaviour.CTContext context) {
-			ConnectedTextureBehaviour.CTContext c = context;
-			int tileX = 0, tileY = 0;
-			int borders = (!c.up ? 1 : 0) + (!c.down ? 1 : 0) + (!c.left ? 1 : 0) + (!c.right ? 1 : 0);
+            int tileX = 0, tileY = 0;
+			int borders = (!context.up ? 1 : 0) + (!context.down ? 1 : 0) + (!context.left ? 1 : 0) + (!context.right ? 1 : 0);
 
-			if (c.up)
+			if (context.up)
 				tileX++;
-			if (c.down)
+			if (context.down)
 				tileX += 2;
-			if (c.left)
+			if (context.left)
 				tileY++;
-			if (c.right)
+			if (context.right)
 				tileY += 2;
 
 			if (borders == 0) {
-				if (c.topRight)
+				if (context.topRight)
 					tileX++;
-				if (c.topLeft)
+				if (context.topLeft)
 					tileX += 2;
-				if (c.bottomRight)
+				if (context.bottomRight)
 					tileY += 2;
-				if (c.bottomLeft)
+				if (context.bottomLeft)
 					tileY++;
 			}
 
 			if (borders == 1) {
-				if (!c.right) {
-					if (c.topLeft || c.bottomLeft) {
+				if (!context.right) {
+					if (context.topLeft || context.bottomLeft) {
 						tileY = 4;
-						tileX = -1 + (c.bottomLeft ? 1 : 0) + (c.topLeft ? 1 : 0) * 2;
+						tileX = -1 + (context.bottomLeft ? 1 : 0) + (context.topLeft ? 1 : 0) * 2;
 					}
 				}
-				if (!c.left) {
-					if (c.topRight || c.bottomRight) {
+				if (!context.left) {
+					if (context.topRight || context.bottomRight) {
 						tileY = 5;
-						tileX = -1 + (c.bottomRight ? 1 : 0) + (c.topRight ? 1 : 0) * 2;
+						tileX = -1 + (context.bottomRight ? 1 : 0) + (context.topRight ? 1 : 0) * 2;
 					}
 				}
-				if (!c.down) {
-					if (c.topLeft || c.topRight) {
+				if (!context.down) {
+					if (context.topLeft || context.topRight) {
 						tileY = 6;
-						tileX = -1 + (c.topLeft ? 1 : 0) + (c.topRight ? 1 : 0) * 2;
+						tileX = -1 + (context.topLeft ? 1 : 0) + (context.topRight ? 1 : 0) * 2;
 					}
 				}
-				if (!c.up) {
-					if (c.bottomLeft || c.bottomRight) {
+				if (!context.up) {
+					if (context.bottomLeft || context.bottomRight) {
 						tileY = 7;
-						tileX = -1 + (c.bottomLeft ? 1 : 0) + (c.bottomRight ? 1 : 0) * 2;
+						tileX = -1 + (context.bottomLeft ? 1 : 0) + (context.bottomRight ? 1 : 0) * 2;
 					}
 				}
 			}
 
 			if (borders == 2) {
-				if ((c.up && c.left && c.topLeft) || (c.down && c.left && c.bottomLeft)
-					|| (c.up && c.right && c.topRight) || (c.down && c.right && c.bottomRight))
+				if ((context.up && context.left && context.topLeft) || (context.down && context.left && context.bottomLeft)
+					|| (context.up && context.right && context.topRight) || (context.down && context.right && context.bottomRight))
 					tileX += 3;
 			}
 

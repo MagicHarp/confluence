@@ -88,10 +88,10 @@ public final class ForgeClient {
 
         if (displayName.get() instanceof Component component) {
             PrefixProvider.getPrefix(event.getItemStack()).ifPresent(itemPrefix ->
-                tooltipElements.set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name)
-                    .withStyle(itemPrefix.tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
-                    .append(" ").append(component)
-                )));
+                    tooltipElements.set(0, Either.left(Component.translatable("prefix.confluence." + itemPrefix.name)
+                            .withStyle(itemPrefix.tier >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED)
+                            .append(" ").append(component)
+                    )));
         }
     }
 
@@ -115,31 +115,31 @@ public final class ForgeClient {
                 if (itemPrefix.manaCost != 0.0) {
                     boolean b = itemPrefix.manaCost > 0.0;
                     tooltip.add(Component.translatable(
-                        "prefix.confluence.tooltip." + (b ? "plus" : "take"),
-                        ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.manaCost * (b ? 100.0 : -100.0)),
-                        Component.translatable("prefix.confluence.tooltip.mana_cost")
+                            "prefix.confluence.tooltip." + (b ? "plus" : "take"),
+                            ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.manaCost * (b ? 100.0 : -100.0)),
+                            Component.translatable("prefix.confluence.tooltip.mana_cost")
                     ).withStyle(b ? ChatFormatting.RED : ChatFormatting.BLUE));
                 }
             } else if (itemPrefix.type == PrefixType.CURIO) {
                 if (itemPrefix.armor > 0) {
                     tooltip.add(Component.translatable(
-                        "prefix.confluence.tooltip.add",
-                        itemPrefix.armor,
-                        Component.translatable("prefix.confluence.tooltip.armor")
+                            "prefix.confluence.tooltip.add",
+                            itemPrefix.armor,
+                            Component.translatable("prefix.confluence.tooltip.armor")
                     ).withStyle(ChatFormatting.BLUE));
                 }
                 if (itemPrefix.additionalMana > 0) {
                     tooltip.add(Component.translatable(
-                        "prefix.confluence.tooltip.add",
-                        itemPrefix.additionalMana,
-                        Component.translatable("prefix.confluence.tooltip.additional_mana")
+                            "prefix.confluence.tooltip.add",
+                            itemPrefix.additionalMana,
+                            Component.translatable("prefix.confluence.tooltip.additional_mana")
                     ).withStyle(ChatFormatting.BLUE));
                 }
                 if (itemPrefix.movementSpeed > 0.0) {
                     tooltip.add(Component.translatable(
-                        "prefix.confluence.tooltip.plus",
-                        ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.movementSpeed * 100.0),
-                        Component.translatable("prefix.confluence.tooltip.movement_speed")
+                            "prefix.confluence.tooltip.plus",
+                            ATTRIBUTE_MODIFIER_FORMAT.format(itemPrefix.movementSpeed * 100.0),
+                            Component.translatable("prefix.confluence.tooltip.movement_speed")
                     ).withStyle(ChatFormatting.BLUE));
                 }
             }
@@ -175,8 +175,8 @@ public final class ForgeClient {
     public static void fov(ComputeFovModifierEvent event) {
         Player player = event.getPlayer();
         if (ClientPacketHandler.isHasScope() && player.isCrouching() &&
-            Minecraft.getInstance().options.getCameraType().isFirstPerson() &&
-            player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)
+                Minecraft.getInstance().options.getCameraType().isFirstPerson() &&
+                player.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.Items.RANGED_WEAPON)
         ) {
             event.setNewFovModifier(0.1F);
         }

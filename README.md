@@ -6,4 +6,3 @@
 - Curios API: 饰品
 - TerraBlender: 自定义生物群系规则
 - Shimmer: 动态光源与彩色光照
-- Fusion (可选): 连接材质
