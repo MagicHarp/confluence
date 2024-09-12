@@ -2,49 +2,60 @@ package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class EvaporativeCloudBlock extends Block {
-    private static final BooleanProperty NeighborBlockState = BooleanProperty.create("neighbor_block_state");
+public class EvaporativeCloudBlock extends BaseEntityBlock implements EntityBlock {
 
     public EvaporativeCloudBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.SNOW).randomTicks());
-        registerDefaultState(this.defaultBlockState().setValue(NeighborBlockState, false));
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+        return new Entity(pPos, pState);
     }
 
     @Override
-    public void tick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.relative(direction);
-            BlockState neighborState = level.getBlockState(neighborPos);
-
-            if (neighborState.getBlock() == Blocks.WATER) {
-                level.setBlockAndUpdate(neighborPos, Blocks.WATER.defaultBlockState());
-                state =state.setValue(NeighborBlockState,true);
-                level.setBlockAndUpdate(pos,state);
-            }
+    public <T extends BlockEntity> BlockEntityTicker getTicker(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
+        if (pLevel.isClientSide) {
+            return null;
         }
+        return ModUtils.getTicker(pBlockEntityType, ModBlocks.EVAPORATIVE_CLOUD_BLOCK_ENTITY.get(), (level, blockPos, blockState, e) -> {
+            for (Direction direction : Direction.values()) {
+                BlockPos neighborPos = blockPos.relative(direction);
+                BlockState neighborState = level.getBlockState(neighborPos);
+
+                if (neighborState.getBlock() == Blocks.WATER) {
+                    level.setBlockAndUpdate(neighborPos, Blocks.WATER.defaultBlockState());
+                    level.removeBlock(blockPos, false);
+                }
+            }
+        });
     }
 
-    public void fallOn(@NotNull Level level, @NotNull BlockState state, @NotNull BlockPos pos, Entity entity, float fallDistance) {
+    public void fallOn(@NotNull Level level, @NotNull BlockState state, @NotNull BlockPos pos, net.minecraft.world.entity.Entity entity, float fallDistance) {
         if (entity.isSuppressingBounce()) {
             super.fallOn(level, state, pos, entity, fallDistance);
         }
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NeighborBlockState);
+    public static class Entity extends BlockEntity {
+        public Entity(BlockPos pPos, BlockState pBlockState) {
+            super(ModBlocks.EVAPORATIVE_CLOUD_BLOCK_ENTITY.get(), pPos, pBlockState);
+        }
     }
 }

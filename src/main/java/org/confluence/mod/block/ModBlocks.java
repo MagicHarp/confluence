@@ -164,7 +164,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> CLOUD_BLOCK = registerWithItem("cloud_block", CloudBlock::new);
     public static final RegistryObject<Block> RAIN_CLOUD_BLOCK = registerWithItem("rain_cloud_block", () -> new ParticleCloudBlock(ParticleTypes.FALLING_WATER));
     public static final RegistryObject<Block> SNOW_CLOUD_BLOCK = registerWithItem("snow_cloud_block", () -> new ParticleCloudBlock(ParticleTypes.SNOWFLAKE));
-    public static final RegistryObject<Block> EVAPORATIVE_CLOUD_BLOCK = registerWithItem("evaporative_cloud_block", EvaporativeCloudBlock::new);
+    public static final RegistryObject<EvaporativeCloudBlock> EVAPORATIVE_CLOUD_BLOCK = registerWithItem("evaporative_cloud_block", EvaporativeCloudBlock::new);
+    public static final RegistryObject<BlockEntityType<EvaporativeCloudBlock.Entity>> EVAPORATIVE_CLOUD_BLOCK_ENTITY = BLOCK_ENTITIES.register("evaporative_cloud_block_entity", () -> BlockEntityType.Builder.of(EvaporativeCloudBlock.Entity::new, EVAPORATIVE_CLOUD_BLOCK.get()).build(null));
     // 草药
     public static final RegistryObject<BaseHerbBlock> WATERLEAF = registerWithoutItem("waterleaf", Waterleaf::new);//幌菊
     public static final RegistryObject<FlameFlower> FLAMEFLOWERS = registerWithoutItem("flameflowers", FlameFlower::new);//火焰花
