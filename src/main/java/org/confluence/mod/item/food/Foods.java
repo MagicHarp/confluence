@@ -123,6 +123,8 @@ public enum Foods implements EnumRegister<Item> {
 
     //节日特有
     ZONGZI("zongzi", () -> new FireproofFoodItem(FoodType.LOW)),
+    MOON_CAKES("moon_cakes", () -> new FireproofFoodItem(FoodType.MEDIUM)),
+    MOONCAKE_CHUNKS("mooncake_chunks", () -> new FireproofFoodItem(FoodType.MOONCAKES)),
 
     ;
     private final RegistryObject<Item> value;

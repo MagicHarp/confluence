@@ -7,7 +7,7 @@ import org.confluence.mod.effect.ModEffects;
 
 public class FoodType {
     //低级，2:30
-    public static final FoodProperties LOW = new FoodProperties.Builder().nutrition(1).saturationMod(1.5f).fast().alwaysEat()
+    public static final FoodProperties LOW = new FoodProperties.Builder().nutrition(2).saturationMod(1.5f).fast().alwaysEat()
         .effect(() -> new MobEffectInstance(ModEffects.EXQUISITELY_STUFFED.get(), 3000), 1f).build();
     //中级,5:00
     public static final FoodProperties MEDIUM = new FoodProperties.Builder().nutrition(3).saturationMod(2.5f).fast().alwaysEat()
@@ -35,4 +35,7 @@ public class FoodType {
         .effect(() -> new MobEffectInstance(ModEffects.EXQUISITELY_STUFFED.get(), 6000), 1f)
         .effect(() -> new MobEffectInstance(MobEffects.SLOW_FALLING, 600, 1), 1.0F)
         .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 300, 1), 1.0F).build();
+    //月饼块
+    public static final FoodProperties MOONCAKES = new FoodProperties.Builder().nutrition(1).saturationMod(1.5f).fast().alwaysEat().build();
+
 }
