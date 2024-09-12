@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.gecko;
+package org.confluence.mod.mixin.integretion.gecko;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

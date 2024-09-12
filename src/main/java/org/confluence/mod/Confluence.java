@@ -29,6 +29,7 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.recipe.ModRecipes;
+import org.confluence.mod.worldgen.ModWorldGens;
 import org.confluence.mod.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +71,7 @@ public final class Confluence {
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
         ModMenus.TYPES.register(bus);
+        bus.addListener(ModWorldGens::registerGenerators);
     }
 
     public static ResourceLocation asResource(String path) {

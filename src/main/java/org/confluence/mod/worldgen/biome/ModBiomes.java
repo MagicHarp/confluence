@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import org.confluence.mod.Confluence;
 
-public class ModBiomes {
+public final class ModBiomes {
     public static final ResourceKey<Biome> THE_CORRUPTION = register("the_corruption");
     public static final ResourceKey<Biome> TR_CRIMSON = register("tr_crimson");
     public static final ResourceKey<Biome> THE_HALLOW = register("the_hallow");

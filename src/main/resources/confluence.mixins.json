@@ -1,6 +1,5 @@
 {
     "client": [
-        "ConnectionMixin",
         "client.AdvancementWidgetMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
@@ -9,6 +8,7 @@
         "client.ClientLivingEntityMixin",
         "client.ClientPacketListenerMixin",
         "client.ClientPlayerMixin",
+        "client.ConnectionMixin",
         "client.CustomHeadLayerMixin",
         "client.EntityModelSetMixin",
         "client.EntityRenderDispatcherMixin",
@@ -33,7 +33,8 @@
         "client.accessor.ModelPartAccessor",
         "client.accessor.PostPassAccessor",
         "client.accessor.RenderChunkInfoAccessor",
-        "gecko.GeoArmorRendererMixin",
+        "integretion.gecko.GeoArmorRendererMixin",
+        "integretion.gecko.GeoEntityRendererMixin",
         "integretion.shimmer.ForgePlatformHelperMixin",
         "integretion.shimmer.LightManagerMixin"
     ],
@@ -54,6 +55,8 @@
         "accessor.ItemEntityAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
+        "accessor.MultiNoiseBiomeSourceAccessor",
+        "accessor.MultiNoiseBiomeSourceParameterListAccessor",
         "accessor.RangedAttributeAccessor",
         "accessor.SlimeAccessor",
         "block.BlockBehaviour$BlockStateBaseMixin",
@@ -69,7 +72,6 @@
         "entity.LivingEntityMixin",
         "entity.PlayerMixin",
         "entity.VillagerMixin",
-        "gecko.GeoEntityRendererMixin",
         "integretion.bettercombat.ServerNetworkMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",

@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.client;
 
 import net.minecraft.network.Connection;
 import net.minecraft.network.PacketListener;

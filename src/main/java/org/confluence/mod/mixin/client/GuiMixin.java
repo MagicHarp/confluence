@@ -35,19 +35,16 @@ public abstract class GuiMixin {
 
     @ModifyVariable(method = "renderEffects", at = @At(value = "STORE", ordinal = 0/* first */), ordinal = 2/* ISTORE 12 */)
     private int modify0(int i) {
-        if(ClientConfigs.leftEffectIcon) return 25;
-        return i;
+        return ClientConfigs.leftEffectIcon ? 25 : i;
     }
 
     @ModifyVariable(method = "renderEffects", at = @At(value = "STORE", ordinal = 1/* second */), ordinal = 2/* ISTORE 12 */)
     private int modify1(int i) {
-        if (ClientConfigs.leftEffectIcon) return i * -1;
-        return i;
+        return ClientConfigs.leftEffectIcon ? -i : i;
     }
 
     @ModifyVariable(method = "renderEffects", at = @At(value = "STORE", ordinal = 2/* third */), ordinal = 2/* ISTORE 12 */)
     private int modify2(int i) {
-        if (ClientConfigs.leftEffectIcon) return i * -1;
-        return i;
+        return ClientConfigs.leftEffectIcon ? -i : i;
     }
 }
