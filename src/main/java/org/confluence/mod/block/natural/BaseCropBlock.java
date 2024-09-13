@@ -59,14 +59,6 @@ public abstract class BaseCropBlock extends CropBlock implements CustomModel, Cu
         return this.mayPlaceOn(groundState, worldIn, blockpos);
     }
 
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-        if (getAge(pState) == getMaxAge()){
-            ModUtils.createItemEntity(getCropDrops(), pPos.getX(), pPos.getY(), pPos.getZ(), pLevel);
-            ModUtils.createItemEntity(new ItemStack(getBaseSeedId(), 2), pPos.getX(), pPos.getY(), pPos.getZ(), pLevel);
-        }
-    }
 
     public abstract List<ItemStack> getCropDrops();
 }

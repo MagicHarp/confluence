@@ -35,19 +35,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confluence:cloudweaver_seed",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "confluence:weaving_cloud_cotton",
           "functions": [
             {
@@ -55,6 +42,34 @@
               "count": {
                 "min": 1,
                 "max": 2
+              }
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "confluence:cloudweaver",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "confluence:cloudweaver_seed",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 3
               }
             }
           ]
