@@ -4,7 +4,9 @@ import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,7 +31,6 @@ import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModPaintings;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.recipe.ModRecipes;
-import org.confluence.mod.worldgen.ModWorldGens;
 import org.confluence.mod.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,10 +72,18 @@ public final class Confluence {
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
         ModMenus.TYPES.register(bus);
-        bus.addListener(ModWorldGens::registerGenerators);
     }
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MODID, path);
+    }
+
+    public static void registerGameRules() {
+        SPREADABLE_CHANCE = GameRules.register("confluenceSpreadableChance", GameRules.Category.MISC, GameRules.IntegerValue.create(10));
+    }
+
+    public static void registerMinecartAbility() {
+        MINECART_CURIO.put(Minecart.class, Items.MINECART);
+        CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
     }
 }

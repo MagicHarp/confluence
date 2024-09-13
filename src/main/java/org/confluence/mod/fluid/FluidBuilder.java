@@ -112,8 +112,8 @@ public class FluidBuilder {
 
             event.register(ForgeRegistries.Keys.FLUIDS, helper -> {
                 ForgeFlowingFluid.Properties properties = new ForgeFlowingFluid
-                    .Properties(builder.fluidType, builder.fluid, builder.flowingFluid)
-                    .block(builder.block).bucket(builder.bucket);
+                        .Properties(builder.fluidType, builder.fluid, builder.flowingFluid)
+                        .block(builder.block).bucket(builder.bucket);
 
                 helper.register(builder.fluid.getId(), builder.source == null ? new ForgeFlowingFluid.Source(properties) : builder.source.apply(properties));
                 helper.register(builder.flowingFluid.getId(), builder.flowing == null ? new ForgeFlowingFluid.Flowing(properties) : builder.flowing.apply(properties));

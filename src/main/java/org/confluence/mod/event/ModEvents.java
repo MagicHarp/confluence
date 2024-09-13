@@ -1,21 +1,12 @@
 package org.confluence.mod.event;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.vehicle.Minecart;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
@@ -27,19 +18,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.effect.beneficial.MagicPowerEffect;
-import org.confluence.mod.effect.beneficial.RageEffect;
-import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.npc.ModVillagers;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
 import org.confluence.mod.entity.worm.TestWormEntity;
@@ -48,13 +36,11 @@ import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
-import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 import org.confluence.mod.network.NetworkHandler;
-import org.confluence.mod.recipe.AmountIngredient;
+import org.confluence.mod.recipe.ModRecipes;
 import org.confluence.mod.util.ModResources;
-import org.confluence.mod.worldgen.biome.*;
-import terrablender.api.Regions;
-import terrablender.api.SurfaceRuleManager;
+import org.confluence.mod.worldgen.ModWorldGens;
+import org.confluence.mod.worldgen.biome.ModBiomes;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -93,27 +79,9 @@ public final class ModEvents {
             NetworkHandler.register();
             ModFluids.registerInteraction();
             ModFluids.registerShimmerTransform();
-
-            if (!ModList.get().isLoaded("attributefix")) {
-                Attribute armor = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor"));
-                if (armor instanceof RangedAttribute rangedAttribute) {
-                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
-                }
-                Attribute attribute = BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation("generic.armor_toughness"));
-                if (attribute instanceof RangedAttribute rangedAttribute) {
-                    ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
-                }
-            }
-
-            Regions.register(new AnotherCrimsonRegion(new ResourceLocation(MODID, "tr_crimson"), 1));
-            Regions.register(new TheCorruptionRegion(new ResourceLocation(MODID, "the_corruption"), 1));
-            Regions.register(new AshForestRegion(new ResourceLocation(MODID, "ash_forest"), 1));
-            Regions.register(new AshWastelandRegion(new ResourceLocation(MODID, "ash_wasteland"), 1));
-            Regions.register(new GlowingMushroomRegion(new ResourceLocation(MODID, "glowing_mushroom"), 1));
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, SurfaceRuleData.makeRules());
-
-            Confluence.SPREADABLE_CHANCE = GameRules.register("confluenceSpreadableChance", GameRules.Category.MISC, GameRules.IntegerValue.create(10));
+            ModAttributes.modifyAttributesUpperLimit();
+            ModBiomes.registerRegionAndSurface();
+            Confluence.registerGameRules();
         });
     }
 
@@ -123,13 +91,8 @@ public final class ModEvents {
             StepRevealingBlock.registerOurOwn();
             LogBlocks.wrapStrip();
             ISpreadable.Type.buildMap();
-
-            Confluence.MINECART_CURIO.put(Minecart.class, Items.MINECART);
-            Confluence.CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
-
-            ModEffects.RAGE.get().addAttributeModifier(ModAttributes.getCriticalChance(), RageEffect.CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
-            ModEffects.CEREBRAL_MINDTRICK.get().addAttributeModifier(ModAttributes.getCriticalChance(), CerebralMindtrickEffect.CRIT_UUID, 0.04, AttributeModifier.Operation.ADDITION);
-            ModEffects.MAGIC_POWER.get().addAttributeModifier(ModAttributes.getMagicDamage(), MagicPowerEffect.MAGIC_UUID, 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            Confluence.registerMinecartAbility();
+            ModEffects.addAttributeModifiers();
         });
     }
 
@@ -140,45 +103,39 @@ public final class ModEvents {
             IModFile modFile = modFileInfo.getFile();
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                    "confluence:terraria_art", Component.translatable("resourcepack.terraria_art"), false,
-                    id -> new ModResources(id, modFile, "resourcepacks/terraria_art"),
-                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                        "confluence:terraria_art", Component.translatable("resourcepack.terraria_art"), false,
+                        id -> new ModResources(id, modFile, "resourcepacks/terraria_art"),
+                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
-                if (pack != null) {
-                    consumer.accept(pack);
-                }
+                if (pack != null) consumer.accept(pack);
             });
 
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                    "confluence:mainstream_connected_ores", Component.translatable("resourcepack.mainstream_connected_ores"), false,
-                    id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
-                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                        "confluence:mainstream_connected_ores", Component.translatable("resourcepack.mainstream_connected_ores"), false,
+                        id -> new ModResources(id, modFile, "resourcepacks/mainstream_connected_ores"),
+                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
-                if (pack != null) {
-                    consumer.accept(pack);
-                }
+                if (pack != null) consumer.accept(pack);
             });
 
             event.addRepositorySource(consumer -> {
                 Pack pack = Pack.readMetaAndCreate(
-                    "confluence:ter_armor", Component.translatable("resourcepack.ter_armor"), false,
-                    id -> new ModResources(id, modFile, "resourcepacks/ter_armor"),
-                    PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
+                        "confluence:ter_armor", Component.translatable("resourcepack.ter_armor"), false,
+                        id -> new ModResources(id, modFile, "resourcepacks/ter_armor"),
+                        PackType.CLIENT_RESOURCES, Pack.Position.TOP, PackSource.BUILT_IN
                 );
-                if (pack != null) {
-                    consumer.accept(pack);
-                }
+                if (pack != null) consumer.accept(pack);
             });
         }
     }
 
     @SubscribeEvent
     public static void register(RegisterEvent event) {
-        event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> {
-            CraftingHelper.register(new ResourceLocation(MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
-        });
+        ModRecipes.registerSerializers(event);
         FluidBuilder.register(event);
+        ModVillagers.registerTypes(event);
+        ModWorldGens.registerGenerators(event);
     }
 
     @SubscribeEvent

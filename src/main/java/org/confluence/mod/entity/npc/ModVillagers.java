@@ -54,7 +54,6 @@ public final class ModVillagers {
     public static void register(IEventBus bus) {
         POIS.register(bus);
         PROFESSIONS.register(bus);
-        bus.addListener(ModVillagers::registerTypes);
         MinecraftForge.EVENT_BUS.addListener(ModVillagers::villagerTrades);
     }
 }

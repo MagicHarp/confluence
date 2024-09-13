@@ -2,6 +2,7 @@ package org.confluence.mod.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -11,6 +12,7 @@ import org.confluence.mod.effect.harmful.*;
 import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.effect.neutral.LoveEffect;
 import org.confluence.mod.effect.neutral.ShimmerEffect;
+import org.confluence.mod.misc.ModAttributes;
 
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
@@ -61,5 +63,11 @@ public final class ModEffects {
             if (living.hasEffect(HONEY.get())) amount += 1;
             living.heal(amount);
         }
+    }
+
+    public static void addAttributeModifiers() {
+        RAGE.get().addAttributeModifier(ModAttributes.getCriticalChance(), RageEffect.CRIT_UUID, 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        CEREBRAL_MINDTRICK.get().addAttributeModifier(ModAttributes.getCriticalChance(), CerebralMindtrickEffect.CRIT_UUID, 0.04, AttributeModifier.Operation.ADDITION);
+        MAGIC_POWER.get().addAttributeModifier(ModAttributes.getMagicDamage(), MagicPowerEffect.MAGIC_UUID, 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 }

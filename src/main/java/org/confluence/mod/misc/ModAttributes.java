@@ -18,11 +18,13 @@ import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.integration.apothic.ApothicHelper;
+import org.confluence.mod.mixin.accessor.RangedAttributeAccessor;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -190,5 +192,16 @@ public final class ModAttributes {
                 }
             }
         } catch (Exception ignored) {}
+    }
+
+    public static void modifyAttributesUpperLimit() {
+        if (!ModList.get().isLoaded("attributefix")) {
+            if (Attributes.ARMOR instanceof RangedAttribute rangedAttribute) {
+                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
+            }
+            if (Attributes.ARMOR_TOUGHNESS instanceof RangedAttribute rangedAttribute) {
+                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
+            }
+        }
     }
 }
