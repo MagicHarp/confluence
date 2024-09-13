@@ -1,16 +1,16 @@
-package org.confluence.mod.item.common;
+package org.confluence.mod.item.bomb;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
-import org.confluence.mod.entity.projectile.bombs.BouncyBombEntity;
+import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
 
-public class BombBouncy extends Bomb {
-    public BombBouncy() {
+public class BombScarab extends Bomb {
+    public BombScarab() {
         super();
     }
 
     protected BaseBombEntity EntityConstructor(Level level, Player player) {
-        return new BouncyBombEntity(level, player);
+        return new ScarabBombEntity(level, player);
     }
 }

@@ -1,4 +1,4 @@
-package org.confluence.mod.item.common;
+package org.confluence.mod.item.bomb;
 
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
