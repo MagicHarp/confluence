@@ -48,7 +48,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:cloudweaver",
+          "name": "confluence:weaving_cloud_cotton",
           "functions": [
             {
               "function": "set_count",

@@ -45,7 +45,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "confluence:stellar_blossom",
+          "block": "confluence:floating_wheat",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"
