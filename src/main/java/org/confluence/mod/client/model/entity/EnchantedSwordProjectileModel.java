@@ -7,12 +7,11 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 
 public class EnchantedSwordProjectileModel extends EntityModel<SwordProjectile> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "enchanted_sword_projectile"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("enchanted_sword_projectile"), "main");
     private final ModelPart bb_main;
 
     public EnchantedSwordProjectileModel(ModelPart root) {

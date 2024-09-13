@@ -107,7 +107,7 @@ public enum AllCTTypes implements CTType {
 	private final ConnectedTextureBehaviour.ContextRequirement contextRequirement;
 
 	AllCTTypes(int sheetSize, ConnectedTextureBehaviour.ContextRequirement contextRequirement) {
-		this.id = new ResourceLocation(Confluence.MODID, name().toLowerCase(Locale.ROOT));
+		this.id = Confluence.asResource(name().toLowerCase(Locale.ROOT));
 		this.sheetSize = sheetSize;
 		this.contextRequirement = contextRequirement;
 

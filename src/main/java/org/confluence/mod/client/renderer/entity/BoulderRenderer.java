@@ -14,7 +14,7 @@ import org.confluence.mod.entity.projectile.BoulderEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class BoulderRenderer extends EntityRenderer<BoulderEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/boulder.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/boulder.png");
     private final BoulderModel model;
 
     public BoulderRenderer(EntityRendererProvider.Context pContext) {

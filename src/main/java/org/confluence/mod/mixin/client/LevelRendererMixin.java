@@ -41,7 +41,7 @@ public abstract class LevelRendererMixin implements ILevelRenderer {
     @Unique
     private static final float confluence$size = 10.0F;
     @Unique
-    private static final ResourceLocation NO_MOON = new ResourceLocation(Confluence.MODID, "textures/environment/no_moon.png");
+    private static final ResourceLocation NO_MOON = Confluence.asResource("textures/environment/no_moon.png");
 
     @Inject(method = "renderSky",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;getStarBrightness(F)F"),

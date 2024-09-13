@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -48,7 +47,6 @@ import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModArmPoses;
 
-import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.entity.ModEntities.*;
 
 @SuppressWarnings("deprecation")
@@ -90,13 +88,13 @@ public final class ModClient {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.fluid().get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.flowingFluid().get(), RenderType.translucent());
 
-            ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
+            ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), Confluence.asResource("enable"), (itemStack, level, living, speed) ->
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
-            ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), new ResourceLocation(MODID, "enable"), (itemStack, level, living, speed) ->
+            ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), Confluence.asResource("enable"), (itemStack, level, living, speed) ->
                 itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
-            ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
+            ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), Confluence.asResource("variant"), (itemStack, level, living, speed) ->
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
-            ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), new ResourceLocation(MODID, "variant"), (itemStack, level, living, speed) ->
+            ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), Confluence.asResource("variant"), (itemStack, level, living, speed) ->
                 itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
             Bows.registerProperties();
@@ -290,6 +288,6 @@ public final class ModClient {
 
     @SubscribeEvent
     public static void registerEntitySpectatorShaders(RegisterEntitySpectatorShadersEvent event) {
-        event.register(DEMON_EYE.get(), new ResourceLocation(MODID, "shaders/post/red.json"));
+        event.register(DEMON_EYE.get(), Confluence.asResource("shaders/post/red.json"));
     }
 }

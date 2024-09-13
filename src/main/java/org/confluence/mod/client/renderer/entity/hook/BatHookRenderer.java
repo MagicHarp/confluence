@@ -9,7 +9,7 @@ import org.confluence.mod.entity.hook.BatHookEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class BatHookRenderer extends AbstractHookRenderer<BatHookEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/grappling_hook.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/grappling_hook.png");
     private static final BlockState CHAIN = Blocks.CHAIN.defaultBlockState();
 
     public BatHookRenderer(EntityRendererProvider.Context pContext) {

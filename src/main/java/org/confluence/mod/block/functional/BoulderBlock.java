@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 
 
 public class BoulderBlock extends AbstractMechanicalBlock implements CustomModel, CustomItemModel {
-    public static final ResourceLocation NORMAL = new ResourceLocation(Confluence.MODID, "boulder");
+    public static final ResourceLocation NORMAL = Confluence.asResource("boulder");
 
     public BoulderBlock() {
         super(Properties.of());

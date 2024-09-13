@@ -14,7 +14,7 @@ import org.confluence.mod.entity.projectile.ShurikenProjectile;
 import org.jetbrains.annotations.NotNull;
 
 public class ShurikenProjectileRenderer extends EntityRenderer<ShurikenProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/shuriken_projectile.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/shuriken_projectile.png");
     private final ShurikenProjectileModel model;
 
     public ShurikenProjectileRenderer(EntityRendererProvider.Context pContext) {

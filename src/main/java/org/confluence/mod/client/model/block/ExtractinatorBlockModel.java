@@ -6,9 +6,9 @@ import org.confluence.mod.block.crafting.ExtractinatorBlock;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ExtractinatorBlockModel extends GeoModel<ExtractinatorBlock.Entity> {
-    public static final ResourceLocation MODEL = new ResourceLocation(Confluence.MODID, "geo/block/extractinator.geo.json");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/block/extractinator.png");
-    public static final ResourceLocation ANIMATIONS = new ResourceLocation(Confluence.MODID, "animations/block/extractinator.animation.json");
+    public static final ResourceLocation MODEL = Confluence.asResource("geo/block/extractinator.geo.json");
+    public static final ResourceLocation TEXTURE = Confluence.asResource("textures/block/extractinator.png");
+    public static final ResourceLocation ANIMATIONS = Confluence.asResource("animations/block/extractinator.animation.json");
 
     @Override
     public ResourceLocation getModelResource(ExtractinatorBlock.Entity animatable) {

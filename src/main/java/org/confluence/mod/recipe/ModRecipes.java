@@ -1,6 +1,5 @@
 package org.confluence.mod.recipe;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -10,8 +9,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-
-import static org.confluence.mod.Confluence.MODID;
 
 public final class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Confluence.MODID);
@@ -28,7 +25,7 @@ public final class ModRecipes {
 
     public static void registerSerializers(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> {
-            CraftingHelper.register(new ResourceLocation(MODID, "amount"), AmountIngredient.Serializer.INSTANCE);
+            CraftingHelper.register(Confluence.asResource("amount"), AmountIngredient.Serializer.INSTANCE);
         });
     }
 

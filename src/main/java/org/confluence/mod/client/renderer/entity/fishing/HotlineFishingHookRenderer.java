@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 import static org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer.renderString;
 
 public class HotlineFishingHookRenderer extends EntityRenderer<HotlineFishingHook> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/fishing/hotline.png");
-    private static final RenderType GLOW = ShimmerRenderTypes.emissiveArmor(new ResourceLocation(Confluence.MODID, "textures/entity/fishing/hotline_glow.png"));
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/fishing/hotline.png");
+    private static final RenderType GLOW = ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/hotline_glow.png"));
     private final HotlineFishingHookModel model;
 
     public HotlineFishingHookRenderer(EntityRendererProvider.Context pContext) {

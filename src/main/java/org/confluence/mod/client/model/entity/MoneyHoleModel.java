@@ -7,13 +7,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.MoneyHoleEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class MoneyHoleModel extends EntityModel<MoneyHoleEntity> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "money_hole"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("money_hole"), "main");
     private final ModelPart bb_main;
 
     public MoneyHoleModel(ModelPart root) {

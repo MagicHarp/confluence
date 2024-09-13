@@ -8,7 +8,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import org.confluence.mod.Confluence;
 
 public class ShimmerTransmutationTrigger extends SimpleCriterionTrigger<ShimmerTransmutationTrigger.TriggerInstance> {
-    public static final ResourceLocation ID = new ResourceLocation(Confluence.MODID, "shimmer_transmutation");
+    public static final ResourceLocation ID = Confluence.asResource("shimmer_transmutation");
 
     @Override
     protected TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate contextAwarePredicate, DeserializationContext deserializationContext) {

@@ -105,7 +105,7 @@ public final class PlayerUtils {
     public static void syncAdvancements(ServerPlayer serverPlayer) {
         int step = ConfluenceData.get(serverPlayer.serverLevel()).getRevealStep();
         for (int i = 0; i < step + 1; i++) {
-            ResourceLocation id = new ResourceLocation(Confluence.MODID, "reveal/step" + i);
+            ResourceLocation id = Confluence.asResource("reveal/step" + i);
             Advancement advancement = serverPlayer.server.getAdvancements().getAdvancement(id);
             if (advancement != null) serverPlayer.getAdvancements().award(advancement, "never");
         }

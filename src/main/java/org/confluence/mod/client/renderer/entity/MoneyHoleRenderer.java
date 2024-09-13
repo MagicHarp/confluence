@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import static org.confluence.mod.client.renderer.entity.hook.AbstractHookRenderer.getPosition;
 
 public class MoneyHoleRenderer extends EntityRenderer<MoneyHoleEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/money_hole.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/money_hole.png");
     private final MoneyHoleModel model;
 
     public MoneyHoleRenderer(EntityRendererProvider.Context pContext) {

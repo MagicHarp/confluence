@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.Vec3;
@@ -109,7 +108,7 @@ public class DeathChestBlockRenderer extends ChestRenderer<DeathChestBlock.Entit
     }
 
     private static Material chest(String pChestName) {
-        return new Material(Sheets.CHEST_SHEET, new ResourceLocation(Confluence.MODID, "entity/chest/" + pChestName));
+        return new Material(Sheets.CHEST_SHEET, Confluence.asResource("entity/chest/" + pChestName));
     }
 
     private static Material chooseMaterial(ChestType pChestType, Material pDoubleMaterial, Material pLeftMaterial, Material pRightMaterial) {

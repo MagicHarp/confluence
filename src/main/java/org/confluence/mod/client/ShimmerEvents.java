@@ -4,10 +4,10 @@ import com.lowdragmc.shimmer.client.light.ColorPointLight;
 import com.lowdragmc.shimmer.client.light.LightManager;
 import com.lowdragmc.shimmer.forge.event.ForgeShimmerLoadConfigEvent;
 import com.lowdragmc.shimmer.forge.event.ForgeShimmerReloadEvent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.block.natural.BaseHerbBlock;
@@ -29,7 +29,7 @@ public final class ShimmerEvents {
 
     @SubscribeEvent
     public static void loadConfig(ForgeShimmerLoadConfigEvent event) {
-        event.event.addConfiguration(new ResourceLocation(MODID, "shimmer.json"));
+        event.event.addConfiguration(Confluence.asResource("shimmer.json"));
     }
 
     @SubscribeEvent

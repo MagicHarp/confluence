@@ -10,7 +10,7 @@ import org.confluence.mod.entity.hook.WebSlingerEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class WebSlingerRenderer extends AbstractHookRenderer<WebSlingerEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/web_slinger.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/web_slinger.png");
     private final BlockState CHAIN;
 
     public WebSlingerRenderer(EntityRendererProvider.Context pContext) {

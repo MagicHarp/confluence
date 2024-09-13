@@ -7,14 +7,13 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.TierSortingRegistry;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Supplier;
-
-import static org.confluence.mod.Confluence.MODID;
 
 public final class ModTiers {
     public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
@@ -44,16 +43,16 @@ public final class ModTiers {
 
     public static void register() {
         ResourceLocation netherite = TierSortingRegistry.getName(Tiers.NETHERITE);
-        ResourceLocation ebony = new ResourceLocation(MODID, "ebony");
-        ResourceLocation tr_crimson = new ResourceLocation(MODID, "tr_crimson");
-        ResourceLocation hellstone = new ResourceLocation(MODID, "hellstone");
-        ResourceLocation cobalt = new ResourceLocation(MODID, "cobalt");
-        ResourceLocation palladium = new ResourceLocation(MODID, "palladium");
-        ResourceLocation mithril = new ResourceLocation(MODID, "mithril");
-        ResourceLocation orichalcum = new ResourceLocation(MODID, "orichalcum");
-        ResourceLocation adamantite = new ResourceLocation(MODID, "adamantite");
-        ResourceLocation titanium = new ResourceLocation(MODID, "titanium");
-        ResourceLocation hallowed = new ResourceLocation(MODID, "hallowed");
+        ResourceLocation ebony = Confluence.asResource("ebony");
+        ResourceLocation tr_crimson = Confluence.asResource("tr_crimson");
+        ResourceLocation hellstone = Confluence.asResource("hellstone");
+        ResourceLocation cobalt = Confluence.asResource("cobalt");
+        ResourceLocation palladium = Confluence.asResource("palladium");
+        ResourceLocation mithril = Confluence.asResource("mithril");
+        ResourceLocation orichalcum = Confluence.asResource("orichalcum");
+        ResourceLocation adamantite = Confluence.asResource("adamantite");
+        ResourceLocation titanium = Confluence.asResource("titanium");
+        ResourceLocation hallowed = Confluence.asResource("hallowed");
         assert netherite != null;
         TierSortingRegistry.registerTier(EBONY, ebony, List.of(), List.of(tr_crimson));
         TierSortingRegistry.registerTier(TR_CRIMSON, tr_crimson, List.of(ebony), List.of(netherite));

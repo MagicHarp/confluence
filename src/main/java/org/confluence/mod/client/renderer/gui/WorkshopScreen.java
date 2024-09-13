@@ -13,7 +13,7 @@ import org.confluence.mod.menu.WorkshopMenu;
 import org.jetbrains.annotations.NotNull;
 
 public class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(Confluence.MODID, "textures/gui/container/workshop.png");
+    private static final ResourceLocation BACKGROUND = Confluence.asResource("textures/gui/container/workshop.png");
     private boolean upButtonClicked = false;
     private ItemStack upItem = null;
     private boolean downButtonClicked = false;

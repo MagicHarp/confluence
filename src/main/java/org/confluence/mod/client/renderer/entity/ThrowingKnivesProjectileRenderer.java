@@ -14,7 +14,7 @@ import org.confluence.mod.entity.projectile.ThrowingKnivesProjectile;
 import org.jetbrains.annotations.NotNull;
 
 public class ThrowingKnivesProjectileRenderer extends EntityRenderer<ThrowingKnivesProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/throw_knives_projectile.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/throw_knives_projectile.png");
     private final ThrowingKnivesProjectileModel model;
 
     public ThrowingKnivesProjectileRenderer(EntityRendererProvider.Context pContext) {

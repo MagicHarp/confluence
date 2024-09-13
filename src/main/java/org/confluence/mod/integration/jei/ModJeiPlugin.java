@@ -28,9 +28,9 @@ import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
 public class ModJeiPlugin implements IModPlugin {
-    public static final ResourceLocation UID = new ResourceLocation(Confluence.MODID, "jei_plugin");
-    public static final ResourceLocation ARROW_DOWN = new ResourceLocation(Confluence.MODID, "textures/gui/arrow_down.png");
-    public static final ResourceLocation ARROW_RIGHT = new ResourceLocation(Confluence.MODID, "textures/gui/arrow_right.png");
+    public static final ResourceLocation UID = Confluence.asResource("jei_plugin");
+    public static final ResourceLocation ARROW_DOWN = Confluence.asResource("textures/gui/arrow_down.png");
+    public static final ResourceLocation ARROW_RIGHT = Confluence.asResource("textures/gui/arrow_right.png");
     public static final JeiBackGround FULL_BACKGROUND = new JeiBackGround(128, 128);
     public static final JeiBackGround HALF_BACKGROUND = new JeiBackGround(128, 64);
     public static final JeiBackGround QUARTER_BACKGROUND = new JeiBackGround(128, 32);

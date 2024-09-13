@@ -40,14 +40,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 } else if (value instanceof RotatedPillarBlock rotatedPillarBlock) {
                     if (path.contains("wood")) {
                         // _side, _side
-                        ResourceLocation side = new ResourceLocation(MODID, "block/" + path.replace("wood", "log") + "_side");
+                        ResourceLocation side = Confluence.asResource("block/" + path.replace("wood", "log") + "_side");
                         axisBlock(rotatedPillarBlock, side, side);
                     } else if (path.contains("log")) {
                         // _side, _end
-                        axisBlock(rotatedPillarBlock, new ResourceLocation(MODID, "block/" + path));
+                        axisBlock(rotatedPillarBlock, Confluence.asResource("block/" + path));
                     } else {
                         // _side, _end
-                        axisBlock(rotatedPillarBlock, new ResourceLocation(MODID, "block/" + path));
+                        axisBlock(rotatedPillarBlock, Confluence.asResource("block/" + path));
                     }
                 } else if (value instanceof FenceBlock fenceBlock) {
                     ResourceLocation texture = texture(path, "_fence");
@@ -63,7 +63,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 } else if (value instanceof StairBlock stairBlock) {
                     stairsBlock(stairBlock, texture(path, "_stairs"));
                 } else if (value instanceof TrapDoorBlock trapDoorBlock) {
-                    trapdoorBlock(trapDoorBlock, new ResourceLocation(MODID, "block/" + path), true);
+                    trapdoorBlock(trapDoorBlock, Confluence.asResource("block/" + path), true);
                 } else if (value instanceof DoorBlock doorBlock) {
                     doorBlock(doorBlock, bottom(path), top(path));
                 } else if (value instanceof ICubeTop) {
@@ -76,7 +76,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else if (value instanceof LeavesBlock) {
                     ConfiguredModel configuredModel = new ConfiguredModel(models()
-                        .withExistingParent(path, "block/leaves").texture("all", new ResourceLocation(MODID, "block/" + path)));
+                        .withExistingParent(path, "block/leaves").texture("all", Confluence.asResource("block/" + path)));
                     getVariantBuilder(value).partialState().setModels(configuredModel);
                 } else {
                     simpleBlock(value);
@@ -100,26 +100,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private static ResourceLocation texture(String path, String regex) {
         if (Arrays.stream(WOODS).anyMatch(path::contains)) {
-            return new ResourceLocation(MODID, "block/" + path.replace(regex, "_planks"));
+            return Confluence.asResource("block/" + path.replace(regex, "_planks"));
         }
-        return new ResourceLocation(MODID, "block/" + path.replace(regex, ""));
+        return Confluence.asResource("block/" + path.replace(regex, ""));
     }
 
     private static ResourceLocation side(String path) {
-        return new ResourceLocation(MODID, "block/" + path + "_side");
+        return Confluence.asResource("block/" + path + "_side");
     }
 
     private static ResourceLocation bottom(String path) {
-        return new ResourceLocation(MODID, "block/" + path + "_bottom");
+        return Confluence.asResource("block/" + path + "_bottom");
     }
 
     private static ResourceLocation top(String path) {
-        return new ResourceLocation(MODID, "block/" + path + "_top");
+        return Confluence.asResource("block/" + path + "_top");
     }
 
     private void registerSignBlock(LogBlocks logBlocks) {
         try {
-            signBlock(logBlocks.SIGN.get(), logBlocks.WALL_SIGN.get(), new ResourceLocation(MODID, "block/" + logBlocks.id + "_planks"));
+            signBlock(logBlocks.SIGN.get(), logBlocks.WALL_SIGN.get(), Confluence.asResource("block/" + logBlocks.id + "_planks"));
         } catch (Exception e) {
             Confluence.LOGGER.error(e.getMessage());
         }

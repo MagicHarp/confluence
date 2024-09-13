@@ -8,23 +8,22 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.BulletModel;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.jetbrains.annotations.NotNull;
 
-import static org.confluence.mod.Confluence.MODID;
-
 public class BulletRenderer extends EntityRenderer<BaseBulletEntity> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
-        new ResourceLocation(MODID, "textures/entity/bullet/amethyst_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/topaz_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/sapphire_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/emerald_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/ruby_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/amber_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/diamond_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/frost_bullet.png"),
-        new ResourceLocation(MODID, "textures/entity/bullet/spark_bullet.png")
+        Confluence.asResource("textures/entity/bullet/amethyst_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/topaz_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/sapphire_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/emerald_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/ruby_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/amber_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/diamond_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/frost_bullet.png"),
+        Confluence.asResource("textures/entity/bullet/spark_bullet.png")
     };
     private final BulletModel model;
 

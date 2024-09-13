@@ -7,13 +7,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.BaseBulletEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class BulletModel extends EntityModel<BaseBulletEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "base_bullet"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("base_bullet"), "main");
 
 	private final ModelPart root;
 

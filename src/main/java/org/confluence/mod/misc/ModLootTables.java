@@ -18,6 +18,6 @@ public final class ModLootTables {
     public static final ResourceLocation EXTRACT_MARINE_GRAVEL = register("gameplay/extract/with_marine_gravel");
 
     private static ResourceLocation register(String id) {
-        return new ResourceLocation(Confluence.MODID, id);
+        return Confluence.asResource(id);
     }
 }

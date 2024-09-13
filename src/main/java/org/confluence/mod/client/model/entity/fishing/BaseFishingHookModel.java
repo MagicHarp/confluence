@@ -7,22 +7,20 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.jetbrains.annotations.NotNull;
 
-import static org.confluence.mod.Confluence.MODID;
-
 public class BaseFishingHookModel extends EntityModel<BaseFishingHook> {
-    public static final ModelLayerLocation WOOD = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "wood");
-    public static final ModelLayerLocation REINFORCED = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "reinforced");
-    public static final ModelLayerLocation FISHER_OF_SOULS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fisher_of_souls");
-    public static final ModelLayerLocation FLESHCATCHER = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fleshcatcher");
-    public static final ModelLayerLocation SCARAB = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "scarab");
-    public static final ModelLayerLocation FIBERGLASS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "fiberglass");
-    public static final ModelLayerLocation MECHANICS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "mechanics");
-    public static final ModelLayerLocation SITTING_DUCKS = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "sitting_ducks");
-    public static final ModelLayerLocation GOLDEN = new ModelLayerLocation(new ResourceLocation(MODID, "base_fishing_hook"), "golden");
+    public static final ModelLayerLocation WOOD = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "wood");
+    public static final ModelLayerLocation REINFORCED = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "reinforced");
+    public static final ModelLayerLocation FISHER_OF_SOULS = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "fisher_of_souls");
+    public static final ModelLayerLocation FLESHCATCHER = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "fleshcatcher");
+    public static final ModelLayerLocation SCARAB = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "scarab");
+    public static final ModelLayerLocation FIBERGLASS = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "fiberglass");
+    public static final ModelLayerLocation MECHANICS = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "mechanics");
+    public static final ModelLayerLocation SITTING_DUCKS = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "sitting_ducks");
+    public static final ModelLayerLocation GOLDEN = new ModelLayerLocation(Confluence.asResource("base_fishing_hook"), "golden");
     private final ModelPart bb_main;
 
     public BaseFishingHookModel(ModelPart root) {

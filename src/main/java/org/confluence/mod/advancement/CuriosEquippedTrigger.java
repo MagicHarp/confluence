@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
 
 public class CuriosEquippedTrigger extends SimpleCriterionTrigger<CuriosEquippedTrigger.TriggerInstance> {
-    public static final ResourceLocation ID = new ResourceLocation(Confluence.MODID, "curios_equipped");
+    public static final ResourceLocation ID = Confluence.asResource("curios_equipped");
 
     @Override
     protected TriggerInstance createInstance(JsonObject pJson, ContextAwarePredicate pPredicate, DeserializationContext pDeserializationContext) {

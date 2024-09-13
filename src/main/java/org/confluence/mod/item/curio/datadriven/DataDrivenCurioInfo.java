@@ -113,7 +113,7 @@ public record DataDrivenCurioInfo(String id, String rarity, List<String> tooltip
     public static void bindTags(Map<ResourceLocation, List<TagLoader.EntryWithSource>> map) {
         INFOS.forEach(info -> {
             List<TagLoader.EntryWithSource> list = map.computeIfAbsent(new ResourceLocation(Curios.MODID, info.slot), location -> new ArrayList<>());
-            ResourceLocation location = new ResourceLocation(Confluence.MODID, info.id.toLowerCase());
+            ResourceLocation location = Confluence.asResource(info.id.toLowerCase());
             if (list.stream().noneMatch(entryWithSource -> entryWithSource.entry().getId().equals(location))) {
                 list.add(new TagLoader.EntryWithSource(TagEntry.element(location), "data_driven"));
             }

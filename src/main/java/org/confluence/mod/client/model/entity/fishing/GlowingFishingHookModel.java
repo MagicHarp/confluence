@@ -7,15 +7,14 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.jetbrains.annotations.NotNull;
 
 public class GlowingFishingHookModel extends EntityModel<CurioFishingHook> {
-    public static final ModelLayerLocation MOSS = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "glowing_fishing_hook"), "moss");
-    public static final ModelLayerLocation COMMON = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "glowing_fishing_hook"), "common");
-    public static final ModelLayerLocation GLOWING = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "glowing_fishing_hook"), "glowing");
+    public static final ModelLayerLocation MOSS = new ModelLayerLocation(Confluence.asResource("glowing_fishing_hook"), "moss");
+    public static final ModelLayerLocation COMMON = new ModelLayerLocation(Confluence.asResource("glowing_fishing_hook"), "common");
+    public static final ModelLayerLocation GLOWING = new ModelLayerLocation(Confluence.asResource("glowing_fishing_hook"), "glowing");
     private final ModelPart bb_main;
 
     public GlowingFishingHookModel(ModelPart root) {

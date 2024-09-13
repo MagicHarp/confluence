@@ -1,6 +1,5 @@
 package org.confluence.mod.client.connected;
 
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 
 public class AllSpriteShifts {
@@ -19,11 +18,11 @@ public class AllSpriteShifts {
     }
 
     private static SpriteShiftEntry get(String originalLocation, String targetLocation) {
-        return SpriteShifter.get(new ResourceLocation(Confluence.MODID, originalLocation), new ResourceLocation(Confluence.MODID, targetLocation));
+        return SpriteShifter.get(Confluence.asResource(originalLocation), Confluence.asResource(targetLocation));
     }
 
     private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName, String connectedTextureName) {
-        return CTSpriteShifter.getCT(type, new ResourceLocation(Confluence.MODID, "block/" + blockTextureName), new ResourceLocation(Confluence.MODID, "block/" + connectedTextureName + "_connected"));
+        return CTSpriteShifter.getCT(type, Confluence.asResource("block/" + blockTextureName), Confluence.asResource("block/" + connectedTextureName + "_connected"));
     }
 
     private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName) {

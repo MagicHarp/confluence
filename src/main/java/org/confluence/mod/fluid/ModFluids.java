@@ -19,6 +19,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidType;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.Torches;
 import org.confluence.mod.item.ModItems;
@@ -30,7 +31,6 @@ import org.confluence.mod.misc.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.fluid.ShimmerEntityTransmutationEvent.addEntity;
 import static org.confluence.mod.fluid.ShimmerItemTransmutationEvent.addItem;
 import static org.confluence.mod.fluid.ShimmerItemTransmutationEvent.blackList;
@@ -41,7 +41,7 @@ public final class ModFluids {
     public static FluidTriple SHIMMER;
 
     public static void initialize() {
-        HONEY = FluidTriple.builder(new ResourceLocation(MODID, "honey"))
+        HONEY = FluidTriple.builder(Confluence.asResource("honey"))
             .properties(FluidType.Properties.create()
                 .density(2000)
                 .canSwim(false)
@@ -55,8 +55,8 @@ public final class ModFluids {
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH))
             .customClient(new IClientFluidTypeExtensions() {
-                private static final ResourceLocation STILL = new ResourceLocation(MODID, "block/fluid/honey_still");
-                private static final ResourceLocation FLOWING = new ResourceLocation(MODID, "block/fluid/honey_flowing");
+                private static final ResourceLocation STILL = Confluence.asResource("block/fluid/honey_still");
+                private static final ResourceLocation FLOWING = Confluence.asResource("block/fluid/honey_flowing");
                 private static final Vector3f FOG_COLOR = new Vector3f(1.0F, 1.0F, 0.0F);
 
                 @Override
@@ -84,7 +84,7 @@ public final class ModFluids {
             .bucket(ModItems.HONEY_BUCKET)
             .build();
 
-        SHIMMER = FluidTriple.builder(new ResourceLocation(MODID, "shimmer"))
+        SHIMMER = FluidTriple.builder(Confluence.asResource("shimmer"))
             .properties(FluidType.Properties.create()
                 .density(800)
                 .lightLevel(10)
@@ -99,8 +99,8 @@ public final class ModFluids {
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH))
             .customClient(new IClientFluidTypeExtensions() {
-                private static final ResourceLocation STILL = new ResourceLocation(MODID, "block/fluid/shimmer_still");
-                private static final ResourceLocation FLOWING = new ResourceLocation(MODID, "block/fluid/shimmer_flowing");
+                private static final ResourceLocation STILL = Confluence.asResource("block/fluid/shimmer_still");
+                private static final ResourceLocation FLOWING = Confluence.asResource("block/fluid/shimmer_flowing");
                 private static final Vector3f FOG_COLOR = new Vector3f(1.0F, 0.5882F, 1.0F);
 
                 @Override

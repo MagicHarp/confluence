@@ -9,18 +9,17 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.item.common.LifeFruit;
 
-import static org.confluence.mod.Confluence.MODID;
-
 public class HealthHudOverlay implements IGuiOverlay {
-    public static final ResourceLocation HEART_SINGLE_FANCY = new ResourceLocation(MODID, "textures/gui/screens/heart_single_fancy.png");
-    public static final ResourceLocation HEART_LEFT = new ResourceLocation(MODID, "textures/gui/screens/heart_left.png");
-    public static final ResourceLocation HEART_MIDDLE = new ResourceLocation(MODID, "textures/gui/screens/heart_middle.png");
-    public static final ResourceLocation HEART_RIGHT_FANCY = new ResourceLocation(MODID, "textures/gui/screens/heart_right_fancy.png");
-    public static final ResourceLocation HEART_RIGHT = new ResourceLocation(MODID, "textures/gui/screens/heart_right.png");
-    public static final ResourceLocation HEART_FILL = new ResourceLocation(MODID, "textures/gui/screens/heart_fill.png");
+    public static final ResourceLocation HEART_SINGLE_FANCY = Confluence.asResource("textures/gui/screens/heart_single_fancy.png");
+    public static final ResourceLocation HEART_LEFT = Confluence.asResource("textures/gui/screens/heart_left.png");
+    public static final ResourceLocation HEART_MIDDLE = Confluence.asResource("textures/gui/screens/heart_middle.png");
+    public static final ResourceLocation HEART_RIGHT_FANCY = Confluence.asResource("textures/gui/screens/heart_right_fancy.png");
+    public static final ResourceLocation HEART_RIGHT = Confluence.asResource("textures/gui/screens/heart_right.png");
+    public static final ResourceLocation HEART_FILL = Confluence.asResource("textures/gui/screens/heart_fill.png");
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {

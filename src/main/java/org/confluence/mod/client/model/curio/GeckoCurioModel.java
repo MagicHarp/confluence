@@ -12,9 +12,9 @@ public class GeckoCurioModel<T extends BaseCurioItem & GeoAnimatable> extends Ge
     private final ResourceLocation animation;
 
     public GeckoCurioModel(String location) {
-        this.model = new ResourceLocation(Confluence.MODID, "geo/curio/" + location + ".geo.json");
-        this.texture = new ResourceLocation(Confluence.MODID, "textures/curio/" + location + ".png");
-        this.animation = new ResourceLocation(Confluence.MODID, "animations/curio/" + location + ".animation.json");
+        this.model = Confluence.asResource("geo/curio/" + location + ".geo.json");
+        this.texture = Confluence.asResource("textures/curio/" + location + ".png");
+        this.animation = Confluence.asResource("animations/curio/" + location + ".animation.json");
     }
 
     @Override

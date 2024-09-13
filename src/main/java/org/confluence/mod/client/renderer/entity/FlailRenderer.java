@@ -18,7 +18,7 @@ import org.confluence.mod.entity.projectile.FlailEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class FlailRenderer extends AbstractHookRenderer<FlailEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/flail.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/flail.png");
 
     public FlailRenderer(EntityRendererProvider.Context pContext){
         super(pContext, new FlailModel(pContext.bakeLayer(FlailModel.LAYER_LOCATION)));

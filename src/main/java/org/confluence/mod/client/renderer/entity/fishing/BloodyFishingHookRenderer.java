@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import static org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer.renderString;
 
 public class BloodyFishingHookRenderer extends EntityRenderer<BloodyFishingHook> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/fishing/bloody.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/fishing/bloody.png");
     private final BloodyFishingHookModel model;
 
     public BloodyFishingHookRenderer(EntityRendererProvider.Context pContext) {

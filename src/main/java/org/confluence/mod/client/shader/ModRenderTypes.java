@@ -75,21 +75,21 @@ public final class ModRenderTypes extends RenderStateShard {
             event.registerShader(
                 new ShaderInstance(
                     resourceProvider,
-                    new ResourceLocation(MODID, "rendertype_entity_dynamic"),
+                    Confluence.asResource("rendertype_entity_dynamic"),
                     DefaultVertexFormat.NEW_ENTITY),
                 shader -> entityDynamic = shader
             );
             event.registerShader(
                 new ShaderInstance(
                     resourceProvider,
-                    new ResourceLocation(MODID, "shimmer_liquid"),
+                    Confluence.asResource("shimmer_liquid"),
                     DefaultVertexFormat.BLOCK),
                 shader -> shimmerLiquid = shader
             );
 //            event.registerShader(
 //                new ShaderInstance(
 //                    resourceProvider,
-//                    new ResourceLocation(MODID, "color"),
+//                    Confluence.asResource("color"),
 //                    DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR),
 //                shader -> aether = shader
 //            );

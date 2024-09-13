@@ -59,7 +59,7 @@ public enum Boxes implements EnumRegister<Boxes.BaseBoxBlock> {
 
     Boxes(String id) {
         this.value = ModBlocks.registerWithItem(id, BaseBoxBlock::new, block -> () ->
-            new Item(block.get(), new ResourceLocation(Confluence.MODID, "gameplay/box/" + id)));
+            new Item(block.get(), Confluence.asResource("gameplay/box/" + id)));
     }
 
     @Override

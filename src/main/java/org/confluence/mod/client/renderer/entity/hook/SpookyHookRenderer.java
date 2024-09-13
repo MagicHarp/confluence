@@ -9,7 +9,7 @@ import org.confluence.mod.entity.hook.SpookyHookEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class SpookyHookRenderer extends AbstractHookRenderer<SpookyHookEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/grappling_hook.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/grappling_hook.png");
     private static final BlockState CHAIN = Blocks.CHAIN.defaultBlockState();
 
     public SpookyHookRenderer(EntityRendererProvider.Context pContext) {

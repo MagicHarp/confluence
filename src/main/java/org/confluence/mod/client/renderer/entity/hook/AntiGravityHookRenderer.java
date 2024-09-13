@@ -9,7 +9,7 @@ import org.confluence.mod.entity.hook.AntiGravityHookEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class AntiGravityHookRenderer extends AbstractHookRenderer<AntiGravityHookEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/grappling_hook.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/grappling_hook.png");
     private static final BlockState CHAIN = Blocks.CHAIN.defaultBlockState();
 
     public AntiGravityHookRenderer(EntityRendererProvider.Context pContext) {

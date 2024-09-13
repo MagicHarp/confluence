@@ -70,6 +70,6 @@ public final class ModAchievements {
     }
 
     private static void offset(String path, float x, float y) {
-        DISPLAY_OFFSET.put(new ResourceLocation(Confluence.MODID, "achievements/" + path), new Vec2(x, y));
+        DISPLAY_OFFSET.put(Confluence.asResource("achievements/" + path), new Vec2(x, y));
     }
 }

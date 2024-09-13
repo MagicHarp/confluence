@@ -1,6 +1,5 @@
 package org.confluence.mod.misc;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -45,7 +44,7 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> ACHIEVEMENTS = register("achievements"); // 成就音效
 
     private static RegistryObject<SoundEvent> register(String id) {
-        return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Confluence.MODID, id)));
+        return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(Confluence.asResource(id)));
     }
 
     public static class Types {

@@ -5,16 +5,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
 
-import static org.confluence.mod.Confluence.MODID;
-
 public class ManaHudOverlay implements IGuiOverlay {
-    public static final ResourceLocation STAR_SINGLE = new ResourceLocation(MODID, "textures/gui/screens/star_single.png");
-    public static final ResourceLocation STAR_A = new ResourceLocation(MODID, "textures/gui/screens/star_a.png");
-    public static final ResourceLocation STAR_C = new ResourceLocation(MODID, "textures/gui/screens/star_c.png");
-    public static final ResourceLocation STAR_B = new ResourceLocation(MODID, "textures/gui/screens/star_b.png");
-    public static final ResourceLocation STAR_FILL = new ResourceLocation(MODID, "textures/gui/screens/star_fill.png");
+    public static final ResourceLocation STAR_SINGLE = Confluence.asResource("textures/gui/screens/star_single.png");
+    public static final ResourceLocation STAR_A = Confluence.asResource("textures/gui/screens/star_a.png");
+    public static final ResourceLocation STAR_C = Confluence.asResource("textures/gui/screens/star_c.png");
+    public static final ResourceLocation STAR_B = Confluence.asResource("textures/gui/screens/star_b.png");
+    public static final ResourceLocation STAR_FILL = Confluence.asResource("textures/gui/screens/star_fill.png");
 
     @Override
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {

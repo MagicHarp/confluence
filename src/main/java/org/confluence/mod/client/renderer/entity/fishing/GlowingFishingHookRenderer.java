@@ -10,35 +10,35 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.fishing.GlowingFishingHookModel;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.jetbrains.annotations.NotNull;
 
-import static org.confluence.mod.Confluence.MODID;
 import static org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer.renderString;
 
 public class GlowingFishingHookRenderer extends EntityRenderer<CurioFishingHook> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
-        new ResourceLocation(MODID, "textures/entity/fishing/common.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/glowing.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/lava_moss.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/helium_moss.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/neon_moss.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/argon_moss.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/krypton_moss.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/xenon_moss.png")
+        Confluence.asResource("textures/entity/fishing/common.png"),
+        Confluence.asResource("textures/entity/fishing/glowing.png"),
+        Confluence.asResource("textures/entity/fishing/lava_moss.png"),
+        Confluence.asResource("textures/entity/fishing/helium_moss.png"),
+        Confluence.asResource("textures/entity/fishing/neon_moss.png"),
+        Confluence.asResource("textures/entity/fishing/argon_moss.png"),
+        Confluence.asResource("textures/entity/fishing/krypton_moss.png"),
+        Confluence.asResource("textures/entity/fishing/xenon_moss.png")
     };
     private static final RenderType[] GLOWS = new RenderType[]{
         null,
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/glowing_glow.png")),
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/lava_moss_glow.png")),
-        RenderType.entityCutoutNoCull(new ResourceLocation(MODID, "textures/entity/fishing/helium_moss_glow.png")),
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/neon_moss_glow.png")),
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/argon_moss_glow.png")),
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/krypton_moss_glow.png")),
-        ShimmerRenderTypes.emissiveArmor(new ResourceLocation(MODID, "textures/entity/fishing/xenon_moss_glow.png"))
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/glowing_glow.png")),
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/lava_moss_glow.png")),
+        RenderType.entityCutoutNoCull(Confluence.asResource("textures/entity/fishing/helium_moss_glow.png")),
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/neon_moss_glow.png")),
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/argon_moss_glow.png")),
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/krypton_moss_glow.png")),
+        ShimmerRenderTypes.emissiveArmor(Confluence.asResource("textures/entity/fishing/xenon_moss_glow.png"))
     };
     private final GlowingFishingHookModel mossModel;
     private final GlowingFishingHookModel commonModel;

@@ -1,6 +1,5 @@
 package org.confluence.mod.network;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.confluence.mod.Confluence;
@@ -10,7 +9,7 @@ import org.confluence.mod.network.s2c.*;
 public final class NetworkHandler {
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-        new ResourceLocation(Confluence.MODID, "main"),
+        Confluence.asResource("main"),
         () -> PROTOCOL_VERSION,
         PROTOCOL_VERSION::equals,
         PROTOCOL_VERSION::equals

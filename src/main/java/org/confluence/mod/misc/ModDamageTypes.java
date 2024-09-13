@@ -2,7 +2,6 @@ package org.confluence.mod.misc;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
@@ -19,7 +18,7 @@ public final class ModDamageTypes {
     public static final ResourceKey<DamageType> THORN = register("thorn");
 
     private static ResourceKey<DamageType> register(String id) {
-        return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Confluence.MODID, id));
+        return ResourceKey.create(Registries.DAMAGE_TYPE, Confluence.asResource(id));
     }
 
     public static DamageSource of(Level level, ResourceKey<DamageType> key) {

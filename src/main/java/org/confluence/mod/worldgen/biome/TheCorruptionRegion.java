@@ -22,8 +22,6 @@ public class TheCorruptionRegion extends Region {
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
-        // Overlap Vanilla's parameters with our own for our COLD_BLUE biome.
-        // The parameters for this biome are chosen arbitrarily.
         new ParameterPointListBuilder()
             .temperature(Temperature.span(Temperature.WARM, Temperature.HOT))
             .humidity(Humidity.span(Humidity.ARID, Humidity.DRY))
@@ -32,8 +30,6 @@ public class TheCorruptionRegion extends Region {
             .depth(Depth.SURFACE, Depth.SURFACE)
             .weirdness(Weirdness.FULL_RANGE, Weirdness.LOW_SLICE_VARIANT_ASCENDING)
             .build().forEach(point -> builder.add(point, ModBiomes.THE_CORRUPTION));
-
-        // Add our points to the mapper
         builder.build().forEach(mapper);
     }
 }

@@ -11,9 +11,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import org.confluence.mod.Confluence;
 import top.theillusivec4.curios.Curios;
-
-import static org.confluence.mod.Confluence.MODID;
 
 public final class ModTags {
     public static class Blocks {
@@ -32,7 +31,7 @@ public final class ModTags {
         public static final TagKey<Block> EASY_CRASH = register("easy_crash");
 
         private static TagKey<Block> register(String id) {
-            return BlockTags.create(new ResourceLocation(MODID, id));
+            return BlockTags.create(Confluence.asResource(id));
         }
     }
 
@@ -63,13 +62,13 @@ public final class ModTags {
         }
 
         private static TagKey<Item> register(String id) {
-            return ItemTags.create(new ResourceLocation(MODID, id));
+            return ItemTags.create(Confluence.asResource(id));
         }
     }
 
-    public static final TagKey<Fluid> FISHING_ABLE = FluidTags.create(new ResourceLocation(MODID, "fishing_able"));
-    public static final TagKey<Fluid> NOT_LAVA = FluidTags.create(new ResourceLocation(MODID, "not_lava"));
+    public static final TagKey<Fluid> FISHING_ABLE = FluidTags.create(Confluence.asResource("fishing_able"));
+    public static final TagKey<Fluid> NOT_LAVA = FluidTags.create(Confluence.asResource("not_lava"));
 
-    public static final TagKey<DamageType> HARMFUL_EFFECT = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MODID, "harmful_effect"));
-    public static final TagKey<Biome> SPREADING = TagKey.create(Registries.BIOME, new ResourceLocation(MODID, "spreading"));
+    public static final TagKey<DamageType> HARMFUL_EFFECT = TagKey.create(Registries.DAMAGE_TYPE, Confluence.asResource("harmful_effect"));
+    public static final TagKey<Biome> SPREADING = TagKey.create(Registries.BIOME, Confluence.asResource("spreading"));
 }

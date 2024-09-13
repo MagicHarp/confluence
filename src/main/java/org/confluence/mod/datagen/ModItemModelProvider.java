@@ -28,8 +28,8 @@ import static org.confluence.mod.Confluence.MODID;
 
 public class ModItemModelProvider extends ItemModelProvider {
     private static final Set<Item> SKIP_ITEMS = Set.of(ModBlocks.PEARL_LOG_BLOCKS.LEAVES.get().asItem());
-    private static final ResourceLocation MISSING_ITEM = new ResourceLocation(MODID, "item/item_icon");
-    private static final ResourceLocation MISSING_BLOCK = new ResourceLocation(MODID, "item/blocks_icon");
+    private static final ResourceLocation MISSING_ITEM = Confluence.asResource("item/item_icon");
+    private static final ResourceLocation MISSING_BLOCK = Confluence.asResource("item/blocks_icon");
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, MODID, existingFileHelper);
@@ -39,7 +39,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         for (IconItem.Icons icons : IconItem.Icons.values()) {
             String path = icons.name().toLowerCase();
-            withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+            withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
         }
 
         ModItems.ITEMS.getEntries().forEach(item -> {
@@ -50,20 +50,20 @@ public class ModItemModelProvider extends ItemModelProvider {
             boolean isBlockItem = false;
             try {
                 if (value instanceof HerbSeedItem) {
-                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
                 } else if (value instanceof BlockItem blockItem) {
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
                     if (block instanceof CustomItemModel) return;
                     if (block instanceof DoorBlock) {
-                        withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                        withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
                     } else if (block instanceof TrapDoorBlock) {
-                        withExistingParent(path, new ResourceLocation(MODID, "block/" + path + "_bottom"));
+                        withExistingParent(path, Confluence.asResource("block/" + path + "_bottom"));
                     } else {
-                        withExistingParent(path, new ResourceLocation(MODID, "block/" + path + (hasInventory(block) ? "_inventory" : "")));
+                        withExistingParent(path, Confluence.asResource("block/" + path + (hasInventory(block) ? "_inventory" : "")));
                     }
                 } else if (isHandheld(value)) {
-                    ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", Confluence.asResource("item/" + path));
                     if (value instanceof Image24x i32) {
                         i32.preset(builder);
                     } else if (value instanceof ReversalImage24x i32) {
@@ -74,15 +74,15 @@ public class ModItemModelProvider extends ItemModelProvider {
                 } else if (value instanceof SpawnEggItem) {
                     withExistingParent(path, "item/template_spawn_egg");
                 } else if (value instanceof BaseCurioItem) {
-                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/curio/" + path));
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/curio/" + path));
                 } else if (value instanceof BaseFoodItem) {
-                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/food/" + path));
                 } else if (value instanceof BottleFoodItem) {
-                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/food/" + path));
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/food/" + path));
                 } else if (value instanceof ReversalImage16x) {
-                    withExistingParent(path, "confluence:item/handheld_mirror").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    withExistingParent(path, "confluence:item/handheld_mirror").texture("layer0", Confluence.asResource("item/" + path));
                 } else {
-                    withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(MODID, "item/" + path));
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
                 }
             } catch (Exception e) {
                 Confluence.LOGGER.error(e.getMessage());

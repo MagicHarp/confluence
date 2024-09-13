@@ -9,7 +9,7 @@ import org.confluence.mod.entity.hook.ChristmasHookEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class ChristmasHookRenderer extends AbstractHookRenderer<ChristmasHookEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/grappling_hook.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/grappling_hook.png");
     private static final BlockState CHAIN = Blocks.CHAIN.defaultBlockState();
 
     public ChristmasHookRenderer(EntityRendererProvider.Context pContext) {

@@ -16,25 +16,24 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ToolActions;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.entity.fishing.AbstractFishingHook;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.jetbrains.annotations.NotNull;
 
-import static org.confluence.mod.Confluence.MODID;
-
 public class BaseFishingHookRenderer extends EntityRenderer<BaseFishingHook> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
-        new ResourceLocation(MODID, "textures/entity/fishing/wood.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/reinforced.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/fisher_of_souls.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/fleshcatcher.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/scarab.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/fiberglass.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/mechanics.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/sitting_ducks.png"),
-        new ResourceLocation(MODID, "textures/entity/fishing/golden.png")
+        Confluence.asResource("textures/entity/fishing/wood.png"),
+        Confluence.asResource("textures/entity/fishing/reinforced.png"),
+        Confluence.asResource("textures/entity/fishing/fisher_of_souls.png"),
+        Confluence.asResource("textures/entity/fishing/fleshcatcher.png"),
+        Confluence.asResource("textures/entity/fishing/scarab.png"),
+        Confluence.asResource("textures/entity/fishing/fiberglass.png"),
+        Confluence.asResource("textures/entity/fishing/mechanics.png"),
+        Confluence.asResource("textures/entity/fishing/sitting_ducks.png"),
+        Confluence.asResource("textures/entity/fishing/golden.png")
     };
     private static final IntegerRGB[] COLORS = new IntegerRGB[]{
         IntegerRGB.BLACK,

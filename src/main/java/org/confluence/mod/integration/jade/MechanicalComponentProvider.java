@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 public class MechanicalComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     public static final MechanicalComponentProvider INSTANCE = new MechanicalComponentProvider();
-    public static final ResourceLocation UID = new ResourceLocation(Confluence.MODID, "jade_mechanical_component");
+    public static final ResourceLocation UID = Confluence.asResource("jade_mechanical_component");
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {

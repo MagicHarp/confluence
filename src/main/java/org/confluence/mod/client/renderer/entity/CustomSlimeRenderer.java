@@ -12,7 +12,7 @@ public class CustomSlimeRenderer extends SlimeRenderer {
 
     public CustomSlimeRenderer(EntityRendererProvider.Context context, String path) {
         super(context);
-        this.texture = new ResourceLocation(Confluence.MODID, "textures/entity/slime/slime_" + path + ".png");
+        this.texture = Confluence.asResource("textures/entity/slime/slime_" + path + ".png");
     }
 
     @Override

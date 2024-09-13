@@ -14,7 +14,7 @@ import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.jetbrains.annotations.NotNull;
 
 public class EnchantedSwordProjectileRenderer extends EntityRenderer<SwordProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/enchanted_sword_projectile.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/enchanted_sword_projectile.png");
     private final EnchantedSwordProjectileModel model;
 
     public EnchantedSwordProjectileRenderer(EntityRendererProvider.Context pContext) {

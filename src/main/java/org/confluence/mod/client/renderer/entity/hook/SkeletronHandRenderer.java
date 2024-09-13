@@ -10,7 +10,7 @@ import org.confluence.mod.entity.hook.SkeletronHandEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class SkeletronHandRenderer extends AbstractHookRenderer<SkeletronHandEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/entity/hook/skeletron_hand.png");
+    private static final ResourceLocation TEXTURE = Confluence.asResource("textures/entity/hook/skeletron_hand.png");
     private final BlockState CHAIN;
 
     public SkeletronHandRenderer(EntityRendererProvider.Context pContext) {

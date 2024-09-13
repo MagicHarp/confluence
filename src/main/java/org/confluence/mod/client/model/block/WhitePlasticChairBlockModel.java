@@ -6,8 +6,8 @@ import org.confluence.mod.block.furniture.chair.WhitePlasticChairBlock;
 import software.bernie.geckolib.model.GeoModel;
 
 public class WhitePlasticChairBlockModel extends GeoModel<WhitePlasticChairBlock.Entity> {
-    public static final ResourceLocation MODEL = new ResourceLocation(Confluence.MODID, "geo/block/white_plastic_chair.geo.json");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Confluence.MODID, "textures/block/white_plastic_chair.png");
+    public static final ResourceLocation MODEL = Confluence.asResource("geo/block/white_plastic_chair.geo.json");
+    public static final ResourceLocation TEXTURE = Confluence.asResource("textures/block/white_plastic_chair.png");
 
     @Override
     public ResourceLocation getModelResource(WhitePlasticChairBlock.Entity animatable) {

@@ -7,13 +7,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.projectile.BaseAmmoEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class AmmoModel extends EntityModel<BaseAmmoEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "base_ammo"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("base_ammo"), "main");
 	private final ModelPart bb_main;
 
 	public AmmoModel(ModelPart root) {

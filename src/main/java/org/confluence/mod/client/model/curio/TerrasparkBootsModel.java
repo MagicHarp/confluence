@@ -7,13 +7,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
 
 public class TerrasparkBootsModel extends HumanoidModel<LivingEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Confluence.MODID, "terraspark_boots"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("terraspark_boots"), "main");
 
 	public TerrasparkBootsModel(ModelPart root) {
 		super(root);

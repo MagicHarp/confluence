@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
@@ -24,8 +25,6 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Supplier;
-
-import static org.confluence.mod.Confluence.MODID;
 
 @OnlyIn(Dist.CLIENT)
 public final class ClientPacketHandler {
@@ -75,7 +74,7 @@ public final class ClientPacketHandler {
                 moonTexture = null;
             } else {
                 moonSpecific = packet.id();
-                moonTexture = new ResourceLocation(MODID, "textures/environment/specific_moon_" + moonSpecific + ".png");
+                moonTexture = Confluence.asResource("textures/environment/specific_moon_" + moonSpecific + ".png");
             }
         });
         context.setPacketHandled(true);
