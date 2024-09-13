@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,12 +33,12 @@ public class BaseBombEntity extends ThrowableItemProjectile {
     }
 
     public BaseBombEntity(Level pLevel, LivingEntity pShooter) {
-        super(EntityType.SNOWBALL, pShooter, pLevel);
+        super(ModEntities.BOMB_ENTITY.get(), pShooter, pLevel);
         setNoGravity(true);
     }
 
     public BaseBombEntity(Level pLevel, double pX, double pY, double pZ) {
-        super(EntityType.SNOWBALL, pX, pY, pZ, pLevel);
+        super(ModEntities.BOMB_ENTITY.get(), pX, pY, pZ, pLevel);
         setNoGravity(true);
     }
 

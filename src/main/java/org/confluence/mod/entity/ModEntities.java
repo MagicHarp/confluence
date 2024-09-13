@@ -16,6 +16,9 @@ import org.confluence.mod.entity.fishing.HotlineFishingHook;
 import org.confluence.mod.entity.hook.*;
 import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
+import org.confluence.mod.entity.projectile.bombs.BouncyBombEntity;
+import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
+import org.confluence.mod.entity.projectile.bombs.StickyBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
@@ -87,7 +90,10 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<ThrowingKnivesProjectile>> THROW_KNIVES_PROJECTILE = ENTITIES.register("throw_knives_projectile", () -> EntityType.Builder.<ThrowingKnivesProjectile>of(ThrowingKnivesProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:throw_knives_projectile"));
     public static final RegistryObject<EntityType<ShurikenProjectile>> SHURIKEN_PROJECTILE = ENTITIES.register("shuriken_projectile", () -> EntityType.Builder.<ShurikenProjectile>of(ShurikenProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:shuriken_projectile"));
 
-    public static final RegistryObject<EntityType<BaseBombEntity>> BOMB_ENTITY = ENTITIES.register("bomb_entity", () -> EntityType.Builder.<BaseBombEntity>of(BaseBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:base_bomb_entity"));
+    public static final RegistryObject<EntityType<BaseBombEntity>> BOMB_ENTITY = ENTITIES.register("bomb_entity", () -> EntityType.Builder.<BaseBombEntity>of(BaseBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:bomb_entity"));
+    public static final RegistryObject<EntityType<BouncyBombEntity>> BOUNCY_BOMB_ENTITY = ENTITIES.register("bouncy_bomb_entity", () -> EntityType.Builder.<BouncyBombEntity>of(BouncyBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:bouncy_bomb_entity"));
+    public static final RegistryObject<EntityType<ScarabBombEntity>> SCARAB_BOMB_ENTITY = ENTITIES.register("scarab_bomb_entity", () -> EntityType.Builder.<ScarabBombEntity>of(ScarabBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:scarab_bomb_entity"));
+    public static final RegistryObject<EntityType<StickyBombEntity>> STICKY_BOMB_ENTITY = ENTITIES.register("sticky_bomb_entity", () -> EntityType.Builder.<StickyBombEntity>of(StickyBombEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("confluence:sticky_bomb_entity"));
     public static final RegistryObject<EntityType<StepStoolEntity>> STEP_STOOL = ENTITIES.register("step_stool", () -> EntityType.Builder.<StepStoolEntity>of(StepStoolEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).build("confluence:step_stool"));
 
     public static final RegistryObject<EntityType<KingSlime>> KING_SLIME = ENTITIES.register("king_slime", () -> EntityType.Builder.<KingSlime>of(KingSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:king_slime"));

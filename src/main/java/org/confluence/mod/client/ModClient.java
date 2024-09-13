@@ -140,6 +140,7 @@ public final class ModClient {
         event.registerLayerDefinition(EnchantedSwordProjectileModel.LAYER_LOCATION, EnchantedSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(IceBladeSwordProjectileModel.LAYER_LOCATION, IceBladeSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ThrowingKnivesProjectileModel.LAYER_LOCATION, ThrowingKnivesProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(BombEntityModel.LAYER_LOCATION, BombEntityModel::createBodyLayer);
         event.registerLayerDefinition(ShurikenProjectileModel.LAYER_LOCATION, ShurikenProjectileModel::createBodyLayer);
         event.registerLayerDefinition(StepStoolModel.LAYER_LOCATION, StepStoolModel::createBodyLayer);
 
@@ -206,6 +207,7 @@ public final class ModClient {
         event.registerEntityRenderer(THROW_KNIVES_PROJECTILE.get(), ThrowingKnivesProjectileRenderer::new);
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
         event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
+        event.registerEntityRenderer(BOMB_ENTITY.get(),BombEntityRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);
