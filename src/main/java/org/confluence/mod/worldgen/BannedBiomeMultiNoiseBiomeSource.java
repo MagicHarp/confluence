@@ -22,13 +22,14 @@ public class BannedBiomeMultiNoiseBiomeSource extends MultiNoiseBiomeSource {
     @Override
     public @NotNull Holder<Biome> getNoiseBiome(int pX, int pY, int pZ, Climate.@NotNull Sampler pSampler) {
         Holder<Biome> biome = super.getNoiseBiome(pX, pY, pZ, pSampler);
-        if(biome.is(bannedBiome)) {
+        if (biome.is(bannedBiome)) {
             if (target == null) {
-                possibleBiomes().forEach(holder -> {
+                for (Holder<Biome> holder : possibleBiomes()) {
                     if (target == null && holder.is(targetBiome)) {
                         this.target = holder;
+                        break;
                     }
-                });
+                }
             }
             return target;
         }
