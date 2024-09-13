@@ -116,6 +116,9 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.7.0+1.20.1")
     implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.20.1-3.0.1.4')
     implementation fg.deobf("com.lowdragmc.shimmer:Shimmer-forge:1.20.1-0.2.4")
+    implementation fg.deobf(jarJar("com.xiaohunao.equipment_benediction:EquipmentBenediction:1.20.1-0.0.5")) {
+        jarJar.ranged(it, "[1.20.1-0.0.5,)")
+    }
 
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.3.0.4")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.3.0.4")
@@ -129,18 +132,16 @@ dependencies {
     compileOnly fg.deobf("curse.maven:jade-324717:5390389")
     runtimeOnly fg.deobf("curse.maven:jade-324717:5390389")
 
+    compileOnly fg.deobf("curse.maven:tetra-289712:5544287")
+    //runtimeOnly fg.deobf("curse.maven:tetra-289712:5544287")
+    //runtimeOnly fg.deobf("curse.maven:mutil-351914:4824501") // Tetra的前置
+
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
     runtimeOnly fg.deobf("curse.maven:spark-361579:4738952")
     //runtimeOnly fg.deobf("curse.maven:apothic-attributes-898963:5634071") // 神化属性
     //runtimeOnly fg.deobf("curse.maven:placebo-283644:5414631") // 神化属性的前置
     //runtimeOnly fg.deobf("curse.maven:air-hop-323071:5048418") // 多段跳
     //runtimeOnly fg.deobf("curse.maven:puzzles-lib-495476:5475403") // 多段跳的前置
-
-
-    implementation fg.deobf(jarJar("com.xiaohunao.equipment_benediction:EquipmentBenediction:1.20.1-0.0.5")) {
-        jarJar.ranged(it, "[1.20.1-0.0.5,)")
-    }
-
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))

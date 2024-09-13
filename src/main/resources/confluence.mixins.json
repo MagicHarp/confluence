@@ -72,6 +72,7 @@
         "entity.PlayerMixin",
         "entity.VillagerMixin",
         "integretion.bettercombat.ServerNetworkMixin",
+        "integretion.tetra.ModularBowItemMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
         "item.CrossbowItemMixin",
