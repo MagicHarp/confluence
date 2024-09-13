@@ -25,7 +25,7 @@ public class BannedBiomeMultiNoiseBiomeSource extends MultiNoiseBiomeSource {
         if (biome.is(bannedBiome)) {
             if (target == null) {
                 for (Holder<Biome> holder : possibleBiomes()) {
-                    if (target == null && holder.is(targetBiome)) {
+                    if (holder.is(targetBiome)) {
                         this.target = holder;
                         break;
                     }

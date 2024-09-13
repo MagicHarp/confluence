@@ -56,7 +56,6 @@
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
         "accessor.MultiNoiseBiomeSourceAccessor",
-        "accessor.MultiNoiseBiomeSourceParameterListAccessor",
         "accessor.RangedAttributeAccessor",
         "accessor.SlimeAccessor",
         "block.BlockBehaviour$BlockStateBaseMixin",
