@@ -477,8 +477,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("container.confluence.workshop", "Workshop");
         add("title.confluence.workshop", "Workshop");
 
-        add("generator.confluence.corruption", "Evil: The Corruption");
-        add("generator.confluence.tr_crimson", "Evil: The Crimson");
+        add("generator.confluence.corruption", "Evil——The Corruption");
+        add("generator.confluence.tr_crimson", "Evil——The Crimson");
 
 
 
