@@ -16,8 +16,6 @@ public class FloatingWheatBlock extends BaseCropBlock{
     public FloatingWheatBlock(Properties pProperties) {
         super(pProperties);
     }
-    private static final Random RANDOM = new Random();
-
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
         return ModItems.FLOATING_WHEAT_SEED.get();
@@ -31,18 +29,7 @@ public class FloatingWheatBlock extends BaseCropBlock{
 
     @Override
     public List<ItemStack> getCropDrops() {
-        int dropCount = getDropCountBasedOnChance();
-        return List.of(new ItemStack(ModBlocks.FLOATING_WHEAT.get(), dropCount));
-    }
-
-    private int getDropCountBasedOnChance() {
-        int chance = RANDOM.nextInt(100) + 1; // Generate a number between 1 and 100
-
-        if (chance <= 50) {
-            return 2; // 50% chance to drop 2 petals
-        } else {
-            return 3; // 50% chance to drop 3 petals
-        }
+        return List.of(); // No drops
     }
 }
 

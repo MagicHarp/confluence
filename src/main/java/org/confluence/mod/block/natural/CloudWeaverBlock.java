@@ -28,21 +28,9 @@ public class CloudWeaverBlock extends BaseCropBlock{
         return Set.of(ModBlocks.CLOUD_BLOCK.get());
     }
 
-
     @Override
     public List<ItemStack> getCropDrops() {
-        int dropCount = getDropCountBasedOnChance();
-        return List.of(new ItemStack(Materials.WEAVING_CLOUD_COTTON.get(), dropCount));
-    }
-
-    private int getDropCountBasedOnChance() {
-        int chance = RANDOM.nextInt(100) + 1; // Generate a number between 1 and 100
-
-        if (chance <= 50) {
-            return 2; // 50% chance to drop 2 petals
-        } else {
-            return 3; // 50% chance to drop 3 petals
-        }
+        return List.of(); // No drops
     }
 }
 

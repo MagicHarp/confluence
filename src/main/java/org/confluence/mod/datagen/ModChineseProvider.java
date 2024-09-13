@@ -1,6 +1,8 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
@@ -1604,7 +1606,6 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hammers.TUNGSTEN_HAMMER.get(), "钨锤");
         add(Hammers.GOLDEN_HAMMER.get(), "金锤");
         add(Hammers.PLATINUM_HAMMER.get(), "铂金锤");
-
         /* HammerAxes */
         // 杂项
         add(ICE_MIRROR.get(), "冰雪镜");
