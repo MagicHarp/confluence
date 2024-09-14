@@ -35,8 +35,7 @@ public class HandOfCreation extends StepStool implements IRightClickSubtractor {
         list.add(Component.translatable("item.confluence.hand_of_creation.tooltip2"));
         list.add(StepStool.TOOLTIP);
         if (itemStack.getTag() != null) {
-            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep"))
-                .withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep")).withStyle(style -> style.withColor(ChatFormatting.BLUE)));
         }
     }
 
@@ -44,8 +43,8 @@ public class HandOfCreation extends StepStool implements IRightClickSubtractor {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         if (ATTRIBUTES == null) {
             ATTRIBUTES = ImmutableMultimap.of(
-                ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Hand Of Creation", 3, AttributeModifier.Operation.ADDITION),
-                ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Hand Of Creation", 0.25, AttributeModifier.Operation.MULTIPLY_BASE),
+                    ForgeMod.BLOCK_REACH.get(), new AttributeModifier(REACH_UUID, "Hand Of Creation", 3, AttributeModifier.Operation.ADDITION),
+                    ModAttributes.getMiningSpeed(), new AttributeModifier(MINING_UUID, "Hand Of Creation", 0.25, AttributeModifier.Operation.MULTIPLY_BASE),
                     ModAttributes.getPickupRange(), new AttributeModifier(TreasureMagnet.PICKUP_UUID, "Hand Of Creation", 6.25, AttributeModifier.Operation.ADDITION)
             );
         }

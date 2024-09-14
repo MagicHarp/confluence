@@ -55,16 +55,15 @@ public class StepStool extends BaseCurioItem {
     public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, List<Component> list, @NotNull TooltipFlag tooltipFlag) {
         list.add(TOOLTIP);
         if (itemStack.getTag() != null) {
-            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep"))
-                .withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+            list.add(Component.translatable("item.confluence.step_stool.tooltip2", itemStack.getTag().getInt("extraStep")).withStyle(style -> style.withColor(ChatFormatting.BLUE)));
         }
     }
 
     public static void send(SlotContext slotContext, int maxStep) {
         if (slotContext.entity() instanceof ServerPlayer serverPlayer) {
             NetworkHandler.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> serverPlayer),
-                new StepStoolStepPacketS2C(slotContext.index(), maxStep)
+                    PacketDistributor.PLAYER.with(() -> serverPlayer),
+                    new StepStoolStepPacketS2C(slotContext.index(), maxStep)
             );
         }
     }
@@ -72,7 +71,7 @@ public class StepStool extends BaseCurioItem {
     @Override
     public Component[] getInformation() {
         return new Component[]{
-            Component.translatable("item.confluence.step_stool.info")
+                Component.translatable("item.confluence.step_stool.info")
         };
     }
 }

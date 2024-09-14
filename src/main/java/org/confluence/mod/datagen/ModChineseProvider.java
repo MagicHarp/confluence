@@ -1,8 +1,6 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
@@ -993,7 +991,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.royal_gel.info3", "这不适用于以下史莱姆：");
         add("item.confluence.royal_gel.info4", "史莱姆王和他的尖刺史莱姆，尽管史莱姆王生成的普通蓝色史莱姆仍然温顺。");
         add("item.confluence.royal_gel.info5", "史莱姆女王和她的弹力史莱姆、水晶史莱姆和天堂史莱姆。");
-        add("item.confluence.shield_of_cthulhu.info", "克苏鲁之盾是困难模式前的盾牌配饰，允许玩家通过双击左键或右键来执行冲刺攻击。");
+        add("item.confluence.shield_of_cthulhu.info", "克苏鲁之盾是困难模式前的盾牌配饰，允许玩家通过疾跑来执行冲刺攻击。");
         add("item.confluence.shield_of_cthulhu.info2", "冲向敌人会造成 30 点伤害，使玩家后退，并获得 0.07 秒的无敌帧数。");
         add("item.confluence.shield_of_cthulhu.info3", "在专家模式下，克苏鲁之盾总是从克苏鲁之眼的宝藏袋中掉落。");
         add("item.confluence.worm_scarf.info", "蠕虫围巾是困难模式前的配饰，可减少 17% 的伤害。");
