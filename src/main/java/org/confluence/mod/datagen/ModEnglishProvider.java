@@ -200,12 +200,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.tabi.info", "It can be found in Chests in the Fortress.");
         add("item.confluence.tsunami_in_a_bottle.info", "It can be found in Shipwreck Chests");
         add("item.confluence.water_walking_boots.info", "It can be found in Ocean Ruins Chests.");
-        add("item.confluence.copper_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last hour.");
-        add("item.confluence.tin_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last hour. ");
-        add("item.confluence.silver_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last half an hour.");
-        add("item.confluence.tungsten_watch.info", "When equipped in an accessory slot or held in the inventory, a clock icon will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last half-hour.");
-        add("item.confluence.gold_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last minute. ");
-        add("item.confluence.platinum_watch.info", "When equipped in an accessory slot or simply held in the inventory, a clock will appear in the upper-right corner of the playing screen, revealing the in-game time accurate to the last minute.");
         add("item.confluence.depth_meter.info", "The Depth Meter have a Chance to be dropped from Bats.");
         add("item.confluence.compass.info", "The Compass have a Chance to be dropped from Bats.");
         add("item.confluence.dps_meter.info", "The DPS Meter have a Chance to be dropped from Creeper.");
