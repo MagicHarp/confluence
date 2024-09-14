@@ -7,7 +7,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -49,16 +51,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements ILivingEntity, SelfGetter<LivingEntity> {
-    private LivingEntityMixin(EntityType<?> pEntityType, Level pLevel){
+    private LivingEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    @Unique private boolean confluence$bled = false;  // bleed的过去式
+    @Unique
+    private boolean confluence$bled = false;  // bleed的过去式
+    @Unique
+    private boolean confluence$breakingEasyCrashBlock = false;
 
     @Shadow
-    public abstract EntityDimensions getDimensions(Pose pPose);
+    public abstract boolean isDeadOrDying();
 
-    @Shadow public abstract boolean isDeadOrDying();
+    @Override
+    public void confluence$setBreakEasyCrashBlock(boolean breaking) {
+        this.confluence$breakingEasyCrashBlock = breaking;
+    }
+
+    @Override
+    public boolean confluence$isBreakEasyCrashBlock() {
+        return confluence$breakingEasyCrashBlock;
+    }
 
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
@@ -67,7 +80,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
             cir.setReturnValue(0.0F);
         } else if (self instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+                    .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
         }
     }
 
@@ -86,7 +99,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         if (self() instanceof Player player) {
             AtomicInteger time = new AtomicInteger(constant);
             player.getCapability(AbilityProvider.CAPABILITY)
-                .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
+                    .ifPresent(playerAbility -> time.set(playerAbility.getInvulnerableTime()));
             return time.get();
         }
         return constant;
@@ -98,8 +111,17 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
         else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
         if (self.fallDistance >= 3.0F && blockState.is(ModTags.Blocks.EASY_CRASH) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
-            self.level().destroyBlock(blockPos, true, self);
+            if (!level().isClientSide) {
+                BlockPos.betweenClosedStream(self.getBoundingBox().move(0.0, -0.5, 0.0)).forEach(pos -> {
+                    if (level().getBlockState(pos).is(ModTags.Blocks.EASY_CRASH)) level().destroyBlock(pos, true, self);
+                });
+            }
+            this.confluence$breakingEasyCrashBlock = true;
+            self.setOnGround(false);
+            super.checkFallDamage(motionY, false, blockState, blockPos);
             ci.cancel();
+        } else {
+            this.confluence$breakingEasyCrashBlock = false;
         }
     }
 
@@ -124,7 +146,7 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
                 cir.setReturnValue(true);
             } else {
                 CuriosUtils.findCurio(self, IFluidWalk.class).ifPresent(iFluidWalk ->
-                    cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
+                        cir.setReturnValue(iFluidWalk.canStandOn(fluidState)));
             }
         }
     }
@@ -234,33 +256,20 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         }
     }
 
-//    @WrapWithCondition(method = "causeFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
-//    private boolean shouldPlayFallSound(LivingEntity instance, SoundEvent soundEvent, float pVolume, float pPitch) {
-//        return IFallResistance.noResistance(instance); // 禁用摔落音效
-//    }
-//
-//    @WrapWithCondition(method = "handleDamageEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
-//    private boolean shouldPlayFallSound(LivingEntity instance, SoundEvent soundEvent, float pVolume, float pPitch, @Local(argsOnly = true) DamageSource damageSource) {
-//        return IFallResistance.noResistance(instance); // 禁用摔落音效
-//    }
-//
-//    @WrapWithCondition(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)V"))
-//    private boolean shouldPlayFallSound(LivingEntity instance, DamageSource pSource) {
-//        return IFallResistance.noResistance(instance, pSource); // 禁用摔落时的受伤音效
-//    }
-
-    /** @author voila  */
+    /**
+     * @author voila
+     */
     @Inject(method = "tickDeath", at = @At("HEAD"))
-    private void tickDeath(CallbackInfo ci){
+    private void tickDeath(CallbackInfo ci) {
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(self());
-        if(options!=null){
+        if (options != null) {
             self().addDeltaMovement(new Vec3(0, -options.getExtraGravity(), 0));
         }
     }
 
     @Inject(method = "hurt", at = @At("RETURN"))
-    private void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir){
-        if(!confluence$bled && isDeadOrDying()){ //TODO: 开关
+    private void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        if (!confluence$bled && isDeadOrDying()) { //TODO: 开关
             DeathAnimUtils.addBloodParticles(self());
             confluence$bled = true;
         }
@@ -269,8 +278,8 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
 
     // 死了就别乱转了
     @Override
-    public void setYRot(float pYRot){
-        if(!(self() instanceof EnderDragon) && self().isDeadOrDying()){
+    public void setYRot(float pYRot) {
+        if (!(self() instanceof EnderDragon) && self().isDeadOrDying()) {
             return;
         }
         super.setYRot(pYRot);

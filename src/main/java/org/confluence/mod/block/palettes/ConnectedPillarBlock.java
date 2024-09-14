@@ -46,7 +46,7 @@ public class ConnectedPillarBlock extends LayeredBlock {
 		MutableBlockPos currentPos = new MutableBlockPos();
 		Axis axis = state.getValue(AXIS);
 
-		for (Direction connection : ModUtils.directions) {
+		for (Direction connection : ModUtils.DIRECTIONS) {
 			if (connection.getAxis() == axis)
 				continue;
 

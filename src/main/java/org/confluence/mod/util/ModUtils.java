@@ -25,7 +25,8 @@ import java.util.List;
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
 public final class ModUtils {
-    public static final Direction[] directions = Direction.values();
+    public static final Direction[] DIRECTIONS = Direction.values();
+    public static final Direction[] HORIZONTAL = new Direction[]{Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
 
     public static float nextFloat(RandomSource randomSource, float origin, float bound) {
         if (origin >= bound) {

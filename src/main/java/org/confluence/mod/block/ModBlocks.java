@@ -27,7 +27,7 @@ import org.confluence.mod.block.natural.herbs.*;
 import org.confluence.mod.block.natural.spreadable.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.ModItems;
-import org.confluence.mod.worldgen.feature.*;
+import org.confluence.mod.worldgen.feature.grower.*;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

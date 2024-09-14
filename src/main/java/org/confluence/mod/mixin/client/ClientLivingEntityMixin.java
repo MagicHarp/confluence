@@ -20,7 +20,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.confluence.mod.client.handler.GravitationHandler;
 import org.confluence.mod.client.handler.StepStoolHandler;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
-import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.IClientLivingEntity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.c2s.FallDistancePacketC2S;
@@ -49,7 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(LivingEntity.class)
-public abstract class ClientLivingEntityMixin extends Entity implements ILivingEntity, SelfGetter<LivingEntity> {
+public abstract class ClientLivingEntityMixin extends Entity implements IClientLivingEntity, SelfGetter<LivingEntity> {
     // 位移，旋转
     @Unique private final Map<CoreGeoBone, float[]> confluence$boneMotions = new HashMap<>();
     @Unique private final Map<ModelPart, float[]> confluence$partMotions = new HashMap<>();

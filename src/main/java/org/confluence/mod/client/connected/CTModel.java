@@ -38,7 +38,7 @@ public class CTModel extends BakedModelWrapperWithData {
 	protected CTData createCTData(BlockAndTintGetter world, BlockPos pos, BlockState state) {
 		CTData data = new CTData();
 		MutableBlockPos mutablePos = new MutableBlockPos();
-		for (Direction face : ModUtils.directions) {
+		for (Direction face : ModUtils.DIRECTIONS) {
 			if (!behaviour.buildContextForOccludedDirections() && !Block.shouldRenderFace(state, world, pos, face, mutablePos.setWithOffset(pos, face)))
 				continue;
 			CTType dataType = behaviour.getDataType(world, pos, state, face);

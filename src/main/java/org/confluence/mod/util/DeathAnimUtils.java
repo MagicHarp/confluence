@@ -26,7 +26,7 @@ import org.confluence.mod.client.particle.options.BloodParticleOptions;
 import org.confluence.mod.mixin.client.accessor.CustomHeadLayerAccessor;
 import org.confluence.mod.mixin.client.accessor.LivingEntityRendererAccessor;
 import org.confluence.mod.mixin.client.accessor.ModelPartAccessor;
-import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.IClientLivingEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.jetbrains.annotations.Nullable;
@@ -131,9 +131,9 @@ public class DeathAnimUtils {
         float[] motions;
         if(bone instanceof GeoBone b){ // TODO: 既然GeoBone也实现了IModelPart(还没提交)就不用分开处理了
             GeoBone parent = b.getParent();
-            motions = ((ILivingEntity) entity).confluence$getMotionsForBone(b);
+            motions = ((IClientLivingEntity) entity).confluence$getMotionsForBone(b);
             if(parent != null){
-                float[] pm = ((ILivingEntity) entity).confluence$getMotionsForBone(parent);
+                float[] pm = ((IClientLivingEntity) entity).confluence$getMotionsForBone(parent);
                 for(int i = 0, motionsLength = motions.length; i < motionsLength; i++){
                     motions[i] -= pm[i];
                 }
@@ -145,10 +145,10 @@ public class DeathAnimUtils {
             poseStack.mulPose(Axis.YP.rotationDegrees(getOffset(entity.deathTime, motions[4], partialTick)));
             poseStack.mulPose(Axis.ZP.rotationDegrees(getOffset(entity.deathTime, motions[5], partialTick)));
         }else if(bone instanceof ModelPart p){
-            motions = ((ILivingEntity) entity).confluence$getMotionsForPart(p);
+            motions = ((IClientLivingEntity) entity).confluence$getMotionsForPart(p);
             float[] parentMotions = ((IModelPart) (Object) p).confluence$parentOffset();
             List<ModelPart.Cube> cubes = ((ModelPartAccessor) (Object) p).getCubes();
-            PartPose deathPose = ((ILivingEntity) entity).confluence$getPoseForPart(p);
+            PartPose deathPose = ((IClientLivingEntity) entity).confluence$getPoseForPart(p);
             if(deathPose != null){
                 p.loadPose(deathPose);
             }
@@ -168,11 +168,11 @@ public class DeathAnimUtils {
                 float ry = getOffset(entity.deathTime, motions[4], partialTick);
                 float rz = getOffset(entity.deathTime, motions[5], partialTick);
                 float ty = 0;
-                Vec3 landMotion = ((ILivingEntity) entity).confluence$landMotion();
+                Vec3 landMotion = ((IClientLivingEntity) entity).confluence$landMotion();
                 Vec2 xz = ((IModelPart) (Object) p).confluence$landMotion();
                 if(!Double.isNaN(landMotion.y) && !options.isNoModelGravity()){  // 实体已落地
                     landMotion = landMotion.with(Direction.Axis.Y, -0.2); // 客户端的精度太低了 算半天还不如一个固定值效果好
-                    int landTicks = ((ILivingEntity) entity).confluence$landTicks();
+                    int landTicks = ((IClientLivingEntity) entity).confluence$landTicks();
                     int lastTick = Math.max(0, landTicks - 1);
                     float fallDistance = (float) -(Mth.lerp(partialTick, (landMotion.y - 0.08) * lastTick, (landMotion.y - 0.08) * landTicks));
                     ty = Math.min(fallDistance, footY);

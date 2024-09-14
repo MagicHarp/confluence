@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.AbstractMechanicalBlock;
+import org.confluence.mod.util.ModUtils;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
@@ -27,16 +28,16 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
         BlockPos blockPos = pContext.origin();
         if (!ModFeatures.isPosAir(level, blockPos)) return false;
         BlockPos.MutableBlockPos mutablePos = blockPos.mutable();
-        for (int v = 1; v < config.maxSearchDown && ModFeatures.isPosAir(level, mutablePos); ++v) {
+        for (int v = 1; v <= config.maxSearchDown && ModFeatures.isPosAir(level, mutablePos); ++v) {
             mutablePos.move(Direction.DOWN);
         }
         if (ModFeatures.isPosSturdy(level, mutablePos, Direction.UP)) {
             BlockPos dartPos = mutablePos.offset(0, 2, 0);
             Direction opposite = null;
-            for (Direction direction : ModFeatures.HORIZONTAL) {
+            for (Direction direction : ModUtils.HORIZONTAL) {
                 BlockPos.MutableBlockPos copy = dartPos.mutable();
                 int h;
-                for (h = 1; h < config.maxDistance && ModFeatures.isPosAir(level, copy); ++h) {
+                for (h = 1; h <= config.maxDistance && ModFeatures.isPosAir(level, copy); ++h) {
                     copy.move(direction);
                 }
                 if (h >= 4 && !level.isStateAtPosition(copy, blockState -> blockState.isAir() || blockState.getCollisionShape(level, copy).isEmpty())) {
@@ -62,7 +63,7 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
     public record Config(int maxDistance, int maxSearchDown) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ExtraCodecs.POSITIVE_INT.fieldOf("maxDistance").orElse(64).forGetter(Config::maxDistance),
-            ExtraCodecs.POSITIVE_INT.fieldOf("maxSearchDown").orElse(32).forGetter(Config::maxSearchDown)
+            ExtraCodecs.POSITIVE_INT.fieldOf("maxSearchDown").orElse(64).forGetter(Config::maxSearchDown)
         ).apply(instance, Config::new));
     }
 }

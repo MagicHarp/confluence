@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.layers.SnowGolemHeadLayer;
 import net.minecraft.world.entity.animal.SnowGolem;
-import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.IClientLivingEntity;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.DeathAnimUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +26,7 @@ public abstract class SnowGolemHeadLayerMixin extends RenderLayer<SnowGolem, Sno
         at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V",shift = At.Shift.AFTER))
     private void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, SnowGolem pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci){
         ModelPart head = this.getParentModel().getHead();
-        ((ILivingEntity) pLivingEntity).confluence$getMotionsForPart(head);
+        ((IClientLivingEntity) pLivingEntity).confluence$getMotionsForPart(head);
         DeathAnimOptions options = DeathAnimUtils.getDeathAnimOptions(pLivingEntity);
         DeathAnimUtils.moveParts(pPoseStack, pLivingEntity, head, pPartialTicks, options);
     }

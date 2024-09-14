@@ -17,19 +17,20 @@ import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.functional.AbstractMechanicalBlock;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
 public final class ModFeatures {
-    static final Direction[] HORIZONTAL = new Direction[]{Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
     static final Predicate<BlockState> IS_REPLACEABLE = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Confluence.MODID);
 
     public static final RegistryObject<BoulderTrapFeature> BOULDER_TRAP = FEATURES.register("boulder_trap", () -> new BoulderTrapFeature(BoulderTrapFeature.Config.CODEC));
     public static final RegistryObject<DartTrapFeature> DART_TRAP = FEATURES.register("dart_trap", () -> new DartTrapFeature(DartTrapFeature.Config.CODEC));
     public static final RegistryObject<JewelryTreeFeature> JEWELRY_TREE = FEATURES.register("jewelry_tree", () -> new JewelryTreeFeature(JewelryTreeFeature.Config.CODEC));
+    public static final RegistryObject<ThinIcePatchFeature> THIN_ICE_PATCH = FEATURES.register("thin_ice_patch", () -> new ThinIcePatchFeature(ThinIcePatchFeature.Config.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHADOW = ResourceKey.create(Registries.CONFIGURED_FEATURE, Confluence.asResource("trees_set/trees_tr_crimson"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> EBONY = ResourceKey.create(Registries.CONFIGURED_FEATURE, Confluence.asResource("trees_set/trees_corruption"));
@@ -46,7 +47,7 @@ public final class ModFeatures {
 
     static @NotNull BlockState getPressurePlate(WorldGenLevel level, BlockPos supportPos) {
         return level.isStateAtPosition(supportPos, blockState -> blockState.is(Blocks.DEEPSLATE)) ?
-            ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : ModBlocks.STONE_PRESSURE_PLATE.get().defaultBlockState();
+                ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : ModBlocks.STONE_PRESSURE_PLATE.get().defaultBlockState();
     }
 
     static @Nullable AbstractMechanicalBlock.Entity getEntity(WorldGenLevel level, BlockPos blockPos) {
@@ -58,7 +59,7 @@ public final class ModFeatures {
     }
 
     static boolean isPosExposed(WorldGenLevel level, BlockPos blockPos) {
-        for (Direction direction : HORIZONTAL) {
+        for (Direction direction : ModUtils.HORIZONTAL) {
             if (level.isStateAtPosition(blockPos.relative(direction), BlockBehaviour.BlockStateBase::isAir)) {
                 return true;
             }
