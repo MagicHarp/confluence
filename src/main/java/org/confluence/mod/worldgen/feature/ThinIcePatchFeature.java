@@ -59,8 +59,9 @@ public class ThinIcePatchFeature extends Feature<ThinIcePatchFeature.Config> {
             if (ay < minY) break;
             for (int x = -config.radius; x <= config.radius; x++) {
                 int ax = ox + x;
+                int radiusSqrSubXSqr = radiusSqr - x * x;
                 for (int z = -config.radius; z <= config.radius; z++) {
-                    if (x * x + z * z <= radiusSqr && level.isStateAtPosition(mutablePos.set(ax, ay, oz + z), PREDICATE)) {
+                    if (z * z <= radiusSqrSubXSqr && level.isStateAtPosition(mutablePos.set(ax, ay, oz + z), PREDICATE)) {
                         if (y <= 3) {
                             air.add(mutablePos.immutable());
                         } else {
