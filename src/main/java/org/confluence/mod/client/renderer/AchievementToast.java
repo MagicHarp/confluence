@@ -8,11 +8,12 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Hashtable;
@@ -36,6 +37,14 @@ public class AchievementToast implements Toast {
         return 64;
     }
 
+    public int iconSize() {
+        return 64;
+    }
+
+    public int iconBorder() {
+        return 4;
+    }
+
     @Override
     public @NotNull Visibility render(@NotNull GuiGraphics pGuiGraphics, @NotNull ToastComponent pToastComponent, long pTimeSinceLastVisible) {
         Font font = pToastComponent.getMinecraft().font;
@@ -44,17 +53,17 @@ public class AchievementToast implements Toast {
         pGuiGraphics.blit(TEXTURE, 0, 0, 0, 0, width(), height());
         renderTitle(pGuiGraphics, pTimeSinceLastVisible, font);
         renderDescription(pGuiGraphics, font);
-        renderIcon(pGuiGraphics);
+        renderIcon(pGuiGraphics, iconSize(), iconBorder());
         pGuiGraphics.pose().popPose();
         playSound(pToastComponent, pTimeSinceLastVisible);
-        return (double) pTimeSinceLastVisible >= 5000.0 * pToastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+        return (double) pTimeSinceLastVisible >= 5000.0 * pToastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 
     private void playSound(@NotNull ToastComponent pToastComponent, long pTimeSinceLastVisible) {
         if (!playedSound && pTimeSinceLastVisible > 0L) {
             this.playedSound = true;
             if (display.frame() == FrameType.CHALLENGE) {
-                pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+                pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(ModSoundEvents.ACHIEVEMENTS.get(), 1.0F, 1.0F));
             }
         }
     }
@@ -72,17 +81,18 @@ public class AchievementToast implements Toast {
         }
     }
 
-    private void renderIcon(@NotNull GuiGraphics pGuiGraphics) {
+    private void renderIcon(@NotNull GuiGraphics pGuiGraphics, int size, int border) {
         pGuiGraphics.pose().pushPose();
-        pGuiGraphics.pose().translate(4, 4, 0);
-        pGuiGraphics.pose().scale(0.375F, 0.375F, 1.0F);
-        pGuiGraphics.blit(icon, 0, 0, 0, 0, 64, 64, 64, 64);
+        pGuiGraphics.pose().translate(border, border, 0);
+        float scale = (float) (16 + border + border) / size;
+        pGuiGraphics.pose().scale(scale, scale, 1.0F);
+        pGuiGraphics.blit(icon, 0, 0, 0, 0, size, size, size, size);
         pGuiGraphics.pose().popPose();
     }
 
     private void renderTitle(@NotNull GuiGraphics pGuiGraphics, long pTimeSinceLastVisible, Font font) {
         List<FormattedCharSequence> list = font.split(display.title(), 125);
-        int i = display.frame() == FrameType.CHALLENGE ? 16746751 : 16776960;
+        int i = display.frame() == FrameType.CHALLENGE ? 0xFF88FF : 0xFFFF00;
         if (list.size() == 1) {
             pGuiGraphics.drawString(font, display.frame().getDisplayName(), 30, 7, i | -16777216, false);
             pGuiGraphics.drawString(font, list.get(0), 30, 18, -1, false);
@@ -95,7 +105,7 @@ public class AchievementToast implements Toast {
                 int l = 16 - list.size() * 9 / 2;
 
                 for (FormattedCharSequence formattedcharsequence : list) {
-                    pGuiGraphics.drawString(font, formattedcharsequence, 30, l, 16777215 | i1, false);
+                    pGuiGraphics.drawString(font, formattedcharsequence, 30, l, 0xFFFFFF | i1, false);
                     l += 9;
                 }
             }
@@ -106,15 +116,17 @@ public class AchievementToast implements Toast {
         ACHIEVEMENTS.put(advancement, toast);
     }
 
-    public static void registerToast(ResourceLocation advancement) {
-        String namespace = advancement.getNamespace();
-        String path = advancement.getPath();
-        ACHIEVEMENTS.put(advancement, new AchievementToast(
+    public static void registerToast(String namespace, String path) {
+        registerToast(new ResourceLocation(namespace, path), new AchievementToast(
                 new ResourceLocation(namespace, "textures/achievement/" + path + ".png"),
                 new AchievementDisplay(FrameType.CHALLENGE,
                         Component.translatable("achievements." + namespace + "." + path + ".title"),
                         Component.translatable("achievements." + namespace + "." + path + ".description")
                 )));
+    }
+
+    public static void registerToast(String path) {
+        registerToast(Confluence.MODID, path);
     }
 
     public static Toast getToast(ResourceLocation advancement) {

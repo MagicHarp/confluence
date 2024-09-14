@@ -1,7 +1,6 @@
 package org.confluence.mod.client;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -31,9 +30,9 @@ public final class ModClient {
         event.enqueueWork(() -> {
             CuriosClient.registerRenderers();
             ClientConfigs.onLoad();
-            AchievementToast.registerToast(new ResourceLocation(MODID, "boots_of_the_hero"));
-            AchievementToast.registerToast(new ResourceLocation(MODID, "black_mirror"));
-            AchievementToast.registerToast(new ResourceLocation(MODID, "ankhumulation_complete"));
+            AchievementToast.registerToast("boots_of_the_hero");
+            AchievementToast.registerToast("black_mirror");
+            AchievementToast.registerToast("ankhumulation_complete");
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
         });
     }

@@ -23,13 +23,14 @@ import org.confluence.mod.util.CuriosUtils;
 public interface IAutoAttack {
     static void sendMsg(ServerPlayer serverPlayer) {
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new AutoAttackPacketS2C(CuriosUtils.hasCurio(serverPlayer, IAutoAttack.class))
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new AutoAttackPacketS2C(CuriosUtils.hasCurio(serverPlayer, IAutoAttack.class))
         );
     }
 
     @OnlyIn(Dist.CLIENT)
     static void apply(Minecraft minecraft, LocalPlayer localPlayer) {
+        if (minecraft.gameMode == null || minecraft.gameMode.isDestroying()) return;
         if (BetterCombatHelper.isLoaded()) {
             ItemStack itemStack = localPlayer.getItemInHand(InteractionHand.MAIN_HAND);
             if (BetterCombatHelper.hasWeaponAttributes(itemStack)) return;
@@ -38,13 +39,13 @@ public interface IAutoAttack {
             if (localPlayer.getAttackStrengthScale(0.5F) < 1.0F) return;
             MinecraftAccessor accessor = (MinecraftAccessor) minecraft;
             if (accessor.getMissTime() > 0) accessor.setMissTime(0);
-            double reach = localPlayer.getEntityReach();
+            double reach = Math.max(localPlayer.getEntityReach(), localPlayer.getBlockReach());
             Vec3 from = localPlayer.getEyePosition(1.0F);
             Vec3 viewVector = localPlayer.getViewVector(1.0F);
             Vec3 to = from.add(viewVector.x * reach, viewVector.y * reach, viewVector.z * reach);
             EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(
-                localPlayer, from, to, new AABB(from, to),
-                entity -> !entity.isSpectator() && entity.isPickable(), reach);
+                    localPlayer, from, to, new AABB(from, to),
+                    entity -> !entity.isSpectator() && entity.isPickable(), reach);
             if (entityhitresult != null && minecraft.gameMode != null) {
                 minecraft.gameMode.attack(localPlayer, entityhitresult.getEntity());
             }

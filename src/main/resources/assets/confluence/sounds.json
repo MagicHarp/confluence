@@ -33,5 +33,10 @@
         "sounds": [
             "confluence:shoes_walk"
         ]
+    },
+    "achievements": {
+        "sounds": [
+            "confluence:achievements"
+        ]
     }
 }
