@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.StateProperties;
 import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
@@ -32,9 +31,6 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
             mutablePos.move(Direction.DOWN);
         }
         if (ModFeatures.isPosSturdy(level, mutablePos, Direction.UP)) {
-            BlockPos supportPos = mutablePos.immutable();
-            BlockPos adapterPos = supportPos.below();
-            if (ModFeatures.isPosExposed(level, adapterPos)) return false;
             BlockPos dartPos = mutablePos.offset(0, 2, 0);
             Direction opposite = null;
             for (Direction direction : ModFeatures.HORIZONTAL) {
@@ -50,13 +46,14 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
                 }
             }
             if (opposite == null) return false;
+            BlockPos supportPos = mutablePos.immutable();
+            BlockPos platePos = supportPos.above();
             BlockState dartTrap = ModBlocks.DART_TRAP.get().defaultBlockState().setValue(FACING, opposite);
             safeSetBlock(level, dartPos, dartTrap, ModFeatures.IS_REPLACEABLE);
-            safeSetBlock(level, supportPos.above(), ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
-            safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), ModFeatures.IS_REPLACEABLE);
+            safeSetBlock(level, platePos, ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
             AbstractMechanicalBlock.Entity dart = ModFeatures.getEntity(level, dartPos);
-            AbstractMechanicalBlock.Entity adapter = ModFeatures.getEntity(level, adapterPos);
-            if (dart != null && adapter != null) dart.connectTo(0x00FF00, adapterPos, adapter);
+            AbstractMechanicalBlock.Entity plate = ModFeatures.getEntity(level, platePos);
+            if (dart != null && plate != null) dart.connectTo(0x00FF00, platePos, plate);
             return true;
         }
         return false;

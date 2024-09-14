@@ -21,8 +21,6 @@ public class HorizontalCTBehaviour extends ConnectedTextureBehaviour.Base {
 
 	@Override
 	public CTSpriteShiftEntry getShift(BlockState state, Direction direction, @NotNull TextureAtlasSprite sprite) {
-		return direction.getAxis()
-			.isHorizontal() ? layerShift : topShift;
+		return direction.getAxis().isHorizontal() ? layerShift : topShift;
 	}
-
 }

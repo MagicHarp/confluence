@@ -64,8 +64,6 @@ public final class ModTabs {
 
                 output.accept(WHITE_PLASTIC_CHAIR_BLOCK.get());
 
-                output.accept(DEEPSLATE_PRESSURE_PLATE.get());
-
                 // 雕像
                 output.accept(STATUE_A.get());
                 for (Torches torches : Torches.values()) output.accept(torches.item.get());
@@ -424,6 +422,8 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MECHANICAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.mechanical"))
             .displayItems((parameters, output) -> {
+                output.accept(CurioItems.MECHANICAL_LENS.get());
+                output.accept(CurioItems.SPECTRE_GOGGLES.get());
                 output.accept(ANDESITE_CASING.get());
                 output.accept(ModItems.RED_WRENCH.get());
                 output.accept(ModItems.GREEN_WRENCH.get());
@@ -443,6 +443,9 @@ public final class ModTabs {
                 output.accept(TIMERS_BLOCK_1_2.get());
                 output.accept(TIMERS_BLOCK_1_4.get());
                 output.accept(GEYSER_BLOCK.get());
+                output.accept(PLAYER_PRESSURE_PLATE.get());
+                output.accept(STONE_PRESSURE_PLATE.get());
+                output.accept(DEEPSLATE_PRESSURE_PLATE.get());
                 output.accept(EXTRACTINATOR.get());
                 output.accept(DEMON_ALTAR.get());
                 output.accept(CRIMSON_ALTAR.get());

@@ -22,8 +22,7 @@ import java.util.List;
 
 public class CTModel extends BakedModelWrapperWithData {
 	private static final ModelProperty<CTData> CT_PROPERTY = new ModelProperty<>();
-
-	private final ConnectedTextureBehaviour behaviour;
+	protected final ConnectedTextureBehaviour behaviour;
 
 	public CTModel(BakedModel originalModel, ConnectedTextureBehaviour behaviour) {
 		super(originalModel);
@@ -40,12 +39,10 @@ public class CTModel extends BakedModelWrapperWithData {
 		CTData data = new CTData();
 		MutableBlockPos mutablePos = new MutableBlockPos();
 		for (Direction face : ModUtils.directions) {
-			if (!behaviour.buildContextForOccludedDirections()
-				&& !Block.shouldRenderFace(state, world, pos, face, mutablePos.setWithOffset(pos, face)))
+			if (!behaviour.buildContextForOccludedDirections() && !Block.shouldRenderFace(state, world, pos, face, mutablePos.setWithOffset(pos, face)))
 				continue;
 			CTType dataType = behaviour.getDataType(world, pos, state, face);
-			if (dataType == null)
-				continue;
+			if (dataType == null) continue;
 			ConnectedTextureBehaviour.CTContext context = behaviour.buildContext(world, pos, state, face, dataType.getContextRequirement());
 			data.put(face, dataType.getTextureIndex(context));
 		}

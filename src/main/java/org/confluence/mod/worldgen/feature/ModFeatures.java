@@ -46,7 +46,7 @@ public final class ModFeatures {
 
     static @NotNull BlockState getPressurePlate(WorldGenLevel level, BlockPos supportPos) {
         return level.isStateAtPosition(supportPos, blockState -> blockState.is(Blocks.DEEPSLATE)) ?
-            ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : Blocks.STONE_PRESSURE_PLATE.defaultBlockState();
+            ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : ModBlocks.STONE_PRESSURE_PLATE.get().defaultBlockState();
     }
 
     static @Nullable AbstractMechanicalBlock.Entity getEntity(WorldGenLevel level, BlockPos blockPos) {

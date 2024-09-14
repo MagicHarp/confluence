@@ -13,8 +13,6 @@ import net.minecraft.world.level.levelgen.Column;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import org.confluence.mod.block.ModBlocks;
-import org.confluence.mod.block.StateProperties;
 import org.confluence.mod.block.functional.AbstractMechanicalBlock;
 import org.confluence.mod.block.functional.BoulderBlock;
 
@@ -35,18 +33,15 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
         if (ModFeatures.isPosAir(level, blockPos)) {
             Optional<Column> optionalColumn = Column.scan(level, blockPos, config.maxHeight, BlockBehaviour.BlockStateBase::isAir, blockState -> blockState.is(BlockTags.BASE_STONE_OVERWORLD));
             if (optionalColumn.isPresent() && optionalColumn.get() instanceof Column.Range range && range.height() > 4) {
-                BlockPos adapterPos = blockPos.atY(range.floor() - 1);
-                if (ModFeatures.isPosExposed(level, adapterPos)) return false;
-
                 BlockPos supportPos = blockPos.atY(range.floor());
                 if (ModFeatures.isPosSturdy(level, supportPos, Direction.UP)) {
                     BlockPos boulderPos = blockPos.atY(range.ceiling());
+                    BlockPos platePos = blockPos.atY(range.floor() + 1);
                     safeSetBlock(level, boulderPos, block.defaultBlockState(), ModFeatures.IS_REPLACEABLE);
-                    safeSetBlock(level, blockPos.atY(range.floor() + 1), ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
-                    safeSetBlock(level, adapterPos, ModBlocks.SIGNAL_ADAPTER.get().defaultBlockState().setValue(StateProperties.REVERSE, true), ModFeatures.IS_REPLACEABLE);
+                    safeSetBlock(level, platePos, ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
                     AbstractMechanicalBlock.Entity boulder = ModFeatures.getEntity(level, boulderPos);
-                    AbstractMechanicalBlock.Entity adapter = ModFeatures.getEntity(level, adapterPos);
-                    if (boulder != null && adapter != null) boulder.connectTo(0xFF0000, adapterPos, adapter);
+                    AbstractMechanicalBlock.Entity plate = ModFeatures.getEntity(level, platePos);
+                    if (boulder != null && plate != null) boulder.connectTo(0xFF0000, platePos, plate);
                     return true;
                 }
             }

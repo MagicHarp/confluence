@@ -15,8 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class ConnectedTextureBehaviour {
 	@Nullable
-	public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction,
-												@NotNull TextureAtlasSprite sprite);
+	public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction, @NotNull TextureAtlasSprite sprite);
 
 	// TODO: allow more than one data type per state/face?
 	@Nullable
@@ -26,48 +25,35 @@ public abstract class ConnectedTextureBehaviour {
 		return false;
 	}
 
-	protected boolean isBeingBlocked(BlockState state, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos,
-		Direction face) {
+	protected boolean isBeingBlocked(BlockState state, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos, Direction face) {
 		BlockPos blockingPos = otherPos.relative(face);
 		BlockState blockState = reader.getBlockState(pos);
 		BlockState blockingState = reader.getBlockState(blockingPos);
 
-		if (!Block.isFaceFull(blockingState.getShape(reader, blockingPos), face.getOpposite()))
-			return false;
-		if (face.getAxis()
-			.choose(pos.getX(), pos.getY(), pos.getZ()) != face.getAxis()
-				.choose(otherPos.getX(), otherPos.getY(), otherPos.getZ()))
-			return false;
+		if (!Block.isFaceFull(blockingState.getShape(reader, blockingPos), face.getOpposite())) return false;
+		if (face.getAxis().choose(pos.getX(), pos.getY(), pos.getZ()) != face.getAxis().choose(otherPos.getX(), otherPos.getY(), otherPos.getZ())) return false;
 
-		return connectsTo(state,
-			getCTBlockState(reader, blockState, face.getOpposite(), pos.relative(face), blockingPos), reader, pos,
-			blockingPos, face);
+		return connectsTo(state, getCTBlockState(reader, blockState, face.getOpposite(), pos.relative(face), blockingPos), reader, pos, blockingPos, face);
 	}
 
-	public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos,
-		BlockPos otherPos, Direction face, Direction primaryOffset, Direction secondaryOffset) {
+	public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos, Direction face, Direction primaryOffset, Direction secondaryOffset) {
 		return connectsTo(state, other, reader, pos, otherPos, face);
 	}
 
-	public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos,
-		BlockPos otherPos, Direction face) {
+	public boolean connectsTo(BlockState state, BlockState other, BlockAndTintGetter reader, BlockPos pos, BlockPos otherPos, Direction face) {
 		return !isBeingBlocked(state, reader, pos, otherPos, face) && state.getBlock() == other.getBlock();
 	}
 
-	private boolean testConnection(BlockAndTintGetter reader, BlockPos currentPos, BlockState connectiveCurrentState,
-		Direction textureSide, final Direction horizontal, final Direction vertical, int sh, int sv) {
+	private boolean testConnection(BlockAndTintGetter reader, BlockPos currentPos, BlockState connectiveCurrentState, Direction textureSide, final Direction horizontal, final Direction vertical, int sh, int sv) {
 		BlockState trueCurrentState = reader.getBlockState(currentPos);
-		BlockPos targetPos = currentPos.relative(horizontal, sh)
-			.relative(vertical, sv);
-		BlockState connectiveTargetState =
-			getCTBlockState(reader, trueCurrentState, textureSide, currentPos, targetPos);
+		BlockPos targetPos = currentPos.relative(horizontal, sh).relative(vertical, sv);
+		BlockState connectiveTargetState = getCTBlockState(reader, trueCurrentState, textureSide, currentPos, targetPos);
 		return connectsTo(connectiveCurrentState, connectiveTargetState, reader, currentPos, targetPos, textureSide,
 			sh == 0 ? null : sh == -1 ? horizontal.getOpposite() : horizontal,
 			sv == 0 ? null : sv == -1 ? vertical.getOpposite() : vertical);
 	}
 
-	public BlockState getCTBlockState(BlockAndTintGetter reader, BlockState reference, Direction face, BlockPos fromPos,
-		BlockPos toPos) {
+	public BlockState getCTBlockState(BlockAndTintGetter reader, BlockState reference, Direction face, BlockPos fromPos, BlockPos toPos) {
 		BlockState blockState = reader.getBlockState(toPos);
 		return blockState.getAppearance(reader, toPos, face, reference, fromPos);
 	}
@@ -85,17 +71,14 @@ public abstract class ConnectedTextureBehaviour {
 	}
 
 	protected Direction getUpDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
-		Axis axis = face.getAxis();
-		return axis.isHorizontal() ? Direction.UP : Direction.NORTH;
+		return face.getAxis().isHorizontal() ? Direction.UP : Direction.NORTH;
 	}
 
 	protected Direction getRightDirection(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face) {
-		Axis axis = face.getAxis();
-		return axis == Axis.X ? Direction.SOUTH : Direction.WEST;
+		return face.getAxis() == Axis.X ? Direction.SOUTH : Direction.WEST;
 	}
 
-	public CTContext buildContext(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face,
-		ContextRequirement requirement) {
+	public CTContext buildContext(BlockAndTintGetter reader, BlockPos pos, BlockState state, Direction face, ContextRequirement requirement) {
 		boolean positive = face.getAxisDirection() == AxisDirection.POSITIVE;
 		Direction h = getRightDirection(reader, pos, state, face);
 		Direction v = getUpDirection(reader, pos, state, face);
