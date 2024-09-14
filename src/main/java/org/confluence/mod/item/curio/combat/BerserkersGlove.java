@@ -47,11 +47,4 @@ public class BerserkersGlove extends BaseCurioItem implements IAutoAttack {
         list.add(IAutoAttack.TOOLTIP);
         list.add(Component.translatable("curios.tooltip.aggro_attach"));
     }
-
-    public Component[] getInformation() {
-        return new Component[]{
-                Component.translatable("item.confluence.berserkers_glove.info"),
-                Component.translatable("item.confluence.berserkers_glove.info2")
-        };
-    }
 }

@@ -180,7 +180,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.cell_phone.tooltip2", "Allows you to return home at will");
 
         add("item.confluence.aglet.info", "It can be found in Shipwreck Chests.");
-        add("item.confluence.anklet_of_the_wind.info", "The effect also stacks with the movement speed bonus of the Aglet.");
         add("item.confluence.climbing_claws.info", "It have a Chance to be dropped from Spider.");
         add("item.confluence.cloud_in_a_bottle.info", "It can be found in Chests in the Mineshaft and Dungeon.");
         add("item.confluence.dunerider_boots.info", "It have a Chance to be dropped from Husk.");
@@ -212,10 +211,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.weather_radio.info", "This item can be located in the chests found within Fisherman Villagers' houses.");
         add("item.confluence.band_of_regeneration.info", "The Band of Regeneration is an accessory that have a Chance to be dropped from Witch");
         add("item.confluence.angler_earring.info", "This item can be located in the chests found within Fisherman Villagers' houses.");
-        add("item.confluence.brain_of_confusion.info", "The Brain of Confusion have a Chance to be dropped from Zombie Villager.");
-        add("item.confluence.gravity_globe.info", "The Gravity Glob have a Chance to be dropped from Shulker.");
-        add("item.confluence.hive_pack.info", "The Hive Pack have a Chance to be dropped from Bee.");
-        add("item.confluence.royal_gel.info", "The Royal Gel have a Chance to be dropped from Slime.");
+        add("item.confluence.brain_of_confusion.info", "It have a Chance to be dropped from Zombie Villager.");
+        add("item.confluence.gravity_globe.info", "It have a Chance to be dropped from Shulker.");
+        add("item.confluence.hive_pack.info", "It have a Chance to be dropped from Bee.");
+        add("item.confluence.royal_gel.info", "It have a Chance to be dropped from Slime.");
         add("item.confluence.shield_of_cthulhu.info", "It have a Chance to be dropped from Ravager.");
         add("item.confluence.worm_scarf.info", "When a player has a tamed cat, the cat may give the player this item when they wake up.");
         add("item.confluence.ancient_chisel.info", "The item can be pass the Archaeology to obtained.");
@@ -224,7 +223,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.portable_cement_mixer.info", "This item can be located in the chests found within Toolsmith Villagers' houses.");
         add("item.confluence.toolbelt.info", "This item can be located in the chests found within Toolsmith Villagers' houses.");
         add("item.confluence.toolbox.info", "The item can be located in the chests found within Toolsmith Villagers' houses.");
-        add("item.confluence.flower_boots.info", "The Flower Boots have a Chance to be dropped from Moss Block.");
+        add("item.confluence.flower_boots.info", "It has a chance of falling from digging through Moss Block.");
         add("item.confluence.treasure_magnet.info", "It can be discovered in chests found within Desert Pyramids, End City, Jungle Pyramids, or Ancient Cities.");
         add("item.confluence.bezoar.info", "It have a Chance to be dropped from Cave Spider.");
         add("item.confluence.black_belt.info", "It have a Chance to be dropped from Wither Skeleton.");
@@ -240,9 +239,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.frozen_turtle_shell.info", "When the Turtle died for Freezing chance to dropped this item.");
         add("item.confluence.hand_drill.info", "It have a Chance to be dropped from Elder Guardian.");
         add("item.confluence.holy_water.info", "It have a Chance to be dropped from Wither Skeleton.");
-        add("item.confluence.honey_comb.info", "The Honey Comb is a accessory which, when equipped, spawns 1–3 (or 1–4 with a Hive Pack equipped) bee projectiles which attack nearby enemies each time the player takes damage.");
-        add("item.confluence.honey_comb.info2", "It also grants the Honey buff for 5 seconds after being damaged.");
-        add("item.confluence.honey_comb.info3", "It have a Chance to be dropped from Bee.");
+        add("item.confluence.honey_comb.info", "It have a Chance to be dropped from Bee.");
         add("item.confluence.magic_quiver.info", "This item have a Chance to be dropped from Wither Skeleton.");
         add("item.confluence.magma_stone.info", "It have a Chance to be dropped from Blaze.");
         add("item.confluence.moon_stone.info", "It have a Chance to be dropped from Phantom.");
@@ -263,8 +260,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.vitamins.info", "It have a Chance to be dropped from Witch.");
         add("item.confluence.warrior_emblem.info", "It have a Chance to be dropped from Vindicator.");
         add("item.confluence.demon_heart.info", "It to be dropped from Wither.");
-        add("item.confluence.berserkers_glove.info", "The Berserker's Glove is a Hardmode accessory crafted from the Power Glove and Flesh Knuckles, granting the abilities of both.");
-        add("item.confluence.berserkers_glove.info2", "Autoswing for melee weapons and whips");
 
         add("death.attack.star_cloak", "%1$s was squashed by a falling star");
 
