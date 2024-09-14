@@ -288,8 +288,6 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
 
         // old
-        add("advancements.start.title", "Old World, New Journey!");
-        add("advancements.start.descr", "The afterlife of convergence and exchange");
         add("advancements.mana_star.title", "Gather the power of the stars");
         add("advancements.mana_star.descr", "The stars will increase your magical powers");
         add("advancements.tin_ingot.title", "resonant harmony, reminiscent of bronze");
@@ -305,6 +303,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("advancements.pretty_in_pink.title", "pretty_in_pink");
         add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
         // new
+        add("achievements.confluence.new_world.title", "Old World, New Journey!");
+        add("achievements.confluence.new_world.description", "The afterlife of convergence and exchange");
         add("achievements.confluence.timber.title", "Timber!! ");
         add("achievements.confluence.timber.description", "Chop down your first tree.");
         add("achievements.confluence.star_power.title", "Star Power");

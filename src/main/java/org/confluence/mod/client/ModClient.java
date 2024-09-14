@@ -99,6 +99,9 @@ public final class ModClient {
             FishingPoles.registerCast();
             Bows.registerProperties();
 
+            // 开局
+            AchievementToast.registerToast("new_world");
+
             // Collector
             AchievementToast.registerToast("timber");
             AchievementToast.registerToast("hammer_time");

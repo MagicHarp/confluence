@@ -338,8 +338,6 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
 
         // old
-        add("advancements.start.title", "旧的世界，新的旅途！");
-        add("advancements.start.descr", "汇合交流的来世");
         add("advancements.falling_star.title", "寻觅坠落之光");
         add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
         add("advancements.mana_star.title", "凝聚众星之力");
@@ -359,6 +357,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.pretty_in_pink.title", "粉红佳人");
         add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
         // new
+        add("achievements.confluence.new_world.title", "旧的世界，新的旅途！");
+        add("achievements.confluence.new_world.description", "汇合交流的来世。");
         add("achievements.confluence.timber.title", "木材！！");
         add("achievements.confluence.timber.description", "砍倒第一棵树。");
         add("achievements.confluence.star_power.title", "星之力");

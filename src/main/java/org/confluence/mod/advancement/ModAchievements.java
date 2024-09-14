@@ -10,8 +10,9 @@ public final class ModAchievements {
     public static final Hashtable<ResourceLocation, Vec2> DISPLAY_OFFSET = new Hashtable<>();
 
     public static void initialize() {
+        offset("new_world", 0, 0);
         // Collector
-        offset("timber", 0, 0);
+        offset("timber", 1, 0);
         /* Benched */
         offset("hammer_time", 2,0);
         offset("heavy_metal", 3, 0);
