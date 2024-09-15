@@ -5,6 +5,7 @@
     },
     "overrides": [
         {
+
             "predicate": {
                 "confluence:variant": 1
             },
@@ -21,6 +22,12 @@
                 "confluence:variant": 3
             },
             "model": "confluence:item/chest_unlocked_shadow"
+        },
+        {
+            "predicate": {
+                "confluence:variant": 4
+            },
+            "model": "confluence:item/chest_unlocked_frozen"
         }
     ]
 }
