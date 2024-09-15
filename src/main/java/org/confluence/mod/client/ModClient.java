@@ -116,6 +116,7 @@ public final class ModClient {
             AchievementToast.registerToast("miner_for_fire");
             AchievementToast.registerToast("head_in_the_clouds");
             AchievementToast.registerToast("like_a_boss");
+            AchievementToast.registerToast("feast_of_midas");
             AchievementToast.registerToast("drax_attax");
             AchievementToast.registerToast("fashion_statement");
             AchievementToast.registerToast("sword_of_the_hero");
@@ -157,6 +158,7 @@ public final class ModClient {
             AchievementToast.registerToast("it_can_talk");
             AchievementToast.registerToast("watch_your_step");
             AchievementToast.registerToast("rock_bottom");
+            AchievementToast.registerToast("a_rare_realm");
             AchievementToast.registerToast("a_shimmer_in_the_dark");
 
             // Slayer boss
@@ -166,6 +168,7 @@ public final class ModClient {
             AchievementToast.registerToast("mastermind");
             AchievementToast.registerToast("sting_operation");
             AchievementToast.registerToast("boned");
+            AchievementToast.registerToast("an_eye_for_an_eye");
             AchievementToast.registerToast("still_hungry");
             AchievementToast.registerToast("just_desserts");
             AchievementToast.registerToast("buckets_of_bolts");
@@ -197,6 +200,7 @@ public final class ModClient {
             AchievementToast.registerToast("archaeologist");
             AchievementToast.registerToast("pretty_in_pink");
             AchievementToast.registerToast("archaeologist");
+            AchievementToast.registerToast("torch_god");
 
 
 
@@ -227,6 +231,10 @@ public final class ModClient {
             AchievementToast.registerToast("feeling_petty");
             AchievementToast.registerToast("jolly_jamboree");
             AchievementToast.registerToast("dead_men_tell_no_tales");
+            AchievementToast.registerToast("unusual_survival_strategies");
+            AchievementToast.registerToast("the_great_slime_mitosis");
+            AchievementToast.registerToast("and_good_riddance");
+            AchievementToast.registerToast("to_infinity_and_beyond");
             MenuScreens.register(ModMenus.SKY_MILL.get(), SkyMillScreen::new);
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
 
