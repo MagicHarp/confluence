@@ -83,11 +83,11 @@ public class ThinIcePatchFeature extends Feature<ThinIcePatchFeature.Config> {
 
     public record Config(int stepHeight, int radius, int maxDepth, int maxSearchHeight, float successRatio) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ExtraCodecs.POSITIVE_INT.fieldOf("stepHeight").orElse(3).forGetter(Config::stepHeight),
+                ExtraCodecs.POSITIVE_INT.fieldOf("step_height").orElse(3).forGetter(Config::stepHeight),
                 ExtraCodecs.POSITIVE_INT.fieldOf("radius").orElse(4).forGetter(Config::radius),
-                ExtraCodecs.POSITIVE_INT.fieldOf("maxDepth").orElse(32).forGetter(Config::maxDepth),
-                ExtraCodecs.POSITIVE_INT.fieldOf("maxSearchHeight").orElse(32).forGetter(Config::maxDepth),
-                ExtraCodecs.POSITIVE_FLOAT.fieldOf("successRatio").orElse(0.5F).forGetter(Config::successRatio)
+                ExtraCodecs.POSITIVE_INT.fieldOf("max_depth").orElse(32).forGetter(Config::maxDepth),
+                ExtraCodecs.POSITIVE_INT.fieldOf("max_search_height").orElse(32).forGetter(Config::maxDepth),
+                ExtraCodecs.POSITIVE_FLOAT.fieldOf("success_ratio").orElse(0.5F).forGetter(Config::successRatio)
         ).apply(instance, Config::new));
     }
 }

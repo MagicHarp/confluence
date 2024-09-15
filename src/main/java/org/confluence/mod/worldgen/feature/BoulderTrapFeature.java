@@ -53,7 +53,7 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
     public record Config(BoulderBlock.Variant variant, int maxHeight) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BoulderBlock.Variant.CODEC.fieldOf("variant").orElse(BoulderBlock.Variant.NORMAL).forGetter(Config::variant),
-            ExtraCodecs.POSITIVE_INT.fieldOf("maxHeight").orElse(64).forGetter(Config::maxHeight)
+            ExtraCodecs.POSITIVE_INT.fieldOf("max_height").orElse(64).forGetter(Config::maxHeight)
         ).apply(instance, Config::new));
     }
 }
