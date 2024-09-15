@@ -21,6 +21,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class AchievementToast implements Toast {
+    private static final Component DISPLAY = Component.translatable("achievements.toast.complete");
     private static final Hashtable<ResourceLocation, Toast> ACHIEVEMENTS = new Hashtable<>();
     private final ResourceLocation icon;
     private final AchievementDisplay display;
@@ -85,12 +86,12 @@ public class AchievementToast implements Toast {
         List<FormattedCharSequence> list = font.split(display.title(), 125);
         int i = display.frame() == FrameType.CHALLENGE ? 16746751 : 16776960;
         if (list.size() == 1) {
-            pGuiGraphics.drawString(font, display.frame().getDisplayName(), 30, 7, i | -16777216, false);
+            pGuiGraphics.drawString(font, DISPLAY, 30, 7, i | -16777216, false);
             pGuiGraphics.drawString(font, list.get(0), 30, 18, -1, false);
         } else {
             if (pTimeSinceLastVisible < 1500L) {
                 int k = Mth.floor(Mth.clamp((float) (1500L - pTimeSinceLastVisible) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
-                pGuiGraphics.drawString(font, display.frame().getDisplayName(), 30, 11, i | k, false);
+                pGuiGraphics.drawString(font, DISPLAY, 30, 11, i | k, false);
             } else {
                 int i1 = Mth.floor(Mth.clamp((float) (pTimeSinceLastVisible - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
                 int l = 16 - list.size() * 9 / 2;

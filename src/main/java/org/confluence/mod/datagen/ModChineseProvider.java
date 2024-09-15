@@ -1,8 +1,6 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
@@ -357,6 +355,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("advancements.pretty_in_pink.title", "粉红佳人");
         add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
         // new
+        add("achievements.toast.complete", "成就达成！");
         add("achievements.confluence.new_world.title", "旧的世界，新的旅途！");
         add("achievements.confluence.new_world.description", "汇合交流的来世。");
         add("achievements.confluence.timber.title", "木材！！");

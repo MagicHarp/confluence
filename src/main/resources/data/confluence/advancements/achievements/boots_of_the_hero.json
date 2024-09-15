@@ -15,6 +15,7 @@
         "announce_to_chat": true,
         "hidden": true
     },
+    "parent": "confluence:achievements/new_world",
     "criteria": {
         "requirement": {
             "trigger": "minecraft:inventory_changed",

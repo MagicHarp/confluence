@@ -14,7 +14,7 @@
         "announce_to_chat": true,
         "hidden": true
     },
-    "parent": "confluence:achievements/boots_of_the_hero",
+    "parent": "confluence:achievements/new_world",
     "criteria": {
         "requirement": {
             "trigger": "minecraft:consume_item",

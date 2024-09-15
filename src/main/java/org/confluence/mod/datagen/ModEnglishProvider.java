@@ -303,6 +303,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("advancements.pretty_in_pink.title", "pretty_in_pink");
         add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
         // new
+        add("achievements.toast.complete", "Achievement achieved!");
         add("achievements.confluence.new_world.title", "Old World, New Journey!");
         add("achievements.confluence.new_world.description", "The afterlife of convergence and exchange");
         add("achievements.confluence.timber.title", "Timber!! ");

@@ -10,7 +10,7 @@
         "description": {
             "translate": "achievements.confluence.new_world.description"
         },
-        "frame": "task",
+        "frame": "challenge",
         "show_toast": false,
         "announce_to_chat": true,
         "hidden": true
