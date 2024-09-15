@@ -192,7 +192,6 @@ public final class ModClient {
             AchievementToast.registerToast("baleful_harvest ");
             AchievementToast.registerToast("ice_scream");
 
-
             AchievementToast.registerToast("vehicular_manslaughter");
             AchievementToast.registerToast("there_are_some_who_call_him");
             AchievementToast.registerToast("deceiver_of_fools");
@@ -201,8 +200,6 @@ public final class ModClient {
             AchievementToast.registerToast("pretty_in_pink");
             AchievementToast.registerToast("archaeologist");
             AchievementToast.registerToast("torch_god");
-
-
 
             // Challenger
             AchievementToast.registerToast("real_estate_agent");
