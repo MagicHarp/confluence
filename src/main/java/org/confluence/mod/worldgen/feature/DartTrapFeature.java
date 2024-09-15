@@ -52,8 +52,8 @@ public class DartTrapFeature extends Feature<DartTrapFeature.Config> {
             BlockState dartTrap = ModBlocks.DART_TRAP.get().defaultBlockState().setValue(FACING, opposite);
             safeSetBlock(level, dartPos, dartTrap, ModFeatures.IS_REPLACEABLE);
             safeSetBlock(level, platePos, ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
-            AbstractMechanicalBlock.Entity dart = ModFeatures.getEntity(level, dartPos);
-            AbstractMechanicalBlock.Entity plate = ModFeatures.getEntity(level, platePos);
+            AbstractMechanicalBlock.Entity dart = ModFeatures.getMechanicalEntity(level, dartPos);
+            AbstractMechanicalBlock.Entity plate = ModFeatures.getMechanicalEntity(level, platePos);
             if (dart != null && plate != null) dart.connectTo(0x00FF00, platePos, plate);
             return true;
         }

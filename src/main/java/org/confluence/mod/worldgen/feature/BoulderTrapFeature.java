@@ -39,8 +39,8 @@ public class BoulderTrapFeature extends Feature<BoulderTrapFeature.Config> {
                     BlockPos platePos = blockPos.atY(range.floor() + 1);
                     safeSetBlock(level, boulderPos, block.defaultBlockState(), ModFeatures.IS_REPLACEABLE);
                     safeSetBlock(level, platePos, ModFeatures.getPressurePlate(level, supportPos), ModFeatures.IS_REPLACEABLE);
-                    AbstractMechanicalBlock.Entity boulder = ModFeatures.getEntity(level, boulderPos);
-                    AbstractMechanicalBlock.Entity plate = ModFeatures.getEntity(level, platePos);
+                    AbstractMechanicalBlock.Entity boulder = ModFeatures.getMechanicalEntity(level, boulderPos);
+                    AbstractMechanicalBlock.Entity plate = ModFeatures.getMechanicalEntity(level, platePos);
                     if (boulder != null && plate != null) boulder.connectTo(0xFF0000, platePos, plate);
                     return true;
                 }

@@ -25,7 +25,7 @@ public class SimpleBlockNBTFeature extends Feature<SimpleBlockNBTFeature.Config>
         BlockState blockState = config.toPlace().getState(pContext.random(), blockPos);
         if (blockState.canSurvive(level, blockPos)) {
             level.setBlock(blockPos, blockState, 2);
-            BlockEntity blockEntity = ModFeatures.getEntity(level, blockPos);
+            BlockEntity blockEntity = ModFeatures.getBlockEntity(level, blockPos);
             if (blockEntity != null) blockEntity.deserializeNBT(config.nbt);
             return true;
         }

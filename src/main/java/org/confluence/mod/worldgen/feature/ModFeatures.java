@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -51,12 +52,21 @@ public final class ModFeatures {
                 ModBlocks.DEEPSLATE_PRESSURE_PLATE.get().defaultBlockState() : ModBlocks.STONE_PRESSURE_PLATE.get().defaultBlockState();
     }
 
-    static @Nullable AbstractMechanicalBlock.Entity getEntity(WorldGenLevel level, BlockPos blockPos) {
+    static @Nullable AbstractMechanicalBlock.Entity getMechanicalEntity(WorldGenLevel level, BlockPos blockPos) {
         if (level.getBlockEntity(blockPos) instanceof AbstractMechanicalBlock.Entity entity) {
             return entity;
         }
-        Confluence.LOGGER.error("Failed to fetch block entity at ({}, {}, {})", blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        Confluence.LOGGER.error("Failed to fetch mechanical block entity at ({}, {}, {})", blockPos.getX(), blockPos.getY(), blockPos.getZ());
         return null;
+    }
+
+    static @Nullable BlockEntity getBlockEntity(WorldGenLevel level, BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity == null) {
+            Confluence.LOGGER.error("Failed to fetch block entity at ({}, {}, {})", blockPos.getX(), blockPos.getY(), blockPos.getZ());
+            return null;
+        }
+        return blockEntity;
     }
 
     static boolean isPosExposed(WorldGenLevel level, BlockPos blockPos) {
