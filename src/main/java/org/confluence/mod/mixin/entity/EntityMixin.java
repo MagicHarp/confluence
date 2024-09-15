@@ -65,9 +65,11 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
     @Shadow
     public abstract void setGlowingTag(boolean pHasGlowingTag);
 
-    @Shadow public abstract Vec3 getDeltaMovement();
+    @Shadow
+    public abstract Vec3 getDeltaMovement();
 
-    @Shadow public abstract Level level();
+    @Shadow
+    public abstract Level level();
 
     @Unique
     private int confluence$cthulhuSprintingTime = 0;
@@ -144,12 +146,12 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
         if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) return;
         if (self() instanceof LivingEntity living) {
             if (ModAttributes.applyDodge(living) ||
-                IFallResistance.isInvul(living, damageSource) ||
-                IFireImmune.isInvul(living, damageSource) ||
-                ObsidianSkinEffect.isInvul(living, damageSource) ||
-                ShimmerEffect.isInvul(living, damageSource) ||
-                RoyalGel.isInvul(living, damageSource) ||
-                ShieldOfCthulhu.isInvul(living)
+                    IFallResistance.isInvul(living, damageSource) ||
+                    IFireImmune.isInvul(living, damageSource) ||
+                    ObsidianSkinEffect.isInvul(living, damageSource) ||
+                    ShimmerEffect.isInvul(living, damageSource) ||
+                    RoyalGel.isInvul(living, damageSource) ||
+                    ShieldOfCthulhu.isInvul(living)
             ) {
                 cir.setReturnValue(true);
             }
@@ -166,7 +168,7 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
         }
     }
 
-    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))
+    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
     private void tickProfiler(CallbackInfo ci) {
         if (confluence$cthulhuSprintingTime > 0) this.confluence$cthulhuSprintingTime--;
         if (confluence$entity_coolDown < 0) this.confluence$entity_coolDown = 0;

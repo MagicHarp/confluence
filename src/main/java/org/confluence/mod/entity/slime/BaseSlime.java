@@ -11,10 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
@@ -93,7 +90,7 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
             }
         }
         if (this.getType().equals(ModEntities.LAVA_SLIME.get())) {
-            if (isInWater()){
+            if (isInWater()) {
                 this.hurt(this.level().damageSources().freeze(), 0.8F);
             }
             this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 500, 4, false, true));
@@ -190,18 +187,23 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
     @Override
     protected void tickDeath() {
         super.tickDeath();
-        if (this.getType().equals(ModEntities.LAVA_SLIME.get())){
+        if (this.getType().equals(ModEntities.LAVA_SLIME.get())) {
             StateDefinition<Block, BlockState> stateDefinition = Blocks.LAVA.getStateDefinition();
             Property<?> levelProperty = stateDefinition.getProperty("level");
             if (levelProperty instanceof IntegerProperty integerProperty) {
                 if (ModUtils.isExpert(level())) {
-                    if (this.level().getBlockState(BlockPos.containing(this.position())).isAir() ||
-                            this.level().getBlockState(BlockPos.containing(this.position())).canBeReplaced(Fluids.LAVA)) {
+                    if (level().getBlockState(BlockPos.containing(this.position())).isAir() || level().getBlockState(BlockPos.containing(position())).canBeReplaced(Fluids.LAVA)) {
                         //todo 未知且非固定出现的渲染bug
-                        this.level().setBlock(BlockPos.containing(this.position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
+                        level().setBlock(BlockPos.containing(position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean isInWall() { // 防止骑僵尸时窒息
+        Entity vehicle = getControlledVehicle();
+        return vehicle == null ? super.isInWall() : vehicle.isInWall();
     }
 }

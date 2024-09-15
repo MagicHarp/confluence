@@ -69,6 +69,7 @@
         "entity.FishingHookMixin",
         "entity.ItemEntityMixin",
         "entity.LivingEntityMixin",
+        "entity.MobMixin",
         "entity.PlayerMixin",
         "entity.VillagerMixin",
         "integretion.bettercombat.ServerNetworkMixin",

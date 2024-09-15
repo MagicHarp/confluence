@@ -9,13 +9,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
@@ -29,6 +27,7 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.level.BlockEvent;
@@ -55,8 +54,10 @@ import org.confluence.mod.effect.harmful.BleedingEffect;
 import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
+import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
+import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
 import org.confluence.mod.item.curio.combat.*;
@@ -281,6 +282,21 @@ public final class ForgeEvents {
             demonEye.setVariant(DemonEyeVariant.random(randomSource));
         } else if (mob instanceof BlackSlime blackSlime) {
             blackSlime.finalizeSpawn(randomSource, event.getDifficulty());
+        }
+    }
+
+    @SubscribeEvent
+    public static void entityJoinLevel(EntityJoinLevelEvent event) {
+        Level level = event.getLevel();
+        if (event.loadedFromDisk() || !(level instanceof ServerLevel serverLevel)) return;
+        if (event.getEntity() instanceof Zombie zombie && !zombie.isBaby() && !zombie.isVehicle() && zombie.getRandom().nextFloat() < 0.05F) {
+            BaseSlime slime = ModEntities.BLUE_SLIME.get().create(level);
+            if (slime != null) {
+                slime.moveTo(zombie.getX(), zombie.getY(), zombie.getZ(), zombie.getYRot(), 0.0F);
+                slime.finalizeSpawn(serverLevel, level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.JOCKEY, null, null);
+                slime.startRiding(zombie);
+                level.addFreshEntity(slime);
+            }
         }
     }
 
