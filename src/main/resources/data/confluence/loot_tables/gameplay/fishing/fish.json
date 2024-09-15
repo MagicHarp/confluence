@@ -411,12 +411,6 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
-                    "biome": "minecraft:deep_frozen_ocean"
-                  }
-                },
-                {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
                     "biome": "minecraft:deep_lukewarm_ocean"
                   }
                 },
