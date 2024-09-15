@@ -22,8 +22,9 @@ import java.util.function.Consumer;
 
 public class SnowArmorItem extends ArmorItem implements NormalGeoItem {
     private final AnimatableInstanceCache SNOW = GeckoLibUtil.createInstanceCache(this);
+    private final boolean pink;
 
-    public SnowArmorItem(Type type) {
+    public SnowArmorItem(Type type, boolean pink) {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
@@ -70,6 +71,12 @@ public class SnowArmorItem extends ArmorItem implements NormalGeoItem {
                 return 0.0F;
             }
         }, type, new Properties());
+        this.pink = pink;
+    }
+
+    @Override
+    public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
+        return true;
     }
 
     @Override
@@ -80,7 +87,7 @@ public class SnowArmorItem extends ArmorItem implements NormalGeoItem {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = new SnowArmorRenderer();
+                    this.renderer = new SnowArmorRenderer(pink);
                 }
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
 

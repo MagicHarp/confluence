@@ -110,10 +110,12 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         LivingEntity self = self();
         if (self.hasEffect(ModEffects.SHIMMER.get())) self.fallDistance = 0.0F;
         else if (self.hasEffect(ModEffects.STONED.get())) self.fallDistance += 3.0F;
-        if (self.fallDistance >= 3.0F && blockState.is(ModTags.Blocks.EASY_CRASH) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
+        if (self.fallDistance >= 2.5F && blockState.is(ModTags.Blocks.EASY_CRASH) && CuriosUtils.noSameCurio(self, ThinIceBlock.IceSafe.class)) {
             if (!level().isClientSide) {
                 BlockPos.betweenClosedStream(self.getBoundingBox().move(0.0, -0.5, 0.0)).forEach(pos -> {
-                    if (level().getBlockState(pos).is(ModTags.Blocks.EASY_CRASH)) level().destroyBlock(pos, true, self);
+                    if (pos.equals(blockPos) || level().getBlockState(pos).is(ModTags.Blocks.EASY_CRASH)) {
+                        level().destroyBlock(pos, true, self);
+                    }
                 });
             }
             this.confluence$breakingEasyCrashBlock = true;

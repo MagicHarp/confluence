@@ -6,7 +6,7 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class SnowArmorRenderer extends GeoArmorRenderer<SnowArmorItem> {
-    public SnowArmorRenderer() {
-        super(new DefaultedItemGeoModel<>(Confluence.asResource("armor/snow_armor")));
+    public SnowArmorRenderer(boolean pink) {
+        super(new DefaultedItemGeoModel<>(Confluence.asResource(pink ? "armor/snow_pink_armor" : "armor/snow_armor")));
     }
 }

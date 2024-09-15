@@ -23,15 +23,15 @@ public enum Armors implements EnumRegister<ArmorItem> {
     RAIN_CAP("rain_cap", () -> new RaincoatArmorItem(ArmorItem.Type.HELMET)),
     RAINCOAT("raincoat", () -> new RaincoatArmorItem(ArmorItem.Type.CHESTPLATE)),
     // 蓝色防雪衣
-    SNOW_CAPS("snow_caps", () -> new SnowArmorItem(ArmorItem.Type.HELMET)),
-    SNOW_SUITS("snow_suits", () -> new SnowArmorItem(ArmorItem.Type.CHESTPLATE)),
-    INSULATED_PANTS("insulated_pants", () -> new SnowArmorItem(ArmorItem.Type.LEGGINGS)),
-    INSULATED_SHOES("insulated_shoes", () -> new SnowArmorItem(ArmorItem.Type.BOOTS)),
+    SNOW_CAPS("snow_caps", () -> new SnowArmorItem(ArmorItem.Type.HELMET, false)),
+    SNOW_SUITS("snow_suits", () -> new SnowArmorItem(ArmorItem.Type.CHESTPLATE, false)),
+    INSULATED_PANTS("insulated_pants", () -> new SnowArmorItem(ArmorItem.Type.LEGGINGS, false)),
+    INSULATED_SHOES("insulated_shoes", () -> new SnowArmorItem(ArmorItem.Type.BOOTS, false)),
     // 粉色防雪衣
-    PINK_SNOW_CAPS("pink_snow_caps", () -> new SnowPinkArmorItem(ArmorItem.Type.HELMET)),
-    PINK_SNOW_SUITS("pink_snow_suits", () -> new SnowPinkArmorItem(ArmorItem.Type.CHESTPLATE)),
-    PINK_INSULATED_PANTS("pink_insulated_pants", () -> new SnowPinkArmorItem(ArmorItem.Type.LEGGINGS)),
-    PINK_INSULATED_SHOES("pink_insulated_shoes", () -> new SnowPinkArmorItem(ArmorItem.Type.BOOTS)),
+    PINK_SNOW_CAPS("pink_snow_caps", () -> new SnowArmorItem(ArmorItem.Type.HELMET, true)),
+    PINK_SNOW_SUITS("pink_snow_suits", () -> new SnowArmorItem(ArmorItem.Type.CHESTPLATE, true)),
+    PINK_INSULATED_PANTS("pink_insulated_pants", () -> new SnowArmorItem(ArmorItem.Type.LEGGINGS, true)),
+    PINK_INSULATED_SHOES("pink_insulated_shoes", () -> new SnowArmorItem(ArmorItem.Type.BOOTS, true)),
     // 忍者套
     NINJA_HELMET("ninja_helmet", () -> new NinjaArmorItem(ArmorItem.Type.HELMET)),
     NINJA_CHESTPLATE("ninja_chestplate", () -> new NinjaArmorItem(ArmorItem.Type.CHESTPLATE)),
