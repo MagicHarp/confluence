@@ -2,6 +2,7 @@ package org.confluence.mod.entity.projectile.bombs;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -13,6 +14,11 @@ public class ScarabBombEntity extends StickyBombEntity {
     float blastPowerNew = 3.5f;
 
     Vec3 facingDir = new Vec3(0, -1, 0);
+
+    public ScarabBombEntity(EntityType<? extends ScarabBombEntity> pEntityType, Player player, Level pLevel) {
+        super(pEntityType, player, pLevel);
+        super.bounceFactor = blastPowerNew;
+    }
 
     public ScarabBombEntity(EntityType<? extends ScarabBombEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

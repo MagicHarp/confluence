@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +27,11 @@ public class BaseBombEntity extends ThrowableItemProjectile {
     protected float blastPower = 3f;
     protected float bounceFactor = 0.2f;
     protected float frictionFactor = 0.9f;
+
+    public BaseBombEntity(EntityType<? extends BaseBombEntity> pEntityType, Player player, Level pLevel) {
+        super(pEntityType, player, pLevel);
+        setNoGravity(true);
+    }
 
     public BaseBombEntity(EntityType<? extends BaseBombEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

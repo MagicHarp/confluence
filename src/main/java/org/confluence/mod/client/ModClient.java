@@ -21,6 +21,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.connected.ModConnectives;
 import org.confluence.mod.client.model.entity.*;
+import org.confluence.mod.client.model.entity.bomb.*;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.BloodyFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.GlowingFishingHookModel;
@@ -32,6 +33,7 @@ import org.confluence.mod.client.particle.*;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
+import org.confluence.mod.client.renderer.entity.Bombs.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
@@ -145,6 +147,9 @@ public final class ModClient {
         event.registerLayerDefinition(IceBladeSwordProjectileModel.LAYER_LOCATION, IceBladeSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ThrowingKnivesProjectileModel.LAYER_LOCATION, ThrowingKnivesProjectileModel::createBodyLayer);
         event.registerLayerDefinition(BombEntityModel.LAYER_LOCATION, BombEntityModel::createBodyLayer);
+        event.registerLayerDefinition(BouncyBombEntityModel.LAYER_LOCATION, BouncyBombEntityModel::createBodyLayer);
+        event.registerLayerDefinition(ScarabBombEntityModel.LAYER_LOCATION, ScarabBombEntityModel::createBodyLayer);
+        event.registerLayerDefinition(StickyBombEntityModel.LAYER_LOCATION, StickyBombEntityModel::createBodyLayer);
         event.registerLayerDefinition(ShurikenProjectileModel.LAYER_LOCATION, ShurikenProjectileModel::createBodyLayer);
         event.registerLayerDefinition(StepStoolModel.LAYER_LOCATION, StepStoolModel::createBodyLayer);
 
@@ -212,6 +217,9 @@ public final class ModClient {
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
         event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
         event.registerEntityRenderer(BOMB_ENTITY.get(),BombEntityRenderer::new);
+        event.registerEntityRenderer(BOUNCY_BOMB_ENTITY.get(), BouncyBombEntityRenderer::new);
+        event.registerEntityRenderer(SCARAB_BOMB_ENTITY.get(), ScarabBombEntityRenderer::new);
+        event.registerEntityRenderer(STICKY_BOMB_ENTITY.get(), StickyBombEntityRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);

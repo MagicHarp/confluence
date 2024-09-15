@@ -1,4 +1,4 @@
-package org.confluence.mod.client.model.entity;
+package org.confluence.mod.client.model.entity.bomb;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
+import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
 
-public class BombEntityModel extends EntityModel<BaseBombEntity> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("bomb_entity"), "main");
+public class ScarabBombEntityModel extends EntityModel<ScarabBombEntity> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("scarab_bomb_entity"), "main");
     private final ModelPart root;
 
-    public BombEntityModel(ModelPart root) {
+    public ScarabBombEntityModel(ModelPart root) {
         this.root = root;
     }
 
@@ -29,8 +29,9 @@ public class BombEntityModel extends EntityModel<BaseBombEntity> {
 
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
+
     @Override
-    public void setupAnim(BaseBombEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(ScarabBombEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
