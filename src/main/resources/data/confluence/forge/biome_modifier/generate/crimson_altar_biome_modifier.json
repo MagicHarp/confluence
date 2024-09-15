@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "biomes": "confluence:tr_crimson",
+    "features": "confluence:crimson_altar",
+    "step": "vegetal_decoration"
+}
