@@ -1937,8 +1937,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.ZONGZI.get(), "粽子");
         add(Foods.CRUDE_CLOUD_BREAD.get(), "粗制云朵面包");
         add(Foods.CLOUD_BREAD.get(), "云朵面包");
-        add(Foods.MOON_CAKES.get(), "月饼");
-        add(Foods.MOONCAKE_CHUNKS.get(), "小块月饼");
+        add(Foods.HONEY_MOONCAKES.get(), "蜂蜜月饼");
+        add(Foods.HONEY_MOONCAKES_CHUNKS.get(), "小块蜂蜜月饼");
+        add(Foods.EGG_YOLK_MOONCAKES.get(), "蛋黄月饼");
+        add(Foods.EGG_YOLK_MOONCAKES_CHUNKS.get(), "小块蛋黄月饼");
         // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");
@@ -1955,8 +1957,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.THORNS_POTION.get(), "荆棘药水");
         add(TerraPotions.MAGIC_POWER_POTION.get(), "魔能药水");
         add(TerraPotions.OBSIDIAN_SKIN_POTION.get(), "黑曜石皮肤药水");
-        add(TerraPotions.LUCK_POTION.get(), "异域幸运药水");
         add(TerraPotions.LESSER_LUCK_POTION.get(), "异域弱效幸运药水");
+        add(TerraPotions.LUCK_POTION.get(), "异域幸运药水");
         add(TerraPotions.GREATER_LUCK_POTION.get(), "异域强效幸运药水");
         add(TerraPotions.LOVE_POTION.get(), "爱情药水");
         add(TerraPotions.SWIFTNESS_POTION.get(), "迅捷药水");
