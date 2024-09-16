@@ -6,11 +6,12 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.datagen.limit.Image24x;
+import org.confluence.mod.datagen.limit.ReversalImage16x;
 import org.confluence.mod.entity.projectile.IceBladeSwordProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.misc.ModSoundEvents;
 
-public class IceBladeSwordItem extends SwordItem implements ISwordProjectile, CustomItemModel {
+public class IceBladeSwordItem extends SwordItem implements ISwordProjectile, ReversalImage16x {
     public IceBladeSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }

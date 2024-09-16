@@ -9,7 +9,7 @@ import org.confluence.mod.entity.projectile.EnchantedSwordProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.misc.ModSoundEvents;
 
-public class EnchantedSwordItem extends SwordItem implements ISwordProjectile, CustomItemModel {
+public class EnchantedSwordItem extends SwordItem implements ISwordProjectile {
     public EnchantedSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }

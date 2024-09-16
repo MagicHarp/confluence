@@ -1998,6 +1998,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.ICHOR.get(), "灵液");
         add(ModEffects.POTION_SICKNESS.get(), "耐药性");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
+        add(ModEffects.BLOOD_BUTCHERED.get(), "血腥屠宰");
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
         // 雕像
