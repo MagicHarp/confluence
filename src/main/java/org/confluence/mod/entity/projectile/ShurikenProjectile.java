@@ -15,6 +15,9 @@ import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ShurikenProjectile extends ThrowableProjectile {
+    int penetrate = 0;
+    final int maxPenetrate = 3;
+
     public ShurikenProjectile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -34,10 +37,14 @@ public class ShurikenProjectile extends ThrowableProjectile {
         Entity entity = pResult.getEntity();
         if (entity.hurt(damageSources().mobProjectile(this, (LivingEntity) getOwner()), 5.2F)) {
             ModUtils.knockBackA2B(this, entity, 0.5, 0.2);
-            if (random.nextBoolean()) {
-                ModUtils.createItemEntity(new ItemStack(ModItems.SHURIKEN.get()), getX(), getY(), getZ(), level(), 0);
+            if (penetrate == maxPenetrate){
+                if (random.nextBoolean()) {
+                    ModUtils.createItemEntity(new ItemStack(ModItems.SHURIKEN.get()), getX(), getY(), getZ(), level(), 0);
+                }
+                discard();
+            } else {
+                penetrate++;
             }
-            discard();
         }
     }
 

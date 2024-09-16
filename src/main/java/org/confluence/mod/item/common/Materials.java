@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import static org.confluence.mod.misc.ModRarity.*;
 
 public enum Materials implements EnumRegister<Item> {
-    GEL("gel", () -> new ColoredItem(WHITE)),
+    GEL("gel", () -> new GelItem(WHITE)),
     PINK_GEL("pink_gel", () -> new BaseItem(PINK)),
 
     RAW_TIN("raw_tin", () -> new BaseItem(WHITE)),
