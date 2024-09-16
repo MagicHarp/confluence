@@ -11,6 +11,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "confluence:starfury",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
           "name": "confluence:shiny_red_balloon",
           "weight": 1
         },
