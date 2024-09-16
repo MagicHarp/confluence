@@ -189,7 +189,7 @@ public final class ModClient {
             AchievementToast.registerToast("kill_the_sun");
             AchievementToast.registerToast("do_you_want_to_slay_a_snowman");
             AchievementToast.registerToast("tin_foil_hatter");
-            AchievementToast.registerToast("baleful_harvest ");
+            AchievementToast.registerToast("baleful_harvest");
             AchievementToast.registerToast("ice_scream");
 
             AchievementToast.registerToast("vehicular_manslaughter");
