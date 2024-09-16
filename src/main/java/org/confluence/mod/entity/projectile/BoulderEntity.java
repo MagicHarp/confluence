@@ -35,19 +35,15 @@ public class BoulderEntity extends Projectile {
     public static final double SPEED = 0.7;
     public static final float DIAMETER = 1.0F;
     public static final float SEARCH_RANGE = 31.5F;
-    public float rotateO;
-    public float rotate;
+    public float rotateO = 0.0F;
+    public float rotate = 0.0F;
 
     public BoulderEntity(EntityType<BoulderEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.rotateO = 0.0F;
-        this.rotate = 0.0F;
     }
 
     public BoulderEntity(Level level, Vec3 pos) {
         super(ModEntities.BOULDER.get(), level);
-        this.rotateO = 0.0F;
-        this.rotate = 0.0F;
         setPos(pos);
     }
 
@@ -79,7 +75,7 @@ public class BoulderEntity extends Projectile {
         double r = 2.0 * s / DIAMETER;
         if (rotate > Mth.TWO_PI) this.rotate -= Mth.TWO_PI;
         this.rotateO = rotate;
-        this.rotate += r;
+        this.rotate += (float) r;
 
         Vec3 start = position();
         Vec3 end = start.add(delta);

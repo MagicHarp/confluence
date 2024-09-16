@@ -32,8 +32,7 @@ public class BoulderRenderer extends EntityRenderer<BoulderEntity> {
         pPoseStack.pushPose();
         pPoseStack.translate(0.0, 0.5, 0.0);
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.getYRot() - 90.0F));
-        float rotate = -Mth.lerp(pPartialTick, pEntity.rotateO, pEntity.rotate);
-        pPoseStack.mulPose(Axis.ZP.rotation(rotate));
+        pPoseStack.mulPose(Axis.ZP.rotation(-Mth.lerp(pPartialTick, pEntity.rotateO, pEntity.rotate)));
         model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(TEXTURE)), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pPoseStack.popPose();
     }

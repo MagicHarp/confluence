@@ -1,19 +1,7 @@
 {
 	"variants": {
-		"facing=north": {
+		"": {
 			"model": "confluence:block/dungeon_pots"
-		},
-		"facing=east": {
-			"model": "confluence:block/dungeon_pots",
-			"y": 90
-		},
-		"facing=south": {
-			"model": "confluence:block/dungeon_pots",
-			"y": 180
-		},
-		"facing=west": {
-			"model": "confluence:block/dungeon_pots",
-			"y": 270
 		}
 	}
 }

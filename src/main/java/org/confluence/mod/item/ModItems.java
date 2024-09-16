@@ -3,17 +3,23 @@ package org.confluence.mod.item;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.capability.mana.ManaStorage;
+import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
+import org.confluence.mod.entity.projectile.bombs.BouncyBombEntity;
+import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
+import org.confluence.mod.entity.projectile.bombs.StickyBombEntity;
 import org.confluence.mod.fluid.ModFluids;
-import org.confluence.mod.item.armor.*;
-import org.confluence.mod.item.axe.*;
-import org.confluence.mod.item.bow.*;
+import org.confluence.mod.item.armor.Armors;
+import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bomb.BombItem;
+import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.*;
-import org.confluence.mod.item.bomb.*;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.curio.cosmetic.BaseCosmeticItem;
 import org.confluence.mod.item.curio.cosmetic.GoldCrown;
@@ -76,10 +82,10 @@ public final class ModItems {
     public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new);
     public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new); // todo 荧光棒
     public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new); // todo 粘性荧光棒
-    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", Bomb::new); // todo 炸弹
-    public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", BombBouncy::new); // todo 弹力炸弹
-    public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", BombSticky::new); // todo 粘性炸弹
-    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", BombScarab::new); // todo 甲虫炸弹
+    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", () -> new BombItem(BaseBombEntity::new)); // todo 炸弹
+    public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", () -> new BombItem(BouncyBombEntity::new)); // todo 弹力炸弹
+    public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", () -> new BombItem(StickyBombEntity::new)); // todo 粘性炸弹
+    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", () -> new BombItem(ScarabBombEntity::new)); // todo 甲虫炸弹
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSoundEvents.ALPHA, 12060));
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));

@@ -49,7 +49,7 @@ import java.util.Optional;
 import static net.minecraft.world.level.block.Block.box;
 import static org.confluence.mod.item.potion.TerraPotions.*;
 
-public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
+public enum Pots implements EnumRegister<Pots.BasePotsBlock> { // todo 正式发布前把pots改为pot
     FOREST_POTS("forest_pots", 1.0F, 0.002F),
     TUNDRA_POTS("tundra_pots", 1.25F, 0.002167F),
     OCEAN_POTS("ocean_pots", 1.25F, 0.002167F),
@@ -93,21 +93,19 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
             this.voxelShape = voxelShape;
             this.moneyRatio = moneyRatio;
             this.moneyHoleChance = moneyHoleChance;
-            registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+            registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false));
         }
 
         @Override
         protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-            builder.add(FACING).add(WATERLOGGED);
+            builder.add(WATERLOGGED);
         }
 
         @Override
         @Nullable
         public BlockState getStateForPlacement(BlockPlaceContext placeContext) {
             FluidState fluidstate = placeContext.getLevel().getFluidState(placeContext.getClickedPos());
-            return defaultBlockState()
-                .setValue(FACING, placeContext.getHorizontalDirection().getOpposite())
-                .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+            return defaultBlockState().setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
         }
 
         @Override
@@ -148,11 +146,6 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> {
         public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
             dropSequence(pLevel, pPos);
         }
-
-//        @Override
-//        public boolean canSurvive(@NotNull BlockState pState, LevelReader pLevel, BlockPos pPos) {
-//            return pLevel.getBlockState(pPos.below()).is(ModTags.Blocks.POTS_SURVIVE);
-//        }
 
         @Override
         public void onProjectileHit(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockHitResult pHit, @NotNull Projectile pProjectile) {

@@ -21,7 +21,10 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.color.IntegerRGB;
 import org.confluence.mod.client.connected.ModConnectives;
 import org.confluence.mod.client.model.entity.*;
-import org.confluence.mod.client.model.entity.bomb.*;
+import org.confluence.mod.client.model.entity.bomb.BaseBombEntityModel;
+import org.confluence.mod.client.model.entity.bomb.BouncyBombEntityModel;
+import org.confluence.mod.client.model.entity.bomb.ScarabBombEntityModel;
+import org.confluence.mod.client.model.entity.bomb.StickyBombEntityModel;
 import org.confluence.mod.client.model.entity.fishing.BaseFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.BloodyFishingHookModel;
 import org.confluence.mod.client.model.entity.fishing.GlowingFishingHookModel;
@@ -33,7 +36,10 @@ import org.confluence.mod.client.particle.*;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
-import org.confluence.mod.client.renderer.entity.Bombs.*;
+import org.confluence.mod.client.renderer.entity.bomb.BaseBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.BouncyBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.ScarabBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.StickyBombEntityRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
@@ -92,13 +98,13 @@ public final class ModClient {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY.flowingFluid().get(), RenderType.translucent());
 
             ItemProperties.register(CurioItems.SPECTRE_GOGGLES.get(), Confluence.asResource("enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(CurioItems.MECHANICAL_LENS.get(), Confluence.asResource("enable"), (itemStack, level, living, speed) ->
-                itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
+                    itemStack.getTag() != null && itemStack.getTag().getBoolean("enable") ? 1.0F : 0.0F);
             ItemProperties.register(ModBlocks.BASE_CHEST_BLOCK.get().asItem(), Confluence.asResource("variant"), (itemStack, level, living, speed) ->
-                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             ItemProperties.register(ModBlocks.DEATH_CHEST_BLOCK.get().asItem(), Confluence.asResource("variant"), (itemStack, level, living, speed) ->
-                itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
+                    itemStack.getTag() == null ? 0 : itemStack.getTag().getInt("VariantId"));
             FishingPoles.registerCast();
             Bows.registerProperties();
 
@@ -258,7 +264,7 @@ public final class ModClient {
         event.registerLayerDefinition(EnchantedSwordProjectileModel.LAYER_LOCATION, EnchantedSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(IceBladeSwordProjectileModel.LAYER_LOCATION, IceBladeSwordProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ThrowingKnivesProjectileModel.LAYER_LOCATION, ThrowingKnivesProjectileModel::createBodyLayer);
-        event.registerLayerDefinition(BombEntityModel.LAYER_LOCATION, BombEntityModel::createBodyLayer);
+        event.registerLayerDefinition(BaseBombEntityModel.LAYER_LOCATION, BaseBombEntityModel::createBodyLayer);
         event.registerLayerDefinition(BouncyBombEntityModel.LAYER_LOCATION, BouncyBombEntityModel::createBodyLayer);
         event.registerLayerDefinition(ScarabBombEntityModel.LAYER_LOCATION, ScarabBombEntityModel::createBodyLayer);
         event.registerLayerDefinition(StickyBombEntityModel.LAYER_LOCATION, StickyBombEntityModel::createBodyLayer);
@@ -328,7 +334,7 @@ public final class ModClient {
         event.registerEntityRenderer(THROW_KNIVES_PROJECTILE.get(), ThrowingKnivesProjectileRenderer::new);
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
         event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
-        event.registerEntityRenderer(BOMB_ENTITY.get(),BombEntityRenderer::new);
+        event.registerEntityRenderer(BOMB_ENTITY.get(), BaseBombEntityRenderer::new);
         event.registerEntityRenderer(BOUNCY_BOMB_ENTITY.get(), BouncyBombEntityRenderer::new);
         event.registerEntityRenderer(SCARAB_BOMB_ENTITY.get(), ScarabBombEntityRenderer::new);
         event.registerEntityRenderer(STICKY_BOMB_ENTITY.get(), StickyBombEntityRenderer::new);

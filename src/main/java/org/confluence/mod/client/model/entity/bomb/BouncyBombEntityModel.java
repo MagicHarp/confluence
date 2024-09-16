@@ -21,19 +21,15 @@ public class BouncyBombEntityModel extends EntityModel<BouncyBombEntity> {
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
-
-        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, 0.0F, -4.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F))
-            .texOffs(0, 12).addBox(-1.5F, 6.0F, -2.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
-            .texOffs(2, 0).addBox(-0.5F, 7.0F, -1.0F, 1.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
-            .texOffs(0, 0).addBox(0.0F, 7.0F, -1.5F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-
+        partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, 0.0F, -4.0F, 6.0F, 6.0F, 6.0F, CubeDeformation.NONE)
+                .texOffs(0, 12).addBox(-1.5F, 6.0F, -2.5F, 3.0F, 1.0F, 3.0F, CubeDeformation.NONE)
+                .texOffs(2, 0).addBox(-0.5F, 7.0F, -1.0F, 1.0F, 2.0F, 0.0F, CubeDeformation.NONE)
+                .texOffs(0, 0).addBox(0.0F, 7.0F, -1.5F, 0.0F, 2.0F, 1.0F, CubeDeformation.NONE), PartPose.ZERO);
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
     @Override
-    public void setupAnim(BouncyBombEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-    }
+    public void setupAnim(BouncyBombEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
