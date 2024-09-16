@@ -126,9 +126,7 @@ public enum Foods implements EnumRegister<Item> {
     HONEY_MOONCAKES("honey_mooncakes", () -> new FireproofFoodItem(FoodType.MEDIUM)),
     HONEY_MOONCAKES_CHUNKS("honey_mooncakes_chunks", () -> new FireproofFoodItem(FoodType.MOONCAKES)),
     EGG_YOLK_MOONCAKES("egg_yolk_mooncakes", () -> new FireproofFoodItem(FoodType.MEDIUM)),
-
     EGG_YOLK_MOONCAKES_CHUNKS("egg_yolk_mooncakes_chunks", () -> new FireproofFoodItem(FoodType.MEDIUM)),
-
     ;
     private final RegistryObject<Item> value;
 
