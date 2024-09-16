@@ -8,7 +8,6 @@
         "client.ClientLivingEntityMixin",
         "client.ClientPacketListenerMixin",
         "client.ClientPlayerMixin",
-        "client.ConnectionMixin",
         "client.CustomHeadLayerMixin",
         "client.EntityModelSetMixin",
         "client.EntityRenderDispatcherMixin",
