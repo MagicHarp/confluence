@@ -335,7 +335,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.hunao.author", "BiliBili_小胡闹鸭");
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
-
+        add("painting.confluence.old_sheep.title", "OLD_SHEEP");
+        add("painting.confluence.old_sheep.author", "BiliBili_我叫老绵羊");
+        add("painting.confluence.slime_dragon.title", "SLIME_DRAGON");
+        add("painting.confluence.slime_dragon.author", "BiliBili_小史龙吖Slime_Dragon");
+        add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
+        add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
         // old
         add("advancements.falling_star.title", "寻觅坠落之光");
         add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
@@ -1231,6 +1236,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(DEMON_CONCH.get(), "恶魔海螺");
         add(SKY_MILL.get(), "天磨");
         add(WORKSHOP.get(), "工匠作坊");
+        add(BOMB_FISH.get(), "炸弹鱼");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
@@ -1938,8 +1944,10 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.ZONGZI.get(), "粽子");
         add(Foods.CRUDE_CLOUD_BREAD.get(), "粗制云朵面包");
         add(Foods.CLOUD_BREAD.get(), "云朵面包");
-        add(Foods.MOON_CAKES.get(), "月饼");
-        add(Foods.MOONCAKE_CHUNKS.get(), "小块月饼");
+        add(Foods.HONEY_MOONCAKES.get(), "蜂蜜月饼");
+        add(Foods.HONEY_MOONCAKES_CHUNKS.get(), "小块蜂蜜月饼");
+        add(Foods.EGG_YOLK_MOONCAKES.get(), "蛋黄月饼");
+        add(Foods.EGG_YOLK_MOONCAKES_CHUNKS.get(), "小块蛋黄月饼");
         // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");
@@ -1956,8 +1964,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.THORNS_POTION.get(), "荆棘药水");
         add(TerraPotions.MAGIC_POWER_POTION.get(), "魔能药水");
         add(TerraPotions.OBSIDIAN_SKIN_POTION.get(), "黑曜石皮肤药水");
-        add(TerraPotions.LUCK_POTION.get(), "异域幸运药水");
         add(TerraPotions.LESSER_LUCK_POTION.get(), "异域弱效幸运药水");
+        add(TerraPotions.LUCK_POTION.get(), "异域幸运药水");
         add(TerraPotions.GREATER_LUCK_POTION.get(), "异域强效幸运药水");
         add(TerraPotions.LOVE_POTION.get(), "爱情药水");
         add(TerraPotions.SWIFTNESS_POTION.get(), "迅捷药水");
@@ -1997,6 +2005,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.ICHOR.get(), "灵液");
         add(ModEffects.POTION_SICKNESS.get(), "耐药性");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
+        add(ModEffects.BLOOD_BUTCHERED.get(), "血腥屠宰");
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
         // 雕像

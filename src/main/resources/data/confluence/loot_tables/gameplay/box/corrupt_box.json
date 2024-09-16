@@ -7,7 +7,12 @@
         {
           "type": "minecraft:item",
           "name": "confluence:band_of_starpower",
-          "weight": 5
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:musket",
+          "weight": 1
         }
       ],
       "rolls": 1

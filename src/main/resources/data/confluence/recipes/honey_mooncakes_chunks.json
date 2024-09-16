@@ -5,11 +5,11 @@
     ],
     "key": {
         "#": {
-            "item": "confluence:moon_cakes"
+            "item": "confluence:honey_mooncakes"
         }
     },
     "result": {
-        "item": "confluence:mooncake_chunks",
+        "item": "confluence:honey_mooncakes_chunks",
         "count": 3
     }
 }

@@ -82,10 +82,11 @@ public final class ModItems {
     public static final RegistryObject<ThrowingKnivesItem> THROWING_KNIVES = ITEMS.register("throwing_knives", ThrowingKnivesItem::new);
     public static final RegistryObject<Item> GLOW_STICK = ITEMS.register("glow_stick", BaseItem::new); // todo 荧光棒
     public static final RegistryObject<Item> STICKY_GLOW_STICK = ITEMS.register("sticky_glow_stick", BaseItem::new); // todo 粘性荧光棒
-    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", () -> new BombItem(BaseBombEntity::new)); // todo 炸弹
-    public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", () -> new BombItem(BouncyBombEntity::new)); // todo 弹力炸弹
-    public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", () -> new BombItem(StickyBombEntity::new)); // todo 粘性炸弹
-    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", () -> new BombItem(ScarabBombEntity::new)); // todo 甲虫炸弹
+    public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", () -> new BombItem(BaseBombEntity::new));
+    public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", () -> new BombItem(BouncyBombEntity::new));
+    public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", () -> new BombItem(StickyBombEntity::new));
+    public static final RegistryObject<Item> BOMB_FISH = ITEMS.register("bomb_fish", () -> new BombItem(StickyBombEntity::new)); // todo 炸弹鱼
+    public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", () -> new BombItem(ScarabBombEntity::new));
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSoundEvents.ALPHA, 12060));
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
     public static final RegistryObject<ManaStorageItem> ARCANE_CRYSTAL = ITEMS.register("arcane_crystal", () -> new ManaStorageItem(ManaStorage::isArcaneCrystalUsed, ManaStorage::setArcaneCrystalUsed));

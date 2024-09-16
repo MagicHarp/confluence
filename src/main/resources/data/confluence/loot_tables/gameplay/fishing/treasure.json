@@ -108,6 +108,36 @@
                 {
                   "condition": "minecraft:location_check",
                   "predicate": {
+                    "biome": "minecraft:badlands"
+                  }
+                },
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biome": "minecraft:desert"
+                  }
+                },
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "biome": "minecraft:wooded_badlands"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "confluence:clam",
+          "weight": 134
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:any_of",
+              "terms": [
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
                     "biome": "confluence:the_hallow"
                   }
                 }
@@ -212,6 +242,21 @@
         {
           "type": "minecraft:item",
           "name": "confluence:balloon_pufferfish",
+          "weight":134
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:bomb_fish",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 7
+              }
+            }
+          ],
           "weight":67
         },
         {

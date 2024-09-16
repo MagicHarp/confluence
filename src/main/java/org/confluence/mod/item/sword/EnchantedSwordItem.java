@@ -4,6 +4,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import org.confluence.mod.datagen.limit.CustomItemModel;
 import org.confluence.mod.entity.projectile.EnchantedSwordProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.misc.ModSoundEvents;

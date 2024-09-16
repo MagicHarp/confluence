@@ -136,6 +136,7 @@ public final class ModClient {
             AchievementToast.registerToast("infinity_1_sword");
             AchievementToast.registerToast("black_mirror");
             AchievementToast.registerToast("ankhumulation_complete");
+
             // Explorer
             AchievementToast.registerToast("new_world");
             AchievementToast.registerToast("you_can_do_it");
