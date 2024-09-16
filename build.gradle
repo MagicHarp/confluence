@@ -122,9 +122,9 @@ dependencies {
     implementation fg.deobf(jarJar("curse.maven:mineteam-1100774:5727734")) {
         jarJar.ranged(it, "[forge-1.20.1-0.0.1,)")
     }
-//    implementation fg.deobf(jarJar("curse.maven:enemybanner-1005952:5556424")){
-//        jarJar.ranged(it, "[forge-1.20.1-0.0.7,)")
-//    }
+    implementation fg.deobf(jarJar("curse.maven:enemybanner-1005952:5556424")){
+        jarJar.ranged(it, "[forge-1.20.1-0.0.7,)")
+    }
 
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.3.0.4")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.3.0.4")
