@@ -1,7 +1,6 @@
 package org.confluence.mod.entity.boss;
 
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -54,6 +53,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         public void tick(KingSlime boss) {
             // 脱战
             List<Player> playersInRange = boss.getNearbyPlayers(100);
+
             if (! boss.shouldDisappear) {
                 // 不要每次都初始化playersInRange2
                 if (playersInRange.isEmpty() && boss.getNearbyPlayers(150).isEmpty()) {
@@ -161,7 +161,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     };
 
     // 变量
-    private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.confluence.king_slime"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
+    private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
     private int indexAI;
     private int difficultyIdx;
     private boolean shouldDisappear;
@@ -202,7 +202,6 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     public List<Player> getNearbyPlayers(double radius) {
         return level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(radius));
     }
-
 
     public static AttributeSupplier.Builder createSlimeAttributes() {
         return Mob.createMobAttributes()
@@ -254,6 +253,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
 
         // 更新boss血条
         bossEvent.setProgress(getHealth() / getMaxHealth());
+        bossEvent.setName(getDisplayName());
         // 不会受到摔落伤害
         resetFallDistance();
         // 落地的粒子效果，十分的高级
@@ -291,7 +291,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     }
     private void spawnSlime(LivingEntity target) {
         if (level() instanceof ServerLevel serverLevel) {
-            BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, COLOR_INT, 3);
+            BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, COLOR_INT, 2);
             slime.setPos(getOnPos().getX(), getOnPos().getY() + 0.5, getOnPos().getZ());
             slime.setTarget(target);
             if (isExpert(serverLevel)) {

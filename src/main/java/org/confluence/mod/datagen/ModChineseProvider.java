@@ -84,6 +84,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.demon_eye", "恶魔眼");
 
         add("entity.confluence.king_slime", "史莱姆王");
+        add("entity.confluence.cthulhu_eye", "克苏鲁之眼");
 
         add("curios.tooltip.speed_boots", "穿戴者可飞速奔跑");
         add("curios.tooltip.may_fly", "可飞行");

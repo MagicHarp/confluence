@@ -315,6 +315,7 @@ public final class ModClient {
         event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
 
         event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
+        event.registerEntityRenderer(CTHULHU_EYE.get(), CthulhuEyeRenderer::new);
         event.registerEntityRenderer(TEST_WORM.get(), TestWormRenderer::new);
         event.registerEntityRenderer(TEST_WORM_PART.get(), TestWormSegmentRenderer::new);
 

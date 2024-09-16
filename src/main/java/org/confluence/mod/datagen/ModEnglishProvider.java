@@ -285,7 +285,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.hunao.title", "HUNAO");
         add("painting.confluence.hunao.author", "BiliBili_小胡闹鸭");
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
-        add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
+        add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412，煮史大神");
 
         // old
         add("advancements.mana_star.title", "Gather the power of the stars");
