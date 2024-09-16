@@ -334,7 +334,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.hunao.author", "BiliBili_小胡闹鸭");
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
-
+        add("painting.confluence.old_sheep.title", "OLD_SHEEP");
+        add("painting.confluence.old_sheep.author", "BiliBili_我叫老绵羊");
+        add("painting.confluence.slime_dragon.title", "SLIME_DRAGON");
+        add("painting.confluence.slime_dragon.author", "BiliBili_小史龙吖Slime_Dragon");
+        add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
+        add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
         // old
         add("advancements.falling_star.title", "寻觅坠落之光");
         add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
@@ -1230,6 +1235,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(DEMON_CONCH.get(), "恶魔海螺");
         add(SKY_MILL.get(), "天磨");
         add(WORKSHOP.get(), "工匠作坊");
+        add(BOMB_FISH.get(), "炸弹鱼");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");

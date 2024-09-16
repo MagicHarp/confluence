@@ -286,6 +286,12 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.hunao.author", "BiliBili_小胡闹鸭");
         add("painting.confluence.sihuai_2412.title", "SIHUAI_2412");
         add("painting.confluence.sihuai_2412.author", "BiliBili_思怀_2412");
+        add("painting.confluence.old_sheep.title", "OLD_SHEEP");
+        add("painting.confluence.old_sheep.author", "BiliBili_我叫老绵羊");
+        add("painting.confluence.slime_dragon.title", "SLIME_DRAGON");
+        add("painting.confluence.slime_dragon.author", "BiliBili_小史龙吖Slime_Dragon");
+        add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
+        add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
 
         // old
         add("advancements.mana_star.title", "Gather the power of the stars");
