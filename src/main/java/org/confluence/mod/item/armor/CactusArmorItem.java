@@ -27,8 +27,9 @@ public class CactusArmorItem extends ArmorItem implements NormalGeoItem {
         super(new ArmorMaterial() {
             @Override
             public int getDurabilityForType(@NotNull Type armorType) {
+                //todo临时开发者套
                 return switch (armorType) {
-                    case HELMET -> 120;
+                    case HELMET -> 120    *   100;
                     case CHESTPLATE -> 170;
                     case LEGGINGS -> 150;
                     case BOOTS -> 130;
@@ -37,9 +38,10 @@ public class CactusArmorItem extends ArmorItem implements NormalGeoItem {
 
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
+                //todo临时开发者套
                 return switch (armorType) {
-                    default -> 1;
-                    case CHESTPLATE, LEGGINGS -> 2;
+                    default -> 1   *  10;
+                    case CHESTPLATE, LEGGINGS -> 2   *   10;
                 };
             }
 

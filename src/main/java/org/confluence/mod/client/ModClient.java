@@ -46,6 +46,8 @@ import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRende
 import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.*;
+import org.confluence.mod.entity.boss.geoRenderer.KingSkullHandRenderer;
+import org.confluence.mod.entity.boss.geoRenderer.KingSkullRenderer;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.ColoredItem;
@@ -314,6 +316,9 @@ public final class ModClient {
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
         event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
+        event.registerEntityRenderer(KING_SKULL.get(), KingSkullRenderer::new);
+        event.registerEntityRenderer(KING_SKULL_HAND.get(), KingSkullHandRenderer::new);
+
 
         event.registerEntityRenderer(DEMON_EYE.get(), DemonEyeRenderer::new);
         event.registerEntityRenderer(CTHULHU_EYE.get(), CthulhuEyeRenderer::new);

@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.entity.boss.CthulhuEye;
+import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.misc.ModRarity;
 import org.jetbrains.annotations.NotNull;

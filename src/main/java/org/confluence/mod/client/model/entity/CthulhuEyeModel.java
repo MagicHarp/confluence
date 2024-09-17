@@ -2,7 +2,7 @@ package org.confluence.mod.client.model.entity;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.boss.CthulhuEye;
+import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import software.bernie.geckolib.model.GeoModel;
 
 public class CthulhuEyeModel extends GeoModel<CthulhuEye> {

@@ -18,7 +18,8 @@ import java.util.function.Supplier;
 public final class ModTiers {
     public static final ModTier CANDY = new ModTier(2, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
 
-    public static final ModTier CACTUS = new ModTier(0, 144, 3, 1, 4, () -> Ingredient.of(Items.CACTUS));
+    //todo临时开发者套
+    public static final ModTier CACTUS = new ModTier(0, 144, 3, 1      *    100, 4, () -> Ingredient.of(Items.CACTUS));
     public static final ModTier COPPER = new ModTier(1, 250, 4, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ModTier TIN = new ModTier(1, 270, 4, 1, 5, () -> Ingredient.of(Materials.TIN_INGOT.get()));
     public static final ModTier LEAD = new ModTier(2, 286, 6, 2, 14, () -> Ingredient.of(Materials.LEAD_INGOT.get()));

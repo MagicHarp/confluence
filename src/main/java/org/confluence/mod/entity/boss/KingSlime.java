@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
@@ -60,6 +61,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
                     boss.shouldDisappear = true;
                 }
             }
+
             // 更新BOSS大小
             boss.setSize( boss.getMaxSize(), false );
             // 在地面上/液体中

@@ -25,7 +25,7 @@ import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.entity.boss.CthulhuEye;
+import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.npc.ModVillagers;

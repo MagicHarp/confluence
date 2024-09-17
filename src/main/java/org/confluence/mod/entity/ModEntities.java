@@ -2,12 +2,20 @@ package org.confluence.mod.entity;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.boss.CthulhuEye;
+import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
+import org.confluence.mod.entity.boss.geoEntity.KingSkull;
+import org.confluence.mod.entity.boss.geoEntity.KingSkullHand;
 import org.confluence.mod.entity.chair.ChairEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
@@ -27,6 +35,8 @@ import org.confluence.mod.entity.worm.TestWormEntity;
 import org.confluence.mod.entity.worm.TestWormPart;
 
 @SuppressWarnings("unused")
+@Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+
 public final class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Confluence.MODID);
 
@@ -97,8 +107,20 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<StickyBombEntity>> STICKY_BOMB_ENTITY = ENTITIES.register("sticky_bomb_entity", () -> EntityType.Builder.<StickyBombEntity>of(StickyBombEntity::new, MobCategory.MISC).sized(0.375F, 0.375F).clientTrackingRange(4).updateInterval(10).build("confluence:sticky_bomb_entity"));
     public static final RegistryObject<EntityType<StepStoolEntity>> STEP_STOOL = ENTITIES.register("step_stool", () -> EntityType.Builder.<StepStoolEntity>of(StepStoolEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).build("confluence:step_stool"));
 
+    /** BOSS **/
     public static final RegistryObject<EntityType<KingSlime>> KING_SLIME = ENTITIES.register("king_slime", () -> EntityType.Builder.<KingSlime>of(KingSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:king_slime"));
-    public static final RegistryObject<EntityType<CthulhuEye>> CTHULHU_EYE = ENTITIES.register("cthulhu_eye", () -> EntityType.Builder.<CthulhuEye>of(CthulhuEye::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:cthulhu_eye"));
+    public static final RegistryObject<EntityType<CthulhuEye>> CTHULHU_EYE = ENTITIES.register("cthulhu_eye", () -> EntityType.Builder.<CthulhuEye>of(CthulhuEye::new, MobCategory.MONSTER)
+            .sized(2.04F, 2.04F)
+            .clientTrackingRange(10)
+            .setTrackingRange(100)
+            .build("confluence:cthulhu_eye"));
+    public static final RegistryObject<EntityType<KingSkull>> KING_SKULL = ENTITIES.register("king_skull", () -> EntityType.Builder.of(KingSkull::new, MobCategory.MONSTER).sized(2.04F, 2.04F).setTrackingRange(100).clientTrackingRange(10).build("confluence:king_skull"));
+    public static final RegistryObject<EntityType<KingSkullHand>> KING_SKULL_HAND = ENTITIES.register("king_skull_hand", () -> EntityType.Builder.<KingSkullHand>of(KingSkullHand::new, MobCategory.MONSTER)
+            .sized(2.04F, 2.04F)
+            .clientTrackingRange(10)
+            .setTrackingRange(100)
+            .build("confluence:king_skull_hand"));
+
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
         return ENTITIES.register(prefix + "_slime", () -> EntityType.Builder.<BaseSlime>of((entityType, level) -> new BaseSlime(entityType, level, color, size), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:" + prefix + "_slime"));
@@ -106,5 +128,22 @@ public final class ModEntities {
 
     private static <E extends AbstractHookEntity> RegistryObject<EntityType<E>> registerHook(String id, EntityType.EntityFactory<E> supplier) {
         return ENTITIES.register(id, () -> EntityType.Builder.of(supplier, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("confluence:" + id));
+    }
+
+    @SubscribeEvent
+    public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        AttributeSupplier.Builder genericBossAttribs = Monster.createMobAttributes()
+                .add(Attributes.FOLLOW_RANGE, 100)
+                .add(Attributes.MAX_HEALTH, 200)
+                .add(Attributes.MOVEMENT_SPEED, 0.15f)
+                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 10)
+
+
+                .add(Attributes.ATTACK_KNOCKBACK, 1);
+        event.put(ModEntities.KING_SKULL.get(), genericBossAttribs.build());
+        event.put(ModEntities.KING_SKULL_HAND.get(), genericBossAttribs.build());
+        //event.put(ModEntities.CTHULHU_EYE.get(),genericBossAttribs.build());
+
     }
 }
