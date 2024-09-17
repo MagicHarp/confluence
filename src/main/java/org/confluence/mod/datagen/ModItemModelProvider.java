@@ -75,9 +75,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     withExistingParent(path, "item/template_spawn_egg");
                 } else if (value instanceof BaseCurioItem) {
                     withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/curio/" + path));
-                } else if (value instanceof BaseFoodItem) {
-                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/food/" + path));
-                } else if (value instanceof BottleFoodItem) {
+                } else if (value instanceof BaseFoodItem || value instanceof BottleFoodItem) {
                     withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/food/" + path));
                 } else if (value instanceof ReversalImage16x) {
                     withExistingParent(path, "confluence:item/handheld_mirror").texture("layer0", Confluence.asResource("item/" + path));

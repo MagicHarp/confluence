@@ -1942,7 +1942,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.FRUIT_JUICE.get(), "混合果汁");
         add(Foods.SAKE.get(), "清酒");
         add(Foods.ZONGZI.get(), "粽子");
-        add(Foods.CLOUD_DOUGH.get(), "云朵面团");
+        add(Foods.CRUDE_CLOUD_BREAD.get(), "云朵面团");
         add(Foods.CLOUD_BREAD.get(), "云朵面包");
         add(Foods.HONEY_MOONCAKES.get(), "蜂蜜月饼");
         add(Foods.HONEY_MOONCAKES_CHUNKS.get(), "小块蜂蜜月饼");
