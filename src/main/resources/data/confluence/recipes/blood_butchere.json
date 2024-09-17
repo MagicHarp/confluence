@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " c ",
+        " c ",
+        " / "
+    ],
+    "key": {
+        "c": {
+            "item": "minecraft:tr_crimson_ingot"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "confluence:blood_butchere",
+        "count": 1
+    }
+}
