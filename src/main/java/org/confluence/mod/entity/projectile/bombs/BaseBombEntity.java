@@ -94,10 +94,9 @@ public class BaseBombEntity extends ThrowableItemProjectile {
         super.tick();
 
         float s = (float) getDeltaMovement().length();
-        float r = 2.0F * s / DIAMETER;
         if (rotate > Mth.TWO_PI) this.rotate -= Mth.TWO_PI;
         this.rotateO = rotate;
-        this.rotate += r;
+        this.rotate += s*2.0F;
 
         if (!level().isClientSide) {
             if (this.delay-- < 0) {

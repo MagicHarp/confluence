@@ -29,8 +29,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static org.confluence.mod.util.ModUtils.isExpert;
-import static org.confluence.mod.util.ModUtils.isMaster;
+import static org.confluence.mod.util.ModUtils.isAtLeastExpert;
+import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
 public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int COLOR_INT = 0x73bcf4;
@@ -172,7 +172,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     public KingSlime(EntityType<? extends Slime> slime, Level level) {
         super(slime, level);
         this.shouldDisappear = false;
-        this.difficultyIdx = isMaster(level()) ? 0 : isExpert(level()) ? 1 : 2;
+        this.difficultyIdx = switchByDifficulty(level, 0, 1, 2);
         this.indexAI = 0;
         this.AIState = STATE_NORMAL;
 
@@ -294,7 +294,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
             BaseSlime slime = new BaseSlime(ModEntities.BLUE_SLIME.get(), serverLevel, COLOR_INT, 2);
             slime.setPos(getOnPos().getX(), getOnPos().getY() + 0.5, getOnPos().getZ());
             slime.setTarget(target);
-            if (isExpert(serverLevel)) {
+            if (isAtLeastExpert(serverLevel)) {
                 //todo 尖刺史莱姆
                 //尖刺史莱姆，你的头顶怎么尖尖的
             }

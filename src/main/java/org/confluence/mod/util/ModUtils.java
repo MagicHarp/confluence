@@ -223,15 +223,31 @@ public final class ModUtils {
     /**
      * 为专家?在处理if...else if时应先使用isMaster
      */
-    public static boolean isExpert(Level level) {
-        return level.getDifficulty().equals(Difficulty.NORMAL) || level.getDifficulty().equals(Difficulty.HARD);
+    public static boolean isAtLeastExpert(Level level) {
+        return level.getDifficulty().getId() >= Difficulty.NORMAL.getId();
     }
 
     /**
      * 为大师?在处理if...else if时应先使用此方法
      */
     public static boolean isMaster(Level level) {
-        return level.getDifficulty().equals(Difficulty.HARD);
+        return level.getDifficulty() == Difficulty.HARD;
+    }
+
+    /**
+     * 根据游戏难度选择值
+     *
+     * @param classic 经典难度的值
+     * @param expert  专家难度的值
+     * @param master  大师难度的值
+     * @return 选择到的值
+     */
+    public static <T> T switchByDifficulty(Level level, T classic, T expert, T master) {
+        return switch (level.getDifficulty()) {
+            case PEACEFUL, EASY -> classic;
+            case NORMAL -> expert;
+            case HARD -> master;
+        };
     }
 
     /**

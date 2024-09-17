@@ -118,7 +118,7 @@ public class BlackSlime extends Slime implements DeathAnimOptions {
                 playSound(SoundEvents.SLIME_ATTACK, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
                 doEnchantDamageEffects(this, pLivingEntity);
 
-                if (ModUtils.isMaster(level()) || (ModUtils.isExpert(level()) && level().random.nextBoolean())) {
+                if (ModUtils.isMaster(level()) || (ModUtils.isAtLeastExpert(level()) && level().random.nextBoolean())) {
                     pLivingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 300, 0), this);
                 }
             }

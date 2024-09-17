@@ -174,7 +174,7 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
                 doEnchantDamageEffects(this, pLivingEntity);
 
                 if (getType() == ModEntities.ICE_SLIME.get()) {
-                    if (ModUtils.isMaster(level()) || (ModUtils.isExpert(level()) && level().random.nextBoolean())) {
+                    if (ModUtils.isMaster(level()) || (ModUtils.isAtLeastExpert(level()) && level().random.nextBoolean())) {
                         pLivingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), this);
                     }
                 } else if (getType() == ModEntities.LAVA_SLIME.get()) {
@@ -191,7 +191,7 @@ public class BaseSlime extends Slime implements DeathAnimOptions {
             StateDefinition<Block, BlockState> stateDefinition = Blocks.LAVA.getStateDefinition();
             Property<?> levelProperty = stateDefinition.getProperty("level");
             if (levelProperty instanceof IntegerProperty integerProperty) {
-                if (ModUtils.isExpert(level())) {
+                if (ModUtils.isAtLeastExpert(level())) {
                     if (level().getBlockState(BlockPos.containing(this.position())).isAir() || level().getBlockState(BlockPos.containing(position())).canBeReplaced(Fluids.LAVA)) {
                         //todo 未知且非固定出现的渲染bug
                         level().setBlock(BlockPos.containing(position()), Blocks.LAVA.defaultBlockState().setValue(integerProperty, 14), 2);

@@ -3,6 +3,8 @@ package org.confluence.mod.entity.boss;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,7 +15,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +24,9 @@ import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -32,32 +35,75 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-import static org.confluence.mod.util.ModUtils.isExpert;
-import static org.confluence.mod.util.ModUtils.isMaster;
+import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
 public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, GeoEntity {
-    int difficultyIdx;
-
     private static final float[] MAX_HEALTHS = {1346f, 1056f, 812f};
     private static final float[] DAMAGE = {12.5f, 9f, 4.5f};
     private static final float[] CRAZY_DAMAGE = {24f, 16f, 8f};
     private static final float[] CRAZY_PERCENTAGE = {0.65f, 0.5f, 0.5f};
+    private static final State<CthulhuEye> STATE_NORMAL = boss -> {};
+    private static final State<CthulhuEye> STATE_MORNING = boss -> boss.setDeltaMovement(0, 2, 0);
+    private static final State<CthulhuEye> STATE_DASH = new State<>() {
+        @Override
+        public void enter(CthulhuEye boss) {
+            boss.triggerAnim("controller", "type_1_run");
+        }
 
-    public CthulhuEye(EntityType<? extends Monster> entityType, Level level) {
+        @Override
+        public void tick(CthulhuEye boss) {
+            boss.dash();
+            if (boss.level().random.nextDouble() <= 0.075D) {   //todo 史
+                boss.triggerAnim("controller", "type_1");
+                boss.AIState = STATE_NORMAL;
+                boss.toState(STATE_NORMAL);
+            }
+        }
+    };
+    private static final State<CthulhuEye> STATE_CRAZY_DASH = new State<>() {
+        @Override
+        public void tick(CthulhuEye boss) {
+            boss.dash();
+            if (boss.level().random.nextDouble() <= 0.065D) {
+                boss.triggerAnim("controller", "type_2");
+                boss.AIState = STATE_CRAZY;
+                boss.toState(STATE_CRAZY);
+            }
+        }
+
+        @Override
+        public void enter(CthulhuEye boss) {
+            boss.triggerAnim("controller", "type_2_run");
+        }
+    };
+    private static final State<CthulhuEye> STATE_CRAZY = new State<>() {
+        @Override
+        public void tick(CthulhuEye boss) {}
+    };
+
+    private final int difficultyIdx;
+    private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_12);
+    private final AnimatableInstanceCache CACHE = GeckoLibUtil.createInstanceCache(this);
+    private State<CthulhuEye> AIState;
+
+    public CthulhuEye(EntityType<CthulhuEye> entityType, Level level) {
         super(entityType, level);
-        this.difficultyIdx = isMaster(level()) ? 0 : isExpert(level()) ? 1 : 2;
-        attrInit(this.getNearbyPlayers(100.0D));
+        this.difficultyIdx = switchByDifficulty(level, 0, 1, 2);
+        attrInit(getNearbyPlayers(100.0D));
         this.AIState = STATE_NORMAL;
         toState(STATE_NORMAL);
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
     @Override
     public void tick() {
         super.tick();
-
         bossEvent.setProgress(getHealth() / getMaxHealth());
-        bossEvent.setName(getDisplayName());
+    }
 
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
         if (level().getDayTime() <= 12000 && level().getDayTime() >= 0) {
             this.AIState = STATE_MORNING;
             toState(STATE_MORNING);
@@ -138,51 +184,6 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
         bossEvent.removePlayer(pServerPlayer);
     }
 
-    private static final State<CthulhuEye> STATE_NORMAL = new State<>() {
-        @Override
-        public void tick(CthulhuEye boss) {}
-    };
-
-    private static final State<CthulhuEye> STATE_MORNING = new State<>() {
-        @Override
-        public void tick(CthulhuEye boss) {
-            boss.setDeltaMovement(0, 2, 0);
-        }
-    };
-
-    private static final State<CthulhuEye> STATE_DASH = new State<>() {
-        @Override
-        public void tick(CthulhuEye boss) {
-            boss.triggerAnim("controller", "type_1_run");
-            boss.dash();
-            if (boss.level().random.nextDouble() <= 0.075D) {   //todo 史
-                boss.triggerAnim("controller", "type_1");
-                boss.AIState = STATE_NORMAL;
-                boss.toState(STATE_NORMAL);
-            }
-        }
-    };
-
-    private static final State<CthulhuEye> STATE_CRAZY_DASH = new State<>() {
-        @Override
-        public void tick(CthulhuEye boss) {
-            boss.triggerAnim("controller", "type_2_run");
-            boss.dash();
-            if (boss.level().random.nextDouble() <= 0.065D) {
-                boss.triggerAnim("controller", "type_2");
-                boss.AIState = STATE_CRAZY;
-                boss.toState(STATE_CRAZY);
-            }
-        }
-    };
-
-    private static final State<CthulhuEye> STATE_CRAZY = new State<>() {
-        @Override
-        public void tick(CthulhuEye boss) {}
-    };
-
-    private State<CthulhuEye> AIState;
-    private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_12);
 
     private void dash() {
         if (getTarget() != null) {
@@ -219,11 +220,6 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
         entity.setDeltaMovement(newMovement);
     }
 
-    /**
-     * 转到新的state
-     *
-     * @param newState
-     */
     @Override
     public void toState(State newState) {
         if (newState == this.AIState)
@@ -235,7 +231,7 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
 
     @Override
     public void AI() {
-        if (!level().isClientSide()) {
+        if (!level().isClientSide) {
             this.AIState.tick(this);
         }
     }
@@ -252,17 +248,31 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return GeckoLibUtil.createInstanceCache(this);
+        return CACHE;
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", state ->
-                state.setAndContinue(RawAnimation.begin().thenLoop("type_1")))
+        controllers.add(new AnimationController<>(this, "controller", state -> state
+                .setAndContinue(RawAnimation.begin().thenLoop("type_1")))
                 .triggerableAnim("type_2", RawAnimation.begin().thenLoop("type_2"))
                 .triggerableAnim("switching", RawAnimation.begin().thenPlay("switching"))
                 .triggerableAnim("type_1_run", RawAnimation.begin().thenLoop("type_1_run"))
                 .triggerableAnim("type_2_run", RawAnimation.begin().thenLoop("type_2_run"))
         );
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        if (hasCustomName()) {
+            bossEvent.setName(getDisplayName());
+        }
+    }
+
+    @Override
+    public void setCustomName(@Nullable Component pName) {
+        super.setCustomName(pName);
+        bossEvent.setName(getDisplayName());
     }
 }
