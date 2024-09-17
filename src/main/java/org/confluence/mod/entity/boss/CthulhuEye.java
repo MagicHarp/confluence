@@ -58,7 +58,7 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
         bossEvent.setProgress(getHealth() / getMaxHealth());
         bossEvent.setName(getDisplayName());
 
-        if (level().getDayTime() <= 12000 && level().getDayTime() >= 0){
+        if (level().getDayTime() <= 12000 && level().getDayTime() >= 0) {
             this.AIState = STATE_MORNING;
             toState(STATE_MORNING);
             return;
@@ -68,12 +68,12 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
             AI();
         }
 
-        if (AIState.equals(STATE_NORMAL)){
-            if (getHealth() <= CRAZY_PERCENTAGE[difficultyIdx] * getMaxHealth()){
+        if (AIState.equals(STATE_NORMAL)) {
+            if (getHealth() <= CRAZY_PERCENTAGE[difficultyIdx] * getMaxHealth()) {
                 triggerAnim("controller", "switching");
                 getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
-                for (int i = 0; i < 20; i++){
-                    if (level() instanceof ServerLevel level){
+                for (int i = 0; i < 20; i++) {
+                    if (level() instanceof ServerLevel level) {
                         BlockPos pos = BlockPos.containing(position());
                         level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.TR_CRIMSON_STONE.get().defaultBlockState()),
                                 pos.getX() + 0.5F,
@@ -91,7 +91,7 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
                 this.AIState = STATE_DASH;
                 toState(STATE_DASH);
             }
-        } else if (AIState.equals(STATE_CRAZY)){
+        } else if (AIState.equals(STATE_CRAZY)) {
             triggerAnim("controller", "type_2");
             if (level().random.nextDouble() <= mapValue(getHealth(), 0, CRAZY_PERCENTAGE[difficultyIdx] * getMaxHealth(),
                     0.00714285D, 0.016666666D)) {
@@ -116,14 +116,14 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
         setHealth(MAX_HEALTHS[difficultyIdx]);
         getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(DAMAGE[difficultyIdx]);
 
-        for (Player player : nearbyPlayers){
+        for (Player player : nearbyPlayers) {
             //todo music
         }
     }
 
     @Override
     public void setVariant(DemonEyeVariant pVariant) {
-         attrInit(getNearbyPlayers(100.0D));
+        attrInit(getNearbyPlayers(100.0D));
     }
 
     @Override
@@ -139,25 +139,11 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
     }
 
     private static final State<CthulhuEye> STATE_NORMAL = new State<>() {
-
-        /**
-         * 每刻触发
-         *
-         * @param boss
-         * @return 下一刻的State（可为自身）
-         */
         @Override
         public void tick(CthulhuEye boss) {}
     };
 
     private static final State<CthulhuEye> STATE_MORNING = new State<>() {
-
-        /**
-         * 每刻触发
-         *
-         * @param boss
-         * @return 下一刻的State（可为自身）
-         */
         @Override
         public void tick(CthulhuEye boss) {
             boss.setDeltaMovement(0, 2, 0);
@@ -165,18 +151,11 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
     };
 
     private static final State<CthulhuEye> STATE_DASH = new State<>() {
-
-        /**
-         * 每刻触发
-         *
-         * @param boss
-         * @return 下一刻的State（可为自身）
-         */
         @Override
         public void tick(CthulhuEye boss) {
             boss.triggerAnim("controller", "type_1_run");
             boss.dash();
-            if (boss.level().random.nextDouble() <= 0.075D){   //todo 史
+            if (boss.level().random.nextDouble() <= 0.075D) {   //todo 史
                 boss.triggerAnim("controller", "type_1");
                 boss.AIState = STATE_NORMAL;
                 boss.toState(STATE_NORMAL);
@@ -185,18 +164,11 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
     };
 
     private static final State<CthulhuEye> STATE_CRAZY_DASH = new State<>() {
-
-        /**
-         * 每刻触发
-         *
-         * @param boss
-         * @return 下一刻的State（可为自身）
-         */
         @Override
         public void tick(CthulhuEye boss) {
             boss.triggerAnim("controller", "type_2_run");
             boss.dash();
-            if (boss.level().random.nextDouble() <= 0.065D){
+            if (boss.level().random.nextDouble() <= 0.065D) {
                 boss.triggerAnim("controller", "type_2");
                 boss.AIState = STATE_CRAZY;
                 boss.toState(STATE_CRAZY);
@@ -205,13 +177,6 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
     };
 
     private static final State<CthulhuEye> STATE_CRAZY = new State<>() {
-
-        /**
-         * 每刻触发
-         *
-         * @param boss
-         * @return 下一刻的State（可为自身）
-         */
         @Override
         public void tick(CthulhuEye boss) {}
     };
@@ -219,7 +184,7 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
     private State<CthulhuEye> AIState;
     private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_12);
 
-    private void dash(){
+    private void dash() {
         if (getTarget() != null) {
             moveEntityTo(self(), getTarget().position(), 1.2);
         } else {
@@ -229,8 +194,8 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
 
     private void spawnMinions(LivingEntity target, int num) {
         if (level() instanceof ServerLevel serverLevel) {
-            for (int i = 0; i < num; i++){
-                DemonEye eye = new DemonEye(ModEntities.DEMON_EYE.get(), serverLevel){
+            for (int i = 0; i < num; i++) {
+                DemonEye eye = new DemonEye(ModEntities.DEMON_EYE.get(), serverLevel) {
                     @Override
                     protected boolean shouldDropLoot() {
                         return false;
@@ -270,7 +235,7 @@ public class CthulhuEye extends DemonEye implements DeathAnimOptions, IBossFSM, 
 
     @Override
     public void AI() {
-        if (! level().isClientSide()) {
+        if (!level().isClientSide()) {
             this.AIState.tick(this);
         }
     }

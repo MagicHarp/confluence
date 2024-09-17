@@ -140,7 +140,7 @@ public final class ModUtils {
         double z = Mth.cos(yawRad);
         x *= div;
         z *= div;
-        return new Vec3(x, y, z);
+        return new Vec3(x, y, z); // Vec3.directionFromRotation(pitch, yaw);
     }
 
     /**
@@ -271,5 +271,20 @@ public final class ModUtils {
             case Y -> new Direction[]{Direction.UP, Direction.DOWN};
             default -> new Direction[]{Direction.SOUTH, Direction.NORTH};
         };
+    }
+
+    /**
+     * 将输入的向量的某个轴乘一个缩放
+     *
+     * @param vec3  输入的向量
+     * @param axis  某个轴
+     * @param scale 缩放
+     * @return 新向量
+     */
+    public static Vec3 relativeScale(Vec3 vec3, Direction.Axis axis, double scale) {
+        double x = axis == Direction.Axis.X ? scale * vec3.x : vec3.x;
+        double y = axis == Direction.Axis.Y ? scale * vec3.y : vec3.y;
+        double z = axis == Direction.Axis.Z ? scale * vec3.z : vec3.z;
+        return new Vec3(x, y, z);
     }
 }

@@ -1,6 +1,5 @@
 package org.confluence.mod.entity.projectile.bombs;
 
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,6 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class BaseBombEntity extends ThrowableItemProjectile {
@@ -84,12 +84,7 @@ public class BaseBombEntity extends ThrowableItemProjectile {
     protected void onHitBlock(@NotNull BlockHitResult pResult) {
         super.onHitBlock(pResult);
         blockHitCallBack(pResult);
-        Vec3 motion = getDeltaMovement();
-        motion = switch (pResult.getDirection().getAxis()) {
-            case X -> motion.with(Direction.Axis.X, -bounceFactor * motion.x());
-            case Y -> motion.with(Direction.Axis.Y, -bounceFactor * motion.y());
-            case Z -> motion.with(Direction.Axis.Z, -bounceFactor * motion.z());
-        };
+        Vec3 motion = ModUtils.relativeScale(getDeltaMovement(), pResult.getDirection().getAxis(), -bounceFactor);
         if (Math.abs(motion.y) < 0.03) motion = new Vec3(motion.x, 0.0, motion.z);
         setDeltaMovement(motion.scale(frictionFactor));
     }
