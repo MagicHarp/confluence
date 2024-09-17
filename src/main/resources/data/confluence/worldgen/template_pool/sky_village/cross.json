@@ -36,6 +36,33 @@
         "location": "confluence:sky_village/masons_house_0",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "confluence:sky_village/cloud_field_0",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "confluence:sky_village/cloud_field_1",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "confluence:sky_village/cloud_field_2",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }
