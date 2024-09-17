@@ -268,7 +268,7 @@ public class AltarBlock extends BaseEntityBlock implements CustomModel, CustomIt
                         pos.getX() + 0.5F,
                         pos.getY() + 0.75F,
                         pos.getZ() + 0.5F,
-                        500, 0.0625F, 0.0625F, 0.0625F, 0.15F);
+                        20, 0.0F, 0.0F, 0.0F, 0.02F);
                 }
                 case CRIMSON -> {
                     level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.REDSTONE_BLOCK.defaultBlockState()),
