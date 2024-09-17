@@ -197,12 +197,12 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
     public enum Variant implements StringRepresentable { // 对于死人箱，只使用unlocked开头的
         LOCKED_GOLDEN(0, "locked_golden", 1),
         UNLOCKED_GOLDEN(1, "unlocked_golden"),
+        LOCKED_SHADOW(2, "locked_shadow", 3),
+        UNLOCKED_SHADOW(3, "unlocked_shadow"),
         UNLOCKED_FROZEN(4, "unlocked_frozen"),
         UNLOCKED_LVY(5, "unlocked_lvy"),
         UNLOCKED_WATER(6, "unlocked_water"),
-        UNLOCKED_SKYWARE(7, "unlocked_skyware"),
-        LOCKED_SHADOW(2, "locked_shadow", 3),
-        UNLOCKED_SHADOW(3, "unlocked_shadow");
+        UNLOCKED_SKYWARE(7, "unlocked_skyware");
 
         private static final IntFunction<Variant> BY_ID = ByIdMap.continuous(Variant::getId, values(), ByIdMap.OutOfBoundsStrategy.CLAMP);
         private final int id;

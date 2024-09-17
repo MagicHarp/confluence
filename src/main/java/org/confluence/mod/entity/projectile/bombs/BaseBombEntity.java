@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.util.ModUtils;
@@ -99,7 +98,6 @@ public class BaseBombEntity extends ThrowableItemProjectile {
         if (rotate > Mth.TWO_PI) this.rotate -= Mth.TWO_PI;
         this.rotateO = rotate;
         this.rotate += r / Mth.PI;
-        Confluence.LOGGER.info("{}, {}, {}", s, r, rotate);
 
         if (!level().isClientSide) {
             if (this.delay-- < 0) {
