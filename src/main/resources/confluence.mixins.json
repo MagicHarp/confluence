@@ -50,6 +50,7 @@
         "accessor.ChestBlockEntityAccessor",
         "accessor.DistanceManagerAccessor",
         "accessor.EntityAccessor",
+        "accessor.ExplosionAccessor",
         "accessor.FishingHookAccessor",
         "accessor.ItemEntityAccessor",
         "accessor.LivingEntityAccessor",

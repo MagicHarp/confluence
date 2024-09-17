@@ -11,22 +11,18 @@ import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ScarabBombEntity extends StickyBombEntity {
-    private static final float BLAST_POWER_NEW = 3.5f;
     private Vec3 facingDir = new Vec3(0, -1, 0);
 
     public ScarabBombEntity(EntityType<? extends ScarabBombEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.blastPower = BLAST_POWER_NEW;
     }
 
     public ScarabBombEntity(Level pLevel, double pX, double pY, double pZ) {
         super(ModEntities.SCARAB_BOMB_ENTITY.get(), pX, pY, pZ, pLevel);
-        this.blastPower = BLAST_POWER_NEW;
     }
 
     public ScarabBombEntity(LivingEntity pShooter) {
         super(ModEntities.SCARAB_BOMB_ENTITY.get(), pShooter);
-        this.blastPower = BLAST_POWER_NEW;
     }
 
     @Override

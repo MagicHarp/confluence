@@ -12,12 +12,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -31,6 +33,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,6 +60,7 @@ import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
+import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.BlackSlime;
 import org.confluence.mod.item.curio.HealthAndMana.MagicCuffs;
@@ -71,6 +75,7 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.mixin.accessor.ExplosionAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
@@ -345,6 +350,14 @@ public final class ForgeEvents {
     public static void curios(CurioEquipEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             ModTriggers.CURIOS_EQUIPPED.trigger(serverPlayer, event.getStack());
+        }
+    }
+
+    @SubscribeEvent
+    public static void explosionDetonate(ExplosionEvent.Detonate event) {
+        if (event.getExplosion().getExploder() instanceof ScarabBombEntity) {
+            ((ExplosionAccessor) event.getExplosion()).setBlockInteraction(Explosion.BlockInteraction.DESTROY);
+            event.getAffectedEntities().removeIf(entity -> entity instanceof ItemEntity);
         }
     }
 }
