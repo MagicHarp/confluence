@@ -45,11 +45,11 @@ public class StickyBombEntity extends BaseBombEntity {
     @Override
     protected void blockHitCallBack(BlockHitResult blockHitResult) {
         super.blockHitCallBack(blockHitResult);
-        this.stickBlock = blockPosition();
         setDeltaMovement(Vec3.ZERO);
         setNoGravity(true);
         Vec3 collPos = blockHitResult.getLocation();
         moveTo(collPos.x, collPos.y, collPos.z, getYRot(), getXRot());
+        this.stickBlock = blockPosition();
     }
 
     @Override

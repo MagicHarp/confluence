@@ -272,6 +272,10 @@ public final class ModBlocks {
         return BLOCKS.register(id, block);
     }
 
+    public static float getObsidianBasedExplosionResistance(float delta) {
+        return Blocks.OBSIDIAN.getExplosionResistance() + delta;
+    }
+
     public static void register(IEventBus bus) {
         Ores.init();
         DecorativeBlocks.init();

@@ -23,7 +23,7 @@ public class BaseBombEntity extends ThrowableItemProjectile {
     public float rotate = 0.0F;
 
     protected int delay = 60;
-    protected float blastPower = 4.0F;
+    protected float blastPower = 3.0F;
     protected float bounceFactor = 0.2f;
     protected float frictionFactor = 0.9f;
 

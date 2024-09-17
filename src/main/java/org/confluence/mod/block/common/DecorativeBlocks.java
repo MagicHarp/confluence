@@ -29,7 +29,7 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     TIN_PLATE("tin_plate", () -> new BeamLikeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK))),
     TR_IRON_BRICKS("tr_iron_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
     ANCIENT_IRON_BRICKS("ancient_iron_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
-    TR_IRON_PLATE("tr_iron_plate", () -> new  BeamLikeBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
+    TR_IRON_PLATE("tr_iron_plate", () -> new BeamLikeBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
 
     LEAD_BRICKS("lead_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
     ANCIENT_LEAD_BRICKS("ancient_lead_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))),
@@ -64,14 +64,14 @@ public enum DecorativeBlocks implements EnumRegister<Block> {
     MARBLE_COLUMN("marble_column", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
 
     CHISELED_TR_OBSIDIAN_BRICKS("chiseled_tr_obsidian_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
-    BLUE_BRICK("blue_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
-    GREEN_BRICK("green_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
-    PINK_BRICK("pink_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
+    BLUE_BRICK("blue_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).explosionResistance(ModBlocks.getObsidianBasedExplosionResistance(200)))),
+    GREEN_BRICK("green_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).explosionResistance(ModBlocks.getObsidianBasedExplosionResistance(200)))),
+    PINK_BRICK("pink_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).explosionResistance(ModBlocks.getObsidianBasedExplosionResistance(200)))),
     AETHERIUM_BRICK("aetherium_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
     CRYSTAL_BLOCK("crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))),
     RAINBOW_BRICK("rainbow_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS))),
 
-;
+    ;
     private final RegistryObject<Block> value;
 
     DecorativeBlocks(String id, Supplier<Block> block) {

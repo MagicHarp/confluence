@@ -19,7 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -75,7 +74,6 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
-import org.confluence.mod.mixin.accessor.ExplosionAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
@@ -356,7 +354,6 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void explosionDetonate(ExplosionEvent.Detonate event) {
         if (event.getExplosion().getExploder() instanceof ScarabBombEntity) {
-            ((ExplosionAccessor) event.getExplosion()).setBlockInteraction(Explosion.BlockInteraction.DESTROY);
             event.getAffectedEntities().removeIf(entity -> entity instanceof ItemEntity);
         }
     }
