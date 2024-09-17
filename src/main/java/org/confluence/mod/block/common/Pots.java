@@ -17,7 +17,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -82,7 +85,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> { // todo 正式发
     public static void init() {}
 
     @SuppressWarnings("deprecation")
-    public static class BasePotsBlock extends HorizontalDirectionalBlock implements CustomModel, SimpleWaterloggedBlock {
+    public static class BasePotsBlock extends Block implements CustomModel, SimpleWaterloggedBlock {
         public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
         private final VoxelShape voxelShape;
         private final float moneyRatio;
