@@ -1,6 +1,7 @@
 package org.confluence.mod.entity.projectile.bombs;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class StickyBombEntity extends BaseBombEntity {
     private BlockPos stickBlock = null;
+    private Direction stickyFace = null;
 
     public StickyBombEntity(EntityType<? extends StickyBombEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -45,11 +47,9 @@ public class StickyBombEntity extends BaseBombEntity {
     @Override
     protected void blockHitCallBack(BlockHitResult blockHitResult) {
         super.blockHitCallBack(blockHitResult);
-        if (stickBlock == null) {
-            setNoGravity(true);
-        }
-        this.stickBlock = blockHitResult.getBlockPos();
+        this.stickBlock = blockPosition();
         setDeltaMovement(Vec3.ZERO);
+        setNoGravity(true);
         Vec3 collPos = blockHitResult.getLocation();
         moveTo(collPos.x, collPos.y, collPos.z, getYRot(), getXRot());
     }
@@ -57,8 +57,8 @@ public class StickyBombEntity extends BaseBombEntity {
     @Override
     public void tick() {
         super.tick();
-        if (stickBlock != null && level().getBlockState(stickBlock).canBeReplaced()) {
-            setNoGravity(true);
+        if (stickBlock != blockPosition()) {
+            setNoGravity(false);
             this.stickBlock = null;
         }
     }
