@@ -1,5 +1,5 @@
 {
-  "fallback": "minecraft:empty",
+  "fallback": "confluence:sky_village/back",
   "elements": [
     {
       "weight": 1,
