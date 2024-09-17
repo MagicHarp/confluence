@@ -71,11 +71,11 @@ public class BoulderEntity extends Projectile {
 
         Vec3 delta = getDeltaMovement().scale(0.99);
         setDeltaMovement(delta);
-        double s = delta.length();
-        double r = 2.0 * s / DIAMETER;
+        float s = (float) delta.length();
+        float r = 2.0F * s / DIAMETER;
         if (rotate > Mth.TWO_PI) this.rotate -= Mth.TWO_PI;
         this.rotateO = rotate;
-        this.rotate += (float) r;
+        this.rotate += r;
 
         Vec3 start = position();
         Vec3 end = start.add(delta);
