@@ -574,19 +574,19 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.worm_scarf.info", "蠕虫围巾在专家模式中的世界吞噬怪宝藏袋中掉落。");
 
 
-        add("block.confluence.base_chest_block.locked_golden", "§r§f上锁的金箱");
-        add("block.confluence.base_chest_block.unlocked_golden", "§r§f金箱");
-        add("block.confluence.base_chest_block.death_golden", "§r§f死人金箱");
-        add("block.confluence.base_chest_block.locked_shadow", "§r§f上锁的暗影箱");
-        add("block.confluence.base_chest_block.unlocked_shadow", "§r§f暗影箱");
-        add("block.confluence.base_chest_block.death_shadow", "§r§f死人暗影箱");
-        add("block.confluence.base_chest_block.unlocked_lvy", "§r§f常春藤箱");
-        add("block.confluence.base_chest_block.death_lvy", "§r§f死人常春藤箱");
-        add("block.confluence.base_chest_block.unlocked_frozen", "§r§f冰冻箱");
-        add("block.confluence.base_chest_block.death_frozen", "§r§f死人冰冻箱");
-        add("block.confluence.base_chest_block.unlocked_water", "§r§f水中箱");
-        add("block.confluence.base_chest_block.death_water", "§r§f死人水中箱");
-        add("block.confluence.base_chest_block.unlocked_skyware", "§r§f天域箱");
+        add("block.confluence.base_chest_block.locked_golden", "§r上锁的金箱");
+        add("block.confluence.base_chest_block.unlocked_golden", "§r金箱");
+        add("block.confluence.base_chest_block.death_golden", "§r死人金箱");
+        add("block.confluence.base_chest_block.locked_shadow", "§r上锁的暗影箱");
+        add("block.confluence.base_chest_block.unlocked_shadow", "§r暗影箱");
+        add("block.confluence.base_chest_block.death_shadow", "§r死人暗影箱");
+        add("block.confluence.base_chest_block.unlocked_lvy", "§r常春藤箱");
+        add("block.confluence.base_chest_block.death_lvy", "§r死人常春藤箱");
+        add("block.confluence.base_chest_block.unlocked_frozen", "§r冰冻箱");
+        add("block.confluence.base_chest_block.death_frozen", "§r死人冰冻箱");
+        add("block.confluence.base_chest_block.unlocked_water", "§r水中箱");
+        add("block.confluence.base_chest_block.death_water", "§r死人水中箱");
+        add("block.confluence.base_chest_block.unlocked_skyware", "§r天域箱");
         add("block.confluence.white_plastic_chair", "大排档凳子");
 
         add("resourcepack.terraria_art", "泰拉艺术");

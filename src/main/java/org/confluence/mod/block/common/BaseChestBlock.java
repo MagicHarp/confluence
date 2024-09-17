@@ -113,8 +113,8 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
                             posZ += relativeDir.getStepZ() * 0.5;
                         }
                         serverLevel.sendParticles(
-                            new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CHAIN.defaultBlockState()),
-                            posX, pPos.getY() + 0.5, posZ, 200, 0.0625, 0.0625, 0.0625, 0.15
+                                new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CHAIN.defaultBlockState()),
+                                posX, pPos.getY() + 0.5, posZ, 200, 0.0625, 0.0625, 0.0625, 0.15
                         );
                     }
                 }
