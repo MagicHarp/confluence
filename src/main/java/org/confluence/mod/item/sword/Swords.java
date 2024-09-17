@@ -50,14 +50,14 @@ public enum Swords implements EnumRegister<SwordItem> {
     BREATHING_REED("breathing_reed", BreathingReed::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
     TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),
-    FALCON_BLADE("falcon_blade", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.45F, new Item.Properties().rarity(ModRarity.BLUE))),
+    FALCON_BLADE("falcon_blade", () -> new ReversalBoardSwordItem(ModTiers.TITANIUM, 3, -1.45F, new Item.Properties().rarity(ModRarity.BLUE))),
     ZOMBIE_ARM("zombie_arm", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.4F, new Item.Properties().rarity(ModRarity.WHITE))),
     MANDIBLE_BLADE("mandible_blade", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 4, -1.4F, new Item.Properties().rarity(ModRarity.GREEN))),
-    BONE_SWORD("bone_sword", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
+    BONE_SWORD("bone_sword", () -> new ReversalBoardSwordItem(ModTiers.TITANIUM, 5, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
     BAT_BAT("bat_bat", BatBatItem::new),
     PURPLE_CLUBBERFISH("purple_clubberfish", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 10, -3.5F, new Item.Properties().rarity(ModRarity.BLUE))),
     STYLISH_SCISSORS("stylish_scissors", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
-    EXOTIC_SCIMITAR("exotic_scimitar", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
+    EXOTIC_SCIMITAR("exotic_scimitar", () -> new ReversalBoardSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
     KATANA("katana",() -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
     CROWBAR("crowbar", CrowbarItem::new);
 
