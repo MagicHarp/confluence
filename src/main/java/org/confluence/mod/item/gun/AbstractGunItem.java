@@ -24,7 +24,7 @@ public abstract class AbstractGunItem extends Item implements Vanishable, GeoIte
     }
 
     public boolean isAuto() {
-        return false;
+        return true;
     }
 
     @Override
@@ -51,7 +51,7 @@ public abstract class AbstractGunItem extends Item implements Vanishable, GeoIte
     }
 
     public int getCoolDown() {
-        return 0;
+        return 10;
     }
 
     public float getShootingSpeed() {

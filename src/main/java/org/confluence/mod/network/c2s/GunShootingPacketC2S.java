@@ -1,5 +1,7 @@
 package org.confluence.mod.network.c2s;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.telemetry.TelemetryProperty;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Tuple;
@@ -28,11 +30,15 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
 
     public static void handle(GunShootingPacketC2S packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
+
+
         context.enqueueWork(() -> {
             ServerPlayer player = context.getSender();
             if (player == null) return;
             ItemStack itemStack = player.getItemInHand(packet.fromMainHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+
             if (itemStack.getItem() instanceof AbstractGunItem abstractGunItem) {
+                if(player.getCooldowns().isOnCooldown(abstractGunItem)) return;
                 Tuple<ItemStack, BaseAmmoItem> ammoTuple = abstractGunItem.getAmmoTuple(player);
                 if (ammoTuple == null) return;
                 ItemStack ammoStack = ammoTuple.getA();
@@ -41,11 +47,13 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
                 BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(player, level);
                 ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(player, abstractGunItem, ammoEntity), 0.0F);
                 level.addFreshEntity(ammoEntity);
-                if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()) {
+                if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()
+                 && Minecraft.getInstance().gameMode.canHurtPlayer()) //创造模式不消耗弹药
+                {
                     ammoStack.shrink(1);
                 }
-                int coolDown = abstractGunItem.getCoolDown();
-                if (coolDown > 0) player.getCooldowns().addCooldown(abstractGunItem, coolDown);
+                player.getCooldowns().addCooldown(abstractGunItem, abstractGunItem.getCoolDown());
+
             }
         });
         context.setPacketHandled(true);

@@ -11,23 +11,27 @@ import org.confluence.mod.network.c2s.GunShootingPacketC2S;
 
 @OnlyIn(Dist.CLIENT)
 public final class GunShootingHandler {
-    public static void handle(InputEvent.InteractionKeyMappingTriggered event, LocalPlayer localPlayer) {
-        if (event.isUseItem()) return;
+    public static void handle(LocalPlayer localPlayer) {
+        if (!Minecraft.getInstance().options.keyAttack.isDown()) return;
         if (localPlayer.getMainHandItem().getItem() instanceof AbstractGunItem abstractGunItem && !localPlayer.getCooldowns().isOnCooldown(abstractGunItem)) {
-            event.setSwingHand(false);
-            event.setCanceled(true);
             performShooting(abstractGunItem, true);
         } else if (localPlayer.getOffhandItem().getItem() instanceof AbstractGunItem abstractGunItem && !localPlayer.getCooldowns().isOnCooldown(abstractGunItem)) {
-            event.setSwingHand(false);
-            event.setCanceled(true);
             performShooting(abstractGunItem, false);
         }
     }
 
-    private static void performShooting(AbstractGunItem abstractGunItem, boolean isMainHand) {
+    public static void performShooting(AbstractGunItem abstractGunItem, boolean isMainHand) {
         if (!abstractGunItem.isAuto()) {
             Minecraft.getInstance().options.keyAttack.setDown(false);
         }
         NetworkHandler.CHANNEL.sendToServer(new GunShootingPacketC2S(isMainHand));
     }
+    public static void animCancel(InputEvent.InteractionKeyMappingTriggered event, LocalPlayer localPlayer) {
+        if (!Minecraft.getInstance().options.keyAttack.isDown()) return;
+        if (localPlayer.getMainHandItem().getItem() instanceof AbstractGunItem) {
+            event.setCanceled(true);
+            event.setSwingHand(false);
+        }
+    }
+
 }

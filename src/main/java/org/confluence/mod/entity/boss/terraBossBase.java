@@ -87,7 +87,6 @@ public abstract class terraBossBase extends Monster implements GeoEntity {
             if(skills.count()==0)return PlayState.STOP;
             String skillString = entity.skills.getCurSkill();
             if(skillString==null) return PlayState.STOP;
-            System.out.println(skillString);
             RawAnimation skill = skillMap.get(skillString);
             if(skill!=null) {
                 state.setAnimation(skill);

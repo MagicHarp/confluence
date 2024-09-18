@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -31,6 +32,7 @@ import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
+import org.confluence.mod.item.gun.AbstractGunItem;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
@@ -41,9 +43,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
+import static org.confluence.mod.client.handler.GunShootingHandler.performShooting;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class ForgeClient {
+    public static boolean leftClicked = false;
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
@@ -60,6 +64,10 @@ public final class ForgeClient {
         AnimateColor.doUpdateExpertColor();
         AnimateColor.doUpdateMasterColor();
         ShimmerEvents.doUpdateTorchColor();
+
+        GunShootingHandler.handle(localPlayer);
+
+
     }
 
     @SubscribeEvent
@@ -99,10 +107,11 @@ public final class ForgeClient {
     public static void leftClick(InputEvent.InteractionKeyMappingTriggered event) {
         LocalPlayer localPlayer = Minecraft.getInstance().player;
         if (localPlayer == null) return;
-        GunShootingHandler.handle(event, localPlayer);
+        GunShootingHandler.animCancel(event, localPlayer);
         CursedEffect.onLeftClick(localPlayer, event);
         StonedEffect.onLeftClick(localPlayer, event);
     }
+
 
     @SubscribeEvent
     public static void itemToolTip(ItemTooltipEvent event) {
