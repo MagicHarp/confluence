@@ -15,7 +15,7 @@ public class BossSkill {
 
     /**
      *
-     * @param skillID 强制状态跳转标识
+     * @param skillID 强制状态跳转标识  已废弃
      * @param skill 动画名称
      * @param timeContinue 状态持续时间
      * @param timeTrigger 逻辑触发时间

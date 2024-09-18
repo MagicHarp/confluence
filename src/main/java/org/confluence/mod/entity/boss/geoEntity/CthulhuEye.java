@@ -36,18 +36,18 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
 
     private int difficultyIdx;
     private int stage = 1;//阶段
-    private static final float[] MAX_HEALTHS = {603f, 473f, 364f};
+    private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
 
     private final int followMinDistance = 16;//最近跟随距离的平方
     private final int distanceAbove = 3;//悬在玩家blockPos上距离
 
     private final float dashFactor = 1.5f;//冲刺增伤
-    private static final float[] DAMAGE = {7f, 6f, 4f};//一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {12f, 10f, 6f};//二阶段接触伤害
+    private static final float[] DAMAGE = {8f, 12f, 16f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {12f, 16f, 24f};//二阶段接触伤害
 
     private final float speedFactor = 2f;//冲刺加速
     private final float stage2SpeedFactor = 1.5f;//二阶段加速加成
-    private static final float[] MOVE_SPEED = {0.5f,0.5f,0.5f};
+    private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
 
     private static final float[] CRAZY_PERCENTAGE = {0.25f, 0.25f, 0.25f};
 
@@ -55,7 +55,7 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
     final int summonCDAll = 20;//仆从召唤cd
     int summonCD = summonCDAll;
 
-    final int stage2_dashCount_base = -5+3;
+    final int stage2_dashCount_base = -3+3;
     int stage2_dashCount = stage2_dashCount_base;//二阶段冲刺次数，每掉1/10的血+1
 
     private Vec3 dashPos;
@@ -82,10 +82,11 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
     @Override
     public void addSkills() {
         difficultyIdx = switchByDifficulty(level(), 0, 1, 2);;
+        System.out.println("difficult = " + difficultyIdx);
     //定义技能实现
         //定格在玩家正上方
         stage1_stare = new BossSkill("1", "type_1", 5*20, 0,
-                terraBossBase -> {},
+                terraBossBase -> {this.noPhysics = true;},
                 terraBossBase -> {
                     if(getTarget()==null) return;
                     cslLookAt();
@@ -106,7 +107,7 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
                     if(distanceToSqr(tar)>followMinDistance) addDeltaMovement(tar.subtract(position()).normalize().scale(MOVE_SPEED[difficultyIdx]/10));
 
                 },
-                terraBossBase -> {}
+                terraBossBase -> {this.noPhysics = false;}
         );
         //延迟20tick冲刺10tick
         state1_dash= new BossSkill("2", "type_1_run", 30, 20,
@@ -149,7 +150,7 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
 
                 });
         stage2_stare = new BossSkill("4", "type_2", 3*20, 0,
-                terraBossBase -> {
+                terraBossBase -> {this.noPhysics = true;
                 },
                 terraBossBase -> {
                     if(getTarget()==null) return;
@@ -176,10 +177,12 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
                     //生成冲撞次数
                     this.stage2_dashCount = (int) (stage2_dashCount_base + 10 - this.getHealth() / (getMaxHealth()/10));
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
+                    this.noPhysics = false;
                 }
         );
         state2_dash= new BossSkill("5", "type_2_run", 20, 10,
                 terraBossBase -> {setDeltaMovement(0,0,0);
+
                 },
                 terraBossBase -> {
                     //延迟冲刺
@@ -231,9 +234,10 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
     }
     public boolean isNoGravity(){return true;}
 
+
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.2)
                 .add(Attributes.ARMOR, 12.0)
@@ -276,6 +280,8 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
         return level().getEntitiesOfClass(Player.class, getBoundingBox().inflate(radius));
     }*/
 
+
+
     @Override//受伤音效
     protected SoundEvent getHurtSound(DamageSource damageSource) { return SoundEvents.SLIME_HURT; }
     //转换阶段
@@ -293,5 +299,7 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
     public void tick(){
         super.tick();
         syncRot();
+        if(level().getDayTime()>100 &&level().getDayTime()<13000)
+            this.setDeltaMovement(0,10,0);//白天消失
     }
 }
