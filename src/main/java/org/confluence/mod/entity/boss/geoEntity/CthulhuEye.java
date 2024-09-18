@@ -36,14 +36,14 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
 
     private int difficultyIdx;
     private int stage = 1;//阶段
-    private static final float[] MAX_HEALTHS = {200f, 200f, 200f};
+    private static final float[] MAX_HEALTHS = {603f, 473f, 364f};
 
     private final int followMinDistance = 16;//最近跟随距离的平方
     private final int distanceAbove = 3;//悬在玩家blockPos上距离
 
     private final float dashFactor = 1.5f;//冲刺增伤
-    private static final float[] DAMAGE = {15f, 10f, 8f};//一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {24f, 16f, 12f};//二阶段接触伤害
+    private static final float[] DAMAGE = {7f, 6f, 4f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {12f, 10f, 6f};//二阶段接触伤害
 
     private final float speedFactor = 2f;//冲刺加速
     private final float stage2SpeedFactor = 1.5f;//二阶段加速加成
