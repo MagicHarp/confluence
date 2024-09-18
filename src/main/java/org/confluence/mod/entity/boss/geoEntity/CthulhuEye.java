@@ -179,7 +179,6 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
                 terraBossBase -> {
                     //生成冲撞次数
                     this.stage2_dashCount = (int) (stage2_dashCount_base + 10 - this.getHealth() / (getMaxHealth()/10));
-                    System.out.println(stage2_dashCount);
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
                 }
         );

@@ -13,6 +13,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.model.entity.AmmoModel;
 import org.confluence.mod.entity.projectile.BaseAmmoEntity;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Math;
 
 public class AmmoRenderer extends EntityRenderer<BaseAmmoEntity> {
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[]{
@@ -36,12 +37,15 @@ public class AmmoRenderer extends EntityRenderer<BaseAmmoEntity> {
 
     @Override
     public void render(BaseAmmoEntity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+        //System.out.println("tickcount = "+pEntity.tickCount+"\nparticletick = "+pPartialTick);
         pPoseStack.pushPose();
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.getYRot() - 90.0F));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.getXRot()));
         pPoseStack.mulPose(Axis.YP.rotation(-Mth.HALF_PI));
         pPoseStack.scale(2.0F, 2.0F, 2.0F);
-        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(pEntity))), 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+
+        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(pEntity))), 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
+                Math.lerp(0,1,Math.min( Math.max(pEntity.tickCount-0.75f,0),2) /2.0f));
         pPoseStack.popPose();
     }
 }

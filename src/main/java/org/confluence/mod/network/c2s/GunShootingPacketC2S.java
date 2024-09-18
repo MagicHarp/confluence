@@ -47,6 +47,9 @@ public record GunShootingPacketC2S(boolean fromMainHand) {
                 BaseAmmoEntity ammoEntity = ammoItem.getAmmoEntity(player, level);
                 ammoEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, getVelocity(player, abstractGunItem, ammoEntity), 0.0F);
                 level.addFreshEntity(ammoEntity);
+
+
+
                 if (ammoItem != AmmoItems.ENDLESS_MUSKET_POUCH.get()
                  && Minecraft.getInstance().gameMode.canHurtPlayer()) //创造模式不消耗弹药
                 {
