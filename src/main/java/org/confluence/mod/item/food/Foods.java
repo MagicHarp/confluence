@@ -47,7 +47,7 @@ public enum Foods implements EnumRegister<Item> {
     GRUB_SOUP("grub_soup", () -> new BottleFoodItem(FoodType.HIGH)), //蛆虫汤
     NACHOS("nachos", () -> new BottleFoodItem(FoodType.HIGH)), //一碗玉米粒
     PHO("pho", () -> new BottleFoodItem(FoodType.MEDIUM)), //河粉
-    CRUDE_CLOUD_BREAD("crude_cloud_bread", () -> new BaseFoodItem(FoodType.LOW)), // 粗制云朵面包
+    CLOUD_DOUGH("cloud_dough", () -> new BaseFoodItem(FoodType.LOW)), // 粗制云朵面包
     CLOUD_BREAD("cloud_bread", () -> new BaseFoodItem(FoodType.CLOUD_BREAD)), // 云朵面包
     // 水果
     APRICOT("apricot", () -> new BaseFoodItem(FoodType.LOW)),

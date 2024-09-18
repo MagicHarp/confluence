@@ -7,7 +7,7 @@
     ],
     "key": {
         "c": {
-            "item": "minecraft:tr_crimson_ingot"
+            "item": "confluence:tr_crimson_ingot"
         },
         "/": {
             "item": "minecraft:stick"
