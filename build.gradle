@@ -119,7 +119,7 @@ dependencies {
     implementation fg.deobf(jarJar("com.xiaohunao.equipment_benediction:EquipmentBenediction:1.20.1-0.0.5")) {
         jarJar.ranged(it, "[1.20.1-0.0.5,)")
     }
-    implementation fg.deobf(jarJar("curse.maven:mineteam-1100774:5733668")) {
+    implementation fg.deobf(jarJar("curse.maven:mineteam-1100774:5734043")) {
         jarJar.ranged(it, "[forge-1.20.1-0.0.2,)")
     }
     implementation fg.deobf(jarJar("curse.maven:enemybanner-1005952:5556424")){
