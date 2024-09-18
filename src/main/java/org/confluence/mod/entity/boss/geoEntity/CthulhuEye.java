@@ -237,7 +237,7 @@ public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , Geo
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.2)
                 .add(Attributes.ARMOR, 12.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 100.00)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 100.0);
 
     }

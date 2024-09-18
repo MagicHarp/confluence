@@ -7,6 +7,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -270,7 +273,17 @@ public final class ModUtils {
      * @param motionY 击退的Y轴动量
      */
     public static void knockBackA2B(Entity a, Entity b, double scale, double motionY) {
-        b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
+        if (b instanceof LivingEntity living) {
+            AttributeInstance instance = living.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+            if (instance != null) scale *= (1.0 - instance.getValue());
+        }
+        if (scale > 0.0) {
+            if (a instanceof LivingEntity living) {
+                AttributeInstance instance = living.getAttribute(Attributes.ATTACK_KNOCKBACK);
+                if (instance != null) scale *= (1.0 + instance.getValue());
+            }
+            b.addDeltaMovement(getVectorA2B(a, b).scale(scale).add(0.0, motionY, 0.0));
+        }
     }
 
     public static Vec3 componentMin(Vec3 vec1, Vec3 vec2) {

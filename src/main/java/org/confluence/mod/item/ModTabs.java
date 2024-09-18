@@ -223,7 +223,7 @@ public final class ModTabs {
                 output.accept(SAND_LAYER_BLOCK.get());
                 output.accept(RED_SAND_LAYER_BLOCK.get());
 
-                for (Pots pots : Pots.values()) output.accept(pots.get());
+                for (RegistryObject<Block> pots : Pots.values()) output.accept(pots.get());
             })
             .build());
     // 材料

@@ -42,44 +42,47 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.util.EnumRegister;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
 import java.util.Optional;
 
 import static net.minecraft.world.level.block.Block.box;
 import static org.confluence.mod.item.potion.TerraPotions.*;
 
-public enum Pots implements EnumRegister<Pots.BasePotsBlock> { // todo 正式发布前把pots改为pot
-    FOREST_POTS("forest_pots", 1.0F, 0.002F),
-    TUNDRA_POTS("tundra_pots", 1.25F, 0.002167F),
-    OCEAN_POTS("ocean_pots", 1.25F, 0.002167F),
-    SPIDER_NEST_POTS("spider_nest_pots", 3.5F, 0.003676F),
-    UNDERGROUND_DESERT_POTS("underground_desert_pots", 1.25F, 0.002169F),
-    JUNGLE_POTS("jungle_pots", 1.75F, 0.0025F),
-    MARBLE_CAVE_POTS("marble_cave_pots", 2.0F, 0.002667F),
-    TR_CRIMSON_POTS("tr_crimson_pots", 1.6F, 0.00274F),
-    PYRAMID_POTS("pyramid_pots", 10.0F, 0.008F),
-    CORRUPTION_POTS("corruption_pots", 1.6F, 0.00274F),
-    DUNGEON_POTS("dungeon_pots", 1.9F, 0.002604F),
-    UNDERWORLD_POTS("underworld_pots", 2.1F, 0.00274F),
-    LIHZAHRD_POTS("lihzahrd_pots", 4.0F, 0.004F);
+public final class Pots {
+    private static LinkedList<RegistryObject<Block>> list = new LinkedList<>();
+    private static RegistryObject<Block>[] values;
 
-    private final RegistryObject<BasePotsBlock> value;
+    public static final RegistryObject<Block> FOREST_POTS = registerWithItem("forest_pots", 1.0F, 0.002F);
+    public static final RegistryObject<Block> TUNDRA_POTS = registerWithItem("tundra_pots", 1.25F, 0.002167F);
+    public static final RegistryObject<Block> OCEAN_POTS = registerWithItem("ocean_pots", 1.25F, 0.002167F);
+    public static final RegistryObject<Block> SPIDER_NEST_POTS = registerWithItem("spider_nest_pots", 3.5F, 0.003676F);
+    public static final RegistryObject<Block> UNDERGROUND_DESERT_POTS = registerWithItem("underground_desert_pots", 1.25F, 0.002169F);
+    public static final RegistryObject<Block> JUNGLE_POTS = registerWithItem("jungle_pots", 1.75F, 0.0025F);
+    public static final RegistryObject<Block> MARBLE_CAVE_POTS = registerWithItem("marble_cave_pots", 2.0F, 0.002667F);
+    public static final RegistryObject<Block> TR_CRIMSON_POTS = registerWithItem("tr_crimson_pots", 1.6F, 0.00274F);
+    public static final RegistryObject<Block> PYRAMID_POTS = registerWithItem("pyramid_pots", 10.0F, 0.008F);
+    public static final RegistryObject<Block> CORRUPTION_POTS = registerWithItem("corruption_pots", 1.6F, 0.00274F);
+    public static final RegistryObject<Block> DUNGEON_POTS = registerWithItem("dungeon_pots", 1.9F, 0.002604F);
+    public static final RegistryObject<Block> UNDERWORLD_POTS = registerWithItem("underworld_pots", 2.1F, 0.00274F);
+    public static final RegistryObject<Block> LIHZAHRD_POTS = registerWithItem("lihzahrd_pots", 4.0F, 0.004F);
 
-    Pots(String id, float moneyRatio, float moneyHoleChance, VoxelShape voxelShape) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, voxelShape));
+    public static RegistryObject<Block> registerWithItem(String id, float moneyRatio, float moneyHoleChance) {
+        RegistryObject<Block> object = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, box(2, 0, 2, 14, 12, 14)));
+        list.add(object);
+        return object;
     }
 
-    Pots(String id, float moneyRatio, float moneyHoleChance) {
-        this.value = ModBlocks.registerWithItem(id, () -> new BasePotsBlock(moneyRatio, moneyHoleChance, box(2, 0, 2, 14, 12, 14)));
-    }
-
-    @Override
-    public RegistryObject<BasePotsBlock> getValue() {
-        return value;
+    @SuppressWarnings("unchecked")
+    public static RegistryObject<Block>[] values() {
+        if (values == null) {
+            values = (RegistryObject<Block>[]) list.toArray(RegistryObject<?>[]::new);
+            list = null;
+        }
+        return values;
     }
 
     public static void init() {}
@@ -277,7 +280,7 @@ public enum Pots implements EnumRegister<Pots.BasePotsBlock> { // todo 正式发
 
         private boolean dropHeart(Level level, BlockPos blockPos, Vec3 center) {
             Optional<? extends Player> optional = level.players().stream()
-                .min((a, b) -> (int) (a.distanceToSqr(center) - b.distanceToSqr(center)));
+                    .min((a, b) -> (int) (a.distanceToSqr(center) - b.distanceToSqr(center)));
             if (optional.isPresent()) {
                 Player player = optional.get();
                 if (player.getHealth() < player.getMaxHealth()) {
