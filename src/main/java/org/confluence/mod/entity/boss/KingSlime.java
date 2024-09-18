@@ -17,7 +17,6 @@ import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
@@ -33,6 +32,7 @@ import java.util.List;
 import static org.confluence.mod.util.ModUtils.isAtLeastExpert;
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
+@SuppressWarnings("all")
 public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int COLOR_INT = 0x73bcf4;
     // 缩小/膨胀时长，单位：刻
@@ -165,13 +165,13 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     // 变量
     private final ServerBossEvent bossEvent = new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_12);
     private int indexAI;
-    private int difficultyIdx;
+    private final int difficultyIdx;
     private boolean shouldDisappear;
     private State<KingSlime> AIState;
     // 重写跳跃-水平方向的移动
     private Vec3 horMoveDir;
 
-    public KingSlime(EntityType<? extends Slime> slime, Level level) {
+    public KingSlime(EntityType<KingSlime> slime, Level level) {
         super(slime, level);
         this.shouldDisappear = false;
         this.difficultyIdx = switchByDifficulty(level, 0, 1, 2);
@@ -187,6 +187,10 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
         horMoveDir = Vec3.ZERO;
 
         attrInit(this.getNearbyPlayers(100.0D));
+    }
+
+    public KingSlime(Level level) {
+        this(ModEntities.KING_SLIME.get(), level);
     }
 
     @Override
