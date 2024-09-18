@@ -1,20 +1,23 @@
 package org.confluence.mod.entity.boss;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class circleBossSkills {
-    public terraBossBase owner;
-    protected final List<bossSkill> bossSkills = new ArrayList<>();
+public class CircleBossSkills {
+    public TerraBossBase owner;
+    protected final List<BossSkill> bossSkills = new ArrayList<>();
     protected Map<String,Integer> stateIndexMap = new HashMap<>();
 
     public int tick = 0;
     public int index = 0;
     public boolean ifStateInit = false;
 
-    public circleBossSkills(terraBossBase owner){ this.owner = owner;}
+    public CircleBossSkills(TerraBossBase owner){ this.owner = owner;}
     public int count(){return bossSkills.size();};
 
-    public boolean pushSkill(bossSkill skill){
+    public boolean pushSkill(BossSkill skill){
         bossSkills.add(skill);
         stateIndexMap.put(skill.skillID,bossSkills.size()-1);
         if(bossSkills.size()==1) tick = 0;

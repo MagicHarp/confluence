@@ -251,7 +251,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             dropSelf(logBlocks.TRAPDOOR.get());
             add(logBlocks.DOOR.get(), this::createDoorTable);
         }
-        for (DecorativeBlocks decorativeBlocks : DecorativeBlocks.values()) {
+        for (RegistryObject<Block> decorativeBlocks : DecorativeBlocks.values()) {
             dropSelf(decorativeBlocks.get());
         }
         for (Boxes boxes : Boxes.values()) dropSelf(boxes.get());

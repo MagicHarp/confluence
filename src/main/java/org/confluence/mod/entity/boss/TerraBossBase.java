@@ -19,15 +19,11 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.FurnaceFuelSlot;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoEntity;
-
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -39,10 +35,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class terraBossBase extends Monster implements GeoEntity {
+public abstract class TerraBossBase extends Monster implements GeoEntity {
 
 
-    public terraBossBase(EntityType<? extends Monster> type, Level level) {
+    public TerraBossBase(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 10, false);
         this.setNoGravity(true);
@@ -60,13 +56,13 @@ public abstract class terraBossBase extends Monster implements GeoEntity {
 
 
     //技能动画
-    public circleBossSkills skills = new circleBossSkills(this );
+    public CircleBossSkills skills = new CircleBossSkills(this );
 
     private final Map<String, RawAnimation> skillMap = new HashMap<>();
     private int lastAnimIndex = -1;
-    private static final EntityDataAccessor<Integer> DATA_SKILL_INDEX = SynchedEntityData.defineId(terraBossBase.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_SKILL_TICK = SynchedEntityData.defineId(terraBossBase.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Vector3f> DATA_ROTATE = SynchedEntityData.defineId(terraBossBase.class, EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Integer> DATA_SKILL_INDEX = SynchedEntityData.defineId(TerraBossBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_SKILL_TICK = SynchedEntityData.defineId(TerraBossBase.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Vector3f> DATA_ROTATE = SynchedEntityData.defineId(TerraBossBase.class, EntityDataSerializers.VECTOR3);
 
 
     //动画数据同步
@@ -82,7 +78,7 @@ public abstract class terraBossBase extends Monster implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, 20, state -> {
-            terraBossBase entity = (terraBossBase)state.getData(DataTickets.ENTITY);
+            TerraBossBase entity = (TerraBossBase)state.getData(DataTickets.ENTITY);
             if(!entity.isAlive()) return PlayState.STOP;
             if(skills.count()==0)return PlayState.STOP;
             String skillString = entity.skills.getCurSkill();
@@ -101,12 +97,12 @@ public abstract class terraBossBase extends Monster implements GeoEntity {
             return PlayState.STOP;
         }));
     }
-    public void addSkill(bossSkill bossSkill,RawAnimation anim){
+    public void addSkill(BossSkill bossSkill, RawAnimation anim){
         this.skills.pushSkill(bossSkill);
         //if(anim==null)return;
         skillMap.put(bossSkill.skill,anim);
     }
-    public void addSkillNoAnim(bossSkill bossSkill){
+    public void addSkillNoAnim(BossSkill bossSkill){
         this.skills.pushSkill(bossSkill);
         //if(anim==null)return;
         //skillMap.put(bossSkill.skill,anim);

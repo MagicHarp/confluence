@@ -38,8 +38,8 @@ public class PlatinumArmorItem extends ArmorItem implements NormalGeoItem {
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    default -> 3;
                     case CHESTPLATE, LEGGINGS -> 5;
+                    default -> 3;
                 };
             }
 
@@ -82,20 +82,17 @@ public class PlatinumArmorItem extends ArmorItem implements NormalGeoItem {
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                if (this.renderer == null) {
+                if (renderer == null) {
                     this.renderer = new PlatinumArmorRenderer();
                 }
-                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-
-                return this.renderer;
+                renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+                return renderer;
             }
         });
     }
 
-
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-    }
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

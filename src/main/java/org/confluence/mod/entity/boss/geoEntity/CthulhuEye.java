@@ -1,17 +1,16 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -20,13 +19,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.entity.boss.bossSkill;
-import org.confluence.mod.entity.boss.terraBossBase;
-import org.confluence.mod.entity.demoneye.*;
+import org.confluence.mod.entity.boss.BossSkill;
+import org.confluence.mod.entity.boss.TerraBossBase;
+import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.util.DeathAnimOptions;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -35,7 +31,7 @@ import java.util.function.Predicate;
 
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
-public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , GeoEntity {
+public class CthulhuEye extends TerraBossBase implements  DeathAnimOptions , GeoEntity {
 
 
     private int difficultyIdx;
@@ -77,18 +73,18 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
     private static final RawAnimation type2run =RawAnimation.begin().thenPlay("type_2_run");
 
     //定义技能类型
-    bossSkill stage1_stare;
-    bossSkill state1_dash;
-    bossSkill switch_1_to_2;
-    bossSkill stage2_stare;
-    bossSkill state2_dash;
+    BossSkill stage1_stare;
+    BossSkill state1_dash;
+    BossSkill switch_1_to_2;
+    BossSkill stage2_stare;
+    BossSkill state2_dash;
 
     @Override
     public void addSkills() {
         difficultyIdx = switchByDifficulty(level(), 0, 1, 2);;
     //定义技能实现
         //定格在玩家正上方
-        stage1_stare = new bossSkill("1", "type_1", 5*20, 0,
+        stage1_stare = new BossSkill("1", "type_1", 5*20, 0,
                 terraBossBase -> {},
                 terraBossBase -> {
                     if(getTarget()==null) return;
@@ -113,7 +109,7 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
                 terraBossBase -> {}
         );
         //延迟20tick冲刺10tick
-        state1_dash= new bossSkill("2", "type_1_run", 30, 20,
+        state1_dash= new BossSkill("2", "type_1_run", 30, 20,
                 terraBossBase -> {
                 },
                 terraBossBase -> {
@@ -141,7 +137,7 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
                 }
         );
         //转换阶段
-        switch_1_to_2= new bossSkill("3", "switching", 40, 0,
+        switch_1_to_2= new BossSkill("3", "switching", 40, 0,
                 terraBossBase -> {
                     if(stage==1)
                         skills.forceStartIndex(0);
@@ -152,7 +148,7 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
 
                 });
-        stage2_stare = new bossSkill("4", "type_2", 3*20, 0,
+        stage2_stare = new BossSkill("4", "type_2", 3*20, 0,
                 terraBossBase -> {
                 },
                 terraBossBase -> {
@@ -182,7 +178,7 @@ public class CthulhuEye extends terraBossBase implements  DeathAnimOptions , Geo
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
                 }
         );
-        state2_dash= new bossSkill("5", "type_2_run", 20, 10,
+        state2_dash= new BossSkill("5", "type_2_run", 20, 10,
                 terraBossBase -> {setDeltaMovement(0,0,0);
                 },
                 terraBossBase -> {

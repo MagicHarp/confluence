@@ -17,7 +17,6 @@ import org.confluence.mod.entity.projectile.bombs.StickyBombEntity;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
-import org.confluence.mod.item.bomb.BombItem;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;

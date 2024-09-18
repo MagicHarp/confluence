@@ -7,14 +7,14 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.entity.boss.bossSkill;
-import org.confluence.mod.entity.boss.terraBossBase;
+import org.confluence.mod.entity.boss.BossSkill;
+import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.projectile.IceBladeSwordProjectile;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
 
-public class KingSkull extends terraBossBase implements GeoEntity {
+public class KingSkull extends TerraBossBase implements GeoEntity {
 
     //定义动画
     private static final RawAnimation roll = RawAnimation.begin().thenPlay("animation.model.roll");
@@ -49,15 +49,15 @@ public class KingSkull extends terraBossBase implements GeoEntity {
     @Override
     public void addSkills() {
         //id作为强制跳转的标识符
-        addSkill(new bossSkill("roll","animation.model.roll",5*20,1),roll);
-        addSkill(new bossSkill("fire1","animation.model.fire",30,25),fire);
-        addSkill(new bossSkill("fire2","animation.model.fire",30,25),fire);
-        addSkill(new bossSkill("fire3","animation.model.fire",30,25),fire);
-        addSkill(new bossSkill("fire4","animation.model.fire",30,25),fire);
-        addSkill(new bossSkill("fire5","animation.model.fire",30,25),fire);
-        addSkill(new bossSkill("fire6","animation.model.fire",30,25),fire);
-        addSkillNoAnim(new bossSkill("hand","hand",100,20));
-        addSkillNoAnim(new bossSkill("dash","dash",4*20,0));
+        addSkill(new BossSkill("roll","animation.model.roll",5*20,1),roll);
+        addSkill(new BossSkill("fire1","animation.model.fire",30,25),fire);
+        addSkill(new BossSkill("fire2","animation.model.fire",30,25),fire);
+        addSkill(new BossSkill("fire3","animation.model.fire",30,25),fire);
+        addSkill(new BossSkill("fire4","animation.model.fire",30,25),fire);
+        addSkill(new BossSkill("fire5","animation.model.fire",30,25),fire);
+        addSkill(new BossSkill("fire6","animation.model.fire",30,25),fire);
+        addSkillNoAnim(new BossSkill("hand","hand",100,20));
+        addSkillNoAnim(new BossSkill("dash","dash",4*20,0));
     }
 
 

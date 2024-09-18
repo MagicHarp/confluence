@@ -3,6 +3,7 @@ package org.confluence.mod;
 import com.mojang.datafixers.util.Function3;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.Item;
@@ -45,8 +46,8 @@ public final class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
 
-    public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("confluence");
-    public static final Hashtable<Class<? extends AbstractMinecart>, Item> MINECART_CURIO = new Hashtable<>();
+    public static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID);
+    public static final Hashtable<EntityType<? extends AbstractMinecart>, Item> MINECART_CURIO = new Hashtable<>();
     public static final Hashtable<Item, Function3<Level, BlockPos, Double, AbstractMinecart>> CURIO_MINECART = new Hashtable<>();
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
 
@@ -83,7 +84,7 @@ public final class Confluence {
     }
 
     public static void registerMinecartAbility() {
-        MINECART_CURIO.put(Minecart.class, Items.MINECART);
+        MINECART_CURIO.put(EntityType.MINECART, Items.MINECART);
         CURIO_MINECART.put(Items.MINECART, (level, blockPos, offsetY) -> new Minecart(level, blockPos.getX() + 0.5, blockPos.getY() + 0.0625 + offsetY, blockPos.getZ() + 0.5));
     }
 }

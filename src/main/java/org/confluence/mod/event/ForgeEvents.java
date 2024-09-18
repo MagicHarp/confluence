@@ -36,7 +36,6 @@ import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,6 +48,7 @@ import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
+import org.confluence.mod.command.SpecificMoon;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.ArcheryEffect;
 import org.confluence.mod.effect.beneficial.ThornsEffect;
@@ -118,29 +118,30 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void levelTick(TickEvent.LevelTickEvent event) {
-        if (event.side == LogicalSide.CLIENT || event.phase == TickEvent.Phase.START) return;
-
-        ServerLevel serverLevel = (ServerLevel) event.level;
-        FallingStarItemEntity.summon(serverLevel);
+        if (!(event.level instanceof ServerLevel serverLevel) || event.phase == TickEvent.Phase.START) return;
         PathService.INSTANCE.pathFindingTick();
-        int dayTime = (int) (serverLevel.getDayTime() % 24000);
+        if (serverLevel.dimension() != Level.OVERWORLD) return;
+        FallingStarItemEntity.summon(serverLevel);
+        int dayTime = (int) (serverLevel.getDayTime() % 24000L);
         RandomSource random = serverLevel.random;
 
         if (dayTime == 1) {
+            ConfluenceData data = ConfluenceData.get(serverLevel);
             float factorX = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
             float factorZ = (random.nextBoolean() ? 1 : -1) * random.nextFloat();
-            ConfluenceData.get(serverLevel).setWindSpeed(factorX, factorZ);
+            data.setWindSpeed(factorX, factorZ);
+            if (data.getSpecificMoon().isBloodyMoon()) {
+                data.setSpecificMoon(SpecificMoon.VANILLA);
+            }
         } else if (dayTime == 6001) {
             if (random.nextFloat() < 0.2F) {
-                ConfluenceData.get(serverLevel).setMoonSpecific(random.nextInt(11)); // 0 ~ 10
+                ConfluenceData.get(serverLevel).setSpecificMoon(SpecificMoon.getCommonMoon(random, serverLevel.getMoonPhase()));
             } else {
-                ConfluenceData.get(serverLevel).setMoonSpecific(-1);
+                ConfluenceData.get(serverLevel).setSpecificMoon(SpecificMoon.VANILLA);
             }
-        } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F &&
-                serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)
-        ) {
+        } else if (dayTime == 12001 && serverLevel.getMoonPhase() != 4 && random.nextFloat() < 0.1111F && serverLevel.players().stream().anyMatch(serverPlayer -> serverPlayer.getMaxHealth() >= 24.0F)) {
             serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("event.confluence.blood_moon").withStyle(ChatFormatting.RED), false);
-            ConfluenceData.get(serverLevel).setMoonSpecific(11);
+            ConfluenceData.get(serverLevel).setSpecificMoon(SpecificMoon.getBloodyMoon(random.nextBoolean(), serverLevel.getMoonPhase()));
         }
     }
 
@@ -329,7 +330,7 @@ public final class ForgeEvents {
     public static void entityMount(EntityMountEvent event) {
         if (event.isMounting() || event.getLevel().isClientSide) return;
         if (event.getEntityMounting() instanceof Player player && event.getEntityBeingMounted() instanceof AbstractMinecart abstractMinecart) {
-            Item item = Confluence.MINECART_CURIO.get(abstractMinecart.getClass());
+            Item item = Confluence.MINECART_CURIO.get(abstractMinecart.getType());
             if (item == null) return;
             ItemStack itemStack = new ItemStack(item);
             if (CuriosUtils.getSlot(player, "minecart", 0).isEmpty()) {

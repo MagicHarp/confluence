@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
@@ -45,7 +46,7 @@ public final class ModTabs {
             .title(Component.translatable("creativetab.confluence.building_blocks"))
             .displayItems((parameters, output) -> {
                 LogBlocks.acceptBuilding(output);
-                for (DecorativeBlocks blocks : DecorativeBlocks.values()) output.accept(blocks.get());
+                for (RegistryObject<Block> blocks : DecorativeBlocks.values()) output.accept(blocks.get());
                 output.accept(BIG_RUBY_BLOCK.get());
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());

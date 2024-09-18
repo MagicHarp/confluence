@@ -92,7 +92,7 @@ public final class PlayerUtils {
         ConfluenceData data = ConfluenceData.get(serverPlayer.serverLevel());
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new SpecificMoonPacketS2C(data.getMoonSpecific()));
+            new SpecificMoonPacketS2C(data.getSpecificMoon()));
         NetworkHandler.CHANNEL.send(
             PacketDistributor.PLAYER.with(() -> serverPlayer),
             new WindSpeedPacketS2C((float) Mth.length(data.getWindSpeedX(), data.getWindSpeedZ())));

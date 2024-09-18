@@ -70,9 +70,8 @@ public class FallingStarItemEntity extends ItemEntity {
         if (serverLevel.dimension().equals(Level.OVERWORLD) && serverLevel.getDayTime() % 24000 > 12000 && serverLevel.getGameTime() % 600 == 0) {
             RandomSource random = serverLevel.random;
             for (ServerPlayer serverPlayer : serverLevel.players()) {
-                int distance = Math.abs(serverLevel.getServer().getScaledTrackingDistance(1));
-                int offsetX = (random.nextBoolean() ? 1 : -1) * random.nextInt(distance);
-                int offsetZ = (random.nextBoolean() ? 1 : -1) * random.nextInt(distance);
+                int offsetX = (random.nextBoolean() ? 1 : -1) * random.nextInt(2);
+                int offsetZ = (random.nextBoolean() ? 1 : -1) * random.nextInt(2);
                 BlockPos pos = serverPlayer.getOnPos().offset(offsetX, 0, offsetZ).atY(256);
                 if (serverLevel.isLoaded(pos)) {
                     serverLevel.addFreshEntity(new FallingStarItemEntity(serverLevel, pos.getCenter()));

@@ -1,18 +1,17 @@
 package org.confluence.mod.entity.boss;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-public class bossSkill {
+public class BossSkill {
 
     public String skillID;
     public String skill;
     public int timeContinue;
     public int timeTrigger;
 
-    public Consumer<terraBossBase> stateInit;
-    public Consumer<terraBossBase> stateTick;
-    public Consumer<terraBossBase> stateOver;
+    public Consumer<TerraBossBase> stateInit;
+    public Consumer<TerraBossBase> stateTick;
+    public Consumer<TerraBossBase> stateOver;
 
     /**
      *
@@ -21,17 +20,17 @@ public class bossSkill {
      * @param timeContinue 状态持续时间
      * @param timeTrigger 逻辑触发时间
      */
-    public bossSkill(String skillID,String skill,int timeContinue,int timeTrigger){
+    public BossSkill(String skillID, String skill, int timeContinue, int timeTrigger){
         this.skill = skill;
         this.timeContinue = timeContinue;
         this.timeTrigger = timeTrigger;
         this.skillID = skillID;
     }
 
-    public bossSkill(String skillID,String animName,int timeContinue,int timeTrigger,
-                     Consumer<terraBossBase> stateInit,
-                     Consumer<terraBossBase> stateTick,
-                     Consumer<terraBossBase> stateOver
+    public BossSkill(String skillID, String animName, int timeContinue, int timeTrigger,
+                     Consumer<TerraBossBase> stateInit,
+                     Consumer<TerraBossBase> stateTick,
+                     Consumer<TerraBossBase> stateOver
     ){
         this.skill = animName;
         this.timeContinue = timeContinue;
@@ -42,13 +41,13 @@ public class bossSkill {
         this.stateOver = stateOver;
     }
 
-    public void addStateReset(Consumer<terraBossBase> stateTick){
+    public void addStateReset(Consumer<TerraBossBase> stateTick){
         this.stateTick = stateTick;
     };
-    public void addStateInit(Consumer<terraBossBase> stateInit){
+    public void addStateInit(Consumer<TerraBossBase> stateInit){
         this.stateInit = stateInit;
     };
-    public void addStateOver(Consumer<terraBossBase> stateOver){
+    public void addStateOver(Consumer<TerraBossBase> stateOver){
         this.stateOver = stateOver;
     };
 }

@@ -16,6 +16,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.client.shimmer.PlayerPointLight;
 import org.confluence.mod.command.GamePhase;
+import org.confluence.mod.command.SpecificMoon;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixinauxiliary.ILevelRenderer;
 import org.confluence.mod.network.s2c.*;
@@ -39,7 +40,7 @@ public final class ClientPacketHandler {
     private static int rightClickSubtractor = 0;
 
     private static ResourceLocation moonTexture = null;
-    private static int moonSpecific = -1;
+    private static SpecificMoon specificMoon = SpecificMoon.VANILLA;
     private static GamePhase gamePhase;
 
     public static void handleMana(ManaPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
@@ -66,15 +67,12 @@ public final class ClientPacketHandler {
     public static void handleSpecificMoon(SpecificMoonPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> {
-            if (moonSpecific == 11 || packet.id() == 11) {
-                rebuildAllChunks();
-            }
-            if (packet.id() < 0) {
-                moonSpecific = -1;
+            if (packet.specificMoon() == SpecificMoon.VANILLA) {
+                specificMoon = SpecificMoon.VANILLA;
                 moonTexture = null;
             } else {
-                moonSpecific = packet.id();
-                moonTexture = Confluence.asResource("textures/environment/specific_moon_" + moonSpecific + ".png");
+                specificMoon = packet.specificMoon();
+                moonTexture = Confluence.asResource("textures/environment/specific_moon_" + specificMoon.getSerializedName() + ".png");
             }
         });
         context.setPacketHandled(true);
@@ -120,13 +118,13 @@ public final class ClientPacketHandler {
         return moonTexture;
     }
 
-    public static int getMoonSpecific() {
-        return moonSpecific;
+    public static SpecificMoon getSpecificMoon() {
+        return specificMoon;
     }
 
     public static boolean isBloodyMoon() {
         ClientLevel level = Minecraft.getInstance().level;
-        return moonSpecific == 11 && level != null && level.dimension() == Level.OVERWORLD;
+        return specificMoon.isBloodyMoon() && level != null && level.dimension() == Level.OVERWORLD;
     }
 
     public static GamePhase getGamePhase() {

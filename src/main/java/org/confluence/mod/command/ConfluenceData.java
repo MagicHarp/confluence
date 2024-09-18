@@ -13,14 +13,14 @@ import org.confluence.mod.util.PlayerUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ConfluenceData extends SavedData {
-    private int moonSpecific;
+    private SpecificMoon specificMoon;
     private GamePhase gamePhase;
     private float windSpeedX;
     private float windSpeedZ;
     private int revealStep;
 
     ConfluenceData() {
-        this.moonSpecific = -1;
+        this.specificMoon = SpecificMoon.VANILLA;
         this.gamePhase = GamePhase.BEFORE_SKELETRON;
         this.windSpeedX = 0.0F;
         this.windSpeedZ = 0.0F;
@@ -28,7 +28,7 @@ public class ConfluenceData extends SavedData {
     }
 
     ConfluenceData(CompoundTag nbt) {
-        this.moonSpecific = nbt.getInt("moonSpecific");
+        this.specificMoon = SpecificMoon.byId(nbt.getInt("moonSpecific"));
         this.gamePhase = GamePhase.valueOf(nbt.getString("gamePhase"));
         this.windSpeedX = nbt.getFloat("windSpeedX");
         this.windSpeedZ = nbt.getFloat("windSpeedZ");
@@ -37,7 +37,7 @@ public class ConfluenceData extends SavedData {
 
     @Override
     public @NotNull CompoundTag save(@NotNull CompoundTag nbt) {
-        nbt.putInt("moonSpecific", moonSpecific);
+        nbt.putInt("moonSpecific", specificMoon.getId());
         nbt.putString("gamePhase", gamePhase.name());
         nbt.putFloat("windSpeedX", windSpeedX);
         nbt.putFloat("windSpeedZ", windSpeedZ);
@@ -57,17 +57,17 @@ public class ConfluenceData extends SavedData {
         return gamePhase.ordinal() == 6;
     }
 
-    public void setMoonSpecific(int moonSpecific) {
-        this.moonSpecific = moonSpecific;
+    public void setSpecificMoon(SpecificMoon specificMoon) {
+        this.specificMoon = specificMoon;
         NetworkHandler.CHANNEL.send(
             PacketDistributor.ALL.noArg(),
-            new SpecificMoonPacketS2C(moonSpecific)
+            new SpecificMoonPacketS2C(specificMoon)
         );
         setDirty();
     }
 
-    public int getMoonSpecific() {
-        return moonSpecific;
+    public SpecificMoon getSpecificMoon() {
+        return specificMoon;
     }
 
     public void setGamePhase(GamePhase gamePhase) {

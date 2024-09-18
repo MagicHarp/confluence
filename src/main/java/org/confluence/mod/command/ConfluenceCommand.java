@@ -1,25 +1,25 @@
 package org.confluence.mod.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.server.command.EnumArgument;
 
 public class ConfluenceCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("confluence").requires(sourceStack -> sourceStack.hasPermission(2))
-            .then(Commands.literal("specificMoon").then(Commands.argument("set", IntegerArgumentType.integer(-1, 11)).executes(context -> {
-                int id = IntegerArgumentType.getInteger(context, "set");
-                ConfluenceData.get(context.getSource().getLevel()).setMoonSpecific(id);
-                return id;
+            .then(Commands.literal("specificMoon").then(Commands.argument("set", EnumArgument.enumArgument(SpecificMoon.class)).executes(context -> {
+                SpecificMoon moon = context.getArgument("set", SpecificMoon.class);
+                ConfluenceData.get(context.getSource().getLevel()).setSpecificMoon(moon);
+                return moon.getId();
             })).executes(context -> {
-                int id = ConfluenceData.get(context.getSource().getLevel()).getMoonSpecific();
-                context.getSource().sendSystemMessage(Component.literal("Specific Moon: " + id));
-                return id;
+                SpecificMoon moon = ConfluenceData.get(context.getSource().getLevel()).getSpecificMoon();
+                context.getSource().sendSystemMessage(Component.literal("Specific Moon: " + moon.getSerializedName()));
+                return moon.getId();
             }))
-            .then(Commands.literal("gamePhase").then(Commands.argument("set", GamePhaseArgumentType.gamePhase()).executes(context -> {
-                GamePhase phase = GamePhaseArgumentType.getPhase(context, "set");
+            .then(Commands.literal("gamePhase").then(Commands.argument("set", EnumArgument.enumArgument(GamePhase.class)).executes(context -> {
+                GamePhase phase = context.getArgument("set", GamePhase.class);
                 ConfluenceData.get(context.getSource().getLevel()).setGamePhase(phase);
                 return phase.ordinal();
             })).executes(context -> {
