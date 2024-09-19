@@ -270,6 +270,9 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     @Override // 受伤音效
     protected SoundEvent getHurtSound(DamageSource damageSource) {return SoundEvents.SLIME_HURT;}
 
+    @Override
+    public boolean isNoGravity(){ return true; }
+
     // 转换阶段
     public boolean hurt(DamageSource pSource, float pAmount) {
         super.hurt(pSource, pAmount);
