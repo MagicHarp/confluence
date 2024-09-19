@@ -59,7 +59,6 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
 
     public CthulhuEye(EntityType<CthulhuEye> entityType, Level level) {
         super(entityType, level);
-        setNoGravity(true);
         this.difficultyIdx = switchByDifficulty(level(), 0, 1, 2);
         //初始属性
         getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx]);
@@ -109,8 +108,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     // 生成仆从
                     spawnMinions(getTarget());
                     // 向玩家正上方移动
-                    Vec3 tar = getTarget().position()
-                            .add(new Vec3(0, distanceAbove, 0));
+                    Vec3 tar = getTarget().position().add(new Vec3(0, distanceAbove, 0));
                     if (distanceToSqr(tar) > followMinDistance) addDeltaMovement(tar.subtract(position()).normalize().scale(MOVE_SPEED[difficultyIdx] / 10));
 
                 },

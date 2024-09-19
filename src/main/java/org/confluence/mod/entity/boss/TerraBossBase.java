@@ -35,6 +35,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("all")
 public abstract class TerraBossBase extends Monster implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS).setDarkenScreen(true);
@@ -42,7 +43,7 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
     public TerraBossBase(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.moveControl = new FlyingMoveControl(this, 10, false);
-        this.setNoGravity(true);
+        setNoGravity(true);
         addSkills();
     }
 
@@ -188,7 +189,7 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
 
     @Override // 是否免疫摔伤
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource damageSource) {
-        return true;
+        return false;
     }
 
     @Override // 是否在实体上渲染着火效果

@@ -54,6 +54,7 @@
         "accessor.ItemEntityAccessor",
         "accessor.LivingEntityAccessor",
         "accessor.LootParamsAccessor",
+        "accessor.MinecraftServerAccessor",
         "accessor.MultiNoiseBiomeSourceAccessor",
         "accessor.RangedAttributeAccessor",
         "accessor.SlimeAccessor",
