@@ -35,8 +35,8 @@ import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
     private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = entity -> entity instanceof Player;
     private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
-    private static final float[] DAMAGE = {8f, 12f, 16f};//一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {12f, 16f, 24f};//二阶段接触伤害
+    private static final float[] DAMAGE = {4f, 6f, 8f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {6f, 10f, 14f};//二阶段接触伤害
     private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
     private static final float[] CRAZY_PERCENTAGE = {0.25f, 0.25f, 0.25f};
 
