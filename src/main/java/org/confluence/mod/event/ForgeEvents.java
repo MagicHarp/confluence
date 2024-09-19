@@ -76,12 +76,15 @@ import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
+import org.confluence.mod.network.s2c.FlushPlayerAbilityPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.event.CurioEquipEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -301,6 +304,22 @@ public final class ForgeEvents {
                 slime.startRiding(zombie);
                 level.addFreshEntity(slime);
             }
+        }
+
+        //进入地狱刷新饰品能力，延迟刷新
+        if(event.getEntity() instanceof ServerPlayer player){
+            player.sendSystemMessage(Component.literal("hello world"));
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    CuriosUtils.getCurios(player).forEach(item->{
+                        NetworkHandler.CHANNEL.send(
+                                PacketDistributor.PLAYER.with(() -> player),
+                                new FlushPlayerAbilityPacketS2C());
+                    });
+                }
+            },50);
+
         }
     }
 
