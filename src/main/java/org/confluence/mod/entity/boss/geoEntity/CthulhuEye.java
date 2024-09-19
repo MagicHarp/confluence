@@ -34,10 +34,10 @@ import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
     private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = entity -> entity instanceof Player;
-    private static final float[] MAX_HEALTHS = {603f, 473f, 364f};
-    private static final float[] DAMAGE = {7f, 6f, 4f}; //一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {12f, 10f, 6f}; //二阶段接触伤害
-    private static final float[] MOVE_SPEED = {0.5f, 0.5f, 0.5f};
+    private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
+    private static final float[] DAMAGE = {8f, 12f, 16f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {12f, 16f, 24f};//二阶段接触伤害
+    private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
     private static final float[] CRAZY_PERCENTAGE = {0.25f, 0.25f, 0.25f};
 
     private final int followMinDistance = 16; //最近跟随距离的平方
@@ -49,7 +49,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private int stage = 1; //阶段
 
     //定义技能参数
-    private final int summonCDAll = 20; //仆从召唤cd
+    private final int summonCDAll = 19; //仆从召唤cd
     private int summonCD = summonCDAll;
 
     private final int stage2_dashCount_base = -5 + 3;
