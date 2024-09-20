@@ -38,7 +38,8 @@ public class PlatinumArmorItem extends ArmorItem implements NormalGeoItem {
             @Override
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
-                    case CHESTPLATE, LEGGINGS -> 5;
+                    case CHESTPLATE -> 6;
+                    case LEGGINGS -> 7;
                     default -> 3;
                 };
             }

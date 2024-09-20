@@ -39,7 +39,7 @@ public class GoldenArmorItem extends ArmorItem implements NormalGeoItem {
             public int getDefenseForType(@NotNull Type armorType) {
                 return switch (armorType) {
                     default -> 3;
-                    case CHESTPLATE, LEGGINGS -> 5;
+                    case CHESTPLATE, LEGGINGS -> 6;
                 };
             }
 
