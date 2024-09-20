@@ -190,6 +190,7 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         public @NotNull CompoundTag getUpdateTag() {
             CompoundTag nbt = super.getUpdateTag();
             nbt.putInt("VariantId", variant.id);
+            nbt.putBoolean("italic", true);
             return nbt;
         }
     }
