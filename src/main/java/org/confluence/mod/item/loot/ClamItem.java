@@ -2,6 +2,7 @@ package org.confluence.mod.item.loot;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.misc.ModLootTables;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 public class ClamItem extends Item {
@@ -40,6 +42,7 @@ public class ClamItem extends Item {
                 }
             }
             itemStack.shrink(1);
+            serverLevel.playSound(null, player.blockPosition(), ModSoundEvents.TERRA_OPERATION.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }
         return InteractionResultHolder.success(itemStack);
     }

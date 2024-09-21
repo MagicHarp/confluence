@@ -18,8 +18,8 @@ import org.confluence.mod.misc.ModLootTables;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.jetbrains.annotations.NotNull;
 
-public class ChristmasGiftsItem extends Item {
-    public ChristmasGiftsItem() {
+public class CthulhuEyeTreasureBagItem extends Item {
+    public CthulhuEyeTreasureBagItem() {
         super(new Properties());
     }
 
@@ -35,7 +35,7 @@ public class ChristmasGiftsItem extends Item {
                 .withParameter(LootContextParams.THIS_ENTITY, player)
                 .withLuck(fishingPower.floatValue())
                 .create(LootContextParamSets.GIFT);
-            LootTable loottable = serverLevel.getServer().getLootData().getLootTable(ModLootTables.CHRISTMAS_GIFTS);
+            LootTable loottable = serverLevel.getServer().getLootData().getLootTable(ModLootTables.CLAM);
             for (ItemStack loot : loottable.getRandomItems(lootparams)) {
                 if (!player.addItem(loot)) {
                     player.drop(loot, false, false);

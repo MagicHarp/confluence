@@ -17,6 +17,9 @@ public final class ModLootTables {
     public static final ResourceLocation EXTRACT_SLUSH = register("gameplay/extract/with_slush");
     public static final ResourceLocation EXTRACT_MARINE_GRAVEL = register("gameplay/extract/with_marine_gravel");
 
+    public static final ResourceLocation CTHULHUEYE_CORRUPTION = register("gameplay/cthulhueye_corruption");
+    public static final ResourceLocation CTHULHUEYE_TR_CRIMSON = register("gameplay/cthulhueye_tr_crimson");
+    public static final ResourceLocation CTHULHUEYE_SYNTHESIS = register("gameplay/cthulhueye_synthesis");
     private static ResourceLocation register(String id) {
         return Confluence.asResource(id);
     }
