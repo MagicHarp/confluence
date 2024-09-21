@@ -22,6 +22,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.BossSkill;
 import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.demoneye.DemonEyeWanderGoal;
 import org.confluence.mod.util.DeathAnimOptions;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -33,7 +34,6 @@ import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
-    private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = entity -> entity instanceof Player;
     private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
     private static final float[] DAMAGE = {5f, 7f, 9f};//一阶段接触伤害
     private static final float[] CRAZY_DAMAGE = {7f, 11f, 15f};//二阶段接触伤害
@@ -117,6 +117,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         // 延迟20tick冲刺10tick
         this.state1_dash = new BossSkill("2", "type_1_run", 30, 20,
                 terraBossBase -> {
+                    cslLookAt();
                 },
                 terraBossBase -> {
 
@@ -185,7 +186,8 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         );
         this.state2_dash = new BossSkill("5", "type_2_run", 20, 10,
                 terraBossBase -> {
-                    setDeltaMovement(0, 0, 0);
+                    //setDeltaMovement(0, 0, 0);
+                    cslLookAt();
                 },
                 terraBossBase -> {
                     // 延迟冲刺
@@ -260,10 +262,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         }
     }
 
-    @Override
-    protected void registerGoals() {
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, LIVING_ENTITY_SELECTOR));
-    }
+
 
     @Override // 受伤音效
     protected SoundEvent getHurtSound(DamageSource damageSource) {return SoundEvents.SLIME_HURT;}
