@@ -15,10 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.common.*;
-import org.confluence.mod.block.crafting.AltarBlock;
-import org.confluence.mod.block.crafting.ExtractinatorBlock;
-import org.confluence.mod.block.crafting.SkyMillBlock;
-import org.confluence.mod.block.crafting.WorkshopBlock;
+import org.confluence.mod.block.crafting.*;
 import org.confluence.mod.block.functional.*;
 import org.confluence.mod.block.furniture.chair.WhitePlasticChairBlock;
 import org.confluence.mod.block.natural.MushroomBlock;
@@ -140,6 +137,8 @@ public final class ModBlocks {
     public static final RegistryObject<SkyMillBlock> SKY_MILL = registerWithItem("sky_mill", SkyMillBlock::new);
     public static final RegistryObject<BlockEntityType<SkyMillBlock.Entity>> SKY_MILL_ENTITY = BLOCK_ENTITIES.register("sky_mill_entity", () -> BlockEntityType.Builder.of(SkyMillBlock.Entity::new, SKY_MILL.get()).build(null));
     public static final RegistryObject<WorkshopBlock> WORKSHOP = registerWithItem("workshop", WorkshopBlock::new);
+    public static final RegistryObject<AlchemyTableBlock> ALCHEMY_TABLE_BLOCK = registerWithItem("alchemy_table", AlchemyTableBlock::new);
+    public static final RegistryObject<BlockEntityType<AlchemyTableBlock.Entity>> ALCHEMY_TABLE_BLOCK_ENTITY = BLOCK_ENTITIES.register("alchemy_table_entity", () -> BlockEntityType.Builder.of(AlchemyTableBlock.Entity::new, ALCHEMY_TABLE_BLOCK.get()).build(null));
     // fluid
     public static final RegistryObject<LiquidBlock> HONEY = registerWithoutItem("honey", () -> new LiquidBlock(ModFluids.HONEY.fluid(), BlockBehaviour.Properties.copy(Blocks.WATER).mapColor(MapColor.COLOR_YELLOW)));
     public static final RegistryObject<CrispyHoneyBlock> CRISPY_HONEY_BLOCK = registerWithItem("crispy_honey_block", CrispyHoneyBlock::new);
