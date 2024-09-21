@@ -140,7 +140,7 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
     public static ItemStack setData(ItemStack itemStack, Variant variant) {
         CompoundTag tag = itemStack.getOrCreateTag();
         tag.putInt("VariantId", variant.id);
-        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name));
+        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.name).withStyle(style -> style.withItalic(false)));
         return itemStack;
     }
 
@@ -190,7 +190,6 @@ public class BaseChestBlock extends ChestBlock implements CustomModel, CustomIte
         public @NotNull CompoundTag getUpdateTag() {
             CompoundTag nbt = super.getUpdateTag();
             nbt.putInt("VariantId", variant.id);
-            nbt.putBoolean("italic", true);
             return nbt;
         }
     }

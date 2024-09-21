@@ -119,7 +119,7 @@ public class DeathChestBlock extends BaseChestBlock implements INetworkBlock {
     public static ItemStack setData(ItemStack itemStack, Variant variant) {
         CompoundTag tag = itemStack.getOrCreateTag();
         tag.putInt("VariantId", variant.getId());
-        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.getSerializedName().replace("unlocked", "death")));
+        itemStack.setHoverName(Component.translatable("block.confluence.base_chest_block." + variant.getSerializedName().replace("unlocked", "death")).withStyle(style -> style.withItalic(false)));
         return itemStack;
     }
 
