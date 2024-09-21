@@ -29,7 +29,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     PLATINUM_BOARD_SWORD("platinum_board_sword", () -> new BoardSwordItem(ModTiers.PLATINUM, 7, 1.6F)),
 
     LIGHTS_BANE("lights_bane", () -> new BloodButchereSword(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 魔光剑
-    BLOOD_BUTCHERER("blood_butchere", () -> new BloodButchereSword(ModTiers.TITANIUM, 7, -2.7F, new Item.Properties().rarity(ModRarity.BLUE))), //TODO 血腥屠刀 （给予被伤害的单位流血效果）蓄力才触发
+    BLOOD_BUTCHERER("blood_butchere", () -> new BloodButchereSword(ModTiers.TITANIUM, 7, -2.7F, new Item.Properties().rarity(ModRarity.BLUE))),
 
     RED_LIGHT_SABER("red_light_saber", LightSaber.Red::new),
     ORANGE_LIGHT_SABER("orange_light_saber", LightSaber.Orange::new),
@@ -40,13 +40,13 @@ public enum Swords implements EnumRegister<SwordItem> {
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
     ICE_BLADE("ice_blade", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),
-    STARFURY("starfury", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
+    STARFURY("starfury", () -> new BloodButchereSword(ModTiers.TITANIUM, 6, -0.1F, new Item.Properties().rarity(ModRarity.GREEN))),  //TODO 星怒
     ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
 
 
     TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
-    CANDY_CANE_SWORD("candy_cane_sword", () -> new BoardSwordItem(ModTiers.CANDY, 5, 1.6F)),
+    CANDY_CANE_SWORD("candy_cane_sword", () -> new ReversalBoardSwordItem(ModTiers.CANDY, 2, -1.4F,new Item.Properties().rarity(ModRarity.WHITE))),
     BREATHING_REED("breathing_reed", BreathingReed::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
     TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),
