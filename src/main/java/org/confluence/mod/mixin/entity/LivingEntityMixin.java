@@ -3,6 +3,8 @@ package org.confluence.mod.mixin.entity;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -35,6 +37,7 @@ import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.Immunity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
 import org.confluence.mod.util.DeathAnimOptions;
@@ -51,6 +54,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements ILivingEntity, SelfGetter<LivingEntity> {
+    @Unique private final Object2IntMap<Immunity> confluence$entityImmunityTicks = new Object2IntOpenHashMap<>();
+
     private LivingEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -73,6 +78,11 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
         return confluence$breakingEasyCrashBlock;
     }
 
+    @Override
+    public Object2IntMap<Immunity> confluence$getImmunityTicks(){
+        return confluence$entityImmunityTicks;
+    }
+
     @Inject(method = "getJumpPower", at = @At("RETURN"), cancellable = true)
     private void multiY(CallbackInfoReturnable<Float> cir) {
         LivingEntity self = self();
@@ -80,22 +90,22 @@ public abstract class LivingEntityMixin extends Entity implements ILivingEntity,
             cir.setReturnValue(0.0F);
         } else if (self instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY)
-                    .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
+                .ifPresent(playerAbility -> cir.setReturnValue((float) (cir.getReturnValue() * playerAbility.getJumpBoost())));
         }
     }
 
-    @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
-    private int invulnerable1(int constant) {
-        return c$getInvulnerableTime(constant);
-    }
+//    @ModifyConstant(method = "hurt", constant = @Constant(intValue = 20))
+//    private int invulnerable1(int constant) {
+//        return c$getInvulnerableTime(constant);
+//    }
+//
+//    @ModifyConstant(method = "handleDamageEvent", constant = @Constant(intValue = 20))
+//    private int invulnerable2(int constant) {
+//        return c$getInvulnerableTime(constant);
+//    }
 
-    @ModifyConstant(method = "handleDamageEvent", constant = @Constant(intValue = 20))
-    private int invulnerable2(int constant) {
-        return c$getInvulnerableTime(constant);
-    }
-
-    @Unique
-    private int c$getInvulnerableTime(int constant) {
+    @Override
+    public int c$getInvulnerableTime(int constant) {
         if (self() instanceof Player player) {
             AtomicInteger time = new AtomicInteger(constant);
             player.getCapability(AbilityProvider.CAPABILITY)

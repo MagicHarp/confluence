@@ -1,5 +1,7 @@
 package org.confluence.mod.event;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -74,6 +76,8 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
+import org.confluence.mod.mixinauxiliary.ILivingEntity;
+import org.confluence.mod.mixinauxiliary.Immunity;
 import org.confluence.mod.network.NetworkHandler;
 import org.confluence.mod.network.s2c.EntityKilledPacketS2C;
 import org.confluence.mod.network.s2c.FlushPlayerAbilityPacketS2C;
@@ -180,7 +184,7 @@ public final class ForgeEvents {
         amount = BrainOfConfusion.apply(living, random, damageSource, amount);
         amount = BreathingReed.apply(living, damageSource, amount);
 
-        amount *= ModUtils.nextFloat(random, 0.8F, 1.2F);
+        amount *= ModUtils.nextFloat(random, 0.8F, 1.2F);  // TODO: 运气
         IDPSMeter.sendMsg(amount, damageSource.getEntity());
         event.setAmount(amount);
     }
@@ -246,7 +250,17 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void livingTick(LivingEvent.LivingTickEvent event) {
-        ModAttributes.applyPickupRange(event.getEntity());
+        LivingEntity entity = event.getEntity();
+        ModAttributes.applyPickupRange(entity);
+        for(ObjectIterator<Object2IntMap.Entry<Immunity>> iterator = ((ILivingEntity) entity).confluence$getImmunityTicks().object2IntEntrySet().iterator(); iterator.hasNext(); ){
+            Object2IntMap.Entry<Immunity> entry = iterator.next();
+            int remain = entry.getIntValue() - 1;
+            if(remain <= 0){
+                iterator.remove();
+            }else{
+                entry.setValue(remain);
+            }
+        }
     }
 
     @SubscribeEvent
@@ -265,18 +279,46 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void livingAttack(LivingAttackEvent event) {
-        if (event.getSource().getEntity() instanceof LivingEntity livingEntity) {
+        DamageSource damageSource = event.getSource();
+        LivingEntity damagingEntity = event.getEntity();
+        if (damageSource.getEntity() instanceof LivingEntity livingEntity) {
             if (livingEntity.getMainHandItem().getItem() instanceof BloodButchereSword) {
-                if (event.getEntity().hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
-                    if (event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4) {
-                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, event.getEntity().getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() + 1, false, false, false));
+                if (damagingEntity.hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
+                    if (damagingEntity.getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4) {
+                        damagingEntity.addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, damagingEntity.getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() + 1, false, false, false));
                     } else {
-                        event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 4, false, false, false));
+                        damagingEntity.addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 4, false, false, false));
                     }
                 } else {
-                    event.getEntity().addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0, false, false, false));
+                    damagingEntity.addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, 0, false, false, false));
                 }
             }
+        }
+
+        damagingEntity.invulnerableTime=0;
+        Entity directEntity = damageSource.getDirectEntity();
+        Object2IntMap<Immunity> invTicks = ((ILivingEntity) damagingEntity).confluence$getImmunityTicks();
+        Immunity.Types type;
+        Immunity cause;
+        if(directEntity != null){
+            type = ((Immunity) directEntity).confluence$getImmunityType();
+            if(type == Immunity.Types.STATIC){
+                cause = (Immunity) directEntity.getType();
+            }else if(type== Immunity.Types.LOCAL){
+                cause = (Immunity) directEntity;
+            }else {
+                throw new IllegalStateException("No valid immunity type");
+            }
+        }else {
+            cause=(Immunity)(Object) damageSource.type();
+            System.out.println(cause);
+        }
+        if(invTicks.containsKey(cause)){
+            event.setCanceled(true);
+            return;
+        }else {
+            int time = ((ILivingEntity) damagingEntity).c$getInvulnerableTime(cause.confluence$getImmunityDuration());
+            invTicks.put(cause, time);
         }
     }
 

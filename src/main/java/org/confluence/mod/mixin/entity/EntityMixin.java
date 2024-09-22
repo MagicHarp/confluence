@@ -30,6 +30,7 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.mixinauxiliary.IEntity;
 import org.confluence.mod.mixinauxiliary.IFishingHook;
+import org.confluence.mod.mixinauxiliary.Immunity;
 import org.confluence.mod.mixinauxiliary.SelfGetter;
 import org.confluence.mod.util.CuriosUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,7 +44,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
+public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immunity {
     @Unique
     private static final Vec3 ANTI_GRAVITY = new Vec3(0.0, -5.0E-4F, 0.0);
 
@@ -119,6 +120,11 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity> {
     @Override
     public boolean confluence$isInShimmer() {
         return confluence$isInShimmer;
+    }
+
+    @Override
+    public Types confluence$getImmunityType(){
+        return Types.LOCAL;
     }
 
     @ModifyExpressionValue(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInLava()Z"))
