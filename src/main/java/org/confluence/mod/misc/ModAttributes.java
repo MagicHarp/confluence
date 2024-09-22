@@ -202,6 +202,9 @@ public final class ModAttributes {
             if (Attributes.ARMOR_TOUGHNESS instanceof RangedAttribute rangedAttribute) {
                 ((RangedAttributeAccessor) rangedAttribute).setMaxValue(1024.0);
             }
+            if (Attributes.MAX_HEALTH instanceof RangedAttribute rangedAttribute) {
+                ((RangedAttributeAccessor) rangedAttribute).setMaxValue(2147483647);
+            }
         }
     }
 }
