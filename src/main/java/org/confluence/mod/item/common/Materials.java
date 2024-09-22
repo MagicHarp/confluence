@@ -62,6 +62,8 @@ public enum Materials implements EnumRegister<Item> {
     SAPPHIRE("sapphire", () -> new BaseItem(WHITE)),
     TOPAZ("topaz", () -> new BaseItem(WHITE)),
 
+    EMERALD_COIN("emerald_coin", () -> new BaseItem(YELLOW)),
+
     STAR_PETALS("star_petals", () -> new FallingStarItem(WHITE)),
     FALLING_STAR("falling_star", () -> new FallingStarItem(WHITE)),
     WEAVING_CLOUD_COTTON("weaving_cloud_cotton", () -> new BaseItem(WHITE)),
