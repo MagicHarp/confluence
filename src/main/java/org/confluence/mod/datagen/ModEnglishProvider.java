@@ -293,27 +293,14 @@ public class ModEnglishProvider extends LanguageProvider {
         add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
         add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
 
-        // old
-        add("advancements.mana_star.title", "Gather the power of the stars");
-        add("advancements.mana_star.descr", "The stars will increase your magical powers");
-        add("advancements.tin_ingot.title", "resonant harmony, reminiscent of bronze");
-        add("advancements.tin_ingot.descr", "Acquire tin ingot, more exotic minerals blend into the world");
-        add("advancements.meteorite_ingot.title", "Something extraterrestrial");
-        add("advancements.meteorite_ingot.descr", "Acquire meteorite ingot");
-        add("advancements.platinum_ingot.title", "Precious metals");
-        add("advancements.platinum_ingot.descr", "Acquire platinum ingot");
-        add("advancements.ebony_ingot.title", "Corrupt will");
-        add("advancements.ebony_ingot.descr", "Acquire ebony ingot");
-        add("advancements.tr_crimson_ingot.title", "Crimson flesh");
-        add("advancements.tr_crimson_ingot.descr", "Acquire crimson ingot");
-        add("advancements.pretty_in_pink.title", "pretty_in_pink");
-        add("advancements.pretty_in_pink.descr", "Find the rare pink slime and defeat it");
         // new
         add("achievements.toast.complete", "Achievement achieved!");
         add("achievements.confluence.new_world.title", "Old World, New Journey!");
         add("achievements.confluence.new_world.description", "The afterlife of convergence and exchange");
         add("achievements.confluence.timber.title", "Timber!! ");
         add("achievements.confluence.timber.description", "Chop down your first tree.");
+        add("achievements.confluence.benched.title", "Benched");
+        add("achievements.confluence.benched.description", "Craft your first Crafting Table.");
         add("achievements.confluence.star_power.title", "Star Power");
         add("achievements.confluence.star_power.description", "Craft a mana crystal out of fallen stars, and consume it.");
         add("achievements.confluence.ooo_shinny.title", "Ooo! Shiny!");
@@ -336,6 +323,13 @@ public class ModEnglishProvider extends LanguageProvider {
         add("achievements.confluence.ankhumulation_complete.description", "The finest protection from unpleasant maladies and ailments.");
         add("achievements.confluence.a_shimmer_in_the_dark.title", "A Shimmer In The Dark");
         add("achievements.confluence.a_shimmer_in_the_dark.description", "Shimmer an item into another item. What other transmutations can you find?");
+
+        add("achievements.confluence.pretty_in_pink.title", "Pretty in Pink");
+        add("achievements.confluence.pretty_in_pink.description", "Kill pinky.");
+        add("achievements.confluence.slippery_shinobi.title", "Slippery Shinobi ");
+        add("achievements.confluence.slippery_shinobi.description", "Defeat King Slime, the lord of all things slimy.");
+        add("achievements.confluence.eye_on_you.title", "Eye on You");
+        add("achievements.confluence.eye_on_you.description", "“Defeat the Eye of Cthulhu, an ocular menace who only appears at night.");
 
         add("prefix.confluence.quick", "Quick");
         add("prefix.confluence.hasty", "Hasty");

@@ -341,31 +341,15 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.slime_dragon.author", "BiliBili_小史龙吖Slime_Dragon");
         add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
         add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
-        // old
-        add("advancements.falling_star.title", "寻觅坠落之光");
-        add("advancements.falling_star.descr", "汇合后的夜空会划落一种特殊的星辰");
-        add("advancements.mana_star.title", "凝聚众星之力");
-        add("advancements.mana_star.descr", "星辰会增长你魔力的造诣");
-        add("advancements.life_crystal.title", "生之希望伴行");
-        add("advancements.life_crystal.descr", "生命给你带来前行的希望");
-        add("advancements.tin_ingot.title", "异口铜声");
-        add("advancements.tin_ingot.descr", "获得锡锭，更多的异界矿物融入于世");
-        add("advancements.meteorite_ingot.title", "天外之物");
-        add("advancements.meteorite_ingot.descr", "获得陨石矿锭");
-        add("advancements.platinum_ingot.title", "尊贵金属");
-        add("advancements.platinum_ingot.descr", "获得铂金锭");
-        add("advancements.ebony_ingot.title", "腐化意志");
-        add("advancements.ebony_ingot.descr", "获得魔矿锭");
-        add("advancements.tr_crimson_ingot.title", "猩红血肉");
-        add("advancements.tr_crimson_ingot.descr", "获得猩红矿锭");
-        add("advancements.pretty_in_pink.title", "粉红佳人");
-        add("advancements.pretty_in_pink.descr", "找到稀有的粉色史莱姆并击败它");
+
         // new
         add("achievements.toast.complete", "成就达成！");
         add("achievements.confluence.new_world.title", "旧的世界，新的旅途！");
         add("achievements.confluence.new_world.description", "汇合交流的来世。");
         add("achievements.confluence.timber.title", "木材！！");
         add("achievements.confluence.timber.description", "砍倒第一棵树。");
+        add("achievements.confluence.benched.title", "准备到位");
+        add("achievements.confluence.benched.description", "制作你的第一个工作台。");
         add("achievements.confluence.star_power.title", "星之力");
         add("achievements.confluence.star_power.description", "使用坠落之星制作魔力水晶并使用它。");
         add("achievements.confluence.ooo_shinny.title", "哦！亮闪闪！");
@@ -388,6 +372,13 @@ public class ModChineseProvider extends LanguageProvider {
         add("achievements.confluence.ankhumulation_complete.description", "这是对抗烦人疾病的最佳防护。");
         add("achievements.confluence.a_shimmer_in_the_dark.title", "暗中微光");
         add("achievements.confluence.a_shimmer_in_the_dark.description", "用微光将一个物品变成另一个物品。你还能找到哪些其他变化？");
+
+        add("achievements.confluence.pretty_in_pink.title", "粉红佳人");
+        add("achievements.confluence.pretty_in_pink.description", "杀死粉史莱姆。");
+        add("achievements.confluence.slippery_shinobi.title", "黏滑忍者");
+        add("achievements.confluence.slippery_shinobi.description", "打败史莱姆王，它是所有黏滑生物的首领。");
+        add("achievements.confluence.eye_on_you.title", "盯着你");
+        add("achievements.confluence.eye_on_you.description", "打败克苏鲁之眼，它是只在夜间出没的危险眼球怪。");
 
         add("prefix.confluence.hard", "坚硬");
         add("prefix.confluence.guarding", "守护");

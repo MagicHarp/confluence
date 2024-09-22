@@ -13,10 +13,10 @@ public final class ModAchievements {
         offset("new_world", 0, 0);
         // Collector
         offset("timber", 1, 0);
-        /* Benched */
-        offset("hammer_time", 2,0);
-        offset("heavy_metal", 3, 0);
-        offset("star_power", 4, 0);
+        offset("benched", 2, 0);
+        offset("hammer_time", 3,0);
+        offset("heavy_metal", 4, 0);
+        offset("star_power", 5, 0);
         offset("hold_on_tight", 0, 1);
         /* Miner for Fire (1, 1) */
         /* Head in the Clouds (2, 1) */
@@ -68,6 +68,12 @@ public final class ModAchievements {
         /* Hey Listen (7.5, 5) */
         /* A Rare Realm (8.5, 5) */
         offset("a_shimmer_in_the_dark", 9.5F, 5);
+
+
+        // Explorer
+        offset("slippery_shinobi", 20F, 20);
+        offset("eye_on_you", 21F, 20);
+        offset("pretty_in_pink", 20F, 40);
     }
 
     private static void offset(String path, float x, float y) {
