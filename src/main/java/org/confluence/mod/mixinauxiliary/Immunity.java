@@ -10,6 +10,6 @@ public interface Immunity {
     Types confluence$getImmunityType();
 
     default int confluence$getImmunityDuration(){
-        return 10;
+        return 0;
     }
 }

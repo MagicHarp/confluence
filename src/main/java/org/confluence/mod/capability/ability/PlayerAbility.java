@@ -49,7 +49,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     public PlayerAbility() {
         this.jumpBoost = 1.0;
         this.fallResistance = 0;
-        this.invulnerableTime = 20;
+        this.invulnerableTime = 10;
         this.fireImmune = false;
         this.maxLavaImmuneTicks = 0;
         this.remainLavaImmuneTicks = 0;
@@ -71,7 +71,7 @@ public final class PlayerAbility implements INBTSerializable<CompoundTag> {
     public void flushAbility(LivingEntity living) {
         AtomicDouble jump = new AtomicDouble(1.0);
         AtomicInteger fall = new AtomicInteger();
-        AtomicInteger invul = new AtomicInteger(20);
+        AtomicInteger invul = new AtomicInteger(10);
         AtomicBoolean fire = new AtomicBoolean();
         AtomicInteger lava = new AtomicInteger();
 

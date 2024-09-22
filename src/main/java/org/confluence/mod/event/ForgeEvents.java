@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -295,6 +296,9 @@ public final class ForgeEvents {
             }
         }
 
+        if(damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)){
+            return;
+        }
         damagingEntity.invulnerableTime=0;
         Entity directEntity = damageSource.getDirectEntity();
         Object2IntMap<Immunity> invTicks = ((ILivingEntity) damagingEntity).confluence$getImmunityTicks();
