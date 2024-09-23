@@ -7,7 +7,7 @@ import org.confluence.mod.misc.ModRarity;
 
 public class TerragrimItem extends SwordItem {
     public TerragrimItem() {
-        super(ModTiers.TITANIUM, 5, 5.2F, new Properties().rarity(ModRarity.ORANGE));
+        super(ModTiers.TITANIUM, 3, 5.2F, new Properties().rarity(ModRarity.ORANGE));
     }
 
 
