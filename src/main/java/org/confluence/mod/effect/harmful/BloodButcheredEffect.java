@@ -12,7 +12,7 @@ public class BloodButcheredEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(),  pAmplifier + 0.5F);
+        pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(),  pAmplifier + 0.1F);
     }
 
     @Override
