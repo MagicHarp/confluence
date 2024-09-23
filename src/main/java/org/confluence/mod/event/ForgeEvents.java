@@ -1,5 +1,6 @@
 package org.confluence.mod.event;
 
+import com.xiaohunao.mine_team.common.event.RegisterTeamDataEvent;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.ChatFormatting;
@@ -418,4 +419,13 @@ public final class ForgeEvents {
             event.getAffectedEntities().removeIf(entity -> entity instanceof ItemEntity);
         }
     }
+
+    @SubscribeEvent
+    public static void onRegisterTeamData(RegisterTeamDataEvent event) {
+        ModEntities.ENTITIES.getEntries().forEach(entry -> {
+            EntityType<?> entityType = entry.get();
+            event.registerTeamData(entityType,data -> data.setCanTeam(false));
+        });
+    }
+
 }
