@@ -11,7 +11,7 @@
             "item": "minecraft:torch"
         },
         {
-            "item": "minecraft:emerald"
+            "item": "confluence:tr_emerald"
         }
     ],
     "result": {

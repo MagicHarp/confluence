@@ -104,6 +104,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BIG_RUBY_BLOCK = registerWithItem("big_ruby_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> BIG_AMBER_BLOCK = registerWithItem("big_amber_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> BIG_TOPAZ_BLOCK = registerWithItem("big_topaz_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> BIG_TR_EMERALD_BLOCK = registerWithItem("big_tr_emerald_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> BIG_SAPPHIRE_BLOCK = registerWithItem("big_sapphire_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> BIG_TR_AMETHYST_BLOCK = registerWithItem("big_tr_amethyst_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     // other environmental stones

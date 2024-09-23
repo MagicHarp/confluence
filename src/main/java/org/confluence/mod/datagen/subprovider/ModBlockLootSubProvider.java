@@ -142,6 +142,11 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         add(Ores.CORRUPTION_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
         add(Ores.FLESHIFICATION_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
         add(Ores.DEEPSLATE_TOPAZ_ORE.get(), block -> createOreDrop(block, Materials.TOPAZ.get()));
+        add(Ores.TR_EMERALD_ORE.get(), block -> createOreDrop(block, Materials.TR_EMERALD.get()));
+        add(Ores.SANCTIFICATION_TR_EMERALD_ORE.get(), block -> createOreDrop(block, Materials.TR_EMERALD.get()));
+        add(Ores.CORRUPTION_TR_EMERALD_ORE.get(), block -> createOreDrop(block, Materials.TR_EMERALD.get()));
+        add(Ores.FLESHIFICATION_TR_EMERALD_ORE.get(), block -> createOreDrop(block, Materials.TR_EMERALD.get()));
+        add(Ores.DEEPSLATE_TR_EMERALD_ORE.get(), block -> createOreDrop(block, Materials.TR_EMERALD.get()));
         add(Ores.SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.SANCTIFICATION_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
         add(Ores.CORRUPTION_SAPPHIRE_ORE.get(), block -> createOreDrop(block, Materials.SAPPHIRE.get()));
@@ -213,6 +218,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(BIG_TOPAZ_BLOCK.get());
         dropSelf(BIG_SAPPHIRE_BLOCK.get());
         dropSelf(BIG_TR_AMETHYST_BLOCK.get());
+        dropSelf(BIG_TR_EMERALD_BLOCK.get());
 
         dropSelf(HARDENED_SAND_BLOCK.get());
         dropSelf(RED_HARDENED_SAND_BLOCK.get());

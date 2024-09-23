@@ -105,6 +105,13 @@ public enum Ores implements EnumBlockRegister<Block> {
     CORRUPTION_AMBER_ORE("corruption_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
     FLESHIFICATION_AMBER_ORE("fleshification_amber_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
 
+    // 翡翠矿
+    TR_EMERALD_ORE("tr_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    DEEPSLATE_TR_EMERALD_ORE("deepslate_tr_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    SANCTIFICATION_TR_EMERALD_ORE("sanctification_tr_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    CORRUPTION_TR_EMERALD_ORE("corruption_tr_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+    FLESHIFICATION_TR_EMERALD_ORE("fleshification_tr_emerald_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
+
     // 异域紫晶矿
     TR_AMETHYST_ORE("tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),
     DEEPSLATE_TR_AMETHYST_ORE("deepslate_tr_amethyst_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE))),

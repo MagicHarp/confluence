@@ -666,6 +666,11 @@ public class ModChineseProvider extends LanguageProvider {
         add(Ores.CORRUPTION_AMBER_ORE.get(), "腐化琥珀矿石");
         add(Ores.FLESHIFICATION_AMBER_ORE.get(), "血化琥珀矿石");
         add(Ores.DEEPSLATE_AMBER_ORE.get(), "深层琥珀矿石");
+        add(Ores.TR_EMERALD_ORE.get(), "翡翠矿石");
+        add(Ores.SANCTIFICATION_TR_EMERALD_ORE.get(), "圣化翡翠矿石");
+        add(Ores.CORRUPTION_TR_EMERALD_ORE.get(), "腐化翡翠矿石");
+        add(Ores.FLESHIFICATION_TR_EMERALD_ORE.get(), "血化翡翠矿石");
+        add(Ores.DEEPSLATE_TR_EMERALD_ORE.get(), "深层翡翠矿石");
         add(Ores.TR_AMETHYST_ORE.get(), "异域紫晶矿石");
         add(Ores.SANCTIFICATION_TR_AMETHYST_ORE.get(), "圣化异域紫晶矿石");
         add(Ores.CORRUPTION_TR_AMETHYST_ORE.get(), "腐化异域紫晶矿石");
@@ -862,6 +867,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(BIG_RUBY_BLOCK.get(), "大红玉块");
         add(BIG_AMBER_BLOCK.get(), "大琥珀块");
         add(BIG_TOPAZ_BLOCK.get(), "大黄玉块");
+        add(BIG_TR_EMERALD_BLOCK.get(), "大翡翠块");
         add(BIG_SAPPHIRE_BLOCK.get(), "大蓝玉块");
         add(BIG_TR_AMETHYST_BLOCK.get(), "大紫晶块");
         add(TR_POLISHED_GRANITE.get(), "异域花岗岩块");
@@ -1077,6 +1083,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.RUBY.get(), "红玉");
         add(Materials.AMBER.get(), "琥珀");
         add(Materials.TOPAZ.get(), "黄玉");
+        add(Materials.TR_EMERALD.get(), "翡翠");
         add(Materials.SAPPHIRE.get(), "蓝玉");
         add(Materials.TR_AMETHYST.get(), "异域紫晶石");
         add(Materials.FALLING_STAR.get(), "坠落之星");

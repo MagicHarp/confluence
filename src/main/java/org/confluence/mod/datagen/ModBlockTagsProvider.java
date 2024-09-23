@@ -59,6 +59,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             BIG_TOPAZ_BLOCK.get(),
             BIG_SAPPHIRE_BLOCK.get(),
             BIG_TR_AMETHYST_BLOCK.get(),
+            BIG_TR_EMERALD_BLOCK.get(),
             DecorativeBlocks.SNOW_BRICKS.get(),
             DecorativeBlocks.TR_COPPER_BRICKS.get(),
             DecorativeBlocks.TR_COPPER_PLATE.get(),

@@ -50,6 +50,7 @@ public final class ModTabs {
                 output.accept(BIG_RUBY_BLOCK.get());
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());
+                output.accept(BIG_TR_EMERALD_BLOCK.get());
                 output.accept(BIG_SAPPHIRE_BLOCK.get());
                 output.accept(BIG_TR_AMETHYST_BLOCK.get());
 

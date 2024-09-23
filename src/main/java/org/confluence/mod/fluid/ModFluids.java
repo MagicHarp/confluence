@@ -180,8 +180,8 @@ public final class ModFluids {
         // 宝石转化
         addItem(Materials.TOPAZ.get(), Materials.TR_AMETHYST.get());
         addItem(Materials.SAPPHIRE.get(), Materials.TOPAZ.get());
-        addItem(Items.EMERALD, Materials.SAPPHIRE.get());
-        addItem(Materials.RUBY.get(), Items.EMERALD);
+        addItem(Materials.TR_EMERALD.get(), Materials.SAPPHIRE.get());
+        addItem(Materials.RUBY.get(), Materials.TR_EMERALD.get());
         addItem(Items.DIAMOND, Materials.RUBY.get());
         addItem(Materials.TR_AMETHYST.get(), Items.DIRT);
         // 锭到矿的转化

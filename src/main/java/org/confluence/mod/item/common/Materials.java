@@ -57,7 +57,7 @@ public enum Materials implements EnumRegister<Item> {
 
     AMBER("amber", () -> new BaseItem(WHITE)),
     TR_AMETHYST("tr_amethyst", () -> new BaseItem(WHITE)),
-    //TR_EMERALD("tr_emerald"),
+    TR_EMERALD("tr_emerald",() -> new BaseItem(WHITE)),
     RUBY("ruby", () -> new BaseItem(WHITE)),
     SAPPHIRE("sapphire", () -> new BaseItem(WHITE)),
     TOPAZ("topaz", () -> new BaseItem(WHITE)),
