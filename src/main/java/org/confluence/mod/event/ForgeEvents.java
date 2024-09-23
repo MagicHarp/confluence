@@ -316,7 +316,6 @@ public final class ForgeEvents {
             }
         }else {
             cause=(Immunity)(Object) damageSource.type();
-            System.out.println(cause);
         }
         if(invTicks.containsKey(cause)){
             event.setCanceled(true);
