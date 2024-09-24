@@ -15,6 +15,7 @@
         "confluence:chests/shipwreck_treasure",
         "confluence:chests/underwater_ruin_small",
         "confluence:chests/underwater_ruin_big",
-        "confluence:chests/desert_pyramid"
+        "confluence:chests/desert_pyramid",
+        "confluence:chests/jungle_temple"
     ]
 }
