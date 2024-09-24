@@ -10,9 +10,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.confluence.mod.entity.ModEntities;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class StarFuryProjextile extends SwordProjectile {
+public class StarFuryProjectile extends SwordProjectile {
     @Override
     protected int getBaseDamage() {
         return 10;
@@ -26,11 +25,11 @@ public class StarFuryProjextile extends SwordProjectile {
     public int hitCount = 2;//可穿透两个目标
 
 
-    public StarFuryProjextile(EntityType<? extends SwordProjectile> pEntityType, Level pLevel) {
+    public StarFuryProjectile(EntityType<? extends SwordProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public StarFuryProjextile(Player owner) {
+    public StarFuryProjectile(Player owner) {
         super(ModEntities.STAR_FURY_PROJECTILE.get(),owner.level());
         this.setOwner(owner);
     }

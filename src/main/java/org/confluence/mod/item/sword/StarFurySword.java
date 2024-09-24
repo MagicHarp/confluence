@@ -7,19 +7,15 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.Angle;
 import org.confluence.mod.datagen.limit.CustomItemModel;
-import org.confluence.mod.datagen.limit.Image24x;
-import org.confluence.mod.entity.ModEntities;
-import org.confluence.mod.entity.projectile.StarFuryProjextile;
+import org.confluence.mod.datagen.limit.ReversalImage16x;
+import org.confluence.mod.entity.projectile.StarFuryProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.misc.ModSoundEvents;
 
@@ -29,7 +25,7 @@ import java.util.List;
 public class StarFurySword extends SwordItem implements CustomItemModel, ISwordProjectile{
     private float maxAngle = 30;//索敌最大角度
     private float range = 30;//索敌范围
-    private float pridict = 10;//预判量
+    private float predict = 10;//预判量
     private float inAccuracy = 0.5f;
     private float offsetV = 20;//发射时的高度偏移
     private float offsetH = 5;//发射时的xy偏移
@@ -43,14 +39,6 @@ public class StarFurySword extends SwordItem implements CustomItemModel, ISwordP
         super(tier, rawDamage, rawSpeed, properties);
     }
 
-
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-
-        genProjectile(pPlayer);
-        return super.use(pLevel,pPlayer,pUsedHand);
-    }
-
-
     public void genProjectile(Player owner) {
         owner.level().playSound(null, owner.getX(), owner.getY(), owner.getZ(), getSound(), SoundSource.AMBIENT, 1.0F, 1.0F);
 
@@ -60,7 +48,7 @@ public class StarFurySword extends SwordItem implements CustomItemModel, ISwordP
 
         if(target!=null){
             //周围有目标 预判
-            waveTarget = target.position().add(target.getDeltaMovement().scale(pridict)).add(0,0.5,0);
+            waveTarget = target.position().add(target.getDeltaMovement().scale(predict)).add(0,0.5,0);
 
         }else{
             //周围无目标 获取视线指向点
@@ -88,7 +76,7 @@ public class StarFurySword extends SwordItem implements CustomItemModel, ISwordP
             Vec3 vec3 = e.getBoundingBox().clip(ori,end).orElse(null);
             //优先指向的目标
             if(vec3!=null){
-                System.out.println("point directly");
+                //System.out.println("point directly");
                 EntityHitResult entityHitResult = new EntityHitResult(e,vec3);
                 hits.add(entityHitResult);
             }//自瞄其他夹角小于一定度数的目标
@@ -96,7 +84,6 @@ public class StarFurySword extends SwordItem implements CustomItemModel, ISwordP
                 EntityHitResult entityHitResult = new EntityHitResult(e,e.position());
                 subHits.add(entityHitResult);
             }
-
         }
 
 
@@ -138,7 +125,7 @@ public class StarFurySword extends SwordItem implements CustomItemModel, ISwordP
 
     @Override
     public SwordProjectile getProjectile(Player player) {
-        return new StarFuryProjextile(player);
+        return new StarFuryProjectile(player);
     }
 
 
