@@ -1,11 +1,16 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -31,6 +36,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import java.util.function.Predicate;
 
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
+import static org.confluence.mod.util.ModUtils.updateEntityRotation;
 
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
@@ -45,6 +51,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private final float dashFactor = 1.5f; //冲刺增伤
     private final float speedFactor = 2f; //冲刺加速
     private final float stage2SpeedFactor = 1.5f; //二阶段加速加成
+    private final float minDashDistanceSqr = 20;
     private int difficultyIdx;
     private int stage = 1; //阶段
 
@@ -56,6 +63,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private int stage2_dashCount = stage2_dashCount_base; //二阶段冲刺次数，每掉1/10的血+1
 
     private Vec3 dashPos;
+    private Vec3 dashDir;
 
     public CthulhuEye(EntityType<CthulhuEye> entityType, Level level) {
         super(entityType, level);
@@ -95,7 +103,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                 terraBossBase -> {},
                 terraBossBase -> {
                     if (getTarget() == null) return;
-                    cslLookAt();
+                    cslLookAt(10);
                     // 生成粒子
                     for (int i = 0; i < 20; i++) {
                         BlockPos pos = BlockPos.containing(position());
@@ -117,7 +125,6 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         // 延迟20tick冲刺10tick
         this.state1_dash = new BossSkill("2", "type_1_run", 30, 20,
                 terraBossBase -> {
-                    cslLookAt();
                 },
                 terraBossBase -> {
 
@@ -125,7 +132,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     if (getTarget() == null) return;
                     if (!skills.canContinue()) {
                         // 调整方向
-                        cslLookAt();
+                        cslLookAt(50);
                         // 不精准度
                         dashPos = getTarget().position().subtract(position()).add(0, 1, 0).offsetRandom(RandomSource.create(), 1);
                         return;
@@ -160,7 +167,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                 },
                 terraBossBase -> {
                     if (getTarget() == null) return;
-                    cslLookAt();
+                    cslLookAt(10);
                     // 生成粒子
                     for (int i = 0; i < 20; i++) {
                         if (level() instanceof ServerLevel level) {
@@ -184,21 +191,26 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
                 }
         );
-        this.state2_dash = new BossSkill("5", "type_2_run", 20, 10,
+        this.state2_dash = new BossSkill("5", "type_2_run", 25, 15,
                 terraBossBase -> {
                     //setDeltaMovement(0, 0, 0);
-                    cslLookAt();
                 },
                 terraBossBase -> {
                     // 延迟冲刺
                     if (getTarget() == null) return;
                     if (!skills.canContinue()) {
                         // 调整方向
-                        cslLookAt();
+                        cslLookAt(360);
                         // 不精准度
                         dashPos = getTarget().position().subtract(position()).add(0, 1, 0).offsetRandom(RandomSource.create(), 4);
+                        dashDir = dashPos.subtract(position());
+                        //冲撞距离过小则后退
+                        if(distanceToSqr(getTarget()) < minDashDistanceSqr) setDeltaMovement(dashPos.normalize().scale(-1));
                         return;
                     }
+                    //updateEntityRotation(this,dashDir);
+
+
                     // 冲刺增加伤害
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx] * dashFactor);
                     if (dashPos != null) this.setDeltaMovement(dashPos.normalize().scale(MOVE_SPEED[difficultyIdx] * speedFactor * stage2SpeedFactor));
@@ -228,11 +240,16 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
 
 
 
-    private void cslLookAt() {
-        if (getTarget() != null) {
-            lookAt(getTarget(), 10, 85);
+    private void cslLookAt(float maxAngleY) {
+        var pEntity = getTarget();
+        if (pEntity != null) {
+            lookAt(getTarget(), maxAngleY, 85);
+
         }
     }
+
+
+
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -285,5 +302,16 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     public void tick() {
         super.tick();
         syncRot();
+    }
+
+    @Override // boss条显示
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        player.sendSystemMessage(Component.translatable("ke_yan_say_to_you_staring").withStyle(ChatFormatting.RED));
+    }
+    @Override // boss条消失
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        player.sendSystemMessage(Component.translatable(""));
     }
 }

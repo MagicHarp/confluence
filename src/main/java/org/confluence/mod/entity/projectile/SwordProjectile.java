@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
@@ -17,7 +18,7 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class SwordProjectile extends Projectile {
+public abstract class SwordProjectile extends AbstractHurtingProjectile {
     private static final int TIME_EXISTENCE = 40;
     protected float attackDamage = 0.0F;
     protected float criticalChance = 0.0F;
@@ -92,5 +93,19 @@ public abstract class SwordProjectile extends Projectile {
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
         return false;
+    }
+
+
+    @Override//火焰效果
+    protected boolean shouldBurn() {
+        return false;
+    }
+    @Override
+    public boolean isPickable() {
+        return false;
+    }
+    @Override//空气阻力
+    protected float getInertia() {
+        return 1;
     }
 }

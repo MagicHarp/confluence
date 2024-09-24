@@ -3,12 +3,11 @@ package org.confluence.mod.network.c2s;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
-import org.confluence.mod.entity.projectile.SwordProjectile;
 import org.confluence.mod.item.sword.ISwordProjectile;
+import org.confluence.mod.item.sword.StarFurySword;
 
 import java.util.function.Supplier;
 
@@ -28,10 +27,7 @@ public record SwordShootingPacketC2S(Item item) {
             if (player == null) return;
             ItemStack mainHandItem = player.getMainHandItem();
             if (mainHandItem.is(packet.item) && packet.item instanceof ISwordProjectile swordProjectile) {
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), swordProjectile.getSound(), SoundSource.AMBIENT, 1.0F, 1.0F);
-                SwordProjectile projectile = swordProjectile.getProjectile(player);
-                projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, swordProjectile.getVelocity(player), 0.0F);
-                player.level().addFreshEntity(projectile);
+                swordProjectile.genProjectile(player);
             }
         });
         context.setPacketHandled(true);
