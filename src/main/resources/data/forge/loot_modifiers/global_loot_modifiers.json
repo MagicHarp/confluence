@@ -10,6 +10,11 @@
         "confluence:blocks/cherry_leaves",
         "confluence:entities/skeleton",
         "confluence:entities/bat",
-        "confluence:entities/zombie"
+        "confluence:entities/zombie",
+        "confluence:chests/shipwreck_supply",
+        "confluence:chests/shipwreck_treasure",
+        "confluence:chests/underwater_ruin_small",
+        "confluence:chests/underwater_ruin_big",
+        "confluence:chests/desert_pyramid"
     ]
 }

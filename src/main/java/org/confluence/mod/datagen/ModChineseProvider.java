@@ -66,6 +66,9 @@ public class ModChineseProvider extends LanguageProvider {
         add("generator.confluence.corruption", "腐化之地");
         add("generator.confluence.tr_crimson", "猩红之地");
 
+        add("bossevent.confluence.cthulhu_eye.generate", "克苏鲁之眼已经苏醒！");
+        add("bossevent.confluence.cthulhu_eye.death", "克苏鲁之眼已被击败！");
+
         add("entity.confluence.ice_slime", "冰冻史莱姆");
         add("entity.confluence.blue_slime", "蓝色史莱姆");
         add("entity.confluence.red_slime", "红色史莱姆");

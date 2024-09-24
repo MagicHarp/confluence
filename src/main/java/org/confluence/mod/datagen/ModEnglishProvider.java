@@ -50,6 +50,9 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
         add("item.confluence.alpha.desc", "C418 - alpha");
 
+        add("bossevent.confluence.cthulhu_eye.generate", "The CthulhuEye has awakened!");
+        add("bossevent.confluence.cthulhu_eye.death", "The CthulhuEye been defeated!");
+
         add("curios.tooltip.speed_boots", "The wearer can run super fast");
         add("curios.tooltip.may_fly", "Allows flight");
         add("curios.tooltip.jump_boost", "Increases jump height");

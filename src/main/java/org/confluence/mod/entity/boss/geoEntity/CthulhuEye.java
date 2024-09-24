@@ -307,11 +307,11 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     @Override // boss条显示
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
-        player.sendSystemMessage(Component.translatable("ke_yan_say_to_you_staring").withStyle(ChatFormatting.RED));
+        player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.generate").withStyle(ChatFormatting.DARK_PURPLE));
     }
     @Override // boss条消失
     public void stopSeenByPlayer(ServerPlayer player) {
         super.stopSeenByPlayer(player);
-        player.sendSystemMessage(Component.translatable(""));
+        player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE));
     }
 }

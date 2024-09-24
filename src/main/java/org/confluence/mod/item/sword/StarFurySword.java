@@ -14,6 +14,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import org.confluence.mod.datagen.limit.CustomItemModel;
+import org.confluence.mod.datagen.limit.Image24x;
 import org.confluence.mod.datagen.limit.ReversalImage16x;
 import org.confluence.mod.entity.projectile.StarFuryProjectile;
 import org.confluence.mod.entity.projectile.SwordProjectile;
@@ -22,7 +23,7 @@ import org.confluence.mod.misc.ModSoundEvents;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StarFurySword extends SwordItem implements CustomItemModel, ISwordProjectile{
+public class StarFurySword extends SwordItem implements Image24x, ISwordProjectile{
     private float maxAngle = 30;//索敌最大角度
     private float range = 30;//索敌范围
     private float predict = 10;//预判量
