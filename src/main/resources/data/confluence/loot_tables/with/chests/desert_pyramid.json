@@ -10,17 +10,22 @@
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 1
+                            "chance": 0.6
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
                 {
                     "type": "minecraft:item",
                     "name": "confluence:sandstorm_in_a_bottle",
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 1
+                            "chance": 0.6
                         }
                     ]
                 }

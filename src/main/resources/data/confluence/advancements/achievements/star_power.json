@@ -12,7 +12,7 @@
         "frame": "challenge",
         "show_toast": false,
         "announce_to_chat": true,
-        "hidden": true
+        "hidden": false
     },
     "parent": "confluence:achievements/new_world",
     "criteria": {
