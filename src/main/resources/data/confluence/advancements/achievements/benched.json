@@ -19,11 +19,13 @@
         "requirement": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
-                "item": {
-                    "items": [
-                        "minecraft:crafting_table"
-                    ]
-                }
+                "items": [
+                    {
+                        "items": [
+                            "minecraft:crafting_table"
+                        ]
+                    }
+                ]
             }
         }
     }
