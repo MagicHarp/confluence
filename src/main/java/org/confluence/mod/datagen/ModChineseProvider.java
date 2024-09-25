@@ -1041,7 +1041,13 @@ public class ModChineseProvider extends LanguageProvider {
         add(SPOOKY_LOG_BLOCKS.STAIRS.get(), "阴森楼梯");
         add(SPOOKY_LOG_BLOCKS.SLAB.get(), "阴森台阶");
 
-
+        add(ModItems.FLAMING_ARROW.get(), "烈焰箭");
+        add(ModItems.UNHOLY_ARROW.get(), "邪箭");
+        add(ModItems.JESTERS_ARROW.get(), "小丑之箭");
+        add(ModItems.HELLFIRE_ARROW.get(), "狱炎箭");
+        add(ModItems.FROSTBURN_ARROW.get(), "寒霜箭");
+        add(ModItems.BONE_ARROW.get(), "骨箭");
+        add(ModItems.SHIMMER_ARROW.get(), "微光箭");
         //endregion blocks
 
         //region items

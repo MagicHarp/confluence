@@ -356,6 +356,15 @@ public final class ModTabs {
                 output.accept(Bows.TUNGSTEN_BOW.get());
                 output.accept(Bows.GOLDEN_BOW.get());
                 output.accept(Bows.PLATINUM_BOW.get());
+
+                output.accept(ModItems.FLAMING_ARROW.get());
+                output.accept(ModItems.UNHOLY_ARROW.get());
+                output.accept(ModItems.JESTERS_ARROW.get());
+                output.accept(ModItems.HELLFIRE_ARROW.get());
+                output.accept(ModItems.FROSTBURN_ARROW.get());
+                output.accept(ModItems.BONE_ARROW.get());
+                output.accept(ModItems.SHIMMER_ARROW.get());
+
                 output.accept(GunItems.HANDGUN.get());
                 output.accept(GunItems.MUSKET.get());
                 output.accept(GunItems.BOOMSTICK.get());
