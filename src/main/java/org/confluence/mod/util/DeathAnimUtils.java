@@ -374,7 +374,7 @@ public class DeathAnimUtils {
         }
         ParticleOptions blood = new BloodParticleOptions(color[0], color[1], color[2], motion.x, motion.y, motion.z);
         ParticleOptions bodyPart = new BodyPartsParticleOptions(motion.x, motion.y, motion.z, entity.getId());
-//        serverLevel.sendParticles(blood, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
+        serverLevel.sendParticles(blood, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
         serverLevel.sendParticles(bodyPart, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
     }
 

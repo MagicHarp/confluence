@@ -1,7 +1,7 @@
 package org.confluence.mod.client.particle;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -9,7 +9,6 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -25,26 +24,9 @@ public class BodyPartsParticle extends TextureSheetParticle {
     private final float uf;
     private final float vf;
 
-    private static final ParticleRenderType ENTITY_SHEET = new ParticleRenderType() {
-        public void begin(BufferBuilder pBuilder, @NotNull TextureManager pTextureManager){
-            RenderSystem.depthMask(true);
-            RenderSystem.setShaderTexture(0, Confluence.asResource("textures/atlas/entity.png"));
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            pBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-        }
-
-        public void end(Tesselator p_107444_){
-            p_107444_.end();
-        }
-
-        public String toString(){
-            return "ENTITY_SHEET";
-        }
-    };
-
     @Override
     public void render(@NotNull VertexConsumer pBuffer, @NotNull Camera pRenderInfo, float pPartialTicks){
+        RenderSystem.setShaderTexture(0,Confluence.asResource("textures/atlas/entity.png"));
         super.render(pBuffer, pRenderInfo, pPartialTicks);
     }
 
@@ -94,7 +76,7 @@ public class BodyPartsParticle extends TextureSheetParticle {
     @Override
     @NotNull
     public ParticleRenderType getRenderType(){
-        return ENTITY_SHEET;
+        return ParticleRenderType.TERRAIN_SHEET;
     }
 
     public static class Provider implements ParticleProvider<BodyPartsParticleOptions> {
