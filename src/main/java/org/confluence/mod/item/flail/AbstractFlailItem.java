@@ -75,4 +75,5 @@ public class AbstractFlailItem extends Item {
         return super.useOnRelease(pStack);
 
     }
+    public boolean isEdible(){return false;}
 }

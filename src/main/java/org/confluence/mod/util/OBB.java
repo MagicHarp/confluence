@@ -172,7 +172,7 @@ public class OBB extends SliceShape { //本来要继承VoxelShape，但是构造
         return Intersects(this, otherOBB);
     }
 
-    // TODO: 大问题
+
     public boolean collide(AABB boundingBox, Vec3 myMotion, Vec3 othersMotion){
         return isColliding(this, new OBB(boundingBox).updateVertex(), myMotion, othersMotion);
     }

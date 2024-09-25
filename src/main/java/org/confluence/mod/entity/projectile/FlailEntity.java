@@ -6,9 +6,11 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
@@ -100,7 +102,7 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
             case PHASE_RETRACT, PHASE_FORCE_RETRACT -> {
                 noPhysics = true;
                 setNoGravity(true);
-                setDeltaMovement(owner.position().add(0,1,0).subtract(position()).normalize().scale(3)); // TODO: 时间决定速度
+                setDeltaMovement(owner.position().add(0,1.5,0).subtract(position()).normalize().scale(3)); // TODO: 时间决定速度
             }
         }
         if(position().distanceToSqr(owner.position()) > 16 * 16){  // TODO: 抛出时间固定，时间决定速度和距离
@@ -109,14 +111,15 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
         refreshDimensions();
         if(!level().isClientSide()){
             OBB obb = getOrientedBoundingBox();
-            AABB border = obb.getBorder();
-            for(LivingEntity living : level().getEntitiesOfClass(LivingEntity.class, border, EntitySelector.NO_SPECTATORS
-                .and(e -> {
-                    //if(phase == PHASE_SPIN){
+            //包围盒要大一点
+            AABB border = getBoundingBox().inflate(2);
+            var entities = level().getEntitiesOfClass(LivingEntity.class, border, EntitySelector.NO_SPECTATORS
+                    .and(e -> {
+                        if(e instanceof Player) return true;
                         return obb.inflate(10).collide(e.getBoundingBox(), motion, e.getDeltaMovement());
-                    //}
-                    //return true;
-                }))){
+                    }));
+
+            for(LivingEntity living : entities){
                 if(living == owner){
                     if(phase == PHASE_RETRACT || phase == PHASE_FORCE_RETRACT){
                         if(owner instanceof IPlayer fp){
@@ -124,14 +127,16 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
                         }
                         discard();
                     }
-                    return;
+                    continue;
                 }
+
                 living.hurt(damageSources().mobAttack(owner instanceof LivingEntity lo ? lo : null), item.damage); // TODO: 不同阶段伤害不同
 //                living.knockback();
                 // TODO: 击退
             }
         }
     }
+
 
     @Override
     public void move(MoverType pType, Vec3 motion){
@@ -174,7 +179,8 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
         if(getPhase() == PHASE_SPIN){
             return super.getDimensions(pPose);
         }else{
-            return EntityDimensions.fixed(0.5f, 0.5f);
+            //包围盒要大一点
+            return EntityDimensions.fixed(0.75f, 0.75f);
         }
     }
 
