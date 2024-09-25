@@ -397,6 +397,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
         event.registerSpriteSet(ModParticles.CURRENT_DUST.get(), CurrentColorDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.BLOOD.get(), BloodParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.BODY_PART.get(), pSprites -> new BodyPartsParticle.Provider());
         event.registerSpriteSet(ModParticles.LIGHTS_BANE.get(), LightsBaneParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_DUST.get(), LightsBaneDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_FADE.get(), LightsBaneFadeParticle.Provider::new);

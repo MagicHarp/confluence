@@ -7,6 +7,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
@@ -23,6 +24,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
+import org.confluence.mod.client.EntityAtlas;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
@@ -44,6 +46,7 @@ import org.confluence.mod.worldgen.ModWorldGens;
 import org.confluence.mod.worldgen.biome.ModBiomes;
 
 import static org.confluence.mod.Confluence.MODID;
+import static org.confluence.mod.Confluence.entityAtlas;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModEvents {
@@ -172,5 +175,11 @@ public final class ModEvents {
         ModAttributes.registerAttribute(ModAttributes.MAGIC_DAMAGE.get(), event::add);
         ModAttributes.registerAttribute(ModAttributes.ARMOR_PASS.get(), event::add);
         ModAttributes.registerAttribute(ModAttributes.PICKUP_RANGE.get(), event::add);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterClientReload(RegisterClientReloadListenersEvent event){
+        Confluence.entityAtlas = new EntityAtlas();
+        event.registerReloadListener(entityAtlas);
     }
 }

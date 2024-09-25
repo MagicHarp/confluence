@@ -23,6 +23,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.options.BloodParticleOptions;
+import org.confluence.mod.client.particle.options.BodyPartsParticleOptions;
 import org.confluence.mod.mixin.client.accessor.CustomHeadLayerAccessor;
 import org.confluence.mod.mixin.client.accessor.LivingEntityRendererAccessor;
 import org.confluence.mod.mixin.client.accessor.ModelPartAccessor;
@@ -371,8 +372,10 @@ public class DeathAnimUtils {
         }else{
             color = DeathAnimOptions.Builtin.DEFAULT.getBloodColor();
         }
-        ParticleOptions particle = new BloodParticleOptions(color[0], color[1], color[2], motion.x, motion.y, motion.z);
-        serverLevel.sendParticles(particle, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
+        ParticleOptions blood = new BloodParticleOptions(color[0], color[1], color[2], motion.x, motion.y, motion.z);
+        ParticleOptions bodyPart = new BodyPartsParticleOptions(motion.x, motion.y, motion.z, entity.getId());
+//        serverLevel.sendParticles(blood, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
+        serverLevel.sendParticles(bodyPart, pos.x, pos.y, pos.z, calcParticleCount(bb), bb.getXsize() / 3, bb.getYsize() / 3, bb.getZsize() / 3, 0);
     }
 
     @Nullable

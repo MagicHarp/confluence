@@ -9,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.particle.options.BloodParticleOptions;
+import org.confluence.mod.client.particle.options.BodyPartsParticleOptions;
 import org.confluence.mod.client.particle.options.CurrentDustOptions;
 import org.confluence.mod.client.particle.options.LightsBaneParticleOptions;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ public final class ModParticles {
     public static final RegistryObject<SimpleParticleType> FLAMEFLOWER_BLOOM = PARTICLES.register("flameflower_bloom", () -> new SimpleParticleType(false));
     public static final RegistryObject<ParticleType<CurrentDustOptions>> CURRENT_DUST = register("current_dust", false, CurrentDustOptions.DESERIALIZER, (p_123819_) -> CurrentDustOptions.CODEC);
     public static final RegistryObject<ParticleType<BloodParticleOptions>> BLOOD = register("blood", false, BloodParticleOptions.DESERIALIZER, type-> BloodParticleOptions.CODEC);
+    public static final RegistryObject<ParticleType<BodyPartsParticleOptions>> BODY_PART = register("body_part", false, BodyPartsParticleOptions.DESERIALIZER, type-> BodyPartsParticleOptions.CODEC);
     public static final RegistryObject<ParticleType<LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", true, LightsBaneParticleOptions.DESERIALIZER, type-> LightsBaneParticleOptions.CODEC);
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_DUST = PARTICLES.register("lights_bane_dust", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_FADE = PARTICLES.register("lights_bane_fade", () -> new SimpleParticleType(true));

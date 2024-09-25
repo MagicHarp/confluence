@@ -17,6 +17,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.confluence.mod.advancement.ModTriggers;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.client.ClientConfigs;
+import org.confluence.mod.client.EntityAtlas;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.command.ModArgumentTypeInfos;
 import org.confluence.mod.effect.ModEffects;
@@ -50,6 +51,7 @@ public final class Confluence {
     public static final Hashtable<EntityType<? extends AbstractMinecart>, Item> MINECART_CURIO = new Hashtable<>();
     public static final Hashtable<Item, Function3<Level, BlockPos, Double, AbstractMinecart>> CURIO_MINECART = new Hashtable<>();
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
+    public static EntityAtlas entityAtlas;
 
     public Confluence() {
         ModConfigs.registerCommon();
@@ -73,6 +75,8 @@ public final class Confluence {
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
         ModMenus.TYPES.register(bus);
+//        entityAtlas = new EntityAtlas();
+//        ((ReloadableResourceManager)(Minecraft.getInstance().getResourceManager())).registerReloadListener(entityAtlas);
     }
 
     public static ResourceLocation asResource(String path) {

@@ -1,7 +1,5 @@
 package org.confluence.mod.client.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.util.RandomSource;
@@ -13,10 +11,11 @@ public class BloodParticle extends TextureSheetParticle {
 
     protected BloodParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, float r, float g, float b){
         super(level, x, y, z);
-        this.lifetime = level.getRandom().nextInt(20, 50);
+        this.lifetime = level.getRandom().nextInt(15, 40);
         this.xd = xSpeed;
         this.yd = ySpeed;
         this.zd = zSpeed;
+        gravity = 2;
 
         this.rCol = r;
         this.gCol = g;
@@ -27,13 +26,8 @@ public class BloodParticle extends TextureSheetParticle {
     @Override
     public void tick(){
         super.tick();
-        float gravity = 0.08f;
-        this.yd -= gravity;
-    }
-
-    @Override
-    public void render(@NotNull VertexConsumer buffer, @NotNull Camera camera, float partialTicks){
-        super.render(buffer, camera, partialTicks);
+//        float gravity = 0.08f;
+//        this.yd -= gravity;
     }
 
     @Override
