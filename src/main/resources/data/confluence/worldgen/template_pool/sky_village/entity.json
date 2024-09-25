@@ -1,5 +1,5 @@
 {
-  "fallback": "confluence:sky_village/cloud",
+  "fallback": "confluence:sky_village/entity",
   "elements": [
     {
       "weight": 1,
