@@ -15,11 +15,12 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.flail.AbstractFlailItem;
 import org.confluence.mod.mixin.accessor.EntityAccessor;
 import org.confluence.mod.mixinauxiliary.IPlayer;
+import org.confluence.mod.mixinauxiliary.Immunity;
 import org.confluence.mod.util.IOriented;
 import org.confluence.mod.util.OBB;
 import org.jetbrains.annotations.NotNull;
 
-public class FlailEntity extends ChainingEntity implements IOriented {
+public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
     public long frameCount = 0;
     private final AbstractFlailItem item;
     private InteractionHand hand;
@@ -195,4 +196,13 @@ public class FlailEntity extends ChainingEntity implements IOriented {
         return new OBB(pos.add(offset * Mth.cos(radians), 1, offset * Mth.sin(radians)), 0.7, 2, 3.6, 0, owner.getYRot()).updateVertex();
     }
 
+    @Override
+    public Types confluence$getImmunityType(){
+        return Types.LOCAL;
+    }
+
+    @Override
+    public int confluence$getImmunityDuration(){
+        return 7;
+    }
 }
