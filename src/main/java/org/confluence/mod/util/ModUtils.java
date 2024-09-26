@@ -1,6 +1,10 @@
 package org.confluence.mod.util;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.entity.VexRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -20,7 +24,11 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.color.FloatRGB;
+import org.confluence.mod.client.color.FloatRGBA;
 import org.confluence.mod.item.ModItems;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.Calendar;
 import java.util.List;
@@ -315,5 +323,34 @@ public final class ModUtils {
         double y = axis == Direction.Axis.Y ? scale * vec3.y : vec3.y;
         double z = axis == Direction.Axis.Z ? scale * vec3.z : vec3.z;
         return new Vec3(x, y, z);
+    }
+
+    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb,
+                                  float l, float w, int h, float x, int y, float z){
+        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(), y, y + h,
+                x, z, x + l, z + l, x + w, z + w, x + w, z + l, 0, 0, 0, 0);
+    }
+
+    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pMinY, int pMaxY, float pX0, float pZ0, float pX1, float pZ1, float pX2, float pZ2, float pX3, float pZ3, float pMinU, float pMaxU, float pMinV, float pMaxV) {
+        PoseStack.Pose posestack$pose = pPoseStack.last();
+        Matrix4f matrix4f = posestack$pose.pose();
+        Matrix3f matrix3f = posestack$pose.normal();
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX0, pZ0, pX1, pZ1, pMinU, pMaxU, pMinV, pMaxV);
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX3, pZ3, pX2, pZ2, pMinU, pMaxU, pMinV, pMaxV);
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX1, pZ1, pX3, pZ3, pMinU, pMaxU, pMinV, pMaxV);
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX2, pZ2, pX0, pZ0, pMinU, pMaxU, pMinV, pMaxV);
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMinY, pX0, pX3, pZ0, pZ3, pMinU, pMaxU, pMinV, pMaxV);
+        renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMaxY, pX0, pX3, pZ0, pZ3, pMinU, pMaxU, pMinV, pMaxV);
+    }
+
+    private static void renderQuad(Matrix4f pPose, Matrix3f pNormal, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pMinY, int pMaxY, float pMinX, float pMinZ, float pMaxX, float pMaxZ, float pMinU, float pMaxU, float pMinV, float pMaxV) {
+        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMinX, pMinZ, pMaxU, pMinV);
+        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMinX, pMinZ, pMaxU, pMaxV);
+        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxX, pMaxZ, pMinU, pMaxV);
+        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMaxX, pMaxZ, pMinU, pMinV);
+    }
+
+    private static void addVertex(Matrix4f pPose, Matrix3f pNormal, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pY, float pX, float pZ, float pU, float pV) {
+        pConsumer.vertex(pPose, pX, (float)pY, pZ).color(pRed, pGreen, pBlue, pAlpha).uv(pU, pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(pNormal, 0.0F, 1.0F, 0.0F).endVertex();
     }
 }
