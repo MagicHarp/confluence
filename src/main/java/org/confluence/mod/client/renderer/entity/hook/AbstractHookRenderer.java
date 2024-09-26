@@ -81,7 +81,7 @@ public abstract class AbstractHookRenderer<T extends ChainingEntity> extends Ent
         }
     }
 
-    protected void renderHook(T entity, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int skyLight) {
+    protected void  renderHook(T entity, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int skyLight) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot() - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(entity.getXRot()));

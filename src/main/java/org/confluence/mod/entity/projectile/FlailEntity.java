@@ -27,6 +27,8 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
     private final AbstractFlailItem item;
     private InteractionHand hand;
     private Vec3 direction;
+    public float offset;
+    public float radians;
 
     public static final EntityDataAccessor<Float> DATA_OFFSET = SynchedEntityData.defineId(FlailEntity.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Integer> DATA_PHASE = SynchedEntityData.defineId(FlailEntity.class, EntityDataSerializers.INT);
@@ -48,9 +50,9 @@ public class FlailEntity extends ChainingEntity implements IOriented, Immunity {
     public FlailEntity(Level pLevel, Entity owner, InteractionHand hand, AbstractFlailItem flailItem){
         this(pLevel, flailItem);
         setOwner(owner);
-        float radians = (float) Math.toRadians(owner.getYRot());
+        radians = (float) Math.toRadians(owner.getYRot());
         this.hand = hand;
-        float offset = hand == InteractionHand.MAIN_HAND ? -0.6f : 0.6f;
+        offset = hand == InteractionHand.MAIN_HAND ? -0.6f : 0.6f;
         getEntityData().set(DATA_OFFSET, offset);
         setPos(owner.position().add(offset * Mth.cos(radians), 0, offset * Mth.sin(radians)));
     }
