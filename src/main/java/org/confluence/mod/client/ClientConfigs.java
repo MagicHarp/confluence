@@ -8,6 +8,8 @@ public final class ClientConfigs {
     public static boolean terraStyleHealth = true;
     public static boolean leftEffectIcon = true;
     public static boolean hurtRedOverlay = true;
+    public static boolean bloodyEffect = true;
+    public static boolean damageIndicator = true;
     private static ForgeConfigSpec.BooleanValue TERRA_STYLE_HEALTH;
     private static ForgeConfigSpec.BooleanValue LEFT_EFFECT_ICON;
     private static ForgeConfigSpec.BooleanValue HURT_RED_OVERLAY;

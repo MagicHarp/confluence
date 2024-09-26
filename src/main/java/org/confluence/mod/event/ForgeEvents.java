@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -50,6 +52,7 @@ import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.client.particle.options.DamageIndicatorOptions;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
 import org.confluence.mod.command.SpecificMoon;
@@ -324,6 +327,17 @@ public final class ForgeEvents {
             int time = ((ILivingEntity) damagingEntity).c$getInvulnerableTime(cause.confluence$getImmunityDuration());
             invTicks.put(cause, time);
         }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDamage(LivingDamageEvent event){
+        if(event.isCanceled() || !(event.getEntity().level() instanceof ServerLevel level))return;
+//        DamageSource damageSource = event.getSource();
+        LivingEntity entity = event.getEntity();
+        Vec3 pos = entity.getEyePosition();
+        int amount = (int) event.getAmount();
+        MutableComponent component = Component.literal(String.valueOf(amount)).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD);
+        level.sendParticles(new DamageIndicatorOptions(component), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
     }
 
     @SubscribeEvent

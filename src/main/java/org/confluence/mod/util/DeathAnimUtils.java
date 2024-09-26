@@ -259,7 +259,7 @@ public class DeathAnimUtils {
     }
 
     /** @author ChatGPT */
-    private static float cubicBezier(float t, float p0, float p1, float p2, float p3){
+    public static float cubicBezier(float t, float p0, float p1, float p2, float p3){
         float u = 1 - t;
         float tt = t * t;
         float uu = u * u;

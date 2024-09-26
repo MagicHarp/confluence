@@ -401,6 +401,7 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.LIGHTS_BANE.get(), LightsBaneParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_DUST.get(), LightsBaneDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_FADE.get(), LightsBaneFadeParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.DAMAGE_INDICATOR.get(), pSprites -> new DamageIndicatorParticle.Provider());
     }
 
     @SubscribeEvent

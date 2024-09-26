@@ -8,10 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.particle.options.BloodParticleOptions;
-import org.confluence.mod.client.particle.options.BodyPartsParticleOptions;
-import org.confluence.mod.client.particle.options.CurrentDustOptions;
-import org.confluence.mod.client.particle.options.LightsBaneParticleOptions;
+import org.confluence.mod.client.particle.options.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -35,7 +32,7 @@ public final class ModParticles {
     public static final RegistryObject<ParticleType<LightsBaneParticleOptions>> LIGHTS_BANE = register("lights_bane", true, LightsBaneParticleOptions.DESERIALIZER, type-> LightsBaneParticleOptions.CODEC);
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_DUST = PARTICLES.register("lights_bane_dust", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> LIGHTS_BANE_FADE = PARTICLES.register("lights_bane_fade", () -> new SimpleParticleType(true));
-
+    public static final RegistryObject<ParticleType<DamageIndicatorOptions>> DAMAGE_INDICATOR = register("damage_indicator", false, DamageIndicatorOptions.DESERIALIZER, type-> DamageIndicatorOptions.CODEC);
 
     @SuppressWarnings("all")
     private static <T extends ParticleOptions> RegistryObject<ParticleType<T>> register(String pKey, boolean pOverrideLimiter, ParticleOptions.Deserializer<T> pDeserializer, final Function<ParticleType<T>, Codec<T>> pCodecFactory) {
