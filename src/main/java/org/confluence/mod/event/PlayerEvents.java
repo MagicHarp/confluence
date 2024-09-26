@@ -16,10 +16,8 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
@@ -110,18 +108,18 @@ public final class PlayerEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void criticalHit(CriticalHitEvent event) {
-        if (ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) return;
-        Player player = event.getEntity();
-        if (!event.isVanillaCritical()) {
-            double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
-            if (player.level().random.nextFloat() < chance) {
-                event.setDamageModifier(1.5F);
-                event.setResult(Event.Result.ALLOW);
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public static void criticalHit(CriticalHitEvent event) {
+//        if (ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get())) return;
+//        Player player = event.getEntity();
+//        if (!event.isVanillaCritical()) {
+//            double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
+//            if (player.level().random.nextFloat() < chance) {
+//                event.setDamageModifier(1.5F);
+//                event.setResult(Event.Result.ALLOW);
+//            }
+//        }
+//    }
 
     @SubscribeEvent
     public static void breakSpeed(PlayerEvent.BreakSpeed event) {

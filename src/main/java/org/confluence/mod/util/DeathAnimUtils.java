@@ -52,6 +52,7 @@ public class DeathAnimUtils {
         options.put(PHANTOM, DeathAnimOptions.Builtin.LOW_SPIN);
         options.put(SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
         options.put(CAVE_SPIDER, DeathAnimOptions.Builtin.NO_GRAVITY.bloodColor(0.459f, 0.706f, 1.000f));
+        options.put(WARDEN, DeathAnimOptions.Builtin.LOW_SPIN);
         options.put(BLAZE, DeathAnimOptions.Builtin.EXTRA_FALL.bloodColor(0.89f, 0.65f, 0.07f));
         options.put(GIANT, DeathAnimOptions.Builtin.DEFAULT.bloodColor(0.45f, 0f, 0f));
         options.put(WITHER, DeathAnimOptions.Builtin.EXTRA_FALL.customParticle(entity -> {

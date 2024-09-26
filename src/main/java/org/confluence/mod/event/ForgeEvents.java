@@ -331,13 +331,25 @@ public final class ForgeEvents {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event){
-        if(event.isCanceled() || !(event.getEntity().level() instanceof ServerLevel level))return;
-//        DamageSource damageSource = event.getSource();
-        LivingEntity entity = event.getEntity();
-        Vec3 pos = entity.getEyePosition();
+        LivingEntity damagingEntity = event.getEntity();
+        DamageSource damageSource = event.getSource();
+        Entity causer = damageSource.getEntity();
+        if(event.isCanceled() || !(event.getEntity().level() instanceof ServerLevel level)) return;
         int amount = (int) event.getAmount();
-        MutableComponent component = Component.literal(String.valueOf(amount)).withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD);
-        level.sendParticles(new DamageIndicatorOptions(component), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
+        boolean crit=false;
+        if(!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get()) && causer instanceof Player player){
+            double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
+            if(damagingEntity.level().random.nextFloat() < chance){
+                amount *= 2;
+                event.setAmount(amount);
+                player.crit(damagingEntity);
+                crit = true;
+            }
+        }
+
+        Vec3 pos = damagingEntity.getEyePosition();
+        MutableComponent component = Component.literal(String.valueOf(amount)).withStyle(crit ? ChatFormatting.DARK_RED : ChatFormatting.GOLD, ChatFormatting.BOLD);
+        level.sendParticles(new DamageIndicatorOptions(component, crit), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
     }
 
     @SubscribeEvent

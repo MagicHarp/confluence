@@ -26,11 +26,13 @@ public class DamageIndicatorParticle extends TextureSheetParticle {
     private float factorOld=0.02f;
     private int transparency=0x11;
     private int transparencyOld=0x11;
+    private final boolean big;
 
-    public DamageIndicatorParticle(ClientLevel pLevel, double pX, double pY, double pZ, Component text){
+    public DamageIndicatorParticle(ClientLevel pLevel, double pX, double pY, double pZ, Component text, boolean big){
         super(pLevel, pX, pY, pZ);
         this.text = text;
         lifetime = 30;
+        this.big = big;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class DamageIndicatorParticle extends TextureSheetParticle {
         yo = y;
         if(age <= 4){
             transparency =Math.min(transparency + 80, 255);
-            factor = DeathAnimUtils.cubicBezier(age / 5f, 0, 1, 1, 1) * 0.04f;
+            factor = DeathAnimUtils.cubicBezier(age / 5f, 0, 1, 1, 1) * (big ? 0.06f : 0.04f);
         }
         float add=DeathAnimUtils.cubicBezier(age / (float)lifetime, 0,0.8f,1f,1) * 0.1f;
         float yOffset = 0.1f - add;
@@ -102,7 +104,7 @@ public class DamageIndicatorParticle extends TextureSheetParticle {
         @Nullable
         @Override
         public Particle createParticle(@NotNull DamageIndicatorOptions options, @NotNull ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed){
-            return new DamageIndicatorParticle(pLevel, pX, pY, pZ, options.text());
+            return new DamageIndicatorParticle(pLevel, pX, pY, pZ, options.text(), options.big());
         }
     }
 }
