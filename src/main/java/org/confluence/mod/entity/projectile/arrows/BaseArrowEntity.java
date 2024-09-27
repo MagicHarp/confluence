@@ -24,7 +24,7 @@ public class BaseArrowEntity extends AbstractArrow {
 
     int penetrate = 0;
     private static final EntityDataAccessor<String> TEXTURE_PATH = SynchedEntityData.defineId(BaseArrowEntity.class, EntityDataSerializers.STRING);
-    public String texturePath;
+    public String texturePath = "";
 
     List<LivingEntity> havenBeen = new ArrayList<>();//标记不能重复穿透
     Builder attr = new Builder();
@@ -82,7 +82,7 @@ public class BaseArrowEntity extends AbstractArrow {
 
 
     public boolean canPenetrate(){
-        return penetrate < attr.penetration_count;
+        return penetrate+1 < attr.penetration_count;
     }
 
 
