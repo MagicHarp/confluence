@@ -600,6 +600,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("attribute.name.generic.pickup_range", "拾取范围");
 
         add("entity.minecraft.villager.confluence.sky_miller", "天师");
+        add("entity.minecraft.villager.confluence.banker", "银行家");
 
         add("container.confluence.workshop", "工匠作坊");
         add("title.confluence.workshop", "工匠作坊");
