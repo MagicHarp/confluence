@@ -334,8 +334,9 @@ public final class ForgeEvents {
         LivingEntity damagingEntity = event.getEntity();
         DamageSource damageSource = event.getSource();
         Entity causer = damageSource.getEntity();
-        if(event.isCanceled() || !(event.getEntity().level() instanceof ServerLevel level)) return;
-        int amount = (int) event.getAmount();
+        // 这个return只针对暴击判定和数值显示，如果以后还有其他用处还要拆出来
+        if(event.isCanceled() || damageSource.is(DamageTypes.GENERIC_KILL) || !(event.getEntity().level() instanceof ServerLevel level)) return;
+        float amount = event.getAmount();
         boolean crit=false;
         if(!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get()) && causer instanceof Player player){
             double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
@@ -348,7 +349,7 @@ public final class ForgeEvents {
         }
 
         Vec3 pos = damagingEntity.getEyePosition();
-        MutableComponent component = Component.literal(String.valueOf(amount)).withStyle(crit ? ChatFormatting.DARK_RED : ChatFormatting.GOLD, ChatFormatting.BOLD);
+        MutableComponent component = Component.literal(String.format("%.1f",amount)).withStyle(crit ? ChatFormatting.DARK_RED : ChatFormatting.GOLD, ChatFormatting.BOLD);
         level.sendParticles(new DamageIndicatorOptions(component, crit), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
     }
 

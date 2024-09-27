@@ -1,5 +1,6 @@
 {
     "client": [
+        "accessor.FontAccessor",
         "client.AdvancementWidgetMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
