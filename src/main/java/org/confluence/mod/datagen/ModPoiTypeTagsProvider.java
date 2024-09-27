@@ -18,6 +18,9 @@ public class ModPoiTypeTagsProvider extends PoiTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(PoiTypeTags.ACQUIRABLE_JOB_SITE).add(ModVillagers.SKY_POI.getKey());
+        tag(PoiTypeTags.ACQUIRABLE_JOB_SITE)
+            .add(ModVillagers.SKY_POI.getKey())
+            .add(ModVillagers.COIN_POI.getKey());
+
     }
 }
