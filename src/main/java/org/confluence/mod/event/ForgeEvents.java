@@ -21,6 +21,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -274,12 +275,23 @@ public final class ForgeEvents {
         Consumer<Boolean> consumer = event::setCanceled;
         BleedingEffect.apply(living, consumer);
         FrostburnEffect.apply(living, consumer);
-        if (event.isCanceled() || !(living instanceof Player player)) return;
-        player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-            if (playerAbility.isVitalCrystalUsed()) {
-                event.setAmount(event.getAmount() * 1.2F);
-            }
-        });
+        if(event.isCanceled()){
+            return;
+        }
+        if(living instanceof Player player){
+            player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
+                if(playerAbility.isVitalCrystalUsed()){
+                    event.setAmount(event.getAmount() * 1.2F);
+                }
+            });
+        }
+        if(!(living.level() instanceof ServerLevel level))return;
+        Vec3 pos = living.getEyePosition();
+        float amount = Math.round(event.getAmount() * 10) / 10f;
+        int intAmount = (int) amount;
+        String text = amount % 1 == 0 ? String.valueOf(intAmount) : String.valueOf(amount);
+        MutableComponent component = Component.literal(text).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD);
+        level.sendParticles(new DamageIndicatorOptions(component, false), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
     }
 
     @SubscribeEvent
@@ -346,10 +358,15 @@ public final class ForgeEvents {
                 player.crit(damagingEntity);
                 crit = true;
             }
+            if(damageSource.getDirectEntity() instanceof AbstractArrow arrow){
+                crit |= arrow.isCritArrow();
+            }
         }
-
+        float roundedAmount = Math.round(amount * 10) / 10f;
+        int intAmount = (int) roundedAmount;
+        String text = roundedAmount % 1 == 0 ? String.valueOf(intAmount) : String.valueOf(roundedAmount);
         Vec3 pos = damagingEntity.getEyePosition();
-        MutableComponent component = Component.literal(String.format("%.1f",amount)).withStyle(crit ? ChatFormatting.DARK_RED : ChatFormatting.GOLD, ChatFormatting.BOLD);
+        MutableComponent component = Component.literal(text).withStyle(crit ? ChatFormatting.DARK_RED : ChatFormatting.GOLD, ChatFormatting.BOLD);
         level.sendParticles(new DamageIndicatorOptions(component, crit), pos.x, pos.y, pos.z, 1, 0.1, 0.1, 0.1, 0);
     }
 
