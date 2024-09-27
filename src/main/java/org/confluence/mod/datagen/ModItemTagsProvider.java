@@ -82,6 +82,18 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 Bows.GOLDEN_SHORT_BOW.get(),
                 Bows.PLATINUM_SHORT_BOW.get()
         );
+        tag(ItemTags.ARROWS).add(
+                ModItems.FLAMING_ARROW.get(),
+                ModItems.UNHOLY_ARROW.get(),
+                ModItems.JESTERS_ARROW.get(),
+                ModItems.HELLFIRE_ARROW.get(),
+                ModItems.FROSTBURN_ARROW.get(),
+                ModItems.BONE_ARROW.get(),
+                ModItems.SHIMMER_ARROW.get()
+        );
+
+
+
         IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.Items.RANGED_WEAPON);
         rangedWeapon.addTag(Tags.Items.TOOLS_BOWS);
         rangedWeapon.addTag(Tags.Items.TOOLS_CROSSBOWS);

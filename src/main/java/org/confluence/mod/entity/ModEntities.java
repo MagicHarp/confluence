@@ -24,6 +24,7 @@ import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.entity.fishing.HotlineFishingHook;
 import org.confluence.mod.entity.hook.*;
 import org.confluence.mod.entity.projectile.*;
+import org.confluence.mod.entity.projectile.arrows.BaseArrowEntity;
 import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
 import org.confluence.mod.entity.projectile.bombs.BouncyBombEntity;
 import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
@@ -101,6 +102,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<StarFuryProjectile>> STAR_FURY_PROJECTILE = ENTITIES.register("star_fury_projectile", () -> EntityType.Builder.<StarFuryProjectile>of(StarFuryProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:star_fury_projectile"));//星怒弹幕
     public static final RegistryObject<EntityType<ThrowingKnivesProjectile>> THROW_KNIVES_PROJECTILE = ENTITIES.register("throw_knives_projectile", () -> EntityType.Builder.<ThrowingKnivesProjectile>of(ThrowingKnivesProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:throw_knives_projectile"));
     public static final RegistryObject<EntityType<ShurikenProjectile>> SHURIKEN_PROJECTILE = ENTITIES.register("shuriken_projectile", () -> EntityType.Builder.<ShurikenProjectile>of(ShurikenProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:shuriken_projectile"));
+    public static final RegistryObject<EntityType<BaseArrowEntity>> ARROW_PROJECTILE = ENTITIES.register("arrow_projectile", () -> EntityType.Builder.<BaseArrowEntity>of(BaseArrowEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:arrow_projectile"));
 
 
 

@@ -19,6 +19,7 @@ import org.confluence.mod.entity.projectile.bombs.StickyBombEntity;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
+import org.confluence.mod.item.bow.BaseArrowItem;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.*;
 import org.confluence.mod.item.curio.CurioItems;
@@ -138,13 +139,13 @@ public final class ModItems {
     public static final RegistryObject<Item> CLOUDWEAVER_SEED = ITEMS.register("cloudweaver_seed", () -> new ItemNameBlockItem(ModBlocks.CLOUDWEAVER.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLOATING_WHEAT_SEED = ITEMS.register("floating_wheat_seed", () -> new ItemNameBlockItem(ModBlocks.FLOATING_WHEAT.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> FLAMING_ARROW = ITEMS.register("flaming_arrow", () -> new BaseItem(ModRarity.WHITE));
-    public static final RegistryObject<Item> UNHOLY_ARROW = ITEMS.register("unholy_arrow", () -> new BaseItem(ModRarity.BLUE));
-    public static final RegistryObject<Item> JESTERS_ARROW = ITEMS.register("jesters_arrow", () -> new BaseItem(ModRarity.BLUE));
-    public static final RegistryObject<Item> HELLFIRE_ARROW = ITEMS.register("hellfire_arrow", () -> new BaseItem(ModRarity.GREEN));
-    public static final RegistryObject<Item> FROSTBURN_ARROW = ITEMS.register("frostburn_arrow", () -> new BaseItem(ModRarity.WHITE));
-    public static final RegistryObject<Item> BONE_ARROW = ITEMS.register("bone_arrow", () -> new BaseItem(ModRarity.WHITE));
-    public static final RegistryObject<Item> SHIMMER_ARROW = ITEMS.register("shimmer_arrow", () -> new BaseItem(ModRarity.WHITE));
+    public static final RegistryObject<Item> FLAMING_ARROW = ITEMS.register("flaming_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> UNHOLY_ARROW = ITEMS.register("unholy_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.BLUE)));
+    public static final RegistryObject<Item> JESTERS_ARROW = ITEMS.register("jesters_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.BLUE)));
+    public static final RegistryObject<Item> HELLFIRE_ARROW = ITEMS.register("hellfire_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.GREEN)));
+    public static final RegistryObject<Item> FROSTBURN_ARROW = ITEMS.register("frostburn_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> BONE_ARROW = ITEMS.register("bone_arrow", () -> new  BaseArrowItem(new Item.Properties().rarity(ModRarity.WHITE)));
+    public static final RegistryObject<Item> SHIMMER_ARROW = ITEMS.register("shimmer_arrow", () -> new BaseArrowItem(new Item.Properties().rarity(ModRarity.WHITE)));
 
     public static void register(IEventBus bus) {
         ModTiers.register();
