@@ -23,6 +23,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.food.Foods;
 
@@ -72,8 +73,27 @@ public final class ModVillagers {
             trades.get(2).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,6), new ItemStack(Foods.HONEY_MOONCAKES.get(),1), 10, 25, 0.05F));
             trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.FALLING_STAR.get(),getRandomQuantity(20, 22)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
             trades.get(4).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(),2), 10, 25, 0.05F));
-            trades.get(4).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.STELLAR_BLOSSOM_SEED.get(),2), 10, 25, 0.05F));
+            trades.get(5).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.STELLAR_BLOSSOM_SEED.get(),2), 10, 25, 0.05F));
             trades.get(4).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.FLOATING_WHEAT_SEED.get(),2), 10, 25, 0.05F));
+        } else if (type == VillagerProfession.ARMORER) {
+            // 故意替换原版的一部分(铅和铂金部分）
+            trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD, getRandomQuantity(6, 10)), new ItemStack(Armors.LEAD_HELMET.get()), 5, 25, 0.05F));
+            trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(10, 14)), new ItemStack(Armors.LEAD_CHESTPLATE.get()), 5, 25, 0.05F));
+            trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(8, 12)), new ItemStack(Armors.LEAD_LEGGINGS.get()), 5, 25, 0.05F));
+            trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(6, 10)),  new ItemStack(Armors.LEAD_BOOTS.get()),5, 25, 0.05F));
+            trades.get(2).add(new BasicItemListing(new ItemStack(Materials.LEAD_INGOT.get(),5), new ItemStack(Items.EMERALD, 1), 10, 25, 0.05F));
+            trades.get(2).add(new BasicItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(Items.COPPER_INGOT,8), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.RUBY.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.AMBER.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.TOPAZ.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.TR_EMERALD.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.TR_AMETHYST.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.SAPPHIRE.get(),getRandomQuantity(1, 2)), new ItemStack(Items.EMERALD,2), 10, 25, 0.05F));
+            trades.get(4).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(7, 9)), new ItemStack(Materials.PLATINUM_INGOT.get(),1), 10, 25, 0.05F));
+            trades.get(5).add(new BasicItemListing(new ItemStack(Items.EMERALD, getRandomQuantity(19, 20)), new ItemStack(Armors.PLATINUM_HELMET.get()), 10, 25, 0.05F));
+            trades.get(5).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(22, 23)), new ItemStack(Armors.PLATINUM_CHESTPLATE.get()), 10, 25, 0.05F));
+            trades.get(5).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(20, 21)), new ItemStack(Armors.PLATINUM_LEGGINGS.get()), 10, 25, 0.05F));
+            trades.get(5).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(18, 19)),  new ItemStack(Armors.PLATINUM_BOOTS.get()),10, 25, 0.05F));
         }
     }
     private static int getRandomQuantity(int min, int max) {
