@@ -1,15 +1,16 @@
 package org.confluence.mod.entity.npc;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -23,6 +24,8 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
+
+import java.util.List;
 
 import static org.confluence.mod.Confluence.MODID;
 
@@ -46,15 +49,19 @@ public final class ModVillagers {
     }
 
     public static void villagerTrades(VillagerTradesEvent event) {
-        if (event.getType() == SKY_MILLER.get())  {
-            event.getTrades().get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD), new ItemStack(ModBlocks.CLOUD_BLOCK.get(),2), 12, 5, 0.05f));
-            event.getTrades().get(1).add(new BasicItemListing(new ItemStack(Materials.WEAVING_CLOUD_COTTON.get(),5), new ItemStack(Items.EMERALD,1), 12, 5, 0.05f));
-            event.getTrades().get(2).add(new BasicItemListing(new ItemStack(Items.DIRT,64), new ItemStack(Items.EMERALD,1), 2, 10, 0.05f));
-            event.getTrades().get(3).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(),1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(),3), 25, 10, 0.05f));
-            event.getTrades().get(3).add(new BasicItemListing(new ItemStack(Items.WATER_BUCKET,1), new ItemStack(ModBlocks.RAIN_CLOUD_BLOCK.get(),1), 12, 20, 0.05f));
-            event.getTrades().get(3).add(new BasicItemListing(new ItemStack(Materials.FALLING_STAR.get(),20), new ItemStack(DecorativeBlocks.SUN_PLATE.get(),10), 12, 20, 0.05f));
-            event.getTrades().get(4).add(new BasicItemListing(new ItemStack(Items.POWDER_SNOW_BUCKET,1), new ItemStack(Items.EMERALD,1), 12, 30, 0.05f));
-            event.getTrades().get(5).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(),2), new ItemStack(ModBlocks.SKY_MILL.get(),1), 12, 30, 0.05f));
+        VillagerProfession type = event.getType();
+        Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+        if (type == SKY_MILLER.get()) {
+            trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD), new ItemStack(ModBlocks.CLOUD_BLOCK.get(), 2), 12, 5, 0.05f));
+            trades.get(1).add(new BasicItemListing(new ItemStack(Materials.WEAVING_CLOUD_COTTON.get(), 5), new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
+            trades.get(2).add(new BasicItemListing(new ItemStack(Items.DIRT, 64), new ItemStack(Items.EMERALD, 1), 2, 10, 0.05f));
+            trades.get(3).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(), 1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(), 3), 25, 10, 0.05f));
+            trades.get(3).add(new BasicItemListing(new ItemStack(Items.WATER_BUCKET, 1), new ItemStack(ModBlocks.RAIN_CLOUD_BLOCK.get(), 1), 12, 20, 0.05f));
+            trades.get(3).add(new BasicItemListing(new ItemStack(Materials.FALLING_STAR.get(), 20), new ItemStack(DecorativeBlocks.SUN_PLATE.get(), 10), 12, 20, 0.05f));
+            trades.get(4).add(new BasicItemListing(new ItemStack(Items.POWDER_SNOW_BUCKET, 1), new ItemStack(Items.EMERALD, 1), 12, 30, 0.05f));
+            trades.get(5).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(), 2), new ItemStack(ModBlocks.SKY_MILL.get(), 1), 12, 30, 0.05f));
+        } else if (type == VillagerProfession.FARMER) {
+            trades.get(1).add(new SkyVillagerItemListing(new ItemStack(ModBlocks.FLOATING_WHEAT.get(), 5), new ItemStack(Items.EMERALD), 12, 25, 0.05F));
         }
     }
 
