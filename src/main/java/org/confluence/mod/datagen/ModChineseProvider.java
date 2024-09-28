@@ -1159,6 +1159,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.KATANA.get(), "武士刀");
         add(Swords.ICE_BLADE.get(), "冰雪剑");
         add(Swords.EXOTIC_SCIMITAR.get(), "异域弯刀");
+        add(Swords.FAKE_SWORD.get(), "假剑");
 
         add(Swords.DEVELOPER_SWORD.get(),"开发者剑");
 
@@ -1992,6 +1993,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.WATER_WALKING_POTION.get(), "水上漂药水");
         add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
         add(TerraPotions.RANDOM_TELEPORT_POTION.get(), "传送药水");
+        add(TerraPotions.SPELUNKER_POTION.get(), "洞穴探险药水");
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.SHINE.get(), "发光");

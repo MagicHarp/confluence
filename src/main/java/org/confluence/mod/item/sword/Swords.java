@@ -47,6 +47,7 @@ public enum Swords implements EnumRegister<SwordItem> {
     TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
     CANDY_CANE_SWORD("candy_cane_sword", () -> new BigRegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F,new Item.Properties().rarity(ModRarity.WHITE))),
+    FAKE_SWORD("fake_sword", () -> new BigRegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F,new Item.Properties().rarity(ModRarity.GRAY))),
     BREATHING_REED("breathing_reed", BreathingReed::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
     TRAGIC_UMBRELLA("tragic_umbrella", UmbrellaItem::new),

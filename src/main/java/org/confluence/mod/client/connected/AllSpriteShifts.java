@@ -4,6 +4,8 @@ import org.confluence.mod.Confluence;
 
 public class AllSpriteShifts {
     public static final CTSpriteShiftEntry ANDESITE_CASING = omni("andesite_casing");
+    public static final CTSpriteShiftEntry SUN_PLATE = omni("sun_plate");
+    public static final CTSpriteShiftEntry PURE_GLASS = omni("pure_glass");
 
     private static CTSpriteShiftEntry omni(String name) {
         return getCT(AllCTTypes.OMNIDIRECTIONAL, name);

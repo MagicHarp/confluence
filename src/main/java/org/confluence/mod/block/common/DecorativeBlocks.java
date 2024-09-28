@@ -22,7 +22,7 @@ public final class DecorativeBlocks {
     public static final RegistryObject<Block> SNOW_BRICKS = registerWithItem("snow_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> TR_STONE_BRICKS = registerWithItem("tr_stone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
-    public static final RegistryObject<Block> PURE_GLASS = registerWithItem("pure_glass", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURE_GLASS = registerWithItem("pure_glass", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
 
     public static final RegistryObject<Block> TR_COPPER_BRICKS = registerWithItem("tr_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryObject<Block> ANCIENT_COPPER_BRICKS = registerWithItem("ancient_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));

@@ -5,6 +5,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.natural.Ores;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -65,8 +67,8 @@ public class SpelunkerHelper {
 
 
             //example
-            targets.put(Blocks.STONE, new Color(255,255,255));
-
+           // targets.put(Blocks.STONE, new Color(255,255,255));
+// todo 泰拉矿石检测
             INIT = true;
         }
     }

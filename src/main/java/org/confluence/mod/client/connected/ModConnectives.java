@@ -6,6 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.common.DecorativeBlocks;
 import org.confluence.mod.client.connected.behaviour.ConnectedTextureBehaviour;
 import org.confluence.mod.client.connected.behaviour.EncasedCTBehaviour;
 
@@ -23,6 +24,12 @@ public final class ModConnectives {
 
         registerCTBehaviour(ModBlocks.ANDESITE_CASING.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING));
         registerCasingConnectivity(ModBlocks.ANDESITE_CASING.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.ANDESITE_CASING));
+
+        registerCTBehaviour(DecorativeBlocks.SUN_PLATE.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.SUN_PLATE));
+        registerCasingConnectivity(DecorativeBlocks.SUN_PLATE.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.SUN_PLATE));
+
+        registerCTBehaviour(DecorativeBlocks.PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.PURE_GLASS));
     }
 
     private static <T extends Block> void registerCasingConnectivity(T entry, BiConsumer<T, CasingConnectivity> consumer) {
