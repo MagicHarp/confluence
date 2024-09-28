@@ -176,7 +176,7 @@ public final class ModVillagers {
             trades.get(4).add(new BasicItemListing(new ItemStack(Items.EMERALD,getRandomQuantity(7, 7)), new ItemStack(Hammers.PLATINUM_HAMMER.get(), 1), 10, 25, 0.05F));
         } else if (type == BANKER.get()) {
             trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD, 1), new ItemStack(Blocks.CHEST, 1), 3, 25, 0.05F));
-            trades.get(1).add(new BasicItemListing(new ItemStack(ModItems.SILVER_COIN.get(),6), new ItemStack(Items.EMERALD, 1), 3, 15, 0.05F));
+            trades.get(1).add(new BasicItemListing(new ItemStack(ModItems.SILVER_COIN.get(),2), new ItemStack(Items.EMERALD, 1), 3, 15, 0.05F));
             trades.get(2).add(new BasicItemListing(new ItemStack(ModItems.GOLDEN_COIN.get(),3), new ItemStack(Materials.EMERALD_COIN.get(), 1), 3, 15, 0.05F));
             trades.get(2).add(new BasicItemListing(new ItemStack(Items.EMERALD,20), new ItemStack(Materials.EMERALD_COIN.get(), 1),3, 25, 0.05F));
             trades.get(4).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(), 1), new ItemStack(Items.EMERALD,20),3, 25, 0.05F));
