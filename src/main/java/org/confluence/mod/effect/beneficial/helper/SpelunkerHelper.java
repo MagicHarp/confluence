@@ -59,6 +59,24 @@ public class SpelunkerHelper {
             targets.put(Blocks.COPPER_ORE, Color.LIGHT_GRAY);
             targets.put(Blocks.DEEPSLATE_COPPER_ORE, Color.LIGHT_GRAY);
 
+            //锡矿
+            targets.put(Ores.TIN_ORE.get(), Color.LIGHT_GRAY);
+            targets.put(Ores.DEEPSLATE_TIN_ORE.get(), Color.LIGHT_GRAY);
+
+            //铅矿
+            targets.put(Ores.LEAD_ORE.get(), Color.PINK);
+            targets.put(Ores.DEEPSLATE_LEAD_ORE.get(), Color.PINK);
+
+            //铂金矿
+            targets.put(Ores.PLATINUM_ORE.get(), Color.ORANGE);
+            targets.put(Ores.DEEPSLATE_PLATINUM_ORE.get(), Color.ORANGE);
+
+            //生命水晶
+            targets.put(ModBlocks.LIFE_CRYSTAL_BLOCK.get(), Color.RED);
+            //箱子
+            targets.put(ModBlocks.BASE_CHEST_BLOCK.get(), Color.ORANGE);
+
+
 
             //青金石
             targets.put(Blocks.LAPIS_ORE, Color.blue);
@@ -71,7 +89,7 @@ public class SpelunkerHelper {
 
             //example
            // targets.put(Blocks.STONE, new Color(255,255,255));
-// todo 泰拉矿石检测
+
 
 
             INIT = true;
