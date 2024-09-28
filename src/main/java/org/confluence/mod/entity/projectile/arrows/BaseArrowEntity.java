@@ -42,16 +42,12 @@ public class BaseArrowEntity extends AbstractArrow {
     public static class Tuple {
         public String path;
         public Builder attr;
-        static Tuple create(String path, Builder type){
-            Tuple t = new Tuple();
-            t.path = path;
-            t.attr = type;
-            return t;
-        }
+        static Tuple create(String path, Builder type){Tuple t = new Tuple();t.path = path;t.attr = type;return t;}
+
 
         //构建属性   mc原版木箭：   damage：2f
         static Tuple JESTERS_ARROW_ENTITY = create("textures/entity/arrow/jesters_arrow.png",new Builder()
-                .damage(4f).low_gravity(0).penetration(99).auto_discard(50).knockBackFactor(2).speedFactor(0.8f));
+                .damage(4f).penetration(99).knockBackFactor(2).speedFactor(0.8f).auto_discard(50).low_gravity(0));
         static Tuple UNHOLY_ARROW_ENTITY = create("textures/entity/arrow/unholy_arrow.png",new Builder()
                 .damage(4.5f).penetration(5).knockBackFactor(1.5f));
         static Tuple FLAMING_ARROW_ENTITY = create("textures/entity/arrow/flaming_arrow.png",new Builder()

@@ -93,6 +93,13 @@ public enum Armors implements EnumRegister<ArmorItem> {
     FOSSIL_LEGGINGS("fossil_leggings", () -> new FossilArmorItem(ArmorItem.Type.LEGGINGS)),
     FOSSIL_BOOTS("fossil_boots", () -> new FossilArmorItem(ArmorItem.Type.BOOTS)),
 ;
+
+
+
+
+
+
+
     private final RegistryObject<ArmorItem> value;
 
     Armors(String id, Supplier<ArmorItem> armorItem) {

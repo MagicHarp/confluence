@@ -1,5 +1,6 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
+import com.xiaohunao.enemybanner.EntityBannerPattern;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,10 +37,9 @@ public class KingSkull extends TerraBossBase implements GeoEntity {
 
         handLeft = new KingSkullHand(this,level(),false);
         handRight = new KingSkullHand(this,level(),true);
-        handLeft.setPos(position());
-        handRight.setPos(position());
-        level().addFreshEntity(handLeft);
-        level().addFreshEntity(handRight);
+
+
+
     }
     public boolean isNoGravity(){
         return true;
@@ -70,8 +70,14 @@ public class KingSkull extends TerraBossBase implements GeoEntity {
     @Override
     public void tick(){
         super.tick();
-        //定义释放技能时状态
 
+        if(tickCount == 20) {
+            handLeft.setPos(position());
+            handRight.setPos(position());
+            level().addFreshEntity(handLeft);
+            level().addFreshEntity(handRight);
+        }
+//定义释放技能时状态
         Entity entity = getTarget();
 
         if(entity != null){
@@ -82,11 +88,14 @@ public class KingSkull extends TerraBossBase implements GeoEntity {
                 case "animation.model.roll":
                     handState = HandState.follow;
                     onDash = true;
+                    onNormalDash = false;
                     if(!skills.canContinue())break;
                     skillRoll();
                     break;
                 case "animation.model.fire":
+                    onDash = false;
                     handState = HandState.follow;
+                    onNormalDash = false;
                     if(skills.canTrigger())
                         skillFire();
                     break;
@@ -96,17 +105,20 @@ public class KingSkull extends TerraBossBase implements GeoEntity {
                     onDash = true;
                     onNormalDash = true;
 
-                    if(skills.tick==1)
-                        normalDash = entity.position().add(0,2,0);
+
+                    if(skills.tick==1) normalDash = entity.position().add(0,2,0);
 
                     break;
                 case "hand":
+                    onDash = false;
                     handState = HandState.attack;
+                    onNormalDash = false;
                     break;
 
 
             }
             //这里放释放技能同时执行的动作
+
 
             //额外动作
             //非冲撞增加向上向量

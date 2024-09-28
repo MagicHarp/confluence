@@ -1160,6 +1160,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.ICE_BLADE.get(), "冰雪剑");
         add(Swords.EXOTIC_SCIMITAR.get(), "异域弯刀");
 
+        add(Swords.DEVELOPER_SWORD.get(),"开发者剑");
+
         add(Axes.COPPER_AXE.get(), "铜斧");
         add(Axes.TIN_AXE.get(), "锡斧");
         add(Axes.LEAD_AXE.get(), "铅斧");

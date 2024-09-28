@@ -1,6 +1,7 @@
 package org.confluence.mod.effect;
 
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,6 +14,8 @@ import org.confluence.mod.effect.neutral.CerebralMindtrickEffect;
 import org.confluence.mod.effect.neutral.LoveEffect;
 import org.confluence.mod.effect.neutral.ShimmerEffect;
 import org.confluence.mod.misc.ModAttributes;
+
+import java.awt.*;
 
 public final class ModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Confluence.MODID);
@@ -57,6 +60,8 @@ public final class ModEffects {
     public static final RegistryObject<ShineEffect> SHINE = EFFECTS.register("shine", ShineEffect::new);
     public static final RegistryObject<ShimmerEffect> SHIMMER = EFFECTS.register("shimmer", ShimmerEffect::new);
     public static final RegistryObject<BloodButcheredEffect> BLOOD_BUTCHERED = EFFECTS.register("blood_butchered", BloodButcheredEffect::new);
+    public static final RegistryObject<MobEffect> SPELUNKER = EFFECTS.register("spelunker", ()->new NormalEffect(MobEffectCategory.BENEFICIAL, Color.yellow.getRGB()));
+
 
     public static void healPerSecond(LivingEntity living, float amount) {
         if (living.level().getGameTime() % 20 == 0) {

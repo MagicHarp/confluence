@@ -43,7 +43,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     REGENERATION_POTION("regeneration_potion", () -> new EffectPotionItem(() -> MobEffects.REGENERATION, 9600)),
     SHINE_POTION("shine_potion", () -> new EffectPotionItem(ModEffects.SHINE, 12000)),
     //SONAR_POTION("sonar_potion", BaseItem::new),
-    //SPELUNKER_POTION("spelunker_potion", BaseItem::new),
+    SPELUNKER_POTION("spelunker_potion", ()->new EffectPotionItem(ModEffects.SPELUNKER, 12000)),//洞穴探险药水
     //STRANGE_BREW("strange_brew", BaseItem::new),
     //SUMMONING_POTION("summoning_potion", BaseItem::new),
     SWIFTNESS_POTION("swiftness_potion", () -> new EffectPotionItem(() -> MobEffects.MOVEMENT_SPEED, 9600)),

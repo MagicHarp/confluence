@@ -59,7 +59,16 @@ public enum Swords implements EnumRegister<SwordItem> {
     STYLISH_SCISSORS("stylish_scissors", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
     EXOTIC_SCIMITAR("exotic_scimitar", () -> new ReversalBoardSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
     KATANA("katana",() -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
-    CROWBAR("crowbar", CrowbarItem::new);
+    CROWBAR("crowbar", CrowbarItem::new),
+
+
+
+
+
+
+
+    DEVELOPER_SWORD("developer_sword",()->new IceBladeSwordItem(ModTiers.TITANIUM,100,100f,new Item.Properties().rarity(ModRarity.MASTER)));//开发者武器
+
 
     private final RegistryObject<SwordItem> value;
 
