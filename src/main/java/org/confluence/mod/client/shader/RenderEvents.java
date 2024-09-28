@@ -2,24 +2,31 @@ package org.confluence.mod.client.shader;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Axis;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.helper.SpelunkerHelper;
+import org.confluence.mod.mixin.accessor.FontAccessor;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class RenderEvents {
@@ -58,12 +65,16 @@ public final class RenderEvents {
 
             if(blockGen==null) blockGen = SpelunkerHelper.blockGen = new SpelunkerHelper(Minecraft.getInstance().player);
             tick = blockGen.refreshTick;
+            //todo 应该在破坏方块事件里设定是否刷新
             blockGen.genBlocks();
             ifRefresh = true;
         }
         if(blockGen==null) return;
-        Vec3 playerPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        Minecraft minecraft = Minecraft.getInstance();
+        Vec3 playerPos = minecraft.gameRenderer.getMainCamera().getPosition();
 
+        Map<Block, ArrayList<BlockPos>> centers = blockGen.centers;
+        var shouldRenderCache = blockGen.centerCacheFrame;
         if(ifRefresh){
             var mapList = blockGen.getBlockMap();
 
@@ -71,14 +82,14 @@ public final class RenderEvents {
             Tesselator tessellator = Tesselator.getInstance();
             BufferBuilder buffer = tessellator.getBuilder();
             buffer.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
-            Map<Block, ArrayList<BlockPos>> centers = blockGen.centers;
-            var centerMap = blockGen.centerCache;
 
+            var centerMap = blockGen.centerCache;
+            shouldRenderCache.clear();
             for(var n : mapList.entrySet()) {//每种矿石
                 //初始化键
                 centers.put(n.getKey(),new ArrayList<>());
 
-                Color color = blockGen.targets.get(n.getKey());
+                Color color = blockGen.targets.get(n.getKey()).color();
                 int colorInt = color.getRGB();
                 if(n.getValue()==null)return;
                 int r = color.getRed();
@@ -99,7 +110,22 @@ public final class RenderEvents {
 
                     /* 相近同种方块禁止渲染 */
                     boolean ifNear = false;
-                    if(centerMap.containsKey(blockProps) && centerMap.get(blockProps) !=null)continue;//已缓存的方块
+
+
+                    if(Minecraft.getInstance().level.getBlockState(blockProps).is(Blocks.AIR)){//已被挖掘，取消缓存
+
+                        System.out.println("block break");
+                        centerMap.remove(blockProps);
+                        for(BlockPos centerPos : centers.get(n.getKey())){//刷新周围中心块
+                            double distance = centerPos.distSqr(blockProps);
+                            if(distance < 25){//附近有中心块，清除改块
+                                centers.get(n.getKey()).remove(centerPos);
+                            }
+                        }
+                    }
+
+
+
                     for(BlockPos centerPos : centers.get(n.getKey())){//否则查找所有的中心块
                         double distance = centerPos.distSqr(blockProps);
                         if(distance < 25){//附近有中心块，添加缓存
@@ -113,6 +139,9 @@ public final class RenderEvents {
 
                     //距离越远透明度越低
                     a = (int) ((255- Math.min(playerPos.distanceToSqr(blockProps.getX(),blockProps.getY(),blockProps.getZ())/(blockGen.range*blockGen.range)*255,255))* blockGen.maxAlpha);
+                    if(a<=0)continue;
+
+                    shouldRenderCache.put(blockProps,n.getKey());
 
                     buffer.vertex(x, y + size, z).color(r,g,b,a).endVertex();
                     buffer.vertex(x + size, y + size, z).color(r,g,b,a).endVertex();
@@ -201,15 +230,38 @@ public final class RenderEvents {
             //poseStack.mulPose(quaternionf);
             //poseStack.mulPoseMatrix(matrix4f1);
 
-            poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
 
+            poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
             //todo 添加文字
-/*
-            var text = Component.literal("HelloWorld").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD);
-            ((FontAccessor) (minecraft.font)).callRenderText(text.getVisualOrderText(),
-                    5, 0, Color.RED.getRGB(),
-                    false, poseStack.last().pose(), minecraft.renderBuffers().bufferSource(), Font.DisplayMode.SEE_THROUGH, 0, 15 << 20 | 15 << 4);
-*/
+            var map = blockGen.targets;
+            int textRange = blockGen.textRange;
+            shouldRenderCache.forEach((pos, block)->{
+                if(playerPos.distanceToSqr(pos.getX(),pos.getY(),pos.getZ())< textRange*textRange){
+                    if(KeyBindings.TAB.get().isDown() && map.get(block).showText()){
+                        var dir = playerPos.subtract(pos.getX(),pos.getY(),pos.getZ()).scale(-1);
+                        var dot = minecraft.player.getForward().dot(dir);
+
+                        if(dot>0){
+                            poseStack.pushPose();
+                            poseStack.translate(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
+                            poseStack.scale(-0.05f,-0.05f,-0.05f);
+
+                            //Quaternionf quaternionf = new Quaternionf().rotateTo( new Vector3f(0,1,0),dir.toVector3f());
+
+                            Quaternionf quaternionf = event.getCamera().rotation();
+                            poseStack.mulPose(quaternionf);
+
+
+                            Component component = block.asItem().getDefaultInstance().getDisplayName();
+                            ((FontAccessor) (minecraft.font)).callRenderText(Component.literal(component.getString()).withStyle(style -> style.withColor(map.get(block).color().getRGB())).getVisualOrderText(),
+                                    2f, 1f, map.get(block).color().getRGB(),
+                                    false, poseStack.last().pose(), minecraft.renderBuffers().bufferSource(), net.minecraft.client.gui.Font.DisplayMode.SEE_THROUGH, 0, 15 << 20 | 15 << 4);
+                            poseStack.popPose();
+                        }
+                    }
+                }
+            });
+
 
 
             vertexBuffer.bind();

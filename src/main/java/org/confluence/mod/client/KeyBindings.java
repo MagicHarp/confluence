@@ -18,6 +18,7 @@ public final class KeyBindings {
         event.register(METAL_DETECTOR.get());
         event.register(HOOK.get());
         event.register(STEP_STOOL.get());
+        event.register(TAB.get());
     }
 
     public static final Lazy<KeyMapping> METAL_DETECTOR = Lazy.of(() -> new KeyMapping(
@@ -42,5 +43,13 @@ public final class KeyBindings {
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_UP,
         "key.categories.gameplay"
+    ));
+
+    public static final Lazy<KeyMapping> TAB = Lazy.of(() -> new KeyMapping(
+            "key.confluence.tab",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_TAB,
+            "key.categories.misc"
     ));
 }
