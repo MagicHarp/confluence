@@ -281,8 +281,23 @@
           "weight": 2
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:spelunker_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 5
+          "weight": 6
         }
       ],
       "rolls": 1

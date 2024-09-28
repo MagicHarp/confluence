@@ -198,11 +198,11 @@
               "count": {
                 "type": "uniform",
                 "min": 2,
-                "max": 4
+                "max": 5
               }
             }
           ],
-          "weight": 3300
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -213,26 +213,11 @@
               "count": {
                 "type": "uniform",
                 "min": 2,
-                "max": 4
+                "max": 5
               }
             }
           ],
-          "weight": 3300
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:flipper_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 2,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 3300
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -243,11 +228,11 @@
               "count": {
                 "type": "uniform",
                 "min": 2,
-                "max": 4
+                "max": 5
               }
             }
           ],
-          "weight": 3300
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -258,12 +243,37 @@
               "count": {
                 "type": "uniform",
                 "min": 2,
-                "max": 4
+                "max": 5
               }
             }
           ],
-          "weight": 3300
+          "weight": 1
         },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:spelunker_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 10
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "name": "confluence:healing_potion",
@@ -272,12 +282,12 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 8,
+                "max": 11
               }
             }
           ],
-          "weight": 3300
+          "weight": 3333
         },
         {
           "type": "minecraft:item",
@@ -287,20 +297,17 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 8,
+                "max": 11
               }
             }
           ],
-          "weight": 3300
+          "weight": 1
         },
         {
           "type": "minecraft:empty",
-          "weight": 200
-        }
-      ],
-      "rolls": 1
-    },
+          "weight": 2
+        },
     {
       "bonus_rolls": 0.0,
       "entries": [
