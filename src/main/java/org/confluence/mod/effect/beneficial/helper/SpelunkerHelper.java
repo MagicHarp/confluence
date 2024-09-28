@@ -9,21 +9,24 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.block.natural.Ores;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class SpelunkerHelper {
+/** 调参表 **/
+    public int refreshTick = 100;//客户端渲染刷新间隔
+    public int range = 30;//球形侦测范围
+    public float maxAlpha = 0.4f;//边框最大alpha(0 - 1)
 
-    public static Map<Block, Color> targets = new HashMap<>();
 
 
+    public static SpelunkerHelper blockGen;
+    public Map<Block, Color> targets = new HashMap<>();
+    public Map<BlockPos,BlockPos> centerCache = new HashMap<>();
+    public Map<Block, ArrayList<BlockPos>> centers = new LinkedHashMap<>();
+    public Map<Block, java.util.List<BlockPos>> blockMap = new HashMap<>();
     Boolean INIT = false;
-    public int range = 30;
-    private Map<Block, java.util.List<BlockPos>> blockMap = new HashMap<>();
     private Player player;
-
     public SpelunkerHelper(Player player) {
         this.player = player;
         genBlocks();
@@ -69,6 +72,8 @@ public class SpelunkerHelper {
             //example
            // targets.put(Blocks.STONE, new Color(255,255,255));
 // todo 泰拉矿石检测
+
+
             INIT = true;
         }
     }
@@ -85,7 +90,7 @@ public class SpelunkerHelper {
                 for (int k = -range; k < range; k++) {
                     BlockPos pos = center.offset(i, j, k);
                     Block block = level.getBlockState(pos).getBlock();
-                    if (targets.containsKey(block)) {
+                    if (targets.containsKey(block) && !centerCache.containsKey(pos)) {
                         var list = blockMap.computeIfAbsent(block, k1 -> new ArrayList<>());
                         list.add(pos);
                     }
