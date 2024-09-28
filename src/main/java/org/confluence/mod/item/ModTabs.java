@@ -229,7 +229,7 @@ public final class ModTabs {
             .build());
     // 材料
     public static final RegistryObject<CreativeModeTab> MATERIALS = TABS.register("materials",
-        () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.ITEM_ICON.get()))
+        () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.MATERIAL_ICON.get()))
             .title(Component.translatable("creativetab.confluence.materials"))
             .displayItems((parameters, output) -> {
                 for (Materials materials : Materials.values()) output.accept(materials.get());

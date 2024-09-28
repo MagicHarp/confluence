@@ -14,6 +14,7 @@ public class IconItem extends Item implements CustomModel {
 
     public enum Icons implements EnumRegister<IconItem> {
         ITEM_ICON("item_icon"),
+        MATERIAL_ICON("material_icon"),
         BLOCKS_ICON("blocks_icon"),
         MAGIC_ICON("magic_icon"),
         MELEE_ICON("melee_icon"),
