@@ -22,15 +22,14 @@ public class AlchemyTableBlockRenderer implements BlockEntityRenderer<AlchemyTab
     @Override
     public void render(AlchemyTableBlock.Entity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         pPoseStack.pushPose();
-        pPoseStack.translate(1, 1, 1);
+        pPoseStack.translate(0, 1, 0);
         var consumer = pBuffer.getBuffer(RenderType.beaconBeam(BEAM_LOCATION, false));
+
         if (pBlockEntity.firstColor != 0){
-            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(1, 1, 1, 50),
-                    1, 1, 1 , 1, 1, 1);
+            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0.5F, 0, 0, 0.05F),0,0);
         }
         if (pBlockEntity.secondColor != 0){
-            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(1, 1, 1, 50),
-                    1, 1, 1 , 1, 1, 1);
+            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0.5F, 0, 0, 0.05F),0,0);
         }
         pPoseStack.popPose();
     }

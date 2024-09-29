@@ -2,6 +2,7 @@ package org.confluence.mod.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.VexRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -32,6 +33,7 @@ import org.joml.Matrix4f;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -325,32 +327,73 @@ public final class ModUtils {
         return new Vec3(x, y, z);
     }
 
-    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb,
-                                  float l, float w, int h, float x, int y, float z){
-        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(), y, y + h,
-                x, z, x + l, z + l, x + w, z + w, x + w, z + l, 0, 0, 0, 0);
+    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb,float u,float v){
+        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(), u,v);
     }
 
-    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pMinY, int pMaxY, float pX0, float pZ0, float pX1, float pZ1, float pX2, float pZ2, float pX3, float pZ3, float pMinU, float pMaxU, float pMinV, float pMaxV) {
+    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float u,float v) {
         PoseStack.Pose posestack$pose = pPoseStack.last();
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
+        /*
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX0, pZ0, pX1, pZ1, pMinU, pMaxU, pMinV, pMaxV);
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX3, pZ3, pX2, pZ2, pMinU, pMaxU, pMinV, pMaxV);
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX1, pZ1, pX3, pZ3, pMinU, pMaxU, pMinV, pMaxV);
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxY, pX2, pZ2, pX0, pZ0, pMinU, pMaxU, pMinV, pMaxV);
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMinY, pX0, pX3, pZ0, pZ3, pMinU, pMaxU, pMinV, pMaxV);
         renderQuad(matrix4f, matrix3f, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMaxY, pX0, pX3, pZ0, pZ3, pMinU, pMaxU, pMinV, pMaxV);
+*/
+
+        Consumer<VertexConsumer> consumer = c->c.color(pRed, pGreen, pBlue, pAlpha).uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrix3f, 0F, 0F, 0F).endVertex();
+        //z=0
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        //x=1
+        matrix4f.translate(1,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+
+        matrix4f.translate(1,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        //x=0
+        matrix4f.translate(1,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        //y=0
+        matrix4f.translate(0,0,1);
+        matrix4f.rotate(Axis.XP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        //y=1
+        matrix4f.translate(0,1,1);
+        matrix4f.rotate(Axis.XP.rotationDegrees(180));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+
+
     }
 
-    private static void renderQuad(Matrix4f pPose, Matrix3f pNormal, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pMinY, int pMaxY, float pMinX, float pMinZ, float pMaxX, float pMaxZ, float pMinU, float pMaxU, float pMinV, float pMaxV) {
-        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMinX, pMinZ, pMaxU, pMinV);
-        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMinX, pMinZ, pMaxU, pMaxV);
-        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMinY, pMaxX, pMaxZ, pMinU, pMaxV);
-        addVertex(pPose, pNormal, pConsumer, pRed, pGreen, pBlue, pAlpha, pMaxY, pMaxX, pMaxZ, pMinU, pMinV);
+
+
+    @FunctionalInterface
+    public interface QFunc<T1, T2, T3,T4 , R,O> {
+        O vertex(T1 t1, T2 t2, T3 t3,T4 t4,R r);
     }
 
-    private static void addVertex(Matrix4f pPose, Matrix3f pNormal, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, int pY, float pX, float pZ, float pU, float pV) {
-        pConsumer.vertex(pPose, pX, (float)pY, pZ).color(pRed, pGreen, pBlue, pAlpha).uv(pU, pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(pNormal, 0.0F, 1.0F, 0.0F).endVertex();
-    }
 }
