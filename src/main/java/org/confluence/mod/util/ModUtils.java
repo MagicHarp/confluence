@@ -327,11 +327,12 @@ public final class ModUtils {
         return new Vec3(x, y, z);
     }
 
-    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb,float u,float v){
-        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(), u,v);
+    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb,float px,float py,float pz,float u,float v){
+        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(),px,py,pz ,u,v);
     }
 
-    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float u,float v) {
+    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float px,float py,float pz,float u,float v) {
+        pPoseStack.pushPose();
         PoseStack.Pose posestack$pose = pPoseStack.last();
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
@@ -347,46 +348,49 @@ public final class ModUtils {
         Consumer<VertexConsumer> consumer = c->c.color(pRed, pGreen, pBlue, pAlpha).uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrix3f, 0F, 0F, 0F).endVertex();
         //z=0
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,0f,0f));
         //x=1
-        matrix4f.translate(1,0,0);
+        matrix4f.translate(px,0,0);
         matrix4f.rotate(Axis.YP.rotationDegrees(-90));
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
-
-        matrix4f.translate(1,0,0);
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
+        //z=1
+        matrix4f.translate(pz,0,0);
         matrix4f.rotate(Axis.YP.rotationDegrees(-90));
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,0f,0f));
         //x=0
-        matrix4f.translate(1,0,0);
+        matrix4f.translate(px,0,0);
         matrix4f.rotate(Axis.YP.rotationDegrees(-90));
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
         //y=0
-        matrix4f.translate(0,0,1);
+
+
+        matrix4f.translate(0,0,px);
         matrix4f.rotate(Axis.XP.rotationDegrees(-90));
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
         //y=1
-        matrix4f.translate(0,1,1);
+
+        matrix4f.translate(0,px,py);
         matrix4f.rotate(Axis.XP.rotationDegrees(180));
         consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,0f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,1f,0f));
-        consumer.accept(pConsumer.vertex(matrix4f,1f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
 
-
+        pPoseStack.popPose();
     }
 
 

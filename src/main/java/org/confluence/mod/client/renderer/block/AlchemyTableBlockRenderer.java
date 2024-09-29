@@ -25,12 +25,14 @@ public class AlchemyTableBlockRenderer implements BlockEntityRenderer<AlchemyTab
         pPoseStack.translate(0, 1, 0);
         var consumer = pBuffer.getBuffer(RenderType.beaconBeam(BEAM_LOCATION, false));
 
-        if (pBlockEntity.firstColor != 0){
-            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0.5F, 0, 0, 0.05F),0,0);
+        if (pBlockEntity.firstColor != 0){                                                                       //x长       y长          z长
+            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0.5F, 0, 0, 0.05F),0.25F,0.4F,0.25F,0,0);
         }
         if (pBlockEntity.secondColor != 0){
-            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0.5F, 0, 0, 0.05F),0,0);
+            pPoseStack.translate(0.75, 0, 0.75);
+            ModUtils.renderCube(pPoseStack, consumer, new FloatRGBA(0F, 0.5f, 0, 0.05F),0.25F,0.4F,0.25F,0,0);
         }
+
         pPoseStack.popPose();
     }
 }
