@@ -3,12 +3,10 @@ package org.confluence.mod.client.shader;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -21,12 +19,15 @@ import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.helper.SpelunkerHelper;
 import org.confluence.mod.mixin.accessor.FontAccessor;
+import org.confluence.mod.util.ModUtils;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class RenderEvents {
@@ -62,7 +63,6 @@ public final class RenderEvents {
         boolean ifRefresh = false;
 
         if(--tick<0){
-
             if(blockGen==null) blockGen = SpelunkerHelper.blockGen = new SpelunkerHelper(Minecraft.getInstance().player);
             tick = blockGen.refreshTick;
             //todo 应该在破坏方块事件里设定是否刷新
@@ -134,7 +134,7 @@ public final class RenderEvents {
                             break;
                         }
                     }
-                    if(ifNear)continue;//非中心块不渲染
+                    if(ifNear && !KeyBindings.TAB.get().isDown())continue;//非中心块或tab按下不渲染
                     centers.get(n.getKey()).add(blockProps);//否则自己成为中心块
 
                     //距离越远透明度越低
@@ -232,27 +232,50 @@ public final class RenderEvents {
 
 
             poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
+            vertexBuffer.bind();
+            vertexBuffer.drawWithShader(poseStack.last().pose(), event.getProjectionMatrix(), RenderSystem.getShader());
+            VertexBuffer.unbind();
+
+
             //todo 添加文字
             var map = blockGen.targets;
             int textRange = blockGen.textRange;
+            AtomicInteger count = new AtomicInteger();
+            float scale = 20;
+            int textDir = blockGen.textRenderType;
             shouldRenderCache.forEach((pos, block)->{
+                if(block.asItem() == Blocks.ANCIENT_DEBRIS.asItem()) count.getAndIncrement();
                 if(playerPos.distanceToSqr(pos.getX(),pos.getY(),pos.getZ())< textRange*textRange){
                     if(KeyBindings.TAB.get().isDown() && map.get(block).showText()){
-                        var dir = playerPos.subtract(pos.getX(),pos.getY(),pos.getZ()).scale(-1);
-                        var dot = minecraft.player.getForward().dot(dir);
+                        double x = pos.getX()+0.5;
+                        double y = pos.getY()+0.5;
+                        double z = pos.getZ()+0.5;
 
-                        if(dot>0){
+                        var dir = playerPos.subtract(x,y,z).scale(-1);
+                        var pf = minecraft.player.getForward();
+                        double angle = Math.acos(dir.dot(pf)/dir.length()*pf.length());
+                        if(angle<70*Math.PI/180){
                             poseStack.pushPose();
-                            poseStack.translate(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
-                            poseStack.scale(-0.05f,-0.05f,-0.05f);
+                            poseStack.translate(x,y,z);//调整到中心位置
 
-                            //Quaternionf quaternionf = new Quaternionf().rotateTo( new Vector3f(0,1,0),dir.toVector3f());
+                            poseStack.scale(-1/scale,-1/scale,-1/scale);
 
-                            Quaternionf quaternionf = event.getCamera().rotation();
-                            poseStack.mulPose(quaternionf);
+
+                            if(textDir==0){
+                                var fs = ModUtils.dirToRot(dir.scale(-1));
+                                Matrix4f m = new Matrix4f().rotate(Axis.YP.rotationDegrees(180-fs[0])).rotate(Axis.XN.rotationDegrees(fs[1]));
+                                poseStack.mulPoseMatrix(m);
+                            }else{
+                                //Quaternionf quaternionf = new Quaternionf().rotateTo( new Vector3f(0,1,0),dir.toVector3f());
+                                Quaternionf q1 = new Quaternionf( event.getCamera().rotation());//旋转到摄像机视角
+                                poseStack.mulPose(q1);
+                            }
 
 
                             Component component = block.asItem().getDefaultInstance().getDisplayName();
+                            poseStack.translate(-component.getString().length()/5.0 * scale,0.7 * scale,0);//旋转后偏移
+
+
                             ((FontAccessor) (minecraft.font)).callRenderText(Component.literal(component.getString()).withStyle(style -> style.withColor(map.get(block).color().getRGB())).getVisualOrderText(),
                                     2f, 1f, map.get(block).color().getRGB(),
                                     false, poseStack.last().pose(), minecraft.renderBuffers().bufferSource(), net.minecraft.client.gui.Font.DisplayMode.SEE_THROUGH, 0, 15 << 20 | 15 << 4);
@@ -261,13 +284,11 @@ public final class RenderEvents {
                     }
                 }
             });
+            System.out.println(count.get());
 
 
 
-            vertexBuffer.bind();
-            vertexBuffer.drawWithShader(poseStack.last().pose(), event.getProjectionMatrix(), RenderSystem.getShader());
 
-            VertexBuffer.unbind();
             poseStack.popPose();
 
 

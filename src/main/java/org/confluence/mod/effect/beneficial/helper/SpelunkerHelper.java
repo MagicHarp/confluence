@@ -17,8 +17,8 @@ public class SpelunkerHelper {
     public int refreshTick = 100;//客户端渲染刷新间隔
     public int range = 30;//球形侦测范围
     public int textRange = 30;//球形显示文本范围
-    public float maxAlpha = 0.4f;//边框最大alpha(0 - 1)
-
+    public float maxAlpha = 0.8f;//边框最大alpha(0 - 1)
+    public int textRenderType = 1;//0表示文字面向玩家，默认是摄像机方向
 
 
     public static SpelunkerHelper blockGen;
@@ -37,12 +37,12 @@ public class SpelunkerHelper {
         genBlocks();
 
         if(!INIT){
-
+            //远古残骸
+            targets.put(Blocks.ANCIENT_DEBRIS,new Tuple(Color.MAGENTA,true) );//这个还必须放这个位置
             //钻石矿
             targets.put(Blocks.DIAMOND_ORE, new Tuple(Color.CYAN,true) );
             targets.put(Blocks.DEEPSLATE_DIAMOND_ORE, new Tuple(Color.CYAN,true) );
-            //远古残骸
-            targets.put(Blocks.ANCIENT_DEBRIS,new Tuple(Color.MAGENTA,true) );//这个还必须放这个位置
+
 
             //绿宝石矿
             targets.put(Blocks.EMERALD_ORE,new Tuple(Color.green,true) );
