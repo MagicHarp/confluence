@@ -52,6 +52,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         // 矿物方块
         addTagsForBlocks(Ores.values());
         // 其他需要镐挖掘的方块
+        IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithHoe = tag(BlockTags.MINEABLE_WITH_HOE);
+        mineableWithHoe.add(
+            ModBlocks.FLOATING_WHEAT_BALE.get()
+
+        );
+        // 其他需要镐挖掘的方块
         IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
         mineableWithPickaxe.add(
             BIG_RUBY_BLOCK.get(),

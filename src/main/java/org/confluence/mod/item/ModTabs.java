@@ -65,6 +65,7 @@ public final class ModTabs {
                 output.accept(BONE_CHAIN.get());
 
                 output.accept(WHITE_PLASTIC_CHAIR_BLOCK.get());
+                output.accept(FLOATING_WHEAT_BALE.get());
 
                 // 雕像
                 output.accept(STATUE_A.get());
@@ -235,6 +236,7 @@ public final class ModTabs {
                 for (Materials materials : Materials.values()) output.accept(materials.get());
                 output.accept(ModItems.WHOOPIE_CUSHION.get());
                 output.accept(ModItems.JUNGLE_SPORE.get());
+                output.accept(FLOATING_WHEAT.get());
             })
             .build());
     // 杂项

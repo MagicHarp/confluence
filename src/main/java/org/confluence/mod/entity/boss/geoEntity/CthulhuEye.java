@@ -41,8 +41,8 @@ import static org.confluence.mod.util.ModUtils.updateEntityRotation;
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
     private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
-    private static final float[] DAMAGE = {5f, 7f, 9f};//一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {7f, 11f, 15f};//二阶段接触伤害
+    private static final float[] DAMAGE = {4f, 6f, 8f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {6f, 10f, 14f};//二阶段接触伤害
     private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
     private static final float[] CRAZY_PERCENTAGE = {0.25f, 0.25f, 0.25f};
 
@@ -180,7 +180,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                         }
                     }
                     // 生成仆从
-                    spawnMinions(getTarget());
+                    //spawnMinions(getTarget());
                     // 向玩家正上方移动
                     Vec3 tar = getTarget().position().add(new Vec3(0, distanceAbove, 0));
                     if (distanceToSqr(tar) > followMinDistance) addDeltaMovement(tar.subtract(position()).normalize().scale(MOVE_SPEED[difficultyIdx] * stage2SpeedFactor / 10));

@@ -44,6 +44,31 @@ public class SpelunkerHelper {
             targets.put(Blocks.DEEPSLATE_DIAMOND_ORE, new Tuple(Color.CYAN,true) );
 
 
+            //红玉矿
+            targets.put(Ores.RUBY_ORE.get(), new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_RUBY_ORE.get(), new Tuple(Color.CYAN,true) );
+
+            //琥珀矿
+            targets.put(Ores.AMBER_ORE.get(), new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_AMBER_ORE.get(), new Tuple(Color.CYAN,true) );
+
+            //黄玉矿
+            targets.put(Ores.TOPAZ_ORE.get(),  new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_TOPAZ_ORE.get(),  new Tuple(Color.CYAN,true) );
+
+            //翡翠矿
+            targets.put(Ores.TR_EMERALD_ORE.get(), new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_TR_EMERALD_ORE.get(), new Tuple(Color.CYAN,true) );
+
+            //蓝玉矿
+            targets.put(Ores.SAPPHIRE_ORE.get(), new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_SAPPHIRE_ORE.get(),new Tuple(Color.CYAN,true) );
+
+            //紫晶矿
+            targets.put(Ores.TR_AMETHYST_ORE.get(), new Tuple(Color.CYAN,true) );
+            targets.put(Ores.DEEPSLATE_TR_AMETHYST_ORE.get(), new Tuple(Color.CYAN,true) );
+
+
             //绿宝石矿
             targets.put(Blocks.EMERALD_ORE,new Tuple(Color.green,true) );
             targets.put(Blocks.DEEPSLATE_EMERALD_ORE,new Tuple(Color.green,true) );

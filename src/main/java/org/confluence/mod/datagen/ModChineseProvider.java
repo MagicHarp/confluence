@@ -928,6 +928,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(CLOUD_BLOCK.get(), "云块");
         add(RAIN_CLOUD_BLOCK.get(), "雨云块");
         add(SNOW_CLOUD_BLOCK.get(), "雪云块");
+        add(FLOATING_WHEAT_BALE.get(), "飘飘麦捆");
+        add(BASE_CHEST_BLOCK.get(), "箱子");
         add(EVAPORATIVE_CLOUD_BLOCK.get(), "蒸发云块");
         add(JUNGLE_HIVE_BLOCK.get(), "丛林蜂巢");
         add(THIN_HONEY_BLOCK.get(), "稀薄蜂蜜块");

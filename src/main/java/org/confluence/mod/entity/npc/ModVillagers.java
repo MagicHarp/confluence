@@ -87,9 +87,9 @@ public final class ModVillagers {
             trades.get(2).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,2), new ItemStack(Foods.PLUM.get()), 7, 25, 0.05F));
             trades.get(2).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,6), new ItemStack(Foods.HONEY_MOONCAKES.get(),1), 7, 25, 0.05F));
             trades.get(3).add(new SkyVillagerItemListing(new ItemStack(Materials.FALLING_STAR.get(),getRandomQuantity(20, 22)), new ItemStack(Items.EMERALD,2), 7, 25, 0.05F));
-            trades.get(4).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(),2), 7, 25, 0.05F));
+            trades.get(5).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(),2), 7, 25, 0.05F));
             trades.get(5).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.STELLAR_BLOSSOM_SEED.get(),2), 7, 25, 0.05F));
-            trades.get(4).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.FLOATING_WHEAT_SEED.get(),2), 7, 25, 0.05F));
+            trades.get(5).add(new SkyVillagerItemListing(new ItemStack(Items.EMERALD,1), new ItemStack(ModItems.FLOATING_WHEAT_SEED.get(),2), 7, 25, 0.05F));
         } else if (type == VillagerProfession.ARMORER) {
             // 故意替换原版的一部分(铅和铂金部分）
             trades.get(1).add(new BasicItemListing(new ItemStack(Items.EMERALD, getRandomQuantity(6, 10)), new ItemStack(Armors.LEAD_HELMET.get()), 5, 25, 0.05F));

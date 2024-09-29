@@ -282,8 +282,8 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 8,
-                "max": 11
+                "min": 5,
+                "max": 8
               }
             }
           ],
@@ -297,8 +297,8 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 8,
-                "max": 11
+                "min": 5,
+                "max": 8
               }
             }
           ],
@@ -307,7 +307,10 @@
         {
           "type": "minecraft:empty",
           "weight": 2
-        },
+        }
+      ],
+      "rolls": 1
+    },
     {
       "bonus_rolls": 0.0,
       "entries": [
