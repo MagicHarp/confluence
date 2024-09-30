@@ -180,10 +180,6 @@ public final class ModTabs {
                 output.accept(ModItems.DEATHWEED.get());
                 output.accept(ModItems.FLAMEFLOWERS.get());
 
-                output.accept(ModBlocks.STELLAR_BLOSSOM.get());
-                output.accept(CLOUDWEAVER.get());
-                output.accept(FLOATING_WHEAT.get());
-
                 output.accept(ModItems.WATERLEAF_SEED.get());
                 output.accept(ModItems.MOONSHINE_GRASS_SEED.get());
                 output.accept(ModItems.SHINE_ROOT_SEED.get());
