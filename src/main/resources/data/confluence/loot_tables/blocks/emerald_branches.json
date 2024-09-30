@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "confluence:tr_emerald",
           "functions": [
             {
               "function": "set_count",
