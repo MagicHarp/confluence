@@ -117,7 +117,6 @@ public class BaseBulletEntity extends Projectile {
                 }
             }
         }
-        if (entity.isPickable()) discard();
     }
 
     @Override
