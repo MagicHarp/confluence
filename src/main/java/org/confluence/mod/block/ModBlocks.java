@@ -48,7 +48,7 @@ public final class ModBlocks {
     // 提取块
     public static final RegistryObject<Block> DESERT_FOSSIL = registerWithItem("desert_fossil", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1.5F, 1.0F)));
     public static final RegistryObject<Block> SLUSH = registerWithItem("slush", () -> new SandBlock(0xcfddde, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.7F).sound(SoundType.GRAVEL)));
-    public static final RegistryObject<Block> MARINE_GRAVEL = registerWithItem("marine_gravel", () -> new SandBlock(0xdedede, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.8F).sound(SoundType.GRAVEL)));
+    public static final RegistryObject<Block> MARINE_GRAVEL = registerWithItem("marine_gravel", () -> new SandBlock(0x48948f, BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(0.8F).sound(SoundType.GRAVEL)));
     // ebony
     public static final LogBlocks EBONY_LOG_BLOCKS = new LogBlocks("ebony", EBONY);
     public static final RegistryObject<Block> EBONY_STONE = registerWithItem("ebony_stone", () -> new CustomModelSpreadingBlock(ISpreadable.Type.CORRUPT, BlockBehaviour.Properties.of()));
