@@ -29,7 +29,7 @@
     },
     "rewards": {
         "loot": [
-            "confluence:achievements/new_world"
+            "confluence:gameplay/start_advancements"
         ]
     }
 }
