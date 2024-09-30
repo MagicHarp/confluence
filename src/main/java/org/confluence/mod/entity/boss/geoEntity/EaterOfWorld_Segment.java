@@ -18,7 +18,6 @@ public class EaterOfWorld_Segment extends TerraBossBase {
     public TerraBossBase lastSegment;
     //public static final RawAnimation roll = RawAnimation.begin().thenPlay("worm.roll");
     public int segmentIndex;
-    public boolean genNewHeadOnRemove = true;
 
     public void setHead(EaterOfWorld head){
         this.head = head;
@@ -76,7 +75,7 @@ public class EaterOfWorld_Segment extends TerraBossBase {
     @Override//死亡时
     public void onRemovedFromWorld() {
 
-        if(level().isClientSide || !genNewHeadOnRemove) return;
+        if(level().isClientSide) return;
 
         if(head!=null &&head.isAlive()&& head.segments.size()>segmentIndex){//重新设置头
 
@@ -88,9 +87,7 @@ public class EaterOfWorld_Segment extends TerraBossBase {
             newHead.setYRot(next.yRotO);
             newHead.setXRot(next.xRotO);
             newHead.genSegments =  false;
-            level().addFreshEntity(newHead);
-            next.genNewHeadOnRemove = false;
-            next.discard();
+
             TerraBossBase last = newHead;
             for(var n : head.segments){
                 var seg = (EaterOfWorld_Segment)n;
@@ -103,7 +100,8 @@ public class EaterOfWorld_Segment extends TerraBossBase {
 
                 }
             }
-
+            next.discard();
+            level().addFreshEntity(newHead);
         }
 
         if(head!=null && head.isAlive()){//删除子序列

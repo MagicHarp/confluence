@@ -91,7 +91,7 @@ public class EaterOfWorld extends TerraBossBase {
                     turnSpeed = turnSpeedBase;
                     shouldMove = true;
                     shouldFollowTarget=true;
-
+                    wanderType = random.nextBoolean()?WonderType.UP:WonderType.DOWN;
 
                 },
                 (terraBossBase)->{
@@ -203,12 +203,12 @@ public class EaterOfWorld extends TerraBossBase {
             EaterOfWorld newHead = new EaterOfWorld(level(),false);
             newHead.setXRot(xRotO);
             newHead.setYRot(yRotO);
-            newHead.setPos(position());
-            newHead.genSegments = false;
+
 
             level().addFreshEntity(newHead);
             TerraBossBase last = newHead;
 
+            Vec3 pos;
             for(var n : segments){
                 var seg = (EaterOfWorld_Segment)n;
                 if(seg.segmentIndex>1){
@@ -218,10 +218,11 @@ public class EaterOfWorld extends TerraBossBase {
                     seg.lastSegment = last;
                     last = seg;
                 }else{//移除第二节点
-                    ((EaterOfWorld_Segment) n).genNewHeadOnRemove = false;
                     n.discard();
                 }
             }
+            newHead.setPos(position());
+            newHead.genSegments = false;
         }
         super.onRemovedFromWorld();
     }

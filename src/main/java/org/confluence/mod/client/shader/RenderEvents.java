@@ -143,7 +143,7 @@ public final class RenderEvents {
 
                     }else{
                         centers.get(n.getKey()).add(blockProps);//太远则自己成为中心块
-                        shouldRenderCache.put(blockProps,n.getKey());
+                        shouldRenderCache.put(blockProps,n.getKey());//只渲染中心块文本
                     }
 
                     //距离越远透明度越低
