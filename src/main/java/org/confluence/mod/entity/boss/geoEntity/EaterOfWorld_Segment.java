@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.TerraBossBase;
 
@@ -74,6 +75,7 @@ public class EaterOfWorld_Segment extends TerraBossBase {
 
     @Override//死亡时
     public void onRemovedFromWorld() {
+
         if(level().isClientSide || !genNewHeadOnRemove) return;
 
         if(head!=null &&head.isAlive()&& head.segments.size()>segmentIndex){//重新设置头

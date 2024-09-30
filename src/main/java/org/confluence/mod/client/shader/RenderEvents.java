@@ -49,8 +49,9 @@ public final class RenderEvents {
             lightTexture.turnOffLightLayer();
         }
 */
-        SpelunkerHelper blockGen= SpelunkerHelper.blockGen;
-        //清除缓存
+        Minecraft minecraft = Minecraft.getInstance();
+        SpelunkerHelper blockGen= SpelunkerHelper.getSingleton(minecraft.player);
+        //效果消失，清除缓存
         if(!Minecraft.getInstance().player.hasEffect(ModEffects.SPELUNKER.get())){
             if(blockGen!=null){
                 blockGen.centerCache.clear();;
@@ -63,17 +64,18 @@ public final class RenderEvents {
         boolean ifRefresh = false;
 
         if(--tick<0){
-            if(blockGen==null) blockGen = SpelunkerHelper.blockGen = new SpelunkerHelper(Minecraft.getInstance().player);
             tick = blockGen.refreshTick;
             //todo 应该在破坏方块事件里设定是否刷新
             blockGen.genBlocks();
             ifRefresh = true;
         }
-        if(blockGen==null) return;
-        Minecraft minecraft = Minecraft.getInstance();
+
+
         Vec3 playerPos = minecraft.gameRenderer.getMainCamera().getPosition();
 
+        //重新加载缓存，提速
         Map<Block, ArrayList<BlockPos>> centers = blockGen.centers;
+        centers.clear();
         var shouldRenderCache = blockGen.centerCacheFrame;
         if(ifRefresh){
             var mapList = blockGen.getBlockMap();
@@ -125,23 +127,30 @@ public final class RenderEvents {
                     }
 
 
-
+                        //todo 可以优化
                     for(BlockPos centerPos : centers.get(n.getKey())){//否则查找所有的中心块
                         double distance = centerPos.distSqr(blockProps);
-                        if(distance < 25){//附近有中心块，添加缓存
+                        if(distance < blockGen.centerInternal){//附近有中心块，添加缓存
                             centerMap.put(blockProps, centerPos);
                             ifNear = true;
                             break;
                         }
                     }
-                    if(ifNear && !KeyBindings.TAB.get().isDown())continue;//非中心块或tab按下不渲染
-                    centers.get(n.getKey()).add(blockProps);//否则自己成为中心块
+
+
+                    if(ifNear){
+                        if(!KeyBindings.TAB.get().isDown())continue;//非中心块或tab按下不渲染
+
+                    }else{
+                        centers.get(n.getKey()).add(blockProps);//太远则自己成为中心块
+                        shouldRenderCache.put(blockProps,n.getKey());
+                    }
 
                     //距离越远透明度越低
                     a = (int) ((255- Math.min(playerPos.distanceToSqr(blockProps.getX(),blockProps.getY(),blockProps.getZ())/(blockGen.range*blockGen.range)*255,255))* blockGen.maxAlpha);
                     if(a<=0)continue;
 
-                    shouldRenderCache.put(blockProps,n.getKey());
+
 
                     buffer.vertex(x, y + size, z).color(r,g,b,a).endVertex();
                     buffer.vertex(x + size, y + size, z).color(r,g,b,a).endVertex();

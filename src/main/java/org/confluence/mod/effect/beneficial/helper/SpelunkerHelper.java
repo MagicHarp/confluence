@@ -19,9 +19,18 @@ public class SpelunkerHelper {
     public int textRange = 30;//球形显示文本范围
     public float maxAlpha = 0.8f;//边框最大alpha(0 - 1)
     public int textRenderType = 1;//0表示文字面向玩家，默认是摄像机方向
+    public int centerInternal = 50;//中心块间距的平方
 
 
-    public static SpelunkerHelper blockGen;
+    public static SpelunkerHelper getSingleton(Player player){
+        if(blockGen==null || blockGen.player!=player){
+
+            blockGen = new SpelunkerHelper(player);
+            return blockGen;
+        }
+        return blockGen;
+    }
+    private static SpelunkerHelper blockGen;
     public Map<Block, Tuple> targets = new HashMap<>();
     public Map<BlockPos,BlockPos> centerCache = new HashMap<>();
     public Map<BlockPos,Block> centerCacheFrame = new HashMap<>();//当前帧渲染的cache
