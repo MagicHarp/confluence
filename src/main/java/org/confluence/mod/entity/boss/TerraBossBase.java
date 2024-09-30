@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -59,8 +61,8 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
         //this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 100F));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, false));
     }
 
     // 技能动画
@@ -134,6 +136,33 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
         collisionHurt();
         super.tick();
         this.setDeltaMovement(getDeltaMovement().scale(0.95));//空气阻力
+    }
+
+
+    public void lookAtPos(Vec3 target, float pMaxYRotIncrease, float pMaxXRotIncrease) {
+
+
+        double d0 = target.x - this.getX();
+        double d2 = target.z - this.getZ();
+        double d1 = target.y - this.getEyeY();
+
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        float f = (float)(Mth.atan2(d2, d0) * 57.2957763671875) - 90.0F;
+        float f1 = (float)(-(Mth.atan2(d1, d3) * 57.2957763671875));
+        this.setXRot(this.rotlerp(this.getXRot(), f1, pMaxXRotIncrease));
+        this.setYRot(this.rotlerp(this.getYRot(), f, pMaxYRotIncrease));
+    }
+    private float rotlerp(float pAngle, float pTargetAngle, float pMaxIncrease) {
+        float f = Mth.wrapDegrees(pTargetAngle - pAngle);
+        if (f > pMaxIncrease) {
+            f = pMaxIncrease;
+        }
+
+        if (f < -pMaxIncrease) {
+            f = -pMaxIncrease;
+        }
+
+        return pAngle + f;
     }
 
     // 开启碰撞伤害

@@ -46,6 +46,8 @@ import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRende
 import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.*;
+import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorldRenderer;
+import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorld_SegmentRenderer;
 import org.confluence.mod.entity.boss.geoRenderer.KingSkullHandRenderer;
 import org.confluence.mod.entity.boss.geoRenderer.KingSkullRenderer;
 import org.confluence.mod.fluid.ModFluids;
@@ -316,6 +318,9 @@ public final class ModClient {
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
         event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
+
+        event.registerEntityRenderer(EATER_OF_WORLD.get(), EaterOfWorldRenderer::new);
+        event.registerEntityRenderer(EATER_OF_WORLD_SEGMENT.get(), EaterOfWorld_SegmentRenderer::new);
         event.registerEntityRenderer(KING_SKULL.get(), KingSkullRenderer::new);
         event.registerEntityRenderer(KING_SKULL_HAND.get(), KingSkullHandRenderer::new);
 

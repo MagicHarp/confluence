@@ -26,6 +26,7 @@ public class CircleBossSkills {
 
 
     public void tick(){
+        if(bossSkills.isEmpty()) return ;
         this.tick++;
 
         if(bossSkills.get(index).stateTick !=null) {

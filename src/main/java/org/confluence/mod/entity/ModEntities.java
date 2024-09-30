@@ -12,10 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
+import org.confluence.mod.entity.boss.geoEntity.*;
 import org.confluence.mod.entity.boss.KingSlime;
-import org.confluence.mod.entity.boss.geoEntity.KingSkull;
-import org.confluence.mod.entity.boss.geoEntity.KingSkullHand;
 import org.confluence.mod.entity.chair.ChairEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
@@ -120,12 +118,26 @@ public final class ModEntities {
             .clientTrackingRange(10)
             .setTrackingRange(100)
             .build("confluence:cthulhu_eye"));
+    public static final RegistryObject<EntityType<EaterOfWorld>> EATER_OF_WORLD = ENTITIES.register("eater_of_world", () -> EntityType.Builder.<EaterOfWorld>of(EaterOfWorld::new, MobCategory.MONSTER)
+            .sized(3F, 3F)
+            .clientTrackingRange(10)
+            .setTrackingRange(100)
+            .build("confluence:cthulhu_eye"));
+    public static final RegistryObject<EntityType<EaterOfWorld_Segment>>EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorld_Segment>of(EaterOfWorld_Segment::new, MobCategory.MONSTER)
+            .sized(2.04F, 2.04F)
+            .clientTrackingRange(10)
+            .noSave()
+            .setTrackingRange(100)
+            .build("confluence:cthulhu_eye"));
+
     public static final RegistryObject<EntityType<KingSkull>> KING_SKULL = ENTITIES.register("king_skull", () -> EntityType.Builder.of(KingSkull::new, MobCategory.MONSTER).sized(2.04F, 2.04F).setTrackingRange(100).clientTrackingRange(10).build("confluence:king_skull"));
     public static final RegistryObject<EntityType<KingSkullHand>> KING_SKULL_HAND = ENTITIES.register("king_skull_hand", () -> EntityType.Builder.<KingSkullHand>of(KingSkullHand::new, MobCategory.MONSTER)
             .sized(2.04F, 2.04F)
             .clientTrackingRange(10)
             .setTrackingRange(100)
             .build("confluence:king_skull_hand"));
+
+
 
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
@@ -142,13 +154,18 @@ public final class ModEntities {
                 .add(Attributes.FOLLOW_RANGE, 100)
                 .add(Attributes.MAX_HEALTH, 200)
                 .add(Attributes.MOVEMENT_SPEED, 0.15f)
-                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.ATTACK_DAMAGE, 1)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10)
 
 
                 .add(Attributes.ATTACK_KNOCKBACK, 1);
+        event.put(ModEntities.EATER_OF_WORLD.get(), genericBossAttribs.build());
+        event.put(ModEntities.EATER_OF_WORLD_SEGMENT.get(), genericBossAttribs.build());
+
+
         event.put(ModEntities.KING_SKULL.get(), genericBossAttribs.build());
         event.put(ModEntities.KING_SKULL_HAND.get(), genericBossAttribs.build());
+
         //event.put(ModEntities.CTHULHU_EYE.get(),genericBossAttribs.build());
 
     }

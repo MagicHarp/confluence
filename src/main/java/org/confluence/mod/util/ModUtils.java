@@ -316,4 +316,14 @@ public final class ModUtils {
         double z = axis == Direction.Axis.Z ? scale * vec3.z : vec3.z;
         return new Vec3(x, y, z);
     }
+
+    /**
+     * 计算向量夹角
+     * @param v1
+     * @param v2
+     * @return degree
+     */
+    public static double angleBetween(Vec3 v1,Vec3 v2){
+        return Math.acos(v1.dot(v2)/v1.length()/v2.length());
+    }
 }
