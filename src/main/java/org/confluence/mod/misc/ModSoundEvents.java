@@ -42,6 +42,10 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> TERRA_OPERATION = register("terra_operation"); // 操作音效
     public static final RegistryObject<SoundEvent> USE_MOUNTS = register("use_mounts"); // 召唤坐骑
     public static final RegistryObject<SoundEvent> ACHIEVEMENTS = register("achievements"); // 成就音效
+    public static final RegistryObject<SoundEvent> REGULAR_STAFF_SHOOT_2 = register("regular_staff_shoot_2"); // 射弹2
+    public static final RegistryObject<SoundEvent> ROAR = register("roar"); // boss吼叫
+    public static final RegistryObject<SoundEvent> HURRIED_ROARING = register("hurried_roaring"); //疯狗冲刺
+
 
     private static RegistryObject<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(Confluence.asResource(id)));
