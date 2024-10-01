@@ -256,7 +256,7 @@ public final class RenderEvents {
                         var pf = minecraft.player.getForward();
                         System.out.println(pf);
                         double angle = Math.acos(dir.dot(pf)/dir.length()/pf.length());
-                        if(angle<70*Math.PI/180){
+                        if(angle<50*Math.PI/180){
                             poseStack.pushPose();
                             poseStack.translate(x,y,z);//调整到中心位置
                             poseStack.scale(-1/scale,-1/scale,-1/scale);

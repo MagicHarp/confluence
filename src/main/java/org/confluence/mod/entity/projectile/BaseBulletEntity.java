@@ -25,6 +25,8 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
@@ -33,6 +35,8 @@ public class BaseBulletEntity extends Projectile {
     protected float attackDamage = 0.0F;
     protected float criticalChance = 0.0F;
     protected float knockBack = 0.0F;
+    protected int penetrateCount = 2;
+    protected List<Entity> penetrateList = new ArrayList<>();
 
     public BaseBulletEntity(EntityType<BaseBulletEntity> entityType, Level level) {
         super(entityType, level);
@@ -80,11 +84,12 @@ public class BaseBulletEntity extends Projectile {
     @Override
     public void tick() {
         super.tick();
+        Vec3 vec3 = getDeltaMovement();
+
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
         checkInsideBlocks();
-        Vec3 vec3 = getDeltaMovement();
         HitResult.Type hitresult$type = hitresult.getType();
-        if (hitresult$type == HitResult.Type.BLOCK || vec3.length() < 0.007) {
+        if (hitresult$type == HitResult.Type.BLOCK || vec3.length() < 0.01) {
             discard();
             return;
         }
@@ -101,13 +106,18 @@ public class BaseBulletEntity extends Projectile {
             setDeltaMovement(vec31.x, vec31.y - getGravity(), vec31.z);
         }
         setPos(offX, offY, offZ);
-        level().addParticle(getParticle(), getX(), getY(), getZ(), 0.0, 0.0, 0.0);
+        level().addParticle(getParticle(), getX()+Math.random()*0.4-0.2, getY()+Math.random()*0.4-0.2, getZ()+Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2);
+        level().addParticle(getParticle(), getX()+Math.random()*0.4-0.2, getY()+Math.random()*0.4-0.2, getZ()+Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2);
+        level().addParticle(getParticle(), getX()+Math.random()*0.4-0.2, getY()+Math.random()*0.4-0.2, getZ()+Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2);
+        level().addParticle(getParticle(), getX()+Math.random()*0.4-0.2, getY()+Math.random()*0.4-0.2, getZ()+Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2, Math.random()*0.4-0.2);
+
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         if (!level().isClientSide) {
+            if(penetrateList.contains(entity)) return;
             float damage = getBaseDamage() * (1.0F + attackDamage);
             if (random.nextFloat() < criticalChance) damage *= 1.5F;
             if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
@@ -116,6 +126,9 @@ public class BaseBulletEntity extends Projectile {
                     ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
                 }
             }
+            penetrateCount--;
+            penetrateList.add(entity);
+            if(penetrateCount==0) discard();
         }
     }
 
