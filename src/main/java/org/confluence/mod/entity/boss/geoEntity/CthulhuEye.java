@@ -28,6 +28,7 @@ import org.confluence.mod.entity.boss.BossSkill;
 import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeWanderGoal;
+import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.util.DeathAnimOptions;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -285,7 +286,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
 
 
     @Override // 受伤音效
-    protected SoundEvent getHurtSound(DamageSource damageSource) {return SoundEvents.SLIME_HURT;}
+    protected SoundEvent getHurtSound(DamageSource damageSource) {return ModSoundEvents.ROUTINE_HURT.get();}
 
     @Override
     public boolean isNoGravity(){ return true; }

@@ -161,5 +161,20 @@
         "sounds": [
             "confluence:achievements"
         ]
+    },
+    "roar": {
+        "sounds": [
+            "confluence:roar"
+        ]
+    },
+    "regular_staff_shoot_2": {
+        "sounds": [
+            "confluence:regular_staff_shoot_2"
+        ]
+    },
+    "hurried_roaring": {
+        "sounds": [
+            "confluence:hurried_roaring"
+        ]
     }
 }
