@@ -13,10 +13,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +23,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
-import org.confluence.mod.effect.beneficial.helper.HunterHelper;
+import org.confluence.mod.effect.beneficial.helper.GlowingHelper;
 import org.confluence.mod.effect.neutral.ShimmerEffect;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerEntityTransmutationEvent;
@@ -49,6 +48,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immunity {
@@ -82,6 +82,8 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immuni
     @Shadow public abstract EntityType<?> getType();
 
     @Shadow public abstract boolean is(Entity pEntity);
+
+    @Shadow protected abstract Vec3 collide(Vec3 pVec);
 
     @Unique
     private int confluence$cthulhuSprintingTime = 0;
@@ -281,12 +283,27 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immuni
         if(Minecraft.getInstance().player !=null &&
                 Minecraft.getInstance().player.hasEffect(ModEffects.HUNTER.get())
         ){
-            HunterHelper helper = HunterHelper.getSingleton();
-            if(helper.colorMap.containsKey(this.getType())) {
-                cir.setReturnValue(helper.colorMap.get(this.getType()).color().getRGB());
+            GlowingHelper helper = GlowingHelper.getHunterHelper();
+
+            AtomicInteger color = new AtomicInteger();
+            //自定义狩猎药水表
+            try{
+                helper.colorMap.forEach((k,v)->{
+                    if(k.isAssignableFrom(self().getClass())) {
+                        color.set(v.color().getRGB());
+                        throw new RuntimeException("break");
+                    }
+                });
+            }catch (RuntimeException e){
+                cir.setReturnValue(color.get());
                 return;
             }
-            AtomicBoolean flag = new AtomicBoolean(false);
+
+            //敌人
+            if(self() instanceof Enemy){
+                cir.setReturnValue(helper.enemyColor.getRGB());
+                return;
+            }
 
             //中立生物
             if(self() instanceof NeutralMob){
@@ -298,17 +315,7 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immuni
                 cir.setReturnValue(helper.neutralColor.getRGB());
                 return;
             }
-            try{
-                helper.colorMap.forEach((k,v)->{
-                    if(k.isAssignableFrom(self().getClass())) {
-                        cir.setReturnValue(v.color().getRGB());
-                        flag.set(true);
-                        throw new RuntimeException("break");
-                    }
-                });
-            }catch (RuntimeException e){
-                if(flag.get()) return;
-            }
+
 
 
 /*

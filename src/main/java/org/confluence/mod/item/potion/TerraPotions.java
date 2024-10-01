@@ -16,7 +16,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     BUILDER_POTION("builder_potion", () -> new EffectPotionItem(ModEffects.BUILDER, 54000)),
     //CALMING_POTION("calming_potion", BaseItem::new),
     //CRATE_POTION("crate_potion", BaseItem::new),
-    //DANGERSENSE_POTION("dangersense_potion", BaseItem::new),
+    DANGERSENSE_POTION("dangersense_potion", () -> new EffectPotionItem(ModEffects.DANGER_SENSE, 4800)),
     ENDURANCE_POTION("endurance_potion", () -> new EffectPotionItem(ModEffects.ENDURANCE, 4800)),
     FEATHERFALL_POTION("featherfall_potion", () -> new EffectPotionItem(() -> MobEffects.SLOW_FALLING, 12000)),
     FLIPPER_POTION("flipper_potion", () -> new EffectPotionItem(ModEffects.FLIPPER, 9600)),
