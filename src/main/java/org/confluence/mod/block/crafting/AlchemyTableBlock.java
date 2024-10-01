@@ -4,9 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +25,8 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.potion.EffectPotionItem;
+import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlchemyTableBlock extends BaseEntityBlock {
+    private static final int DEVIATIONS = 50000;
     public AlchemyTableBlock(){
         super(Properties.copy(Blocks.CRAFTING_TABLE));
     }
@@ -38,9 +43,14 @@ public class AlchemyTableBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pState.getBlock() instanceof AlchemyTableBlock && pLevel.getBlockEntity(pPos) instanceof AlchemyTableBlock.Entity entity) {
             if (pPlayer.isShiftKeyDown()){
+                if (entity.firstColor == 0){
+                    return InteractionResult.PASS;
+                }
                 if (entity.craft()){
                     pPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1.8F);
                 }
+                entity.craftPotion(pState, pLevel, pPos, pPlayer);
+
                 return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
             }
             if (pPlayer.getItemInHand(pHand).getItem() instanceof PotionItem) {
@@ -73,44 +83,34 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                 pPlayer.playSound(SoundEvents.HONEY_DRINK, 1, 0.8F);
             } else {
                 ItemStack item = pPlayer.getItemInHand(pHand);
-                if (entity.operator != 0){
-                    if (item.is(ModItems.WATERLEAF.get())) {
-                        entity.operator = 1;
-                    } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
-                        entity.operator = 2;
-                    } else if (item.is(ModItems.SHINE_ROOT.get())){
-                        entity.operator = 3;
-                    }
-                } else {
-                    if (item.is(ModItems.WATERLEAF.get())) {
-                        entity.operator = 1;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
-                        entity.operator = 2;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.SHINE_ROOT.get())){
-                        entity.operator = 3;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.SHIVERINGTHORNS.get())){
-                        entity.operator = 4;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.SUNFLOWERS.get())){
-                        entity.operator = 5;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.DEATHWEED.get())){
-                        entity.operator = 6;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.FLAMEFLOWERS.get())){
-                        entity.operator = 7;
-                        item.shrink(1);
-                    } else if (item.is(ModItems.EBONY_MUSHROOM.get()) || item.is(ModItems.GLOWING_MUSHROOM.get()) ||
-                            item.is(ModItems.LIFE_MUSHROOM.get()) || item.is(ModItems.TR_CRIMSON_MUSHROOM.get())){
-                        entity.operator = 8;
-                        item.shrink(1);
-                    } else if (item.is(Materials.BLACK_PEARL.get())){
-                        entity.operator = 9;
-                        item.shrink(1);
-                    }
+                if (item.is(ModItems.WATERLEAF.get())) {
+                    entity.operator = 1;
+                    item.shrink(1);
+                } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
+                    entity.operator = 2;
+                    item.shrink(1);
+                } else if (item.is(ModItems.SHINE_ROOT.get())){
+                    entity.operator = 3;
+                    item.shrink(1);
+                } else if (item.is(ModItems.SHIVERINGTHORNS.get())){
+                    entity.operator = 4;
+                    item.shrink(1);
+                } else if (item.is(ModItems.SUNFLOWERS.get())){
+                    entity.operator = 5;
+                    item.shrink(1);
+                } else if (item.is(ModItems.DEATHWEED.get())){
+                    entity.operator = 6;
+                    item.shrink(1);
+                } else if (item.is(ModItems.FLAMEFLOWERS.get())){
+                    entity.operator = 7;
+                    item.shrink(1);
+                } else if (item.is(ModItems.EBONY_MUSHROOM.get()) || item.is(ModItems.GLOWING_MUSHROOM.get()) ||
+                        item.is(ModItems.LIFE_MUSHROOM.get()) || item.is(ModItems.TR_CRIMSON_MUSHROOM.get())){
+                    entity.operator = 8;
+                    item.shrink(1);
+                } else if (item.is(Materials.BLACK_PEARL.get())){
+                    entity.operator = 9;
+                    item.shrink(1);
                 }
             }
             pPlayer.sendSystemMessage(Component.literal(entity.firstColor + " " + entity.secondColor + " " + entity.operator));
@@ -143,7 +143,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
             super(ModBlocks.ALCHEMY_TABLE_BLOCK_ENTITY.get(), pPos, pBlockState);
         }
 
-
+        public void resetFirstColor(){ firstColor = 0; }
 
 
         @Override
@@ -169,6 +169,31 @@ public class AlchemyTableBlock extends BaseEntityBlock {
             nbt.putInt("operator", operator);
             nbt.putInt("second_color", secondColor);
             return nbt;
+        }
+
+        public void craftPotion(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
+            List<MobEffect> effects = new ArrayList<>();
+            if (pLevel instanceof ServerLevel serverLevel && pState.getBlock() instanceof AlchemyTableBlock block && pLevel.getBlockEntity(pPos) instanceof AlchemyTableBlock.Entity entity) {
+                for (Object o : ForgeRegistries.MOB_EFFECTS.getValues().toArray()) {
+                    if (o instanceof MobEffect effect) {
+                        //get all effects
+                        if (effect.getColor() - DEVIATIONS < firstColor && effect.getColor() + DEVIATIONS > firstColor) {
+                            effects.add(effect);
+                        }
+                    }
+                }
+                if (effects.isEmpty()) {
+                    return;
+                }
+                for (MobEffect effect : effects) {
+                    ModUtils.testMessage(pPlayer, ForgeRegistries.MOB_EFFECTS.getKey(effects.get(pLevel.random.nextInt(effects.size()))).toString() + "   :   " + effect.getColor());
+                }
+                resetFirstColor();
+                //todo 渲染bug
+                ItemStack potion = new ItemStack(TerraPotions.VANILLA_POTION.get());
+                potion.getOrCreateTag().putString("Potion", ForgeRegistries.MOB_EFFECTS.getKey(effects.get(pLevel.random.nextInt(effects.size()))).toString());
+                ModUtils.createItemEntity(potion, pPos.getCenter(), pLevel);
+            }
         }
 
         public boolean craft() {

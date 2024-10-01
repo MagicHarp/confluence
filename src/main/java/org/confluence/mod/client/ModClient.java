@@ -54,6 +54,8 @@ import org.confluence.mod.item.common.ColoredItem;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
+import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.potion.VanillaPotionItem;
 import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModArmPoses;
 
@@ -73,6 +75,7 @@ public final class ModClient {
         return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
     };
     public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
+    public static final ItemColor POTION = (pStack, pTintIndex) -> VanillaPotionItem.getColor(pStack);
 
     private static IntegerRGB hallowMixture(int m) {
         if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
@@ -408,6 +411,7 @@ public final class ModClient {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(SIMPLE, Materials.GEL.get());
+        event.register(POTION, TerraPotions.VANILLA_POTION.get());
     }
 
 //    @SubscribeEvent
