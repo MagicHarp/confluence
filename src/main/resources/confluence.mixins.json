@@ -65,6 +65,7 @@
         "chunk.BlockCounterMixin",
         "chunk.LevelChunkSectionMixin",
         "chunk.PalettedContainerAccessor",
+        "client.MinectaftMixin",
         "entity.AbstractArrowMixin",
         "entity.DamageTypeMixin",
         "entity.EntityMixin",

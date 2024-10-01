@@ -24,7 +24,7 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     GILLS_POTION("gills_potion", () -> new EffectPotionItem(() -> MobEffects.WATER_BREATHING, 4800)),
     GRAVITATION_POTION("gravitation_potion", () -> new EffectPotionItem(ModEffects.GRAVITATION, 3600)),
     HEART_REACH_POTION("heart_reach_potion", () -> new EffectPotionItem(ModEffects.HEART_REACH, 9600)),
-    //HUNTER_POTION("hunter_potion", BaseItem::new),
+    HUNTER_POTION("hunter_potion", ()->new EffectPotionItem(ModEffects.HUNTER, 9600)),
     INFERNO_POTION("inferno_potion", () -> new EffectPotionItem(ModEffects.INFERNO, 4800)),
     INVISIBILITY_POTION("invisibility_potion", () -> new EffectPotionItem(() -> MobEffects.INVISIBILITY, 3600)),
     IRON_SKIN_POTION("iron_skin_potion", () -> new EffectPotionItem(ModEffects.IRON_SKIN, 9600)),

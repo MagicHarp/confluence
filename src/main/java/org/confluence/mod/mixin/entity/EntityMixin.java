@@ -1,6 +1,7 @@
 package org.confluence.mod.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
@@ -8,16 +9,22 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
 import org.confluence.mod.capability.ability.AbilityProvider;
+import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.beneficial.ObsidianSkinEffect;
+import org.confluence.mod.effect.beneficial.helper.HunterHelper;
 import org.confluence.mod.effect.neutral.ShimmerEffect;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.fluid.ShimmerEntityTransmutationEvent;
@@ -71,6 +78,10 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immuni
 
     @Shadow
     public abstract Level level();
+
+    @Shadow public abstract EntityType<?> getType();
+
+    @Shadow public abstract boolean is(Entity pEntity);
 
     @Unique
     private int confluence$cthulhuSprintingTime = 0;
@@ -263,5 +274,53 @@ public abstract class EntityMixin implements IEntity, SelfGetter<Entity>, Immuni
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.x, y, motion.z);
         entity.setGlowingTag(true);
+    }
+
+    @Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
+    public void getTeamColor(CallbackInfoReturnable<Integer> cir){
+        if(Minecraft.getInstance().player !=null &&
+                Minecraft.getInstance().player.hasEffect(ModEffects.HUNTER.get())
+        ){
+            HunterHelper helper = HunterHelper.getSingleton();
+            if(helper.colorMap.containsKey(this.getType())) {
+                cir.setReturnValue(helper.colorMap.get(this.getType()).color().getRGB());
+                return;
+            }
+            AtomicBoolean flag = new AtomicBoolean(false);
+
+            //中立生物
+            if(self() instanceof NeutralMob){
+                /*todo 添加愤怒颜色
+                if((self() instanceof EnderMan) && ((EnderMan) self()).isCreepy()){
+                        cir.setReturnValue(helper.angerColor.getRGB());
+                        return;
+                }*/
+                cir.setReturnValue(helper.neutralColor.getRGB());
+                return;
+            }
+            try{
+                helper.colorMap.forEach((k,v)->{
+                    if(k.isAssignableFrom(self().getClass())) {
+                        cir.setReturnValue(v.color().getRGB());
+                        flag.set(true);
+                        throw new RuntimeException("break");
+                    }
+                });
+            }catch (RuntimeException e){
+                if(flag.get()) return;
+            }
+
+
+/*
+            if(helper.colorMap.containsKey(self().getClass()) ) {
+                cir.setReturnValue(helper.colorMap.get(self().getClass()).getRGB());
+                return;
+            }
+            */
+//            if(Monster.class.isAssignableFrom(this.getType().getBaseClass())) cir.setReturnValue(helper.enemyColor.getRGB());
+//            if(Monster.class.isAssignableFrom(this.getType().getBaseClass())) cir.setReturnValue(helper.enemyColor.getRGB());
+
+            cir.setReturnValue(helper.defaultColor.getRGB());
+        }
     }
 }

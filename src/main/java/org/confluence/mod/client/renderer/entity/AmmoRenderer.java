@@ -45,7 +45,7 @@ public class AmmoRenderer extends EntityRenderer<BaseAmmoEntity> {
         pPoseStack.scale(2.0F, 2.0F, 2.0F);
 
         model.renderToBuffer(pPoseStack, pBuffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(pEntity))), 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F,
-                Math.lerp(0,1,Math.min( Math.max(pEntity.tickCount-0.75f,0),2) /2.0f));
+                Math.lerp(0,1,Math.min( Math.max(pEntity.tickCount-1,0),2) /2.0f));
         pPoseStack.popPose();
     }
 }
