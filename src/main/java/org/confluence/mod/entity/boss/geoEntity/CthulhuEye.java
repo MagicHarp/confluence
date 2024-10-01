@@ -40,9 +40,9 @@ import static org.confluence.mod.util.ModUtils.updateEntityRotation;
 
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
-    private static final float[] MAX_HEALTHS = {1000f, 1500f, 2000f};
-    private static final float[] DAMAGE = {4f, 6f, 8f};//一阶段接触伤害
-    private static final float[] CRAZY_DAMAGE = {6f, 10f, 14f};//二阶段接触伤害
+    private static final float[] MAX_HEALTHS = {728f, 946f, 1206f};
+    private static final float[] DAMAGE = {4f, 6f, 9f};//一阶段接触伤害
+    private static final float[] CRAZY_DAMAGE = {6f, 10f, 15f};//二阶段接触伤害
     private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
     private static final float[] CRAZY_PERCENTAGE = {0.25f, 0.25f, 0.25f};
 

@@ -39,7 +39,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
     private static final int SHRINK_ENLARGE_DURATION = 20;
     // 大师 专家 普通
     private static final int[] TOTAL_SPLITS = {75, 50, 30};
-    private static final float[] MAX_HEALTHS = {260f, 364f, 464f};
+    private static final float[] MAX_HEALTHS = {520f, 728f, 928f};
     private static final float[] DAMAGE = {26f, 20f, 10f};
     private static final float[] JUMP_SPEED_HORIZONTAL = {1.1f, 1.35f, 1.55f};
     private static final float[] JUMP_SPEED_VERTICAL = {1.5f, 1.75f, 2f};
