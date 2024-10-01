@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "confluence:item/gel"
+        "layer0": "confluence:item/vanilla_potion"
     }
 }

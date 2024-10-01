@@ -75,7 +75,7 @@ public final class ModClient {
         return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
     };
     public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
-    public static final ItemColor POTION = (pStack, pTintIndex) -> VanillaPotionItem.getColor(pStack);
+    public static final ItemColor POTION = (pStack, pTintIndex) -> VanillaPotionItem.getColor(pStack) + 0x2a2a2a;
 
     private static IntegerRGB hallowMixture(int m) {
         if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);

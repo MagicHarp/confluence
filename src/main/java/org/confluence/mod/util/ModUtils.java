@@ -4,13 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.entity.VexRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.color.FloatRGBA;
 import org.confluence.mod.item.ModItems;
 import org.joml.Matrix3f;
@@ -400,4 +399,11 @@ public final class ModUtils {
         O vertex(T1 t1, T2 t2, T3 t3,T4 t4,R r);
     }
 
+    public static void addPotionTooltip(MobEffect effect, List<Component> components) {
+        if (effect == null){
+            components.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
+            return;
+        }
+        components.add(Component.translatable(effect.getDescriptionId()).withStyle(ChatFormatting.BLUE));
+    }
 }

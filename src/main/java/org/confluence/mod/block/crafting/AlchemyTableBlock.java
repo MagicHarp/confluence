@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlchemyTableBlock extends BaseEntityBlock {
-    private static final int DEVIATIONS = 50000;
+    private static int DEVIATIONS = 150000;
     public AlchemyTableBlock(){
         super(Properties.copy(Blocks.CRAFTING_TABLE));
     }

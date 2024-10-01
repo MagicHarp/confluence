@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -46,7 +47,9 @@ public class VanillaPotionItem extends AbstractPotionItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (pStack.getTag() != null) {
-            pTooltipComponents.add(Component.translatable(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(pStack.getTag().getString("Potion"))).getDescriptionId()));
+            ModUtils.addPotionTooltip(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(pStack.getTag().getString("Potion"))), pTooltipComponents);
+        } else {
+            ModUtils.addPotionTooltip(null, pTooltipComponents);
         }
     }
 
