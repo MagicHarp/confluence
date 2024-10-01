@@ -40,7 +40,7 @@ import static org.confluence.mod.util.ModUtils.updateEntityRotation;
 
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
-    private static final float[] MAX_HEALTHS = {364f, 473f, 603f};
+    private static final float[] MAX_HEALTHS = {1000f, 1500f, 2000f};
     private static final float[] DAMAGE = {4f, 6f, 8f};//一阶段接触伤害
     private static final float[] CRAZY_DAMAGE = {6f, 10f, 14f};//二阶段接触伤害
     private static final float[] MOVE_SPEED = {0.5f,0.6f,0.7f};
@@ -56,7 +56,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private int stage = 1; //阶段
 
     //定义技能参数
-    private final int summonCDAll = 19; //仆从召唤cd
+    private final int summonCDAll = 15; //仆从召唤cd
     private int summonCD = summonCDAll;
 
     private final int stage2_dashCount_base = -5 + 3;
@@ -191,9 +191,12 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
                 }
         );
-        this.state2_dash = new BossSkill("5", "type_2_run", 25, 15,
+        this.state2_dash = new BossSkill("5", "type_2_run", 20, 10,
                 terraBossBase -> {
                     //setDeltaMovement(0, 0, 0);
+                    if(this.getHealth()/getMaxHealth()<0.3f && stage2_dashCount < 4){
+                        state2_dash.timeTrigger = 5;
+                    }else state2_dash.timeTrigger = 10;
                 },
                 terraBossBase -> {
                     // 延迟冲刺
@@ -209,7 +212,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                         return;
                     }
                     //updateEntityRotation(this,dashDir);
-
+                    lookAtPos(dashDir,50,80);
 
                     // 冲刺增加伤害
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx] * dashFactor);
@@ -238,6 +241,9 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         addSkill(state2_dash, type2run); // 6
     }
 
+    public void endDash2(){
+
+    }
 
 
     private void cslLookAt(float maxAngleY) {
@@ -289,12 +295,11 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
 
     // 转换阶段
     public boolean hurt(DamageSource pSource, float pAmount) {
-        super.hurt(pSource, pAmount);
         if (this.getHealth() / getMaxHealth() < 0.5 && stage == 1) {
             stage = 2;
             skills.forceStartIndex(4); // 强制执行技能序列
         }
-        return true;
+        return super.hurt(pSource, pAmount);
     }
 
     // 同步旋转

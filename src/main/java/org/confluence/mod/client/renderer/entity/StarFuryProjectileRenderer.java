@@ -49,7 +49,10 @@ public class StarFuryProjectileRenderer extends EntityRenderer<SwordProjectile> 
 
         poseStack.mulPose(Axis.YP.rotationDegrees(frame++));
 
-        VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(null)));
+//        VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(null)));
+        VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.outline(getTextureLocation(null)));
+
+
         vertex(vertexconsumer, matrix4f, matrix3f, packedLight, 0.0F, 0, 0, 1);
         vertex(vertexconsumer, matrix4f, matrix3f, packedLight, 1.0F, 0, 1, 1);
         vertex(vertexconsumer, matrix4f, matrix3f, packedLight, 1.0F, 1, 1, 0);

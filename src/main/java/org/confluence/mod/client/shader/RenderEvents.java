@@ -4,7 +4,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
@@ -65,7 +67,7 @@ public final class RenderEvents {
 
         if(--tick<0){
             tick = blockGen.refreshTick;
-            //todo 应该在破坏方块事件里设定是否刷新
+            //todo 如果性能消耗太大，应该在破坏方块事件里设定是否刷新
             blockGen.genBlocks();
             ifRefresh = true;
         }
@@ -215,44 +217,34 @@ public final class RenderEvents {
 
         if (vertexBuffer != null) {
 
-
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable(GL11.GL_LINE_SMOOTH);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
-
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
-
-
             PoseStack poseStack = event.getPoseStack();
             poseStack.pushPose();
-            //forge自动旋转到照相机视角，所以不需要旋转变换
-
-            //float scale = (float) (1.0/128);
-            //Quaternionf quaternionf = event.getCamera().rotation().conjugate(new Quaternionf());
-            //Quaternionf quaternionf1 = new Quaternionf(quaternionf.x*scale, quaternionf.y*scale,quaternionf.z*scale, quaternionf.w).normalize();
-            //float angle = Minecraft.getInstance().player.yHeadRot;
-
-            //Quaternionf quaternionf = new Quaternionf().setAngleAxis(angle * Math.PI / 180,0,1,0);
-
-            //Matrix4f matrix4f1 = new Matrix4f().rotation(quaternionf1);
-            //poseStack.mulPose(quaternionf);
-            //poseStack.mulPoseMatrix(matrix4f1);
-
-
             poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
+            minecraft.getBlockRenderer().renderSingleBlock(minecraft.level.getBlockState(BlockPos.containing(playerPos.subtract(0,-1,0))),poseStack,minecraft.renderBuffers().bufferSource(),15, OverlayTexture.NO_OVERLAY);
             vertexBuffer.bind();
             vertexBuffer.drawWithShader(poseStack.last().pose(), event.getProjectionMatrix(), RenderSystem.getShader());
             VertexBuffer.unbind();
+            poseStack.popPose();
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDisable(GL11.GL_LINE_SMOOTH);
 
+            poseStack.pushPose();
+            poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
 
-            //todo 添加文字
             var map = blockGen.targets;
             int textRange = blockGen.textRange;
             AtomicInteger count = new AtomicInteger();
             float scale = 20;
             int textDir = blockGen.textRenderType;
-            shouldRenderCache.forEach((pos, block)->{
+            for(var n : shouldRenderCache.entrySet()){
+                var  pos = n.getKey();
+                var block = n.getValue();
                 if(block.asItem() == Blocks.ANCIENT_DEBRIS.asItem()) count.getAndIncrement();
                 if(playerPos.distanceToSqr(pos.getX(),pos.getY(),pos.getZ())< textRange*textRange){
                     if(KeyBindings.TAB.get().isDown() && map.get(block).showText()){
@@ -262,13 +254,12 @@ public final class RenderEvents {
 
                         var dir = playerPos.subtract(x,y,z).scale(-1);
                         var pf = minecraft.player.getForward();
-                        double angle = Math.acos(dir.dot(pf)/dir.length()*pf.length());
+                        System.out.println(pf);
+                        double angle = Math.acos(dir.dot(pf)/dir.length()/pf.length());
                         if(angle<70*Math.PI/180){
                             poseStack.pushPose();
                             poseStack.translate(x,y,z);//调整到中心位置
-
                             poseStack.scale(-1/scale,-1/scale,-1/scale);
-
 
                             if(textDir==0){
                                 var fs = ModUtils.dirToRot(dir.scale(-1));
@@ -286,27 +277,20 @@ public final class RenderEvents {
 
 
                             ((FontAccessor) (minecraft.font)).callRenderText(Component.literal(component.getString()).withStyle(style -> style.withColor(map.get(block).color().getRGB())).getVisualOrderText(),
-                                    2f, 1f, map.get(block).color().getRGB(),
-                                    false, poseStack.last().pose(), minecraft.renderBuffers().bufferSource(), net.minecraft.client.gui.Font.DisplayMode.SEE_THROUGH, 0, 15 << 20 | 15 << 4);
+                                    -5, -5f, map.get(block).color().getRGB(),
+                                    false, poseStack.last().pose(), minecraft.renderBuffers().bufferSource(), Font.DisplayMode.SEE_THROUGH, 0, 15 << 20 | 15 << 4);
+
                             poseStack.popPose();
+
                         }
                     }
                 }
-            });
-            System.out.println(count.get());
+            }
 
-
-
-
+            //System.out.println(count.get());
             poseStack.popPose();
 
 
-
-
-
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDisable(GL11.GL_LINE_SMOOTH);
 
 
         }

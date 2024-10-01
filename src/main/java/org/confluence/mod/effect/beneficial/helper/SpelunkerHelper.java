@@ -18,7 +18,7 @@ public class SpelunkerHelper {
     public int range = 30;//球形侦测范围
     public int textRange = 30;//球形显示文本范围
     public float maxAlpha = 0.8f;//边框最大alpha(0 - 1)
-    public int textRenderType = 1;//0表示文字面向玩家，默认是摄像机方向
+    public int textRenderType = 0;//0表示文字面向玩家,默认是摄像机方向
     public int centerInternal = 50;//中心块间距的平方
 
 

@@ -1,11 +1,13 @@
 package org.confluence.mod.effect.beneficial.helper;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.TripWireHookBlock;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.projectile.BoulderEntity;

@@ -12,6 +12,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,6 +44,8 @@ import java.util.function.Predicate;
 
 @SuppressWarnings("all")
 public abstract class TerraBossBase extends Monster implements GeoEntity {
+    public float ironGlomResistance = 0.4f;
+    public float explosionResistance = 0.5f;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS).setDarkenScreen(true);
 
@@ -180,7 +184,16 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
                         e.hurt(this.damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
                 }
             }
+       }
+    }
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if(pSource.getEntity() instanceof IronGolem){
+            pAmount *= ironGlomResistance;
         }
+        if(pSource.is(DamageTypes.EXPLOSION)){
+            pAmount *= explosionResistance;
+        }
+        return super.hurt(pSource,pAmount);
     }
 
     public boolean canAttack(Entity entity) {
