@@ -56,7 +56,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private int stage = 1; //阶段
 
     //定义技能参数
-    private final int summonCDAll = 15; //仆从召唤cd
+    private int summonCDAll = 15; //仆从召唤cd
     private int summonCD = summonCDAll;
 
     private final int stage2_dashCount_base = -5 + 3;
@@ -105,7 +105,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     if (getTarget() == null) return;
                     cslLookAt(10);
                     // 生成粒子
-                    for (int i = 0; i < 20; i++) {
+                    for (int i = 0; i < 10; i++) {
                         BlockPos pos = BlockPos.containing(position());
                         ((ServerLevel) level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.TR_CRIMSON_STONE.get().defaultBlockState()),
                                 pos.getX() + 0.5F,
@@ -125,6 +125,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         // 延迟20tick冲刺10tick
         this.state1_dash = new BossSkill("2", "type_1_run", 30, 20,
                 terraBossBase -> {
+
                 },
                 terraBossBase -> {
 
@@ -153,10 +154,18 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         // 转换阶段
         this.switch_1_to_2 = new BossSkill("3", "switching", 40, 0,
                 terraBossBase -> {
-                    if (stage == 1)
+                    if (stage == 1){
                         skills.forceStartIndex(0);
+                        return;
+                    }
+                    summonCD = 0;
+                    summonCDAll = 7;
                 },
-                terraBossBase -> {},
+                terraBossBase -> {
+
+
+                    spawnMinions(getTarget());
+                    },
                 terraBossBase -> {
                     // 增加属性
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx]);
@@ -168,19 +177,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                 terraBossBase -> {
                     if (getTarget() == null) return;
                     cslLookAt(10);
-                    // 生成粒子
-                    for (int i = 0; i < 20; i++) {
-                        if (level() instanceof ServerLevel level) {
-                            BlockPos pos = BlockPos.containing(position());
-                            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.TR_CRIMSON_STONE.get().defaultBlockState()),
-                                    pos.getX() + 0.5F,
-                                    pos.getY() + 0.75F,
-                                    pos.getZ() + 0.5F,
-                                    10, 0.0625F, 0.0625F, 0.0625F, 0.15F);
-                        }
-                    }
-                    // 生成仆从
-                    //spawnMinions(getTarget());
+
                     // 向玩家正上方移动
                     Vec3 tar = getTarget().position().add(new Vec3(0, distanceAbove, 0));
                     if (distanceToSqr(tar) > followMinDistance) addDeltaMovement(tar.subtract(position()).normalize().scale(MOVE_SPEED[difficultyIdx] * stage2SpeedFactor / 10));

@@ -19,8 +19,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -28,8 +30,10 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.bow.BaseArrowItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,13 +51,15 @@ public class BaseArrowEntity extends AbstractArrow {
 
         //构建属性   mc原版木箭：   damage：2f
         static Tuple JESTERS_ARROW_ENTITY = create("textures/entity/arrow/jesters_arrow.png",new Builder()
-                .damage(4f).penetration(99).knockBackFactor(2).speedFactor(0.8f).auto_discard(50).low_gravity(0));
+                .damage(4f).penetration(99).knockBackFactor(2).speedFactor(0.8f).auto_discard(50).low_gravity(0).attachArrow(ModItems.JESTERS_ARROW.get()));
         static Tuple UNHOLY_ARROW_ENTITY = create("textures/entity/arrow/unholy_arrow.png",new Builder()
-                .damage(4.5f).penetration(5).knockBackFactor(1.5f));
+                .damage(4.5f).penetration(5).knockBackFactor(1.5f).attachArrow(ModItems.UNHOLY_ARROW.get()));
         static Tuple FLAMING_ARROW_ENTITY = create("textures/entity/arrow/flaming_arrow.png",new Builder()
-                .damage(4.5f).causeFire(10*20) );
-    }
+                .damage(4.5f).causeFire(10*20) .attachArrow(ModItems.FLAMING_ARROW.get()));
 
+
+    }
+    static Map<Integer,Item> type2ArrowItem = new HashMap<>();
         /*
         HELLFIRE_ARROW
         FROSTBURN_ARROW
@@ -184,14 +190,11 @@ public class BaseArrowEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getPickupItem() {
-        return null;
+
+        if(type2ArrowItem.get(this.attr.type)!=null)return  type2ArrowItem.get(this.attr.type).getDefaultInstance();
+        return Items.ARROW.getDefaultInstance();
     }
-/*
-    //要加上，不然报错
-    public boolean isNoPhysics() {
-        return this.noPhysics;
-    }
-*/
+
     public void tick(){
 
         if(!level().isClientSide && tickCount>attr.auto_discard_tick)discard();
@@ -246,6 +249,7 @@ public class BaseArrowEntity extends AbstractArrow {
         private float knockBackFactor = 1;
         private int causeFireTick = 0;
         private List<MobEffect> effects = new ArrayList<>();
+        private Item attachArrow;
         public Builder damage(float damage){//基本伤害
             base_damage = damage;
             return this;
@@ -281,10 +285,15 @@ public class BaseArrowEntity extends AbstractArrow {
             this.causeFireTick = tick;
             return this;
         }
-
+        public Builder attachArrow(Item arrow){//初始火焰增加
+            this.attachArrow = arrow;
+            type2ArrowItem.put(type,arrow);
+            return this;
+        }
 
 
 
     }
+
 
 }

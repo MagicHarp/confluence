@@ -20,8 +20,8 @@ import java.util.Objects;
 public class EaterOfWorld extends TerraBossBase {
     private float segmentInternal = 3.5f;
     int segmentCount = 30;//体节长度
-    static float turnSpeedBase = 3f;//转向速度
-    static float moveSpeedBase = 0.5f;//移动速度
+    static float turnSpeedBase = 4f;//转向速度
+    static float moveSpeedBase = 0.7f;//移动速度
     boolean genSegments = true;//是否生成体节
     float wanderPosRadius = 20;//寻点半径
 
@@ -193,7 +193,7 @@ public class EaterOfWorld extends TerraBossBase {
                 this.setPos(position().add(getForward().normalize().scale(moveSpeed)));
             }
 
-            if(this.segmentCount==0)discard();
+            //if(this.segmentCount==0)discard();
 
         }
     }
@@ -218,6 +218,7 @@ public class EaterOfWorld extends TerraBossBase {
                     seg.lastSegment = last;
                     last = seg;
                 }else{//移除第二节点
+                    ((EaterOfWorld_Segment) n).genNewHeadOnRemove = false;
                     n.discard();
                 }
             }

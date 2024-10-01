@@ -122,7 +122,7 @@ public final class ModEntities {
             .setTrackingRange(100)
             .build("confluence:cthulhu_eye"));
     public static final RegistryObject<EntityType<EaterOfWorld_Segment>>EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorld_Segment>of(EaterOfWorld_Segment::new, MobCategory.MONSTER)
-            .sized(2.04F, 2.04F)
+            .sized(3F, 3F)
             .clientTrackingRange(100)
             .noSave()
             .setTrackingRange(100)
@@ -150,7 +150,7 @@ public final class ModEntities {
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         AttributeSupplier.Builder genericBossAttribs = Monster.createMobAttributes()
                 .add(Attributes.FOLLOW_RANGE, 100)
-                .add(Attributes.MAX_HEALTH, 200)
+                .add(Attributes.MAX_HEALTH, 100)
                 .add(Attributes.MOVEMENT_SPEED, 0.15f)
                 .add(Attributes.ATTACK_DAMAGE, 1)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10)
