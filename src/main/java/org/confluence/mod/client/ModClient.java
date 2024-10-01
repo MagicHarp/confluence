@@ -36,10 +36,7 @@ import org.confluence.mod.client.particle.*;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
-import org.confluence.mod.client.renderer.entity.bomb.BaseBombEntityRenderer;
-import org.confluence.mod.client.renderer.entity.bomb.BouncyBombEntityRenderer;
-import org.confluence.mod.client.renderer.entity.bomb.ScarabBombEntityRenderer;
-import org.confluence.mod.client.renderer.entity.bomb.StickyBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
@@ -355,6 +352,7 @@ public final class ModClient {
         event.registerEntityRenderer(BOUNCY_BOMB_ENTITY.get(), BouncyBombEntityRenderer::new);
         event.registerEntityRenderer(SCARAB_BOMB_ENTITY.get(), ScarabBombEntityRenderer::new);
         event.registerEntityRenderer(STICKY_BOMB_ENTITY.get(), StickyBombEntityRenderer::new);
+        event.registerEntityRenderer(BOMB_FISH_ENTITY.get(), BombFishEntityRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);

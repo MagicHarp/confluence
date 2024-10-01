@@ -80,6 +80,12 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(CLOUD_BLOCK.get());
         dropSelf(RAIN_CLOUD_BLOCK.get());
         dropSelf(SNOW_CLOUD_BLOCK.get());
+        dropSelf(FLOATING_WHEAT_BALE.get());
+        dropSelf(SHADOW_SAPLING.get());
+        dropSelf(EBONY_SAPLING.get());
+        dropSelf(PEARL_SAPLING.get());
+        dropSelf(PALM_SAPLING.get());
+        dropSelf(ASH_SAPLING.get());
         dropSelf(Ores.STURDY_FOSSIL_BLOCK.get());
 
         dropSelf(EXTRACTINATOR.get());

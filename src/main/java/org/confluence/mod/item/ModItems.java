@@ -12,10 +12,7 @@ import org.confluence.mod.capability.ability.PlayerAbility;
 import org.confluence.mod.capability.mana.ManaStorage;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
-import org.confluence.mod.entity.projectile.bombs.BaseBombEntity;
-import org.confluence.mod.entity.projectile.bombs.BouncyBombEntity;
-import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
-import org.confluence.mod.entity.projectile.bombs.StickyBombEntity;
+import org.confluence.mod.entity.projectile.bombs.*;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.armor.Armors;
 import org.confluence.mod.item.axe.Axes;
@@ -87,7 +84,7 @@ public final class ModItems {
     public static final RegistryObject<Item> BOMB = ITEMS.register("bomb", () -> new BombItem(BaseBombEntity::new));
     public static final RegistryObject<Item> BOUNCY_BOMB = ITEMS.register("bouncy_bomb", () -> new BombItem(BouncyBombEntity::new));
     public static final RegistryObject<Item> STICKY_BOMB = ITEMS.register("sticky_bomb", () -> new BombItem(StickyBombEntity::new));
-    public static final RegistryObject<Item> BOMB_FISH = ITEMS.register("bomb_fish", () -> new BombItem(StickyBombEntity::new)); // todo 炸弹鱼
+    public static final RegistryObject<Item> BOMB_FISH = ITEMS.register("bomb_fish", () -> new BombFishItem(BombFishEntity::new)); // todo 炸弹鱼
     public static final RegistryObject<Item> SCARAB_BOMB = ITEMS.register("scarab_bomb", () -> new BombItem(ScarabBombEntity::new));
     public static final RegistryObject<RecordItem> ALPHA = ITEMS.register("alpha", () -> new ExpertRecordItem(0, ModSoundEvents.ALPHA, 12060));
     public static final RegistryObject<PlayerAbilityItem> VITAL_CRYSTAL = ITEMS.register("vital_crystal", () -> new PlayerAbilityItem(PlayerAbility::isVitalCrystalUsed, PlayerAbility::setVitalCrystalUsed));
