@@ -21,7 +21,7 @@ public class EnchantedSwordItem extends SwordItem implements ISwordProjectile {
 
     @Override
     public SoundEvent getSound() {
-        return ModSoundEvents.FROZEN_ARROW.get();
+        return ModSoundEvents.REGULAR_STAFF_SHOOT_2.get();
     }
 
     @Override
