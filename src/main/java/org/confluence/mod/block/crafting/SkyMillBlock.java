@@ -11,11 +11,13 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -44,11 +46,11 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class SkyMillBlock extends HorizontalDirectionalBlock implements EntityBlock, CustomModel, CustomItemModel { // todo
+public class SkyMillBlock extends HorizontalDirectionalBlock implements EntityBlock, CustomModel { // todo
     private static final Component CONTAINER_TITLE = Component.translatable("container.confluence.sky_mill");
 
     private static final VoxelShape SHAPE = Shapes.box(0.1875, 0.0, 0.1875, 0.8125, 0.8, 0.8125);
-    public SkyMillBlock() {
+    public SkyMillBlock()    {
         super(Properties.copy(Blocks.GRINDSTONE));
     }
     @Override
@@ -56,12 +58,21 @@ public class SkyMillBlock extends HorizontalDirectionalBlock implements EntityBl
         return SHAPE;
     }
     @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+    @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState pState) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+        public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
         return new Entity(pPos, pState);
     }
 
@@ -116,17 +127,17 @@ public class SkyMillBlock extends HorizontalDirectionalBlock implements EntityBl
                     if (renderer == null) {
                         this.renderer = new GeoItemRenderer<>(new GeoModel<>() {
                             @Override
-                            public ResourceLocation getModelResource(SkyMillBlock.Item animatable) {
+                            public ResourceLocation getModelResource(Item animatable) {
                                 return SkyMillBlockModel.MODEL;
                             }
 
                             @Override
-                            public ResourceLocation getTextureResource(SkyMillBlock.Item animatable) {
+                            public ResourceLocation getTextureResource(Item animatable) {
                                 return SkyMillBlockModel.TEXTURE;
                             }
 
                             @Override
-                            public ResourceLocation getAnimationResource(SkyMillBlock.Item animatable) {
+                            public ResourceLocation getAnimationResource(Item animatable) {
                                 return SkyMillBlockModel.ANIMATIONS;
                             }
                         });
