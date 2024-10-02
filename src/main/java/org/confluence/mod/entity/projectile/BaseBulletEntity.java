@@ -113,6 +113,10 @@ public class BaseBulletEntity extends Projectile {
 
     }
 
+    public void setDamage(float damage){
+        this.attackDamage = damage;
+    }
+
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
@@ -120,7 +124,7 @@ public class BaseBulletEntity extends Projectile {
             if(penetrateList.contains(entity)) return;
             float damage = getBaseDamage() * (1.0F + attackDamage);
             if (random.nextFloat() < criticalChance) damage *= 1.5F;
-            if (entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
+            if (canAttack(entity) && entity.hurt(damageSources().indirectMagic(this, getOwner()), damage)) {
                 float attackKnockBack = getBaseKnockBack() * (1.0F + knockBack);
                 if (attackKnockBack > 0.0F) {
                     ModUtils.knockBackA2B(this, entity, attackKnockBack * 0.5, 0.2);
@@ -130,6 +134,10 @@ public class BaseBulletEntity extends Projectile {
             penetrateList.add(entity);
             if(penetrateCount==0) discard();
         }
+    }
+
+    public boolean canAttack(Entity entity){
+        return entity!=getOwner();
     }
 
     @Override

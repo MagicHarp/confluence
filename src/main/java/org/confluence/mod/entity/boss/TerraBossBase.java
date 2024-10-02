@@ -1,5 +1,7 @@
 package org.confluence.mod.entity.boss;
 
+import com.mojang.brigadier.Command;
+import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -42,8 +44,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static org.confluence.mod.util.ModUtils.switchByDifficulty;
+
 @SuppressWarnings("all")
 public abstract class TerraBossBase extends Monster implements GeoEntity {
+
+    public int difficultyIdx;
+
     public float ironGlomResistance = 0.4f;
     public float explosionResistance = 0.5f;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -54,6 +61,8 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
         this.moveControl = new FlyingMoveControl(this, 10, false);
         setNoGravity(true);
         addSkills();
+        this.difficultyIdx = switchByDifficulty(level(), 0, 1, 2);
+
     }
 
     public abstract void addSkills();
@@ -197,8 +206,10 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
     }
 
     public boolean canAttack(Entity entity) {
-        return entity instanceof Player || getTarget() != null && getTarget().is(entity);
+        return entity instanceof Player || getTarget() != null && getTarget().is(entity) && entity != this &&!(entity instanceof TerraBossBase);
     }
+
+
 
     // boss条
     public boolean shouldShowBossBar() {
