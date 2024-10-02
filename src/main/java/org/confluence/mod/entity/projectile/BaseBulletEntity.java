@@ -113,6 +113,10 @@ public class BaseBulletEntity extends Projectile {
 
     }
 
+    public void setDamage(float damage){
+        this.attackDamage = damage;
+    }
+
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
