@@ -85,6 +85,7 @@ public class EaterOfWorld extends TerraBossBase {
             baseSegmentsHealth.add(newSegment.getMaxHealth());
             level().addFreshEntity(newSegment);
         }
+        ((EaterOfWorld_Segment)baseSegments.get(segmentCount)).ifTail = true;
         ifBaseHead = true;
     }
     public EaterOfWorld(EntityType<? extends Monster> type, Level level) {
@@ -271,6 +272,7 @@ public class EaterOfWorld extends TerraBossBase {
 
                 for(int i=0;i<baseSegments.size();i++){
                     baseSegmentsHealth.set(i,baseSegments.get(i).getHealth());
+
                     if(baseSegments.get(i) instanceof EaterOfWorld  eater){
                         if(!eater.ifBaseHead || !eater.isAlive()){
                             eater.removeBossEvent();
@@ -282,6 +284,9 @@ public class EaterOfWorld extends TerraBossBase {
                     }
                     //死亡则跳过
                     if(baseSegmentsHealth.get(i)<=0.0){
+                        if(lastSeg instanceof EaterOfWorld_Segment last){
+                            last.ifTail = true;
+                        }
                         cur = 0;
                         continue;
                     }
@@ -308,6 +313,7 @@ public class EaterOfWorld extends TerraBossBase {
                         lastSeg = newHead;
                     }else{//体节
                         EaterOfWorld_Segment curSeg = (EaterOfWorld_Segment)baseSegments.get(i);
+
                         //TODO 被区块刷新掉的体节重现
                         if(baseSegments.get(i).isRemoved() && tickCount % 50 == 0){
 /*
@@ -321,6 +327,9 @@ public class EaterOfWorld extends TerraBossBase {
 //                        }
                         curSeg.head = newHead;
                         curSeg.lastSegment = lastSeg;
+                        if(lastSeg instanceof EaterOfWorld_Segment last){
+                            last.ifTail = false;
+                        }
                         lastSeg = curSeg;
 
                     }

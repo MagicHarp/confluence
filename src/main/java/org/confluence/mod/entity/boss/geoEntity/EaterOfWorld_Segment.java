@@ -1,6 +1,9 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -24,6 +27,13 @@ public class EaterOfWorld_Segment extends TerraBossBase {
 
     //public int segmentIndex;
     public boolean genNewHeadOnRemove = true;
+    public boolean ifTail = false;
+    public static final EntityDataAccessor<Boolean> DATA_TAIL = SynchedEntityData.defineId(EaterOfWorld_Segment.class, EntityDataSerializers.BOOLEAN);
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        entityData.define(DATA_TAIL, false);
+    }
 
     public void setHead(EaterOfWorld head){
         this.head = head;
@@ -76,7 +86,7 @@ public class EaterOfWorld_Segment extends TerraBossBase {
         if(!level().isClientSide) {
             if (lastSegment != null && lastSegment.isAlive())
                 this.setPos(getNextPos());
-
+            entityData.set(DATA_TAIL,ifTail);
             /*
             if(tickCount%5==0){
                 TerraBossBase rear = lastSegment;
@@ -94,6 +104,8 @@ public class EaterOfWorld_Segment extends TerraBossBase {
 
 */
 
+        }else{
+            ifTail = entityData.get(DATA_TAIL);
         }
     }
 

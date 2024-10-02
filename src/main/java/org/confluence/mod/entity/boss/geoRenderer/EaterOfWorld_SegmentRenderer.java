@@ -17,11 +17,14 @@ public class EaterOfWorld_SegmentRenderer extends GeoEntityRenderer<EaterOfWorld
     public EaterOfWorld_SegmentRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new GeoNormalModel<>("eater_of_world_segment"));
     }
+
     public GeoModel<EaterOfWorld_Segment> getGeoModel() {
-//        if(animatable.head==null) return this.model;
+        if(animatable.ifTail)
+            return tailModel;
 //        return animatable.head.segments.size() == animatable.segmentIndex?tailModel:this.model;
-        return super.getGeoModel();
+        return this.model;
     }
+
     @Override
     public void preRender(PoseStack poseStack, EaterOfWorld_Segment animatable, BakedGeoModel model, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay,  red,  green, blue, alpha);
