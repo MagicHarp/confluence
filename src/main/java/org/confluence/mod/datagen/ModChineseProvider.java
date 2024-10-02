@@ -344,6 +344,12 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.slime_dragon.author", "BiliBili_小史龙吖Slime_Dragon");
         add("painting.confluence.khaki_coffee_beans.title", "KHAKI_COFFEE_BEANS");
         add("painting.confluence.khaki_coffee_beans.author", "BiliBili_卡其色咖啡豆");
+        add("painting.confluence.uqtqu_day.title", "UQTQU_DAY");
+        add("painting.confluence.uqtqu_day.author", "BiliBili__昼泽_");
+        add("painting.confluence.emerald_shenyi.title", "EMERALD_SHENYI");
+        add("painting.confluence.emerald_shenyi.author", "BiliBili_Emerald_审翼");
+        add("painting.confluence.black_cat.title", "BLACK_CAT");
+        add("painting.confluence.black_cat.author", "???");
 
         // new
         add("achievements.toast.complete", "成就达成！");
