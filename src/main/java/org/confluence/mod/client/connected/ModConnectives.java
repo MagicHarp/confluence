@@ -30,6 +30,41 @@ public final class ModConnectives {
 
         registerCTBehaviour(DecorativeBlocks.PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.PURE_GLASS));
         registerCasingConnectivity(DecorativeBlocks.PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.WHITE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.WHITE_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.WHITE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.WHITE_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.LIGHT_GREY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.LIGHT_GREY_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.LIGHT_GREY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.LIGHT_GREY_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.GREY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.GREY_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.GREY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.GREY_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.BLACK_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.BLACK_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.BLACK_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.BLACK_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.BROWN_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.BROWN_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.BROWN_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.BROWN_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.RED_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.RED_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.RED_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.RED_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.ORANGE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.ORANGE_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.ORANGE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.ORANGE_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.YELLOW_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.YELLOW_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.YELLOW_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.YELLOW_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.LIME_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.LIME_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.LIME_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.LIME_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.GREEN_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.GREEN_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.GREEN_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.GREEN_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.CYAN_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.CYAN_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.CYAN_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.CYAN_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.LIGHT_BLUE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.LIGHT_BLUE_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.LIGHT_BLUE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.LIGHT_BLUE_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.BLUE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.BLUE_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.BLUE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.BLUE_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.PURPLE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.PURPLE_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.PURPLE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.PURPLE_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.MAGENTA_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.MAGENTA_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.MAGENTA_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.MAGENTA_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.PINK_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.PINK_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.PINK_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.PINK_PURE_GLASS));
+
+
+
     }
 
     private static <T extends Block> void registerCasingConnectivity(T entry, BiConsumer<T, CasingConnectivity> consumer) {

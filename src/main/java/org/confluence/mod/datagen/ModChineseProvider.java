@@ -918,6 +918,22 @@ public class ModChineseProvider extends LanguageProvider {
         add(TR_GRANITE_COLUMN.get(), "异域花岗岩梁");
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
         add(PURE_GLASS.get(), "纯净玻璃块");
+        add(WHITE_PURE_GLASS.get(), "白色纯净玻璃块");
+        add(LIGHT_GREY_PURE_GLASS.get(), "淡灰色玻璃块");
+        add(GREY_PURE_GLASS.get(), "灰色纯净玻璃块");
+        add(BLACK_PURE_GLASS.get(), "黑色纯净玻璃块");
+        add(BROWN_PURE_GLASS.get(), "棕色纯净玻璃块");
+        add(RED_PURE_GLASS.get(), "红色纯净玻璃块");
+        add(ORANGE_PURE_GLASS.get(), "橙色纯净玻璃块");
+        add(YELLOW_PURE_GLASS.get(), "黄色纯净玻璃块");
+        add(LIME_PURE_GLASS.get(), "黄绿色纯净玻璃块");
+        add(GREEN_PURE_GLASS.get(), "绿色纯净玻璃块");
+        add(CYAN_PURE_GLASS.get(), "青色纯净玻璃块");
+        add(LIGHT_BLUE_PURE_GLASS.get(), "淡蓝色纯净玻璃块");
+        add(BLUE_PURE_GLASS.get(), "蓝色纯净玻璃块");
+        add(PURPLE_PURE_GLASS.get(), "紫色纯净玻璃块");
+        add(MAGENTA_PURE_GLASS.get(), "品红纯净玻璃块");
+        add(PINK_PURE_GLASS.get(), "品红纯净玻璃块");
 
         add(THIN_ICE_BLOCK.get(), "薄冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");

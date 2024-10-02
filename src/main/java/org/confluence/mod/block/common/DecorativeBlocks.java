@@ -24,6 +24,22 @@ public final class DecorativeBlocks {
     public static final RegistryObject<Block> TR_STONE_BRICKS = registerWithItem("tr_stone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
     public static final RegistryObject<Block> PURE_GLASS = registerWithItem("pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> WHITE_PURE_GLASS = registerWithItem("white_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> LIGHT_GREY_PURE_GLASS = registerWithItem("light_grey_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> GREY_PURE_GLASS = registerWithItem("grey_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> BLACK_PURE_GLASS = registerWithItem("black_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> BROWN_PURE_GLASS = registerWithItem("brown_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> RED_PURE_GLASS = registerWithItem("red_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> ORANGE_PURE_GLASS = registerWithItem("orange_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> YELLOW_PURE_GLASS = registerWithItem("yellow_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> LIME_PURE_GLASS = registerWithItem("lime_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> GREEN_PURE_GLASS = registerWithItem("green_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> CYAN_PURE_GLASS = registerWithItem("cyan_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> LIGHT_BLUE_PURE_GLASS = registerWithItem("light_blue_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> BLUE_PURE_GLASS = registerWithItem("blue_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURPLE_PURE_GLASS = registerWithItem("purple_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> MAGENTA_PURE_GLASS = registerWithItem("magenta_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> PINK_PURE_GLASS = registerWithItem("pink_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
 
     public static final RegistryObject<Block> TR_COPPER_BRICKS = registerWithItem("tr_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryObject<Block> ANCIENT_COPPER_BRICKS = registerWithItem("ancient_copper_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
