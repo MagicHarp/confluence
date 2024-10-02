@@ -2,33 +2,27 @@ package org.confluence.mod.item.hammer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.confluence.mod.datagen.limit.Image24x;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
-public class HammerItem extends DiggerItem {
-    public HammerItem(Tier tier, float rawDamage, float rawSpeed) {
+public class BigHammerItem extends HammerItem implements Image24x {
+    public BigHammerItem(Tier tier, float rawDamage, float rawSpeed) {
         this(tier, rawDamage, rawSpeed, new Properties());
     }
 
-    public HammerItem(Tier tier, float rawDamage, float rawSpeed, Properties properties) {
+    public BigHammerItem(Tier tier, float rawDamage, float rawSpeed, Properties properties) {
         super(rawDamage - tier.getAttackDamageBonus() - 1, rawSpeed - 4, tier, BlockTags.WALLS, properties);
-    }
-
-    public HammerItem(float v, float v1, Tier tier, TagKey<Block> walls, Properties properties) {
-        super(v, v1, tier, walls, properties);
     }
 
     @Override

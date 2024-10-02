@@ -6,7 +6,7 @@ import org.confluence.mod.util.EnumRegister;
 
 import java.util.function.Supplier;
 
-public enum HammerAxes implements EnumRegister<HammerAxeItem> {
+public enum HammerAxes implements EnumRegister<HammerAxeItem>  {
     ;
 
     private final RegistryObject<HammerAxeItem> value;

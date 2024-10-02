@@ -1194,6 +1194,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Axes.TUNGSTEN_AXE.get(), "钨斧");
         add(Axes.GOLDEN_AXE.get(), "金斧");
         add(Axes.PLATINUM_AXE.get(), "铂金斧");
+        add(Axes.EBONY_AXE.get(), "暗夜战斧");
+        add(Axes.TR_CRIMSON_AXE.get(), "嗜血狂斧");
 
         add(Pickaxes.COPPER_PICKAXE.get(), "铜镐");
         add(Pickaxes.CACTUS_PICKAXE.get(), "仙人掌镐");
@@ -1214,6 +1216,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(Hammers.TUNGSTEN_HAMMER.get(), "钨锤");
         add(Hammers.GOLDEN_HAMMER.get(), "金锤");
         add(Hammers.PLATINUM_HAMMER.get(), "铂金锤");
+        add(Hammers.EBONY_HAMMER.get(), "魔锤");
+        add(Hammers.TR_CRIMSON_HAMMER.get(), "血肉锤");
         /* HammerAxes */
         // 杂项
         add(ICE_MIRROR.get(), "冰雪镜");
@@ -1984,6 +1988,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.HONEY_MOONCAKES_CHUNKS.get(), "小块蜂蜜月饼");
         add(Foods.EGG_YOLK_MOONCAKES.get(), "蛋黄月饼");
         add(Foods.EGG_YOLK_MOONCAKES_CHUNKS.get(), "小块蛋黄月饼");
+        add(Foods.LONGEVITY_NOODLES.get(), "长寿面");
+        add(Foods.FLUTTERING_LAMB_CHOPS.get(), "飘飘羊排");
+        add(Foods.COOKED_FLUTTERING_LAMB_CHOPS.get(), "熟飘飘羊排");
         // 药水
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");
