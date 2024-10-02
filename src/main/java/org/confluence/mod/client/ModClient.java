@@ -382,6 +382,7 @@ public final class ModClient {
         event.registerBlockEntityRenderer(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), BaseChestBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.DEATH_CHEST_BLOCK_ENTITY.get(), DeathChestBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.WHITE_PLASTIC_CHAIR_ENTITY.get(), WhitePlasticChairRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.SKY_MILL_ENTITY.get(), SkyMillBlockRenderer::new);
 
         event.registerEntityRenderer(FLAIL.get(), FlailRenderer::new);
         event.registerEntityRenderer(CHAIR.get(), NoopRenderer::new);
