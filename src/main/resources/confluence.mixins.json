@@ -10,6 +10,7 @@
         "client.ClientPacketListenerMixin",
         "client.ClientPlayerMixin",
         "client.CustomHeadLayerMixin",
+        "client.DebugInfoMixin",
         "client.EntityModelSetMixin",
         "client.EntityRenderDispatcherMixin",
         "client.EntityRendererProvider$ContextMixin",
@@ -41,7 +42,6 @@
     "compatibilityLevel": "JAVA_17",
     "minVersion": "0.8.5",
     "mixins": [
-        "DebugInfoMixin",
         "ForgeHookMixin",
         "InventoryChangeTriggerMixin",
         "ServerAdvancementManagerMixin",
