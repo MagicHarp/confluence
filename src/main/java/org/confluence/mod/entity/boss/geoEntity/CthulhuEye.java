@@ -70,11 +70,12 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         super(entityType, level);
         this.difficultyIdx = switchByDifficulty(level(), 0, 1, 2);
         //初始属性
-        getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx]);
-        setHealth(MAX_HEALTHS[difficultyIdx]);
+        int size = level().players().size();
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HEALTHS[difficultyIdx] * size);
+        setHealth(MAX_HEALTHS[difficultyIdx]* size);
         getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(DAMAGE[difficultyIdx]);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
-
+        this.playSound(ModSoundEvents.ROAR.get());
     }
 
     public CthulhuEye(Level level) {
@@ -161,6 +162,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     }
                     summonCD = 0;
                     summonCDAll = 7;
+                    this.playSound(ModSoundEvents.HURRIED_ROARING.get());
                 },
                 terraBossBase -> {
 
@@ -194,14 +196,20 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                     //setDeltaMovement(0, 0, 0);
                     if(this.getHealth()/getMaxHealth()<0.3f && stage2_dashCount < 4){
                         state2_dash.timeTrigger = 5;
-                    }else state2_dash.timeTrigger = 10;
+                        this.playSound(ModSoundEvents.HURRIED_ROARING.get());
+                    }else {
+                        state2_dash.timeTrigger = 10;
+                        this.playSound(ModSoundEvents.ROAR.get());
+                    }
+
                 },
                 terraBossBase -> {
                     // 延迟冲刺
                     if (getTarget() == null) return;
+                    cslLookAt(360);
                     if (!skills.canContinue()) {
                         // 调整方向
-                        cslLookAt(360);
+
                         // 不精准度
                         dashPos = getTarget().position().subtract(position()).add(0, 1, 0).offsetRandom(RandomSource.create(), 4);
                         dashDir = dashPos.subtract(position());
@@ -210,7 +218,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
                         return;
                     }
                     //updateEntityRotation(this,dashDir);
-                    lookAtPos(dashDir,50,80);
+                    //lookAtPos(dashPos,50,80);
 
                     // 冲刺增加伤害
                     getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(CRAZY_DAMAGE[difficultyIdx] * dashFactor);
@@ -307,6 +315,11 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         syncRot();
     }
 
+    public void onRemovedFromWorld(){
+        level().players().forEach(player ->
+                player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE)));
+    }
+
     @Override // boss条显示
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
@@ -316,6 +329,5 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     @Override // boss条消失
     public void stopSeenByPlayer(ServerPlayer player) {
         super.stopSeenByPlayer(player);
-        player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE));
     }
 }
