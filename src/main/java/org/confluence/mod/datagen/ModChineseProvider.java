@@ -486,6 +486,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("fluid_type.confluence.honey", "蜂蜜");
 
         add("title.confluence.shimmer_transmutation", "微光嬗变");
+        add("title.confluence.altar", "献祭");
+        add("title.confluence.sky_mill", "天域工艺");
         add("condition.confluence.shimmer_transmutation", "需要的游戏阶段: %s");
 
         add("item.confluence.aglet.info", "它可以在地表宝箱、木匣和珍珠木匣中找到。");

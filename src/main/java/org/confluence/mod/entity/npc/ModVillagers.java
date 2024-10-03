@@ -76,7 +76,7 @@ public final class ModVillagers {
             trades.get(2).add(new BasicItemListing(new ItemStack(Items.DIRT, getRandomQuantity(61, 64)),new ItemStack(Items.EMERALD, 1), 2, 10, 0.05f));
             trades.get(3).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(), 1), new ItemStack(ModItems.CLOUDWEAVER_SEED.get(), 3), 25, 10, 0.05f));
             trades.get(3).add(new BasicItemListing(new ItemStack(Items.WATER_BUCKET, 1), new ItemStack(ModBlocks.RAIN_CLOUD_BLOCK.get(), 1), 12, 20, 0.05f));
-            trades.get(3).add(new BasicItemListing(new ItemStack(Materials.FALLING_STAR.get(), getRandomQuantity(20, 22)), new ItemStack(DecorativeBlocks.SUN_PLATE.get(), 10), 12, 20, 0.05f));
+            trades.get(3).add(new BasicItemListing(new ItemStack(Materials.FALLING_STAR.get(), getRandomQuantity(2, 3)), new ItemStack(DecorativeBlocks.SUN_PLATE.get(), 10), 12, 20, 0.05f));
             trades.get(4).add(new BasicItemListing(new ItemStack(Items.POWDER_SNOW_BUCKET, 1), new ItemStack(Items.EMERALD, 1), 12, 30, 0.05f));
             trades.get(5).add(new BasicItemListing(new ItemStack(Materials.EMERALD_COIN.get(), 2), new ItemStack(ModBlocks.SKY_MILL.get(), 1), 12, 30, 0.05f));
         } else if (type == VillagerProfession.FARMER) {
