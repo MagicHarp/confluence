@@ -29,7 +29,7 @@ public final class ModPaintings {
     public static final RegistryObject<PaintingVariant> KHAKI_COFFEE_BEANS = PAINTING_VARIANTS.register("khaki_coffee_beans", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> UQTQU_DAY = PAINTING_VARIANTS.register("uqtqu_day", () -> new PaintingVariant(32, 32));
     public static final RegistryObject<PaintingVariant> EMERALD_SHENYI = PAINTING_VARIANTS.register("emerald_shenyi", () -> new PaintingVariant(32, 32));
-    public static final RegistryObject<PaintingVariant> BLACK_CAT = PAINTING_VARIANTS.register("black_cat", () -> new PaintingVariant(32, 32));
+    public static final RegistryObject<PaintingVariant> CHROMATIC = PAINTING_VARIANTS.register("chromatic", () -> new PaintingVariant(32, 32));
 
     public static void register(IEventBus bus) {
         PAINTING_VARIANTS.register(bus);
