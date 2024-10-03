@@ -1,6 +1,7 @@
 package org.confluence.mod;
 
 import com.mojang.datafixers.util.Function3;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -52,6 +53,17 @@ public final class Confluence {
     public static final Hashtable<Item, Function3<Level, BlockPos, Double, AbstractMinecart>> CURIO_MINECART = new Hashtable<>();
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
     public static EntityAtlas entityAtlas;
+    public static final boolean IS_RUNNING_IN_IDE;
+    static {
+        boolean inIDE;
+        try{
+            Minecraft.class.getDeclaredField("instance");
+            inIDE =true;
+        }catch(NoSuchFieldException e){
+            inIDE =false;
+        }
+        IS_RUNNING_IN_IDE = inIDE;
+    }
 
     public Confluence() {
         ModConfigs.registerCommon();
@@ -75,8 +87,6 @@ public final class Confluence {
         ModLootModifiers.MODIFIERS.register(bus);
         ModFeatures.FEATURES.register(bus);
         ModMenus.TYPES.register(bus);
-//        entityAtlas = new EntityAtlas();
-//        ((ReloadableResourceManager)(Minecraft.getInstance().getResourceManager())).registerReloadListener(entityAtlas);
     }
 
     public static ResourceLocation asResource(String path) {

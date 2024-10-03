@@ -16,8 +16,8 @@ public enum Axes implements EnumRegister<AxeItem> {
     TUNGSTEN_AXE("tungsten_axe", () -> new BaseAxeItem(ModTiers.TUNGSTEN, 4, 1)),
     GOLDEN_AXE("golden_axe", () -> new BaseAxeItem(ModTiers.GOLD, 5, 1)),
     PLATINUM_AXE("platinum_axe", () -> new BaseAxeItem(ModTiers.PLATINUM, 5, 1)),
-    EBONY_AXE("ebony_axe", () -> new BaseAxeItem(ModTiers.EBONY, 6, 1)),
-    TR_CRIMSON_AXE("tr_crimson_axe", () -> new BaseAxeItem(ModTiers.TR_CRIMSON, 6, 1));
+    EBONY_AXE("ebony_axe", () -> new BigAxeItem(ModTiers.EBONY, 7, 1)),
+    TR_CRIMSON_AXE("tr_crimson_axe", () -> new BigAxeItem(ModTiers.TR_CRIMSON, 8, 1));
 
     private final RegistryObject<AxeItem> value;
 

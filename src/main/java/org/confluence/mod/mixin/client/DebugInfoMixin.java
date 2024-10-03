@@ -1,8 +1,9 @@
-package org.confluence.mod.mixin;
+package org.confluence.mod.mixin.client;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.RandomState;
+import org.confluence.mod.Confluence;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,6 +15,7 @@ import java.util.List;
 public abstract class DebugInfoMixin {
     @Inject(method = "addDebugScreenInfo", at = @At("RETURN"))
     private void addInfo(List<String> pInfo, RandomState pRandom, BlockPos pPos, CallbackInfo ci){
+        if(!Confluence.IS_RUNNING_IN_IDE) return;
         String info = pInfo.get(pInfo.size() - 1);
         pInfo.set(pInfo.size() - 1,
             info.replace("T:", "温度:").replace("V:", "湿度:").replace("C:", "大陆性:")

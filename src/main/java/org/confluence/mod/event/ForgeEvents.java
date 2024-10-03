@@ -322,13 +322,10 @@ public final class ForgeEvents {
         Immunity cause;
         if(directEntity != null){
             type = ((Immunity) directEntity).confluence$getImmunityType();
-            if(type == Immunity.Types.STATIC){
-                cause = (Immunity) directEntity.getType();
-            }else if(type== Immunity.Types.LOCAL){
-                cause = (Immunity) directEntity;
-            }else {
-                throw new IllegalStateException("No valid immunity type");
-            }
+            cause = switch(type){
+                case STATIC -> (Immunity) directEntity.getType();
+                case LOCAL -> (Immunity) directEntity;
+            };
         }else {
             cause=(Immunity)(Object) damageSource.type();
         }
@@ -336,7 +333,7 @@ public final class ForgeEvents {
             event.setCanceled(true);
             return;
         }else {
-            int time = ((ILivingEntity) damagingEntity).c$getInvulnerableTime(cause.confluence$getImmunityDuration());
+            int time = ((ILivingEntity) damagingEntity).c$getInvulnerableTime(cause.confluence$getImmunityDuration(damagingEntity.level().registryAccess()));
             invTicks.put(cause, time);
         }
     }

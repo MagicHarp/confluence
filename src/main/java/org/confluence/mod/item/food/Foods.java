@@ -42,13 +42,15 @@ public enum Foods implements EnumRegister<Item> {
     MARSHMALLOW("marshmallow", () -> new BaseFoodItem(FoodType.LOW)), //棉花糖
     COOKED_MARSHMALLOW("cooked_marshmallow", () -> new BaseFoodItem(FoodType.MEDIUM)), //烤棉花糖
     PAD_THAI("pad_thai", () -> new BaseFoodItem(FoodType.SENIOR)), //泰式炒河粉
-    FISH_AND_MUSHROOM_SOUP("fish_and_mushroom_soup", () -> new BottleFoodItem(FoodType.MEDIUM)), //鱼菇汤
+    FISH_AND_MUSHROOM_SOUP("fish_and_mushroom_soup", () -> new BowlFoodItem(FoodType.MEDIUM)), //鱼菇汤
     FRUIT_SALAD("fruit_salad", () -> new BottleFoodItem(FoodType.HIGH)), //水果沙拉
-    GRUB_SOUP("grub_soup", () -> new BottleFoodItem(FoodType.HIGH)), //蛆虫汤
-    NACHOS("nachos", () -> new BottleFoodItem(FoodType.HIGH)), //一碗玉米粒
-    PHO("pho", () -> new BottleFoodItem(FoodType.MEDIUM)), //河粉
+    GRUB_SOUP("grub_soup", () -> new BowlFoodItem(FoodType.HIGH)), //蛆虫汤
+    NACHOS("nachos", () -> new BowlFoodItem(FoodType.HIGH)), //一碗玉米粒
+    PHO("pho", () -> new BowlFoodItem(FoodType.MEDIUM)), //河粉
     CLOUD_DOUGH("cloud_dough", () -> new BaseFoodItem(FoodType.LOW)), // 粗制云朵面包
     CLOUD_BREAD("cloud_bread", () -> new BaseFoodItem(FoodType.CLOUD_BREAD)), // 云朵面包
+    FLUTTERING_LAMB_CHOPS("fluttering_lamb_chops", () -> new BaseFoodItem(FoodType.LOW)),
+    COOKED_FLUTTERING_LAMB_CHOPS("cooked_fluttering_lamb_chops", () -> new BaseFoodItem(FoodType.SENIOR)),
     // 水果
     APRICOT("apricot", () -> new BaseFoodItem(FoodType.LOW)),
     BANANA("banana", () -> new BaseFoodItem(FoodType.LOW)),
@@ -123,10 +125,15 @@ public enum Foods implements EnumRegister<Item> {
 
     //节日特有
     ZONGZI("zongzi", () -> new FireproofFoodItem(FoodType.LOW)),
+
     HONEY_MOONCAKES("honey_mooncakes", () -> new FireproofFoodItem(FoodType.MEDIUM)),
     HONEY_MOONCAKES_CHUNKS("honey_mooncakes_chunks", () -> new FireproofFoodItem(FoodType.MOONCAKES)),
     EGG_YOLK_MOONCAKES("egg_yolk_mooncakes", () -> new FireproofFoodItem(FoodType.MEDIUM)),
     EGG_YOLK_MOONCAKES_CHUNKS("egg_yolk_mooncakes_chunks", () -> new FireproofFoodItem(FoodType.MEDIUM)),
+
+    LONGEVITY_NOODLES("longevity_noodles", () -> new BowlFoodItem(FoodType.LOW)),
+
+
     ;
     private final RegistryObject<Item> value;
 
