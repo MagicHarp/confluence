@@ -60,6 +60,7 @@ public class SpelunkerHelper {
     public Map<Block, java.util.List<BlockPos>> blockMap = new HashMap<>();
     private Boolean INIT = false;
     private Player player;
+    private Minecraft mc;
 
     enum ShowType {SPELUNKER, DANGER}
 
@@ -68,6 +69,7 @@ public class SpelunkerHelper {
         genBlocks();
 
         if(!INIT){
+            mc = Minecraft.getInstance();
             //远古残骸
             putTarget(Blocks.ANCIENT_DEBRIS,Color.MAGENTA,true, ShowType.SPELUNKER);//这个还必须放这个位置
             //钻石矿
@@ -151,6 +153,10 @@ public class SpelunkerHelper {
             //example
            // putTarget(Blocks.STONE, new Color(255,255,255));
 
+            /**危险感知**/
+            putTarget(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.STONE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+
 
 
             INIT = true;
@@ -162,6 +168,7 @@ public class SpelunkerHelper {
 
 
     public record Tuple(Color color,Boolean showText,ShowType showType) { }
+
 
     public void genBlocks() {
 
@@ -180,7 +187,8 @@ public class SpelunkerHelper {
                     if (targets.containsKey(block) /*&&//有目标且
                             (!centerCache.containsKey(pos) ||//未已缓存或
                                     centerCache.containsKey(pos) && player.level().getBlockState(pos).is(Blocks.AIR))*/
-                    //&&targets.
+                    && (targets.get(block).showType==ShowType.SPELUNKER && mc.player.hasEffect(ModEffects.SPELUNKER.get()) ||
+                            targets.get(block).showType==ShowType.DANGER && mc.player.hasEffect(ModEffects.DANGER_SENSE.get()))
                     ) {//已缓存但为空
 
                         var list = blockMap.computeIfAbsent(block, k1 -> new ArrayList<>());
@@ -215,7 +223,7 @@ public class SpelunkerHelper {
         SpelunkerHelper blockGen= SpelunkerHelper.getSingleton(minecraft.player);
         //效果消失，清除缓存
         if(!Minecraft.getInstance().player.hasEffect(ModEffects.SPELUNKER.get())
-            ||!Minecraft.getInstance().player.hasEffect(ModEffects.DANGER_SENSE.get())
+            &&!Minecraft.getInstance().player.hasEffect(ModEffects.DANGER_SENSE.get())
         ){
             if(blockGen!=null){
                 blockGen.centerCache.clear();;
@@ -289,25 +297,30 @@ public class SpelunkerHelper {
                         }
                     }
 
-
-                    //todo 可以优化
-                    for(BlockPos centerPos : centers.get(n.getKey())){//否则查找所有的中心块
-                        double distance = centerPos.distSqr(blockProps);
-                        if(distance < blockGen.centerInternal){//附近有中心块，添加缓存
-                            centerMap.put(blockProps, centerPos);
-                            ifNear = true;
-                            break;
+                    if(blockGen.targets.get(n.getKey()).showType==ShowType.SPELUNKER){//矿透方块
+                        if(!minecraft.player.hasEffect(ModEffects.SPELUNKER.get()))continue;
+                        //todo 可以优化
+                        for(BlockPos centerPos : centers.get(n.getKey())){//否则查找所有的中心块
+                            double distance = centerPos.distSqr(blockProps);
+                            if(distance < blockGen.centerInternal){//附近有中心块，添加缓存
+                                centerMap.put(blockProps, centerPos);
+                                ifNear = true;
+                                break;
+                            }
                         }
+
+                        if(ifNear){
+                            if(!KeyBindings.TAB.get().isDown())continue;//非中心块或tab按下不渲染
+
+                        }else{
+                            centers.get(n.getKey()).add(blockProps);//太远则自己成为中心块
+                            shouldRenderCache.put(blockProps,n.getKey());//只渲染中心块文本
+                        }
+                    }else if(blockGen.targets.get(n.getKey()).showType==ShowType.DANGER){//危险方块
+                        if(!minecraft.player.hasEffect(ModEffects.DANGER_SENSE.get()))continue;
+                        shouldRenderCache.put(blockProps,n.getKey());//渲染所有危险方块
                     }
 
-
-                    if(ifNear){
-                        if(!KeyBindings.TAB.get().isDown())continue;//非中心块或tab按下不渲染
-
-                    }else{
-                        centers.get(n.getKey()).add(blockProps);//太远则自己成为中心块
-                        shouldRenderCache.put(blockProps,n.getKey());//只渲染中心块文本
-                    }
 
                     //距离越远透明度越低
                     a = (int) ((255- Math.min(playerPos.distanceToSqr(blockProps.getX(),blockProps.getY(),blockProps.getZ())/(blockGen.range*blockGen.range)*255,255))* blockGen.maxAlpha);
