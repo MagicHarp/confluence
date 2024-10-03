@@ -399,11 +399,21 @@ public final class ModUtils {
         O vertex(T1 t1, T2 t2, T3 t3,T4 t4,R r);
     }
 
-    public static void addPotionTooltip(MobEffect effect, List<Component> components) {
+    public static void addPotionTooltip(MobEffect effect, List<Component> components,
+                                        int amplifier, int duration) {
         if (effect == null){
             components.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
             return;
         }
-        components.add(Component.translatable(effect.getDescriptionId()).withStyle(ChatFormatting.BLUE));
+        components.add(Component.translatable(effect.getDescriptionId()).append(amplifier == 0 ? "" : " ")
+                .append(Component.translatable(amplifier == 0 ? "" : ("enchantment.level." + (amplifier + 1))))
+                .append("（" + tickFormat(duration) + "）").withStyle(ChatFormatting.BLUE));
+    }
+
+    public static String tickFormat(int tick){
+        int sec = tick / 20;
+        return (sec / 60 < 10 ? "0" : "") + sec / 60
+                + ":" +
+                (sec % 60 < 10 ? "0" : "") + sec % 60;
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -75,7 +76,6 @@ public final class ModClient {
         return x.mixture(y, 0.5F).mixture(z, 0.5F).get();
     };
     public static final ItemColor SIMPLE = (pStack, pTintIndex) -> ColoredItem.getColor(pStack);
-    public static final ItemColor POTION = (pStack, pTintIndex) -> VanillaPotionItem.getColor(pStack) + 0x2a2a2a;
 
     private static IntegerRGB hallowMixture(int m) {
         if (m <= 4) return IntegerRGB.HALLOW_A.mixture(IntegerRGB.HALLOW_B, m * 0.25F);
@@ -411,7 +411,8 @@ public final class ModClient {
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(SIMPLE, Materials.GEL.get());
-        event.register(POTION, TerraPotions.VANILLA_POTION.get());
+        event.register((pStack, pTintIndex) -> pTintIndex > 0 ? -1 :
+                VanillaPotionItem.getColor(pStack), TerraPotions.VANILLA_POTION.get());
     }
 
 //    @SubscribeEvent

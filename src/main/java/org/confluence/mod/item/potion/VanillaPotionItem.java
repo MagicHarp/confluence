@@ -31,6 +31,14 @@ public class VanillaPotionItem extends AbstractPotionItem {
         this.amplifier = amplifier;
     }
 
+    public void setDuration(int duration){
+        this.duration = duration;
+    }
+
+    public void setAmplifier(int amplifier){
+        this.amplifier = amplifier;
+    }
+
     @Override
     protected void apply(ItemStack itemStack, Level level, LivingEntity living) {
         MobEffect effect;
@@ -47,9 +55,10 @@ public class VanillaPotionItem extends AbstractPotionItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (pStack.getTag() != null) {
-            ModUtils.addPotionTooltip(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(pStack.getTag().getString("Potion"))), pTooltipComponents);
+            ModUtils.addPotionTooltip(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation(pStack.getTag().getString("Potion")))
+                    , pTooltipComponents, amplifier, duration);
         } else {
-            ModUtils.addPotionTooltip(null, pTooltipComponents);
+            ModUtils.addPotionTooltip(null, pTooltipComponents, 0, 0);
         }
     }
 

@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.Potion;
@@ -26,6 +27,7 @@ import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.item.potion.EffectPotionItem;
 import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.potion.VanillaPotionItem;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,6 +50,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                 }
                 if (entity.craft()){
                     pPlayer.playSound(SoundEvents.FIRECHARGE_USE, 1, 1.8F);
+                    return InteractionResult.PASS;
                 }
                 entity.craftPotion(pState, pLevel, pPos, pPlayer);
 
@@ -190,7 +193,11 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                 }
                 resetFirstColor();
                 //todo 渲染bug
-                ItemStack potion = new ItemStack(TerraPotions.VANILLA_POTION.get());
+                VanillaPotionItem item = (VanillaPotionItem) TerraPotions.VANILLA_POTION.get();
+                if (level != null) {
+                    item.setDuration(level.random.nextInt(60, 1200));
+                }
+                ItemStack potion = new ItemStack(item);
                 potion.getOrCreateTag().putString("Potion", ForgeRegistries.MOB_EFFECTS.getKey(effects.get(pLevel.random.nextInt(effects.size()))).toString());
                 ModUtils.createItemEntity(potion, pPos.getCenter(), pLevel);
             }
