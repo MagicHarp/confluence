@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.Level;
@@ -32,8 +33,11 @@ import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AlchemyTableBlock extends BaseEntityBlock {
     private static int DEVIATIONS = 150000;
@@ -86,40 +90,55 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                 pPlayer.playSound(SoundEvents.HONEY_DRINK, 1, 0.8F);
             } else {
                 ItemStack item = pPlayer.getItemInHand(pHand);
-                if (item.is(ModItems.WATERLEAF.get())) {
-                    entity.operator = 1;
-                    item.shrink(1);
-                } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
-                    entity.operator = 2;
-                    item.shrink(1);
-                } else if (item.is(ModItems.SHINE_ROOT.get())){
-                    entity.operator = 3;
-                    item.shrink(1);
-                } else if (item.is(ModItems.SHIVERINGTHORNS.get())){
-                    entity.operator = 4;
-                    item.shrink(1);
-                } else if (item.is(ModItems.SUNFLOWERS.get())){
-                    entity.operator = 5;
-                    item.shrink(1);
-                } else if (item.is(ModItems.DEATHWEED.get())){
-                    entity.operator = 6;
-                    item.shrink(1);
-                } else if (item.is(ModItems.FLAMEFLOWERS.get())){
-                    entity.operator = 7;
-                    item.shrink(1);
-                } else if (item.is(ModItems.EBONY_MUSHROOM.get()) || item.is(ModItems.GLOWING_MUSHROOM.get()) ||
-                        item.is(ModItems.LIFE_MUSHROOM.get()) || item.is(ModItems.TR_CRIMSON_MUSHROOM.get())){
-                    entity.operator = 8;
-                    item.shrink(1);
-                } else if (item.is(Materials.BLACK_PEARL.get())){
-                    entity.operator = 9;
+                if (item.is(Items.REDSTONE)) {
+                    if (entity.isRedstone < 2 && item.getCount() >= (entity.isRedstone * (int) Math.pow(entity.isRedstone, Math.pow(entity.isRedstone, entity.isRedstone))) + 1){
+                        entity.isRedstone++;
+                        item.shrink(entity.isRedstone * (int) Math.pow(entity.isRedstone,
+                                Math.pow(entity.isRedstone, entity.isRedstone)) + 1);
+                        return InteractionResult.PASS;
+                    }
+                } else if (item.is(Items.GLOWSTONE_DUST)) {
+                    if (entity.isGlowstone < 2 && item.getCount() >= (entity.isGlowstone * (int) Math.pow(entity.isGlowstone,
+                            Math.pow(entity.isGlowstone, entity.isGlowstone))) + 1 ){
+                        entity.isGlowstone++;
+                        item.shrink(entity.isGlowstone * (int) Math.pow(entity.isGlowstone, Math.pow(entity.isGlowstone, entity.isGlowstone)) + 1);
+                    }
+                }
+                if (getVault(item) != 0){
+                    entity.operator = getVault(item);
                     item.shrink(1);
                 }
             }
-            pPlayer.sendSystemMessage(Component.literal(entity.firstColor + " " + entity.secondColor + " " + entity.operator));
+            pPlayer.sendSystemMessage(Component.literal(
+                    entity.firstColor + " " + entity.secondColor + " " + entity.operator
+            + " " + entity.isRedstone + " " + entity.isGlowstone));
         }
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+    }
+
+    public static int getVault(ItemStack item){
+        if (item.is(ModItems.WATERLEAF.get())) {
+            return 1;
+        } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
+            return 2;
+        } else if (item.is(ModItems.SHINE_ROOT.get())){
+            return 3;
+        } else if (item.is(ModItems.SHIVERINGTHORNS.get())){
+            return 4;
+        } else if (item.is(ModItems.SUNFLOWERS.get())){
+            return 5;
+        } else if (item.is(ModItems.DEATHWEED.get())){
+            return 6;
+        } else if (item.is(ModItems.FLAMEFLOWERS.get())){
+            return 7;
+        } else if (item.is(ModItems.EBONY_MUSHROOM.get()) || item.is(ModItems.GLOWING_MUSHROOM.get()) ||
+                item.is(ModItems.LIFE_MUSHROOM.get()) || item.is(ModItems.TR_CRIMSON_MUSHROOM.get())){
+            return 8;
+        } else if (item.is(Materials.BLACK_PEARL.get())){
+            return 9;
+        }
+        return 0;
     }
 
     public static int calculateAverage(List<Integer> numbers) {
@@ -141,6 +160,10 @@ public class AlchemyTableBlock extends BaseEntityBlock {
         public int firstColor;
         public int operator;
         public int secondColor;
+
+        public int isRedstone;
+        public int isGlowstone;
+
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
             super(ModBlocks.ALCHEMY_TABLE_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -195,9 +218,12 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                 //todo 渲染bug
                 VanillaPotionItem item = (VanillaPotionItem) TerraPotions.VANILLA_POTION.get();
                 if (level != null) {
-                    item.setDuration(level.random.nextInt(60, 1200));
+                    item.setDuration(level.random.nextInt(60 * (isRedstone + 1) , 1200 * (isRedstone + 1)));
+                    item.setAmplifier(isGlowstone);
                 }
                 ItemStack potion = new ItemStack(item);
+                isGlowstone = 0;
+                isRedstone = 0;
                 potion.getOrCreateTag().putString("Potion", ForgeRegistries.MOB_EFFECTS.getKey(effects.get(pLevel.random.nextInt(effects.size()))).toString());
                 ModUtils.createItemEntity(potion, pPos.getCenter(), pLevel);
             }
