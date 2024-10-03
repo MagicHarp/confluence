@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -334,7 +335,13 @@ public final class ModUtils {
         }
         components.add(Component.translatable(effect.getDescriptionId()).append(amplifier == 0 ? "" : " ")
                 .append(Component.translatable(amplifier == 0 ? "" : ("enchantment.level." + (amplifier + 1))))
-                .append("（" + tickFormat(duration) + "）").withStyle(ChatFormatting.BLUE));
+                .append("（" + tickFormat(duration) + "）").withStyle(getPotionCategoryColor(effect)));
+    }
+
+    private static ChatFormatting getPotionCategoryColor(MobEffect effect) {
+        return effect.getCategory().equals(MobEffectCategory.NEUTRAL) ?
+                ChatFormatting.GRAY : effect.getCategory().equals(MobEffectCategory.BENEFICIAL) ?
+                ChatFormatting.BLUE : ChatFormatting.RED;
     }
 
     public static String tickFormat(int tick){
