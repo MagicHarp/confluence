@@ -1,11 +1,16 @@
 package org.confluence.mod.util;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -20,10 +25,14 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.color.FloatRGBA;
 import org.confluence.mod.item.ModItems;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static net.minecraft.world.item.ItemStack.ATTRIBUTE_MODIFIER_FORMAT;
 
@@ -315,5 +324,87 @@ public final class ModUtils {
         double y = axis == Direction.Axis.Y ? scale * vec3.y : vec3.y;
         double z = axis == Direction.Axis.Z ? scale * vec3.z : vec3.z;
         return new Vec3(x, y, z);
+    }
+
+    public static void addPotionTooltip(MobEffect effect, List<Component> components,
+                                        int amplifier, int duration) {
+        if (effect == null){
+            components.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
+            return;
+        }
+        components.add(Component.translatable(effect.getDescriptionId()).append(amplifier == 0 ? "" : " ")
+                .append(Component.translatable(amplifier == 0 ? "" : ("enchantment.level." + (amplifier + 1))))
+                .append("（" + tickFormat(duration) + "）").withStyle(ChatFormatting.BLUE));
+    }
+
+    public static String tickFormat(int tick){
+        int sec = tick / 20;
+        return (sec / 60 < 10 ? "0" : "") + sec / 60
+                + ":" +
+                (sec % 60 < 10 ? "0" : "") + sec % 60;
+    }
+
+    /**
+     * 计算向量夹角
+     * @param v1
+     * @param v2
+     * @return degree
+     */
+    public static double angleBetween(Vec3 v1,Vec3 v2){
+        return Math.acos(v1.dot(v2)/v1.length()/v2.length());
+    }
+
+    public static void renderCube(PoseStack stack, VertexConsumer consumer, FloatRGBA rgb, float px, float py, float pz, float u, float v){
+        renderPart(stack, consumer, rgb.red(), rgb.green(), rgb.blue(), rgb.alpha(),px,py,pz ,u,v);
+    }
+
+    private static void renderPart(PoseStack pPoseStack, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float px,float py,float pz,float u,float v) {
+        pPoseStack.pushPose();
+        PoseStack.Pose posestack$pose = pPoseStack.last();
+        Matrix4f matrix4f = posestack$pose.pose();
+        Matrix3f matrix3f = posestack$pose.normal();
+        Consumer<VertexConsumer> consumer = c->c.color(pRed, pGreen, pBlue, pAlpha).uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(matrix3f, 0F, 0F, 0F).endVertex();
+        //z=0
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,0f,0f));
+        //x=1
+        matrix4f.translate(px,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
+        //z=1
+        matrix4f.translate(pz,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,px,0f,0f));
+        //x=0
+        matrix4f.translate(px,0,0);
+        matrix4f.rotate(Axis.YP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,py,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
+        //y=0
+        matrix4f.translate(0,0,px);
+        matrix4f.rotate(Axis.XP.rotationDegrees(-90));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
+        //y=1
+        matrix4f.translate(0,px,py);
+        matrix4f.rotate(Axis.XP.rotationDegrees(180));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,0f,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,0f,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,px,0f));
+        consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
+
+        pPoseStack.popPose();
     }
 }
