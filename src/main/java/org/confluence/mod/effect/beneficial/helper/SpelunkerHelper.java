@@ -223,7 +223,7 @@ public class SpelunkerHelper {
         SpelunkerHelper blockGen= SpelunkerHelper.getSingleton(minecraft.player);
         //效果消失，清除缓存
         if(!Minecraft.getInstance().player.hasEffect(ModEffects.SPELUNKER.get())
-            ||!Minecraft.getInstance().player.hasEffect(ModEffects.DANGER_SENSE.get())
+            &&!Minecraft.getInstance().player.hasEffect(ModEffects.DANGER_SENSE.get())
         ){
             if(blockGen!=null){
                 blockGen.centerCache.clear();;
@@ -298,6 +298,7 @@ public class SpelunkerHelper {
                     }
 
                     if(blockGen.targets.get(n.getKey()).showType==ShowType.SPELUNKER){//矿透方块
+                        if(!minecraft.player.hasEffect(ModEffects.SPELUNKER.get()))continue;
                         //todo 可以优化
                         for(BlockPos centerPos : centers.get(n.getKey())){//否则查找所有的中心块
                             double distance = centerPos.distSqr(blockProps);
@@ -316,6 +317,7 @@ public class SpelunkerHelper {
                             shouldRenderCache.put(blockProps,n.getKey());//只渲染中心块文本
                         }
                     }else if(blockGen.targets.get(n.getKey()).showType==ShowType.DANGER){//危险方块
+                        if(!minecraft.player.hasEffect(ModEffects.DANGER_SENSE.get()))continue;
                         shouldRenderCache.put(blockProps,n.getKey());//渲染所有危险方块
                     }
 
