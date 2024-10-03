@@ -383,7 +383,22 @@
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:hunter_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -398,22 +413,7 @@
               }
             }
           ],
-          "weight": 2500
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:flipper_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 2,
-                "max": 4
-              }
-            }
-          ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -428,7 +428,7 @@
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -443,8 +443,33 @@
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:spelunker_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 18
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "name": "confluence:healing_potion",
@@ -453,12 +478,12 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 5,
+                "max": 8
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -468,16 +493,16 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 5,
+                "max": 8
               }
             }
           ],
-          "weight": 2500
+          "weight": 1
         },
         {
           "type": "minecraft:empty",
-          "weight": 8250
+          "weight": 2
         }
       ],
       "rolls": 1

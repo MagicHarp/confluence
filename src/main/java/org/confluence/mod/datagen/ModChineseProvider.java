@@ -2026,6 +2026,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.FEATHERFALL_POTION.get(), "羽落药水");
         add(TerraPotions.RANDOM_TELEPORT_POTION.get(), "传送药水");
         add(TerraPotions.SPELUNKER_POTION.get(), "洞穴探险药水");
+        add(TerraPotions.DANGERSENSE_POTION.get(), "危险感药水");
+        add(TerraPotions.HUNTER_POTION.get(), "狩猎药水");
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.SHINE.get(), "发光");

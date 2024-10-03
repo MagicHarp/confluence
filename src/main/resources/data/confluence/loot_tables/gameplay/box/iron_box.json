@@ -231,6 +231,21 @@
         },
         {
           "type": "minecraft:item",
+          "name": "confluence:hunter_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
           "name": "confluence:gravitation_potion",
           "functions": [
             {
@@ -306,7 +321,7 @@
         },
         {
           "type": "minecraft:empty",
-          "weight": 18
+          "weight": 21
         }
       ],
       "rolls": 1
@@ -327,7 +342,7 @@
               }
             }
           ],
-          "weight": 3333
+          "weight": 1
         },
         {
           "type": "minecraft:item",
