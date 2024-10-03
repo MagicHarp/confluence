@@ -20,6 +20,7 @@ import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.item.food.BaseFoodItem;
 import org.confluence.mod.item.food.BottleFoodItem;
 import org.confluence.mod.item.mana.StaffItem;
+import org.confluence.mod.item.potion.VanillaPotionItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.Set;
@@ -98,6 +99,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private static boolean shouldSkip(Item item) {
-        return item instanceof CustomModel || (item instanceof GeoItem && !(item instanceof NormalGeoItem)) || SKIP_ITEMS.contains(item);
+        return (item instanceof CustomModel || (item instanceof GeoItem && !(item instanceof NormalGeoItem)) || SKIP_ITEMS.contains(item)) || item instanceof VanillaPotionItem;
     }
 }

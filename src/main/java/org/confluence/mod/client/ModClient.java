@@ -36,15 +36,16 @@ import org.confluence.mod.client.particle.*;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
-import org.confluence.mod.client.renderer.entity.bomb.*;
+import org.confluence.mod.client.renderer.entity.bomb.BaseBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.BouncyBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.ScarabBombEntityRenderer;
+import org.confluence.mod.client.renderer.entity.bomb.StickyBombEntityRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.gui.*;
-import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorldRenderer;
-import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorld_SegmentRenderer;
 import org.confluence.mod.entity.boss.geoRenderer.KingSkullHandRenderer;
 import org.confluence.mod.entity.boss.geoRenderer.KingSkullRenderer;
 import org.confluence.mod.fluid.ModFluids;
@@ -315,9 +316,6 @@ public final class ModClient {
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
         event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
-
-        event.registerEntityRenderer(EATER_OF_WORLD.get(), EaterOfWorldRenderer::new);
-        event.registerEntityRenderer(EATER_OF_WORLD_SEGMENT.get(), EaterOfWorld_SegmentRenderer::new);
         event.registerEntityRenderer(KING_SKULL.get(), KingSkullRenderer::new);
         event.registerEntityRenderer(KING_SKULL_HAND.get(), KingSkullHandRenderer::new);
 
@@ -338,13 +336,8 @@ public final class ModClient {
         event.registerEntityRenderer(STAR_CLOAK.get(), StarCloakEntityRenderer::new);
         event.registerEntityRenderer(BOULDER.get(), BoulderRenderer::new);
         event.registerEntityRenderer(MONEY_HOLE.get(), MoneyHoleRenderer::new);
-
         event.registerEntityRenderer(ENCHANTED_SWORD_PROJECTILE.get(), EnchantedSwordProjectileRenderer::new);
         event.registerEntityRenderer(ICE_BLADE_SWORD_PROJECTILE.get(), IceBladeSwordProjectileRenderer::new);
-        event.registerEntityRenderer(STAR_FURY_PROJECTILE.get(), StarFuryProjectileRenderer::new);
-        event.registerEntityRenderer(ARROW_PROJECTILE.get(), TerraArrowRenderer::new);
-
-
         event.registerEntityRenderer(THROW_KNIVES_PROJECTILE.get(), ThrowingKnivesProjectileRenderer::new);
         event.registerEntityRenderer(SHURIKEN_PROJECTILE.get(), ShurikenProjectileRenderer::new);
         event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
@@ -352,7 +345,6 @@ public final class ModClient {
         event.registerEntityRenderer(BOUNCY_BOMB_ENTITY.get(), BouncyBombEntityRenderer::new);
         event.registerEntityRenderer(SCARAB_BOMB_ENTITY.get(), ScarabBombEntityRenderer::new);
         event.registerEntityRenderer(STICKY_BOMB_ENTITY.get(), StickyBombEntityRenderer::new);
-        event.registerEntityRenderer(BOMB_FISH_ENTITY.get(), BombFishEntityRenderer::new);
 
         event.registerEntityRenderer(BASE_HOOK.get(), BaseHookRenderer::new);
         event.registerEntityRenderer(WEB_SLINGER.get(), WebSlingerRenderer::new);
@@ -382,7 +374,6 @@ public final class ModClient {
         event.registerBlockEntityRenderer(ModBlocks.BASE_CHEST_BLOCK_ENTITY.get(), BaseChestBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.DEATH_CHEST_BLOCK_ENTITY.get(), DeathChestBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlocks.WHITE_PLASTIC_CHAIR_ENTITY.get(), WhitePlasticChairRenderer::new);
-        event.registerBlockEntityRenderer(ModBlocks.SKY_MILL_ENTITY.get(), SkyMillBlockRenderer::new);
 
         event.registerEntityRenderer(FLAIL.get(), FlailRenderer::new);
         event.registerEntityRenderer(CHAIR.get(), NoopRenderer::new);
@@ -403,11 +394,9 @@ public final class ModClient {
         event.registerSpriteSet(ModParticles.FLAMEFLOWER_BLOOM.get(), FlameFlowerParticle.Provider::new);
         event.registerSpriteSet(ModParticles.CURRENT_DUST.get(), CurrentColorDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.BLOOD.get(), BloodParticle.Provider::new);
-        event.registerSpriteSet(ModParticles.BODY_PART.get(), pSprites -> new BodyPartsParticle.Provider());
         event.registerSpriteSet(ModParticles.LIGHTS_BANE.get(), LightsBaneParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_DUST.get(), LightsBaneDustParticle.Provider::new);
         event.registerSpriteSet(ModParticles.LIGHTS_BANE_FADE.get(), LightsBaneFadeParticle.Provider::new);
-        event.registerSpriteSet(ModParticles.DAMAGE_INDICATOR.get(), pSprites -> new DamageIndicatorParticle.Provider());
     }
 
     @SubscribeEvent

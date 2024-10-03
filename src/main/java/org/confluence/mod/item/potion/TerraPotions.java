@@ -59,7 +59,8 @@ public enum TerraPotions implements EnumRegister<AbstractPotionItem> {
     MANA_POTION("mana_potion", () -> new ManaPotionItem(100, Rarity.UNCOMMON)),
     GREATER_MANA_POTION("greater_mana_potion", () -> new ManaPotionItem(200, Rarity.RARE)),
     SUPER_MANA_POTION("super_mana_potion", () -> new ManaPotionItem(300, Rarity.EPIC)),
-    RANDOM_TELEPORT_POTION("random_teleport_potion", RandomTeleportPotionItem::new);
+    RANDOM_TELEPORT_POTION("random_teleport_potion", RandomTeleportPotionItem::new),
+    VANILLA_POTION("vanilla_potion", VanillaPotionItem::new);
 
     private final RegistryObject<AbstractPotionItem> value;
 
