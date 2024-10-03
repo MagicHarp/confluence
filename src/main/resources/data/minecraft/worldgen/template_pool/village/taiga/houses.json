@@ -156,6 +156,15 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
+        "location": "confluence:common_village/taiga_bank_0",
+        "processors": "minecraft:mossify_10_percent",
+        "projection": "rigid"
+      },
+      "weight": 50
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "minecraft:village/taiga/houses/taiga_cartographer_house_1",
         "processors": "minecraft:mossify_10_percent",
         "projection": "rigid"

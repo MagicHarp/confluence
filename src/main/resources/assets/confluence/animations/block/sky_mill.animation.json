@@ -22,6 +22,28 @@
 					}
 				}
 			}
+		},
+		"animation.sky_mill.none": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"bone": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 180]
+						},
+						"4.0": {
+							"vector": [0, 0, 360]
+						}
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
