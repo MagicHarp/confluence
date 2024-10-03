@@ -347,8 +347,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("painting.confluence.uqtqu_day.author", "BiliBili__昼泽_");
         add("painting.confluence.emerald_shenyi.title", "EMERALD_SHENYI");
         add("painting.confluence.emerald_shenyi.author", "BiliBili_Emerald_审翼");
-        add("painting.confluence.black_cat.title", "BLACK_CAT");
-        add("painting.confluence.black_cat.author", "???");
+        add("painting.confluence.chromatic.title", "CHROMATIC");
+        add("painting.confluence.chromatic.author", "BiliBili_陌林_Chromatic");
 
         // new
         add("achievements.toast.complete", "成就达成！");
