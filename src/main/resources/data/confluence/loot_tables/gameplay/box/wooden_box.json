@@ -238,41 +238,11 @@
               "count": {
                 "type": "uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ],
-          "weight": 1429
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:shine_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ],
-          "weight": 1429
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:iron_skin_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -283,41 +253,26 @@
               "count": {
                 "type": "uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "confluence:night_owl_potion",
+          "name": "confluence:iron_skin_potion",
           "functions": [
             {
               "function": "set_count",
               "count": {
                 "type": "uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ],
-          "weight": 1429
-        },
-        {
-          "type": "minecraft:item",
-          "name": "confluence:gills_potion",
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "type": "uniform",
-                "min": 1,
-                "max": 2
-              }
-            }
-          ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -328,11 +283,11 @@
               "count": {
                 "type": "uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -343,12 +298,97 @@
               "count": {
                 "type": "uniform",
                 "min": 1,
-                "max": 2
+                "max": 3
               }
             }
           ],
-          "weight": 1429
+          "weight": 1
         },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:night_owl_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:shine_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:gills_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:dangersense_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:hunter_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "weight": 1
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 60
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "name": "confluence:lesser_healing_potion",
@@ -357,12 +397,12 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 5,
+                "max": 8
               }
             }
           ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -372,16 +412,16 @@
               "function": "set_count",
               "count": {
                 "type": "uniform",
-                "min": 3,
-                "max": 7
+                "min": 5,
+                "max": 8
               }
             }
           ],
-          "weight": 1429
+          "weight": 1
         },
         {
           "type": "minecraft:empty",
-          "weight": 7139
+          "weight": 4
         }
       ],
       "rolls": 1

@@ -296,8 +296,38 @@
           "weight": 2
         },
         {
+          "type": "minecraft:item",
+          "name": "confluence:dangersense_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "confluence:hunter_potion",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "type": "uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "weight": 2
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 6
+          "weight": 8
         }
       ],
       "rolls": 1
