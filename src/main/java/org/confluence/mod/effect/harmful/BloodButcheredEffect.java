@@ -16,19 +16,19 @@ public class BloodButcheredEffect extends MobEffect {
 
         switch (pAmplifier) {
             case 2:
-                damage = 0.1F;
+                damage = 2F;
                 break;
             case 3:
-                damage = 0.15F;
+                damage = 4F;
                 break;
             case 4:
-                damage = 0.2F;
+                damage = 6F;
                 break;
             case 5:
-                damage = 0.25F;
+                damage = 8F;
                 break;
             default:
-                damage = 0.05F;
+                damage = 10F;
                 break;
         }
 
