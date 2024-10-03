@@ -462,6 +462,7 @@ public final class ModTabs {
                 output.accept(CRIMSON_ALTAR.get());
                 output.accept(SKY_MILL.get());
                 output.accept(WORKSHOP.get());
+                output.accept(ALCHEMY_TABLE_BLOCK.get());
             })
             .build());
 }

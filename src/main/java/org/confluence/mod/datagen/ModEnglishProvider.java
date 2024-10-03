@@ -14,6 +14,7 @@ import org.confluence.mod.datagen.limit.CustomName;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.potion.VanillaPotionItem;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -254,6 +255,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("item.confluence.hand_of_creation.tooltip3", "Increases pickup range for items");
         add("item.confluence.step_stool.tooltip", "Press ↑ key to stand higher, and press Shift key to down");
         add("item.confluence.step_stool.tooltip2", "Extra Step: %s");
+        add("item.confluence.vanilla_potion", "Potion");
 
         add("item.confluence.magic_conch.pos", "Pos: [%s, %s, %s]");
 
@@ -505,6 +507,7 @@ public class ModEnglishProvider extends LanguageProvider {
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item item1 = item.get();
             if (item1 instanceof BlockItem) return;
+            if (item1 instanceof VanillaPotionItem) return;
             if (item1 instanceof CustomName customName) {
                 if (customName.getGenName() != null) {
                     add(item1, customName.getGenName());

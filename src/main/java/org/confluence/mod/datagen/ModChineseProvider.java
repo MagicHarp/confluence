@@ -1278,6 +1278,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(DEMON_CONCH.get(), "恶魔海螺");
         add(SKY_MILL.get(), "天磨");
         add(WORKSHOP.get(), "工匠作坊");
+        add(ALCHEMY_TABLE_BLOCK.get(), "炼药桌");
         add(BOMB_FISH.get(), "炸弹鱼");
 
         // 功能性方块
@@ -1994,6 +1995,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Foods.FLUTTERING_LAMB_CHOPS.get(), "飘飘羊排");
         add(Foods.COOKED_FLUTTERING_LAMB_CHOPS.get(), "熟飘飘羊排");
         // 药水
+        add(VANILLA_POTION.get(), "药水");
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");
         add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");
