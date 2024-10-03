@@ -30,6 +30,10 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+/**
+ * 实际上是渲染方块边框的类
+ */
 public class SpelunkerHelper {
 /** 调参表 **/
     public int refreshTick = 100;//客户端渲染刷新间隔
@@ -57,7 +61,7 @@ public class SpelunkerHelper {
     private Boolean INIT = false;
     private Player player;
 
-
+    enum ShowType {SPELUNKER, DANGER}
 
     public SpelunkerHelper(Player player) {
         this.player = player;
@@ -65,97 +69,99 @@ public class SpelunkerHelper {
 
         if(!INIT){
             //远古残骸
-            targets.put(Blocks.ANCIENT_DEBRIS,new Tuple(Color.MAGENTA,true) );//这个还必须放这个位置
+            putTarget(Blocks.ANCIENT_DEBRIS,Color.MAGENTA,true, ShowType.SPELUNKER);//这个还必须放这个位置
             //钻石矿
-            targets.put(Blocks.DIAMOND_ORE, new Tuple(Color.CYAN,true) );
-            targets.put(Blocks.DEEPSLATE_DIAMOND_ORE, new Tuple(Color.CYAN,true) );
+            putTarget(Blocks.DIAMOND_ORE,  Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_DIAMOND_ORE, Color.CYAN,true, ShowType.SPELUNKER);
 
 
             //红玉矿
-            targets.put(Ores.RUBY_ORE.get(), new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_RUBY_ORE.get(), new Tuple(Color.CYAN,true) );
+            putTarget(Ores.RUBY_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_RUBY_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
 
             //琥珀矿
-            targets.put(Ores.AMBER_ORE.get(), new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_AMBER_ORE.get(), new Tuple(Color.CYAN,true) );
+            putTarget(Ores.AMBER_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_AMBER_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
 
             //黄玉矿
-            targets.put(Ores.TOPAZ_ORE.get(),  new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_TOPAZ_ORE.get(),  new Tuple(Color.CYAN,true) );
+            putTarget(Ores.TOPAZ_ORE.get(),  Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_TOPAZ_ORE.get(),  Color.CYAN,true, ShowType.SPELUNKER);
 
             //翡翠矿
-            targets.put(Ores.TR_EMERALD_ORE.get(), new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_TR_EMERALD_ORE.get(), new Tuple(Color.CYAN,true) );
+            putTarget(Ores.TR_EMERALD_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_TR_EMERALD_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
 
             //蓝玉矿
-            targets.put(Ores.SAPPHIRE_ORE.get(), new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_SAPPHIRE_ORE.get(),new Tuple(Color.CYAN,true) );
+            putTarget(Ores.SAPPHIRE_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_SAPPHIRE_ORE.get(),Color.CYAN,true, ShowType.SPELUNKER);
 
             //紫晶矿
-            targets.put(Ores.TR_AMETHYST_ORE.get(), new Tuple(Color.CYAN,true) );
-            targets.put(Ores.DEEPSLATE_TR_AMETHYST_ORE.get(), new Tuple(Color.CYAN,true) );
+            putTarget(Ores.TR_AMETHYST_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_TR_AMETHYST_ORE.get(), Color.CYAN,true, ShowType.SPELUNKER);
 
 
             //绿宝石矿
-            targets.put(Blocks.EMERALD_ORE,new Tuple(Color.green,true) );
-            targets.put(Blocks.DEEPSLATE_EMERALD_ORE,new Tuple(Color.green,true) );
+            putTarget(Blocks.EMERALD_ORE,Color.green,true, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_EMERALD_ORE,Color.green,true, ShowType.SPELUNKER);
 
             //铁矿
-            targets.put(Blocks.IRON_ORE, new Tuple(Color.PINK,true) );
-            targets.put(Blocks.DEEPSLATE_IRON_ORE, new Tuple(Color.PINK,true) );
+            putTarget(Blocks.IRON_ORE, Color.PINK,true, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_IRON_ORE, Color.PINK,true, ShowType.SPELUNKER);
 
             //金矿
-            targets.put(Blocks.GOLD_ORE, new Tuple(Color.ORANGE,true) );
-            targets.put(Blocks.DEEPSLATE_GOLD_ORE, new Tuple(Color.ORANGE,true) );
+            putTarget(Blocks.GOLD_ORE, Color.ORANGE,true, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_GOLD_ORE, Color.ORANGE,true, ShowType.SPELUNKER);
 
             //煤矿
-            targets.put(Blocks.COAL_ORE, new Tuple(Color.BLACK,false) );
-            targets.put(Blocks.DEEPSLATE_COAL_ORE, new Tuple(Color.BLACK,false) );
+            putTarget(Blocks.COAL_ORE, Color.BLACK,false, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_COAL_ORE, Color.BLACK,false, ShowType.SPELUNKER);
 
             //铜矿
-            targets.put(Blocks.COPPER_ORE, new Tuple(Color.LIGHT_GRAY,false) );
-            targets.put(Blocks.DEEPSLATE_COPPER_ORE, new Tuple(Color.LIGHT_GRAY,false) );
+            putTarget(Blocks.COPPER_ORE, Color.LIGHT_GRAY,false, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_COPPER_ORE, Color.LIGHT_GRAY,false, ShowType.SPELUNKER);
 
             //锡矿
-            targets.put(Ores.TIN_ORE.get(), new Tuple(Color.LIGHT_GRAY,false) );
-            targets.put(Ores.DEEPSLATE_TIN_ORE.get(), new Tuple(Color.LIGHT_GRAY,false) );
+            putTarget(Ores.TIN_ORE.get(), Color.LIGHT_GRAY,false, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_TIN_ORE.get(), Color.LIGHT_GRAY,false, ShowType.SPELUNKER);
 
             //铅矿
-            targets.put(Ores.LEAD_ORE.get(), new Tuple(Color.PINK,false) );
-            targets.put(Ores.DEEPSLATE_LEAD_ORE.get(), new Tuple(Color.PINK,false) );
+            putTarget(Ores.LEAD_ORE.get(), Color.PINK,false, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_LEAD_ORE.get(), Color.PINK,false, ShowType.SPELUNKER);
 
             //铂金矿
-            targets.put(Ores.PLATINUM_ORE.get(), new Tuple(Color.ORANGE,true) );
-            targets.put(Ores.DEEPSLATE_PLATINUM_ORE.get(), new Tuple(Color.ORANGE,true) );
+            putTarget(Ores.PLATINUM_ORE.get(), Color.ORANGE,true, ShowType.SPELUNKER);
+            putTarget(Ores.DEEPSLATE_PLATINUM_ORE.get(), Color.ORANGE,true, ShowType.SPELUNKER);
 
             //生命水晶
-            targets.put(ModBlocks.LIFE_CRYSTAL_BLOCK.get(), new Tuple(Color.RED,true) );
+            putTarget(ModBlocks.LIFE_CRYSTAL_BLOCK.get(), Color.RED,true, ShowType.SPELUNKER);
             //箱子
-            targets.put(ModBlocks.BASE_CHEST_BLOCK.get(), new Tuple(Color.ORANGE,true) );
+            putTarget(ModBlocks.BASE_CHEST_BLOCK.get(), Color.ORANGE,true, ShowType.SPELUNKER);
 
 
 
             //青金石
-            targets.put(Blocks.LAPIS_ORE, new Tuple(Color.blue,false) );
-            targets.put(Blocks.DEEPSLATE_LAPIS_ORE, new Tuple(Color.blue,false) );
+            putTarget(Blocks.LAPIS_ORE, Color.blue,false, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_LAPIS_ORE, Color.blue,false, ShowType.SPELUNKER);
 
             //红石
-            targets.put(Blocks.REDSTONE_ORE, new Tuple(Color.red,false) );
-            targets.put(Blocks.DEEPSLATE_REDSTONE_ORE, new Tuple(Color.red,false) );
+            putTarget(Blocks.REDSTONE_ORE, Color.red,false, ShowType.SPELUNKER);
+            putTarget(Blocks.DEEPSLATE_REDSTONE_ORE, Color.red,false, ShowType.SPELUNKER);
 
 
             //example
-           // targets.put(Blocks.STONE, new Color(255,255,255));
+           // putTarget(Blocks.STONE, new Color(255,255,255));
 
 
 
             INIT = true;
         }
     }
+    public void putTarget(Block block, Color color, Boolean always, ShowType showType){
+        targets.put(block, new Tuple(color,always,showType) );
+    }
 
 
-
-    public record Tuple(Color color,Boolean showText) { }
+    public record Tuple(Color color,Boolean showText,ShowType showType) { }
 
     public void genBlocks() {
 
@@ -173,7 +179,9 @@ public class SpelunkerHelper {
                     Block block = level.getBlockState(pos).getBlock();
                     if (targets.containsKey(block) /*&&//有目标且
                             (!centerCache.containsKey(pos) ||//未已缓存或
-                                    centerCache.containsKey(pos) && player.level().getBlockState(pos).is(Blocks.AIR))*/) {//已缓存但为空
+                                    centerCache.containsKey(pos) && player.level().getBlockState(pos).is(Blocks.AIR))*/
+                    //&&targets.
+                    ) {//已缓存但为空
 
                         var list = blockMap.computeIfAbsent(block, k1 -> new ArrayList<>());
                         list.add(pos);
@@ -197,15 +205,18 @@ public class SpelunkerHelper {
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS
-                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS
-                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS
-                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES
-                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES
+//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS
+//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS
+//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES
+//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES
+
         )return;
         Minecraft minecraft = Minecraft.getInstance();
         SpelunkerHelper blockGen= SpelunkerHelper.getSingleton(minecraft.player);
         //效果消失，清除缓存
-        if(!Minecraft.getInstance().player.hasEffect(ModEffects.SPELUNKER.get())){
+        if(!Minecraft.getInstance().player.hasEffect(ModEffects.SPELUNKER.get())
+            ||!Minecraft.getInstance().player.hasEffect(ModEffects.DANGER_SENSE.get())
+        ){
             if(blockGen!=null){
                 blockGen.centerCache.clear();;
                 blockGen.centers.clear();;
