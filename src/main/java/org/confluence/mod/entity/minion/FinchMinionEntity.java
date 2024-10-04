@@ -10,10 +10,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.mixinauxiliary.Immunity;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class FinchMinionEntity extends MinionEntity{
+public class FinchMinionEntity extends MinionEntity implements Immunity {
 
     public FinchMinionEntity(Level pLevel) {
         super(ModEntities.FINCH_MINION.get(), pLevel);
@@ -52,7 +53,19 @@ public class FinchMinionEntity extends MinionEntity{
         Entity entity = entityHitResult.getEntity();
         if (level() instanceof ServerLevel){
             float damage = 3.8F;
-            entity.hurt(damageSources().mobAttack(this), damage);
+            entity.hurt(damageSources().mobProjectile(this, owner), damage);
+            RandomSource random = level().random;
+            setDeltaMovement(random.nextFloat() / 2, random.nextFloat() / 2, random.nextFloat() / 2);
         }
+    }
+
+    @Override
+    public Types confluence$getImmunityType(){
+        return Types.LOCAL;
+    }
+
+    @Override
+    public int confluence$getImmunityDuration(){
+        return 7;
     }
 }
