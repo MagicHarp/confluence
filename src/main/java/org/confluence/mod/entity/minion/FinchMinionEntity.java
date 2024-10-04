@@ -33,7 +33,9 @@ public class FinchMinionEntity extends MinionEntity{
         if (ownerAttack != null){
             Vec3 direction = ModUtils.getDirection(position(), ownerAttack.position(), 1.8D);
             double[] dirs = {direction.x, direction.y, direction.z};
-            setDeltaMovement(dirs[0] / 20.5, dirs[1] / 20.5, dirs[2] / 20.5);
+            setDeltaMovement(dirs[0] / 18.5
+                    , dirs[1] / 18.5
+                    , dirs[2] / 18.5);
             setRot(-(ModUtils.dirToRot(direction)[0]), -(ModUtils.dirToRot(direction)[1]));
         } else {
             if (owner != null){
@@ -50,9 +52,7 @@ public class FinchMinionEntity extends MinionEntity{
         Entity entity = entityHitResult.getEntity();
         if (level() instanceof ServerLevel){
             float damage = 3.8F;
-            entity.hurt(damageSources().mobAttack(owner), damage);
-            RandomSource random = level().random;
-            setDeltaMovement(random.nextFloat() / 2, random.nextFloat() / 2, random.nextFloat() / 2);
+            entity.hurt(damageSources().mobAttack(this), damage);
         }
     }
 }

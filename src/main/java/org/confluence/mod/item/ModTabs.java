@@ -33,6 +33,7 @@ import org.confluence.mod.item.hook.Hooks;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.staff.Staffs;
 import org.confluence.mod.item.sword.Swords;
 
 import static org.confluence.mod.block.ModBlocks.*;
@@ -398,7 +399,7 @@ public final class ModTabs {
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.SUMMON_ICON.get()))
             .title(Component.translatable("creativetab.confluence.summoners"))
             .displayItems((parameters, output) -> {
-
+                for (Staffs staff : Staffs.values()) output.accept(staff.get());
             })
             .build());
     // 食物与药水
