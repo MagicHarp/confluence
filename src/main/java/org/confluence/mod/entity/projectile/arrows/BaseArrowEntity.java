@@ -102,6 +102,10 @@ public class BaseArrowEntity extends AbstractArrow {
 
         if(!canPenetrate()) super.onHitEntity(pResult);
         Entity entity = pResult.getEntity();
+        if(!(entity instanceof LivingEntity)) {
+            super.onHitEntity(pResult);
+            return;
+        }
         if(havenBeen.contains((LivingEntity) entity)) return;
         float f = (float)this.getDeltaMovement().length();
         f = Math.max(f, minSpeedAttackFactor);//速度修正系数影响的最小速度值
