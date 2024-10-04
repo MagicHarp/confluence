@@ -30,6 +30,7 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.minion.FinchMinionEntity;
 import org.confluence.mod.entity.npc.ModVillagers;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.entity.slime.HoneySlime;
@@ -76,6 +77,8 @@ public final class ModEvents {
 
         event.put(ModEntities.TEST_WORM.get(), TestWormEntity.createAttributes().build());
         event.put(ModEntities.TEST_WORM_PART.get(), TestWormPart.createAttributes().build());
+
+        event.put(ModEntities.FINCH_MINION.get(), FinchMinionEntity.createAttributes().build());
     }
 
     @SubscribeEvent

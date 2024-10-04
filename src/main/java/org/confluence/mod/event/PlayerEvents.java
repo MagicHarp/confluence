@@ -25,6 +25,7 @@ import org.confluence.mod.block.crafting.AltarBlock;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
 import org.confluence.mod.client.handler.GravitationHandler;
+import org.confluence.mod.entity.minion.MinionEntity;
 import org.confluence.mod.item.IRangePickup;
 import org.confluence.mod.item.common.LifeCrystal;
 import org.confluence.mod.item.common.LifeFruit;
@@ -35,8 +36,10 @@ import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModTags;
 import org.confluence.mod.network.s2c.InfoCurioCheckPacketS2C;
 import org.confluence.mod.util.CuriosUtils;
+import org.confluence.mod.util.ModUtils;
 import org.confluence.mod.util.PlayerUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -51,6 +54,21 @@ public final class PlayerEvents {
             PlayerUtils.syncAdvancements(serverPlayer);
             PlayerUtils.resetClientPacket(serverPlayer);
             InfoCurioCheckPacketS2C.send(serverPlayer, serverPlayer.getInventory());
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerQuit(PlayerEvent.PlayerLoggedOutEvent event){
+        List<? extends Entity> entities = ModUtils.getNearbyEntities(Short.MAX_VALUE, event.getEntity().level(),
+                MinionEntity.class, event.getEntity().getBoundingBox());
+        for (Entity entity : entities){
+            if (entity instanceof MinionEntity minion){
+                if (minion.owner != null){
+                    if (minion.owner.is(event.getEntity())){
+                        minion.kill();
+                    }
+                }
+            }
         }
     }
 

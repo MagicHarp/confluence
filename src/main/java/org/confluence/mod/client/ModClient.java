@@ -349,6 +349,8 @@ public final class ModClient {
         event.registerEntityRenderer(STAR_FURY_PROJECTILE.get(), StarFuryProjectileRenderer::new);
         event.registerEntityRenderer(ARROW_PROJECTILE.get(), TerraArrowRenderer::new);
 
+        event.registerEntityRenderer(FINCH_MINION.get(), FinchMinionRenderer::new);
+
 
         event.registerEntityRenderer(STEP_STOOL.get(), StepStoolRenderer::new);
         event.registerEntityRenderer(BOMB_ENTITY.get(), BaseBombEntityRenderer::new);

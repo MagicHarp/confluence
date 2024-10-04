@@ -21,6 +21,7 @@ import org.confluence.mod.entity.fishing.BloodyFishingHook;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.entity.fishing.HotlineFishingHook;
 import org.confluence.mod.entity.hook.*;
+import org.confluence.mod.entity.minion.FinchMinionEntity;
 import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.arrows.BaseArrowEntity;
 import org.confluence.mod.entity.projectile.bombs.*;
@@ -98,6 +99,13 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<ThrowingKnivesProjectile>> THROW_KNIVES_PROJECTILE = ENTITIES.register("throw_knives_projectile", () -> EntityType.Builder.<ThrowingKnivesProjectile>of(ThrowingKnivesProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:throw_knives_projectile"));
     public static final RegistryObject<EntityType<ShurikenProjectile>> SHURIKEN_PROJECTILE = ENTITIES.register("shuriken_projectile", () -> EntityType.Builder.<ShurikenProjectile>of(ShurikenProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:shuriken_projectile"));
     public static final RegistryObject<EntityType<BaseArrowEntity>> ARROW_PROJECTILE = ENTITIES.register("arrow_projectile", () -> EntityType.Builder.<BaseArrowEntity>of(BaseArrowEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).build("confluence:arrow_projectile"));
+
+
+    public static final RegistryObject<EntityType<FinchMinionEntity>> FINCH_MINION =
+            ENTITIES.register("finch_minion", () -> EntityType.Builder.<FinchMinionEntity>of
+            ((pType, pLevel) -> new FinchMinionEntity(pLevel), MobCategory.MISC)
+            .sized(0.5F, 0.5F)
+            .build("confluence:finch_minion"));
 
 
 
