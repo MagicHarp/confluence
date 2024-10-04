@@ -213,8 +213,8 @@ public class SpelunkerHelper {
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY
                 ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_SOLID_BLOCKS
-//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS
-//                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS
+                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_BLOCKS
+                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS
 //                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES
 //                ||event.getStage() == RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES
 
