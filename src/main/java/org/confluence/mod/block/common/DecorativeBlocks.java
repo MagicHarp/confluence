@@ -90,6 +90,7 @@ public final class DecorativeBlocks {
     public static final RegistryObject<Block> AETHERIUM_BRICK = registerWithItem("aetherium_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
     public static final RegistryObject<Block> CRYSTAL_BLOCK = registerWithItem("crystal_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
     public static final RegistryObject<Block> RAINBOW_BRICK = registerWithItem("rainbow_brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final RegistryObject<Block> DISC_BLOCK = registerWithItem("disc_block", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 
     public static RegistryObject<Block> registerWithItem(String id, Supplier<Block> block) {
         RegistryObject<Block> object = ModBlocks.registerWithItem(id, block);

@@ -942,6 +942,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(PURPLE_PURE_GLASS.get(), "紫色纯净玻璃块");
         add(MAGENTA_PURE_GLASS.get(), "品红纯净玻璃块");
         add(PINK_PURE_GLASS.get(), "品红纯净玻璃块");
+        add(DISC_BLOCK.get(), "飞盘块");
 
         add(THIN_ICE_BLOCK.get(), "薄冰块");
         add(CRISPY_HONEY_BLOCK.get(), "松脆蜂蜜块");
