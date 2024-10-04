@@ -36,6 +36,7 @@ import org.confluence.mod.item.loot.*;
 import org.confluence.mod.item.mana.ManaWeapons;
 import org.confluence.mod.item.pickaxe.Pickaxes;
 import org.confluence.mod.item.potion.TerraPotions;
+import org.confluence.mod.item.staff.Staffs;
 import org.confluence.mod.item.sword.Swords;
 import org.confluence.mod.misc.ModRarity;
 import org.confluence.mod.misc.ModSoundEvents;
@@ -167,6 +168,7 @@ public final class ModItems {
         GunItems.init();
         FlailItems.init();
         Bows.init();
+        Staffs.init();
         ITEMS.register(bus);
     }
 }

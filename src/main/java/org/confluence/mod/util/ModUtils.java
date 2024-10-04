@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.FloatRGBA;
@@ -413,5 +414,10 @@ public final class ModUtils {
         consumer.accept(pConsumer.vertex(matrix4f,pz,0f,0f));
 
         pPoseStack.popPose();
+    }
+
+    public static List<? extends Entity> getNearbyEntities(double radius, Level level,
+                                          Class<? extends Entity> entity, AABB box) {
+        return level.getEntitiesOfClass(entity, box.inflate(radius));
     }
 }

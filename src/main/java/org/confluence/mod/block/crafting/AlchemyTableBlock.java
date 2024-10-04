@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -47,6 +48,8 @@ public class AlchemyTableBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        //if (!(pLevel instanceof ServerLevel))
+        //    return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);  //todo开起来渲染失效
         if (pState.getBlock() instanceof AlchemyTableBlock && pLevel.getBlockEntity(pPos) instanceof AlchemyTableBlock.Entity entity) {
             if (pPlayer.isShiftKeyDown()){
                 if (entity.firstColor == 0){
