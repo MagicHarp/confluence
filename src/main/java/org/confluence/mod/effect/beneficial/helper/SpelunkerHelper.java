@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.effect.ModEffects;
@@ -29,6 +30,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.confluence.mod.block.ModBlocks.DART_TRAP;
+import static org.confluence.mod.block.ModBlocks.SWITCH;
 
 
 /**
@@ -156,6 +160,34 @@ public class SpelunkerHelper {
             /**危险感知**/
             putTarget(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
             putTarget(Blocks.STONE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(ModBlocks.STONE_PRESSURE_PLATE.get(), Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(ModBlocks.INSTANTANEOUS_EXPLOSION_TNT.get(), Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(BoulderBlock.Variant.NORMAL.get(), Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(SWITCH.get(), Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(DART_TRAP.get(),Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(ModBlocks.DEEPSLATE_PRESSURE_PLATE.get(),  Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.TNT, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.TRIPWIRE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.SCULK_SHRIEKER, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.SCULK_SENSOR, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.DETECTOR_RAIL, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.ACTIVATOR_RAIL, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.ACACIA_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.BAMBOO_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.BIRCH_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.CRIMSON_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.CHERRY_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.WARPED_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.SPRUCE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.DARK_OAK_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.OAK_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.JUNGLE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.MANGROVE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE, Color.MAGENTA,true, ShowType.DANGER);
+            putTarget(ModBlocks.PLAYER_PRESSURE_PLATE.get(), Color.MAGENTA,true, ShowType.DANGER);
+
 
 
 

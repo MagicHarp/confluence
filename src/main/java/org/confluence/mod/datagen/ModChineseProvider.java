@@ -1280,6 +1280,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(WORKSHOP.get(), "工匠作坊");
         add(ALCHEMY_TABLE_BLOCK.get(), "炼药桌");
         add(BOMB_FISH.get(), "炸弹鱼");
+        add(STONE_PRESSURE_PLATE.get(), "石头压力板");
 
         // 功能性方块
         add(ECHO_BLOCK.get(), "回声块");
