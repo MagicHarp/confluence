@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
 public class BloodButcheredEffect extends MobEffect {
+    private static int tickCount = 0;
 
     public BloodButcheredEffect() {
         super(MobEffectCategory.HARMFUL, 0xFF0000);
@@ -14,25 +15,14 @@ public class BloodButcheredEffect extends MobEffect {
     public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         float damage;
 
-        switch (pAmplifier) {
-            case 2:
-                damage = 2F;
-                break;
-            case 3:
-                damage = 4F;
-                break;
-            case 4:
-                damage = 6F;
-                break;
-            case 5:
-                damage = 8F;
-                break;
-            default:
-                damage = 10F;
-                break;
+        if (tickCount >= 20){
+            tickCount = 0;
+            damage = pAmplifier + 2.0F;
+            pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(), damage);
         }
 
-        pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(), damage);
+        ++tickCount;
+
     }
 
     @Override
