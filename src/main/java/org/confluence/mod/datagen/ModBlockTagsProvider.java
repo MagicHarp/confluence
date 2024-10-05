@@ -46,9 +46,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
+    public @NotNull IntrinsicTagAppender<Block> tag(@NotNull TagKey<Block> pTag) {
+        return super.tag(pTag);
+    }
+
+    @Override
     public void addTags(HolderLookup.@NotNull Provider provider) {
         // 木制方块
-        LogBlocks.acceptAxeTag(tag(BlockTags.MINEABLE_WITH_AXE));
+        LogBlocks.acceptTags(this);
         // 矿物方块
         addTagsForBlocks(Ores.values());
         // 其他需要镐挖掘的方块

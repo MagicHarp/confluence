@@ -148,6 +148,7 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:placebo-283644:5414631") // 神化属性的前置
     //runtimeOnly fg.deobf("curse.maven:air-hop-323071:5048418") // 多段跳
     //runtimeOnly fg.deobf("curse.maven:puzzles-lib-495476:5475403") // 多段跳的前置
+    runtimeOnly fg.deobf("curse.maven:better-tips-nbt-tag-682363:4636196")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))

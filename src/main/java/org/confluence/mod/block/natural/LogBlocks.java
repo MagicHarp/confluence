@@ -1,7 +1,7 @@
 package org.confluence.mod.block.natural;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -17,9 +17,11 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
+import org.confluence.mod.datagen.ModBlockTagsProvider;
 import org.confluence.mod.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.function.Supplier;
 
+import static net.minecraft.data.tags.IntrinsicHolderTagsProvider.IntrinsicTagAppender;
 import static org.confluence.mod.block.ModBlocks.registerWithItem;
 import static org.confluence.mod.block.ModBlocks.registerWithoutItem;
 
@@ -36,6 +39,7 @@ public final class LogBlocks {
     public static final Hashtable<Block, Block> WRAPPED_STRIP = new Hashtable<>();
 
     public final String id;
+    public final boolean ignitedByLava;
     public final RegistryObject<Block> PLANKS;
     public RegistryObject<RotatedPillarBlock> LOG;
     public RegistryObject<RotatedPillarBlock> STRIPPED_LOG;
@@ -57,6 +61,7 @@ public final class LogBlocks {
 
     public LogBlocks(String id, BlockSetType blockSetType, WoodType woodType, boolean requiresTree, boolean ignitedByLava) {
         this.id = id;
+        this.ignitedByLava = ignitedByLava;
         BlockBehaviour.Properties planks = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD);
         this.PLANKS = registerWithItem(id + "_planks", () -> new Block(ignitedByLava ? planks.ignitedByLava() : planks));
         if (requiresTree) {
@@ -140,30 +145,99 @@ public final class LogBlocks {
         }
     }
 
-    public static void acceptAxeTag(IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block> tag) {
+    public static void acceptTags(ModBlockTagsProvider provider) {
+        IntrinsicTagAppender<Block> completes = provider.tag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL);
+        IntrinsicTagAppender<Block> burn = provider.tag(BlockTags.LOGS_THAT_BURN);
+        IntrinsicTagAppender<Block> logs = provider.tag(BlockTags.LOGS);
+        IntrinsicTagAppender<Block> planks = provider.tag(BlockTags.PLANKS);
+        IntrinsicTagAppender<Block> buttons = provider.tag(BlockTags.BUTTONS);
+        IntrinsicTagAppender<Block> woodenButtons = provider.tag(BlockTags.WOODEN_BUTTONS);
+        IntrinsicTagAppender<Block> stairs = provider.tag(BlockTags.STAIRS);
+        IntrinsicTagAppender<Block> woodenStairs = provider.tag(BlockTags.WOODEN_STAIRS);
+        IntrinsicTagAppender<Block> slabs = provider.tag(BlockTags.SLABS);
+        IntrinsicTagAppender<Block> woodenSlabs = provider.tag(BlockTags.WOODEN_SLABS);
+        IntrinsicTagAppender<Block> fences = provider.tag(BlockTags.FENCES);
+        IntrinsicTagAppender<Block> woodenFences = provider.tag(BlockTags.WOODEN_FENCES);
+        IntrinsicTagAppender<Block> forgeFences = provider.tag(Tags.Blocks.FENCES);
+        IntrinsicTagAppender<Block> forgeFencesWooden = provider.tag(Tags.Blocks.FENCES_WOODEN);
+        IntrinsicTagAppender<Block> fenceGates = provider.tag(BlockTags.FENCE_GATES);
+        IntrinsicTagAppender<Block> forgeFenceGates = provider.tag(Tags.Blocks.FENCE_GATES);
+        IntrinsicTagAppender<Block> forgeFenceGatesWooden = provider.tag(Tags.Blocks.FENCE_GATES_WOODEN);
+        IntrinsicTagAppender<Block> trapdoors = provider.tag(BlockTags.TRAPDOORS);
+        IntrinsicTagAppender<Block> woodenTrapdoors = provider.tag(BlockTags.WOODEN_TRAPDOORS);
+        IntrinsicTagAppender<Block> woodenPressurePlates = provider.tag(BlockTags.WOODEN_PRESSURE_PLATES);
+        IntrinsicTagAppender<Block> doors = provider.tag(BlockTags.DOORS);
+        IntrinsicTagAppender<Block> woodenDoors = provider.tag(BlockTags.WOODEN_DOORS);
+        IntrinsicTagAppender<Block> leaves = provider.tag(BlockTags.LEAVES);
+        IntrinsicTagAppender<Block> signs = provider.tag(BlockTags.SIGNS);
         for (LogBlocks logBlocks : LOG_BLOCKS) {
-            tag.add(logBlocks.PLANKS.get());
+            planks.add(logBlocks.PLANKS.get());
+
             if (logBlocks.LOG != null) {
-                tag.add(logBlocks.LOG.get());
+                RotatedPillarBlock value = logBlocks.LOG.get();
+                completes.add(value);
+                if (logBlocks.ignitedByLava) burn.add(value);
+                logs.add(value);
             }
             if (logBlocks.STRIPPED_LOG != null) {
-                tag.add(logBlocks.STRIPPED_LOG.get());
+                RotatedPillarBlock value = logBlocks.STRIPPED_LOG.get();
+                completes.add(value);
+                if (logBlocks.ignitedByLava) burn.add(value);
+                logs.add(value);
             }
             if (logBlocks.WOOD != null) {
-                tag.add(logBlocks.WOOD.get());
+                RotatedPillarBlock value = logBlocks.WOOD.get();
+                completes.add(value);
+                if (logBlocks.ignitedByLava) burn.add(value);
+                logs.add(value);
             }
             if (logBlocks.STRIPPED_WOOD != null) {
-                tag.add(logBlocks.STRIPPED_WOOD.get());
+                RotatedPillarBlock value = logBlocks.STRIPPED_WOOD.get();
+                completes.add(value);
+                if (logBlocks.ignitedByLava) burn.add(value);
+                logs.add(value);
             }
-            tag.add(logBlocks.BUTTON.get());
-            tag.add(logBlocks.FENCE.get());
-            tag.add(logBlocks.FENCE_GATE.get());
-            tag.add(logBlocks.PRESSURE_PLATE.get());
-            tag.add(logBlocks.SLAB.get());
-            tag.add(logBlocks.STAIRS.get());
-            tag.add(logBlocks.SIGN.get());
-            tag.add(logBlocks.TRAPDOOR.get());
-            tag.add(logBlocks.DOOR.get());
+            if (logBlocks.LEAVES != null) {
+                LeavesBlock leavesBlock = logBlocks.LEAVES.get();
+                completes.add(leavesBlock);
+                leaves.add(leavesBlock);
+            }
+
+            ButtonBlock buttonBlock = logBlocks.BUTTON.get();
+            buttons.add(buttonBlock);
+            woodenButtons.add(buttonBlock);
+
+            FenceBlock fenceBlock = logBlocks.FENCE.get();
+            fences.add(fenceBlock);
+            woodenFences.add(fenceBlock);
+            forgeFences.add(fenceBlock);
+            forgeFencesWooden.add(fenceBlock);
+
+            FenceGateBlock fenceGateBlock = logBlocks.FENCE_GATE.get();
+            fenceGates.add(fenceGateBlock);
+            forgeFenceGates.add(fenceGateBlock);
+            forgeFenceGatesWooden.add(fenceGateBlock);
+
+            PressurePlateBlock pressurePlateBlock = logBlocks.PRESSURE_PLATE.get();
+            woodenPressurePlates.add(pressurePlateBlock);
+
+            SlabBlock slabBlock = logBlocks.SLAB.get();
+            slabs.add(slabBlock);
+            woodenSlabs.add(slabBlock);
+
+            StairBlock stairBlock = logBlocks.STAIRS.get();
+            stairs.add(stairBlock);
+            woodenStairs.add(stairBlock);
+
+            signs.add(logBlocks.SIGN.get());
+
+            TrapDoorBlock trapDoorBlock = logBlocks.TRAPDOOR.get();
+            trapdoors.add(trapDoorBlock);
+            woodenTrapdoors.add(trapDoorBlock);
+
+            DoorBlock doorBlock = logBlocks.DOOR.get();
+            doors.add(doorBlock);
+            woodenDoors.add(doorBlock);
         }
     }
 

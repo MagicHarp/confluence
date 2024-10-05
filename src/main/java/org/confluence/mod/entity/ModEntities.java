@@ -12,8 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.boss.geoEntity.*;
 import org.confluence.mod.entity.boss.KingSlime;
+import org.confluence.mod.entity.boss.geoEntity.*;
 import org.confluence.mod.entity.chair.ChairEntity;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
@@ -22,6 +22,7 @@ import org.confluence.mod.entity.fishing.CurioFishingHook;
 import org.confluence.mod.entity.fishing.HotlineFishingHook;
 import org.confluence.mod.entity.hook.*;
 import org.confluence.mod.entity.minion.FinchMinionEntity;
+import org.confluence.mod.entity.model.CrownOfKingSlimeModelEntity;
 import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.arrows.BaseArrowEntity;
 import org.confluence.mod.entity.projectile.bombs.*;
@@ -117,8 +118,9 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BombFishEntity>> BOMB_FISH_ENTITY = ENTITIES.register("bomb_fish_entity", () -> EntityType.Builder.<BombFishEntity>of(BombFishEntity::new, MobCategory.MISC).sized(0.375F, 0.375F).clientTrackingRange(4).updateInterval(10).build("confluence:bomb_fish_entity"));
     public static final RegistryObject<EntityType<StepStoolEntity>> STEP_STOOL = ENTITIES.register("step_stool", () -> EntityType.Builder.<StepStoolEntity>of(StepStoolEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).build("confluence:step_stool"));
 
-    /** BOSS **/
+    // BOSS
     public static final RegistryObject<EntityType<KingSlime>> KING_SLIME = ENTITIES.register("king_slime", () -> EntityType.Builder.<KingSlime>of(KingSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:king_slime"));
+    public static final RegistryObject<EntityType<CrownOfKingSlimeModelEntity>> CROWN_OF_KING_SLIME_MODEL = ENTITIES.register("crown_of_king_slime_model", () -> EntityType.Builder.of(CrownOfKingSlimeModelEntity::new, MobCategory.MISC).sized(0.0F, 0.0F).clientTrackingRange(10).build("confluence:crown_of_king_slime_model"));
     public static final RegistryObject<EntityType<CthulhuEye>> CTHULHU_EYE = ENTITIES.register("cthulhu_eye", () -> EntityType.Builder.<CthulhuEye>of(CthulhuEye::new, MobCategory.MONSTER)
             .sized(2.04F, 2.04F)
             .clientTrackingRange(200)
@@ -129,7 +131,7 @@ public final class ModEntities {
             .clientTrackingRange(200)
             .setTrackingRange(200)
             .build("confluence:cthulhu_eye"));
-    public static final RegistryObject<EntityType<EaterOfWorld_Segment>>EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorld_Segment>of(EaterOfWorld_Segment::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EaterOfWorld_Segment>> EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorld_Segment>of(EaterOfWorld_Segment::new, MobCategory.MONSTER)
             .sized(3F, 3F)
             .clientTrackingRange(200)
             .noSave()
@@ -142,8 +144,6 @@ public final class ModEntities {
             .clientTrackingRange(10)
             .setTrackingRange(100)
             .build("confluence:king_skull_hand"));
-
-
 
 
     private static RegistryObject<EntityType<BaseSlime>> registerSlime(String prefix, int color, int size) {
