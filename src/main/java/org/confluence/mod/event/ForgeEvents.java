@@ -13,7 +13,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -122,5 +124,13 @@ public final class ForgeEvents {
     @SubscribeEvent
     public static void livingTick(LivingEvent.LivingTickEvent event) {
         ModAttributes.applyPickupRange(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void entityJoinLevel(EntityJoinLevelEvent event) {
+        if (!event.getLevel().isClientSide && event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() instanceof LivingEntity living) {
+            ModAttributes.applyToArrow(living, arrow);
+            MoltenQuiver.applyToArrow(living, arrow);
+        }
     }
 }

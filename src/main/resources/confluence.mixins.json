@@ -11,8 +11,7 @@
         "LivingEntityAccessor",
         "LivingEntityMixin",
         "SlimeBlockMixin",
-        "TagLoaderMixin",
-        "tetra.ModularBowItemMixin"
+        "TagLoaderMixin"
     ],
     "minVersion": "0.8.5",
     "client": [
