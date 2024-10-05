@@ -90,7 +90,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> TR_AMETHYST_SAPLING = registerWithItem("tr_amethyst_sapling", () -> new StoneSaplingBlock(new TrAmethystTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> ASH_SAPLING = registerWithItem("ash_sapling", () -> new AshSaplingBlock(new AshTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     // desert
-    public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM);
+    public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM, properties -> () -> new LeavesBlock(properties));
     // ash
     public static final LogBlocks ASH_LOG_BLOCKS = new LogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
     public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", AshBlock::new);
