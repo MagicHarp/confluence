@@ -10,7 +10,16 @@
                     "conditions": [
                         {
                             "condition": "minecraft:random_chance",
-                            "chance": 0.2
+                            "chance": 0.5
+                        },
+                        {
+                            "condition": "minecraft:damage_source_properties",
+                            "predicate": {
+                                "direct_entity": {
+                                    "type": "minecraft:player"
+                                },
+                                "is_direct": true
+                            }
                         }
                     ]
                 },
@@ -21,6 +30,15 @@
                         {
                             "condition": "minecraft:random_chance",
                             "chance": 0.2
+                        },
+                        {
+                            "condition": "minecraft:damage_source_properties",
+                            "predicate": {
+                                "direct_entity": {
+                                    "type": "minecraft:player"
+                                },
+                                "is_direct": true
+                            }
                         }
                     ]
                 },
@@ -31,6 +49,15 @@
                         {
                             "condition": "minecraft:random_chance",
                             "chance": 0.2
+                        },
+                        {
+                            "condition": "minecraft:damage_source_properties",
+                            "predicate": {
+                                "direct_entity": {
+                                    "type": "minecraft:player"
+                                },
+                                "is_direct": true
+                            }
                         }
                     ]
                 }

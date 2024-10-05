@@ -7,6 +7,15 @@
                 {
                     "type": "minecraft:item",
                     "name": "confluence:frog_leg"
+                },
+                {
+                    "condition": "minecraft:damage_source_properties",
+                    "predicate": {
+                        "direct_entity": {
+                            "type": "minecraft:player"
+                        },
+                        "is_direct": true
+                    }
                 }
             ]
         }

@@ -7,6 +7,15 @@
                 {
                     "type": "minecraft:item",
                     "name": "confluence:paladins_shield"
+                },
+                {
+                    "condition": "minecraft:damage_source_properties",
+                    "predicate": {
+                        "direct_entity": {
+                            "type": "minecraft:player"
+                        },
+                        "is_direct": true
+                    }
                 }
             ]
         }

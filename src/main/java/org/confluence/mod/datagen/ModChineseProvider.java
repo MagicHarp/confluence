@@ -185,8 +185,10 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.frog_leg.info", "它有几率从青蛙身上掉落。");
         add("item.confluence.hermes_boots.info", "它可以在村庄盔甲匠的宝箱中找到。");
         add("item.confluence.lava_charm.info", "它有几率从烈焰人掉落。");
+        add("item.confluence.lucky_horseshoe.info", "它可以在沙漠神殿，末地城，丛林遗迹或古代城市的箱子中找到。");
         add("item.confluence.magiluminescence.info", "它可以在末地城的宝箱中找到。");
         add("item.confluence.sailfish_boots.info", "它可以在沉船宝箱中找到.");
+        add("item.confluence.sandstorm_in_a_bottle.info", "它可以在沙漠神殿的宝箱中找到。");
         add("item.confluence.shiny_red_balloon.info", "当玩家拥有村庄英雄效果时，图书管理员有几率将此物品交给玩家。");
         add("item.confluence.shoe_spikes.info","它有几率从蜘蛛身上掉落。");
         add("item.confluence.step_stool.info", "你可以在锻造台使用梯凳升级它的额外高度");
@@ -230,7 +232,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.feral_claws.info", "它可以在丛林神庙内的箱子中找到。");
         add("item.confluence.flashlight.info", "它可以在要塞内的箱子中找到。");
         add("item.confluence.flesh_knuckles.info", "它有几率从猪灵蛮兵身上掉落。");
-        add("item.confluence.frozen_turtle_shell.info2", "当海龟因冰冻而死时，有几率掉落这个饰品。");
+        add("item.confluence.frozen_turtle_shell.info", "当海龟因冰冻而死时，有几率掉落这个饰品。");
+        add("item.confluence.hand_drill.info", "它有几率从远古守卫者身上掉落。");
         add("item.confluence.holy_water.info", "它有几率从凋零骷髅身上掉落。");
         add("item.confluence.honey_comb.info", "它有几率从蜜蜂身上掉落。");
         add("item.confluence.magic_quiver.info7", "这件物品有几率从凋零骷髅身上掉落。");
