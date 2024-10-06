@@ -1,0 +1,17 @@
+{
+  "type": "confluence:palm_tree",
+  "config": {
+    "trunk_block": {
+      "type": "simple_state_provider",
+      "state": {
+        "Name": "confluence:palm_log"
+      }
+    },
+    "leaves_block": {
+      "type": "simple_state_provider",
+      "state": {
+        "Name": "confluence:palm_leaves"
+      }
+    }
+  }
+}

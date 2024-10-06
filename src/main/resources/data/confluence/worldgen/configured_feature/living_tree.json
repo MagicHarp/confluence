@@ -1,0 +1,20 @@
+{
+  "type": "confluence:living_tree",
+  "config": {
+    "trunk_block": {
+      "type": "simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_wood"
+      }
+    },
+    "leaves_block": {
+      "type": "simple_state_provider",
+      "state": {
+        "Name": "minecraft:oak_leaves",
+        "Properties": {
+          "persistent": "true"
+        }
+      }
+    }
+  }
+}

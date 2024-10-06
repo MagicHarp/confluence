@@ -33,6 +33,8 @@ public final class ModFeatures {
     public static final RegistryObject<JewelryTreeFeature> JEWELRY_TREE = FEATURES.register("jewelry_tree", () -> new JewelryTreeFeature(JewelryTreeFeature.Config.CODEC));
     public static final RegistryObject<ThinIcePatchFeature> THIN_ICE_PATCH = FEATURES.register("thin_ice_patch", () -> new ThinIcePatchFeature(ThinIcePatchFeature.Config.CODEC));
     public static final RegistryObject<SimpleBlockNBTFeature> SIMPLE_BLOCK_NBT = FEATURES.register("simple_block_nbt", () -> new SimpleBlockNBTFeature(SimpleBlockNBTFeature.Config.CODEC));
+    public static final RegistryObject<PalmTreeFeature> PALM_TREE = FEATURES.register("palm_tree", () -> new PalmTreeFeature(PalmTreeFeature.Config.CODEC));
+    public static final RegistryObject<LivingTreeFeature> LIVING_TREE = FEATURES.register("living_tree", () -> new LivingTreeFeature(LivingTreeFeature.Config.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHADOW = ResourceKey.create(Registries.CONFIGURED_FEATURE, Confluence.asResource("trees_set/trees_tr_crimson"));
     public static final ResourceKey<ConfiguredFeature<?, ?>> EBONY = ResourceKey.create(Registries.CONFIGURED_FEATURE, Confluence.asResource("trees_set/trees_corruption"));
