@@ -24,6 +24,7 @@ public final class GunItems {
     public static final RegistryObject<StarCannonItem> STARCANNON = ITEMS.register("starcannon", StarCannonItem::new);
     public static final RegistryObject<BlowpipeItem> BLOWPIPE = ITEMS.register("blowpipe", BlowpipeItem::new);
     public static final RegistryObject<BlowgunItem> BLOWGUN = ITEMS.register("blowgun", BlowgunItem::new);
+    public static final RegistryObject<DebugGunItem> DEBUGGUN = ITEMS.register("debuggun", DebugGunItem::new);
 
     public static void init() {}
 }

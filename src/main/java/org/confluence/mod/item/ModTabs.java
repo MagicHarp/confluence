@@ -402,6 +402,15 @@ public final class ModTabs {
                 for (Staffs staff : Staffs.values()) output.accept(staff.get());
             })
             .build());
+    // 开发者物品
+    public static final RegistryObject<CreativeModeTab> DEVELOPER = TABS.register("developer",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.DEVELOPER_ICON.get()))
+                    .title(Component.translatable("creativetab.confluence.developer"))
+                    .displayItems((parameters, output) -> {
+                        output.accept(Swords.CROWBAR.get());
+                        output.accept(GunItems.DEBUGGUN.get());
+                    })
+                    .build());
     // 食物与药水
     public static final RegistryObject<CreativeModeTab> FOOD_AND_POTIONS = TABS.register("food_and_potions",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.POTION_ICON.get()))

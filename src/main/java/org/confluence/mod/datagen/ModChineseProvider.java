@@ -59,6 +59,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.armors", "汇流来世 | 盔甲");
         add("creativetab.confluence.accessories", "汇流来世 | 配饰");
         add("creativetab.confluence.mechanical", "汇流来世 | 器械");
+        add("creativetab.confluence.developer", "汇流来世 | 开发者物品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
 
@@ -1510,6 +1511,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(GunItems.UZI.get(), "乌兹冲锋枪");
         add(GunItems.SHOTGUN.get(), "霰弹枪");
         add(GunItems.MUSKET.get(), "火枪");
+        add(GunItems.DEBUGGUN.get(), "调试枪");
         add(Bows.WOODEN_SHORT_BOW.get(), "木短弓");
         add(Bows.COPPER_SHORT_BOW.get(), "铜短弓");
         add(Bows.TIN_SHORT_BOW.get(), "锡短弓");

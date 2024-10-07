@@ -46,7 +46,7 @@ public class TacticalShotgunItem extends AbstractGunItem {
                 int r = arm == HumanoidArm.RIGHT ? 1 : -1;
                 poseStack.translate(r * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
 
-                poseStack.translate(r * 0F, -0.15F, -0.1);
+                poseStack.translate(r * 0F, 0, 0);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0F));
                 poseStack.mulPose(Axis.YP.rotationDegrees(r * 0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(r * 0F));

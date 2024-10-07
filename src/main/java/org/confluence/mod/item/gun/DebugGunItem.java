@@ -18,20 +18,20 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 
 import java.util.function.Consumer;
 
-public class BoomstickItem extends AbstractGunItem {
-    public BoomstickItem() {
-        super(ModRarity.GREEN);
+public class DebugGunItem extends AbstractGunItem {
+    public DebugGunItem() {
+        super(ModRarity.RED);
     }
 
     @Override
     public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private DefaultGunItemRenderer<BoomstickItem> renderer;
+            private DefaultGunItemRenderer<DebugGunItem> renderer;
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (renderer == null) {
-                    this.renderer = new DefaultGunItemRenderer<>("boomstick");
+                    this.renderer = new DefaultGunItemRenderer<>("debuggun");
                 }
                 return renderer;
             }

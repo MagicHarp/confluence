@@ -24,6 +24,7 @@ public class IconItem extends Item implements CustomModel {
         POTION_ICON("potion_icon"),
         PRECIOUS_ICON("precious_icon"),
         SUMMON_ICON("summon_icon"),
+        DEVELOPER_ICON("developer_icon"),
         ACCESSORIES_ICON("accessories_icon"),
         TOOLS_ICON("tools_icon"),
         MECHANICAL_ICON("mechanical_icon");
