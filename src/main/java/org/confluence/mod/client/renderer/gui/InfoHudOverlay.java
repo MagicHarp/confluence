@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.handler.InformationHandler;
 
 public class InfoHudOverlay implements IGuiOverlay {
@@ -17,11 +18,16 @@ public class InfoHudOverlay implements IGuiOverlay {
         gui.setupOverlayRenderState(true, false);
         gui.getMinecraft().getProfiler().push("info");
 
-        int top = screenHeight / 2;
+        int top = (int) (screenHeight * ClientConfigs.informationHudTop);
         Font font = gui.getFont();
         for (Component info : InformationHandler.getInformation()) {
+            int left;
             int w = font.width(info);
-            int left = screenWidth - 2 - w;
+            if (ClientConfigs.informationIsLeft) {
+                left = 2;
+            } else {
+                left = screenWidth - 2 - w;
+            }
             guiGraphics.fill(left - 1, top - 1, left + w + 1, top + font.lineHeight - 1, background);
             guiGraphics.drawString(font, info, left, top, textColor, false);
             top += font.lineHeight;
