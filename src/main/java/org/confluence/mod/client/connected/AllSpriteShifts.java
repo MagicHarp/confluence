@@ -4,6 +4,7 @@ import org.confluence.mod.Confluence;
 
 public class AllSpriteShifts {
     public static final CTSpriteShiftEntry ANDESITE_CASING = omni("andesite_casing");
+    public static final CTSpriteShiftEntry THIN_ICE_BLOCK = omni("thin_ice_block");
     public static final CTSpriteShiftEntry SUN_PLATE = omni("sun_plate");
     public static final CTSpriteShiftEntry PURE_GLASS = omni("pure_glass");
     public static final CTSpriteShiftEntry WHITE_PURE_GLASS = omni("white_pure_glass");

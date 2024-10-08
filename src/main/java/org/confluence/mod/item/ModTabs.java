@@ -4,7 +4,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
@@ -245,8 +247,6 @@ public final class ModTabs {
                 output.accept(ModItems.SILVER_COIN.get());
                 output.accept(ModItems.GOLDEN_COIN.get());
                 output.accept(ModItems.PLATINUM_COIN.get());
-                output.accept(ModItems.EXPERT_TEST_ITEM.get());
-                output.accept(ModItems.MASTER_TEST_ITEM.get());
                 output.accept(ModItems.STAR.get());
                 output.accept(ModItems.SOUL_CAKE.get());
                 output.accept(ModItems.SUGAR_PLUM.get());
@@ -407,8 +407,20 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItem.Icons.DEVELOPER_ICON.get()))
                     .title(Component.translatable("creativetab.confluence.developer"))
                     .displayItems((parameters, output) -> {
+                        output.accept(Blocks.COMMAND_BLOCK);
+                        output.accept(Blocks.CHAIN_COMMAND_BLOCK);
+                        output.accept(Blocks.REPEATING_COMMAND_BLOCK);
+                        output.accept(Blocks.BARRIER);
+                        output.accept(Blocks.STRUCTURE_BLOCK);
+                        output.accept(Blocks.STRUCTURE_VOID);
+                        output.accept(Blocks.JIGSAW);
+                        output.accept(Items.KNOWLEDGE_BOOK);
+                        output.accept(Items.DEBUG_STICK);
                         output.accept(Swords.CROWBAR.get());
                         output.accept(GunItems.DEBUGGUN.get());
+                        output.accept(Swords.DEVELOPER_SWORD.get());
+                        output.accept(ModItems.EXPERT_TEST_ITEM.get());
+                        output.accept(ModItems.MASTER_TEST_ITEM.get());
                     })
                     .build());
     // 食物与药水

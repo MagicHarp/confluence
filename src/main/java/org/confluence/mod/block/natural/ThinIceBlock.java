@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import org.confluence.mod.block.common.CustomModelBlock;
+import org.confluence.mod.datagen.limit.CustomModel;
 import org.confluence.mod.mixinauxiliary.ILivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
