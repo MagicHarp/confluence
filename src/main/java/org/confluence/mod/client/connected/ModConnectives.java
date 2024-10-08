@@ -35,10 +35,10 @@ public final class ModConnectives {
         registerCasingConnectivity(DecorativeBlocks.PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.PURE_GLASS));
         registerCTBehaviour(DecorativeBlocks.WHITE_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.WHITE_PURE_GLASS));
         registerCasingConnectivity(DecorativeBlocks.WHITE_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.WHITE_PURE_GLASS));
-        registerCTBehaviour(DecorativeBlocks.LIGHT_GREY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.LIGHT_GREY_PURE_GLASS));
-        registerCasingConnectivity(DecorativeBlocks.LIGHT_GREY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.LIGHT_GREY_PURE_GLASS));
-        registerCTBehaviour(DecorativeBlocks.GREY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.GREY_PURE_GLASS));
-        registerCasingConnectivity(DecorativeBlocks.GREY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.GREY_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.LIGHT_GRAY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.LIGHT_GRAY_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.LIGHT_GRAY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.LIGHT_GRAY_PURE_GLASS));
+        registerCTBehaviour(DecorativeBlocks.GRAY_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.GRAY_PURE_GLASS));
+        registerCasingConnectivity(DecorativeBlocks.GRAY_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.GRAY_PURE_GLASS));
         registerCTBehaviour(DecorativeBlocks.BLACK_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.BLACK_PURE_GLASS));
         registerCasingConnectivity(DecorativeBlocks.BLACK_PURE_GLASS.get(), (block, cc) -> cc.makeCasing(block, AllSpriteShifts.BLACK_PURE_GLASS));
         registerCTBehaviour(DecorativeBlocks.BROWN_PURE_GLASS.get(), () -> new EncasedCTBehaviour(AllSpriteShifts.BROWN_PURE_GLASS));

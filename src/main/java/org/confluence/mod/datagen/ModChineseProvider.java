@@ -928,8 +928,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(MARBLE_COLUMN.get(), "异域大理岩梁");
         add(PURE_GLASS.get(), "纯净玻璃块");
         add(WHITE_PURE_GLASS.get(), "白色纯净玻璃块");
-        add(LIGHT_GREY_PURE_GLASS.get(), "淡灰色玻璃块");
-        add(GREY_PURE_GLASS.get(), "灰色纯净玻璃块");
+        add(LIGHT_GRAY_PURE_GLASS.get(), "淡灰色玻璃块");
+        add(GRAY_PURE_GLASS.get(), "灰色纯净玻璃块");
         add(BLACK_PURE_GLASS.get(), "黑色纯净玻璃块");
         add(BROWN_PURE_GLASS.get(), "棕色纯净玻璃块");
         add(RED_PURE_GLASS.get(), "红色纯净玻璃块");

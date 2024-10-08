@@ -25,8 +25,8 @@ public final class DecorativeBlocks {
 
     public static final RegistryObject<Block> PURE_GLASS = registerWithItem("pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> WHITE_PURE_GLASS = registerWithItem("white_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
-    public static final RegistryObject<Block> LIGHT_GREY_PURE_GLASS = registerWithItem("light_grey_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
-    public static final RegistryObject<Block> GREY_PURE_GLASS = registerWithItem("grey_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> LIGHT_GRAY_PURE_GLASS = registerWithItem("light_gray_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> GRAY_PURE_GLASS = registerWithItem("gray_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> BLACK_PURE_GLASS = registerWithItem("black_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> BROWN_PURE_GLASS = registerWithItem("brown_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
     public static final RegistryObject<Block> RED_PURE_GLASS = registerWithItem("red_pure_glass", () -> new ConnectedGlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS)));
