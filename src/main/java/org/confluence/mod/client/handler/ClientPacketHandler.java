@@ -17,6 +17,7 @@ public final class ClientPacketHandler {
     private static boolean hasTabi = false;
     private static boolean hasScope = false;
     private static int rightClickSubtractor = 0;
+    private static boolean hasMagiluminescence = false;
 
     public static boolean couldAutoAttack() {
         return autoAttack;
@@ -78,5 +79,15 @@ public final class ClientPacketHandler {
         NetworkEvent.Context context = ctx.get();
         context.enqueueWork(() -> rightClickSubtractor = packet.amount());
         context.setPacketHandled(true);
+    }
+
+    public static void handleMagiluminescence(MagiluminescencePacketS2C packet, Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        context.enqueueWork(() -> hasMagiluminescence = packet.has());
+        context.setPacketHandled(true);
+    }
+
+    public static boolean isHasMagiluminescence() {
+        return hasMagiluminescence;
     }
 }

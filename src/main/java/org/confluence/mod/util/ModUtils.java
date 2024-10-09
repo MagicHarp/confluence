@@ -37,9 +37,9 @@ public final class ModUtils {
         boolean b = amount > 0.0;
         amount *= 100.0;
         return Component.translatable(
-            "prefix.confluence.tooltip." + (b ? "plus" : "take"),
-            ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
-            Component.translatable("prefix.confluence.tooltip." + type)
+                "prefix.confluence.tooltip." + (b ? "plus" : "take"),
+                ATTRIBUTE_MODIFIER_FORMAT.format(b ? amount : -amount),
+                Component.translatable("prefix.confluence.tooltip." + type)
         ).withStyle(b ? ChatFormatting.BLUE : ChatFormatting.RED);
     }
 
@@ -59,6 +59,7 @@ public final class ModUtils {
         AtomicInteger climb = new AtomicInteger();
         AtomicBoolean shield = new AtomicBoolean();
         AtomicBoolean tabi = new AtomicBoolean();
+        AtomicBoolean magil = new AtomicBoolean();
 
 
         CuriosApi.getCuriosInventory(serverPlayer).ifPresent(curiosItemHandler -> {
@@ -69,6 +70,8 @@ public final class ModUtils {
                 if (curio == CurioItems.SHIELD_OF_CTHULHU.get()) {
                     shield.set(true);
                     continue;
+                } else if (curio == CurioItems.MAGILUMINESCENCE.get()) {
+                    magil.set(true);
                 }
                 if (curio instanceof FartInAJar fart) {
                     fartSpeed.set(fart.getJumpSpeed());
@@ -122,44 +125,48 @@ public final class ModUtils {
 
 
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerJumpPacketS2C(
-                fartSpeed.get(),
-                sandstormSpeed.get(),
-                sandstormTicks.get(),
-                blizzardSpeed.get(),
-                blizzardTicks.get(),
-                tsunamiSpeed.get(),
-                cloudSpeed.get()
-            )
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerJumpPacketS2C(
+                        fartSpeed.get(),
+                        sandstormSpeed.get(),
+                        sandstormTicks.get(),
+                        blizzardSpeed.get(),
+                        blizzardTicks.get(),
+                        tsunamiSpeed.get(),
+                        cloudSpeed.get()
+                )
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerFlyPacketS2C(maxFlyTicks.get(), flySpeed.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new AutoAttackPacketS2C(autoAttack.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new AutoAttackPacketS2C(autoAttack.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new ScopeEnablePacketS2C(scope.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new ScopeEnablePacketS2C(scope.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new RightClickSubtractorPacketS2C(substractor.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new RightClickSubtractorPacketS2C(substractor.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new PlayerClimbPacketS2C(climb.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new PlayerClimbPacketS2C(climb.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new ShieldOfCthulhuPacketS2C(shield.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new ShieldOfCthulhuPacketS2C(shield.get())
         );
         NetworkHandler.CHANNEL.send(
-            PacketDistributor.PLAYER.with(() -> serverPlayer),
-            new TabiPacketS2C(tabi.get())
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new TabiPacketS2C(tabi.get())
+        );
+        NetworkHandler.CHANNEL.send(
+                PacketDistributor.PLAYER.with(() -> serverPlayer),
+                new MagiluminescencePacketS2C(magil.get())
         );
     }
 }

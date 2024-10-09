@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 public final class InformationHandler {
     private static final ArrayList<Component> information = new ArrayList<>();
 
-    private static final byte[] infoData = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private static final byte[] infoData = new byte[12];
     private static final Int2ObjectOpenHashMap<byte[]> REMOTE_DATA = new Int2ObjectOpenHashMap<>();
 
     private static @Nullable Function<Long, Component> timeInfo = null;
@@ -151,52 +151,26 @@ public final class InformationHandler {
                 case MinuteWatch.OWNER, MinuteWatch.OTHER -> MinuteWatch::wrapTime;
                 default -> null;
             };
-
-            b = enabled[IWeatherRadio.INDEX];
-            c = infoData[IWeatherRadio.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IWeatherRadio.INDEX] = b;
-
-            b = enabled[ISextant.INDEX];
-            c = infoData[ISextant.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[ISextant.INDEX] = b;
-
-            b = enabled[IFishermansPocketGuide.INDEX];
-            c = infoData[IFishermansPocketGuide.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IFishermansPocketGuide.INDEX] = b;
-
-            b = enabled[IMetalDetector.INDEX];
-            c = infoData[IMetalDetector.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IMetalDetector.INDEX] = b;
-
-            b = enabled[ILifeFormAnalyzer.INDEX];
-            c = infoData[ILifeFormAnalyzer.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[ILifeFormAnalyzer.INDEX] = b;
-
-            b = enabled[IRadar.INDEX];
-            c = infoData[IRadar.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IRadar.INDEX] = b;
-
-            b = enabled[ITallyCounter.INDEX];
-            c = infoData[ITallyCounter.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[ITallyCounter.INDEX] = b;
-
-            b = enabled[IDPSMeter.INDEX];
-            c = infoData[IDPSMeter.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IDPSMeter.INDEX] = b;
-
-            b = enabled[IStopwatch.INDEX];
-            c = infoData[IStopwatch.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IStopwatch.INDEX] = b;
-
-            b = enabled[ICompass.INDEX];
-            c = infoData[ICompass.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[ICompass.INDEX] = b;
-
-            b = enabled[IDepthMeter.INDEX];
-            c = infoData[IDepthMeter.INDEX];
-            if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[IDepthMeter.INDEX] = b;
+            setInfoData(enabled, IWeatherRadio.INDEX);
+            setInfoData(enabled, ISextant.INDEX);
+            setInfoData(enabled, IFishermansPocketGuide.INDEX);
+            setInfoData(enabled, IMetalDetector.INDEX);
+            setInfoData(enabled, ILifeFormAnalyzer.INDEX);
+            setInfoData(enabled, IRadar.INDEX);
+            setInfoData(enabled, ITallyCounter.INDEX);
+            setInfoData(enabled, IDPSMeter.INDEX);
+            setInfoData(enabled, IStopwatch.INDEX);
+            setInfoData(enabled, ICompass.INDEX);
+            setInfoData(enabled, IDepthMeter.INDEX);
         });
         context.setPacketHandled(true);
+    }
+
+    private static void setInfoData(byte[] enabled, byte index) {
+        byte b = enabled[index];
+        byte c = infoData[index];
+        // 玩家发给自己的信息 || 收到别人共享的信息
+        if ((b >= 0 && c >= 0) || (b != -128 && c <= 0)) infoData[index] = b;
     }
 
     public static void handleEntityKilled(EntityKilledPacketS2C packet, Supplier<NetworkEvent.Context> ctx) {

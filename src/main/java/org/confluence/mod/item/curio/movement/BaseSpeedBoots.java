@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.color.FloatRGB;
+import org.confluence.mod.client.handler.ClientPacketHandler;
 import org.confluence.mod.client.particle.options.CurrentDustOptions;
 import org.confluence.mod.item.curio.BaseCurioItem;
 import org.confluence.mod.misc.ModSoundEvents;
@@ -65,6 +66,7 @@ public class BaseSpeedBoots extends BaseCurioItem {
             int speed = nbt.getInt("speed");
             if (player.zza > 0) {
                 if (player.onGround()) {
+                    if (ClientPacketHandler.isHasMagiluminescence()) addition *= 2;
                     int actually = Math.min(max - speed, addition);
                     if (actually > 0) {
                         NetworkHandler.CHANNEL.sendToServer(new SpeedBootsNBTPacketC2S(slotContext.index(), speed + actually));
