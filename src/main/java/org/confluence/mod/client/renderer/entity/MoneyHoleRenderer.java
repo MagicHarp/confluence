@@ -43,7 +43,7 @@ public class MoneyHoleRenderer extends EntityRenderer<MoneyHoleEntity> {
             pPoseStack.mulPose(Axis.YP.rotation(Mth.HALF_PI - (float) Math.atan2(vec32.z, vec32.x)));
             pPoseStack.mulPose(Axis.XP.rotation(Mth.HALF_PI + (float) Math.acos(vec32.y)));
         }
-        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(TEXTURE)), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        model.renderToBuffer(pPoseStack, pBuffer.getBuffer(model.renderType(TEXTURE)), 0xF000F0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pPoseStack.popPose();
     }
 }
