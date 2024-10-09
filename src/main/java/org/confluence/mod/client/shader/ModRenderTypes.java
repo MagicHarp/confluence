@@ -1,5 +1,6 @@
 package org.confluence.mod.client.shader;
 
+import com.lowdragmc.shimmer.forge.ShimmerMod;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
@@ -79,6 +80,7 @@ public final class ModRenderTypes extends RenderStateShard {
                     DefaultVertexFormat.NEW_ENTITY),
                 shader -> entityDynamic = shader
             );
+
             event.registerShader(
                 new ShaderInstance(
                     resourceProvider,

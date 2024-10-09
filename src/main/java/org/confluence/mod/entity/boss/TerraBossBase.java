@@ -24,10 +24,13 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -41,6 +44,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -53,6 +57,9 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
 
     public float ironGlomResistance = 0.4f;
     public float explosionResistance = 0.5f;
+    public int attackInternal = 20;
+    private int _attackInternal = 20;
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(getDisplayName(), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS).setDarkenScreen(true);
 
@@ -148,6 +155,7 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
         }
         collisionHurt();
         super.tick();
+        attackInternal--;
         this.setDeltaMovement(getDeltaMovement().scale(0.95));//空气阻力
     }
 
@@ -189,8 +197,11 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
             var entities = level().getEntities(this, this.getBoundingBox());
             if (!entities.isEmpty()) {
                 for (var e : entities) {
-                    if (canAttack(e))
-                        e.hurt(this.damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                    if (canAttack(e)){
+                        attackInternal = _attackInternal;
+                        //测试末影龙
+                        e.hurt(this.damageSources().explosion(new Explosion(level(), this, 0.0f, 0,0,3, List.of(this.blockPosition()))), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                    }
                 }
             }
        }
@@ -202,11 +213,13 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
         if(pSource.is(DamageTypes.EXPLOSION)){
             pAmount *= explosionResistance;
         }
+
         return super.hurt(pSource,pAmount);
     }
 
     public boolean canAttack(Entity entity) {
-        return entity instanceof Player || getTarget() != null && getTarget().is(entity) && entity != this &&!(entity instanceof TerraBossBase);
+        return attackInternal < 0 &&
+                (entity instanceof Player || getTarget() != null && getTarget().is(entity) && entity != this &&!(entity instanceof TerraBossBase));
     }
 
 
