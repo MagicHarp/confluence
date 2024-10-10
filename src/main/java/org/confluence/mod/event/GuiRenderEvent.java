@@ -17,6 +17,8 @@ import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.bow.Bows;
+import org.confluence.mod.item.bow.ShortBowItem;
 import org.confluence.mod.util.DelayedTaskExecutor;
 import org.joml.Matrix4f;
 
@@ -31,48 +33,44 @@ public class GuiRenderEvent {
 
         if(Minecraft.getInstance().player.isUsingItem() && Minecraft.getInstance().player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof BowItem){
             Minecraft mc = Minecraft.getInstance();
-
             float charge = mc.player.getTicksUsingItem() / 20.0f;
             if(charge < 0.1f) return;
+            var pose = event.getPoseStack();
+            pose.pushPose();
+            ItemStack bow = mc.player.getItemInHand(InteractionHand.MAIN_HAND);
 
-            //todo 
-            //ArrowItem arrowItem = mc.player.getProjectile()
 
             //拉弓前后位移
             float scale = 1f;
             float offset = charge < 0.65f? 0:
-                    charge < 0.9f?0.65f:0.9f;
+                    charge < 0.9f?0.58f:1f;
 
-            var pose = event.getPoseStack();
-
-            pose.pushPose();
-            pose.translate(0.3, -0.2, -0.6+offset*0.3);
-            pose.scale(scale,scale,scale);
-            pose.mulPose(Axis.YP.rotationDegrees(2));
-            pose.mulPose(Axis.XP.rotationDegrees(-100));
-
-            ItemStack bow = mc.player.getItemInHand(InteractionHand.MAIN_HAND);
-
-            //应用抖动
             float f7 = (float)bow.getUseDuration() - ((float)mc.player.getUseItemRemainingTicks());
             float f11 = f7 / 10.0F;
-            if (f11 > 1.0F) {
-                f11 = 1.0F;
+            f11=Math.min(f11,1);
+            float f19 = f11 > 0.1F?Mth.sin((f7 - 0.1F) * 1.3F) * (f11 - 0.1F):0;
+            //应用抖动
+            //               左右偏移        上下抖动系数
+            pose.translate(0.29, f19 * 0.004F-0.1,0);
+            if(bow.getItem() instanceof ShortBowItem){
+                float f12 = Math.min(f7 / 20.0F,1);
+                //                                  前后帧偏移系数
+                pose.translate(0,0, -0.6 + f12*0.13);
+            } else{
+                //                                  前后阶段偏移系数  前后帧偏移系数
+                pose.translate(0,0, offset*0.13-0.6 + f11*0.04);
             }
-            if (f11 > 0.1F) {
-                float f14 = Mth.sin((f7 - 0.1F) * 1.3F);
-                float f17 = f11 - 0.1F;
-                float f19 = f14 * f17;
-                pose.translate(0, f19 * 0.004F, 0);
-            }
 
+            pose.scale(scale,scale,scale+f11*0.2f);
+            pose.mulPose(Axis.YP.rotationDegrees(8));
+            pose.mulPose(Axis.XP.rotationDegrees(-110));
 
-
+            ItemStack arrowItem = mc.player.getProjectile(bow);
             ItemInHandRenderer renderer = mc .gameRenderer.itemInHandRenderer;
 
             renderer.renderItem(
                     mc.player,
-                    mc.player.getItemInHand(InteractionHand.OFF_HAND),
+                    arrowItem,
                     ItemDisplayContext.FIRST_PERSON_RIGHT_HAND,
                     false,
                     pose,
