@@ -38,6 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.function.Consumer;
 
 public abstract class LightSaber extends BoardSwordItem implements GeoItem {
+
     public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlay("turn_off");
     private static final ImmutableMultimap<Attribute, AttributeModifier> ON = ImmutableMultimap.of(
         Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 9, AttributeModifier.Operation.ADDITION),
@@ -48,7 +49,7 @@ public abstract class LightSaber extends BoardSwordItem implements GeoItem {
         Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1, AttributeModifier.Operation.ADDITION)
     );
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
+    public int frame = 0;
     public LightSaber() {
         super(new Tier() {
             @Override
