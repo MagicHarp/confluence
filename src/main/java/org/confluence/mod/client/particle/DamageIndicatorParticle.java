@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.particle.options.DamageIndicatorOptions;
-import org.confluence.mod.mixin.accessor.FontAccessor;
+import org.confluence.mod.mixin.client.accessor.FontAccessor;
 import org.confluence.mod.util.DeathAnimUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

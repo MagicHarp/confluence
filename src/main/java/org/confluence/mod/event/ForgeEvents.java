@@ -65,6 +65,7 @@ import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.demoneye.DemonEye;
 import org.confluence.mod.entity.demoneye.DemonEyeVariant;
 import org.confluence.mod.entity.projectile.bombs.ScarabBombEntity;
@@ -225,6 +226,11 @@ public final class ForgeEvents {
                 ModUtils.dropMoney(amount, living.getX(), living.getEyeY() - 0.3, living.getZ(), level);
             }
         }
+        if (!living.level().isClientSide) {
+            if (living instanceof TerraBossBase terra) {
+                terra.onDeath();
+            }
+        }
     }
 
     @SubscribeEvent
@@ -258,12 +264,12 @@ public final class ForgeEvents {
     public static void livingTick(LivingEvent.LivingTickEvent event) {
         LivingEntity entity = event.getEntity();
         ModAttributes.applyPickupRange(entity);
-        for(ObjectIterator<Object2IntMap.Entry<Immunity>> iterator = ((ILivingEntity) entity).confluence$getImmunityTicks().object2IntEntrySet().iterator(); iterator.hasNext(); ){
+        for (ObjectIterator<Object2IntMap.Entry<Immunity>> iterator = ((ILivingEntity) entity).confluence$getImmunityTicks().object2IntEntrySet().iterator(); iterator.hasNext(); ) {
             Object2IntMap.Entry<Immunity> entry = iterator.next();
             int remain = entry.getIntValue() - 1;
-            if(remain <= 0){
+            if (remain <= 0) {
                 iterator.remove();
-            }else{
+            } else {
                 entry.setValue(remain);
             }
         }
@@ -275,17 +281,17 @@ public final class ForgeEvents {
         Consumer<Boolean> consumer = event::setCanceled;
         BleedingEffect.apply(living, consumer);
         FrostburnEffect.apply(living, consumer);
-        if(event.isCanceled()){
+        if (event.isCanceled()) {
             return;
         }
-        if(living instanceof Player player){
+        if (living instanceof Player player) {
             player.getCapability(AbilityProvider.CAPABILITY).ifPresent(playerAbility -> {
-                if(playerAbility.isVitalCrystalUsed()){
+                if (playerAbility.isVitalCrystalUsed()) {
                     event.setAmount(event.getAmount() * 1.2F);
                 }
             });
         }
-        if(!(living.level() instanceof ServerLevel level))return;
+        if (!(living.level() instanceof ServerLevel level)) return;
         Vec3 pos = living.getEyePosition();
         float amount = Math.round(event.getAmount() * 10) / 10f;
         int intAmount = (int) amount;
@@ -312,50 +318,50 @@ public final class ForgeEvents {
             }
         }
 
-        if(damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)){
+        if (damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return;
         }
-        damagingEntity.invulnerableTime=0;
+        damagingEntity.invulnerableTime = 0;
         Entity directEntity = damageSource.getDirectEntity();
         Object2IntMap<Immunity> invTicks = ((ILivingEntity) damagingEntity).confluence$getImmunityTicks();
         Immunity.Types type;
         Immunity cause;
-        if(directEntity != null){
+        if (directEntity != null) {
             type = ((Immunity) directEntity).confluence$getImmunityType();
-            cause = switch(type){
+            cause = switch (type) {
                 case STATIC -> (Immunity) directEntity.getType();
                 case LOCAL -> (Immunity) directEntity;
             };
-        }else {
-            cause=(Immunity)(Object) damageSource.type();
+        } else {
+            cause = (Immunity) (Object) damageSource.type();
         }
-        if(invTicks.containsKey(cause)){
+        if (invTicks.containsKey(cause)) {
             event.setCanceled(true);
             return;
-        }else {
+        } else {
             int time = ((ILivingEntity) damagingEntity).c$getInvulnerableTime(cause.confluence$getImmunityDuration(damagingEntity.level().registryAccess()));
             invTicks.put(cause, time);
         }
     }
 
     @SubscribeEvent
-    public static void onLivingDamage(LivingDamageEvent event){
+    public static void onLivingDamage(LivingDamageEvent event) {
         LivingEntity damagingEntity = event.getEntity();
         DamageSource damageSource = event.getSource();
         Entity causer = damageSource.getEntity();
         // 这个return只针对暴击判定和数值显示，如果以后还有其他用处还要拆出来
-        if(event.isCanceled() || damageSource.is(DamageTypes.GENERIC_KILL) || !(event.getEntity().level() instanceof ServerLevel level)) return;
+        if (event.isCanceled() || damageSource.is(DamageTypes.GENERIC_KILL) || !(event.getEntity().level() instanceof ServerLevel level)) return;
         float amount = event.getAmount();
-        boolean crit=false;
-        if(!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get()) && causer instanceof Player player){
+        boolean crit = false;
+        if (!ModAttributes.hasCustomAttribute(ModAttributes.CRIT_CHANCE.get()) && causer instanceof Player player) {
             double chance = player.getAttributeValue(ModAttributes.CRIT_CHANCE.get());
-            if(damagingEntity.level().random.nextFloat() < chance){
+            if (damagingEntity.level().random.nextFloat() < chance) {
                 amount *= 2;
                 event.setAmount(amount);
                 player.crit(damagingEntity);
                 crit = true;
             }
-            if(damageSource.getDirectEntity() instanceof AbstractArrow arrow){
+            if (damageSource.getDirectEntity() instanceof AbstractArrow arrow) {
                 crit |= arrow.isCritArrow();
             }
         }
@@ -375,6 +381,8 @@ public final class ForgeEvents {
             demonEye.setVariant(DemonEyeVariant.random(randomSource));
         } else if (mob instanceof BlackSlime blackSlime) {
             blackSlime.finalizeSpawn(randomSource, event.getDifficulty());
+        } else if (mob instanceof TerraBossBase terra) {
+            terra.onFinializeSpawn();
         }
     }
 
@@ -402,6 +410,11 @@ public final class ForgeEvents {
                                     new FlushPlayerAbilityPacketS2C());
                         });
                     }, 50));
+        }
+
+        if (event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() instanceof LivingEntity living) {
+            ModAttributes.applyToArrow(living, arrow);
+            MoltenQuiver.applyToArrow(living, arrow);
         }
     }
 
@@ -464,8 +477,7 @@ public final class ForgeEvents {
     public static void onRegisterTeamData(RegisterTeamDataEvent event) {
         ModEntities.ENTITIES.getEntries().forEach(entry -> {
             EntityType<?> entityType = entry.get();
-            event.registerTeamData(entityType,data -> data.setCanTeam(false));
+            event.registerTeamData(entityType, data -> data.setCanTeam(false));
         });
     }
-
 }

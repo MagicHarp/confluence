@@ -1,7 +1,5 @@
 package org.confluence.mod.entity.boss;
 
-import com.mojang.brigadier.Command;
-import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -24,13 +21,11 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.RenderGuiEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -250,10 +245,14 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
             this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
-    @Override // 死亡时
+    @Override // 从客户端移除时
     public void onRemovedFromWorld() {
         super.onRemovedFromWorld();
     }
+
+    public void onDeath() {}
+
+    public void onFinializeSpawn() {}
 
     @Override // 取消墙体窒息伤害
     public boolean isInWall() {

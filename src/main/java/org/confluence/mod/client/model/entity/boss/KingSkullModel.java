@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.boss.geoModel;
+package org.confluence.mod.client.model.entity.boss;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;

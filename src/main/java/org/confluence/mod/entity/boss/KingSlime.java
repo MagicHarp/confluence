@@ -21,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.model.CrownOfKingSlimeModelEntity;
 import org.confluence.mod.entity.slime.BaseSlime;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
@@ -139,6 +140,7 @@ public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
                         } else {
                             closestPlayerPos = serverLevel.getRandomPlayer().getOnPos().getCenter();
                         }
+                        serverLevel.addFreshEntity(new CrownOfKingSlimeModelEntity(serverLevel, boss.position().add(0.0, boss.getDimensions(boss.getPose()).height, 0.0)));
                         boss.teleportTo(closestPlayerPos.x, closestPlayerPos.y + 0.75F, closestPlayerPos.z);
                     }
                 }

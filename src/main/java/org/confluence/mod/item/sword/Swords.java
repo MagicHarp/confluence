@@ -40,14 +40,14 @@ public enum Swords implements EnumRegister<SwordItem> {
     WHITE_LIGHT_SABER("white_light_saber", LightSaber.White::new),
 
     ICE_BLADE("ice_blade", () -> new IceBladeSwordItem(ModTiers.TITANIUM, 5, -0.1F, new Item.Properties().rarity(ModRarity.BLUE))),
-    STARFURY("starfury",()->new StarFurySword(ModTiers.TITANIUM,6,-0.1f,new Item.Properties().rarity(ModRarity.GREEN))),//新版星怒
+    STARFURY("starfury", () -> new StarFurySword(ModTiers.TITANIUM, 6, -0.1f, new Item.Properties().rarity(ModRarity.GREEN))),//新版星怒
     ENCHANTED_SWORD("enchanted_sword", () -> new EnchantedSwordItem(ModTiers.TITANIUM, 7, -0.2F, new Item.Properties().rarity(ModRarity.ORANGE))),
 
 
     TERRAGRIM("terragrim", TerragrimItem::new),
     // 其他剑
-    FAKE_SWORD("fake_sword", () -> new RegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F,new Item.Properties().rarity(ModRarity.GRAY))),
-    CANDY_CANE_SWORD("candy_cane_sword", () -> new BigRegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F,new Item.Properties().rarity(ModRarity.WHITE))),
+    FAKE_SWORD("fake_sword", () -> new RegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F, new Item.Properties().rarity(ModRarity.GRAY))),
+    CANDY_CANE_SWORD("candy_cane_sword", () -> new BigRegularBroadSwordItem(ModTiers.CANDY, 0, -1.4F, new Item.Properties().rarity(ModRarity.WHITE))),
 
     BREATHING_REED("breathing_reed", BreathingReed::new),
     UMBRELLA("umbrella", UmbrellaItem::new),
@@ -60,17 +60,11 @@ public enum Swords implements EnumRegister<SwordItem> {
     PURPLE_CLUBBERFISH("purple_clubberfish", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 10, -3.5F, new Item.Properties().rarity(ModRarity.BLUE))),
     STYLISH_SCISSORS("stylish_scissors", () -> new RegularBroadSwordItem(ModTiers.TITANIUM, 3, -1.2F, new Item.Properties().rarity(ModRarity.GREEN))),
     EXOTIC_SCIMITAR("exotic_scimitar", () -> new ReversalBoardSwordItem(ModTiers.TITANIUM, 5, -0.3F, new Item.Properties().rarity(ModRarity.GREEN))),
-    KATANA("katana",() -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
+    KATANA("katana", () -> new BigRegularBroadSwordItem(ModTiers.TITANIUM, 4, -0.3F, new Item.Properties().rarity(ModRarity.BLUE))),
+
+
     CROWBAR("crowbar", CrowbarItem::new),
-
-
-
-
-
-
-
-    DEVELOPER_SWORD("developer_sword",()->new IceBladeSwordItem(ModTiers.TITANIUM,100,100f,new Item.Properties().rarity(ModRarity.MASTER)));//开发者武器
-
+    DEVELOPER_SWORD("developer_sword", DeveloperSword::new);
 
     private final RegistryObject<SwordItem> value;
 

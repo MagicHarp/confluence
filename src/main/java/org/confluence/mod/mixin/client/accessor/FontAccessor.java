@@ -1,4 +1,4 @@
-package org.confluence.mod.mixin.accessor;
+package org.confluence.mod.mixin.client.accessor;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;

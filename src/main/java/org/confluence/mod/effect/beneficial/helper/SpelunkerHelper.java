@@ -20,15 +20,15 @@ import org.confluence.mod.block.functional.BoulderBlock;
 import org.confluence.mod.block.natural.Ores;
 import org.confluence.mod.client.KeyBindings;
 import org.confluence.mod.effect.ModEffects;
-import org.confluence.mod.mixin.accessor.FontAccessor;
+import org.confluence.mod.mixin.client.accessor.FontAccessor;
 import org.confluence.mod.util.ModUtils;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.confluence.mod.block.ModBlocks.DART_TRAP;

@@ -1,16 +1,12 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -18,8 +14,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.block.ModBlocks;
@@ -27,17 +21,13 @@ import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.BossSkill;
 import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.demoneye.DemonEye;
-import org.confluence.mod.entity.demoneye.DemonEyeWanderGoal;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.util.DeathAnimOptions;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
-import java.util.function.Predicate;
-
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
-import static org.confluence.mod.util.ModUtils.updateEntityRotation;
 
 @SuppressWarnings("all")
 public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEntity {
@@ -300,6 +290,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     public boolean isNoGravity(){ return true; }
 
     // 转换阶段
+    @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (this.getHealth() / getMaxHealth() < 0.5 && stage == 1) {
             stage = 2;
@@ -315,19 +306,13 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         syncRot();
     }
 
-    public void onRemovedFromWorld(){
-        level().players().forEach(player ->
-                player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE)));
+    @Override
+    public void onDeath() {
+        if (!level().isClientSide) level().players().forEach(player -> player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE)));
     }
 
-    @Override // boss条显示
-    public void startSeenByPlayer(ServerPlayer player) {
-        super.startSeenByPlayer(player);
-        player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.generate").withStyle(ChatFormatting.DARK_PURPLE));
-
-    }
-    @Override // boss条消失
-    public void stopSeenByPlayer(ServerPlayer player) {
-        super.stopSeenByPlayer(player);
+    @Override
+    public void onFinializeSpawn() {
+        if (!level().isClientSide) level().players().forEach(player -> player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.generate").withStyle(ChatFormatting.DARK_PURPLE)));
     }
 }

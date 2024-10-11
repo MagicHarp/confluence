@@ -1,24 +1,24 @@
-package org.confluence.mod.entity.boss.geoRenderer;
+package org.confluence.mod.client.renderer.entity.boss;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import org.confluence.mod.entity.boss.geoEntity.EaterOfWorld_Segment;
-import org.confluence.mod.entity.boss.geoModel.GeoNormalModel;
+import org.confluence.mod.client.model.entity.boss.GeoNormalModel;
+import org.confluence.mod.entity.boss.geoEntity.EaterOfWorldSegment;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class EaterOfWorld_SegmentRenderer extends GeoEntityRenderer<EaterOfWorld_Segment> {
-    static GeoNormalModel<EaterOfWorld_Segment> tailModel = new GeoNormalModel<>("eater_of_world_tail");
-    public EaterOfWorld_SegmentRenderer(EntityRendererProvider.Context renderManager) {
+public class EaterOfWorldSegmentRenderer extends GeoEntityRenderer<EaterOfWorldSegment> {
+    static GeoNormalModel<EaterOfWorldSegment> tailModel = new GeoNormalModel<>("eater_of_world_tail");
+    public EaterOfWorldSegmentRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new GeoNormalModel<>("eater_of_world_segment"));
     }
 
-    public GeoModel<EaterOfWorld_Segment> getGeoModel() {
+    public GeoModel<EaterOfWorldSegment> getGeoModel() {
         if(animatable.ifTail)
             return tailModel;
 //        return animatable.head.segments.size() == animatable.segmentIndex?tailModel:this.model;
@@ -26,7 +26,7 @@ public class EaterOfWorld_SegmentRenderer extends GeoEntityRenderer<EaterOfWorld
     }
 
     @Override
-    public void preRender(PoseStack poseStack, EaterOfWorld_Segment animatable, BakedGeoModel model, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void preRender(PoseStack poseStack, EaterOfWorldSegment animatable, BakedGeoModel model, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay,  red,  green, blue, alpha);
         poseStack.scale(3.5f,3.5f,3.5f);
         poseStack.translate(0,0,0);

@@ -1,15 +1,14 @@
-package org.confluence.mod.entity.boss.geoRenderer;
+package org.confluence.mod.client.renderer.entity.boss;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import org.confluence.mod.client.model.entity.boss.GeoNormalModel;
 import org.confluence.mod.entity.boss.geoEntity.EaterOfWorld;
-import org.confluence.mod.entity.boss.geoModel.GeoNormalModel;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class EaterOfWorldRenderer extends GeoEntityRenderer<EaterOfWorld> {

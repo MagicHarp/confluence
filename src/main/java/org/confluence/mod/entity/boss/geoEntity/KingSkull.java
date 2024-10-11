@@ -1,6 +1,5 @@
 package org.confluence.mod.entity.boss.geoEntity;
 
-import com.xiaohunao.enemybanner.EntityBannerPattern;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -158,7 +157,7 @@ public class KingSkull extends TerraBossBase implements GeoEntity {
     }
 
 
-    @Override//死亡时
+    @Override // 从客户端移除时
     public void onRemovedFromWorld() {
         handLeft.discard();
         handRight.discard();

@@ -37,6 +37,7 @@ import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
 import org.confluence.mod.client.renderer.entity.bomb.*;
+import org.confluence.mod.client.renderer.entity.boss.*;
 import org.confluence.mod.client.renderer.entity.fishing.BaseFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.BloodyFishingHookRenderer;
 import org.confluence.mod.client.renderer.entity.fishing.GlowingFishingHookRenderer;
@@ -44,10 +45,6 @@ import org.confluence.mod.client.renderer.entity.fishing.HotlineFishingHookRende
 import org.confluence.mod.client.renderer.entity.hook.*;
 import org.confluence.mod.client.renderer.entity.model.CrownOfKingSlimeModelRenderer;
 import org.confluence.mod.client.renderer.gui.*;
-import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorldRenderer;
-import org.confluence.mod.entity.boss.geoRenderer.EaterOfWorld_SegmentRenderer;
-import org.confluence.mod.entity.boss.geoRenderer.KingSkullHandRenderer;
-import org.confluence.mod.entity.boss.geoRenderer.KingSkullRenderer;
 import org.confluence.mod.fluid.ModFluids;
 import org.confluence.mod.item.bow.Bows;
 import org.confluence.mod.item.common.ColoredItem;
@@ -189,11 +186,11 @@ public final class ModClient {
         event.registerEntityRenderer(HONEY_SLIME.get(), c -> new CustomSlimeRenderer(c, "honey"));
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
-        event.registerEntityRenderer(KING_SLIME.get(), c -> new CustomSlimeRenderer(c, "king"));
+        event.registerEntityRenderer(KING_SLIME.get(), KingSlimeRenderer::new);
         event.registerEntityRenderer(CROWN_OF_KING_SLIME_MODEL.get(), CrownOfKingSlimeModelRenderer::new);
 
         event.registerEntityRenderer(EATER_OF_WORLD.get(), EaterOfWorldRenderer::new);
-        event.registerEntityRenderer(EATER_OF_WORLD_SEGMENT.get(), EaterOfWorld_SegmentRenderer::new);
+        event.registerEntityRenderer(EATER_OF_WORLD_SEGMENT.get(), EaterOfWorldSegmentRenderer::new);
 
         event.registerEntityRenderer(KING_SKULL.get(), KingSkullRenderer::new);
         event.registerEntityRenderer(KING_SKULL_HAND.get(), KingSkullHandRenderer::new);

@@ -10,13 +10,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.TerraBossBase;
-import org.confluence.mod.item.common.ColoredItem;
 
 
-public class EaterOfWorld_Segment extends TerraBossBase {
+public class EaterOfWorldSegment extends TerraBossBase {
     private static final float[] MAX_HEALTHS = {50f, 70f, 100f};
     private static final float[] DAMAGE = {4f, 6f, 9f};//接触伤害
 
@@ -28,7 +26,7 @@ public class EaterOfWorld_Segment extends TerraBossBase {
     //public int segmentIndex;
     public boolean genNewHeadOnRemove = true;
     public boolean ifTail = false;
-    public static final EntityDataAccessor<Boolean> DATA_TAIL = SynchedEntityData.defineId(EaterOfWorld_Segment.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> DATA_TAIL = SynchedEntityData.defineId(EaterOfWorldSegment.class, EntityDataSerializers.BOOLEAN);
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -44,12 +42,12 @@ public class EaterOfWorld_Segment extends TerraBossBase {
     }
 
 
-    public EaterOfWorld_Segment(EntityType<? extends Monster> type, Level level) {
+    public EaterOfWorldSegment(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.noPhysics = true;
     }
 
-    public EaterOfWorld_Segment(EaterOfWorld head, Level level) {
+    public EaterOfWorldSegment(EaterOfWorld head, Level level) {
 
         super(ModEntities.EATER_OF_WORLD_SEGMENT.get(), level);
         this.head = head;

@@ -120,7 +120,7 @@ public final class ModEntities {
 
     // BOSS
     public static final RegistryObject<EntityType<KingSlime>> KING_SLIME = ENTITIES.register("king_slime", () -> EntityType.Builder.<KingSlime>of(KingSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:king_slime"));
-    public static final RegistryObject<EntityType<CrownOfKingSlimeModelEntity>> CROWN_OF_KING_SLIME_MODEL = ENTITIES.register("crown_of_king_slime_model", () -> EntityType.Builder.of(CrownOfKingSlimeModelEntity::new, MobCategory.MISC).sized(0.0F, 0.0F).clientTrackingRange(10).build("confluence:crown_of_king_slime_model"));
+    public static final RegistryObject<EntityType<CrownOfKingSlimeModelEntity>> CROWN_OF_KING_SLIME_MODEL = ENTITIES.register("crown_of_king_slime_model", () -> EntityType.Builder.<CrownOfKingSlimeModelEntity>of(CrownOfKingSlimeModelEntity::new, MobCategory.MISC).sized(0.0F, 0.0F).clientTrackingRange(10).build("confluence:crown_of_king_slime_model"));
     public static final RegistryObject<EntityType<CthulhuEye>> CTHULHU_EYE = ENTITIES.register("cthulhu_eye", () -> EntityType.Builder.<CthulhuEye>of(CthulhuEye::new, MobCategory.MONSTER)
             .sized(2.04F, 2.04F)
             .clientTrackingRange(200)
@@ -131,7 +131,7 @@ public final class ModEntities {
             .clientTrackingRange(200)
             .setTrackingRange(200)
             .build("confluence:cthulhu_eye"));
-    public static final RegistryObject<EntityType<EaterOfWorld_Segment>> EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorld_Segment>of(EaterOfWorld_Segment::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EaterOfWorldSegment>> EATER_OF_WORLD_SEGMENT = ENTITIES.register("eater_of_world_segment", () -> EntityType.Builder.<EaterOfWorldSegment>of(EaterOfWorldSegment::new, MobCategory.MONSTER)
             .sized(3F, 3F)
             .clientTrackingRange(200)
             .noSave()

@@ -1,6 +1,5 @@
 {
     "client": [
-        "accessor.FontAccessor",
         "client.AdvancementWidgetMixin",
         "client.BlockModelShaperMixin",
         "client.CarriedBlockLayerMixin",
@@ -27,6 +26,7 @@
         "client.SnowGolemHeadLayerMixin",
         "client.accessor.CompileResultsAccessor",
         "client.accessor.CustomHeadLayerAccessor",
+        "client.accessor.FontAccessor",
         "client.accessor.LevelRendererAccessor",
         "client.accessor.LivingEntityRendererAccessor",
         "client.accessor.LocalPlayerAccessor",
