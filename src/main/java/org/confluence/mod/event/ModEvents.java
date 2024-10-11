@@ -26,6 +26,7 @@ import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
 import org.confluence.mod.client.EntityAtlas;
 import org.confluence.mod.effect.ModEffects;
+import org.confluence.mod.entity.BloodCrawler.BloodCrawler;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
@@ -71,6 +72,7 @@ public final class ModEvents {
         event.put(ModEntities.HONEY_SLIME.get(), HoneySlime.createSlimeAttributes(0F, 0, 16.0F).build());
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
+        event.put(ModEntities.BLOOD_CRAWLER.get(), BloodCrawler.createAttributes().build());
 
         event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
         event.put(ModEntities.CTHULHU_EYE.get(), CthulhuEye.createAttributes().build());

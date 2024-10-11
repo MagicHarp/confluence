@@ -186,6 +186,8 @@ public final class ModClient {
         event.registerEntityRenderer(HONEY_SLIME.get(), c -> new CustomSlimeRenderer(c, "honey"));
         event.registerEntityRenderer(BLACK_SLIME.get(), c -> new CustomSlimeRenderer(c, "black"));
 
+        event.registerEntityRenderer(BLOOD_CRAWLER.get(), BloodCrawlerRenderer::new);
+
         event.registerEntityRenderer(KING_SLIME.get(), KingSlimeRenderer::new);
         event.registerEntityRenderer(CROWN_OF_KING_SLIME_MODEL.get(), CrownOfKingSlimeModelRenderer::new);
 

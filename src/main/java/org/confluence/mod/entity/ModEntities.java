@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.entity.BloodCrawler.BloodCrawler;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.boss.geoEntity.*;
 import org.confluence.mod.entity.chair.ChairEntity;
@@ -54,9 +55,10 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<BaseSlime>> TROPIC_SLIME = registerSlime("tropic", 0x73bcf4, 2);
     public static final RegistryObject<EntityType<BaseSlime>> YELLOW_SLIME = registerSlime("yellow", 0xf8e234, 2);
     public static final RegistryObject<EntityType<HoneySlime>> HONEY_SLIME = ENTITIES.register("honey_slime", () -> EntityType.Builder.<HoneySlime>of((entityType, level) -> new HoneySlime(entityType, level, 0xf8e234), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:honey_slime"));
-    /* todo honey slime  */
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:demon_eye"));
+
+    public static final RegistryObject<EntityType<BloodCrawler>> BLOOD_CRAWLER = ENTITIES.register("blood_crawler", () -> EntityType.Builder.of(BloodCrawler::new, MobCategory.MONSTER).sized(1.8F, 1.2F).clientTrackingRange(10).build("confluence:blood_crawler"));
 
     public static final RegistryObject<EntityType<TestWormEntity>> TEST_WORM = ENTITIES.register("test_worm", () -> EntityType.Builder.of(TestWormEntity::new, MobCategory.MONSTER).sized(0.1F, 0.1F).clientTrackingRange(10).build("confluence:test_worm"));
     public static final RegistryObject<EntityType<TestWormPart>> TEST_WORM_PART = ENTITIES.register("test_worm_segment", () -> EntityType.Builder.<TestWormPart>of(TestWormPart::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:test_worm_segment"));
