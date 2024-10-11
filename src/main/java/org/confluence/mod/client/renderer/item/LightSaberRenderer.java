@@ -1,5 +1,7 @@
 package org.confluence.mod.client.renderer.item;
 
+
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,6 +22,7 @@ public class LightSaberRenderer extends GeoItemRenderer<LightSaber> {
         @Override
         protected RenderType getRenderType(LightSaber animatable) {
             animatable.frame++;
+
             //可以修改贴图
             //return RenderType.energySwirl(((LightSaberModel)this.getGeoModel()).texture, (float) (Math.sin(frame * 0.01F)/4+Math.sin(frame * 0.02F)/2 + Math.sin(frame * 0.04F))%0.1f, (float) (Math.cos(frame * 0.01F)/4+Math.cos(frame * 0.02F)/2 + Math.cos(frame * 0.04F)));
             return RenderType.energySwirl(((LightSaberModel)this.getGeoModel()).texture, 0, (float) (Math.cos(animatable.frame * 0.001F)/4+Math.cos(animatable.frame * 0.002F)/2 + Math.cos(animatable.frame * 0.004F)));
