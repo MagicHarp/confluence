@@ -1,0 +1,12 @@
+{
+    "type": "forge:add_spawns",
+    "biomes": [
+        "confluence:tr_crimson"
+    ],
+    "spawners": {
+        "type": "confluence:blood_crawler",
+        "weight": 60,
+        "minCount": 1,
+        "maxCount": 1
+    }
+}
