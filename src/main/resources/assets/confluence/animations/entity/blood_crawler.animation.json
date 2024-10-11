@@ -513,6 +513,34 @@
 					}
 				}
 			}
+		},
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"end": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.1667": {
+							"vector": [1, 1, 1]
+						},
+						"0.25": {
+							"vector": [1, 1.2, 1.2]
+						},
+						"0.5": {
+							"vector": [1, 1, 1]
+						},
+						"0.5833": {
+							"vector": [1, 1.2, 1.2]
+						},
+						"1.0": {
+							"vector": [1, 1, 1]
+						}
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
