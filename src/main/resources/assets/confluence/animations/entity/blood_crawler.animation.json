@@ -405,6 +405,114 @@
 					}
 				}
 			}
+		},
+		"misc.attack": {
+			"animation_length": 0.9167,
+			"bones": {
+				"hand": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5417": {
+							"vector": [-10, 0, 0],
+							"easing": "easeOutQuint"
+						},
+						"0.875": {
+							"vector": [0, 0, 0],
+							"easing": "easeInQuint"
+						}
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"left_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.375": {
+							"vector": [0, -37.5, 0],
+							"easing": "easeInQuart"
+						},
+						"0.625": {
+							"vector": [0, -37.5, 0],
+							"easing": "easeInQuart"
+						},
+						"0.8333": {
+							"vector": [0, 0, 0],
+							"easing": "easeInQuart"
+						}
+					}
+				},
+				"right_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.375": {
+							"vector": [0, 32.5, 0],
+							"easing": "easeInQuart"
+						},
+						"0.625": {
+							"vector": [0, 32.5, 0],
+							"easing": "easeInQuart"
+						},
+						"0.8333": {
+							"vector": [0, 0, 0],
+							"easing": "easeInQuart"
+						}
+					}
+				},
+				"left_leg_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [7.5, 27.5, 0],
+							"easing": "easeInQuint"
+						},
+						"0.75": {
+							"vector": [74.1352, 9.49338, 98.95284],
+							"easing": "easeInQuint"
+						},
+						"0.9167": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.9167": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"right_leg_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-14.76169, -7.96439, 33.51819],
+							"easing": "easeInQuint"
+						},
+						"0.75": {
+							"vector": [72.26651, -5.24164, -94.47493],
+							"easing": "easeInQuint"
+						},
+						"0.9167": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

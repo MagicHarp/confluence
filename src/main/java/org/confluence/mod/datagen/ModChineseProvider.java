@@ -86,6 +86,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.black_slime", "史莱姆之母");
         add("entity.confluence.lava_slime", "岩浆史莱姆");
         add("entity.confluence.demon_eye", "恶魔眼");
+        add("entity.confluence.blood_crawler", "血爬虫");
 
         add("entity.confluence.king_slime", "史莱姆王");
         add("entity.confluence.cthulhu_eye", "克苏鲁之眼");
@@ -1564,6 +1565,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.LUMINOUS_SLIME_SPAWN_EGG.get(), "夜明史莱姆刷怪蛋");
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
         add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
+        add(SpawnEggs.BLOOD_CRAWLER_SPAWN_EGG.get(), "血爬虫刷怪蛋");
+        add(SpawnEggs.CTHULHU_EYE_SPAWN_EGG.get(), "克苏鲁之眼刷怪蛋");
         add(SpawnEggs.KING_SLIME_SPAWN_EGG.get(), "史莱姆王刷怪蛋");
         // 光剑
         add(Swords.RED_LIGHT_SABER.get(), "陨石红光剑");
