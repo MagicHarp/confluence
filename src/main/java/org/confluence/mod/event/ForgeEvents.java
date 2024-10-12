@@ -305,7 +305,7 @@ public final class ForgeEvents {
         DamageSource damageSource = event.getSource();
         LivingEntity damagingEntity = event.getEntity();
         if (damageSource.getEntity() instanceof LivingEntity livingEntity) {
-            if (livingEntity.getMainHandItem().getItem() instanceof BloodButchereSword) {
+            if (livingEntity.getItemInHand(event.getEntity().getUsedItemHand()).getItem() instanceof BloodButchereSword) {
                 if (damagingEntity.hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
                     if (damagingEntity.getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4) {
                         damagingEntity.addEffect(new MobEffectInstance(ModEffects.BLOOD_BUTCHERED.get(), 180, damagingEntity.getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() + 1, false, false, false));

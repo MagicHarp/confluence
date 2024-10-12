@@ -3,6 +3,7 @@ package org.confluence.mod.effect.harmful;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class BloodButcheredEffect extends MobEffect {
     private static int tickCount = 0;
@@ -12,10 +13,10 @@ public class BloodButcheredEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+    public void applyEffectTick(@NotNull LivingEntity pLivingEntity, int pAmplifier) {
         float damage;
 
-        if (tickCount >= 20){
+        if (tickCount % 35 == 0){
             tickCount = 0;
             damage = pAmplifier + 2.0F;
             pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(), damage);
