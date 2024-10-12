@@ -406,7 +406,7 @@
 				}
 			}
 		},
-		"misc.attack": {
+		"attack.strike": {
 			"animation_length": 0.9167,
 			"bones": {
 				"hand": {

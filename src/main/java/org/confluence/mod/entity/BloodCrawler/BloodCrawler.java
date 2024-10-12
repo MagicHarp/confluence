@@ -1,6 +1,7 @@
 package org.confluence.mod.entity.BloodCrawler;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -10,11 +11,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import org.checkerframework.checker.units.qual.A;
 import org.confluence.mod.entity.boss.TerraBossBase;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DataTickets;
@@ -37,8 +43,10 @@ public class BloodCrawler extends Spider implements GeoEntity {
         this.setHealth(MAX_HEALTH);
     }
 
-
     protected void registerGoals() {
+        super.registerGoals();
+
+        /*
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.4F));
         // this.goalSelector.addGoal(4, new Spider.SpiderAttackGoa(this));
@@ -46,6 +54,9 @@ public class BloodCrawler extends Spider implements GeoEntity {
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        */
+
+        this.targetSelector.removeAllGoals(a->!(a instanceof HurtByTargetGoal));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class,false));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class,false));
 
@@ -61,7 +72,7 @@ public class BloodCrawler extends Spider implements GeoEntity {
             .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)  // 召唤物品的几率
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);     // 击退抗性
     }
-    public static boolean checkBloodCrawlerSpawn(EntityType<? extends Mob> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+    public static boolean checkBloodCrawlerSpawn(EntityType<? extends BloodCrawler> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
         if (!(pLevel instanceof Level level)) {
             return false; // 如果 pLevel 不是 Level 的实例，返回 false
         }
@@ -79,7 +90,8 @@ public class BloodCrawler extends Spider implements GeoEntity {
     }
 
 
-        private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
