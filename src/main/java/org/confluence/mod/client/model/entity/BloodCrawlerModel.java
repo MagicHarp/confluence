@@ -2,7 +2,7 @@ package org.confluence.mod.client.model.entity;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.BloodCrawler.BloodCrawler;
+import org.confluence.mod.entity.monster.BloodCrawler;
 import software.bernie.geckolib.model.GeoModel;
 
 public class BloodCrawlerModel extends GeoModel<BloodCrawler> {

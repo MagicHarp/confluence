@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.demoneye;
+package org.confluence.mod.entity.monster.demoneye;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;

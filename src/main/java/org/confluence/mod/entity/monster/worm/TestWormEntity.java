@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.worm;
+package org.confluence.mod.entity.monster.worm;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;

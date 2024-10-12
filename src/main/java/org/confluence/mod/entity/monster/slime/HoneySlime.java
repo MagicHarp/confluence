@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.slime;
+package org.confluence.mod.entity.monster.slime;
 
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;

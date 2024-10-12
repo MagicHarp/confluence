@@ -20,7 +20,7 @@ import org.confluence.mod.block.ModBlocks;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.BossSkill;
 import org.confluence.mod.entity.boss.TerraBossBase;
-import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.monster.demoneye.DemonEye;
 import org.confluence.mod.misc.ModSoundEvents;
 import org.confluence.mod.util.DeathAnimOptions;
 import software.bernie.geckolib.animatable.GeoEntity;

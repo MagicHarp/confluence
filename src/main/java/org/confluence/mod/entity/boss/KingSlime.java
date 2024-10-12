@@ -22,7 +22,7 @@ import org.confluence.mod.client.color.FloatRGB;
 import org.confluence.mod.client.particle.ModParticles;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.model.CrownOfKingSlimeModelEntity;
-import org.confluence.mod.entity.slime.BaseSlime;
+import org.confluence.mod.entity.monster.slime.BaseSlime;
 import org.confluence.mod.mixin.accessor.SlimeAccessor;
 import org.confluence.mod.util.DeathAnimOptions;
 import org.confluence.mod.util.ModUtils;

@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.worm;
+package org.confluence.mod.entity.monster.worm;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;

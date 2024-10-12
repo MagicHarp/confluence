@@ -2,7 +2,7 @@ package org.confluence.mod.client.model.entity;
 
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.worm.TestWormPart;
+import org.confluence.mod.entity.monster.worm.TestWormPart;
 import software.bernie.geckolib.model.GeoModel;
 
 // TODO: 暂时使用恶魔眼模型

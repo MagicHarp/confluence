@@ -12,11 +12,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.entity.BloodCrawler.BloodCrawler;
+import org.confluence.mod.entity.monster.BloodCrawler;
 import org.confluence.mod.entity.boss.KingSlime;
 import org.confluence.mod.entity.boss.geoEntity.*;
 import org.confluence.mod.entity.chair.ChairEntity;
-import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.monster.CrimsonCreeper;
+import org.confluence.mod.entity.monster.demoneye.DemonEye;
 import org.confluence.mod.entity.fishing.BaseFishingHook;
 import org.confluence.mod.entity.fishing.BloodyFishingHook;
 import org.confluence.mod.entity.fishing.CurioFishingHook;
@@ -27,11 +28,11 @@ import org.confluence.mod.entity.model.CrownOfKingSlimeModelEntity;
 import org.confluence.mod.entity.projectile.*;
 import org.confluence.mod.entity.projectile.arrows.BaseArrowEntity;
 import org.confluence.mod.entity.projectile.bombs.*;
-import org.confluence.mod.entity.slime.BaseSlime;
-import org.confluence.mod.entity.slime.BlackSlime;
-import org.confluence.mod.entity.slime.HoneySlime;
-import org.confluence.mod.entity.worm.TestWormEntity;
-import org.confluence.mod.entity.worm.TestWormPart;
+import org.confluence.mod.entity.monster.slime.BaseSlime;
+import org.confluence.mod.entity.monster.slime.BlackSlime;
+import org.confluence.mod.entity.monster.slime.HoneySlime;
+import org.confluence.mod.entity.monster.worm.TestWormEntity;
+import org.confluence.mod.entity.monster.worm.TestWormPart;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -57,6 +58,7 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<HoneySlime>> HONEY_SLIME = ENTITIES.register("honey_slime", () -> EntityType.Builder.<HoneySlime>of((entityType, level) -> new HoneySlime(entityType, level, 0xf8e234), MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:honey_slime"));
     public static final RegistryObject<EntityType<BlackSlime>> BLACK_SLIME = ENTITIES.register("black_slime", () -> EntityType.Builder.of(BlackSlime::new, MobCategory.MONSTER).sized(2.04F, 2.04F).clientTrackingRange(10).build("confluence:black_slime"));
     public static final RegistryObject<EntityType<DemonEye>> DEMON_EYE = ENTITIES.register("demon_eye", () -> EntityType.Builder.of(DemonEye::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).build("confluence:demon_eye"));
+    public static final RegistryObject<EntityType<CrimsonCreeper>> CRIMSON_CREEPER = ENTITIES.register("crimson_creeper", () -> EntityType.Builder.of(CrimsonCreeper::new, MobCategory.MONSTER).build("confluence:crimson_creeper"));
 
     public static final RegistryObject<EntityType<BloodCrawler>> BLOOD_CRAWLER = ENTITIES.register("blood_crawler", () -> EntityType.Builder.of(BloodCrawler::new, MobCategory.MONSTER).sized(1.8F, 1.2F).clientTrackingRange(10).build("confluence:blood_crawler"));
 

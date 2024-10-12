@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.slime;
+package org.confluence.mod.entity.monster.slime;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

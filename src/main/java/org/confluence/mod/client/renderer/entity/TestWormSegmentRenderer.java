@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
 import org.confluence.mod.client.model.entity.TestWormSegmentModel;
-import org.confluence.mod.entity.worm.TestWormPart;
+import org.confluence.mod.entity.monster.worm.TestWormPart;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class TestWormSegmentRenderer extends GeoEntityRenderer<TestWormPart> {

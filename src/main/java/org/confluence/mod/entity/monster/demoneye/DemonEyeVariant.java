@@ -1,4 +1,4 @@
-package org.confluence.mod.entity.demoneye;
+package org.confluence.mod.entity.monster.demoneye;
 
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.RandomSource;

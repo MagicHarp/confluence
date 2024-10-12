@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.CreeperRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -203,6 +204,8 @@ public final class ModClient {
         event.registerEntityRenderer(CTHULHU_EYE.get(), CthulhuEyeRenderer::new);
         event.registerEntityRenderer(TEST_WORM.get(), TestWormRenderer::new);
         event.registerEntityRenderer(TEST_WORM_PART.get(), TestWormSegmentRenderer::new);
+
+        event.registerEntityRenderer(CRIMSON_CREEPER.get(), CrimsonCreeperRenderer::new);
 
         event.registerEntityRenderer(BASE_BULLET.get(), BulletRenderer::new);
         event.registerEntityRenderer(FALLING_STAR_ITEM_ENTITY.get(), FallingStarRenderer::new);

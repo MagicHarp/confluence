@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
 import org.confluence.mod.client.model.entity.DemonEyeModel;
-import org.confluence.mod.entity.demoneye.DemonEye;
+import org.confluence.mod.entity.monster.demoneye.DemonEye;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class DemonEyeRenderer extends GeoEntityRenderer<DemonEye> {
