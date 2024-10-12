@@ -22,9 +22,7 @@ public class KingSlimeRenderer extends CustomSlimeRenderer {
     @Override
     public void render(Slime pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
-        float scale = pEntity.getSize() / 8.0F;
-        pPoseStack.translate(0.0, scale + pEntity.getDimensions(pEntity.getPose()).height, 0.0);
-        pPoseStack.scale(scale, scale, scale);
+        pPoseStack.translate(0.0F, 1.0625F + pEntity.getDimensions(pEntity.getPose()).height, 0.0F);
         pPoseStack.mulPose(CrownOfKingSlimeModelRenderer.FLIP_Y.rotateY(pEntity.getYHeadRot() * Mth.DEG_TO_RAD + Mth.PI, new Quaternionf()));
         model.renderToBuffer(pPoseStack, pBuffer.getBuffer(CrownOfKingSlimeModel.RENDER_TYPE), pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pPoseStack.popPose();
