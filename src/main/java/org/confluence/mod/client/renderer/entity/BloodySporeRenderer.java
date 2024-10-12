@@ -7,10 +7,10 @@ import net.minecraft.world.entity.monster.Creeper;
 import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
 
-public class CrimsonCreeperRenderer extends CreeperRenderer {
-    private static final ResourceLocation LOCATION = new ResourceLocation(Confluence.MODID, "textures/entity/crimson_creeper.png");
+public class BloodySporeRenderer extends CreeperRenderer {
+    private static final ResourceLocation LOCATION = new ResourceLocation(Confluence.MODID, "textures/entity/bloody_spore.png");
 
-    public CrimsonCreeperRenderer(EntityRendererProvider.Context p_173958_) {
+    public BloodySporeRenderer(EntityRendererProvider.Context p_173958_) {
         super(p_173958_);
     }
 

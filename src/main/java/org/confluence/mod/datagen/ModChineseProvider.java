@@ -87,6 +87,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.lava_slime", "岩浆史莱姆");
         add("entity.confluence.demon_eye", "恶魔眼");
         add("entity.confluence.blood_crawler", "血爬虫");
+        add("entity.confluence.bloody_spore", "血腥芽孢");
 
         add("entity.confluence.king_slime", "史莱姆王");
         add("entity.confluence.cthulhu_eye", "克苏鲁之眼");
@@ -1130,6 +1131,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Materials.WEAVING_CLOUD_COTTON.get(), "织云棉");
         add(Materials.CARRION.get(), "腐肉");
         add(Materials.VERTEBRA.get(), "椎骨");
+        add(Materials.BLOOD_CLOT_POWDER.get(), "血凝粉末");
         add(Materials.LENS.get(), "晶状体");
         add(Materials.BLACK_LENS.get(), "黑晶状体");
         add(Materials.CRYSTAL_SHARDS_ITEM.get(), "水晶碎块");
@@ -1566,6 +1568,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SpawnEggs.LAVA_SLIME_SPAWN_EGG.get(), "岩浆史莱姆刷怪蛋");
         add(SpawnEggs.DEMON_EYE_SPAWN_EGG.get(), "恶魔眼刷怪蛋");
         add(SpawnEggs.BLOOD_CRAWLER_SPAWN_EGG.get(), "血爬虫刷怪蛋");
+        add(SpawnEggs.BLOODY_SPORE_SPAWN_EGG.get(), "血腥芽孢刷怪蛋");
         add(SpawnEggs.CTHULHU_EYE_SPAWN_EGG.get(), "克苏鲁之眼刷怪蛋");
         add(SpawnEggs.KING_SLIME_SPAWN_EGG.get(), "史莱姆王刷怪蛋");
         // 光剑

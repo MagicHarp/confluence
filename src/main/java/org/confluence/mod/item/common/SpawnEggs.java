@@ -29,6 +29,7 @@ public enum SpawnEggs implements EnumRegister<ForgeSpawnEggItem> {
     LUMINOUS_SLIME_SPAWN_EGG("evil_slime_spawn_egg", ModEntities.LUMINOUS_SLIME, 0xFF00FF, 0xEDFFFA),
     DEMON_EYE_SPAWN_EGG("demon_eye_spawn_egg", ModEntities.DEMON_EYE, 0xffffff, 0xab0d0d),
     BLOOD_CRAWLER_SPAWN_EGG("blood_crawler_spawn_egg", ModEntities.BLOOD_CRAWLER, 0xf2d4ca, 0xa75049),
+    BLOODY_SPORE_SPAWN_EGG("bloody_spore_spawn_egg", ModEntities.BLOODY_SPORE, 0xa75049, 0x65292c),
 
     KING_SLIME_SPAWN_EGG("king_slime_spawn_egg", ModEntities.KING_SLIME, 0x73bcf4, 0xf8e234),
     CTHULHU_EYE_SPAWN_EGG("cthulhu_eye_spawn_egg", ModEntities.CTHULHU_EYE, 0xffffff, 0xab0d0d),

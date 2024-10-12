@@ -1,22 +1,26 @@
 package org.confluence.mod.entity.monster;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.confluence.mod.entity.ModEntities;
 
-public class CrimsonCreeper extends Creeper {
+public class BloodySpore extends Creeper {
     private int oldSwell;
     private int swell;
     private int maxSwell = 30;
 
-    public CrimsonCreeper(EntityType<? extends Creeper> pEntityType, Level pLevel) {
+    public BloodySpore(EntityType<? extends Creeper> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -70,6 +74,23 @@ public class CrimsonCreeper extends Creeper {
             this.discard();
         }
     }
+    public static boolean checkBloodySporeSpawn(EntityType<? extends BloodySpore> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        if (!(pLevel instanceof Level level)) {
+            return false; // 如果 pLevel 不是 Level 的实例，返回 false
+        }
+
+        if (!checkMobSpawnRules(type, pLevel, pSpawnType, pPos, pRandom)) {
+            return false; // 如果不满足基本生成规则，返回 false
+        }
+
+        int y = pPos.getY();
+        if (y >= 260) {
+            return false; // 不能生成在 y = 260 或更高的位置
+        }
+
+        return true;
+    }
+
     @Override
     public float getSwelling(float pPartialTicks) {
         return Mth.lerp(pPartialTicks, (float)this.oldSwell, (float)this.swell) / (float)(this.maxSwell - 2);

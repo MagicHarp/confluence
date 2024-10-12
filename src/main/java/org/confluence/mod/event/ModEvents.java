@@ -31,7 +31,7 @@ import org.confluence.mod.entity.monster.BloodCrawler;
 import org.confluence.mod.entity.ModEntities;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.confluence.mod.entity.boss.KingSlime;
-import org.confluence.mod.entity.monster.CrimsonCreeper;
+import org.confluence.mod.entity.monster.BloodySpore;
 import org.confluence.mod.entity.monster.demoneye.DemonEye;
 import org.confluence.mod.entity.minion.FinchMinionEntity;
 import org.confluence.mod.entity.npc.ModVillagers;
@@ -77,7 +77,7 @@ public final class ModEvents {
         event.put(ModEntities.BLACK_SLIME.get(), Monster.createMonsterAttributes().build()); // 由finalizeSpawn设置
         event.put(ModEntities.DEMON_EYE.get(), DemonEye.createAttributes().build());
         event.put(ModEntities.BLOOD_CRAWLER.get(), BloodCrawler.createAttributes().build());
-        event.put(ModEntities.CRIMSON_CREEPER.get(), CrimsonCreeper.createAttributes().build());
+        event.put(ModEntities.BLOODY_SPORE.get(), BloodySpore.createAttributes().build());
 
         event.put(ModEntities.KING_SLIME.get(), KingSlime.createSlimeAttributes().build());
         event.put(ModEntities.CTHULHU_EYE.get(), CthulhuEye.createAttributes().build());
@@ -196,6 +196,7 @@ public final class ModEvents {
 
         event.register(ModEntities.DEMON_EYE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEye::checkDemonEyeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.BLOOD_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BloodCrawler::checkBloodCrawlerSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.BLOODY_SPORE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BloodySpore::checkBloodySporeSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent
