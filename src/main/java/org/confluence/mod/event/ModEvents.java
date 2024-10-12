@@ -21,6 +21,7 @@ import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.block.crafting.AlchemyTableBlock;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.block.natural.spreadable.ISpreadable;
 import org.confluence.mod.block.reveal.StepRevealingBlock;
@@ -40,6 +41,8 @@ import org.confluence.mod.entity.monster.worm.TestWormEntity;
 import org.confluence.mod.entity.monster.worm.TestWormPart;
 import org.confluence.mod.fluid.FluidBuilder;
 import org.confluence.mod.fluid.ModFluids;
+import org.confluence.mod.item.ModItems;
+import org.confluence.mod.item.common.Materials;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.network.NetworkHandler;
@@ -96,6 +99,30 @@ public final class ModEvents {
             ModBiomes.registerRegionAndSurface();
             Confluence.registerGameRules();
         });
+
+        //炼药桌
+        AlchemyTableBlock.addStatement(1, Integer::sum, false);  //a+b
+        AlchemyTableBlock.addStatement(2, (a, b) -> a - b, false);
+        AlchemyTableBlock.addStatement(3, (a, b) -> a * b, false);
+        AlchemyTableBlock.addStatement(4, (a, b) -> a / b, false);
+        AlchemyTableBlock.addStatement(5, (a, b) -> a % b, false);
+        AlchemyTableBlock.addStatement(6, (a, b) -> (int) Math.sqrt(a), true);
+        AlchemyTableBlock.addStatement(7, (a, b) -> (int) Math.pow(a, 2), true);
+        AlchemyTableBlock.addStatement(8, (a, b) -> (int) Math.pow(a, 3), true);
+        AlchemyTableBlock.addStatement(9, (a, b) -> -a, true);
+
+        AlchemyTableBlock.addOperator(ModItems.WATERLEAF.get(), 1);
+        AlchemyTableBlock.addOperator(ModItems.MOONSHINE_GRASS.get(), 2);
+        AlchemyTableBlock.addOperator(ModItems.SHINE_ROOT.get(), 3);
+        AlchemyTableBlock.addOperator(ModItems.SHIVERINGTHORNS.get(), 4);
+        AlchemyTableBlock.addOperator(ModItems.SUNFLOWERS.get(), 5);
+        AlchemyTableBlock.addOperator(ModItems.DEATHWEED.get(), 6);
+        AlchemyTableBlock.addOperator(ModItems.FLAMEFLOWERS.get(), 7);
+        AlchemyTableBlock.addOperator(ModItems.EBONY_MUSHROOM.get(), 8);
+        AlchemyTableBlock.addOperator(ModItems.GLOWING_MUSHROOM.get(), 8);
+        AlchemyTableBlock.addOperator(ModItems.LIFE_MUSHROOM.get(), 8);
+        AlchemyTableBlock.addOperator(ModItems.TR_CRIMSON_MUSHROOM.get(), 8);
+        AlchemyTableBlock.addOperator(Materials.BLACK_PEARL.get(), 9);
     }
 
     @SubscribeEvent

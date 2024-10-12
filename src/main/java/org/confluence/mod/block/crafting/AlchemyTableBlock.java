@@ -35,10 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AlchemyTableBlock extends BaseEntityBlock {
     private static int DEVIATIONS = 150000;
@@ -121,27 +118,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
     }
 
     public static int getVault(ItemStack item){
-        if (item.is(ModItems.WATERLEAF.get())) {
-            return 1;
-        } else if (item.is(ModItems.MOONSHINE_GRASS.get())){
-            return 2;
-        } else if (item.is(ModItems.SHINE_ROOT.get())){
-            return 3;
-        } else if (item.is(ModItems.SHIVERINGTHORNS.get())){
-            return 4;
-        } else if (item.is(ModItems.SUNFLOWERS.get())){
-            return 5;
-        } else if (item.is(ModItems.DEATHWEED.get())){
-            return 6;
-        } else if (item.is(ModItems.FLAMEFLOWERS.get())){
-            return 7;
-        } else if (item.is(ModItems.EBONY_MUSHROOM.get()) || item.is(ModItems.GLOWING_MUSHROOM.get()) ||
-                item.is(ModItems.LIFE_MUSHROOM.get()) || item.is(ModItems.TR_CRIMSON_MUSHROOM.get())){
-            return 8;
-        } else if (item.is(Materials.BLACK_PEARL.get())){
-            return 9;
-        }
-        return 0;
+        return Entity.operatorMap.getOrDefault(item.getItem(), 0);
     }
 
     public static int calculateAverage(List<Integer> numbers) {
@@ -158,6 +135,15 @@ public class AlchemyTableBlock extends BaseEntityBlock {
         return new AlchemyTableBlock.Entity(pPos, pState);
     }
 
+    public static void addStatement(int operator, AlchemyTableStatement statement
+    , boolean onlyNeedFirstColor){
+        Entity.statementMap.put(operator, Map.of(statement, onlyNeedFirstColor));
+    }
+
+    public static void addOperator(Item item, int op){
+        Entity.operatorMap.put(item, op);
+    }
+
     public static class Entity extends BlockEntity{
 
         public int firstColor;
@@ -166,6 +152,9 @@ public class AlchemyTableBlock extends BaseEntityBlock {
 
         public int isRedstone;
         public int isGlowstone;
+
+        public static Map<Integer, Map<AlchemyTableStatement, Boolean>> statementMap = new HashMap<>();
+        public static Map<Item, Integer> operatorMap = new HashMap<>();
 
 
         public Entity(BlockPos pPos, BlockState pBlockState) {
@@ -233,30 +222,21 @@ public class AlchemyTableBlock extends BaseEntityBlock {
         }
 
         public boolean craft() {
-            if (firstColor != 0 && operator >= 6){
-                int result;
-                switch (operator){
-                    case 6 -> result = (int) Math.sqrt(firstColor);
-                    case 7 -> result = (int) Math.pow(firstColor, 2);
-                    case 8 -> result = (int) Math.pow(firstColor, 3);
-                    case 9 -> result = -firstColor;
-                    default -> throw new RuntimeException("Invalid operator");
-                }
-                if (operator != 9){
-                    firstColor = Math.abs(result);
-                } else {
-                    firstColor = result;
-                }
-                operator = 0;
-            } else if (firstColor != 0 && secondColor != 0 && operator != 0){
-                int result;
-                switch (operator){
-                    case 1 -> result = firstColor + secondColor;
-                    case 2 -> result = firstColor - secondColor;
-                    case 3 -> result = firstColor * secondColor;
-                    case 4 -> result = firstColor / secondColor;
-                    case 5 -> result = firstColor % secondColor;
-                    default -> throw new RuntimeException("Invalid operator");
+            if (firstColor != 0 && operator != 0){
+                int result = firstColor;
+                for (int op : statementMap.keySet()){
+                    if (op == operator) {
+                        AlchemyTableStatement statement = (AlchemyTableStatement) statementMap.get(op).keySet().toArray()[0];
+                        if (!statementMap.get(op).get(statement)){
+                            if (secondColor != 0){
+                                result = statement.getStatement(firstColor, secondColor);
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            result = statement.getStatement(firstColor, 0);
+                        }
+                    }
                 }
                 firstColor = Math.abs(result);
                 operator = 0;
@@ -266,5 +246,10 @@ public class AlchemyTableBlock extends BaseEntityBlock {
             }
             return true;
         }
+    }
+
+    @FunctionalInterface
+    public interface AlchemyTableStatement{
+        int getStatement(int a, int b);
     }
 }
