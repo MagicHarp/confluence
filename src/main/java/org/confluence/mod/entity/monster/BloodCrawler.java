@@ -1,7 +1,10 @@
 package org.confluence.mod.entity.monster;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -13,11 +16,15 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import org.confluence.mod.misc.ModSoundEvents;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.Random;
 
 public class BloodCrawler extends Spider implements GeoEntity {
 
@@ -75,6 +82,23 @@ public class BloodCrawler extends Spider implements GeoEntity {
 
         return true;
     }
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSoundEvents.BLOOD_CRAWLER_DEATH.get();
+    }
+    @Override
+    protected SoundEvent getAmbientSound() {
+        Random rand = new Random();
+        SoundEvent sound1 = ModSoundEvents.BLOOD_CRAWLER_FREE.get();
+        SoundEvent sound2 = ModSoundEvents.BLOOD_CRAWLER_FREE_2.get();
+
+        // 随机选择音效
+        return rand.nextBoolean() ? sound1 : sound2;
+    }
+    @Override
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
+        return ModSoundEvents.BLOOD_CRAWLER_HURT.get();
+    }
 
 
 
@@ -90,4 +114,5 @@ public class BloodCrawler extends Spider implements GeoEntity {
         controllers.add(DefaultAnimations.genericWalkIdleController(this));
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE));
     }
+
 }

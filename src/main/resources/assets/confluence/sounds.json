@@ -176,5 +176,25 @@
         "sounds": [
             "confluence:hurried_roaring"
         ]
+    },
+    "blood_crawler_death": {
+        "sounds": [
+            "confluence:mob/blood_crawler_death"
+        ]
+    },
+    "blood_crawler_free": {
+        "sounds": [
+            "confluence:mob/blood_crawler_free"
+        ]
+    },
+    "blood_crawler_free_2": {
+        "sounds": [
+            "confluence:mob/blood_crawler_free_2"
+        ]
+    },
+    "blood_crawler_hurt": {
+        "sounds": [
+            "confluence:mob/blood_crawler_hurt"
+        ]
     }
 }

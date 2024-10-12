@@ -28,7 +28,10 @@ public class BloodySpore extends Creeper {
         return Mob.createMobAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 0.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.MAX_HEALTH, 100.0);
+                .add(Attributes.MAX_HEALTH, 100.0)
+                .add(Attributes.FOLLOW_RANGE, 32)             // 跟随距离
+                .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)  // 召唤物品的几率
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1);     // 击退抗性
     }
 
     @Override
