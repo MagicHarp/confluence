@@ -34,8 +34,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class BloodCrawler extends Spider implements GeoEntity {
 
-    private static final int ATTACK_DAMAGE = 11;
-    private static final int MAX_HEALTH = 23;
+    private static final int ATTACK_DAMAGE = 15;
+    private static final int MAX_HEALTH = 31;
     private static final int DEFENSE = 2;
 
     public BloodCrawler(EntityType<? extends Spider> type, Level level) {
@@ -67,7 +67,7 @@ public class BloodCrawler extends Spider implements GeoEntity {
             .add(Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE)  // 攻击力
             .add(Attributes.MAX_HEALTH, MAX_HEALTH)        // 生命值
             .add(Attributes.ARMOR, DEFENSE)                 // 防御值
-            .add(Attributes.MOVEMENT_SPEED, 0.3)          // 移动速度
+            .add(Attributes.MOVEMENT_SPEED, 0.38)          // 移动速度
             .add(Attributes.FOLLOW_RANGE, 32)             // 跟随距离
             .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)  // 召唤物品的几率
             .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);     // 击退抗性
@@ -100,7 +100,7 @@ public class BloodCrawler extends Spider implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(DefaultAnimations.genericWalkController(this));
-        //controllers.add(DefaultAnimations.genericWalkIdleController(this));
+        controllers.add(DefaultAnimations.genericWalkIdleController(this));
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE));
     }
 }
