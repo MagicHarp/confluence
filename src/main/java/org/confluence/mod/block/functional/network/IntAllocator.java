@@ -1,11 +1,9 @@
 package org.confluence.mod.block.functional.network;
 
-
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 
 public class IntAllocator {
-    private final IntSet table;
+    private final IntOpenHashSet table;
 
     public IntAllocator() {
         this.table = new IntOpenHashSet();

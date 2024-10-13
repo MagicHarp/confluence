@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EffectInstance;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.PostPass;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.confluence.mod.mixin.client.accessor.PostPassAccessor;
@@ -28,6 +29,8 @@ public class LightPostPass extends PostPass {
         EffectInstance effect = getEffect();
         PostPassAccessor accessor = (PostPassAccessor) this;
         List<IntSupplier> auxAssets = accessor.getAuxAssets();
+        LightTexture lightTexture = Minecraft.getInstance().gameRenderer.lightTexture();
+        lightTexture.turnOnLightLayer();
         effect.setSampler("Sampler2", () -> RenderSystem.getShaderTexture(2));
         // Custom End
         effect.setSampler("DiffuseSampler", inTarget::getColorTextureId);
@@ -64,5 +67,8 @@ public class LightPostPass extends PostPass {
                 ((RenderTarget) object).unbindRead();
             }
         }
+
+        // Custom Start
+        lightTexture.turnOffLightLayer();
     }
 }

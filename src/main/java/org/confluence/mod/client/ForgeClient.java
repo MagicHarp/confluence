@@ -1,11 +1,15 @@
 package org.confluence.mod.client;
 
+import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.PostChain;
+import net.minecraft.client.renderer.PostPass;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -27,16 +31,21 @@ import org.confluence.mod.capability.prefix.PrefixProvider;
 import org.confluence.mod.capability.prefix.PrefixType;
 import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.handler.*;
+import org.confluence.mod.client.shader.LightPostPass;
 import org.confluence.mod.effect.ModEffects;
 import org.confluence.mod.effect.harmful.CursedEffect;
 import org.confluence.mod.effect.harmful.StonedEffect;
+import org.confluence.mod.item.ModItems;
 import org.confluence.mod.item.curio.combat.IAutoAttack;
 import org.confluence.mod.misc.ModTags;
+import org.confluence.mod.mixin.client.accessor.GameRendererAccessor;
 import org.confluence.mod.mixin.client.accessor.MinecraftAccessor;
+import org.confluence.mod.mixin.client.accessor.PostChainAccessor;
 import org.confluence.mod.mixinauxiliary.ILivingEntityRenderer;
 import org.confluence.mod.mixinauxiliary.IModelPart;
 import org.confluence.mod.util.DeathAnimUtils;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,11 +108,38 @@ public final class ForgeClient {
 
     @SubscribeEvent
     public static void leftClick(InputEvent.InteractionKeyMappingTriggered event) {
-        LocalPlayer localPlayer = Minecraft.getInstance().player;
+        Minecraft minecraft = Minecraft.getInstance();
+        LocalPlayer localPlayer = minecraft.player;
         if (localPlayer == null) return;
         GunShootingHandler.animCancel(event, localPlayer);
         CursedEffect.onLeftClick(localPlayer, event);
         StonedEffect.onLeftClick(localPlayer, event);
+
+        if (localPlayer.getMainHandItem().is(ModItems.EXPERT_TEST_ITEM.get())) {
+            GameRenderer gameRenderer = minecraft.gameRenderer;
+            GameRendererAccessor gameRendererAccessor = (GameRendererAccessor) gameRenderer;
+            PostChain postEffect = gameRendererAccessor.getPostEffect();
+            if (postEffect != null) {
+                postEffect.close();
+            }
+
+            try {
+                PostChain postChain = new PostChain(minecraft.getTextureManager(), gameRendererAccessor.getResourceManager(), minecraft.getMainRenderTarget(), Confluence.asResource("shaders/post/light.json"));
+                PostChainAccessor postChainAccessor = (PostChainAccessor) postChain;
+                PostPass postpass = new LightPostPass(
+                        gameRendererAccessor.getResourceManager(), "confluence:blit",
+                        postChainAccessor.callGetRenderTarget("swap"),
+                        postChainAccessor.callGetRenderTarget("minecraft:main")
+                );
+                postChainAccessor.getPasses().add(postChainAccessor.getPasses().size(), postpass);
+                gameRendererAccessor.setPostEffect(postChain);
+                postChain.resize(minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight());
+                gameRendererAccessor.setEffectActive(true);
+            } catch (IOException | JsonSyntaxException ioexception) {
+                gameRendererAccessor.setEffectIndex(GameRenderer.EFFECT_NONE);
+                gameRendererAccessor.setEffectActive(false);
+            }
+        }
     }
 
     @SubscribeEvent
