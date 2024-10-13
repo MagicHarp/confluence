@@ -95,6 +95,10 @@ public final class ModBlocks {
     public static final LogBlocks ASH_LOG_BLOCKS = new LogBlocks("ash", ASH.SET, ASH.TYPE, true, false);
     public static final RegistryObject<Block> ASH_BLOCK = registerWithItem("ash_block", AshBlock::new);
     public static final RegistryObject<Block> ASH_GRASS_BLOCK = registerWithItem("ash_grass_block", AshGrassBlock::new);
+    // life
+    public static final RegistryObject<Block> LIFE_PLANKS = registerWithItem("life_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> LIFE_LOG = registerWithItem("life_log", () -> new BeamLikeBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> LIFE_LEAVES = registerWithItem("life_leaves", () -> new CustomModelBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     // mushroom
     public static final RegistryObject<MushroomGrassBlock> MUSHROOM_GRASS_BLOCK = registerWithItem("mushroom_grass_block", MushroomGrassBlock::new);
     // jewelry

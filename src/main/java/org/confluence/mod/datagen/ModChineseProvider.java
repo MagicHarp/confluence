@@ -839,6 +839,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(ASH_LOG_BLOCKS.FENCE_GATE.get(), "白蜡木栅栏门");
         add(ASH_LOG_BLOCKS.PRESSURE_PLATE.get(), "白蜡木压力板");
 
+        add(LIFE_LOG.get(), "生命原木");
+        add(LIFE_LEAVES.get(), "生命木树叶");
+        add(LIFE_PLANKS.get(), "生命木板");
 
         add(DESERT_FOSSIL.get(), "沙漠化石");
         add(HARDENED_SAND_BLOCK.get(), "硬化沙块");

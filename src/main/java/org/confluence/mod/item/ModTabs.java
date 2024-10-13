@@ -50,6 +50,8 @@ public final class ModTabs {
             .displayItems((parameters, output) -> {
                 LogBlocks.acceptBuilding(output);
                 for (RegistryObject<Block> blocks : DecorativeBlocks.values()) output.accept(blocks.get());
+                output.accept(LIFE_PLANKS.get());
+
                 output.accept(BIG_RUBY_BLOCK.get());
                 output.accept(BIG_AMBER_BLOCK.get());
                 output.accept(BIG_TOPAZ_BLOCK.get());
@@ -145,6 +147,9 @@ public final class ModTabs {
                 output.accept(ASH_GRASS_BLOCK.get());
                 output.accept(ASH_LOG_BLOCKS.LOG.get());
                 output.accept(ASH_LOG_BLOCKS.LEAVES.get());
+
+                output.accept(LIFE_LEAVES.get());
+                output.accept(LIFE_LOG.get());
                 // 树苗
                 output.accept(SHADOW_SAPLING.get());
                 output.accept(EBONY_SAPLING.get());
