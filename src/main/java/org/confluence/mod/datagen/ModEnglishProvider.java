@@ -260,7 +260,8 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("item.confluence.magic_conch.pos", "Pos: [%s, %s, %s]");
 
-        add("death.attack.falling_star", "%1$s was squashed by a falling star");
+        add("death.attack.falling_star", "%1$s got a response from a meteor");
+        add("death.attack.star_cloak", "%1$s was squashed by a falling star");
         add("death.attack.boulder", "%1$s  is crushed by boulder");
 
         add("painting.confluence.magic_harp.title", "MAGIC_HARP");

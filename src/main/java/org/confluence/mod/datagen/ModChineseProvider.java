@@ -1,6 +1,8 @@
 package org.confluence.mod.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.block.ModBlocks;
@@ -295,7 +297,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("item.confluence.step_stool.tooltip", "按↑键站得更高，按Shift键下来");
         add("item.confluence.step_stool.tooltip2", "额外高度：%s");
 
-        add("death.attack.falling_star", "%1$s 被坠星压扁了");
+        add("death.attack.falling_star", "%1$s 得到了流星的回应");
         add("death.attack.star_cloak", "%1$s 被坠星压扁了");
         add("death.attack.boulder", "%1$s 被巨石均匀地涂抹在地上");
 
