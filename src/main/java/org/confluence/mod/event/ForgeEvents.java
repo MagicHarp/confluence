@@ -38,6 +38,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -79,6 +80,7 @@ import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
+import org.confluence.mod.item.sword.DeveloperSword;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
@@ -479,5 +481,17 @@ public final class ForgeEvents {
             EntityType<?> entityType = entry.get();
             event.registerTeamData(entityType, data -> data.setCanTeam(false));
         });
+    }
+
+    @SubscribeEvent
+    public static void appendTooltip(ItemTooltipEvent event) {
+        if (event.getItemStack().getItem() instanceof DeveloperSword){
+            event.getToolTip().clear();
+            event.getToolTip().add(Component.translatable("item.confluence.developer_sword"));
+            event.getToolTip().add(Component.literal(""));
+            event.getToolTip().add(Component.translatable("item.modifiers.mainhand").withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add(Component.literal(" ∞ ").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_damage")));
+            event.getToolTip().add(Component.literal(" ∞ ").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_speed")));
+        }
     }
 }

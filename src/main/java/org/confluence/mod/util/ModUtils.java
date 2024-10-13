@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.color.FloatRGBA;
 import org.confluence.mod.item.ModItems;
 import org.joml.Matrix3f;
@@ -419,5 +420,9 @@ public final class ModUtils {
     public static List<? extends Entity> getNearbyEntities(double radius, Level level,
                                           Class<? extends Entity> entity, AABB box) {
         return level.getEntitiesOfClass(entity, box.inflate(radius));
+    }
+
+    public static int getRainbowColor() {
+        return AnimateColor.getExpertColor();
     }
 }

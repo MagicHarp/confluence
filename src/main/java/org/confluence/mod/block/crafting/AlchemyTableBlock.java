@@ -104,7 +104,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                         item.shrink(entity.isGlowstone * (int) Math.pow(entity.isGlowstone, Math.pow(entity.isGlowstone, entity.isGlowstone)) + 1);
                     }
                 }
-                if (getVault(item) != 0){
+                if (getVault(item) != 0 && entity.operator == 0){
                     entity.operator = getVault(item);
                     item.shrink(1);
                 }
@@ -119,6 +119,16 @@ public class AlchemyTableBlock extends BaseEntityBlock {
 
     public static int getVault(ItemStack item){
         return Entity.operatorMap.getOrDefault(item.getItem(), 0);
+    }
+
+    public static Item getItemByOperator(int i){
+        Set<Map.Entry<Item, Integer>> e = Entity.operatorMap.entrySet();
+        for (Map.Entry<Item, Integer> en : e){
+            if (en.getValue().equals(i)){
+                return en.getKey();
+            }
+        }
+        return Items.AIR;
     }
 
     public static int calculateAverage(List<Integer> numbers) {

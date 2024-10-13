@@ -66,7 +66,6 @@ public class BloodySpore extends Creeper {
             int $$0 = this.isPowered() ? 2 : 1;
             this.dead = true;
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 4.2F * $$0, Level.ExplosionInteraction.NONE);
-            System.out.println("ok, it is custom exp!");
             int number = (random.nextInt(2, 4)) * $$0;
             for (int i = 0; i < number; i++){
                 //summon
@@ -87,11 +86,7 @@ public class BloodySpore extends Creeper {
         }
 
         int y = pPos.getY();
-        if (y >= 260) {
-            return false; // 不能生成在 y = 260 或更高的位置
-        }
-
-        return true;
+        return y < 260; // 不能生成在 y = 260 或更高的位置
     }
 
     @Override
