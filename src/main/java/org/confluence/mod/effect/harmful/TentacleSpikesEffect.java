@@ -5,10 +5,10 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class BloodButcheredEffect extends MobEffect {
+public class TentacleSpikesEffect extends MobEffect {
     private static int tickCount = 0;
 
-    public BloodButcheredEffect() {
+    public TentacleSpikesEffect() {
         super(MobEffectCategory.HARMFUL, 0xFF0000);
     }
 
@@ -18,7 +18,7 @@ public class BloodButcheredEffect extends MobEffect {
 
         if (tickCount % 35 == 0){
             tickCount = 0;
-            damage = pAmplifier + 4.0F;
+            damage = pAmplifier + 2.0F;
             pLivingEntity.hurt(pLivingEntity.level().damageSources().magic(), damage);
         }
 

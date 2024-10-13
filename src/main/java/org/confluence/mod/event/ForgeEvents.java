@@ -81,6 +81,7 @@ import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
 import org.confluence.mod.item.sword.DeveloperSword;
+import org.confluence.mod.item.sword.TentacleMaceSword;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
 import org.confluence.mod.misc.ModDamageTypes;
@@ -307,6 +308,19 @@ public final class ForgeEvents {
         DamageSource damageSource = event.getSource();
         LivingEntity damagingEntity = event.getEntity();
         if (damageSource.getEntity() instanceof LivingEntity livingEntity) {
+            if (livingEntity.getItemInHand(event.getEntity().getUsedItemHand()).getItem() instanceof TentacleMaceSword) {
+                if (damagingEntity.hasEffect(ModEffects.TENTACLE_SPIKES.get())) {
+                    if (damagingEntity.getEffect(ModEffects.TENTACLE_SPIKES.get()).getAmplifier() < 4) {
+                        damagingEntity.addEffect(new MobEffectInstance(ModEffects.TENTACLE_SPIKES.get(), 180, damagingEntity.getEffect(ModEffects.TENTACLE_SPIKES.get()).getAmplifier() + 1, false, false, false));
+                    } else {
+                        damagingEntity.addEffect(new MobEffectInstance(ModEffects.TENTACLE_SPIKES.get(), 180, 4, false, false, false));
+                    }
+                } else {
+                    damagingEntity.addEffect(new MobEffectInstance(ModEffects.TENTACLE_SPIKES.get(), 180, 0, false, false, false));
+                }
+            }
+        }
+        if (damageSource.getEntity() instanceof LivingEntity livingEntity) {
             if (livingEntity.getItemInHand(event.getEntity().getUsedItemHand()).getItem() instanceof BloodButchereSword) {
                 if (damagingEntity.hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
                     if (damagingEntity.getEffect(ModEffects.BLOOD_BUTCHERED.get()).getAmplifier() < 4) {
@@ -345,6 +359,8 @@ public final class ForgeEvents {
             invTicks.put(cause, time);
         }
     }
+
+
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {

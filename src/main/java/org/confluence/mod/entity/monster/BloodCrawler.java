@@ -64,7 +64,7 @@ public class BloodCrawler extends Spider implements GeoEntity {
             .add(Attributes.MOVEMENT_SPEED, 0.38)          // 移动速度
             .add(Attributes.FOLLOW_RANGE, 32)             // 跟随距离
             .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)  // 召唤物品的几率
-            .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);     // 击退抗性
+            .add(Attributes.KNOCKBACK_RESISTANCE, 0.8);     // 击退抗性
     }
     public static boolean checkBloodCrawlerSpawn(EntityType<? extends BloodCrawler> type, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
         if (!(pLevel instanceof Level level)) {

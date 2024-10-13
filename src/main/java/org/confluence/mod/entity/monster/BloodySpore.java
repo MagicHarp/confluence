@@ -31,7 +31,7 @@ public class BloodySpore extends Creeper {
                 .add(Attributes.MAX_HEALTH, 100.0)
                 .add(Attributes.FOLLOW_RANGE, 32)             // 跟随距离
                 .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)  // 召唤物品的几率
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1);     // 击退抗性
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8);     // 击退抗性
     }
 
     @Override

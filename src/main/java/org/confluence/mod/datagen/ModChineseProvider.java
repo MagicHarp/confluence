@@ -1191,6 +1191,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(Swords.LIGHTS_BANE.get(), "魔光剑");
         add(Swords.BLOOD_BUTCHERER.get(), "血腥屠刀");
         add(Swords.KATANA.get(), "武士刀");
+        add(Swords.TENTACLE_MACE.get(), "触手钉锤");
         add(Swords.ICE_BLADE.get(), "冰雪剑");
         add(Swords.EXOTIC_SCIMITAR.get(), "异域弯刀");
         add(Swords.FAKE_SWORD.get(), "假剑");
@@ -2069,6 +2070,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.POTION_SICKNESS.get(), "耐药性");
         add(ModEffects.CEREBRAL_MINDTRICK.get(), "控脑术");
         add(ModEffects.BLOOD_BUTCHERED.get(), "血腥屠宰");
+        add(ModEffects.TENTACLE_SPIKES.get(), "触手钉刺");
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
         // 雕像

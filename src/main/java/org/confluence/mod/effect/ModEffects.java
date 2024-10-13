@@ -60,6 +60,7 @@ public final class ModEffects {
     public static final RegistryObject<ShineEffect> SHINE = EFFECTS.register("shine", ShineEffect::new);
     public static final RegistryObject<ShimmerEffect> SHIMMER = EFFECTS.register("shimmer", ShimmerEffect::new);
     public static final RegistryObject<BloodButcheredEffect> BLOOD_BUTCHERED = EFFECTS.register("blood_butchered", BloodButcheredEffect::new);
+    public static final RegistryObject<TentacleSpikesEffect> TENTACLE_SPIKES = EFFECTS.register("tentacle_spikes", TentacleSpikesEffect::new);
     public static final RegistryObject<MobEffect> SPELUNKER = EFFECTS.register("spelunker", ()->new NormalEffect(MobEffectCategory.BENEFICIAL, Color.yellow.getRGB()));
     public static final RegistryObject<MobEffect> HUNTER = EFFECTS.register("hunter", ()->new NormalEffect(MobEffectCategory.BENEFICIAL, Color.orange.getRGB()));
     public static final RegistryObject<MobEffect> DANGER_SENSE = EFFECTS.register("danger_sense", ()->new NormalEffect(MobEffectCategory.BENEFICIAL, Color.PINK.getRGB()));
