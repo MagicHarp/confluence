@@ -196,5 +196,10 @@
         "sounds": [
             "confluence:mob/blood_crawler_hurt"
         ]
+    },
+    "decoupling": {
+        "sounds": [
+            "confluence:decoupling"
+        ]
     }
 }

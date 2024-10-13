@@ -45,6 +45,7 @@ public final class ModSoundEvents {
     public static final RegistryObject<SoundEvent> REGULAR_STAFF_SHOOT_2 = register("regular_staff_shoot_2"); // 射弹2
     public static final RegistryObject<SoundEvent> ROAR = register("roar"); // boss吼叫
     public static final RegistryObject<SoundEvent> HURRIED_ROARING = register("hurried_roaring"); //疯狗冲刺
+    public static final RegistryObject<SoundEvent> DECOUPLING = register("decoupling"); //脱钩
     // 血爬虫
     public static final RegistryObject<SoundEvent> BLOOD_CRAWLER_DEATH = register("blood_crawler_death");
     public static final RegistryObject<SoundEvent> BLOOD_CRAWLER_FREE = register("blood_crawler_free");
