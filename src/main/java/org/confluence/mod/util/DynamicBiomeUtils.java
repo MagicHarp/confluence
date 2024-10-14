@@ -5,8 +5,11 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import org.confluence.mod.misc.ModTags;
-import org.confluence.mod.mixin.chunk.PalettedContainerAccessor;
 import org.confluence.mod.mixinauxiliary.IChunkSection;
+import org.confluence.mod.worldgen.biome.ModBiomes;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DynamicBiomeUtils {
     public static Holder<Biome> BIOME_CRIMSON;
@@ -26,32 +29,33 @@ public class DynamicBiomeUtils {
         if(!(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> biomes)){
             return null;
         }
-        PalettedContainer.Data<Holder<Biome>> data = ((PalettedContainerAccessor<Holder<Biome>>) biomes).getData();
-        Holder<Biome> evil = null;
-        boolean matchPref = true;
-        boolean hasPure = false;
-        int size = data.palette().getSize();
-        for(int i = 0; i < size; i++){
-            Holder<Biome> biome = data.palette().valueFor(i);
-            if(radical){
-                if((preference == null && biome.is(ModTags.SPREADING)) || preference == biome){
-                    return biome;
+        AtomicReference<Holder<Biome>> evil = new AtomicReference<>();
+        AtomicBoolean matchPref = new AtomicBoolean(true);
+        AtomicBoolean hasPure = new AtomicBoolean(false);
+        try{
+            biomes.getAll(biome->{
+                if(radical){
+                    if((preference == null && biome.is(ModTags.SPREADING)) || preference == biome){
+                        throw new ReturnException(biome); // 提前返回
+                    }
+                }else{
+                    evil.set(biome);
+                    if(preference == null && !biome.is(ModTags.SPREADING)){
+                        hasPure.set(true);
+                    }else if(biome != preference){
+                        matchPref.set(false);
+                    }
                 }
-            }else{
-                evil=biome;
-                if(preference == null && !biome.is(ModTags.SPREADING)){
-                    hasPure = true;
-                }else if(biome != preference){
-                    matchPref=false;
-                }
-            }
+            });
+        }catch(ReturnException e){
+            return (Holder<Biome>) e.getValue();
         }
 
         if(radical) return null;
         if(preference == null){
-            return hasPure ? null : evil;
+            return hasPure.get() ? null : evil.get();
         }else {
-            return matchPref /*尽量避开但是真的避不开*/? evil : null;
+            return matchPref.get() /*尽量避开但是真的避不开*/? evil.get() : null;
         }
     }
 
@@ -59,7 +63,7 @@ public class DynamicBiomeUtils {
      * @param counts 0猩红，1腐化，2神圣
      * @return 平衡的结果，纯净返回null
      */
-    public static Holder<Biome> balanceEvil(int[] counts){
+    public static Holder<Biome> balanceEvil(int[] counts, IChunkSection biomeSource){
         int crimson = counts[0];
         int corrupt = counts[1];
         int hallow = counts[2];
@@ -75,11 +79,11 @@ public class DynamicBiomeUtils {
         counts[2] = hallow;
 
         if(corrupt >= BIOME_THRESHOLD && corrupt >= crimson){
-            return BIOME_CORRUPT;
+            return biomeSource.confluence$getBiomeByKey(ModBiomes.THE_CORRUPTION);
         }else if(crimson >= BIOME_THRESHOLD){
-            return BIOME_CRIMSON;
+            return biomeSource.confluence$getBiomeByKey(ModBiomes.TR_CRIMSON);
         }else if(hallow >= BIOME_THRESHOLD){
-            return BIOME_HALLOW;
+            return biomeSource.confluence$getBiomeByKey(ModBiomes.THE_HALLOW);
         }else{
             return null;
         }
@@ -87,7 +91,7 @@ public class DynamicBiomeUtils {
 
     public static Holder<Biome> judgeSection(LevelChunkSection section){
         IChunkSection counter = (IChunkSection) section;
-        return balanceEvil(new int[]{counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()});
+        return balanceEvil(new int[]{counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()}, counter);
     }
 
 }

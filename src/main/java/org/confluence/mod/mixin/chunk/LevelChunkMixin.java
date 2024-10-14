@@ -64,7 +64,7 @@ public abstract class LevelChunkMixin extends ChunkAccess {
         if(confluence$serverLevel == null) return;
         IChunkSection counter = (IChunkSection) section;
         int[] i = {counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()};
-        Holder<Biome> targetBiome = balanceEvil(i);
+        Holder<Biome> targetBiome = balanceEvil(i, counter);
 
         if(targetBiome != null){
             confluence$infect(section, pPos, targetBiome, true);
@@ -113,7 +113,6 @@ public abstract class LevelChunkMixin extends ChunkAccess {
             IChunkSection counter = (IChunkSection) section;
             counter.confluence$setBiomes(counter.confluence$getBackupBiome());
         }else{
-//            section.fillBiomesFromNoise((pX, pY, pZ, pSampler) -> biome, null, 0, 0, 0);
             ((IChunkSection) section).confluence$setBiomes(((IPalettedContainer<Holder<Biome>>) section.getBiomes()).confluence$recreateSingle(biome));
         }
         BlockPos abovePos = pPos.above(16);

@@ -24,7 +24,7 @@ public abstract class ProtoChunkMixin {
     private void setBlock(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, int $$3, int $$4, int $$5, int $$6, LevelChunkSection section, boolean $$8, int $$9, int $$10, int $$11, BlockState beforeState){
         IChunkSection counter = (IChunkSection) section;
         int[] i = {counter.confluence$getCrimson(), counter.confluence$getCorrupt(), counter.confluence$getHallow()};
-        Holder<Biome> targetBiome = balanceEvil(i);
+        Holder<Biome> targetBiome = balanceEvil(i, counter);
         if(targetBiome != null){
             confluence$infect(section, targetBiome);
         }
@@ -40,6 +40,5 @@ public abstract class ProtoChunkMixin {
             return;
         }
         ((IChunkSection)section).confluence$setBiomes(((IPalettedContainer<Holder<Biome>>)section.getBiomes()).confluence$recreateSingle(biome));
-
     }
 }

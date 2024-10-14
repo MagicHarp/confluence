@@ -1,7 +1,9 @@
 package org.confluence.mod.mixin.chunk;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.IdMap;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
@@ -70,7 +72,6 @@ public abstract class LevelChunkSectionMixin implements IChunkSection {
         this.biomes = biomes;
     }
 
-
     @Inject(method = "<init>(Lnet/minecraft/core/Registry;)V",at = @At("RETURN"))
     private void constr(Registry<Biome> pBiomeRegistry, CallbackInfo ci){
         confluence$backupBiome = biomes.recreate();
@@ -93,5 +94,15 @@ public abstract class LevelChunkSectionMixin implements IChunkSection {
                 case HALLOW -> confluence$hallowCount++;
             }
         }
+    }
+
+    public Holder<Biome> confluence$getBiomeByKey(ResourceKey<Biome> key){
+        IdMap<Holder<Biome>> biomeReg = ((PalettedContainerAccessor<Holder<Biome>>) biomes).getRegistry();
+        for(Holder<Biome> biome : biomeReg){
+            if(biome.unwrapKey().orElse(null) == key){
+                return biome;
+            }
+        }
+        throw new IllegalArgumentException("Getting unregistered biome " + key);
     }
 }
