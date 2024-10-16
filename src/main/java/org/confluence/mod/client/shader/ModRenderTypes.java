@@ -1,6 +1,5 @@
 package org.confluence.mod.client.shader;
 
-import com.lowdragmc.shimmer.forge.ShimmerMod;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
@@ -13,6 +12,7 @@ import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.post.DIYShaderInstance;
 
 import java.io.IOException;
 
@@ -21,12 +21,79 @@ import static org.confluence.mod.Confluence.MODID;
 public final class ModRenderTypes extends RenderStateShard {
     public static RenderType shimmerLiquid;
 
-    private ModRenderTypes() {
-        super(null, null, null);
+
+
+
+
+
+    @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class Shaders {
+        private static ShaderInstance entityDynamic;
+        private static ShaderInstance shimmerLiquid;
+        public static DIYShaderInstance cth;
+        public static DIYShaderInstance diy_blit;
+
+        public static ShaderInstance aether;
+
+        @SubscribeEvent
+        public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
+            ResourceProvider resourceProvider = event.getResourceProvider();
+            event.registerShader(
+                    new ShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("rendertype_entity_dynamic"),
+                            DefaultVertexFormat.NEW_ENTITY),
+                    shader -> entityDynamic = shader
+            );
+
+            event.registerShader(
+                    new ShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("shimmer_liquid"),
+                            DefaultVertexFormat.BLOCK),
+                    shader -> shimmerLiquid = shader
+            );
+//            event.registerShader(
+//                new ShaderInstance(
+//                    resourceProvider,
+//                    Confluence.asResource("color"),
+//                    DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR),
+//                shader -> aether = shader
+//            );
+
+
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("cth"),
+                            DefaultVertexFormat.NEW_ENTITY,
+                            um->{}//um.createUniform("samcolor")
+                            ),
+                    shader -> cth = (DIYShaderInstance) shader
+            );
+
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("diy_blit"),
+                            DefaultVertexFormat.BLIT_SCREEN,
+                            um->{
+                                um.createUniform("offs");
+                            }
+                            ),
+                    shader -> diy_blit = (DIYShaderInstance) shader
+            );
+
+        }
     }
+
+
 
     public static final ShaderStateShard ENTITY_DYNAMIC_SHADER = new ShaderStateShard(() -> Shaders.entityDynamic);
     public static final ShaderStateShard SHIMMER_LIQUID_SHADER = new ShaderStateShard(() -> Shaders.shimmerLiquid);
+    public static final ShaderStateShard CTH_SHADER = new ShaderStateShard(() -> Shaders.cth);
+    public static final ShaderStateShard DIY_BLIT = new ShaderStateShard(() -> Shaders.diy_blit);
+
 
     public static RenderType getEntityDynamic(ResourceLocation... textures) {
         MultiTextureStateShard.Builder builder = MultiTextureStateShard.builder();
@@ -64,37 +131,30 @@ public final class ModRenderTypes extends RenderStateShard {
         );
     }
 
-    @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class Shaders {
-        private static ShaderInstance entityDynamic;
-        private static ShaderInstance shimmerLiquid;
-        public static ShaderInstance aether;
+    public static RenderType cthRenderType(ResourceLocation tex) {
+        return RenderType.create(MODID + "cth_render_type",
+                DefaultVertexFormat.NEW_ENTITY,
+                VertexFormat.Mode.QUADS,
+                256,
+                true,
+                false,
+                RenderType.CompositeState.builder()
+                        .setShaderState(CTH_SHADER)
+                        .setTextureState(new RenderStateShard.TextureStateShard(tex, false, false))
+                        .setTransparencyState(NO_TRANSPARENCY)
+                        .setCullState(NO_CULL)
+                        .setLightmapState(LIGHTMAP)
+                        .setOverlayState(OVERLAY)
+                        //.setOutputState(RenderStateShard.OUTLINE_TARGET)
+                        .createCompositeState(false)
+        );
 
-        @SubscribeEvent
-        public static void onRegisterShaders(RegisterShadersEvent event) throws IOException {
-            ResourceProvider resourceProvider = event.getResourceProvider();
-            event.registerShader(
-                new ShaderInstance(
-                    resourceProvider,
-                    Confluence.asResource("rendertype_entity_dynamic"),
-                    DefaultVertexFormat.NEW_ENTITY),
-                shader -> entityDynamic = shader
-            );
-
-            event.registerShader(
-                new ShaderInstance(
-                    resourceProvider,
-                    Confluence.asResource("shimmer_liquid"),
-                    DefaultVertexFormat.BLOCK),
-                shader -> shimmerLiquid = shader
-            );
-//            event.registerShader(
-//                new ShaderInstance(
-//                    resourceProvider,
-//                    Confluence.asResource("color"),
-//                    DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR),
-//                shader -> aether = shader
-//            );
-        }
     }
+
+
+
+    private ModRenderTypes() {
+        super(null, null, null);
+    }
+
 }
