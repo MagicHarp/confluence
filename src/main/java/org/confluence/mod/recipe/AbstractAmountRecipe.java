@@ -114,7 +114,7 @@ public abstract class AbstractAmountRecipe implements Recipe<Container> {
             }
             if (nonNullList.isEmpty()) throw new JsonParseException("No ingredients for " + pRecipeId);
             R recipe = newInstance(pRecipeId, result, nonNullList);
-            if (ingredients.size() > recipe.maxIngredientSize()) throw new IndexOutOfBoundsException("The ingredient size of '" + pRecipeId + "' is out of 3");
+            if (ingredients.size() > recipe.maxIngredientSize()) throw new IndexOutOfBoundsException("The ingredient size of '" + pRecipeId + "' is multiOut of 3");
             return recipe;
         }
 

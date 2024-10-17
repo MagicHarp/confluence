@@ -84,7 +84,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("curios.tooltip.tally_counter", "Displays how many monsters have been killed");
         add("curios.tooltip.weather_radio", "Displays the weather");
         add("curios.tooltip.scope", "Increases view range for ranged weapons");
-        add("curios.tooltip.scope2", "Hold ranged weapon and crouch to zoom out");
+        add("curios.tooltip.scope2", "Hold ranged weapon and crouch to zoom multiOut");
         add("curios.tooltip.wall_climb", "Allows the ability to climb walls, hold shift key to slide down");
         add("curios.tooltip.wall_slide", "Allows the ability to slide down walls, hold shift key to slide down quickly");
         add("curios.tooltip.tabi", "Allows the ability to dash while double tap a direction");
@@ -314,7 +314,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("achievements.confluence.benched.title", "Benched");
         add("achievements.confluence.benched.description", "Craft your first Crafting Table.");
         add("achievements.confluence.star_power.title", "Star Power");
-        add("achievements.confluence.star_power.description", "Craft a mana crystal out of fallen stars, and consume it.");
+        add("achievements.confluence.star_power.description", "Craft a mana crystal multiOut of fallen stars, and consume it.");
         add("achievements.confluence.ooo_shinny.title", "Ooo! Shiny!");
         add("achievements.confluence.ooo_shinny.description", "Mine your first nugget of ore with a pickaxe.");
         add("achievements.confluence.i_am_loot.title", "I Am Loot!");

@@ -33,6 +33,7 @@ import org.confluence.mod.client.model.entity.hook.BaseHookModel;
 import org.confluence.mod.client.model.entity.hook.SkeletronHandModel;
 import org.confluence.mod.client.model.entity.hook.WebSlingerModel;
 import org.confluence.mod.client.particle.*;
+import org.confluence.mod.client.post.PostUtil;
 import org.confluence.mod.client.renderer.AchievementToast;
 import org.confluence.mod.client.renderer.block.*;
 import org.confluence.mod.client.renderer.entity.*;
@@ -114,6 +115,8 @@ public final class ModClient {
             MenuScreens.register(ModMenus.WORKSHOP.get(), WorkshopScreen::new);
 
             ModConnectives.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+            PostUtil.init();
         });
     }
 

@@ -57,7 +57,9 @@ public final class ForgeClient {
     public static void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer localPlayer = minecraft.player;
-        if (event.phase == TickEvent.Phase.START) return;
+        if (event.phase == TickEvent.Phase.START) {
+            return;
+        }
         GravitationHandler.tick(localPlayer);
         StepStoolHandler.handle(localPlayer);
         if (localPlayer == null) return;

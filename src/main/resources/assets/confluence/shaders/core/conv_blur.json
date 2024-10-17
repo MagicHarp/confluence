@@ -12,7 +12,7 @@
         "UV0"
     ],
     "samplers": [
-        { "name": "ori"},
+
         { "name": "att"}
 
     ],

@@ -45,7 +45,7 @@ public final class ModResources extends PathPackResources {
 //        InputStream inputStream = Confluence.class.getResourceAsStream("/resourcepacks/terraria_art/pack.png");
 //        BufferedImage bimg = ImageIO.read(Objects.requireNonNull(inputStream));
 //        StringBuilder text = new StringBuilder();
-//        out:
+//        multiOut:
 //        for (int y = 21; y < 37; y++) {
 //            for (int x = 384; x < 401; x++) {
 //                byte[] rgba = (byte[]) bimg.getRaster().getDataElements(x, y, null);
@@ -59,7 +59,7 @@ public final class ModResources extends PathPackResources {
 //                if ("0a00".equals(uniStr)) {
 //                    text.append("\n");
 //                } else if ("3f0b".equals(uniStr)) {
-//                    break out;
+//                    break multiOut;
 //                } else if (!"000".equals(uniStr) && !"0000".equals(uniStr)) {
 //                    text.append((char) Integer.parseInt(uniStr, 16));
 //                }

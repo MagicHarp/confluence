@@ -37,7 +37,7 @@ void main() {
 
 
 
-    //frag3 = vec4(average, average, average, 1.0);
+//    frag3 = vec4(average, average, average, color.a);
     frag3 =fragColor;
 
 

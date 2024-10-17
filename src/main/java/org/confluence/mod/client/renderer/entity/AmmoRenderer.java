@@ -37,7 +37,7 @@ public class AmmoRenderer extends EntityRenderer<BaseAmmoEntity> {
 
     @Override
     public void render(BaseAmmoEntity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-        //System.out.println("tickcount = "+pEntity.tickCount+"\nparticletick = "+pPartialTick);
+        //System.multiOut.println("tickcount = "+pEntity.tickCount+"\nparticletick = "+pPartialTick);
         pPoseStack.pushPose();
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.getYRot() - 90.0F));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.getXRot()));

@@ -40,6 +40,9 @@ public class UniformsMap {
     public void setUniform(String uniformName, int value) {
         glUniform1i(getUniformLocation(uniformName), value);
     }
+    public void setUniform(String uniformName, float value) {
+        glUniform1f(getUniformLocation(uniformName), value);
+    }
 
     public void setUniform(String uniformName, Matrix4f value) {
         try (MemoryStack stack = MemoryStack.stackPush()) {

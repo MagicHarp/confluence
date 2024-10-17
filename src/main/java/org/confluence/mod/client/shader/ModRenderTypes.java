@@ -30,7 +30,11 @@ public final class ModRenderTypes extends RenderStateShard {
     public static class Shaders {
         private static ShaderInstance entityDynamic;
         private static ShaderInstance shimmerLiquid;
-        public static DIYShaderInstance cth;
+
+
+        public static DIYShaderInstance cthSampler;
+
+        public static DIYShaderInstance conv;
         public static DIYShaderInstance diy_blit;
 
         public static ShaderInstance aether;
@@ -69,7 +73,7 @@ public final class ModRenderTypes extends RenderStateShard {
                             DefaultVertexFormat.NEW_ENTITY,
                             um->{}//um.createUniform("samcolor")
                             ),
-                    shader -> cth = (DIYShaderInstance) shader
+                    shader -> cthSampler = (DIYShaderInstance) shader
             );
 
             event.registerShader(
@@ -77,11 +81,22 @@ public final class ModRenderTypes extends RenderStateShard {
                             resourceProvider,
                             Confluence.asResource("diy_blit"),
                             DefaultVertexFormat.BLIT_SCREEN,
-                            um->{
-                                um.createUniform("offs");
-                            }
+                            null
                             ),
                     shader -> diy_blit = (DIYShaderInstance) shader
+            );
+
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("conv_blur"),
+                            DefaultVertexFormat.BLIT_SCREEN,
+                            um->{
+                                um.createUniform("dist");
+                                um.createUniform("dir");
+                            }
+                    ),
+                    shader -> conv = (DIYShaderInstance) shader
             );
 
         }
@@ -91,7 +106,7 @@ public final class ModRenderTypes extends RenderStateShard {
 
     public static final ShaderStateShard ENTITY_DYNAMIC_SHADER = new ShaderStateShard(() -> Shaders.entityDynamic);
     public static final ShaderStateShard SHIMMER_LIQUID_SHADER = new ShaderStateShard(() -> Shaders.shimmerLiquid);
-    public static final ShaderStateShard CTH_SHADER = new ShaderStateShard(() -> Shaders.cth);
+    public static final ShaderStateShard CTH_SHADER = new ShaderStateShard(() -> Shaders.cthSampler);
     public static final ShaderStateShard DIY_BLIT = new ShaderStateShard(() -> Shaders.diy_blit);
 
 

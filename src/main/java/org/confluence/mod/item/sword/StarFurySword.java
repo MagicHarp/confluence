@@ -77,7 +77,7 @@ public class StarFurySword extends SwordItem implements Image24x, ISwordProjecti
             Vec3 vec3 = e.getBoundingBox().clip(ori,end).orElse(null);
             //优先指向的目标
             if(vec3!=null){
-                //System.out.println("point directly");
+                //System.multiOut.println("point directly");
                 EntityHitResult entityHitResult = new EntityHitResult(e,vec3);
                 hits.add(entityHitResult);
             }//自瞄其他夹角小于一定度数的目标

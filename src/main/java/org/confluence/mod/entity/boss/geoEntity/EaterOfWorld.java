@@ -327,7 +327,7 @@ public class EaterOfWorld extends TerraBossBase {
 
                     cur++;
                 }
-//                System.out.println(allSeg + " head:" + headCount);
+//                System.multiOut.println(allSeg + " head:" + headCount);
             }
         }else{
             segmentCount = entityData.get(DATA_SEG_COUNT);
