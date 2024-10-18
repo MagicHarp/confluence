@@ -71,6 +71,7 @@ public class ModChineseProvider extends LanguageProvider {
 
         add("bossevent.confluence.cthulhu_eye.generate", "克苏鲁之眼已经苏醒！");
         add("bossevent.confluence.cthulhu_eye.death", "克苏鲁之眼已被击败！");
+        add("bossevent.confluence.cthulhu_eye.leave", "克苏鲁之眼离开了！");
 
         add("entity.confluence.ice_slime", "冰冻史莱姆");
         add("entity.confluence.blue_slime", "蓝色史莱姆");

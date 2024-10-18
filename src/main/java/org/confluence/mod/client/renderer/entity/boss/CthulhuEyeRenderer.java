@@ -1,8 +1,5 @@
 package org.confluence.mod.client.renderer.entity.boss;
 
-import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -12,21 +9,21 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.client.model.entity.CthulhuEyeModel;
 import org.confluence.mod.client.post.DIYBlitTarget;
-import org.confluence.mod.client.post.DIYShaderInstance;
+import org.confluence.mod.client.post.PostUtil;
 import org.confluence.mod.client.shader.ModRenderTypes;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
-import org.joml.Vector4f;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import javax.annotation.Nullable;
 
-import static com.mojang.blaze3d.platform.GlStateManager.glActiveTexture;
-import static org.lwjgl.opengl.GL11C.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11C.glBindTexture;
-import static org.lwjgl.opengl.GL13C.GL_TEXTURE0;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CthulhuEyeRenderer extends GeoEntityRenderer<CthulhuEye> {
-    public static DIYBlitTarget tempBlurTarget;
+    //public static DIYBlitTarget tempBlurTarget;
     public CthulhuEyeRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new CthulhuEyeModel());
 
@@ -48,36 +45,33 @@ public class CthulhuEyeRenderer extends GeoEntityRenderer<CthulhuEye> {
 
     @Override
     public void render(CthulhuEye entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-//        ModRenderTypes.Shaders.cthSampler.setUniforms(ump -> {
-//            ump.setUniform("samcolor", new Vector4f(0,1,0,1));
-//        });
-        if(tempBlurTarget==null)  {
-            tempBlurTarget=new DIYBlitTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),
-                    false,true,ModRenderTypes.Shaders.conv,shader->{
-                shader.setSampler("att",  tempBlurTarget.getColorTextureId());
-            });
-//            tempBlurTarget=new TextureTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),false,true);
-            tempBlurTarget.setClearColor(0,0,0,0);
+
+        if(entity.stage>1){
+            Object obj = entity.getUUID();
+            AtomicBoolean exisit = new AtomicBoolean(false);
+            PostUtil.blurList.forEach((k,v)->{ if(k==obj) exisit.set(true);});
+            DIYBlitTarget target;
+            Vector3f dir = entity.getDeltaMovement().toVector3f();
+            new Matrix4f().rotate(Minecraft.getInstance().gameRenderer.getMainCamera().rotation().conjugate().normalize()).transformPosition(dir);
+            float distance = Minecraft.getInstance().player.distanceTo(entity);
+            distance /= Math.min(entity.getDeltaMovement().length(), 1);
+            if(!exisit.get()){
+                target = new DIYBlitTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),
+                        false,true,ModRenderTypes.Shaders.conv);
+                target.setClearColor(0,0,0,0);
+
+                PostUtil.blurList.put(obj,new PostUtil.blurTuple(target,distance,new Vector2f(dir.x,dir.y),true));
+            }else{
+                target = PostUtil.blurList.get(obj).fbo;
+
+                PostUtil.blurList.get(obj).dir = new Vector2f(dir.x,dir.y);
+                PostUtil.blurList.get(obj).distance = distance;
+                PostUtil.blurList.get(obj).dirty = true;
+            }
+            ModRenderTypes.Shaders.cthSampler.setMultiOutTarget(target);
         }
-
-
-        ModRenderTypes.Shaders.cthSampler.setMultiOutTarget(tempBlurTarget);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
 
-
-/*
-        Minecraft.getInstance().getMainRenderTarget().unbindWrite();
-
-        tempBlurTarget.bindWrite(true);
-        tempBlurTarget.setBlitShader(ModRenderTypes.Shaders.conv);
-        tempBlurTarget.getBlitShader().setUniforms(ump -> {ump.setUniform("offs", 10);});
-        tempBlurTarget.blitToScreen(Minecraft.getInstance().getWindow().getWidth(),
-                Minecraft.getInstance().getWindow().getHeight(),false);
-
-        Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D,  Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
-*/
     }
 
     public RenderType getRenderType(CthulhuEye animatable, ResourceLocation texture,

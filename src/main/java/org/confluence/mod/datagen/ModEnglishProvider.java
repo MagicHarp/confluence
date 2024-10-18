@@ -54,6 +54,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("bossevent.confluence.cthulhu_eye.generate", "The CthulhuEye has awakened!");
         add("bossevent.confluence.cthulhu_eye.death", "The CthulhuEye been defeated!");
+        add("bossevent.confluence.cthulhu_eye.leave", "The CthulhuEye leaved!");
 
         add("curios.tooltip.speed_boots", "The wearer can run super fast");
         add("curios.tooltip.may_fly", "Allows flight");

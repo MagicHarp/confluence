@@ -30,11 +30,11 @@ void main(){
 //        fragColor =  texture(ori, texCoord) + color1;
 //    }
     */
-
+    vec2 dir1 = vec2(dir.x, -dir.y);
     vec2 oneTexel = vec2(0.3/dist, 0.3/dist);
     vec3 color = vec3(0.0);
-    for(int i = -5; i <= 5; i++){
-        color += texture(att, texCoord + i*oneTexel*normalize(dir)).rgb;
+    for(int i = -6; i <= 2; i++){
+        color += texture(att, texCoord + i*oneTexel*normalize(dir1)).rgb;
     }
     fragColor = vec4(color/10.0,texture(att,texCoord).a);
 

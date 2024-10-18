@@ -21,12 +21,9 @@ import static org.lwjgl.opengl.GL13C.*;
 import static org.lwjgl.opengl.GL30C.*;
 
 public class DIYBlitTarget extends TextureTarget {
-    public DIYBlitTarget(int pWidth, int pHeight, boolean pUseDepth, boolean pClearError, DIYShaderInstance blitShader,
-                         Consumer<DIYShaderInstance> createSampler) {
+    public DIYBlitTarget(int pWidth, int pHeight, boolean pUseDepth, boolean pClearError, DIYShaderInstance blitShader) {
         super(pWidth, pHeight, pUseDepth, pClearError);
         this.blitShader = blitShader;
-        this.createSampler = createSampler;
-
     }
     private Consumer<DIYShaderInstance> createSampler;
     private DIYShaderInstance blitShader;
@@ -54,7 +51,7 @@ public class DIYBlitTarget extends TextureTarget {
 
         Matrix4f matrix4f = (new Matrix4f()).setOrtho(0.0F, (float)pWidth, (float)pHeight, 0.0F, 1000.0F, 3000.0F);
         RenderSystem.setProjectionMatrix(matrix4f, VertexSorting.ORTHOGRAPHIC_Z);
-        createSampler.accept(blitShader);
+        if(createSampler!= null) createSampler.accept(blitShader);
 //        blitShader.setSampler("ori",  Minecraft.getInstance().getMainRenderTarget().getColorTextureId());
 //        blitShader.setSampler("att",  this.colorTextureId);
 

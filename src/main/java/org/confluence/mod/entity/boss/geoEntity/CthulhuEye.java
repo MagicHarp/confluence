@@ -44,7 +44,7 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
     private final float stage2SpeedFactor = 1.5f; //二阶段加速加成
     private final float minDashDistanceSqr = 20;
     private int difficultyIdx;
-    private int stage = 1; //阶段
+    public int stage = 1; //阶段
 
     //定义技能参数
     private int summonCDAll = 15; //仆从召唤cd

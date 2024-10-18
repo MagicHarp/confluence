@@ -11,9 +11,8 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.post.PostUtil;
 import org.confluence.mod.item.sword.Swords;
 
-import static com.mojang.blaze3d.platform.GlStateManager.glActiveTexture;
-import static org.confluence.mod.client.post.PostUtil.cthBlurTarget;
-import static org.confluence.mod.client.renderer.entity.boss.CthulhuEyeRenderer.tempBlurTarget;
+
+
 import static org.confluence.mod.effect.beneficial.helper.SpelunkerHelper.renderLevel;
 
 import static org.lwjgl.opengl.GL30C.*;
@@ -24,7 +23,7 @@ public final class RenderEvents {
     public static void renderLevelStage(RenderLevelStageEvent event) {
         renderLevel(event); //洞探
         if(event.getStage()== RenderLevelStageEvent.Stage.AFTER_LEVEL
-                && Minecraft.getInstance().player.getMainHandItem().is(Swords.DEVELOPER_SWORD.get())
+//                && Minecraft.getInstance().player.getMainHandItem().is(Swords.DEVELOPER_SWORD.get())
         ){
                 PostUtil.postProcess();
             /*
@@ -106,6 +105,8 @@ public final class RenderEvents {
 
         }
     }
+
+
     @SubscribeEvent
     public static void onRenderTickEnd(TickEvent.RenderTickEvent event){
         /*
