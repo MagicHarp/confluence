@@ -9,7 +9,6 @@ import org.confluence.mod.common.init.ModItems;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.init.ModTabs;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.block.ModOreBlocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 public class Confluence {
     public static final String MODID = "confluence";
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
-
 
     public Confluence(IEventBus eventBus, ModContainer container) {
         ModTabs.TABS.register(eventBus);

@@ -40,7 +40,7 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
                     .title(Component.translatable("creativetab.confluence.misc"))
                     .displayItems((parameters, output) -> {
-                        ModBlocks.BOX.getEntries().forEach(block -> output.accept(block.get().asItem()));
+                        ModBlocks.BOX.get().getAll(Registries.BLOCK).forEach(entry -> output.accept(entry.get().asItem()));
                     })
                     .build()
     );
