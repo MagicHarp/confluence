@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.init.block.ModDecorativeBlocks;
 import org.confluence.mod.common.init.block.ModOreBlocks;
 
@@ -22,7 +21,7 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
                     .title(Component.translatable("creativetab.confluence.building_blocks"))
                     .displayItems((parameters, output) -> {
-                        ModDecorativeBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get().asItem()));
+                        ModDecorativeBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get()));
                     })
                     .build()
     );
@@ -31,7 +30,7 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
                     .title(Component.translatable("creativetab.confluence.natural_blocks"))
                     .displayItems((parameters, output) -> {
-                        ModOreBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get().asItem()));
+                        ModOreBlocks.BLOCKS.getEntries().forEach(block -> output.accept(block.get()));
                     })
                     .build()
     );
@@ -40,7 +39,7 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.AIR))
                     .title(Component.translatable("creativetab.confluence.misc"))
                     .displayItems((parameters, output) -> {
-                        ModBlocks.BOX.get().getAll(Registries.BLOCK).forEach(entry -> output.accept(entry.get().asItem()));
+                        //ModBlocks.BOX.get().getAll(Registries.BLOCK).forEach(entry -> output.accept(entry.get(), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY));
                     })
                     .build()
     );
