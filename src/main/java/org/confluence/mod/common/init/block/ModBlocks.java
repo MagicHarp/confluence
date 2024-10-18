@@ -6,7 +6,6 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,8 +17,6 @@ import org.confluence.mod.common.item.BoxBlockItem;
 
 public class ModBlocks {
     public static final NonNullBiConsumer<DataGenContext<Item, BoxBlockItem>, CreativeModeTabModifier> PARENT_ONLY = (context, modifier) -> modifier.accept(context, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
-    public static NonNullSupplier<Registrate> BOX = NonNullSupplier.lazy(() -> Registrate.create(Confluence.MODID).skipErrors(true)); // todo 销毁
-
 
     //TODO 暂未添加宝匣Tag标记
     public static final BlockEntry<Block> WOODEN_BOX = registerBoxBlock("wooden_box");
@@ -50,14 +47,13 @@ public class ModBlocks {
     public static final BlockEntry<Block> HELL_STONE_BOX = registerBoxBlock("hell_stone_box");
     public static final BlockEntry<Block> BEACH_BOX = registerBoxBlock("beach_box");
 
-
     public static void register(IEventBus eventBus) {
         ModOreBlocks.BLOCKS.register(eventBus);
         ModDecorativeBlocks.BLOCKS.register(eventBus);
     }
 
     public static BlockEntry<Block> registerBoxBlock(String name) {
-        BlockBuilder<Block, Registrate> blockBuilder = BOX.get().block(name, Block::new).initialProperties(() -> Blocks.OAK_PLANKS);
+        BlockBuilder<Block, Registrate> blockBuilder = Confluence.REGISTRATE.get().block(name, Block::new).initialProperties(() -> Blocks.OAK_PLANKS);
         blockBuilder.item((block, properties) -> new BoxBlockItem(block, Confluence.asResource(name)))
                 .tab(ModTabs.CREATIVES.getKey(), PARENT_ONLY).register();
         return blockBuilder.register();

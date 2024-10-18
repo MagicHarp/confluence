@@ -1,5 +1,7 @@
 package org.confluence.mod;
 
+import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 @Mod(Confluence.MODID)
 public class Confluence {
     public static final String MODID = "confluence";
+    public static NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> Registrate.create(MODID).skipErrors(true)); // todo 销毁
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
 
     public Confluence(IEventBus eventBus, ModContainer container) {
