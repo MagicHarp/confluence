@@ -1,7 +1,5 @@
 package org.confluence.mod.client.shader;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.event.TickEvent;
@@ -9,19 +7,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.post.PostUtil;
-import org.confluence.mod.item.sword.Swords;
-
 
 
 import static org.confluence.mod.effect.beneficial.helper.SpelunkerHelper.renderLevel;
-
-import static org.lwjgl.opengl.GL30C.*;
 
 @Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class RenderEvents {
     @SubscribeEvent
     public static void renderLevelStage(RenderLevelStageEvent event) {
         renderLevel(event); //洞探
+
         if(event.getStage()== RenderLevelStageEvent.Stage.AFTER_LEVEL
 //                && Minecraft.getInstance().player.getMainHandItem().is(Swords.DEVELOPER_SWORD.get())
         ){
@@ -109,16 +104,10 @@ public final class RenderEvents {
 
     @SubscribeEvent
     public static void onRenderTickEnd(TickEvent.RenderTickEvent event){
-        /*
-        if(event.phase == TickEvent.Phase.START && event.type == TickEvent.Type.RENDER){
-            if(postUtil.isFirstFrame){
-                postUtil.isFirstFrame = false;
-                postUtil.init();
-            }
-        }
-        */
+
         if(event.phase == TickEvent.Phase.END && event.type == TickEvent.Type.RENDER){
             PostUtil.clear();
+
         }
     }
 

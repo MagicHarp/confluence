@@ -5,14 +5,15 @@
         "dstrgb": "1-srcalpha"
     },
     "vertex": "confluence:diy_blit",
-    "fragment": "confluence:diy_blit",
+    "fragment": "confluence:diy_blit_mix_normal",
     "attributes": [
         "Position",
         "Color",
         "UV0"
     ],
     "samplers": [
-        { "name": "att" }
+        { "name": "ori"},
+        { "name": "att"}
 
     ],
     "uniforms": [

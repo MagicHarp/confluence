@@ -4,8 +4,8 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "confluence:conv_blur",
-    "fragment": "confluence:conv_blur",
+    "vertex": "confluence:diy_blit",
+    "fragment": "confluence:motion_blur",
     "attributes": [
         "Position",
         "Color",

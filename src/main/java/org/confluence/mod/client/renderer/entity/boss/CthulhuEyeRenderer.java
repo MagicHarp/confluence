@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.client.model.entity.CthulhuEyeModel;
 import org.confluence.mod.client.post.DIYBlitTarget;
 import org.confluence.mod.client.post.PostUtil;
+import org.confluence.mod.client.post.effect.MotionBlur;
 import org.confluence.mod.client.shader.ModRenderTypes;
 import org.confluence.mod.entity.boss.geoEntity.CthulhuEye;
 import org.joml.Matrix4f;
@@ -20,7 +21,6 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import javax.annotation.Nullable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class CthulhuEyeRenderer extends GeoEntityRenderer<CthulhuEye> {
     //public static DIYBlitTarget tempBlurTarget;
@@ -45,31 +45,41 @@ public class CthulhuEyeRenderer extends GeoEntityRenderer<CthulhuEye> {
 
     @Override
     public void render(CthulhuEye entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-
-        if(entity.stage>1){
+        MotionBlur mb = PostUtil.motionBlur;
+        if(mb!=null && entity.stage>1 && entity.getDeltaMovement().length() > 0.3){
             Object obj = entity.getUUID();
             AtomicBoolean exisit = new AtomicBoolean(false);
-            PostUtil.blurList.forEach((k,v)->{ if(k==obj) exisit.set(true);});
+            mb.blurList.forEach((k,v)->{ if(k==obj) exisit.set(true);});
             DIYBlitTarget target;
+            // 运动方向
             Vector3f dir = entity.getDeltaMovement().toVector3f();
+            // 旋转到相机坐标系
             new Matrix4f().rotate(Minecraft.getInstance().gameRenderer.getMainCamera().rotation().conjugate().normalize()).transformPosition(dir);
+            // 长度与距离相关
             float distance = Minecraft.getInstance().player.distanceTo(entity);
-            distance /= Math.min(entity.getDeltaMovement().length(), 1);
+            // 长度与移速相关
+            distance /= (float) Math.min(entity.getDeltaMovement().length(), 1);
+            // 长度与角度相关
+            //distance *= Math.max(Math.cos((dir.angle(new Vector3f(1,0,0)))),0.3f);
             if(!exisit.get()){
                 target = new DIYBlitTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),
-                        false,true,ModRenderTypes.Shaders.conv);
+                        false,true,ModRenderTypes.Shaders.motion_blur);
                 target.setClearColor(0,0,0,0);
 
-                PostUtil.blurList.put(obj,new PostUtil.blurTuple(target,distance,new Vector2f(dir.x,dir.y),true));
+                mb.blurList.put(obj,new MotionBlur.blurTuple(target,distance,new Vector2f(dir.x,dir.y),true));
             }else{
-                target = PostUtil.blurList.get(obj).fbo;
+                target = mb.blurList.get(obj).fbo;
 
-                PostUtil.blurList.get(obj).dir = new Vector2f(dir.x,dir.y);
-                PostUtil.blurList.get(obj).distance = distance;
-                PostUtil.blurList.get(obj).dirty = true;
+                mb.blurList.get(obj).dir = new Vector2f(dir.x,dir.y);
+                mb.blurList.get(obj).distance = distance;
+                mb.blurList.get(obj).dirty = true;
             }
             ModRenderTypes.Shaders.cthSampler.setMultiOutTarget(target);
+
         }
+
+
+
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
 
     }

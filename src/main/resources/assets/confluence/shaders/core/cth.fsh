@@ -31,14 +31,8 @@ void main() {
     color *= lightMapColor;
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
 
-
     float average = dot(fragColor.rgb,vec3(0.299, 0.587, 0.114));
-
-
-
 
 //    frag3 = vec4(average, average, average, color.a);
     frag3 =fragColor;
-
-
 }

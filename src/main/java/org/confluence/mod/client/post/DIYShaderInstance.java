@@ -37,17 +37,14 @@ public class DIYShaderInstance extends ShaderInstance {
 
     public void apply(){
         super.apply();
-        if(createUniforms!= null &&um.programId== this.getId()) createUniforms.accept(um);
-        //um.createUniform("samcolor");
-        if(applyUniforms!= null && um.programId == this.getId()) applyUniforms.accept(um);
-        //um.setUniform("samcolor", new Vector4f(0,1,0,1));
-
+        if(createUniforms!= null &&um.programId== this.getId() && !um.isReady) createUniforms.accept(um);
+        if(applyUniforms!= null && um.programId == this.getId() && um.isReady) applyUniforms.accept(um);
 
         if(multiOut || bind) {
             multiOut = false;
             //glActiveTexture(GL_TEXTURE0+SAMPLE_CHANNELS);
-            glBindTexture(GL_TEXTURE_2D, textureId);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Minecraft.getInstance().getMainRenderTarget().width,Minecraft.getInstance().getMainRenderTarget().height,  0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+//            glBindTexture(GL_TEXTURE_2D, textureId);
+//            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Minecraft.getInstance().getMainRenderTarget().width,Minecraft.getInstance().getMainRenderTarget().height,  0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0+SAMPLE_CHANNELS, GL_TEXTURE_2D, textureId, 0);
             int[] textures = new int[]{GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT0+SAMPLE_CHANNELS};
             glDrawBuffers(textures);

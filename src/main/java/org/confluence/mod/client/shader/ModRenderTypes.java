@@ -32,10 +32,15 @@ public final class ModRenderTypes extends RenderStateShard {
         private static ShaderInstance shimmerLiquid;
 
 
-        public static DIYShaderInstance cthSampler;
+        public static DIYShaderInstance cthSampler;//克眼采样着色器
+        public static DIYShaderInstance positionColorSampler;//点颜色采样着色器
 
-        public static DIYShaderInstance conv;
-        public static DIYShaderInstance diy_blit;
+        public static DIYShaderInstance motion_blur;
+        public static DIYShaderInstance gaussian_blur;
+        public static DIYShaderInstance diy_blit;//直接输出到屏幕
+        public static DIYShaderInstance diy_blit_gamma;//gamma校正
+        public static DIYShaderInstance diy_blit_mix_add;//线性混合相加
+
 
         public static ShaderInstance aether;
 
@@ -75,6 +80,16 @@ public final class ModRenderTypes extends RenderStateShard {
                             ),
                     shader -> cthSampler = (DIYShaderInstance) shader
             );
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("position_color"),
+                            DefaultVertexFormat.POSITION_COLOR,
+                            um->{}
+                    ),
+                    shader -> positionColorSampler = (DIYShaderInstance) shader
+            );
+
 
             event.registerShader(
                     new DIYShaderInstance(
@@ -89,14 +104,43 @@ public final class ModRenderTypes extends RenderStateShard {
             event.registerShader(
                     new DIYShaderInstance(
                             resourceProvider,
-                            Confluence.asResource("conv_blur"),
+                            Confluence.asResource("diy_blit_mix_add"),
+                            DefaultVertexFormat.BLIT_SCREEN,
+                            null
+                    ),
+                    shader -> diy_blit_mix_add = (DIYShaderInstance) shader
+            );
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("diy_blit_gamma"),
+                            DefaultVertexFormat.BLIT_SCREEN,
+                            null
+                    ),
+                    shader -> diy_blit_gamma = (DIYShaderInstance) shader
+            );
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("motion_blur"),
                             DefaultVertexFormat.BLIT_SCREEN,
                             um->{
                                 um.createUniform("dist");
                                 um.createUniform("dir");
                             }
                     ),
-                    shader -> conv = (DIYShaderInstance) shader
+                    shader -> motion_blur = (DIYShaderInstance) shader
+            );
+            event.registerShader(
+                    new DIYShaderInstance(
+                            resourceProvider,
+                            Confluence.asResource("gaussian_blur"),
+                            DefaultVertexFormat.BLIT_SCREEN,
+                            um->{
+                                um.createUniform("hor");
+                            }
+                    ),
+                    shader -> gaussian_blur = (DIYShaderInstance) shader
             );
 
         }

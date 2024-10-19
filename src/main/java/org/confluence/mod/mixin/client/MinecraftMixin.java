@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
-public abstract class MinectaftMixin {
+public abstract class MinecraftMixin {
 
     @Inject(method = "shouldEntityAppearGlowing", at = @At(value = "HEAD"), cancellable = true)
     public void changeGlowOutline(Entity pentity, CallbackInfoReturnable<Boolean> cir) {

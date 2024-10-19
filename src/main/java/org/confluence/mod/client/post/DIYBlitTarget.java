@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import org.confluence.mod.client.shader.ModRenderTypes;
 import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL11;
 
 import java.util.function.Consumer;
 
@@ -25,6 +26,7 @@ public class DIYBlitTarget extends TextureTarget {
         super(pWidth, pHeight, pUseDepth, pClearError);
         this.blitShader = blitShader;
     }
+    private boolean autoClear = true;
     private Consumer<DIYShaderInstance> createSampler;
     private DIYShaderInstance blitShader;
     public void blitToScreen(int pWidth, int pHeight, boolean pDisableBlend) {
@@ -88,7 +90,9 @@ public class DIYBlitTarget extends TextureTarget {
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, 0);
 
+
         GlStateManager._depthMask(true);
+
         GlStateManager._colorMask(true, true, true, true);
     }
 
@@ -104,5 +108,14 @@ public class DIYBlitTarget extends TextureTarget {
     }
     public void setCreateSampler(Consumer<DIYShaderInstance> blitShader) {
         this.createSampler = blitShader;
+    }
+    public void setAutoClear(boolean autoClear) {
+        this.autoClear = autoClear;
+    }
+    public void clear(boolean error){
+        super.clear(error);
+        if( autoClear && (this.viewHeight!=Minecraft.getInstance().getWindow().getHeight() || this.viewWidth!=Minecraft.getInstance().getWindow().getWidth())){
+            this.resize(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),error);
+        }
     }
 }

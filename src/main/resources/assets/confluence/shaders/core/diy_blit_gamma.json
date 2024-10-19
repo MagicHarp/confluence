@@ -5,13 +5,14 @@
         "dstrgb": "1-srcalpha"
     },
     "vertex": "confluence:diy_blit",
-    "fragment": "confluence:diy_blit",
+    "fragment": "confluence:diy_blit_gamma",
     "attributes": [
         "Position",
         "Color",
         "UV0"
     ],
     "samplers": [
+        { "name": "ori" },
         { "name": "att" }
 
     ],
