@@ -426,6 +426,7 @@ public final class ModTabs {
                         output.accept(Swords.DEVELOPER_SWORD.get());
                         output.accept(ModItems.EXPERT_TEST_ITEM.get());
                         output.accept(ModItems.MASTER_TEST_ITEM.get());
+                        output.accept(ModBlocks.LIVING_SAPLING.get());
                     })
                     .build());
     // 食物与药水

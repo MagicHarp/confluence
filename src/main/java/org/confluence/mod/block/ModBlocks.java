@@ -89,6 +89,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SAPPHIRE_SAPLING = registerWithItem("sapphire_sapling", () -> new StoneSaplingBlock(new SapphireTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> TR_AMETHYST_SAPLING = registerWithItem("tr_amethyst_sapling", () -> new StoneSaplingBlock(new TrAmethystTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     public static final RegistryObject<Block> ASH_SAPLING = registerWithItem("ash_sapling", () -> new AshSaplingBlock(new AshTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> LIVING_SAPLING = registerWithItem("living_sapling", () -> new LivingSaplingBlock(new LivingTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
     // desert
     public static final LogBlocks PALM_LOG_BLOCKS = new LogBlocks("palm", PALM, properties -> () -> new LeavesBlock(properties));
     // ash
