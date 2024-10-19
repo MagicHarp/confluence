@@ -54,8 +54,10 @@ import org.confluence.mod.item.curio.CurioItems;
 import org.confluence.mod.item.fishing.FishingPoles;
 import org.confluence.mod.item.potion.TerraPotions;
 import org.confluence.mod.item.potion.VanillaPotionItem;
+import org.confluence.mod.item.sword.Swords;
 import org.confluence.mod.menu.ModMenus;
 import org.confluence.mod.misc.ModArmPoses;
+import org.confluence.mod.util.ModUtils;
 
 import static org.confluence.mod.entity.ModEntities.*;
 

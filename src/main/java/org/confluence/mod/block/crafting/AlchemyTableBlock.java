@@ -113,6 +113,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                     entity.firstColor + " " + entity.secondColor + " " + entity.operator
             + " " + entity.isRedstone + " " + entity.isGlowstone));
         }
+        //todo 奇怪的多余药水消耗
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
@@ -248,7 +249,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
                         }
                     }
                 }
-                firstColor = Math.abs(result);
+                firstColor = result;
                 operator = 0;
                 secondColor = 0;
             } else {
