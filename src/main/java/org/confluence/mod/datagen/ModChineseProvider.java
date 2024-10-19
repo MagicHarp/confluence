@@ -64,6 +64,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("creativetab.confluence.developer", "汇流来世 | 开发者物品");
 
         add("item.confluence.meteorite_ingot.tooltip", "摸起来是温的");
+        add("item.confluence.developer_sword.inf", " 无限 ");
 
         add("gamerule.confluenceSpreadableChance", "邪恶群系蔓延设置");
         add("generator.confluence.corruption", "腐化之地");
@@ -163,6 +164,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("info.confluence.bait", "鱼饵力: %s%%");
         add("info.confluence.network", "#%s 信号: %s");
         add("info.confluence.potion_mana", "药水魔力: %s");
+        add("info.confluence.respawn_time", "复活剩余时间: ");
+        add("info.confluence.second", "秒");
 
         add("key.confluence.hook", "使用钩爪");
         add("key.confluence.metal_detector", "检测矿物");

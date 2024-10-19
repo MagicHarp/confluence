@@ -51,6 +51,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("item.confluence.meteorite_ingot.tooltip", "Warm to the touch");
         add("item.confluence.alpha.desc", "C418 - alpha");
+        add("item.confluence.developer_sword.inf", " Infinity ");
 
         add("bossevent.confluence.cthulhu_eye.generate", "The CthulhuEye has awakened!");
         add("bossevent.confluence.cthulhu_eye.death", "The CthulhuEye been defeated!");
@@ -124,6 +125,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("info.confluence.bait", "Bait Power: %s%%");
         add("info.confluence.network", "#%s Signal: %s");
         add("info.confluence.potion_mana", "Potion Mana: %s");
+        add("info.confluence.respawn_time", "Respawn Time: ");
+        add("info.confluence.second", "s");
 
         add("key.confluence.hook", "Throwing Hook");
         add("key.confluence.metal_detector", "Detect Metal");

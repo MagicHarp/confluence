@@ -19,6 +19,10 @@ import java.util.List;
 public final class ModConfigs {
     public static ForgeConfigSpec.BooleanValue DROP_MONEY;
     public static ForgeConfigSpec.BooleanValue REPLACE_VANILLA_GOLDEN_ITEMS;
+    public static ForgeConfigSpec.IntValue DEFAULT_RESPAWN_TIME_MIN;
+    public static ForgeConfigSpec.IntValue DEFAULT_RESPAWN_TIME_MAX;
+    public static ForgeConfigSpec.IntValue BOSS_RESPAWN_TIME_MIN;
+    public static ForgeConfigSpec.IntValue BOSS_RESPAWN_TIME_MAX;
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_BLOCKS;
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> RARE_CREATURES;
     public static ArrayList<BlockState> rareBlocks = new ArrayList<>();
@@ -98,6 +102,18 @@ public final class ModConfigs {
             "minecraft:warden",
             "minecraft:mooshroom",
             "minecraft:panda"), o -> true);
+        DEFAULT_RESPAWN_TIME_MIN = BUILDER.comment(
+                "The min value of the default respawn time"
+        ).defineInRange("defRespawnTimeMin", 3, 0, Integer.MAX_VALUE);
+        DEFAULT_RESPAWN_TIME_MAX = BUILDER.comment(
+                "The max value of the default respawn time"
+        ).defineInRange("defRespawnTimeMax", 8, 0, Integer.MAX_VALUE);
+        BOSS_RESPAWN_TIME_MIN = BUILDER.comment(
+                "The min respawn time when the boss is present"
+        ).defineInRange("bossRespawnTimeMin", 9, 0, Integer.MAX_VALUE);
+        BOSS_RESPAWN_TIME_MAX = BUILDER.comment(
+                "The max respawn time when the boss is present"
+        ).defineInRange("bossRespawnTimeMax", 18, 0, Integer.MAX_VALUE);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BUILDER.build());
     }
 }

@@ -506,8 +506,8 @@ public final class ForgeEvents {
             event.getToolTip().add(Component.translatable("item.confluence.developer_sword"));
             event.getToolTip().add(Component.literal(""));
             event.getToolTip().add(Component.translatable("item.modifiers.mainhand").withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(Component.literal(" ∞ ").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_damage")));
-            event.getToolTip().add(Component.literal(" ∞ ").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_speed")));
+            event.getToolTip().add(Component.translatable("item.confluence.developer_sword.inf").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_damage")));
+            event.getToolTip().add(Component.translatable("item.confluence.developer_sword.inf").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_speed")));
         }
     }
 }

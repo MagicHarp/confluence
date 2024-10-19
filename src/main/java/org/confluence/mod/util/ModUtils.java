@@ -4,9 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -29,7 +32,9 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.color.FloatRGBA;
+import org.confluence.mod.entity.boss.IBossFSM;
 import org.confluence.mod.item.ModItems;
+import org.confluence.mod.misc.ModConfigs;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -422,7 +427,31 @@ public final class ModUtils {
         return level.getEntitiesOfClass(entity, box.inflate(radius));
     }
 
+    public static boolean hasBoss(double radius, Level level,
+                                   AABB box){
+        boolean flag = false;
+        for (Entity entity : getNearbyEntities(radius, level, Entity.class, box)) {
+            if (entity instanceof IBossFSM) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
     public static int getRainbowColor() {
         return AnimateColor.getExpertColor();
+    }
+
+    public static int getRespawnWaitTime(LocalPlayer player) {
+        boolean hasBoss = hasBoss(Short.MAX_VALUE, player.level(),
+                player.getBoundingBox());
+        if (hasBoss) {
+            return player.getRandom().nextInt(ModConfigs.BOSS_RESPAWN_TIME_MIN.get()
+                    , ModConfigs.BOSS_RESPAWN_TIME_MAX.get());
+        } else {
+            return player.getRandom().nextInt(ModConfigs.DEFAULT_RESPAWN_TIME_MIN.get(),
+                    ModConfigs.DEFAULT_RESPAWN_TIME_MAX.get());
+        }
     }
 }
