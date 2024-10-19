@@ -75,7 +75,6 @@
     "chunk.PalettedContainerAccessor",
     "chunk.PalettedContainerMixin",
     "chunk.ProtoChunkMixin",
-    "client.MinectaftMixin",
     "entity.AbstractArrowMixin",
     "entity.DamageTypeMixin",
     "entity.EntityMixin",

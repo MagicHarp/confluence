@@ -1,27 +1,19 @@
 package org.confluence.mod.client.post;
 
 
-import com.mojang.blaze3d.pipeline.MainTarget;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.stats.Stat;
-import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.client.post.effect.Bloom;
 import org.confluence.mod.client.post.effect.MotionBlur;
-import org.confluence.mod.client.shader.ModRenderTypes;
-import org.joml.Vector2f;
-
 import java.util.*;
 import java.util.function.Consumer;
 
-//import static org.confluence.mod.client.renderer.entity.boss.CthulhuEyeRenderer.tempBlurTarget;
-import static com.mojang.blaze3d.platform.GlStateManager.glBlendFuncSeparate;
-import static org.lwjgl.opengl.GL11C.*;
 import static org.lwjgl.opengl.GL13C.GL_TEXTURE0;
 
 public class PostUtil {
 
+    public static boolean isFirstFrame = true;  // 必须初始化一次
     public static List<PostEffect> effects = new ArrayList<>();
 
     public static Bloom bloom;
@@ -52,8 +44,6 @@ public class PostUtil {
             effects.forEach(PostEffect::init);
         }
     }
-
-    public static boolean isFirstFrame = true;  // 必须初始化一次
 
     public static void addEffect(PostEffect effect){
         effects.add(effect);
