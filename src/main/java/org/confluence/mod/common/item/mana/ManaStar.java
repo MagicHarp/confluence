@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.init.ModAttachments;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.item.CustomRarityItem;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ManaStar extends CustomRarityItem {
     public ManaStar() {
-        super(new Properties().stacksTo(16), ModRarities.YELLOW);
+        super(new Properties().stacksTo(16), ModRarity.YELLOW);
     }
 
     @Override
