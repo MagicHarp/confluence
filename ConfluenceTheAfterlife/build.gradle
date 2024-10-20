@@ -1,0 +1,102 @@
+plugins {
+    id 'net.neoforged.moddev'
+}
+
+
+
+neoForge {
+    version = project.neo_version
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+            //programArgument '--nogui'
+        }
+        data {
+            data()
+            gameDirectory = project.file('run-data')
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    mavenLocal()
+    maven { // Registrate
+        url "https://maven.ithundxr.dev/snapshots"
+    }
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+}
+
+dependencies {
+    var projectName = ["Core","TerraEntity","MineTeam","EquipmentBenediction","TerraCurio","TerraGuns"];
+    projectName.forEach {name -> implementation jarJar(project(":" + name))}
+
+
+    implementation jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[${registrate_version},)")
+    implementation jarJar(group: 'software.bernie.geckolib', name: "geckolib-neoforge-${minecraft_version}", version: "[${geckolib_version},)")
+
+    compileOnly "curse.maven:jade-324717:5639932"
+    runtimeOnly "curse.maven:jade-324717:5639932"
+
+    compileOnly "mezz.jei:jei-1.21-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-1.21-neoforge:${jei_version}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [minecraft_version      : minecraft_version,
+                             minecraft_version_range: minecraft_version_range,
+                             neo_version            : neo_version,
+                             neo_version_range      : neo_version_range,
+                             loader_version_range   : loader_version_range,
+                             mod_id                 : mod_id,
+                             mod_name               : mod_name,
+                             mod_license            : mod_license,
+                             mod_version            : mod_version,
+                             mod_authors            : mod_authors,
+                             mod_description        : mod_description]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+

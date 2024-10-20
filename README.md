@@ -1,0 +1,9 @@
+|项目名|备注|是否独立运行|
+|--|--|--|
+|ConfluenceTheAfterlife|本体|是|
+|Coce|非独立运行项目共用代码|否|
+|TerraEntity|泰拉实体生物|是|
+|MineTeam|类泰拉团队机制|是|
+|EquipmentBenediction|多种装备加成机制|是|
+|TerraCurio|泰拉饰品|是|
+|TerraGuns|泰拉枪支|是|
