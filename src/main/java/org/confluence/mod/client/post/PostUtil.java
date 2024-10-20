@@ -6,6 +6,9 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import org.confluence.mod.client.post.effect.Bloom;
 import org.confluence.mod.client.post.effect.MotionBlur;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
+
 import java.util.*;
 import java.util.function.Consumer;
 

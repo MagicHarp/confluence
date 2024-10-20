@@ -1,9 +1,17 @@
 package org.confluence.mod.client.post.effect;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Item;
 import org.confluence.mod.client.post.DIYBlitTarget;
 import org.confluence.mod.client.post.PostEffect;
 import org.confluence.mod.client.shader.ModRenderTypes;
+import org.confluence.mod.item.curio.BaseCurioItem;
+import org.confluence.mod.item.curio.CurioItems;
+import org.confluence.mod.item.sword.LightSaber;
+import org.confluence.mod.item.sword.Swords;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.confluence.mod.client.post.PostUtil.postPass;
 import static org.lwjgl.opengl.GL11C.*;
@@ -15,11 +23,20 @@ public class Bloom implements PostEffect {
     public DIYBlitTarget glowTargetOri;
     public DIYBlitTarget glowTargetH;
     public DIYBlitTarget glowTargetV;
+    // 施加效果的物品：加入map则采样，selfGlow采样最大亮度，light修正亮度
+    public Map<Item,Tuple> itemMap = new HashMap<>();
+    public Map<Class<? extends Item>,Tuple> itemClassMap = new HashMap<>();
+
+    public Item mainhandItem;
+    public Item offhandItem;
+    public boolean shouldRender = false;
+    public record Tuple(boolean selfGlow, float light){}
     public Bloom(){
 
     }
     // 辉光效果
     public void apply() {
+        if(!shouldRender) return;
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -33,40 +50,24 @@ public class Bloom implements PostEffect {
                 },
                 null
         );
+
         glDisable(GL_BLEND);
         for(int i=0;i<20;i++){
             int finalI = i;
             var out =i%2==0? glowTargetV: glowTargetH;
             var in =i%2==0? glowTargetH: glowTargetV;
             postPass(
-                    out,                                      //输出FBO
-                    in,                                                                             //输入FBO
-                    ModRenderTypes.Shaders.gaussian_blur,                                                    //shader定义实现的混合方式
+                    out,
+                    in,
+                    ModRenderTypes.Shaders.gaussian_blur,
                     shader-> {
-                        shader.setSampler("att", in);                                        //采样当前帧缓冲
+                        shader.setSampler("att", in);
                     },
                     um->{um.setUniform("hor", finalI %2==0?GL_TRUE:GL_FALSE);}
             );
         }
 
 //        glEnable(GL_BLEND);
-//        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-/*
-//        glBlendFunc(GL_ONE, GL_ONE);
-        postPass(
-                glowTargetH,
-                glowTargetOri,
-                ModRenderTypes.Shaders.diy_blit_gamma,
-                shader-> {
-                    shader.setSampler("ori", glowTargetH);
-                    shader.setSampler("att", glowTargetOri);
-                },
-                null
-        );
-*/
-
-//        glEnable(GL_BLEND);
-//
         //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
         //glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
         glEnable(GL_BLEND);
@@ -98,6 +99,17 @@ public class Bloom implements PostEffect {
 
         glowTargetV = new DIYBlitTarget(width, height, false, true, ModRenderTypes.Shaders.diy_blit);
         glowTargetV.setClearColor(0, 0, 0, 0);
+
+        // 注册辉光效果的物品类型
+        itemClassMap.put(LightSaber.class, new Tuple( true, 2.0f));
+        itemClassMap.put(BaseCurioItem.class, new Tuple( false, 1.0f));
+        itemMap.put(CurioItems.ANKH_SHIELD.get(),new Tuple( true, 1.0f));//覆盖类属性
+
+
+        // 注册辉光效果的物品 优先级更高
+        itemMap.put(Swords.VOLCANO.get(), new Tuple( true, 2.0f));
+        itemMap.put(Swords.DEVELOPER_SWORD.get(), new Tuple( false, 1.0f));
+
     }
 
     @Override
@@ -105,7 +117,6 @@ public class Bloom implements PostEffect {
         if(glowTargetOri!=null) glowTargetOri.clear(true);
         if(glowTargetH !=null) glowTargetH.clear(true);
         if(glowTargetV !=null) glowTargetV.clear(true);
-
+        shouldRender = false;
     }
-
 }
