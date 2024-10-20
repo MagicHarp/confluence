@@ -12,7 +12,6 @@ plugins {
 
 include ":ConfluenceTheAfterlife"
 
-var projectName = ["Core","TerraEntity","MineTeam","EquipmentBenediction","TerraCurio"];
+var projectName = ["Core","TerraEntity","MineTeam","EquipmentBenediction","TerraCurio","ParticleStorm"];
 projectName.forEach {name -> include ":" + name}
-include 'Core'
 
