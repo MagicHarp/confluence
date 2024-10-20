@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.init.ModAttachments;
-import org.confluence.mod.common.init.ModRarities;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.item.CustomRarityItem;
 import org.jetbrains.annotations.NotNull;
