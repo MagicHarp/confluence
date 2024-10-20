@@ -18,4 +18,4 @@ plugins {
 
 rootProject.name = 'Confluence'
 
-include "TerraGuns"
+//include "TerraGuns"
