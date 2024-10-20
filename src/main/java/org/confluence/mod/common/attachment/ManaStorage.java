@@ -2,6 +2,7 @@ package org.confluence.mod.common.attachment;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +59,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         return true;
     }
 
+    // todo
     public boolean extractMana(IntSupplier sup) {
         if (!canExtract()) return false;
         int extract = (int) (sup.getAsInt() * extractRatio);
@@ -122,7 +124,8 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         return false;
     }
 
-//    public void flushAbility(LivingEntity living) {
+    // todo
+    public void flushAbility(LivingEntity living) {
 //        MutableFloat ratio = new MutableFloat(1.0);
 //        AtomicBoolean band = new AtomicBoolean();
 //        AtomicInteger mana = new AtomicInteger();
@@ -144,7 +147,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
 //        this.extractRatio = ratio.getValue();
 //        this.manaRegenerationBand = band.get();
 //        this.additionalMana = mana.get();
-//    }
+    }
 
     public boolean hasManaRegenerationBand() {
         return manaRegenerationBand;
