@@ -9,3 +9,12 @@ pluginManagement {
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
+
+include 'ConfluenceTheAfterlife'
+include 'TerraEntity'
+include 'Core'
+include 'MineTeam'
+include 'EquipmentBenediction'
+include 'TerraCurio'
+include 'TerraGuns'
+

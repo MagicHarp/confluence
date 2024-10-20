@@ -23,5 +23,5 @@ eclipse
 run
 run-data
 
-src/test
-src/generated
+ConfluenceTheAfterlife/src/test
+ConfluenceTheAfterlife/src/generated
