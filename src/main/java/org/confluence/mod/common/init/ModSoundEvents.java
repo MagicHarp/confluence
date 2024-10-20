@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 
-public class ModSoundEvents {
+public final class ModSoundEvents {
     public static final DeferredRegister<SoundEvent> SOUND_EVENT = DeferredRegister.create(Registries.SOUND_EVENT, Confluence.MODID);
 
     public static final DeferredHolder<SoundEvent,SoundEvent> TRANSMISSION = register("transmission");

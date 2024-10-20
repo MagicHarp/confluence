@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.confluence.mod.Confluence;
 
-public class ModLootTables {
+public final class ModLootTables {
     public static final ResourceKey<LootTable> WOODEN_BOX = register("wooden_box");
     public static final ResourceKey<LootTable> IRON_BOX = register("iron_box");
     public static final ResourceKey<LootTable> GOLDEN_BOX = register("golden_box");
