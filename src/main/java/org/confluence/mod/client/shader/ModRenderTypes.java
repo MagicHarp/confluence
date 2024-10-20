@@ -85,7 +85,7 @@ public final class ModRenderTypes extends RenderStateShard {
                             resourceProvider,
                             Confluence.asResource("position_color"),
                             DefaultVertexFormat.POSITION_COLOR,
-                            um->{}
+                            um->um.createUniform("colorMask")
                     ),
                     shader -> positionColorSampler = (DIYShaderInstance) shader
             );
@@ -96,7 +96,7 @@ public final class ModRenderTypes extends RenderStateShard {
                             resourceProvider,
                             Confluence.asResource("diy_blit"),
                             DefaultVertexFormat.BLIT_SCREEN,
-                            null
+                            um->um.createUniform("colorMask")
                             ),
                     shader -> diy_blit = (DIYShaderInstance) shader
             );

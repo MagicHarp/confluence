@@ -38,7 +38,7 @@ public class DIYShaderInstance extends ShaderInstance {
     public void apply(){
         super.apply();
         if(createUniforms!= null &&um.programId== this.getId() && !um.isReady) createUniforms.accept(um);
-        if(applyUniforms!= null && um.programId == this.getId() && um.isReady) applyUniforms.accept(um);
+        if(applyUniforms!= null && um.programId == this.getId()) applyUniforms.accept(um);
 
         if(multiOut || bind) {
             multiOut = false;

@@ -3,7 +3,7 @@
 
 in vec4 vertexColor;
 
-uniform vec4 ColorModulator;
+uniform vec4 colorMask;
 
 layout (location = 0) out vec4 fragColor;
 layout (location = 1) out vec4 frag3;
@@ -13,7 +13,7 @@ void main() {
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = color * ColorModulator;
+    fragColor = color * colorMask;
 
-    frag3 = color;
+    frag3 = color * colorMask;
 }

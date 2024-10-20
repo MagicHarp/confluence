@@ -65,7 +65,7 @@ public class CthulhuEyeRenderer extends GeoEntityRenderer<CthulhuEye> {
                 target = new DIYBlitTarget(Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight(),
                         false,true,ModRenderTypes.Shaders.motion_blur);
                 target.setClearColor(0,0,0,0);
-
+                target.clear(true);
                 mb.blurList.put(obj,new MotionBlur.blurTuple(target,distance,new Vector2f(dir.x,dir.y),true));
             }else{
                 target = mb.blurList.get(obj).fbo;
