@@ -10,6 +10,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import org.confluence.mod.util.ModUtils;
+import org.joml.Vector3d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,46 +21,7 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
         super(pCodec);
     }
 
-    private static void refineLocationList(List<List<Double>> locationList, int dis, FeaturePlaceContext<Config> context) {
-        boolean refined;
-        do {
-            refined = false;
-            for (int i = 0; i < locationList.size() - 1; i++) {
-                List<Double> point1 = locationList.get(i);
-                List<Double> point2 = locationList.get(i + 1);
-                double distance = calculateDistance(point1, point2);
-                if (distance > dis) {
-                    List<Double> midpoint = calculateMidpoint(point1, point2);
-                    addRandomOffset(midpoint, distance, context);
-                    locationList.add(i + 1, midpoint);
-                    refined = true;
-                }
-            }
-        } while (refined);
-    }
-
-    private static double calculateDistance(List<Double> point1, List<Double> point2) {
-        return Math.sqrt(Math.pow(point2.get(0) - point1.get(0), 2) +
-                Math.pow(point2.get(1) - point1.get(1), 2) +
-                Math.pow(point2.get(2) - point1.get(2), 2));
-    }
-
-    private static List<Double> calculateMidpoint(List<Double> point1, List<Double> point2) {
-        List<Double> midpoint = new ArrayList<>();
-        midpoint.add((point1.get(0) + point2.get(0)) / 2);
-        midpoint.add((point1.get(1) + point2.get(1)) / 2);
-        midpoint.add((point1.get(2) + point2.get(2)) / 2);
-        return midpoint;
-    }
-
-    private static void addRandomOffset(List<Double> midpoint, double distance, FeaturePlaceContext<Config> context) {
-        double offset = distance / 8;
-        midpoint.set(0, midpoint.get(0) + (context.random().nextDouble() - 0.5) * offset * 2);
-        midpoint.set(1, midpoint.get(1) + (context.random().nextDouble() - 0.5) * offset * 2);
-        midpoint.set(2, midpoint.get(2) + (context.random().nextDouble() - 0.5) * offset * 2);
-    }
-
-    private static void placeBlock(List<List<Double>> posListToPlace, double rMax, double rMin, BlockState blockStateToPlace, WorldGenLevel level, double rPer, double placePer, boolean repAir, FeaturePlaceContext<Config> context) {
+    private static void placeBlock(List<Vector3d> posListToPlace, double rMax, double rMin, BlockState blockStateToPlace, WorldGenLevel level, double rPer, double placePer, boolean repAir, FeaturePlaceContext<Config> context) {
 
         int rCheck = (int) (rMax + 2.0);
 
@@ -71,10 +34,10 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                     for (int setZ = -rCheck; setZ <= rCheck; setZ++) {
                         double xSq = rPlace * rPlace - setZ * setZ;
                         if (xSq >= 0) {
-                            int trunkBlockPosX1 = posListToPlace.get(posList).get(0).intValue() + (int) Math.sqrt(xSq);
-                            int trunkBlockPosX2 = posListToPlace.get(posList).get(0).intValue() - (int) Math.sqrt(xSq);
-                            int trunkBlockPosY = (int) (posListToPlace.get(posList).get(1).intValue() + setY * rPer);
-                            int trunkBlockPosZ = posListToPlace.get(posList).get(2).intValue() + setZ;
+                            int trunkBlockPosX1 = (int) posListToPlace.get(posList).x + (int) Math.sqrt(xSq);
+                            int trunkBlockPosX2 = (int) posListToPlace.get(posList).x - (int) Math.sqrt(xSq);
+                            int trunkBlockPosY = (int) (posListToPlace.get(posList).y + setY * rPer);
+                            int trunkBlockPosZ = (int) posListToPlace.get(posList).z + setZ;
                             if (trunkBlockPosX1 != trunkBlockPosX2) {
                                 for (int trunkBlockPosXli = trunkBlockPosX2; trunkBlockPosXli <= trunkBlockPosX1; trunkBlockPosXli++) {
                                     BlockPos trunkBlockPosPlace = new BlockPos(trunkBlockPosXli, trunkBlockPosY, trunkBlockPosZ);
@@ -90,10 +53,10 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
         }
     }
 
-    private static List<List<Double>> placeList(List<List<Double>> posListToPlace, double rMax, double rMin, double rPer, double placePer, FeaturePlaceContext<Config> context) {
+    private static List<Vector3d> placeList(List<Vector3d> posListToPlace, double rMax, double rMin, double rPer, double placePer, FeaturePlaceContext<Config> context) {
 
         int rCheck = (int) (rMax + 2.0);
-        List<List<Double>> listToReturn = new ArrayList<>();
+        List<Vector3d> listToReturn = new ArrayList<>();
 
         for (int posList = 0; posList < posListToPlace.size(); posList++) {
             double r = rMax - (rMax - rMin) / posListToPlace.size() * posList;
@@ -104,18 +67,18 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                     for (int setZ = -rCheck; setZ <= rCheck; setZ++) {
                         double xSq = rPlace * rPlace - setZ * setZ;
                         if (xSq >= 0) {
-                            int trunkBlockPosX1 = posListToPlace.get(posList).get(0).intValue() + (int) Math.sqrt(xSq);
-                            int trunkBlockPosX2 = posListToPlace.get(posList).get(0).intValue() - (int) Math.sqrt(xSq);
-                            int trunkBlockPosY = (int) (posListToPlace.get(posList).get(1).intValue() + setY * rPer);
-                            int trunkBlockPosZ = posListToPlace.get(posList).get(2).intValue() + setZ;
+                            int trunkBlockPosX1 = (int) posListToPlace.get(posList).x + (int) Math.sqrt(xSq);
+                            int trunkBlockPosX2 = (int) posListToPlace.get(posList).x - (int) Math.sqrt(xSq);
+                            int trunkBlockPosY = (int) (posListToPlace.get(posList).y + setY * rPer);
+                            int trunkBlockPosZ = (int) posListToPlace.get(posList).z + setZ;
                             if (trunkBlockPosX1 != trunkBlockPosX2) {
                                 for (int trunkBlockPosXli = trunkBlockPosX2; trunkBlockPosXli <= trunkBlockPosX1; trunkBlockPosXli++) {
                                     BlockPos trunkBlockPosPlace = new BlockPos(trunkBlockPosXli, trunkBlockPosY, trunkBlockPosZ);
                                     if (((double) context.random().nextInt(10001) / 10000) <= placePer) {
-                                        List<Double> posS = new ArrayList<>();
-                                        posS.add((double) trunkBlockPosPlace.getX());
-                                        posS.add((double) trunkBlockPosPlace.getY());
-                                        posS.add((double) trunkBlockPosPlace.getZ());
+                                        Vector3d posS = new Vector3d();
+                                        posS.x = trunkBlockPosPlace.getX();
+                                        posS.y = trunkBlockPosPlace.getY();
+                                        posS.z = trunkBlockPosPlace.getZ();
                                         listToReturn.add(posS);
                                     }
                                 }
@@ -144,6 +107,9 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                             BlockPos posToPlaceWood = new BlockPos(blockPos.getX() + xPlaceLi, blockPos.getY() - 1 - yToPlace, blockPos.getZ() + zToPlace);
                             level.setBlock(posToPlaceWood, blockStateForWood, 2);
                         }
+                    } else {
+                        BlockPos posToPlaceAir = new BlockPos(blockPos.getX() + xToPlace, blockPos.getY() - 1 - yToPlace, blockPos.getZ() + zToPlace);
+                        level.setBlock(posToPlaceAir, blockStateForWood, 2);
                     }
                 }
             }
@@ -160,6 +126,9 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                             BlockPos posToPlaceAir = new BlockPos(blockPos.getX() + xPlaceLi, blockPos.getY() - 1 - yToPlace, blockPos.getZ() + zToPlace);
                             level.setBlock(posToPlaceAir, blockStateForAir, 2);
                         }
+                    } else {
+                        BlockPos posToPlaceAir = new BlockPos(blockPos.getX() + xToPlace, blockPos.getY() - 1 - yToPlace, blockPos.getZ() + zToPlace);
+                        level.setBlock(posToPlaceAir, blockStateForAir, 2);
                     }
                 }
             }
@@ -175,27 +144,28 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
         BlockPos leavesBlockPos = pContext.origin();
         BlockState trunkBlockState = config.trunk().getState(pContext.random(), trunkBlockPos);
         BlockState leavesBlockState = config.leaves().getState(pContext.random(), leavesBlockPos);
+        double dis = Math.sqrt(Math.pow(trunkBlockPos.getZ(), 2) + Math.pow(trunkBlockPos.getX(), 2));
 
-        if (true) {
+        if (dis >= 700) {
 
-            List<List<Double>> locationList1 = new ArrayList<>();
-            List<Double> locationStart = new ArrayList<>();
-            List<Double> locationEnd = new ArrayList<>();
+            List<Vector3d> locationList1 = new ArrayList<>();
+            Vector3d locationStart = new Vector3d();
+            Vector3d locationEnd = new Vector3d();
 
-            locationStart.add((double) (trunkBlockPos.getX()));
-            locationStart.add((double) (trunkBlockPos.getY()));
-            locationStart.add((double) (trunkBlockPos.getZ()));
-            locationEnd.add((double) (trunkBlockPos.getX() + bl * pContext.random().nextInt(5)));
-            locationEnd.add((double) (trunkBlockPos.getY() + 55 + pContext.random().nextInt(10)));
-            locationEnd.add((double) (trunkBlockPos.getZ() + bl * pContext.random().nextInt(5)));
+            locationStart.x = (trunkBlockPos.getX());
+            locationStart.y = (trunkBlockPos.getY());
+            locationStart.z = (trunkBlockPos.getZ());
+            locationEnd.x = (trunkBlockPos.getX() + bl * pContext.random().nextInt(5));
+            locationEnd.y = (trunkBlockPos.getY() + 55 + pContext.random().nextInt(10));
+            locationEnd.z = (trunkBlockPos.getZ() + bl * pContext.random().nextInt(5));
 
             locationList1.add(locationStart);
             locationList1.add(locationEnd);
-            List<List<Double>> leavesListFirst = new ArrayList<>();
+            List<Vector3d> leavesListFirst = new ArrayList<>();
             leavesListFirst.add(locationEnd);
             placeBlock(placeList(leavesListFirst, 30.0, 30.0, 0.5, 0.005, pContext), 4.0, 4.0, leavesBlockState, level, 0.5, 0.5, false, pContext);
 
-            refineLocationList(locationList1, 1, pContext);
+            ModUtils.lightningPathList(locationList1, 1.0, pContext);
             placeBlock(locationList1, 6.0, 1.0, trunkBlockState, level, 1.0, 1.0, true, pContext);
 
             int stickCount = 5 + pContext.random().nextInt(5);
@@ -207,16 +177,16 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                 double endX = len * Math.cos(everyA) * Math.cos(everyB);
                 double endY = len * Math.sin(everyB);
                 double endZ = len * Math.sin(everyA) * Math.cos(everyB);
-                List<Double> stickStart = locationList1.get(locationList1.size() - (int) (locationList1.size() / 11 * 7) - pContext.random().nextInt(10));
-                List<Double> stickEnd = new ArrayList<>();
-                stickEnd.add(locationEnd.get(0) + endX);
-                stickEnd.add(locationEnd.get(1) + endY - 20);
-                stickEnd.add(locationEnd.get(2) + endZ);
-                List<List<Double>> stickList = new ArrayList<>();
-                List<List<Double>> leavesList = new ArrayList<>();
+                Vector3d stickStart = locationList1.get(locationList1.size() - (locationList1.size() / 11 * 7) - pContext.random().nextInt(10));
+                Vector3d stickEnd = new Vector3d();
+                stickEnd.x = (locationEnd.x + endX);
+                stickEnd.y = (locationEnd.y + endY - 20);
+                stickEnd.z = (locationEnd.z + endZ);
+                List<Vector3d> stickList = new ArrayList<>();
+                List<Vector3d> leavesList = new ArrayList<>();
                 stickList.add(stickStart);
                 stickList.add(stickEnd);
-                refineLocationList(stickList, 1, pContext);
+                ModUtils.lightningPathList(stickList, 1.0, pContext);
                 placeBlock(stickList, 2.0 + pContext.random().nextInt(2), 1.0, trunkBlockState, level, 1.0, 1.0, true, pContext);
                 leavesList.add(stickEnd);
                 placeBlock(placeList(leavesList, 20.0, 20.0, 0.5, 0.005, pContext), 4.0, 4.0, leavesBlockState, level, 0.5, 0.5, false, pContext);
@@ -230,17 +200,17 @@ public class LivingTreeFeature extends Feature<LivingTreeFeature.Config> {
                 double endX = len * Math.cos(everyA) * Math.cos(everyB);
                 double endY = len * Math.sin(everyB);
                 double endZ = len * Math.sin(everyA) * Math.cos(everyB);
-                List<Double> stickStart = locationList1.get(pContext.random().nextInt(10));
-                List<Double> stickEnd = new ArrayList<>();
+                Vector3d stickStart = locationList1.get(pContext.random().nextInt(10));
+                Vector3d stickEnd = new Vector3d();
                 BlockPos stickEndPos = new BlockPos((int) (locationStart.get(0) + endX), (int) (locationStart.get(1) - endY), (int) (locationStart.get(2) + endZ));
                 if (!level.getBlockState(stickEndPos).isAir()) {
-                    stickEnd.add(locationStart.get(0) + endX);
-                    stickEnd.add(locationStart.get(1) - endY);
-                    stickEnd.add(locationStart.get(2) + endZ);
-                    List<List<Double>> stickList = new ArrayList<>();
+                    stickEnd.x = (locationStart.x + endX);
+                    stickEnd.y = (locationStart.y - endY);
+                    stickEnd.z = (locationStart.z + endZ);
+                    List<Vector3d> stickList = new ArrayList<>();
                     stickList.add(stickStart);
                     stickList.add(stickEnd);
-                    refineLocationList(stickList, 1, pContext);
+                    ModUtils.lightningPathList(stickList, 1.0, pContext);
                     placeBlock(stickList, 2.0 + pContext.random().nextInt(2), 1.0, trunkBlockState, level, 1.0, 1.0, true, pContext);
                 }
             }
