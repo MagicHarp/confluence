@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import org.confluence.mod.common.init.ModAttachments;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
 
@@ -41,7 +42,7 @@ public class GamePlay implements INBTSerializable<CompoundTag> {
     // todo
     public float getFishingPower(Player player) {
         float base = fishingPower;
-//        if (gummyWormUsed) base += 3.0F;
+        if (player.getData(ModAttachments.EVER_BENEFICIAL.get()).isGummyWormUsed()) base += 3.0F;
         Level level = player.level();
         long dayTime = level.dayTime() % 24000; // [0, 24000]
         if (level.isRaining()) base *= 1.1F;
