@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
 @SuppressWarnings("all")
-public abstract class TerraBossBase extends Monster implements GeoEntity {
+public abstract class TerraBossBase extends Monster implements GeoEntity, Boss {
 
     public int difficultyIdx;
 
@@ -249,10 +249,6 @@ public abstract class TerraBossBase extends Monster implements GeoEntity {
     public void onRemovedFromWorld() {
         super.onRemovedFromWorld();
     }
-
-    public void onDeath() {}
-
-    public void onFinializeSpawn() {}
 
     @Override // 取消墙体窒息伤害
     public boolean isInWall() {

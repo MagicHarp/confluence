@@ -24,9 +24,6 @@ public class MinionEntity extends LivingEntity {
         super.tick();
         noPhysics = true;
         checkCollision();
-        if (owner == null || owner.isDeadOrDying()){
-            kill();
-        }
     }
 
     private void checkCollision() {

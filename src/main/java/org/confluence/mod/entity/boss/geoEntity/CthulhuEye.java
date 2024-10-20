@@ -305,14 +305,4 @@ public class CthulhuEye extends TerraBossBase implements DeathAnimOptions, GeoEn
         super.tick();
         syncRot();
     }
-
-    @Override
-    public void onDeath() {
-        if (!level().isClientSide) level().players().forEach(player -> player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.death").withStyle(ChatFormatting.DARK_PURPLE)));
-    }
-
-    @Override
-    public void onFinializeSpawn() {
-        if (!level().isClientSide) level().players().forEach(player -> player.sendSystemMessage(Component.translatable("bossevent.confluence.cthulhu_eye.generate").withStyle(ChatFormatting.DARK_PURPLE)));
-    }
 }

@@ -66,6 +66,11 @@ public class EaterOfWorldSegment extends TerraBossBase {
         return newPos;
     }
 
+    @Override
+    public boolean shouldShowMessage() {
+        return false;
+    }
+
     public boolean isNoGravity(){
         return true;
     }

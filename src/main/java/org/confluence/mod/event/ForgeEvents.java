@@ -38,7 +38,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -54,7 +53,6 @@ import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
-import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.particle.options.DamageIndicatorOptions;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
@@ -67,6 +65,7 @@ import org.confluence.mod.effect.harmful.FrostburnEffect;
 import org.confluence.mod.effect.harmful.ManaSicknessEffect;
 import org.confluence.mod.entity.FallingStarItemEntity;
 import org.confluence.mod.entity.ModEntities;
+import org.confluence.mod.entity.boss.Boss;
 import org.confluence.mod.entity.boss.TerraBossBase;
 import org.confluence.mod.entity.monster.demoneye.DemonEye;
 import org.confluence.mod.entity.monster.demoneye.DemonEyeVariant;
@@ -81,7 +80,6 @@ import org.confluence.mod.item.curio.informational.IDPSMeter;
 import org.confluence.mod.item.curio.movement.IFallResistance;
 import org.confluence.mod.item.sword.BloodButchereSword;
 import org.confluence.mod.item.sword.BreathingReed;
-import org.confluence.mod.item.sword.DeveloperSword;
 import org.confluence.mod.item.sword.TentacleMaceSword;
 import org.confluence.mod.misc.ModAttributes;
 import org.confluence.mod.misc.ModConfigs;
@@ -231,8 +229,15 @@ public final class ForgeEvents {
             }
         }
         if (!living.level().isClientSide) {
-            if (living instanceof TerraBossBase terra) {
-                terra.onDeath();
+            if (living instanceof Boss boss) {
+                if (boss.shouldShowMessage()){
+                    LivingEntity e = (LivingEntity) boss;
+                    Level level = e.level();
+                    if (!level.isClientSide) level.players().
+                            forEach(player ->
+                                    player.sendSystemMessage(Component.translatable("bossevent.confluence.boss_death", e.getDisplayName().getString())
+                                            .withStyle(ChatFormatting.DARK_PURPLE)));
+                }
             }
         }
     }
@@ -400,8 +405,17 @@ public final class ForgeEvents {
             demonEye.setVariant(DemonEyeVariant.random(randomSource));
         } else if (mob instanceof BlackSlime blackSlime) {
             blackSlime.finalizeSpawn(randomSource, event.getDifficulty());
-        } else if (mob instanceof TerraBossBase terra) {
-            terra.onFinializeSpawn();
+        } else if (mob instanceof Boss boss) {
+            if (boss.shouldShowMessage()){
+                LivingEntity e = (LivingEntity) boss;
+                Level level = e.level();
+                if (!level.isClientSide) level.players().
+                        forEach(player ->
+                                player.sendSystemMessage(Component.translatable(
+                                        "bossevent.confluence.boss_generate",
+                                                e.getDisplayName().getString())
+                                        .withStyle(ChatFormatting.DARK_PURPLE)));
+            }
         }
     }
 

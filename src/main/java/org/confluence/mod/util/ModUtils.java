@@ -32,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.color.FloatRGBA;
+import org.confluence.mod.entity.boss.Boss;
 import org.confluence.mod.entity.boss.IBossFSM;
 import org.confluence.mod.item.ModItems;
 import org.confluence.mod.misc.ModConfigs;
@@ -431,7 +432,7 @@ public final class ModUtils {
                                    AABB box){
         boolean flag = false;
         for (Entity entity : getNearbyEntities(radius, level, Entity.class, box)) {
-            if (entity instanceof IBossFSM) {
+            if (entity instanceof Boss) {
                 flag = true;
                 break;
             }

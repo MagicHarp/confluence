@@ -19,8 +19,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.ArrayList;
 
 public class TestWormEntity extends AbstractWormEntity {
-    public static final int WORM_LENGTH = 72;
-    public static final float WORM_HEALTH = 5f;
+    public static final int WORM_LENGTH = 5;
+    public static final float WORM_HEALTH = 1f;
     public static final WormMovementUtils.WormSegmentMovementOptions FOLLOW_INFO =
             new WormMovementUtils.WormSegmentMovementOptions()
                     .setFollowDistance(0.5)

@@ -34,7 +34,7 @@ import static org.confluence.mod.util.ModUtils.isAtLeastExpert;
 import static org.confluence.mod.util.ModUtils.switchByDifficulty;
 
 @SuppressWarnings("all")
-public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM {
+public class KingSlime extends Slime implements DeathAnimOptions, IBossFSM, Boss {
     private static final int COLOR_INT = 0x73bcf4;
     // 缩小/膨胀时长，单位：刻
     private static final int SHRINK_ENLARGE_DURATION = 20;
