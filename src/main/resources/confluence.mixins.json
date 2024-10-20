@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_8",
     "refmap": "confluence.refmap.json",
     "mixins": [
+        "accessor.EntityAccessor"
     ],
     "client": [
     ],
