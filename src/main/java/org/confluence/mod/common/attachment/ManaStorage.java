@@ -1,23 +1,13 @@
-package org.confluence.mod.common.capability;
+package org.confluence.mod.common.attachment;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.capabilities.EntityCapability;
-import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.util.INBTSerializable;
-import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntSupplier;
 
 public class ManaStorage implements INBTSerializable<CompoundTag> {
-    public static final String KEY = Confluence.MODID + ":mana";
-    public static final EntityCapability<ManaStorage, Void> CAP = EntityCapability.createVoid(ResourceLocation.parse(KEY), ManaStorage.class);
-    private final Player player;
-
     private int stars;
     private int additionalMana;
     private int currentMana;
@@ -28,21 +18,15 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
 
     private boolean arcaneCrystalUsed;
 
-    public ManaStorage(Player player) {
-        this.player = player;
+    public ManaStorage() {
+        this.stars = 1;
+        this.additionalMana = 0;
+        this.currentMana = 20;
+        this.regenerateDelay = 0;
+        this.extractRatio = 1.0F;
+        this.manaRegenerationBand = false;
 
-        if (player.getPersistentData().contains(KEY)) {
-            deserializeNBT(player.level().registryAccess(), player.getPersistentData().getCompound(KEY));
-        } else {
-            this.stars = 1;
-            this.additionalMana = 0;
-            this.currentMana = 20;
-            this.regenerateDelay = 0;
-            this.extractRatio = 1.0F;
-            this.manaRegenerationBand = false;
-
-            this.arcaneCrystalUsed = false;
-        }
+        this.arcaneCrystalUsed = false;
     }
 
     @Override
@@ -71,7 +55,6 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
         if (!canReceive()) return false;
         int received = Math.min(sup.getAsInt(), getMaxMana() - currentMana);
         this.currentMana += received;
-        serializeNBT(player.level().registryAccess());
         return true;
     }
 
@@ -93,7 +76,6 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
 //            toUse.finishUsingItem(serverPlayer.level(), serverPlayer);
 //        }
         this.currentMana -= extract;
-        serializeNBT(player.level().registryAccess());
         return true;
     }
 
@@ -174,31 +156,5 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
 
     public boolean isArcaneCrystalUsed() {
         return arcaneCrystalUsed;
-    }
-
-    public void copyFrom(ManaStorage manaStorage) {
-        this.stars = manaStorage.stars;
-        this.additionalMana = manaStorage.additionalMana;
-        this.currentMana = manaStorage.currentMana;
-        this.extractRatio = manaStorage.extractRatio;
-        this.manaRegenerationBand = manaStorage.manaRegenerationBand;
-
-        this.arcaneCrystalUsed = manaStorage.arcaneCrystalUsed;
-    }
-
-    public static class Provider implements ICapabilityProvider<Player, Void, ManaStorage> {
-        private ManaStorage manaStorage;
-
-        @Override
-        public @Nullable ManaStorage getCapability(@NotNull Player player, Void context) {
-            return getOrCreateCapability(player);
-        }
-
-        private ManaStorage getOrCreateCapability(@NotNull Player player) {
-            if (manaStorage == null) {
-                this.manaStorage = new ManaStorage(player);
-            }
-            return manaStorage;
-        }
     }
 }

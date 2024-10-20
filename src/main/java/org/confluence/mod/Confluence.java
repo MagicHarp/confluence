@@ -15,10 +15,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
-import org.confluence.mod.common.init.ModDataComponentTypes;
-import org.confluence.mod.common.init.ModItems;
-import org.confluence.mod.common.init.ModSoundEvents;
-import org.confluence.mod.common.init.ModTabs;
+import org.confluence.mod.common.init.*;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +38,7 @@ public class Confluence {
         ModItems.register(eventBus);
         ModDataComponentTypes.DATA_COMPONENT_TYPE.register(eventBus);
         ModSoundEvents.SOUND_EVENT.register(eventBus);
+        ModAttachments.TYPES.register(eventBus);
     }
 
     public static ResourceLocation asResource(String path) {
