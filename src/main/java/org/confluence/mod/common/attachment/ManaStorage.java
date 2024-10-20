@@ -2,6 +2,7 @@ package org.confluence.mod.common.attachment;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,7 @@ public class ManaStorage implements INBTSerializable<CompoundTag> {
     }
 
     // todo
-    public boolean extractMana(IntSupplier sup) {
+    public boolean extractMana(IntSupplier sup, ServerPlayer serverPlayer) {
         if (!canExtract()) return false;
         int extract = (int) (sup.getAsInt() * extractRatio);
 //        if (currentMana < extract) {

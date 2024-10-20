@@ -5,7 +5,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.renderer.gui.ManaHudLayer;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT, modid = Confluence.MODID)
 public final class ModClientEvents {
@@ -22,8 +24,8 @@ public final class ModClientEvents {
     }
 
     @SubscribeEvent
-    public static void registerGuiLayers(RegisterGuiLayersEvent event) { // registerGuiOverlays
-
+    public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+        event.registerBelow(VanillaGuiLayers.SELECTED_ITEM_NAME, Confluence.asResource("mana_hud"), new ManaHudLayer());
     }
 
     @SubscribeEvent

@@ -3,6 +3,7 @@ package org.confluence.mod.client.animate;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.Mth;
 
 public class ColorAnimation {
     public static final Codec<ColorAnimation> CODEC = Codec.STRING.dispatch("type", ColorAnimation::getType, type -> switch (type) {
@@ -57,15 +58,10 @@ public class ColorAnimation {
         // 更新颜色的方法
         public ColorState updateColor(int deltaR, int deltaG, int deltaB) {
             return new ColorState(
-                    clamp(red + deltaR, MIN_COLOR_VALUE, MAX_COLOR_VALUE),
-                    clamp(green + deltaG, MIN_COLOR_VALUE, MAX_COLOR_VALUE),
-                    clamp(blue + deltaB, MIN_COLOR_VALUE, MAX_COLOR_VALUE)
+                    Mth.clamp(red + deltaR, MIN_COLOR_VALUE, MAX_COLOR_VALUE),
+                    Mth.clamp(green + deltaG, MIN_COLOR_VALUE, MAX_COLOR_VALUE),
+                    Mth.clamp(blue + deltaB, MIN_COLOR_VALUE, MAX_COLOR_VALUE)
             );
-        }
-
-        // 限制颜色值在指定范围内
-        private static int clamp(int value, int min, int max) {
-            return Math.max(min, Math.min(max, value));
         }
 
         public int color() {
