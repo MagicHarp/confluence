@@ -66,7 +66,7 @@ repositories {
 }
 
 dependencies {
-    var projectName = ["Core","TerraEntity","MineTeam","EquipmentBenediction","TerraCurio","TerraGuns"];
+    var projectName = ["Core","TerraEntity","MineTeam","EquipmentBenediction","TerraCurio"];
     projectName.forEach {name -> implementation jarJar(project(":" + name))}
 
 
