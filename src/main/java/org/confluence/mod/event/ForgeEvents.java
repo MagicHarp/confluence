@@ -54,6 +54,7 @@ import org.confluence.mod.block.functional.network.PathService;
 import org.confluence.mod.block.natural.LogBlocks;
 import org.confluence.mod.capability.ability.AbilityProvider;
 import org.confluence.mod.capability.mana.ManaProvider;
+import org.confluence.mod.client.color.AnimateColor;
 import org.confluence.mod.client.particle.options.DamageIndicatorOptions;
 import org.confluence.mod.command.ConfluenceCommand;
 import org.confluence.mod.command.ConfluenceData;
@@ -497,17 +498,5 @@ public final class ForgeEvents {
             EntityType<?> entityType = entry.get();
             event.registerTeamData(entityType, data -> data.setCanTeam(false));
         });
-    }
-
-    @SubscribeEvent
-    public static void appendTooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof DeveloperSword){
-            event.getToolTip().clear();
-            event.getToolTip().add(Component.translatable("item.confluence.developer_sword"));
-            event.getToolTip().add(Component.literal(""));
-            event.getToolTip().add(Component.translatable("item.modifiers.mainhand").withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(Component.translatable("item.confluence.developer_sword.inf").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_damage")));
-            event.getToolTip().add(Component.translatable("item.confluence.developer_sword.inf").withStyle(style -> style.withColor(ModUtils.getRainbowColor())).append(Component.translatable("attribute.name.attack_speed")));
-        }
     }
 }

@@ -439,10 +439,6 @@ public final class ModUtils {
         return flag;
     }
 
-    public static int getRainbowColor() {
-        return AnimateColor.getExpertColor();
-    }
-
     public static int getRespawnWaitTime(LocalPlayer player) {
         boolean hasBoss = hasBoss(Short.MAX_VALUE, player.level(),
                 player.getBoundingBox());

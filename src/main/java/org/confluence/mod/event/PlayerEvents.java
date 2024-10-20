@@ -58,21 +58,6 @@ public final class PlayerEvents {
     }
 
     @SubscribeEvent
-    public static void playerQuit(PlayerEvent.PlayerLoggedOutEvent event){
-        List<? extends Entity> entities = ModUtils.getNearbyEntities(Short.MAX_VALUE, event.getEntity().level(),
-                MinionEntity.class, event.getEntity().getBoundingBox());
-        for (Entity entity : entities){
-            if (entity instanceof MinionEntity minion){
-                if (minion.owner != null){
-                    if (minion.owner.is(event.getEntity())){
-                        minion.kill();
-                    }
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             if (event.player.isLocalPlayer()) {
