@@ -36,6 +36,7 @@ public class Confluence {
         ModTabs.TABS.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
+        ModEntities.ENTITIES.register(eventBus);
         ModDataComponentTypes.DATA_COMPONENT_TYPE.register(eventBus);
         ModSoundEvents.SOUND_EVENT.register(eventBus);
         ModAttachments.TYPES.register(eventBus);

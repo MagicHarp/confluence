@@ -97,6 +97,9 @@ tasks.withType(ProcessResources).configureEach {
     filesMatching(['META-INF/neoforge.mods.toml']) {
         expand replaceProperties
     }
+
+
 }
 
 
+tasks.withType(Copy).all{ duplicatesStrategy = DuplicatesStrategy.EXCLUDE }

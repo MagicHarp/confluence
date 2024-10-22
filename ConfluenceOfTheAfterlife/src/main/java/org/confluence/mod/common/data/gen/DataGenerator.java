@@ -24,10 +24,10 @@ public class DataGenerator {
         CompletableFuture<HolderLookup.Provider> lookup = event.getLookupProvider();
 
         boolean client = event.includeClient();
-//        generator.addProvider(client, new ModChineseProvider(output));
-//        generator.addProvider(client, new ModEnglishProvider(output));
+        generator.addProvider(client, new ModChineseProvider(output));
+        generator.addProvider(client, new ModEnglishProvider(output));
 //        generator.addProvider(client, new ModBlockStateProvider(output, helper));
-//        generator.addProvider(client, new ModItemModelProvider(output, helper));
+        generator.addProvider(client, new ModItemModelProvider(output, helper));
 
         boolean server = event.includeServer();
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(output, lookup, helper);
@@ -38,5 +38,6 @@ public class DataGenerator {
 //        generator.addProvider(server, new ModPoiTypeTagsProvider(output, lookup, helper));
 
         PROVIDERS = generator.getProvidersView();
+
     }
 }
