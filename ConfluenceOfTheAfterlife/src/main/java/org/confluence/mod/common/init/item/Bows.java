@@ -1,7 +1,5 @@
 package org.confluence.mod.common.init.item;
 
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
@@ -20,6 +18,4 @@ public class Bows {
     public static final DeferredItem<ShortBowItem> TUNGSTEN_SHORT_BOW = BOWS.register("tungsten_short_bow", () -> new ShortBowItem(5.5F, 1280, ModRarity.WHITE));
     public static final DeferredItem<ShortBowItem> GOLDEN_SHORT_BOW = BOWS.register("golden_short_bow", () -> new ShortBowItem(6.0F, 1408, ModRarity.WHITE));
     public static final DeferredItem<ShortBowItem> PLATINUM_SHORT_BOW = BOWS.register("platinum_short_bow", () -> new ShortBowItem(6.0F, 1536, ModRarity.WHITE));
-
-
 }

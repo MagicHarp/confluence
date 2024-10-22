@@ -109,7 +109,7 @@ public class BaseBombEntity extends ThrowableItemProjectile {
             rotation.set(0.0, 0.0, rotate);
 
             if (emitter == null) {
-                this.emitter = new ParticleEmitter(level(), position(), PARTICLE);
+                this.emitter = new ParticleEmitter(level(), position(), getLeadParticle());
                 emitter.offsetRot.set(0.0, -Mth.HALF_PI, 0.0);
                 emitter.offsetPos = new Vec3(0.0, DIAMETER, 0.0);
                 emitter.parentRotation = rotation;
@@ -127,5 +127,9 @@ public class BaseBombEntity extends ThrowableItemProjectile {
     @Override
     public double getDefaultGravity() {
         return 0.05;
+    }
+
+    protected ResourceLocation getLeadParticle() {
+        return PARTICLE;
     }
 }

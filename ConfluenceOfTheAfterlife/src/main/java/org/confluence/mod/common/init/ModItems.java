@@ -9,15 +9,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.projectile.bombs.*;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.item.common.BombItem;
-import org.confluence.mod.common.item.common.LifeCrystal;
-import org.confluence.mod.common.item.common.LifeFruit;
 import org.confluence.mod.common.init.item.Arrows;
 import org.confluence.mod.common.init.item.Bows;
 import org.confluence.mod.common.init.item.Swords;
 import org.confluence.mod.common.init.item.common.IconItem;
+import org.confluence.mod.common.item.common.BombItem;
+import org.confluence.mod.common.item.common.LifeCrystal;
+import org.confluence.mod.common.item.common.LifeFruit;
 import org.confluence.mod.common.item.mana.ManaStar;
-import org.confluence.mod.common.init.item.common.*;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Confluence.MODID);
@@ -39,18 +38,12 @@ public final class ModItems {
     public static final DeferredItem<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new BlockItem(ModBlocks.PLATINUM_COIN_PILE.get(), new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
     public static void register(IEventBus eventBus) {
-
         ITEMS.register(eventBus);
+        BLOCK_ITEMS.register(eventBus);
         Swords.SWORDS.register(eventBus);
         Bows.BOWS.register(eventBus);
-
         Arrows.ARROWS.register(eventBus);
         Materials.MATERIALS.register(eventBus);
-
-        BLOCK_ITEMS.register(eventBus);
-
-
-//        new ModEffects();
         IconItem.init();
     }
 }
