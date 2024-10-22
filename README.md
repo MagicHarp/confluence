@@ -1,13 +1,14 @@
-|项目名|备注|是否独立运行|
-|--|--|--|
-|ConfluenceOfTheAfterlife|本体|是|
-|Coce|非独立运行项目共用代码|否|
-|TerraEntity|泰拉实体生物|是|
-|MineTeam|类泰拉团队机制|是|
-|EquipmentBenediction|多种装备加成机制|是|
-|TerraCurio|泰拉饰品|是|
-|TerraGuns|泰拉枪支|是|
-|ParticleStorm|为复杂的粒子提供API|是|
+|项目名| 备注    |是否独立运行|
+|--|-------|--|
+|[ConfluenceOfTheAfterlife](ConfluenceOfTheAfterlife)| 本体|是|
+|[Core](Core)| 非独立运行项目共用代码|否|
+|[TerraEntity](TerraEntity)| 泰拉实体生物|是|
+|[MineTeam](MineTeam)| 类泰拉团队机制|是|
+|[EquipmentBenediction](EquipmentBenediction)| 多种装备加成机制|是|
+|[TerraCurio](TerraCurio)| 泰拉饰品|是|
+|TerraGuns| 泰拉枪支|是|
+|[ParticleStorm](ParticleStorm)| 为复杂的粒子提供API |是|
+|[HeavenDestinyMoment](HeavenDestinyMoment)|提供各类事件机制API|是|
 
 
 ## 构建项目
