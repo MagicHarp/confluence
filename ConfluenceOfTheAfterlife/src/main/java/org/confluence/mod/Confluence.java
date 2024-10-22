@@ -15,6 +15,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
+import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.common.init.*;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class Confluence {
     public static final Logger LOGGER = LoggerFactory.getLogger("Confluence");
 
     public Confluence(IEventBus eventBus, ModContainer container) {
+        ClientConfigs.register(container);
         ModTabs.TABS.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);

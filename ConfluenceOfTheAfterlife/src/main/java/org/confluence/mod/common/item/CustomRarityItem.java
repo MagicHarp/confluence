@@ -1,6 +1,7 @@
 package org.confluence.mod.common.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.common.component.ModRarity;
@@ -17,7 +18,7 @@ public class CustomRarityItem extends Item {
     }
 
     @Override
-    public @NotNull Component getName(@NotNull ItemStack pStack) {
+    public @NotNull MutableComponent getName(@NotNull ItemStack pStack) {
         return Component.translatable(getDescriptionId()).withStyle(style -> style.withColor(pStack.get(ModDataComponentTypes.MOD_RARITY.get()).getColor()));
     }
 }

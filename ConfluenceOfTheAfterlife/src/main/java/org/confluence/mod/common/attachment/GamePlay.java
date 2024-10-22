@@ -39,7 +39,7 @@ public class GamePlay implements INBTSerializable<CompoundTag> {
         this.coinRange = coin.get() ? 16.67 : 2.0;
     }
 
-    // todo
+    // todo 血月
     public float getFishingPower(Player player) {
         float base = fishingPower;
         if (player.getData(ModAttachments.EVER_BENEFICIAL.get()).isGummyWormUsed()) base += 3.0F;

@@ -1,12 +1,10 @@
 package org.confluence.mod.client.renderer.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.handler.ClientPacketHandler;
@@ -21,15 +19,11 @@ public class ManaHudLayer implements LayeredDraw.Layer {
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Minecraft minecraft = Minecraft.getInstance();
-        int screenWidth = guiGraphics.guiWidth();
-        if (minecraft.options.hideGui || !minecraft.gameMode.canHurtPlayer()) return;
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableDepthTest();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        if (minecraft.options.hideGui || !GuiHelper.shouldDrawSurvivalElements(minecraft)) return;
+        GuiHelper.setupOverlayRenderState(true, false);
         minecraft.getProfiler().push("mana");
 
+        int screenWidth = guiGraphics.guiWidth();
         int currentMana = ClientPacketHandler.getCurrentMana();
         int maxManaCount = ClientPacketHandler.getMaxMana() / 20;
         int currentManaCount = currentMana / 20;

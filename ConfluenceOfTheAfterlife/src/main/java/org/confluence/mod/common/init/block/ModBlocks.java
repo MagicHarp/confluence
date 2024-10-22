@@ -6,19 +6,27 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.common.block.CoinPileBlock;
+import org.confluence.mod.common.init.ModItems;
 import org.confluence.mod.common.init.ModTabs;
-import org.confluence.mod.common.item.BoxBlockItem;
+import org.confluence.mod.common.item.common.BoxBlockItem;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ModBlocks {
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Confluence.MODID);
     public static final NonNullBiConsumer<DataGenContext<Item, BoxBlockItem>, CreativeModeTabModifier> PARENT_ONLY = (context, modifier) -> modifier.accept(context, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
 
-    //TODO 暂未添加宝匣Tag标记
     public static final BlockEntry<Block> WOODEN_BOX = registerBoxBlock("wooden_box");
     public static final BlockEntry<Block> IRON_BOX = registerBoxBlock("iron_box");
     public static final BlockEntry<Block> GOLDEN_BOX = registerBoxBlock("golden_box");
@@ -47,15 +55,45 @@ public class ModBlocks {
     public static final BlockEntry<Block> HELL_STONE_BOX = registerBoxBlock("hell_stone_box");
     public static final BlockEntry<Block> BEACH_BOX = registerBoxBlock("beach_box");
 
-    public static void register(IEventBus eventBus) {
-        ModOreBlocks.BLOCKS.register(eventBus);
-        ModDecorativeBlocks.BLOCKS.register(eventBus);
+    public static final DeferredBlock<CoinPileBlock> COPPER_COIN_PILE = registerWithoutItem("copper_coin_pile", CoinPileBlock::new);
+    public static final DeferredBlock<CoinPileBlock> SILVER_COIN_PILE = registerWithoutItem("silver_coin_pile", CoinPileBlock::new);
+    public static final DeferredBlock<CoinPileBlock> GOLDEN_COIN_PILE = registerWithoutItem("golden_coin_pile", CoinPileBlock::new);
+    public static final DeferredBlock<CoinPileBlock> PLATINUM_COIN_PILE = registerWithoutItem("platinum_coin_pile", CoinPileBlock::new);
+
+
+    public static <B extends Block> DeferredBlock<B> registerWithItem(String id, Supplier<B> block) {
+        return registerWithItem(id, block, new Item.Properties());
     }
 
-    public static BlockEntry<Block> registerBoxBlock(String name) {
+    public static <B extends Block> DeferredBlock<B> registerWithItem(String id, Supplier<B> block, Function<Supplier<B>, Supplier<BlockItem>> item) {
+        DeferredBlock<B> object = BLOCKS.register(id, block);
+        ModItems.ITEMS.register(id, item.apply(object));
+        return object;
+    }
+
+    public static <B extends Block> DeferredBlock<B> registerWithItem(String id, Supplier<B> block, Item.Properties properties) {
+        DeferredBlock<B> object = BLOCKS.register(id, block);
+        ModItems.ITEMS.register(id, () -> new BlockItem(object.get(), properties));
+        return object;
+    }
+
+    public static <B extends Block> DeferredBlock<B> registerWithoutItem(String id, Supplier<B> block) {
+        return BLOCKS.register(id, block);
+    }
+
+    public static BlockEntry<Block> registerBoxBlock(String name) { // TODO 暂未添加宝匣Tag标记
         BlockBuilder<Block, Registrate> blockBuilder = Confluence.REGISTRATE.get().block(name, Block::new).initialProperties(() -> Blocks.OAK_PLANKS);
-        blockBuilder.item((block, properties) -> new BoxBlockItem(block, Confluence.asResource(name)))
-                .tab(ModTabs.CREATIVES.getKey(), PARENT_ONLY).register();
+        blockBuilder.item((block, properties) -> new BoxBlockItem(block, Confluence.asResource(name))).tab(ModTabs.CREATIVES.getKey(), PARENT_ONLY).register();
         return blockBuilder.register();
+    }
+
+    public static float getObsidianBasedExplosionResistance(float delta) {
+        return Blocks.OBSIDIAN.getExplosionResistance() + delta;
+    }
+
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+        ModOreBlocks.BLOCKS.register(eventBus);
+        ModDecorativeBlocks.BLOCKS.register(eventBus);
     }
 }
