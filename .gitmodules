@@ -18,3 +18,7 @@
 	path = HeavenDestinyMoment
 	url = https://github.com/XiaoHuNao/HeavenDestinyMoment
 	branch = neo/1.21
+[submodule "PhaseJourney"]
+	path = PhaseJourney
+	url = https://github.com/XiaoHuNao/PhaseJourney
+	branch = master
