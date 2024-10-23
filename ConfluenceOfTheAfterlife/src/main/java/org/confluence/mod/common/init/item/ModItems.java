@@ -9,7 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.projectile.bombs.*;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.item.common.IconItem;
 import org.confluence.mod.common.item.common.BombItem;
 import org.confluence.mod.common.item.common.LifeCrystal;
 import org.confluence.mod.common.item.common.LifeFruit;
@@ -37,10 +36,10 @@ public final class ModItems {
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         BLOCK_ITEMS.register(eventBus);
-        Swords.SWORDS.register(eventBus);
-        Bows.BOWS.register(eventBus);
-        Arrows.ARROWS.register(eventBus);
-        Materials.MATERIALS.register(eventBus);
-        IconItem.init();
+        IconItems.ICONS.register(eventBus);
+        SwordItems.SWORDS.register(eventBus);
+        BowItems.BOWS.register(eventBus);
+        ArrowItems.ARROWS.register(eventBus);
+        MaterialItems.MATERIALS.register(eventBus);
     }
 }

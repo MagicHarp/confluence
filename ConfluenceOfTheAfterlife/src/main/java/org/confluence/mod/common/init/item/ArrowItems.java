@@ -6,7 +6,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.item.bow.BaseArrowItem;
 
-public class Arrows {
+public class ArrowItems {
     public static final DeferredRegister.Items ARROWS = DeferredRegister.createItems(Confluence.MODID);
 
     public static final DeferredItem<BaseArrowItem> FLAMING_ARROW = ARROWS.register("flaming_arrow", () -> new BaseArrowItem(ModRarity.WHITE));

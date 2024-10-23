@@ -9,7 +9,7 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.SimpleTier;
-import org.confluence.mod.common.init.item.Materials;
+import org.confluence.mod.common.init.item.MaterialItems;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -21,30 +21,30 @@ import java.util.function.Supplier;
 public final class ModTiers {
     public static final Tier CACTUS = new PoweredTier(35, ModTags.Blocks.NEEDS_4_LEVEL, 144, 3, 1, 4, () -> Ingredient.of(Items.CACTUS));
     public static final Tier COPPER = new PoweredTier(35, ModTags.Blocks.NEEDS_4_LEVEL, 250, 4, 1, 5, () -> Ingredient.of(Items.COPPER_INGOT));
-    public static final Tier TIN = new PoweredTier(35, ModTags.Blocks.NEEDS_4_LEVEL, 270, 4, 1, 5, () -> Ingredient.of(Materials.TIN_INGOT.get()));
-    public static final Tier LEAD = new PoweredTier(43, ModTags.Blocks.NEEDS_4_LEVEL, 286, 6, 2, 14, () -> Ingredient.of(Materials.LEAD_INGOT.get()));
-    public static final Tier SILVER = new PoweredTier(45, ModTags.Blocks.NEEDS_4_LEVEL, 304, 6, 2, 14, () -> Ingredient.of(Materials.SILVER_INGOT.get()));
-    public static final Tier TUNGSTEN = new PoweredTier(50, ModTags.Blocks.NEEDS_4_LEVEL, 648, 8, 2, 18, () -> Ingredient.of(Materials.TUNGSTEN_INGOT.get()));
+    public static final Tier TIN = new PoweredTier(35, ModTags.Blocks.NEEDS_4_LEVEL, 270, 4, 1, 5, () -> Ingredient.of(MaterialItems.TIN_INGOT.get()));
+    public static final Tier LEAD = new PoweredTier(43, ModTags.Blocks.NEEDS_4_LEVEL, 286, 6, 2, 14, () -> Ingredient.of(MaterialItems.LEAD_INGOT.get()));
+    public static final Tier SILVER = new PoweredTier(45, ModTags.Blocks.NEEDS_4_LEVEL, 304, 6, 2, 14, () -> Ingredient.of(MaterialItems.SILVER_INGOT.get()));
+    public static final Tier TUNGSTEN = new PoweredTier(50, ModTags.Blocks.NEEDS_4_LEVEL, 648, 8, 2, 18, () -> Ingredient.of(MaterialItems.TUNGSTEN_INGOT.get()));
     public static final Tier GOLD = new PoweredTier(55, ModTags.Blocks.NEEDS_4_LEVEL, 1600, 8, 3, 22, () -> Ingredient.of(Items.GOLD_INGOT));
     public static final Tier CANDY = new PoweredTier(55, ModTags.Blocks.NEEDS_4_LEVEL, 4000, 6, 2, 14, () -> Ingredient.of(Items.SUGAR)); // 糖(圣诞限定）
-    public static final Tier FOSSIL = new PoweredTier(55, ModTags.Blocks.NEEDS_4_LEVEL, 1200, 8, 3, 22, () -> Ingredient.of(Materials.STURDY_FOSSIL.get()));
+    public static final Tier FOSSIL = new PoweredTier(55, ModTags.Blocks.NEEDS_4_LEVEL, 1200, 8, 3, 22, () -> Ingredient.of(MaterialItems.STURDY_FOSSIL.get()));
     // 骨镐 55
-    public static final Tier PLATINUM = new PoweredTier(59, ModTags.Blocks.NEEDS_4_LEVEL, 1661, 8, 3, 22, () -> Ingredient.of(Materials.PLATINUM_INGOT.get()));
+    public static final Tier PLATINUM = new PoweredTier(59, ModTags.Blocks.NEEDS_4_LEVEL, 1661, 8, 3, 22, () -> Ingredient.of(MaterialItems.PLATINUM_INGOT.get()));
     // 掠夺鲨 59
-    public static final Tier METEORITE = new PoweredTier(60, ModTags.Blocks.NEEDS_4_LEVEL, 0, 9, 3, 23, () -> Ingredient.of(Materials.METEORITE_INGOT.get()));
+    public static final Tier METEORITE = new PoweredTier(60, ModTags.Blocks.NEEDS_4_LEVEL, 0, 9, 3, 23, () -> Ingredient.of(MaterialItems.METEORITE_INGOT.get()));
 
-    public static final Tier EBONY = new PoweredTier(65, ModTags.Blocks.NEEDS_4_LEVEL, 0, 10, 4, 24, () -> Ingredient.of(Materials.EBONY_INGOT.get()));
-    public static final Tier TR_CRIMSON = new PoweredTier(70, ModTags.Blocks.NEEDS_4_LEVEL, 0, 11, 4, 25, () -> Ingredient.of(Materials.TR_CRIMSON_INGOT.get()));
-    public static final Tier HELLSTONE = new PoweredTier(100, ModTags.Blocks.NEEDS_5_LEVEL, 0, 14, 6, 27, () -> Ingredient.of(Materials.HELLSTONE_INGOT.get()));
-    public static final Tier COBALT = new PoweredTier(110, ModTags.Blocks.NEEDS_6_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.COBALT_INGOT.get()));
-    public static final Tier PALLADIUM = new PoweredTier(130, ModTags.Blocks.NEEDS_6_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.PALLADIUM_INGOT.get()));
-    public static final Tier MITHRIL = new PoweredTier(150, ModTags.Blocks.NEEDS_7_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.MITHRIL_INGOT.get()));
-    public static final Tier ORICHALCUM = new PoweredTier(165, ModTags.Blocks.NEEDS_7_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.ORICHALCUM_INGOT.get()));
-    public static final Tier ADAMANTITE = new PoweredTier(180, ModTags.Blocks.NEEDS_8_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.ADAMANTITE_INGOT.get()));
-    public static final Tier TITANIUM = new PoweredTier(190, ModTags.Blocks.NEEDS_8_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.TITANIUM_INGOT.get()));
+    public static final Tier EBONY = new PoweredTier(65, ModTags.Blocks.NEEDS_4_LEVEL, 0, 10, 4, 24, () -> Ingredient.of(MaterialItems.EBONY_INGOT.get()));
+    public static final Tier TR_CRIMSON = new PoweredTier(70, ModTags.Blocks.NEEDS_4_LEVEL, 0, 11, 4, 25, () -> Ingredient.of(MaterialItems.TR_CRIMSON_INGOT.get()));
+    public static final Tier HELLSTONE = new PoweredTier(100, ModTags.Blocks.NEEDS_5_LEVEL, 0, 14, 6, 27, () -> Ingredient.of(MaterialItems.HELLSTONE_INGOT.get()));
+    public static final Tier COBALT = new PoweredTier(110, ModTags.Blocks.NEEDS_6_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.COBALT_INGOT.get()));
+    public static final Tier PALLADIUM = new PoweredTier(130, ModTags.Blocks.NEEDS_6_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.PALLADIUM_INGOT.get()));
+    public static final Tier MITHRIL = new PoweredTier(150, ModTags.Blocks.NEEDS_7_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.MITHRIL_INGOT.get()));
+    public static final Tier ORICHALCUM = new PoweredTier(165, ModTags.Blocks.NEEDS_7_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.ORICHALCUM_INGOT.get()));
+    public static final Tier ADAMANTITE = new PoweredTier(180, ModTags.Blocks.NEEDS_8_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.ADAMANTITE_INGOT.get()));
+    public static final Tier TITANIUM = new PoweredTier(190, ModTags.Blocks.NEEDS_8_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.TITANIUM_INGOT.get()));
     // 幽灵镐 200
     // 叶绿镐 200
-    public static final Tier HALLOWED = new PoweredTier(200, ModTags.Blocks.NEEDS_9_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(Materials.HALLOWED_INGOT.get()));
+    public static final Tier HALLOWED = new PoweredTier(200, ModTags.Blocks.NEEDS_9_LEVEL, 0, 4, 1, 5, () -> Ingredient.of(MaterialItems.HALLOWED_INGOT.get()));
     // 蘑菇矿挖爪 200
     // 锯刃镐 210
     // 四柱镐 225

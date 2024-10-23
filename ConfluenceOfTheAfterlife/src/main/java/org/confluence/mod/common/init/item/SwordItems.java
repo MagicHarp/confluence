@@ -13,7 +13,7 @@ import org.confluence.mod.common.item.sword.ShortSwordItem;
 
 import java.util.function.Supplier;
 
-public class Swords {
+public class SwordItems {
     public static final DeferredRegister.Items SWORDS = DeferredRegister.createItems(Confluence.MODID);
 
     public static final DeferredItem<SwordItem> COPPER_SHORT_SWORD = registerShortSword("copper_short_sword", ModTiers.COPPER, 2, 3);

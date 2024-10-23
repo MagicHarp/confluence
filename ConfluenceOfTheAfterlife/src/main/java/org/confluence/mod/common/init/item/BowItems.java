@@ -6,7 +6,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.item.bow.ShortBowItem;
 
-public class Bows {
+public class BowItems {
     public static final DeferredRegister.Items BOWS = DeferredRegister.createItems(Confluence.MODID);
 
     public static final DeferredItem<ShortBowItem> WOODEN_SHORT_BOW = BOWS.register("wooden_short_bow", () -> new ShortBowItem(4.0F, 384, ModRarity.WHITE));

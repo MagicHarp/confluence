@@ -23,7 +23,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.confluence.mod.common.init.ModEntities;
-import org.confluence.mod.common.init.item.Arrows;
+import org.confluence.mod.common.init.item.ArrowItems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +44,11 @@ public class BaseArrowEntity extends AbstractArrow {
 
         //构建属性   mc原版木箭：   damage：2f
         static Tuple JESTERS_ARROW_ENTITY = create("textures/entity/arrow/jesters_arrow.png",new Builder()
-                .damage(4f).penetration(99).knockBackFactor(2).speedFactor(0.8f).auto_discard(50).low_gravity(0).attachArrow(Arrows.JESTERS_ARROW.get()));
+                .damage(4f).penetration(99).knockBackFactor(2).speedFactor(0.8f).auto_discard(50).low_gravity(0).attachArrow(ArrowItems.JESTERS_ARROW.get()));
         static Tuple UNHOLY_ARROW_ENTITY = create("textures/entity/arrow/unholy_arrow.png",new Builder()
-                .damage(4.5f).penetration(5).knockBackFactor(1.5f).attachArrow(Arrows.UNHOLY_ARROW.get()));
+                .damage(4.5f).penetration(5).knockBackFactor(1.5f).attachArrow(ArrowItems.UNHOLY_ARROW.get()));
         static Tuple FLAMING_ARROW_ENTITY = create("textures/entity/arrow/flaming_arrow.png",new Builder()
-                .damage(4.5f).causeFire(10*20) .attachArrow(Arrows.FLAMING_ARROW.get()));
+                .damage(4.5f).causeFire(10*20) .attachArrow(ArrowItems.FLAMING_ARROW.get()));
 
 
     }
@@ -224,9 +224,9 @@ public class BaseArrowEntity extends AbstractArrow {
 
 
     public static Map<Item,Tuple> selectArrowFromItemMap = Map.of(
-            Arrows.JESTERS_ARROW.get(), Tuple.JESTERS_ARROW_ENTITY,
-            Arrows.UNHOLY_ARROW.get(), Tuple.UNHOLY_ARROW_ENTITY,
-            Arrows.FLAMING_ARROW.get(), Tuple.FLAMING_ARROW_ENTITY
+            ArrowItems.JESTERS_ARROW.get(), Tuple.JESTERS_ARROW_ENTITY,
+            ArrowItems.UNHOLY_ARROW.get(), Tuple.UNHOLY_ARROW_ENTITY,
+            ArrowItems.FLAMING_ARROW.get(), Tuple.FLAMING_ARROW_ENTITY
     );
 
 

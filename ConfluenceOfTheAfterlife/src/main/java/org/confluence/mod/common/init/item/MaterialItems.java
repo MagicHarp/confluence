@@ -7,7 +7,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.item.CustomRarityItem;
 
-public class Materials {
+public class MaterialItems {
     public static final DeferredRegister.Items MATERIALS = DeferredRegister.createItems(Confluence.MODID);
 
     public static final DeferredItem<Item> GEL = register("gel", ModRarity.WHITE);

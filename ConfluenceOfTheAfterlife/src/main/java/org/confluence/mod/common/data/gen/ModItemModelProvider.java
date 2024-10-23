@@ -13,10 +13,10 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.item.Bows;
+import org.confluence.mod.common.init.item.BowItems;
+import org.confluence.mod.common.init.item.IconItems;
 import org.confluence.mod.common.init.item.ModItems;
-import org.confluence.mod.common.init.item.Swords;
-import org.confluence.mod.common.init.item.common.IconItem;
+import org.confluence.mod.common.init.item.SwordItems;
 import org.confluence.mod.terra_curio.common.item.curio.BaseCurioItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
@@ -36,20 +36,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        /*
-        for (IconItem.Icons icons : IconItem.Icons.values()) {
-            String path = icons.name().toLowerCase();
+        IconItems.ICONS.getEntries().forEach(icon -> {
+            String path = icon.getId().getPath().toLowerCase();
             withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
-        }*/
-
+        });
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
-            IconItem.ICONS.getEntries().forEach(icon -> {
 
-                    String path = icon.getId().getPath().toLowerCase();
-                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
-
-            });
             if (shouldSkip(value)) return;
 
             String path = item.getId().getPath().toLowerCase();
@@ -98,7 +91,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         });
 
 
-        List<DeferredRegister.Items> Handled = List.of(Swords.SWORDS, Bows.BOWS);
+        List<DeferredRegister.Items> Handled = List.of(SwordItems.SWORDS, BowItems.BOWS);
         Handled.forEach(reg -> reg.getEntries().forEach(item -> {
             String path = item.getId().getPath().toLowerCase();
             withExistingParent(path, "item/handheld").texture("layer0", Confluence.asResource("item/" + path));
@@ -125,9 +118,9 @@ public class ModItemModelProvider extends ItemModelProvider {
     private static boolean shouldSkip(Item item) {
         return (
                 //item instanceof IconItem ||
-                        item instanceof GeoItem
+                item instanceof GeoItem
 //                        && !(item instanceof NormalGeoItem))
-                || SKIP_ITEMS.contains(item))
+                        || SKIP_ITEMS.contains(item))
 //                || item instanceof VanillaPotionItem
                 ;
     }

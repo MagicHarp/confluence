@@ -12,9 +12,9 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModTags;
-import org.confluence.mod.common.init.item.Arrows;
-import org.confluence.mod.common.init.item.Bows;
-import org.confluence.mod.common.init.item.Materials;
+import org.confluence.mod.common.init.item.ArrowItems;
+import org.confluence.mod.common.init.item.BowItems;
+import org.confluence.mod.common.init.item.MaterialItems;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +45,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 //                ModBlocks.SPOOKY_LOG_BLOCKS.PLANKS.get().asItem(), ModBlocks.ASH_LOG_BLOCKS.PLANKS.get().asItem(), ModBlocks.PEARL_LOG_BLOCKS.PLANKS.get().asItem(), Blocks.OAK_PLANKS.asItem(), Blocks.SPRUCE_PLANKS.asItem(),
                 Blocks.ACACIA_PLANKS.asItem(), Blocks.DARK_OAK_PLANKS.asItem(), Blocks.JUNGLE_PLANKS.asItem(), Blocks.MANGROVE_PLANKS.asItem(), Blocks.CHERRY_PLANKS.asItem(), Blocks.BAMBOO_PLANKS.asItem(), Blocks.CRIMSON_PLANKS.asItem(),
                 Blocks.BIRCH_PLANKS.asItem(), Blocks.WARPED_PLANKS.asItem());
-        tag(ModTags.Items.LEAD_AND_IRON).add(Items.IRON_INGOT, Materials.LEAD_INGOT.get());
+        tag(ModTags.Items.LEAD_AND_IRON).add(Items.IRON_INGOT, MaterialItems.LEAD_INGOT.get());
         IntrinsicTagAppender<Item> torch = tag(ModTags.Items.TORCH);
         torch.add(Items.TORCH, Items.SOUL_TORCH);
 //        for (Torches torches : Torches.values()) torch.add(torches.item.get());
@@ -65,9 +65,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 //                Foods.BLOOD_ORANGE.get(), Foods.ELDERBERRY.get(), Foods.BLACKCURRANT.get()
 //        );
 
-        Bows.BOWS.getEntries().forEach(entry -> tag(Tags.Items.TOOLS_BOW).add(entry.get()));
+        BowItems.BOWS.getEntries().forEach(entry -> tag(Tags.Items.TOOLS_BOW).add(entry.get()));
 //
-        Arrows.ARROWS.getEntries().forEach(entry -> tag(ItemTags.ARROWS).add(entry.get()));
+        ArrowItems.ARROWS.getEntries().forEach(entry -> tag(ItemTags.ARROWS).add(entry.get()));
 
 
 //        IntrinsicTagAppender<Item> rangedWeapon = tag(ModTags.Items.RANGED_WEAPON);
