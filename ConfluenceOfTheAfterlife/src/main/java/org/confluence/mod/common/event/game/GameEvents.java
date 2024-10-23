@@ -21,7 +21,7 @@ public final class GameEvents {
     @SubscribeEvent
     public static void curios(CurioChangeEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            ModTriggers.CURIOS_EQUIPPED.trigger(serverPlayer, event.getTo());
+            ModTriggers.CURIOS_EQUIPPED.get().trigger(serverPlayer, event.getTo());
         }
     }
 

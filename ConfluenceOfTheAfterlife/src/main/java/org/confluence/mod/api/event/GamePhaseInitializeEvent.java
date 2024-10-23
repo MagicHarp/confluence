@@ -10,6 +10,7 @@ public class GamePhaseInitializeEvent extends Event implements IModBusEvent {
 
     public GamePhaseInitializeEvent(GamePhase[] original) {
         this.original = original;
+        this.neoValues = original;
     }
 
     public GamePhase[] getOriginal() {

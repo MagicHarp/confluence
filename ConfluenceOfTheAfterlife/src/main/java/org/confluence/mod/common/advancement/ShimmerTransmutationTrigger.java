@@ -5,19 +5,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public class ShimmerTransmutationTrigger extends SimpleCriterionTrigger<ShimmerTransmutationTrigger.TriggerInstance> {
-    public static final ResourceLocation ID = Confluence.asResource("shimmer_transmutation");
-
-    // todo
-    public void trigger(ServerPlayer pPlayer, Entity entity) {
+    public void trigger(ServerPlayer pPlayer, Entity entity) { // todo invoke
         trigger(pPlayer, instance -> instance.matches(pPlayer, entity));
     }
 

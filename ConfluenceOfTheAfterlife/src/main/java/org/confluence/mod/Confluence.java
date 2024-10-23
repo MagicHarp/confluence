@@ -14,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.IModBusEvent;
 import net.neoforged.fml.loading.FMLPaths;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.common.CommonConfigs;
@@ -40,15 +39,15 @@ public class Confluence {
     public Confluence(IEventBus eventBus, ModContainer container) {
         CommonConfigs.register(container);
         ClientConfigs.register(container);
-//        ModTriggers.initialize();
-        ModTabs.TABS.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
+        ModAttributes.ATTRIBUTES.register(eventBus);
+        ModTriggers.TRIGGERS.register(eventBus);
+        ModTabs.TABS.register(eventBus);
         ModEntities.ENTITIES.register(eventBus);
         ModDataComponentTypes.DATA_COMPONENT_TYPE.register(eventBus);
         ModSoundEvents.SOUND_EVENT.register(eventBus);
         ModAttachments.TYPES.register(eventBus);
-        ModAttributes.ATTRIBUTES.register(eventBus);
     }
 
     public static ResourceLocation asResource(String path) {

@@ -6,17 +6,13 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.mod.Confluence;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public class CuriosEquippedTrigger extends SimpleCriterionTrigger<CuriosEquippedTrigger.TriggerInstance> {
-    public static final ResourceLocation ID = Confluence.asResource("curios_equipped");
-
     public void trigger(ServerPlayer pPlayer, ItemStack itemStack) {
         trigger(pPlayer, instance -> instance.matches(itemStack));
     }
