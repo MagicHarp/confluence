@@ -41,5 +41,6 @@ public final class ModItems {
         BowItems.BOWS.register(eventBus);
         ArrowItems.ARROWS.register(eventBus);
         MaterialItems.MATERIALS.register(eventBus);
+        TerraPotions.POTIONS.register(eventBus);
     }
 }

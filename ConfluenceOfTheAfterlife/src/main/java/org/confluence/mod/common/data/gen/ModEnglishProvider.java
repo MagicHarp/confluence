@@ -6,10 +6,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.block.ModOreBlocks;
-import org.confluence.mod.common.init.item.ArrowItems;
-import org.confluence.mod.common.init.item.BowItems;
-import org.confluence.mod.common.init.item.ModItems;
-import org.confluence.mod.common.init.item.SwordItems;
+import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.terra_curio.common.effect.ModEffects;
 import org.confluence.mod.terra_curio.common.entity.ModEntities;
 
@@ -509,7 +506,7 @@ public class ModEnglishProvider extends LanguageProvider {
 //                    add(item1, customName.getGenName());
 //                }
 //            } else {
-                add(item1, toTitleCase(item.getId().getPath()));
+            add(item1, toTitleCase(item.getId().getPath()));
 //            }
 
         });
@@ -519,6 +516,7 @@ public class ModEnglishProvider extends LanguageProvider {
         SwordItems.SWORDS.getEntries().forEach(sword -> add(sword.get(), toTitleCase(sword.getId().getPath())));
         ArrowItems.ARROWS.getEntries().forEach(arrow -> add(arrow.get(), toTitleCase(arrow.getId().getPath())));
         BowItems.BOWS.getEntries().forEach(bow -> add(bow.get(), toTitleCase(bow.getId().getPath())));
+        TerraPotions.POTIONS.getEntries().forEach(potion -> add(potion.get(), toTitleCase(potion.getId().getPath())));
 //
 //        for (ModPrefix.Universal universal : ModPrefix.Universal.values()) {
 //            add("prefix.confluence." + universal.name().toLowerCase(), toTitleCase(universal.name()));

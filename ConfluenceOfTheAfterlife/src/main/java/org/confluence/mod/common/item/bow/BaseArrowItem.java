@@ -14,8 +14,9 @@ public class BaseArrowItem extends ArrowItem {
         super(new Properties().component(ModDataComponentTypes.MOD_RARITY, rarity));
     }
     public AbstractArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter,ItemStack weapon) {
+        // todo 到时候做自定义箭矢的时候再改
         if(pStack.getItem() instanceof BaseArrowItem && BaseArrowEntity.selectArrowFromItemMap.containsKey(pStack.getItem())){
-            BaseArrowEntity arrow = new BaseArrowEntity(pShooter,BaseArrowEntity.selectArrowFromItemMap.get(pStack.getItem()));
+            BaseArrowEntity arrow = new BaseArrowEntity(pShooter,this.getDefaultInstance(),this.getDefaultInstance());
             //arrow.setEffectsFromItem(pStack);
             return arrow;
         }

@@ -1,5 +1,7 @@
 package org.confluence.mod.client.event;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -14,6 +16,7 @@ import org.confluence.mod.client.renderer.entity.projectile.TerraArrowRenderer;
 import org.confluence.mod.client.renderer.gui.HealthHudLayer;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudLayer;
+import org.confluence.mod.common.item.potion.EffectThrowablePotionItem;
 
 import static org.confluence.mod.common.init.ModEntities.*;
 
@@ -56,6 +59,7 @@ public final class ModClientEvents {
         event.registerEntityRenderer(BOMB_FISH_ENTITY.get(), BombFishEntityRenderer::new);
 
         event.registerEntityRenderer(ARROW_PROJECTILE.get(), TerraArrowRenderer::new);
+        event.registerEntityRenderer(EFFECT_THROWN_POTION.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent

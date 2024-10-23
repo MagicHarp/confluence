@@ -3,11 +3,9 @@ package org.confluence.mod.common.data.gen;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.item.ArrowItems;
-import org.confluence.mod.common.init.item.BowItems;
-import org.confluence.mod.common.init.item.MaterialItems;
-import org.confluence.mod.common.init.item.SwordItems;
+import org.confluence.mod.common.init.item.*;
 
 
 public class ModChineseProvider extends LanguageProvider {
@@ -1559,17 +1557,17 @@ public class ModChineseProvider extends LanguageProvider {
         add(BowItems.PLATINUM_SHORT_BOW.get(), "铂金短弓");
 
 
-/*
-        add(Bows.COPPER_BOW.get(), "铜弓");
-        add(Bows.TIN_BOW.get(), "锡弓");
-        add(Bows.IRON_BOW.get(), "铁弓");
-        add(Bows.LEAD_BOW.get(), "铅弓");
-        add(Bows.SILVER_BOW.get(), "银弓");
-        add(Bows.TUNGSTEN_BOW.get(), "钨弓");
-        add(Bows.GOLDEN_BOW.get(), "金弓");
-        add(Bows.PLATINUM_BOW.get(), "铂金弓");
 
- */
+        add(BowItems.COPPER_BOW.get(), "铜弓");
+        add(BowItems.TIN_BOW.get(), "锡弓");
+        add(BowItems.IRON_BOW.get(), "铁弓");
+        add(BowItems.LEAD_BOW.get(), "铅弓");
+        add(BowItems.SILVER_BOW.get(), "银弓");
+        add(BowItems.TUNGSTEN_BOW.get(), "钨弓");
+        add(BowItems.GOLDEN_BOW.get(), "金弓");
+        add(BowItems.PLATINUM_BOW.get(), "铂金弓");
+
+
         // 子弹
         /*
         add(AmmoItems.MUSKET_BULLET.get(), "火枪子弹");
@@ -1865,8 +1863,8 @@ public class ModChineseProvider extends LanguageProvider {
 
          */
         // 药水
-        /*
-        add(VANILLA_POTION.get(), "药水");
+
+//        add(VANILLA_POTION.get(), "药水");
         add(TerraPotions.GRAVITATION_POTION.get(), "重力药水");
         add(TerraPotions.SHINE_POTION.get(), "光环药水");
         add(TerraPotions.IRON_SKIN_POTION.get(), "铁皮药水");
@@ -1903,8 +1901,8 @@ public class ModChineseProvider extends LanguageProvider {
         add(TerraPotions.DANGERSENSE_POTION.get(), "危险感药水");
         add(TerraPotions.HUNTER_POTION.get(), "狩猎药水");
 
-         */
-        /*
+
+
         // 药水效果
         add(ModEffects.MANA_SICKNESS.get(), "魔力病");
         add(ModEffects.SHINE.get(), "发光");
@@ -1933,7 +1931,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ModEffects.TENTACLE_SPIKES.get(), "触手钉刺");
         add(ModEffects.BROKEN_ARMOR.get(), "破损盔甲");
         add(ModEffects.STONED.get(), "石化");
-        */
+
         // 雕像
 //        add(STATUE_A.get(), "A雕像");
         //endregion items

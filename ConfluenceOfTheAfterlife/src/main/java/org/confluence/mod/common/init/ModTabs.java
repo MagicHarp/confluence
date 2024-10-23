@@ -103,7 +103,7 @@ public final class ModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(IconItems.ITEM_ICON.get()))
                     .title(Component.translatable("creativetab.confluence.food_and_potions"))
                     .displayItems((parameters, output) -> {
-
+                            TerraPotions.POTIONS.getEntries().forEach(item -> output.accept(item.get()));
                     })
                     .build());
     // 盔甲

@@ -25,6 +25,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.confluence.mod.common.init.ModEntities;
 import org.confluence.mod.common.init.item.ArrowItems;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +51,6 @@ public class BaseArrowEntity extends AbstractArrow {
         static Tuple FLAMING_ARROW_ENTITY = create("textures/entity/arrow/flaming_arrow.png",new Builder()
                 .damage(4.5f).causeFire(10*20) .attachArrow(ArrowItems.FLAMING_ARROW.get()));
 
-
     }
     static Map<Integer,Item> type2ArrowItem = new HashMap<>();
         /*
@@ -59,11 +59,6 @@ public class BaseArrowEntity extends AbstractArrow {
         BONE_ARROW
         SHIMMER_ARROW
         */
-
-
-
-
-
 
     private static final EntityDataAccessor<String> TEXTURE_PATH = SynchedEntityData.defineId(BaseArrowEntity.class, EntityDataSerializers.STRING);
     public String texturePath = "";
@@ -76,13 +71,13 @@ public class BaseArrowEntity extends AbstractArrow {
     }
 
 
-    public BaseArrowEntity(LivingEntity owner, Tuple arrowTuple) {
-        super(ModEntities.ARROW_PROJECTILE.get(),owner.level());
+    public BaseArrowEntity(LivingEntity owner, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(ModEntities.ARROW_PROJECTILE.get(), owner, owner.level(), pickupItemStack, firedFromWeapon);
+        Tuple arrowTuple = selectArrowFromItemMap.get(pickupItemStack.getItem());
         this.attr = arrowTuple.attr;
         if((attr.type& Tag.low_gravity)!=0) this.setNoGravity(true);
         entityData.set(TEXTURE_PATH,arrowTuple.path);
         this.texturePath = arrowTuple.path;
-
     }
 
     public void shoot(double pX, double pY, double pZ, float pVelocity, float pInaccuracy) {
@@ -187,8 +182,10 @@ public class BaseArrowEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-
-        if(type2ArrowItem.get(this.attr.type)!=null)return  type2ArrowItem.get(this.attr.type).getDefaultInstance();
+        // 构造延迟
+        if(this.attr==null) return Items.ARROW.getDefaultInstance();
+        if(type2ArrowItem.get(this.attr.type)!=null)
+            return  type2ArrowItem.get(this.attr.type).getDefaultInstance();
         return Items.ARROW.getDefaultInstance();
     }
 

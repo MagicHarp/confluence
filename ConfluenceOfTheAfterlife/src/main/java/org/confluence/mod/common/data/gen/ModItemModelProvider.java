@@ -13,10 +13,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.item.BowItems;
-import org.confluence.mod.common.init.item.IconItems;
-import org.confluence.mod.common.init.item.ModItems;
-import org.confluence.mod.common.init.item.SwordItems;
+import org.confluence.mod.common.init.block.ModOreBlocks;
+import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.terra_curio.common.item.curio.BaseCurioItem;
 import software.bernie.geckolib.animatable.GeoItem;
 
@@ -36,10 +34,31 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        IconItems.ICONS.getEntries().forEach(icon -> {
-            String path = icon.getId().getPath().toLowerCase();
-            withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
-        });
+
+        // 一般物品
+        List<DeferredRegister.Items> customModels = List.of(IconItems.ICONS,TerraPotions.POTIONS,MaterialItems.MATERIALS, ArrowItems.ARROWS);
+        customModels.forEach(reg -> reg.getEntries().forEach(item -> {
+            String path = item.getId().getPath().toLowerCase();
+            try {withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));}
+            catch (Exception e) {
+                Confluence.LOGGER.error(e.getMessage());
+                withExistingParent(path,MISSING_ITEM);
+            }
+        }));
+
+        // 手持物品
+        List<DeferredRegister.Items> Handled = List.of(SwordItems.SWORDS, BowItems.BOWS);
+        Handled.forEach(reg -> reg.getEntries().forEach(item -> {
+            String path = item.getId().getPath().toLowerCase();
+            try { withExistingParent(path, "item/handheld").texture("layer0", Confluence.asResource("item/" + path));}
+            catch (Exception e) {
+            Confluence.LOGGER.error(e.getMessage());
+            withExistingParent(path,MISSING_ITEM);
+        }
+        }));
+
+
+
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
 
@@ -52,6 +71,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 //                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
 //                } else
                 if (value instanceof BlockItem blockItem) {
+
                     isBlockItem = true;
                     Block block = blockItem.getBlock();
 //                    if (block instanceof CustomItemModel) return;
@@ -62,6 +82,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     } else {
                         withExistingParent(path, Confluence.asResource("block/" + path + (hasInventory(block) ? "_inventory" : "")));
                     }
+
                 } else if (isHandheld(value)) {
                     ItemModelBuilder builder = withExistingParent(path, "item/handheld").texture("layer0", Confluence.asResource("item/" + path));
 //                    if (value instanceof Image24x i32) {
@@ -91,11 +112,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         });
 
 
-        List<DeferredRegister.Items> Handled = List.of(SwordItems.SWORDS, BowItems.BOWS);
-        Handled.forEach(reg -> reg.getEntries().forEach(item -> {
-            String path = item.getId().getPath().toLowerCase();
-            withExistingParent(path, "item/handheld").texture("layer0", Confluence.asResource("item/" + path));
-        }));
+
 
 /*
         Swords.SWORDS.getEntries().forEach(item -> {
