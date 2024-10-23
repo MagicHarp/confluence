@@ -15,23 +15,7 @@ public final class EntityEvents {
 
     }
 
-    @SubscribeEvent
-    public static void attributeCreate(EntityAttributeCreationEvent event) {
 
-    }
-
-    @SubscribeEvent
-    public static void entityAttributeModification(EntityAttributeModificationEvent event) {
-        ModAttributes.readJsonConfig();
-        ModAttributes.registerAttribute(ModAttributes.CRIT_CHANCE, event::add);
-        ModAttributes.registerAttribute(ModAttributes.RANGED_VELOCITY, event::add);
-        ModAttributes.registerAttribute(ModAttributes.RANGED_DAMAGE, event::add);
-        ModAttributes.registerAttribute(ModAttributes.DODGE_CHANCE, event::add);
-        ModAttributes.registerAttribute(ModAttributes.AGGRO, event::add);
-        ModAttributes.registerAttribute(ModAttributes.MAGIC_DAMAGE, event::add);
-        ModAttributes.registerAttribute(ModAttributes.ARMOR_PASS, event::add);
-        ModAttributes.registerAttribute(ModAttributes.PICKUP_RANGE, event::add);
-    }
 //
 //    @SubscribeEvent
 //    public static void entityMount(EntityMountEvent event) {

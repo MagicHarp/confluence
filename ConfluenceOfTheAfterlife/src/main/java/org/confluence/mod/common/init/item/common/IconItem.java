@@ -3,10 +3,15 @@ package org.confluence.mod.common.init.item.common;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.item.ModItems;
 
 
 public class IconItem extends Item {
+    public static final DeferredRegister.Items ICONS = DeferredRegister.createItems(Confluence.MODID);
+
+
     public static final DeferredItem<Item> ITEM_ICON = register("item_icon");
     public static final DeferredItem<Item> MATERIAL_ICON = register("material_icon");
     public static final DeferredItem<Item> BLOCKS_ICON = register("blocks_icon");
@@ -28,7 +33,7 @@ public class IconItem extends Item {
     }
 
     public static DeferredItem<Item> register(String name) {
-        return ModItems.ITEMS.register(name, IconItem::new);
+        return ICONS.register(name, IconItem::new);
     }
 
     public static void init() {}

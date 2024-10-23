@@ -44,6 +44,12 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         ModItems.ITEMS.getEntries().forEach(item -> {
             Item value = item.get();
+            IconItem.ICONS.getEntries().forEach(icon -> {
+
+                    String path = icon.getId().getPath().toLowerCase();
+                    withExistingParent(path, "item/generated").texture("layer0", Confluence.asResource("item/" + path));
+
+            });
             if (shouldSkip(value)) return;
 
             String path = item.getId().getPath().toLowerCase();
@@ -91,6 +97,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             }
         });
 
+
         List<DeferredRegister.Items> Handled = List.of(Swords.SWORDS, Bows.BOWS);
         Handled.forEach(reg -> reg.getEntries().forEach(item -> {
             String path = item.getId().getPath().toLowerCase();
@@ -117,7 +124,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private static boolean shouldSkip(Item item) {
         return (
-                item instanceof IconItem ||
+                //item instanceof IconItem ||
                         item instanceof GeoItem
 //                        && !(item instanceof NormalGeoItem))
                 || SKIP_ITEMS.contains(item))
