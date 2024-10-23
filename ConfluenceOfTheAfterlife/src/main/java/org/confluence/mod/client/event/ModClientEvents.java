@@ -10,6 +10,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.client.model.entity.bomb.*;
 import org.confluence.mod.client.renderer.entity.bomb.*;
+import org.confluence.mod.client.renderer.entity.projectile.TerraArrowRenderer;
 import org.confluence.mod.client.renderer.gui.HealthHudLayer;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudLayer;
@@ -53,6 +54,8 @@ public final class ModClientEvents {
         event.registerEntityRenderer(SCARAB_BOMB_ENTITY.get(), ScarabBombEntityRenderer::new);
         event.registerEntityRenderer(STICKY_BOMB_ENTITY.get(), StickyBombEntityRenderer::new);
         event.registerEntityRenderer(BOMB_FISH_ENTITY.get(), BombFishEntityRenderer::new);
+
+        event.registerEntityRenderer(ARROW_PROJECTILE.get(), TerraArrowRenderer::new);
     }
 
     @SubscribeEvent

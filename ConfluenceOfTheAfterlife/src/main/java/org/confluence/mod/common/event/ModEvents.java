@@ -1,4 +1,4 @@
-package org.confluence.mod.common.event.mod;
+package org.confluence.mod.common.event;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -12,6 +12,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 
 import static org.confluence.mod.Confluence.MODID;
@@ -26,7 +27,7 @@ public final class ModEvents {
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-
+            CommonConfigs.onLoad();
         });
     }
 

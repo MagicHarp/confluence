@@ -11,7 +11,7 @@ public class Materials{
     public static final DeferredRegister.Items MATERIALS = DeferredRegister.createItems(Confluence.MODID);
 
 
-    // todo ai自动生成的，没有检查
+    // todo ai自动生成的，没有检查（逆天）
     public static DeferredItem<Item> GEL = register("material/gel", ModRarity.WHITE);
     public static DeferredItem<Item> PINK_GEL = register("material/pink_gel", ModRarity.PINK);
 
