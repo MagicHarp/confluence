@@ -17,6 +17,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
 import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.common.CommonConfigs;
+import org.confluence.mod.common.advancement.ModTriggers;
 import org.confluence.mod.common.init.*;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.init.item.ModItems;
@@ -38,6 +39,7 @@ public class Confluence {
     public Confluence(IEventBus eventBus, ModContainer container) {
         CommonConfigs.register(container);
         ClientConfigs.register(container);
+        ModTriggers.initialize();
         ModTabs.TABS.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);

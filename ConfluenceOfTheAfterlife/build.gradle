@@ -72,10 +72,12 @@ dependencies {
 
     implementation jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[${registrate_version},)")
     implementation jarJar(group: 'software.bernie.geckolib', name: "geckolib-neoforge-${minecraft_version}", version: "[${geckolib_version},)")
+    implementation "curse.maven:adorned-1036809:5740650"
 
     compileOnly "curse.maven:jade-324717:5639932"
     runtimeOnly "curse.maven:jade-324717:5639932"
 
+    compileOnly("mezz.jei:jei-1.21-common-api:${jei_version}")
     compileOnly "mezz.jei:jei-1.21-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-1.21-neoforge:${jei_version}"
 }
