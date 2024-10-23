@@ -10,7 +10,6 @@ import org.confluence.mod.common.item.CustomRarityItem;
 public class Materials {
     public static final DeferredRegister.Items MATERIALS = DeferredRegister.createItems(Confluence.MODID);
 
-    // todo ai自动生成的，没有检查（逆天）
     public static final DeferredItem<Item> GEL = register("gel", ModRarity.WHITE);
     public static final DeferredItem<Item> PINK_GEL = register("pink_gel", ModRarity.PINK);
 
@@ -91,89 +90,6 @@ public class Materials {
     public static final DeferredItem<Item> PEARL = register("pearl");
     public static final DeferredItem<Item> BLACK_PEARL = register("black_pearl");
     public static final DeferredItem<Item> PINK_PEARL = register("pink_pearl");
-
-    /*
-    GEL("gel", () -> new GelItem(WHITE)),
-    PINK_GEL("pink_gel", () -> new BaseItem(PINK)),
-
-    RAW_TIN("raw_tin", () -> new BaseItem(WHITE)),
-    TIN_INGOT("tin_ingot", () -> new BaseItem(WHITE)),
-    RAW_LEAD("raw_lead", () -> new BaseItem(WHITE)),
-    LEAD_INGOT("lead_ingot", () -> new BaseItem(WHITE)),
-    RAW_SILVER("raw_silver", () -> new BaseItem(WHITE)),
-    SILVER_INGOT("silver_ingot", () -> new BaseItem(WHITE)),
-    RAW_TUNGSTEN("raw_tungsten", () -> new BaseItem(WHITE)),
-    TUNGSTEN_INGOT("tungsten_ingot", () -> new BaseItem(WHITE)),
-    RAW_PLATINUM("raw_platinum", () -> new BaseItem(BLUE)),
-    PLATINUM_INGOT("platinum_ingot", () -> new BaseItem(BLUE)),
-    RAW_METEORITE("raw_meteorite", () -> new BaseItem(BLUE)),
-    METEORITE_INGOT("meteorite_ingot", () -> new TooltipItem(Component.translatable("item.confluence.meteorite_ingot.tooltip"))),
-    RAW_EBONY("raw_ebony", () -> new BaseItem(BLUE)),
-    EBONY_INGOT("ebony_ingot", () -> new BaseItem(BLUE)),
-    RAW_TR_CRIMSON("raw_tr_crimson", () -> new BaseItem(BLUE)),
-    TR_CRIMSON_INGOT("tr_crimson_ingot", () -> new BaseItem(BLUE)),
-    HELLSTONE_INGOT("hellstone_ingot", () -> new BaseItem(ORANGE,true)),
-    RAW_HELLSTONE("raw_hellstone", () -> new BaseItem(ORANGE,true)),
-    PRIMORDIAL_HELLSTONE_INGOT("primordial_hellstone_ingot", () -> new BaseItem(ORANGE,true)),
-
-    RAW_COBALT("raw_cobalt", () -> new BaseItem(LIGHT_RED,true)),
-    COBALT_INGOT("cobalt_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    RAW_PALLADIUM("raw_palladium", () -> new BaseItem(LIGHT_RED,true)),
-    PALLADIUM_INGOT("palladium_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    RAW_MITHRIL("raw_mithril", () -> new BaseItem(LIGHT_RED,true)),
-    MITHRIL_INGOT("mithril_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    RAW_ORICHALCUM("raw_orichalcum", () -> new BaseItem(LIGHT_RED,true)),
-    ORICHALCUM_INGOT("orichalcum_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    RAW_ADAMANTITE("raw_adamantite", () -> new BaseItem(LIGHT_RED,true)),
-    ADAMANTITE_INGOT("adamantite_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    RAW_TITANIUM("raw_titanium", () -> new BaseItem(LIGHT_RED,true)),
-    TITANIUM_INGOT("titanium_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    HALLOWED_INGOT("hallowed_ingot", () -> new BaseItem(LIGHT_RED,true)),
-    CHLOROPHYTE_INGOT("chlorophyte_ingot", () -> new BaseItem(ORANGE,true)),
-    RAW_CHLOROPHYTE("raw_chlorophyte", () -> new BaseItem(ORANGE,true)),
-    SHROOMITE_INGOT("shroomite_ingot", () -> new BaseItem(ORANGE,true)),
-    SPECTRE_INGOT("spectre_ingot", () -> new BaseItem(ORANGE,true)),
-    RAW_LUMINITE("raw_luminite", () -> new BaseItem(ORANGE,true)),
-    LUMINITE_INGOT("luminite_ingot", () -> new BaseItem(ORANGE,true)),
-
-    AMBER("amber", () -> new BaseItem(WHITE)),
-    TR_AMETHYST("tr_amethyst", () -> new BaseItem(WHITE)),
-    TR_EMERALD("tr_emerald",() -> new BaseItem(WHITE)),
-    RUBY("ruby", () -> new BaseItem(WHITE)),
-    SAPPHIRE("sapphire", () -> new BaseItem(WHITE)),
-    TOPAZ("topaz", () -> new BaseItem(WHITE)),
-
-    EMERALD_COIN("emerald_coin", () -> new BaseItem(YELLOW)),
-
-    STAR_PETALS("star_petals", () -> new FallingStarItem(WHITE)),
-    FALLING_STAR("falling_star", () -> new FallingStarItem(WHITE)),
-    WEAVING_CLOUD_COTTON("weaving_cloud_cotton", () -> new BaseItem(WHITE)),
-    CARRION("carrion", () -> new BaseItem(WHITE)),
-    VERTEBRA("vertebra", () -> new BaseItem(WHITE)),
-    BLOOD_CLOT_POWDER("blood_clot_powder", () -> new BaseItem(WHITE)),
-    BLACK_INK("black_ink", () -> new BaseItem(WHITE)),
-    PURPLE_MUCUS("purple_mucus", () -> new BaseItem(WHITE)),
-    SHARK_FIN("shark_fin", () -> new BaseItem(WHITE)),
-    ANTLION_MANDIBLE("antlion_mandible", () -> new BaseItem(WHITE)),
-    HOOK("hook", () -> new BaseItem(WHITE)),
-    LENS("lens", () -> new BaseItem(WHITE)),
-    BLACK_LENS("black_lens", () -> new BaseItem(WHITE)),
-    LIFE_CRYSTAL("life_crystal", LifeCrystal::new),
-    LIFE_FRUIT("life_fruit", LifeFruit::new),
-    MANA_STAR("mana_star",ManaStar::new),
-    STURDY_FOSSIL("sturdy_fossil", () -> new BaseItem(BLUE)),
-    SHADOW_SCALE("shadow_scale", () -> new BaseItem(BLUE)),
-    TISSUE_SAMPLE("tissue_sample", () -> new BaseItem(BLUE)),
-
-    CRYSTAL_SHARDS_ITEM("crystal_shards_item", () -> new BaseItem(BLUE)),
-    CURSED_FLAME("cursed_flame", () -> new BaseItem(ORANGE)),
-    ICHOR("ichor", () -> new BaseItem(ORANGE)),
-    PIXIE_DUST("pixie_dust", () -> new BaseItem(BLUE)),
-
-    PEARL("pearl", () -> new BaseItem(BLUE)),
-    BLACK_PEARL("black_pearl", () -> new BaseItem(BLUE)),
-    PINK_PEARL("pink_pearl", () -> new BaseItem(BLUE));
-*/
 
     public static DeferredItem<Item> register(String id) {
         return MATERIALS.register(id, () -> new Item(new Item.Properties()));

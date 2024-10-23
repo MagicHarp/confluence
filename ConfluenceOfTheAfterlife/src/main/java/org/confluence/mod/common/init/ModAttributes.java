@@ -103,13 +103,13 @@ public final class ModAttributes {
 //            abstractArrow.setKnockback((int) Math.ceil(abstractArrow.getKnockback() * (1.0 + attributeInstance.getValue())));
         }
 
-        if (!ModAttributes.hasCustomAttribute(RANGED_VELOCITY)) {
+        if (!hasCustomAttribute(RANGED_VELOCITY)) {
             attributeInstance = living.getAttribute(RANGED_VELOCITY);
             if (attributeInstance != null) {
                 abstractArrow.setDeltaMovement(abstractArrow.getDeltaMovement().scale(attributeInstance.getValue()));
             }
         }
-        if (!abstractArrow.isCritArrow() && !ModAttributes.hasCustomAttribute(CRIT_CHANCE)) {
+        if (!abstractArrow.isCritArrow() && !hasCustomAttribute(CRIT_CHANCE)) {
             attributeInstance = living.getAttribute(CRIT_CHANCE);
             if (attributeInstance != null) {
                 abstractArrow.setCritArrow(living.getRandom().nextFloat() < attributeInstance.getValue());

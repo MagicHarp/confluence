@@ -42,7 +42,7 @@ public class Confluence {
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         ModAttributes.ATTRIBUTES.register(eventBus);
-        ModTriggers.TRIGGERS.register(eventBus);
+        ModTriggers.TYPES.register(eventBus);
         ModTabs.TABS.register(eventBus);
         ModEntities.ENTITIES.register(eventBus);
         ModDataComponentTypes.DATA_COMPONENT_TYPE.register(eventBus);
