@@ -72,7 +72,6 @@ public final class ModEvents {
     @SubscribeEvent
     public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
-        /*
         registrar.playToClient(
                 ManaPacketS2C.TYPE,
                 ManaPacketS2C.STREAM_CODEC,
@@ -83,7 +82,6 @@ public final class ModEvents {
                 GamePhasePacketS2C.STREAM_CODEC,
                 GamePhasePacketS2C::handle
         );
-        */
         registrar.playToClient(
                 WindSpeedPacketS2C.TYPE,
                 WindSpeedPacketS2C.STREAM_CODEC,
