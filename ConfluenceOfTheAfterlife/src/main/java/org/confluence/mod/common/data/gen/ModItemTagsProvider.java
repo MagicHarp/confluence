@@ -8,14 +8,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.Materials;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.item.Arrows;
 import org.confluence.mod.common.init.item.Bows;
+import org.confluence.mod.common.init.item.Materials;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

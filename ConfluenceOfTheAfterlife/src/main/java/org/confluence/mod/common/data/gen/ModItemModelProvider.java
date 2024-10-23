@@ -7,16 +7,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.*;
-
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.ModItems;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.init.item.Bows;
+import org.confluence.mod.common.init.item.ModItems;
 import org.confluence.mod.common.init.item.Swords;
 import org.confluence.mod.common.init.item.common.IconItem;
 import org.confluence.mod.terra_curio.common.item.curio.BaseCurioItem;

@@ -13,6 +13,10 @@ public class CustomRarityItem extends Item {
         super(properties.component(ModDataComponentTypes.MOD_RARITY.get(), ModRarity.GRAY));
     }
 
+    public CustomRarityItem(ModRarity rarity) {
+        super(new Properties().component(ModDataComponentTypes.MOD_RARITY.get(), rarity));
+    }
+
     public CustomRarityItem(Properties properties, ModRarity rarity) {
         super(properties.component(ModDataComponentTypes.MOD_RARITY.get(), rarity));
     }

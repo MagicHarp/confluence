@@ -2,11 +2,9 @@ package org.confluence.mod.common.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
@@ -14,6 +12,7 @@ import org.confluence.mod.common.init.block.ModDecorativeBlocks;
 import org.confluence.mod.common.init.block.ModOreBlocks;
 import org.confluence.mod.common.init.item.Arrows;
 import org.confluence.mod.common.init.item.Bows;
+import org.confluence.mod.common.init.item.Materials;
 import org.confluence.mod.common.init.item.Swords;
 import org.confluence.mod.common.init.item.common.IconItem;
 

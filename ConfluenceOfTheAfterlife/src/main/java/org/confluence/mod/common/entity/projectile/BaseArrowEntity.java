@@ -14,7 +14,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
@@ -23,11 +22,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.init.ModEntities;
-import org.confluence.mod.common.init.ModItems;
 import org.confluence.mod.common.init.item.Arrows;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;

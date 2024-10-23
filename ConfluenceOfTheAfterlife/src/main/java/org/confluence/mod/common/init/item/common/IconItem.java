@@ -3,7 +3,7 @@ package org.confluence.mod.common.init.item.common;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
-import org.confluence.mod.common.init.ModItems;
+import org.confluence.mod.common.init.item.ModItems;
 
 
 public class IconItem extends Item {

@@ -8,7 +8,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.block.HellStoneBlock;
 import org.confluence.mod.common.block.MeteoriteOre;
-import org.confluence.mod.common.init.ModItems;
+import org.confluence.mod.common.init.item.ModItems;
 
 import java.util.function.Supplier;
 

@@ -19,6 +19,7 @@ import org.confluence.mod.client.ClientConfigs;
 import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.init.*;
 import org.confluence.mod.common.init.block.ModBlocks;
+import org.confluence.mod.common.init.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

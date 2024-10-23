@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.ModItems;
+import org.confluence.mod.common.init.item.ModItems;
 
 import java.util.Calendar;
 import java.util.List;

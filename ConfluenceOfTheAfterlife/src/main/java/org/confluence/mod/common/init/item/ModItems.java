@@ -1,4 +1,4 @@
-package org.confluence.mod.common.init;
+package org.confluence.mod.common.init.item;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -9,9 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.projectile.bombs.*;
 import org.confluence.mod.common.init.block.ModBlocks;
-import org.confluence.mod.common.init.item.Arrows;
-import org.confluence.mod.common.init.item.Bows;
-import org.confluence.mod.common.init.item.Swords;
 import org.confluence.mod.common.init.item.common.IconItem;
 import org.confluence.mod.common.item.common.BombItem;
 import org.confluence.mod.common.item.common.LifeCrystal;

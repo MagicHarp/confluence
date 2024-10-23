@@ -3,14 +3,11 @@ package org.confluence.mod.common.data.gen;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.Materials;
-import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.init.item.Arrows;
 import org.confluence.mod.common.init.item.Bows;
+import org.confluence.mod.common.init.item.Materials;
 import org.confluence.mod.common.init.item.Swords;
-import org.confluence.mod.common.item.BoxBlockItem;
-import org.confluence.mod.terra_curio.common.entity.ModEntities;
 
 
 public class ModChineseProvider extends LanguageProvider {
