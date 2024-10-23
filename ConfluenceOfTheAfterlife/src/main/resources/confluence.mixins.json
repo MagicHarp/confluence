@@ -6,7 +6,13 @@
     "refmap": "confluence.refmap.json",
     "mixins": [
         "accessor.EntityAccessor",
-        "accessor.RangedAttributeAccessor"
+        "accessor.RangedAttributeAccessor",
+        "entity.AbstractArrowMixin",
+        "item.BowItemMixin",
+        "item.BucketItemMixin",
+        "item.CrossbowItemMixin",
+        "item.HoneyBottleItemMixin",
+        "item.ProjectileWeaponItemMixin"
     ],
     "client": [
     ],
