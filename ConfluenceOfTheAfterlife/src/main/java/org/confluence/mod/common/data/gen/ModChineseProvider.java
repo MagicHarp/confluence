@@ -1130,15 +1130,15 @@ public class ModChineseProvider extends LanguageProvider {
         add(MaterialItems.SHADOW_SCALE.get(), "暗影鳞片");
         add(MaterialItems.TISSUE_SAMPLE.get(), "组织样本");
         add(MaterialItems.PURPLE_MUCUS.get(), "紫色黏液");
-        add(MaterialItems.MANA_STAR.get(), "魔力水晶");
-        add(MaterialItems.LIFE_CRYSTAL.get(), "生命水晶");
+//        add(MaterialItems.MANA_STAR.get(), "魔力水晶");
+//        add(MaterialItems.LIFE_CRYSTAL.get(), "生命水晶");
         add(MaterialItems.CURSED_FLAME.get(), "诅咒火");
         add(MaterialItems.ICHOR.get(), "灵液");
         add(MaterialItems.PIXIE_DUST.get(), "妖精尘");
         add(MaterialItems.PEARL.get(), "珍珠");
         add(MaterialItems.BLACK_PEARL.get(), "黑珍珠");
         add(MaterialItems.PINK_PEARL.get(), "粉珍珠");
-        add(MaterialItems.LIFE_FRUIT.get(), "生命果");
+//        add(MaterialItems.LIFE_FRUIT.get(), "生命果");
         add(MaterialItems.HOOK.get(), "爪钩");
         add(MaterialItems.GEL.get(), "凝胶");
         add(MaterialItems.PINK_GEL.get(), "粉凝胶");

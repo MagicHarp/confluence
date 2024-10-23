@@ -75,9 +75,9 @@ public class MaterialItems {
     public static final DeferredItem<Item> HOOK = register("hook");
     public static final DeferredItem<Item> LENS = register("lens");
     public static final DeferredItem<Item> BLACK_LENS = register("black_lens");
-    public static final DeferredItem<Item> LIFE_CRYSTAL = register("life_crystal", ModRarity.WHITE);
-    public static final DeferredItem<Item> LIFE_FRUIT = register("life_fruit");
-    public static final DeferredItem<Item> MANA_STAR = register("mana_star");
+//    public static final DeferredItem<Item> LIFE_CRYSTAL = register("life_crystal", ModRarity.WHITE);
+//    public static final DeferredItem<Item> LIFE_FRUIT = register("life_fruit");
+//    public static final DeferredItem<Item> MANA_STAR = register("mana_star");
     public static final DeferredItem<Item> STURDY_FOSSIL = register("sturdy_fossil");
     public static final DeferredItem<Item> SHADOW_SCALE = register("shadow_scale");
     public static final DeferredItem<Item> TISSUE_SAMPLE = register("tissue_sample");
@@ -98,4 +98,6 @@ public class MaterialItems {
     public static DeferredItem<Item> register(String id, ModRarity rarity) {
         return MATERIALS.register(id, () -> new CustomRarityItem(rarity));
     }
+
+    public static void init(){}
 }
