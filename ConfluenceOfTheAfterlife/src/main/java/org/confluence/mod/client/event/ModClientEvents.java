@@ -23,6 +23,8 @@ import org.confluence.mod.client.renderer.entity.projectile.TerraArrowRenderer;
 import org.confluence.mod.client.renderer.gui.HealthHudLayer;
 import org.confluence.mod.client.renderer.gui.InfoHudOverlay;
 import org.confluence.mod.client.renderer.gui.ManaHudLayer;
+import org.confluence.mod.common.init.item.BowItems;
+import org.confluence.mod.common.init.item.FishingPoleItems;
 
 import static org.confluence.mod.common.init.ModEntities.*;
 
@@ -37,6 +39,8 @@ public final class ModClientEvents {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ClientConfigs.onLoad();
+            BowItems.registerProperties();
+            FishingPoleItems.registerCast();
         });
     }
 

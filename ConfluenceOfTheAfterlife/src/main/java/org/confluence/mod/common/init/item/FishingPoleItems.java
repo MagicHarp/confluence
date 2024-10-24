@@ -35,8 +35,6 @@ public class FishingPoleItems {
         return POLES.register(name, supplier);
     }
 
-    public static void init() {}
-
     @OnlyIn(Dist.CLIENT)
     public static void registerCast() {
         ResourceLocation cast = ResourceLocation.withDefaultNamespace("cast");
