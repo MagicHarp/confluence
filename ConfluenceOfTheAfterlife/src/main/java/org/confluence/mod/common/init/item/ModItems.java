@@ -14,7 +14,6 @@ import org.confluence.mod.common.item.common.BombItem;
 import org.confluence.mod.common.item.common.LifeCrystal;
 import org.confluence.mod.common.item.common.LifeFruit;
 import org.confluence.mod.common.item.curio.fishing.FishingBobber;
-import org.confluence.mod.common.item.fishing.QuestedFishes;
 import org.confluence.mod.common.item.mana.ManaStar;
 
 public final class ModItems {
@@ -48,13 +47,14 @@ public final class ModItems {
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         BLOCK_ITEMS.register(eventBus);
-        IconItems.ICONS.register(eventBus);
-        SwordItems.SWORDS.register(eventBus);
-        BowItems.BOWS.register(eventBus);
         ArrowItems.ARROWS.register(eventBus);
-        MaterialItems.MATERIALS.register(eventBus);
-        TerraPotions.POTIONS.register(eventBus);
         BaitItems.BAITS.register(eventBus);
+        BowItems.BOWS.register(eventBus);
+        FishingPoleItems.POLES.register(eventBus);
+        IconItems.ICONS.register(eventBus);
+        MaterialItems.MATERIALS.register(eventBus);
+        SwordItems.SWORDS.register(eventBus);
+        TerraPotions.POTIONS.register(eventBus);
         QuestedFishes.FISHES.register(eventBus);
     }
 }

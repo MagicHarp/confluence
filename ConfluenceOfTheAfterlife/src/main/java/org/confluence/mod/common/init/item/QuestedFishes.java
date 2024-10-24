@@ -1,4 +1,4 @@
-package org.confluence.mod.common.item.fishing;
+package org.confluence.mod.common.init.item;
 
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
