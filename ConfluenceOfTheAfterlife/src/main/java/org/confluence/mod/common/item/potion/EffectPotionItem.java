@@ -9,13 +9,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.component.ModRarity;
-import org.confluence.mod.common.init.ModDataComponentTypes;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
+import org.confluence.mod.terra_curio.common.init.ModDataComponentTypes;
 
 import java.util.List;
 
 public class EffectPotionItem extends AbstractPotionItem {
-    public final Holder<MobEffect>mobEffect;
+    public final Holder<MobEffect> mobEffect;
     public final int duration;
     public final int amplifier;
 
@@ -35,11 +35,11 @@ public class EffectPotionItem extends AbstractPotionItem {
     }
 
     public EffectPotionItem(Holder<MobEffect> mobEffect, int duration) {
-        this(new Properties().component(ModDataComponentTypes.MOD_RARITY,ModRarity.BLUE), mobEffect, duration, 0);
+        this(new Properties().component(ModDataComponentTypes.MOD_RARITY, ModRarity.BLUE), mobEffect, duration, 0);
     }
 
     public EffectPotionItem(Holder<MobEffect> mobEffect, int duration, int amplifier) {
-        this(new Properties().component(ModDataComponentTypes.MOD_RARITY,ModRarity.BLUE), mobEffect, duration, amplifier);
+        this(new Properties().component(ModDataComponentTypes.MOD_RARITY, ModRarity.BLUE), mobEffect, duration, amplifier);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class EffectPotionItem extends AbstractPotionItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack,  TooltipContext context,List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("info.confluence.potion_mana", mobEffect.value().getColor()));
     }
 }

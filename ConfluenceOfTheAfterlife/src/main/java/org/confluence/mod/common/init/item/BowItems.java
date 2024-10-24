@@ -1,12 +1,11 @@
 package org.confluence.mod.common.init.item;
 
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.item.bow.RoutineBowItem;
 import org.confluence.mod.common.item.bow.ShortBowItem;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
 
 public class BowItems {
     public static final DeferredRegister.Items BOWS = DeferredRegister.createItems(Confluence.MODID);

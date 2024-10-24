@@ -13,10 +13,10 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.CommonConfigs;
-import org.confluence.mod.common.init.ModAttributes;
 import org.confluence.mod.network.s2c.GamePhasePacketS2C;
 import org.confluence.mod.network.s2c.ManaPacketS2C;
 import org.confluence.mod.network.s2c.WindSpeedPacketS2C;
+import org.confluence.mod.terra_curio.common.init.ModAttributes;
 
 import static org.confluence.mod.Confluence.MODID;
 

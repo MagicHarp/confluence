@@ -12,11 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.attachment.GamePlay;
-import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.init.ModAttachments;
-import org.confluence.mod.common.init.ModDataComponentTypes;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.item.CustomRarityItem;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
+import org.confluence.mod.terra_curio.common.init.ModDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class LifeCrystal extends CustomRarityItem {

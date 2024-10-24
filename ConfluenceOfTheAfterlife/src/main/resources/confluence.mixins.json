@@ -6,11 +6,12 @@
     "refmap": "confluence.refmap.json",
     "mixins": [
         "accessor.EntityAccessor",
-        "accessor.RangedAttributeAccessor",
+        "accessor.FishingHookAccessor",
         "entity.AbstractArrowMixin",
         "item.BowItemMixin",
         "item.BucketItemMixin",
         "item.CrossbowItemMixin",
+        "item.FishingRodItemMixin",
         "item.HoneyBottleItemMixin",
         "item.ProjectileWeaponItemMixin"
     ],

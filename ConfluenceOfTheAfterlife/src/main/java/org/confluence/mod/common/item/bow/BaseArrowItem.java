@@ -5,9 +5,9 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.entity.projectile.BaseArrowEntity;
-import org.confluence.mod.common.init.ModDataComponentTypes;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
+import org.confluence.mod.terra_curio.common.init.ModDataComponentTypes;
 
 public class BaseArrowItem extends ArrowItem {
     public BaseArrowItem(ModRarity rarity) {

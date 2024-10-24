@@ -41,7 +41,6 @@ public class Confluence {
         ClientConfigs.register(container);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
-        ModAttributes.ATTRIBUTES.register(eventBus);
         ModTriggers.TYPES.register(eventBus);
         ModTabs.TABS.register(eventBus);
         ModEntities.ENTITIES.register(eventBus);

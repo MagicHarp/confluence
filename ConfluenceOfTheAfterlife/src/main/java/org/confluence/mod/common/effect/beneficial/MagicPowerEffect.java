@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.init.ModAttributes;
+import org.confluence.mod.terra_curio.common.init.ModAttributes;
 
 public class MagicPowerEffect extends MobEffect {
     public static final ResourceLocation ID = Confluence.asResource("magic_power");

@@ -7,11 +7,14 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.common.entity.fishing.CurioFishingHook;
 import org.confluence.mod.common.entity.projectile.bombs.*;
 import org.confluence.mod.common.init.block.ModBlocks;
 import org.confluence.mod.common.item.common.BombItem;
 import org.confluence.mod.common.item.common.LifeCrystal;
 import org.confluence.mod.common.item.common.LifeFruit;
+import org.confluence.mod.common.item.curio.fishing.FishingBobber;
+import org.confluence.mod.common.item.fishing.QuestedFishes;
 import org.confluence.mod.common.item.mana.ManaStar;
 
 public final class ModItems {
@@ -33,6 +36,15 @@ public final class ModItems {
     public static final DeferredItem<Item> GOLDEN_COIN = ITEMS.register("golden_coin", () -> new BlockItem(ModBlocks.GOLDEN_COIN_PILE.get(), new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final DeferredItem<Item> PLATINUM_COIN = ITEMS.register("platinum_coin", () -> new BlockItem(ModBlocks.PLATINUM_COIN_PILE.get(), new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
+    public static final DeferredItem<FishingBobber> FISHING_BOBBER = ITEMS.register("fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.COMMON)), // 钓鱼浮标
+            GLOWING_FISHING_BOBBER = ITEMS.register("glowing_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.GLOWING)), // 发光钓鱼浮标
+            LAVA_MOSS_FISHING_BOBBER = ITEMS.register("lava_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.LAVA)), // 熔岩苔藓钓鱼浮标
+            HELIUM_MOSS_FISHING_BOBBER = ITEMS.register("helium_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.HELIUM)), // 氦苔藓钓鱼浮标
+            NEON_MOSS_FISHING_BOBBER = ITEMS.register("neon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.NEON)), // 氖苔藓钓鱼浮标
+            ARGON_MOSS_FISHING_BOBBER = ITEMS.register("argon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.ARGON)), // 氩苔藓钓鱼浮标
+            KRYPTON_MOSS_FISHING_BOBBER = ITEMS.register("krypton_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.KRYPTON)), // 氪苔藓钓鱼浮标
+            XENON_MOSS_FISHING_BOBBER = ITEMS.register("xenon_moss_fishing_bobber", () -> new FishingBobber(CurioFishingHook.Variant.XENON)); // 氙苔藓钓鱼浮标
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         BLOCK_ITEMS.register(eventBus);
@@ -42,5 +54,7 @@ public final class ModItems {
         ArrowItems.ARROWS.register(eventBus);
         MaterialItems.MATERIALS.register(eventBus);
         TerraPotions.POTIONS.register(eventBus);
+        BaitItems.BAITS.register(eventBus);
+        QuestedFishes.FISHES.register(eventBus);
     }
 }

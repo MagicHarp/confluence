@@ -10,6 +10,5 @@ import java.util.function.Supplier;
 public final class ModTriggers {
     public static final DeferredRegister<CriterionTrigger<?>> TYPES = DeferredRegister.create(BuiltInRegistries.TRIGGER_TYPES, Confluence.MODID);
 
-    public final static Supplier<CuriosEquippedTrigger> CURIOS_EQUIPPED = TYPES.register("curios_equipped", CuriosEquippedTrigger::new);
     public final static Supplier<ShimmerTransmutationTrigger> SHIMMER_TRANSMUTATION = TYPES.register("shimmer_transmutation", ShimmerTransmutationTrigger::new);
 }

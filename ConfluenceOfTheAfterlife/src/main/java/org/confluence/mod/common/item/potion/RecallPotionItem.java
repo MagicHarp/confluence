@@ -8,10 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
-import org.confluence.mod.common.component.ModRarity;
-import org.confluence.mod.common.init.ModDataComponentTypes;
-
 import org.confluence.mod.common.init.ModSoundEvents;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
+import org.confluence.mod.terra_curio.common.init.ModDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class RecallPotionItem extends AbstractPotionItem {

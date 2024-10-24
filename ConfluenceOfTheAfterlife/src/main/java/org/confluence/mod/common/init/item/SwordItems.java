@@ -6,10 +6,10 @@ import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.component.ModRarity;
 import org.confluence.mod.common.init.ModTiers;
 import org.confluence.mod.common.item.sword.BoardSwordItem;
 import org.confluence.mod.common.item.sword.ShortSwordItem;
+import org.confluence.mod.terra_curio.common.component.ModRarity;
 
 import java.util.function.Supplier;
 
