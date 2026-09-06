@@ -1,20 +1,23 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 
-/// 将地面生物移动到原版陆地随机算法给出的目标附近位置。
+import javax.annotation.Nullable;
+
+/// 将地面生物传送到目标附近的安全落点。
 ///
-/// 这段行为对应 1.21 侧法师类生物的传送循环：最多尝试指定次数，遇到第一个可用候选点就立即传送。
-/// {@link LandRandomPos} 负责按照陆地寻路条件选点，本节点只补充实际落点的区块与碰撞检查，
-/// 避免候选点在未加载区域或实体碰撞箱插进方块时造成实测中的错误传送。
+/// 候选点以目标为中心生成，并强制保持至少四格距离。节点只接受脚下可站立、没有熔岩且
+/// 完整碰撞箱不与方块重叠的位置，也不会为寻找落点加载新区块。
 public class TeleportNearTargetAction extends BTNode {
+    private static final int MINIMUM_DISTANCE = 4;
     private final PathfinderMob mob;
     private final int horizontalRange;
     private final int verticalRange;
@@ -44,10 +47,20 @@ public class TeleportNearTargetAction extends BTNode {
         if (target == null || !target.isAlive()) return BTStatus.FAILURE;
 
         for (int attempt = 0; attempt < attempts; attempt++) {
-            Vec3 candidate = LandRandomPos.getPosTowards(mob, horizontalRange, verticalRange, target.position());
+            int xOffset = mob.getRandom().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
+            int zOffset = mob.getRandom().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
+            int horizontalDistanceSquared = xOffset * xOffset + zOffset * zOffset;
+            if (horizontalDistanceSquared < MINIMUM_DISTANCE * MINIMUM_DISTANCE || horizontalDistanceSquared > horizontalRange * horizontalRange) {
+                continue;
+            }
+            BlockPos origin = target.blockPosition().offset(
+                    xOffset,
+                    mob.getRandom().nextIntBetweenInclusive(-verticalRange, verticalRange),
+                    zOffset);
+            Vec3 candidate = findStandingPosition(origin);
             if (candidate == null) continue;
-            if (!canTeleportTo(candidate)) continue;
 
+            mob.getNavigation().stop();
             mob.teleportTo(candidate.x, candidate.y, candidate.z);
             done = true;
             return BTStatus.SUCCESS;
@@ -55,13 +68,22 @@ public class TeleportNearTargetAction extends BTNode {
         return BTStatus.FAILURE;
     }
 
-    private boolean canTeleportTo(Vec3 candidate) {
-        BlockPos position = BlockPos.containing(candidate);
-        if (!mob.level().hasChunkAt(position)) {
-            return false;
+    @Nullable
+    private Vec3 findStandingPosition(BlockPos origin) {
+        BlockPos.MutableBlockPos cursor = origin.above(verticalRange).mutable();
+        for (int offset = 0; offset <= verticalRange * 2; ++offset) {
+            BlockPos feet = cursor.immutable();
+            if (mob.level().hasChunkAt(feet)
+                    && mob.level().getBlockState(feet.below()).isFaceSturdy(mob.level(), feet.below(), Direction.UP)
+                    && !mob.level().getFluidState(feet).is(FluidTags.LAVA)) {
+                Vec3 destination = Vec3.atBottomCenterOf(feet);
+                AABB destinationBox = mob.getBoundingBox().move(destination.x - mob.getX(), destination.y - mob.getY(), destination.z - mob.getZ());
+                if (mob.level().noCollision(mob, destinationBox)) {
+                    return destination;
+                }
+            }
+            cursor.move(Direction.DOWN);
         }
-        // 原版随机点只代表脚下坐标，真正传送前仍要验证整个实体碰撞箱是否能放下。
-        AABB destinationBox = mob.getBoundingBox().move(candidate.x - mob.getX(), candidate.y - mob.getY(), candidate.z - mob.getZ());
-        return mob.level().noCollision(mob, destinationBox);
+        return null;
     }
 }

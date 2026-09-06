@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -24,12 +25,12 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
-/// 地狱恶魔的五连镰刀攻击与客户端动作表现。
+/// 地狱恶魔的四连镰刀攻击与客户端动作表现。
 ///
-/// 恶魔先沿用鸟妖的一百五十刻接近阶段，再于第 175、183、191、199 和 201 tick
-/// 发射五枚镰刀。挥手状态持续 30 tick，与投掷动画长度一致；受伤动作优先于投掷，
+/// 恶魔先进行一百五十刻接近，再于第 175、183、191 和 199 tick
+/// 发射四枚镰刀。挥手状态持续 30 tick，与投掷动画长度一致；受伤动作优先于投掷，
 /// 二者结束后回到悬浮待机。
-public class Demon extends Harpy {
+public class Demon extends ReboundingFlyingMonster {
     private static final RawAnimation HURT = RawAnimation.begin().thenPlay("hurt");
     private static final RawAnimation ATTACK_THROW = RawAnimation.begin().thenPlay("attack.throw");
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
@@ -42,6 +43,18 @@ public class Demon extends Harpy {
         return BaseFlyingMonster.createFlyingAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.ATTACK_DAMAGE, 8.0);
+    }
+
+    @Override
+    protected Vec3 reboundVelocity(Vec3 requested, Vec3 allowed) {
+        Vec3 rebound = requested;
+        if (allowed.x != requested.x) {
+            rebound = new Vec3(-requested.x * 0.8, rebound.y + 0.2, rebound.z);
+        }
+        if (allowed.z != requested.z) {
+            rebound = new Vec3(rebound.x, rebound.y + 0.2, -requested.z * 0.8);
+        }
+        return rebound;
     }
 
     @Override
@@ -62,8 +75,7 @@ public class Demon extends Harpy {
                 175,
                 183,
                 191,
-                199,
-                201);
+                199);
         return new BTRoot() {
             @Override
             protected BTNode createTree() {

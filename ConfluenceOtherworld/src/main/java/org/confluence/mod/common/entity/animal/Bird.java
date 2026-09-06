@@ -38,8 +38,6 @@ import org.confluence.mod.common.init.ModSoundEvents;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -47,7 +45,6 @@ import java.util.Iterator;
 
 /// 直接沿用原版动物的 Goal 调度，并使用鹦鹉式飞行导航与树冠巡游。
 public class Bird extends Animal implements FlyingAnimal, CritterVisual {
-    private static final RawAnimation FLY_ONLY = RawAnimation.begin().thenLoop("move.fly");
     public float flap;
     public float flapSpeed;
     public float oFlapSpeed;
@@ -83,7 +80,7 @@ public class Bird extends Animal implements FlyingAnimal, CritterVisual {
         return false;
     }
 
-    /// 鸟类在 1.21 侧只作为可捕捉的小动物存在，不参与原版繁殖流程。
+    /// 鸟类只作为可捕捉的小动物存在，不参与原版繁殖流程。
     @Override
     public boolean canMate(net.minecraft.world.entity.animal.Animal other) {
         return false;
@@ -163,14 +160,6 @@ public class Bird extends Animal implements FlyingAnimal, CritterVisual {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSoundEvents.ROUTINE_DEATH.get();
-    }
-
-    /// 为只提供 {@code move.fly} 的昆虫资源安装持续飞行动画。
-    ///
-    /// 这些资源没有 {@code move.walk} 或 {@code misc.idle}，使用通用走路控制器会持续输出
-    /// 缺失动画警告，并在停顿阶段让翅膀完全静止。
-    protected final void registerFlyOnlyController(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Fly", 5, state -> state.setAndContinue(FLY_ONLY)));
     }
 
     @Override

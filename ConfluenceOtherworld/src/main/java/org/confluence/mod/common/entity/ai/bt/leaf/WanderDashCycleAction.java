@@ -1,10 +1,10 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
 /// 在空中游走一段时间后，沿锁定方向持续冲刺的循环行为。
 ///
@@ -12,7 +12,7 @@ import org.confluence.mod.common.entity.ai.bt.BTStatus;
 /// 横向移动躲避。撞墙会立即结束本次冲刺并重新游走；接触伤害带独立冷却，避免实体
 /// 包围盒持续相交时每 tick 重复结算。
 public final class WanderDashCycleAction extends BTNode {
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final int wanderTicks;
     private final int dashTicks;
     private final double dashSpeed;
@@ -20,9 +20,8 @@ public final class WanderDashCycleAction extends BTNode {
     private int phaseTicks;
     private boolean dashing;
     private Vec3 dashDirection = Vec3.ZERO;
-    private Vec3 dashTarget = Vec3.ZERO;
 
-    public WanderDashCycleAction(PathfinderMob mob, int wanderTicks, int dashTicks, double wanderSpeed, double dashSpeed) {
+    public WanderDashCycleAction(BaseMonster mob, int wanderTicks, int dashTicks, double wanderSpeed, double dashSpeed) {
         if (wanderTicks <= 0 || dashTicks <= 0 || !Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0 || !Double.isFinite(dashSpeed) || dashSpeed <= 0.0) {
             throw new IllegalArgumentException("Wander dash durations and speeds must be positive");
         }
@@ -54,7 +53,6 @@ public final class WanderDashCycleAction extends BTNode {
                     if (direction.lengthSqr() > 1.0E-8) {
                         wanderAction.stop();
                         dashDirection = direction;
-                        dashTarget = targetPosition;
                         dashing = true;
                     }
                 }
@@ -72,12 +70,9 @@ public final class WanderDashCycleAction extends BTNode {
             beginWander();
             return BTStatus.RUNNING;
         }
-        Vec3 lookPosition = mob.position().add(dashDirection.scale(20.0)).add(0.0, 1.0, 0.0);
-        mob.getLookControl().setLookAt(lookPosition);
-        mob.setYRot(mob.getYHeadRot());
+        mob.faceCombatDirection(dashDirection, 180.0F, 180.0F);
         mob.setDeltaMovement(dashDirection.scale(dashSpeed));
         mob.hasImpulse = true;
-        mob.getLookControl().setLookAt(dashTarget);
         return BTStatus.RUNNING;
     }
 
@@ -87,14 +82,12 @@ public final class WanderDashCycleAction extends BTNode {
         dashing = false;
         phaseTicks = 0;
         dashDirection = Vec3.ZERO;
-        dashTarget = Vec3.ZERO;
     }
 
     private void beginWander() {
         dashing = false;
         phaseTicks = 0;
         dashDirection = Vec3.ZERO;
-        dashTarget = Vec3.ZERO;
         wanderAction.start();
     }
 

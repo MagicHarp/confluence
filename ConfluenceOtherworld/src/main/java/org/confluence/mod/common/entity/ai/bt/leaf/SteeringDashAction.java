@@ -1,23 +1,22 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
 /// 实体先在待机阶段按指定速度朝向目标。进入触发角后持续加速；当目标离开可转向角时，
 /// 实体保留冲刺方向、逐渐减速并向上抬升一段时间。贴身命中后则先沿当前正面远离目标，
 /// 拉开足够距离后才重新对准。转向速度、触发角和冲刺中的最大转向角是三个独立参数，
 /// 不能互相代替。
 ///
-/// 本动作只保留原 {@code DashGoal} 自己的贴身攻击；1.21 怪物公共接触伤害由飞行实体
-/// 独立计时，不能绑在某个行为树节点上，否则切换动作时会错误暂停。
+/// 本动作只负责冲刺运动；公共接触伤害由飞行实体独立计时，不能绑在某个行为树节点上，
+/// 否则切换动作时会错误暂停。
 public final class SteeringDashAction extends BTNode {
     private static final int POINT_BLANK_COOLDOWN = 30;
 
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final double friction;
     private final double maxSpeed;
     private final double acceleration;
@@ -32,12 +31,12 @@ public final class SteeringDashAction extends BTNode {
     private int pointBlankCooldown;
     private Vec3 lastDirection = Vec3.ZERO;
 
-    public SteeringDashAction(PathfinderMob mob, double friction, double maxSpeed, double acceleration,
+    public SteeringDashAction(BaseMonster mob, double friction, double maxSpeed, double acceleration,
                               double turnSpeedDegrees, double triggerAngleDegrees, double steeringAngleDegrees, int backDuration) {
         this(mob, friction, maxSpeed, acceleration, turnSpeedDegrees, triggerAngleDegrees, steeringAngleDegrees, backDuration, false);
     }
 
-    public SteeringDashAction(PathfinderMob mob, double friction, double maxSpeed, double acceleration,
+    public SteeringDashAction(BaseMonster mob, double friction, double maxSpeed, double acceleration,
                               double turnSpeedDegrees, double triggerAngleDegrees, double steeringAngleDegrees, int backDuration,
                               boolean lookDuringBack) {
         if (!Double.isFinite(friction) || friction < 0.0 || friction > 1.0 || !Double.isFinite(maxSpeed) || maxSpeed <= 0.0
@@ -80,9 +79,7 @@ public final class SteeringDashAction extends BTNode {
         }
 
         double distance = mob.getEyePosition().distanceTo(target.getEyePosition());
-        if (distance < 0.5 && mob.swingTime == 0 && pointBlankCooldown <= 0) {
-            mob.doHurtTarget(target);
-            mob.swing(InteractionHand.MAIN_HAND);
+        if (distance < 0.5 && pointBlankCooldown <= 0) {
             phase = Phase.AWAY;
             pointBlankCooldown = POINT_BLANK_COOLDOWN;
             return BTStatus.RUNNING;
@@ -94,6 +91,7 @@ public final class SteeringDashAction extends BTNode {
                 Vec3 velocity = mob.getDeltaMovement().scale(friction).add(away.normalize().scale(0.1));
                 if (velocity.lengthSqr() > maxSpeed * maxSpeed)
                     velocity = velocity.normalize().scale(maxSpeed);
+                mob.faceCombatDirection(velocity, turnSpeedDegrees, 85.0F);
                 mob.setDeltaMovement(velocity);
             }
             if (distance > 5.0) {
@@ -170,8 +168,7 @@ public final class SteeringDashAction extends BTNode {
     }
 
     private void lookAtTarget(LivingEntity target) {
-        mob.getLookControl().setLookAt(target, turnSpeedDegrees, 85.0F);
-        mob.lookAt(target, turnSpeedDegrees, 85.0F);
+        mob.faceCombatPosition(target.getEyePosition(), turnSpeedDegrees, 85.0F);
     }
 
     private void slowLastDirection() {

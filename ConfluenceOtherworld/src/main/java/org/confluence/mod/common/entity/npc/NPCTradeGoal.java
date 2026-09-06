@@ -18,9 +18,7 @@ public final class NPCTradeGoal extends Goal {
     /// 只有有效交易菜单仍属于该 NPC 且玩家保持在四格内时才能交易。
     @Override
     public boolean canUse() {
-        Player player = npc.getTradingPlayer();
-        return npc.isAlive() && !npc.isInWater() && npc.onGround() && !npc.hurtMarked && player != null
-                && npc.distanceToSqr(player) <= 16.0 && player.containerMenu instanceof NPCTradeMenu menu && menu.getNPC() == npc;
+        return npc.isAlive() && npc.getInteractingPlayer() != null;
     }
 
     /// 交易持续条件与启动条件完全相同，防止菜单和实体状态脱节。
@@ -32,14 +30,14 @@ public final class NPCTradeGoal extends Goal {
     /// 交易开始时立即停止原有路径。
     @Override
     public void start() {
-        npc.getNavigation().stop();
+        npc.stopForInteraction();
     }
 
     /// 交易期间保持静止并持续面向玩家。
     @Override
     public void tick() {
-        npc.getNavigation().stop();
-        Player player = npc.getTradingPlayer();
+        npc.stopForInteraction();
+        Player player = npc.getInteractingPlayer();
         if (player != null) npc.getLookControl().setLookAt(player, 30, 30);
     }
 
@@ -47,7 +45,8 @@ public final class NPCTradeGoal extends Goal {
     @Override
     public void stop() {
         Player player = npc.getTradingPlayer();
-        if (player != null) player.closeContainer();
+        if (player != null && player.containerMenu instanceof NPCTradeMenu menu && menu.getNPC() == npc)
+            player.closeContainer();
         npc.setTradingPlayer(null);
     }
 }

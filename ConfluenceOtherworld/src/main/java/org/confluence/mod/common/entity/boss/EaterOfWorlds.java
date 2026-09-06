@@ -34,6 +34,7 @@ import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
+import org.confluence.mod.common.entity.monster.WormSegment;
 import org.confluence.mod.common.init.entity.BossEntities;
 import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.jetbrains.annotations.Nullable;
@@ -133,6 +134,9 @@ public class EaterOfWorlds extends BaseWormBoss {
     }
 
     @Override
+    public boolean sharesHurtAnimation() {return false;}
+
+    @Override
     public void initSegments() {
         super.initSegments();
         if (pendingSegmentPositions != null && segments.size() == activeSegmentCount) {
@@ -173,6 +177,7 @@ public class EaterOfWorlds extends BaseWormBoss {
 
     @Override
     protected boolean hurtSegment(BossWormPart segment, DamageSource source, float amount) {
+        if (WormSegment.isWormDamage(source)) return false;
         if (restructuring || segment.getOwner() != this || segment.isInvulnerableTo(source) || amount <= 0.0F) {
             return false;
         }
@@ -376,7 +381,7 @@ public class EaterOfWorlds extends BaseWormBoss {
         // pending 列表只会在链条完整后消费，因此不会空跑或重复覆盖。
         head.initSegments();
         head.setPrimaryHead(primary);
-        for (ServerPlayer viewer : viewers) head.bossEvent.addPlayer(viewer);
+        for (ServerPlayer viewer : viewers) head.addBossBarPlayer(viewer);
         return head;
     }
 
@@ -424,18 +429,21 @@ public class EaterOfWorlds extends BaseWormBoss {
                     ? attacker
                     : null;
         }
-        if (inheritedTarget != null) eater.setTarget(inheritedTarget);
+        if (inheritedTarget != null) {
+            eater.setTarget(inheritedTarget);
+            org.confluence.mod.common.entity.ai.BossMinionCoordinator.faceTargetImmediately(eater, inheritedTarget);
+        }
 
         // 注册表目前只有标准噬魂怪实体；生成点和目标继承集中在这里，后续增加大型变体时
         // 只需替换实体工厂，不会污染普通体节断裂逻辑。
-        serverLevel.addFreshEntity(eater);
+        if (!serverLevel.addFreshEntity(eater)) eater.discard();
     }
 
     private void transferPrimaryRoleTo(EaterOfWorlds successor) {
         if (successor == this) return;
         List<ServerPlayer> viewers = List.copyOf(bossEvent.getPlayers());
         successor.setPrimaryHead(true);
-        for (ServerPlayer viewer : viewers) successor.bossEvent.addPlayer(viewer);
+        for (ServerPlayer viewer : viewers) successor.addBossBarPlayer(viewer);
         setPrimaryHead(false);
     }
 
@@ -459,10 +467,10 @@ public class EaterOfWorlds extends BaseWormBoss {
             }
         }
         if (!primary) {
-            bossEvent.removeAllPlayers();
+            removeAllBossBarPlayers();
         } else if (level() instanceof ServerLevel serverLevel) {
             for (ServerPlayer player : serverLevel.players()) {
-                if (distanceToSqr(player) <= 16384.0) bossEvent.addPlayer(player);
+                if (distanceToSqr(player) <= 16384.0) addBossBarPlayer(player);
             }
         }
     }
@@ -475,7 +483,7 @@ public class EaterOfWorlds extends BaseWormBoss {
     @Override
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
-        if (!isMainBody()) bossEvent.removePlayer(player);
+        if (!isMainBody()) removeBossBarPlayer(player);
     }
 
     @Override
@@ -484,6 +492,11 @@ public class EaterOfWorlds extends BaseWormBoss {
         float remainingHealth = 0.0F;
         for (EaterOfWorlds head : encounterHeads()) remainingHealth += head.chainHealth();
         return remainingHealth / ENCOUNTER_MAX_HEALTH;
+    }
+
+    @Override
+    protected float getBossBarMaximumHealth() {
+        return isMainBody() ? ENCOUNTER_MAX_HEALTH : super.getBossBarMaximumHealth();
     }
 
     private float chainHealth() {
@@ -678,12 +691,12 @@ public class EaterOfWorlds extends BaseWormBoss {
 
     @Override
     public void tick() {
-        if (!level().isClientSide) {
+        if (isAlive() && !level().isClientSide) {
             acquireTargetFromHeadRange();
             restoreEncounterTargetBeforeLifecycle();
         }
         super.tick();
-        if (isRemoved()) return;
+        if (!isAlive()) return;
         if (level().isClientSide) {
             tickClientInterpolation();
             return;
@@ -870,7 +883,7 @@ public class EaterOfWorlds extends BaseWormBoss {
 
     /// 头部在本类 tick 的末段直接移动后，同一刻重新收紧体节链。
     private void refreshSegmentsAfterHeadMovement() {
-        updateSegmentsAlongTrail();
+        updateSegmentChain();
     }
 
     private void beginPhase(MovementPhase phase) {

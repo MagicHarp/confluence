@@ -20,12 +20,15 @@ public class AnglerDialogScreen extends NPCDialogScreen {
 
     private final State state;
     private final ItemStack questFish;
-    private int dialogIndex;
+    private final String levelName;
+    private boolean showQuestFish;
 
-    public AnglerDialogScreen(int entityId, State state, Item questFish) {
+    public AnglerDialogScreen(int entityId, State state, Item questFish, String levelName) {
         super(entityId);
         this.state = state;
         this.questFish = questFish.getDefaultInstance();
+        this.levelName = levelName;
+        this.showQuestFish = state == State.SHOW_HINT;
     }
 
     @Override
@@ -45,7 +48,10 @@ public class AnglerDialogScreen extends NPCDialogScreen {
         addRenderableWidget(Button.builder(Component.translatable("gui.confluence.dialog"), b -> {
             if (entity instanceof BaseNPC npc) {
                 String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
-                if (key != null) dialogText = Component.translatable(key);
+                if (key != null) {
+                    dialogText = Component.translatable(key, levelName);
+                    showQuestFish = false;
+                }
             }
         }).width(60).pos(width / 2 - 30, height / 2 + 50).build());
     }
@@ -54,14 +60,14 @@ public class AnglerDialogScreen extends NPCDialogScreen {
         switch (state) {
             case COMPLETED -> {
                 String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
-                dialogText = key != null ? Component.translatable(key) : Component.translatable("dialogs.confluence.angler.completed");
+                dialogText = key != null ? Component.translatable(key, levelName) : Component.translatable("dialogs.confluence.angler.completed");
             }
             case NO_QUEST -> {
                 String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
-                dialogText = key != null ? Component.translatable(key) : Component.translatable("dialogs.confluence.angler.no_quest");
+                dialogText = key != null ? Component.translatable(key, levelName) : Component.translatable("dialogs.confluence.angler.no_quest");
             }
             case SHOW_HINT -> {
-                String key = "dialogs.confluence.angler.item." + questFish.getDescriptionId();
+                String key = "dialogs.confluence.angler." + questFish.getDescriptionId();
                 dialogText = Component.translatable(key);
             }
             case WAKE_UP ->
@@ -70,6 +76,7 @@ public class AnglerDialogScreen extends NPCDialogScreen {
     }
 
     private void showQuestText() {
+        showQuestFish = state == State.SHOW_HINT;
         switch (state) {
             case COMPLETED -> dialogText = Component.translatable("dialogs.confluence.angler.completed");
             case NO_QUEST -> dialogText = Component.translatable("dialogs.confluence.angler.no_quest");
@@ -93,12 +100,13 @@ public class AnglerDialogScreen extends NPCDialogScreen {
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        if (state == State.SHOW_HINT) {
-            guiGraphics.renderFakeItem(questFish, width / 2 - 8, height / 2 - 50);
+        if (showQuestFish) {
+            int textTop = height / 2 - font.split(dialogText, DIALOG_WIDTH).size() * font.lineHeight / 2 - 30;
+            guiGraphics.renderFakeItem(questFish, width / 2 - 8, textTop - 22);
         }
     }
 
-    public static void open(int entityId, State state, Item questFish) {
-        Minecraft.getInstance().setScreen(new AnglerDialogScreen(entityId, state, questFish));
+    public static void open(int entityId, State state, Item questFish, String levelName) {
+        Minecraft.getInstance().setScreen(new AnglerDialogScreen(entityId, state, questFish, levelName));
     }
 }

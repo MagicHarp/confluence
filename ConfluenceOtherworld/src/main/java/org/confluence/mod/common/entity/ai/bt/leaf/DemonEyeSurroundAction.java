@@ -5,14 +5,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 
-import java.util.List;
-
-/// 复现 1.21 恶魔眼围绕目标移动的行为。
+/// 恶魔眼围绕目标上下浮动并持续修正航点的移动行为。
 ///
 /// 恶魔眼不会按固定阶段绕圈后直线冲锋，而是每四十刻重新选择玩家周围的一个航点。
 /// 航点高度按照余弦曲线变化，水平方向偶尔偏转二十度，因此整体轨迹会在玩家周围上下
@@ -68,13 +65,6 @@ public final class DemonEyeSurroundAction extends BTNode {
         }
         mob.getLookControl().setLookAt(targetPos.x, targetPos.y, targetPos.z, 30.0F, 85.0F);
         mob.lookAt(EntityAnchorArgument.Anchor.EYES, targetPos);
-
-        List<Player> targets = mob.level().getEntitiesOfClass(Player.class,
-                mob.getBoundingBox().expandTowards(nextMovement).inflate(0.15),
-                player -> !player.isSpectator() && mob.canAttack(player));
-        for (Player targetEntity : targets) {
-            mob.doHurtTarget(targetEntity);
-        }
 
         ticksLeft--;
         return BTStatus.RUNNING;

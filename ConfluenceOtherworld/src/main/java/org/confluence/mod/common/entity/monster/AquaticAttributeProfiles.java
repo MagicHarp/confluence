@@ -4,7 +4,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-/// 1.21.1 水生敌怪注册数值的集中映射。
+/// 水生敌怪注册数值的集中映射。
 ///
 /// 字段顺序与同步侧 {@code AttBuilder.createAttributes} 的语义保持一致，具体实体注册时只选择
 /// 对应档案，避免同一生物的生命、护甲或击退参数分散在多个类中。档案最终仍生成原版属性表，

@@ -14,6 +14,12 @@ public final class Paladin extends RangedMonster {
         super(type, level, 50, 1.1);
     }
 
+    /// 圣骑士不会隔着地牢墙体直接取得新目标；已进入战斗后的短暂记忆仍由原版目标行为维护。
+    @Override
+    protected boolean mustSeePlayerTarget() {
+        return true;
+    }
+
     @Override
     protected Projectile createProjectile(LivingEntity target) {
         PaladinHammerProjectile projectile = ModEntities.PALADIN_HAMMER_PROJECTILE.get().create(level());

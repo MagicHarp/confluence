@@ -129,16 +129,7 @@ public class BloodCrawler extends BaseMonster {
             protected BTNode createTree() {
                 return SelectorNode.of(
                         new VanillaGoalAction(new LeapAtTargetGoal(BloodCrawler.this, 0.4F)),
-                        new VanillaGoalAction(new MeleeAttackGoal(BloodCrawler.this, 1.0, true) {
-                            @Override
-                            public boolean canContinueToUse() {
-                                if (getLightLevelDependentMagicValue() >= 0.5F && random.nextInt(100) == 0) {
-                                    setTarget(null);
-                                    return false;
-                                }
-                                return super.canContinueToUse();
-                            }
-                        }),
+                        new VanillaGoalAction(new MeleeAttackGoal(BloodCrawler.this, 1.0, true)),
                         new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(BloodCrawler.this, 0.8)),
                         new VanillaGoalAction(new LookAtPlayerGoal(BloodCrawler.this, Player.class, 8.0F)),
                         new VanillaGoalAction(new RandomLookAroundGoal(BloodCrawler.this)));

@@ -7,10 +7,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.common.entity.monster.Hornet;
 
 /// 黄蜂发射的毒刺弹幕。
 ///
-/// 毒刺复用敌对生物直线弹幕的碰撞与阵营判断，并在合法命中时附加五秒中毒。
+/// 毒刺复用敌对生物直线弹幕的碰撞与阵营判断，并在合法命中时由发射者结算中毒。
 /// 效果只由服务端命中结算产生，客户端不自行预测状态效果。
 public final class HornetStingerProjectile extends StraightMonsterProjectile {
     private static final int POISON_DURATION = 100;
@@ -33,7 +34,7 @@ public final class HornetStingerProjectile extends StraightMonsterProjectile {
     }
 
     /// 使用调用方明确提供的出生点和瞄准向量生成毒刺。
-    /// 蜂王瞄准目标眼睛，普通黄蜂瞄准目标身体中部；两种 1.21 行为不能被同一个
+    /// 蜂王瞄准目标眼睛，普通黄蜂瞄准目标身体中部；两种发射语义不能被同一个
     /// 通用“从发射者眼睛射击”入口合并，否则出生高度和弹道都会发生偏移。
     public void configure(Mob owner, Vec3 origin, Vec3 aim, float damage, float inaccuracy, int poisonAmplifier) {
         configureAimed(owner, origin, aim, damage, 1.0F, inaccuracy, 100);
@@ -42,6 +43,10 @@ public final class HornetStingerProjectile extends StraightMonsterProjectile {
 
     @Override
     protected void onSuccessfulHit(Mob owner, LivingEntity target) {
+        if (owner instanceof Hornet hornet) {
+            hornet.applyStingerPoison(target);
+            return;
+        }
         target.addEffect(new MobEffectInstance(MobEffects.POISON, POISON_DURATION, poisonAmplifier), owner);
     }
 }

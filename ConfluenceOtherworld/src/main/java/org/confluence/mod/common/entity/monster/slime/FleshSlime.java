@@ -13,7 +13,7 @@ import org.confluence.mod.common.init.ModTags;
 public class FleshSlime extends BaseSlime {
 
     public FleshSlime(EntityType<? extends BaseSlime> type, Level level) {
-        super(type, level, 0xFF0000, false);
+        super(type, level, false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

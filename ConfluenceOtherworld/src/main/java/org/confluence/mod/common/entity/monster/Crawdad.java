@@ -4,10 +4,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.util.OverworldUtils;
+import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -15,19 +23,19 @@ import software.bernie.geckolib.core.object.PlayState;
 
 /// 具有红、蓝两种外观并会中距离跃击的龙虾。
 public final class Crawdad extends BaseWarriorMonster {
+    private static final AttributeModifier CLAW_DAMAGE = new PortAttributeModifier(Confluence.asResource("crawdad_claw_damage"), 0.875, PortAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).unwrap();
     private static final String VARIANT_TAG = "Variant";
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Crawdad.class, EntityDataSerializers.INT);
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");
     private static final RawAnimation ATTACK = RawAnimation.begin().thenPlay("attack");
+    private static final int CLAW_ATTACK_TICKS = 20;
+    private static final int CLAW_WINDUP_TICKS = 5;
+    private static final double CLAW_REACH = 0.75;
     private boolean variantInitialized;
+    private int clawAttackTicks;
 
     public Crawdad(EntityType<? extends Crawdad> type, Level level) {
         super(type, level);
-    }
-
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return true;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -68,6 +76,46 @@ public final class Crawdad extends BaseWarriorMonster {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide || clawAttackTicks <= 0) return;
+        getNavigation().stop();
+        Vec3 movement = getDeltaMovement();
+        setDeltaMovement(0.0, movement.y, 0.0);
+        if (--clawAttackTicks == CLAW_ATTACK_TICKS - CLAW_WINDUP_TICKS) performClawHit();
+    }
+
+    /// 龙虾贴身且站稳时先停下挥螯；地表白天不会发动这一强化攻击。
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        if (!canUseClawAttack()) return super.doHurtTarget(target);
+        if (clawAttackTicks == 0) {
+            clawAttackTicks = CLAW_ATTACK_TICKS;
+            swing(net.minecraft.world.InteractionHand.MAIN_HAND, true);
+        }
+        return false;
+    }
+
+    private boolean canUseClawAttack() {
+        return onGround() && Math.abs(getDeltaMovement().y) < 0.01
+                && (getY() < OverworldUtils.getSurfaceY() || level().isNight());
+    }
+
+    private void performClawHit() {
+        LivingEntity target = getTarget();
+        if (target == null || !target.isAlive() || !getBoundingBox().inflate(CLAW_REACH).intersects(target.getBoundingBox()))
+            return;
+        AttributeInstance attackDamage = getAttribute(Attributes.ATTACK_DAMAGE);
+        if (attackDamage == null) return;
+        attackDamage.addTransientModifier(CLAW_DAMAGE);
+        try {
+            super.doHurtTarget(target);
+        } finally {
+            attackDamage.removeModifier(CLAW_DAMAGE.getId());
+        }
+    }
+
+    @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt(VARIANT_TAG, getVariant());
@@ -100,6 +148,6 @@ public final class Crawdad extends BaseWarriorMonster {
 
     @Override
     public int getCurrentSwingDuration() {
-        return 12;
+        return 20;
     }
 }

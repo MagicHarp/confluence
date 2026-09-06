@@ -8,23 +8,33 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.IVariant;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import org.confluence.mod.common.entity.ai.bt.BTNode;
+import org.confluence.mod.common.entity.ai.bt.BTRoot;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
-public class Butterfly extends Bird implements VariantHolder<Butterfly.Variant> {
+public class Butterfly extends BaseFlyingCritter implements VariantHolder<Butterfly.Variant> {
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Butterfly.class, EntityDataSerializers.INT);
     public static final String VARIANT_KEY = "Variant";
-    private static final Variant[] COMMON_SPAWN_VARIANTS = {
-            Variant.JULIA, Variant.MONARCH, Variant.PURPLE_EMPEROR, Variant.RED_ADMIRAL,
-            Variant.SULPHUR, Variant.TREE_NYMPH, Variant.ULYSSES, Variant.ZEBRA_SWALLOWTAIL
-    };
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.JULIA, 399)
+            .add(Variant.MONARCH, 399)
+            .add(Variant.PURPLE_EMPEROR, 399)
+            .add(Variant.RED_ADMIRAL, 399)
+            .add(Variant.SULPHUR, 399)
+            .add(Variant.TREE_NYMPH, 399)
+            .add(Variant.ULYSSES, 399)
+            .add(Variant.ZEBRA_SWALLOWTAIL, 399)
+            .add(Variant.GOLD, 8)
+            .build();
 
     public Butterfly(EntityType<? extends Butterfly> type, Level level) {
         super(type, level);
@@ -42,7 +52,7 @@ public class Butterfly extends Bird implements VariantHolder<Butterfly.Variant> 
 
     @Override
     public Variant getVariant() {
-        return CritterVariantUtil.byId(Variant.values(), this.entityData.get(DATA_VARIANT), Variant.RED_ADMIRAL);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     @Override
@@ -71,7 +81,17 @@ public class Butterfly extends Bird implements VariantHolder<Butterfly.Variant> 
 
     @Override
     protected void initializeSpawnVariant() {
-        setVariant(CritterVariantUtil.withRareVariant(random, COMMON_SPAWN_VARIANTS, Variant.GOLD));
+        setVariant(SPAWN_VARIANTS.select(random));
+    }
+
+    @Override
+    protected BTRoot createBT() {
+        return new BTRoot() {
+            @Override
+            protected BTNode createTree() {
+                return withPassivePanic(createEnemyAvoidingFlyingRoutine(), 1.25D);
+            }
+        };
     }
 
     @Override
@@ -79,11 +99,6 @@ public class Butterfly extends Bird implements VariantHolder<Butterfly.Variant> 
 
     @Override
     public ResourceLocation getTexturePath() {return getVariant().texturePath();}
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        registerFlyOnlyController(controllers);
-    }
 
     public enum Variant implements IVariant {
         JULIA,
@@ -97,6 +112,7 @@ public class Butterfly extends Bird implements VariantHolder<Butterfly.Variant> 
         GOLD;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), RED_ADMIRAL);
 
         @Override
         public String getSerializedName() {

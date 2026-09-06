@@ -15,10 +15,7 @@ import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.gui.hud.TerraStyleArmorHud;
-import org.confluence.mod.client.gui.hud.TerraStyleFoodHud;
-import org.confluence.mod.client.gui.hud.TerraStyleHealthHud;
-import org.confluence.mod.client.gui.hud.TerraStyleManaHud;
+import org.confluence.mod.client.gui.hud.*;
 import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeMenu;
 import org.confluence.mod.common.init.ModTags;
@@ -47,6 +44,8 @@ public final class ClientConfigs {
     public static boolean achievementToast = true;
     public static SellPriceDisplay sellPriceDisplay = SellPriceDisplay.EVERYWHERE;
     public static int customTitle = 71;
+    public static CustomBossBarRenderer.Style bossBarStyle = CustomBossBarRenderer.Style.STATIC;
+    public static boolean bossBarNumbersVisible = true;
 
     public static boolean terraStyleHealth = true;
     public static TerraStyleHealthHud.Health healthStyle = TerraStyleHealthHud.Health.OVERLAY;
@@ -88,6 +87,8 @@ public final class ClientConfigs {
     private static BooleanValue ACHIEVEMENT_TOAST;
     private static EnumValue<SellPriceDisplay> SELL_PRICE_DISPLAY;
     private static IntValue CUSTOM_TITLE;
+    private static EnumValue<CustomBossBarRenderer.Style> BOSS_BAR_STYLE;
+    private static BooleanValue BOSS_BAR_NUMBERS_VISIBLE;
 
     private static BooleanValue TERRA_STYLE_HEALTH;
     private static EnumValue<TerraStyleHealthHud.Health> HEALTH_STYLE;
@@ -130,6 +131,8 @@ public final class ClientConfigs {
         achievementToast = ACHIEVEMENT_TOAST.get();
         sellPriceDisplay = SELL_PRICE_DISPLAY.get();
         customTitle = CUSTOM_TITLE.get();
+        bossBarStyle = BOSS_BAR_STYLE.get();
+        bossBarNumbersVisible = BOSS_BAR_NUMBERS_VISIBLE.get();
 
         terraStyleHealth = TERRA_STYLE_HEALTH.get();
         healthStyle = HEALTH_STYLE.get();
@@ -182,6 +185,13 @@ public final class ClientConfigs {
         }
         {
             builder.push("HUD");
+            {
+                builder.push("Boss");
+                BOSS_BAR_STYLE = builder.defineEnum("bossBarStyle", CustomBossBarRenderer.Style.STATIC);
+                BOSS_BAR_NUMBERS_VISIBLE = builder.comment("Show exact health values on custom boss bars.")
+                        .define("bossBarNumbersVisible", true);
+                builder.pop();
+            }
             {
                 builder.push("Health");
                 TERRA_STYLE_HEALTH = builder.define("terraStyleHealth", true);

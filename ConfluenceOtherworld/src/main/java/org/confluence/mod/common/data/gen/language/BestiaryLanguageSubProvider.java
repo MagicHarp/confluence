@@ -299,7 +299,7 @@ public class BestiaryLanguageSubProvider implements LanguageSubProvider {
         add("bestiary.entity.confluence.purple_slime.desc", "A simple, gelatinous creature that swallows anything and everything whole! It takes a long time to digest anything.");
         add("bestiary.entity.confluence.pink_slime.desc", "The smallest slime ever recorded, their extreme cellular density makes them incredibly durable for their small size. They eat money.");
         add("bestiary.entity.confluence.golden_slime.desc", "Legends tell of a slime that has gorged itself on countless coins, a symbol of wealth and fortune.");
-        add("bestiary.entity.confluence.honey_slime.desc", "Some wasps discovered that slimes accidentally fallen into honey taste far more delicious, so swarms raise these slimes on occasion.");
+        add("bestiary.entity.confluence.sweet_slime.desc", "Some wasps discovered that slimes accidentally fallen into honey taste far more delicious, so swarms raise these slimes on occasion.");
         add("bestiary.entity.confluence.swamp_slime.desc", "So many people have been trapped in the swamp that the native slimes here look particularly horrifying.");
         add("bestiary.entity.confluence.green_dumpling_slime.desc", "Slimes that have devoured various medicinal herbs and mugwort appear during a specific festival of the year.");
         add("bestiary.entity.confluence.spiked_slime.desc", "The King Slime splits off more aggressive individuals to protect itself. They hurl out their distinctive hardened spikes.");
@@ -1081,7 +1081,7 @@ public class BestiaryLanguageSubProvider implements LanguageSubProvider {
         add("bestiary.entity.confluence.purple_slime.desc", "紫史莱姆是简单的胶状生物，见到任何东西都会整个吞下！但消化过程需要很长时间。");
         add("bestiary.entity.confluence.pink_slime.desc", "粉史莱姆是有记录以来最小的史莱姆，其极高的细胞密度让小巧的体型拥有了惊人的耐用性。它们以钱币为食。");
         add("bestiary.entity.confluence.golden_slime.desc", "传说世界上有一种吃了太多钱币的史莱姆，是财富与运气的象征。");
-        add("bestiary.entity.confluence.honey_slime.desc", "有的黄蜂发现，不小心掉入蜂蜜中的史莱姆会变得更加可口。于是蜂群有时候会养殖这种史莱姆。");
+        add("bestiary.entity.confluence.sweet_slime.desc", "有的黄蜂发现，不小心掉入蜂蜜中的史莱姆会变得更加可口。于是蜂群有时候会养殖这种史莱姆。");
         add("bestiary.entity.confluence.swamp_slime.desc", "由于陷入沼泽的人不在少数，导致了这里的原生史莱姆看上去特别骇人。");
         add("bestiary.entity.confluence.green_dumpling_slime.desc", "吞噬了各种草药和艾草的史莱姆，会在一年中特定的节日中出现。");
         add("bestiary.entity.confluence.spiked_slime.desc", "史莱姆王分裂出更具有攻击性的个体以保护自己。它们会发射出独特的硬化尖刺。");

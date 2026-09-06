@@ -64,15 +64,14 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
         return BaseFlyingMonster.createFlyingAttributes().add(Attributes.ATTACK_DAMAGE, 18.0).add(Attributes.KNOCKBACK_RESISTANCE, 0.0);
     }
 
-    /// 恶魔眼始终使用飞行物理。这里直接返回无重力语义，与 1.21 侧一致，避免命令生成或
+    /// 恶魔眼始终使用飞行物理。这里直接返回无重力语义，避免命令生成或
     /// NBT 读取覆盖实体标志后先坠落到地面，再由飞行行为勉强拉回目标高度。
     @Override
     public boolean isNoGravity() {
         return true;
     }
 
-    /// 1.21 的恶魔眼没有接入 {@code AbstractMonster}，结果只有绕飞而没有任何伤害入口。
-    /// 这里保留其运动与朝向，但补回泰拉敌怪应有的身体碰撞伤害。
+    /// 恶魔眼通过身体碰撞造成伤害，不能只实现绕飞而缺少伤害入口。
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
@@ -227,8 +226,6 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
             return large;
         }
 
-        public int textureIndex() { return ordinal() / 2; }
-
         @Override
         public Codec<Variant> codec() {
             return CODEC;
@@ -246,8 +243,17 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
 
         @Override
         public ResourceLocation texturePath() {
-            String[] names = {"normal", "cataract", "sleepy", "dilated", "green", "purple", "owl", "spaceship"};
-            return Confluence.asResource("textures/entity/demon_eye/" + names[textureIndex()] + ".png");
+            String textureName = switch (this) {
+                case NORMAL, NORMAL_BIG -> "normal";
+                case CATARACT, CATARACT_BIG -> "cataract";
+                case SLEEPY, SLEEPY_BIG -> "sleepy";
+                case DILATED, DILATED_SMALL -> "dilated";
+                case GREEN, GREEN_SMALL -> "green";
+                case PURPLE, PURPLE_BIG -> "purple";
+                case OWL -> "owl";
+                case SPACESHIP -> "spaceship";
+            };
+            return Confluence.asResource("textures/entity/demon_eye/" + textureName + ".png");
         }
 
         public ResourceLocation animationPath() {

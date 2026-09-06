@@ -2,6 +2,7 @@ package org.confluence.mod.common.entity.animal;
 
 import PortLib.extensions.com.mojang.serialization.DataResult.PortDataResultExtension;
 import com.mojang.serialization.Codec;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -10,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,6 +38,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
 /// 使用原版 {@link Rabbit} 的导航、跳跃控制和行为，只扩展本模组的外观与待机动画。
 public class Bunny extends Rabbit implements GeoEntity {
@@ -46,7 +49,10 @@ public class Bunny extends Rabbit implements GeoEntity {
     private static final RawAnimation WATCH_2 = RawAnimation.begin().thenPlay("watch_2");
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
-    private static final Variant[] COMMON_SPAWN_VARIANTS = {Variant.NORMAL};
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.NORMAL, 399)
+            .add(Variant.GOLD, 1)
+            .build();
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int idleTicks;
@@ -65,7 +71,7 @@ public class Bunny extends Rabbit implements GeoEntity {
     }
 
     public Variant getBunnyVariant() {
-        return CritterVariantUtil.byId(Variant.values(), entityData.get(DATA_VARIANT), Variant.NORMAL);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     public void setBunnyVariant(Variant variant) {
@@ -88,27 +94,33 @@ public class Bunny extends Rabbit implements GeoEntity {
     }
 
     protected void initializeSpawnVariant() {
-        setBunnyVariant(CritterVariantUtil.withRareVariant(random, COMMON_SPAWN_VARIANTS, Variant.GOLD));
+        setBunnyVariant(SPAWN_VARIANTS.select(random));
     }
 
     @Override
     public void tick() {
         super.tick();
+        if (level().isClientSide && tickCount % 5 == 0 && getBunnyVariant() == Variant.GOLD) {
+            level().addParticle(ParticleTypes.ELECTRIC_SPARK, getRandomX(0.8), getRandomY(), getRandomZ(0.8), 0.0, 0.01, 0.0);
+        }
         --watchTicksRemaining;
         if (level().isClientSide) return;
         if (!navigation.isDone()) {
             idleTicks = 0;
+            if (watchTicksRemaining >= 0) {
+                watchTicksRemaining = -1;
+                entityData.set(DATA_WATCH_STATE, -1);
+            }
         } else {
             ++idleTicks;
             if (idleTicks % 100 == 99) nextWatchTick = tickCount + random.nextInt(20);
             if (tickCount == nextWatchTick) beginWatchCycle(50 + 1000 * random.nextInt(2));
         }
-        if (watchTicksRemaining >= 0) navigation.stop();
     }
 
     private void beginWatchCycle(int encodedDuration) {
-        watchTicksRemaining = encodedDuration;
         watchAnimationType = encodedDuration / 1000;
+        watchTicksRemaining = encodedDuration % 1000;
         entityData.set(DATA_WATCH_STATE, encodedDuration);
     }
 
@@ -188,6 +200,7 @@ public class Bunny extends Rabbit implements GeoEntity {
         CORRUPT, VICIOUS, EXPLOSIVE;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), NORMAL);
 
         @Override
         public String getSerializedName() {

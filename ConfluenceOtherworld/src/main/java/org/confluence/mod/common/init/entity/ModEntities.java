@@ -266,9 +266,45 @@ public final class ModEntities {
                     .build(id.toString()));
     public static final RegistryObject<EntityType<HostileParticleProjectile>> DARK_CASTER_PROJECTILE = register("dark_caster_projectile",
             id -> EntityType.Builder.<HostileParticleProjectile>of(
-                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.DARK_CASTER),
+                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.WATER_SPHERE),
                             MobCategory.MISC)
                     .sized(0.5F, 0.5F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .build(id.toString()));
+    public static final RegistryObject<EntityType<HostileParticleProjectile>> CHAOS_BALL_PROJECTILE = register("chaos_ball_projectile",
+            id -> EntityType.Builder.<HostileParticleProjectile>of(
+                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.CHAOS_BALL),
+                            MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .build(id.toString()));
+    public static final RegistryObject<EntityType<HostileParticleProjectile>> SHADOW_BEAM_PROJECTILE = register("shadow_beam_projectile",
+            id -> EntityType.Builder.<HostileParticleProjectile>of(
+                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.SHADOW_BEAM),
+                            MobCategory.MISC)
+                    .sized(0.35F, 0.35F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .build(id.toString()));
+    public static final RegistryObject<EntityType<HostileParticleProjectile>> INFERNO_BOLT_PROJECTILE = register("inferno_bolt_projectile",
+            id -> EntityType.Builder.<HostileParticleProjectile>of(
+                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.INFERNO_BOLT),
+                            MobCategory.MISC)
+                    .sized(0.6F, 0.6F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .build(id.toString()));
+    public static final RegistryObject<EntityType<HostileParticleProjectile>> LOST_SOUL_PROJECTILE = register("lost_soul_projectile",
+            id -> EntityType.Builder.<HostileParticleProjectile>of(
+                            (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.LOST_SOUL),
+                            MobCategory.MISC)
+                    .sized(0.45F, 0.45F)
                     .clientTrackingRange(10)
                     .updateInterval(1)
                     .noSave()

@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeMenu;
 import org.confluence.mod.common.init.entity.NpcEntities;
-import org.confluence.mod.common.init.item.ModItems;
 import org.confluence.mod.network.c2s.OpenMenuPacketC2S;
 import org.lwjgl.glfw.GLFW;
 
@@ -123,11 +122,8 @@ public final class NPCTradeScreen extends AbstractContainerScreen<NPCTradeMenu> 
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
-        int sellX = leftPos + 152;
-        int sellY = topPos + 72;
-        graphics.renderFakeItem(ModItems.GOLD_COIN.toStack(), sellX, sellY);
         renderTooltip(graphics, mouseX, mouseY);
-        if (mouseX >= sellX && mouseX < sellX + 16 && mouseY >= sellY && mouseY < sellY + 16) {
+        if (!menu.getCarried().isEmpty() && hoveredSlot != null && hoveredSlot.index < 36 && !hoveredSlot.hasItem()) {
             graphics.renderTooltip(font, Component.translatable("gui.confluence.sell"), mouseX, mouseY);
         }
     }

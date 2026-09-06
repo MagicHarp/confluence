@@ -14,17 +14,20 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.Ocelot;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
@@ -146,8 +149,6 @@ public class BloodySpore extends BaseMonster {
                         SequenceNode.of(new HasTargetCondition(BloodySpore.this),
                                 new MoveToTargetAction(BloodySpore.this, 1.0, 3.0),
                                 new SwellAndBurstAction()),
-                        new VanillaGoalAction(new AvoidEntityGoal<>(BloodySpore.this, Ocelot.class, 6.0F, 1.0, 1.2)),
-                        new VanillaGoalAction(new AvoidEntityGoal<>(BloodySpore.this, Cat.class, 6.0F, 1.0, 1.2)),
                         new VanillaGoalAction(new MeleeAttackGoal(BloodySpore.this, 1.0, false)),
                         new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(BloodySpore.this, 0.8)),
                         new VanillaGoalAction(new LookAtPlayerGoal(BloodySpore.this, Player.class, 8.0F)),
@@ -197,12 +198,17 @@ public class BloodySpore extends BaseMonster {
         serverLevel.explode(this, getX(), getY(), getZ(), 4.2F * multiplier, Level.ExplosionInteraction.NONE);
         int count = random.nextInt(2, 4) * multiplier;
         float offset = random.nextFloat() * 2.0F;
+        var target = getTarget();
         for (int index = 0; index < count; index++) {
             Entity tumor = MonsterEntities.BLOOD_TUMORS.get().create(serverLevel);
             if (tumor == null) continue;
             tumor.setPos(position());
             double angle = offset * index * Math.PI;
             tumor.setDeltaMovement(new Vec3(Math.sin(angle) * 0.3, random.nextDouble() * 0.5 + 0.2, Math.cos(angle) * 0.3));
+            if (tumor instanceof Mob mob && target != null && target.isAlive()) {
+                mob.setTarget(target);
+                BossMinionCoordinator.faceTargetImmediately(mob, target);
+            }
             if (!serverLevel.addFreshEntity(tumor)) tumor.discard();
         }
         discard();

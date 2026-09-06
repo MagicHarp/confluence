@@ -38,6 +38,8 @@ public final class LivingInvulnerableEffectsSubProvider {
                 // TODO 歪尾真菌 蚁狮 蚁狮马/巨型蚁狮马 蚁狮幼虫
                 .add(MonsterEntities.LITTLE_HORNET, MobEffects.POISON, LibEffects.CONFUSED.get())
                 .add(MonsterEntities.BLACK_SLIME, MobEffects.POISON)
+                .add(MonsterEntities.MOTHER_SLIME, MobEffects.POISON)
+                .add(MonsterEntities.BABY_SLIME, MobEffects.POISON)
                 .add(MonsterEntities.BLOOD_CRAWLER, MobEffects.POISON)
                 .add(MonsterEntities.BLUE_JELLYFISH, LibEffects.CONFUSED)
                 .add(MonsterEntities.PINK_JELLYFISH, LibEffects.CONFUSED)
@@ -51,13 +53,14 @@ public final class LivingInvulnerableEffectsSubProvider {
                 .add(MonsterEntities.CRAWDAD, LibEffects.CONFUSED)
                 .add(CritterEntities.CRAB, LibEffects.CONFUSED)
                 .add(MonsterEntities.CURSED_SKULL, MobEffects.POISON, LibEffects.CONFUSED.get())
-                .add(BossEntities.DUNGEON_GUARDIAN, new AnyHolderSet<>(provider.lookupOrThrow(Registries.MOB_EFFECT)), LivingInvulnerableEffects.Category.HARMFUL)
+                .add(BossEntities.DUNGEON_GUARDIAN, new AnyHolderSet<>(provider.lookupOrThrow(Registries.MOB_EFFECT)), LivingInvulnerableEffects.Category.HARMFUL_EXCEPT_WHIP_TAG)
                 .add(MonsterEntities.DUNGEON_SLIME, MobEffects.POISON)
                 .add(MonsterEntities.EATER_OF_SOULS, LibEffects.CONFUSED)
                 .add(MonsterEntities.FACE_MONSTER, MobEffects.POISON)
                 .add(MonsterEntities.FIRE_IMP, LibEffects.CONFUSED, ModEffects.HELLFIRE)
                 // TODO 冰冻僵尸 真菌球怪
                 .add(MonsterEntities.GHOST, ModEffects.ACID_VENOM, ModEffects.FROSTBITE, ModEffects.SHADOWFLAME, LibEffects.CONFUSED, ModEffects.ICHOR, poison, ModEffects.FROST_BURN, ModEffects.HELLFIRE) //TODO 涂油 破晓
+                .add(MonsterEntities.WRAITH, new AnyHolderSet<>(provider.lookupOrThrow(Registries.MOB_EFFECT)), LivingInvulnerableEffects.Category.HARMFUL_EXCEPT_WHIP_TAG)
                 .add(MonsterEntities.GIANT_SHELLY, LibEffects.CONFUSED)
                 .add(MonsterEntities.GIANT_WORM, LibEffects.CONFUSED)
                 // TODO 侏儒
@@ -76,6 +79,7 @@ public final class LivingInvulnerableEffectsSubProvider {
                 .add(MonsterEntities.MAN_EATER, MobEffects.POISON, LibEffects.CONFUSED.get())
                 .add(MonsterEntities.METEOR_HEAD, MobEffects.POISON, LibEffects.CONFUSED.get(), ModEffects.HELLFIRE.get())
                 .add(MonsterEntities.PINK_SLIME, MobEffects.POISON)
+                .add(MonsterEntities.PALADIN, LibEffects.CONFUSED)
                 .add(MonsterEntities.PIRANHA, LibEffects.CONFUSED)
                 .add(MonsterEntities.PURPLE_SLIME, MobEffects.POISON)
                 // TODO 乌鸦
@@ -111,12 +115,13 @@ public final class LivingInvulnerableEffectsSubProvider {
                 /*
                 TODO 猩红斧 诅咒锤 跳跳兽 沙漠幽魂 魔教徒 挖掘怪 沙虫 附魔剑 恶心浮游怪 腹足怪 巨型诅咒骷髅头 巨型真菌球怪 地狱装甲骷髅
                  弹跳杰克南瓜灯 冰雪精 冰雪陆龟 灵液黏黏怪 冰雪人鱼 夜明蝙蝠 夜明史莱姆 丛林蜘蛛 熔岩蝙蝠 丛林蜥蜴 火星探测器 蛇发女妖 苔藓黄蜂 蛾
-                  圣骑士 装甲幻影魔 褴褛邪教徒法师 红魔鬼 岩石巨人 符文巫师 生锈装甲骷髅 骷髅弓箭手 骷髅突击手 骷髅狙击手 小史莱姆 恶翅史莱姆
+                  装甲幻影魔 褴褛邪教徒法师 红魔鬼 岩石巨人 符文巫师 生锈装甲骷髅 骷髅弓箭手 骷髅突击手 骷髅狙击手 小史莱姆 恶翅史莱姆
                    恶翅史莱姆(无翅膀) 骷髅特警 毒泥 吞世怪
                  */
                 .add(MonsterEntities.WYVERN, LibEffects.CONFUSED)
                 .add(MonsterEntities.GREEN_DUMPLING_SLIME, MobEffects.POISON)
                 .add(MonsterEntities.GOLDEN_SLIME, ModEffects.SHIMMER)
+                .add(MonsterEntities.GASTROPOD, MobEffects.POISON)
                 .add(MonsterEntities.HERPLING, LibEffects.CONFUSED)
                 .add(MonsterEntities.DERPLING, LibEffects.CONFUSED)
                 .add(MonsterEntities.SAND_POACHER, MobEffects.POISON)

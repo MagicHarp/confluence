@@ -41,7 +41,8 @@ final class HungryMovementAction extends BTNode {
 
         Vec3 forward;
         if (free) {
-            forward = direction.scale(0.3125);
+            // 自由饿鬼已经脱离系绳，不再叠加旧锚点方向；无目标时保持悬停。
+            forward = Vec3.ZERO;
         } else {
             double sine = hungry.tickCount * 0.15 * frequencyMultiplier;
             double shakeMultiplier = targetInRange ? 0.3 : 1.0;
@@ -73,13 +74,12 @@ final class HungryMovementAction extends BTNode {
 
     private Vec3 pursuitVelocity(LivingEntity target, Vec3 anchor, boolean free, boolean targetInRange) {
         Vec3 targetPosition = BossMinionCoordinator.predict(target, 4.0D, 3.0D);
-        hungry.getLookControl().setLookAt(target, 200.0F, 85.0F);
-        hungry.lookAt(target, 200.0F, 85.0F);
         Vec3 towardTarget = targetPosition.subtract(hungry.position()).normalize();
+        if (free) return towardTarget.scale(1.15);
         Vec3 towardAnchor = anchor.subtract(hungry.position()).normalize();
         Vec3 mixed = towardTarget.add(towardAnchor.scale(0.3)).normalize();
-        if (!free) direction = direction.lerp(targetPosition.subtract(anchor).normalize(), 0.3);
-        return mixed.scale(free ? 1.15 : 1.15 * (targetInRange ? 2.0 : 1.0));
+        direction = direction.lerp(targetPosition.subtract(anchor).normalize(), 0.3);
+        return mixed.scale(1.15 * (targetInRange ? 2.0 : 1.0));
     }
 
     private void updateIdleDirection(BaseBoss owner) {
@@ -101,8 +101,6 @@ final class HungryMovementAction extends BTNode {
 
     private void updateRotation(Vec3 velocity) {
         if (velocity.lengthSqr() < 1.0E-8) return;
-        double horizontal = Math.hypot(velocity.x, velocity.z);
-        hungry.setYRot((float) (Math.atan2(velocity.z, velocity.x) * 180.0 / Math.PI) - 90.0F);
-        hungry.setXRot((float) -(Math.atan2(velocity.y, horizontal) * 180.0 / Math.PI));
+        hungry.faceCombatDirection(velocity, 180.0F, 180.0F);
     }
 }

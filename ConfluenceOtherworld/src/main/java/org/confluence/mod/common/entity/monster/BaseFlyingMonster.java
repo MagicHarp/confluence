@@ -66,7 +66,7 @@ public abstract class BaseFlyingMonster extends BaseMonster {
 
     /// 指示具体实体是否保留普通生物的推动行为。
     ///
-    /// 通用飞行预制体默认不可推动，但妖精、黄蜂及部分穿墙生物并未使用该预制体，
+    /// 通用飞行预制体默认不可推动；妖精、黄蜂及部分穿墙生物通过覆盖本方法保留推动，
     /// 因此不能在公共飞行基类中统一抹平差异。
     protected boolean hasPushableBody() {
         return false;

@@ -16,7 +16,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +40,7 @@ import org.confluence.mod.common.attachment.EverBeneficial;
 import org.confluence.mod.common.attachment.ExtraInventory;
 import org.confluence.mod.common.attachment.ManaStorage;
 import org.confluence.mod.common.block.functional.enemybanner.AbstractEnemyBannerBlock;
-import org.confluence.mod.common.data.entity.CreatureDefinitionLoader;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.data.map.GamePhase2AttributeModifiers;
 import org.confluence.mod.common.data.map.LivingInvulnerableEffects;
 import org.confluence.mod.common.data.saved.Bestiary;
@@ -241,7 +240,7 @@ public final class LivingEntityEvents {
         }
         if (!(attacker instanceof BaseBoss boss) || boss == victim) return;
 
-        double multiplier = CreatureDefinitionLoader.get(boss.getType()).boss().damageMultiplierOr(1.0D) * CommonConfigs.BOSS_ATTRIBUTES_MULTIPLIER_DAMAGE.get();
+        double multiplier = CreatureDefinition.get(boss.getType()).boss().damageMultiplierOr(1.0D) * CommonConfigs.BOSS_ATTRIBUTES_MULTIPLIER_DAMAGE.get();
         if (multiplier != 1.0D) {
             event.setAmount((float) Math.max(0.0D, event.getAmount() * multiplier));
         }
@@ -512,13 +511,12 @@ public final class LivingEntityEvents {
                 mob.addTag("undead_miner");
                 event.setCanceled(true);
             }
-        } else if (event.getSpawnType() == MobSpawnType.NATURAL && mob instanceof Slime slime) {
-            if ((ModSecretSeeds.CELEBRATIONMK10.match() || ModSecretSeeds.GET_FIXED_BOI.match()) && mob.getRandom().nextInt(140) == 1) {
-                event.setCanceled(true);
+        } else if (event.getSpawnType() == MobSpawnType.NATURAL && mob.getType().is(ModTags.EntityTypes.GOLDEN_SLIME_REPLACEABLE)) {
+            if ((ModSecretSeeds.CELEBRATIONMK10.match() || ModSecretSeeds.GET_FIXED_BOI.match()) && mob.getRandom().nextInt(180) == 0) {
                 GoldenSlime goldenSlime = MonsterEntities.GOLDEN_SLIME.get().create(level);
                 if (goldenSlime != null) {
-                    goldenSlime.moveTo(slime.getX(), slime.getY(), slime.getZ(), slime.getYRot(), slime.getXRot());
-                    level.addFreshEntity(goldenSlime);
+                    goldenSlime.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                    if (level.addFreshEntity(goldenSlime)) event.setCanceled(true);
                 }
             }
         }/* else if (type == CritterEntities.WORM.get()) {

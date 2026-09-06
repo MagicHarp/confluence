@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
@@ -20,7 +21,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
-/// 尖刺史莱姆 —— 有目标时发射 8 方向尖刺并跳跃追击。
+/// 尖刺史莱姆的跳跃与射击公共状态机。
 public class SpikedSlime extends BaseSlime {
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
     private static final RawAnimation JUMP = RawAnimation.begin().thenPlay("jump");
@@ -28,11 +29,11 @@ public class SpikedSlime extends BaseSlime {
     private static final double CLOSE_ATTACK_DISTANCE = 7.0;
 
     public SpikedSlime(EntityType<? extends BaseSlime> type, Level level) {
-        this(type, level, 0x4B6E8C, false);
+        this(type, level, false);
     }
 
-    protected SpikedSlime(EntityType<? extends BaseSlime> type, Level level, int color, boolean passiveByDay) {
-        super(type, level, color, passiveByDay);
+    protected SpikedSlime(EntityType<? extends BaseSlime> type, Level level, boolean passiveByDay) {
+        super(type, level, passiveByDay);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -51,8 +52,8 @@ public class SpikedSlime extends BaseSlime {
         return SlimeSpikeEntity.Variant.NORMAL;
     }
 
-    /// 丛林尖刺史莱姆可在远距离跳跃前偶尔补射一发；普通与冰雪变体保持纯追击。
-    protected boolean canFireDistantSingleSpike() {
+    /// 是否使用生态尖刺史莱姆的难度分层射击方式。
+    protected boolean usesBiomeSpikePattern() {
         return false;
     }
 
@@ -74,8 +75,9 @@ public class SpikedSlime extends BaseSlime {
         double baseAngle = random.nextDouble() * Math.PI * 2.0;
         double verticalAngle = random.nextDouble() * 0.3 + 0.05;
         double horizontalScale = Math.cos(verticalAngle);
-        for (int i = 0; i < spikeCount(); i++) {
-            double angle = baseAngle + Math.PI * 2.0 * i / spikeCount();
+        int count = usesBiomeSpikePattern() ? 6 + random.nextInt(3) : spikeCount();
+        for (int i = 0; i < count; i++) {
+            double angle = baseAngle + Math.PI * 2.0 * i / count;
             SlimeSpikeEntity spike = SlimeSpikeEntity.create(level(), this, ModEntities.SLIME_SPIKE.get(), Math.cos(angle) * horizontalScale, Math.sin(verticalAngle), Math.sin(angle) * horizontalScale, 0.3F, 1.0F, spikeDamage(), spikeVariant(), true);
             spike.setPos(getBoundingBox().getCenter().offsetRandom(random, 0.2F));
             level().addFreshEntity(spike);
@@ -98,10 +100,10 @@ public class SpikedSlime extends BaseSlime {
         hasImpulse = true;
     }
 
-    /// 复刻 1.21 的尖刺史莱姆战斗时序。
+    /// 执行尖刺史莱姆的战斗时序。
     ///
-    /// 近距离先瞄准二十刻，再蓄力五刻并以三刻间隔发射三轮八向弹幕；远距离
-    /// 瞄准后蓄力跳向目标。目标在动作中途失效时立即失败，由选择节点重新决策。
+    /// 普通尖刺史莱姆近距离发射三轮八向弹幕；丛林和冰雪变体在经典模式瞄准单发，
+    /// 专家及以上难度近距离改为一次六至八向环射。目标失效时立即重新决策。
     private final class CombatAction extends BTNode {
         private int tick;
         private boolean closeRange;
@@ -114,13 +116,14 @@ public class SpikedSlime extends BaseSlime {
         public void start() {
             tick = 0;
             LivingEntity target = getTarget();
-            closeRange = target != null && distanceToSqr(target) < CLOSE_ATTACK_DISTANCE * CLOSE_ATTACK_DISTANCE;
+            boolean expert = LibUtils.isAtLeastExpert(level(), blockPosition());
+            closeRange = target != null && distanceToSqr(target) < CLOSE_ATTACK_DISTANCE * CLOSE_ATTACK_DISTANCE
+                    && (!usesBiomeSpikePattern() || expert);
             if (!closeRange) {
-                distantShotBranch = canFireDistantSingleSpike() && random.nextInt(3) == 0;
-                int extraWait = canFireDistantSingleSpike() && !distantShotBranch ? 4 : 0;
-                distantTriggerTick = 20 + extraWait;
-                distantJumpTick = 29 + extraWait;
-                distantFinishTick = 38 + extraWait;
+                distantShotBranch = usesBiomeSpikePattern();
+                distantTriggerTick = 20;
+                distantJumpTick = 29;
+                distantFinishTick = 38;
             }
         }
 
@@ -133,14 +136,15 @@ public class SpikedSlime extends BaseSlime {
             tick++;
 
             if (tick <= 20) {
-                getLookControl().setLookAt(target, 30.0F, 30.0F);
+                faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
             }
 
             if (closeRange) {
                 if (tick == 20) {
                     triggerAnim("Controller", "attack");
                 }
-                if (tick == 24 || tick == 26 || tick == 28) {
+                if ((usesBiomeSpikePattern() && tick == 24)
+                        || (!usesBiomeSpikePattern() && (tick == 24 || tick == 26 || tick == 28))) {
                     fireRadialVolley();
                 }
                 return tick >= 49 ? BTStatus.SUCCESS : BTStatus.RUNNING;
@@ -156,6 +160,7 @@ public class SpikedSlime extends BaseSlime {
                 triggerAnim("Controller", "jump");
             }
             if (tick == distantJumpTick) {
+                faceCombatPosition(target.getEyePosition(), 180.0F, 180.0F);
                 jumpToward(target);
             }
             return tick >= distantFinishTick ? BTStatus.SUCCESS : BTStatus.RUNNING;

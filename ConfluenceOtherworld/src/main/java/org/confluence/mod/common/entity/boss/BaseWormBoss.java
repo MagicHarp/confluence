@@ -3,12 +3,12 @@ package org.confluence.mod.common.entity.boss;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.common.entity.ai.WormChainTrail;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -26,7 +26,6 @@ import java.util.List;
 /// 蠕虫型 Boss 基类。穿透方块移动，体节跟随。
 public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     protected final List<BossWormPart> segments = new ArrayList<>();
-    private final WormChainTrail segmentTrail = new WormChainTrail();
 
     public BaseWormBoss(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -119,6 +118,25 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
         return hurt(source, amount);
     }
 
+    protected final void indicateChainHurt() {
+        for (BossWormPart segment : segments) segment.indicateHurt();
+    }
+
+    public boolean sharesHurtAnimation() {return true;}
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return !(target instanceof WormSegment) && super.canAttack(target);
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (WormSegment.isWormDamage(source)) return false;
+        boolean accepted = super.hurt(source, amount);
+        if (accepted && sharesHurtAnimation() && !level().isClientSide) indicateChainHurt();
+        return accepted;
+    }
+
     @Override
     public void onAddedToWorld() {
         super.onAddedToWorld();
@@ -126,6 +144,7 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     }
 
     public void initSegments() {
+        if (!isAlive()) return;
         int expectedCount = Math.max(0, getSegmentCount());
         if (expectedCount == 0) {
             discardSegments();
@@ -134,7 +153,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
 
         if (segments.isEmpty()) {
             spawnCompleteSegmentChain(expectedCount);
-            segmentTrail.invalidate();
             return;
         }
 
@@ -143,7 +161,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
         if (segments.size() != expectedCount) {
             discardSegments();
             spawnCompleteSegmentChain(expectedCount);
-            segmentTrail.invalidate();
             return;
         }
 
@@ -217,7 +234,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
             if (!part.isRemoved()) part.discard();
         }
         segments.clear();
-        segmentTrail.invalidate();
     }
 
     @Nullable
@@ -243,25 +259,25 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
 
     @Override
     public void tick() {
+        if (isDeadOrDying()) setDeltaMovement(Vec3.ZERO);
         super.tick();
-        if (isRemoved()) return;
+        if (!isAlive()) return;
         if (!level().isClientSide) {
             initSegments();
             /// 头部完成本 tick 移动后立即按链表顺序刷新全部体节。不能依赖各体节
             /// 自己的实体 tick 顺序，否则当世界先 tick 身体、后 tick 头部时，
             /// 帧末相邻间距会额外叠加一次头部位移并产生明显拉伸。
-            updateSegmentsAlongTrail();
+            updateSegmentChain();
         }
     }
 
-    /// 子类若在 {@code super.tick()} 后直接提交头部位移，可再次调用以消费该段新轨迹。
-    protected final void updateSegmentsAlongTrail() {
-        List<WormChainTrail.Sample> chainPositions = segmentTrail.sample(position(), segments, getEffectiveSegmentSpacing());
-        for (int index = 0; index < segments.size(); index++) {
-            WormChainTrail.Sample sample = chainPositions.get(index);
-            segments.get(index).moveToChainPosition(sample.position());
-            segments.get(index).orientAlongChain(sample.tangent());
-        }
+    /// 子类若在 {@code super.tick()} 后直接提交头部位移，可再次调用以刷新体节链。
+    protected final void updateSegmentChain() {
+        if (!isAlive()) return;
+        // 位置先按中心点定长约束，朝向随后由相邻中心统一计算，避免急转时
+        // 一节已经转向而后一节仍停留在另一套历史轨迹上。
+        for (BossWormPart segment : segments) segment.updateSegmentPosition();
+        for (BossWormPart segment : segments) segment.updateSegmentRotation();
     }
 
     @Override
@@ -270,7 +286,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
         for (BossWormPart segment : segments) {
             if (!segment.isRemoved()) segment.refreshDimensions();
         }
-        segmentTrail.invalidate();
     }
 
     @Override
@@ -280,12 +295,19 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return source == damageSources().inWall() || super.isInvulnerableTo(source);
+        return WormSegment.isWormDamage(source) || source == damageSources().inWall() || super.isInvulnerableTo(source);
     }
 
     @Override
     public boolean isPushable() {
         return false;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        // 保留父类掉落和击败结算，但不延迟清理死亡链条。
+        if (!isAlive() && !level().isClientSide) discardSegments();
     }
 
     @Override
@@ -301,7 +323,9 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     public @Nullable WormSegment getPrev() {return null;}
 
     @Override
-    public @Nullable WormSegment getNext() {return getSegment(1);}
+    public @Nullable WormSegment getNext() {
+        return getSegment(1);
+    }
 
     @Override
     public void updateSegmentPosition() {}

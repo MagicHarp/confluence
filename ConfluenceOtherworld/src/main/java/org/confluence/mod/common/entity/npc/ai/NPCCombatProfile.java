@@ -3,7 +3,7 @@ package org.confluence.mod.common.entity.npc.ai;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.npc.BaseNPC;
 
 import java.util.function.Function;
@@ -57,7 +57,7 @@ public record NPCCombatProfile(Function<BaseNPC, Item> weapon, Attack attack,
         void perform(BaseNPC npc, LivingEntity target, Values values);
     }
 
-    /// 注册时写入实体 Attribute 的默认值；同名 entity_definition 字段可在运行时覆盖。
+    /// 注册时写入实体 Attribute 的默认值；生物定义数据图中的同名字段可在运行时覆盖。
     public record AttributesDefaults(
             /// 最大生命值。
             double maxHealth,
@@ -72,7 +72,7 @@ public record NPCCombatProfile(Function<BaseNPC, Item> weapon, Attack attack,
             /// 取值范围为 0 到 1 的击退抗性。
             double knockbackResistance) {}
 
-    /// 公共自卫目标使用的默认行为参数；同名 entity_definition 字段可在运行时覆盖。
+    /// 公共自卫目标使用的默认行为参数；生物定义数据图中的同名字段可在运行时覆盖。
     public record BehaviorDefaults(
             /// 能够执行攻击策略的最大距离。
             double attackRange,
@@ -109,7 +109,7 @@ public record NPCCombatProfile(Function<BaseNPC, Item> weapon, Attack attack,
         private double maxHealth = 250;
         private double damage = 10;
         private double defense = 15;
-        private double movementSpeed = 0.3;
+        private double movementSpeed = 0.15;
         private double followRange = 24;
         private double knockbackResistance = 0.5;
         private double attackRange = 10;
@@ -125,73 +125,73 @@ public record NPCCombatProfile(Function<BaseNPC, Item> weapon, Attack attack,
             this.attack = attack;
         }
 
-        /// 设置默认最大生命；entity_definition 的 max_health 可覆盖该值。
+        /// 设置默认最大生命；生物定义数据图的 max_health 可覆盖该值。
         public Builder maxHealth(double value) {
             maxHealth = value;
             return this;
         }
 
-        /// 设置默认攻击伤害；entity_definition 的 attack_damage 可覆盖该值。
+        /// 设置默认攻击伤害；生物定义数据图的 attack_damage 可覆盖该值。
         public Builder damage(double value) {
             damage = value;
             return this;
         }
 
-        /// 设置默认防御；entity_definition 的 armor 可覆盖该值。
+        /// 设置默认防御；生物定义数据图的 armor 可覆盖该值。
         public Builder defense(double value) {
             defense = value;
             return this;
         }
 
-        /// 设置默认移动速度；entity_definition 的 movement_speed 可覆盖该值。
+        /// 设置默认移动速度；生物定义数据图的 movement_speed 可覆盖该值。
         public Builder movementSpeed(double value) {
             movementSpeed = value;
             return this;
         }
 
-        /// 设置默认索敌上限；entity_definition 的 follow_range 可覆盖该值。
+        /// 设置默认索敌上限；生物定义数据图的 follow_range 可覆盖该值。
         public Builder followRange(double value) {
             followRange = value;
             return this;
         }
 
-        /// 设置默认击退抗性；entity_definition 的 knockback_resistance 可覆盖该值。
+        /// 设置默认击退抗性；生物定义数据图的 knockback_resistance 可覆盖该值。
         public Builder knockbackResistance(double value) {
             knockbackResistance = value;
             return this;
         }
 
-        /// 设置默认攻击距离；entity_definition 的 attack_range 可覆盖该值。
+        /// 设置默认攻击距离；生物定义数据图的 attack_range 可覆盖该值。
         public Builder attackRange(double value) {
             attackRange = value;
             return this;
         }
 
-        /// 设置默认后撤距离；0 可关闭后撤，entity_definition 的 retreat_range 可覆盖该值。
+        /// 设置默认后撤距离；0 可关闭后撤，生物定义数据图的 retreat_range 可覆盖该值。
         public Builder retreatRange(double value) {
             retreatRange = value;
             return this;
         }
 
-        /// 设置默认攻击准备 tick 数；entity_definition 的 windup_ticks 可覆盖该值。
+        /// 设置默认攻击准备 tick 数；生物定义数据图的 windup_ticks 可覆盖该值。
         public Builder prepareTime(int value) {
             prepareTime = value;
             return this;
         }
 
-        /// 设置默认攻击间隔 tick 数；entity_definition 的 shot_cooldown 可覆盖该值。
+        /// 设置默认攻击间隔 tick 数；生物定义数据图的 shot_cooldown 可覆盖该值。
         public Builder attackInterval(int value) {
             attackInterval = value;
             return this;
         }
 
-        /// 设置默认弹体初速度；entity_definition 的 projectile_speed 可覆盖该值。
+        /// 设置默认弹体初速度；生物定义数据图的 projectile_speed 可覆盖该值。
         public Builder projectileSpeed(double value) {
             projectileSpeed = value;
             return this;
         }
 
-        /// 设置默认每秒自然恢复量；entity_definition 的 health_regeneration 可覆盖该值。
+        /// 设置默认每秒自然恢复量；生物定义数据图的 health_regeneration 可覆盖该值。
         public Builder healthRegeneration(double value) {
             healthRegeneration = value;
             return this;

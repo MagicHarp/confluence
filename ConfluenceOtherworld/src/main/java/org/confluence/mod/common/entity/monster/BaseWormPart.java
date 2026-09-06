@@ -30,8 +30,7 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
     // 未命中时每 10 tick 重试；命中后给同一体节 20 tick 接触伤害冷却。
     private static final int COLLISION_DETECTION_INTERVAL = 10;
     private static final int COLLISION_ATTACK_INTERVAL = 20;
-    // 已确认本体死亡时快速清理；仅暂时无法解析本体时保留更长的加载宽限。
-    private static final int DEAD_OWNER_REMOVAL_TICKS = 20;
+    // 仅暂时无法解析本体时保留加载宽限，已确认死亡的体节立即清理。
     private static final int OWNER_RESOLUTION_GRACE_TICKS = 100;
     private static final String OWNER_TAG = "Owner";
     private static final String INDEX_TAG = "SegmentIndex";
@@ -84,6 +83,11 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         return entityData.get(HURT_FLASH_TICKS) > 0;
     }
 
+    public void indicateHurt() {
+        // 体节独立同步视觉状态，不依赖客户端是否正在追踪头部及其受伤事件。
+        entityData.set(HURT_FLASH_TICKS, 10);
+    }
+
     @Override
     public Entity damageRecipient() {
         return this;
@@ -130,12 +134,20 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         if (!(previous instanceof Entity leader)) return;
 
         Vec3 previousPosition = position();
-        Vec3 difference = previousPosition.subtract(leader.position());
-        if (difference.lengthSqr() < 0.001) difference = new Vec3(0, 1, 0);
-        Vec3 destination = leader.position().add(difference.normalize().scale(head.segmentSpacing()));
+        Vec3 leaderCenter = WormSegment.center(leader);
+        Vec3 difference = WormSegment.center(this).subtract(leaderCenter);
+        if (difference.lengthSqr() < 0.001) {
+            difference = leader.getLookAngle().scale(-1.0D);
+            if (difference.lengthSqr() < 1.0E-7D) difference = new Vec3(0, 0, -1);
+        }
+        Vec3 destinationCenter = leaderCenter.add(difference.normalize().scale(head.segmentSpacing()));
 
         if (!level().isClientSide) contactSweepStart = previousPosition;
-        setPos(destination.x, destination.y, destination.z);
+        setPos(destinationCenter.x, destinationCenter.y - getBbHeight() * 0.5D, destinationCenter.z);
+    }
+
+    public void orientAlongChain(Vec3 tangent) {
+        WormSegment.orientAlong(this, tangent);
     }
 
     public void moveToChainPosition(Vec3 destination) {
@@ -144,42 +156,25 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         setPos(destination.x, destination.y, destination.z);
     }
 
-    public void orientAlongChain(Vec3 tangent) {
-        if (tangent.lengthSqr() < 1.0E-7D) return;
-        double horizontalDistance = Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z);
-        float yaw = (float) (Mth.atan2(tangent.z, tangent.x) * Mth.RAD_TO_DEG) - 90.0F;
-        float pitch = (float) (-Mth.atan2(tangent.y, horizontalDistance) * Mth.RAD_TO_DEG);
-        setRot(yaw, pitch);
-    }
-
     @Override
     public void updateSegmentRotation() {
         WormSegment previous = getPrev();
         if (!(previous instanceof Entity leader)) return;
 
-        WormSegment next = getNext();
-        Vec3 tangent = getSegmentIndex() > 1 && next instanceof Entity follower
-                ? leader.position().subtract(follower.position())
-                : leader.position().subtract(position());
-        if (tangent.lengthSqr() < 1.0E-7) return;
-
-        double horizontalDistance = Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z);
-        float yaw = (float) (Mth.atan2(tangent.z, tangent.x) * Mth.RAD_TO_DEG) - 90.0F;
-        float pitch = (float) (-Mth.atan2(tangent.y, horizontalDistance) * Mth.RAD_TO_DEG);
-        setRot(yaw, pitch);
+        Vec3 tangent = WormSegment.center(leader).subtract(WormSegment.center(this));
+        orientAlongChain(tangent);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (level().isClientSide) tickClientInterpolation();
-        else if (entityData.get(HURT_FLASH_TICKS) > 0)
+        if (!level().isClientSide && entityData.get(HURT_FLASH_TICKS) > 0)
             entityData.set(HURT_FLASH_TICKS, entityData.get(HURT_FLASH_TICKS) - 1);
+        if (level().isClientSide) tickClientInterpolation();
         BaseWormMonster head = getOwner();
         if (head != null && !head.isAlive()) {
-            /// 死亡头部已经完成过所有权解析，不需要等待网络实体的加入顺序。
-            /// 保留二十刻死亡阶段后清理体节，既避免尸体长期残留，也不会截断受伤死亡表现。
-            if (++unresolvedOwnerTicks > DEAD_OWNER_REMOVAL_TICKS) discard();
+            // 已确认死亡，不再等待本体的死亡动画或所有权解析宽限。
+            discard();
             return;
         }
         if (head == null) {
@@ -221,7 +216,6 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         BaseWormMonster head = getOwner();
         if (head == null || !head.isAlive() || !head.hurt(source, amount)) return false;
         markHurt();
-        entityData.set(HURT_FLASH_TICKS, 10);
         return true;
     }
 
@@ -234,10 +228,13 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
     public boolean isPickable() {return !isRemoved();}
 
     @Override
-    public boolean canBeCollidedWith() {
-        BaseWormMonster head = getOwner();
-        return head != null && head.isAlive();
-    }
+    public boolean canBeCollidedWith() {return false;}
+
+    @Override
+    public boolean isPushable() {return false;}
+
+    @Override
+    public void push(Entity entity) {}
 
     @Override
     protected void defineSynchedData() {
@@ -300,6 +297,8 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         if (!level().isClientSide || teleport || distanceToSqr(x, y, z) > 4096.0D) {
             setPos(x, y, z);
             setRot(yaw, pitch);
+            yRotO = yaw;
+            xRotO = pitch;
             clientLerpSteps = 0;
             return;
         }
@@ -312,6 +311,10 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
     }
 
     private void tickClientInterpolation() {
+        // 渲染帧使用旧角度到当前角度的 partial tick 插值；即使本 tick 没有新网络目标，
+        // 也必须推进旧角度，否则会在同一小段旋转上反复播放。
+        yRotO = getYRot();
+        xRotO = getXRot();
         if (clientLerpSteps <= 0) return;
         double progress = 1.0D / clientLerpSteps;
         setPos(
@@ -320,7 +323,7 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
                 Mth.lerp(progress, getZ(), clientLerpZ));
         setRot(
                 Mth.rotLerp((float) progress, getYRot(), clientLerpYaw),
-                Mth.lerp((float) progress, getXRot(), clientLerpPitch));
+                Mth.rotLerp((float) progress, getXRot(), clientLerpPitch));
         clientLerpSteps--;
     }
 

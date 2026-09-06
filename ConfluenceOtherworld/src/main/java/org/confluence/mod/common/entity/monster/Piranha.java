@@ -24,7 +24,7 @@ import software.bernie.geckolib.core.animation.AnimationController;
 /// 食人鱼及其共用水生近战变体。
 ///
 /// 移动和离水扑腾由水生基类处理；食人鱼本身补充持续咬合表现、攻击动作周期
-/// 与长时间水下供气。持续设置挥击状态是 1.21 的模型语义，用于让嘴部和尾部
+/// 与长时间水下供气。持续设置挥击状态用于让嘴部和尾部
 /// 始终播放快速咬合动画，并不代表每 tick 都结算一次伤害。
 public class Piranha extends BaseAquaticMonster {
 
@@ -36,11 +36,7 @@ public class Piranha extends BaseAquaticMonster {
         return AquaticAttributeProfiles.PIRANHA.createBuilder();
     }
 
-    public static AttributeSupplier.Builder createArapaimaAttributes() {
-        return AquaticAttributeProfiles.ARAPAIMA.createBuilder();
-    }
-
-    /// 1.21 的食人鱼族继承水生动物，攻击只由近战 Goal 结算。
+    /// 食人鱼族的攻击只由近战目标结算。
     @Override
     protected boolean hasEntityContactAttack() {
         return false;
@@ -56,8 +52,7 @@ public class Piranha extends BaseAquaticMonster {
                         new VanillaGoalAction(new MeleeAttackGoal(Piranha.this, 1.2, true)),
                         new VanillaGoalAction(createStrollGoal()),
                         new VanillaGoalAction(new RandomLookAroundGoal(Piranha.this)),
-                        new VanillaGoalAction(new LookAtPlayerGoal(Piranha.this, Player.class, 6.0F)),
-                        new VanillaGoalAction(new FollowBoatGoal(Piranha.this)));
+                        new VanillaGoalAction(new LookAtPlayerGoal(Piranha.this, Player.class, 6.0F)));
             }
         };
     }

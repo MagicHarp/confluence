@@ -10,11 +10,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -62,6 +64,7 @@ import org.confluence.mod.common.init.*;
 import org.confluence.mod.common.init.armor.ArmorSetBonusKey;
 import org.confluence.mod.common.init.armor.ModArmorBonus;
 import org.confluence.mod.common.init.block.NatureBlocks;
+import org.confluence.mod.common.init.entity.ModEntities;
 import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.common.item.axe.LucyTheAxe;
@@ -307,7 +310,19 @@ public final class PlayerEvents {
         if (!TCUtils.hasType(player, AccessoryItems.HIGH$TEST$FISHING$LINE) && player.getRandom().nextFloat() < 0.1429F) {
             player.level().playSound(null, event.getHookEntity().blockPosition(), ModSoundEvents.DECOUPLING.get(), SoundSource.AMBIENT);
             event.setCanceled(true);
+            return;
         }
+        if (!(player instanceof ServerPlayer serverPlayer) || !BloodMoonGameEvent.INSTANCE.started())
+            return;
+        var hook = event.getHookEntity();
+        if (!hook.getInBlockState().getFluidState().is(FluidTags.WATER)) return;
+        int chance = hook.getType() == ModEntities.BLOODY_FISHING_HOOK.get() ? 6 : 12;
+        if (player.getRandom().nextInt(chance) != 0) return;
+        var enemy = MonsterEntities.WANDERING_EYE_FISH.get().spawn(serverPlayer.serverLevel(), hook.blockPosition(), MobSpawnType.EVENT);
+        if (enemy == null) return;
+        enemy.setTarget(serverPlayer);
+        enemy.setDeltaMovement(serverPlayer.position().subtract(enemy.position()).normalize().scale(0.35));
+        event.getDrops().clear();
     }
 
     private static void interact$RightClickItem(PlayerInteractEvent.RightClickItem event) {

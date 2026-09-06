@@ -23,7 +23,7 @@ public abstract class BaseAquaticMonster extends BaseMonster {
 
     @Override
     protected boolean canTargetPlayer(LivingEntity target) {
-        return target.isInWater();
+        return isValidAquaticTarget(target);
     }
 
     @Override
@@ -33,7 +33,12 @@ public abstract class BaseAquaticMonster extends BaseMonster {
 
     @Override
     public boolean canAttack(LivingEntity target) {
-        return target.isInWater() && super.canAttack(target);
+        return isValidAquaticTarget(target) && super.canAttack(target);
+    }
+
+    /// 判断目标是否处于当前水生物种能够攻击的位置；普通水生敌怪仅攻击水中目标。
+    protected boolean isValidAquaticTarget(LivingEntity target) {
+        return target.isInWaterRainOrBubble();
     }
 
     @Override
@@ -54,12 +59,17 @@ public abstract class BaseAquaticMonster extends BaseMonster {
     @Override
     public void tick() {
         super.tick();
-        if (!isNoAi() && !isInWaterRainOrBubble() && onGround()) {
+        if (flopsOnLand() && !isNoAi() && !isInWaterRainOrBubble() && onGround()) {
             setDeltaMovement(getDeltaMovement().add((random.nextFloat() * 2.0F - 1.0F) * 0.2F, 0.5, (random.nextFloat() * 2.0F - 1.0F) * 0.2F));
             setYRot(random.nextFloat() * 360.0F);
             setOnGround(false);
             hasImpulse = true;
         }
+    }
+
+    /// 鱼类离水后会挣扎；水母等无法主动离地的生物可关闭这一共用行为。
+    protected boolean flopsOnLand() {
+        return true;
     }
 
     @Override

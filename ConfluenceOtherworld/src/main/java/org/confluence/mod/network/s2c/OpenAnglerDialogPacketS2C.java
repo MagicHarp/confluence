@@ -14,7 +14,8 @@ import org.mesdag.portlib.network.codec.PortStreamCodec;
 public record OpenAnglerDialogPacketS2C(
         int entityId,
         byte state,
-        Item questFish
+        Item questFish,
+        String levelName
 ) implements IPortPacket.S2C {
     public static final byte COMPLETED = 0;
     public static final byte NO_QUEST = 1;
@@ -28,6 +29,7 @@ public record OpenAnglerDialogPacketS2C(
                     PortByteBufCodecs.VAR_INT, OpenAnglerDialogPacketS2C::entityId,
                     PortByteBufCodecs.BYTE, OpenAnglerDialogPacketS2C::state,
                     PortByteBufCodecs.registry(Registries.ITEM), OpenAnglerDialogPacketS2C::questFish,
+                    PortByteBufCodecs.STRING_UTF8, OpenAnglerDialogPacketS2C::levelName,
                     OpenAnglerDialogPacketS2C::new
             );
 
@@ -39,7 +41,7 @@ public record OpenAnglerDialogPacketS2C(
             case WAKE_UP -> AnglerDialogScreen.State.WAKE_UP;
             default -> AnglerDialogScreen.State.SHOW_HINT;
         };
-        AnglerDialogScreen.open(entityId, s, questFish);
+        AnglerDialogScreen.open(entityId, s, questFish, levelName);
     }
 
     @Override

@@ -45,11 +45,17 @@ public class Snatcher extends BaseMonster {
     private static final EntityDataAccessor<Vector3f> ANCHOR = SynchedEntityData.defineId(Snatcher.class, EntityDataSerializers.VECTOR3);
     private static final EntityDataAccessor<Vector3f> REST_DIRECTION = SynchedEntityData.defineId(Snatcher.class, EntityDataSerializers.VECTOR3);
     private static final List<Vec3> SEARCH_DIRECTIONS = createSearchDirections();
+    private final Profile profile;
     private Vec3 anchor = Vec3.ZERO;
     private Vec3 restDirection = new Vec3(0.0, 1.0, 0.0);
 
     public Snatcher(EntityType<? extends Snatcher> type, Level level) {
+        this(type, level, Profile.SNATCHER);
+    }
+
+    public Snatcher(EntityType<? extends Snatcher> type, Level level, Profile profile) {
         super(type, level);
+        this.profile = profile;
         noPhysics = true;
     }
 
@@ -151,6 +157,16 @@ public class Snatcher extends BaseMonster {
         return restDirection;
     }
 
+    /// 地表抓人草的普通阶段最大伸展距离；地下食人怪拥有更长藤蔓。
+    double normalReach() {
+        return profile.normalReach;
+    }
+
+    /// 返回延展阶段最大伸展距离。
+    double extendedReach() {
+        return profile.extendedReach;
+    }
+
     @Override
     public AABB getBoundingBoxForCulling() {
         return isAnchored()
@@ -158,7 +174,7 @@ public class Snatcher extends BaseMonster {
                 : super.getBoundingBoxForCulling().inflate(10.0);
     }
 
-    /// 捕人草在 1.21 中使用独立的五 tick 接触检测与 0.3 格扩展范围。
+    /// 捕人草使用独立的五 tick 接触检测与 0.3 格扩展范围。
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
@@ -230,5 +246,19 @@ public class Snatcher extends BaseMonster {
             }
         }
         return List.copyOf(directions);
+    }
+
+    /// 共享藤蔓状态机的物种伸展范围。
+    public enum Profile {
+        SNATCHER(9.4, 12.2),
+        MAN_EATER(15.6, 20.3);
+
+        private final double normalReach;
+        private final double extendedReach;
+
+        Profile(double normalReach, double extendedReach) {
+            this.normalReach = normalReach;
+            this.extendedReach = extendedReach;
+        }
     }
 }

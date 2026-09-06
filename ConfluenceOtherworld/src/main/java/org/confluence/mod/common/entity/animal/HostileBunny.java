@@ -9,7 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class HostileBunny extends Bunny {
-    private static final Variant[] HOSTILE_VARIANTS = {Variant.CORRUPT, Variant.VICIOUS};
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.CORRUPT, 1)
+            .add(Variant.VICIOUS, 1)
+            .build();
 
     public HostileBunny(EntityType<? extends Bunny> type, Level level) {
         super(type, level);
@@ -33,6 +36,6 @@ public class HostileBunny extends Bunny {
 
     @Override
     protected void initializeSpawnVariant() {
-        setBunnyVariant(CritterVariantUtil.uniform(random, HOSTILE_VARIANTS));
+        setBunnyVariant(SPAWN_VARIANTS.select(random));
     }
 }

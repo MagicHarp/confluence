@@ -3,17 +3,17 @@ package org.confluence.mod.client.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.entity.model.BaseSlimeModel;
 import org.confluence.mod.common.entity.monster.slime.BaseSlime;
 
-/// 普通泰拉瑞亚史莱姆渲染器。
+/// 泰拉瑞亚史莱姆族的通用渲染器。
 ///
-/// 内核、面部和半透明外壳复刻 1.21 侧使用的原版史莱姆渲染结构。实体仍保留 1.20
-/// 重写后的行为树与属性系统，客户端只读取视觉尺寸和挤压进度，不依赖原版 {@code Slime}
-/// 实体类。
+/// 内核、面部和半透明外壳共用同一套缩放与挤压数据；具体实体可以声明自发光，
+/// 渲染器不根据注册名猜测变体。这里只读取客户端视觉状态，不参与移动、碰撞或伤害结算。
 public final class BaseSlimeRenderer<T extends BaseSlime> extends MobRenderer<T, BaseSlimeModel<T>> {
     private final ResourceLocation texture;
 
@@ -26,6 +26,11 @@ public final class BaseSlimeRenderer<T extends BaseSlime> extends MobRenderer<T,
     @Override
     public ResourceLocation getTextureLocation(T slime) {
         return texture;
+    }
+
+    @Override
+    protected int getBlockLightLevel(T slime, BlockPos pos) {
+        return slime.isFullBright() ? 15 : super.getBlockLightLevel(slime, pos);
     }
 
     @Override

@@ -7,4 +7,8 @@ public interface CritterVisual extends GeoEntity {
     ResourceLocation getModelPath();
 
     ResourceLocation getTexturePath();
+
+    default boolean isFullBright() {
+        return false;
+    }
 }

@@ -10,8 +10,9 @@ import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
+import org.confluence.mod.common.entity.ai.bt.leaf.ChargeAttackAction;
+import org.confluence.mod.common.entity.ai.bt.leaf.CircleAroundTargetAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.LookForwardWanderFlyAction;
-import org.confluence.mod.common.entity.ai.bt.leaf.SteeringDashAction;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -37,8 +38,8 @@ public class EaterOfSouls extends BaseFlyingMonster {
             protected BTNode createTree() {
                 return SelectorNode.of(
                         SequenceNode.of(new HasTargetCondition(EaterOfSouls.this),
-                                new SteeringDashAction(EaterOfSouls.this, 0.98, 0.4, 0.01,
-                                        10.0, 10.0, 10.0, 15)),
+                                new CircleAroundTargetAction(EaterOfSouls.this, 0.35, 6.0),
+                                new ChargeAttackAction(EaterOfSouls.this, 0.5, 5)),
                         new LookForwardWanderFlyAction(EaterOfSouls.this, 0.2, 0.0F));
             }
         };

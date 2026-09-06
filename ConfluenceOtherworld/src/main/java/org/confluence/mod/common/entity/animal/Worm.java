@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -20,13 +21,15 @@ import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
 public class Worm extends BaseCritter implements VariantHolder<Worm.Variant> {
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Worm.class, EntityDataSerializers.INT);
     public static final String VARIANT_KEY = "Variant";
-    private static final Variant[] COMMON_SPAWN_VARIANTS = {
-            Variant.NORMAL, Variant.NIGHTCRAWLER
-    };
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.NORMAL, 399)
+            .add(Variant.GOLD, 1)
+            .build();
 
     public Worm(EntityType<? extends Worm> type, Level level) {
         super(type, level);
@@ -41,14 +44,14 @@ public class Worm extends BaseCritter implements VariantHolder<Worm.Variant> {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
-                return withPassivePanic(createGroundCritterRoutine(1.0), 1.5);
+                return withPassivePanic(createGroundCritterRoutine(0.45D), 0.7D);
             }
         };
     }
 
     @Override
     public Variant getVariant() {
-        return CritterVariantUtil.byId(Variant.values(), this.entityData.get(DATA_VARIANT), Variant.NORMAL);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     @Override
@@ -85,7 +88,7 @@ public class Worm extends BaseCritter implements VariantHolder<Worm.Variant> {
 
     @Override
     protected void initializeSpawnVariant() {
-        setVariant(CritterVariantUtil.withRareVariant(random, COMMON_SPAWN_VARIANTS, Variant.GOLD));
+        setVariant(SPAWN_VARIANTS.select(random));
     }
 
     /// 蚯蚓的三种外观共用模型，但纹理存放在独立子目录中。
@@ -104,6 +107,7 @@ public class Worm extends BaseCritter implements VariantHolder<Worm.Variant> {
         NORMAL, GOLD, NIGHTCRAWLER;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), NORMAL);
 
         @Override
         public Codec<Variant> codec() {

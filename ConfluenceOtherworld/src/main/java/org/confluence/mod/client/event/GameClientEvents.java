@@ -31,6 +31,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import org.confluence.lib.api.event.OnGatherEffectScreenTooltipsEvent;
@@ -53,6 +54,7 @@ import org.confluence.mod.client.gui.BackgroundImageMakerScreen;
 import org.confluence.mod.client.gui.BackgroundLayer;
 import org.confluence.mod.client.gui.container.ExtraInventoryScreen;
 import org.confluence.mod.client.gui.container.SoulOverviewScreen;
+import org.confluence.mod.client.gui.hud.CustomBossBarRenderer;
 import org.confluence.mod.client.gui.hud.HouseSelectHud;
 import org.confluence.mod.client.handler.*;
 import org.confluence.mod.client.handler.bestiary.ClientBestiary;
@@ -112,6 +114,7 @@ public final class GameClientEvents {
         PortEventHandler.addListener(GameClientEvents::input$InteractionKeyMappingTriggered);
         PortEventHandler.addListener(GameClientEvents::input$MouseScrolling);
         PortEventHandler.addListener(GameClientEvents::renderGuiOverlay$Pre);
+        PortEventHandler.addListener(GameClientEvents::bossEventProgress);
         PortEventHandler.addListener(PortEventPriority.LOWEST, GameClientEvents::gatherComponents);
         PortEventHandler.addListener(GameClientEvents::itemToolTip);
         PortEventHandler.addListener(PortEventPriority.LOW, GameClientEvents::addAttributeTooltips);
@@ -137,6 +140,10 @@ public final class GameClientEvents {
         PortEventHandler.addListener(GameClientEvents::applyGunCamera);
         PortEventHandler.addListener(GameClientEvents::bulletImpact);
         PortEventHandler.addListener(GameClientEvents::cancelSwap);
+    }
+
+    private static void bossEventProgress(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        CustomBossBarRenderer.render(event);
     }
 
     private static void clientTick$Pre(PortClientTickEvent.Pre event) {
@@ -243,6 +250,7 @@ public final class GameClientEvents {
         ClientBestiary.getInstance().reset();
         LucyTheAxeHandler.reset();
         ClientGameEventSystem.reset();
+        ClientBossBarTracker.clear();
 //        AchievementUtils.saveData();
     }
 

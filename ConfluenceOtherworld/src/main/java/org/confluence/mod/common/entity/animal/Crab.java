@@ -2,6 +2,7 @@ package org.confluence.mod.common.entity.animal;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -9,14 +10,26 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
+import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
+import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
+import org.confluence.mod.common.entity.monster.BaseMonster;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animation.AnimatableManager;
 
-public class Crab extends BaseCritter {
+public class Crab extends BaseMonster implements CritterVisual {
 
     public Crab(EntityType<? extends Crab> type, Level level) {
         super(type, level);
@@ -24,7 +37,13 @@ public class Crab extends BaseCritter {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return BaseCritter.createInsectAttributes();
+        return BaseMonster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 21.0)
+                .add(Attributes.ATTACK_DAMAGE, 10.0)
+                .add(Attributes.ARMOR, 5.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
+                .add(Attributes.FOLLOW_RANGE, 20.0)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25);
     }
 
     @Override
@@ -32,7 +51,11 @@ public class Crab extends BaseCritter {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
-                return withPassivePanic(createGroundCritterRoutine(1.0), 1.5);
+                return SelectorNode.of(
+                        new VanillaGoalAction(new MeleeAttackGoal(Crab.this, 1.0, true)),
+                        new VanillaGoalAction(new RandomStrollGoal(Crab.this, 1.0)),
+                        new VanillaGoalAction(new LookAtPlayerGoal(Crab.this, Player.class, 6.0F)),
+                        new VanillaGoalAction(new RandomLookAroundGoal(Crab.this)));
             }
         };
     }
@@ -52,6 +75,28 @@ public class Crab extends BaseCritter {
     @Override
     public Vec3 handleRelativeFrictionAndCalculateMovement(Vec3 movement, float friction) {
         return super.handleRelativeFrictionAndCalculateMovement(movement, friction * 1.2F);
+    }
+
+    /// 螃蟹在海底与陆地使用同一套地面步态；两栖导航只负责让路径跨越水陆边界，
+    /// 不会把它改成能够在水中悬浮的游泳实体。
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new AmphibiousPathNavigation(this, level);
+    }
+
+    @Override
+    public ResourceLocation getModelPath() {
+        return getType().builtInRegistryHolder().key().location().withPrefix("geo/entity/animal/");
+    }
+
+    @Override
+    public ResourceLocation getTexturePath() {
+        return getType().builtInRegistryHolder().key().location().withPrefix("textures/entity/animal/").withSuffix(".png");
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(DefaultAnimations.genericWalkController(this));
     }
 
     /// 把普通“面朝目标向前走”转换为“身体侧面朝向目标横着走”。
@@ -88,6 +133,10 @@ public class Crab extends BaseCritter {
 
             float targetYaw = (float) (Mth.atan2(deltaZ, deltaX) * Mth.RAD_TO_DEG);
             mob.setYRot(rotlerp(mob.getYRot(), targetYaw, 90.0F));
+            // 螃蟹以模型的侧轴前进，因此这里刻意不减 90 度；只需让身体和头部
+            // 跟随同一个横向朝向，避免碰撞/移动方向正确但模型仍朝旧方向。
+            mob.setYBodyRot(mob.getYRot());
+            mob.setYHeadRot(mob.getYRot());
             mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
 
             BlockPos currentPos = mob.blockPosition();

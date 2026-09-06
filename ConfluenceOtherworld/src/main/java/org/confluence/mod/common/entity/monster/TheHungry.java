@@ -87,6 +87,7 @@ public class TheHungry extends BaseFlyingMonster implements BossOwnedEntity {
     public void setMaster(BaseBoss master, Vec3 relativeAnchor) {
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
         leashPos = relativeAnchor;
         setAnchor(master.position().add(relativeAnchor));
@@ -274,7 +275,7 @@ public class TheHungry extends BaseFlyingMonster implements BossOwnedEntity {
         freeHungry.setMaster(master, master.position().scale(-1.0));
         freeHungry.setFree(true);
         freeHungry.suppressLoot = true;
-        serverLevel.addFreshEntity(freeHungry);
+        if (!serverLevel.addFreshEntity(freeHungry)) freeHungry.discard();
     }
 
     @Override

@@ -142,7 +142,11 @@ public class EyeOfCthulhu extends BaseBoss {
     @Override
     public void tick() {
         super.tick();
-        if (isRemoved() || level().isClientSide) {
+        if (isRemoved()) {
+            return;
+        }
+        if (level().isClientSide) {
+            if (getCombatState() == CombatState.LEAVING) faceSkyward();
             return;
         }
 
@@ -312,7 +316,7 @@ public class EyeOfCthulhu extends BaseBoss {
         leavingTicks++;
         /// 白天撤离沿竖直方向快速升空。
         setDeltaMovement(0.0, 0.8, 0.0);
-        faceAlongMovement(60.0F, 60.0F);
+        faceSkyward();
         if (leavingTicks >= LEAVE_DISCARD_TICKS) {
             discard();
         }
@@ -358,6 +362,15 @@ public class EyeOfCthulhu extends BaseBoss {
     /// 没有明确目标时沿当前速度方向修正朝向，用于脱战离场和短暂失去目标的惯性阶段。
     private void faceAlongMovement(float maxYawChange, float maxPitchChange) {
         faceCombatMovement(maxYawChange, maxPitchChange);
+    }
+
+    /// 撤离时保持当前偏航，只把模型正面轴准确转向天空。
+    /// 客户端也重复约束俯仰，避免无目标的 LookControl 在两个移动包之间把姿态拉回水平。
+    private void faceSkyward() {
+        setXRot(-90.0F);
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+        getLookControl().setLookAt(getX(), getEyeY() + 1.0, getZ());
     }
 
     private Vec3 createDashDirection(LivingEntity target) {

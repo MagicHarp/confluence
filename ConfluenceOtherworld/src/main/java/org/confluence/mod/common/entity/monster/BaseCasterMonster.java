@@ -8,16 +8,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
-import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
-import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
-import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
-import org.confluence.mod.common.entity.ai.bt.leaf.*;
+import org.confluence.mod.common.entity.ai.bt.leaf.CasterCycleAction;
 import org.confluence.mod.common.entity.projectile.HostileParticleProjectile;
-import org.confluence.mod.common.init.entity.ModEntities;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+
+import javax.annotation.Nullable;
 
 /// 法师怪物基类：三次远程施法后向目标方向重新选取安全落点。
 ///
@@ -26,16 +24,16 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 public abstract class BaseCasterMonster extends BaseMonster {
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
-    private final CycleMode cycleMode;
-    private CasterCycleAction sharedCycleAction;
+    private final CasterCycleAction.HurtResponse hurtResponse;
+    private CasterCycleAction cycleAction;
 
     public BaseCasterMonster(EntityType<? extends BaseCasterMonster> type, Level level) {
-        this(type, level, CycleMode.SHARED_1_21);
+        this(type, level, CasterCycleAction.HurtResponse.PAUSE_THEN_TELEPORT);
     }
 
-    protected BaseCasterMonster(EntityType<? extends BaseCasterMonster> type, Level level, CycleMode cycleMode) {
+    public BaseCasterMonster(EntityType<? extends BaseCasterMonster> type, Level level, CasterCycleAction.HurtResponse hurtResponse) {
         super(type, level);
-        this.cycleMode = cycleMode;
+        this.hurtResponse = hurtResponse;
     }
 
     public static AttributeSupplier.Builder createCasterAttributes() {
@@ -52,45 +50,13 @@ public abstract class BaseCasterMonster extends BaseMonster {
 
     @Override
     protected BTRoot createBT() {
-        if (cycleMode == CycleMode.SHARED_1_21) {
-            if (sharedCycleAction == null) {
-                sharedCycleAction = new CasterCycleAction(this, this::createProjectile);
-            }
-            return createSharedCycleTree(sharedCycleAction);
+        if (cycleAction == null) {
+            cycleAction = new CasterCycleAction(this, this::createProjectile, hurtResponse, casterTiming(), castsPerCycle(), projectilesPerVolley(), projectileIntervalTicks());
         }
-        return createLegacyCycleTree();
-    }
-
-    private BTRoot createSharedCycleTree(CasterCycleAction cycleAction) {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
-                return SelectorNode.of(cycleAction, new RandomStrollAction(BaseCasterMonster.this, 0.8, 8));
-            }
-        };
-    }
-
-    private BTRoot createLegacyCycleTree() {
-        return new BTRoot() {
-            @Override
-            protected BTNode createTree() {
-                return SelectorNode.of(
-                        SequenceNode.of(new HasTargetCondition(BaseCasterMonster.this),
-                                new WaitAction(20),
-                                new SpawnProjectileAction(
-                                        BaseCasterMonster.this,
-                                        BaseCasterMonster.this
-                                                ::createImmediateProjectile),
-                                new WaitAction(50),
-                                new SpawnProjectileAction(
-                                        BaseCasterMonster.this,
-                                        BaseCasterMonster.this
-                                                ::createImmediateProjectile),
-                                new WaitAction(50),
-                                new SpawnProjectileAction(BaseCasterMonster.this, BaseCasterMonster.this::createImmediateProjectile),
-                                new WaitAction(80),
-                                new TeleportNearTargetAction(BaseCasterMonster.this, 20, 5, 8)),
-                        new RandomStrollAction(BaseCasterMonster.this, 0.8, 8));
+                return cycleAction;
             }
         };
     }
@@ -98,17 +64,41 @@ public abstract class BaseCasterMonster extends BaseMonster {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         boolean accepted = super.hurt(source, amount);
-        if (accepted && sharedCycleAction != null) {
-            sharedCycleAction.interruptAfterHurt();
+        if (accepted && cycleAction != null && shouldInterruptCastingAfterHurt()) {
+            cycleAction.interruptAfterHurt();
         }
         return accepted;
     }
 
-    /// 返回当前法师固定使用的弹幕类型。
-    protected EntityType<HostileParticleProjectile> projectileType() {
-        return ModEntities.DARK_CASTER_PROJECTILE.get();
+    /// 决定本次有效受击是否打断施法周期。
+    protected boolean shouldInterruptCastingAfterHurt() {
+        return true;
     }
 
+    /// 返回当前法师固定使用的弹幕类型。
+    protected abstract EntityType<HostileParticleProjectile> projectileType();
+
+    /// 返回一次施法动作连续生成的弹幕数量；普通法师每轮只生成一枚。
+    protected int projectilesPerVolley() {
+        return 1;
+    }
+
+    /// 返回每次传送之间的施法动作次数；普通法师保持三次。
+    protected int castsPerCycle() {
+        return 3;
+    }
+
+    /// 返回同一轮内相邻弹幕的间隔。
+    protected int projectileIntervalTicks() {
+        return 1;
+    }
+
+    /// 返回当前法师的完整战斗时序；只有资料明确存在独立周期的变体需要覆盖。
+    protected CasterCycleAction.Timing casterTiming() {
+        return CasterCycleAction.DEFAULT_TIMING;
+    }
+
+    @Nullable
     HostileParticleProjectile createProjectile(LivingEntity target) {
         HostileParticleProjectile projectile = projectileType().create(level());
         if (projectile == null) {
@@ -123,14 +113,6 @@ public abstract class BaseCasterMonster extends BaseMonster {
         return 20;
     }
 
-    private HostileParticleProjectile createImmediateProjectile(LivingEntity target) {
-        HostileParticleProjectile projectile = createProjectile(target);
-        if (projectile != null) {
-            swing(net.minecraft.world.InteractionHand.MAIN_HAND);
-        }
-        return projectile;
-    }
-
     /// 施法挥手期间播放法术动作，其余时间按实际移动状态选择行走或待机。
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
@@ -142,9 +124,4 @@ public abstract class BaseCasterMonster extends BaseMonster {
         }));
     }
 
-    /// 1.21 共有怪使用预施法周期；只存在于 1.20 的旧怪暂时保留当前节奏。
-    protected enum CycleMode {
-        SHARED_1_21,
-        LEGACY_1_20
-    }
 }

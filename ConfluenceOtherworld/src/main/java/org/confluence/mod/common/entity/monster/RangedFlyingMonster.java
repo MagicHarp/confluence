@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -16,8 +16,6 @@ import org.confluence.mod.common.entity.ai.bt.leaf.CircleAroundTargetAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.LookForwardWanderFlyAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.SpawnProjectileAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
-import org.confluence.mod.common.entity.projectile.HostileParticleProjectile;
-import org.confluence.mod.common.init.entity.ModEntities;
 
 /// 以环绕目标和周期性弹幕为主要战斗方式的飞行怪物基类。
 ///
@@ -27,11 +25,11 @@ import org.confluence.mod.common.init.entity.ModEntities;
 ///
 /// 射击行为复用实体攻击伤害属性生成弹幕快照；本类只编排移动与发射时机，不重复实现
 /// 弹幕命中、暴击或伤害结算。
-public class RangedFlyingMonster extends BaseFlyingMonster {
+public abstract class RangedFlyingMonster extends BaseFlyingMonster {
     private final int shotCooldown;
     private final double shotMultiplier;
 
-    public RangedFlyingMonster(EntityType<? extends RangedFlyingMonster> type, Level level, int shotCooldown, double shotMultiplier) {
+    protected RangedFlyingMonster(EntityType<? extends RangedFlyingMonster> type, Level level, int shotCooldown, double shotMultiplier) {
         super(type, level);
         if (shotCooldown <= 0 || !Double.isFinite(shotMultiplier) || shotMultiplier < 0.0)
             throw new IllegalArgumentException("Flying ranged attack timing and multiplier are invalid");
@@ -63,14 +61,7 @@ public class RangedFlyingMonster extends BaseFlyingMonster {
         };
     }
 
-    protected Projectile createProjectile(LivingEntity target) {
-        HostileParticleProjectile projectile = ModEntities.VILE_SPIT_PROJECTILE.get().create(level());
-        if (projectile == null) {
-            return null;
-        }
-        projectile.configure(this, target, (float) (getAttributeValue(Attributes.ATTACK_DAMAGE) * shotMultiplier()));
-        return projectile;
-    }
+    protected abstract Projectile createProjectile(LivingEntity target);
 
     protected final double shotMultiplier() {
         return creatureDefinition().behavior().shotMultiplierOr(shotMultiplier);

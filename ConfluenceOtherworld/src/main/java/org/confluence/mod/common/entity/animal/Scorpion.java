@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
@@ -15,16 +16,23 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.IVariant;
+import org.confluence.mod.common.entity.ai.bt.BTNode;
+import org.confluence.mod.common.entity.ai.bt.BTRoot;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
 /// 同时承载普通蝎子与黑蝎子的同步变体实体。
 ///
 /// 两种外观共享模型、属性和行为，只把自然生成选择、存档值与纹理映射留在本类。
 /// 捕捉物品可以显式写入变体，客户端与重新加载后的服务端仍会得到相同外观。
-public class Scorpion extends SimpleCritter implements VariantHolder<Scorpion.Variant> {
+public class Scorpion extends BaseCritter implements VariantHolder<Scorpion.Variant> {
     public static final String VARIANT_KEY = "Variant";
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Scorpion.class, EntityDataSerializers.INT);
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.BLACK, 1)
+            .add(Variant.NORMAL, 1)
+            .build();
 
     public Scorpion(EntityType<? extends Scorpion> type, Level level) {
         super(type, level);
@@ -35,6 +43,16 @@ public class Scorpion extends SimpleCritter implements VariantHolder<Scorpion.Va
     }
 
     @Override
+    protected BTRoot createBT() {
+        return new BTRoot() {
+            @Override
+            protected BTNode createTree() {
+                return withPassivePanic(createGroundCritterRoutine(0.7D), 1.0D);
+            }
+        };
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         entityData.define(DATA_VARIANT, Variant.NORMAL.ordinal());
@@ -42,7 +60,7 @@ public class Scorpion extends SimpleCritter implements VariantHolder<Scorpion.Va
 
     @Override
     public Variant getVariant() {
-        return CritterVariantUtil.byId(Variant.values(), entityData.get(DATA_VARIANT), Variant.NORMAL);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     @Override
@@ -57,7 +75,7 @@ public class Scorpion extends SimpleCritter implements VariantHolder<Scorpion.Va
 
     @Override
     protected void initializeSpawnVariant() {
-        setVariant(CritterVariantUtil.uniform(random, Variant.values()));
+        setVariant(SPAWN_VARIANTS.select(random));
     }
 
     @Override
@@ -91,6 +109,7 @@ public class Scorpion extends SimpleCritter implements VariantHolder<Scorpion.Va
         NORMAL;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), NORMAL);
 
         @Override
         public String getSerializedName() {

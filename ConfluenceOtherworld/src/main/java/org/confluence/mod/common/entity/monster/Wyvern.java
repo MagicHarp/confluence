@@ -62,7 +62,7 @@ public class Wyvern extends BaseWormMonster {
         return ModSoundEvents.WYVERN_DEATH.get();
     }
 
-    /// 把 1.21 的盘旋与往返突袭状态收敛到一个持续运行的行为树节点。
+    /// 把盘旋与往返突袭状态收敛到一个持续运行的行为树节点。
     private static final class WyvernMovementAction extends BTNode {
         private static final double TURN_DISTANCE_SQR = 16.0 * 16.0;
         private static final double CIRCLE_RADIUS = 20.0;
@@ -163,9 +163,8 @@ public class Wyvern extends BaseWormMonster {
         }
 
         private void lookAt(LivingEntity target, float yawLimit) {
-            wyvern.getLookControl().setLookAt(target);
             if (yawLimit > 0.0F) {
-                wyvern.lookAt(target, yawLimit, 30.0F);
+                wyvern.faceCombatPosition(target.getEyePosition(), yawLimit, 30.0F);
             }
         }
 
@@ -173,13 +172,7 @@ public class Wyvern extends BaseWormMonster {
             if (direction.lengthSqr() < 1.0E-6) {
                 return;
             }
-            Vec3 lookPosition = wyvern.position().add(direction.normalize().scale(8.0));
-            wyvern.getLookControl().setLookAt(lookPosition.x, lookPosition.y, lookPosition.z, 10.0F, 30.0F);
-            float yaw = (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
-            float pitch = (float) (-(Mth.atan2(direction.y, Math.sqrt(direction.x * direction.x + direction.z * direction.z)) * Mth.RAD_TO_DEG));
-            wyvern.setYRot(Mth.rotLerp(0.2F, wyvern.getYRot(), yaw));
-            wyvern.setXRot(Mth.rotLerp(0.2F, wyvern.getXRot(), pitch));
-            wyvern.setYBodyRot(wyvern.getYRot());
+            wyvern.faceCombatDirection(direction, 10.0F, 30.0F);
         }
     }
 }

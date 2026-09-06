@@ -1,10 +1,10 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.projectile.Projectile;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -20,14 +20,14 @@ import java.util.function.Function;
 /// 弹幕的类型、伤害、速度和额外效果仍由实体自己的工厂负责。本节点只验证时间表、
 /// 调用工厂并在服务端把已经配置好的弹幕加入世界。
 public final class FlyingVolleyCombatAction extends BTNode {
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final SteeringDashAction approachAction;
     private final Function<LivingEntity, @Nullable Projectile> projectileFactory;
     private final int approachTicks;
     private final int[] shotTicks;
     private int cycleTick;
 
-    public FlyingVolleyCombatAction(PathfinderMob mob, SteeringDashAction approachAction, Function<LivingEntity, @Nullable Projectile> projectileFactory, int approachTicks, int... shotTicks) {
+    public FlyingVolleyCombatAction(BaseMonster mob, SteeringDashAction approachAction, Function<LivingEntity, @Nullable Projectile> projectileFactory, int approachTicks, int... shotTicks) {
         this.mob = Objects.requireNonNull(mob, "mob");
         this.approachAction = Objects.requireNonNull(approachAction, "approachAction");
         this.projectileFactory = Objects.requireNonNull(projectileFactory, "projectileFactory");
@@ -69,10 +69,14 @@ public final class FlyingVolleyCombatAction extends BTNode {
 
         mob.setDeltaMovement(mob.getDeltaMovement().scale(0.95));
         mob.hasImpulse = true;
-        mob.lookAt(target, 5.0F, 80.0F);
-        mob.getLookControl().setLookAt(target, 5.0F, 80.0F);
-        if (Arrays.binarySearch(shotTicks, cycleTick) >= 0 && !spawnProjectile(target)) {
-            return BTStatus.FAILURE;
+        mob.faceCombatPosition(target.getEyePosition(), 5.0F, 80.0F);
+        if (Arrays.binarySearch(shotTicks, cycleTick) >= 0) {
+            if (!mob.getSensing().hasLineOfSight(target)) {
+                cycleTick = 0;
+                approachAction.start();
+                return BTStatus.RUNNING;
+            }
+            if (!spawnProjectile(target)) return BTStatus.FAILURE;
         }
 
         if (cycleTick >= shotTicks[shotTicks.length - 1]) {

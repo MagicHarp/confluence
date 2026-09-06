@@ -45,6 +45,7 @@ public class PhantasmDragon extends BaseFlyingMonster implements BossOwnedEntity
     public void setMaster(LunaticCultist master) {
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 

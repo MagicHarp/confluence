@@ -40,8 +40,7 @@ import org.confluence.lib.color.GlobalColors;
 import org.confluence.lib.util.LibDateUtils;
 import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
-import org.confluence.mod.common.data.entity.CreatureDefinitionLoader;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.data.saved.Bestiary;
 import org.confluence.mod.common.data.saved.HouseHandler;
 import org.confluence.mod.common.data.saved.NPCSpawner;
@@ -107,8 +106,9 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
     private int chatDisplayTicks;
     @Nullable
     private Player tradingPlayer;
+    private Player dialogPlayer;
+    private int dialogExpiresAt;
     private final NPCCombatProfile combatProfile;
-    private int creatureDefinitionRevision = -1;
     private double healthRegenerationProgress;
 
     public BaseNPC(EntityType<? extends BaseNPC> type, Level level, NPCCombatProfile combatProfile) {
@@ -130,7 +130,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 250.0)
                 .add(Attributes.ARMOR, 15.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.MOVEMENT_SPEED, 0.15)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 10.0);
@@ -174,15 +174,14 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
     protected void customServerAiStep() {
         super.customServerAiStep();
         ServerLevel level = (ServerLevel) level();
-        tickBrain(level);
+        if (getInteractingPlayer() == null) tickBrain(level);
+        else stopForInteraction();
         tickFindHouse(level);
         tickWalkToHome(level);
         tickMood();
         tickHealthRegeneration();
         ChatManager.tickNPC(this);
         if (tickCount % 20 == 0) {
-            if (creatureDefinitionRevision != CreatureDefinitionLoader.getRevision())
-                applyCreatureDefinition();
             ensureFixedWeapon();
         }
 
@@ -276,7 +275,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
 
     /// 有 HOME 记忆时向家移动。
     protected void tickWalkToHome(ServerLevel level) {
-        if (!house.isValid() || tradingPlayer != null) return;
+        if (!house.isValid() || getInteractingPlayer() != null) return;
         BlockPos homePos = house.center();
         double distSq = blockPosition().distSqr(homePos);
         if (distSq < 4) return;
@@ -366,7 +365,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
 
     /// 返回当前数据包重载轮次中该实体类型的数值覆盖。
     public CreatureDefinition creatureDefinition() {
-        return CreatureDefinitionLoader.get(getType());
+        return CreatureDefinition.get(getType());
     }
 
     /// 恢复注册项规定的固有武器，并处理困难模式武器切换。
@@ -383,9 +382,8 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
         float oldMaxHealth = getMaxHealth();
         boolean wasFullHealth = Math.abs(oldHealth - oldMaxHealth) < 0.001F;
         applyProfileAttributes();
-        CreatureDefinitionLoader.applyAttributes(this);
+        CreatureDefinition.applyAttributes(this);
         setHealth(wasFullHealth ? getMaxHealth() : Math.min(oldHealth, getMaxHealth()));
-        creatureDefinitionRevision = CreatureDefinitionLoader.getRevision();
     }
 
     /// 将注册 profile 中的全部实体属性默认值写入属性实例。
@@ -446,6 +444,36 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
 
     public void setTradingPlayer(@Nullable Player tradingPlayer) {
         this.tradingPlayer = tradingPlayer;
+        if (tradingPlayer != null) stopForInteraction();
+    }
+
+    public @Nullable Player getInteractingPlayer() {
+        if (tradingPlayer != null && tradingPlayer.isAlive() && tradingPlayer.level() == level()
+                && distanceToSqr(tradingPlayer) <= 64.0D
+                && tradingPlayer.containerMenu instanceof NPCTradeMenu menu && menu.getNPC() == this)
+            return tradingPlayer;
+        if (dialogPlayer != null && (tickCount > dialogExpiresAt || !dialogPlayer.isAlive()
+                || dialogPlayer.isRemoved() || dialogPlayer.level() != level() || distanceToSqr(dialogPlayer) > 64.0D))
+            dialogPlayer = null;
+        return dialogPlayer;
+    }
+
+    public void updateDialogSession(ServerPlayer player, boolean open) {
+        if (dialogPlayer != player) return;
+        if (!open) dialogPlayer = null;
+        else if (isAlive() && player.isAlive() && player.level() == level() && distanceToSqr(player) <= 64.0D)
+            dialogExpiresAt = tickCount + 60;
+    }
+
+    public void stopForInteraction() {
+        getNavigation().stop();
+        getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+        setSpeed(0.0F);
+        setXxa(0.0F);
+        setZza(0.0F);
+        setJumping(false);
+        Vec3 motion = getDeltaMovement();
+        setDeltaMovement(0.0D, motion.y, 0.0D);
     }
 
     @Nullable
@@ -465,6 +493,9 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
     }
 
     protected void recordInteraction(ServerPlayer player) {
+        dialogPlayer = player;
+        dialogExpiresAt = tickCount + 60;
+        stopForInteraction();
         // 被"救援"的 NPC 首次交互时，将其正式加入区域
         if (shouldInteract) {
             setShouldInteract(false);
@@ -595,6 +626,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
     public void onAddedToWorld() {
         super.onAddedToWorld();
         if (!level().isClientSide) {
+            initName();
             applyCreatureDefinition();
             ensureFixedWeapon();
         }

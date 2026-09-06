@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,23 +17,29 @@ import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.IVariant;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
-import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
-import org.confluence.mod.common.entity.ai.bt.leaf.RandomStrollAction;
+import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
 public class Grasshopper extends BaseCritter implements VariantHolder<Grasshopper.Variant> {
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Grasshopper.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_JUMPING = SynchedEntityData.defineId(Grasshopper.class, EntityDataSerializers.BOOLEAN);
     public static final String VARIANT_KEY = "Variant";
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.GREEN, 399)
+            .add(Variant.GOLD, 1)
+            .build();
 
     public Grasshopper(EntityType<? extends Grasshopper> type, Level level) {
         super(type, level);
@@ -48,7 +55,10 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
-                return withPassivePanic(SequenceNode.of(new RandomStrollAction(Grasshopper.this, 1.0, 10)), 0.9);
+                return withPassivePanic(
+                        createGroundCritterRoutine(1.0,
+                                new VanillaGoalAction(new AvoidEntityGoal<>(Grasshopper.this, Player.class, 6.0F, 0.9, 1.2))),
+                        0.9);
             }
         };
     }
@@ -62,7 +72,7 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
 
     @Override
     public Variant getVariant() {
-        return CritterVariantUtil.byId(Variant.values(), this.entityData.get(DATA_VARIANT), Variant.GREEN);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     @Override
@@ -91,9 +101,7 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
 
     @Override
     protected void initializeSpawnVariant() {
-        setVariant(random.nextInt(CritterVariantUtil.GOLD_RARITY) == 0
-                ? Variant.GOLD
-                : Variant.GREEN);
+        setVariant(SPAWN_VARIANTS.select(random));
     }
 
     @Override
@@ -130,6 +138,7 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
         GREEN, GOLD;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), GREEN);
 
         @Override
         public String getSerializedName() {

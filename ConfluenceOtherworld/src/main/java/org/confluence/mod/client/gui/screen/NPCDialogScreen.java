@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.entity.npc.dialog.NPCDialogLoader;
+import org.confluence.mod.network.c2s.NPCDialogSessionPacketC2S;
 import org.confluence.mod.network.c2s.OpenNPCTradePacketC2S;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +21,26 @@ public class NPCDialogScreen extends Screen {
     protected final int entityId;
     protected final boolean canTrade;
     protected Component dialogText = Component.empty();
+    private int sessionTicks;
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (minecraft == null || minecraft.level == null || minecraft.player == null) return;
+        if (!(minecraft.level.getEntity(entityId) instanceof BaseNPC npc) || !npc.isAlive()
+                || minecraft.player.distanceToSqr(npc) > 64.0D) {
+            onClose();
+            return;
+        }
+        if (sessionTicks++ % 20 == 0) NPCDialogSessionPacketC2S.send(entityId, true);
+    }
+
+    @Override
+    public void removed() {
+        super.removed();
+        if (minecraft != null && minecraft.getConnection() != null)
+            NPCDialogSessionPacketC2S.send(entityId, false);
+    }
 
     public NPCDialogScreen(int entityId) {
         this(entityId, false);

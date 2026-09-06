@@ -54,7 +54,9 @@ public class VanillaZombieGeoModel<T extends Mob & GeoEntity> extends GeoNormalM
         for (CoreGeoBone bone : getAnimationProcessor().getRegisteredBones()) {
             ModelPart source = sourcePart(bone.getName());
             if (source != null) {
-                bone.setRotX(source.xRot);
+                // Bedrock 人形手臂的 X 轴正方向与原版 HumanoidModel 相反；腿部和头部不受影响。
+                boolean arm = bone.getName().startsWith(LEFT_ARM) || bone.getName().startsWith(RIGHT_ARM);
+                bone.setRotX(arm ? -source.xRot : source.xRot);
                 bone.setRotY(source.yRot);
                 bone.setRotZ(source.zRot);
             }

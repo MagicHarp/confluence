@@ -138,7 +138,7 @@ public class TheDestroyer extends BaseWormBoss {
     public void tick() {
         previousBodyRoll = getBodyRoll();
         super.tick();
-        if (isRemoved() || level().isClientSide) {
+        if (!isAlive() || level().isClientSide) {
             return;
         }
         if (getTarget() == null && tickCount % 30 == 0) {

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.client.ConfigScreenHandler;
@@ -44,7 +45,9 @@ public class MergedConfigurationScreen extends Screen {
                     .<BiFunction<ModContainer, Screen, Screen>>map(func -> (mod, parent) -> func.apply(minecraft, parent))
                     .orElseGet(() -> PortConfigurationScreen::new);
 
-            buttons.add(addRenderableWidget(Button.builder(Component.translatable("modid.name." + modid), button -> {
+            String nameKey = "modid.name." + modid;
+            Component name = I18n.exists(nameKey) ? Component.translatable(nameKey) : Component.literal(container.getModInfo().getDisplayName());
+            buttons.add(addRenderableWidget(Button.builder(name, button -> {
                 assert minecraft != null;
                 minecraft.setScreen(factory.apply(container, this));
             }).bounds(

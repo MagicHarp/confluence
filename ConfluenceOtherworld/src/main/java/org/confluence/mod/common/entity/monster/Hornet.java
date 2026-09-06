@@ -1,13 +1,10 @@
 package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.Difficulty;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,20 +16,20 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.projectile.HornetStingerProjectile;
 import org.confluence.mod.common.init.entity.ModEntities;
-import org.mesdag.portlib.wrapper.common.extensions.IPortEnchantmentHelperExtension;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
 /// 丛林黄蜂。
 ///
-/// 黄蜂的射击与战斗走位是 1.21 中独立于普通飞行预制体的特例：射击前停止导航并
+/// 黄蜂的射击与战斗走位独立于普通飞行预制体：射击前停止导航并
 /// 转正，发射后按固定周期重新寻找悬空路径。相关计时保留在实体专用节点中，避免为单个
 /// 特例增加公共飞行参数。
 public class Hornet extends BaseFlyingMonster {
@@ -94,22 +91,21 @@ public class Hornet extends BaseFlyingMonster {
         return navigation;
     }
 
-    @Override
-    public boolean doHurtTarget(Entity target) {
-        swing(InteractionHand.MAIN_HAND);
-        var damageSource = damageSources().sting(this);
-        boolean hit = target.hurt(damageSource, (float) (int) getAttributeValue(Attributes.ATTACK_DAMAGE));
-        if (!hit) return false;
-        if (level() instanceof ServerLevel serverLevel) {
-            IPortEnchantmentHelperExtension.doPostAttackEffects(serverLevel, target, damageSource);
+    /// 黄蜂毒刺在经典模式有三分之一概率中毒；专家及大师模式必定触发。
+    /// 高难度下三分之一为固定长时效果，其余为随机短时效果。
+    public void applyStingerPoison(LivingEntity target) {
+        boolean master = LibUtils.isMaster(level(), blockPosition());
+        boolean expert = master || LibUtils.isAtLeastExpert(level(), blockPosition());
+        if (!expert && random.nextInt(3) != 0) return;
+        int duration;
+        if (!expert) {
+            duration = 200;
+        } else if (random.nextInt(3) == 0) {
+            duration = master ? 500 : 400;
+        } else {
+            duration = master ? Mth.randomBetweenInclusive(random, 50, 250) : Mth.randomBetweenInclusive(random, 40, 200);
         }
-        if (!(target instanceof LivingEntity living)) return true;
-        living.setStingerCount(living.getStingerCount() + 1);
-        int duration = level().getDifficulty() == Difficulty.NORMAL ? 200 : level().getDifficulty() == Difficulty.HARD ? 360 : 0;
-        if (duration > 0)
-            living.addEffect(new MobEffectInstance(MobEffects.POISON, duration), this);
-        playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
-        return true;
+        target.addEffect(new MobEffectInstance(MobEffects.POISON, duration), this);
     }
 
     private final class HornetCombatNode extends BTNode {
@@ -212,8 +208,7 @@ public class Hornet extends BaseFlyingMonster {
     }
 
     private void lookAtTarget(LivingEntity target, float yawLimit, float pitchLimit) {
-        lookAt(target, yawLimit, pitchLimit);
-        getLookControl().setLookAt(target);
+        faceCombatPosition(target.getEyePosition(), yawLimit, pitchLimit);
     }
 
     private static double angleBetween(Vec3 first, Vec3 second) {

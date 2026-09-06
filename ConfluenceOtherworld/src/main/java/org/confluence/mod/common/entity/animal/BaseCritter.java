@@ -1,5 +1,6 @@
 package org.confluence.mod.common.entity.animal;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.confluence.mod.common.entity.IVariant;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -61,8 +63,16 @@ public abstract class BaseCritter extends Animal implements CritterVisual {
     protected void initializeSpawnVariant() {}
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
+    public void tick() {
+        super.tick();
+        if (level().isClientSide && tickCount % 5 == 0 && hasGoldenSparkles()) {
+            level().addParticle(ParticleTypes.ELECTRIC_SPARK, getRandomX(0.8), getRandomY(), getRandomZ(0.8), 0.0, 0.01, 0.0);
+        }
+    }
+
+    /// 金色小动物使用统一闪光表现；只有明确持有 gold 变体的实体会启用。
+    protected boolean hasGoldenSparkles() {
+        return this instanceof VariantHolder<?> holder && holder.getVariant() instanceof IVariant variant && "gold".equals(variant.getSerializedName());
     }
 
     @Override
@@ -87,9 +97,9 @@ public abstract class BaseCritter extends Animal implements CritterVisual {
         return SelectorNode.of(new VanillaGoalAction(new PanicGoal(this, panicSpeed)), routine);
     }
 
-    /// 创建 1.21 地面小动物共用的日常行为。
+    /// 创建地面小动物共用的日常行为。
     ///
-    /// 漂浮始终具有最高优先级；物种可把繁殖、食物吸引或跟随亲代等动作插入其后；
+    /// 漂浮始终具有最高优先级；物种可把逃跑、跳跃或攀爬等专属动作插入其后；
     /// 最后再执行避水巡游、观察玩家和随机转头。共享顺序集中在基类中，新增同类生物
     /// 不需要复制一整套原版动作，也不会遗漏落水逃生。
     protected final BTNode createGroundCritterRoutine(double strollSpeed, BTNode... speciesActions) {
@@ -112,7 +122,7 @@ public abstract class BaseCritter extends Animal implements CritterVisual {
         return ModSoundEvents.ROUTINE_DEATH.get();
     }
 
-    /// 地面小动物沿用 1.21 简单动物与兔类的较低声音音量。
+    /// 地面小动物使用较低的声音音量。
     ///
     /// 飞行动物和鸭子的原版继承值不同，由对应中间基类或具体实体覆盖；
     /// 这样新增地面小动物无需重复声明相同常量。

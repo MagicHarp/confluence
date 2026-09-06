@@ -16,6 +16,7 @@ import org.mesdag.portlib.registries.PortRegisterHandler;
 
 public final class SpawnEggItems {
     public static final PortItemRegistration ITEMS = PortRegisterHandler.item(Confluence.MODID);
+
     public static final PortDeferredItem<ForgeSpawnEggItem> SLIMELING_SPAWN_EGG = egg(MonsterEntities.SLIMELING);
     public static final PortDeferredItem<ForgeSpawnEggItem> ENCHANTED_SWORD_SPAWN_EGG = egg(MonsterEntities.ENCHANTED_SWORD);
     public static final PortDeferredItem<ForgeSpawnEggItem> BASE_BONES_SPAWN_EGG = egg(MonsterEntities.BASE_BONES);
@@ -67,7 +68,7 @@ public final class SpawnEggItems {
     public static final PortDeferredItem<ForgeSpawnEggItem> MAN_EATER_SPAWN_EGG = egg(MonsterEntities.MAN_EATER);
     public static final PortDeferredItem<ForgeSpawnEggItem> TROPIC_SLIME_SPAWN_EGG = egg(MonsterEntities.TROPIC_SLIME);
     public static final PortDeferredItem<ForgeSpawnEggItem> DERPLING_SPAWN_EGG = egg(MonsterEntities.DERPLING);
-    public static final PortDeferredItem<ForgeSpawnEggItem> HONEY_SLIME_SPAWN_EGG = egg(MonsterEntities.HONEY_SLIME);
+    public static final PortDeferredItem<ForgeSpawnEggItem> SWEET_SLIME_SPAWN_EGG = egg(MonsterEntities.SWEET_SLIME);
     public static final PortDeferredItem<ForgeSpawnEggItem> SNATCHER_SPAWN_EGG = egg(MonsterEntities.SNATCHER);
     public static final PortDeferredItem<ForgeSpawnEggItem> GIANT_TORTOISE_SPAWN_EGG = egg(MonsterEntities.GIANT_TORTOISE);
     public static final PortDeferredItem<ForgeSpawnEggItem> ICE_SLIME_SPAWN_EGG = egg(MonsterEntities.ICE_SLIME);

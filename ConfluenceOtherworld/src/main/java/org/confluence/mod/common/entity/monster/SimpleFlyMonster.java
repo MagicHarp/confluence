@@ -1,11 +1,10 @@
 package org.confluence.mod.common.entity.monster;
 
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -13,15 +12,14 @@ import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.LookForwardWanderFlyAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.SteeringDashAction;
-import org.confluence.mod.common.init.ModSoundEvents;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
 /// 仅通过参数区分冲撞节奏的简单飞行敌怪。
 ///
-/// 滴滴怪、飞鱼和游荡眼球鱼的行为结构相同，区别仅是惯性、最高速度、转向锥和
-/// 掠过后的滑行时间，因此保留为同一个实体类并使用不可变冲撞参数。真正具有额外状态或
+/// 使用本类的生物共享惯性转向、冲刺、掠过滑行和近身后撤的结构，仅由
+/// 不可变冲撞参数区分节奏。真正具有额外状态或
 /// 特殊攻击的生物仍应使用独立子类，不能继续向本类堆叠类型判断。
 public class SimpleFlyMonster extends BaseFlyingMonster {
     private static final RawAnimation FLY = RawAnimation.begin().thenLoop("fly");
@@ -29,13 +27,12 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
     private final DashProfile dashProfile;
     private final double wanderSpeed;
     private final boolean playFlyAnimation;
-    private final SoundProfile soundProfile;
 
     public SimpleFlyMonster(EntityType<? extends SimpleFlyMonster> type, Level level, double chargeSpeed, double wanderSpeed) {
-        this(type, level, DashProfile.standard(chargeSpeed), wanderSpeed, false, SoundProfile.ROUTINE);
+        this(type, level, DashProfile.standard(chargeSpeed), wanderSpeed, false);
     }
 
-    public SimpleFlyMonster(EntityType<? extends SimpleFlyMonster> type, Level level, DashProfile dashProfile, double wanderSpeed, boolean playFlyAnimation, SoundProfile soundProfile) {
+    public SimpleFlyMonster(EntityType<? extends SimpleFlyMonster> type, Level level, DashProfile dashProfile, double wanderSpeed, boolean playFlyAnimation) {
         super(type, level);
         if (!Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0) {
             throw new IllegalArgumentException("Wander speed must be finite and positive");
@@ -43,8 +40,13 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
         this.dashProfile = dashProfile;
         this.wanderSpeed = wanderSpeed;
         this.playFlyAnimation = playFlyAnimation;
-        this.soundProfile = soundProfile;
         setDiscardFriction(true);
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+    }
+
+    @Override
+    protected boolean mustSeePlayerTarget() {
+        return true;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -76,7 +78,7 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
         };
     }
 
-    /// 普通转向飞行怪使用未扩张的实体包围盒。只有 1.21 明确声明了特殊范围
+    /// 普通转向飞行怪使用未扩张的实体包围盒。只有具有特殊范围
     /// 或检测周期的实体才覆盖这三个方法，避免在注册点追加难以辨认的布尔值和数字参数。
     @Override
     protected double contactAttackInflation() {
@@ -98,20 +100,6 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
         if (playFlyAnimation) {
             controllers.add(new AnimationController<>(this, "Fly", 0, state -> state.setAndContinue(FLY)));
         }
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return soundProfile == SoundProfile.DRIPPLER
-                ? ModSoundEvents.DRIPPLER_HURT.get()
-                : super.getHurtSound(source);
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return soundProfile == SoundProfile.DRIPPLER
-                ? ModSoundEvents.DRIPPLER_DEATH.get()
-                : super.getDeathSound();
     }
 
     /// 一组只描述转向冲撞物理的数据。
@@ -145,8 +133,4 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
         }
     }
 
-    public enum SoundProfile {
-        ROUTINE,
-        DRIPPLER
-    }
 }

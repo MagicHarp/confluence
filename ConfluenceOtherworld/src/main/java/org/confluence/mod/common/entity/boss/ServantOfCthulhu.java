@@ -45,6 +45,7 @@ public class ServantOfCthulhu extends BaseFlyingMonster implements BossOwnedEnti
     public void setMaster(EyeOfCthulhu master) {
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 
@@ -110,8 +111,7 @@ public class ServantOfCthulhu extends BaseFlyingMonster implements BossOwnedEnti
             return;
         }
 
-        boolean coordinatedDive = masterForCoordination() != null
-                && BossMinionCoordinator.isAttackWindow(this, 52, 25);
+        boolean coordinatedDive = masterForCoordination() != null && BossMinionCoordinator.isAttackWindow(this, 52, 25);
         Vec3 destination = coordinatedDive
                 ? BossMinionCoordinator.predict(target, 5.0D, 4.0D)
                 : BossMinionCoordinator.orbitPoint(this, target, 6.0D, 1.8D, 0.035D, 8);

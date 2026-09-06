@@ -5,9 +5,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.Confluence;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import org.confluence.mod.common.entity.ai.bt.BTNode;
+import org.confluence.mod.common.entity.ai.bt.BTRoot;
 
-public class HellButterfly extends Bird {
+public class HellButterfly extends BaseFlyingCritter {
 
     public HellButterfly(EntityType<? extends HellButterfly> type, Level level) {
         super(type, level);
@@ -23,6 +24,16 @@ public class HellButterfly extends Bird {
     }
 
     @Override
+    protected BTRoot createBT() {
+        return new BTRoot() {
+            @Override
+            protected BTNode createTree() {
+                return withPassivePanic(createEnemyAvoidingFlyingRoutine(), 1.25D);
+            }
+        };
+    }
+
+    @Override
     public ResourceLocation getModelPath() {
         return Confluence.asResource("animal/butterfly");
     }
@@ -33,7 +44,8 @@ public class HellButterfly extends Bird {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        registerFlyOnlyController(controllers);
+    public boolean isFullBright() {
+        return true;
     }
+
 }

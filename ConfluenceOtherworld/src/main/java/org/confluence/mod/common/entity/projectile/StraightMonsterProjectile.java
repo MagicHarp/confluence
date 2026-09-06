@@ -1,5 +1,6 @@
 package org.confluence.mod.common.entity.projectile;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +22,8 @@ import org.mesdag.portlib.wrapper.common.extensions.IPortProjectileExtension;
 /// 实现加速、减速等运动差异，避免每种远程生物重复一整套碰撞代码。
 public abstract class StraightMonsterProjectile extends Projectile
         implements IPortProjectileExtension {
+    private static final String DAMAGE_KEY = "Damage";
+    private static final String MAXIMUM_LIFETIME_KEY = "MaximumLifetime";
     private float damage;
     private int maximumLifetime = 100;
 
@@ -98,18 +101,27 @@ public abstract class StraightMonsterProjectile extends Projectile
             return;
         }
 
+        Vec3 velocity = modifyVelocity(getDeltaMovement());
+        setDeltaMovement(velocity);
         HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        if (hitResult.getType() != HitResult.Type.MISS
-                && !PortProjectileImpactEvent.onProjectileImpact(this, hitResult)) {
+        if (hitResult.getType() != HitResult.Type.MISS && !PortProjectileImpactEvent.onProjectileImpact(this, hitResult)) {
             hitTargetOrDeflectSelf(hitResult);
         }
         if (isRemoved()) {
             return;
         }
+        if (hitResult instanceof BlockHitResult blockHitResult && ownsBlockImpactMovement(blockHitResult)) {
+            checkInsideBlocks();
+            updateRotation();
+            return;
+        }
+        if (hitResult instanceof EntityHitResult entityHitResult && ownsEntityImpactMovement(entityHitResult)) {
+            checkInsideBlocks();
+            updateRotation();
+            return;
+        }
 
         checkInsideBlocks();
-        Vec3 velocity = modifyVelocity(getDeltaMovement());
-        setDeltaMovement(velocity);
         setPos(getX() + velocity.x, getY() + velocity.y, getZ() + velocity.z);
         updateRotation();
     }
@@ -128,6 +140,11 @@ public abstract class StraightMonsterProjectile extends Projectile
                 onSuccessfulHit(owner, target);
             }
         }
+        finishEntityHit(result);
+    }
+
+    /// 完成实体命中后的生命周期处理；普通直线弹幕在首次命中后消失。
+    protected void finishEntityHit(EntityHitResult result) {
         discard();
     }
 
@@ -140,6 +157,33 @@ public abstract class StraightMonsterProjectile extends Projectile
     @Override
     protected void onHitBlock(BlockHitResult result) {
         discard();
+    }
+
+    /// 方块命中回调是否已经决定了本 tick 的最终位置与速度。
+    ///
+    /// 反弹弹体需要返回 {@code true}，防止公共直线移动在回调结束后再次使用命中前速度，
+    /// 穿墙弹体则保持默认值并继续完成原位移。
+    protected boolean ownsBlockImpactMovement(BlockHitResult result) {
+        return false;
+    }
+
+    /// 实体命中回调是否已经决定了本 tick 的最终位置与速度。
+    protected boolean ownsEntityImpactMovement(EntityHitResult result) {
+        return false;
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putFloat(DAMAGE_KEY, damage);
+        tag.putInt(MAXIMUM_LIFETIME_KEY, maximumLifetime);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains(DAMAGE_KEY)) damage = tag.getFloat(DAMAGE_KEY);
+        if (tag.contains(MAXIMUM_LIFETIME_KEY)) maximumLifetime = tag.getInt(MAXIMUM_LIFETIME_KEY);
     }
 
     @Override

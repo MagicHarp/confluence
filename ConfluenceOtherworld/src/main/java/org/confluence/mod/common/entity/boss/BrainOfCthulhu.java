@@ -561,6 +561,11 @@ public class BrainOfCthulhu extends BaseBoss {
         return getEncounterProgress();
     }
 
+    @Override
+    protected float getBossBarMaximumHealth() {
+        return isPhase2() ? getMaxHealth() : (float) (getMaxHealth() + NEURON_COUNT * VisualNeuron.BASE_MAX_HEALTH);
+    }
+
     /// 第一阶段 Boss 条使用固定的遭遇总生命上限。
     ///
     /// 神经元死亡后只能减少当前生命，不能同时从最大生命中移除；否则每击杀一只神经元，

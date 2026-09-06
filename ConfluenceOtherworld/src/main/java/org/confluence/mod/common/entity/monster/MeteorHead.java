@@ -1,10 +1,13 @@
 package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -33,6 +36,11 @@ public class MeteorHead extends BaseFlyingMonster {
     }
 
     @Override
+    protected boolean mustSeePlayerTarget() {
+        return false;
+    }
+
+    @Override
     protected BTRoot createBT() {
         return new BTRoot() {
             @Override
@@ -42,6 +50,27 @@ public class MeteorHead extends BaseFlyingMonster {
                         new LookForwardWanderFlyAction(MeteorHead.this, 0.18, 0.0F));
             }
         };
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        LivingEntity target = getTarget();
+        if (target != null && target.isAlive()) {
+            faceCombatPosition(target.getEyePosition(), 360.0F, 360.0F);
+        }
+    }
+
+    /// 陨石怪接触玩家时有三分之一概率点燃目标，持续时间随难度延长。
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean damaged = super.doHurtTarget(target);
+        if (damaged && target instanceof LivingEntity living && random.nextInt(3) == 0) {
+            int duration = LibUtils.isMaster(level(), blockPosition()) ? 350
+                    : LibUtils.isAtLeastExpert(level(), blockPosition()) ? 280 : 140;
+            living.setRemainingFireTicks(Math.max(living.getRemainingFireTicks(), duration));
+        }
+        return damaged;
     }
 
     @Override

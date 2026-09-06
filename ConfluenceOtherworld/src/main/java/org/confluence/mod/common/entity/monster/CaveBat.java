@@ -5,10 +5,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -16,7 +21,10 @@ import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.LookForwardWanderFlyAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.SteeringDashAction;
+import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.ModSoundEvents;
+import org.confluence.terra_curio.common.init.TCItems;
+import org.confluence.terra_curio.util.TCUtils;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -76,7 +84,20 @@ public class CaveBat extends BaseFlyingMonster {
         return super.hurt(source, amount);
     }
 
-    /// 保留 1.21 地狱蝙蝠分布在身体两侧的熔岩粒子轨迹。
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean damaged = super.doHurtTarget(target);
+        if (damaged && target instanceof LivingEntity living)
+            variant.applyContactEffect(this, living);
+        return damaged;
+    }
+
+    private int scaledDuration(int classicTicks) {
+        if (LibUtils.isMaster(level(), blockPosition())) return classicTicks * 5 / 2;
+        return LibUtils.isAtLeastExpert(level(), blockPosition()) ? classicTicks * 2 : classicTicks;
+    }
+
+    /// 生成分布在地狱蝙蝠身体两侧的熔岩粒子轨迹。
     private void spawnHellBatParticles() {
         int offset = getId() * 3;
         float wave = Mth.cos((offset + tickCount) * 7.448451F * Mth.DEG_TO_RAD + Mth.PI);
@@ -88,7 +109,7 @@ public class CaveBat extends BaseFlyingMonster {
         level().addParticle(ParticleTypes.LAVA, getX() - x, getY() + y, getZ() - z, 0.0, 0.0, 0.0);
     }
 
-    /// 保留 1.21 冰蝙蝠围绕身体随机散落的成对雪花粒子。
+    /// 生成围绕冰蝙蝠身体随机散落的成对雪花粒子。
     private void spawnIceBatParticles() {
         float side = getBbWidth() * 0.2F;
         float x = Mth.cos(getYRot() * Mth.DEG_TO_RAD + getRandom().nextFloat()) * side;
@@ -103,10 +124,35 @@ public class CaveBat extends BaseFlyingMonster {
         return ModSoundEvents.BAT_DEATH.get();
     }
 
-    /// 只保存同一套蝙蝠行为的环境表现差异。
+    /// 保存同一套蝙蝠飞行行为之间的环境表现与接触效果差异。
     public enum Variant {
-        ROUTINE,
-        ICE,
-        HELL
+        ROUTINE {
+            @Override
+            void applyContactEffect(CaveBat bat, LivingEntity target) {}
+        },
+        ICE {
+            @Override
+            void applyContactEffect(CaveBat bat, LivingEntity target) {
+                if (TCUtils.hasType(target, TCItems.FROZEN$IMMUNE)) return;
+                if (bat.random.nextBoolean()) {
+                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, bat.scaledDuration(300)), bat);
+                }
+                int frozenChance = LibUtils.isAtLeastExpert(bat.level(), bat.blockPosition()) ? 1225 : 35;
+                int frozenRolls = LibUtils.isAtLeastExpert(bat.level(), bat.blockPosition()) ? 69 : 1;
+                if (bat.random.nextInt(frozenChance) < frozenRolls) {
+                    target.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), bat.scaledDuration(20)), bat);
+                }
+            }
+        },
+        GIANT {
+            @Override
+            void applyContactEffect(CaveBat bat, LivingEntity target) {}
+        },
+        HELL {
+            @Override
+            void applyContactEffect(CaveBat bat, LivingEntity target) {}
+        };
+
+        abstract void applyContactEffect(CaveBat bat, LivingEntity target);
     }
 }

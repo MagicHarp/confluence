@@ -28,8 +28,8 @@ import java.util.UUID;
 
 /// 蜂王召唤的近战幼蜂。
 ///
-/// 幼蜂只响应受击或蜂王每 32 tick 下发的目标，使用飞行导航
-/// 追近后近战；离蜂王超过 30 格且蜂王所在位置可容纳实体时，回到蜂王上方。所有者追踪器
+/// 幼蜂只响应受击或蜂王下发的目标，使用飞行导航
+/// 追近后近战；离蜂王超过 60 格且蜂王所在位置可容纳实体时，回到蜂王上方。所有者追踪器
 /// 只负责跨存档恢复归属，不额外增加持续追踪、强制返航或独立索敌。
 public final class LittleHornet extends Hornet implements BossOwnedEntity {
     private static final RawAnimation WING = RawAnimation.begin().thenLoop("wing");
@@ -50,6 +50,7 @@ public final class LittleHornet extends Hornet implements BossOwnedEntity {
     public void setMaster(QueenBee master) {
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 
@@ -177,7 +178,7 @@ public final class LittleHornet extends Hornet implements BossOwnedEntity {
             }
 
             boolean attackWindow = BossMinionCoordinator.isAttackWindow(LittleHornet.this, 64, 28);
-            getLookControl().setLookAt(target, 30.0F, 30.0F);
+            faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
             if (--repathDelay <= 0) {
                 QueenBee master = getMaster();
                 if (master != null && !attackWindow) {

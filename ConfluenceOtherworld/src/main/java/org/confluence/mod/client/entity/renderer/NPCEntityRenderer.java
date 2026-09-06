@@ -2,6 +2,7 @@ package org.confluence.mod.client.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.LightTexture;
@@ -16,9 +17,11 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.entity.model.NPCHumanoidGeoModel;
+import org.confluence.mod.common.entity.npc.AnglerNPC;
 import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.entity.npc.chat.NPCChat;
 import org.joml.Matrix4f;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 
 import java.util.List;
 
@@ -32,6 +35,14 @@ public class NPCEntityRenderer<T extends BaseNPC> extends GeoNormalRenderer<T> {
     public NPCEntityRenderer(EntityRendererProvider.Context context, ResourceLocation path) {
         super(context, new NPCHumanoidGeoModel<>(path));
         addRenderLayer(new VanillaHumanoidRenderer.HeldItemLayer<>(this, "LeftArm", "RightArm"));
+    }
+
+    @Override
+    protected void adjustPose(PoseStack poseStack, T animatable, BakedGeoModel model, float partialTick) {
+        if (animatable instanceof AnglerNPC angler && !angler.isWakeUp()) {
+            poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
+            poseStack.translate(0.0F, -1.0F, 0.0F);
+        }
     }
 
     @Override

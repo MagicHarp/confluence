@@ -49,6 +49,7 @@ public final class TheDestroyerProbe extends BaseFlyingMonster implements BossOw
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
         shotTimer = 1 + BossMinionCoordinator.phaseOffset(this, SHOT_INTERVAL);
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 

@@ -7,13 +7,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -21,12 +20,11 @@ import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.*;
 import org.confluence.mod.common.init.ModSoundEvents;
+import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
-
-import java.util.UUID;
 
 /// 通用陆行近战怪物，负责追击、近战、越障跃击和空闲漫游。
 ///
@@ -34,12 +32,12 @@ import java.util.UUID;
 /// 公共实现统一管理瞬时属性修饰符和疾跑状态，防止每种僵尸都复制一套
 /// 容易发生永久叠加的属性代码。
 public class BaseWarriorMonster extends BaseMonster {
-    private static final UUID PURSUIT_SPEED_UUID = UUID.fromString("90d2f39a-960e-48b2-bcf7-48a49b51d982");
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
     private static final RawAnimation RUN = RawAnimation.begin().thenLoop("move.run");
     private static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
     private static final RawAnimation ATTACK = RawAnimation.begin().thenLoop("attack.strike");
     private final double pursuitSpeedBonus;
+    private final AttributeModifier pursuitSpeedModifier;
     private final double meleeSpeed;
     private final boolean ignoreLightPathCost;
     private final LandAnimationProfile animationProfile;
@@ -81,14 +79,24 @@ public class BaseWarriorMonster extends BaseMonster {
     }
 
     public BaseWarriorMonster(EntityType<? extends BaseWarriorMonster> type, Level level, double pursuitSpeedBonus, LandAnimationProfile animationProfile, LandSoundProfile soundProfile, double meleeSpeed, boolean ignoreLightPathCost) {
+        this(type, level, pursuitSpeedBonus, animationProfile, soundProfile, meleeSpeed, ignoreLightPathCost, DoorBehavior.NONE);
+    }
+
+    public BaseWarriorMonster(EntityType<? extends BaseWarriorMonster> type, Level level, double pursuitSpeedBonus, LandAnimationProfile animationProfile, LandSoundProfile soundProfile, double meleeSpeed, boolean ignoreLightPathCost, DoorBehavior doorBehavior) {
         super(type, level);
         if (!Double.isFinite(pursuitSpeedBonus) || pursuitSpeedBonus < 0.0 || !Double.isFinite(meleeSpeed) || meleeSpeed <= 0.0)
-            throw new IllegalArgumentException("Movement parameters must be positive");
+            throw new IllegalArgumentException("Pursuit speed bonus must be finite and non-negative, and melee speed must be finite and positive");
         this.pursuitSpeedBonus = pursuitSpeedBonus;
+        this.pursuitSpeedModifier = new PortAttributeModifier(Confluence.asResource("warrior_pursuit_speed"), pursuitSpeedBonus, PortAttributeModifier.Operation.ADD_VALUE).unwrap();
         this.animationProfile = animationProfile;
         this.soundProfile = soundProfile;
         this.meleeSpeed = meleeSpeed;
         this.ignoreLightPathCost = ignoreLightPathCost;
+        if (doorBehavior == DoorBehavior.OPEN && navigation instanceof GroundPathNavigation groundNavigation) {
+            configurePlayerTargetLineOfSight(false);
+            groundNavigation.setCanOpenDoors(true);
+            goalSelector.addGoal(-1, new OpenDoorGoal(this, true));
+        }
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -163,11 +171,11 @@ public class BaseWarriorMonster extends BaseMonster {
         if (movementSpeed == null) {
             return;
         }
-        AttributeModifier modifier = movementSpeed.getModifier(PURSUIT_SPEED_UUID);
+        AttributeModifier modifier = movementSpeed.getModifier(pursuitSpeedModifier.getId());
         if (pursuing && modifier == null) {
-            movementSpeed.addTransientModifier(new AttributeModifier(PURSUIT_SPEED_UUID, "Target pursuit speed", pursuitSpeedBonus, AttributeModifier.Operation.ADDITION));
+            movementSpeed.addTransientModifier(pursuitSpeedModifier);
         } else if (!pursuing && modifier != null) {
-            movementSpeed.removeModifier(PURSUIT_SPEED_UUID);
+            movementSpeed.removeModifier(pursuitSpeedModifier.getId());
         }
         setSprinting(pursuing);
     }
@@ -250,5 +258,11 @@ public class BaseWarriorMonster extends BaseMonster {
         ZOMBIE,
         FACE_MONSTER,
         POSSESSED_ARMOR
+    }
+
+    /// 普通战士实体对门的明确处理方式。
+    public enum DoorBehavior {
+        NONE,
+        OPEN
     }
 }

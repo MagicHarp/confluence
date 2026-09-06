@@ -11,4 +11,9 @@ public class PhasingChargeMonster extends SimpleFlyMonster {
         super(type, level, chargeSpeed, wanderSpeed);
         this.noPhysics = true;
     }
+
+    @Override
+    protected boolean mustSeePlayerTarget() {
+        return false;
+    }
 }

@@ -10,11 +10,15 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.init.ModEffects;
+import org.confluence.terra_curio.common.init.TCItems;
+import org.confluence.terra_curio.util.TCUtils;
 
 public class SlimeSpikeEntity extends AbstractHurtingProjectile {
     private static final String RUNTIME_KEY = "ConfluenceSlimeSpikeRuntime";
@@ -41,7 +45,7 @@ public class SlimeSpikeEntity extends AbstractHurtingProjectile {
         return create(level, shooter, type, dirX, dirY, dirZ, velocity, 0.0F, damage);
     }
 
-    /// 创建史莱姆尖刺并显式指定散布值。普通工厂保留零散布，尖刺史莱姆则使用 1.21 的 {@code 1.0F} 散布，避免把所有调用方的弹道一并改变。
+    /// 创建史莱姆尖刺并显式指定散布值。普通工厂保留零散布，尖刺史莱姆自行传入散布，避免把所有调用方的弹道一并改变。
     public static SlimeSpikeEntity create(Level level, LivingEntity shooter, EntityType<? extends SlimeSpikeEntity> type, double dirX, double dirY, double dirZ, float velocity, float inaccuracy, float damage) {
         return create(level, shooter, type, dirX, dirY, dirZ, velocity, inaccuracy, damage, Variant.NORMAL, true);
     }
@@ -60,12 +64,31 @@ public class SlimeSpikeEntity extends AbstractHurtingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!level().isClientSide && result.getEntity() instanceof LivingEntity target) {
-            target.hurt(damageSources().mobProjectile(this, getOwner() instanceof LivingEntity owner ? owner : null), damage);
+        if (!level().isClientSide && result.getEntity() instanceof LivingEntity target
+                && getOwner() instanceof Mob owner && owner.canAttack(target)
+                && target.hurt(damageSources().mobProjectile(this, owner), damage)) {
             if (getVariant() == Variant.JUNGLE) {
-                target.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
+                if (random.nextInt(8) < 5) {
+                    int baseDuration = random.nextBoolean() ? 100 : 400;
+                    target.addEffect(new MobEffectInstance(MobEffects.POISON, scaledDuration(baseDuration)), owner);
+                }
             } else if (getVariant() == Variant.ICE) {
-                target.addEffect(new MobEffectInstance(ModEffects.FROST_BURN.get(), 100));
+                if (!TCUtils.hasType(target, TCItems.FROZEN$IMMUNE)) {
+                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, scaledDuration(400)), owner);
+                    boolean expert = LibUtils.isAtLeastExpert(level(), blockPosition());
+                    if (!expert) {
+                        if (random.nextInt(20) == 0) {
+                            target.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), 30), owner);
+                        }
+                    } else {
+                        int roll = random.nextInt(400);
+                        if (roll < 20) {
+                            target.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), LibUtils.isMaster(level(), blockPosition()) ? 75 : 60), owner);
+                        } else if (roll < 39) {
+                            target.addEffect(new MobEffectInstance(ModEffects.FROZEN.get(), LibUtils.isMaster(level(), blockPosition()) ? 50 : 40), owner);
+                        }
+                    }
+                }
             }
         }
         discard();
@@ -141,6 +164,11 @@ public class SlimeSpikeEntity extends AbstractHurtingProjectile {
 
     public Variant getVariant() {
         return Variant.values()[entityData.get(DATA_VARIANT)];
+    }
+
+    private int scaledDuration(int classicTicks) {
+        if (LibUtils.isMaster(level(), blockPosition())) return classicTicks * 5 / 2;
+        return LibUtils.isAtLeastExpert(level(), blockPosition()) ? classicTicks * 2 : classicTicks;
     }
 
     public enum Variant {NORMAL, JUNGLE, ICE}

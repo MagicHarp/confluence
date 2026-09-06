@@ -578,8 +578,10 @@ public class HillOfFlesh extends BaseBoss {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (source.getEntity() != null && !encounterEntities.contains(source.getEntity())) {
-            return false;
+        Entity attacker = source.getEntity();
+        if (attacker instanceof LivingEntity livingAttacker) {
+            if (!canAttack(livingAttacker)) return false;
+            markEncounterEntity(livingAttacker);
         }
         return super.hurt(source, amount * 0.5F);
     }

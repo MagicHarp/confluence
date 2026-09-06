@@ -5,7 +5,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.entity.model.ExplicitGeoModel;
@@ -66,6 +68,11 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
         this.shadowRadius = 0.5F;
     }
 
+    @Override
+    protected boolean usesInterpolatedLight(SkeletronHand hand) {
+        return true;
+    }
+
     /// 各部位已使用世界空间坐标，不能再次叠加实体旋转。
     @Override
     protected void applyRotations(
@@ -74,6 +81,26 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
             float ageInTicks,
             float rotationYaw,
             float partialTick) {}
+
+    @Override
+    protected int getSkyLightLevel(SkeletronHand hand, BlockPos probe) {
+        int light = super.getSkyLightLevel(hand, probe);
+        int visibleHeight = Math.max(1, Mth.ceil(hand.getBbHeight()));
+        for (int offset = 1; offset <= visibleHeight; offset++) {
+            light = Math.max(light, hand.level().getBrightness(LightLayer.SKY, probe.above(offset)));
+        }
+        return light;
+    }
+
+    @Override
+    protected int getBlockLightLevel(SkeletronHand hand, BlockPos probe) {
+        int light = super.getBlockLightLevel(hand, probe);
+        int visibleHeight = Math.max(1, Mth.ceil(hand.getBbHeight()));
+        for (int offset = 1; offset <= visibleHeight; offset++) {
+            light = Math.max(light, hand.level().getBrightness(LightLayer.BLOCK, probe.above(offset)));
+        }
+        return light;
+    }
 
     @Override
     public void renderRecursively(
@@ -334,7 +361,9 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
         poseStack.pushPose();
         poseStack.translate(start.x, start.y, start.z);
         poseStack.mulPose(rotationFromBasis(basis));
-        poseStack.scale((float) (renderedLength / modelLength), 1.0F, 1.0F);
+        // 只拉伸顶点位置。把非等比长度缩放写入法线矩阵会改变法线长度，
+        // 手臂转到特定角度时实体光照会突然压成近黑色。
+        poseStack.last().pose().scale((float) (renderedLength / modelLength), 1.0F, 1.0F);
         poseStack.translate(-surface.minimumX, -bone.getPivotY() / 16.0F, -bone.getPivotZ() / 16.0F);
         renderBoneCubes(poseStack, bone, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.popPose();

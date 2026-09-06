@@ -3,6 +3,7 @@ package org.confluence.mod.common.entity.boss;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
@@ -31,10 +32,12 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.util.LibUtils;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.entity.ai.bt.Blackboard;
 import org.confluence.mod.common.entity.monster.BaseMonster;
 import org.confluence.mod.common.init.ModSecretSeeds;
+import org.confluence.mod.network.s2c.BossBarSyncPacketS2C;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -58,6 +61,8 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     protected int noTargetTicks = 0;
     /// 连续失去合格玩家超过该时长后结束遭遇。
     protected static final int DISENGAGE_TICKS = 200;
+    /// 定期补发自定义样式元数据，覆盖换档、重连及部件主身份交接造成的客户端时序差。
+    private static final int BOSS_BAR_RESYNC_INTERVAL = 40;
     private static final int RETREAT_TICKS = 40;
     private static final byte PHASE_PARTICLE_EVENT = 60;
     private static final byte DEATH_PARTICLE_EVENT = 61;
@@ -75,6 +80,8 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     private boolean noPhysicsBeforeRetreat;
     private boolean applyingDisengageMovement;
     private boolean removingSubEntities;
+    private float lastSynchronizedBossBarHealth = Float.NaN;
+    private float lastSynchronizedBossBarMaximumHealth = Float.NaN;
     private final BossChunkTicket encounterChunkTicket = new BossChunkTicket(getUUID());
 
     public BaseBoss(EntityType<? extends Monster> type, Level level) {
@@ -102,13 +109,13 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     @Override
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
-        bossEvent.addPlayer(player);
+        addBossBarPlayer(player);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer player) {
         super.stopSeenByPlayer(player);
-        bossEvent.removePlayer(player);
+        removeBossBarPlayer(player);
     }
 
     @Override
@@ -120,12 +127,52 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
-        bossEvent.setProgress(Mth.clamp(getBossBarProgress(), 0.0F, 1.0F));
+        float progress = Mth.clamp(getBossBarProgress(), 0.0F, 1.0F);
+        bossEvent.setProgress(progress);
+        float maximumHealth = getBossBarMaximumHealth();
+        float health = progress * maximumHealth;
+        if (Float.compare(health, lastSynchronizedBossBarHealth) != 0 || Float.compare(maximumHealth, lastSynchronizedBossBarMaximumHealth) != 0 || tickCount % BOSS_BAR_RESYNC_INTERVAL == 0) {
+            lastSynchronizedBossBarHealth = health;
+            lastSynchronizedBossBarMaximumHealth = maximumHealth;
+            for (ServerPlayer player : bossEvent.getPlayers())
+                sendBossBar(player, health, maximumHealth, true);
+        }
     }
 
     /// 返回本场遭遇在当前 tick 的唯一 Boss 条进度快照。
     protected float getBossBarProgress() {
         return getMaxHealth() <= 0.0F ? 0.0F : getHealth() / getMaxHealth();
+    }
+
+    protected float getBossBarMaximumHealth() {
+        return getMaxHealth();
+    }
+
+    protected final void addBossBarPlayer(ServerPlayer player) {
+        bossEvent.addPlayer(player);
+        synchronizeBossBar(player, true);
+    }
+
+    protected final void removeBossBarPlayer(ServerPlayer player) {
+        bossEvent.removePlayer(player);
+        synchronizeBossBar(player, false);
+    }
+
+    protected final void removeAllBossBarPlayers() {
+        for (ServerPlayer player : List.copyOf(bossEvent.getPlayers())) removeBossBarPlayer(player);
+    }
+
+    private void synchronizeBossBar(ServerPlayer player, boolean visible) {
+        if (!visible) {
+            sendBossBar(player, 0.0F, 0.0F, false);
+            return;
+        }
+        float maximumHealth = getBossBarMaximumHealth();
+        sendBossBar(player, Mth.clamp(getBossBarProgress(), 0.0F, 1.0F) * maximumHealth, maximumHealth, true);
+    }
+
+    private void sendBossBar(ServerPlayer player, float health, float maximumHealth, boolean visible) {
+        Confluence.NETWORK_HANDLER.sendToPlayer(player, new BossBarSyncPacketS2C(bossEvent.getId(), BuiltInRegistries.ENTITY_TYPE.getKey(getType()), health, maximumHealth, visible));
     }
 
     // === Boss interface ===

@@ -13,7 +13,7 @@ import org.confluence.mod.common.init.ModDataMaps;
 ///
 /// 该记录只保存可安全热重载的“数值配置”，不保存实体实例、行为树节点或 Forge 对象。
 /// 生物实体的 Java 实现是默认值的唯一来源；数据包只保存需要改动的覆盖值。
-/// 数据文件位于 `data/<namespace>/data_maps/entity_type/creature_definition.json`；
+/// 数据文件位于 {@code data/<命名空间>/data_maps/entity_type/creature_definition.json}；
 /// KubeJS 也可以用标准实体类型 Data Map 写入相同结构，无需依赖本体内部 Java 类。
 /// 未填写的字段统一以负数表示“沿用 Java 侧默认值”，
 /// 从而允许整合包只覆盖自己关心的参数。

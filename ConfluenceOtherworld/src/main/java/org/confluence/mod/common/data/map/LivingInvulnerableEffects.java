@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.confluence.mod.api.whip.WhipTagEffect;
 import org.confluence.mod.common.init.ModDataMaps;
 
 import java.util.Arrays;
@@ -35,20 +36,24 @@ public record LivingInvulnerableEffects(HolderSet<MobEffect> effects, List<Categ
     }
 
     public enum Category implements StringRepresentable {
-        BENEFICIAL(MobEffectCategory.BENEFICIAL),
-        HARMFUL(MobEffectCategory.HARMFUL),
-        NEUTRAL(MobEffectCategory.NEUTRAL);
+        BENEFICIAL(MobEffectCategory.BENEFICIAL, false),
+        HARMFUL(MobEffectCategory.HARMFUL, false),
+        /// 匹配普通有害效果，但允许召唤鞭标记正常附着。
+        HARMFUL_EXCEPT_WHIP_TAG(MobEffectCategory.HARMFUL, true),
+        NEUTRAL(MobEffectCategory.NEUTRAL, false);
 
         public static final Codec<Category> CODEC = StringRepresentable.fromEnum(Category::values);
 
         private final MobEffectCategory value;
+        private final boolean allowsWhipTag;
 
-        Category(MobEffectCategory value) {
+        Category(MobEffectCategory value, boolean allowsWhipTag) {
             this.value = value;
+            this.allowsWhipTag = allowsWhipTag;
         }
 
         public boolean is(MobEffect effect) {
-            return value == effect.getCategory();
+            return value == effect.getCategory() && (!allowsWhipTag || !(effect instanceof WhipTagEffect));
         }
 
         @Override

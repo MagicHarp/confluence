@@ -38,7 +38,7 @@ public class IceThornStructure extends Structure {
             Confluence.asResource("amethyst_tree")
     };
 
-    protected IceThornStructure(StructureSettings settings) {
+    public IceThornStructure(StructureSettings settings) {
         super(settings);
     }
 

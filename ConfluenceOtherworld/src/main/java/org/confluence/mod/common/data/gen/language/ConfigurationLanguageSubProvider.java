@@ -37,6 +37,13 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.sellPriceDisplay.never", "Not displayed at any time");
         add("confluence.configuration.sellPriceDisplay.everywhere", "Displayed at all times");
         add("confluence.configuration.sellPriceDisplay.trade_screen", "Only displayed in the trading screen");
+        add("confluence.configuration.bossBarStyle", "Boss Bar Style");
+        add("confluence.configuration.bossBarStyle.tooltip", "Selects the vanilla, static custom, or dynamic custom boss bar.");
+        add("confluence.configuration.bossBarStyle.vanilla", "Vanilla");
+        add("confluence.configuration.bossBarStyle.static", "Static Custom");
+        add("confluence.configuration.bossBarStyle.dynamic", "Dynamic Custom");
+        add("confluence.configuration.bossBarNumbersVisible", "Boss Bar Health Values");
+        add("confluence.configuration.bossBarNumbersVisible.tooltip", "Shows exact health values on custom boss bars.");
         add("confluence.configuration.Recipe", "Crafting Recipe System");
         add("confluence.configuration.Recipe.button", "Crafting Recipe System");
         add("confluence.configuration.Recipe.tooltip", "Settings related to crafting recipes");
@@ -272,6 +279,8 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.terraStyleArmor.tooltip", "When enabled, armor is displayed in Terra style.");
         add("confluence.configuration.Armor.tooltip", "About Armor Display");
         add("confluence.configuration.title", "Configuration Screen");
+        add("title.confluence.merged_configuration", "Confluence Merged Configuration Overview");
+        add("modid.name.confluence", "Confluence");
         add("confluence.configuration.section.confluence.client.toml.title", "Client-side Configuration");
         add("confluence.configuration.Entity.tooltip", "Entity-related Visual Effects");
         add("confluence.configuration.section.confluence.common.toml.title", "Common Configuration");
@@ -333,6 +342,13 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.sellPriceDisplay.never", "任何时候都不显示");
         add("confluence.configuration.sellPriceDisplay.everywhere", "任何时候都显示");
         add("confluence.configuration.sellPriceDisplay.trade_screen", "仅在交易界面显示");
+        add("confluence.configuration.bossBarStyle", "Boss血条样式");
+        add("confluence.configuration.bossBarStyle.tooltip", "选择原版、静态自定义或动态自定义Boss血条。");
+        add("confluence.configuration.bossBarStyle.vanilla", "原版");
+        add("confluence.configuration.bossBarStyle.static", "静态自定义");
+        add("confluence.configuration.bossBarStyle.dynamic", "动态自定义");
+        add("confluence.configuration.bossBarNumbersVisible", "Boss血条数值");
+        add("confluence.configuration.bossBarNumbersVisible.tooltip", "在自定义Boss血条上显示精确生命值。");
         add("confluence.configuration.Recipe", "合成配方机制");
         add("confluence.configuration.Recipe.button", "合成配方机制");
         add("confluence.configuration.Recipe.tooltip", "一些合成配方相关设置");
@@ -563,6 +579,8 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.terraStyleArmor.tooltip", "开启后，护甲值显示为泰拉样式");
         add("confluence.configuration.Armor.tooltip", "关于护甲值显示");
         add("confluence.configuration.title", "配置界面");
+        add("title.confluence.merged_configuration", "汇流来世合并配置总览");
+        add("modid.name.confluence", "汇流来世");
         add("confluence.configuration.section.confluence.client.toml.title", "客户端配置");
         add("confluence.configuration.Entity.tooltip", "与生物有关的视觉效果");
         add("confluence.configuration.section.confluence.common.toml.title", "通用配置");

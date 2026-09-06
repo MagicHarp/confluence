@@ -5,11 +5,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.projectile.SlimeSpikeEntity;
 
-/// 尖刺丛林史莱姆 —— 战斗时发射 8 方向尖刺，游荡时也发射单发尖刺。
+/// 尖刺丛林史莱姆 —— 远距离瞄准玩家发射尖刺，专家模式近距离改为环形齐射。
 public class SpikedJungleSlime extends SpikedSlime {
 
     public SpikedJungleSlime(EntityType<? extends BaseSlime> type, Level level) {
-        super(type, level, 0x9ae920, false);
+        super(type, level, false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -22,7 +22,7 @@ public class SpikedJungleSlime extends SpikedSlime {
     }
 
     @Override
-    protected boolean canFireDistantSingleSpike() {
+    protected boolean usesBiomeSpikePattern() {
         return true;
     }
 }

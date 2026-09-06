@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import org.confluence.mod.common.entity.npc.trade.NPCTradeMenu;
 import org.confluence.mod.common.init.ModDataComponentTypes;
 import org.confluence.mod.common.init.ModDataMaps;
 import org.confluence.mod.util.ClientUtils;
@@ -53,7 +54,12 @@ public record ValueComponent(int value) {
     }
 
     public static void addTooltip(ItemStack stack, List<Component> toolTip) {
-        int price = getValue(stack, 0);
+        if (stack.getTag() != null && stack.getTag().contains(NPCTradeMenu.BUY_PRICE_TAG)) {
+            long buyPrice = stack.getTag().getLong(NPCTradeMenu.BUY_PRICE_TAG);
+            if (buyPrice > 0)
+                toolTip.add(Component.translatable("tooltip.price.buy").withStyle(ChatFormatting.GRAY).append(ClientUtils.formatPrice(buyPrice)));
+        }
+        long price = getValueLong(stack, 0);
         if (price > 0) {
             toolTip.add(Component.translatable("tooltip.price.sell").withStyle(ChatFormatting.GRAY).append(ClientUtils.formatPrice(price)));
         }

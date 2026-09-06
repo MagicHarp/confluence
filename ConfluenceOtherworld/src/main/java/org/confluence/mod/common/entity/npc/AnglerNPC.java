@@ -132,7 +132,7 @@ public class AnglerNPC extends BaseNPC {
                 NPCSpawner.Region newRegion = NPCSpawner.getNpcSpawnRegion(serverPlayer);
                 NPCSpawner.INSTANCE.moveNPCToAnotherRegion(this, getRegion(), newRegion);
                 NPCSpawner.broadcastMessageToRegion(level(), this, Component.translatable("event.confluence.npc.arrived", getType().getDescription(), getName()).withColor(GlobalColors.NPC_ARRIVED.get()));
-                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.WAKE_UP, Items.AIR));
+                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.WAKE_UP, Items.AIR, levelName(serverPlayer)));
                 return InteractionResult.sidedSuccess(level().isClientSide);
             }
             initName();
@@ -144,20 +144,24 @@ public class AnglerNPC extends BaseNPC {
             AnglerData.INSTANCE.refreshIfNeeded(serverLevel);
             PlayerSpecialData data = PlayerSpecialData.of(serverPlayer);
             if (data.hasCompletedAnglerQuestToday(serverLevel)) {
-                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.COMPLETED, Items.AIR));
+                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.COMPLETED, Items.AIR, levelName(serverPlayer)));
             } else if (!AnglerData.INSTANCE.hasValidQuest()) {
-                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.NO_QUEST, Items.AIR));
+                Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.NO_QUEST, Items.AIR, levelName(serverPlayer)));
             } else {
                 Item questFish = AnglerData.INSTANCE.getQuestFish();
                 if (player.getInventory().countItem(questFish) > 0) {
                     submitQuest(serverPlayer, questFish, data);
                     return InteractionResult.sidedSuccess(level().isClientSide);
                 } else {
-                    Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.SHOW_HINT, questFish));
+                    Confluence.NETWORK_HANDLER.sendToPlayer(serverPlayer, new OpenAnglerDialogPacketS2C(getId(), OpenAnglerDialogPacketS2C.SHOW_HINT, questFish, levelName(serverPlayer)));
                 }
             }
         }
         return InteractionResult.sidedSuccess(level().isClientSide);
+    }
+
+    private static String levelName(ServerPlayer player) {
+        return player.server.getWorldData().getLevelName();
     }
 
     private void submitQuest(ServerPlayer player, Item questFish, PlayerSpecialData data) {

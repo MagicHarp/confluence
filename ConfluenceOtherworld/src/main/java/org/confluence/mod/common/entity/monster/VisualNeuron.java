@@ -100,6 +100,7 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
     public void setOwner(BrainOfCthulhu owner) {
         ownerTracker.bind(this, owner);
         entityData.set(OWNER_UUID, Optional.of(owner.getUUID()));
+        setTarget(owner.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
         // Boss 随从不能套用普通怪物按玩家距离随机消失的规则，否则第一阶段会无故丢失编队成员。
         setPersistenceRequired();

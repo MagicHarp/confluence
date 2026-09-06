@@ -12,9 +12,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -22,6 +22,7 @@ import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
 import org.confluence.mod.common.entity.monster.humanoid.BaseHumanoidMonster;
+import org.confluence.mod.common.gameevent.BloodMoonGameEvent;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -38,21 +39,49 @@ import software.bernie.geckolib.core.animation.AnimationController;
 /// 模型动画由客户端骷髅动画族统一驱动，实体类仅保留游戏行为。
 public class MeleeSkeleton extends BaseHumanoidMonster {
     private final boolean ignoresLightPathCost;
+    private final BehaviorProfile behaviorProfile;
+    private boolean doorNavigationEnabled;
 
     public MeleeSkeleton(EntityType<? extends MeleeSkeleton> type, Level level) {
-        this(type, level, false);
+        this(type, level, false, BehaviorProfile.NORMAL);
     }
 
     public MeleeSkeleton(EntityType<? extends MeleeSkeleton> type, Level level, boolean ignoresLightPathCost) {
+        this(type, level, ignoresLightPathCost, BehaviorProfile.NORMAL);
+    }
+
+    public MeleeSkeleton(EntityType<? extends MeleeSkeleton> type, Level level, boolean ignoresLightPathCost, BehaviorProfile behaviorProfile) {
         super(type, level);
         this.ignoresLightPathCost = ignoresLightPathCost;
+        this.behaviorProfile = behaviorProfile;
+        if (behaviorProfile.doorRule != DoorRule.NONE) {
+            updateDoorBehavior();
+            goalSelector.addGoal(-1, new OpenDoorGoal(this, true) {
+                @Override
+                public boolean canUse() {
+                    return canOpenDoorsNow() && super.canUse();
+                }
+
+                @Override
+                public boolean canContinueToUse() {
+                    return canOpenDoorsNow() && super.canContinueToUse();
+                }
+            });
+        }
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return BaseHumanoidMonster.createHumanoidAttributes();
     }
 
-    /// 1.21 的近战骷髅仍位于原版骷髅武器 Goal 链，不使用普通泰拉敌怪的附着碰撞扫描。
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
+    }
+
+    /// 近战骷髅由原版武器目标结算攻击，不使用附着碰撞扫描。
     @Override
     protected boolean hasEntityContactAttack() {
         return false;
@@ -64,10 +93,24 @@ public class MeleeSkeleton extends BaseHumanoidMonster {
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
+    public void tick() {
+        if (!level().isClientSide && behaviorProfile.doorRule != DoorRule.NONE)
+            updateDoorBehavior();
+        super.tick();
+    }
+
+    private void updateDoorBehavior() {
+        boolean enabled = canOpenDoorsNow();
+        if (doorNavigationEnabled == enabled) return;
+        doorNavigationEnabled = enabled;
+        configurePlayerTargetLineOfSight(!enabled);
+        if (navigation instanceof GroundPathNavigation groundNavigation)
+            groundNavigation.setCanOpenDoors(enabled);
+    }
+
+    private boolean canOpenDoorsNow() {
+        return behaviorProfile.doorRule == DoorRule.ALWAYS
+                || behaviorProfile.doorRule == DoorRule.BLOOD_MOON && BloodMoonGameEvent.INSTANCE.started();
     }
 
     @Override
@@ -91,8 +134,15 @@ public class MeleeSkeleton extends BaseHumanoidMonster {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
+                if (behaviorProfile.leapsAtTarget) {
+                    return SelectorNode.of(
+                            new VanillaGoalAction(new LeapAtTargetGoal(MeleeSkeleton.this, 0.4F)),
+                            new VanillaGoalAction(new MeleeAttackGoal(MeleeSkeleton.this, 1.2, false)),
+                            new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(MeleeSkeleton.this, 1.0)),
+                            new VanillaGoalAction(new LookAtPlayerGoal(MeleeSkeleton.this, Player.class, 8.0F)),
+                            new VanillaGoalAction(new RandomLookAroundGoal(MeleeSkeleton.this)));
+                }
                 return SelectorNode.of(
-                        new VanillaGoalAction(new AvoidEntityGoal<>(MeleeSkeleton.this, Wolf.class, 6.0F, 1.0, 1.2)),
                         new VanillaGoalAction(new MeleeAttackGoal(MeleeSkeleton.this, 1.2, false)),
                         new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(MeleeSkeleton.this, 1.0)),
                         new VanillaGoalAction(new LookAtPlayerGoal(MeleeSkeleton.this, Player.class, 8.0F)),
@@ -136,4 +186,26 @@ public class MeleeSkeleton extends BaseHumanoidMonster {
                 && super.addEffect(effect, source);
     }
 
+    /// 骷髅外观组对应的服务端行为；普通骷髅仅在血月开门，孢子骷髅始终开门，
+    /// 愤怒骷髅还会进行近距离跃扑。
+    public enum BehaviorProfile {
+        NORMAL(DoorRule.NONE, false),
+        BLOOD_MOON_DOORS(DoorRule.BLOOD_MOON, false),
+        OPEN_DOORS(DoorRule.ALWAYS, false),
+        ANGRY_BONES(DoorRule.ALWAYS, true);
+
+        private final DoorRule doorRule;
+        private final boolean leapsAtTarget;
+
+        BehaviorProfile(DoorRule doorRule, boolean leapsAtTarget) {
+            this.doorRule = doorRule;
+            this.leapsAtTarget = leapsAtTarget;
+        }
+    }
+
+    private enum DoorRule {
+        NONE,
+        BLOOD_MOON,
+        ALWAYS
+    }
 }

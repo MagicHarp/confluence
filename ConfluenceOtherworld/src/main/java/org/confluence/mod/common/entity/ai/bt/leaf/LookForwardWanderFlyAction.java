@@ -2,15 +2,15 @@ package org.confluence.mod.common.entity.ai.bt.leaf;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.AirRandomPos;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
-/// 复现 1.21 飞行预制体的无目标巡航。
+/// 让飞行生物沿当前朝向附近选择目标并平滑巡航。
 public final class LookForwardWanderFlyAction extends BTNode {
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final double maxSpeed;
     private final float offsetY;
     private final boolean stopsForTarget;
@@ -19,11 +19,11 @@ public final class LookForwardWanderFlyAction extends BTNode {
     private int ticksLeft;
     private Vec3 targetPos;
 
-    public LookForwardWanderFlyAction(PathfinderMob mob, double maxSpeed, float offsetY) {
+    public LookForwardWanderFlyAction(BaseMonster mob, double maxSpeed, float offsetY) {
         this(mob, maxSpeed, offsetY, true);
     }
 
-    public LookForwardWanderFlyAction(PathfinderMob mob, double maxSpeed, float offsetY, boolean stopsForTarget) {
+    public LookForwardWanderFlyAction(BaseMonster mob, double maxSpeed, float offsetY, boolean stopsForTarget) {
         if (!Double.isFinite(maxSpeed) || maxSpeed <= 0.0 || !Float.isFinite(offsetY)) {
             throw new IllegalArgumentException("Flying wander speed must be positive and height offset must be finite");
         }
@@ -70,11 +70,10 @@ public final class LookForwardWanderFlyAction extends BTNode {
             mob.hasImpulse = true;
         }
 
-        mob.getLookControl().setLookAt(mob.position().add(movement.scale(20.0)).add(0.0, 1.0, 0.0));
-        mob.setYRot(mob.getYHeadRot());
         double speed = movement.length();
         if (speed > maxSpeed)
             mob.setDeltaMovement(movement.normalize().scale(maxSpeed + (speed - maxSpeed) * 0.5));
+        mob.faceCombatMovement(10.0F, 30.0F);
         ticksLeft--;
         return BTStatus.RUNNING;
     }

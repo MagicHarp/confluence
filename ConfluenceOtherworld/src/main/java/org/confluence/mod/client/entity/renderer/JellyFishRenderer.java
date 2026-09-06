@@ -17,8 +17,8 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
 /// 水母脉冲状态、游动朝向和发光表现的专用渲染器。
 ///
-/// 服务端只同步当前是否进入脉冲阶段；客户端使用相邻两次有效速度插值模型朝向，
-/// 并持续绕自身纵轴缓慢旋转。发光重绘仅在脉冲阶段启用，避免待机水母始终全亮。
+/// 服务端分别同步脉冲推进和专家模式带电状态；客户端使用相邻两次有效速度插值模型朝向，
+/// 并持续绕自身纵轴缓慢旋转。发光重绘仅在带电阶段启用，避免普通难度水母错误发亮。
 public final class JellyFishRenderer extends GeoNormalRenderer<JellyFish> {
     public JellyFishRenderer(EntityRendererProvider.Context context, ExplicitGeoModel<JellyFish> model) {
         super(context, model);
@@ -44,7 +44,7 @@ public final class JellyFishRenderer extends GeoNormalRenderer<JellyFish> {
                     float partialTick,
                     int packedLight,
                     int packedOverlay) {
-                if (animatable.isAttackPhase()) {
+                if (animatable.isElectrified()) {
                     super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
                 }
             }

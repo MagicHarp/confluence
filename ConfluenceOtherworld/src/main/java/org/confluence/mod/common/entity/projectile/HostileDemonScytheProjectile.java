@@ -1,11 +1,14 @@
 package org.confluence.mod.common.entity.projectile;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.common.entitiy.IAxisZRotate;
+import org.confluence.lib.util.LibUtils;
 
 /// 恶魔生物发射的镰刀弹幕。
 ///
@@ -31,6 +34,14 @@ public final class HostileDemonScytheProjectile extends StraightMonsterProjectil
             return velocity.scale(ACCELERATION);
         }
         return velocity;
+    }
+
+    @Override
+    protected void onSuccessfulHit(Mob owner, LivingEntity target) {
+        if (random.nextInt(3) != 0) return;
+        int duration = LibUtils.isMaster(level(), blockPosition()) ? 750
+                : LibUtils.isAtLeastExpert(level(), blockPosition()) ? 600 : 300;
+        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, duration), owner);
     }
 
     @Override

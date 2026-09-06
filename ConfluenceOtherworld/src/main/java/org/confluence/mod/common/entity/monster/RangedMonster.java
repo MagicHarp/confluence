@@ -6,12 +6,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
+import org.confluence.mod.common.entity.ai.bt.condition.TargetWithinRangeCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.*;
 
 /// 地面远程战斗模板。
@@ -40,22 +41,18 @@ public abstract class RangedMonster extends BaseWarriorMonster {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
+                double meleeRange = behavior.meleeRangeOr(2.0);
                 return SelectorNode.of(
                         SequenceNode.of(new HasTargetCondition(RangedMonster.this),
-                                new MoveToTargetAction(RangedMonster.this,
-                                        behavior.moveSpeedOr(0.9), behavior.preferredRangeOr(14.0)),
-                                new SpawnProjectileAction(
-                                        RangedMonster.this,
-                                        RangedMonster.this::createProjectile),
-                                new WaitAction(behavior.shotCooldownOr(shotCooldown))),
+                                new TargetWithinRangeCondition(RangedMonster.this, meleeRange),
+                                new MeleeAttackAction(RangedMonster.this, meleeRange)),
                         SequenceNode.of(new HasTargetCondition(RangedMonster.this),
-                                new MoveToTargetAction(RangedMonster.this,
-                                        behavior.moveSpeedOr(1.1), behavior.meleeRangeOr(2.0)),
-                                new MeleeAttackAction(RangedMonster.this,
-                                        behavior.meleeRangeOr(1.0))),
+                                new MoveToTargetAction(RangedMonster.this, behavior.moveSpeedOr(0.9), behavior.preferredRangeOr(14.0)),
+                                new RangedWindupAction(RangedMonster.this, behavior.windupTicksOr(10)),
+                                new SpawnProjectileAction(RangedMonster.this, RangedMonster.this::createProjectile),
+                                new WaitAction(behavior.shotCooldownOr(shotCooldown))),
                         SequenceNode.of(new WaitAction(behavior.idleTicksOr(20) + random.nextInt(40)),
-                                new RandomStrollAction(RangedMonster.this,
-                                        behavior.wanderSpeedOr(0.5), behavior.wanderRadiusOr(8))));
+                                new RandomStrollAction(RangedMonster.this, behavior.wanderSpeedOr(0.5), behavior.wanderRadiusOr(8))));
             }
         };
     }

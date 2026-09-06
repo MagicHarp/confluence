@@ -19,6 +19,8 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.confluence.lib.util.LibDateUtils;
@@ -33,6 +35,7 @@ import org.confluence.mod.common.entity.ai.bt.leaf.MeleeAttackAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.MoveToTargetAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.RandomStrollAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
+import org.confluence.mod.common.gameevent.BloodMoonGameEvent;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.util.OverworldUtils;
 import org.jetbrains.annotations.Nullable;
@@ -80,6 +83,22 @@ public class Zombie extends BaseHumanoidMonster implements VariantHolder<Zombie.
                 .add(Attributes.ARMOR, 2.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
                 .add(Attributes.FOLLOW_RANGE, 16.0);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        goalSelector.addGoal(-1, new OpenDoorGoal(this, true) {
+            @Override
+            public boolean canUse() {
+                return canOpenDoorsDuringBloodMoon() && super.canUse();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return canOpenDoorsDuringBloodMoon() && super.canContinueToUse();
+            }
+        });
     }
 
     @Override
@@ -162,12 +181,19 @@ public class Zombie extends BaseHumanoidMonster implements VariantHolder<Zombie.
         if (!level().isClientSide) {
             // 原版僵尸模型通过该同步标记决定是否前伸双臂；行为树不会自动维护它。
             setAggressive(getTarget() != null && getTarget().isAlive());
+            if (navigation instanceof GroundPathNavigation groundNavigation) {
+                groundNavigation.setCanOpenDoors(canOpenDoorsDuringBloodMoon());
+            }
         }
         if (!level().isClientSide && !isPersistenceRequired()
                 && level().isDay() && level().canSeeSky(blockPosition())
         ) {
             discard();
         }
+    }
+
+    private boolean canOpenDoorsDuringBloodMoon() {
+        return BloodMoonGameEvent.INSTANCE.started() && getVariant() != Variant.ARMED;
     }
 
     public enum Variant implements StringRepresentable {

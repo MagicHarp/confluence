@@ -9,14 +9,15 @@ import org.confluence.mod.common.entity.ai.bt.BTStatus;
 
 /// 抓人草的两阶段锚定摆动行为。
 ///
-/// 一个完整周期持续 200 tick，前后半段使用不同的伸展倍率。头部同时叠加
-/// 朝向、往复摆动和根部回拉速度，最终速度限制为 0.3，保持与 1.21 侧相同的
-/// 藤蔓式运动，而不是直接追逐一个被硬截断的目标点。
+/// 一个完整周期持续 150 tick：普通伸展五秒，扩大伸展二点五秒。头部同时叠加
+/// 朝向、往复摆动和根部回拉速度，最终速度限制为 0.3，形成连续的藤蔓式运动，而不是直接追逐一个被硬截断的目标点。
 ///
-/// 该状态只保存在行为节点内，不写入实体存档；这与 1.21 的阶段语义一致，
+/// 该状态只保存在行为节点内，不写入实体存档；
 /// 重新加载后从新周期开始。根部和初始方向仍由实体同步与持久化。
 final class SnatcherMovementAction extends BTNode {
-    private static final int CYCLE_TICKS = 200;
+    private static final int NORMAL_PHASE_TICKS = 100;
+    private static final int EXTENDED_PHASE_TICKS = 50;
+    private static final int CYCLE_TICKS = NORMAL_PHASE_TICKS + EXTENDED_PHASE_TICKS;
     private static final double MAX_SPEED = 0.3;
 
     private final Snatcher snatcher;
@@ -42,16 +43,16 @@ final class SnatcherMovementAction extends BTNode {
         }
 
         phase = (phase + 1) % CYCLE_TICKS;
-        int stage = (int) (phase * 2.0F / CYCLE_TICKS + 1);
+        boolean extended = phase >= NORMAL_PHASE_TICKS;
         LivingEntity target = snatcher.getTarget();
         Vec3 extraVelocity = target == null
                 ? updateIdleDirection()
-                : updateTargetDirection(target, stage);
+                : updateTargetDirection(target, extended);
 
         double frequencyMultiplier = target == null ? 1.0 : 2.0;
         Vec3 forward = direction.normalize().scale(0.2 * Math.sin(snatcher.tickCount * 0.05 * frequencyMultiplier));
-        double lengthMultiplier = target == null ? 1.0 : stage;
-        Vec3 returnPosition = snatcher.getAnchor().add(direction.scale(5.0 * lengthMultiplier * 0.5 * (3.0 + Math.sin(snatcher.tickCount * 0.05 * frequencyMultiplier))));
+        double reach = target != null && extended ? snatcher.extendedReach() : snatcher.normalReach();
+        Vec3 returnPosition = snatcher.getAnchor().add(direction.scale(reach * 0.25 * (3.0 + Math.sin(snatcher.tickCount * 0.05 * frequencyMultiplier))));
         Vec3 returnVelocity = returnPosition.subtract(snatcher.position()).scale(0.1);
         Vec3 finalVelocity = extraVelocity.add(forward).add(returnVelocity);
         if (finalVelocity.lengthSqr() > MAX_SPEED * MAX_SPEED) {
@@ -63,10 +64,9 @@ final class SnatcherMovementAction extends BTNode {
         return BTStatus.RUNNING;
     }
 
-    private Vec3 updateTargetDirection(LivingEntity target, int stage) {
+    private Vec3 updateTargetDirection(LivingEntity target, boolean extended) {
         Vec3 targetPosition = target.position().add(0.0, target.getEyeHeight() * 0.5, 0.0);
-        snatcher.getLookControl().setLookAt(target, 200.0F, 85.0F);
-        snatcher.lookAt(target, 200.0F, 85.0F);
+        snatcher.faceCombatPosition(targetPosition, 200.0F, 85.0F);
 
         Vec3 fromHeadToAnchor = snatcher.getAnchor().subtract(snatcher.position());
         Vec3 fromHeadToTarget = targetPosition.subtract(snatcher.position());
@@ -78,7 +78,7 @@ final class SnatcherMovementAction extends BTNode {
         Vec3 velocity = Vec3.ZERO;
         if (divisor > 1.0E-6 && perpendicular.lengthSqr() > 1.0E-8) {
             double scale = fromHeadToAnchor.dot(fromHeadToTarget)
-                    / divisor * (stage == 2 ? 0.25 : 5.0);
+                    / divisor * (extended ? 0.25 : 5.0);
             velocity = perpendicular.normalize().scale(-scale);
         }
         if (fromAnchorToTarget.lengthSqr() > 1.0E-8) {

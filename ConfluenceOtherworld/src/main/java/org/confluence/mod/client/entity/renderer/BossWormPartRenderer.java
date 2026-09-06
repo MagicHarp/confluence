@@ -22,15 +22,20 @@ public final class BossWormPartRenderer extends BossGeoRenderer<BossWormPart> {
                 Confluence.asResource("geo/entity/boss/eater_of_worlds_segment.geo.json"),
                 Confluence.asResource("textures/entity/boss/eater_of_worlds_segment.png"),
                 Confluence.asResource("geo/entity/boss/eater_of_worlds_tail.geo.json"),
-                        Confluence.asResource("textures/entity/boss/eater_of_worlds_tail.png")),
-                true, 2.2F, 0.0F);
+                Confluence.asResource("textures/entity/boss/eater_of_worlds_tail.png")), true, 2.2F, 0.0F);
+    }
+
+    @Override
+    protected boolean usesInterpolatedLight(BossWormPart segment) {
+        return true;
     }
 
     @Override
     protected void adjustPose(PoseStack poseStack, BossWormPart segment, BakedGeoModel model, float partialTick) {
         if (!(segment.getOwner() instanceof TheDestroyer)) return;
-        Vec3 axis = segment.getLookAngle();
+        Vec3 axis = WormPartRenderer.chainTangent(segment, partialTick);
         if (axis.lengthSqr() <= 1.0E-7) return;
+        axis = axis.normalize();
         float roll = Mth.lerp(partialTick, segment.getPreviousSegmentRoll(), segment.getSegmentRoll());
         poseStack.mulPose(Axis.of(new Vector3f((float) axis.x, (float) axis.y, (float) axis.z)).rotationDegrees(roll));
     }

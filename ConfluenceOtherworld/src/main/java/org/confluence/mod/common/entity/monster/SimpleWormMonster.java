@@ -2,11 +2,13 @@ package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.leaf.WormMovementAction;
 import org.confluence.mod.common.entity.boss.BaseBoss;
@@ -48,7 +50,7 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
 
     @Override
     protected float segmentSpacing() {
-        return role == Role.BONE_SERPENT ? 2.5F : role == Role.FLYING ? 1.0F : 1.6F;
+        return role == Role.BONE_SERPENT ? 2.5F : role == Role.FLYING ? 1.25F : 1.6F;
     }
 
     @Override
@@ -71,6 +73,7 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
 
     public void setBossOwner(BaseBoss owner) {
         ownerTracker.bind(this, owner);
+        setTarget(owner.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 
@@ -96,10 +99,31 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
             inheritedTarget = getTarget();
             if (isRemoved()) return;
         }
+        Vec3 movementStart = position();
+        float previousYaw = getYRot();
+        float previousPitch = getXRot();
         super.tick();
+        if (!level().isClientSide && isAlive() && !isNoAi()) {
+            // 原版视线控制器会在 AI 后重置俯仰。先恢复上一刻的朝向基准，再按实际位移取向，
+            // 与体节使用同一套切线转换；不能使用移动结束后已被阻力改变的速度。
+            setYRot(previousYaw);
+            setXRot(previousPitch);
+            WormSegment.orientAlong(this, position().subtract(movementStart));
+            setYBodyRot(getYRot());
+            setYHeadRot(getYRot());
+        }
         if (owned && getTarget() != inheritedTarget) {
             setTarget(inheritedTarget);
         }
+    }
+
+    @Override
+    public void aiStep() {
+        if (level().isClientSide && lerpSteps > 0) {
+            // 原版生物俯仰插值不跨角度边界，头部需与体节一样走最短角路径。
+            lerpXRot = getXRot() + Mth.wrapDegrees(lerpXRot - getXRot());
+        }
+        super.aiStep();
     }
 
     /// 血肉阵营蠕虫不得攻击同阵营实体；有明确所有者时还需服从所有者的目标过滤。

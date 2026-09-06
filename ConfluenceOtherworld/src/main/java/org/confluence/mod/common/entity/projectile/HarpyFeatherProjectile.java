@@ -18,7 +18,8 @@ public final class HarpyFeatherProjectile extends StraightMonsterProjectile {
     }
 
     public void configure(Mob owner, LivingEntity target, float damage, float velocity, float inaccuracy) {
-        Vec3 aim = new Vec3(target.getX() - owner.getX(), target.getY() - owner.getY(), target.getZ() - owner.getZ());
-        configureAimed(owner, owner.getEyePosition(), aim, damage, velocity, inaccuracy, MAX_LIFETIME);
+        Vec3 origin = owner.getEyePosition();
+        Vec3 aim = target.position().add(0.0, target.getBbHeight() * 0.5, 0.0).subtract(origin);
+        configureAimed(owner, origin, aim, damage, velocity, inaccuracy, MAX_LIFETIME);
     }
 }

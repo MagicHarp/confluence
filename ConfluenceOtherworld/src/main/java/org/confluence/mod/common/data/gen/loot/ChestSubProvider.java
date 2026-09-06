@@ -1,6 +1,8 @@
 package org.confluence.mod.common.data.gen.loot;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -9,10 +11,7 @@ import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
-import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
-import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.confluence.mod.Confluence;
@@ -41,6 +40,8 @@ public final class ChestSubProvider implements LootTableSubProvider {
 
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
+        output.accept(Confluence.asResource("chests/mysterious_note"), mysteriousTextLoot(ModItems.MYSTERIOUS_NOTE.get(), "mysterious_note", 5));
+        output.accept(Confluence.asResource("chests/mysterious_slate"), mysteriousTextLoot(ModItems.MYSTERIOUS_SLATE.get(), "mysterious_slate", 2));
         // VanillaChestLoot
         LootPoolSingletonContainer.Builder<?> manaEnchantedBookBuilder = LootItem.lootTableItem(Items.BOOK)
                 .apply(manaEnchantment());
@@ -580,6 +581,17 @@ public final class ChestSubProvider implements LootTableSubProvider {
         );
     }
 
+    /// 每个文本变体权重一致，空项维持原资源中的总体出现概率。
+    private static LootTable.Builder mysteriousTextLoot(net.minecraft.world.item.Item item, String key, int variants) {
+        LootPool.Builder pool = LootPool.lootPool();
+        for (int index = 0; index < variants; index++) {
+            pool.add(LootItem.lootTableItem(item)
+                    .apply(SetLoreFunction.setLore().setReplace(true).addLine(Component.translatable("lore.confluence." + key + "." + index).withStyle(style -> style.withColor(ChatFormatting.GRAY).withItalic(false))))
+                    .apply(SetNameFunction.setName(Component.translatable("item.confluence." + key + ".name_" + index).withStyle(style -> style.withItalic(false)))));
+        }
+        pool.add(EmptyLootItem.emptyItem().setWeight(30));
+        return LootTable.lootTable().withPool(pool);
+    }
 
     // 困难模式前箱子地下通用
     private LootTable.Builder initialWorldUndergroundCommon() {

@@ -7,9 +7,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 /// 血腥鱼竿的专用浮标实体。
 ///
-/// 泰拉瑞亚中鱼饵桶会提高血月钓起敌怪的概率；当前 1.20 与 1.21 侧都还没有独立的“钓起敌怪”基础流程，
-/// 因此这里暂时只保留专用实体类型。等血月钓怪池接入后，应当在统一的鱼获结果处理处根据该实体类型做概率加权，
-/// 不要把敌怪生成逻辑散落到鱼竿物品或渲染实体里。
+/// 该类型用于让统一鱼获事件识别鱼饵投掷者，并提高血月钓起敌怪的概率。
 public class BloodyFishingHook extends AbstractFishingHook {
     public BloodyFishingHook(EntityType<BloodyFishingHook> entityType, Level level) {
         super(entityType, level);

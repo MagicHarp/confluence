@@ -203,13 +203,13 @@ public final class ModEvents {
         event.put(CritterEntities.CRAB.get(), Crab.createAttributes().build());
         event.put(CritterEntities.BUTTERFLY.get(), Butterfly.createAttributes().build());
         event.put(CritterEntities.FAIRY.get(), Fairy.createAttributes().build());
-        event.put(CritterEntities.FEALING.get(), Fairy.createAttributes().build());
-        event.put(CritterEntities.GLOWING_SNAIL.get(), SimpleCritter.createAttributes().build());
+        event.put(CritterEntities.FEALING.get(), Fealing.createAttributes().build());
+        event.put(CritterEntities.GLOWING_SNAIL.get(), Snail.createAttributes().build());
         event.put(CritterEntities.GRUBBY.get(), SimpleCritter.createAttributes().build());
         event.put(CritterEntities.MAGGOT.get(), SimpleCritter.createAttributes().build());
-        event.put(CritterEntities.MAGMA_SNAIL.get(), SimpleCritter.createAttributes().build());
+        event.put(CritterEntities.MAGMA_SNAIL.get(), Snail.createAttributes().build());
         event.put(CritterEntities.SLUGGY.get(), SimpleCritter.createAttributes().build());
-        event.put(CritterEntities.SNAIL.get(), SimpleCritter.createAttributes().build());
+        event.put(CritterEntities.SNAIL.get(), Snail.createAttributes().build());
         event.put(CritterEntities.SCORPION.get(), Scorpion.createAttributes().build());
         event.put(CritterEntities.HELL_BUTTERFLY.get(), HellButterfly.createAttributes().build());
         event.put(CritterEntities.PRISMATIC_LACEWING.get(), PrismaticLacewing.createAttributes().build());
@@ -224,6 +224,7 @@ public final class ModEvents {
         event.put(MonsterEntities.CURSED_SKULL.get(), CreatureAttributeBuilder.creature(21, 6, 18, 32, 1, 0.82).build());
         event.put(MonsterEntities.CORRUPTOR.get(), CreatureAttributeBuilder.creature(156, 18, 32, 48, 1, 0.73).flying().build());
         event.put(MonsterEntities.SLIMER.get(), CreatureAttributeBuilder.creature(156, 20, 45, 48, 1, 0.73).flying().build());
+        event.put(MonsterEntities.WINGLESS_SLIMER.get(), WinglessSlimer.createAttributes().build());
         event.put(MonsterEntities.ENCHANTED_SWORD.get(), CreatureAttributeBuilder.creature(208, 20, 41, 48, 1, 0.82).flying().build());
         event.put(MonsterEntities.GREEN_SLIME.get(), BaseSlime.createGreenAttributes().build());
         event.put(MonsterEntities.BLUE_SLIME.get(), BaseSlime.createBlueAttributes().build());
@@ -245,7 +246,9 @@ public final class ModEvents {
         event.put(MonsterEntities.GREEN_DUMPLING_SLIME.get(), BaseSlime.createGreenDumplingAttributes().build());
         event.put(MonsterEntities.SWAMP_SLIME.get(), BaseSlime.createSwampAttributes().build());
         event.put(MonsterEntities.BLACK_SLIME.get(), BlackSlime.createAttributes().build());
-        event.put(MonsterEntities.HONEY_SLIME.get(), HoneySlime.createAttributes().build());
+        event.put(MonsterEntities.MOTHER_SLIME.get(), MotherSlime.createAttributes().build());
+        event.put(MonsterEntities.BABY_SLIME.get(), BabySlime.createAttributes().build());
+        event.put(MonsterEntities.SWEET_SLIME.get(), SweetSlime.createAttributes().build());
         event.put(MonsterEntities.GOLDEN_SLIME.get(), GoldenSlime.createAttributes().build());
         event.put(MonsterEntities.FLESH_SLIME.get(), FleshSlime.createAttributes().build());
         event.put(MonsterEntities.SPIKED_SLIME.get(), SpikedSlime.createAttributes().build());
@@ -326,7 +329,7 @@ public final class ModEvents {
         event.put(MonsterEntities.TAINTED_GHOUL.get(), CreatureAttributeBuilder.creature(114, 32, 33, 64, 1, 0.55).stepHeight(3.2).jumpStrength(0.7).build());
         event.put(MonsterEntities.VILE_GHOUL.get(), CreatureAttributeBuilder.creature(130, 30, 31, 64, 1, 0.64).stepHeight(3.2).jumpStrength(0.7).build());
         event.put(MonsterEntities.DREAMER_GHOUL.get(), CreatureAttributeBuilder.creature(156, 32, 28, 64, 1, 0.55).stepHeight(3.2).jumpStrength(0.7).build());
-        event.put(MonsterEntities.PALADIN.get(), CreatureAttributeBuilder.creature(520, 52, 52, 64, 1, 0.9).build());
+        event.put(MonsterEntities.PALADIN.get(), CreatureAttributeBuilder.creature(520, 52, 52, 64, 1, 1).build());
         event.put(MonsterEntities.BONE_LEE.get(), CreatureAttributeBuilder.creature(520, 34, 48, 48, 1, 0.95).movementSpeed(0.38).build());
         event.put(MonsterEntities.GOBLIN_ARCHER.get(), CreatureAttributeBuilder.creature(41, 6, 11, 32, 1, 0.37).build());
         event.put(MonsterEntities.GOBLIN_PEON.get(), CreatureAttributeBuilder.creature(31, 4, 6, 32, 1, 0.2).build());
@@ -345,7 +348,7 @@ public final class ModEvents {
         // 水怪
         event.put(MonsterEntities.PIRANHA.get(), Piranha.createAttributes().build());
         event.put(MonsterEntities.BLOOD_FEEDER.get(), CreatureAttributeBuilder.creature(130, 12, 30, 32, 0.5, 0.55).build());
-        event.put(MonsterEntities.ARAPAIMA.get(), Piranha.createArapaimaAttributes().build());
+        event.put(MonsterEntities.ARAPAIMA.get(), Arapaima.createAttributes().build());
         event.put(MonsterEntities.BLUE_JELLYFISH.get(), JellyFish.createAttributes().build());
         event.put(MonsterEntities.PINK_JELLYFISH.get(), JellyFish.createPinkAttributes().build());
         event.put(MonsterEntities.GREEN_JELLYFISH.get(), JellyFish.createGreenAttributes().build());
@@ -353,7 +356,7 @@ public final class ModEvents {
         // 卷壳怪
         event.put(MonsterEntities.GIANT_SHELLY.get(), CreatureAttributeBuilder.creature(26, 12, 9, 20, 0, 0.4).movementSpeed(0.1).build());
         event.put(MonsterEntities.CRAWDAD.get(), CreatureAttributeBuilder.creature(26, 6, 15, 25, 0, 0.1).jumpStrength(0.8).build());
-        // Wraith + Mimics
+        // 幻灵与宝箱怪
         event.put(MonsterEntities.WRAITH.get(), CreatureAttributeBuilder.creature(83, 0, 33, 32, 1, 0.37).gravity(0).build());
         event.put(MonsterEntities.WOODEN_MIMIC.get(), CreatureAttributeBuilder.creature(260, 30, 42, 32, 1, 0.73).build());
         event.put(MonsterEntities.GOLDEN_MIMIC.get(), CreatureAttributeBuilder.creature(260, 30, 42, 32, 1, 0.73).build());

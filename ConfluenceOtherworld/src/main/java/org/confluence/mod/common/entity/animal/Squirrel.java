@@ -8,36 +8,30 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.VariantHolder;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.confluence.mod.common.entity.IVariant;
-import org.confluence.mod.common.init.ModSoundEvents;
-import org.confluence.mod.common.init.entity.CritterEntities;
+import org.confluence.mod.common.entity.ai.bt.BTNode;
+import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Locale;
+import java.util.function.IntFunction;
 
-public class Squirrel extends Animal implements VariantHolder<Squirrel.Variant>, CritterVisual {
+public class Squirrel extends BaseCritter implements VariantHolder<Squirrel.Variant> {
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Squirrel.class, EntityDataSerializers.INT);
     public static final String VARIANT_KEY = "Variant";
-    private static final Variant[] COMMON_SPAWN_VARIANTS = {Variant.NORMAL, Variant.RED};
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
+    private static final VariantSpawnProfile<Variant> SPAWN_VARIANTS = VariantSpawnProfile.<Variant>builder()
+            .add(Variant.NORMAL, 399)
+            .add(Variant.GOLD, 1)
+            .build();
     public Squirrel(EntityType<? extends Squirrel> type, Level level) {
         super(type, level);
         getAttribute(Attributes.SAFE_FALL_DISTANCE).setBaseValue(6.0);
@@ -51,14 +45,13 @@ public class Squirrel extends Animal implements VariantHolder<Squirrel.Variant>,
     }
 
     @Override
-    protected void registerGoals() {
-        goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new PanicGoal(this, 2.0));
-        goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        goalSelector.addGoal(4, new FollowParentGoal(this, 1.25));
-        goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+    protected BTRoot createBT() {
+        return new BTRoot() {
+            @Override
+            protected BTNode createTree() {
+                return withPassivePanic(createGroundCritterRoutine(1.0), 2.0);
+            }
+        };
     }
 
     @Override
@@ -69,7 +62,7 @@ public class Squirrel extends Animal implements VariantHolder<Squirrel.Variant>,
 
     @Override
     public Variant getVariant() {
-        return CritterVariantUtil.byId(Variant.values(), this.entityData.get(DATA_VARIANT), Variant.NORMAL);
+        return Variant.BY_ID.apply(entityData.get(DATA_VARIANT));
     }
 
     @Override
@@ -91,16 +84,14 @@ public class Squirrel extends Animal implements VariantHolder<Squirrel.Variant>,
         PortDataResultExtension.ifSuccess(Variant.CODEC.parse(NbtOps.INSTANCE, tag.get(VARIANT_KEY)), this::setVariant);
     }
 
+    @Override
     protected void initializeSpawnVariant() {
-        setVariant(CritterVariantUtil.withRareVariant(random, COMMON_SPAWN_VARIANTS, Variant.GOLD));
+        setVariant(SPAWN_VARIANTS.select(random));
     }
 
-    @javax.annotation.Nullable
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @javax.annotation.Nullable SpawnGroupData data, @javax.annotation.Nullable CompoundTag tag) {
-        SpawnGroupData result = super.finalizeSpawn(level, difficulty, spawnType, data, tag);
-        if (tag == null || !tag.contains(VARIANT_KEY)) initializeSpawnVariant();
-        return result;
+    protected String variantSaveKey() {
+        return VARIANT_KEY;
     }
 
     @Override
@@ -114,42 +105,12 @@ public class Squirrel extends Animal implements VariantHolder<Squirrel.Variant>,
         controllers.add(DefaultAnimations.genericWalkIdleController(this));
     }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSoundEvents.ROUTINE_HURT.get();
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return ModSoundEvents.ROUTINE_DEATH.get();
-    }
-
-    @Override
-    protected float getSoundVolume() {
-        return 0.4F;
-    }
-
-    /// 松鼠当前没有可触发求偶的食物，但仍保留后代工厂，供命令、事件和附属模组调用。
-    @Override
-    public Squirrel getBreedOffspring(ServerLevel level, net.minecraft.world.entity.AgeableMob otherParent) {
-        return CritterEntities.SQUIRREL.get().create(level);
-    }
-
     public enum Variant implements IVariant {
         NORMAL, RED, GOLD,
         AMETHYST, TOPAZ, SAPPHIRE, EMERALD, RUBY, AMBER, DIAMOND;
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
+        private static final IntFunction<Variant> BY_ID = ByIdMap.sparse(Variant::ordinal, values(), NORMAL);
 
         @Override
         public String getSerializedName() {

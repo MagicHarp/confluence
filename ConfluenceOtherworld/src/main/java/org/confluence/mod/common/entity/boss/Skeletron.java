@@ -505,6 +505,11 @@ public class Skeletron extends BaseBoss {
     }
 
     @Override
+    protected float getBossBarMaximumHealth() {
+        return getMaxHealth() + handMaxHealth * 2.0F;
+    }
+
+    @Override
     public boolean canAttack(LivingEntity entity) {
         return !(entity instanceof Skeletron) && super.canAttack(entity);
     }

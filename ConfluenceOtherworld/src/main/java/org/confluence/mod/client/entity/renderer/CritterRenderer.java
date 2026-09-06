@@ -1,6 +1,7 @@
 package org.confluence.mod.client.entity.renderer;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import org.confluence.mod.Confluence;
@@ -17,5 +18,10 @@ public class CritterRenderer<T extends Entity & CritterVisual> extends GeoNormal
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         return entity.getTexturePath();
+    }
+
+    @Override
+    protected int getBlockLightLevel(T entity, BlockPos pos) {
+        return entity.isFullBright() ? 15 : super.getBlockLightLevel(entity, pos);
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 
-/// 昆虫及简单小动物——共用的标准 flee+wander BT。
+/// 沿地面短距离移动、停顿并在遇到障碍时改向的被动蠕虫类小动物。
 public class SimpleCritter extends BaseCritter {
 
     public SimpleCritter(EntityType<? extends SimpleCritter> type, Level level) {
@@ -25,12 +25,12 @@ public class SimpleCritter extends BaseCritter {
         return new BTRoot() {
             @Override
             protected BTNode createTree() {
-                return withPassivePanic(createGroundCritterRoutine(1.0), 1.5);
+                return withPassivePanic(createGroundCritterRoutine(0.45D), 0.7D);
             }
         };
     }
 
-    /// 此类承载的蜗牛、幼虫和蛆虫在 1.21 中使用零摔落伤害倍率。
+    /// 体型很小的被动蠕虫不承受摔落伤害。
     @Override
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
         return false;

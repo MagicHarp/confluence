@@ -89,6 +89,14 @@ public final class GamePhase2AttributeModifiersSubProvider {
                         GamePhase.WALL_OF_FLESH, NORMAL_CHANGE_2,
                         GamePhase.PLANTERA, NORMAL_CHANGE_3
                 ))
+                .add(MonsterEntities.MOTHER_SLIME, Map.of(
+                        GamePhase.WALL_OF_FLESH, NORMAL_CHANGE_2,
+                        GamePhase.PLANTERA, NORMAL_CHANGE_3
+                ))
+                .add(MonsterEntities.BABY_SLIME, Map.of(
+                        GamePhase.WALL_OF_FLESH, NORMAL_CHANGE_2,
+                        GamePhase.PLANTERA, NORMAL_CHANGE_3
+                ))
                 .add(MonsterEntities.BLUE_SLIME, Map.of(
                         GamePhase.WALL_OF_FLESH, AttributeModifiersValue.builder()
                                 .add(Attributes.MAX_HEALTH, id, 4.4, PortAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)

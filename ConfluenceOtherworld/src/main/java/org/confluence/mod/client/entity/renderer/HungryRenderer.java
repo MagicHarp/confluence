@@ -21,6 +21,8 @@ import org.joml.Vector3f;
 /// 绘制饿鬼本体及其连接 Boss 锚点的连续叶片。
 public final class HungryRenderer<T extends TheHungry> extends GeoNormalRenderer<T> {
     private static final ModelResourceLocation SEGMENT_MODEL = new ModelResourceLocation(Confluence.asResource("entity/the_hungry_leaf"), "inventory");
+    private static final double SEGMENT_SPACING = 0.75;
+    private static final int MAX_SEGMENTS = 96;
 
     public HungryRenderer(EntityRendererProvider.Context context) {
         super(context, Confluence.asResource("the_hungry"), true, 1.0F, 0.0F);
@@ -37,7 +39,9 @@ public final class HungryRenderer<T extends TheHungry> extends GeoNormalRenderer
         Vec3 difference = entity.getAnchor().subtract(entityPosition);
         double distance = difference.length();
         if (distance < 1.0E-5) return;
-        int count = Mth.clamp((int) (distance * 0.8) + 5, 5, 50);
+        // 单个叶节主干约长一格，按四分之三格布置可保留少量重叠；旧算法在长距离时
+        // 被五十节上限截断，相邻距离会超过一格并直接露出断口。
+        int count = Mth.clamp(Mth.ceil(distance / SEGMENT_SPACING), 5, MAX_SEGMENTS);
         Vec3 step = difference.scale(1.0 / count);
         Quaternionf rotation = new Quaternionf().rotationTo(new Vector3f(0.0F, 1.0F, 0.0F), step.toVector3f());
         BakedModel model = Minecraft.getInstance().getModelManager().getModel(SEGMENT_MODEL);

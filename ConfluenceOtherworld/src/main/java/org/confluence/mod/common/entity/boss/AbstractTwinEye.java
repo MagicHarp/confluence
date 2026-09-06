@@ -63,6 +63,7 @@ public abstract class AbstractTwinEye extends BaseFlyingMonster implements BossO
     public final void setMaster(TheTwins master) {
         ownerTracker.bind(this, master);
         entityData.set(OWNER_UUID, Optional.of(master.getUUID()));
+        setTarget(master.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 

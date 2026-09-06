@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -13,12 +14,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
 import org.confluence.mod.common.init.ModSoundEvents;
+import org.mesdag.portlib.wrapper.world.entity.projectile.PortProjectileDeflection;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -38,8 +42,6 @@ public class BaseMimic extends BaseMonster {
     private int actionTicks;
     private int jumpAnimationTicks;
     private int targetMissingTicks;
-    private int trackRepeats;
-    private Vec3 trackingVelocity = Vec3.ZERO;
 
     public BaseMimic(EntityType<? extends BaseMimic> type, Level level) {
         super(type, level);
@@ -58,8 +60,10 @@ public class BaseMimic extends BaseMonster {
 
     @Override
     public void onAddedToWorld() {
-        if (!level().isClientSide && entityData.get(DATA_IDLE_ANGLE) < 0)
-            setIdleAngle(random.nextInt(4) * 90);
+        if (!level().isClientSide) {
+            setFollowRange(isHardmodeVariant() ? 5.0 : 6.25);
+            if (entityData.get(DATA_IDLE_ANGLE) < 0) setIdleAngle(random.nextInt(4) * 90);
+        }
         super.onAddedToWorld();
     }
 
@@ -119,8 +123,12 @@ public class BaseMimic extends BaseMonster {
 
     private void tickWithoutTarget() {
         navigation.stop();
+        if (targetMissingTicks == 0) {
+            resetAttackState();
+            setMimicPose(MimicPose.OPEN);
+        }
         if (++targetMissingTicks < 20) return;
-        setFollowRange(5.0);
+        setFollowRange(isHardmodeVariant() ? 5.0 : 6.25);
         MimicPose pose = getMimicPose();
         if (targetMissingTicks == 20) {
             setGravity(0.08);
@@ -140,7 +148,7 @@ public class BaseMimic extends BaseMonster {
             setMimicPose(MimicPose.OPEN);
         }
         lookAtTarget(target);
-        if (actionTicks > 0 && action != 8 && action != 9) {
+        if (actionTicks > 0 && action != 7 && action != 8 && action != 9) {
             actionTicks--;
             return;
         }
@@ -161,64 +169,56 @@ public class BaseMimic extends BaseMonster {
 
     private void tickHardmodeAttack(LivingEntity target) {
         if (action == 3) {
-            if (random.nextBoolean()) {
-                action = 4;
-                trackRepeats = getHealth() < getMaxHealth() * 0.5F ? 3 : 1;
-                actionTicks = 8;
-            } else {
-                action = 9;
-                actionTicks = 50;
-                setGravity(0.0);
+            switch (random.nextInt(3)) {
+                case 0 -> {
+                    action = 4;
+                    actionTicks = 8;
+                }
+                case 1 -> {
+                    action = 7;
+                    actionTicks = 40;
+                    setDeltaMovement(Vec3.ZERO);
+                    setMimicPose(MimicPose.CLOSED);
+                }
+                default -> {
+                    action = 8;
+                    actionTicks = 30;
+                    noPhysics = true;
+                    setGravity(0.0);
+                    setMimicPose(MimicPose.JUMPING);
+                }
             }
             return;
         }
         if (action >= 4 && action <= 6) {
             if (!onGround()) return;
             launchAt(target, action == 6 ? 1.5 : 1.0, action == 6 ? 0.2 : 0.0);
-            action++;
+            action = action == 6 ? 10 : action + 1;
             actionTicks = 8;
             return;
         }
         if (action == 7) {
-            trackingVelocity = Vec3.ZERO;
-            setMimicPose(MimicPose.JUMPING);
-            action = 8;
-            actionTicks = 50;
+            setDeltaMovement(Vec3.ZERO);
+            if (--actionTicks <= 0) resetAttackCycle();
             return;
         }
         if (action == 8) {
-            trackTarget(target);
-            if (--actionTicks > 0) return;
-            setDeltaMovement(trackingVelocity.scale(0.5));
-            setMimicPose(MimicPose.CLOSING);
-            if (--trackRepeats > 0) {
-                action = 7;
-                actionTicks = 16;
-            } else {
-                action = 10;
-                actionTicks = 8;
-            }
+            Vec3 destination = target.position().add(0.0, 5.0, 0.0);
+            Vec3 direction = destination.subtract(position());
+            Vec3 velocity = getDeltaMovement().scale(0.75).add(direction.normalize().scale(0.2));
+            if (velocity.lengthSqr() > 1.0) velocity = velocity.normalize();
+            setDeltaMovement(velocity);
+            if (--actionTicks > 0 && direction.lengthSqr() > 1.0) return;
+            action = 9;
+            actionTicks = 40;
+            noPhysics = false;
+            setGravity(0.16);
+            setDeltaMovement(0.0, -1.2, 0.0);
             return;
         }
         if (action == 9) {
-            Vec3 destination = target.position().add(0.0, 5.0, 0.0);
-            Vec3 direction = destination.subtract(position());
-            Vec3 acceleration = direction.scale(0.03);
-            if (acceleration.lengthSqr() > 0.15 * 0.15) {
-                acceleration = acceleration.normalize().scale(0.15);
-            }
-            Vec3 velocity = getDeltaMovement().add(acceleration);
-            if (velocity.lengthSqr() > 1.0) {
-                velocity = velocity.normalize();
-            }
-            if (direction.lengthSqr() < 2.0) {
-                velocity = velocity.scale(0.8);
-            }
-            setDeltaMovement(velocity);
-            if (--actionTicks <= 0) {
-                setGravity(0.08);
-                resetAttackCycle();
-            }
+            setDeltaMovement(getDeltaMovement().x * 0.5, Math.min(getDeltaMovement().y, -1.2), getDeltaMovement().z * 0.5);
+            if (onGround() || --actionTicks <= 0) resetAttackCycle();
             return;
         }
         if (action == 10) resetAttackCycle();
@@ -233,29 +233,31 @@ public class BaseMimic extends BaseMonster {
         setMimicPose(MimicPose.JUMPING);
     }
 
-    private void trackTarget(LivingEntity target) {
-        Vec3 desired = target.position().subtract(position()).normalize().scale(5.0);
-        Vec3 steering = desired.subtract(trackingVelocity);
-        double steeringLength = steering.length();
-        if (steeringLength > 0.1) steering = steering.scale(0.1 / steeringLength);
-        trackingVelocity = trackingVelocity.add(steering);
-        double speed = trackingVelocity.length();
-        if (speed > 5.0) trackingVelocity = trackingVelocity.scale(5.0 / speed);
-        trackingVelocity = trackingVelocity.scale(0.95);
-        setDeltaMovement(trackingVelocity);
-        if (trackingVelocity.lengthSqr() > 0.01) {
-            float yaw = (float) Math.toDegrees(Math.atan2(-trackingVelocity.x, trackingVelocity.z));
-            setYRot(yaw);
-            setYHeadRot(yaw);
-        }
-    }
-
     private void resetAttackCycle() {
         action = 0;
         actionTicks = 15;
-        trackingVelocity = Vec3.ZERO;
+        noPhysics = false;
         setGravity(0.08);
         setMimicPose(MimicPose.OPEN);
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (action == 7 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
+        boolean damaged = super.hurt(source, amount);
+        if (damaged && !level().isClientSide && getTarget() == null) {
+            LivingEntity nearest = level().getNearestPlayer(this, 16.0);
+            if (nearest != null && canAttack(nearest)) setTarget(nearest);
+        }
+        return damaged;
+    }
+
+    /// 困难模式拟态怪闭合时免疫伤害；专家及大师模式还会反射可反射的投射物。
+    @Override
+    public PortProjectileDeflection deflection(Projectile projectile) {
+        return action == 7 && isHardmodeVariant() && LibUtils.isAtLeastExpert(level(), blockPosition())
+                ? PortProjectileDeflection.REVERSE
+                : PortProjectileDeflection.NONE;
     }
 
     private void setGravity(double gravity) {
@@ -280,6 +282,7 @@ public class BaseMimic extends BaseMonster {
         float yaw = (float) (Mth.atan2(dz, dx) * Mth.RAD_TO_DEG) - 90.0F;
         setYRot(yaw);
         setYBodyRot(yaw);
+        setYHeadRot(yaw);
     }
 
     private void snapToIdleAngle() {
@@ -323,8 +326,7 @@ public class BaseMimic extends BaseMonster {
         actionTicks = 0;
         jumpAnimationTicks = 0;
         targetMissingTicks = 0;
-        trackRepeats = 0;
-        trackingVelocity = Vec3.ZERO;
+        noPhysics = false;
         setGravity(0.08);
     }
 

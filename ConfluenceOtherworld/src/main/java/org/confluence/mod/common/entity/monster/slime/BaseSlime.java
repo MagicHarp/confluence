@@ -9,6 +9,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.SpawnPlacementChecks;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -32,42 +35,48 @@ import org.confluence.mod.common.entity.boss.BossOwnerTracker;
 import org.confluence.mod.common.entity.monster.BaseMonster;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.entity.MonsterEntities;
+import org.confluence.mod.util.OverworldUtils;
 
 public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     protected static final String SIZE_KEY = "SlimeSize";
+    private static final int HONEY_SOAK_CHECK_INTERVAL = 20;
     private static final int HONEY_SOAK_CHECKS_REQUIRED = 120;
     private static final EntityDataAccessor<Integer> DATA_SIZE = SynchedEntityData.defineId(BaseSlime.class, EntityDataSerializers.INT);
-    protected final int slimeColor;
     protected final boolean passiveByDay;
+    private final boolean honeyConvertible;
     private float oldSquish;
     private float squish;
     private float targetSquish;
+
+    public boolean isFullBright() {
+        return false;
+    }
+
     private boolean wasOnGround;
     private int honeySoakTime;
     private final BossOwnerTracker<BaseBoss> bossOwnerTracker = new BossOwnerTracker<>(BaseBoss.class);
 
     public BaseSlime(EntityType<? extends BaseSlime> type, Level level) {
-        this(type, level, 0x48E920, false, 2);
+        this(type, level, false, 2, false);
     }
 
-    protected BaseSlime(EntityType<? extends BaseSlime> type, Level level, int slimeColor) {
-        this(type, level, slimeColor, false, 2);
+    protected BaseSlime(EntityType<? extends BaseSlime> type, Level level, boolean passiveByDay) {
+        this(type, level, passiveByDay, 2, false);
     }
 
-    protected BaseSlime(EntityType<? extends BaseSlime> type, Level level,
-                        int slimeColor, boolean passiveByDay) {
-        this(type, level, slimeColor, passiveByDay, 2);
+    public BaseSlime(EntityType<? extends BaseSlime> type, Level level, boolean passiveByDay, int size) {
+        this(type, level, passiveByDay, size, false);
     }
 
-    public BaseSlime(EntityType<? extends BaseSlime> type, Level level, int slimeColor, boolean passiveByDay, int size) {
+    public BaseSlime(EntityType<? extends BaseSlime> type, Level level, boolean passiveByDay, int size, boolean honeyConvertible) {
         super(type, level);
-        this.slimeColor = slimeColor;
         this.passiveByDay = passiveByDay;
+        this.honeyConvertible = honeyConvertible;
         this.moveControl = new SlimeMoveControl(this);
         setSlimeSize(size);
     }
 
-    /// 保留 1.21 侧原版史莱姆的索敌规则。
+    /// 史莱姆的主动索敌规则。
     ///
     /// 白天被动的颜色变体不会主动寻找玩家，但受击反击仍由
     /// {@link HurtByTargetGoal} 独立处理；玩家与史莱姆的高度差也必须不超过四格。
@@ -83,8 +92,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
 
     /// 判断玩家是否满足史莱姆的主动索敌条件；受击反击不经过此方法。
     protected boolean canProactivelyTargetPlayer(LivingEntity player) {
-        return Math.abs(player.getY() - getY()) <= 4.0
-                && (!passiveByDay || level().isNight());
+        return Math.abs(player.getY() - getY()) <= 4.0 && (!passiveByDay || level().isNight() || getY() < OverworldUtils.getSurfaceY());
     }
 
     @Override
@@ -103,6 +111,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     public void setBossOwner(BaseBoss owner) {
         bossOwnerTracker.bind(this, owner);
         setPersistenceRequired();
+        setTarget(owner.getTarget());
         BossMinionCoordinator.faceTargetImmediately(this, getTarget());
     }
 
@@ -155,35 +164,47 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         bossOwnerTracker.load(tag);
     }
 
-    /// 按史莱姆类型执行 1.21 侧现有的自然生成分层规则。
+    /// 按史莱姆类型执行自然生成分层规则。
     ///
     /// 生物群系数据只决定某种史莱姆能否进入候选列表；亮度、高度、昼夜和露天条件仍在
-    /// 此处统一判定。未列入任何分支的类型保持不可自然生成，包括虽然注册了放置规则、但
-    /// 1.21 当前没有为其提供有效环境分支的青团史莱姆。
+    /// 此处统一判定。未列入任何分支的类型保持不可自然生成，包括尚未定义有效环境分支的
+    /// 青团史莱姆。
     public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        if (!(level instanceof Level world) || !SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random)) {
+        if (!(level instanceof Level world) || !Mob.checkMobSpawnRules(type, level, spawnType, pos, random)) {
             return false;
         }
 
         int y = pos.getY();
         if (type == MonsterEntities.YELLOW_SLIME.get() || type == MonsterEntities.RED_SLIME.get() || type == MonsterEntities.DESERT_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0 && y >= 0 && y < 40;
+            return level.getBrightness(LightLayer.SKY, pos) == 0 && y > OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY()
+                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
         }
-        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.DUNGEON_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0 && y <= 40;
+        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.MOTHER_SLIME.get()) {
+            return level.getBrightness(LightLayer.SKY, pos) == 0 && y < OverworldUtils.getUndergroundY()
+                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        }
+        if (type == MonsterEntities.DUNGEON_SLIME.get()) {
+            return level.getBrightness(LightLayer.SKY, pos) == 0 && y < OverworldUtils.getSurfaceY()
+                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
         }
         if (type == MonsterEntities.LAVA_SLIME.get()) {
-            return y >= 30 && y < 100;
+            return world.dimension() == OverworldUtils.underworld();
+        }
+        if (type == MonsterEntities.PINK_SLIME.get()) {
+            if (y >= OverworldUtils.getSpaceY()) return false;
+            return y > OverworldUtils.getSurfaceY() ? world.isDay() && level.canSeeSky(pos) : SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        }
+        if (type == MonsterEntities.CRIMSLIME.get() || type == MonsterEntities.CORRUPT_SLIME.get()) {
+            return y < OverworldUtils.getSpaceY() && (y > OverworldUtils.getSurfaceY() || SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random));
         }
         if (type == MonsterEntities.BLUE_SLIME.get()
                 || type == MonsterEntities.GREEN_SLIME.get()
                 || type == MonsterEntities.PURPLE_SLIME.get()
                 || type == MonsterEntities.ICE_SLIME.get()
                 || type == MonsterEntities.JUNGLE_SLIME.get()
-                || type == MonsterEntities.PINK_SLIME.get()
                 || type == MonsterEntities.SWAMP_SLIME.get()
                 || type == MonsterEntities.TROPIC_SLIME.get()) {
-            return y >= 40 && y < 260 && world.isDay() && level.canSeeSky(pos);
+            return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && world.isDay() && level.canSeeSky(pos);
         }
         return false;
     }
@@ -201,7 +222,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     /// 返回下一次落地起跳前的等待时间。
     ///
     /// 普通史莱姆沿用原版的十至二十九刻随机间隔；进入攻击状态后，移动控制器会把
-    /// 该间隔缩短为三分之一。仅金史莱姆等在 1.21 侧明确覆盖此值的变体需要重写。
+    /// 该间隔缩短为三分之一。仅金史莱姆等具有独立跳跃节奏的变体需要重写。
     protected int getJumpDelay() {
         return random.nextInt(20) + 10;
     }
@@ -216,7 +237,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
             if (isRemoved()) return;
         }
         if (!level().isClientSide) {
-            updateHoneySoaking();
+            if (tickCount % HONEY_SOAK_CHECK_INTERVAL == 0) updateHoneySoaking();
             if (isRemoved()) {
                 return;
             }
@@ -229,6 +250,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
         if (onGround() && !groundedBeforeTick) {
             targetSquish = -0.5F;
+            onLanded();
         } else if (!onGround() && wasOnGround) {
             targetSquish = 1.0F;
         }
@@ -251,8 +273,8 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
 
     /// 连续驱动史莱姆移动的行为节点。
     ///
-    /// 它对应 1.21 侧原版史莱姆同时运行的漂浮、攻击、随机转向和持续跳跃四个目标，
-    /// 但仍作为新架构中的单一行为树节点执行。节点不会把一次跳跃拆成“蓄力—起跳—落地—
+    /// 它同时承担漂浮、攻击、随机转向和持续跳跃四项职责，但仍作为单一行为树节点执行。
+    /// 节点不会把一次跳跃拆成“蓄力—起跳—落地—
     /// 长时间等待”的离散任务，因此转向、追击速度和落地后的下一跳节奏与原实现一致。
     private static final class SlimeLocomotionAction extends BTNode {
         private final BaseSlime slime;
@@ -371,8 +393,18 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
 
     // === 子类可重写的行为钩子 ===
 
+    /// 从空中落地时触发，用于特殊史莱姆补充落地效果。
+    protected void onLanded() {}
+
     /// 攻击目标后触发，用于附加效果（如冰霜减速）
     protected void onAttackTarget(LivingEntity target) {}
+
+    /// 处理会致盲的史莱姆共有的四分之一触发概率，并按世界难度换算持续时间。
+    protected final void tryApplyDarkness(LivingEntity target) {
+        if (random.nextInt(4) != 0) return;
+        int duration = LibUtils.isMaster(level(), blockPosition()) ? 750 : LibUtils.isAtLeastExpert(level(), blockPosition()) ? 600 : 300;
+        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, duration), this);
+    }
 
     @Override
     public boolean doHurtTarget(Entity target) {
@@ -390,8 +422,8 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
     }
 
-    /// 每 tick 推进蜂蜜浸泡状态。只有 1.21 侧明确支持的绿、蓝、紫三种史莱姆参与转化，
-    /// 离开蜂蜜后进度立即清零；完成时由服务端原位替换为二号蜂蜜史莱姆。
+    /// 每秒检查一次蜂蜜浸泡状态。只有绿、蓝、紫三种史莱姆参与转化，
+    /// 离开蜂蜜后进度立即清零；完成时由服务端原位替换为二号甜蜜史莱姆。
     private void updateHoneySoaking() {
         if (!canConvertFromHoney() || !level().getBlockState(blockPosition()).is(ModTags.Blocks.HONEY)) {
             honeySoakTime = 0;
@@ -401,21 +433,25 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
             return;
         }
 
-        HoneySlime honeySlime = MonsterEntities.HONEY_SLIME.get().create(level());
-        if (honeySlime == null) {
+        SweetSlime sweetSlime = MonsterEntities.SWEET_SLIME.get().create(level());
+        if (sweetSlime == null) {
             return;
         }
-        honeySlime.setSlimeSize(2);
-        honeySlime.moveTo(getX(), getY(), getZ(), getYRot(), getXRot());
-        level().addFreshEntity(honeySlime);
-        discard();
+        sweetSlime.setSlimeSize(2);
+        sweetSlime.moveTo(getX(), getY(), getZ(), getYRot(), getXRot());
+        sweetSlime.setNoAi(isNoAi());
+        sweetSlime.setInvulnerable(isInvulnerable());
+        if (isPersistenceRequired()) sweetSlime.setPersistenceRequired();
+        if (hasCustomName()) {
+            sweetSlime.setCustomName(getCustomName());
+            sweetSlime.setCustomNameVisible(isCustomNameVisible());
+        }
+        if (level().addFreshEntity(sweetSlime)) discard();
+        else sweetSlime.discard();
     }
 
     private boolean canConvertFromHoney() {
-        EntityType<?> type = getType();
-        return type == MonsterEntities.GREEN_SLIME.get()
-                || type == MonsterEntities.BLUE_SLIME.get()
-                || type == MonsterEntities.PURPLE_SLIME.get();
+        return honeyConvertible;
     }
 
     @Override
@@ -446,11 +482,6 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         return false;
     }
 
-    /// 是否免疫溺水
-    protected boolean ignoreDrowning() {
-        return false;
-    }
-
     @Override
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
         return false;
@@ -467,18 +498,12 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
     }
 
-    @Override
-    public boolean isInWater() {
-        if (ignoreDrowning()) return false;
-        return super.isInWater();
-    }
-
     /// 客户端模型缩放值，供使用同一实体类型表达不同年龄的史莱姆家族使用。
     public float getVisualScale() {
         return 1.0F;
     }
 
-    /// 普通史莱姆在 1.21 侧使用原版尺寸 2；年龄或特殊变体可继续通过
+    /// 普通史莱姆使用尺寸 2；年龄或特殊变体可继续通过
     /// {@link #getVisualScale()} 调整最终大小。
     public float getVisualSize() {
         return getSlimeSize() * getVisualScale();

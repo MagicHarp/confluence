@@ -7,8 +7,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.common.entity.ai.SweptContactAttack;
 import org.confluence.mod.common.entity.ai.WormChainTrail;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
@@ -28,12 +28,19 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     protected final List<BaseWormPart> segments = new ArrayList<>();
     private final WormChainTrail segmentTrail = new WormChainTrail();
     private int collisionCooldown;
+    private @Nullable Vec3 contactSweepStart;
 
     public BaseWormMonster(EntityType<? extends BaseWormMonster> type, Level level) {
         super(type, level);
         this.noPhysics = true;
         setNoGravity(true);
     }
+
+    @Override
+    public boolean canBeCollidedWith() {return false;}
+
+    @Override
+    public boolean isPushable() {return false;}
 
     protected abstract int getSegmentCount();
 
@@ -43,7 +50,7 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return source.is(DamageTypes.IN_WALL) || super.isInvulnerableTo(source);
+        return WormSegment.isWormDamage(source) || source.is(DamageTypes.IN_WALL) || super.isInvulnerableTo(source);
     }
 
     @Override
@@ -53,6 +60,7 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     }
 
     public void initSegments() {
+        if (!isAlive()) return;
         if (hasCompleteSegmentChain()) return;
         discardSegments();
         Vec3 previousPosition = position();
@@ -111,12 +119,15 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
 
     @Override
     public void tick() {
+        if (isDeadOrDying()) setDeltaMovement(Vec3.ZERO);
+        if (!level().isClientSide && contactSweepStart == null) contactSweepStart = position();
         super.tick();
+        if (!isAlive()) return;
         if (!level().isClientSide) {
             initSegments();
-            List<WormChainTrail.Sample> chainPositions = segmentTrail.sample(position(), segments, segmentSpacing());
+            List<WormChainTrail.Sample> samples = segmentTrail.sample(position(), segments, segmentSpacing());
             for (int index = 0; index < segments.size(); index++) {
-                WormChainTrail.Sample sample = chainPositions.get(index);
+                WormChainTrail.Sample sample = samples.get(index);
                 segments.get(index).moveToChainPosition(sample.position());
                 segments.get(index).orientAlongChain(sample.tangent());
             }
@@ -126,15 +137,35 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
 
     private void tickCollision() {
         if (collisionCooldown > 0) { collisionCooldown--; return; }
-        AABB box = getBoundingBox();
-        for (LivingEntity target : level().getEntitiesOfClass(LivingEntity.class, box)) {
-            if (target == this) continue;
-            if (target.getType() == getType()) continue;
-            if (!canAttack(target)) continue;
-            if (getTarget() == null) setTarget(target);
+        Vec3 sweepStart = contactSweepStart;
+        contactSweepStart = position();
+        for (var target : SweptContactAttack.findTargets(this, sweepStart, 0.0, SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE, this::canContactAttack)) {
+            if (getTarget() == null && target instanceof LivingEntity living) setTarget(living);
             doHurtTarget(target);
         }
         collisionCooldown = COLLISION_INTERVAL;
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        super.die(source);
+        // 死亡结算完成后立即清理链条，不等待本体死亡动画结束。
+        if (!isAlive() && !level().isClientSide) discardSegments();
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (WormSegment.isWormDamage(source)) return false;
+        boolean accepted = super.hurt(source, amount);
+        if (accepted && !level().isClientSide) {
+            for (BaseWormPart segment : segments) segment.indicateHurt();
+        }
+        return accepted;
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return !(target instanceof WormSegment) && super.canAttack(target);
     }
 
     @Override
@@ -150,7 +181,9 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     public @Nullable WormSegment getPrev() {return null;}
 
     @Override
-    public @Nullable WormSegment getNext() {return getSegment(1);}
+    public @Nullable WormSegment getNext() {
+        return getSegment(1);
+    }
 
     @Override
     public void updateSegmentPosition() {}

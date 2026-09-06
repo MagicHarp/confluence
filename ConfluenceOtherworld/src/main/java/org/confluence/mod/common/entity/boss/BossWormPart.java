@@ -113,7 +113,9 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
     }
 
     public boolean isHurtFlashing() {
-        return entityData.get(HURT_FLASH_TICKS) > 0;
+        BaseWormBoss head = getOwner();
+        // 共享生命的链条跟随本体闪红，独立体节仍保留自身的受伤反馈。
+        return head != null && head.sharesHurtAnimation() && head.hurtTime > 0 || entityData.get(HURT_FLASH_TICKS) > 0;
     }
 
     @Override
@@ -163,26 +165,20 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
         if (!(previous instanceof Entity leader)) return;
 
         Vec3 previousPosition = position();
-        Vec3 difference = previousPosition.subtract(leader.position());
-        if (difference.lengthSqr() < 0.001) difference = new Vec3(0, 1, 0);
-        Vec3 destination = leader.position().add(difference.normalize().scale(head.getEffectiveSegmentSpacing()));
+        Vec3 leaderCenter = WormSegment.center(leader);
+        Vec3 difference = WormSegment.center(this).subtract(leaderCenter);
+        if (difference.lengthSqr() < 0.001) {
+            difference = leader.getLookAngle().scale(-1.0D);
+            if (difference.lengthSqr() < 1.0E-7D) difference = new Vec3(0, 0, -1);
+        }
+        Vec3 destinationCenter = leaderCenter.add(difference.normalize().scale(head.getEffectiveSegmentSpacing()));
 
         if (!level().isClientSide) contactSweepStart = previousPosition;
-        setPos(destination.x, destination.y, destination.z);
-    }
-
-    public void moveToChainPosition(Vec3 destination) {
-        Vec3 previousPosition = position();
-        if (!level().isClientSide) contactSweepStart = previousPosition;
-        setPos(destination.x, destination.y, destination.z);
+        setPos(destinationCenter.x, destinationCenter.y - getBbHeight() * 0.5D, destinationCenter.z);
     }
 
     public void orientAlongChain(Vec3 tangent) {
-        if (tangent.lengthSqr() < 1.0E-7D) return;
-        double horizontalDistance = Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z);
-        float yaw = (float) (Mth.atan2(tangent.z, tangent.x) * Mth.RAD_TO_DEG) - 90.0F;
-        float pitch = (float) (-Mth.atan2(tangent.y, horizontalDistance) * Mth.RAD_TO_DEG);
-        setRot(yaw, pitch);
+        WormSegment.orientAlong(this, tangent);
     }
 
     @Override
@@ -190,18 +186,9 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
         WormSegment previous = getPrev();
         if (!(previous instanceof Entity leader)) return;
 
-        // 身体模型以当前节为中心向两侧延伸，必须使用“后一节 -> 前一节”的中心切线。
-        // 若只朝前一节，弯点会形成两根硬折梁，接近 90° 时模型彼此穿插成分叉。
-        WormSegment next = getNext();
-        Vec3 tangent = getSegmentIndex() > 1 && next instanceof Entity follower
-                ? leader.position().subtract(follower.position())
-                : leader.position().subtract(position());
-        if (tangent.lengthSqr() < 1.0E-7) return;
-
-        double horizontalDistance = Math.sqrt(tangent.x * tangent.x + tangent.z * tangent.z);
-        float yaw = (float) (Mth.atan2(tangent.z, tangent.x) * Mth.RAD_TO_DEG) - 90.0F;
-        float pitch = (float) (-Mth.atan2(tangent.y, horizontalDistance) * Mth.RAD_TO_DEG);
-        setRot(yaw, pitch);
+        // 每一节只朝向自己的直接前一节，不能跨过当前节拿“前一节到后一节”的弦线。
+        Vec3 tangent = WormSegment.center(leader).subtract(WormSegment.center(this));
+        orientAlongChain(tangent);
     }
 
     @Override
@@ -221,6 +208,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
             return;
         }
         if (!head.isAlive()) {
+            // 已确认本体死亡，立即清理体节，不保留静止的链条。
             discard();
             return;
         }
@@ -333,7 +321,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return source == damageSources().inWall() || super.isInvulnerableTo(source);
+        return WormSegment.isWormDamage(source) || source == damageSources().inWall() || super.isInvulnerableTo(source);
     }
 
     @Override
@@ -441,6 +429,8 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
         if (!level().isClientSide || teleport || distanceToSqr(x, y, z) > 4096.0D) {
             setPos(x, y, z);
             setRot(yaw, pitch);
+            yRotO = yaw;
+            xRotO = pitch;
             clientLerpSteps = 0;
             return;
         }
@@ -453,6 +443,9 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
     }
 
     private void tickClientInterpolation() {
+        // 每 tick 推进渲染插值起点；俯仰和偏航都按最短角路径跨越正负一百八十度。
+        yRotO = getYRot();
+        xRotO = getXRot();
         if (clientLerpSteps <= 0) return;
         double progress = 1.0D / clientLerpSteps;
         setPos(
@@ -461,7 +454,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
                 Mth.lerp(progress, getZ(), clientLerpZ));
         setRot(
                 Mth.rotLerp((float) progress, getYRot(), clientLerpYaw),
-                Mth.lerp((float) progress, getXRot(), clientLerpPitch));
+                Mth.rotLerp((float) progress, getXRot(), clientLerpPitch));
         clientLerpSteps--;
     }
 

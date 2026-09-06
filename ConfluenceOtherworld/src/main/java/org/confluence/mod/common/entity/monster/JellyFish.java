@@ -7,10 +7,11 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -22,12 +23,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.RandomSwimAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
+import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.ModSoundEvents;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -42,14 +45,23 @@ public class JellyFish extends BaseAquaticMonster {
     private static final int PURSUIT_TICKS = 150;
     private static final int PULSE_TICKS = 80;
     private static final int ATTACK_PULSE_INTERVAL = 20;
+    private static final double SHORE_TARGET_RANGE = 6.0;
+    private static final double SHORE_TARGET_HEIGHT = 3.0;
     private static final EntityDataAccessor<Boolean> ATTACK_PHASE = SynchedEntityData.defineId(JellyFish.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ELECTRIFIED = SynchedEntityData.defineId(JellyFish.class, EntityDataSerializers.BOOLEAN);
+    private final Profile profile;
 
     /// 渲染器使用相邻两次有效速度插值模型朝向，避免每次脉冲时突然翻转。
     public Vec3 lastMovement = Vec3.ZERO;
     public Vec3 currentMovement = Vec3.ZERO;
 
     public JellyFish(EntityType<? extends JellyFish> type, Level level) {
+        this(type, level, Profile.ROUTINE);
+    }
+
+    public JellyFish(EntityType<? extends JellyFish> type, Level level, Profile profile) {
         super(type, level);
+        this.profile = profile;
         this.moveControl = new JellyFishMoveControl(this);
     }
 
@@ -69,6 +81,7 @@ public class JellyFish extends BaseAquaticMonster {
     protected void defineSynchedData() {
         super.defineSynchedData();
         entityData.define(ATTACK_PHASE, false);
+        entityData.define(ELECTRIFIED, false);
     }
 
     @Override
@@ -90,24 +103,50 @@ public class JellyFish extends BaseAquaticMonster {
         return new JellyFishCombatAction(this);
     }
 
+    /// 水中的玩家始终是有效目标；靠近水岸且可见的玩家也会触发水母向水面脉冲，
+    /// 使其能够跃出水面攻击，但不会在搁浅后继续把自己当作陆地怪物追踪。
+    @Override
+    protected boolean isValidAquaticTarget(LivingEntity target) {
+        if (target.isInWaterRainOrBubble()) return true;
+        if (!isInWaterRainOrBubble() || !hasLineOfSight(target)) return false;
+        double x = target.getX() - getX();
+        double z = target.getZ() - getZ();
+        double y = target.getY() - getY();
+        return x * x + z * z <= SHORE_TARGET_RANGE * SHORE_TARGET_RANGE
+                && y >= -1.0 && y <= SHORE_TARGET_HEIGHT;
+    }
+
     /// 返回服务端同步的脉冲阶段，供动画与发光层选择表现。
     public boolean isAttackPhase() {
         return entityData.get(ATTACK_PHASE);
     }
 
-    private void setAttackPhase(boolean attackPhase) {
-        entityData.set(ATTACK_PHASE, attackPhase);
+    /// 带电是专家模式独有的防御状态，不能与普通的收缩推进动画混为一谈。
+    public boolean isElectrified() {
+        return entityData.get(ELECTRIFIED);
     }
 
-    /// 1.21 侧虽然有攻击阶段和攻击动画，却没有注册任何伤害入口。
-    /// 水母作为敌对水生生物使用与其他接触型敌怪相同的独立冷却，不把伤害绑在动画帧上。
+    private void setAttackPhase(boolean attackPhase) {
+        entityData.set(ATTACK_PHASE, attackPhase);
+        entityData.set(ELECTRIFIED, attackPhase && isInWater() && LibUtils.isAtLeastExpert(level(), blockPosition()));
+    }
+
+    /// 水母使用独立接触伤害冷却，不把伤害绑在攻击动画帧上。
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
     }
 
     @Override
+    protected boolean flopsOnLand() {
+        return false;
+    }
+
+    @Override
     public void tick() {
+        if (!level().isClientSide && isElectrified() && (!isInWater() || horizontalCollision || verticalCollision)) {
+            entityData.set(ELECTRIFIED, false);
+        }
         if (level().isClientSide && getDeltaMovement().length() > 0.08) {
             lastMovement = getDeltaMovement();
         }
@@ -115,6 +154,16 @@ public class JellyFish extends BaseAquaticMonster {
         if (getDeltaMovement().length() > 0.08) {
             currentMovement = getDeltaMovement();
         }
+    }
+
+    /// 带电阶段保持上一次脉冲速度，直到碰到实体方块或离开水面。
+    @Override
+    public void travel(Vec3 travelVector) {
+        if (isEffectiveAi() && isElectrified() && isInWater()) {
+            move(MoverType.SELF, getDeltaMovement());
+            return;
+        }
+        super.travel(travelVector);
     }
 
     @Override
@@ -138,7 +187,7 @@ public class JellyFish extends BaseAquaticMonster {
         return ModSoundEvents.JELLYFISH_DEATH.get();
     }
 
-    /// 保留 1.21 的追逐—脉冲周期，并补足原实现攻击阶段缺失的定向推进。
+    /// 执行水母的追逐—脉冲周期，并在攻击阶段进行定向推进。
     private static final class JellyFishCombatAction extends BTNode {
         private final JellyFish jellyfish;
         private int phaseTicks;
@@ -158,7 +207,7 @@ public class JellyFish extends BaseAquaticMonster {
         @Override
         public BTStatus execute() {
             var target = jellyfish.getTarget();
-            if (target == null || !target.isInWater() || !jellyfish.canAttack(target)) {
+            if (target == null || !jellyfish.canAttack(target)) {
                 jellyfish.setAttackPhase(false);
                 jellyfish.getNavigation().stop();
                 return BTStatus.FAILURE;
@@ -205,10 +254,33 @@ public class JellyFish extends BaseAquaticMonster {
             if (direction.lengthSqr() <= 1.0E-6) {
                 return;
             }
+            jellyfish.faceCombatDirection(direction, 30.0F, 30.0F);
             jellyfish.setDeltaMovement(direction.normalize().scale(0.5));
-            jellyfish.getLookControl().setLookAt(target, 30.0F, 30.0F);
             jellyfish.hasImpulse = true;
         }
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean damaged = super.doHurtTarget(target);
+        if (damaged && target instanceof LivingEntity living && profile.silences && random.nextInt(5) == 0) {
+            int duration = LibUtils.isMaster(level(), blockPosition()) ? 350
+                    : LibUtils.isAtLeastExpert(level(), blockPosition()) ? 280 : 140;
+            living.addEffect(new MobEffectInstance(ModEffects.SILENCED.get(), duration), this);
+        }
+        return damaged;
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (isElectrified() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            if (!level().isClientSide && source.getDirectEntity() == source.getEntity()
+                    && source.getEntity() instanceof LivingEntity attacker) {
+                attacker.hurt(damageSources().thorns(this), (float) (getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.3));
+            }
+            return false;
+        }
+        return super.hurt(source, amount);
     }
 
     /// 水母以离散脉冲修正方向，而不是像普通鱼一样连续推进。
@@ -244,6 +316,8 @@ public class JellyFish extends BaseAquaticMonster {
 
                 float targetYaw = (float) (Mth.atan2(zDistance, xDistance) * Mth.RAD_TO_DEG) - 90.0F;
                 mob.setYRot(rotlerp(mob.getYRot(), targetYaw, 90.0F));
+                mob.setYBodyRot(mob.getYRot());
+                mob.setYHeadRot(mob.getYRot());
                 mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
                 mob.setDeltaMovement(new Vec3(xDistance, yDistance, zDistance).normalize().scale(0.5));
 
@@ -265,9 +339,20 @@ public class JellyFish extends BaseAquaticMonster {
             }
 
             if (mob.getTarget() != null) {
-                mob.lookAt(mob.getTarget(), 10.0F, 10.0F);
-                mob.getLookControl().setLookAt(mob.getTarget(), 10.0F, 10.0F);
+                ((JellyFish) mob).faceCombatPosition(mob.getTarget().getEyePosition(), 10.0F, 10.0F);
             }
+        }
+    }
+
+    /// 共享水母状态机中的接触效果档案；颜色、属性和生成条件仍由注册与数据层负责。
+    public enum Profile {
+        ROUTINE(false),
+        GREEN(true);
+
+        private final boolean silences;
+
+        Profile(boolean silences) {
+            this.silences = silences;
         }
     }
 }

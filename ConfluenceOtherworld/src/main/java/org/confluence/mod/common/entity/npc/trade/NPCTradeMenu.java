@@ -23,7 +23,6 @@ import org.confluence.mod.common.init.ModMenuTypes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.item.ModItems;
 import org.confluence.mod.util.Coins;
-import org.confluence.mod.util.MoneyText;
 import org.confluence.mod.util.PlayerMoneyTransaction;
 import org.confluence.mod.util.PlayerUtils;
 
@@ -32,13 +31,13 @@ import java.util.List;
 
 /// NPC 商店菜单。
 ///
-/// 普通点击购买一组并叠加到光标，Shift 点击尽可能批量买入背包；最后一个商店槽固定用于出售。
+/// 商品可购买；把物品放入任意空白商店格或 Shift 点击背包即可出售，并在本次交易中回购。
 public class NPCTradeMenu extends AbstractContainerMenu {
+    public static final String BUY_PRICE_TAG = "ConfluenceShopBuyPrice";
     private static final int TRADE_COLS = 9;
     private static final int TRADE_ROWS = 4;
     private static final int TRADE_SIZE = TRADE_COLS * TRADE_ROWS;
-    private static final int OFFER_SLOTS = TRADE_SIZE - 1;
-    private static final int SELL_SLOT = TRADE_SIZE - 1;
+    private static final int OFFER_SLOTS = TRADE_SIZE;
     private static final int MONEY_SLOT_START = TRADE_SIZE;
     private static final int MONEY_SLOT_COUNT = 4;
     private static final int MONEY_SLOT_END = MONEY_SLOT_START + MONEY_SLOT_COUNT;
@@ -46,6 +45,7 @@ public class NPCTradeMenu extends AbstractContainerMenu {
     private static final int DATA_PAGE = 0;
     private static final int DATA_PAGE_COUNT = 1;
     private static final int DATA_OFFER_COUNT = 2;
+    private static final int DATA_BUYBACK_COUNT = 3;
 
     private final BaseNPC npc;
     private final Player player;
@@ -59,7 +59,8 @@ public class NPCTradeMenu extends AbstractContainerMenu {
     private final List<NPCTradeOffer> offers;
     private final int shopRevision;
     private final List<SlotState> slotStates = new ArrayList<>(TRADE_SIZE);
-    private final SimpleContainerData pageData = new SimpleContainerData(3);
+    private final SimpleContainerData pageData = new SimpleContainerData(4);
+    private final List<Buyback> buybacks = new ArrayList<>();
 
     public static NPCTradeMenu fromNetwork(int containerId, Inventory inventory, FriendlyByteBuf data) {
         int entityId = data.readInt();
@@ -105,7 +106,7 @@ public class NPCTradeMenu extends AbstractContainerMenu {
 
         addDataSlots(pageData);
         pageData.set(DATA_OFFER_COUNT, this.offers.size());
-        pageData.set(DATA_PAGE_COUNT, Math.max(1, (this.offers.size() + OFFER_SLOTS - 1) / OFFER_SLOTS));
+        pageData.set(DATA_PAGE_COUNT, this.offers.size() / OFFER_SLOTS + 1);
         populatePage(0);
     }
 
@@ -116,12 +117,17 @@ public class NPCTradeMenu extends AbstractContainerMenu {
             return;
         }
         if (!(player instanceof ServerPlayer serverPlayer) || !canUseThisMenu(serverPlayer)) return;
-        if (slotIndex == SELL_SLOT) {
-            sellCarried(serverPlayer);
+        int offerIndex = getCurrentPage() * OFFER_SLOTS + slotIndex;
+        if (offerIndex >= offers.size()) {
+            int buybackIndex = offerIndex - offers.size();
+            if (buybackIndex < buybacks.size()) {
+                if (clickType == ClickType.PICKUP || clickType == ClickType.QUICK_MOVE)
+                    buyBack(serverPlayer, buybackIndex, clickType == ClickType.QUICK_MOVE);
+            } else if (clickType == ClickType.PICKUP) {
+                sellCarried(serverPlayer);
+            }
             return;
         }
-        int offerIndex = getCurrentPage() * OFFER_SLOTS + slotIndex;
-        if (offerIndex >= offers.size()) return;
         NPCTradeOffer offer = offers.get(offerIndex);
         if (!offer.isAvailable(serverPlayer, npc)) {
             serverPlayer.closeContainer();
@@ -142,7 +148,11 @@ public class NPCTradeMenu extends AbstractContainerMenu {
         ItemStack soldStack = source.getItem().copy();
         if (soldStack.is(ModTags.Items.COINS)) return ItemStack.EMPTY;
         long price = getSellPrice(soldStack);
-        return price > 0 && PlayerMoneyTransaction.creditFromInventory(serverPlayer, source.getContainerSlot(), soldStack, price, true) ? soldStack : ItemStack.EMPTY;
+        if (price > 0 && PlayerMoneyTransaction.creditFromInventory(serverPlayer, source.getContainerSlot(), soldStack, price, true)) {
+            rememberSale(soldStack, price);
+            return soldStack;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -186,7 +196,9 @@ public class NPCTradeMenu extends AbstractContainerMenu {
     public List<SlotState> getSlotStates() {
         int firstSlot = getCurrentPage() * OFFER_SLOTS;
         for (int slot = 0; slot < TRADE_SIZE; slot++) {
-            slotStates.set(slot, slot == SELL_SLOT ? SlotState.SELL : firstSlot + slot < pageData.get(DATA_OFFER_COUNT) ? SlotState.NPC_ITEM : SlotState.EMPTY);
+            int absolute = firstSlot + slot;
+            slotStates.set(slot, absolute < pageData.get(DATA_OFFER_COUNT) ? SlotState.NPC_ITEM
+                    : absolute < pageData.get(DATA_OFFER_COUNT) + pageData.get(DATA_BUYBACK_COUNT) ? SlotState.BUYBACK : SlotState.EMPTY);
         }
         return slotStates;
     }
@@ -195,22 +207,22 @@ public class NPCTradeMenu extends AbstractContainerMenu {
         int firstOffer = page * OFFER_SLOTS;
         for (int slot = 0; slot < TRADE_SIZE; slot++) {
             int absoluteSlot = firstOffer + slot;
-            SlotState state = slot == SELL_SLOT ? SlotState.SELL : absoluteSlot < offers.size() ? SlotState.NPC_ITEM : SlotState.EMPTY;
+            SlotState state = absoluteSlot < offers.size() ? SlotState.NPC_ITEM
+                    : absoluteSlot < offers.size() + buybacks.size() ? SlotState.BUYBACK : SlotState.EMPTY;
             slotStates.set(slot, state);
             if (state == SlotState.NPC_ITEM) {
                 NPCTradeOffer offer = offers.get(absoluteSlot);
                 ItemStack stack = offer.stack();
                 tradeContainer.setItem(slot, withTradeDetails(stack, offer.costs(), getBuyPrice(stack)));
+            } else if (state == SlotState.BUYBACK) {
+                Buyback sale = buybacks.get(absoluteSlot - offers.size());
+                tradeContainer.setItem(slot, withTradeDetails(sale.stack(), List.of(), sale.price()));
             } else {
                 tradeContainer.setItem(slot, ItemStack.EMPTY);
             }
         }
         pageData.set(DATA_PAGE, page);
         broadcastChanges();
-    }
-
-    public int getSellSlotIndex() {
-        return SELL_SLOT;
     }
 
     public boolean isOfferSlot(int slot) {
@@ -269,9 +281,43 @@ public class NPCTradeMenu extends AbstractContainerMenu {
         ItemStack cursor = getCarried();
         if (cursor.isEmpty() || cursor.is(ModTags.Items.COINS)) return;
         long price = getSellPrice(cursor);
-        if (price > 0 && PlayerMoneyTransaction.credit(player, price, true))
+        if (price > 0 && PlayerMoneyTransaction.credit(player, price, true)) {
+            ItemStack sold = cursor.copy();
             setCarried(ItemStack.EMPTY);
+            rememberSale(sold, price);
+        }
     }
+
+    private void rememberSale(ItemStack stack, long price) {
+        buybacks.add(new Buyback(stack.copy(), price));
+        refreshStock();
+    }
+
+    private void refreshStock() {
+        pageData.set(DATA_BUYBACK_COUNT, buybacks.size());
+        // 商品恰好占满一页时仍提供空白页，随时可将光标物品放入商店出售。
+        pageData.set(DATA_PAGE_COUNT, (offers.size() + buybacks.size()) / OFFER_SLOTS + 1);
+        populatePage(Math.min(getCurrentPage(), getPageCount() - 1));
+    }
+
+    private void buyBack(ServerPlayer player, int index, boolean toInventory) {
+        Buyback sale = buybacks.get(index);
+        ItemStack result = sale.stack().copy();
+        if (toInventory) {
+            if (!PlayerMoneyTransaction.purchase(player, sale.price(), true, result)) return;
+        } else {
+            ItemStack cursor = getCarried();
+            if (!cursor.isEmpty() && (!ItemStack.isSameItemSameTags(cursor, result)
+                    || cursor.getCount() + result.getCount() > cursor.getMaxStackSize())) return;
+            if (!PlayerMoneyTransaction.debit(player, sale.price(), true)) return;
+            if (cursor.isEmpty()) setCarried(result);
+            else cursor.grow(result.getCount());
+        }
+        buybacks.remove(index);
+        refreshStock();
+    }
+
+    private record Buyback(ItemStack stack, long price) {}
 
     private void buyToCursor(ServerPlayer player, NPCTradeOffer offer) {
         ItemStack result = offer.stack();
@@ -392,11 +438,10 @@ public class NPCTradeMenu extends AbstractContainerMenu {
         ListTag lore = displayTag.getList("Lore", Tag.TAG_STRING);
         if (costs.isEmpty()) {
             if (price <= 0) return display;
-            Component line = Component.translatable("tooltip.price.buy").withStyle(ChatFormatting.GRAY).append(MoneyText.format(price));
-            lore.add(StringTag.valueOf(Component.Serializer.toJson(line)));
+            display.getOrCreateTag().putLong(BUY_PRICE_TAG, price);
         } else {
             for (ItemStack cost : costs) {
-                Component line = Component.translatable("tooltip.trade.cost", cost.getCount(), cost.getHoverName()).withStyle(ChatFormatting.GRAY);
+                Component line = Component.translatable("tooltip.trade.cost", cost.getCount(), cost.getHoverName()).withStyle(ChatFormatting.GRAY).withStyle(style -> style.withItalic(false));
                 lore.add(StringTag.valueOf(Component.Serializer.toJson(line)));
             }
         }
@@ -405,7 +450,7 @@ public class NPCTradeMenu extends AbstractContainerMenu {
     }
 
     public enum SlotState {
-        EMPTY, NPC_ITEM, SELL
+        EMPTY, NPC_ITEM, BUYBACK
     }
 
     private static final class TradeSlot extends Slot {

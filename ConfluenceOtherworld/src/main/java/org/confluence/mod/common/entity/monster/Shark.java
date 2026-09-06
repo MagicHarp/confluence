@@ -27,6 +27,11 @@ public class Shark extends Piranha {
         return new SharkRandomSwimmingGoal(this, 0.6, 10);
     }
 
+    @Override
+    protected boolean flopsOnLand() {
+        return false;
+    }
+
     private static final class SharkMoveControl extends SmoothSwimmingMoveControl {
         private SharkMoveControl(Shark mob) {
             super(mob, 85, 10, 0.02F, 0.1F, true);

@@ -7,7 +7,10 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -15,11 +18,15 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.confluence.lib.util.LibUtils;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
+import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.ModSoundEvents;
+import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
@@ -27,9 +34,10 @@ import software.bernie.geckolib.core.object.PlayState;
 
 /// 能攀爬墙面并高速贴近目标的沙贼。
 ///
-/// 攀爬标记由服务端根据水平碰撞更新并同步，移动属性则与 1.21 实体的实际数值对齐。
+/// 攀爬标记由服务端根据水平碰撞更新并同步，移动属性由实体注册数据控制。
 /// 这保留了蜘蛛式地形通过能力，同时继续使用本项目统一的行为树处理追击和近战。
 public class SandPoacher extends BaseMonster {
+    private static final AttributeModifier WALL_PURSUIT_SPEED = new PortAttributeModifier(Confluence.asResource("sand_poacher_wall_pursuit_speed"), 0.25, PortAttributeModifier.Operation.ADD_VALUE).unwrap();
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(SandPoacher.class, EntityDataSerializers.BYTE);
     private static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
 
@@ -48,15 +56,15 @@ public class SandPoacher extends BaseMonster {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        entityData.define(CLIMBING, (byte) 0);
-    }
-
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        entityData.define(CLIMBING, (byte) 0);
     }
 
     @Override
@@ -69,7 +77,27 @@ public class SandPoacher extends BaseMonster {
         super.tick();
         if (!level().isClientSide) {
             setClimbing(horizontalCollision);
+            var movementSpeed = getAttribute(Attributes.MOVEMENT_SPEED);
+            if (movementSpeed != null) {
+                boolean pursuingOnWall = isClimbing() && getTarget() != null && getTarget().isAlive() && hasLineOfSight(getTarget());
+                if (pursuingOnWall && movementSpeed.getModifier(WALL_PURSUIT_SPEED.getId()) == null) {
+                    movementSpeed.addTransientModifier(WALL_PURSUIT_SPEED);
+                } else if (!pursuingOnWall) {
+                    movementSpeed.removeModifier(WALL_PURSUIT_SPEED.getId());
+                }
+            }
         }
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean damaged = super.doHurtTarget(target);
+        if (damaged && target instanceof LivingEntity living) {
+            int duration = LibUtils.isMaster(level(), blockPosition()) ? 200
+                    : LibUtils.isAtLeastExpert(level(), blockPosition()) ? 160 : 80;
+            living.addEffect(new MobEffectInstance(ModEffects.ACID_VENOM.get(), duration), this);
+        }
+        return damaged;
     }
 
     @Override
@@ -101,16 +129,7 @@ public class SandPoacher extends BaseMonster {
             protected BTNode createTree() {
                 return SelectorNode.of(
                         new VanillaGoalAction(new LeapAtTargetGoal(SandPoacher.this, 0.4F)),
-                        new VanillaGoalAction(new MeleeAttackGoal(SandPoacher.this, 1.0, true) {
-                            @Override
-                            public boolean canContinueToUse() {
-                                if (getLightLevelDependentMagicValue() >= 0.5F && random.nextInt(100) == 0) {
-                                    setTarget(null);
-                                    return false;
-                                }
-                                return super.canContinueToUse();
-                            }
-                        }),
+                        new VanillaGoalAction(new MeleeAttackGoal(SandPoacher.this, 1.0, true)),
                         new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(SandPoacher.this, 0.8)),
                         new VanillaGoalAction(new LookAtPlayerGoal(SandPoacher.this, Player.class, 8.0F)),
                         new VanillaGoalAction(new RandomLookAroundGoal(SandPoacher.this)));

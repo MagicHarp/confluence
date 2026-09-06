@@ -3,28 +3,27 @@ package org.confluence.mod.common.entity.ai.bt.leaf;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
 /// 持弓敌怪的完整远程作战周期。
 ///
-/// 该节点重现 1.21 侧 {@code TERangedAttackGoal} 的可见性、转向、拉弓、射击冷却和
-/// 射后走位。状态集中在同一个节点中，避免行为树每刻重启拉弓过程；具体箭实体仍由
+/// 该节点统一处理可见性、转向、拉弓、射击冷却和射后走位。状态集中在同一个节点中，
+/// 避免行为树每刻重启拉弓过程；具体箭实体仍由
 /// {@link SpawnArrowAction} 创建。
 ///
-/// 节点只在目标有效且实体仍持有弓时运行。失去弓后返回失败，由实体行为树切换到
-/// 近战分支，这与 1.21 侧重新评估武器目标的结果一致。
+/// 节点只在目标有效且实体仍持有弓时运行。失去弓后返回失败，由实体行为树切换到近战分支。
 public final class BowCombatAction extends BTNode {
     private static final int REQUIRED_VISIBLE_TICKS = 5;
     private static final double LOOK_WHILE_MOVING_ANGLE = 0.85;
     private static final double FIRE_ANGLE = 0.1;
 
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final double movementSpeed;
     private final int normalAttackInterval;
     private final int hardAttackInterval;
@@ -38,7 +37,7 @@ public final class BowCombatAction extends BTNode {
     private int repathTicks;
     private int repositionTicks;
 
-    public BowCombatAction(PathfinderMob mob, double movementSpeed, int normalAttackInterval, int hardAttackInterval, double attackRadius, int drawDuration, float arrowVelocity) {
+    public BowCombatAction(BaseMonster mob, double movementSpeed, int normalAttackInterval, int hardAttackInterval, double attackRadius, int drawDuration, float arrowVelocity) {
         if (!Double.isFinite(movementSpeed) || movementSpeed <= 0.0 || normalAttackInterval <= 0 || hardAttackInterval <= 0
                 || !Double.isFinite(attackRadius) || attackRadius <= 0.0 || drawDuration <= 0 || !Float.isFinite(arrowVelocity) || arrowVelocity <= 0.0F) {
             throw new IllegalArgumentException("Bow combat timing and radius must be positive");
@@ -97,8 +96,7 @@ public final class BowCombatAction extends BTNode {
         }
 
         if (mob.isUsingItem()) {
-            mob.lookAt(target, 30.0F, 30.0F);
-            mob.getLookControl().setLookAt(target);
+            mob.faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
             if (!canSee && lostSightTicks > 60) {
                 mob.stopUsingItem();
                 attackCooldown = 10;

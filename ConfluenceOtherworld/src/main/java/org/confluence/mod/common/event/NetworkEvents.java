@@ -12,6 +12,7 @@ public final class NetworkEvents {
         PortNetworkHandler handler = Confluence.NETWORK_HANDLER;
 
         // C2S
+        handler.registerInGameC2S(NPCDialogSessionPacketC2S.class, NPCDialogSessionPacketC2S.ID, NPCDialogSessionPacketC2S.STREAM_CODEC);
         handler.registerInGameC2S(ApplySelectionPacketC2S.class, ApplySelectionPacketC2S.ID, ApplySelectionPacketC2S.STREAM_CODEC);
         handler.registerInGameC2S(DyeMixPacketC2S.class, DyeMixPacketC2S.ID, DyeMixPacketC2S.STREAM_CODEC);
         handler.registerInGameC2S(EmptyTargetSweepPacketC2S.class, EmptyTargetSweepPacketC2S.ID, EmptyTargetSweepPacketC2S.STREAM_CODEC);
@@ -37,6 +38,7 @@ public final class NetworkEvents {
 //        handler.registerInGameS2C(AchievementsDataSyncPacketS2C.class, AchievementsDataSyncPacketS2C.ID, AchievementsDataSyncPacketS2C.STREAM_CODEC);
         handler.registerInGameS2C(AvailableHouseSelectPacketS2C.class, AvailableHouseSelectPacketS2C.ID, AvailableHouseSelectPacketS2C.STREAM_CODEC);
         handler.registerInGameS2C(BestiarySyncPacketS2C.class, BestiarySyncPacketS2C.ID, BestiarySyncPacketS2C.STREAM_CODEC);
+        handler.registerInGameS2C(BossBarSyncPacketS2C.class, BossBarSyncPacketS2C.ID, BossBarSyncPacketS2C.STREAM_CODEC);
         handler.registerInGameS2C(BulletImpactPacketS2C.class, BulletImpactPacketS2C.ID, BulletImpactPacketS2C.STREAM_CODEC);
         handler.registerInGameS2C(BrushingColorPacketS2C.class, BrushingColorPacketS2C.ID, BrushingColorPacketS2C.STREAM_CODEC);
 //        handler.registerInGameS2C(CompatibilitySyncPacketS2c.class, CompatibilitySyncPacketS2c.ID, CompatibilitySyncPacketS2c.STREAM_CODEC);

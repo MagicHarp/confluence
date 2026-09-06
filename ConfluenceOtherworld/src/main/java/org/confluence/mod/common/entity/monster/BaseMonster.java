@@ -17,8 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.common.data.entity.CreatureDefinition;
-import org.confluence.mod.common.data.entity.CreatureDefinitionLoader;
+import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.SweptContactAttack;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
@@ -34,8 +33,9 @@ import java.util.Objects;
 public abstract class BaseMonster extends Monster implements GeoEntity {
     protected final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private boolean behaviorTreeRegistered;
+    private BTRoot behaviorTree;
+    private NearestAttackableTargetGoal<Player> playerTargetGoal;
     private int contactAttackTicks = 20;
-    private int creatureDefinitionRevision = Integer.MIN_VALUE;
     private double defaultMaxHealth = Double.NaN;
     private double defaultAttackDamage;
     private double defaultArmor;
@@ -52,7 +52,15 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     protected void registerGoals() {
         super.registerGoals();
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, mustSeePlayerTarget(), this::canTargetPlayer));
+        this.playerTargetGoal = new NearestAttackableTargetGoal<>(this, Player.class, mustSeePlayerTarget(), this::canTargetPlayer);
+        this.targetSelector.addGoal(2, playerTargetGoal);
+    }
+
+    /// 构造参数决定索敌视线规则的实体在自身字段完成初始化后调用此方法，避免超类构造期间读取未初始化状态。
+    protected final void configurePlayerTargetLineOfSight(boolean mustSee) {
+        if (playerTargetGoal != null) targetSelector.removeGoal(playerTargetGoal);
+        playerTargetGoal = new NearestAttackableTargetGoal<>(this, Player.class, mustSee, this::canTargetPlayer);
+        targetSelector.addGoal(2, playerTargetGoal);
     }
 
     protected boolean canTargetPlayer(LivingEntity target) {
@@ -68,15 +76,18 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
         super.onAddedToWorld();
         if (!level().isClientSide && !behaviorTreeRegistered) {
             applyCreatureDefinition();
-            BTRoot behaviorTree;
-            try {
-                behaviorTree = Objects.requireNonNull(createBT(), () -> "Missing behavior tree for " + getType());
-            } catch (RuntimeException exception) {
-                Confluence.LOGGER.error("Failed to create behavior tree for {}; the entity will remain passive instead of crashing the level", getType(), exception);
-                behaviorTree = disabledBehaviorTree();
-            }
+            behaviorTree = createSafeBehaviorTree();
             this.goalSelector.addGoal(0, behaviorTree);
             behaviorTreeRegistered = true;
+        }
+    }
+
+    private BTRoot createSafeBehaviorTree() {
+        try {
+            return Objects.requireNonNull(createBT(), () -> "Missing behavior tree for " + getType());
+        } catch (RuntimeException exception) {
+            Confluence.LOGGER.error("Failed to create behavior tree for {}; the entity will remain passive instead of crashing the level", getType(), exception);
+            return disabledBehaviorTree();
         }
     }
 
@@ -103,10 +114,6 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     /// 近战目标执行伤害的陆地生物额外获得一次碰撞攻击。
     @Override
     public void tick() {
-        if (!level().isClientSide && behaviorTreeRegistered
-                && creatureDefinitionRevision != CreatureDefinitionLoader.getRevision()) {
-            applyCreatureDefinition();
-        }
         super.tick();
         if (!usesPostMovementContactAttack()) {
             tickEntityContactAttack();
@@ -115,9 +122,13 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
 
     /// 推进一次连续接触攻击。直接改写位置的状态机可把调用延后到本 tick 位移完成之后。
     protected final void tickEntityContactAttack() {
-        if (level().isClientSide || !isAlive() || !hasEntityContactAttack() || getTarget() == null || --contactAttackTicks > 0) {
+        if (level().isClientSide || !isAlive()) {
             return;
         }
+        // 冷却按世界时间持续流逝，不能在非攻击阶段暂停；否则下一次冲刺会继承旧冷却，
+        // 高速越过目标后才恢复攻击能力。
+        if (contactAttackTicks > 0) contactAttackTicks--;
+        if (!hasEntityContactAttack() || getTarget() == null || contactAttackTicks > 0) return;
 
         var entities = SweptContactAttack.findTargets(
                 this,
@@ -129,10 +140,10 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
             contactAttackTicks = contactDetectionInterval();
             return;
         }
-        for (Entity entity : entities) {
-            doHurtTarget(entity);
-            contactAttackTicks = contactAttackInterval();
-        }
+        boolean attacked = false;
+        for (Entity entity : entities) attacked |= doHurtTarget(entity);
+        // 目标正处于受伤无敌帧等情况下不算命中，保持检测频率以免一次冲刺完全漏伤。
+        contactAttackTicks = attacked ? contactAttackInterval() : contactDetectionInterval();
     }
 
     protected boolean usesPostMovementContactAttack() {
@@ -163,14 +174,15 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
 
     /// 只攻击当前实体可以合法攻击且类型不同的目标。
     protected boolean canContactAttack(Entity entity) {
-        return entity instanceof LivingEntity living
-                && entity.getType() != getType()
-                && canAttack(living);
+        if (!(entity instanceof LivingEntity living) || entity.getType() == getType() || !canAttack(living)) {
+            return false;
+        }
+        return living == getTarget() || living instanceof Player;
     }
 
     /// 以实际战斗方向为唯一权威，同时更新实体、身体、头部和 LookControl。
     /// 飞行怪、冲刺怪与 Boss 共用这一入口，避免各自只写一半旋转状态。
-    protected final void faceCombatDirection(Vec3 direction, float maximumYawChange, float maximumPitchChange) {
+    public final void faceCombatDirection(Vec3 direction, float maximumYawChange, float maximumPitchChange) {
         if (!Double.isFinite(direction.x) || !Double.isFinite(direction.y) || !Double.isFinite(direction.z)
                 || direction.lengthSqr() < 1.0E-7D) {
             return;
@@ -186,14 +198,15 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
         setXRot(pitch);
         yBodyRot = yaw;
         yHeadRot = yaw;
-        getLookControl().setLookAt(position().add(direction));
+        Vec3 lookTarget = getEyePosition().add(direction);
+        getLookControl().setLookAt(lookTarget.x, lookTarget.y, lookTarget.z, maximumYawChange, maximumPitchChange);
     }
 
-    protected final void faceCombatPosition(Vec3 targetPosition, float maximumYawChange, float maximumPitchChange) {
+    public final void faceCombatPosition(Vec3 targetPosition, float maximumYawChange, float maximumPitchChange) {
         faceCombatDirection(targetPosition.subtract(getEyePosition()), maximumYawChange, maximumPitchChange);
     }
 
-    protected final void faceCombatMovement(float maximumYawChange, float maximumPitchChange) {
+    public final void faceCombatMovement(float maximumYawChange, float maximumPitchChange) {
         faceCombatDirection(getDeltaMovement(), maximumYawChange, maximumPitchChange);
     }
 
@@ -227,7 +240,7 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     }
 
     protected final CreatureDefinition creatureDefinition() {
-        return CreatureDefinitionLoader.get(getType());
+        return CreatureDefinition.get(getType());
     }
 
     /// 恢复 Java 注册默认值后重新应用当前数据包快照。
@@ -235,6 +248,10 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     /// 先恢复默认值保证删除覆盖文件后也能还原，而不是把上一次覆盖继续当成新的基础值。
     /// 生命百分比不强制保持：满血实体继续满血，受伤实体只在新上限更低时截断。
     private void applyCreatureDefinition() {
+        float oldHealth = getHealth();
+        float oldMaxHealth = getMaxHealth();
+        float oldScale = getScale();
+        boolean wasFullHealth = Math.abs(oldHealth - oldMaxHealth) < 0.001F;
         if (Double.isNaN(defaultMaxHealth)) {
             defaultMaxHealth = baseValue(Attributes.MAX_HEALTH);
             defaultAttackDamage = baseValue(Attributes.ATTACK_DAMAGE);
@@ -252,17 +269,16 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
             setBaseValue(Attributes.KNOCKBACK_RESISTANCE, defaultKnockbackResistance);
             setBaseValue(Attributes.SCALE.value(), defaultScale);
         }
-
-        float oldHealth = getHealth();
-        float oldMaxHealth = getMaxHealth();
-        float oldScale = getScale();
-        boolean wasFullHealth = Math.abs(oldHealth - oldMaxHealth) < 0.001F;
-        CreatureDefinitionLoader.applyAttributes(this);
+        CreatureDefinition.applyAttributes(this);
         setHealth(wasFullHealth ? getMaxHealth() : Math.min(oldHealth, getMaxHealth()));
         if (Math.abs(oldScale - getScale()) > 0.0001F) {
             refreshDimensions();
         }
-        creatureDefinitionRevision = CreatureDefinitionLoader.getRevision();
+        if (behaviorTreeRegistered) {
+            goalSelector.removeGoal(behaviorTree);
+            behaviorTree = createSafeBehaviorTree();
+            goalSelector.addGoal(0, behaviorTree);
+        }
         onCreatureDefinitionReload();
     }
 

@@ -10,7 +10,6 @@ import org.confluence.mod.StartupConfigs;
 import org.confluence.mod.common.component.prefix.PrefixComponent;
 import org.confluence.mod.common.data.AchievementOffsetLoader;
 import org.confluence.mod.common.data.AnglerQuestLoader;
-import org.confluence.mod.common.data.entity.CreatureDefinitionLoader;
 import org.confluence.mod.common.entity.npc.NPCNames;
 import org.confluence.mod.common.entity.npc.chat.ChatManager;
 import org.confluence.mod.common.entity.npc.dialog.NPCDialogLoader;
@@ -78,7 +77,6 @@ public final class GameEvents {
         event.addListener(NPCNames.Loader.getInstance());
         event.addListener(ChatManager.getLoader());
         event.addListener(new MoodData.Loader());
-        event.addListener(new CreatureDefinitionLoader());
         event.addListener(NPCTradeList.Loader.getInstance());
         event.addListener(AnglerQuestLoader.getInstance());
     }

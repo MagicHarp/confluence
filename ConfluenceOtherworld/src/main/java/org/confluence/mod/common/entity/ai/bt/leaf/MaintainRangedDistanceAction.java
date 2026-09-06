@@ -1,10 +1,10 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
 /// 让飞行远程单位在目标周围维持一个稳定的作战距离带。
 ///
@@ -15,7 +15,7 @@ import org.confluence.mod.common.entity.ai.bt.BTStatus;
 /// 每次启动只运行固定的 {@code duration}，到期主动成功退出，把调度权交还给上层选择器。
 /// 这样远程走位不会长期占用行为树，也能与射击、冲刺等节点轮换。目标丢失或死亡时立即失败。
 public final class MaintainRangedDistanceAction extends BTNode {
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private final double minimumDistanceSqr;
     private final double maximumDistanceSqr;
     private final double speed;
@@ -23,7 +23,7 @@ public final class MaintainRangedDistanceAction extends BTNode {
     private int ticks;
     private double orbitDirection;
 
-    public MaintainRangedDistanceAction(PathfinderMob mob, double minimumDistance, double maximumDistance, double speed, int duration) {
+    public MaintainRangedDistanceAction(BaseMonster mob, double minimumDistance, double maximumDistance, double speed, int duration) {
         if (!Double.isFinite(minimumDistance) || minimumDistance <= 0.0 || !Double.isFinite(maximumDistance) || maximumDistance <= minimumDistance) {
             throw new IllegalArgumentException("Ranged distance band must be positive and ordered");
         }
@@ -74,7 +74,7 @@ public final class MaintainRangedDistanceAction extends BTNode {
         Vec3 acceleration = direction.add(0.0, verticalCorrection, 0.0).normalize().scale(speed * 0.08);
         mob.setDeltaMovement(mob.getDeltaMovement().scale(0.82).add(acceleration));
         mob.hasImpulse = true;
-        mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+        mob.faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
         return BTStatus.RUNNING;
     }
 }
