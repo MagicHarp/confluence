@@ -18,8 +18,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 /// 客户端类，服务端请勿调用
-public final class SoulSkillClientHolder {
-    public static final SoulSkillClientHolder INSTANCE = new SoulSkillClientHolder();
+public final class SoulSkillClientHandler {
+    public static final SoulSkillClientHandler INSTANCE = new SoulSkillClientHandler();
     public static final RouletteWheelBigHud ROULETTE_WHEEL_BIG_HUD_INSTANCE = new RouletteWheelBigHud();
     public static final RouletteWheelSmallHud ROULETTE_WHEEL_SMALL_HUD_INSTANCE = new RouletteWheelSmallHud();
     public static final CardHorizontalHud CARD_HORIZONTAL_L_HUD_INSTANCE = new CardHorizontalHud(false);
@@ -72,7 +72,7 @@ public final class SoulSkillClientHolder {
         equippedSkills.removeIf(Objects::isNull);
     }
 
-    public void handler() {
+    public void handle() {
         while (getKeyMapping().consumeClick()) {
             if (!wasSpellWheelDown) {
                 allOpen();
@@ -83,7 +83,7 @@ public final class SoulSkillClientHolder {
     }
 
     public boolean scrolling(double scrollDeltaY) {
-        if (ClientConfigs.soulQuickSkillStyle == SoulSkillClientHolder.Type.ROULETTE_WHEEL_BIG) {
+        if (ClientConfigs.soulQuickSkillStyle == SoulSkillClientHandler.Type.ROULETTE_WHEEL_BIG) {
             return false;
         }
         if (!active) {
