@@ -301,11 +301,10 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.rainbowGradient", "Rainbow Gradient");
 
         add("title.confluence.merged_configuration", "Confluence Merged Configuration Overview");
-        add("modid.name.confluence", "Confluence");
+        add("modid.name.confluence", "Confluence: Otherworld");
         add("modid.name.terra_curio", "Terra Curios");
-        add("modid.name.terra_entity", "Terra Entities");
-        add("modid.name.the_trackers", "Trackers");
-        add("modid.name.thr_dim_particle", "3D Particles");
+        add("modid.name.the_trackers", "The Trackers");
+        add("modid.name.particlestorm", "Particle Storm");
     }
 
     @Override
@@ -593,9 +592,8 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("title.confluence.merged_configuration", "汇流来世合并配置总览");
         add("modid.name.confluence", "汇流来世");
         add("modid.name.terra_curio", "泰拉饰品");
-        add("modid.name.terra_entity", "泰拉生物");
         add("modid.name.the_trackers", "全追踪");
-        add("modid.name.thr_dim_particle", "三维粒子");
+        add("modid.name.particlestorm", "粒子风暴");
     }
 
     @Override
