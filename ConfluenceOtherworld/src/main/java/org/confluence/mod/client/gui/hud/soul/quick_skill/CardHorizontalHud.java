@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.client.gui.widget.soul_skill.SoulSkillBox;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.client.util.SoulQuickSkillHudUtils;
 import org.confluence.mod.common.soulskill.SoulSkillStack;
 import org.jetbrains.annotations.Nullable;
@@ -242,8 +242,8 @@ public class CardHorizontalHud extends BasicSoulQuickSkillHud {
     public void update() {}
 
     @Override
-    public SoulSkillClientHolder.Type getType() {
-        return isRight ? SoulSkillClientHolder.Type.CARD_HORIZONTAL_R
-                : SoulSkillClientHolder.Type.CARD_HORIZONTAL_L;
+    public SoulSkillClientHandler.Type getType() {
+        return isRight ? SoulSkillClientHandler.Type.CARD_HORIZONTAL_R
+                : SoulSkillClientHandler.Type.CARD_HORIZONTAL_L;
     }
 }

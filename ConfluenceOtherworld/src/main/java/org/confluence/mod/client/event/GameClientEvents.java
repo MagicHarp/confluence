@@ -185,7 +185,7 @@ public final class GameClientEvents {
 
         if (player != null) {
             if (Confluence.SOUL_SKILLS) {
-                SoulSkillClientHolder.INSTANCE.handler();
+                SoulSkillClientHandler.INSTANCE.handle();
                 boolean isSoulOverviewScreen = false;
                 while (ModKeyBindings.SOUL_OVERVIEW.get().consumeClick()) {
                     if (!isSoulOverviewScreen) {
@@ -297,7 +297,7 @@ public final class GameClientEvents {
         if (player == null) return;
         double scrollDeltaY = event.getScrollDeltaY();
         if (Confluence.SOUL_SKILLS) {
-            if (SoulSkillClientHolder.INSTANCE.scrolling(scrollDeltaY)) {
+            if (SoulSkillClientHandler.INSTANCE.scrolling(scrollDeltaY)) {
                 event.setCanceled(true);
             }
         }

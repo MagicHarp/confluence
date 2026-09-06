@@ -19,7 +19,7 @@ import org.confluence.mod.client.gui.hud.TerraStyleArmorHud;
 import org.confluence.mod.client.gui.hud.TerraStyleFoodHud;
 import org.confluence.mod.client.gui.hud.TerraStyleHealthHud;
 import org.confluence.mod.client.gui.hud.TerraStyleManaHud;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.util.ModUtils;
 import org.confluence.terraentity.client.gui.container.TETradeScreen;
@@ -52,7 +52,7 @@ public final class ClientConfigs {
     public static TerraStyleManaHud.Mana manaStyle = TerraStyleManaHud.Mana.OVERLAY;
     public static int manaOffsetX = 0;
     public static int manaOffsetY = 0;
-    public static SoulSkillClientHolder.Type soulQuickSkillStyle;
+    public static SoulSkillClientHandler.Type soulQuickSkillStyle;
     public static boolean terraStyleArmor = true;
     public static TerraStyleArmorHud.Armor armorStyle = TerraStyleArmorHud.Armor.OVERLAY;
     public static boolean leftEffectIcon = true;
@@ -89,7 +89,7 @@ public final class ClientConfigs {
     private static EnumValue<TerraStyleManaHud.Mana> MANA_STYLE;
     private static IntValue MANA_OFFSET_X;
     private static IntValue MANA_OFFSET_Y;
-    private static EnumValue<SoulSkillClientHolder.Type> SOUL_QUICK_SKILL_STYLE;
+    private static EnumValue<SoulSkillClientHandler.Type> SOUL_QUICK_SKILL_STYLE;
     private static BooleanValue TERRA_STYLE_ARMOR;
     private static EnumValue<TerraStyleArmorHud.Armor> ARMOR_STYLE;
     private static BooleanValue LEFT_EFFECT_ICON;
@@ -188,7 +188,7 @@ public final class ClientConfigs {
             }
             if (Confluence.SOUL_SKILLS) {
                 builder.push("Soul");
-                SOUL_QUICK_SKILL_STYLE = builder.defineEnum("soulQuickSkillStyle", SoulSkillClientHolder.Type.ROULETTE_WHEEL_SMALL);
+                SOUL_QUICK_SKILL_STYLE = builder.defineEnum("soulQuickSkillStyle", SoulSkillClientHandler.Type.ROULETTE_WHEEL_SMALL);
                 builder.pop();
             }
             {

@@ -54,7 +54,7 @@ import org.confluence.mod.client.gameevent.GoblinArmyProgressRenderer;
 import org.confluence.mod.client.gui.VoidSeaFilterRenderer;
 import org.confluence.mod.client.gui.container.*;
 import org.confluence.mod.client.gui.hud.*;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.client.handler.StarPhaseHandler;
 import org.confluence.mod.client.handler.WormholeHandlerClient;
 import org.confluence.mod.client.handler.bestiary.ClientBestiary;
@@ -217,12 +217,12 @@ public final class ModClientEvents {
         event.registerBelow(VanillaGuiLayers.BOSS_OVERLAY, Confluence.asResource("goblin_army"), new GoblinArmyProgressRenderer());
 
         if (Confluence.SOUL_SKILLS) {
-            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("card_horizontal_l_hud"), SoulSkillClientHolder.CARD_HORIZONTAL_L_HUD_INSTANCE);
-            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("card_horizontal_r_hud"), SoulSkillClientHolder.CARD_HORIZONTAL_R_HUD_INSTANCE);
-            event.registerBelow(VanillaGuiLayers.HOTBAR, Confluence.asResource("roulette_wheel_small_hud"), SoulSkillClientHolder.ROULETTE_WHEEL_SMALL_HUD_INSTANCE);
-            event.registerBelow(VanillaGuiLayers.HOTBAR, Confluence.asResource("current_selected_skill_hud"), SoulSkillClientHolder.CURRENT_SELECTED_SKILL_HUD_INSTANCE);
-            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("roulette_wheel_big_hud"), SoulSkillClientHolder.ROULETTE_WHEEL_BIG_HUD_INSTANCE);
-            SoulSkillClientHolder.INSTANCE.init();
+            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("card_horizontal_l_hud"), SoulSkillClientHandler.CARD_HORIZONTAL_L_HUD_INSTANCE);
+            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("card_horizontal_r_hud"), SoulSkillClientHandler.CARD_HORIZONTAL_R_HUD_INSTANCE);
+            event.registerBelow(VanillaGuiLayers.HOTBAR, Confluence.asResource("roulette_wheel_small_hud"), SoulSkillClientHandler.ROULETTE_WHEEL_SMALL_HUD_INSTANCE);
+            event.registerBelow(VanillaGuiLayers.HOTBAR, Confluence.asResource("current_selected_skill_hud"), SoulSkillClientHandler.CURRENT_SELECTED_SKILL_HUD_INSTANCE);
+            event.registerAbove(VanillaGuiLayers.SUBTITLE_OVERLAY, Confluence.asResource("roulette_wheel_big_hud"), SoulSkillClientHandler.ROULETTE_WHEEL_BIG_HUD_INSTANCE);
+            SoulSkillClientHandler.INSTANCE.init();
         }
     }
 
