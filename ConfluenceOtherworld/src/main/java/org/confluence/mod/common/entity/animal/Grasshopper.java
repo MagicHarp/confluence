@@ -22,7 +22,6 @@ import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SequenceNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.RandomStrollAction;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -41,7 +40,7 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return BaseCritter.createInsectAttributes().add(IPortAttributesExtension.fallDamageMultiplier().get(), 0.0);
+        return BaseCritter.createInsectAttributes().add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override

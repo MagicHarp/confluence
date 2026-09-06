@@ -37,7 +37,6 @@ import org.confluence.mod.util.DateUtils;
 import org.mesdag.portlib.registries.PortDeferredItem;
 import org.mesdag.portlib.registries.PortItemRegistration;
 import org.mesdag.portlib.registries.PortRegisterHandler;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 import org.mesdag.portlib.wrapper.world.item.component.PortItemAttributeModifiers;
@@ -215,7 +214,7 @@ public final class ModItems {
     public static Consumer<PortItemAttributeModifiers.Builder> attributes(double blockInteractionRange, double attackKnockback) {
         return builder -> {
             if (blockInteractionRange != 0)
-                builder.add(IPortAttributesExtension.blockInteractionRange(), new PortAttributeModifier(BASE_BLOCK_INTERACTION_RANGE_ID, blockInteractionRange, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND);
+                builder.add(Attributes.BLOCK_INTERACTION_RANGE, new PortAttributeModifier(BASE_BLOCK_INTERACTION_RANGE_ID, blockInteractionRange, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND);
             if (attackKnockback != 0)
                 builder.add(Attributes.ATTACK_KNOCKBACK, new PortAttributeModifier(BASE_ATTACK_KNOCKBACK_ID, attackKnockback, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND);
             builder.add(LibAttributes.getCriticalChance(), new PortAttributeModifier(BASE_CRITICAL_CHANCE_ID, 0.04, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND);

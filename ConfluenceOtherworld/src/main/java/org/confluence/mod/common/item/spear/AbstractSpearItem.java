@@ -18,6 +18,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +41,6 @@ import org.confluence.mod.common.entity.projectile.spear.SpearProjectile;
 import org.confluence.mod.common.init.item.ModItems;
 import org.confluence.mod.common.item.tooltipcomponent.AltImageComponent;
 import org.confluence.mod.util.ModUtils;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import org.mesdag.portlib.wrapper.common.extensions.IPortEnchantmentHelperExtension;
 import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
@@ -223,7 +223,7 @@ public abstract class AbstractSpearItem extends TooltipItem implements GeoItem {
         }
         if (currentFrame == null) currentFrame = PortListExtension.getLast(keyframes);
         AnimationPoint point = new AnimationPoint(currentFrame, startTick, currentFrame.length(), currentFrame.startValue().get(), currentFrame.endValue().get());
-        return point.keyFrame().easingType().apply(point) * owner.getAttributeValue(IPortAttributesExtension.entityInteractionRange()) / -16;
+        return point.keyFrame().easingType().apply(point) * owner.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) / -16;
     }
 
     @Override
@@ -254,7 +254,7 @@ public abstract class AbstractSpearItem extends TooltipItem implements GeoItem {
 
     public static PortItemAttributeModifiers attributes(float extraRange, float extraDamage) {
         return PortItemAttributeModifiers.builder()
-                .add(IPortAttributesExtension.entityInteractionRange(), new PortAttributeModifier(ModItems.BASE_ENTITY_INTERACTION_RANGE_ID, extraRange, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ENTITY_INTERACTION_RANGE, new PortAttributeModifier(ModItems.BASE_ENTITY_INTERACTION_RANGE_ID, extraRange, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND)
                 .add(LibAttributes.getAttackDamage(), new PortAttributeModifier(ModItems.BASE_ATTACK_DAMAGE_ID, extraDamage, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND)
                 .build();
     }

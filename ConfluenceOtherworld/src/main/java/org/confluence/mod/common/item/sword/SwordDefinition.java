@@ -13,7 +13,6 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.component.SwordProjectileComponent;
 import org.confluence.mod.common.init.ModDataComponentTypes;
 import org.confluence.mod.common.init.item.ModItems;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.AttributeHolder;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
@@ -64,7 +63,7 @@ public record SwordDefinition(
         public Builder specialSweep(float ratio) {
             specialSweep = true;
             if (ratio > 0.0F)
-                attribute(IPortAttributesExtension.sweepingDamageRatio(), ratio, PortAttributeModifier.Operation.ADD_VALUE);
+                attribute(Attributes.SWEEPING_DAMAGE_RATIO, ratio, PortAttributeModifier.Operation.ADD_VALUE);
             return this;
         }
 

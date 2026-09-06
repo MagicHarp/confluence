@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -17,7 +18,6 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.block.functional.network.INetworkEntity;
 import org.confluence.mod.common.block.functional.network.PathService;
 import org.mesdag.portlib.diff.Diff;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 
 public class WireCutterItem extends TooltipItem {
@@ -28,7 +28,7 @@ public class WireCutterItem extends TooltipItem {
     public WireCutterItem() {
         super(new Properties().stacksTo(1), ModRarity.BLUE, "tooltip.item.confluence.wire_cutter.0");
         this.defaultModifiers = ImmutableMultimap.<Attribute, AttributeModifier>builder()
-                .put(IPortAttributesExtension.blockInteractionRange().value(), new AttributeModifier(
+                .put(Attributes.BLOCK_INTERACTION_RANGE.value(), new AttributeModifier(
                         PortAttributeModifier.rl2uuid(BASE_ID),
                         BASE_ID.getPath(),
                         20,

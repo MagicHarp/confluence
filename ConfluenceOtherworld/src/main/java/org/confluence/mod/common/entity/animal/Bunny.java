@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,7 +28,6 @@ import org.confluence.mod.common.entity.IVariant;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.init.entity.CritterEntities;
 import org.jetbrains.annotations.Nullable;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -60,8 +60,8 @@ public class Bunny extends Rabbit implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Rabbit.createAttributes()
-                .add(IPortAttributesExtension.jumpStrength().get(), 0.6)
-                .add(IPortAttributesExtension.safeFallDistance().get(), 6.0);
+                .add(Attributes.JUMP_STRENGTH, 0.6)
+                .add(Attributes.SAFE_FALL_DISTANCE.value(), 6.0);
     }
 
     public Variant getBunnyVariant() {

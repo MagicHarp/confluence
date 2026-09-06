@@ -32,7 +32,6 @@ import org.confluence.mod.common.entity.boss.BossOwnerTracker;
 import org.confluence.mod.common.entity.monster.BaseMonster;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.entity.MonsterEntities;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     protected static final String SIZE_KEY = "SlimeSize";
@@ -501,8 +500,8 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, maxHealth)
                 .add(Attributes.ATTACK_DAMAGE, attackDamage)
-                .add(Attributes.ARMOR, (double) armor)
-                .add(IPortAttributesExtension.waterMovementEfficiency().get(), 0.2)
+                .add(Attributes.ARMOR, armor)
+                .add(Attributes.WATER_MOVEMENT_EFFICIENCY.value(), 0.2)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.FOLLOW_RANGE, 16.0);
     }

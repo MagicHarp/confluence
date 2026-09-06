@@ -35,7 +35,6 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.common.LibAttributes;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModSoundEvents;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -74,8 +73,8 @@ public class Bird extends Animal implements FlyingAnimal, CritterVisual {
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.FLYING_SPEED, 0.4)
-                .add(LibAttributes.getAttackDamage().get(), 3.0)
-                .add(IPortAttributesExtension.fallDamageMultiplier().get(), 0.0);
+                .add(LibAttributes.getAttackDamage().value(), 3.0)
+                .add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     /// 鸟类没有幼年模型和幼年行为，年龄数据不应改变客户端缩放、碰撞或行为选择。

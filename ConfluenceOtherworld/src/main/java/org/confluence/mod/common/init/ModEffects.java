@@ -25,7 +25,6 @@ import org.confluence.mod.common.effect.flask.FlaskOfGoldEffect;
 import org.confluence.mod.common.effect.harmful.*;
 import org.confluence.mod.common.effect.neutral.ShimmerEffect;
 import org.mesdag.portlib.wrapper.common.PortEffectCure;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 import java.util.function.Function;
 
@@ -45,7 +44,7 @@ public final class ModEffects {
             .addAttributeModifier(LibAttributes.getMagicDamage(), id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
             .addAttributeModifier(LibAttributes.getRangedDamage(), id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
             .addAttributeModifier(LibAttributes.getSummonDamage(), id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
-            .addAttributeModifier(IPortAttributesExtension.blockBreakSpeed(), id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
+            .addAttributeModifier(Attributes.BLOCK_BREAK_SPEED, id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
             .addAttributeModifier(ConfluenceMagicLib.SUMMON_KNOCKBACK, id, ADD_MULTIPLIED_TOTAL, v -> exquisitelyStuffed(v, 0.05, 0.075, 0.10))
     );
     public static final RegistryObject<MobEffect> IRON_SKIN = register("iron_skin", id -> new PublicMobEffect(MobEffectCategory.BENEFICIAL, 0x184F5)
@@ -71,7 +70,7 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> TITAN = register("titan", id -> new PublicMobEffect(MobEffectCategory.BENEFICIAL, 0xD2B48C)
             .addAttributeModifier(Attributes.ATTACK_KNOCKBACK, id, 0.5, ADD_MULTIPLIED_TOTAL));
     public static final RegistryObject<MobEffect> BUILDER = register("builder", id -> new PublicMobEffect(MobEffectCategory.BENEFICIAL, 0x8B6914)
-            .addAttributeModifier(IPortAttributesExtension.blockInteractionRange(), id, 3, ADD_VALUE));
+            .addAttributeModifier(Attributes.BLOCK_INTERACTION_RANGE, id, 3, ADD_VALUE));
     public static final RegistryObject<MobEffect> FISHING = EFFECTS.register("fishing", () -> new PublicMobEffect(MobEffectCategory.BENEFICIAL, 0x00BFFF));
     public static final RegistryObject<MobEffect> MAGIC_POWER = register("magic_power", id -> new PublicMobEffect(MobEffectCategory.BENEFICIAL, 0xCC00CC)
             .addAttributeModifier(LibAttributes.getMagicDamage(), id, 0.2, ADD_MULTIPLIED_TOTAL));
@@ -100,8 +99,8 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> BROKEN_ARMOR = register("broken_armor", id -> new PublicMobEffect(MobEffectCategory.HARMFUL, 0x330088)
             .addAttributeModifier(Attributes.ARMOR, id, -0.5, ADD_MULTIPLIED_TOTAL));
     public static final RegistryObject<MobEffect> STONED = register("stoned", id -> new PublicMobEffect(MobEffectCategory.HARMFUL, 0x999999)
-            .addAttributeModifier(IPortAttributesExtension.safeFallDistance(), id, -3.0, ADD_VALUE)
-            .addAttributeModifier(IPortAttributesExtension.gravity(), id, 0.02, ADD_VALUE));
+            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, id, -3.0, ADD_VALUE)
+            .addAttributeModifier(Attributes.GRAVITY, id, 0.02, ADD_VALUE));
     public static final RegistryObject<MobEffect> BLOOD_BUTCHERED = EFFECTS.register("blood_butchered", BloodButcheredEffect::new);
     public static final RegistryObject<MobEffect> TENTACLE_SPIKES = EFFECTS.register("tentacle_spikes", TentacleSpikesEffect::new);
     public static final RegistryObject<MobEffect> LOVE = EFFECTS.register("love", () -> new PublicMobEffect(MobEffectCategory.NEUTRAL, 0xEE0000));

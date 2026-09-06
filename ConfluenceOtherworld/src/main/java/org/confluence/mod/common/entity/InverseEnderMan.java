@@ -7,12 +7,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.confluence.lib.mixed.ILibEntity;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 public class InverseEnderMan extends EnderMan {
     public InverseEnderMan(EntityType<? extends InverseEnderMan> type, Level level) {
@@ -21,7 +21,7 @@ public class InverseEnderMan extends EnderMan {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        Attribute value = IPortAttributesExtension.gravity().get();
+        Attribute value = Attributes.GRAVITY.value();
         return EnderMan.createAttributes().add(value, -value.getDefaultValue());
     }
 

@@ -3,21 +3,21 @@ package org.confluence.mod.common.entity.animal;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 /// 昆虫及简单小动物——共用的标准 flee+wander BT。
 public class SimpleCritter extends BaseCritter {
 
     public SimpleCritter(EntityType<? extends SimpleCritter> type, Level level) {
         super(type, level);
-        getAttribute(IPortAttributesExtension.stepHeight()).setBaseValue(0.3);
+        getAttribute(Attributes.STEP_HEIGHT).setBaseValue(0.3);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return BaseCritter.createInsectAttributes().add(IPortAttributesExtension.fallDamageMultiplier().get(), 0.0);
+        return BaseCritter.createInsectAttributes().add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override

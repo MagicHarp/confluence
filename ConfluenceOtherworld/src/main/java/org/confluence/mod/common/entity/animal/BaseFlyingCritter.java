@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.Level;
 import org.confluence.lib.common.LibAttributes;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 /// 能够持续在三维空间活动的小动物基类。
 ///
@@ -30,8 +29,8 @@ public abstract class BaseFlyingCritter extends BaseCritter {
     public static AttributeSupplier.Builder createFlyingCritterAttributes() {
         return BaseCritter.createInsectAttributes()
                 .add(Attributes.FLYING_SPEED, 0.25)
-                .add(LibAttributes.getAttackDamage().get(), 3.0)
-                .add(IPortAttributesExtension.fallDamageMultiplier().get(), 0.0);
+                .add(LibAttributes.getAttackDamage().value(), 3.0)
+                .add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override

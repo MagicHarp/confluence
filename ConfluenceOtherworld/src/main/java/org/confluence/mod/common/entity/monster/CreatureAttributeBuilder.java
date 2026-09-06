@@ -4,7 +4,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.confluence.lib.common.LibAttributes;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 /// 本体生物注册共用的属性模板构建器。
 public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
@@ -14,7 +13,7 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
 
     public static CreatureAttributeBuilder creature(double health, double armor, double attack, double followRange, double attackKnockback, double knockbackResistance) {
         return new CreatureAttributeBuilder(Mob.createMobAttributes()
-                .add(LibAttributes.getAttackDamage().get(), attack)
+                .add(LibAttributes.getAttackDamage().value(), attack)
                 .add(Attributes.MAX_HEALTH, health)
                 .add(Attributes.ARMOR, armor)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
@@ -24,8 +23,8 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
                 .add(Attributes.ATTACK_KNOCKBACK, attackKnockback)
                 .add(Attributes.ATTACK_SPEED)
                 .add(Attributes.FLYING_SPEED)
-                .add(IPortAttributesExtension.scale().get(), 1.0D)
-                .add(IPortAttributesExtension.safeFallDistance().get(), 8.0)
+                .add(Attributes.SCALE.value(), 1.0D)
+                .add(Attributes.SAFE_FALL_DISTANCE.value(), 8.0)
                 .build());
     }
 
@@ -35,7 +34,7 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
 
     public static CreatureAttributeBuilder boss(double attack, double health, double armor) {
         return new CreatureAttributeBuilder(Mob.createMobAttributes()
-                .add(LibAttributes.getAttackDamage().get(), attack)
+                .add(LibAttributes.getAttackDamage().value(), attack)
                 .add(Attributes.MAX_HEALTH, health)
                 .add(Attributes.ARMOR, armor)
                 .add(Attributes.MOVEMENT_SPEED, 1.0)
@@ -44,13 +43,13 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
                 .add(Attributes.ATTACK_KNOCKBACK)
                 .add(Attributes.ATTACK_SPEED)
                 .add(Attributes.FLYING_SPEED)
-                .add(IPortAttributesExtension.scale().get(), 1.0D)
-                .add(IPortAttributesExtension.safeFallDistance().get(), 8.0)
+                .add(Attributes.SCALE.value(), 1.0D)
+                .add(Attributes.SAFE_FALL_DISTANCE.value(), 8.0)
                 .build());
     }
 
     public CreatureAttributeBuilder flying() {
-        add(IPortAttributesExtension.safeFallDistance().get(), 1000.0);
+        add(Attributes.SAFE_FALL_DISTANCE.value(), 1000.0);
         return this;
     }
 
@@ -60,22 +59,22 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
     }
 
     public CreatureAttributeBuilder safeFallDistance(double value) {
-        add(IPortAttributesExtension.safeFallDistance().get(), value);
+        add(Attributes.SAFE_FALL_DISTANCE.value(), value);
         return this;
     }
 
     public CreatureAttributeBuilder gravity(double value) {
-        add(IPortAttributesExtension.gravity().get(), value);
+        add(Attributes.GRAVITY.value(), value);
         return this;
     }
 
     public CreatureAttributeBuilder jumpStrength(double value) {
-        add(IPortAttributesExtension.jumpStrength().get(), value);
+        add(Attributes.JUMP_STRENGTH, value);
         return this;
     }
 
     public CreatureAttributeBuilder stepHeight(double value) {
-        add(IPortAttributesExtension.stepHeight().get(), value);
+        add(Attributes.STEP_HEIGHT.value(), value);
         return this;
     }
 

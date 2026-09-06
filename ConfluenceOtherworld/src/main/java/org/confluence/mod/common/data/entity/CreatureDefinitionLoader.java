@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.confluence.mod.Confluence;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +72,7 @@ public final class CreatureDefinitionLoader extends SimpleJsonResourceReloadList
         setBaseValue(mob, Attributes.MOVEMENT_SPEED, overrides.movementSpeed());
         setBaseValue(mob, Attributes.FOLLOW_RANGE, overrides.followRange());
         setBaseValue(mob, Attributes.KNOCKBACK_RESISTANCE, overrides.knockbackResistance());
-        setBaseValue(mob, IPortAttributesExtension.scale().value(), overrides.scale());
+        setBaseValue(mob, Attributes.SCALE.value(), overrides.scale());
 
         if (wasFullHealth) {
             mob.setHealth(mob.getMaxHealth());

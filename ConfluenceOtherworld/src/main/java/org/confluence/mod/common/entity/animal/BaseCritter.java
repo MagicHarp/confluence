@@ -20,7 +20,6 @@ import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
 import org.confluence.mod.common.init.ModSoundEvents;
-import org.mesdag.portlib.wrapper.common.extensions.IPortAttributesExtension;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -146,7 +145,7 @@ public abstract class BaseCritter extends Animal implements CritterVisual {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.18)
-                .add(IPortAttributesExtension.stepHeight().get(), 0.3);
+                .add(Attributes.STEP_HEIGHT.value(), 0.3);
     }
 
     @Override
