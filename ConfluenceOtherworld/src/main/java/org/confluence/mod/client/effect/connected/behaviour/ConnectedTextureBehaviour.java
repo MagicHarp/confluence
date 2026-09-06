@@ -10,12 +10,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.client.effect.connected.CTSpriteShiftEntry;
 import org.confluence.mod.client.effect.connected.CTType;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ConnectedTextureBehaviour {
     @Nullable
-    public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction, @NotNull TextureAtlasSprite sprite);
+    public abstract CTSpriteShiftEntry getShift(BlockState state, Direction direction, TextureAtlasSprite sprite);
 
     @Nullable
     public abstract CTType getDataType(BlockAndTintGetter world, BlockPos pos, BlockState state, Direction direction);

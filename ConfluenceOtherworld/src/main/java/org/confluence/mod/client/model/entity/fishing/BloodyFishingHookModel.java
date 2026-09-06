@@ -9,7 +9,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.fishing.BloodyFishingHook;
-import org.jetbrains.annotations.NotNull;
 
 public class BloodyFishingHookModel extends EntityModel<BloodyFishingHook> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("bloody_fishing_hook"), "main");
@@ -29,10 +28,10 @@ public class BloodyFishingHookModel extends EntityModel<BloodyFishingHook> {
     }
 
     @Override
-    public void setupAnim(@NotNull BloodyFishingHook pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {}
+    public void setupAnim(BloodyFishingHook pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {}
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack pPoseStack, @NotNull VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float red, float green, float blue, float alpha) {
         bb_main.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, red, green, blue, alpha);
     }
 }

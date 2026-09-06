@@ -16,8 +16,7 @@ import net.minecraft.world.phys.Vec2;
 import org.confluence.lib.color.IntegerARGB;
 import org.confluence.lib.util.LibMathUtils;
 import org.confluence.mod.client.gui.widget.soul_skill.SoulSkillBox;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
-import org.jetbrains.annotations.NotNull;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.joml.Matrix4f;
 import org.mesdag.portlib.client.PortDeltaTicker;
 
@@ -123,8 +122,8 @@ public class RouletteWheelBigHud extends BasicSoulQuickSkillHud {
     }
 
     @Override
-    public SoulSkillClientHolder.Type getType() {
-        return SoulSkillClientHolder.Type.ROULETTE_WHEEL_BIG;
+    public SoulSkillClientHandler.Type getType() {
+        return SoulSkillClientHandler.Type.ROULETTE_WHEEL_BIG;
     }
 
     @Override
@@ -437,16 +436,20 @@ public class RouletteWheelBigHud extends BasicSoulQuickSkillHud {
         final Matrix4f pose = poseStack.last().pose();
 
         vertexConsumer.vertex(pose, p1.x, p1.y, 0)
-                .color(color.red(), color.green(), color.blue(), color.alpha());
+                .color(color.red(), color.green(), color.blue(), color.alpha())
+                .endVertex();
         vertexConsumer.vertex(pose, p2.x, p2.y, 0)
-                .color(color.red(), color.green(), color.blue(), color.alpha());
+                .color(color.red(), color.green(), color.blue(), color.alpha())
+                .endVertex();
         vertexConsumer.vertex(pose, p3.x, p3.y, 0)
-                .color(color.red(), color.green(), color.blue(), color.alpha());
+                .color(color.red(), color.green(), color.blue(), color.alpha())
+                .endVertex();
         vertexConsumer.vertex(pose, p4.x, p4.y, 0)
-                .color(color.red(), color.green(), color.blue(), color.alpha());
+                .color(color.red(), color.green(), color.blue(), color.alpha())
+                .endVertex();
     }
 
-    private @NotNull Vec2 getMousePos() {
+    private Vec2 getMousePos() {
         return new Vec2(getMouseX(), getMouseY());
     }
 
@@ -458,7 +461,7 @@ public class RouletteWheelBigHud extends BasicSoulQuickSkillHud {
         return (float) mouseHandler.xpos() * window.getGuiScaledWidth() / window.getScreenWidth();
     }
 
-    private @NotNull Vec2 getScreenCenter() {
+    private Vec2 getScreenCenter() {
         return new Vec2(getScreenWidth() * 0.5f, getScreenHeight() * 0.5f);
     }
 

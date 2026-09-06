@@ -14,7 +14,6 @@ import net.minecraftforge.client.model.data.ModelProperty;
 import org.confluence.mod.client.effect.connected.BakedModelWrapperWithData;
 import org.confluence.mod.client.effect.connected.BakedQuadHelper;
 import org.confluence.mod.common.data.saved.BrushData;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class GrayBlockModelSwapper extends BakedModelWrapperWithData {
     }
 
     @Override
-    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData extraData, @Nullable RenderType renderType) {
         List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
         int[] colors = extraData.get(COLOR_PROPERTY);
         if (colors == null) return quads;

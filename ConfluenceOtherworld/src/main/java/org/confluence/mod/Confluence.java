@@ -46,6 +46,8 @@ public final class Confluence {
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
     public static final PortNetworkHandler NETWORK_HANDLER = new PortNetworkHandler(MODID, "1");
 
+    public static final boolean SOUL_SKILLS = false;
+
     public Confluence(FMLJavaModLoadingContext context) {
         IEventBus eventBus = context.getModEventBus();
         StartupConfigs.register();

@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -56,7 +55,7 @@ public abstract class MinecartAbilityEvent extends PlayerEvent {
             return blockPos;
         }
 
-        public void setMinecart(@NotNull AbstractMinecart minecart) {
+        public void setMinecart(AbstractMinecart minecart) {
             this.minecart = minecart;
         }
     }
@@ -69,7 +68,7 @@ public abstract class MinecartAbilityEvent extends PlayerEvent {
             super(player, minecart);
         }
 
-        public void setMinecartItem(@NotNull ItemStack minecartItem) {
+        public void setMinecartItem(ItemStack minecartItem) {
             this.minecartItem = minecartItem;
         }
 
@@ -78,7 +77,7 @@ public abstract class MinecartAbilityEvent extends PlayerEvent {
         }
 
         @Override
-        public @NotNull AbstractMinecart getMinecart() {
+        public AbstractMinecart getMinecart() {
             return Objects.requireNonNull(minecart);
         }
     }

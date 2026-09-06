@@ -9,7 +9,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.fishing.HotlineFishingHook;
-import org.jetbrains.annotations.NotNull;
 
 public class HotlineFishingHookModel extends EntityModel<HotlineFishingHook> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Confluence.asResource("hotline_fishing_hook"), "main");
@@ -30,10 +29,10 @@ public class HotlineFishingHookModel extends EntityModel<HotlineFishingHook> {
     }
 
     @Override
-    public void setupAnim(@NotNull HotlineFishingHook pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {}
+    public void setupAnim(HotlineFishingHook pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {}
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack pPoseStack, @NotNull VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float red, float green, float blue, float alpha) {
         bb_main.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, red, green, blue, alpha);
     }
 }

@@ -51,7 +51,7 @@ import org.confluence.mod.client.entity.renderer.*;
 import org.confluence.mod.client.gameevent.GoblinArmyProgressRenderer;
 import org.confluence.mod.client.gui.container.*;
 import org.confluence.mod.client.gui.hud.*;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.client.handler.StarPhaseHandler;
 import org.confluence.mod.client.handler.SwordProjectileVisualHandler;
 import org.confluence.mod.client.handler.bestiary.ClientBestiary;
@@ -211,8 +211,6 @@ public final class ModClientEvents {
         event.register(ModMenuTypes.DYE_VAT.get(), DyeVatScreen::new);
         event.register(ModMenuTypes.DYE_MIX.get(), DyeMixScreen::new);
         event.register(ModMenuTypes.PIGGY_BANK.get(), PiggyBankScreen::new);
-        // npc
-//  todo      event.register(ModMenuTypes.NPC_TRADES_MENU.get(), WithForgeTradeScreen::new);
         event.register(ModMenuTypes.REFORGE_MENU.get(), NPCReforgeScreen::new);
         event.register(ModMenuTypes.NPC_TRADE.get(), NPCTradeScreen::new);
     }
@@ -228,19 +226,19 @@ public final class ModClientEvents {
         event.registerAbove(VanillaGuiOverlay.FOOD_LEVEL.id(), manaHud, new TerraStyleManaHud());
         ResourceLocation foodHud = Confluence.asResource("food_hud");
         event.registerBelow(manaHud, foodHud, new TerraStyleFoodHud());
-//        ResourceLocation soulHud = Confluence.asResource("soul_hud");
-//        event.registerAbove(manaHud, soulHud, new TerraStyleSoulHud());
 
         event.registerBelow(VanillaGuiOverlay.CROSSHAIR.id(), Confluence.asResource("house_select"), new HouseSelectHud());
         event.registerBelow(VanillaGuiOverlay.BOSS_EVENT_PROGRESS.id(), Confluence.asResource("goblin_army"), new GoblinArmyProgressRenderer());
         event.registerAboveAll(Confluence.asResource("ask_for_softcore"), new AskForSoftcoreLayer());
 
-        event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("card_horizontal_l_hud"), SoulSkillClientHolder.CARD_HORIZONTAL_L_HUD_INSTANCE);
-        event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("card_horizontal_r_hud"), SoulSkillClientHolder.CARD_HORIZONTAL_R_HUD_INSTANCE);
-        event.registerBelow(VanillaGuiOverlay.HOTBAR.id(), Confluence.asResource("roulette_wheel_small_hud"), SoulSkillClientHolder.ROULETTE_WHEEL_SMALL_HUD_INSTANCE);
-        event.registerBelow(VanillaGuiOverlay.HOTBAR.id(), Confluence.asResource("current_selected_skill_hud"), SoulSkillClientHolder.CURRENT_SELECTED_SKILL_HUD_INSTANCE);
-        event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("roulette_wheel_big_hud"), SoulSkillClientHolder.ROULETTE_WHEEL_BIG_HUD_INSTANCE);
-        SoulSkillClientHolder.INSTANCE.init();
+        if (Confluence.SOUL_SKILLS) {
+            event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("card_horizontal_l_hud"), SoulSkillClientHandler.CARD_HORIZONTAL_L_HUD_INSTANCE);
+            event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("card_horizontal_r_hud"), SoulSkillClientHandler.CARD_HORIZONTAL_R_HUD_INSTANCE);
+            event.registerBelow(VanillaGuiOverlay.HOTBAR.id(), Confluence.asResource("roulette_wheel_small_hud"), SoulSkillClientHandler.ROULETTE_WHEEL_SMALL_HUD_INSTANCE);
+            event.registerBelow(VanillaGuiOverlay.HOTBAR.id(), Confluence.asResource("current_selected_skill_hud"), SoulSkillClientHandler.CURRENT_SELECTED_SKILL_HUD_INSTANCE);
+            event.registerAbove(VanillaGuiOverlay.SUBTITLES.id(), Confluence.asResource("roulette_wheel_big_hud"), SoulSkillClientHandler.ROULETTE_WHEEL_BIG_HUD_INSTANCE);
+            SoulSkillClientHandler.INSTANCE.init();
+        }
     }
 
     public static void registerEntityLayers(PortEntityRenderersEvent.RegisterLayerDefinitions event) {

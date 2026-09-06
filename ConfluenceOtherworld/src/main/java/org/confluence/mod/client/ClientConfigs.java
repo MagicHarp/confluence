@@ -14,11 +14,12 @@ import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.client.gui.hud.TerraStyleArmorHud;
 import org.confluence.mod.client.gui.hud.TerraStyleFoodHud;
 import org.confluence.mod.client.gui.hud.TerraStyleHealthHud;
 import org.confluence.mod.client.gui.hud.TerraStyleManaHud;
-import org.confluence.mod.client.handler.SoulSkillClientHolder;
+import org.confluence.mod.client.handler.SoulSkillClientHandler;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeMenu;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.item.flail.BaseFlailItem;
@@ -56,10 +57,7 @@ public final class ClientConfigs {
     public static TerraStyleManaHud.Mana manaStyle = TerraStyleManaHud.Mana.OVERLAY;
     public static int manaOffsetX = 0;
     public static int manaOffsetY = 0;
-    public static SoulSkillClientHolder.Type soulQuickSkillStyle;
-    //    public static TerraStyleSoulHud.Soul soulStyle = TerraStyleSoulHud.Soul.OVERLAY;
-//    public static int soulOffsetX = 0;
-//    public static int soulOffsetY = 0;
+    public static SoulSkillClientHandler.Type soulQuickSkillStyle;
     public static boolean terraStyleArmor = true;
     public static TerraStyleArmorHud.Armor armorStyle = TerraStyleArmorHud.Armor.OVERLAY;
     public static boolean leftEffectIcon = true;
@@ -100,10 +98,7 @@ public final class ClientConfigs {
     private static EnumValue<TerraStyleManaHud.Mana> MANA_STYLE;
     private static IntValue MANA_OFFSET_X;
     private static IntValue MANA_OFFSET_Y;
-    private static EnumValue<SoulSkillClientHolder.Type> SOUL_QUICK_SKILL_STYLE;
-    //    private static EnumValue<TerraStyleSoulHud.Soul> SOUL_STYLE;
-//    private static IntValue SOUL_OFFSET_X;
-//    private static IntValue SOUL_OFFSET_Y;
+    private static EnumValue<SoulSkillClientHandler.Type> SOUL_QUICK_SKILL_STYLE;
     private static BooleanValue TERRA_STYLE_ARMOR;
     private static EnumValue<TerraStyleArmorHud.Armor> ARMOR_STYLE;
     private static BooleanValue LEFT_EFFECT_ICON;
@@ -144,10 +139,9 @@ public final class ClientConfigs {
         manaStyle = MANA_STYLE.get();
         manaOffsetX = MANA_OFFSET_X.get();
         manaOffsetY = MANA_OFFSET_Y.get();
-        soulQuickSkillStyle = SOUL_QUICK_SKILL_STYLE.get();
-//        soulStyle = SOUL_STYLE.get();
-//        soulOffsetX = SOUL_OFFSET_X.get();
-//        soulOffsetY = SOUL_OFFSET_Y.get();
+        if (Confluence.SOUL_SKILLS) {
+            soulQuickSkillStyle = SOUL_QUICK_SKILL_STYLE.get();
+        }
         terraStyleArmor = TERRA_STYLE_ARMOR.get();
         armorStyle = ARMOR_STYLE.get();
         terraStyleFood = TERRA_STYLE_FOOD.get();
@@ -209,16 +203,9 @@ public final class ClientConfigs {
                 MANA_OFFSET_Y = builder.defineInRange("manaOffsetY", 0, -256, 256);
                 builder.pop();
             }
-//            {
-//                builder.push("Soul");
-//                SOUL_STYLE = builder.defineEnum("soulStyle", TerraStyleSoulHud.Soul.OVERLAY);
-//                SOUL_OFFSET_X = builder.defineInRange("soulOffsetX", 0, -256, 256);
-//                SOUL_OFFSET_Y = builder.defineInRange("soulOffsetY", 0, -256, 256);
-//                builder.pop();
-//            }
-            {
+            if (Confluence.SOUL_SKILLS) {
                 builder.push("Soul");
-                SOUL_QUICK_SKILL_STYLE = builder.defineEnum("soulQuickSkillStyle", SoulSkillClientHolder.Type.ROULETTE_WHEEL_SMALL);
+                SOUL_QUICK_SKILL_STYLE = builder.defineEnum("soulQuickSkillStyle", SoulSkillClientHandler.Type.ROULETTE_WHEEL_SMALL);
                 builder.pop();
             }
             {

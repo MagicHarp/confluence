@@ -25,7 +25,6 @@ import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.block.OreBlocks;
 import org.confluence.mod.mixed.ILevelChunkSection;
 import org.confluence.mod.mixed.IPalettedContainer;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mesdag.portlib.wrapper.common.PortTags;
 
@@ -75,7 +74,6 @@ public final class DynamicBiomeUtils {
     /// 如果原群系包含邪恶：如果纯邪恶则返回平原，否则从纯净中挑一个
     ///
     /// 如果原群系没有邪恶则返回原群系
-    @NotNull
     public static PalettedContainer<Holder<Biome>> judgeBackupBiome(LevelChunkSection section, HolderLookup.RegistryLookup<Biome> lookup) {
         PalettedContainer<Holder<Biome>> biomes = (PalettedContainer<Holder<Biome>>) section.getBiomes();
         AtomicReference<Holder<Biome>> pure = new AtomicReference<>();

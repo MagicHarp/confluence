@@ -14,7 +14,6 @@ import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
 import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.client.effect.connected.behaviour.ConnectedTextureBehaviour;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +48,7 @@ public class CTModel extends BakedModelWrapperWithData {
     }
 
     @Override
-    public @NotNull List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand, ModelData extraData, RenderType renderType) {
+    public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand, ModelData extraData, RenderType renderType) {
         List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
         CTData data = extraData.get(CT_PROPERTY);
         if (data == null) return quads;

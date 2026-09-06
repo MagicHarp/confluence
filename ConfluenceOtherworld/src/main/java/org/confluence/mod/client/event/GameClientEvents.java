@@ -37,6 +37,7 @@ import org.confluence.lib.api.event.OnGatherEffectScreenTooltipsEvent;
 import org.confluence.lib.client.animate.ExpertColorAnimation;
 import org.confluence.lib.util.LibClientUtils;
 import org.confluence.lib.util.LibUtils;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.api.event.AfterFlushArmorSetBonusEvent;
 import org.confluence.mod.api.event.BulletEvent;
 import org.confluence.mod.api.event.GunEvent;
@@ -167,15 +168,17 @@ public final class GameClientEvents {
         LocalPlayer player = minecraft.player;
 
         if (player != null) {
-            SoulSkillClientHolder.INSTANCE.handler();
-            boolean isSoulOverviewScreen = false;
-            while (ModKeyBindings.SOUL_OVERVIEW.get().consumeClick()) {
-                if (!isSoulOverviewScreen) {
-                    isSoulOverviewScreen = true;
+            if (Confluence.SOUL_SKILLS) {
+                SoulSkillClientHandler.INSTANCE.handle();
+                boolean isSoulOverviewScreen = false;
+                while (ModKeyBindings.SOUL_OVERVIEW.get().consumeClick()) {
+                    if (!isSoulOverviewScreen) {
+                        isSoulOverviewScreen = true;
+                    }
                 }
-            }
-            if (isSoulOverviewScreen && SoulGuiAccess.isAllowed(player)) {
-                minecraft.setScreen(new SoulOverviewScreen());
+                if (isSoulOverviewScreen) {
+                    minecraft.setScreen(new SoulOverviewScreen());
+                }
             }
             WeatherHandler.handle();
             MeteorLandingHandler.handle(minecraft, player);
@@ -285,8 +288,10 @@ public final class GameClientEvents {
         double scrollDeltaY = event.getScrollDeltaY();
         if (ClientWeaponInputManager.scroll(player, scrollDeltaY)) {
             event.setCanceled(true);
-        } else if (SoulSkillClientHolder.INSTANCE.scrolling(scrollDeltaY)) {
-            event.setCanceled(true);
+        } else if (Confluence.SOUL_SKILLS) {
+            if (SoulSkillClientHandler.INSTANCE.scrolling(scrollDeltaY)) {
+                event.setCanceled(true);
+            }
         }
     }
 

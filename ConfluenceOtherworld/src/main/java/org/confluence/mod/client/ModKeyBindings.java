@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.util.Lazy;
+import org.confluence.mod.Confluence;
 import org.lwjgl.glfw.GLFW;
 import org.mesdag.portlib.event.PortEventHandler;
 import org.mesdag.portlib.event.client.PortRegisterKeyMappingsEvent;
@@ -27,38 +28,40 @@ public final class ModKeyBindings {
         keyMappings = null;
     }
 
-    // region 魔法系列
-
     public static final Lazy<KeyMapping> GUN_SHOOT = register(() -> new KeyMapping("key.confluence.shoot", KeyConflictContext.IN_GAME, InputConstants.Type.MOUSE, GLFW.GLFW_MOUSE_BUTTON_LEFT, KEY_BINDINGS_CATEGORY));
     public static final Lazy<KeyMapping> GUN_AIM = register(() -> new KeyMapping("key.confluence.aim", KeyConflictContext.IN_GAME, InputConstants.Type.MOUSE, GLFW.GLFW_MOUSE_BUTTON_RIGHT, KEY_BINDINGS_CATEGORY));
     public static final Lazy<KeyMapping> GUN_INSPECT = register(() -> new KeyMapping("key.confluence.inspect", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_R, KEY_BINDINGS_CATEGORY));
 
+    //region 魔法系列
+
     /// 灵魂总览
-    public static final Lazy<KeyMapping> SOUL_OVERVIEW = register(() -> new KeyMapping(
+    public static final Lazy<KeyMapping> SOUL_OVERVIEW = Confluence.SOUL_SKILLS ? register(() -> new KeyMapping(
             "key.confluence.soul.overview",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_C,
             KEY_BINDINGS_CATEGORY
-    ));
+    )) : null;
 
     /// 灵魂快捷技能切换
-    public static final Lazy<KeyMapping> MAGIC_QUICK_SKILL_SWITCHING = register(() -> new KeyMapping(
+    public static final Lazy<KeyMapping> MAGIC_QUICK_SKILL_SWITCHING = Confluence.SOUL_SKILLS ? register(() -> new KeyMapping(
             "key.confluence.soul.quick_skill_switching",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_SHIFT,
             KEY_BINDINGS_CATEGORY
-    ));
+    )) : null;
 
     /// 魔法技能释放
-    public static final Lazy<KeyMapping> MAGIC_SKILL_RELEASE = register(() -> new KeyMapping(
+    public static final Lazy<KeyMapping> MAGIC_SKILL_RELEASE = Confluence.SOUL_SKILLS ? register(() -> new KeyMapping(
             "key.confluence.magic.skill_release",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_SHIFT,
             KEY_BINDINGS_CATEGORY
-    ));
+    )) : null;
+
+    //endregion
 
     public static final Lazy<KeyMapping> HOOK = register(() -> new KeyMapping("key.confluence.hook", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_E, KEY_BINDINGS_CATEGORY));
 
