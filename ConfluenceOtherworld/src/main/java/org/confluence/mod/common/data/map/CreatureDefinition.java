@@ -2,26 +2,24 @@ package org.confluence.mod.common.data.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.confluence.mod.common.init.ModDataMaps;
-import org.mesdag.portlib.event.registries.PortDataMapsUpdatedEvent;
 
 /// 生物与 Boss 共用的数据包数值定义。
 ///
 /// 该记录只保存可安全热重载的“数值配置”，不保存实体实例、行为树节点或 Forge 对象。
 /// 生物实体的 Java 实现是默认值的唯一来源；数据包只保存需要改动的覆盖值。
-/// 数据文件位于 {@code data/<命名空间>/data_maps/entity_type/creature_definition.json}；
+/// 数据文件位于 `data/<namespace>/data_maps/entity_type/creature_definition.json`；
 /// KubeJS 也可以用标准实体类型 Data Map 写入相同结构，无需依赖本体内部 Java 类。
 /// 未填写的字段统一以负数表示“沿用 Java 侧默认值”，
 /// 从而允许整合包只覆盖自己关心的参数。
 ///
 /// 这里是稳定的数据格式边界。外部模组与脚本应写入 JSON，而不是直接持有加载器的内部映射；
-/// 这样既能参与标准资源包优先级，也能在 {@code /reload} 时与其他数据包一起原子生效。
+/// 这样既能参与标准资源包优先级，也能在 `/reload` 时与其他数据包一起原子生效。
 public record CreatureDefinition(AttributeOverrides attributes, BehaviorOverrides behavior,
                                  BossOverrides boss) {
     /// 未找到定义或定义未提供任何覆盖值时使用的不可变空对象。
@@ -34,21 +32,10 @@ public record CreatureDefinition(AttributeOverrides attributes, BehaviorOverride
             BossOverrides.CODEC.optionalFieldOf("boss", BossOverrides.EMPTY).forGetter(CreatureDefinition::boss)
     ).apply(instance, CreatureDefinition::new));
 
-    private static volatile int revision;
-
     /// 返回实体类型对应的覆盖数据；没有定义时返回共享空对象。
     public static CreatureDefinition get(EntityType<?> type) {
         CreatureDefinition definition = ModDataMaps.getEntityData(ModDataMaps.CREATURE_DEFINITION, type);
         return definition == null ? EMPTY : definition;
-    }
-
-    /// 返回最近一次实体类型 Data Map 更新后的版本号，供存活实体按需刷新属性。
-    public static int getRevision() {
-        return revision;
-    }
-
-    public static void onDataMapsUpdated(PortDataMapsUpdatedEvent event) {
-        if (Registries.ENTITY_TYPE.equals(event.getRegistryKey())) revision++;
     }
 
     /// 将当前实体类型 Data Map 中的属性基础值覆盖应用到生物实例。
@@ -208,7 +195,7 @@ public record CreatureDefinition(AttributeOverrides attributes, BehaviorOverride
         }
 
         private static double positive(double value, double fallback) {
-            return Double.isFinite(value) && value > 0 ? value : fallback;
+            return value > 0 ? value : fallback;
         }
 
         private static int positive(int value, int fallback) {
@@ -220,7 +207,7 @@ public record CreatureDefinition(AttributeOverrides attributes, BehaviorOverride
         }
 
         private static double nonNegative(double value, double fallback) {
-            return Double.isFinite(value) && value >= 0 ? value : fallback;
+            return value >= 0 ? value : fallback;
         }
     }
 }

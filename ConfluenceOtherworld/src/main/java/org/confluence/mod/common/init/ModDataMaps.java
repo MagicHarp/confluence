@@ -72,7 +72,6 @@ public final class ModDataMaps {
     }
 
     public static void init() {
-        PortEventHandler.addListener(CreatureDefinition::onDataMapsUpdated);
         PortEventHandler.addListener((PortRegisterDataMapTypesEvent event) -> {
             for (PortDataMapType<?, ?> type : types) {
                 event.register(type);

@@ -116,12 +116,18 @@ public final class EntityEvents {
             event.setInvulnerable(true);
             return;
         }
-        if (attacker instanceof Player a && victim instanceof Player v && (!PlayerSpecialData.of(a).isPvP() || !PlayerSpecialData.of(v).isPvP())) {
+        if (attacker instanceof Player a &&
+                victim instanceof Player v &&
+                (!PlayerSpecialData.of(a).isPvP() || !PlayerSpecialData.of(v).isPvP())
+        ) {
             event.setInvulnerable(true);
             return;
         }
-        if (CommonConfigs.NPC_INVULNERABLE_TO_PLAYER.get() && (victim instanceof BaseNPC || victim.getType().is(ModTags.EntityTypes.NPC_INVULNERABLE_TO_PLAYER)) &&
-                LibEntityUtils.getOwner(damageSource) instanceof Player) {
+        if (CommonConfigs.NPC_INVULNERABLE_TO_PLAYER.get() &&
+                (victim instanceof BaseNPC || victim.getType().is(ModTags.EntityTypes.NPC_INVULNERABLE_TO_PLAYER)) &&
+                LibEntityUtils.getOwner(damageSource) instanceof Player player &&
+                !player.isCreative()
+        ) {
             event.setInvulnerable(true);
             return;
         }

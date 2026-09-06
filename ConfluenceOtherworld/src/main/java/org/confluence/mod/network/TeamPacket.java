@@ -40,12 +40,14 @@ public record TeamPacket(int playerId, Team team, boolean pvp) implements IPortP
 
     @Override
     public void handle(Context context) {
-        Player player = context.player();
-        if (player instanceof ServerPlayer sp) {
-            context.enqueueWork(() -> c2s(sp));
-        } else if (player != null) {
-            context.enqueueWork(() -> s2c(player));
-        }
+        context.enqueueWork(() -> {
+            Player player = context.player();
+            if (context.player() instanceof ServerPlayer sp) {
+                c2s(sp);
+            } else if (player != null) {
+                s2c(player);
+            }
+        });
     }
 
     @Override
@@ -54,29 +56,27 @@ public record TeamPacket(int playerId, Team team, boolean pvp) implements IPortP
     }
 
     public void c2s(ServerPlayer player) {
-        // C2S 中的实体编号不可信：玩家只能修改自己的队伍与 PvP 状态。
-        // playerId 仍保留在协议中，供同一个双向包在 S2C 同步其他玩家时定位实体。
-        Player target = player;
-        PlayerSpecialData data = PlayerSpecialData.of(target);
-        PlayerList playerList = player.server.getPlayerList();
-        int textColor = team.getColor().getTextColor();
-        if (data.getTeam() != team) {
-            Component msg;
-            if (team == Team.WHITE) {
-                msg = Component.translatable("message.confluence.leave_team", target.getName()).withColor(textColor);
-            } else {
-                msg = Component.translatable("message.confluence.join_team", target.getName(), team.getLowerCaseName()).withColor(textColor);
+        if (player.level().getEntity(playerId) instanceof Player target) {
+            PlayerSpecialData data = PlayerSpecialData.of(target);
+            PlayerList playerList = player.server.getPlayerList();
+            int textColor = team.getColor().getTextColor();
+            if (data.getTeam() != team) {
+                Component msg;
+                if (team == Team.WHITE) {
+                    msg = Component.translatable("message.confluence.leave_team", target.getName()).withColor(textColor);
+                } else {
+                    msg = Component.translatable("message.confluence.join_team", target.getName(), team.getLowerCaseName()).withColor(textColor);
+                }
+                playerList.broadcastSystemMessage(msg, false);
+                data.setTeam(team);
             }
-            playerList.broadcastSystemMessage(msg, false);
-            data.setTeam(team);
+            if (data.isPvP() != pvp) {
+                Component msg = Component.translatable(pvp ? "message.confluence.enable_pvp" : "message.confluence.disable_pvp", target.getName()).withColor(textColor);
+                playerList.broadcastSystemMessage(msg, false);
+                data.setPvP(pvp);
+            }
         }
-        if (data.isPvP() != pvp) {
-            Component msg = Component.translatable(pvp ? "message.confluence.enable_pvp" : "message.confluence.disable_pvp", target.getName()).withColor(textColor);
-            playerList.broadcastSystemMessage(msg, false);
-            data.setPvP(pvp);
-        }
-        // 广播服务器重新构造的权威状态，不能原样转发客户端提供的 playerId。
-        Confluence.NETWORK_HANDLER.sendToPlayersTrackingEntityAndSelf(player, makePacket(player));
+        Confluence.NETWORK_HANDLER.sendToPlayersTrackingEntity(player, this);
     }
 
     public void s2c(Player player) {

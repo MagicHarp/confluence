@@ -20,11 +20,13 @@ public record AskForSoftcorePacket(boolean accept) implements IPortPacket {
 
     @Override
     public void handle(Context context) {
-        if (context.player() instanceof ServerPlayer player) {
-            context.enqueueWork(() -> c2s(player));
-        } else if (context.player() != null) {
-            context.enqueueWork(this::s2c);
-        }
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer sp) {
+                c2s(sp);
+            } else {
+                s2c();
+            }
+        });
     }
 
     @Override
@@ -46,5 +48,4 @@ public record AskForSoftcorePacket(boolean accept) implements IPortPacket {
             player.sendSystemMessage(Component.translatable("confluence.difficulty_notice.never.done"));
         }
     }
-
 }
