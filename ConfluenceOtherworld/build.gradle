@@ -257,6 +257,41 @@ tasks.withType(Jar).configureEach { duplicatesStrategy = DuplicatesStrategy.EXCL
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 
+def confluenceRefmapPath = layout.buildDirectory.file("mixin/${mod_id}.refmap.json")
+
+tasks.register('patchRefmap') {
+    dependsOn compileJava
+    doLast {
+        def refmapFile = confluenceRefmapPath.get().asFile
+        if (!refmapFile.exists()) {
+            logger.warn("Refmap file not found at ${refmapFile.absolutePath}, skipping patch")
+            return
+        }
+
+        def json = new groovy.json.JsonSlurper().parse(refmapFile) as Map
+
+        def insertRefMap = { String m, String meth, String map ->
+            if (!json.mappings[m]) json.mappings[m] = [:]
+            if (!json.data.searge[m]) json.data.searge[m] = [:]
+            json.mappings[m][meth] = map
+            json.data.searge[m][meth] = map
+        }
+
+        insertRefMap(
+                'org/confluence/mod/mixin/client/resources/model/ModelBakeryMixin',
+                'lambda$loadModel$22',
+                'Lnet/minecraft/client/resources/model/ModelBakery;m_119331_(Ljava/util/Map;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/datafixers/util/Pair;Ljava/util/Map;Lnet/minecraft/client/resources/model/ModelResourceLocation;Lnet/minecraft/world/level/block/state/BlockState;)V'
+        )
+
+        refmapFile.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json))
+        logger.lifecycle('Patched refmap')
+    }
+}
+
+tasks.named('jar') {
+    dependsOn patchRefmap
+}
+
 jar {
     exclude 'org/confluence/mod/common/data/gen'
 }

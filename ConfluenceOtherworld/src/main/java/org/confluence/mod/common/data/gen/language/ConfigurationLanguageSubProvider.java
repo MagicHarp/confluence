@@ -288,6 +288,12 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.yoyoUseButton", "Yoyo Action Button");
         add("confluence.configuration.gunUseButton", "Gun Action Button");
         add("confluence.configuration.flailUseButton", "Flail Action Button");
+
+        add("title.confluence.merged_configuration", "Confluence Merged Configuration Overview");
+        add("modid.name.confluence", "Confluence: Otherworld");
+        add("modid.name.terra_curio", "Terra Curios");
+        add("modid.name.the_trackers", "The Trackers");
+        add("modid.name.particlestorm", "Particle Storm");
     }
 
     @Override
@@ -563,6 +569,12 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.minEctoMistEffectRadius", "最小迷雾效果距离");
         add("confluence.configuration.minEctoMistEffectRadius.tooltip", "设置为0时，关闭迷雾效果");
         add("confluence.configuration.customTitle", "自定义标题");
+
+        add("title.confluence.merged_configuration", "汇流来世合并配置总览");
+        add("modid.name.confluence", "汇流来世");
+        add("modid.name.terra_curio", "泰拉饰品");
+        add("modid.name.the_trackers", "全追踪");
+        add("modid.name.particlestorm", "粒子风暴");
     }
 
     @Override

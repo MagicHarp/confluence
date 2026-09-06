@@ -10,13 +10,10 @@ import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import nowebsite.makertechno.the_trackers.TheTrackers;
-import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.mod.Confluence;
 import org.confluence.terra_curio.TerraCurio;
-import org.confluence.terra_furniture.TerraFurniture;
 import org.mesdag.particlestorm.ParticleStorm;
 import org.mesdag.portlib.client.gui.PortConfigurationScreen;
-import org.mesdag.thr_dim_particle.TDP;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +38,11 @@ public class MergedConfigurationScreen extends Screen {
             Optional<? extends ModContainer> optionalContainer = ModList.get().getModContainerById(modid);
             if (optionalContainer.isEmpty()) continue;
             ModContainer container = optionalContainer.get();
-            BiFunction<ModContainer, Screen, Screen> factory;
-            if (Confluence.MODID.equals(modid)) {
-                factory = PortConfigurationScreen::new;
-            } else {
-                Optional<BiFunction<Minecraft, Screen, Screen>> optionalFactory = ConfigScreenHandler.getScreenFactoryFor(container.getModInfo());
-                if (optionalFactory.isEmpty()) continue;
-                factory = (mod, parent) -> optionalFactory.get().apply(minecraft, parent);
-            }
+            BiFunction<ModContainer, Screen, Screen> factory = Confluence.MODID.equals(modid)
+                    ? PortConfigurationScreen::new
+                    : ConfigScreenHandler.getScreenFactoryFor(container.getModInfo())
+                    .<BiFunction<ModContainer, Screen, Screen>>map(func -> (mod, parent) -> func.apply(minecraft, parent))
+                    .orElseGet(() -> PortConfigurationScreen::new);
 
             buttons.add(addRenderableWidget(Button.builder(Component.translatable("modid.name." + modid), button -> {
                 assert minecraft != null;
@@ -75,6 +69,7 @@ public class MergedConfigurationScreen extends Screen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         assert minecraft != null;
         guiGraphics.drawCenteredString(minecraft.font, title, width / 2, 6, 0xFFFFFF);
@@ -89,12 +84,9 @@ public class MergedConfigurationScreen extends Screen {
     public static Screen factory(Minecraft minecraft, Screen parent) {
         return new MergedConfigurationScreen(parent,
                 Confluence.MODID,
-                ConfluenceMagicLib.LIB_ID,
                 TerraCurio.MODID,
-                TerraFurniture.MODID,
                 TheTrackers.MOD_ID,
-                ParticleStorm.MODID,
-                TDP.MODID
+                ParticleStorm.MODID
         );
     }
 }

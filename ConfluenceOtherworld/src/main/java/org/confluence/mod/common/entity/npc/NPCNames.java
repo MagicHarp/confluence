@@ -44,7 +44,6 @@ public record NPCNames(Map<String, Float> namesWeights) {
             JsonElement json = map.get(PATH);
             if (json == null) {
                 names = ImmutableMap.of();
-                Confluence.LOGGER.info("Loaded 0 NPC name tables");
                 return;
             }
             DataResult<Map<EntityType<?>, NPCNames>> decoded = TABLE_CODEC.parse(JsonOps.INSTANCE, json);
@@ -56,7 +55,6 @@ public record NPCNames(Map<String, Float> namesWeights) {
                 return;
             }
             names = ImmutableMap.copyOf(parsed.get());
-            Confluence.LOGGER.info("Loaded {} NPC name tables", names.size());
         }
 
         @Nullable

@@ -35,7 +35,6 @@ public class NPCDialogLoader extends SimpleJsonResourceReloadListener {
         JsonElement json = map.get(PATH);
         if (json == null) {
             this.dialogs = ImmutableMap.of();
-            Confluence.LOGGER.info("Loaded 0 NPC dialog tables");
             return;
         }
         DataResult<Map<EntityType<?>, NPCDialog>> decoded = CODEC.parse(JsonOps.INSTANCE, json);
@@ -47,7 +46,6 @@ public class NPCDialogLoader extends SimpleJsonResourceReloadListener {
             return;
         }
         this.dialogs = ImmutableMap.copyOf(parsed.get());
-        Confluence.LOGGER.info("Loaded {} NPC dialog tables", dialogs.size());
     }
 
     @Nullable

@@ -90,7 +90,6 @@ public final class NPCTradeList {
             }
             State previous = state;
             state = new State(result.table(), previous.revision() + 1);
-            Confluence.LOGGER.info("Loaded {} NPC shop tables", result.table().size());
         }
     }
 }
