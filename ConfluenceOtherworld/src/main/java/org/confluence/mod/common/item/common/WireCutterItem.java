@@ -1,13 +1,8 @@
 package org.confluence.mod.common.item.common;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -17,29 +12,15 @@ import org.confluence.lib.common.item.TooltipItem;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.block.functional.network.INetworkEntity;
 import org.confluence.mod.common.block.functional.network.PathService;
-import org.mesdag.portlib.diff.Diff;
+import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
 
 public class WireCutterItem extends TooltipItem {
     public static final ResourceLocation BASE_ID = Confluence.asResource("wire_cutter");
 
-    protected final Multimap<Attribute, AttributeModifier> defaultModifiers;
-
     public WireCutterItem() {
         super(new Properties().stacksTo(1), ModRarity.BLUE, "tooltip.item.confluence.wire_cutter.0");
-        this.defaultModifiers = ImmutableMultimap.<Attribute, AttributeModifier>builder()
-                .put(Attributes.BLOCK_INTERACTION_RANGE.value(), new AttributeModifier(
-                        PortAttributeModifier.rl2uuid(BASE_ID),
-                        BASE_ID.getPath(),
-                        20,
-                        AttributeModifier.Operation.ADDITION
-                )).build();
-    }
-
-    @Diff
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        return defaultModifiers;
+        addAttributeModifiers(builder -> builder.add(Attributes.BLOCK_INTERACTION_RANGE, new PortAttributeModifier(BASE_ID, 20, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND));
     }
 
     @Override
