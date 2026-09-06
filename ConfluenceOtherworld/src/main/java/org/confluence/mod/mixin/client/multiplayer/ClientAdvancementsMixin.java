@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ClientAdvancements.class)
 public abstract class ClientAdvancementsMixin {
     @WrapOperation(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/ToastComponent;addToast(Lnet/minecraft/client/gui/components/toasts/Toast;)V"))
-    private void showAchievementToast(ToastComponent instance, Toast toast, Operation<Void> original, @Local(name = "advancement") Advancement advancement) {
+    private void showAchievementToast(ToastComponent instance, Toast toast, Operation<Void> original, @Local Advancement advancement /* 不要使用name */) {
         if (ClientConfigs.achievementToast) {
             AchievementToast achievementToast = AchievementToast.getToast(advancement.getId());
             if (achievementToast != null) {

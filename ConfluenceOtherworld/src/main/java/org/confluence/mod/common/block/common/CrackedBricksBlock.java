@@ -15,9 +15,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.mesdag.portlib.diff.IPortBlock;
 
-public class CrackedBricksBlock extends Block implements IPortBlock {
+public class CrackedBricksBlock extends Block {
     public CrackedBricksBlock(Properties properties) {
         super(properties);
     }
@@ -54,7 +53,7 @@ public class CrackedBricksBlock extends Block implements IPortBlock {
     @Override
     public void onDestroyedByPushReaction(BlockState state, Level level, BlockPos pos, Direction pushDirection, FluidState fluid) {
         scheduleTick(level, pos);
-        IPortBlock.super.onDestroyedByPushReaction(state, level, pos, pushDirection, fluid);
+        super.onDestroyedByPushReaction(state, level, pos, pushDirection, fluid);
     }
 
     @Override
@@ -66,9 +65,5 @@ public class CrackedBricksBlock extends Block implements IPortBlock {
         for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-7, -7, -7), pos.offset(7, 7, 7))) {
             level.scheduleTick(blockPos, this, 1);
         }
-    }
-
-    @Override
-    public void portlib$setRenderPropertiesInternal(Object properties) {
     }
 }

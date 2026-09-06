@@ -18,6 +18,7 @@ import org.confluence.mod.mixin.world.level.dimension.DimensionTypeAccessor;
 
 import java.util.stream.Stream;
 
+// todo 1.3.0
 public class TheEndBiomeHolder {
     private static Holder<Biome> chorusForest;
     private static Holder<Biome> inverseForest;

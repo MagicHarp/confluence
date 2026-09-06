@@ -38,6 +38,7 @@ import org.confluence.mod.integration.terra_furniture.TFReferences;
 import org.mesdag.portlib.network.PortNetworkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
 @Mod(Confluence.MODID)
 public final class Confluence {
@@ -46,7 +47,7 @@ public final class Confluence {
     public static GameRules.Key<GameRules.IntegerValue> SPREADABLE_CHANCE;
     public static final PortNetworkHandler NETWORK_HANDLER = new PortNetworkHandler(MODID, "1");
 
-    public static final boolean SOUL_SKILLS = false;
+    public static final boolean SOUL_SKILLS = false; // todo 1.3.0
 
     public Confluence(FMLJavaModLoadingContext context) {
         IEventBus eventBus = context.getModEventBus();
@@ -106,6 +107,8 @@ public final class Confluence {
         ModDensityFunctionTypes.TYPES.register(eventBus);
 
         ModSoulSkills.register(eventBus);
+
+        MixinEnvironment.getCurrentEnvironment().setOption(MixinEnvironment.Option.DUMP_TARGET_ON_FAILURE, true);
     }
 
     public static void registerGameRules() {

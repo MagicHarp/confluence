@@ -10,11 +10,6 @@ import terrablender.api.SurfaceRuleManager;
 
 import static org.confluence.mod.Confluence.MODID;
 
-/// Confluence 自定义群系的资源键与 TerraBlender 注册入口。
-///
-/// 群系本身由数据包 JSON 定义；本类另外负责把部分群系嵌入原版的多噪声参数空间，
-/// 并把对应的地表规则交给 TerraBlender。如果只存在 JSON 而没有调用
-/// {@link #registerRegionAndSurface()}，这些群系虽然能进入注册表，却不会自然出现在新区块中。
 public final class ModBiomes {
     public static final ResourceKey<Biome> THE_CORRUPTION = register("the_corruption");
     public static final ResourceKey<Biome> THE_CORRUPTION_DESERT = register("the_corruption_desert");
@@ -41,10 +36,6 @@ public final class ModBiomes {
         return ResourceKey.create(Registries.BIOME, Confluence.asResource(name));
     }
 
-    /// 注册五个会参与自然生成的区域，并安装三个维度的地表规则。
-    ///
-    /// 权重只决定同类 TerraBlender Region 之间被选中的相对频率；具体落点仍由各 Region
-    /// 定义的温度、湿度、大陆性、侵蚀度、深度与怪异度范围约束。该方法只能在通用启动队列中调用一次。
     public static void registerRegionAndSurface() {
         Regions.register(new TheCrimsonRegion(Confluence.asResource("the_crimson"), 1));
         Regions.register(new TheCorruptionRegion(Confluence.asResource("the_corruption"), 1));
@@ -54,11 +45,12 @@ public final class ModBiomes {
 
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, SurfaceRuleData.makeConfluenceOverWorldRules());
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, SurfaceRuleData.makeConfluenceNetherRules());
-        // TerraBlender 3.x 的 Forge 1.20.1 API 只支持主世界和下界类别。
-        // 末地群系由 TheEndBiomeSourceMixin 选择，地表规则则由 NoiseGeneratorSettingsMixin
-        // 对默认方块为末地石的噪声设置进行组合，避免伪造不存在的 RuleCategory.END。
 
-        // 这组兼容规则在原版基岩层规则之前执行，使泰拉地表材料能覆盖匹配的原版群系。
-        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 0, SurfaceRuleData.makeMinecraftOverWorldRules());
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(
+                SurfaceRuleManager.RuleCategory.OVERWORLD,
+                SurfaceRuleManager.RuleStage.BEFORE_BEDROCK,
+                0,
+                SurfaceRuleData.makeMinecraftOverWorldRules()
+        );
     }
 }

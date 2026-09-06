@@ -14,7 +14,7 @@ var projectName = [
         "PortLib"
 ]
 
-version = mod_version + "-beta" + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
+version = mod_version + "-alpha" + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
 group = mod_group_id
 
 base {
@@ -281,6 +281,26 @@ tasks.register('patchRefmap') {
                 'org/confluence/mod/mixin/client/resources/model/ModelBakeryMixin',
                 'lambda$loadModel$22',
                 'Lnet/minecraft/client/resources/model/ModelBakery;m_119331_(Ljava/util/Map;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/datafixers/util/Pair;Ljava/util/Map;Lnet/minecraft/client/resources/model/ModelResourceLocation;Lnet/minecraft/world/level/block/state/BlockState;)V'
+        )
+        insertRefMap(
+                'org/confluence/mod/mixin/world/level/levelgen/feature/TreeFeatureMixin',
+                'lambda$place$6',
+                'Lnet/minecraft/world/level/levelgen/feature/TreeFeature;m_160545_(Ljava/util/Set;Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V'
+        )
+        insertRefMap(
+                'org/confluence/mod/mixin/client/gui/screens/inventory/InventoryScreenMixin',
+                'lambda$init$0',
+                'Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;m_289593_(Lnet/minecraft/client/gui/components/Button;)V'
+        )
+        insertRefMap(
+                'org/confluence/mod/mixin/client/resources/model/ModelManagerMixin',
+                'lambda$loadModels$17',
+                'Lnet/minecraft/client/resources/model/ModelManager;m_245484_(Lnet/minecraft/resources/ResourceLocation;Ljava/util/Collection;)V'
+        )
+        insertRefMap(
+                'org/confluence/mod/mixin/client/gui/screens/worldselection/WorldCreationUiStateMixin',
+                'lambda$setSeed$2',
+                'Lnet/minecraft/client/gui/screens/worldselection/WorldCreationUiState;m_267677_(Lnet/minecraft/world/level/levelgen/WorldOptions;)Lnet/minecraft/world/level/levelgen/WorldOptions;'
         )
 
         refmapFile.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json))

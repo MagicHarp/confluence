@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/// TerraBlender 3.0.1.10 没有末地规则类别，因此在末地噪声设置中补入 Confluence 地表规则。
+/// todo 1.3.0
 @Mixin(NoiseGeneratorSettings.class)
 public abstract class NoiseGeneratorSettingsMixin {
     @Shadow

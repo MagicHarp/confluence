@@ -31,12 +31,12 @@ public abstract class PlacedFeatureMixin {
     @Unique
     private PortTriState confluence$isPine = PortTriState.DEFAULT;
 
-    @ModifyArg(method = "placeWithContext", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;forEach(Ljava/util/function/Consumer;)V"))
+    @ModifyArg(method = "placeWithContext", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;forEach(Ljava/util/function/Consumer;)V", remap = false))
     private Consumer<BlockPos> wrap(
             Consumer<BlockPos> consumer,
             @Local(argsOnly = true) PlacementContext context,
             @Local(argsOnly = true) RandomSource source,
-            @Local(name = "mutableboolean") MutableBoolean mutableboolean
+            @Local MutableBoolean mutableboolean // 不能用name
     ) {
         if (confluence$isPine == PortTriState.FALSE) { // 大概率为false，所以只需要检查一次
             return consumer;

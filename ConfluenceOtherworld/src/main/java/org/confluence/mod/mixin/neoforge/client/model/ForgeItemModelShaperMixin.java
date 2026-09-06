@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(value = ForgeItemModelShaper.class, remap = false, priority = 1100)
 public abstract class ForgeItemModelShaperMixin {
-    @ModifyVariable(method = "getItemModel(Lnet/minecraft/world/item/Item;)Lnet/minecraft/client/resources/model/BakedModel;", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = "getItemModel(Lnet/minecraft/world/item/Item;)Lnet/minecraft/client/resources/model/BakedModel;", at = @At("HEAD"), argsOnly = true, remap = true)
     private Item getModel(Item value) {
         return GlobalCloakData.INSTANCE.getTarget(value);
     }
