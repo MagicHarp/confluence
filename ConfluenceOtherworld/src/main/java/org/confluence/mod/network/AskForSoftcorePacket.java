@@ -1,7 +1,6 @@
 package org.confluence.mod.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -27,7 +26,7 @@ public record AskForSoftcorePacket(boolean accept) implements IPacket {
 
     @Override
     public void s2c(Player player) {
-        Minecraft.getInstance().setScreen(new AskForSoftcoreScreen());
+        AskForSoftcoreScreen.createAskingScreen();
     }
 
     @Override

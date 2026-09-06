@@ -1,5 +1,6 @@
 package org.confluence.mod.client.gui;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -33,6 +34,10 @@ public class AskForSoftcoreScreen extends Screen {
         this.imageHeight = 110;
         this.leftPos = (width - imageWidth) / 2;
         this.topPos = (height - imageHeight) / 2 - 33;
+    }
+
+    public static void createAskingScreen() {
+        Minecraft.getInstance().setScreen(new AskForSoftcoreScreen());
     }
 
     public static void setAskForSoftcoreScreen(boolean b) {
