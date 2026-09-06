@@ -126,7 +126,7 @@ public final class GameClientEvents {
     private static boolean wasFlailKeyHeld = false;
 
     @SubscribeEvent
-    public static void registerShaders(RegisterShadersEvent event) throws IOException {
+    public static void registerShaders(RegisterShadersEvent event) {
         try {
             ModRenderer.register(event.getResourceProvider(), event::registerShader);
         } catch (IOException e) {
@@ -135,12 +135,12 @@ public final class GameClientEvents {
     }
 
     @SubscribeEvent
-    public static void computeFogColor(ViewportEvent.ComputeFogColor event) {
+    public static void viewport$ComputeFogColor(ViewportEvent.ComputeFogColor event) {
         VoidSeaFilterRenderer.computeFogColor(event);
     }
 
     @SubscribeEvent
-    public static void renderFog(ViewportEvent.RenderFog event) {
+    public static void viewport$RenderFog(ViewportEvent.RenderFog event) {
         VoidSeaFilterRenderer.renderFog(event);
     }
 
@@ -577,7 +577,7 @@ public final class GameClientEvents {
         if (itemStack.is(SwordItems.NIGHTS_EDGE)) {
             if (!player.getCooldowns().isOnCooldown(itemStack.getItem())) {
                 player.resetAttackStrengthTicker();
-                PlayerAttackingStatePacket.sendToServer(); // todo 修复
+                PlayerAttackingStatePacket.sendToServer(player, Minecraft.getInstance().options.getCameraType().isFirstPerson()); // todo 修复
             }
             event.setCanceled(true);
         } else if (PlayerUtils.couldPerformEmptyTargetSweep(player)) {
@@ -589,6 +589,4 @@ public final class GameClientEvents {
     public static void afterFlushArmorSetBonus(AfterFlushArmorSetBonusEvent event) {
         ClientPacketHandler.setLuminance(event.getEntity(), event.getData());
     }
-
-
 }
