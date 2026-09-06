@@ -1,6 +1,7 @@
 package org.confluence.mod.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -10,8 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import org.confluence.lib.network.IPacket;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.client.gui.hud.AskForSoftcoreLayer;
+import org.confluence.mod.client.gui.AskForSoftcoreScreen;
 import org.confluence.mod.common.data.saved.ConfluenceData;
+import org.jetbrains.annotations.NotNull;
 
 public record AskForSoftcorePacket(boolean accept) implements IPacket {
     public static final Type<AskForSoftcorePacket> TYPE = Confluence.createType("ask_for_softcore");
@@ -19,13 +21,13 @@ public record AskForSoftcorePacket(boolean accept) implements IPacket {
             .map(AskForSoftcorePacket::new, AskForSoftcorePacket::accept);
 
     @Override
-    public Type<AskForSoftcorePacket> type() {
+    public @NotNull Type<AskForSoftcorePacket> type() {
         return TYPE;
     }
 
     @Override
     public void s2c(Player player) {
-        AskForSoftcoreLayer.setAskForSoftcoreLayer(true);
+        Minecraft.getInstance().setScreen(new AskForSoftcoreScreen());
     }
 
     @Override

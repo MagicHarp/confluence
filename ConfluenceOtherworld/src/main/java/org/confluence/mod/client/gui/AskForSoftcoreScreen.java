@@ -11,8 +11,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.network.AskForSoftcorePacket;
 
-import static org.confluence.mod.client.gui.hud.AskForSoftcoreLayer.setAskForSoftcoreLayer;
-
 public class AskForSoftcoreScreen extends Screen {
     private static final ResourceLocation BASE = Confluence.asResource("textures/gui/ask_for_softcore.png");
 
@@ -22,6 +20,7 @@ public class AskForSoftcoreScreen extends Screen {
     private int topPos;
 
     public boolean isChooseSoftcore = false;
+    private static boolean askForSoftcoreScreen = false;
 
     public AskForSoftcoreScreen() {
         super(CommonComponents.EMPTY);
@@ -34,6 +33,14 @@ public class AskForSoftcoreScreen extends Screen {
         this.imageHeight = 110;
         this.leftPos = (width - imageWidth) / 2;
         this.topPos = (height - imageHeight) / 2 - 33;
+    }
+
+    public static void setAskForSoftcoreScreen(boolean b) {
+        askForSoftcoreScreen = b;
+    }
+
+    public static boolean isAskForSoftcoreScreen() {
+        return askForSoftcoreScreen;
     }
 
     @Override
@@ -89,7 +96,7 @@ public class AskForSoftcoreScreen extends Screen {
                 getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, i));
                 if (i == 1)
                     PacketDistributor.sendToServer(new AskForSoftcorePacket(isChooseSoftcore));
-                setAskForSoftcoreLayer(false);
+                setAskForSoftcoreScreen(false);
                 onClose();
                 return true;
             }
