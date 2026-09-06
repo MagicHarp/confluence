@@ -1356,6 +1356,7 @@ public class ModDataProvider {
                     desertBadlands,
                     List.of(
                             new MobSpawnSettings.SpawnerData(CritterEntities.SCORPION.get(), 15, 1, 1),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.DRAGONFLY.get(), 5, 1, 2),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.DESERT_SLIME.get(), 15, 1, 2),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.TOMB_CRAWLER.get(), 180, 1, 1),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.ANTLION_SWARMER.get(), 500, 1, 1),
@@ -1402,33 +1403,15 @@ public class ModDataProvider {
                     overworld,
                     List.of(
                             new MobSpawnSettings.SpawnerData(MonsterEntities.NYMPH.get(), 3, 1, 1),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.FAIRY.get(), 3, 1, 1)
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.GHOST.get(), 5, 1, 1),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.FAIRY.get(), 3, 1, 1),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.JEWEL_BUNNY.get(), 2, 1, 1),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.JEWEL_SQUIRREL.get(), 2, 1, 1)
                     )
             ));
             register(context, createModifierKey("common_highlevel"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                     overworld,
                     List.of(new MobSpawnSettings.SpawnerData(MonsterEntities.HARPY.get(), 60, 1, 2))
-            ));
-            register(context, createModifierKey("common_plains"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
-                    HolderSet.direct(biome.getOrThrow(net.minecraft.world.level.biome.Biomes.PLAINS)),
-                    List.of(
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_ARCHER.get(), 5, 1, 2),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_PEON.get(), 5, 1, 2),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_WARRIOR.get(), 5, 1, 2),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_THIEF.get(), 5, 1, 2),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_SCOUT.get(), 5, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.ANGER_GOBLIN.get(), 3, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.GOBLIN_SORCERER.get(), 5, 1, 1)
-                    )
-            ));
-            register(context, createModifierKey("addition_bloody"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
-                    HolderSet.direct(biome.getOrThrow(net.minecraft.world.level.biome.Biomes.CRIMSON_FOREST)),
-                    List.of(
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.BLOOD_ZOMBIE.get(), 30, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.DRIPPLER.get(), 15, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.WANDERING_EYE_FISH.get(), 10, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.BLOODY_SPORE.get(), 15, 1, 1)
-                    )
             ));
             register(context, createModifierKey("common_swamp"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                     biome.getOrThrow(PortTags.Biomes.IS_SWAMP),
@@ -1441,18 +1424,21 @@ public class ModDataProvider {
                     List.of(
                             new MobSpawnSettings.SpawnerData(CritterEntities.BUNNY.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.SQUIRREL.get(), 10, 1, 2),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.RED_SQUIRREL.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.DUCK.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.BIRD.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.BLUE_JAY.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.CARDINAL.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.JEWEL_BUNNY.get(), 2, 1, 1),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.JEWEL_SQUIRREL.get(), 2, 1, 1)
+                            new MobSpawnSettings.SpawnerData(CritterEntities.BUTTERFLY.get(), 5, 1, 3),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.DRAGONFLY.get(), 5, 1, 2),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.LADYBUG.get(), 4, 1, 2)
                     )
             ));
             register(context, createModifierKey("common_forest"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                     biome.getOrThrow(ModTags.Biomes.IS_FOREST),
                     List.of(
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.BLACK_SLIME.get(), 60, 1, 3),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.BLACK_SLIME.get(), 24, 1, 3),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.MOTHER_SLIME.get(), 36, 1, 3),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.BLUE_SLIME.get(), 30, 2, 4),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.CAVE_BAT.get(), 145, 1, 2),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.GIANT_SHELLY.get(), 90, 1, 1),
@@ -1470,12 +1456,6 @@ public class ModDataProvider {
                             new MobSpawnSettings.SpawnerData(MonsterEntities.FLYING_FISH.get(), 60, 1, 2),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.WOODEN_MIMIC.get(), 2, 1, 1),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.GOLDEN_MIMIC.get(), 2, 1, 1),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.BUNNY.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.SQUIRREL.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.DUCK.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.BIRD.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.BLUE_JAY.get(), 10, 1, 2),
-                            new MobSpawnSettings.SpawnerData(CritterEntities.CARDINAL.get(), 10, 1, 2),
                             new MobSpawnSettings.SpawnerData(CritterEntities.SNAIL.get(), 10, 1, 1),
                             new MobSpawnSettings.SpawnerData(CritterEntities.WORM.get(), 15, 1, 1),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.BLUE_JELLYFISH.get(), 5, 1, 1),
@@ -1490,8 +1470,18 @@ public class ModDataProvider {
                             new MobSpawnSettings.SpawnerData(MonsterEntities.FIRE_IMP.get(), 13, 1, 1),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.BONE_SERPENT.get(), 1, 1, 1),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.SHADOW_MIMIC.get(), 1, 1, 1),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.DEMON.get(), 7, 1, 1)
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.DEMON.get(), 7, 1, 1),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.HELL_BUTTERFLY.get(), 4, 1, 2),
+                            new MobSpawnSettings.SpawnerData(CritterEntities.MAGMA_SNAIL.get(), 4, 1, 2)
                     )
+            ));
+            register(context, createModifierKey("hallow_critters"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                    biome.getOrThrow(ModTags.Biomes.THE_HALLOW),
+                    List.of(new MobSpawnSettings.SpawnerData(CritterEntities.PRISMATIC_LACEWING.get(), 2, 1, 1))
+            ));
+            register(context, createModifierKey("hallow_monsters"), new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                    biome.getOrThrow(ModTags.Biomes.THE_HALLOW),
+                    List.of(new MobSpawnSettings.SpawnerData(MonsterEntities.CHAOS_ELEMENTAL.get(), 20, 1, 1))
             ));
             // 三种下界原版群系拥有各自的额外生成表，资源 ID 保持旧手写文件不变。
             register(context,
@@ -1619,6 +1609,7 @@ public class ModDataProvider {
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.CRIMSLIME.get(), 35, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.CRIMSON_MIMIC.get(), 1, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.HERPLING.get(), 60, 1, 1))
+                            .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.BLOOD_FEEDER.get(), 30, 1, 2))
                             .build())
                     .generationSettings(biomeGenerationSettings(placedFeatures, worldCarvers, builder -> {
                         addDefaultGenerations(builder);
@@ -1645,6 +1636,7 @@ public class ModDataProvider {
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.DARK_LAMIA.get(), 45, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.HERPLING.get(), 60, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.TAINTED_GHOUL.get(), 35, 2, 3))
+                            .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.BLOOD_FEEDER.get(), 30, 1, 2))
                             .build())
                     .generationSettings(BiomeGenerationSettings.EMPTY)
                     .build()
@@ -1659,6 +1651,7 @@ public class ModDataProvider {
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.CRIMSLIME.get(), 35, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.CRIMSON_MIMIC.get(), 1, 1, 1))
                             .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.HERPLING.get(), 60, 1, 1))
+                            .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.BLOOD_FEEDER.get(), 30, 1, 2))
                             .build())
                     .generationSettings(BiomeGenerationSettings.EMPTY)
                     .build()
@@ -1739,7 +1732,7 @@ public class ModDataProvider {
                                     .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.HAT_SPORE_ZOMBIE.get(), 15, 1, 2))
                                     .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.WOODEN_MIMIC.get(), 1, 1, 1))
                                     .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(MonsterEntities.GOLDEN_MIMIC.get(), 1, 1, 1))
-                                    .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(CritterEntities.GLOWING_SNAIL.get(), 10, 1, 2))
+                                    .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(CritterEntities.GLOWING_SNAIL.get(), 10, 1, 2))
                                     .build())
                             .generationSettings(biomeGenerationSettings(placedFeatures, worldCarvers, builder -> {
                                 addDefaultGenerations(builder);
@@ -1878,6 +1871,15 @@ public class ModDataProvider {
     public static class ProcessorListz {
         private static final ResourceKey<StructureProcessorList> DESERT_UNDERGROUND_CABINS = key("desert_underground_cabins");
         private static final ResourceKey<StructureProcessorList> SHIMMER_LAKE = key("shimmer_lake");
+        private static final ResourceKey<StructureProcessorList> ENCHANTED_SWORD_SHRINE = key("enchanted_sword_shrine");
+        private static final ResourceKey<StructureProcessorList> ENCHANTED_SWORD_SHRINE_LOCATION = key("enchanted_sword_shrine_1");
+        private static final ResourceKey<StructureProcessorList> ICE_UNDERGROUND_CABINS = key("ice_underground_cabins");
+        private static final ResourceKey<StructureProcessorList> JUNGLE_SHRINE = key("jungle_shrine");
+        private static final ResourceKey<StructureProcessorList> JUNGLE_UNDERGROUND_CABINS = key("jungle_underground_cabins");
+        private static final ResourceKey<StructureProcessorList> MINE_TUNNEL = key("mine_tunnel");
+        private static final ResourceKey<StructureProcessorList> MINE_TUNNEL_TRAPS = key("mine_tunnel_1");
+        private static final ResourceKey<StructureProcessorList> NATURAL = key("natural");
+        private static final ResourceKey<StructureProcessorList> UNDERGROUND_CABINS = key("underground_cabins");
 
         private static ResourceKey<StructureProcessorList> key(String path) {
             return Confluence.asResourceKey(Registries.PROCESSOR_LIST, path);
@@ -1905,6 +1907,60 @@ public class ModDataProvider {
                     new ProcessorRule(new RandomBlockMatchTest(Blocks.EMERALD_BLOCK, 0.3F), AlwaysTrueTest.INSTANCE, stone),
                     new ProcessorRule(new BlockMatchTest(Blocks.EMERALD_BLOCK), AlwaysTrueTest.INSTANCE, ModBlocks.SHIMMER.get().defaultBlockState())
             )))));
+            context.register(ICE_UNDERGROUND_CABINS, cabinProcessor());
+            context.register(JUNGLE_SHRINE, cabinProcessor());
+            context.register(JUNGLE_UNDERGROUND_CABINS, cabinProcessor());
+            context.register(UNDERGROUND_CABINS, cabinProcessor());
+            context.register(ENCHANTED_SWORD_SHRINE, new StructureProcessorList(List.of(new RuleProcessor(List.of(
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.FLOWERING_AZALEA, 0.05F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.AZALEA, 0.05F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.FERN, 0.3F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.GRASS, 0.3F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.DANDELION, 0.05F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.POPPY, 0.05F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.ALLIUM, 0.05F),
+                    randomReplacement(Blocks.IRON_BLOCK, Blocks.AZURE_BLUET, 0.05F),
+                    replacement(Blocks.IRON_BLOCK, Blocks.AIR)
+            )))));
+            List<Block> shrineGround = List.of(Blocks.DIRT, Blocks.GRASS_BLOCK, Blocks.WATER, Blocks.YELLOW_TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.RED_TERRACOTTA, Blocks.WHITE_TERRACOTTA, Blocks.TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.SANDSTONE, Blocks.SAND, Blocks.RED_SANDSTONE, Blocks.RED_SAND, Blocks.CLAY, Blocks.MUD, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.DIRT_PATH, NatureBlocks.CORRUPT_GRASS_BLOCK.get(), NatureBlocks.CRIMSON_GRASS_BLOCK.get(), NatureBlocks.HALLOW_GRASS_BLOCK.get());
+            List<ProcessorRule> shrineLocationRules = shrineGround.stream().map(block -> new ProcessorRule(AlwaysTrueTest.INSTANCE, new BlockMatchTest(block), block.defaultBlockState())).collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+            shrineLocationRules.add(replacement(Blocks.CRYING_OBSIDIAN, Blocks.AIR));
+            context.register(ENCHANTED_SWORD_SHRINE_LOCATION, new StructureProcessorList(List.of(new RuleProcessor(shrineLocationRules))));
+            context.register(MINE_TUNNEL, new StructureProcessorList(List.of(new RuleProcessor(List.of(
+                    new ProcessorRule(new BlockMatchTest(Blocks.STONE), new BlockMatchTest(Blocks.AIR), Blocks.OAK_PLANKS.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.STONE), new BlockMatchTest(Blocks.DEEPSLATE), Blocks.DEEPSLATE.defaultBlockState())
+            )))));
+            List<Block> trapBlocks = List.of(Blocks.DEEPSLATE, Blocks.TNT, Blocks.OBSIDIAN, Blocks.REDSTONE_WIRE, Blocks.REDSTONE_TORCH, Blocks.REPEATER, FunctionalBlocks.INSTANTANEOUS_EXPLOSION_TNT.get(), Blocks.TARGET, Blocks.STICKY_PISTON, Blocks.SLIME_BLOCK, Blocks.HONEY_BLOCK, Blocks.LAVA, Blocks.TRIPWIRE, Blocks.TRIPWIRE_HOOK);
+            List<ProcessorRule> trapRules = trapBlocks.stream().map(block -> new ProcessorRule(new BlockMatchTest(block), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState())).collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+            trapRules.add(new ProcessorRule(new BlockMatchTest(Blocks.STONE), new BlockMatchTest(Blocks.DEEPSLATE), Blocks.DEEPSLATE.defaultBlockState()));
+            trapRules.add(new ProcessorRule(new BlockMatchTest(Blocks.DEEPSLATE), new BlockMatchTest(Blocks.STONE), Blocks.STONE.defaultBlockState()));
+            context.register(MINE_TUNNEL_TRAPS, new StructureProcessorList(List.of(new RuleProcessor(trapRules))));
+            BlockState caveVines = Blocks.CAVE_VINES.defaultBlockState();
+            BlockState caveVinesPlant = Blocks.CAVE_VINES_PLANT.defaultBlockState();
+            context.register(NATURAL, new StructureProcessorList(List.of(new RuleProcessor(List.of(
+                    new ProcessorRule(new RandomBlockStateMatchTest(caveVines, 0.25F), AlwaysTrueTest.INSTANCE, caveVines.setValue(BlockStateProperties.BERRIES, true)),
+                    new ProcessorRule(new RandomBlockStateMatchTest(caveVinesPlant, 0.25F), AlwaysTrueTest.INSTANCE, caveVinesPlant.setValue(BlockStateProperties.BERRIES, true))
+            )))));
+        }
+
+        private static StructureProcessorList cabinProcessor() {
+            return new StructureProcessorList(List.of(new RuleProcessor(List.of(
+                    new ProcessorRule(new BlockMatchTest(Blocks.OAK_STAIRS), new BlockMatchTest(Blocks.STONE), Blocks.STONE.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.OAK_STAIRS), new BlockMatchTest(Blocks.DEEPSLATE), Blocks.DEEPSLATE.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.SPRUCE_STAIRS), new BlockMatchTest(Blocks.STONE), Blocks.STONE.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.SPRUCE_STAIRS), new BlockMatchTest(Blocks.DEEPSLATE), Blocks.DEEPSLATE.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.SPRUCE_SLAB), new BlockMatchTest(Blocks.STONE), Blocks.STONE.defaultBlockState()),
+                    new ProcessorRule(new BlockMatchTest(Blocks.SPRUCE_SLAB), new BlockMatchTest(Blocks.DEEPSLATE), Blocks.DEEPSLATE.defaultBlockState()),
+                    replacement(Blocks.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Blocks.SPRUCE_PLANKS)
+            ))));
+        }
+
+        private static ProcessorRule randomReplacement(Block input, Block output, float chance) {
+            return new ProcessorRule(new RandomBlockMatchTest(input, chance), AlwaysTrueTest.INSTANCE, output.defaultBlockState());
+        }
+
+        private static ProcessorRule replacement(Block input, Block output) {
+            return new ProcessorRule(new BlockMatchTest(input), AlwaysTrueTest.INSTANCE, output.defaultBlockState());
         }
     }
 
@@ -1917,6 +1973,31 @@ public class ModDataProvider {
         private static final ResourceKey<StructureTemplatePool> DUNGEON_ALTAR$DUNGEON_ALTAR = key("dungeon_altar/dungeon_altar");
         private static final ResourceKey<StructureTemplatePool> DESERT_UNDERGROUND_CABINS$DESERT_UNDERGROUND_CABINS = key("desert_underground_cabins/desert_underground_cabins");
         private static final ResourceKey<StructureTemplatePool> EBONY_STONE_THORN$EBONY_STONE_THORN = key("ebony_stone_thorn/ebony_stone_thorn");
+        private static final ResourceKey<StructureTemplatePool> ENCHANTED_SWORD_SHRINE$MAIN = key("enchanted_sword_shrine/enchanted_sword_shrine");
+        private static final ResourceKey<StructureTemplatePool> ENCHANTED_SWORD_SHRINE$LINE = key("enchanted_sword_shrine/line");
+        private static final ResourceKey<StructureTemplatePool> ENCHANTED_SWORD_SHRINE$SWORD = key("enchanted_sword_shrine/sword");
+        private static final ResourceKey<StructureTemplatePool> ICE_UNDERGROUND_CABINS$MAIN = key("ice_underground_cabins/ice_underground_cabins");
+        private static final ResourceKey<StructureTemplatePool> JUNGLE_SHRINE$MAIN = key("jungle_shrine/jungle_shrine");
+        private static final ResourceKey<StructureTemplatePool> JUNGLE_UNDERGROUND_CABINS$MAIN = key("jungle_underground_cabins/jungle_underground_cabins");
+        private static final ResourceKey<StructureTemplatePool> MINE_TUNNEL$MAIN = key("mine_tunnel/mine_tunnels");
+        private static final ResourceKey<StructureTemplatePool> NATURAL$HANGING = key("natural/hanging");
+        private static final ResourceKey<StructureTemplatePool> NETHER_TOWER$MAIN = key("nether_tower/main");
+        private static final ResourceKey<StructureTemplatePool> NETHER_TOWER$RIGHT_UP = key("nether_tower/right_up");
+        private static final ResourceKey<StructureTemplatePool> NETHER_TOWER$RIGHT = key("nether_tower/right");
+        private static final ResourceKey<StructureTemplatePool> NETHER_TOWER$UP = key("nether_tower/up");
+        private static final ResourceKey<StructureTemplatePool> OBSIDIAN_CASTLE$MAIN = key("obsidian_castle/main");
+        private static final ResourceKey<StructureTemplatePool> OBSIDIAN_CASTLE$BRIDGES = key("obsidian_castle/obsidian_castle_bridges");
+        private static final ResourceKey<StructureTemplatePool> SHIMMER_LAKE$MAIN = key("shimmer_lake/main");
+        private static final ResourceKey<StructureTemplatePool> SHIMMER_LAKE$TREES = key("shimmer_lake/trees");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$BACK = key("sky_village/back");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$BOOKS = key("sky_village/books");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$CENTER = key("sky_village/center");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$CLOUD = key("sky_village/cloud");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$CROSS = key("sky_village/cross");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$ENTITY = key("sky_village/entity");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$STREETS_START = key("sky_village/streets_start");
+        private static final ResourceKey<StructureTemplatePool> SKY_VILLAGE$STREETS = key("sky_village/streets");
+        private static final ResourceKey<StructureTemplatePool> UNDERGROUND_CABINS$MAIN = key("underground_cabins/underground_cabins");
 
         private static ResourceKey<StructureTemplatePool> key(String path) {
             return Confluence.asResourceKey(Registries.TEMPLATE_POOL, path);
@@ -1936,11 +2017,70 @@ public class ModDataProvider {
             register(context, DUNGEON_ALTAR$DUNGEON_ALTAR, "confluence:dungeon_altar/dungeon_altar", emptyTemplatePool, emptyProcessorList);
             register(context, DESERT_UNDERGROUND_CABINS$DESERT_UNDERGROUND_CABINS, "confluence:desert_underground_cabins/desert_underground_cabins", emptyTemplatePool, processorList.getOrThrow(ProcessorListz.DESERT_UNDERGROUND_CABINS));
             register(context, EBONY_STONE_THORN$EBONY_STONE_THORN, "confluence:ebony_stone_thorn/ebony_stone_thorn", emptyTemplatePool, emptyProcessorList);
+            register(context, ENCHANTED_SWORD_SHRINE$MAIN, emptyTemplatePool, processorList, entry("enchanted_sword_shrine/enchanted_sword_shrine", 1, ProcessorListz.ENCHANTED_SWORD_SHRINE));
+            register(context, ENCHANTED_SWORD_SHRINE$LINE, emptyTemplatePool, processorList, entry("enchanted_sword_shrine/line", 1, ProcessorListz.ENCHANTED_SWORD_SHRINE_LOCATION));
+            register(context, ENCHANTED_SWORD_SHRINE$SWORD, emptyTemplatePool, processorList,
+                    entry("enchanted_sword_shrine/enchanted_sword", 49), entry("enchanted_sword_shrine/rotten_sword", 2), entry("enchanted_sword_shrine/terragrim", 3));
+            register(context, ICE_UNDERGROUND_CABINS$MAIN, emptyTemplatePool, processorList, entry("ice_underground_cabins/ice_underground_cabins", 1, ProcessorListz.ICE_UNDERGROUND_CABINS));
+            register(context, JUNGLE_SHRINE$MAIN, emptyTemplatePool, processorList, entry("jungle_shrine/jungle_shrine", 1, ProcessorListz.JUNGLE_SHRINE));
+            register(context, JUNGLE_UNDERGROUND_CABINS$MAIN, emptyTemplatePool, processorList, entry("jungle_underground_cabins/jungle_underground_cabins", 1, ProcessorListz.JUNGLE_UNDERGROUND_CABINS));
+            register(context, MINE_TUNNEL$MAIN, emptyTemplatePool, processorList,
+                    entry("mine_tunnels/mine_tunnels_straight", 60, ProcessorListz.MINE_TUNNEL), entry("mine_tunnels/mine_tunnels_up", 60, ProcessorListz.MINE_TUNNEL),
+                    entry("mine_tunnels/mine_tunnels_down", 60, ProcessorListz.MINE_TUNNEL), entry("mine_tunnels/mine_tunnels_bifurcate", 60, ProcessorListz.MINE_TUNNEL),
+                    entry("mine_tunnels/mine_tunnels_tnt", 1, ProcessorListz.MINE_TUNNEL_TRAPS), entry("mine_tunnels/mine_tunnels_lava", 1, ProcessorListz.MINE_TUNNEL_TRAPS));
+            register(context, NATURAL$HANGING, emptyTemplatePool, processorList,
+                    entry("natural/cave_vines_plant_0", 4, ProcessorListz.NATURAL), entry("natural/cave_vines_plant_1", 4, ProcessorListz.NATURAL), entry("natural/cave_vines_plant_2", 4, ProcessorListz.NATURAL),
+                    entry("natural/hanging_roots", 3), entry("natural/spore_blossom", 6), entry("natural/air", 14));
+            register(context, NETHER_TOWER$MAIN, emptyTemplatePool, processorList, entry("nether_tower/nether_tower", 1));
+            register(context, NETHER_TOWER$RIGHT_UP, emptyTemplatePool, processorList, entry("nether_tower/nether_tower_right_up", 1));
+            register(context, NETHER_TOWER$RIGHT, emptyTemplatePool, processorList, entry("nether_tower/nether_tower_right", 1));
+            register(context, NETHER_TOWER$UP, emptyTemplatePool, processorList, entry("nether_tower/nether_tower_up", 1));
+            register(context, OBSIDIAN_CASTLE$MAIN, emptyTemplatePool, processorList, entry("obsidian_castle/obsidian_castle_center", 1));
+            register(context, OBSIDIAN_CASTLE$BRIDGES, emptyTemplatePool, processorList, entry("obsidian_castle/obsidian_castle_bridge", 1));
+            register(context, SHIMMER_LAKE$MAIN, emptyTemplatePool, processorList, entry("shimmer_lake/main", 1, ProcessorListz.SHIMMER_LAKE));
+            List<PoolEntry> shimmerTrees = new ArrayList<>();
+            for (String gem : List.of("amber", "diamond", "jade", "ruby", "sapphire", "topaz", "amethyst")) {
+                for (int variant = 0; variant < 3; variant++)
+                    shimmerTrees.add(entry("shimmer_lake/trees/" + gem + "_tree_" + variant, 1));
+            }
+            shimmerTrees.add(entry("air/air", 15));
+            register(context, SHIMMER_LAKE$TREES, emptyTemplatePool, processorList, shimmerTrees.toArray(PoolEntry[]::new));
+            register(context, SKY_VILLAGE$BACK, emptyTemplatePool, processorList, entry("sky_village/cross_end", 1));
+            register(context, SKY_VILLAGE$BOOKS, templatePool.getOrThrow(SKY_VILLAGE$BOOKS), processorList,
+                    entry("sky_village/book_0", 1), entry("sky_village/book_1", 1), entry("sky_village/book_2", 1), entry("sky_village/book_3", 1), entry("sky_village/book_4", 1), entry("sky_village/without_book", 45));
+            register(context, SKY_VILLAGE$CENTER, emptyTemplatePool, processorList, entry("sky_village/sky_village_center", 1));
+            register(context, SKY_VILLAGE$CLOUD, templatePool.getOrThrow(SKY_VILLAGE$CLOUD), processorList, entry("sky_village/library_cloud", 1));
+            register(context, SKY_VILLAGE$CROSS, templatePool.getOrThrow(SKY_VILLAGE$BACK), processorList,
+                    entry("sky_village/sky_village_cross", 1), entry("sky_village/cartographer_0", 2), entry("sky_village/weaponsmith_0", 2), entry("sky_village/masons_house_0", 2),
+                    entry("sky_village/cloud_field_0", 1), entry("sky_village/cloud_field_1", 1), entry("sky_village/cloud_field_2", 1), entry("sky_village/library_0", 1), entry("sky_village/church_0", 1), entry("sky_village/stable_0", 2));
+            register(context, SKY_VILLAGE$ENTITY, templatePool.getOrThrow(SKY_VILLAGE$ENTITY), processorList, entry("sky_village/sky_villager", 1));
+            register(context, SKY_VILLAGE$STREETS_START, emptyTemplatePool, processorList, entry("sky_village/sky_village_street_0", 1), entry("sky_village/sky_village_street_1", 1), entry("sky_village/sky_village_street_2", 1));
+            register(context, SKY_VILLAGE$STREETS, emptyTemplatePool, processorList, entry("sky_village/sky_village_street_0", 1), entry("sky_village/sky_village_street_1", 1), entry("sky_village/sky_village_street_2", 1), entry("sky_village/sky_village_street_end", 2));
+            register(context, UNDERGROUND_CABINS$MAIN, emptyTemplatePool, processorList, entry("underground_cabins/underground_cabins", 1, ProcessorListz.UNDERGROUND_CABINS));
         }
 
         private static void register(BootstapContext<StructureTemplatePool> context, ResourceKey<StructureTemplatePool> key, String location, Holder<StructureTemplatePool> fallback, Holder<StructureProcessorList> processors) {
             context.register(key, new StructureTemplatePool(fallback, Collections.singletonList(new Pair<>(SinglePoolElement.single(location, processors).apply(StructureTemplatePool.Projection.RIGID), 1))));
         }
+
+        private static void register(BootstapContext<StructureTemplatePool> context, ResourceKey<StructureTemplatePool> key, Holder<StructureTemplatePool> fallback, HolderGetter<StructureProcessorList> processors, PoolEntry... entries) {
+            List<Pair<Function<StructureTemplatePool.Projection, ? extends net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement>, Integer>> elements = new ArrayList<>();
+            for (PoolEntry entry : entries) {
+                elements.add(Pair.of(SinglePoolElement.single("confluence:" + entry.template, processors.getOrThrow(entry.processor)), entry.weight));
+            }
+            context.register(key, new StructureTemplatePool(fallback, elements, StructureTemplatePool.Projection.RIGID));
+        }
+
+        private static PoolEntry entry(String template, int weight) {
+            return entry(template, weight, ProcessorLists.EMPTY);
+        }
+
+        private static PoolEntry entry(String template, int weight, ResourceKey<StructureProcessorList> processor) {
+            return new PoolEntry(template, weight, processor);
+        }
+
+        private record PoolEntry(String template, int weight,
+                                 ResourceKey<StructureProcessorList> processor) {}
     }
 
     public static class Structures {
@@ -2001,7 +2141,12 @@ public class ModDataProvider {
                             new MobSpawnSettings.SpawnerData(MonsterEntities.SHORT_BONES.get(), 240, 8, 9),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.DARK_CASTER.get(), 240, 2, 3),
                             new MobSpawnSettings.SpawnerData(MonsterEntities.CURSED_SKULL.get(), 200, 3, 4),
-                            new MobSpawnSettings.SpawnerData(MonsterEntities.DUNGEON_SLIME.get(), 120, 1, 2)
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.DUNGEON_SLIME.get(), 120, 1, 2),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.PALADIN.get(), 30, 1, 1),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.BONE_LEE.get(), 80, 1, 1),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.NECROMANCER.get(), 80, 1, 1),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.DIABOLIST.get(), 80, 1, 1),
+                            new MobSpawnSettings.SpawnerData(MonsterEntities.RAGGED_CASTER.get(), 80, 1, 1)
                     ))
             ), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, TerrainAdjustment.NONE)));
             context.register(ModStructures.Keys.DUNGEON_ALTAR, new JigsawStructure(
@@ -2024,11 +2169,38 @@ public class ModDataProvider {
                     worldSurfaceWg,
                     116
             ));
+            context.register(ModStructures.Keys.ENCHANTED_SWORD_SHRINE, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_ENCHANTED_SWORD_SHRINE), GenerationStep.Decoration.STRONGHOLDS, TerrainAdjustment.NONE, templatePool.getOrThrow(TemplatePools.ENCHANTED_SWORD_SHRINE$MAIN), -20, 20, 116));
+            context.register(ModStructures.Keys.ICE_UNDERGROUND_CABINS, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_ICE_UNDERGROUND_CABINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN, templatePool.getOrThrow(TemplatePools.ICE_UNDERGROUND_CABINS$MAIN), -50, 10, 116));
+            context.register(ModStructures.Keys.JUNGLE_SHRINE, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_JUNGLE_UNDERGROUND_CABINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN, templatePool.getOrThrow(TemplatePools.JUNGLE_SHRINE$MAIN), -50, 30, 108));
+            context.register(ModStructures.Keys.JUNGLE_UNDERGROUND_CABINS, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_JUNGLE_UNDERGROUND_CABINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN, templatePool.getOrThrow(TemplatePools.JUNGLE_UNDERGROUND_CABINS$MAIN), -50, 10, 116));
+            context.register(ModStructures.Keys.NETHER_TOWER, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_NETHER_TOWER), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, TerrainAdjustment.BEARD_BOX, templatePool.getOrThrow(TemplatePools.NETHER_TOWER$MAIN), 32, 35, 116));
+            context.register(ModStructures.Keys.OBSIDIAN_CASTLE, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_NETHER_TOWER), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, TerrainAdjustment.BEARD_BOX, templatePool.getOrThrow(TemplatePools.OBSIDIAN_CASTLE$MAIN), 32, 40, 116));
+            context.register(ModStructures.Keys.SKY_VILLAGE, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_SKY_VILLAGE), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, TerrainAdjustment.NONE, templatePool.getOrThrow(TemplatePools.SKY_VILLAGE$CENTER), 250, 260, 128));
+            context.register(ModStructures.Keys.UNDERGROUND_CABINS, jigsaw(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_UNDERGROUND_CABINS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BEARD_THIN, templatePool.getOrThrow(TemplatePools.UNDERGROUND_CABINS$MAIN), -50, 10, 116));
+            context.register(ModStructures.Keys.HEAVEN_ISLANDS, new HeavenIslandsStructure(settings(overworld, GenerationStep.Decoration.TOP_LAYER_MODIFICATION)));
+            context.register(ModStructures.Keys.ICE_THORN, new IceThornStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_SNOWY), GenerationStep.Decoration.TOP_LAYER_MODIFICATION)));
+            context.register(ModStructures.Keys.LIVING_MAHOGANY_TREE, new LivingMahoganyTreeStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_JUNGLE), GenerationStep.Decoration.VEGETAL_DECORATION)));
+            context.register(ModStructures.Keys.LIVING_TREE, new LivingTreeStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION)));
+            context.register(ModStructures.Keys.MINE_TUNNELS, new MineTunnelsStructure(settings(biome.getOrThrow(ModTags.Biomes.HAS_STRUCTURE_MINE_TUNNELS), GenerationStep.Decoration.UNDERGROUND_STRUCTURES)));
+            context.register(ModStructures.Keys.OASIS, new OasisStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_DESERT), GenerationStep.Decoration.TOP_LAYER_MODIFICATION)));
+            context.register(ModStructures.Keys.OBSIDIAN_PILLAR, new ObsidianPillarStructure(settings(HolderSet.direct(biome.getOrThrow(ModBiomes.CHORUS_FOREST)), GenerationStep.Decoration.VEGETAL_DECORATION)));
+            context.register(ModStructures.Keys.PYRAMID, new PyramidStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_DESERT), GenerationStep.Decoration.TOP_LAYER_MODIFICATION)));
+            context.register(ModStructures.Keys.QUEEN_BEE_HIVE, new QueenBeeHiveStructure(settings(HolderSet.direct(biome.getOrThrow(net.minecraft.world.level.biome.Biomes.JUNGLE)), GenerationStep.Decoration.VEGETAL_DECORATION)));
+            context.register(ModStructures.Keys.SMALL_LIVING_MAHOGANY_TREE, new SmallLivingMahoganyTreeStructure(settings(biome.getOrThrow(PortTags.Biomes.IS_SWAMP), GenerationStep.Decoration.VEGETAL_DECORATION)));
             context.register(ModStructures.Keys.SHIMMER_LAKE, new ShimmerLakeStructure(new Structure.StructureSettings(overworld, Map.of(
                     MobCategory.CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(
-                            new MobSpawnSettings.SpawnerData(CritterEntities.FEALING.get(), 30, 1, 2)
+                            new MobSpawnSettings.SpawnerData(CritterEntities.FEALING.get(), 30, 2, 5)
                     ))
             ), GenerationStep.Decoration.VEGETAL_DECORATION, TerrainAdjustment.NONE)));
+        }
+
+        private static Structure.StructureSettings settings(HolderSet<Biome> biomes, GenerationStep.Decoration step) {
+            return new Structure.StructureSettings(biomes, Map.of(), step, TerrainAdjustment.NONE);
+        }
+
+        private static JigsawStructure jigsaw(HolderSet<Biome> biomes, GenerationStep.Decoration step, TerrainAdjustment terrain, Holder<StructureTemplatePool> pool, int minY, int maxY, int maxDistance) {
+            return new JigsawStructure(new Structure.StructureSettings(biomes, Map.of(), step, terrain), pool, Optional.empty(), 7,
+                    UniformHeight.of(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)), false, Optional.empty(), maxDistance);
         }
     }
 
@@ -2110,6 +2282,35 @@ public class ModDataProvider {
                     50, 30,
                     RandomSpreadType.TRIANGULAR
             )));
+            registerStructureSet(context, structure, structureSet, "enchanted_sword_shrine", ModStructures.Keys.ENCHANTED_SWORD_SHRINE, 22, 17, 80383093, SHIMMER_LAKE, 10);
+            registerStructureSet(context, structure, structureSet, "heaven_islands", ModStructures.Keys.HEAVEN_ISLANDS, 57, 1, 61782648, AIR, 16);
+            registerStructureSet(context, structure, structureSet, "ice_thorn", ModStructures.Keys.ICE_THORN, 24, 18, 46576271, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "ice_underground_cabins", ModStructures.Keys.ICE_UNDERGROUND_CABINS, 5, 3, 52440119, SHIMMER_LAKE, 10);
+            registerStructureSet(context, structure, structureSet, "jungle_shrine", ModStructures.Keys.JUNGLE_SHRINE, 5, 3, 24802245, AIR, 10);
+            registerStructureSet(context, structure, structureSet, "jungle_underground_cabins", ModStructures.Keys.JUNGLE_UNDERGROUND_CABINS, 5, 3, 62840809, SHIMMER_LAKE, 10);
+            registerStructureSet(context, structure, structureSet, "living_mahogany_tree", ModStructures.Keys.LIVING_MAHOGANY_TREE, 26, 12, 59155800, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "living_tree", ModStructures.Keys.LIVING_TREE, 30, 16, 88092714, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "mine_tunnels", ModStructures.Keys.MINE_TUNNELS, 10, 7, 24836848, SHIMMER_LAKE, 10);
+            registerStructureSet(context, structure, structureSet, "nether_tower", ModStructures.Keys.NETHER_TOWER, 15, 10, 61943871, BuiltinStructureSets.VILLAGES, 10);
+            registerStructureSet(context, structure, structureSet, "oasis", ModStructures.Keys.OASIS, 30, 16, 70166617, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "obsidian_castle", ModStructures.Keys.OBSIDIAN_CASTLE, 30, 28, 26518570, key("nether_tower"), 5);
+            registerStructureSet(context, structure, structureSet, "obsidian_pillar", ModStructures.Keys.OBSIDIAN_PILLAR, 30, 5, 15740802, null, 0);
+            registerStructureSet(context, structure, structureSet, "queen_bee_hive", ModStructures.Keys.QUEEN_BEE_HIVE, 13, 8, 23234854, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "sky_village", ModStructures.Keys.SKY_VILLAGE, 80, 70, 17846607, AIR, 16);
+            registerStructureSet(context, structure, structureSet, "small_living_mahogany_tree", ModStructures.Keys.SMALL_LIVING_MAHOGANY_TREE, 22, 7, 42961406, BuiltinStructureSets.VILLAGES, 8);
+            registerStructureSet(context, structure, structureSet, "underground_cabins", ModStructures.Keys.UNDERGROUND_CABINS, 5, 3, 61041867, SHIMMER_LAKE, 10);
+        }
+
+        private static ResourceKey<StructureSet> key(String path) {
+            return Confluence.asResourceKey(Registries.STRUCTURE_SET, path);
+        }
+
+        private static void registerStructureSet(BootstapContext<StructureSet> context, HolderGetter<Structure> structures, HolderGetter<StructureSet> sets,
+                                                 String path, ResourceKey<Structure> structure, int spacing, int separation, int salt,
+                                                 ResourceKey<StructureSet> excludedSet, int exclusionChunks) {
+            Optional<StructurePlacement.ExclusionZone> exclusion = excludedSet == null ? Optional.empty() : Optional.of(new StructurePlacement.ExclusionZone(sets.getOrThrow(excludedSet), exclusionChunks));
+            register(context, path, new StructureSet(structures.getOrThrow(structure), new RandomSpreadStructurePlacement(
+                    Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.DEFAULT, 1.0F, salt, exclusion, spacing, separation, RandomSpreadType.TRIANGULAR)));
         }
 
         private static void register(BootstapContext<StructureSet> context, String path, StructureSet set) {

@@ -59,6 +59,7 @@ public final class ModDataGenerator {
         generator.addProvider(server, new NPCMoodProvider(output));
         generator.addProvider(server, new NPCNameProvider(output));
         generator.addProvider(server, new NPCChatProvider(output));
+        generator.addProvider(server, new NPCDialogProvider(output));
         generator.addProvider(server, new AnglerQuestProvider(output));
         ModBlockTagsProvider blockTagsProvider = generator.addProvider(server, new ModBlockTagsProvider(output, lookup, helper));
         generator.addProvider(server, new ModItemTagsProvider(output, lookup, blockTagsProvider.contentsGetter(), helper));

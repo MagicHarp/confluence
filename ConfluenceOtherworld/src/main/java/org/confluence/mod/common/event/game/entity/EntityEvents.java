@@ -20,6 +20,7 @@ import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.attachment.ExtraInventory;
 import org.confluence.mod.common.attachment.PlayerSpecialData;
 import org.confluence.mod.common.entity.boss.BossMultiplayerEnhancement;
+import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.armor.ModArmorBonus;
@@ -109,9 +110,7 @@ public final class EntityEvents {
                 return;
             }
         }
-        if (attacker instanceof Player player &&
-                !PlayerSpecialData.of(player).isCouldHurtCritters() &&
-                !victim.getType().is(ModTags.EntityTypes.CRITTER_COMPANIONSHIP_BLACKLIST) &&
+        if (attacker instanceof Player player && !PlayerSpecialData.of(player).isCouldHurtCritters() && !victim.getType().is(ModTags.EntityTypes.CRITTER_COMPANIONSHIP_BLACKLIST) &&
                 (LibEntityUtils.isAnimal(victim) || victim.getType().is(ModTags.EntityTypes.CRITTER_COMPANIONSHIP_WHITELIST))
         ) {
             event.setInvulnerable(true);
@@ -121,11 +120,8 @@ public final class EntityEvents {
             event.setInvulnerable(true);
             return;
         }
-        if (CommonConfigs.NPC_INVULNERABLE_TO_PLAYER.get() &&
-                victim.getType().is(ModTags.EntityTypes.NPC_INVULNERABLE_TO_PLAYER) &&
-                LibEntityUtils.getOwner(damageSource) instanceof Player player &&
-                !player.isCreative()
-        ) {
+        if (CommonConfigs.NPC_INVULNERABLE_TO_PLAYER.get() && (victim instanceof BaseNPC || victim.getType().is(ModTags.EntityTypes.NPC_INVULNERABLE_TO_PLAYER)) &&
+                LibEntityUtils.getOwner(damageSource) instanceof Player) {
             event.setInvulnerable(true);
             return;
         }

@@ -34,6 +34,7 @@ public final class ModDataMaps {
     public static final PortDataMapType<Item, ExtractinatorData> CHLOROPHYTE_EXTRACTINATOR = register("chlorophyte_extractinator", Registries.ITEM, ExtractinatorData.CODEC, jei);
     public static final PortDataMapType<Item, DiggingPower> DIGGING_POWER = register("digging_power", Registries.ITEM, DiggingPower.CODEC, true);
     public static final PortDataMapType<EntityType<?>, TreasureBagDrop> TREASURE_BAG = register("treasure_bag", Registries.ENTITY_TYPE, TreasureBagDrop.CODEC, false);
+    public static final PortDataMapType<EntityType<?>, CreatureDefinition> CREATURE_DEFINITION = register("creature_definition", Registries.ENTITY_TYPE, CreatureDefinition.CODEC, false);
     public static final PortDataMapType<EntityType<?>, ImmunityDataMap> IMMUNITY = register("immunity", Registries.ENTITY_TYPE, ImmunityDataMap.CODEC, true);
     public static final PortDataMapType<EntityType<?>, BugNetEntityToItem> BUG_NET_ENTITY_TO_ITEM = register("bug_net_entity_to_item", Registries.ENTITY_TYPE, BugNetEntityToItem.CODEC, false);
     public static final PortDataMapType<EntityType<?>, LivingInvulnerableEffects> LIVING_INVULNERABLE_EFFECTS = register("living_invulnerable_effects", Registries.ENTITY_TYPE, LivingInvulnerableEffects.CODEC, true);
@@ -71,6 +72,7 @@ public final class ModDataMaps {
     }
 
     public static void init() {
+        PortEventHandler.addListener(CreatureDefinition::onDataMapsUpdated);
         PortEventHandler.addListener((PortRegisterDataMapTypesEvent event) -> {
             for (PortDataMapType<?, ?> type : types) {
                 event.register(type);

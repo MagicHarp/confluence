@@ -39,6 +39,24 @@ public final class ModStructures {
         public static final ResourceKey<Structure> DUNGEON_ALTAR = key("dungeon_altar");
         public static final ResourceKey<Structure> EBONY_STONE_THORN = key("ebony_stone_thorn");
         public static final ResourceKey<Structure> SHIMMER_LAKE = key("shimmer_lake");
+        public static final ResourceKey<Structure> ENCHANTED_SWORD_SHRINE = key("enchanted_sword_shrine");
+        public static final ResourceKey<Structure> HEAVEN_ISLANDS = key("heaven_islands");
+        public static final ResourceKey<Structure> ICE_THORN = key("ice_thorn");
+        public static final ResourceKey<Structure> ICE_UNDERGROUND_CABINS = key("ice_underground_cabins");
+        public static final ResourceKey<Structure> JUNGLE_SHRINE = key("jungle_shrine");
+        public static final ResourceKey<Structure> JUNGLE_UNDERGROUND_CABINS = key("jungle_underground_cabins");
+        public static final ResourceKey<Structure> LIVING_MAHOGANY_TREE = key("living_mahogany_tree");
+        public static final ResourceKey<Structure> LIVING_TREE = key("living_tree");
+        public static final ResourceKey<Structure> MINE_TUNNELS = key("mine_tunnels");
+        public static final ResourceKey<Structure> NETHER_TOWER = key("nether_tower");
+        public static final ResourceKey<Structure> OASIS = key("oasis");
+        public static final ResourceKey<Structure> OBSIDIAN_CASTLE = key("obsidian_castle");
+        public static final ResourceKey<Structure> OBSIDIAN_PILLAR = key("obsidian_pillar");
+        public static final ResourceKey<Structure> PYRAMID = key("pyramid");
+        public static final ResourceKey<Structure> QUEEN_BEE_HIVE = key("queen_bee_hive");
+        public static final ResourceKey<Structure> SKY_VILLAGE = key("sky_village");
+        public static final ResourceKey<Structure> SMALL_LIVING_MAHOGANY_TREE = key("small_living_mahogany_tree");
+        public static final ResourceKey<Structure> UNDERGROUND_CABINS = key("underground_cabins");
 
         private static ResourceKey<Structure> key(String path) {
             return Confluence.asResourceKey(Registries.STRUCTURE, path);

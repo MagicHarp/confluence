@@ -31,7 +31,7 @@ public class LivingMahoganyTreeStructure extends Structure {
     public static final Codec<LivingMahoganyTreeStructure> CODEC = simpleCodec(LivingMahoganyTreeStructure::new);
     public static final ResourceKey<ConfiguredFeature<?, ?>> LIVING_IVY_CHESTS = Confluence.asResourceKey(Registries.CONFIGURED_FEATURE, "living_ivy_chests");
 
-    protected LivingMahoganyTreeStructure(StructureSettings settings) {
+    public LivingMahoganyTreeStructure(StructureSettings settings) {
         super(settings);
     }
 

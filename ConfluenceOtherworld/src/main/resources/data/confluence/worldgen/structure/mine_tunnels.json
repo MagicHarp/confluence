@@ -1,6 +1,0 @@
-{
-  "type": "confluence:mine_tunnels",
-  "biomes": "#confluence:has_structure/mine_tunnels",
-  "spawn_overrides": {},
-  "step": "underground_structures"
-}

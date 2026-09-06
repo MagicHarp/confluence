@@ -28,7 +28,7 @@ import static org.confluence.lib.util.LibStructureUtils.*;
 public class QueenBeeHiveStructure extends Structure {
     public static final Codec<QueenBeeHiveStructure> CODEC = simpleCodec(QueenBeeHiveStructure::new);
 
-    protected QueenBeeHiveStructure(StructureSettings settings) {
+    public QueenBeeHiveStructure(StructureSettings settings) {
         super(settings);
     }
 

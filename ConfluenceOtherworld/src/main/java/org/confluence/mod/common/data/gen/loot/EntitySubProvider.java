@@ -427,7 +427,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(ToolItems.GOLDEN_DUNGEON_KEY)).apply(random0To1)
                 )
         );
-        add(MonsterEntities.HONEY_SLIME.get(), LootTable.lootTable()
+        add(MonsterEntities.SWEET_SLIME.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(FoodItems.HONEY_GUMMI)).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 7))).apply(random3To4)
                 )
@@ -762,7 +762,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         add(MonsterEntities.PURPLE_SLIME.get(), slimeCommon(-6326333));
         add(MonsterEntities.RED_SLIME.get(), slimeCommon(-1079407));
         add(MonsterEntities.YELLOW_SLIME.get(), slimeCommon(-871089));
-        add(MonsterEntities.SLIMELING.get(), slimeCommon(0x50C878));
+        add(MonsterEntities.SLIMELING.get(), corruptionSlimeLoot());
         add(MonsterEntities.JUNGLE_SLIME.get(), slimeCommon(-6570130));
         add(MonsterEntities.ICE_SLIME.get(), slimeCommon(-10628609)
                 .withPool(LootPool.lootPool()
@@ -795,13 +795,10 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                         .add(EmptyLootItem.emptyItem().setWeight(14))
                 )
         );
-        add(MonsterEntities.LAVA_SLIME.get(), slimeCommon(0xE64A19));
-        add(MonsterEntities.BLACK_SLIME.get(), slimeCommon(-7697782)
-                .withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(1))
-                        .add(EmptyLootItem.emptyItem().setWeight(99))
-                )
-        );
+        add(MonsterEntities.LAVA_SLIME.get(), lavaSlimeLoot());
+        add(MonsterEntities.BLACK_SLIME.get(), slimeCommon(-7697782));
+        add(MonsterEntities.MOTHER_SLIME.get(), motherSlimeLoot());
+        add(MonsterEntities.BABY_SLIME.get(), slimeCommon(-7697782));
         add(MonsterEntities.TROPIC_SLIME.get(), slimeCommon(-10644993)
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.TROPICAL_FISH))
@@ -927,30 +924,8 @@ public final class EntitySubProvider extends EntityLootSubProvider {
 //                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", -4040988))))
                         )
         );
-        add(MonsterEntities.CRIMSLIME.get(), LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(TCItems.BLINDFOLD).setWeight(2))
-                                .add(emptyWeight98)
-                        )
-                        .withPool(LootPool.lootPool()
-                                        .add(LootItem.lootTableItem(MaterialItems.GEL))
-                                        .apply(random0To1)
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
-//                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", -3386287))))
-                        )
-        );
-        add(MonsterEntities.CORRUPT_SLIME.get(), LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .add(LootItem.lootTableItem(TCItems.BLINDFOLD).setWeight(2))
-                                .add(emptyWeight98)
-                        )
-                        .withPool(LootPool.lootPool()
-                                        .add(LootItem.lootTableItem(MaterialItems.GEL))
-                                        .apply(random0To1)
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
-//                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", -6522185))))
-                        )
-        );
+        add(MonsterEntities.CRIMSLIME.get(), corruptionSlimeLoot());
+        add(MonsterEntities.CORRUPT_SLIME.get(), corruptionSlimeLoot());
         // 宝箱怪
         add(MonsterEntities.WOODEN_MIMIC.get(), mimicCommon()
         );
@@ -1152,11 +1127,16 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         add(MonsterEntities.GIANT_TORTOISE.get(), LootTable.lootTable());
         add(MonsterEntities.GIANT_FLYING_FOX.get(), batCommon());
         add(MonsterEntities.CORRUPTOR.get(), LootTable.lootTable());
-        add(MonsterEntities.SLIMER.get(), slimeCommon(0x50C878));
+        add(MonsterEntities.SLIMER.get(), LootTable.lootTable());
+        add(MonsterEntities.WINGLESS_SLIMER.get(), corruptionSlimeLoot());
         add(MonsterEntities.BLOOD_FEEDER.get(), LootTable.lootTable());
         add(MonsterEntities.UNICORN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().add(LootItem.lootTableItem(MaterialItems.UNICORN_HORN))));
-        add(MonsterEntities.GASTROPOD.get(), LootTable.lootTable());
+        add(MonsterEntities.GASTROPOD.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(MaterialItems.GEL))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 10)))
+                        .apply(random0To1)));
         add(MonsterEntities.CHAOS_ELEMENTAL.get(), LootTable.lootTable());
         add(MonsterEntities.ENCHANTED_SWORD.get(), LootTable.lootTable());
         add(MonsterEntities.BLAZING_WHEEL.get(), LootTable.lootTable());
@@ -1320,6 +1300,52 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
 //                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", gelColor))))
                 );
+    }
+
+    /**
+     * 岩浆史莱姆不携带额外物品也不掉落凝胶，只保留其独立的稀有史莱姆法杖掉落。
+     */
+    private LootTable.Builder lavaSlimeLoot() {
+        return LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(SummonItems.SLIME_STAFF))
+                .add(EmptyLootItem.emptyItem().setWeight(7999))
+        );
+    }
+
+    /**
+     * 史莱姆之母不携带随机物品，但保留凝胶、史莱姆法杖和指南针掉落。
+     */
+    private LootTable.Builder motherSlimeLoot() {
+        LootItemConditionalFunction.Builder<?> random0To1 = LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(SummonItems.SLIME_STAFF))
+                        .add(EmptyLootItem.emptyItem().setWeight(6999)))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(MaterialItems.GEL))
+                        .apply(random0To1)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(1))
+                        .add(EmptyLootItem.emptyItem().setWeight(99)));
+    }
+
+    /**
+     * 腐化、猩红和恶翼史莱姆族系共用凝胶、黑暗免疫饰品与史莱姆法杖掉落。
+     */
+    private LootTable.Builder corruptionSlimeLoot() {
+        LootItemConditionalFunction.Builder<?> random0To1 = LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(SummonItems.SLIME_STAFF))
+                        .add(EmptyLootItem.emptyItem().setWeight(6999)))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(MaterialItems.GEL))
+                        .apply(random0To1)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(TCItems.BLINDFOLD).setWeight(2))
+                        .add(EmptyLootItem.emptyItem().setWeight(98)));
     }
 
     private LootTable.Builder goblinCommon() {

@@ -31,7 +31,7 @@ import static org.confluence.lib.util.LibStructureUtils.getHeight;
 public class ObsidianPillarStructure extends Structure {
     public static final Codec<ObsidianPillarStructure> CODEC = simpleCodec(ObsidianPillarStructure::new);
 
-    protected ObsidianPillarStructure(StructureSettings settings) {
+    public ObsidianPillarStructure(StructureSettings settings) {
         super(settings);
     }
 

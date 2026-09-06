@@ -29,7 +29,7 @@ import static org.confluence.lib.util.LibStructureUtils.getHeight;
 public class LivingTreeStructure extends Structure {
     public static final Codec<LivingTreeStructure> CODEC = simpleCodec(LivingTreeStructure::new);
 
-    protected LivingTreeStructure(StructureSettings settings) {
+    public LivingTreeStructure(StructureSettings settings) {
         super(settings);
     }
 

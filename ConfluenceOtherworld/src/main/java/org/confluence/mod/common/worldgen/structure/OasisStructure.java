@@ -33,7 +33,7 @@ import static org.confluence.lib.util.LibStructureUtils.lineSet;
 public class OasisStructure extends Structure {
     public static final Codec<OasisStructure> CODEC = simpleCodec(OasisStructure::new);
 
-    protected OasisStructure(StructureSettings settings) {
+    public OasisStructure(StructureSettings settings) {
         super(settings);
     }
 

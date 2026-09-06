@@ -43,7 +43,7 @@ public class HeavenIslandsStructure extends Structure {
             Confluence.asResource("yellow_willow")
     };
 
-    protected HeavenIslandsStructure(StructureSettings settings) {
+    public HeavenIslandsStructure(StructureSettings settings) {
         super(settings);
     }
 

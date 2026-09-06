@@ -17,17 +17,11 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.entries.*;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.confluence.mod.common.block.food.GreenDumplingBlock;
@@ -53,11 +47,14 @@ import static org.confluence.mod.common.init.block.ModBlocks.*;
 import static org.confluence.mod.common.init.block.NatureBlocks.*;
 import static org.confluence.mod.common.init.block.OreBlocks.*;
 import static org.confluence.mod.common.init.item.ConsumableItems.LIFE_CRYSTAL;
+import static org.confluence.mod.common.init.item.ConsumableItems.PINE_CONE;
 import static org.confluence.mod.common.init.item.MaterialItems.*;
 
 @SuppressWarnings("all")
 public final class BlockSubProvider extends BlockLootSubProvider {
     public static final LootItemCondition.Builder HAS_SHEARS;
+    private static final float[] STANDARD_SAPLING_CHANCES = {0.06F, 0.075F, 0.1F, 0.12F};
+    private static final float[] STANDARD_STICK_CHANCES = {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
     public BlockSubProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
@@ -66,6 +63,15 @@ public final class BlockSubProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         LootPoolSingletonContainer.Builder<?> emptyWeight59 = EmptyLootItem.emptyItem().setWeight(59);
+
+        addFruitLeaves(EBONY_LOG_BLOCKS.LEAVES.get(), EBONY_LOG_BLOCKS.SAPLING.get(), new Item[]{FoodItems.BLACKCURRANT.get(), FoodItems.ELDERBERRY.get()}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F}, STANDARD_STICK_CHANCES);
+        addFruitLeaves(PALM_LOG_BLOCKS.LEAVES.get(), PALM_LOG_BLOCKS.SAPLING.get(), new Item[]{FoodItems.BANANA.get(), FoodItems.COCONUT.get()}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F}, STANDARD_STICK_CHANCES);
+        addFruitLeaves(PEARL_LOG_BLOCKS.LEAVES.get(), PEARL_LOG_BLOCKS.SAPLING.get(), new Item[]{FoodItems.DRAGON_FRUIT.get(), FoodItems.STAR_FRUIT.get()}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F}, STANDARD_STICK_CHANCES);
+        addFruitLeaves(SHADOW_LOG_BLOCKS.LEAVES.get(), SHADOW_LOG_BLOCKS.SAPLING.get(), new Item[]{FoodItems.BLOOD_ORANGE.get(), FoodItems.RAMBUTAN.get()}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F}, STANDARD_STICK_CHANCES);
+        addFruitLeaves(BAOBAB_LOG_BLOCKS.LEAVES.get(), BAOBAB_LOG_BLOCKS.SAPLING.get(), new Item[]{FoodItems.BAOBAB_FRUIT.get()}, new float[]{0.012F, 0.013F, 0.0125F, 0.02F, 0.06F}, STANDARD_STICK_CHANCES);
+        addFruitLeaves(PINE_LOG_BLOCKS.LEAVES.get(), PINE_SAPLING.get(), new Item[]{PINE_CONE.get()}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F}, new float[]{0.006F, 0.006667F, 0.0075F, 0.01F, 0.03F});
+        addFruitLeaves(VOID_LOG_BLOCKS.LEAVES.get(), VOID_LOG_BLOCKS.SAPLING.get(), new Item[0], new float[0], STANDARD_STICK_CHANCES);
+        addFruitLeaves(YELLOW_WILLOW_LOG_BLOCKS.LEAVES.get(), YELLOW_WILLOW_LOG_BLOCKS.SAPLING.get(), new Item[0], new float[0], STANDARD_STICK_CHANCES, new float[]{0.001F, 0.001333333F, 0.002F, 0.004F});
 
         // region ore
         dropSelf(TIN_BLOCK.get());
@@ -1030,6 +1036,27 @@ public final class BlockSubProvider extends BlockLootSubProvider {
 
     private LootItemCondition.Builder doesNotHaveShearsOrSilkTouch() {
         return hasShearsOrSilkTouch().invert();
+    }
+
+    private void addFruitLeaves(Block leaves, Block sapling, Item[] fruits, float[] fruitChances, float[] stickChances) {
+        addFruitLeaves(leaves, sapling, fruits, fruitChances, stickChances, STANDARD_SAPLING_CHANCES);
+    }
+
+    /// 叶片本体、树苗、水果和木棍共享剪刀与精准采集判定，但各树种保留原有幸运概率。
+    private void addFruitLeaves(Block leaves, Block sapling, Item[] fruits, float[] fruitChances, float[] stickChances, float[] saplingChances) {
+        LootTable.Builder table = LootTable.lootTable().withPool(LootPool.lootPool().add(AlternativesEntry.alternatives(
+                LootItem.lootTableItem(leaves).when(hasShearsOrSilkTouch()),
+                LootItem.lootTableItem(sapling).when(survivesExplosion()).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, saplingChances))
+        )));
+        for (Item fruit : fruits) {
+            table.withPool(LootPool.lootPool().when(doesNotHaveShearsOrSilkTouch()).add(applyExplosionDecay(leaves,
+                    LootItem.lootTableItem(fruit).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fruitChances)))));
+        }
+        table.withPool(LootPool.lootPool().when(doesNotHaveShearsOrSilkTouch()).add(applyExplosionDecay(leaves,
+                LootItem.lootTableItem(Items.STICK)
+                        .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, stickChances))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))));
+        add(leaves, table);
     }
 
     private void addHerbDrop(BaseHerbBlock block, Item herb, Item seed) {

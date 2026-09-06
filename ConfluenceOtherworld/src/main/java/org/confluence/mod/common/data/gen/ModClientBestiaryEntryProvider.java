@@ -154,7 +154,7 @@ public class ModClientBestiaryEntryProvider extends AbstractRecipeProvider {
         entries.numberedVariant(CritterEntities.LADYBUG, 1, Ladybug.Variant.RED,
                 builder -> builder.order(7800).rarity(3).background(SURFACE)
                         .filters(FilterEntry.WINDY_DAY));
-        entries.numberedVariant(CritterEntities.FEALING, 0, Fairy.Variant.PINK, builder -> builder.order(8100).rarity(5).background(CAVE).filters(FilterEntry.CAVE));
+        entries.add(CritterEntities.FEALING, builder -> builder.order(8100).rarity(5).background(CAVE).filters(FilterEntry.CAVE));
         entries.numberedVariant(CritterEntities.DUCK, 0, Duck.Variant.MALLARD, builder -> builder.order(8200).rarity(2).background(SURFACE_SUN).filters(surfaceDaytime));
         entries.numberedVariant(CritterEntities.DUCK, 1, Duck.Variant.COMMON, builder -> builder.order(8300).rarity(2).background(SURFACE_SUN).filters(surfaceDaytime));
         entries.numberedVariant(CritterEntities.FAIRY, 0, Fairy.Variant.PINK,
@@ -249,7 +249,7 @@ public class ModClientBestiaryEntryProvider extends AbstractRecipeProvider {
                 .background(SURFACE_SUN).filters(FilterEntry.RARE_CREATURE, surfaceDaytime[0], surfaceDaytime[1]));
         entries.add(MonsterEntities.GOLDEN_SLIME, builder -> builder.order(13301).rarity(5)
                 .background(SURFACE_SUN).filters(FilterEntry.RARE_CREATURE, surfaceDaytime[0], surfaceDaytime[1]));
-        entries.add(MonsterEntities.HONEY_SLIME, builder -> builder.order(13302).rarity(3)
+        entries.add(MonsterEntities.SWEET_SLIME, builder -> builder.order(13302).rarity(3)
                 .background(THE_JUNGLE_SUN).filters(FilterEntry.UNDERGROUND_JUNGLE));
         entries.add(MonsterEntities.SWAMP_SLIME, builder -> builder.order(13303).rarity(2)
                 .background(SURFACE_SUN).filters(surfaceDaytime));
@@ -291,17 +291,9 @@ public class ModClientBestiaryEntryProvider extends AbstractRecipeProvider {
                 .background(UNDERGROUND).filters(FilterEntry.UNDERGROUND));
         entries.add(MonsterEntities.GIANT_WORM, builder -> builder.order(18300).rarity(1)
                 .background(UNDERGROUND).filters(FilterEntry.UNDERGROUND));
-        entries.add(MonsterEntities.BLACK_SLIME, "entity.confluence.baby_slime", "",
-                builder -> {
-                    cave(builder, 18500, 1);
-                    builder.entityNbt(tag -> tag.putInt("SlimeSize", 1));
-                });
+        entries.add(MonsterEntities.BABY_SLIME, builder -> cave(builder, 18500, 1));
         entries.add(MonsterEntities.BLACK_SLIME, builder -> cave(builder, 18600, 1));
-        entries.add(MonsterEntities.BLACK_SLIME, "entity.confluence.mother_slime", "",
-                builder -> {
-                    cave(builder, 18800, 2);
-                    builder.entityNbt(tag -> tag.putInt("SlimeSize", 4));
-                });
+        entries.add(MonsterEntities.MOTHER_SLIME, builder -> cave(builder, 18800, 2));
         entries.add(EntityType.SKELETON, builder -> cave(builder, 19100, 1));
         entries.add(MonsterEntities.CRAWDAD, builder -> cave(builder, 19500, 2));
         entries.mobArmorItems(EntityType.SKELETON, "entity.confluence.undead_miner", "",

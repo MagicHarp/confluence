@@ -12,11 +12,12 @@ import org.confluence.mod.common.component.prefix.ModPrefix;
 import org.confluence.mod.common.data.gen.language.AchievementsLanguageSubProvider;
 import org.confluence.mod.common.data.gen.language.BestiaryLanguageSubProvider;
 import org.confluence.mod.common.data.gen.language.ConfigurationLanguageSubProvider;
-import org.confluence.mod.common.data.gen.language.DialogsLanguageSubProvider;
+import org.confluence.mod.common.data.gen.language.LucyTheAxeLanguageSubProvider;
 import org.confluence.mod.common.data.saved.Team;
 import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.block.*;
 import org.confluence.mod.common.init.entity.ModEntities;
+import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.confluence.mod.common.init.entity.NpcEntities;
 import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.common.item.whip.BaseWhipItem;
@@ -92,7 +93,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add(ModEntities.HARPY_FEATHER.get(), "Harpy Feather Projectile");
         add(ModEntities.HOSTILE_DEMON_SCYTHE.get(), "Hostile Demon Scythe Projectile");
         add(ModEntities.HORNET_STINGER.get(), "Hornet Stinger Projectile");
-        add(ModEntities.DARK_CASTER_PROJECTILE.get(), "Dark Caster Projectile");
+        add(ModEntities.DARK_CASTER_PROJECTILE.get(), "Water Sphere");
+        add(ModEntities.CHAOS_BALL_PROJECTILE.get(), "Chaos Ball");
+        add(ModEntities.SHADOW_BEAM_PROJECTILE.get(), "Shadow Beam");
+        add(ModEntities.INFERNO_BOLT_PROJECTILE.get(), "Inferno Bolt");
+        add(ModEntities.LOST_SOUL_PROJECTILE.get(), "Lost Soul");
         add(ModEntities.VILE_SPIT_PROJECTILE.get(), "Vile Spit Projectile");
         add(ModEntities.FIRE_IMP_PROJECTILE.get(), "Fire Imp Projectile");
         add(ModEntities.GASTROPOD_PROJECTILE.get(), "Gastropod Projectile");
@@ -1134,10 +1139,11 @@ public class ModEnglishProvider extends LanguageProvider {
         add("entity.confluence.frozen_zombie", "Frozen Zombie");
         add("entity.confluence.raincoat_zombie", "Raincoat Zombie");
         add("entity.confluence.undead_miner", "Undead Miner");
-        add("entity.confluence.baby_slime", "Baby Slime");
-        add("entity.confluence.mother_slime", "Mother Slime");
+        add(MonsterEntities.BABY_SLIME.get(), "Baby Slime");
+        add(MonsterEntities.MOTHER_SLIME.get(), "Mother Slime");
 
-        new DialogsLanguageSubProvider(this::add, true);
+        NPCDialogProvider.addTranslations(this::add, true);
+        LucyTheAxeLanguageSubProvider.addTranslations(this::add, true);
 
         // sound
         add("confluence.subtitle.transmission", "Transmission Magic: Activated");
@@ -1669,8 +1675,8 @@ public class ModEnglishProvider extends LanguageProvider {
         addAll(VanityArmorItems.ITEMS);
 
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), LibUtils.toTitleCase(effect.getId().getPath())));
-        ModEntities.getEntities().forEach(register -> register.getEntries()
-                .forEach(entity -> add(entity.get(), LibUtils.toTitleCase(entity.getId().getPath()))));
+        ModEntities.getEntities().forEach(register -> register.getEntries().forEach(entity -> add(entity.get(), LibUtils.toTitleCase(entity.getId().getPath()))));
+        add(MonsterEntities.WINGLESS_SLIMER.get(), "Slimer");
 
         add(QuestedFishes.CAPN_TUNABEARD.get(), "Cap'n Tunabeard");
         add(FoodItems.PINA_COLADA.get(), "Piña Colada");
@@ -2045,7 +2051,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add(SpawnEggItems.MAN_EATER_SPAWN_EGG.get(), "Man Eater Spawn Egg");
         add(SpawnEggItems.TROPIC_SLIME_SPAWN_EGG.get(), "Tropic Slime Spawn Egg");
         add(SpawnEggItems.DERPLING_SPAWN_EGG.get(), "Derpling Spawn Egg");
-        add(SpawnEggItems.HONEY_SLIME_SPAWN_EGG.get(), "Honey Slime Spawn Egg");
+        add(SpawnEggItems.SWEET_SLIME_SPAWN_EGG.get(), "Sweet Slime Spawn Egg");
         add(SpawnEggItems.SNATCHER_SPAWN_EGG.get(), "Snatcher Spawn Egg");
         add(SpawnEggItems.GIANT_TORTOISE_SPAWN_EGG.get(), "Giant Tortoise Spawn Egg");
         add(SpawnEggItems.ICE_SLIME_SPAWN_EGG.get(), "Ice Slime Spawn Egg");

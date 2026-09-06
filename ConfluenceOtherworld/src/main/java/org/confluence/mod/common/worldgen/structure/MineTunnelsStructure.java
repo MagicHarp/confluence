@@ -46,7 +46,7 @@ public class MineTunnelsStructure extends Structure {
     };
     public static final int[] railShape = new int[]{5, 4, 7, 6};
 
-    protected MineTunnelsStructure(StructureSettings settings) {
+    public MineTunnelsStructure(StructureSettings settings) {
         super(settings);
     }
 

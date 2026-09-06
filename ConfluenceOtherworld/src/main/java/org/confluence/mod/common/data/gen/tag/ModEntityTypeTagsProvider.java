@@ -12,6 +12,7 @@ import org.confluence.lib.common.LibTags;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.entity.*;
+import org.confluence.terra_curio.common.init.TCTags;
 import org.jetbrains.annotations.Nullable;
 import org.mesdag.portlib.wrapper.common.PortTags;
 
@@ -68,7 +69,8 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 CritterEntities.FAIRY.get()
         );
         tag(ModTags.EntityTypes.SPAWN_AT_GRAVEYARD)
-                .addTag(PortTags.EntityTypes.ZOMBIES);
+                .addTag(PortTags.EntityTypes.ZOMBIES)
+                .add(MonsterEntities.GHOST.get());
         //.add(MonsterEntities.DEMON_EYE.get()); fixme 恶魔之眼白天会飞走
         tag(ModTags.EntityTypes.DO_NOT_DROPS_EVIL_SOUL).addTag(
                 Tags.EntityTypes.BOSSES
@@ -77,6 +79,8 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 MonsterEntities.GREEN_SLIME.get(),
                 MonsterEntities.PINK_SLIME.get(),
                 MonsterEntities.BLACK_SLIME.get(),
+                MonsterEntities.MOTHER_SLIME.get(),
+                MonsterEntities.BABY_SLIME.get(),
                 MonsterEntities.PURPLE_SLIME.get(),
                 MonsterEntities.RED_SLIME.get(),
                 MonsterEntities.YELLOW_SLIME.get(),
@@ -97,6 +101,16 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .addTag(Tags.EntityTypes.BOSSES);
         tag(ModTags.EntityTypes.GORE_EFFECT_BLACKLIST)
                 .addTag(LibTags.EntityTypes.SLIME);
+        tag(ModTags.EntityTypes.GOLDEN_SLIME_REPLACEABLE).add(
+                EntityType.SLIME,
+                MonsterEntities.BLUE_SLIME.get(),
+                MonsterEntities.GREEN_SLIME.get(),
+                MonsterEntities.JUNGLE_SLIME.get(),
+                MonsterEntities.PURPLE_SLIME.get(),
+                MonsterEntities.RED_SLIME.get(),
+                MonsterEntities.YELLOW_SLIME.get(),
+                MonsterEntities.BLACK_SLIME.get()
+        );
         IntrinsicTagAppender<EntityType<?>> npcInvulnerableToPlayer = tag(ModTags.EntityTypes.NPC_INVULNERABLE_TO_PLAYER);
         for (RegistryObject<? extends EntityType<?>> npc : NpcEntities.ENTITIES.getEntries()) {
             npcInvulnerableToPlayer.add(npc.get());
@@ -119,8 +133,10 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 MonsterEntities.RED_SLIME.get(),
                 MonsterEntities.TROPIC_SLIME.get(),
                 MonsterEntities.YELLOW_SLIME.get(),
-                MonsterEntities.HONEY_SLIME.get(),
+                MonsterEntities.SWEET_SLIME.get(),
                 MonsterEntities.BLACK_SLIME.get(),
+                MonsterEntities.MOTHER_SLIME.get(),
+                MonsterEntities.BABY_SLIME.get(),
                 MonsterEntities.GOLDEN_SLIME.get(),
                 MonsterEntities.SPIKED_JUNGLE_SLIME.get(),
                 MonsterEntities.SPIKED_ICE_SLIME.get(),
@@ -128,9 +144,14 @@ public class ModEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 MonsterEntities.GREEN_DUMPLING_SLIME.get(),
                 MonsterEntities.SWAMP_SLIME.get(),
                 MonsterEntities.SLIMELING.get(),
+                MonsterEntities.SLIMER.get(),
+                MonsterEntities.WINGLESS_SLIMER.get(),
+                MonsterEntities.GASTROPOD.get(),
                 MonsterEntities.FLESH_SLIME.get(),
                 EntityType.SLIME
         );
+        // 饰品侧沿用同一份史莱姆集合，避免两套名单在新增实体或改名后再次分叉。
+        tag(TCTags.SLIME).addTag(LibTags.EntityTypes.SLIME);
 
         tag(PortTags.EntityTypes.ARTHROPOD).add(
                 ModEntities.RIDEABLE_BEE.get(),

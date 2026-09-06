@@ -22,7 +22,7 @@ import static org.confluence.lib.util.LibStructureUtils.*;
 public class PyramidStructure extends Structure {
     public static final Codec<PyramidStructure> CODEC = simpleCodec(PyramidStructure::new);
 
-    protected PyramidStructure(StructureSettings settings) {
+    public PyramidStructure(StructureSettings settings) {
         super(settings);
     }
 

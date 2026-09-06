@@ -1920,7 +1920,7 @@ public final class ModTabs {
                         jungle.accept(SpawnEggItems.MAN_EATER_SPAWN_EGG.get());
                         jungle.accept(SpawnEggItems.TROPIC_SLIME_SPAWN_EGG.get());
                         jungle.accept(SpawnEggItems.DERPLING_SPAWN_EGG.get());
-                        jungle.accept(SpawnEggItems.HONEY_SLIME_SPAWN_EGG.get());
+                        jungle.accept(SpawnEggItems.SWEET_SLIME_SPAWN_EGG.get());
                         jungle.accept(SpawnEggItems.SNATCHER_SPAWN_EGG.get());
                         jungle.accept(SpawnEggItems.LITTLE_HORNET_SPAWN_EGG.get());
                         jungle.accept(SpawnEggItems.GIANT_TORTOISE_SPAWN_EGG.get());

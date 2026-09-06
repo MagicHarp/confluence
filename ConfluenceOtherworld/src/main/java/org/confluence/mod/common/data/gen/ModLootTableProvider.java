@@ -20,6 +20,7 @@ public class ModLootTableProvider extends LootTableProvider {
                 new SubProviderEntry(ArchaeologySubProvider::new, LootContextParamSets.ARCHAEOLOGY),
                 new SubProviderEntry(FishingSubProvider::new, LootContextParamSets.FISHING),
                 new SubProviderEntry(GiftSubProvider::new, LootContextParamSets.GIFT),
+                new SubProviderEntry(LostPaperSubProvider::new, LootContextParamSets.ALL_PARAMS),
                 new SubProviderEntry(AddBlockLootConfluenceSubProvider::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(AddEntityLootConfluenceSubProvider::new, LootContextParamSets.ENTITY),
                 new SubProviderEntry(AddChestLootConfluenceSubProvider::new, LootContextParamSets.CHEST)

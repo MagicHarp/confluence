@@ -24,7 +24,7 @@ import static org.confluence.lib.util.LibStructureUtils.getHeight;
 public class SmallLivingMahoganyTreeStructure extends Structure {
     public static final Codec<SmallLivingMahoganyTreeStructure> CODEC = simpleCodec(SmallLivingMahoganyTreeStructure::new);
 
-    protected SmallLivingMahoganyTreeStructure(StructureSettings settings) {
+    public SmallLivingMahoganyTreeStructure(StructureSettings settings) {
         super(settings);
     }
 
