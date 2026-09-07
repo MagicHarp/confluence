@@ -27,7 +27,7 @@ public final class SnatcherRenderer extends GeoNormalRenderer<Snatcher> {
     private static final double MAX_SEGMENT_LENGTH = 0.8;
 
     public SnatcherRenderer(EntityRendererProvider.Context context, ResourceLocation path) {
-        super(context, path);
+        super(context, path, true, 1.0F, -9.0F / 16.0F);
     }
 
     @Override

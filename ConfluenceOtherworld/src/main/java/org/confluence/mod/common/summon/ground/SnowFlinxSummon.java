@@ -17,7 +17,7 @@ public final class SnowFlinxSummon extends GroundMeleeSummon {
     private int dashCooldown = 20;
 
     public SnowFlinxSummon(ServerPlayer owner, int slotCost, SummonStats stats, SummonPose initialPose) {
-        super(Confluence.asResource("summon_snow_flinx"), owner, slotCost, stats, initialPose, 1.0, 1.0, 32.0, 0.56, 0.70);
+        super(Confluence.asResource("summon_snow_flinx"), owner, slotCost, stats, initialPose, 1.0, 1.0, 16.0, 0.40, 0.50);
     }
 
     @Override
@@ -43,7 +43,7 @@ public final class SnowFlinxSummon extends GroundMeleeSummon {
         }
         if (leapForwardDelay == 1) {
             Vec3 direction = targetPosition.subtract(position()).multiply(1.0, 0.0, 1.0).normalize();
-            moveWithCollision(new Vec3(direction.x * 0.56, velocity().y, direction.z * 0.56));
+            moveWithCollision(new Vec3(direction.x * 0.40, velocity().y, direction.z * 0.40));
             return;
         }
         super.moveInCombat(target);
@@ -52,7 +52,12 @@ public final class SnowFlinxSummon extends GroundMeleeSummon {
     @Override
     protected void onSuccessfulHit(LivingEntity target) {
         if (dashCooldown <= 0) {
-            moveWithCollision(velocity().add(targetPosition().subtract(position()).normalize()));
+            Vec3 direction = targetPosition().subtract(position()).normalize();
+            Vec3 movement = velocity().scale(0.5).add(direction.scale(0.35));
+            if (movement.lengthSqr() > 0.25) {
+                movement = movement.normalize().scale(0.5);
+            }
+            moveWithCollision(movement);
             dashCooldown = 20;
         }
     }

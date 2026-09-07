@@ -442,7 +442,7 @@ public class BaseTerraRepeaterItem extends CrossbowItem {
         }
         Level level = entity.level();
         if (level.isClientSide) {
-            entity.playSound(ModSoundEvents.BOW_COOLDOWN_RECOVERY.get());
+            level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.BOW_COOLDOWN_RECOVERY.get(), entity.getSoundSource(), 1.0F, 1.0F, false);
         }
         level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CROSSBOW_LOADING_END,
                 entity.getSoundSource(), 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);

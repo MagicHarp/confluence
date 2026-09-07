@@ -436,6 +436,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         for (Player player : level().players()) {
             if (isEncounterObserver(player)
                     && combatAnchorDistanceSqr(player) < rangeSqr) {
+                registerCombatParticipant(player);
                 noTargetTicks = 0;
                 stopDisengageRetreat();
                 return;
@@ -533,7 +534,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     /// 把玩家登记为本场遭遇参与者。正常游戏中由锁定目标和玩家伤害自动登记。
     public final void registerCombatParticipant(Player player) {
         if (player.level() == level() && player.isAlive()
-                && !player.isCreative() && !player.isSpectator()) {
+                && !player.isSpectator()) {
             combatParticipantIds.add(player.getUUID());
             if (deathRetargetBlocked.remove(player.getUUID()) && isValidCurrentCombatPlayer(player)) {
                 setTarget(player);
@@ -548,8 +549,8 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     /// 自然生成的 Boss 仍然可以依靠附近玩家搜索接管战斗；召唤道具路径则必须显式登记召唤者，
     /// 否则刚生成的 Boss 会短暂进入无目标分支，飞行 Boss 在客户端实测中会表现为沉底或贴地滑行。
     public final void initializeSummonedCombat(Player player) {
+        registerCombatParticipant(player);
         Player combatPlayer = isValidCurrentCombatPlayer(player) ? player : null;
-        if (combatPlayer != null) registerCombatParticipant(combatPlayer);
         setTarget(combatPlayer);
         noTargetTicks = 0;
         stopDisengageRetreat();

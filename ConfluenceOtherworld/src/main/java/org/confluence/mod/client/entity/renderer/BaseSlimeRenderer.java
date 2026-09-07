@@ -37,6 +37,8 @@ public final class BaseSlimeRenderer<T extends BaseSlime> extends MobRenderer<T,
     protected void scale(T slime, PoseStack poseStack, float partialTick) {
         float size = slime.getVisualSize();
         shadowRadius = 0.25F * size;
+        poseStack.scale(0.999F, 0.999F, 0.999F);
+        poseStack.translate(0.0F, 0.001F, 0.0F);
         float squish = Mth.lerp(partialTick, slime.getOldSquish(), slime.getSquish())
                 / (size * 0.5F + 1.0F);
         float inverse = 1.0F / (squish + 1.0F);

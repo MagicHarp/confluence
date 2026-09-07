@@ -119,6 +119,10 @@ public class NPCReforgeMenu extends AbstractContainerMenu {
         return data[DATA_REFORGE_COST];
     }
 
+    public @Nullable BaseNPC getNPC() {
+        return npc;
+    }
+
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         if (index < 0 || index >= slots.size()) return ItemStack.EMPTY;
@@ -171,5 +175,8 @@ public class NPCReforgeMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         clearContainer(player, container);
+        if (npc != null && npc.getTradingPlayer() == player) {
+            npc.setTradingPlayer(null);
+        }
     }
 }

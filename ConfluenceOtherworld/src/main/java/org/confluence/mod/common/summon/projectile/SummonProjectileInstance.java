@@ -8,16 +8,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.*;
-import org.confluence.lib.common.LibAttributes;
 import org.confluence.lib.common.LibDamageTypes;
 import org.confluence.mod.api.summon.OwnedSummon;
 import org.confluence.mod.api.summon.SummonTargetCache;
 import org.confluence.mod.api.whip.WhipTagTracker;
 import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
-import org.confluence.mod.common.summon.SummonInstance;
-import org.confluence.mod.common.summon.SummonPose;
-import org.confluence.mod.common.summon.SummonRenderPart;
-import org.confluence.mod.common.summon.SummonVisualState;
+import org.confluence.mod.common.summon.*;
 import org.confluence.mod.mixed.Immunity;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +29,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
     private final SummonInstance source;
     private final ServerPlayer owner;
     private final UUID intendedTargetId;
-    private final float baseDamage;
+    private final SummonStats stats;
     private Vec3 position;
     private Vec3 velocity;
     private boolean removed;
@@ -44,7 +40,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
         this.source = source;
         this.owner = source.owner();
         intendedTargetId = target.getUUID();
-        baseDamage = source.stats().baseDamage();
+        stats = source.stats();
         position = source.position();
         Vec3 aimPoint = source.actualTarget() != null && source.actualTarget() != source.target()
                 ? source.targetPosition()
@@ -68,7 +64,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
         double blockDistance = blockHit.getType() == HitResult.Type.BLOCK
                 ? collisionStart.distanceToSqr(blockHit.getLocation()) : Double.MAX_VALUE;
         double entityDistance = entityHit == null ? Double.MAX_VALUE : collisionStart.distanceToSqr(entityHit.getLocation());
-        if (entityDistance <= blockDistance) {
+        if (entityHit != null && entityDistance <= blockDistance) {
             position = entityHit.getLocation();
             hit(entityHit.getEntity());
         } else if (blockDistance < Double.MAX_VALUE) {
@@ -131,7 +127,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
             removed = true;
             return;
         }
-        float damage = baseDamage * (float) owner.getAttributeValue(LibAttributes.getSummonDamage());
+        float damage = stats.damage(owner);
         damage = WhipTagTracker.modifyDamage(owner, this, logicalTarget, damage);
         DamageSource damageSource = LibDamageTypes.of(owner.level(), LibDamageTypes.SUMMONER, owner);
         onImpact(logicalTarget);

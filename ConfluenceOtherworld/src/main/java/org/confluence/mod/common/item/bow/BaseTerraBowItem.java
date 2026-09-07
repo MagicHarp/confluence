@@ -138,7 +138,7 @@ public class BaseTerraBowItem extends BowItem {
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingUseDuration) {
         if (hasFullPullHitEffect() && getUseDuration(stack, entity) - remainingUseDuration == 16 && level.isClientSide) {
-            entity.playSound(ModSoundEvents.BOW_COOLDOWN_RECOVERY.get());
+            level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), ModSoundEvents.BOW_COOLDOWN_RECOVERY.get(), entity.getSoundSource(), 1.0F, 1.0F, false);
         }
     }
 

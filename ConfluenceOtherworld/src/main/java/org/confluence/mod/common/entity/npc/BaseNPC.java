@@ -58,6 +58,7 @@ import org.confluence.mod.common.entity.npc.trade.NPCTradeList;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeMenu;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeOffer;
 import org.confluence.mod.common.init.ModEffects;
+import org.confluence.mod.common.menu.NPCReforgeMenu;
 import org.confluence.mod.network.s2c.OpenNPCDialogPacketS2C;
 import org.confluence.mod.util.AchievementUtils;
 import org.jetbrains.annotations.Nullable;
@@ -450,7 +451,8 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
     public @Nullable Player getInteractingPlayer() {
         if (tradingPlayer != null && tradingPlayer.isAlive() && tradingPlayer.level() == level()
                 && distanceToSqr(tradingPlayer) <= 64.0D
-                && tradingPlayer.containerMenu instanceof NPCTradeMenu menu && menu.getNPC() == this)
+                && (tradingPlayer.containerMenu instanceof NPCTradeMenu tradeMenu && tradeMenu.getNPC() == this
+                || tradingPlayer.containerMenu instanceof NPCReforgeMenu reforgeMenu && reforgeMenu.getNPC() == this))
             return tradingPlayer;
         if (dialogPlayer != null && (tickCount > dialogExpiresAt || !dialogPlayer.isAlive()
                 || dialogPlayer.isRemoved() || dialogPlayer.level() != level() || distanceToSqr(dialogPlayer) > 64.0D))

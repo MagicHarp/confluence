@@ -10,7 +10,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.lib.common.LibAttributes;
 import org.confluence.lib.common.LibDamageTypes;
 import org.confluence.mod.api.summon.OwnedSummon;
 import org.confluence.mod.api.summon.SummonTargetCache;
@@ -247,7 +246,7 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
         if (!SummonTargetCache.isValidTarget(owner, encounterOwner, Double.MAX_VALUE, true)) {
             return false;
         }
-        float damage = stats.baseDamage() * (float) owner.getAttributeValue(LibAttributes.getSummonDamage());
+        float damage = stats.damage(owner);
         damage = WhipTagTracker.modifyDamage(owner, this, encounterOwner, damage * damageMultiplier);
         DamageSource source = LibDamageTypes.of(owner.level(), LibDamageTypes.SUMMONER, owner);
         if (damageRecipient instanceof LivingEntity living) {

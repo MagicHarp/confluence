@@ -12,6 +12,7 @@ import org.confluence.lib.common.component.ModRarity;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.component.SwordProjectileComponent;
 import org.confluence.mod.common.init.ModDataComponentTypes;
+import org.confluence.mod.common.init.ModTiers;
 import org.confluence.mod.common.init.item.ModItems;
 import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.AttributeHolder;
@@ -122,6 +123,7 @@ public record SwordDefinition(
         public BuildResult build(Tier tier, ModRarity rarity, int rawDamage, float rawSpeed) {
             Item.Properties properties = new Item.Properties();
             propertyModifiers.forEach(modifier -> modifier.accept(properties));
+            if (tier == ModTiers.UNBREAKABLE) properties.unbreakable();
             properties.durability(tier.getUses()).component(ConfluenceMagicLib.MOD_RARITY, rarity);
             PortItemAttributeModifiers.Builder attributesBuilder = PortItemAttributeModifiers.builder();
             attributes.forEach(entry -> attributesBuilder.add(entry.attribute(), entry.modifier(), PortEquipmentSlotGroup.MAINHAND));

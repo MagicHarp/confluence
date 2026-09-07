@@ -72,7 +72,9 @@ public final class FinchSummon extends FlyingSummon {
     }
 
     private double previousVerticalBob() {
-        return Math.sin((tickCount() - 1) * 0.5F) * 0.03F;
+        double current = Math.sin(tickCount() * 0.5F) * 0.06F;
+        double previous = Math.sin((tickCount() - 1) * 0.5F) * 0.06F;
+        return current - previous;
     }
 
     @Override

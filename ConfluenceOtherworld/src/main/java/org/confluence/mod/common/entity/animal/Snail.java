@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -19,6 +20,8 @@ import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
+
+import java.util.List;
 
 /**
  * 能沿地面、墙面和天花板连续爬行的蜗牛类小动物。
@@ -112,7 +115,7 @@ public class Snail extends SimpleCritter {
         }
         BlockPos supportPos = BlockPos.containing(x, y, z);
         BlockState support = level().getBlockState(supportPos);
-        return support.isFaceSturdy(level(), supportPos, face);
+        return support.isFaceSturdy(level(), supportPos, face) || Block.isFaceFull(support.getCollisionShape(level(), supportPos), face);
     }
 
     private Direction findAdjacentSupport() {
@@ -231,7 +234,7 @@ public class Snail extends SimpleCritter {
         lastCrawlPosition = currentPosition;
 
         if (blockedTicks >= 12) {
-            setCrawlDirection(getCrawlDirection().getOpposite());
+            setCrawlDirection(selectAvoidanceDirection(attachment));
             blockedTicks = 0;
             turnCooldown = 40 + random.nextInt(61);
             return;
@@ -244,6 +247,24 @@ public class Snail extends SimpleCritter {
                 .toArray(Direction[]::new);
         if (candidates.length > 0) setCrawlDirection(candidates[random.nextInt(candidates.length)]);
         turnCooldown = 80 + random.nextInt(121);
+    }
+
+    private Direction selectAvoidanceDirection(Direction attachment) {
+        Direction current = getCrawlDirection();
+        Direction reverse = current.getOpposite();
+        List<Direction> detours = java.util.Arrays.stream(Direction.values())
+                .filter(direction -> direction.getAxis() != attachment.getAxis())
+                .filter(direction -> direction != current && direction != reverse)
+                .filter(this::canAdvanceOrAttach)
+                .toList();
+        if (!detours.isEmpty()) return detours.get(random.nextInt(detours.size()));
+        return canAdvanceOrAttach(reverse) ? reverse : current;
+    }
+
+    private boolean canAdvanceOrAttach(Direction direction) {
+        Vec3 step = Vec3.atLowerCornerOf(direction.getNormal()).scale(Math.max(0.08D, getBbWidth() * 0.25D));
+        if (level().noCollision(this, getBoundingBox().move(step))) return true;
+        return direction.getAxis().isHorizontal() && hasSupport(direction.getOpposite());
     }
 
     private void transitionToAdjacentSupport(Direction previousAttachment, Direction attachment, Direction crawl) {
@@ -304,15 +325,17 @@ public class Snail extends SimpleCritter {
 
     private void turnOntoObstacle(Direction attachment, Direction crawl) {
         boolean obstacleAhead = crawl.getAxis().isHorizontal() && hasObstacleAhead(crawl);
-        if (attachment == Direction.UP && crawl.getAxis().isHorizontal() && obstacleAhead) {
+        Direction obstacleFace = crawl.getOpposite();
+        boolean canAttachToObstacle = obstacleAhead && hasSupport(obstacleFace);
+        if (attachment == Direction.UP && crawl.getAxis().isHorizontal() && canAttachToObstacle) {
             setAttachmentFace(crawl.getOpposite());
             setCrawlDirection(Direction.UP);
-        } else if (attachment == Direction.DOWN && crawl.getAxis().isHorizontal() && obstacleAhead) {
+        } else if (attachment == Direction.DOWN && crawl.getAxis().isHorizontal() && canAttachToObstacle) {
             setAttachmentFace(crawl.getOpposite());
             setCrawlDirection(Direction.DOWN);
         } else if (attachment.getAxis().isHorizontal()
                 && crawl.getAxis().isHorizontal()
-                && obstacleAhead) {
+                && canAttachToObstacle) {
             // 沿墙横爬撞到相邻墙面时绕过内棱；否则会一直顶着拐角不动。
             setAttachmentFace(crawl.getOpposite());
             setCrawlDirection(attachment.getOpposite());

@@ -13,6 +13,7 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
     @Override
     public void english() {
         // configuration
+        add("confluence.screen.soul_overview.center", "Soul Overview Screen: Center");
         add("confluence.configuration.Compatibility", "Compatibility Mechanism");
         add("confluence.configuration.Compatibility.button", "Settings for compatibility with other mods");
         add("confluence.configuration.ArsNouveau", "Ars Nouveau");
@@ -307,6 +308,7 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
 
     @Override
     public void chinese() {
+        add("confluence.screen.soul_overview.center", "灵魂技能总览界面.居中");
         add("confluence.configuration.WeaponInput", "武器输入");
         add("confluence.configuration.WeaponInput.button", "武器输入");
         add("confluence.configuration.WeaponInput.tooltip", "分别设置各类武器主要动作使用鼠标左键还是右键。");

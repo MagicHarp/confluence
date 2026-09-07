@@ -1,5 +1,6 @@
 package org.confluence.mod.common.entity.monster;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.data.map.CreatureDefinition;
@@ -46,6 +48,11 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
 
     public BaseMonster(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        if (!isNoGravity()) super.playStepSound(pos, state);
     }
 
     @Override

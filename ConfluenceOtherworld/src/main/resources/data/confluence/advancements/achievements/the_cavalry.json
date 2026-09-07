@@ -9,7 +9,7 @@
             },
             "trigger": "terra_curio:curios_equipped"
         },
-        "runtime": {
+        "never": {
             "trigger": "minecraft:impossible"
         }
     },
@@ -30,7 +30,7 @@
     },
     "requirements": [
         [
-            "runtime",
+            "never",
             "curio"
         ]
     ],

@@ -346,6 +346,8 @@ public class ModChineseProvider extends LanguageProvider {
         add("message.confluence.peddlers_satchel", "旅商的背包变大！");
         add("message.confluence.house_detect.occupied", "这个房间已被%1$s %2$s占领！");
         add("message.confluence.house_detect.npc_not_fount", "未在附近找到该NPC！");
+        add("tooltip.confluence.house_detect.mode.add.success", "添加房屋成功！");
+        add("tooltip.confluence.house_detect.mode.delete.success", "删除房屋成功！");
         add("message.confluence.house_select.tip1", "按一次Esc以退出，长按Alt以选择");
         add("message.confluence.house_select.tip2", "右击以检查、添加或移除房间");
         add("message.confluence.house_select.check", "检查");
@@ -4883,7 +4885,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(SummonItems.STARDUST_DRAGON_STAFF.get(), "星尘龙法杖");
         add("tooltip.confluence.summon.damage", "基础召唤伤害：%s");
         add("tooltip.confluence.summon.slots", "占用仆从栏：%s");
-        add("tooltip.confluence.summon.retrieve", "潜行使用以收回全部战斗召唤物");
+        add("tooltip.confluence.summon.retrieve", "右键长按以解除所有召唤物");
         add(ModEntities.FLOWER_POWER_PETAL.get(), "花之力花瓣");
         add(ModEntities.DRIPPLER_CRIPPLER_PROJECTILE.get(), "血肉射弹");
         add(ModEntities.FLAIRON_BUBBLE.get(), "泡泡");
@@ -5133,6 +5135,9 @@ public class ModChineseProvider extends LanguageProvider {
     }
 
     private void addBoomerangTranslations() {
+        add("tooltip.confluence.boomerang.fly_speed", "飞行速度");
+        add("tooltip.confluence.boomerang.max_count", "分身数量");
+        add("tooltip.confluence.boomerang.penetration", "穿透数量");
         add(BoomerangItems.ENCHANTED_BOOMERANG.get(), "附魔回旋镖");
         add(BoomerangItems.FLAMARANG.get(), "烈焰回旋镖");
         add(BoomerangItems.ICE_BOOMERANG.get(), "冰雪回旋镖");

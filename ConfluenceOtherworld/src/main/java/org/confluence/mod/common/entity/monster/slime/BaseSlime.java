@@ -170,7 +170,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     /// 此处统一判定。未列入任何分支的类型保持不可自然生成，包括尚未定义有效环境分支的
     /// 青团史莱姆。
     public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        if (!(level instanceof Level world) || !Mob.checkMobSpawnRules(type, level, spawnType, pos, random)) {
+        if (!(level instanceof Level world) || !SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random)) {
             return false;
         }
 

@@ -70,6 +70,11 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
         return super.hurt(source, amount);
     }
 
+    @Override
+    public boolean displayFireAnimation() {
+        return role != Role.BONE_SERPENT && super.displayFireAnimation();
+    }
+
     public void setBossOwner(BaseBoss owner) {
         ownerTracker.bind(this, owner);
         setTarget(owner.getTarget());

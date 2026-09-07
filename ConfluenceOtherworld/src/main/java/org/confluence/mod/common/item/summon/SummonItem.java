@@ -100,7 +100,7 @@ public class SummonItem extends Item {
             return;
         }
         player.swing(living.getUsedItemHand(), true);
-        summon(player, living.getUsedItemHand(), new SummonStats(baseDamage));
+        summon(player, living.getUsedItemHand(), SummonStats.from(stack, baseDamage));
     }
 
     private void summon(ServerPlayer player, InteractionHand hand, SummonStats stats) {

@@ -48,10 +48,11 @@ final class ClientSummonGeoRenderer extends GeoObjectRenderer<ClientSummonVisual
     public void preRender(PoseStack poseStack, ClientSummonVisual visual, BakedGeoModel model, MultiBufferSource bufferSource,
                           VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
                           float red, float green, float blue, float alpha) {
+        super.preRender(poseStack, visual, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        poseStack.translate(-0.5F, -0.51F, -0.5F);
         scaleModelForRender(scale, scale, poseStack, visual, model, isReRender, partialTick, packedLight, packedOverlay);
         poseStack.translate(0.0F, offsetY, 0.0F);
         if (yawOffset != 0.0F) poseStack.mulPose(Axis.YP.rotationDegrees(yawOffset));
-        super.preRender(poseStack, visual, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override

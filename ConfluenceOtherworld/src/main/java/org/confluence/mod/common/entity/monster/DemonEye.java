@@ -170,6 +170,9 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
 
     @Override
     public void tick() {
+        if (!level().isClientSide) {
+            setTarget(level().getNearestPlayer(getX(), getY(), getZ(), 40.0, true));
+        }
         super.tick();
         Vec3 movement = getDeltaMovement();
         if (movement.lengthSqr() > 1.0E-8) {

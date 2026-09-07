@@ -21,6 +21,7 @@ import org.confluence.mod.api.client.animation.HandAnimationAction;
 import org.confluence.mod.api.client.animation.HandAnimationApi;
 import org.confluence.mod.api.client.animation.HandAnimationChannel;
 import org.confluence.mod.api.client.animation.HandAnimationProfile;
+import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.init.ModDataComponentTypes;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.item.gun.definition.FireMode;
@@ -79,8 +80,7 @@ public class BaseGun extends Item implements GeoItem {
     }
 
     public boolean isAutomatic(ItemStack stack) {
-        return !stack.is(ModTags.Items.MANUAL_GUN)
-                && (definition.fireMode() == FireMode.AUTOMATIC || stack.is(ModTags.Items.AUTOMATIC_GUN));
+        return CommonConfigs.AUTO_FIRE_ALL_GUNS.get() || stack.is(ModTags.Items.AUTOMATIC_GUN);
     }
 
     @Override

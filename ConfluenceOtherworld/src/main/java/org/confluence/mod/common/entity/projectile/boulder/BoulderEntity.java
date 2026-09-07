@@ -256,7 +256,7 @@ public class BoulderEntity extends Projectile {
                     }
                     int directionsSize = directions.size();
                     if (!directions.isEmpty()) {
-                        Direction direction1 = directions.get(directionsSize == 1 ? 0 : random.nextIntBetweenInclusive(0, directionsSize - 1));
+                        Direction direction1 = directions.get(directionsSize == 1 ? 0 : getRandom1211().nextIntBetweenInclusive(0, directionsSize - 1));
                         setDeltaMovement(getDeltaMovement().relative(direction1, 1).scale(speed));
                     }
                 }

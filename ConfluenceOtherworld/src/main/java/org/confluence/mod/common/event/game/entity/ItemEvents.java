@@ -121,6 +121,7 @@ public final class ItemEvents {
     }
 
     private static void gun$Use(GunEvent.UseGunEvent event) {
+        event.setCooldowns(PrefixUtils.calculateUseTime(event.getPlayer(), event.getCooldowns()));
         if (event.getGun() instanceof ManaGunItem manaGun && event.getPlayer() instanceof ServerPlayer player && !manaGun.consumeMana(player, player.getMainHandItem())) {
             event.setCanceled(true);
         }

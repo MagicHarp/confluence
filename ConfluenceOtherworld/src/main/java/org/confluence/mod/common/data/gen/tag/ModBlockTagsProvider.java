@@ -1906,11 +1906,29 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.NPC_HOUSE_CONSTITUTE).add(
                 WHITE_PAPER_PANE_LAMP.get(),
                 MALACHITE_PAPER_PANE_LAMP.get()
-        );
-        /// 1.20 侧先用原版可稳定识别的家具语义承载房屋判定，避免把房屋系统绑定到
-        /// TerraFurniture。附属模组仍可通过同名数据标签加入自己的桌椅。
-        tag(ModTags.Blocks.NPC_HOUSE_CHAIR).addTag(BlockTags.STAIRS);
-        tag(ModTags.Blocks.NPC_HOUSE_TABLE).add(Blocks.CRAFTING_TABLE);
+                ).addTag(ModTags.Blocks.NPC_HOUSE_CHAIR)
+                .addTag(ModTags.Blocks.NPC_HOUSE_TABLE)
+                .add(
+                        Blocks.TORCH,
+                        Blocks.WALL_TORCH,
+                        Blocks.LIGHT,
+                        Blocks.SHROOMLIGHT,
+                        Blocks.LANTERN,
+                        Blocks.SEA_LANTERN,
+                        Blocks.SOUL_LANTERN,
+                        Blocks.JACK_O_LANTERN,
+                        Blocks.PEARLESCENT_FROGLIGHT,
+                        Blocks.OCHRE_FROGLIGHT,
+                        Blocks.VERDANT_FROGLIGHT,
+                        Blocks.REDSTONE_LAMP
+                )
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "light_source"));
+        tag(ModTags.Blocks.NPC_HOUSE_CHAIR)
+                .addTag(BlockTags.BEDS)
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "house_chair"));
+        tag(ModTags.Blocks.NPC_HOUSE_TABLE)
+                .add(Blocks.CRAFTING_TABLE)
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "house_table"));
         tag(ModTags.Blocks.CACTUS).add(
                 Blocks.CACTUS,
                 CRIMSON_CACTUS.get(),

@@ -796,9 +796,9 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                 )
         );
         add(MonsterEntities.LAVA_SLIME.get(), lavaSlimeLoot());
-        add(MonsterEntities.BLACK_SLIME.get(), slimeCommon(-7697782));
+        add(MonsterEntities.BLACK_SLIME.get(), blackSlimeLoot());
         add(MonsterEntities.MOTHER_SLIME.get(), motherSlimeLoot());
-        add(MonsterEntities.BABY_SLIME.get(), slimeCommon(-7697782));
+        add(MonsterEntities.BABY_SLIME.get(), blackSlimeLoot());
         add(MonsterEntities.TROPIC_SLIME.get(), slimeCommon(-10644993)
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.TROPICAL_FISH))
@@ -1325,6 +1325,13 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                         .add(LootItem.lootTableItem(MaterialItems.GEL))
                         .apply(random0To1)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(1))
+                        .add(EmptyLootItem.emptyItem().setWeight(99)));
+    }
+
+    private LootTable.Builder blackSlimeLoot() {
+        return slimeCommon(-7697782)
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(1))
                         .add(EmptyLootItem.emptyItem().setWeight(99)));

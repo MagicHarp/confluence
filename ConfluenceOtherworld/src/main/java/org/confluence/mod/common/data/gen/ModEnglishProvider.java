@@ -74,7 +74,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add(SummonItems.STARDUST_DRAGON_STAFF.get(), "Stardust Dragon Staff");
         add("tooltip.confluence.summon.damage", "Base summon damage: %s");
         add("tooltip.confluence.summon.slots", "Minion slots: %s");
-        add("tooltip.confluence.summon.retrieve", "Use while sneaking to retrieve all combat summons");
+        add("tooltip.confluence.summon.retrieve", "Hold right-click to release all summons");
         add(YoyoItems.AMAZON.get(), "Amazon");
         add(YoyoItems.ARTERY.get(), "Artery");
         add(YoyoItems.CASCADE.get(), "Cascade");
@@ -432,6 +432,8 @@ public class ModEnglishProvider extends LanguageProvider {
         add("message.confluence.peddlers_satchel", "The Traveling Merchant's satchel deepens!");
         add("message.confluence.house_detect.occupied", "House has been occupied by %2$s the %1$s!");
         add("message.confluence.house_detect.npc_not_fount", "NPC not found nearby!");
+        add("tooltip.confluence.house_detect.mode.add.success", "Add House success!");
+        add("tooltip.confluence.house_detect.mode.delete.success", "Delete House success!");
         add("message.confluence.house_select.tip1", "Press Esc to escape, hold Alt to select");
         add("message.confluence.house_select.tip2", "Right Click to check or add/remove house");
         add("message.confluence.house_select.check", "Check");
@@ -1963,6 +1965,9 @@ public class ModEnglishProvider extends LanguageProvider {
     }
 
     private void addBoomerangTranslations() {
+        add("tooltip.confluence.boomerang.fly_speed", "Fly Speed");
+        add("tooltip.confluence.boomerang.max_count", "Max Count");
+        add("tooltip.confluence.boomerang.penetration", "Penetrates Count");
         add(BoomerangItems.ENCHANTED_BOOMERANG.get(), "Enchanted Boomerang");
         add(BoomerangItems.FLAMARANG.get(), "Flamarang");
         add(BoomerangItems.ICE_BOOMERANG.get(), "Ice Boomerang");

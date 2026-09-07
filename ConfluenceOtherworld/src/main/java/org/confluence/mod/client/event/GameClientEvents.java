@@ -28,6 +28,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.ItemStack;
@@ -64,6 +65,7 @@ import org.confluence.mod.client.renderer.item.DungeonCompassRenderer;
 import org.confluence.mod.client.renderer.item.LucyTheAxeDialogRenderer;
 import org.confluence.mod.client.renderer.item.ZombieArmRenderer;
 import org.confluence.mod.client.summon.ClientSummonManager;
+import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.attachment.PlayerSpecialData;
 import org.confluence.mod.common.component.ValueComponent;
 import org.confluence.mod.common.component.prefix.PrefixComponent;
@@ -78,6 +80,7 @@ import org.confluence.mod.common.init.block.NatureBlocks;
 import org.confluence.mod.common.init.gun.GunSounds;
 import org.confluence.mod.common.init.item.ModItems;
 import org.confluence.mod.common.init.item.SwordItems;
+import org.confluence.mod.common.item.bow.ShortBowItem;
 import org.confluence.mod.common.item.common.ScryingOrb;
 import org.confluence.mod.common.item.crossbow.BaseTerraRepeaterItem;
 import org.confluence.mod.common.item.gun.BaseGun;
@@ -175,6 +178,7 @@ public final class GameClientEvents {
         LocalPlayer player = minecraft.player;
 
         if (player != null) {
+            releaseFullyDrawnBow(minecraft, player);
             if (Confluence.SOUL_SKILLS) {
                 SoulSkillClientHandler.INSTANCE.handle();
                 boolean isSoulOverviewScreen = false;
@@ -288,6 +292,17 @@ public final class GameClientEvents {
                 }
             }
         }
+    }
+
+    private static void releaseFullyDrawnBow(Minecraft minecraft, LocalPlayer player) {
+        if (minecraft.gameMode == null || !player.isUsingItem()) return;
+        ItemStack stack = player.getUseItem();
+        if (!(stack.getItem() instanceof BowItem) || (!CommonConfigs.AUTO_RELEASE_ALL_BOWS.get() && !stack.is(ModTags.Items.AUTOMATIC_BOW))) {
+            return;
+        }
+        int usedTicks = stack.getUseDuration() - player.getUseItemRemainingTicks();
+        int fullDrawTicks = stack.getItem() instanceof ShortBowItem ? ShortBowItem.MAX_DRAW_DURATION : BowItem.MAX_DRAW_DURATION;
+        if (usedTicks >= fullDrawTicks) minecraft.gameMode.releaseUsingItem(player);
     }
 
     private static void input$MouseScrolling(PortInputEvent.MouseScrollingEvent event) {

@@ -595,9 +595,9 @@ public final class ModClientEvents {
         event.registerEntityRenderer(MonsterEntities.SWEET_SLIME.get(), c -> new BaseSlimeRenderer<>(c, "honey"));
         event.registerEntityRenderer(MonsterEntities.GOLDEN_SLIME.get(), c -> new BaseSlimeRenderer<>(c, "gold"));
         event.registerEntityRenderer(MonsterEntities.FLESH_SLIME.get(), c -> new BaseSlimeRenderer<>(c, "flesh"));
-        event.registerEntityRenderer(MonsterEntities.SPIKED_SLIME.get(), c -> new GeoNormalRenderer<>(c, Confluence.asResource("slime/spiked_slime")));
-        event.registerEntityRenderer(MonsterEntities.SPIKED_JUNGLE_SLIME.get(), c -> new GeoNormalRenderer<>(c, Confluence.asResource("slime/spiked_jungle_slime")));
-        event.registerEntityRenderer(MonsterEntities.SPIKED_ICE_SLIME.get(), c -> new GeoNormalRenderer<>(c, Confluence.asResource("slime/spiked_ice_slime")));
+        event.registerEntityRenderer(MonsterEntities.SPIKED_SLIME.get(), c -> new GeoSpecialSlimeRenderer<>(c, Confluence.asResource("slime/spiked_slime")));
+        event.registerEntityRenderer(MonsterEntities.SPIKED_JUNGLE_SLIME.get(), c -> new GeoSpecialSlimeRenderer<>(c, Confluence.asResource("slime/spiked_jungle_slime")));
+        event.registerEntityRenderer(MonsterEntities.SPIKED_ICE_SLIME.get(), c -> new GeoSpecialSlimeRenderer<>(c, Confluence.asResource("slime/spiked_ice_slime")));
         event.registerEntityRenderer(MonsterEntities.DEMON_EYE.get(), DemonEyeRenderer::new);
         event.registerEntityRenderer(MonsterEntities.HARPY.get(), c -> new GeoNormalRenderer<>(c, MonsterEntities.HARPY.getId()));
         event.registerEntityRenderer(MonsterEntities.PIXIE.get(), c -> new FairyRenderer<>(c, MonsterEntities.PIXIE.getId()).setBoneToGlow(

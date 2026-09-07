@@ -13,10 +13,11 @@ import java.util.UUID;
 
 /// 负责为 Boss 应用与难度、当前维度玩家数量有关的属性倍率。
 ///
-/// 基础属性以专家难度单人战为基准。经典、专家和大师难度分别使用
-/// {@code 0.66}、{@code 1.0} 和 {@code 1.5} 倍属性；最大生命值还会乘以
+/// 基础属性以专家难度单人战为基准。经典、专家和大师难度的最大生命值分别使用
+/// {@code 0.66}、{@code 1.0} 和 {@code 1.5} 倍；最大生命值还会乘以
 /// 当前维度中的玩家数量，最多计算八名玩家。攻击伤害只随难度变化，与
-/// 玩家数量无关。具有特殊生命基准或多人公式的
+/// 玩家数量无关，并会抵消原版简单难度的额外减半，避免大师难度与原版困难
+/// 难度倍率重复相乘。具有特殊生命基准或多人公式的
 /// Boss 可以只覆写生命倍率，不会改变公共攻击倍率。
 ///
 /// 属性修饰符使用固定 UUID 并永久保存。无论 Boss 经由自然生成、
@@ -38,22 +39,27 @@ public final class BossMultiplayerEnhancement {
         if (boss.level().isClientSide) {
             return;
         }
-        double difficultyMultiplier = LibUtils.switchByDifficulty(boss.level(), boss.blockPosition(), 0.66D, 1.0D, 1.5D);
+        double healthDifficultyMultiplier = LibUtils.switchByDifficulty(boss.level(), boss.blockPosition(), 0.66D, 1.0D, 1.5D);
+        double damageDifficultyMultiplier = LibUtils.switchByDifficulty(boss.level(), boss.blockPosition(), 0.66D, 1.0D, 1.0D);
         int playerCount = Math.max(1, Math.min(boss.level().players().size(), MAX_PLAYER_COUNT));
-        apply(boss, difficultyMultiplier, playerCount, org.confluence.mod.common.CommonConfigs.BOSS_ATTRIBUTES_MULTIPLIER_HEALTH.get());
+        apply(boss, healthDifficultyMultiplier, damageDifficultyMultiplier, playerCount, org.confluence.mod.common.CommonConfigs.BOSS_ATTRIBUTES_MULTIPLIER_HEALTH.get());
     }
 
     static void apply(LivingEntity boss, double difficultyMultiplier, int playerCount) {
-        apply(boss, difficultyMultiplier, playerCount, 1.0D);
+        apply(boss, difficultyMultiplier, difficultyMultiplier, playerCount, 1.0D);
     }
 
     static void apply(LivingEntity boss, double difficultyMultiplier, int playerCount, double healthConfigMultiplier) {
+        apply(boss, difficultyMultiplier, difficultyMultiplier, playerCount, healthConfigMultiplier);
+    }
+
+    private static void apply(LivingEntity boss, double healthDifficultyInput, double damageDifficultyMultiplier, int playerCount, double healthConfigMultiplier) {
         // 区块可在玩家加入前恢复；零人不能永久写入“最大生命乘零”的属性修饰符。
         int clampedPlayerCount = Math.max(1, Math.min(playerCount, MAX_PLAYER_COUNT));
-        double healthDifficultyMultiplier = difficultyMultiplier;
+        double healthDifficultyMultiplier = healthDifficultyInput;
         double healthPlayerMultiplier = clampedPlayerCount;
         if (boss instanceof BaseBoss baseBoss) {
-            healthDifficultyMultiplier = baseBoss.getBossHealthDifficultyMultiplier(difficultyMultiplier);
+            healthDifficultyMultiplier = baseBoss.getBossHealthDifficultyMultiplier(healthDifficultyInput);
             healthPlayerMultiplier = baseBoss.getBossHealthPlayerMultiplier(clampedPlayerCount);
         }
 
@@ -72,7 +78,7 @@ public final class BossMultiplayerEnhancement {
 
         AttributeInstance attackDamage = boss.getAttribute(LibAttributes.getAttackDamage());
         if (attackDamage != null && !attackDamage.hasModifier(DAMAGE_MODIFIER_ID)) {
-            attackDamage.addPermanentModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, "Boss difficulty attack damage", difficultyMultiplier - 1.0D, AttributeModifier.Operation.MULTIPLY_BASE));
+            attackDamage.addPermanentModifier(new AttributeModifier(DAMAGE_MODIFIER_ID, "Boss difficulty attack damage", damageDifficultyMultiplier - 1.0D, AttributeModifier.Operation.MULTIPLY_BASE));
         }
     }
 

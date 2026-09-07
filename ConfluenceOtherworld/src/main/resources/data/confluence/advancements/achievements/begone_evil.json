@@ -1,7 +1,7 @@
 {
     "parent": "confluence:achievements/new_world",
     "criteria": {
-        "runtime": {
+        "never": {
             "trigger": "minecraft:impossible"
         }
     },
@@ -22,7 +22,7 @@
     },
     "requirements": [
         [
-            "runtime"
+            "never"
         ]
     ],
     "sends_telemetry_event": false
