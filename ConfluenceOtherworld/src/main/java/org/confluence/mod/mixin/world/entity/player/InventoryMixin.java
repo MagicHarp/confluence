@@ -67,14 +67,14 @@ public abstract class InventoryMixin {
                 cir.setReturnValue(true);
             }
         } else if (!stack.isEmpty() && PrefixUtils.canInit(stack)) {
-            PrefixUtils.initPrefix(player.getRandom(), stack);
+            PrefixUtils.initPrefix(player.getRandom1211(), stack);
         }
     }
 
     @Inject(method = "setItem", at = @At("HEAD"))
     private void initPrefix(int index, ItemStack stack, CallbackInfo ci) {
         if (!stack.isEmpty() && PrefixUtils.canInit(stack)) {
-            PrefixUtils.initPrefix(player.getRandom(), stack);
+            PrefixUtils.initPrefix(player.getRandom1211(), stack);
         }
     }
 

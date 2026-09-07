@@ -307,7 +307,7 @@ public final class PlayerEvents {
     private static void itemFished(ItemFishedEvent event) {
         Player player = event.getEntity();
 
-        if (!TCUtils.hasType(player, AccessoryItems.HIGH$TEST$FISHING$LINE) && player.getRandom().nextFloat() < 0.1429F) {
+        if (!TCUtils.hasType(player, AccessoryItems.HIGH$TEST$FISHING$LINE) && player.getRandom1211().nextFloat() < 0.1429F) {
             player.level().playSound(null, event.getHookEntity().blockPosition(), ModSoundEvents.DECOUPLING.get(), SoundSource.AMBIENT);
             event.setCanceled(true);
             return;
@@ -317,7 +317,7 @@ public final class PlayerEvents {
         var hook = event.getHookEntity();
         if (!hook.getInBlockState().getFluidState().is(FluidTags.WATER)) return;
         int chance = hook.getType() == ModEntities.BLOODY_FISHING_HOOK.get() ? 6 : 12;
-        if (player.getRandom().nextInt(chance) != 0) return;
+        if (player.getRandom1211().nextInt(chance) != 0) return;
         var enemy = MonsterEntities.WANDERING_EYE_FISH.get().spawn(serverPlayer.serverLevel(), hook.blockPosition(), MobSpawnType.EVENT);
         if (enemy == null) return;
         enemy.setTarget(serverPlayer);

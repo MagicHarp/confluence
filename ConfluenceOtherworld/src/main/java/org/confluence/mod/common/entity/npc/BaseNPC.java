@@ -510,7 +510,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
 
     protected final void initName() {
         if (hasCustomName()) return;
-        String name = NPCNames.Loader.getInstance().getRandomName(getType(), getRandom());
+        String name = NPCNames.Loader.getInstance().getRandomName(getType(), getRandom1211());
         if (name != null) setCustomName(Component.literal(name));
     }
 

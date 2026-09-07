@@ -21,7 +21,7 @@ public class IgnitingFlailItem extends BaseFlailItem {
 
     @Override
     public void onFlailHit(Player owner, LivingEntity target, BaseFlailEntity flail) {
-        if (target.getRandom().nextFloat() < igniteChance) {
+        if (target.getRandom1211().nextFloat() < igniteChance) {
             target.setRemainingFireTicks(FIRE_TICKS);
         }
     }

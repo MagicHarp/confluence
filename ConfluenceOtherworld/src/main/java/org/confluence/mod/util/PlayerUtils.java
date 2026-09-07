@@ -364,7 +364,7 @@ public final class PlayerUtils {
             max = CommonConfigs.BOSS_RESPAWN_TIME_MAX.get();
         }
         if (min == max) return min;
-        return player.getRandom().nextInt(Math.min(min, max), Math.max(min, max));
+        return player.getRandom1211().nextInt(Math.min(min, max), Math.max(min, max));
     }
 
     /// @return true表示魔力值不够
@@ -397,10 +397,10 @@ public final class PlayerUtils {
     }
 
     public static boolean shouldSkipConsumeAmmo(Player player) {
-        if (player.hasEffect(ModEffects.AMMO_BOX) && player.getRandom().nextFloat() < 0.2F) {
+        if (player.hasEffect(ModEffects.AMMO_BOX) && player.getRandom1211().nextFloat() < 0.2F) {
             return true;
         }
-        return LibMathUtils.checkChance(ModArmorBonus.getValue(player, ModArmorBonus.SKIP$CONSUME$AMMO$CHANCE), player.getRandom());
+        return LibMathUtils.checkChance(ModArmorBonus.getValue(player, ModArmorBonus.SKIP$CONSUME$AMMO$CHANCE), player.getRandom1211());
     }
 
     public static boolean skipHealIfOnFire(Player player) {

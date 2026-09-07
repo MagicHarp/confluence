@@ -112,9 +112,9 @@ public class CaveBat extends BaseFlyingMonster {
     /// 生成围绕冰蝙蝠身体随机散落的成对雪花粒子。
     private void spawnIceBatParticles() {
         float side = getBbWidth() * 0.2F;
-        float x = Mth.cos(getYRot() * Mth.DEG_TO_RAD + getRandom().nextFloat()) * side;
-        float z = Mth.sin(getYRot() * Mth.DEG_TO_RAD + getRandom().nextFloat()) * side;
-        float y = 0.6F * (getBbHeight() + getRandom().nextFloat() - 0.5F);
+        float x = Mth.cos(getYRot() * Mth.DEG_TO_RAD + getRandom1211().nextFloat()) * side;
+        float z = Mth.sin(getYRot() * Mth.DEG_TO_RAD + getRandom1211().nextFloat()) * side;
+        float y = 0.6F * (getBbHeight() + getRandom1211().nextFloat() - 0.5F);
         level().addParticle(ParticleTypes.SNOWFLAKE, getX() + x, getY() + y, getZ() + z, 0.0, 0.0, 0.0);
         level().addParticle(ParticleTypes.SNOWFLAKE, getX() - x, getY() + y, getZ() - z, 0.0, 0.0, 0.0);
     }

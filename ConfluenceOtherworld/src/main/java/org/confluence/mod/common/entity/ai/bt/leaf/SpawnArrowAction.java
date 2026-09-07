@@ -78,7 +78,7 @@ public final class SpawnArrowAction extends BTNode {
             arrow.discard();
             return BTStatus.FAILURE;
         }
-        shooter.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (shooter.getRandom().nextFloat() * 0.4F + 0.8F));
+        shooter.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (shooter.getRandom1211().nextFloat() * 0.4F + 0.8F));
         done = true;
         return BTStatus.SUCCESS;
     }

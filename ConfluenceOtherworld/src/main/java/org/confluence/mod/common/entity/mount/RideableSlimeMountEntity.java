@@ -80,7 +80,7 @@ public final class RideableSlimeMountEntity extends AbstractMountEntity implemen
             jumpQueued = false;
         }
         if (!level().isClientSide && isInWater()) {
-            vertical = Math.min(JUMP_VELOCITY, vertical + (getRandom().nextFloat() < 0.8F ? 0.2 : 0.1));
+            vertical = Math.min(JUMP_VELOCITY, vertical + (getRandom1211().nextFloat() < 0.8F ? 0.2 : 0.1));
         }
         moveWithVelocity(new Vec3(velocity.x, vertical, velocity.z));
         updateGroundState(player);

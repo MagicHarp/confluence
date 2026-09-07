@@ -24,10 +24,10 @@ public class BeenadeEntity extends BaseGrenadeEntity {
         super.explodeFunction(level);
         if (getOwner() instanceof LivingEntity living) {
             boolean hivePack = TCUtils.hasType(living, TCItems.HIVE$PACK);
-            int amount = Mth.randomBetweenInclusive(living.getRandom(), 15, 20);
-            if (hivePack && living.getRandom().nextFloat() < 0.3333F) amount++;
+            int amount = Mth.randomBetweenInclusive(living.getRandom1211(), 15, 20);
+            if (hivePack && living.getRandom1211().nextFloat() < 0.3333F) amount++;
             for (int i = 0; i < amount; i++) {
-                BeeProjectile bee = new BeeProjectile(level, living, hivePack && living.getRandom().nextBoolean());
+                BeeProjectile bee = new BeeProjectile(level, living, hivePack && living.getRandom1211().nextBoolean());
                 bee.setBaseDamage(2.5F);
                 bee.setPos(position());
                 level.addFreshEntity(bee);

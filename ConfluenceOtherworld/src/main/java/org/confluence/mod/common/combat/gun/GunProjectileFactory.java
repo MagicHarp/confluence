@@ -39,7 +39,7 @@ public final class GunProjectileFactory {
 
     private static List<BaseBulletEntity> createDefaults(ShotContext context, GunProjectilePattern pattern) {
         int count = pattern.type() == GunProjectilePattern.Type.SHOTGUN
-                ? pattern.sampleProjectileCount(context.shooter().getRandom()) : 1;
+                ? pattern.sampleProjectileCount(context.shooter().getRandom1211()) : 1;
         List<BaseBulletEntity> projectiles = new ArrayList<>(count);
         for (int index = 0; index < count; index++)
             projectiles.add(createDefaultProjectile(context, pattern));

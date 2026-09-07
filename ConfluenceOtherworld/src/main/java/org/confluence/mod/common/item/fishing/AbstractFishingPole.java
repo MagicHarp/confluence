@@ -177,14 +177,14 @@ public abstract class AbstractFishingPole extends FishingRodItem {
         if (bait.is(BaitItems.TRUFFLE_WORM)) {
             consume = true;
         } else if (bait.is(BaitItems.GOLD_WORM)) {
-            if (player.getRandom().nextInt(20) == 0) {
+            if (player.getRandom1211().nextInt(20) == 0) {
                 consume = true;
             }
         } else {
             float factor = TCUtils.hasType(player, AccessoryItems.TACKLE$BOX) ? 2.0F : 1.0F;
             IBait iBait = IBait.of(bait);
             float bonus = iBait == null ? 0 : iBait.getBaitBonus() * 100;
-            if (player.getRandom().nextFloat() < 1.0F / (factor + bonus / 6.0F)) {
+            if (player.getRandom1211().nextFloat() < 1.0F / (factor + bonus / 6.0F)) {
                 consume = true;
             }
         }

@@ -226,7 +226,7 @@ public class RainbowSheep extends Animal implements IForgeShearable {
 
         @Override
         public boolean canUse() {
-            if (mob.getRandom().nextInt(mob.isBaby() ? 50 : 1000) != 0) {
+            if (mob.getRandom1211().nextInt(mob.isBaby() ? 50 : 1000) != 0) {
                 return false;
             }
             BlockPos pos = mob.blockPosition();

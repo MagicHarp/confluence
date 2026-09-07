@@ -38,11 +38,11 @@ public class EctoMistHelper {
             ILevelChunkSection iSection = DynamicBiomeUtils.getISection(player.level(), player.blockPosition());
             effectiveTombstones = iSection == null ? 0 : iSection.confluence$getBlockCounts().tomb - iSection.confluence$getBlockCounts().sunflower;
         }
-        if (isGraveyard() && !minecraft.isPaused() && player.getRandom().nextInt(10) == 0) {
+        if (isGraveyard() && !minecraft.isPaused() && player.getRandom1211().nextInt(10) == 0) {
             player.level().addParticle(ModParticleTypes.ECTO_MIST.get(),
-                    player.getX() + (player.getRandom().nextDouble() - 0.5) * 16,
-                    player.getY() + player.getRandom().nextDouble() * 4,
-                    player.getZ() + (player.getRandom().nextDouble() - 0.5) * 16,
+                    player.getX() + (player.getRandom1211().nextDouble() - 0.5) * 16,
+                    player.getY() + player.getRandom1211().nextDouble() * 4,
+                    player.getZ() + (player.getRandom1211().nextDouble() - 0.5) * 16,
                     0, 0, 0);
         }
     }

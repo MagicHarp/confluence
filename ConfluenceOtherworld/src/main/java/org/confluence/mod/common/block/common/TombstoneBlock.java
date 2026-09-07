@@ -64,7 +64,7 @@ public class TombstoneBlock extends HorizontalDirectionalBlock implements Entity
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         if (!level.isClientSide && pos.getY() < OverworldUtils.getSurfaceY() && LibDateUtils.isNight(level)) {
             ILevelChunkSection iSection = DynamicBiomeUtils.getISection(level, pos);
-            RandomSource random = player.getRandom();
+            RandomSource random = player.getRandom1211();
             if (iSection != null && iSection.confluence$isGraveyard() && random.nextBoolean()) {
                 MonsterEntities.GHOST.get().spawn((ServerLevel) level, pos.offset(
                         Mth.randomBetweenInclusive(random, -15, 15),

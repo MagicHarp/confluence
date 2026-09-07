@@ -101,7 +101,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
         }
         entityData.set(DURATION_TICKS, durationTicks);
         int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.WHIP_SWEEP.get(), weapon);
-        entityData.set(SWEEP_LEVEL, enchantmentLevel > 0 && getRandom().nextFloat() < 0.2F ? enchantmentLevel : 0);
+        entityData.set(SWEEP_LEVEL, enchantmentLevel > 0 && getRandom1211().nextFloat() < 0.2F ? enchantmentLevel : 0);
         setDeltaMovement(normalized.scale(0.05));
     }
 
@@ -141,7 +141,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
             return;
         }
         if (tickCount == (int) (durationTicks() * 0.3F)) {
-            owner.playSound(ModSoundEvents.WHIP_ATTACK.get(), 0.6F + getRandom().nextFloat() * 0.2F, 1.0F);
+            owner.playSound(ModSoundEvents.WHIP_ATTACK.get(), 0.6F + getRandom1211().nextFloat() * 0.2F, 1.0F);
         }
         if (!level().isClientSide) {
             hitAlongCurrentCurve(owner, definition);

@@ -29,7 +29,7 @@ public class CrispyHoneyBlock extends Block {
         super.playerDestroy(level, player, pos, state, blockEntity, tool);
         if (player instanceof ServerPlayer serverPlayer &&
                 ModSecretSeeds.FOR_THE_WORTHY.match(serverPlayer.server) &&
-                player.getRandom().nextBoolean()
+                player.getRandom1211().nextBoolean()
         ) {
             level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
         }

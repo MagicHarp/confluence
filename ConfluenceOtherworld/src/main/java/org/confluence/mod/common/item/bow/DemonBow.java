@@ -22,7 +22,7 @@ public class DemonBow extends BaseTerraBowItem {
             if (!fullPull) return;
             var projectile = ModEntities.LIGHTS_BANE.get().create(owner.level()).addAttackDamage(7.0F);
             projectile.setOwner(owner);
-            projectile.setPos(target.position().add(target.getRandom().nextFloat() * 0.2F, target.getEyeHeight() * 0.5F, target.getRandom().nextFloat() * 0.2F));
+            projectile.setPos(target.position().add(target.getRandom1211().nextFloat() * 0.2F, target.getEyeHeight() * 0.5F, target.getRandom1211().nextFloat() * 0.2F));
             owner.level().addFreshEntity(projectile);
         });
     }

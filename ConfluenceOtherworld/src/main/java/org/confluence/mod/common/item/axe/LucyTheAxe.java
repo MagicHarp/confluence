@@ -55,7 +55,7 @@ public class LucyTheAxe extends BaseAxeItem {
     }
 
     public static void onIdle(ServerPlayer player, long gameTime) {
-        if (gameTime % 1200 == 0 && player.getRandom().nextInt(5) == 0) {
+        if (gameTime % 1200 == 0 && player.getRandom1211().nextInt(5) == 0) {
             NonNullList<ItemStack> items = player.getInventory().items;
             for (int i = 0; i < items.size(); i++) {
                 if (Inventory.isHotbarSlot(i) && LucyTheAxeDialogPacketS2C.checkAndBroadcast(player, items.get(i), LucyTheAxeDialogCategory.IDLE)) {

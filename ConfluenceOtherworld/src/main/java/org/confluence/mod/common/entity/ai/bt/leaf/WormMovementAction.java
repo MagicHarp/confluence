@@ -106,8 +106,8 @@ public final class WormMovementAction extends BTNode {
 
     private Vec3 chooseWanderTarget() {
         Vec3 forward = worm.getLookAngle().normalize().scale(10.0);
-        double angle = worm.getRandom().nextDouble() * Mth.TWO_PI;
-        double radius = 8.0 + worm.getRandom().nextDouble() * 12.0;
+        double angle = worm.getRandom1211().nextDouble() * Mth.TWO_PI;
+        double radius = 8.0 + worm.getRandom1211().nextDouble() * 12.0;
         double x = worm.getX() + forward.x + Math.cos(angle) * radius;
         double z = worm.getZ() + forward.z + Math.sin(angle) * radius;
         double baseY = switch (profile.wanderHeightMode()) {
@@ -118,7 +118,7 @@ public final class WormMovementAction extends BTNode {
                     ? worm.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mth.floor(x), Mth.floor(z))
                     : worm.getY();
         } + profile.wanderHeightOffset();
-        double y = Math.max(worm.level().getMinBuildHeight() + 2.0, baseY + worm.getRandom().nextInt(9) - 3.0);
+        double y = Math.max(worm.level().getMinBuildHeight() + 2.0, baseY + worm.getRandom1211().nextInt(9) - 3.0);
         return new Vec3(x, y, z);
     }
 

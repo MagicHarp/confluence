@@ -37,7 +37,6 @@ import org.confluence.mod.common.init.entity.ModEntities;
 import org.confluence.mod.common.worldgen.secret_seed.ForTheWorthy;
 import org.confluence.mod.util.TrapDamageHelper;
 import org.jetbrains.annotations.Nullable;
-import org.mesdag.portlib.wrapper.common.extensions.IPortProjectileExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ import java.util.function.Predicate;
 /// 机关、特殊种子及子类都可以在生成后调整巨石参数，因此这些参数属于实体实例的玩法状态，
 /// 不能只依赖构造器默认值。区块重载时还必须延续发射者、寿命和逐目标命中冷却；当前版本格式若
 /// 损坏则直接使实体失效，避免用部分默认值继续造成伤害或触发移除效果。
-public class BoulderEntity extends Projectile implements IPortProjectileExtension {
+public class BoulderEntity extends Projectile {
     public static final float SEARCH_RANGE = 31.5F;
 
     private static final EntityDataAccessor<BlockState> DATA_BLOCK_STATE = SynchedEntityData.defineId(BoulderEntity.class, EntityDataSerializers.BLOCK_STATE);

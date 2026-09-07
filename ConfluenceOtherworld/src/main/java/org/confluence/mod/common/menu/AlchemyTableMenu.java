@@ -173,7 +173,7 @@ public class AlchemyTableMenu extends AbstractContainerMenu {
         @Override
         public void onTake(Player pPlayer, ItemStack pStack) {
             if (recipe != null) {
-                RandomSource random = pPlayer.getRandom();
+                RandomSource random = pPlayer.getRandom1211();
                 SimpleContainer materials = input.getMaterials();
                 int size = materials.getContainerSize();
                 ArrayList<Tuple<Integer, ItemStack>> itemStacks = new ArrayList<>();

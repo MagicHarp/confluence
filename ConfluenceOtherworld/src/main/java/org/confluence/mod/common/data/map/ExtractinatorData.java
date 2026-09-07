@@ -44,7 +44,7 @@ public record ExtractinatorData(List<Pool> pools) {
                 : new ItemParticleOption(ParticleTypes.ITEM, itemStack);
         serverLevel.sendParticles(options, pos.getX() + 0.5F, pos.getY() + 0.75F, pos.getZ() + 0.5F, 100, 0F, 0.0625F, 0F, 0.25F);
 
-        RandomSource random = player.getRandom();
+        RandomSource random = player.getRandom1211();
         for (Pool pool : data.pools) {
             for (ItemStack item : pool.getRandomItems(random)) {
                 LibEntityUtils.createItemEntity(item, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, level, 40);

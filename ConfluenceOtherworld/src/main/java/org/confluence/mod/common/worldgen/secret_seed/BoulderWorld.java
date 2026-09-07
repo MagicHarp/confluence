@@ -35,7 +35,7 @@ public class BoulderWorld extends SecretSeed {
     }
 
     public static void createBoulderWhenBlockDestroy(ServerPlayer player, BlockState state, BlockPos pos) {
-        if (ModSecretSeeds.BOULDER_WORLD.match(player.server) && LibMathUtils.checkChance(0.01F, player.getRandom())) {
+        if (ModSecretSeeds.BOULDER_WORLD.match(player.server) && LibMathUtils.checkChance(0.01F, player.getRandom1211())) {
             if (state.getCollisionShape(player.level(), pos) == Shapes.block()) {
                 BoulderEntity entity = new BoulderEntity(player.level(), pos.getCenter(), state);
                 entity.targetTo(player);

@@ -168,19 +168,19 @@ public class BaseTerraRepeaterItem extends CrossbowItem {
         } else {
             processProjectileCount = 0;
         }
-        return Math.round(this.baseBurstCount.getCount(shooter.getRandom())) + processProjectileCount;
+        return Math.round(this.baseBurstCount.getCount(shooter.getRandom1211())) + processProjectileCount;
     }
 
     public int getConcurrentCount(LivingEntity shooter, InteractionHand hand) {
-        return Math.round(this.baseConcurrentCount.getCount(shooter.getRandom()));
+        return Math.round(this.baseConcurrentCount.getCount(shooter.getRandom1211()));
     }
 
     public float getConcurrentAngle(LivingEntity shooter, InteractionHand hand) {
-        return this.baseConcurrentAngle.getCount(shooter.getRandom());
+        return this.baseConcurrentAngle.getCount(shooter.getRandom1211());
     }
 
     public float getConcurrentInterval(LivingEntity shooter, InteractionHand hand) {
-        return this.baseConcurrentInterval.getCount(shooter.getRandom());
+        return this.baseConcurrentInterval.getCount(shooter.getRandom1211());
     }
 
     public float getDamage(LivingEntity shooter, InteractionHand hand) {
@@ -304,7 +304,7 @@ public class BaseTerraRepeaterItem extends CrossbowItem {
         float angleIncrement = projectileItemsCount == 1 ? 0.0F : 2.0F * processProjectileSpread / (float) (projectileItemsCount - 1);
         float initialAngleOffset = (float) ((projectileItemsCount - 1) % 2) * angleIncrement / 2.0F;
 
-        int signFactor = shooter.getRandom().nextBoolean() ? 1 : -1;
+        int signFactor = shooter.getRandom1211().nextBoolean() ? 1 : -1;
         for (int itemstackIndex = 0; itemstackIndex < projectileItemsCount; itemstackIndex++) {
             ItemStack itemstack = projectileItems.get(itemstackIndex);
             if (itemstack.isEmpty()) {
@@ -315,7 +315,7 @@ public class BaseTerraRepeaterItem extends CrossbowItem {
             int concurrentCount = getConcurrentCount(shooter, hand);
 
             int multiShootCount = !modifyArrowBuilder.canMultiShoot.test(itemstack) ? 1 : concurrentCount;
-            int signFactor1 = shooter.getRandom().nextBoolean() ? 1 : -1;
+            int signFactor1 = shooter.getRandom1211().nextBoolean() ? 1 : -1;
             for (int projectileIndex = 0; projectileIndex < concurrentCount; projectileIndex++) {
                 int i1 = (projectileIndex % 2 == 0 ? projectileIndex - 1 : -projectileIndex) * signFactor1;
 
@@ -365,7 +365,7 @@ public class BaseTerraRepeaterItem extends CrossbowItem {
         }
 
         projectile.shoot(vector3f.x(), vector3f.y(), vector3f.z(), velocity, inaccuracy);
-        float f = getShotPitch(shooter.getRandom(), index);
+        float f = getShotPitch(shooter.getRandom1211(), index);
         shooter.level().playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_SHOOT, shooter.getSoundSource(), 1.0F, f);
     }
 

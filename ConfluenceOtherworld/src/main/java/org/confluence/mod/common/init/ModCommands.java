@@ -230,7 +230,7 @@ public final class ModCommands {
                             ServerPlayer player = source.getPlayer();
                             if (cannotBeReforged(source, player)) return 0;
                             ItemStack itemStack = player.getMainHandItem();
-                            PrefixComponent prefix = PrefixUtils.random(player.getRandom(), itemStack);
+                            PrefixComponent prefix = PrefixUtils.random(player.getRandom1211(), itemStack);
                             if (unknownPrefixType(source, prefix)) return 0;
                             source.sendSuccess(() -> Component.translatable("commands.confluence.reforge.success", ModRarity.withColor(itemStack, prefix.getName())), false);
                             return 1;
@@ -240,7 +240,7 @@ public final class ModCommands {
                             ServerPlayer player = source.getPlayer();
                             if (cannotBeReforged(source, player)) return 0;
                             ItemStack itemStack = player.getMainHandItem();
-                            PrefixComponent prefix = PrefixUtils.best(player.getRandom(), itemStack);
+                            PrefixComponent prefix = PrefixUtils.best(player.getRandom1211(), itemStack);
                             if (unknownPrefixType(source, prefix)) return 0;
                             source.sendSuccess(() -> Component.translatable("commands.confluence.reforge.success", ModRarity.withColor(itemStack, prefix.getName())), false);
                             return 1;

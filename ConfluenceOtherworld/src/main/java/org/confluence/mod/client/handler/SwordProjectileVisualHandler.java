@@ -48,9 +48,9 @@ public final class SwordProjectileVisualHandler implements SwordProjectileVisual
             effect.particle().ifPresent(particle -> {
                 for (int index = 0; index < Math.min(effect.count(), 64); index++) {
                     projectile.level().addParticle(particle,
-                            projectile.getX() + projectile.getRandom().nextGaussian() * effect.spread(),
-                            projectile.getY() + projectile.getRandom().nextGaussian() * effect.spread(),
-                            projectile.getZ() + projectile.getRandom().nextGaussian() * effect.spread(),
+                            projectile.getX() + projectile.getRandom1211().nextGaussian() * effect.spread(),
+                            projectile.getY() + projectile.getRandom1211().nextGaussian() * effect.spread(),
+                            projectile.getZ() + projectile.getRandom1211().nextGaussian() * effect.spread(),
                             motion.x * effect.velocityScale(), motion.y * effect.velocityScale(), motion.z * effect.velocityScale());
                 }
             });

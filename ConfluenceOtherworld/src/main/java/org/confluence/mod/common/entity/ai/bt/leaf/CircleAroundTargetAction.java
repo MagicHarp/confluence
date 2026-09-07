@@ -28,8 +28,8 @@ public class CircleAroundTargetAction extends BTNode {
     public void start() {
         tick = 0;
         LivingEntity target = mob.getTarget();
-        angle = target == null ? mob.getRandom().nextDouble() * Math.PI * 2 : Math.atan2(mob.getZ() - target.getZ(), mob.getX() - target.getX());
-        direction = mob.getRandom().nextBoolean() ? 1.0 : -1.0;
+        angle = target == null ? mob.getRandom1211().nextDouble() * Math.PI * 2 : Math.atan2(mob.getZ() - target.getZ(), mob.getX() - target.getX());
+        direction = mob.getRandom1211().nextBoolean() ? 1.0 : -1.0;
     }
 
     @Override

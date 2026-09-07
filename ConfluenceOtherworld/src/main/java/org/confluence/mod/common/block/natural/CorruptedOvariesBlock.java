@@ -34,7 +34,7 @@ public class CorruptedOvariesBlock extends Block {
                 double d1 = Math.abs(entity.getZ() - entity.zOld);
                 if (d0 >= 0.003F || d1 >= 0.003F) {
                     entity.hurt(level.damageSources().magic(), 3.0F);
-                    if (living.getRandom().nextFloat() < 0.15F) {
+                    if (living.getRandom1211().nextFloat() < 0.15F) {
                         living.addEffect(new MobEffectInstance(ModEffects.DEMONIC_THOUGHTS.get(), 200));
                     }
                 }

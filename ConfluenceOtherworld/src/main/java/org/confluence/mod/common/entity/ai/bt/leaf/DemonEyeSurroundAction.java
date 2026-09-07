@@ -39,8 +39,8 @@ public final class DemonEyeSurroundAction extends BTNode {
 
         Vec3 horizontalDirection = mob.position().with(Direction.Axis.Y, target.getY()).vectorTo(target.position());
         float yaw = (float) Math.toDegrees(Mth.atan2(-horizontalDirection.x, horizontalDirection.z));
-        if (mob.getRandom().nextInt(3) == 0) {
-            yaw += mob.getRandom().nextBoolean() ? 20.0F : -20.0F;
+        if (mob.getRandom1211().nextInt(3) == 0) {
+            yaw += mob.getRandom1211().nextBoolean() ? 20.0F : -20.0F;
         }
         Vec3 direction = Vec3.directionFromRotation(0.0F, yaw);
         targetPos = direction.normalize().scale(4.0).with(Direction.Axis.Y, offsetY()).add(target.position());

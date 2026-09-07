@@ -98,7 +98,7 @@ public interface IFishingHook extends ILibExtraSyncedData<FishingHook> {
             boolean catchableQuest = AnglerQuestLoader.getInstance().find(questedFish)
                     .map(entry -> entry.canBeCaught(self))
                     .orElse(false);
-            if (catchableQuest && LibMathUtils.checkChance(0.25F, self.getRandom())) {
+            if (catchableQuest && LibMathUtils.checkChance(0.25F, self.getRandom1211())) {
                 return ObjectArrayList.of(questedFish.getDefaultInstance());
             }
 

@@ -24,10 +24,10 @@ public class BeeGunItem extends ManaGunItem {
 
     public List<Projectile> createProjectiles(ServerPlayer player) {
         boolean hivePack = TCUtils.hasType(player, TCItems.HIVE$PACK);
-        int count = 1 + player.getRandom().nextInt(hivePack ? 4 : 3);
+        int count = 1 + player.getRandom1211().nextInt(hivePack ? 4 : 3);
         List<Projectile> projectiles = new ArrayList<>(count);
         for (int index = 0; index < count; index++) {
-            projectiles.add(new BeeGunBullet(player.serverLevel(), player, hivePack && player.getRandom().nextBoolean()));
+            projectiles.add(new BeeGunBullet(player.serverLevel(), player, hivePack && player.getRandom1211().nextBoolean()));
         }
         notTheBees(player);
         return projectiles;

@@ -428,7 +428,7 @@ public final class ModArmorBonus {
             tag.putLong("confluence:last_flower_petal_attack", gameTime);
             FlowerPetalProjectile projectile = new FlowerPetalProjectile(player);
             Vec3 position = victim.position().add(0, victim.getBbHeight() * 0.5, 0);
-            RandomSource random = player.getRandom();
+            RandomSource random = player.getRandom1211();
             double y = (random.nextFloat() - 0.5) * 10;
             Vec3 offset = position.add(
                     (random.nextFloat() - 0.5) * 10,

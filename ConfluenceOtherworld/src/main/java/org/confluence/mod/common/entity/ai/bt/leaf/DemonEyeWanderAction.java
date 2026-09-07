@@ -29,8 +29,8 @@ public final class DemonEyeWanderAction extends BTNode {
         mob.hasImpulse = true;
         if (Double.isNaN(anchorY)) anchorY = mob.getY();
 
-        double x = mob.getRandom().nextDouble() * 10.0 - 5.0;
-        double z = mob.getRandom().nextDouble() * 10.0 - 5.0;
+        double x = mob.getRandom1211().nextDouble() * 10.0 - 5.0;
+        double z = mob.getRandom1211().nextDouble() * 10.0 - 5.0;
         Vec3 horizontal = new Vec3(x, 0.0, z);
         if (horizontal.lengthSqr() < 1.0E-8) {
             horizontal = new Vec3(1.0, 0.0, 0.0);

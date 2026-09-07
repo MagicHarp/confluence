@@ -41,7 +41,7 @@ public final class MaintainRangedDistanceAction extends BTNode {
     public void start() {
         ticks = 0;
         // 一轮行为内方向保持稳定，避免每 tick 随机切换造成左右抖动。
-        orbitDirection = mob.getRandom().nextBoolean() ? 1.0 : -1.0;
+        orbitDirection = mob.getRandom1211().nextBoolean() ? 1.0 : -1.0;
     }
 
     @Override

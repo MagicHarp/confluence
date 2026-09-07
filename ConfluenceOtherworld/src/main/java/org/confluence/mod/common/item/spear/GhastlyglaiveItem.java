@@ -65,10 +65,10 @@ public class GhastlyglaiveItem extends AbstractSpearItem {
         LivingEntity nearestEnemy = PortListExtension.getFirst(enemies);
 
         // 在最近敌人周围圆上随机生成：x²+z²=SPAWN_RADIUS²，y 随机偏移 [-2, 2]
-        double angle = owner.getRandom().nextDouble() * Math.PI * 2;
+        double angle = owner.getRandom1211().nextDouble() * Math.PI * 2;
         double spawnX = nearestEnemy.getX() + SPAWN_RADIUS * Math.cos(angle);
         double spawnZ = nearestEnemy.getZ() + SPAWN_RADIUS * Math.sin(angle);
-        double spawnY = nearestEnemy.getY() + (owner.getRandom().nextDouble() * 4.0 - 2.0);
+        double spawnY = nearestEnemy.getY() + (owner.getRandom1211().nextDouble() * 4.0 - 2.0);
 
         // 发射方向：水平指向锁定敌人
         Vec3 dir = new Vec3(

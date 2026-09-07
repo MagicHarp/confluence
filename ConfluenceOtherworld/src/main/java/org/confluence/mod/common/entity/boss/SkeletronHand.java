@@ -78,7 +78,7 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
         this.entityData.set(HAND_INDEX, index);
         this.slapInterval = (master.isExpert()
                 ? EXPERT_SLAP_INTERVAL : CLASSIC_SLAP_INTERVAL)
-                + master.getRandom().nextInt(RANDOM_INTERVAL);
+                + master.getRandom1211().nextInt(RANDOM_INTERVAL);
         this.slapSpeed = master.isExpert()
                 ? EXPERT_SLAP_SPEED : CLASSIC_SLAP_SPEED;
         this.slapTick = slapInterval;

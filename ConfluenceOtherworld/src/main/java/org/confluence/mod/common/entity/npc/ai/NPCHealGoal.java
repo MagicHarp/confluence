@@ -80,7 +80,7 @@ public class NPCHealGoal extends Goal {
     /// 每次治疗随机准备 10 到 19 tick，与 Wiki 的治疗攻击准备范围一致。
     @Override
     public void start() {
-        prepareTicks = 10 + npc.getRandom().nextInt(10);
+        prepareTicks = 10 + npc.getRandom1211().nextInt(10);
     }
 
     /// 接近盟友并投出追踪治疗弹；治疗自己时直接结算，避免弹体无法命中所有者。
@@ -102,7 +102,7 @@ public class NPCHealGoal extends Goal {
             npc.getNavigation().stop();
         }
         if (healTarget != npc && npc.distanceToSqr(healTarget) > attackRange * attackRange) {
-            prepareTicks = 10 + npc.getRandom().nextInt(10);
+            prepareTicks = 10 + npc.getRandom1211().nextInt(10);
             return;
         }
         if (--prepareTicks > 0) return;
@@ -119,7 +119,7 @@ public class NPCHealGoal extends Goal {
             npc.level().addFreshEntity(syringe);
         }
         npc.swing(InteractionHand.MAIN_HAND, true);
-        cooldown = 5 + npc.getRandom().nextInt(10);
+        cooldown = 5 + npc.getRandom1211().nextInt(10);
         healTarget = null;
     }
 

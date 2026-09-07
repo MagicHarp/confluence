@@ -51,7 +51,7 @@ public class StarSteelSword extends BaseSwordItem {
             boolean lastAttackCrit = tag.getBoolean("confluence:last_attack_crit");
             tag.remove("confluence:last_attack_crit");
             if (lastAttackCrit) return;
-            if (LibMathUtils.checkChance(DROP_STAR_CHANCE, victim.getRandom())) {
+            if (LibMathUtils.checkChance(DROP_STAR_CHANCE, victim.getRandom1211())) {
                 Vec3 delta = attacker.getLookAngle().add(0, 0.2, 0).scale(0.3);
                 ItemEntity itemEntity = new ItemEntity(
                         attacker.level(),

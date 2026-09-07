@@ -72,7 +72,7 @@ public abstract class SpearProjectile extends AbstractHurtingProjectile implemen
     public SpearProjectile(EntityType<? extends SpearProjectile> entityType, Level pLevel) {
         super(entityType, pLevel);
         if (!level().isClientSide()) {
-            this.direction = new Vec3(this.getRandom().nextFloat() - 0.5f, this.getRandom().nextFloat() - 0.5f, this.getRandom().nextFloat() - 0.5f);
+            this.direction = new Vec3(this.getRandom1211().nextFloat() - 0.5f, this.getRandom1211().nextFloat() - 0.5f, this.getRandom1211().nextFloat() - 0.5f);
             this.entityData.set(DATA_DIRECTION, direction.toVector3f());
         }
     }

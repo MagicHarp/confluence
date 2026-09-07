@@ -42,7 +42,7 @@ public final class JumpingMonsterCycleAction extends BTNode {
         jumped = false;
         elapsedTicks = 0;
 
-        double angle = mob.getRandom().nextDouble() * Math.PI * 2.0;
+        double angle = mob.getRandom1211().nextDouble() * Math.PI * 2.0;
         randomLookPosition = mob.getEyePosition().add(Math.cos(angle), 0.0, Math.sin(angle));
     }
 

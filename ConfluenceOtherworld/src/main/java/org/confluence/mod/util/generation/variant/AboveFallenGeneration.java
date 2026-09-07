@@ -53,9 +53,9 @@ public record AboveFallenGeneration(
         float actualInaccuracy;
         Vec3 firePos, projVel;
         Vec3 fireLocOffset = new Vec3(
-                owner.getRandom().nextDouble() * offsetH * 2 - offsetH,
+                owner.getRandom1211().nextDouble() * offsetH * 2 - offsetH,
                 offsetV,
-                owner.getRandom().nextDouble() * offsetH * 2 - offsetH
+                owner.getRandom1211().nextDouble() * offsetH * 2 - offsetH
         );
 
         if (target != null) {

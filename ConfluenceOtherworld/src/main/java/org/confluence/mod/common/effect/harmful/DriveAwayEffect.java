@@ -45,7 +45,7 @@ public class DriveAwayEffect extends PortMobEffect {
             return;
         MobEffectInstance instance = living.getEffect(this);
         if (instance == null) return;
-        double angle = living.getRandom().nextDouble() * Math.PI * 2.0;
+        double angle = living.getRandom1211().nextDouble() * Math.PI * 2.0;
         Vec3 center = living.position().add(Math.cos(angle), 0.0, Math.sin(angle));
         DriveAwayController.start(mob, center, baseSpeed * (amplifier + 1.0), instance.getDuration());
     }

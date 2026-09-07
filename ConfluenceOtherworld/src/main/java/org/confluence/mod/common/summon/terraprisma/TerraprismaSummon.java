@@ -135,12 +135,12 @@ public final class TerraprismaSummon extends SummonInstance {
 
     void finishSlashAnimation() {
         boolean validTarget = hasValidTarget();
-        if (validTarget && owner().getRandom().nextBoolean() || !validTarget && owner().getRandom().nextFloat() < 0.1F) {
-            int cycles = 2 + owner().getRandom().nextInt(4);
+        if (validTarget && owner().getRandom1211().nextBoolean() || !validTarget && owner().getRandom1211().nextFloat() < 0.1F) {
+            int cycles = 2 + owner().getRandom1211().nextInt(4);
             animationState = SummonAnimation.SPIN_X;
             animationTicks = 0;
             animationDuration = 12 * cycles;
-            animationDegrees = (owner().getRandom().nextBoolean() ? 1.0F : -1.0F) * 360.0F * cycles;
+            animationDegrees = (owner().getRandom1211().nextBoolean() ? 1.0F : -1.0F) * 360.0F * cycles;
             scaleY = 2.0F;
             scaleYTicks = 1;
         }
@@ -155,7 +155,7 @@ public final class TerraprismaSummon extends SummonInstance {
 
     void finishRotateAnimation() {
         boolean validTarget = hasValidTarget();
-        if (validTarget && owner().getRandom().nextBoolean() || !validTarget && owner().getRandom().nextFloat() < 0.1F) {
+        if (validTarget && owner().getRandom1211().nextBoolean() || !validTarget && owner().getRandom1211().nextFloat() < 0.1F) {
             animationState = SummonAnimation.SPIN_Y;
             animationTicks = 0;
             animationDuration = 30;

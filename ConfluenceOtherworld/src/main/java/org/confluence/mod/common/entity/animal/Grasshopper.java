@@ -233,14 +233,14 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
             double horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
             if (horizontalDistance > 1.0E-5) {
                 double impulse = Math.min(distanceSquared * 0.4, 0.5)
-                        + grasshopper.getRandom().nextDouble() * 0.5;
+                        + grasshopper.getRandom1211().nextDouble() * 0.5;
                 grasshopper.addDeltaMovement(new net.minecraft.world.phys.Vec3(deltaX / horizontalDistance * impulse, 0.0, deltaZ / horizontalDistance * impulse));
             }
             grasshopper.setJumping(true);
         }
 
         private int randomDelay() {
-            return grasshopper.getRandom().nextInt(10) + 5;
+            return grasshopper.getRandom1211().nextInt(10) + 5;
         }
     }
 }

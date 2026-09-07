@@ -46,8 +46,8 @@ public final class LookForwardWanderFlyAction extends BTNode {
         Vec3 forwardTarget = mob.position().add(forwardOffset);
         targetPos = AirRandomPos.getPosTowards(mob, 10, 5, 1, forwardTarget, Mth.PI * 0.1F);
         if (targetPos == null) {
-            double x = mob.getRandom().nextDouble() * 10.0 - 5.0;
-            double z = mob.getRandom().nextDouble() * 10.0 - 5.0;
+            double x = mob.getRandom1211().nextDouble() * 10.0 - 5.0;
+            double z = mob.getRandom1211().nextDouble() * 10.0 - 5.0;
             Vec3 horizontal = new Vec3(x, 0.0, z);
             if (horizontal.lengthSqr() < 1.0E-8) horizontal = new Vec3(1.0, 0.0, 0.0);
             targetPos = horizontal.normalize().scale(15.0).add(mob.position()).with(Direction.Axis.Y, anchorY + getOffsetY() + 5.0);

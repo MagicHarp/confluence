@@ -58,7 +58,7 @@ public enum BoulderRainGameEvent implements GameEvent {
         BlockState blockState = FunctionalBlocks.NORMAL_BOULDER.get().defaultBlockState();
         for (ServerLevel level : availableLevels) {
             for (ServerPlayer player : level.players()) {
-                if (player.getRandom().nextInt(10) == 0) {
+                if (player.getRandom1211().nextInt(10) == 0) {
                     Vec3 position = player.position();
                     double x = Mth.nextDouble(level.random, position.x - 32, position.x + 32);
                     double z = Mth.nextDouble(level.random, position.z - 32, position.z + 32);

@@ -334,7 +334,7 @@ public class JellyFish extends BaseAquaticMonster {
                         ? BASE_PULSE_COOLDOWN * 3
                         : BASE_PULSE_COOLDOWN;
                 pulseCooldown = BASE_PULSE_COOLDOWN
-                        + mob.getRandom().nextInt(randomRange);
+                        + mob.getRandom1211().nextInt(randomRange);
                 return;
             }
 

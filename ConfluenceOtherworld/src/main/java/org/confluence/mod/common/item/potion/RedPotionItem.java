@@ -69,14 +69,14 @@ public class RedPotionItem extends AbstractPotionItem {
         if (!(level instanceof ServerLevel serverLevel)) return;
         if (ModSecretSeeds.FOR_THE_WORTHY.match(serverLevel)) {
             for (int i = 0; i < 3; i++) {
-                living.addEffect(new MobEffectInstance(Util.getRandom(beneficial, living.getRandom()).get(), 30 * 60 * 20));
+                living.addEffect(new MobEffectInstance(Util.getRandom(beneficial, living.getRandom1211()).get(), 30 * 60 * 20));
             }
         } else {
             int duration = LibUtils.switchByDifficulty(level, living.blockPosition(), 60, 120, 180) * 60 * 20;
-            if (living.getRandom().nextFloat() < 1.0F / 11.0F) {
+            if (living.getRandom1211().nextFloat() < 1.0F / 11.0F) {
                 living.setRemainingFireTicks(duration);
             } else {
-                living.addEffect(new MobEffectInstance(Util.getRandom(harmful, living.getRandom()).get(), duration));
+                living.addEffect(new MobEffectInstance(Util.getRandom(harmful, living.getRandom1211()).get(), duration));
             }
         }
     }

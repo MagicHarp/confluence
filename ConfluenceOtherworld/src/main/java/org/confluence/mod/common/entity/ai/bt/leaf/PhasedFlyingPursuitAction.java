@@ -95,7 +95,7 @@ public final class PhasedFlyingPursuitAction extends BTNode {
 
     public void resetCycle() {
         remainingTicks = cycleTicks;
-        orbitSign = mob.getRandom().nextBoolean() ? 1.0 : -1.0;
+        orbitSign = mob.getRandom1211().nextBoolean() ? 1.0 : -1.0;
     }
 
     /// 用切向速度形成环绕，并根据半径和高度误差缓慢拉回目标附近。

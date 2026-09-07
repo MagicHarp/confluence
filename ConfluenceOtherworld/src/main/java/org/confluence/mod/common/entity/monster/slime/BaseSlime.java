@@ -293,7 +293,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
             }
 
             if (slime.isInWater() || slime.isInLava()) {
-                if (slime.getRandom().nextFloat() < 0.8F) {
+                if (slime.getRandom1211().nextFloat() < 0.8F) {
                     slime.getJumpControl().jump();
                 }
                 control.setWantedMovement(1.2);
@@ -317,8 +317,8 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
 
             if (!slime.isPassenger() && (slime.onGround() || slime.hasEffect(net.minecraft.world.effect.MobEffects.LEVITATION))) {
                 if (--directionChangeDelay <= 0) {
-                    directionChangeDelay = 40 + slime.getRandom().nextInt(60);
-                    idleDirection = slime.getRandom().nextInt(360);
+                    directionChangeDelay = 40 + slime.getRandom1211().nextInt(60);
+                    idleDirection = slime.getRandom1211().nextInt(360);
                 }
                 control.setDirection(idleDirection, false);
                 control.setWantedMovement(1.0);
@@ -381,7 +381,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
                     jumpDelay /= 3;
                 }
                 slime.getJumpControl().jump();
-                slime.playSound(SoundEvents.SLIME_JUMP, slime.getSoundVolume(), ((slime.getRandom().nextFloat() - slime.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+                slime.playSound(SoundEvents.SLIME_JUMP, slime.getSoundVolume(), ((slime.getRandom1211().nextFloat() - slime.getRandom1211().nextFloat()) * 0.2F + 1.0F) * 0.8F);
                 return;
             }
 

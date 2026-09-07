@@ -139,7 +139,7 @@ public class AltarBlock extends BaseEntityBlock {
             if (tool.is(HammerItems.PWNHAMMER.get())) {
                 AchievementUtils.awardAchievement(serverPlayer, "begone_evil");
             }
-            RandomSource random = player.getRandom();
+            RandomSource random = player.getRandom1211();
             int wraithAmount = random.nextInt(2) + 1;
             for (int i = 0; i < wraithAmount; i++) {
                 MonsterEntities.WRAITH.get().spawn(serverLevel, pos.offset(

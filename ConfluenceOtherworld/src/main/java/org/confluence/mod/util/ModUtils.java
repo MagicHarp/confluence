@@ -184,7 +184,7 @@ public final class ModUtils {
         double amount = getLivingBaseMoneyDrops(living, level);
 
         if (living.hasEffect(ModEffects.MIDAS.get())) {
-            amount *= Mth.nextDouble(living.getRandom(), 1.1, 1.49);
+            amount *= Mth.nextDouble(living.getRandom1211(), 1.1, 1.49);
         }
         if (IMinecraftServer.isHardmode(level.getServer())) {
             amount *= 1.6;
@@ -211,11 +211,11 @@ public final class ModUtils {
     public static void applyBrainOfCthulhuDebuff(ServerLevel level, @Nullable Entity attacker, LivingEntity living) {
         if (attacker != null && LibUtils.isAtLeastExpert(level, living.blockPosition())) {
             EntityType<?> type = attacker.getType();
-            if (type == MonsterEntities.VISUAL_NEURON.get() || (type == BossEntities.BRAIN_OF_CTHULHU.get() && attacker.getRandom().nextFloat() < 0.3333F)) {
+            if (type == MonsterEntities.VISUAL_NEURON.get() || (type == BossEntities.BRAIN_OF_CTHULHU.get() && attacker.getRandom1211().nextFloat() < 0.3333F)) {
                 boolean master = LibUtils.isMaster(level, living.blockPosition());
                 MobEffect debuff;
                 float min;
-                int i = attacker.getRandom().nextInt(81);
+                int i = attacker.getRandom1211().nextInt(81);
                 if (i < 11) {
                     debuff = MobEffects.POISON;
                     min = master ? 6.56F : 5.25F;
@@ -244,13 +244,13 @@ public final class ModUtils {
                     debuff = ModEffects.BROKEN_ARMOR.get();
                     min = master ? 12.19F : 9.75F;
                 }
-                living.addEffect(new MobEffectInstance(debuff, (int) ((attacker.getRandom().nextFloat() * min + min) * 20)));
+                living.addEffect(new MobEffectInstance(debuff, (int) ((attacker.getRandom1211().nextFloat() * min + min) * 20)));
             }
         }
     }
 
     public static void applyCursedSkullDebuff(@Nullable Entity attacker, LivingEntity living) {
-        if (attacker != null && attacker.getType() == MonsterEntities.CURSED_SKULL.get() && attacker.getRandom().nextFloat() < 0.33F) {
+        if (attacker != null && attacker.getType() == MonsterEntities.CURSED_SKULL.get() && attacker.getRandom1211().nextFloat() < 0.33F) {
             living.addEffect(new MobEffectInstance(ModEffects.CURSED.get(), 80));
         }
     }

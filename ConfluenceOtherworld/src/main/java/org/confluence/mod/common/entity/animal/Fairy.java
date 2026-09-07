@@ -201,7 +201,7 @@ public class Fairy extends BaseFlyingCritter implements VariantHolder<Fairy.Vari
                 return;
             }
 
-            angle += fairy.getRandom().nextFloat() * 0.05F + 0.05F;
+            angle += fairy.getRandom1211().nextFloat() * 0.05F + 0.05F;
             Vec3 playerPos = target.position();
             if (!following) {
                 moveAround(playerPos);

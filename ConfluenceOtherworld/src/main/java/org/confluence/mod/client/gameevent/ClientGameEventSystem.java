@@ -125,7 +125,7 @@ public final class ClientGameEventSystem {
         if (start) {
             List<SpecificMoonVariant> variants = SpecificMoonVariant.getByGameEvent(SpecificMoonGameEvent.KEY);
             if (!variants.isEmpty()) {
-                moonTexture = Util.getRandom(variants, player.getRandom()).texture;
+                moonTexture = Util.getRandom(variants, player.getRandom1211()).texture;
             }
         } else {
             moonTexture = null;

@@ -19,9 +19,9 @@ public final class DemonEyeLeaveAction extends BTNode {
 
     @Override
     public void start() {
-        double x = mob.getRandom().nextDouble() - 0.5;
-        double y = 0.1 + 0.5 * mob.getRandom().nextDouble();
-        double z = mob.getRandom().nextDouble() - 0.5;
+        double x = mob.getRandom1211().nextDouble() - 0.5;
+        double y = 0.1 + 0.5 * mob.getRandom1211().nextDouble();
+        double z = mob.getRandom1211().nextDouble() - 0.5;
         acceleration = new Vec3(x, y, z).normalize().scale(0.25);
     }
 

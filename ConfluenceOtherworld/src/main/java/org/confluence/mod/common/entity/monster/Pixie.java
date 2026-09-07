@@ -153,7 +153,7 @@ public class Pixie extends BaseFlyingMonster {
         @Override
         protected @Nullable Vec3 getPosition() {
             Vec3 position = mob.isInWater() ? LandRandomPos.getPos(mob, 15, 15) : null;
-            if (mob.getRandom().nextFloat() >= probability) position = getTreePosition();
+            if (mob.getRandom1211().nextFloat() >= probability) position = getTreePosition();
             return position == null ? super.getPosition() : position;
         }
 

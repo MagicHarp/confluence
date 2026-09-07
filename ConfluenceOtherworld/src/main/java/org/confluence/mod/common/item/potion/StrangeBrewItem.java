@@ -20,7 +20,7 @@ public class StrangeBrewItem extends AbstractPotionItem {
     protected void apply(ItemStack itemStack, Level level, LivingEntity living) {
         if (level.isClientSide) return;
 
-        RandomSource random = living.getRandom();
+        RandomSource random = living.getRandom1211();
         living.heal(Mth.randomBetweenInclusive(random, 14, 24));
         int ticks = 0;
         float v = random.nextFloat();

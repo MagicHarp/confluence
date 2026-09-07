@@ -349,7 +349,7 @@ public enum NPCSpawner implements IGlobalData {
                 return spawnAtPos(player.serverLevel(), pos, NpcEntities.GUIDE.get());
             }
         } else if (!hasNPCAlive(region, NpcEntities.PARTY_GIRL.get())) {
-            if (player.getRandom().nextInt(40) == 0 && getAliveNpcCount(region, entityType -> true/* todo 骷髅商人不计入 */) >= 14) {
+            if (player.getRandom1211().nextInt(40) == 0 && getAliveNpcCount(region, entityType -> true/* todo 骷髅商人不计入 */) >= 14) {
                 return spawnAtPos(player.serverLevel(), pos, NpcEntities.PARTY_GIRL.get());
             }
         }
@@ -361,7 +361,7 @@ public enum NPCSpawner implements IGlobalData {
         if (!hasNPCAlive(region, NpcEntities.TRAVELING_MERCHANT.get())) {
             if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, LibDateUtils.getDayTime(12, 0), player.level())) {
                 int bound = 30000 / CommonConfigs.NPC_SPAWN_INTERVAL.get(); // 6.25分钟内生成期望为22.12%
-                if (player.getRandom().nextInt(bound) == 0 && getAliveNpcCount(region, entityType -> entityType != NpcEntities.OLD_MAN.get()) >= 2) {
+                if (player.getRandom1211().nextInt(bound) == 0 && getAliveNpcCount(region, entityType -> entityType != NpcEntities.OLD_MAN.get()) >= 2) {
                     return spawnAtPos(player.serverLevel(), pos, NpcEntities.TRAVELING_MERCHANT.get());
                 }
             }

@@ -23,7 +23,7 @@ public abstract class ModelBakeryMixin {
         return objects.length == 0 || !(objects[0] instanceof ResourceLocation rl) || !confluence$skipSet.contains(rl.getNamespace());
     }
 
-    // 手动生成refmap
+    // "Exception loading blockstate definition: '{}' missing model for variant: '{}'"
     @WrapWithCondition(method = "lambda$loadModel$22", at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V", ordinal = 0, remap = false), remap = false)
     private boolean skipConfluenceLog(Logger instance, String s, Object o0, Object o1) {
         return !(o0 instanceof ResourceLocation rl) || !confluence$skipSet.contains(rl.getNamespace());

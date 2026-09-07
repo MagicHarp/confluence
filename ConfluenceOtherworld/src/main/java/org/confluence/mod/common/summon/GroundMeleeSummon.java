@@ -48,9 +48,9 @@ public abstract class GroundMeleeSummon extends PhysicalSummon {
     protected void moveInCombat(LivingEntity target) {
         Vec3 targetPosition = targetBasePosition();
         boolean targetMoved = lastCombatTargetPosition == null || targetPosition.distanceToSqr(lastCombatTargetPosition) >= 1.0;
-        if (--combatRepathCooldown <= 0 && (targetMoved || owner().getRandom().nextFloat() < 0.05F)) {
+        if (--combatRepathCooldown <= 0 && (targetMoved || owner().getRandom1211().nextFloat() < 0.05F)) {
             double distanceSqr = position().distanceToSqr(targetPosition);
-            combatRepathCooldown = 4 + owner().getRandom().nextInt(7);
+            combatRepathCooldown = 4 + owner().getRandom1211().nextInt(7);
             if (distanceSqr > 1024.0) combatRepathCooldown += 10;
             else if (distanceSqr > 256.0) combatRepathCooldown += 5;
             lastCombatTargetPosition = targetPosition;

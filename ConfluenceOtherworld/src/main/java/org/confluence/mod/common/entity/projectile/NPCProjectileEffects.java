@@ -28,7 +28,7 @@ public final class NPCProjectileEffects {
     public static final ResourceLocation POISON = register("poison", (context, target) -> {
         if (target instanceof LivingEntity living && context.hurt(living)) {
             living.addEffect(new MobEffectInstance(MobEffects.POISON,
-                    60 + context.projectile().getRandom().nextInt(41)));
+                    60 + context.projectile().getRandom1211().nextInt(41)));
         }
     });
     /// 在命中点造成范围伤害、声音和爆炸粒子，但不破坏方块。

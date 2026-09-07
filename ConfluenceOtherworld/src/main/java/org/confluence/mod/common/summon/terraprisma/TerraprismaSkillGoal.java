@@ -41,7 +41,7 @@ abstract class TerraprismaSkillGoal extends SummonGoal<TerraprismaSummon> {
         elapsedTicks = 0;
         summon.setSkillDamageMultiplier(1.0F);
         int randomRange = Math.max(1, (int) (baseCooldown * 0.3F));
-        cooldown = baseCooldown + summon.owner().getRandom().nextInt(randomRange);
+        cooldown = baseCooldown + summon.owner().getRandom1211().nextInt(randomRange);
     }
 
     final void updateCooldown() {

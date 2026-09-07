@@ -155,12 +155,12 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
         if (distanceSqr < ownerRecoveryDistanceSqr()) return;
         BlockPos ownerBlockPosition = owner.blockPosition();
         for (int attempt = 0; attempt < 10; attempt++) {
-            int offsetX = owner.getRandom().nextIntBetweenInclusive(-3, 3);
-            int offsetZ = owner.getRandom().nextIntBetweenInclusive(-3, 3);
+            int offsetX = owner.getRandom1211().nextIntBetweenInclusive(-3, 3);
+            int offsetZ = owner.getRandom1211().nextIntBetweenInclusive(-3, 3);
             if (Math.abs(offsetX) < 2 && Math.abs(offsetZ) < 2) {
                 continue;
             }
-            int offsetY = owner.getRandom().nextIntBetweenInclusive(-1, 1);
+            int offsetY = owner.getRandom1211().nextIntBetweenInclusive(-1, 1);
             Vec3 candidate = new Vec3(ownerBlockPosition.getX() + offsetX + 0.5D, ownerBlockPosition.getY() + offsetY, ownerBlockPosition.getZ() + offsetZ + 0.5D);
             if (!canRecoverAt(candidate)) {
                 continue;

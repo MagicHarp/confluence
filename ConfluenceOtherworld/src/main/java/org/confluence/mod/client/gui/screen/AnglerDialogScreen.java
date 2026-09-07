@@ -47,7 +47,7 @@ public class AnglerDialogScreen extends NPCDialogScreen {
         // 对话按钮
         addRenderableWidget(Button.builder(Component.translatable("gui.confluence.dialog"), b -> {
             if (entity instanceof BaseNPC npc) {
-                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
+                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom1211(), npc.getType());
                 if (key != null) {
                     dialogText = Component.translatable(key, levelName);
                     showQuestFish = false;
@@ -59,11 +59,11 @@ public class AnglerDialogScreen extends NPCDialogScreen {
     private void initDialog(BaseNPC npc) {
         switch (state) {
             case COMPLETED -> {
-                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
+                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom1211(), npc.getType());
                 dialogText = key != null ? Component.translatable(key, levelName) : Component.translatable("dialogs.confluence.angler.completed");
             }
             case NO_QUEST -> {
-                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
+                String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom1211(), npc.getType());
                 dialogText = key != null ? Component.translatable(key, levelName) : Component.translatable("dialogs.confluence.angler.no_quest");
             }
             case SHOW_HINT -> {
@@ -71,7 +71,7 @@ public class AnglerDialogScreen extends NPCDialogScreen {
                 dialogText = Component.translatable(key);
             }
             case WAKE_UP ->
-                    dialogText = Component.translatable(anglerDialogPrefix(npc) + ".wakeup." + npc.getRandom().nextInt(3));
+                    dialogText = Component.translatable(anglerDialogPrefix(npc) + ".wakeup." + npc.getRandom1211().nextInt(3));
         }
     }
 
@@ -84,7 +84,7 @@ public class AnglerDialogScreen extends NPCDialogScreen {
             case WAKE_UP -> {
                 Entity entity = minecraft.level.getEntity(entityId);
                 if (entity instanceof BaseNPC npc) {
-                    dialogText = Component.translatable(anglerDialogPrefix(npc) + ".wakeup." + npc.getRandom().nextInt(3));
+                    dialogText = Component.translatable(anglerDialogPrefix(npc) + ".wakeup." + npc.getRandom1211().nextInt(3));
                 }
             }
         }

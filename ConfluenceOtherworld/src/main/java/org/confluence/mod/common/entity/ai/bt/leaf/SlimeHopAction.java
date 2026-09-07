@@ -51,7 +51,7 @@ public class SlimeHopAction extends BTNode {
                         ? new Vec3(toTarget.x / hDist, 0, toTarget.z / hDist)
                         : Vec3.ZERO;
             } else {
-                float yaw = mob.getRandom().nextFloat() * (float) Math.PI * 2;
+                float yaw = mob.getRandom1211().nextFloat() * (float) Math.PI * 2;
                 dir = new Vec3(-Math.sin(yaw), 0, Math.cos(yaw));
             }
 

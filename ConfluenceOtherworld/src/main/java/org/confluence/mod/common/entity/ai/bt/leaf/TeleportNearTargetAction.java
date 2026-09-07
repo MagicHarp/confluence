@@ -47,15 +47,15 @@ public class TeleportNearTargetAction extends BTNode {
         if (target == null || !target.isAlive()) return BTStatus.FAILURE;
 
         for (int attempt = 0; attempt < attempts; attempt++) {
-            int xOffset = mob.getRandom().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
-            int zOffset = mob.getRandom().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
+            int xOffset = mob.getRandom1211().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
+            int zOffset = mob.getRandom1211().nextIntBetweenInclusive(-horizontalRange, horizontalRange);
             int horizontalDistanceSquared = xOffset * xOffset + zOffset * zOffset;
             if (horizontalDistanceSquared < MINIMUM_DISTANCE * MINIMUM_DISTANCE || horizontalDistanceSquared > horizontalRange * horizontalRange) {
                 continue;
             }
             BlockPos origin = target.blockPosition().offset(
                     xOffset,
-                    mob.getRandom().nextIntBetweenInclusive(-verticalRange, verticalRange),
+                    mob.getRandom1211().nextIntBetweenInclusive(-verticalRange, verticalRange),
                     zOffset);
             Vec3 candidate = findStandingPosition(origin);
             if (candidate == null) continue;

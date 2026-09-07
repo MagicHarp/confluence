@@ -475,7 +475,7 @@ public final class GameClientEvents {
 //        if (!ModClientSetups.guideCheckedJEI && type == TENpcEntities.GUIDE.get()) {
 //            event.setNeoDialog(Component.translatable("dialogs.terra_entity.guide.jei_check"));
 //            ModClientSetups.guideCheckedJEI = true;
-//        } else if (type == TENpcEntities.NURSE.get() && event.getNPC().getRandom().nextInt(25) == 0) {
+//        } else if (type == TENpcEntities.NURSE.get() && event.getNPC().getRandom1211().nextInt(25) == 0) {
 //            StatsCounter stats = player.getStats();
 //            for (Stat<EntityType<?>> stat : Stats.ENTITY_KILLED_BY) {
 //                int value = stats.getValue(stat);

@@ -68,7 +68,7 @@ public class NPCDialogScreen extends Screen {
     }
 
     protected void selectDialog(BaseNPC npc) {
-        String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom(), npc.getType());
+        String key = NPCDialogLoader.getInstance().getRandomDialogKey(npc.getRandom1211(), npc.getType());
         if (key != null) dialogText = Component.translatable(key);
     }
 

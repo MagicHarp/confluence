@@ -27,7 +27,7 @@ public class DaoOfPowItem extends BaseFlailItem {
 
     @Override
     public void onFlailHit(Player owner, LivingEntity target, BaseFlailEntity flail) {
-        if (target.getRandom().nextFloat() < confuseChance) {
+        if (target.getRandom1211().nextFloat() < confuseChance) {
             target.addEffect(new MobEffectInstance(LibEffects.CONFUSED.get(), CONFUSE_TICKS));
         }
     }

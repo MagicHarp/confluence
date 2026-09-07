@@ -161,7 +161,7 @@ public final class LivingEntityEvents {
             }
             for (ServerPlayer player : level.players()) {
                 if (player.position().distanceToSqr(victim.position()) > 32 * 32) continue;
-                if (ManaStorage.of(player).canReceive() && player.getRandom().nextFloat() < 0.083F) {
+                if (ManaStorage.of(player).canReceive() && player.getRandom1211().nextFloat() < 0.083F) {
                     LibEntityUtils.createItemEntity(DateUtils.getStarItem().getDefaultInstance(), victim.position(), level, 0);
                     break;
                 }
@@ -179,7 +179,7 @@ public final class LivingEntityEvents {
                 }
 
                 if (npc.getType() == NpcEntities.GUIDE.get() && level.dimension() == OverworldUtils.underworld() && damageSource.is(DamageTypes.LAVA)) {
-                    GuideVooDooDollItem.summon(npc, level, npc.getRandom().nextBoolean(), () -> null);
+                    GuideVooDooDollItem.summon(npc, level, npc.getRandom1211().nextBoolean(), () -> null);
                 }
             }
             if (victim.hasEffect(ModEffects.BLOOD_BUTCHERED.get())) {
@@ -411,8 +411,8 @@ public final class LivingEntityEvents {
                 drops.add(new ItemEntity(level, x, y, z, itemStack));
             }
         }
-        if (LibMathUtils.checkChance(0.011F, living.getRandom())) dropsHolidayGift:{ // 掉落节日礼物
-            Item holidayGift = DateUtils.getHolidayGift(living.getRandom());
+        if (LibMathUtils.checkChance(0.011F, living.getRandom1211())) dropsHolidayGift:{ // 掉落节日礼物
+            Item holidayGift = DateUtils.getHolidayGift(living.getRandom1211());
             if (holidayGift == Items.AIR) break dropsHolidayGift;
             ItemEntity entity = new ItemEntity(level, x, y, z, holidayGift.getDefaultInstance());
             entity.setNoPickUpDelay();
@@ -423,7 +423,7 @@ public final class LivingEntityEvents {
                 isEnemy &&
                 !living.getType().is(ModTags.EntityTypes.DO_NOT_DROPS_EVIL_SOUL) &&
                 (y < OverworldUtils.getUndergroundY() || ModSecretSeeds.DONT_DIG_UP.match(level) || ModSecretSeeds.GET_FIXED_BOI.match(level)) &&
-                living.getRandom().nextFloat() < (LibUtils.isAtLeastExpert(level, living.blockPosition()) ? 0.36F : 0.2F)
+                living.getRandom1211().nextFloat() < (LibUtils.isAtLeastExpert(level, living.blockPosition()) ? 0.36F : 0.2F)
         ) { // 掉落光明或暗影之魂
             Holder<Biome> biome = level.getBiome(living.blockPosition());
             ItemStack soul = ItemStack.EMPTY;
@@ -436,7 +436,7 @@ public final class LivingEntityEvents {
                 drops.add(new ItemEntity(level, x, y, z, soul, 0, 0.02, 0));
             }
         }
-        if (isEnemy && level.dimension() == OverworldUtils.underworld() && living.getRandom().nextInt(400) == 0) { // 掉落喷流球
+        if (isEnemy && level.dimension() == OverworldUtils.underworld() && living.getRandom1211().nextInt(400) == 0) { // 掉落喷流球
             drops.add(new ItemEntity(level, x, y, z, YoyoItems.CASCADE.toStack()));
         }
 
@@ -467,7 +467,7 @@ public final class LivingEntityEvents {
             event.setCanBreathe(true);
         } else if (LibEntityUtils.anyHandHasItem(living, itemStack -> !itemStack.isEmpty() && itemStack.is(SwordItems.BREATHING_REED.get()))) {
             if (living.canDrownInFluidType(living.level().getFluidState(living.blockPosition().offset(0, 2, 0)).getFluidType())) {
-                event.setConsumeAirAmount(living.getRandom().nextInt(2) > 0 ? 0 : 1);
+                event.setConsumeAirAmount(living.getRandom1211().nextInt(2) > 0 ? 0 : 1);
             } else {
                 event.setCanBreathe(true);
             }
@@ -484,7 +484,7 @@ public final class LivingEntityEvents {
             Holder<Biome> biome = level.getBiome(blockPos);
             DifficultyInstance difficulty = event.getDifficulty();
             if (biome.is(PortTags.Biomes.IS_ICY) || biome.is(PortTags.Biomes.IS_SNOWY)) {
-                boolean pink = mob.getRandom().nextFloat() < 0.01F;
+                boolean pink = mob.getRandom1211().nextFloat() < 0.01F;
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.HEAD, (pink ? ArmorItems.PINK_SNOW_CAPS : ArmorItems.SNOW_CAPS).get(), 0.003F);
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.CHEST, (pink ? ArmorItems.PINK_SNOW_SUITS : ArmorItems.SNOW_SUITS).get(), 0.003F);
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.LEGS, (pink ? ArmorItems.PINK_INSULATED_PANTS : ArmorItems.INSULATED_PANTS).get(), 0.003F);
@@ -501,7 +501,7 @@ public final class LivingEntityEvents {
             }
         } else if (type == EntityType.SKELETON) {
             DifficultyInstance difficulty = event.getDifficulty();
-            if (!level.canSeeSky(BlockPos.containing(event.getX(), event.getY(), event.getZ())) && mob.getRandom().nextFloat() < 0.01F) {
+            if (!level.canSeeSky(BlockPos.containing(event.getX(), event.getY(), event.getZ())) && mob.getRandom1211().nextFloat() < 0.01F) {
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.HEAD, ArmorItems.MINING_HELMET.get(), 1.0F);
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.CHEST, ArmorItems.MINING_CHESTPLATE.get(), 1.0F);
                 LibEntityUtils.setItemAndDropChance(mob, difficulty, EquipmentSlot.LEGS, ArmorItems.MINING_LEGGINGS.get(), 1.0F);
@@ -512,7 +512,7 @@ public final class LivingEntityEvents {
                 event.setCanceled(true);
             }
         } else if (event.getSpawnType() == MobSpawnType.NATURAL && mob.getType().is(ModTags.EntityTypes.GOLDEN_SLIME_REPLACEABLE)) {
-            if ((ModSecretSeeds.CELEBRATIONMK10.match() || ModSecretSeeds.GET_FIXED_BOI.match()) && mob.getRandom().nextInt(180) == 0) {
+            if ((ModSecretSeeds.CELEBRATIONMK10.match() || ModSecretSeeds.GET_FIXED_BOI.match()) && mob.getRandom1211().nextInt(180) == 0) {
                 GoldenSlime goldenSlime = MonsterEntities.GOLDEN_SLIME.get().create(level);
                 if (goldenSlime != null) {
                     goldenSlime.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
@@ -550,7 +550,7 @@ public final class LivingEntityEvents {
     private static void useItem$Finish(LivingEntityUseItemEvent.Finish event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         ItemStack itemStack = event.getItem();
-        RandomSource random = player.getRandom();
+        RandomSource random = player.getRandom1211();
         if (itemStack.is(FoodItems.GREEN_DUMPLING.get()) && random.nextInt(6) == 0) {
             player.addEffect(new MobEffectInstance(ModEffects.CHOKING.get(), 2400));
         }
@@ -620,7 +620,7 @@ public final class LivingEntityEvents {
         if (BloodMoonGameEvent.INSTANCE.started()) {
             Mob mob = event.getEntity();
             if (mob instanceof Enemy && mob.position().y > OverworldUtils.getSurfaceY()) {
-                event.setSize(LibMathUtils.multiplyInt(event.getSize(), 2, mob.getRandom()));
+                event.setSize(LibMathUtils.multiplyInt(event.getSize(), 2, mob.getRandom1211()));
             }
         }
     }
@@ -634,7 +634,7 @@ public final class LivingEntityEvents {
     private static void curioChange(CurioChangeEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             if (PrefixUtils.canInit(event.getTo())) {
-                PrefixUtils.initPrefix(player.getRandom(), event.getTo());
+                PrefixUtils.initPrefix(player.getRandom1211(), event.getTo());
             }
         }
     }

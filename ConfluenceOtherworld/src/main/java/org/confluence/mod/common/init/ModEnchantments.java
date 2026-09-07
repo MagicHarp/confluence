@@ -22,7 +22,7 @@ public final class ModEnchantments {
     public static final RegistryObject<Enchantment> EFFICIENT_MAGIC = ENCHANTMENTS.register("efficient_magic", () -> new ManaIOEnchantment(Categories.MANA, LibEnchantmentUtils.SlotGroups.MAINHAND, 1));
     public static final RegistryObject<Enchantment> MANA_MENDING = ENCHANTMENTS.register("mana_mending", ManaMendingEnchantment::new);
     public static final RegistryObject<Enchantment> CELESTIAL_ABSORPTION = ENCHANTMENTS.register("celestial_absorption", () -> new ManaAffectiveEnchantment(2, (attacker, victim, level) -> {
-        int count = LibMathUtils.multiplyInt(1, 0.1F * level, attacker.getRandom());
+        int count = LibMathUtils.multiplyInt(1, 0.1F * level, attacker.getRandom1211());
         if (count < 1) return;
         ItemEntity itemEntity = new ItemEntity(attacker.level(), victim.getX(), victim.getEyeY(), victim.getZ(), ModItems.STAR.toStack(count));
         itemEntity.setNoPickUpDelay();

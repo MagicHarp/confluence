@@ -26,7 +26,7 @@ public class FlyWanderAction extends BTNode {
     @Override
     public void start() {
         tick = 0;
-        RandomSource r = mob.getRandom();
+        RandomSource r = mob.getRandom1211();
         target = mob.position().add((r.nextFloat() - 0.5) * range * 2, (r.nextFloat() - 0.5) * range, (r.nextFloat() - 0.5) * range * 2);
     }
 

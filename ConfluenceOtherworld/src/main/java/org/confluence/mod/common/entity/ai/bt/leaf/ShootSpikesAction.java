@@ -38,7 +38,7 @@ public class ShootSpikesAction extends BTNode {
                 SlimeSpikeEntity spike = SlimeSpikeEntity.create(mob.level(), mob, spikeType, Math.cos(angle), 0.1, Math.sin(angle), 0.5f, damage);
                 mob.level().addFreshEntity(spike);
             }
-            cooldown.restart(gameTime, COOLDOWN_TICKS + mob.getRandom().nextInt(20));
+            cooldown.restart(gameTime, COOLDOWN_TICKS + mob.getRandom1211().nextInt(20));
         }
         return BTStatus.SUCCESS;
     }

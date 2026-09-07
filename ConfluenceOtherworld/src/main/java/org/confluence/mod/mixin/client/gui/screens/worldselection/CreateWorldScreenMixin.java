@@ -30,19 +30,12 @@ public abstract class CreateWorldScreenMixin {
         @Final
         private EditBox seedEdit;
 
-// todo button       @WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/layouts/CommonLayouts;labeledElement(Lnet/minecraft/client/gui/Font;Lnet/minecraft/client/gui/layouts/LayoutElement;Lnet/minecraft/network/chat/Component;)Lnet/minecraft/client/gui/layouts/Layout;"))
-//        private Layout setSeedEditorWidthAndAddButton(Font font, LayoutElement element, Component label, Operation<Layout> original) {
-//            seedEdit.setWidth(seedEdit.getWidth() - seedEdit.getHeight() - 2);
-//            LinearLayout layout = LinearLayout.horizontal().spacing(8);
-//            layout.addChild(element);
-//            layout.addChild(new ImageButton(0, 0, 20, 20, SecretSeedsSelectionScreen.SPRITES, button -> {
-//                button.setFocused(false);
-//                this$0.getMinecraft().pushGuiLayer(new SecretSeedsSelectionScreen(seedEdit, this$0.getUiState()));
-//            }), settings -> settings.paddingLeft(-4));
-//            return original.call(font, layout, label);
-//        }
         @Inject(method = "<init>", at = @At("TAIL"))
-        private void setSeedEditorWidthAndAddButton(CreateWorldScreen this$0, CallbackInfo ci, @Local(name = "gridlayout$rowhelper1") GridLayout.RowHelper gridlayout$rowhelper1) {
+        private void setSeedEditorWidthAndAddButton(
+                CreateWorldScreen this$0,
+                CallbackInfo ci,
+                @Local(ordinal = 1) GridLayout.RowHelper gridlayout$rowhelper1 // 不要用name
+        ) {
             seedEdit.setWidth(seedEdit.getWidth() - seedEdit.getHeight() - 2);
             gridlayout$rowhelper1.addChild(new PortImageButton(0, 0, 20, 20, SecretSeedsSelectionScreen.SPRITES, button -> {
                 button.setFocused(false);

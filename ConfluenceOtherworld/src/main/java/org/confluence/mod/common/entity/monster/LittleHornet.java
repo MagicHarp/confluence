@@ -189,7 +189,7 @@ public final class LittleHornet extends Hornet implements BossOwnedEntity {
                     var intercept = BossMinionCoordinator.predict(target, 4.0D, 3.0D);
                     getNavigation().moveTo(intercept.x, intercept.y, intercept.z, MOVE_SPEED);
                 }
-                repathDelay = 4 + getRandom().nextInt(7);
+                repathDelay = 4 + getRandom1211().nextInt(7);
             }
             if (attackCooldown > 0) {
                 attackCooldown--;

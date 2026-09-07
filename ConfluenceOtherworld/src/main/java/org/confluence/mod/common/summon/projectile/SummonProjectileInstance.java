@@ -51,7 +51,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
                 : new Vec3(target.getX(), target.getY() + target.getEyeHeight() * 0.5, target.getZ());
         Vec3 direction = aimPoint.subtract(position).normalize();
         double spread = 0.0172275 * inaccuracy;
-        direction = direction.add(owner.getRandom().triangle(0.0, spread), owner.getRandom().triangle(0.0, spread), owner.getRandom().triangle(0.0, spread)).normalize();
+        direction = direction.add(owner.getRandom1211().triangle(0.0, spread), owner.getRandom1211().triangle(0.0, spread), owner.getRandom1211().triangle(0.0, spread)).normalize();
         this.velocity = direction.scale(velocity);
     }
 

@@ -60,10 +60,10 @@ final class SwordSlashGoal extends SummonGoal<SummonSword> {
         slashTicks = 0;
         triggered = false;
         summon.setDamageMultiplier(1.0F);
-        if (summon.owner().getRandom().nextFloat() < 0.5F) {
+        if (summon.owner().getRandom1211().nextFloat() < 0.5F) {
             summon.beginPostSlashSpin();
         }
-        cooldown = BASE_COOLDOWN + summon.owner().getRandom().nextInt((int) (BASE_COOLDOWN * 0.3F));
+        cooldown = BASE_COOLDOWN + summon.owner().getRandom1211().nextInt((int) (BASE_COOLDOWN * 0.3F));
     }
 
     void updateCooldown() {

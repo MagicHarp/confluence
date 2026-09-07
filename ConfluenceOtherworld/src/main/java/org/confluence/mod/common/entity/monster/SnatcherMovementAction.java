@@ -91,8 +91,8 @@ final class SnatcherMovementAction extends BTNode {
         if (--directionSwitchTicks > 0) {
             return Vec3.ZERO;
         }
-        directionSwitchTicks = snatcher.getRandom().nextInt(200) + 100;
-        Vec3 candidate = new Vec3(snatcher.getRandom().nextDouble() - 0.5, snatcher.getRandom().nextDouble() - 0.5, snatcher.getRandom().nextDouble() - 0.5);
+        directionSwitchTicks = snatcher.getRandom1211().nextInt(200) + 100;
+        Vec3 candidate = new Vec3(snatcher.getRandom1211().nextDouble() - 0.5, snatcher.getRandom1211().nextDouble() - 0.5, snatcher.getRandom1211().nextDouble() - 0.5);
         if (candidate.lengthSqr() < 1.0E-8) {
             return Vec3.ZERO;
         }

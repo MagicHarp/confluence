@@ -78,7 +78,7 @@ public class SkyFractureItem extends ManaStaffItem<SkyFractureProjectile> {
 
     @Override
     protected void beforeShoot(ServerPlayer player, ItemStack stack, SkyFractureProjectile projectile) {
-        projectile.setPos(player.getRandomX(2), player.getY(player.getRandom().nextFloat() * 1.5) + 0.5, player.getRandomZ(2));
+        projectile.setPos(player.getRandomX(2), player.getY(player.getRandom1211().nextFloat() * 1.5) + 0.5, player.getRandomZ(2));
         projectile.setDamage(damage);
         projectile.setDefaultVelocity(velocity);
         projectile.setOwner(player);

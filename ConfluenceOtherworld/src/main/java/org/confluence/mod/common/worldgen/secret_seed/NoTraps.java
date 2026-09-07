@@ -44,7 +44,7 @@ public class NoTraps extends SecretSeed {
 
     public static void breakClimbable(LivingEntity living) {
         if (living instanceof ServerPlayer serverPlayer && ModSecretSeeds.NO_TRAPS.match(serverPlayer.server)) {
-            if (living.level().getGameTime() % 20 == 0 && living.getRandom().nextFloat() < 0.3F) {
+            if (living.level().getGameTime() % 20 == 0 && living.getRandom1211().nextFloat() < 0.3F) {
                 living.level().destroyBlock(living.blockPosition(), true);
             }
         }
@@ -57,7 +57,7 @@ public class NoTraps extends SecretSeed {
     }
 
     public static void entityDropsGrenade(LivingEntity living) {
-        if (living.level() instanceof ServerLevel serverLevel && ModSecretSeeds.NO_TRAPS.match(serverLevel) && living.getRandom().nextFloat() < 0.03F) {
+        if (living.level() instanceof ServerLevel serverLevel && ModSecretSeeds.NO_TRAPS.match(serverLevel) && living.getRandom1211().nextFloat() < 0.03F) {
             Player nearestPlayer = serverLevel.getNearestPlayer(living, 16);
             if (nearestPlayer != null) {
                 BaseGrenadeEntity grenade = new BaseGrenadeEntity(living);

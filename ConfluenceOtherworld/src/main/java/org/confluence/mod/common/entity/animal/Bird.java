@@ -261,7 +261,7 @@ public class Bird extends Animal implements FlyingAnimal, CritterVisual {
             if (mob.isInWater()) {
                 position = LandRandomPos.getPos(mob, 15, 15);
             }
-            if (mob.getRandom().nextFloat() >= probability) {
+            if (mob.getRandom1211().nextFloat() >= probability) {
                 position = findTreePosition();
             }
             return position == null ? super.getPosition() : position;

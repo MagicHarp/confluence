@@ -35,7 +35,7 @@ public final class LucyTheAxeHandler {
             }
             cycleMap.put(key, index + 1);
         } else {
-            index = player.getRandom().nextInt(0, category.entries());
+            index = player.getRandom1211().nextInt(0, category.entries());
         }
 
         Component dialog = Component.translatable("dialogs." + key.getNamespace() + ".lucy_the_axe." + key.getPath() + "." + index);

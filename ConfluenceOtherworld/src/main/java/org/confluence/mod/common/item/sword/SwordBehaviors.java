@@ -78,7 +78,7 @@ public final class SwordBehaviors {
                 BeeKeeperProjectile projectile = ModEntities.BEE.get().create(attacker.level());
                 if (projectile == null) continue;
                 projectile.setOwner(attacker);
-                projectile.setPos(victim.position().add(victim.getRandom().nextFloat() * 0.2F, victim.getEyeHeight() * 0.5F, victim.getRandom().nextFloat() * 0.2F));
+                projectile.setPos(victim.position().add(victim.getRandom1211().nextFloat() * 0.2F, victim.getEyeHeight() * 0.5F, victim.getRandom1211().nextFloat() * 0.2F));
                 projectile.addAttackDamage(2.0F);
                 attacker.level().addFreshEntity(projectile);
             }
@@ -96,7 +96,7 @@ public final class SwordBehaviors {
     }
 
     private static void applyEffect(LivingEntity victim, Supplier<? extends MobEffect> effect, int duration, int maxAmplifier, float chance) {
-        if (victim.getRandom().nextFloat() >= chance) return;
+        if (victim.getRandom1211().nextFloat() >= chance) return;
         MobEffect mobEffect = effect.get();
         MobEffectInstance current = victim.getEffect(mobEffect);
         int amplifier = current == null ? 0 : Math.min(current.getAmplifier() + 1, maxAmplifier);

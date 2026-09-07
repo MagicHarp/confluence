@@ -69,7 +69,7 @@ public final class SlimeSummon extends PhysicalSummon {
                 && target.getY() > position().y + 2.0;
         double jumpStrength = enhancedJump ? 1.0 : 0.5;
         moveWithCollision(new Vec3(velocity.x * 0.546 + direction.x * acceleration, jumpStrength, velocity.z * 0.546 + direction.z * acceleration));
-        int delay = owner().getRandom().nextInt(10) + 5;
+        int delay = owner().getRandom1211().nextInt(10) + 5;
         jumpDelay = aggressive ? Math.max(1, delay / 3) : delay;
     }
 
@@ -109,7 +109,7 @@ public final class SlimeSummon extends PhysicalSummon {
                     : summon.position().add(Vec3.directionFromRotation(0.0F, summon.currentPose().yaw()));
             Vec3 horizontal = destination.subtract(summon.position()).multiply(1.0, 0.0, 1.0).normalize();
             Vec3 velocity = summon.velocity();
-            double jump = summon.owner().getRandom().nextFloat() < 0.8F ? 0.04 : 0.0;
+            double jump = summon.owner().getRandom1211().nextFloat() < 0.8F ? 0.04 : 0.0;
             double acceleration = 0.02 * (aggressive ? 1.0 : 0.84);
             summon.moveWithCollision(new Vec3(velocity.x * 0.8 + horizontal.x * acceleration, velocity.y * 0.8 + jump, velocity.z * 0.8 + horizontal.z * acceleration));
         }

@@ -40,7 +40,7 @@ final class SwordFollowOwnerGoal extends SummonGoal<SummonSword> {
             return;
         }
         Vec3 nextVelocity = summon.velocity().add(direction.normalize()).normalize().scale(speed);
-        Vec3 wiggle = new Vec3(summon.owner().getRandom().nextGaussian(), summon.owner().getRandom().nextGaussian(), summon.owner().getRandom().nextGaussian()).scale(0.01);
+        Vec3 wiggle = new Vec3(summon.owner().getRandom1211().nextGaussian(), summon.owner().getRandom1211().nextGaussian(), summon.owner().getRandom1211().nextGaussian()).scale(0.01);
         Vec3 nextPosition = summon.position().add(nextVelocity).add(wiggle);
         summon.moveTo(summon.followPose(nextPosition, targetPosition));
     }

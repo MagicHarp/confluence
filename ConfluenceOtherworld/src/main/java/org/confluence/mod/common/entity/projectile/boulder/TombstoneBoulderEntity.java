@@ -105,6 +105,6 @@ public class TombstoneBoulderEntity extends BoulderEntity {
         return Util.getRandom(ModBlocks.TOMBSTONES.object2BooleanEntrySet().stream()
                 .filter(entry -> entry.getBooleanValue() == isGolden)
                 .map(entry -> entry.getKey().get().defaultBlockState())
-                .toArray(BlockState[]::new), living.getRandom());
+                .toArray(BlockState[]::new), living.getRandom1211());
     }
 }

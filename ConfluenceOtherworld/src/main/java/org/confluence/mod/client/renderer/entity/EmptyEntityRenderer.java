@@ -21,7 +21,7 @@ public class EmptyEntityRenderer extends EntityRenderer<EmptyEntity> {
 
     @Override
     public void render(EmptyEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        this.thunderboltVFX.render(entity.getPosition(partialTick), entity.getRandom(), poseStack, bufferSource, packedLight);
+        this.thunderboltVFX.render(entity.getPosition(partialTick), entity.getRandom1211(), poseStack, bufferSource, packedLight);
     }
 
     @Override

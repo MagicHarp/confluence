@@ -99,7 +99,7 @@ public abstract class FlyingSummon extends SummonInstance {
                 hoverRepositionCooldown = 20;
             }
             moveToward(hoverDestination, lookAtPosition, chaseAcceleration, maximumSpeed);
-        } else if (owner().getRandom().nextFloat() < 0.5F) {
+        } else if (owner().getRandom1211().nextFloat() < 0.5F) {
             moveToward(nearestPosition, lookAtPosition, hoverAcceleration, maximumSpeed);
         } else {
             moveByFacing(velocity().scale(MOMENTUM_DAMPING), lookAtPosition, 15.0F, 85.0F);

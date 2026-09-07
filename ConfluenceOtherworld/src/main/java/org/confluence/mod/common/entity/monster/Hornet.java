@@ -187,7 +187,7 @@ public class Hornet extends BaseFlyingMonster {
                         ? BTStatus.RUNNING
                         : BTStatus.SUCCESS;
             }
-            if (!getNavigation().isDone() || getRandom().nextInt(10) != 0) {
+            if (!getNavigation().isDone() || getRandom1211().nextInt(10) != 0) {
                 return BTStatus.SUCCESS;
             }
             Vec3 destination = findFlightPosition(3, 1);

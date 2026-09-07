@@ -84,8 +84,8 @@ final class HungryMovementAction extends BTNode {
 
     private void updateIdleDirection(BaseBoss owner) {
         if (--switchTicks > 0 || !(owner instanceof WallOfFlesh)) return;
-        switchTicks = hungry.getRandom().nextInt(20) + 10;
-        Vec3 candidate = new Vec3(hungry.getRandom().nextDouble() - 0.5, hungry.getRandom().nextDouble() - 0.5, hungry.getRandom().nextDouble() - 0.5);
+        switchTicks = hungry.getRandom1211().nextInt(20) + 10;
+        Vec3 candidate = new Vec3(hungry.getRandom1211().nextDouble() - 0.5, hungry.getRandom1211().nextDouble() - 0.5, hungry.getRandom1211().nextDouble() - 0.5);
         if (candidate.lengthSqr() < 1.0E-8) return;
         candidate = candidate.normalize();
         BlockPos testPosition = BlockPos.containing(hungry.position().add(candidate.scale(5.0)));

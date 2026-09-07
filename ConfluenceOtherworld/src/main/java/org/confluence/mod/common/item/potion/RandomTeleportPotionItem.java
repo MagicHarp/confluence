@@ -23,11 +23,11 @@ public class RandomTeleportPotionItem extends AbstractPotionItem {
     @Override
     protected void apply(ItemStack itemStack, Level level, LivingEntity living) {
         if (!(level instanceof ServerLevel serverLevel)) return;
-        double nx = living.getX() + (living.getRandom().nextDouble() - 0.5) * RANGE;
+        double nx = living.getX() + (living.getRandom1211().nextDouble() - 0.5) * RANGE;
         int min = level.getMinBuildHeight();
         int max = min + serverLevel.getLogicalHeight() - 1;
-        double ny = living.getRandom().nextIntBetweenInclusive(min, max);
-        double nz = living.getZ() + (living.getRandom().nextDouble() - 0.5) * RANGE;
+        double ny = living.getRandom1211().nextIntBetweenInclusive(min, max);
+        double nz = living.getZ() + (living.getRandom1211().nextDouble() - 0.5) * RANGE;
         if (living.isPassenger()) {
             living.stopRiding();
         }

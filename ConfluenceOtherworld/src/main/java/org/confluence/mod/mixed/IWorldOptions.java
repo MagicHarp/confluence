@@ -30,7 +30,7 @@ public interface IWorldOptions {
 
     long THE_CORRUPTION = 0b00000001;
     long THE_CRIMSON = 0b00000010;
-    long DOUBLE_EVIL = 0b00000011;
+    long DOUBLE_EVIL = THE_CORRUPTION | THE_CRIMSON;
     long HARDMODE = 0b00000100;
     long GRADUATED = 0b00001100;
     long SECRET_SEED = Long.MAX_VALUE >> ModSecretSeeds.RESERVE << ModSecretSeeds.RESERVE;
@@ -64,9 +64,7 @@ public interface IWorldOptions {
         registerWorldIcon(map, GFB_MASK, "get_fixed_boi");
         registerWorldIcon(map, BW_MASK, "boulder_world");
 
-        CustomWorldIconRegisterEvent event = new CustomWorldIconRegisterEvent(map);
-        PortEventHandler.postEvent(event);
-        map.putAll(event.getToAdd());
+        map.putAll(PortEventHandler.postEventWithReturn(new CustomWorldIconRegisterEvent(map)).getToAdd());
     });
 
     static void registerWorldIcon(Long2ObjectMap<ResourceLocation> map, long flag, String base) {

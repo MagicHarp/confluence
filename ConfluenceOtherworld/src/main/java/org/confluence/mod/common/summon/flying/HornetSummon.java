@@ -74,9 +74,9 @@ public final class HornetSummon extends FlyingSummon {
         double facing = Math.toRadians(currentPose().yaw());
         Vec3 fallback = position().add(Vec3.directionFromRotation(0.0F, currentPose().yaw()).scale(4.0));
         for (int attempt = 0; attempt < 10; attempt++) {
-            double angle = facing + Mth.nextDouble(owner().getRandom(), -Math.PI * 0.5, Math.PI * 0.5);
-            double distance = Mth.nextDouble(owner().getRandom(), 3.0, 8.0);
-            Vec3 candidate = position().add(-Math.sin(angle) * distance, Mth.nextDouble(owner().getRandom(), -3.0, 7.0), Math.cos(angle) * distance);
+            double angle = facing + Mth.nextDouble(owner().getRandom1211(), -Math.PI * 0.5, Math.PI * 0.5);
+            double distance = Mth.nextDouble(owner().getRandom1211(), 3.0, 8.0);
+            Vec3 candidate = position().add(-Math.sin(angle) * distance, Mth.nextDouble(owner().getRandom1211(), -3.0, 7.0), Math.cos(angle) * distance);
             if (owner().level().noCollision(new AABB(candidate.x - 0.3, candidate.y - 0.3, candidate.z - 0.3, candidate.x + 0.3, candidate.y + 0.3, candidate.z + 0.3))) {
                 return candidate;
             }
