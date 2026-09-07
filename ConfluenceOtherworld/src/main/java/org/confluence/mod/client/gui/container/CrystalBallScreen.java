@@ -32,6 +32,7 @@ public class CrystalBallScreen extends AbstractContainerScreen<CrystalBallMenu> 
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }

@@ -108,6 +108,7 @@ public final class NPCTradeScreen extends AbstractContainerScreen<NPCTradeMenu> 
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(graphics);
         graphics.blit(CONTAINER_TEXTURE, leftPos, topPos, 0, 0, imageWidth, TOP_HEIGHT);
         graphics.blit(CONTAINER_TEXTURE, leftPos, topPos + TOP_HEIGHT, 0, 126, imageWidth, 96);
         graphics.blit(PIGGY_BANK_TEXTURE, leftPos - 33, topPos + 10, 224, 0, 32, 86);

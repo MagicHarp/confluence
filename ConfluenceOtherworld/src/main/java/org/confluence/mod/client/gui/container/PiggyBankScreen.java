@@ -26,6 +26,7 @@ public class PiggyBankScreen extends AbstractContainerScreen<PiggyBankMenu> {
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         int i = (width - imageWidth) / 2;
         int j = (height - imageHeight) / 2;
         guiGraphics.blit(BACKGROUND, i, j, 0, 0, imageWidth, imageHeight);

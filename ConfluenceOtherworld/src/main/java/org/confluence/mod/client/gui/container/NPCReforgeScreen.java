@@ -34,6 +34,7 @@ public class NPCReforgeScreen extends AbstractContainerScreen<NPCReforgeMenu> {
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos + 19, 0, 0, imageWidth, imageHeight);
         int cost = menu.getCost();
         if (cost < 0x3F3F3F3F) {

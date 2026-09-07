@@ -23,6 +23,7 @@ public class FletchingTableScreen extends AbstractContainerScreen<FletchingTable
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         if (menu.input.getTail().isEmpty()) {
             guiGraphics.blit(BACKGROUND, leftPos + 30, topPos + 53, 177, 34, 16, 16);

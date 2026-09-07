@@ -25,6 +25,7 @@ public class AlchemyTableScreen extends AbstractContainerScreen<AlchemyTableMenu
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         if (menu.input.getItem(0).isEmpty()) {
             guiGraphics.blit(BACKGROUND, leftPos + 80, topPos + 17, 178, 17, 16, 16);

@@ -36,6 +36,7 @@ public abstract class EnhanceForgeScreen<M extends EnhancedForgeMenu> extends Ab
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         if (menu.isLit()) {
             int l = Mth.ceil(menu.getLitProgress() * 16);

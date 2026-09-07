@@ -25,6 +25,7 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> {
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
         guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         int width = Mth.ceil(menu.getBurnProgress() * 46);
         guiGraphics.blit(BACKGROUND, leftPos + 78, topPos + 36, 177, 17, width, 15);
