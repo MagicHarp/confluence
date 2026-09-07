@@ -8,7 +8,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.leaf.WormMovementAction;
 import org.confluence.mod.common.entity.boss.BaseBoss;
@@ -99,19 +98,7 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
             inheritedTarget = getTarget();
             if (isRemoved()) return;
         }
-        Vec3 movementStart = position();
-        float previousYaw = getYRot();
-        float previousPitch = getXRot();
         super.tick();
-        if (!level().isClientSide && isAlive() && !isNoAi()) {
-            // 原版视线控制器会在 AI 后重置俯仰。先恢复上一刻的朝向基准，再按实际位移取向，
-            // 与体节使用同一套切线转换；不能使用移动结束后已被阻力改变的速度。
-            setYRot(previousYaw);
-            setXRot(previousPitch);
-            WormSegment.orientAlong(this, position().subtract(movementStart));
-            setYBodyRot(getYRot());
-            setYHeadRot(getYRot());
-        }
         if (owned && getTarget() != inheritedTarget) {
             setTarget(inheritedTarget);
         }

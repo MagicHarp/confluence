@@ -157,38 +157,14 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
         return head == null ? null : head.getSegment(getSegmentIndex() + 1);
     }
 
-    @Override
-    public void updateSegmentPosition() {
-        BaseWormBoss head = getOwner();
-        if (head == null) return;
-        WormSegment previous = getPrev();
-        if (!(previous instanceof Entity leader)) return;
-
-        Vec3 previousPosition = position();
-        Vec3 leaderCenter = WormSegment.center(leader);
-        Vec3 difference = WormSegment.center(this).subtract(leaderCenter);
-        if (difference.lengthSqr() < 0.001) {
-            difference = leader.getLookAngle().scale(-1.0D);
-            if (difference.lengthSqr() < 1.0E-7D) difference = new Vec3(0, 0, -1);
-        }
-        Vec3 destinationCenter = leaderCenter.add(difference.normalize().scale(head.getEffectiveSegmentSpacing()));
-
-        if (!level().isClientSide) contactSweepStart = previousPosition;
-        setPos(destinationCenter.x, destinationCenter.y - getBbHeight() * 0.5D, destinationCenter.z);
-    }
-
     public void orientAlongChain(Vec3 tangent) {
         WormSegment.orientAlong(this, tangent);
     }
 
-    @Override
-    public void updateSegmentRotation() {
-        WormSegment previous = getPrev();
-        if (!(previous instanceof Entity leader)) return;
-
-        // 每一节只朝向自己的直接前一节，不能跨过当前节拿“前一节到后一节”的弦线。
-        Vec3 tangent = WormSegment.center(leader).subtract(WormSegment.center(this));
-        orientAlongChain(tangent);
+    public void moveToChainPosition(Vec3 destination) {
+        Vec3 previousPosition = position();
+        if (!level().isClientSide) contactSweepStart = previousPosition;
+        setPos(destination.x, destination.y, destination.z);
     }
 
     @Override

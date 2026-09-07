@@ -31,6 +31,12 @@ public final class BossWormPartRenderer extends BossGeoRenderer<BossWormPart> {
     }
 
     @Override
+    protected float getEffectiveModelScale(BossWormPart segment) {
+        // 毁灭者暂时复用吞噬者体节模型，以它自己的 3.2 格中心距同步放大模型。
+        return segment.getOwner() instanceof TheDestroyer ? TheDestroyer.SEGMENT_SPACING : 2.2F;
+    }
+
+    @Override
     protected void adjustPose(PoseStack poseStack, BossWormPart segment, BakedGeoModel model, float partialTick) {
         if (!(segment.getOwner() instanceof TheDestroyer)) return;
         Vec3 axis = WormPartRenderer.chainTangent(segment, partialTick);

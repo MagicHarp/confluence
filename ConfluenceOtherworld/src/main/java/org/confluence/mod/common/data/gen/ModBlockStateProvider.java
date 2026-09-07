@@ -54,20 +54,32 @@ public final class ModBlockStateProvider extends BlockStateProvider {
 
         ResourceLocation logSide = Confluence.asResource("block/" + id + "_log");
         ResourceLocation logTop = Confluence.asResource("block/" + id + "_log_top");
-        if (blockSet.LOG.isBound() && shouldGenerate(blockSet.LOG.get()) && hasTexture(logSide) && hasTexture(logTop)) {
-            logBlock(blockSet.LOG.get());
+        if (blockSet.LOG.isBound() && hasTexture(logSide) && hasTexture(logTop)) {
+            if (shouldGenerate(blockSet.LOG.get())) {
+                logBlock(blockSet.LOG.get());
+            } else {
+                ensureLogModels(id + "_log", logSide, logTop);
+            }
         }
         ResourceLocation strippedLogSide = Confluence.asResource("block/stripped_" + id + "_log");
         ResourceLocation strippedLogTop = Confluence.asResource("block/stripped_" + id + "_log_top");
-        if (blockSet.STRIPPED_LOG.isBound() && shouldGenerate(blockSet.STRIPPED_LOG.get()) && hasTexture(strippedLogSide) && hasTexture(strippedLogTop)) {
-            logBlock(blockSet.STRIPPED_LOG.get());
+        if (blockSet.STRIPPED_LOG.isBound() && hasTexture(strippedLogSide) && hasTexture(strippedLogTop)) {
+            if (shouldGenerate(blockSet.STRIPPED_LOG.get())) {
+                logBlock(blockSet.STRIPPED_LOG.get());
+            } else {
+                ensureLogModels("stripped_" + id + "_log", strippedLogSide, strippedLogTop);
+            }
         }
         ResourceLocation leavesTexture = Confluence.asResource("block/" + id + "_leaves");
-        if (blockSet.LEAVES.isBound() && shouldGenerate(blockSet.LEAVES.get()) && hasTexture(leavesTexture)) {
-            ModelFile leaves = models().withExistingParent(id + "_leaves", "block/leaves")
-                    .texture("all", leavesTexture);
-            getVariantBuilder(blockSet.LEAVES.get()).partialState()
-                    .setModels(new ConfiguredModel(leaves));
+        if (blockSet.LEAVES.isBound() && hasTexture(leavesTexture)) {
+            ResourceLocation leavesModel = Confluence.asResource("block/" + id + "_leaves");
+            ModelFile leaves = hasHandwrittenModel(leavesModel)
+                    ? models().getExistingFile(leavesModel)
+                    : models().withExistingParent(id + "_leaves", "block/leaves").texture("all", leavesTexture);
+            if (shouldGenerate(blockSet.LEAVES.get())) {
+                getVariantBuilder(blockSet.LEAVES.get()).partialState()
+                        .setModels(new ConfiguredModel(leaves));
+            }
         }
         if (blockSet.WOOD.isBound() && shouldGenerate(blockSet.WOOD.get()) && hasTexture(logSide)) {
             ModelFile model = models().cubeColumn(id + "_wood", logSide, logSide);
@@ -169,6 +181,19 @@ public final class ModBlockStateProvider extends BlockStateProvider {
         return hasHandwrittenModel(location)
                 ? models().getExistingFile(location)
                 : factory.get();
+    }
+
+    private void ensureLogModels(String path, ResourceLocation side, ResourceLocation end) {
+        ResourceLocation vertical = Confluence.asResource("block/" + path);
+        if (!hasHandwrittenModel(vertical)) {
+            models().cubeColumn(path, side, end);
+        }
+        ResourceLocation horizontal = Confluence.asResource("block/" + path + "_horizontal");
+        if (!hasHandwrittenModel(horizontal)) {
+            models().withExistingParent(path + "_horizontal", "block/cube_column_horizontal")
+                    .texture("side", side)
+                    .texture("end", end);
+        }
     }
 
     private void simpleBlockIfAbsent(Block block) {

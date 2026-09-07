@@ -154,7 +154,7 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
 
         cooking(writer, smelting, "smelting/", "", Ingredient.of(Items.SOUL_SAND), DecorativeBlocks.SOUL_GLASS.toStack(), 0.1F, 200);
 
-        RecipeSerializer<?> smoking = RecipeSerializer.SMELTING_RECIPE;
+        RecipeSerializer<?> smoking = RecipeSerializer.SMOKING_RECIPE;
         cooking(writer, smoking, "smoking/", "", Ingredient.of(FoodItems.BAOBAB_FRUIT), FoodItems.COOKED_BAOBAB_FRUIT.toStack(), 0.35F, 100);
         cooking(writer, smoking, "smoking/", "", Ingredient.of(FoodItems.CLOUD_DOUGH), FoodItems.CLOUD_BREAD.toStack(), 0.2F, 100);
         cooking(writer, smoking, "smoking/", "", Ingredient.of(FoodItems.FLUTTERING_LAMB_CHOPS), FoodItems.COOKED_FLUTTERING_LAMB_CHOPS.toStack(), 0.35F, 100);

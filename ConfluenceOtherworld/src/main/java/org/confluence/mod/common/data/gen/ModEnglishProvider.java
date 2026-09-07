@@ -832,10 +832,10 @@ public class ModEnglishProvider extends LanguageProvider {
         add("tooltip.item.confluence.coin.0", "Sneak and right-click to merge into a primary coin");
         add("tooltip.item.confluence.hardmode_convertor.0", "Right-clicking on the ground immediately turns the current world into Hardmode");
         add("tooltip.item.confluence.life_crystal.0", "Permanently increases maximum life by 4");
-        add("tooltip.item.confluence.recall_life_crystal.0", "Permanently decreases maximum life by 4");
+        add("tooltip.item.confluence.recall_life_crystal.0", "Permanently reduces maximum life by 4");
         add("tooltip.item.confluence.life_fruit.0", "Permanently increases maximum life by 1");
         add("tooltip.item.confluence.mana_crystal.0", "Permanently increases maximum mana by 20");
-        add("tooltip.item.confluence.recall_mana_crystal.0", "Permanently decreases maximum mana by 20");
+        add("tooltip.item.confluence.recall_mana_crystal.0", "Permanently reduces maximum mana by 20");
         add("tooltip.item.confluence.arcane_crystal.0", "Permanently increases mana regeneration");
         add("tooltip.item.confluence.vital_crystal.0", "Permanently boosts life regeneration");
         add("tooltip.item.confluence.aegis_apple.0", "Permanently increases defense");
@@ -1063,36 +1063,6 @@ public class ModEnglishProvider extends LanguageProvider {
 
         add("button.confluence.dye_vat", "Dye Vat");
         add("button.confluence.dye_mix", "Dye Mix");
-
-        // Override
-        add("item.confluence.encumbering_stone.disable", "Encumbering Stone: Disable");
-        add("item.confluence.guide_to_critter_companionship.disable", "Guide to Critter Companionship: Disable");
-        add("item.confluence.guide_to_environmental_preservation.disable", "Guide to Environmental Preservation: Disable");
-        add("item.confluence.guide_to_peaceful_coexistence.disable", "Guide to Peaceful Coexistence: Disable");
-        add("item.confluence.paint", "Paint");
-        add(AccessoryItems.PHILOSOPHERS_STONE.get(), "Philosopher's Stone");
-        add(ModItems.BOREDOMS_PACT_FALLING_RESOLVE.get(), "Boredom's Pact - Falling Resolve");
-        add(FunctionalBlocks.BLEND_O_MATIC.get(), "Blend-O-Matic");
-        add(StatueBlocks.N0_STATUE.get(), "'0' Statue");
-        add(StatueBlocks.N1_STATUE.get(), "'1' Statue");
-        add(StatueBlocks.N2_STATUE.get(), "'2' Statue");
-        add(StatueBlocks.N3_STATUE.get(), "'3' Statue");
-        add(StatueBlocks.N4_STATUE.get(), "'4' Statue");
-        add(StatueBlocks.N5_STATUE.get(), "'5' Statue");
-        add(StatueBlocks.N6_STATUE.get(), "'6' Statue");
-        add(StatueBlocks.N7_STATUE.get(), "'7' Statue");
-        add(StatueBlocks.N8_STATUE.get(), "'8' Statue");
-        add(StatueBlocks.N9_STATUE.get(), "'9' Statue");
-        add(VanityArmorItems.DEAD_MANS_SWEATER.get(), "Dead Man's Sweater");
-        add(SwordItems.NIGHTS_EDGE.get(), "Night's Edge");
-        add(ConsumableItems.PEDDLERS_SATCHEL.get(), "Peddler's Satchel");
-        add(QuestedFishes.CAPN_TUNABEARD.get(), "Cap'n Tunabeard");
-
-        add("block.confluence.timers_1_1", "1 Second Timer");
-        add("block.confluence.timers_3_1", "3 Second Timer");
-        add("block.confluence.timers_5_1", "5 Second TImer");
-        add("block.confluence.timers_1_2", "1/2 Second Timer");
-        add("block.confluence.timers_1_4", "1/4 Second TImer");
 
         add("resourcepack.terraria_art", "Terraria Art");
         add("resourcepack.terraria_armor", "Terraria-Like Armor");
@@ -1676,6 +1646,7 @@ public class ModEnglishProvider extends LanguageProvider {
 
         ModEffects.EFFECTS.getEntries().forEach(effect -> add(effect.get(), LibUtils.toTitleCase(effect.getId().getPath())));
         ModEntities.getEntities().forEach(register -> register.getEntries().forEach(entity -> add(entity.get(), LibUtils.toTitleCase(entity.getId().getPath()))));
+        addOverrides();
         add(MonsterEntities.WINGLESS_SLIMER.get(), "Slimer");
 
         add(QuestedFishes.CAPN_TUNABEARD.get(), "Cap'n Tunabeard");
@@ -1812,7 +1783,8 @@ public class ModEnglishProvider extends LanguageProvider {
         addEffect(ModEffects.AROMATIC_SATIATION.get(), "Continuous response to hunger and satiety");
 
         addEffect(ModEffects.DEMONIC_THOUGHTS.get(), "Being inflicted with Demonic Thoughts again spawns Eater of Souls");
-        addWhipTagEffectTranslations();
+        addBoomerangTranslations();
+        addWhipTranslations();
         addEffect(ModEffects.HELLFIRE.get(), "Losing life");
         addEffect(ModEffects.FROST_BURN.get(), "Losing life; Cannot regenerate life");
         addEffect(ModEffects.CRIMSON_STORM.get(), "You are trapped in the storm, there is no escape.");
@@ -1928,6 +1900,43 @@ public class ModEnglishProvider extends LanguageProvider {
         add("creativetab.confluence.developer", "Confluence | Developer");
     }
 
+    private void addOverrides() {
+        add("item.confluence.encumbering_stone.disable", "Encumbering Stone: Disable");
+        add("item.confluence.guide_to_critter_companionship.disable", "Guide to Critter Companionship: Disable");
+        add("item.confluence.guide_to_environmental_preservation.disable", "Guide to Environmental Preservation: Disable");
+        add("item.confluence.guide_to_peaceful_coexistence.disable", "Guide to Peaceful Coexistence: Disable");
+        add("item.confluence.paint", "Paint");
+        add(AccessoryItems.PHILOSOPHERS_STONE.get(), "Philosopher's Stone");
+        add(ModItems.BOREDOMS_PACT_FALLING_RESOLVE.get(), "Boredom's Pact - Falling Resolve");
+        add(FunctionalBlocks.BLEND_O_MATIC.get(), "Blend-O-Matic");
+        add(NatureBlocks.CATTAIL_BLOCK.get(), "Cattail Block");
+        add(NatureBlocks.CRIMSON_CATTAIL_BLOCK.get(), "Crimson Cattail Block");
+        add(NatureBlocks.EBONY_CATTAIL_BLOCK.get(), "Ebony Cattail Block");
+        add(NatureBlocks.GLOWING_MUSHROOM_CATTAIL_BLOCK.get(), "Glowing Mushroom Cattail Block");
+        add(NatureBlocks.HALLOW_CATTAIL_BLOCK.get(), "Hallow Cattail Block");
+        add(NatureBlocks.JUNGLE_CATTAIL_BLOCK.get(), "Jungle Cattail Block");
+        add(NatureBlocks.SHIMMER_DROOPING_VINE.get(), "Shimmer Drooping Vine");
+        add(StatueBlocks.N0_STATUE.get(), "'0' Statue");
+        add(StatueBlocks.N1_STATUE.get(), "'1' Statue");
+        add(StatueBlocks.N2_STATUE.get(), "'2' Statue");
+        add(StatueBlocks.N3_STATUE.get(), "'3' Statue");
+        add(StatueBlocks.N4_STATUE.get(), "'4' Statue");
+        add(StatueBlocks.N5_STATUE.get(), "'5' Statue");
+        add(StatueBlocks.N6_STATUE.get(), "'6' Statue");
+        add(StatueBlocks.N7_STATUE.get(), "'7' Statue");
+        add(StatueBlocks.N8_STATUE.get(), "'8' Statue");
+        add(StatueBlocks.N9_STATUE.get(), "'9' Statue");
+        add(VanityArmorItems.DEAD_MANS_SWEATER.get(), "Dead Man's Sweater");
+        add(SwordItems.NIGHTS_EDGE.get(), "Night's Edge");
+        add(ConsumableItems.PEDDLERS_SATCHEL.get(), "Peddler's Satchel");
+        add(QuestedFishes.CAPN_TUNABEARD.get(), "Cap'n Tunabeard");
+        add("block.confluence.timers_1_1", "1 Second Timer");
+        add("block.confluence.timers_3_1", "3 Second Timer");
+        add("block.confluence.timers_5_1", "5 Second Timer");
+        add("block.confluence.timers_1_2", "1/2 Second Timer");
+        add("block.confluence.timers_1_4", "1/4 Second Timer");
+    }
+
 
 //    private void addDefaultRegistryTranslations(HolderLookup.RegistryLookup<?> dimensions, String dimensionsPath) {
 //        dimensions.listElements().forEach(dimension -> {
@@ -1953,23 +1962,37 @@ public class ModEnglishProvider extends LanguageProvider {
         add("tooltip." + effect.getDescriptionId() + ".0", tooltip);
     }
 
-    private void addWhipTagEffectTranslations() {
-        addWhipTagEffect(WhipItems.LEATHER_WHIP.get());
-        addWhipTagEffect(WhipItems.SLUB_WHIP.get());
-        addWhipTagEffect(WhipItems.RUBY_WHIP.get());
-        addWhipTagEffect(WhipItems.AMBER_WHIP.get());
-        addWhipTagEffect(WhipItems.TOPAZ_WHIP.get());
-        addWhipTagEffect(WhipItems.JADE_WHIP.get());
-        addWhipTagEffect(WhipItems.DIAMOND_WHIP.get());
-        addWhipTagEffect(WhipItems.SAPPHIRE_WHIP.get());
-        addWhipTagEffect(WhipItems.AMETHYST_WHIP.get());
-        addWhipTagEffect(WhipItems.SWAMP_WHIP.get());
-        addWhipTagEffect(WhipItems.SNAPTHORN.get());
-        addWhipTagEffect(WhipItems.SPINAL_TAP.get());
-        addWhipTagEffect(WhipItems.FIRECRACKER.get());
+    private void addBoomerangTranslations() {
+        add(BoomerangItems.ENCHANTED_BOOMERANG.get(), "Enchanted Boomerang");
+        add(BoomerangItems.FLAMARANG.get(), "Flamarang");
+        add(BoomerangItems.ICE_BOOMERANG.get(), "Ice Boomerang");
+        add(BoomerangItems.SHROOMERANG.get(), "Shroomerang");
+        add(BoomerangItems.TRIMARANG.get(), "Trimarang");
+        add(BoomerangItems.COMBAT_WRENCH.get(), "Combat Wrench");
+        add(BoomerangItems.WOOD_BOOMERANG.get(), "Wood Boomerang");
+        add(BoomerangItems.BEIDOU_BOOMERANG.get(), "Bei Dou Boomerang");
+        add(BoomerangItems.DEVELOPER_BOOMERANG.get(), "Developer Boomerang");
     }
 
-    private void addWhipTagEffect(BaseWhipItem whip) {
+    private void addWhipTranslations() {
+        addWhipTranslation(WhipItems.LEATHER_WHIP.get(), "Leather Whip");
+        addWhipTranslation(WhipItems.SLUB_WHIP.get(), "Slub Whip");
+        addWhipTranslation(WhipItems.RUBY_WHIP.get(), "Ruby Whip");
+        addWhipTranslation(WhipItems.AMBER_WHIP.get(), "Amber Whip");
+        addWhipTranslation(WhipItems.TOPAZ_WHIP.get(), "Topaz Whip");
+        addWhipTranslation(WhipItems.JADE_WHIP.get(), "Jade Whip");
+        addWhipTranslation(WhipItems.DIAMOND_WHIP.get(), "Diamond Whip");
+        addWhipTranslation(WhipItems.SAPPHIRE_WHIP.get(), "Sapphire Whip");
+        addWhipTranslation(WhipItems.AMETHYST_WHIP.get(), "Amethyst Whip");
+        addWhipTranslation(WhipItems.SWAMP_WHIP.get(), "Swamp Whip");
+        addWhipTranslation(WhipItems.SNAPTHORN.get(), "Snapthorn");
+        addWhipTranslation(WhipItems.SPINAL_TAP.get(), "Spinal Tap");
+        addWhipTranslation(WhipItems.FIRECRACKER.get(), "Firecracker");
+    }
+
+    private void addWhipTranslation(BaseWhipItem whip, String name) {
+        add(whip, name);
+        add(whip.definition().tagEffect().get(), name + " Mark");
         String tooltip = whip.definition().tagEffect().get().fixedDamage() == 0.0F
                 ? "Minions focus on this target"
                 : "Minions deal additional damage";

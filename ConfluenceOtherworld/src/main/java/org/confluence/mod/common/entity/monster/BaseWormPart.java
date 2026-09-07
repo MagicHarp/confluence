@@ -126,26 +126,6 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         return head == null ? null : head.getSegment(getSegmentIndex() + 1);
     }
 
-    @Override
-    public void updateSegmentPosition() {
-        BaseWormMonster head = getOwner();
-        if (head == null) return;
-        WormSegment previous = head.getSegment(getSegmentIndex() - 1);
-        if (!(previous instanceof Entity leader)) return;
-
-        Vec3 previousPosition = position();
-        Vec3 leaderCenter = WormSegment.center(leader);
-        Vec3 difference = WormSegment.center(this).subtract(leaderCenter);
-        if (difference.lengthSqr() < 0.001) {
-            difference = leader.getLookAngle().scale(-1.0D);
-            if (difference.lengthSqr() < 1.0E-7D) difference = new Vec3(0, 0, -1);
-        }
-        Vec3 destinationCenter = leaderCenter.add(difference.normalize().scale(head.segmentSpacing()));
-
-        if (!level().isClientSide) contactSweepStart = previousPosition;
-        setPos(destinationCenter.x, destinationCenter.y - getBbHeight() * 0.5D, destinationCenter.z);
-    }
-
     public void orientAlongChain(Vec3 tangent) {
         WormSegment.orientAlong(this, tangent);
     }
@@ -154,15 +134,6 @@ public class BaseWormPart extends Entity implements WormSegment, GeoEntity, Part
         Vec3 previousPosition = position();
         if (!level().isClientSide) contactSweepStart = previousPosition;
         setPos(destination.x, destination.y, destination.z);
-    }
-
-    @Override
-    public void updateSegmentRotation() {
-        WormSegment previous = getPrev();
-        if (!(previous instanceof Entity leader)) return;
-
-        Vec3 tangent = WormSegment.center(leader).subtract(WormSegment.center(this));
-        orientAlongChain(tangent);
     }
 
     @Override

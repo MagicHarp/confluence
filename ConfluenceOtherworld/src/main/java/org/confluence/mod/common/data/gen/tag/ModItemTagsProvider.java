@@ -51,6 +51,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 potions.add(item1);
             }
         });
+        potions.add(PotionItems.WORMHOLE_POTION.get());
         IntrinsicTagAppender<Item> foods = tag(PortTags.Items.FOODS);
         foods.add(PotionItems.ALE.get());
         FoodItems.ITEMS.getEntries().forEach(item -> {

@@ -128,10 +128,6 @@ public final class WormPartRenderer extends GeoNormalRenderer<BaseWormPart> {
     static Vec3 chainTangent(WormSegment segment, float partialTick) {
         if (!(segment instanceof Entity current) || !(segment.getPrev() instanceof Entity leader))
             return Vec3.ZERO;
-        return interpolatedCenter(leader, partialTick).subtract(interpolatedCenter(current, partialTick));
-    }
-
-    private static Vec3 interpolatedCenter(Entity entity, float partialTick) {
-        return entity.getPosition(partialTick).add(0.0D, entity.getBbHeight() * 0.5D, 0.0D);
+        return leader.getPosition(partialTick).subtract(current.getPosition(partialTick));
     }
 }

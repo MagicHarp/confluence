@@ -18,6 +18,9 @@ public final class ImmunitySubProvider {
                 .add(ModEntities.GOLDEN_SHOWER, new ImmunityDataMap(Immunity.Type.STATIC, 4), false)
                 .add(ModEntities.WATER_STREAM, new ImmunityDataMap(Immunity.Type.STATIC, 4), false)
                 .add(ModEntities.NIGHTS_EDGE, new ImmunityDataMap(Immunity.Type.STATIC, 20), false)
+                .add(ModEntities.ICE_PILLAR, new ImmunityDataMap(Immunity.Type.STATIC, 20), false)
+                .add(ModEntities.SLIME_SPIKE, new ImmunityDataMap(Immunity.Type.STATIC, 5), false)
+                .add(ModEntities.FIRE_IMP_PROJECTILE, new ImmunityDataMap(Immunity.Type.LOCAL, 1), false)
                 .add(ModEntities.MAGIC_MISSILE, new ImmunityDataMap(Immunity.Type.STATIC, 7), false)
                 .add(ModEntities.RAIN, new ImmunityDataMap(Immunity.Type.LOCAL, 4), false)
                 .add(TCEntities.X_BONE, new ImmunityDataMap(Immunity.Type.STATIC, 4), false);

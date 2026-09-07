@@ -284,8 +284,8 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.section.confluence.client.toml.title", "Client-side Configuration");
         add("confluence.configuration.Entity.tooltip", "Entity-related Visual Effects");
         add("confluence.configuration.section.confluence.common.toml.title", "Common Configuration");
-        add("confluence.configuration.minEctoMistEffectRadius", "Min Ecto Mist Effect Radius");
-        add("confluence.configuration.minEctoMistEffectRadius.tooltip", "Disables ecto mist effect when set to 0.");
+        add("confluence.configuration.minEctoMistEffectRadius", "Minimum Ecto Mist Effect Radius");
+        add("confluence.configuration.minEctoMistEffectRadius.tooltip", "Set to 0 to disable the ecto mist effect.");
         add("confluence.configuration.customTitle", "Custom Title");
         add("confluence.configuration.WeaponInput", "Weapon Input");
         add("confluence.configuration.WeaponInput.button", "Weapon Input");
@@ -556,14 +556,14 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
 
         // 分割
         add("confluence.configuration.Mana.button", "魔力值");
-        add("confluence.configuration.Soul.button", "灵魂值");
+        add("confluence.configuration.Soul.button", "灵魂");
         add("confluence.configuration.Armor.button", "护甲值");
         add("confluence.configuration.Health.button", "生命值");
         add("confluence.configuration.Food.button", "饥饿值");
         add("confluence.configuration.manaStyle.tooltip", "魔力值样式");
         add("confluence.configuration.Mana.tooltip", "关于魔力值显示");
         add("confluence.configuration.Food.tooltip", "关于饥饿值显示");
-        add("confluence.configuration.Soul.tooltip", "关于灵魂值显示");
+        add("confluence.configuration.Soul.tooltip", "关于灵魂显示");
         add("confluence.configuration.section.confluence.client.toml", "个人显示设定（客户端）");
         add("confluence.configuration.section.confluence.common.toml", "游戏机制设定（服务端）");
         add("confluence.configuration.leftEffectIcon.tooltip", "开启后，药水效果图标显示屏幕左侧");
@@ -584,8 +584,8 @@ public class ConfigurationLanguageSubProvider implements LanguageSubProvider {
         add("confluence.configuration.section.confluence.client.toml.title", "客户端配置");
         add("confluence.configuration.Entity.tooltip", "与生物有关的视觉效果");
         add("confluence.configuration.section.confluence.common.toml.title", "通用配置");
-        add("confluence.configuration.minEctoMistEffectRadius", "最小迷雾效果距离");
-        add("confluence.configuration.minEctoMistEffectRadius.tooltip", "设置为0时，关闭迷雾效果");
+        add("confluence.configuration.minEctoMistEffectRadius", "最小灵雾雾气效果距离");
+        add("confluence.configuration.minEctoMistEffectRadius.tooltip", "设置为0时，关闭灵雾雾气效果");
         add("confluence.configuration.customTitle", "自定义标题");
 
         add("title.confluence.merged_configuration", "汇流来世合并配置总览");

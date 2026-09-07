@@ -155,7 +155,8 @@ public class EaterOfWorlds extends BaseWormBoss {
 
     @Override
     protected float getSegmentSpacing() {
-        return 2.8F;
+        // 体节模型沿前后轴长 1 格，渲染倍率为 2.2；中心距必须与显示长度一致。
+        return 2.2F;
     }
 
     /// 出生时使用盘曲链，而不是把六十个碰撞体叠在头部中心。
@@ -330,7 +331,7 @@ public class EaterOfWorlds extends BaseWormBoss {
             Vec3 position = positions.get(index);
             segments.get(index).setPos(position.x, position.y, position.z);
         }
-        for (BossWormPart segment : segments) segment.updateSegmentRotation();
+        updateSegmentChain();
     }
 
     private @Nullable EaterOfWorlds spawnSplitHead(Vec3 position, float yaw, float pitch, float headHealth,

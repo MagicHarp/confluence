@@ -94,7 +94,7 @@ public final class BlockSubProvider extends BlockLootSubProvider {
         dropSelf(COBALT_BLOCK.get());
         dropSelf(RAW_COBALT_BLOCK.get());
         dropSelf(PALLADIUM_BLOCK.get());
-        dropSelf(RAW_PLATINUM_BLOCK.get());
+        dropSelf(RAW_PALLADIUM_BLOCK.get());
         dropSelf(MYTHRIL_BLOCK.get());
         dropSelf(RAW_MYTHRIL_BLOCK.get());
         dropSelf(ORICHALCUM_BLOCK.get());
@@ -122,6 +122,9 @@ public final class BlockSubProvider extends BlockLootSubProvider {
         dropSelf(OPAL_BLOCK.get());
         dropSelf(GELSTONE_BLOCK.get());
         dropSelf(COLD_CRYSTAL_BLOCK.get());
+        dropSelf(FLESH_BLOCK.get());
+        dropSelf(LESION_BLOCK.get());
+        dropSelf(GEYSER_BLOCK.get());
         this.add(NatureBlocks.CRYSTAL_SHARDS.get(), p_344211_ -> this.createSilkTouchDispatchTable(p_344211_, (LootPoolEntryContainer.Builder<?>) this.applyExplosionDecay(p_344211_, LootItem.lootTableItem(NatureBlocks.CRYSTAL_SHARDS.get().asItem()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));
         dropSelf(EXTRACTINATOR.get());
         dropSelf(SKY_MILL.get());
@@ -687,6 +690,7 @@ public final class BlockSubProvider extends BlockLootSubProvider {
         add(DUNGEON_DOOR.get(), this::createDoorTable);
         add(TRADITIONAL_DYNASTY_DOOR.get(), this::createDoorTable);
         add(CHRISTMAS_PINE_DOOR.get(), this::createDoorTable);
+        add(LIHZAHRD_DOOR.get(), this::createDoorTable);
         dropSelf(CHRISTMAS_PINE_TRAPDOOR.get());
 
         // 发光蘑菇

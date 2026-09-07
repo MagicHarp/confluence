@@ -16,6 +16,8 @@ import java.util.List;
 public final class WormChainTrail {
     // 轨迹点移动不足 0.001 方块时不重复记录，避免静止时队列无限增长。
     private static final double MIN_POINT_DISTANCE_SQR = 1.0E-6D;
+    private static final double EPSILON = 1.0E-7D;
+    private static final int SMOOTHING_PASSES = 2;
 
     private final Deque<Vec3> points = new ArrayDeque<>();
     private int seededSegmentCount = -1;
@@ -31,26 +33,22 @@ public final class WormChainTrail {
             seed(headPosition, segments);
         } else {
             Vec3 newest = points.peekFirst();
-            if (newest == null || newest.distanceToSqr(headPosition) > MIN_POINT_DISTANCE_SQR) {
+            double movementSqr = newest == null ? 0.0D : newest.distanceToSqr(headPosition);
+            if (newest != null && movementSqr > Math.max(16.0D, spacing * spacing * 9.0D)) {
+                shift(headPosition.subtract(newest));
+            } else if (newest == null || movementSqr > MIN_POINT_DISTANCE_SQR) {
                 points.addFirst(headPosition);
             }
         }
 
         double safeSpacing = Math.max(0.05D, spacing);
-        trim(safeSpacing * (count + 2));
+        trim(safeSpacing * (count + 3));
+        List<Vec3> curve = buildSmoothCurve();
         List<Sample> result = new ArrayList<>(count);
         for (int index = 1; index <= count; index++) {
             double distance = index * safeSpacing;
-            Vec3 position = sampleDistance(distance);
-            // 用体节目标点前后各 45% 间距的轨迹点作有限差分，使朝向与位置来自同一条曲线。
-            double tangentRadius = safeSpacing * 0.45D;
-            Vec3 towardHead = sampleDistance(Math.max(0.0D, distance - tangentRadius));
-            Vec3 towardTail = sampleDistance(distance + tangentRadius);
-            Vec3 tangent = towardHead.subtract(towardTail);
-            if (tangent.lengthSqr() <= MIN_POINT_DISTANCE_SQR) {
-                tangent = index == 1 ? headPosition.subtract(position) : Vec3.ZERO;
-            }
-            result.add(new Sample(position, tangent));
+            Vec3 position = sampleDistance(curve, distance);
+            result.add(new Sample(position));
         }
         return result;
     }
@@ -69,15 +67,38 @@ public final class WormChainTrail {
         seededSegmentCount = segments.size();
     }
 
-    private Vec3 sampleDistance(double requestedDistance) {
-        Vec3 previous = points.peekFirst();
-        if (previous == null) return Vec3.ZERO;
+    private void shift(Vec3 offset) {
+        List<Vec3> shifted = points.stream().map(point -> point.add(offset)).toList();
+        points.clear();
+        points.addAll(shifted);
+    }
+
+    private List<Vec3> buildSmoothCurve() {
+        List<Vec3> curve = new ArrayList<>(points);
+        for (int pass = 0; pass < SMOOTHING_PASSES && curve.size() >= 3; pass++) {
+            List<Vec3> smoothed = new ArrayList<>(curve.size() * 2);
+            smoothed.add(curve.get(0));
+            for (int index = 0; index + 1 < curve.size(); index++) {
+                Vec3 from = curve.get(index);
+                Vec3 to = curve.get(index + 1);
+                smoothed.add(from.lerp(to, 0.25D));
+                smoothed.add(from.lerp(to, 0.75D));
+            }
+            smoothed.add(curve.get(curve.size() - 1));
+            curve = smoothed;
+        }
+        return curve;
+    }
+
+    private Vec3 sampleDistance(List<Vec3> curve, double requestedDistance) {
+        if (curve.isEmpty()) return Vec3.ZERO;
+        Vec3 previous = curve.get(0);
 
         double traversed = 0.0D;
-        for (Vec3 current : points) {
+        for (Vec3 current : curve) {
             if (current == previous) continue;
             double length = previous.distanceTo(current);
-            if (length > 1.0E-7D && traversed + length >= requestedDistance) {
+            if (length > EPSILON && traversed + length >= requestedDistance) {
                 double progress = (requestedDistance - traversed) / length;
                 return previous.lerp(current, progress);
             }
@@ -86,15 +107,11 @@ public final class WormChainTrail {
         }
 
         // 刚生成或结构变化后的短轨迹沿末端切线补足，避免尾部全部挤到最后一点。
-        Vec3 last = points.peekLast();
-        if (last == null) return previous;
-        Vec3 beforeLast = null;
-        for (Vec3 point : points) {
-            if (point != last) beforeLast = point;
-        }
-        if (beforeLast == null) return last;
+        Vec3 last = curve.get(curve.size() - 1);
+        if (curve.size() < 2) return last;
+        Vec3 beforeLast = curve.get(curve.size() - 2);
         Vec3 tailDirection = last.subtract(beforeLast);
-        if (tailDirection.lengthSqr() <= MIN_POINT_DISTANCE_SQR) return last;
+        if (tailDirection.lengthSqr() <= EPSILON) return last;
         return last.add(tailDirection.normalize().scale(requestedDistance - traversed));
     }
 
@@ -105,16 +122,22 @@ public final class WormChainTrail {
         for (Vec3 point : points) {
             if (previous != null) {
                 length += previous.distanceTo(point);
-                if (length > retainedLength) break;
             }
             previous = point;
         }
-        while (length > retainedLength && points.size() > 2) {
-            Vec3 last = points.removeLast();
+        while (points.size() > 2) {
+            Vec3 last = points.peekLast();
+            points.removeLast();
             Vec3 newLast = points.peekLast();
-            if (newLast != null) length -= newLast.distanceTo(last);
+            if (newLast == null) break;
+            double edge = newLast.distanceTo(last);
+            if (length - edge < retainedLength) {
+                points.addLast(last);
+                break;
+            }
+            length -= edge;
         }
     }
 
-    public record Sample(Vec3 position, Vec3 tangent) {}
+    public record Sample(Vec3 position) {}
 }

@@ -3127,7 +3127,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(ShovelItems.PLATINUM_SHOVEL.get(), "铂金锹");
         add(ShovelItems.SHADOW_SHOVEL.get(), "暗影锹");
         add(ShovelItems.MINER.get(), "采掘者");
-        add(ShovelItems.GRAVE_DIGGERS_SHOVEL.get(), "掘墓者");
+        add(ShovelItems.GRAVE_DIGGERS_SHOVEL.get(), "掘墓者铲");
 
 
         add(PickaxeItems.COPPER_PICKAXE.get(), "铜镐");
@@ -4580,7 +4580,7 @@ public class ModChineseProvider extends LanguageProvider {
         addEffect(ModEffects.SPELUNKER.get(), "寻宝", "显示宝藏和矿石的位置；按下[%s]显示具体信息");
         addEffect(ModEffects.HUNTER.get(), "狩猎", "显示敌人位置");
         addEffect(ModEffects.DANGER_SENSE.get(), "危险感知", "你可以看到附近的危险；按下[%s]显示具体信息");
-        addEffect(ModEffects.FROZEN.get(), "冰冻", "你不能移动！");
+        addEffect(ModEffects.FROZEN.get(), "冻结", "你不能移动！");
         addEffect(ModEffects.STINKY.get(), "臭味", "你的味道真难闻");
         addEffect(ModEffects.THE_BAST_DEFENSE.get(), "巴斯特防御", "防御增加5");
         addEffect(ModEffects.SHARPENED.get(), "锋利", "近战武器具有盔甲穿透力");
@@ -4614,7 +4614,8 @@ public class ModChineseProvider extends LanguageProvider {
         addEffect(ModEffects.AROMATIC_SATIATION.get(), "芳息饱腹", "持续回复饥饿与饱和");
 
         addEffect(ModEffects.DEMONIC_THOUGHTS.get(), "邪念", "再次被赋予邪念时会生成噬魂怪");
-        addWhipTagEffectTranslations();
+        addBoomerangTranslations();
+        addWhipTranslations();
         addEffect(ModEffects.HELLFIRE.get(), "狱炎", "持续损失生命值");
         addEffect(ModEffects.FROST_BURN.get(), "霜冻", "缓慢损失生命值，无法再生生命");
         addEffect(ModEffects.CRIMSON_STORM.get(), "猩红风暴", "你已陷入风暴，无可逃脱。");
@@ -4848,12 +4849,12 @@ public class ModChineseProvider extends LanguageProvider {
     /// 主翻译方法已经接近 JVM 单方法长度上限，因此按内容分组为同类私有方法；
     /// 名称仍直接绑定注册对象，不引入额外映射表或外部名称类。
     private void addFlailTranslations() {
-        add(FlailItems.MACE.get(), "链球");
+        add(FlailItems.MACE.get(), "链锤");
         add(FlailItems.FLAMING_MACE.get(), "火焰链锤");
         add(FlailItems.WIND_ANCHOR.get(), "风锚");
-        add(FlailItems.GUARDIAN_FLAIL.get(), "守卫者链锤");
-        add(FlailItems.ANCIENT_GUARDIAN_FLAIL.get(), "远古守卫者链锤");
-        add(FlailItems.BALL_O_HURT.get(), "致伤球");
+        add(FlailItems.GUARDIAN_FLAIL.get(), "守卫链球");
+        add(FlailItems.ANCIENT_GUARDIAN_FLAIL.get(), "远古守卫链球");
+        add(FlailItems.BALL_O_HURT.get(), "链球");
         add(FlailItems.THE_MEATBALL.get(), "血肉之球");
         add(FlailItems.BLUE_MOON.get(), "蓝月");
         add(FlailItems.SUNFURY.get(), "阳炎之怒");
@@ -4885,7 +4886,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("tooltip.confluence.summon.retrieve", "潜行使用以收回全部战斗召唤物");
         add(ModEntities.FLOWER_POWER_PETAL.get(), "花之力花瓣");
         add(ModEntities.DRIPPLER_CRIPPLER_PROJECTILE.get(), "血肉射弹");
-        add(ModEntities.FLAIRON_BUBBLE.get(), "猪鲨链球气泡");
+        add(ModEntities.FLAIRON_BUBBLE.get(), "泡泡");
     }
 
 
@@ -5131,28 +5132,38 @@ public class ModChineseProvider extends LanguageProvider {
         add("tooltip." + effect.getDescriptionId() + ".0", tooltip);
     }
 
-    /// 独立方法仅用于避免主翻译方法超过 JVM 的单方法字节码上限。
-    private void addWhipTagEffectTranslations() {
-        addWhipTagEffect(WhipItems.LEATHER_WHIP.get());
-        addWhipTagEffect(WhipItems.SLUB_WHIP.get());
-        addWhipTagEffect(WhipItems.RUBY_WHIP.get());
-        addWhipTagEffect(WhipItems.AMBER_WHIP.get());
-        addWhipTagEffect(WhipItems.TOPAZ_WHIP.get());
-        addWhipTagEffect(WhipItems.JADE_WHIP.get());
-        addWhipTagEffect(WhipItems.DIAMOND_WHIP.get());
-        addWhipTagEffect(WhipItems.SAPPHIRE_WHIP.get());
-        addWhipTagEffect(WhipItems.AMETHYST_WHIP.get());
-        addWhipTagEffect(WhipItems.SWAMP_WHIP.get());
-        addWhipTagEffect(WhipItems.SNAPTHORN.get());
-        addWhipTagEffect(WhipItems.SPINAL_TAP.get());
-        addWhipTagEffect(WhipItems.FIRECRACKER.get());
+    private void addBoomerangTranslations() {
+        add(BoomerangItems.ENCHANTED_BOOMERANG.get(), "附魔回旋镖");
+        add(BoomerangItems.FLAMARANG.get(), "烈焰回旋镖");
+        add(BoomerangItems.ICE_BOOMERANG.get(), "冰雪回旋镖");
+        add(BoomerangItems.SHROOMERANG.get(), "蘑菇回旋镖");
+        add(BoomerangItems.TRIMARANG.get(), "三尖回旋镖");
+        add(BoomerangItems.COMBAT_WRENCH.get(), "战斗扳手");
+        add(BoomerangItems.WOOD_BOOMERANG.get(), "木回旋镖");
+        add(BoomerangItems.BEIDOU_BOOMERANG.get(), "北斗飞镖");
+        add(BoomerangItems.DEVELOPER_BOOMERANG.get(), "开发者回旋镖");
     }
 
-    private void addWhipTagEffect(BaseWhipItem whip) {
-        String tooltip = whip.definition().tagEffect().get().fixedDamage() == 0.0F
-                ? "召唤物优先攻击该目标"
-                : "召唤物额外造成伤害";
-        addEffect(whip.definition().tagEffect().get(), "狩猎", tooltip);
+    private void addWhipTranslations() {
+        addWhipTranslation(WhipItems.LEATHER_WHIP.get(), "皮鞭");
+        addWhipTranslation(WhipItems.SLUB_WHIP.get(), "竹节鞭");
+        addWhipTranslation(WhipItems.RUBY_WHIP.get(), "红玉鞭");
+        addWhipTranslation(WhipItems.AMBER_WHIP.get(), "琥珀鞭");
+        addWhipTranslation(WhipItems.TOPAZ_WHIP.get(), "黄玉鞭");
+        addWhipTranslation(WhipItems.JADE_WHIP.get(), "翡翠鞭");
+        addWhipTranslation(WhipItems.DIAMOND_WHIP.get(), "钻石鞭");
+        addWhipTranslation(WhipItems.SAPPHIRE_WHIP.get(), "蓝玉鞭");
+        addWhipTranslation(WhipItems.AMETHYST_WHIP.get(), "紫晶鞭");
+        addWhipTranslation(WhipItems.SWAMP_WHIP.get(), "沼泽藤蔓");
+        addWhipTranslation(WhipItems.SNAPTHORN.get(), "荆鞭");
+        addWhipTranslation(WhipItems.SPINAL_TAP.get(), "脊柱骨鞭");
+        addWhipTranslation(WhipItems.FIRECRACKER.get(), "鞭炮");
+    }
+
+    private void addWhipTranslation(BaseWhipItem whip, String name) {
+        add(whip, name);
+        String tooltip = whip.definition().tagEffect().get().fixedDamage() == 0.0F ? "召唤物优先攻击该目标" : "召唤物额外造成伤害";
+        addEffect(whip.definition().tagEffect().get(), name + "标记", tooltip);
     }
 
     private void addPreviouslyMissingTranslations() {

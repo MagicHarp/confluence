@@ -125,11 +125,20 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
         if (!isAlive()) return;
         if (!level().isClientSide) {
             initSegments();
-            List<WormChainTrail.Sample> samples = segmentTrail.sample(position(), segments, segmentSpacing());
+            Vec3 leaderPosition = position();
+            List<WormChainTrail.Sample> samples = segmentTrail.sample(leaderPosition, segments, segmentSpacing());
             for (int index = 0; index < segments.size(); index++) {
                 WormChainTrail.Sample sample = samples.get(index);
-                segments.get(index).moveToChainPosition(sample.position());
-                segments.get(index).orientAlongChain(sample.tangent());
+                BaseWormPart segment = segments.get(index);
+                segment.moveToChainPosition(sample.position());
+                segment.orientAlongChain(leaderPosition.subtract(sample.position()));
+                leaderPosition = sample.position();
+            }
+            Vec3 movement = new Vec3(getX() - xo, getY() - yo, getZ() - zo);
+            if (movement.lengthSqr() > 1.0E-7D) {
+                WormSegment.orientAlong(this, movement);
+                setYBodyRot(getYRot());
+                setYHeadRot(getYRot());
             }
             tickCollision();
         }
@@ -184,12 +193,6 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     public @Nullable WormSegment getNext() {
         return getSegment(1);
     }
-
-    @Override
-    public void updateSegmentPosition() {}
-
-    @Override
-    public void updateSegmentRotation() {}
 
     public static AttributeSupplier.Builder createWormAttributes() {
         return BaseMonster.createMonsterAttributes()

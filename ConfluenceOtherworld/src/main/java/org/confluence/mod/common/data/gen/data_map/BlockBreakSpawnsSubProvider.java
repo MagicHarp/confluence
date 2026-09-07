@@ -45,6 +45,18 @@ public final class BlockBreakSpawnsSubProvider {
                 .push(NatureBlocks.LIFE_MUSHROOM.get())
                 .expand(CritterEntities.GRASSHOPPER.get(), 0.02F)
                 .expand(CritterEntities.WORM.get(), 0.005F)
+                .pop()
+                .push(NatureBlocks.ASH_GRASS.get())
+                .expand(CritterEntities.HELL_BUTTERFLY.get(), 0.07F)
+                .expand(CritterEntities.MAGMA_SNAIL.get(), 0.07F)
+                .pop()
+                .push(Blocks.CRIMSON_ROOTS)
+                .expand(CritterEntities.HELL_BUTTERFLY.get(), 0.01F)
+                .expand(CritterEntities.MAGMA_SNAIL.get(), 0.01F)
+                .pop()
+                .push(Blocks.WARPED_ROOTS)
+                .expand(CritterEntities.HELL_BUTTERFLY.get(), 0.01F)
+                .expand(CritterEntities.MAGMA_SNAIL.get(), 0.01F)
                 .pop();
 
         SimpleWeightedRandomList<EntityType<?>> jungleBugs = SimpleWeightedRandomList.<EntityType<?>>builder()

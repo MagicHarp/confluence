@@ -18,10 +18,7 @@ import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModLootTables;
-import org.confluence.mod.common.init.item.FoodItems;
-import org.confluence.mod.common.init.item.MaterialItems;
-import org.confluence.mod.common.init.item.SummonItems;
-import org.confluence.mod.common.init.item.SwordItems;
+import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.mixin.data.loot.EntityLootSubProviderAccessor;
 import org.confluence.terra_curio.common.init.TCItems;
 
@@ -60,6 +57,17 @@ public class AddEntityLootConfluenceSubProvider extends EntityLootSubProvider im
                                                         )
                                         ))
                                 )
+                ).withPool(
+                        LootPool.lootPool()
+                                .add(LootItem.lootTableItem(FlailItems.ANCIENT_GUARDIAN_FLAIL))
+                                .add(EmptyLootItem.emptyItem())
+                )
+        ));
+        entries.add(new AddedEntityLoot(EntityType.GUARDIAN,
+                LootTable.lootTable().withPool(
+                        LootPool.lootPool()
+                                .add(LootItem.lootTableItem(FlailItems.GUARDIAN_FLAIL).setWeight(1))
+                                .add(EmptyLootItem.emptyItem().setWeight(14))
                 )
         ));
         LootItemCondition.Builder playerHasSmeltsLootEnchantment = LootItemEntityPropertyCondition.hasProperties(

@@ -7,10 +7,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.monster.BaseWormMonster;
-import org.confluence.mod.common.entity.monster.BaseWormPart;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 
@@ -22,19 +20,8 @@ public final class WyvernRenderer<T extends BaseWormMonster> extends GeoNormalRe
 
     @Override
     protected void applyRotations(T wyvern, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
-        BaseWormPart first = wyvern.level().getEntitiesOfClass(BaseWormPart.class,
-                        wyvern.getBoundingBox().inflate(8.0),
-                        part -> !part.isRemoved() && part.getSegmentIndex() == 1 && part.getOwner() == wyvern)
-                .stream().findFirst().orElse(null);
-        Vec3 tangent = first == null ? Vec3.ZERO : wyvern.getPosition(partialTick).subtract(first.getPosition(partialTick));
         float yaw = Mth.rotLerp(partialTick, wyvern.yRotO, wyvern.getYRot());
         float pitch = Mth.rotLerp(partialTick, wyvern.xRotO, wyvern.getXRot());
-        if (tangent.lengthSqr() > 1.0E-7) {
-            if (tangent.horizontalDistanceSqr() > 1.0E-7) {
-                yaw = (float) (Mth.atan2(tangent.z, tangent.x) * Mth.RAD_TO_DEG) - 90.0F;
-            }
-            pitch = (float) (-Mth.atan2(tangent.y, tangent.horizontalDistance()) * Mth.RAD_TO_DEG);
-        }
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
         poseStack.mulPose(Axis.XP.rotationDegrees(-pitch));
     }

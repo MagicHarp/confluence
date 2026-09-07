@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.common.entity.ai.WormChainTrail;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -26,6 +27,7 @@ import java.util.List;
 /// 蠕虫型 Boss 基类。穿透方块移动，体节跟随。
 public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     protected final List<BossWormPart> segments = new ArrayList<>();
+    private final WormChainTrail segmentTrail = new WormChainTrail();
 
     public BaseWormBoss(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -200,6 +202,7 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
             }
             segments.add(part);
         }
+        segmentTrail.invalidate();
     }
 
     private @Nullable BossWormPart createSegment(int index, int expectedCount, Vec3 segmentPosition, float yaw, float pitch) {
@@ -234,6 +237,7 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
             if (!part.isRemoved()) part.discard();
         }
         segments.clear();
+        segmentTrail.invalidate();
     }
 
     @Nullable
@@ -274,10 +278,22 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     /// 子类若在 {@code super.tick()} 后直接提交头部位移，可再次调用以刷新体节链。
     protected final void updateSegmentChain() {
         if (!isAlive()) return;
-        // 位置先按中心点定长约束，朝向随后由相邻中心统一计算，避免急转时
-        // 一节已经转向而后一节仍停留在另一套历史轨迹上。
-        for (BossWormPart segment : segments) segment.updateSegmentPosition();
-        for (BossWormPart segment : segments) segment.updateSegmentRotation();
+        Vec3 leaderPosition = position();
+        List<WormChainTrail.Sample> samples = segmentTrail.sample(
+                leaderPosition, segments, getEffectiveSegmentSpacing());
+        for (int index = 0; index < segments.size(); index++) {
+            WormChainTrail.Sample sample = samples.get(index);
+            BossWormPart segment = segments.get(index);
+            segment.moveToChainPosition(sample.position());
+            segment.orientAlongChain(leaderPosition.subtract(sample.position()));
+            leaderPosition = sample.position();
+        }
+        Vec3 movement = new Vec3(getX() - xo, getY() - yo, getZ() - zo);
+        if (movement.lengthSqr() > 1.0E-7D) {
+            WormSegment.orientAlong(this, movement);
+            setYBodyRot(getYRot());
+            setYHeadRot(getYRot());
+        }
     }
 
     @Override
@@ -326,12 +342,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     public @Nullable WormSegment getNext() {
         return getSegment(1);
     }
-
-    @Override
-    public void updateSegmentPosition() {}
-
-    @Override
-    public void updateSegmentRotation() {}
 
     @Override
     protected BTRoot createBT() {
