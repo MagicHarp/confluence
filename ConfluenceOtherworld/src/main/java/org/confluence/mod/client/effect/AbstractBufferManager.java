@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
-import org.joml.Quaternionf;
 import org.mesdag.portlib.event.client.PortRenderLevelStageEvent;
 
 import java.util.function.Supplier;
@@ -59,10 +58,10 @@ public abstract class AbstractBufferManager {
     }
 
     public void render(PortRenderLevelStageEvent event) {
-        render(event.getPoseStack(), event.getModelViewMatrix(), Minecraft.getInstance().gameRenderer.getMainCamera().getPosition(), event.getProjectionMatrix());
+        render(event.getPoseStack(), Minecraft.getInstance().gameRenderer.getMainCamera().getPosition(), event.getProjectionMatrix());
     }
 
-    public void render(PoseStack poseStack, Matrix4f modelMatrix, Vec3 playerPos, Matrix4f projectMatrix) {
+    public void render(PoseStack poseStack, Vec3 playerPos, Matrix4f projectMatrix) {
         if (shouldRefresh()) {
             refresh();
         }
@@ -72,7 +71,6 @@ public abstract class AbstractBufferManager {
             RenderSystem.setShader(setShader());
 
             poseStack.pushPose();
-            poseStack.mulPose(modelMatrix.getUnnormalizedRotation(new Quaternionf()));
             poseStack.translate(-playerPos.x(), -playerPos.y(), -playerPos.z());
 //            poseStack.mulPose(event.getCamera().rotation());
 
