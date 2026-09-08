@@ -45,10 +45,10 @@ public final class ModGunUtils {
         NonNullList<ItemStack> stackNonNullList = inventory.items;
         List<ItemStack> copyList = new ArrayList<>(stackNonNullList);
 
-        GunEvent.InventoryExtraEvent inventoryExtraEvent = new GunEvent.InventoryExtraEvent(player, baseGun, copyList);
-        PortEventHandler.postEvent(inventoryExtraEvent);
+        GunEvent.InventoryExtra inventoryExtra = new GunEvent.InventoryExtra(player, baseGun, copyList);
+        PortEventHandler.postEvent(inventoryExtra);
 
-        for (ItemStack item : inventoryExtraEvent.getAmmoList()) {
+        for (ItemStack item : inventoryExtra.getAmmoList()) {
             if (item == null || item.isEmpty() || item.is(Items.AIR)) continue;
             if (item.is(ModTags.Items.AMMO) && isCompatible(player, item, gun)) {
                 ammo = item;
@@ -69,9 +69,9 @@ public final class ModGunUtils {
         if (gun.is(GunItems.SNOWBALL_CANNON))
             selected = ammo.is(ModTags.Items.SNOW_AMMO);
 
-        GunEvent.AmmoSelectionEvent ammoSelectionEvent = new GunEvent.AmmoSelectionEvent(player, baseGun, ammo, selected);
-        PortEventHandler.postEvent(ammoSelectionEvent);
-        return ammoSelectionEvent.isSelected();
+        GunEvent.AmmoSelection ammoSelection = new GunEvent.AmmoSelection(player, baseGun, ammo, selected);
+        PortEventHandler.postEvent(ammoSelection);
+        return ammoSelection.isSelected();
     }
 
     /// 是否可以开枪
@@ -80,9 +80,9 @@ public final class ModGunUtils {
             return false;
         }
         ItemStack ammo = getAmmo(player, gun);
-        GunEvent.GunFireEvent gunFireEvent = new GunEvent.GunFireEvent(player, baseGun, ammo, !ammo.isEmpty());
-        PortEventHandler.postEvent(gunFireEvent);
+        GunEvent.Fire fire = new GunEvent.Fire(player, baseGun, ammo, !ammo.isEmpty());
+        PortEventHandler.postEvent(fire);
 
-        return gunFireEvent.isFire();
+        return fire.isFire();
     }
 }

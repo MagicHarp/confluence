@@ -110,7 +110,7 @@ public final class PrefixUtils {
         return setAndUpdate(itemStack, prefixType, prefixType.randomPrefix(random));
     }
 
-    public static @Nullable PrefixComponent setAndUpdate(ItemStack itemStack, PrefixType prefixType, ModPrefix modPrefix) {
+    public static @Nullable PrefixComponent setAndUpdate(ItemStack itemStack, @Nullable PrefixType prefixType, ModPrefix modPrefix) {
         if (prefixType == null) return null;
         PrefixComponent prefix = modPrefix.createComponent(prefixType, itemStack);
         itemStack.set(ModDataComponentTypes.PREFIX, prefix);

@@ -22,7 +22,7 @@ import java.util.Objects;
 public final class GunProjectileFactory {
     public static int spawn(ShotContext context, GunProjectilePattern pattern) {
         BaseGun gun = (BaseGun) context.gun().getItem();
-        GunEvent.ProjectileCreationEvent event = new GunEvent.ProjectileCreationEvent(gun, context, createDefaults(context, pattern));
+        GunEvent.ProjectileCreation event = new GunEvent.ProjectileCreation(gun, context, createDefaults(context, pattern));
         PortEventHandler.postEvent(event);
         List<Projectile> projectiles = event.getProjectiles();
         projectiles.removeIf(Objects::isNull);

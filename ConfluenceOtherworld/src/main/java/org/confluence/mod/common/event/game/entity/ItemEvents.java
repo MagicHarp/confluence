@@ -113,21 +113,21 @@ public final class ItemEvents {
         }
     }
 
-    private static void gunFire(GunEvent.GunFireEvent event) {
+    private static void gunFire(GunEvent.Fire event) {
         if (event.getGun() instanceof ManaGunItem) {
             event.setAmmo(ItemStack.EMPTY);
             event.setFire(true);
         }
     }
 
-    private static void gun$Use(GunEvent.UseGunEvent event) {
+    private static void gun$Use(GunEvent.Use event) {
         event.setCooldowns(PrefixUtils.calculateUseTime(event.getPlayer(), event.getCooldowns()));
         if (event.getGun() instanceof ManaGunItem manaGun && event.getPlayer() instanceof ServerPlayer player && !manaGun.consumeMana(player, player.getMainHandItem())) {
             event.setCanceled(true);
         }
     }
 
-    private static void gun$ShrinkBullet(GunEvent.ShrinkBulletEvent event) {
+    private static void gun$ShrinkBullet(GunEvent.ShrinkBullet event) {
         if (event.getGun() instanceof ManaGunItem) {
             event.setCanceled(true);
         } else if (!event.isInfinity() && PlayerUtils.shouldSkipConsumeAmmo(event.getPlayer())) {
@@ -135,7 +135,7 @@ public final class ItemEvents {
         }
     }
 
-    private static void gun$AmmoData(GunEvent.AmmoDataEvent event) {
+    private static void gun$AmmoData(GunEvent.AmmoData event) {
         Player player = event.getPlayer();
         if (event.getGun() instanceof ManaGunItem manaGun) {
             event.setDamage(manaGun.getDamage());
@@ -149,13 +149,13 @@ public final class ItemEvents {
         event.setKnockback(event.getKnockback() * (float) player.getAttributeValue(Attributes.ATTACK_KNOCKBACK));
     }
 
-    private static void gun$AmmoSelection(GunEvent.AmmoSelectionEvent event) {
+    private static void gun$AmmoSelection(GunEvent.AmmoSelection event) {
         if (GunItems.STAR_CANNON.get() == event.getGun()) {
             event.setSelected(event.getAmmo().is(MaterialItems.FALLING_STAR.get()));
         }
     }
 
-    private static void gun$InventoryExtra(GunEvent.InventoryExtraEvent event) {
+    private static void gun$InventoryExtra(GunEvent.InventoryExtra event) {
         event.addAmmoFirst(ExtraInventory.of(event.getPlayer()).getAllAmmo());
     }
 

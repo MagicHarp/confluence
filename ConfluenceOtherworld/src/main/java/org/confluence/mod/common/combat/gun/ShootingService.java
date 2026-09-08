@@ -15,12 +15,12 @@ public final class ShootingService {
         if (!(gunStack.getItem() instanceof BaseGun gun) || player.getCooldowns().isOnCooldown(gun))
             return false;
 
-        GunEvent.UseGunEvent useEvent = new GunEvent.UseGunEvent(player, gun, gun.getCooldown());
+        GunEvent.Use useEvent = new GunEvent.Use(player, gun, gun.getCooldown());
         PortEventHandler.postEvent(useEvent);
         if (useEvent.isCanceled()) return false;
 
         ItemStack ammo = ModGunUtils.getAmmo(player, gunStack);
-        GunEvent.GunFireEvent fireEvent = new GunEvent.GunFireEvent(player, gun, ammo, !ammo.isEmpty());
+        GunEvent.Fire fireEvent = new GunEvent.Fire(player, gun, ammo, !ammo.isEmpty());
         PortEventHandler.postEvent(fireEvent);
         if (!fireEvent.isFire() || fireEvent.getAmmo() == null) return false;
         ItemStack selectedAmmo = fireEvent.getAmmo();
@@ -36,7 +36,7 @@ public final class ShootingService {
 
     private static void consumeAmmo(ServerPlayer player, BaseGun gun, ItemStack gunStack, ItemStack ammo) {
         if (ammo.isEmpty()) return;
-        GunEvent.ShrinkBulletEvent event = new GunEvent.ShrinkBulletEvent(player, gun, gunStack, ammo, GunFiringService.isInfinite(ammo));
+        GunEvent.ShrinkBullet event = new GunEvent.ShrinkBullet(player, gun, gunStack, ammo, GunFiringService.isInfinite(ammo));
         PortEventHandler.postEvent(event);
         ItemStack bulletStack = event.getBulletStack();
         int shrink = Math.max(0, event.getShrink());

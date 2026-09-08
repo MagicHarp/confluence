@@ -24,7 +24,7 @@ public enum ShotFeedbackPacketS2C implements IPortPacket.S2C {
 
     @Override
     public void work(Player player) {
-        PortEventHandler.postEvent(new GunEvent.ShotConfirmedEvent(player));
+        PortEventHandler.postEvent(new GunEvent.ShotConfirmed(player));
     }
 
     public static void sendTo(ServerPlayer player) {

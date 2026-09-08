@@ -601,13 +601,13 @@ public final class GameClientEvents {
         if (!baseGun.isAutomatic(mainHandItem) && !shoot.consumeClick() && !defaultBindingPressed)
             return;
 
-        GunEvent.UseGunEvent useGunEvent = new GunEvent.UseGunEvent(player, baseGun, baseGun.getCooldown());
-        PortEventHandler.postEvent(useGunEvent);
-        if (useGunEvent.isCanceled()) return;
+        GunEvent.Use use = new GunEvent.Use(player, baseGun, baseGun.getCooldown());
+        PortEventHandler.postEvent(use);
+        if (use.isCanceled()) return;
 
         player.playSound(GunSounds.getSound(mainHandItem), 1f, 1f);
         ShootPacketC2S.sendToServer();
-        cooldowns.addCooldown(baseGun, Math.max(0, useGunEvent.getCooldowns()));
+        cooldowns.addCooldown(baseGun, Math.max(0, use.getCooldowns()));
     }
 
     private static void updateGunCameraAnimation(LocalPlayer player) {

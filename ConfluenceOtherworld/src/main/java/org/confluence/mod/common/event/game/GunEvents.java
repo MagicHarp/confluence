@@ -18,7 +18,7 @@ public final class GunEvents {
         PortEventHandler.addListener(GunEvents::bulletImpact);
     }
 
-    private static void createProjectile(GunEvent.ProjectileCreationEvent event) {
+    private static void createProjectile(GunEvent.ProjectileCreation event) {
         if (event.getGun() instanceof StarCannonItem starCannon) {
             event.setProjectiles(List.of(starCannon.createProjectile(event.getContext().shooter(), event.getContext().ammo())));
             return;

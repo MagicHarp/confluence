@@ -2,7 +2,6 @@ package org.confluence.mod.common.block.common;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,9 +24,6 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.ChestType;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.lib.common.block.StateProperties;
@@ -75,50 +71,15 @@ public class BaseChestBlock extends ChestBlock {
         return state.getValue(UNLOCKED) ? super.getExplosionResistance(state, level, pos, explosion) : 18000;
     }
 
-    @Nullable
-    private Direction candidatePartnerFacing(BlockPlaceContext context, Direction direction) {
-        BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction));
-        if (blockstate.is(this) && blockstate.getValue(UNLOCKED) == unlocked(context.getItemInHand())) {
-            return blockstate.getValue(TYPE) == ChestType.SINGLE ? blockstate.getValue(FACING) : null;
-        }
-        return null;
-    }
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        ChestType chesttype = ChestType.SINGLE;
-        Direction direction = context.getHorizontalDirection().getOpposite();
-        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-        boolean flag = context.isSecondaryUseActive();
-        Direction direction1 = context.getClickedFace();
-
-        if (direction1.getAxis().isHorizontal() && flag) {
-            Direction direction2 = this.candidatePartnerFacing(context, direction1.getOpposite());
-            if (direction2 != null && direction2.getAxis() != direction1.getAxis()) {
-                direction = direction2;
-                chesttype = direction2.getCounterClockWise() == direction1.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
-            }
-        }
-
-        if (chesttype == ChestType.SINGLE && !flag) {
-            if (direction == this.candidatePartnerFacing(context, direction.getClockWise())) {
-                chesttype = ChestType.LEFT;
-            } else if (direction == this.candidatePartnerFacing(context, direction.getCounterClockWise())) {
-                chesttype = ChestType.RIGHT;
-            }
-        }
-
-        return this.defaultBlockState()
-                .setValue(FACING, direction)
-                .setValue(TYPE, chesttype)
-                .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER)
-                .setValue(UNLOCKED, unlocked(context.getItemInHand()));
+        return super.getStateForPlacement(context).setValue(UNLOCKED, unlocked(context.getItemInHand()));
     }
 
     protected boolean unlocked(ItemStack stack) {
         CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains("BlockStateTag")) {
-            CompoundTag blockStateTag = tag.getCompound("BlockStateTag");
+        if (tag != null) {
+            CompoundTag blockStateTag = tag.getCompound(BlockItem.BLOCK_STATE_TAG);
             return blockStateTag.getString("unlocked").equals("true");
         }
         return true;
@@ -132,14 +93,14 @@ public class BaseChestBlock extends ChestBlock {
             if (key != null && !key.useKeyOn(stack, state, level, pos, player, hand, hitResult)) {
                 return InteractionResult.FAIL;
             }
-            return InteractionResult.SUCCESS;
+            return super.use(state, level, pos, player, hand, hitResult);
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
         }
 
-        return InteractionResult.PASS;
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -161,7 +122,7 @@ public class BaseChestBlock extends ChestBlock {
 
     public static void setupComponent(ItemStack stack, boolean unlocked) {
         CompoundTag tag = stack.getOrCreateTag();
-        CompoundTag blockStateTag = tag.contains("BlockStateTag") ? tag.getCompound("BlockStateTag") : new CompoundTag();
+        CompoundTag blockStateTag = tag.getCompound(BlockItem.BLOCK_STATE_TAG);
         blockStateTag.putString("unlocked", unlocked ? "true" : "false");
         tag.put("BlockStateTag", blockStateTag);
     }

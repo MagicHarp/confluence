@@ -32,7 +32,7 @@ public final class GunFiringService {
                         gunProperties.critical(), gunProperties.penetrate(), gun.getDefinition().inaccuracy()),
                 new AmmoStats(ammoProperties.damage(), ammoProperties.velocity(), ammoProperties.velocityMultiplier(),
                         ammoProperties.knockback(), ammoProperties.penetrate()));
-        GunEvent.AmmoDataEvent event = new GunEvent.AmmoDataEvent(player, gun, gunStack, ballistics.damage(),
+        GunEvent.AmmoData event = new GunEvent.AmmoData(player, gun, gunStack, ballistics.damage(),
                 ballistics.critical(), ballistics.knockback(), ballistics.velocity(), ballistics.penetrate(), ballistics.inaccuracy());
         PortEventHandler.postEvent(event);
         float damage = LibMathUtils.criticalDamageTotal(event.getCritical(), event.getDamage(), player.getRandom1211());

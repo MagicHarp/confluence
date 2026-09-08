@@ -33,10 +33,10 @@ public class GunEvent extends Event {
 
     /// 初始化开火事件
     @Cancelable
-    public static class UseGunEvent extends GunEvent {
+    public static class Use extends GunEvent {
         private int cooldowns;
 
-        public UseGunEvent(Player player, BaseGun gun, int cooldowns) {
+        public Use(Player player, BaseGun gun, int cooldowns) {
             super(player, gun);
             this.cooldowns = cooldowns;
         }
@@ -51,10 +51,10 @@ public class GunEvent extends Event {
     }
 
     /// Posted on the client after the server has accepted and spawned a shot.
-    public static class ShotConfirmedEvent extends Event {
+    public static class ShotConfirmed extends Event {
         private final Player player;
 
-        public ShotConfirmedEvent(Player player) {
+        public ShotConfirmed(Player player) {
             this.player = player;
         }
 
@@ -64,11 +64,11 @@ public class GunEvent extends Event {
     }
 
     /// 开火事件
-    public static class GunFireEvent extends GunEvent {
+    public static class Fire extends GunEvent {
         private ItemStack bullet;
         private boolean fire;
 
-        public GunFireEvent(Player player, BaseGun gun, ItemStack bullet, boolean fire) {
+        public Fire(Player player, BaseGun gun, ItemStack bullet, boolean fire) {
             super(player, gun);
             this.bullet = bullet;
             this.fire = fire;
@@ -92,11 +92,11 @@ public class GunEvent extends Event {
     }
 
     /// 初始化开火事件
-    public static class AmmoSelectionEvent extends GunEvent {
+    public static class AmmoSelection extends GunEvent {
         private final ItemStack ammo;
         private boolean selected;
 
-        public AmmoSelectionEvent(Player player, BaseGun gun, ItemStack ammo, boolean selected) {
+        public AmmoSelection(Player player, BaseGun gun, ItemStack ammo, boolean selected) {
             super(player, gun);
             this.ammo = ammo;
             this.selected = selected;
@@ -116,10 +116,10 @@ public class GunEvent extends Event {
     }
 
     /// 初始化开火事件
-    public static class InventoryExtraEvent extends GunEvent {
+    public static class InventoryExtra extends GunEvent {
         private final List<ItemStack> ammoList;
 
-        public InventoryExtraEvent(Player player, BaseGun gun, List<ItemStack> ammoList) {
+        public InventoryExtra(Player player, BaseGun gun, List<ItemStack> ammoList) {
             super(player, gun);
             this.ammoList = ammoList;
         }
@@ -146,7 +146,7 @@ public class GunEvent extends Event {
     }
 
     /// 射击时，子弹数据计算事件
-    public static class AmmoDataEvent extends GunEvent {
+    public static class AmmoData extends GunEvent {
         private float damage;
         private float critical;
         private float knockback;
@@ -155,7 +155,7 @@ public class GunEvent extends Event {
         private float inaccuracy;
         private final ItemStack gunStack;
 
-        public AmmoDataEvent(Player player, BaseGun gun, ItemStack gunStack, float damage, float critical, float knockback, float velocity, int penetrate, float inaccuracy) {
+        public AmmoData(Player player, BaseGun gun, ItemStack gunStack, float damage, float critical, float knockback, float velocity, int penetrate, float inaccuracy) {
             super(player, gun);
             this.gunStack = gunStack;
             this.critical = critical;
@@ -225,11 +225,11 @@ public class GunEvent extends Event {
     /// Listeners may replace the list with arbitrary projectile entities.
     /// This supports guns whose projectiles are entities rather than registered
     /// {@code BaseBullet} items while keeping spawning server-authoritative.
-    public static class ProjectileCreationEvent extends GunEvent {
+    public static class ProjectileCreation extends GunEvent {
         private final ShotContext context;
         private final List<Projectile> projectiles;
 
-        public ProjectileCreationEvent(BaseGun gun, ShotContext context, Collection<? extends Projectile> projectiles) {
+        public ProjectileCreation(BaseGun gun, ShotContext context, Collection<? extends Projectile> projectiles) {
             super(context.shooter(), gun);
             this.context = context;
             this.projectiles = new ArrayList<>(projectiles);
@@ -253,13 +253,13 @@ public class GunEvent extends Event {
 
     /// 子弹消耗事件
     @Cancelable
-    public static class ShrinkBulletEvent extends GunEvent {
+    public static class ShrinkBullet extends GunEvent {
         private int shrink = 1;
         private boolean infinity;
         private ItemStack bullet;
         private final ItemStack gun;
 
-        public ShrinkBulletEvent(Player player, BaseGun baseGun, ItemStack gun, ItemStack bullet, boolean infinity) {
+        public ShrinkBullet(Player player, BaseGun baseGun, ItemStack gun, ItemStack bullet, boolean infinity) {
             super(player, baseGun);
             this.gun = gun;
             this.infinity = infinity;
