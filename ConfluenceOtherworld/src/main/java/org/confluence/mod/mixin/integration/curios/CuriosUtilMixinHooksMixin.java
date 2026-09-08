@@ -1,0 +1,26 @@
+package org.confluence.mod.mixin.integration.curios;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import org.confluence.mod.common.init.armor.ModArmorBonus;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import top.theillusivec4.curios.mixin.CuriosUtilMixinHooks;
+
+@Mixin(value = CuriosUtilMixinHooks.class, remap = false)
+public abstract class CuriosUtilMixinHooksMixin {
+    @ModifyReturnValue(method = "getFortuneLevel(Lnet/minecraft/world/entity/player/Player;)I", at = @At("RETURN"), remap = false)
+    private static int modify(int original, Player player) {
+        return original + ModArmorBonus.getValue(player, ModArmorBonus.FORTUNE);
+    }
+
+    @ModifyReturnValue(method = "getFortuneLevel(Lnet/minecraft/world/level/storage/loot/LootContext;)I", at = @At(value = "RETURN", ordinal = 0), remap = false)
+    private static int modify(int original, @Local(name = "livingEntity") LivingEntity livingEntity) {
+        if (livingEntity instanceof Player player) {
+            return original + ModArmorBonus.getValue(player, ModArmorBonus.FORTUNE);
+        }
+        return original;
+    }
+}

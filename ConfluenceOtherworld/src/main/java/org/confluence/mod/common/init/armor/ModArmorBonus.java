@@ -85,7 +85,7 @@ public final class ModArmorBonus {
     public static final ValueType.UnitType TITANIUM$SHARDS = ValueType.UnitType.of(Confluence.asResource("titanium_shards"));
     public static final ValueType.UnitType LAVA$IMMUNE = ValueType.UnitType.of(Confluence.asResource("lava_immune"));
     public static final ValueType.IntegerType DURABILITY$REPAIR$AMOUNT$PER$SECOND$IN$LAVA = ValueType.IntegerType.of(Confluence.asResource("durability_repair_amount_per_second_in_lava"), IntegerValue.GET_MAX, 0);
-    public static final ValueType.IntegerType FORTUNE = ValueType.IntegerType.of(Confluence.asResource("fortune"), AS_ENCHANTMENT_INT_CR, 0); // todo
+    public static final ValueType.IntegerType FORTUNE = ValueType.IntegerType.of(Confluence.asResource("fortune"), AS_ENCHANTMENT_INT_CR, 0);
     public static final ValueType<Object2IntMap<MobEffect>, EnhanceEffectDuration> ENHANCE$EFFECT$DURATION = ValueType.create(Confluence.asResource("enhance_effect_duration"), EnhanceEffectDuration.MERGE, EnhanceEffectDuration.CODEC, Object2IntMaps.emptyMap(), EnhanceEffectDuration::new);
     // endregion
 
