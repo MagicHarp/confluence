@@ -1,11 +1,9 @@
 
 package org.confluence.mod.common.init;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.confluence.lib.common.item.GroupItem;
@@ -1684,7 +1682,7 @@ public final class ModTabs {
                     })
                     .withTabsBefore(TCTabs.ACCESSORIES.getId()).build());
     public static final RegistryObject<CreativeModeTab> WARRIORS = TABS.register("warriors",
-            () -> CreativeModeTab.builder().icon(IconItems.MELEE_ICON::toStack)
+            () -> CreativeModeTab.builder().icon(IconItems.WARRIOR_ICON::toStack)
                     .title(Component.translatable("creativetab.confluence.warriors"))
                     .displayItems((parameters, output) -> {
                         output = new WipNotDisplayOutput(output);
@@ -1779,8 +1777,8 @@ public final class ModTabs {
                     })
                     .withTabsBefore(ARMORS.getId())
                     .build());
-    public static final RegistryObject<CreativeModeTab> SHOOTERS = TABS.register("rangers",
-            () -> CreativeModeTab.builder().icon(IconItems.REMOTE_ICON::toStack)
+    public static final RegistryObject<CreativeModeTab> RANGERS = TABS.register("rangers",
+            () -> CreativeModeTab.builder().icon(IconItems.RANGER_ICON::toStack)
                     .title(Component.translatable("creativetab.confluence.rangers"))
                     .displayItems((parameters, output) -> {
                         output = new WipNotDisplayOutput(output);
@@ -1838,13 +1836,12 @@ public final class ModTabs {
                     .withTabsBefore(WARRIORS.getId())
                     .build());
     public static final RegistryObject<CreativeModeTab> MAGES = TABS.register("mages",
-            () -> CreativeModeTab.builder().icon(IconItems.MAGIC_ICON::toStack)
+            () -> CreativeModeTab.builder().icon(IconItems.SORCERER_ICON::toStack)
                     .title(Component.translatable("creativetab.confluence.mages"))
                     .displayItems((parameters, output) -> {
                         output = new WipNotDisplayOutput(output);
 
                         acceptAll(ManaWeaponItems.ITEMS, output);
-                        HolderLookup.RegistryLookup<Enchantment> registryLookup = parameters.holders().lookupOrThrow(Registries.ENCHANTMENT);
                         output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.MANA_REGENERATION.get(), 3));
                         output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.EFFICIENT_MAGIC.get(), 1));
                         output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.MANA_MENDING.get(), 3));
@@ -1854,10 +1851,10 @@ public final class ModTabs {
                         output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.SPELL_DESPERATION.get(), 2));
                         output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.MYSTIC_SURGE.get(), 2));
                     })
-                    .withTabsBefore(SHOOTERS.getId())
+                    .withTabsBefore(RANGERS.getId())
                     .build());
     public static final RegistryObject<CreativeModeTab> SUMMONERS = TABS.register("summoners",
-            () -> CreativeModeTab.builder().icon(IconItems.SUMMON_ICON::toStack)
+            () -> CreativeModeTab.builder().icon(IconItems.SUMMONER_ICON::toStack)
                     .title(Component.translatable("creativetab.confluence.summoners"))
                     .displayItems((parameters, output) -> {
                         output = new WipNotDisplayOutput(output);

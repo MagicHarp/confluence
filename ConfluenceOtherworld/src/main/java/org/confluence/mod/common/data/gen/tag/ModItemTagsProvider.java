@@ -523,6 +523,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModTags.Items.PREFIX_ACCESSORY_ONLY)
                 .addTag(TCTags.Items.ACCESSORY);
 
+        IntrinsicTagAppender<Item> boomerang = tag(ModTags.Items.BOOMERANG);
+        BoomerangItems.ITEMS.getEntries().forEach(item -> boomerang.add(item.get()));
+
         IntrinsicTagAppender<Item> dye = tag(ModTags.Items.DYE);
         dye.add(VanityArmorItems.TEAM_DYE.get());
 
