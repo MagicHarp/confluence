@@ -36,10 +36,6 @@ public class SpikedSlime extends BaseSlime {
         super(type, level, passiveByDay);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(7.0f, 5, 26.0f);
-    }
-
     protected int spikeCount() {
         return 8;
     }

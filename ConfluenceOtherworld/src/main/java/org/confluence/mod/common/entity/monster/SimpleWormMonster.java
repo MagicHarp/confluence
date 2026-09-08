@@ -38,10 +38,6 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
         this.role = role;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseWormMonster.createWormAttributes();
-    }
-
     @Override
     protected int getSegmentCount() {
         return segments;
@@ -68,6 +64,11 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
             return false;
         }
         return super.hurt(source, amount);
+    }
+
+    @Override
+    public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
+        return role != Role.FLYING && super.causeFallDamage(fallDistance, multiplier, source);
     }
 
     @Override

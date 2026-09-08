@@ -97,16 +97,6 @@ public class KingSlime extends BaseBoss {
         entityData.define(DATA_PHASE_TICKS, 0);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 728.0)
-                .add(Attributes.ATTACK_DAMAGE, 16.5)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.2)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 100.0);
-    }
-
     @Override
     protected BossEvent.BossBarColor getBossBarColor() {
         return BossEvent.BossBarColor.BLUE;

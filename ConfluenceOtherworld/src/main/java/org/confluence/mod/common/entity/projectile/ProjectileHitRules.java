@@ -21,7 +21,7 @@ public final class ProjectileHitRules {
             return false;
         }
         Entity target = encounterOwner(rawTarget);
-        if (!LibEntityUtils.canHitEntity(target, owner)) {
+        if (!LibEntityUtils.canHitEntity(rawTarget, owner)) {
             return false;
         }
         if (target == owner || owner != null && owner.isAlliedTo(target)) {

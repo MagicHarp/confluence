@@ -25,10 +25,6 @@ public class SweetSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(0f, 0, 16.0f);
-    }
-
     /// 甜蜜史莱姆没有仇恨与攻击行为，仅保留通用史莱姆的巡游移动。
     @Override
     protected void registerGoals() {}

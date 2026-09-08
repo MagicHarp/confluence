@@ -19,10 +19,7 @@ public final class StraightFlyingPursuitAction extends BTNode {
     private final double turnRadians;
 
     public StraightFlyingPursuitAction(BaseMonster mob, double friction, double maxSpeed, double acceleration, double turnSpeedDegrees) {
-        if (!Double.isFinite(friction) || friction < 0.0 || friction > 1.0
-                || !Double.isFinite(maxSpeed) || maxSpeed <= 0.0
-                || !Double.isFinite(acceleration) || acceleration <= 0.0
-                || !Double.isFinite(turnSpeedDegrees) || turnSpeedDegrees <= 0.0 || turnSpeedDegrees > 180.0) {
+        if (friction < 0.0 || friction > 1.0 || maxSpeed <= 0.0 || acceleration <= 0.0 || turnSpeedDegrees <= 0.0 || turnSpeedDegrees > 180.0) {
             throw new IllegalArgumentException("Straight pursuit parameters are outside their valid ranges");
         }
         this.mob = mob;

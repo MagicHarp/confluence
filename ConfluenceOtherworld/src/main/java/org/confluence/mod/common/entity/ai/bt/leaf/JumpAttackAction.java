@@ -20,11 +20,11 @@ public final class JumpAttackAction extends BTNode {
     private int elapsedTicks;
 
     public JumpAttackAction(BaseMonster mob, double maximumDistance, double speedMultiplier, int cooldownTicks, int windupTicks) {
-        if (!Double.isFinite(maximumDistance) || maximumDistance <= 0.0) {
-            throw new IllegalArgumentException("Jump maximum distance must be finite and positive");
+        if (maximumDistance <= 0.0) {
+            throw new IllegalArgumentException("Jump maximum distance must be positive");
         }
-        if (!Double.isFinite(speedMultiplier) || speedMultiplier <= 0.0) {
-            throw new IllegalArgumentException("Jump speed multiplier must be finite and positive");
+        if (speedMultiplier <= 0.0) {
+            throw new IllegalArgumentException("Jump speed multiplier must be positive");
         }
         if (cooldownTicks < 0 || windupTicks < 0) {
             throw new IllegalArgumentException("Jump cooldown and windup must be non-negative");

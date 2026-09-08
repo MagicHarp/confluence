@@ -15,8 +15,8 @@ public record SummonVisualState(
         if (animationTicks < 0 || animationDuration < 0) {
             throw new IllegalArgumentException("Summon animation time must not be negative");
         }
-        if (!Float.isFinite(animationDegrees) || !Float.isFinite(scale) || !Float.isFinite(scaleY) || scale <= 0.0F || scaleY <= 0.0F) {
-            throw new IllegalArgumentException("Summon visual values must be finite and scales must be positive");
+        if (scale <= 0.0F || scaleY <= 0.0F) {
+            throw new IllegalArgumentException("Summon visual scales must be positive");
         }
     }
 }

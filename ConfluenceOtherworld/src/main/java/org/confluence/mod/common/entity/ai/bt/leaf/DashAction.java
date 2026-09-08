@@ -15,7 +15,7 @@ public class DashAction extends BTNode {
     private int tick;
 
     public DashAction(BaseMonster mob, double speed, int duration) {
-        if (!Double.isFinite(speed) || speed <= 0.0 || duration <= 0)
+        if (speed <= 0.0 || duration <= 0)
             throw new IllegalArgumentException("Dash speed and duration must be positive");
         this.mob = mob;
         this.speed = speed;

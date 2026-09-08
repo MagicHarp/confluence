@@ -15,8 +15,8 @@ public class MeleeAttackAction extends BTNode {
     protected static final int ATTACK_COOLDOWN = 20;
 
     public MeleeAttackAction(Mob mob, double attackRange) {
-        if (!Double.isFinite(attackRange) || attackRange < 0.0) {
-            throw new IllegalArgumentException("Melee attack range must be finite and non-negative");
+        if (attackRange < 0.0) {
+            throw new IllegalArgumentException("Melee attack range must be non-negative");
         }
         this.mob = mob;
         this.attackRange = attackRange;

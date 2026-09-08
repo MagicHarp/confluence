@@ -49,15 +49,6 @@ public class DungeonGuardian extends BaseBoss {
         return true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 9999.0)
-                .add(Attributes.ATTACK_DAMAGE, 9999.0)
-                .add(Attributes.ARMOR, 9999.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 100.0);
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

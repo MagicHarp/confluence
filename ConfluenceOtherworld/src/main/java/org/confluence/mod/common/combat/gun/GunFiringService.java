@@ -2,7 +2,6 @@ package org.confluence.mod.common.combat.gun;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.lib.common.LibAttributes;
 import org.confluence.lib.util.LibMathUtils;
 import org.confluence.mod.api.event.GunEvent;
 import org.confluence.mod.common.component.BulletPropertyComponent;
@@ -36,8 +35,7 @@ public final class GunFiringService {
         GunEvent.AmmoDataEvent event = new GunEvent.AmmoDataEvent(player, gun, gunStack, ballistics.damage(),
                 ballistics.critical(), ballistics.knockback(), ballistics.velocity(), ballistics.penetrate(), ballistics.inaccuracy());
         PortEventHandler.postEvent(event);
-        float critical = event.getCritical() + (float) player.getAttributeValue(LibAttributes.getCriticalChance());
-        float damage = LibMathUtils.criticalDamageTotal(critical, event.getDamage(), player.getRandom1211());
+        float damage = LibMathUtils.criticalDamageTotal(event.getCritical(), event.getDamage(), player.getRandom1211());
         return GunProjectileFactory.spawn(new ShotContext(player, gunStack, ammo, damage, event.getKnockback(), event.getVelocity(), event.getPenetrate(), event.getInaccuracy()), gun.getDefinition().projectilePattern());
     }
 

@@ -27,17 +27,13 @@ public final class FlyingFishMonster extends BaseFlyingMonster {
 
     public FlyingFishMonster(EntityType<? extends FlyingFishMonster> type, Level level, PursuitProfile pursuitProfile, double wanderSpeed) {
         super(type, level);
-        if (!Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0) {
-            throw new IllegalArgumentException("Wander speed must be finite and positive");
+        if (wanderSpeed <= 0.0) {
+            throw new IllegalArgumentException("Wander speed must be positive");
         }
         this.pursuitProfile = pursuitProfile;
         this.wanderSpeed = wanderSpeed;
         setDiscardFriction(true);
         setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes();
     }
 
     @Override
@@ -90,14 +86,14 @@ public final class FlyingFishMonster extends BaseFlyingMonster {
     public record PursuitProfile(double friction, double maxSpeed, double acceleration,
                                  double turnSpeedDegrees) {
         public PursuitProfile {
-            if (!Double.isFinite(friction) || friction < 0.0 || friction > 1.0) {
+            if (friction < 0.0 || friction > 1.0) {
                 throw new IllegalArgumentException("Pursuit friction must be within [0, 1]");
             }
-            if (!Double.isFinite(maxSpeed) || maxSpeed <= 0.0 || !Double.isFinite(acceleration) || acceleration <= 0.0) {
-                throw new IllegalArgumentException("Pursuit speed and acceleration must be finite and positive");
+            if (maxSpeed <= 0.0 || acceleration <= 0.0) {
+                throw new IllegalArgumentException("Pursuit speed and acceleration must be positive");
             }
-            if (!Double.isFinite(turnSpeedDegrees) || turnSpeedDegrees <= 0.0 || turnSpeedDegrees > 180.0) {
-                throw new IllegalArgumentException("Pursuit turn speed must be finite and within (0, 180]");
+            if (turnSpeedDegrees <= 0.0 || turnSpeedDegrees > 180.0) {
+                throw new IllegalArgumentException("Pursuit turn speed must be within (0, 180]");
             }
         }
 

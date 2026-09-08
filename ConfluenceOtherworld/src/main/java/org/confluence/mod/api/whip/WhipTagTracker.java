@@ -73,8 +73,8 @@ public final class WhipTagTracker {
         Objects.requireNonNull(owner, "Whip tag owner must not be null");
         Objects.requireNonNull(summon, "Whip tag summon must not be null");
         Objects.requireNonNull(target, "Whip tag target must not be null");
-        if (!Float.isFinite(baseDamage) || baseDamage < 0.0F) {
-            throw new IllegalArgumentException("Whip tag base damage must be finite and non-negative");
+        if (baseDamage < 0.0F) {
+            throw new IllegalArgumentException("Whip tag base damage must be non-negative");
         }
         Entry entry = find(owner, target);
         if (entry == null) {
@@ -82,7 +82,7 @@ public final class WhipTagTracker {
         }
 
         float damage = entry.effect().modifyDamage(new WhipTagDamageContext(owner, summon, target, entry.whipStack()), baseDamage);
-        if (!Float.isFinite(damage) || damage < 0.0F) {
+        if (damage < 0.0F) {
             throw new IllegalStateException("Whip tag effect returned invalid damage");
         }
         return damage;

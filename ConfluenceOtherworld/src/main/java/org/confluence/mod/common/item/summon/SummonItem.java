@@ -44,8 +44,8 @@ public class SummonItem extends Item {
         if (slotCost <= 0) {
             throw new IllegalArgumentException("Summon slot cost must be positive");
         }
-        if (!Float.isFinite(baseDamage) || baseDamage < 0.0F) {
-            throw new IllegalArgumentException("Summon base damage must be finite and non-negative");
+        if (baseDamage < 0.0F) {
+            throw new IllegalArgumentException("Summon base damage must be non-negative");
         }
         this.slotCost = slotCost;
         this.baseDamage = baseDamage;

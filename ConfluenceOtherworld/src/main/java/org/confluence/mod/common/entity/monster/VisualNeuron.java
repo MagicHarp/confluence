@@ -92,10 +92,6 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
         entityData.define(COMBAT_STATE, CombatState.RETURNING.id);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return CreatureAttributeBuilder.creature(BASE_MAX_HEALTH, 10.0, 9.0, 0.0, 0.0, 0.1);
-    }
-
     /// 建立神经元与权威 Boss 的精确所有权。
     public void setOwner(BrainOfCthulhu owner) {
         ownerTracker.bind(this, owner);

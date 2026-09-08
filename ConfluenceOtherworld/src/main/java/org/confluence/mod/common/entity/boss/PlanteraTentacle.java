@@ -12,6 +12,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.SweptContactAttack;
@@ -21,11 +23,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /// 世纪之花触手——从方块表面伸出攻击玩家，短时间后消失。
-public class PlanteraTentacle extends BaseBossPart<Plantera> implements GeoEntity {
+public class PlanteraTentacle extends BaseLivingBossPart<Plantera> implements GeoEntity {
     private static final String SLOT_TAG = "Slot";
-    private static final float DAMAGE = 15.6F;
-    private static final float MAX_HEALTH = 260.0F;
-    private static final float ARMOR = 20.0F;
     private static final double DISTANCE_FROM_ANCHOR = 6.0;
     private static final double RADIAL_STEP = 0.15;
     private static final double TARGET_ATTRACTION_RADIUS = 24.0;
@@ -38,7 +37,7 @@ public class PlanteraTentacle extends BaseBossPart<Plantera> implements GeoEntit
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int contactCooldown;
 
-    public PlanteraTentacle(EntityType<?> type, Level level) {
+    public PlanteraTentacle(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.noPhysics = true;
     }
@@ -113,7 +112,7 @@ public class PlanteraTentacle extends BaseBossPart<Plantera> implements GeoEntit
         for (Entity entity : SweptContactAttack.findTargets(this, 0.25D,
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 candidate -> candidate instanceof LivingEntity living && living != master && master.canAttack(living))) {
-            if (entity.hurt(damageSources().mobAttack(master), DAMAGE)) {
+            if (entity.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE))) {
                 contactCooldown = CONTACT_COOLDOWN;
                 break;
             }
@@ -135,11 +134,6 @@ public class PlanteraTentacle extends BaseBossPart<Plantera> implements GeoEntit
         double cosine = Math.cos(radians);
         double sine = Math.sin(radians);
         return offset.scale(cosine).add(axis.cross(offset).scale(sine)).add(axis.scale(axis.dot(offset) * (1.0 - cosine)));
-    }
-
-    @Override
-    protected float getMaxPartHealth() {
-        return MAX_HEALTH;
     }
 
     @Override
@@ -172,14 +166,11 @@ public class PlanteraTentacle extends BaseBossPart<Plantera> implements GeoEntit
         Plantera owner = getOwner();
         if (owner == null || !owner.isAlive() || isRemoved() || isInvulnerableTo(source))
             return false;
-        float appliedDamage = source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount : CombatRules.getDamageAfterAbsorb(amount, ARMOR, 0.0F);
-        if (appliedDamage <= 0.0F) return false;
-        float remaining = Math.max(0.0F, getPartHealth() - appliedDamage);
-        setPartHealth(remaining);
+        if (!super.hurt(source, amount)) return false;
+        float remaining = getHealth();
         indicateHurt();
         if (remaining <= 0.0F) {
             onPartDestroyed(owner);
-            discard();
         }
         return true;
     }

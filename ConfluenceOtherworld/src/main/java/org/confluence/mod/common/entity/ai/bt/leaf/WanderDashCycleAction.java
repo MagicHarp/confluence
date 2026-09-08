@@ -22,7 +22,7 @@ public final class WanderDashCycleAction extends BTNode {
     private Vec3 dashDirection = Vec3.ZERO;
 
     public WanderDashCycleAction(BaseMonster mob, int wanderTicks, int dashTicks, double wanderSpeed, double dashSpeed) {
-        if (wanderTicks <= 0 || dashTicks <= 0 || !Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0 || !Double.isFinite(dashSpeed) || dashSpeed <= 0.0) {
+        if (wanderTicks <= 0 || dashTicks <= 0 || wanderSpeed <= 0.0 || dashSpeed <= 0.0) {
             throw new IllegalArgumentException("Wander dash durations and speeds must be positive");
         }
         this.mob = mob;

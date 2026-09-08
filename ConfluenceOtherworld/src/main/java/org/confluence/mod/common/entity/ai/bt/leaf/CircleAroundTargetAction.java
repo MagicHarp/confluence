@@ -16,8 +16,8 @@ public class CircleAroundTargetAction extends BTNode {
     protected static final int DURATION = 80;
 
     public CircleAroundTargetAction(BaseMonster mob, double speed, double radius) {
-        if (!Double.isFinite(speed) || speed <= 0.0 || !Double.isFinite(radius) || radius <= 0.0) {
-            throw new IllegalArgumentException("Orbit speed and radius must be finite and positive");
+        if (speed <= 0.0 || radius <= 0.0) {
+            throw new IllegalArgumentException("Orbit speed and radius must be positive");
         }
         this.mob = mob;
         this.speed = speed;

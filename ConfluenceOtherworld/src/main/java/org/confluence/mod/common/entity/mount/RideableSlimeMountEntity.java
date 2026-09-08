@@ -13,7 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.lib.util.LibEntityUtils;
+import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -95,8 +95,17 @@ public final class RideableSlimeMountEntity extends AbstractMountEntity implemen
             return;
         }
         if (!level().isClientSide && jumpActive && !grounded) {
-            LivingEntity target = LibEntityUtils.getAABBAngleTarget(position(), position().add(0.5, -1.0, 0.5), level(), player, 1.0, 40.0, entity -> entity instanceof LivingEntity && entity.isAttackable());
-            if (target != null && target.hurt(damageSources().generic(), STOMP_DAMAGE)) {
+            boolean stomped = false;
+            for (LivingEntity target : level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    getBoundingBox().expandTowards(0.0, -1.0, 0.0).inflate(0.15),
+                    target -> ProjectileHitRules.canHit(player, target)
+            )) {
+                if (target.hurt(damageSources().playerAttack(player), STOMP_DAMAGE)) {
+                    stomped = true;
+                }
+            }
+            if (stomped) {
                 Vec3 velocity = getDeltaMovement();
                 setDeltaMovement(velocity.x, JUMP_VELOCITY, velocity.z);
                 playSound(SoundEvents.SLIME_BLOCK_PLACE, 0.5F, 2.0F);

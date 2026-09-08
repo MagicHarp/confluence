@@ -70,10 +70,6 @@ public class MeleeSkeleton extends BaseHumanoidMonster {
         }
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseHumanoidMonster.createHumanoidAttributes();
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

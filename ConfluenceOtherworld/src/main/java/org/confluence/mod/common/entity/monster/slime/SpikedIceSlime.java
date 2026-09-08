@@ -19,10 +19,6 @@ public class SpikedIceSlime extends SpikedSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(6.0f, 8, 31.0f);
-    }
-
     @Override
     protected SlimeSpikeEntity.Variant spikeVariant() {
         return SlimeSpikeEntity.Variant.ICE;

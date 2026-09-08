@@ -12,11 +12,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.lib.common.LibAttributes;
 import org.confluence.mod.api.whip.WhipAppearance;
 import org.confluence.mod.api.whip.WhipDefinition;
 import org.confluence.mod.common.entity.projectile.whip.WhipAttackEntity;
 import org.confluence.mod.common.init.entity.ModEntities;
+import org.confluence.mod.common.init.item.WhipItems;
 
 import java.util.Objects;
 
@@ -49,22 +51,31 @@ public class BaseWhipItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (player instanceof ServerPlayer serverPlayer) {
+            if (hasWhipCooldown(serverPlayer)) {
+                return InteractionResultHolder.fail(stack);
+            }
             WhipAttackEntity attack = new WhipAttackEntity(ModEntities.WHIP_ATTACK.get(), level);
             HumanoidArm arm = hand == InteractionHand.MAIN_HAND
                     ? serverPlayer.getMainArm()
                     : serverPlayer.getMainArm().getOpposite();
             int durationTicks = resolveDurationTicks(serverPlayer);
-            Vec3 direction = serverPlayer.getViewVector(1.0F);
+            Vec3 direction = Vec3.directionFromRotation(0.0F, serverPlayer.getYRot());
             attack.setOwner(serverPlayer);
             attack.setDamage(definition.baseDamage() * (float) serverPlayer.getAttributeValue(LibAttributes.getSummonDamage()));
-            attack.initialize(stack, direction, arm, durationTicks);
+            attack.initialize(stack, direction, arm, durationTicks,
+                    (float) serverPlayer.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE));
             attack.setPos(serverPlayer.position().add(0.0, serverPlayer.getBbHeight() * 0.5F, 0.0).add(playerHandOffset(serverPlayer, arm)));
             if (level.addFreshEntity(attack)) {
-                serverPlayer.getCooldowns().addCooldown(this, durationTicks);
+                WhipItems.ITEMS.getEntries().forEach(entry -> serverPlayer.getCooldowns().addCooldown(entry.get(), durationTicks));
                 serverPlayer.awardStat(Stats.ITEM_USED.get(this));
             }
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+    }
+
+    private static boolean hasWhipCooldown(Player player) {
+        return WhipItems.ITEMS.getEntries().stream()
+                .anyMatch(entry -> player.getCooldowns().isOnCooldown(entry.get()));
     }
 
     /// 按 1.21 的公式把玩家当前攻击速度换算为一次完整挥鞭所需的 tick 数。
@@ -72,8 +83,8 @@ public class BaseWhipItem extends Item {
     public static int resolveDurationTicks(Player player) {
         Objects.requireNonNull(player, "Whip player must not be null");
         double attackSpeed = player.getAttributeValue(Attributes.ATTACK_SPEED);
-        if (!Double.isFinite(attackSpeed) || attackSpeed <= 0.0) {
-            throw new IllegalStateException("Whip attack speed must be finite and positive");
+        if (attackSpeed <= 0.0) {
+            throw new IllegalStateException("Whip attack speed must be positive");
         }
         return Math.max(1, (int) (80.0 / attackSpeed));
     }

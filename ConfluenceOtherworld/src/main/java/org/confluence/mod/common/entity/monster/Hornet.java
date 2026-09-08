@@ -41,12 +41,6 @@ public class Hornet extends BaseFlyingMonster {
         this.moveControl = new FlyingMoveControl(this, 20, true);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 24.0)
-                .add(Attributes.ATTACK_DAMAGE, 6.0);
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

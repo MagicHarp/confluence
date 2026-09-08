@@ -11,6 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.PartHitTarget;
@@ -31,10 +33,8 @@ import java.util.UUID;
 ///
 /// 体节把伤害转交给具有权威状态的头部；区块重新加载后也由头部重建整条体节链。
 /// 因此体节只保存恢复归属所需的最小信息，不能独立决定 Boss 生命周期。
-public class BossWormPart extends Entity implements WormSegment, GeoEntity, PartHitTarget {
-    // 不同 Boss 体节的接触伤害，以及一次命中后的冷却（tick）。
-    private static final float EATER_COLLISION_DAMAGE = 4.0F;
-    private static final float DESTROYER_COLLISION_DAMAGE = 66.0F;
+public class BossWormPart extends Monster implements WormSegment, GeoEntity, PartHitTarget {
+    // 一次接触命中后的冷却（tick）。
     private static final int COLLISION_COOLDOWN = 10;
     // 允许本体后到达的网络/区块加载宽限，单位为 tick。
     private static final int OWNER_RESOLUTION_GRACE_TICKS = 100;
@@ -75,6 +75,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
         super(type, level);
         this.noPhysics = true;
         this.noCulling = true;
+        this.setNoGravity(true);
     }
 
     public void bindTo(BaseWormBoss owner, int index, boolean tail) {
@@ -250,9 +251,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
                 candidate -> candidate instanceof LivingEntity living && candidate != head && head.canAttack(living));
         for (Entity entity : contacts) {
             if (entity instanceof LivingEntity target) {
-                float damage = head instanceof TheDestroyer
-                        ? DESTROYER_COLLISION_DAMAGE
-                        : EATER_COLLISION_DAMAGE;
+                float damage = (float) getAttributeValue(Attributes.ATTACK_DAMAGE);
                 target.hurt(damageSources().mobAttack(head), damage);
                 hurtCooldown = COLLISION_COOLDOWN;
                 return;
@@ -346,6 +345,7 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
 
     @Override
     protected void defineSynchedData() {
+        super.defineSynchedData();
         entityData.define(OWNER_ID, -1);
         entityData.define(INDEX, 0);
         entityData.define(TAIL, false);
@@ -356,7 +356,8 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
         ownerUUID = tag.hasUUID(OWNER_TAG) ? tag.getUUID(OWNER_TAG) : null;
         entityData.set(INDEX, tag.getInt(INDEX_TAG));
         entityData.set(TAIL, tag.getBoolean(TAIL_TAG));
@@ -364,7 +365,8 @@ public class BossWormPart extends Entity implements WormSegment, GeoEntity, Part
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
         UUID uuid = owner == null ? ownerUUID : owner.getUUID();
         if (uuid != null) tag.putUUID(OWNER_TAG, uuid);
         tag.putInt(INDEX_TAG, getSegmentIndex());

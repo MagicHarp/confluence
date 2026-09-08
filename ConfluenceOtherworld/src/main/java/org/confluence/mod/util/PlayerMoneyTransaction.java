@@ -73,15 +73,9 @@ public final class PlayerMoneyTransaction {
         List<ItemStack> extraCopy = copyStacks(extraInventory.getAllCoins());
         List<ItemStack> piggyCopy = piggyBank == null ? List.of() : copyContainer(piggyBank);
 
-        long current = Math.addExact(sumAndClearCoins(inventoryCopy), Math.addExact(sumAndClearCoins(extraCopy), sumAndClearCoins(piggyCopy)));
-        Optional<List<ItemStack>> encoded = encodeCoins(Math.addExact(current, amount), inventoryCopy.size() + extraCopy.size() + piggyCopy.size());
-        if (encoded.isEmpty()) {
+        boolean credited = addMoneyToFirstAvailableWallet(amount, extraCopy, piggyCopy, inventoryCopy);
+        if (!credited) {
             return false;
-        }
-        for (ItemStack stack : encoded.get()) {
-            if (!placeIntoEmptySlot(stack, extraCopy) && !placeIntoEmptySlot(stack, piggyCopy) && !placeIntoEmptySlot(stack, inventoryCopy)) {
-                return false;
-            }
         }
 
         commitInventory(inventory, inventoryCopy);
@@ -104,14 +98,8 @@ public final class PlayerMoneyTransaction {
         List<ItemStack> piggyCopy = piggyBank == null ? List.of() : copyContainer(piggyBank);
         inventoryCopy.set(sourceSlot, ItemStack.EMPTY);
 
-        long current = Math.addExact(sumAndClearCoins(inventoryCopy), Math.addExact(sumAndClearCoins(extraCopy), sumAndClearCoins(piggyCopy)));
-        Optional<List<ItemStack>> encoded = encodeCoins(Math.addExact(current, amount), inventoryCopy.size() + extraCopy.size() + piggyCopy.size());
-        if (encoded.isEmpty()) return false;
-        for (ItemStack stack : encoded.get()) {
-            if (!placeIntoEmptySlot(stack, extraCopy) && !placeIntoEmptySlot(stack, piggyCopy) && !placeIntoEmptySlot(stack, inventoryCopy)) {
-                return false;
-            }
-        }
+        boolean credited = addMoneyToFirstAvailableWallet(amount, extraCopy, piggyCopy, inventoryCopy);
+        if (!credited) return false;
 
         commitInventory(inventory, inventoryCopy);
         commitExtraInventory(extraInventory, extraCopy);
@@ -141,22 +129,40 @@ public final class PlayerMoneyTransaction {
         List<ItemStack> extraCopy = copyStacks(extraInventory.getAllCoins());
         List<ItemStack> piggyCopy = piggyBank == null ? List.of() : copyContainer(piggyBank);
 
-        long total = Math.addExact(sumAndClearCoins(inventoryCopy), Math.addExact(sumAndClearCoins(extraCopy), sumAndClearCoins(piggyCopy)));
+        long piggyMoney = sumCoins(piggyCopy);
+        long carriedMoney = Math.addExact(sumCoins(inventoryCopy), sumCoins(extraCopy));
+        long total = Math.addExact(piggyMoney, carriedMoney);
         if (total < cost) {
             return false;
+        }
+
+        // 总额校验包含存钱罐；实际付款先使用背包和钱币栏，不足部分才扣存钱罐。
+        // 两个区域分别找零，交易不会在它们之间迁移余额。
+        long carriedCost = Math.min(cost, carriedMoney);
+        long piggyCost = cost - carriedCost;
+        if (carriedCost > 0) {
+            sumAndClearCoins(inventoryCopy);
+            sumAndClearCoins(extraCopy);
+        }
+        if (piggyCost > 0) {
+            boolean rewritten = rewriteMoney(piggyCopy, piggyMoney - piggyCost);
+            if (!rewritten) return false;
         }
 
         if (!result.isEmpty() && !insertIntoInventory(result, inventoryCopy)) {
             return false;
         }
 
-        Optional<List<ItemStack>> change = encodeCoins(total - cost, inventoryCopy.size() + extraCopy.size() + piggyCopy.size());
-        if (change.isEmpty()) {
-            return false;
-        }
-        for (ItemStack stack : change.get()) {
-            if (!placeIntoEmptySlot(stack, extraCopy) && !placeIntoEmptySlot(stack, piggyCopy) && !placeIntoEmptySlot(stack, inventoryCopy)) {
+        if (carriedCost > 0) {
+            Optional<List<ItemStack>> change = encodeCoins(carriedMoney - carriedCost,
+                    inventoryCopy.size() + extraCopy.size());
+            if (change.isEmpty()) {
                 return false;
+            }
+            for (ItemStack stack : change.get()) {
+                if (!placeIntoEmptySlot(stack, extraCopy) && !placeIntoEmptySlot(stack, inventoryCopy)) {
+                    return false;
+                }
             }
         }
 
@@ -196,6 +202,46 @@ public final class PlayerMoneyTransaction {
             stacks.set(slot, ItemStack.EMPTY);
         }
         return total;
+    }
+
+    private static long sumCoins(List<ItemStack> stacks) {
+        long total = 0;
+        for (ItemStack stack : stacks) {
+            long value = CoinItem.valueOf(stack.getItem());
+            if (!stack.isEmpty() && stack.is(ModTags.Items.COINS) && value > 0) {
+                total = Math.addExact(total, Math.multiplyExact(value, stack.getCount()));
+            }
+        }
+        return total;
+    }
+
+    /// 在单个存储区域内重新编码余额，区域中的非钱币物品保持原位。
+    private static boolean rewriteMoney(List<ItemStack> slots, long amount) {
+        if (slots.isEmpty()) return amount == 0;
+        sumAndClearCoins(slots);
+        Optional<List<ItemStack>> encoded = encodeCoins(amount, slots.size());
+        if (encoded.isEmpty()) return false;
+        for (ItemStack stack : encoded.get()) {
+            if (!placeIntoEmptySlot(stack, slots)) return false;
+        }
+        return true;
+    }
+
+    /// 售出所得只写入一个能够容纳整笔金额的钱包，不重排其他钱包已有的钱币。
+    private static boolean addMoneyToFirstAvailableWallet(long amount, List<ItemStack> extraInventory, List<ItemStack> piggyBank, List<ItemStack> inventory) {
+        return addMoneyToWallet(amount, extraInventory) || addMoneyToWallet(amount, piggyBank) || addMoneyToWallet(amount, inventory);
+    }
+
+    private static boolean addMoneyToWallet(long amount, List<ItemStack> wallet) {
+        if (wallet.isEmpty()) return false;
+        List<ItemStack> candidate = copyStacks(wallet);
+        long current = sumCoins(candidate);
+        boolean rewritten = rewriteMoney(candidate, Math.addExact(current, amount));
+        if (!rewritten) return false;
+        for (int slot = 0; slot < wallet.size(); slot++) {
+            wallet.set(slot, candidate.get(slot));
+        }
+        return true;
     }
 
     /// 在明确的槽位预算内拆分钱币。

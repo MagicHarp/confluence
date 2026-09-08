@@ -10,10 +10,10 @@ import java.util.List;
 public record YoyoDefinition(float attackDamage, float maximumRange, int stringColor,
                              int lifetimeTicks, List<YoyoHitEffect> hitEffects) {
     public YoyoDefinition {
-        if (!Float.isFinite(attackDamage) || attackDamage < 0.0F)
-            throw new IllegalArgumentException("Yoyo attack damage must be finite and non-negative");
-        if (!Float.isFinite(maximumRange) || maximumRange < 1.0F)
-            throw new IllegalArgumentException("Yoyo range must be finite and at least 1.0");
+        if (attackDamage < 0.0F)
+            throw new IllegalArgumentException("Yoyo attack damage must be non-negative");
+        if (maximumRange < 1.0F)
+            throw new IllegalArgumentException("Yoyo range must be at least 1.0");
         if (lifetimeTicks <= 0)
             throw new IllegalArgumentException("Yoyo lifetime must be positive");
         stringColor = 0xFF000000 | stringColor & 0x00FFFFFF;

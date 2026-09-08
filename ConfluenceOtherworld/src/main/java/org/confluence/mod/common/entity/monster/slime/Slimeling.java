@@ -12,10 +12,6 @@ public class Slimeling extends BaseSlime {
         super(type, level, false, 1);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(7.0f, 2, 45.0f);
-    }
-
     @Override
     protected void onAttackTarget(LivingEntity target) {
         tryApplyDarkness(target);

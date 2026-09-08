@@ -20,10 +20,6 @@ public class GoldenSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(5.0f, 2, 97.0f);
-    }
-
     @Override
     protected void setSlimeSize(int size) {
         super.setSlimeSize(2);

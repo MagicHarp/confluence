@@ -59,14 +59,6 @@ public class Snatcher extends BaseMonster {
         noPhysics = true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 10.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
-    }
-
     @Override
     protected void registerGoals() {
         targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));

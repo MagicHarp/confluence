@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,7 @@ import java.util.Optional;
 ///
 /// 抓钩锚定方块并为主体提供移动目标；它不独立持有 Boss 生命周期，
 /// 主体消失、脱战或重新构建附属实体时必须一并清理。
-public class PlanteraHook extends BaseBossPart<Plantera> implements GeoEntity {
+public class PlanteraHook extends BaseLivingBossPart<Plantera> implements GeoEntity {
     static final int STATE_IDLE = 0;
     static final int STATE_EXTENDING = 1;
     static final int STATE_GRABBED = 2;
@@ -39,7 +40,7 @@ public class PlanteraHook extends BaseBossPart<Plantera> implements GeoEntity {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public PlanteraHook(EntityType<?> type, Level level) {
+    public PlanteraHook(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
 

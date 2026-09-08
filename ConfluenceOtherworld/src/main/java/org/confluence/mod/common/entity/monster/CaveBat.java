@@ -44,10 +44,6 @@ public class CaveBat extends BaseFlyingMonster {
         setDiscardFriction(true);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes();
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

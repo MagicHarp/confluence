@@ -375,7 +375,7 @@ public interface ModPrefix {
             if (criticalChance != 0.0F) {
                 builder.put(LibAttributes.getCriticalChance().value(), createModifier(criticalChance, ADD_VALUE));
             }
-            if (value != 0.0F) {
+            if (velocity != 0.0F) {
                 builder.put(LibAttributes.getRangedVelocity().value(), createModifier(velocity, ADD_MULTIPLIED_TOTAL));
             }
             if (knockBack != 0.0F) {

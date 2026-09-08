@@ -1,5 +1,11 @@
 package org.confluence.mod.common.entity.monster;
 
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.CollisionGetter;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.level.pathfinder.SwimNodeEvaluator;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -9,6 +15,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 /// 敌对水生生物共用的水下导航、移动与目标选择基类。
@@ -28,7 +35,24 @@ public abstract class BaseAquaticMonster extends BaseMonster {
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return new WaterBoundPathNavigation(this, level);
+        return new WaterBoundPathNavigation(this, level) {
+            @Override
+            protected PathFinder createPathFinder(int maxVisitedNodes) {
+                nodeEvaluator = new SwimNodeEvaluator(false) {
+                    @Override
+                    public BlockPathTypes getBlockPathType(BlockGetter blocks, int x, int y, int z, Mob mob) {
+                        BlockPathTypes type = super.getBlockPathType(blocks, x, y, z, mob);
+                        if (type != BlockPathTypes.WATER || !(blocks instanceof CollisionGetter collisions)) {
+                            return type;
+                        }
+                        double offset = (int) (mob.getBbWidth() + 1.0F) * 0.5;
+                        AABB box = mob.getBoundingBox().move(x + offset - mob.getX(), y - mob.getY(), z + offset - mob.getZ());
+                        return collisions.getBlockCollisions(mob, box).iterator().hasNext() ? BlockPathTypes.BLOCKED : type;
+                    }
+                };
+                return new PathFinder(nodeEvaluator, maxVisitedNodes);
+            }
+        };
     }
 
     @Override

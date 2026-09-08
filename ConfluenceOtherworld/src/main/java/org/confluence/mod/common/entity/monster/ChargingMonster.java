@@ -23,15 +23,11 @@ public class ChargingMonster extends BaseWarriorMonster {
 
     public ChargingMonster(EntityType<? extends ChargingMonster> type, Level level, double chargeSpeed, int windupTicks) {
         super(type, level);
-        if (!Double.isFinite(chargeSpeed) || chargeSpeed <= 0.0 || windupTicks < 0) {
-            throw new IllegalArgumentException("Charge speed must be finite and positive; windup must be non-negative");
+        if (chargeSpeed <= 0.0 || windupTicks < 0) {
+            throw new IllegalArgumentException("Charge speed must be positive; windup must be non-negative");
         }
         this.chargeSpeed = chargeSpeed;
         this.windupTicks = windupTicks;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseWarriorMonster.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.28).add(Attributes.KNOCKBACK_RESISTANCE, 0.6);
     }
 
     /// 冲锋阶段依赖身体命中；专用动作只负责运动，不再维护第二套碰撞计时器。

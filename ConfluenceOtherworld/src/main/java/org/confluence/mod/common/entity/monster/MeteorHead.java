@@ -29,12 +29,6 @@ public class MeteorHead extends BaseFlyingMonster {
         this.noPhysics = true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0);
-    }
-
     @Override
     protected boolean mustSeePlayerTarget() {
         return false;

@@ -19,6 +19,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.lib.common.LibAttributes;
 import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.item.boomerang.BoomerangItem;
 import org.mesdag.portlib.event.entity.PortProjectileImpactEvent;
@@ -58,12 +59,12 @@ public class BoomerangProjectile extends Projectile {
         if (fire) setSecondsOnFire(4);
     }
 
-    public void configure(LivingEntity owner, ItemStack weapon, float damage, float flySpeed, float backSpeed,
-                          int forwardTicks, int penetration) {
+    public void configure(LivingEntity owner, ItemStack weapon, float damage, float flySpeed, float backSpeed, int forwardTicks, int penetration) {
         setOwner(owner);
         setPos(owner.getX(), owner.getEyeY() - 0.15, owner.getZ());
         entityData.set(DATA_WEAPON, weapon.copyWithCount(1));
-        entityData.set(DATA_DAMAGE, Math.max(0, damage));
+        float resolvedDamage = damage * (float) owner.getAttributeValue(LibAttributes.getAttackDamage());
+        entityData.set(DATA_DAMAGE, Math.max(0, resolvedDamage));
         this.backSpeed = Math.max(0.01F, backSpeed);
         this.forwardTicks = Math.max(1, forwardTicks);
         this.penetration = Math.max(1, penetration);

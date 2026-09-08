@@ -127,16 +127,6 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
         entityData.define(DATA_CHAT, new CompoundTag());
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 250.0)
-                .add(Attributes.ARMOR, 15.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.15)
-                .add(Attributes.FOLLOW_RANGE, 24.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-                .add(Attributes.ATTACK_DAMAGE, 10.0);
-    }
-
     // === Goals ===
 
     @Override

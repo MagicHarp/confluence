@@ -7,17 +7,17 @@ public record BulletDefinition(float damage, float velocity, float velocityMulti
                                float knockback, int penetrate, ModRarity rarity, boolean infinity,
                                BulletBehavior behavior, BulletImpactEffect impactEffect) {
     public BulletDefinition {
-        if (!Float.isFinite(damage) || damage < 0) {
-            throw new IllegalArgumentException("damage must be finite and non-negative");
+        if (damage < 0) {
+            throw new IllegalArgumentException("damage must be non-negative");
         }
-        if (!Float.isFinite(velocity) || velocity < 0) {
-            throw new IllegalArgumentException("velocity must be finite and non-negative");
+        if (velocity < 0) {
+            throw new IllegalArgumentException("velocity must be non-negative");
         }
-        if (!Float.isFinite(velocityMultiplier) || velocityMultiplier < 0) {
-            throw new IllegalArgumentException("velocityMultiplier must be finite and non-negative");
+        if (velocityMultiplier < 0) {
+            throw new IllegalArgumentException("velocityMultiplier must be non-negative");
         }
-        if (!Float.isFinite(knockback) || knockback < 0) {
-            throw new IllegalArgumentException("knockback must be finite and non-negative");
+        if (knockback < 0) {
+            throw new IllegalArgumentException("knockback must be non-negative");
         }
         if (penetrate < -1) throw new IllegalArgumentException("penetrate must be -1 or greater");
         if (rarity == null || behavior == null || impactEffect == null) {

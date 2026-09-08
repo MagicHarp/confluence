@@ -84,8 +84,8 @@ public class BaseWarriorMonster extends BaseMonster {
 
     public BaseWarriorMonster(EntityType<? extends BaseWarriorMonster> type, Level level, double pursuitSpeedBonus, LandAnimationProfile animationProfile, LandSoundProfile soundProfile, double meleeSpeed, boolean ignoreLightPathCost, DoorBehavior doorBehavior) {
         super(type, level);
-        if (!Double.isFinite(pursuitSpeedBonus) || pursuitSpeedBonus < 0.0 || !Double.isFinite(meleeSpeed) || meleeSpeed <= 0.0)
-            throw new IllegalArgumentException("Pursuit speed bonus must be finite and non-negative, and melee speed must be finite and positive");
+        if (pursuitSpeedBonus < 0.0 || meleeSpeed <= 0.0)
+            throw new IllegalArgumentException("Pursuit speed bonus must be non-negative, and melee speed must be positive");
         this.pursuitSpeedBonus = pursuitSpeedBonus;
         this.pursuitSpeedModifier = new PortAttributeModifier(Confluence.asResource("warrior_pursuit_speed"), pursuitSpeedBonus, PortAttributeModifier.Operation.ADD_VALUE).unwrap();
         this.animationProfile = animationProfile;
@@ -97,14 +97,6 @@ public class BaseWarriorMonster extends BaseMonster {
             groundNavigation.setCanOpenDoors(true);
             goalSelector.addGoal(-1, new OpenDoorGoal(this, true));
         }
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.23)
-                .add(Attributes.FOLLOW_RANGE, 16.0);
     }
 
     @Override
@@ -226,10 +218,10 @@ public class BaseWarriorMonster extends BaseMonster {
     public record JumpProfile(double maximumDistance, double speedMultiplier, int cooldownTicks,
                               int windupTicks) {
         public JumpProfile {
-            if (!Double.isFinite(maximumDistance) || maximumDistance <= 0.0) {
-                throw new IllegalArgumentException("Jump profile maximum distance must be finite and positive");
+            if (maximumDistance <= 0.0) {
+                throw new IllegalArgumentException("Jump profile maximum distance must be positive");
             }
-            if (!Double.isFinite(speedMultiplier) || speedMultiplier <= 0.0 || cooldownTicks < 0 || windupTicks < 0) {
+            if (speedMultiplier <= 0.0 || cooldownTicks < 0 || windupTicks < 0) {
                 throw new IllegalArgumentException("Jump profile speed must be positive and timing must be non-negative");
             }
         }

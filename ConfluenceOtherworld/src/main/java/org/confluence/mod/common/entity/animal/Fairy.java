@@ -17,7 +17,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
@@ -63,10 +63,6 @@ public class Fairy extends BaseFlyingCritter implements VariantHolder<Fairy.Vari
         /// 仙灵需要跨越普通方块把玩家引向宝箱。该标记只改变实体碰撞，
         /// 导航目标、脱离距离和移动节奏仍由引导目标负责。
         setGuiding(true);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingCritter.createFlyingCritterAttributes();
     }
 
     /**

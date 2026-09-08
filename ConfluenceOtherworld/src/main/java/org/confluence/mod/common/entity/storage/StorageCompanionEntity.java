@@ -12,7 +12,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -246,11 +246,4 @@ public abstract class StorageCompanionEntity extends TamableAnimal implements Ge
         return null;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.35)
-                .add(Attributes.FLYING_SPEED, 0.45)
-                .add(Attributes.FOLLOW_RANGE, 32.0);
-    }
 }

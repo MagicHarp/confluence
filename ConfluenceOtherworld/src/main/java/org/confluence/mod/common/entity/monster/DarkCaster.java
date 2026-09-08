@@ -26,11 +26,6 @@ public class DarkCaster extends BaseCasterMonster {
         this.profile = profile;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseCasterMonster.createCasterAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 16.0);
-    }
-
     /// 各类法师共享施法时序，但必须生成各自具有独立碰撞规则的弹幕。
     @Override
     protected EntityType<HostileParticleProjectile> projectileType() {

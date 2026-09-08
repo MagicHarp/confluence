@@ -9,11 +9,11 @@ import org.confluence.mod.util.PrefixUtils;
 
 public record SummonStats(float baseDamage, float weaponDamageMultiplier) {
     public SummonStats {
-        if (!Float.isFinite(baseDamage) || baseDamage < 0.0F) {
-            throw new IllegalArgumentException("Summon damage must be finite and non-negative");
+        if (baseDamage < 0.0F) {
+            throw new IllegalArgumentException("Summon damage must be non-negative");
         }
-        if (!Float.isFinite(weaponDamageMultiplier) || weaponDamageMultiplier < 0.0F) {
-            throw new IllegalArgumentException("Summon weapon damage multiplier must be finite and non-negative");
+        if (weaponDamageMultiplier < 0.0F) {
+            throw new IllegalArgumentException("Summon weapon damage multiplier must be non-negative");
         }
     }
 

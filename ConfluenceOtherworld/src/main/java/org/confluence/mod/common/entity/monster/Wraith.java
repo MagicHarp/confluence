@@ -30,12 +30,6 @@ public class Wraith extends BaseFlyingMonster {
         this.noPhysics = true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0)
-                .add(Attributes.ATTACK_DAMAGE, 12.0);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

@@ -21,11 +21,11 @@ public final class WhipCurveSampler {
 
     public static List<Vec3> sample(WhipCurve curve, double progress, double scale, double segmentSpacing) {
         Objects.requireNonNull(curve, "curve");
-        if (!Double.isFinite(scale) || scale <= 0.0) {
-            throw new IllegalArgumentException("Whip curve scale must be finite and positive");
+        if (scale <= 0.0) {
+            throw new IllegalArgumentException("Whip curve scale must be positive");
         }
-        if (!Double.isFinite(segmentSpacing) || segmentSpacing <= 0.0) {
-            throw new IllegalArgumentException("Whip segment spacing must be finite and positive");
+        if (segmentSpacing <= 0.0) {
+            throw new IllegalArgumentException("Whip segment spacing must be positive");
         }
         List<Vec3> source = curve.controlPoints(progress);
         if (source == null || source.size() < 2) {
@@ -56,8 +56,8 @@ public final class WhipCurveSampler {
     /// 等弧长采样规则，而不需要复制一份近似但不同的曲线算法。
     public static List<Vec3> sampleControlPoints(List<Vec3> source, double segmentSpacing) {
         Objects.requireNonNull(source, "source");
-        if (!Double.isFinite(segmentSpacing) || segmentSpacing <= 0.0) {
-            throw new IllegalArgumentException("Whip segment spacing must be finite and positive");
+        if (segmentSpacing <= 0.0) {
+            throw new IllegalArgumentException("Whip segment spacing must be positive");
         }
         if (source.size() < 2) {
             throw new IllegalArgumentException("Whip curve must provide at least two control points");

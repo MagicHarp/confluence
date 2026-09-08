@@ -17,7 +17,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
@@ -52,6 +51,7 @@ public class Zombie extends BaseHumanoidMonster implements VariantHolder<Zombie.
     public static final String VARIANT_KEY = "Variant";
     private static final EntityDataAccessor<Integer> DATA_VARIANT =
             SynchedEntityData.defineId(Zombie.class, EntityDataSerializers.INT);
+    private static final java.util.EnumMap<Variant, VariantStats> VARIANT_STATS = new java.util.EnumMap<>(Variant.class);
 
     public Zombie(EntityType<? extends Zombie> type, Level level) {
         this(type, level, Variant.NORMAL);
@@ -68,22 +68,21 @@ public class Zombie extends BaseHumanoidMonster implements VariantHolder<Zombie.
     }
 
     protected void applyVariantStats(Variant v) {
-        getAttribute(Attributes.MAX_HEALTH).setBaseValue(v.health);
-        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(v.damage);
-        getAttribute(Attributes.ARMOR).setBaseValue(v.armor);
+        VariantStats stats = VARIANT_STATS.get(v);
+        if (stats == null) return;
+        getAttribute(Attributes.MAX_HEALTH).setBaseValue(stats.health);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(stats.damage);
+        getAttribute(Attributes.ARMOR).setBaseValue(stats.armor);
         if (getHealth() > getMaxHealth()) {
             setHealth(getMaxHealth());
         }
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createHumanoidAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0)
-                .add(Attributes.ARMOR, 2.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.23)
-                .add(Attributes.FOLLOW_RANGE, 16.0);
+    public static void registerVariantStats(Variant variant, double health, double damage, int armor) {
+        VARIANT_STATS.put(variant, new VariantStats(health, damage, armor));
     }
+
+    private record VariantStats(double health, double damage, int armor) {}
 
     @Override
     protected void registerGoals() {
@@ -197,31 +196,25 @@ public class Zombie extends BaseHumanoidMonster implements VariantHolder<Zombie.
     }
 
     public enum Variant implements StringRepresentable {
-        NORMAL("normal", 20.0, 4.0, 2, 0xB7C7A5, 1.0F),
-        ARMED("armed", 24.0, 6.0, 3, 0xC6B08A, 1.05F),
-        SLIMED("slimed", 18.0, 3.5, 2, 0x79C96B, 0.95F),
-        PINCUSHION("pincushion", 22.0, 5.0, 3, 0xB09A79, 1.0F),
-        TWIGGY("twiggy", 20.0, 5.0, 1, 0x8E6E43, 1.05F),
-        SWAMP("swamp", 20.0, 3.5, 3, 0x68875B, 1.0F),
-        RAINCOAT("raincoat", 22.0, 4.5, 2, 0xE6C947, 1.0F),
-        BLOOD("blood", 28.0, 6.0, 3, 0xC04A4A, 1.08F),
-        ESKIMO("eskimo", 24.0, 5.0, 4, 0xBBD3DF, 1.05F),
-        BALD("bald", 18.0, 4.5, 1, 0xA7A58D, 0.98F);
+        NORMAL("normal", 0xB7C7A5, 1.0F),
+        ARMED("armed", 0xC6B08A, 1.05F),
+        SLIMED("slimed", 0x79C96B, 0.95F),
+        PINCUSHION("pincushion", 0xB09A79, 1.0F),
+        TWIGGY("twiggy", 0x8E6E43, 1.05F),
+        SWAMP("swamp", 0x68875B, 1.0F),
+        RAINCOAT("raincoat", 0xE6C947, 1.0F),
+        BLOOD("blood", 0xC04A4A, 1.08F),
+        ESKIMO("eskimo", 0xBBD3DF, 1.05F),
+        BALD("bald", 0xA7A58D, 0.98F);
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
 
         private final String name;
-        public final double health;
-        public final double damage;
-        public final int armor;
         private final int tint;
         private final float scale;
 
-        Variant(String name, double health, double damage, int armor, int tint, float scale) {
+        Variant(String name, int tint, float scale) {
             this.name = name;
-            this.health = health;
-            this.damage = damage;
-            this.armor = armor;
             this.tint = tint;
             this.scale = scale;
         }

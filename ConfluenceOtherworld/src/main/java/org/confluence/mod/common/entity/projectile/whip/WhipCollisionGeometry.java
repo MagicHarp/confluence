@@ -16,14 +16,16 @@ final class WhipCollisionGeometry {
     private WhipCollisionGeometry() {}
 
     static boolean intersectsSweptCurve(List<Vec3> previous, List<Vec3> current, AABB box) {
+        return firstContactProgress(previous, current, box) != Double.POSITIVE_INFINITY;
+    }
+
+    /// 返回目标沿鞭身从根部到梢部的首次接触位置，用于稳定同一刻命中多个目标时的衰减顺序。
+    static double firstContactProgress(List<Vec3> previous, List<Vec3> current, AABB box) {
         if (current.size() < 2) {
-            return false;
+            return Double.POSITIVE_INFINITY;
         }
         if (previous.size() < 2) {
-            return intersectsCurve(current, box);
-        }
-        if (intersectsCurve(previous, box) || intersectsCurve(current, box)) {
-            return true;
+            return firstCurveContact(current, box);
         }
 
         int segmentCount = Math.max(previous.size(), current.size()) - 1;
@@ -34,25 +36,28 @@ final class WhipCollisionGeometry {
             Vec3 previousTo = samplePolyline(previous, to);
             Vec3 currentFrom = samplePolyline(current, from);
             Vec3 currentTo = samplePolyline(current, to);
+            if (intersectsSegment(box, previousFrom, previousTo) || intersectsSegment(box, currentFrom, currentTo)) {
+                return from;
+            }
             for (int step = 1; step < SWEEP_SUBSTEPS; step++) {
                 double progress = (double) step / SWEEP_SUBSTEPS;
                 Vec3 sweptFrom = previousFrom.lerp(currentFrom, progress);
                 Vec3 sweptTo = previousTo.lerp(currentTo, progress);
                 if (intersectsSegment(box, sweptFrom, sweptTo)) {
-                    return true;
+                    return from;
                 }
             }
         }
-        return false;
+        return Double.POSITIVE_INFINITY;
     }
 
-    private static boolean intersectsCurve(List<Vec3> points, AABB box) {
+    private static double firstCurveContact(List<Vec3> points, AABB box) {
         for (int index = 1; index < points.size(); index++) {
             if (intersectsSegment(box, points.get(index - 1), points.get(index))) {
-                return true;
+                return (double) (index - 1) / (points.size() - 1);
             }
         }
-        return false;
+        return Double.POSITIVE_INFINITY;
     }
 
     /// 判断线段是否接触包围盒，同时覆盖线段整体位于盒内的情况。

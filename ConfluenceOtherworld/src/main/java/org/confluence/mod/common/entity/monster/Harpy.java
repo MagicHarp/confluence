@@ -41,11 +41,6 @@ public class Harpy extends ReboundingFlyingMonster {
         return rebound;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 10.0);
-    }
-
     @Override
     protected BTRoot createBT() {
         BTNode combat = new FlyingVolleyCombatAction(

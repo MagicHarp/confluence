@@ -12,7 +12,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.SweptContactAttack;
@@ -27,14 +29,12 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /// 机械骷髅王手臂。4 种模式：0=锯子, 1=钳子, 2=加农炮, 3=激光。
-public class SkeletronPrimeArm extends BaseBossPart<SkeletronPrime> implements GeoEntity {
+public class SkeletronPrimeArm extends BaseLivingBossPart<SkeletronPrime> implements GeoEntity {
     public static final int LASER = 0;
     public static final int SAW = 1;
     public static final int VICE = 2;
     public static final int CANNON = 3;
 
-    private static final float MAX_PART_HEALTH = 2080.0F;
-    private static final float PART_ARMOR = 26.0F;
     private static final String ARM_TYPE_TAG = "ArmType";
     private static final EntityDataAccessor<Integer> ARM_TYPE = SynchedEntityData.defineId(SkeletronPrimeArm.class, EntityDataSerializers.INT);
 
@@ -45,7 +45,7 @@ public class SkeletronPrimeArm extends BaseBossPart<SkeletronPrime> implements G
     private boolean previousOwnerSpinning;
     private Vec3 dashDirection = Vec3.ZERO;
 
-    public SkeletronPrimeArm(EntityType<?> type, Level level) {
+    public SkeletronPrimeArm(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.noPhysics = true;
     }
@@ -286,7 +286,7 @@ public class SkeletronPrimeArm extends BaseBossPart<SkeletronPrime> implements G
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 entity -> entity instanceof LivingEntity living && living.canBeSeenAsEnemy()
                         && !(living instanceof Enemy) && master.canAttack(living))) {
-            target.hurt(damageSources().mobAttack(master), 8.0F);
+            target.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE));
             contactCooldown = 20;
             return;
         }
@@ -307,26 +307,14 @@ public class SkeletronPrimeArm extends BaseBossPart<SkeletronPrime> implements G
         if (source.getEntity() instanceof net.minecraft.world.entity.player.Player player) {
             owner.registerCombatParticipant(player);
         }
-        float appliedDamage = source.is(DamageTypeTags.BYPASSES_ARMOR)
-                ? amount
-                : CombatRules.getDamageAfterAbsorb(amount, PART_ARMOR, 0.0F);
-        if (appliedDamage <= 0.0F) {
-            return false;
-        }
-        float remaining = Math.max(0.0F, getPartHealth() - appliedDamage);
-        setPartHealth(remaining);
+        if (!super.hurt(source, amount)) return false;
+        float remaining = getHealth();
         indicateHurt();
         onPartHealthChanged(owner, remaining);
         if (remaining <= 0.0F) {
             onPartDestroyed(owner);
-            discard();
         }
         return true;
-    }
-
-    @Override
-    protected float getMaxPartHealth() {
-        return MAX_PART_HEALTH;
     }
 
     @Override

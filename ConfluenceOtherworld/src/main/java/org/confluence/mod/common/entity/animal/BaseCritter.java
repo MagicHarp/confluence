@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
@@ -142,22 +142,9 @@ public abstract class BaseCritter extends Animal implements CritterVisual {
         return null;
     }
 
-    public static AttributeSupplier.Builder createCritterAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.18);
-    }
-
     /// 创建昆虫与同尺寸小型生物的基础属性。
     ///
     /// 该配置独立于普通小动物，避免新增昆虫时误用十点生命的通用配置。
-    public static AttributeSupplier.Builder createInsectAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.18)
-                .add(Attributes.STEP_HEIGHT.value(), 0.3);
-    }
-
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;

@@ -43,9 +43,6 @@ public class SkeletronPrime extends BaseBoss {
     private static final int NORMAL_HOVER_TICKS = 200;
     private static final int NORMAL_SPIN_END_TICKS = 250;
     private static final int COMBAT_CYCLE_TICKS = 260;
-    // 每条机械臂在难度和多人倍率生效前的基础最大生命。
-    private static final float ARM_MAX_HEALTH = 2080.0F;
-
     private static final String DESTROYED_ARMS_TAG = "DestroyedArms";
     private static final String ARM_HEALTH_TAG = "ArmHealth";
     private static final String COMBAT_CYCLE_TAG = "CombatCycle";
@@ -64,15 +61,6 @@ public class SkeletronPrime extends BaseBoss {
         setNoGravity(true);
         noPhysics = true;
         xpReward = 2500;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 10920.0)
-                .add(Attributes.ATTACK_DAMAGE, 21.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
     }
 
     @Override
@@ -252,7 +240,7 @@ public class SkeletronPrime extends BaseBoss {
     }
 
     private SkeletronPrimeArm spawnArm(ServerLevel serverLevel, int index) {
-        SkeletronPrimeArm arm = BossEntities.SKELETRON_PRIME_ARM.get().create(level());
+        SkeletronPrimeArm arm = BossEntities.SKELETRON_PRIME_PART.get().create(level());
         if (arm == null) {
             return null;
         }
@@ -298,7 +286,9 @@ public class SkeletronPrime extends BaseBoss {
         for (float health : armHealth) {
             current += Math.max(0.0F, health);
         }
-        float maximum = getMaxHealth() + ARM_MAX_HEALTH * ARM_COUNT;
+        float armMaximum = (float) net.minecraft.world.entity.ai.attributes.DefaultAttributes
+                .getSupplier(BossEntities.SKELETRON_PRIME_PART.get()).getBaseValue(Attributes.MAX_HEALTH);
+        float maximum = getMaxHealth() + armMaximum * ARM_COUNT;
         return Mth.clamp(current / maximum, 0.0F, 1.0F);
     }
 

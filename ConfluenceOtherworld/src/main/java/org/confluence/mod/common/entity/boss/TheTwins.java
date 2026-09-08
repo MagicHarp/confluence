@@ -352,9 +352,4 @@ public class TheTwins extends BaseBoss {
         if (spazmatism != null && spazmatism.isAlive()) spazmatism.setTarget(target);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 0.0);
-    }
 }

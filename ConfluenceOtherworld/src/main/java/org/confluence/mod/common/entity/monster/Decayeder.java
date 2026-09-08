@@ -36,14 +36,6 @@ public class Decayeder extends BaseMonster {
         setLeftHanded(false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

@@ -24,8 +24,8 @@ public class ChargeAttackAction extends BTNode {
     }
 
     public ChargeAttackAction(BaseMonster mob, double speed, int windupTicks) {
-        if (!Double.isFinite(speed) || speed <= 0.0) {
-            throw new IllegalArgumentException("Charge speed must be finite and positive");
+        if (speed <= 0.0) {
+            throw new IllegalArgumentException("Charge speed must be positive");
         }
         if (windupTicks < 0) {
             throw new IllegalArgumentException("Charge windup must be non-negative");

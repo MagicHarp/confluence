@@ -7,7 +7,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -34,16 +34,6 @@ public class Crab extends BaseMonster implements CritterVisual {
     public Crab(EntityType<? extends Crab> type, Level level) {
         super(type, level);
         this.moveControl = new SidewaysMoveControl(this);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 21.0)
-                .add(Attributes.ATTACK_DAMAGE, 10.0)
-                .add(Attributes.ARMOR, 5.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.2)
-                .add(Attributes.FOLLOW_RANGE, 20.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25);
     }
 
     @Override

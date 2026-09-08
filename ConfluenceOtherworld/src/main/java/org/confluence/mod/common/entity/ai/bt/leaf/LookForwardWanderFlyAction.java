@@ -24,8 +24,8 @@ public final class LookForwardWanderFlyAction extends BTNode {
     }
 
     public LookForwardWanderFlyAction(BaseMonster mob, double maxSpeed, float offsetY, boolean stopsForTarget) {
-        if (!Double.isFinite(maxSpeed) || maxSpeed <= 0.0 || !Float.isFinite(offsetY)) {
-            throw new IllegalArgumentException("Flying wander speed must be positive and height offset must be finite");
+        if (maxSpeed <= 0.0) {
+            throw new IllegalArgumentException("Flying wander speed must be positive");
         }
         this.mob = mob;
         this.maxSpeed = maxSpeed;

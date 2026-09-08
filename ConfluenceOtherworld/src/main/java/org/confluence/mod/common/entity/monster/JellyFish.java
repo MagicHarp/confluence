@@ -65,18 +65,6 @@ public class JellyFish extends BaseAquaticMonster {
         this.moveControl = new JellyFishMoveControl(this);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return AquaticAttributeProfiles.BLUE_JELLYFISH.createBuilder();
-    }
-
-    public static AttributeSupplier.Builder createPinkAttributes() {
-        return AquaticAttributeProfiles.PINK_JELLYFISH.createBuilder();
-    }
-
-    public static AttributeSupplier.Builder createGreenAttributes() {
-        return AquaticAttributeProfiles.GREEN_JELLYFISH.createBuilder();
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

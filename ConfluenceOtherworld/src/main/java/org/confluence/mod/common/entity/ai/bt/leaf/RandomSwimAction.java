@@ -25,7 +25,7 @@ public class RandomSwimAction extends BTNode {
     private boolean pathStarted;
 
     public RandomSwimAction(PathfinderMob mob, double speed, int horizontalRange, int verticalRange) {
-        if (!Double.isFinite(speed) || speed <= 0.0 || horizontalRange <= 0 || verticalRange <= 0) {
+        if (speed <= 0.0 || horizontalRange <= 0 || verticalRange <= 0) {
             throw new IllegalArgumentException("Random swim speed and ranges must be positive");
         }
         this.mob = mob;

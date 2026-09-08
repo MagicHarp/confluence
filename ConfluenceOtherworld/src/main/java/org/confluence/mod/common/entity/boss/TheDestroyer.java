@@ -85,6 +85,11 @@ public class TheDestroyer extends BaseWormBoss {
     }
 
     @Override
+    protected EntityType<? extends BossWormPart> getSegmentType() {
+        return BossEntities.THE_DESTROYER_PART.get();
+    }
+
+    @Override
     protected float getSegmentSpacing() {
         return SEGMENT_SPACING;
     }
@@ -117,14 +122,6 @@ public class TheDestroyer extends BaseWormBoss {
     @Override
     protected BossEvent.BossBarColor getBossBarColor() {
         return BossEvent.BossBarColor.RED;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return createWormBossAttributes()
-                .add(Attributes.MAX_HEALTH, 23333.0)
-                .add(Attributes.ATTACK_DAMAGE, 35.0)
-                .add(Attributes.ARMOR, 2.0)
-                .add(Attributes.FOLLOW_RANGE, 96.0);
     }
 
     @Override

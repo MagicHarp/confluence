@@ -23,12 +23,6 @@ public class FireImp extends BaseCasterMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseCasterMonster.createCasterAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0)
-                .add(Attributes.ATTACK_DAMAGE, 10.0);
-    }
-
     @Override
     public boolean fireImmune() { return true; }
 

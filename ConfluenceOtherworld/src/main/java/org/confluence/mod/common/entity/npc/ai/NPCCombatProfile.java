@@ -207,14 +207,9 @@ public record NPCCombatProfile(Function<BaseNPC, Item> weapon, Attack attack,
                             healthRegeneration));
         }
 
-        /// 在注册阶段拒绝非有限值和越界值，避免无效参数进入实体 tick。
+        /// 在注册阶段拒绝越界值，避免无效参数进入实体 tick。
         private void validate() {
-            if (!Double.isFinite(maxHealth) || !Double.isFinite(damage) || !Double.isFinite(defense)
-                    || !Double.isFinite(movementSpeed) || !Double.isFinite(followRange)
-                    || !Double.isFinite(knockbackResistance) || !Double.isFinite(attackRange)
-                    || !Double.isFinite(retreatRange) || !Double.isFinite(projectileSpeed)
-                    || !Double.isFinite(healthRegeneration)
-                    || maxHealth <= 0 || damage < 0 || defense < 0 || movementSpeed < 0 || followRange < 0
+            if (maxHealth <= 0 || damage < 0 || defense < 0 || movementSpeed < 0 || followRange < 0
                     || knockbackResistance < 0 || attackRange < 0 || retreatRange < 0
                     || prepareTime < 0 || attackInterval <= 0 || projectileSpeed <= 0 || healthRegeneration < 0) {
                 throw new IllegalArgumentException("NPC combat profile values are out of range");

@@ -13,8 +13,8 @@ public class WhipTagEffect extends PublicMobEffect {
 
     public WhipTagEffect(int color, float fixedDamage) {
         super(MobEffectCategory.HARMFUL, color);
-        if (!Float.isFinite(fixedDamage) || fixedDamage < 0.0F) {
-            throw new IllegalArgumentException("Whip tag damage must be finite and non-negative");
+        if (fixedDamage < 0.0F) {
+            throw new IllegalArgumentException("Whip tag damage must be non-negative");
         }
         this.fixedDamage = fixedDamage;
     }

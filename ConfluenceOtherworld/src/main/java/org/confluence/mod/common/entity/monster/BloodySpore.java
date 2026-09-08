@@ -60,15 +60,6 @@ public class BloodySpore extends BaseMonster {
         xpReward = 20;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 100.0)
-                .add(Attributes.ATTACK_DAMAGE, 0.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

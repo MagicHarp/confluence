@@ -24,10 +24,6 @@ public class LavaSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(10.0f, 10, 30.0f);
-    }
-
     @Override
     protected boolean isFireImmune() {
         return true;

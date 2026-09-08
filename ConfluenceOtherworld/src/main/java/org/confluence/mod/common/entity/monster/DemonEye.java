@@ -35,10 +35,13 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
+import java.util.EnumMap;
+
 public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<DemonEye.Variant> {
     public static final String VARIANT_KEY = "Variant";
     private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(DemonEye.class, EntityDataSerializers.INT);
     private static final RawAnimation FLY = RawAnimation.begin().thenLoop("fly");
+    private static final EnumMap<Variant, VariantStats> VARIANT_STATS = new EnumMap<>(Variant.class);
     private DemonEyeSurroundAction surroundAction;
 
     public DemonEye(EntityType<? extends DemonEye> type, Level level) {
@@ -51,18 +54,22 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
     }
 
     private void applyVariantStats(Variant v) {
-        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(v.health);
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(v.damage);
-        this.getAttribute(Attributes.ARMOR).setBaseValue(v.armor);
-        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(v.isLarge() ? 0.1 : 0.2);
+        VariantStats stats = VARIANT_STATS.get(v);
+        if (stats == null) return;
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(stats.health);
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(stats.damage);
+        this.getAttribute(Attributes.ARMOR).setBaseValue(stats.armor);
+        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(stats.movementSpeed);
         if (getHealth() > getMaxHealth()) {
             setHealth(getMaxHealth());
         }
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes().add(Attributes.ATTACK_DAMAGE, 18.0).add(Attributes.KNOCKBACK_RESISTANCE, 0.0);
+    public static void registerVariantStats(Variant variant, double health, double damage, int armor, double movementSpeed) {
+        VARIANT_STATS.put(variant, new VariantStats(health, damage, armor, movementSpeed));
     }
+
+    private record VariantStats(double health, double damage, int armor, double movementSpeed) {}
 
     /// 恶魔眼始终使用飞行物理。这里直接返回无重力语义，避免命令生成或
     /// NBT 读取覆盖实体标志后先坠落到地面，再由飞行行为勉强拉回目标高度。
@@ -187,36 +194,30 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
     }
 
     public enum Variant implements IVariant {
-        NORMAL("normal", false, 15.0, 3.5, 1, 1.0F),
-        NORMAL_BIG("normal_big", true, 12.0, 4.0, 2, 1.3F),
-        CATARACT("cataract", false, 11.5, 3.5, 2, 1.0F),
-        CATARACT_BIG("cataract_big", true, 14.0, 4.0, 2, 1.3F),
-        SLEEPY("sleepy", false, 15.0, 3.0, 1, 1.0F),
-        SLEEPY_BIG("sleepy_big", true, 16.0, 3.5, 1, 1.3F),
-        DILATED("dilated", true, 12.0, 3.5, 1, 1.0F),
-        DILATED_SMALL("dilated_small", false, 11.5, 3.0, 0, 0.7F),
-        GREEN("green", true, 15.0, 4.0, 0, 1.0F),
-        GREEN_SMALL("green_small", false, 12.5, 3.0, 0, 0.7F),
-        PURPLE("purple", false, 15.0, 3.0, 2, 1.0F),
-        PURPLE_BIG("purple_big", true, 16.0, 3.0, 2, 1.3F),
-        OWL("owl", false, 18.5, 3.0, 3, 1.0F),
-        SPACESHIP("spaceship", false, 15.0, 3.0, 2, 1.0F);
+        NORMAL("normal", false, 1.0F),
+        NORMAL_BIG("normal_big", true, 1.3F),
+        CATARACT("cataract", false, 1.0F),
+        CATARACT_BIG("cataract_big", true, 1.3F),
+        SLEEPY("sleepy", false, 1.0F),
+        SLEEPY_BIG("sleepy_big", true, 1.3F),
+        DILATED("dilated", true, 1.0F),
+        DILATED_SMALL("dilated_small", false, 0.7F),
+        GREEN("green", true, 1.0F),
+        GREEN_SMALL("green_small", false, 0.7F),
+        PURPLE("purple", false, 1.0F),
+        PURPLE_BIG("purple_big", true, 1.3F),
+        OWL("owl", false, 1.0F),
+        SPACESHIP("spaceship", false, 1.0F);
 
         public static final Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
 
         private final String name;
         private final boolean large;
-        public final double health;
-        public final double damage;
-        public final int armor;
         private final float scale;
 
-        Variant(String name, boolean large, double health, double damage, int armor, float scale) {
+        Variant(String name, boolean large, float scale) {
             this.name = name;
             this.large = large;
-            this.health = health;
-            this.damage = damage;
-            this.armor = armor;
             this.scale = scale;
         }
 

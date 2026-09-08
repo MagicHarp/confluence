@@ -13,7 +13,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.IVariant;
@@ -33,10 +33,6 @@ public class Worm extends BaseCritter implements VariantHolder<Worm.Variant> {
 
     public Worm(EntityType<? extends Worm> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseCritter.createInsectAttributes().add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override

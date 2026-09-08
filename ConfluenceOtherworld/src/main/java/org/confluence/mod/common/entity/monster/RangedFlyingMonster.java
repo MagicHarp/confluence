@@ -31,15 +31,11 @@ public abstract class RangedFlyingMonster extends BaseFlyingMonster {
 
     protected RangedFlyingMonster(EntityType<? extends RangedFlyingMonster> type, Level level, int shotCooldown, double shotMultiplier) {
         super(type, level);
-        if (shotCooldown <= 0 || !Double.isFinite(shotMultiplier) || shotMultiplier < 0.0)
+        if (shotCooldown <= 0 || shotMultiplier < 0.0)
             throw new IllegalArgumentException("Flying ranged attack timing and multiplier are invalid");
         setDiscardFriction(true);
         this.shotCooldown = shotCooldown;
         this.shotMultiplier = shotMultiplier;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes().add(Attributes.FOLLOW_RANGE, 32.0);
     }
 
     @Override

@@ -12,10 +12,6 @@ public class SpikedJungleSlime extends SpikedSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(15.0f, 8, 33.0f);
-    }
-
     @Override
     protected SlimeSpikeEntity.Variant spikeVariant() {
         return SlimeSpikeEntity.Variant.JUNGLE;

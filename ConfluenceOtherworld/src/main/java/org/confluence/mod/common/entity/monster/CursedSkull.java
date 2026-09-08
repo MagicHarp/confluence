@@ -30,11 +30,6 @@ public class CursedSkull extends BaseFlyingMonster {
         pursuit = new PhasedFlyingPursuitAction(this, 200, 150, 80, 0.02, 0.05, 0.5, 5.0, 0.3);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0).add(Attributes.ATTACK_DAMAGE, 15.0);
-    }
-
     @Override
     protected boolean mustSeePlayerTarget() {
         return false;

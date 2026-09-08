@@ -72,13 +72,6 @@ public class GraniteElemental extends BaseFlyingMonster {
         this.moveControl = new FlyingMoveControl(this, 180, true);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0)
-                .add(Attributes.ATTACK_DAMAGE, 14.0)
-                .add(Attributes.ARMOR, 6.0);
-    }
-
     /// 花岗精只会在洞穴层生成；同一片活动区域最多存在一只，不限制远处独立花岗岩洞。
     public static boolean checkSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         if (!SpawnPlacementChecks.checkCaveMonsterSpawn(type, level, spawnType, pos, random))

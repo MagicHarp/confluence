@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.network.NetworkHooks;
+import org.confluence.lib.common.LibAttributes;
 import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
 import org.confluence.mod.common.init.entity.ModEntities;
 import org.confluence.mod.common.item.yoyo.YoyoItem;
@@ -79,7 +80,7 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
         yoyo.setOwner(owner);
         yoyo.entityData.set(WEAPON, weapon.copyWithCount(1));
         yoyo.entityData.set(RANGE, item.maximumRange());
-        yoyo.setDamage(item.attackDamage());
+        yoyo.setDamage(item.attackDamage() * (float) owner.getAttributeValue(LibAttributes.getAttackDamage()));
         yoyo.setPos(owner.getX(), owner.getY(0.5F), owner.getZ());
         if (!owner.level().addFreshEntity(yoyo)) {
             yoyo.discard();

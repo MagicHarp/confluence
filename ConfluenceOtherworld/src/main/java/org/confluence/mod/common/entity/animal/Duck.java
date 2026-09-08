@@ -18,7 +18,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
@@ -67,15 +67,6 @@ public class Duck extends BaseCritter implements FlyingAnimal, VariantHolder<Duc
         moveControl = new FlyingMoveControl(this, 10, false);
         getAttribute(Attributes.WATER_MOVEMENT_EFFICIENCY.value()).setBaseValue(1.0);
         setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 4.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.FLYING_SPEED, 0.35)
-                .add(Attributes.WATER_MOVEMENT_EFFICIENCY.value(), 1.0)
-                .add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override

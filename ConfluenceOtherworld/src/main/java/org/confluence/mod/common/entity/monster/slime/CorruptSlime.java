@@ -14,10 +14,6 @@ public class CorruptSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(28.0f, 20, 88.0f);
-    }
-
     @Override
     protected void onAttackTarget(LivingEntity target) {
         tryApplyDarkness(target);

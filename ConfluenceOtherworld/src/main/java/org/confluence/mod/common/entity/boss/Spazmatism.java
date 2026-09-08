@@ -48,15 +48,6 @@ public class Spazmatism extends AbstractTwinEye {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 8970.0)
-                .add(Attributes.ATTACK_DAMAGE, 22.0)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8)
-                .add(Attributes.FOLLOW_RANGE, 96.0);
-    }
-
     @Override
     protected boolean isRetinazer() {
         return false;

@@ -19,7 +19,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.item.ItemStack;
@@ -62,12 +62,6 @@ public class Bunny extends Rabbit implements GeoEntity {
 
     public Bunny(EntityType<? extends Bunny> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Rabbit.createAttributes()
-                .add(Attributes.JUMP_STRENGTH, 0.6)
-                .add(Attributes.SAFE_FALL_DISTANCE.value(), 6.0);
     }
 
     public Variant getBunnyVariant() {

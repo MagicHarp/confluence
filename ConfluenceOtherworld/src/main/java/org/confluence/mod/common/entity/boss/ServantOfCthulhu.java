@@ -62,10 +62,6 @@ public class ServantOfCthulhu extends BaseFlyingMonster implements BossOwnedEnti
         return entityData.get(OWNER_UUID).orElse(null);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return CreatureAttributeBuilder.creature(10.0, 1.0, 3.0, 30.0, 0.5, 0.3).flying();
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

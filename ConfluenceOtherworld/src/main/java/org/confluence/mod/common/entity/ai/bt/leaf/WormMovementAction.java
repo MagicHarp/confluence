@@ -127,8 +127,8 @@ public final class WormMovementAction extends BTNode {
                           double wanderHeightBoundary, double wanderHeightOffset,
                           WanderHeightMode wanderHeightMode, boolean canFly) {
         public Profile {
-            if (!Double.isFinite(attackSpeed) || attackSpeed <= 0.0 || !Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0
-                    || Double.isNaN(maximumAttackHeight) || Double.isNaN(wanderHeightBoundary) || !Double.isFinite(wanderHeightOffset)
+            if (attackSpeed <= 0.0 || wanderSpeed <= 0.0
+                    || Double.isNaN(maximumAttackHeight) || Double.isNaN(wanderHeightBoundary)
                     || wanderHeightMode == null) {
                 throw new IllegalArgumentException("Worm movement speeds must be positive");
             }

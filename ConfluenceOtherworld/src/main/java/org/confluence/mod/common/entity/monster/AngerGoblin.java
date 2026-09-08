@@ -15,16 +15,6 @@ public class AngerGoblin extends GoblinMonster {
         super(type, level, Items.GOLDEN_SWORD.getDefaultInstance(), LandAnimationProfile.NONE);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 90.0)
-                .add(Attributes.ATTACK_DAMAGE, 12.0)
-                .add(Attributes.ARMOR, 8.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.23)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
-    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return ModSoundEvents.ROUTINE_HURT.get();

@@ -11,7 +11,7 @@ import java.util.Objects;
 /// @param controlPoints 以玩家手部锚点为原点的局部控制点
 public record WhipFrame(float progress, List<Vec3> controlPoints) {
     public WhipFrame {
-        if (!Float.isFinite(progress) || progress < 0.0F || progress > 1.0F) {
+        if (progress < 0.0F || progress > 1.0F) {
             throw new IllegalArgumentException("Whip frame progress must be in [0, 1]");
         }
         controlPoints = List.copyOf(Objects.requireNonNull(controlPoints, "controlPoints"));

@@ -47,10 +47,6 @@ public class BaseMimic extends BaseMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 80.0).add(Attributes.ATTACK_DAMAGE, 15.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -114,7 +110,7 @@ public class BaseMimic extends BaseMonster {
         targetMissingTicks = 0;
         setFollowRange(16.0);
         MimicPose pose = getMimicPose();
-        if (pose == MimicPose.CLOSED || pose == MimicPose.CLOSING) {
+        if (action != 7 && (pose == MimicPose.CLOSED || pose == MimicPose.CLOSING)) {
             setMimicPose(MimicPose.OPEN);
             resetAttackCycle();
         }
@@ -246,8 +242,12 @@ public class BaseMimic extends BaseMonster {
         if (action == 7 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
         boolean damaged = super.hurt(source, amount);
         if (damaged && !level().isClientSide && getTarget() == null) {
-            LivingEntity nearest = level().getNearestPlayer(this, 16.0);
-            if (nearest != null && canAttack(nearest)) setTarget(nearest);
+            if (source.getEntity() instanceof LivingEntity attacker && canAttack(attacker)) {
+                setTarget(attacker);
+            } else {
+                LivingEntity nearest = level().getNearestPlayer(this, 16.0);
+                if (nearest != null && canAttack(nearest)) setTarget(nearest);
+            }
         }
         return damaged;
     }

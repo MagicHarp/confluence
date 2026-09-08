@@ -15,7 +15,7 @@ public class FlyWanderAction extends BTNode {
     protected static final int TIMEOUT = 100;
 
     public FlyWanderAction(PathfinderMob mob, double speed, int range) {
-        if (!Double.isFinite(speed) || speed <= 0.0 || range <= 0) {
+        if (speed <= 0.0 || range <= 0) {
             throw new IllegalArgumentException("Flying wander speed and range must be positive");
         }
         this.mob = mob;

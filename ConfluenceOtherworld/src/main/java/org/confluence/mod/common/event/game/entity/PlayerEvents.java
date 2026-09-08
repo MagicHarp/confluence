@@ -90,6 +90,7 @@ import org.confluence.terra_curio.util.TCUtils;
 import org.mesdag.portlib.event.PortEventHandler;
 import org.mesdag.portlib.event.PortEventPriority;
 import org.mesdag.portlib.event.entity.player.*;
+import org.mesdag.portlib.wrapper.common.util.PortTriState;
 import org.mesdag.portlib.wrapper.common.extensions.IPortParticleUtilsExtension;
 import org.mesdag.portlib.wrapper.world.PortItemInteractionResult;
 
@@ -254,13 +255,13 @@ public final class PlayerEvents {
         }
     }
 
-    private static void itemEntityPickup$Pre(EntityItemPickupEvent event) {
+    private static void itemEntityPickup$Pre(PortItemEntityPickupEvent.Pre event) {
 // 不用管这个       // Forge 事件可能收到自定义 Player 实现；服务端附件逻辑只处理真实服务端玩家。
 //        if (!(event.getPlayer() instanceof ServerPlayer player)) {
 //            return;
 //        }
-        ServerPlayer player = (ServerPlayer) event.getEntity();
-        ItemEntity itemEntity = event.getItem();
+        ServerPlayer player = (ServerPlayer) event.getPlayer();
+        ItemEntity itemEntity = event.getItemEntity();
         ItemStack itemStack = itemEntity.getItem();
         if (IServerPlayer.of(player).confluence$isCouldPickupItem()) {
             if (CommonConfigs.AUTO_STACK_GELS_COLOR.get()) autoStackGelsColor:{
@@ -275,21 +276,21 @@ public final class PlayerEvents {
                 }
             }
             if (itemEntity instanceof TreasureBagItemEntity entity) {
-                if (!entity.isOwner(player)) event.setResult(Event.Result.DENY);
+                if (!entity.isOwner(player)) event.setCanPickup(PortTriState.FALSE);
             }
         } else {
-            event.setResult(Event.Result.DENY);
+            event.setCanPickup(PortTriState.FALSE);
         }
 
         if (itemStack.is(ModTags.Items.PROVIDE_MANA)) {
             ManaStorage.of(player).receiveMana(() -> itemStack.getCount() * 100.0F);
             StarSteelSword.onManaStarPickup(player);
             itemEntity.discard();
-            event.setResult(Event.Result.DENY);
+            event.setCanPickup(PortTriState.FALSE);
         } else if (itemStack.is(ModTags.Items.PROVIDE_LIFE)) {
             player.heal(itemStack.getCount() * 4.0F);
             itemEntity.discard();
-            event.setResult(Event.Result.DENY);
+            event.setCanPickup(PortTriState.FALSE);
         }
     }
 

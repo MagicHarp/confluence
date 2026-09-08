@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -45,10 +46,6 @@ public class Skeletron extends BaseBoss {
     // 骷髅弹的基础发射间隔（tick）和单发基础伤害；难度修正另行计算。
     private static final int BASE_SKULL_COOLDOWN = 20;
     private static final float SKULL_DAMAGE = 6.0F;
-    // 每只手在难度及多人倍率生效前的基础生命和接触伤害。
-    private static final float BASE_HAND_MAX_HEALTH = 405.0F;
-    private static final float BASE_HAND_CONTACT_DAMAGE = 10.0F;
-
     private static final String DESTROYED_HANDS_TAG = "DestroyedHands";
     private static final String PHASE_TWO_TAG = "PhaseTwo";
     private static final String HAND_HEALTH_TAG = "HandHealth";
@@ -64,8 +61,8 @@ public class Skeletron extends BaseBoss {
     private int combatCycle;
     private boolean floatingActive;
     private boolean floatingCrazy;
-    private float handMaxHealth = BASE_HAND_MAX_HEALTH;
-    private final float[] handHealth = {BASE_HAND_MAX_HEALTH, BASE_HAND_MAX_HEALTH};
+    private float handMaxHealth;
+    private final float[] handHealth = new float[2];
     private boolean initialRoarPlayed;
     private boolean restoringSavedState;
     private int lastRoarTick = Integer.MIN_VALUE;
@@ -76,15 +73,8 @@ public class Skeletron extends BaseBoss {
         setNoGravity(true);
         noPhysics = true;
         xpReward = 2000;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 2288.0)
-                .add(Attributes.ATTACK_DAMAGE, 18.2)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 300.0);
+        handMaxHealth = registeredHandMaxHealth();
+        java.util.Arrays.fill(handHealth, handMaxHealth);
     }
 
     @Override
@@ -367,7 +357,7 @@ public class Skeletron extends BaseBoss {
             return;
         }
 
-        float previousMaximum = handMaxHealth > 0.0F ? handMaxHealth : BASE_HAND_MAX_HEALTH;
+        float previousMaximum = handMaxHealth > 0.0F ? handMaxHealth : registeredHandMaxHealth();
         float[] healthRatios = new float[handHealth.length];
         for (int index = 0; index < handHealth.length; index++) {
             healthRatios[index] = Mth.clamp(handHealth[index] / previousMaximum, 0.0F, 1.0F);
@@ -389,27 +379,15 @@ public class Skeletron extends BaseBoss {
     private float calculateScaledHandMaxHealth() {
         var maxHealthAttribute = getAttribute(Attributes.MAX_HEALTH);
         if (maxHealthAttribute == null || maxHealthAttribute.getBaseValue() <= 0.0D) {
-            return BASE_HAND_MAX_HEALTH;
+            return registeredHandMaxHealth();
         }
         double multiplier = maxHealthAttribute.getValue() / maxHealthAttribute.getBaseValue();
-        double result = BASE_HAND_MAX_HEALTH * multiplier;
-        return Double.isFinite(result) && result > 0.0D
-                ? (float) result : BASE_HAND_MAX_HEALTH;
+        return (float) (registeredHandMaxHealth() * multiplier);
     }
 
-    float getHandMaxHealth() {
-        return handMaxHealth;
-    }
-
-    float getHandContactDamage() {
-        var attackAttribute = getAttribute(Attributes.ATTACK_DAMAGE);
-        if (attackAttribute == null || attackAttribute.getBaseValue() <= 0.0D) {
-            return BASE_HAND_CONTACT_DAMAGE;
-        }
-        double multiplier = attackAttribute.getValue() / attackAttribute.getBaseValue();
-        double result = BASE_HAND_CONTACT_DAMAGE * multiplier;
-        return Double.isFinite(result) && result >= 0.0D
-                ? (float) result : BASE_HAND_CONTACT_DAMAGE;
+    private static float registeredHandMaxHealth() {
+        return (float) DefaultAttributes.getSupplier(BossEntities.SKELETRON_HAND.get())
+                .getBaseValue(Attributes.MAX_HEALTH);
     }
 
     private void ensureHands() {
@@ -549,9 +527,9 @@ public class Skeletron extends BaseBoss {
                 || destroyedHands == ALL_HANDS_DESTROYED;
         combatCycle = Mth.clamp(tag.getInt(COMBAT_CYCLE_TAG), 0, COMBAT_CYCLE_END);
         handMaxHealth = tag.contains(HAND_MAX_HEALTH_TAG)
-                ? tag.getFloat(HAND_MAX_HEALTH_TAG) : BASE_HAND_MAX_HEALTH;
+                ? tag.getFloat(HAND_MAX_HEALTH_TAG) : registeredHandMaxHealth();
         if (!Float.isFinite(handMaxHealth) || handMaxHealth <= 0.0F) {
-            handMaxHealth = BASE_HAND_MAX_HEALTH;
+            handMaxHealth = registeredHandMaxHealth();
         }
         initialRoarPlayed = tag.getBoolean(INITIAL_ROAR_PLAYED_TAG);
         restoringSavedState = true;

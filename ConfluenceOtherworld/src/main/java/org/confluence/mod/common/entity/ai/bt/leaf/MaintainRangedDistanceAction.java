@@ -24,10 +24,10 @@ public final class MaintainRangedDistanceAction extends BTNode {
     private double orbitDirection;
 
     public MaintainRangedDistanceAction(BaseMonster mob, double minimumDistance, double maximumDistance, double speed, int duration) {
-        if (!Double.isFinite(minimumDistance) || minimumDistance <= 0.0 || !Double.isFinite(maximumDistance) || maximumDistance <= minimumDistance) {
+        if (minimumDistance <= 0.0 || maximumDistance <= minimumDistance) {
             throw new IllegalArgumentException("Ranged distance band must be positive and ordered");
         }
-        if (!Double.isFinite(speed) || speed <= 0.0 || duration <= 0) {
+        if (speed <= 0.0 || duration <= 0) {
             throw new IllegalArgumentException("Ranged movement duration must be positive");
         }
         this.mob = mob;

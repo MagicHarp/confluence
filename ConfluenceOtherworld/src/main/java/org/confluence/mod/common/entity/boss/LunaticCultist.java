@@ -64,15 +64,6 @@ public class LunaticCultist extends BaseBoss {
         return true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 700.0)
-                .add(Attributes.ATTACK_DAMAGE, 20.0)
-                .add(Attributes.ARMOR, 8.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
-
     @Override
     protected BossEvent.BossBarColor getBossBarColor() {
         return BossEvent.BossBarColor.YELLOW;

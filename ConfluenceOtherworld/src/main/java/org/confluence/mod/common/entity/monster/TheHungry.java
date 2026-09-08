@@ -145,12 +145,6 @@ public class TheHungry extends BaseFlyingMonster implements BossOwnedEntity {
         return maximumDistance;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 35.0)
-                .add(Attributes.ATTACK_DAMAGE, 8.0);
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

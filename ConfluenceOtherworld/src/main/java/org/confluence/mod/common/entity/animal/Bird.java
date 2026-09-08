@@ -14,7 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
@@ -63,15 +63,6 @@ public class Bird extends Animal implements FlyingAnimal, CritterVisual {
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0F);
         setPathfindingMalus(BlockPathTypes.COCOA, -1.0F);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.2)
-                .add(Attributes.FLYING_SPEED, 0.4)
-                .add(LibAttributes.getAttackDamage().value(), 3.0)
-                .add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     /// 鸟类没有幼年模型和幼年行为，年龄数据不应改变客户端缩放、碰撞或行为选择。

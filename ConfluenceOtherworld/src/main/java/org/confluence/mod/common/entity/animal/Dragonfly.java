@@ -12,7 +12,7 @@ import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -40,10 +40,6 @@ public class Dragonfly extends BaseFlyingCritter implements VariantHolder<Dragon
 
     public Dragonfly(EntityType<? extends Dragonfly> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingCritter.createFlyingCritterAttributes();
     }
 
     @Override

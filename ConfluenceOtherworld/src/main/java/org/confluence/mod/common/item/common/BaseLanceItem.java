@@ -21,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.Tags;
 import org.confluence.lib.common.LibDamageTypes;
+import org.confluence.lib.common.LibAttributes;
 import org.confluence.lib.common.component.ModRarity;
 import org.confluence.lib.common.item.CustomRarityItem;
 import org.confluence.lib.util.LibEntityUtils;
@@ -118,7 +119,8 @@ public class BaseLanceItem extends CustomRarityItem implements /* todo leftclick
                 Vec3 projectedVelocity = LibMathUtils.vectorProjection(relativeVelocity, lanceDirection); // 计算投影速度(投影到剑的方向上)
                 double impactSpeed = projectedVelocity.length() * 30; // 获得向量长度，第一次乘系数
 
-                victim.hurt(damageSource, Mth.floor(baseAttackDamage * (impactSpeed * 6 / 175 + 0.1F))); // 第二次乘系数，+0.1f在乘baseAttackDamage后得到的是基础数值(其实这里的计算逻辑有点问题)
+                double resolvedBaseDamage = baseAttackDamage * owner.getAttributeValue(LibAttributes.getAttackDamage());
+                victim.hurt(damageSource, Mth.floor(resolvedBaseDamage * (impactSpeed * 6 / 175 + 0.1F))); // 第二次乘系数，+0.1f在乘baseAttackDamage后得到的是基础数值(其实这里的计算逻辑有点问题)
 
                 if (!victim.getType().is(Tags.EntityTypes.BOSSES)) {
                     double kb = impactSpeed * baseKnockback * 4 / 105;

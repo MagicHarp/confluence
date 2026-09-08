@@ -98,16 +98,6 @@ public class WallOfFlesh extends BaseBoss {
         return true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 3096.0)
-                .add(Attributes.ATTACK_DAMAGE, 39.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.MOVEMENT_SPEED, BASE_SPEED)
-                .add(Attributes.FOLLOW_RANGE, TARGET_RANGE);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

@@ -9,8 +9,8 @@ public final class TargetWithinRangeCondition extends Condition<Mob> {
 
     public TargetWithinRangeCondition(Mob mob, double range) {
         super(mob);
-        if (!Double.isFinite(range) || range < 0.0D) {
-            throw new IllegalArgumentException("Target range must be finite and non-negative");
+        if (range < 0.0D) {
+            throw new IllegalArgumentException("Target range must be non-negative");
         }
         this.rangeSquared = range * range;
     }

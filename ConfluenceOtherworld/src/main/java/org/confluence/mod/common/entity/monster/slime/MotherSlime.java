@@ -17,10 +17,6 @@ public final class MotherSlime extends BaseSlime {
         super(type, level, false, SIZE);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(10.0F, 7, 58.0F);
-    }
-
     @Override
     protected void setSlimeSize(int size) {
         super.setSlimeSize(SIZE);

@@ -31,8 +31,8 @@ public final class SpawnArrowAction extends BTNode {
     }
 
     private SpawnArrowAction(Mob shooter, DoubleSupplier explicitDamage, float bowPower, float velocity, Float explicitInaccuracy) {
-        if (!Float.isFinite(bowPower) || bowPower < 0.0F || !Float.isFinite(velocity) || velocity <= 0.0F
-                || explicitInaccuracy != null && (!Float.isFinite(explicitInaccuracy) || explicitInaccuracy < 0.0F)) {
+        if (bowPower < 0.0F || velocity <= 0.0F
+                || explicitInaccuracy != null && explicitInaccuracy < 0.0F) {
             throw new IllegalArgumentException("Arrow power, velocity and inaccuracy are outside their valid ranges");
         }
         this.shooter = shooter;

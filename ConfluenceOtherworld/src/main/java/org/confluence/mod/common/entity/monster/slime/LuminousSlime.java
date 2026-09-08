@@ -11,10 +11,6 @@ public class LuminousSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(36.4f, 30, 93.0f);
-    }
-
     @Override
     public boolean isFullBright() {
         return true;

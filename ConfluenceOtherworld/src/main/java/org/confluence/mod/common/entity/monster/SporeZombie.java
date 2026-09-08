@@ -18,16 +18,6 @@ public class SporeZombie extends BaseWarriorMonster {
         super(type, level, 0.25, LandAnimationProfile.WALK_RUN, LandSoundProfile.ZOMBIE, 0.8, true, DoorBehavior.OPEN);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 93.0)
-                .add(Attributes.ATTACK_DAMAGE, 20.0)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.08)
-                .add(Attributes.FOLLOW_RANGE, 60.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1);
-    }
-
     @Override
     protected SoundEvent getAmbientSound() {
         return ModSoundEvents.TR_ZOMBIE_FREE.get();

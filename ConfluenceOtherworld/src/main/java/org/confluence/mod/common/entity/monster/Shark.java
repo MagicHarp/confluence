@@ -18,10 +18,6 @@ public class Shark extends Piranha {
         this.moveControl = new SharkMoveControl(this);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return AquaticAttributeProfiles.SHARK.createBuilder();
-    }
-
     @Override
     protected Goal createStrollGoal() {
         return new SharkRandomSwimmingGoal(this, 0.6, 10);

@@ -13,8 +13,8 @@ public record GunProjectilePattern(Type type, float gravity, int minProjectiles,
         if (type == null) {
             throw new IllegalArgumentException("projectile pattern type is required");
         }
-        if (!Float.isFinite(gravity) || gravity < 0.0F) {
-            throw new IllegalArgumentException("gravity must be finite and non-negative");
+        if (gravity < 0.0F) {
+            throw new IllegalArgumentException("gravity must be non-negative");
         }
         if (minProjectiles < 1 || maxProjectiles < minProjectiles) {
             throw new IllegalArgumentException("projectile count range is invalid");

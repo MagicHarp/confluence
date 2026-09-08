@@ -16,10 +16,6 @@ public class FleshSlime extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(14.0f, 6, 50.0f);
-    }
-
     @Override
     protected boolean isFireImmune() {
         return true;

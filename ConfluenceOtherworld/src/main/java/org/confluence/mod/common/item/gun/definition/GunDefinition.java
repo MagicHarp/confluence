@@ -8,20 +8,20 @@ public record GunDefinition(int cooldown, float damage, float velocity, float kn
                             FireMode fireMode, GunProjectilePattern projectilePattern) {
     public GunDefinition {
         if (cooldown < 0) throw new IllegalArgumentException("cooldown must be non-negative");
-        if (!Float.isFinite(damage) || damage < 0) {
-            throw new IllegalArgumentException("damage must be finite and non-negative");
+        if (damage < 0) {
+            throw new IllegalArgumentException("damage must be non-negative");
         }
-        if (!Float.isFinite(velocity) || velocity < 0) {
-            throw new IllegalArgumentException("velocity must be finite and non-negative");
+        if (velocity < 0) {
+            throw new IllegalArgumentException("velocity must be non-negative");
         }
-        if (!Float.isFinite(knockback) || knockback < 0) {
-            throw new IllegalArgumentException("knockback must be finite and non-negative");
+        if (knockback < 0) {
+            throw new IllegalArgumentException("knockback must be non-negative");
         }
-        if (!Float.isFinite(critical) || critical < 0 || critical > 1) {
+        if (critical < 0 || critical > 1) {
             throw new IllegalArgumentException("critical must be between 0 and 1");
         }
-        if (!Float.isFinite(inaccuracy) || inaccuracy < 0) {
-            throw new IllegalArgumentException("inaccuracy must be finite and non-negative");
+        if (inaccuracy < 0) {
+            throw new IllegalArgumentException("inaccuracy must be non-negative");
         }
         if (penetrate < -1) throw new IllegalArgumentException("penetrate must be -1 or greater");
         if (rarity == null || fireMode == null || projectilePattern == null) {

@@ -22,10 +22,6 @@ public final class Arapaima extends Piranha {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return AquaticAttributeProfiles.ARAPAIMA.createBuilder();
-    }
-
     @Override
     protected boolean isValidAquaticTarget(LivingEntity target) {
         return target.isInWaterRainOrBubble() || isReachableFromShore(target);

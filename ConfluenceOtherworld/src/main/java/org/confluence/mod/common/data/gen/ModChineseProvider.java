@@ -4801,7 +4801,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(BossEntities.EYE_OF_CTHULHU.get(), "克苏鲁之眼");
         add(BossEntities.SERVANT_OF_CTHULHU.get(), "克苏鲁之仆");
         add(BossEntities.EATER_OF_WORLDS.get(), "世界吞噬者");
-        add(BossEntities.WORM_SEGMENT.get(), "世界吞噬者体节");
+        add(BossEntities.EATER_OF_WORLDS_SEGMENT.get(), "世界吞噬者体节");
         add(BossEntities.BRAIN_OF_CTHULHU.get(), "克苏鲁之脑");
         add(BossEntities.BRAIN_FAKE.get(), "克苏鲁之脑幻象");
         add(BossEntities.QUEEN_BEE.get(), "蜂王");
@@ -4819,8 +4819,9 @@ public class ModChineseProvider extends LanguageProvider {
         add(BossEntities.SPAZMATISM.get(), "魔焰眼");
         add(BossEntities.THE_TWINS.get(), "双子魔眼");
         add(BossEntities.SKELETRON_PRIME.get(), "机械骷髅王");
-        add(BossEntities.SKELETRON_PRIME_ARM.get(), "机械骷髅王机械臂");
+        add(BossEntities.SKELETRON_PRIME_PART.get(), "机械骷髅王机械臂");
         add(BossEntities.THE_DESTROYER.get(), "毁灭者");
+        add(BossEntities.THE_DESTROYER_PART.get(), "毁灭者体节");
         add(BossEntities.THE_DESTROYER_PROBE.get(), "毁灭者探测器");
         add(BossEntities.PLANTERA.get(), "世纪之花");
         add(BossEntities.PLANTERA_TENTACLE.get(), "世纪之花触手");
@@ -4886,6 +4887,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("tooltip.confluence.summon.damage", "基础召唤伤害：%s");
         add("tooltip.confluence.summon.slots", "占用仆从栏：%s");
         add("tooltip.confluence.summon.retrieve", "右键长按以解除所有召唤物");
+        add("tooltip.confluence.storage_companion.retrieve", "潜行右键以收回");
         add(ModEntities.FLOWER_POWER_PETAL.get(), "花之力花瓣");
         add(ModEntities.DRIPPLER_CRIPPLER_PROJECTILE.get(), "血肉射弹");
         add(ModEntities.FLAIRON_BUBBLE.get(), "泡泡");

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -39,16 +40,6 @@ public final class Nymph extends BaseMonster {
     public Nymph(EntityType<? extends Nymph> type, Level level) {
         super(type, level);
         xpReward = 20;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 156.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0)
-                .add(Attributes.ARMOR, 16.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.FOLLOW_RANGE, 15.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
     }
 
     @Override
@@ -90,7 +81,7 @@ public final class Nymph extends BaseMonster {
                 return;
             }
         }
-        if (target == null || !target.isAlive()) {
+        if (target != null && !target.isAlive()) {
             getNavigation().stop();
         }
         updatePursuitSpeed(target != null && target.isAlive());
@@ -162,6 +153,17 @@ public final class Nymph extends BaseMonster {
                             @Override
                             public boolean canUse() {
                                 return isTriggered() && super.canUse();
+                            }
+                        }),
+                        new VanillaGoalAction(new WaterAvoidingRandomStrollGoal(Nymph.this, 0.6) {
+                            @Override
+                            public boolean canUse() {
+                                return isTriggered() && getTarget() == null && super.canUse();
+                            }
+
+                            @Override
+                            public boolean canContinueToUse() {
+                                return isTriggered() && getTarget() == null && super.canContinueToUse();
                             }
                         }),
                         new VanillaGoalAction(new LookAtPlayerGoal(Nymph.this, Player.class, 10.0F, 1.0F)));

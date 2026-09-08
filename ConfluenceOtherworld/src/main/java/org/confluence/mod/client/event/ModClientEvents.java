@@ -643,7 +643,8 @@ public final class ModClientEvents {
         event.registerEntityRenderer(BossEntities.CROWN_OF_KING_SLIME_MODEL.get(), CrownOfKingSlimeModelRenderer::new);
         event.registerEntityRenderer(BossEntities.EYE_OF_CTHULHU.get(), c -> new BossGeoRenderer<>(c, Confluence.asResource("boss/eye_of_cthulhu"), true, 1.0F, 1.5F));
         event.registerEntityRenderer(BossEntities.SERVANT_OF_CTHULHU.get(), c -> new BossGeoRenderer<>(c, Confluence.asResource("servant_of_cthulhu")));
-        event.registerEntityRenderer(BossEntities.WORM_SEGMENT.get(), BossWormPartRenderer::new);
+        event.registerEntityRenderer(BossEntities.EATER_OF_WORLDS_SEGMENT.get(), BossWormPartRenderer::new);
+        event.registerEntityRenderer(BossEntities.THE_DESTROYER_PART.get(), BossWormPartRenderer::new);
         event.registerEntityRenderer(BossEntities.EATER_OF_WORLDS.get(), c -> new BossGeoRenderer<>(c, Confluence.asResource("boss/eater_of_worlds"), true, 2.2F, 0.0F));
         event.registerEntityRenderer(BossEntities.QUEEN_BEE.get(), QueenBeeRenderer::new);
         event.registerEntityRenderer(BossEntities.BRAIN_OF_CTHULHU.get(), BrainOfCthulhuRenderer::new);
@@ -658,7 +659,7 @@ public final class ModClientEvents {
         // 双子魔眼控制实体只负责生命周期，两只眼睛实体仍各自独立渲染。
         event.registerEntityRenderer(BossEntities.THE_TWINS.get(), TheTwinsRenderer::new);
         event.registerEntityRenderer(BossEntities.SKELETRON_PRIME.get(), SkeletronPrimeBossRenderer::new);
-        event.registerEntityRenderer(BossEntities.SKELETRON_PRIME_ARM.get(), SkeletronPrimeArmRenderer::new);
+        event.registerEntityRenderer(BossEntities.SKELETRON_PRIME_PART.get(), SkeletronPrimeArmRenderer::new);
         event.registerEntityRenderer(BossEntities.WALL_OF_FLESH.get(), WallOfFleshRenderer::new);
         event.registerEntityRenderer(BossEntities.WALL_OF_FLESH_EYE.get(), NoopRenderer::new);
         event.registerEntityRenderer(BossEntities.WALL_OF_FLESH_MOUTH.get(), NoopRenderer::new);

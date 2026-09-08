@@ -53,12 +53,14 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
     private static final EntityDataAccessor<Float> DIRECTION_Z = SynchedEntityData.defineId(WhipAttackEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> RIGHT_ARM = SynchedEntityData.defineId(WhipAttackEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DURATION_TICKS = SynchedEntityData.defineId(WhipAttackEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> RANGE_ATTRIBUTE = SynchedEntityData.defineId(WhipAttackEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Integer> SWEEP_LEVEL = SynchedEntityData.defineId(WhipAttackEntity.class, EntityDataSerializers.INT);
     /// 轨迹以 16 个局部单位表示，因此每点鞭距属性对应 1.6 格世界距离。
     private static final double RANGE_ATTRIBUTE_SCALE = 1.6;
     public static final double RENDER_SEGMENT_SPACING = 0.22;
 
     private final Map<UUID, Integer> nextHitTicks = new HashMap<>();
+    private final Set<UUID> completedTargets = new HashSet<>();
     private final Set<BlockPos> hitBlocks = new HashSet<>();
     private int successfulHits;
     private boolean durabilityConsumed;
@@ -84,11 +86,20 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
 
     /// 在服务端发射时冻结本次挥动实际使用的攻速时长。
     public void initialize(ItemStack weapon, Vec3 direction, HumanoidArm arm, int durationTicks) {
+        LivingEntity owner = getLivingOwner();
+        float range = owner == null
+                ? (float) ConfluenceMagicLib.WHIP_RANGE.value().getDefaultValue()
+                : (float) owner.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE);
+        initialize(weapon, direction, arm, durationTicks, range);
+    }
+
+    /// 在服务端发射时冻结本次挥动实际使用的攻速时长与鞭距。
+    public void initialize(ItemStack weapon, Vec3 direction, HumanoidArm arm, int durationTicks, float rangeAttribute) {
         if (!(weapon.getItem() instanceof BaseWhipItem)) {
             throw new IllegalArgumentException("Whip attack weapon must be a BaseWhipItem");
         }
-        if (!Double.isFinite(direction.x) || !Double.isFinite(direction.y) || !Double.isFinite(direction.z) || direction.lengthSqr() <= 1.0E-12) {
-            throw new IllegalArgumentException("Whip attack direction must be finite and non-zero");
+        if (direction.lengthSqr() <= 1.0E-12) {
+            throw new IllegalArgumentException("Whip attack direction must be non-zero");
         }
         Vec3 normalized = direction.normalize();
         entityData.set(WEAPON, weapon.copyWithCount(1));
@@ -100,6 +111,10 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
             throw new IllegalArgumentException("Whip duration must be positive");
         }
         entityData.set(DURATION_TICKS, durationTicks);
+        if (rangeAttribute <= 0.0F) {
+            throw new IllegalArgumentException("Whip range must be positive");
+        }
+        entityData.set(RANGE_ATTRIBUTE, rangeAttribute);
         int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.WHIP_SWEEP.get(), weapon);
         entityData.set(SWEEP_LEVEL, enchantmentLevel > 0 && getRandom1211().nextFloat() < 0.2F ? enchantmentLevel : 0);
         setDeltaMovement(normalized.scale(0.05));
@@ -114,6 +129,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
         entityData.define(DIRECTION_Z, 1.0F);
         entityData.define(RIGHT_ARM, true);
         entityData.define(DURATION_TICKS, 1);
+        entityData.define(RANGE_ATTRIBUTE, 1.0F);
         entityData.define(SWEEP_LEVEL, 0);
     }
 
@@ -186,7 +202,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
         List<Vec3> localPoints = WhipCurveSampler.sample(
                 sweepLevel() > 0 ? WhipCurves.SWEEP : definition.curve(),
                 progress,
-                RANGE_ATTRIBUTE_SCALE * owner.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE),
+                RANGE_ATTRIBUTE_SCALE * entityData.get(RANGE_ATTRIBUTE),
                 RENDER_SEGMENT_SPACING);
         return transformLocalPointsLike121(localPoints);
     }
@@ -240,7 +256,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
     private List<Vec3> sampleWorldControlPoints(LivingEntity owner, WhipDefinition definition, float partialTick) {
         double progress = Mth.clamp((tickCount + partialTick) / durationTicks(), 0.0, 1.0);
         List<Vec3> localPoints = (sweepLevel() > 0 ? WhipCurves.SWEEP : definition.curve()).controlPoints(progress).stream()
-                .map(point -> point.scale(RANGE_ATTRIBUTE_SCALE * owner.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE)))
+                .map(point -> point.scale(RANGE_ATTRIBUTE_SCALE * entityData.get(RANGE_ATTRIBUTE)))
                 .toList();
         return transformLocalPointsLike121(localPoints);
     }
@@ -303,6 +319,8 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
                     && (ProjectileHitRules.canHit(owner, rawTarget)
                     || isFriendlySummon(owner, logicalTarget, definition));
         });
+        candidates.sort(Comparator.comparingDouble(rawTarget -> WhipCollisionGeometry.firstContactProgress(
+                previousCurve, currentCurve, rawTarget.getBoundingBox().inflate(radius))));
         for (Entity rawTarget : candidates) {
             Entity damageRecipient = ProjectileHitRules.damageRecipient(rawTarget);
             Entity identity = ProjectileHitRules.dedupeIdentity(rawTarget);
@@ -318,6 +336,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
                 continue;
             }
             if (applyFriendlyHit(owner, logicalTarget, definition)) {
+                completedTargets.add(identity.getUUID());
                 delayNextHit(identity.getUUID(), definition);
                 continue;
             }
@@ -366,6 +385,11 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
         float damage = baseDamage * multiplier
                 * (1.0F + sweepLevel() * 0.2F);
         delayNextHit(identity.getUUID(), definition);
+        if (!LibDamageTypes.hurtWithoutKnockback(damageRecipient,
+                LibDamageTypes.of(level(), LibDamageTypes.SUMMON, this, owner), damage)) {
+            return;
+        }
+        completedTargets.add(identity.getUUID());
         int hitIndex = successfulHits++;
         if (owner instanceof Player player) {
             consumeDurabilityAfterFirstEnemyHit(player);
@@ -374,12 +398,11 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
             WhipDirectHitContext context = new WhipDirectHitContext(player, logicalTarget, weapon(), damage, hitIndex);
             definition.directHitEffects().forEach(effect -> effect.apply(context));
         }
-        LibDamageTypes.hurtWithoutKnockback(damageRecipient,
-                LibDamageTypes.of(level(), LibDamageTypes.SUMMON, this, owner), damage);
     }
 
     private boolean canHitAgain(UUID targetId) {
-        return tickCount >= nextHitTicks.getOrDefault(targetId, Integer.MIN_VALUE);
+        return !completedTargets.contains(targetId)
+                && tickCount >= nextHitTicks.getOrDefault(targetId, Integer.MIN_VALUE);
     }
 
     private void delayNextHit(UUID targetId, WhipDefinition definition) {
@@ -429,7 +452,7 @@ public final class WhipAttackEntity extends DamageSettableProjectile {
     }
 
     private boolean canReachTarget(LivingEntity owner, Entity target) {
-        Vec3 eyes = owner.getEyePosition();
+        Vec3 eyes = attackOrigin == null ? owner.getEyePosition() : attackOrigin;
         AABB box = target.getBoundingBox();
         return hasLineOfSight(eyes, new Vec3(target.getX(), box.maxY, target.getZ()))
                 || hasLineOfSight(eyes, target.position())

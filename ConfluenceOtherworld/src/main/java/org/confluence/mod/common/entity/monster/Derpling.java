@@ -20,13 +20,6 @@ public class Derpling extends BaseMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0)
-                .add(Attributes.ATTACK_DAMAGE, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25);
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

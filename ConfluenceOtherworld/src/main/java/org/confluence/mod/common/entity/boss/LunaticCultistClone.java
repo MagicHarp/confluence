@@ -42,15 +42,6 @@ public final class LunaticCultistClone extends BaseFlyingMonster implements Boss
         this.xpReward = 0;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 1.0)
-                .add(Attributes.ATTACK_DAMAGE, 8.0)
-                .add(Attributes.ARMOR, 0.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

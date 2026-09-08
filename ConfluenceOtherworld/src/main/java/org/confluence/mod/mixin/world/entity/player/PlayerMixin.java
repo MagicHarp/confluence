@@ -1,14 +1,11 @@
 package org.confluence.mod.mixin.world.entity.player;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.confluence.lib.mixed.ILibDamageSource;
 import org.confluence.lib.util.LibEntityUtils;
 import org.confluence.mod.common.data.saved.Bestiary;
 import org.confluence.mod.common.init.ModEffects;
@@ -35,13 +32,9 @@ public abstract class PlayerMixin implements IPlayer {
         return confluence$currentBait;
     }
 
-    @ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSources;playerAttack(Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/damagesource/DamageSource;"))
-    private DamageSource attack(DamageSource original, @Local(name = "flag2") boolean flag2) {
-        ILibDamageSource lds = ILibDamageSource.of(original);
-        if (lds != null) {
-            lds.confluence$setCritical(flag2);
-        }
-        return original;
+    @ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"), index = 1)
+    private float removeVanillaJumpCritical(float amount, @Local(name = "flag2") boolean vanillaCritical) {
+        return vanillaCritical ? amount / 1.5F : amount;
     }
 
     @ModifyArg(method = "causeFoodExhaustion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;addExhaustion(F)V"))

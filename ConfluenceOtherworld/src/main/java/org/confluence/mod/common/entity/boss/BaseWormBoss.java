@@ -4,7 +4,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -53,8 +53,11 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
 
     protected abstract int getSegmentCount();
 
+    protected abstract EntityType<? extends BossWormPart> getSegmentType();
+
     protected float getInitialSegmentHealth(int index) {
-        return 0.0F;
+        return (float) net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier(getSegmentType())
+                .getBaseValue(Attributes.MAX_HEALTH);
     }
 
     /// 返回相邻体节中心之间的距离。
@@ -206,7 +209,7 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     }
 
     private @Nullable BossWormPart createSegment(int index, int expectedCount, Vec3 segmentPosition, float yaw, float pitch) {
-        BossWormPart part = BossEntities.WORM_SEGMENT.get().create(level());
+        BossWormPart part = getSegmentType().create(level());
         if (part == null) return null;
 
         part.bindTo(this, index, index == expectedCount);
@@ -356,12 +359,4 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
         };
     }
 
-    public static AttributeSupplier.Builder createWormBossAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 500.0)
-                .add(Attributes.ATTACK_DAMAGE, 20.0)
-                .add(Attributes.ARMOR, 4.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
 }

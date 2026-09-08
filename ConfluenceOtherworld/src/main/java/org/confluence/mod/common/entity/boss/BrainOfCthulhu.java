@@ -99,16 +99,6 @@ public class BrainOfCthulhu extends BaseBoss {
         xpReward = 2000;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 552.0)
-                .add(Attributes.ATTACK_DAMAGE, 14.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.5)
-                .add(Attributes.ARMOR, 14.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
-
     @Override
     protected BossEvent.BossBarColor getBossBarColor() {
         return BossEvent.BossBarColor.YELLOW;

@@ -16,7 +16,7 @@ public class MoveToTargetAction extends BTNode {
     }
 
     MoveToTargetAction(TargetNavigation navigation, double speed, double closeEnough) {
-        if (!Double.isFinite(speed) || speed <= 0.0 || !Double.isFinite(closeEnough) || closeEnough < 0.0) {
+        if (speed <= 0.0 || closeEnough < 0.0) {
             throw new IllegalArgumentException("Target movement speed must be positive and stopping distance must be non-negative");
         }
         this.navigation = navigation;

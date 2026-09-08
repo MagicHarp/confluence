@@ -38,15 +38,6 @@ public final class Crawdad extends BaseWarriorMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 26.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.FOLLOW_RANGE, 25.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1);
-    }
-
     @Override
     protected JumpProfile jumpProfile() {
         return new JumpProfile(4.0, 2.0, 60, 0);

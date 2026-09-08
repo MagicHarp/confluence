@@ -10,8 +10,4 @@ public class Pinky extends BaseSlime {
         super(type, level, true, 1);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(2.0f, 2, 97.0f);
-    }
-
 }

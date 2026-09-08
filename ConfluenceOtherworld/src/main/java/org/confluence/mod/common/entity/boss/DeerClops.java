@@ -88,15 +88,6 @@ public class DeerClops extends BaseBoss {
         setMaxUpStep(1.0F);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 3094.0)
-                .add(Attributes.ATTACK_DAMAGE, 10.4)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.4)
-                .add(Attributes.FOLLOW_RANGE, 300.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

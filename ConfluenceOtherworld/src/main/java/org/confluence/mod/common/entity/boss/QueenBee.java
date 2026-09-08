@@ -88,16 +88,6 @@ public class QueenBee extends BaseBoss {
         xpReward = 1500;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 1237.0)
-                .add(Attributes.ATTACK_DAMAGE, 14.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.0)
-                .add(Attributes.ARMOR, 8.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

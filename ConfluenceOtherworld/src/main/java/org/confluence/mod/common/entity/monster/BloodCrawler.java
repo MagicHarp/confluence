@@ -43,17 +43,6 @@ public class BloodCrawler extends BaseMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 31.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0)
-                .add(Attributes.ARMOR, 8.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.38)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.01)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

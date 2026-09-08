@@ -15,8 +15,8 @@ public final class FlyingPursuitAction extends BTNode {
     private int repathTicks;
 
     public FlyingPursuitAction(BaseMonster mob, double navigationSpeed) {
-        if (!Double.isFinite(navigationSpeed) || navigationSpeed <= 0.0)
-            throw new IllegalArgumentException("Flying pursuit speed must be finite and positive");
+        if (navigationSpeed <= 0.0)
+            throw new IllegalArgumentException("Flying pursuit speed must be positive");
         this.mob = mob;
         this.navigationSpeed = navigationSpeed;
     }

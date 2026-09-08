@@ -6,7 +6,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
@@ -18,11 +18,6 @@ public class InverseEnderMan extends EnderMan {
     public InverseEnderMan(EntityType<? extends InverseEnderMan> type, Level level) {
         super(type, level);
         ILibEntity.of(this).confluence$setShouldRot(true);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        Attribute value = Attributes.GRAVITY.value();
-        return EnderMan.createAttributes().add(value, -value.getDefaultValue());
     }
 
     public static boolean checkInverseEnderManSpawnRules(EntityType<? extends InverseEnderMan> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {

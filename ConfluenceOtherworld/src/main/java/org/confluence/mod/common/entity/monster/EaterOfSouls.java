@@ -13,22 +13,18 @@ import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.ChargeAttackAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.CircleAroundTargetAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.LookForwardWanderFlyAction;
+import org.confluence.mod.common.init.entity.MonsterEntities;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 
 public class EaterOfSouls extends BaseFlyingMonster {
+    private static final RawAnimation SPAWN = RawAnimation.begin().thenPlayAndHold("spawn");
     private static final RawAnimation FLY = RawAnimation.begin().thenLoop("fly");
 
     public EaterOfSouls(EntityType<? extends EaterOfSouls> type, Level level) {
         super(type, level);
         setDiscardFriction(true);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 12.0);
     }
 
     @Override
@@ -47,7 +43,8 @@ public class EaterOfSouls extends BaseFlyingMonster {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Movement", 0, state -> state.setAndContinue(FLY)));
+        controllers.add(new AnimationController<>(this, "Movement", 0, state ->
+                state.setAndContinue(getType() == MonsterEntities.CRIMERA.get() ? FLY : SPAWN)));
     }
 
     @Override

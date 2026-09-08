@@ -32,10 +32,6 @@ public class Piranha extends BaseAquaticMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return AquaticAttributeProfiles.PIRANHA.createBuilder();
-    }
-
     /// 食人鱼族的攻击只由近战目标结算。
     @Override
     protected boolean hasEntityContactAttack() {

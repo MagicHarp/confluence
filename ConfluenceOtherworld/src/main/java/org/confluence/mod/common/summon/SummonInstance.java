@@ -240,8 +240,8 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
         Objects.requireNonNull(damageRecipient, "Summon damage recipient must not be null");
         Objects.requireNonNull(encounterOwner, "Summon encounter owner must not be null");
         Objects.requireNonNull(dedupeIdentity, "Summon dedupe identity must not be null");
-        if (!Float.isFinite(damageMultiplier) || damageMultiplier < 0.0F) {
-            throw new IllegalArgumentException("Summon damage multiplier must be finite and non-negative");
+        if (damageMultiplier < 0.0F) {
+            throw new IllegalArgumentException("Summon damage multiplier must be non-negative");
         }
         if (!SummonTargetCache.isValidTarget(owner, encounterOwner, Double.MAX_VALUE, true)) {
             return false;

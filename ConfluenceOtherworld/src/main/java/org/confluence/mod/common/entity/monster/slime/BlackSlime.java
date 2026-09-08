@@ -15,10 +15,6 @@ public final class BlackSlime extends BaseSlime {
         super(type, level, false, SIZE);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(6.0F, 4, 25.0F);
-    }
-
     @Override
     protected void setSlimeSize(int size) {
         super.setSlimeSize(SIZE);

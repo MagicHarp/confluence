@@ -98,16 +98,6 @@ public final class PrimeEnderDragon extends BaseBoss {
         xpReward = 5000;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 4624.0)
-                .add(Attributes.ATTACK_DAMAGE, 32.0)
-                .add(Attributes.ARMOR, 20.0)
-                .add(Attributes.MOVEMENT_SPEED, 1.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 300.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

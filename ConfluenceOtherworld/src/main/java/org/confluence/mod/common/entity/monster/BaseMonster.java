@@ -9,7 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -310,17 +310,6 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSoundEvents.ROUTINE_DEATH.get();
-    }
-
-    public static AttributeSupplier.Builder createMonsterAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0)
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.ARMOR, 0.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.23)
-                .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.0)
-                .add(Attributes.SCALE.value(), 1.0D);
     }
 
     @Override

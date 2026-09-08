@@ -30,6 +30,7 @@ import org.confluence.mod.common.init.item.GunItems;
 import org.confluence.mod.common.item.BaseBullet;
 import org.joml.Vector3f;
 import org.mesdag.portlib.event.PortEventHandler;
+import org.mesdag.portlib.wrapper.world.entity.projectile.PortProjectileDeflection;
 
 import java.util.*;
 
@@ -251,7 +252,10 @@ public class BaseBulletEntity extends Projectile {
                 setPos(segmentEnd.x, segmentEnd.y, segmentEnd.z);
                 break;
             }
-            onHitEntity((EntityHitResult) hitResult);
+            if (hitTargetOrDeflectSelf(hitResult) != PortProjectileDeflection.NONE) {
+                PortEventHandler.postEvent(new BulletEvent.Tick.Post(this, getBullet()));
+                return;
+            }
             if (isRemoved()) {
                 PortEventHandler.postEvent(new BulletEvent.Tick.Post(this, getBullet()));
                 return;

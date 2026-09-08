@@ -1,6 +1,7 @@
 package org.confluence.mod.util;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.confluence.lib.ConfluenceMagicLib;
@@ -85,6 +86,16 @@ public final class PrefixUtils {
 
     public static @Nullable PrefixComponent getPrefix(ItemStack itemStack) {
         return itemStack.isEmpty() ? null : itemStack.get(ModDataComponentTypes.PREFIX);
+    }
+
+    public static int calculateUseTime(Player player, int baseTicks) {
+        if (baseTicks <= 0) return 0;
+        double baseSpeed = player.getAttributeBaseValue(Attributes.ATTACK_SPEED);
+        double attackSpeed = player.getAttributeValue(Attributes.ATTACK_SPEED);
+        if (baseSpeed <= 0.0 || attackSpeed <= 0.0) {
+            return baseTicks;
+        }
+        return Math.max(1, (int) Math.ceil(baseTicks * baseSpeed / attackSpeed));
     }
 
     public static @Nullable PrefixComponent random(RandomSource random, ItemStack itemStack) {

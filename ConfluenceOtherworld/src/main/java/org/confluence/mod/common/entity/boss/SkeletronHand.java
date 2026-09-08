@@ -13,6 +13,8 @@ import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -23,7 +25,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /// 骷髅王之手。绕头部轨道运行，周期性挥击玩家。
-public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity {
+public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoEntity {
     // 两次拍击之间的基础间隔，单位为 tick；专家模式缩短准备时间。
     private static final int CLASSIC_SLAP_INTERVAL = 45;
     private static final int EXPERT_SLAP_INTERVAL = 30;
@@ -37,9 +39,7 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
     private static final double PASS_DISTANCE = 4.0;
     // 到达判定直接与距离平方比较，避免每 tick 开平方。
     private static final double ARRIVAL_DISTANCE_SQUARED = 1.5;
-    // 部件属性的基础值；实际最大生命由本体统一应用难度和多人倍率。
-    private static final float BASE_MAX_PART_HEALTH = 405.0F;
-    private static final float PART_ARMOR = 4.0F;
+    // 实际最大生命和接触伤害由本体统一应用难度及多人倍率。
     // 整条手臂的选取/受击半径；动态包围盒从肩部根点延伸到手掌，而不是只覆盖手掌模型。
     private static final double ARM_HITBOX_RADIUS = 0.85D;
     private static final String HAND_INDEX_TAG = "HandIndex";
@@ -60,7 +60,7 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
     private float clientLerpYaw;
     private float clientLerpPitch;
 
-    public SkeletronHand(EntityType<?> type, Level level) {
+    public SkeletronHand(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.noPhysics = true;
     }
@@ -228,7 +228,7 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
         for (net.minecraft.world.entity.Entity entity : SweptContactAttack.findTargets(this, 0.0D,
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 candidate -> candidate instanceof LivingEntity living && living != master && master.canAttack(living))) {
-            entity.hurt(damageSources().mobAttack(master), master.getHandContactDamage());
+            entity.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE));
         }
     }
 
@@ -297,10 +297,8 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
         if (source.getEntity() instanceof net.minecraft.world.entity.player.Player player) {
             owner.registerCombatParticipant(player);
         }
-        float appliedDamage = source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount : CombatRules.getDamageAfterAbsorb(amount, PART_ARMOR, 0.0F);
-        if (appliedDamage <= 0.0F) return false;
-        float remaining = Math.max(0.0F, getPartHealth() - appliedDamage);
-        setPartHealth(remaining);
+        if (!super.hurt(source, amount)) return false;
+        float remaining = getHealth();
         indicateHurt();
         playSound(SoundEvents.SKELETON_HURT, 0.9F, 0.9F + random.nextFloat() * 0.2F);
         if (level() instanceof ServerLevel serverLevel) {
@@ -311,15 +309,8 @@ public class SkeletronHand extends BaseBossPart<Skeletron> implements GeoEntity 
         onPartHealthChanged(owner, remaining);
         if (remaining <= 0.0F) {
             onPartDestroyed(owner);
-            discard();
         }
         return true;
-    }
-
-    @Override
-    protected float getMaxPartHealth() {
-        Skeletron owner = getOwner();
-        return owner == null ? BASE_MAX_PART_HEALTH : owner.getHandMaxHealth();
     }
 
     @Override

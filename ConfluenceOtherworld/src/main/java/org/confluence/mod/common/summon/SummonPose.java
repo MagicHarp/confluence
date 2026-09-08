@@ -9,9 +9,6 @@ public record SummonPose(Vec3 position, float yaw, float pitch, float roll) {
         if (position == null) {
             throw new IllegalArgumentException("Summon pose position must not be null");
         }
-        if (!Float.isFinite(yaw) || !Float.isFinite(pitch) || !Float.isFinite(roll)) {
-            throw new IllegalArgumentException("Summon pose rotation must be finite");
-        }
     }
 
     public SummonPose interpolate(SummonPose target, float progress) {

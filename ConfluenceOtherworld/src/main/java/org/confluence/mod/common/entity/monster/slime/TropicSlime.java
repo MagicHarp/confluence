@@ -12,10 +12,6 @@ public class TropicSlime extends BaseSlime {
         super(type, level, true);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(5.0f, 1, 13.0f);
-    }
-
     @Override
     public boolean hurt(DamageSource source, float amount) {
         return !source.is(DamageTypes.DROWN) && super.hurt(source, amount);

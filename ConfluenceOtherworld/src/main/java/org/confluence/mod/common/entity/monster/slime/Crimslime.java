@@ -13,10 +13,6 @@ public class Crimslime extends BaseSlime {
         setSlimeSize(1 + random.nextInt(3));
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(31.2f, 26, 104.0f);
-    }
-
     @Override
     protected void onAttackTarget(LivingEntity target) {
         tryApplyDarkness(target);

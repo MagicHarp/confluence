@@ -3,7 +3,7 @@ package org.confluence.mod.common.entity.monster;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -34,13 +34,6 @@ public abstract class BaseCasterMonster extends BaseMonster {
     public BaseCasterMonster(EntityType<? extends BaseCasterMonster> type, Level level, CasterCycleAction.HurtResponse hurtResponse) {
         super(type, level);
         this.hurtResponse = hurtResponse;
-    }
-
-    public static AttributeSupplier.Builder createCasterAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0)
-                .add(Attributes.ARMOR, 2.0)
-                .add(Attributes.FOLLOW_RANGE, 24.0);
     }
 
     @Override

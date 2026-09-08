@@ -13,10 +13,6 @@ public final class WinglessSlimer extends BaseSlime {
         super(type, level, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(45.0F, 20, 234.0F);
-    }
-
     @Override
     protected void onAttackTarget(LivingEntity target) {
         tryApplyDarkness(target);

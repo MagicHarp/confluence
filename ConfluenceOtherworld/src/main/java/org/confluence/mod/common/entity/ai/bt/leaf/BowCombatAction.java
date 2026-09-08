@@ -38,8 +38,8 @@ public final class BowCombatAction extends BTNode {
     private int repositionTicks;
 
     public BowCombatAction(BaseMonster mob, double movementSpeed, int normalAttackInterval, int hardAttackInterval, double attackRadius, int drawDuration, float arrowVelocity) {
-        if (!Double.isFinite(movementSpeed) || movementSpeed <= 0.0 || normalAttackInterval <= 0 || hardAttackInterval <= 0
-                || !Double.isFinite(attackRadius) || attackRadius <= 0.0 || drawDuration <= 0 || !Float.isFinite(arrowVelocity) || arrowVelocity <= 0.0F) {
+        if (movementSpeed <= 0.0 || normalAttackInterval <= 0 || hardAttackInterval <= 0
+                || attackRadius <= 0.0 || drawDuration <= 0 || arrowVelocity <= 0.0F) {
             throw new IllegalArgumentException("Bow combat timing and radius must be positive");
         }
         this.mob = mob;

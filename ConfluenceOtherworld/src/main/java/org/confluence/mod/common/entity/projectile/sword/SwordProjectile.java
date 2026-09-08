@@ -178,7 +178,7 @@ public abstract class SwordProjectile extends AbstractHurtingProjectile implemen
     }
 
     protected final void configureCollision(int interval, double inflation) {
-        if (interval < 1 || !Double.isFinite(inflation) || inflation < 0.0) {
+        if (interval < 1 || inflation < 0.0) {
             throw new IllegalArgumentException("Invalid sword projectile collision settings");
         }
         collisionInterval = interval;

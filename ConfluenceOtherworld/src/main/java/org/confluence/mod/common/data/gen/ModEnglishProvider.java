@@ -75,6 +75,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("tooltip.confluence.summon.damage", "Base summon damage: %s");
         add("tooltip.confluence.summon.slots", "Minion slots: %s");
         add("tooltip.confluence.summon.retrieve", "Hold right-click to release all summons");
+        add("tooltip.confluence.storage_companion.retrieve", "Sneak and right-click to recall");
         add(YoyoItems.AMAZON.get(), "Amazon");
         add(YoyoItems.ARTERY.get(), "Artery");
         add(YoyoItems.CASCADE.get(), "Cascade");

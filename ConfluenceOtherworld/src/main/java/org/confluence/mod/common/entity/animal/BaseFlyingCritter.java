@@ -1,7 +1,7 @@
 package org.confluence.mod.common.entity.animal;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
@@ -38,13 +38,6 @@ public abstract class BaseFlyingCritter extends BaseCritter {
     /// {@link FlyingMoveControl} 在产生实际位移时读取飞行速度，只有移动速度而缺少该属性
     /// 会在实体首个飞行 tick 直接抛错。所有空中小动物都应从这里创建属性，避免注册事件
     /// 漏掉隐含依赖。
-    public static AttributeSupplier.Builder createFlyingCritterAttributes() {
-        return BaseCritter.createInsectAttributes()
-                .add(Attributes.FLYING_SPEED, 0.25)
-                .add(LibAttributes.getAttackDamage().value(), 3.0)
-                .add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
-    }
-
     @Override
     protected PathNavigation createNavigation(Level level) {
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);

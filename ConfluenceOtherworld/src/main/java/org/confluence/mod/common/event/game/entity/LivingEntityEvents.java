@@ -190,7 +190,7 @@ public final class LivingEntityEvents {
         }
     }
 
-    private static void heal(LivingHealEvent event) {
+    private static void heal(PortLivingHealEvent event) {
         LivingEntity living = event.getEntity();
         if (!(living.level() instanceof ServerLevel level)) return;
         float amount = event.getAmount();

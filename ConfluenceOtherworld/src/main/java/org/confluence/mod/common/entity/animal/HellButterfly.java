@@ -2,7 +2,7 @@ package org.confluence.mod.common.entity.animal;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.level.Level;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -12,10 +12,6 @@ public class HellButterfly extends BaseFlyingCritter {
 
     public HellButterfly(EntityType<? extends HellButterfly> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingCritter.createFlyingCritterAttributes();
     }
 
     @Override

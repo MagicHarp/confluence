@@ -4,7 +4,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -192,15 +192,6 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     @Override
     public @Nullable WormSegment getNext() {
         return getSegment(1);
-    }
-
-    public static AttributeSupplier.Builder createWormAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 80.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0)
-                .add(Attributes.ARMOR, 5.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
     }
 
     @Override

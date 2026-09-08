@@ -3,9 +3,12 @@ package org.confluence.mod.client.entity.model;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import org.confluence.mod.common.entity.boss.BossWormPart;
 import org.confluence.mod.common.entity.monster.BaseWormPart;
 import org.confluence.mod.common.entity.monster.WormSegment;
+import org.confluence.mod.common.init.entity.BossEntities;
+import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 
@@ -25,7 +28,6 @@ public class WormPartGeoModel<T extends GeoEntity & WormSegment> extends GeoNorm
     private final ResourceLocation tailTexture;
     private final String modelDirectory;
     private final String textureDirectory;
-    private final String fallbackFamily;
 
     public WormPartGeoModel(ResourceLocation bodyModel, ResourceLocation bodyTexture, ResourceLocation tailModel, ResourceLocation tailTexture) {
         super(bodyModel, false);
@@ -35,38 +37,39 @@ public class WormPartGeoModel<T extends GeoEntity & WormSegment> extends GeoNorm
         this.tailTexture = tailTexture;
         this.modelDirectory = directory(bodyModel.getPath());
         this.textureDirectory = directory(bodyTexture.getPath());
-        this.fallbackFamily = fileName(bodyModel.getPath()).replace("_segment.geo.json", "");
     }
 
     @Override
     public ResourceLocation getModelResource(T segment) {
-        String family = family(segment);
-        if (family == null) {
+        EntityType<?> familyType = familyType(segment);
+        if (familyType == null || usesFallbackResources(familyType)) {
             return segment.isTail() ? tailModel : bodyModel;
         }
-        if (isWyvernFamily(family)) {
+        if (isWyvernFamily(familyType)) {
             return ResourceLocation.fromNamespaceAndPath(bodyModel.getNamespace(), modelDirectory + "wyvern.geo.json");
         }
+        String family = BuiltInRegistries.ENTITY_TYPE.getKey(familyType).getPath();
         return ResourceLocation.fromNamespaceAndPath(bodyModel.getNamespace(), modelDirectory + family
                 + (segment.isTail() ? "_tail.geo.json" : "_segment.geo.json"));
     }
 
     @Override
     public ResourceLocation getTextureResource(T segment) {
-        String family = family(segment);
-        if (family == null) {
+        EntityType<?> familyType = familyType(segment);
+        if (familyType == null || usesFallbackResources(familyType)) {
             return segment.isTail() ? tailTexture : bodyTexture;
         }
-        if (isWyvernFamily(family)) {
+        if (isWyvernFamily(familyType)) {
             return ResourceLocation.fromNamespaceAndPath(bodyTexture.getNamespace(), textureDirectory + "wyvern.png");
         }
+        String family = BuiltInRegistries.ENTITY_TYPE.getKey(familyType).getPath();
         return ResourceLocation.fromNamespaceAndPath(bodyTexture.getNamespace(), textureDirectory + family
                 + (segment.isTail() ? "_tail.png" : "_segment.png"));
     }
 
     /// 飞龙的头部、普通体节、翼节和尾节位于同一个模型文件中，不能按普通蠕虫的文件命名规则拼接。
     public boolean usesWyvernGeometry(T segment) {
-        return isWyvernFamily(family(segment));
+        return isWyvernFamily(familyType(segment));
     }
 
     @Override
@@ -74,7 +77,7 @@ public class WormPartGeoModel<T extends GeoEntity & WormSegment> extends GeoNorm
         return null;
     }
 
-    private @Nullable String family(T segment) {
+    private @Nullable EntityType<?> familyType(T segment) {
         Entity ownerEntity = null;
         if (segment instanceof BaseWormPart part) {
             ownerEntity = part.getOwner();
@@ -82,7 +85,7 @@ public class WormPartGeoModel<T extends GeoEntity & WormSegment> extends GeoNorm
             ownerEntity = part.getOwner();
         }
         if (ownerEntity != null) {
-            return familyFromEntity(ownerEntity);
+            return ownerEntity.getType();
         }
 
         WormSegment head = segment;
@@ -97,38 +100,25 @@ public class WormPartGeoModel<T extends GeoEntity & WormSegment> extends GeoNorm
         if (head.getSegmentIndex() != 0 || !(head instanceof Entity entity)) {
             return null;
         }
-        return familyFromEntity(entity);
+        return isSegmentCarrier(entity.getType()) ? null : entity.getType();
     }
 
-    private @Nullable String familyFromEntity(Entity entity) {
-        ResourceLocation typeId = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
-        // 共用体节只是网络同步载体；链首尚未同步时不能把它的注册名当作资源家族名。
-        if (isSharedPlaceholder(typeId.getPath())) {
-            return null;
-        }
-        String family = typeId.getPath();
-        // 资源包尚无毁灭者专用节段文件，避免构造不存在的资源路径。
-        if (fallbackFamily.equals("eater_of_worlds") && family.equals("the_destroyer")) {
-            return fallbackFamily;
-        }
-        return family;
+    private static boolean isSegmentCarrier(EntityType<?> type) {
+        return type == BossEntities.EATER_OF_WORLDS_SEGMENT.get()
+                || type == BossEntities.THE_DESTROYER_PART.get()
+                || type == MonsterEntities.WORM_SEGMENT.get();
     }
 
-    private static boolean isSharedPlaceholder(String family) {
-        return "boss_worm_segment".equals(family) || "worm_segment".equals(family);
+    private static boolean usesFallbackResources(EntityType<?> type) {
+        return type == BossEntities.THE_DESTROYER.get();
     }
 
-    private static boolean isWyvernFamily(@Nullable String family) {
-        return "wyvern".equals(family) || "arch_wyvern".equals(family);
+    private static boolean isWyvernFamily(@Nullable EntityType<?> type) {
+        return type == MonsterEntities.WYVERN.get() || type == MonsterEntities.ARCH_WYVERN.get();
     }
 
     private static String directory(String path) {
         int separator = path.lastIndexOf('/');
         return separator < 0 ? "" : path.substring(0, separator + 1);
-    }
-
-    private static String fileName(String path) {
-        int separator = path.lastIndexOf('/');
-        return separator < 0 ? path : path.substring(separator + 1);
     }
 }

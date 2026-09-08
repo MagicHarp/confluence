@@ -16,10 +16,6 @@ public class IceSlime extends BaseSlime {
         super(type, level, true);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createSlimeAttributes(5.0f, 4, 13.0f);
-    }
-
     @Override
     protected void onAttackTarget(LivingEntity target) {
         if (!TCUtils.hasType(target, TCItems.FROZEN$IMMUNE) && random.nextInt(12) == 0) {

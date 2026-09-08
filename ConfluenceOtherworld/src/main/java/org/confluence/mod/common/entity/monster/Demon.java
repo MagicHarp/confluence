@@ -39,12 +39,6 @@ public class Demon extends ReboundingFlyingMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0)
-                .add(Attributes.ATTACK_DAMAGE, 8.0);
-    }
-
     @Override
     protected Vec3 reboundVelocity(Vec3 requested, Vec3 allowed) {
         Vec3 rebound = requested;

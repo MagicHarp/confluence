@@ -16,7 +16,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -48,9 +50,6 @@ public class EaterOfWorlds extends BaseWormBoss {
     // 一条完整世界吞噬者的初始体节数，以及难度/多人倍率前的头部与单体节生命。
     public static final int INITIAL_SEGMENT_COUNT = 60;
     public static final float HEAD_MAX_HEALTH = 54.0F;
-    public static final float NODE_MAX_HEALTH = 50.0F;
-    private static final float NODE_ARMOR = 6.0F;
-    private static final float ENCOUNTER_MAX_HEALTH = HEAD_MAX_HEALTH + NODE_MAX_HEALTH * INITIAL_SEGMENT_COUNT;
     private static final String ENCOUNTER_TAG = "Encounter";
     private static final String PRIMARY_TAG = "PrimaryHead";
     private static final String SEGMENT_COUNT_TAG = "ActiveSegmentCount";
@@ -134,6 +133,24 @@ public class EaterOfWorlds extends BaseWormBoss {
     }
 
     @Override
+    protected EntityType<? extends BossWormPart> getSegmentType() {
+        return BossEntities.EATER_OF_WORLDS_SEGMENT.get();
+    }
+
+    private static float segmentMaxHealth() {
+        return segmentAttribute(Attributes.MAX_HEALTH);
+    }
+
+    private static float segmentAttribute(Attribute attribute) {
+        return (float) DefaultAttributes.getSupplier(BossEntities.EATER_OF_WORLDS_SEGMENT.get())
+                .getBaseValue(attribute);
+    }
+
+    private static float encounterMaxHealth() {
+        return HEAD_MAX_HEALTH + segmentMaxHealth() * INITIAL_SEGMENT_COUNT;
+    }
+
+    @Override
     public boolean sharesHurtAnimation() {return false;}
 
     @Override
@@ -150,7 +167,7 @@ public class EaterOfWorlds extends BaseWormBoss {
     protected float getInitialSegmentHealth(int index) {
         return index >= 1 && index <= segmentHealths.size()
                 ? segmentHealths.get(index - 1)
-                : NODE_MAX_HEALTH;
+                : segmentMaxHealth();
     }
 
     @Override
@@ -193,7 +210,8 @@ public class EaterOfWorlds extends BaseWormBoss {
             return false;
         }
 
-        float appliedDamage = source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount : CombatRules.getDamageAfterAbsorb(amount, NODE_ARMOR, 0.0F);
+        float appliedDamage = source.is(DamageTypeTags.BYPASSES_ARMOR) ? amount
+                : CombatRules.getDamageAfterAbsorb(amount, (float) segment.getAttributeValue(Attributes.ARMOR), 0.0F);
         if (appliedDamage <= 0.0F) return false;
         float remaining = Math.max(0.0F, segmentHealths.get(index - 1) - appliedDamage);
         segmentHealths.set(index - 1, remaining);
@@ -319,7 +337,7 @@ public class EaterOfWorlds extends BaseWormBoss {
         activeSegmentCount = Math.min(INITIAL_SEGMENT_COUNT, healths.size());
         segmentHealths.clear();
         for (int index = 0; index < activeSegmentCount; index++) {
-            segmentHealths.add(Mth.clamp(healths.get(index), 0.0F, NODE_MAX_HEALTH));
+            segmentHealths.add(Mth.clamp(healths.get(index), 0.0F, segmentMaxHealth()));
         }
         initSegments();
         restoreSegmentPositions(positions);
@@ -348,7 +366,7 @@ public class EaterOfWorlds extends BaseWormBoss {
         head.activeSegmentCount = Math.min(INITIAL_SEGMENT_COUNT, bodyHealths.size());
         head.segmentHealths.clear();
         for (int index = 0; index < head.activeSegmentCount; index++) {
-            head.segmentHealths.add(Mth.clamp(bodyHealths.get(index), 0.0F, NODE_MAX_HEALTH));
+            head.segmentHealths.add(Mth.clamp(bodyHealths.get(index), 0.0F, segmentMaxHealth()));
         }
         BossMultiplayerEnhancement.copyEncounterScaling(this, head);
         head.setHealth(Mth.clamp(headHealth, 0.1F, (float) head.getMaxHealth()));
@@ -492,12 +510,12 @@ public class EaterOfWorlds extends BaseWormBoss {
         if (!isMainBody()) return super.getBossBarProgress();
         float remainingHealth = 0.0F;
         for (EaterOfWorlds head : encounterHeads()) remainingHealth += head.chainHealth();
-        return remainingHealth / ENCOUNTER_MAX_HEALTH;
+        return remainingHealth / encounterMaxHealth();
     }
 
     @Override
     protected float getBossBarMaximumHealth() {
-        return isMainBody() ? ENCOUNTER_MAX_HEALTH : super.getBossBarMaximumHealth();
+        return isMainBody() ? encounterMaxHealth() : super.getBossBarMaximumHealth();
     }
 
     private float chainHealth() {
@@ -592,7 +610,7 @@ public class EaterOfWorlds extends BaseWormBoss {
 
     private void resetSegmentHealths(int count) {
         segmentHealths.clear();
-        for (int index = 0; index < count; index++) segmentHealths.add(NODE_MAX_HEALTH);
+        for (int index = 0; index < count; index++) segmentHealths.add(segmentMaxHealth());
     }
 
     @Override
@@ -628,8 +646,11 @@ public class EaterOfWorlds extends BaseWormBoss {
         ListTag healths = tag.getList(SEGMENT_HEALTHS_TAG, FloatTag.TAG_FLOAT);
         segmentHealths.clear();
         for (int index = 0; index < activeSegmentCount; index++) {
-            float health = index < healths.size() ? healths.getFloat(index) : NODE_MAX_HEALTH;
-            segmentHealths.add(Float.isFinite(health) ? Mth.clamp(health, 0.0F, NODE_MAX_HEALTH) : NODE_MAX_HEALTH);
+            float maximum = segmentMaxHealth();
+            float health = index < healths.size() ? healths.getFloat(index) : maximum;
+            segmentHealths.add(Float.isFinite(health)
+                    ? Mth.clamp(health, 0.0F, maximum)
+                    : maximum);
         }
         int phaseIndex = Mth.clamp(tag.getInt(MOVEMENT_PHASE_TAG), 0, MovementPhase.values().length - 1);
         movementPhase = MovementPhase.values()[phaseIndex];
@@ -650,14 +671,6 @@ public class EaterOfWorlds extends BaseWormBoss {
     @Override
     protected BossEvent.BossBarColor getBossBarColor() {
         return BossEvent.BossBarColor.PURPLE;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return createWormBossAttributes()
-                .add(Attributes.MAX_HEALTH, HEAD_MAX_HEALTH)
-                .add(Attributes.ATTACK_DAMAGE, 11.5)
-                .add(Attributes.ARMOR, 4.0)
-                .add(Attributes.FOLLOW_RANGE, TARGET_SEARCH_RANGE);
     }
 
     @Override

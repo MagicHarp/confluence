@@ -90,16 +90,6 @@ public class EyeOfCthulhu extends BaseBoss {
         xpReward = 1000;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, EXPERT_BASE_HEALTH)
-                .add(Attributes.ATTACK_DAMAGE, PHASE_ONE_DAMAGE)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.0)
-                .add(Attributes.ARMOR, 12.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

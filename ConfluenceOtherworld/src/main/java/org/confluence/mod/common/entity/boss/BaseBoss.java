@@ -21,7 +21,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
@@ -821,17 +821,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     // === Attributes ===
 
-    public static AttributeSupplier.Builder createBossAttributes() {
-        return createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 500.0)
-                .add(Attributes.ATTACK_DAMAGE, 15.0)
-                .add(Attributes.ARMOR, 10.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0)
-                .add(Attributes.FLYING_SPEED, 0.4);
-    }
-
-    // === Death ===
+// === Death ===
 
     @Override
     public void die(DamageSource source) {

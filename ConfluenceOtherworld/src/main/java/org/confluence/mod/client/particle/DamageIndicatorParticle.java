@@ -2,7 +2,6 @@ package org.confluence.mod.client.particle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -56,19 +55,14 @@ public class DamageIndicatorParticle extends TextureSheetParticle {
         poseStack.translate(dx, dy, dz);
 
         poseStack.mulPose(camera.rotation());
-        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-
         float f = Mth.lerp(pPartialTicks, factorOld, factor);
-        poseStack.scale(f, f, f);  // 文本大小
+        poseStack.scale(-f, -f, f);
         int width = minecraft.font.width(text);
         Matrix4f matrix = new Matrix4f(poseStack.last().pose());
-        minecraft.font.renderText(text.getVisualOrderText(),
-                -width / 2f, 0, Mth.lerpInt(pPartialTicks, transparencyOld, transparency) << 24,
-                false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, getLightColor(pPartialTicks));
-        matrix.translate(0, 0, 0.03f);
-        minecraft.font.renderText(text.getVisualOrderText(),
-                -width / 2f, 0, Mth.lerpInt(pPartialTicks, transparencyOld, transparency) << 24,
-                true, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, getLightColor(pPartialTicks));
+        int color = Mth.lerpInt(pPartialTicks, transparencyOld, transparency) << 24 | 0xFFFFFF;
+        minecraft.font.drawInBatch(text.getVisualOrderText(), -width / 2.0F, 0.0F, color, false, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, getLightColor(pPartialTicks));
+        matrix.translate(0.0F, 0.0F, 0.03F);
+        minecraft.font.drawInBatch(text.getVisualOrderText(), -width / 2.0F, 0.0F, color, true, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, getLightColor(pPartialTicks));
         bufferSource.endBatch();
         poseStack.popPose();
     }

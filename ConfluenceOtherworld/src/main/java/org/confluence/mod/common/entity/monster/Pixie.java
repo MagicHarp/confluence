@@ -48,11 +48,6 @@ public class Pixie extends BaseFlyingMonster {
         this.moveControl = new FlyingMoveControl(this, 180, false);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0).add(Attributes.ATTACK_DAMAGE, 8.0);
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {

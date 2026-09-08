@@ -62,15 +62,6 @@ public class PhantasmDragon extends BaseFlyingMonster implements BossOwnedEntity
         return entityData.get(OWNER_UUID).orElse(null);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes()
-                .add(Attributes.MAX_HEALTH, 150.0)
-                .add(Attributes.ATTACK_DAMAGE, 12.0)
-                .add(Attributes.ARMOR, 4.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-                .add(Attributes.FOLLOW_RANGE, 48.0);
-    }
-
     @Override
     protected boolean hasEntityContactAttack() {
         return true;

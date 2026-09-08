@@ -7,7 +7,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.Confluence;
@@ -20,10 +20,6 @@ public class PrismaticLacewing extends BaseFlyingCritter {
 
     public PrismaticLacewing(EntityType<? extends PrismaticLacewing> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingCritter.createFlyingCritterAttributes();
     }
 
     @Override

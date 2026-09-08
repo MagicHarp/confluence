@@ -2,7 +2,7 @@ package org.confluence.mod.common.entity.animal;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -18,10 +18,6 @@ import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
 public final class Fealing extends BaseFlyingCritter {
     public Fealing(EntityType<? extends BaseFlyingCritter> type, Level level) {
         super(type, level);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingCritter.createFlyingCritterAttributes();
     }
 
     @Override

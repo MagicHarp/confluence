@@ -45,16 +45,6 @@ public class SandPoacher extends BaseMonster {
         super(type, level);
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseMonster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 166.0)
-                .add(Attributes.ATTACK_DAMAGE, 34.0)
-                .add(Attributes.ARMOR, 24.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.FOLLOW_RANGE, 64.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.55);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

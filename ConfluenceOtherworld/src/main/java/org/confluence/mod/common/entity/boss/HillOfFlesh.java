@@ -107,15 +107,6 @@ public class HillOfFlesh extends BaseBoss {
         return true;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createBossAttributes()
-                .add(Attributes.MAX_HEALTH, 3824.0)
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
-                .add(Attributes.ARMOR, 6.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
-                .add(Attributes.FOLLOW_RANGE, OUTER_RADIUS);
-    }
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();

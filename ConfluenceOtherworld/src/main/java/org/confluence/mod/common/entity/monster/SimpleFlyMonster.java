@@ -34,8 +34,8 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
 
     public SimpleFlyMonster(EntityType<? extends SimpleFlyMonster> type, Level level, DashProfile dashProfile, double wanderSpeed, boolean playFlyAnimation) {
         super(type, level);
-        if (!Double.isFinite(wanderSpeed) || wanderSpeed <= 0.0) {
-            throw new IllegalArgumentException("Wander speed must be finite and positive");
+        if (wanderSpeed <= 0.0) {
+            throw new IllegalArgumentException("Wander speed must be positive");
         }
         this.dashProfile = dashProfile;
         this.wanderSpeed = wanderSpeed;
@@ -47,10 +47,6 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
     @Override
     protected boolean mustSeePlayerTarget() {
         return true;
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseFlyingMonster.createFlyingAttributes();
     }
 
     @Override
@@ -108,15 +104,15 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
                               double steeringAngleDegrees, int coastTicks) {
 
         public DashProfile {
-            if (!Double.isFinite(friction) || friction < 0.0 || friction > 1.0) {
+            if (friction < 0.0 || friction > 1.0) {
                 throw new IllegalArgumentException("Dash friction must be within [0, 1]");
             }
-            if (!Double.isFinite(maxSpeed) || maxSpeed <= 0.0 || !Double.isFinite(acceleration) || acceleration <= 0.0) {
-                throw new IllegalArgumentException("Dash speed and acceleration must be finite and positive");
+            if (maxSpeed <= 0.0 || acceleration <= 0.0) {
+                throw new IllegalArgumentException("Dash speed and acceleration must be positive");
             }
-            if (!Double.isFinite(turnSpeedDegrees) || turnSpeedDegrees <= 0.0
-                    || !Double.isFinite(triggerAngleDegrees) || triggerAngleDegrees <= 0.0 || triggerAngleDegrees > 180.0
-                    || !Double.isFinite(steeringAngleDegrees) || steeringAngleDegrees <= 0.0 || steeringAngleDegrees > 180.0
+            if (turnSpeedDegrees <= 0.0
+                    || triggerAngleDegrees <= 0.0 || triggerAngleDegrees > 180.0
+                    || steeringAngleDegrees <= 0.0 || steeringAngleDegrees > 180.0
                     || coastTicks < 0) {
                 throw new IllegalArgumentException("Dash angles must be finite and valid; coast time cannot be negative");
             }

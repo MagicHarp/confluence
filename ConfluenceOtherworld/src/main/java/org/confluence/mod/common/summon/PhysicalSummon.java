@@ -23,8 +23,8 @@ public abstract class PhysicalSummon extends SummonInstance {
 
     protected PhysicalSummon(ResourceLocation type, ServerPlayer owner, int slotCost, SummonStats stats, SummonPose initialPose, double width, double height) {
         super(type, owner, slotCost, stats, initialPose);
-        if (!Double.isFinite(width) || !Double.isFinite(height) || width <= 0.0 || height <= 0.0) {
-            throw new IllegalArgumentException("Physical summon dimensions must be finite and positive");
+        if (width <= 0.0 || height <= 0.0) {
+            throw new IllegalArgumentException("Physical summon dimensions must be positive");
         }
         this.width = width;
         this.height = height;

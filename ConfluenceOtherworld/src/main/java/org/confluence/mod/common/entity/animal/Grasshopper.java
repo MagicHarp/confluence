@@ -14,7 +14,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -44,10 +44,6 @@ public class Grasshopper extends BaseCritter implements VariantHolder<Grasshoppe
     public Grasshopper(EntityType<? extends Grasshopper> type, Level level) {
         super(type, level);
         this.moveControl = new JumpMoveControl(this);
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return BaseCritter.createInsectAttributes().add(Attributes.FALL_DAMAGE_MULTIPLIER.value(), 0.0);
     }
 
     @Override
