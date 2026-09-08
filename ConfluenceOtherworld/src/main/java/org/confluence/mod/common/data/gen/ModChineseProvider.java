@@ -284,7 +284,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("itemGroup.confluence.heros_set", "英雄套装");
         add("itemGroup.confluence.archaeologists_set", "考古学家套装");
         add("itemGroup.confluence.clothiers_set", "服装店老板套装");
-        add("itemGroup.confluence.familiar_set", "学徒套装");
+        add("itemGroup.confluence.familiar_set", "便装套装");
         add("itemGroup.confluence.doctors_set", "博士套装");
         add("itemGroup.confluence.guy_fawkes_set", "盖伊·福克斯套装");
         add("itemGroup.confluence.mummy_set", "木乃伊套装");
