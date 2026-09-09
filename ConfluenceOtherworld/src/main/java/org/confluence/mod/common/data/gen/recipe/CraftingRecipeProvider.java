@@ -598,7 +598,7 @@ public class CraftingRecipeProvider extends AbstractRecipeProvider {
         shapeless(writer, ConsumableItems.SCARAB_BOMB.toStack(), Ingredient.of(ConsumableItems.BOMB), Ingredient.of(MaterialItems.STURDY_FOSSIL));
         shapeless(writer, BoomerangItems.TRIMARANG.toStack(), Ingredient.of(BoomerangItems.ENCHANTED_BOOMERANG), Ingredient.of(BoomerangItems.ICE_BOOMERANG), Ingredient.of(BoomerangItems.SHROOMERANG));
         shapeless(writer, BoomerangItems.ENCHANTED_BOOMERANG.toStack(), Ingredient.of(BoomerangItems.WOOD_BOOMERANG), Ingredient.of(MaterialItems.FALLING_STAR));
-        shapeless(writer, BaitItems.NIGHTCRAWLER.toStack(), Ingredient.of(BaitItems.WORM), Ingredient.of(MaterialItems.FALLING_STAR));
+        shapeless(writer, BaitItems.ENCHANTED_NIGHTCRAWLER.toStack(), Ingredient.of(BaitItems.WORM), Ingredient.of(MaterialItems.FALLING_STAR));
         // 宝石树苗
         shapeless(writer, NatureBlocks.RUBY_SAPLING.toStack(), Ingredient.of(Items.OAK_SAPLING), Ingredient.of(ModTags.Items.GEMS_RUBY));
         shapeless(writer, NatureBlocks.AMBER_SAPLING.toStack(), Ingredient.of(Items.OAK_SAPLING), Ingredient.of(ModTags.Items.GEMS_AMBER));

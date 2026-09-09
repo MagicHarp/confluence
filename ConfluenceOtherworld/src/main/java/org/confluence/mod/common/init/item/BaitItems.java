@@ -30,7 +30,7 @@ public class BaitItems {
             BLUE_DRAGONFLY = register("blue_dragonfly", BLUE, 0.2F, CritterEntities.DRAGONFLY, entity -> entity.setVariant(Dragonfly.Variant.BLUE)),
             BLUE_JELLYFISH = register("blue_jellyfish", BLUE, 0.2F),
             BUGGY = register("buggy", GREEN, 0.4F),
-            NIGHTCRAWLER = register("nightcrawler", GREEN, 0.35F, CritterEntities.WORM, entity -> entity.setVariant(Worm.Variant.NIGHTCRAWLER)),
+            ENCHANTED_NIGHTCRAWLER = register("enchanted_nightcrawler", GREEN, 0.35F, CritterEntities.WORM, entity -> entity.setVariant(Worm.Variant.NIGHTCRAWLER)),
             FIREFLY = register("firefly", BLUE, 0.2F),
             GLOWING_SNAIL = register("glowing_snail", BLUE, 0.15F, CritterEntities.GLOWING_SNAIL),
             GOLD_BUTTERFLY = register("gold_butterfly", ORANGE, 0.5F, CritterEntities.BUTTERFLY, entity -> entity.setVariant(Butterfly.Variant.GOLD)),

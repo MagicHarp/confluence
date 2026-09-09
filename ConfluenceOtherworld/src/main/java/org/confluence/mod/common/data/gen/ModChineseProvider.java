@@ -267,7 +267,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("itemGroup.confluence.heros_set", "英雄套装");
         add("itemGroup.confluence.archaeologists_set", "考古学家套装");
         add("itemGroup.confluence.clothiers_set", "服装店老板套装");
-        add("itemGroup.confluence.familiar_set", "学徒套装");
+        add("itemGroup.confluence.familiar_set", "便装套装");
         add("itemGroup.confluence.doctors_set", "博士套装");
         add("itemGroup.confluence.guy_fawkes_set", "盖伊·福克斯套装");
         add("itemGroup.confluence.mummy_set", "木乃伊套装");
@@ -1412,7 +1412,7 @@ public class ModChineseProvider extends LanguageProvider {
         add("entity.confluence.demon_eye.green_small", "小绿恶魔眼");
         add("entity.confluence.demon_eye.cataract", "白内障恶魔眼");
         add("entity.confluence.demon_eye.cataract_big", "大白内障恶魔眼");
-        add("entity.confluence.worm.nightcrawler", "附魔夜行者");
+        add("entity.confluence.worm.enchanted_nightcrawler", "附魔夜行者");
         add("entity.confluence.worm.gold", "金蠕虫");
         add("entity.confluence.worm.normal", "蠕虫");
         add("entity.confluence.grasshopper.gold", "金蚱蜢");
@@ -3623,7 +3623,7 @@ public class ModChineseProvider extends LanguageProvider {
         add(BaitItems.BLUE_JELLYFISH.get(), "蓝水母");
         add(BaitItems.BLUE_DRAGONFLY.get(), "蓝蜻蜓");
         add(BaitItems.BUGGY.get(), "蚜虫");
-        add(BaitItems.NIGHTCRAWLER.get(), "附魔夜行者");
+        add(BaitItems.ENCHANTED_NIGHTCRAWLER.get(), "附魔夜行者");
         add(BaitItems.FIREFLY.get(), "萤火虫");
         add(BaitItems.GLOWING_SNAIL.get(), "发光蜗牛");
         add(BaitItems.GOLD_BUTTERFLY.get(), "金蝴蝶");

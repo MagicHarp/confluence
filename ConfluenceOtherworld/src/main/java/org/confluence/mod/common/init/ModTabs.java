@@ -845,6 +845,8 @@ public final class ModTabs {
                         natural_materials.accept(MaterialItems.SAPPHIRE.get());
                         natural_materials.accept(MaterialItems.AMETHYST.get());
                         natural_materials.accept(MaterialItems.PEARL.get());
+                        natural_materials.accept(MaterialItems.FALLING_STAR.get());
+                        natural_materials.accept(MaterialItems.STAR_PETALS.get());
                         natural_materials.accept(MaterialItems.BLACK_PEARL.get());
                         natural_materials.accept(MaterialItems.PINK_PEARL.get());
                         natural_materials.accept(MaterialItems.COLD_CRYSTAL.get());
@@ -919,8 +921,6 @@ public final class ModTabs {
                         plants_herbs.accept(MaterialItems.DEATHWEED.get());
                         plants_herbs.accept(MaterialItems.JUNGLE_SPORE.get());
                         plants_herbs.accept(MaterialItems.SPORE_ROOT.get());
-                        plants_herbs.accept(MaterialItems.FALLING_STAR.get());
-                        plants_herbs.accept(MaterialItems.STAR_PETALS.get());
                         plants_herbs.accept(MaterialItems.FLOATING_WHEAT_HEADS.get());
                         plants_herbs.accept(MaterialItems.WEAVING_CLOUD_COTTON.get());
 

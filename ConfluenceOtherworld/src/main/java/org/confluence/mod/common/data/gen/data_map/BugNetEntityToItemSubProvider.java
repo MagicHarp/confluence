@@ -60,7 +60,7 @@ public final class BugNetEntityToItemSubProvider {
                         variant(Ladybug.Variant.RED, BaitItems.LADYBUG)
                 ))
                 .add(CritterEntities.WORM, List.of(
-                        variant(Worm.Variant.NIGHTCRAWLER, BaitItems.NIGHTCRAWLER),
+                        variant(Worm.Variant.NIGHTCRAWLER, BaitItems.ENCHANTED_NIGHTCRAWLER),
                         variant(Worm.Variant.GOLD, BaitItems.GOLD_WORM),
                         variant(Worm.Variant.NORMAL, BaitItems.WORM)
                 ))

@@ -1652,7 +1652,7 @@ public final class ValueSubProvider {
                 .add(BaitItems.BLUE_DRAGONFLY, silver10)
                 .add(BaitItems.BLUE_JELLYFISH, gold1 + gold2 + silver50)
                 .add(BaitItems.BUGGY, silver10)
-                .add(BaitItems.NIGHTCRAWLER, silver20)
+                .add(BaitItems.ENCHANTED_NIGHTCRAWLER, silver20)
                 .add(BaitItems.FIREFLY, silver1 + silver2)
                 .add(BaitItems.GLOWING_SNAIL, silver50)
                 .add(BaitItems.GOLD_BUTTERFLY, gold10)
