@@ -28,10 +28,8 @@ public record SwordDefinition(
         boolean canSweep,
         boolean specialSweep,
         boolean tooltipImage,
-        List<SwordBehavior> behaviors,
         List<Consumer<MutableComponent>> tooltips) {
     public SwordDefinition {
-        behaviors = List.copyOf(behaviors);
         tooltips = List.copyOf(tooltips);
     }
 
@@ -51,7 +49,6 @@ public record SwordDefinition(
         private boolean baseAttributes = true;
         private SwordProjectileComponent projectile;
         private int modifierIndex;
-        private final List<SwordBehavior> behaviors = new ArrayList<>();
         private final List<Consumer<MutableComponent>> tooltips = new ArrayList<>();
         private final List<AttributeEntry> attributes = new ArrayList<>();
         private final List<Consumer<Item.Properties>> propertyModifiers = new ArrayList<>();
@@ -75,11 +72,6 @@ public record SwordDefinition(
 
         public Builder withoutBaseAttributes() {
             baseAttributes = false;
-            return this;
-        }
-
-        public Builder behavior(SwordBehavior behavior) {
-            behaviors.add(behavior);
             return this;
         }
 
@@ -132,7 +124,7 @@ public record SwordDefinition(
                 attributesBuilder.add(Attributes.ATTACK_SPEED, new PortAttributeModifier(ModItems.BASE_ATTACK_SPEED_ID, rawSpeed - 4, PortAttributeModifier.Operation.ADD_VALUE), PortEquipmentSlotGroup.MAINHAND);
             }
             properties.attributes(attributesBuilder.build());
-            return new BuildResult(new SwordDefinition(canSweep, specialSweep, tooltipImage, behaviors, tooltips), properties, projectile);
+            return new BuildResult(new SwordDefinition(canSweep, specialSweep, tooltipImage, tooltips), properties, projectile);
         }
     }
 }

@@ -3,8 +3,12 @@ package org.confluence.mod.common.summon;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.api.summon.SummonTargetCache;
+import org.jetbrains.annotations.Nullable;
 
 /// 飞行召唤物的通用运行基类。
 public abstract class FlyingSummon extends SummonInstance {
@@ -71,7 +75,22 @@ public abstract class FlyingSummon extends SummonInstance {
 
     /// 按指定朝向移动。
     protected final void moveBy(Vec3 movement, float yaw, float pitch) {
-        advanceTo(new SummonPose(position().add(movement), yaw, pitch, currentPose().roll()));
+        Vec3 resolvedMovement = resolveBlockCollision(movement);
+        advanceTo(new SummonPose(position().add(resolvedMovement), yaw, pitch, currentPose().roll()));
+    }
+
+    protected final @Nullable LivingEntity acquireVisibleTarget(double range) {
+        if (position().distanceToSqr(owner().position()) > 32.0 * 32.0) return null;
+        LivingEntity target = SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), position(), range);
+        return target != null && SummonTargetCache.hasVisibleTarget(owner().serverLevel(), owner(), position(), range, target)
+                ? target : null;
+    }
+
+    private Vec3 resolveBlockCollision(Vec3 movement) {
+        if (movement.lengthSqr() < 1.0E-10D) return Vec3.ZERO;
+        AABB bounds = AABB.ofSize(position().add(0.0, height * 0.5, 0.0), width, height, width);
+        return Entity.collideBoundingBox(null, movement, bounds, owner().level(),
+                owner().level().getEntityCollisions(null, bounds.expandTowards(movement)));
     }
 
     private void moveByFacing(Vec3 movement, Vec3 lookAtPosition, float maximumYawChange, float maximumPitchChange) {

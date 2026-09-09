@@ -2,6 +2,7 @@ package org.confluence.mod.common.data.gen.loot;
 
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.loot.EntityLootSubProvider;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EntityType;
@@ -12,10 +13,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.*;
-import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -33,6 +31,7 @@ import org.confluence.mod.common.loot.EntityVariantLootItemCondition;
 import org.confluence.mod.common.loot.GamePhaseLootItemCondition;
 import org.confluence.mod.mixin.data.loot.EntityLootSubProviderAccessor;
 import org.confluence.terra_curio.common.init.TCItems;
+import org.mesdag.portlib.diff.IPortItemStack;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -762,7 +761,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         add(MonsterEntities.PURPLE_SLIME.get(), slimeCommon(-6326333));
         add(MonsterEntities.RED_SLIME.get(), slimeCommon(-1079407));
         add(MonsterEntities.YELLOW_SLIME.get(), slimeCommon(-871089));
-        add(MonsterEntities.SLIMELING.get(), corruptionSlimeLoot());
+        add(MonsterEntities.SLIMELING.get(), corruptionSlimeLoot(-6522185));
         add(MonsterEntities.JUNGLE_SLIME.get(), slimeCommon(-6570130));
         add(MonsterEntities.ICE_SLIME.get(), slimeCommon(-10628609)
                 .withPool(LootPool.lootPool()
@@ -921,11 +920,11 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                                         .add(LootItem.lootTableItem(MaterialItems.GEL))
                                         .apply(random0To1)
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
-//                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", -4040988))))
+                                .apply(setGelColor(-4040988))
                         )
         );
-        add(MonsterEntities.CRIMSLIME.get(), corruptionSlimeLoot());
-        add(MonsterEntities.CORRUPT_SLIME.get(), corruptionSlimeLoot());
+        add(MonsterEntities.CRIMSLIME.get(), corruptionSlimeLoot(-3386287));
+        add(MonsterEntities.CORRUPT_SLIME.get(), corruptionSlimeLoot(-6522185));
         // 宝箱怪
         add(MonsterEntities.WOODEN_MIMIC.get(), mimicCommon()
         );
@@ -1128,7 +1127,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         add(MonsterEntities.GIANT_FLYING_FOX.get(), batCommon());
         add(MonsterEntities.CORRUPTOR.get(), LootTable.lootTable());
         add(MonsterEntities.SLIMER.get(), LootTable.lootTable());
-        add(MonsterEntities.WINGLESS_SLIMER.get(), corruptionSlimeLoot());
+        add(MonsterEntities.WINGLESS_SLIMER.get(), corruptionSlimeLoot(-6522185));
         add(MonsterEntities.BLOOD_FEEDER.get(), LootTable.lootTable());
         add(MonsterEntities.UNICORN.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().add(LootItem.lootTableItem(MaterialItems.UNICORN_HORN))));
@@ -1298,7 +1297,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                                 .add(LootItem.lootTableItem(MaterialItems.GEL))
                                 .apply(random0To1)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
-//                        .apply(SetComponentsFunction.setComponent(ConfluenceMagicLib.NBT.get(), NbtComponent.create(tag -> tag.putInt("color", gelColor))))
+                        .apply(setGelColor(gelColor))
                 );
     }
 
@@ -1324,7 +1323,8 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(MaterialItems.GEL))
                         .apply(random0To1)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                        .apply(setGelColor(-7697782)))
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(1))
                         .add(EmptyLootItem.emptyItem().setWeight(99)));
@@ -1340,7 +1340,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
     /**
      * 腐化、猩红和恶翼史莱姆族系共用凝胶、黑暗免疫饰品与史莱姆法杖掉落。
      */
-    private LootTable.Builder corruptionSlimeLoot() {
+    private LootTable.Builder corruptionSlimeLoot(int gelColor) {
         LootItemConditionalFunction.Builder<?> random0To1 = LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F));
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool()
@@ -1349,10 +1349,21 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(MaterialItems.GEL))
                         .apply(random0To1)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4))))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+                        .apply(setGelColor(gelColor)))
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(TCItems.BLINDFOLD).setWeight(2))
                         .add(EmptyLootItem.emptyItem().setWeight(98)));
+    }
+
+    private static LootItemConditionalFunction.Builder<?> setGelColor(int color) {
+        CompoundTag component = new CompoundTag();
+        component.putInt("color", color);
+        CompoundTag components = new CompoundTag();
+        components.put("confluence_magic_lib:nbt", component);
+        CompoundTag stackTag = new CompoundTag();
+        stackTag.put(IPortItemStack.DATA_COMPONENTS, components);
+        return SetNbtFunction.setTag(stackTag);
     }
 
     private LootTable.Builder goblinCommon() {

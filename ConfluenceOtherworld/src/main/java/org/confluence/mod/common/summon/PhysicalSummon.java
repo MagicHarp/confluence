@@ -88,7 +88,7 @@ public abstract class PhysicalSummon extends SummonInstance {
         Vec3 direction = horizontal.lengthSqr() < 1.0E-6 ? Vec3.ZERO : horizontal.normalize();
         double damping = onGround ? groundDamping() : 0.91;
         double acceleration = onGround ? speed * 0.216 / (damping * damping * damping) : 0.02;
-        Vec3 horizontalMovement = velocity().multiply(damping, 0.0, damping).add(direction.scale(acceleration));
+        Vec3 horizontalMovement = velocity().add(direction.scale(acceleration)).multiply(damping, 0.0, damping);
         double vertical = velocity().y * 0.98 - 0.08;
         if (onGround && waypoint.y > position().y + 0.35) vertical = jumpStrength;
         return moveWithCollision(new Vec3(horizontalMovement.x, vertical, horizontalMovement.z));

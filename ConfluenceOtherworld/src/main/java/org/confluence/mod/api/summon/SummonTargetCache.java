@@ -198,6 +198,11 @@ public final class SummonTargetCache {
         return hasLineOfSight(level, owner, origin, target.getEyePosition());
     }
 
+    public static boolean hasVisibleTarget(ServerLevel level, ServerPlayer owner, Vec3 origin, double range, LivingEntity target) {
+        if (!isValidTarget(owner, target, origin, range, true)) return false;
+        return hasVisiblePart(level, owner, origin, range, target) || hasLineOfSight(level, owner, origin, target);
+    }
+
     private static boolean hasLineOfSight(ServerLevel level, ServerPlayer owner, Vec3 origin, Vec3 target) {
         return level.clip(new ClipContext(origin, target, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, owner)).getType() == HitResult.Type.MISS;
     }

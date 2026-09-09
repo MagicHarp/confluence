@@ -17,12 +17,12 @@ abstract class TerraprismaSkillGoal extends SummonGoal<TerraprismaSummon> {
 
     @Override
     public boolean canUse() {
-        return summon.tickCount() > 0 && cooldown == 0 && summon.hasValidTarget();
+        return summon.tickCount() > 0 && cooldown == 0 && summon.targetWithinOwnerRange();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return summon.hasValidTarget() && elapsedTicks < duration;
+        return summon.targetWithinOwnerRange() && elapsedTicks < duration;
     }
 
     @Override

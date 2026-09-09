@@ -12,7 +12,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -176,23 +175,15 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
 
         int y = pos.getY();
         if (type == MonsterEntities.YELLOW_SLIME.get() || type == MonsterEntities.RED_SLIME.get() || type == MonsterEntities.DESERT_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0 && y > OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY()
-                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+            return level.getBrightness(LightLayer.SKY, pos) == 0
+                    && y >= OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY();
         }
-        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.MOTHER_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0 && y < OverworldUtils.getUndergroundY()
-                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
-        }
-        if (type == MonsterEntities.DUNGEON_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0 && y < OverworldUtils.getSurfaceY()
-                    && SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.MOTHER_SLIME.get()
+                || type == MonsterEntities.DUNGEON_SLIME.get()) {
+            return level.getBrightness(LightLayer.SKY, pos) == 0 && y <= OverworldUtils.getSurfaceY();
         }
         if (type == MonsterEntities.LAVA_SLIME.get()) {
-            return world.dimension() == OverworldUtils.underworld();
-        }
-        if (type == MonsterEntities.PINK_SLIME.get()) {
-            if (y >= OverworldUtils.getSpaceY()) return false;
-            return y > OverworldUtils.getSurfaceY() ? world.isDay() && level.canSeeSky(pos) : SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random);
+            return world.dimension() == OverworldUtils.underworld() && y >= 30 && y < 100;
         }
         if (type == MonsterEntities.CRIMSLIME.get() || type == MonsterEntities.CORRUPT_SLIME.get()) {
             return y < OverworldUtils.getSpaceY() && (y > OverworldUtils.getSurfaceY() || SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random));
@@ -200,11 +191,13 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         if (type == MonsterEntities.BLUE_SLIME.get()
                 || type == MonsterEntities.GREEN_SLIME.get()
                 || type == MonsterEntities.PURPLE_SLIME.get()
+                || type == MonsterEntities.PINK_SLIME.get()
                 || type == MonsterEntities.ICE_SLIME.get()
                 || type == MonsterEntities.JUNGLE_SLIME.get()
                 || type == MonsterEntities.SWAMP_SLIME.get()
                 || type == MonsterEntities.TROPIC_SLIME.get()) {
-            return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && world.isDay() && level.canSeeSky(pos);
+            return y >= OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY()
+                    && world.isDay() && level.canSeeSky(pos);
         }
         return false;
     }

@@ -20,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.WalkAnimationState;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,6 +30,7 @@ import org.confluence.mod.client.effect.RenderStateShardAccessor;
 import org.confluence.mod.client.model.entity.projectile.HornetStingerProjectileModel;
 import org.confluence.mod.client.model.entity.summon.TerraprismaModel;
 import org.confluence.mod.common.summon.SummonAnimation;
+import org.confluence.mod.common.summon.flying.FinchSummon;
 import org.confluence.mod.common.summon.projectile.SummonProjectileTypes;
 import org.confluence.mod.network.s2c.SummonSyncPacketS2C;
 import org.joml.Matrix4f;
@@ -45,6 +47,7 @@ public final class ClientSummonManager {
     private static final ResourceLocation TERRAPRISMA = Confluence.asResource("terraprisma");
     private static final ResourceLocation STARDUST_DRAGON = Confluence.asResource("stardust_dragon");
     private static final ResourceLocation IRON_GOLEM = Confluence.asResource("i_32_iron_golem");
+    private static final ResourceLocation FINCH = Confluence.asResource("finch_baby");
     private static final ResourceLocation TERRAPRISMA_TEXTURE = Confluence.asResource("textures/entity/model/terraprisma_gray.png");
     private static final ResourceLocation HORNET_STINGER = SummonProjectileTypes.HORNET_STINGER.id();
     private static final ResourceLocation IMP_FIREBALL = SummonProjectileTypes.IMP_FIREBALL.id();
@@ -52,6 +55,7 @@ public final class ClientSummonManager {
     private static final ResourceLocation STINGER_TEXTURE = Confluence.asResource("textures/entity/model/stinger.png");
     private static final int BACK_TRANSITION_TICKS = 20;
     private static final double INTERPOLATION_TICKS = 1.0;
+    private static final double TERRAPRISMA_INTERPOLATION_TICKS = 1.5;
     private static final double TELEPORT_DISTANCE_SQR = 16.0 * 16.0;
     private static final Map<UUID, State> STATES = new HashMap<>();
     private static final Map<UUID, ClientSummonVisual> GEO_VISUALS = new HashMap<>();
@@ -70,7 +74,6 @@ public final class ClientSummonManager {
     private static long synchronizationSequence;
     private static TerraprismaModel terraprismaModel;
     private static HornetStingerProjectileModel hornetStingerModel;
-    private static ClientIronGolemRenderer ironGolemRenderer;
 
     private ClientSummonManager() {}
 
@@ -99,6 +102,13 @@ public final class ClientSummonManager {
                 occupiedSlots++;
         }
         return occupiedSlots + requestedSlots <= capacity;
+    }
+
+    public static boolean hasSummon(UUID ownerId, ResourceLocation type) {
+        for (State state : STATES.values()) {
+            if (state.ownerId.equals(ownerId) && state.current.type().equals(type)) return true;
+        }
+        return false;
     }
 
     public static void accept(UUID ownerId, List<SummonSyncPacketS2C.Entry> entries) {
@@ -179,10 +189,11 @@ public final class ClientSummonManager {
                     renderTrail(state, event, buffers, 0.15F, summonSwordColor(state.current.type()));
             } else if (state.current.type().equals(STARDUST_DRAGON)) {
                 renderStardustDragonPart(state, event, buffers);
+            } else if (state.current.type().equals(IRON_GOLEM)) {
+                // 服务端使用真实的原版铁傀儡实体；客户端由原版实体渲染器负责绘制。
+                continue;
             } else if (usesGeoVisual(state.current.type())) {
                 renderGeoVisual(state, event, buffers);
-            } else if (state.current.type().equals(IRON_GOLEM)) {
-                renderIronGolemVisual(state, event, buffers);
             }
         }
         buffers.endBatch();
@@ -200,9 +211,10 @@ public final class ClientSummonManager {
             return;
         }
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        Vec3 position = state.interpolatedPosition(partialTick);
+        Vec3 position = state.renderPosition(partialTick);
         ClientSummonVisual visual = GEO_VISUALS.computeIfAbsent(state.current.id(), id -> new ClientSummonVisual(id, state.current.type()));
-        visual.update(state.current.animation(), state.current.position().distanceToSqr(state.previous.position()) > 1.0E-5, state.lastUpdate + partialTick);
+        visual.update(state.current.animation(), state.current.position().distanceToSqr(state.previous.position()) > 1.0E-5,
+                state.lastUpdate + partialTick);
         Vec3 camera = event.getCamera().getPosition();
         int packedLight = LevelRenderer.getLightColor(level, BlockPos.containing(position));
         PoseStack poseStack = event.getPoseStack();
@@ -252,27 +264,6 @@ public final class ClientSummonManager {
             case "finch_baby", "hornet_baby", "sculk_wisp", "summon_imp" -> true;
             default -> false;
         };
-    }
-
-    private static void renderIronGolemVisual(State state, PortRenderLevelStageEvent event, MultiBufferSource bufferSource) {
-        Minecraft minecraft = Minecraft.getInstance();
-        ClientLevel level = minecraft.level;
-        if (level == null) {
-            return;
-        }
-        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        Vec3 position = state.interpolatedPosition(partialTick);
-        Vec3 camera = event.getCamera().getPosition();
-        int packedLight = LevelRenderer.getLightColor(level, BlockPos.containing(position));
-        PoseStack poseStack = event.getPoseStack();
-        poseStack.pushPose();
-        poseStack.translate(position.x - camera.x, position.y - camera.y, position.z - camera.z);
-        ironGolemRenderer(minecraft.getEntityModels()).render(poseStack, bufferSource, packedLight,
-                state.interpolatedYaw(partialTick), state.interpolatedPitch(partialTick),
-                state.walkAnimation.position(partialTick), state.walkAnimation.speed(partialTick),
-                state.current.animation() == SummonAnimation.MELEE_ATTACK
-                        ? Math.max(0, state.current.animationDuration() - state.current.animationTicks()) : 0, partialTick);
-        poseStack.popPose();
     }
 
     private static void renderSummonSword(State state, PortRenderLevelStageEvent event, MultiBufferSource bufferSource) {
@@ -357,7 +348,7 @@ public final class ClientSummonManager {
     private static void renderTerraprisma(State state, PortRenderLevelStageEvent event, MultiBufferSource bufferSource) {
         Minecraft minecraft = Minecraft.getInstance();
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        Vec3 position = state.interpolatedPosition(partialTick);
+        Vec3 position = state.renderPosition(partialTick);
         PoseStack poseStack = event.getPoseStack();
         poseStack.pushPose();
         Vec3 camera = event.getCamera().getPosition();
@@ -506,11 +497,6 @@ public final class ClientSummonManager {
         return hornetStingerModel;
     }
 
-    private static ClientIronGolemRenderer ironGolemRenderer(EntityModelSet models) {
-        if (ironGolemRenderer == null) ironGolemRenderer = new ClientIronGolemRenderer(models);
-        return ironGolemRenderer;
-    }
-
     private static final class State {
         private final UUID ownerId;
         private final UUID visualGroupId;
@@ -650,6 +636,20 @@ public final class ClientSummonManager {
             return interpolatedPosition(renderTime(partialTick));
         }
 
+        private Vec3 renderPosition(float partialTick) {
+            Vec3 synchronizedPosition = interpolatedPosition(partialTick);
+            if (!current.followingOwner() || !current.type().equals(FINCH))
+                return synchronizedPosition;
+            ClientLevel level = Minecraft.getInstance().level;
+            if (level == null) return synchronizedPosition;
+            Player owner = level.getPlayerByUUID(ownerId);
+            if (owner == null) return synchronizedPosition;
+            Vec3 ownerPosition = owner.getPosition(partialTick);
+            float bodyYaw = Mth.rotLerp(partialTick, owner.yBodyRotO, owner.yBodyRot);
+            Vec3 formationPosition = FinchSummon.perchPosition(ownerPosition, bodyYaw, current.order());
+            return synchronizedPosition.lerp(formationPosition, backProgress(partialTick));
+        }
+
         private Vec3 interpolatedPosition(double time) {
             return interpolationStartPosition.lerp(current.position(), interpolationProgress(time));
         }
@@ -690,7 +690,8 @@ public final class ClientSummonManager {
         }
 
         private float interpolationProgress(double time) {
-            return Mth.clamp((float) ((time - interpolationStartTime) / INTERPOLATION_TICKS), 0.0F, 1.0F);
+            double duration = current.type().equals(TERRAPRISMA) ? TERRAPRISMA_INTERPOLATION_TICKS : INTERPOLATION_TICKS;
+            return Mth.clamp((float) ((time - interpolationStartTime) / duration), 0.0F, 1.0F);
         }
 
         private int rgb() {

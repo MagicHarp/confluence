@@ -10,11 +10,15 @@ import org.confluence.mod.api.summon.SummonTargetCache;
 import org.confluence.mod.common.summon.*;
 import org.confluence.mod.common.summon.sword.SummonSword;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /// 泰拉棱镜召唤物的运行实例。
 public final class TerraprismaSummon extends SummonInstance {
     public static final int SLOT_COST = 1;
     public static final float BASE_DAMAGE = 18.0F;
-    private static final double SEARCH_RANGE = 16.0;
+    private static final double SEARCH_RANGE = 40.0;
     private static final SummonVisualState FOLLOWING_VISUAL_STATE = new SummonVisualState(true, SummonAnimation.NONE, 0, 0, 0.0F, 1.0F, 1.0F);
     private final TerraprismaSlashGoal slashGoal = new TerraprismaSlashGoal(this);
     private final TerraprismaRotateGoal rotateGoal = new TerraprismaRotateGoal(this);
@@ -27,6 +31,7 @@ public final class TerraprismaSummon extends SummonInstance {
     private float scale = 1.0F;
     private float scaleY = 1.0F;
     private int scaleYTicks;
+    private final Set<UUID> attackHits = new HashSet<>();
 
     public TerraprismaSummon(ServerPlayer owner, int slotCost, SummonStats stats, SummonPose initialPose) {
         super(Confluence.asResource("terraprisma"), owner, slotCost, stats, initialPose);
@@ -72,7 +77,10 @@ public final class TerraprismaSummon extends SummonInstance {
         for (SummonCollision.Hit hit : SummonCollision.sweep(owner().level(), previousPreviousPose, previousPose,
                 currentPose, attackBox(), candidate -> candidate == target()
                         || SummonTargetCache.isValidTarget(owner(), candidate, SEARCH_RANGE * 2.0, false))) {
-            hurtEntity(hit.damageRecipient(), hit.encounterOwner(), hit.dedupeIdentity(), skillDamageMultiplier);
+            UUID identity = hit.dedupeIdentity().getUUID();
+            if (!attackHits.contains(identity) && hurtEntity(hit.damageRecipient(), hit.encounterOwner(), hit.dedupeIdentity(), skillDamageMultiplier)) {
+                attackHits.add(identity);
+            }
         }
     }
 
@@ -85,6 +93,10 @@ public final class TerraprismaSummon extends SummonInstance {
     public boolean hasValidTarget() {
         LivingEntity target = target();
         return target != null && target.isAlive() && !target.isRemoved() && target.level() == owner().level();
+    }
+
+    boolean targetWithinOwnerRange() {
+        return hasValidTarget() && target().distanceToSqr(owner()) <= SEARCH_RANGE * SEARCH_RANGE;
     }
 
     SummonPose followPose(Vec3 nextPosition, Vec3 targetPosition) {
@@ -122,6 +134,10 @@ public final class TerraprismaSummon extends SummonInstance {
         skillDamageMultiplier = multiplier;
     }
 
+    void beginAttackCycle() {
+        attackHits.clear();
+    }
+
     void setFollowingOwner(boolean followingOwner) {
         this.followingOwner = followingOwner;
     }
@@ -129,39 +145,30 @@ public final class TerraprismaSummon extends SummonInstance {
     void beginSlashAnimation() {
         animationState = SummonAnimation.SLASH;
         animationTicks = 0;
-        animationDuration = 10;
+        animationDuration = 14;
         animationDegrees = 0.0F;
     }
 
     void finishSlashAnimation() {
-        boolean validTarget = hasValidTarget();
-        if (validTarget && owner().getRandom1211().nextBoolean() || !validTarget && owner().getRandom1211().nextFloat() < 0.1F) {
-            int cycles = 2 + owner().getRandom1211().nextInt(4);
-            animationState = SummonAnimation.SPIN_X;
-            animationTicks = 0;
-            animationDuration = 12 * cycles;
-            animationDegrees = (owner().getRandom1211().nextBoolean() ? 1.0F : -1.0F) * 360.0F * cycles;
-            scaleY = 2.0F;
-            scaleYTicks = 1;
-        }
+        resetAnimation();
     }
 
     void beginRotateAnimation() {
-        animationState = SummonAnimation.ROTATE_Z;
-        animationTicks = 0;
-        animationDuration = 10;
-        animationDegrees = 1080.0F;
+        resetAnimation();
     }
 
     void finishRotateAnimation() {
-        boolean validTarget = hasValidTarget();
-        if (validTarget && owner().getRandom1211().nextBoolean() || !validTarget && owner().getRandom1211().nextFloat() < 0.1F) {
-            animationState = SummonAnimation.SPIN_Y;
-            animationTicks = 0;
-            animationDuration = 30;
-            animationDegrees = 720.0F;
-            scale = 2.0F;
-        }
+        resetAnimation();
+    }
+
+    private void resetAnimation() {
+        animationState = SummonAnimation.NONE;
+        animationTicks = 0;
+        animationDuration = 0;
+        animationDegrees = 0.0F;
+        scale = 1.0F;
+        scaleY = 1.0F;
+        scaleYTicks = 0;
     }
 
     @Override

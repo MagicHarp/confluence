@@ -83,9 +83,8 @@ public final class StardustDragonSummon extends FlyingSummon {
 
     private void idle() {
         if (movementTarget == null || --movementTargetTicks <= 0) {
-            var random = owner().getRandom1211();
-            movementTarget = owner().position().add((random.nextDouble() - 0.5) * 10.0, (random.nextDouble() - 0.5) * 10.0 + 2.0, (random.nextDouble() - 0.5) * 10.0);
-            movementTargetTicks = 10;
+            movementTarget = formationPosition(2.0, 0.0, 2.5);
+            movementTargetTicks = 5;
         }
         steerToward(movementTarget, 0.3F, 0.3);
     }

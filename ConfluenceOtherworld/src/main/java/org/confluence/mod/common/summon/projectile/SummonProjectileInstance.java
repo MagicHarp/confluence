@@ -58,7 +58,7 @@ public abstract class SummonProjectileInstance implements OwnedSummon, Immunity 
         }
         tickCount++;
         Vec3 collisionStart = position;
-        Vec3 end = position.add(velocity.scale(2.0));
+        Vec3 end = position.add(velocity);
         BlockHitResult blockHit = owner.level().clip(new ClipContext(collisionStart, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, owner));
         EntityHitResult entityHit = findEntityHit(collisionStart, end);
         double blockDistance = blockHit.getType() == HitResult.Type.BLOCK

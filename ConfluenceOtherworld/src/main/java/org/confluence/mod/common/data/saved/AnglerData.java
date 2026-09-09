@@ -53,7 +53,7 @@ public enum AnglerData implements IGlobalData {
         if (tag.isEmpty()) {
             return;
         }
-        if (!tag.contains("QuestGameDay", Tag.TAG_LONG) || !tag.contains("SelectedIndex", Tag.TAG_INT) || !tag.contains("QuestFish", Tag.TAG_COMPOUND)) {
+        if (!tag.contains("QuestGameDay", Tag.TAG_LONG) || !tag.contains("QuestFish", Tag.TAG_STRING)) {
             Confluence.LOGGER.warn("Angler data is missing a required field or contains an invalid field type");
         }
         this.questGameDay = tag.getLong("QuestGameDay");

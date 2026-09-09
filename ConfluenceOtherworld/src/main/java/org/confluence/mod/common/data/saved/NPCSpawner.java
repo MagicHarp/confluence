@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.PlayerRespawnLogic;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -417,10 +418,10 @@ public enum NPCSpawner implements IGlobalData {
             if (closestBiome3d != null) {
                 BaseNPC npc = NpcEntities.ANGLER.get().create(level);
                 if (npc != null) {
-                    int dx = level.random.nextInt(4) - 2;
-                    int dz = level.random.nextInt(4) - 2;
-                    npc.setPos(closestBiome3d.getFirst().atY(level.getSeaLevel()).offset(dx, 0, dz).getCenter());
-                    level.addFreshEntity(npc);
+                    BlockPos spawnPos = findAnglerSpawnPos(level, playerPos, closestBiome3d.getFirst(), npc);
+                    if (spawnPos == null) return false;
+                    npc.setPos(spawnPos.getBottomCenter());
+                    if (!level.addFreshEntity(npc)) return false;
                     npc.setRegion(playerRegion);
                     getRegionAliveDetails(playerRegion).put(NpcEntities.ANGLER.get(), true);
                     return true;
@@ -428,6 +429,29 @@ public enum NPCSpawner implements IGlobalData {
             }
         }
         return false;
+    }
+
+    private static BlockPos findAnglerSpawnPos(Level level, BlockPos playerPos, BlockPos oceanPos, BaseNPC npc) {
+        AABB bounds = npc.getDimensions(Pose.STANDING).makeBoundingBox(Vec3.ZERO);
+        RandomSource random = level.random;
+        int seaLevel = level.getSeaLevel();
+        for (int attempt = 0; attempt < 32; attempt++) {
+            double angle = random.nextDouble() * Mth.TWO_PI;
+            int distance = 8 + random.nextInt(17);
+            int x = oceanPos.getX() + Mth.floor(Mth.cos((float) angle) * distance);
+            int z = oceanPos.getZ() + Mth.floor(Mth.sin((float) angle) * distance);
+            BlockPos candidate = new BlockPos(x, seaLevel, z);
+            long dx = candidate.getX() - playerPos.getX();
+            long dz = candidate.getZ() - playerPos.getZ();
+            if (dx * dx + dz * dz < 8 * 8
+                    || !level.getBiome(candidate).is(PortTags.Biomes.IS_OCEAN)
+                    || !level.getFluidState(candidate.below()).is(FluidTags.WATER)
+                    || !level.noCollision(npc, bounds.move(candidate.getBottomCenter()))) {
+                continue;
+            }
+            return candidate;
+        }
+        return null;
     }
 
     private boolean trySpawnDryad(ServerPlayer player, BlockPos pos, Region region) {

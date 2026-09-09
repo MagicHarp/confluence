@@ -14,9 +14,8 @@ public final class SlimeSummon extends PhysicalSummon {
     public static final int SLOT_COST = 1;
     public static final float BASE_DAMAGE = 5.0F;
     private static final double SEARCH_RANGE = 10.0;
-    private static final double RETURN_FLIGHT_DISTANCE = 25.0;
+    private static final double RETURN_FLIGHT_DISTANCE = 16.0;
     private static final double RETURN_FLIGHT_STOP_DISTANCE = 4.0;
-    private static final double JUMP_FOLLOW_DISTANCE = 16.0;
     private static final SummonVisualState FLYING_VISUAL_STATE = new SummonVisualState(false, SummonAnimation.FLY, 0, 0, 0.0F, 1.0F, 1.0F);
     private int jumpDelay;
     private boolean returningByFlight;
@@ -78,18 +77,23 @@ public final class SlimeSummon extends PhysicalSummon {
 
         @Override
         public boolean canUse() {
-            if (summon.position().distanceTo(summon.owner().position()) > RETURN_FLIGHT_DISTANCE)
+            Vec3 destination = summon.formationPosition(0.0, 1.25, 1.5);
+            if (summon.position().distanceTo(destination) > RETURN_FLIGHT_DISTANCE)
                 summon.returningByFlight = true;
             return summon.returningByFlight;
         }
 
         @Override
-        public boolean canContinueToUse() {return summon.position().distanceTo(summon.owner().position()) > RETURN_FLIGHT_STOP_DISTANCE;}
+        public boolean canContinueToUse() {
+            return summon.position().distanceTo(summon.formationPosition(0.0, 1.25, 1.5)) > RETURN_FLIGHT_STOP_DISTANCE;
+        }
 
         @Override
         public void tick() {
-            Vec3 direction = summon.owner().position().add(0.0, 3.0, 0.0).subtract(summon.position()).normalize();
-            summon.moveWithoutCollision(direction);
+            Vec3 destination = summon.formationPosition(2.0, 1.25, 1.5);
+            Vec3 direction = destination.subtract(summon.position());
+            Vec3 desiredVelocity = direction.lengthSqr() < 1.0E-6 ? Vec3.ZERO : direction.normalize().scale(0.7);
+            summon.moveWithoutCollision(summon.velocity().scale(0.75).add(desiredVelocity.scale(0.25)));
         }
 
         @Override
@@ -132,17 +136,17 @@ public final class SlimeSummon extends PhysicalSummon {
 
         @Override
         public boolean canUse() {
-            return summon.target() == null
-                    && summon.position().distanceTo(summon.owner().position()) < JUMP_FOLLOW_DISTANCE;
+            return summon.target() == null && !summon.returningByFlight;
         }
 
         @Override
         public void tick() {
-            if (summon.position().distanceTo(summon.owner().position()) < RETURN_FLIGHT_STOP_DISTANCE) {
+            Vec3 destination = summon.formationPosition(0.0, 1.25, 1.5);
+            if (summon.position().distanceTo(destination) < RETURN_FLIGHT_STOP_DISTANCE) {
                 summon.moveWithCollision(new Vec3(0.0, summon.velocity().y - 0.08, 0.0));
             } else {
-                double distance = summon.position().distanceTo(summon.owner().position());
-                summon.hopToward(summon.owner().position(), true, distance < 6.0 ? 0.56 : 1.05);
+                double distance = summon.position().distanceTo(destination);
+                summon.hopToward(destination, true, distance < 6.0 ? 0.56 : 1.05);
             }
         }
     }

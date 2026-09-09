@@ -9,6 +9,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import org.confluence.lib.common.LibEffects;
 import org.confluence.lib.common.component.ModRarity;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModEffects;
@@ -62,15 +63,13 @@ public class SwordItems {
     public static final PortDeferredItem<BaseSwordItem> GLADIUS = register("gladius", ModTiers.UNBREAKABLE, 6, 3,
             () -> SwordDefinition.builder().withoutSweep());
     public static final PortDeferredItem<BaseSwordItem> UMBRELLA = register("umbrella",
-            () -> new GeoSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 2, 1.6F, SwordDefinition.builder()
+            () -> new UmbrellaSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 2, 1.6F, SwordDefinition.builder()
                     .withoutSweep()
-                    .behavior(SwordBehaviors.UMBRELLA)
                     .tooltip(p -> p.withColor(11184810))
                     .unbreakable()));
     public static final PortDeferredItem<BaseSwordItem> TRAGIC_UMBRELLA = register("tragic_umbrella",
-            () -> new GeoSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 2, 1.6F, SwordDefinition.builder()
+            () -> new UmbrellaSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 2, 1.6F, SwordDefinition.builder()
                     .withoutSweep()
-                    .behavior(SwordBehaviors.UMBRELLA)
                     .tooltip(p -> p.withColor(11184810))
                     .unbreakable()));
 
@@ -129,10 +128,9 @@ public class SwordItems {
             () -> SwordDefinition.builder()
                     .specialSweep(0.5F)
                     .tooltipImage());
-    public static final PortDeferredItem<BaseSwordItem> FALCON_BLADE = register("falcon_blade", ModTiers.UNBREAKABLE, 6, 1.8F, ModRarity.BLUE,
-            () -> SwordDefinition.builder()
-                    .specialSweep(0.5F)
-                    .behavior(SwordBehaviors.MOMENTUM));
+    public static final PortDeferredItem<BaseSwordItem> FALCON_BLADE = register("falcon_blade",
+            () -> new MomentumSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 6, 1.8F,
+                    SwordDefinition.builder().specialSweep(0.5F)));
     public static final PortDeferredItem<BaseSwordItem> ZOMBIE_ARM = register("zombie_arm", ModTiers.UNBREAKABLE, 5, 2.4F,
             () -> SwordDefinition.builder().specialSweep(0.5F));
     public static final PortDeferredItem<BaseSwordItem> MANDIBLE_BLADE = register("mandible_blade", ModTiers.UNBREAKABLE, 6, 2.4F,
@@ -143,10 +141,9 @@ public class SwordItems {
                     .tooltipImage());
     public static final PortDeferredItem<BaseSwordItem> STYLISH_SCISSORS = register("stylish_scissors", ModTiers.UNBREAKABLE, 5, 2.2F, ModRarity.GREEN,
             () -> SwordDefinition.builder().specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> EXOTIC_SCIMITAR = register("exotic_scimitar", ModTiers.UNBREAKABLE, 7, 2.3F, ModRarity.GREEN,
-            () -> SwordDefinition.builder()
-                    .specialSweep(0.8F)
-                    .behavior(SwordBehaviors.MOMENTUM));
+    public static final PortDeferredItem<BaseSwordItem> EXOTIC_SCIMITAR = register("exotic_scimitar",
+            () -> new MomentumSwordItem(ModTiers.UNBREAKABLE, ModRarity.GREEN, 7, 2.3F,
+                    SwordDefinition.builder().specialSweep(0.8F)));
     public static final PortDeferredItem<BaseSwordItem> KATANA = register("katana", ModTiers.UNBREAKABLE, 6, 3.7F, ModRarity.BLUE,
             () -> SwordDefinition.builder().specialSweep(0.8F));
 
@@ -164,45 +161,26 @@ public class SwordItems {
                     .attribute(Attributes.ATTACK_KNOCKBACK, 0.8F, PortAttributeModifier.Operation.ADD_VALUE));
 
     // 效果剑
-    public static final PortDeferredItem<BaseSwordItem> PURPLE_CLUBBERFISH = register("purple_clubberfish", ModTiers.UNBREAKABLE, 15, 0.5F,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.PURPLE_CLUBBERFISH)
+    public static final PortDeferredItem<BaseSwordItem> PURPLE_CLUBBERFISH = register("purple_clubberfish",
+            () -> new EffectSwordItem(ModTiers.UNBREAKABLE, ModRarity.WHITE, 15, 0.5F, SwordDefinition.builder()
                     .tooltipImage()
                     .attribute(Attributes.ENTITY_INTERACTION_RANGE, 2, PortAttributeModifier.Operation.ADD_VALUE)
-                    .specialSweep(0.8F));
+                    .specialSweep(0.8F), LibEffects.CONFUSED, 40, 1, 0.5F));
     public static final PortDeferredItem<BaseSwordItem> LIGHTS_BANE = register("lights_bane", ModTiers.UNBREAKABLE, 11, 3, ModRarity.BLUE,
             () -> SwordDefinition.builder()
                     .projectile(SwordProjectileDefinitions.LIGHTS_BANE)
                     .tooltipImage()
                     .specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> BLOOD_BUTCHERER = register("blood_butcherer", ModTiers.UNBREAKABLE, 14, 1.3F, ModRarity.BLUE,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.BLOOD_BUTCHERER)
+    public static final PortDeferredItem<BaseSwordItem> BLOOD_BUTCHERER = register("blood_butcherer",
+            () -> new EffectSwordItem(ModTiers.UNBREAKABLE, ModRarity.BLUE, 14, 1.3F, SwordDefinition.builder()
                     .tooltipImage()
-                    .specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> VOLCANO = register("volcano", ModTiers.UNBREAKABLE, 25, 1.2F, ModRarity.ORANGE,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.VOLCANO)
-                    .tooltipImage()
-                    .attribute(Attributes.ENTITY_INTERACTION_RANGE, 4.0F, PortAttributeModifier.Operation.ADD_VALUE)
-                    .attribute(Attributes.ATTACK_KNOCKBACK, 0.5F, PortAttributeModifier.Operation.ADD_VALUE)
-                    .specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> BAT_BAT = register("bat_bat", ModTiers.UNBREAKABLE, 21, 0.6F, ModRarity.ORANGE,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.BAT_BAT)
-                    .tooltipImage()
-                    .attribute(Attributes.ENTITY_INTERACTION_RANGE, 2, PortAttributeModifier.Operation.ADD_VALUE)
-                    .specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> TENTACLE_MACE = register("tentacle_mace", ModTiers.UNBREAKABLE, 13, 2.0F, ModRarity.GREEN,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.TENTACLE_MACE)
-                    .specialSweep(0.8F));
-    public static final PortDeferredItem<BaseSwordItem> BEE_KEEPER = register("bee_keeper", ModTiers.UNBREAKABLE, 18, 1.6F, ModRarity.GREEN,
-            () -> SwordDefinition.builder()
-                    .behavior(SwordBehaviors.BEE_KEEPER)
-                    .tooltips(2)
-                    .tooltipImage()
-                    .specialSweep(0.8F));
+                    .specialSweep(0.8F), ModEffects.BLOOD_BUTCHERED, 180, 4, 1.0F));
+    public static final PortDeferredItem<BaseSwordItem> VOLCANO = register("volcano", VolcanoItem::new);
+    public static final PortDeferredItem<BaseSwordItem> BAT_BAT = register("bat_bat", BatBatItem::new);
+    public static final PortDeferredItem<BaseSwordItem> TENTACLE_MACE = register("tentacle_mace",
+            () -> new EffectSwordItem(ModTiers.UNBREAKABLE, ModRarity.GREEN, 13, 2.0F,
+                    SwordDefinition.builder().specialSweep(0.8F), ModEffects.TENTACLE_SPIKES, 180, 4, 1.0F));
+    public static final PortDeferredItem<BaseSwordItem> BEE_KEEPER = register("bee_keeper", BeeKeeperItem::new);
 
     // 弹幕剑
     public static final PortDeferredItem<BaseSwordItem> ICE_BLADE = register("ice_blade", ModTiers.UNBREAKABLE, 10, 2.0F, ModRarity.BLUE,

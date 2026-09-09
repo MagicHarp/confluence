@@ -65,7 +65,7 @@ public class StaffOfRegrowth extends CustomRarityItem {
     @Diff
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        return defaultModifiers;
+        return slot == EquipmentSlot.MAINHAND ? defaultModifiers : super.getAttributeModifiers(slot, stack);
     }
 
     @Override

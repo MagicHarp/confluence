@@ -14,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.lib.mixed.SelfGetter;
 import org.confluence.mod.client.renderer.item.SpecialItemRenderingUtil;
 import org.confluence.mod.client.summon.ClientSummonManager;
@@ -22,6 +21,7 @@ import org.confluence.mod.common.init.item.SummonItems;
 import org.confluence.mod.common.item.bow.BaseTerraBowItem;
 import org.confluence.mod.common.item.crossbow.BaseTerraRepeaterItem;
 import org.confluence.mod.common.item.whip.BaseWhipItem;
+import org.confluence.mod.common.summon.SummonTypes;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,8 +55,7 @@ public abstract class ItemRendererMixin implements SelfGetter<ItemRenderer> {
     @Inject(method = "getModel", at = @At("HEAD"), cancellable = true)
     private void useEmptyFinchStaffModel(ItemStack stack, @Nullable Level level, @Nullable LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> callback) {
         if (!(entity instanceof Player player) || !stack.is(SummonItems.FINCH_STAFF)) return;
-        int capacity = Math.max(0, (int) Math.floor(player.getAttributeValue(ConfluenceMagicLib.MINION_CAPACITY)));
-        if (!ClientSummonManager.hasAvailableSlots(player.getUUID(), 1, capacity)) {
+        if (ClientSummonManager.hasSummon(player.getUUID(), SummonTypes.FINCH.id())) {
             callback.setReturnValue(ClientSummonManager.finchStaffEmptyModel());
         }
     }

@@ -74,11 +74,13 @@ public class BaseSwordItem extends SwordItem {
         if (attacker instanceof Player player) {
             if (!source.is(PortTags.DamageTypes.CAN_BREAK_ARMOR_STAND) || !source.is(PortTags.DamageTypes.IS_PLAYER_ATTACK) || player.getAttackStrengthScale(0.5F) <= 0.95F)
                 return;
-            definition.behaviors().forEach(behavior -> behavior.onDamage(weapon, player, victim, source));
+            onDamage(weapon, player, victim, source);
         } else if (attacker instanceof LivingEntity living) {
-            definition.behaviors().forEach(behavior -> behavior.onDamage(weapon, living, victim, source));
+            onDamage(weapon, living, victim, source);
         }
     }
+
+    protected void onDamage(ItemStack weapon, LivingEntity attacker, LivingEntity victim, DamageSource source) {}
 
     public boolean tryFireProjectile(ServerPlayer player, InteractionHand hand) {
         ItemStack weapon = player.getItemInHand(hand);
@@ -116,9 +118,11 @@ public class BaseSwordItem extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!super.hurtEnemy(stack, target, attacker)) return false;
-        definition.behaviors().forEach(behavior -> behavior.postHurtEnemy(stack, target, attacker));
+        afterHurtEnemy(stack, target, attacker);
         return true;
     }
+
+    protected void afterHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {}
 
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
@@ -164,12 +168,12 @@ public class BaseSwordItem extends SwordItem {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        definition.behaviors().forEach(behavior -> behavior.inventoryTick(stack, level, entity, slotId, isSelected));
+        onInventoryTick(stack, level, entity, slotId, isSelected);
     }
 
+    protected void onInventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {}
+
     public float modifyDamage(ItemStack stack, DamageSource source, @Nullable Entity attacker, LivingEntity victim, float amount) {
-        for (SwordBehavior behavior : definition.behaviors())
-            amount = behavior.modifyDamage(stack, source, attacker, victim, amount);
         return amount;
     }
 

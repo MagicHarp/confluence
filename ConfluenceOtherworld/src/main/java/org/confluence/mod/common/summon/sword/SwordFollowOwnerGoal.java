@@ -26,22 +26,16 @@ final class SwordFollowOwnerGoal extends SummonGoal<SummonSword> {
 
     @Override
     public void tick() {
-        int sequence = summon.order() + 1;
-        Vec3 forward = Vec3.directionFromRotation(0.0F, summon.owner().yBodyRot).multiply(1.0, 0.0, 1.0).normalize();
-        Vec3 right = forward.cross(new Vec3(0.0, 1.0, 0.0)).normalize();
-        double backDistance = 0.6F - 0.05F * (sequence - 1);
-        Vec3 targetPosition = summon.owner().position().subtract(forward.scale(backDistance))
-                .add(0.0, 1.0, 0.0)
-                .add(right.scale(0.2F * (sequence / 2) * ((sequence & 1) == 0 ? 1.0F : -1.0F)));
+        Vec3 targetPosition = summon.formationPosition(1.0, 0.35, 0.8);
         Vec3 direction = targetPosition.subtract(summon.position());
-        double speed = Math.min(direction.length() * 0.5, 1.0);
-        if (speed == 0.0) {
+        if (direction.lengthSqr() < 1.0E-4) {
             summon.moveTo(summon.followPose(summon.position(), targetPosition));
             return;
         }
-        Vec3 nextVelocity = summon.velocity().add(direction.normalize()).normalize().scale(speed);
-        Vec3 wiggle = new Vec3(summon.owner().getRandom1211().nextGaussian(), summon.owner().getRandom1211().nextGaussian(), summon.owner().getRandom1211().nextGaussian()).scale(0.01);
-        Vec3 nextPosition = summon.position().add(nextVelocity).add(wiggle);
+        double speed = Math.min(direction.length() * 0.35, 0.85);
+        Vec3 desiredVelocity = direction.normalize().scale(speed);
+        Vec3 nextVelocity = summon.velocity().scale(0.72).add(desiredVelocity.scale(0.28));
+        Vec3 nextPosition = summon.position().add(nextVelocity);
         summon.moveTo(summon.followPose(nextPosition, targetPosition));
     }
 }

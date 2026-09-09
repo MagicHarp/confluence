@@ -3,7 +3,6 @@ package org.confluence.mod.common.summon.flying;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.api.summon.SummonTargetCache;
 import org.confluence.mod.common.summon.*;
 import org.confluence.mod.common.summon.projectile.SummonProjectileTypes;
 
@@ -28,7 +27,7 @@ public final class ImpSummon extends FlyingSummon {
 
     @Override
     protected LivingEntity findTarget() {
-        return SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), position(), SEARCH_RANGE);
+        return acquireVisibleTarget(SEARCH_RANGE);
     }
 
     @Override

@@ -6,7 +6,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.api.summon.SummonTargetCache;
 import org.confluence.mod.common.summon.*;
 import org.confluence.mod.common.summon.projectile.SummonProjectileTypes;
 
@@ -30,7 +29,7 @@ public final class HornetSummon extends FlyingSummon {
 
     @Override
     protected LivingEntity findTarget() {
-        return SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), position(), 84.0);
+        return acquireVisibleTarget(84.0);
     }
 
     @Override

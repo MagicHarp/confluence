@@ -46,6 +46,8 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
     private int ownerRecoveryCooldown;
     private int order;
     private int sameTypeCount = 1;
+    private int formationOrder;
+    private int formationCount = 1;
     private final Map<UUID, Integer> nextPartHitTicks = new HashMap<>();
 
     protected SummonInstance(ResourceLocation type, ServerPlayer owner, int slotCost, SummonStats stats, SummonPose initialPose) {
@@ -121,7 +123,7 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
 
     /// 返回超过该距离平方后需要拉回所有者附近的阈值。
     protected double ownerRecoveryDistanceSqr() {
-        return 40.0 * 40.0;
+        return 96.0 * 96.0;
     }
 
     protected int ownerRecoveryInterval() {
@@ -448,8 +450,21 @@ public abstract class SummonInstance implements OwnedSummon, Immunity {
         return sameTypeCount;
     }
 
+    public final Vec3 formationPosition(double height, double spacing, double backDistance) {
+        Vec3 forward = Vec3.directionFromRotation(0.0F, owner.yBodyRot).multiply(1.0, 0.0, 1.0).normalize();
+        Vec3 right = forward.cross(new Vec3(0.0, 1.0, 0.0)).normalize();
+        double centeredOrder = formationOrder - (formationCount - 1) * 0.5;
+        return owner.position().subtract(forward.scale(backDistance))
+                .add(right.scale(centeredOrder * spacing)).add(0.0, height, 0.0);
+    }
+
     final void updateGroupState(int order, int sameTypeCount) {
         this.order = order;
         this.sameTypeCount = sameTypeCount;
+    }
+
+    final void updateFormationState(int order, int count) {
+        formationOrder = order;
+        formationCount = count;
     }
 }

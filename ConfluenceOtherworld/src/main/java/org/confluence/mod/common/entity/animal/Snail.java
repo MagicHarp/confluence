@@ -1,6 +1,5 @@
 package org.confluence.mod.common.entity.animal;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -8,11 +7,10 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -20,6 +18,10 @@ import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
 import org.confluence.mod.common.entity.ai.bt.leaf.VanillaGoalAction;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.List;
 
@@ -27,15 +29,16 @@ import java.util.List;
  * 能沿地面、墙面和天花板连续爬行的蜗牛类小动物。
  */
 public class Snail extends SimpleCritter {
+    private static final RawAnimation CRAWL = RawAnimation.begin().thenLoop("move.walk");
     private static final String ATTACHMENT_TAG = "SnailAttachment";
     private static final String CRAWL_DIRECTION_TAG = "SnailCrawlDirection";
     private static final EntityDataAccessor<Byte> DATA_ATTACHMENT = SynchedEntityData.defineId(Snail.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> DATA_CRAWL_DIRECTION = SynchedEntityData.defineId(Snail.class, EntityDataSerializers.BYTE);
     private final Profile profile;
-    private BlockPos outerEdgeSupport;
     private int turnCooldown;
     private int blockedTicks;
     private Vec3 lastCrawlPosition;
+    private boolean attachmentNeedsValidation = true;
 
     public Snail(EntityType<? extends Snail> type, Level level) {
         this(type, level, Profile.NORMAL);
@@ -46,6 +49,13 @@ public class Snail extends SimpleCritter {
         this.profile = profile;
         // 高度变化由贴面爬行处理，禁用原版自动跨步，避免跳上台阶。
         setMaxUpStep(0.0F);
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        // GeckoLib 的通用行走控制器只可靠识别地面水平位移；沿墙竖直爬行会被误判为静止。
+        controllers.add(new AnimationController<>(this, "Crawl", 0,
+                state -> isNoGravity() ? state.setAndContinue(CRAWL) : PlayState.STOP));
     }
 
     @Override
@@ -100,125 +110,55 @@ public class Snail extends SimpleCritter {
     }
 
     private boolean hasSupport(Direction face) {
-        AABB box = getBoundingBox();
-        double x = Mth.clamp(getX(), box.minX + 1.0E-3, box.maxX - 1.0E-3);
-        double y = (box.minY + box.maxY) * 0.5;
-        double z = Mth.clamp(getZ(), box.minZ + 1.0E-3, box.maxZ - 1.0E-3);
-        double reach = 0.08;
-        switch (face) {
-            case UP -> y = box.minY - reach;
-            case DOWN -> y = box.maxY + reach;
-            case NORTH -> z = box.maxZ + reach;
-            case SOUTH -> z = box.minZ - reach;
-            case WEST -> x = box.maxX + reach;
-            case EAST -> x = box.minX - reach;
+        return hasSupport(face, getBoundingBox());
+    }
+
+    private boolean hasSupport(Direction face, AABB bounds) {
+        double thickness = 0.08D;
+        double insetX = Math.min(0.08D, bounds.getXsize() * 0.2D);
+        double insetY = Math.min(0.08D, bounds.getYsize() * 0.2D);
+        double insetZ = Math.min(0.08D, bounds.getZsize() * 0.2D);
+        AABB probe = switch (face) {
+            case UP -> new AABB(bounds.minX + insetX, bounds.minY - thickness, bounds.minZ + insetZ,
+                    bounds.maxX - insetX, bounds.minY + 0.01D, bounds.maxZ - insetZ);
+            case DOWN -> new AABB(bounds.minX + insetX, bounds.maxY - 0.01D, bounds.minZ + insetZ,
+                    bounds.maxX - insetX, bounds.maxY + thickness, bounds.maxZ - insetZ);
+            case EAST ->
+                    new AABB(bounds.minX - thickness, bounds.minY + insetY, bounds.minZ + insetZ,
+                            bounds.minX + 0.01D, bounds.maxY - insetY, bounds.maxZ - insetZ);
+            case WEST -> new AABB(bounds.maxX - 0.01D, bounds.minY + insetY, bounds.minZ + insetZ,
+                    bounds.maxX + thickness, bounds.maxY - insetY, bounds.maxZ - insetZ);
+            case SOUTH ->
+                    new AABB(bounds.minX + insetX, bounds.minY + insetY, bounds.minZ - thickness,
+                            bounds.maxX - insetX, bounds.maxY - insetY, bounds.minZ + 0.01D);
+            case NORTH -> new AABB(bounds.minX + insetX, bounds.minY + insetY, bounds.maxZ - 0.01D,
+                    bounds.maxX - insetX, bounds.maxY - insetY, bounds.maxZ + thickness);
+        };
+        return level().getBlockCollisions(this, probe).iterator().hasNext();
+    }
+
+    private Direction findPhysicalSupport(Direction preferred) {
+        if (hasSupport(Direction.UP)) return Direction.UP;
+        if (preferred != Direction.UP && hasSupport(preferred)) return preferred;
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            if (direction != preferred && hasSupport(direction)) return direction;
         }
-        BlockPos supportPos = BlockPos.containing(x, y, z);
-        BlockState support = level().getBlockState(supportPos);
-        return support.isFaceSturdy(level(), supportPos, face) || Block.isFaceFull(support.getCollisionShape(level(), supportPos), face);
+        return preferred != Direction.DOWN && hasSupport(Direction.DOWN) ? Direction.DOWN : null;
     }
 
     private Direction findAdjacentSupport() {
         Direction current = getAttachmentFace();
+        Direction crawl = getCrawlDirection();
         if (current.getAxis().isHorizontal()) {
-            if (getCrawlDirection() == Direction.DOWN && hasSupport(Direction.UP))
-                return Direction.UP;
-            if (getCrawlDirection() == Direction.UP && hasSupport(Direction.DOWN))
-                return Direction.DOWN;
+            if (crawl == Direction.DOWN && hasSupport(Direction.UP)) return Direction.UP;
+            if (crawl == Direction.UP && hasSupport(Direction.DOWN)) return Direction.DOWN;
         }
-        if (hasSupport(current)) {
-            outerEdgeSupport = null;
-            return current;
-        }
-        // 翻过顶部外棱时，身体最初仍在墙顶上方，中心探针尚未接触墙面。
-        // 此时保留已确认的支撑方块，让身体继续下降直至贴上墙面。
-        if (outerEdgeSupport != null && current.getAxis().isHorizontal()
-                && getCrawlDirection() == Direction.DOWN
-                && getBoundingBox().minY <= outerEdgeSupport.getY() + 1.01D
-                && getBoundingBox().getCenter().y >= outerEdgeSupport.getY() + 1.0D
-                && level().getBlockState(outerEdgeSupport).isFaceSturdy(level(), outerEdgeSupport, current)) {
-            return current;
-        }
-        outerEdgeSupport = null;
-        if (current.getAxis().isHorizontal() && getCrawlDirection() == Direction.UP) {
-            double topY = topSurfaceYBeyondEdge(current);
-            if (Double.isFinite(topY)) {
-                return getY() + 1.0E-3D >= topY ? Direction.UP : current;
-            }
-        }
-        if (current == Direction.UP && getCrawlDirection().getAxis().isHorizontal()) {
-            Direction travel = getCrawlDirection();
-            double outsideCoordinate = outsideWallCoordinateBelowEdge(travel);
-            if (Double.isFinite(outsideCoordinate)) {
-                // 整个碰撞箱越过外棱之后才转为向下爬墙。
-                double coordinate = travel.getAxis() == Direction.Axis.X ? getX() : getZ();
-                boolean cleared = travel.getAxisDirection() == Direction.AxisDirection.POSITIVE ? coordinate >= outsideCoordinate : coordinate <= outsideCoordinate;
-                return cleared ? travel : current;
-            }
-        }
-        if (current == Direction.DOWN && getCrawlDirection().getAxis().isHorizontal()) {
-            Direction travel = getCrawlDirection();
-            double outsideCoordinate = outsideCeilingWallCoordinate(travel);
-            if (Double.isFinite(outsideCoordinate)) {
-                double coordinate = travel.getAxis() == Direction.Axis.X ? getX() : getZ();
-                boolean cleared = travel.getAxisDirection() == Direction.AxisDirection.POSITIVE
-                        ? coordinate >= outsideCoordinate
-                        : coordinate <= outsideCoordinate;
-                return cleared ? travel : current;
-            }
-        }
+        if (hasSupport(current)) return current;
         if (hasSupport(Direction.UP)) return Direction.UP;
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            if (hasSupport(direction)) return direction;
+            if (direction != current && hasSupport(direction)) return direction;
         }
         return hasSupport(Direction.DOWN) ? Direction.DOWN : null;
-    }
-
-    private double topSurfaceYBeyondEdge(Direction wallAttachment) {
-        AABB box = getBoundingBox();
-        Direction intoWall = wallAttachment.getOpposite();
-        double inset = getBbWidth() * 0.5D + 0.08D;
-        double x = getX() + intoWall.getStepX() * inset;
-        double z = getZ() + intoWall.getStepZ() * inset;
-        BlockPos supportPos = BlockPos.containing(x, box.minY - 0.08D, z);
-        return level().getBlockState(supportPos).isFaceSturdy(level(), supportPos, Direction.UP) ? supportPos.getY() + 1.0D : Double.NaN;
-    }
-
-    private double outsideWallCoordinateBelowEdge(Direction travel) {
-        AABB box = getBoundingBox();
-        double inset = getBbWidth() * 0.5D + 0.08D;
-        double x = getX() - travel.getStepX() * inset;
-        double z = getZ() - travel.getStepZ() * inset;
-        BlockPos supportPos = BlockPos.containing(x, box.minY - 0.08D, z);
-        if (!level().getBlockState(supportPos).isFaceSturdy(level(), supportPos, travel))
-            return Double.NaN;
-        double clearance = getBbWidth() * 0.5D + 1.0E-3D;
-        return switch (travel) {
-            case EAST -> supportPos.getX() + 1.0D + clearance;
-            case WEST -> supportPos.getX() - clearance;
-            case SOUTH -> supportPos.getZ() + 1.0D + clearance;
-            case NORTH -> supportPos.getZ() - clearance;
-            default -> Double.NaN;
-        };
-    }
-
-    private double outsideCeilingWallCoordinate(Direction travel) {
-        AABB box = getBoundingBox();
-        double inset = getBbWidth() * 0.5D + 0.08D;
-        BlockPos supportPos = BlockPos.containing(
-                getX() - travel.getStepX() * inset,
-                box.maxY + 0.08D,
-                getZ() - travel.getStepZ() * inset);
-        if (!level().getBlockState(supportPos).isFaceSturdy(level(), supportPos, travel))
-            return Double.NaN;
-        double clearance = getBbWidth() * 0.5D + 1.0E-3D;
-        return switch (travel) {
-            case EAST -> supportPos.getX() + 1.0D + clearance;
-            case WEST -> supportPos.getX() - clearance;
-            case SOUTH -> supportPos.getZ() + 1.0D + clearance;
-            case NORTH -> supportPos.getZ() - clearance;
-            default -> Double.NaN;
-        };
     }
 
     private void ensureTangentDirection(Direction attachment) {
@@ -236,17 +176,34 @@ public class Snail extends SimpleCritter {
         if (blockedTicks >= 12) {
             setCrawlDirection(selectAvoidanceDirection(attachment));
             blockedTicks = 0;
-            turnCooldown = 40 + random.nextInt(61);
+            turnCooldown = 30 + random.nextInt(91);
             return;
         }
         if (--turnCooldown > 0) return;
+        // 墙面和天花板上保持当前方向直到抵达棱边；中途随机反向会让蜗牛长期困在同一侧。
+        if (attachment != Direction.UP) {
+            turnCooldown = 50 + random.nextInt(151);
+            return;
+        }
         Direction current = getCrawlDirection();
-        Direction[] candidates = java.util.Arrays.stream(Direction.values())
+        List<Direction> candidates = java.util.Arrays.stream(Direction.values())
                 .filter(direction -> direction.getAxis() != attachment.getAxis())
-                .filter(direction -> direction != current && direction != current.getOpposite())
-                .toArray(Direction[]::new);
-        if (candidates.length > 0) setCrawlDirection(candidates[random.nextInt(candidates.length)]);
-        turnCooldown = 80 + random.nextInt(121);
+                .filter(direction -> canAdvance(attachment, direction))
+                .toList();
+        if (!candidates.isEmpty()) {
+            int totalWeight = 0;
+            for (Direction direction : candidates)
+                totalWeight += direction == current ? 4 : direction == current.getOpposite() ? 1 : 2;
+            int selected = random.nextInt(totalWeight);
+            for (Direction direction : candidates) {
+                selected -= direction == current ? 4 : direction == current.getOpposite() ? 1 : 2;
+                if (selected < 0) {
+                    setCrawlDirection(direction);
+                    break;
+                }
+            }
+        }
+        turnCooldown = 50 + random.nextInt(151);
     }
 
     private Direction selectAvoidanceDirection(Direction attachment) {
@@ -255,76 +212,34 @@ public class Snail extends SimpleCritter {
         List<Direction> detours = java.util.Arrays.stream(Direction.values())
                 .filter(direction -> direction.getAxis() != attachment.getAxis())
                 .filter(direction -> direction != current && direction != reverse)
-                .filter(this::canAdvanceOrAttach)
+                .filter(direction -> canAdvance(attachment, direction))
                 .toList();
         if (!detours.isEmpty()) return detours.get(random.nextInt(detours.size()));
-        return canAdvanceOrAttach(reverse) ? reverse : current;
+        return canAdvance(attachment, reverse) ? reverse : current;
     }
 
-    private boolean canAdvanceOrAttach(Direction direction) {
+    private boolean canAdvance(Direction attachment, Direction direction) {
         Vec3 step = Vec3.atLowerCornerOf(direction.getNormal()).scale(Math.max(0.08D, getBbWidth() * 0.25D));
-        if (level().noCollision(this, getBoundingBox().move(step))) return true;
-        return direction.getAxis().isHorizontal() && hasSupport(direction.getOpposite());
+        AABB movedBounds = getBoundingBox().move(step);
+        if (!level().noCollision(this, movedBounds)) return false;
+        // 保持当前表面，或越过外棱后能够贴到前进方向对应的相邻表面。
+        return hasSupport(attachment, movedBounds) || hasSupport(direction, movedBounds);
     }
 
     private void transitionToAdjacentSupport(Direction previousAttachment, Direction attachment, Direction crawl) {
         setAttachmentFace(attachment);
-        if (previousAttachment == Direction.UP && attachment.getAxis().isHorizontal() && crawl == attachment) {
-            snapOutsideWall(attachment);
-            setCrawlDirection(Direction.DOWN);
+        if (previousAttachment.getAxis().isVertical()) {
+            if (attachment == crawl) setCrawlDirection(previousAttachment.getOpposite());
             return;
         }
-        if (previousAttachment == Direction.DOWN && attachment.getAxis().isHorizontal() && crawl == attachment) {
-            snapOutsideCeilingWall(attachment);
-            setCrawlDirection(Direction.UP);
-            return;
-        }
-        if (previousAttachment.getAxis().isHorizontal() && attachment == Direction.DOWN && crawl == Direction.DOWN) {
+        if (attachment == Direction.UP)
+            setCrawlDirection(crawl == Direction.UP ? previousAttachment.getOpposite() : previousAttachment);
+        else if (attachment == Direction.DOWN)
             setCrawlDirection(previousAttachment.getOpposite());
-            return;
-        }
-        if (!previousAttachment.getAxis().isHorizontal() || attachment != Direction.UP) return;
-        if (crawl == Direction.UP) {
-            double topY = topSurfaceYBeyondEdge(previousAttachment);
-            if (Double.isFinite(topY)) setPos(getX(), topY, getZ());
-            setCrawlDirection(previousAttachment.getOpposite());
-        } else if (crawl == Direction.DOWN) {
-            setCrawlDirection(previousAttachment);
-        }
-    }
-
-    private void snapOutsideWall(Direction wallAttachment) {
-        double halfWidth = getBbWidth() * 0.5D;
-        double inset = halfWidth + 0.08D;
-        BlockPos supportPos = BlockPos.containing(getX() - wallAttachment.getStepX() * inset, getBoundingBox().minY - 0.08D, getZ() - wallAttachment.getStepZ() * inset);
-        outerEdgeSupport = supportPos;
-        double clearance = halfWidth + 1.0E-3D;
-        switch (wallAttachment) {
-            case EAST -> setPos(supportPos.getX() + 1.0D + clearance, getY(), getZ());
-            case WEST -> setPos(supportPos.getX() - clearance, getY(), getZ());
-            case SOUTH -> setPos(getX(), getY(), supportPos.getZ() + 1.0D + clearance);
-            case NORTH -> setPos(getX(), getY(), supportPos.getZ() - clearance);
-        }
-    }
-
-    private void snapOutsideCeilingWall(Direction wallAttachment) {
-        double halfWidth = getBbWidth() * 0.5D;
-        double inset = halfWidth + 0.08D;
-        BlockPos supportPos = BlockPos.containing(
-                getX() - wallAttachment.getStepX() * inset,
-                getBoundingBox().maxY + 0.08D,
-                getZ() - wallAttachment.getStepZ() * inset);
-        double clearance = halfWidth + 1.0E-3D;
-        switch (wallAttachment) {
-            case EAST -> setPos(supportPos.getX() + 1.0D + clearance, getY(), getZ());
-            case WEST -> setPos(supportPos.getX() - clearance, getY(), getZ());
-            case SOUTH -> setPos(getX(), getY(), supportPos.getZ() + 1.0D + clearance);
-            case NORTH -> setPos(getX(), getY(), supportPos.getZ() - clearance);
-        }
     }
 
     private void turnOntoObstacle(Direction attachment, Direction crawl) {
-        boolean obstacleAhead = crawl.getAxis().isHorizontal() && hasObstacleAhead(crawl);
+        boolean obstacleAhead = crawl.getAxis().isHorizontal() && moveUpToObstacle(crawl);
         Direction obstacleFace = crawl.getOpposite();
         boolean canAttachToObstacle = obstacleAhead && hasSupport(obstacleFace);
         if (attachment == Direction.UP && crawl.getAxis().isHorizontal() && canAttachToObstacle) {
@@ -342,9 +257,12 @@ public class Snail extends SimpleCritter {
         }
     }
 
-    private boolean hasObstacleAhead(Direction crawl) {
-        Vec3 step = Vec3.atLowerCornerOf(crawl.getNormal()).scale(Math.max(0.08D, getBbWidth() * 0.25D));
-        return !level().noCollision(this, getBoundingBox().move(step));
+    private boolean moveUpToObstacle(Direction crawl) {
+        Vec3 approach = Vec3.atLowerCornerOf(crawl.getNormal()).scale(Math.max(0.08D, getBbWidth() * 0.25D));
+        if (level().noCollision(this, getBoundingBox().move(approach))) return false;
+        // 使用实体自身的碰撞移动贴到表面，而不是扩大支撑探针造成悬空贴附。
+        move(MoverType.SELF, approach);
+        return true;
     }
 
     private void updateCrawlRotation(Direction crawl, Direction attachment) {
@@ -385,6 +303,10 @@ public class Snail extends SimpleCritter {
             entityData.set(DATA_ATTACHMENT, tag.getByte(ATTACHMENT_TAG));
         if (tag.contains(CRAWL_DIRECTION_TAG))
             entityData.set(DATA_CRAWL_DIRECTION, tag.getByte(CRAWL_DIRECTION_TAG));
+        setNoGravity(false);
+        attachmentNeedsValidation = true;
+        blockedTicks = 0;
+        lastCrawlPosition = null;
     }
 
     private final class SurfaceCrawlAction extends BTNode {
@@ -392,7 +314,7 @@ public class Snail extends SimpleCritter {
         public void start() {
             navigation.stop();
             ensureTangentDirection(getAttachmentFace());
-            turnCooldown = 60 + random.nextInt(81);
+            turnCooldown = 30 + random.nextInt(121);
             lastCrawlPosition = position();
         }
 
@@ -401,6 +323,17 @@ public class Snail extends SimpleCritter {
             if (isInWaterOrBubble() || isInLava()) {
                 setNoGravity(false);
                 return BTStatus.FAILURE;
+            }
+            if (attachmentNeedsValidation) {
+                Direction recovered = findPhysicalSupport(getAttachmentFace());
+                attachmentNeedsValidation = false;
+                if (recovered == null) {
+                    setAttachmentFace(Direction.UP);
+                    setNoGravity(false);
+                    return BTStatus.RUNNING;
+                }
+                setAttachmentFace(recovered);
+                ensureTangentDirection(recovered);
             }
             Direction support = findAdjacentSupport();
             if (support == null) {
@@ -416,18 +349,17 @@ public class Snail extends SimpleCritter {
             turnOntoObstacle(support, crawl);
             support = getAttachmentFace();
             crawl = getCrawlDirection();
+            if (!canAdvance(support, crawl)) {
+                setCrawlDirection(selectAvoidanceDirection(support));
+            }
             updateWanderingDirection(support);
             crawl = getCrawlDirection();
             setNoGravity(true);
             fallDistance = 0.0F;
-            double speed = getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.35;
+            double speed = getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.18;
             Vec3 tangent = Vec3.atLowerCornerOf(crawl.getNormal()).scale(speed);
-            // 先水平移过顶部外棱，直到整个碰撞箱越过边缘。
-            // 此时向下施加贴附力，会让支撑方块的棱角被误判为前方障碍。
-            Vec3 adhesion = support == Direction.UP && !hasSupport(Direction.UP)
-                    ? Vec3.ZERO
-                    : Vec3.atLowerCornerOf(support.getOpposite().getNormal()).scale(0.025);
-            setDeltaMovement(tangent.add(adhesion));
+            Vec3 adhesion = Vec3.atLowerCornerOf(support.getOpposite().getNormal()).scale(0.025);
+            setDeltaMovement(canAdvance(support, crawl) ? tangent.add(adhesion) : adhesion);
             updateCrawlRotation(crawl, support);
             hasImpulse = true;
             return BTStatus.RUNNING;

@@ -148,10 +148,13 @@ public final class SummonContainer implements IPortNBTSerializable<CompoundTag> 
         groupCounts.clear();
         groupOrders.clear();
         for (SummonInstance summon : summons) groupCounts.merge(summon.groupKey(), 1, Integer::sum);
+        int formationOrder = 0;
+        int formationCount = summons.size();
         for (SummonInstance summon : summons) {
             ResourceLocation group = summon.groupKey();
             int order = groupOrders.getOrDefault(group, 0);
             summon.updateGroupState(order, groupCounts.get(group));
+            summon.updateFormationState(formationOrder++, formationCount);
             groupOrders.put(group, order + 1);
         }
     }

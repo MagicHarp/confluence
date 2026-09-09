@@ -57,6 +57,7 @@ public enum EmptyTargetSweepPacketC2S implements IPortPacket.C2S {
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
             player.sweepAttack();
             player.swing(InteractionHand.MAIN_HAND, false);
+            player.resetAttackStrengthTicker();
         }
     }
 

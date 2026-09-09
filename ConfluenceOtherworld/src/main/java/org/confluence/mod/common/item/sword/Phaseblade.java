@@ -1,6 +1,5 @@
 package org.confluence.mod.common.item.sword;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +29,9 @@ import org.confluence.mod.client.renderer.item.PhasebladeRenderer;
 import org.confluence.mod.common.init.ModSoundEvents;
 import org.confluence.mod.common.init.item.ModItems;
 import org.mesdag.portlib.diff.Diff;
+import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
 import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
+import org.mesdag.portlib.wrapper.world.item.component.PortItemAttributeModifiers;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -40,7 +41,6 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class Phaseblade extends BaseSwordItem implements GeoItem {
@@ -48,24 +48,23 @@ public class Phaseblade extends BaseSwordItem implements GeoItem {
     public static final ResourceLocation ID = Confluence.asResource("phaseblade");
 
     private final String color;
-    private final Multimap<Attribute, AttributeModifier> turnOnModifiers;
-    private final Multimap<Attribute, AttributeModifier> turnOffModifiers;
+    private final PortItemAttributeModifiers turnOnModifiers;
+    private final PortItemAttributeModifiers turnOffModifiers;
 
     public int frame = 0;
 
     public Phaseblade(Tier tier, ModRarity rarity, int rawDamage, float rawSpeed, String color) {
         super(tier, rarity, rawDamage, rawSpeed, SwordDefinition.builder().specialSweep(0.8F).withoutBaseAttributes());
         this.color = color;
-        this.turnOnModifiers = createAttributes(tier, rawDamage, rawSpeed);
-        this.turnOffModifiers = createAttributes(tier, 0, 2);
+        this.turnOnModifiers = createAttributes(rawDamage - 1, rawSpeed - 4);
+        this.turnOffModifiers = createAttributes(1, -2);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
-    private static Multimap<Attribute, AttributeModifier> createAttributes(Tier tier, int rawDamage, float rawSpeed) {
-        UUID uuid = PortAttributeModifier.rl2uuid(ID);
-        return ImmutableMultimap.<Attribute, AttributeModifier>builder()
-                .put(LibAttributes.getAttackDamage().value(), new AttributeModifier(uuid, ID.getPath(), ModItems.getAttackDamage(tier, rawDamage), AttributeModifier.Operation.MULTIPLY_TOTAL))
-                .put(Attributes.ATTACK_SPEED, new AttributeModifier(uuid, ID.getPath(), ModItems.getAttackSpeed(rawSpeed), AttributeModifier.Operation.MULTIPLY_TOTAL))
+    private static PortItemAttributeModifiers createAttributes(float attackDamage, float attackSpeed) {
+        return PortItemAttributeModifiers.builder()
+                .add(LibAttributes.getAttackDamage(), ModItems.BASE_ATTACK_DAMAGE_ID, attackDamage, PortAttributeModifier.Operation.ADD_VALUE, PortEquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, ModItems.BASE_ATTACK_SPEED_ID, attackSpeed, PortAttributeModifier.Operation.ADD_VALUE, PortEquipmentSlotGroup.MAINHAND)
                 .build();
     }
 
@@ -109,7 +108,7 @@ public class Phaseblade extends BaseSwordItem implements GeoItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        return isTurnOn(stack) ? turnOnModifiers : turnOffModifiers;
+        return (isTurnOn(stack) ? turnOnModifiers : turnOffModifiers).getAttributeModifiers(slot);
     }
 
     @Override

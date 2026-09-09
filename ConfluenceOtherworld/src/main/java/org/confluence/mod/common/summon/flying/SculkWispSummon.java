@@ -8,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
-import org.confluence.mod.api.summon.SummonTargetCache;
 import org.confluence.mod.common.summon.*;
 
 /// 幽匿飞灵召唤物的运行实例。
@@ -27,7 +26,7 @@ public final class SculkWispSummon extends FlyingSummon {
 
     @Override
     protected LivingEntity findTarget() {
-        return SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), position(), 64.0);
+        return acquireVisibleTarget(64.0);
     }
 
     @Override

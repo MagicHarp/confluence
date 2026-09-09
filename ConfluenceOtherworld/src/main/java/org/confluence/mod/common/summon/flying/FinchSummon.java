@@ -2,6 +2,7 @@ package org.confluence.mod.common.summon.flying;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -15,16 +16,23 @@ public final class FinchSummon extends FlyingSummon {
     public static final float BASE_DAMAGE = 2.0F;
     private int attackPhaseTicks;
     private int hitMovementCooldown;
+    private boolean followingOwner;
 
     public FinchSummon(ServerPlayer owner, int slotCost, SummonStats stats, SummonPose initialPose) {
         super(Confluence.asResource("finch_baby"), owner, slotCost, stats, initialPose, 0.5, 0.5);
         addGoal(1, new AttackGoal(this));
-        addGoal(9, new MomentumSummonIdleGoal<>(this, 1.8, 0.035, 0.70));
+        addGoal(9, new PerchOwnerGoal(this));
     }
 
     @Override
     protected LivingEntity findTarget() {
-        return SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), position(), 32.0);
+        LivingEntity target = SummonTargetCache.acquire(owner().serverLevel(), owner(), uuid(), owner().position(), 50.0);
+        return target != null && position().distanceToSqr(owner().position()) <= 50.0 * 50.0 && SummonTargetCache.hasVisibleTarget(owner().serverLevel(), owner(), position(), Double.MAX_VALUE, target) ? target : null;
+    }
+
+    @Override
+    public int confluence$getImmunityDuration(DamageSource damageSource) {
+        return 15;
     }
 
     @Override
@@ -82,6 +90,19 @@ public final class FinchSummon extends FlyingSummon {
         return super.idleVelocity().add(0.0, previousVerticalBob(), 0.0);
     }
 
+    @Override
+    public SummonVisualState visualState() {
+        return followingOwner ? new SummonVisualState(true, SummonAnimation.NONE, 0, 0, 0.0F, 1.0F, 1.0F) : SummonVisualState.DEFAULT;
+    }
+
+    public static Vec3 perchPosition(Vec3 ownerPosition, float bodyYaw, int order) {
+        Vec3 forward = Vec3.directionFromRotation(0.0F, bodyYaw).multiply(1.0, 0.0, 1.0).normalize();
+        Vec3 right = forward.cross(new Vec3(0.0, 1.0, 0.0)).normalize();
+        return order == 0
+                ? ownerPosition.add(0.0, 1.42, 0.0).add(right.scale(0.32)).subtract(forward.scale(0.08))
+                : ownerPosition.add(0.0, 1.78 + (order - 1) * 0.16, 0.0);
+    }
+
     private Rotation turnToward(Vec3 direction, float maximumYawChange, float maximumPitchChange) {
         Vec3 normalized = direction.normalize();
         float desiredYaw = (float) Math.toDegrees(Math.atan2(-normalized.x, normalized.z));
@@ -112,6 +133,48 @@ public final class FinchSummon extends FlyingSummon {
         @Override
         public void tick() {
             summon.attack(summon.target());
+        }
+    }
+
+    private static final class PerchOwnerGoal extends SummonGoal<FinchSummon> {
+        private PerchOwnerGoal(FinchSummon summon) {
+            super(summon);
+        }
+
+        @Override
+        public boolean canUse() {
+            return summon.target() == null;
+        }
+
+        @Override
+        public void start() {
+            summon.followingOwner = true;
+        }
+
+        @Override
+        public void stop() {
+            summon.followingOwner = false;
+        }
+
+        @Override
+        public void tick() {
+            Vec3 destination = perchPosition(summon.owner().position(), summon.owner().yBodyRot, summon.order());
+            Vec3 ownerVelocity = summon.owner().getDeltaMovement();
+            if (summon.owner().onGround()) ownerVelocity = ownerVelocity.multiply(1.0, 0.0, 1.0);
+            Vec3 offset = destination.add(ownerVelocity).subtract(summon.position());
+            Vec3 desiredVelocity = ownerVelocity.add(offset.scale(0.45));
+            if (desiredVelocity.lengthSqr() > 1.0)
+                desiredVelocity = desiredVelocity.normalize();
+            Vec3 movement = summon.velocity().scale(0.35).add(desiredVelocity.scale(0.65));
+            if (offset.lengthSqr() < 0.25 * 0.25) {
+                summon.moveBy(movement, summon.owner().yBodyRot, 0.0F);
+                return;
+            }
+            float yaw = movement.horizontalDistanceSqr() < 1.0E-8 ? summon.owner().yBodyRot
+                    : (float) Math.toDegrees(Math.atan2(-movement.x, movement.z));
+            float pitch = movement.lengthSqr() < 1.0E-8 ? 0.0F
+                    : Mth.clamp((float) Math.toDegrees(Math.asin(-movement.normalize().y)), -35.0F, 35.0F);
+            summon.moveBy(movement, yaw, pitch);
         }
     }
 
