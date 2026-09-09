@@ -30,6 +30,7 @@ import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.init.ModStructures;
 import org.confluence.mod.common.init.item.ToolItems;
 import org.jetbrains.annotations.Nullable;
+import org.mesdag.portlib.PortLib;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class DungeonCompass extends TooltipItem {
             .aisle("   A   ", " A   A ", "       ", "A     A", "       ", " A   A ", "   A   ")
             .aisle("   T   ", " T   T ", "   O   ", "T O O T", "   O   ", " T   T ", "   T   ")
             .where('A', BlockInWorld.hasState(state -> state.is(Blocks.AMETHYST_BLOCK)))
-            .where('T', BlockInWorld.hasState(state -> state.is(/* todo Blocks.CHISELED_TUFF*/Blocks.TUFF)))
+            .where('T', BlockInWorld.hasState(state -> state.is(PortLib.CHISELED_TUFF.get())))
             .where('O', BlockInWorld.hasState(state -> state.is(Blocks.CRYING_OBSIDIAN)))
             .build();
 
@@ -69,7 +70,7 @@ public class DungeonCompass extends TooltipItem {
     }
 
     public static void matches(Player player, InteractionHand hand, Level level, ItemStack itemStack, BlockState blockState, BlockPos blockPos) {
-        if (itemStack.is(ToolItems.METEOR_COMPASS) && blockState.is(/* todo Blocks.CHISELED_TUFF*/Blocks.TUFF)) {
+        if (itemStack.is(ToolItems.METEOR_COMPASS) && blockState.is(PortLib.CHISELED_TUFF.get())) {
             BlockPattern.BlockPatternMatch matches = PATTERN.matches(level, blockPos.offset(3, 1, 3), Direction.DOWN, Direction.SOUTH);
             if (matches == null) return;
             if (level.isClientSide) {

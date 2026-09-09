@@ -20,6 +20,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.item.*;
 import org.confluence.terra_curio.common.init.TCItems;
+import org.mesdag.portlib.PortLib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,11 +123,11 @@ public class AddChestLootConfluenceSubProvider implements LootTableSubProvider, 
                                 .addLine(Component.literal(" ").append(Component.literal("3").withStyle(style -> style.withFont(Confluence.asResource("paper_image")).withItalic(false).withColor(0xFFFFFF))))
                                 .addLine(Component.literal("                       ").append(Component.literal("4").withStyle(style -> style.withFont(Confluence.asResource("paper_image")).withItalic(false).withColor(0xFFFFFF))))
                                 .addLine(Component.literal("                             ").append(Blocks.AMETHYST_BLOCK.getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
-                                .addLine(Component.literal("                             ").append(Blocks./* todo CHISELED_TUFF*/TUFF.getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
+                                .addLine(Component.literal("                             ").append(PortLib.CHISELED_TUFF.get().getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
                                 .addLine(CommonComponents.EMPTY)
                                 .addLine(Component.literal("                        ").append(Blocks.CRYING_OBSIDIAN.getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
                                 .addLine(CommonComponents.EMPTY)
-                                .addLine(Component.literal("                        ").append(Blocks./* todo CHISELED_TUFF*/TUFF.getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
+                                .addLine(Component.literal("                        ").append(PortLib.CHISELED_TUFF.get().getName().withStyle(style -> style.withFont(ResourceLocation.withDefaultNamespace("uniform")).withItalic(false).withColor(0x3A2509))))
                                 .addLine(CommonComponents.EMPTY)
                                 .addLine(CommonComponents.EMPTY)
                 ).apply(

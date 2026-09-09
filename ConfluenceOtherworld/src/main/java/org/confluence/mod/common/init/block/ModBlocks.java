@@ -33,6 +33,7 @@ import org.confluence.mod.common.block.natural.CursedFlameBlock;
 import org.confluence.mod.common.block.natural.herbs.*;
 import org.confluence.mod.common.init.ModFluids;
 import org.confluence.mod.common.init.item.ModItems;
+import org.mesdag.portlib.diff.Diff;
 import org.mesdag.portlib.registries.PortBlockRegistration;
 import org.mesdag.portlib.registries.PortDeferredBlock;
 import org.mesdag.portlib.registries.PortRegisterHandler;
@@ -157,6 +158,7 @@ public final class ModBlocks {
         return Blocks.OBSIDIAN.getExplosionResistance() + delta;
     }
 
+    @Diff
     public static BlockBehaviour.Properties tuffProperties() {
         return BlockBehaviour.Properties.of()
                 .mapColor(MapColor.TERRACOTTA_GRAY)
@@ -166,6 +168,7 @@ public final class ModBlocks {
                 .strength(1.5F, 6.0F);
     }
 
+    @Diff
     public static BlockBehaviour.Properties tuffBricksProperties() {
         return BlockBehaviour.Properties.of()
                 .mapColor(MapColor.TERRACOTTA_GRAY)

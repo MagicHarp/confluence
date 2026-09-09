@@ -112,13 +112,13 @@ public final class ModStacks {
                 appendComponent(blankCount(29), makeComponent(true, WRITE_COLOR, false, false, false, false, false, FONT_UNIFORM,
                         "block.minecraft.amethyst_block")),
                 appendComponent(blankCount(29), makeComponent(true, WRITE_COLOR, false, false, false, false, false, FONT_UNIFORM,
-                        "block.minecraft.chiseled_tuff")),
+                        "block.portlib.chiseled_tuff")),
                 EMPTY_LINE,
                 appendComponent(blankCount(24), makeComponent(true, WRITE_COLOR, false, false, false, false, false, FONT_UNIFORM,
                         "block.minecraft.crying_obsidian")),
                 EMPTY_LINE,
                 appendComponent(blankCount(24), makeComponent(true, WRITE_COLOR, false, false, false, false, false, FONT_UNIFORM,
-                        "block.minecraft.chiseled_tuff")),
+                        "block.portlib.chiseled_tuff")),
                 EMPTY_LINE,
                 EMPTY_LINE
         ));

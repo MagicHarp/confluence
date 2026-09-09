@@ -24,6 +24,7 @@ import org.confluence.lib.common.worldgen.structure.SimpleTemplatePiece;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModStructures;
 import org.confluence.mod.common.init.block.FunctionalBlocks;
+import org.mesdag.portlib.PortLib;
 
 import java.util.*;
 
@@ -225,7 +226,7 @@ public class MineTunnelsStructure extends Structure {
                     /* 9  */  Blocks.RAIL.defaultBlockState().setValue(RailBlock.SHAPE, RailShape.SOUTH_WEST),
                     /* 10 */  Blocks.RAIL.defaultBlockState().setValue(RailBlock.SHAPE, RailShape.SOUTH_EAST),
                     /* 11 */  Blocks.RAIL.defaultBlockState().setValue(RailBlock.SHAPE, RailShape.NORTH_WEST),
-                    /* 12 */  Blocks./*CHISELED_TUFF_BRICKS*/STONE.defaultBlockState(),
+                    /* 12 */  PortLib.CHISELED_TUFF_BRICKS.get().defaultBlockState(),
                     /* 13 */  Blocks.LEVER.defaultBlockState().setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.FLOOR),
                     /* 14 */  Blocks.SPRUCE_LOG.defaultBlockState(),
                     /* 15 */  Blocks.STONE_BRICKS.defaultBlockState(),
