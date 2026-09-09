@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeHooks;
 import org.confluence.lib.common.block.HorizontalDirectionalWithHorizontalTwoPartBlock;
 import org.confluence.lib.common.block.StateProperties;
 import org.confluence.lib.common.recipe.ArrayRecipeInput;
@@ -430,7 +431,7 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
             if (fuel.isEmpty()) {
                 return 0;
             } else {
-                return fuel.getBurnTime(getRecipeType()) / 2;
+                return ForgeHooks.getBurnTime(fuel, getRecipeType()) / 2;
             }
         }
 
@@ -521,7 +522,7 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
                 return itemStack.isEmpty() || (itemStack.is(stack.getItem()) && itemStack.getCount() + stack.getCount() <= stack.getMaxStackSize());
             } else {
                 ItemStack itemstack = getItem(FUEL_SLOT);
-                return stack.getBurnTime(getRecipeType()) > 0 || stack.is(Items.BUCKET) && !itemstack.is(Items.BUCKET);
+                return ForgeHooks.getBurnTime(stack, getRecipeType()) > 0 || stack.is(Items.BUCKET) && !itemstack.is(Items.BUCKET);
             }
         }
 
@@ -597,7 +598,6 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
 
         @Override
         public boolean isEmpty() {
-            // NonNullList 的长度是固定槽位数，不能用列表长度判断容器是否为空。
             for (ItemStack stack : getItems()) {
                 if (!stack.isEmpty()) {
                     return false;
@@ -608,30 +608,27 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
 
         @Override
         public ItemStack getItem(int slot) {
-            // 非基座半边也必须读取基座库存，否则菜单与漏斗会看到两份状态。
-            return getItems().get(slot);
+            return items.get(slot);
         }
 
         @Override
         public ItemStack removeItem(int slot, int amount) {
-            // ContainerHelper 返回实际取出的分割栈，并把剩余数量留在原槽位。
-            return ContainerHelper.removeItem(getItems(), slot, amount);
+            return ContainerHelper.removeItem(items, slot, amount);
         }
 
         @Override
         public ItemStack removeItemNoUpdate(int slot) {
-            // 取空槽位时用 EMPTY 替换，绝不能删除 NonNullList 元素并改变槽位编号。
-            return ContainerHelper.takeItem(getItems(), slot);
+            return ContainerHelper.takeItem(items, slot);
         }
 
         @Override
         public boolean stillValid(Player player) {
-            return Container.stillValidBlockEntity(getBasePart(), player);
+            return Container.stillValidBlockEntity(this, player);
         }
 
         @Override
         public void clearContent() {
-            getItems().clear();
+            items.clear();
         }
     }
 }

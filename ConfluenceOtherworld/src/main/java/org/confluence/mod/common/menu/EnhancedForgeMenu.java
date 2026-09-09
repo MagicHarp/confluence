@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.common.ForgeHooks;
 import org.confluence.lib.common.menu.ContainerResultSlot;
 import org.confluence.lib.common.menu.ForgeFuelSlot;
 
@@ -71,7 +72,7 @@ public abstract class EnhancedForgeMenu extends AbstractContainerMenu {
 
                 slot.onQuickCraft(itemstack1, itemstack);
             } else if (index > FUEL_SLOT) {
-                if (itemstack1.getBurnTime(getRecipeType()) > 0) {
+                if (ForgeHooks.getBurnTime(itemstack1, getRecipeType()) > 0) {
                     if (!moveItemStackTo(itemstack1, FUEL_SLOT, RESULT_SLOT, false)) {
                         return ItemStack.EMPTY;
                     }
