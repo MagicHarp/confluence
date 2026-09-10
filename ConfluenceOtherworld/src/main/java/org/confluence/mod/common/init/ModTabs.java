@@ -1774,6 +1774,9 @@ public final class ModTabs {
                         acceptAll(SpearItems.ITEMS, output, "spear");
                         acceptAll(LanceItems.ITEMS, output, "lance");
                         acceptAll(FlailItems.ITEMS, output, "flail");
+
+                        output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.WHIP_SWEEP.get(), 2));
+                        output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.MULTI_BOOMERANG.get(), 3));
                     })
                     .withTabsBefore(ARMORS.getId())
                     .build());
@@ -1863,6 +1866,7 @@ public final class ModTabs {
                         acceptAll(WhipItems.ITEMS, output);
                         acceptAll(LightPetItems.ITEMS, output);
                         acceptAll(PetItems.ITEMS, output);
+                        output.accept(LibEnchantmentUtils.enchantedBook(ModEnchantments.SUMMONER_PACT.get(), 3));
                     })
                     .withTabsBefore(MAGES.getId())
                     .build());

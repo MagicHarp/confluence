@@ -26,82 +26,82 @@ public class NpcEntities {
 
     public static final RegistryObject<EntityType<SimpleNPC>> GUIDE = register("guide", () -> Items.BOW,
             NPCCombatActions.ARROW,
-            builder -> builder.damage(8).defense(30).projectileSpeed(1.5).healthRegeneration(2));
+            builder -> builder.maxHealth(65).damage(3).defense(30).projectileSpeed(1.5).healthRegeneration(2));
     public static final RegistryObject<EntityType<SimpleNPC>> MERCHANT = register("merchant",
             ConsumableItems.THROWING_KNIVE,
             NPCCombatActions.thrown(ConsumableItems.THROWING_KNIVE::toStack, NPCProjectileEffects.NONE),
-            builder -> builder.damage(12).projectileSpeed(1.2));
+            builder -> builder.maxHealth(65).damage(4).projectileSpeed(1.2));
     public static final RegistryObject<EntityType<NurseNPC>> NURSE = register("nurse", NurseNPC::new,
             () -> Items.SPLASH_POTION,
             NPCCombatActions.thrown(() -> new ItemStack(Items.SPLASH_POTION), NPCProjectileEffects.POISON),
-            builder -> builder.damage(8).attackRange(5).attackInterval(35).projectileSpeed(1.1), 0.6F, 1.85F);
+            builder -> builder.maxHealth(65).damage(3).attackRange(5).attackInterval(35).projectileSpeed(1.1), 0.6F, 1.85F);
     public static final RegistryObject<EntityType<SimpleNPC>> DEMOLITIONIST = register("demolitionist",
             ConsumableItems.GRENADE,
             NPCCombatActions.thrown(ConsumableItems.GRENADE::toStack, NPCProjectileEffects.EXPLOSIVE),
-            builder -> builder.damage(20).attackRange(8).retreatRange(5).attackInterval(45)
+            builder -> builder.maxHealth(65).damage(6).attackRange(8).retreatRange(5).attackInterval(45)
                     .projectileSpeed(0.8));
     public static final RegistryObject<EntityType<SimpleNPC>> DYE_TRADER = register("dye_trader",
             SwordItems.EXOTIC_SCIMITAR, NPCCombatActions.MELEE,
-            builder -> builder.damage(11).attackRange(3).retreatRange(3).attackInterval(25));
+            builder -> builder.maxHealth(65).damage(3).attackRange(3).retreatRange(3).attackInterval(25));
     public static final RegistryObject<EntityType<AnglerNPC>> ANGLER = register("angler", AnglerNPC::new,
             ConsumableItems.FROST_DAGGERFISH,
             NPCCombatActions.thrown(ConsumableItems.FROST_DAGGERFISH::toStack, NPCProjectileEffects.NONE),
-            builder -> builder.projectileSpeed(1.3), 0.6F, 1.4F);
+            builder -> builder.maxHealth(65).projectileSpeed(1.3), 0.6F, 1.4F);
     public static final RegistryObject<EntityType<AnglerNPC>> FEMALE_ANGLER = register("female_angler", AnglerNPC::new,
             ConsumableItems.FROST_DAGGERFISH,
             NPCCombatActions.thrown(ConsumableItems.FROST_DAGGERFISH::toStack, NPCProjectileEffects.NONE),
             builder -> builder.projectileSpeed(1.3), 0.45F, 1.45F);
     public static final RegistryObject<EntityType<SimpleNPC>> ZOOLOGIST = register("zoologist", () -> Items.AIR,
             NPCCombatActions.MELEE,
-            builder -> builder.damage(15).attackRange(3).retreatRange(3).attackInterval(20));
+            builder -> builder.maxHealth(65).damage(4).attackRange(3).retreatRange(3).attackInterval(20));
     public static final RegistryObject<EntityType<DryadNPC>> DRYAD = register("dryad", DryadNPC::new, () -> Items.AIR,
             NPCCombatActions.DRYAD_WARD,
-            builder -> builder.damage(4).attackRange(18.75).retreatRange(4).attackInterval(200), 0.6F, 1.85F);
+            builder -> builder.maxHealth(65).damage(2).attackRange(18.75).retreatRange(4).attackInterval(200), 0.6F, 1.85F);
     public static final RegistryObject<EntityType<SimpleNPC>> PAINTER = register("painter", PaintItems.PAINTBRUSH,
             NPCCombatActions.thrown(PaintItems.PAINT::toStack, NPCProjectileEffects.NONE),
-            builder -> builder.damage(8).attackInterval(20).projectileSpeed(1.5));
+            builder -> builder.maxHealth(65).damage(3).attackInterval(20).projectileSpeed(1.5));
     public static final RegistryObject<EntityType<SimpleNPC>> ARMS_DEALER = register("arms_dealer",
             npc -> NPCCombatActions.isHardmode() ? GunItems.MINISHARK.get() : GunItems.FLINTLOCK_PISTOL.get(),
             NPCCombatActions.ARMS_DEALER,
-            builder -> builder.damage(24).attackRange(13).attackInterval(30).projectileSpeed(2));
+            builder -> builder.maxHealth(65).damage(7).attackRange(13).attackInterval(30).projectileSpeed(2));
     public static final RegistryObject<EntityType<SimpleNPC>> STYLIST = register("stylist",
             SwordItems.STYLISH_SCISSORS, NPCCombatActions.MELEE,
-            builder -> builder.attackRange(3).retreatRange(3).attackInterval(20));
+            builder -> builder.maxHealth(65).damage(4).attackRange(3).retreatRange(3).retreatRange(3).attackInterval(20));
     public static final RegistryObject<EntityType<SimpleNPC>> GOBLIN_TINKERER = register("goblin_tinkerer",
             ConsumableItems.SPIKY_BALL, NPCCombatActions.SPIKY_BALL,
-            builder -> builder.damage(15).attackRange(9).projectileSpeed(0.75));
+            builder -> builder.maxHealth(65).damage(4).attackRange(9).projectileSpeed(0.75));
     public static final RegistryObject<EntityType<SimpleNPC>> WITCH_DOCTOR = register("witch_doctor",
             GunItems.BLOWGUN,
             NPCCombatActions.thrown(() -> new ItemStack(Items.ARROW), NPCProjectileEffects.POISON),
-            builder -> builder.damage(20).attackRange(12).attackInterval(25).projectileSpeed(1.6));
+            builder -> builder.maxHealth(65).damage(6).attackRange(12).attackInterval(25).projectileSpeed(1.6));
     public static final RegistryObject<EntityType<SimpleNPC>> CLOTHIER = register("clothier",
             ManaWeaponItems.BOOK_OF_SKULLS, NPCCombatActions.SHADOWFLAME_SKULL,
-            builder -> builder.damage(16).attackRange(12).attackInterval(35).projectileSpeed(0.7));
+            builder -> builder.maxHealth(65).damage(5).attackRange(12).attackInterval(35).projectileSpeed(0.7));
     public static final RegistryObject<EntityType<MechanicNPC>> MECHANIC = register("mechanic", MechanicNPC::new,
             BoomerangItems.COMBAT_WRENCH, NPCCombatActions.COMBAT_WRENCH,
-            builder -> builder.damage(11).projectileSpeed(1.4), 0.6F, 1.85F);
+            builder -> builder.maxHealth(65).damage(3).projectileSpeed(1.4), 0.6F, 1.85F);
     public static final RegistryObject<EntityType<SimpleNPC>> PARTY_GIRL = register("party_girl",
             ConsumableItems.GRENADE,
             NPCCombatActions.thrown(ConsumableItems.GRENADE::toStack, NPCProjectileEffects.EXPLOSIVE),
-            builder -> builder.damage(30).attackRange(9).retreatRange(5).attackInterval(50)
+            builder -> builder.maxHealth(65).damage(8).attackRange(9).retreatRange(5).attackInterval(50)
                     .projectileSpeed(0.9));
     public static final RegistryObject<EntityType<SimpleNPC>> WIZARD = register("wizard",
             ManaWeaponItems.FLOWER_OF_FIRE, NPCCombatActions.FIREBALL,
-            builder -> builder.damage(18).attackRange(12).attackInterval(35).projectileSpeed(0.75));
+            builder -> builder.maxHealth(65).damage(5).attackRange(12).attackInterval(35).projectileSpeed(0.75));
     public static final RegistryObject<EntityType<SimpleNPC>> TAX_COLLECTOR = register("tax_collector",
             () -> Items.STICK, NPCCombatActions.MELEE,
-            builder -> builder.attackRange(3).retreatRange(3));
+            builder -> builder.maxHealth(65).damage(4).attackRange(3).retreatRange(3));
     public static final RegistryObject<EntityType<SimpleNPC>> TRUFFLE = register("truffle", () -> Items.AIR,
             NPCCombatActions.TRUFFLE_SPORES,
-            builder -> builder.attackRange(8).attackInterval(25).projectileSpeed(0.8));
+            builder -> builder.maxHealth(65).damage(4).attackRange(8).attackInterval(25).projectileSpeed(0.8));
     public static final RegistryObject<EntityType<TravelingMerchantNPC>> TRAVELING_MERCHANT = register(
             "traveling_merchant", TravelingMerchantNPC::new,
             npc -> NPCCombatActions.isHardmode() ? Items.BOW : GunItems.FLINTLOCK_PISTOL.get(),
             NPCCombatActions.TRAVELING_MERCHANT,
-            builder -> builder.attackRange(12).attackInterval(25).projectileSpeed(2), 0.6F, 1.85F);
+            builder -> builder.maxHealth(65).damage(4).attackRange(12).attackInterval(25).projectileSpeed(2), 0.6F, 1.85F);
     public static final RegistryObject<EntityType<OldManNPC>> OLD_MAN = register("old_man", OldManNPC::new,
             () -> Items.AIR, (npc, target, values) -> {},
-            builder -> builder.damage(0).attackRange(0).retreatRange(6).attackInterval(Integer.MAX_VALUE)
+            builder -> builder.maxHealth(65).damage(0).attackRange(0).retreatRange(6).attackInterval(Integer.MAX_VALUE)
                     .healthRegeneration(0),
             0.6F, 1.85F);
 

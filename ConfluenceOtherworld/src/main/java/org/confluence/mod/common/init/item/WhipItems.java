@@ -29,22 +29,22 @@ public final class WhipItems {
     /// 当前鞭节模型沿纵轴占四个像素，因此使用四像素间距首尾衔接。
     private static final int DEFAULT_SEGMENT_SPACING_PIXELS = 4;
 
-    public static final PortDeferredItem<BaseWhipItem> LEATHER_WHIP = register("leather_whip", 10.0F, 1.0F, 0.5F, 0.9F, 15, 200,
+    public static final PortDeferredItem<BaseWhipItem> LEATHER_WHIP = register("leather_whip", 7.0F, 1.0F, 0.5F, 0.9F, 15, 200,
             List.of(), List.of(context -> context.summon().addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100), context.owner())));
-    public static final PortDeferredItem<BaseWhipItem> SLUB_WHIP = register("slub_whip", 8.0F, 1.0F, 0.2F, 0.5F, 15, 300);
-    public static final PortDeferredItem<BaseWhipItem> RUBY_WHIP = register("ruby_whip", 12.7F, 1.0F, 0.5F, 0.8F, 15, 760);
-    public static final PortDeferredItem<BaseWhipItem> AMBER_WHIP = register("amber_whip", 12.7F, 1.0F, 0.5F, 0.8F, 15, 740);
-    public static final PortDeferredItem<BaseWhipItem> TOPAZ_WHIP = register("topaz_whip", 12.5F, 1.0F, 0.5F, 0.8F, 15, 700);
-    public static final PortDeferredItem<BaseWhipItem> JADE_WHIP = register("jade_whip", 12.6F, 1.0F, 0.5F, 0.8F, 15, 900);
-    public static final PortDeferredItem<BaseWhipItem> DIAMOND_WHIP = register("diamond_whip", 12.8F, 1.0F, 0.5F, 0.8F, 15, 1000);
-    public static final PortDeferredItem<BaseWhipItem> SAPPHIRE_WHIP = register("sapphire_whip", 12.6F, 1.0F, 0.5F, 0.8F, 15, 720);
-    public static final PortDeferredItem<BaseWhipItem> AMETHYST_WHIP = register("amethyst_whip", 12.5F, 1.0F, 0.5F, 0.8F, 15, 700);
-    public static final PortDeferredItem<BaseWhipItem> SWAMP_WHIP = register("swamp_whip", 16.0F, 2.0F, 0.6F, 1.6F, 15, 1200,
+    public static final PortDeferredItem<BaseWhipItem> SLUB_WHIP = register("slub_whip", 5.0F, 1.0F, 0.2F, 0.5F, 15, 300);
+    public static final PortDeferredItem<BaseWhipItem> RUBY_WHIP = register("ruby_whip", 9.7F, 1.0F, 0.5F, 0.8F, 15, 760);
+    public static final PortDeferredItem<BaseWhipItem> AMBER_WHIP = register("amber_whip", 9.7F, 1.0F, 0.5F, 0.8F, 15, 740);
+    public static final PortDeferredItem<BaseWhipItem> TOPAZ_WHIP = register("topaz_whip", 9.5F, 1.0F, 0.5F, 0.8F, 15, 700);
+    public static final PortDeferredItem<BaseWhipItem> JADE_WHIP = register("jade_whip", 9.6F, 1.0F, 0.5F, 0.8F, 15, 900);
+    public static final PortDeferredItem<BaseWhipItem> DIAMOND_WHIP = register("diamond_whip", 9.8F, 1.0F, 0.5F, 0.8F, 15, 1000);
+    public static final PortDeferredItem<BaseWhipItem> SAPPHIRE_WHIP = register("sapphire_whip", 9.6F, 1.0F, 0.5F, 0.8F, 15, 720);
+    public static final PortDeferredItem<BaseWhipItem> AMETHYST_WHIP = register("amethyst_whip", 9.5F, 1.0F, 0.5F, 0.8F, 15, 700);
+    public static final PortDeferredItem<BaseWhipItem> SWAMP_WHIP = register("swamp_whip", 13.0F, 2.0F, 0.6F, 1.6F, 15, 1200,
             context -> context.target().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40), context.owner()));
-    public static final PortDeferredItem<BaseWhipItem> SNAPTHORN = register("snapthorn", 18.0F, 3.0F, 0.7F, 1.85F, 15, 3600,
+    public static final PortDeferredItem<BaseWhipItem> SNAPTHORN = register("snapthorn", 15.0F, 3.0F, 0.7F, 1.85F, 15, 3600,
             context -> context.target().addEffect(new MobEffectInstance(MobEffects.POISON, 60, 1), context.owner()));
-    public static final PortDeferredItem<BaseWhipItem> SPINAL_TAP = register("spinal_tap", 29.0F, 4.0F, 0.8F, 1.6F, 13, 3600);
-    public static final PortDeferredItem<BaseWhipItem> FIRECRACKER = register("firecracker", 37.0F, 0.0F, 0.5F, 1.85F, 15, 3600,
+    public static final PortDeferredItem<BaseWhipItem> SPINAL_TAP = register("spinal_tap", 26.0F, 4.0F, 0.8F, 1.6F, 13, 3600);
+    public static final PortDeferredItem<BaseWhipItem> FIRECRACKER = register("firecracker", 34.0F, 0.0F, 0.5F, 1.85F, 15, 3600,
             context -> context.target().addEffect(new MobEffectInstance(ModEffects.HELLFIRE.get(), 40), context.owner()));
 
     private WhipItems() {}
