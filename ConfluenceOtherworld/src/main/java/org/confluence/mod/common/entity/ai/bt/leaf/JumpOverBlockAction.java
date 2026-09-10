@@ -27,7 +27,7 @@ public final class JumpOverBlockAction extends BTNode {
         Path path = mob.getNavigation().getPath();
         if (path == null || path.getNodeCount() <= path.getNextNodeIndex() + 1)
             return BTStatus.FAILURE;
-        AttributeInstance jumpStrength = mob.getAttribute(Attributes.JUMP_STRENGTH);
+        AttributeInstance jumpStrength = mob.getAttribute(Attributes.JUMP_STRENGTH_1211);
         double jumpHeight = (jumpStrength == null ? 0.42D : jumpStrength.getBaseValue()) * 4.0D;
         int nextY = path.getNextNode().y;
         if (nextY <= mob.getY() || nextY >= mob.getY() + jumpHeight) return BTStatus.FAILURE;

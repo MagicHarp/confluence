@@ -50,7 +50,7 @@ public class ReallySmall extends SecretSeed {
         if (instance != null) {
             instance.addOrReplacePermanentModifier(div8);
         }
-        instance = player.getAttribute(Attributes.JUMP_STRENGTH);
+        instance = player.getAttribute(Attributes.JUMP_STRENGTH_1211);
         if (instance != null) {
             instance.addOrReplacePermanentModifier(div8);
         }

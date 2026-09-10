@@ -14,11 +14,11 @@ var projectName = [
         "PortLib"
 ]
 
-version = mod_version + "-alpha" + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
+version = mod_version + "-alpha+" + minecraft_version + "-${new SimpleDateFormat("yyMMdd").format(new Date())}"
 group = mod_group_id
 
 base {
-    archivesName = "ConfluenceOtherworld"
+    archivesName = "ConfluenceOtherworld-forge"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -190,8 +190,11 @@ repositories {
 dependencies {
     projectName.forEach { name ->
         modImplementation(project(":" + name))
-        jarJar(project(":" + name))
+        if ("PortLib" != name) {
+            jarJar(project(":" + name))
+        }
     }
+    interfaceInjectionData("org.mesdag:PortLib:${portlib_version}")
 
     modImplementation("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     modCompileOnly("com.eliotlash.mclib:mclib:20")
@@ -212,7 +215,6 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3"))
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    interfaceInjectionData("org.mesdag:PortLib:${portlib_version}")
 }
 
 mixin {

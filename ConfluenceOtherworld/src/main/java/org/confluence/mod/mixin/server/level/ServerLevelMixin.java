@@ -3,6 +3,7 @@ package org.confluence.mod.mixin.server.level;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LightningBolt;
 import org.confluence.lib.mixed.SelfGetter;
@@ -11,16 +12,15 @@ import org.confluence.mod.common.entity.AccumulatingEnergyEntity;
 import org.confluence.mod.common.init.entity.ModEntities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin implements SelfGetter<ServerLevel> {
-    @ModifyArg(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I", ordinal = 0))
-    private int modifyFrequency(int bound) {
+    @WrapOperation(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I", ordinal = 0))
+    private int modifyFrequency(RandomSource instance, int i, Operation<Integer> original) {
         if (CommonConfigs.TERRA_STYLE_LIGHTNING_BOLT.get()) {
-            return Math.max(bound / CommonConfigs.TERRA_STYLE_LIGHTNING_BOLT_FREQUENCY_MULTIPLIER.get(), 1);
+            i = Math.max(i / CommonConfigs.TERRA_STYLE_LIGHTNING_BOLT_FREQUENCY_MULTIPLIER.get(), 1);
         }
-        return bound;
+        return original.call(instance, i);
     }
 
     @WrapOperation(method = "tickChunk", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z", ordinal = 1))

@@ -26,18 +26,6 @@ public abstract class CreateWorldScreenMixin {
 
     @Mixin(targets = "net.minecraft.client.gui.screens.worldselection.CreateWorldScreen$WorldTab")
     public abstract static class WorldTabMixin {
-//        @Inject(method = "<init>", at = @At("TAIL"))
-//        private void setSeedEditorWidthAndAddButton(
-//                CreateWorldScreen this$0,
-//                CallbackInfo ci,
-//                @Local(ordinal = 1) GridLayout.RowHelper gridlayout$rowhelper1 // 不要用name
-//        ) {
-//            seedEdit.setWidth(seedEdit.getWidth() - seedEdit.getHeight() - 2);
-//            gridlayout$rowhelper1.addChild(new PortImageButton(0, 0, 20, 20, SecretSeedsSelectionScreen.SPRITES, button -> {
-//                button.setFocused(false);
-//                this$0.getMinecraft().pushGuiLayer(new SecretSeedsSelectionScreen(seedEdit, this$0.getUiState()));
-//            }), LayoutSettings.defaults().paddingLeft(-4));
-//        }
         @WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/layouts/GridLayout$RowHelper;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;Lnet/minecraft/client/gui/layouts/LayoutSettings;)Lnet/minecraft/client/gui/layouts/LayoutElement;"))
         private <T extends LayoutElement> T setSeedEditorWidthAndAddButton(GridLayout.RowHelper instance, T child, LayoutSettings layoutSettings, Operation<T> original, CreateWorldScreen this$0) {
             EditBox seedEdit = (EditBox) child;

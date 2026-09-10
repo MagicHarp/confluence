@@ -1,7 +1,7 @@
 package org.confluence.mod.common.entity.monster;
 
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -195,7 +195,7 @@ public final class CreatureAttributeBuilder extends AttributeSupplier.Builder {
     ///
     /// @param value 跳跃初始向上速度的属性值，实际高度还受重力和跳跃逻辑影响
     public CreatureAttributeBuilder jumpStrength(double value) {
-        add(Attributes.JUMP_STRENGTH, value);
+        add(Attributes.JUMP_STRENGTH_1211.value(), value);
         return this;
     }
 
