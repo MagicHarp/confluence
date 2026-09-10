@@ -33,7 +33,7 @@ public abstract class WorldSelectionList$WorldListEntryMixin {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void loadSecretFlag(CallbackInfo ci, @Local(argsOnly = true) LevelSummary summary) {
         try (LevelStorageSource.LevelStorageAccess access = minecraft.getLevelSource().validateAndCreateAccess(summary.getLevelId())) {
-            CompoundTag tag = NbtIo.readCompressed(access.getLevelPath(LevelResource.LEVEL_DATA_FILE).toFile());
+            CompoundTag tag = NbtIo.readCompressed(access.getLevelPath(LevelResource.LEVEL_DATA_FILE).toFile()).getCompound("Data");
             this.confluence$secretFlag = tag.getCompound("WorldGenSettings").getLong("secret_flag");
         } catch (Exception ignored) {}
     }
