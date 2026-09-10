@@ -15,17 +15,6 @@
 						}
 					}
 				},
-				"phaseblade": {
-					"scale": {
-						"0.0": {
-							"vector": [1, 1, 1]
-						},
-						"0.5": {
-							"vector": [1, 0, 1],
-							"easing": "easeOutExpo"
-						}
-					}
-				},
 				"handle": {
 					"scale": {
 						"0.0": {
@@ -33,6 +22,17 @@
 						},
 						"0.5": {
 							"vector": [1, 1, 1]
+						}
+					}
+				},
+				"phasesaber": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.5": {
+							"vector": [1, 0, 1],
+							"easing": "easeOutExpo"
 						}
 					}
 				}
@@ -52,7 +52,7 @@
 						}
 					}
 				},
-				"phaseblade": {
+				"phasesaber": {
 					"scale": {
 						"0.0": {
 							"vector": [1, 0, 1]
