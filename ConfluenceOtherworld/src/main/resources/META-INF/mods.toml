@@ -32,13 +32,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "terrablender"
-mandatory = true
-versionRange = "[${terrablender_version},)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.${mod_id}]]
 modId = "portlib"
 mandatory = true
 versionRange = "[${portlib_version},)"

@@ -208,7 +208,6 @@ dependencies {
     modImplementation jarJar("nowebsite.makertechno.the_trackers:TheTrackers:${the_trackers_version}")
 
     modImplementation("top.theillusivec4.curios:curios-forge:${curios_version}")
-    modImplementation('com.github.glitchfiend:TerraBlender-forge:' + minecraft_version + '-' + terrablender_version)
 
 //    implementation jarJar(files('libs/LanguageFixer.jar'))
 
@@ -242,7 +241,6 @@ tasks.withType(ProcessResources).configureEach {
             mod_authors            : mod_authors,
             mod_description        : mod_description,
             curios_version         : curios_version,
-            terrablender_version   : terrablender_version,
             geckolib_version       : geckolib_version,
             portlib_version        : portlib_version
     ]

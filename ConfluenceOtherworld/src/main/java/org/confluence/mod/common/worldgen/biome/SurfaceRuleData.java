@@ -9,7 +9,9 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import org.confluence.mod.common.init.ModBiomes;
 import org.confluence.mod.common.init.block.NatureBlocks;
 
-// todo terrablender
+/// 本模组的地表规则定义。规则在 {@link org.confluence.mod.common.init.ModBiomes#registerRegionAndSurface()}
+/// 里按维度类别登记到 {@link org.confluence.mod.common.worldgen.biome.injector.SurfaceRuleRegistry}，
+/// 由 `NoiseBasedChunkGenerator` 的注入点拼到真正的原版规则源之前。
 public final class SurfaceRuleData {
     private static SurfaceRules.RuleSource state(Block block) {
         return SurfaceRules.state(block.defaultBlockState());
@@ -20,7 +22,6 @@ public final class SurfaceRuleData {
 
     private static final SurfaceRules.ConditionSource grassSeed = SurfaceRules.verticalGradient("minecraft:bedrock_floor", VerticalAnchor.absolute(48), VerticalAnchor.absolute(52));
     private static final SurfaceRules.ConditionSource deepslateSeed = SurfaceRules.verticalGradient("minecraft:deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8));
-    private static final SurfaceRules.ConditionSource mushroomSeed = SurfaceRules.verticalGradient("minecraft:deepslate", VerticalAnchor.absolute(40), VerticalAnchor.absolute(42));
     private static final SurfaceRules.ConditionSource sandSeed = SurfaceRules.verticalGradient("minecraft:deepslate", VerticalAnchor.absolute(20), VerticalAnchor.absolute(25));
     private static final SurfaceRules.ConditionSource redSandSeed = SurfaceRules.verticalGradient("minecraft:deepslate", VerticalAnchor.absolute(74), VerticalAnchor.absolute(76));
     private static final SurfaceRules.ConditionSource iceSeed = SurfaceRules.verticalGradient("minecraft:deepslate", VerticalAnchor.absolute(20), VerticalAnchor.absolute(35));
@@ -95,9 +96,16 @@ public final class SurfaceRuleData {
                         )
                 ),
 
-                // 发光蘑菇地
+                // 发光蘑菇地：整片变成蘑菇泥（泰拉瑞亚的发光蘑菇地也是泥地 + 蘑菇草）。
+                //
+                // 这里原本还叠了一层 `mushroomSeed`（y <= 42）作为硬高度闸。那是多余的，而且有害：
+                // `SurfaceSystem` 每处理一个 y 都会重建 `Context.biome` 供应器
+                // （见 SurfaceRules$Context#updateY），所以 `isBiome` 是**逐 y 采样**的，
+                // 地表永远不会命中蘑菇群系 —— 群系自己已经被 depth 闸限在地表以下了。
+                // 而高山地形里蘑菇群系会延伸得比 y=42 更高，那层闸会把同一个群系切成
+                // 「有蘑菇泥」和「只有群系名」两半。保留 `not(deepslateSeed)` 让最底层深板岩照常出现。
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.GLOWING_MUSHROOM),
-                        SurfaceRules.ifTrue(mushroomSeed,
+                        SurfaceRules.ifTrue(SurfaceRules.not(deepslateSeed),
                                 SurfaceRules.ifTrue(SurfaceRules.not(bedrockFloorSeed),
                                         SurfaceRules.sequence(
                                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, mushroomSurface()),

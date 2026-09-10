@@ -1,7 +1,6 @@
 package org.confluence.mod.util;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -78,34 +76,33 @@ public final class OverworldUtils {
         pineTree = null;
     }
 
+    /// 主世界群系的收尾替换。由 {@code ConfluenceBiomeInjector} 的处理器在区域注入之后调用。
+    ///
+    /// - 「不是蜜蜂」密种：把非豁免群系随机换成丛林群系；
+    /// - 出生点保护：出生点 128 格内的邪恶群系换成平原。
+    ///
+    /// @param jungleGetter 惰性求值的丛林群系表（来自 `possibleBiomes`，首次使用时才计算）
     @ApiStatus.Internal
-    public static Holder<Biome> replaceBiome(
-            MultiNoiseBiomeSource biomeSource, // <- 不要删
+    public static Holder<Biome> postProcess(
             int x, int y, int z,
-            Holder<Biome> original,
-            Supplier<List<Holder<Biome>>> jungleGetter,
-            Supplier<Pair<Holder<Biome>, Holder<Biome>>> biomePairGetter
+            Holder<Biome> biome,
+            Supplier<List<Holder<Biome>>> jungleGetter
     ) {
-        if (!uninitialized) {
-            if (notTheBees) {
-                List<Holder<Biome>> jungle = jungleGetter.get();
-                if (!jungle.isEmpty()) {
-                    original = NotTheBees.replaceBiome(x, y, z, original, jungle);
-                }
-            } else {
-                Pair<Holder<Biome>, Holder<Biome>> pair = biomePairGetter.get();
-                if (pair != null && original == pair.getFirst()) {
-                    original = pair.getSecond();
-                }
-            }
-            if (original.is(ModBiomes.THE_CORRUPTION) || original.is(ModBiomes.THE_CRIMSON)) {
-                ServerLevelData levelData = server.getWorldData().overworldData();
-                if (Mth.lengthSquared(levelData.getXSpawn() - QuartPos.toBlock(x), levelData.getZSpawn() - QuartPos.toBlock(z)) <= 128 * 128) {
-                    original = plains;
-                }
+        if (uninitialized) return biome;
+        Holder<Biome> result = biome;
+        if (notTheBees) {
+            List<Holder<Biome>> jungle = jungleGetter.get();
+            if (!jungle.isEmpty()) {
+                result = NotTheBees.replaceBiome(x, y, z, result, jungle);
             }
         }
-        return original;
+        if (result.is(ModBiomes.THE_CORRUPTION) || result.is(ModBiomes.THE_CRIMSON)) {
+            ServerLevelData levelData = server.getWorldData().overworldData();
+            if (Mth.lengthSquared(levelData.getXSpawn() - QuartPos.toBlock(x), levelData.getZSpawn() - QuartPos.toBlock(z)) <= 128 * 128) {
+                result = plains;
+            }
+        }
+        return result;
     }
 
     @ApiStatus.Internal

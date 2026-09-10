@@ -14,11 +14,21 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.confluence.mod.common.init.ModBiomes;
+import org.confluence.mod.common.worldgen.biome.injector.BiomeSourceHandler;
 import org.confluence.mod.mixin.world.level.dimension.DimensionTypeAccessor;
 
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-// todo 1.3.0
+/// 末地群系注入。
+///
+/// 末地不使用气候参数（{@code TheEndBiomeSource} 直接按噪声阈值挑群系），所以不走
+/// {@link org.confluence.mod.common.worldgen.biome.injector.BiomeRegion} 的参数盒子模型，
+/// 而是直接把一个 {@link BiomeSourceHandler} 挂到 {@code TheEndBiomeSource} 实例上。
+///
+/// 注意：{@link #open(MinecraftServer)} / {@link #close()} 目前**没有**被调用
+/// （{@code ServerEvents} 里的调用一直是注释状态），因此注册进去的处理器是纯透传，
+/// 末地生成行为与替换 TerraBlender 之前完全一致。要启用只需恢复那两处调用。
 public class TheEndBiomeHolder {
     private static Holder<Biome> chorusForest;
     private static Holder<Biome> inverseForest;
@@ -69,9 +79,17 @@ public class TheEndBiomeHolder {
         initialized = false;
     }
 
-    public static Stream<Holder<Biome>> addConfluenceBiomes(Stream<Holder<Biome>> original) {
-        if (initialized) {
-            Stream<Holder<Biome>> myBiomes = Stream.of(
+    private static final BiomeSourceHandler HANDLER = new BiomeSourceHandler() {
+        @Override
+        public Holder<Biome> resolve(int x, int y, int z, Climate.Sampler sampler, Supplier<Holder<Biome>> original) {
+            if (!initialized) return original.get();
+            return replaceBiome(x, y, z, sampler, original.get());
+        }
+
+        @Override
+        public Stream<Holder<Biome>> extraBiomes() {
+            if (!initialized) return Stream.empty();
+            return Stream.of(
                     chorusForest,
                     inverseForest,
                     moonlightForest,
@@ -81,9 +99,11 @@ public class TheEndBiomeHolder {
                     moonlitDrySea,
                     darkMoonFlats
             );
-            return Stream.concat(original, myBiomes);
         }
-        return original;
+    };
+
+    public static BiomeSourceHandler handler() {
+        return HANDLER;
     }
 
     public static Holder<Biome> replaceBiome(int x, int y, int z, Climate.Sampler sampler, Holder<Biome> original) {

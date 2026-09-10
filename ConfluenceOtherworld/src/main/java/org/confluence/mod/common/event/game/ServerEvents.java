@@ -9,6 +9,7 @@ import org.confluence.mod.common.block.functional.network.NetworkService;
 import org.confluence.mod.common.block.functional.network.PathService;
 import org.confluence.mod.common.data.saved.GlobalCloakData;
 import org.confluence.mod.common.gameevent.GameEventSystem;
+import org.confluence.mod.common.worldgen.biome.injector.ConfluenceBiomeInjector;
 import org.confluence.mod.util.OverworldUtils;
 import org.mesdag.portlib.event.PortEventHandler;
 import org.mesdag.portlib.event.PortEventPriority;
@@ -27,6 +28,9 @@ public final class ServerEvents {
         MinecraftServer server = event.getServer();
 //        TheEndBiomeHolder.open(server);
         OverworldUtils.open(server);
+        // 必须在 loadLevel() 之前完成：原版第一次读取 possibleBiomes() 发生在
+        // createLevels() 里，晚于本事件。详见 ConfluenceBiomeInjector#install。
+        ConfluenceBiomeInjector.install(server);
     }
 
     public static void serverStarted(ServerStartedEvent event) {
@@ -37,6 +41,7 @@ public final class ServerEvents {
     public static void serverStopping(ServerStoppingEvent event) {
         GameEventSystem.INSTANCE.close(event.getServer());
 //        TheEndBiomeHolder.close();
+        ConfluenceBiomeInjector.uninstall();
         OverworldUtils.close();
     }
 

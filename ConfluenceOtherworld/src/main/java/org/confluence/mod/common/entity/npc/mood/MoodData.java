@@ -85,7 +85,6 @@ public final class MoodData {
             }
 
             moodTable = newTable.isEmpty() ? EMPTY : Map.copyOf(newTable);
-            Confluence.LOGGER.info("Loaded {} NPC mood tables", moodTable.size());
         }
     }
 }

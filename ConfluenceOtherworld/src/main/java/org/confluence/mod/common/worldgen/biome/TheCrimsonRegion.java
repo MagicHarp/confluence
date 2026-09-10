@@ -1,41 +1,51 @@
 package org.confluence.mod.common.worldgen.biome;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
+import org.confluence.mod.Confluence;
 import org.confluence.mod.common.init.ModBiomes;
-import terrablender.api.Region;
-import terrablender.api.RegionType;
-import terrablender.api.VanillaParameterOverlayBuilder;
+import org.confluence.mod.common.worldgen.biome.injector.BiomeRegion;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
-import static terrablender.api.ParameterUtils.*;
+import static org.confluence.mod.common.worldgen.biome.injector.ParameterBuilder.*;
 
 /// 血腥之地的主世界噪声区域。
 ///
-/// 它覆盖偏暖到炎热、内陆、地表至地下的大范围湿度组合，但只接管第 4—5 档侵蚀度。
-/// 这使血腥之地与腐化之地在参数空间中保持不同形状，而不是单纯随机替换任意原版群系。
-public final class TheCrimsonRegion extends Region {
-    public TheCrimsonRegion(ResourceLocation name, int weight) {
-        super(name, RegionType.OVERWORLD, weight);
+/// 与 {@link TheCorruptionRegion} 使用**完全相同**的参数盒子，理由见那边的文档：
+/// 一个世界只会出现两种邪恶群系之一，盒子不承担区分职责，分布由区域分配器的噪声带决定。
+/// 两者盒子一致也保证了「腐化世界」与「猩红世界」的地形骨架完全一致，
+/// 只差群系本身（贴图、音效、刷怪、地物）。
+public final class TheCrimsonRegion implements BiomeRegion {
+    public static final ResourceLocation ID = Confluence.asResource("the_crimson");
+
+    @Override
+    public ResourceLocation id() {
+        return ID;
     }
 
     @Override
-    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-        VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
-        new ParameterPointListBuilder()
-                .temperature(Temperature.span(Temperature.WARM, Temperature.HOT))
-                .humidity(Humidity.span(Humidity.ARID, Humidity.HUMID))
-                .continentalness(Continentalness.INLAND)
-                .erosion(Erosion.EROSION_4, Erosion.EROSION_5)
-                .depth(Depth.UNDERGROUND, Depth.SURFACE)
-                .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.FULL_RANGE)
-                .build()
-                .forEach(point -> builder.add(point, ModBiomes.THE_CRIMSON));
-        builder.build().forEach(mapper);
+    public int weight() {
+        return 1;
+    }
+
+    @Override
+    public Set<ResourceKey<Biome>> biomes() {
+        return Set.of(ModBiomes.THE_CRIMSON);
+    }
+
+    @Override
+    public void addBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
+        addColumn(consumer,
+                Temperature.FULL_RANGE,
+                Humidity.FULL_RANGE,
+                Continentalness.LAND,
+                Erosion.FULL_RANGE,
+                Weirdness.FULL_RANGE,
+                ModBiomes.THE_CRIMSON);
     }
 }
