@@ -27,7 +27,6 @@ import org.confluence.mod.common.init.block.NatureBlocks;
 import org.confluence.mod.common.init.entity.*;
 import org.confluence.mod.common.init.item.*;
 import org.confluence.mod.common.loot.DateLootItemCondition;
-import org.confluence.mod.common.loot.EntityVariantLootItemCondition;
 import org.confluence.mod.common.loot.GamePhaseLootItemCondition;
 import org.confluence.mod.mixin.data.loot.EntityLootSubProviderAccessor;
 import org.confluence.terra_curio.common.init.TCItems;
@@ -477,7 +476,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
                         .add(EmptyLootItem.emptyItem().setWeight(99))
                 )
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.CORRUPTION_CARRY).setWeight(19).setQuality(1))
+                        .add(LootTableReference.lootTableReference(ModLootTables.CORRUPTION_CARRY).setWeight(19).setQuality(1))
                         .add(EmptyLootItem.emptyItem().setWeight(9981))
                 )
         );
@@ -809,7 +808,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         );
         add(MonsterEntities.PINK_SLIME.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.SLIME_CARRY))
+                        .add(LootTableReference.lootTableReference(ModLootTables.SLIME_CARRY))
                         .add(EmptyLootItem.emptyItem().setWeight(19))
                 )
                 .withPool(LootPool.lootPool()
@@ -827,7 +826,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         );
         add(MonsterEntities.SWAMP_SLIME.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.SLIME_CARRY))
+                        .add(LootTableReference.lootTableReference(ModLootTables.SLIME_CARRY))
                         .add(EmptyLootItem.emptyItem().setWeight(19))
                 )
                 .withPool(LootPool.lootPool()
@@ -1266,7 +1265,7 @@ public final class EntitySubProvider extends EntityLootSubProvider {
         LootItemConditionalFunction.Builder<?> random0To1 = LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F));
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.SLIME_CARRY))
+                        .add(LootTableReference.lootTableReference(ModLootTables.SLIME_CARRY))
                         .add(EmptyLootItem.emptyItem().setWeight(19))
                 )
                 .withPool(LootPool.lootPool()

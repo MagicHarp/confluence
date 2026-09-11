@@ -7,9 +7,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
-import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
@@ -774,7 +774,7 @@ public record GiftSubProvider() implements LootTableSubProvider {
         // 草药袋内部池
         output.accept(Confluence.asResource("gameplay/herb_bag"), LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.HERB_BAG_INNER))
+                        .add(LootTableReference.lootTableReference(ModLootTables.HERB_BAG_INNER))
                         .apply(count2To5)
                 )
         );
@@ -866,18 +866,18 @@ public record GiftSubProvider() implements LootTableSubProvider {
         );
         output.accept(ModLootTables.QUESTS_AFTER_10, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.QUESTS_1)).when(beforeWallOfFlesh)
+                        .add(LootTableReference.lootTableReference(ModLootTables.QUESTS_1)).when(beforeWallOfFlesh)
                 )
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.QUESTS_2)).when(afterWallOfFlesh)
+                        .add(LootTableReference.lootTableReference(ModLootTables.QUESTS_2)).when(afterWallOfFlesh)
                 )
         );
         output.accept(ModLootTables.QUESTS_AFTER_75, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.QUESTS_3)).when(beforeWallOfFlesh)
+                        .add(LootTableReference.lootTableReference(ModLootTables.QUESTS_3)).when(beforeWallOfFlesh)
                 )
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.QUESTS_4)).when(afterWallOfFlesh)
+                        .add(LootTableReference.lootTableReference(ModLootTables.QUESTS_4)).when(afterWallOfFlesh)
                 )
         );
         // 渔夫奖励列表其二  肉前，第十个任务后

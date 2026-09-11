@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -235,7 +235,7 @@ public final class ChestSubProvider implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(FishingPoleItems.FIBERGLASS_FISHING_POLE).setWeight(7))
                 )
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.LIVING_MAHOGANY_CARRY).setWeight(2))
+                        .add(LootTableReference.lootTableReference(ModLootTables.LIVING_MAHOGANY_CARRY).setWeight(2))
                         .add(LootItem.lootTableItem(MinecartItems.BEE_MINECART))
                         .add(EmptyLootItem.emptyItem().setWeight(7))
                 )

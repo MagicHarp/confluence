@@ -9,9 +9,9 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.predicates.*;
@@ -109,7 +109,7 @@ public class AddEntityLootConfluenceSubProvider extends EntityLootSubProvider im
         ));
         entries.add(new AddedEntityLoot(EntityType.SLIME, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.SLIME_CARRY).setWeight(1))
+                        .add(LootTableReference.lootTableReference(ModLootTables.SLIME_CARRY).setWeight(1))
                         .add(EmptyLootItem.emptyItem().setWeight(19)))
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(TCItems.COMPASS).setWeight(2))

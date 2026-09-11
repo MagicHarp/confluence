@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
@@ -260,15 +260,15 @@ public record FishingSubProvider() implements LootTableSubProvider {
         output.accept(ModLootTables.FISHING, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.JUNK).setWeight(5).setQuality(-1))
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.TREASURE)
+                        .add(LootTableReference.lootTableReference(ModLootTables.JUNK).setWeight(5).setQuality(-1))
+                        .add(LootTableReference.lootTableReference(ModLootTables.TREASURE)
                                 .setWeight(10)
                                 .setQuality(1)
                                 .when(LootItemEntityPropertyCondition.hasProperties(
                                         LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(FishingHookPredicate.inOpenWater(true))
                                 ))
                         )
-                        .add(DynamicLoot.dynamicEntry(ModLootTables.FISH).setWeight(85).setQuality(-1))
+                        .add(LootTableReference.lootTableReference(ModLootTables.FISH).setWeight(85).setQuality(-1))
                 )
         );
         // 匣子
