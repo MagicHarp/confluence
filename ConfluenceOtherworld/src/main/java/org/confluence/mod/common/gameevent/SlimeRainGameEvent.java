@@ -45,7 +45,6 @@ public enum SlimeRainGameEvent implements GameEvent {
     public static final ResourceKey<SlimeRainGameEvent> KEY = GameEvent.createKey(Confluence.asResource("slime_rain"));
     public static final String ENTITY_TAG = "spawn_during_slime_rain";
 
-    private static final int _12$00 = LibDateUtils.getDayTime(12, 0);
     private transient MinecraftServer server;
     private transient ServerLevel level;
     private boolean started;
@@ -175,7 +174,7 @@ public enum SlimeRainGameEvent implements GameEvent {
             return true;
         }
         int invChance = 0;
-        if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, _12$00, level) && // 时间
+        if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, LibDateUtils._12$00, level) && // 时间
                 !level.isRaining() && !BloodMoonGameEvent.INSTANCE.started() // 事件
         ) {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {

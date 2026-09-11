@@ -4,11 +4,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.boss.WallOfFlesh;
 import org.confluence.mod.common.entity.boss.WallOfFleshMouth;
 import org.confluence.mod.common.init.ModEffects;
+import org.confluence.mod.util.OverworldUtils;
 import org.mesdag.portlib.wrapper.world.effect.PortMobEffect;
 
 /// 将逃离追逐区域的参战者拉回血肉墙前方。
@@ -41,7 +41,7 @@ public class TheTongueEffect extends PortMobEffect {
         }
 
         Vec3 targetPosition = mouth.position().add(wall.getForwardVector().scale(45.0));
-        if (living.level().dimension() == Level.NETHER && living.getY() < NETHER_GENERATION_HEIGHT && targetPosition.y >= NETHER_GENERATION_HEIGHT) {
+        if (living.level().dimension() == OverworldUtils.underworld() && living.getY() < NETHER_GENERATION_HEIGHT && targetPosition.y >= NETHER_GENERATION_HEIGHT) {
             targetPosition = targetPosition.add(0.0, -15.0, 0.0);
         }
         if (living.position().distanceTo(mouth.position()) > EXECUTION_DISTANCE) {

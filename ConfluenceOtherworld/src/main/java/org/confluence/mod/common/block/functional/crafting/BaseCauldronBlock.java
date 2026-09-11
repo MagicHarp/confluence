@@ -182,7 +182,7 @@ public class BaseCauldronBlock extends HorizontalDirectionalBlock implements Ent
                 Optional<CookingPotRecipe> recipeFor = blockEntity.cachedCheck.getRecipeFor(input, level);
                 if (recipeFor.isPresent()) {
                     CookingPotRecipe recipe = recipeFor.get();
-                    if (canResultInsert(blockEntity.items, blockEntity.getMaxStackSize(), recipe.getResultItem(null))) {
+                    if (canResultInsert(blockEntity.items, blockEntity.getMaxStackSize(), recipe.getResultItem(level.registryAccess()))) {
                         blockEntity.cookingTotalTime = recipe.getCookingTime();
                         if (++blockEntity.cookingProgress >= blockEntity.cookingTotalTime) {
                             blockEntity.items.get(CookingPotMenu.CONTAINER_SLOT).shrink(1);
@@ -213,16 +213,14 @@ public class BaseCauldronBlock extends HorizontalDirectionalBlock implements Ent
         private static boolean canResultInsert(NonNullList<ItemStack> inventory, int maxStackSize, ItemStack neoResult) {
             if (neoResult.isEmpty()) {
                 return false;
-            } else {
-                ItemStack oldResult = inventory.get(CookingPotMenu.RESULT_SLOT);
-                if (oldResult.isEmpty()) {
-                    return true;
-                } else if (!IPortItemStackExtension.isSameItemSameComponents(oldResult, neoResult)) {
-                    return false;
-                } else {
-                    return oldResult.getCount() + neoResult.getCount() <= maxStackSize && oldResult.getCount() + neoResult.getCount() <= oldResult.getMaxStackSize() || oldResult.getCount() + neoResult.getCount() <= neoResult.getMaxStackSize();
-                }
             }
+            ItemStack oldResult = inventory.get(CookingPotMenu.RESULT_SLOT);
+            if (oldResult.isEmpty()) {
+                return true;
+            } else if (!IPortItemStackExtension.isSameItemSameComponents(oldResult, neoResult)) {
+                return false;
+            }
+            return oldResult.getCount() + neoResult.getCount() <= maxStackSize && oldResult.getCount() + neoResult.getCount() <= oldResult.getMaxStackSize() || oldResult.getCount() + neoResult.getCount() <= neoResult.getMaxStackSize();
         }
 
         @Override
@@ -242,7 +240,6 @@ public class BaseCauldronBlock extends HorizontalDirectionalBlock implements Ent
 
         @Override
         public void clearContent() {
-            // 固定槽位列表只清空内容，不改变用于配方和菜单的槽位编号。
             items.clear();
         }
 
@@ -299,6 +296,5 @@ public class BaseCauldronBlock extends HorizontalDirectionalBlock implements Ent
         public int getContainerSize() {
             return items.size();
         }
-
     }
 }

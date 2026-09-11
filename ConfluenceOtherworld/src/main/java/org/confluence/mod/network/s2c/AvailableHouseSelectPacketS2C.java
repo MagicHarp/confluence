@@ -1,7 +1,7 @@
 package org.confluence.mod.network.s2c;
 
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Reference2BooleanMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -68,7 +68,7 @@ public record AvailableHouseSelectPacketS2C(boolean[] available) implements IPor
     }
 
     public static IPortPacket collectPacket(ServerPlayer player) {
-        Object2BooleanMap<EntityType<?>> details = NPCSpawner.INSTANCE.getRegionAliveDetails(new NPCSpawner.Region(player.chunkPosition()));
+        Reference2BooleanMap<EntityType<?>> details = NPCSpawner.INSTANCE.getRegionAliveDetails(new NPCSpawner.Region(player.chunkPosition()));
         boolean[] values = new boolean[size];
         for (int i = 0; i < size; i++) {
             EntityType<?> type = getTypes()[i];

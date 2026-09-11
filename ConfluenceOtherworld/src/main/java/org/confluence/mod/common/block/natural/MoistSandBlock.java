@@ -23,6 +23,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import org.confluence.mod.common.init.block.NatureBlocks;
 import org.confluence.mod.common.worldgen.feature.PlantPatchFeature;
+import org.confluence.mod.util.OverworldUtils;
 import org.mesdag.portlib.wrapper.sounds.PortSoundEvents;
 
 import java.util.List;
@@ -137,7 +138,7 @@ public class MoistSandBlock extends Block implements BonemealableBlock {
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        if (level.dimension() == Level.NETHER) {
+        if (level.dimension() == OverworldUtils.underworld()) {
             if (state.is(NatureBlocks.MOISTENED_RED_SAND_BLOCK.get())) {
                 level.setBlock(pos, Blocks.RED_SAND.defaultBlockState(), 3);
             } else if (state.is(NatureBlocks.MOISTENED_SAND_BLOCK.get())) {

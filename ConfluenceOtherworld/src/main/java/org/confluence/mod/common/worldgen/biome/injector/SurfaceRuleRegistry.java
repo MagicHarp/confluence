@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import org.confluence.mod.util.OverworldUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -128,8 +129,8 @@ public final class SurfaceRuleRegistry {
 
     @Nullable
     public static Category categoryOf(ResourceKey<Level> dimension) {
-        if (Level.OVERWORLD.equals(dimension)) return Category.OVERWORLD;
-        if (Level.NETHER.equals(dimension)) return Category.NETHER;
+        if (OverworldUtils.dimension().equals(dimension)) return Category.OVERWORLD;
+        if (OverworldUtils.underworld().equals(dimension)) return Category.NETHER;
         if (Level.END.equals(dimension)) return Category.END;
         return null;
     }

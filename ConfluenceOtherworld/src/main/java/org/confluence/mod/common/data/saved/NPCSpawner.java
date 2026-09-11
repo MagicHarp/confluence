@@ -1,6 +1,5 @@
 package org.confluence.mod.common.data.saved;
 
-import PortLib.extensions.com.mojang.serialization.Codec.PortCodecExtension;
 import PortLib.extensions.com.mojang.serialization.DataResult.PortDataResultExtension;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -50,6 +49,7 @@ import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.entity.npc.TravelingMerchantNPC;
 import org.confluence.mod.common.gameevent.GameEventSystem;
 import org.confluence.mod.common.gameevent.GoblinArmyGameEvent;
+import org.confluence.mod.common.gameevent.SolarEclipseGameEvent;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.entity.BossEntities;
 import org.confluence.mod.common.init.entity.NpcEntities;
@@ -73,15 +73,20 @@ import java.util.function.Predicate;
 public enum NPCSpawner implements IGlobalData {
     INSTANCE;
     public static final int CURRENT_VERSION = 1;
-    public static final Codec<Map<Region, Object2BooleanMap<EntityType<?>>>> NPC_ALIVE_CODEC = LibCodecUtils.notStringKeyMap(
-            "region", Region.CODEC,
-            "alive", PortCodecExtension.object2BooleanMap(BuiltInRegistries.ENTITY_TYPE.byNameCodec()));
-    public static final Codec<Set<EntityType<?>>> NPC_SPAWNED_CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf()
-            .xmap(ObjectOpenHashSet::new, ObjectArrayList::new);
+    public static final Codec<Map<Region, Reference2BooleanMap<EntityType<?>>>> NPC_ALIVE_CODEC;
+    public static final Codec<Set<EntityType<?>>> NPC_SPAWNED_CODEC;
 
-    private Map<Region, Object2BooleanMap<EntityType<?>>> npcAlive = new Object2ObjectOpenHashMap<>();
+    static {
+        Codec<EntityType<?>> entityTypeCodec = BuiltInRegistries.ENTITY_TYPE.byNameCodec();
+        NPC_ALIVE_CODEC = LibCodecUtils.notStringKeyMap(
+                "region", Region.CODEC,
+                "alive", LibCodecUtils.reference2BooleanMap(entityTypeCodec));
+        NPC_SPAWNED_CODEC = entityTypeCodec.listOf().xmap(ReferenceOpenHashSet::new, ReferenceArrayList::new);
+    }
+
+    private Map<Region, Reference2BooleanMap<EntityType<?>>> npcAlive = new Object2ObjectOpenHashMap<>();
     /// 生成过的NPC，可用于NPC复活而无需再次满足条件
-    private Set<EntityType<?>> npcSpawned = new ObjectOpenHashSet<>();
+    private Set<EntityType<?>> npcSpawned = new ReferenceOpenHashSet<>();
     private boolean isAdvancedCombatTechniquesUsed = false; // 先进战斗技术
     private boolean isAdvancedCombatTechniquesVolumeTwoUsed = false; // 先进战斗技术：卷二
     private boolean isPeddlersSatchelUsed = false; // 商贩背包
@@ -115,10 +120,10 @@ public enum NPCSpawner implements IGlobalData {
     }
 
     public int getAliveNpcCount(Region region, Predicate<EntityType<?>> filter) {
-        Object2BooleanMap<EntityType<?>> map = npcAlive.get(region);
+        Reference2BooleanMap<EntityType<?>> map = npcAlive.get(region);
         if (map == null) return 0;
         int count = 0;
-        for (Object2BooleanMap.Entry<EntityType<?>> entry : map.object2BooleanEntrySet()) {
+        for (Reference2BooleanMap.Entry<EntityType<?>> entry : map.reference2BooleanEntrySet()) {
             if (entry.getBooleanValue() && filter.test(entry.getKey())) {
                 count++;
             }
@@ -126,12 +131,12 @@ public enum NPCSpawner implements IGlobalData {
         return count;
     }
 
-    public Object2BooleanMap<EntityType<?>> getRegionAliveDetails(Region region) {
-        return npcAlive.computeIfAbsent(region, region1 -> new Object2BooleanOpenHashMap<>());
+    public Reference2BooleanMap<EntityType<?>> getRegionAliveDetails(Region region) {
+        return npcAlive.computeIfAbsent(region, region1 -> new Reference2BooleanOpenHashMap<>());
     }
 
     public boolean hasNPCAlive(Region region, EntityType<?> entityType) {
-        Object2BooleanMap<EntityType<?>> map = npcAlive.get(region);
+        Reference2BooleanMap<EntityType<?>> map = npcAlive.get(region);
         return map != null && map.getOrDefault(entityType, false);
     }
 
@@ -140,7 +145,7 @@ public enum NPCSpawner implements IGlobalData {
             getRegionAliveDetails(region).put(entityType, true);
             addSpawned(entityType);
         } else {
-            Object2BooleanMap<EntityType<?>> map = npcAlive.get(region);
+            Reference2BooleanMap<EntityType<?>> map = npcAlive.get(region);
             if (map != null && map.getBoolean(entityType)) {
                 map.put(entityType, false);
             }
@@ -212,7 +217,7 @@ public enum NPCSpawner implements IGlobalData {
         if (version != CURRENT_VERSION) {
             throw new IllegalArgumentException("Unsupported NPC spawner data version: " + version);
         }
-        Map<Region, Object2BooleanMap<EntityType<?>>> decodedAlive =
+        Map<Region, Reference2BooleanMap<EntityType<?>>> decodedAlive =
                 PortDataResultExtension.getOrThrow(NPC_ALIVE_CODEC.parse(NbtOps.INSTANCE, tag.get("NpcAlive")), message -> new IllegalArgumentException("Failed to decode living NPC data: " + message));
         Set<EntityType<?>> decodedSpawned = PortDataResultExtension.getOrThrow(
                 NPC_SPAWNED_CODEC.parse(NbtOps.INSTANCE, tag.get("NpcSpawned")),
@@ -227,10 +232,10 @@ public enum NPCSpawner implements IGlobalData {
     @Override
     public void encode(CompoundTag tag) {
         tag.putInt("Version", CURRENT_VERSION);
-        Iterator<Map.Entry<Region, Object2BooleanMap<EntityType<?>>>> iterator = npcAlive.entrySet().iterator();
+        Iterator<Map.Entry<Region, Reference2BooleanMap<EntityType<?>>>> iterator = npcAlive.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Region, Object2BooleanMap<EntityType<?>>> next = iterator.next();
-            next.getValue().object2BooleanEntrySet().removeIf(entry -> !entry.getBooleanValue());
+            Map.Entry<Region, Reference2BooleanMap<EntityType<?>>> next = iterator.next();
+            next.getValue().reference2BooleanEntrySet().removeIf(entry -> !entry.getBooleanValue());
             if (next.getValue().isEmpty()) {
                 iterator.remove();
             }
@@ -357,10 +362,11 @@ public enum NPCSpawner implements IGlobalData {
         return false;
     }
 
-    /// todo 他不会在日食期间生成。
     private boolean trySpawnTravelingMerchant(ServerPlayer player, BlockPos pos, Region region) {
         if (!hasNPCAlive(region, NpcEntities.TRAVELING_MERCHANT.get())) {
-            if (LibDateUtils.isWithinDayTime(LibDateUtils._04$30, LibDateUtils.getDayTime(12, 0), player.level())) {
+            if (!GameEventSystem.INSTANCE.isEventStarted(SolarEclipseGameEvent.KEY) &&
+                    LibDateUtils.isWithinDayTime(LibDateUtils._04$30, LibDateUtils._12$00, player.level())
+            ) {
                 int bound = 30000 / CommonConfigs.NPC_SPAWN_INTERVAL.get(); // 6.25分钟内生成期望为22.12%
                 if (player.getRandom1211().nextInt(bound) == 0 && getAliveNpcCount(region, entityType -> entityType != NpcEntities.OLD_MAN.get()) >= 2) {
                     return spawnAtPos(player.serverLevel(), pos, NpcEntities.TRAVELING_MERCHANT.get());
@@ -401,7 +407,9 @@ public enum NPCSpawner implements IGlobalData {
     // todo 可用于做染料的物品
     private boolean trySpawnDyeTrader(ServerPlayer player, BlockPos pos, Region region) {
         if (!hasNPCAlive(region, NpcEntities.DYE_TRADER.get())) {
-            if (hasNPCAlive(region, NpcEntities.MERCHANT.get()) && player.getInventory().hasAnyMatching(stack -> stack.is(Tags.Items.DYES))) {
+            if (hasNPCAlive(region, NpcEntities.MERCHANT.get()) &&
+                    player.getInventory().hasAnyMatching(stack -> stack.is(Tags.Items.DYES))
+            ) {
                 return spawnAtPos(player.serverLevel(), pos, NpcEntities.DYE_TRADER.get());
             }
         }
@@ -478,7 +486,7 @@ public enum NPCSpawner implements IGlobalData {
     }
 
     private boolean trySpawnPainter(ServerPlayer player, BlockPos pos, Region region) {
-        Object2BooleanMap<EntityType<?>> map = npcAlive.get(region);
+        Reference2BooleanMap<EntityType<?>> map = npcAlive.get(region);
         if (map != null && !map.getOrDefault(NpcEntities.PAINTER.get(), false)) {
             if (map.size() >= 8) {
                 return spawnAtPos(player.serverLevel(), pos, NpcEntities.PAINTER.get());

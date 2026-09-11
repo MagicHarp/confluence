@@ -189,7 +189,7 @@ public class BasePotBlock extends Block implements SimpleWaterloggedBlock {
         if (level.random.nextFloat() < (LibUtils.isAtLeastExpert(level, blockPos) ? 0.0444F : 0.0222F)) {
             double y = center.y;
             Item item = null;
-            if (level.dimension() == Level.NETHER) {
+            if (level.dimension() == OverworldUtils.underworld()) {
                 item = switch (level.random.nextInt(14)) {
                     case 0 -> SPELUNKER_POTION.get();
                     case 1 -> FEATHERFALL_POTION.get();
@@ -323,7 +323,7 @@ public class BasePotBlock extends Block implements SimpleWaterloggedBlock {
         boolean isHardmode = KillBoard.INSTANCE.getGamePhase().isHardmode();
         if (level.random.nextBoolean()) {
             item = isHardmode ? ConsumableItems.GRENADE.get() : ConsumableItems.SHURIKEN.get();
-        } else if (level.dimension() == Level.NETHER) {
+        } else if (level.dimension() == OverworldUtils.underworld()) {
             item = ArrowItems.HELLFIRE_ARROW.get();
         } else if (isHardmode) {
             if (level.random.nextBoolean()) {
@@ -340,7 +340,7 @@ public class BasePotBlock extends Block implements SimpleWaterloggedBlock {
 
     private boolean dropHeal(ServerLevel level, BlockPos blockPos, Vec3 center) {
         Item item;
-        if (level.dimension() == Level.NETHER || KillBoard.INSTANCE.getGamePhase().isHardmode()) {
+        if (level.dimension() == OverworldUtils.underworld() || KillBoard.INSTANCE.getGamePhase().isHardmode()) {
             item = PotionItems.HEALING_POTION.get();
         } else {
             item = PotionItems.LESSER_HEALING_POTION.get();
@@ -367,7 +367,7 @@ public class BasePotBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private boolean dropRope(ServerLevel level, BlockPos blockPos, Vec3 center) {
-        if (level.dimension() == Level.NETHER || KillBoard.INSTANCE.getGamePhase().isHardmode()) {
+        if (level.dimension() == OverworldUtils.underworld() || KillBoard.INSTANCE.getGamePhase().isHardmode()) {
             return dropMoney(level, blockPos, center);
         } else {
             LibEntityUtils.createItemEntity(ModBlocks.ROPE.get().asItem(), level.random.nextInt(5, 11), center, level, 0);

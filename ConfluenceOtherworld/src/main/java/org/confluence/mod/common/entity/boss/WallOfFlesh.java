@@ -16,7 +16,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +32,7 @@ import org.confluence.mod.common.entity.monster.TheHungry;
 import org.confluence.mod.common.init.ModEffects;
 import org.confluence.mod.common.init.entity.BossEntities;
 import org.confluence.mod.common.init.entity.MonsterEntities;
+import org.confluence.mod.util.OverworldUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -310,7 +310,7 @@ public class WallOfFlesh extends BaseBoss {
         for (Entity entity : subEntities) {
             if (!(entity instanceof WallOfFleshMouth mouth) || !mouth.isAlive() || mouth.getY() <= level().getMinBuildHeight())
                 continue;
-            if (level().dimension() == Level.NETHER && mouth.getY() >= NETHER_GENERATION_HEIGHT * 2.0 / 3.0)
+            if (level().dimension() == OverworldUtils.underworld() && mouth.getY() >= NETHER_GENERATION_HEIGHT * 2.0 / 3.0)
                 continue;
             double distance = mouth.distanceToSqr(living);
             if (distance < nearestDistance) {

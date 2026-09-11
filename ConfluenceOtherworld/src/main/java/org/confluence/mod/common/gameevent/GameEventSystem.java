@@ -45,6 +45,7 @@ public enum GameEventSystem implements IGlobalData {
         map.put(FrostMoonGameEvent.KEY, FrostMoonGameEvent.INSTANCE);
         map.put(PumpkinMoonGameEvent.KEY, PumpkinMoonGameEvent.INSTANCE);
         map.put(BoulderRainGameEvent.KEY, BoulderRainGameEvent.INSTANCE);
+        map.put(SolarEclipseGameEvent.KEY, SolarEclipseGameEvent.INSTANCE);
         PortEventHandler.postEvent(new CustomGameEventRegisterEvent(map));
     });
     private transient int startedEventAmount;

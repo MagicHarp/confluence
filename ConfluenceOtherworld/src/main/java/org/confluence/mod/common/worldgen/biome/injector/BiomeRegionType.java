@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
+import org.confluence.mod.util.OverworldUtils;
 import org.jetbrains.annotations.Nullable;
 
 /// 区域类别。决定使用哪一张区域表和哪一组地表规则。
@@ -38,14 +39,14 @@ public enum BiomeRegionType {
     ///
     /// 区域尺度 512 格：单个区域大致横跨 200~400 格，与泰拉瑞亚的腐化带（约 300 格宽）
     /// 和发光蘑菇地（约 150 格）同量级。全图范围内大概每 2000 格能碰到一处。
-    OVERWORLD(Level.OVERWORLD, 27, 512.0D),
+    OVERWORLD(OverworldUtils.dimension(), 27, 512.0D),
     /// 下界。
     ///
     /// 权重 `18 : 1 : 1` ⇒ 10% 的列是新群系，灰烬森林与灰烬荒原各 5%。
     /// 再乘温湿度闸后两种灰烬地形合计约占 **6% 的下界**。
     ///
     /// 区域尺度 256 格（下界只有 128 格高，而且本来就是个紧凑维度）。
-    NETHER(Level.NETHER, 18, 256.0D);
+    NETHER(OverworldUtils.underworld(), 18, 256.0D);
 
     private final ResourceKey<Level> dimension;
     private final int vanillaWeight;

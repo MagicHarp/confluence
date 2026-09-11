@@ -20,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.event.entity.living.*;
@@ -28,6 +29,7 @@ import org.confluence.lib.api.entity.Boss;
 import org.confluence.lib.api.event.ArmorPenetrationEvent;
 import org.confluence.lib.api.event.ProcessCriticalDamageEvent;
 import org.confluence.lib.common.LibTags;
+import org.confluence.lib.mixed.ILibMobEffectInstance;
 import org.confluence.lib.util.LibDateUtils;
 import org.confluence.lib.util.LibEntityUtils;
 import org.confluence.lib.util.LibMathUtils;
@@ -92,6 +94,7 @@ import org.confluence.mod.util.*;
 import org.confluence.terra_curio.api.event.AfterAccessoryAbilitiesFlushedEvent;
 import org.confluence.terra_curio.util.TCUtils;
 import org.jetbrains.annotations.Nullable;
+import org.mesdag.portlib.diff.Diff;
 import org.mesdag.portlib.event.PortEventHandler;
 import org.mesdag.portlib.event.PortEventPriority;
 import org.mesdag.portlib.event.entity.living.*;
@@ -130,6 +133,7 @@ public final class LivingEntityEvents {
         PortEventHandler.addListener(LivingEntityEvents::curioChange);
         PortEventHandler.addListener(LivingEntityEvents::toBeBestiaryEntry);
         PortEventHandler.addListener(LivingEntityEvents::armorPenetration);
+        PortEventHandler.addListener(LivingEntityEvents::potionColorCalculation);
     }
 
     private static void death(LivingDeathEvent event) {
@@ -660,6 +664,17 @@ public final class LivingEntityEvents {
                 living.hasEffect(ModEffects.SHARPENED.get())
         ) {
             event.setPenetration(event.getPenetration() + 12);
+        }
+    }
+
+    @Diff
+    private static void potionColorCalculation(PotionColorCalculationEvent event) {
+        List<MobEffectInstance> enabled = event.getEffects().stream().filter(instance -> ILibMobEffectInstance.of(instance).confluence$isEnabled()).toList();
+        if (enabled.isEmpty()) {
+            event.shouldHideParticles(true);
+            event.setColor(0);
+        } else if (enabled.size() != event.getEffects().size()) {
+            event.setColor(PotionUtils.getColor(enabled));
         }
     }
 }
