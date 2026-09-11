@@ -214,6 +214,14 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3"))
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+
+    if (false) {
+        modRuntimeOnly("curse.maven:terramity-1084134:6054971")
+        modRuntimeOnly("curse.maven:caelus-308989:5281700")
+        modRuntimeOnly("curse.maven:patchouli-306770:7731017")
+    }
+//    modRuntimeOnly("curse.maven:bigger-stacks-564896:8263248")
 }
 
 mixin {
