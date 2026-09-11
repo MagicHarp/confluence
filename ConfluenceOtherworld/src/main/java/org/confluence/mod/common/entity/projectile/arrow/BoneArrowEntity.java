@@ -20,11 +20,6 @@ public class BoneArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 4.6;
-    }
-
-    @Override
     protected double getAdditionalKnockback() {
         return 1.75;
     }

@@ -20,11 +20,6 @@ public class ShimmerArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 5.4;
-    }
-
-    @Override
     public double getDefaultGravity() {
         return -0.05;
     }

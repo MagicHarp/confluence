@@ -239,6 +239,17 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
     }
 
     @Override
+    public boolean isAttackable() {
+        T resolvedOwner = getOwner();
+        return !isRemoved() && resolvedOwner != null && resolvedOwner.isAlive();
+    }
+
+    @Override
+    public boolean canBeHitByProjectile() {
+        return isAttackable();
+    }
+
+    @Override
     public boolean canBeCollidedWith() {
         T resolvedOwner = getOwner();
         return resolvedOwner != null && resolvedOwner.isAlive();

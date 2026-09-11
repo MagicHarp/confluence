@@ -23,11 +23,6 @@ public class HellfireArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 5.6;
-    }
-
-    @Override
     protected int getLuminance() {
         return 8;
     }

@@ -36,6 +36,7 @@ import org.confluence.mod.Confluence;
 import org.confluence.mod.common.CommonConfigs;
 import org.confluence.mod.common.entity.ai.bt.Blackboard;
 import org.confluence.mod.common.entity.monster.BaseMonster;
+import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.init.ModSecretSeeds;
 import org.confluence.mod.network.s2c.BossBarSyncPacketS2C;
 
@@ -50,8 +51,9 @@ import java.util.*;
 ///
 /// 战斗是否仍在继续只由合格玩家决定，而不是由铁傀儡等任意存活目标决定。当前玩家死亡、
 /// 切换到创造/旁观、离开维度或离开战斗范围时，服务器立即在本维度追踪范围内选择仇恨值最高
-/// 的其他存活玩家。多人战中只要仍有一名合格玩家，撤离计时就会清零；全部玩家离场后 Boss
-/// 脱战 {@value #DISENGAGE_TICKS} tick，随后无死亡奖励、无击杀消息地消失。
+/// 的其他存活玩家。多人战中只要仍有一名合格玩家，撤离计时就会清零；若没有战斗目标但仍有
+/// 正在追踪本体的创造玩家，Boss 保持无目标待机。只有现场确实无人时才开始
+/// {@value #DISENGAGE_TICKS} tick 的脱战，随后无死亡奖励、无击杀消息地消失。
 public abstract class BaseBoss extends BaseMonster implements Boss {
     protected final ServerBossEvent bossEvent;
     protected final Blackboard blackboard = new Blackboard();
@@ -80,6 +82,8 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     private boolean noPhysicsBeforeRetreat;
     private boolean applyingDisengageMovement;
     private boolean removingSubEntities;
+    /// 本 tick 是否有创造模式玩家在交战范围内维持现场。它不参与索敌，只阻止无人脱战清理。
+    private boolean encounterObserverNearby;
     private float lastSynchronizedBossBarHealth = Float.NaN;
     private float lastSynchronizedBossBarMaximumHealth = Float.NaN;
     private final BossChunkTicket encounterChunkTicket = new BossChunkTicket(getUUID());
@@ -282,7 +286,11 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         if (source.is(DamageTypes.EXPLOSION)) {
             amount *= explosionResistance;
         }
-        return super.hurt(source, amount);
+        boolean hurt = super.hurt(source, amount);
+        if (hurt && source.getEntity() instanceof BaseNPC npc && canAttack(npc)) {
+            setTarget(npc);
+        }
+        return hurt;
     }
 
     /// Boss 遭遇只把玩家作为敌对生命。部件、仆从、其他 Boss 和普通怪物即使恰好穿过
@@ -290,7 +298,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     @Override
     public boolean canAttack(LivingEntity target) {
         return shouldMaintainCombatTarget()
-                && target instanceof Player
+                && (target instanceof Player || target instanceof BaseNPC)
                 && super.canAttack(target);
     }
 
@@ -348,7 +356,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     @Override
     public void tick() {
-        Player targetBeforeAi = null;
+        LivingEntity targetBeforeAi = null;
         if (!level().isClientSide) {
             LivingEntity currentTarget = getTarget();
             UUID diedTargetId = currentTarget instanceof Player player && !player.isAlive() ? player.getUUID() : null;
@@ -369,7 +377,8 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
                 }
             }
             if (shouldMaintainCombatTarget()) {
-                targetBeforeAi = validCombatPlayer(getTarget());
+                targetBeforeAi = validNpcRetaliationTarget(getTarget());
+                if (targetBeforeAi == null) targetBeforeAi = validCombatPlayer(getTarget());
                 if (targetBeforeAi == null) {
                     targetBeforeAi = findCombatPlayer();
                 }
@@ -407,17 +416,29 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     /// 已有合格目标时保持仇恨稳定，不会因为另一名玩家仇恨值更高就每 tick 来回换目标；只有当前
     /// 目标失效时才选择追踪范围内仇恨值最高的替代玩家。没有替代者时立即清空目标，使行为树停止
     /// 攻击，再进入宽限计时。
-    private void updateCombatLifecycle(@Nullable Player targetBeforeAi) {
+    private void updateCombatLifecycle(@Nullable LivingEntity targetBeforeAi) {
         if (!shouldMaintainCombatTarget()) {
             if (getTarget() != null) setTarget(null);
             synchronizeCombatTarget(null);
             noTargetTicks = 0;
+            encounterObserverNearby = false;
             stopDisengageRetreat();
             return;
         }
 
         // AI 运行期间可以刷新导航和攻击状态，但不能把仍然合法的权威玩家换成铁傀儡、
         // 召唤物或另一名玩家。只有原目标已经失效，才接受 AI 找到的合法玩家或重新选取。
+        BaseNPC npcTarget = validNpcRetaliationTarget(targetBeforeAi);
+        if (npcTarget == null) npcTarget = validNpcRetaliationTarget(getTarget());
+        if (npcTarget != null) {
+            if (getTarget() != npcTarget) setTarget(npcTarget);
+            synchronizeCombatTarget(null);
+            noTargetTicks = 0;
+            encounterObserverNearby = false;
+            stopDisengageRetreat();
+            return;
+        }
+
         Player combatPlayer = validCombatPlayer(targetBeforeAi);
         if (combatPlayer == null) combatPlayer = validCombatPlayer(getTarget());
         if (combatPlayer == null) combatPlayer = findCombatPlayer();
@@ -427,23 +448,37 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         synchronizeCombatTarget(combatPlayer);
         if (combatPlayer != null) {
             noTargetTicks = 0;
+            encounterObserverNearby = false;
             stopDisengageRetreat();
             return;
         }
 
         // 创造和旁观玩家只维持现场，不参与战斗，也绝不会进入 Mob#getTarget。
-        double rangeSqr = getCombatPlayerRange() * getCombatPlayerRange();
-        for (Player player : level().players()) {
-            if (isEncounterObserver(player)
-                    && combatAnchorDistanceSqr(player) < rangeSqr) {
-                registerCombatParticipant(player);
-                noTargetTicks = 0;
-                stopDisengageRetreat();
-                return;
-            }
+        // 该检查必须放在脱战计时之前：创造模式玩家同样“在场”，Boss 却永远找不到
+        // 合格战斗目标。若只按合格目标计时，创造模式实测时 Boss 会在 200 tick 后
+        // 判空脱战并 discard，玩家看到的就是一个既打不动、又已经不存在于服务端的实体。
+        if (refreshEncounterObserver()) {
+            noTargetTicks = 0;
+            stopDisengageRetreat();
+            return;
         }
 
         tickDisengageTimer();
+    }
+
+    /// 刷新“现场玩家”判定：正在由服务端追踪该 Boss 的创造模式玩家会成为
+    /// {@link #encounterObserverNearby}。他们不能被索敌，但会让 Boss 保持无目标待机，
+    /// 而不是进入撤离或移除流程。这里不能复用较小的索敌半径：客户端仍能看到 Boss 时
+    /// 就开始服务端撤离，会造成可见实体与服务端生命周期不一致。旁观者不计入。
+    private boolean refreshEncounterObserver() {
+        boolean observerNearby = false;
+        for (ServerPlayer player : bossEvent.getPlayers()) {
+            if (!isEncounterObserver(player)) continue;
+            registerCombatParticipant(player);
+            observerNearby = true;
+        }
+        encounterObserverNearby = observerNearby;
+        return observerNearby;
     }
 
     private void tickDisengageTimer() {
@@ -490,6 +525,14 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     final boolean isDisengageRetreating() {
         return disengageRetreating;
+    }
+
+    /// 本 tick 是否有创造模式玩家在交战范围内维持现场。
+    ///
+    /// 这类玩家不能被索敌，但仍然在场；子实体可以据此决定是否播放撤离表现，
+    /// 而不是沿用“已经没有玩家”的撤离语义。
+    protected final boolean hasEncounterObserverNearby() {
+        return encounterObserverNearby;
     }
 
     @Override
@@ -632,6 +675,13 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     private @Nullable Player validCombatPlayer(@Nullable LivingEntity target) {
         return target instanceof Player player && isValidCurrentCombatPlayer(player) ? player : null;
+    }
+
+    private @Nullable BaseNPC validNpcRetaliationTarget(@Nullable LivingEntity target) {
+        return target instanceof BaseNPC npc
+                && npc.level() == level()
+                && npc.isAlive()
+                && canAttack(npc) ? npc : null;
     }
 
     private boolean isEncounterObserver(Player player) {

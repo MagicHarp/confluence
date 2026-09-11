@@ -78,8 +78,10 @@ public class YoyoItem extends CustomRarityItem {
     }
 
     public final void applyHitEffect(YoyoEntity yoyo, ServerPlayer owner, LivingEntity target) {
-        definition.applyHitEffects(yoyo, owner, target);
+        onHitTarget(yoyo, owner, target);
     }
+
+    protected void onHitTarget(YoyoEntity yoyo, ServerPlayer owner, LivingEntity target) {}
 
     /// 主动作由悠悠球控制，不允许左键配置时同时进入原版挖掘状态。
     @Override

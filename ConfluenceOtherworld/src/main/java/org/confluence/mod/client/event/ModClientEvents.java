@@ -680,6 +680,8 @@ public final class ModClientEvents {
         event.registerEntityRenderer(BossEntities.DEERCLOPS.get(), DeerclopsRenderer::new);
         event.registerEntityRenderer(THROWN_ICE_PROJECTILE.get(), DeerclopsThrownIceRenderer::new);
         event.registerEntityRenderer(ICE_PILLAR.get(), DeerclopsIcePillarRenderer::new);
+        event.registerEntityRenderer(PHASEBLADE_PROJECTILE.get(), PhasebladeProjectileRenderer::new);
+        event.registerEntityRenderer(PHASESABER_PROJECTILE.get(), PhasebladeProjectileRenderer::new);
         event.registerEntityRenderer(SHADOW_HAND.get(), c -> new GeoNormalRenderer<>(c,
                 new ExplicitGeoModel<>(
                         Confluence.asResource("geo/entity/proj/shadow_hand.geo.json"),

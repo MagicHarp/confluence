@@ -20,11 +20,6 @@ public class UnholyArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 5.4;
-    }
-
-    @Override
     protected int getPenetrationCount() {
         return 5;
     }

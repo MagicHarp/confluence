@@ -85,6 +85,15 @@
 				{
 					"name": "phasesaber",
 					"parent": "group",
+                    "pivot": [
+                        1,
+                        10,
+                        0
+                    ]
+                },
+                {
+                    "name": "phasesaber_core",
+                    "parent": "phasesaber",
 					"pivot": [1, 10, 0],
 					"cubes": [
 						{
@@ -98,7 +107,18 @@
 								"up": {"uv": [34, 18], "uv_size": [3, 1]},
 								"down": {"uv": [35, 21], "uv_size": [3, -1]}
 							}
-						},
+                        }
+                    ]
+                },
+                {
+                    "name": "phasesaber_outer",
+                    "parent": "phasesaber",
+                    "pivot": [
+                        1,
+                        10,
+                        0
+                    ],
+                    "cubes": [
 						{
 							"origin": [4, 32, 1],
 							"size": [-6, -22, -2],
@@ -110,7 +130,18 @@
 								"up": {"uv": [28, 20], "uv_size": [6, 2]},
 								"down": {"uv": [28, 25], "uv_size": [6, -2]}
 							}
-						},
+                        }
+                    ]
+                },
+                {
+                    "name": "phasesaber_middle",
+                    "parent": "phasesaber",
+                    "pivot": [
+                        1,
+                        10,
+                        0
+                    ],
+                    "cubes": [
 						{
 							"origin": [2.5, 31, 0.75],
 							"size": [-3.5, -21, -1.5],

@@ -8,7 +8,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 public class ShimmerArrowItem extends BaseTerraArrowItem {
     public ShimmerArrowItem() {
-        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE));
+        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE), 3.5F);
     }
 
     @Override

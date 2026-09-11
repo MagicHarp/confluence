@@ -100,14 +100,30 @@ public final class TerraprismaSummon extends SummonInstance {
     }
 
     SummonPose followPose(Vec3 nextPosition, Vec3 targetPosition) {
-        int sequence = order() + 1;
-        Vec3 forward = Vec3.directionFromRotation(0.0F, owner().yBodyRot).multiply(1.0, 0.0, 1.0).normalize();
-        Vec3 lookPosition = position().subtract(forward.scale(5.0))
-                .add(0.0, -8.0 - (sequence - 1) / 2.0, 0.0)
-                .add(position().subtract(targetPosition).scale(20.0));
-        Vec3 direction = lookPosition.subtract(position());
-        return direction.lengthSqr() < 1.0E-6 ? currentPose() : aimAt(nextPosition, direction);
+        Vec3 direction = targetPosition.subtract(nextPosition);
+        Vec3 horizontal = direction.multiply(1.0, 0.0, 1.0);
+        if (horizontal.lengthSqr() < 1.0E-6) {
+            float yaw = summonYawFromOwner();
+            float pitch = IDLE_PITCH;
+            return new SummonPose(nextPosition, yaw, pitch, 0.0F);
+        }
+        Vec3 aimed = horizontal.normalize().add(0.0, -IDLE_PITCH_TANGENT, 0.0);
+        return aimed.lengthSqr() < 1.0E-6 ? currentPose() : aimAt(nextPosition, aimed);
     }
+
+    /// 返回主人当前朝向的偏航角，供就位状态下的剑身对齐。
+    float summonYawFromOwner() {
+        return owner().yBodyRot;
+    }
+
+    /// 把主人身体朝向投影到水平面，得到跟随站位使用的单位前向向量。
+    static Vec3 ownerFacing(float bodyYaw) {
+        return Vec3.directionFromRotation(0.0F, bodyYaw);
+    }
+
+    /// 就位时剑身相对水平面的下压角度，单位为度。
+    private static final float IDLE_PITCH = 62.0F;
+    private static final double IDLE_PITCH_TANGENT = Math.tan(Math.toRadians(IDLE_PITCH));
 
     SummonPose aimAt(Vec3 position, Vec3 direction) {
         Vec3 normalized = direction.normalize();

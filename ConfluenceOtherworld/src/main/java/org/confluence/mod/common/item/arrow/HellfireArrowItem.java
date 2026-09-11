@@ -8,7 +8,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 public class HellfireArrowItem extends BaseTerraArrowItem {
     public HellfireArrowItem() {
-        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.GREEN));
+        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.GREEN), 4.0F);
     }
 
     @Override

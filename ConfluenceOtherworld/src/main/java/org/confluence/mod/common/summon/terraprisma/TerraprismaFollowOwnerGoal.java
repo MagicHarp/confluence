@@ -27,7 +27,7 @@ final class TerraprismaFollowOwnerGoal extends SummonGoal<TerraprismaSummon> {
     @Override
     public void tick() {
         int sequence = summon.order() + 1;
-        Vec3 forward = Vec3.directionFromRotation(0.0F, summon.owner().yBodyRot).multiply(1.0, 0.0, 1.0).normalize();
+        Vec3 forward = TerraprismaSummon.ownerFacing(summon.owner().yBodyRot);
         Vec3 right = forward.cross(new Vec3(0.0, 1.0, 0.0)).normalize();
         double backDistance = 0.6F - 0.05F * (sequence - 1);
         Vec3 targetPosition = summon.owner().position().subtract(forward.scale(backDistance))
@@ -42,7 +42,9 @@ final class TerraprismaFollowOwnerGoal extends SummonGoal<TerraprismaSummon> {
         if (summon.owner().onGround()) ownerVelocity = ownerVelocity.multiply(1.0, 0.0, 1.0);
         Vec3 desiredVelocity = ownerVelocity.add(direction.scale(0.45));
         if (desiredVelocity.lengthSqr() > 1.0) desiredVelocity = desiredVelocity.normalize();
-        Vec3 nextVelocity = summon.velocity().scale(0.35).add(desiredVelocity.scale(0.65));
+        // 就位跟随以贴近主人为第一目标，因此收敛系数高于战斗机动：系数过低会让剑持续
+        // 落后于玩家并在客户端插值后表现为一顿一顿的拖影。
+        Vec3 nextVelocity = summon.velocity().scale(0.28).add(desiredVelocity.scale(0.72));
         Vec3 nextPosition = summon.position().add(nextVelocity);
         summon.moveTo(summon.followPose(nextPosition, targetPosition));
     }

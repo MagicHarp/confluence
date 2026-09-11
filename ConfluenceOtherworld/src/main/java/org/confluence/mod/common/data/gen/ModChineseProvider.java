@@ -3045,6 +3045,16 @@ public class ModChineseProvider extends LanguageProvider {
         add(SwordItems.BLUE_PHASEBLADE.get(), "蓝陨石光剑");
         add(SwordItems.PURPLE_PHASEBLADE.get(), "紫陨石光剑");
         add(SwordItems.WHITE_PHASEBLADE.get(), "白陨石光剑");
+        add(SwordItems.PINK_PHASEBLADE.get(), "粉陨石光剑");
+        // 晶光刃
+        add(SwordItems.RED_PHASESABER.get(), "红晶光刃");
+        add(SwordItems.ORANGE_PHASESABER.get(), "橙晶光刃");
+        add(SwordItems.YELLOW_PHASESABER.get(), "黄晶光刃");
+        add(SwordItems.GREEN_PHASESABER.get(), "绿晶光刃");
+        add(SwordItems.BLUE_PHASESABER.get(), "蓝晶光刃");
+        add(SwordItems.PURPLE_PHASESABER.get(), "紫晶光刃");
+        add(SwordItems.WHITE_PHASESABER.get(), "白晶光刃");
+        add(SwordItems.PINK_PHASESABER.get(), "粉晶光刃");
 
         // 其他近战
         add(SpearItems.SPEAR.get(), "长矛");

@@ -2,20 +2,40 @@ package org.confluence.mod.common.item.arrow;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.projectile.arrow.BaseArrowEntity;
 import org.confluence.mod.common.init.entity.ModEntities;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class BaseTerraArrowItem extends ArrowItem {
-    public BaseTerraArrowItem(Properties properties) {
+    private final float additionalDamage;
+
+    public BaseTerraArrowItem(Properties properties, float additionalDamage) {
         super(properties);
+        this.additionalDamage = additionalDamage;
+    }
+
+    public final float getAdditionalDamage() {
+        return additionalDamage;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
+        tooltip.add(Component.translatable("tooltip.item.confluence.additional_attack_damage")
+                .append(": +")
+                .append(String.format("%.1f", additionalDamage))
+                .withStyle(style -> style.withColor(0x00FF00)));
     }
 
     protected EntityType<? extends BaseArrowEntity> getEntityType() {

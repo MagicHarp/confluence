@@ -22,11 +22,6 @@ public class FrostburnArrowEntity extends BaseArrowEntity {
         super(entityType, owner, pickupItemStack, firedFromWeapon);
     }
     @Override
-    public double getBaseDamage() {
-        return 4.4;
-    }
-
-    @Override
     protected int getLuminance() {
         return 5;
     }

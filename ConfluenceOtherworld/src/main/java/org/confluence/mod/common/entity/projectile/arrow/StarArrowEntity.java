@@ -20,11 +20,6 @@ public class StarArrowEntity extends BaseArrowEntity {
         super(entityType, owner, pickupItemStack, firedFromWeapon);
     }
     @Override
-    public double getBaseDamage() {
-        return 5;
-    }
-
-    @Override
     protected int getPenetrationCount() {
         return 99;
     }

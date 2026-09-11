@@ -21,11 +21,6 @@ public class FlamingArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 4.4;
-    }
-
-    @Override
     protected int getLuminance() {
         return 12;
     }

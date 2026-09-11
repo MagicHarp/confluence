@@ -27,6 +27,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.monster.BaseMimic;
 import org.confluence.mod.common.entity.npc.BaseNPC;
+import org.confluence.mod.common.item.arrow.BaseTerraArrowItem;
 import org.confluence.mod.common.item.bow.BaseTerraBowItem;
 import org.confluence.mod.common.item.crossbow.BaseTerraRepeaterItem;
 import org.confluence.mod.mixed.IAbstractArrow;
@@ -146,15 +147,14 @@ public class BaseArrowEntity extends PortAbstractArrow {
     }
 
     protected float getCalculatedDamage() {
-        float speed = (float) this.getDeltaMovement().length();
-        speed = capMaxSpeed(speed);
+        float speed = IAbstractArrow.of(this).confluence$isDamageNotAffectedBySpeedBonus() ? 1.0F : capMinSpeed(capMaxSpeed((float) getDeltaMovement().length()));
         double d0 = this.getBaseDamage();
         if (this.getWeaponItem() != null && this.level() instanceof ServerLevel) {
             int value = EnchantmentHelper.getTagEnchantmentLevel(Enchantments.POWER_ARROWS, this.getWeaponItem());
             d0 *= (value * 0.1f + 1.0f);
         }
-        speed = capMinSpeed(speed);
-        int i = Mth.ceil(Mth.clamp((double) speed * d0, 0.0, 2.147483647E9));
+        double additionalDamage = getPickupItem().getItem() instanceof BaseTerraArrowItem arrowItem ? arrowItem.getAdditionalDamage() : 0.0D;
+        int i = Mth.ceil(Mth.clamp(speed * d0 + additionalDamage, 0.0, 2.147483647E9));
         if (this.isCritArrow()) {
             long j = this.random.nextInt(i / 2 + 2);
             i = (int) Math.min(j + (long) i, 2147483647L);

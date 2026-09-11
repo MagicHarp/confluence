@@ -8,7 +8,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 public class StarArrowItem extends BaseTerraArrowItem {
     public StarArrowItem() {
-        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.BLUE));
+        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.BLUE), 2.5F);
     }
 
     @Override

@@ -8,7 +8,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 public class BoneArrowItem extends BaseTerraArrowItem {
     public BoneArrowItem() {
-        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE));
+        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE), 1.5F);
     }
 
     @Override

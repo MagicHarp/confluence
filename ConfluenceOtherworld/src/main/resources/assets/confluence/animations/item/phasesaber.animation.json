@@ -1,6 +1,44 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
+        "idle_on": {
+            "loop": true,
+            "bones": {
+                "light": {
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                },
+                "phasesaber": {
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            }
+        },
+        "idle_off": {
+            "loop": true,
+            "bones": {
+                "light": {
+                    "scale": [
+                        1,
+                        0,
+                        1
+                    ]
+                },
+                "phasesaber": {
+                    "scale": [
+                        1,
+                        0,
+                        1
+                    ]
+                }
+            }
+        },
 		"turn_off": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,

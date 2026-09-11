@@ -8,7 +8,7 @@ import org.confluence.mod.common.init.entity.ModEntities;
 
 public class FrostburnArrowItem extends BaseTerraArrowItem {
     public FrostburnArrowItem() {
-        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE));
+        super(new Properties().component(ConfluenceMagicLib.MOD_RARITY, ModRarity.WHITE), 2.0F);
     }
 
     @Override

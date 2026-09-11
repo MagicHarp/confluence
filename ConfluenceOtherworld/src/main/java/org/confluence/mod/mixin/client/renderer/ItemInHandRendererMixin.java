@@ -12,9 +12,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.phys.AABB;
+import org.confluence.mod.common.entity.yoyo.YoyoEntity;
 import org.confluence.mod.common.init.item.SwordItems;
 import org.confluence.mod.common.item.bow.BaseTerraBowItem;
 import org.confluence.mod.common.item.crossbow.BaseTerraRepeaterItem;
+import org.confluence.mod.common.item.yoyo.YoyoItem;
 import org.confluence.terra_curio.common.item.MagicMirror;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,7 +46,19 @@ public abstract class ItemInHandRendererMixin {
             if (!player.isInvisible()) {
                 renderPlayerArm(poseStack, buffer, combinedLight, equippedProgress, swingProgress, humanoidarm);
             }
+        } else if (stack.getItem() instanceof YoyoItem && !player.isInvisible()
+                && hasMatchingDeployedYoyo(player, stack)) {
+            // The deployed yoyo model is suppressed separately, so retain the first-person arm.
+            // This mirrors 1.21's explicit arm rendering without coupling every yoyo item to a
+            // shared client-side weapon flag.
+            renderPlayerArm(poseStack, buffer, combinedLight, equippedProgress, swingProgress, humanoidarm);
         }
+    }
+
+    private static boolean hasMatchingDeployedYoyo(AbstractClientPlayer player, ItemStack stack) {
+        return !player.level().getEntitiesOfClass(YoyoEntity.class,
+                AABB.ofSize(player.position(), 128.0D, 128.0D, 128.0D),
+                yoyo -> yoyo.belongsTo(player) && yoyo.represents(stack)).isEmpty();
     }
 
     @WrapOperation(method = {"evaluateWhichHandsToRender", "selectionUsingItemWhileHoldingBowLike"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))

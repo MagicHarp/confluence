@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
@@ -281,10 +282,17 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
         return entityData.get(WEAPON);
     }
 
+    public boolean belongsTo(Player player) {
+        Entity owner = getOwner();
+        return owner != null && owner.getUUID().equals(player.getUUID());
+    }
+
+    public boolean represents(ItemStack stack) {
+        return !stack.isEmpty() && getWeapon().getItem() == stack.getItem();
+    }
+
     public @Nullable YoyoItem getYoyoItem() {
-        return getWeapon().getItem() instanceof YoyoItem item
-                ? item
-                : null;
+        return getWeapon().getItem() instanceof YoyoItem item ? item : null;
     }
 
     /// 服务端仍使用原版弹幕拥有者；客户端通过同步的实体 ID 解析玩家。

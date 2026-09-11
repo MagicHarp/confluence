@@ -4,16 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.Vec3;
@@ -62,8 +62,8 @@ public class DeerClops extends BaseBoss {
     private static final double MAXIMUM_ATTACK_RANGE = 20.0;
     private static final double THROWN_ICE_RANGE = 10.0;
     private static final double SHADOW_HAND_HEIGHT = 5.0;
-    private static final double TRAVERSAL_JUMP_SPEED = 0.62;
-    private static final double TRAVERSAL_FORWARD_SPEED = 0.22;
+    private static final double TRAVERSAL_JUMP_SPEED = 0.85;
+    private static final double TRAVERSAL_FORWARD_SPEED = 0.28;
     private static final float ATTACK_DAMAGE = 10.0F;
     private static final float RANGE_DAMAGE = 10.0F;
     private static final float SHADOW_HAND_DAMAGE = 10.0F;
@@ -74,6 +74,8 @@ public class DeerClops extends BaseBoss {
     private int iceWaveStep = -1;
     private Vec3 iceWaveOrigin = Vec3.ZERO;
     private Vec3 iceWaveDirection = Vec3.ZERO;
+    private Vec3 attackFacingDirection = new Vec3(0.0, 0.0, 1.0);
+    private float attackFacingYaw;
     private @Nullable BlockPos chestTarget;
     private int chestAttackTicks;
     private int traversalJumpCooldown;
@@ -166,11 +168,11 @@ public class DeerClops extends BaseBoss {
         double distanceSqr = distanceToSqr(target);
         boolean outsideAttackRange = distanceSqr > MAXIMUM_ATTACK_RANGE * MAXIMUM_ATTACK_RANGE;
         setFarInvulnerable(outsideAttackRange);
-        faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
 
         if (getCombatState() == CombatState.ATTACK) {
             navigation.stop();
             resetTraversalTracking();
+            applyLockedAttackFacing();
             if (++stateTicks == ATTACK_WINDUP_TICKS) {
                 performIceAttack(target);
             }
@@ -182,8 +184,10 @@ public class DeerClops extends BaseBoss {
         }
 
         setCombatState(CombatState.CHASE);
+        faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
         if (distanceSqr > PREFERRED_RANGE * PREFERRED_RANGE) {
             boolean pathStarted = navigation.moveTo(target, 1.0);
+            breakBlockingWood();
             tryTraversalJump(target, pathStarted);
         } else {
             navigation.stop();
@@ -195,7 +199,59 @@ public class DeerClops extends BaseBoss {
         if (attackCooldown > 0) {
             attackCooldown--;
         } else {
+            lockAttackFacing(target);
             setCombatState(CombatState.ATTACK);
+        }
+    }
+
+    private void lockAttackFacing(LivingEntity target) {
+        Vec3 direction = target.position().subtract(position()).multiply(1.0, 0.0, 1.0);
+        if (direction.lengthSqr() < 1.0E-6) {
+            direction = getLookAngle().multiply(1.0, 0.0, 1.0);
+        }
+        if (direction.lengthSqr() >= 1.0E-6) {
+            attackFacingDirection = direction.normalize();
+            attackFacingYaw = (float) Math.toDegrees(Math.atan2(-attackFacingDirection.x, attackFacingDirection.z));
+        } else {
+            attackFacingYaw = getYRot();
+        }
+        applyLockedAttackFacing();
+    }
+
+    private void applyLockedAttackFacing() {
+        setYRot(attackFacingYaw);
+        yRotO = attackFacingYaw;
+        yBodyRot = attackFacingYaw;
+        yBodyRotO = attackFacingYaw;
+        yHeadRot = attackFacingYaw;
+        yHeadRotO = attackFacingYaw;
+        Vec3 lookAt = getEyePosition().add(attackFacingDirection.scale(8.0));
+        getLookControl().setLookAt(lookAt.x, lookAt.y, lookAt.z, 0.0F, 0.0F);
+    }
+
+    private void breakBlockingWood() {
+        if (!horizontalCollision || !level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            return;
+        }
+        Vec3 forward = getDeltaMovement().multiply(1.0, 0.0, 1.0);
+        if (forward.lengthSqr() < 1.0E-4) {
+            forward = getLookAngle().multiply(1.0, 0.0, 1.0);
+        }
+        if (forward.lengthSqr() < 1.0E-4) {
+            return;
+        }
+        forward = forward.normalize();
+        var bounds = getBoundingBox().expandTowards(forward.scale(1.25)).inflate(0.2, 0.1, 0.2);
+        int broken = 0;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                BlockPos.containing(bounds.minX, bounds.minY, bounds.minZ),
+                BlockPos.containing(bounds.maxX, bounds.maxY, bounds.maxZ))) {
+            var state = level().getBlockState(pos);
+            if ((state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES))
+                    && level().destroyBlock(pos, true, this)
+                    && ++broken >= 8) {
+                break;
+            }
         }
     }
 
@@ -206,7 +262,7 @@ public class DeerClops extends BaseBoss {
         } else if (target.getY() - getY() > SHADOW_HAND_HEIGHT) {
             return new AttackResult(AttackPattern.SHADOW_HAND, spawnShadowHands(target));
         } else {
-            beginIcePillarWave(horizontalOffset);
+            beginIcePillarWave(attackFacingDirection);
             return new AttackResult(AttackPattern.ICE_PILLAR, 0);
         }
     }
@@ -307,6 +363,13 @@ public class DeerClops extends BaseBoss {
         iceWaveOrigin = position();
         iceWaveDirection = direction;
         iceWaveStep = 0;
+        DeerclopsIcePillarProjectile waveModel = ModEntities.ICE_PILLAR.get().create(level());
+        if (waveModel != null) {
+            // 模型原点后方仍有约一格长的近端冰刺；放到碰撞箱外，避免整道冰墙从巨鹿体内长出。
+            double visualStart = getBbWidth() * 0.5 + 1.0;
+            waveModel.configureWaveModel(this, position().add(direction.scale(visualStart)), direction);
+            level().addFreshEntity(waveModel);
+        }
     }
 
     private void tickIceWave() {

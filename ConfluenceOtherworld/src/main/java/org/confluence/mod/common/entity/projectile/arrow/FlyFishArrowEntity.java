@@ -20,11 +20,6 @@ public class FlyFishArrowEntity extends BaseArrowEntity {
     }
 
     @Override
-    public double getBaseDamage() {
-        return 4.2;
-    }
-
-    @Override
     protected float getCalculatedDamage() {
         float damage = super.getCalculatedDamage();
         return level().isRaining() ? damage + 3 : damage;

@@ -27,8 +27,8 @@ public final class WallOfFleshRenderer extends BossGeoRenderer<WallOfFlesh> {
     private static final String[] WALL_VARIANTS = {
             "bone0", "bone1", "bone2", "bone3", "bone4"
     };
-    private static final int GRID_WIDTH = 60;
-    private static final int GRID_HEIGHT = 40;
+    private static final int GRID_WIDTH = 40;
+    private static final int GRID_HEIGHT = 30;
     private static final float GRID_SPACING = 15.0F;
     private static final float GECKO_SCALE = 16.0F;
 
@@ -56,7 +56,34 @@ public final class WallOfFleshRenderer extends BossGeoRenderer<WallOfFlesh> {
             float blue,
             float alpha) {
         rebuildModelIfNeeded(wall, bakedModel);
+        synchronizePartBones(wall);
         super.preRender(poseStack, wall, bakedModel, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+    }
+
+    private void synchronizePartBones(WallOfFlesh wall) {
+        GeoBone root = getGeoModel().getBone("All").orElse(null);
+        if (root == null) return;
+        for (WallOfFleshPart part : wall.getSubEntities().stream()
+                .filter(WallOfFleshPart.class::isInstance)
+                .map(WallOfFleshPart.class::cast)
+                .filter(WallOfFleshPart::isAlive)
+                .toList()) {
+            String name = part instanceof WallOfFleshEye
+                    ? "wall_eye_" + part.getId()
+                    : part instanceof WallOfFleshMouth
+                    ? "wall_mouth_" + part.getId() : null;
+            if (name == null) continue;
+            Vec3 local = wall.getLocalOffset(part);
+            Vec3 offset = new Vec3(-local.x * GECKO_SCALE, local.y * GECKO_SCALE, local.z * GECKO_SCALE);
+            root.getChildBones().stream().filter(bone -> name.equals(bone.getName())).findFirst().ifPresent(bone -> {
+                bone.setPosX((float) offset.x);
+                bone.setPosY((float) offset.y);
+                bone.setPosZ((float) offset.z);
+                bone.setPivotX((float) offset.x);
+                bone.setPivotY((float) offset.y);
+                bone.setPivotZ((float) offset.z);
+            });
+        }
     }
 
     @Override

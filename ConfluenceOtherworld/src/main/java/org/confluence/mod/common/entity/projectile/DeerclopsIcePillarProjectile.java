@@ -13,6 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.init.ModEffects;
 import org.joml.Vector3f;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +26,13 @@ import java.util.UUID;
 ///
 /// 冰柱本身不移动，也不会因为接触方块而提前消失。实体只会被同一根冰柱
 /// 命中一次；碰撞高度随可见冰块逐步增长，避免画面尚未升起时提前伤到玩家。
-public final class DeerclopsIcePillarProjectile extends Projectile {
+public final class DeerclopsIcePillarProjectile extends Projectile implements GeoEntity {
     private static final EntityDataAccessor<Vector3f> DATA_AXIS = SynchedEntityData.defineId(DeerclopsIcePillarProjectile.class, EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Boolean> DATA_RENDER_WAVE = SynchedEntityData.defineId(DeerclopsIcePillarProjectile.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Vector3f> DATA_WAVE_DIRECTION = SynchedEntityData.defineId(DeerclopsIcePillarProjectile.class, EntityDataSerializers.VECTOR3);
     private static final int LIFETIME = 40;
     private final Set<UUID> hitEntities = new HashSet<>();
+    private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
     private float damage;
 
     public DeerclopsIcePillarProjectile(EntityType<? extends DeerclopsIcePillarProjectile> type, Level level) {
@@ -41,6 +48,25 @@ public final class DeerclopsIcePillarProjectile extends Projectile {
         this.damage = damage;
     }
 
+    public void configureWaveModel(Mob owner, Vec3 origin, Vec3 direction) {
+        Vec3 horizontal = direction.multiply(1.0, 0.0, 1.0).normalize();
+        setOwner(owner);
+        setPos(origin);
+        entityData.set(DATA_RENDER_WAVE, true);
+        entityData.set(DATA_WAVE_DIRECTION, horizontal.toVector3f());
+        float yaw = (float) Math.toDegrees(Math.atan2(-horizontal.x, horizontal.z));
+        setYRot(yaw);
+        yRotO = yaw;
+    }
+
+    public boolean rendersWaveModel() {
+        return entityData.get(DATA_RENDER_WAVE);
+    }
+
+    public Vec3 getWaveDirection() {
+        return new Vec3(entityData.get(DATA_WAVE_DIRECTION));
+    }
+
     public Vector3f getAxis() {
         return entityData.get(DATA_AXIS);
     }
@@ -52,6 +78,8 @@ public final class DeerclopsIcePillarProjectile extends Projectile {
     @Override
     protected void defineSynchedData() {
         entityData.define(DATA_AXIS, new Vector3f(0.0F, 1.0F, 0.0F));
+        entityData.define(DATA_RENDER_WAVE, false);
+        entityData.define(DATA_WAVE_DIRECTION, new Vector3f(0.0F, 0.0F, 1.0F));
     }
 
     @Override
@@ -61,7 +89,7 @@ public final class DeerclopsIcePillarProjectile extends Projectile {
             discard();
             return;
         }
-        if (level().isClientSide || !(getOwner() instanceof Mob owner)) {
+        if (rendersWaveModel() || level().isClientSide || !(getOwner() instanceof Mob owner)) {
             return;
         }
 
@@ -84,10 +112,14 @@ public final class DeerclopsIcePillarProjectile extends Projectile {
 
     @Override
     public boolean canHitEntity(Entity target) {
-        return target instanceof LivingEntity living
-                && getOwner() instanceof Mob owner
-                && living != owner
-                && owner.canAttack(living)
-                && !hitEntities.contains(target.getUUID());
+        return target instanceof LivingEntity living && getOwner() instanceof Mob owner && living != owner && owner.canAttack(living) && !hitEntities.contains(target.getUUID());
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animationCache;
     }
 }

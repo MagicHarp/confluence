@@ -2,8 +2,8 @@
   "credit": "Made by Mesdag",
   "parent": "builtin/entity",
   "texture_size": [
-    40,
-    40
+      32,
+      32
   ],
   "gui_light": "front",
   "display": {

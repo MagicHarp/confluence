@@ -55,6 +55,15 @@
 				},
 				{
 					"name": "phaseblade",
+                    "pivot": [
+                        -1,
+                        11,
+                        -1
+                    ]
+                },
+                {
+                    "name": "phaseblade_core",
+                    "parent": "phaseblade",
 					"pivot": [-1, 11, -1],
 					"cubes": [
 						{
@@ -68,7 +77,18 @@
 								"up": {"uv": [19, 16], "uv_size": [1, 1]},
 								"down": {"uv": [6, 21], "uv_size": [1, -1]}
 							}
-						},
+                        }
+                    ]
+                },
+                {
+                    "name": "phaseblade_outer",
+                    "parent": "phaseblade",
+                    "pivot": [
+                        -1,
+                        11,
+                        -1
+                    ],
+                    "cubes": [
 						{
 							"origin": [1, 35, 1],
 							"size": [-3, -24, -3],
@@ -80,7 +100,18 @@
 								"up": {"uv": [10, 16], "uv_size": [3, 3]},
 								"down": {"uv": [17, 3], "uv_size": [3, -3]}
 							}
-						},
+                        }
+                    ]
+                },
+                {
+                    "name": "phaseblade_middle",
+                    "parent": "phaseblade",
+                    "pivot": [
+                        -1,
+                        11,
+                        -1
+                    ],
+                    "cubes": [
 						{
 							"origin": [0.25, 34.25, 0.25],
 							"size": [-1.5, -23.5, -1.5],

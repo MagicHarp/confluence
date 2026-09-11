@@ -21,7 +21,11 @@ public final class ProjectileHitRules {
             return false;
         }
         Entity target = encounterOwner(rawTarget);
-        if (!LibEntityUtils.canHitEntity(rawTarget, owner)) {
+        if (rawTarget instanceof PartHitTarget) {
+            if (target.isRemoved() || !target.isAttackable() || owner != null && owner.isPassengerOfSameVehicle(target)) {
+                return false;
+            }
+        } else if (!LibEntityUtils.canHitEntity(rawTarget, owner)) {
             return false;
         }
         if (target == owner || owner != null && owner.isAlliedTo(target)) {

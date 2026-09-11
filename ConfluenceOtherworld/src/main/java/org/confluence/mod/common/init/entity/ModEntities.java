@@ -359,6 +359,22 @@ public final class ModEntities {
                     .noSave()
                     .noSummon()
                     .build(id.toString()));
+    public static final RegistryObject<EntityType<ThrownPhasebladeProjectile>> PHASEBLADE_PROJECTILE = register("phaseblade_projectile",
+            id -> EntityType.Builder.of(ThrownPhasebladeProjectile::new, MobCategory.MISC)
+                    .sized(0.55F, 0.55F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .noSummon()
+                    .build(id.toString()));
+    public static final RegistryObject<EntityType<ThrownPhasesaberProjectile>> PHASESABER_PROJECTILE = register("phasesaber_projectile",
+            id -> EntityType.Builder.of(ThrownPhasesaberProjectile::new, MobCategory.MISC)
+                    .sized(0.55F, 0.55F)
+                    .clientTrackingRange(10)
+                    .updateInterval(1)
+                    .noSave()
+                    .noSummon()
+                    .build(id.toString()));
     public static final RegistryObject<EntityType<DeerclopsShadowHandProjectile>> SHADOW_HAND = register("shadow_hand",
             id -> EntityType.Builder.of(DeerclopsShadowHandProjectile::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
