@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import org.confluence.mod.common.init.ModEffects;
 import org.mesdag.portlib.wrapper.common.PortEffectCure;
 import org.mesdag.portlib.wrapper.common.PortTags;
@@ -38,13 +37,6 @@ public abstract class FlaskEffect extends PortMobEffect {
                     flaskEffect.doMeleeAttack(living, victim, activeEffect.getAmplifier(), damageSource, amount);
                 }
             }
-        }
-    }
-
-    /// 保留下来的flask effect
-    public static void cloneFlaskEffects(Player old, Player neo) {
-        for (MobEffectInstance instance : old.getActiveEffects()) {
-            neo.forceAddEffect(instance, null);
         }
     }
 

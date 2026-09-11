@@ -15,6 +15,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -53,7 +54,6 @@ import org.confluence.mod.common.data.map.DiggingPower;
 import org.confluence.mod.common.data.saved.HardmodeConvertor;
 import org.confluence.mod.common.data.saved.NPCSpawner;
 import org.confluence.mod.common.data.saved.Team;
-import org.confluence.mod.common.effect.flask.FlaskEffect;
 import org.confluence.mod.common.entity.TreasureBagItemEntity;
 import org.confluence.mod.common.entity.minecart.BaseMinecartEntity;
 import org.confluence.mod.common.entity.monster.BaseMimic;
@@ -90,8 +90,8 @@ import org.confluence.terra_curio.util.TCUtils;
 import org.mesdag.portlib.event.PortEventHandler;
 import org.mesdag.portlib.event.PortEventPriority;
 import org.mesdag.portlib.event.entity.player.*;
-import org.mesdag.portlib.wrapper.common.util.PortTriState;
 import org.mesdag.portlib.wrapper.common.extensions.IPortParticleUtilsExtension;
+import org.mesdag.portlib.wrapper.common.util.PortTriState;
 import org.mesdag.portlib.wrapper.world.PortItemInteractionResult;
 
 import java.util.Objects;
@@ -374,7 +374,12 @@ public final class PlayerEvents {
         Player old = event.getOriginal();
         Player neo = event.getEntity();
 
-        FlaskEffect.cloneFlaskEffects(old, neo);
+        /// 保留flask effect，由于1.20.1没有清除旧玩家的效果，所以和1.21.1的代码不一样
+        for (MobEffectInstance instance : old.getActiveEffects()) {
+            if (instance.getCures().contains(ModEffects.FLASK)) {
+                neo.forceAddEffect(instance, null);
+            }
+        }
     }
 
     private static void respawn(PlayerEvent.PlayerRespawnEvent event) {
