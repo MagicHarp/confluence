@@ -35,6 +35,9 @@ import org.confluence.mod.common.entity.monster.BaseMonster;
 import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.confluence.mod.util.OverworldUtils;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     protected static final String SIZE_KEY = "SlimeSize";
@@ -115,11 +118,11 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     }
 
     @Override
-    public BaseBoss getBossOwner() {
+    public @Nullable BaseBoss getBossOwner() {
         return bossOwnerTracker.resolve(this);
     }
 
-    public java.util.UUID getBossOwnerUUID() {
+    public @Nullable UUID getBossOwnerUUID() {
         return bossOwnerTracker.getOwnerUUID();
     }
 
@@ -166,8 +169,7 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
     /// 按史莱姆类型执行自然生成分层规则。
     ///
     /// 生物群系数据只决定某种史莱姆能否进入候选列表；亮度、高度、昼夜和露天条件仍在
-    /// 此处统一判定。未列入任何分支的类型保持不可自然生成，包括尚未定义有效环境分支的
-    /// 青团史莱姆。
+    /// 此处统一判定。未列入任何分支的类型保持不可自然生成。
     public static boolean checkSlimeSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         if (!(level instanceof Level world)) {
             return false;
@@ -179,11 +181,9 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
 
         if (type == MonsterEntities.YELLOW_SLIME.get() || type == MonsterEntities.RED_SLIME.get() || type == MonsterEntities.DESERT_SLIME.get()) {
-            return level.getBrightness(LightLayer.SKY, pos) == 0
-                    && y >= OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY();
+            return level.getBrightness(LightLayer.SKY, pos) == 0 && y >= OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY();
         }
-        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.MOTHER_SLIME.get()
-                || type == MonsterEntities.DUNGEON_SLIME.get()) {
+        if (type == MonsterEntities.BLACK_SLIME.get() || type == MonsterEntities.MOTHER_SLIME.get() || type == MonsterEntities.DUNGEON_SLIME.get()) {
             return level.getBrightness(LightLayer.SKY, pos) == 0 && y <= OverworldUtils.getSurfaceY();
         }
         if (type == MonsterEntities.LAVA_SLIME.get()) {
@@ -200,8 +200,9 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
                 || type == MonsterEntities.JUNGLE_SLIME.get()
                 || type == MonsterEntities.SWAMP_SLIME.get()
                 || type == MonsterEntities.TROPIC_SLIME.get()) {
-            return y >= OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && world.isDay() && level.canSeeSky(pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+            return SpawnPlacementChecks.checkSurfaceDayMobSpawn(type, level, spawnType, pos, random);
         }
+        // 未被上面任何分支覆盖的类型保持不可自然生成，避免误用其他分层的条件。
         return false;
     }
 

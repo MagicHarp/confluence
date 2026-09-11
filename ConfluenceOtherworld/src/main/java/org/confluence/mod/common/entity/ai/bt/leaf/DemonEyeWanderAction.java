@@ -1,6 +1,5 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.PathfinderMob;
@@ -53,7 +52,6 @@ public final class DemonEyeWanderAction extends BTNode {
             mob.hasImpulse = true;
         }
         mob.getLookControl().setLookAt(targetPos.x, targetPos.y, targetPos.z, 30.0F, 85.0F);
-        mob.lookAt(EntityAnchorArgument.Anchor.EYES, targetPos);
         ticksLeft--;
         return BTStatus.RUNNING;
     }

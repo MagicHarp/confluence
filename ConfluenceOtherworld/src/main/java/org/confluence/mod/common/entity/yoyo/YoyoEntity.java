@@ -32,6 +32,7 @@ import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
 import org.confluence.mod.common.init.entity.ModEntities;
 import org.confluence.mod.common.item.yoyo.YoyoItem;
 import org.confluence.mod.common.item.yoyo.YoyoSession;
+import org.confluence.mod.util.PrefixUtils;
 import org.jetbrains.annotations.Nullable;
 import org.mesdag.portlib.event.entity.PortProjectileImpactEvent;
 import org.mesdag.portlib.wrapper.common.extensions.IPortEnchantmentHelperExtension;
@@ -70,6 +71,11 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
     }
 
     /// 创建实体并冻结发射瞬间的近战、暴击与穿甲上下文。
+    ///
+    /// 伤害按「物品自身倍率 × 玩家攻击力加成」组合，不能直接乘 `ATTACK_DAMAGE` 的总值：
+    /// 力量等效果会向该属性加算固定值，而武器前缀注入的是乘算修饰符。原版按
+    /// 「先乘算、后加算」结算，若把含加算部分的总值再乘一次物品倍率，力量就会被
+    /// 前缀的乘算放大（力量II 实测从 8.1 变成 56.8，恰好是 +6 被放大的 7 倍）。
     public static @Nullable YoyoEntity spawn(ServerPlayer owner, ItemStack weapon) {
         if (!(weapon.getItem() instanceof YoyoItem item)) {
             return null;
@@ -81,7 +87,8 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
         yoyo.setOwner(owner);
         yoyo.entityData.set(WEAPON, weapon.copyWithCount(1));
         yoyo.entityData.set(RANGE, item.maximumRange());
-        yoyo.setDamage(item.attackDamage() * (float) owner.getAttributeValue(LibAttributes.getAttackDamage()));
+        yoyo.setDamage((float) (item.attackDamage() * PrefixUtils.attributeWithoutHeldItem(
+                owner, LibAttributes.getAttackDamage(), weapon)));
         yoyo.setPos(owner.getX(), owner.getY(0.5F), owner.getZ());
         if (!owner.level().addFreshEntity(yoyo)) {
             yoyo.discard();

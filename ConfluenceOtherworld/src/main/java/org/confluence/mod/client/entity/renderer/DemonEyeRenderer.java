@@ -36,10 +36,9 @@ public class DemonEyeRenderer extends GeoNormalRenderer<DemonEye> {
         // 1.21 侧恶魔眼模型本身按 1.55 倍显示；1.20 额外保留变种体型差异。
         float scale = 1.55F * eye.getVariant().scale();
         poseStack.scale(scale, scale, scale);
-        // 沿当前朝向的侧轴俯仰，避免飞行和受击时被渲染成横躺在地面上。
-        double yaw = Mth.lerp(partialTick, eye.yRotO, eye.getYRot()) * Mth.DEG_TO_RAD;
+        double yaw = Mth.lerp(partialTick, eye.yBodyRotO, eye.yBodyRot) * Mth.DEG_TO_RAD;
         Vector3f pitchAxis = new Vector3f((float) Math.cos(yaw), 0.0F, (float) Math.sin(yaw));
-        poseStack.mulPose(Axis.of(pitchAxis).rotationDegrees(-Mth.lerp(partialTick, eye.xRotO, eye.getXRot())));
+        poseStack.mulPose(Axis.of(pitchAxis).rotationDegrees(Mth.rotLerp(partialTick, eye.xRotO, eye.getXRot())));
         super.preRender(poseStack, eye, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 

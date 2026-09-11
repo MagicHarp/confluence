@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -142,12 +141,15 @@ public class Hornet extends BaseFlyingMonster {
                 return BTStatus.RUNNING;
             }
 
-            if (--repathTicks <= 0 || repathTicks < REPATH_THRESHOLD) {
+            if (--repathTicks <= 0 || getNavigation().isDone() || repathTicks == REPATH_THRESHOLD) {
                 Vec3 destination = findFlightPosition(6, 3);
-                if (destination != null) {
-                    swing(InteractionHand.MAIN_HAND);
+                if (destination != null && getNavigation().createPath(destination.x, destination.y, destination.z, 0) != null) {
                     getNavigation().moveTo(destination.x, destination.y, destination.z, 1.5);
+                } else {
+                    Vec3 pursuit = target.getEyePosition();
+                    getNavigation().moveTo(pursuit.x, pursuit.y, pursuit.z, 1.5);
                 }
+                swing(InteractionHand.MAIN_HAND);
                 repathTicks = REPATH_RESET;
             }
             lookAtTarget(target, 360.0F, 360.0F);

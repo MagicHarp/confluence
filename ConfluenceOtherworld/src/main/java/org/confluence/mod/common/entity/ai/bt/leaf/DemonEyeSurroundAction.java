@@ -1,7 +1,7 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument;
-import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -9,16 +9,33 @@ import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
 
-/// 恶魔眼围绕目标上下浮动并持续修正航点的移动行为。
+/// 恶魔眼在夜间锁定玩家后的追击行为。
 ///
-/// 恶魔眼不会按固定阶段绕圈后直线冲锋，而是每四十刻重新选择玩家周围的一个航点。
-/// 航点高度按照余弦曲线变化，水平方向偶尔偏转二十度，因此整体轨迹会在玩家周围上下
-/// 浮动。移动时仍保留原速度，只在尚未达到速度上限或需要明显转向时继续加速。
+/// 行为模仿泰拉恶魔眼：先短暂悬停蓄势并朝向玩家，然后沿当前方向直线冲撞，命中或
+/// 超时后进入下一轮。它不做绕圈巡航 —— 绕圈会让航点始终保持在玩家周围若干格之外，
+/// 既不会发生接触伤害（`hasEntityContactAttack` 依赖身体碰撞），也就没有"冲撞攻击"
+/// 可言。
+///
+/// 单次冲撞的飞行方向在开冲瞬间锁定，中途不再修正：因此转弯是"一轮一次"的，
+/// 天然形成泰拉里那种偏慢的转向手感，而不是贴脸追踪。
 public final class DemonEyeSurroundAction extends BTNode {
+    /// 悬停蓄势时长，单位为刻。
+    private static final int HOVER_TICKS = 14;
+    /// 单次冲撞的最长时长，超过后强制进入下一轮，避免在障碍后长时间贴墙。
+    private static final int CHARGE_TICKS = 36;
+    /// 开冲时向玩家方向施加的初始速度。
+    private static final double CHARGE_IMPULSE = 0.32D;
+    /// 冲撞途中的持续加速度（沿锁定方向）。
+    private static final double STEER_ACCELERATION = 0.06D;
+    /// 冲撞途中允许的最大速度。
+    private static final double MAX_SPEED = 0.75D;
+    /// 水面规避探测距离，单位为方块。
+    private static final double WATER_LOOKAHEAD = 1.5D;
+
     private final PathfinderMob mob;
-    private int locateCount;
-    private int ticksLeft;
-    private Vec3 targetPos;
+    private int stateTicks;
+    private boolean charging;
+    private Vec3 chargeDirection = Vec3.ZERO;
 
     public DemonEyeSurroundAction(PathfinderMob mob) {
         this.mob = mob;
@@ -26,75 +43,103 @@ public final class DemonEyeSurroundAction extends BTNode {
 
     @Override
     public void start() {
-        LivingEntity target = mob.getTarget();
-        if (target == null) {
-            targetPos = null;
-            return;
-        }
-
-        locateCount++;
-        ticksLeft = 40;
-        mob.setDeltaMovement(mob.getDeltaMovement().with(Direction.Axis.Y, 0.0));
-        mob.hasImpulse = true;
-
-        Vec3 horizontalDirection = mob.position().with(Direction.Axis.Y, target.getY()).vectorTo(target.position());
-        float yaw = (float) Math.toDegrees(Mth.atan2(-horizontalDirection.x, horizontalDirection.z));
-        if (mob.getRandom1211().nextInt(3) == 0) {
-            yaw += mob.getRandom1211().nextBoolean() ? 20.0F : -20.0F;
-        }
-        Vec3 direction = Vec3.directionFromRotation(0.0F, yaw);
-        targetPos = direction.normalize().scale(4.0).with(Direction.Axis.Y, offsetY()).add(target.position());
+        charging = false;
+        stateTicks = 0;
+        chargeDirection = Vec3.ZERO;
+        // 立即锁定一次朝向，避免刚进入追击时还沿用上一段游荡的朝向。
+        faceTarget();
     }
 
     @Override
     public BTStatus execute() {
         LivingEntity target = mob.getTarget();
-        Vec3 position = mob.position();
-        if (target == null || !target.isAlive() || !mob.level().isNight() || targetPos == null || ticksLeft <= 0
-                || position.distanceToSqr(targetPos) <= 0.09
-                || target.position().distanceToSqr(targetPos) >= 100.0) {
+        if (target == null || !target.isAlive() || !mob.level().isNight()) {
             return BTStatus.SUCCESS;
         }
 
-        Vec3 movement = mob.getDeltaMovement();
-        Vec3 acceleration = position.vectorTo(targetPos).normalize().multiply(0.08, 0.03, 0.08);
-        Vec3 nextMovement = movement.add(acceleration);
-        if (angleBetween(acceleration, movement) > 15.0 || nextMovement.length() < 0.4) {
-            mob.setDeltaMovement(nextMovement);
-            mob.hasImpulse = true;
+        if (!charging) {
+            return tickHover(target);
         }
-        mob.getLookControl().setLookAt(targetPos.x, targetPos.y, targetPos.z, 30.0F, 85.0F);
-        mob.lookAt(EntityAnchorArgument.Anchor.EYES, targetPos);
+        return tickCharge();
+    }
 
-        ticksLeft--;
+    /// 悬停蓄势：把水平速度压下来，让身体停在原地并转向玩家。
+    private BTStatus tickHover(LivingEntity target) {
+        Vec3 movement = mob.getDeltaMovement();
+        Vec3 damped = new Vec3(movement.x * 0.7D, movement.y * 0.85D, movement.z * 0.7D);
+        mob.setDeltaMovement(damped);
+        mob.hasImpulse = true;
+        faceTarget();
+        if (++stateTicks >= HOVER_TICKS) {
+            beginCharge(target);
+        }
         return BTStatus.RUNNING;
     }
 
-    /// 碰撞改变垂直速度时同步修正当前航点，避免恶魔眼反复撞向同一块天花板或地面。
-    public void adjustTargetAfterVerticalCollision(boolean movingDown) {
+    /// 开始一次冲撞：锁定方向并给出初速。
+    private void beginCharge(LivingEntity target) {
+        Vec3 aim = target.getEyePosition().subtract(mob.getEyePosition());
+        chargeDirection = aim.lengthSqr() < 1.0E-6D ? mob.getViewVector(1.0F) : aim.normalize();
+        mob.setDeltaMovement(chargeDirection.scale(CHARGE_IMPULSE));
+        mob.hasImpulse = true;
+        stateTicks = 0;
+        charging = true;
+    }
+
+    /// 冲撞推进：沿锁定方向继续加速，命中减速或超时后回到悬停。
+    private BTStatus tickCharge() {
+        Vec3 movement = mob.getDeltaMovement();
+        Vec3 next = movement.add(chargeDirection.scale(STEER_ACCELERATION));
+        if (next.length() > MAX_SPEED) {
+            next = next.normalize().scale(MAX_SPEED);
+        }
+        // 迎面有水就抬高，把冲撞抬过水面；否则恶魔眼会一头扎进水里。
+        next = next.add(waterAvoidance(next));
+        mob.setDeltaMovement(next);
+        mob.hasImpulse = true;
+
+        stateTicks++;
+        // 撞到东西会明显掉速，这时就该收势，让下一轮重新瞄准。
+        if (stateTicks >= CHARGE_TICKS || movement.length() < CHARGE_IMPULSE * 0.4D) {
+            charging = false;
+            stateTicks = 0;
+            chargeDirection = Vec3.ZERO;
+        }
+        return BTStatus.RUNNING;
+    }
+
+    /// 若沿给定方向前进一小段会进入液体，则返回一个向上分量。
+    private Vec3 waterAvoidance(Vec3 direction) {
+        if (direction.lengthSqr() < 1.0E-8D) {
+            return Vec3.ZERO;
+        }
+        Vec3 probe = mob.getEyePosition().add(direction.normalize().scale(WATER_LOOKAHEAD));
+        BlockPos pos = BlockPos.containing(probe);
+        if (!mob.level().getFluidState(pos).is(FluidTags.WATER)) {
+            return Vec3.ZERO;
+        }
+        return new Vec3(0.0D, 0.06D, 0.0D);
+    }
+
+    /// 让身体朝向当前目标；朝向的最终权威仍是实体自身的 `tick`，这里只驱动 LookControl。
+    private void faceTarget() {
         LivingEntity target = mob.getTarget();
-        if (targetPos != null && target != null) {
-            targetPos = targetPos.with(Direction.Axis.Y,
-                    target.getY() + (movingDown ? 2.0 : -1.0));
+        if (target == null) {
+            return;
         }
+        Vec3 eye = target.getEyePosition();
+        mob.getLookControl().setLookAt(eye.x, eye.y, eye.z, 30.0F, 85.0F);
     }
 
-    Vec3 targetPosition() {
-        return targetPos;
-    }
-
-    private float offsetY() {
-        float period = 6.1F;
-        float radians = Mth.TWO_PI * (locateCount % period) / period;
-        return 2.57F * Mth.cos(radians) + 1.0F;
-    }
-
-    private static double angleBetween(Vec3 first, Vec3 second) {
-        double lengths = first.length() * second.length();
-        if (lengths < 1.0E-8) {
-            return 0.0;
+    /// 碰撞改变垂直速度时同步清理冲撞状态，避免继续朝同一块天花板或地面推进。
+    public void adjustTargetAfterVerticalCollision(boolean movingDown) {
+        if (charging) {
+            charging = false;
+            stateTicks = 0;
+            chargeDirection = Vec3.ZERO;
         }
-        double cosine = Mth.clamp(first.dot(second) / lengths, -1.0, 1.0);
-        return Math.toDegrees(Math.acos(cosine));
+        // 抬高或压低一点目标高度，让下一轮冲撞不再重复撞同一个面。
+        Vec3 movement = mob.getDeltaMovement();
+        mob.setDeltaMovement(new Vec3(movement.x, movingDown ? Mth.clamp(-movement.y, 0.1D, 0.22D) : movement.y, movement.z));
     }
 }

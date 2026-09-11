@@ -3,6 +3,7 @@ package org.confluence.mod.common.entity.projectile.mana;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.common.LibDamageTypes;
@@ -30,7 +31,7 @@ public class BeeGunBullet extends BeeProjectile {
 
     @Override
     protected void trackTarget() {
-        LivingEntity target = LibEntityUtils.getAABBAngleTarget(position(), position().add(getDeltaMovement().normalize()), level(), getOwner(), 10, 180, this::canHitEntity);
+        LivingEntity target = LibEntityUtils.getAABBAngleTarget(position(), position().add(getDeltaMovement().normalize()), level(), getOwner(), 10, 180, candidate -> candidate instanceof Enemy && canHitEntity(candidate));
         if (target == null) {
             setDeltaMovement(getDeltaMovement().normalize().scale(isGiant() ? 0.5 : 0.25));
         } else {

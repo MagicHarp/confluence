@@ -12,11 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.VariantHolder;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -181,16 +177,22 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
             setTarget(level().getNearestPlayer(getX(), getY(), getZ(), 40.0, true));
         }
         super.tick();
-        Vec3 movement = getDeltaMovement();
-        if (movement.lengthSqr() > 1.0E-8) {
-            float yaw = (float) Math.toDegrees(Mth.atan2(-movement.x, movement.z));
-            float pitch = (float) -Math.toDegrees(Mth.atan2(movement.y, movement.horizontalDistance()));
-            setYRot(yaw);
-            setXRot(pitch);
-            setYBodyRot(yaw);
-            setYHeadRot(yaw);
-            getLookControl().setLookAt(getEyePosition().add(movement));
+        LivingEntity target = getTarget();
+        Vec3 lookAt = target != null && target.isAlive() ? target.getEyePosition() : getEyePosition().add(getDeltaMovement());
+        applyLookRotation(lookAt);
+    }
+
+    private void applyLookRotation(Vec3 lookAt) {
+        Vec3 direction = lookAt.subtract(getEyePosition());
+        if (direction.lengthSqr() < 1.0E-8) {
+            return;
         }
+        float yaw = (float) Math.toDegrees(Mth.atan2(-direction.x, direction.z));
+        float pitch = (float) Math.toDegrees(Mth.atan2(direction.y, direction.horizontalDistance()));
+        setYRot(yaw);
+        setXRot(pitch);
+        setYBodyRot(yaw);
+        setYHeadRot(yaw);
     }
 
     public enum Variant implements IVariant {

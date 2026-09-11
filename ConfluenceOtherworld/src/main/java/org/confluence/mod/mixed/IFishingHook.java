@@ -23,6 +23,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.confluence.lib.mixed.ILibExtraSyncedData;
 import org.confluence.lib.util.LibMathUtils;
+import org.confluence.mod.common.attachment.PlayerSpecialData;
 import org.confluence.mod.common.data.AnglerQuestLoader;
 import org.confluence.mod.common.data.saved.AnglerData;
 import org.confluence.mod.common.init.ModEffects;
@@ -94,8 +95,9 @@ public interface IFishingHook extends ILibExtraSyncedData<FishingHook> {
         if (self.getPlayerOwner() instanceof ServerPlayer player) {
             ServerLevel level = player.serverLevel();
             AnglerData.INSTANCE.refreshIfNeeded(level);
+            boolean questPending = !PlayerSpecialData.of(player).hasCompletedAnglerQuestToday(level);
             Item questedFish = AnglerData.INSTANCE.getQuestFish();
-            boolean catchableQuest = AnglerQuestLoader.getInstance().find(questedFish)
+            boolean catchableQuest = questPending && AnglerQuestLoader.getInstance().find(questedFish)
                     .map(entry -> entry.canBeCaught(self))
                     .orElse(false);
             if (catchableQuest && LibMathUtils.checkChance(0.25F, self.getRandom1211())) {

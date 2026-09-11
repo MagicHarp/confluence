@@ -98,8 +98,6 @@ public final class CreatureSpawnPlacements {
                 MonsterEntities.DECAYEDER, MonsterEntities.CRIMERA,
                 MonsterEntities.EATER_OF_SOULS, MonsterEntities.BLOOD_CRAWLER,
                 MonsterEntities.JUNGLE_BAT);
-        // 玩家位于地表腐化地时仍可触发候选生成，但吞噬怪本体必须先在地下生成，
-        // 再依靠蠕虫行为钻出；不能像普通陆地怪一样直接站到草地上。
         group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks::checkBelowSurfaceMonsterSpawn,
                 MonsterEntities.DEVOURER);
         group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks::checkGhostSpawn, MonsterEntities.GHOST);
@@ -137,57 +135,57 @@ public final class CreatureSpawnPlacements {
     }
 
     private static void registerHardmodeMonsters(PortRegisterSpawnPlacementsEvent event) {
-        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkHighLevelMonsterSpawn), MonsterEntities.WYVERN, MonsterEntities.ARCH_WYVERN);
+        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkHighLevelMonsterSpawn), MonsterEntities.WYVERN, MonsterEntities.ARCH_WYVERN);
         group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkRoutineMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkRoutineMonsterSpawn),
                 MonsterEntities.CORRUPTOR, MonsterEntities.ENCHANTED_SWORD,
                 MonsterEntities.SLIMER);
-        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkSurfaceNightMonsterSpawn), MonsterEntities.GIANT_FLYING_FOX, MonsterEntities.GASTROPOD);
-        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkSurfaceDayMobSpawn), MonsterEntities.DERPLING);
+        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkSurfaceNightMonsterSpawn), MonsterEntities.GIANT_FLYING_FOX, MonsterEntities.GASTROPOD);
+        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkSurfaceDayMobSpawn), MonsterEntities.DERPLING);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkSurfaceMobSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkSurfaceMobSpawn),
                 MonsterEntities.PIXIE, MonsterEntities.UNICORN);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkRoutineMobSpawn), MonsterEntities.GIANT_TORTOISE);
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkRoutineMobSpawn), MonsterEntities.GIANT_TORTOISE);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(BaseSlime::checkSlimeSpawn), MonsterEntities.CRIMSLIME, MonsterEntities.CORRUPT_SLIME);
+                SpawnPlacementChecks.hardmode(BaseSlime::checkSlimeSpawn), MonsterEntities.CRIMSLIME, MonsterEntities.CORRUPT_SLIME);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkCaveMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkCaveMonsterSpawn),
                 MonsterEntities.CHAOS_ELEMENTAL);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkUndergroundMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkUndergroundMonsterSpawn),
                 MonsterEntities.LUMINOUS_SLIME,
                 MonsterEntities.DARK_LAMIA, MonsterEntities.LIGHT_LAMIA,
                 MonsterEntities.GHOUL, MonsterEntities.TAINTED_GHOUL,
                 MonsterEntities.VILE_GHOUL, MonsterEntities.DREAMER_GHOUL,
                 MonsterEntities.SAND_POACHER);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkGroundSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkGroundSpawn),
                 MonsterEntities.WOODEN_MIMIC);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkCaveMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkCaveMonsterSpawn),
                 MonsterEntities.GIANT_BAT);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
                 atLeast(GamePhase.PLANTERA, SpawnPlacementChecks::checkDungeonMonsterSpawn),
                 MonsterEntities.PALADIN, MonsterEntities.BONE_LEE,
                 MonsterEntities.NECROMANCER, MonsterEntities.DIABOLIST,
                 MonsterEntities.RAGGED_CASTER);
-        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkDungeonMonsterSpawn), MonsterEntities.BLAZING_WHEEL, MonsterEntities.SPIKE_BALL);
-        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkPossessedArmorSpawn), MonsterEntities.POSSESS_ARMOR);
-        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkWraithSpawn), MonsterEntities.WRAITH);
+        group(event, PortSpawnPlacementTypes.NO_RESTRICTIONS, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkDungeonMonsterSpawn), MonsterEntities.BLAZING_WHEEL, MonsterEntities.SPIKE_BALL);
+        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkPossessedArmorSpawn), MonsterEntities.POSSESS_ARMOR);
+        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkWraithSpawn), MonsterEntities.WRAITH);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkBelowSurfaceMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkBelowSurfaceMonsterSpawn),
                 MonsterEntities.GOLDEN_MIMIC, MonsterEntities.ICE_MIMIC,
                 MonsterEntities.CRIMSON_MIMIC, MonsterEntities.CORRUPT_MIMIC,
                 MonsterEntities.HALLOWED_MIMIC, MonsterEntities.JUNGLE_MIMIC);
-        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkNetherMonsterSpawn), MonsterEntities.SHADOW_MIMIC);
+        group(event, PortSpawnPlacementTypes.ON_GROUND, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkNetherMonsterSpawn), MonsterEntities.SHADOW_MIMIC);
         group(event, PortSpawnPlacementTypes.ON_GROUND,
-                SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkRoutineMonsterSpawn),
+                SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkRoutineMonsterSpawn),
                 MonsterEntities.MUMMY, MonsterEntities.DARK_MUMMY,
                 MonsterEntities.BLOOD_MUMMY, MonsterEntities.LIGHT_MUMMY,
                 MonsterEntities.HERPLING);
-        group(event, PortSpawnPlacementTypes.IN_WATER, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkUndergroundWaterMonsterSpawn), MonsterEntities.GREEN_JELLYFISH);
-        group(event, PortSpawnPlacementTypes.IN_WATER, SpawnPlacementChecks.<Mob>hardmode(SpawnPlacementChecks::checkWaterMonsterSpawn), MonsterEntities.ARAPAIMA, MonsterEntities.BLOOD_FEEDER);
+        group(event, PortSpawnPlacementTypes.IN_WATER, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkUndergroundWaterMonsterSpawn), MonsterEntities.GREEN_JELLYFISH);
+        group(event, PortSpawnPlacementTypes.IN_WATER, SpawnPlacementChecks.hardmode(SpawnPlacementChecks::checkWaterMonsterSpawn), MonsterEntities.ARAPAIMA, MonsterEntities.BLOOD_FEEDER);
     }
 
     private static boolean checkWormSpawn(EntityType<Worm> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -200,21 +198,15 @@ public final class CreatureSpawnPlacements {
     }
 
     private static boolean checkCavernCritterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getUndergroundY()
-                && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getUndergroundY() && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     private static boolean checkSurfaceDayCritterSpawn(EntityType<? extends Animal> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return level instanceof ServerLevel serverLevel
-                && serverLevel.isDay()
-                && pos.getY() > OverworldUtils.getSurfaceY()
-                && Animal.checkAnimalSpawnRules(type, level, spawnType, pos, random);
+        return level instanceof ServerLevel serverLevel && serverLevel.isDay() && pos.getY() > OverworldUtils.getSurfaceY() && Animal.checkAnimalSpawnRules(type, level, spawnType, pos, random);
     }
 
     private static boolean checkNetherDayCritterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return level instanceof ServerLevel serverLevel
-                && serverLevel.getServer().overworld().isDay()
-                && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return level instanceof ServerLevel serverLevel && serverLevel.getServer().overworld().isDay() && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     private static boolean checkLadybugSpawn(EntityType<? extends Animal> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -232,7 +224,7 @@ public final class CreatureSpawnPlacements {
             return false;
         }
         AABB populationArea = new AABB(pos).inflate(LACEWING_POPULATION_RADIUS, LACEWING_POPULATION_HEIGHT, LACEWING_POPULATION_RADIUS);
-        if (!serverLevel.getEntities(type, populationArea, entity -> entity.isAlive()).isEmpty())
+        if (!serverLevel.getEntities(type, populationArea, LivingEntity::isAlive).isEmpty())
             return false;
         return Animal.checkAnimalSpawnRules(type, level, spawnType, pos, random);
     }
@@ -243,9 +235,10 @@ public final class CreatureSpawnPlacements {
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    private static void group(PortRegisterSpawnPlacementsEvent event, PortSpawnPlacementType placement, SpawnPlacements.SpawnPredicate predicate, RegistryObject<? extends EntityType<?>>... types) {
-        // 泛型在 RegistryObject<?> 边界被擦除；所有调用点都只传入 Mob 类型，并由测试审计覆盖。
-        for (RegistryObject<? extends EntityType<?>> type : types) {
+    private static void group(PortRegisterSpawnPlacementsEvent event, PortSpawnPlacementType placement, SpawnPlacements.SpawnPredicate predicate, RegistryObject... types) {
+        // 可变参数的数组元素必须是可具体化类型，否则每个调用点都会创建未经检查的泛型数组。
+        // 这里仅在统一注册边界使用原始 RegistryObject，具体实体类型仍由各注册项自身持有。
+        for (RegistryObject type : types) {
             event.register((EntityType) type.get(), placement, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate, PortRegisterSpawnPlacementsEvent.Operation.REPLACE);
         }
     }

@@ -1,6 +1,10 @@
 package org.confluence.mod.util;
 
+import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -86,6 +90,28 @@ public final class PrefixUtils {
 
     public static @Nullable PrefixComponent getPrefix(ItemStack itemStack) {
         return itemStack.isEmpty() ? null : itemStack.get(ModDataComponentTypes.PREFIX);
+    }
+
+    /// 取实体在指定属性上的加成，并剔除手持物品自身对该属性的贡献。
+    public static double attributeWithoutHeldItem(LivingEntity entity, Holder<Attribute> attribute, ItemStack heldItem) {
+        double heldValue = PrefixUtils.heldItemContribution(heldItem, 1.0D, attribute.value());
+        return heldValue > 0.0D ? entity.getAttributeValue(attribute) / heldValue : entity.getAttributeValue(attribute);
+    }
+
+    /// 以基准值反推手持物品在该属性上的贡献，等价于原版对物品修饰符的结算。
+    public static double heldItemContribution(ItemStack heldItem, double baseValue, Attribute attribute) {
+        double value = baseValue;
+        PrefixComponent prefix = getPrefix(heldItem);
+        if (prefix != null) {
+            for (AttributeModifier modifier : prefix.modifiers().get().get(attribute)) {
+                value += switch (modifier.getOperation()) {
+                    case ADDITION -> modifier.getAmount();
+                    case MULTIPLY_BASE -> modifier.getAmount() * baseValue;
+                    case MULTIPLY_TOTAL -> modifier.getAmount() * value;
+                };
+            }
+        }
+        return value;
     }
 
     public static int calculateUseTime(Player player, int baseTicks) {

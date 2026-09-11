@@ -31,39 +31,33 @@ public final class SpawnPlacementChecks {
 
     public static boolean checkGroundSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkUndergroundMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return y > OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkCaveMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getUndergroundY()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getUndergroundY() && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     /// 地下层与洞穴层共用的放置规则，适用于泰拉中标注为“地下及更深处”的敌怪。
     public static boolean checkBelowSurfaceMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getSurfaceY()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkDungeonMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() >= -35 && pos.getY() <= 40 && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() >= -35 && pos.getY() <= 40 && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkHighLevelMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() > OverworldUtils.getSpaceY() && pos.getY() < level.getMaxBuildHeight()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() > OverworldUtils.getSpaceY() && pos.getY() < level.getMaxBuildHeight() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkNetherMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return level instanceof Level world && world.dimension() == OverworldUtils.underworld()
-                && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return level instanceof Level world && world.dimension() == OverworldUtils.underworld() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkFlyingFishSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -93,9 +87,7 @@ public final class SpawnPlacementChecks {
             return false;
         }
         int y = pos.getY();
-        // 地下可全天生成；地表高度带仅允许夜晚生成。
-        boolean validAltitude = y >= level.getMinBuildHeight() && (y < OverworldUtils.getSurfaceY()
-                || y < OverworldUtils.getSpaceY() && level instanceof Level world && world.isNight());
+        boolean validAltitude = y >= level.getMinBuildHeight() && (y < OverworldUtils.getSurfaceY() || y < OverworldUtils.getSpaceY() && level instanceof Level world && world.isNight());
         return validAltitude && level instanceof Level world && hasClearColumn(world, pos);
     }
 
@@ -106,13 +98,11 @@ public final class SpawnPlacementChecks {
 
     public static boolean checkSurfaceWaterMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY()
-                && hasDeepWater(level, pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && hasDeepWater(level, pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkUndergroundWaterMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getSurfaceY() && hasDeepWater(level, pos)
-                && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && hasDeepWater(level, pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkGoblinScoutSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -126,8 +116,7 @@ public final class SpawnPlacementChecks {
 
     public static boolean checkSurfaceMobSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY()
-                && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkRoutineMobSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -155,8 +144,7 @@ public final class SpawnPlacementChecks {
         if (CommonConfigs.SPAWN_WITHOUT_LIGHT.get()) {
             return Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
         }
-        EntityType<? extends Monster> monsterType =
-                (EntityType<? extends Monster>) (EntityType<?>) type;
+        EntityType<? extends Monster> monsterType = (EntityType<? extends Monster>) type;
         return Monster.checkMonsterSpawnRules(monsterType, level, spawnType, pos, random);
     }
 
