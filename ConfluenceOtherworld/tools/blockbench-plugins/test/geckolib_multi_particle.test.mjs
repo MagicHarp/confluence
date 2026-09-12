@@ -35,6 +35,8 @@ function createEnvironment() {
 		listeners: {},
 		messages: [],
 		quickMessages: [],
+		warnings: [],
+		errors: [],
 		settings: {},
 		categories: {},
 		removedSettings: [],
@@ -46,6 +48,13 @@ function createEnvironment() {
 		undo_edits: [],
 		preview_count: 0,
 		observed: [],
+	};
+
+	// 插件用 console.warn 记录“写出了数组”的提示，这里收集起来断言
+	env.console = {
+		log() {},
+		warn: (...args) => env.warnings.push(args.join(' ')),
+		error: (...args) => env.errors.push(args.join(' ')),
 	};
 
 	env.Plugin = {
@@ -242,88 +251,72 @@ test('注册插件、创建设置项、patch 编解码器', () => {
 
 	const ids = Object.keys(env.settings);
 	assert.deepEqual(ids.sort(), [
-		'geckolib_multi_particle_array_runtime_ready',
 		'geckolib_multi_particle_enabled',
-		'geckolib_multi_particle_export_mode',
 		'geckolib_multi_particle_force_linear',
-		'geckolib_multi_particle_merge_epsilon',
-		'geckolib_multi_particle_merge_on_import',
-		'geckolib_multi_particle_sub_tick_offset',
 	].sort());
 
-	assert.equal(env.settings.geckolib_multi_particle_export_mode.value, 'array', '默认应输出数组（工程内置 mixin）');
-	assert.equal(env.settings.geckolib_multi_particle_array_runtime_ready.value, true);
 	assert.notEqual(env.codec.compileAnimation, env.original_compile, 'compileAnimation 应该被包装');
-	assert.notEqual(env.codec.loadFile, env.original_load, 'loadFile 应该被包装');
+	assert.equal(env.codec.loadFile, env.original_load, 'loadFile 不应该被包装（插件不碰导入）');
 	assert.ok(env.listeners.render_frame && env.listeners.render_frame.length === 1);
 	assert.ok(env.listeners.update_keyframe_selection && env.listeners.update_keyframe_selection.length === 1);
 	assert.equal(env.toolbar_children.length, 1, '工具栏按钮应该被加入 keyframe 工具栏');
 	assert.equal(env.Keyframe.prototype.menu.structure.length, 1, '右键菜单项应该被加入');
 });
 
-/* 2. 导出：split 模式 ---------------------------------------------------- */
-test('导出 split 模式：同一关键帧的多个效果拆成亚刻偏移', () => {
+/* 2. 导出：多效果 -> 数组，单效果 -> 对象 --------------------------------- */
+test('导出：多效果关键帧写成数组，单效果关键帧保持对象写法', () => {
 	const env = createEnvironment();
 	loadPlugin(env);
-	env.settings.geckolib_multi_particle_export_mode.value = 'split';
 
 	const p1 = { effect: 'minecraft:flame' };
 	const p2 = { effect: 'minecraft:smoke' };
 	const p3 = { effect: 'minecraft:heart' };
 	const p4 = { effect: 'minecraft:crit' };
+	const single = { effect: 'minecraft:single', locator: 'root' };
 	const s1 = { effect: 'minecraft:block.note_block.bell' };
 	const s2 = { effect: 'minecraft:block.note_block.hat' };
 	env.compile_result = {
-		particle_effects: { '10.0': [p1, p2], '0.1': [p3, p4], '2.0': { effect: 'single' } },
+		particle_effects: { '10.0': [p1, p2], '0.1': [p3, p4], '2.0': single },
 		sound_effects: { '0.5': [s1, s2] },
 	};
 
 	const result = env.codec.compileAnimation({ name: 'animation.test' });
 
-	assert.deepEqual(Object.keys(result.particle_effects), ['10.0', '10.00001', '0.1', '0.10001', '2.0']);
-	assert.equal(result.particle_effects['10.0'], p1);
-	assert.equal(result.particle_effects['10.00001'], p2);
-	// 浮点噪声检查：0.1 + 1e-5 必须是 "0.10001"，而不是 "0.11000000000000001"
-	assert.equal(result.particle_effects['0.1'], p3);
-	assert.equal(result.particle_effects['0.10001'], p4);
-	assert.deepEqual(result.particle_effects['2.0'], { effect: 'single' });
-	assert.deepEqual(Object.keys(result.sound_effects), ['0.5', '0.50001']);
-	assert.equal(result.sound_effects['0.50001'], s2);
+	// 时间码不被改写，一个时间码仍然只有一个条目
+	assert.deepEqual(Object.keys(result.particle_effects), ['10.0', '0.1', '2.0']);
+	assert.deepEqual(plain(result.particle_effects['10.0']), [p1, p2]);
+	assert.deepEqual(plain(result.particle_effects['0.1']), [p3, p4]);
+	assert.deepEqual(plain(result.particle_effects['2.0']), single, '单效果必须还是普通对象');
+	assert.deepEqual(plain(result.sound_effects['0.5']), [s1, s2]);
 });
 
-/* 3. 导出：array 模式 ---------------------------------------------------- */
-test('导出 array 模式：保持数组并只警告一次', () => {
+test('导出：1 个数据点的数组会被还原成对象写法', () => {
 	const env = createEnvironment();
 	loadPlugin(env);
-	env.settings.geckolib_multi_particle_export_mode.value = 'array';
-	env.settings.geckolib_multi_particle_array_runtime_ready.value = false; // 未打运行时补丁才会提示
+
+	// 例如关键帧有两个 data point，但其中一个 effect 为空（核心只返回一个点）
+	const only = { effect: 'minecraft:flame' };
+	env.compile_result = { particle_effects: { '0.5': [only] } };
+
+	const result = env.codec.compileAnimation({ name: 'animation.test' });
+	assert.deepEqual(plain(result.particle_effects['0.5']), only);
+	assert.equal(env.warnings.length, 0, '没有写出数组就不该提示');
+});
+
+test('导出数组时只在控制台提示一次', () => {
+	const env = createEnvironment();
+	loadPlugin(env);
 
 	const points = [{ effect: 'a' }, { effect: 'b' }];
 	env.compile_result = { particle_effects: { '0.5': points } };
-
 	const first = env.codec.compileAnimation({ name: 'animation.test' });
-	assert.deepEqual(first.particle_effects['0.5'], points);
-	assert.equal(env.quickMessages.length, 1, '应该给出一次警告');
+	assert.deepEqual(plain(first.particle_effects['0.5']), points);
+	assert.equal(env.warnings.length, 1, '应该给出一次控制台提示');
+	assert.equal(env.quickMessages.length, 0, '不应该弹窗打扰');
 
 	env.compile_result = { particle_effects: { '0.5': points } };
 	env.codec.compileAnimation({ name: 'animation.test' });
-	assert.equal(env.quickMessages.length, 1, '警告不应重复');
-});
-
-test('array 模式 + 已打运行时补丁时不再提示', () => {
-	const env = createEnvironment();
-	loadPlugin(env);
-	// 默认就是 array + 已打补丁
-	assert.equal(env.settings.geckolib_multi_particle_export_mode.value, 'array');
-	assert.equal(env.settings.geckolib_multi_particle_array_runtime_ready.value, true);
-
-	const points = [{ effect: 'a' }, { effect: 'b' }];
-	env.compile_result = { particle_effects: { '0.5': points } };
-
-	const result = env.codec.compileAnimation({ name: 'animation.test' });
-	assert.deepEqual(plain(result.particle_effects['0.5']), points);
-	assert.deepEqual(Object.keys(result.particle_effects), ['0.5'], '不应再出现 0.50001 之类的亚刻条目');
-	assert.equal(env.quickMessages.length, 0, '打补丁后不应再提示');
+	assert.equal(env.warnings.length, 1, '提示不应重复');
 });
 
 test('默认导出：0.0 关键帧上的两个效果写成数组（复现用户场景）', () => {
@@ -338,78 +331,29 @@ test('默认导出：0.0 关键帧上的两个效果写成数组（复现用户�
 	assert.deepEqual(plain(result.particle_effects), { '0.0': [pa, pb] });
 });
 
-/* 4. 导入合并 ------------------------------------------------------------ */
-test('导入时把亚刻偏移条目合并为一个关键帧的多个效果', () => {
+/* 4. 导入：插件完全不碰导入路径 ------------------------------------------ */
+test('导入路径不被 patch（数组写法由 GeckoLib 插件自己解析）', () => {
 	const env = createEnvironment();
 	loadPlugin(env);
 
-	const content = JSON.stringify({
-		format_version: '1.8.0',
-		animations: {
-			'animation.test': {
-				particle_effects: {
-					'0.5': { effect: 'a' },
-					'0.50001': { effect: 'b' },
-					'0.50002': { effect: 'c' },
-					'1.0': { effect: 'd' },
-				},
-				sound_effects: {
-					'0.25': { effect: 's1' },
-					'0.25001': { effect: 's2' },
+	assert.equal(env.codec.loadFile, env.original_load, 'loadFile 不应该被包装');
+
+	const file = {
+		content: JSON.stringify({
+			animations: {
+				'animation.test': {
+					particle_effects: { '0.5': [{ effect: 'a' }, { effect: 'b' }] },
 				},
 			},
-		},
-	});
+		}),
+	};
+	env.codec.loadFile(file);
 
-	env.codec.loadFile({ content, path: 'test.animation.json' });
-
-	const animations = env.load_file_argument.json.animations['animation.test'];
-	const particles = animations.particle_effects;
-	assert.ok(Array.isArray(particles['0.5']), '0.5 应该合并成数组');
-	assert.deepEqual(plain(particles['0.5']).map(point => point.effect), ['a', 'b', 'c']);
-	assert.deepEqual(plain(particles['1.0']), { effect: 'd' });
-	assert.deepEqual(plain(animations.sound_effects['0.25']).map(point => point.effect), ['s1', 's2']);
+	assert.equal(env.load_file_argument, file, '文件对象应原样传给 GeckoLib 插件');
+	assert.equal(file.json, undefined, '插件不应改写导入内容（不做亚刻合并）');
 });
 
-test('导入合并：阈值之外的条目保持独立', () => {
-	const env = createEnvironment();
-	loadPlugin(env);
-
-	const content = JSON.stringify({
-		animations: {
-			'animation.test': {
-				particle_effects: { '0.5': { effect: 'a' }, '0.51': { effect: 'b' } },
-			},
-		},
-	});
-	env.codec.loadFile({ content });
-
-	const particles = env.load_file_argument.json.animations['animation.test'].particle_effects;
-	assert.deepEqual(Object.keys(particles), ['0.5', '0.51']);
-	assert.deepEqual(plain(particles['0.51']), { effect: 'b' });
-});
-
-/* 5. 模型层兜底合并 ------------------------------------------------------ */
-test('模型层兜底合并（加载顺序导致预处理没生效时）', () => {
-	const env = createEnvironment();
-	loadPlugin(env);
-
-	const anchor = effectKeyframe(0.5);
-	const second = effectKeyframe(0.50001);
-	const third = effectKeyframe(1.0);
-	const animation = { animators: { effects: { particle: [anchor, second, third] } } };
-	env.load_result = [animation];
-
-	env.codec.loadFile({ content: '{}' });
-
-	assert.equal(second.removed, true, '距离过近的关键帧应被移除');
-	assert.equal(anchor.data_points.length, 2, '第二个关键帧的 data point 应并入第一个');
-	assert.deepEqual(anchor.data_points.map(point => point.effect), ['effect_0', 'effect_0']);
-	assert.equal(third.removed, undefined);
-	assert.equal(animation.animators.effects.particle.length, 3, '移除由关键帧自身负责，数组内容不动');
-});
-
-/* 6. 手动添加效果 -------------------------------------------------------- */
+/* 5. 手动添加效果 -------------------------------------------------------- */
 test('“添加粒子效果”动作会复制现有效果为新条目', () => {
 	const env = createEnvironment();
 	loadPlugin(env);
@@ -492,7 +436,7 @@ test('onunload 完整还原', () => {
 	assert.equal(env.toolbar_children.length, 0);
 	assert.equal(env.Keyframe.prototype.menu.structure.length, 0);
 	assert.equal(Object.keys(env.settings).length, 0);
-	assert.equal(env.removedSettings.length, 7);
+	assert.equal(env.removedSettings.length, 2);
 	assert.equal(env.observed_disconnected, true);
 	assert.equal((env.listeners.render_frame || []).length, 0, 'render_frame 监听应被移除');
 	assert.equal((env.listeners.update_keyframe_selection || []).length, 0, 'update_keyframe_selection 监听应被移除');

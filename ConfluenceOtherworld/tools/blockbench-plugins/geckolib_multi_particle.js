@@ -9,16 +9,13 @@
  * 原理 / How it works
  *  - Blockbench 核心本身支持 effect 通道（particle / sound）的关键帧拥有多个 data point
  *    （`EffectAnimator.channels.particle.max_data_points = 1000`，
- *     `Keyframe#compileBedrockKeyframe()` 在 data_points > 1 时会返回数组）。
+ *     `Keyframe#compileBedrockKeyframe()` 在 data_points > 1 时返回数组，否则返回单个对象）。
  *  - 但 GeckoLib 官方插件在每一帧都会隐藏关键帧面板里的 “+” (add data point) 按钮，
  *    于是编辑器里无法为一个关键帧添加第二个粒子效果。本插件只在“效果通道”的关键帧上
  *    恢复该按钮，不动骨骼（rotation/position/scale）关键帧的行为。
- *  - GeckoLib 运行时（4.x 与 5.x 的 `particle_effects` / `sound_effects` 都是
- *    `Map<时间, 效果对象>`）只接受“每个时间点一个效果对象”，因此导出时默认把同一关键帧上
- *    的额外效果拆成“亚刻（sub-tick）时间偏移”的独立条目 —— 这些条目间隔只有 1e-5 秒
- *    （0.0002 游戏刻），GeckoLib 的 `adjustedTick >= keyframeTick` 判定会让它们在同一个
- *    游戏刻/同一渲染帧内全部触发，视觉上等于同时发射。
- *  - 导入时再把这种亚刻偏移的条目合并回一个关键帧的多个 data point，保证往返编辑不丢信息。
+ *  - 导出时固定为：多效果关键帧写成数组，单效果关键帧保持原来的对象写法（不做任何时间偏移）。
+ *    数组写法需要运行时支持 —— 见 ConfluenceOtherworld 的
+ *    `integration.geckolib.KeyFramesAdapterMixin`。
  *
  * @author  DSH
  * @version 1.0.0
@@ -35,30 +32,18 @@
 	const EFFECT_JSON_KEYS = { particle: 'particle_effects', sound: 'sound_effects' };
 	const CATEGORY_ID = PLUGIN_ID;
 
-	/** 亚刻偏移允许的范围（秒） */
-	const MIN_OFFSET = 1e-9;
-	const MAX_OFFSET = 0.05;
-	/** 合并阈值允许的范围（秒） */
-	const MIN_EPSILON = 1e-9;
-	const MAX_EPSILON = 0.05;
-
-	const DEFAULT_OFFSET = 0.00001;   // 1e-5 s = 0.0002 游戏刻
-	const DEFAULT_EPSILON = 0.0001;   // 1e-4 s = 0.002 游戏刻
-
 	const state = {
 		/** 被 patch 的动画编解码器（GeckoLib 复用 Bedrock 的 animation codec） */
 		codec: null,
 		originalCompileAnimation: null,
-		originalLoadFile: null,
 		patchedCompile: null,
-		patchedLoad: null,
 		observer: null,
 		observerTarget: null,
 		toolbarItem: null,
 		menuItem: null,
 		/** 已注册的事件监听：[event, handler]，卸载时逐个移除 */
 		listeners: [],
-		warnedArrayMode: false,
+		notifiedArrayExport: false,
 	};
 
 	/** Setting 实例，键为短名 */
@@ -84,25 +69,6 @@
 	/** 插件是否应当生效（设置已启用 + 当前工程是 GeckoLib 格式） */
 	function isActive() {
 		return !!setting('enabled', true) && isGeckoLibProject();
-	}
-
-	function clampNumber(value, min, max, fallback) {
-		const number = typeof value === 'number' ? value : parseFloat(value);
-		if (!isFinite(number) || number <= 0) return fallback;
-		return Math.min(max, Math.max(min, number));
-	}
-
-	function subTickOffset() {
-		return clampNumber(setting('sub_tick_offset', DEFAULT_OFFSET), MIN_OFFSET, MAX_OFFSET, DEFAULT_OFFSET);
-	}
-
-	function mergeEpsilon() {
-		return clampNumber(setting('merge_epsilon', DEFAULT_EPSILON), MIN_EPSILON, MAX_EPSILON, DEFAULT_EPSILON);
-	}
-
-	/** 'array' = 基岩版风格数组（默认，需 mixin 支持）；'split' = 亚刻偏移（任何 GeckoLib 都能读） */
-	function exportMode() {
-		return setting('export_mode', 'array') === 'split' ? 'split' : 'array';
 	}
 
 	/** 关键帧是否属于“效果”通道（粒子 / 音效），而不是骨骼变换通道 */
@@ -145,244 +111,71 @@
 	}
 
 	/* ====================================================================== *
-	 * 时间码（timecode）处理
+	 * 导出：多效果关键帧 -> 数组，单效果关键帧 -> 原来的对象写法
 	 * ====================================================================== */
 
 	/**
-	 * 把秒数格式化成 Bedrock / GeckoLib 的时间码字符串。
-	 * 始终保留小数点（Blockbench 的 `getTimecodeString()` 也是这个风格），并且不会产生
-	 * 浮点噪声（0.1 + 1e-5 -> "0.10001"）。
-	 */
-	function formatTimecode(time) {
-		let text = time.toFixed(9).replace(/0+$/, '').replace(/\.$/, '');
-		if (text === '' || text === '-0') text = '0';
-		if (text.indexOf('.') === -1) text += '.0';
-		return text;
-	}
-
-	/** 在时间码上加一个偏移；偏移为 0 时原样返回，避免改写原本的写法 */
-	function timecodeWithOffset(timecode, delta) {
-		if (!delta) return timecode;
-		const base = parseFloat(timecode);
-		if (!isFinite(base)) return timecode;
-		return formatTimecode(base + delta);
-	}
-
-	/* ====================================================================== *
-	 * 导出：把“一个关键帧上的多个效果”转换成 GeckoLib 能读的形式
-	 * ====================================================================== */
-
-	/**
-	 * 处理一个 `xxx_effects` 对象。
+	 * 归一化一个 `xxx_effects` 对象（幂等）：
 	 *
-	 * 核心编译出来的结构是：
-	 *   { "0.5": { effect, locator, ... } }                       只有一个效果
-	 *   { "0.5": [ { effect, ... }, { effect, ... } ] }            同一关键帧有多个效果
+	 *   { "0.5": { effect, locator, pre_effect_script } }              只有一个效果 —— 原样保留
+	 *   { "0.5": [ { effect, ... }, { effect, ... } ] }               多个效果 —— 数组
 	 *
-	 * - split 模式：第二个及以后的效果写成 "0.50001"、"0.50002" … 的独立条目（运行时兼容）
-	 * - array 模式：保持数组（基岩版风格，但官方 GeckoLib 运行时会抛 "Not a JSON Object"）
+	 * Blockbench 核心的 `Keyframe#compileBedrockKeyframe()` 本来就是这么输出的
+	 * （`points.length <= 1 ? points[0] : points`），这里只是再保证一次，
+	 * 顺便把“是否真的写出了数组”告诉调用方。
+	 *
+	 * @returns {{effects: object, hasArray: boolean}}
 	 */
-	function transformEffectsObject(effects, mode, offset) {
-		if (!effects || typeof effects !== 'object') return effects;
+	function normalizeEffectsObject(effects) {
+		if (!effects || typeof effects !== 'object') return { effects, hasArray: false };
 
 		const result = {};
+		let hasArray = false;
+
 		for (const timecode in effects) {
 			if (!Object.prototype.hasOwnProperty.call(effects, timecode)) continue;
 			const value = effects[timecode];
 
-			if (Array.isArray(value) && value.length > 1) {
+			if (Array.isArray(value)) {
 				const points = value.filter(point => point !== undefined && point !== null && point !== '');
 				if (points.length === 0) continue;
-
-				if (mode === 'array') {
-					result[timecode] = points.length === 1 ? points[0] : points;
+				if (points.length === 1) {
+					result[timecode] = points[0];
 				} else {
-					points.forEach((point, index) => {
-						result[timecodeWithOffset(timecode, index * offset)] = point;
-					});
+					result[timecode] = points;
+					hasArray = true;
 				}
 			} else {
 				result[timecode] = value;
 			}
 		}
-		return result;
+
+		return { effects: result, hasArray };
 	}
 
 	/** 处理单个动画的编译结果（`animation_codec.compileAnimation()` 的返回值） */
 	function transformCompiledAnimation(animationTag) {
 		if (!animationTag || typeof animationTag !== 'object') return animationTag;
 
-		const mode = exportMode();
-		const offset = subTickOffset();
-		let usedArrayMode = false;
+		let hasArray = false;
 
 		for (const channel of EFFECT_CHANNELS) {
 			const key = EFFECT_JSON_KEYS[channel];
 			if (!animationTag[key]) continue;
-			animationTag[key] = transformEffectsObject(animationTag[key], mode, offset);
+			const result = normalizeEffectsObject(animationTag[key]);
+			animationTag[key] = result.effects;
+			hasArray = hasArray || result.hasArray;
 		}
 
-		if (mode === 'array') {
-			// array 模式下如果确实输出了数组，提醒一次（官方 GeckoLib 4.x/5.x 不支持）
-			for (const channel of EFFECT_CHANNELS) {
-				const value = animationTag[EFFECT_JSON_KEYS[channel]];
-				if (!value) continue;
-				for (const timecode in value) {
-					if (Array.isArray(value[timecode])) { usedArrayMode = true; break; }
-				}
-			}
-		}
-
-		if (usedArrayMode && !state.warnedArrayMode && !setting('array_runtime_ready', false)) {
-			state.warnedArrayMode = true;
-			notify('提示：粒子/音效以数组形式导出 —— 官方 GeckoLib 运行时无法解析（Not a JSON Object），需要 mixin 补丁；'
-				+ '若已打好补丁，可在插件设置里关闭本提示。');
+		// 数组写法需要运行时支持，只在真的写出数组时提示一次（只写日志，不打扰操作）
+		if (hasArray && !state.notifiedArrayExport) {
+			state.notifiedArrayExport = true;
+			console.warn('[GeckoLib Multi-Particle] 已导出数组写法（同一关键帧多个效果）。'
+				+ '读取该文件的 GeckoLib 运行时需要数组支持，例如本仓库的 '
+				+ 'integration.geckolib.KeyFramesAdapterMixin。');
 		}
 
 		return animationTag;
-	}
-
-	/* ====================================================================== *
-	 * 导入：把亚刻偏移的效果条目合并回同一个关键帧
-	 * ====================================================================== */
-
-	/** 把落在 mergeEpsilon 之内的 `xxx_effects` 条目合并成一个数组条目 */
-	function mergeEffectsObject(effects, epsilon) {
-		if (!effects || typeof effects !== 'object') return effects;
-
-		const entries = [];
-		for (const timecode in effects) {
-			if (!Object.prototype.hasOwnProperty.call(effects, timecode)) continue;
-			const time = parseFloat(timecode);
-			if (!isFinite(time)) return effects; // 出现异常时间码就不动它
-			entries.push({ timecode, time, value: effects[timecode] });
-		}
-		if (entries.length < 2) return effects;
-
-		entries.sort((a, b) => a.time - b.time);
-
-		const clusters = [];
-		let current = null;
-		for (const entry of entries) {
-			if (current && (entry.time - current.lastTime) <= epsilon) {
-				current.items.push(entry.value);
-				current.lastTime = entry.time;
-			} else {
-				current = { timecode: entry.timecode, lastTime: entry.time, items: [entry.value] };
-				clusters.push(current);
-			}
-		}
-
-		const result = {};
-		for (const cluster of clusters) {
-			if (cluster.items.length === 1) {
-				result[cluster.timecode] = cluster.items[0];
-				continue;
-			}
-			const points = [];
-			cluster.items.forEach(item => {
-				if (Array.isArray(item)) {
-					item.forEach(point => { if (point) points.push(point); });
-				} else if (item) {
-					points.push(item);
-				}
-			});
-			result[cluster.timecode] = points.length === 1 ? points[0] : points;
-		}
-		return result;
-	}
-
-	/**
-	 * 在解析动画文件之前处理 JSON —— GeckoLib 插件的解析器本身已经支持数组
-	 * （`data_points: particles`），所以只要在这里合并好，导入后就是一个关键帧带多个效果。
-	 */
-	function prepareImportFile(file) {
-		if (!file || typeof file !== 'object') return;
-		let json = file.json;
-		if (!json) {
-			if (typeof file.content !== 'string' || !file.content.trim()) return;
-			try {
-				json = (typeof autoParseJSON === 'function')
-					? autoParseJSON(file.content, { file_path: file.path })
-					: JSON.parse(file.content);
-			} catch (error) {
-				return;
-			}
-		}
-		if (!json || typeof json !== 'object') return;
-
-		let changed = false;
-		const animations = json.animations;
-		if (animations && typeof animations === 'object') {
-			const epsilon = mergeEpsilon();
-			for (const animationName in animations) {
-				const animationTag = animations[animationName];
-				if (!animationTag || typeof animationTag !== 'object') continue;
-				for (const channel of EFFECT_CHANNELS) {
-					const key = EFFECT_JSON_KEYS[channel];
-					if (!animationTag[key]) continue;
-					const merged = mergeEffectsObject(animationTag[key], epsilon);
-					if (merged !== animationTag[key]) {
-						animationTag[key] = merged;
-						changed = true;
-					}
-				}
-			}
-		}
-
-		// 让后续解析使用我们处理过的对象（GeckoLib 的解析器优先读取 file.json）
-		if (changed) file.json = json;
-	}
-
-	function copyDataPoint(keyframe, source) {
-		const point = new KeyframeDataPoint(keyframe);
-		const properties = KeyframeDataPoint.properties || {};
-		for (const name in properties) {
-			if (Object.prototype.hasOwnProperty.call(properties, name) && source[name] !== undefined) {
-				point[name] = source[name];
-			}
-		}
-		return point;
-	}
-
-	/**
-	 * 兜底合并：在“已经解析完成”的动画模型上，把彼此距离小于 mergeEpsilon 的效果关键帧
-	 * 合并为一个带多个 data point 的关键帧（用于插件加载顺序导致 JSON 预处理没赶上的情况）。
-	 */
-	function mergeEffectKeyframesOfAnimation(animation) {
-		if (!animation || !animation.animators) return;
-		const effects = animation.animators.effects;
-		if (!effects) return;
-		const epsilon = mergeEpsilon();
-
-		for (const channel of EFFECT_CHANNELS) {
-			const keyframes = effects[channel];
-			if (!Array.isArray(keyframes) || keyframes.length < 2) continue;
-
-			const sorted = keyframes.slice().sort((a, b) => a.time - b.time);
-			let anchor = null;
-			for (const keyframe of sorted) {
-				if (anchor && (keyframe.time - anchor.time) <= epsilon) {
-					(keyframe.data_points || []).forEach(point => {
-						anchor.data_points.push(copyDataPoint(anchor, point));
-					});
-					keyframe.remove();
-				} else {
-					anchor = keyframe;
-				}
-			}
-		}
-	}
-
-	function mergeEffectKeyframesOf(animations) {
-		if (!Array.isArray(animations)) return;
-		animations.forEach(animation => {
-			try {
-				mergeEffectKeyframesOfAnimation(animation);
-			} catch (error) {
-				console.error('[GeckoLib Multi-Particle] merge failed', error);
-			}
-		});
 	}
 
 	/* ====================================================================== *
@@ -501,7 +294,7 @@
 	}
 
 	/**
-	 * 给动画编解码器打 patch。
+	 * 给动画编解码器打 patch（只包导出）。
 	 *
 	 * 每次调用都会检查当前的实现是不是我们自己的包装函数：GeckoLib 插件（或别的插件）
 	 * 可能在之后重新应用 monkeypatch 把我们的包装覆盖掉，这时需要重新包装一层。
@@ -526,45 +319,18 @@
 			codec.compileAnimation = state.patchedCompile;
 		}
 
-		// 导入：在 GeckoLib 的解析器创建关键帧之前合并亚刻偏移条目
-		if (typeof codec.loadFile === 'function' && codec.loadFile !== state.patchedLoad) {
-			const previous = codec.loadFile;
-			state.originalLoadFile = previous;
-			state.patchedLoad = function (file) {
-				try {
-					if (isActive() && setting('merge_on_import', true)) prepareImportFile(file);
-				} catch (error) {
-					console.error('[GeckoLib Multi-Particle] import pre-merge failed', error);
-				}
-				const result = previous.apply(this, arguments);
-				try {
-					if (isActive() && setting('merge_on_import', true)) mergeEffectKeyframesOf(result);
-				} catch (error) {
-					console.error('[GeckoLib Multi-Particle] import merge failed', error);
-				}
-				return result;
-			};
-			codec.loadFile = state.patchedLoad;
-		}
-
 		state.codec = codec;
 	}
 
 	function unpatchAnimationCodec() {
 		const codec = state.codec;
-		if (codec) {
-			if (state.patchedCompile && codec.compileAnimation === state.patchedCompile && state.originalCompileAnimation) {
-				codec.compileAnimation = state.originalCompileAnimation;
-			}
-			if (state.patchedLoad && codec.loadFile === state.patchedLoad && state.originalLoadFile) {
-				codec.loadFile = state.originalLoadFile;
-			}
+		if (codec && state.patchedCompile && codec.compileAnimation === state.patchedCompile
+			&& state.originalCompileAnimation) {
+			codec.compileAnimation = state.originalCompileAnimation;
 		}
 		state.codec = null;
 		state.patchedCompile = null;
-		state.patchedLoad = null;
 		state.originalCompileAnimation = null;
-		state.originalLoadFile = null;
 	}
 
 	/* ====================================================================== *
@@ -574,7 +340,8 @@
 	Plugin.register(PLUGIN_ID, {
 		title: 'GeckoLib Multi-Particle Keyframes',
 		author: 'DSH',
-		description: '在 GeckoLib 动画编辑器中，允许同一个关键帧包含多个粒子/音效效果（像基岩版实体动画那样）。导出时自动转换为 GeckoLib 运行时可以读取的格式。',
+		description: '在 GeckoLib 动画编辑器中，允许同一个关键帧包含多个粒子/音效效果（像基岩版实体动画那样）。'
+			+ '导出时多效果关键帧写成数组，单效果关键帧保持原来的对象写法。',
 		version: '1.0.0',
 		variant: 'both',
 		min_version: '5.0.0',
@@ -592,64 +359,6 @@
 				plugin: PLUGIN_ID,
 				type: 'toggle',
 				value: true,
-			});
-
-			config.export_mode = new Setting(PLUGIN_ID + '_export_mode', {
-				name: '导出方式',
-				description: '同一关键帧上的多个效果要如何写入动画 JSON。默认“输出数组”（基岩版写法，语义为严格同一刻），'
-					+ '需要运行时支持 —— 本仓库已内置 mixin（ConfluenceOtherworld: integration.geckolib.KeyFramesAdapterMixin）。'
-					+ '如果动画要给没有该补丁的 GeckoLib 使用，请改成“拆分为亚刻偏移”。',
-				category: CATEGORY_ID,
-				plugin: PLUGIN_ID,
-				type: 'select',
-				value: 'array',
-				options: {
-					array: '输出数组（默认，需要 mixin 补丁）',
-					split: '拆分为亚刻偏移（无需改运行时）',
-				},
-			});
-
-			config.array_runtime_ready = new Setting(PLUGIN_ID + '_array_runtime_ready', {
-				name: '运行时已支持数组（不再提示）',
-				description: '本工程已内置让 GeckoLib 解析 particle_effects / sound_effects 数组的 mixin，默认打开；'
-					+ '关掉后以数组模式导出会弹一次兼容性提示。',
-				category: CATEGORY_ID,
-				plugin: PLUGIN_ID,
-				type: 'toggle',
-				value: true,
-			});
-
-			config.sub_tick_offset = new Setting(PLUGIN_ID + '_sub_tick_offset', {
-				name: '亚刻偏移（秒）',
-				description: '拆分模式下，同一关键帧的第二个及以后的效果依次后移的时间。默认 0.00001 秒 = 0.0002 游戏刻，仍会在同一游戏刻触发。',
-				category: CATEGORY_ID,
-				plugin: PLUGIN_ID,
-				type: 'number',
-				value: DEFAULT_OFFSET,
-				min: MIN_OFFSET,
-				max: MAX_OFFSET,
-				step: 1e-5,
-			});
-
-			config.merge_on_import = new Setting(PLUGIN_ID + '_merge_on_import', {
-				name: '导入时合并亚刻效果',
-				description: '导入动画 JSON 时，把彼此间隔小于合并阈值的粒子/音效条目重新合成一个关键帧的多个效果。',
-				category: CATEGORY_ID,
-				plugin: PLUGIN_ID,
-				type: 'toggle',
-				value: true,
-			});
-
-			config.merge_epsilon = new Setting(PLUGIN_ID + '_merge_epsilon', {
-				name: '导入合并阈值（秒）',
-				description: '只有间隔小于该值的效果条目才会被视为“同一关键帧”。默认 0.0001 秒，远小于时间轴最小的 0.001 秒吸附步长。',
-				category: CATEGORY_ID,
-				plugin: PLUGIN_ID,
-				type: 'number',
-				value: DEFAULT_EPSILON,
-				min: MIN_EPSILON,
-				max: MAX_EPSILON,
-				step: 1e-5,
 			});
 
 			config.force_linear = new Setting(PLUGIN_ID + '_force_linear', {
@@ -688,7 +397,7 @@
 			});
 
 			listen('select_project', () => {
-				state.warnedArrayMode = false;
+				state.notifiedArrayExport = false;
 				state.observerTarget = null;
 				patchAnimationCodec();
 			});
