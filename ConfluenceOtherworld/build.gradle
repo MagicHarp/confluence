@@ -209,6 +209,10 @@ dependencies {
 
     modImplementation("top.theillusivec4.curios:curios-forge:${curios_version}")
 
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
 //    implementation jarJar(files('libs/LanguageFixer.jar'))
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))

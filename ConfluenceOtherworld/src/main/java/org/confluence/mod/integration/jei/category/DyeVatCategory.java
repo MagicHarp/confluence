@@ -1,0 +1,66 @@
+package org.confluence.mod.integration.jei.category;
+
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
+import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.common.init.block.FunctionalBlocks;
+import org.confluence.mod.common.recipe.DyeVatRecipe;
+import org.confluence.mod.integration.jei.ModJeiPlugin;
+
+public class DyeVatCategory implements IRecipeCategory<DyeVatRecipe> {
+    public static final RecipeType<DyeVatRecipe> TYPE = new RecipeType<>(Confluence.asResource("dye_vat"), DyeVatRecipe.class);
+    private final IDrawable icon;
+
+    public DyeVatCategory(IJeiHelpers jeiHelpers) {
+        this.icon = jeiHelpers.getGuiHelper().createDrawableItemStack(FunctionalBlocks.DYE_VAT.toStack());
+    }
+
+    @Override
+    public RecipeType<DyeVatRecipe> getRecipeType() {
+        return TYPE;
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("title.confluence.dye_vat");
+    }
+
+    @Override
+    public IDrawable getIcon() {
+        return icon;
+    }
+
+    @Override
+    public int getWidth() {
+        return 128;
+    }
+
+    @Override
+    public int getHeight() {
+        return 32;
+    }
+
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, DyeVatRecipe recipe, IFocusGroup focusGroup) {
+        ModJeiPlugin.set4IngredientsRecipe(builder, recipe);
+    }
+
+    @Override
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, DyeVatRecipe recipe, IFocusGroup focuses) {
+        IRecipeCategory.super.createRecipeExtras(builder, recipe, focuses);
+        builder.addRecipeArrowWidget().setPosition(50 + 5, 6 + 2);
+    }
+
+    @Override
+    public ResourceLocation getRegistryName(DyeVatRecipe recipe) {
+        return Confluence.asResource(recipe.getGroup() + "/" + BuiltInRegistries.ITEM.getKey(recipe.getResult().getItem()).getPath());
+    }
+}

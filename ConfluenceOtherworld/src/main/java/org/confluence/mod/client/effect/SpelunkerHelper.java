@@ -129,7 +129,6 @@ public class SpelunkerHelper extends AbstractBufferManager {
     public static SpelunkerHelper getSingleton() {
         if (blockGen == null) {
             blockGen = new SpelunkerHelper(100);
-
         }
         return blockGen;
     }

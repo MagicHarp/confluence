@@ -127,6 +127,9 @@ public class MoonlitDrySeaSkyRender {
         }
     }
 
+    private static final Matrix4f mat = new Matrix4f();
+    private static final Quaternionf quat = new Quaternionf();
+
     public static void render(LocalPlayer player, PortRenderLevelStageEvent event, float alphaMul) {
         if (alphaMul < 0.01F) return;
 
@@ -138,9 +141,7 @@ public class MoonlitDrySeaSkyRender {
 
         int dreamBubbleColor = threeColor(ModClientSetups.DREAM_BUBBLE_A, ModClientSetups.DREAM_BUBBLE_B, ModClientSetups.DREAM_BUBBLE_C, time, 500);
 
-        PoseStack poseStack = new PoseStack();
-        poseStack.mulPose(event.getModelViewMatrix().getUnnormalizedRotation(new Quaternionf()));
-        Matrix4f matrix4f = poseStack.last().pose();
+        mat.rotation(event.getModelViewMatrix().getUnnormalizedRotation(quat));
 
         int alpha = (int) (alphaMul * 255 * 0.5);
         int r = (dreamBubbleColor >> 16) & 0xFF;
@@ -257,25 +258,33 @@ public class MoonlitDrySeaSkyRender {
                 float nx = (-dz / len) * lineWidth;
                 float nz = (dx / len) * lineWidth;
 
-                builder.vertex(matrix4f, x1 + nx, renderY, z1 + nz)
-                        .color(r, g, b, calculateAlpha(x1 + nx, z1 + nz, alpha, side2_3));
-                builder.vertex(matrix4f, x1 - nx, renderY, z1 - nz)
-                        .color(r, g, b, calculateAlpha(x1 - nx, z1 - nz, alpha, side2_3));
-                builder.vertex(matrix4f, x2 - nx, renderY, z2 - nz)
-                        .color(r, g, b, calculateAlpha(x2 - nx, z2 - nz, alpha, side2_3));
-                builder.vertex(matrix4f, x2 + nx, renderY, z2 + nz)
-                        .color(r, g, b, calculateAlpha(x2 + nx, z2 + nz, alpha, side2_3));
+                builder.vertex(mat, x1 + nx, renderY, z1 + nz)
+                        .color(r, g, b, calculateAlpha(x1 + nx, z1 + nz, alpha, side2_3))
+                        .endVertex();
+                builder.vertex(mat, x1 - nx, renderY, z1 - nz)
+                        .color(r, g, b, calculateAlpha(x1 - nx, z1 - nz, alpha, side2_3))
+                        .endVertex();
+                builder.vertex(mat, x2 - nx, renderY, z2 - nz)
+                        .color(r, g, b, calculateAlpha(x2 - nx, z2 - nz, alpha, side2_3))
+                        .endVertex();
+                builder.vertex(mat, x2 + nx, renderY, z2 + nz)
+                        .color(r, g, b, calculateAlpha(x2 + nx, z2 + nz, alpha, side2_3))
+                        .endVertex();
 
                 float topY = renderY + wallHeight;
 
-                builder.vertex(matrix4f, x1, renderY, z1)
-                        .color(r, g, b, calculateAlpha(x1, z1, alpha, side2_3));
-                builder.vertex(matrix4f, x2, renderY, z2)
-                        .color(r, g, b, calculateAlpha(x2, z2, alpha, side2_3));
-                builder.vertex(matrix4f, x2, topY, z2)
-                        .color(r, g, b, 0);
-                builder.vertex(matrix4f, x1, topY, z1)
-                        .color(r, g, b, 0);
+                builder.vertex(mat, x1, renderY, z1)
+                        .color(r, g, b, calculateAlpha(x1, z1, alpha, side2_3))
+                        .endVertex();
+                builder.vertex(mat, x2, renderY, z2)
+                        .color(r, g, b, calculateAlpha(x2, z2, alpha, side2_3))
+                        .endVertex();
+                builder.vertex(mat, x2, topY, z2)
+                        .color(r, g, b, 0)
+                        .endVertex();
+                builder.vertex(mat, x1, topY, z1)
+                        .color(r, g, b, 0)
+                        .endVertex();
             }
         }
 

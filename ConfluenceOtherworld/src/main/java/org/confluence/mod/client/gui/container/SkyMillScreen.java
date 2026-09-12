@@ -30,9 +30,9 @@ public class SkyMillScreen extends AbstractContainerScreen<SkyMillMenu> {
     private int startIndex;
     private boolean displayRecipes;
 
-    public SkyMillScreen(SkyMillMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-        super(pMenu, pPlayerInventory, pTitle);
-        pMenu.registerUpdateListener(this::containerChanged);
+    public SkyMillScreen(SkyMillMenu menu, Inventory inventory, Component title) {
+        super(menu, inventory, title);
+        menu.registerUpdateListener(this::containerChanged);
         --this.titleLabelY;
     }
 
@@ -44,27 +44,27 @@ public class SkyMillScreen extends AbstractContainerScreen<SkyMillMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        renderBackground(pGuiGraphics);
-        pGuiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        renderBackground(guiGraphics);
+        guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         int k = (int) (41.0F * scrollOffs);
-        pGuiGraphics.blit(BACKGROUND, leftPos + 154, topPos + SCROLLER_HEIGHT + k, 176 + (isScrollBarActive() ? 0 : SCROLLER_WIDTH), 0, 12, SCROLLER_HEIGHT);
+        guiGraphics.blit(BACKGROUND, leftPos + 154, topPos + SCROLLER_HEIGHT + k, 176 + (isScrollBarActive() ? 0 : SCROLLER_WIDTH), 0, 12, SCROLLER_HEIGHT);
         int l = leftPos + RECIPES_X;
         int i1 = topPos + RECIPES_Y;
         int j1 = startIndex + SCROLLER_WIDTH;
-        renderButtons(pGuiGraphics, pMouseX, pMouseY, l, i1, j1);
-        renderRecipes(pGuiGraphics, l, i1, j1);
+        renderButtons(guiGraphics, mouseX, mouseY, l, i1, j1);
+        renderRecipes(guiGraphics, l, i1, j1);
     }
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
-        renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
-        super.renderTooltip(pGuiGraphics, pX, pY);
+    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+        super.renderTooltip(guiGraphics, x, y);
         if (displayRecipes) {
             int i = leftPos + RECIPES_X;
             int j = topPos + RECIPES_Y;
@@ -75,43 +75,43 @@ public class SkyMillScreen extends AbstractContainerScreen<SkyMillMenu> {
                 int i1 = l - startIndex;
                 int j1 = i + i1 % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH;
                 int k1 = j + i1 / RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_HEIGHT + 2;
-                if (pX >= j1 && pX < j1 + RECIPES_IMAGE_SIZE_WIDTH && pY >= k1 && pY < k1 + RECIPES_IMAGE_SIZE_HEIGHT) {
-                    pGuiGraphics.renderTooltip(font, list.get(l).getResultItem(minecraft.level.registryAccess()), pX, pY);
+                if (x >= j1 && x < j1 + RECIPES_IMAGE_SIZE_WIDTH && y >= k1 && y < k1 + RECIPES_IMAGE_SIZE_HEIGHT) {
+                    guiGraphics.renderTooltip(font, list.get(l).getResult(), x, y);
                 }
             }
         }
     }
 
-    private void renderButtons(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, int pX, int pY, int pLastVisibleElementIndex) {
-        for (int i = startIndex; i < pLastVisibleElementIndex && i < menu.getNumRecipes(); ++i) {
+    private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
+        for (int i = startIndex; i < lastVisibleElementIndex && i < menu.getNumRecipes(); ++i) {
             int j = i - startIndex;
-            int k = pX + j % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH;
+            int k = x + j % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH;
             int l = j / RECIPES_COLUMNS;
-            int i1 = pY + l * RECIPES_IMAGE_SIZE_HEIGHT + 2;
+            int i1 = y + l * RECIPES_IMAGE_SIZE_HEIGHT + 2;
             int j1 = imageHeight;
             if (i == menu.getSelectedRecipeIndex()) {
                 j1 += RECIPES_IMAGE_SIZE_HEIGHT;
-            } else if (pMouseX >= k && pMouseY >= i1 && pMouseX < k + RECIPES_IMAGE_SIZE_WIDTH && pMouseY < i1 + RECIPES_IMAGE_SIZE_HEIGHT) {
+            } else if (mouseX >= k && mouseY >= i1 && mouseX < k + RECIPES_IMAGE_SIZE_WIDTH && mouseY < i1 + RECIPES_IMAGE_SIZE_HEIGHT) {
                 j1 += 36;
             }
-            pGuiGraphics.blit(BACKGROUND, k, i1 - 1, 0, j1, RECIPES_IMAGE_SIZE_WIDTH, RECIPES_IMAGE_SIZE_HEIGHT);
+            guiGraphics.blit(BACKGROUND, k, i1 - 1, 0, j1, RECIPES_IMAGE_SIZE_WIDTH, RECIPES_IMAGE_SIZE_HEIGHT);
         }
     }
 
-    private void renderRecipes(GuiGraphics pGuiGraphics, int pX, int pY, int pStartIndex) {
+    private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
         List<SkyMillRecipe> list = menu.getRecipes();
 
-        for (int i = startIndex; i < pStartIndex && i < menu.getNumRecipes(); ++i) {
-            int j = i - startIndex;
-            int k = pX + j % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH;
+        for (int i = this.startIndex; i < startIndex && i < menu.getNumRecipes(); ++i) {
+            int j = i - this.startIndex;
+            int k = x + j % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH;
             int l = j / RECIPES_COLUMNS;
-            int i1 = pY + l * RECIPES_IMAGE_SIZE_HEIGHT + 2;
-            pGuiGraphics.renderItem(list.get(i).getResultItem(minecraft.level.registryAccess()), k, i1);
+            int i1 = y + l * RECIPES_IMAGE_SIZE_HEIGHT + 2;
+            guiGraphics.renderItem(list.get(i).getResult(), k, i1);
         }
     }
 
     @Override
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
         this.scrolling = false;
         if (displayRecipes) {
             int i = leftPos + RECIPES_X;
@@ -120,8 +120,8 @@ public class SkyMillScreen extends AbstractContainerScreen<SkyMillMenu> {
 
             for (int l = startIndex; l < k; ++l) {
                 int i1 = l - startIndex;
-                double d0 = pMouseX - (double) (i + i1 % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH);
-                double d1 = pMouseY - (double) (j + i1 / RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_HEIGHT);
+                double d0 = mouseX - (double) (i + i1 % RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_WIDTH);
+                double d1 = mouseY - (double) (j + i1 / RECIPES_COLUMNS * RECIPES_IMAGE_SIZE_HEIGHT);
                 if (d0 >= 0.0D && d1 >= 0.0D && d0 < RECIPES_IMAGE_SIZE_WIDTH && d1 < RECIPES_IMAGE_SIZE_HEIGHT && menu.clickMenuButton(minecraft.player, l)) {
                     minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                     minecraft.gameMode.handleInventoryButtonClick(menu.containerId, l);
@@ -131,31 +131,32 @@ public class SkyMillScreen extends AbstractContainerScreen<SkyMillMenu> {
 
             i = leftPos + 119;
             j = topPos + 9;
-            if (pMouseX >= (double) i && pMouseX < (double) (i + SCROLLER_WIDTH) && pMouseY >= (double) j && pMouseY < (double) (j + SCROLLER_FULL_HEIGHT)) {
+            if (mouseX >= (double) i && mouseX < (double) (i + SCROLLER_WIDTH) && mouseY >= (double) j && mouseY < (double) (j + SCROLLER_FULL_HEIGHT)) {
                 this.scrolling = true;
             }
         }
-        return super.mouseClicked(pMouseX, pMouseY, pButton);
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
-    public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
         if (scrolling && isScrollBarActive()) {
             int i = topPos + RECIPES_Y;
             int j = i + SCROLLER_FULL_HEIGHT;
-            this.scrollOffs = ((float) pMouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
+            this.scrollOffs = ((float) mouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
             this.scrollOffs = Mth.clamp(scrollOffs, 0.0F, 1.0F);
             this.startIndex = (int) ((double) (scrollOffs * (float) getOffscreenRows()) + 0.5D) * RECIPES_COLUMNS;
             return true;
         } else {
-            return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
+            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
         }
     }
 
-    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (isScrollBarActive()) {
             int i = getOffscreenRows();
-            float f = (float) pDelta / (float) i;
+            float f = (float) delta / (float) i;
             this.scrollOffs = Mth.clamp(scrollOffs - f, 0.0F, 1.0F);
             this.startIndex = (int) ((double) (scrollOffs * (float) i) + 0.5D) * RECIPES_COLUMNS;
         }

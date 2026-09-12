@@ -45,7 +45,7 @@ public abstract class EnhancedForgeRecipe extends AbstractAmountRecipe<PortRecip
 
     public static <R extends EnhancedForgeRecipe> MapCodec<R> codec(Factory<R> factory) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(AbstractAmountRecipe::getResult),
                 INGREDIENTS_CODEC.forGetter(R::getIngredients),
                 PortCodecExtension.lenientOptionalFieldOf(Codec.FLOAT, "experience", 0.0F).forGetter(R::getExperience),
                 PortCodecExtension.lenientOptionalFieldOf(Codec.INT, "cookingtime", 100).forGetter(R::getCookingTime),
@@ -66,11 +66,11 @@ public abstract class EnhancedForgeRecipe extends AbstractAmountRecipe<PortRecip
 
             @Override
             public void encode(PortRegistryFriendlyByteBuf buffer, R recipe) {
-                buffer.writeVarInt(recipe.ingredients.size());
-                for (Ingredient ingredient : recipe.ingredients) {
+                buffer.writeVarInt(recipe.getIngredients().size());
+                for (Ingredient ingredient : recipe.getIngredients()) {
                     Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
                 }
-                ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
+                ItemStack.STREAM_CODEC.encode(buffer, recipe.getResult());
                 buffer.writeFloat(recipe.experience);
                 buffer.writeVarInt(recipe.cookingTime);
                 buffer.writeBoolean(recipe.requiresFuel);

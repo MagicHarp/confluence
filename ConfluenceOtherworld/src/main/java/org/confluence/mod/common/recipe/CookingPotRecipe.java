@@ -93,8 +93,8 @@ public class CookingPotRecipe extends AbstractAmountRecipe<CookingPotRecipe.Inpu
         @Override
         protected MapCodec<CookingPotRecipe> getCodec() {
             return RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                    INGREDIENTS_CODEC.forGetter(recipe -> recipe.ingredients),
+                    ItemStack.STRICT_CODEC.fieldOf("result").forGetter(AbstractAmountRecipe::getResult),
+                    INGREDIENTS_CODEC.forGetter(AbstractAmountRecipe::getIngredients),
                     Ingredient.CODEC.fieldOf("container").forGetter(recipe -> recipe.container),
                     HeatSourcePredicate.CODEC.fieldOf("heat_source").forGetter(recipe -> recipe.heatSource),
                     Codec.INT.fieldOf("cookingtime").forGetter(recipe -> recipe.cookingTime)
@@ -117,11 +117,11 @@ public class CookingPotRecipe extends AbstractAmountRecipe<CookingPotRecipe.Inpu
 
                 @Override
                 public void encode(PortRegistryFriendlyByteBuf buffer, CookingPotRecipe recipe) {
-                    buffer.writeVarInt(recipe.ingredients.size());
-                    for (Ingredient ingredient : recipe.ingredients) {
+                    buffer.writeVarInt(recipe.getIngredients().size());
+                    for (Ingredient ingredient : recipe.getIngredients()) {
                         Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
                     }
-                    ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
+                    ItemStack.STREAM_CODEC.encode(buffer, recipe.getResult());
                     Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.container);
                     HeatSourcePredicate.STREAM_CODEC.encode(buffer, recipe.heatSource);
                     buffer.writeVarInt(recipe.cookingTime);

@@ -38,7 +38,6 @@ import org.confluence.mod.integration.terra_furniture.TFReferences;
 import org.mesdag.portlib.network.PortNetworkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spongepowered.asm.mixin.MixinEnvironment;
 
 @Mod(Confluence.MODID)
 public final class Confluence {
@@ -106,9 +105,7 @@ public final class Confluence {
         ModCommands.ARGUMENT_TYPE_INFOS.register(eventBus);
         ModDensityFunctionTypes.TYPES.register(eventBus);
 
-        ModSoulSkills.register(eventBus);
-
-        MixinEnvironment.getCurrentEnvironment().setOption(MixinEnvironment.Option.DUMP_TARGET_ON_FAILURE, true);
+//        MixinEnvironment.getCurrentEnvironment().setOption(MixinEnvironment.Option.DUMP_TARGET_ON_FAILURE, true);
     }
 
     public static void registerGameRules() {

@@ -50,7 +50,7 @@ public class HeavyWorkBenchMenu extends EitherAmountContainerMenu4x<EnvironmentR
         if (index == -1) return result.getItem(0);
         int recipesSize = recipes.size();
         if (index < recipesSize) {
-            return recipes.get(index).getResultItem(player.registryAccess());
+            return recipes.get(index).getResult();
         }
         return craftingRecipes.get(index - recipesSize).getResultItem(player.registryAccess());
     }
@@ -61,7 +61,7 @@ public class HeavyWorkBenchMenu extends EitherAmountContainerMenu4x<EnvironmentR
         if (index == -1) return result.getItem(0);
         int recipesSize = recipes.size();
         if (index < recipesSize) {
-            return recipes.get(index).getResultItem(player.registryAccess());
+            return recipes.get(index).getResult();
         }
         return craftingRecipes.get(index - recipesSize).getResultItem(player.registryAccess());
     }

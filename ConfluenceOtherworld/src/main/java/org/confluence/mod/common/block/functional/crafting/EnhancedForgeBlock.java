@@ -272,7 +272,7 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
 
                     Optional<R> recipe = level.getRecipeManager().getRecipeFor(recipeType, recipeInput, level).stream()
                             .filter(holder -> holder.matches(recipeInput, level))
-                            .max(Comparator.comparingInt(holder -> holder.ingredients.size()));
+                            .max(Comparator.comparingInt(holder -> holder.getIngredients().size()));
                     if (recipe.isPresent()) {
                         this.lastRecipe = recipe.get();
                         return recipe;
@@ -398,7 +398,7 @@ public abstract class EnhancedForgeBlock extends HorizontalDirectionalWithHorizo
 
         protected boolean canForgeBurn(T recipe) {
             if ((!recipe.isRequiresFuel() || (useFuel() || isLit() || !getItem(FUEL_SLOT).isEmpty())) && Arrays.stream(itemStacks).anyMatch(itemStack -> !itemStack.isEmpty())) {
-                ItemStack neoResult = recipe.getResultItem(level.registryAccess());
+                ItemStack neoResult = recipe.getResult();
                 return canResultInsert(neoResult);
             } else {
                 return false;

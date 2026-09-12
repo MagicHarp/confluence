@@ -575,7 +575,6 @@ public final class LivingEntityEvents {
                 player.removeEffect(negativeEffects.get(i));
             }
         }
-
     }
 
     private static void mobSpawn$PositionCheck(MobSpawnEvent.PositionCheck event) {
