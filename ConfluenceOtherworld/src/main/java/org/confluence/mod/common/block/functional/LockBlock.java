@@ -1,11 +1,10 @@
 package org.confluence.mod.common.block.functional;
 
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
@@ -27,10 +26,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.confluence.mod.common.init.block.FunctionalBlocks;
+import org.mesdag.portlib.wrapper.PortEnvironment;
 
 import java.util.Iterator;
 import java.util.Optional;
-import java.util.Set;
 
 public class LockBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -72,8 +71,7 @@ public class LockBlock extends Block implements EntityBlock {
                     }
                 }
             } else {
-                TagKey<Item> tag = entity.matchTool.get().tag;
-                if (tag != null) {
+                entity.matchTool.get().tag.ifPresent(tag -> {
                     HolderSet<Item> holders = BuiltInRegistries.ITEM.getOrCreateTag(tag);
                     MutableComponent itemsNeed = Component.translatable("message.confluence.lock.need");
                     Component or = Component.translatable("message.confluence.lock.or");
@@ -83,19 +81,17 @@ public class LockBlock extends Block implements EntityBlock {
                         if (iterator.hasNext()) itemsNeed.append(or);
                     }
                     player.displayClientMessage(itemsNeed, true);
-                } else {
-                    Set<Item> items = entity.matchTool.get().items;
-                    if (items != null) {
-                        MutableComponent itemsNeed = Component.translatable("message.confluence.lock.need");
-                        Component or = Component.translatable("message.confluence.lock.or");
-                        Iterator<Item> iterator = items.iterator();
-                        while (iterator.hasNext()) {
-                            itemsNeed.append(iterator.next().getDescription());
-                            if (iterator.hasNext()) itemsNeed.append(or);
-                        }
-                        player.displayClientMessage(itemsNeed, true);
+                });
+                entity.matchTool.get().items.ifPresent(items -> {
+                    MutableComponent itemsNeed = Component.translatable("message.confluence.lock.need");
+                    Component or = Component.translatable("message.confluence.lock.or");
+                    Iterator<Holder<Item>> iterator = items.iterator();
+                    while (iterator.hasNext()) {
+                        itemsNeed.append(iterator.next().value().getDescription());
+                        if (iterator.hasNext()) itemsNeed.append(or);
                     }
-                }
+                    player.displayClientMessage(itemsNeed, true);
+                });
                 return InteractionResult.PASS;
             }
         }
@@ -103,7 +99,7 @@ public class LockBlock extends Block implements EntityBlock {
     }
 
     public static class BEntity extends BlockEntity {
-        private Optional<ItemPredicate> matchTool = Optional.empty();
+        private Optional<MatchTool> matchTool = Optional.empty();
         private boolean consumeTool = false;
 
         public BEntity(BlockPos pos, BlockState blockState) {
@@ -113,20 +109,26 @@ public class LockBlock extends Block implements EntityBlock {
         @Override
         public void load(CompoundTag tag) {
             super.load(tag);
-            /// 没有匹配工具是锁块的合法默认状态，保存时也会省略 MatchTool。
-            /// 因此读取当前格式时必须先检查字段，不能把 null 交给编解码器。
-            this.matchTool = tag.contains("MatchTool")
-                    ? ItemPredicate.CODEC
-                    .parse(NbtOps.INSTANCE, tag.get("MatchTool")).result()
-                    : Optional.empty();
+            this.matchTool = MatchTool.CODEC.parse(PortEnvironment.registryAccess().createSerializationContext(NbtOps.INSTANCE), tag.get("MatchTool")).result();
             this.consumeTool = tag.getBoolean("ConsumeTool");
         }
 
         @Override
         protected void saveAdditional(CompoundTag tag) {
             super.saveAdditional(tag);
-            matchTool.flatMap(predicate -> ItemPredicate.CODEC.encodeStart(NbtOps.INSTANCE, predicate).result()).ifPresent(nbt -> tag.put("MatchTool", nbt));
+            matchTool.flatMap(predicate -> MatchTool.CODEC.encodeStart(PortEnvironment.registryAccess().createSerializationContext(NbtOps.INSTANCE), predicate).result()).ifPresent(nbt -> tag.put("MatchTool", nbt));
             tag.putBoolean("ConsumeTool", consumeTool);
+        }
+    }
+
+    record MatchTool(Optional<HolderSet<Item>> items, Optional<TagKey<Item>> tag) {
+        static final Codec<MatchTool> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                RegistryCodecs.homogeneousList(Registries.ITEM).optionalFieldOf("items").forGetter(MatchTool::items),
+                TagKey.codec(Registries.ITEM).optionalFieldOf("tag").forGetter(MatchTool::tag)
+        ).apply(instance, MatchTool::new));
+
+        public boolean matches(ItemStack stack) {
+            return (items.isEmpty() || items.get().contains(stack.getItemHolder())) && (tag.isEmpty() || stack.is(tag.get()));
         }
     }
 }
