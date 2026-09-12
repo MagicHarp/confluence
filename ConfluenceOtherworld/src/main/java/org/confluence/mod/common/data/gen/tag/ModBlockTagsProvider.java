@@ -1906,7 +1906,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.NPC_HOUSE_CONSTITUTE).add(
                 WHITE_PAPER_PANE_LAMP.get(),
                 MALACHITE_PAPER_PANE_LAMP.get()
-                ).addTag(ModTags.Blocks.NPC_HOUSE_CHAIR)
+                )
+                .addTag(ModTags.Blocks.NPC_HOUSE_CHAIR)
                 .addTag(ModTags.Blocks.NPC_HOUSE_TABLE)
                 .add(
                         Blocks.TORCH,
@@ -1921,14 +1922,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         Blocks.OCHRE_FROGLIGHT,
                         Blocks.VERDANT_FROGLIGHT,
                         Blocks.REDSTONE_LAMP
-                )
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "light_source"));
+                );
         tag(ModTags.Blocks.NPC_HOUSE_CHAIR)
                 .addTag(BlockTags.BEDS)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "house_chair"));
+                .addOptionalTag(ResourceLocation.parse("terra_furniture:house_chair"));
         tag(ModTags.Blocks.NPC_HOUSE_TABLE)
                 .add(Blocks.CRAFTING_TABLE)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("terra_furniture", "house_table"));
+                .addOptionalTag(ResourceLocation.parse("terra_furniture:house_table"));
         tag(ModTags.Blocks.CACTUS).add(
                 Blocks.CACTUS,
                 CRIMSON_CACTUS.get(),

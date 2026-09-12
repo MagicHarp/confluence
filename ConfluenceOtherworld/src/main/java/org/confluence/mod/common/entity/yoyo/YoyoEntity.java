@@ -28,10 +28,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.network.NetworkHooks;
 import org.confluence.lib.common.LibAttributes;
+import org.confluence.lib.common.LibDamageTypes;
 import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
 import org.confluence.mod.common.init.entity.ModEntities;
 import org.confluence.mod.common.item.yoyo.YoyoItem;
 import org.confluence.mod.common.item.yoyo.YoyoSession;
+import org.confluence.mod.mixed.Immunity;
 import org.confluence.mod.util.PrefixUtils;
 import org.jetbrains.annotations.Nullable;
 import org.mesdag.portlib.event.entity.PortProjectileImpactEvent;
@@ -50,7 +52,7 @@ import java.util.UUID;
 ///
 /// 该类只负责生命周期、准星方向运动、方块反弹、接触伤害与收回。具体命中特效回调给
 /// {@link YoyoItem}，因此公共运动实现不依赖任何具体悠悠球或衍生弹幕。
-public final class YoyoEntity extends Projectile implements GeoEntity {
+public final class YoyoEntity extends Projectile implements GeoEntity, Immunity {
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(YoyoEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<ItemStack> WEAPON = SynchedEntityData.defineId(YoyoEntity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> RETURNING = SynchedEntityData.defineId(YoyoEntity.class, EntityDataSerializers.BOOLEAN);
@@ -71,11 +73,6 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
     }
 
     /// 创建实体并冻结发射瞬间的近战、暴击与穿甲上下文。
-    ///
-    /// 伤害按「物品自身倍率 × 玩家攻击力加成」组合，不能直接乘 `ATTACK_DAMAGE` 的总值：
-    /// 力量等效果会向该属性加算固定值，而武器前缀注入的是乘算修饰符。原版按
-    /// 「先乘算、后加算」结算，若把含加算部分的总值再乘一次物品倍率，力量就会被
-    /// 前缀的乘算放大（力量II 实测从 8.1 变成 56.8，恰好是 +6 被放大的 7 倍）。
     public static @Nullable YoyoEntity spawn(ServerPlayer owner, ItemStack weapon) {
         if (!(weapon.getItem() instanceof YoyoItem item)) {
             return null;
@@ -87,8 +84,7 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
         yoyo.setOwner(owner);
         yoyo.entityData.set(WEAPON, weapon.copyWithCount(1));
         yoyo.entityData.set(RANGE, item.maximumRange());
-        yoyo.setDamage((float) (item.attackDamage() * PrefixUtils.attributeWithoutHeldItem(
-                owner, LibAttributes.getAttackDamage(), weapon)));
+        yoyo.setDamage((float) (item.attackDamage() * PrefixUtils.attributeWithoutHeldItem(owner, LibAttributes.getAttackDamage(), weapon)));
         yoyo.setPos(owner.getX(), owner.getY(0.5F), owner.getZ());
         if (!owner.level().addFreshEntity(yoyo)) {
             yoyo.discard();
@@ -206,7 +202,7 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
             return;
         }
         boolean attempted = false;
-        DamageSource source = damageSources().mobAttack(owner);
+        DamageSource source = LibDamageTypes.of(level(), LibDamageTypes.SWORD_PROJECTILE, this, owner);
         Set<UUID> hitIdentities = new HashSet<>();
         for (Entity candidate : nearby) {
             if (!ProjectileHitRules.canHit(owner, candidate)) continue;
@@ -346,5 +342,15 @@ public final class YoyoEntity extends Projectile implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+    }
+
+    @Override
+    public Type confluence$getImmunityType() {
+        return Type.LOCAL;
+    }
+
+    @Override
+    public int confluence$getImmunityDuration(DamageSource damageSource) {
+        return 7;
     }
 }
