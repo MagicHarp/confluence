@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.effect.RenderStateShardAccessor;
 import org.confluence.mod.common.entity.monster.Snatcher;
 import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.joml.Matrix3f;
@@ -55,7 +56,7 @@ public final class SnatcherRenderer extends GeoNormalRenderer<Snatcher> {
         Vec3 direction = segment.normalize();
         Quaternionf rotation = new Quaternionf().rotationTo(new Vector3f(0.0F, 1.0F, 0.0F), direction.toVector3f());
         ResourceLocation texture = entity.getType() == MonsterEntities.MAN_EATER.get() ? MAN_EATER_VINE : SNATCHER_VINE;
-        VertexConsumer vertices = buffers.getBuffer(SmoothEntityRenderType.cutout(texture));
+        VertexConsumer vertices = buffers.getBuffer(RenderStateShardAccessor.smoothEntityCutout(texture));
 
         for (int index = 0; index < count; index++) {
             Vec3 center = start.add(segment.scale(index + 0.5));

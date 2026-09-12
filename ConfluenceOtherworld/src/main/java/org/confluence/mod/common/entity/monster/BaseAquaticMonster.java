@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 public abstract class BaseAquaticMonster extends BaseMonster {
     protected BaseAquaticMonster(EntityType<? extends Monster> type, Level level) {
         super(type, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
@@ -74,7 +74,7 @@ public abstract class BaseAquaticMonster extends BaseMonster {
 
     /// 判断目标是否处于当前水生物种能够攻击的位置；普通水生敌怪仅攻击水中目标。
     protected boolean isValidAquaticTarget(LivingEntity target) {
-        return target.isInWaterRainOrBubble();
+        return target.isInWaterOrBubble();
     }
 
     @Override
@@ -95,7 +95,7 @@ public abstract class BaseAquaticMonster extends BaseMonster {
     @Override
     public void tick() {
         super.tick();
-        if (!level().isClientSide && flopsOnLand() && !isNoAi() && !isInWaterRainOrBubble() && onGround()) {
+        if (!level().isClientSide && flopsOnLand() && !isNoAi() && !isInWaterOrBubble() && onGround()) {
             setDeltaMovement(getDeltaMovement().add((random.nextFloat() * 2.0F - 1.0F) * 0.2F, 0.5, (random.nextFloat() * 2.0F - 1.0F) * 0.2F));
             setYRot(random.nextFloat() * 360.0F);
             setOnGround(false);
@@ -114,9 +114,6 @@ public abstract class BaseAquaticMonster extends BaseMonster {
             moveRelative(getSpeed(), travelVector);
             move(MoverType.SELF, getDeltaMovement());
             setDeltaMovement(getDeltaMovement().scale(0.9));
-            if (getTarget() == null) {
-                setDeltaMovement(getDeltaMovement().add(0.0, -0.005, 0.0));
-            }
             return;
         }
         super.travel(travelVector);

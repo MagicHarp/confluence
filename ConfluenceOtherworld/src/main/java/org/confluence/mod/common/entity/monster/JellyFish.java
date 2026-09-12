@@ -12,7 +12,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -95,8 +94,8 @@ public class JellyFish extends BaseAquaticMonster {
     /// 使其能够跃出水面攻击，但不会在搁浅后继续把自己当作陆地怪物追踪。
     @Override
     protected boolean isValidAquaticTarget(LivingEntity target) {
-        if (target.isInWaterRainOrBubble()) return true;
-        if (!isInWaterRainOrBubble() || !hasLineOfSight(target)) return false;
+        if (target.isInWaterOrBubble()) return true;
+        if (!isInWaterOrBubble() || !hasLineOfSight(target)) return false;
         double x = target.getX() - getX();
         double z = target.getZ() - getZ();
         double y = target.getY() - getY();
@@ -193,11 +192,20 @@ public class JellyFish extends BaseAquaticMonster {
         }
 
         @Override
+        public BTStatus tryPreempt(Runnable stopCurrent) {
+            var target = jellyfish.getTarget();
+            if (target == null || !jellyfish.canAttack(target)) return BTStatus.FAILURE;
+            stopCurrent.run();
+            start();
+            return execute();
+        }
+
+        @Override
         public BTStatus execute() {
             var target = jellyfish.getTarget();
             if (target == null || !jellyfish.canAttack(target)) {
                 jellyfish.setAttackPhase(false);
-                jellyfish.getNavigation().stop();
+                if (phaseTicks > 0) jellyfish.getNavigation().stop();
                 return BTStatus.FAILURE;
             }
 
@@ -230,6 +238,7 @@ public class JellyFish extends BaseAquaticMonster {
 
         @Override
         public void stop() {
+            if (phaseTicks > 0) jellyfish.getNavigation().stop();
             phaseTicks = 0;
             repathTicks = 0;
             jellyfish.setAttackPhase(false);
@@ -285,9 +294,6 @@ public class JellyFish extends BaseAquaticMonster {
 
         @Override
         public void tick() {
-            if (mob.isInWater()) {
-                mob.setDeltaMovement(mob.getDeltaMovement().add(0.0, 0.005, 0.0));
-            }
 
             if (--pulseCooldown <= 0 && operation == Operation.MOVE_TO) {
                 operation = Operation.WAIT;

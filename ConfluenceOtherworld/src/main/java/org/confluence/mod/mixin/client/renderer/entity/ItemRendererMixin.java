@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -19,6 +20,7 @@ import org.confluence.lib.mixed.SelfGetter;
 import org.confluence.mod.client.renderer.item.SpecialItemRenderingUtil;
 import org.confluence.mod.client.summon.ClientSummonManager;
 import org.confluence.mod.common.entity.projectile.sword.PhasebladeProjectile;
+import org.confluence.mod.common.entity.projectile.whip.WhipAttackEntity;
 import org.confluence.mod.common.entity.yoyo.YoyoEntity;
 import org.confluence.mod.common.init.item.SummonItems;
 import org.confluence.mod.common.item.bow.BaseTerraBowItem;
@@ -54,8 +56,10 @@ public abstract class ItemRendererMixin implements SelfGetter<ItemRenderer> {
                                          int combinedLight, int combinedOverlay, BakedModel model,
                                          @Local(argsOnly = true) @Nullable LivingEntity entity) {
         if (!(entity instanceof Player player)) return true;
-        if (stack.getItem() instanceof BaseWhipItem whip && player.getCooldowns().isOnCooldown(whip))
-            return false;
+        if (stack.getItem() instanceof BaseWhipItem && (displayContext.firstPerson() || displayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || displayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)) {
+            HumanoidArm arm = leftHand ? HumanoidArm.LEFT : HumanoidArm.RIGHT;
+            return player.level().getEntitiesOfClass(WhipAttackEntity.class, player.getBoundingBox().inflate(8.0), attack -> attack.representsHeldWeapon(player, stack, arm)).isEmpty();
+        }
         if (stack.getItem() instanceof YoyoItem) {
             return player.level().getEntitiesOfClass(YoyoEntity.class,
                     AABB.ofSize(player.position(), 128.0D, 128.0D, 128.0D),

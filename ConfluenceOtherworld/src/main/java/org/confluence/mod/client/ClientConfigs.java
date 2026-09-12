@@ -22,6 +22,7 @@ import org.confluence.mod.common.init.ModTags;
 import org.confluence.mod.common.item.flail.BaseFlailItem;
 import org.confluence.mod.common.item.gun.BaseGun;
 import org.confluence.mod.common.item.mana.ManaStaffItem;
+import org.confluence.mod.common.item.whip.BaseWhipItem;
 import org.confluence.mod.common.item.yoyo.YoyoItem;
 import org.confluence.mod.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
@@ -265,7 +266,7 @@ public final class ClientConfigs {
         if (stack.getItem() instanceof ManaStaffItem<?>) {
             return staffUseButton;
         }
-        if (stack.is(ModTags.Items.WHIP)) {
+        if (stack.getItem() instanceof BaseWhipItem || stack.is(ModTags.Items.WHIP)) {
             return whipUseButton;
         }
         if (stack.getItem() instanceof YoyoItem) {

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import org.confluence.mod.client.effect.RenderStateShardAccessor;
 import org.confluence.mod.client.entity.model.GeoNormalModel;
 import org.confluence.mod.common.entity.PartHitTarget;
 import org.confluence.mod.common.entity.boss.BaseWormBoss;
@@ -62,7 +63,7 @@ public class GeoNormalRenderer<T extends Entity & GeoEntity> extends GeoEntityRe
     public RenderType getRenderType(T entity, ResourceLocation texture, @Nullable MultiBufferSource buffers, float partialTick) {
         RenderType type = super.getRenderType(entity, texture, buffers, partialTick);
         // 连续光照必须同时使用可读取小数 UV2 的 shader；透明、发光等专用材质不替换。
-        return usesInterpolatedLight(entity) && type == RenderType.entityCutoutNoCull(texture) ? SmoothEntityRenderType.cutout(texture) : type;
+        return usesInterpolatedLight(entity) && type == RenderType.entityCutoutNoCull(texture) ? RenderStateShardAccessor.smoothEntityCutout(texture) : type;
     }
 
     /// 仅由跨方块的长模型或分段实体显式启用，普通实体沿用原版单点光照。

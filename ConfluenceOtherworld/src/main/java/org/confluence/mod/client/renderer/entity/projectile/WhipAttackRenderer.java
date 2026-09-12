@@ -2,7 +2,6 @@ package org.confluence.mod.client.renderer.entity.projectile;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,29 +13,27 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.api.whip.WhipAppearance;
 import org.confluence.mod.api.whip.WhipSegment;
-import org.confluence.mod.api.whip.curve.WhipCurveSampler;
+import org.confluence.mod.client.renderer.entity.TetherRenderHelper;
 import org.confluence.mod.common.entity.projectile.whip.WhipAttackEntity;
 import org.confluence.mod.common.item.whip.BaseWhipItem;
+import org.joml.Matrix3f;
+import org.joml.Quaternionf;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /// 沿攻击实体的曲线绘制可组合鞭子外观。
 ///
-/// 玩家手中的普通物品 JSON 模型负责显示手柄，本渲染器只处理手柄之后的曲线。
+/// 当前挥动时隐藏物品模型，鞭身通过通用手部连接点接到保留的手臂。
 /// 每个外观分段独立选择固定像素间距或固定数量，并按声明顺序叠加；鞭梢和颜色线均为
 /// 可选项。所有模型仍通过原版烘焙模型渲染，因此模型自身的面与背面剔除规则不会丢失。
 public final class WhipAttackRenderer extends EntityRenderer<WhipAttackEntity> {
     /// 与 1.21 鞭子渲染器保持一致，物品模型按半格比例绘制。
     private static final float MODEL_SCALE = 0.5F;
-    private static final float ROLL_DEGREES_PER_SEGMENT = 10.0F;
     /// 模型经过 0.5 缩放后，一个 JSON 像素只占世界中的 1/32 格。
     /// 采样距离必须使用同一换算，否则四像素长的鞭节之间会留下半段空隙。
     private static final double RENDERED_PIXELS_PER_BLOCK = 32.0;
@@ -48,18 +45,26 @@ public final class WhipAttackRenderer extends EntityRenderer<WhipAttackEntity> {
     @Override
     public void render(WhipAttackEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
         ItemStack weapon = entity.weapon();
-        List<Vec3> points = alignCurveToHand(entity, entity.sampleRenderControlPoints(partialTick), partialTick);
+        if (entity.isRemoved() || entity.swingProgress(partialTick) >= 1.0F) return;
+        List<Vec3> points = entity.sampleWorldPoints(partialTick);
         if (weapon.isEmpty() || points.size() < 2) {
             return;
         }
         if (!(weapon.getItem() instanceof BaseWhipItem whip)) {
             return;
         }
+        if (points.get(0).distanceToSqr(points.get(points.size() - 1)) < 1.0E-6) return;
+        if (entity.getOwner() instanceof Player player) {
+            Vec3 offset = TetherRenderHelper.handPosition(entityRenderDispatcher, player, entity.attackArm(), partialTick).subtract(points.get(0));
+            // 整体平移到手臂连接点，不再扭曲近手端或改变鞭身形状。
+            points = points.stream().map(point -> point.add(offset)).toList();
+        }
         WhipAppearance appearance = whip.appearance();
         Vec3 origin = entity.getPosition(partialTick);
+        Vec3 widthAxis = entity.swingRight();
 
         for (WhipSegment segment : appearance.segments()) {
-            renderLayer(weapon, segment, points, origin, poseStack, buffers, packedLight);
+            renderLayer(weapon, segment, points, origin, widthAxis, poseStack, buffers, packedLight);
         }
         if (appearance.optionalLineColor().isPresent()) {
             renderCurveLine(points, origin, appearance.optionalLineColor().getAsInt(), poseStack, buffers);
@@ -67,59 +72,8 @@ public final class WhipAttackRenderer extends EntityRenderer<WhipAttackEntity> {
         super.render(entity, entityYaw, partialTick, poseStack, buffers, packedLight);
     }
 
-    /// 把玩家当前持手作为客户端样条根部。
-    ///
-    /// 服务端轨迹仍使用实体生成时冻结的世界坐标，本方法只修正客户端显示。1.21
-    /// 是把玩家当前手部作为样条控制点参与插值，而不是对已经采样完的折线硬改第一个点。
-    /// 这里保持同样的时机，避免第三人称看起来从错误手侧甩出。
-    private List<Vec3> alignCurveToHand(WhipAttackEntity entity, List<Vec3> controlPoints, float partialTick) {
-        if (controlPoints.isEmpty() || !(entity.getOwner() instanceof Player player)) {
-            return controlPoints;
-        }
-        float attack = player.getAttackAnim(partialTick);
-        float swing = Mth.sin(Mth.sqrt(attack) * Mth.PI);
-        Vec3 hand = player == Minecraft.getInstance().player
-                && entityRenderDispatcher.options.getCameraType().isFirstPerson()
-                ? getFirstPersonHandPosition(player, entity.attackArm(), swing, partialTick)
-                : getThirdPersonHandPosition(player, entity.attackArm(), partialTick);
-        if (controlPoints.size() == 1) {
-            return List.of(hand);
-        }
-        ArrayList<Vec3> result = new ArrayList<>(controlPoints.size());
-        result.add(hand);
-        for (int index = 1; index < controlPoints.size(); index++) {
-            result.add(controlPoints.get(index));
-        }
-        return WhipCurveSampler.sampleControlPoints(result, WhipAttackEntity.RENDER_SEGMENT_SPACING);
-    }
 
-    /// 按 1.21 的视场角和近裁剪面换算第一人称持鞭手位置。
-    private Vec3 getFirstPersonHandPosition(Player player, HumanoidArm arm, float swing, float partialTick) {
-        int side = arm == HumanoidArm.RIGHT ? 1 : -1;
-        double fovScale = 960.0
-                / entityRenderDispatcher.options.fov().get();
-        Vec3 offset = entityRenderDispatcher.camera.getNearPlane()
-                .getPointOnPlane(side * 0.525F, -0.1F)
-                .scale(fovScale)
-                .yRot(swing * 0.5F - 1.0F)
-                .xRot(-swing * 0.7F);
-        return player.getPosition(partialTick).add(offset).add(0.0, player.getEyeHeight() * 0.8F, 0.0);
-    }
-
-    /// 取得第三人称挥鞭手位置，并和服务端生成锚点保持相同的左右手约定。
-    private static Vec3 getThirdPersonHandPosition(Player player, HumanoidArm arm, float partialTick) {
-        int side = arm == HumanoidArm.RIGHT ? 1 : -1;
-        float bodyYaw = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot)
-                * Mth.DEG_TO_RAD;
-        double sin = Mth.sin(bodyYaw);
-        double cos = Mth.cos(bodyYaw);
-        float scale = player.getScale();
-        double sideOffset = side * 0.5 * scale;
-        double crouchOffset = player.isCrouching() ? -0.1875 : 0.0;
-        return player.getEyePosition(partialTick).add(-cos * sideOffset, crouchOffset - scale, -sin * sideOffset);
-    }
-
-    private static void renderLayer(ItemStack weapon, WhipSegment segment, List<Vec3> curve, Vec3 origin, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
+    private static void renderLayer(ItemStack weapon, WhipSegment segment, List<Vec3> curve, Vec3 origin, Vec3 widthAxis, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
         List<WhipPolylineSamples.Sample> samples =
                 segment.mode() == WhipSegment.Mode.FIXED_SPACING
                         ? WhipPolylineSamples.fixedSpacing(curve, segment.value() / RENDERED_PIXELS_PER_BLOCK)
@@ -136,28 +90,44 @@ public final class WhipAttackRenderer extends EntityRenderer<WhipAttackEntity> {
                 .distanceToSqr(tip.position()) <= 1.0E-10) {
             bodyCount--;
         }
-        /// fixedSpacing/fixedCount 已从第一个有效间隔开始取样，不包含曲线根点。
+        Quaternionf orientation = null;
+        Vec3 previousDirection = null;
+        // 沿曲线传递上一节的朝向，不再为每节叠加固定扭转。
         for (int index = 0; index < bodyCount; index++) {
             WhipPolylineSamples.Sample sample = samples.get(index);
-            renderSegment(weapon, body, sample.position().subtract(origin), sample.tangent(), index + 1, poseStack, buffers, packedLight);
+            Vec3 direction = sample.tangent().scale(-1.0);
+            orientation = segmentOrientation(direction, previousDirection, orientation, widthAxis);
+            renderSegment(weapon, body, sample.position().subtract(origin), orientation, poseStack, buffers, packedLight);
+            previousDirection = direction;
         }
         if (hasTip) {
-            renderSegment(weapon, WhipSegmentModels.model(segment.tipModel()), tip.position().subtract(origin), tip.tangent(), bodyCount + 1, poseStack, buffers, packedLight);
+            orientation = segmentOrientation(tip.tangent().scale(-1.0), previousDirection, orientation, widthAxis);
+            renderSegment(weapon, WhipSegmentModels.model(segment.tipModel()), tip.position().subtract(origin), orientation, poseStack, buffers, packedLight);
         }
     }
 
-    private static void renderSegment(ItemStack weapon, BakedModel model, Vec3 offset, Vec3 tangent, int index, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
+    private static Quaternionf segmentOrientation(Vec3 direction, Vec3 previousDirection, Quaternionf previous, Vec3 widthAxis) {
+        if (previous != null && previousDirection.dot(direction) > -0.9999) {
+            return new Quaternionf().rotationTo((float) previousDirection.x, (float) previousDirection.y, (float) previousDirection.z, (float) direction.x, (float) direction.y, (float) direction.z).mul(previous).normalize();
+        }
+        Vec3 width = widthAxis.subtract(direction.scale(widthAxis.dot(direction)));
+        if (width.lengthSqr() < 1.0E-6) {
+            Vec3 fallback = Math.abs(direction.y) < 0.9 ? new Vec3(0.0, 1.0, 0.0) : new Vec3(0.0, 0.0, 1.0);
+            width = fallback.subtract(direction.scale(fallback.dot(direction)));
+        }
+        width = width.normalize();
+        Vec3 normal = width.cross(direction).normalize();
+        return new Quaternionf().setFromNormalized(new Matrix3f((float) width.x, (float) width.y, (float) width.z, (float) direction.x, (float) direction.y, (float) direction.z, (float) normal.x, (float) normal.y, (float) normal.z));
+    }
+
+    private static void renderSegment(ItemStack weapon, BakedModel model, Vec3 offset, Quaternionf orientation, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(offset.x, offset.y, offset.z);
         poseStack.scale(MODEL_SCALE, MODEL_SCALE, MODEL_SCALE);
 
-        float yaw = (float) (Math.PI - Math.atan2(tangent.z, tangent.x));
-        float pitch = (float) -Math.atan2(tangent.y, tangent.horizontalDistance());
-        poseStack.mulPose(Axis.YP.rotation(yaw));
-        poseStack.mulPose(Axis.ZP.rotation(pitch + (float) Math.PI * 0.5F));
-        poseStack.translate(0.5F, 0.5F, 0.5F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(index * ROLL_DEGREES_PER_SEGMENT));
-        poseStack.translate(-0.5F, -0.5F, -0.5F);
+        // 模型沿 +Y 延伸，采样点位于该节末端，朝根部排布；先将模型中轴移至原点。
+        poseStack.mulPose(orientation);
+        poseStack.translate(-0.5F, 0.0F, -0.5F);
 
         for (RenderType renderType : model.getRenderTypes(weapon, false)) {
             VertexConsumer consumer = ItemRenderer.getFoilBuffer(buffers, renderType, false, weapon.hasFoil());

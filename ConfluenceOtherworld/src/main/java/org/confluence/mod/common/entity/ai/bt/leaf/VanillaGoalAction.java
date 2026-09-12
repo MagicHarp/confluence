@@ -28,6 +28,16 @@ public final class VanillaGoalAction extends BTNode {
     }
 
     @Override
+    public BTStatus tryPreempt(Runnable stopCurrent) {
+        if (!goal.canUse()) return BTStatus.FAILURE;
+        // 旧动作先释放导航，再让新动作建立路径；canUse 只调用一次。
+        stopCurrent.run();
+        running = true;
+        goal.start();
+        return execute();
+    }
+
+    @Override
     public BTStatus execute() {
         if (!running) {
             return BTStatus.FAILURE;

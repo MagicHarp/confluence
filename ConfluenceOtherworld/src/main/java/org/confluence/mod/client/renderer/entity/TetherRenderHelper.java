@@ -34,7 +34,11 @@ public final class TetherRenderHelper {
     }
 
     private static Vec3 mainHandPosition(EntityRenderDispatcher dispatcher, Player player, float partialTick) {
-        int arm = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
+        return handPosition(dispatcher, player, player.getMainArm(), partialTick);
+    }
+
+    public static Vec3 handPosition(EntityRenderDispatcher dispatcher, Player player, HumanoidArm hand, float partialTick) {
+        int arm = hand == HumanoidArm.RIGHT ? 1 : -1;
         if (dispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
             double scale = 960.0 / dispatcher.options.fov().get();
             return player.getEyePosition(partialTick).add(dispatcher.camera.getNearPlane().getPointOnPlane(arm * 0.525F, -0.5F).scale(scale));

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.effect.RenderStateShardAccessor;
 import org.confluence.mod.common.entity.boss.HillOfFlesh;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
@@ -30,7 +31,7 @@ public final class HillOfFleshRenderer extends BossGeoRenderer<HillOfFlesh> {
         super.render(hill, entityYaw, partialTick, poseStack, buffers, packedLight);
         if (!hill.isAlive() || hill.isInitializing()) return;
         // 场地使用同步的判定半径，不继承肉山模型的缩放、转向和出场位移。
-        VertexConsumer vertices = buffers.getBuffer(HillOfFleshBoundaryRenderType.FIRE);
+        VertexConsumer vertices = buffers.getBuffer(RenderStateShardAccessor.HILL_OF_FLESH_BOUNDARY);
         renderBoundary(poseStack.last().pose(), vertices, hill.getOuterRadius(), -10.0F, HillOfFlesh.ARENA_HEIGHT - 10.0F);
         renderBoundary(poseStack.last().pose(), vertices, hill.getInnerRadius(), 0.0F, 2.0F);
     }

@@ -8,10 +8,7 @@ import java.util.Objects;
 
 /// 将当前时间点的鞭身控制点转换为近似等弧长折线。
 ///
-/// 空间曲线沿用 1.21 侧的普通 Catmull-Rom 公式。先生成密集曲线，再按累计弧长
-/// 重新采样，能在不改变原有挥动形状的前提下稳定各鞭节长度，也为服务端扫掠碰撞
-/// 提供稳定间距。该类无可变状态，服务端和客户端必须共同调用它，不能各自维护
-/// 另一套轨迹公式。
+/// 先生成平滑曲线，再按累计弧长重新采样，保证模型分段间距和碰撞采样稳定。
 public final class WhipCurveSampler {
     private static final int DENSE_STEPS_PER_SPAN = 16;
     private static final int MIN_SEGMENTS = 8;
@@ -50,10 +47,6 @@ public final class WhipCurveSampler {
     }
 
     /// 将已经完成世界坐标变换的控制点重新采样成平滑折线。
-    ///
-    /// 鞭子客户端渲染需要把玩家当前手部位置临时并入样条，但服务端命中仍然使用
-    /// 发射瞬间冻结的控制点。提供这个入口后，渲染层可以复用同一套 Catmull-Rom 与
-    /// 等弧长采样规则，而不需要复制一份近似但不同的曲线算法。
     public static List<Vec3> sampleControlPoints(List<Vec3> source, double segmentSpacing) {
         Objects.requireNonNull(source, "source");
         if (segmentSpacing <= 0.0) {
@@ -97,10 +90,7 @@ public final class WhipCurveSampler {
         return dense;
     }
 
-    /// 计算 1.21 {@code FrameUtil.interpolate} 使用的普通 Catmull-Rom 曲线。
-    ///
-    /// 这里不能换成中心参数或弦长参数公式，否则即使关键帧完全相同，鞭梢的弧线、
-    /// 扫掠范围和命中时机仍会产生可见差异。
+    /// 普通 Catmull-Rom 曲线。
     private static Vec3 uniformCatmullRom(Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3, double progress) {
         double t2 = progress * progress;
         double t3 = t2 * progress;

@@ -54,16 +54,12 @@ public class SelectorNode extends BTNode {
     private BTStatus tryHigherPriorityChildren() {
         for (int index = 0; index < currentIndex; index++) {
             BTNode candidate = children.get(index);
-            candidate.start();
-            BTStatus status = candidate.execute();
+            BTStatus status = candidate.tryPreempt(children.get(currentIndex)::stop);
             if (status == BTStatus.FAILURE) {
                 candidate.stop();
                 continue;
             }
 
-            if (currentIndex < children.size()) {
-                children.get(currentIndex).stop();
-            }
             if (status == BTStatus.SUCCESS) {
                 candidate.stop();
                 currentIndex = -1;

@@ -16,6 +16,7 @@ public final class ClientWeaponInputManager {
     public static void init() {
         if (HANDLERS.isEmpty()) {
             register(YoyoInputHandler.INSTANCE);
+            register(WhipInputHandler.INSTANCE);
             register(PhasebladeInputHandler.INSTANCE);
         }
     }

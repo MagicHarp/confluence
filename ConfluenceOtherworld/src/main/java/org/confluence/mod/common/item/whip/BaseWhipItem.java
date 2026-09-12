@@ -14,94 +14,122 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.ConfluenceMagicLib;
 import org.confluence.lib.common.LibAttributes;
-import org.confluence.mod.api.whip.WhipAppearance;
-import org.confluence.mod.api.whip.WhipDefinition;
+import org.confluence.mod.Confluence;
+import org.confluence.mod.api.whip.*;
+import org.confluence.mod.api.whip.curve.WhipCurve;
+import org.confluence.mod.api.whip.curve.WhipCurves;
 import org.confluence.mod.common.entity.projectile.whip.WhipAttackEntity;
 import org.confluence.mod.common.init.entity.ModEntities;
-import org.confluence.mod.common.init.item.WhipItems;
+import org.mesdag.portlib.wrapper.world.entity.PortEquipmentSlotGroup;
+import org.mesdag.portlib.wrapper.world.entity.ai.attributes.PortAttributeModifier;
+import org.mesdag.portlib.wrapper.world.item.component.PortItemAttributeModifiers;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
-/// 鞭子物品的公共实现。
-///
-/// 普通鞭子只需要提供 {@link WhipDefinition}。左右键配置、服务端去重、冷却、耐久、召唤伤害与暴击
-/// 快照以及攻击实体生成均由此类统一处理；复杂鞭子可以通过定义中的两类效果接口扩展，不需要复制整套
-/// 发射和碰撞代码。
+/// 鞭子的共享挥动流程；具体数值和命中行为由各物品类提供。
 public class BaseWhipItem extends Item {
-    private final WhipDefinition definition;
+    private final float baseDamage;
+    private final int durationTicks;
+    private final int hitCooldownTicks;
+    private final Supplier<? extends WhipTagEffect> tagEffect;
     private final WhipAppearance appearance;
 
-    public BaseWhipItem(Properties properties, WhipDefinition definition, WhipAppearance appearance) {
-        super(properties);
-        this.definition = Objects.requireNonNull(definition, "Whip definition must not be null");
-        this.appearance = Objects.requireNonNull(appearance, "Whip appearance must not be null");
+    public BaseWhipItem(String name, float baseDamage, float attackSpeedModifier, float range, int hitCooldownTicks, Supplier<? extends WhipTagEffect> tagEffect) {
+        this(baseDamage, attackSpeedModifier, range, hitCooldownTicks, tagEffect, WhipAppearance.segments(WhipSegment.fixedSpacing(Confluence.asResource("item/whip_segments/" + name), 4)));
     }
 
-    public WhipDefinition definition() {
-        return definition;
+    protected BaseWhipItem(float baseDamage, float attackSpeedModifier, float range, int hitCooldownTicks, Supplier<? extends WhipTagEffect> tagEffect, WhipAppearance appearance) {
+        super(createProperties(attackSpeedModifier, range));
+        this.baseDamage = baseDamage;
+        this.durationTicks = Math.max(1, (int) (80.0 / (4.0 * (1.0 + attackSpeedModifier))));
+        this.hitCooldownTicks = hitCooldownTicks;
+        this.tagEffect = Objects.requireNonNull(tagEffect);
+        this.appearance = Objects.requireNonNull(appearance);
     }
+
+    private static Properties createProperties(float attackSpeedModifier, float range) {
+        PortItemAttributeModifiers attributes = PortItemAttributeModifiers.builder()
+                .add(Attributes.ATTACK_SPEED, new PortAttributeModifier(Confluence.asResource("whip_attack_speed_modifier"), attackSpeedModifier, PortAttributeModifier.Operation.ADD_MULTIPLIED_BASE), PortEquipmentSlotGroup.MAINHAND)
+                .add(ConfluenceMagicLib.WHIP_RANGE, new PortAttributeModifier(Confluence.asResource("whip_range_modifier"), range, PortAttributeModifier.Operation.ADD_MULTIPLIED_BASE), PortEquipmentSlotGroup.MAINHAND)
+                .build();
+        return new Properties().stacksTo(1).unbreakable().attributes(attributes);
+    }
+
+    public float baseDamage() {return baseDamage;}
+
+    public int durationTicks() {return durationTicks;}
+
+    public int hitCooldownTicks() {return hitCooldownTicks;}
+
+    public WhipTagEffect tagEffect() {return tagEffect.get();}
+
+    public float damageFalloff() {return 0.8F;}
+
+    public float minimumDamageMultiplier() {return 0.2F;}
+
+    public boolean penetratesBlocks() {return false;}
+
+    public WhipCurve curve() {return WhipCurves.DEFAULT;}
+
+    public void onDirectHit(WhipDirectHitContext context) {}
+
+    public boolean canHitFriendlySummons() {return false;}
+
+    public void onFriendlyHit(WhipFriendlyHitContext context) {}
 
     public WhipAppearance appearance() {
         return appearance;
     }
 
-    /// 右键模式通过原版物品入口提交动作；左键模式由统一客户端输入包提交。
-    /// 客户端配置层会阻止未选中的按键进入这里，因此服务端只需验证有限触发类型。
+    /// 所有输入入口都经过服务端会话，不能通过连点或切换鞭子叠加攻击。
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (player instanceof ServerPlayer serverPlayer) {
-            if (hasWhipCooldown(serverPlayer)) {
-                return InteractionResultHolder.fail(stack);
-            }
-            WhipAttackEntity attack = new WhipAttackEntity(ModEntities.WHIP_ATTACK.get(), level);
-            HumanoidArm arm = hand == InteractionHand.MAIN_HAND
-                    ? serverPlayer.getMainArm()
-                    : serverPlayer.getMainArm().getOpposite();
-            int durationTicks = resolveDurationTicks(serverPlayer);
-            Vec3 direction = Vec3.directionFromRotation(0.0F, serverPlayer.getYRot());
-            attack.setOwner(serverPlayer);
-            attack.setDamage(definition.baseDamage() * (float) serverPlayer.getAttributeValue(LibAttributes.getSummonDamage()));
-            attack.initialize(stack, direction, arm, durationTicks,
-                    (float) serverPlayer.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE));
-            attack.setPos(serverPlayer.position().add(0.0, serverPlayer.getBbHeight() * 0.5F, 0.0).add(playerHandOffset(serverPlayer, arm)));
-            if (level.addFreshEntity(attack)) {
-                WhipItems.ITEMS.getEntries().forEach(entry -> serverPlayer.getCooldowns().addCooldown(entry.get(), durationTicks));
-                serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-            }
-        }
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        if (player instanceof ServerPlayer serverPlayer)
+            WhipSession.requestSwing(serverPlayer, hand);
+        // 仅在服务端实际创建攻击时挥手，拒绝续发时不能触发原版空挥动画。
+        return InteractionResultHolder.consume(stack);
     }
 
-    private static boolean hasWhipCooldown(Player player) {
-        return WhipItems.ITEMS.getEntries().stream()
-                .anyMatch(entry -> player.getCooldowns().isOnCooldown(entry.get()));
+    WhipAttackEntity createAttack(ServerPlayer player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        WhipAttackEntity attack = new WhipAttackEntity(ModEntities.WHIP_ATTACK.get(), player.level());
+        HumanoidArm arm = hand == InteractionHand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
+        attack.setOwner(player);
+        attack.setDamage(baseDamage() * (float) player.getAttributeValue(LibAttributes.getSummonDamage()));
+        attack.initialize(stack, player.getLookAngle(), arm, resolveDurationTicks(player), (float) player.getAttributeValue(ConfluenceMagicLib.WHIP_RANGE));
+        attack.setPos(handPosition(player, arm, 1.0F));
+        if (!player.level().addFreshEntity(attack)) return null;
+        player.swing(hand, true);
+        player.awardStat(Stats.ITEM_USED.get(this));
+        return attack;
+    }
+
+    public static float swingStep(Player player) {
+        double speed = player.getAttributeValue(Attributes.ATTACK_SPEED);
+        return Double.isFinite(speed) ? (float) Mth.clamp(speed / 80.0, 0.0, 1.0) : 0.0F;
     }
 
     /// 按 1.21 的公式把玩家当前攻击速度换算为一次完整挥鞭所需的 tick 数。
     /// 物品本身、词缀、盔甲和状态效果对攻击速度的修改都会在读取属性时自然合并。
     public static int resolveDurationTicks(Player player) {
         Objects.requireNonNull(player, "Whip player must not be null");
-        double attackSpeed = player.getAttributeValue(Attributes.ATTACK_SPEED);
-        if (attackSpeed <= 0.0) {
-            throw new IllegalStateException("Whip attack speed must be positive");
-        }
-        return Math.max(1, (int) (80.0 / attackSpeed));
+        float step = swingStep(player);
+        return step > 0.0F ? Math.max(1, (int) Math.ceil(1.0 / step)) : Integer.MAX_VALUE;
     }
 
-    /// 计算本次挥鞭生成时的手部锚点。
-    ///
-    /// 这个点同时决定服务端命中曲线根部和客户端后续吸附根部的初始侧向，因此必须和渲染器使用同一套左右手约定。
-    /// 对右手来说，面向 +Z 时锚点应落在玩家视觉右侧，避免第三人称看到鞭子从左手侧甩出。
-    private static Vec3 playerHandOffset(Player player, HumanoidArm arm) {
+    /// 逻辑与渲染共享持手锚点，避免第一人称另行变形鞭根。
+    public static Vec3 handPosition(Player player, HumanoidArm arm, float partialTick) {
         int side = arm == HumanoidArm.RIGHT ? 1 : -1;
-        float yaw = player.yBodyRot * Mth.DEG_TO_RAD + 1.0F;
-        double sin = Mth.sin(yaw);
-        double cos = Mth.cos(yaw);
+        float yaw = Mth.rotLerp(partialTick, player.yRotO, player.getYRot());
+        float pitch = Mth.lerp(partialTick, player.xRotO, player.getXRot());
+        Vec3 forward = Vec3.directionFromRotation(pitch, yaw);
+        Vec3 right = Vec3.directionFromRotation(0.0F, yaw + 90.0F);
+        Vec3 up = right.cross(forward).normalize();
         float scale = player.getScale();
-        double sideOffset = side * 0.25 * scale;
-        double forwardOffset = 0.8 * scale;
-        return new Vec3(-cos * sideOffset - sin * forwardOffset, 0.0, -sin * sideOffset + cos * forwardOffset);
+        // 前后和高低偏移都跟随俯仰，直上直下时仍由 yaw 确定左右手方向。
+        return player.getEyePosition(partialTick).add(right.scale(side * 0.25 * scale)).add(forward.scale(0.4 * scale)).add(up.scale(-0.45 * scale));
     }
 
 }

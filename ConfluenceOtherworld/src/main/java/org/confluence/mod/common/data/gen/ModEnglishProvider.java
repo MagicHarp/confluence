@@ -2019,11 +2019,11 @@ public class ModEnglishProvider extends LanguageProvider {
 
     private void addWhipTranslation(BaseWhipItem whip, String name) {
         add(whip, name);
-        add(whip.definition().tagEffect().get(), name + " Mark");
-        String tooltip = whip.definition().tagEffect().get().fixedDamage() == 0.0F
+        add(whip.tagEffect(), name + " Mark");
+        String tooltip = whip.tagEffect().fixedDamage() == 0.0F
                 ? "Minions focus on this target"
                 : "Minions deal additional damage";
-        addEffect(whip.definition().tagEffect().get(), tooltip);
+        addEffect(whip.tagEffect(), tooltip);
     }
 
     private void addGunTranslations() {

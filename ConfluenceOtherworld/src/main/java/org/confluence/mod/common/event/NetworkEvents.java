@@ -36,6 +36,7 @@ public final class NetworkEvents {
         handler.registerInGameC2S(ShootPacketC2S.class, ShootPacketC2S.ID, ShootPacketC2S.STREAM_CODEC);
         handler.registerInGameC2S(YoyoControlPacketC2S.class, YoyoControlPacketC2S.ID, YoyoControlPacketC2S.STREAM_CODEC);
         handler.registerInGameC2S(WeaponUseStatePacketC2S.class, WeaponUseStatePacketC2S.ID, WeaponUseStatePacketC2S.STREAM_CODEC);
+        handler.registerInGameC2S(WhipControlPacketC2S.class, WhipControlPacketC2S.ID, WhipControlPacketC2S.STREAM_CODEC);
         // S2C
         handler.registerInGameS2C(AchievementOffsetSyncPacketS2C.class, AchievementOffsetSyncPacketS2C.ID, AchievementOffsetSyncPacketS2C.STREAM_CODEC);
 //        handler.registerInGameS2C(AchievementsDataSyncPacketS2C.class, AchievementsDataSyncPacketS2C.ID, AchievementsDataSyncPacketS2C.STREAM_CODEC);

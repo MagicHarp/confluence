@@ -6,14 +6,19 @@ import java.util.List;
 
 /// 本体提供的鞭子轨迹预设。
 ///
-/// 这里保留 1.21 侧的原始局部关键点，只把 1.21 使用的 16 像素单位换算成世界单位。
-/// 轨迹外层可以继续使用新的分段渲染 API，但挥动形状本身不能因为重构而改变。
+/// 以 1.21 的轨迹为基础，普通挥鞭仅提前鞭梢下抽，不改变伸出距离和总时长。
 public final class WhipCurves {
+    public static final float SNAP_PROGRESS = 0.60F;
+    public static final float SWEEP_SOUND_PROGRESS = 0.3F;
     public static final WhipCurve DEFAULT = new KeyframedWhipCurve(List.of(
             new WhipFrame(0.0F, List.of(Vec3.ZERO, Vec3.ZERO, Vec3.ZERO)),
-            new WhipFrame(0.25F, List.of(Vec3.ZERO, new Vec3(-1.0 / 16.0, 3.0 / 16.0, 0.0), new Vec3(-4.0 / 16.0, 3.0 / 16.0, 0.0))),
+            new WhipFrame(0.25F, List.of(Vec3.ZERO, new Vec3(-1.0 / 16.0, 0.0, 0.0), new Vec3(-4.0 / 16.0, 3.0 / 16.0, 0.0))),
             new WhipFrame(0.50F, List.of(Vec3.ZERO, new Vec3(-4.0 / 16.0, 0.0, 0.0), new Vec3(-14.0 / 16.0, 3.0 / 16.0, 0.0))),
-            new WhipFrame(0.75F, List.of(Vec3.ZERO, new Vec3(-5.0 / 16.0, -4.0 / 16.0, 0.0), new Vec3(-16.0 / 16.0, -4.0 / 16.0, 0.0))),
+            // 水平伸出保持原速，只让鞭梢先蓄势、快速下抽，再缓冲收势。
+            new WhipFrame(0.58F, List.of(Vec3.ZERO, new Vec3(-4.32 / 16.0, 0.0, 0.0), new Vec3(-14.64 / 16.0, 2.6 / 16.0, 0.0))),
+            new WhipFrame(0.68F, List.of(Vec3.ZERO, new Vec3(-4.72 / 16.0, 0.0, 0.0), new Vec3(-15.44 / 16.0, -3.5 / 16.0, 0.0))),
+            new WhipFrame(0.74F, List.of(Vec3.ZERO, new Vec3(-4.96 / 16.0, 0.0, 0.0), new Vec3(-15.92 / 16.0, -4.0 / 16.0, 0.0))),
+            new WhipFrame(0.75F, List.of(Vec3.ZERO, new Vec3(-5.0 / 16.0, 0.0, 0.0), new Vec3(-16.0 / 16.0, -4.0 / 16.0, 0.0))),
             new WhipFrame(1.0F, List.of(Vec3.ZERO, Vec3.ZERO, Vec3.ZERO))
     ));
 

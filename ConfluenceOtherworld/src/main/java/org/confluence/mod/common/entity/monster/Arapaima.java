@@ -3,7 +3,6 @@ package org.confluence.mod.common.entity.monster;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -24,21 +23,21 @@ public final class Arapaima extends Piranha {
 
     @Override
     protected boolean isValidAquaticTarget(LivingEntity target) {
-        return target.isInWaterRainOrBubble() || isReachableFromShore(target);
+        return target.isInWaterOrBubble() || isReachableFromShore(target);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (level().isClientSide) return;
+        if (level().isClientSide || isNoAi()) return;
         if (leapCooldown > 0) {
             leapCooldown--;
             return;
         }
         LivingEntity target = getTarget();
-        if (target == null || target.isInWaterRainOrBubble() || !isReachableFromShore(target))
+        if (target == null || target.isInWaterOrBubble() || !isReachableFromShore(target))
             return;
-        if (!isInWaterRainOrBubble() || level().getFluidState(blockPosition().above()).is(FluidTags.WATER))
+        if (!isInWaterOrBubble() || level().getFluidState(blockPosition().above()).is(FluidTags.WATER))
             return;
         Vec3 horizontal = target.position().subtract(position()).multiply(1.0, 0.0, 1.0);
         if (horizontal.lengthSqr() < 1.0E-7) return;
@@ -52,6 +51,8 @@ public final class Arapaima extends Piranha {
     }
 
     private boolean isReachableFromShore(LivingEntity target) {
+        if (!isInWaterOrBubble() && (onGround() || leapCooldown <= 0) || !hasLineOfSight(target))
+            return false;
         double x = target.getX() - getX();
         double z = target.getZ() - getZ();
         double y = target.getY() - getY();

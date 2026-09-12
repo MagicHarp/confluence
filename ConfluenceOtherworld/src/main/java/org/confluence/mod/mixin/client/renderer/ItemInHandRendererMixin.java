@@ -13,10 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.phys.AABB;
+import org.confluence.mod.common.entity.projectile.whip.WhipAttackEntity;
 import org.confluence.mod.common.entity.yoyo.YoyoEntity;
 import org.confluence.mod.common.init.item.SwordItems;
 import org.confluence.mod.common.item.bow.BaseTerraBowItem;
 import org.confluence.mod.common.item.crossbow.BaseTerraRepeaterItem;
+import org.confluence.mod.common.item.whip.BaseWhipItem;
 import org.confluence.mod.common.item.yoyo.YoyoItem;
 import org.confluence.terra_curio.common.item.MagicMirror;
 import org.spongepowered.asm.mixin.Mixin;
@@ -46,8 +48,11 @@ public abstract class ItemInHandRendererMixin {
             if (!player.isInvisible()) {
                 renderPlayerArm(poseStack, buffer, combinedLight, equippedProgress, swingProgress, humanoidarm);
             }
-        } else if (stack.getItem() instanceof YoyoItem && !player.isInvisible()
-                && hasMatchingDeployedYoyo(player, stack)) {
+        } else if (stack.getItem() instanceof BaseWhipItem && !player.isInvisible()
+                && !player.level().getEntitiesOfClass(WhipAttackEntity.class, player.getBoundingBox().inflate(8.0), attack -> attack.representsHeldWeapon(player, stack, humanoidarm)).isEmpty()) {
+            // 挥鞭时只保留伸出的手臂，物品模型由 ItemRendererMixin 隐藏。
+            renderPlayerArm(poseStack, buffer, combinedLight, equippedProgress, 0.0F, humanoidarm);
+        } else if (stack.getItem() instanceof YoyoItem && !player.isInvisible() && hasMatchingDeployedYoyo(player, stack)) {
             // The deployed yoyo model is suppressed separately, so retain the first-person arm.
             // This mirrors 1.21's explicit arm rendering without coupling every yoyo item to a
             // shared client-side weapon flag.

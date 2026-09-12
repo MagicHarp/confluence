@@ -1,21 +1,20 @@
 package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class Shark extends Piranha {
     public Shark(EntityType<? extends Shark> type, Level level) {
         super(type, level);
-        this.moveControl = new SharkMoveControl(this);
     }
 
     @Override
@@ -28,20 +27,6 @@ public class Shark extends Piranha {
         return false;
     }
 
-    private static final class SharkMoveControl extends SmoothSwimmingMoveControl {
-        private SharkMoveControl(Shark mob) {
-            super(mob, 85, 10, 0.02F, 0.1F, true);
-        }
-
-        @Override
-        public void tick() {
-            if (mob.isInWater()) {
-                mob.setDeltaMovement(mob.getDeltaMovement().add(0.0, 0.001, 0.0));
-            }
-            super.tick();
-        }
-    }
-
     private static final class SharkRandomSwimmingGoal extends RandomSwimmingGoal {
         private SharkRandomSwimmingGoal(Shark mob, double speed, int interval) {
             super(mob, speed, interval);
@@ -50,17 +35,21 @@ public class Shark extends Piranha {
         @Nullable
         @Override
         protected Vec3 getPosition() {
-            Vec3 rawPosition = BehaviorUtils.getRandomSwimmablePos(mob, 10, 3);
-            if (rawPosition == null) {
-                return null;
+            for (int attempt = 0; attempt < 10; attempt++) {
+                Vec3 candidate = BehaviorUtils.getRandomSwimmablePos(mob, 10, 3);
+                if (candidate == null) continue;
+                AABB box = mob.getBoundingBox().move(candidate.subtract(mob.position())).deflate(1.0E-4);
+                if (!mob.level().noCollision(mob, box)) continue;
+                boolean submerged = true;
+                for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(box.minX), Mth.floor(box.minY), Mth.floor(box.minZ), Mth.floor(box.maxX), Mth.floor(box.maxY), Mth.floor(box.maxZ))) {
+                    if (!mob.level().getFluidState(pos).is(FluidTags.WATER)) {
+                        submerged = false;
+                        break;
+                    }
+                }
+                if (submerged) return candidate;
             }
-            int y = (int) rawPosition.y;
-            BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(rawPosition.x, y + 1, rawPosition.z);
-            while (mob.level().getBlockState(pos).isPathfindable(mob.level(), pos, PathComputationType.WATER) && y < rawPosition.y + 3) {
-                y++;
-                pos.set(rawPosition.x, y + 1, rawPosition.z);
-            }
-            return new Vec3(rawPosition.x, y, rawPosition.z);
+            return null;
         }
     }
 }
