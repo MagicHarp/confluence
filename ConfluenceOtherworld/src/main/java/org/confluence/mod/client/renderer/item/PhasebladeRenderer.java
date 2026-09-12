@@ -95,14 +95,15 @@ public class PhasebladeRenderer extends GeoItemRenderer<BasePhasebladeItem> {
 
     @Override
     protected void renderInGui(ItemDisplayContext context, PoseStack poses, MultiBufferSource buffers, int light, int overlay) {
-        if (!(animatable instanceof Phasesaber saber) || forceBladeOn) {
+        if (forceBladeOn) {
             super.renderInGui(context, poses, buffers, light, overlay);
             return;
         }
         double time = BladeItemVisualState.time(Minecraft.getInstance().getFrameTime());
         double extension = BladeItemVisualState.get(getCurrentItemStack(), time).extension(time);
         String suffix = extension <= 0 ? "inactive" : extension >= 1 ? "item" : "activation";
-        ResourceLocation texture = Confluence.asResource("textures/item/phasesaber/" + saber.color() + "_phasesaber_" + suffix + ".png");
+        String family = animatable instanceof Phasesaber ? "phasesaber" : "phaseblade";
+        ResourceLocation texture = Confluence.asResource("textures/item/" + family + "/" + animatable.color() + "_" + family + "_" + suffix + ".png");
         int frame = Math.min(6, (int) (extension * 7));
         float v0 = suffix.equals("activation") ? frame / 7.0F : 0;
         float v1 = suffix.equals("activation") ? (frame + 1) / 7.0F : 1;
