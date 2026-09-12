@@ -331,7 +331,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("itemGroup.confluence.mummy_set", "Mummy Set");
         add("itemGroup.confluence.clown_set", " Clown Set");
         add("itemGroup.confluence.sailor_set", " Sailor Set");
-
+//武器
         add("itemGroup.confluence.boomerang", "Boomerang");
         add("itemGroup.confluence.spear", "Spear");
         add("itemGroup.confluence.lance", "Lance");
@@ -339,6 +339,7 @@ public class ModEnglishProvider extends LanguageProvider {
         add("itemGroup.confluence.pre_hardmode_broadswords", "Pre-Hardmode Broadswords");
         add("itemGroup.confluence.hardmode_broadswords", "Hardmode Broadswords");
         add("itemGroup.confluence.yoyo", "Yoyo");
+        add("itemGroup.confluence.flail","Flail");
 
         add("itemGroup.confluence.short_bow", "Short Bow");
         add("itemGroup.confluence.bow", "Bow");
