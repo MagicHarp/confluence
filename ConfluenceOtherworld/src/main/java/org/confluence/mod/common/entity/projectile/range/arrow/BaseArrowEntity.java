@@ -221,7 +221,6 @@ public class BaseArrowEntity extends AbstractArrow {
             if (!this.level().isClientSide) {
                 living.setArrowCount(living.getArrowCount() + 1);
             }
-            //todo 击退
             this.doKnockback(living, damagesource);
             if (modify.knockBack > 0) {
                 double d1 = modify.knockBack;
