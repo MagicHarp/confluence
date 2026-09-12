@@ -39,7 +39,7 @@ public final class KingSlimeRenderer extends MobRenderer<KingSlime, BaseSlimeMod
         // 当前碰撞箱已经包含体型缩放，只需补上本帧挤压造成的纵向伸缩。
         float bodyHeight = slime.getDimensions(slime.getPose()).height * (squish + 1.0F);
         poseStack.translate(0.0F, bodyHeight + CrownOfKingSlimeModel.ATTACHMENT_BASE_OFFSET, 0.0F);
-        float bodyRotation = Mth.lerp(partialTick, slime.yBodyRotO, slime.yBodyRot);
+        float bodyRotation = Mth.rotLerp(partialTick, slime.yBodyRotO, slime.yBodyRot);
         poseStack.mulPose(CrownOfKingSlimeModelRenderer.FLIP_Y.rotateY(bodyRotation * Mth.DEG_TO_RAD + Mth.PI, new org.joml.Quaternionf()));
         poseStack.scale(CrownOfKingSlimeModel.RENDER_SCALE, CrownOfKingSlimeModel.RENDER_SCALE, CrownOfKingSlimeModel.RENDER_SCALE);
         crownModel.renderToBuffer(poseStack, buffer.getBuffer(CrownOfKingSlimeModel.RENDER_TYPE), packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);

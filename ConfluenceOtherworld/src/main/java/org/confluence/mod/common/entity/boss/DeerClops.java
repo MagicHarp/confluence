@@ -9,10 +9,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -111,13 +108,6 @@ public class DeerClops extends BaseBoss {
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
-
-    @Override
     public void tick() {
         super.tick();
         if (isRemoved() || level().isClientSide) {
@@ -184,14 +174,16 @@ public class DeerClops extends BaseBoss {
         }
 
         setCombatState(CombatState.CHASE);
-        faceCombatPosition(target.getEyePosition(), 30.0F, 30.0F);
+        setXRot(0.0F);
         if (distanceSqr > PREFERRED_RANGE * PREFERRED_RANGE) {
             boolean pathStarted = navigation.moveTo(target, 1.0);
             breakBlockingWood();
             tryTraversalJump(target, pathStarted);
+            faceCombatDirection(getDeltaMovement().multiply(1.0, 0.0, 1.0), 30.0F, 0.0F);
         } else {
             navigation.stop();
             resetTraversalTracking();
+            faceCombatDirection(target.position().subtract(position()).multiply(1.0, 0.0, 1.0), 30.0F, 0.0F);
         }
         if (outsideAttackRange) {
             return;
@@ -436,7 +428,7 @@ public class DeerClops extends BaseBoss {
             return;
         }
         if (chestTarget != null) {
-            faceCombatPosition(Vec3.atCenterOf(chestTarget), 30.0F, 30.0F);
+            faceCombatDirection(Vec3.atCenterOf(chestTarget).subtract(position()).multiply(1.0, 0.0, 1.0), 30.0F, 0.0F);
         }
         if (++chestAttackTicks == 7 && chestTarget != null && level().getBlockEntity(chestTarget) instanceof ChestBlockEntity) {
             Vec3 attackDirection = Vec3.atCenterOf(chestTarget).subtract(position()).multiply(1.0D, 0.0D, 1.0D);

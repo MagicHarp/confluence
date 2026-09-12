@@ -161,12 +161,12 @@ public enum NPCSpawner implements IGlobalData {
 
     public void moveNPCToAnotherRegion(BaseNPC living, Region from, Region to) {
         EntityType<?> entityType = living.getType();
-        if (hasNPCAlive(from, entityType)) {
+        if (!from.equals(to)) {
             setNPCAlive(from, entityType, false);
-            setNPCAlive(to, entityType, true);
-            living.setRegion(to);
-            applyBenedictions(living);
         }
+        setNPCAlive(to, entityType, true);
+        living.setRegion(to);
+        applyBenedictions(living);
     }
 
     public void onNPCAdded(BaseNPC living) {
@@ -192,12 +192,13 @@ public enum NPCSpawner implements IGlobalData {
     public void onNPCRemoved(BaseNPC living) {
         HouseHandler.INSTANCE.removeHouse(living.level().dimension(), living.getUUID());
         setNPCAlive(living.getRegion(), living.getType(), false);
+        if (living.shouldInteract()) return;
         if (CommonConfigs.BROADCAST_NPC_MSG.get() && living.getType() != NpcEntities.OLD_MAN.get()) {
             MutableComponent message;
             if (living instanceof AnglerNPC angler) {
                 if (!angler.isWakeUp()) return; // 渔夫未唤醒时死亡不广播
                 message = Component.translatable("event.confluence.npc.left", living.getName()).withColor(GlobalColors.NPC_SLAIN.get());
-            } else if (living instanceof TravelingMerchantNPC) {
+            } else if (living instanceof TravelingMerchantNPC && living.isAlive()) {
                 message = Component.translatable("event.confluence.traveling_merchant.departed", living.getName()).withColor(GlobalColors.NPC_ARRIVED.get());
             } else if (!living.hasCustomName()) {
                 message = Component.translatable("event.confluence.npc.slain.unnamed", living.getType().getDescription()).withColor(GlobalColors.NPC_SLAIN.get());
@@ -539,7 +540,7 @@ public enum NPCSpawner implements IGlobalData {
                                 BaseNPC npc = NpcEntities.OLD_MAN.get().create(level);
                                 if (npc == null) return false;
                                 npc.setPos(offset.getBottomCenter());
-                                level.addFreshEntity(npc);
+                                if (!level.addFreshEntity(npc)) return false;
                                 npc.setRegion(npcRegion);
                                 getRegionAliveDetails(npcRegion).put(NpcEntities.OLD_MAN.get(), true);
                                 // 没有计入spawned列表
@@ -575,7 +576,7 @@ public enum NPCSpawner implements IGlobalData {
                                 BaseNPC npc = NpcEntities.MECHANIC.get().create(level);
                                 if (npc == null) return false;
                                 npc.setPos(offset.getBottomCenter());
-                                level.addFreshEntity(npc);
+                                if (!level.addFreshEntity(npc)) return false;
                                 npc.setRegion(npcRegion);
                                 npc.setShouldInteract(true); // 标记需要交互
                                 getRegionAliveDetails(npcRegion).put(NpcEntities.MECHANIC.get(), true);
@@ -655,6 +656,7 @@ public enum NPCSpawner implements IGlobalData {
     }
 
     public static void broadcastMessageToRegion(Level level, BaseNPC npc, Component message) {
+        if (level.isClientSide || !CommonConfigs.BROADCAST_NPC_MSG.get()) return;
         Region region = npc.getRegion();
         for (Player player : level.players()) {
             if (region.isOnRegion(player.chunkPosition()) || npc.distanceToSqr(player) < 96 * 96) {

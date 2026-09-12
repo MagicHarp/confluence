@@ -14,6 +14,7 @@ import org.confluence.mod.client.entity.model.GeoNormalModel;
 import org.confluence.mod.common.entity.PartHitTarget;
 import org.confluence.mod.common.entity.boss.BaseWormBoss;
 import org.confluence.mod.common.entity.monster.BaseWormMonster;
+import org.confluence.mod.common.entity.monster.WormSegment;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -126,15 +127,14 @@ public class GeoNormalRenderer<T extends Entity & GeoEntity> extends GeoEntityRe
 
     /// 非生物部件没有自己的 scale 属性，渲染时继承遭遇主体的同步倍率。
     private float getEncounterScale(T animatable) {
-        if (animatable instanceof LivingEntity || !(animatable instanceof PartHitTarget part))
-            return 1.0F;
-        Entity owner = part.encounterOwner();
-        return owner instanceof LivingEntity living ? living.getScale() : 1.0F;
+        if (animatable instanceof PartHitTarget part && part.encounterOwner() instanceof LivingEntity owner)
+            return owner.getScale();
+        return animatable instanceof LivingEntity living ? living.getScale() : 1.0F;
     }
 
     @Override
     protected void applyRotations(T animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
-        if (!(animatable instanceof LivingEntity)) {
+        if (!(animatable instanceof LivingEntity) || animatable instanceof WormSegment) {
             rotationYaw = getRenderYaw(animatable, partialTick);
         }
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);

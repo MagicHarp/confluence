@@ -2,9 +2,6 @@ package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -34,6 +31,13 @@ public abstract class BaseFlyingMonster extends BaseMonster {
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
+    }
+
+    @Override
+    protected float tickHeadTurn(float bodyYaw, float animationSpeed) {
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+        return animationSpeed;
     }
 
     /// 飞行怪默认始终使用无重力物理。

@@ -9,7 +9,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
@@ -17,6 +16,7 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.composite.SelectorNode;
@@ -148,8 +148,8 @@ public class MeleeSkeleton extends BaseHumanoidMonster {
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pos) {
-        return ignoresLightPathCost ? 0.0F : super.getWalkTargetValue(pos);
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return ignoresLightPathCost ? 0.0F : super.getWalkTargetValue(pos, level);
     }
 
     @Override

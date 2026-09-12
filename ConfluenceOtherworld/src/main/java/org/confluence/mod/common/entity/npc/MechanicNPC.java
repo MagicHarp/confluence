@@ -13,7 +13,7 @@ public class MechanicNPC extends BaseNPC {
 
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return !getRegion().isOnRegion(chunkPosition());
+        return shouldInteract();
     }
 
     @Override

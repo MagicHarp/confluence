@@ -7,9 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +16,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.confluence.mod.common.entity.ai.SweptContactAttack;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -40,7 +37,7 @@ public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoE
     // 到达判定直接与距离平方比较，避免每 tick 开平方。
     private static final double ARRIVAL_DISTANCE_SQUARED = 1.5;
     // 实际最大生命和接触伤害由本体统一应用难度及多人倍率。
-    // 整条手臂的选取/受击半径；动态包围盒从肩部根点延伸到手掌，而不是只覆盖手掌模型。
+    // 整条手臂的选取/受击半径；动态包围盒包含肩、肘、掌，接触伤害沿两段骨骼检测。
     private static final double ARM_HITBOX_RADIUS = 0.85D;
     private static final String HAND_INDEX_TAG = "HandIndex";
     private static final EntityDataAccessor<Integer> HAND_INDEX = SynchedEntityData.defineId(SkeletronHand.class, EntityDataSerializers.INT);
@@ -59,6 +56,7 @@ public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoE
     private double clientLerpZ;
     private float clientLerpYaw;
     private float clientLerpPitch;
+    private SkeletronArmPose previousArmPose;
 
     public SkeletronHand(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -120,16 +118,15 @@ public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoE
     }
 
     private void updateArmBoundingBox(Skeletron master) {
-        Vec3 root = getRootPosition(master);
-        Vec3 palm = position();
-        double radius = ARM_HITBOX_RADIUS * master.getScale();
-        setBoundingBox(new AABB(
-                Math.min(root.x, palm.x) - radius,
-                Math.min(root.y, palm.y) - radius,
-                Math.min(root.z, palm.z) - radius,
-                Math.max(root.x, palm.x) + radius,
-                Math.max(root.y, palm.y) + radius,
-                Math.max(root.z, palm.z) + radius));
+        setBoundingBox(getArmPose(1.0F).bounds(ARM_HITBOX_RADIUS * master.getScale()));
+    }
+
+    public SkeletronArmPose getArmPose(float partialTick) {
+        Skeletron master = getOwner();
+        float scale = master == null ? getScale() : master.getScale();
+        Vec3 palm = getPosition(partialTick).add(0.0, 8.0 / 16.0 * scale, 0.0);
+        Vec3 shoulder = getRootPosition(partialTick).add(0.0, 7.0 / 16.0 * scale, 0.0);
+        return SkeletronArmPose.solve(shoulder, palm, master == null ? position() : master.getPosition(partialTick), master == null ? getYRot() : master.getFacingYaw(partialTick), scale);
     }
 
     /// 手掌始终指向头部侧面的连接根点；
@@ -224,10 +221,14 @@ public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoE
     }
 
     private void damageArmContacts(Skeletron master) {
+        SkeletronArmPose current = getArmPose(1.0F);
+        SkeletronArmPose previous = previousArmPose == null ? current : previousArmPose;
+        previousArmPose = current;
         if (master.getTarget() == null || !master.getTarget().isAlive()) return;
-        for (net.minecraft.world.entity.Entity entity : SweptContactAttack.findTargets(this, 0.0D,
-                SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
-                candidate -> candidate instanceof LivingEntity living && living != master && master.canAttack(living))) {
+        double radius = ARM_HITBOX_RADIUS * master.getScale();
+        AABB search = current.bounds(radius).minmax(previous.bounds(radius)).inflate(0.125);
+        for (LivingEntity entity : level().getEntitiesOfClass(LivingEntity.class, search,
+                living -> living != this && living != master && master.canAttack(living) && current.sweeps(previous, living.getBoundingBox(), radius))) {
             entity.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE));
         }
     }
@@ -294,9 +295,6 @@ public class SkeletronHand extends BaseLivingBossPart<Skeletron> implements GeoE
         Skeletron owner = getOwner();
         if (owner == null || !owner.isAlive() || isRemoved() || isInvulnerableTo(source))
             return false;
-        if (source.getEntity() instanceof net.minecraft.world.entity.player.Player player) {
-            owner.registerCombatParticipant(player);
-        }
         if (!super.hurt(source, amount)) return false;
         float remaining = getHealth();
         indicateHurt();

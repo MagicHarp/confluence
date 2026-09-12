@@ -72,11 +72,6 @@ public final class GiantTortoise extends BaseMonster {
     }
 
     @Override
-    protected int contactDetectionInterval() {
-        return 1;
-    }
-
-    @Override
     protected double contactAttackInflation() {
         return 0.5;
     }

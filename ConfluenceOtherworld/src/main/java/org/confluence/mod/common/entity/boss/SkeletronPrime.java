@@ -12,13 +12,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.SweptContactAttack;
@@ -86,17 +81,9 @@ public class SkeletronPrime extends BaseBoss {
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-        targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
-    }
-
-    @Override
     public void tick() {
         super.tick();
-        if (isRemoved()) {
+        if (!isAlive()) {
             return;
         }
         if (level().isClientSide) {
@@ -189,11 +176,11 @@ public class SkeletronPrime extends BaseBoss {
                 + (enraged ? 999.0F : 0.0F);
         for (Entity target : SweptContactAttack.findTargets(this, 0.0D, maximumContactSweepDistance(),
                 entity -> entity instanceof LivingEntity living && living.canBeSeenAsEnemy() && canAttack(living))) {
-            target.hurt(damageSources().mobAttack(this), damage);
-            contactCooldown = 20;
-            return;
+            if (target.hurt(damageSources().mobAttack(this), damage)) {
+                contactCooldown = 20;
+                return;
+            }
         }
-        contactCooldown = 5;
     }
 
     @Override
@@ -342,9 +329,5 @@ public class SkeletronPrime extends BaseBoss {
         return false;
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
 }

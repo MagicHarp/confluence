@@ -11,10 +11,8 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -115,11 +113,6 @@ public class BrainOfCthulhu extends BaseBoss {
         };
     }
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
 
     @Override
     public void tick() {
@@ -273,7 +266,7 @@ public class BrainOfCthulhu extends BaseBoss {
     }
 
     private void tickPhaseOneMovement(double verticalOffset) {
-        Player target = getTarget() instanceof Player player ? player : null;
+        LivingEntity target = getTarget();
         if (target == null || !target.isAlive()) return;
 
         Vec3 away = position().subtract(target.position()).multiply(1.0, 0.0, 1.0);
@@ -301,10 +294,8 @@ public class BrainOfCthulhu extends BaseBoss {
     /// 第二阶段依次执行短暂变形、曲线绕行、冲刺、淡出、重新定位和淡入。
     /// 额外冲刺前会重新经过绕行段，不能直接在上一段冲刺结束的位置再次启动冲刺。
     private void tickPhaseTwoCycle() {
-        Player target = getTarget() instanceof Player player && player.isAlive()
-                ? player
-                : null;
-        if (target == null) return;
+        LivingEntity target = getTarget();
+        if (target == null || !target.isAlive() || !canAttack(target)) return;
 
         switch (phaseTwoState) {
             case TRANSFORMING -> {
@@ -382,7 +373,7 @@ public class BrainOfCthulhu extends BaseBoss {
     }
 
     /// 构造第二阶段绕行曲线。控制点位于玩家周围，终点略高于控制点，形成掠过轨迹。
-    private void initializeStalkingCurve(Player target) {
+    private void initializeStalkingCurve(LivingEntity target) {
         double radius = 16.0 + random.nextDouble();
         double angle = random.nextDouble() * Mth.TWO_PI;
         phaseTwoCurveStart = position();
@@ -392,7 +383,7 @@ public class BrainOfCthulhu extends BaseBoss {
     }
 
     /// 冲刺曲线先穿过玩家附近，再延伸到玩家另一侧，避免自动索敌式折线追踪。
-    private void initializeDashCurve(Player target) {
+    private void initializeDashCurve(LivingEntity target) {
         Vec3 fromTarget = target.position().subtract(position());
         Vec3 horizontal = fromTarget.multiply(1.0, 0.0, 1.0);
         if (horizontal.lengthSqr() < 1.0E-6) horizontal = new Vec3(1.0, 0.0, 0.0);
@@ -415,7 +406,7 @@ public class BrainOfCthulhu extends BaseBoss {
         setPos(position);
     }
 
-    private void lookAtTarget(Player target) {
+    private void lookAtTarget(LivingEntity target) {
         faceCombatPosition(target.getEyePosition(), 10.0F, 30.0F);
     }
 
@@ -502,7 +493,7 @@ public class BrainOfCthulhu extends BaseBoss {
 
     /// 在球坐标范围内取样，同时跳过会把实体放进方块或液体的位置。
     private void teleportAroundTarget(double minimumRadius, double maximumRadius, double minimumBeta, double maximumBeta, double verticalOffset, int attempts) {
-        Player target = getTarget() instanceof Player player ? player : null;
+        LivingEntity target = getTarget();
         if (target == null || !(level() instanceof ServerLevel serverLevel)) return;
 
         for (int attempt = 0; attempt < attempts; attempt++) {
@@ -602,8 +593,6 @@ public class BrainOfCthulhu extends BaseBoss {
         return false;
     }
 
-    @Override
-    public boolean isPushable() {return false;}
 
     public boolean isPhase2() {
         return level().isClientSide ? entityData.get(DATA_PHASE_TWO) : phase2;

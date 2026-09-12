@@ -86,7 +86,7 @@ public final class TheDestroyerProbe extends BaseFlyingMonster implements BossOw
             if (isRemoved()) return;
         }
         super.tick();
-        if (level().isClientSide) {
+        if (level().isClientSide || !isAlive()) {
             return;
         }
         if (master != null && getTarget() != inheritedTarget) {
@@ -98,12 +98,14 @@ public final class TheDestroyerProbe extends BaseFlyingMonster implements BossOw
         if (distanceToSqr(master) > 4096.0) {
             Vec3 towardMaster = master.position().add(0.0, 2.0, 0.0).subtract(position());
             setDeltaMovement(getDeltaMovement().scale(0.4).add(towardMaster.normalize().scale(0.45)));
+            faceCombatMovement(30.0F, 30.0F);
+            hasImpulse = true;
+            return;
         }
         LivingEntity target = getTarget();
         if (target != null && target.isAlive()) {
             Vec3 orbit = BossMinionCoordinator.orbitPoint(this, target, 13.0D, 3.0D, 0.022D, 12);
-            setDeltaMovement(BossMinionCoordinator.steer(
-                    getDeltaMovement(), position(), orbit, 0.11D, 0.7D));
+            setDeltaMovement(BossMinionCoordinator.steer(getDeltaMovement(), position(), orbit, 0.11D, 0.7D));
             faceCombatPosition(BossMinionCoordinator.predict(target, 3.0D, 2.5D), 30.0F, 30.0F);
             hasImpulse = true;
         }

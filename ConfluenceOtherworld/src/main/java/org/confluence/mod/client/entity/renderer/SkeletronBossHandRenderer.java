@@ -20,9 +20,6 @@ import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.cache.object.GeoCube;
 import software.bernie.geckolib.cache.object.GeoQuad;
 
-import java.util.Map;
-import java.util.WeakHashMap;
-
 /// 以手掌实体为末端、以头部侧面为根点绘制骷髅王手臂。
 ///
 /// 模型中的三组网格使用绝对枢轴，网格表面并不恰好落在枢轴上。渲染器先在世界空间
@@ -32,18 +29,9 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
     private static final Vec3 WORLD_UP = new Vec3(0.0, 1.0, 0.0);
     // 小于该平方长度的向量视为退化，防止归一化产生 NaN。
     private static final double EPSILON = 1.0E-7;
-    // 无法读取烘焙网格时使用的掌至肘、肘至肩长度，模型像素已换算为方块。
-    private static final double FALLBACK_DISTAL_LENGTH = 85.0 / 16.0;
-    private static final double FALLBACK_UPPER_ARM_LENGTH = 62.0 / 16.0;
-    // 目标贴近肩部时允许手臂压缩，但不会缩到原模型长度的 58% 以下。
-    private static final double MINIMUM_CLOSE_SCALE = 0.58;
-    // 掌部几乎与肩部重合时沿用上一帧方向，阈值单位为方块。
-    private static final double NEAR_ZERO_DIRECTION_RADIUS = 0.25;
     // 肘部保留轻微网格交叠避免漏缝，腕部反向留出可见间隙；单位为方块。
     private static final double JOINT_OVERLAP = 0.22;
     private static final double WRIST_GAP = 0.125;
-    // 在上一版已有的 15° 外偏基础上再增加 15°，总外偏为 30°。
-    private static final double ELBOW_OUTWARD_ANGLE = Math.toRadians(30.0D);
 
     // 这些值只在模型没有可读顶点时使用；正常渲染会直接从烘焙网格求边界。
     private static final SurfaceRange FALLBACK_PALM_SURFACE =
@@ -52,8 +40,6 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
             new SurfaceRange(21.670 / 16.0, 78.080 / 16.0);
     private static final SurfaceRange FALLBACK_UPPER_ARM_SURFACE =
             new SurfaceRange(92.670 / 16.0, 149.080 / 16.0);
-
-    private final Map<SkeletronHand, Vec3> previousReachDirections = new WeakHashMap<>();
 
     public SkeletronBossHandRenderer(EntityRendererProvider.Context context) {
         super(
@@ -170,68 +156,14 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
             return;
         }
 
-        Vec3 shoulderPosition =
-                hand.getRootPosition(partialTick).add(0.0, bone.getPivotY() / 16.0, 0.0);
-        Vec3 palmToShoulder = shoulderPosition.subtract(palmPosition);
-        double jointDistance = palmToShoulder.length();
-
-        Vec3 ownerFront = horizontalFacing(owner.getFacingYaw(partialTick));
-        Vec3 ownerSide = shoulderPosition.subtract(owner.getPosition(partialTick));
-        ownerSide = new Vec3(ownerSide.x, 0.0, ownerSide.z);
-        if (ownerSide.lengthSqr() <= EPSILON) {
-            ownerSide = new Vec3(ownerFront.z, 0.0, -ownerFront.x);
-        } else {
-            ownerSide = ownerSide.normalize();
-        }
-
-        Vec3 reachDirection = resolveReachDirection(hand, palmToShoulder, ownerFront);
-        // 向后为主、向外和向上为辅。即便整条手臂接近竖直，投影后仍保留稳定的水平极向量。
-        Vec3 preferredPole =
-                ownerFront.scale(-Math.cos(ELBOW_OUTWARD_ANGLE))
-                        .add(ownerSide.scale(Math.sin(ELBOW_OUTWARD_ANGLE)))
-                        .add(WORLD_UP.scale(0.08));
-        Vec3 poleDirection = stablePole(preferredPole, ownerSide, reachDirection);
-
-        double distalLength = Math.abs(upperArm.getPivotX() - palm.getPivotX()) / 16.0;
-        if (!Double.isFinite(distalLength) || distalLength <= EPSILON) {
-            distalLength = FALLBACK_DISTAL_LENGTH;
-        }
-        double upperArmLength = Math.abs(bone.getPivotX() - upperArm.getPivotX()) / 16.0;
-        if (!Double.isFinite(upperArmLength) || upperArmLength <= EPSILON) {
-            upperArmLength = FALLBACK_UPPER_ARM_LENGTH;
-        }
-
-        double maximumReach = distalLength + upperArmLength;
-        double minimumReach = Math.abs(distalLength - upperArmLength);
-        double solvedDistalLength = distalLength;
-        double solvedUpperArmLength = upperArmLength;
-        if (jointDistance >= maximumReach) {
-            double stretch = jointDistance / maximumReach;
-            solvedDistalLength *= stretch;
-            solvedUpperArmLength *= stretch;
-        } else if (jointDistance < minimumReach && minimumReach > EPSILON) {
-            // 极近目标使用两条仍然可见的腰构成折叠三角形，不能把手臂压缩成几个像素。
-            double commonLength = Math.max(distalLength, upperArmLength) * MINIMUM_CLOSE_SCALE;
-            double ratio = Mth.clamp(jointDistance / minimumReach, 0.0, 1.0);
-            double blend = ratio * ratio;
-            solvedDistalLength = Mth.lerp(blend, commonLength, distalLength);
-            solvedUpperArmLength = Mth.lerp(blend, commonLength, upperArmLength);
-        }
-
-        Vec3 elbowPosition;
-        if (jointDistance <= EPSILON) {
-            elbowPosition = palmPosition.add(poleDirection.scale(solvedDistalLength));
-        } else {
-            double along =
-                    (solvedDistalLength * solvedDistalLength
-                            + jointDistance * jointDistance
-                            - solvedUpperArmLength * solvedUpperArmLength)
-                            / (2.0 * jointDistance);
-            double height =
-                    Math.sqrt(Math.max(0.0, solvedDistalLength * solvedDistalLength - along * along));
-            elbowPosition =
-                    palmPosition.add(reachDirection.scale(along)).add(poleDirection.scale(height));
-        }
+        var armPose = hand.getArmPose(partialTick);
+        double inverseScale = 1.0 / owner.getScale();
+        // 公共渲染入口已应用体型，世界空间骨架先还原到模型空间，避免关节距离被重复放大。
+        Vec3 shoulderPosition = entityPosition.add(armPose.shoulder().subtract(entityPosition).scale(inverseScale));
+        palmPosition = entityPosition.add(armPose.palm().subtract(entityPosition).scale(inverseScale));
+        Vec3 reachDirection = armPose.reach();
+        Vec3 poleDirection = armPose.pole();
+        Vec3 elbowPosition = entityPosition.add(armPose.elbow().subtract(entityPosition).scale(inverseScale));
 
         Vec3 distalDirection = elbowPosition.subtract(palmPosition);
         if (distalDirection.lengthSqr() <= EPSILON) {
@@ -424,42 +356,6 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
         return new Basis(basis.x, basis.y.scale(-1.0D), basis.z.scale(-1.0D));
     }
 
-    private Vec3 resolveReachDirection(SkeletronHand hand, Vec3 displacement, Vec3 fallback) {
-        double distance = displacement.length();
-        Vec3 previous = previousReachDirections.get(hand);
-        if (distance <= EPSILON) {
-            Vec3 resolved = previous == null ? fallback.normalize() : previous;
-            previousReachDirections.put(hand, resolved);
-            return resolved;
-        }
-
-        Vec3 current = displacement.scale(1.0 / distance);
-        if (previous != null && distance < NEAR_ZERO_DIRECTION_RADIUS) {
-            double blend = Mth.clamp(distance / NEAR_ZERO_DIRECTION_RADIUS, 0.0, 1.0);
-            current = slerpDirection(previous, current, blend, fallback);
-        }
-        previousReachDirections.put(hand, current);
-        return current;
-    }
-
-    private static Vec3 slerpDirection(Vec3 from, Vec3 to, double progress, Vec3 fallbackPole) {
-        double dot = Mth.clamp(from.dot(to), -1.0, 1.0);
-        if (dot > 0.9995) {
-            return from.scale(1.0 - progress).add(to.scale(progress)).normalize();
-        }
-        if (dot < -0.9995) {
-            Vec3 tangent = stablePole(fallbackPole, WORLD_UP, from);
-            double angle = Math.PI * progress;
-            return from.scale(Math.cos(angle)).add(tangent.scale(Math.sin(angle))).normalize();
-        }
-
-        double angle = Math.acos(dot);
-        double inverseSine = 1.0 / Math.sin(angle);
-        double fromWeight = Math.sin((1.0 - progress) * angle) * inverseSine;
-        double toWeight = Math.sin(progress * angle) * inverseSine;
-        return from.scale(fromWeight).add(to.scale(toWeight)).normalize();
-    }
-
     private static Vec3 stablePole(Vec3 preferred, Vec3 secondary, Vec3 reachDirection) {
         Vec3 pole = reject(preferred, reachDirection);
         if (pole.lengthSqr() <= 1.0E-5) {
@@ -526,11 +422,6 @@ public class SkeletronBossHandRenderer extends BossGeoRenderer<SkeletronHand> {
 
     private static Vec3 reject(Vec3 vector, Vec3 axis) {
         return vector.subtract(axis.scale(vector.dot(axis)));
-    }
-
-    private static Vec3 horizontalFacing(float yawDegrees) {
-        float yaw = yawDegrees * Mth.DEG_TO_RAD;
-        return new Vec3(-Mth.sin(yaw), 0.0, Mth.cos(yaw));
     }
 
     private record Basis(Vec3 x, Vec3 y, Vec3 z) {}

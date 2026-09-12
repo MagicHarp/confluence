@@ -69,9 +69,10 @@ public final class HouseValidater {
         queue.add(start);
         visited.add(start);
 
-        boolean hasLight = false;
-        boolean hasChair = false;
-        boolean hasTable = false;
+        BlockState startState = level.getBlockState(start);
+        boolean hasLight = level.getLightEmission(start) >= MIN_LIGHT;
+        boolean hasChair = startState.is(ModTags.Blocks.NPC_HOUSE_CHAIR);
+        boolean hasTable = startState.is(ModTags.Blocks.NPC_HOUSE_TABLE);
 
         int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, minZ = Integer.MAX_VALUE;
         int maxX = Integer.MIN_VALUE, maxY = Integer.MIN_VALUE, maxZ = Integer.MIN_VALUE;
@@ -93,7 +94,6 @@ public final class HouseValidater {
                 int dx = Math.abs(neighbor.getX() - start.getX());
                 int dy = Math.abs(neighbor.getY() - start.getY());
                 int dz = Math.abs(neighbor.getZ() - start.getZ());
-                if (dx > MAX_RADIUS || dy > MAX_RADIUS || dz > MAX_RADIUS) continue;
 
                 BlockState nbState = level.getBlockState(neighbor);
                 /// 桌椅和墙面光源通常是房间边界的一部分，不应加入可行走空间的洪泛集合，
@@ -102,8 +102,11 @@ public final class HouseValidater {
                 if (!hasLight && level.getLightEmission(neighbor) >= MIN_LIGHT) hasLight = true;
                 if (!hasChair && nbState.is(ModTags.Blocks.NPC_HOUSE_CHAIR)) hasChair = true;
                 if (!hasTable && nbState.is(ModTags.Blocks.NPC_HOUSE_TABLE)) hasTable = true;
-                if (nbState.isAir() || nbState.is(ModTags.Blocks.NPC_HOUSE_CONSTITUTE)) {
+                if (nbState.isAir() || nbState.is(ModTags.Blocks.NPC_HOUSE_CONSTITUTE) && !nbState.isCollisionShapeFullBlock(level, neighbor)) {
+                    if (dx > MAX_RADIUS || dy > MAX_RADIUS || dz > MAX_RADIUS)
+                        return Result.error(ResultType.TOO_LARGE);
                     visited.add(neighbor);
+                    if (visited.size() > MAX_VOLUME) return Result.error(ResultType.TOO_LARGE);
                     queue.add(neighbor);
                 }
             }

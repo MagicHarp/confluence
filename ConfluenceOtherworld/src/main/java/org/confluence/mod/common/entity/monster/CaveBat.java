@@ -10,7 +10,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.util.LibUtils;
@@ -66,8 +65,10 @@ public class CaveBat extends BaseFlyingMonster {
     @Override
     public void aiStep() {
         super.aiStep();
-        addDeltaMovement(new Vec3(0.0, Math.sin(tickCount * 0.2) * 0.03, 0.0));
-        if (!level().isClientSide) return;
+        if (!level().isClientSide) {
+            addDeltaMovement(new Vec3(0.0, Math.sin(tickCount * 0.2) * 0.03, 0.0));
+            return;
+        }
         switch (variant) {
             case HELL -> spawnHellBatParticles();
             case ICE -> spawnIceBatParticles();

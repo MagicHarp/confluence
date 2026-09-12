@@ -10,7 +10,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
@@ -36,21 +35,6 @@ import java.util.UUID;
 /// 所有权使用 Boss UUID 持久化。区块卸载只会清除当前实例缓存，不会猜测附近的同类 Boss；
 /// Boss 重新加载后，神经元会通过精确 UUID 恢复双向关系，从而避免多人同时挑战时串场。
 public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return true;
-    }
-
-    @Override
-    protected int contactDetectionInterval() {
-        return 1;
-    }
-
-    @Override
-    protected double contactAttackInflation() {
-        return 0.2;
-    }
-
     /// 视神经元在当前版本属性注册中使用的基础最大生命。
     public static final double BASE_MAX_HEALTH = 44.0;
     private static final String STATE_TAG = "CombatState";
@@ -83,6 +67,11 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
     public VisualNeuron(EntityType<? extends VisualNeuron> type, Level level) {
         super(type, level);
         noPhysics = true;
+    }
+
+    @Override
+    protected double contactAttackInflation() {
+        return 0.2;
     }
 
     @Override
@@ -141,7 +130,7 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
     ///
     /// @return 是否成功接受了这次命令
     public boolean attack(LivingEntity target) {
-        if (!isReady() || !target.isAlive()) return false;
+        if (!isReady() || !canAttack(target)) return false;
         setTarget(target);
         ready = false;
         attackTicks = 0;
@@ -162,6 +151,16 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
     }
 
     @Override
+    public boolean canAttack(LivingEntity target) {
+        BrainOfCthulhu owner = getOwner();
+        return owner != null && owner.isAlive() && owner.canAttack(target) && super.canAttack(target);
+    }
+
+    /// 出击目标由克苏鲁之脑下达，通用索敌不能覆盖正在执行的命令。
+    @Override
+    protected void registerGoals() {}
+
+    @Override
     protected BTRoot createBT() {
         return new BTRoot() {
             @Override
@@ -180,6 +179,11 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
                 if (isRemoved()) reportDeath();
                 if (getOwnerUUID() == null) discard();
                 return;
+            }
+            LivingEntity target = getTarget();
+            if (target != null && !canAttack(target)) {
+                setTarget(null);
+                beginReturn();
             }
         }
         super.tick();
@@ -208,7 +212,7 @@ public class VisualNeuron extends BaseFlyingMonster implements BossOwnedEntity {
     private void tickAttack() {
         attackTicks++;
         LivingEntity target = getTarget();
-        if (target == null || !target.isAlive()) {
+        if (target == null || !canAttack(target)) {
             beginReturn();
             return;
         }

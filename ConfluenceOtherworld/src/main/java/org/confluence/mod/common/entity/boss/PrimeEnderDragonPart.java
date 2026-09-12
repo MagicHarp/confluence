@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.confluence.mod.common.entity.npc.BaseNPC;
 
 /// 本源末影龙的服务端碰撞部件。
 ///
@@ -59,9 +60,7 @@ public final class PrimeEnderDragonPart extends BaseBossPart<PrimeEnderDragon> {
                 ? amount
                 : amount * 0.25F + Math.min(amount, 1.0F);
         if (forwarded < 0.01F) return false;
-        if (source.getEntity() instanceof Player || source.is(DamageTypeTags.ALWAYS_HURTS_ENDER_DRAGONS))
-            owner.hurt(source, forwarded);
-        return true;
+        return (source.getEntity() instanceof Player || source.getEntity() instanceof BaseNPC || source.is(DamageTypeTags.ALWAYS_HURTS_ENDER_DRAGONS)) && owner.hurt(source, forwarded);
     }
 
     @Override

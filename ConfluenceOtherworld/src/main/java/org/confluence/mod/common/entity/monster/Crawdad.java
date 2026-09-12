@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -94,7 +93,7 @@ public final class Crawdad extends BaseWarriorMonster {
 
     private void performClawHit() {
         LivingEntity target = getTarget();
-        if (target == null || !target.isAlive() || !getBoundingBox().inflate(CLAW_REACH).intersects(target.getBoundingBox()))
+        if (target == null || !target.isAlive() || !canAttack(target) || !hasLineOfSight(target) || !getBoundingBox().inflate(CLAW_REACH).intersects(target.getBoundingBox()))
             return;
         AttributeInstance attackDamage = getAttribute(Attributes.ATTACK_DAMAGE);
         if (attackDamage == null) return;

@@ -1,24 +1,26 @@
 package org.confluence.mod.common.entity.ai.bt.leaf;
 
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTStatus;
+import org.confluence.mod.common.entity.monster.BaseMonster;
 
 /// 恶魔眼白天离场时使用的持续上升运动。
 ///
-/// 行为只改变速度，不强制清除目标，也不在固定时间后直接删除实体；实际离场仍交给
+/// 离场时停止追击，不在固定时间后直接删除实体；实际离场仍交给
 /// 原版距离卸载规则处理，使玩家能看见完整的飞离过程。
 public final class DemonEyeLeaveAction extends BTNode {
-    private final PathfinderMob mob;
+    private final BaseMonster mob;
     private Vec3 acceleration = Vec3.ZERO;
 
-    public DemonEyeLeaveAction(PathfinderMob mob) {
+    public DemonEyeLeaveAction(BaseMonster mob) {
         this.mob = mob;
     }
 
     @Override
     public void start() {
+        mob.getNavigation().stop();
+        mob.setTarget(null);
         double x = mob.getRandom1211().nextDouble() - 0.5;
         double y = 0.1 + 0.5 * mob.getRandom1211().nextDouble();
         double z = mob.getRandom1211().nextDouble() - 0.5;
@@ -30,10 +32,11 @@ public final class DemonEyeLeaveAction extends BTNode {
         if (!mob.level().isDay()) {
             return BTStatus.SUCCESS;
         }
-        if (mob.getDeltaMovement().length() < 0.5) {
-            mob.addDeltaMovement(acceleration);
-            mob.hasImpulse = true;
-        }
+        mob.setTarget(null);
+        Vec3 movement = mob.getDeltaMovement().add(acceleration);
+        mob.setDeltaMovement(movement.lengthSqr() > 0.25 ? movement.normalize().scale(0.5) : movement);
+        mob.faceCombatMovement(10.0F, 30.0F);
+        mob.hasImpulse = true;
         return BTStatus.RUNNING;
     }
 }

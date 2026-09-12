@@ -4,8 +4,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import org.confluence.lib.util.LibUtils;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -49,6 +47,7 @@ public class MeteorHead extends BaseFlyingMonster {
     @Override
     public void tick() {
         super.tick();
+        if (level().isClientSide) return;
         LivingEntity target = getTarget();
         if (target != null && target.isAlive()) {
             faceCombatPosition(target.getEyePosition(), 360.0F, 360.0F);

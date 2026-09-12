@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 
 /// 哥布林族共用的陆地行为。
 ///
@@ -44,7 +45,7 @@ public class GoblinMonster extends HumanoidWarriorMonster {
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pos) {
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         return 0.0F;
     }
 

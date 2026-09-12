@@ -58,4 +58,10 @@ public class OldManNPC extends BaseNPC {
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return true; // 老人可以消失
     }
+
+    @Override
+    public void checkDespawn() {
+        super.checkDespawn();
+        if (isRemoved()) NPCSpawner.INSTANCE.setNPCAlive(getRegion(), getType(), false);
+    }
 }

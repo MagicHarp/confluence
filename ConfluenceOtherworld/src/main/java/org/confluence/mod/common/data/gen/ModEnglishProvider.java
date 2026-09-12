@@ -50,6 +50,12 @@ public class ModEnglishProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("house_validator.result_type.found", "This housing is suitable.");
+        add("house_validator.result_type.too_small", "This housing is too small.");
+        add("house_validator.result_type.too_large", "This housing is too large or not enclosed.");
+        add("house_validator.result_type.no_light", "This housing needs a sufficiently bright light source.");
+        add("house_validator.result_type.no_chair", "This housing needs a chair or bed.");
+        add("house_validator.result_type.no_table", "This housing needs a table or workbench.");
         add("message.confluence.boss_spawn", "%s has awoken!");
         add("message.confluence.boss_leave", "%s has been defeated!");
         add(NpcEntities.FEMALE_ANGLER.get(), "Female Angler");
@@ -72,6 +78,21 @@ public class ModEnglishProvider extends LanguageProvider {
         add(SummonItems.SUMMON_NETHERITE_SWORD_STAFF.get(), "Netherite Sword Staff");
         add(SummonItems.TERRAPRISMA.get(), "Terraprisma");
         add(SummonItems.STARDUST_DRAGON_STAFF.get(), "Stardust Dragon Staff");
+        add("entity.confluence.finch_baby", "Baby Finch");
+        add("entity.confluence.i_32_iron_golem", "I-32 Iron Golem");
+        add("entity.confluence.slime_baby", "Baby Slime");
+        add("entity.confluence.hornet_baby", "Hornet Minion");
+        add("entity.confluence.sculk_wisp", "Sculk Wisp");
+        add("entity.confluence.summon_imp", "Imp Minion");
+        add("entity.confluence.summon_snow_flinx", "Snow Flinx Minion");
+        add("entity.confluence.summon_wooden_sword", "Wooden Sword Minion");
+        add("entity.confluence.summon_stone_sword", "Stone Sword Minion");
+        add("entity.confluence.summon_iron_sword", "Iron Sword Minion");
+        add("entity.confluence.summon_golden_sword", "Golden Sword Minion");
+        add("entity.confluence.summon_diamond_sword", "Diamond Sword Minion");
+        add("entity.confluence.summon_netherite_sword", "Netherite Sword Minion");
+        add("entity.confluence.terraprisma", "Terraprisma");
+        add("entity.confluence.stardust_dragon", "Stardust Dragon");
         add("tooltip.confluence.summon.damage", "Base summon damage: %s");
         add("tooltip.confluence.summon.slots", "Minion slots: %s");
         add("tooltip.confluence.summon.retrieve", "Hold right-click to release all summons");

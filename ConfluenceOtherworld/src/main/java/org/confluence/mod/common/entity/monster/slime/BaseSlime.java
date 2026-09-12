@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -76,6 +77,11 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         this.honeyConvertible = honeyConvertible;
         this.moveControl = new SlimeMoveControl(this);
         setSlimeSize(size);
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return 0.0F;
     }
 
     /// 史莱姆的主动索敌规则。
@@ -176,10 +182,16 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
 
         int y = pos.getY();
+        if (type == MonsterEntities.BLUE_SLIME.get()
+                || type == MonsterEntities.GREEN_SLIME.get() || type == MonsterEntities.PURPLE_SLIME.get()
+                || type == MonsterEntities.PINK_SLIME.get() || type == MonsterEntities.ICE_SLIME.get()
+                || type == MonsterEntities.JUNGLE_SLIME.get() || type == MonsterEntities.SWAMP_SLIME.get()
+                || type == MonsterEntities.TROPIC_SLIME.get()) {
+            return level.canSeeSky(pos) && SpawnPlacementChecks.checkSurfaceDayMobSpawn(type, level, spawnType, pos, random);
+        }
         if (!SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random)) {
             return false;
         }
-
         if (type == MonsterEntities.YELLOW_SLIME.get() || type == MonsterEntities.RED_SLIME.get() || type == MonsterEntities.DESERT_SLIME.get()) {
             return level.getBrightness(LightLayer.SKY, pos) == 0 && y >= OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY();
         }
@@ -191,16 +203,6 @@ public class BaseSlime extends BaseMonster implements BossOwnedEntity {
         }
         if (type == MonsterEntities.CRIMSLIME.get() || type == MonsterEntities.CORRUPT_SLIME.get()) {
             return y < OverworldUtils.getSpaceY() && (y > OverworldUtils.getSurfaceY() || SpawnPlacementChecks.checkMonsterSpawnRules(type, level, spawnType, pos, random));
-        }
-        if (type == MonsterEntities.BLUE_SLIME.get()
-                || type == MonsterEntities.GREEN_SLIME.get()
-                || type == MonsterEntities.PURPLE_SLIME.get()
-                || type == MonsterEntities.PINK_SLIME.get()
-                || type == MonsterEntities.ICE_SLIME.get()
-                || type == MonsterEntities.JUNGLE_SLIME.get()
-                || type == MonsterEntities.SWAMP_SLIME.get()
-                || type == MonsterEntities.TROPIC_SLIME.get()) {
-            return SpawnPlacementChecks.checkSurfaceDayMobSpawn(type, level, spawnType, pos, random);
         }
         // 未被上面任何分支覆盖的类型保持不可自然生成，避免误用其他分层的条件。
         return false;

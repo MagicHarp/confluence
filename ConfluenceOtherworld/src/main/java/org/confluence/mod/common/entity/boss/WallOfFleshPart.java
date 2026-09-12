@@ -59,12 +59,9 @@ public abstract class WallOfFleshPart extends BaseBossPart<WallOfFlesh> {
     protected abstract void tickAttack(WallOfFlesh master, @Nullable LivingEntity target);
 
     private void tickContactDamage(WallOfFlesh master) {
-        if (master.getTarget() == null) return;
-        if (contactCooldown > 0) {
-            contactCooldown--;
-            return;
-        }
-        for (Entity entity : SweptContactAttack.findTargets(this, 0.0D,
+        if (contactCooldown > 0) contactCooldown--;
+        if (master.getTarget() == null || contactCooldown > 0) return;
+        for (Entity entity : SweptContactAttack.findTargets(this, getContactSweepStart(), 0.0D,
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 candidate -> candidate instanceof LivingEntity living && living != master && master.canAttack(living))) {
             LivingEntity living = (LivingEntity) entity;

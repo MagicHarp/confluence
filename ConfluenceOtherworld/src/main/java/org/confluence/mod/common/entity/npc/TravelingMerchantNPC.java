@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import org.confluence.lib.util.LibDateUtils;
 import org.confluence.mod.common.data.saved.NPCSpawner;
 import org.confluence.mod.common.entity.npc.ai.NPCCombatProfile;
 import org.confluence.mod.common.entity.npc.trade.NPCTradeOffer;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /// 旅商 —— 随机到访、黄昏后离开。
-/// 每天黎明有概率生成，黄昏(dayTime 12000)后消失。
+/// 黎明后有概率生成，18:00 后离开。
 /// 商贩背包可使商品数 +1。
 public class TravelingMerchantNPC extends BaseNPC {
     private static final String STOCK_INITIALIZED_TAG = "TradeStockInitialized";
@@ -60,7 +61,8 @@ public class TravelingMerchantNPC extends BaseNPC {
     protected void customServerAiStep() {
         super.customServerAiStep();
         long dayTime = level().getDayTime();
-        if (dayTime < spawnDayTime || dayTime % 24000 >= 12000) {
+        int time = LibDateUtils.getDayTime(dayTime);
+        if (dayTime < spawnDayTime || dayTime - spawnDayTime >= 24000 || time >= LibDateUtils._18$00 && time < LibDateUtils._04$30) {
             if (!departing) {
                 departing = true;
                 NPCSpawner.INSTANCE.onNPCRemoved(this);

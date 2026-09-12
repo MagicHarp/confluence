@@ -8,9 +8,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -113,7 +110,8 @@ public final class LunaticCultistClone extends BaseFlyingMonster implements Boss
     public boolean hurt(DamageSource source, float amount) {
         if (level().isClientSide) return true;
         LunaticCultist master = getMaster();
-        if (master != null && source.getEntity() instanceof Player) {
+        if (master != null && source.getEntity() instanceof LivingEntity attacker && master.canAttack(attacker)) {
+            master.onEncounterHurt(source);
             master.onCloneHit(this);
         }
         discard();

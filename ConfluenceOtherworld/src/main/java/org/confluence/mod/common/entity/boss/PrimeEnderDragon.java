@@ -7,19 +7,13 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.util.AirRandomPos;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -67,7 +61,7 @@ public final class PrimeEnderDragon extends BaseBoss {
     private static final double MAXIMUM_FLIGHT_SPEED = 0.9;
     private static final double FLIGHT_ACCELERATION = 0.08;
     private static final double LASER_MAXIMUM_RANGE = 20.0;
-    private static final double LASER_RADIUS = 1.5;
+    public static final float LASER_RADIUS = 1.5F;
     private static final int OPENING_WAIT_TICKS = 20;
     private static final int TARGET_REFRESH_TICKS = 20;
     private static final int INERTIA_TICKS = 20;
@@ -87,6 +81,7 @@ public final class PrimeEnderDragon extends BaseBoss {
     private int idleWanderTicks;
     private int idleWanderDuration;
     private int laserChargeTicks;
+    private int partContactCooldown;
     private Vec3 flightTarget;
     private boolean hadCombatTarget;
 
@@ -123,12 +118,6 @@ public final class PrimeEnderDragon extends BaseBoss {
         };
     }
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
 
     @Override
     public void setNoAi(boolean noAi) {
@@ -142,7 +131,7 @@ public final class PrimeEnderDragon extends BaseBoss {
     @Override
     public void tick() {
         super.tick();
-        if (isRemoved()) {
+        if (!isAlive()) {
             return;
         }
         if (level().isClientSide) {
@@ -328,7 +317,7 @@ public final class PrimeEnderDragon extends BaseBoss {
         if (velocity.lengthSqr() < 1.0E-6) {
             return;
         }
-        float targetYaw = (float) (Mth.atan2(-velocity.x, velocity.z) * Mth.RAD_TO_DEG);
+        float targetYaw = horizontal < 1.0E-7D ? getYRot() : (float) (Mth.atan2(-velocity.x, velocity.z) * Mth.RAD_TO_DEG);
         float targetPitch = (float) (-Mth.atan2(velocity.y, horizontal) * Mth.RAD_TO_DEG);
         setYRot(Mth.approachDegrees(getYRot(), targetYaw, yawStep));
         setXRot(Mth.approachDegrees(getXRot(), targetPitch, 4.0F));
@@ -369,13 +358,14 @@ public final class PrimeEnderDragon extends BaseBoss {
     }
 
     int performLaserAttack(double range) {
-        Vec3 start = getHeadPosition();
+        Vec3 start = getLaserOrigin(1.0F);
         Vec3 direction = getViewVector(1.0F).normalize();
         Vec3 end = start.add(direction.scale(Math.min(range, LASER_MAXIMUM_RANGE)));
         AABB area = new AABB(start, end).inflate(LASER_RADIUS);
         int hits = 0;
         for (LivingEntity entity : level().getEntitiesOfClass(LivingEntity.class, area, entity -> entity != this && canAttack(entity))) {
-            if (distanceToSegmentSqr(entity.getBoundingBox().getCenter(), start, end) > LASER_RADIUS * LASER_RADIUS) {
+            AABB hitBox = entity.getBoundingBox().inflate(LASER_RADIUS);
+            if (!hitBox.contains(start) && !hitBox.contains(end) && hitBox.clip(start, end).isEmpty()) {
                 continue;
             }
             if (entity.hurt(LibDamageTypes.of(level(), DamageTypes.MAGIC, this), 5.0F)) {
@@ -396,8 +386,7 @@ public final class PrimeEnderDragon extends BaseBoss {
 
     /// 计算当前头部激光的世界坐标起点。
     ///
-    /// 临时碰撞部件可能比主体晚一包到达客户端，因此渲染起点只依赖主体
-    /// 姿态；服务端伤害仍优先使用真实头部碰撞箱中心。
+    /// 临时碰撞部件可能比主体晚一包到达客户端，因此绘制和伤害统一使用主体姿态计算起点。
     public Vec3 getLaserOrigin(float partialTick) {
         double x = Mth.lerp(partialTick, xo, getX());
         double y = Mth.lerp(partialTick, yo, getY());
@@ -405,17 +394,7 @@ public final class PrimeEnderDragon extends BaseBoss {
         float pitch = Mth.rotLerp(partialTick, xRotO, getXRot());
         float yaw = Mth.rotLerp(partialTick, yRotO, getYRot());
         Vec3 forward = Vec3.directionFromRotation(pitch, yaw);
-        return new Vec3(x, y, z).add(forward.scale(4.5)).add(0.0, 3.0, 0.0);
-    }
-
-    private static double distanceToSegmentSqr(Vec3 point, Vec3 start, Vec3 end) {
-        Vec3 segment = end.subtract(start);
-        double lengthSqr = segment.lengthSqr();
-        if (lengthSqr < 1.0E-8) {
-            return point.distanceToSqr(start);
-        }
-        double factor = Mth.clamp(point.subtract(start).dot(segment) / lengthSqr, 0.0, 1.0);
-        return point.distanceToSqr(start.add(segment.scale(factor)));
+        return new Vec3(x, y, z).add(forward.scale(4.5).add(0.0, 3.0, 0.0).scale(getScale()));
     }
 
     boolean shootDragonFireball(LivingEntity target) {
@@ -435,16 +414,20 @@ public final class PrimeEnderDragon extends BaseBoss {
     }
 
     private void updatePartContactDamage() {
-        if (getTarget() == null || tickCount % CONTACT_INTERVAL != 0) {
+        if (partContactCooldown > 0) {
+            partContactCooldown--;
             return;
         }
+        if (getTarget() == null) return;
+        boolean attacked = false;
         for (PrimeEnderDragonPart part : List.copyOf(parts.values())) {
-            for (net.minecraft.world.entity.Entity entity : SweptContactAttack.findTargets(part, 0.2D,
+            for (net.minecraft.world.entity.Entity entity : SweptContactAttack.findTargets(part, part.getContactSweepStart(), 0.2D,
                     SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
-                    candidate -> candidate instanceof Player player && canAttack(player))) {
-                doHurtTarget(entity);
+                    candidate -> candidate instanceof LivingEntity living && canAttack(living))) {
+                attacked |= doHurtTarget(entity);
             }
         }
+        if (attacked) partContactCooldown = CONTACT_INTERVAL;
     }
 
     @Override
@@ -515,15 +498,6 @@ public final class PrimeEnderDragon extends BaseBoss {
                 : head.getBoundingBox().getCenter();
     }
 
-    @Override
-    public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
-        return false;
-    }
-
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {

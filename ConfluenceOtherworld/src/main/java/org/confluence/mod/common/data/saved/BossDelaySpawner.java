@@ -43,6 +43,7 @@ public enum BossDelaySpawner {
         while (iterator.hasNext()) l:{
             Delayed<BaseBoss> delayed = iterator.next();
             if (--delayed.delay >= 0) continue;
+            int retryDelay = Integer.MAX_VALUE;
             for (ServerPlayer player : level.players()) {
                 int state = delayed.predicate.applyAsInt(player);
                 if (state == SUCCESS) {
@@ -53,11 +54,14 @@ public enum BossDelaySpawner {
                     iterator.remove();
                     break l;
                 } else if (state != CONTINUE) {
-                    delayed.delay = state;
-                    break l;
+                    retryDelay = Math.min(retryDelay, state);
                 }
             }
-            iterator.remove();
+            if (retryDelay != Integer.MAX_VALUE) {
+                delayed.delay = retryDelay;
+            } else {
+                iterator.remove();
+            }
         }
     }
 
@@ -88,11 +92,10 @@ public enum BossDelaySpawner {
             if (!BossDelaySpawner.eyeOfCthulhuChecker(player) || level.random.nextFloat() >= 0.3333F) {
                 continue;
             }
-            BossDelaySpawner.INSTANCE.pushBoss(1350, BossEntities.EYE_OF_CTHULHU.get(), player1 ->
-                    player1.getY() > OverworldUtils.getSurfaceY() && LibDateUtils.isNight(player1.level()) && BossDelaySpawner.eyeOfCthulhuChecker(player1)
-                            ? BossDelaySpawner.SUCCESS
-                            : 20
-            );
+            BossDelaySpawner.INSTANCE.pushBoss(1350, BossEntities.EYE_OF_CTHULHU.get(), player1 -> {
+                if (!LibDateUtils.isNight(player1.level())) return BossDelaySpawner.CANCEL;
+                return player1.getY() >= OverworldUtils.getSurfaceY() && BossDelaySpawner.eyeOfCthulhuChecker(player1) ? BossDelaySpawner.SUCCESS : 20;
+            });
             level.getServer().getPlayerList().broadcastSystemMessage(
                     Component.translatable("event.confluence.eye_of_cthulhu").withColor(GlobalColors.MESSAGE.get()),
                     false

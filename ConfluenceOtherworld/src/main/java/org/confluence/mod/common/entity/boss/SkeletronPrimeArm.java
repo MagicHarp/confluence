@@ -5,9 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -276,8 +274,7 @@ public class SkeletronPrimeArm extends BaseLivingBossPart<SkeletronPrime> implem
         setXRot((float) -(Mth.atan2(direction.y, horizontal) * Mth.RAD_TO_DEG));
     }
 
-    /// 四条机械臂使用统一接触攻击节奏。未碰到目标时十刻后复查，
-    /// 命中或完成一次有效攻击尝试后等待二十刻；检测范围不额外膨胀。
+    /// 四条机械臂逐刻检查接触，成功造成伤害后冷却二十刻，检测范围不额外膨胀。
     private void damageContactTargets(SkeletronPrime master) {
         if (contactCooldown > 0 || master.getTarget() == null) {
             return;
@@ -286,11 +283,11 @@ public class SkeletronPrimeArm extends BaseLivingBossPart<SkeletronPrime> implem
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 entity -> entity instanceof LivingEntity living && living.canBeSeenAsEnemy()
                         && !(living instanceof Enemy) && master.canAttack(living))) {
-            target.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE));
-            contactCooldown = 20;
-            return;
+            if (target.hurt(damageSources().mobAttack(master), (float) getAttributeValue(Attributes.ATTACK_DAMAGE))) {
+                contactCooldown = 20;
+                return;
+            }
         }
-        contactCooldown = 10;
     }
 
     private void moveToNextPosition() {
@@ -303,9 +300,6 @@ public class SkeletronPrimeArm extends BaseLivingBossPart<SkeletronPrime> implem
         SkeletronPrime owner = getOwner();
         if (owner == null || !owner.isAlive() || isRemoved() || isInvulnerableTo(source)) {
             return false;
-        }
-        if (source.getEntity() instanceof net.minecraft.world.entity.player.Player player) {
-            owner.registerCombatParticipant(player);
         }
         if (!super.hurt(source, amount)) return false;
         float remaining = getHealth();

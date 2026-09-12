@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -41,7 +42,7 @@ public final class BossOwnerTracker<T extends BaseBoss> {
     }
 
     public @Nullable T resolve(Entity dependent) {
-        if (owner != null && !owner.isRemoved()) return owner;
+        if (owner != null && !owner.isRemoved() && owner.level() == dependent.level()) return owner;
         owner = null;
         if (ownerUUID == null || !(dependent.level() instanceof ServerLevel serverLevel))
             return null;
@@ -76,8 +77,8 @@ public final class BossOwnerTracker<T extends BaseBoss> {
 
         if (ownerUUID != null) {
             // getEntity(UUID) 返回 null 也可能只是主人所在区块尚未恢复。宽限期内保留仍然
-            // 合法的旧玩家目标，不能让仆从每次跨区块边界都停顿一百 tick。
-            if (!isBasicCombatPlayer(dependent.getTarget(), dependent)) {
+            // 合法的旧玩家或 NPC 目标，不能让仆从每次跨区块边界都停顿一百 tick。
+            if (!isBasicCombatTarget(dependent.getTarget(), dependent)) {
                 dependent.setTarget(null);
             }
             if (++unresolvedTicks > Math.max(0, resolutionGraceTicks)) {
@@ -90,7 +91,7 @@ public final class BossOwnerTracker<T extends BaseBoss> {
     }
 
     private static void synchronizeTarget(Mob dependent, BaseBoss owner) {
-        Player authoritativeTarget = owner.getAuthoritativeCombatTarget();
+        LivingEntity authoritativeTarget = owner.getAuthoritativeLivingTarget();
         if (authoritativeTarget != null) {
             if (dependent.getTarget() != authoritativeTarget) {
                 dependent.setTarget(authoritativeTarget);
@@ -105,12 +106,9 @@ public final class BossOwnerTracker<T extends BaseBoss> {
         }
     }
 
-    private static boolean isBasicCombatPlayer(@Nullable LivingEntity target, Mob dependent) {
-        return target instanceof Player player
-                && player.level() == dependent.level()
-                && player.isAlive()
-                && !player.isCreative()
-                && !player.isSpectator();
+    private static boolean isBasicCombatTarget(@Nullable LivingEntity target, Mob dependent) {
+        return target != null && target.level() == dependent.level() && target.isAlive() && !target.isRemoved()
+                && (target instanceof BaseNPC || target instanceof Player player && !player.isCreative() && !player.isSpectator());
     }
 
     public void unbind(Entity dependent) {

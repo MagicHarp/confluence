@@ -1,7 +1,6 @@
 package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.confluence.mod.common.data.map.CreatureDefinition;
@@ -60,21 +59,6 @@ public final class FlyingFishMonster extends BaseFlyingMonster {
                         new LookForwardWanderFlyAction(FlyingFishMonster.this, behavior.wanderSpeedOr(wanderSpeed), 0.0F));
             }
         };
-    }
-
-    @Override
-    protected double contactAttackInflation() {
-        return 0.0;
-    }
-
-    @Override
-    protected int contactDetectionInterval() {
-        return 10;
-    }
-
-    @Override
-    protected int contactAttackInterval() {
-        return 20;
     }
 
     @Override

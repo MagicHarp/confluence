@@ -61,7 +61,7 @@ public final class JumpingWarriorMonster extends BaseWarriorMonster {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!contactProfile.isMummy()) return;
+        if (level().isClientSide || !contactProfile.isMummy()) return;
         var speed = getAttribute(Attributes.MOVEMENT_SPEED);
         if (speed == null) return;
         boolean enraged = getHealth() <= getMaxHealth() * 0.5F;

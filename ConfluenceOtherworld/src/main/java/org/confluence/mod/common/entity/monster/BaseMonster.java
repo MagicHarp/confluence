@@ -7,9 +7,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -38,6 +36,7 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     private BTRoot behaviorTree;
     private NearestAttackableTargetGoal<Player> playerTargetGoal;
     private int contactAttackTicks = 20;
+    private int contactTeleportTick = Integer.MIN_VALUE;
     private double defaultMaxHealth = Double.NaN;
     private double defaultAttackDamage;
     private double defaultArmor;
@@ -121,10 +120,27 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     /// 近战目标执行伤害的陆地生物额外获得一次碰撞攻击。
     @Override
     public void tick() {
+        if (!level().isClientSide) clearInvalidCombatTarget();
         super.tick();
+        if (!level().isClientSide) clearInvalidCombatTarget();
         if (!usesPostMovementContactAttack()) {
             tickEntityContactAttack();
         }
+    }
+
+    /// 在 AI 执行前和接触伤害前清理失效目标，蓄力中的动作也不能继续追击创造玩家。
+    private void clearInvalidCombatTarget() {
+        LivingEntity target = getTarget();
+        if (target != null && (!target.isAlive() || target.isRemoved() || target.level() != level() || !canAttack(target)
+                || target instanceof Player player && (player.isCreative() || player.isSpectator()))) {
+            setTarget(null);
+        }
+    }
+
+    @Override
+    public void teleportTo(double x, double y, double z) {
+        super.teleportTo(x, y, z);
+        contactTeleportTick = tickCount;
     }
 
     /// 推进一次连续接触攻击。直接改写位置的状态机可把调用延后到本 tick 位移完成之后。
@@ -139,18 +155,18 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
 
         var entities = SweptContactAttack.findTargets(
                 this,
+                contactTeleportTick == tickCount ? position() : new Vec3(xo, yo, zo),
                 contactAttackInflation(),
                 maximumContactSweepDistance(),
                 this::canContactAttack
         );
         if (entities.isEmpty()) {
-            contactAttackTicks = contactDetectionInterval();
             return;
         }
         boolean attacked = false;
         for (Entity entity : entities) attacked |= doHurtTarget(entity);
         // 目标正处于受伤无敌帧等情况下不算命中，保持检测频率以免一次冲刺完全漏伤。
-        contactAttackTicks = attacked ? contactAttackInterval() : contactDetectionInterval();
+        contactAttackTicks = attacked ? contactAttackInterval() : 0;
     }
 
     protected boolean usesPostMovementContactAttack() {
@@ -160,10 +176,6 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
     /// 由需要持续接触攻击的生物覆盖。
     protected boolean hasEntityContactAttack() {
         return false;
-    }
-
-    protected int contactDetectionInterval() {
-        return 10;
     }
 
     protected int contactAttackInterval() {
@@ -187,7 +199,7 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
         return living == getTarget() || living instanceof Player;
     }
 
-    /// 以实际战斗方向为唯一权威，同时更新实体、身体、头部和 LookControl。
+    /// 以实际战斗方向为唯一权威，同时更新实体、身体和头部朝向。
     /// 飞行怪、冲刺怪与 Boss 共用这一入口，避免各自只写一半旋转状态。
     public final void faceCombatDirection(Vec3 direction, float maximumYawChange, float maximumPitchChange) {
         if (!Double.isFinite(direction.x) || !Double.isFinite(direction.y) || !Double.isFinite(direction.z)
@@ -195,7 +207,7 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
             return;
         }
         double horizontal = Math.sqrt(direction.x * direction.x + direction.z * direction.z);
-        float targetYaw = (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
+        float targetYaw = horizontal < 1.0E-7D ? getYRot() : (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
         float targetPitch = (float) (-Mth.atan2(direction.y, horizontal) * Mth.RAD_TO_DEG);
         // 第一个参数是目标角，第二个参数是当前参考角；传反会使实体从目标角反推，
         // 表现为拒绝转向、突然跳向或越过目标后反复摆动。
@@ -205,8 +217,6 @@ public abstract class BaseMonster extends Monster implements GeoEntity {
         setXRot(pitch);
         yBodyRot = yaw;
         yHeadRot = yaw;
-        Vec3 lookTarget = getEyePosition().add(direction);
-        getLookControl().setLookAt(lookTarget.x, lookTarget.y, lookTarget.z, maximumYawChange, maximumPitchChange);
     }
 
     public final void faceCombatPosition(Vec3 targetPosition, float maximumYawChange, float maximumPitchChange) {

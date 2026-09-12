@@ -4,9 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -104,11 +102,8 @@ public class PlanteraTentacle extends BaseLivingBossPart<Plantera> implements Ge
             setXRot((float) (-Mth.atan2(lookDirection.y, lookDirection.horizontalDistance()) * Mth.RAD_TO_DEG));
         }
 
-        if (contactCooldown > 0) {
-            contactCooldown--;
-            return;
-        }
-        if (master.getTarget() == null) return;
+        if (contactCooldown > 0) contactCooldown--;
+        if (master.getTarget() == null || contactCooldown > 0) return;
         for (Entity entity : SweptContactAttack.findTargets(this, 0.25D,
                 SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE,
                 candidate -> candidate instanceof LivingEntity living && living != master && master.canAttack(living))) {

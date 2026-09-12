@@ -113,7 +113,7 @@ public abstract class AbstractTwinEye extends BaseFlyingMonster implements BossO
             }
         }
         super.tick();
-        if (level().isClientSide || isRemoved()) {
+        if (level().isClientSide || !isAlive()) {
             return;
         }
         if (master != null && getTarget() != inheritedTarget) {
@@ -174,10 +174,9 @@ public abstract class AbstractTwinEye extends BaseFlyingMonster implements BossO
     @Override
     public boolean hurt(DamageSource source, float amount) {
         TheTwins master = getMaster();
-        if (master != null && source.getEntity() instanceof net.minecraft.world.entity.player.Player player) {
-            master.registerCombatParticipant(player);
-        }
-        return super.hurt(source, amount);
+        boolean hurt = super.hurt(source, amount);
+        if (hurt && master != null) master.onEncounterHurt(source);
+        return hurt;
     }
 
     /// 双子魔眼共用阶段动画，但各自从自己的资源文件读取同名动画键。

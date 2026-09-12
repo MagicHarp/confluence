@@ -19,12 +19,6 @@ public final class BloodTumor extends BaseMonster {
         super(type, level);
     }
 
-    /// 肿瘤只是定时孵化载体，不会因玩家接触而造成伤害。
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return false;
-    }
-
     @Override
     public void tick() {
         super.tick();

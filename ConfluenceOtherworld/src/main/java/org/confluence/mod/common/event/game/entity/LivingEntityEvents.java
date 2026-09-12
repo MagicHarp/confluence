@@ -580,22 +580,23 @@ public final class LivingEntityEvents {
 
     private static void mobSpawn$PositionCheck(MobSpawnEvent.PositionCheck event) {
         if (event.getSpawnType() != MobSpawnType.NATURAL) return;
+        // 墓地的额外放行不能覆盖其他监听器或游戏事件已经作出的禁止生成决定。
+        if (event.getResult() == PortMobSpawnEvent.PositionCheck.PortResult.FAIL.unwrap()) return;
         Mob mob = event.getEntity();
-        if (event.getResult() != PortMobSpawnEvent.PositionCheck.PortResult.FAIL.unwrap() && (
-                DungeonStructure.skipSpawn(mob, event.getLevel().getLevel()) ||
-                        GameEventSystem.shouldDenyNatureSpawn()
-        )) {
+        if (DungeonStructure.skipSpawn(mob, event.getLevel().getLevel()) || GameEventSystem.shouldDenyNatureSpawn()) {
             event.setResult(PortMobSpawnEvent.PositionCheck.PortResult.FAIL.unwrap());
+            return;
         }
         if (mob.getType().is(ModTags.EntityTypes.SPAWN_AT_GRAVEYARD)) {
             ILevelChunkSection iSection = DynamicBiomeUtils.getISection(event.getLevel(), mob.blockPosition());
-            if (iSection != null && iSection.confluence$isGraveyard()) {
+            if (iSection != null && iSection.confluence$isGraveyard() && mob.checkSpawnObstruction(event.getLevel())) {
                 event.setResult(PortMobSpawnEvent.PositionCheck.PortResult.SUCCEED.unwrap());
             }
         }
     }
 
     private static void mobSpawn$SpawnPlacementCheck(MobSpawnEvent.SpawnPlacementCheck event) {
+        if (event.getResult() == Event.Result.DENY) return;
         if (event.getSpawnType() == MobSpawnType.NATURAL && !getPlacementCheckResult(event)) {
             EntityType<?> entityType = event.getEntityType();
 //            if (entityType == TEMonsterEntities.GHOST.get()) {

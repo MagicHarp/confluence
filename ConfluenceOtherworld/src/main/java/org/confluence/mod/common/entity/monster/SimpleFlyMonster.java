@@ -1,7 +1,6 @@
 package org.confluence.mod.common.entity.monster;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.confluence.mod.common.data.map.CreatureDefinition;
@@ -72,23 +71,6 @@ public class SimpleFlyMonster extends BaseFlyingMonster {
                         new LookForwardWanderFlyAction(self, behavior.wanderSpeedOr(wanderSpeed), 0.0F));
             }
         };
-    }
-
-    /// 普通转向飞行怪使用未扩张的实体包围盒。只有具有特殊范围
-    /// 或检测周期的实体才覆盖这三个方法，避免在注册点追加难以辨认的布尔值和数字参数。
-    @Override
-    protected double contactAttackInflation() {
-        return 0.0;
-    }
-
-    @Override
-    protected int contactDetectionInterval() {
-        return 10;
-    }
-
-    @Override
-    protected int contactAttackInterval() {
-        return 20;
     }
 
     @Override

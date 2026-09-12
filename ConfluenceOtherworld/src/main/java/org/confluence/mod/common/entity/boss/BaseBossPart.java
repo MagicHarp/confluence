@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.api.entity.Boss;
 import org.confluence.mod.common.entity.PartHitTarget;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,8 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
     private @Nullable T owner;
     private @Nullable UUID ownerUUID;
     private int unresolvedOwnerTicks;
+    private @Nullable Vec3 contactSweepStart;
+    private long contactMovementTick = Long.MIN_VALUE;
 
     protected BaseBossPart(EntityType<?> type, Level level) {
         super(type, level);
@@ -52,6 +55,8 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
         this.owner = owner;
         this.ownerUUID = owner.getUUID();
         this.entityData.set(OWNER_ID, owner.getId());
+        contactSweepStart = position();
+        contactMovementTick = level().getGameTime();
         // 只在首次绑定/新建部件时补满生命，不覆盖从存档恢复的剩余生命。
         if (isDestructible() && getPartHealth() <= 0.0F) {
             this.entityData.set(PART_HEALTH, getMaxPartHealth());
@@ -121,6 +126,20 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
     protected void onPartHealthChanged(T owner, float remainingHealth) {}
 
     @Override
+    public void setPos(double x, double y, double z) {
+        long gameTime = level().getGameTime();
+        if (contactMovementTick != gameTime) {
+            contactSweepStart = position();
+            contactMovementTick = gameTime;
+        }
+        super.setPos(x, y, z);
+    }
+
+    public final Vec3 getContactSweepStart() {
+        return contactMovementTick == level().getGameTime() && contactSweepStart != null ? contactSweepStart : position();
+    }
+
+    @Override
     public final void tick() {
         super.tick();
         if (!level().isClientSide && entityData.get(HURT_FLASH_TICKS) > 0) {
@@ -143,6 +162,7 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
     }
 
     protected final boolean hurtOwnerAndPart(DamageSource source, float amount, float ownerMultiplier) {
+        if (level().isClientSide || amount <= 0.0F) return false;
         T resolvedOwner = getOwner();
         if (resolvedOwner == null || !resolvedOwner.isAlive() || isRemoved()) {
             return false;
@@ -155,6 +175,7 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
 
         float remaining = Math.max(0.0F, getPartHealth() - amount);
         entityData.set(PART_HEALTH, remaining);
+        if (!ownerHurt) resolvedOwner.onEncounterHurt(source);
         indicateHurt();
         onPartHealthChanged(resolvedOwner, remaining);
         if (remaining <= 0.0F) {
@@ -196,7 +217,7 @@ public abstract class BaseBossPart<T extends BaseBoss> extends Entity implements
     protected void addPartSaveData(CompoundTag tag) {}
 
     private void resolveOwner() {
-        if (owner != null && !owner.isRemoved()) {
+        if (owner != null && !owner.isRemoved() && owner.level() == level()) {
             return;
         }
         owner = null;

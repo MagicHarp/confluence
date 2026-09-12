@@ -6,11 +6,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -85,17 +81,11 @@ public class LunaticCultist extends BaseBoss {
         };
     }
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
 
     @Override
     public void tick() {
         super.tick();
-        if (isRemoved()) return;
+        if (!isAlive()) return;
 
         if (!level().isClientSide) {
             if (getTarget() == null && tickCount % 10 == 0) {
@@ -103,7 +93,7 @@ public class LunaticCultist extends BaseBoss {
                 if (replacement != null) setTarget(replacement);
             }
 
-            // Teleport cycle
+            // 传送周期
             teleportTimer--;
             if (teleportTimer <= 0 && getTarget() != null) {
                 teleportTimer = TELEPORT_TICKS + random.nextInt(40);
@@ -111,7 +101,7 @@ public class LunaticCultist extends BaseBoss {
                 if (++attackCycle % 3 == 0) spawnClones();
             }
 
-            // Summon phantom dragon
+            // 弹幕与幻影龙召唤周期
             if (getTarget() != null) {
                 spellTimer--;
                 if (spellTimer <= 0) {

@@ -65,11 +65,11 @@ public abstract class BasePhasebladeItem extends BaseSwordItem implements GeoIte
     protected abstract String texturePrefix();
 
     public final ResourceLocation textureResource() {
-        return Confluence.asResource("textures/item/phaseblade/" + color + "_" + texturePrefix() + ".png");
+        return Confluence.asResource("textures/item/" + texturePrefix() + "/" + color + "_" + texturePrefix() + ".png");
     }
 
     public final ResourceLocation emissiveResource() {
-        return Confluence.asResource("textures/item/phaseblade/" + color + "_" + texturePrefix() + "_mark.png");
+        return Confluence.asResource("textures/item/" + texturePrefix() + "/" + color + "_" + texturePrefix() + "_mark.png");
     }
 
     public final String color() {

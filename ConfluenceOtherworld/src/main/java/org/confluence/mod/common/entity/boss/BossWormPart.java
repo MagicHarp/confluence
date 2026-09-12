@@ -168,6 +168,10 @@ public class BossWormPart extends Monster implements WormSegment, GeoEntity, Par
         setPos(destination.x, destination.y, destination.z);
     }
 
+    /// 体节只沿头部给出的链条位置移动，不再叠加生物惯性或受击位移。
+    @Override
+    public void travel(Vec3 travelVector) {}
+
     @Override
     public void tick() {
         previousSegmentRoll = getSegmentRoll();

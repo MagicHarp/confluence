@@ -4,8 +4,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.confluence.mod.common.entity.ai.SweptContactAttack;
@@ -22,7 +20,7 @@ import java.util.List;
 /// 蠕虫怪物基类——分段实体（头+体+尾），穿透方块移动。
 /// 每 tick 头部移动，体节跟随前一个保持固定间距。
 public abstract class BaseWormMonster extends BaseMonster implements WormSegment {
-    // 头部每三 tick 扫描一次接触目标，连续位移仍由扫掠碰撞补足中间路径。
+    // 命中后保留三刻冷却；未命中时逐刻检测，扫掠只覆盖本刻实际经过的路径。
     private static final int COLLISION_INTERVAL = 3;
 
     protected final List<BaseWormPart> segments = new ArrayList<>();
@@ -118,6 +116,13 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     }
 
     @Override
+    protected float tickHeadTurn(float bodyYaw, float animationSpeed) {
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+        return animationSpeed;
+    }
+
+    @Override
     public void tick() {
         if (isDeadOrDying()) setDeltaMovement(Vec3.ZERO);
         if (!level().isClientSide && contactSweepStart == null) contactSweepStart = position();
@@ -145,14 +150,18 @@ public abstract class BaseWormMonster extends BaseMonster implements WormSegment
     }
 
     private void tickCollision() {
-        if (collisionCooldown > 0) { collisionCooldown--; return; }
         Vec3 sweepStart = contactSweepStart;
         contactSweepStart = position();
+        if (collisionCooldown > 0) {
+            collisionCooldown--;
+            return;
+        }
+        boolean attacked = false;
         for (var target : SweptContactAttack.findTargets(this, sweepStart, 0.0, SweptContactAttack.DEFAULT_MAX_SWEEP_DISTANCE, this::canContactAttack)) {
             if (getTarget() == null && target instanceof LivingEntity living) setTarget(living);
-            doHurtTarget(target);
+            attacked |= doHurtTarget(target);
         }
-        collisionCooldown = COLLISION_INTERVAL;
+        if (attacked) collisionCooldown = COLLISION_INTERVAL;
     }
 
     @Override

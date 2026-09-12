@@ -5,6 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.confluence.lib.api.entity.Boss;
 import org.confluence.mod.common.entity.PartHitTarget;
 import org.jetbrains.annotations.Nullable;
@@ -102,8 +104,29 @@ public abstract class BaseLivingBossPart<T extends BaseBoss> extends Monster imp
     protected void onPartHealthChanged(T owner, float remainingHealth) {}
 
     @Override
+    public boolean hurt(DamageSource source, float amount) {
+        T resolvedOwner = getOwner();
+        if (resolvedOwner == null || !resolvedOwner.isAlive() || isRemoved()) return false;
+        boolean hurt = super.hurt(source, amount);
+        if (hurt) resolvedOwner.onEncounterHurt(source);
+        return hurt;
+    }
+
+    /// 部件位置由 tickPart 更新，不能先让普通生物移动再叠加一次专用位移。
+    @Override
+    public void travel(Vec3 travelVector) {}
+
+    @Override
+    protected float tickHeadTurn(float bodyYaw, float animationSpeed) {
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+        return animationSpeed;
+    }
+
+    @Override
     public final void tick() {
         super.tick();
+        if (!isAlive()) return;
         T resolvedOwner = getOwner();
         if (resolvedOwner == null) {
             if (!level().isClientSide && ++unresolvedOwnerTicks > OWNER_RESOLUTION_GRACE_TICKS)
@@ -171,7 +194,7 @@ public abstract class BaseLivingBossPart<T extends BaseBoss> extends Monster imp
     protected void addPartSaveData(CompoundTag tag) {}
 
     private void resolveOwner() {
-        if (owner != null && !owner.isRemoved()) return;
+        if (owner != null && !owner.isRemoved() && owner.level() == level()) return;
         owner = null;
         Entity byNetworkId = level().getEntity(entityData.get(OWNER_ID));
         if (getOwnerType().isInstance(byNetworkId)) {

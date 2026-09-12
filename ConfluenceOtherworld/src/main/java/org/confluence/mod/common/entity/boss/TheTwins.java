@@ -2,14 +2,13 @@ package org.confluence.mod.common.entity.boss;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +35,8 @@ public class TheTwins extends BaseBoss {
     private static final String SPAZMATISM_UUID_TAG = "SpazmatismUUID";
     private static final String RETINAZER_MAX_HEALTH_TAG = "RetinazerMaxHealth";
     private static final String SPAZMATISM_MAX_HEALTH_TAG = "SpazmatismMaxHealth";
+    private static final String RETINAZER_HEALTH_TAG = "RetinazerHealth";
+    private static final String SPAZMATISM_HEALTH_TAG = "SpazmatismHealth";
 
     private Retinazer retinazer;
     private Spazmatism spazmatism;
@@ -43,6 +44,8 @@ public class TheTwins extends BaseBoss {
     private UUID spazmatismUUID;
     private float retinazerMaxHealth;
     private float spazmatismMaxHealth;
+    private float retinazerHealth;
+    private float spazmatismHealth;
     private boolean spawned = false;
     private int defeatedEyes;
 
@@ -78,10 +81,23 @@ public class TheTwins extends BaseBoss {
 
     @Override
     protected float getBossBarProgress() {
+        updateEyeHealthSnapshots();
         float totalMax = retinazerMaxHealth + spazmatismMaxHealth;
-        float total = (retinazer != null && retinazer.isAlive() ? retinazer.getHealth() : 0)
-                + (spazmatism != null && spazmatism.isAlive() ? spazmatism.getHealth() : 0);
-        return totalMax > 0.0F ? total / totalMax : 0.0F;
+        float total = ((defeatedEyes & RETINAZER_DEFEATED) == 0 ? retinazerHealth : 0.0F)
+                + ((defeatedEyes & SPAZMATISM_DEFEATED) == 0 ? spazmatismHealth : 0.0F);
+        return totalMax > 0.0F ? Mth.clamp(total / totalMax, 0.0F, 1.0F) : 0.0F;
+    }
+
+    /// 卸载前保留最后已知血量，恢复实例后再用真实值更新；没有实例不代表眼球死亡。
+    private void updateEyeHealthSnapshots() {
+        if (retinazer != null) {
+            retinazerMaxHealth = retinazer.getMaxHealth();
+            retinazerHealth = Mth.clamp(retinazer.getHealth(), 0.0F, retinazerMaxHealth);
+        }
+        if (spazmatism != null) {
+            spazmatismMaxHealth = spazmatism.getMaxHealth();
+            spazmatismHealth = Mth.clamp(spazmatism.getHealth(), 0.0F, spazmatismMaxHealth);
+        }
     }
 
     // === BT (idle — eyes do all the work) ===
@@ -141,6 +157,7 @@ public class TheTwins extends BaseBoss {
     }
 
     private void recoverEyes() {
+        updateEyeHealthSnapshots();
         if (retinazer != null && !retinazer.isAlive()) retinazer = null;
         if (spazmatism != null && !spazmatism.isAlive()) spazmatism = null;
 
@@ -286,10 +303,12 @@ public class TheTwins extends BaseBoss {
     private void markTwinDefeated(boolean wasRetinazer) {
         if (wasRetinazer) {
             defeatedEyes |= RETINAZER_DEFEATED;
+            retinazerHealth = 0.0F;
             retinazer = null;
             retinazerUUID = null;
         } else {
             defeatedEyes |= SPAZMATISM_DEFEATED;
+            spazmatismHealth = 0.0F;
             spazmatism = null;
             spazmatismUUID = null;
         }
@@ -302,12 +321,15 @@ public class TheTwins extends BaseBoss {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
+        updateEyeHealthSnapshots();
         tag.putBoolean(SPAWNED_TAG, spawned);
         tag.putInt(DEFEATED_EYES_TAG, defeatedEyes);
         if (retinazerUUID != null) tag.putUUID(RETINAZER_UUID_TAG, retinazerUUID);
         if (spazmatismUUID != null) tag.putUUID(SPAZMATISM_UUID_TAG, spazmatismUUID);
         tag.putFloat(RETINAZER_MAX_HEALTH_TAG, retinazerMaxHealth);
         tag.putFloat(SPAZMATISM_MAX_HEALTH_TAG, spazmatismMaxHealth);
+        tag.putFloat(RETINAZER_HEALTH_TAG, retinazerHealth);
+        tag.putFloat(SPAZMATISM_HEALTH_TAG, spazmatismHealth);
     }
 
     @Override
@@ -319,6 +341,9 @@ public class TheTwins extends BaseBoss {
         spazmatismUUID = tag.hasUUID(SPAZMATISM_UUID_TAG) ? tag.getUUID(SPAZMATISM_UUID_TAG) : null;
         retinazerMaxHealth = tag.getFloat(RETINAZER_MAX_HEALTH_TAG);
         spazmatismMaxHealth = tag.getFloat(SPAZMATISM_MAX_HEALTH_TAG);
+        // 旧存档没有当前血量快照，先保留已知容量，等待原眼球加载后校正。
+        retinazerHealth = (defeatedEyes & RETINAZER_DEFEATED) != 0 ? 0.0F : Mth.clamp(tag.contains(RETINAZER_HEALTH_TAG) ? tag.getFloat(RETINAZER_HEALTH_TAG) : retinazerMaxHealth, 0.0F, retinazerMaxHealth);
+        spazmatismHealth = (defeatedEyes & SPAZMATISM_DEFEATED) != 0 ? 0.0F : Mth.clamp(tag.contains(SPAZMATISM_HEALTH_TAG) ? tag.getFloat(SPAZMATISM_HEALTH_TAG) : spazmatismMaxHealth, 0.0F, spazmatismMaxHealth);
         retinazer = null;
         spazmatism = null;
     }

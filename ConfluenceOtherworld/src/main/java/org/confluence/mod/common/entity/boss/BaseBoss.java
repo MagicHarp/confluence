@@ -287,17 +287,26 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
             amount *= explosionResistance;
         }
         boolean hurt = super.hurt(source, amount);
-        if (hurt && source.getEntity() instanceof BaseNPC npc && canAttack(npc)) {
-            setTarget(npc);
-        }
+        if (hurt && source.getEntity() instanceof BaseNPC) onEncounterHurt(source);
         return hurt;
     }
 
-    /// Boss 遭遇只把玩家作为敌对生命。部件、仆从、其他 Boss 和普通怪物即使恰好穿过
+    /// 本体和独立扣血的部件共用受击响应，不向本体重复结算部件伤害。
+    final void onEncounterHurt(DamageSource source) {
+        if (level().isClientSide || !isAlive()) return;
+        if (source.getEntity() instanceof Player player) registerCombatParticipant(player);
+        if (source.getEntity() instanceof BaseNPC npc && canAttack(npc)) {
+            setTarget(npc);
+        }
+    }
+
+    /// Boss 遭遇攻击玩家及 NPC。部件、仆从、其他 Boss 和普通怪物即使恰好穿过
     /// 本体的接触伤害箱，也不能被玩家战斗状态间接伤害。
     @Override
     public boolean canAttack(LivingEntity target) {
-        return shouldMaintainCombatTarget()
+        return isAlive() && shouldMaintainCombatTarget()
+                && target.level() == level() && target.isAlive() && !target.isRemoved()
+                && (!(target instanceof Player player) || !player.isCreative() && !player.isSpectator())
                 && (target instanceof Player || target instanceof BaseNPC)
                 && super.canAttack(target);
     }
@@ -354,8 +363,25 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     // === Tick ===
 
+    /// 状态机决定朝向，不能由原版倒退行走修正再翻转半圈。
+    @Override
+    protected float tickHeadTurn(float bodyYaw, float animationSpeed) {
+        yBodyRot = getYRot();
+        yHeadRot = getYRot();
+        return animationSpeed;
+    }
+
     @Override
     public void tick() {
+        if (!isAlive()) {
+            if (!level().isClientSide) {
+                setTarget(null);
+                synchronizeCombatTarget(null);
+                encounterChunkTicket.release();
+            }
+            super.tick();
+            return;
+        }
         LivingEntity targetBeforeAi = null;
         if (!level().isClientSide) {
             LivingEntity currentTarget = getTarget();
@@ -608,7 +634,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     protected final void inheritEncounterState(BaseBoss source) {
         combatParticipantIds.addAll(source.combatParticipantIds);
         mechanicalMayhemParticipantIds.addAll(source.mechanicalMayhemParticipantIds);
-        Player sourceTarget = source.getAuthoritativeCombatTarget();
+        LivingEntity sourceTarget = source.getAuthoritativeLivingTarget();
         if (sourceTarget != null) {
             setTarget(sourceTarget);
         }
@@ -681,6 +707,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         return target instanceof BaseNPC npc
                 && npc.level() == level()
                 && npc.isAlive()
+                && combatAnchorDistanceSqr(npc) < getCombatPlayerRange() * getCombatPlayerRange()
                 && canAttack(npc) ? npc : null;
     }
 
@@ -702,6 +729,12 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         return shouldMaintainCombatTarget() ? validCombatPlayer(getTarget()) : null;
     }
 
+    final @Nullable LivingEntity getAuthoritativeLivingTarget() {
+        if (!shouldMaintainCombatTarget()) return null;
+        BaseNPC npc = validNpcRetaliationTarget(getTarget());
+        return npc == null ? validCombatPlayer(getTarget()) : npc;
+    }
+
     private boolean isEligibleRetargetCandidate(Player player) {
         return player.level() == level() && player.canBeSeenAsEnemy();
     }
@@ -712,13 +745,13 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
         return Math.max(16.0, getAttributeValue(Attributes.FOLLOW_RANGE));
     }
 
-    /// 计算玩家到整场遭遇最近锚点的平方距离。活着的结构部件也算锚点，因此多人分别牵制
+    /// 计算战斗目标到整场遭遇最近锚点的平方距离。活着的结构部件也算锚点，因此多人分别牵制
     /// Boss 本体和部件时不会因只远离本体而错误脱战；普通仆从不会扩大整场战斗的保留范围。
-    protected double combatAnchorDistanceSqr(Player player) {
-        double nearest = distanceToSqr(player);
+    protected double combatAnchorDistanceSqr(LivingEntity target) {
+        double nearest = distanceToSqr(target);
         for (Entity part : subEntities) {
             if (part.isAlive() && isCombatAnchor(part)) {
-                nearest = Math.min(nearest, part.distanceToSqr(player));
+                nearest = Math.min(nearest, part.distanceToSqr(target));
             }
         }
         return nearest;
@@ -726,7 +759,7 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
 
     /// 只有构成本体空间范围或共享胜负条件的实体才参与遭遇距离计算。
     protected boolean isCombatAnchor(Entity entity) {
-        return entity instanceof BaseBossPart<?> || entity instanceof AbstractTwinEye;
+        return entity instanceof BaseBossPart<?> || entity instanceof BaseLivingBossPart<?> || entity instanceof AbstractTwinEye;
     }
 
     /// 在目标周围寻找适合飞行 Boss 的传送点。
@@ -780,12 +813,6 @@ public abstract class BaseBoss extends BaseMonster implements Boss {
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
-    }
-
-    /// Boss 的高速冲刺需要每 tick 检查连续路径，命中后的伤害无敌帧仍由 LivingEntity 处理。
-    @Override
-    protected int contactDetectionInterval() {
-        return 1;
     }
 
     @Override

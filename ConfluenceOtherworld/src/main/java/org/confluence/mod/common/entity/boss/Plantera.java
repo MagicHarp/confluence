@@ -12,10 +12,6 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -100,17 +96,11 @@ public class Plantera extends BaseBoss {
         };
     }
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
 
     @Override
     public void tick() {
         super.tick();
-        if (isRemoved()) return;
+        if (!isAlive()) return;
 
         if (!level().isClientSide) {
             if (tickCount == 1 || tickCount % 20 == 0) ensureHooks();
@@ -334,6 +324,7 @@ public class Plantera extends BaseBoss {
             velocity = velocity.normalize().scale(maximumSpeed);
         }
         setDeltaMovement(velocity);
+        faceCombatPosition(target.getEyePosition(), 90.0F, 90.0F);
     }
 
     /// 进入或刷新 200 tick 的狂暴窗口。只有首次进入时播放咆哮；
@@ -514,15 +505,6 @@ public class Plantera extends BaseBoss {
                 || source.is(DamageTypeTags.IS_DROWNING)
                 || super.isInvulnerableTo(source);
     }
-
-    @Override
-    public boolean canAttack(LivingEntity entity) {
-        return !(entity instanceof Plantera)
-                && super.canAttack(entity);
-    }
-
-    @Override public boolean causeFallDamage(float f, float m, DamageSource s) { return false; }
-    @Override public boolean isPushable() { return false; }
 
     @Override
     protected Vec3 getDisengageMovement() {

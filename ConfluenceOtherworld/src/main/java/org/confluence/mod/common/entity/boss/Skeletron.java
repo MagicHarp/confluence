@@ -11,7 +11,6 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.monster.Monster;
@@ -105,7 +104,7 @@ public class Skeletron extends BaseBoss {
             synchronizeHandStats();
         }
         super.tick();
-        if (isRemoved() || level().isClientSide) {
+        if (!isAlive() || level().isClientSide) {
             return;
         }
 
@@ -170,7 +169,7 @@ public class Skeletron extends BaseBoss {
     private void applyExclusiveFacing(Vec3 direction, float maximumYawChange, float maximumPitchChange) {
         if (direction.lengthSqr() <= 1.0E-7D) return;
         double horizontal = Math.sqrt(direction.x * direction.x + direction.z * direction.z);
-        float targetYaw = (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
+        float targetYaw = horizontal < 1.0E-7D ? getYRot() : (float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F;
         float targetPitch = (float) (-Mth.atan2(direction.y, horizontal) * Mth.RAD_TO_DEG);
         float yaw = Mth.rotateIfNecessary(targetYaw, getYRot(), maximumYawChange);
         float pitch = Mth.rotateIfNecessary(targetPitch, getXRot(), maximumPitchChange);
@@ -557,7 +556,5 @@ public class Skeletron extends BaseBoss {
         return false;
     }
 
-    @Override
-    public boolean isPushable() {return false;}
 
 }

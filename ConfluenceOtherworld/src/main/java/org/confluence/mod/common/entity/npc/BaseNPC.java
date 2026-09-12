@@ -16,11 +16,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -491,9 +493,7 @@ public abstract class BaseNPC extends PathfinderMob implements GeoEntity {
         // 被"救援"的 NPC 首次交互时，将其正式加入区域
         if (shouldInteract) {
             setShouldInteract(false);
-            region = NPCSpawner.getNpcSpawnRegion(player);
-            NPCSpawner.INSTANCE.applyBenedictions(this);
-            NPCSpawner.INSTANCE.addSpawned(getType());
+            NPCSpawner.INSTANCE.moveNPCToAnotherRegion(this, region, NPCSpawner.getNpcSpawnRegion(player));
             NPCSpawner.broadcastMessageToRegion(player.level(), this, Component.translatable("event.confluence.npc.arrived", getType().getDescription(), getName()).withColor(GlobalColors.NPC_ARRIVED.get()));
         }
         // 图鉴记录

@@ -207,7 +207,7 @@ public class WallOfFlesh extends BaseBoss {
         boolean placementReady = level().isClientSide
                 || applyInitialPlacement();
         super.tick();
-        if (isRemoved()) {
+        if (!isAlive()) {
             return;
         }
 
@@ -766,10 +766,6 @@ public class WallOfFlesh extends BaseBoss {
         return false;
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
     /// 墙体背景不直接承受点击和弹幕命中，伤害由眼睛与嘴部转发。
     @Override

@@ -196,6 +196,9 @@ public final class ModEntities {
                     .updateInterval(1)
                     .noSave()
                     .build(id.toString()));
+    public static final RegistryObject<EntityType<HostileParticleProjectile>> HILL_FIRE_BOUND = register("hill_fire_bound",
+            id -> EntityType.Builder.<HostileParticleProjectile>of((type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.HILL_FIRE_BOUND), MobCategory.MISC)
+                    .sized(0.35F, 0.35F).clientTrackingRange(12).updateInterval(1).noSave().build(id.toString()));
     public static final RegistryObject<EntityType<HostileParticleProjectile>> WALL_OF_FLESH_LASER = register("wall_of_flesh_laser",
             id -> EntityType.Builder.<HostileParticleProjectile>of(
                             (type, level) -> new HostileParticleProjectile(type, level, HostileParticleProjectile.Variant.WALL_OF_FLESH_LASER),

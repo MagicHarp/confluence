@@ -15,12 +15,9 @@ import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -37,6 +34,7 @@ import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
 import org.confluence.mod.common.entity.monster.WormSegment;
+import org.confluence.mod.common.entity.npc.BaseNPC;
 import org.confluence.mod.common.init.entity.BossEntities;
 import org.confluence.mod.common.init.entity.MonsterEntities;
 import org.jetbrains.annotations.Nullable;
@@ -681,27 +679,21 @@ public class EaterOfWorlds extends BaseWormBoss {
     }
 
     @Override
-    protected double combatAnchorDistanceSqr(Player player) {
-        double nearest = super.combatAnchorDistanceSqr(player);
+    protected double combatAnchorDistanceSqr(LivingEntity target) {
+        double nearest = super.combatAnchorDistanceSqr(target);
         UUID encounter = getEncounterUUID();
         if (encounter == null || !(level() instanceof ServerLevel)) return nearest;
 
         for (EaterOfWorlds head : encounterHeads()) {
             if (head == this) continue;
-            nearest = Math.min(nearest, head.distanceToSqr(player));
+            nearest = Math.min(nearest, head.distanceToSqr(target));
             for (BossWormPart segment : head.segments) {
-                if (segment.isAlive()) nearest = Math.min(nearest, segment.distanceToSqr(player));
+                if (segment.isAlive()) nearest = Math.min(nearest, segment.distanceToSqr(target));
             }
         }
         return nearest;
     }
 
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
-    }
 
     @Override
     public void tick() {
@@ -728,6 +720,7 @@ public class EaterOfWorlds extends BaseWormBoss {
     /// 就可能让距离结果失效。这里先以头部的有限坐标完成搜索，再交给遭遇层同步到其他头部。
     private void acquireTargetFromHeadRange() {
         if (!(level() instanceof ServerLevel serverLevel)) return;
+        if (getAuthoritativeLivingTarget() instanceof BaseNPC) return;
         if (getTarget() instanceof Player current && isDirectlyTargetable(current)) return;
 
         double maximumAggro = Double.NEGATIVE_INFINITY;
@@ -780,6 +773,7 @@ public class EaterOfWorlds extends BaseWormBoss {
     /// 避免各头因实体执行顺序不同而各自累计脱战计时。
     private void restoreEncounterTargetBeforeLifecycle() {
         if (!(level() instanceof ServerLevel serverLevel) || getEncounterUUID() == null) return;
+        if (getAuthoritativeLivingTarget() instanceof BaseNPC) return;
         EncounterState state = encounterState(serverLevel, getEncounterUUID());
         Player sharedTarget = state.targetId == null ? null : serverLevel.getPlayerByUUID(state.targetId);
         if (sharedTarget != null && !isValidCurrentCombatPlayer(sharedTarget)) {
@@ -818,6 +812,7 @@ public class EaterOfWorlds extends BaseWormBoss {
         if (sharedTarget == null) return;
 
         for (EaterOfWorlds head : heads) {
+            if (head.getAuthoritativeLivingTarget() instanceof BaseNPC) continue;
             if (!head.isValidCurrentCombatPlayer(sharedTarget)) continue;
             head.registerCombatParticipant(sharedTarget);
             if (head.getTarget() != sharedTarget) head.setTarget(sharedTarget);

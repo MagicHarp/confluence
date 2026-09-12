@@ -1,13 +1,14 @@
 package org.confluence.mod.common.entity.monster;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import org.confluence.mod.common.entity.ai.BossMinionCoordinator;
 import org.confluence.mod.common.entity.ai.bt.leaf.WormMovementAction;
 import org.confluence.mod.common.entity.boss.BaseBoss;
@@ -41,6 +42,11 @@ public class SimpleWormMonster extends BaseWormMonster implements BossOwnedEntit
     @Override
     protected int getSegmentCount() {
         return segments;
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return role == Role.SURFACE || role == Role.BONE_SERPENT || role == Role.FLYING ? 0.0F : super.getWalkTargetValue(pos, level);
     }
 
     @Override

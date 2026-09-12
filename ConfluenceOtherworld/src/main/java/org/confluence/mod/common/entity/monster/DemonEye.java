@@ -67,18 +67,7 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
 
     private record VariantStats(double health, double damage, int armor, double movementSpeed) {}
 
-    /// 恶魔眼始终使用飞行物理。这里直接返回无重力语义，避免命令生成或
-    /// NBT 读取覆盖实体标志后先坠落到地面，再由飞行行为勉强拉回目标高度。
-    @Override
-    public boolean isNoGravity() {
-        return true;
-    }
 
-    /// 恶魔眼通过身体碰撞造成伤害，不能只实现绕飞而缺少伤害入口。
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return true;
-    }
 
     /// 恶魔眼体型决定受击后的位移幅度。
     ///
@@ -174,9 +163,11 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
     @Override
     public void tick() {
         if (!level().isClientSide) {
-            setTarget(level().getNearestPlayer(getX(), getY(), getZ(), 40.0, true));
+            setTarget(level().isDay() ? null : level().getNearestPlayer(getX(), getY(), getZ(), 40.0, true));
         }
         super.tick();
+        if (level().isClientSide) return;
+        if (level().isDay()) setTarget(null);
         LivingEntity target = getTarget();
         Vec3 lookAt = target != null && target.isAlive() ? target.getEyePosition() : getEyePosition().add(getDeltaMovement());
         applyLookRotation(lookAt);
@@ -187,8 +178,8 @@ public class DemonEye extends ReboundingFlyingMonster implements VariantHolder<D
         if (direction.lengthSqr() < 1.0E-8) {
             return;
         }
-        float yaw = (float) Math.toDegrees(Mth.atan2(-direction.x, direction.z));
-        float pitch = (float) Math.toDegrees(Mth.atan2(direction.y, direction.horizontalDistance()));
+        float yaw = direction.horizontalDistanceSqr() < 1.0E-8 ? getYRot() : (float) Math.toDegrees(Mth.atan2(-direction.x, direction.z));
+        float pitch = (float) -Math.toDegrees(Mth.atan2(direction.y, direction.horizontalDistance()));
         setYRot(yaw);
         setXRot(pitch);
         setYBodyRot(yaw);

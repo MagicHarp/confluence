@@ -429,6 +429,7 @@ public final class ModClientEvents {
         event.registerEntityRenderer(NPC_SHADOWFLAME_SKULL.get(), SkullProjectileRenderer::new);
         event.registerEntityRenderer(HILL_LAVA_PILLAR.get(), NoopRenderer::new);
         event.registerEntityRenderer(WALL_OF_FLESH_LASER.get(), NoopRenderer::new);
+        event.registerEntityRenderer(HILL_FIRE_BOUND.get(), NoopRenderer::new);
         event.registerEntityRenderer(DESTROYER_LASER.get(), NoopRenderer::new);
         event.registerEntityRenderer(PRIME_LASER.get(), NoopRenderer::new);
         event.registerEntityRenderer(PLANTERA_SEED.get(), NoopRenderer::new);

@@ -8,7 +8,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -18,7 +17,6 @@ import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
 import org.confluence.mod.common.entity.monster.BaseFlyingMonster;
-import org.confluence.mod.common.entity.monster.CreatureAttributeBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -97,7 +95,7 @@ public class ServantOfCthulhu extends BaseFlyingMonster implements BossOwnedEnti
         }
 
         super.tick();
-        if (level().isClientSide) return;
+        if (level().isClientSide || !isAlive()) return;
         if (hasOwnerIdentity && getTarget() != inheritedTarget) {
             setTarget(inheritedTarget);
         }
@@ -136,15 +134,6 @@ public class ServantOfCthulhu extends BaseFlyingMonster implements BossOwnedEnti
                 && canAttack(player);
     }
 
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return true;
-    }
-
-    @Override
-    protected int contactDetectionInterval() {
-        return 1;
-    }
 
     @Override
     protected double contactAttackInflation() {

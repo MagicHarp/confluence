@@ -182,10 +182,6 @@ public class BrainFake extends BaseBossPart<BrainOfCthulhu> implements GeoEntity
         return false;
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
     @Override
     public void remove(RemovalReason reason) {

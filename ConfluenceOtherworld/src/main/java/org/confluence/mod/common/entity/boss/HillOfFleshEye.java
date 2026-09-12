@@ -1,10 +1,13 @@
 package org.confluence.mod.common.entity.boss;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.confluence.mod.common.entity.projectile.HostileParticleProjectile;
+import org.confluence.mod.common.init.entity.ModEntities;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -50,19 +53,15 @@ public class HillOfFleshEye extends BaseBossPart<HillOfFlesh> implements GeoEnti
     }
 
     private void shootAt(HillOfFlesh master, LivingEntity target) {
-        Vec3 origin = getEyePosition();
+        if (!(level() instanceof ServerLevel serverLevel)) return;
+        Vec3 origin = getBoundingBox().getCenter();
         Vec3 dir = target.getEyePosition().subtract(origin);
         if (dir.lengthSqr() < 0.01) return;
-        dir = dir.normalize();
-        Vec3 end = origin.add(dir.scale(64));
-        for (LivingEntity e : level().getEntitiesOfClass(LivingEntity.class,
-                getBoundingBox().expandTowards(dir.scale(64)).inflate(1.0))) {
-            if (e == master || !master.canAttack(e)) continue;
-            if (e.getBoundingBox().clip(origin, end).isPresent()) {
-                e.hurt(damageSources().mobAttack(master), DAMAGE);
-                break;
-            }
-        }
+        HostileParticleProjectile projectile = ModEntities.HILL_FIRE_BOUND.get().create(serverLevel);
+        if (projectile == null) return;
+        double speed = shootBurst >= 3 ? 1.0 : 0.5;
+        projectile.configure(master, origin, dir.normalize().scale(speed), DAMAGE, 100);
+        serverLevel.addFreshEntity(projectile);
     }
 
     @Override

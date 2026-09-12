@@ -5,12 +5,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import org.confluence.mod.Confluence;
 import org.confluence.mod.common.data.map.CreatureDefinition;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
@@ -120,8 +120,8 @@ public class BaseWarriorMonster extends BaseMonster {
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pos) {
-        return ignoreLightPathCost ? 0.0F : super.getWalkTargetValue(pos);
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return ignoreLightPathCost ? 0.0F : super.getWalkTargetValue(pos, level);
     }
 
     protected JumpProfile jumpProfile() {

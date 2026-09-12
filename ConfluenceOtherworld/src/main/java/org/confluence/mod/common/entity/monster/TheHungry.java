@@ -10,8 +10,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -40,16 +38,6 @@ import java.util.UUID;
 /// 才作为独立野怪寻找玩家。这样区块反向加载不会把暂时找不到主体的从属错误转换成
 /// 永久野怪，也不需要再注册一套重复的 {@code hungry} 实体。
 public class TheHungry extends BaseFlyingMonster implements BossOwnedEntity {
-    @Override
-    protected int contactDetectionInterval() {
-        return 5;
-    }
-
-    @Override
-    protected double contactAttackInflation() {
-        return 0.3;
-    }
-
     private static final RawAnimation BAIT = RawAnimation.begin().thenLoop("bait");
     private static final String LEASH_X_TAG = "LeashX";
     private static final String LEASH_Y_TAG = "LeashY";
@@ -76,6 +64,12 @@ public class TheHungry extends BaseFlyingMonster implements BossOwnedEntity {
         minimumDistance = 8.0 + distanceOffset;
         maximumDistance = 64.0 + distanceOffset;
     }
+
+    @Override
+    protected double contactAttackInflation() {
+        return 0.3;
+    }
+
 
     @Override
     protected void defineSynchedData() {

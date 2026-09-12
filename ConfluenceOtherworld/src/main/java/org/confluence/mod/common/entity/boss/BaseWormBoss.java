@@ -4,7 +4,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
@@ -18,7 +17,6 @@ import org.confluence.mod.common.entity.ai.bt.condition.HasTargetCondition;
 import org.confluence.mod.common.entity.ai.bt.leaf.MoveToTargetAction;
 import org.confluence.mod.common.entity.ai.bt.leaf.WaitAction;
 import org.confluence.mod.common.entity.monster.WormSegment;
-import org.confluence.mod.common.init.entity.BossEntities;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -256,10 +254,10 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
     }
 
     @Override
-    protected double combatAnchorDistanceSqr(net.minecraft.world.entity.player.Player player) {
-        double nearest = distanceToSqr(player);
+    protected double combatAnchorDistanceSqr(LivingEntity target) {
+        double nearest = distanceToSqr(target);
         for (BossWormPart segment : segments) {
-            if (segment.isAlive()) nearest = Math.min(nearest, segment.distanceToSqr(player));
+            if (segment.isAlive()) nearest = Math.min(nearest, segment.distanceToSqr(target));
         }
         return nearest;
     }
@@ -317,10 +315,6 @@ public abstract class BaseWormBoss extends BaseBoss implements WormSegment {
         return WormSegment.isWormDamage(source) || source == damageSources().inWall() || super.isInvulnerableTo(source);
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
     @Override
     public void die(DamageSource source) {

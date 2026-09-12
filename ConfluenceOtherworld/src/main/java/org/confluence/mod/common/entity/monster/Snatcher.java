@@ -1,17 +1,17 @@
 package org.confluence.mod.common.entity.monster;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -57,6 +57,11 @@ public class Snatcher extends BaseMonster {
         super(type, level);
         this.profile = profile;
         noPhysics = true;
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        return 0.0F;
     }
 
     @Override
@@ -162,19 +167,14 @@ public class Snatcher extends BaseMonster {
     @Override
     public AABB getBoundingBoxForCulling() {
         return isAnchored()
-                ? new AABB(position(), getAnchor())
+                ? super.getBoundingBoxForCulling().minmax(new AABB(position(), getAnchor()).inflate(0.25D))
                 : super.getBoundingBoxForCulling().inflate(10.0);
     }
 
-    /// 捕人草使用独立的五 tick 接触检测与 0.3 格扩展范围。
+    /// 捕人草使用连续接触检测与 0.3 格扩展范围。
     @Override
     protected boolean hasEntityContactAttack() {
         return true;
-    }
-
-    @Override
-    protected int contactDetectionInterval() {
-        return 5;
     }
 
     @Override

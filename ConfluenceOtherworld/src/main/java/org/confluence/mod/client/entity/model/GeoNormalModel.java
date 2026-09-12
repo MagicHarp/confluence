@@ -32,9 +32,7 @@ public class GeoNormalModel<T extends GeoEntity> extends DefaultedEntityGeoModel
     @Override
     public void setCustomAnimations(T animatable, long instanceId, AnimationState<T> animationState) {
         if (this.headBone != null) {
-            if (this.head == null) {
-                this.head = getHead();
-            }
+            this.head = getHead();
             if (this.head != null) {
                 EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
                 this.head.setRotX(entityData.headPitch() * 0.017453292F);

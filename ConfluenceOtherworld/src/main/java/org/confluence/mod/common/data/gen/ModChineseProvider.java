@@ -25,6 +25,12 @@ public class ModChineseProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("house_validator.result_type.found", "这间房屋符合入住条件。");
+        add("house_validator.result_type.too_small", "房屋太小。");
+        add("house_validator.result_type.too_large", "房屋过大或未封闭。");
+        add("house_validator.result_type.no_light", "房屋缺少足够明亮的光源。");
+        add("house_validator.result_type.no_chair", "房屋缺少椅子或床。");
+        add("house_validator.result_type.no_table", "房屋缺少桌子或工作台。");
         addMountAndHostileProjectileTranslations();
         add("tooltip.confluence.rideable_item.desc", "按下快捷键以骑乘。默认 R 键");
 
@@ -4894,6 +4900,21 @@ public class ModChineseProvider extends LanguageProvider {
         add(SummonItems.SUMMON_NETHERITE_SWORD_STAFF.get(), "下界合金剑法杖");
         add(SummonItems.TERRAPRISMA.get(), "泰拉棱镜");
         add(SummonItems.STARDUST_DRAGON_STAFF.get(), "星尘龙法杖");
+        add("entity.confluence.finch_baby", "雀宝宝");
+        add("entity.confluence.i_32_iron_golem", "i-32型铁傀儡");
+        add("entity.confluence.slime_baby", "史莱姆宝宝");
+        add("entity.confluence.hornet_baby", "仆役黄蜂");
+        add("entity.confluence.sculk_wisp", "幽匿游灵");
+        add("entity.confluence.summon_imp", "召唤的小鬼");
+        add("entity.confluence.summon_snow_flinx", "小雪怪");
+        add("entity.confluence.summon_wooden_sword", "青冥");
+        add("entity.confluence.summon_stone_sword", "破山");
+        add("entity.confluence.summon_iron_sword", "白虹");
+        add("entity.confluence.summon_golden_sword", "流星");
+        add("entity.confluence.summon_diamond_sword", "龙渊");
+        add("entity.confluence.summon_netherite_sword", "赤霄");
+        add("entity.confluence.terraprisma", "泰拉棱镜");
+        add("entity.confluence.stardust_dragon", "星尘龙");
         add("tooltip.confluence.summon.damage", "基础召唤伤害：%s");
         add("tooltip.confluence.summon.slots", "占用仆从栏：%s");
         add("tooltip.confluence.summon.retrieve", "右键长按以解除所有召唤物");

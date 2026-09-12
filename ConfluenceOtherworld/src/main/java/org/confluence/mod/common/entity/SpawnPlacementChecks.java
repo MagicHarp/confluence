@@ -20,8 +20,8 @@ import org.confluence.mod.util.OverworldUtils;
 /// 放置规则。因此高度、维度、昼夜、天气、视野和困难模式等硬约束必须集中在此处，不能只依赖
 /// JSON 中的权重或生物群系选择。
 ///
-/// 各方法先施加泰拉瑞亚语义对应的额外门槛，再委托原版怪物或水生动物规则完成亮度、碰撞、
-/// 流体等基础检查。这样可以复用原版兼容逻辑，并让所有生成入口遵循同一套明确语义。
+/// 各方法负责环境与支撑条件；实体遮挡检查仍由后续生成流程执行。
+/// 水生敌怪使用水域条件，不能复用要求脚下支撑方块的陆生 Mob 规则。
 public final class SpawnPlacementChecks {
     private SpawnPlacementChecks() {}
 
@@ -31,12 +31,12 @@ public final class SpawnPlacementChecks {
 
     public static boolean checkGroundSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return y >= OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkUndergroundMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return y >= OverworldUtils.getUndergroundY() && y < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkCaveMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -53,7 +53,7 @@ public final class SpawnPlacementChecks {
     }
 
     public static boolean checkHighLevelMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() > OverworldUtils.getSpaceY() && pos.getY() < level.getMaxBuildHeight() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() >= OverworldUtils.getSpaceY() && pos.getY() < level.getMaxBuildHeight() && checkMonsterSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkNetherMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -92,17 +92,16 @@ public final class SpawnPlacementChecks {
     }
 
     public static boolean checkWaterMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getSpaceY() && hasDeepWater(level, pos)
-                && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getSpaceY() && hasDeepWater(level, pos);
     }
 
     public static boolean checkSurfaceWaterMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && hasDeepWater(level, pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return y >= OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && hasDeepWater(level, pos);
     }
 
     public static boolean checkUndergroundWaterMonsterSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return pos.getY() < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && hasDeepWater(level, pos) && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return pos.getY() < OverworldUtils.getSurfaceY() && !level.canSeeSky(pos) && hasDeepWater(level, pos);
     }
 
     public static boolean checkGoblinScoutSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -116,7 +115,7 @@ public final class SpawnPlacementChecks {
 
     public static boolean checkSurfaceMobSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         int y = pos.getY();
-        return y > OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
+        return y >= OverworldUtils.getSurfaceY() && y < OverworldUtils.getSpaceY() && Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
     }
 
     public static boolean checkRoutineMobSpawn(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
@@ -140,7 +139,7 @@ public final class SpawnPlacementChecks {
     /// {@link Monster#checkMonsterSpawnRules}，否则它们会绕过统一的亮度配置。
     @SuppressWarnings("unchecked")
     public static boolean checkMonsterSpawnRules(EntityType<? extends Mob> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        // 忽略光照时仍调用原版 Mob 规则，保留碰撞、刷怪方块和世界边界等基础安全检查。
+        // 忽略光照时仍保留 Mob 对脚下方块的生成支撑检查；碰撞和边界由外部生成流程处理。
         if (CommonConfigs.SPAWN_WITHOUT_LIGHT.get()) {
             return Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
         }

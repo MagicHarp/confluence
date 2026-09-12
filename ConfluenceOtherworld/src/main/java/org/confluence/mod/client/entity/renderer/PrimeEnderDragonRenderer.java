@@ -25,7 +25,6 @@ import org.joml.Vector3f;
 public final class PrimeEnderDragonRenderer extends BossGeoRenderer<PrimeEnderDragon> {
     private static final ResourceLocation BEAM_TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/beacon_beam.png");
     private static final float CORE_HALF_WIDTH = 0.35F;
-    private static final float GLOW_HALF_WIDTH = 0.55F;
 
     public PrimeEnderDragonRenderer(EntityRendererProvider.Context context) {
         super(context, new ExplicitGeoModel<>(
@@ -73,7 +72,7 @@ public final class PrimeEnderDragonRenderer extends BossGeoRenderer<PrimeEnderDr
         float time = dragon.tickCount + partialTick;
         float vOffset = -time * 0.03F;
         renderBeamLayer(poseStack.last(), buffers.getBuffer(RenderType.beaconBeam(BEAM_TEXTURE, false)), range, CORE_HALF_WIDTH, vOffset, 112, 54, 255, 255);
-        renderBeamLayer(poseStack.last(), buffers.getBuffer(RenderType.beaconBeam(BEAM_TEXTURE, true)), range, GLOW_HALF_WIDTH, vOffset + 0.25F, 172, 102, 255, 150);
+        renderBeamLayer(poseStack.last(), buffers.getBuffer(RenderType.beaconBeam(BEAM_TEXTURE, true)), range, PrimeEnderDragon.LASER_RADIUS, vOffset + 0.25F, 172, 102, 255, 150);
         poseStack.popPose();
     }
 

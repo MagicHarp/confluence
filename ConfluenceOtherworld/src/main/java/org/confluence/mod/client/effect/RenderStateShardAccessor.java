@@ -4,14 +4,28 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.Util;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterShadersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.confluence.mod.Confluence;
 
+import java.io.IOException;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
+@Mod.EventBusSubscriber(modid = Confluence.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderStateShardAccessor extends RenderStateShard {
+    private static ShaderInstance unlitShader;
+    public static final Function<ResourceLocation, RenderType> UNLIT_TRANSLUCENT = Util.memoize(texture -> RenderType.create("confluence_unlit_translucent", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true,
+            RenderType.CompositeState.builder().setShaderState(new ShaderStateShard(() -> unlitShader == null ? GameRenderer.getRendertypeEyesShader() : unlitShader))
+                    .setTextureState(new TextureStateShard(texture, false, false)).setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setCullState(NO_CULL).setLightmapState(NO_LIGHTMAP).setOverlayState(NO_OVERLAY).setWriteMaskState(COLOR_WRITE).createCompositeState(false)));
     public static final RenderType TRAIL_RENDER_TYPE = RenderType.create(
             "trail_render_type",
             DefaultVertexFormat.POSITION_COLOR,
@@ -46,6 +60,11 @@ public class RenderStateShardAccessor extends RenderStateShard {
                                 .setWriteMaskState(COLOR_WRITE)
                                 .createCompositeState(false));
             });
+
+    @SubscribeEvent
+    public static void registerShaders(RegisterShadersEvent event) throws IOException {
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), Confluence.asResource("unlit_translucent"), DefaultVertexFormat.NEW_ENTITY), instance -> unlitShader = instance);
+    }
 
     public static RenderType createTextOutline(ResourceLocation texture) {
         return RenderType.create("confluence_outline_text", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false, true,

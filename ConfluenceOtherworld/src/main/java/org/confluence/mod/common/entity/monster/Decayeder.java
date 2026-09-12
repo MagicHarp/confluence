@@ -5,8 +5,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -17,6 +15,7 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.confluence.mod.common.entity.ai.bt.BTNode;
 import org.confluence.mod.common.entity.ai.bt.BTRoot;
@@ -48,12 +47,6 @@ public class Decayeder extends BaseMonster {
         return true;
     }
 
-    /// 腐骴只由持弓或近战武器目标结算攻击。
-    @Override
-    protected boolean hasEntityContactAttack() {
-        return false;
-    }
-
     @Override
     protected BTRoot createBT() {
         return new BTRoot() {
@@ -70,7 +63,7 @@ public class Decayeder extends BaseMonster {
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pos) {
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
         return 0.0F;
     }
 

@@ -21,12 +21,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.confluence.mod.Confluence;
+import org.confluence.mod.client.particle.BladeTrailEmitter;
 import org.confluence.mod.common.entity.projectile.ProjectileHitRules;
 import org.confluence.mod.common.item.sword.BasePhasebladeItem;
 import org.confluence.mod.common.item.sword.Phasesaber;
 import org.jetbrains.annotations.NotNull;
-import org.mesdag.particlestorm.api.IMolangParticleInstance;
-import org.mesdag.particlestorm.data.molang.MolangExp;
 import org.mesdag.particlestorm.particle.MolangParticleEngine;
 import org.mesdag.particlestorm.particle.ParticleEmitter;
 import org.mesdag.portlib.event.entity.PortProjectileImpactEvent;
@@ -225,49 +224,23 @@ public abstract class PhasebladeProjectile extends Projectile implements ItemSup
     private void tickClientEmitters(State state) {
         if (!level().isClientSide) return;
         ResourceLocation particle = bladeParticle();
-        if (state == State.STUCK || particle == null) {
-            removeClientEmitters();
-            return;
-        }
+        if (state == State.STUCK || particle == null) return;
 
         Vec3 axis = bladeDirection(0.0F);
         double halfLength = projectileGeometry().length() * 0.5D;
         Vec3 center = collisionCenter();
         Vec3 tip = center.add(axis.scale(halfLength));
         Vec3 tail = center.subtract(axis.scale(halfLength));
-        if (tipEmitter == null || tipEmitter.isRemoved()) tipEmitter = createEmitter(tip, particle);
+        if (tipEmitter == null || tipEmitter.isRemoved())
+            tipEmitter = createEmitter(tip, particle, 1.0D);
         if (tailEmitter == null || tailEmitter.isRemoved())
-            tailEmitter = createEmitter(tail, particle);
-        tipEmitter.setPos(tip);
-        tailEmitter.setPos(tail);
+            tailEmitter = createEmitter(tail, particle, -1.0D);
     }
 
-    private ParticleEmitter createEmitter(Vec3 position, ResourceLocation particle) {
-        ParticleEmitter emitter = new ParticleEmitter(level(), position, particle, new MolangExp(Map.of(
-                "variable.endpoint_x", "0",
-                "variable.endpoint_y", "0",
-                "variable.endpoint_z", "0"
-        )));
-        emitter.hideOutline = true;
+    private ParticleEmitter createEmitter(Vec3 position, ResourceLocation particle, double end) {
+        ParticleEmitter emitter = new BladeTrailEmitter(this, position, particle, end);
         MolangParticleEngine.INSTANCE.addEmitter(emitter);
         return emitter;
-    }
-
-    private void removeClientEmitters() {
-        if (tipEmitter != null) {
-            removeEmitterAndParticles(tipEmitter);
-            tipEmitter = null;
-        }
-        if (tailEmitter != null) {
-            removeEmitterAndParticles(tailEmitter);
-            tailEmitter = null;
-        }
-    }
-
-    private static void removeEmitterAndParticles(ParticleEmitter emitter) {
-        var particles = MolangParticleEngine.INSTANCE.getParticlesForEmitter(emitter);
-        if (particles != null) particles.forEach(IMolangParticleInstance::discard);
-        MolangParticleEngine.INSTANCE.removeEmitter(emitter, false);
     }
 
     private BladeBlockHit findBladeBlockHit() {
@@ -500,12 +473,6 @@ public abstract class PhasebladeProjectile extends Projectile implements ItemSup
     protected float groundKnockbackMultiplier() {return 0.75F;}
 
     private record BladeBlockHit(BlockHitResult result, double axisOffset) {}
-
-    @Override
-    public void remove(RemovalReason reason) {
-        removeClientEmitters();
-        super.remove(reason);
-    }
 
     public enum State {
         FORWARD,

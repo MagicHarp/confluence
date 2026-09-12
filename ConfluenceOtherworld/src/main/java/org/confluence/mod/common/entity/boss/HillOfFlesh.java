@@ -1,5 +1,6 @@
 package org.confluence.mod.common.entity.boss;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,8 +14,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -52,7 +51,7 @@ public class HillOfFlesh extends BaseBoss {
     private static final float INNER_DAMAGE = 40.0F;
     private static final float OUTER_DAMAGE = 40.0F;
     // 场地高度单位为方块；出场与开始破坏场地的时间单位为 tick。
-    private static final int ARENA_HEIGHT = 100;
+    public static final int ARENA_HEIGHT = 100;
     private static final int INITIALIZATION_TICKS = 150;
     private static final int DESTRUCTION_START_TICK = 75;
     private static final int INNER_EXPANSION_TICKS = 600;
@@ -74,6 +73,7 @@ public class HillOfFlesh extends BaseBoss {
 
     private static final EntityDataAccessor<Boolean> DATA_INITIALIZING = SynchedEntityData.defineId(HillOfFlesh.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_OUTER_RADIUS = SynchedEntityData.defineId(HillOfFlesh.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_INNER_RADIUS = SynchedEntityData.defineId(HillOfFlesh.class, EntityDataSerializers.FLOAT);
 
     private static final double[][] PART_OFFSETS = {
             {8, 13, 5}, {-8, 10, 8}, {7, 8, -7},
@@ -97,21 +97,31 @@ public class HillOfFlesh extends BaseBoss {
 
     public HillOfFlesh(EntityType<? extends Monster> type, Level level) {
         super(type, level);
-        setNoGravity(true);
         xpReward = 5000;
     }
 
-    /// 肉山丘陵的墙体布局由自身锚点控制，不接受原版重力。
     @Override
     public boolean isNoGravity() {
-        return true;
+        return isInitializing();
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        float radius = getOuterRadius();
+        return new AABB(getX() - radius, getY() - 10.0, getZ() - radius, getX() + radius, getY() + ARENA_HEIGHT, getZ() + radius).minmax(getBoundingBox());
+    }
+
+    @Override
+    protected boolean hasEntityContactAttack() {
+        return !isInitializing();
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         entityData.define(DATA_INITIALIZING, true);
-        entityData.define(DATA_OUTER_RADIUS, INNER_RADIUS);
+        entityData.define(DATA_OUTER_RADIUS, OUTER_RADIUS);
+        entityData.define(DATA_INNER_RADIUS, INNER_RADIUS);
     }
 
     @Override
@@ -142,6 +152,10 @@ public class HillOfFlesh extends BaseBoss {
     }
 
     public float getInnerRadius() {
+        return entityData.get(DATA_INNER_RADIUS);
+    }
+
+    private float calculateInnerRadius() {
         if (!phase2 || !isExpert()) {
             return INNER_RADIUS;
         }
@@ -151,6 +165,7 @@ public class HillOfFlesh extends BaseBoss {
     /// 仅供正式召唤流程开启地形清场。
     public void enableArenaDestruction() {
         terrainDestructionEnabled = true;
+        if (isInitializing()) entityData.set(DATA_OUTER_RADIUS, INNER_RADIUS);
     }
 
     @Override
@@ -243,7 +258,11 @@ public class HillOfFlesh extends BaseBoss {
     @Override
     public void tick() {
         super.tick();
-        if (isRemoved() || level().isClientSide) {
+        if (!isAlive()) {
+            return;
+        }
+        if (level().isClientSide) {
+            showArenaBoundary();
             return;
         }
 
@@ -278,6 +297,7 @@ public class HillOfFlesh extends BaseBoss {
         if (phase2 && isExpert() && expandingTicks < INNER_EXPANSION_TICKS) {
             expandingTicks++;
         }
+        entityData.set(DATA_INNER_RADIUS, calculateInnerRadius());
     }
 
     private void updateArenaDestruction() {
@@ -359,6 +379,8 @@ public class HillOfFlesh extends BaseBoss {
     }
 
     void markEncounterEntity(LivingEntity entity) {
+        if (!entity.isAlive() || entity.isRemoved() || entity.level() != level() || !canAttack(entity))
+            return;
         encounterEntities.add(entity);
         entity.addEffect(new MobEffectInstance(ModEffects.CRIMSON_STORM.get(), 200, 0), this);
         if (entity instanceof Player player) {
@@ -378,18 +400,39 @@ public class HillOfFlesh extends BaseBoss {
     void applyArenaDamage() {
         float outerRadius = getOuterRadius();
         float innerRadius = getInnerRadius();
-        encounterEntities.removeIf(entity -> !entity.isAlive());
+        encounterEntities.removeIf(entity -> !entity.isAlive() || entity.isRemoved() || entity.level() != level() || !canAttack(entity));
         for (LivingEntity entity : List.copyOf(encounterEntities)) {
             double distanceSquared = entity.position().subtract(position()).horizontalDistanceSqr();
+            float damage = 0.0F;
             if (distanceSquared > outerRadius * outerRadius) {
-                entity.hurt(LibDamageTypes.of(level(), DamageTypes.MAGIC, this), OUTER_DAMAGE);
+                damage = OUTER_DAMAGE;
             } else if (distanceSquared
                     < (innerRadius - 5.0F)
                     * (innerRadius - 5.0F)) {
-                entity.hurt(LibDamageTypes.of(level(), DamageTypes.MAGIC, this), ATTACHED_DAMAGE);
+                damage = ATTACHED_DAMAGE;
             } else if (distanceSquared
                     < innerRadius * innerRadius) {
-                entity.hurt(LibDamageTypes.of(level(), DamageTypes.MAGIC, this), INNER_DAMAGE);
+                damage = INNER_DAMAGE;
+            }
+            if (damage > 0.0F && entity.hurt(LibDamageTypes.of(level(), DamageTypes.MAGIC, this), damage)) {
+                ((ServerLevel) level()).sendParticles(ParticleTypes.FLAME, entity.getX(), entity.getY() + entity.getBbHeight() * 0.5, entity.getZ(), 20, entity.getBbWidth() * 0.2, entity.getBbHeight() * 0.5, entity.getBbWidth() * 0.2, 0.0);
+            }
+        }
+    }
+
+    private void showArenaBoundary() {
+        if (isInitializing()) return;
+        double angle = tickCount * 0.1;
+        for (int i = 0; i < 2; i++) {
+            double innerAngle = angle + i * Math.PI;
+            level().addParticle(ParticleTypes.FLAME, getX() + Math.cos(innerAngle) * getInnerRadius(), getY() + 0.2, getZ() + Math.sin(innerAngle) * getInnerRadius(), 0.0, 0.0, 0.0);
+        }
+        Player viewer = level().getNearestPlayer(this, 128.0);
+        if (viewer == null) return;
+        for (int height = -8; height <= 8; height++) {
+            for (int i = 0; i < 3; i++) {
+                double outerAngle = tickCount * 0.02 + height * 0.03 + i * Mth.TWO_PI / 3.0;
+                level().addParticle(ParticleTypes.FLAME, getX() + Math.cos(outerAngle) * getOuterRadius(), viewer.getY() + height, getZ() + Math.sin(outerAngle) * getOuterRadius(), 0.0, 0.0, 0.0);
             }
         }
     }
@@ -400,7 +443,7 @@ public class HillOfFlesh extends BaseBoss {
     /// 多个血肉山或多名玩家同时存在时不会互相覆盖目标。距离越远时牵引越弱，主要用于
     /// 抑制持续向外逃离，同时保留玩家在主战斗带内调整位置的能力。
     void applyStormPull() {
-        encounterEntities.removeIf(entity -> !entity.isAlive());
+        encounterEntities.removeIf(entity -> !entity.isAlive() || entity.isRemoved() || entity.level() != level() || !canAttack(entity));
         for (LivingEntity entity : encounterEntities) {
             Vec3 direction = position().subtract(entity.position());
             double distance = direction.length();
@@ -596,8 +639,9 @@ public class HillOfFlesh extends BaseBoss {
         encounterTicks = Math.max(0, tag.getInt(ENCOUNTER_TICKS_TAG));
         phase2 = tag.getBoolean(PHASE_TWO_TAG);
         expandingTicks = Mth.clamp(tag.getInt(EXPANDING_TICKS_TAG), 0, INNER_EXPANSION_TICKS);
-        entityData.set(DATA_OUTER_RADIUS, Mth.clamp(tag.getFloat(OUTER_RADIUS_TAG), INNER_RADIUS, OUTER_RADIUS));
+        entityData.set(DATA_INNER_RADIUS, calculateInnerRadius());
         terrainDestructionEnabled = tag.getBoolean(TERRAIN_DESTRUCTION_TAG);
+        entityData.set(DATA_OUTER_RADIUS, terrainDestructionEnabled ? Mth.clamp(tag.getFloat(OUTER_RADIUS_TAG), INNER_RADIUS, OUTER_RADIUS) : OUTER_RADIUS);
         fleshSlimeTimer = restoreTimer(tag, FLESH_SLIME_TIMER_TAG, FLESH_SLIME_INTERVAL);
         leechTimer = restoreTimer(tag, LEECH_TIMER_TAG, LEECH_INTERVAL);
         lavaPillarTimer = restoreTimer(tag, LAVA_PILLAR_TIMER_TAG, LAVA_PILLAR_INTERVAL);
@@ -613,10 +657,6 @@ public class HillOfFlesh extends BaseBoss {
                 ? Math.max(0, tag.getInt(key)) : fallback;
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
 
     @Override
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
